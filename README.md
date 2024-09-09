@@ -35,3 +35,4 @@ ensuring clarity and peace of mind for students who use SpleetWaise.
   like to contribute code to this project,
   see [se-education.org](https://se-education.org/#contributing-to-se-edu) for
   more info.
+
