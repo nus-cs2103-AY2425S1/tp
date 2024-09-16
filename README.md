@@ -16,4 +16,4 @@
 * This project is a **part of the se-education.org** initiative. If you would like to contribute code to this project, see [se-education.org](https://se-education.org/#contributing-to-se-edu) for more info.
 
 * Hello! This is the repo for inSUREance :)
-* This is a test to see if the CodeCov has been set up correctly.
+* This is to test if MarkBind has been successfully set up.
