@@ -1,4 +1,5 @@
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
+https://app.codecov.io/gh/AY2425S1-CS2103T-T14-1/tp/settings/badge
 
 ![Ui](docs/images/Ui.png)
 
