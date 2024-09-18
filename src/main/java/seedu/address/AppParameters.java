@@ -22,7 +22,6 @@ public class AppParameters {
     public Path getConfigPath() {
         return configPath;
     }
-    
 
     public void setConfigPath(Path configPath) {
         this.configPath = configPath;
