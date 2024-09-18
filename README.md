@@ -4,6 +4,9 @@
 
 ![Ui](docs/images/Ui.png)
 
+[User Guide](https://ay2425s1-cs2103-f12-2.github.io/tp/)
+
+
 * This is **a sample project for Software Engineering (SE) students**.<br>
   Example usages:
   * as a starting point of a course project (as opposed to writing everything from scratch)
