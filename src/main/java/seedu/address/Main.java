@@ -22,6 +22,7 @@ import seedu.address.commons.core.LogsCenter;
  * to be the entry point of the application, we avoid this issue.
  */
 public class Main {
+    // Fake Comment winston 19/9/2024 8.17pm
     private static Logger logger = LogsCenter.getLogger(Main.class);
 
     public static void main(String[] args) {
