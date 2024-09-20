@@ -32,24 +32,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Testing
 * Responsibilities: Model
 
-### Johnny Doe
+### Timothy Tan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/teamotitan.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
+[[homepage](http://github.com/teamotitan)]
+[[github](https://github.com/teamotitan)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Documentation
 
 
 ### Soumyadip Saha
