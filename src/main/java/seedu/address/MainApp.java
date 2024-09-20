@@ -172,6 +172,12 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) {
         logger.info("Starting AddressBook " + MainApp.VERSION);
         ui.start(primaryStage);
+
+        // Load sample data if the address book is empty
+        if (model.getAddressBook().getPersonList().isEmpty()) {
+            ReadOnlyAddressBook sampleAddressBook = SampleDataUtil.getSampleAddressBook();
+            model.setAddressBook(sampleAddressBook);
+        }
     }
 
     @Override
