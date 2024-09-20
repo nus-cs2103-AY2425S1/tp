@@ -50,12 +50,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Toh Yi Fan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ty1fan.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](https://github.com/TY1Fan)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Code quality and Component-storage
