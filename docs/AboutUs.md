@@ -5,55 +5,52 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
-### John Doe
+### Karthick KC
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/RohitSharma.jpg" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/karthickkc)]
+[[portfolio](team/karthickkc.md)]
 
 * Role: Project Advisor
 
-### Jane Doe
+### Ng Hong Jing
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/RohitSharma.jpg" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/hj235)]
+[[portfolio](team/hongjing.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Wesley Wong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/RohitSharma.jpg" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/wes-w-z-h)] [[portfolio](team/wesley.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Karthikeyan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/RohitSharma.jpg" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/SKarthikeyan28)]
+[[portfolio](team/karthikeyan.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Zachery Ng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/RohitSharma.jpg" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/bbbbcccd)]
+[[portfolio](team/zachery.md)]
 
 * Role: Developer
 * Responsibilities: UI
