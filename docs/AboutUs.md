@@ -42,6 +42,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Documentation
 
+
+### Soumyadip Saha
+
+<img src="images/soumyadip-cmd.png" width="200px">
+
+[[github](http://github.com/soumyadip-cmd)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer, deadline and deliverables manager
+* Responsibilities: commons
+
 ### Toh Yi Fan
 
 <img src="images/ty1fan.png" width="200px">
@@ -51,3 +62,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: Code quality and Component-storage
+
