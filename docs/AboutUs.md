@@ -11,51 +11,55 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Chen Feng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/feng1231.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
+[[github](https://github.com/feng1231)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Scheduling and tracking
+* In charge of Logic package
 
-### Johnny Doe
+### Dinh Duy Linh Dan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/denniedan.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/DennieDan)]
+[[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Testing
+* Responsibilities: Model
 
-### Jean Doe
+### Timothy Tan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/teamotitan.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[homepage](http://github.com/teamotitan)]
+[[github](https://github.com/teamotitan)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Documentation
+
+
+### Soumyadip Saha
+
+<img src="images/soumyadip-cmd.png" width="200px">
+
+[[github](http://github.com/soumyadip-cmd)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer, deadline and deliverables manager
+* Responsibilities: commons
+
+### Toh Yi Fan
+
+<img src="images/ty1fan.png" width="200px">
+
+[[github](https://github.com/TY1Fan)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Code quality and Component-storage
 
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
