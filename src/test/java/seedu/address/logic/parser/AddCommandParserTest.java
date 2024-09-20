@@ -46,7 +46,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandParserTest {
-    private AddCommandParser parser = new AddCommandParser();
+    private FindCommandParser parser = new FindCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
