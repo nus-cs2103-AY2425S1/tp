@@ -11,6 +11,27 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Chen Feng
+
+<img src="images/feng1231.png" width="200px">
+
+[[github](https://github.com/feng1231)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Team Lead
+* Responsibilities: Scheduling and tracking
+* In charge of Logic package
+
+### Dinh Duy Linh Dan
+
+<img src="images/denniedan.png" width="200px">
+
+[[github](http://github.com/DennieDan)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Testing
+* Responsibilities: Model
+
 ### Timothy Tan
 
 <img src="images/teamotitan.png" width="200px">
@@ -21,41 +42,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Documentation
 
-### Jane Doe
+### Toh Yi Fan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ty1fan.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
+[[github](https://github.com/TY1Fan)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
+* Responsibilities: Code quality and Component-storage
