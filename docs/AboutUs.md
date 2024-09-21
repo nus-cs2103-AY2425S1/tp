@@ -9,6 +9,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Teh Rui-Chun
+
+<img src="images/reginateh.png" width="200px">
+
+[[homepage](https://nus-cs2103-ay2425s1.github.io/website)]
+[[github](https://github.com/reginateh)]
+[[portfolio](team/reginateh.md)]
+
+* Role: Code quality, Integration
+
 ### Chin Kuan Jak
 
 <img src="images/darkmoongreatsword.png" width="200px">
@@ -29,35 +39,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/trpmy.md)]
 
 * Role: Team lead, Deliverables and deadlines, Scheduling and tracking
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
 
 ### Si Rui
 
