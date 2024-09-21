@@ -1,9 +1,7 @@
 ---
-  layout: default.md
-  title: "Logging guide"
+layout: page
+title: Logging guide
 ---
-
-# Logging guide
 
 * We are using `java.util.logging` package for logging.
 * The `LogsCenter` class is used to manage the logging levels and logging destinations.
