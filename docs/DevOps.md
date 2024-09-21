@@ -1,15 +1,12 @@
 ---
-  layout: default.md
-  title: "DevOps guide"
-  pageNav: 3
+layout: page
+title: DevOps guide
 ---
 
-# DevOps guide
+* Table of Contents
+{:toc}
 
-<!-- * Table of Contents -->
-<page-nav-print />
-
-<!-- -------------------------------------------------------------------------------------------------------------------- -->
+--------------------------------------------------------------------------------------------------------------------
 
 ## Build automation
 
