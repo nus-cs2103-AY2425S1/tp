@@ -11,7 +11,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Hoo Yu Shing
 
-<img src="images/yushing.png" width="200px">
+<img src="images/hooyushing.png" width="200px">
 
 
 [[github](https://github.com/hooyushing)]
