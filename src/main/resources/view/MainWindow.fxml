@@ -49,9 +49,9 @@
                 </StackPane>
             <TabPane tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
               <tabs>
-                <Tab text="Contacts">
+                <Tab fx:id="contactsTab" text="Contacts">
                      <content>
-                        <SplitPane fx:id="splitView" dividerPositions="0.29797979797979796" prefHeight="160.0" prefWidth="200.0">
+                        <SplitPane fx:id="contactsSplitView" dividerPositions="0.29797979797979796" prefHeight="160.0" prefWidth="200.0">
                           <items>
                             <AnchorPane>
                                  <children>
@@ -66,14 +66,38 @@
                               </AnchorPane>
                             <AnchorPane>
                                  <children>
-                                    <VBox fx:id="detailView" minWidth="450.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    <VBox fx:id="contactsDetailViewPlaceholder" minWidth="450.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                  </children>
                               </AnchorPane>
                           </items>
                         </SplitPane>
                      </content>
                   </Tab>
-                <Tab text="Events" />
+                <Tab fx:id="eventsTab" text="Events">
+                     <content>
+                        <SplitPane dividerPositions="0.5" prefHeight="200.0" prefWidth="200.0">
+                           <items>
+                              <AnchorPane>
+                                 <children>
+                                    <VBox fx:id="eventList" minWidth="350.0" prefWidth="450.0" styleClass="pane-with-border" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <padding>
+                                          <Insets bottom="10" left="10" right="10" top="10" />
+                                       </padding>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane>
+                                 <children>
+                                    <VBox fx:id="eventDetailViewPlaceholder" minWidth="450.0" prefWidth="450.0" styleClass="pane-with-border" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <padding>
+                                          <Insets bottom="10" left="10" right="10" top="10" />
+                                       </padding>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                           </items>
+                        </SplitPane>
+                     </content></Tab>
               </tabs>
             </TabPane>
 

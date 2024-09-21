@@ -6,6 +6,7 @@ import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
@@ -38,6 +39,11 @@ public class UiManager implements Ui {
 
         //Set the application icon.
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
+
+        // Load custom fonts
+        FontLoader.loadFont("Poppins/Poppins-Regular.ttf");
+        FontLoader.loadFont("Poppins/Poppins-Medium.ttf");
+        FontLoader.loadFont("Poppins/Poppins-Bold.ttf");
 
         try {
             mainWindow = new MainWindow(primaryStage, logic);
