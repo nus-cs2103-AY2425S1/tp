@@ -9,51 +9,54 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Kristia Ng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kngys.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/kngys)]
+[[portfolio](team/kngys.md)]
 
-* Role: Project Advisor
+* Role: Developer, Code quality
 
-### Jane Doe
+### Teh Rui-Chun
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/reginateh.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[homepage](https://nus-cs2103-ay2425s1.github.io/website)]
+[[github](https://github.com/reginateh)]
+[[portfolio](team/reginateh.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Code quality, Integration
 
-### Johnny Doe
+### Chin Kuan Jak
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/darkmoongreatsword.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[homepage](http://www.comp.nus.edu.sg/~damithch)]
+[[github](https://github.com/darkmoongreatsword)]
+[[portfolio](team/darkmoongreatsword.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Testing 
 
-### James Doe
+### Tran Phuoc My
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/trpmy.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[homepage](http://www.comp.nus.edu.sg/~trpmy)]
+[[github](https://github.com/trpmy)]
+[[portfolio](team/trpmy.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Team lead, Deliverables and deadlines, Scheduling and tracking
+
+### Si Rui
+
+<img src="images/beginner-web-developer.png" width="200px">
+
+[[homepage](http://www.comp.nus.edu.sg/~damithch)]
+[[github](http://github.com/beginner-web-developer)]
+[[portfolio](team/beginner-web-developer.md)]
+
+* Role: Documentation
+* Responsibilities: Responsible for quality of project documents
