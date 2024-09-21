@@ -19,6 +19,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Code quality, Integration
 
+### Chin Kuan Jak
+
+<img src="images/darkmoongreatsword.png" width="200px">
+
+[[homepage](http://www.comp.nus.edu.sg/~damithch)]
+[[github](https://github.com/darkmoongreatsword)]
+[[portfolio](team/darkmoongreatsword.md)]
+
+* Role: Developer
+* Responsibilities: Testing 
+
 ### Tran Phuoc My
 
 <img src="images/trpmy.png" width="200px">
@@ -28,35 +39,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/trpmy.md)]
 
 * Role: Team lead, Deliverables and deadlines, Scheduling and tracking
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
 
 ### Si Rui
 
