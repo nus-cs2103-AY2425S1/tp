@@ -9,6 +9,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Kristia Ng
+
+<img src="images/kngys.png" width="200px">
+
+[[homepage](http://www.comp.nus.edu.sg/~damithch)]
+[[github](https://github.com/kngys)]
+[[portfolio](team/kngys.md)]
+
+* Role: Developer, Code quality
+
 ### Teh Rui-Chun
 
 <img src="images/reginateh.png" width="200px">
