@@ -20,6 +20,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Testing 
 
+### Tran Phuoc My
+
+<img src="images/trpmy.png" width="200px">
+
+[[homepage](http://www.comp.nus.edu.sg/~trpmy)]
+[[github](https://github.com/trpmy)]
+[[portfolio](team/trpmy.md)]
+
+* Role: Team lead, Deliverables and deadlines, Scheduling and tracking
+
 ### Jane Doe
 
 <img src="images/johndoe.png" width="200px">
@@ -49,12 +59,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Si Rui
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/beginner-web-developer.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[homepage](http://www.comp.nus.edu.sg/~damithch)]
+[[github](http://github.com/beginner-web-developer)]
+[[portfolio](team/beginner-web-developer.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Documentation
+* Responsibilities: Responsible for quality of project documents
