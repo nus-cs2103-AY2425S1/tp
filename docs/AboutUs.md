@@ -9,6 +9,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Chin Kuan Jak
+
+<img src="images/darkmoongreatsword.png" width="200px">
+
+[[homepage](http://www.comp.nus.edu.sg/~damithch)]
+[[github](https://github.com/darkmoongreatsword)]
+[[portfolio](team/darkmoongreatsword.md)]
+
+* Role: Developer
+* Responsibilities: Testing 
+
 ### Tran Phuoc My
 
 <img src="images/trpmy.png" width="200px">
