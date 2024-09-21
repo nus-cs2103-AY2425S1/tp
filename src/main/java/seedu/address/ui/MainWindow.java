@@ -60,7 +60,7 @@ public class MainWindow extends UiPart<Stage> {
     private SplitPane eventsSplitView;
 
     @FXML
-    private VBox contactsDetailViewPlaceholder;
+    private VBox contactDetailViewPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;

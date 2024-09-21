@@ -22,11 +22,11 @@
     <scene>
         <Scene>
             <stylesheets>
-                <URL value="@DarkTheme.css" />
+                <URL value="@BaseTheme.css" />
                 <URL value="@Extensions.css" />
             </stylesheets>
 
-            <VBox>
+            <VBox styleClass="root-layout">
                 <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
                     <Menu mnemonicParsing="false" text="File">
                         <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
@@ -36,16 +36,12 @@
                     </Menu>
                 </MenuBar>
 
-                <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
-                    <padding>
-                        <Insets bottom="5" left="10" right="10" top="5" />
-                    </padding>
-                </StackPane>
+                <StackPane fx:id="commandBoxPlaceholder" VBox.vgrow="NEVER" />
 
-                <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" styleClass="pane-with-border" VBox.vgrow="NEVER">
-                    <padding>
-                        <Insets bottom="5" left="10" right="10" top="5" />
-                    </padding>
+                <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" VBox.vgrow="NEVER">
+               <padding>
+                  <Insets left="32.0" right="32.0" />
+               </padding>
                 </StackPane>
             <TabPane tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
               <tabs>
@@ -55,18 +51,15 @@
                           <items>
                             <AnchorPane>
                                  <children>
-                        
+
                                         <VBox fx:id="personList" minWidth="350.0" prefWidth="450.0" styleClass="pane-with-border" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                            <padding>
-                                                <Insets bottom="10" left="10" right="10" top="10" />
-                                            </padding>
                                             <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
                                         </VBox>
                                  </children>
                               </AnchorPane>
                             <AnchorPane>
                                  <children>
-                                    <VBox fx:id="contactsDetailViewPlaceholder" minWidth="450.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    <VBox fx:id="contactDetailViewPlaceholder" minWidth="450.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                  </children>
                               </AnchorPane>
                           </items>
@@ -83,6 +76,9 @@
                                        <padding>
                                           <Insets bottom="10" left="10" right="10" top="10" />
                                        </padding>
+                                       <children>
+                                          <StackPane fx:id="eventListPanelPlaceholder" />
+                                       </children>
                                     </VBox>
                                  </children>
                               </AnchorPane>

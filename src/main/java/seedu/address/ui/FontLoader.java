@@ -9,10 +9,10 @@ public class FontLoader {
 
     public static void loadFont(String fileName) {
         String fullPathname = RESOURCE_PATH + fileName;
-        Font f = Font.loadFont(MainApp.class.getResourceAsStream(fullPathname), 18);
+        Font.loadFont(MainApp.class.getResourceAsStream(fullPathname), 18);
     }
 
     public static void getAvailableFonts() {
-        Font.getFontNames().forEach(f -> System.out.println(f));
+        Font.getFontNames().forEach(System.out::println);
     }
 }
