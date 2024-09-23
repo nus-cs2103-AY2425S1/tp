@@ -9,7 +9,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import hallpointer.address.logic.commands.FindCommand;
-import hallpointer.address.model.person.NameContainsKeywordsPredicate;
+import hallpointer.address.model.member.NameContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
 

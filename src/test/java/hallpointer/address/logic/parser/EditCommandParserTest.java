@@ -38,10 +38,10 @@ import hallpointer.address.commons.core.index.Index;
 import hallpointer.address.logic.Messages;
 import hallpointer.address.logic.commands.EditCommand;
 import hallpointer.address.logic.commands.EditCommand.EditPersonDescriptor;
-import hallpointer.address.model.person.Address;
-import hallpointer.address.model.person.Email;
-import hallpointer.address.model.person.Name;
-import hallpointer.address.model.person.Phone;
+import hallpointer.address.model.member.Address;
+import hallpointer.address.model.member.Email;
+import hallpointer.address.model.member.Name;
+import hallpointer.address.model.member.Phone;
 import hallpointer.address.model.tag.Tag;
 import hallpointer.address.testutil.EditPersonDescriptorBuilder;
 

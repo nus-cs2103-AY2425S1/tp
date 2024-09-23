@@ -17,7 +17,7 @@ import hallpointer.address.logic.Messages;
 import hallpointer.address.model.Model;
 import hallpointer.address.model.ModelManager;
 import hallpointer.address.model.UserPrefs;
-import hallpointer.address.model.person.Person;
+import hallpointer.address.model.member.Person;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -97,7 +97,7 @@ public class DeleteCommandTest {
         // null -> returns false
         assertFalse(deleteFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different member -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
     }
 

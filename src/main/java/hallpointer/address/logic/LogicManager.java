@@ -14,7 +14,7 @@ import hallpointer.address.logic.parser.AddressBookParser;
 import hallpointer.address.logic.parser.exceptions.ParseException;
 import hallpointer.address.model.Model;
 import hallpointer.address.model.ReadOnlyAddressBook;
-import hallpointer.address.model.person.Person;
+import hallpointer.address.model.member.Person;
 import hallpointer.address.storage.Storage;
 import javafx.collections.ObservableList;
 

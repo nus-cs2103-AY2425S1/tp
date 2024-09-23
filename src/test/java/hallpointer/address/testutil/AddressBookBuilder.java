@@ -1,7 +1,7 @@
 package hallpointer.address.testutil;
 
 import hallpointer.address.model.AddressBook;
-import hallpointer.address.model.person.Person;
+import hallpointer.address.model.member.Person;
 
 /**
  * A utility class to help with building Addressbook objects.

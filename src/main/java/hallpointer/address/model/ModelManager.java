@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 import hallpointer.address.commons.core.GuiSettings;
 import hallpointer.address.commons.core.LogsCenter;
-import hallpointer.address.model.person.Person;
+import hallpointer.address.model.member.Person;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 

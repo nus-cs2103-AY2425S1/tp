@@ -3,7 +3,7 @@ package hallpointer.address.ui;
 import java.util.logging.Logger;
 
 import hallpointer.address.commons.core.LogsCenter;
-import hallpointer.address.model.person.Person;
+import hallpointer.address.model.member.Person;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;

@@ -1,4 +1,4 @@
-package hallpointer.address.model.person;
+package hallpointer.address.model.member;
 
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -15,8 +15,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import hallpointer.address.model.person.exceptions.DuplicatePersonException;
-import hallpointer.address.model.person.exceptions.PersonNotFoundException;
+import hallpointer.address.model.member.exceptions.DuplicatePersonException;
+import hallpointer.address.model.member.exceptions.PersonNotFoundException;
 import hallpointer.address.testutil.PersonBuilder;
 
 public class UniquePersonListTest {

@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 import hallpointer.address.logic.commands.FindCommand;
 import hallpointer.address.logic.parser.exceptions.ParseException;
-import hallpointer.address.model.person.NameContainsKeywordsPredicate;
+import hallpointer.address.model.member.NameContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object

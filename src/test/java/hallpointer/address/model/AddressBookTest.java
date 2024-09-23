@@ -16,8 +16,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import hallpointer.address.model.person.Person;
-import hallpointer.address.model.person.exceptions.DuplicatePersonException;
+import hallpointer.address.model.member.Person;
+import hallpointer.address.model.member.exceptions.DuplicatePersonException;
 import hallpointer.address.testutil.PersonBuilder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

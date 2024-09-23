@@ -1,4 +1,4 @@
-package hallpointer.address.model.person;
+package hallpointer.address.model.member;
 
 import static hallpointer.address.commons.util.AppUtil.checkArgument;
 import static java.util.Objects.requireNonNull;

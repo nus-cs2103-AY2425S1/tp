@@ -14,10 +14,10 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import hallpointer.address.logic.parser.exceptions.ParseException;
-import hallpointer.address.model.person.Address;
-import hallpointer.address.model.person.Email;
-import hallpointer.address.model.person.Name;
-import hallpointer.address.model.person.Phone;
+import hallpointer.address.model.member.Address;
+import hallpointer.address.model.member.Email;
+import hallpointer.address.model.member.Name;
+import hallpointer.address.model.member.Phone;
 import hallpointer.address.model.tag.Tag;
 
 public class ParserUtilTest {

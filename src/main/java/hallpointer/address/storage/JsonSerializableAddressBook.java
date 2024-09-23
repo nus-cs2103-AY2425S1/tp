@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import hallpointer.address.commons.exceptions.IllegalValueException;
 import hallpointer.address.model.AddressBook;
 import hallpointer.address.model.ReadOnlyAddressBook;
-import hallpointer.address.model.person.Person;
+import hallpointer.address.model.member.Person;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -19,7 +19,7 @@ import hallpointer.address.model.person.Person;
 @JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate member(s).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
 

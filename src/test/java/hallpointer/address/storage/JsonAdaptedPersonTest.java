@@ -12,10 +12,10 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import hallpointer.address.commons.exceptions.IllegalValueException;
-import hallpointer.address.model.person.Address;
-import hallpointer.address.model.person.Email;
-import hallpointer.address.model.person.Name;
-import hallpointer.address.model.person.Phone;
+import hallpointer.address.model.member.Address;
+import hallpointer.address.model.member.Email;
+import hallpointer.address.model.member.Name;
+import hallpointer.address.model.member.Phone;
 
 public class JsonAdaptedPersonTest {
     private static final String INVALID_NAME = "R@chel";

@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 import hallpointer.address.model.Model;
 import hallpointer.address.model.ModelManager;
 import hallpointer.address.model.UserPrefs;
-import hallpointer.address.model.person.NameContainsKeywordsPredicate;
+import hallpointer.address.model.member.NameContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -50,7 +50,7 @@ public class FindCommandTest {
         // null -> returns false
         assertFalse(findFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different member -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 

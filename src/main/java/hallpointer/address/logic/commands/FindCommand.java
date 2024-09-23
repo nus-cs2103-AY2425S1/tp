@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import hallpointer.address.commons.util.ToStringBuilder;
 import hallpointer.address.logic.Messages;
 import hallpointer.address.model.Model;
-import hallpointer.address.model.person.NameContainsKeywordsPredicate;
+import hallpointer.address.model.member.NameContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.

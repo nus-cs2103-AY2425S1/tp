@@ -11,7 +11,7 @@ import hallpointer.address.logic.Messages;
 import hallpointer.address.model.Model;
 import hallpointer.address.model.ModelManager;
 import hallpointer.address.model.UserPrefs;
-import hallpointer.address.model.person.Person;
+import hallpointer.address.model.member.Person;
 import hallpointer.address.testutil.PersonBuilder;
 
 /**
