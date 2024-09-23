@@ -10,7 +10,7 @@ import java.util.Set;
 
 import hallpointer.address.logic.commands.AddCommand;
 import hallpointer.address.logic.commands.EditCommand.EditPersonDescriptor;
-import hallpointer.address.model.person.Person;
+import hallpointer.address.model.member.Person;
 import hallpointer.address.model.tag.Tag;
 
 /**
@@ -19,14 +19,14 @@ import hallpointer.address.model.tag.Tag;
 public class PersonUtil {
 
     /**
-     * Returns an add command string for adding the {@code person}.
+     * Returns an add command string for adding the {@code member}.
      */
     public static String getAddCommand(Person person) {
         return AddCommand.COMMAND_WORD + " " + getPersonDetails(person);
     }
 
     /**
-     * Returns the part of command string for the given {@code person}'s details.
+     * Returns the part of command string for the given {@code member}'s details.
      */
     public static String getPersonDetails(Person person) {
         StringBuilder sb = new StringBuilder();

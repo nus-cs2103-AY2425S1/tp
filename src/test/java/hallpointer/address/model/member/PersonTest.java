@@ -1,4 +1,4 @@
-package hallpointer.address.model.person;
+package hallpointer.address.model.member;
 
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
@@ -66,7 +66,7 @@ public class PersonTest {
         // different type -> returns false
         assertFalse(ALICE.equals(5));
 
-        // different person -> returns false
+        // different member -> returns false
         assertFalse(ALICE.equals(BOB));
 
         // different name -> returns false

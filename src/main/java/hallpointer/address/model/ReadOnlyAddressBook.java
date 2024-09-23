@@ -1,6 +1,6 @@
 package hallpointer.address.model;
 
-import hallpointer.address.model.person.Person;
+import hallpointer.address.model.member.Person;
 import javafx.collections.ObservableList;
 
 /**

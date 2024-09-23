@@ -15,7 +15,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import hallpointer.address.commons.core.GuiSettings;
-import hallpointer.address.model.person.NameContainsKeywordsPredicate;
+import hallpointer.address.model.member.NameContainsKeywordsPredicate;
 import hallpointer.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {

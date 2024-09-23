@@ -1,4 +1,4 @@
-package hallpointer.address.model.person;
+package hallpointer.address.model.member;
 
 import static hallpointer.address.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertFalse;

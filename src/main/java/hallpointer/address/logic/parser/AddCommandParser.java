@@ -12,11 +12,11 @@ import java.util.stream.Stream;
 
 import hallpointer.address.logic.commands.AddCommand;
 import hallpointer.address.logic.parser.exceptions.ParseException;
-import hallpointer.address.model.person.Address;
-import hallpointer.address.model.person.Email;
-import hallpointer.address.model.person.Name;
-import hallpointer.address.model.person.Person;
-import hallpointer.address.model.person.Phone;
+import hallpointer.address.model.member.Address;
+import hallpointer.address.model.member.Email;
+import hallpointer.address.model.member.Name;
+import hallpointer.address.model.member.Person;
+import hallpointer.address.model.member.Phone;
 import hallpointer.address.model.tag.Tag;
 
 /**

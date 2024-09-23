@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import hallpointer.address.model.AddressBook;
-import hallpointer.address.model.person.Person;
+import hallpointer.address.model.member.Person;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.

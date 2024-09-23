@@ -1,4 +1,4 @@
-package hallpointer.address.model.person;
+package hallpointer.address.model.member;
 
 import java.util.List;
 import java.util.function.Predicate;

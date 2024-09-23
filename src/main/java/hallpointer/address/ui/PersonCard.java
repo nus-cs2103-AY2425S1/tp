@@ -2,7 +2,7 @@ package hallpointer.address.ui;
 
 import java.util.Comparator;
 
-import hallpointer.address.model.person.Person;
+import hallpointer.address.model.member.Person;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;

@@ -7,7 +7,7 @@ import hallpointer.address.logic.commands.CommandResult;
 import hallpointer.address.logic.commands.exceptions.CommandException;
 import hallpointer.address.logic.parser.exceptions.ParseException;
 import hallpointer.address.model.ReadOnlyAddressBook;
-import hallpointer.address.model.person.Person;
+import hallpointer.address.model.member.Person;
 import javafx.collections.ObservableList;
 
 /**

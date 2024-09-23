@@ -11,16 +11,16 @@ import hallpointer.address.commons.util.ToStringBuilder;
 import hallpointer.address.logic.Messages;
 import hallpointer.address.logic.commands.exceptions.CommandException;
 import hallpointer.address.model.Model;
-import hallpointer.address.model.person.Person;
+import hallpointer.address.model.member.Person;
 
 /**
- * Adds a person to the address book.
+ * Adds a member to the address book.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a member to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -35,8 +35,8 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New member added: %1$s";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This member already exists in the address book";
 
     private final Person toAdd;
 
