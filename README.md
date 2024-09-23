@@ -1,4 +1,12 @@
+# TAHub Contacts
+
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
+[![GitHub Release](https://img.shields.io/github/v/release/AY2425S1-CS2103T-F14B-2/tp)](https://github.com/AY2425S1-CS2103T-F14B-2/tp/releases)
+![Coverage](https://app.codecov.io/gh/AY2425S1-CS2103T-F14B-2/tp/settings/badge)
+
+<br>
+
+## What This is Based on
 
 ![Ui](docs/images/Ui.png)
 
