@@ -294,8 +294,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | tutor                                      | add a new student             | keep track of my tutee's information                                    |
 | `* * *`  | user                                       | delete an entry               | remove entries that I no longer need                                    |
 | `* * *`  | private tutor                              | view all my students' details | have an overview of how many tutees I am managing                       |
-| `* * *`  | tutor with many students                   | find a person by name         | locate details of tutees without having to go through the entire list   |
-| `* *`    | busy undergraduate tutor                   | find entries by date          | locate details of tutees that has tuition on a specific date            |
+| `* * *`  | tutor with many students                   | find a student by name        | locate details of tutees without having to go through the entire list   |
+| `* *`    | busy undergraduate tutor                   | find students by date         | locate details of tutees that has tuition on a specific date            |
 | `* *`    | new user                                   | see sample entries            | understand how the interface will look like with entries added          |
 | `*`      | user                                       | hide private contact details  | minimize chance of someone else seeing them by accident                 |
 | `*`      | user with many persons in the address book | sort persons by name          | locate a person easily                                                  |
