@@ -4,8 +4,6 @@
 [![GitHub Release](https://img.shields.io/github/v/release/AY2425S1-CS2103T-F14B-2/tp)](https://github.com/AY2425S1-CS2103T-F14B-2/tp/releases)
 [![codecov](https://codecov.io/gh/AY2425S1-CS2103T-F14B-2/tp/graph/badge.svg?token=B9KWYUPZ78)](https://codecov.io/gh/AY2425S1-CS2103T-F14B-2/tp)
 
-<br>
-
 ## What This is Based on
 
 ![Ui](docs/images/Ui.png)
