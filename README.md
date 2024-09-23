@@ -2,7 +2,7 @@
 
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
 [![GitHub Release](https://img.shields.io/github/v/release/AY2425S1-CS2103T-F14B-2/tp)](https://github.com/AY2425S1-CS2103T-F14B-2/tp/releases)
-![Coverage](https://app.codecov.io/gh/AY2425S1-CS2103T-F14B-2/tp/settings/badge)
+[![codecov](https://codecov.io/gh/AY2425S1-CS2103T-F14B-2/tp/graph/badge.svg?token=B9KWYUPZ78)](https://codecov.io/gh/AY2425S1-CS2103T-F14B-2/tp)
 
 <br>
 
