@@ -14,7 +14,7 @@
 
 # More Information
   * It is **written in OOP fashion**. 
-  * It is **written in Java**, and has about 6 kLoC.
+  * It is **written in Java**, and has about 6 KLoC.
   * It comes with a **reasonable level of user and developer documentation**.
   * It is developed by a team of 5 from NUS Computer Science as a project for a module on software engineering (CS2103T). You can find more [about us here](https://ay2425s1-cs2103t-f14a-1.github.io/tp/AboutUs.html).
 
