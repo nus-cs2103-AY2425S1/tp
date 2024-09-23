@@ -1,7 +1,5 @@
 package seedu.address.commons.core;
 
-import seedu.address.model.person.Person;
-
 /**
  * Container for user visible messages.
  */
