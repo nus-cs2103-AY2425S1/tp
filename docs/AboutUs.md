@@ -28,16 +28,17 @@ You can reach us CS2103T F09 group 3!
 [[portfolio](qifeng.md)]
 
 * Role: Developer 
-* Responsibilities: Code quality 
+* Responsibilities: Code quality
 
-### Johnny Doe
+### Wei Bin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/weibin.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/weibinlim)]
+[[portfolio](team/weibin.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Testing
 
 ### Jean Doe
 
@@ -59,3 +60,4 @@ You can reach us CS2103T F09 group 3!
 * Role: Developer
 * Responsibilities: UI
 
+>>>>>>> d0d56e25bb21bcd602450d89aac85dee67147a00
