@@ -342,7 +342,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Accessibility**
 1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse. 
 2. The user interface should be easy to navigate and intuitive, with clear labels, large enough texts, and highlighted error messages. 
-3. The application should provide clear help sections or tooltips for users, explaining how to use its features.
+3. The application should provide clear help sections for users, explaining how to use its features.
 
 **Concurrency Control**
 1. Should only be used by one person at a time, meaning it is designed for a single user and cannot be accessed or shared by multiple users simultaneously. 
@@ -363,7 +363,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Logging**
 1. Activity Logs: The system should log all user activity and critical events for security auditing and troubleshooting.
 
-*{More to be added}*
 
 ### Glossary
 
