@@ -273,31 +273,42 @@ _{Explain here how the data archiving feature will be implemented}_
 ### Product scope
 
 **Target user profile**:
-
-* has a need to manage a significant number of contacts
+* is a full time university student with fixed schedule
+* is giving private tuition to a significant number of students
+* has a need to manage a significant number of tutees' information
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Empower undergraduate private tutors to efficiently manage payments, track student performance, and organize schedules using CLI.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                                               | So that I can…​                                |
-|--------|--------------------------------------------|------------------------------------------------------------|------------------------------------------------|
-| `* *`  | user                                       | edit contact details                                       | keep my information up-to-date                 |
-| `* *`  | busy undergraduate tutor                   | check who owes me tuition fee                              | identify and remind them to pay                |
-| `* *`  | busy undergraduate tutor                   | be reminded of my tuitions for today                       | remember to teach for today (if any)           |
-| `* *`  | busy undergraduate tutor                   | have an overview of the tuition fee earned/ owed as of now | easily keep track of how much more I should receive |
-| `* *`  | forgetful user                             | detect duplicates                                          | avoid manually finding and deleting the duplicates |
-| `* *`  | forgetful user                             | tag users with date and time of tuition                    | differentiate between different contacts    |
-| `*`    | user with many persons in the address book | sort persons by name                                       | locate a person easily                         |
-| `*`    | busy undergraduate tutor                   | have information of both the children and his/her guardian | contact either of them                         |
-| `*`    | tutor with many students                   | to know which guardian is associated with which children   | know which student is under that guardian/ vice-versa |
+| Priority | As a …​                                    | I want to …​                  | So that I can…​                                                         |
+|----------|--------------------------------------------|-------------------------------|-------------------------------------------------------------------------|
+| `* * *`  | new user                                   | see usage instructions        | refer to instructions when I forget how to use the App                  |
+| `* * *`  | tutor                                      | add a new student             | keep track of my tutee's information                                    |
+| `* * *`  | user                                       | delete an entry               | remove entries that I no longer need                                    |
+| `* * *`  | private tutor                              | view all my students' details | have an overview of how many tutees I am managing                       |
+| `* * *`  | tutor with many students                   | find a student by name        | locate details of tutees without having to go through the entire list   |
+| `* *`    | busy undergraduate tutor                   | find students by date         | locate details of tutees that has tuition on a specific date            |
+| `* *`    | new user                                   | see sample entries            | understand how the interface will look like with entries added          |
+| `* *`    | user                                       | edit contact details                                       | keep my information up-to-date                 |
+| `* *`    | busy undergraduate tutor                   | check who owes me tuition fee                              | identify and remind them to pay                |
+| `* *`    | busy undergraduate tutor                   | be reminded of my tuitions for today                       | remember to teach for today (if any)           |
+| `* *`    | busy undergraduate tutor                   | have an overview of the tuition fee earned/ owed as of now | easily keep track of how much more I should receive |
+| `* *`    | forgetful user                             | detect duplicates                                          | avoid manually finding and deleting the duplicates |
+| `* *`    | forgetful user                             | tag users with date and time of tuition                    | differentiate between different contacts    |
+| `*`      | user                                       | hide private contact details  | minimize chance of someone else seeing them by accident                 |
+| `*`      | user with many persons in the address book | sort persons by name          | locate a person easily                                                  |
+| `*`      | user that types fast                       | be able to undo my actions    | revert back if I have made a mistake                                    |
+| `*`      | user with many persons in the address book | sort persons by name                                       | locate a person easily                         |
+| `*`      | busy undergraduate tutor                   | have information of both the children and his/her guardian | contact either of them                         |
+| `*`      | tutor with many students                   | to know which guardian is associated with which children   | know which student is under that guardian/ vice-versa |
 
 *{More to be added}*
 
