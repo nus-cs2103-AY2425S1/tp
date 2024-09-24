@@ -11,14 +11,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### Hovan Leong
+### Samuel Lim
 
-<img src="images/hovanleong.png" width="200px">
+<img src="images/slye20.png" width="200px">
 
-[[github](https://github.com/hovanleong)]
-[[portfolio](team/hovanleong.md)]
+[[github](https://github.com/slye20)]
+[[portfolio](team/slye20.md)]
 
-* Role: Documentation
+* Role: Software Developer, Documentation, Testing, Code quality and many more!
 
 ### Jane Doe
 
@@ -39,15 +39,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Hovan Leong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/hovanleong.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/hovanleong)]
+[[portfolio](team/hovanleong.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Documentation
 
 ### James Doe
 
