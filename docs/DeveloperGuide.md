@@ -328,17 +328,41 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 *{More to be added}*
 
 ### Non-Functional Requirements
+**Environment Requirements**
+1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage. 
-3. Should only be used by one person at a time, meaning it is designed for a single user and cannot be accessed or shared by multiple users simultaneously. 
-4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse. 
-5. All the data should be stored in human-editable files and must not be stored using DBMS. 
-6. Data should be saved permanently and not affected by any sudden accidents e.g., power outage, hardware breakdown. 
-7. The software should not depend on any remote server and should be able to run at any time. 
-8. The application should be able to launch without an installer.
-9. For any simple usage, the application should be able to response within 2 seconds 
-10. Features should be testable without any external installation or access e.g., remote APIs, audio players, user accounts, internet connection. 
+**Data Requirements**
+1. All the data should be stored in human-editable files and must not be stored using DBMS. 
+2. Data should be saved permanently and not affected by any sudden accidents e.g., power outage, hardware breakdown.
+
+**Performance Requirements**
+1. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage. 
+2. For any simple usage, the application should be able to response within 2 seconds.
+
+**Accessibility**
+1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse. 
+2. The user interface should be easy to navigate and intuitive, with clear labels, large enough texts, and highlighted error messages. 
+3. The application should provide clear help sections or tooltips for users, explaining how to use its features.
+
+**Concurrency Control**
+1. Should only be used by one person at a time, meaning it is designed for a single user and cannot be accessed or shared by multiple users simultaneously. 
+
+**Testability**
+1. The software should not depend on any remote server and should be able to run at any time. 
+2. The application should be able to launch without an installer.
+3. Features should be testable without any external installation or access e.g., remote APIs, audio players, user accounts, internet connection. 
+
+**Security Requirements**
+1. The application is assumed to be used locally without creating any user account.
+2. Data stored in human-editable files is assumed to be highly secured and not damaged.
+
+**Maintainability Requirements**
+1. The codebase should be modular and well-documented (i.e. JavaDoc, following abstraction and cohesion) to ensure ease of maintenance and updates.
+2. The application must use a version control system to track changes and maintain multiple versions of the software.
+
+**Logging**
+1. Activity Logs: The system should log all user activity and critical events for security auditing and troubleshooting.
+
 *{More to be added}*
 
 ### Glossary
