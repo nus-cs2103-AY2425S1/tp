@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# BridalBuddy Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -302,30 +302,102 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a person**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User creates a new person with the required details (e.g. guest, vendor, task).
+2. System adds the entry.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The provided details are incomplete or invalid.
+    * 1a1. System shows an error message and requests the user to re-enter the details.
+
+      Use case resumes at step 1.
+
+
+**Use Case: Read/Print Out Entries**
+
+**MSS**
+1. User requests to view or print all people.
+2. System displays or prints the list of all people.
+
+   Use case ends.
+
+**Extensions**
+* 2a. No entries exist.
 
   Use case ends.
 
-* 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+**Use Case: Update Details of Person**
 
-      Use case resumes at step 2.
+**MSS**
+1. User selects an entry to update together with the fields to be updated.
+2. System saves the changes and notifies user of success.
 
-*{More to be added}*
+   Use case ends.
+
+**Extensions**
+* 1a. The provided entry does not exist.
+    * 1a1. System shows an error message.
+
+      Use case ends.
+
+* 1b. The new details are incomplete or invalid.
+    * 1b1. System shows an error message and requests the user to re-enter the details.
+
+      Use case resumes at step 1.
+
+
+**Use Case: Delete a Person**
+
+**MSS**
+1. User requests to delete an entry.
+2. System deletes the entry.
+
+   Use case ends.
+
+**Extensions**
+* 1a. The provided entry does not exist.
+    * 1a1. System shows an error message.
+
+      Use case resumes at step 1.
+
+
+**Use Case: Categorise Persons**
+
+**MSS**
+1. User requests to categorise a person (e.g., family, friends, coworkers).
+2. System assigns attendees to the category.
+
+   Use case ends.
+
+**Extensions**
+* 1a. User tries to create a duplicate category.
+    * 1a1. System shows an error message.
+
+      Use case ends.
+
+
+**Use Case: Search and Filter Persons**
+
+**MSS**
+1. User requests to search for or filter entries (e.g., by category, name, RSVP status).
+2. System prompts for search or filter criteria.
+3. User provides the criteria.
+4. System displays the matching entries.
+
+   Use case ends.
+
+**Extensions**
+* 4a. No matching entries are found.
+    * 4a1. System shows a message indicating no results.
+
+      Use case ends.
 
 ### Non-Functional Requirements
 
