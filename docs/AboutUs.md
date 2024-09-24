@@ -40,25 +40,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/Chronoxy)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Troller
+* Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Ethan Tan
 
 <img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/ethantyh692)]
+[[portfolio](team/ethantyh692.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
