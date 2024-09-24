@@ -29,10 +29,6 @@ public class RemarkCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_REMARK + "Likes to swim.";
 
-    public static final String MESSAGE_NOT_IMPLEMENTED_YET = "Remark command not implemented yet";
-
-    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Remark: %2$s";
-
     private final Index index;
     private final Remark remark;
 
@@ -73,7 +69,7 @@ public class RemarkCommand extends Command {
      */
     private String generateSuccessMessage(Person personToEdit) {
         String message = !remark.value.isEmpty() ? MESSAGE_ADD_REMARK_SUCCESS : MESSAGE_DELETE_REMARK_SUCCESS;
-        return String.format(message, Messages.format(personToEdit));
+        return String.format(message, personToEdit);
     }
 
     @Override
