@@ -5,7 +5,7 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `e0969203[at]u.nus.edu`
 
 ## Project team
 
@@ -19,14 +19,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: Logic
 
-### Jane Doe
+### Linette Goh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/linette-g.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/linette-g)]
+[[portfolio](team/linette.md)]
 
-* Role: Team Lead
+* Role: Developer
 * Responsibilities: UI
 
 ### Brendan Ng
