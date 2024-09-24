@@ -313,49 +313,132 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
  | `*` | Expert User | Set up automated messages for elderly contacts that are not reachable | I can have an alternative communication method | 
  | `*` | Expert User | Use AI to calculate the priority list for elderly based on their information | The correct eldelry are being prioritised  | 
 
-*{More to be added}*
-
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+**System: ContactMate**  
+**Use case: UC01 \- Mark elderly as called**  
+**Actor: Staff**  
+**Guarantees:** 
 
-**Use case: Delete a person**
+* Marks elderly’s details to contact book only if input has no errors.
 
-**MSS**
+**MSS:**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. Staff lists elderly contacts by priority (UC02).  
+2. Staff calls the elderly at the top of the list.  
+3. Staff marks the elderly as called and takes notes of the call with mark command.  
+4. ContactMate updates the elderly as marked and displays a success message.
 
     Use case ends.
 
-**Extensions**
+**Extensions:**  
+* 1a. The list is empty.  
+  * Use case ends.  
+* 3a. ContactMate detects an invalid INDEX or incorrect command syntax.  
+  * 3a1. ContactMate shows an error message.  
+  * Use case resumes from step 3\.
 
-* 2a. The list is empty.
+**System: ContactMate**  
+**Use case: UC02 \- List elderly contacts by priority**  
+**Actor: Staff**  
+**Guarantees:** 
 
-  Use case ends.
+* List of elderly sorted by priority will be shown.
 
-* 3a. The given index is invalid.
+**MSS:**
 
-    * 3a1. AddressBook shows an error message.
+1. Staff inputs list command to view elderly contacts.  
+2. ContactMate updates view to show contacts sorted based on priority (date to be called).
 
-      Use case resumes at step 2.
+      Use case ends.
 
-*{More to be added}*
+**System: ContactMate**  
+**Use case: UC03 \- List individual elderly call history**  
+**Actor: Staff**  
+**Guarantees:** 
+
+* Elderly call history will be listed only if the input has no errors.
+
+**MSS:**
+
+1. Staff lists elderly contacts by priority (UC02).  
+2. Staff inputs INDEX or NRIC of elderly they want to know the call history of.  
+3. ContactMate updates view to show a list of calls made to a specific elderly 
+
+	Use case ends.
+
+**Extensions:**  
+* 1a. The list is empty.  
+    * Use case ends.  
+* 2a. ContactMate detects an invalid INDEX or NRIC or incorrect command syntax.  
+	* 2a1. ContactMate shows an error message.  
+	* Use case resumes from step 2\.
+
+**System: ContactMate**  
+**Use case: UC04 \- Delete elderly from the call list**  
+**Actor: Staff**  
+**Guarantees:** 
+
+* Delete elderly from the contact list only if input has no errors.
+
+**MSS:**
+
+1. Staff lists elderly contacts by priority (UC02).  
+2. Staff inputs the NRIC or INDEX of elderly they want to delete.  
+3. ContactMate prompts the Staff for confirmation before deletion.  
+4. Staff confirms the deletion.  
+5. ContactMate deletes the elderly and confirms the successful deletion for Staff.
+
+**Extensions:**  
+* 1a. The list is empty.  
+    * Use case ends.  
+* 2a. ContactMate detects an invalid INDEX or invalid NRIC or incorrect command syntax.  
+	* 2a1. ContactMate shows an error message.  
+	* Use case resumes from step 2\.  
+* 3a. Staff cancels the deletion.  
+	* 3a1. ContactMate shows a cancellation message.  
+	* Use case ends.
+
+**System: ContactMate**  
+**Use case: UC05 \- Add new elderly who have joined the Befriending Program, with appropriate details and fields**  
+**Actor: Staff**  
+**Guarantees:** 
+
+* Adds elderly to contact book only if input has no errors.
+
+**MSS:**
+
+1. Staff inputs details for the elderly they want to add to the system.  
+2. ContactMate adds the new elderly and shows the updated list with the newly added elderly.
+
+      Use case ends.
+
+**Extensions:**  
+* 1a. ContactMate detects an invalid INDEX or invalid NRIC or incorrect command syntax.  
+	* 1a1. ContactMate shows an error message.  
+	* Use case resumes from step 1\.  
+* 1b. ContactMate detects that the elderly being added has an NRIC matching someone in the contact book.  
+	* 1b1. ContactMate shows an error message saying this elderly already exists.  
+	* Use case resumes from step 1\.  
+* 1c. ContactMate detects that the elderly being added has a matching name, phone number or email with someone in the contact book.  
+	* 1c1. ContactMate shows a warning message that the elderly added has a matching field.  
+	* Use case resumes from step 2\.
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. A user with above-average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+2. The product should be a single-user system.
+3. The product should not rely on a remote server.
+4. It should accommodate up to 250 elderly without noticeable performance slowdowns during typical usage.
+5. The product should respond within two seconds.
+6. The product should work on Windows, Linux and Mac as long as they have `Java 17` installed.
 
-*{More to be added}*
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **AAC**: Active Ageing Centre. A recreational centre that supports elderly in the area.
+* **Befriending** Program: Program which elderly signs up for to receive support from an AAC.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
