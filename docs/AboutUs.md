@@ -5,7 +5,8 @@
 
 # About Us
 
-We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
+We are a team working on our CS2103T Team Project, based in the
+[School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
 You can reach us at the email `seer[at]comp.nus.edu.sg`
 
@@ -21,15 +22,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Zee
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/zeepheru.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/zeepheru)]
+[[portfolio](team/zee.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Team Lead, Developer
+* Responsibilities: Art
 
 ### Johnny Doe
 
