@@ -40,15 +40,15 @@ You can reach us CS2103T F09 group 3!
 * Role: Developer
 * Responsibilities: Testing
 
-### Jean Doe
+### Hovan Leong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/hovanleong.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/hovanleong)]
+[[portfolio](team/hovanleong.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Documentation
+
 
 ### James Doe
 
