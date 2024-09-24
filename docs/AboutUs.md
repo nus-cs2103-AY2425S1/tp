@@ -9,15 +9,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Boon Hsuan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/flyingdonkeys.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[homepage](https://tuition-production.up.railway.app/)]
+[[github](https://github.com/FlyingDonkeys)]
+[[portfolio](team/boonhsuan.md)]
 
 * Role: Project Advisor
+* Responsibilities: Code stuff
 
 ### Jane Doe
 
