@@ -10,6 +10,7 @@ We are a team based in the [School of Computing, National University of Singapor
 You can reach us at CS2103T F09 group 3!
 
 ## Project team
+Here are the members of our team! 
 
 ### Tan Yi Xuan
 
