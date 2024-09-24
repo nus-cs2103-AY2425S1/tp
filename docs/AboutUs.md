@@ -11,33 +11,36 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### Aw Jean Leng Adrian
+### Ma Xizi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/maxizi.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/Chronoxy)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/Ma-Xizi)]
+[[portfolio](team/Ma-Xizi.md)]
 
-* Role: Troller
+* Role: Developer
+* Responsibilities: Something Random
 
-### Jane Doe
+### Norbert Loh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/norbertloh.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[homepage](http://www.comp.nus.edu.sg/~damithch)]
+[[github](https://github.com/norbertloh)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Aw Jean Leng Adrian
 
 <img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/Chronoxy)]
+[[portfolio](team/johndoe.md)]
 
-* Role: Developer
+* Role: Troller
 * Responsibilities: Data
 
 ### Jean Doe
