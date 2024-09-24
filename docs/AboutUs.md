@@ -18,5 +18,5 @@ You can reach us CS2103T F09 group 3!
 [[github](https://github.com/slye20)]
 [[portfolio](team/slye20.md)]
 
-* Role: Software Developer, Documentation, Testing, Code quality and many more!
+* Role: Software Developer, Documentation, Testing, Code quality and many more! :)
 
