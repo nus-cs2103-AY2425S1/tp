@@ -20,3 +20,42 @@ You can reach us CS2103T F09 group 3!
 
 * Role: Software Developer, Documentation, Testing, Code quality and many more!
 
+### Yang Qifeng
+
+<img src="images/qifeng.png" width="200px">
+
+[[github](http://github.com/YangQF2002)]
+[[portfolio](qifeng.md)]
+
+* Role: Developer 
+* Responsibilities: Code quality 
+
+### Johnny Doe
+
+<img src="images/johndoe.png" width="200px">
+
+[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities: Data
+
+### Jean Doe
+
+<img src="images/johndoe.png" width="200px">
+
+[[github](http://github.com/johndoe)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities: Dev Ops + Threading
+
+### James Doe
+
+<img src="images/johndoe.png" width="200px">
+
+[[github](http://github.com/johndoe)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities: UI
+
