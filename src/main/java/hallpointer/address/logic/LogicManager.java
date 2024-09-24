@@ -14,7 +14,7 @@ import hallpointer.address.logic.parser.AddressBookParser;
 import hallpointer.address.logic.parser.exceptions.ParseException;
 import hallpointer.address.model.Model;
 import hallpointer.address.model.ReadOnlyAddressBook;
-import hallpointer.address.model.person.Person;
+import hallpointer.address.model.member.Member;
 import hallpointer.address.storage.Storage;
 import javafx.collections.ObservableList;
 
@@ -67,8 +67,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+    public ObservableList<Member> getFilteredMemberList() {
+        return model.getFilteredMemberList();
     }
 
     @Override

@@ -3,7 +3,7 @@ package hallpointer.address.logic.parser;
 import static hallpointer.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static hallpointer.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static hallpointer.address.testutil.Assert.assertThrows;
-import static hallpointer.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static hallpointer.address.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -17,17 +17,17 @@ import hallpointer.address.logic.commands.AddCommand;
 import hallpointer.address.logic.commands.ClearCommand;
 import hallpointer.address.logic.commands.DeleteCommand;
 import hallpointer.address.logic.commands.EditCommand;
-import hallpointer.address.logic.commands.EditCommand.EditPersonDescriptor;
+import hallpointer.address.logic.commands.EditCommand.EditMemberDescriptor;
 import hallpointer.address.logic.commands.ExitCommand;
 import hallpointer.address.logic.commands.FindCommand;
 import hallpointer.address.logic.commands.HelpCommand;
 import hallpointer.address.logic.commands.ListCommand;
 import hallpointer.address.logic.parser.exceptions.ParseException;
-import hallpointer.address.model.person.NameContainsKeywordsPredicate;
-import hallpointer.address.model.person.Person;
-import hallpointer.address.testutil.EditPersonDescriptorBuilder;
-import hallpointer.address.testutil.PersonBuilder;
-import hallpointer.address.testutil.PersonUtil;
+import hallpointer.address.model.member.Member;
+import hallpointer.address.model.member.NameContainsKeywordsPredicate;
+import hallpointer.address.testutil.EditMemberDescriptorBuilder;
+import hallpointer.address.testutil.MemberBuilder;
+import hallpointer.address.testutil.MemberUtil;
 
 public class AddressBookParserTest {
 
@@ -35,9 +35,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddCommand(person), command);
+        Member member = new MemberBuilder().build();
+        AddCommand command = (AddCommand) parser.parseCommand(MemberUtil.getAddCommand(member));
+        assertEquals(new AddCommand(member), command);
     }
 
     @Test
@@ -49,17 +49,17 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_MEMBER.getOneBased());
+        assertEquals(new DeleteCommand(INDEX_FIRST_MEMBER), command);
     }
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Person person = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        Member member = new MemberBuilder().build();
+        EditMemberDescriptor descriptor = new EditMemberDescriptorBuilder(member).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+                + INDEX_FIRST_MEMBER.getOneBased() + " " + MemberUtil.getEditMemberDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(INDEX_FIRST_MEMBER, descriptor), command);
     }
 
     @Test

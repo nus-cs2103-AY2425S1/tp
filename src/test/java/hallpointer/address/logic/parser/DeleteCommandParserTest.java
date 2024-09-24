@@ -3,7 +3,7 @@ package hallpointer.address.logic.parser;
 import static hallpointer.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static hallpointer.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static hallpointer.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static hallpointer.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static hallpointer.address.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +22,7 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_PERSON));
+        assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_MEMBER));
     }
 
     @Test
