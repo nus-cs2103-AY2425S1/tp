@@ -274,13 +274,21 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Has a need to manage a significant number of contacts
+* Has a need to manage different types of contacts (e.g. vendors, guests)
+* Has a need to manage a few separate weddings concurrently
+* Favours desktop applications over other alternatives
+* Prefers keyboard commands over mouse interactions
+* Adequately proficient with command-line applications
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
+* Streamlined, all-in-one wedding planning tool
+* Intuitive organisation and customisation
+* Stress-free and efficient planning process
+* One-stop companion for wedding planners
+* Simplifies time-intensive and tedious tasks of managing guest lists, schedules, and vendor contacts
+* Enhances efficiency by reducing time spent navigating complex GUIs
+
 
 
 ### User stories
