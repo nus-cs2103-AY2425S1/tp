@@ -337,7 +337,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Performance Requirements**
 1. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage. 
-2. For any simple usage, the application should be able to response within 2 seconds.
+2. For any simple usage, the application should be able to respond within 2 seconds.
 
 **Accessibility**
 1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse. 
