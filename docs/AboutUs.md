@@ -50,11 +50,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Kushal Das
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kushaldas27.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/kushaldas27)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
