@@ -2,10 +2,10 @@ package hallpointer.address.logic.commands;
 
 import static hallpointer.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static hallpointer.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static hallpointer.address.testutil.TypicalPersons.CARL;
-import static hallpointer.address.testutil.TypicalPersons.ELLE;
-import static hallpointer.address.testutil.TypicalPersons.FIONA;
-import static hallpointer.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static hallpointer.address.testutil.TypicalMembers.CARL;
+import static hallpointer.address.testutil.TypicalMembers.ELLE;
+import static hallpointer.address.testutil.TypicalMembers.FIONA;
+import static hallpointer.address.testutil.TypicalMembers.getTypicalAddressBook;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -55,23 +55,23 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noPersonFound() {
+    public void execute_zeroKeywords_noMemberFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        expectedModel.updateFilteredMemberList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), model.getFilteredMemberList());
     }
 
     @Test
-    public void execute_multipleKeywords_multiplePersonsFound() {
+    public void execute_multipleKeywords_multipleMembersFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        expectedModel.updateFilteredMemberList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredMemberList());
     }
 
     @Test

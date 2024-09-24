@@ -9,41 +9,41 @@ import static hallpointer.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.Set;
 
 import hallpointer.address.logic.commands.AddCommand;
-import hallpointer.address.logic.commands.EditCommand.EditPersonDescriptor;
-import hallpointer.address.model.member.Person;
+import hallpointer.address.logic.commands.EditCommand.EditMemberDescriptor;
+import hallpointer.address.model.member.Member;
 import hallpointer.address.model.tag.Tag;
 
 /**
- * A utility class for Person.
+ * A utility class for Member.
  */
-public class PersonUtil {
+public class MemberUtil {
 
     /**
      * Returns an add command string for adding the {@code member}.
      */
-    public static String getAddCommand(Person person) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(person);
+    public static String getAddCommand(Member member) {
+        return AddCommand.COMMAND_WORD + " " + getMemberDetails(member);
     }
 
     /**
      * Returns the part of command string for the given {@code member}'s details.
      */
-    public static String getPersonDetails(Person person) {
+    public static String getMemberDetails(Member member) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + person.getName().fullName + " ");
-        sb.append(PREFIX_PHONE + person.getPhone().value + " ");
-        sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
-        sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
-        person.getTags().stream().forEach(
+        sb.append(PREFIX_NAME + member.getName().fullName + " ");
+        sb.append(PREFIX_PHONE + member.getPhone().value + " ");
+        sb.append(PREFIX_EMAIL + member.getEmail().value + " ");
+        sb.append(PREFIX_ADDRESS + member.getAddress().value + " ");
+        member.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
         return sb.toString();
     }
 
     /**
-     * Returns the part of command string for the given {@code EditPersonDescriptor}'s details.
+     * Returns the part of command string for the given {@code EditMemberDescriptor}'s details.
      */
-    public static String getEditPersonDescriptorDetails(EditPersonDescriptor descriptor) {
+    public static String getEditMemberDescriptorDetails(EditMemberDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));

@@ -14,8 +14,8 @@ import hallpointer.address.logic.commands.AddCommand;
 import hallpointer.address.logic.parser.exceptions.ParseException;
 import hallpointer.address.model.member.Address;
 import hallpointer.address.model.member.Email;
+import hallpointer.address.model.member.Member;
 import hallpointer.address.model.member.Name;
-import hallpointer.address.model.member.Person;
 import hallpointer.address.model.member.Phone;
 import hallpointer.address.model.tag.Tag;
 
@@ -45,9 +45,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, tagList);
+        Member member = new Member(name, phone, email, address, tagList);
 
-        return new AddCommand(person);
+        return new AddCommand(member);
     }
 
     /**

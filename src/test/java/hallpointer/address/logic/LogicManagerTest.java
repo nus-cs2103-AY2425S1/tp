@@ -7,7 +7,7 @@ import static hallpointer.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static hallpointer.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static hallpointer.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static hallpointer.address.testutil.Assert.assertThrows;
-import static hallpointer.address.testutil.TypicalPersons.AMY;
+import static hallpointer.address.testutil.TypicalMembers.AMY;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
@@ -27,11 +27,11 @@ import hallpointer.address.model.Model;
 import hallpointer.address.model.ModelManager;
 import hallpointer.address.model.ReadOnlyAddressBook;
 import hallpointer.address.model.UserPrefs;
-import hallpointer.address.model.member.Person;
+import hallpointer.address.model.member.Member;
 import hallpointer.address.storage.JsonAddressBookStorage;
 import hallpointer.address.storage.JsonUserPrefsStorage;
 import hallpointer.address.storage.StorageManager;
-import hallpointer.address.testutil.PersonBuilder;
+import hallpointer.address.testutil.MemberBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
@@ -83,8 +83,8 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    public void getFilteredMemberList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredMemberList().remove(0));
     }
 
     /**
@@ -167,9 +167,9 @@ public class LogicManagerTest {
         // Triggers the saveAddressBook method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        Member expectedMember = new MemberBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
-        expectedModel.addPerson(expectedPerson);
+        expectedModel.addMember(expectedMember);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
 }

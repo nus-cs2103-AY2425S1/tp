@@ -2,7 +2,7 @@ package hallpointer.address.ui;
 
 import java.util.Comparator;
 
-import hallpointer.address.model.member.Person;
+import hallpointer.address.model.member.Member;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -10,11 +10,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code Member}.
  */
-public class PersonCard extends UiPart<Region> {
+public class MemberCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "MemberListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -24,7 +24,7 @@ public class PersonCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Person person;
+    public final Member member;
 
     @FXML
     private HBox cardPane;
@@ -42,17 +42,17 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code MemberCode} with the given {@code Member} and index to display.
      */
-    public PersonCard(Person person, int displayedIndex) {
+    public MemberCard(Member member, int displayedIndex) {
         super(FXML);
-        this.person = person;
+        this.member = member;
         id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-        person.getTags().stream()
+        name.setText(member.getName().fullName);
+        phone.setText(member.getPhone().value);
+        address.setText(member.getAddress().value);
+        email.setText(member.getEmail().value);
+        member.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
