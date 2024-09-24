@@ -3,8 +3,8 @@ package hallpointer.address.logic.commands;
 import static hallpointer.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static hallpointer.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static hallpointer.address.logic.commands.CommandTestUtil.showMemberAtIndex;
-import static hallpointer.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static hallpointer.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static hallpointer.address.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
+import static hallpointer.address.testutil.TypicalIndexes.INDEX_SECOND_MEMBER;
 import static hallpointer.address.testutil.TypicalMembers.getTypicalAddressBook;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -29,10 +29,10 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Member memberToDelete = model.getFilteredMemberList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        Member memberToDelete = model.getFilteredMemberList().get(INDEX_FIRST_MEMBER.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_MEMBER);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_MEMBER_SUCCESS,
                 Messages.format(memberToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -46,17 +46,17 @@ public class DeleteCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredMemberList().size() + 1);
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showMemberAtIndex(model, INDEX_FIRST_PERSON);
+        showMemberAtIndex(model, INDEX_FIRST_MEMBER);
 
-        Member memberToDelete = model.getFilteredMemberList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        Member memberToDelete = model.getFilteredMemberList().get(INDEX_FIRST_MEMBER.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_MEMBER);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_MEMBER_SUCCESS,
                 Messages.format(memberToDelete));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -68,27 +68,27 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showMemberAtIndex(model, INDEX_FIRST_PERSON);
+        showMemberAtIndex(model, INDEX_FIRST_MEMBER);
 
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        Index outOfBoundIndex = INDEX_SECOND_MEMBER;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getMemberList().size());
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON);
+        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_MEMBER);
+        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_MEMBER);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_PERSON);
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_MEMBER);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false

@@ -1,6 +1,6 @@
 package hallpointer.address.logic.commands;
 
-import static hallpointer.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static hallpointer.address.model.Model.PREDICATE_SHOW_ALL_MEMBERS;
 import static java.util.Objects.requireNonNull;
 
 import hallpointer.address.model.Model;
@@ -18,7 +18,7 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredMemberList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

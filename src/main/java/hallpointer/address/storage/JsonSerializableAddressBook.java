@@ -19,7 +19,7 @@ import hallpointer.address.model.member.Member;
 @JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Members list contains duplicate member(s).";
+    public static final String MESSAGE_DUPLICATE_MEMBER = "Members list contains duplicate member(s).";
 
     private final List<JsonAdaptedMember> members = new ArrayList<>();
 
@@ -50,7 +50,7 @@ class JsonSerializableAddressBook {
         for (JsonAdaptedMember jsonAdaptedMember : members) {
             Member member = jsonAdaptedMember.toModelType();
             if (addressBook.hasMembers(member)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+                throw new IllegalValueException(MESSAGE_DUPLICATE_MEMBER);
             }
             addressBook.addMember(member);
         }

@@ -3,7 +3,7 @@ package hallpointer.address.logic.parser;
 import static hallpointer.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static hallpointer.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static hallpointer.address.testutil.Assert.assertThrows;
-import static hallpointer.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static hallpointer.address.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -49,8 +49,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_MEMBER.getOneBased());
+        assertEquals(new DeleteCommand(INDEX_FIRST_MEMBER), command);
     }
 
     @Test
@@ -58,8 +58,8 @@ public class AddressBookParserTest {
         Member member = new MemberBuilder().build();
         EditMemberDescriptor descriptor = new EditMemberDescriptorBuilder(member).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + MemberUtil.getEditMemberDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+                + INDEX_FIRST_MEMBER.getOneBased() + " " + MemberUtil.getEditMemberDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(INDEX_FIRST_MEMBER, descriptor), command);
     }
 
     @Test

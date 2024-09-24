@@ -2,7 +2,7 @@ package hallpointer.address.logic.commands;
 
 import static hallpointer.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static hallpointer.address.logic.commands.CommandTestUtil.showMemberAtIndex;
-import static hallpointer.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static hallpointer.address.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
 import static hallpointer.address.testutil.TypicalMembers.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -33,7 +33,7 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        showMemberAtIndex(model, INDEX_FIRST_PERSON);
+        showMemberAtIndex(model, INDEX_FIRST_MEMBER);
         assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }
