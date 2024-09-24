@@ -7,7 +7,7 @@ import hallpointer.address.logic.commands.CommandResult;
 import hallpointer.address.logic.commands.exceptions.CommandException;
 import hallpointer.address.logic.parser.exceptions.ParseException;
 import hallpointer.address.model.ReadOnlyAddressBook;
-import hallpointer.address.model.person.Person;
+import hallpointer.address.model.member.Member;
 import javafx.collections.ObservableList;
 
 /**
@@ -30,8 +30,8 @@ public interface Logic {
      */
     ReadOnlyAddressBook getAddressBook();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered list of members */
+    ObservableList<Member> getFilteredMemberList();
 
     /**
      * Returns the user prefs' address book file path.

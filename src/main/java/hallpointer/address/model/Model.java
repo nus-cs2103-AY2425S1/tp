@@ -4,7 +4,7 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 
 import hallpointer.address.commons.core.GuiSettings;
-import hallpointer.address.model.person.Person;
+import hallpointer.address.model.member.Member;
 import javafx.collections.ObservableList;
 
 /**
@@ -12,7 +12,7 @@ import javafx.collections.ObservableList;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Member> PREDICATE_SHOW_ALL_MEMBERS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -53,35 +53,35 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a member with the same identity as {@code member} exists in the address book.
      */
-    boolean hasPerson(Person person);
+    boolean hasMember(Member member);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given member.
+     * The member must exist in the address book.
      */
-    void deletePerson(Person target);
+    void deleteMember(Member target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given member.
+     * {@code member} must not already exist in the address book.
      */
-    void addPerson(Person person);
+    void addMember(Member member);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
+     * Replaces the given member {@code target} with {@code editedMember}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The member identity of {@code editedMember} must not be the same as another existing member in the address book.
      */
-    void setPerson(Person target, Person editedPerson);
+    void setMember(Member target, Member editedMember);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered member list */
+    ObservableList<Member> getFilteredMemberList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered member list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredMemberList(Predicate<Member> predicate);
 }

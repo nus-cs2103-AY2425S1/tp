@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import hallpointer.address.logic.parser.Prefix;
-import hallpointer.address.model.person.Person;
+import hallpointer.address.model.member.Member;
 
 /**
  * Container for user visible messages.
@@ -14,8 +14,8 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
-    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
+    public static final String MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX = "The member index provided is invalid";
+    public static final String MESSAGE_MEMBERS_LISTED_OVERVIEW = "%1$d members listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
 
@@ -32,19 +32,19 @@ public class Messages {
     }
 
     /**
-     * Formats the {@code person} for display to the user.
+     * Formats the {@code member} for display to the user.
      */
-    public static String format(Person person) {
+    public static String format(Member member) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(person.getName())
+        builder.append(member.getName())
                 .append("; Phone: ")
-                .append(person.getPhone())
+                .append(member.getPhone())
                 .append("; Email: ")
-                .append(person.getEmail())
+                .append(member.getEmail())
                 .append("; Address: ")
-                .append(person.getAddress())
+                .append(member.getAddress())
                 .append("; Tags: ");
-        person.getTags().forEach(builder::append);
+        member.getTags().forEach(builder::append);
         return builder.toString();
     }
 

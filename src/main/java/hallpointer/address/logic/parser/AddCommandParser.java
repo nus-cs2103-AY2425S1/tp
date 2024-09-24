@@ -12,11 +12,11 @@ import java.util.stream.Stream;
 
 import hallpointer.address.logic.commands.AddCommand;
 import hallpointer.address.logic.parser.exceptions.ParseException;
-import hallpointer.address.model.person.Address;
-import hallpointer.address.model.person.Email;
-import hallpointer.address.model.person.Name;
-import hallpointer.address.model.person.Person;
-import hallpointer.address.model.person.Phone;
+import hallpointer.address.model.member.Address;
+import hallpointer.address.model.member.Email;
+import hallpointer.address.model.member.Member;
+import hallpointer.address.model.member.Name;
+import hallpointer.address.model.member.Phone;
 import hallpointer.address.model.tag.Tag;
 
 /**
@@ -27,7 +27,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException if the user input does not conform to the expected format
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
@@ -45,9 +45,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, tagList);
+        Member member = new Member(name, phone, email, address, tagList);
 
-        return new AddCommand(person);
+        return new AddCommand(member);
     }
 
     /**

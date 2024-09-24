@@ -1,6 +1,6 @@
 package hallpointer.address.storage;
 
-import static hallpointer.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static hallpointer.address.testutil.TypicalMembers.getTypicalAddressBook;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
