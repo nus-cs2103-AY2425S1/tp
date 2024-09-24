@@ -324,7 +324,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 
 **MSS:**
 
-1. Staff lists elderly contacts by priority (UC02).  
+1. Staff <u>lists elderly contacts by priority (UC02)</u>.  
 2. Staff calls the elderly at the top of the list.  
 3. Staff marks the elderly as called and takes notes of the call with mark command.  
 4. ContactMate updates the elderly as marked and displays a success message.
@@ -361,7 +361,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 
 **MSS:**
 
-1. Staff lists elderly contacts by priority (UC02).  
+1. Staff <u>lists elderly contacts by priority (UC02)</u>.  
 2. Staff inputs INDEX or NRIC of elderly they want to know the call history of.  
 3. ContactMate updates view to show a list of calls made to a specific elderly 
 
@@ -383,7 +383,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 
 **MSS:**
 
-1. Staff lists elderly contacts by priority (UC02).  
+1. Staff <u>lists elderly contacts by priority (UC02)</u>.  
 2. Staff inputs the NRIC or INDEX of elderly they want to delete.  
 3. ContactMate prompts the Staff for confirmation before deletion.  
 4. Staff confirms the deletion.  
