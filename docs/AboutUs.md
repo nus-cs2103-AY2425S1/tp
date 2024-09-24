@@ -42,7 +42,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Ewen Low
 
-<img src="docs/images/oolongwater.png" width="200px">
+<img src="images/oolongwater.png" width="200px">
 
 [[github](http://github.com/oolongwater)]
 [[portfolio](team/johndoe.md)]
