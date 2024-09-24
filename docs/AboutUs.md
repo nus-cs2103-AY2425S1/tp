@@ -7,9 +7,19 @@
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us CS2103T F09 group 3!
+You can reach us at CS2103T F09 group 3!
 
 ## Project team
+
+### Tan Yi Xuan
+
+<img src="images/yxtan02.png" width="200px">
+
+[[github](https://github.com/yxtan02)]
+[[portfolio](team/yxtan02.md)]
+
+* Role: Developer
+* Responsibilities: Integration
 
 ### Samuel Lim
 
@@ -18,7 +28,8 @@ You can reach us CS2103T F09 group 3!
 [[github](https://github.com/slye20)]
 [[portfolio](team/slye20.md)]
 
-* Role: Software Developer, Documentation, Testing, Code quality and many more!
+* Role: Developer
+* Responsibilities: Documentation, Testing, Code quality and many more!
 
 ### Yang Qifeng
 
@@ -49,15 +60,3 @@ You can reach us CS2103T F09 group 3!
 
 * Role: Developer
 * Responsibilities: Documentation
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
-
->>>>>>> d0d56e25bb21bcd602450d89aac85dee67147a00
