@@ -23,7 +23,7 @@ You can reach us at the email `e0969203[at]u.nus.edu`
 
 <img src="images/linette-g.png" width="200px">
 
-[[github](http://github.com/linette)]
+[[github](http://github.com/linette-g)]
 [[portfolio](team/linette.md)]
 
 * Role: Developer
