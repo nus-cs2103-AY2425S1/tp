@@ -352,8 +352,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    Use case ends.
 
 **Extensions**
-* 1a. The provided entry does not exist.
-    * 1a1. System shows an error message.
+* 1a. The input command was invalid (i.e. spelling error, etc.).
+    * 1a1. System tells the user the command is unrecognised.
 
       Use case ends.
 
@@ -377,8 +377,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
-* 1b. The provided entry does not exist.
-    * 1b1. System shows an error message.
+* 1b. The input command was invalid (i.e. spelling error, etc.).
+    * 1b1. System tells the user the command is unrecognised.
 
       Use case ends.
 
@@ -397,8 +397,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 1b. The provided entry does not exist.
-    * 1b1. System shows an error message.
+* 1b. The input command was invalid (i.e. spelling error, etc.).
+    * 1b1. System tells the user the command is unrecognised.
 
       Use case ends.
 
@@ -414,8 +414,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    Use case ends.
 
 **Extensions**
-* 1a. The provided entry does not exist.
-    * 1a1. System shows an error message.
+* 1a. The input command was invalid (i.e. spelling error, etc.).
+    * 1a1. System tells the user the command is unrecognised.
 
       Use case ends.
 
