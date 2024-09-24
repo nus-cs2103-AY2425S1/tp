@@ -21,11 +21,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Norbert Loh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/norbertloh.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[homepage](http://www.comp.nus.edu.sg/~damithch)]
+[[github](https://github.com/norbertloh)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Team Lead
