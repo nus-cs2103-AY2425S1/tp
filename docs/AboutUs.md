@@ -17,10 +17,9 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/Ma-Xizi)]
-[[portfolio](team/Ma-Xizi.md)]
 
-* Role: Developer
-* Responsibilities: Something Random
+* Role: Testing
+* Responsibilities: Ensures the testing of the project is done properly and on time.
 
 ### Norbert Loh
 
@@ -52,3 +51,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
+
+## Acknowledgement
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+
