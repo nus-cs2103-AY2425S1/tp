@@ -31,11 +31,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Adib Rifa'i
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/bigismols.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/bigismols)] [[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Backend Storage
