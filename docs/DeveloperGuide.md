@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# BridalBuddy Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -274,29 +274,35 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Has a need to manage a significant number of contacts
+* Has a need to manage different types of contacts (e.g. vendors, guests)
+* Has a need to manage a few separate weddings concurrently
+* Favours desktop applications over other alternatives
+* Prefers keyboard commands over mouse interactions
+* Adequately proficient with command-line applications
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
+* Streamlined, all-in-one wedding planning tool
+* Intuitive organisation and customisation
+* Stress-free and efficient planning process
+* One-stop companion for wedding planners
+* Simplifies time-intensive and tedious tasks of managing guest lists, schedules, and vendor contacts
+* Enhances efficiency by reducing time spent navigating complex GUIs
+
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​                         | I want to …​                                                                                        | So that I can…​                                                              |
+|----------|---------------------------------|-----------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------|
+| `* * *`  | Forgetful wedding planner       | Create entries of guests/vendors with relevant details (1.name, 2. contact info, 3. Roles, 4.Notes) | I can easily manage and track my guest/vendor list                           |
+| `* * *`  | Careful wedding planner         | Update details of current guests/vendors                                                            | I can correct any mistakes or update any  additional information at any time |
+| `* * *`  | Organized wedding planner       | Read/Print out a guest/vendor list                                                                  | I can quickly access and reference their details.                            |
+| `* * *`  | Organized wedding planner       | Delete guests/vendors contacts that I no longer need                                                | my wedding planner stays organised                                           |
+| `* *`    | Busy wedding planner            | Manage vendor contact details (photographers, caterers, florists)                                   | quickly reference and communicate with vendors                               |
+| `* *`    | Organised wedding planner       | Categorise attendees (family members, friends, vendors)                                             | keep track of different groups involved in the wedding                       |
 
 ### Use cases
 
@@ -329,16 +335,51 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+Data Requirements
+1. Size: The system should support storage for up to 500 guests and 50 vendors per wedding. Data size should not exceed 10 MB for each wedding event.
+2. Volatility: Guest lists and vendor details may change frequently, especially closer to the event date. Therefore, the system must accommodate dynamic data updates and edits.
+3. Persistency: All guest, vendor, and event information must be saved persistently in a txt file and remain accessible even after system shutdown or failure.
+4. Backup Frequency: Automatic backups of data should be created whenever the application is closed.
 
-*{More to be added}*
+Environment Requirements
+
+5. Operating System: The system must be compatible with Windows, macOS, and Linux operating systems.
+6. Dependencies: Java 17 should be the core language.
+
+Accessibility
+7. Provide command-line help documentation that can be accessed at any time with a simple command (help).
+
+Capacity
+
+8. The system should be able to handle data storage for up to 100 simultaneous weddings, each containing up to 500 guests and 50 vendors.
+
+Compliance with Regulations
+9. The system must comply with data privacy regulations, including GDPR, ensuring that personal information such as guest addresses and phone numbers are securely handled and stored.
+
+Fault Tolerance
+10. The system should handle errors such as missing commands or invalid input gracefully, providing clear error messages without causing system crashes.
+11. Ensure that invalid input (e.g., incorrect phone format) does not result in data corruption.
+
+Performance Requirements
+12. The system should respond to user input within two seconds, even for lists of up to 500 guests and 50 vendors.
+13. Backup operations must complete within five seconds for a wedding list of up to 500 entries.
+14. System startup time should not exceed five seconds on standard hardware.
+
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **CLI (Command-Line Interface)**: A text-based interface used to interact with software by typing commands.
+*  **CRUD Operations**: Stands for Create, Read, Update, and Delete – the basic operations that can be performed on data.
+*  **RSVP**: Short for "Répondez S'il Vous Plaît," used to track guest attendance responses for an event.
+*  **Vendor**: A supplier providing services or goods for a wedding, such as photographers, florists, caterers, etc.
+*  **Tag**: A keyword or label assigned to an entry to categorize and easily filter it within the list.
+*  **Index**: A numerical value representing the position of an entry in a list, used to reference and perform operations on the contact.
+*  **Status**: A predefined label assigned to a task or attendee, representing their state (e.g., confirmed, pending, or canceled).
+*  **Task**: A wedding-related activity that requires completion, such as booking a venue, sending invites, or coordinating with vendors.
+*  **Syntax**: The specific structure and format required for entering commands in the CLI.
+*  **Stakeholders**: Any individuals or organizations involved in the wedding, including family members, guests, and vendors.
 
 --------------------------------------------------------------------------------------------------------------------
 
