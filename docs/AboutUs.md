@@ -43,7 +43,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/zyng233.png" width="200px">
 
 [[github](http://github.com/zyng233)]
-[[portfolio](team/johndoe)]
+[[portfolio](team/ziying.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
