@@ -1,6 +1,6 @@
 ---
-  layout: default.md
-  title: "About Us"
+layout: default.md
+title: "About Us"
 ---
 
 # About Us
@@ -38,13 +38,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Backend Storage
 
-### Jean Doe
+### Ewen Low
 
-<img src="images/johndoe.png" width="200px">
+<img src="docs/images/oolongwater.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/oolongwater)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
