@@ -34,7 +34,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Aw Jean Leng Adrian
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/chronoxy.png" width="200px">
 
 [[github](https://github.com/Chronoxy)]
 [[portfolio](team/johndoe.md)]
@@ -44,7 +44,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Ethan Tan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ethantyh692.png" width="200px">
 
 [[github](http://github.com/ethantyh692)]
 [[portfolio](team/ethantyh692.md)]
