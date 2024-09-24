@@ -318,6 +318,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
+* 1b. The input command was invalid (i.e. spelling error, etc.).
+    * 1b1. System tells the user the command is unrecognised.
+
+      Use case ends.
+
 
 **Use Case: Read/Print Out Entries**
 
@@ -328,6 +333,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    Use case ends.
 
 **Extensions**
+* 1a. The input command was invalid (i.e. spelling error, etc.).
+    * 1a1. System tells the user the command is unrecognised.
+
+      Use case ends.
+
 * 2a. No entries exist.
 
   Use case ends.
@@ -367,6 +377,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
+* 1b. The provided entry does not exist.
+    * 1b1. System shows an error message.
+
+      Use case ends.
+
 
 **Use Case: Categorise Persons**
 
@@ -382,6 +397,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+* 1b. The provided entry does not exist.
+    * 1b1. System shows an error message.
+
+      Use case ends.
+
 
 **Use Case: Search and Filter Persons**
 
@@ -394,6 +414,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    Use case ends.
 
 **Extensions**
+* 1a. The provided entry does not exist.
+    * 1a1. System shows an error message.
+
+      Use case ends.
+
 * 4a. No matching entries are found.
     * 4a1. System shows a message indicating no results.
 
