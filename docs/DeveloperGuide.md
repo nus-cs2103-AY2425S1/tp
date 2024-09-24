@@ -262,13 +262,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
+* employee at Active Ageing Centre (AAC)
 * has a need to manage a significant number of contacts
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Easy way to manage regular checkups. Fast, convenient and reliable way to organise contacts and ensure that everyone is checked up on a regular basis. It solves the problem of having to manually manage all the elderly just to keep up with the government’s (AIC) requirements.
 
 
 ### User stories
