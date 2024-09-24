@@ -19,7 +19,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/Ma-Xizi)]
 [[portfolio](team/Ma-Xizi.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: Something Random
 
 ### Norbert Loh
 
@@ -32,13 +33,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Aw Jean Leng Adrian
 
 <img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/Chronoxy)]
+[[portfolio](team/johndoe.md)]
 
-* Role: Developer
+* Role: Troller
 * Responsibilities: Data
 
 ### Jean Doe
