@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 
 import hallpointer.address.commons.core.index.Index;
 import hallpointer.address.model.Model;
-import hallpointer.address.model.member.Person;
+import hallpointer.address.model.member.Member;
 
 /**
  * A utility class for test cases.
@@ -36,20 +36,20 @@ public class TestUtil {
      * Returns the middle index of the member in the {@code model}'s member list.
      */
     public static Index getMidIndex(Model model) {
-        return Index.fromOneBased(model.getFilteredPersonList().size() / 2);
+        return Index.fromOneBased(model.getFilteredMemberList().size() / 2);
     }
 
     /**
      * Returns the last index of the member in the {@code model}'s member list.
      */
     public static Index getLastIndex(Model model) {
-        return Index.fromOneBased(model.getFilteredPersonList().size());
+        return Index.fromOneBased(model.getFilteredMemberList().size());
     }
 
     /**
      * Returns the member in the {@code model}'s member list at {@code index}.
      */
-    public static Person getPerson(Model model, Index index) {
-        return model.getFilteredPersonList().get(index.getZeroBased());
+    public static Member getMember(Model model, Index index) {
+        return model.getFilteredMemberList().get(index.getZeroBased());
     }
 }

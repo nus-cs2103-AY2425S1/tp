@@ -11,10 +11,10 @@ import hallpointer.address.commons.util.ToStringBuilder;
 import hallpointer.address.model.tag.Tag;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Member in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Member {
 
     // Identity fields
     private final Name name;
@@ -28,7 +28,7 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Member(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -62,21 +62,21 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both members have the same name.
+     * This defines a weaker notion of equality between two members.
      */
-    public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
+    public boolean isSameMember(Member otherMember) {
+        if (otherMember == this) {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        return otherMember != null
+                && otherMember.getName().equals(getName());
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both members have the same identity and data fields.
+     * This defines a stronger notion of equality between two members.
      */
     @Override
     public boolean equals(Object other) {
@@ -85,16 +85,16 @@ public class Person {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Member)) {
             return false;
         }
 
-        Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+        Member otherMember = (Member) other;
+        return name.equals(otherMember.name)
+                && phone.equals(otherMember.phone)
+                && email.equals(otherMember.email)
+                && address.equals(otherMember.address)
+                && tags.equals(otherMember.tags);
     }
 
     @Override

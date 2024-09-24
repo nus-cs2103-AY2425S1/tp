@@ -1,7 +1,7 @@
 package hallpointer.address.logic.commands;
 
 import static hallpointer.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static hallpointer.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static hallpointer.address.testutil.TypicalMembers.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
