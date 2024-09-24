@@ -5,55 +5,52 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `e1121785@u.nus.edu`
 
 ## Project team
 
-### John Doe
+### Soh Wei Kiat
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/weikiat.jpg" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/jovensoh)]
+[[portfolio](http://jovensoh.github.io)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: UI, DevOps
 
-### Jean Doe
+### Kaarthik K.
 
 <img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/keerthigkaarthik)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Backend Logic + Database
 
-### James Doe
+### Kan Jun Hong
 
 <img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/Fluffykan)]
+
+* Role: Developer
+* Responsibilities: Data Management
+
+### Tzu Che
+
+<img src="images/johndoe.png" width="200px">
+
+[[github](http://github.com/ttzuche)]
+
+* Role: Developer
+* Responsibilities: Frontend
+
+### Tzu En
+
+<img src="images/johndoe.png" width="200px">
+
+[[github](http://github.com/tzuennn)]
 
 * Role: Developer
 * Responsibilities: UI
