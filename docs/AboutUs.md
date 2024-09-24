@@ -26,7 +26,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/qifeng.png" width="200px">
 
 [[github](http://github.com/YangQF2002)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](qifeng.md)]
 
 * Role: Developer 
 * Responsibilities: Code quality 
