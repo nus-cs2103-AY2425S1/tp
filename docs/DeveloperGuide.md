@@ -274,6 +274,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
+A wedding planner who:
 * Has a need to manage a significant number of contacts
 * Has a need to manage different types of contacts (e.g. vendors, guests)
 * Has a need to manage a few separate weddings concurrently

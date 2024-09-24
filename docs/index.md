@@ -10,7 +10,7 @@
 
 ![Ui](images/Ui.png)
 
-**BridalBuddy is a desktop application for a wedding planner to manage the people that are involved in the wedding!.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
+**BridalBuddy is a desktop application for a wedding planner to manage the people that are involved in the wedding!** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
 * If you are interested in using BridalBuddy, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
 * If you are interested about developing BridalBuddy, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
