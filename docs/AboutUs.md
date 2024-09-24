@@ -47,8 +47,8 @@ You can reach us CS2103T F09 group 3!
 [[github](https://github.com/hovanleong)]
 [[portfolio](team/hovanleong.md)]
 
-* Role: Documentation
-
+* Role: Developer
+* Responsibilities: Documentation
 
 ### James Doe
 
