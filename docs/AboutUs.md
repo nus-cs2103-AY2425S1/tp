@@ -38,12 +38,12 @@ You can reach us at the email `e0969203[at]u.nus.edu`
 * Role: Developer
 * Responsibilities: DevOps
 
-### Jean Doe
+### Ziying
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/zyng233.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/zyng233)]
+[[portfolio](team/ziying.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
