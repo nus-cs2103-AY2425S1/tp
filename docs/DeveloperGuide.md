@@ -389,6 +389,8 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 4. Staff confirms the deletion.  
 5. ContactMate deletes the elderly and confirms the successful deletion for Staff.
 
+    Use case ends.
+
 **Extensions:**  
 * 1a. The list is empty.  
     * Use case ends.  
