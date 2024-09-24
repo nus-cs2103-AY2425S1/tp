@@ -17,7 +17,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://ay2425s1-cs2103t-w14-3.github.io/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
