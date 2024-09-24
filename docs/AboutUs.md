@@ -21,15 +21,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Yang Qifeng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/qifeng.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/YangQF2002)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Developer 
+* Responsibilities: Code quality 
 
 ### Johnny Doe
 
