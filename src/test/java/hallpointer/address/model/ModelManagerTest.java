@@ -1,6 +1,6 @@
 package hallpointer.address.model;
 
-import static hallpointer.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static hallpointer.address.model.Model.PREDICATE_SHOW_ALL_MEMBERS;
 import static hallpointer.address.testutil.Assert.assertThrows;
 import static hallpointer.address.testutil.TypicalMembers.ALICE;
 import static hallpointer.address.testutil.TypicalMembers.BENSON;
@@ -122,7 +122,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredMemberList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManager.updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();

@@ -101,7 +101,7 @@ public class ModelManager implements Model {
     @Override
     public void addMember(Member member) {
         addressBook.addMember(member);
-        updateFilteredMemberList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
     }
 
     @Override
