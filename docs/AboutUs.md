@@ -19,15 +19,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Suhayl Pervez
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/suhayl13.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](https://github.com/suhayl13)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Testing
+* Responsibilities: Ensures the testing of the project is done properly and on time.
 
 ### Johnny Doe
 
