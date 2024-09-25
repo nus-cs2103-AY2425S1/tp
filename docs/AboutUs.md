@@ -5,7 +5,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-=======
+
+### Althea Tan
+
+<img src="images/althea.png" width="200px">
+
+[[github](https://github.com/althea28)]
+
+* Role: Developer
+* Responsibilities: Deliverables and deadlines, Documentation, UI
+
 ### Jian Yi
 
 <img src="images/jian7490.png" width="200px">
