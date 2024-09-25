@@ -11,7 +11,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### luileng
+### Cheng Lui Leng
 
 <img src="images/luileng.png" width="200px">
 
