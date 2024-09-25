@@ -21,14 +21,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Wang Jingjing
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/potaotototo.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/potaotototo)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Team Lead
+* Role: Developer
 * Responsibilities: UI
 
 ### Johnny Doe
