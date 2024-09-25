@@ -290,43 +290,277 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+#### Use case: Save a student's contact
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User enters command to save a student's contact.
+2. LMS parses the contact details from the user's command.
+3. LMS requests for confirmation.
+4. User confirms the details.
+5. LMS saves the contact and notifies the user.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. LMS detects an error in the entered data.
+  * 2a1. LMS requests for the correct data.
+  * 2a2. User enters new data.
+  * Steps 2a1-2a2 are repeated until the data entered are correct.
+  * Use case resumes from step 3.
 
-  Use case ends.
+* \*a. At any time, User chooses to cancel the saving process.
+  * \*a1. LMS requests to confirm the cancellation of the process.
+  * \*a2. User confirms the cancellation of the process.
+  * Use case ends.
 
-* 3a. The given index is invalid.
+---
 
-    * 3a1. AddressBook shows an error message.
+#### Use case: Save a student's address
 
-      Use case resumes at step 2.
+**MSS**
 
-*{More to be added}*
+1. User enters command to save a student's address.
+2. LMS parses the address details from the user's command.
+3. LMS requests for confirmation.
+4. User confirms the details.
+5. LMS saves the student's address and notifies the user.
 
-### Non-Functional Requirements
+   Use case ends.
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+**Extensions**
 
-*{More to be added}*
+* 2a. LMS detects an error in the entered data.
+  * 2a1. LMS requests for the correct data.
+  * 2a2. User enters new data.
+  * Steps 2a1-2a2 are repeated until the data entered are correct.
+  * Use case resumes from step 3.
 
-### Glossary
+* \*a. At any time, User chooses to cancel the saving process.
+  * \*a1. LMS requests to confirm the cancellation of the process.
+  * \*a2. User confirms the cancellation of the process.
+  * Use case ends.
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+---
+
+#### Use case: Save a student's lesson timing
+
+**MSS**
+
+1. User enters command to save a student's lesson timing.
+2. LMS parses the lesson timing details from the user's command.
+3. LMS requests for confirmation.
+4. User confirms the details.
+5. LMS saves the lesson timing and notifies the user.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. LMS detects an error in the entered data.
+  * 2a1. LMS requests for the correct data.
+  * 2a2. User enters new data.
+  * Steps 2a1-2a2 are repeated until the data entered are correct.
+  * Use case resumes from step 3.
+
+* \*a. At any time, User chooses to cancel the saving process.
+  * \*a1. LMS requests to confirm the cancellation of the process.
+  * \*a2. User confirms the cancellation of the process.
+  * Use case ends.
+
+---
+
+#### Use case: Add a piano piece to a student
+
+**MSS**
+
+1. User enters command to add a piano piece to a student.
+2. LMS parses the piano piece details from the user's command.
+3. LMS requests for confirmation.
+4. User confirms the addition.
+5. LMS adds the piano piece to the student's record and notifies the user.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. LMS detects an error in the entered data.
+  * 2a1. LMS requests for the correct data.
+  * 2a2. User enters new data.
+  * Steps 2a1-2a2 are repeated until the data entered are correct.
+  * Use case resumes from step 3.
+
+* \*a. At any time, User chooses to cancel the addition process.
+  * \*a1. LMS requests to confirm the cancellation of the process.
+  * \*a2. User confirms the cancellation of the process.
+  * Use case ends.
+
+---
+
+#### Use case: View a student's grade level
+
+**MSS**
+
+1. User enters command to view a student's grade level.
+2. LMS parses the student's details from the user's command.
+3. LMS retrieves the student's grade level from the database.
+4. LMS displays the student's grade level to the user.
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. LMS detects an error while retrieving the grade level.
+  * 3a1. LMS shows an error message.
+  * Use case ends.
+
+* \*a. At any time, User chooses to cancel the process.
+  * \*a1. LMS requests to confirm the cancellation of the process.
+  * \*a2. User confirms the cancellation of the process.
+  * Use case ends.
+
+---
+
+#### Use case: View a list of all students
+
+**MSS**
+
+1. User enters command to view a list of all students.
+2. LMS retrieves the list of students from the database.
+3. LMS displays the list of students to the user.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. LMS detects an error while retrieving the list.
+  * 2a1. LMS shows an error message.
+  * Use case ends.
+
+---
+
+#### Use case: Cancel a lesson session
+
+**MSS**
+
+1. User enters command to cancel a lesson session.
+2. LMS parses the lesson session details from the user's command.
+3. LMS requests for confirmation.
+4. User confirms the cancellation.
+5. LMS cancels the lesson session and notifies the user.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. LMS detects an error in the entered data.
+  * 2a1. LMS requests for the correct data.
+  * 2a2. User enters new data.
+  * Steps 2a1-2a2 are repeated until the data entered are correct.
+  * Use case resumes from step 3.
+
+* \*a. At any time, User chooses to cancel the cancellation process.
+  * \*a1. LMS requests to confirm the cancellation of the process.
+  * \*a2. User confirms the cancellation of the process.
+  * Use case ends.
+
+---
+
+#### Use case: Schedule a make-up lesson
+
+**MSS**
+
+1. User enters command to schedule a make-up lesson.
+2. LMS parses the make-up lesson details from the user's command.
+3. LMS requests for confirmation.
+4. User confirms the scheduling.
+5. LMS schedules the make-up lesson and notifies the user.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. LMS detects an error in the entered data.
+  * 2a1. LMS requests for the correct data.
+  * 2a2. User enters new data.
+  * Steps 2a1-2a2 are repeated until the data entered are correct.
+  * Use case resumes from step 3.
+
+* \*a. At any time, User chooses to cancel the scheduling process.
+  * \*a1. LMS requests to confirm the cancellation of the process.
+  * \*a2. User confirms the cancellation of the process.
+  * Use case ends.
+
+---
+
+#### Use case: Delete a student
+
+**MSS**
+
+1. User enters command to delete a student.
+2. LMS parses the student details from the user's command.
+3. LMS requests for confirmation.
+4. User confirms the deletion.
+5. LMS deletes the student from the database and notifies the user.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. LMS detects an error in the entered data.
+  * 2a1. LMS requests for the correct data.
+  * 2a2. User enters new data.
+  * Steps 2a1-2a2 are repeated until the data entered are correct.
+  * Use case resumes from step 3.
+
+* \*a. At any time, User chooses to cancel the deletion process.
+  * \*a1. LMS requests to confirm the cancellation of the process.
+  * \*a2. User confirms the cancellation of the process.
+  * Use case ends.
+
+---
+
+#### Use case: View the list of commands
+
+**MSS**
+
+1. User enters command to view the list of commands.
+2. LMS retrieves the list of available commands.
+3. LMS displays the list of commands to the user.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. LMS detects an error while retrieving the list.
+  * 2a1. LMS shows an error message.
+  * Use case ends.
+
+---
+
+#### Use case: Save and retrieve data after application restart
+
+**MSS**
+
+1. User enters data into the application.
+2. User chooses to save the data.
+3. LMS saves the data to persistent storage.
+4. User turns off the application.
+5. User restarts the application.
+6. LMS retrieves the data from persistent storage and displays it to the user.
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. LMS detects an error while saving the data.
+  * 3a1. LMS shows an error message.
+  * Use case ends.
+
+* 6a. LMS detects an error while retrieving the data.
+  * 6a1. LMS shows an error message.
+  * Use case ends.
 
 --------------------------------------------------------------------------------------------------------------------
 
