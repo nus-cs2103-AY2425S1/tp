@@ -9,7 +9,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-
 ### Ng Eswen
 
 <img src="images/solomon0519.png" width="200px">
@@ -20,3 +19,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Documentation
 * Responsiblities: Check proper documentation
 
+### Yiow Meng Loong
+
+<img src="images/creditablex.png" width="200px">
+
+[[github](http://github.com/creditablex)]
+[[portfolio](team/creditablex.md)]
+
+* Role: Team Lead
+* Responsibilities: Lead Team
