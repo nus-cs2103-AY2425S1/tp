@@ -313,7 +313,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User creates a new person with the required details (e.g. guest, vendor, task).
+1. User creates a new person with the required details (e.g. name, email, role, etc.).
 2. System adds the entry.
 
    Use case ends.
