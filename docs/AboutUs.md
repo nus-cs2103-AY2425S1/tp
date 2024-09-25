@@ -13,7 +13,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Matthew Yip
 
-<img src="images/matthewyip1511.png.png" width="200px">
+<img src="images/matthewyip1511.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/matthewyip1511)]
