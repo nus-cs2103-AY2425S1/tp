@@ -11,33 +11,33 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Lim Kai Xuan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kaixuan477.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/kaixuan477)]
+[[portfolio](team/kaixuan.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: Code Quality
 
-### Jane Doe
+### Foo Chao
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/FooChao.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/FooChao)]
+[[portfolio](team/FooChao.md)]
 
-* Role: Team Lead
+* Role: Developer
 * Responsibilities: UI
 
-### Johnny Doe
+### Yu Sutong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yu-sutong.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/yu-sutong)] [[portfolio](team/yu-sutong.md)]
 
-* Role: Developer/Tester
+* Role: Team Lead
 * Responsibilities: Data
 
 ### Ng Kheng Yang
