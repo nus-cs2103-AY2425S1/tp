@@ -59,3 +59,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: UI
+
+### Emmanuel Er
+<img src="images/emmannyyy.png" width="200px">
+
+[[github](http://github.com/emmannyyy)]
+* Role: Team Lead
+* Responsibilities: Git Expert, Manages Storage Component 
+
+
