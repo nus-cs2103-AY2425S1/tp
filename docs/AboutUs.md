@@ -17,6 +17,23 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/joeltio)]
 [[linkedin](https://www.linkedin.com/in/joel-tio)]
 
+### Lim Jia Wei
+
+<img src="images/itlimjiawei.png" width="200px">
+
+[[github](http://github.com/johndoe)]
+[[linkedin](https://sg.linkedin.com/in/jiawei88)]
+
 * Role: Developer
-* Responsibilities: Code Quality, Git Expert
+* Responsibilities: Testing, IntelliJ Expert
+
+### Sheen
+
+<img src="images/sheenkerr.png" width="200px">
+
+[[github](http://github.com/sheenkerr)]
+[[portfolio](https://www.linkedin.com/in/sheenkerr/)]
+
+* Role: Developer
+* Responsibilities: Documentation
 
