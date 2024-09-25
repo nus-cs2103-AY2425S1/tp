@@ -31,7 +31,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: UI
 
-### Johnny Doe
+### Yu Sutong
 
 <img src="images/yu-sutong.png" width="200px">
 
@@ -40,22 +40,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: Data
 
-### Jean Doe
+### Ng Kheng Yang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/awdse22.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: 
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/awdse22)]
+[[portfolio](team/khengyang.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Dev Ops + Threading
