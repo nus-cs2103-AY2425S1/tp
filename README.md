@@ -10,4 +10,4 @@
   * It comes with a **reasonable level of user and developer documentation**.
 * It is named `BizBook` as it aims to improve the workflow of business to business dealings by prioritizing efficiency and offering features specific to this target demographic.
 * For the detailed documentation of this project, see the **[BizBook Website](https://ay2425s1-cs2103-f10-3.github.io/tp/)**.
-* This project is a **part of the se-education.org** initiative. If you would like to contribute code to this project, see [se-education.org](https://se-education.org/#contributing-to-se-edu) for more info.
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
