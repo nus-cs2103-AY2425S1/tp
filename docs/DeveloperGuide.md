@@ -290,7 +290,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Cancel a lesson session**
+#### Use case: Cancel a lesson session
 
 **MSS**
 
@@ -301,7 +301,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5. User confirms the cancellation.
 6. LMS cancels the lesson session and notifies the user.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
@@ -316,7 +316,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * \*a2. User confirms the cancellation of the process.
   * Use case ends.
 
-#### Use case: Schedule a make-up lesson**
+---
+
+#### Use case: Schedule a make-up lesson
 
 **MSS**
 
@@ -327,7 +329,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5. User confirms the scheduling.
 6. LMS schedules the make-up lesson and notifies the user.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
@@ -342,7 +344,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * \*a2. User confirms the cancellation of the process.
   * Use case ends.
 
-*Use case: Save a student's lesson timing**
+---
+
+#### Use case: Save a student's lesson timing
 
 **MSS**
 
@@ -353,7 +357,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5. User confirms the details.
 6. LMS saves the lesson timing and notifies the user.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
@@ -368,7 +372,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * \*a2. User confirms the cancellation of the process.
   * Use case ends.
 
-#### Use case: Save and retrieve data after application restart**
+---
+
+#### Use case: Save and retrieve data after application restart
 
 **MSS**
 
@@ -379,7 +385,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5. User restarts the application.
 6. LMS retrieves the data from persistent storage and displays it to the user.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
@@ -391,6 +397,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 6a1. LMS shows an error message.
   * Use case ends.
 
+---
+
 #### Use case: View a list of all students
 
 **MSS**
@@ -399,13 +407,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. LMS retrieves the list of students from the database.
 3. LMS displays the list of students to the user.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
 * 2a. LMS detects an error while retrieving the list.
   * 2a1. LMS shows an error message.
   * Use case ends.
+
+---
 
 #### Use case: Delete a student
 
@@ -418,7 +428,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5. User confirms the deletion.
 6. LMS deletes the student from the database and notifies the user.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
@@ -433,6 +443,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * \*a2. User confirms the cancellation of the process.
   * Use case ends.
 
+---
+
 #### Use case: View the list of commands
 
 **MSS**
@@ -441,13 +453,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. LMS retrieves the list of available commands.
 3. LMS displays the list of commands to the user.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
 * 2a. LMS detects an error while retrieving the list.
   * 2a1. LMS shows an error message.
   * Use case ends.
+
+---
 
 #### Use case: Add a piano piece to a student
 
@@ -460,7 +474,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5. User confirms the addition.
 6. LMS adds the piano piece to the student's record and notifies the user.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
@@ -475,6 +489,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * \*a2. User confirms the cancellation of the process.
   * Use case ends.
 
+---
+
 #### Use case: Save a student's address
 
 **MSS**
@@ -486,7 +502,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5. User confirms the details.
 6. LMS saves the student's address and notifies the user.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
@@ -501,6 +517,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * \*a2. User confirms the cancellation of the process.
   * Use case ends.
 
+---
+
 #### Use case: View a student's grade level
 
 **MSS**
@@ -511,7 +529,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4. LMS retrieves the student's grade level from the database.
 5. LMS displays the student's grade level to the user.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
@@ -524,6 +542,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * \*a2. User confirms the cancellation of the process.
   * Use case ends.
 
+---
+
 #### Use case: Save a person's contact
 
 **MSS**
@@ -535,7 +555,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5. User confirms the details.
 6. LMS saves the contact and notifies the user.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
@@ -549,11 +569,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * \*a1. LMS requests to confirm the cancellation of the process.
   * \*a2. User confirms the cancellation of the process.
   * Use case ends.
-
-### Glossary
-
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
 
