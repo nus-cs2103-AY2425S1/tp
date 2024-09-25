@@ -11,33 +11,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Jian Yi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jian7490.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/jian7490)]
+[[portfolio](team/jian7490.md)]
 
 * Role: Developer
+<<<<<<< HEAD
 * Responsibilities: Data
 
 ### Jean Doe
@@ -68,3 +50,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Responsibilities: Git Expert, Manages Storage Component 
 
 
+=======
+* Responsibilities: Models + Code quality
+>>>>>>> aaa074c28fb2329e80faa02e30d0b48716ad0121
