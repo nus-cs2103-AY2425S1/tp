@@ -22,4 +22,3 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/emmannyyy)]
 * Role: Team Lead
 * Responsibilities: Git Expert, Manages Storage Component
-* 
