@@ -17,7 +17,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[Linkdin](www.linkedin.com/in/nicholas-cheng-)]
 
 * Role: Team Lead
-* Responsibilities: Team Leader, VScode expert
+* Responsibilities: VScode expert
 
 
 ### Joel Tio
