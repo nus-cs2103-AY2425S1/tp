@@ -13,7 +13,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/ylchin.png" width="200px">
 
 [[github](https://github.com/ylchin)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/ylchin.md)]
 
 * Role: Deliverables and deadlines
 * Responsibilities: Project deliverables
