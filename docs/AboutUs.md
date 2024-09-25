@@ -18,7 +18,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/kaixuan477)]
 [[portfolio](team/kaixuan.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: Code Quality
 
 ### Jane Doe
 
