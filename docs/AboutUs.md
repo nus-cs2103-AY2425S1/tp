@@ -40,15 +40,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### lm-44
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/lm-44.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/lm-44)]
+[[portfolio](team/lm-44.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Integration, Scheduling and tracking, In charge of Logic
 
 ### James Doe
 
