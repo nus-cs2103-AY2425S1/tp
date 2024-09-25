@@ -21,4 +21,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](http://github.com/emmannyyy)]
 * Role: Team Lead
-* Responsibilities: Git Expert, Manages Storage Component
+* Responsibilities: UI
+
+### lm-44
+
+<img src="images/lm-44.png" width="200px">
+
+[[github](http://github.com/lm-44)]
+[[portfolio](team/lm-44.md)]
+
+* Role: Developer
+* Responsibilities: Integration, Scheduling and tracking, In charge of Logic
