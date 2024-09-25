@@ -34,7 +34,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/itlimjiawei.png" width="200px">
 
-[[github](https://github.com/ITLimJiaWei/)]
+[[github](https://github.com/ITLimJiaWei)]
 [[linkedin](https://www.linkedin.com/in/jiawei88)]
 
 - Role: Developer
