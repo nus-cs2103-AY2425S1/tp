@@ -1,44 +1,27 @@
----
-  layout: default.md
-  title: "About Us"
----
-
 # About Us
-
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
 You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Jian Yi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jian7490.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/jian7490)]
+[[portfolio](team/jian7490.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Models + Code quality
+
+
+### Emmanuel Er
+<img src="images/emmannyyy.png" width="200px">
+
+[[github](http://github.com/emmannyyy)]
+* Role: Team Lead
+* Responsibilities: UI
 
 ### lm-44
 
@@ -49,13 +32,3 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: Integration, Scheduling and tracking, In charge of Logic
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
