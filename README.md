@@ -4,7 +4,7 @@
 
 
 ## Description
-SellSaavy helps independent sellers/dropshipping business owners manage detail of their clients and orders.
+SellSavvy helps independent sellers/dropshipping business owners manage detail of their clients and orders.
 It is optimized for CLI users so that frequent tasks can be done faster by typing in commands.
 
 ## Features
