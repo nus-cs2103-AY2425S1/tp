@@ -274,27 +274,29 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
+* independent sellers/dropshipping business owners selling on platforms like Carousell
+* lack a central platform for dropshipping and delivery order management
 * has a need to manage a significant number of contacts
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: For small independent sellers, organizing customer lists can be challenging. SellSavvy offers a centralized platform to store orders and track deliveries, streamlining dropshipping management. SellSavvy is optimized for tech-savvy fast-typing users through command-line interface and efficient functionalities.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​                                     | I want to …​                                                 | So that I can…​                                                      |
+|----------|---------------------------------------------|--------------------------------------------------------------|----------------------------------------------------------------------|
+| `* * *`  | user                                        | add customers' details such as name, contact number, address | remember key and essential details of customers for future deliveries |
+| `* * *`  | user                                        | add orders related to a customer                             | keep track of deliveries to be made                                  |
+| `* * *`  | user                                        | add details to orders, such as delivery date and item        | know what needs to be delivered and when                             |
+| `* * *`  | user                                        | mark orders as completed                                     | track which orders are still outstanding                             |
+| `* * *`  | user                                        | delete an order                                              | remove orders that have been canceled                                |
+| `* * *`  | user with many contacts in the address book | delete a customer from my address book                       | remove clients who I no longer need to be in contact with            |
 
 *{More to be added}*
 
