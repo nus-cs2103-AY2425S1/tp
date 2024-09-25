@@ -9,51 +9,53 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Nicholas Cheng De Fei
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/nicholas-cheng-de-fei.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-- Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/Nicholas-Cheng-De-Fei)]
+[[linkedin](https://www.linkedin.com/in/nicholas-cheng-)]
 
 - Role: Team Lead
-- Responsibilities: UI
+- Responsibilities: Project Coordination, VScode Expert
+
+### Joel Tio
+
+<img src="images/joeltio.png" width="200px">
+
+[[website](https://joelt.io)]
+[[github](https://github.com/joeltio)]
+[[linkedin](https://www.linkedin.com/in/joel-tio)]
+
+- Role: Developer
+- Responsibilities: Code Quality, Git Expert
+
+### Lim Jia Wei
+
+<img src="images/itlimjiawei.png" width="200px">
+
+[[github](http://github.com/johndoe)]
+[[linkedin](https://www.linkedin.com/in/jiawei88)]
+
+- Role: Developer
+- Responsibilities: Testing, IntelliJ Expert
 
 ### Kenneth Teo
 
 <img src="images/kennethteo2002.png" width="200px">
 
-[[github](https://github.com/KennethTeo2002)] [[linkedin](https://www.linkedin.com/in/kenneth-teo-boon-jun/)]
+[[github](https://github.com/KennethTeo2002)]
+[[linkedin](https://www.linkedin.com/in/kenneth-teo-boon-jun)]
 
 - Role: Developer
-- Responsibilities: Integration + Deliverables and deadlines
+- Responsibilities: Integration, Deliverables and deadlines
 
-### Jean Doe
+### Sheen
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/sheenkerr.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-- Role: Developer
-- Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/sheenkerr)]
+[[linkedin](https://www.linkedin.com/in/sheenkerr)]
 
 - Role: Developer
-- Responsibilities: UI
+- Responsibilities: Documentation
