@@ -16,6 +16,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/luileng.png" width="200px">
 
 [[github](https://github.com/luileng)]
+[[portfolio](team/luileng.md)]
 
 * Role: Code quality
 
