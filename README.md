@@ -7,10 +7,10 @@ SellSaavy helps independent sellers/dropshipping business owners manage detail o
 It is optimized for CLI users so that frequent tasks can be done faster by typing in commands.
 
 ## Features
-- Add & delete customer information
-- Add & delete order information for each customer
-- View full list of customer
-- View full list of orders under each customer
+- Add & delete customer information.
+- Add & delete order information for each customer.
+- View full list of customer.
+- View full list of orders under each customer.
 
 ## Site Map
 - To be updated.
