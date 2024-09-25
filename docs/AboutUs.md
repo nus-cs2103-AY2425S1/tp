@@ -19,31 +19,32 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: Team Leader, VScode expert
 
-### Johnny Doe
 
-<img src="images/johndoe.png" width="200px">
+### Joel Tio
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+<img src="images/joeltio.png" width="200px">
 
-* Role: Developer
-* Responsibilities: Data
+[[website](https://joelt.io)]
+[[github](https://github.com/joeltio)]
+[[linkedin](https://www.linkedin.com/in/joel-tio)]
 
-### Jean Doe
+### Lim Jia Wei
 
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
+<img src="images/itlimjiawei.png" width="200px">
 
 [[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[linkedin](https://sg.linkedin.com/in/jiawei88)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Testing, IntelliJ Expert
+
+### Sheen
+
+<img src="images/sheenkerr.png" width="200px">
+
+[[github](http://github.com/sheenkerr)]
+[[portfolio](https://www.linkedin.com/in/sheenkerr/)]
+
+* Role: Developer
+* Responsibilities: Documentation
+
