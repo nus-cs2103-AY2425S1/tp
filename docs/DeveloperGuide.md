@@ -406,7 +406,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Student**: A person who is taking lessons from the tutor
+* **Tutor**: The user of the application
+* **Parent**: A person who is the parent or guardian of the student
+* **Add student**: A feature that allows users to create a new student entry along with their information in the application
+* **Delete student**: A feature that allows users to remove a student entry and their information from the application
+* **Search student**: A feature that allows users to find a particular student by entering their name
+* **Private student details**: Student details and contact information that are not meant to be shared with others
+* **Private parent details**: Parent details and contact information that are not meant to be shared with others
+* **Notes tab**: A section within the application where users can record additional information about their students
+* **Tutoring schedule**: A timetable that shows the dates and times of lessons with students
+* **Scheduling conflicts**: Overlapping lesson times when a tutor has more than one lesson at a specific time
+* **Tags**: Labels that can be assigned to students to group them based on common characteristics
+* **Filtering**: A feature that allows users to view specific groups of students based on their tags or specific criteria
 
 --------------------------------------------------------------------------------------------------------------------
 
