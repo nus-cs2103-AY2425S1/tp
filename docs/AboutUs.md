@@ -14,10 +14,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/nicholas-cheng-de-fei.png" width="200px">
 
 [[github](https://github.com/Nicholas-Cheng-De-Fei)]
-[[Linkdin](www.linkedin.com/in/nicholas-cheng-)]
+[[linkedin](www.linkedin.com/in/nicholas-cheng-)]
 
 * Role: Team Lead
-* Responsibilities: VScode expert
+* Responsibilities: VScode Expert
 
 
 ### Joel Tio
