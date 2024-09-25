@@ -57,5 +57,5 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/kaikquah)]
 [[portfolio](team/kaikquah.md)]
 
-* Role: Integration
+* Role: Developer
 * Responsibilities: Integration and Testing
