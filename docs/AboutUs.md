@@ -9,15 +9,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Ng Eswen
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/solomon0519.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/Solomon0519)]
+[[portfolio](team/Eswen.md)]
 
-* Role: Project Advisor
+* Role: Documentation
+* Responsiblities: Check proper documentation
 
 ### Kenny Lewi
 
@@ -29,31 +29,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Testing
 * Responsibilities: Ensures the testing of the project is done properly and on time
 
-### Johnny Doe
+### Yiow Meng Loong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/creditablex.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/creditablex)]
+[[portfolio](team/creditablex.md)]
 
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
+* Role: Team Lead
+* Responsibilities: Lead Team
