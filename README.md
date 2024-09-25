@@ -1,5 +1,7 @@
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
 
+[![codecov](https://codecov.io/gh/AY2425S1-CS2103-F12-1/tp/graph/badge.svg?token=4P6LHV4HJ0)](https://codecov.io/gh/AY2425S1-CS2103-F12-1/tp)
+
 ![Ui](docs/images/Ui.png)
 
 * This is **a sample project for Software Engineering (SE) students**.<br>
@@ -14,3 +16,4 @@
 * This project is a **part of the se-education.org** initiative. If you would like to contribute code to this project, see [se-education.org](https://se-education.org/#contributing-to-se-edu) for more info.
 
 * Hello! This is the repo for inSUREance :)
+* This is to test if MarkBind has been successfully set up.
