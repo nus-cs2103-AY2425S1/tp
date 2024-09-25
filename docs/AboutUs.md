@@ -5,6 +5,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+=======
 ### Jian Yi
 
 <img src="images/jian7490.png" width="200px">
@@ -14,7 +15,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: Models + Code quality
-
 
 ### Emmanuel Er
 <img src="images/emmannyyy.png" width="200px">
@@ -32,3 +32,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: Integration, Scheduling and tracking, In charge of Logic
+
+### Avril Moh
+
+<img src="images/avrilmohh.png" width="200px">
+
+[[github](https://github.com/avrilmohh)]
+[[portfolio](team/avrilmohh.md)]
+
+* Role: Developer
+* Responsibilities: Testing, In charge of Main and Commons
