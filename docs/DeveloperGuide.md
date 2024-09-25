@@ -290,26 +290,175 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Cancel a lesson session
+#### Use case: Save a student's contact
 
 **MSS**
 
-1. User chooses to cancel a lesson session.
-2. LMS requests for details of the lesson session to be canceled.
-3. User enters the requested details (e.g., student name, lesson date, and time).
-4. LMS requests for confirmation.
-5. User confirms the cancellation.
-6. LMS cancels the lesson session and notifies the user.
+1. User enters command to save a student's contact.
+2. LMS parses the contact details from the user's command.
+3. LMS requests for confirmation.
+4. User confirms the details.
+5. LMS saves the contact and notifies the user.
 
    Use case ends.
 
 **Extensions**
 
-* 3a. LMS detects an error in the entered data.
-  * 3a1. LMS requests for the correct data.
-  * 3a2. User enters new data.
-  * Steps 3a1-3a2 are repeated until the data entered are correct.
-  * Use case resumes from step 4.
+* 2a. LMS detects an error in the entered data.
+  * 2a1. LMS requests for the correct data.
+  * 2a2. User enters new data.
+  * Steps 2a1-2a2 are repeated until the data entered are correct.
+  * Use case resumes from step 3.
+
+* \*a. At any time, User chooses to cancel the saving process.
+  * \*a1. LMS requests to confirm the cancellation of the process.
+  * \*a2. User confirms the cancellation of the process.
+  * Use case ends.
+
+---
+
+#### Use case: Save a student's address
+
+**MSS**
+
+1. User enters command to save a student's address.
+2. LMS parses the address details from the user's command.
+3. LMS requests for confirmation.
+4. User confirms the details.
+5. LMS saves the student's address and notifies the user.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. LMS detects an error in the entered data.
+  * 2a1. LMS requests for the correct data.
+  * 2a2. User enters new data.
+  * Steps 2a1-2a2 are repeated until the data entered are correct.
+  * Use case resumes from step 3.
+
+* \*a. At any time, User chooses to cancel the saving process.
+  * \*a1. LMS requests to confirm the cancellation of the process.
+  * \*a2. User confirms the cancellation of the process.
+  * Use case ends.
+
+---
+
+#### Use case: Save a student's lesson timing
+
+**MSS**
+
+1. User enters command to save a student's lesson timing.
+2. LMS parses the lesson timing details from the user's command.
+3. LMS requests for confirmation.
+4. User confirms the details.
+5. LMS saves the lesson timing and notifies the user.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. LMS detects an error in the entered data.
+  * 2a1. LMS requests for the correct data.
+  * 2a2. User enters new data.
+  * Steps 2a1-2a2 are repeated until the data entered are correct.
+  * Use case resumes from step 3.
+
+* \*a. At any time, User chooses to cancel the saving process.
+  * \*a1. LMS requests to confirm the cancellation of the process.
+  * \*a2. User confirms the cancellation of the process.
+  * Use case ends.
+
+---
+
+#### Use case: Add a piano piece to a student
+
+**MSS**
+
+1. User enters command to add a piano piece to a student.
+2. LMS parses the piano piece details from the user's command.
+3. LMS requests for confirmation.
+4. User confirms the addition.
+5. LMS adds the piano piece to the student's record and notifies the user.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. LMS detects an error in the entered data.
+  * 2a1. LMS requests for the correct data.
+  * 2a2. User enters new data.
+  * Steps 2a1-2a2 are repeated until the data entered are correct.
+  * Use case resumes from step 3.
+
+* \*a. At any time, User chooses to cancel the addition process.
+  * \*a1. LMS requests to confirm the cancellation of the process.
+  * \*a2. User confirms the cancellation of the process.
+  * Use case ends.
+
+---
+
+#### Use case: View a student's grade level
+
+**MSS**
+
+1. User enters command to view a student's grade level.
+2. LMS parses the student's details from the user's command.
+3. LMS retrieves the student's grade level from the database.
+4. LMS displays the student's grade level to the user.
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. LMS detects an error while retrieving the grade level.
+  * 3a1. LMS shows an error message.
+  * Use case ends.
+
+* \*a. At any time, User chooses to cancel the process.
+  * \*a1. LMS requests to confirm the cancellation of the process.
+  * \*a2. User confirms the cancellation of the process.
+  * Use case ends.
+
+---
+
+#### Use case: View a list of all students
+
+**MSS**
+
+1. User enters command to view a list of all students.
+2. LMS retrieves the list of students from the database.
+3. LMS displays the list of students to the user.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. LMS detects an error while retrieving the list.
+  * 2a1. LMS shows an error message.
+  * Use case ends.
+
+---
+
+#### Use case: Cancel a lesson session
+
+**MSS**
+
+1. User enters command to cancel a lesson session.
+2. LMS parses the lesson session details from the user's command.
+3. LMS requests for confirmation.
+4. User confirms the cancellation.
+5. LMS cancels the lesson session and notifies the user.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. LMS detects an error in the entered data.
+  * 2a1. LMS requests for the correct data.
+  * 2a2. User enters new data.
+  * Steps 2a1-2a2 are repeated until the data entered are correct.
+  * Use case resumes from step 3.
 
 * \*a. At any time, User chooses to cancel the cancellation process.
   * \*a1. LMS requests to confirm the cancellation of the process.
@@ -322,22 +471,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User chooses to schedule a make-up lesson.
-2. LMS requests for details of the make-up lesson (e.g., student name, new lesson date, and time).
-3. User enters the requested details.
-4. LMS requests for confirmation.
-5. User confirms the scheduling.
-6. LMS schedules the make-up lesson and notifies the user.
+1. User enters command to schedule a make-up lesson.
+2. LMS parses the make-up lesson details from the user's command.
+3. LMS requests for confirmation.
+4. User confirms the scheduling.
+5. LMS schedules the make-up lesson and notifies the user.
 
    Use case ends.
 
 **Extensions**
 
-* 3a. LMS detects an error in the entered data.
-  * 3a1. LMS requests for the correct data.
-  * 3a2. User enters new data.
-  * Steps 3a1-3a2 are repeated until the data entered are correct.
-  * Use case resumes from step 4.
+* 2a. LMS detects an error in the entered data.
+  * 2a1. LMS requests for the correct data.
+  * 2a2. User enters new data.
+  * Steps 2a1-2a2 are repeated until the data entered are correct.
+  * Use case resumes from step 3.
 
 * \*a. At any time, User chooses to cancel the scheduling process.
   * \*a1. LMS requests to confirm the cancellation of the process.
@@ -346,30 +494,47 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-#### Use case: Save a student's lesson timing
+#### Use case: Delete a student
 
 **MSS**
 
-1. User chooses to save a student's lesson timing.
-2. LMS requests for details of the lesson timing (e.g., student name, lesson date, and time).
-3. User enters the requested details.
-4. LMS requests for confirmation.
-5. User confirms the details.
-6. LMS saves the lesson timing and notifies the user.
+1. User enters command to delete a student.
+2. LMS parses the student details from the user's command.
+3. LMS requests for confirmation.
+4. User confirms the deletion.
+5. LMS deletes the student from the database and notifies the user.
 
    Use case ends.
 
 **Extensions**
 
-* 3a. LMS detects an error in the entered data.
-  * 3a1. LMS requests for the correct data.
-  * 3a2. User enters new data.
-  * Steps 3a1-3a2 are repeated until the data entered are correct.
-  * Use case resumes from step 4.
+* 2a. LMS detects an error in the entered data.
+  * 2a1. LMS requests for the correct data.
+  * 2a2. User enters new data.
+  * Steps 2a1-2a2 are repeated until the data entered are correct.
+  * Use case resumes from step 3.
 
-* \*a. At any time, User chooses to cancel the saving process.
+* \*a. At any time, User chooses to cancel the deletion process.
   * \*a1. LMS requests to confirm the cancellation of the process.
   * \*a2. User confirms the cancellation of the process.
+  * Use case ends.
+
+---
+
+#### Use case: View the list of commands
+
+**MSS**
+
+1. User enters command to view the list of commands.
+2. LMS retrieves the list of available commands.
+3. LMS displays the list of commands to the user.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. LMS detects an error while retrieving the list.
+  * 2a1. LMS shows an error message.
   * Use case ends.
 
 ---
@@ -395,179 +560,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 6a. LMS detects an error while retrieving the data.
   * 6a1. LMS shows an error message.
-  * Use case ends.
-
----
-
-#### Use case: View a list of all students
-
-**MSS**
-
-1. User chooses to view a list of all students.
-2. LMS retrieves the list of students from the database.
-3. LMS displays the list of students to the user.
-
-   Use case ends.
-
-**Extensions**
-
-* 2a. LMS detects an error while retrieving the list.
-  * 2a1. LMS shows an error message.
-  * Use case ends.
-
----
-
-#### Use case: Delete a student
-
-**MSS**
-
-1. User chooses to delete a student.
-2. LMS requests for details of the student to be deleted (e.g., student name or ID).
-3. User enters the requested details.
-4. LMS requests for confirmation.
-5. User confirms the deletion.
-6. LMS deletes the student from the database and notifies the user.
-
-   Use case ends.
-
-**Extensions**
-
-* 3a. LMS detects an error in the entered data.
-  * 3a1. LMS requests for the correct data.
-  * 3a2. User enters new data.
-  * Steps 3a1-3a2 are repeated until the data entered are correct.
-  * Use case resumes from step 4.
-
-* \*a. At any time, User chooses to cancel the deletion process.
-  * \*a1. LMS requests to confirm the cancellation of the process.
-  * \*a2. User confirms the cancellation of the process.
-  * Use case ends.
-
----
-
-#### Use case: View the list of commands
-
-**MSS**
-
-1. New user chooses to view the list of commands.
-2. LMS retrieves the list of available commands.
-3. LMS displays the list of commands to the user.
-
-   Use case ends.
-
-**Extensions**
-
-* 2a. LMS detects an error while retrieving the list.
-  * 2a1. LMS shows an error message.
-  * Use case ends.
-
----
-
-#### Use case: Add a piano piece to a student
-
-**MSS**
-
-1. User chooses to add a piano piece to a student.
-2. LMS requests for details of the piano piece and the student (e.g., student name, piece title, composer).
-3. User enters the requested details.
-4. LMS requests for confirmation.
-5. User confirms the addition.
-6. LMS adds the piano piece to the student's record and notifies the user.
-
-   Use case ends.
-
-**Extensions**
-
-* 3a. LMS detects an error in the entered data.
-  * 3a1. LMS requests for the correct data.
-  * 3a2. User enters new data.
-  * Steps 3a1-3a2 are repeated until the data entered are correct.
-  * Use case resumes from step 4.
-
-* \*a. At any time, User chooses to cancel the addition process.
-  * \*a1. LMS requests to confirm the cancellation of the process.
-  * \*a2. User confirms the cancellation of the process.
-  * Use case ends.
-
----
-
-#### Use case: Save a student's address
-
-**MSS**
-
-1. User chooses to save a student's address.
-2. LMS requests for details of the student's address (e.g., student name, address).
-3. User enters the requested details.
-4. LMS requests for confirmation.
-5. User confirms the details.
-6. LMS saves the student's address and notifies the user.
-
-   Use case ends.
-
-**Extensions**
-
-* 3a. LMS detects an error in the entered data.
-  * 3a1. LMS requests for the correct data.
-  * 3a2. User enters new data.
-  * Steps 3a1-3a2 are repeated until the data entered are correct.
-  * Use case resumes from step 4.
-
-* \*a. At any time, User chooses to cancel the saving process.
-  * \*a1. LMS requests to confirm the cancellation of the process.
-  * \*a2. User confirms the cancellation of the process.
-  * Use case ends.
-
----
-
-#### Use case: View a student's grade level
-
-**MSS**
-
-1. User chooses to view a student's grade level.
-2. LMS requests for the student's details (e.g., student name).
-3. User enters the requested details.
-4. LMS retrieves the student's grade level from the database.
-5. LMS displays the student's grade level to the user.
-
-   Use case ends.
-
-**Extensions**
-
-* 4a. LMS detects an error while retrieving the grade level.
-  * 4a1. LMS shows an error message.
-  * Use case ends.
-
-* \*a. At any time, User chooses to cancel the process.
-  * \*a1. LMS requests to confirm the cancellation of the process.
-  * \*a2. User confirms the cancellation of the process.
-  * Use case ends.
-
----
-
-#### Use case: Save a person's contact
-
-**MSS**
-
-1. User chooses to save a person's contact.
-2. LMS requests for details of the contact (e.g., name, phone number, email).
-3. User enters the requested details.
-4. LMS requests for confirmation.
-5. User confirms the details.
-6. LMS saves the contact and notifies the user.
-
-   Use case ends.
-
-**Extensions**
-
-* 3a. LMS detects an error in the entered data.
-  * 3a1. LMS requests for the correct data.
-  * 3a2. User enters new data.
-  * Steps 3a1-3a2 are repeated until the data entered are correct.
-  * Use case resumes from step 4.
-
-* \*a. At any time, User chooses to cancel the saving process.
-  * \*a1. LMS requests to confirm the cancellation of the process.
-  * \*a2. User confirms the cancellation of the process.
   * Use case ends.
 
 --------------------------------------------------------------------------------------------------------------------
