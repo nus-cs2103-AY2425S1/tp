@@ -34,7 +34,7 @@ Here are the members of our team!
 
 ### Yang Qifeng
 
-<img src="images/qifeng.png" width="200px">
+<img src="images/yangqf2002.png" width="200px">
 
 [[github](http://github.com/YangQF2002)]
 [[portfolio](qifeng.md)]
@@ -44,7 +44,7 @@ Here are the members of our team!
 
 ### Wei Bin
 
-<img src="images/weibin.png" width="200px">
+<img src="images/weibinlim.png" width="200px">
 
 [[github](https://github.com/weibinlim)]
 [[portfolio](team/weibin.md)]
