@@ -288,14 +288,47 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​              | I want to …​            | So that I can…​                                                                                                 |
+|---------|----------------------|-------------------------|-----------------------------------------------------------------------------------------------------------------|
+| `* * *` | new user             | add my students' contact details | easily access and communicate with them or their guardians                                                      
+| `* * *` | new user             | search for a student's name        | find relevant student(s) easily                                                                                 |
+| `* * *` | new user             | delete students' entries     | remove students that I am no longer teaching                                                                    |
+| `* * *` | new user             | easily access my tutoring schedule with each student | stay organised and manage my records more effectively                                                           
+| `* * *` | new user             | be automatically alerted if there are scheduling conflicts when adding a new student whose tuition time overlaps with another student | quickly adjust their schedule and avoid double-booking                                                          |
+| `* * *` | new user             | organise my students' contact details                        | find my students' by certain categories easily                                                                  |
+| `* * *` | new user             | have an option to store the address of the students                        | easily go to the student's house if the tuition session is in person                                            |
+| `* * *` | impatient user       | be able to add a task within 15 seconds                        | use the app in a rush                                                                                           |
+| `* * *` | impatient user       | be able to load up the app with the main user interface within 1-2 seconds                        | use the app seamlessly                                                                                          |
+| `* * *` | intermediate user    | schedule classes that repeats every week                        | not  keep scheduling classes on the same day(s)                                                                 |
+| `* * *` | intermediate user    | filter the entries by teaching date, such as “today” or “tomorrow” or "next 3 days"                        | quickly view and manage the students I am teaching on specific days                                             |
+| `* * *` | intermediate user    | be able to prevent duplicate student entries                        | avoid confusion when managing students with similar names                                                       |
+| `* * *` | expert user          | leave notes on a student's entry to track their learning progress                        | monitor and adjust my teaching strategies effectively                                                           |
+| `* * *` | expert user          | keyboard shortcuts                         | quickly add, delete and update students information                                                             ||           |                                            | leave notes on a student's entry to track their learning progress                             |                                                                      |
+| `* *`   | new user             | have a guided tour or input guide                        | know how to add students to the address book                                                                    |
+| `* *`   | new user             | clear all the app data quickly                        | delete data that was used when experimenting with the app.                                                      |
+| `* *`   | new user             | customise my own style of formatting by choosing from a few different options                        | not  follow a single formatting option instructed by the product                                                |
+| `* *`   | long screentime user | filter away data that I deem unnecessary                         | stay undistracted from other data                                                                               |
+| `* *`   | intermediate user    | copy information of my students to my clipboard                        | I can send them their invoice or notes quickly                                                                  |
+| `* *`   | intermediate user    |  filter entries by the payment status for the month                       | easily identify who has paid and who has not, enabling me to send invoices only to the students who are overdue |
+| `* *`   | intermediate user    | export student data in various formats (CSV, Excel, WhatsApp message etc.)                        | students can view their progress easily, and it is easy for students to view it on their end                    |
+| `* *`   | intermediate user    | record and track any special needs or accommodations required by my students                        | adapt my teaching style or lesson content appropriately                                                         |
+| `* *`   | intermediate user    | customise the user interface (color scheme, font size) of the app                        | make it visually appealing and easy to use according to my preferences                                          |
+| `* *`   | intermediate user    | track each student’s performance in specific subjects (e.g. Math, Science)                        | identify their strengths and weaknesses in different areas                                                      |
+| `* *`   | intermediate user    | record whether each student prefers online or in-person tutoring sessions | plan for travelling if needed                                                                                   |
+| `* *`   | impatient user       | quickly search for a student using autocomplete or suggestions as I type the student’s name | find a student quickly                                                                                          |
+| `* *`   | forgetful user       | see students that I am teaching today once I open the address book | reminded of who I need to teach today                                                                           |
+| `* *`   | expect user          | track students' exam results and view their progress over time | update my teaching style to better meet their needs                                                             |
+| `* *`   | expert user          | quickly filter by important dates, such as upcoming exams | effectively tailor my lessons to prepare students in a timely manner                                            |
+| `*  `   | new user             | undo an operation | undo a command if it was an mistake                                                                             |
+| `* `    | new user             | import student data in various formats (e.g., CSV, Excel) | quickly see how the product will look when populated                                                            |
+| `*`     | intermediate user    | set up automated reminders for upcoming lessons | adequately prepare for my lessons                                                                               |
+| `*`     | intermediate user    | attach lesson materials, homework assignments, or additional resources to each student's profile | easily share and track what I’ve assigned to each student                                                       |
+| `*`     | intermediate user    | filter and view students who have upcoming exams | prioritise revision sessions and prepare them effectively                                                       |
+| `*`     | forgetful user       |add a profile picture to my students recognise my student by picture  | recognise my student by picture and contact them without remembering their name                                 |
+| `*`     | expert user          | have some tips of the day / updates on more advanced features  | use the app seamlessly                                                                                          |
+| `*`     | expert user          | automate the process of sending invoice reminders to students or parents | manage payments efficiently and eliminate the need for manual tracking and individual messaging                 |
+| `*`     | expert user          | not type the exact command, just something like it  | not just adhere to a specific format                                                                                                       |
+
 
 *{More to be added}*
 
