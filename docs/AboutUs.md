@@ -24,7 +24,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/kennylewi.png" width="200px">
 
 [[github](http://github.com/kennylewi)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/kennylewi.md)]
 
 * Role: Testing
 * Responsibilities: Ensures the testing of the project is done properly and on time
