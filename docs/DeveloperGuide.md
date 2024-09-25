@@ -336,16 +336,42 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC1 - Add a student**
+
+**MSS**
+
+1. User types keyword followed by student details into textbox
+2. App acknowledges that a new user has been added
+3. Use case ends
+
+**Extensions**
+
+- 2a. App detects similar/identical name or phone number in records
+
+    - 2a1. Asks user to confirm action
+    - 2a2. User confirms/denies
+    - 2a3. App adds new entry and acknowledges / returns to home screen
+    - 2a4. Use case ends
+
+
+**Use case: UC2 - List all students**
+
+**MSS**
+
+1. User types keyword 
+2. App displays all students address book in alphabetical order 
+3. Use case ends
+
+**Use case: UC3 - Delete a person**
 
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
+2.  AddressBook shows a list of persons <u>(UC2)</u>
+3.  User types keyword followed by delete index or name
 4.  AddressBook deletes the person
+5. Use case ends
 
-    Use case ends.
 
 **Extensions**
 
@@ -358,8 +384,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. AddressBook shows an error message.
 
       Use case resumes at step 2.
+- 3b. The given name does not exist
+  - 3b1 AddressBook shows an error message. 
+  - 3b2. Use case resumes from step 2
 
-*{More to be added}*
 
 ### Non-Functional Requirements
 
@@ -374,7 +402,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 9.  The application should handle errors gracefully, providing meaningful feedback to users in case of failures.
 10. Comprehensive user and technical documentation should be provided
 
-*{More to be added}*
 
 ### Glossary
 
