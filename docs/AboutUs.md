@@ -34,7 +34,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/itlimjiawei.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](https://github.com/johndoe)]
 [[linkedin](https://www.linkedin.com/in/jiawei88)]
 
 - Role: Developer
@@ -54,7 +54,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/sheenkerr.png" width="200px">
 
-[[github](http://github.com/sheenkerr)]
+[[github](https://github.com/sheenkerr)]
 [[linkedin](https://www.linkedin.com/in/sheenkerr)]
 
 - Role: Developer
