@@ -11,6 +11,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Jewi Teo
+
+<img src="images/jewiteo.png" width="200px">
+
+[[github](http://github.com/jewiteo)]
+[[portfolio](team/jewiteo.md)]
+
+* Role: Developer
+* Responsibilities: UI
 
 ### Non Kittilakkananon
 
@@ -48,11 +57,3 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Jewi
-
-<img src="images/jewiteo.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/quekbingheng.md)]
-
-* Role: Developer
