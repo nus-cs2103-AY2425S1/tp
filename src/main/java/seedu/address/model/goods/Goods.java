@@ -19,6 +19,7 @@ public class Goods {
 
     private final String goodsName;
     private final int quantity;
+    private final int price;
     private final GoodsCategories category;
     private final LocalDateTime procurementDate;
     private final LocalDateTime arrivalDate;
@@ -37,13 +38,14 @@ public class Goods {
      * @param isDelivered Current delivery status.
      * @param supplierName A valid supplier name.
      */
-    public Goods(String goodsName, int quantity, GoodsCategories category, LocalDateTime procurementDate, LocalDateTime arrivalDate, boolean isDelivered, String supplierName) {
+    public Goods(String goodsName, int quantity, int price, GoodsCategories category, LocalDateTime procurementDate, LocalDateTime arrivalDate, boolean isDelivered, String supplierName) {
         requireAllNonNull(goodsName, quantity, category, procurementDate, arrivalDate, isDelivered, supplierName);
         checkArgument(isValidGoodsName(goodsName));
         checkArgument(isValidProcurementDate(procurementDate));
         checkArgument(isValidArrivalDate(arrivalDate));
         this.goodsName = goodsName;
         this.quantity = quantity;
+        this.price = price;
         this.category = category;
         this.procurementDate = procurementDate;
         this.arrivalDate = arrivalDate;
@@ -81,11 +83,22 @@ public class Goods {
         return this.supplierName == supplier;
     }
 
+    public int getQuantity() {
+        return this.quantity;
+    }
+
+    /**
+     * Returns total price of the goods.
+     */
+    public int getPriceTotal() {
+        return this.quantity * this.price;
+    }
+
     /**
      * Return a new goods object with the new delivery status.
      */
     public Goods markAsDelivered() {
-        return new Goods(goodsName, quantity, category, procurementDate, arrivalDate, true, supplierName);
+        return new Goods(goodsName, quantity, price, category, procurementDate, arrivalDate, true, supplierName);
     }
 
     /**
