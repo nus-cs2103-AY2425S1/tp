@@ -13,7 +13,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Lincoln Yao
 
-<img src="imgaes/plishh.png" width="200px">
+<img src="images/plishh.png" width="200px">
 
 [[github](http://github.com/plishh)]
 [[portfolio](team/plishh.md)]
