@@ -1,5 +1,4 @@
-[![CI Status](https://github.com/AY2425S1-CS2103-F13-3/tp/actions)
-
+[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103-F13-3/tp/actions)
 ![Ui](docs/images/Ui.png)
 
 * This is **a sample project for Software Engineering (SE) students**.<br>
