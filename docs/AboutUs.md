@@ -9,15 +9,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Aaron Rodrigues
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/runus01.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/runus01)]
+[[portfolio](team/runus01.md)]
 
-* Role: Project Advisor
+* Role: Tester and Pet Manager
+* Responsibilities: Ensures proper and timely testing of the software while managing the project's pet-related features.
 
 ### Clarissa
 
