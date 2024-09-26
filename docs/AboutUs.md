@@ -30,14 +30,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: In charge of Search
 
-### Johnny Doe
+### David Goh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/davidgohzk.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/daivdgohzk)] [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Documentation and Code Quality
+* Responsibilities: Co-incharge of Pet Owner
 
 ### Jonathan Loh
 
