@@ -296,14 +296,13 @@ A wedding planner who:
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                         | I want to …​                                                                                        | So that I can…​                                                              |
-|----------|---------------------------------|-----------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------|
-| `* * *`  | Forgetful wedding planner       | Create entries of guests/vendors with relevant details (1.name, 2. contact info, 3. Roles, 4.Notes) | I can easily manage and track my guest/vendor list                           |
-| `* * *`  | Careful wedding planner         | Update details of current guests/vendors                                                            | I can correct any mistakes or update any  additional information at any time |
-| `* * *`  | Organized wedding planner       | Read/Print out a guest/vendor list                                                                  | I can quickly access and reference their details.                            |
-| `* * *`  | Organized wedding planner       | Delete guests/vendors contacts that I no longer need                                                | my wedding planner stays organised                                           |
-| `* *`    | Busy wedding planner            | Manage vendor contact details (photographers, caterers, florists)                                   | quickly reference and communicate with vendors                               |
-| `* *`    | Organised wedding planner       | Categorise attendees (family members, friends, vendors)                                             | keep track of different groups involved in the wedding                       |
+| Priority | As a …​                    | I want to …​                                                     | So that I can…​                                                                  |
+|----------|----------------------------|------------------------------------------------------------------|----------------------------------------------------------------------------------|
+| `* * *`  | forgetful wedding planner  | add a new guest/vendor into the contact list                     | easily track and manage guests/vendors for the wedding                           |
+| `* * *`  | organized wedding planner  | view a list of guests/vendors                                    | easily access and reference their details.                                       |
+| `* * *`  | organized wedding planner  | delete a guest/vendor contact that I no longer need              | keep my contact list organised and clutter-free                                  |
+| `* * *`  | meticulous wedding planner | edit the details of an existing guest/vendor in the contact list | correct mistakes and ensure that all information remains accurate and up-to-date |
+| `* *`    | organised wedding planner  | categorise attendees (family members, friends, vendors)          | keep track of different groups involved in the wedding                           |
 
 ### Use cases
 

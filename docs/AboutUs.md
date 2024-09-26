@@ -30,14 +30,14 @@ Here are the members of our team!
 [[portfolio](team/slye20.md)]
 
 * Role: Developer
-* Responsibilities: Documentation, Testing, Code quality and many more!
+* Responsibilities: Deliverables and deadlines, Scheduling and tracking
 
 ### Yang Qifeng
 
 <img src="images/yangqf2002.png" width="200px">
 
 [[github](http://github.com/YangQF2002)]
-[[portfolio](qifeng.md)]
+[[portfolio](team/qifeng.md)]
 
 * Role: Developer 
 * Responsibilities: Code quality
