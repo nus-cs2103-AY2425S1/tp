@@ -13,7 +13,7 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -279,22 +279,60 @@ _{Explain here how the data archiving feature will be implemented}_
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
+* Busy Students and Professionals with a need to coordinate available meeting times with their contacts
 
 **Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+
+Our application helps to coordinate meeting timings with relevant contacts, by keeping track of the schedules of the user’s contacts. This will be very useful for busy Students and Professionals that have many meetings with different people throughout the day.
+
+By making the commands similar to Natural Language, our application aims to provide a user-centric experience. The ease of use would make the product an attractive alternative to current Calendar applications that require the user to navigate multiple screens and input their meetings.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​                               | I want to …​                                                                 | So that…​                                                                            |
+|----------|--------------------------------------------|-----------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
+| `* * *`  | new user                                   | see usage instructions                                                            | refer to instructions when I forget how to use the App                                    |
+| `* * *`  | user                                       | add a new person                                                                  |                                                                                           |
+| `* * *`  | user                                       | delete a person                                                                   | remove entries that I no longer need                                                      |
+| `* * *`  | user                                       | find a person by name                                                             | locate details of persons without having to go through the entire list                    |
+| `* *`    | user                                       | hide private contact details                                                      | minimize chance of someone else seeing them by accident                                   |
+| `*`      | user with many persons in the address book | sort persons by name                                                              | locate a person easily                                                                    |
+| `* * *`  | novice user                                | be able to add my schedule                                                        | I am able to keep track of my own schedule to plan meetings with others                   |
+| `* * *`  | novice user                                | be able to delete my schedule                                                     | I am able to remove unwanted schedule                                                     |
+| `* * *`  | novice user                                | be able to see my schedule                                                        | I am able to find a suitable timing for me to schedule meetings with others               |
+| `* * *`  | beginner user                              | be able to see information of my contacts                                         | I am able to find the relevant information needed to contact and arrange for meetings     |
+| `* *`    | new user                                   | have a tutorial on the SeeRee 2.0                                                 | I can use it efficiently in planning for my weekly tasks                                  |
+| `* *`    | new user                                   | have a settings tab                                                               | I can configure SeeRee 2.0 to my needs and preferences                                    |
+| `* *`    | beginner user                              | have error messages that inform me of my mistakes                                 | I can learn the correct implementation of the commands of the CLI                         |
+| `* *`    | beginner user                              | edit present contacts that I have                                                 | I do not need to delete made contacts and can easily edit any changes                     |
+| `* *`    | novice user                                | be able to edit my schedule                                                       | I am able to adjust my schedule details according to any changes that occur               |
+| `* *`    | cli enthusiast                             | be able to navigate the entire app using only keyboard commands                   | I can use the app effectively without a mouse                                             |
+| `*`      | new user                                   | have a nice streamlined CLI interface                                             | it is easy on my eyes when I am focusing on planning my tasks                             |
+| `*`      | expert user                                | be able to see the schedules of my contacts                                       | I am able to schedule meetings at approriate timings for everyone                         |
+| `*`      | expert user                                | delete large groups of contacts                                                   | I am able to reduce clutter of information and schedules when they become irrelevant      |
+| `*`      | expert user                                | add large groups of contacts                                                      | I am able to efficiently add related members and not have to type redundant information   |
+| `*`      | beginner user                              | have reminders for project and task deadline                                      | I am able to stay on track with my work within the week                                   |
+| `*`      | expert user                                | be able to create personalised shortcuts for commonly used functions              | I am able to save time on frequently performed tasks                                      |
+| `*`      | beginner user                              | add notes to each contact (e.g. project role, preferred contact method)           | I can remember important details when reaching out                                        |
+| `*`      | new user                                   | categorize my contacts by groups (e.g. students, team members)                    | I can easily find the right people based on the project or class                          |
+| `*`      | novice user                                | mark certain contacts as "favorites"                                              | I can easily access key people I frequently interact with, like project leads or students |
+| `*`      | expert user                                | create contact reminders (e.g. "check in with students after the midterm")        | I remember to follow up at key points throughout the semester                             |
+| `*`      | new user                                   | sort my contacts alphabetically or by other method                                | I can quickly find the contact I need                                                     |
+| `*`      | expert user                                | archive contacts that I no longer need but might want to reference in the future  | my main contact list stays clutter-free without losing old connections                    |
+| `*`      | new user                                   | have a reccomended path to travel to meeting rooms                                | I will be able to reach meeting venues easily                                             |
+| `*`      | speedy user                                | be able to check whether a specific meeting time has conflicts easily             | plan meeting time more efficiently                                                        |
+| `*`      | busy user                                  | have notifications of my upcoming meetings everyday                               | I will remember what meetings I want to attend                                            |
+| `*`      | team member                                | export my schedule into a nice text using a single command                        | I will be able to communicate to my teammates my schedule easily                          |
+| `*`      | team member                                | import my teammate schedule using a single command                                | I can use the App to plan meeting times easily                                            |
+| `*`      | careless user                              | be able to bulk edit or delete the tasks for the day                              |                                                                                           |
+| `*`      | long time user                             | merge duplicate contacts easily                                                   | I can consolidate information from multiple entries                                       |
+| `*`      | speedy user                                | (I want) the app to load my schedule within 2 seconds                             | I can quickly access my information without waiting                                       |
+| `*`      | non-native English speaker                 | (I want) the app to be available in multiple languages                            | I can use it in my preferred language                                                     |
+| `*`      | expert user                                | be able to export my data in standard formats (e.g., iCal, CSV)                   | I can easily migrate my information if needed                                             |
+| `*`      | power user                                 | be able to customize the app's interface and features to my preferences           | I can optimize my workflow                                                                |
 
 *{More to be added}*
 
