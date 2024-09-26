@@ -11,6 +11,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Lim Kai Wei
+
+<img src="images/limkaiwei.png" width="200px">
+
+[[github](https://github.com/LimKaiWei)]
+[[portfolio](team/limkaiwei.md)]
+
+* Role: ???
+* Responsibilities: ???
+
 ### Jewi Teo
 
 <img src="images/jewiteo.png" width="200px">
@@ -47,13 +57,3 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Team Lead
 * Responsibilities: UI
-
-### Kai Wei
-
-<img src="images/limkaiwei.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/quekbingheng.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
