@@ -302,11 +302,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `UGTeach` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Adding a student**
+**Use case: UC01 - Adding a student**
 
 **MSS**
 1. User enters command to create new student entry.
-2. System displays `[Student's name] successfully added!` and command line is cleared.
+2. System displays success message and command line is cleared.
 
    Use case ends.
 
@@ -327,10 +327,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * Use cases resumes from step 2.
 
 
-**Use case: Read all entries**
+**Use case: UC02 - Read all entries**
 
 **MSS**
-1. User enters `list` command to view all entries.
+1. User enters command to view all entries.
 2. System displays list with all entries to the user.
 
    Use case ends.
@@ -342,16 +342,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * Steps 1a1-1a2 are repeated until all details entered are correct.
 * Use cases resumes from step 2.
 
-* 1b. List is empty.
-    * 1b1. System displays message: `List is empty!`
+* 1b. System detects the list is empty.
+    * 1b1. System shows an empty list.
 
   Use case ends.
 
-**Use case: Read total earnings**
+**Use case: UC03 - Read total earnings**
 
 **MSS**
 
-1. User enters `income` command to read total earnings and total money owed.
+1. User enters command to read total earnings and total money owed.
 2. System displays total earnings and total money owed to the user.
 
    Use case ends.
@@ -364,13 +364,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * Use cases resumes from step 2.
 
 
-**Use case: Delete a student entry**
+**Use case: UC04 - Delete a student entry**
 
 **MSS**
 
-1. User requests to <ins>list students(UC1)</ins>.
-2. User enters `delete [INDEX]` where index is index of specific student.
-3. System displays list with entry at specific index deleted.
+1. User requests to <ins>list students(UC01)</ins>.
+2. User enters command to delete a specific student.
+3. System displays list with specified student deleted from the list.
 
    Use case ends.
 
