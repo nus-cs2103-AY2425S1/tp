@@ -300,30 +300,93 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `UGTeach` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Adding a student**
 
 **MSS**
+1. User enters command to create new student entry.
+2. System displays `[Student's name] successfully added!` and command line is cleared.
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
-
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. System detects error in entered command.
+    * 1a1. System displays error message and does not clear command line.
+    * 1a2. User enters new command.
+
+* Steps 1a1-1a2 are repeated until all details entered are correct.
+* Use cases resumes from step 2.
+
+
+* 1b. System detects error in parameters.
+    * 1b1. System displays error message and does not clear command line.
+    * 1b2. User enters command with correct parameters.
+* Steps 1b1-1b2 are repeated until all details entered are correct.
+* Use cases resumes from step 2.
+
+
+**Use case: Read all entries**
+
+**MSS**
+1. User enters `list` command to view all entries.
+2. System displays list with all entries to the user.
+
+   Use case ends.
+
+**Extension**
+* 1a. System detects error in entered command.
+    * 1a1. System displays error message and does not clear command line.
+    * 1a2. User enters new command.
+* Steps 1a1-1a2 are repeated until all details entered are correct.
+* Use cases resumes from step 2.
+
+* 1b. List is empty.
+    * 1b1. System displays message: `List is empty!`
 
   Use case ends.
 
-* 3a. The given index is invalid.
+**Use case: Read total earnings**
 
-    * 3a1. AddressBook shows an error message.
+**MSS**
 
-      Use case resumes at step 2.
+1. User enters `income` command to read total earnings and total money owed.
+2. System displays total earnings and total money owed to the user.
+
+   Use case ends.
+
+**Extension**
+* 1a. System detects error in entered command.
+    * 1a1. System displays error message and does not clear command line.
+    * 1a2. User enters new command.
+* Steps 1a1-1a2 are repeated until all details entered are correct.
+* Use cases resumes from step 2.
+
+
+**Use case: Delete a student entry**
+
+**MSS**
+
+1. User requests to <ins>list students(UC1)</ins>.
+2. User enters `delete [INDEX]` where index is index of specific student.
+3. System displays list with entry at specific index deleted.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The given index is invalid.
+    * 2a1. System displays error message and does not clear command line.
+    * 2a2. User enters command with new index.
+* Steps 2a1-2a2 are repeated until index entered is correct.
+* Use cases resumes from step 3.
+
+* 2b. System detects error in format of entered command.
+    * 2b1. System displays error message and does not clear command line.
+    * 2b2. User enters new command.
+* Steps 2b1-2b2 are repeated until all details entered are correct.
+* Use cases resumes from step 3.
 
 *{More to be added}*
 
