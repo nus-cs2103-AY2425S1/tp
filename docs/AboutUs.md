@@ -11,51 +11,51 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Quek Bing Heng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/quekbingheng.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/quekbingheng)]
 
 * Role: Project Advisor
 
-### Jane Doe
+### Brendan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/brendan8899.png" width="200px">
 
 [[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/quekbingheng)]
 
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Kai Wei
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/limkaiwei.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/johndoe)] [[portfolio](team/quekbingheng)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Non
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/tata32000.png" width="200px">
 
 [[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/quekbingheng)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Jewi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jewiteo.png" width="200px">
 
 [[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/quekbingheng)]
 
 * Role: Developer
 * Responsibilities: UI
