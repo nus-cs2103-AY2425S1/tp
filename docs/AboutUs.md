@@ -11,6 +11,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Brendan Soh
+
+<img src="images/brendan8899.png" width="200px">
+
+[[homepage](http://www.comp.nus.edu.sg/~damithch)]
+[[github](https://github.com/Brendan8899)]
+[[portfolio](team/brendan.md)]
+
+* Role: Software Developer
+
 ### Lim Kai Wei
 
 <img src="images/limkaiwei.png" width="200px">
@@ -47,13 +57,3 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/quekbingheng.md)]
 
 * Role: Project Advisor
-
-### Brendan
-
-<img src="images/brendan8899.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/quekbingheng.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
