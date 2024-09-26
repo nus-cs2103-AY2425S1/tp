@@ -48,12 +48,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Jordan Chan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/naythee169.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/naythee169)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Deliverables & Deadlines, Scheduling & Tracking
+* Responsibilities: 
+* - Ensure project deliverables are done on time and in the right format.
+* - In charge of defining, assigning and tracking project tasks
