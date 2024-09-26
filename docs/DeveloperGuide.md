@@ -273,28 +273,42 @@ _{Explain here how the data archiving feature will be implemented}_
 ### Product scope
 
 **Target user profile**:
-
-* has a need to manage a significant number of contacts
+* is a full time university student with fixed schedule
+* is giving private tuition to a significant number of students
+* has a need to manage a significant number of tutees' information
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Empower undergraduate private tutors to efficiently manage payments, track student performance, and organize schedules using CLI.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​                                    | I want to …​                  | So that I can…​                                                         |
+|----------|--------------------------------------------|-------------------------------|-------------------------------------------------------------------------|
+| `* * *`  | new user                                   | see usage instructions        | refer to instructions when I forget how to use the App                  |
+| `* * *`  | tutor                                      | add a new student             | keep track of my tutee's information                                    |
+| `* * *`  | user                                       | delete an entry               | remove entries that I no longer need                                    |
+| `* * *`  | private tutor                              | view all my students' details | have an overview of how many tutees I am managing                       |
+| `* * *`  | tutor with many students                   | find a student by name        | locate details of tutees without having to go through the entire list   |
+| `* *`    | busy undergraduate tutor                   | find students by date         | locate details of tutees that has tuition on a specific date            |
+| `* *`    | new user                                   | see sample entries            | understand how the interface will look like with entries added          |
+| `* *`    | user                                       | edit contact details                                       | keep my information up-to-date                 |
+| `* *`    | busy undergraduate tutor                   | check who owes me tuition fee                              | identify and remind them to pay                |
+| `* *`    | busy undergraduate tutor                   | be reminded of my tuitions for today                       | remember to teach for today (if any)           |
+| `* *`    | busy undergraduate tutor                   | have an overview of the tuition fee earned/ owed as of now | easily keep track of how much more I should receive |
+| `* *`    | forgetful user                             | detect duplicates                                          | avoid manually finding and deleting the duplicates |
+| `* *`    | forgetful user                             | tag users with date and time of tuition                    | differentiate between different contacts    |
+| `*`      | user                                       | hide private contact details  | minimize chance of someone else seeing them by accident                 |
+| `*`      | user with many persons in the address book | sort persons by name          | locate a person easily                                                  |
+| `*`      | user that types fast                       | be able to undo my actions    | revert back if I have made a mistake                                    |
+| `*`      | user with many persons in the address book | sort persons by name                                       | locate a person easily                         |
+| `*`      | busy undergraduate tutor                   | have information of both the children and his/her guardian | contact either of them                         |
+| `*`      | tutor with many students                   | to know which guardian is associated with which children   | know which student is under that guardian/ vice-versa |
 
 *{More to be added}*
 
@@ -328,17 +342,47 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 *{More to be added}*
 
 ### Non-Functional Requirements
+**Environment Requirements**
+1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+**Data Requirements**
+1. All the data should be stored in human-editable files and must not be stored using DBMS. 
+2. Data should be saved permanently and not affected by any sudden accidents e.g., power outage, hardware breakdown.
 
-*{More to be added}*
+**Performance Requirements**
+1. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage. 
+2. For any simple usage, the application should be able to respond within 2 seconds.
+
+**Accessibility**
+1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse. 
+2. The user interface should be easy to navigate and intuitive, with clear labels, large enough texts, and highlighted error messages. 
+3. The application should provide clear help sections for users, explaining how to use its features.
+
+**Concurrency Control**
+1. Should only be used by one person at a time, meaning it is designed for a single user and cannot be accessed or shared by multiple users simultaneously. 
+
+**Testability**
+1. The software should not depend on any remote server and should be able to run at any time. 
+2. The application should be able to launch without an installer.
+3. Features should be testable without any external installation or access e.g., remote APIs, audio players, user accounts, internet connection. 
+
+**Security Requirements**
+1. The application is assumed to be used locally without creating any user account.
+2. Data stored in human-editable files is assumed to be highly secured and not damaged.
+
+**Maintainability Requirements**
+1. The codebase should be modular and well-documented (i.e. JavaDoc, following abstraction and cohesion) to ensure ease of maintenance and updates.
+2. The application must use a version control system to track changes and maintain multiple versions of the software.
+
+**Logging**
+1. Activity Logs: The system should log all user activity and critical events for security auditing and troubleshooting.
+
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **DBMS**: Database Management System, a software providing tools for structural data storage.
 
 --------------------------------------------------------------------------------------------------------------------
 
