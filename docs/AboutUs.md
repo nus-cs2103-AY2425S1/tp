@@ -23,7 +23,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Foo Chao
 
-<img src="images/FooChao.png" width="200px">
+<img src="images/foochao.png" width="200px">
 
 [[github](http://github.com/FooChao)]
 [[portfolio](team/FooChao.md)]
