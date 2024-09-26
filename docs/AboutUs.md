@@ -11,7 +11,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Brendan Soh
 
 <img src="images/brendan8899.png" width="200px">
 
