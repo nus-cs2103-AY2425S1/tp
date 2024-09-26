@@ -11,6 +11,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+
+### Non Kittilakkananon
+
+<img src="images/tata32000.png" width="200px">
+
+[[github](https://github.com/tata32000)]
+[[portfolio](team/tata32000.md)]
+
 ### Quek Bing Heng
 
 <img src="images/quekbingheng.png" width="200px">
@@ -40,16 +48,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Non
-
-<img src="images/tata32000.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/quekbingheng.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
 ### Jewi
 
 <img src="images/jewiteo.png" width="200px">
@@ -58,4 +56,3 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/quekbingheng.md)]
 
 * Role: Developer
-* Responsibilities: UI
