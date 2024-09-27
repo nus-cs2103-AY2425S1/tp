@@ -46,8 +46,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/munhuikim)]
 [[portfolio](https://www.linkedin.com/in/munhui-kim/)]
 
-* Role: 
-* Responsibilities: 
+* Role: In charge of Documentations
+* Responsibilities: Responsible for the quality of various project documents.
 
 ### Vu Hoang Kien
 
