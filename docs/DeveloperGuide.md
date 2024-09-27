@@ -331,10 +331,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list students
+2.  AddressBook shows a list of students
+3.  User requests to delete a specific students in the list
+4.  AddressBook deletes the students
 
     Use case ends.
 
@@ -354,8 +354,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
+1.  User requests to list students
+2.  AddressBook shows a list of students
 3.  User requests to add a specific student to the list
 4.  AddressBook adds the student
 
@@ -372,6 +372,39 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. AddressBook shows an error message.
 
       Use case resumes at step 2.
+
+**Use case: Categorise student based on tutorial class**
+
+**MSS**
+
+1.  User requests to list students
+2.  AddressBook shows a list of students
+3.  User requests to edit a specific student to the list
+4.  AddressBook checks if the tutorial class is valid. 
+5.  AddressBook edits the student's tutorial class
+6.  AddressBook returns the student 
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+    Use case ends.
+
+* 3a. The given student index is invalid.
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 3.
+
+* 4a. The given tutorial index is invalid.
+
+  * 4a1. AddressBook shows an error message.
+
+    Use case resumes at step 4.
+
+
 
 
 ### Non-Functional Requirements
