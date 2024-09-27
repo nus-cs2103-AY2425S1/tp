@@ -302,14 +302,43 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `DocTrack` application and the **Actor** is the `user`, unless specified otherwise)
 
+**Use case: Update a patient**
+
+**MSS**
+
+1.  User requests to list patients.
+2.  DocTrack shows a list of patients.
+3.  User requests to update a specific patient in the list with new details
+4.  DocTrack updates the patient.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. DocTrack shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The new details are invalid.
+
+    * 3b1. DocTrack shows an error message.
+
+      Use case resumes at step 2.
+
 **Use case: Delete a patient**
 
 **MSS**
 
 1.  User requests to list patients.
-2.  AddressBook shows a list of patients.
+2.  DocTrack shows a list of patients.
 3.  User requests to delete a specific patient in the list.
-4.  AddressBook deletes the patient.
+4.  DocTrack deletes the patient.
 
     Use case ends.
 
@@ -330,9 +359,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list patients.
-2.  AddressBook shows a list of patients.
+2.  DocTrack shows a list of patients.
 3.  User requests to list appoinments for a specific patient in the list.
-4.  AddressBook shows a list of appointments for that patient.
+4.  DocTrack shows a list of appointments for that patient.
 
     Use case ends.
 
@@ -347,6 +376,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. DocTrack shows an error message.
 
       Use case resumes at step 2.
+
+**Use case: Update an appointment**
+
+**MSS**
+
+1.  User requests to list appointments.
+2.  DocTrack shows a list of appointments.
+3.  User requests to update a specific appointment in the list with new details
+4.  DocTrack updates the appointment.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. DocTrack shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The new details are invalid.
+
+    * 3b1. DocTrack shows an error message.
+
+      Use case resumes at step 2.
+
 
 ### Non-Functional Requirements
 
