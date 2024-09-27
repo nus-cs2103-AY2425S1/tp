@@ -325,7 +325,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-* 3b. The new details are invalid.
+* 3b. The new patient details are invalid.
 
     * 3b1. DocTrack shows an error message.
 
@@ -377,6 +377,64 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Add an appointment**
+
+**MSS**
+
+1.  User requests to list patients.
+2.  DocTrack shows a list of patients.
+3.  User requests to add an appoinment for a specific patient in the list.
+4.  DocTrack adds appointment.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. DocTrack shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The appointment details are invalid (i.e. wrongly formatted or overlap with existing appointment)
+
+    * 3b1. DocTrack shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Duplicate an appointment**
+
+**MSS**
+
+1.  User requests to list appointments.
+2.  DocTrack shows a list of appointments.
+3.  User requests to duplicate a specific appointment in the list on a new date.
+4.  DocTrack duplicates appointment.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. DocTrack shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The appointment details are invalid (i.e. wrongly formatted or overlap with existing appointment)
+
+    * 3b1. DocTrack shows an error message.
+
+      Use case resumes at step 2.
+
 **Use case: Update an appointment**
 
 **MSS**
@@ -400,7 +458,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-* 3b. The new details are invalid.
+* 3b. The new details are invalid (i.e. wrongly formatted).
 
     * 3b1. DocTrack shows an error message.
 
