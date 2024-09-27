@@ -41,7 +41,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Munhui Kim
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/munhuikim.png" width="200px">
 
 [[github](http://github.com/munhuikim)]
 [[portfolio](https://www.linkedin.com/in/munhui-kim/)]
