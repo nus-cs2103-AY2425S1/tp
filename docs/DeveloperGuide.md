@@ -320,13 +320,46 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4.  The programme should be able to startup within 3s (minimum startup time)
+5.  Error messages and prompts should be clear and easy to understand for users of all technical skill levels.
+6. Data stored locally should be encrypted and only accessible via the app with correct authentication.
+   *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+  **Patient Contact**:  
+  Refers to the personal and medical information of an individual being treated, including name, NRIC, phone number, and medical details.
+
+* **Medical Condition**:  
+A diagnosis or health issue assigned to a patient, such as "Diabetes Type 2" or "Hypertension." This helps track and manage a patient's health status.
+
+* **Appointment**:  
+A scheduled meeting between a patient and a medical professional, stored with details like date, time, and purpose.
+
+* **NRIC**:  
+National Registration Identity Card, a unique 9-character identifier used to distinguish each patient or medical worker.
+
+* **Priority Level**:  
+Indicates the urgency of a patient’s condition, with values like low, medium, or high to assist medical professionals in managing urgent cases.
+
+* **Allergy**:  
+A specific substance or condition that a patient has a sensitivity or adverse reaction to, such as "Peanuts" or "Lactose."
+
+* **Contact List**:  
+A list of all patients and their associated information, which can be searched or filtered by various criteria like name or condition.
+
+* **Doctor**:  
+A medical professional who uses MediBase3 to manage patient information, schedule appointments, and track medical conditions.
+
+* **Appointment Date and Time**:  
+The specific day and time when a patient is scheduled to see a doctor, formatted as `YYYY-MM-DD` and `HH:MM`.
+
+* **Medical History**:  
+A chronological record of a patient’s past medical conditions, treatments, allergies, and appointments.
+
+* **Search by Condition**:  
+A feature that allows users to filter and display patients based on specific medical conditions.
 
 --------------------------------------------------------------------------------------------------------------------
 
