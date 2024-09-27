@@ -59,3 +59,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: UI
+
+### Jo An
+
+<img src="images/jayjay19630.png" width="200px">
+
+[[github](https://github.com/jayjay19630)]
+[[portfolio](team/jayjay19630.md)]
+
+* Role: Deliverables and Deadlines, Scheduling and Tracking
+* Responsibilities: UI
