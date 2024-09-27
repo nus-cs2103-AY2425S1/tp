@@ -19,15 +19,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Sivakumar Karthikraj
 
-<img src="images/johndoe.png" width="200px">
+![](images/TechRaj.png)
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/TechRaj)]
+[[portfolio](team/TechRaj.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Developer
+* Responsibilities: Backend
+* About me: I am a Year 2 Computer Science student who has in interest in SWE and AI/ML. When I am not coding, you can usually catch me cycling across Singapore or listen to some Rap.
 
 ### Johnny Doe
 
