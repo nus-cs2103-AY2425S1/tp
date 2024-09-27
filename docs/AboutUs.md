@@ -38,7 +38,7 @@ You can reach us at our individual emails below!
 <img src="images/choiwab.png" width="200px">
 
 [[github](http://github.com/choiwab)] 
-[[portfolio](https://jaechoi.vercel.app/)]
+[[portfolio](team/choiwab.md)]
 
 * Role: Code quality + In Charge of Storage 
 * Responsibilities: Oversee code quality of tp and review Storage component
