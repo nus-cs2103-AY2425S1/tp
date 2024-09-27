@@ -327,7 +327,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Delete a student**
 
 **MSS**
 
@@ -350,7 +350,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: Add a student**
+
+**MSS**
+
+1.  User requests to list persons
+2.  AddressBook shows a list of persons
+3.  User requests to add a specific student to the list
+4.  AddressBook adds the student
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is full.
+  * AddressBook shows an error message
+    Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
 
 ### Non-Functional Requirements
 
