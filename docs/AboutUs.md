@@ -9,51 +9,25 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
 
-<img src="images/johndoe.png" width="200px">
+### Sivakumar Karthikraj
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+![](images/TechRaj.png)
 
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/TechRaj)]
+[[portfolio](team/TechRaj.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Backend
+* About me: I am a Year 2 Computer Science student who has in interest in SWE and AI/ML. When I am not coding, you can usually catch me cycling across Singapore or listen to some Rap.
 
-### Jean Doe
+### Ho Wei Nian
 
-<img src="images/johndoe.png" width="200px">
+![](images/hweinian.png)
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/hweinian)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
+* Responsibilities: Backend
+* About me: I am a Year 2 Computer Science student who has in interest in SWE. 
