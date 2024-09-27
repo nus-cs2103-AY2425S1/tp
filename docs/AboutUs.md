@@ -17,6 +17,7 @@ You can reach us at our individual emails below!
 
 [[github](https://github.com/zaidansani)]
 [[email](mailto:zaidan@u.nus.edu)]
+[[portfolio](team/zaidansani.md)]
 
 * Role: Team Lead
   * Integration
