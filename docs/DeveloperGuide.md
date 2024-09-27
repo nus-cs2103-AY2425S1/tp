@@ -432,7 +432,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 4.
 
+**Use case: Add assignment**
 
+**MSS**
+
+1.  User requests to add an assignment 
+2.  AddressBook creates the assignment
+3.  AddressBook gets a list of students 
+4.  AddressBook adds the copy of the assignment to the assignment list of every student in the list.
+
+       Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
 
 ### Non-Functional Requirements
 
