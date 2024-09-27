@@ -1,6 +1,6 @@
 ---
   layout: default.md
-    title: "Vangmay's Project Portfolio Page"
+  title: "Vangmay's Project Portfolio Page"
 ---
 
 ### Project: DocTrack
