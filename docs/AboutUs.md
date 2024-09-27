@@ -15,10 +15,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 
 [[github](https://github.com/hooyushing)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](https://www.linkedin.com/in/hoo-yu-shing-252a08238/)]
 
-* Role: 
-* Responsibilities:
+* Role: Team lead
+* Responsibilities: Responsible for overall project coordination
 
 ### Wong Wai Hin
 
@@ -39,7 +39,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: 
 * Responsibilities: 
 
-### Muihui Kim
+### Munhui Kim
 
 <img src="images/johndoe.png" width="200px">
 
