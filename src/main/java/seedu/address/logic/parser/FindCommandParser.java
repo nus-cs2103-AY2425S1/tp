@@ -25,9 +25,44 @@ public class FindCommandParser implements Parser<FindCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        String[] nameKeywords = trimmedArgs.split("\\s+");
+        if (!trimmedArgs.contains("n/") && !trimmedArgs.contains("c/")) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
 
-        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        if (trimmedArgs.contains("n/")) {
+            String[] nameKeywords = parseName(trimmedArgs);
+            return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        }
+
+        String[] classIdKeywords = parseClassId(trimmedArgs);
+        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(classIdKeywords)));
+
+
     }
+
+    private String[] parseName(String args) throws ParseException{
+        String[] names = args.split("n/", 2);
+        if (names.length < 2 || names[1].trim().isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+
+        return names[1].trim().split("\\s+");
+
+    }
+
+    private String[] parseClassId(String args) throws ParseException{
+        String[] classIds = args.split("c/", 2);
+        if (classIds.length < 2 || classIds[1].trim().isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+
+        return classIds[1].trim().split("\\s+");
+
+    }
+
+
 
 }
