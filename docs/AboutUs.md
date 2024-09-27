@@ -33,14 +33,14 @@ You can reach us at our individual emails below!
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Jae Choi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/choiwab.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/choiwab)] [[portfolio](https://jaechoi.vercel.app/)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Code quality + In Charge of Storage 
+* Responsibilities: Oversee code quality of tp and review Storage component
 
 ### Jean Doe
 
