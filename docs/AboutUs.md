@@ -9,6 +9,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+
 ### Brian Ma
 
 <img src="images/bmanara.png" width="200px">
@@ -17,3 +18,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: Testing + Integration
+
+
+### MiloTruck
+
+<img src="images/milotruck.png" width="200px">
+
+[[github](http://github.com/milotruck)]
+[[portfolio](team/milotruck.md)]
+
+* Role: Developer
+* Responsibilities: Code quality
