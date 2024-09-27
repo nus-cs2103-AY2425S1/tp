@@ -18,7 +18,7 @@ You can reach us at our individual emails below!
 [[github](https://github.com/vangmay)] 
 [[portfolio](team/vangmay.md)]
 
-* Role: Developer and Quality Assurance
+* Roles: Developer, Quality Assurance
 * Responsibilities: Logic
 
 ### Muhammad ZAIDAN bin Sani
@@ -29,9 +29,8 @@ You can reach us at our individual emails below!
 [[email](mailto:zaidan@u.nus.edu)]
 [[portfolio](team/zaidansani.md)]
 
-* Role: Team Lead
-  * Integration
-  * In charge of `Model`
+* Roles: Team Lead, Developer, Integration
+* Responsibilities: Model
 
 ### Jae Choi
 
@@ -40,8 +39,8 @@ You can reach us at our individual emails below!
 [[github](http://github.com/choiwab)] 
 [[portfolio](team/choiwab.md)]
 
-* Role: Code quality + In Charge of Storage 
-* Responsibilities: Oversee code quality of tp and review Storage component
+* Roles: Developer, Code quality
+* Responsibilities: Storage
 
 ### Rachel Tai
 
@@ -50,7 +49,7 @@ You can reach us at our individual emails below!
 [[github](https://github.com/rxchell)]
 [[portfolio](team/rxchell.md)]
 
-* Role: Documentation
+* Roles: Developer, Documentation
 * Responsibilities: Commons
 
 ### Jo An
@@ -61,5 +60,5 @@ You can reach us at our individual emails below!
 [[email](mailto:jo.an@u.nus.edu)]
 [[portfolio](team/jayjay19630.md)]
 
-* Role: Deliverables and Deadlines, Scheduling and Tracking
+* Roles: Developer, Deliverables and Deadlines, Scheduling and Tracking
 * Responsibilities: UI
