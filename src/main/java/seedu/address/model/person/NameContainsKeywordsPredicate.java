@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
+
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
