@@ -3,8 +3,10 @@
   title: "Jae's Project Portfolio Page"
 ---
 
-### Jae
+### Project: DocTrack
 
-DocTrack is a desktop address book application used for ... The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about ... kLoC.
+**DocTrack** helps general practitioners (GPs) at small clinics quickly access patient contact details, appointments, and treatment records. It is optimized for users who prefer a command-line interface (CLI), enabling faster completion of frequent tasks through typed commands.
+
+---
 
 Given below are my contributions to the project.
