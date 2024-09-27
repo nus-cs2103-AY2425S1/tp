@@ -290,12 +290,135 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
+System: EduTuTu
+
+
+**Use Case UC01: Add Student**
+**Actor: Administrator**
+
+Main Success Scenario (MSS):
+1. Administrator chooses to add a new student.
+2. EduTuTu prompts for student details.
+3. Administrator enters the student's name, phone number, email, address, fees, and class ID.
+4. EduTuTu validates the entered data.
+5. EduTuTu adds the new student to the address book and displays a confirmation message.
+6. Use case ends.
+
+**Extensions:**
+a.  EduTuTu detects invalid or missing data.
+a1. EduTuTu displays an error message specifying the invalid fields.
+a2. Administrator re-enters the correct data.
+Steps a1–a2 repeat until all data are valid.
+Use case resumes from step 4.
+
+b. Administrator decides to cancel the operation.
+b1. EduTuTu asks for confirmation to cancel.
+b2. Administrator confirms cancellation.
+Use case ends.
+
+c.  EduTuTu identifies a duplicate student (same name).
+c1. EduTuTu displays an error message: "This person already exists in the address book."
+Use case ends.
+
+**Use Case UC02: Delete Student**
+**Actor: Administrator**
+
+Main Success Scenario (MSS):
+1. Administrator chooses to delete a student.
+2. EduTuTu prompts for the student's index.
+3. Administrator enters the index.
+4. EduTuTu validates the index.
+5. EduTuTu deletes the student and displays the deleted student's details.
+6. Use case ends.
+
+**Extensions:**
+a. Administrator enters an invalid index (non-integer or out of bounds).
+a1. EduTuTu displays an error message: "The person index provided is invalid."
+Use case resumes from step 2
+
+b. Administrator decides to cancel the deletion.
+b1. EduTuTu asks for confirmation to cancel.
+b2. Administrator confirms cancellation.
+Use case ends.
+
+**Use Case UC03: List All Students**
+Actor: Administrator
+
+Main Success Scenario (MSS):
+Administrator requests to list all students.
+1. EduTuTu retrieves all student records.
+2. EduTuTu displays the list of all students with unique indices.
+Use case ends.
+
+Extensions:
+a. The address book is empty.
+a1. EduTuTu displays a message: "No students in the address book."
+Use case ends.
+
+**Use Case UC04: Find Students**
+Actor: Administrator
+
+Main Success Scenario (MSS):
+1. Administrator chooses to find students.
+2. EduTuTu prompts for search criteria (name and/or class ID).
+3. Administrator enters the search criteria.
+4. EduTuTuvalidates the input.
+5. EduTuTu searches and displays matching students with unique indices.
+Use case ends.
+
+Extensions:
+a. Administrator enters invalid search criteria.
+a1. EduTuTu displays an error message specifying the invalid input.
+Use case resumes from step 2.
+
+b. No students match the search criteria.
+b1. EduTuTu displays a message: "0 persons listed!"
+Use case ends.
+
+**Use Case UC05: Mark Fees as Paid**
+Actor: Administrator
+
+Main Success Scenario (MSS):
+1. Administrator chooses to mark a student's fees as paid.
+2. EduTuTu prompts for the student's index and the date (year-month).
+3. Administrator enters the index and date (YYYY-MM).
+4. EduTuTu validates the index and date format.
+5. EduTuTu updates the student's record and confirms the payment status.
+Use case ends.
+
+Extensions:
+a. Administrator enters an invalid index.
+a1. EduTuTu displays an error message: "Index should be a positive integer and should not be blank."
+
+Use case resumes from step 2.
+b. Administrator enters an invalid date format or invalid month.
+b1. EduTuTu displays an error message: "The date provided must follow the format YYYY-MM and have a valid month."
+Use case resumes from step 2.
+
+c. Administrator decides to cancel the operation.
+c1. EduTuTu asks for confirmation to cancel.
+c2. Administrator confirms cancellation.
+Use case ends.
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1.Performance Requirements
+Response Time: The system should respond to any command within 1 second under normal operating conditions.
+Throughput: Capable of processing concurrent commands from multiple administrators without significant delay.
+Capacity: Should handle up to 1,000 students without noticeable sluggishness in performance for typical usage.
+
+2.Maintainability Requirements
+Code Quality: The codebase should be modular, well-documented, and adhere to standard coding conventions to facilitate maintenance.
+Documentation: Comprehensive technical documentation should be provided for future developers and maintainers.
+Automated Testing: Implement unit tests and integration tests to ensure that new changes do not break existing functionality.
+
+3.Portability Requirements
+Cross-Platform Compatibility: The application must run on any mainstream operating system (Windows, macOS, Linux) that has Java 17 or above installed.
+Minimal Dependencies: Avoid platform-specific dependencies to ensure ease of deployment across different environments.
+
+4. Ethical Requirements
+Non-Discrimination: The system should be designed to avoid biases, especially if implementing features like sorting or filtering.
+Transparency: Actions performed by the system should be transparent to the user, avoiding hidden processes that could cause confusion.
 
 ### Glossary
 
