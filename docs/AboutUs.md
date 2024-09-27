@@ -23,10 +23,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Lo Yong Zhe
 
-<img src="images/Reallyeasy1.png" width="200px">
+<img src="images/reallyeasy1.png" width="200px">
 
 [[github](https://github.com/Reallyeasy1)]
-[[portfolio](team/Reallyeasy1.md)]
+[[portfolio](team/reallyeasy1)]
 
 * Role: Software Engineer
 * Responsibilities: Data
