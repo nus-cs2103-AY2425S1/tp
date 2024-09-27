@@ -17,12 +17,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](https://github.com/PresleyChew)]
 
-
 * Role: Project Advisor
 * Responsibilities: Ensure task is on track
 * About me: I am a year 2 Computer Science student who does a 2nd major in Psychology. When I am not coding, you can usually catch me at the Louis Vuitton store in Ion ;)
-
-
+    
 ### Yap Yong Zhuo
 
 ![](images/yong-zhuo.png)
@@ -34,10 +32,9 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Responsibilities: UI/UX design and Commands
 * About Me: I am a Year 2 Computer Science student minoring in Psychology.
 
-
 ### Sivakumar Karthikraj
 
-![](images/TechRaj.png)
+![](images/techraj.png)
 
 [[github](http://github.com/TechRaj)]
 [[portfolio](team/TechRaj.md)]
@@ -55,14 +52,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: Backend
-* About me: I am a Year 2 Computer Science student who has in interest in SWE. 
+* About me: I am a Year 2 Computer Science student who has in interest in SWE.
 
 ###  Yukna
 
-<img src="images/yadobler.png" width="200px">
+![](images/yadobler.png)
 
 [[github](http://github.com/yadobler)]
 [[portfolio](team/yadobler.md)]
 
 * Role: Developer
 * Responsibilities: Anything and Everything
+
