@@ -59,3 +59,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: UI
+
+### Rachel Tai
+
+<img src="images/rxchell.png" width="200px">
+
+[[github](https://github.com/rxchell)]
+[[portfolio](team/rxchell.md)]
+
+* Role: Documentation
+* Responsibilities: Commons
