@@ -28,7 +28,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/Reallyeasy1)]
 [[portfolio](team/Reallyeasy1.md)]
 
-* Role: Developer
+* Role: Software Engineer
 * Responsibilities: Devops + Threading 
 
 
