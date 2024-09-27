@@ -5,7 +5,7 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `e1121292@u.nus.edu`
 
 ## Project team
 
@@ -16,6 +16,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 ![](images/presleychew.png)
 
 [[github](https://github.com/PresleyChew)]
+[[portfolio](team/presleychew.md)]
 
 * Role: Project Advisor
 * Responsibilities: Ensure task is on track
@@ -37,7 +38,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 ![](images/techraj.png)
 
 [[github](http://github.com/TechRaj)]
-[[portfolio](team/TechRaj.md)]
+[[portfolio](team/techraj.md)]
 
 * Role: Developer
 * Responsibilities: Backend

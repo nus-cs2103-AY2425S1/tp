@@ -485,7 +485,7 @@ Use case ends.
 4.  The programme should be able to startup within 3s (minimum startup time)
 5.  Error messages and prompts should be clear and easy to understand for users of all technical skill levels.
 6. Data stored locally should be encrypted and only accessible via the app with correct authentication.
-   *{More to be added}*
+
 
 ### Glossary
 
