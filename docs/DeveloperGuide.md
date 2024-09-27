@@ -313,7 +313,7 @@ _{More to be added}_
 
 - 3a. The given index is invalid.
 
-  - 3a1. AddressBook shows an error message.
+  - 3a1. Bizbook shows an error message.
 
     Use case resumes at step 2.
 
