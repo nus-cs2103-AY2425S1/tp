@@ -15,10 +15,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 
 [[github](https://github.com/hooyushing)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](https://www.linkedin.com/in/hoo-yu-shing-252a08238/)]
 
-* Role: 
-* Responsibilities:
+* Role: Team Lead
+* Responsibilities: Responsible for overall project coordination.
 
 ### Wong Wai Hin
 
@@ -32,29 +32,30 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Matthew Ho
 
-<img src="images/matthew.png" width="200px">
+<img src="images/sumomomomomo.png" width="200px">
 
-[[github](http://github.com/sumomomomomo)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/sumomomomomo)] 
+[[portfolio](https://www.linkedin.com/in/matthew-ho-803a41192/)]
 
-* Role: 
-* Responsibilities: 
+* Role: Code Quality
+* Responsibilities: Looks after code quality; ensures adherence to coding standards.
 
 ### Munhui Kim
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/munhuikim.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/munhuikim)]
+[[portfolio](https://www.linkedin.com/in/munhui-kim/)]
 
-* Role: 
-* Responsibilities: 
+* Role: Documentation
+* Responsibilities: Responsible for the quality of various project documents.
 
 ### Vu Hoang Kien
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kienvumrpm.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/kienvumrpm)]
+[[portfolio](https://www.linkedin.com/in/kienvu2211/)]
 
-* Role: 
-* Responsibilities: 
+* Role: Implementor
+* Responsibilities: Help others to debug.
