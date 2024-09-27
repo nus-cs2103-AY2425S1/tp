@@ -262,13 +262,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* doctors who are busy managing their patients and appointments
+* doctors who need to know their patient's status
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: manage patients and appointments faster than a typical mouse/GUI driven app
 
 
 ### User stories
@@ -292,32 +293,189 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Medibase 3` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case:** UC1 - Add Patient
+**MSS:**
+1. User keys in the patient details.
+2. MB3 adds the patient and displays a success message.  
+   Use case ends.
 
-**MSS**
+**Extensions:**
+1a. MB3 detects an error when adding patient data.  
+1a1. MB3 does not add patient data and shows an error message.  
+Use case ends.
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+---
 
+**Use case:** UC2 - Edit Patient
+
+**MSS:**
+1. User requests MB3 to edit the patient data.
+2. MB3 updates the patient data and displays a success message.  
+   Use case ends.
+
+**Extensions:**
+* 1a. MB3 detects an error when editing patient data.
+  * 1a1. MB3 does not update patient data and shows an error message.  
     Use case ends.
 
-**Extensions**
+---
 
-* 2a. The list is empty.
+**Use case:** UC3 - Find Patient by Name
+**MSS:**
+1. User keys in the patient name.
+2. MB3 prints the selected patient information and displays a success message.  
+   Use case ends.
 
-  Use case ends.
+**Extensions:**
+* 1a. MB3 detects an error when finding patient data.  
+  * 1a1. MB3 does not print patient data and shows an error message.  
+        Use case ends.
 
-* 3a. The given index is invalid.
+---
+ 
+**Use case:** UC4 - List Patients
+**MSS:**
+1. User requests MB3 to list patients.
+2. MB3 lists the patient data sequentially and displays a success message.  
+   Use case ends.
 
-    * 3a1. AddressBook shows an error message.
+**Extensions:**
+* 1a. MB3 detects an error when listing patient data.  
+  * 1a1. MB3 does not list patient data and shows an error message.  
+Use case ends.
 
-      Use case resumes at step 2.
+---
+ 
+**Use case:** UC5 - Add Appointment
+**MSS:**
+1. User keys in the appointment details.
+2. MB3 adds the appointment and displays a success message.  
+   Use case ends.
 
-*{More to be added}*
+**Extensions:**
+* 1a. MB3 detects an error when adding an appointment.  
+  * 1a1. MB3 does not add the appointment and shows an error message.  
+Use case ends.
+
+---
+ 
+**Use case:** UC6 - Add Medical Condition
+**MSS:**
+1. User keys in the patient’s medical condition.
+2. MB3 adds the medical condition and displays a success message.  
+   Use case ends.
+
+**Extensions:**
+* 1a. MB3 detects an error when adding the patient’s medical condition.  
+  * 1a1. MB3 does not add the medical condition and shows an error message.  
+Use case ends.
+
+---
+ 
+**Use case:** UC7 - Update Patient’s Priority
+**MSS:**
+1. User requests MB3 to update a selected patient’s priority.
+2. MB3 updates the patient’s priority and displays a success message.  
+   Use case ends.
+
+**Extensions:**
+* 1a. MB3 detects an error when updating the patient’s priority.  
+  * 1a1. MB3 does not update the patient’s priority and shows an error message.  
+Use case ends.
+
+---
+ 
+**Use case:** UC8 - Add Allergies to Patients
+**MSS:**
+1. User keys in the patient’s allergies to MB3.
+2. MB3 adds the allergies and displays a success message.  
+   Use case ends.
+
+**Extensions:**
+* 1a. MB3 detects an error when adding the patient’s allergies.  
+  * 1a1. MB3 does not add the allergies and shows an error message.  
+Use case ends.
+
+---
+
+**Use case:** UC9 - Delete Patient Contact
+**MSS:**
+1. User requests MB3 to delete a selected patient’s contact.
+2. MB3 deletes the patient’s contact and displays a success message.  
+   Use case ends.
+
+**Extensions:**
+* 1a. MB3 detects an error when deleting a patient’s contact.  
+  * 1a1. MB3 does not delete the patient’s contact and shows an error message.  
+Use case ends.
+
+---
+ 
+**Use case:** UC10 - Delete Patient Condition   
+**MSS:**
+1. User requests MB3 to delete a selected patient’s condition.
+2. MB3 deletes the patient’s condition and displays a success message.  
+   Use case ends.
+
+**Extensions:**
+* 1a. MB3 detects an error when deleting a patient’s condition.  
+  * 1a1. MB3 does not delete the patient’s condition and shows an error message.  
+Use case ends.
+
+---
+ 
+**Use case:** UC11 - Delete Patient Allergies
+**MSS:**
+1. User requests MB3 to delete a selected patient’s allergies.
+2. MB3 deletes the allergies and displays a success message.  
+   Use case ends.
+
+**Extensions:**
+* 1a. MB3 detects an error when deleting a patient’s allergies.  
+  * 1a1. MB3 does not delete the allergies and shows an error message.  
+Use case ends.
+
+---
+
+**Use case:** UC12 - Delete Patient Appointment
+**MSS:**
+1. User requests MB3 to delete a selected patient’s appointment.
+2. MB3 deletes the appointment and displays a success message.  
+   Use case ends.
+
+**Extensions:**
+* 1a. MB3 detects an error when deleting a patient’s appointment.  
+  * 1a1. MB3 does not delete the appointment and shows an error message.  
+Use case ends.
+
+---
+ 
+**Use case:** UC13 - List Patients By Condition
+**MSS:**
+1. User requests MB3 to list patients’ details by condition.
+2. MB3 lists patients' details by condition and displays a success message.  
+   Use case ends.
+
+**Extensions:**
+* 1a. MB3 detects an error when listing patients by condition.  
+  * 1a1. MB3 does not list the patients by condition and shows an error message.  
+Use case ends.
+
+---
+
+**Use case:** UC14 - List Patients By Priority
+**MSS:**
+1. User requests MB3 to list patients’ details by priority.
+2. MB3 lists patients' details by priority and displays a success message.  
+   Use case ends.
+
+**Extensions:**
+* 1a. MB3 detects an error when listing patients by priority.  
+  * 1a1. MB3 does not list the patients by priority and shows an error message.  
+Use case ends.
+
 
 ### Non-Functional Requirements
 
