@@ -11,7 +11,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Hoo Yu Shing
 
-<img src="images/yushing.png" width="200px">
+<img src="images/hooyushing.png" width="200px">
 
 
 [[github](https://github.com/hooyushing)]
@@ -32,9 +32,9 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Matthew Ho
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/matthew.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/sumomomomomo)] [[portfolio](team/johndoe.md)]
 
 * Role: 
 * Responsibilities: 
