@@ -300,16 +300,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `DocTrack` application and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Delete a patient**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list patients.
+2.  AddressBook shows a list of patients.
+3.  User requests to delete a specific patient in the list.
+4.  AddressBook deletes the patient.
 
     Use case ends.
 
@@ -321,11 +321,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. DocTrack shows an error message.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: Find appointments for a specific patient**
+
+**MSS**
+
+1.  User requests to list patients.
+2.  AddressBook shows a list of patients.
+3.  User requests to list appoinments for a specific patient in the list.
+4.  AddressBook shows a list of appointments for that patient.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. DocTrack shows an error message.
+
+      Use case resumes at step 2.
 
 ### Non-Functional Requirements
 
