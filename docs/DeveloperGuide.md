@@ -327,14 +327,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Delete a student**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list students
+2.  AddressBook shows a list of students
+3.  User requests to delete a specific student in the list
+4.  AddressBook deletes the student
 
     Use case ends.
 
@@ -350,7 +350,104 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: Add a student**
+
+**MSS**
+
+1.  User requests to list students
+2.  AddressBook shows a list of students
+3.  User requests to add a specific student to the list
+4.  AddressBook adds the student
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is full.
+  * AddressBook shows an error message
+    Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Categorise student based on tutorial class**
+
+**MSS**
+
+1.  User requests to list students
+2.  AddressBook shows a list of students
+3.  User requests to categorise the tutorial class of a specific student to the list
+4.  AddressBook checks if the tutorial class is valid. 
+5.  AddressBook edits the student's tutorial class
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+    Use case ends.
+
+* 3a. The given student index is invalid.
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 3.
+
+* 4a. The given tutorial index is invalid.
+
+  * 4a1. AddressBook shows an error message.
+
+    Use case resumes at step 4.
+
+**Use case: Record Student Attendance**
+
+**MSS**
+
+1.  User requests to list students
+2.  AddressBook shows a list of students
+3.  User requests to mark attendance of a specific student to the list
+4.  AddressBook adds the date and status to the students attendance list
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given student index is invalid.
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 3.
+
+* 4a. The date given is invalid or after the current date.
+
+    * 4a1. AddressBook shows an error message.
+
+      Use case resumes at step 4.
+
+**Use case: Add assignment**
+
+**MSS**
+
+1.  User requests to add an assignment 
+2.  AddressBook creates the assignment
+3.  AddressBook gets a list of students 
+4.  AddressBook adds the copy of the assignment to the assignment list of every student in the list.
+
+       Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
 
 ### Non-Functional Requirements
 

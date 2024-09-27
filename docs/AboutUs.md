@@ -21,6 +21,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Integration and Testing
 
+### Lo Yong Zhe
+
+<img src="images/Reallyeasy1.png" width="200px">
+
+[[github](https://github.com/Reallyeasy1)]
+[[portfolio](team/Reallyeasy1.md)]
+
+* Role: Developer
+* Responsibilities: Devops + Threading 
+
+
 ### Jane Doe
 
 <img src="images/johndoe.png" width="200px">
@@ -31,15 +42,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
 ### Jean Doe
 
 <img src="images/johndoe.png" width="200px">
@@ -48,7 +50,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Data
 
 ### James Doe
 
