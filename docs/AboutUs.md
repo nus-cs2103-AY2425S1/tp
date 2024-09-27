@@ -29,8 +29,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/Reallyeasy1.md)]
 
 * Role: Software Engineer
-* Responsibilities: Devops + Threading 
-
+* Responsibilities: Data
 
 ### Jane Doe
 
@@ -50,7 +49,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Devops + Threading
 
 ### James Doe
 
