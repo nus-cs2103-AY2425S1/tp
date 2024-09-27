@@ -8,7 +8,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Althea Tan
 
-<img src="images/althea.png" width="200px">
+<img src="images/althea28.png" width="200px">
 
 [[github](https://github.com/althea28)]
 
