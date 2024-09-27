@@ -57,3 +57,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Responsibilities: Backend
 * About me: I am a Year 2 Computer Science student who has in interest in SWE. 
 
+###  Yukna
+
+<img src="images/yadobler.png" width="200px">
+
+[[github](http://github.com/yadobler)]
+[[portfolio](team/yadobler.md)]
+
+* Role: Developer
+* Responsibilities: Anything and Everything
