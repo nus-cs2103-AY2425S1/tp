@@ -11,6 +11,15 @@ You can reach us at our individual emails below!
 
 ## Project team
 
+### Vangmay Sachan
+
+<img src="images/vangmay.png" width="200px">
+
+[[github](https://github.com/vangmay)] [[portfolio](team/vangmay.md)]
+
+* Role: Developer and Quality Assurance
+* Responsibilities: Logic
+
 ### Muhammad ZAIDAN bin Sani
 
 <img src="images/zaidansani.png" width="200px">
