@@ -34,10 +34,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/matthew.png" width="200px">
 
-[[github](http://github.com/sumomomomomo)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/sumomomomomo)] [[portfolio](https://www.linkedin.com/in/matthew-ho-803a41192/)]
 
-* Role: 
-* Responsibilities: 
+* Role: Code Quality
+* Responsibilities: Looks after code quality; ensures adherence to coding standards.
 
 ### Muihui Kim
 
