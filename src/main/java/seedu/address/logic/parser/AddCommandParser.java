@@ -2,7 +2,10 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FEES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MONTHSPAID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -13,7 +16,10 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.ClassId;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Fees;
+import seedu.address.model.person.MonthsPaid;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -43,9 +49,12 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+        Fees fees = ParserUtil.parseFees(argMultimap.getValue(PREFIX_FEES).orElse("0"));
+        ClassId classId = ParserUtil.parseClassId(argMultimap.getValue(PREFIX_CLASSID).orElse("0"));
+        MonthsPaid monthsPaid = ParserUtil.parseMonthsPaid(argMultimap.getValue(PREFIX_MONTHSPAID).orElse("0"));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, tagList);
+        Person person = new Person(name, phone, email, address, fees, classId, monthsPaid, tagList);
 
         return new AddCommand(person);
     }
