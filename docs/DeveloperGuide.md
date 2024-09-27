@@ -275,45 +275,21 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                              | I want to …​                                                                                | So that I can…​                                                          |
+|----------|--------------------------------------|---------------------------------------------------------------------------------------------|--------------------------------------------------------------------------|
+| `* * *`  | Tuition Center Administrators        | keep different levels of access for contact information                                     | keep sensitive information not accessible to unauthorized users          |
+| `* * *`  | Tuition Center Administrators        | search for contacts based on multiple criteria (name, role, or ID)                          | can find a specific person quickly without manually scrolling the list   |
+| `* * *`  | Tuition Center Administrators        | a user-friendly command-line interface with clear and concise command options               | quickly perform tasks without a usage guide                              |
+| `* * *`  | Tuition Center Administrators        | manage, retrieve and update the contact information for teachers, students and parents      | smoothly communicate across all parties without any confusions or delays |
+| `* * *`  | Tuition Center Administrators        | able to perform mutliple actions at once                                                    | increase the productivity                                                |
+| `* * *`  | Tuition Center Administrators        | add note about individual students (e.g. learning preferences, special needs, etc)          | can personalise learning experience                                      |
+| `* *`    | Tuition Center Administrators        | send automated payment notifications to parents                                             | can ensure timely payments                                               |
+| `* *`    | Tuition Center Administrators        | integrate a billing system that automatically calculates monthly fees and generate invoices | can reduce workload                                                      |
+| `* *`    | Tuition Center Administrators        | log and track communication history with parents, teachers and students                     | ensure continuity in communication                                       |
 
-*{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
-
-**Use case: Delete a person**
-
-**MSS**
-
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. AddressBook shows an error message.
-
-      Use case resumes at step 2.
-
-*{More to be added}*
 
 ### Non-Functional Requirements
 
@@ -321,12 +297,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
-*{More to be added}*
-
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Tuition Center Administrator**: The person responsible for overseeing the operations of the tuition center, managing contacts, scheduling, and communication with students, parents, and teachers.
+* **Data Migration**: The process of transferring data from one system to another. This feature ensures that contacts, communication history, and other data can be shared across different platforms or stakeholders.
 
 --------------------------------------------------------------------------------------------------------------------
 
