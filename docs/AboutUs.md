@@ -17,8 +17,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/hooyushing)]
 [[portfolio](https://www.linkedin.com/in/hoo-yu-shing-252a08238/)]
 
-* Role: Team lead
-* Responsibilities: Responsible for overall project coordination
+* Role: Team Lead
+* Responsibilities: Responsible for overall project coordination.
 
 ### Wong Wai Hin
 
@@ -32,9 +32,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Matthew Ho
 
-<img src="images/matthew.png" width="200px">
+<img src="images/sumomomomomo.png" width="200px">
 
-[[github](http://github.com/sumomomomomo)] [[portfolio](https://www.linkedin.com/in/matthew-ho-803a41192/)]
+[[github](http://github.com/sumomomomomo)] 
+[[portfolio](https://www.linkedin.com/in/matthew-ho-803a41192/)]
 
 * Role: Code Quality
 * Responsibilities: Looks after code quality; ensures adherence to coding standards.
@@ -46,7 +47,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/munhuikim)]
 [[portfolio](https://www.linkedin.com/in/munhui-kim/)]
 
-* Role: In charge of Documentations
+* Role: Documentation
 * Responsibilities: Responsible for the quality of various project documents.
 
 ### Vu Hoang Kien
@@ -57,4 +58,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](https://www.linkedin.com/in/kienvu2211/)]
 
 * Role: Implementor
-* Responsibilities: Help others to debug
+* Responsibilities: Help others to debug.
