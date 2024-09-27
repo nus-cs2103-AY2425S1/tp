@@ -6,7 +6,7 @@
 # HiredFiredPro
 
 [![CI Status](https://github.com/AY2425S1-CS2103T-W09-1/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-W09-1/tp/actions)
-[![codecov](https://codecov.io/gh/se-edu/addressbook-level3/branch/master/graph/badge.svg)](https://codecov.io/gh/se-edu/addressbook-level3)
+[![codecov](https://codecov.io/gh/AY2425S1-CS2103T-W09-1/tp/branch/master/graph/badge.svg)](https://codecov.io/gh/AY2425S1-CS2103T-W09-1/tp)
 
 ![Ui](images/Ui.png)
 
