@@ -272,31 +272,52 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Target user profile**: University dormitory manager (teacher residents or admins at Dorm Halls)
 
-* has a need to manage a significant number of contacts
+* has a need to manage a significant number of student contacts
 * prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* has experience and prefers using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Provide fast and centralised access to vital resident information.
 
+* keeps track of residents' contact details
+* manages room number and roles of residents
+* allows for quick input of details and querying by different conditions for dorm managers of large dorms.
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​                   | I want to …​                                                 | So that I can…​                                                        |
+|----------|---------------------------|--------------------------------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | forgetful dorm manager    | see usage instructions                                       | refer to instructions when I forget how to use the App                 |
+| `* * *`  | dorm manager              | add a new contact                                            | keep track of students in my dorm                                      |
+| `* * *`  | dorm manager              | delete a contact                                             | remove entries when residents leave the dorm to prevent clutter        |
+| `* * *`  | dorm manager              | view contacts                                                |                                                                        |
+| `* * *`  | dorm manager              | see emergency contacts of my residents                       | act quickly in the event of an emergency                               |
+| `* * *`  | strict dorm manager       | know my residents' room number                               | go check on them                                                       |
+| `* *`    | bustling dorm manager     | find a contact by their details (eg. name, room)             | locate contacts without having to go through the entire list           |
+| `* *`    | dorm manager              | edit a contact                                               | update contact details                                                 |
+| `* *`    | clumsy dorm manager       | undo my actions                                              | restore information if I accidentally delete them                      |
+| `* *`    | dorm manager              | give roles (responsibilities) to my residents                | foster communal living                                                 |
+| `* *`    | forgetful dorm manager    | keep track of the roles of my residents (eg. RA, CCA leader) | know their responsibilities                                            |
+| `* *`    | dorm manager              | find residents with certain roles (eg. RA, CCA leader)       | view and contact them as a group                                       |
+| `* *`    | impatient dorm manager    | load / save all resident details to a file                   | avoid typing in each resident's details                                |
+| `*`      | dorm manager              | sort contacts by name, room number                           | locate a contact easily                                                |
+| `*`      | forgetful dorm manager    | search by partial matches                                    | find contacts without memorising their full name                       |
+| `*`      | neat dorm manager         | group residents by block, floor, cluster, year               | keep contacts organised in specific groups                             |
+| `*`      | dorm manager              | filter search results by roles or groups                     | find contacts in specific groups quickly                               |
+| `*`      | dorm manager              | view a summary of resident groups                            | get an overview of the dorm population                                 |
+| `*`      | dorm manager              | keep track of demerit points of my residents                 | evict them when needed                                                 |
+| `*`      | anxious dorm manager      | know the phone, email and home address of my residents       | contact residents through multiple channels in case they don't respond |
+| `*`      | thoughtful dorm manager   | know the major of my residents                               | provide care and support during stressful periods                      |
+| `*`      | wholesome dorm manager    | know the clubs of my residents                               | support their arts showcases / sports competitions                     |
+| `*`      | enthusiastic dorm manager | know the food preferences of my residents                    | prepare welfare packs for them                                         |
+| `*`      | dorm manager              | know the medical conditions of my residents                  | provide timely medical assistance                                      |
+| `*`      | dorm manager              | know the nationality of my residents                         | better respect their culture                                           |
+| `*`      | thoughtful dorm manager   | add a small description of each resident                     | note the quirks and interests of each resident                         |
+| `*`      | dorm manager              | keep the commands short and powerful                         | use it effectively with CLI experience                                 |
 
-*{More to be added}*
 
 ### Use cases
 
