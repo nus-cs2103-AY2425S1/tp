@@ -10,6 +10,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 ## Project team
 
 
+### Yap Yong Zhuo
+
+![](images/yong-zhuo.png)
+
+[[github](http://github.com/yong-zhuo)]
+[[portfolio](team/yong-zhuo.md)]
+
+* Role: Team Lead
+* Responsibilities: UI/UX design and Commands
+* About Me: I am a Year 2 Computer Science student minoring in Psychology.
+
 ### Sivakumar Karthikraj
 
 ![](images/TechRaj.png)
@@ -26,8 +37,9 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 ![](images/hweinian.png)
 
 [[github](http://github.com/hweinian)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/hweinian.md)]
 
 * Role: Developer
 * Responsibilities: Backend
 * About me: I am a Year 2 Computer Science student who has in interest in SWE. 
+
