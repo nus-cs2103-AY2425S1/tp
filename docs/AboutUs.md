@@ -62,6 +62,16 @@ You can reach us at our individual emails below!
 * Role: Developer
 * Responsibilities: UI
 
+### Rachel Tai
+
+<img src="images/rxchell.png" width="200px">
+
+[[github](https://github.com/rxchell)]
+[[portfolio](team/rxchell.md)]
+
+* Role: Documentation
+* Responsibilities: Commons
+
 ### Jo An
 
 <img src="images/jayjay19630.png" width="200px">
