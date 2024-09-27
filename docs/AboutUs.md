@@ -15,7 +15,8 @@ You can reach us at our individual emails below!
 
 <img src="images/vangmay.png" width="200px">
 
-[[github](https://github.com/vangmay)] [[portfolio](team/vangmay.md)]
+[[github](https://github.com/vangmay)] 
+[[portfolio](team/vangmay.md)]
 
 * Role: Developer and Quality Assurance
 * Responsibilities: Logic
@@ -32,44 +33,15 @@ You can reach us at our individual emails below!
   * Integration
   * In charge of `Model`
 
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
 ### Jae Choi
 
 <img src="images/choiwab.png" width="200px">
 
-[[github](http://github.com/choiwab)] [[portfolio](https://jaechoi.vercel.app/)]
+[[github](http://github.com/choiwab)] 
+[[portfolio](https://jaechoi.vercel.app/)]
 
 * Role: Code quality + In Charge of Storage 
 * Responsibilities: Oversee code quality of tp and review Storage component
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
 
 ### Rachel Tai
 
@@ -86,6 +58,7 @@ You can reach us at our individual emails below!
 <img src="images/jayjay19630.png" width="200px">
 
 [[github](https://github.com/jayjay19630)]
+[[email](mailto:jo.an@u.nus.edu)]
 [[portfolio](team/jayjay19630.md)]
 
 * Role: Deliverables and Deadlines, Scheduling and Tracking
