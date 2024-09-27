@@ -51,10 +51,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Vu Hoang Kien
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kienvumrpm.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/kienvumrpm)]
+[[portfolio](https://www.linkedin.com/in/kienvu2211/)]
 
-* Role: 
-* Responsibilities: 
+* Role: Implementor
+* Responsibilities: Help others to debug
