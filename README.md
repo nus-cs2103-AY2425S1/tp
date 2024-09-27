@@ -7,5 +7,5 @@
   * It is **written in OOP fashion**.
   * It now functions as a tool for interviewers to manage details of interviewees.
 * It is named `HiredFiredPro`.
-* For the detailed documentation of this project, see the **[HiredFiredPro Website](http://ay2425s1-cs2103t-w09-1.github.io/tp)**.
+* For the detailed documentation of this project, see the **[HiredFiredPro Website](https://ay2425s1-cs2103t-w09-1.github.io/tp)**.
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
