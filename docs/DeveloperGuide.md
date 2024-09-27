@@ -410,7 +410,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests to list students
 2.  AddressBook shows a list of students
 3.  User requests to mark attendance of a specific student to the list
-4.  AddressBook adds the date to the students attendance list
+4.  AddressBook adds the date and status to the students attendance list
 
     Use case ends.
 
