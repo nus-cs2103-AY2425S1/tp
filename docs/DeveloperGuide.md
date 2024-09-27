@@ -464,6 +464,52 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Delete an appointment**
+
+**MSS**
+
+1.  User requests to list appointments.
+2.  DocTrack shows a list of appointments.
+3.  User requests to delete a specific appointment in the list.
+4.  DocTrack deletes the appointment.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. DocTrack shows an error message.
+
+      Use case resumes at step 2.
+
+
+**Use case: Find patient for a specific appointment**
+
+**MSS**
+
+1.  User requests to list appointments.
+2.  DocTrack shows a list of appointments.
+3.  User requests to find patient for a specific appointment in the list.
+4.  DocTrack shows patient details.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. DocTrack shows an error message.
+
+      Use case resumes at step 2.
 
 ### Non-Functional Requirements
 
