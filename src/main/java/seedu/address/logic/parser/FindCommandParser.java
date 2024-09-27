@@ -41,7 +41,7 @@ public class FindCommandParser implements Parser<FindCommand> {
 
     }
 
-    private String[] parseName(String args) throws ParseException{
+    private String[] parseName(String args) throws ParseException {
         String[] names = args.split("n/", 2);
         if (names.length < 2 || names[1].trim().isEmpty()) {
             throw new ParseException(
@@ -52,7 +52,7 @@ public class FindCommandParser implements Parser<FindCommand> {
 
     }
 
-    private String[] parseClassId(String args) throws ParseException{
+    private String[] parseClassId(String args) throws ParseException {
         String[] classIds = args.split("c/", 2);
         if (classIds.length < 2 || classIds[1].trim().isEmpty()) {
             throw new ParseException(
