@@ -288,30 +288,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `BizBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC1 - Add a person**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to add a new person, with the appropriate commands
+2.  `BizBook` displays a success message along with the details of the newly added person
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. There is an error in the user's command.
+    * 1a1 `BizBook`shows an error message.
 
-  Use case ends.
+      Use case resumes at step 1.
 
-* 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+* *a. `BizBook` detects an error in the entered command.
 
-      Use case resumes at step 2.
+    * *a1 `BizBook`  requests for a valid command.
+    * *a2 User enters new command.
+
+      Steps *a1-*a2 are repeated until a valid command is input.
+
+      Use case ends.
+
+
 
 *{More to be added}*
 
