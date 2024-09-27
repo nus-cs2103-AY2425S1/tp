@@ -7,19 +7,21 @@
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at our individual emails below!
 
 ## Project team
 
-### John Doe
+### Muhammad ZAIDAN bin Sani
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/zaidansani.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/zaidansani)]
+[[email](mailto:zaidan@u.nus.edu)]
+[[portfolio](team/zaidansani.md)]
 
-* Role: Project Advisor
+* Role: Team Lead
+  * Integration
+  * In charge of `Model`
 
 ### Jane Doe
 
@@ -69,3 +71,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Documentation
 * Responsibilities: Commons
+
+### Jo An
+
+<img src="images/jayjay19630.png" width="200px">
+
+[[github](https://github.com/jayjay19630)]
+[[portfolio](team/jayjay19630.md)]
+
+* Role: Deliverables and Deadlines, Scheduling and Tracking
+* Responsibilities: UI
