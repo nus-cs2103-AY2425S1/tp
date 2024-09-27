@@ -9,6 +9,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+
+### Tania Thng
+
+<img src="images/taniathng.png" width="200px">
+
+[[github](http://github.com/taniathng)] [[portfolio](team/taniathng.md)]
+* Role: Team Leader
+* Responsibilities: Organize team tasks.
+
 ### Chiang Qin Kang
 <img src="images/chiangqinkang.png" width="200px">
 
