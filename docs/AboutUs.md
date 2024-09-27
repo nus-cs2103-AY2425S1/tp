@@ -60,6 +60,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/TY1Fan)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Code quality and Component-storage
+* Role: Code quality, and in charge of storage component
+* Responsibilities: Looks after code quality and storage component
 
