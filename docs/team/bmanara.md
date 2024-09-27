@@ -34,7 +34,7 @@ Given below are my contributions to the project.
         * Added implementation details of the `delete` feature.
 
 * **Community**:
-    
+
 
 * **Tools**:
 
