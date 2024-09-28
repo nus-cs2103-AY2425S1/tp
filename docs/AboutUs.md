@@ -20,6 +20,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Team Lead
 
+### Eline Ngu Xiang Ee
+
+<img src="images/elinengu.png" width="200px">
+
+[[github](https://github.com/elinengu)]
+[[portfolio](team/elinengu.md)]
+
+- Role: Project Member
+
 ### Huang Jiaxi
 
 <img src="images/huangjiaxi1111.png" width="200px">
