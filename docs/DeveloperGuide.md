@@ -299,7 +299,7 @@ Priorities: High (must have) - `Essential`, Medium (nice to have) - `Typical`, L
 | Essential | Interviewer    | delete candidates                                                                                | keep track of current candidates                                                      |
 | Essential | Hiring Manager | view a list of candidates                                                                        | quickly assess who has applied for the position                                       |
 | Essential | Hiring Manager | mark candidates as "hired" or "rejected"                                                         | finalize the hiring process                                                           |
-| Essential | Hiring Manager | see the current status of a candidate (e.g., shortlisted, rejected)                              | track their progress                                                                  |
+| Essential | Hiring Manager | see the current status of a candidate (e.g. shortlisted, rejected)                               | track their progress                                                                  |
 | Novel     | CEO            | receive notifications when candidates complete a new interview stage                             | stay updated on the hiring progress                                                   |
 | Novel     | Hiring Manager | schedule interviews                                                                              | avoid scheduling conflicts                                                            |
 | Novel     | Hiring Manager | export the list of shortlisted candidates to a CSV file                                          | share it with other team members                                                      |
@@ -316,7 +316,7 @@ Priorities: High (must have) - `Essential`, Medium (nice to have) - `Typical`, L
 | Typical   | Hiring Manager | assign interviewees to interviewers                                                              | allocate tasks to interviewers more efficiently                                       |
 | Typical   | Hiring Manager | see when the candidate is available to start work e.g. graduation date                           | prepare the necessary onboarding process based on when the candidate begins their job |
 | Typical   | Hiring Manager | see candidates’ salary expectations                                                              | prepare for salary negotiation with the candidate                                     |
-| Typical   | Hiring Manager | search for candidates based on keywords (skills, position, etc.)                                 | quickly find the right profiles                                                       |
+| Typical   | Hiring Manager | search for candidates based on keywords (skills, position etc.)                                  | quickly find the right profiles                                                       |
 
 ### Use cases
 
