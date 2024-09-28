@@ -298,10 +298,10 @@ _{More to be added}_
 **MSS**
 
 1.  User requests to list persons.
-2.  Bizbook shows a list of persons.
+2.  `Bizbook` shows a list of persons.
 3.  User requests to delete a specific person in the list.
-4.  Bizbook deletes the person.
-5.  Bizbook <u>save contacts to save file (UC No.)</u>.
+4.  `Bizbook` deletes the person.
+5.  `Bizbook` <u>save contacts to save file (UC No.)</u>.
 
     Use case ends.
 
@@ -313,7 +313,7 @@ _{More to be added}_
 
 - 3a. The given index is invalid.
 
-  - 3a1. Bizbook shows an error message.
+  - 3a1. `Bizbook` shows an error message.
 
     Use case resumes at step 2.
 
