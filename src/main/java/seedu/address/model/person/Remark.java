@@ -1,11 +1,20 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
+
+/**
+ * Represents a Person's remarks in the address book, as added by a user.
+ * Guarantees: immutable;
+ */
 public class Remark {
 
     public final String value;
 
+    /**
+     * Constructs an {@code Remark}.
+     *
+     * @param remark A remark, in the form of a string.
+     */
     public Remark(String remark) {
         requireNonNull(remark);
         this.value = remark;

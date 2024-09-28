@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -10,18 +12,12 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
 
-
-import java.util.List;
-
+/**
+ * Adds a remark to a displayed using its displaying index from the address book.
+ */
 public class RemarkCommand extends Command {
 
-    private final Index index;
-
-    private final Remark remark;
-
     public static final String COMMAND_WORD = "remark";
-
-    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Remark: %2$s";
     public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to Person: %1$s";
     public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed remark from Person: %1$s";
 
@@ -34,6 +30,14 @@ public class RemarkCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + "r/ Likes to swim.";
 
+    private final Index index;
+    private final Remark remark;
+
+    /**
+     * Constructs a RemarkCommand instance, and ensures that both values are not null.
+     * @param index index of the specified user in the address book.
+     * @param remark remark to be associated with the user.
+     */
     public RemarkCommand(Index index, Remark remark) {
         requireAllNonNull(index, remark);
 
