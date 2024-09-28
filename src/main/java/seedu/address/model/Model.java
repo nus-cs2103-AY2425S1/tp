@@ -6,7 +6,6 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
 
 /**
  * The API of the Model component.
@@ -84,6 +83,5 @@ public interface Model {
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> personPredicate);
-    void updateFilteredPersonListByTag(Predicate<Tag> tagPredicate);
+    void updateFilteredPersonList(Predicate<Person> predicate);
 }
