@@ -1,6 +1,6 @@
 ---
 layout: page
-title: AddressBook Level-1
+title: KonTActs
 ---
 
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
@@ -15,5 +15,7 @@ title: AddressBook Level-1
 
 
 **Acknowledgements**
+
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 * Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
