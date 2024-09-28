@@ -5,19 +5,19 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
 
-You can reach us at the email `e1249111@u.nus.edu`
+You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### Javier Tan Meng Wee
+### John Doe
 
-<img src="images/incogdino.png" width="200px">
+<img src="images/johndoe.png" width="200px">
 
+[[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/johndoe)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Testing
-* Responsibilities: Ensure testing of the project is done properly and on time.
+* Role: Project Advisor
 
 ### Jane Doe
 
@@ -50,10 +50,11 @@ You can reach us at the email `e1249111@u.nus.edu`
 
 ### James Doe
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/incogdino.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/incogdino)]
+[[portfolio](team/incogdino.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Testing
+* Responsibilities: Ensures the testing of the project is done properly and on time.
+
