@@ -20,8 +20,9 @@ You can reach us at the email `e1121292@u.nus.edu`
 
 * Role: Project Advisor
 * Responsibilities: Ensure task is on track
-* About me: I am a year 2 Computer Science student who does a 2nd major in Psychology. When I am not coding, you can usually catch me at the Louis Vuitton store in Ion ;)
-    
+
+* About me: I am a year 2 Computer Science student who does a 2nd major in Psychology. I am also interested in AI. When I am not coding, you can usually catch me at the Louis Vuitton store in Ion ;)
+
 ### Yap Yong Zhuo
 
 ![](images/yong-zhuo.png)
