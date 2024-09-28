@@ -297,7 +297,7 @@ _{More to be added}_
 
 **MSS**
 
-1.  User requests to list persons.
+1.  User requests to <u>list persons (UC No.)</u>.
 2.  `Bizbook` shows a list of persons.
 3.  User requests to delete a specific person in the list.
 4.  `Bizbook` deletes the person.
