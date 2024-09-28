@@ -31,11 +31,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-<<<<<<< Updated upstream
 ### Johnny Doe
-=======
-### Sankar
->>>>>>> Stashed changes
 
 <img src="images/johndoe.png" width="200px">
 
@@ -44,12 +40,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Shricharan
+### Ulrico Nolan Orlando
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ulricolo7.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/ulricolo7)]
+[[portfolio](team/ulricolo7.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
