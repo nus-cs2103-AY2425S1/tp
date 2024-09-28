@@ -11,6 +11,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Mao Xiongkai
+
+<img src="images/maoxiongkai.png" width="200px">
+
+[[github](https://github.com/MAOXIONGKAI)]
+[[portfolio](team/maoxiongkai)]
+
+* Role: Team Lead
+
 ### Huang Jiaxi
 
 <img src="images/huangjiaxi1111.png" width="200px">
