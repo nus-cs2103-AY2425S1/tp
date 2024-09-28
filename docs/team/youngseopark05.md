@@ -1,5 +1,7 @@
 # 👋 Hi there! I'm Youngseo Park!
 
+<img src="../images/youngseopark05.png" alt="Youngseo Park's picture" width="200px" style="display: block; margin: 0 auto" />
+
 I'm a **Computer Science Sophomore** at the **National University of Singapore (NUS)**, diving deep into the exciting world of **Game Development**, **UI/UX Design**, and **XR Interaction Design**! 🚀
 
 ### 🌟 About Me
