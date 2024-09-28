@@ -55,7 +55,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/lithops-zty.png" width="200px">
 
 [[github](http://github.com/lithops-zty)]
-[[portfolio](team/tianyi.md)]
+[[portfolio](team/lithops-zty.md)]
 
 * Role: Developer
 * Responsibilities: UI
