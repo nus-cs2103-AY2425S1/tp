@@ -318,22 +318,22 @@ _{More to be added}_
 
 **Use case: UC2 Load contact from save file**
 
-**Actor: BizBook**
+**Actor: `BizBook`**
 
 **Guarantees:** Contact list is initialized with available data.
 
 **MSS**
 
-1.  BizBook searches OS directory for save file.
+1.  `BizBook` searches OS directory for save file.
 2.  OS returns save file object.
 3.  For each line is save file.
 
-    - 3.1 BizBook reads a line from the file.
-    - 3.2 BizBook parses the line into a contact object.
-    - 3.3 BizBook adds the contact object to the contact list.
+    - 3.1 `BizBook` reads a line from the file.
+    - 3.2 `BizBook` parses the line into a contact object.
+    - 3.3 `BizBook` adds the contact object to the contact list.
     - 3.4 Repeat steps 3.1 - 3.3 until all lines are processed.
 
-4.  BizBook finishes loading contacts into the contact list.
+4.  `BizBook` finishes loading contacts into the contact list.
 
     Use case ends.
 
@@ -341,16 +341,16 @@ _{More to be added}_
 
 - 1a. Save file does not exist.
 
-  - 1a1. BizBook shows a warning message.
-  - 1a2. BizBook creates a new save file.
-  - 1a3. BizBook loads an empty contact list.
+  - 1a1. `BizBook` shows a warning message.
+  - 1a2. `BizBook` creates a new save file.
+  - 1a3. `BizBook` loads an empty contact list.
 
   Use case ends.
 
 - 3.1a. Line does not fit proper contact format.
 
-  - 3.1a1. BizBook ignores line.
-  - 3.1a2. BizBook shows a warning message.
+  - 3.1a1. `BizBook` ignores line.
+  - 3.1a2. `BizBook` shows a warning message.
 
   Use case resumes at step 3.1.
 
