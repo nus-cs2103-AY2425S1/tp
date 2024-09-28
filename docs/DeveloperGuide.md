@@ -320,16 +320,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Should work on any mainstream OS as long as it has Java 17 or above installed.
 2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. Commands should be easy to remember
+4. Commands should be easy to remember.
 5. Ui should be easy to navigate and intuitive.
-6. KonTActs should be easy to use for new users
-7. The system should work on both 32 bit and 64 bit environments
-8. Contact details are securely stored
+6. KonTActs should be easy to use for new users.
+7. The system should work on both 32 bit and 64 bit environments.
+8. Contact details are securely stored.
 9. The application should have an uptime of at least 99.9% to ensure constant availability for users.
 10. The application should automatically save data after every change to avoid data loss in case of a crash.
 11. There should be proper documentation for the code and application usage to assist developers in future updates.
 12. Error messages should be descriptive, providing users with clear guidance on how to resolve the issue.
-13. Searching for or filtering contacts should take less than 5 seconds
+13. Searching for or filtering contacts should take less than 5 seconds.
 14. Stored contacts are persisted between sessions.
 
 ### Glossary
