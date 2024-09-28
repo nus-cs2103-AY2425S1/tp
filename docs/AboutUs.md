@@ -11,15 +11,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Eliot Snodgrass
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/appleshill.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[github](https://github.com/appleshill)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+* Role: Team Lead
 
 ### Jane Doe
 
@@ -50,12 +49,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Code quality
 * Responsibilities: Looks after code quality, ensures adherence to coding standards, etc.
 
-### James Doe
+### Ryan Han
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/github_ryanwarwick.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/RyanWarwick)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Deliverables and deadlines
+* Responsibilities: Ensure project deliverables are done on time and in the right format.
