@@ -1,10 +1,10 @@
 package seedu.address.model.goods;
 
-import java.time.LocalDateTime;
-
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.time.LocalDateTime;
 
 /**
  * Represents goods.
@@ -38,7 +38,8 @@ public class Goods {
      * @param isDelivered Current delivery status.
      * @param supplierName A valid supplier name.
      */
-    public Goods(String goodsName, int quantity, int price, GoodsCategories category, LocalDateTime procurementDate, LocalDateTime arrivalDate, boolean isDelivered, String supplierName) {
+    public Goods(String goodsName, int quantity, int price, GoodsCategories category, 
+            LocalDateTime procurementDate, LocalDateTime arrivalDate, boolean isDelivered, String supplierName) {
         requireAllNonNull(goodsName, quantity, category, procurementDate, arrivalDate, isDelivered, supplierName);
         checkArgument(isValidGoodsName(goodsName));
         checkArgument(isValidProcurementDate(procurementDate));
