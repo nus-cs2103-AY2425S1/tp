@@ -19,6 +19,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Remark;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -69,8 +70,8 @@ public class CommandTestUtil {
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 
-    public static final String VALID_REMARK_AMY = "Like skiing.";
-    public static final String VALID_REMARK_BOB = "Favourite pastime: Eating";
+    public static final Remark VALID_REMARK_AMY = new Remark("Like skiing.");
+    public static final Remark VALID_REMARK_BOB = new Remark("Favourite pastime: Eating");
 
     /**
      * Executes the given {@code command}, confirms that <br>
