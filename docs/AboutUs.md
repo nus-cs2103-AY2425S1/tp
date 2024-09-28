@@ -37,9 +37,18 @@ You can reach us at the email `e1249111[at]u.nus.edu`
 [[github](http://github.com/currynia)]
 [[portfolio](team/currynia.md)]
 
-- Role: Code quality
-- Responsibilities: Looks after code quality, ensures adherence to coding standards, etc.
+* Role: Code quality
+* Responsibilities: Looks after code quality, ensures adherence to coding standards, etc.
 
+### Lau Xiang Yu
+
+<img src="images/dessnowy.png" width="200px">
+
+[[github](http://github.com/DesSnowy)] 
+[[portfolio](team/dessnowy.md)]
+
+* Role: Developer
+* Responsibilities: Integration
 
 
 ### Swaminathan Viswa
