@@ -15,9 +15,20 @@ You can reach us at the email `e1249111[at]u.nus.edu`
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/tohjh)]
 
 - Role: Project Advisor
+
+
+### Toh Jia Han
+
+<img src="images/tohjh.png" width="200px">
+
+[[github](http://github.com/tohjh)]
+[[portfolio](team/tohjh.md)]
+
+* Role: Developer
+* Responsibilities: Deliverables and deadline
 
 ### Wen Rui
 
@@ -26,8 +37,8 @@ You can reach us at the email `e1249111[at]u.nus.edu`
 [[github](http://github.com/currynia)]
 [[portfolio](team/currynia.md)]
 
-- Role: Code quality
-- Responsibilities: Looks after code quality, ensures adherence to coding standards, etc.
+* Role: Code quality
+* Responsibilities: Looks after code quality, ensures adherence to coding standards, etc.
 
 ### Lau Xiang Yu
 
@@ -39,22 +50,27 @@ You can reach us at the email `e1249111[at]u.nus.edu`
 * Role: Developer
 * Responsibilities: Integration
 
-### Jean Doe
 
-<img src="images/johndoe.png" width="200px">
+### Swaminathan Viswa
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
 
-- Role: Developer
-- Responsibilities: Dev Ops + Threading
+<img src="images/swaminathanviswa.png" width="200px">
 
-### James Doe
+[[github](http://github.com/SwaminathanViswa)]
+[[portfolio](team/swaminathanviswa.md)]
+
+
+* Role: Developer
+* Responsibilities: Responsible for quality of project documentations
+
+ ### Javier Tan Meng Wee
 
 <img src="images/incogdino.png" width="200px">
 
+
 [[github](http://github.com/incogdino)]
 [[portfolio](team/incogdino.md)]
+
 
 * Role: Testing
 * Responsibilities: Ensures the testing of the project is done properly and on time.
