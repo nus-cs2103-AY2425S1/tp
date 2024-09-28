@@ -23,7 +23,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Arvind Natarajan
 
-<img src="images/diegotheexplorar.png.png" width="200px">
+<img src="images/diegotheexplorar.png" width="200px">
 
 [[github](https://github.com/DiegoTheExplorar)]
 [[portfolio](www.linkedin.com/in/arvind-natarajan-65aa77290)]
