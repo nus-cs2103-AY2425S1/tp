@@ -1,10 +1,10 @@
 {
-  "baseUrl": "",
+  "baseUrl": "/tp",
   "titlePrefix": "BA€",
   "titleSuffix": "AddressBook Level-3",
   "faviconPath": "images/SeEduLogo.png",
   "style": {
-    "codeTheme": "light"
+    "codeTheme": "dark"
   },
   "ignore": [
     "_markbind/layouts/*",
