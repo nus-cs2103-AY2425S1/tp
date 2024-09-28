@@ -38,17 +38,18 @@ You can reach us at the email `e1249111[at]u.nus.edu`
 - Role: Developer
 - Responsibilities: Data
 
-### Jean Doe
 
-<img src="images/johndoe.png" width="200px">
+### Swaminathan Viswa
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+<img src="images/swaminathanviswa.png" width="200px">
 
-- Role: Developer
-- Responsibilities: Dev Ops + Threading
+[[github](http://github.com/SwaminathanViswa)]
+[[portfolio](team/swaminathanviswa.md)]
 
-### James Doe
+* Role: Developer
+* Responsibilities: Responsible for quality of project documentations
+
+ ### Javier Tan Meng Wee
 
 <img src="images/incogdino.png" width="200px">
 
