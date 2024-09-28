@@ -274,13 +274,19 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
+* has a need to manage a significant number of candidates across various job roles
+* has a need to view and filter candidate lists quickly based on various categories
+* requires tools to schedule interviews, assign interviewers and update the outcome of the interview
+* requires tools to efficiently track candidate progress and make hiring decisions
+* prefers desktop apps for recruitment tracking over web or mobile applications
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Provides streamlined access to candidate information allowing users to track their progress, 
+compare candidates, and make informed hiring decisions with efficient CLI commands, faster than a typical 
+mouse/GUI driven app.
+
 
 
 ### User stories
