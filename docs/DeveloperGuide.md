@@ -318,11 +318,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5. The system displays a success message.
 
 **Extensions**:
-- 3a. Invalid candidate details are provided (e.g., incorrect email format): The system displays an error message.
+- 3a. HiredFiredPro detects an error in the entered data.
+  - 3a1. HiredFiredPro requests for the correct data.
+  - 3a2. Hiring Manager enters new data.
+  - Steps 3a1-3a2 are repeated until the data entered are correct.
+  - Use case resumes from step 4.
 - 4a. The candidate is already on the shortlist: The system displays a duplicate error message.
 
 **Command Example**:  
 `add n/John Doe j/Software Engineer p/98765432 e/johnd@example.com a/123 Main St`
+
+Use case ends.
 
 ---
 
@@ -342,6 +348,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Command Example**:  
 `delete 1`
 
+Use case ends.
+
 ---
 
 ## Use Case 3: View Candidate List
@@ -357,6 +365,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Command Example**:  
 `list`
+
+Use case ends.
 
 ---
 
@@ -376,6 +386,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Command Example**:  
 `view n/John Doe j/Software Engineer`
 
+Use case ends.
+
 ---
 
 ## Use Case 5: Mark Candidate Status as Hired or Rejected
@@ -388,11 +400,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. The system displays a success message.
 
 **Extensions**:
-- 2a. The candidate is already marked with the specified status: The system displays an error message.
+- 2a. The specified candidate does not exist: The system displays an error message.
+- 2b. The candidate is already marked with the specified status: The system displays an error message.
 
 **Command Example**:  
 `hire n/John Doe j/Software Engineer`  
 `reject n/Jane Smith j/Data Analyst`
+
+Use case ends.
 
 
 ### Non-Functional Requirements
