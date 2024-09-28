@@ -30,3 +30,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: UI
+
+### Tan Wei Seng
+
+<img src="images/weiseng18.png" width="200px">
+
+[[github](http://github.com/weiseng18)]
+[[portfolio](team/weiseng18.md)]
+
+* Role: Developer, Git expert
+* Responsibilities: Model, Testing
