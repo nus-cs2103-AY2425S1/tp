@@ -16,5 +16,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/elinengu.png" width="200px">
 
 [[github](https://github.com/elinengu)]
+[[portfolio](team/elinengu.md)]
 
 - Role: Project Member
