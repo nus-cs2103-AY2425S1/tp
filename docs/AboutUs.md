@@ -5,7 +5,7 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `e1249111[at]u.nus.edu`
 
 ## Project team
 
@@ -17,7 +17,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/johndoe)]
 [[portfolio](team/tohjh)]
 
-* Role: Project Advisor
+- Role: Project Advisor
+
 
 ### Toh Jia Han
 
@@ -29,31 +30,38 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Deliverables and deadline
 
-### Johnny Doe
+### Wen Rui
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/currynia.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/tohjh)]
+[[github](http://github.com/currynia)]
+[[portfolio](team/currynia.md)]
 
-* Role: Developer
-* Responsibilities: Data
+- Role: Code quality
+- Responsibilities: Looks after code quality, ensures adherence to coding standards, etc.
 
-### Jean Doe
 
-<img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/tohjh)]
+### Swaminathan Viswa
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
 
-### James Doe
+<img src="images/swaminathanviswa.png" width="200px">
 
-<img src="images/johndoe.png" width="200px">
+[[github](http://github.com/SwaminathanViswa)]
+[[portfolio](team/swaminathanviswa.md)]
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/tohjh)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Responsible for quality of project documentations
+
+ ### Javier Tan Meng Wee
+
+<img src="images/incogdino.png" width="200px">
+
+
+[[github](http://github.com/incogdino)]
+[[portfolio](team/incogdino.md)]
+
+
+* Role: Testing
+* Responsibilities: Ensures the testing of the project is done properly and on time.
