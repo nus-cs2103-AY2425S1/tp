@@ -1,7 +1,7 @@
 ---
-  layout: default.md
-  title: "Developer Guide"
-  pageNav: 3
+layout: default.md
+title: "Developer Guide"
+pageNav: 3
 ---
 
 # AB-3 Developer Guide
@@ -306,32 +306,94 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+## Use Case 1: Add Candidate to Shortlist
+**Actor**: Hiring Manager  
+**Goal**: To add a candidate to the shortlist for a job position.
 
-**Use case: Delete a person**
+**Main Success Scenario**:
+1. Hiring Manager enters the command to add a candidate.
+2. The system prompts for the candidate's details, including name, job title, phone number, email, and address.
+3. The system validates the provided details (e.g., correct format for phone, email).
+4. The system adds the candidate to the shortlist.
+5. The system displays a success message.
 
-**MSS**
+**Extensions**:
+- 3a. Invalid candidate details are provided (e.g., incorrect email format): The system displays an error message.
+- 4a. The candidate is already on the shortlist: The system displays a duplicate error message.
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+**Command Example**:  
+`add n/John Doe j/Software Engineer p/98765432 e/johnd@example.com a/123 Main St`
 
-    Use case ends.
+---
 
-**Extensions**
+## Use Case 2: Delete Candidate from Shortlist
+**Actor**: Hiring Manager  
+**Goal**: To remove a candidate from the shortlist.
 
-* 2a. The list is empty.
+**Main Success Scenario**:
+1. Hiring Manager enters the command to delete a candidate by specifying the candidate's index in the list.
+2. The system deletes the candidate from the list.
+3. The system displays a success message.
 
-  Use case ends.
+**Extensions**:
+- 1a. The list is empty: The system displays a message indicating there are no candidates to delete.
+- 1b. An invalid index is entered: The system displays an error message.
 
-* 3a. The given index is invalid.
+**Command Example**:  
+`delete 1`
 
-    * 3a1. AddressBook shows an error message.
+---
 
-      Use case resumes at step 2.
+## Use Case 3: View Candidate List
+**Actor**: Hiring Manager  
+**Goal**: To view the list of all candidates.
 
-*{More to be added}*
+**Main Success Scenario**:
+1. Hiring Manager enters the command to list all candidates.
+2. The system retrieves and displays the list of candidates in alphabetical order.
+
+**Extensions**:
+- 2a. The list is empty: The system displays a message indicating no candidates are currently listed.
+
+**Command Example**:  
+`list`
+
+---
+
+## Use Case 4: View Candidate Status
+**Actor**: Hiring Manager  
+**Goal**: To view the status (e.g., hired, rejected) of a specific candidate.
+
+**Main Success Scenario**:
+1. Hiring Manager enters the command with the candidate's name and job title.
+2. The system retrieves the candidate's status.
+3. The system displays the status of the candidate.
+
+**Extensions**:
+- 1a. The specified candidate does not exist: The system displays an error message.
+- 1b. The job title or name is missing: The system displays an error message requesting the missing parameter.
+
+**Command Example**:  
+`view n/John Doe j/Software Engineer`
+
+---
+
+## Use Case 5: Mark Candidate Status as Hired or Rejected
+**Actor**: Hiring Manager  
+**Goal**: To update the status of a candidate to "hired" or "rejected."
+
+**Main Success Scenario**:
+1. Hiring Manager enters the command with the candidate's name and job title.
+2. The system changes the candidate's status to either "hired" or "rejected."
+3. The system displays a success message.
+
+**Extensions**:
+- 2a. The candidate is already marked with the specified status: The system displays an error message.
+
+**Command Example**:  
+`hire n/John Doe j/Software Engineer`  
+`reject n/Jane Smith j/Data Analyst`
+
 
 ### Non-Functional Requirements
 
