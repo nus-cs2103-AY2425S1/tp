@@ -21,16 +21,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
 ### Johnny Doe
 
 <img src="images/johndoe.png" width="200px">
@@ -50,6 +40,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
+### Skyler Ng
+
+<img src="images/skyl3-r.png" width="200px">
+
+[[github](http://github.com/skyl3-r)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Code Quality
+* Responsibilities: Look after code quality, ensure adherence to coding standards.
+
 ### Eyu Gong Yi
 
 <img src="images/eyugongyi.png" width="200px">
@@ -59,3 +59,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: Testing of Application
+
