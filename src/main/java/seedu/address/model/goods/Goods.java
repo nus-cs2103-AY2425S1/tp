@@ -38,7 +38,7 @@ public class Goods {
      * @param isDelivered Current delivery status.
      * @param supplierName A valid supplier name.
      */
-    public Goods(String goodsName, int quantity, int price, GoodsCategories category, 
+    public Goods(String goodsName, int quantity, int price, GoodsCategories category,
             LocalDateTime procurementDate, LocalDateTime arrivalDate, boolean isDelivered, String supplierName) {
         requireAllNonNull(goodsName, quantity, category, procurementDate, arrivalDate, isDelivered, supplierName);
         checkArgument(isValidGoodsName(goodsName));
