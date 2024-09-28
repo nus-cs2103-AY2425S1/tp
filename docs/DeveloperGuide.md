@@ -280,14 +280,32 @@ typical mouse/GUI driven app
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …           | I want to …                                                                 | So that I can …                                                   |
+|----------|------------------|-----------------------------------------------------------------------------|-------------------------------------------------------------------|
+| `* * *`  | user             | add new contacts                                                            | save the contact information of people                            |
+| `* * *`  | user             | delete a contact                                                            | free up space in my app                                           |
+| `* * *`  | user             | view all contact                                                            | retrieve contact information                                      |
+| `* * *`  | user             | save all contact                                                            | retain all information for when i reopen the app                  |
+| `* * *`  | sales rep        | have a low query time                                                       | avoid wasting much time querying my desired contact               |
+| `* *`    | user             | search through my contacts                                                  | find a specific person                                            |
+| `* *`    | user             | view all commands                                                           | know how to use the app                                           |
+| `* *`    | user             | edit contact                                                                | update contact with new information                               |
+| `* *`    | user             | sort contact by name                                                        | see whose contact I have saved                                    |
+| `* *`    | user             | archive contact                                                             | hide less frequently used contacts without deleting them          |
+| `* *`    | user             | be alerted when a contact already exist                                     | avoid accidentally creating a duplicate                           |
+| `* *`    | user             | undo a command                                                              | fix a mistake I made                                              |
+| `* *`    | new user         | import all contact details into the app                                     | start using without manual setup                                  |
+| `* *`    | sales rep        | keep track of clients I have contacted by seeing when I last contacted them | avoid wasting time calling them again about the same product      |
+| `* *`    | sales rep        | view my most popular/active clients                                         | promote the new product                                           |
+| `* *`    | sales rep        | remember the client's preferred products                                    | recommend related products                                        |
+| `* *`    | sales rep        | add notes to client's contact                                               | keep track of my conversation with them                           |
+| `* *`    | sales rep        | group my clients by industry                                                | tell if sales are doing well in that industry among other metrics |
+| `* *`    | sales rep        | add tags to clients                                                         | categorize them                                                   |
+| `* *`    | sales rep        | keep note of my client's email addresses                                    | potentially send promotions or survey forms                       |
+| `* *`    | sales rep        | export a list of contact emails                                             | add them to a mailing list                                        |
+| `* *`    | sales rep        | add a tag to multiple clients                                               | tag the clients more easily                                       |
+| `*`      | experienced user | use keyboard shortcuts                                                      | navigate the app faster                                           |
+| `*`      | sales rep        | contact my client quickly from the app                                      | avoid typing numbers repeatedly on my phone                       |
 
 *{More to be added}*
 
