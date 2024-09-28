@@ -40,12 +40,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Ulrico Nolan Orlando
+### Jean Doe
 
-<img src="images/ulricolo7.png" width="200px">
+<img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/ulricolo7)]
-[[portfolio](team/ulricolo7.md)]
+[[github](http://github.com/johndoe)]
+[[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
