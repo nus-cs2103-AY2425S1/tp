@@ -325,8 +325,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* Contact: An individual (e.g. student) stored in the system, typically having details regarding them such as their name, github username and etc.
+
+* Easy to use for new users: intuitive commands that are easy to understand and UI that is easy to navigate
+
+* Mainstream OS: Windows, Linux, Unix, MacOS
+
+* Average typing speed: about 40 words per minute
+
+* Uptime: The system should be operational during that period of time.
+
+* Between sessions: Every opening and closing of the application.
+
+* Proper documentation: A detailed user and developer guide which helps future users and developers to understand and use the code.
+
+* Typical usage: Normal or expected usage patterns of the application, such as the frequency of adding, deleting, or viewing contacts during everyday use.
 
 --------------------------------------------------------------------------------------------------------------------
 
