@@ -5,7 +5,7 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
 
-You can reach us at the email `e1249111[at]comp.nus.edu.sg`
+You can reach us at the email `e1249111[at]u.nus.edu`
 
 ## Project team
 
@@ -19,7 +19,7 @@ You can reach us at the email `e1249111[at]comp.nus.edu.sg`
 
 - Role: Project Advisor
 
-### Jane Doe
+### Wen Rui
 
 <img src="images/currynia.png" width="200px">
 
