@@ -274,13 +274,19 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
+* has a need to manage a significant number of candidates across various job roles
+* has a need to view and filter candidate lists quickly based on various categories
+* requires tools to schedule interviews, assign interviewers and update the outcome of the interview
+* requires tools to efficiently track candidate progress and make hiring decisions
+* prefers desktop apps for recruitment tracking over web or mobile applications
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Provides streamlined access to candidate information allowing users to track their progress, 
+compare candidates, and make informed hiring decisions with efficient CLI commands, faster than a typical 
+mouse/GUI driven app.
+
 
 
 ### User stories
@@ -329,16 +335,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2. Setup instructions should be clear and simple, allowing users to get the app running within 5 minutes without installations.
+3. Should be able to hold up to 1000 candidates without a noticeable sluggishness in performance for typical usage.
+4. Commands should be intuitive and easy to remember, minimizing the learning curve for new users.
+5. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+6. Should respond to user input commands within 1 second for optimal usability.
+7. Should provide clear error messages and feedback for invalid input, allowing easy debugging for non-technical users.
+8. Sensitive information, like candidate emails and phone numbers, should be stored securely and not exposed in error logs or publicly accessible files.
+9. The application interface should be adaptable to different screen sizes and resolutions, ensuring usability on both standard and high-definition displays.
 
-*{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Command-Line Interface (CLI)**: A text-based interface where users input typed commands to perform specific tasks
+* **Graphical user interface (GUI)**: A graphical interface where users interact with graphical elements to perform specific tasks
+* **Debugging**: The process of identifying and correcting errors or bugs to perform an intended function.
 
 --------------------------------------------------------------------------------------------------------------------
 
