@@ -50,10 +50,10 @@ You can reach us at the email `e1249111[at]u.nus.edu`
 
 ### James Doe
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/incogdino.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/incogdino)]
+[[portfolio](team/incogdino.md)]
 
-- Role: Developer
-- Responsibilities: UI
+* Role: Testing
+* Responsibilities: Ensures the testing of the project is done properly and on time.
