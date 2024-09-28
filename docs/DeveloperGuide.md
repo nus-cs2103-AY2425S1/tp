@@ -306,7 +306,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `HiredFiredPro` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `HiredFiredPro`)
 
 ## Use Case 1: Add Candidate to Shortlist
 **Actor**: Hiring Manager  
@@ -314,7 +314,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Main Success Scenario**:
 1. Hiring Manager enters the command to add a candidate.
 2. HiredFiredPro adds the candidate.
-3. Use case ends.
 
 **Extensions**:
 - 1a. HiredFiredPro detects an error in the entered data.
@@ -326,6 +325,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Command Example**:  
 `add n/John Doe j/Software Engineer p/98765432 e/johnd@example.com a/123 Main St`
 
+Use case ends.
 
 ---
 
@@ -335,8 +335,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Main Success Scenario**:
 1. Hiring Manager enters the command to delete a candidate by specifying the candidate's index in the list.
 2. The system deletes the candidate from the list.
-3. The system displays a success message.
-4. Use case ends.
 
 **Extensions**:
 - 1a. The list is empty: The system displays a message indicating there are no candidates to delete.
@@ -344,6 +342,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Command Example**:  
 `delete 1`
+
+Use case ends.
 
 
 ---
@@ -354,7 +354,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Main Success Scenario**:
 1. Hiring Manager enters the command to list all candidates.
 2. The system retrieves and displays the list of candidates in alphabetical order.
-3. Use case ends.
 
 **Extensions**:
 - 2a. The list is empty: The system displays a message indicating no candidates are currently listed.
@@ -362,6 +361,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Command Example**:  
 `list`
 
+Use case ends.
 
 ---
 
@@ -370,9 +370,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Main Success Scenario**:
 1. Hiring Manager enters the command with the candidate's name and job title.
-2. The system retrieves the candidate's status.
 3. The system displays the status of the candidate.
-4. Use case ends.
 
 **Extensions**:
 - 1a. The specified candidate does not exist: The system displays an error message.
@@ -380,6 +378,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Command Example**:  
 `view n/John Doe j/Software Engineer`
+
+Use case ends.
 
 
 ---
@@ -391,7 +391,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Hiring Manager enters the command with the candidate's name and job title.
 2. The system changes the candidate's status to either "hired" or "rejected."
 3. The system displays a success message.
-4. Use case ends.
 
 **Extensions**:
 - 2a. The specified candidate does not exist: The system displays an error message.
@@ -401,6 +400,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 `hire n/John Doe j/Software Engineer`  
 `reject n/Jane Smith j/Data Analyst`
 
+Use case ends.
 
 
 ### Non-Functional Requirements
