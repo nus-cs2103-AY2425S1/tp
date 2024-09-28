@@ -327,11 +327,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * Contact: An individual (e.g. student) stored in the system, typically having details regarding them such as their name, github username and etc.
 
-* Easy to use for new users: intuitive commands that are easy to understand and UI that is easy to navigate
+* Easy to use for new users: intuitive commands that are easy to understand and UI that is easy to navigate.
 
-* Mainstream OS: Windows, Linux, Unix, MacOS
+* Mainstream OS: Windows, Linux, Unix, MacOS.
 
-* Average typing speed: about 40 words per minute
+* Average typing speed: about 40 words per minute.
 
 * Uptime: The system should be operational during that period of time.
 
