@@ -306,40 +306,37 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
+(For all use cases below, the **System** is the `HiredFiredPro` and the **Actor** is the `user`, unless specified otherwise)
+
 ## Use Case 1: Add Candidate to Shortlist
 **Actor**: Hiring Manager  
-**Goal**: To add a candidate to the shortlist for a job position.
 
 **Main Success Scenario**:
 1. Hiring Manager enters the command to add a candidate.
-2. The system prompts for the candidate's details, including name, job title, phone number, email, and address.
-3. The system validates the provided details (e.g., correct format for phone, email).
-4. The system adds the candidate to the shortlist.
-5. The system displays a success message.
+2. HiredFiredPro adds the candidate.
+3. Use case ends.
 
 **Extensions**:
-- 3a. HiredFiredPro detects an error in the entered data.
-  - 3a1. HiredFiredPro requests for the correct data.
-  - 3a2. Hiring Manager enters new data.
-  - Steps 3a1-3a2 are repeated until the data entered are correct.
-  - Use case resumes from step 4.
-- 4a. The candidate is already on the shortlist: The system displays a duplicate error message.
+- 1a. HiredFiredPro detects an error in the entered data.
+  - 1a1. HiredFiredPro requests for the correct data.
+  - 1a2. Hiring Manager enters new data.
+  - Steps 1a1-1a2 are repeated until the data entered are correct.
+  - Use case resumes from step 2.
 
 **Command Example**:  
 `add n/John Doe j/Software Engineer p/98765432 e/johnd@example.com a/123 Main St`
 
-Use case ends.
 
 ---
 
 ## Use Case 2: Delete Candidate from Shortlist
 **Actor**: Hiring Manager  
-**Goal**: To remove a candidate from the shortlist.
 
 **Main Success Scenario**:
 1. Hiring Manager enters the command to delete a candidate by specifying the candidate's index in the list.
 2. The system deletes the candidate from the list.
 3. The system displays a success message.
+4. Use case ends.
 
 **Extensions**:
 - 1a. The list is empty: The system displays a message indicating there are no candidates to delete.
@@ -348,17 +345,16 @@ Use case ends.
 **Command Example**:  
 `delete 1`
 
-Use case ends.
 
 ---
 
 ## Use Case 3: View Candidate List
 **Actor**: Hiring Manager  
-**Goal**: To view the list of all candidates.
 
 **Main Success Scenario**:
 1. Hiring Manager enters the command to list all candidates.
 2. The system retrieves and displays the list of candidates in alphabetical order.
+3. Use case ends.
 
 **Extensions**:
 - 2a. The list is empty: The system displays a message indicating no candidates are currently listed.
@@ -366,18 +362,17 @@ Use case ends.
 **Command Example**:  
 `list`
 
-Use case ends.
 
 ---
 
 ## Use Case 4: View Candidate Status
 **Actor**: Hiring Manager  
-**Goal**: To view the status (e.g., hired, rejected) of a specific candidate.
 
 **Main Success Scenario**:
 1. Hiring Manager enters the command with the candidate's name and job title.
 2. The system retrieves the candidate's status.
 3. The system displays the status of the candidate.
+4. Use case ends.
 
 **Extensions**:
 - 1a. The specified candidate does not exist: The system displays an error message.
@@ -386,18 +381,17 @@ Use case ends.
 **Command Example**:  
 `view n/John Doe j/Software Engineer`
 
-Use case ends.
 
 ---
 
 ## Use Case 5: Mark Candidate Status as Hired or Rejected
 **Actor**: Hiring Manager  
-**Goal**: To update the status of a candidate to "hired" or "rejected."
 
 **Main Success Scenario**:
 1. Hiring Manager enters the command with the candidate's name and job title.
 2. The system changes the candidate's status to either "hired" or "rejected."
 3. The system displays a success message.
+4. Use case ends.
 
 **Extensions**:
 - 2a. The specified candidate does not exist: The system displays an error message.
@@ -407,7 +401,6 @@ Use case ends.
 `hire n/John Doe j/Software Engineer`  
 `reject n/Jane Smith j/Data Analyst`
 
-Use case ends.
 
 
 ### Non-Functional Requirements
