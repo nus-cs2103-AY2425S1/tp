@@ -21,9 +21,6 @@ public class SampleDataUtil {
 
     public static final Remark EMPTY_REMARK = new Remark("");
 
-    /**
-     * Returns an array of sample persons.
-     */
     public static Person[] getSamplePersons() {
         return new Person[] {
                 new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
@@ -47,9 +44,6 @@ public class SampleDataUtil {
         };
     }
 
-    /**
-     * Returns a sample {@code AddressBook} populated with sample persons.
-     */
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
@@ -60,13 +54,11 @@ public class SampleDataUtil {
 
     /**
      * Returns a tag set containing the list of strings given.
-     *
-     * @param strings The tags to be added to the set.
-     * @return A set of {@code Tag} objects.
      */
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
                 .map(Tag::new)
                 .collect(Collectors.toSet());
     }
+
 }
