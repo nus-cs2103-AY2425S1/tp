@@ -349,7 +349,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Command-Line Interface (CLI)**: A text-based interface where users input typed commands to perform specific tasks
+* **Graphical user interface (GUI)**: A graphical interface where users interact with graphical elements to perform specific tasks
+* **Debugging**: The process of identifying and correcting errors or bugs to perform an intended function.
 
 --------------------------------------------------------------------------------------------------------------------
 
