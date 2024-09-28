@@ -20,15 +20,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Team Lead
 
-### Jane Doe
+### Arvind Natarajan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/diegotheexplorar.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/DiegoTheExplorar)]
+[[portfolio](www.linkedin.com/in/arvind-natarajan-65aa77290)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Documentation
+* Responsibilities: I make sure codebase is well documented
 
 ### Johnny Doe
 
