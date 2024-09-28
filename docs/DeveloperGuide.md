@@ -275,16 +275,37 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a/an …​       | I want to …​                                                           | So that …​                                                                     |
+|-------|------------------|------------------------------------------------------------------------|--------------------------------------------------------------------------------|
+| `* * *` | CS2030S TA       | store student's github username                                        | I can easily reference them when grading assignments.                          |
+| `* * *` | user             | add the student's contact number                                       | I can easily reference them when I need to contact my students.                |
+| `* * *` | CS2030S TA       | add the contact details of other TAs                                   | I can quickly reach out for help or collaboration.                             |
+| `* * *` | CS2030S TA       | add contact details of professors                                      | I can easily reach them for guidance or to pass on important information.      |
+| `* * *` | CS2030S TA       | delete contacts easily                                                 | I dont clutter the list with unwanted contacts.                                |
+| `* * *` | CS2030S TA       | store the grades and progress of my students                           | I can keep track of which of my students need more guidance and follow up.     |
+| `* * *` | CS2030S TA       | store student's telegram username                                      | I can easily reference them and contact them when needed to.                   |
+| `* * *` | CS2030S TA       | see the student's MC or reasoning when they do not turn up for lessons | I can create make up lessons / check up on them.                               |
+| `* *` | CS2030S TA       | have a function to hide the details of students that I do not need     | I can only the the information that I want to see.                             |
+| `* *` | CS2030S TA       | view the last modification date of student contact details             | I can confirm the accuracy and recency of the information stored.              |
+| `* *` | CS2030S TA       | create contacts with optional fields                                   | I can resepct the privacy of my students.                                      |
+| `*`  | CS2030S TA       | search for a student’s GitHub username                                 | I can quickly access their repository for grading and feedback.                |
+| `*`  | potential user   | see the application populated with sample data                         | I can see how the app looks like when it is in use.                            |
+| `*`  | CS2030S TA       | put the contacts into different tabs                                   | I can easily navigate between different types of contacts.                     |
+| `*`  | CS2030S TA       | use the command line interface to search for contacts                  | I can integrate the tool smoothly into my existing workflow.                   |
+| `*`  | CS2030S TA       | search for the contact details of professors/ other TAs                | I can quickly contact them for help if needed.                                 |
+| `*`  | CS2030S TA       | find my students house in time                                         | I can offer them help in times of crisis.                                      |
+| `*`  | CS2030S TA       | organise the contact of my students                                    | I can view the details of each student with greater ease.                      |
+| `*`  | CS2030S TA       | import student contact information from a file                         | I can easily transfer data between devices.                                    |
+| `*`  | CS2030S TA       | export student contact information to a file                           | I can backup or share contact details with other TAs or professors if needed.  |
+| `*`  | CS2030S TA       | flag specific students for follow-up                                   | I can easily identify students who may need additional support or guidance.    |
+| `*`  | CS2030S TA       | choose to sort my students                                             | I can group students based on their proficiency.                               |
+| `*`  | CS2030S TA       | filter the contact details that is shown                               | I can easily find the information of a particular group.                       |
+| `*`  | CS2030S TA       | filter contacts based on a certain criteria                            | I can access a specific subset of students that I want.                        |
+| `*`  | CS2030S TA       | tag students with custom labels                                        | I can categorize students based on their progress or needs.                    |
+| `*`  | CS2030S TA       | use the command line to access my students work                        | have their work and contact and tags all tied together in one smooth workflow. |
+| `*`  | experienced user | create shortcuts for commands that I use frequently                    | I can access the frequently used information quickly.                          |
+| `*`  | new user         | use a help function to check what this app offers                      | I can easily have the details of the commands to use in my fingertips.         |
+| `*`  | CS2030S TA       | create automatic flags to indicate if a student's work is marked       | I can monitor grading deadlines so that I can stay on top of my responsibilities without missing any critical dates.                                 |
 
 ### Use cases
 
