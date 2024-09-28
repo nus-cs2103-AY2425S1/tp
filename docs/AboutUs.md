@@ -20,41 +20,32 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Team Lead
 
-### Jane Doe
+### Huang Jiaxi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/huangjiaxi1111.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/huangjiaxi1111)]
+[[portfolio](team/huangjiaxi1111.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Zhu Tianyi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/lithops-zty.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/lithops-zty)]
+[[portfolio](team/lithops-zty.md)]
 
 * Role: Developer
 * Responsibilities: UI
+
+### Tan Wei Seng
+
+<img src="images/weiseng18.png" width="200px">
+
+[[github](http://github.com/weiseng18)]
+[[portfolio](team/weiseng18.md)]
+
+* Role: Developer, Git expert
+* Responsibilities: Model, Testing
