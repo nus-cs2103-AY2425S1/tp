@@ -294,8 +294,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to add a new person, with the appropriate commands
-2.  `BizBook` displays a success message along with the details of the newly added person
+1.  User requests to add a new person.
+2.  `BizBook` displays a success message along with the details of the newly added person.
 
     Use case ends.
 
@@ -305,16 +305,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1 `BizBook`shows an error message.
 
       Use case resumes at step 1.
-
-
-* *a. `BizBook` detects an error in the entered command.
-
-    * *a1 `BizBook`  requests for a valid command.
-    * *a2 User enters new command.
-
-      Steps *a1-*a2 are repeated until a valid command is input.
-
-      Use case ends.
 
 
 
