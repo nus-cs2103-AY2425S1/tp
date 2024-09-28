@@ -11,7 +11,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Eline Ngu Xiang Ee
 
 <img src="images/elinengu.png" width="200px">
 
