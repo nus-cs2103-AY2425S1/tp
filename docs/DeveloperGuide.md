@@ -291,18 +291,32 @@ mouse/GUI driven app.
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Priorities: High (must have) - `Essential`, Medium (nice to have) - `Typical`, Low (unlikely to have) - `Novel`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority  | As a …​        | I want to …​                                                                                     | So that I can…​                                                                       |
+|-----------|----------------|--------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------|
+| Novel     | CEO            | receive notifications when candidates complete a new interview stage                             | stay updated on the hiring progress                                                   |
+| Essential | Hiring Manager | view a list of candidates                                                                        | quickly assess who has applied for the position                                       |
+| Essential | Hiring Manager | mark candidates as "hired" or "rejected,"                                                        | finalize the hiring process                                                           |
+| Typical   | Hiring Manager | filter candidates according to different categories e.g. more/less experienced                   | easily pick out the potential candidates.                                             |
+| Essential | Hiring Manager | see the current status of a candidate (e.g., shortlisted, rejected)                              | track their progress                                                                  |
+| Novel     | Hiring Manager | schedule interviews                                                                              | avoid scheduling conflicts                                                            |
+| Novel     | Hiring Manager | export the list of shortlisted candidates to a CSV file                                          | share it with other team members                                                      |
+| Typical   | Hiring Manager | assign interviewees to interviewers                                                              | allocate tasks to interviewers more efficiently                                       |
+| Novel     | Hiring Manager | compare multiple candidates side-by-side based on their interview scores, experience, and skills | make informed hiring decisions                                                        |
+| Typical   | Hiring Manager | see when the candidate is available to start work e.g. graduation date                           | prepare the necessary onboarding process based on when the candidate begins their job |
+| Typical   | Hiring Manager | see candidates’ salary expectations                                                              | prepare for salary negotiation with the candidate                                     |
+| Typical   | Hiring Manager | search for candidates based on keywords (skills, position, etc.)                                 | quickly find the right profiles                                                       |
+| Novel     | Interviewer    | access a repository of standardized coding questions                                             | structure interviews efficiently and test candidates sufficiently                     |
+| Novel     | Interviewer    | share feedback with other developers                                                             | collaborate and make informed hiring decisions                                        |
+| Typical   | Interviewer    | see candidates’s programming languages                                                           | ensure that they have sufficient programming knowledge based on company needs         |
+| Typical   | Interviewer    | see the list of candidates to interview/ already interviewed                                     | keep track and organize the people I need to interview                                |
+| Typical   | Interviewer    | fill out a scorecard for each candidate during the interview                                     | objectively evaluate their performance across multiple criteria                       |
+| Typical   | Interviewer    | collaborate with hiring managers to align on candidate evaluation criteria                       | ensure we are looking for the right fit                                               |
+| Typical   | Interviewer    | attach files (resumes, portfolios) to a candidate's profile                                      | have all relevant documents in one place                                              |
+| Typical   | Interviewer    | view interview schedules for each candidate                                                      | keep track of upcoming interviews                                                     |
+| Essential | Interviewer    | add candidates                                                                                   | keep track of current candidates                                                      |
+| Essential | Interviewer    | delete candidates                                                                                | keep track of current candidates                                                      |
 
 ### Use cases
 
