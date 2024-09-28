@@ -290,12 +290,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC1 - List all people saved in `BizBook`**
+**Use case: UC1 - List all people saved in the System**
 
 **MSS**
 
-1.  User requests to list all people saved in their `BizBook` by entering a command.
-2.  `BizBook` shows a list of persons.
+1.  User requests to list all people saved in the System by entering a command.
+2.  System shows a list of persons.
 
     Use case ends.
 
@@ -303,14 +303,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. If there are no contacts stored in the system.
 
-  * 1a1 `BizBook` informs users that they have no contacts stored.
+  * 1a1 System informs user that they have no contacts stored.
   
     * Use case ends.
 
 
-* 1b. `BizBook` detects an error in the entered command.
+* 1b. The System detects an error in the entered command.
 
-    * 1b1 `BizBook` requests for a valid command.
+    * 1b1 System requests for a valid command.
 
       Use case resumes at step 1.
 
