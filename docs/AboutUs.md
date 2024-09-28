@@ -14,7 +14,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/youngseopark05.png" width="200px">
 
 [[Github](http://github.com/youngseopark05)]
-[[About Me](team/youngseopark.md)]
+[[About Me](team/youngseopark05.md)]
 
 * Role: Developer, Designer
 * Responsibilities: UI, Scheduling and Tracking
