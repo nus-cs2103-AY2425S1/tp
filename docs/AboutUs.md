@@ -19,15 +19,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Toh Jia Han
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/tohjh.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/tohjh)]
+[[portfolio](team/tohjh.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Developer
+* Responsibilities: Deliverables and deadline
 
 ### Johnny Doe
 
