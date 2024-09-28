@@ -294,7 +294,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to add a new person.
+1.  User requests to add a new person by entering a command.
 2.  `BizBook` displays a success message along with the details of the newly added person.
 
     Use case ends.
