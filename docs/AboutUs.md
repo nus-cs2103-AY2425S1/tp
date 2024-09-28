@@ -19,7 +19,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/psh12320)]
 [[portfolio](team/AboutUs.md)]
 
-* Role: Project Advisor
+- Role: Project Advisor
 
 ### Sankar Ram Subramanian
 
@@ -37,8 +37,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Data
+- Role: Developer
+- Responsibilities: Data
 
 ### Ulrico Nolan Orlando
 
@@ -47,15 +47,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/ulricolo7)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+- Role: Developer
+- Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Peter Hadi Wijaya
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/peterhw963.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/PeterHW963)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: UI
+- Role: Slacker
+- Responsibilities: Nothing
