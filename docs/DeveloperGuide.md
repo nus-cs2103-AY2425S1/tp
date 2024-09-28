@@ -263,7 +263,7 @@ _{Explain here how the data archiving feature will be implemented}_
 **Target user profile**:
 
 A sales and customer relations representative working in the F&B industry. In
-particular, this representative works with B2B transactions.
+particular, this representative works with B2B sales.
 
 * has a need to manage a significant number of business contacts
 * prefer desktop apps over other types
