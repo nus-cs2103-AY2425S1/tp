@@ -12,7 +12,7 @@ You can reach us at the following emails:
 
 ### Youngseo Park
 
-<img src="images/youngseopark05.png" width="200px">
+<img src="../images/youngseopark05.png" alt="Youngseo Park's picture" width="200px" style="display: block; margin: 0 auto" />
 
 [[Github](http://github.com/youngseopark05)]
 [[About Me](team/youngseopark05.md)]
