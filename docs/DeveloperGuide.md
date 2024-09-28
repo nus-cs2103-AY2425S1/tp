@@ -335,11 +335,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2. Setup instructions should be clear and simple, allowing users to get the app running within 5 minutes without installations.
+3. Should be able to hold up to 1000 candidates without a noticeable sluggishness in performance for typical usage.
+4. Commands should be intuitive and easy to remember, minimizing the learning curve for new users.
+5. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+6. Should respond to user input commands within 1 second for optimal usability.
+7. Should provide clear error messages and feedback for invalid input, allowing easy debugging for non-technical users.
+8. Sensitive information, like candidate emails and phone numbers, should be stored securely and not exposed in error logs or publicly accessible files.
+9. The application interface should be adaptable to different screen sizes and resolutions, ensuring usability on both standard and high-definition displays.
 
-*{More to be added}*
 
 ### Glossary
 
