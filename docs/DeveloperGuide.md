@@ -290,30 +290,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC2 - List all people saved in `BizBook`**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list all people saved in their `BizBook`.
+2.  `BizBook` shows a list of persons.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. If there are no contacts stored in the system.
+  
+  * Use case ends.
 
-  Use case ends.
 
-* 3a. The given index is invalid.
+* 1b. `BizBook` detects an error in the entered command.
 
-    * 3a1. AddressBook shows an error message.
+    * 1b1 `BizBook` requests for a valid command.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
 *{More to be added}*
+
+
 
 ### Non-Functional Requirements
 
