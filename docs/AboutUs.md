@@ -21,15 +21,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 - Role: Project Advisor
 
-### Jane Doe
+### Sankar Ram Subramanian
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/marraknas.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/marraknas)]
 [[portfolio](team/johndoe.md)]
 
-- Role: Team Lead
-- Responsibilities: UI
+* Role: Developer
+* Responsibilities: Documentation
 
 ### Johnny Doe
 
@@ -57,5 +57,5 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/PeterHW963)]
 [[portfolio](team/johndoe.md)]
 
-- Role: Developer
+- Role: Slacker
 - Responsibilities: Nothing
