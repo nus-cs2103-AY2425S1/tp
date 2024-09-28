@@ -21,15 +21,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Ensure project deliverables are done on time and in the right format
 
-### Johnny Doe
+### Thaddeus Foo
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/foothaddeus.png" width="200px">
 
-[[github](http://github.com/johndoe)] 
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/foothaddeus)] [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Documentation
+* Responsibilities: Quality of Project Documents
 
 ### Siddardha Reddy Sanagala
 
