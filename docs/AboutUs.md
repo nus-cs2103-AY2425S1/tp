@@ -11,27 +11,27 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Li Xiner
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/xiner.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/Xinghuajulia)]
+[[portfolio](team/xiner.md)]
 
 * Role: Project Advisor
 
-### Jane Doe
+### Peter Hadi Wijaya
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/peter.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/PeterHW963)]
+[[portfolio](team/peter.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Joseph Doe
 
 <img src="images/johndoe.png" width="200px">
 
@@ -50,12 +50,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Ulrico Nolan Orlando
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/Rico.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/ulricolo7)]
+[[portfolio](team/rico.md)]
 
 * Role: Developer
 * Responsibilities: UI
