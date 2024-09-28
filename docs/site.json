@@ -4,7 +4,7 @@
   "titleSuffix": "AddressBook Level-3",
   "faviconPath": "images/SeEduLogo.png",
   "style": {
-    "codeTheme": "dark"
+    "codeTheme": "light"
   },
   "ignore": [
     "_markbind/layouts/*",
