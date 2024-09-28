@@ -13,7 +13,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  *     arrivalDate is valid as declared in {@link #isValidArrivalDate(LocalDateTime)}
  */
 public class Goods {
-    
+
     public static final String MESSAGE_CONSTRAINTS = "Product quantity cannot be negative or 0!";
     public static final String VALIDATION_REGEX = "/^[\\w\\-\\s]+$/";
 
@@ -29,7 +29,7 @@ public class Goods {
     /**
      * Constructs a {@Code Goods}.
      * All fields should not be null.
-     * 
+     *
      * @param goodsName A valid goods name.
      * @param quantity A valid quantity.
      * @param category A category for the goods.
