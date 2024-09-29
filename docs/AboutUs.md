@@ -50,10 +50,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### TOH KENG HIAN
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kenghian.png" width="200px">
 
 [[github](https://github.com/KengHian)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/kenghian.md)]
 
 * Role: Developer
-* Responsibilities: 
+* Responsibilities: Code quality
