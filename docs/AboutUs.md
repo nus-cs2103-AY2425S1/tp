@@ -54,3 +54,4 @@ You can reach us at our personal email respectively
 [[portfolio](https://github.com/vicelyav)]
 
 * Role: Code Quality
+
