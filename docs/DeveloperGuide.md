@@ -280,7 +280,10 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: \
+Allows NUS CS freshmen to easily locate the admin contact details when needed, 
+which helps them better manage contact details of their professors, teaching assistants, classmates, CCA mates, offices, emergency helplines, etc.
+so that they can focus more on their study.
 
 
 ### User stories
