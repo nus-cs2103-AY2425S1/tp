@@ -271,8 +271,9 @@ _{Explain here how the data archiving feature will be implemented}_
 - prefers typing and keyboard shortcuts to mouse interactions
 - is reasonably comfortable using and prefers CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
 
+HRConnect provides fast access to employee, project, and candidate contact details, optimized for HR professionals who prefer a CLI. It allows quick updates, talent pool organization, and candidate tracking, all through a streamlined, command-based interface designed for speed and efficiency. It also helps with assignment of HR staff to HR events and cases.
 
 ### User stories
 
