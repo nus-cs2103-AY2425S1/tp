@@ -6,7 +6,7 @@
 
 * This is **a project done by Software Engineering (SE) students**, built as a **brownfield project** using **AB3 as a base**.<br>
 * The project simulates an ongoing software project for a desktop application called _EduManage_, designed for **tuition teachers** to manage student contact information and details.
-  * It is **written in OOP fashion**, and provides a **well-written**, with around **6 KLoC** &ndash; larger than beginner-level SE modules.
+  * It is **written in OOP fashion**, and provides a **well-written** codebase, with around **6 KLoC** &ndash; larger than beginner-level SE modules.
   * The project includes **comprehensive user and developer documentation**.
 * This project is called `EduManage` to reflect its purpose in managing student contacts and information for educational purposes.
 * For the detailed documentation of this project, see the **[EduManage Product Website](https://https://ay2425s1-cs2103t-w08-3.github.io/tp/)**.
