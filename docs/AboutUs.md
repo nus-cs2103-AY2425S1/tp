@@ -9,7 +9,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### Boon Hsuan
+### Boon Hsuan is a donkey
 
 <img src="images/flyingdonkeys.png" width="200px">
 
