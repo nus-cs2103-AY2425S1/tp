@@ -334,13 +334,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | expert user                                | be able to export my data in standard formats (e.g., iCal, CSV)                   | I can easily migrate my information if needed                                             |
 | `*`      | power user                                 | be able to customize the app's interface and features to my preferences           | I can optimize my workflow                                                                |
 
-*{More to be added}*
-
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+For all use cases below, the **System** is the `SeeRee 2.0` and the **Actor** is the `user`, unless specified otherwise
 
-**Use case: Delete a person**
+<u>**Use case: UC0 - Delete a person**</u>
 
 **MSS**
 
@@ -363,20 +361,127 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-*{More to be added}*
+<u>**Use Case: UC1 - Adding events to a schedule**</u>
+
+**Preconditions:**
+- User is logged in with access to own schedule.
+
+**Guarantees**
+- User’s schedule will be updated with new events only if the command is successful.
+- User’s old events on the schedule will not be edited.
+
+**MSS**
+1. User requests to add a new event to their schedule.
+2. System adds a new event to the user's schedule.
+3. User’s schedule is updated with new event.
+
+   Use case ends.
+
+**Extensions**
+- 1a. System detects an error in the entered data command format.
+
+    - 1a1. System requests the user to enter the proper command format.
+
+        Use case resume from step 1.
+
+- 1b. System detects a duplicate error in the entered data command.
+
+    - 1b1. System requests the user to enter a non-conflicting time for the event.
+
+        Use case resumes from step 1.
+
+<u>**Use Case: UC2 - Delete events of a schedule**</u>
+**Preconditions**
+**Guarantees**
+**MSS**
+**Extensions**
+
+<u>**Use Case: UC3 - View schedule**</u>
+**Preconditions**
+**Guarantees**
+**MSS**
+**Extensions**
+
+<u>**Use Case: UC4 - View contact information**</u>
+
+**Preconditions**
+- User is logged in with access to own contacts
+
+**Guarantees**
+- Contacts with that name will be displayed.
+- If no match, display a message notifying the user that no contacts with that name are found.
+
+**MSS**
+1. User finds for contact using name.
+2. System looks for contacts with that name.
+3. System displays all contacts with that name.
+
+   Use case ends.
+
+**Extensions**
+- 2a. System is unable to find any user with that name.
+
+    - 2a1. System notifies the user it is unable to find any user with that name.
+    
+        Use case ends.
+
+<u>**Use Case: UC5 - Editing an existing schedule**</u>
+
+**Preconditions**
+- Users are logged in with access to their own schedule.
+- The schedule to be edited already exists in the system.
+
+**Guarantees**
+- The schedule will be updated with the provided details only if the command is successful.
+- The schedule's details will remain unchanged if the command fails.
+
+**MSS**
+1. User requests to edit an existing schedule using the edit-schedule command.
+2. System checks the format of the entered data and verifies that the index is in range.
+3. System updates the schedule with the provided name, date, time, and contact changes (if specified).
+4. User's schedule is successfully updated.
+
+    Use case ends.
+
+**Extensions**
+- 1a. The system detects an error in the entered command format (e.g., invalid date or time format, index out of range).
+
+    - 1a1. The system displays an error message: "Invalid edit-schedule format. Please make sure that the index is in range. d/[DATE] is in the format of DD-MM-YYYY. t/[TIME] is in the format of hhmm (24 hours notation)."
+
+        Use case resumes from step 1.
+
+- 1b. The system detects that the contact index to be added or removed is out of range or invalid.
+
+    - 1b1. The system displays an error message indicating the invalid contact index.
+
+        Use case resumes from step 1.
+
+- 1c. The system detects that the contact specified for removal is not in the current schedule.
+
+    - 1c1. The system displays an error message: "Contact not found in the schedule."
+
+        Use case resumes from step 1.
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4.  Is portable, the software should work without requiring an installer, only requires Java 17.
+5.  The data should be stored locally and should be in a human editable text file.
+6.  The product should be for a single user.
+7.  The product is not required to use a Database Management System to store data.
+8.  The product is not required to depend on your a remote server.
+9.  The GUI should work well, the GUI should be usable.
+10. The product should be packaged into a single JAR file.
+11. The product is not required to use third-party frameworks/libraries/services.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Schedule**: A user-defined event that includes information such as a name, date, time, and associated contacts. Can be edited, added, or deleted.
+* **Contact**: An individual or entity that is linked to a schedule. Contacts can be added or removed from schedules via commands.
 
 --------------------------------------------------------------------------------------------------------------------
 
