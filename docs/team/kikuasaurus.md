@@ -1,6 +1,6 @@
 ---
   layout: default.md
-  title: "kikuasaurus' Project Portfolio Page"
+  title: "KiKuasaurus' Project Portfolio Page"
 ---
 
 ### Project: StaffSync

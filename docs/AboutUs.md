@@ -11,7 +11,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### kikuasaurus
+### KiKuasaurus
 
 <img src="images/kikuasaurus.png" width="200px">
 
