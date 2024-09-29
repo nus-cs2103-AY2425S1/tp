@@ -298,14 +298,20 @@ so that they can focus more on their study.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​                                                                                                      | I want to …​                                           | So that I can…​                                         |
+|----------|--------------------------------------------------------------------------------------------------------------|--------------------------------------------------------|---------------------------------------------------------|
+| `* * *`  | Y1 CS Student                                                                                                | add a contact                                          | start tracking my contacts on this app                  |
+| `* * *`  | Y1 CS student who prefers a clean address book with useful contacts only                                     | delete contacts                                        | remove contacts that I no longer need to keep track of  |
+| `* * *`  | Y1 CS student who hates using a mouse or touchpad                                                            | access to all functionalities of the app with keyboard | manage the contacts in the most efficient way           |
+| `* *`    | Y1 CS student who wants to seek clarifications/actions from a professor regarding certain issues             | find contact details of the professor(s) for a course  | seek help/assistance with ease                          |
+| `* *`    | Y1 CS student who is sick before a tutorial/lab/exam                                                         | find contact details of my TA                          | easily inform them about my absence on time             |
+| `* *`    | Y1 CS student who is involved in any accident or emergency                                                   | find contact details of campus security                | protect me and my friends' safety immediately           |
+| `* *`    | Y1 CS student who has financial concerns for school                                                          | find contact details of nus financial office           | settle any financial related issues                     |
+| `* *`    | New user                                                                                                     | see usage instructions                                 | refer to instructions when I forget how to use the App  |
+| `*`      | Y1 CS student who is a fresh man in a cca                                                                    | find contact details of my cca leader/friends          | settle any cca-related issues with them                 |
+| `*`      | Y1 CS student who are unsure about the procedure of making an appointment with a doctor                      | find contact details for UHC and NUH easily            | make appointment with doctor as early as possible       |
+| `*`      | Y1 CS student who are facing an academic challenges and mental issue                                         | find contact details of counselling service            | seek help and support from others before it is too late |
+| `*`      | Y1 CS student who lives in campus and don't know where to contact with if I need to enquire some information | find contact details of campus hostels easily          |                                                         |
 
 *{More to be added}*
 
