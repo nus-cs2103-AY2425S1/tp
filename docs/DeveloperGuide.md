@@ -325,7 +325,83 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: Add and view tasks for a student**
+
+**MSS**
+
+1.  User requests to list persons
+2.  AddressBook shows a list of persons
+3.  User requests to add a task to a specific student in the list
+4.  AddressBook updates the student’s outstanding tasks list
+5.  User requests to view list of tasks of the student
+6.  AddressBook displays the student’s outstanding tasks list
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given person is invalid/ cannot be found.
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. Wrong format for deadline was given.
+
+    * 3b1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+* 3c. No task description was given.
+
+    * 3c1. AddressBook shows an error message.
+
+        Use case resumes at step 2.
+
+* 5a. The given person is invalid/ cannot be found.
+
+    * 5a1. AddressBook shows an error message.
+
+      Use case resumes at step 4.
+
+**Use case: Add tags for a student**
+
+**MSS**
+
+1.  User requests to list persons
+2.  AddressBook shows a list of persons
+3.  User requests to tag a specific student in the list according to his/ her school level and/ or subject
+4.  AddressBook updates the corresponding tags of the student
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given person is invalid/ cannot be found.
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. Multiple school level tags were given.
+
+    * 3b1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+* 3c. No tags were given.
+
+    * 3c1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
 
 ### Non-Functional Requirements
 
