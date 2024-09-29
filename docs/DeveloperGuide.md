@@ -325,6 +325,88 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Add  notes to a person**
+
+**MSS**
+
+1.  User requests to list persons
+2.  AddressBook shows a list of persons
+3.  User requests to update the notes  of a specific person in the list
+4.  AddressBook updates the notes details the person
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given name is invalid.
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+
+**Use case: View Specific student**
+
+**MSS**
+
+1.  User requests to list persons
+2.  AddressBook shows a list of persons
+3.  User requests to View a specific user
+4.  AddressBook shows the details from the person
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given person is invalid/ cannot be found.
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Add tags for a student**
+
+**MSS**
+
+1.  User requests to list persons
+2.  AddressBook shows a list of persons
+3.  User requests to tag a specific student in the list according to his/her school level and/or subject
+4.  AddressBook updates the corresponding tags of the student
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given person is invalid/ cannot be found.
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. Multiple school level tags were given.
+
+* 3b1. AddressBook shows an error message.
+
+  Use case resumes at step 2.
+
+*3c. No tags were given.
+
+* 3c1. AddressBook shows an error message.
+
+  Use case resumes at step 2.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
