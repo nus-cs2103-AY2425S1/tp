@@ -22,3 +22,7 @@ command line interface, and faces lack of time to keep track of his students' co
 ## Find Out More
 
 For detailed documentation of this project, see our [Product Website](https://ay2425s1-cs2103t-f14b-2.github.io/tp).
+
+---
+
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
