@@ -52,7 +52,6 @@ public class CommandTestUtil {
     public static final String REMARK_DESC_BOB = " " + PREFIX_REMARK + VALID_REMARK_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
-
     public static final String VALID_REMARK_ALICE = "like apples";
     public static final String VALID_REMARK_BENSON = "good friend";
     public static final String VALID_REMARK_CARL = "enjoys hiking";
