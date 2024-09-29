@@ -1,7 +1,7 @@
 {
   "baseUrl": "",
   "titlePrefix": "StaffSync",
-  "titleSuffix": "AddressBook Level-3",
+  "titleSuffix": "StaffSync",
   "faviconPath": "images/SeEduLogo.png",
   "style": {
     "codeTheme": "light"
