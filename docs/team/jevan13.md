@@ -1,6 +1,6 @@
 ---
   layout: default.md
-  title: "Jevan's Project Portfolio Page"
+  title: "jevan13's Project Portfolio Page"
 ---
 
 ### Project: StaffSync
