@@ -290,7 +290,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `BizBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC1 - Add a person**
+**Use case: UC2 - Add a person**
 
 **MSS**
 
@@ -301,10 +301,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. There is an error in the user's command.
-    * 1a1 System shows an error message.
+- 1a. There is an error in the user's command.
+  - 1a1 System shows an error message.
 
-      Use case resumes at step 1.
+  Use case resumes at step 1.
 
 
 
