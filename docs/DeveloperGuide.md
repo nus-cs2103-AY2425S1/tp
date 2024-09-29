@@ -329,16 +329,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+1.  Should work on any _mainstream OS_ on either 32-bit or 64-bit systems as long as it has Java `17` or above installed.
+2.  Should be able to hold up and deal with up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4.  A user should be able to run the program without the need to install libraries or other dependencies. They should only need Java to run the program and the program should be self contained.
+5.  The application should be resizable and by default, be of a size that is usable on a 1920x1080 screen.
+6.  The program should be backward compatible for version changes and previous saved data should be able to be loaded without any issues.
+7.  Our application should have an _MVP_ by the end of v1.3, around the end of week 9.
+8.  Our application should have an _Alpha Release_ by the end of v1.4, around the end of week 10.
+9.  Our application should have a _Release Candidate_ by the end of v1.5, around the end of week 11.
+10.  Our application should have a _Public Release_ by the end of v1.6, around the end of week 12.
+11.   Our application will NOT handle any security or privacy related to data inserted into the application. It is the user's responsibility to ensure that the data is not sensitive or private and that it will not be leaked.
+12.   Our program should not have any memory leaks and should not consume more memory than necessary.
+13.   Our program should not crash with any user input.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **MVP**: Minimum Viable Product - The minimum set of features that is required to make the product usable by the target user
+* **Alpha Release**: A version of the software that is feature complete but may have bugs
+* **Release Candidate**: A version of the software that is feature complete and has no known bugs
+* **Public Release**: A version of the software that is released to the public with any bugs squashed after Release Candidate
 
 --------------------------------------------------------------------------------------------------------------------
 
