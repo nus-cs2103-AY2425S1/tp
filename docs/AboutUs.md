@@ -17,3 +17,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Software Developer
 
+### Ignatius Oey
+
+<img src="images/ignatiusoey09.png.png" width="200px">
+
+[[github](https://github.com/ignatiusoey09)]
+
+* Role: Developer
+* Responsibilities: Developing
