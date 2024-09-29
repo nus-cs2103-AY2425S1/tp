@@ -47,7 +47,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/tansanchian.png" width="200px">
 
 [[github](http://github.com/tansanchian)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/tansanchian.md)]
 
 * Role: Software Engineer
 * Responsibilities: Backend Development
