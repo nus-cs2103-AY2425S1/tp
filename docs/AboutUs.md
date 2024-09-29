@@ -12,7 +12,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### Boon Hsuan is a weeb
+### Boon Hsuan
 
 <img src="images/flyingdonkeys.png" width="200px">
 
