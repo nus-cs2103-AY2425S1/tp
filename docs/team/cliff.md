@@ -7,4 +7,4 @@ title: John Doe's Project Portfolio Page
 
 Aspiring Game Developer, Y2 CS. Language Studies (Japanese) Minor
 
-![cliff.png](..%2Fimages%2Fcliff.png)
+![domokunx.png](..%2Fimages%2Fdomokunx.png)
