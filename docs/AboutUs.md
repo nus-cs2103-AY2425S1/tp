@@ -21,7 +21,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 * Role: Project Advisor
 
-### Jane Doe
+### infinitytwo
 
 <img src="images/infinitytwo.png" width="200px">
 
