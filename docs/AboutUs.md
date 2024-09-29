@@ -1,6 +1,6 @@
 ---
   layout: default.md
-  title: "About Us"
+title: "About Us"
 ---
 
 # About Us
@@ -9,13 +9,41 @@ We are a team based in the [School of Computing, National University of Singapor
 
 You can reach us at the email `seer[at]comp.nus.edu.sg`
 
-## Project team
+## PlanPerfect Project Team
 
 ### Yash Raj Khandelwal
 
 <img src="images/yxshrk.jpg" width="200px">
 
 * Role: Software Developer
+* Responsibilities: Software Developing
+
+### Liyam 
+
+<img src="images/kikokidayo.png" width="200px">
+
+[[github](https://github.com/kikokidayo)]
+
+* Role: Developer 
+* Responsibilities: Developing
+
+### Maegan Tan
+
+<img src="images/maertan.png" width="200px">
+
+[[github](http://github.com/maertan)]
+
+* Role: Developer
+* Responsibilities: Developing
+
+### Aditya Ghosh
+
+<img src="images/adipanda2002.png" width="200px">
+
+[[github](https://github.com/adipanda2002)]
+
+* Role: Software Engineer
+* Responsibilities: Software Engineering
 
 ### Ignatius Oey
 
