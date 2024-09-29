@@ -317,9 +317,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1.  The system should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2.  The system should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
+3.  The system should maintain data integrity, where system should ensure that data is accurate and consistent, preventing duplicate entries.
+4.  The system should be developed in a modular way for easier updates and bug fixes.
+5.  The system should ensure data consistency accross all instances.
+6.  The system should continue functioning in the event of a missing or corrupted save file.
+7.  The system should encrypt sensitive data to follow data protection laws.
+8.  The interface should be intuitive and easy to use.
 
 *{More to be added}*
 
