@@ -21,7 +21,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 * Role: Project Advisor
 
-### infinitytwo
+### InfinityTwo
 
 <img src="images/infinitytwo.png" width="200px">
 
