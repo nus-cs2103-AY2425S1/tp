@@ -11,6 +11,28 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+
+### Hans Neddyanto Tandjung
+
+
+<img src="images/hansneddyanto.png" width="200px">
+
+[[homepage](https://github.com/hansneddyanto)]
+[[github](https://github.com/hansneddyantoe)]
+[[portfolio](https://github.com/hansneddyanto)]
+
+* Role: Project Manager
+
+
+### Chin Sek Yi
+<img src="images/chinsekyi.png" width="200px">
+
+[[homepage](http://www.comp.nus.edu.sg/~damithch)]
+[[github](https://github.com/ChinSekYi)]
+[[portfolio](https://github.com/ChinSekYi)]
+
+* Role: Product Manager
+
 ### Vicelya Visakha
 
 <img src="images/vicelyav.png" width="200px">
@@ -20,16 +42,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](https://github.com/vicelyav)]
 
 * Role: Code Quality
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
 
 ### Johnny Doe
 
