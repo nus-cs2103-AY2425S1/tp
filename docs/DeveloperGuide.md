@@ -291,32 +291,342 @@ _{More to be added}_
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `KonTActs` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Add contacts**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User chooses to add a contact.
+2. KonTActs requests for the contact details.
+3. User enters the contact details.
+4. KonTActs adds the new contact.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
-- 2a. The list is empty.
+- 3a. KonTActs detects an error in the input format.
 
-  Use case ends.
+  - 3a1.KonTActs requests for the corrected input.
+  - 3b2. User enters a new input.
+  - Steps 3a1 - 3a2 are repeated until input format is correct.
 
-- 3a. The given index is invalid.
+    Use cases resume from step 4.
 
-  - 3a1. AddressBook shows an error message.
+<br>
 
-    Use case resumes at step 2.
+**Use case: UC02 - Delete contacts**
 
-_{More to be added}_
+**Precondition**
+
+1. The task that the user wants to delete exists.
+
+**MSS**
+
+1. User indicates to delete a task.
+2. KonTActs deletes the tasks and indicates success.
+
+   Use case ends.
+
+**Extensions**
+
+- 1a. KonTActs detects an error in the input.
+
+  - 1a1.KonTActs requests for the user to try again.
+  - 1a2. User enters the command again
+  - Steps 1a1 - 1a2 are repeated until the input entered is correct.
+
+    Use case resumes from step 2.
+
+<br>
+
+**Use case: UC03 - Add grades of students**
+
+**Precondition**
+
+1. The student that the user wants to add grades exists.
+2. The assignment that the user wants to add a grade to exists.
+
+**MSS**
+
+1. User chooses to add grades for a student.
+2. KonTActs requests for details of the student alongside the assignment and grade.
+3. User enters the requested details.
+4. KonTActs updates the grade of the student.
+
+   Use case ends.
+
+**Extensions**
+
+- 4a. KonTActs detects an error in the entered data.
+
+  - 4a1. KonTActs requests for the correct data.
+  - 4a2. User enters new data.
+  - Steps 4a1-4a2 are repeated until the data entered are correct.
+
+    Use case resumes from step 4.
+
+    <br>
+
+**Use case: UC04 - View Contact**
+
+**MSS**
+
+1. Current UI is not showing the entire contact list.
+2. User chooses to view the entire contact list.
+3. KonTActs displays the full list of contacts.\
+   Use case ends.
+
+**Extensions**
+
+- 1a. User has previously filtered the contact list.
+
+  - 1a1. KonTActs displays the full contact list, removing the previous filters.
+
+    Use case ends.
+
+- 1b. KonTActs detects an error (e.g., unable to retrieve contacts).
+
+  - 1b1. KonTActs displays an error message.
+
+    Use case ends.
+
+<br>
+
+**Use case: UC05 - Update contacts**
+
+**MSS**
+
+1. TA chooses to update a contact’s details.
+2. KonTActs requests the contact’s identifier.
+3. TA enters the identifier of the contact to update.
+4. KonTActs displays the current details and requests the changes.
+5. TA updates the relevant details.
+6. KonTActs saves and displays the changes.
+
+   Use case ends.
+
+**Extensions**
+
+- 3a. KonTActs identifies that there is no such contact.
+
+  - 3a1. KonTActs requests for the correct data.
+  - 3a2. TA enters the correct data.
+  - Steps 3a1-3a2 are repeated until the data entered are correct.
+
+    Use case resumes from step 4.
+
+<br>
+
+**Use case: UC06 - Filter Contact List**
+
+**MSS**
+
+1. User chooses to filter the contact list.
+2. KonTActs requests the filter criteria (current overall grades, name, tele handle).
+3. User enters the filter criteria.
+4. KonTActs filters the contact list based on the entered criteria and displays the filtered list.
+
+   Use case ends.
+
+**Extensions**
+
+- 3a. KonTActs detects an error in the entered filter criteria (e.g., incorrect input - invalid score input).
+
+  - 3a1. KonTActs requests for the correct filter criteria.
+  - 3a2. Users enter new criteria.
+  - Steps 3a1-3a2 are repeated until the criteria entered are valid.
+
+    Use case resumes from step 4.
+
+- \*a. At any time, User chooses to cancel the filter action.
+- \*a1. KonTActs stops the filter operation and returns to the unfiltered contact list by using list
+
+<br>
+
+**Use case: UC07 - Create shortcut for commands**
+
+**MSS**
+
+1. User indicates to create a shortcut.
+2. KonTActs request for the command that is frequently used.
+3. User enters the command to be shortened.
+4. KonTActs request for the shortcut input to replace the command.
+5. User enters the shortcut input.
+6. KonTActs stores the shortcut and indicates success.
+
+   Use case ends.
+
+**Extensions**
+
+- 3a. KonTActs detects that the command entered is not valid.
+
+  - 3a1. KonTActs requests for the correct command.
+  - 3a2. User enters a new command.
+  - Steps 3a1 - 3a2 are repeated until the command entered is valid.
+
+    Use case resumes from step 4.
+
+- 5a. KonTActs detects that the shortcut is already in use.
+
+  - 5a1. KonTActs request for a new shortcut.
+  - 5a2. User enters a new shortcut.
+  - Steps 5a1 - 5a2 are repeated until the shortcut entered is valid.
+
+    Use case resumes from step 6.
+
+- \*a. At any time, User chooses to cancel the creation of a shortcut.
+
+  - \*a1. KonTActs stops the creation.
+
+    Use case ends.
+
+    <br>
+
+**Use case: UC08 - Sort students based on proficiency**
+
+**Precondition**
+
+1. The address book contains a list of students/ contacts.
+2. Contacts should have a proficiency rating associated to them.
+
+**MSS**
+
+1. User chooses to sort the students based on their proficiency.
+2. User enters the sort command.
+3. KonTActs returns the list of students in the sorted order.
+   Use case ends.
+
+   <br>
+
+**Use case: UC09 - Export contacts**
+
+**MSS**
+
+1. User chooses to export the contact list.
+2. KonTActs requests for the format.
+3. User selects the desired format.
+4. KonTActs exports the contact list to the specified format and shows successful import.
+
+   Use case ends.
+
+**Extensions**
+
+- 2a. User selects an unsupported format.
+
+  - 2a1. KonTActs displays an error message and provides the list of formats that are supported.
+
+    Use case resumes from step 3.
+
+    <br>
+
+**Use case: UC10 - Request for help**
+
+**MSS**
+
+1. User inputs help command.
+2. KonTActs shows a help page.
+
+   Use case ends.
+
+**Extensions**
+
+- 1a. User inputs help for a specific command.
+
+  - 1a1. KonTActs displays a help page for that command.
+
+    Use case ends.
+
+    <br>
+
+**Use case: UC11 - Tag students with custom labels**
+
+**Precondition**
+
+1. The student that the user wants to tag exists.
+
+**MSS**
+
+1. User chooses to tag a student.
+2. KonTActs requests for details of the student alongside the tag to label the student.
+3. User enters the requested details.
+4. KonTActs tags the student with the suggested label.
+
+   Use case ends.
+
+**Extensions**
+
+- 3a. KonTActs detects an error in the entered data.
+
+  - 3a1. KonTActs requests for the correct data.
+  - 3a2. User enters new data.
+  - Steps 3a1-3a2 are repeated until the data entered are correct.
+
+    Use case resumes from step 3.
+
+    <br>
+
+**Use case: UC12 - View last modification date of contact details**
+
+**MSS**
+
+1. User requests for last modification date of contact.
+2. KonTActs shows the last modification date for that contact.
+
+   Use case ends.
+
+**Extensions**
+
+- 1a. User inputs a non-existing contact.
+
+  - 1a1. KonTActs requests for corrected contact details.
+  - 1a2. User inputs new contact details.
+  - Steps 1a1 - 1a2 are repeated until the input contact is correct.
+
+    Use case resumes from step 2.
+
+    <br>
+
+**Use case: UC13 - Import contacts**
+
+**MSS**
+
+1. User chooses to import the contact list.
+2. KonTActs requests for the file.
+3. User selects the desired file.
+4. KonTActs import the contact list from the specified file and shows successful import.
+
+   Use case ends.
+
+**Extensions**
+
+- 3a. KonTActs detects an unsupported or corrupted file.
+
+  - 3a1. KonTActs indicates it is unable to import from that file and requests for a new file.
+  - 3a2. User selects a new file.
+  - Steps 3a1 - 3a2 are repeated until KonTActs is able to import contacts from the file.
+
+    Use case resumes from step 4.
+
+- \*a. At any time, User chooses to cancel the import.
+
+  - \*a1. KonTActs stops the import.
+
+    Use case ends.
+
+    <br>
+
+**Use case: UC14 - Create automatic flags for students’ work if marked**
+
+Actor: TA
+
+**MSS**
+
+1. TA marks a student’s work.
+2. KonTActs creates a flag to show the student’s work as marked.
+
+   Use case ends.
 
 ### Non-Functional Requirements
 
@@ -385,294 +695,3 @@ testers are expected to do more *exploratory* testing.
 1. _{ more test cases …​ }_
 
 ---
-
-## **Use cases**
-
-### Use case: UC01 - Add contacts
-
-System: KonTActs
-Actor: User
-MSS:
-
-1. User chooses to add a contact.
-2. KonTActs requests for the contact details.
-3. User enters the contact details.
-4. KonTActs adds the new contact. \
-   Use case ends.
-
-Extensions:
-
-- 3a. KonTActs detects an error in the input format.
-  - 3a1. KonTActs requests for the corrected input.
-  - 3b2. User enters a new input.
-  - Steps 3a1 - 3a2 are repeated until input format is correct.
-  - Use cases resume from step 4.
-
-### Use case: UC02 - Delete contacts
-
-System: KonTActs
-Actor: User
-Precondition: The task that the user wants to delete exists.
-
-MSS:
-
-1. User indicates to delete a task.
-2. KonTActs deletes the tasks and indicates success.\
-   Use case ends.
-
-Extensions:
-
-- 1a. KonTActs detects an error in the input.
-  - 1a1. KonTActs requests for the user to try again.
-  - 1a2. User enters the command again
-  - Steps 1a1 - 1a2 are repeated until the input entered is correct.\
-    Use case resumes from step 2.
-
-### Use case: UC03 - Add grades of students
-
-System: KonTActs
-Actor: User
-Precondition:
-The student that the user wants to add grades exists.
-The assignment that the user wants to add a grade to exists.
-
-MSS:
-
-1. User chooses to add grades for a student.
-2. KonTActs requests for details of the student alongside the assignment and grade.
-3. User enters the requested details.
-4. KonTActs updates the grade of the student.\
-   Use case ends.
-
-Extensions:
-
-- 4a. KonTActs detects an error in the entered data.
-  - 4a1. KonTActs requests for the correct data.
-  - 4a2. User enters new data.
-  - Steps 4a1-4a2 are repeated until the data entered are correct.\
-    Use case resumes from step 4.
-
-### Use case: UC04 - View Contact
-
-System: KonTActs
-Actor: User
-System: KonTActs
-Actor: User
-MSS:
-
-1. Current UI is not showing the entire contact list.
-2. User chooses to view the entire contact list.
-3. KonTActs displays the full list of contacts.\
-   Use case ends.
-
-Extensions:
-
-- 1a. User has previously filtered the contact list.
-  - 1a1. KonTActs displays the full contact list, removing the previous filters.\
-    Use case ends.
-- 1b. KonTActs detects an error (e.g., unable to retrieve contacts). \* 1b1. KonTActs displays an error message.\
-  Use case ends.
-
-### Use case: UC05 - Update contacts
-
-System: KonTActs
-Actor: User
-MSS:
-
-1. TA chooses to update a contact’s details.
-2. KonTActs requests the contact’s identifier.
-3. TA enters the identifier of the contact to update.
-4. KonTActs displays the current details and requests the changes.
-5. TA updates the relevant details.
-6. KonTActs saves and displays the changes.\
-   Use case ends.
-
-Extensions:
-
-- 3a. KonTActs identifies that there is no such contact.
-  - 3a1. KonTActs requests for the correct data. \
-  - 3a2. TA enters the correct data.
-  - Steps 3a1-3a2 are repeated until the data entered are correct. \
-    Use case resumes from step 4.
-
-### Use case: UC06 - Filter Contact List
-
-System: KonTActs
-Actor: User
-MSS:
-
-1. User chooses to filter the contact list.
-1. KonTActs requests the filter criteria (current overall grades, name, tele handle).
-1. User enters the filter criteria.
-1. KonTActs filters the contact list based on the entered criteria and displays the filtered list. \
-   Use case ends.
-
-Extensions:
-
-- 3a. KonTActs detects an error in the entered filter criteria (e.g., incorrect input - invalid score input).
-  - 3a1. KonTActs requests for the correct filter criteria.
-  - 3a2. Users enter new criteria.
-  - Steps 3a1-3a2 are repeated until the criteria entered are valid.\
-    Use case resumes from step 4.
-- \*a. At any time, User chooses to cancel the filter action.
-- \*a1. KonTActs stops the filter operation and returns to the unfiltered contact list by using list function\
-  Use case ends.
-
-### Use case: UC07 - Create shortcut for commands
-
-System: KonTActs
-Actor: User
-MSS:
-
-1. User indicates to create a shortcut.
-2. KonTActs request for the command that is frequently used.
-3. User enters the command to be shortened.
-4. KonTActs request for the shortcut input to replace the command.
-5. User enters the shortcut input.
-6. KonTActs stores the shortcut and indicates success.
-   Use case ends.
-
-Extensions:
-
-- 3a. KonTActs detects that the command entered is not valid.
-
-  - 3a1. KonTActs requests for the correct command.
-  - 3a2. User enters a new command.
-  - Steps 3a1 - 3a2 are repeated until the command entered is valid.\
-    Use case resumes from step 4.
-
-- 5a. KonTActs detects that the shortcut is already in use.
-
-  - 5a1. KonTActs request for a new shortcut.
-  - 5a2. User enters a new shortcut.
-  - Steps 5a1 - 5a2 are repeated until the shortcut entered is valid.\
-    Use case resumes from step 6.
-
-- \*a. At any time, User chooses to cancel the creation of a shortcut.
-  - \*a1. KonTActs stops the creation.\
-    Use case ends.
-
-### Use case: UC08 - Sort students based on proficiency
-
-System: KonTActs
-Actor: User
-Precondition:
-The address book contains a list of students/ contacts.
-Contacts should have a proficiency rating associated to them.
-
-MSS:
-
-1. User chooses to sort the students based on their proficiency.
-2. User enters the sort command.
-3. KonTActs returns the list of students in the sorted order. \
-   Use case ends.
-
-### Use case: UC09 - Export contacts
-
-System: KonTActs
-Actor: User
-MSS:
-
-1. User chooses to export the contact list.
-2. KonTActs requests for the format.
-3. User selects the desired format.
-4. KonTActs exports the contact list to the specified format and shows successful import. \
-   Use case ends.
-
-Extensions:
-
-- 2a. User selects an unsupported format.
-  - 2a1. KonTActs displays an error message and provides the list of formats that are supported. \
-    Use case resumes from step 3.
-
-### Use case: UC10 - Request for help
-
-System: KonTActs
-Actor: User
-MSS:
-
-1. User inputs help command.
-2. KonTActs shows a help page.\
-   Use case ends.
-
-Extensions:
-
-- 1a. User inputs help for a specific command.
-  - 1a1. KonTActs displays a help page for that command.\
-    Use case ends.
-
-### Use case: UC11 - Tag students with custom labels
-
-System: KonTActs
-Actor: User
-Precondition:
-The student that the user wants to tag exists.
-
-MSS:
-
-1. User chooses to tag a student.
-2. KonTActs requests for details of the student alongside the tag to label the student.
-3. User enters the requested details.
-4. KonTActs tags the student with the suggested label. \
-   Use case ends.
-
-Extensions:
-
-- 3a. KonTActs detects an error in the entered data.
-  - 3a1. KonTActs requests for the correct data.
-  - 3a2. User enters new data.
-  - Steps 3a1-3a2 are repeated until the data entered are correct. \
-    Use case resumes from step 3.
-
-### Use case: UC12 - View last modification date of contact details
-
-System: KonTActs
-Actor: User
-MSS:
-
-1. User requests for last modification date of contact.
-2. KonTActs shows the last modification date for that contact. \
-   Use case ends.
-
-Extensions:
-
-- 1a. User inputs a non-existing contact.
-- 1a1. KonTActs requests for corrected contact details.
-- 1a2. User inputs new contact details.
-- Steps 1a1 - 1a2 are repeated until the input contact is correct.\
-  Use case resumes from step 2.
-
-### Use case: UC13 - Import contacts
-
-System: KonTActs
-Actor: User
-MSS:
-
-1. User chooses to import the contact list.
-2. KonTActs requests for the file.
-3. User selects the desired file.
-4. KonTActs import the contact list from the specified file and shows successful import.\
-   Use case ends.
-
-Extensions:
-
-- 3a. KonTActs detects an unsupported or corrupted file.
-
-  - 3a1. KonTActs indicates it is unable to import from that file and requests for a new file.
-  - 3a2. User selects a new file.
-  - Steps 3a1 - 3a2 are repeated until KonTActs is able to import contacts from the file. \
-    Use case resumes from step 4.
-
-- \*a. At any time, User chooses to cancel the import.
-  - \*a1. KonTActs stops the import.\
-    Use case ends.
-
-### Use case: UC14 - Create automatic flags for students’ work if marked
-
-System: KonTActs
-Actor: TA
-MSS:
-
-1. TA marks a student’s work.
-2. KonTActs creates a flag to show the student’s work as marked. \
-   Use case ends.
