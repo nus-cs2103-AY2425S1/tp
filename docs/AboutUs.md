@@ -31,11 +31,11 @@ We are a team based in the [School of Computing, National University of Singapor
 * Role: Developer
 * Responsibilities: UI
 
-### Johnny Doe
+### jevan13
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jevan13.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/jevan13)] [[portfolio](team/jevan13.md)]
 
 * Role: Developer
 * Responsibilities: Data
