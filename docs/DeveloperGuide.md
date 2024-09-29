@@ -274,27 +274,61 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* tech-savvy full-time tuition teacher
+* has a need to manage a significant number of students
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Our app is designed to help tech-savvy full-time tuition teachers manage the schedules and contact details of a small to medium number of students. The app focuses on preventing scheduling conflicts by automatically checking for overlapping lesson times and organising students into groups for easier lesson planning.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​              | I want to …​            | So that I can…​                                                                                                 |
+|---------|----------------------|-------------------------|-----------------------------------------------------------------------------------------------------------------|
+| `* * *` | new user             | add my students' contact details | easily access and communicate with them or their guardians                                                      
+| `* * *` | new user             | search for a student's name        | find relevant student(s) easily                                                                                 |
+| `* * *` | new user             | delete students' entries     | remove students that I am no longer teaching                                                                    |
+| `* * *` | new user             | easily access my tutoring schedule with each student | stay organised and manage my records more effectively                                                           
+| `* * *` | new user             | be automatically alerted if there are scheduling conflicts when adding a new student whose tuition time overlaps with another student | quickly adjust their schedule and avoid double-booking                                                          |
+| `* * *` | new user             | organise my students' contact details                        | find my students' by certain categories easily                                                                  |
+| `* * *` | new user             | have an option to store the address of the students                        | easily go to the student's house if the tuition session is in person                                            |
+| `* * *` | impatient user       | be able to add a task within 15 seconds                        | use the app in a rush                                                                                           |
+| `* * *` | impatient user       | be able to load up the app with the main user interface within 1-2 seconds                        | use the app seamlessly                                                                                          |
+| `* * *` | intermediate user    | schedule classes that repeats every week                        | not  keep scheduling classes on the same day(s)                                                                 |
+| `* * *` | intermediate user    | filter the entries by teaching date, such as “today” or “tomorrow” or "next 3 days"                        | quickly view and manage the students I am teaching on specific days                                             |
+| `* * *` | intermediate user    | be able to prevent duplicate student entries                        | avoid confusion when managing students with similar names                                                       |
+| `* * *` | expert user          | leave notes on a student's entry to track their learning progress                        | monitor and adjust my teaching strategies effectively                                                           |
+| `* * *` | expert user          | keyboard shortcuts                         | quickly add, delete and update students information                                                             ||           |                                            | leave notes on a student's entry to track their learning progress                             |                                                                      |
+| `* *`   | new user             | have a guided tour or input guide                        | know how to add students to the address book                                                                    |
+| `* *`   | new user             | clear all the app data quickly                        | delete data that was used when experimenting with the app.                                                      |
+| `* *`   | new user             | customise my own style of formatting by choosing from a few different options                        | not  follow a single formatting option instructed by the product                                                |
+| `* *`   | long screentime user | filter away data that I deem unnecessary                         | stay undistracted from other data                                                                               |
+| `* *`   | intermediate user    | copy information of my students to my clipboard                        | I can send them their invoice or notes quickly                                                                  |
+| `* *`   | intermediate user    |  filter entries by the payment status for the month                       | easily identify who has paid and who has not, enabling me to send invoices only to the students who are overdue |
+| `* *`   | intermediate user    | export student data in various formats (CSV, Excel, WhatsApp message etc.)                        | students can view their progress easily, and it is easy for students to view it on their end                    |
+| `* *`   | intermediate user    | record and track any special needs or accommodations required by my students                        | adapt my teaching style or lesson content appropriately                                                         |
+| `* *`   | intermediate user    | customise the user interface (color scheme, font size) of the app                        | make it visually appealing and easy to use according to my preferences                                          |
+| `* *`   | intermediate user    | track each student’s performance in specific subjects (e.g. Math, Science)                        | identify their strengths and weaknesses in different areas                                                      |
+| `* *`   | intermediate user    | record whether each student prefers online or in-person tutoring sessions | plan for travelling if needed                                                                                   |
+| `* *`   | impatient user       | quickly search for a student using autocomplete or suggestions as I type the student’s name | find a student quickly                                                                                          |
+| `* *`   | forgetful user       | see students that I am teaching today once I open the address book | reminded of who I need to teach today                                                                           |
+| `* *`   | expect user          | track students' exam results and view their progress over time | update my teaching style to better meet their needs                                                             |
+| `* *`   | expert user          | quickly filter by important dates, such as upcoming exams | effectively tailor my lessons to prepare students in a timely manner                                            |
+| `*  `   | new user             | undo an operation | undo a command if it was an mistake                                                                             |
+| `* `    | new user             | import student data in various formats (e.g., CSV, Excel) | quickly see how the product will look when populated                                                            |
+| `*`     | intermediate user    | set up automated reminders for upcoming lessons | adequately prepare for my lessons                                                                               |
+| `*`     | intermediate user    | attach lesson materials, homework assignments, or additional resources to each student's profile | easily share and track what I’ve assigned to each student                                                       |
+| `*`     | intermediate user    | filter and view students who have upcoming exams | prioritise revision sessions and prepare them effectively                                                       |
+| `*`     | forgetful user       |add a profile picture to my students recognise my student by picture  | recognise my student by picture and contact them without remembering their name                                 |
+| `*`     | expert user          | have some tips of the day / updates on more advanced features  | use the app seamlessly                                                                                          |
+| `*`     | expert user          | automate the process of sending invoice reminders to students or parents | manage payments efficiently and eliminate the need for manual tracking and individual messaging                 |
+| `*`     | expert user          | not type the exact command, just something like it  | not just adhere to a specific format                                                                                                       |
+
 
 *{More to be added}*
 
@@ -302,16 +336,42 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC1 - Add a student**
+
+**MSS**
+
+1. User types keyword followed by student details into textbox
+2. App acknowledges that a new user has been added
+3. Use case ends
+
+**Extensions**
+
+- 2a. App detects similar/identical name or phone number in records
+
+    - 2a1. Asks user to confirm action
+    - 2a2. User confirms/denies
+    - 2a3. App adds new entry and acknowledges / returns to home screen
+    - 2a4. Use case ends
+
+
+**Use case: UC2 - List all students**
+
+**MSS**
+
+1. User types keyword 
+2. App displays all students address book in alphabetical order 
+3. Use case ends
+
+**Use case: UC3 - Delete a person**
 
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
+2.  AddressBook shows a list of persons <u>(UC2)</u>
+3.  User types keyword followed by delete index or name
 4.  AddressBook deletes the person
+5. Use case ends
 
-    Use case ends.
 
 **Extensions**
 
@@ -324,21 +384,41 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. AddressBook shows an error message.
 
       Use case resumes at step 2.
+- 3b. The given name does not exist
+  - 3b1 AddressBook shows an error message. 
+  - 3b2. Use case resumes from step 2
 
-*{More to be added}*
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  The system should respond to user commands within 15 seconds.
+5.  The application should launch within 2 seconds.
+6.  The application should not store sensitive information (e.g., NRIC numbers) without explicit user consent.
+7.  The application should demonstrate stability during long-term usage without crashing or freezing.
+8.  The application should be usable by novice users without extensive training.
+9.  The application should handle errors gracefully, providing meaningful feedback to users in case of failures.
+10. Comprehensive user and technical documentation should be provided
 
-*{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Student**: A person who is taking lessons from the tutor
+* **Tutor**: The user of the application
+* **Parent**: A person who is the parent or guardian of the student
+* **Add student**: A feature that allows users to create a new student entry along with their information in the application
+* **Delete student**: A feature that allows users to remove a student entry and their information from the application
+* **Search student**: A feature that allows users to find a particular student by entering their name
+* **Private student details**: Student details and contact information that are not meant to be shared with others
+* **Private parent details**: Parent details and contact information that are not meant to be shared with others
+* **Notes tab**: A section within the application where users can record additional information about their students
+* **Tutoring schedule**: A timetable that shows the dates and times of lessons with students
+* **Scheduling conflicts**: Overlapping lesson times when a tutor has more than one lesson at a specific time
+* **Tags**: Labels that can be assigned to students to group them based on common characteristics
+* **Filtering**: A feature that allows users to view specific groups of students based on their tags or specific criteria
 
 --------------------------------------------------------------------------------------------------------------------
 
