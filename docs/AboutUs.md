@@ -7,19 +7,21 @@
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at our emails: 
+
+- `E1113234@u.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Anthony Hermanto
 
-<img src="images/johndoe.png" width="200px">
+![Anthony picture](./images/thony-ui.png)
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/thony-ui)]
+[[portfolio](https://www.anthonyhermanto.com)]
 
-* Role: Project Advisor
+* Role: Team Lead
+* Responsibilities: Manage the team. Handle the logic for delete commands. (delete buyer and delete seller)
 
 ### Jane Doe
 
