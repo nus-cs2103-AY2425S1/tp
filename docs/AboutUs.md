@@ -9,7 +9,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 You can reach us at the email `seer[at]comp.nus.edu.sg`
 
-## Project team
+## PlanPerfect Project Team
 
 ### Maegan Tan
 
@@ -19,3 +19,22 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: Developer
+
+### Aditya Ghosh
+
+<img src="images/adipanda2002.png" width="200px">
+
+[[github](https://github.com/adipanda2002)]
+
+* Role: Software Engineer
+* Responsibilities: Software Engineering
+
+### Ignatius Oey
+
+<img src="images/ignatiusoey09.png.png" width="200px">
+
+[[github](https://github.com/ignatiusoey09)]
+
+* Role: Developer
+* Responsibilities: Developing
+ 
