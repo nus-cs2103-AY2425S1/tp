@@ -11,6 +11,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## PlanPerfect Project Team
 
+### Liyam 
+
+<img src="images/kikokidayo.png" width="200px">
+
+[[github](https://github.com/kikokidayo)]
+
+* Role: Developer 
+* Responsibilities: Developing
+
 ### Maegan Tan
 
 <img src="images/maertan.png" width="200px">
