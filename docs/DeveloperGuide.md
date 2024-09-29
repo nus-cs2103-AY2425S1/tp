@@ -1,10 +1,10 @@
 ---
   layout: default.md
-  title: "Developer Guide"
+  title: "EduManage"
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# EduManage Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
