@@ -9,5 +9,5 @@
   * It is **written in OOP fashion**, and provides a **well-written**, with around **6 KLoC** &ndash; larger than beginner-level SE modules.
   * The project includes **comprehensive user and developer documentation**.
 * This project is called `EduManage` to reflect its purpose in managing student contacts and information for educational purposes.
-* For the detailed documentation of this project, see the **[EduManage Product Website](https://se-education.org/addressbook-level3)**.
+* For the detailed documentation of this project, see the **[EduManage Product Website](https://https://ay2425s1-cs2103t-w08-3.github.io/tp/)**.
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
