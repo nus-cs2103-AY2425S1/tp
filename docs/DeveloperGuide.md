@@ -279,16 +279,42 @@ HRConnect provides fast access to employee, project, and candidate contact detai
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​                                                      | I want to …​                                                                     | So that I can…​                                                                     |
+| -------- | ------------------------------------------------------------ | -------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `* * *`  | new user                                                     | see usage instructions and tips                                                  | refer to instructions and tips when I forget how to use the App                     |
+| `* * *`  | user                                                         | add a new employee                                                               |                                                                                     |
+| `* * *`  | user                                                         | add a new project                                                                |                                                                                     |
+| `* * *`  | user                                                         | add a new job candidate                                                          |                                                                                     |
+| `* * *`  | user                                                         | remove an employee                                                               | remove entries that I no longer need                                                |
+| `* * *`  | user                                                         | remove a project                                                                 | remove entries that I no longer need                                                |
+| `* * *`  | user                                                         | remove a job candidate                                                           | remove entries that I no longer need                                                |
+| `* * *`  | user                                                         | search for employee details by name or ID                                        | locate employee details without having to go through the entire list                |
+| `* * *`  | user                                                         | search for project details by name or ID                                         | locate project details without having to go through the entire list                 |
+| `* * *`  | user                                                         | search for job candidates by name or ID                                          | locate candidate details without having to go through the entire list               |
+| `* *`    | user                                                         | search for employees by skill sets                                               | find employees with desired skills without having to go through the entire list     |
+| `* *`    | user                                                         | search for projects by description                                               | find projects that match a description without having to go through the entire list |
+| `* *`    | user                                                         | search for job candidates by interview status                                    | track the number of candidates at each stage of the hiring pipeline                 |
+| `* *`    | user                                                         | update employee details                                                          | update an entry without having to delete and re-create it                           |
+| `* *`    | user                                                         | update project details                                                           | update an entry without having to delete and re-create it                           |
+| `* *`    | user                                                         | update job candidate details                                                     | update an entry without having to delete and re-create it                           |
+| `* *`    | user                                                         | hide private contact details                                                     | minimize chance of someone else seeing them by accident                             |
+| `* *`    | user managing many employees                                 | categorize employees by their departments                                        | organize employees based on their department                                        |
+| `* *`    | user managing many employees                                 | categorize employees into talent pools by skill sets                             | organize employees based on their skills                                            |
+| `* *`    | user managing many projects                                  | sort projects by their deadlines                                                 | focus on projects due earlier                                                       |
+| `* *`    | user that tracks project progress                            | list employees with project deliverables due soon                                | remind employees of their upcoming deliverables                                     |
+| `* *`    | user that tracks project progress                            | list employees with project deliverables overdue                                 | remind employees to complete overdue deliverables                                   |
+| `* *`    | user that assigns manpower to projects                       | filter employees with certain skill sets                                         | assign suitable people to projects                                                  |
+| `* *`    | user that recruits job candidates for projects               | filter job candidates with certain skill sets                                    | contact job candidates with skill sets sought after by the company                  |
+| `* *`    | frequent user                                                | see a summary of upcoming interviews and project deadlines upon starting the App | stay updated without searching or filtering for details                             |
+| `* *`    | busy user                                                    | have most responses return within 200 ms                                         | perform actions smoothly and quickly                                                |
+| `*`      | user with many persons in the App                            | sort persons by name                                                             | locate a person easily                                                              |
+| `*`      | user that has entered a lot of wrong data                    | reset the data to its default state                                              | start over with fresh data                                                          |
+| `*`      | user with a lot of old data                                  | archive outdated records                                                         | keep the database clutter-free and relevant                                         |
+| `*`      | user that prefers short-form commands and keyboard shortcuts | use short-form commands and keyboard shortcuts to perform regular functions      | perform actions more efficiently                                                    |
+| `*`      | user in-charge of employee up-skilling                       | track employees' learning of new skills                                          | monitor employees' progress in learning new skills                                  |
+| `*`      | user in-charge many manpower allocations                     | assign multiple employees to different projects using batch commands             | manage manpower at scale                                                            |
+| `*`      | user returning after a long break                            | see recent changes made to the records                                           | get back up to speed quickly                                                        |
+| `*`      | HR team lead                                                 | delegate manpower allocation tasks to team members                               | manage the HR team efficiently                                                      |
 
 ### Use cases
 
