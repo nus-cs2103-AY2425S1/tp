@@ -11,15 +11,26 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Fui Jing Min
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/fui03.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[github](https://github.com/fui03)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: Integration and Testing
+
+### Lo Yong Zhe
+
+<img src="images/Reallyeasy1.png" width="200px">
+
+[[github](https://github.com/Reallyeasy1)]
+[[portfolio](team/Reallyeasy1.md)]
+
+* Role: Developer
+* Responsibilities: Devops + Threading 
+
 
 ### Jane Doe
 
@@ -30,15 +41,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Team Lead
 * Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
 
 ### Tan San Chian
 

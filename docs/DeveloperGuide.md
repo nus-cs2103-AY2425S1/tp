@@ -280,36 +280,61 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: manage students' tasks and attendance faster than a typical mouse/GUI driven app
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority  | As a …​                         | I want to …​                                                                                       | So that I can…​                                                                          |
+|-----------|---------------------------------|----------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------|
+| `* * *`   | tutor                           | add student data                                                                                   | I can add student information efficiently                                                |
+| `* * *`   | tutor                           | delete student data                                                                                | I can delete student information efficiently                                             |
+| `* * *`   | tutor                           | categorise students based on tutorial classes                                                      | I can find out which students are in my class                                            |
+| `* * *`   | course coordinator              | record student attendance daily through a CLI command                                              | I can track student participation                                                        |
+| `* * *`   | assignment-focused instructor   | create assignments for students                                                                    | I can assign tasks to students                                                           |
+| `* *`     | tutor                           | edit student data                                                                                  | I can manage student information efficiently                                             |
+| `* *`     | tutor                           | undo previous commands                                                                             | I can undo mistakes made in previous commands                                            |
+| `* *`     | independent tutor               | manage my own data files independently                                                             | I don’t have to worry about multi-user access conflicts                                  |
+| `* *`     | power user                      | use command shortcuts for frequent operations                                                      | I can save time                                                                          |
+| `* *`     | data-cautious professional      | back up my data to a local file                                                                    | I can restore it if something goes wrong                                                 |
+| `* *`     | solo practitioner               | optimise my application for single-user functionality                                              | I can focus on my tasks without distractions                                             |
+| `* *`     | assignment-focused instructor   | mark assignments as completed or pending                                                           | I can track the progress of each student                                                 |
+| `* *`     | deadline-aware tutor            | have a reminder command to alert me about overdue assignments                                      | I can follow up with students                                                            |
+| `* *`     | grading instructor              | enter grades and calculate final scores using a CLI command                                        | I can manage grading efficiently                                                         |
+| `* *`     | class performance analyst       | see a summary of grades for a class in a single command                                            | I can evaluate overall performance                                                       |
+| `* *`     | student mentor                  | generate predictive insights based on historical data to identify students who may need extra help | I can provide timely interventions                                                       |
+| `* *`     | parent communication officer    | use a command to generate a progress report for each student                                       | I can share it during parent-teacher meetings                                            |
+| `* *`     | long-term performance evaluator | compare student performance across different terms                                                 | I can assess improvement or decline                                                      |
+| `* *`     | student progress tracker        | tag students with custom labels                                                                    | I can quickly identify those needing special attention                                   |
+| `* *`     | cross-platform user             | run the application on any platform (Windows, Linux, OS X) without any OS-specific dependencies    | I can use it anywhere                                                                    |
+| `* *`     | convenience-seeking educator    | use the application without an installer                                                           | I can use it directly from the downloaded JAR file                                       |
+| `* *`     | data visualization enthusiast   | use ASCII-based bar charts and progress bars for a quick visual representation of data             | I can easily grasp trends                                                                |
+| `* *`     | self-learning user              | use interactive help commands                                                                      | I can understand how to use the application without referring to external documentation. |
+| `*`       | seasoned CLI user               | have a command history feature                                                                     | I can reuse previous commands without retyping them                                      |
+| `*`       | advanced user                   | store all data in a local, human-editable text file                                                | I can manually edit it when needed                                                       |
+| `*`       | meticulous user                 | check data integrity when loading files                                                            | I am alerted of any corrupt or inconsistent data                                         |
+| `*`       | privacy-focused educator        | ensure that all data are user-specific and not shared                                              | My data remains private                                                                  |
+| `*`       | custom-evaluation designer      | define my own grading scale via a text file                                                        | I can adapt it to different evaluation criteria                                          |
+| `*`       | security-conscious tutor        | secure sensitive student data with encryption in local files                                       | Unauthorized access is prevented                                                         |
+| `*`       | safety-focused user             | automate daily backups with encryption                                                             | My data is safe from accidental loss                                                     |
+| `*`       | personalization enthusiast      | customize the CLI interface with different themes and fonts                                        | I can have a more comfortable user experience                                            |
+| `*`       | course manager                  | configure the grading system and attendance rules via a configuration text file                    | I can tailor the application to my needs                                                 |
 
-*{More to be added}*
 
 ### Use cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Delete a student**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list students
+2.  AddressBook shows a list of students
+3.  User requests to delete a specific student in the list
+4.  AddressBook deletes the student
 
     Use case ends.
 
@@ -325,7 +350,104 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: Add a student**
+
+**MSS**
+
+1.  User requests to list students
+2.  AddressBook shows a list of students
+3.  User requests to add a specific student to the list
+4.  AddressBook adds the student
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is full.
+  * AddressBook shows an error message
+    Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Categorise student based on tutorial class**
+
+**MSS**
+
+1.  User requests to list students
+2.  AddressBook shows a list of students
+3.  User requests to categorise the tutorial class of a specific student to the list
+4.  AddressBook checks if the tutorial class is valid. 
+5.  AddressBook edits the student's tutorial class
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+    Use case ends.
+
+* 3a. The given student index is invalid.
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 3.
+
+* 4a. The given tutorial index is invalid.
+
+  * 4a1. AddressBook shows an error message.
+
+    Use case resumes at step 4.
+
+**Use case: Record Student Attendance**
+
+**MSS**
+
+1.  User requests to list students
+2.  AddressBook shows a list of students
+3.  User requests to mark attendance of a specific student to the list
+4.  AddressBook adds the date and status to the students attendance list
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given student index is invalid.
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 3.
+
+* 4a. The date given is invalid or after the current date.
+
+    * 4a1. AddressBook shows an error message.
+
+      Use case resumes at step 4.
+
+**Use case: Add assignment**
+
+**MSS**
+
+1.  User requests to add an assignment 
+2.  AddressBook creates the assignment
+3.  AddressBook gets a list of students 
+4.  AddressBook adds the copy of the assignment to the assignment list of every student in the list.
+
+       Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
 
 ### Non-Functional Requirements
 
