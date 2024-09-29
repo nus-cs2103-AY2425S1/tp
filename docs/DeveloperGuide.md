@@ -329,16 +329,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. The system should work seamlessly across macOS, Windows, and Linux operating systems.
+2. The system should support both 32-bit and 64-bit environments.
+3. Should work on any mainstream OS as long as it has Java `17` or above installed.
+4. The system should execute commands (such as adding, deleting, or listing contacts) within 1 second under normal loads (e.g., up to 1,000 contacts).
+5. Should be able to hold up to 1,000 persons without noticeable sluggishness in performance for typical usage.
+6. The system should support up to 1,000 concurrent users without performance degradation.
+7. A user with above-average typing speed for regular English text (i.e., not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+8. The system must be user-friendly and usable by individuals with no prior experience with contact management systems.
+9. Volatility: Transaction data should be stored persistently and remain available for a minimum of 10 years.
+10. Complete user documentation, including installation and setup instructions, must be provided.
+11. The system should be designed to allow for the addition of new modules without requiring a full redesign.
+12. The system should gracefully handle incorrect or incomplete inputs by providing meaningful error messages without crashing.
 
-*{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Contact**: An entry in Talentcy address book that contains information about a particular person such as name, phone number, email address, and any other relevant details
+* **Command**: A specific text-based instruction given by the user to the system to perform a particular action (e.g., add NAME p/PHONE_NUMBER e/EMAIL j/JOB_CODE_APPLIED_FOR t/TAG is a command to add a contact to the address book)
 
 --------------------------------------------------------------------------------------------------------------------
 
