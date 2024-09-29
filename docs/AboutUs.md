@@ -40,15 +40,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Jayden Kim
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jayden-kim-nus.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](https://github.com/Jayden-Kim-NUS)]
 [[portfolio](team/johndoe.md)]
 
+Hi, I like writing and formatting stuff (real).
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Documentation
 
 ### James Doe
 
