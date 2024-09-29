@@ -51,12 +51,13 @@ Hi, I like writing and formatting stuff (real).
 * Role: Developer
 * Responsibilities: Documentation
 
-### James Doe
+### Kieran Koh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/FriedCabbageSalad.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
+[[github](http://github.com/FriedCabbageSalad)]
+[[portfolio](team/johndoe.md)]  
+I am Kieran, a Year 2 Computer Science student at the National University of Singapore!
+My hobbies are Gaming and I've recently been experimenting with Home-Labs.
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Testing
