@@ -21,34 +21,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Anthony Goh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/antgyf.png" width="200px">
 
-[[github](http://github.com/)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/antgyf)]
 
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Code Quality
 
 ### Wu Bojin
 
@@ -58,4 +37,26 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Data
+
+### Jayden Kim
+
+<img src="images/jayden-kim-nus.png" width="200px">
+
+[[github](https://github.com/Jayden-Kim-NUS)]
+[[portfolio](team/johndoe.md)]
+
+Hi, I like writing and formatting stuff (real).
+* Role: Developer
+* Responsibilities: Documentation
+
+### Kieran Koh
+
+<img src="images/FriedCabbageSalad.png" width="200px">
+
+[[github](http://github.com/FriedCabbageSalad)]
+[[portfolio](team/johndoe.md)]  
+I am Kieran, a Year 2 Computer Science student at the National University of Singapore!
+My hobbies are Gaming and I've recently been experimenting with Home-Labs.
+* Role: Developer
+* Responsibilities: Testing
