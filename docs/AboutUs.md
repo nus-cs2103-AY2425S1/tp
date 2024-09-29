@@ -13,7 +13,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Yash Raj Khandelwal
 
-<img src="images/yxshrk.jpg" width="200px">
+<img src="images/yxshrk.png" width="200px">
 
 * Role: Software Developer
 * Responsibilities: Software Developing
