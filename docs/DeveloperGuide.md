@@ -262,11 +262,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+- HR professional of a tech company with over 1000 employees with different skill sets and roles
+- works in a team of HR professionals
+- manages recruitment and manpower allocation for company projects
+- has a need to manage a significant number of contacts
+- prefer desktop apps over other types
+- can type fast
+- prefers typing and keyboard shortcuts to mouse interactions
+- is reasonably comfortable using and prefers CLI apps
 
 **Value proposition**: manage contacts faster than a typical mouse/GUI driven app
 
