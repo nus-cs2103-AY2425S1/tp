@@ -11,15 +11,15 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project team
 
-### John Doe
+### KiKuasaurus
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kikuasaurus.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/kikuasaurus)]
+[[portfolio](team/kikusaurus.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: Query Language
 
 ### InfinityTwo
 
