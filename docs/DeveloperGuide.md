@@ -301,18 +301,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. If there are no contacts stored in the system.
+- 1a. If there are no contacts stored in the system.
 
-  * 1a1 System informs user that they have no contacts stored.
-  
-    * Use case ends.
+  - 1a1 System informs user that they have no contacts stored.
+
+  Use case ends.
 
 
-* 1b. The System detects an error in the entered command.
+- 1b. The System detects an error in the entered command.
 
-    * 1b1 System requests for a valid command.
+  - 1b1 System requests for a valid command.
 
-      Use case resumes at step 1.
+  Use case resumes at step 1.
 
 *{More to be added}*
 
