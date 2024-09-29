@@ -35,8 +35,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](http://github.com/leezehao)] [[portfolio](team/leezehao.md)]
 
-* Role: Developer
-* Responsibilities: Documentation, Deliverables and Deadlines
+* Role: Documentation
+* Responsibilities: Ensuring completeness and tidiness of all project documentation.
 
 ### Jean Doe
 
