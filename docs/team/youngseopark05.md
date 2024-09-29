@@ -24,6 +24,6 @@ I'm passionate about creating engaging experiences through technology and design
 When I’m not coding or designing, you can find me playing the **bass guitar** or contributing to the **NUS Arts Production Crew**! 🎭
 
 ### 🌈 Let’s Connect!
-Feel free to reach out if you share my interests or just want to chat! I love collaborating and meeting new people. 
+Feel free to reach out if you share my interests or just want to chat! I love collaborating and meeting new people.
 
 Happy coding! 💖
