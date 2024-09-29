@@ -318,7 +318,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  The should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
 3.  The should be able to maintain data integrity, where system should ensure that data is accurate and consistent, preventing duplicate entries.
 4.  The system should be developed in a modular way for easier updates and bug fixes.
 5.  The system should be able to ensure data consistency accross all instances.
