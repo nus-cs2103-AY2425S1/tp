@@ -452,11 +452,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1.  _Technical Requirement_: The App should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2.  _Performance Requirement_: Should be able to hold up to 1000 employees without a noticeable sluggishness in performance for typical usage.
+3.  _Performance Requirement_: The App should respond to most commands within 200 milliseconds.
+4.  _Quality Requirement_: A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+5.  _Quality Requirement_: A HR professional who has never used software to manage manpower should be able to accomplish most tasks using the App.
+6.  _Fault Tolerance_: The App should be able to handle corrupted data without crashing.
+7.  _Documentation_: The code should be well-documented so that maintainers new to the project can quickly understand and contribute to the codebase.
+8.  _Constraints_: The App should be backward compatible with data produced by earlier versions of the App.
+9.  _Notes about project scope_: The App is not required to handle the actual firing / hiring of an employee or the completion or termination of a project.
 
 ### Glossary
 
