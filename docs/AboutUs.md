@@ -30,11 +30,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: Scheduling and tracking
 
-### Johnny Doe
+### Sean Lim
 
-<img src="images/johndoe.png" width="200px">
+<img src="https://avatars.githubusercontent.com/u/8543107?v=4" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/seanlim)] [[bsky](https://seanlkx.bsky.social/)]
 
 * Role: Developer
 * Responsibilities: Data
