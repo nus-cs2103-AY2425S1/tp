@@ -476,10 +476,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-
---------------------------------------------------------------------------------------------------------------------
+- **Mainstream OS**: Windows, Linux, Unix, MacOS
+- **CLI**: Command Line Interface - A way of interacting with a computer system by inputting lines of text. The keyboard is primarily used.
+- **GUI**: Graphical User Interface - A way of interacting with a computer system where graphical elements such as windows, buttons, and menus are used.
+- **Private contact detail**: A contact detail that is not meant to be shared with others
+- **HR**: Human Resource - people responsible for finding, hiring, and training employees
+- **Job candidate**: An applicant who is being considered for a job. The applicant is not yet an employee.
 
 ## **Appendix: Instructions for manual testing**
 
