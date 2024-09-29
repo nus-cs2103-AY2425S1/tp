@@ -318,32 +318,135 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `HRConnect` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Remove an employee**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to list employees
+2. HRConnect shows a list of employees with their ids
+3. User requests to delete a specific employee in the list by their id
+4. HRConnect deletes the person
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+- 2a. The list is empty.
 
   Use case ends.
 
-* 3a. The given index is invalid.
+- 3a. The given id is invalid.
 
-    * 3a1. AddressBook shows an error message.
+  - 3a1. HRConnect shows an error message.
 
-      Use case resumes at step 2.
+    Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: Remove a project**
+
+**MSS**
+
+1. User requests to list projects
+2. HRConnect shows a list of projects with their ids
+3. User requests to delete a specific project in the list by its id
+4. HRConnect deletes the project
+
+   Use case ends.
+
+**Extensions**
+
+- 2a. The list is empty.
+
+  Use case ends.
+
+- 3a. The given id is invalid.
+
+  - 3a1. HRConnect shows an error message.
+
+    Use case resumes at step 2.
+
+**Use case: Assign an employee to a project**
+
+**MSS**
+
+1. User requests to list employees
+2. HRConnect shows a list of employees with their ids
+3. User requests to list projects
+4. HRConnect shows a list of projects with their ids
+5. User requests to assign a specific employee by their id to a specific project by its id
+6. HRConnect assigns the employee to the project
+
+   Use case ends.
+
+**Extensions**
+
+- 2a. The list is empty.
+
+  Use case ends.
+
+- 4a. The list is empty.
+
+  Use case ends.
+
+- 5a. Either of the given ids is invalid.
+
+  - 5a1. HRConnect shows an error message.
+
+    HRConnect displays the list of projects if the project id is invalid and the list of employees if the employee id is invalid. Use case resume at step 4.
+
+**Use case: Un-assign an employee from a project**
+
+**MSS**
+
+1. User requests to list projects
+2. HRConnect shows a list of projects with their ids
+3. User selects a project by its id
+4. HRConnect shows a list of employees assigned to the project
+5. User requests to un-assign a specific employee by their id from the selected project
+6. HRConnect un-assigns the employee from the project
+
+   Use case ends.
+
+**Extensions**
+
+- 2a. The list is empty.
+
+  Use case ends.
+
+- 4a. The list is empty.
+
+  Use case ends.
+
+- 5a. The given id is invalid.
+
+  - 5a1. HRConnect shows an error message.
+
+    Use case resumes at step 4.
+
+**Use case: Filter employees with desired skills**
+
+**MSS**
+
+1. User requests to list skills the employees in the company have
+2. HRConnect shows a list of skills
+3. User selects a few skills
+4. User requests to list all employees with all of the skills selected
+5. HRConnect lists all employees with all of the skills selected
+
+   Use case ends.
+
+**Extensions**
+
+- 2a. The list of skills is empty.
+
+  Use case ends.
+
+- 3a. User selects invalid skills.
+
+  - 3a1. HRConnect shows an error message.
+
+    Use case resumes at step 2.
 
 ### Non-Functional Requirements
 
