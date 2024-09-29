@@ -302,14 +302,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - List all persons**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to list all persons
+2. AddressBook shows a list of all persons
+
+    Use case ends.
+
+
+**Use case: UC02 - Delete a person**
+
+**MSS**
+
+1.  User <u>views the list of all persons (UC01)</u>
+2. User requests to delete a specific person in the list
+3. AddressBook deletes the person
+4. AddressBook shows a success message
 
     Use case ends.
 
@@ -325,7 +335,105 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-*{More to be added}*
+
+**Use case: UC03 - Add a person**
+
+**MSS**
+
+1. User requests to add a person
+2. AddressBook adds the new specified person
+3. AddressBook shows a success message to the user
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The input format is invalid
+
+    * 1a1. AddressBook shows an error message
+
+        Use case ends.
+
+
+**Use case: UC04 - Tag a person**
+
+**MSS**
+
+1. User <u>views a list of all persons (UC01)</u>
+2. User requests to attach a tag to a specific person
+3. AddressBook adds a tag to the person
+4. AddressBook shows a success message to the User
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. Person does not exist
+
+    * 3a1. The AddressBook shows an error message
+        
+        Use case ends.
+
+
+**Use case: UC05 - Untag a person**
+
+**MSS**
+
+1. User <u>views a list of all persons (UC01)</u>
+2. User requests to remove a tag from a specific person
+3. AddressBook removes the tag from the specified person
+4. AddressBook shows a success message
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. Person does not exist in AddressBook
+
+    * 3a1. AddressBook shows an error message
+    
+        Use case ends.
+
+**Use case: UC06 - List persons by tag**
+
+**MSS**
+
+1. User requests to view a list of persons who have specific tag(s)
+2. AddressBook shows a list of persons who have the specified tag(s)
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty
+
+    Use case ends.
+
+**Use case: UC07 - Find person by name**
+
+**MSS**
+
+1. User requests to retrieve a person's details by name
+2. AddressBook shows the specified person's details
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Person does not exist in AddressBook
+
+    * 1a1. AddressBook shows a message that person could not be found
+
+        Use case ends.
+
+**Use case: UC08 - Getting help**
+
+**MSS**
+
+1. User inputs the help command
+2. AddressBook shows a list of valid commands with examples
+
+    Use case ends.
 
 ### Non-Functional Requirements
 
