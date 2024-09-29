@@ -274,7 +274,15 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
+* NUS Computer Science Freshman
+* unfamiliar with the school system(team teams, school structures, communication channels etc.)
+* has no idea where to look for contact info of relevant personnel when certain issues happen, for example
+  * Informing tutor about absence in tutorial/lab due to illness
+  * Asking Prof for clarification/actions on certain admin issues
+  * Contact school financial office to settle relevant issues
 * has a need to manage a significant number of contacts
+* find it frustrating to gather contacts from all types of platforms
+* has the initiatives to jot down contact info when such information is given during the class
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
