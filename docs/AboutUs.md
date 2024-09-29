@@ -21,7 +21,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Jane Doh
 
 <img src="images/johndoe.png" width="200px">
 
@@ -31,7 +31,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Johnny Doh
 
 <img src="images/johndoe.png" width="200px">
 
@@ -40,7 +40,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Jean Doh
 
 <img src="images/johndoe.png" width="200px">
 
@@ -50,7 +50,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### James Doh
 
 <img src="images/johndoe.png" width="200px">
 
