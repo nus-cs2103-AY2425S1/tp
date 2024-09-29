@@ -21,15 +21,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Hrishiraj Mandal
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/raj.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/Virusrwj223)]
+[[portfolio](https://virusrwj223.github.io/hm)]
+[[linkedin](https://www.linkedin.com/in/hrishiraj-mandal)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Tester
+* Responsibilities: Ensures the testing of the project is done properly and on time
 
 ### Johnny Doe
 
