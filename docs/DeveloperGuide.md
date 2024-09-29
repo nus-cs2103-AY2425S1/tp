@@ -322,6 +322,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is `HRConnect` and the **Actor** is the `user`, unless specified otherwise)
 
+---
+
 **Use case: Remove an employee**
 
 **MSS**
@@ -345,6 +347,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 2.
 
+---
+
 **Use case: Remove a project**
 
 **MSS**
@@ -367,6 +371,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   - 3a1. HRConnect shows an error message.
 
     Use case resumes at step 2.
+
+---
 
 **Use case: Assign an employee to a project**
 
@@ -397,6 +403,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     HRConnect displays the list of projects if the project id is invalid and the list of employees if the employee id is invalid. Use case resume at step 4.
 
+---
+
 **Use case: Un-assign an employee from a project**
 
 **MSS**
@@ -426,6 +434,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 4.
 
+---
+
 **Use case: Filter employees with desired skills**
 
 **MSS**
@@ -449,6 +459,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   - 3a1. HRConnect shows an error message.
 
     Use case resumes at step 2.
+
+---
 
 ### Non-Functional Requirements
 
