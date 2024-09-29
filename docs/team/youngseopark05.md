@@ -26,4 +26,8 @@ When I’m not coding or designing, you can find me playing the **bass guitar** 
 ### 🌈 Let’s Connect!
 Feel free to reach out if you share my interests or just want to chat! I love collaborating and meeting new people.
 
+LinkedIn: https://www.linkedin.com/in/youngseo-park-867873226/
+
+Github: https://github.com/youngseopark05
+
 Happy coding! 💖
