@@ -11,15 +11,26 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Hans Neddyanto Tandjung
 
+
+<img src="images/hansneddyanto.png" width="200px">
+
+[[homepage](https://github.com/hansneddyanto)]
+[[github](https://github.com/hansneddyantoe)]
+[[portfolio](https://github.com/hansneddyanto)]
+
+* Role: Project Manager
+
+
+### Chin Sek Yi
 <img src="images/chinsekyi.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/ChinSekYi)]
 [[portfolio](https://github.com/ChinSekYi)]
 
-* Role: Project Advisor
+* Role: Product Manager
 
 ### Jane Doe
 
