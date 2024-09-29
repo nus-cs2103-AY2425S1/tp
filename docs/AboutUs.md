@@ -1,6 +1,6 @@
 ---
   layout: default.md
-  title: "About Us"
+title: "About Us"
 ---
 
 # About Us
@@ -11,6 +11,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## PlanPerfect Project Team
 
+### Maegan Tan
+
+<img src="images/maertan.png" width="200px">
+
+[[github](http://github.com/maertan)]
+
+* Role: Developer
+* Responsibilities: Developer
+
 ### Aditya Ghosh
 
 <img src="images/adipanda2002.png" width="200px">
@@ -18,6 +27,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/adipanda2002)]
 
 * Role: Software Engineer
+* Responsibilities: Software Engineering
 
 ### Ignatius Oey
 
