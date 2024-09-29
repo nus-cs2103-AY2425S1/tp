@@ -263,28 +263,55 @@ _{Explain here how the data archiving feature will be implemented}_
 **Target user profile**:
 
 * has a need to manage a significant number of contacts
+* needs to manage appointments for these contacts
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* values tools that allow for rapid data entry and retrieval
+* requires robust search capabilities to quickly find patient or doctor information
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: manage contacts and appointments faster than a GUI app
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
 
-*{More to be added}*
+
+| Priority | As a …​                                  | I want to …​                                                                                     | So that I can…​                                                                                                                 |
+|----------|------------------------------------------|--------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------|
+| `* * *`  | receptionist                             | add new patient records                                                                          | maintain an up-to-date list of patients                                                                                         |
+| `* * *`  | receptionist                             | delete outdated patient records                                                                  | keep the patient database clean and relevant                                                                                    |
+| `* * *`  | receptionist                             | search for a patient's record by their name                                                      | quickly retrieve their information                                                                                              |
+| `* * *`  | receptionist                             | mark appointments done or undone                                                                 | keep track of the appointments                                                                                                  |
+| `* * *`  | receptionist                             | add appointments for both patients and doctors                                                   | keep track of their respective appointments                                                                                     |
+| `* * *`  | receptionist                             | delete appointments for both patients and doctors                                                | keep track of their respective appointments                                                                                     |
+| `* * *`  | user                                     | add doctor records                                                                               | manage a list of all doctors working in the clinic                                                                              |
+| `* * *`  | user                                     | delete doctor records                                                                            | manage a list of all doctors working in the clinic                                                                              |
+| `* *`    | receptionist                             | update existing patient details                                                                  | keep up with the latest information                                                                                             |
+| `* *`    | receptionist                             | view a summary of all patient records                                                            | prepare for upcoming consultations                                                                                              |
+| `* *`    | receptionist                             | view upcoming appointments for each doctor                                                       | manage the clinic's daily schedule effectively                                                                                  |
+| `* *`    | receptionist                             | tag certain patients according to their needs                                                    | search for patients based on their care requirements                                                                            |
+| `* *`    | receptionist                             | tag certain patients according to their priorities                                               | contact them when necessary                                                                                                     |
+| `* *`    | receptionist                             | view which patients need to be called on the current date                                        | so that I easily find out who to I need to contact them                                                                         |
+| `* *`    | receptionist                             | add reminders for certain days                                                                   | keep track of all reminders/tasks for the given date                                                                            |
+| `* *`    | receptionist                             | update reminders I made                                                                          | keep up with the latest information                                                                                             |
+| `* *`    | receptionist                             | delete reminders I made                                                                          | remove entries that have the wrong details.                                                                                     |
+| `* *`    | receptionist                             | search for patients based on the tag given to them                                               | easily find and identify patients                                                                                               |
+| `*`      | receptionist                             | fetch the history of missed appointments                                                         | contact the patient and inform the doctor                                                                                       |
+| `* *`    | receptionist                             | search for patient based on their name/contact number                                            | easily find their contact details and records                                                                                   |
+| `* *`    | receptionist                             | generate a list of all upcoming appointments for the current date (or a specified one)           | to assist in daily scheduling (which patient consult which doctor) and preparation                                              |
+| `* *`    | receptionist                             | filter patient records by the type of doctor/specialist they are meeting/have already consulted  | manage referrals and specialist appointments effectively                                                                        | 
+| `*`      | receptionist                             | set recurring appointments for patients                                                          | streamline the process for those who require regular consultations (instead of them having to repeatedly schedule appointments) |
+| `* *`    | receptionist                             | add/link a patient appointment to a specific doctor after checking the doctor's availability     |                                                                                                                                 |
+| `* *`    | receptionist                             | change/update a patient's linked doctor if there is a sudden change in the doctor's availability |                                                                                                                                 |
+| `* *`    | user                                     | view records in a calendar view                                                                  | get an organised overview of all appointments                                                                                   |
+| `*`      | user                                     | sort and view records based on their dates                                                       |                                                                                                                                 |
+| `**`     | user                                     | update the status of doctors (available, on leave, etc)                                          |                                                                                                                                 |
+| `* *`    | user                                     | track the availability of doctors and when they are free based on patient records                |                                                                                                                                 |
+| `* *`    | healthcare provider                      | add notes to patient records                                                                     |                                                                                                                                 |
+| `*`      | healthcare provider                      | view a patient's past appointments in this clinic (not upcoming)                                 | better understand their medical history and prepare their doctor for consultations                                              |
 
 ### Use cases
 
