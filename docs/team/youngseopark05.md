@@ -1,4 +1,4 @@
-# 👋 Hi there! I'm Youngseo Park!
+## 👋 Hi there! I'm Youngseo Park!
 
 <img src="../images/youngseopark05.png" alt="Youngseo Park's picture" width="200px" style="display: block; margin: 0 auto" />
 
