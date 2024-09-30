@@ -276,16 +276,20 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                    | I want to …​                        | So that I can…​                                                       |
+|----------|--------------------------------------------|-------------------------------------|-----------------------------------------------------------------------|
+| `* * *`  | user | list all contacts |
+| `* * *`  | user | create a contact |
+| `* * *`  | user | remove a contact | remove contact information that I no longer need
+| `* * *`  | user | list all job listings |
+| `* * *`  | user | create a job listing |  
+| `* * *`  | user | remove a job listing | remove job listing information that I no longer need
+| `* * *`  | user | filter contacts based on job listing | focus on contacting talents that fits the job
+| `* * *`  | user | list all companies |
+| `* * *`  | user | create a company | group and organize contacts and job listings
+| `* * *`  | user | delete a company | remove company information that I no longer need
+| `* * *`  | user | view company details | view relevant information of a company together
 
-*{More to be added}*
 
 ### Use cases
 
@@ -327,7 +331,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
 
