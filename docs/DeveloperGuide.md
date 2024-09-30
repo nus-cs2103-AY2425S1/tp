@@ -330,15 +330,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2.  Should work on any _reasonable system_ with good performance: common operation such as retrieving patient data must complete within 1 second, and complex operations must complete within 3 seconds.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4.  Should not require installation
+5.  Must not operate with dependency on any remote server
+6.  No usage of DBMS
+7.  Main product file must not exceed 100MB
+8.  Documentation must not exceed 15MB
+9.  Product should be designed for typing-preferred consumers, offering a CLI experience
+10. Product should be designed for a single user.
+11. Product must function correctly on _standard resolutions_ and support scaling of 100%, 125%, 150%.
+12. Data must be persistent, with all changes saved immediately to local storage
+13. Data files must be in a format that can be edited manually by advanced users
+14. Data file must remain usable and intact even with invalid input from the application
+15. Errors must trigger clear, user-friendly messages
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Reasonable system**: A system with an OS matching the criteria above, with parts with a release date maximum 10 years from the current date
+* **Standard resolutions**: 1920x1080 and 1080x720
 
 --------------------------------------------------------------------------------------------------------------------
 
