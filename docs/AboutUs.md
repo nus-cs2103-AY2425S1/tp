@@ -9,7 +9,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### Prabhu NATARAJAN 
+### Prabhu NATARAJAN
 
 <img src="images/prabhu.png" width="200px">
 
