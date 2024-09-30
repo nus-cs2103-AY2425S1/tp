@@ -588,6 +588,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**Use case: Automatic Saving and Loading of Contacts**
+
+**MSS**
+
+1.  User adds a new contact or updates an existing contact within ContactCS
+2.  ContactCS automatically saves the contact details to persistent storage (e.g., a file)
+3.  When the user opens the app, ContactCS loads the saved contacts from persistent storage
+
+**Extensions**
+
+* 2a. There is a failure in saving the contact (e.g., due to storage issues)
+    * 2a1. ContactCS shows an error message indicating that the contact could not be saved
+  
+      Use case ends.
+  
+* 3a. There is a failure in loading the contacts when the app starts
+    * 3a1. ContactCS shows an error message indicating that the contacts could not be loaded and may prompt the user to try again
+  
+      Use case ends.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
