@@ -297,7 +297,7 @@ _{More to be added}_
 
 **MSS**
 
-1.  Actor requests to <u>list persons (UC No.)</u>.
+1.  Actor requests to <u>list persons (UC2)</u>.
 2.  Actor requests to delete a specific person in the list.
 3.  System deletes the person.
 4.  System <u>save contacts to save file (UC No.)</u>.
@@ -312,7 +312,7 @@ _{More to be added}_
 
     Use case resumes at step 2.
 
-**Use case: UC2 Load contact from save file**
+**Use case: UC2 - Load contact from save file**
 
 **Actor: `BizBook`**
 
@@ -322,7 +322,7 @@ _{More to be added}_
 
 1.  Actor searches OS directory for save file.
 2.  OS returns save file object.
-3.  For each line is save file.
+3.  For each line of save file.
 
     - 3.1 Actor reads a line from the file.
     - 3.2 Actor parses the line into a contact object.
