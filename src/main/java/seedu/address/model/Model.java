@@ -76,6 +76,12 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    /**
+     * Marks the given person as contacted.
+     * The person must exist in the address book.
+     */
+    void markAsContacted(Person target);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
