@@ -17,6 +17,18 @@ Target User: Insurance agents tracking their clients
 Value proposition: provides quick and efficient access to client details, tailored for insurance agents who need a streamlined interface to manage contacts, track policy updates, and schedule client follow-ups.
 
 
+
+### Mant Koh En Wei
+
+<img src="images/m-kew.png" width="200px">
+
+[[homepage](http://www.comp.nus.edu.sg/~damithch)]
+[[github](https://github.com/m-kew)]
+[[portfolio](team/m-kew.md)]
+
+
+
+
 ### Denon Chong
 
 <img src="images/ssirmentos.png" width="200px">
@@ -25,17 +37,8 @@ Value proposition: provides quick and efficient access to client details, tailor
 [[github](https://github.com/ssirmentos)]
 [[portfolio](team/ssirmentos.md)]
 
+
 * Role: Developer
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
 
 ### Ong Juan Wen
 
