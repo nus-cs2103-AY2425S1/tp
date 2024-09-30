@@ -11,7 +11,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-
 ### Eda Yeo
 
 <img src="images/edayeo.png" width="200px">
@@ -21,8 +20,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: CI/CD
-=======
-* Role: Project Advisor
+
+### Li Yifeng
+
+<img src="images/charlesliyifeng.png" width="200px">
+
+[[github](https://github.com/charlesliyifeng)]
+
+* Role: Developer
+* Responsibilities: Logic + Testing
 
 ### Sean Foong
 
