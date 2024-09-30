@@ -27,16 +27,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/johndoe.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Data
 
-### Johnny Doe
+### Siow Rui Ming
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ruiming97.png.jpg" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/ruiming97)] [[portfolio](team/ruiming97.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Ui
 
 ### Jean Doe
 
