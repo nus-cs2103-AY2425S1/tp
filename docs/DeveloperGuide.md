@@ -446,7 +446,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Contact Details**: Info about a person: name, email, address, phone number etc.
+* **Target audience**: Wedding planners
+* **CLI**: Command Line Interface
+* **GUI**: Graphic User Interface
 
 --------------------------------------------------------------------------------------------------------------------
 
