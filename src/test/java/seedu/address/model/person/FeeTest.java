@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 
 
-class FeeTest {
+public class FeeTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
@@ -45,13 +45,13 @@ class FeeTest {
     @Test
     public void toStringTest() {
         Fee fee = new Fee("1.23");
-        assertEquals("1.23/h", fee.toString());
+        assertEquals("1.23", fee.toString());
 
         Fee fee2 = new Fee("1.0");
-        assertEquals("1.00/h", fee2.toString());
+        assertEquals("1.00", fee2.toString());
 
         Fee fee3 = new Fee("0");
-        assertEquals("0.00/h", fee3.toString());
+        assertEquals("0.00", fee3.toString());
     }
 
     @Test
