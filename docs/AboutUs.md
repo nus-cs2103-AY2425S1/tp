@@ -11,13 +11,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Yuvraj Aryan Singh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yuvrajaryan.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/yuvrajaryan)]
+[[portfolio](team/yuvrajaryan.md)]
 
 - Role: Project Advisor
 
@@ -31,31 +30,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 - Role: Developer
 - Responsibilities: Testing, Integration
 
-### Johnny Doh
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-- Role: Developer
-- Responsibilities: Data
-
-### Jean Doh
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-- Role: Developer
-- Responsibilities: Dev Ops + Threading
-
 ### Keith Ong
 
 <img src="images/keithxun.png" width="200px">
 
 [[github](http://github.com/keithxun)]
 [[portfolio](team/keithxun.md)]
+
 
 - Role: Developer
 - Responsibilities: UI, Scheduling and tracking
