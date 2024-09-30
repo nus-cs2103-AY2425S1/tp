@@ -300,32 +300,64 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TutorEase` and the **Actor** is the `Tutor`, unless specified otherwise)
 
-**Use case: Delete a person**
+**System**: TutorEase  
+**Use Case**: UC04 - Add lesson for student  
+**Actor:** Tutor  
+**MSS:**
+1. Tutor keys in required fields to add student contact.
+2. TutorEase adds the lesson to the student.  
+   Use case ends.
 
-**MSS**
+**Extensions:**
+* 1a. TutorEase detects bad or wrongly formatted inputs.
+    * 1a1. TutorEase prompts Tutor with correct format.
+    * 1a2. Tutor enters new data.
+      Steps 1a1 to 1a2 are repeated until the data entered are correct.  
+      Use case resumes from Step 2.
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+* 1b. TutorEase detects that the student does not exist.
+    * 1b1. TutorEase prompts Tutor to key in data for a student that exists.
+    * 1b2. Tutor enters new data.  
+      Steps 1b1 to 1b2 are repeated until the data entered are correct.  
+      Use case resumes from Step 2.
 
-    Use case ends.
+**System:** TutorEase  
+**Use Case**: UC05 - Delete lesson for student  
+**Actor:** Tutor  
+**MSS:**
+1. Tutor keys in required fields to delete student contact.
+2. TutorEase deletes the lesson for the student.  
+   Use case ends.
 
-**Extensions**
+**Extensions:**
+* **1a.** TutorEase detects bad or wrongly formatted inputs.
+    * **1a1.** TutorEase prompts Tutor with correct format.
+    * **1a2.** Tutor enters new data.  
+      Steps 1a1 to 1a2 are repeated until the data entered are correct.  
+      Use case resumes from Step 2.
 
-* 2a. The list is empty.
+* **1b.** TutorEase detects that the student does not exist.
+    * **1b1.** TutorEase prompts Tutor to key in data for a student that exists.
+    * **1b2.** Tutor enters new data.  
+      Steps 1b1 to 1b2 are repeated until the data entered are correct.  
+      Use case resumes from Step 2.
 
-  Use case ends.
+**System:** TutorEase  
+**Use Case**: UC06 - List all lessons  
+**Actor:** Tutor  
+**MSS:**
+1. Tutor keys in required fields to list all lessons.
+2. TutorEase lists all lessons.    
+   Use case ends.
 
-* 3a. The given index is invalid.
-
-    * 3a1. AddressBook shows an error message.
-
-      Use case resumes at step 2.
-
-*{More to be added}*
+**Extensions:**
+* **1a.** TutorEase detects bad or wrongly formatted inputs.
+    * **1a1.** TutorEase prompts Tutor with correct format.
+    * **1a2.** Tutor enters new data.  
+      Steps 1a1 to 1a2 are repeated until the data entered are correct.  
+      Use case resumes from Step 2.
 
 ### Non-Functional Requirements
 
