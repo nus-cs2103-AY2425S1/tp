@@ -7,6 +7,7 @@ import static seedu.address.model.person.Days.isValidDay;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Objects;
 
 
 /**
@@ -126,9 +127,8 @@ public class Schedule {
 
     @Override
     public int hashCode() {
-        return dayValue.hashCode()
-                + startTimeValue.hashCode()
-                + endTimeValue.hashCode();
+        // use this method for custom fields hashing instead of implementing your own
+        return Objects.hash(dayValue, startTimeValue, endTimeValue);
     }
 
     private Days getDayComponent(String time) {
