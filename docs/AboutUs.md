@@ -11,14 +11,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### ALEK KWEK
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/alekkwek18.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/AlekKwek18)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/alekkwek18.md)]
 
 * Role: Developer
-
+* Responsibilities: Maintain and add features for contacts
+* 
 ### BENJAMIN CHIN HAO NAN
 
 <img src="images/johndoe.png" width="200px">
