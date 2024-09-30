@@ -262,27 +262,28 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* a teacher in an educational institution (private institution, i.e. tuition centers)
+* need to manage large amount of student information
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: It allows for easy and efficient retrieval or storage of student information while providing a clean and user-friendly interface. The application supports modularity, and users are able to import and export to other similar applications without relying on complex or costly software.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​  | I want to …​                                     | So that I can…​                                                     |
+|----------|----------|--------------------------------------------------| ------------------------------------------------------------------- |
+| `* * *`  | educator | add students into the database                   | easily refer to their information when needed             |
+| `* * *`  | educator | list all students to view the number of students |I can collate that information                                       |
+| `* * *`  | educator | delete a student                                 |remove entries that I no longer need                                 |
+| `* * *`  | educator | find a person by name                            |I can find the relevant person without scrolling through a long list |
+| `* *`    | educator | clear all information                            |I can start anew for a new academic year              |
+| `* *`    | educator | update details easily when there are changes     |I can have the most updated information                                            |
 
 *{More to be added}*
 
