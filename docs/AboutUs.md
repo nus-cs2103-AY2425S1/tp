@@ -21,6 +21,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data, UI
 
+### Yuvraj Aryan Singh
+
+<img src="images/yuvrajaryan.png" width="200px">
+
+[[github](http://github.com/yuvrajaryan)]
+[[portfolio](team/yuvrajaryan.md)]
+
 
 ### Daniel Lai
 
