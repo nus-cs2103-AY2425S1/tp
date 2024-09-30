@@ -31,12 +31,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### MAU ZE WEI
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/wassilililily.png" width="200px">
 
 [[github](https://github.com/wassilililily)] [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: 
+* Responsibilities: Integration: In charge of versioning of the code, maintaining the code repository, integrating various parts of the software to create a whole.
 
 ### SOO JUN BOON
 
