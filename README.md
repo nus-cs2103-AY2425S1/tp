@@ -1,6 +1,10 @@
-[![CI Status](https://ay2425s1-cs2103t-w14-3.github.io/workflows/Java%20CI/badge.svg)](https://ay2425s1-cs2103t-w14-3.github.io/actions)
+[![CI Status](https://github.com/ay2425s1-cs2103t-w14-3/tp/workflows/Java%20CI/badge.svg)](https://github.com/ay2425s1-cs2103t-w14-3/tp/actions)
 
 ![Ui](docs/images/Ui.png)
+
+
+
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 * This is **a sample project for Software Engineering (SE) students**.<br>
   Example usages:
