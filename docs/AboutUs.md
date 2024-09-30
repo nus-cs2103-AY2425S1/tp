@@ -21,13 +21,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### BENJAMIN CHIN HAO NAN
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/quasant.png" width="200px">
 
 [[github](https://github.com/Quasant)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/quasant.md)]
 
 * Role: Developer
-* Responsibilities: 
+* Responsibilities: TBC
 
 ### MAU ZE WEI
 
