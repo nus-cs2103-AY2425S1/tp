@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# ContactCS Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -35,7 +35,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-F12-1/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-F12-1/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -67,13 +67,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-F12-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-F12-1/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-F12-1/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -84,7 +84,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-F12-1/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -116,7 +116,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-F12-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
@@ -139,7 +139,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-F12-1/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -274,27 +274,57 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
+* NUS Computer Science Freshman
+* unfamiliar with the school system(team teams, school structures, communication channels etc.)
+* has no idea where to look for contact info of relevant personnel when certain issues happen, for example
+  * Informing tutor about absence in tutorial/lab due to illness
+  * Asking Prof for clarification/actions on certain admin issues
+  * Contact school financial office to settle relevant issues
 * has a need to manage a significant number of contacts
+* find it frustrating to gather contacts from all types of platforms
+* has the initiatives to jot down contact info when such information is given during the class
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: \
+Allows NUS CS freshmen to easily locate the admin contact details when needed, 
+which helps them better manage contact details of their professors, teaching assistants, classmates, CCA mates, offices, emergency helplines, etc.
+so that they can focus more on their study.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​                                                                                                      | I want to …​                                                                                                                | So that I can…​                                                                      |
+|----------|--------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|
+| `* * *`  | Y1 CS Student                                                                                                | add a contact                                                                                                               | start tracking my contacts on this app                                               |
+| `* * *`  | Y1 CS student who prefers a clean address book with useful contacts only                                     | delete contacts                                                                                                             | remove contacts that I no longer need to keep track of                               |
+| `* * *`  | Y1 CS student who hates using a mouse or touchpad                                                            | access to all functionalities of the app with keyboard                                                                      | manage the contacts in the most efficient way                                        |
+| `* * *`  | Y1 CS student                                                                                                | search for contacts info from my address book using name, module code or role                                               | find their contact immediately and reach out to them to settle any issues            |
+| `* *`    | Y1 CS student who struggles to remember who to reach out to for certain issues                               | find the correct contact info by searching the category of the issue that I am trying to settle                             | seek help immediately even when I forget who to reach out to                         |
+| `* *`    | Y1 CS student who wants to seek clarifications/actions from a professor regarding certain issues             | find contact details of the professor(s) for a course                                                                       | seek help/assistance with ease                                                       |
+| `* *`    | Y1 CS student who is sick before a tutorial/lab/exam                                                         | find contact details of my TA                                                                                               | easily inform them about my absence on time                                          |
+| `* *`    | Y1 CS student who is involved in any accident or emergency                                                   | find contact details of campus security                                                                                     | protect me and my friends' safety immediately                                        |
+| `* *`    | Y1 CS student who has financial concerns for school                                                          | find contact details of nus financial office                                                                                | settle any financial related issues                                                  |
+| `* *`    | Y1 CS student who needs to update contact info                                                               | update contact info for courses in this semester with that in the next semester                                             | keep info updated in more efficient ways                                             |
+| `* *`    | Y1 CS student who frequently access some of the contact details but lazy to repeat same commands everytime   | classify frequently accessed contacts and query them using shorter commands                                                 | access those frequent contact without wasting too much time                          |  
+| `* *`    | New user                                                                                                     | see usage instructions                                                                                                      | refer to instructions when I forget how to use the App                               |
+| `* *`    | Y1 CS student who is a fresh man in a cca                                                                    | find contact details of my cca leader/friends                                                                               | settle any cca-related issues with them                                              |
+| `* *`    | Y1 CS student who are unsure about the procedure of making an appointment with a doctor                      | find contact details for UHC and NUH easily                                                                                 | make appointment with doctor as early as possible                                    |
+| `* *`    | Y1 CS student who are facing an academic challenges and mental issue                                         | find contact details of counselling service                                                                                 | seek help and support from others before it is too late                              |
+| `* *`    | Y1 CS student who lives in campus and don't know where to contact with if I need to enquire some information | find contact details of campus hostels easily                                                                               |                                                                                      |
+| `* *`    | Y1 CS student who is keen to study together with friends/wants to manage friends know from class             | find out contact of friends who attend a specific module/course during the semester                                         |                                                                                      |
+| `* *`    | Potential user exploring the app                                                                             | see the app populated with sample data                                                                                      | see how the app will look like when it is in use.                                    |
+| `* *`    | Y1 CS Student who hates typing long commands                                                                 | use shortcuts to complete commands automatically                                                                            |                                                                                      |
+| `*`      | Y1 CS student who wants to share my contact list with friends who need them                                  | transfer useful data to help others efficiently                                                                             |                                                                                      |
+| `*`      | Y1 CS student who finds it troublesome to open various email platform for communication                      | open Outlook's new email screen automatically from the app itself                                                           |                                                                                      |
+| `*`      | Y1 CS student who are unsure about the modules planning but don't know who to reach out for                  | find the respective contact of academic advisors                                                                            |                                                                                      |
+| `*`      | Y1 CS student who is unaware of the various opportunities provided by nus and soc                            | find the contact emails and main pages for the opportunities such as SEP, NOC, UROP + ReX, summer school, winter school etc |                                                                                      |
+| `*`      | Y1 CS student who is lazy                                                                                    | use up/down arrow to access recent commands                                                                                 | avoid typing repeated command                                                        |
+| `*`      | User who performed action wrongly when using the app                                                         | redo/undo current actions                                                                                                   | perform multiple actions efficiently without wasting time on correcting the mistakes |
 
 *{More to be added}*
 
