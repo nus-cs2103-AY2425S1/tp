@@ -7,7 +7,7 @@
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email seer[at]comp.nus.edu.sg
 
 ## Project team
 
@@ -18,8 +18,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/QinHaichen12)]
 [[portfolio](team/qinhaichen12.md)]
 
-* Role: Developer
-* Responsibilities: Data, UI
+- Role: Developer
+- Responsibilities: Data, UI
 
 ### Yuvraj Aryan Singh
 
@@ -28,6 +28,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/yuvrajaryan)]
 [[portfolio](team/yuvrajaryan.md)]
 
+- Role: Developer
+- Responsibilities: Data, UI
 
 ### Daniel Lai
 
@@ -48,5 +50,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/keithxun.md)]
 
 - Role: Developer
-- Responsibilities: UI, Scheduling and tracking
+- Responsibilities: UI
 
+### Tag Han
+
+<img src="images/taggyhan.png" width="200px">
+
+[[github](https://github.com/taggyhan)]
+[[portfolio](team/taggyhan.md)]
+
+- Role: Developer
+- Responsibilities: UI, Scheduling and tracking
