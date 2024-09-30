@@ -11,6 +11,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Qin Haichen
+
+<img src="images/qinhaichen12.png" width="200px">
+
+[[github](https://github.com/QinHaichen12)]
+[[portfolio](team/qinhaichen12.md)]
+
+* Role: Developer
+* Responsibilities: Data, UI
+
 ### Yuvraj Aryan Singh
 
 <img src="images/yuvrajaryan.png" width="200px">
@@ -18,7 +28,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/yuvrajaryan)]
 [[portfolio](team/yuvrajaryan.md)]
 
-- Role: Project Advisor
 
 ### Daniel Lai
 
@@ -30,6 +39,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 - Role: Developer
 - Responsibilities: Testing, Integration
 
+
 ### Keith Ong
 
 <img src="images/keithxun.png" width="200px">
@@ -37,6 +47,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/keithxun)]
 [[portfolio](team/keithxun.md)]
 
-
 - Role: Developer
 - Responsibilities: UI, Scheduling and tracking
+
