@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+AgentAssist is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AgentAssist can get your sales tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -130,7 +130,7 @@ Examples:
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
-
+`
 Format: `delete INDEX`
 
 * Deletes the person at the specified `INDEX`.
@@ -140,6 +140,19 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+### Adding a remark to a contact: `remark`
+
+Adds a remark to the specified person from the address book. If there's an existing remark, it is overwritten by the new remark.
+Format: `remark INDEX [r/REMARK]`
+
+* Adds a remark to the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `remark 2 r/He is very rich` adds the remark "He is very rich" to the 2nd person in the address book.
+* `find Betsy` followed by `remark 1 r/"She is my friend"` adds the remark "She is my friend" to the 1st person in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
