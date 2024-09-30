@@ -133,7 +133,7 @@ public class Schedule {
 
     private Days getDayComponent(String time) {
         String[] split = time.split("-");
-        return Days.valueOf(split[0]);
+        return Days.valueOf(split[0].toUpperCase());
     }
 
     private LocalTime getStartTimeComponent(String time) {
