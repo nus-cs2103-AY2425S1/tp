@@ -23,7 +23,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/ruiming97.png.jpg" width="200px">
 
-[[github](http://github.com/ruiming97)] 
+[[github](http://github.com/ruiming97)]
 [[portfolio](team/ruiming97.md)]
 
 - Role: Developer
