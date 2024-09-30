@@ -11,51 +11,44 @@ You can reach us at the email seer[at]comp.nus.edu.sg
 
 ## Project team
 
-### John Doe
+### Qin Haichen
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/qinhaichen12.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doh
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doh
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/QinHaichen12)]
+[[portfolio](team/qinhaichen12.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Data, UI
 
-### Jean Doh
+### Yuvraj Aryan Singh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yuvrajaryan.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/yuvrajaryan)]
+[[portfolio](team/yuvrajaryan.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
 
-### James Doh
+### Daniel Lai
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/starchypotatocode.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/starchypotatocode)]
+[[portfolio](team/starchypotatocode.md)]
+
+- Role: Developer
+- Responsibilities: Testing, Integration
+
+
+### Keith Ong
+
+<img src="images/keithxun.png" width="200px">
+
+[[github](http://github.com/keithxun)]
+[[portfolio](team/keithxun.md)]
+
+- Role: Developer
+- Responsibilities: UI, Scheduling and tracking
 
 * Role: Developer
 * Responsibilities: UI
@@ -65,7 +58,7 @@ You can reach us at the email seer[at]comp.nus.edu.sg
 <img src="images/taggyhan.png" width="200px">
 
 [[github](https://github.com/taggyhan)]
-[[portfolio](https://drive.google.com/file/d/15wkTIRL-KbPrgr-XD4S3tDqCMvUuK-t5/view?usp=sharing)]
+[[portfolio](team/taggyhan.md)]
 
 * Role: Developer
 * Responsibilities: UI, Scheduling and tracking
