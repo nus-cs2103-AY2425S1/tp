@@ -23,7 +23,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Hrishiraj Mandal
 
-<img src="images/raj.png" width="200px">
+<img src="images/virusrwj223.png" width="200px">
 
 [[github](https://github.com/Virusrwj223)]
 [[portfolio](https://virusrwj223.github.io/hm)]
