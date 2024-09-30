@@ -74,21 +74,21 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+### Create a new contact: `add`
 
-### Adding a person: `add`
+Add new contact (client or vendor) to contact list.
 
-Adds a person to the address book.
-
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
+Format:
+`add vendor /name [name] /hp [phone number] /email [email] /address [address] /service [service type]`
+`add client /name [name] /hp [phone number] /email [email] /address [address] /date [wedding date]`
 <box type="tip" seamless>
 
 **Tip:** A person can have any number of tags (including 0)
 </box>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add vendor /name ABC Catering /hp 98765432 /email contact@abccatering.com /address Blk 123 Bukit Merah St 7 /service Catering`
+* `add client /name Jane Doe /hp 91234567 /email jane.doe@example.com /address Blk 231 Sembawang St 4 /date 2024-12-15`
 
 ### Listing all persons : `list`
 
@@ -196,7 +196,8 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Create Vendor Contact** | `add vendor /name [name] /hp [phone number] /email [email] /address [address] /service [service type]` <br> e.g., `add vendor /name ABC Catering /hp 98765432 /email contact@abccatering.com /address Blk 123 Bukit Merah St 7 /service Catering`
+**Create Client Contact** | `add client /name [name] /hp [phone number] /email [email] /address [address] /date [wedding date] ` <br> e.g., `add client /name Jane Doe /hp 91234567 /email jane.doe@example.com /address Blk 231 Sembawang St 4 /date 2024-12-15`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
