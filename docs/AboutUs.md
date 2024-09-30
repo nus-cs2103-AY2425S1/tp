@@ -11,13 +11,13 @@ You can reach us at the email `e1121785@u.nus.edu`
 
 ### Soh Wei Kiat
 
-<img src="images/weikiat.jpg" width="200px">
+<img src="images/weiKiat.png" width="200px">
 
 [[github](https://github.com/jovensoh)]
 [[portfolio](http://jovensoh.github.io)]
 
 * Role: Developer
-* Responsibilities: UI, DevOps
+* Responsibilities: UI/UX, DevOps
 
 ### Kaarthik K.
 
