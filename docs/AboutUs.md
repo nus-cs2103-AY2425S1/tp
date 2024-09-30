@@ -18,7 +18,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/fui03)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
+* Role: Project Developer
 * Responsibilities: Integration and Testing
 
 ### Lo Yong Zhe
@@ -31,32 +31,32 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Software Engineer
 * Responsibilities: Data
 
-### Jane Doe
+### Teh Wai Hong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/waihongteh.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/waihongteh)]
+[[portfolio](team/waihongteh.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
 
-### Jean Doe
+### Tan San Chian
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/tansanchian.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/tansanchian)]
+[[portfolio](team/tansanchian.md)]
 
-* Role: Developer
-* Responsibilities: Devops + Threading
+* Role: Software Engineer
+* Responsibilities: Backend Development
 
-### James Doe
+### Samson Chew Jun Jie
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/samsonchew.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/SamsonChew)]
+[[portfolio](team/SamsonChew.md)]
 
 * Role: Developer
 * Responsibilities: UI
