@@ -444,8 +444,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 * **DBMS**: Database Management System, a software providing tools for structural data storage.
+* **CLI**: Command-line interface where you interact with the system using your keyboard
+* **API**: Application Programming Interface, a set of programming code that enables data transmission between one software and another
+* **Abstraction and Cohesion**: Abstraction is hiding all but relevant data in order to reduce complexity and increase efficiency. Cohesion is the degree which elements belong together
+* **Version Control System**: Version control is the practice of tracking and managing changes to software code, and there are many version control systems such as Git, Apache Subversion etc
 
 --------------------------------------------------------------------------------------------------------------------
 
