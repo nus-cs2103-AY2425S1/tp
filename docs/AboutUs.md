@@ -13,7 +13,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Zwe Zeya
 
-<img src="images/ZweZeya.png" width="200px">
+<img src="images/zwezeya.png" width="200px">
 
 [[github](https://github.com/ZweZeya)]
 [[portfolio](team/johndoe.md)]
