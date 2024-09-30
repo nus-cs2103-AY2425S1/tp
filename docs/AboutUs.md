@@ -21,7 +21,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Wu Bojin
 
-<img src="images/bojin.png" width="200px">
+<img src="images/wubojin.png" width="200px">
 
 [[github](http://github.com/wubojin)]
 [[portfolio](team/johndoe.md)]
