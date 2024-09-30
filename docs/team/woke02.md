@@ -1,6 +1,6 @@
 ---
   layout: default.md
-  title: "Kelly Wong's Project Portfolio Page"
+  title: "John Doe's Project Portfolio Page"
 ---
 
 ### Project: AddressBook Level 3
