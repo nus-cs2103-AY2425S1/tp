@@ -5,10 +5,22 @@ title: Alek Kwek's Project Portfolio Page
 
 ### Project: TalentConnect
 
-**TalentConnect is designed for solo, freelance, or third-party recruiters who need to manage a large number of
-candidates and job listings.** These users often work independently, seeking a tool that helps
-them efficiently track candidate details and job requirements. While it has a GUI, most of the user
-interactions happen using a CLI (Command Line Interface).
+TalentConnect is a desktop address book application for freelancer third-party
+recruiters, with functionality to enhance the recruitment management experience.
+This includes matching job listings to candidates and tagging successful candidates
+to companies for billing.
 
 Given below are my contributions to the project.
 
+* **New Feature**: NIL
+
+* **Code contributed**: NIL
+
+* **Project management**:
+    * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+
+* **Enhancements to existing features**: NIL
+
+* **Documentation**:
+    * User Guide: NIL
+    * Developer Guide: NIL
