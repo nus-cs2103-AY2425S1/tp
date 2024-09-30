@@ -1,4 +1,5 @@
 [![CI Status](https://github.com/AY2425S1-CS2103-F13-3/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103-F13-3/tp/actions)
+[![codecov](https://codecov.io/gh/AY2425S1-CS2103-F13-3/tp/graph/badge.svg?token=RORXHI4Y1Q)](https://codecov.io/gh/AY2425S1-CS2103-F13-3/tp)
 ![Ui](docs/images/Ui.png)
 
 * This is **a sample project for Software Engineering (SE) students**.<br>
