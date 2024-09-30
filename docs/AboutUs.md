@@ -19,12 +19,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Lavanya Garg
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/lavanyagarg112.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/lavanyagarg112)]
+[[portfolio](team/lavanyagarg112.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
