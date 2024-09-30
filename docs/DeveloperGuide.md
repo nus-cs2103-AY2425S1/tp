@@ -312,13 +312,54 @@ _{More to be added}_
 
     Use case resumes at step 2.
 
-_{More to be added}_
+**Use case: UC2 Load contact from save file**
+
+**Actor: `BizBook`**
+
+**Guarantees:** Contact list is initialized with available data.
+
+**MSS**
+
+1.  `BizBook` searches OS directory for save file.
+2.  OS returns save file object.
+3.  For each line is save file.
+
+    - 3.1 `BizBook` reads a line from the file.
+    - 3.2 `BizBook` parses the line into a contact object.
+    - 3.3 `BizBook` adds the contact object to the contact list.
+    - 3.4 Repeat steps 3.1 - 3.3 until all lines are processed.
+
+4.  `BizBook` finishes loading contacts into the contact list.
+
+    Use case ends.
+
+**Extensions**
+
+- 1a. Save file does not exist.
+
+  - 1a1. `BizBook` shows a warning message.
+  - 1a2. `BizBook` creates a new save file.
+  - 1a3. `BizBook` loads an empty contact list.
+
+  Use case ends.
+
+- 3.1a. Line does not fit proper contact format.
+
+  - 3.1a1. `BizBook` ignores line.
+  - 3.1a2. `BizBook` shows a warning message.
+
+  Use case resumes at step 3.1.
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1.  The system should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2.  The system should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
+3.  The system should maintain data integrity, where system should ensure that data is accurate and consistent, preventing duplicate entries.
+4.  The system should be developed in a modular way for easier updates and bug fixes.
+5.  The system should ensure data consistency accross all instances.
+6.  The system should continue functioning in the event of a missing or corrupted save file.
+7.  The system should encrypt sensitive data to follow data protection laws.
+8.  The interface should be intuitive and easy to use.
 
 _{More to be added}_
 
