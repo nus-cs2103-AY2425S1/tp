@@ -8,7 +8,7 @@ title: EventfulNUS
 
 ![Ui](images/Ui.png)
 
-**<h2>🦁 EventfulNUS is every NUS Inter-Faculty Games (IFG) organiser's handy contact manager! 🏆</h2>** 
+**🦁 EventfulNUS is every NUS Inter-Faculty Games (IFG) organiser's handy contact manager! 🏆** 
 
 **All event organizers will be able to:**
 - 🏀 View what kind of participant each contact is in the application is without having to dig through paperwork / NUSync
@@ -19,7 +19,6 @@ While it has a GUI, most of the user interactions happen using a CLI (Command Li
 
 * If you are interested in using EventfulNUS, head over to the [_Quick Start_ section of the **User Guide**](https://ay2425s1-cs2103t-w14-4.github.io/tp/UserGuide.html#quick-start).
 * If you are interested in contributing EventfulNUS, the [**Developer Guide**](https://ay2425s1-cs2103t-w14-4.github.io/tp/DeveloperGuide.html) is a good place to start.
-
 
 **Acknowledgements**
 
