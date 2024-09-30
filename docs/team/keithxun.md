@@ -8,8 +8,8 @@
 
 ## Education
 
-**National University of Singapore**  
-_Bachelor of Computing_ (Aug 2023 – Aug 2027)  
+**National University of Singapore**
+_Bachelor of Computing_ (Aug 2023 – Aug 2027)
 **GPA**: 4.8
 
 ---
