@@ -263,14 +263,14 @@ _{Explain here how the data archiving feature will be implemented}_
 **Target user profile**:
 
 * has a need to manage a significant number of contacts
-* needs to manage appointments for these contacts
+* has a need to manage appointments for these contacts
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * values tools that allow for rapid data entry and retrieval
 * requires robust search capabilities to quickly find patient or doctor information
 
-**Value proposition**: manage contacts and appointments faster than a GUI app
+**Value proposition**: manage contacts and appointments faster than a typical GUI driven app
 
 
 ### User stories
@@ -311,20 +311,367 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `**`     | user                                     | update the status of doctors (available, on leave, etc)                                          |                                                                                                                                 |
 | `* *`    | user                                     | track the availability of doctors and when they are free based on patient records                |                                                                                                                                 |
 | `* *`    | healthcare provider                      | add notes to patient records                                                                     |                                                                                                                                 |
-| `*`      | healthcare provider                      | view a patient's past appointments in this clinic (not upcoming)                                 | better understand their medical history and prepare their doctor for consultations                                              |
+| `*`      | healthcare provider                      | view a patient's past appointments in this clinic                                                | better understand their medical history and prepare their doctor for consultations                                              |
 
 ### Use cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Add a patient**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to add a patient
+2.  AddressBook adds the patient
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given patient is a duplicate already in the AddressBook.
+
+    * 1a1. AddressBook shows an error message.
+
+      Use case ends.
+
+* 1b. The given name uses the wrong format.
+
+    * 1b1. AddressBook shows an error message.
+
+      Use case ends.
+
+* 1c. The given phone number uses the wrong format.
+
+    * 1c1. AddressBook shows an error message.
+
+      Use case ends.
+
+* 1d. The given email uses the wrong format.
+
+    * 1d1. AddressBook shows an error message.
+
+      Use case ends.
+
+* 1e. The given address uses the wrong format.
+
+    * 1e1. AddressBook shows an error message.
+
+      Use case ends.
+
+* 1f. The given date of birth uses the wrong format.
+
+    * 1f1. AddressBook shows an error message.
+
+      Use case ends.
+
+* 1g. The given gender uses the wrong format.
+
+    * 1g1. AddressBook shows an error message.
+
+      Use case ends.
+
+**Use case: UC02 - Add a doctor**
+
+**MSS**
+
+1.  User requests to add a doctor
+2.  AddressBook adds the doctor
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given doctor is a duplicate already in the AddressBook.
+
+    * 1a1. AddressBook shows an error message.
+
+      Use case ends.
+
+* 1b. The given name uses the wrong format.
+
+    * 1b1. AddressBook shows an error message.
+
+      Use case ends.
+
+* 1c. The given phone number uses the wrong format.
+
+    * 1c1. AddressBook shows an error message.
+
+      Use case ends.
+
+* 1d. The given email uses the wrong format.
+
+    * 1d1. AddressBook shows an error message.
+
+      Use case ends.
+
+* 1e. The given address uses the wrong format.
+
+    * 1e1. AddressBook shows an error message.
+
+      Use case ends.
+
+* 1f. The given speciality uses the wrong format.
+
+    * 1f1. AddressBook shows an error message.
+
+      Use case ends.
+
+<a name="list-patient-anchor-point"></a>
+**Use case: UC03 - List all patients**
+
+**MSS**
+
+1.  User requests to list patients
+2.  AddressBook shows a list of all patients previously added
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+    * 2a1. AddressBook shows a message to indicate list is empty. 
+     
+      Use case ends.
+
+<a name="list-doctor-anchor-point"></a>
+**Use case: UC04 - List all doctors**
+
+**MSS**
+
+1.  User requests to list doctors
+2.  AddressBook shows a list of all doctors previously added
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+    * 2a1. AddressBook shows a message to indicate list is empty.
+
+      Use case ends.
+
+<a name="find-patient-anchor-point"></a>
+**Use case: UC05 - Find a patient**
+
+**MSS**
+
+1.  User requests to find a specific patient
+2.  AddressBook shows a list of all patients with matching names
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given name uses the wrong format.
+
+    * 1a1. AddressBook shows an error message.
+
+      Use case ends.
+
+* 2a. There are no patients with matching names.
+
+    * 2a1. AddressBook shows a message to indicate no matches found.
+
+      Use case ends.
+
+<a name="find-doctor-anchor-point"></a>
+**Use case: UC06 - Find a doctor**
+
+**MSS**
+
+1.  User requests to find a specific doctor
+2.  AddressBook shows a list of all doctors with matching names
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given name uses the wrong format.
+
+    * 1a1. AddressBook shows an error message.
+
+      Use case ends.
+
+* 2a. There are no doctors with matching names.
+
+    * 2a1. AddressBook shows a message to indicate no matches found.
+
+      Use case ends.
+
+**Use case: UC07 - Delete a patient**
+
+**MSS**
+
+1.  User requests to either [list patients (UC03)](#list-patient-anchor-point) or [find a patient (UC05)](#find-patient-anchor-point)
+2.  AddressBook shows a list of patients
+3.  User requests to delete a specific patient in the list
+4.  AddressBook deletes the patient
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC08 - Delete a doctor**
+
+**MSS**
+
+1.  User requests to either [list doctors (UC04)](#list-doctor-anchor-point) or [find a doctor (UC06)](#find-doctor-anchor-point)
+2.  AddressBook shows a list of doctors
+3.  User requests to delete a specific doctor in the list
+4.  AddressBook deletes the doctor
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC09 - Add an appointment**
+
+**MSS**
+
+1.  User requests to add an appointment
+2.  AddressBook adds the appointment
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given appointment is a duplicate already in the AddressBook.
+
+    * 1a1. AddressBook shows an error message.
+
+      Use case ends.
+
+* 1b. The given patient name uses the wrong format.
+
+    * 1b1. AddressBook shows an error message.
+
+      Use case ends.
+
+* 1c. The given doctor name uses the wrong format.
+
+    * 1c1. AddressBook shows an error message.
+
+      Use case ends.
+
+* 1d. The given date uses the wrong format.
+
+    * 1d1. AddressBook shows an error message.
+
+      Use case ends.
+
+* 1e. The given time uses the wrong format.
+
+    * 1e1. AddressBook shows an error message.
+
+      Use case ends.
+
+<a name="list-appt-anchor-point"></a>
+**Use case: UC10 - List all appointments scheduled at a certain date and time**
+
+**MSS**
+
+1.  User requests to list appointments scheduled at a certain date and time
+2.  AddressBook shows a list of all appointments with matching date and time
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given date uses the wrong format.
+
+    * 1a1. AddressBook shows an error message.
+
+      Use case ends.
+
+* 1b. The given time uses the wrong format.
+
+    * 1b1. AddressBook shows an error message.
+
+      Use case ends.
+
+* 2a. There are no appointments with matching date and time.
+
+    * 2a1. AddressBook shows a message to indicate no matches found.
+
+      Use case ends.
+
+**Use case: UC11 - Delete an appointment**
+
+**MSS**
+
+1.  User requests to [list appointments (UC10)](#list-appt-anchor-point)
+2.  AddressBook shows a list of appointments
+3.  User requests to delete a specific appointment in the list
+4.  AddressBook deletes the appointment
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC12 - Mark an appointment as done**
+
+**MSS**
+
+1.  User requests to [list appointments (UC10)](#list-appt-anchor-point)
+2.  AddressBook shows a list of appointments
+3.  User requests to mark a specific appointment in the list
+4.  AddressBook marks the appointment as done
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC13 - Mark an appointment as undone**
+
+**MSS**
+
+1.  User requests to [list appointments (UC10)](#list-appt-anchor-point)
+2.  AddressBook shows a list of appointments
+3.  User requests to unmark a specific appointment in the list
+4.  AddressBook marks the appointment as undone
 
     Use case ends.
 
@@ -359,6 +706,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Healthcare Data Privacy Regulations**: Laws and standards that govern the storage and access to patient and doctor data. Examples include HIPAA.
 * **HIPAA**: The Health Insurance Portability and Accountability Act, a regulation in the U.S. that mandates secure handling of personal health information.
 * **Audit**: A record of all changes made in the system, including who made the changes and when.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
