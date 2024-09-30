@@ -21,16 +21,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Testing, Integration, Code Quality
 
-### Chen Yu Bryan
-
-<img src="images/bryancheny.png" width="200px">
-
-[[github](https://github.com/bryancheny)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Documentation + Testing
-
 ### Jane Doe
 
 <img src="images/johndoe.png" width="200px">
