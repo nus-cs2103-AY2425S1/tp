@@ -21,12 +21,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Goh Song Lin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/gohsl99.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/bryanckh)]
+[[github](http://github.com/gohsl99)]
+[[portfolio](team/gohsl99.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
