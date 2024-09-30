@@ -275,13 +275,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-- has a need to manage a significant number of contacts
-- prefer desktop apps over other types
-- can type fast
-- prefers typing to mouse interactions
-- is reasonably comfortable using CLI apps
+* is a CCA leader in a NUS Hall
+* is responsible for managing member participation, tracking attendance, and allocating points
+* prefers streamlined solutions to minimize manual administrative work
+* comfortable with both desktop and command-line interfaces (CLI)
+* often managing multiple responsibilities, including academic workload and hall duties
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+
+**Value proposition**: Hall Pointer empowers CCA leaders in NUS Halls to efficiently manage member tracking by streamlining participation recording, points allocation, and member information (such as room addresses). It simplifies manual data management, allowing leaders to focus on organizing activities rather than administrative tasks. Ideal for small, close-knit CCAs, it ensures quick access to updated information, enabling accurate and easy sharing of participation records with hall management or other stakeholders.
 
 ### User stories
 
