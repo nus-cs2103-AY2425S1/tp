@@ -275,12 +275,11 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* is a CCA leader in a NUS Hall
-* is responsible for managing member participation, tracking attendance, and allocating points
-* prefers streamlined solutions to minimize manual administrative work
-* comfortable with both desktop and command-line interfaces (CLI)
-* often managing multiple responsibilities, including academic workload and hall duties
-
+- is a CCA leader in a NUS Hall
+- is responsible for managing member participation, tracking attendance, and allocating points
+- prefers streamlined solutions to minimize manual administrative work
+- comfortable with both desktop and command-line interfaces (CLI)
+- often managing multiple responsibilities, including academic workload and hall duties
 
 **Value proposition**: Hall Pointer empowers CCA leaders in NUS Halls to efficiently manage member tracking by streamlining participation recording, points allocation, and member information (such as room addresses). It simplifies manual data management, allowing leaders to focus on organizing activities rather than administrative tasks. Ideal for small, close-knit CCAs, it ensures quick access to updated information, enabling accurate and easy sharing of participation records with hall management or other stakeholders.
 
@@ -289,7 +288,7 @@ _{Explain here how the data archiving feature will be implemented}_
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​         | I want to …​                                                     | So that I can …​                                                        | Remarks/Notes                                                                         |
-|----------|-----------------|------------------------------------------------------------------|-------------------------------------------------------------------------|---------------------------------------------------------------------------------------|
+| -------- | --------------- | ---------------------------------------------------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
 | `* * *`  | First-time user | Explore the app using sample data                                | I can understand its features without manually entering data            |                                                                                       |
 | `* * *`  | First-time user | See a guide on how to use the app                                | I can better understand its functionalities                             |                                                                                       |
 | `* * *`  | First-time user | Save the changes I made                                          | I won’t have to redo my work after reopening the app                    |                                                                                       |
@@ -346,11 +345,15 @@ _{More to be added}_
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 members without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-_{More to be added}_
+1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2. Should be able to hold up to 1000 members without a noticeable sluggishness in performance for typical usage.
+3. A user with above-average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. The application should respond to user commands within 2 seconds under normal operating conditions.
+5. The user interface should be intuitive enough for a first-time user to understand basic functionalities without external help.
+6. While primarily designed for one user, the application should be able to handle up to 1000 members efficiently, with room for future enhancements.
+7. The application should have a success rate of at least 95% for command executions, ensuring that most user actions are completed successfully without errors.
+8. Code should be organized and documented to facilitate future updates or modifications.
+9. The application should run seamlessly across different operating systems without requiring extensive configuration.
 
 ### Glossary
 
