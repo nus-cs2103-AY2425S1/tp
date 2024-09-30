@@ -131,19 +131,21 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting a contact : `delete`
 
-Deletes the specified person from the address book.
+Deletes an existing contact (client or vendor) from the contact list using the contact's unique contact ID.
 
-Format: `delete INDEX`
+Format: 
+`delete vendor /id [contact ID]` 
+`delete client /id [contact ID]`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+
+* Deletes the contact of the specific type with the specified `contact ID`.
+* The contact ID is **guaranteed to be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `delete vendor /id 123`
+* `delete client /id 456`
 
 ### Clearing all entries : `clear`
 
@@ -199,7 +201,8 @@ Action     | Format, Examples
 **Create Vendor Contact** | `add vendor /name [name] /hp [phone number] /email [email] /address [address] /service [service type]` <br> e.g., `add vendor /name ABC Catering /hp 98765432 /email contact@abccatering.com /address Blk 123 Bukit Merah St 7 /service Catering`
 **Create Client Contact** | `add client /name [name] /hp [phone number] /email [email] /address [address] /date [wedding date] ` <br> e.g., `add client /name Jane Doe /hp 91234567 /email jane.doe@example.com /address Blk 231 Sembawang St 4 /date 2024-12-15`
 **Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Create Vendor Contact** | `delete vendor /id [contact ID]`<br> e.g., `delete vendor /id 123`
+**Create Client Contact** | `delete client /id [contact ID]`<br> e.g., `delete client /id 456`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
