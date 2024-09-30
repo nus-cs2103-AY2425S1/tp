@@ -16,13 +16,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/zwezeya.png" width="200px">
 
 [[github](https://github.com/ZweZeya)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/zwezeya.md)]
 
 * Role: Developer
+* Responsibilities: Goat
 
 ### Raghava Chittidi
 
 <img src="images/raghava-chittidi.png" width="200px">
+
 
 [[github](http://github.com/Raghava-Chittidi)]
 [[portfolio](team/raghava-chittidi.md)]
@@ -30,16 +32,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Software Developer
 
-### Johnny Doe
+### Dylan Chan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/choaticman.png" width="200px">
 
-[[github](http://github.com/snowstopxt)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/choaticman)] [[portfolio](team/choaticman.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Software Engineer
 
-### Jean Doe
+### Kelly Wong
 
 <img src="images/woke02.png" width="200px">
 
