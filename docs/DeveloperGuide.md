@@ -287,34 +287,37 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### User stories
 
-Priorities: High (must have) - ★★★, Medium (nice to have) - ★★, Low (unlikely to have) - ★
+Priorities:
+ <span style="color:#4CB140;">High (must have) - ★★★</span> |
+ <span style="color:#F0AB00;">Medium (nice to have) - ★★</span> |
+ <span style="color:#C9190B;">Low (unlikely to have) - ★</span>
 
-| Priority | As a ...          | I want to ...                                         | So that I can ...                                              |
-|----------|-------------------|-------------------------------------------------------|----------------------------------------------------------------|
-| ★★★      | Beginner User     | Add contacts                                          | Track contact details for students joining the class           |
-| ★★★      | Beginner User     | View contacts                                         | Get an overview of my students’ contact information            |
-| ★★★      | Beginner User     | Delete contacts                                       | Remove students no longer in the class                         |
-| ★★★      | Beginner User     | Edit contacts                                         | Update contact details when they change                        |
-| ★★★      | Beginner User     | Add essential data about students                     | Track students’ progress and access it when needed             |
-| ★★★      | Beginner User     | View essential data about students                    | Access key data for each student                               |
-| ★★★      | Beginner User     | Delete essential data about students                  | Remove data for students who have left the class               |
-| ★★★      | Beginner User     | Edit essential data about students                    | Update student information when changes occur                  |
-| ★★       | Beginner User     | Search for students                                   | Quickly find student contact details                           |
-| ★★       | Intermediate User | Sort students by grades                               | Prioritize weaker students for follow-up                       |
-| ★★       | Expert User       | Delete students in bulk                               | Remove multiple students quickly, e.g., after class ends       |
-| ★        | Intermediate User | Add filters to searches                               | Narrow down search results to find specific students           |
-| ★★       | Intermediate User | Get warnings before making major changes              | Avoid accidental changes to important student data             |
-| ★★       | Beginner User     | Explore app with sample student data                  | Test features without needing real data                        |
-| ★★       | Beginner User     | Access help for available commands                    | Learn how to use the app's functionality effectively           |
-| ★        | Intermediate User | Bulk import student data                              | Add multiple students at once                                  |
-| ★★       | Beginner User     | Export contact list to a CSV                          | Back up student contact information                            |
-| ★★       | Intermediate User | Merge duplicate student entries                       | Reduce clutter in the contact list                             |
-| ★        | Beginner User     | Filter students by attendance status                  | Track and follow up with absent students                       |
-| ★★       | Intermediate User | Sort students alphabetically                          | Quickly locate students in the contact list                    |
-| ★        | Intermediate User | Add comments to student profiles                      | Record observations or important information about students    |
-| ★        | Beginner User     | Assign preferred communication methods to parents     | Ensure efficient communication through preferred channels      |
-| ★        | Intermediate User | Flag students with missing contact details            | Ensure all required student information is complete            |
-| ★        | Beginner User     | Set communication preferences for individual students | Communicate via their preferred method (Telegram, phone, etc.) |
+| Priority                                       | As a ... User    | I want to ...                                         | So that I can ...                                              |
+|------------------------------------------------|-------------------|-------------------------------------------------------|----------------------------------------------------------------|
+| <span style="color:#4CB140;">★★★</span>      | Beginner          | Add contacts                                          | Track contact details for students joining the class           |
+| <span style="color:#4CB140;">★★★</span>      | Beginner          | View contacts                                         | Get an overview of my students’ contact information            |
+| <span style="color:#4CB140;">★★★</span>      | Beginner          | Delete contacts                                       | Remove students no longer in the class                         |
+| <span style="color:#4CB140;">★★★</span>      | Beginner          | Edit contacts                                         | Update contact details when they change                        |
+| <span style="color:#4CB140;">★★★</span>      | Beginner          | Add essential data about students                     | Track students’ progress and access it when needed             |
+| <span style="color:#4CB140;">★★★</span>      | Beginner          | View essential data about students                    | Access key data for each student                               |
+| <span style="color:#4CB140;">★★★</span>      | Beginner          | Delete essential data about students                  | Remove data for students who have left the class               |
+| <span style="color:#4CB140;">★★★</span>      | Beginner          | Edit essential data about students                    | Update student information when changes occur                  |
+| <span style="color:#F0AB00;">★★</span>       | Beginner          | Search for students                                   | Quickly find student contact details                           |
+| <span style="color:#F0AB00;">★★</span>       | Intermediate      | Sort students by grades                               | Prioritize weaker students for follow-up                       |
+| <span style="color:#F0AB00;">★★</span>       | Expert            | Delete students in bulk                               | Remove multiple students quickly, e.g., after class ends       |
+| <span style="color:#C9190B;">★</span>        | Intermediate      | Add filters to searches                               | Narrow down search results to find specific students           |
+| <span style="color:#F0AB00;">★★</span>       | Intermediate      | Get warnings before making major changes              | Avoid accidental changes to important student data             |
+| <span style="color:#F0AB00;">★★</span>       | Beginner          | Explore app with sample student data                  | Test features without needing real data                        |
+| <span style="color:#F0AB00;">★★</span>       | Beginner          | Access help for available commands                    | Learn how to use the app's functionality effectively           |
+| <span style="color:#C9190B;">★</span>        | Intermediate      | Bulk import student data                              | Add multiple students at once                                  |
+| <span style="color:#F0AB00;">★★</span>       | Beginner          | Export contact list to a CSV                          | Back up student contact information                            |
+| <span style="color:#F0AB00;">★★</span>       | Intermediate      | Merge duplicate student entries                       | Reduce clutter in the contact list                             |
+| <span style="color:#C9190B;">★</span>        | Beginner          | Filter students by attendance status                  | Track and follow up with absent students                       |
+| <span style="color:#F0AB00;">★★</span>       | Intermediate      | Sort students alphabetically                          | Quickly locate students in the contact list                    |
+| <span style="color:#C9190B;">★</span>        | Intermediate      | Add comments to student profiles                      | Record observations or important information about students    |
+| <span style="color:#C9190B;">★</span>        | Beginner          | Assign preferred communication methods to parents     | Ensure efficient communication through preferred channels      |
+| <span style="color:#C9190B;">★</span>        | Intermediate      | Flag students with missing contact details            | Ensure all required student information is complete            |
+| <span style="color:#C9190B;">★</span>        | Beginner          | Set communication preferences for individual students | Communicate via their preferred method (Telegram, phone, etc.) |
 
 ### Use cases
 
