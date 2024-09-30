@@ -25,7 +25,11 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * Did initial setup for project documentation.
+  * Created Ui Mockup.
 
 * **Community**:
 
 * **Tools**:
+
+* **Design**:
+  * Created logo and icon designs.
