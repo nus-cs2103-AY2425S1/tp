@@ -464,19 +464,19 @@ Performance Requirements
 
 
 ### Glossary
-
+**Technical**
 *  **Mainstream OS**: Windows, Linux, Unix, MacOS
 *  **CLI**: Command-Line Interface, a text-based interface used to interact with software by typing commands.
-*  **GUI**: Graphical User Interface, a user interface that allows users to interact with the app through graphical elements such as buttons, text fields, and menus
-*  **JAR**: 
-*  **JSON**:
-*  **Guest**: A person invited to the wedding
+*  **GUI**: Graphical User Interface, a user interface that allows users to interact with the app through graphical elements such as buttons, text fields, and menus.
+*  **JAR**: Java Archive, A file format used to package Java applications and libraries into a single, compressed file
+*  **JSON**: JavaScript Object Notation, a lightweight data-interchange format for structuring and exchanging data
+
+**Non-technical**
+*  **Guest**: A person invited to the wedding.
 *  **Vendor**: A supplier providing services or goods for a wedding, such as photographers, florists, caterers, etc.
-*  **RSVP Status**: The attendance response status of a guest. It can be either confirmed, pending, or canceled.
+*  **RSVP Status**: The attendance response status of a guest. It can be either confirmed, pending, or declined.
 *  **Tag**: A keyword or label assigned to an entry to categorize and easily filter it within the list.
 *  **Index**: A numerical value representing the position of an entry in a list, used to reference and perform operations on the contact.
-*  **Wedding Planner**: 
-*  **Task**: A wedding-related activity that requires completion, such as booking a venue, sending invites, or coordinating with vendors.
 
 --------------------------------------------------------------------------------------------------------------------
 
