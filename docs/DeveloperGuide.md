@@ -274,13 +274,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* has a need to manage a significant number of volunteer records and site locations
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
+* has a need to generate and visualize reports (e.g., volunteer hours, visit frequency) in a simple and efficient way
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: manage volunteer records and site visits faster than a typical mouse/GUI-driven app, while efficiently scheduling and tracking volunteer engagement
 
 
 ### User stories
