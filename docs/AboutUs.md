@@ -24,7 +24,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/jiayi-gallium369.png" width="200px">
 
 [[github](http://github.com/jiayi-gallium369)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/jiayi-gallium369.md)]
 
 - Role: Developer
 - Responsibilities: UI
