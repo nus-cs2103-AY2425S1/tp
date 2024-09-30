@@ -22,7 +22,7 @@ You can reach us at the email `cs2103_f11_2[at]comp.nus.edu.sg`
 
 <img src="images/shizy.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/shizy)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Team Lead
@@ -47,12 +47,12 @@ You can reach us at the email `cs2103_f11_2[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
+
 ### Yi Hao
 
 <img src="images/johndoe.png" width="200px">
 
 [[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: UI, Code Quality, Integration
