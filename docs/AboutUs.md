@@ -18,7 +18,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/ZweZeya)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Software Engineer
+* Role: Developer
 
 ### Jane Doe
 
