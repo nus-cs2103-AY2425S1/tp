@@ -17,6 +17,7 @@ Target User: Insurance agents tracking their clients
 Value proposition: provides quick and efficient access to client details, tailored for insurance agents who need a streamlined interface to manage contacts, track policy updates, and schedule client follow-ups.
 
 
+
 ### Mant Koh En Wei
 
 <img src="images/m-kew.png" width="200px">
@@ -25,43 +26,45 @@ Value proposition: provides quick and efficient access to client details, tailor
 [[github](https://github.com/m-kew)]
 [[portfolio](team/m-kew.md)]
 
-* Role: Developer
 
-### Jane Doe
 
-<img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+### Denon Chong
 
-* Role: Team Lead
-* Responsibilities: UI
+<img src="images/ssirmentos.png" width="200px">
 
-### Johnny Doe
 
-<img src="images/johndoe.png" width="200px">
+[[github](https://github.com/ssirmentos)]
+[[portfolio](team/ssirmentos.md)]
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Data
 
-### Jean Doe
+### Ong Juan Wen
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/the0nlyjuan.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/the0nlyjuan)] [[portfolio](team/the0nlyjuan.md)]
+
+* Role: Developer
+* Responsibilities: Code Quality
+
+### Edwin Wong
+
+<img src="images/edwin1022.png" width="200px">
+
+[[github](http://github.com/Edwin1022)]
+[[portfolio](team/edwinwong.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Aw Ming Yi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/mingyiaw.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/MingYiAw)]
+[[portfolio](team/mingyiaw.md)]
 
 * Role: Developer
 * Responsibilities: UI
