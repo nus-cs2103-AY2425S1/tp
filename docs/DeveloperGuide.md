@@ -300,32 +300,271 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TAHub Contacts` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to add a contact with a name, email, and optionally a phone number, address, and tags.
+2. System validates the input fields:
+    * a. Checks if the name is valid (alphabets and spaces only).
+    * b. Checks if the email format is valid and unique.
+    * c. (Optional) Checks if the phone number is valid (8 digits) and unique.
+    * d. (Optional) Validates address and tags.
+3. System adds the contact if all validations pass.
+4. System displays a success message, "New contact added: [Contact details]."
 
-    Use case ends.
+   Use case ends.
+
+**Extensions**
+
+* 2a. The name is in an invalid format.
+    * 2a1. System shows an error message, "Invalid name format."
+      Use case resumes at step 1.
+
+* 2b. The email is invalid or already exists.
+    * 2b1. System shows an error message, "Invalid email format." or "Contact already exists."
+      Use case resumes at step 1.
+
+* 2c. The phone number is invalid or already exists.
+    * 2c1. System shows an error message, "Invalid phone number format." or "Phone number already exists."
+      Use case resumes at step 1.
+
+**Use case: View contacts**
+
+**MSS**
+
+1. User requests to view all contacts.
+2. System retrieves and displays the list of all contacts with their details (name, phone number, email, address, tags).
+3. User views the list to get an overview of student contact information.
+
+   Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
+    * 2a1. System shows a message, "No contacts available."
+      Use case ends.
 
-  Use case ends.
+**Use case: Delete a contact**
 
-* 3a. The given index is invalid.
+**MSS**
 
-    * 3a1. AddressBook shows an error message.
+1. User requests to delete a contact by providing the index of the contact in the list.
+2. System validates the provided index.
+3. System deletes the contact if the index is valid.
+4. System displays a success message, "Deleted contact: [Contact details]."
 
+   Use case ends.
+
+**Extensions**
+
+* 2a. The index is out of bounds.
+    * 2a1. System shows an error message, "Invalid index."
+      Use case resumes at step 1.
+
+**Use case: Edit a contact**
+
+**MSS**
+
+1. User requests to edit the contact by providing the index of the contact and the fields to update (name, phone, email, address, tags).
+2. System validates the provided index and input fields:
+    * a. Checks if the contact at the given index exists.
+    * b. Validates the new name, email, phone, address, and tags as per the same rules as in the add contact case.
+3. System updates the contact with the new details if all validations pass.
+4. System displays a success message, "Contact updated: [Updated contact details]."
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The index is out of bounds.
+    * 2a1. System shows an error message, "Invalid index."
+      Use case resumes at step 1.
+
+* 2b. The new name is invalid.
+    * 2b1. System shows an error message, "Invalid name format."
+      Use case resumes at step 1.
+
+* 2c. The new email is invalid or already exists.
+    * 2c1. System shows an error message, "Invalid email format." or "Contact already exists."
+      Use case resumes at step 1.
+
+* 2d. The new phone number is invalid or already exists.
+    * 2d1. System shows an error message, "Invalid phone number format." or "Phone number already exists."
+      Use case resumes at step 1.
+
+**Use case: Add essential data about students**
+
+**MSS**
+
+1. User requests to add essential data (such as progress or status) for a specific student.
+2. System prompts the user to provide the student’s essential data, such as progress, performance, or notes.
+3. System validates the input and associates the data with the correct student.
+4. System confirms the addition of the data with a success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The provided data is invalid.
+    * 2a1. System shows an error message, "Invalid data format."
+      Use case resumes at step 1.
+
+* 3a. The student does not exist in the system.
+    * 3a1. System shows an error message, "Student not found."
+      Use case ends.
+
+**Use case: View essential data about students**
+
+**MSS**
+
+1. User requests to view essential data for a specific student.
+2. System retrieves and displays the student's essential data, such as progress, performance, or notes.
+3. User views the essential data to track the student's progress.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The student does not exist in the system.
+    * 2a1. System shows an error message, "Student not found."
+      Use case ends.
+
+* 2b. No essential data has been recorded for the student.
+    * 2b1. System shows a message, "No essential data available for this student."
+      Use case ends.
+
+**Use case: Delete essential data about students**
+
+**MSS**
+
+1. User requests to delete essential data for a specific student.
+2. System prompts the user for confirmation to delete the essential data for the student.
+3. User confirms the deletion.
+4. System deletes the student’s essential data and shows a success message, "Essential data for [Student] has been deleted."
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The student does not exist in the system.
+    * 2a1. System shows an error message, "Student not found."
+      Use case ends.
+
+* 3a. User cancels the deletion.
+    * 3a1. System aborts the deletion process.
+      Use case ends.
+
+* 4a. No essential data exists for the student.
+    * 4a1. System shows a message, "No essential data to delete for this student."
+      Use case ends.
+
+**Use case: Edit essential data about students**
+
+**MSS**
+
+1. User requests to edit essential data for a specific student.
+2. System prompts the user to provide new or updated essential data for the student.
+3. System validates the input and updates the student’s essential data.
+4. System shows a success message, "Essential data for [Student] has been updated."
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The student does not exist in the system.
+    * 2a1. System shows an error message, "Student not found."
+      Use case ends.
+
+* 2b. The provided data is invalid.
+    * 2b1. System shows an error message, "Invalid data format."
+      Use case resumes at step 1.
+
+* 4a. No changes were made to the data.
+    * 4a1. System shows a message, "No changes detected."
+      Use case ends.
+
+
+**Use case: Search students**
+
+**MSS**
+
+1. User requests to find students by providing keywords.
+2. System searches for contacts whose names contain the given keywords (case-insensitive).
+3. System displays the matching contacts if found.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. No contacts match the keywords.
+    * 2a1. System shows a message, "No contacts found."
+      Use case ends.
+
+**Use case: Sort students by grades**
+
+**MSS**
+
+1. User requests to sort students by their grades.
+2. System retrieves all students and their corresponding grades.
+3. System sorts the students by grades in ascending order (prioritizing weaker students).
+4. System displays the sorted list of students with their grades for follow-up.
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. No students have grades recorded.
+    * 3a1. System shows a message, "No grade data available for sorting."
+      Use case ends.
+
+**Use case: Delete students in bulk**
+
+**MSS**
+
+1. User requests to delete multiple students from the system.
+2. System prompts the user to confirm the deletion of the selected students.
+3. User confirms the bulk deletion.
+4. System deletes the selected students and displays a success message for the deletion.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User does not select any students for deletion.
+    * 1a1. System shows a message, "No students selected for deletion."
+      Use case ends.
+
+* 2a. User cancels the deletion.
+    * 2a1. System aborts the bulk deletion process.
+      Use case ends.
+
+* 4a. One or more of the selected students do not exist in the system.
+    * 4a1. System skips deleting non-existent students and completes deletion for valid students.
+    * 4a2. System shows a message, "Some students could not be deleted as they do not exist."
+
+**Use case: Add filters to searches**
+
+**MSS**
+
+1. User requests to search for students with additional filters (e.g., by grade, tag, or other criteria).
+2. System prompts the user to specify the filters (e.g., grade range, specific tag, etc.).
+3. User specifies the filters and submits the search request.
+4. System retrieves students that match the specified filters and displays the filtered list.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The provided filter is invalid.
+    * 2a1. System shows an error message, "Invalid filter. Please provide valid criteria."
       Use case resumes at step 2.
 
-*{More to be added}*
+* 4a. No students match the specified filters.
+    * 4a1. System shows a message, "No students found matching the filters."
+      Use case ends.
 
 ### Non-Functional Requirements
 
