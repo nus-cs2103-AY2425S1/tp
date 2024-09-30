@@ -101,6 +101,36 @@ public class Schedule {
         return start.isBefore(end);
     }
 
+    @Override
+    public String toString() {
+        return dayValue + " " + startTimeValue + " - " + endTimeValue;
+
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Schedule)) {
+            return false;
+        }
+
+        Schedule otherSchedule = (Schedule) other;
+        return dayValue.equals(otherSchedule.dayValue)
+                && startTimeValue.equals(otherSchedule.startTimeValue)
+                && endTimeValue.equals(otherSchedule.endTimeValue);
+    }
+
+    @Override
+    public int hashCode() {
+        return dayValue.hashCode()
+                + startTimeValue.hashCode()
+                + endTimeValue.hashCode();
+    }
+
     private Days getDayComponent(String time) {
         String[] split = time.split("-");
         return Days.valueOf(split[0]);
