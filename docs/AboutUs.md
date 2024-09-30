@@ -9,7 +9,18 @@ We are a team based in the [School of Computing, National University of Singapor
 
 You can reach us at the email `seer[at]comp.nus.edu.sg`
 
+- `kheehou.yong@u.nus.edu`
+
 ## Project team
+
+### Yong Khee Hou
+
+![Khee Hou picture](./images/yongkheehou.png)
+
+[[github](https://github.com/yongkheehou)]
+
+* Role: Documentation
+* Responsibilities: Ensure well-maintained documentation for the project. Handle command to add clients (buyers/ sellers).
 
 ### John Doe
 
