@@ -1,3 +1,29 @@
+* {
+    // The '-fx-ll-' prefix denotes base colours of the LegacyLink project
+    // CSS variables need to be prefixed with '-fx' to be detected by the JavaFX runtime
+
+    -fx-ll-background: #fff;
+    -fx-ll-background-grey: #F5F5F5;
+    -fx-ll-highlight: #F9F1FF;
+
+    -fx-ll-text: #000;
+    -fx-ll-text-light: #848484;
+    -fx-ll-accent: #6226D9;
+
+    -fx-ll-success: #E4FFDE;
+    -fx-ll-warning: #FFFBDE;
+    -fx-ll-danger: #FFE3DE;
+
+    -fx-ll-stroke-dark: #909090;
+    -fx-ll-stroke-light: #D3D3D3;
+
+    -fx-ll-status-bar-bg: #8549B1;
+}
+
+.root-layout {
+    -fx-background-color: #fff;
+}
+
 .background {
     -fx-background-color: derive(#1d1d1d, 20%);
     background-color: #383838; /* Used in the default.html file */
@@ -5,38 +31,82 @@
 
 .label {
     -fx-font-size: 11pt;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Poppins Medium";
     -fx-text-fill: #555555;
     -fx-opacity: 0.9;
 }
 
 .label-bright {
     -fx-font-size: 11pt;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Poppins Medium";
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
 
 .label-header {
     -fx-font-size: 32pt;
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-family: "Poppins Regular";
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
 
 .text-field {
     -fx-font-size: 12pt;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Poppins Medium";
 }
 
 .tab-pane {
-    -fx-padding: 0 0 0 1;
+    -fx-padding: 0;
 }
 
 .tab-pane .tab-header-area {
-    -fx-padding: 0 0 0 0;
+    -fx-padding: 4px 0 1px 32px;
     -fx-min-height: 0;
     -fx-max-height: 0;
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: transparent;
+    -fx-effect: none;
+    -fx-border-color: transparent transparent -fx-ll-stroke-dark transparent;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.tab-pane:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.tab {
+    -fx-padding: 4px 32px 4px 32px;
+    -fx-background-radius: 4px 4px 0 0;
+    -fx-background-color: white;
+    -fx-border-width: 2px;
+    -fx-border-color: transparent;
+    -fx-border-insets: 0 0 0 0;
+    -fx-font-family: "Poppins Bold";
+}
+
+.tab-label {
+    -fx-text-fill: -fx-ll-text;
+}
+
+.tab:selected {
+    -fx-border-color: transparent transparent -fx-ll-accent transparent;
+    -fx-border-width: 2px;
+}
+
+.tab:selected .tab-label {
+    -fx-text-fill: -fx-ll-accent;
+}
+
+.tab:selected:hover {
+
+}
+
+.tab:hover {
+    -fx-background-color: -fx-ll-highlight;
+    -fx-padding: 4px 32px 4px 32px;
 }
 
 .table-view {
@@ -66,7 +136,7 @@
 
 .table-view .column-header .label {
     -fx-font-size: 20pt;
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-family: "Poppins Regular";
     -fx-text-fill: white;
     -fx-alignment: center-left;
     -fx-opacity: 1;
@@ -89,45 +159,55 @@
 
 .list-view {
     -fx-background-insets: 0;
-    -fx-padding: 0;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-padding: 16px 0 0 16px;
+    -fx-background-color: #fff;
 }
 
 .list-cell {
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
-    -fx-padding: 0 0 0 0;
+    -fx-padding: 8px;
+    -fx-background-radius: 16px;
+    -fx-background-insets: 8px;
 }
 
 .list-cell:filled:even {
-    -fx-background-color: #3c3e3f;
+    -fx-background-color: #fff;
 }
 
 .list-cell:filled:odd {
-    -fx-background-color: #515658;
+    -fx-background-color: -fx-ll-background-grey;
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #424d5f;
+    -fx-background-color: -fx-ll-highlight;
+}
+
+.list-cell:filled #cardPane {
+    -fx-border-width: 1;
+    -fx-border-insets: -1;
+    -fx-border-radius: 16px;
+    -fx-border-color: -fx-ll-stroke-dark;
 }
 
 .list-cell:filled:selected #cardPane {
-    -fx-border-color: #3e7b91;
+    -fx-border-color: -fx-ll-accent;
     -fx-border-width: 1;
+    -fx-border-insets: -1;
 }
 
 .list-cell .label {
-    -fx-text-fill: white;
+    -fx-text-fill: -fx-ll-text;
 }
 
 .cell_big_label {
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Poppins Medium";
     -fx-font-size: 16px;
     -fx-text-fill: #010504;
 }
 
 .cell_small_label {
-    -fx-font-family: "Segoe UI";
+    -fx-font-family: "Poppins Regular";
     -fx-font-size: 13px;
     -fx-text-fill: #010504;
 }
@@ -136,29 +216,23 @@
      -fx-background-color: derive(#1d1d1d, 20%);
 }
 
-.pane-with-border {
-     -fx-background-color: derive(#1d1d1d, 20%);
-     -fx-border-color: derive(#1d1d1d, 10%);
-     -fx-border-top-width: 1px;
-}
-
 .status-bar {
-    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-background-color: -fx-ll-status-bar-bg;
 }
 
 .result-display {
     -fx-background-color: transparent;
-    -fx-font-family: "Segoe UI Light";
-    -fx-font-size: 13pt;
-    -fx-text-fill: white;
+    -fx-font-family: "Poppins Regular";
+    -fx-font-size: 10pt;
+    -fx-text-fill: -fx-ll-text-light;
 }
 
 .result-display .label {
-    -fx-text-fill: black !important;
+    -fx-text-fill: -fx-ll-text !important;
 }
 
 .status-bar .label {
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-family: "Poppins Regular";
     -fx-text-fill: white;
     -fx-padding: 4px;
     -fx-pref-height: 30px;
@@ -174,54 +248,50 @@
     -fx-text-fill: white;
 }
 
-.grid-pane {
-    -fx-background-color: derive(#1d1d1d, 30%);
-    -fx-border-color: derive(#1d1d1d, 30%);
-    -fx-border-width: 1px;
-}
-
-.grid-pane .stack-pane {
-    -fx-background-color: derive(#1d1d1d, 30%);
-}
-
-.context-menu {
-    -fx-background-color: derive(#1d1d1d, 50%);
-}
-
 .context-menu .label {
     -fx-text-fill: white;
 }
 
 .menu-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent -fx-ll-text-light transparent;
+    -fx-border-width: 0 0 1px 0;
 }
 
 .menu-bar .label {
-    -fx-font-size: 14pt;
-    -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: white;
+    -fx-font-size: 10pt;
+    -fx-font-family: "Poppins Regular";
+    -fx-text-fill: -fx-ll-text;
     -fx-opacity: 0.9;
+}
+
+.menu {
+    -fx-background-color: transparent;
+}
+
+.menu-item {
+    -fx-background-color: white;
+    -fx-text-fill: -fx-ll-text;
+}
+
+.menu-item:hover {
+    -fx-background-color: #d0d0d0;
 }
 
 .menu .left-container {
     -fx-background-color: black;
 }
 
-/*
- * Metro style Push Button
- * Author: Pedro Duque Vieira
- * http://pixelduke.wordpress.com/2012/10/23/jmetro-windows-8-controls-on-java/
- */
 .button {
     -fx-padding: 5 22 5 22;
     -fx-border-color: #e2e2e2;
     -fx-border-width: 2;
     -fx-background-radius: 0;
     -fx-background-color: #1d1d1d;
-    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-family: "Poppins Regular", Helvetica, Arial, sans-serif;
     -fx-font-size: 11pt;
     -fx-text-fill: #d8d8d8;
-    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+    -fx-background-insets: 0;;
 }
 
 .button:hover {
@@ -282,11 +352,11 @@
 }
 
 .scroll-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: transparent;
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: -fx-ll-stroke-light;
     -fx-background-insets: 3;
 }
 
@@ -317,24 +387,34 @@
     -fx-text-fill: #F70D1A;
 }
 
-#commandTextField {
-    -fx-background-color: transparent #383838 transparent #383838;
-    -fx-background-insets: 0;
-    -fx-border-color: #383838 #383838 #ffffff #383838;
-    -fx-border-insets: 0;
-    -fx-border-width: 1;
-    -fx-font-family: "Segoe UI Light";
-    -fx-font-size: 13pt;
-    -fx-text-fill: white;
+#commandBox {
+    -fx-background-color: transparent;
+    -fx-padding: 24px 32px 16px 32px;
 }
 
-#filterField, #personListPanel, #personWebpage {
-    -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
+#commandTextField {
+    -fx-padding: 12px 24px 12px 24px;
+
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 16px;
+
+    -fx-border-color: -fx-ll-stroke-light;
+    -fx-border-radius: 24px;
+    -fx-border-insets: -1;
+    -fx-border-width: 1;
+
+    -fx-font-family: "Poppins Regular";
+    -fx-font-size: 11pt;
+    -fx-text-fill: -fx-ll-text;
 }
 
 #resultDisplay .content {
-    -fx-background-color: transparent, #383838, transparent, #383838;
+    -fx-background-color: white;
     -fx-background-radius: 0;
+    -fx-border-color: -fx-ll-stroke-light;
+    -fx-border-width: 1px;
+    -fx-padding: 12px 20px;
 }
 
 #tags {
