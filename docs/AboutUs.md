@@ -42,15 +42,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Coding
 
-### Jean Doe
+### Maximus Tan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/miloaisdino.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/miloaisdino)]
+[[portfolio](team/maximus.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: DevOps + Threading
 
 ### James Doe
 
