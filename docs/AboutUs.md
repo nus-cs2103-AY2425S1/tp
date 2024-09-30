@@ -15,7 +15,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/limjeremy496)]
 
 * Role: Project Advisor
 
@@ -24,7 +24,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/johndoe.png" width="200px">
 
 [[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/limjeremy496)]
 
 * Role: Team Lead
 * Responsibilities: UI
@@ -33,17 +33,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/limjeremy496)] [[portfolio](team/limjeremy496.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Jeremy
 
 <img src="images/johndoe.png" width="200px">
 
 [[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/limjeremy496)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
@@ -53,7 +53,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/johndoe.png" width="200px">
 
 [[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/limjeremy496)]
 
 * Role: Developer
 * Responsibilities: UI
