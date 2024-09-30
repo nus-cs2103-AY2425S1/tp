@@ -11,6 +11,13 @@ You can reach us at the email `nowherenearyou[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Low Xi Si
+
+<img src="images/lowxisi.png" width="200px">
+
+[[github](https://github.com/lowxisi)]
+[[portfolio](team/lowxisi.md)]
+
 ### Chua Tse Hui
 Materials Science and Engineering Student.
 <img src="images/cth06-Github.png" width="200px">
