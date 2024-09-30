@@ -3,7 +3,8 @@ layout: page
 title: About Us
 ---
 
-We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
+We are W14 Team 4 formed for the [National University of Singapore School of Computing](https://www.comp.nus.edu.sg)'s
+CS2103T Software Engineering course!
 
 You can reach us at the following emails:
 - `e1290028@u.nus.edu`
