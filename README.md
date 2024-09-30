@@ -2,9 +2,6 @@
 
 ![Ui](docs/images/Ui.png)
 
-# UniNet
-UniNet helps international students in NUS manage detail of their contacts. It is optimized for CLI users so that frequent tasks can be done faster by typing in commands.
-
 * This is **a sample project for Software Engineering (SE) students**.<br>
   Example usages:
   * as a starting point of a course project (as opposed to writing everything from scratch)
