@@ -300,32 +300,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TutorEase` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use Case: UC01 - Add student contact**
 
-**MSS**
+**MSS**:
+Tutor keys in required fields to add student contact
+TutorEase adds the student contact
+Use case ends
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. AddressBook shows an error message.
-
-      Use case resumes at step 2.
-
-*{More to be added}*
+**Extensions**:
+1a. TutorEase detects bad or wrongly formatted inputs.
+1a1. TutorEase prompts Tutor with correct format
+1a2. Tutor enters new data.
+Steps 1a1 to 1a2 are repeated until the data entered are correct
+Use case resumes from Step 2
 
 ### Non-Functional Requirements
 
