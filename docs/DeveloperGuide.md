@@ -301,45 +301,143 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
-
-**Use case: Delete a person**
+**Use Case: Add a new internship entry**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. The user requests to add a new internship entry.
+2. HireMe creates a new entry.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The user does not include the company name.
+    * 1a1. HireMe shows an error message.
 
-  Use case ends.
+      Use case ends.
 
-* 3a. The given index is invalid.
+* 1b. The user does not include the internship role.
+    * 1b1. HireMe shows an error message.
 
-    * 3a1. AddressBook shows an error message.
+      Use case ends.
 
-      Use case resumes at step 2.
+* 1c. The user does not include the company email.
+    * 1c1. HireMe shows an error message.
+
+      Use case ends.
+
+* 1d. The user does not include the date of application.
+    * 1d1. HireMe shows an error message.
+
+      Use case ends.
+
+**Use Case: Delete an internship entry**
+
+**MSS**
+
+1. The user requests to delete a particular internship entry.
+2. HireMe deletes the entry.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The given index is invalid.
+    * 1a1. HireMe shows an error message.
+
+      Use case ends.
+
+**Use Case: Load saved internship applications**
+
+**MSS**
+
+1. The user starts the application.
+2. HireMe loads the previously saved internship applications.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. No save file is found.
+    * 1a1. HireMe creates a new empty save file.
+
+      Use case ends.
+
+* 1b. A file with an invalid format is found.
+    * 1b1. HireMe shows an error message.
+
+      Use case ends.
+
+**Use Case: Auto-save the current state of the internship list**
+
+**MSS**
+
+1. The user performs an action that changes the internship list (e.g., adding, editing, or deleting an entry).
+2. The system automatically saves the updated internship list to `HireMe.txt`.
+3. The file is saved successfully without displaying a confirmation message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The file cannot be saved due to an error.
+    * 1a1. The system shows the error message: "Error! Unable to save file."
+    * 1a2. The system retries the auto-save after a short delay.
+    * 1a3. If the save operation still fails, the system logs the error and informs the user that changes might not have been saved.
+
+      Use case ends.
+
+**Use Case: View all internship entries**
+
+**MSS**
+
+1. The user requests to view all internship entries.
+2. HireMe shows all internship entries.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. There are no internship entries.
+    * 1a1. HireMe shows a message indicating "no entries."
+
+      Use case ends.
+
 
 *{More to be added}*
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. **Performance**: The application should respond to user actions within **two seconds**.
+2. **Scalability**: The application should handle **at least 500 internship applications** without any performance issues (e.g., lag or slowness).
+3. **Cross-Platform Compatibility**: The application should run on any operating system that has **Java 17** installed.
+4. **User Accessibility**: The system should be usable by a **novice** with no prior experience using a CLI application, without much difficulty.
+5. **Project Scheduling**: The project should follow a **weekly delivery schedule**, releasing a set of features every week.
+6. **Data Persistence**: The application should ensure that data **persists** after the user closes the application.
+7. **Data Integrity**: Upon reopening the application, the **loaded data** should be identical to the **last saved state** and should not be volatile.
 
 *{More to be added}*
 
-### Glossary
+# Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+- **Application Status**:
+    - **PENDING**: The internship application is currently in progress.
+    - **REJECTED**: The user has rejected or been rejected from this internship application.
+    - **ACCEPTED**: The user has accepted the offer for this internship.
+
+- **Action**: The task carried out by the HireMe application such as Add, Delete, Update entries.
+
+- **Command**: The string the user types into the HireMe application’s command bar to carry out a particular action.
+
+- **Command Bar**: The input bar at the top of the HireMe application which allows users to type in a string command.
+
+- **Company Email**: The email of the company that the user is applying for an internship role at.
+
+- **Company Name**: The name of the company that the user is applying for an internship role at.
+
+- **Role**: The role of the internship the user applied for.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
