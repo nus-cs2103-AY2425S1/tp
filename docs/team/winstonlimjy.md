@@ -1,6 +1,6 @@
 ---
   layout: default.md
-  title: "John Doe's Project Portfolio Page"
+  title: "Winston Lim Jun Yang"
 ---
 
 ### Project: AddressBook Level 3

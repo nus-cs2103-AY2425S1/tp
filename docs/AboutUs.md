@@ -35,20 +35,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/zackjh.png" width="200px">
 
-[[github](http://github.com/zackjh)] [[portfolio](team/zackjh.md)]
+[[github](http://github.com/zackjh)] 
+[[portfolio](team/zackjh.md)]
 
 * Role: Developer
 * Responsibilities: Data and Others
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
 
 ### Nathan Lye
 
@@ -58,4 +49,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/robotwizzard.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Dev Ops + Threading
+
+### Winston Lim Jun Yang
+
+<img src="images/winstonlimjy.png" width="200px">
+
+[[github](http://github.com/winstonlimjy)]
+[[portfolio](team/winstonlimjy.md)]
+
+* Role: Developer
+* Responsibilities: Ui
