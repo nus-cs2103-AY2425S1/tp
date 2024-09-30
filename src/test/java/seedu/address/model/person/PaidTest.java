@@ -54,9 +54,10 @@ public class PaidTest {
     void equals() {
         Paid paid = new Paid("1.23");
         Paid samePaid = new Paid("1.23");
+        Paid differentPaid = new Paid("1.24");
 
         // same values -> returns true
-        assertTrue(paid.equals(new Paid("1.23")));
+        assertTrue(paid.equals(samePaid));
 
         // same object -> returns true
         assertTrue(paid.equals(paid));
@@ -68,6 +69,20 @@ public class PaidTest {
         assertFalse(paid.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(paid.equals(new Paid("1.24")));
+        assertFalse(paid.equals(differentPaid));
+    }
+
+    @Test
+    void hashCodeTest() {
+        Paid paid = new Paid("1.23");
+        Paid samePaid = new Paid("1.23");
+        Paid differentPaid = new Paid("1.24");
+
+        // same values -> returns true
+        assertTrue(paid.hashCode() == samePaid.hashCode());
+
+        // different values -> returns false
+        assertFalse(paid.hashCode() == differentPaid.hashCode());
+
     }
 }

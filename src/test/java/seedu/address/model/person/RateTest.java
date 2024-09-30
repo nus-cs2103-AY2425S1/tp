@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -55,9 +56,10 @@ public class RateTest {
     void equals() {
         Rate rate = new Rate("1.23");
         Rate sameRate = new Rate("1.23");
+        Rate differentRate = new Rate("1.24");
 
         // same values -> returns true
-        assertTrue(rate.equals(new Rate("1.23")));
+        assertTrue(rate.equals(sameRate));
 
         // same object -> returns true
         assertTrue(rate.equals(rate));
@@ -69,6 +71,20 @@ public class RateTest {
         assertFalse(rate.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(rate.equals(new Rate("1.24")));
+        assertFalse(rate.equals(differentRate));
+    }
+
+    @Test
+    public void hashCodeTest() {
+        Rate rate = new Rate("1.23");
+        Rate sameRate = new Rate("1.23");
+        Rate differentRate = new Rate("1.24");
+
+        // same values -> returns true
+        assertEquals(rate.hashCode(), sameRate.hashCode());
+
+        // different values -> returns false
+        assertNotEquals(rate.hashCode(), differentRate.hashCode());
+
     }
 }
