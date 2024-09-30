@@ -55,7 +55,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/keithxun.png" width="200px">
 
 [[github](http://github.com/keithxun)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/keithxun.md)]
 
 - Role: Developer
 - Responsibilities: UI, Scheduling and tracking
