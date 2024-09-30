@@ -31,31 +31,32 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Zachary Kang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/zackjh.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/bryanckh)]
+[[github](http://github.com/zackjh)] 
+[[portfolio](team/zackjh.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Data and Others
 
-### Jean Doe
+### Nathan Lye
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/robotwizzard.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/bryanckh)]
+[[github](http://github.com/robotwizzard)]
+[[portfolio](team/robotwizzard.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Winston Lim Jun Yang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/winstonlimjy.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/bryanckh)]
+[[github](http://github.com/winstonlimjy)]
+[[portfolio](team/winstonlimjy.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Ui
