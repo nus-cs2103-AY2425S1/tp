@@ -30,6 +30,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Logic + Testing
 
+### He Shi
+
+<img src="images/lancehaha.png" width="200px">
+
+[[github](http://github.com/lancehaha)]
+
+* Role: Developer
+* Responsibilities: non-functional requirements
+
 ### Sean Foong
 
 <img src="images/seanfoongjt.png" width="200px">
