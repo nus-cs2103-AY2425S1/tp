@@ -330,14 +330,75 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `ContactCS` and the **Actor** is the `CS freshman`, unless specified otherwise)
+
+**Use case: Add a contact**
+
+**MSS**
+
+1.  User requests to add a new contact by inputting the relevant contact details (name, email, phone number, module code, etc.)
+2.  ContactCS verifies the input format and checks for duplicate
+3.  If the input is valid, ContactCS adds the contact under the specified module
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Necessary input such as module code, name, or email is missing.
+
+  * 2a1. ContactCS shows an error message prompting the user to provide the required information.
+        
+    Use case ends.
+
+* 3a. The given format is invalid.
+
+    * 3a1. ContactCS shows an error message prompting the user to provide the correct format and shows the valid command format
+
+      Use case ends.
+
+* 4a. The given contact is a duplicate.
+
+    * 4a1. ContactCS shows an error message telling the user that the contact already exists in ContactCS
+
+      Use case ends.
+
+**Use case: Search contact**
+
+**MSS**
+
+1.  User requests to search for a contact by inputting either:
+     * The name of the contact,
+     * The module code (optionally including the role), or
+     * The category of the issue
+2.  ContactCS verifies the input format and searches for the matching contacts
+3.  ContactCS shows a list of matching contacts
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Necessary input such as module code, or category of the issue is missing.
+
+    * 2a1. ContactCS shows an error message prompting the user to provide the required information and shows the valid command format
+
+        Use case ends.
+
+* 3a. The given format is invalid.
+
+    * 3a1. ContactCS shows an error message prompting the user to provide the correct format
+
+      Use case ends.
+
+* 4a. No matching contacts found.
+
+    Use case ends.
 
 **Use case: Delete a person**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
+1.  User requests to list/search persons
+2.  ContactCS shows a list of persons
 3.  User requests to delete a specific person in the list
 4.  AddressBook deletes the person
 
@@ -347,13 +408,185 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The list is empty.
 
-  Use case ends.
+    Use case ends.
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. ContactCS shows an error message.
 
       Use case resumes at step 2.
+
+**Use case: Update contact information**
+
+**MSS**
+
+1.  User requests to list/search persons
+2.  ContactCS shows a list of persons
+3.  User requests to update contact information for a specific person in the list
+4.  ContactCS verifies and updates the contact details
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+    Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. ContactCS shows an error message.
+
+      Use case resumes at step 2.
+
+* 4a. The given format is invalid.
+
+    * 4a1. ContactCS shows an error message prompting the user to provide the correct format
+
+      Use case resumes at step 2.
+
+**Use case: Mark frequently used contacts**
+
+**MSS**
+
+1.  User requests to list/search persons
+2.  ContactCS shows a list of persons
+3.  User requests to mark certain contacts as frequently accessed
+4.  ContactCS marks these contacts for quick access
+
+**Extensions**
+
+* 2a. The list is empty.
+
+    Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. ContactCS shows an error message.
+
+      Use case resumes at step 2.
+
+* 4a. The given format is invalid.
+
+    * 4a1. ContactCS shows an error message prompting the user to provide the correct format
+
+      Use case resumes at step 2.
+
+**Use case: Access frequently used contacts**
+
+**MSS**
+
+1.  User requests to access frequently used contacts
+2.  ContactCS shows a list of persons
+
+**Extensions**
+
+* 2a. The list is empty.
+
+    Use case ends.
+
+* 3a. The given format is invalid.
+
+    * 3a1. ContactCS shows an error message prompting the user to provide the correct format
+
+      Use case ends.
+
+**Use case: View usage instructions**
+
+**MSS**
+
+1.  User requests to view usage instructions for the app
+2.  ContactCS displays the usage instructions and commands available for the user
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given format is invalid.
+
+    * 2a1. ContactCS shows an error message prompting the user to provide the correct format
+
+        Use case ends.
+
+**Use case: View app with sample data**
+
+**MSS**
+
+1.  User requests to view app with sample data
+2.  ContactCS populates the interface with sample data for demonstration purposes
+3.  User interacts with the app to see how it functions with the sample data
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given format is invalid.
+
+    * 2a1. ContactCS shows an error message prompting the user to provide the correct format
+
+      Use case ends.
+
+**Use case: Redo/Undo actions**
+
+**MSS**
+
+1.  User performs an action in ContactCS
+2.  User requests to undo the last action
+3.  ContactCS reverts to the state before the last action
+4.  If the user wishes to redo the action, they request a redo
+5.  ContactCS reapplies the last undone action
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. No action has been performed yet.
+    * 2a1. ContactCS shows an error message indicating that there is no action to undo
+
+       Use case ends.
+
+* 3a. User tries to redo an action without having undone one first.
+    * 3a1. ContactCS shows an error message indicating that there is no action to redo
+
+        Use case ends.
+
+* 4a. The given format is invalid.
+
+    * 4a1. ContactCS shows an error message prompting the user to provide the correct format
+
+      Use case ends.
+
+**Use case: Open Outlook for email communication**
+
+**MSS**
+
+1.  User requests to open the email client from ContactCS
+2.  ContactCS opens the Outlook web application in the default browser, pre-filled with the selected contact’s email address
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The user does not have internet access.
+    * 2a1. ContactCS shows an error message indicating that there is no internet connection
+
+        Use case ends.
+
+* 3a. The selected contact does not have an email address.
+    * 3a1. ContactCS shows an error message indicating that the selected contact does not have an email associated.
+
+       Use case ends.
+
+* 4a. An error occurs while attempting to open the browser.
+    * 4a1. ContactCS shows an error message indicating that the request to open the browser failed
+
+      Use case ends.
+
+* 5a. The given format is invalid.
+
+    * 5a1. ContactCS shows an error message prompting the user to provide the correct format
+
+      Use case ends.
 
 *{More to be added}*
 
