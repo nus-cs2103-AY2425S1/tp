@@ -1,8 +1,8 @@
 package keycontacts.storage;
 
+import static keycontacts.testutil.TypicalStudents.getTypicalAddressBook;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static keycontacts.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.nio.file.Path;
 

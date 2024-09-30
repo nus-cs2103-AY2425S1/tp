@@ -9,7 +9,7 @@ import keycontacts.logic.commands.exceptions.CommandException;
 import keycontacts.logic.parser.exceptions.ParseException;
 import keycontacts.model.Model;
 import keycontacts.model.ReadOnlyAddressBook;
-import keycontacts.model.student.Person;
+import keycontacts.model.student.Student;
 
 /**
  * API of the Logic component
@@ -31,8 +31,8 @@ public interface Logic {
      */
     ReadOnlyAddressBook getAddressBook();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered list of students */
+    ObservableList<Student> getFilteredStudentList();
 
     /**
      * Returns the user prefs' address book file path.

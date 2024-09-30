@@ -15,8 +15,8 @@ import keycontacts.logic.parser.exceptions.ParseException;
 import keycontacts.model.student.Address;
 import keycontacts.model.student.Email;
 import keycontacts.model.student.Name;
-import keycontacts.model.student.Person;
 import keycontacts.model.student.Phone;
+import keycontacts.model.student.Student;
 import keycontacts.model.tag.Tag;
 
 /**
@@ -45,9 +45,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, tagList);
+        Student student = new Student(name, phone, email, address, tagList);
 
-        return new AddCommand(person);
+        return new AddCommand(student);
     }
 
     /**

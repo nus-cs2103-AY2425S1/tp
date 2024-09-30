@@ -1,9 +1,9 @@
 package keycontacts.logic.commands;
 
 import static keycontacts.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static keycontacts.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static keycontacts.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static keycontacts.testutil.TypicalPersons.getTypicalAddressBook;
+import static keycontacts.logic.commands.CommandTestUtil.showStudentAtIndex;
+import static keycontacts.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
+import static keycontacts.testutil.TypicalStudents.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,7 +33,7 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showStudentAtIndex(model, INDEX_FIRST_STUDENT);
         assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }

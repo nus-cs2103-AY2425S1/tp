@@ -1,11 +1,11 @@
 package keycontacts.logic.parser;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static keycontacts.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static keycontacts.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static keycontacts.testutil.Assert.assertThrows;
-import static keycontacts.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static keycontacts.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,17 +17,17 @@ import keycontacts.logic.commands.AddCommand;
 import keycontacts.logic.commands.ClearCommand;
 import keycontacts.logic.commands.DeleteCommand;
 import keycontacts.logic.commands.EditCommand;
-import keycontacts.logic.commands.EditCommand.EditPersonDescriptor;
+import keycontacts.logic.commands.EditCommand.EditStudentDescriptor;
 import keycontacts.logic.commands.ExitCommand;
 import keycontacts.logic.commands.FindCommand;
 import keycontacts.logic.commands.HelpCommand;
 import keycontacts.logic.commands.ListCommand;
 import keycontacts.logic.parser.exceptions.ParseException;
 import keycontacts.model.student.NameContainsKeywordsPredicate;
-import keycontacts.model.student.Person;
-import keycontacts.testutil.EditPersonDescriptorBuilder;
-import keycontacts.testutil.PersonBuilder;
-import keycontacts.testutil.PersonUtil;
+import keycontacts.model.student.Student;
+import keycontacts.testutil.EditStudentDescriptorBuilder;
+import keycontacts.testutil.StudentBuilder;
+import keycontacts.testutil.StudentUtil;
 
 public class AddressBookParserTest {
 
@@ -35,9 +35,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddCommand(person), command);
+        Student student = new StudentBuilder().build();
+        AddCommand command = (AddCommand) parser.parseCommand(StudentUtil.getAddCommand(student));
+        assertEquals(new AddCommand(student), command);
     }
 
     @Test
@@ -49,17 +49,17 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_STUDENT.getOneBased());
+        assertEquals(new DeleteCommand(INDEX_FIRST_STUDENT), command);
     }
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Person person = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        Student student = new StudentBuilder().build();
+        EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(student).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+                + INDEX_FIRST_STUDENT.getOneBased() + " " + StudentUtil.getEditStudentDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(INDEX_FIRST_STUDENT, descriptor), command);
     }
 
     @Test

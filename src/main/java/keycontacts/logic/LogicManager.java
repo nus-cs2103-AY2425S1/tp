@@ -15,7 +15,7 @@ import keycontacts.logic.parser.AddressBookParser;
 import keycontacts.logic.parser.exceptions.ParseException;
 import keycontacts.model.Model;
 import keycontacts.model.ReadOnlyAddressBook;
-import keycontacts.model.student.Person;
+import keycontacts.model.student.Student;
 import keycontacts.storage.Storage;
 
 /**
@@ -67,8 +67,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+    public ObservableList<Student> getFilteredStudentList() {
+        return model.getFilteredStudentList();
     }
 
     @Override

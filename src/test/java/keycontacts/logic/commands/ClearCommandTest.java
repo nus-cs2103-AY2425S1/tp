@@ -1,7 +1,7 @@
 package keycontacts.logic.commands;
 
 import static keycontacts.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static keycontacts.testutil.TypicalPersons.getTypicalAddressBook;
+import static keycontacts.testutil.TypicalStudents.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
