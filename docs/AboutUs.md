@@ -35,15 +35,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](http://github.com/keerthigkaartik)]
 
-### Jean Doe
+### Tseng Tzu En
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/tzuennn.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+[[github](http://github.com/tzuennn)]
+[[portfolio](team/tzuennn.md)]
 
 ### Tseng Tzu Che
 
