@@ -29,11 +29,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Varatharaju Mithuna
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/miuna9890.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/miuna9890/tp)] [[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Data
