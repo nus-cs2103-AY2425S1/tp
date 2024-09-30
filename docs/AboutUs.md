@@ -46,12 +46,12 @@ Value proposition: provides quick and efficient access to client details, tailor
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Edwin Wong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/edwin1022.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/Edwin1022)]
+[[portfolio](team/edwinwong.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
