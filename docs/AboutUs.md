@@ -18,7 +18,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/fui03)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
+* Role: Project Developer
 * Responsibilities: Integration and Testing
 
 ### Lo Yong Zhe
