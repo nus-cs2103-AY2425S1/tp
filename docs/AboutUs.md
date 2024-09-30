@@ -30,7 +30,7 @@ You can reach us at the email `e1121785@u.nus.edu`
 
 ### Kan Jun Hong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/Fluffykan.png" width="200px">
 
 [[github](http://github.com/Fluffykan)]
 
