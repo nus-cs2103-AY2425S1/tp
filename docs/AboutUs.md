@@ -7,54 +7,53 @@
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `dreamdaydesigners@comp.nus.edu.sg`
 
-## Project team
+## DreamDayDesigners
 
-### John Doe
+### Mervyn
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/teddayz.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/teddayz)]
+[[portfolio](team/mervyn.md)]
 
 * Role: Project Advisor
 
-### Jane Doe
+### Yi Zhong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yizhong187.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/yizhong187)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Casper
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/casperngeen.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/casperngreen)] [[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Leslie
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/leslieyip02.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/leslieyip02)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Yi Long
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/fyl2003.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/fyl2003)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
