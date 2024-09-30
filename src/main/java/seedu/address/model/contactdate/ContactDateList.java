@@ -6,29 +6,34 @@ import java.util.ArrayList;
  * Represents a List of ContactDates in the address book.
  */
 public class ContactDateList extends ArrayList<ContactDate> {
-    private final ArrayList<ContactDate> contactDates;
 
     public ContactDateList() {
-        contactDates = new ArrayList<>();
+        super();
     }
 
-    public ContactDateList(ContactDate ...contactDates) {
-        this.contactDates = new ArrayList<>();
-        for (ContactDate contactDate : contactDates) {
-            this.contactDates.add(contactDate);
+    public ContactDateList(ContactDate ...contactDatesToAdd) {
+        super();
+        for (ContactDate contactDate : contactDatesToAdd) {
+            this.add(contactDate);
         }
     }
 
+    public ContactDateList(ArrayList<ContactDate> contactDates) {
+        super(contactDates);
+    }
+
     public void addAll(ContactDateList contactDateList) {
-        contactDates.addAll(contactDateList.contactDates);
+        for (ContactDate contactDate : contactDateList) {
+            this.add(contactDate);
+        }
     }
 
     public void markAsContacted() {
-        contactDates.add(ContactDate.getCurrentDate());
+        this.add(ContactDate.getCurrentDate());
     }
 
     public ContactDate getLastContacted() {
-        return contactDates.get(contactDates.size() - 1);
+        return this.get(this.size() - 1);
     }
 
     @Override
@@ -43,6 +48,6 @@ public class ContactDateList extends ArrayList<ContactDate> {
         }
 
         ContactDateList otherList = (ContactDateList) other;
-        return contactDates.equals(otherList.contactDates);
+        return this.equals(otherList);
     }
 }
