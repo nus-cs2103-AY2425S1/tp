@@ -11,29 +11,30 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### ALEK KWEK
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/alekkwek18.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/AlekKwek18)]
-[[portfolio](team/wassilililily)]
+[[portfolio](team/alekkwek18.md)]
 
 * Role: Developer
-
+* Responsibilities: Maintain and add features for contacts
+* 
 ### BENJAMIN CHIN HAO NAN
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/quasant.png" width="200px">
 
 [[github](https://github.com/Quasant)]
-[[portfolio](team/wassilililily)]
+[[portfolio](team/quasant.md)]
 
 * Role: Developer
-* Responsibilities: 
+* Responsibilities: TBC
 
 ### MAU ZE WEI
 
 <img src="images/wassilililily.png" width="200px">
 
-[[github](https://github.com/wassilililily)] [[portfolio](team/wassilililily.md)]
+[[github](https://github.com/wassilililily)] 
+[[portfolio](team/wassilililily.md)]
 
 
 * Role: Developer
@@ -41,21 +42,20 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### SOO JUN BOON
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/green-tea-123.png" width="200px">
 
 [[github](https://github.com/Green-Tea-123)]
-[[portfolio](team/wassilililily)]
+[[portfolio](team/green-tea-123.md)]
 
 * Role: Developer
 * Responsibilities: 
 
 ### TOH KENG HIAN
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kenghian.png" width="200px">
 
 [[github](https://github.com/KengHian)]
-[[portfolio](team/wassilililily)]
+[[portfolio](team/kenghian.md)]
 
 * Role: Developer
-* Responsibilities: 
-
+* Responsibilities: Code quality
