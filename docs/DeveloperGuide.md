@@ -316,6 +316,22 @@ Use case ends
 Steps 1a1 to 1a2 are repeated until the data entered are correct
 Use case resumes from Step 2
 
+**Use Case: UC02 - Delete student contact**
+
+**MSS**:
+Tutor keys in required fields to delete student contact
+TutorEase deletes the student contact
+Use case ends
+
+**Extensions**:
+1a. TutorEase detects bad or wrongly formatted inputs.
+1a1. TutorEase prompts Tutor with correct format
+1a2. Tutor enters new data.
+Steps 1a1 to 1a2 are repeated until the data entered are correct
+Use case resumes from Step 2
+
+
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
