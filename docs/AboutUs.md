@@ -50,7 +50,7 @@ You can reach us at the email `cs2103_f11_2[at]comp.nus.edu.sg`
 
 ### Yi Hao
 
-<img src="images/shizy.png" width="200px">
+<img src="images/johndoe.png" width="200px">
 
 [[github](http://github.com/johndoe)]
 
