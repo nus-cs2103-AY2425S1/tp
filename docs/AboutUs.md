@@ -38,14 +38,25 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Documentation, Code Quality, Deliverables and Deadlines
 * Responsibilities: Integration
 
+### Lei Jianwen
+
+<img src="images/jianwen0451.png" width="200px">
+
+[[github](http://github.com/jianwen0451)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer Java Expert
+* Responsibilities: Dev Ops + Threading
+
 ### Collin Tan Yu Qi
 
 <img src="images/tanyqcollin.png" width="200px">
 
 [[github](http://github.com/tanyqcollin)]
+[[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: UI
 
 ### Tee Jing Hong
 
