@@ -10,7 +10,7 @@ _markbind/logs/
 # Dependency directories
 node_modules/
 
-# Production build files (change if you output the build to a different directory)
+# Production
 _site/
 
 # Env
