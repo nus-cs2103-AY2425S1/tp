@@ -1,8 +1,8 @@
 {
   "baseUrl": "",
   "titlePrefix": "TAHub Contacts",
-  "titleSuffix": "AddressBook Level-3",
-  "faviconPath": "images/tahc-icon_197px.png",
+  "titleSuffix": "TAHub Contacts",
+  "faviconPath": "images/brand/tahc-icon_thumb.png",
   "style": {
     "codeTheme": "light",
     "bootstrapTheme": "bootswatch-flatly"
