@@ -18,8 +18,8 @@ You can reach us at the email seer[at]comp.nus.edu.sg
 [[github](https://github.com/QinHaichen12)]
 [[portfolio](team/qinhaichen12.md)]
 
-* Role: Developer
-* Responsibilities: Data, UI
+- Role: Developer
+- Responsibilities: Data, UI
 
 ### Yuvraj Aryan Singh
 
@@ -28,6 +28,8 @@ You can reach us at the email seer[at]comp.nus.edu.sg
 [[github](http://github.com/yuvrajaryan)]
 [[portfolio](team/yuvrajaryan.md)]
 
+- Role: Developer
+- Responsibilities: Data, UI
 
 ### Daniel Lai
 
@@ -48,10 +50,7 @@ You can reach us at the email seer[at]comp.nus.edu.sg
 [[portfolio](team/keithxun.md)]
 
 - Role: Developer
-- Responsibilities: UI, Scheduling and tracking
-
-* Role: Developer
-* Responsibilities: UI
+- Responsibilities: UI
 
 ### Tag Han
 
@@ -60,5 +59,5 @@ You can reach us at the email seer[at]comp.nus.edu.sg
 [[github](https://github.com/taggyhan)]
 [[portfolio](team/taggyhan.md)]
 
-* Role: Developer
-* Responsibilities: UI, Scheduling and tracking
+- Role: Developer
+- Responsibilities: UI, Scheduling and tracking
