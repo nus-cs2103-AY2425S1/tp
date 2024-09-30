@@ -1,10 +1,14 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+
+
 
 class SubjectTest {
 
@@ -54,5 +58,18 @@ class SubjectTest {
 
         // different values -> returns false
         assertFalse(subject.equals(new Subject("biology")));
+    }
+
+    @Test
+    public void hashCodeTest() {
+        Subject subject = new Subject("economics");
+        Subject otherSubject = new Subject("economics");
+
+        Subject differentSubject = new Subject("biology");
+        assertEquals(subject.hashCode(), subject.hashCode());
+
+        assertEquals(subject.hashCode(), otherSubject.hashCode());
+
+        assertNotEquals(subject.hashCode(), differentSubject.hashCode());
     }
 }
