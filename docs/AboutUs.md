@@ -56,12 +56,12 @@ Value proposition: provides quick and efficient access to client details, tailor
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Aw Ming Yi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/mingyiaw.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/MingYiAw)]
+[[portfolio](team/mingyiaw.md)]
 
 * Role: Developer
 * Responsibilities: UI
