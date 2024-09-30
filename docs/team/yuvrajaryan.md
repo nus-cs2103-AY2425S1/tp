@@ -1,6 +1,6 @@
 ---
   layout: default.md
-  title: "John Doe's Project Portfolio Page"
+  title: "Yuvraj Aryan Singh's Project Portfolio Page"
 ---
 
 ### Project: AddressBook Level 3
