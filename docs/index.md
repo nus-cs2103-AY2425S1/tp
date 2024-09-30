@@ -10,7 +10,7 @@
 
 ![Ui](images/Ui.png)
 
-**ContactCS is a desktop application for managing your contact details.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
+**ContactCS** is designed for NUS Computer Science freshmen to efficiently manage and locate important contact details, including those of professors, teaching assistants, classmates, school offices, and more.
 
 * If you are interested in using ContactCS, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
 * If you are interested about developing ContactCS, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
