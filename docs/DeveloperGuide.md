@@ -391,16 +391,47 @@ For all use cases below, the **System** is the `SeeRee 2.0` and the **Actor** is
         Use case resumes from step 1.
 
 <u>**Use Case: UC2 - Delete events of a schedule**</u>
+
 **Preconditions**
+- User is logged in with access to own schedule
+- The specific event to be deleted exists within the schedule
+
 **Guarantees**
+- User’s schedule will only be updated if the command is successful.
+- Other events on the user’s schedule will not be deleted.
+- There will not be gaps between the indexes of the new schedule after deletion.
+
 **MSS**
+1. User requests to delete a specific event on their schedule.
+2. System deletes the event.
+3. User’s schedule is updated without the removed event.
+
+    Use case ends.
+
 **Extensions**
+- 1a. The given index is invalid
+
+    - 1a1. System shows an error message
+
+        Use case resume from step 1. 
 
 <u>**Use Case: UC3 - View schedule**</u>
+
 **Preconditions**
-**Guarantees**
+- User is logged in with access to own schedule.
+
 **MSS**
+1. User requests to see a specific week in his schedule
+2. System updates schedule window to display schedule for that week
+
+    Use case ends.
+
 **Extensions**
+- 1a. The input date specified by the user does not follow the date format.
+
+    - 1a1. System shows an error message, notifying the user the correct date format
+
+	    Use case ends.
 
 <u>**Use Case: UC4 - View contact information**</u>
 
