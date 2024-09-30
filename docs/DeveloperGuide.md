@@ -464,19 +464,19 @@ Performance Requirements
 
 
 ### Glossary
+**Technical**
+*  **Mainstream OS**: Windows, Linux, Unix, MacOS
+*  **CLI**: Command-Line Interface, a text-based interface used to interact with software by typing commands.
+*  **GUI**: Graphical User Interface, a user interface that allows users to interact with the app through graphical elements such as buttons, text fields, and menus.
+*  **JAR**: Java Archive, A file format used to package Java applications and libraries into a single, compressed file
+*  **JSON**: JavaScript Object Notation, a lightweight data-interchange format for structuring and exchanging data
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-* **CLI (Command-Line Interface)**: A text-based interface used to interact with software by typing commands.
-*  **CRUD Operations**: Stands for Create, Read, Update, and Delete – the basic operations that can be performed on data.
-*  **RSVP**: Short for "Répondez S'il Vous Plaît," used to track guest attendance responses for an event.
+**Non-technical**
+*  **Guest**: A person invited to the wedding.
 *  **Vendor**: A supplier providing services or goods for a wedding, such as photographers, florists, caterers, etc.
+*  **RSVP Status**: The attendance response status of a guest. It can be either confirmed, pending, or declined.
 *  **Tag**: A keyword or label assigned to an entry to categorize and easily filter it within the list.
 *  **Index**: A numerical value representing the position of an entry in a list, used to reference and perform operations on the contact.
-*  **Status**: A predefined label assigned to a task or attendee, representing their state (e.g., confirmed, pending, or canceled).
-*  **Task**: A wedding-related activity that requires completion, such as booking a venue, sending invites, or coordinating with vendors.
-*  **Syntax**: The specific structure and format required for entering commands in the CLI.
-*  **Stakeholders**: Any individuals or organizations involved in the wedding, including family members, guests, and vendors.
 
 --------------------------------------------------------------------------------------------------------------------
 
