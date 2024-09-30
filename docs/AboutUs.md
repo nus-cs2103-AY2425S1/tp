@@ -9,15 +9,31 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Soh Wei Kiat
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jovensoh.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[homepage](jovensoh.github.io)]
+[[github](https://github.com/jovensoh)]
+[[portfolio](team/jovensoh.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: UI/UX, DevOps
+
+### Kan Jun Hong
+
+<img src="images/fluffykan.png" width="200px">
+
+[[github](http://github.com/Fluffykan)]
+
+* Role: Developer
+* Responsibilities: UI
+
+### Keerthi G Kaarthik
+
+<img src="images/keerthigkaarthik.png" width="200px">
+
+[[github](http://github.com/keerthigkaartik)]
 
 ### Tseng Tzu En
 
@@ -25,34 +41,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](http://github.com/tzuennn)]
 [[portfolio](team/tzuennn.md)]
-* Role: Developer
-* Responsibilities: UI
 
-### Johnny Doe
+### Tseng Tzu Che
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ttzuche.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/ttzuche)]
+[[portfolio](team/ttzuche.md)]
 
 * Role: Developer
 * Responsibilities: UI
