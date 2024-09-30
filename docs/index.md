@@ -9,7 +9,7 @@
 [![GitHub Release](https://img.shields.io/github/v/release/AY2425S1-CS2103T-F14B-2/tp)](https://github.com/AY2425S1-CS2103T-F14B-2/tp/releases)
 [![codecov](https://codecov.io/gh/AY2425S1-CS2103T-F14B-2/tp/graph/badge.svg?token=B9KWYUPZ78)](https://codecov.io/gh/AY2425S1-CS2103T-F14B-2/tp)
 
-![Logo](docs/images/brand/tahc-logo_small.png) ![Logo](docs/images/brand/tahc-icon_small.png)
+![Logo](images/brand/tahc-logo_small.png) ![Logo](images/brand/tahc-icon_small.png)
 
 ![Ui](images/Ui.png)
 
