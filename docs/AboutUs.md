@@ -9,20 +9,9 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/charlene)]
-
-- Role: Project Advisor
-
 ### Jia Yi
 
 <img src="images/jiayi-gallium369.png" width="200px">
-
 
 [[github](http://github.com/jiayi-gallium369)]
 [[portfolio](team/jiayi-gallium369.md)]
@@ -30,12 +19,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 - Role: Developer
 - Responsibilities: UI
 
-
 ### Siow Rui Ming
 
 <img src="images/ruiming97.png.jpg" width="200px">
 
-[[github](http://github.com/ruiming97)] 
+[[github](http://github.com/ruiming97)]
 [[portfolio](team/ruiming97.md)]
 
 - Role: Developer
@@ -43,13 +31,23 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Jeremy
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/limjeremy496.png" width="200px">
 
 [[github](http://github.com/limjeremy496)]
 [[portfolio](team/limjeremy496.md)]
 
 - Role: Developer
 - Responsibilities: Dev Ops + Threading
+
+### Leroy Chiu
+
+<img src="images/leroychiu20.png" width="200px">
+
+[[github](http://github.com/leroychiu20)]
+[[portfolio](team/leroychiu20.md)]
+
+- Role: Developer
+- Responsibilities: UI, Testing
 
 ### Charlene Teoh
 
