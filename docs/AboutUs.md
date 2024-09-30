@@ -14,7 +14,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/rachelcoll.png" width="200px">
 
 [[github](https://github.com/Rachelcoll)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/runxin)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Data
