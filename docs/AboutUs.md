@@ -9,21 +9,21 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Prabhu NATARAJAN 
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/prabhu.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[homepage](https://www.comp.nus.edu.sg/cs/people/prabhu/)]
+[[github](https://github.com/prabhu-na)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Project Advisor
 
 ### Jane Doe
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yongqqqq.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/yongqqqq)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Team Lead
