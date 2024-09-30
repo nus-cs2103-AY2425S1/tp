@@ -39,7 +39,7 @@ You can reach us at the email `e1121785@u.nus.edu`
 
 ### Tzu Che
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/tzuche.png" width="200px">
 
 [[github](http://github.com/ttzuche)]
 
