@@ -13,14 +13,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Ma Xizi
 
-<img src="images/maxizi.png" width="200px">
+<img src="images/ma-xizi.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/Ma-Xizi)]
-[[portfolio](team/Ma-Xizi.md)]
 
-* Role: Developer
-* Responsibilities: Something Random
+* Role: Testing
+* Responsibilities: Ensures the testing of the project is done properly and on time.
 
 ### Norbert Loh
 
@@ -35,7 +34,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Aw Jean Leng Adrian
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/chronoxy.png" width="200px">
 
 [[github](https://github.com/Chronoxy)]
 [[portfolio](team/johndoe.md)]
@@ -45,10 +44,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Ethan Tan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ethantyh692.png" width="200px">
 
 [[github](http://github.com/ethantyh692)]
 [[portfolio](team/ethantyh692.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
+
+## Acknowledgement
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+
