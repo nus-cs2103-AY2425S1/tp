@@ -22,6 +22,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Testing, Integration, Code Quality
 
+### Isaac Ng
+
+<img src="images/izn432.png" width="200px">
+
+[[github](http://github.com/izn432)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities: Ui
+
 ### Wong Swee Chong, Dave
 
 <img src="images/dwsc37.png" width="200px">
@@ -31,25 +41,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Team Lead
 * Responsibilities: Code Review, Project Management
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
 
 ### Audi Prasanto
 
