@@ -258,14 +258,22 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ## **Appendix: Requirements**
 
-### Product scope
+### Product Scope
 
 **Target user profile**:
 
-Sports Event (e.g. IFG) Organisers that need to manage and contact: Audience, Athletes, Committee Members, Referees, 
-Photography. This person prefers CLI over GUI and has many event participants to keep track of.
+Sports Event (e.g. IFG) Organisers that need to manage and contact: 
+- Audience
+- Athletes
+- Committee Members
+- Referees
+- Photography
+and more.
+
+This person prefers CLI over GUI and has many event participants to keep track of.
 
 **Value proposition**: 
+
 All event organizers will be able to:
 - View what kind of participant each contact is in the application is 
 without having to dig through paperwork / NUSync.
