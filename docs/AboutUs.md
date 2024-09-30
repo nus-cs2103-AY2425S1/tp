@@ -11,25 +11,26 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Zwe Zeya
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/zwezeya.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/choaticman)]
+[[github](https://github.com/ZweZeya)]
+[[portfolio](team/zwezeya.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: Goat
 
-### Jane Doe
+### Raghava Chittidi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/raghava-chittidi.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/choaticman)]
 
-* Role: Team Lead
-* Responsibilities: UI
+[[github](http://github.com/Raghava-Chittidi)]
+[[portfolio](team/raghava-chittidi.md)]
+
+* Role: Developer
+* Responsibilities: Software Developer
 
 ### Dylan Chan
 
@@ -40,22 +41,22 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Software Engineer
 
-### Jean Doe
+### Kelly Wong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/woke02.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/choaticman)]
+[[github](http://github.com/woke02)]
+[[portfolio](team/woke02.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Wu XueTing
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/snowstopxt.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/choaticman)]
+[[github](http://github.com/snowstopxt)]
+[[portfolio](team/xueting.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: UI, FXML, Prototype 
