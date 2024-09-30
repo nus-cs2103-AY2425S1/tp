@@ -259,17 +259,30 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ## **Appendix: Requirements**
 
-### Product scope
+### Product Scope
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+Sports Event (e.g. IFG) Organisers that need to manage and contact: 
+- Audience
+- Athletes
+- Committee Members
+- Referees
+- Photography
+and more.
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+This person prefers CLI over GUI and has many event participants to keep track of.
+
+**Value proposition**: 
+
+All event organizers will be able to:
+- View what kind of participant each contact is in the application is 
+without having to dig through paperwork / NUSync.
+- View how participants are grouped by membership (e.g. faculty sports team) 
+without having to dig through paperwork / NUSync.
+- Track the particular participant’s involvement in the event’s sub-events 
+(e.g. IFG has multiple sub-events that stakeholders can take part in) 
+without having to dig through paperwork / NUSync.
 
 
 ### User stories
