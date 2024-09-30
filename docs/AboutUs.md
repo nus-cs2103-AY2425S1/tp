@@ -22,3 +22,24 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Responsibilities: Data, UI
 
 
+### Daniel Lai
+
+<img src="images/starchypotatocode.png" width="200px">
+
+[[github](http://github.com/starchypotatocode)]
+[[portfolio](team/starchypotatocode.md)]
+
+- Role: Developer
+- Responsibilities: Testing, Integration
+
+
+### Keith Ong
+
+<img src="images/keithxun.png" width="200px">
+
+[[github](http://github.com/keithxun)]
+[[portfolio](team/keithxun.md)]
+
+- Role: Developer
+- Responsibilities: UI, Scheduling and tracking
+
