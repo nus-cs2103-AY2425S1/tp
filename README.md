@@ -10,5 +10,5 @@
   * It is **written in OOP fashion**. It provides a **well-structured** code base of **reasonable size** (around 6 KLoC), allowing for efficient development and extensibility, especially for intermediate-level SE students or developers.
   * It comes with **well-maintained user and developer documentation**.
 * It is named `PlanPerfect` because it is primarily designed for wedding planners to organize important contacts and event-related information.
-* For the detailed documentation of this project, see the **[PlanPerfect Product Website](https://github.com/AY2425S1-CS2103T-T12-2/tp)**.
-* This project is a **part of the NUS CS2103T initiative**. If you would like to contribute code to this project, check out the [contribution guidelines](https://github.com/AY2425S1-CS2103T-T12-2/tp).
+* For the detailed documentation of this project, see the **[PlanPerfect Product Website](https://ay2425s1-cs2103t-t12-2.github.io/tp)**.
+
