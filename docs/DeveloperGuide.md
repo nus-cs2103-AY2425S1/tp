@@ -285,20 +285,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | educator | clear all information                            |I can start anew for a new academic year              |
 | `* *`    | educator | update details easily when there are changes     |I can have the most updated information                                            |
 
-*{More to be added}*
+
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `StoreClass` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case 1: List out all students**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list students
+2.  StoreClass shows a list of students
+
+    Use case ends.
+
+**Use case 2: Delete a student**
+
+**MSS**
+
+1.  User requests to list students
+2.  StoreClass shows a list of students
+3.  User requests to delete a specific student in the list
+4.  StoreClass deletes the student
 
     Use case ends.
 
@@ -314,15 +323,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case 3: Add a student**
+
+**MSS**
+
+1.  User requests to add persons and type in the relevant information
+2.  StoreClass adds the new student
+3. StoreClass show the new list of students
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given index is invalid.
+
+    * 1a1. AddressBook shows an error message.
+
+      Use case resumes at step 1.
+
+
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. The product should be an offline product that can run without accessing the internet.
 
-*{More to be added}*
 
 ### Glossary
 
