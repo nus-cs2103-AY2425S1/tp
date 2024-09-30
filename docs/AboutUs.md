@@ -23,6 +23,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/jiayi-gallium369.png" width="200px">
 
+
 [[github](http://github.com/jiayi-gallium369)]
 [[portfolio](team/jiayi-gallium369.md)]
 
@@ -40,12 +41,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 - Role: Developer
 - Responsibilities: Data
 
-### Jean Doe
+### Jeremy
 
 <img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/charlene)]
+[[github](http://github.com/limjeremy496)]
+[[portfolio](team/limjeremy496.md)]
 
 - Role: Developer
 - Responsibilities: Dev Ops + Threading
