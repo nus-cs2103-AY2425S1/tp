@@ -1,6 +1,6 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
+// import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -38,6 +38,8 @@ public class PersonCard extends UiPart<Region> {
     private Label address;
     @FXML
     private Label email;
+
+    // used to display blue color tags.
     @FXML
     private FlowPane tags;
 
@@ -52,8 +54,12 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+
+        // This is the code to show blue tags. I will comment it out instead of deleting it.
+        /*
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                */
     }
 }
