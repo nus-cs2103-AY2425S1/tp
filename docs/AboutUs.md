@@ -42,15 +42,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Jean Doe
+### Tan San Chian
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/tansanchian.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/tansanchian)]
+[[portfolio](team/tansanchian.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Software Engineer
+* Responsibilities: Backend Development
 
 ### Samson Chew Jun Jie
 
