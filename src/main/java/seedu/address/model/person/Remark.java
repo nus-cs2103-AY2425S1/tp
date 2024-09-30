@@ -6,6 +6,7 @@ import static java.util.Objects.requireNonNull;
  * Represents a Person's remarks in the address book, as added by a user.
  * Guarantees: immutable;
  */
+
 public class Remark {
 
     public final String value;
