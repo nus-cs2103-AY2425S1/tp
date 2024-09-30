@@ -229,13 +229,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 
@@ -254,6 +254,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * [Configuration guide](Configuration.md)
 * [DevOps guide](DevOps.md)
 
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Requirements**
@@ -262,27 +263,43 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* international or exchange student joining NUS
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: helps international students manage important contacts faster than a typical mouse/GUI driven app
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                    | I want to …​                                      | So that I can…​                                                     |
+|----------| ----------------------------------------- | ------------------------------------------------- | ------------------------------------------------------------------- |
+| `* * *`  | new user                                   | see usage instructions                            | refer to instructions when I forget how to use the App              |
+| `* * *`  | user                                       | add new contacts                                  |                                                                     |
+| `* * *`  | user                                       | view all contacts                                 | see all my contacts saved in one screen                             |
+| `* * *`  | user                                       | delete a contact                                  | remove entries that I no longer need                                |
+| `* *`    | potential user                             | see the app populated with sample data            | easily try and see how the app will look like when it is in use     |
+| `* *`    | new user ready to use the app              | remove all current data                           | remove all sample data I used when exploring the app                |
+| `* *`    | familiar user of the app                   | save the contacts under a favourites tab          | easily access the contacts that I frequently use                    |
+| `* *`    | familiar user of the app                   | tag certain contacts                              | remember where I know the contacts from                             |
+| `* *`    | new user who is from a different country   | change the language of the app                    | better use the app in my first language                             |
+| `* *`    | new user who is an exchange student        | learn how to use the app quickly                  | use the app frequently during my 6 months in NUS                    |
+| `* *`    | new user who is unfamiliar with English    | use shortcut commands instead of the full name of the commands | make minimal spelling mistakes when I am entering the commands     |
+| `* *`    | familiar user of the app                   | filter contacts by tag                            | easier find my contacts who belong to the same group                |
+| `* *`    | familiar user of the app                   | search contacts by name                           | easily find the contact person instead of scrolling                 |
+| `* *`    | first-time user                            | see some sample contacts (local emergency etc)    | I do not need to manually search for those contacts that are useful in urgent situations |
+| `* *`    | student with frequent changes in schedule  | mark contacts as "high priority" or "low priority" | focus on the most relevant people when my schedule is tight         |
+| `* *`    | international student unfamiliar with the local area | access a pre-populated list of essential services (e.g., embassy, health services, police) | quickly contact these services in case of an emergency          |
+| `* *`    | user                                       | edit my contacts                                  | amend mistakes/update new info on my contacts                       |
+| `*`      | new user who is unfamiliar with English    | have suggestions on commands to enter             | enter the right commands if I am unsure on how to spell certain words |
+| `*`      | familiar user of the app                   | choose country codes for different countries      | easier categorise and save different numbers from my diverse base of contacts |
+| `*`      | familiar user of the app                   | mass add a large list of contacts                 | avoid from entering repetitive commands                             |
+| `*`      | impatient user                             | experience reasonable response time while up to 1000 concurrent users are using it | use the app even when the traffic is at the maximum expected level |
+| `*`      | busy user                                  | quickly import contacts from other platforms (e.g., phone, social media, email) | avoid manually inputting every new contact into UniNet             |
 
 *{More to be added}*
 
