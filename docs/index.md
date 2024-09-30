@@ -19,13 +19,16 @@ If you _are_ a busy undergraduate Computer Science student juggling Teaching Ass
 While it has a GUI (Graphical User Interface), most of the user interactions happen using a CLI (Command Line Interface)
 with typed commands.
 
-<box type="tip" >
-* If you are interested in **using** TAHub Contacts, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
-* If you are interested about **developing** TAHub Contacts, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+## Want to
 
+<box theme="info" header="##### :fa-solid-keyboard: **Use** TAHub Contacts?">
+    <md>Head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).</md>
+</box>
+<box theme="secondary" header="##### :fa-solid-code: Help **develop** TAHub Contacts?">
+    <md>The [**Developer Guide**](DeveloperGuide.html) is a good place to start.</md>
 </box>
 
-## Acknowledgements
+## :fa-solid-heart: Acknowledgements
 
-* :heart: This project is built on the AddressBook-Level3 (AB3) project created by the [SE-EDU initiative](https://se-education.org).
-* :heart: Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+* This project is built on the AddressBook-Level3 (AB3) project created by the [SE-EDU initiative](https://se-education.org).
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)

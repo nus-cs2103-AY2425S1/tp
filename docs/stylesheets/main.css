@@ -13,8 +13,8 @@ mark {
   width: 100%;
 }
 
-/* Alert boxes */
-.alert {
+/* <box seamless></box> */
+.alert box[seamless] {
   color: black; /* Need this to allow for <box seamless></box> elements */
 }
 
