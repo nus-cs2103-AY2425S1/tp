@@ -274,27 +274,28 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
+* studies at School of Computing in NUS
+* is constantly applying for internships
+* has a need to keep track of significant number of internships
 * can type fast
-* prefers typing to mouse interactions
+* prefers typing to mouse interaction
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: manage internships faster than a typical mouse/GUI driven app
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​                       | I want to …​                                 | So that …​                                                           |
+|----------|-------------------------------|----------------------------------------------|----------------------------------------------------------------------|
+| `* * *`  | CS Undergraduate              | View the list of application                 | I can view all my past applications                                  |
+| `* * *`  | An efficient CS Undergraduate | Type the commands                            | I do not have to lift my fingers off the keyboard                    |
+| `* * *`  | CS Undergraduate              | Add an internship application                | I can add on to the records of all the internships I have applied to |
+| `* * *`  | CS Undergraduate              | Delete an internship application             | I can remove irrelevant applications                                 |
+| `* *`    | CS Undergraduate              | Save the internship application data locally | I will not lose my data when I exit the application                  |
+| `* *`    | CS Undergraduate              | Load the internship from a saved file        | I can get back my data when I open the application                   |
 
 *{More to be added}*
 
