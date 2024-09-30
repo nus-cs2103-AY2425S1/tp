@@ -4,7 +4,6 @@
 
 <header sticky>
   <navbar type="primary">
-    <!-- <a slot="brand" href="{{baseUrl}}/index.html" title="Home" class="navbar-brand">TAHub Contacts</a> -->
     <img slot="brand" href="{{baseUrl}}/index.html" title="Home" class="navbar-brand" src="/images/brand/tahc-logo_transparent_thumb.png"></img>
     <li><a href="{{baseUrl}}/index.html" class="nav-link">Home</a></li>
     <li><a href="{{baseUrl}}/UserGuide.html" class="nav-link">User Guide</a></li>
