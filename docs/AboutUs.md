@@ -58,4 +58,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/xueting.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: UI, FXML, Prototype 
