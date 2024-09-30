@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# TAHub Contacts Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -285,18 +285,34 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Priorities: High (must have) - ★★★, Medium (nice to have) - ★★, Low (unlikely to have) - ★
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
-
-_{More to be added}_
+| Priority | As a ...          | I want to ...                                         | So that I can ...                                              |
+|----------|-------------------|-------------------------------------------------------|----------------------------------------------------------------|
+| ★★★      | Beginner User     | Add contacts                                          | Track contact details for students joining the class           |
+| ★★★      | Beginner User     | View contacts                                         | Get an overview of my students’ contact information            |
+| ★★★      | Beginner User     | Delete contacts                                       | Remove students no longer in the class                         |
+| ★★★      | Beginner User     | Edit contacts                                         | Update contact details when they change                        |
+| ★★★      | Beginner User     | Add essential data about students                     | Track students’ progress and access it when needed             |
+| ★★★      | Beginner User     | View essential data about students                    | Access key data for each student                               |
+| ★★★      | Beginner User     | Delete essential data about students                  | Remove data for students who have left the class               |
+| ★★★      | Beginner User     | Edit essential data about students                    | Update student information when changes occur                  |
+| ★★       | Beginner User     | Search for students                                   | Quickly find student contact details                           |
+| ★★       | Intermediate User | Sort students by grades                               | Prioritize weaker students for follow-up                       |
+| ★★       | Expert User       | Delete students in bulk                               | Remove multiple students quickly, e.g., after class ends       |
+| ★        | Intermediate User | Add filters to searches                               | Narrow down search results to find specific students           |
+| ★★       | Intermediate User | Get warnings before making major changes              | Avoid accidental changes to important student data             |
+| ★★       | Beginner User     | Explore app with sample student data                  | Test features without needing real data                        |
+| ★★       | Beginner User     | Access help for available commands                    | Learn how to use the app's functionality effectively           |
+| ★        | Intermediate User | Bulk import student data                              | Add multiple students at once                                  |
+| ★★       | Beginner User     | Export contact list to a CSV                          | Back up student contact information                            |
+| ★★       | Intermediate User | Merge duplicate student entries                       | Reduce clutter in the contact list                             |
+| ★        | Beginner User     | Filter students by attendance status                  | Track and follow up with absent students                       |
+| ★★       | Intermediate User | Sort students alphabetically                          | Quickly locate students in the contact list                    |
+| ★        | Intermediate User | Add comments to student profiles                      | Record observations or important information about students    |
+| ★        | Beginner User     | Assign preferred communication methods to parents     | Ensure efficient communication through preferred channels      |
+| ★        | Intermediate User | Flag students with missing contact details            | Ensure all required student information is complete            |
+| ★        | Beginner User     | Set communication preferences for individual students | Communicate via their preferred method (Telegram, phone, etc.) |
 
 ### Use cases
 
