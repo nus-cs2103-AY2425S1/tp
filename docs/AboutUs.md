@@ -21,4 +21,22 @@ You can reach us at the email `nowherenearyou[at]comp.nus.edu.sg`
 
 * Roll: out
 
+### Wu Zengfu
 
+<img src="images/zengfu.png" width="200px">
+
+[[github](https://github.com/wuzengfu)]
+[[portfolio](team/zengfu.md)]
+
+* Role: Deliverables and deadlines
+* Responsibilities: Model
+
+### Ernest Yu
+
+<img src="images/somethingfishyfishy.png" width="200px">
+
+[[github](http://github.com/somethingfishyfishy)] 
+[[portfolio](team/johndoe.md)]
+
+* Role: Supervisor, Developer
+* Responsibilities: Many
