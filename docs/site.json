@@ -1,8 +1,8 @@
 {
   "baseUrl": "",
   "titlePrefix": "InSUREance",
-  "titleSuffix": "AddressBook Level-3",
-  "faviconPath": "images/SeEduLogo.png",
+  "titleSuffix": "InSUREance APP",
+  "faviconPath": "images/siteLogo.png",
   "style": {
     "codeTheme": "light"
   },
