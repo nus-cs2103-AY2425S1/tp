@@ -9,27 +9,27 @@ UniNet helps international students in NUS manage detail of their contacts. It i
 
 Given below are my contributions to the project.
 
-* **New Feature**: 
-  * What it does: 
+* **New Feature**:
+  * What it does:
   * Justification:
-  * Highlights: 
-  * Credits: 
+  * Highlights:
+  * Credits:
 
-* **New Feature**: 
+* **New Feature**:
 
-* **Code contributed**: 
+* **Code contributed**:
 
 * **Project management**:
- 
+
 
 * **Enhancements to existing features**:
-  
+
 
 * **Documentation**:
   * User Guide:
-  
+
   * Developer Guide:
-   
+
 
 * **Community**:
 
