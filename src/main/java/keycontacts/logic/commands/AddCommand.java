@@ -11,7 +11,7 @@ import keycontacts.commons.util.ToStringBuilder;
 import keycontacts.logic.Messages;
 import keycontacts.logic.commands.exceptions.CommandException;
 import keycontacts.model.Model;
-import keycontacts.model.person.Person;
+import keycontacts.model.student.Person;
 
 /**
  * Adds a person to the address book.

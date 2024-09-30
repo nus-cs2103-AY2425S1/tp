@@ -27,7 +27,7 @@ import keycontacts.model.Model;
 import keycontacts.model.ModelManager;
 import keycontacts.model.ReadOnlyAddressBook;
 import keycontacts.model.UserPrefs;
-import keycontacts.model.person.Person;
+import keycontacts.model.student.Person;
 import keycontacts.storage.JsonAddressBookStorage;
 import keycontacts.storage.JsonUserPrefsStorage;
 import keycontacts.storage.StorageManager;

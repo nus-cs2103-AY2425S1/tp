@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import keycontacts.model.AddressBook;
-import keycontacts.model.person.Person;
+import keycontacts.model.student.Person;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.

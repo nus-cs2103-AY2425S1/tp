@@ -10,7 +10,7 @@ import java.util.Set;
 
 import keycontacts.logic.commands.AddCommand;
 import keycontacts.logic.commands.EditCommand.EditPersonDescriptor;
-import keycontacts.model.person.Person;
+import keycontacts.model.student.Person;
 import keycontacts.model.tag.Tag;
 
 /**

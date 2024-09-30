@@ -38,10 +38,10 @@ import keycontacts.commons.core.index.Index;
 import keycontacts.logic.Messages;
 import keycontacts.logic.commands.EditCommand;
 import keycontacts.logic.commands.EditCommand.EditPersonDescriptor;
-import keycontacts.model.person.Address;
-import keycontacts.model.person.Email;
-import keycontacts.model.person.Name;
-import keycontacts.model.person.Phone;
+import keycontacts.model.student.Address;
+import keycontacts.model.student.Email;
+import keycontacts.model.student.Name;
+import keycontacts.model.student.Phone;
 import keycontacts.model.tag.Tag;
 import keycontacts.testutil.EditPersonDescriptorBuilder;
 

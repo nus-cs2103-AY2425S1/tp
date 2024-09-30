@@ -1,4 +1,4 @@
-package keycontacts.model.person;
+package keycontacts.model.student;
 
 import static keycontacts.commons.util.CollectionUtil.requireAllNonNull;
 

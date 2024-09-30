@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 import keycontacts.model.Model;
 import keycontacts.model.ModelManager;
 import keycontacts.model.UserPrefs;
-import keycontacts.model.person.NameContainsKeywordsPredicate;
+import keycontacts.model.student.NameContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.

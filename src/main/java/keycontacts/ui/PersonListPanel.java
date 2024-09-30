@@ -8,7 +8,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import keycontacts.commons.core.LogsCenter;
-import keycontacts.model.person.Person;
+import keycontacts.model.student.Person;
 
 /**
  * Panel containing the list of persons.

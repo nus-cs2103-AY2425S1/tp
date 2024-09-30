@@ -22,7 +22,7 @@ import keycontacts.model.AddressBook;
 import keycontacts.model.Model;
 import keycontacts.model.ReadOnlyAddressBook;
 import keycontacts.model.ReadOnlyUserPrefs;
-import keycontacts.model.person.Person;
+import keycontacts.model.student.Person;
 import keycontacts.testutil.PersonBuilder;
 
 public class AddCommandTest {

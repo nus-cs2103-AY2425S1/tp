@@ -1,4 +1,4 @@
-package keycontacts.model.person;
+package keycontacts.model.student;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;

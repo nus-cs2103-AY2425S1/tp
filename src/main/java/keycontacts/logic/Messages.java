@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import keycontacts.logic.parser.Prefix;
-import keycontacts.model.person.Person;
+import keycontacts.model.student.Person;
 
 /**
  * Container for user visible messages.

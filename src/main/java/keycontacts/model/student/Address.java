@@ -1,4 +1,4 @@
-package keycontacts.model.person;
+package keycontacts.model.student;
 
 import static java.util.Objects.requireNonNull;
 import static keycontacts.commons.util.AppUtil.checkArgument;

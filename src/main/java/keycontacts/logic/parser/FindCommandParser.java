@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 import keycontacts.logic.commands.FindCommand;
 import keycontacts.logic.parser.exceptions.ParseException;
-import keycontacts.model.person.NameContainsKeywordsPredicate;
+import keycontacts.model.student.NameContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object

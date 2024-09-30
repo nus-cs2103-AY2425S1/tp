@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 
 import keycontacts.commons.core.index.Index;
 import keycontacts.model.Model;
-import keycontacts.model.person.Person;
+import keycontacts.model.student.Person;
 
 /**
  * A utility class for test cases.

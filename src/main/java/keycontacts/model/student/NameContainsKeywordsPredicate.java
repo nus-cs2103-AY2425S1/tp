@@ -1,4 +1,4 @@
-package keycontacts.model.person;
+package keycontacts.model.student;
 
 import java.util.List;
 import java.util.function.Predicate;

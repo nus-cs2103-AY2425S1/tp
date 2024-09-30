@@ -14,10 +14,10 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import keycontacts.logic.parser.exceptions.ParseException;
-import keycontacts.model.person.Address;
-import keycontacts.model.person.Email;
-import keycontacts.model.person.Name;
-import keycontacts.model.person.Phone;
+import keycontacts.model.student.Address;
+import keycontacts.model.student.Email;
+import keycontacts.model.student.Name;
+import keycontacts.model.student.Phone;
 import keycontacts.model.tag.Tag;
 
 public class ParserUtilTest {

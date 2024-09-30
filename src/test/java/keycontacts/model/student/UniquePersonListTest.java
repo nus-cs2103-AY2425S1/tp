@@ -1,4 +1,4 @@
-package keycontacts.model.person;
+package keycontacts.model.student;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -15,8 +15,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import keycontacts.model.person.exceptions.DuplicatePersonException;
-import keycontacts.model.person.exceptions.PersonNotFoundException;
+import keycontacts.model.student.exceptions.DuplicatePersonException;
+import keycontacts.model.student.exceptions.PersonNotFoundException;
 import keycontacts.testutil.PersonBuilder;
 
 public class UniquePersonListTest {

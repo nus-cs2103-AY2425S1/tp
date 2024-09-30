@@ -12,11 +12,11 @@ import java.util.stream.Stream;
 
 import keycontacts.logic.commands.AddCommand;
 import keycontacts.logic.parser.exceptions.ParseException;
-import keycontacts.model.person.Address;
-import keycontacts.model.person.Email;
-import keycontacts.model.person.Name;
-import keycontacts.model.person.Person;
-import keycontacts.model.person.Phone;
+import keycontacts.model.student.Address;
+import keycontacts.model.student.Email;
+import keycontacts.model.student.Name;
+import keycontacts.model.student.Person;
+import keycontacts.model.student.Phone;
 import keycontacts.model.tag.Tag;
 
 /**

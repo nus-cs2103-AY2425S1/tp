@@ -18,8 +18,8 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import keycontacts.model.person.Person;
-import keycontacts.model.person.exceptions.DuplicatePersonException;
+import keycontacts.model.student.Person;
+import keycontacts.model.student.exceptions.DuplicatePersonException;
 import keycontacts.testutil.PersonBuilder;
 
 public class AddressBookTest {

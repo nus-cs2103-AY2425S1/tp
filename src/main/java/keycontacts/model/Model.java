@@ -5,7 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import keycontacts.commons.core.GuiSettings;
-import keycontacts.model.person.Person;
+import keycontacts.model.student.Person;
 
 /**
  * The API of the Model component.

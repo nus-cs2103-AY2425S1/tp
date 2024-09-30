@@ -9,7 +9,7 @@ import keycontacts.commons.util.ToStringBuilder;
 import keycontacts.logic.Messages;
 import keycontacts.logic.commands.exceptions.CommandException;
 import keycontacts.model.Model;
-import keycontacts.model.person.Person;
+import keycontacts.model.student.Person;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.

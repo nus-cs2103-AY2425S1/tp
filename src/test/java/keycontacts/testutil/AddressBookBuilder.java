@@ -1,7 +1,7 @@
 package keycontacts.testutil;
 
 import keycontacts.model.AddressBook;
-import keycontacts.model.person.Person;
+import keycontacts.model.student.Person;
 
 /**
  * A utility class to help with building Addressbook objects.

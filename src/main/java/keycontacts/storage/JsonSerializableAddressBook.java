@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import keycontacts.commons.exceptions.IllegalValueException;
 import keycontacts.model.AddressBook;
 import keycontacts.model.ReadOnlyAddressBook;
-import keycontacts.model.person.Person;
+import keycontacts.model.student.Person;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.

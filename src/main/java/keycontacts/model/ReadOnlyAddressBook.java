@@ -1,7 +1,7 @@
 package keycontacts.model;
 
 import javafx.collections.ObservableList;
-import keycontacts.model.person.Person;
+import keycontacts.model.student.Person;
 
 /**
  * Unmodifiable view of an address book

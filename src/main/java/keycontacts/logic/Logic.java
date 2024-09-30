@@ -9,7 +9,7 @@ import keycontacts.logic.commands.exceptions.CommandException;
 import keycontacts.logic.parser.exceptions.ParseException;
 import keycontacts.model.Model;
 import keycontacts.model.ReadOnlyAddressBook;
-import keycontacts.model.person.Person;
+import keycontacts.model.student.Person;
 
 /**
  * API of the Logic component

@@ -9,10 +9,10 @@ import java.util.Set;
 import keycontacts.commons.core.index.Index;
 import keycontacts.commons.util.StringUtil;
 import keycontacts.logic.parser.exceptions.ParseException;
-import keycontacts.model.person.Address;
-import keycontacts.model.person.Email;
-import keycontacts.model.person.Name;
-import keycontacts.model.person.Phone;
+import keycontacts.model.student.Address;
+import keycontacts.model.student.Email;
+import keycontacts.model.student.Name;
+import keycontacts.model.student.Phone;
 import keycontacts.model.tag.Tag;
 
 /**

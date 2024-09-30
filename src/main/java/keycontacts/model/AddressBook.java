@@ -6,8 +6,8 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import keycontacts.commons.util.ToStringBuilder;
-import keycontacts.model.person.Person;
-import keycontacts.model.person.UniquePersonList;
+import keycontacts.model.student.Person;
+import keycontacts.model.student.UniquePersonList;
 
 /**
  * Wraps all data at the address-book level

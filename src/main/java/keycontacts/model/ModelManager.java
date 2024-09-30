@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import keycontacts.commons.core.GuiSettings;
 import keycontacts.commons.core.LogsCenter;
-import keycontacts.model.person.Person;
+import keycontacts.model.student.Person;
 
 /**
  * Represents the in-memory model of the address book data.

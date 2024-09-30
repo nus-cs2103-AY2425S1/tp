@@ -15,7 +15,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import keycontacts.commons.core.GuiSettings;
-import keycontacts.model.person.NameContainsKeywordsPredicate;
+import keycontacts.model.student.NameContainsKeywordsPredicate;
 import keycontacts.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {

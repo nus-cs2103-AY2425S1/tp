@@ -17,8 +17,8 @@ import keycontacts.commons.core.index.Index;
 import keycontacts.logic.commands.exceptions.CommandException;
 import keycontacts.model.AddressBook;
 import keycontacts.model.Model;
-import keycontacts.model.person.NameContainsKeywordsPredicate;
-import keycontacts.model.person.Person;
+import keycontacts.model.student.NameContainsKeywordsPredicate;
+import keycontacts.model.student.Person;
 import keycontacts.testutil.EditPersonDescriptorBuilder;
 
 /**
