@@ -59,3 +59,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: UI
+
+
+### Ernest Yu
+
+<img src="images/somethingfishyfishy.png" width="200px">
+
+[[github](http://github.com/somethingfishyfishy)] 
+[[portfolio](team/johndoe.md)]
+
+* Role: Supervisor, Developer
+* Responsibilities: Many
+
