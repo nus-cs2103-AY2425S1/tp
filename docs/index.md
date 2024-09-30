@@ -19,7 +19,7 @@ If you _are_ a busy undergraduate Computer Science student juggling Teaching Ass
 While it has a GUI (Graphical User Interface), most of the user interactions happen using a CLI (Command Line Interface)
 with typed commands.
 
-<box type="tip" seamless>
+<box type="tip" >
 * If you are interested in **using** TAHub Contacts, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
 * If you are interested about **developing** TAHub Contacts, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
 

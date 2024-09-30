@@ -13,6 +13,11 @@ mark {
   width: 100%;
 }
 
+/* Alert boxes */
+.alert {
+  color: black; /* Need this to allow for <box seamless></box> elements */
+}
+
 /* Scrollbar */
 
 .slim-scroll::-webkit-scrollbar {
@@ -172,6 +177,7 @@ mark {
   }
 }
 
+/* These override the header colors set by the theme. Disabled for the time being */
 /* h2,
 h3,
 h4,
