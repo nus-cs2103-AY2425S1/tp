@@ -5,9 +5,9 @@
 
 # About Us
 
-We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
+We are a team based in the [National University of Singapore](http://www.nus.edu.sg) coming from varied and diverse backgrounds!
+You can reach us at the email `nowherenearyou[at]comp.nus.edu.sg`
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
@@ -18,43 +18,42 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/lowxisi)]
 [[portfolio](team/lowxisi.md)]
 
-* Role: Project Advisor
+### Chua Tse Hui
+Materials Science and Engineering Student.
+<img src="images/cth06-Github.png" width="200px">
 
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
+[[Google](http://www.google.com.sg)]
+[[github](https://github.com/cth06-Github)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Project Helper
 
-### Johnny Doe
+### Winston Jin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/winstonjin.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
+[[homepage](http://www.comp.nus.edu.sg/)]
+[[github](https://github.com/winstonjin)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Roll: out
 
-### James Doe
+### Wu Zengfu
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/zengfu.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](https://github.com/wuzengfu)]
+[[portfolio](team/zengfu.md)]
+
+* Role: Deliverables and deadlines
+* Responsibilities: Model
+
+### Ernest Yu
+
+<img src="images/somethingfishyfishy.png" width="200px">
+
+[[github](http://github.com/somethingfishyfishy)] 
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Supervisor, Developer
+* Responsibilities: Many
