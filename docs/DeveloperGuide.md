@@ -275,7 +275,7 @@ _{Explain here how the data archiving feature will be implemented}_
 **Target user profile**:
 * General Practitioners (GPs) at small clinics
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Time spent looking through paper medical documents should be spent in other life-saving activities. Our product resolves this issue by creating fast access to patient contact details as well as their relevant appointment/treatment details, allowing GPs to contact and monitor their patients easily.
 
 
 ### User stories
