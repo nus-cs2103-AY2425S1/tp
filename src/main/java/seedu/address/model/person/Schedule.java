@@ -72,6 +72,12 @@ public class Schedule {
         if (time.length() != 4) {
             return false;
         }
+
+        // disallow 2400
+        if (time.equals("2400")) {
+            return false;
+        }
+
         try {
             LocalTime.parse(time, TIME_FORMAT);
         } catch (DateTimeParseException e) {
