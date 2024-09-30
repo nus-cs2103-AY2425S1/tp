@@ -17,15 +17,15 @@ Target User: Insurance agents tracking their clients
 Value proposition: provides quick and efficient access to client details, tailored for insurance agents who need a streamlined interface to manage contacts, track policy updates, and schedule client follow-ups.
 
 
-### John Doe
+### Mant Koh En Wei
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/m-kew.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/m-kew)]
+[[portfolio](team/m-kew.md)]
 
-* Role: Project Advisor
+* Role: Developer
 
 ### Jane Doe
 
