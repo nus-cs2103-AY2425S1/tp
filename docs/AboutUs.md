@@ -15,45 +15,48 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/johndoe)]
-[[portfolio](team/limjeremy496)]
+[[portfolio](team/charlene)]
 
-* Role: Project Advisor
+- Role: Project Advisor
 
-### Jane Doe
+### Jia Yi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jiayi-gallium369.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/limjeremy496)]
 
-* Role: Team Lead
-* Responsibilities: UI
+[[github](http://github.com/jiayi-gallium369)]
+[[portfolio](team/jiayi-gallium369.md)]
 
-### Johnny Doe
+- Role: Developer
+- Responsibilities: UI
 
-<img src="images/johndoe.png" width="200px">
 
-[[github](https://github.com/limjeremy496)] [[portfolio](team/limjeremy496.md)]
+### Siow Rui Ming
 
-* Role: Developer
-* Responsibilities: Data
+<img src="images/ruiming97.png.jpg" width="200px">
+
+[[github](http://github.com/ruiming97)] 
+[[portfolio](team/ruiming97.md)]
+
+- Role: Developer
+- Responsibilities: Data
 
 ### Jeremy
 
 <img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/limjeremy496)]
+[[github](http://github.com/limjeremy496)]
+[[portfolio](team/limjeremy496.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+- Role: Developer
+- Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Charlene Teoh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/charlene.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/limjeremy496)]
+[[github](http://github.com/charlenetcy)]
+[[portfolio](team/charlene.md)]
 
-* Role: Developer
-* Responsibilities: UI
+- Role: Developer
+- Responsibilities: UI, Deliverables and deadlines
