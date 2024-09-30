@@ -40,10 +40,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### SOO JUN BOON
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/green-tea-123.png" width="200px">
 
 [[github](https://github.com/Green-Tea-123)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/green-tea-123.md)]
 
 * Role: Developer
 * Responsibilities: 
