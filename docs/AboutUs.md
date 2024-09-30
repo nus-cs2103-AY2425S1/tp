@@ -46,7 +46,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/kimxw.md)]
 
 * Role: Developer
-* Responsibilities: Developer
+* Responsibilities: Team Lead
 
 ### James Doe
 
