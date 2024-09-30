@@ -11,13 +11,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Bryan Chan Kah Hoe
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/bryanckh.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/bryanckh)]
+[[portfolio](team/bryanckh.md)]
 
 * Role: Project Advisor
 
@@ -31,31 +31,32 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Zachary Kang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/zackjh.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/zackjh)] 
+[[portfolio](team/zackjh.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Data and Others
 
-### Jean Doe
+### Nathan Lye
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/robotwizzard.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/robotwizzard)]
+[[portfolio](team/robotwizzard.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Winston Lim Jun Yang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/winstonlimjy.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/winstonlimjy)]
+[[portfolio](team/winstonlimjy.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Ui
