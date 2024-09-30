@@ -2,7 +2,7 @@
   "baseUrl": "",
   "titlePrefix": "TAHub Contacts",
   "titleSuffix": "AddressBook Level-3",
-  "faviconPath": "images/SeEduLogo.png",
+  "faviconPath": "images/tahc-icon_197px.png",
   "style": {
     "codeTheme": "light",
     "bootstrapTheme": "bootswatch-flatly"
