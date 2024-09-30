@@ -21,3 +21,23 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: CI/CD
+=======
+* Role: Project Advisor
+
+### Sean Foong
+
+<img src="images/seanfoongjt.png" width="200px">
+
+[[github](http://github.com/SeanFoongjt)] [[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities: Documentation, Data
+
+### Chooi Shao Xian
+
+<img src="images/chashaobao123.png" width="200px">
+
+[[github](http://github.com/chashaobao123)]
+
+* Role: Developer
+* Responsibilities: UI
