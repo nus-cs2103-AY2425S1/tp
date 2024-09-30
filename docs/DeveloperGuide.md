@@ -350,11 +350,10 @@ _{More to be added}_
 3. A user with above-average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. The application should respond to user commands within 2 seconds under normal operating conditions.
 5. The user interface should be intuitive enough for a first-time user to understand basic functionalities without external help.
-6. Member data should be stored securely to prevent unauthorized access, even though it is a single-user application.
-7. While primarily designed for one user, the application should be able to handle up to 1000 members efficiently, with room for future enhancements.
-8. The application should have a success rate of at least 95% for command executions, ensuring that most user actions are completed successfully without errors.
-9. Code should be organized and documented to facilitate future updates or modifications.
-10. The application should run seamlessly across different operating systems without requiring extensive configuration.
+6. While primarily designed for one user, the application should be able to handle up to 1000 members efficiently, with room for future enhancements.
+7. The application should have a success rate of at least 95% for command executions, ensuring that most user actions are completed successfully without errors.
+8. Code should be organized and documented to facilitate future updates or modifications.
+9. The application should run seamlessly across different operating systems without requiring extensive configuration.
 
 ### Glossary
 
