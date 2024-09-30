@@ -37,14 +37,14 @@ Value proposition: provides quick and efficient access to client details, tailor
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Ong Juan Wen
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/the0nlyjuan.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/the0nlyjuan)] [[portfolio](team/the0nlyjuan.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Code Quality
 
 ### Jean Doe
 
