@@ -3,7 +3,7 @@
   title: ""
 ---
 
-# AddressBook Level-3
+# HallPointer
 
 [![CI Status](https://ay2425s1-cs2103t-w14-3.github.io/workflows/Java%20CI/badge.svg)](https://ay2425s1-cs2103t-w14-3.github.io/actions)
 [![codecov](https://codecov.io/gh/se-edu/addressbook-level3/branch/master/graph/badge.svg)](https://codecov.io/gh/se-edu/addressbook-level3)
