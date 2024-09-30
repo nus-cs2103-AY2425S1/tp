@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents a Person's contacted date in the address book.
@@ -30,7 +31,15 @@ public class ContactDate {
      * Returns true if a given string is a valid date.
      */
     public static boolean isValidContactDate(String test) {
-        return test.matches(VALIDATION_REGEX);
+        try {
+            if (!test.matches(VALIDATION_REGEX)) {
+                return false;
+            }
+            LocalDate.parse(test);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
     }
 
     /**
