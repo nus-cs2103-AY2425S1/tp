@@ -302,30 +302,255 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+### **Use Case: Get Warnings Before Making Major Changes**
 
-**MSS**
+#### **Main Success Scenario (MSS):**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. Tutor initiates a major change (e.g., deleting a student record or modifying multiple student details at once).
+2. System detects the action as a major change.
+3. System prompts the tutor with a warning message describing the potential consequences (e.g., "Warning: You are about to delete [Student's name]. This action cannot be undone. Do you wish to proceed?").
+4. Tutor reviews the warning and confirms whether to proceed or cancel.
+5. If confirmed, the system proceeds with the requested changes and displays a success message.
 
-    Use case ends.
+   **Use case ends.**
 
-**Extensions**
+#### **Extensions:**
 
-* 2a. The list is empty.
+- **4a. Tutor cancels the operation.**
+    - System aborts the change and returns to the previous state.
+    - System displays a message: "Operation cancelled."
+    - **Use case ends.**
 
-  Use case ends.
+---
 
-* 3a. The given index is invalid.
+### **Use Case: Explore App with Sample Student Data**
 
-    * 3a1. AddressBook shows an error message.
+#### **Main Success Scenario (MSS):**
 
-      Use case resumes at step 2.
+1. Tutor selects an option to load the app with sample student data.
+2. System loads pre-populated sample student data into the app.
+3. Tutor interacts with the sample data, testing features such as adding, editing, and deleting students, without affecting any real data.
+4. System processes tutor actions using the sample data.
+5. Tutor completes the exploration of the app and returns to normal mode.
+6. System displays a message confirming that all changes made in the sample mode are not saved.
 
-*{More to be added}*
+   **Use case ends.**
+7. 
+---
+
+### **Use Case: Access Help for Available Commands**
+
+#### **Main Success Scenario (MSS):**
+
+1. Tutor requests help (e.g., by typing a help command or selecting a help option from the menu).
+2. System displays a list of available commands and their descriptions.
+3. Tutor reviews the commands and selects one for further clarification.
+4. System provides detailed usage instructions and examples for the selected command.
+5. Tutor follows the instructions to learn how to use the specific functionality.
+
+   **Use case ends.**
+
+#### **Extensions:**
+
+- **3a. Tutor requests help for an unsupported command.**
+    - System shows an error message: "Command not recognized. Please review the available commands."
+    - **Use case resumes at step 3.**
+
+---
+
+### **Use Case: Bulk Import Student Data**
+
+#### **Main Success Scenario (MSS):**
+
+1. Tutor selects the bulk import option in the system.
+2. System prompts the tutor to upload a file containing student data in the required format (e.g., CSV).
+3. Tutor uploads the file.
+4. System validates the file format and student data based on predefined rules (e.g., required fields such as name, email, and valid formats).
+5. If validation passes, system imports the students into the app.
+6. System displays a success message: "Successfully imported [number] students."
+7. Tutor reviews the imported student data.
+
+   **Use case ends.**
+
+#### **Extensions:**
+
+- **4a. File format is invalid.**
+    - System displays an error message: "Invalid file format. Please use the correct format (e.g., CSV)."
+    - **Use case resumes at step 2.**
+
+- **4b. Some student data is invalid.**
+    - System displays an error message: "Error importing [X] students due to invalid data (e.g., missing fields, invalid email format). Please correct the data and try again."
+    - System provides the option to retry the import after corrections.
+    - **Use case resumes at step 2.**
+
+---
+
+### **Use Case: Export Contact List to a CSV**
+
+#### **Main Success Scenario (MSS):**
+
+1. Tutor selects the option to export the contact list.
+2. System prompts the tutor to specify the file name and location for the CSV file.
+3. Tutor confirms the file name and location.
+4. System generates the CSV file with the contact list, including details such as name, phone number, email, and address.
+5. System displays a success message: "Contact list successfully exported to [file location]."
+
+   **Use case ends.**
+
+#### **Extensions:**
+
+- **2a. Export fails due to file system error (e.g., permission denied).**
+    - System displays an error message: "Export failed. Please check your file permissions and try again."
+    - **Use case resumes at step 2.**
+
+---
+
+### **Use Case: Merge Duplicate Student Entries**
+
+#### **Main Success Scenario (MSS):**
+
+1. Tutor selects the option to merge duplicate student entries.
+2. System scans the contact list for potential duplicates (based on name, email, or phone number).
+3. System presents the tutor with a list of duplicate entries and prompts for confirmation of the merge.
+4. Tutor confirms which entries to merge.
+5. System merges the selected entries and updates the contact list accordingly.
+6. System displays a success message: "Duplicates successfully merged."
+
+   **Use case ends.**
+
+#### **Extensions:**
+
+- **3a. No duplicates found.**
+    - System displays a message: "No duplicates found in the contact list."
+    - **Use case ends.**
+
+- **4a. Tutor cancels the merge.**
+    - System aborts the merge operation and returns to the previous screen.
+    - **Use case ends.**
+
+---
+
+### **Use Case: Filter Students by Attendance Status**
+
+#### **Main Success Scenario (MSS):**
+
+1. Tutor selects the option to filter students by attendance status.
+2. System prompts the tutor to choose a specific attendance status (e.g., present, absent, late).
+3. Tutor selects the desired attendance status.
+4. System filters and displays the list of students matching the selected attendance status.
+5. Tutor reviews the filtered list to track or follow up with the absent students.
+
+   **Use case ends.**
+
+#### **Extensions:**
+
+- **4a. No students match the selected attendance status.**
+    - System displays a message: "No students match the selected attendance status."
+    - **Use case ends.**
+
+---
+
+### **Use Case: Sort Students Alphabetically**
+
+#### **Main Success Scenario (MSS):**
+
+1. Tutor selects the option to sort students alphabetically.
+2. System prompts the tutor to choose a sorting criterion (e.g., by first name, by last name).
+3. Tutor selects the desired criterion.
+4. System sorts the students based on the selected criterion.
+5. Tutor reviews the sorted contact list for quick reference or location.
+
+   **Use case ends.**
+
+#### **Extensions:**
+
+- **4a. Contact list is empty.**
+    - System displays a message: "No students available to sort."
+    - **Use case ends.**
+
+---
+
+### **Use Case: Add Comments to Student Profiles**
+
+#### **Main Success Scenario (MSS):**
+
+1. Tutor selects a student profile.
+2. Tutor chooses the option to add a comment to the student's profile.
+3. System prompts the tutor to enter the comment.
+4. Tutor enters the desired observation or important information about the student as a comment.
+5. System saves the comment and associates it with the student's profile.
+6. System displays a success message: "Comment added to [Student's name] profile."
+
+   **Use case ends.**
+
+#### **Extensions:**
+
+- **4a. Comment is empty or invalid.**
+    - System displays an error message: "Invalid comment. Please enter a valid comment."
+    - **Use case resumes at step 3.**
+
+---
+
+### **Use Case: Assign Preferred Communication Methods to Parents**
+
+#### **Main Success Scenario (MSS):**
+
+1. Tutor selects a student profile.
+2. Tutor chooses the option to assign a preferred communication method for the student's parents.
+3. System displays available communication methods (e.g., phone, email, messaging apps).
+4. Tutor selects one or more preferred methods.
+5. System saves the selected preferences for the student's parents.
+6. System displays a success message: "Preferred communication method(s) saved for [Student's name] parents."
+
+   **Use case ends.**
+
+#### **Extensions:**
+
+- **4a. No communication method selected.**
+    - System displays an error message: "Please select at least one communication method."
+    - **Use case resumes at step 3.**
+
+---
+
+### **Use Case: Flag Students with Missing Contact Details**
+
+#### **Main Success Scenario (MSS):**
+
+1. Tutor selects the option to check for missing contact details.
+2. System scans the contact list for students with incomplete or missing contact information (e.g., missing phone number or email).
+3. System displays a list of students with incomplete contact details.
+4. Tutor chooses to review the flagged students and updates the missing information as needed.
+
+   **Use case ends.**
+
+#### **Extensions:**
+
+- **3a. No students with missing contact details.**
+    - System displays a message: "All student contact details are complete."
+    - **Use case ends.**
+
+---
+
+### **Use Case: Set Communication Preferences for Individual Students**
+
+#### **Main Success Scenario (MSS):**
+
+1. Tutor selects a student profile.
+2. Tutor chooses the option to set a preferred communication method for the student.
+3. System displays available communication methods (e.g., Telegram, phone, email).
+4. Tutor selects the student's preferred method.
+5. System saves the selected preference.
+6. System displays a success message: "Preferred communication method saved for [Student's name]."
+
+   **Use case ends.**
+
+#### **Extensions:**
+
+- **4a. No communication method selected.**
+    - System displays an error message: "Please select a communication method."
+    - **Use case resumes at step 3.**
+
+---
 
 ### Non-Functional Requirements
 
