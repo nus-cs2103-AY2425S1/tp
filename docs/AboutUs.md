@@ -28,11 +28,11 @@ You can reach us at the email `cs2103t_f11_2[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Tan Weilian
+### Wei Lian
 
 <img src="images/weiliann.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/weiliann)] [[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Data
