@@ -17,7 +17,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/erwin)]
 
 * Role: Project Advisor
 
@@ -26,26 +26,29 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/johndoe.png" width="200px">
 
 [[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/erwin)]
 
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Erwin Soh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/meerkatboy.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/meerkatboy)] [[portfolio](team/erwin.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Backend tester, code quality, UI developer
+* Responsibilities:
+  * Ensure that testing of the project code is done regularly and sufficiently
+  * Look after code quality to ensure that good coding standards and guidelines are adhered to
+  * Work on developing the user interface for our user guide, ensuring a smooth and pleasant user experience
 
 ### Jean Doe
 
 <img src="images/johndoe.png" width="200px">
 
 [[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/erwin)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
@@ -55,7 +58,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/johndoe.png" width="200px">
 
 [[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/erwin)]
 
 * Role: Developer
 * Responsibilities: UI
