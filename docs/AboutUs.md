@@ -18,3 +18,44 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: [Backend, Testing]
+=======
+### Chiang Kai Jing Colin Adam
+
+<img src="images/colinac.png" width="200px">
+
+[[github](https://github.com/colinac)]
+[[portfolio](team/colinac.md)]
+
+* Role: Developer
+
+### Sun Weiyang
+
+<img src="images/artillerysun.png" width="200px">
+
+[[github](https://github.com/ArtillerySun)]
+[[portfolio](team/artillerysun.md)]
+
+* Role: Developer
+* Responsibilities: Data
+
+
+### Tea Li Hao
+
+<img src="images/jellypenguinnn.png" width="200px">
+
+[[github](http://github.com/jellypenguinnn)]
+[[portfolio](team/jellypenguinnn.md)]
+
+* Role: Developer
+* Responsibilities: UI
+
+### Jaynon
+
+<img src="images/jaynon.png" width="200px">
+
+[[github](http://github.com/Jaynon)]
+[[portfolio](team/jaynon.md)]
+
+* Role: Developer
+* Responsibilities: Data
+
