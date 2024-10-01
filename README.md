@@ -3,7 +3,7 @@
 
 ![Ui](docs/images/Ui.png)
 
-* This is **a sample project for Software Engineering (SE) students**.<br>
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).<br>
   Example usages:
   * as a starting point of a course project (as opposed to writing everything from scratch)
   * as a case study
