@@ -50,11 +50,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Rayner Lim Fang Yuh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/rayray39.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/rayray39)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
