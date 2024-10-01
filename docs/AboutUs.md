@@ -24,9 +24,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/justin-aw46.png" width="200px">
 
 [[github](http://github.com/Justin-Aw46)]
+[[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Deadlines
+* Responsibilities: Testing
 
 ### Johnny Dee
 
