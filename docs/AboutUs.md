@@ -19,13 +19,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/HanB1n.md)]
 
 * Role: Developer
+* Responsibilities: Developer
 
-### Jane Doe
+### Danza Seah
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/danzaseah.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/janedoe)]
+[[github](http://github.com/DanzaSeah)]
+[[portfolio](team/danzaseah.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
