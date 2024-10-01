@@ -9,51 +9,41 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### He Minhao
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/minhao23.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[github](https://github.com/minhao23)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Project Advisor
 
-### Jane Doe
+### Wang Xiyu (Wxy2003-xy)
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/wxy2003-xy.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/wxy2003-xy)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Sugimoto Shoujin
 
-<img src="images/johndoe.png" width="200px">
+<img src="./images/jinnsuke.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/jinnsuke)] [[portfolio](https://www.linkedin.com/in/shoujinsugimoto/)]
 
-* Role: Developer
+* Role: Developer 
 * Responsibilities: Data
 
-### Jean Doe
+### Raviraj Talgeri
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/starbucksventi.png" width="200px">
 
 [[github](http://github.com/johndoe)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
+* Role: Developer 
 * Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
