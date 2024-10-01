@@ -7,7 +7,7 @@ import java.util.Objects;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Represents the result of a command execution. test
+ * Represents the result of a command execution.
  */
 public class CommandResult {
 
