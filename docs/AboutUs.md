@@ -37,7 +37,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
 
-* Role: Developer
+* Role: Activity Monitor
 * Responsibilities: Data
 
 ### Jean Doe
@@ -47,15 +47,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/johndoe)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
+* Role: Documentation Lead
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Ang Qi Jun
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/realqijun.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/realqijun)]
+[[portfolio](team/qijun.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: UI Lead
+* Responsibilities: UI, Documentation
