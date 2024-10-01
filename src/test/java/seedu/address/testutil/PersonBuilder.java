@@ -6,9 +6,11 @@ import java.util.Set;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Company;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Guest;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Rsvp;
 import seedu.address.model.person.Vendor;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -23,6 +25,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_COMPANY = "The Wedding People";
+    public static final String DEFAULT_RSVP = "Pending";
 
     private Name name;
     private Phone phone;
@@ -30,7 +33,8 @@ public class PersonBuilder {
     private Address address;
     private Set<Tag> tags;
     private Company company;
-    private final boolean isVendor;
+    private Rsvp rsvp;
+    private boolean isVendor;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -42,6 +46,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         company = new Company(DEFAULT_COMPANY);
+        rsvp = new Rsvp(DEFAULT_RSVP);
         isVendor = true;
     }
 
@@ -60,7 +65,7 @@ public class PersonBuilder {
             company = ((Vendor) personToCopy).getCompany();
         } else {
             isVendor = false;
-            // TODO: Add Guest type here
+            rsvp = ((Guest) personToCopy).getRsvp();
         }
     }
 
@@ -112,9 +117,15 @@ public class PersonBuilder {
         return this;
     }
 
+    public PersonBuilder withRsvp(String rsvp) {
+        this.rsvp = new Rsvp(rsvp);
+        this.isVendor = false;
+        return this;
+    }
+
     public Person build() {
         if (!isVendor) {
-            // TODO: Add case for guest here
+            return new Guest(name, phone, email, address, tags, rsvp);
         }
         return new Vendor(name, phone, email, address, tags, company);
     }

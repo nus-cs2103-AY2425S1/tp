@@ -38,7 +38,6 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_RSVP_ACCEPTED = "Accepted";
     public static final String VALID_RSVP_PENDING = "PENDING";
-
     public static final String VALID_COMPANY_AMY = "Wedding here";
     public static final String VALID_COMPANY_BOB = "Wedding anywhere";
 
