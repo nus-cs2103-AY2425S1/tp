@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# MediContact Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -274,33 +274,61 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Administrative staff at a GP clinic responsible for patient management.
+* should be apt with technology and trained to be familiar with the software as their primary job
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
+Patient / Contact management systems might be outdated in GP clinics, introducing MediContact might improve user-friendliness. 
+MediContact also centralizes the details of patients at the clinic with a command line interface to enable efficient contact between patient and clinic. 
+Furthermore, it can provide easy categorisation and filtering of patients.
+
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​        | I want to …​                                                                     | So that I can…​                                                                                 |
+|----------|----------------|----------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|
+| `* * *`  | new user       | add a new contact with multiple phone numbers (e.g. home, mobile, email address) | manage patient contact information and have multiple options for reaching them in an emergency. |
+| `* * *`  | user           | delete a contact                                                                 | remove outdated or incorrect contact information                                                |
+| `* * *`  | user           | list all contacts in one dashboard                                               | easily view all the contacts that I have added.                                                 |
+| `* * *`  | user           | find the patient contact by a keyword                                            | I can search the patients’ contact instantly.                                                   |
+| `* *`    | user           | edit an existing patient contact                                                 | I can update their details when necessary.                                                      |
+| `*`      | user           | filter patients based on appointment dates                                       | I can contact and remind them.                                                                  |
+| `*`      | potential user | see the app populated with some sample commands                                  | locate a person easily                                                                          |
+| `*`      | user           | use the app to work offline                                                      | I can use it even when there is no internet connection.                                         |
+| `*`      | user           | save addresses                                                                   | I have their location readily available.                                                        |
+
 
 *{More to be added}*
 
 ### Use cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+
+**Use case: Add a contact**
+
+**MSS**
+
+1.  User requests to add contact
+2.  User inputs the contact details
+3.  User requests to add the contact
+4.  Medicontact adds the contact
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Necessary field is missing
+
+    * 2a1. Medicontact shows an error message indicating which field is missing
+    * 2a2. Use case ends.
+
+* 2b. Wrong format in input
+
+    * 2b1.Medicontact shows an error message specifying the incorrect format.
+    * 2b2. Use case ends.
 
 **Use case: Delete a person**
 
@@ -329,16 +357,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
+1.  Technical: Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2.  Performance:
+   - Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
+   - The response to any use action should become visible within 3 seconds.
+3.  Quality: The system should be easy to use for a novice who has never use CLI before
+4.  Note to project: Security measures like encryption will not be implemented in this project 
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Encryption**: The process of converting data into a code to prevent unauthorized access, typically using algorithms and keys.
 
 --------------------------------------------------------------------------------------------------------------------
 
