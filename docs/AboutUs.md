@@ -29,7 +29,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/varun.md)]
 
 * Role: Product Manager
-* Responsibilities: Scheduling and tracking, deliverables and deadlines
+* Responsibilities: Scheduling and tracking, Deliverables and deadlines
 
 ### Erwin Soh
 
@@ -38,18 +38,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/meerkatboy)]
 [[portfolio](team/erwin.md)]
 
-* Role: Testing Lead, code quality, UI developer
-* Responsibilities:
-  * Ensure that testing of the project code is done regularly and sufficiently
-  * Look after code quality to ensure that good coding standards and guidelines are adhered to
-  * Work on developing the user interface for our user guide, ensuring a smooth and pleasant user experience
+* Role: Testing Lead
+* Responsibilities: Testing, Code Quality, UI
 
 ### Simon Tong
 
 <img src="images/uniqly.png" width="200px">
 
 [[github](http://github.com/uniqly)]
-[[portfolio](team/uniqly.md)]
+[[portfolio](team/simon.md)]
 
 * Role: Documentation Lead
 * Responsibilities: Documentation, Testing, Code Quality
