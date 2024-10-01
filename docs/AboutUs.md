@@ -9,6 +9,36 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Johnny Doe
+
+<img src="images/jiaaaaen.png" width="200px">
+
+[[github](http://github.com/jiaaaaen)] 
+[[portfolio](team/jiaaaaen.md)]
+
+* Role: Developer
+* Responsibilities: Data
+
+### Tan Yi Long
+
+<img src="images/yiiilonggg.png" width="200px">
+
+[[github](http://github.com/yiiilonggg)]
+[[portfolio](team/yiiilonggg.md)]
+
+* Role: Developer
+* Responsibilities: Dev Ops + Threading
+
+### Zon
+
+<img src="images/zlch.png" width="200px">
+
+[[github](http://github.com/zlch)]
+[[portfolio](team/Zon.md)]
+
+* Role: Developer
+* Responsibilities: UI
+
 ### Liu Yujia
 
 <img src="images/liuyj2002.png" width="200px">
@@ -17,5 +47,3 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](https://www.linkedin.com/in/liu-yujia-26b167203/)]
 
 * Role: 
-
-
