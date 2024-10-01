@@ -52,7 +52,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Kieran Koh
 
-<img src="images/FriedCabbageSalad.png" width="200px">
+<img src="images/friedcabbagesalad.png" width="200px">
 
 [[github](http://github.com/FriedCabbageSalad)]
 [[portfolio](team/johndoe.md)]  
