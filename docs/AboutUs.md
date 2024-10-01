@@ -11,6 +11,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Sng Ying Xuan Shernice
+
+<img src="images/shernicesng.png" width="200px">
+
+[[github](http://github.com/shernicesng)] 
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities: Code Quality
 
 ### Joey Goh
 
@@ -25,10 +34,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 ### Guan Yi Sim
 
 <img src="images/droas590.png" width="200px">
-
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Testing
