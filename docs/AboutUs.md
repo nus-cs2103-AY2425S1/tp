@@ -21,15 +21,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Krishnan Linkes Varun
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/linkesv.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/linkesV)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Code quality
+* Responsibilities: Looks after code quality, ensures adherence to coding standards, etc.
 
 ### Johnny Doe
 
