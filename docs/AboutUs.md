@@ -11,15 +11,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## VendorVault
 
-### John Doe
+### Vince
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/vinc3leong.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[github](https://github.com/vinc3leong)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+* Role: Documentation
+* Responsibilities: Responsible for the quality of various project documents.
+
 
 ### Krishnan Linkes Varun
 
