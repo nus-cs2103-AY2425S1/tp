@@ -18,8 +18,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/andrew22teoh)]
 [[portfolio](team/andrew22teoh.md)]
 
-* Role: Project Team Member
-* Responsibility: Reviewing and approving pull requests
+* Role: Team Lead
 
 ### Jane Doe
 
