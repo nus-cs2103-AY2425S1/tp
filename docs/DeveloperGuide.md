@@ -267,6 +267,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
+* is a student with a need track the transactions made on a daily basis due to frequent splitting of bills with saved contacts
 
 **Value proposition**: manage contacts faster than a typical mouse/GUI driven app
 
@@ -275,14 +276,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
+|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
+| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
+| `* * *`  | user                                       | add a new person             |                                                                        |
+| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
+| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
+| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
+| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
 
 *{More to be added}*
 
@@ -327,6 +328,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Transactions**: A Transaction represents a record of a financial interaction between the user and another party (another contact). It can either be an income (positive value) or an expense (negative value).
+* **Balance**: Refers to the net difference between the user’s total income and total expenses over a period. It can be positive, indicating a surplus, or negative, indicating a deficit.
 
 --------------------------------------------------------------------------------------------------------------------
 
