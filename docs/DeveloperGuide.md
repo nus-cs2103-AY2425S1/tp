@@ -13,7 +13,7 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+_This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org)_.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -329,9 +329,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse. 
+2. Data Requirements:
+   - Size: System must be able to handle at least 1,000 student records, with each containing personal information and lesson schedules.
+   - Volatility: Contact information is not expected to be changed frequently, but lessons schedules may change frequently. System must allow quick updates without issues.
+   - Data persistency: all students and lesson data should be stored and retrievable until entry has been deleted.
+3. Environment Requirements:
+   - Technical Compatability: System must be compatible with _Mainstream OS_ as long as it has Java `17` or above installed.
+   - Server Requirements: stored locally.
+4. Capacity:
+   - User Capacity: System is designed for local use and therefore for 1 local user.
+   - Data Capacity: as mentioned above within Data Requirements.
+5. Documentation:
+   - User Guide: A complete user guide will be provided for tutor, detailing every command and cover common troubleshooting scenarios.
+   - Developer Guide: Comprehensive developer guide will be available, to facilitate future development and maintenance.
+6. Fault Tolerance:
+   - Error handling: System should handle up to 90% of incorrect inputs (incorrect date formats, missing fields or etc) without crashing and should provide meaningful error messages to guide users to correct the input.
+7. Maintability:
+   - System should have modular components that are easily replaceable or upgradable without affecting the application.
+8. Portability:
+   - System must be portable across devices with different operating systems, allowing tutors to install it easily.
+9. Quality:
+   - Ease of Use: System should be usable by tutors with minimal computer literacy and include intuitive CLI commands and user-friendly prompts.
+   - Testing coverage: Unit tests should cover at least 60% of codebase, ensuring high reliability during future updates.
+10. Testability:
+    - Automated Testing: System should support automated unit and integration testing for continuous integration, allowing future updates to be tested without manual intervention.
 
 *{More to be added}*
 
