@@ -40,22 +40,22 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Daron Oh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/daronoh.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/choonzies)]
+[[github](http://github.com/daronoh)]
+[[portfolio](team/daronoh.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Integration, In charge of Search feature
 
 ### James Doe
 
 <img src="images/johndoe.png" width="200px">
 
 [[github](http://github.com/johndoe)]
-[[portfolio](team/choonzies)]
+[[portfolio](team/daronoh)]
 
 * Role: Developer
 * Responsibilities: UI
