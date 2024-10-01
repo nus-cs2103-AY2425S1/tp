@@ -33,7 +33,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Lutfir Rahman
 
-<img src="images/lutfir_cpu.png" width="200px">
+<img src="images/lutfir-cpu.png" width="200px">
 
 [[github](http://github.com/lutfir-cpu)] [[portfolio](team/lutfir-cpu.md)]
 
