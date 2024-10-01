@@ -20,24 +20,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Team Lead
 
-### Jane Doe
+### Abdulrahman Al Rammah
+<img src="images/abdulrahmanalrammah.png" width="200px">
 
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/abdulrahmanalrammah)]
+[[portfolio](team/abdulrahmanalrammah.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Documentation
 
 ### Rayner Lim Fang Yuh
 
