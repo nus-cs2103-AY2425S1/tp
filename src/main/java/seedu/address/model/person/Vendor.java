@@ -27,7 +27,7 @@ public class Vendor extends Person {
      * @param address Residential or business address of the vendor.
      * @param tags Tags associated with the vendor.
      */
-    public Vendor(Name name, Company company, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Vendor(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Company company) {
         super(name, phone, email, address, tags);
         this.company = company;
     }

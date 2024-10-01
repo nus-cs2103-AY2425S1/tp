@@ -4,10 +4,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Company;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Vendor;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -20,12 +22,15 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_COMPANY = "The Wedding People";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private Company company;
+    private final boolean isVendor;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -36,6 +41,8 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        company = new Company(DEFAULT_COMPANY);
+        isVendor = true;
     }
 
     /**
@@ -47,6 +54,14 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+
+        if (personToCopy instanceof Vendor) {
+            isVendor = true;
+            company = ((Vendor) personToCopy).getCompany();
+        } else {
+            isVendor = false;
+            // TODO: Add Guest type here
+        }
     }
 
     /**
@@ -90,7 +105,10 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        if (!isVendor) {
+            // TODO: Add case for guest here
+        }
+        return new Vendor(name, phone, email, address, tags, company);
     }
 
 }
