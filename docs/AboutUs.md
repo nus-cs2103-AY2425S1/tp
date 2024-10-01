@@ -29,11 +29,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Sugimoto Shoujin
 
-<img src="images/johndoe.png" width="200px">
+<img src="./images/jinnsuke.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/jinnsuke)] [[portfolio](https://www.linkedin.com/in/shoujinsugimoto/)]
 
 * Role: Developer
 * Responsibilities: Data
