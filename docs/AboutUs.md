@@ -9,15 +9,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Alden Tan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/aldentantan.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/aldentantan)]
 
-* Role: Project Advisor
+* Role: Team Lead
+* Responsibilities: Deliverables and Deadlines, Scheduling and Tracking
 
 ### Jane Doe
 
