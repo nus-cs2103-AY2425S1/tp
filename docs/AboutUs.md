@@ -11,15 +11,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Andrew Teoh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/andrew22teoh.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/andrew22teoh)]
+[[portfolio](team/andrew22teoh.md)]
 
-* Role: Project Advisor
+* Role: Team Lead
 
 ### Jane Doe
 
@@ -40,16 +39,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
 ### Rayner Lim Fang Yuh
 
 <img src="images/rayray39.png" width="200px">
@@ -59,3 +48,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: UI
+
+### Rachael Chan
+<img src="images/rachael-chan.png" width="200px">
+
+[[github](http://github.com/rachael-chan)]
+[[portfolio](team/rachaelchan.md)]
+
+* Role: Software Engineer
+* Responsibilities: In charge of `Model`
+
