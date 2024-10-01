@@ -1,4 +1,3 @@
-
 ## **Appendix: Requirements**
 
 {% include DeveloperGuide/Requirements/00_product_scope.md %}
