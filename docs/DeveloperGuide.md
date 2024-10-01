@@ -291,32 +291,28 @@ _{More to be added}_
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Bizbook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC1 - Delete a person**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  Actor requests to <u>list persons (UC2)</u>.
+2.  Actor requests to delete a specific person in the list.
+3.  System deletes the person.
+4.  System <u>save contacts to save file (UC No.)</u>.
 
     Use case ends.
 
 **Extensions**
 
-- 2a. The list is empty.
+- 2a. The given index is invalid.
 
-  Use case ends.
-
-- 3a. The given index is invalid.
-
-  - 3a1. AddressBook shows an error message.
+  - 2a1. System shows an error message.
 
     Use case resumes at step 2.
 
-**Use case: UC2 Load contact from save file**
+**Use case: UC2 - Load contact from save file**
 
 **Actor: `BizBook`**
 
@@ -324,16 +320,16 @@ _{More to be added}_
 
 **MSS**
 
-1.  `BizBook` searches OS directory for save file.
+1.  Actor searches OS directory for save file.
 2.  OS returns save file object.
-3.  For each line is save file.
+3.  For each line of save file.
 
-    - 3.1 `BizBook` reads a line from the file.
-    - 3.2 `BizBook` parses the line into a contact object.
-    - 3.3 `BizBook` adds the contact object to the contact list.
+    - 3.1 Actor reads a line from the file.
+    - 3.2 Actor parses the line into a contact object.
+    - 3.3 Actor adds the contact object to the contact list.
     - 3.4 Repeat steps 3.1 - 3.3 until all lines are processed.
 
-4.  `BizBook` finishes loading contacts into the contact list.
+4.  Actor finishes loading contacts into the contact list.
 
     Use case ends.
 
@@ -341,16 +337,16 @@ _{More to be added}_
 
 - 1a. Save file does not exist.
 
-  - 1a1. `BizBook` shows a warning message.
-  - 1a2. `BizBook` creates a new save file.
-  - 1a3. `BizBook` loads an empty contact list.
+  - 1a1. Actor shows a warning message.
+  - 1a2. Actor creates a new save file.
+  - 1a3. Actor loads an empty contact list.
 
   Use case ends.
 
 - 3.1a. Line does not fit proper contact format.
 
-  - 3.1a1. `BizBook` ignores line.
-  - 3.1a2. `BizBook` shows a warning message.
+  - 3.1a1. Actor ignores line.
+  - 3.1a2. Actor` shows a warning message.
 
   Use case resumes at step 3.1.
 
