@@ -15,11 +15,10 @@ import java.util.regex.Pattern;
 public class Nric {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "NRIC should be a valid";
+            "Please ensure that the NRIC is a valid one issued by the Singapore government.";
 
     /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * NRIC should start with S, T, F or G followed by 7 digits and end with a character.
      */
     public static final String VALIDATION_REGEX = "(?i)^([STFG])(\\d{7})([A-Z])$";
 
@@ -52,6 +51,7 @@ public class Nric {
     /**
      * Returns true if the checksum of the NRIC is valid.
      * Checksum as used by the Singapore government to validate NRIC numbers.
+     * Any magic numbers or characters used in the method are based on the checksum algorithm.
      *
      * @param firstChar The first character of the NRIC number.
      * @param middleDigits The middle 7 digits of the NRIC number.
@@ -59,6 +59,7 @@ public class Nric {
      * @return true if the checksum is valid, false otherwise.
      */
     private static boolean isValidCheckSum(String firstChar, String middleDigits, String lastChar) {
+        // Weights for each digit in the NRIC number (in order).
         int[] weights = {2, 7, 6, 5, 4, 3, 2};
         int sum = 0;
 
@@ -81,7 +82,9 @@ public class Nric {
             String[] remainderToCheckSumArr = {"X", "W", "U", "T", "R", "Q", "P", "N", "M", "L", "K"};
             return lastChar.equalsIgnoreCase(remainderToCheckSumArr[remainder]);
         } else {
-            // The code should not get here
+            // Should never reach here as the first character of the NRIC should be S, T, F or G,
+            // and this is already checked in the isValidNric method.
+            assert false : "Invalid first character of NRIC";
             return false;
         }
     }
