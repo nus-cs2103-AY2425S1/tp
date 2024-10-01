@@ -363,31 +363,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-**1\. Domain Rules**  
-\- 1a. \`Essential\` The number of contacts in a single event should not exceed 1000, ensuring efficient management of contacts for each event.
+**1. Domain Rules**  
+- 1a. `Essential` The number of contacts in a single event should not exceed 1000, ensuring efficient management of contacts for each event.
 
-**2\. Technical Requirements**  
-\- 2a. \`Essential\` Must be compatible with Java 17 or higher, ensuring that the application runs on modern environments.  
-\- 2b. \`Typical\` The system should work on both 32-bit and 64-bit environments, making it accessible to a broader range of users.  
-\- 2c. \`Novel\` The system must support running offline and sync data when the internet is available, allowing event planners to manage contacts without internet access.
+**2. Technical Requirements**  
+- 2a. `Essential` Must be compatible with Java 17 or higher, ensuring that the application runs on modern environments.  
+- 2b. `Typical` The system should work on both 32-bit and 64-bit environments, making it accessible to a broader range of users.  
+- 2c. `Novel` The system must support running offline and sync data when the internet is available, allowing event planners to manage contacts without internet access.
 
-**3\. Performance Requirements**  
-\- 3a. \`Essential\` The system should respond to user input within 2 seconds under normal load conditions, providing a fast and efficient user experience for frequent tasks.  
-\- 3b. \`Typical\` Event-based contact searches should return results within 3 seconds for up to 1000 contacts, facilitating quick access to relevant information.  
-\- 3c. \`Typical\` Bulk messages up to 500 contacts should be queued for delivery within 5 seconds, enabling event organizers to send updates quickly.
+**3. Performance Requirements**  
+- 3a. `Essential` The system should respond to user input within 2 seconds under normal load conditions, providing a fast and efficient user experience for frequent tasks.  
+- 3b. `Typical` Event-based contact searches should return results within 3 seconds for up to 1000 contacts, facilitating quick access to relevant information.  
+- 3c. `Typical` Bulk messages up to 500 contacts should be queued for delivery within 5 seconds, enabling event organizers to send updates quickly.
 
-**4\. Quality Requirements**  
-\- 4a. \`Essential\` The system should be usable by event planners with no prior experience in using CLI applications, ensuring accessibility for all users.  
-\- 4b. \`Typical\` All command-line options should have detailed help documentation accessible from within the application, providing guidance for users.  
-\- 4c. \`Novel\` The interface must support fast-typing users, minimizing mouse interactions to enhance productivity.
+**4. Quality Requirements**  
+- 4a. `Essential` The system should be usable by event planners with no prior experience in using CLI applications, ensuring accessibility for all users.  
+- 4b. `Typical` All command-line options should have detailed help documentation accessible from within the application, providing guidance for users.  
+- 4c. `Novel` The interface must support fast-typing users, minimizing mouse interactions to enhance productivity.
 
-**5\. Project Scope**  
-\- 5a. \`Typical\` The product is not required to handle the printing of physical contact lists, focusing instead on digital management.  
-\- 5b. \`Novel\` Integration with third-party calendar apps (e.g. Google Calendar) is planned for future versions but is out of scope for this release, allowing for future enhancements.
+**5. Project Scope**  
+- 5a. `Typical` The product is not required to handle the printing of physical contact lists, focusing instead on digital management.  
+- 5b. `Novel` Integration with third-party calendar apps (e.g. Google Calendar) is planned for future versions but is out of scope for this release, allowing for future enhancements.
 
-**6\. Others**  
-\- 6a. \`Essential\` The system should avoid any discriminatory language or culturally sensitive imagery in user messages or templates, ensuring a respectful environment for all users.  
-\- 6b. \`Novel\` The contact mapping feature should not use any personal data without user consent, ensuring compliance with privacy regulations like GDPR.
+**6. Others**  
+- 6a. `Essential` The system should avoid any discriminatory language or culturally sensitive imagery in user messages or templates, ensuring a respectful environment for all users.  
+- 6b. `Novel` The contact mapping feature should not use any personal data without user consent, ensuring compliance with privacy regulations like GDPR.
 
 *{More to be added}*
 
