@@ -407,14 +407,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3.  The response to any command should be visible within two seconds.
+4.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+5.  Should be meant for a single user, not a multi-user product.
+6.  Data should be stored locally in a human editable text file.
+7.  Should have easy-to-read and detailed User and Developer Guides.
+8.  Should have PDF-friendly User and Developer Guides. 
+9.  Should work without an installer. 
+10. Should be packaged into a single JAR file. 
+11. Should not depend on the developer's own remote server. 
+12. GUI should work well for standard screen resolutions 1920x1080 and higher and for screen scales 100% and 125%.
 
-*{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Emergency contact**: The contact to use if an emergency happens during the tutoring period
+* **School level**: The level of study a student is currently at, eg. Secondary 3 (`S3`) or Junior College 1 (`JC1`)
+* **Subject**: The subject the student is receiving tuition for, eg. `Math`, `English`, `Literature`
 
 --------------------------------------------------------------------------------------------------------------------
 
