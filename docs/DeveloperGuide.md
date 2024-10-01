@@ -262,14 +262,13 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+Busy social workers providing community case management services at local social service agencies. 
+- Their role involves the need to keep track of, and follow up with multiple assigned clients, each with varying needs and requirements.
 
 **Value proposition**: manage contacts faster than a typical mouse/GUI driven app
-
+A CLI-first case management application that enables social workers to efficiently manage client details, appointments, and priorities. 
+- Repeated chores including data entry and search will be streamlined via simple CLI inputs, easing the mental load 
+of the social workers, allowing them to focus more on delivering high-quality care and support for the clients.
 
 ### User stories
 
