@@ -11,6 +11,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+
+### Joey Goh
+
+<img src="images/jowhee3011.png" width="200px">
+
+[[github](http://github.com/jowhee3011)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities: Scheduling and tracking
+
 ### Guan Yi Sim
 
 <img src="images/droas590.png" width="200px">
