@@ -381,9 +381,9 @@ otherwise)
     Steps 1a1 to 1a2 are repeated until the data entered are correct.  
     Use case resumes from Step 2.
 
-* 1b. TutorEase detects that the student does not exist.
-    * 1b1. TutorEase prompts Tutor to key in data for a student that exists.
-    * 1b2. Tutor enters new data.  
+* **1b**. TutorEase detects that the student does not exist.
+    * **1b1**. TutorEase prompts Tutor to key in data for a student that exists.
+    * **1b2**. Tutor enters new data.  
     Steps 1b1 to 1b2 are repeated until the data entered are correct.  
     Use case resumes from Step 2.
 
