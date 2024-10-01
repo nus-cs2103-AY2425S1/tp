@@ -342,6 +342,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Additional installer**: A file, program, driver that needs to be installed first, which in turn installs the product.
 * **JAR file**: A Java ARchive file.
 * **Singapore Standard Time**: Singapore time, which is 8 hours ahead of Coordinated Universal Time (UTC + 08:00)
+* **Hard disk**: data storage device in laptops and computers.
+* **.JSON file**: JavaScript Object Notation, stores and transports data using a human-readable text format.
 
 --------------------------------------------------------------------------------------------------------------------
 
