@@ -339,6 +339,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Additional installer**: A file, program, driver that needs to be installed first, which in turn installs the product.
+* **JAR file**: A Java ARchive file.
+* **Singapore Standard Time**: Singapore time, which is 8 hours ahead of Coordinated Universal Time (UTC + 08:00)
 
 --------------------------------------------------------------------------------------------------------------------
 
