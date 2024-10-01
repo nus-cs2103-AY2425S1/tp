@@ -57,5 +57,5 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/realqijun)]
 [[portfolio](team/qijun.md)]
 
-* Role: Beginner
-* Responsibilities: UI
+* Role: Developer
+* Responsibilities: UI, Documentation
