@@ -29,13 +29,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Malhotra Arnav
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/arnav12344.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/arnav12344)] [[portfolio](team/johndoe.md)]
 
-* Role: Developer
+* Role: Developer, Admin
 * Responsibilities: Data
 
 ### Jean Doe
@@ -48,11 +48,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### Malhotra Arnav
+### James Doe
 
-<img src="images/arnav12344.png" width="200px">
+<img src="images/johndoe.png" width="200px">
 
-[[github](https://github.com/arnav12344)]
+[[github](http://github.com/johndoe)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
