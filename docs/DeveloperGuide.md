@@ -287,16 +287,37 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​          | I want to …​                                                   | So that I can…​                              |
+|----------|------------------|----------------------------------------------------------------|----------------------------------------------|
+| `* * *`  | user             | cancel a particular lesson session                             | respond to special circumstances effectively |
+| `* * *`  | user             | schedule a make-up lesson for students who missed              | manage lesson rescheduling efficiently       |
+| `* * *`  | user             | save a student’s lesson timing                                 | know when I will meet them                   |
+| `* * *`  | user             | save the data and retrieve them after restarting the app       | ensure my data is persistent                 |
+| `* * *`  | user             | view a list of all my students                                 | keep track of all my students                |
+| `* * *`  | user             | delete a student when they stop taking lessons                 | keep my records clean                        |
+| `* * *`  | new user         | view the list of commands                                      | know what commands I can run                 |
+| `* * *`  | user             | add a piano piece to a student                                 | track what piece they are working on         |
+| `* * *`  | user             | save a student’s address                                       | know where to travel for tutoring            |
+| `* * *`  | user             | see the grade level of a student                               | be more prepared for lessons                 |
+| `* * *`  | user             | save a person's contact                                        | contact them easily for tutoring             |
+| `* *`    | user             | modify the details of each record                              | change particulars when needed               |
+| `* *`    | user             | sort the record by student name, lesson day, contact, etc.     | find specific records easily                 |
+| `* *`    | user             | see students scheduled for a particular day                    | know my schedule for the day                 |
+| `* *`    | user             | search students based on name, day of lesson, or category      | locate a student efficiently                 |
+| `* *`    | user             | export my student data to a CSV file                           | back up my records or share them with others |
+| `*`      | user             | track the purchase and sale of learning materials              | manage inventory and ensure reimbursement    |
+| `*`      | user             | generate reports on each student’s progress                    | share them with parents or guardians         |
+| `*`      | user             | view a timetable for the week                                  | prepare my schedule                          |
+| `*`      | new user         | receive prompts/suggestions when I type a command wrongly      | get help using the system                    |
+| `*`      | experienced user | use shortcuts/aliases for commands                             | perform common tasks faster                  |
+| `*`      | user             | group my students together if they are in the same class       | view their information easier                |
+| `*`      | user             | track whether each student has paid for the month              | collect my fees on time                      |
+| `*`      | user             | keep track of how much each student should pay for lessons     | manage fees easier                           |
+| `*`      | user             | write down miscellaneous notes for each student                | recall them before each lesson               |
+| `*`      | user             | add tags to my students                                        | identify them easily                         |
+| `*`      | user             | view a summary of my income for the month                      | track my earnings                            |
+| `*`      | user             | track attendance for each student                              | see how consistent they are with lessons     |
+| `*`      | user             | track the progress of each student on their assigned pieces    | monitor their improvement                    |
 
 ### Use cases
 
