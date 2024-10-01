@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Alez Ng's Project Portfolio Page
+title: al-ez's Project Portfolio Page
 ---
 
 ### Project: AddressBook Level 3
