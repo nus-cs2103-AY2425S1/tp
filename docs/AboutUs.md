@@ -9,7 +9,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Dominic
 
 <img src="images/johndoe.png" width="200px">
 
@@ -17,7 +17,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/johndoe)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+*
+- Rank: ***** General(5 star General)
+- Role: Lead developer & Chief of UserGuide
+- Responsibilities: lead the team, oversee the User guide
+
 
 ### Jane Doe
 
