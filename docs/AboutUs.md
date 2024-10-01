@@ -11,31 +11,31 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Lynette Lee Si Ying
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/lynetteleesiying.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+
+[[github](https://github.com/LynetteLeeSiYing)]
+
+
+* Role: Testing
+
+### Kelly Bong Jia Qi
+
+<img src="images/bonzzz3.png" width="200px">
+
+[[github](http://github.com/bonzzz3)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
+* Role: Code Quality
 * Responsibilities: UI
 
 ### Johnny Doe
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ottotan.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/OttoTan)] [[portfolio](team/ottotan.md)]
 
 * Role: Developer
 * Responsibilities: Data
@@ -50,11 +50,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Nasya Myrilla Wijaya
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/myrilla12.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/myrilla12)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer

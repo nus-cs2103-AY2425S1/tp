@@ -1,9 +1,9 @@
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
+[![CI Status](https://github.com/AY2425S1-CS2103T-T10-1/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-T10-1/tp/actions)
 [![codecov](https://codecov.io/gh/AY2425S1-CS2103T-T10-1/tp/graph/badge.svg?token=2GDD9TYLJB)](https://codecov.io/gh/AY2425S1-CS2103T-T10-1/tp)
 
 ![Ui](docs/images/Ui.png)
 
-* This is **a sample project for Software Engineering (SE) students**.<br>
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).<br>
   Example usages:
   * as a starting point of a course project (as opposed to writing everything from scratch)
   * as a case study
