@@ -287,14 +287,29 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​                                              | I want to …​                                        | So that I can…​                                                       |
+|----------|------------------------------------------------------|-----------------------------------------------------|-----------------------------------------------------------------------|
+| `* * *`  | new user                                             | see usage instructions                              | refer to instructions when I forget how to use the App                |
+| `* * *`  | user that types fast                                 | utilize an easy to use CLI interface                | be more efficient while using the app                                 |
+| `*`      | user who prefers less screen clutter                 | toggle list view to be less detailed / more general |                                                                       |
+| `* * *`  | CS major planning to apply for internships           | find a specific company by name                     | retrieve info without having to go through the entire list            |
+| `* *`    | CS major planning to apply for internships           | add additional info about the company               |                                                                       |
+| `* *`    | CS major planning to apply for internships           | update the information for a specific company       | ensure my information is up-to-date                                   |
+| `* * *`  | CS major planning to apply for internships           | remove companies I am no longer interested in       | reduce clutter in my list of potential companies                      |
+| `*`      | CS major planning to apply for internships           | add referral contacts to companies                  | remember to include them when applying                                |
+| `*`      | CS major planning to apply for internships           | sort companies by hiring status                     | better prioritize certain companies                                   |
+| `*`      | CS major planning to apply for internships           | sort companies by location distance                 | better prioritize certain companies                                   |
+| `*`      | CS major planning to apply for internships           | sort companies by remote work availability          | better prioritize certain companies                                   |
+| `*`      | CS major planning to apply for internships           | sort companies by working hour flexibility          | better prioritize certain companies                                   |
+| `*`      | CS major planning to apply for internships           | sort companies by internship role                   | better prioritize certain companies                                   |
+| `* * *`  | CS major currently applying for internships          | add internship applications to a specific company   |                                                                       |
+| `* * *`  | CS major currently applying for internships          | mark the status of different applications           | keep track of the current progress of the application                 |
+| `* *`    | CS major currently applying for internships          | view upcoming interviews to applied companies       |                                                                       |
+| `*`      | CS major currently applying for internships          | add notes for upcoming / completed interviews       | find a specific piece of info for that interview in the future        |
+| `* *`    | CS major currently applying for internships          | filter applications by status                       | focus on applications that need immediate attention                   |
+| `*`      | CS major currently applying for internships          | organize interview timings                          | ensure that they do not overlap                                       |
+| `* * *`  | CS major who have previously applied for internships | delete internship application records               | remove irrelevant applications that clutter the screen                |
+| `* *`    | user                                                 | export my data out of InternBuddy                   | have a data backup and/or share company information with fellow peers |
 
 *{More to be added}*
 
