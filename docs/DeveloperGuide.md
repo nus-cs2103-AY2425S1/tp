@@ -325,6 +325,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+
+**Use case:** Save Contact
+
+**Preconditions:**
+1. The system should be operational.
+
+**Guarantees:**
+
+1. The file will be saved to the directory if the directory exists.
+2. If there is a duplicate file(file of the same name), it will be overwritten.
+3. If the directory is not valid, there will be no effect with the command.
+
+**MSS**
+1. The user wants to save the current state using the “save” command.
+2. System create a file for the current state and saves it in the local machine at the instructed directory.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The directory does not exist.
+* 2a1. System prompt the user that the target directory does not exist.
+
+
 *{More to be added}*
 
 ### Non-Functional Requirements
@@ -332,6 +356,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. The user should be able to understand the information returned by the command within 30 seconds.
+5. The address book is only able to access files from local machines.
+
 
 *{More to be added}*
 
@@ -339,6 +366,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Vendor**: A person who provides certain kinds of services
 
 --------------------------------------------------------------------------------------------------------------------
 
