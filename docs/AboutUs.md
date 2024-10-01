@@ -47,8 +47,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/ngjianyi)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Testing
+* Role: Testing
+* Responsibilities: Ensures the testing of the project is done properly and on time
 
 ### James Doe
 
