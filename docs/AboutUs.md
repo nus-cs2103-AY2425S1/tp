@@ -17,45 +17,47 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/choonzies)]
 
 * Role: Project Advisor
 
-### Jane Doe
+### Poh Jing Choon
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/choonzies.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/choonzies)]
+[[portfolio](team/choonzies.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Storage management
 
-### Jean Doe
+### Clarence
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/clarud.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+
+[[github](http://github.com/clarud)] 
+[[portfolio](team/clarud.md)]
+
+* Role: Developer, Deliverables and deadlines
+* Responsibilities: Ensure project deliverables are done on time and in the right format, In charge of delete feature
+
+### Daron Oh
+
+<img src="images/daronoh.png" width="200px">
+
+[[github](http://github.com/daronoh)]
+[[portfolio](team/daronoh.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Integration, In charge of Search feature
 
-### James Doe
+### Nicholas Lam
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/niclammm.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/niclammm)]
+[[portfolio](team/niclammm.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Scheduling and tracking
+* Responsibilities: In charge of defining, assigning, and tracking project tasks.
