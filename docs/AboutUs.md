@@ -35,7 +35,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](http://github.com/jinnsuke)] [[portfolio](https://www.linkedin.com/in/shoujinsugimoto/)]
 
-* Role: Developer
+* Role: Developer 
 * Responsibilities: Data
 
 ### Jean Doe
