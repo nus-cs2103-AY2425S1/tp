@@ -19,11 +19,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Wang Xiyu (Wxy2003-xy)
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/wxy2003-xy.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/wxy2003-xy)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Team Lead
