@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
@@ -28,7 +27,6 @@ class JsonAdaptedPerson {
     private final String name;
     private final String phone;
     private final String emergencyContact;
-    private final String email;
     private final String address;
     private final String note;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
@@ -38,13 +36,12 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("emergencyContact") String emergencyContact, @JsonProperty("email") String email,
+            @JsonProperty("emergencyContact") String emergencyContact,
             @JsonProperty("address") String address, @JsonProperty("note") String note,
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.emergencyContact = emergencyContact;
-        this.email = email;
         this.address = address;
         this.note = note;
         if (tags != null) {
@@ -59,7 +56,6 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         emergencyContact = source.getEmergencyContact().value;
-        email = source.getEmail().value;
         address = source.getAddress().value;
         note = source.getNote().value;
         tags.addAll(source.getTags().stream()
@@ -102,14 +98,6 @@ class JsonAdaptedPerson {
         }
         final Phone modelEmergencyContact = new Phone(emergencyContact);
 
-        if (email == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
-        }
-        if (!Email.isValidEmail(email)) {
-            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
-        }
-        final Email modelEmail = new Email(email);
-
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
@@ -121,7 +109,7 @@ class JsonAdaptedPerson {
         final Note modelNote = new Note(note);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmergencyContact ,modelEmail, modelAddress, modelNote, modelTags);
+        return new Person(modelName, modelPhone, modelEmergencyContact, modelAddress, modelNote, modelTags);
     }
 
 }

@@ -20,7 +20,6 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Phone emergencyContact;
-    private final Email email;
 
     // Data fields
     private final Address address;
@@ -30,12 +29,11 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Phone emergencyContact, Email email, Address address, Note note, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Phone emergencyContact, Address address, Note note, Set<Tag> tags) {
+        requireAllNonNull(name, phone, address, tags);
         this.name = name;
         this.phone = phone;
         this.emergencyContact = emergencyContact;
-        this.email = email;
         this.address = address;
         this.note = note;
         this.tags.addAll(tags);
@@ -51,10 +49,6 @@ public class Person {
 
     public Phone getEmergencyContact() {
         return emergencyContact;
-    }
-
-    public Email getEmail() {
-        return email;
     }
 
     public Address getAddress() {
@@ -103,7 +97,6 @@ public class Person {
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && emergencyContact.equals(otherPerson.emergencyContact)
-                && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && note.equals(otherPerson.note)
                 && tags.equals(otherPerson.tags);
@@ -112,7 +105,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, emergencyContact, email, address, note, tags);
+        return Objects.hash(name, phone, emergencyContact, address, note, tags);
     }
 
     @Override
@@ -121,7 +114,6 @@ public class Person {
                 .add("name", name)
                 .add("phone", phone)
                 .add("emergency contact", emergencyContact)
-                .add("email", email)
                 .add("address", address)
                 .add("note", note)
                 .add("tags", tags)

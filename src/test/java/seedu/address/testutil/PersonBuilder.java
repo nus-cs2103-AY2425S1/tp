@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
@@ -20,14 +19,12 @@ public class PersonBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMERGENCY_CONTACT = "93838383";
-    public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_NOTE = "";
 
     private Name name;
     private Phone phone;
     private Phone emergencyContact;
-    private Email email;
     private Address address;
     private Note note;
     private Set<Tag> tags;
@@ -39,7 +36,6 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         emergencyContact = new Phone(DEFAULT_EMERGENCY_CONTACT);
-        email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         note = new Note(DEFAULT_NOTE);
         tags = new HashSet<>();
@@ -52,7 +48,6 @@ public class PersonBuilder {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         emergencyContact = personToCopy.getEmergencyContact();
-        email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         note = personToCopy.getNote();
         tags = new HashSet<>(personToCopy.getTags());
@@ -106,16 +101,8 @@ public class PersonBuilder {
         return this;
     }
 
-    /**
-     * Sets the {@code Email} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withEmail(String email) {
-        this.email = new Email(email);
-        return this;
-    }
-
     public Person build() {
-        return new Person(name, phone, emergencyContact, email, address, note, tags);
+        return new Person(name, phone, emergencyContact, address, note, tags);
     }
 
 }
