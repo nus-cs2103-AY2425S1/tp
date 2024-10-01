@@ -305,8 +305,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: Add a contact**
 
-**Use Case: Get Warnings Before Making Major Changes**
-
 **Main Success Scenario (MSS):**
 
 1. User requests to add a contact with a name, email, and optionally a phone number, address, and tags.
@@ -343,7 +341,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. User views the list to get an overview of student contact information.
 
    Use case ends.
-=======
+
+**Use Case: Get Warnings Before Making Major Changes**
+
 1. Tutor initiates a major change (e.g., deleting a student record or modifying multiple student details at once).
 2. System detects the action as a major change.
 3. System prompts the tutor with a warning message describing the potential consequences (e.g., "Warning: You are about to delete [Student's name]. This action cannot be undone. Do you wish to proceed?").
