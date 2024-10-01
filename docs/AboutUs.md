@@ -30,12 +30,12 @@ You can reach us at the email `e1113201@u.nus.edu`
 
 * Role: Developer
 
+### Tay Xuen Ye
 
-### Xuen Ye
+<img src="images/tayxuenye.png" width="200px">
 
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/tayxuenye)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/tayxuenye)]
+[[portfolio](team/tayxuenye.md)]
 
 * Role: Developer
 * Responsibilities: Data
