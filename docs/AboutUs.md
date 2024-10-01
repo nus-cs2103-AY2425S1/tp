@@ -9,7 +9,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### Minhao
+### He Minhao
 
 <img src="images/minhao23.png" width="200px">
 
