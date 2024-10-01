@@ -3,13 +3,12 @@
 
 ![Ui](docs/images/Ui.png)
 
-**MedConnect is a desktop application for healthcare administrators in old folks homes for dementia patients to
-consolidate contacts of patients and related information into a single database.**
+**MedConnect is a desktop application for healthcare administrators in old folks homes for dementia patients to consolidate contacts of patients and related information into a single database.**
 
 For the detailed documentation of this project, see the **[MedConnect Product Website](https://ay2425s1-cs2103t-t13-1.github.io/tp/)**.
 
-* If you are interested in using AddressBook, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
-* If you are interested about developing AddressBook, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+* If you are interested in using MedConnect, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
+* If you are interested about developing MedConnect, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
   
 **Acknowledgements**
 

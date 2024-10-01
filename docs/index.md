@@ -8,16 +8,14 @@ title: AddressBook Level-3
 
 ![Ui](images/Ui.png)
 
-**MedConnect is a desktop application for healthcare administrators in old folks homes for dementia patients to 
-consolidate contacts of patients and related information into a single database.**
+**MedConnect is a desktop application for healthcare administrators in old folks homes for dementia patients to consolidate contacts of patients and related information into a single database.**
 
-It enables speedy lookups and updates, ensuring that administrators can quickly connect with the right people, 
-from on-call doctors to patients’ families, when every second counts.
+It enables speedy lookups and updates, ensuring that administrators can quickly connect with the right people, from on-call doctors to patients’ families, when every second counts.
 
 While it has a GUI (Graphical User Interface), most of the user interactions happen using a CLI (Command Line Interface).
 
-* If you are interested in using AddressBook, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
-* If you are interested about developing AddressBook, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+* If you are interested in using MedConnect, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
+* If you are interested about developing MedConnect, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
 
 
 **Acknowledgements**
