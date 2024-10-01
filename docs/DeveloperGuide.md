@@ -1,7 +1,7 @@
 ---
   layout: default.md
-  title: "Developer Guide"
-  pageNav: 3
+    title: "Developer Guide"
+    pageNav: 3
 ---
 
 # HallPointer Developer Guide
@@ -243,13 +243,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 - **Alternative 1 (current choice):** Saves the entire address book.
 
-  - Pros: Easy to implement.
-  - Cons: May have performance issues in terms of memory usage.
+    - Pros: Easy to implement.
+    - Cons: May have performance issues in terms of memory usage.
 
 - **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  - Pros: Will use less memory (e.g. for `delete`, just save the member being deleted).
-  - Cons: We must ensure that the implementation of each individual command are correct.
+    - Pros: Will use less memory (e.g. for `delete`, just save the member being deleted).
+    - Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 
@@ -316,32 +316,172 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+#### Use Case: UC01 - Add Member to CCA
 
-**Use case: Delete a member**
+**System**: Hall Pointer App
 
-**MSS**
+**Actor**: CCA Leader
 
-1.  User requests to list members
-2.  AddressBook shows a list of members
-3.  User requests to delete a specific member in the list
-4.  AddressBook deletes the member
+**Description**: This use case allows a CCA leader to add a new member to the CCA for attendance tracking and point allocation.
 
-    Use case ends.
+**Preconditions**:
+1. The CCA Leader must know the details of the new member.
 
-**Extensions**
+**Main Success Scenario (MSS)**:
+1. CCA Leader inputs the `add_member` command with required details (name, room number, and telegram handle).
+    - Example: `add_member /name John Doe /room 4/3/301 /tele johndoe123`
+2. Hall Pointer validates the entered details for the new member.
+3. Hall Pointer adds the member to the system and displays a success message.
+4. The new member is displayed in the GUI.
+    - Use case ends.
 
-- 2a. The list is empty.
+**Extensions**:
 
-  Use case ends.
+- **2a. Hall Pointer detects an error in the entered data**.
+    - 2a1. Hall Pointer requests for correct data with an error message indicating the invalid field.
+    - 2a2. CCA Leader re-enters corrected data.
+    - Steps 2a1-2a2 are repeated until all data is correct.
+    - Use case resumes from step 3.
 
-- 3a. The given index is invalid.
+- **2b. Duplicate member is detected**.
+    - 2b1. Hall Pointer displays an error message: `Error: Member John Doe already exists.`
+        - Use case ends.
 
-  - 3a1. AddressBook shows an error message.
+- **\*a. At any time, CCA Leader chooses to cancel the add member operation**.
+    - \*a1. Hall Pointer requests confirmation of the cancellation.
+    - \*a2. CCA Leader confirms the cancellation.
+        - Use case ends.
 
-    Use case resumes at step 2.
+---
 
-_{More to be added}_
+#### Use Case: UC02 - Add Session to CCA
+
+**System**: Hall Pointer App
+
+**Actor**: CCA Leader
+
+**Description**: This use case allows a CCA leader to add a new CCA session to the system for tracking attendance and point allocation.
+
+**Preconditions**:
+1. The CCA Leader must know the details of the session such as name, date, and points.
+
+**Main Success Scenario (MSS)**:
+1. CCA Leader inputs the `add_session` command with session details (name, date, and points).
+    - Example: `add_session rehearsal /date 2024-09-19 /points 2`
+2. Hall Pointer validates the entered session details.
+3. Hall Pointer adds the session to the system and displays a success message.
+4. The new session is displayed in the GUI.
+    - Use case ends.
+
+**Extensions**:
+
+- **2a. Hall Pointer detects an error in the entered data**.
+    - 2a1. Hall Pointer requests for correct data with an error message indicating the invalid field.
+    - 2a2. CCA Leader re-enters corrected data.
+    - Steps 2a1-2a2 are repeated until all data is correct.
+    - Use case resumes from step 3.
+
+- **2b. Duplicate session is detected**.
+    - 2b1. Hall Pointer displays an error message: `Error: Session rehearsal already exists.`
+        - Use case ends.
+
+- **\*a. At any time, CCA Leader chooses to cancel the add session operation**.
+    - \*a1. Hall Pointer requests confirmation of the cancellation.
+    - \*a2. CCA Leader confirms the cancellation.
+        - Use case ends.
+
+---
+
+#### Use Case: UC03 - Mark Member Present for a Session
+
+**System**: Hall Pointer App
+
+**Actor**: CCA Leader
+
+**Description**: This use case allows a CCA leader to mark a member as present for a specific CCA session.
+
+**Preconditions**:
+1. The member and session must exist in the system.
+
+**Main Success Scenario (MSS)**:
+1. CCA Leader inputs the `mark_present` command with the member name and session name.
+    - Example: `mark_present John Doe /session volleyball training`
+2. Hall Pointer validates the member and session details.
+3. Hall Pointer records the attendance and displays a success message:
+    - `Attendance recorded for John Doe on volleyball training.`
+4. The updated attendance is reflected in the GUI.
+    - Use case ends.
+
+**Extensions**:
+
+- **2a. Member or session not found**.
+    - 2a1. Hall Pointer displays an error message indicating the missing entity.
+        - `Failed to log attendance: member or session does not exist.`
+        - Use case ends.
+
+- **\*a. At any time, CCA Leader chooses to cancel the mark present operation**.
+    - \*a1. Hall Pointer requests confirmation of the cancellation.
+    - \*a2. CCA Leader confirms the cancellation.
+        - Use case ends.
+
+---
+
+#### Use Case: UC04 - Update Member Information
+
+**System**: Hall Pointer App
+
+**Actor**: CCA Leader
+
+**Description**: This use case allows a CCA leader to update the details of an existing member, such as room number, telegram handle, or tags.
+
+**Preconditions**:
+1. The member to be updated must exist in the system.
+
+**Main Success Scenario (MSS)**:
+1. CCA Leader inputs the `update_member` command with the member name and new details.
+    - Example: `update_member John Doe /room 9/10/203 /tag friend`
+2. Hall Pointer validates the member and new details.
+3. Hall Pointer updates the member information and displays a success message.
+    - `Member John Doe's room updated to 9/10/203.`
+4. The updated member information is displayed in the GUI.
+    - Use case ends.
+
+**Extensions**:
+
+- **2a. Member not found**.
+    - 2a1. Hall Pointer displays an error message:
+        - `Error: Member with the given name could not be found.`
+        - Use case ends.
+
+- **\*a. At any time, CCA Leader chooses to cancel the update operation**.
+    - \*a1. Hall Pointer requests confirmation of the cancellation.
+    - \*a2. CCA Leader confirms the cancellation.
+        - Use case ends.
+
+---
+
+#### Use Case: UC05 - View All Members
+
+**System**: Hall Pointer App
+
+**Actor**: CCA Leader
+
+**Description**: This use case allows a CCA leader to view a list of all members in the system.
+
+**Preconditions**:  
+None.
+
+**Main Success Scenario (MSS)**:
+1. CCA Leader inputs the `list_members` command.
+2. Hall Pointer retrieves and displays all members in the GUI.
+    - Use case ends.
+
+**Extensions**:
+
+- **2a. No members found**.
+    - 2a1. Hall Pointer displays an error message:
+        - `Error: No members found.`
+        - Use case ends.
 
 ### Non-Functional Requirements
 
@@ -377,16 +517,16 @@ testers are expected to do more _exploratory_ testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
 
-   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   2. Re-launch the app by double-clicking the jar file.<br>
-      Expected: The most recent window size and location is retained.
+    2. Re-launch the app by double-clicking the jar file.<br>
+       Expected: The most recent window size and location is retained.
 
 3. _{ more test cases …​ }_
 
@@ -394,16 +534,16 @@ testers are expected to do more _exploratory_ testing.
 
 1. Deleting a member while all members are being shown
 
-   1. Prerequisites: List all members using the `list` command. Multiple members in the list.
+    1. Prerequisites: List all members using the `list` command. Multiple members in the list.
 
-   2. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    2. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   3. Test case: `delete 0`<br>
-      Expected: No member is deleted. Error details shown in the status message. Status bar remains the same.
+    3. Test case: `delete 0`<br>
+       Expected: No member is deleted. Error details shown in the status message. Status bar remains the same.
 
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 2. _{ more test cases …​ }_
 
@@ -411,6 +551,6 @@ testers are expected to do more _exploratory_ testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 2. _{ more test cases …​ }_
