@@ -325,6 +325,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+
+**Use case: Find a person based on keyword**
+
+**MSS**
+
+1.  User enter keywords and requests to find a person
+2.  AddressBook find a list of persons matching the keywords
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
