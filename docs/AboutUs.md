@@ -40,15 +40,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Simon Tong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/uniqly.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/uniqly)]
+[[portfolio](team/uniqly.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Documentation Lead
+* Responsibilities: Documentation, Testing, Code Quality
 
 ### James Doe
 
