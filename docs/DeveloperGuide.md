@@ -289,14 +289,24 @@ Match with the appropriate suppliers to find products correctly.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​     | I want to …​                                      | So that I can…​                                                                                            |
+|----------|-------------|---------------------------------------------------|------------------------------------------------------------------------------------------------------------|
+| `* * *`  | shop owner  | view all my supplier contacts                     |                                                                                                            |
+| `* * *`  | shop owner  | add supplier contact                              |                                                                                                            |
+| `* * *`  | shop owner  | delete supplier contact                           | I can remove suppliers from the past who are no longer of interest                                         |
+| `* * *`  | shop owner  | edit supplier contact                             | I can easily alter contact information in the address book when suppliers change their contact information |
+| `* *`    | shop owner  | Search for my supplier contacts by name           | I can find the contact information of the person I am looking for through names                            |
+| `*`      | shop owner  | Search for my supplier contacts by contact number | I can find the contact information of the person I am looking for through a contact number                 |
+| `*`      | shop owner  | Search for my supplier contacts by product        | I can find the contact information of the supplier I am looking for based on the product they supply       |
+| `* *`    | shop owner  | have custom tags for my suppliers                 | I can keep track of special details about my suppliers                                                     |
+| `* * *`  | shop owner  | add delivery information                          | I can track of the upcoming deliveries                                                                     |
+| `* *`    | shop owner  | edit delivery information                         | I can edit upcoming deliveries without changing other fields                                               |
+| `* * *`  | shop owner  | delete delivery information                       | I can delete deliveries that are no longer happening                                                       |
+| `* *`    | shop owner  | mark delivery with completion status              | I know if a delivery has been completed/postponed/cancelled                                                |
+| `*`      | shop owner  | Search for my deliveries by date                  | I can find the deliveries happening on a certain date                                                      |
+| `*`      | shop owner  | Search for my deliveries by supplier name         | I can find the deliveries associated with a supplier                                                       |
+| `* *`    | shop owner  | view past deliveries                              | I can keep track of deliveries that have been completed                                                    |
+| `* *`    | shop owner  | view list of products                             | I know what products I am currently selling                                                                |
 
 *{More to be added}*
 
