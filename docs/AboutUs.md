@@ -31,14 +31,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Lutfir Rahman
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/lutfir_cpu.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/lutfir-cpu)] [[portfolio](team/lutfir-cpu.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Team Lead, Integration Lead
+* Responsibilities: In charge of integrations/pull requests. Sets direction of the project. Git/Github expert.
 
 ### Jean Doe
 
