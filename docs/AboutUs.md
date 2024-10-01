@@ -60,4 +60,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/johndoe.md)]
 
 * Role: Integration
-* Responsibilities: Responsible for code versioning and integrating different parts of the software. 
+* Responsibilities: Responsible for code versioning and integrating different parts of the software.
