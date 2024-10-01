@@ -21,15 +21,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Lee Zhi Yi
 
 <img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github]((https://github.com/zhiyi12345)]
+[[portfolio](https://www.linkedin.com/in/lee-zhi-yi-534b50141?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3Bd1JZpde5RUefqWLqVc6xdg%3D%3D)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Just a hardworking member
+* Responsibilities: To be asigned
 
 ### Johnny Doe
 
