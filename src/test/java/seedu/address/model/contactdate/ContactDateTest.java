@@ -28,7 +28,7 @@ public class ContactDateTest {
         assertFalse(ContactDate.isValidContactDate("2020-13-01"));
         assertFalse(ContactDate.isValidContactDate("2020-01-32"));
         assertFalse(ContactDate.isValidContactDate(""));
-        
+
         // valid contact date
         assertTrue(ContactDate.isValidContactDate("2020-01-01"));
     }
