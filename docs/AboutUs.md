@@ -9,7 +9,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### Johnny Doe
+### Tan Jia En
 
 <img src="images/jiaaaaen.png" width="200px">
 
