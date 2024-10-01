@@ -39,6 +39,15 @@ public class ContactDateListTest {
     }
 
     @Test
+    public void markAsContacted_contactDateProvided() {
+        ContactDateList contactDateList = new ContactDateList();
+        ContactDate contactDate = new ContactDate("2024-10-01");
+        contactDateList.markAsContacted(contactDate);
+        assertEquals(1, contactDateList.size());
+        assertEquals(contactDate, contactDateList.getLastContacted());
+    }
+
+    @Test
     public void equals() {
         ContactDateList contactDateList = new ContactDateList();
         ContactDateList contactDateListCopy = new ContactDateList();

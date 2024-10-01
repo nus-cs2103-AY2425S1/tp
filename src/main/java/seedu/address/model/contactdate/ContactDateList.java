@@ -44,6 +44,14 @@ public class ContactDateList extends ArrayList<ContactDate> {
     }
 
     /**
+     * Adds the given ContactDate to the ContactDateList.
+     * @param contactDate
+     */
+    public void markAsContacted(ContactDate contactDate) {
+        this.add(contactDate);
+    }
+
+    /**
      * Returns the last ContactDate in the ContactDateList.
      * @return the most recent ContactDate.
      * @throws IndexOutOfBoundsException if the list is empty.
