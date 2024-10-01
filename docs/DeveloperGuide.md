@@ -270,10 +270,9 @@ particular, this representative works with B2B sales.
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
-* has a need to transfer large number of contacts to new workers
 
-**Value proposition**: manage and organise large number of contacts faster than a
-typical mouse/GUI driven app
+**Value proposition**: Efficiently manage and organise a large number of contacts
+faster than a typical mouse/GUI driven app
 
 
 ### User stories
