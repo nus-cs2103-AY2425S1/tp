@@ -20,18 +20,18 @@ public class MajorTest {
     }
 
     @Test
-    public void isValidAddress() {
+    public void isValidMajor() {
         // null address
-        assertThrows(NullPointerException.class, () -> Major.isValidAddress(null));
+        assertThrows(NullPointerException.class, () -> Major.isValidMajor(null));
 
         // invalid addresses
-        assertFalse(Major.isValidAddress("")); // empty string
-        assertFalse(Major.isValidAddress(" ")); // spaces only
+        assertFalse(Major.isValidMajor("")); // empty string
+        assertFalse(Major.isValidMajor(" ")); // spaces only
 
         // valid addresses
-        assertTrue(Major.isValidAddress("Blk 456, Den Road, #01-355"));
-        assertTrue(Major.isValidAddress("-")); // one character
-        assertTrue(Major.isValidAddress("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
+        assertTrue(Major.isValidMajor("Blk 456, Den Road, #01-355"));
+        assertTrue(Major.isValidMajor("-")); // one character
+        assertTrue(Major.isValidMajor("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
     }
 
     @Test

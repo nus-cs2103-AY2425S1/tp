@@ -10,8 +10,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Major;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.StudentId;
@@ -27,7 +27,7 @@ class JsonAdaptedPerson {
     private final String name;
     private final String studentId;
     private final String email;
-    private final String address;
+    private final String major;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -35,12 +35,12 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("studentId") String studentId,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
+            @JsonProperty("email") String email, @JsonProperty("major") String major,
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.studentId = studentId;
         this.email = email;
-        this.address = address;
+        this.major = major;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -53,7 +53,7 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         studentId = source.getStudentId().value;
         email = source.getEmail().value;
-        address = source.getAddress().value;
+        major = source.getMajor().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -95,13 +95,13 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
-        if (address == null) {
+        if (major == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Major.class.getSimpleName()));
         }
-        if (!Major.isValidAddress(address)) {
+        if (!Major.isValidMajor(major)) {
             throw new IllegalValueException(Major.MESSAGE_CONSTRAINTS);
         }
-        final Major modelAddress = new Major(address);
+        final Major modelAddress = new Major(major);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelStudentId, modelEmail, modelAddress, modelTags);

@@ -24,7 +24,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MAJOR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NETID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
@@ -86,13 +86,13 @@ public class AddCommandParserTest {
 
         // multiple addresses
         assertParseFailure(parser, ADDRESS_DESC_AMY + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_MAJOR));
 
         // multiple fields repeated
         assertParseFailure(parser,
                 validExpectedPersonString + PHONE_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY + ADDRESS_DESC_AMY
                         + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_ADDRESS,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_MAJOR,
                         PREFIX_NETID, PREFIX_STUDENTID));
 
         // invalid value followed by valid value
@@ -111,7 +111,7 @@ public class AddCommandParserTest {
 
         // invalid address
         assertParseFailure(parser, INVALID_ADDRESS_DESC + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_MAJOR));
 
         // valid value followed by invalid value
 
@@ -129,7 +129,7 @@ public class AddCommandParserTest {
 
         // invalid address
         assertParseFailure(parser, validExpectedPersonString + INVALID_ADDRESS_DESC,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_MAJOR));
     }
 
     @Test
