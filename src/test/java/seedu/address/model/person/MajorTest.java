@@ -6,40 +6,40 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-public class AddressTest {
+public class MajorTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Address(null));
+        assertThrows(NullPointerException.class, () -> new Major(null));
     }
 
     @Test
     public void constructor_invalidAddress_throwsIllegalArgumentException() {
         String invalidAddress = "";
-        assertThrows(IllegalArgumentException.class, () -> new Address(invalidAddress));
+        assertThrows(IllegalArgumentException.class, () -> new Major(invalidAddress));
     }
 
     @Test
     public void isValidAddress() {
         // null address
-        assertThrows(NullPointerException.class, () -> Address.isValidAddress(null));
+        assertThrows(NullPointerException.class, () -> Major.isValidAddress(null));
 
         // invalid addresses
-        assertFalse(Address.isValidAddress("")); // empty string
-        assertFalse(Address.isValidAddress(" ")); // spaces only
+        assertFalse(Major.isValidAddress("")); // empty string
+        assertFalse(Major.isValidAddress(" ")); // spaces only
 
         // valid addresses
-        assertTrue(Address.isValidAddress("Blk 456, Den Road, #01-355"));
-        assertTrue(Address.isValidAddress("-")); // one character
-        assertTrue(Address.isValidAddress("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
+        assertTrue(Major.isValidAddress("Blk 456, Den Road, #01-355"));
+        assertTrue(Major.isValidAddress("-")); // one character
+        assertTrue(Major.isValidAddress("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
     }
 
     @Test
     public void equals() {
-        Address address = new Address("Valid Address");
+        Major address = new Major("Valid Address");
 
         // same values -> returns true
-        assertTrue(address.equals(new Address("Valid Address")));
+        assertTrue(address.equals(new Major("Valid Address")));
 
         // same object -> returns true
         assertTrue(address.equals(address));
@@ -51,6 +51,6 @@ public class AddressTest {
         assertFalse(address.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(address.equals(new Address("Other Valid Address")));
+        assertFalse(address.equals(new Major("Other Valid Address")));
     }
 }

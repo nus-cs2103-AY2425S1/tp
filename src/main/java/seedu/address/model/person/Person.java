@@ -22,13 +22,13 @@ public class Person {
     private final StudentId studentId;
 
     // Data fields
-    private final Address address;
+    private final Major address;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, StudentId studentId, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, StudentId studentId, Email email, Major address, Set<Tag> tags) {
         requireAllNonNull(name, studentId, email, address, tags);
         this.name = name;
         this.studentId = studentId;
@@ -49,7 +49,7 @@ public class Person {
         return email;
     }
 
-    public Address getAddress() {
+    public Major getAddress() {
         return address;
     }
 
