@@ -21,15 +21,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Chua Kee Chin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ckclion.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/ckclion)]
+[[portfolio](team/ckclion.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Testing Lead
+* Responsibilities: Ensures the testing of the project is done properly and on time.
 
 ### Johnny Doe
 
