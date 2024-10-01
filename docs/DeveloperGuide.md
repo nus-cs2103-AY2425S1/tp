@@ -325,20 +325,45 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: View Contacts**
+
+**Preconditions:**
+1. Contacts are saved properly.
+
+**Guarantees: **
+1. The user's previously saved contacts will be listed with their details.
+2. Contacts are sorted alphabetically.
+
+**MSS**
+
+1.  User wishes to view his previously saved contacts.
+2.  System gets the saved contacts.
+3.  System shows the saved contacts to the user.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. System is unable to get saved contacts. 
+* 2a1. System informs the user that the file is corrupted.
+    Use case ends.
+* 2b. The list is empty.
+* 2b1. System informs the user that there are no saved contacts.
+    Use case ends.
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4.  The system should respond within two seconds.
+5.  The system should work on both 32-bit and 64-bit environments.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **32-bit and 64-bit environment**: The amount of memory that your computer can address. 64-bit machines are able to access much more memory than 32-bit machines.
 
 --------------------------------------------------------------------------------------------------------------------
 
