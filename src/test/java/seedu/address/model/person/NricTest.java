@@ -37,21 +37,21 @@ public class NricTest {
 
     @Test
     public void equals() {
-        Nric Nric = new Nric("S6406542D");
+        Nric nric = new Nric("S6406542D");
 
         // same values -> returns true
-        assertTrue(Nric.equals(new Nric("S6406542D")));
+        assertTrue(nric.equals(new Nric("S6406542D")));
 
         // same object -> returns true
-        assertTrue(Nric.equals(Nric));
+        assertTrue(nric.equals(nric));
 
         // null -> returns false
-        assertFalse(Nric.equals(null));
+        assertFalse(nric.equals(null));
 
         // different types -> returns false
-        assertFalse(Nric.equals(5.0f));
+        assertFalse(nric.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(Nric.equals(new Nric("S9798929Z")));
+        assertFalse(nric.equals(new Nric("S9798929Z")));
     }
 }

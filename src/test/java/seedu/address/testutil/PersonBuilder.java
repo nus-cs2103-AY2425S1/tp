@@ -1,6 +1,5 @@
 package seedu.address.testutil;
 
-import java.util.Deque;
 import java.util.HashSet;
 import java.util.Set;
 
