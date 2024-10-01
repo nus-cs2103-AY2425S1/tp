@@ -22,43 +22,39 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: UI developer
 * Responsibilities: Develop GUI features
 
+### Sng Ying Xuan Shernice
 
-### Jane Doe
+<img src="images/shernicesng.png" width="200px">
 
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/shernicesng)] 
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Code Quality
 
-### James Doe
+### Joey Goh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jowhee3011.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/jowhee3011)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Scheduling and tracking
 
+### Guan Yi Sim
+
+<img src="images/droas590.png" width="200px">
+
+* Role: Developer
+* Responsibilities: Testing
+
+### Ved Joshi
+
+<img src="images/vedjoshi.png" width="200px">
+
+[[github](http://github.com/vedjoshi)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities: Documentation
