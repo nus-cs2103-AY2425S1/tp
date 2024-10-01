@@ -22,7 +22,7 @@ public class Rsvp {
         this.rsvp = rsvp;
     }
 
-    private static boolean isValidRsvp(String str) {
+    public static boolean isValidRsvp(String str) {
 
         if (!str.matches(VALIDATION_REGEX)) {
             return false;
