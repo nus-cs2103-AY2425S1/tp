@@ -48,6 +48,15 @@ You can reach us at the email `E1120956@u.nus.edu`
 * Role: Code Quality
 * Responsibilities: Ensuring code quality
 
+### Wen Kang
+
+<img src="images/SlothyCat.png" width="200px">
+
+[[github](http://github.com/SlothyCat)]
+
+* Role: Documentation Expert
+* Responsibilities: Ensures Documentation is consistent and up to standards 
+
 ### Zien Xu
 
 <img src="images/zienxu.png" width="200px">
@@ -56,3 +65,4 @@ You can reach us at the email `E1120956@u.nus.edu`
 
 * Role: Tester
 * Responsibilities: Ensures the testing of the project is done properly and on time.
+
