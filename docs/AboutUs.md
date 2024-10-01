@@ -45,8 +45,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/PrishaVP)]
 [[portfolio](team/prisha.md)]
 
-* Role: Developer
-* Responsibilities: Scheduling and tracking
+* Role: Scheduling and tracking
+* Responsibilities: In charge of defining, assigning, and tracking project tasks.
 
 ### James Doe
 
