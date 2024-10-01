@@ -21,14 +21,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Testing
 
-### Jane Doe
+### Kelly Bong Jia Qi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/bonzzz3.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/bonzzz3)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Team Lead
+* Role: Code Quality
 * Responsibilities: UI
 
 ### Johnny Doe
