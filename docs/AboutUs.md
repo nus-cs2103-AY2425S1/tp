@@ -50,12 +50,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Zien Xu
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/zienxu.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/zienxu)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Tester
+* Responsibilities: Ensures the testing of the project is done properly and on time.
