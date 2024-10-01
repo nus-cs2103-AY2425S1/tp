@@ -7,7 +7,7 @@ public class Rsvp {
 
     public static final String MESSAGE_CONSTRAINTS =
             "RSVP Status should be 'ACCEPTED', 'DECLINED'";
-    private static final String[] RSVP_STATUS = {"ACCEPTED", "DECLINED"};
+    private static final String[] RSVP_STATUS = {"PENDING", "ACCEPTED", "DECLINED"};
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
