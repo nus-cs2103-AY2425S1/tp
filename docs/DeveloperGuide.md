@@ -338,7 +338,7 @@ Priorities:
 
    Use case ends.
 
-**Extensions**
+**Extensions:**
 
 * 2a. The name is in an invalid format.
   * 2a1. System shows an error message, "Invalid name format."
@@ -354,7 +354,7 @@ Priorities:
 
 #### Use case: View contacts
 
-**MSS**
+**Main Success Scenario (MSS):**
 
 1. User requests to view all contacts.
 2. System retrieves and displays the list of all contacts with their details (name, phone number, email, address, tags).
@@ -380,7 +380,7 @@ Priorities:
 
 #### Use case: Delete a contact
 
-**MSS**
+**Main Success Scenario (MSS):**
 
 1. User requests to delete a contact by providing the index of the contact in the list.
 2. System validates the provided index.
@@ -389,7 +389,7 @@ Priorities:
 
    Use case ends.
 
-**Extensions**
+**Extensions:**
 
 * 2a. The index is out of bounds.
   * 2a1. System shows an error message, "Invalid index."
@@ -397,7 +397,7 @@ Priorities:
 
 #### Use case: Edit a contact
 
-**MSS**
+**Main Success Scenario (MSS):**
 
 1. User requests to edit the contact by providing the index of the contact and the fields to update (name, phone, email, address, tags).
 2. System validates the provided index and input fields:
@@ -408,7 +408,7 @@ Priorities:
 
    Use case ends.
 
-**Extensions**
+**Extensions:**
 
 * 2a. The index is out of bounds.
   * 2a1. System shows an error message, "Invalid index."
@@ -428,7 +428,7 @@ Priorities:
 
 #### Use case: Add essential data about students
 
-**MSS**
+**Main Success Scenario (MSS):**
 
 1. User requests to add essential data (such as progress or status) for a specific student.
 2. System prompts the user to provide the student’s essential data, such as progress, performance, or notes.
@@ -437,7 +437,7 @@ Priorities:
 
    Use case ends.
 
-**Extensions**
+**Extensions:**
 
 * 2a. The provided data is invalid.
   * 2a1. System shows an error message, "Invalid data format."
@@ -449,7 +449,7 @@ Priorities:
 
 #### Use case: View essential data about students
 
-**MSS**
+**Main Success Scenario (MSS):**
 
 1. User requests to view essential data for a specific student.
 2. System retrieves and displays the student's essential data, such as progress, performance, or notes.
@@ -457,7 +457,7 @@ Priorities:
 
    Use case ends.
 
-**Extensions**
+**Extensions:**
 
 * 2a. The student does not exist in the system.
   * 2a1. System shows an error message, "Student not found."
@@ -469,7 +469,7 @@ Priorities:
 
 #### Use case: Delete essential data about students
 
-**MSS**
+**Main Success Scenario (MSS):**
 
 1. User requests to delete essential data for a specific student.
 2. System prompts the user for confirmation to delete the essential data for the student.
@@ -478,7 +478,7 @@ Priorities:
 
    Use case ends.
 
-**Extensions**
+**Extensions:**
 
 * 2a. The student does not exist in the system.
   * 2a1. System shows an error message, "Student not found."
@@ -494,7 +494,7 @@ Priorities:
 
 #### Use case: Edit essential data about students
 
-**MSS**
+**Main Success Scenario (MSS):**
 
 1. User requests to edit essential data for a specific student.
 2. System prompts the user to provide new or updated essential data for the student.
@@ -503,7 +503,7 @@ Priorities:
 
    Use case ends.
 
-**Extensions**
+**Extensions:**
 
 * 2a. The student does not exist in the system.
   * 2a1. System shows an error message, "Student not found."
@@ -519,7 +519,7 @@ Priorities:
 
 #### Use case: Search students
 
-**MSS**
+**Main Success Scenario (MSS):**
 
 1. User requests to find students by providing keywords.
 2. System searches for contacts whose names contain the given keywords (case-insensitive).
@@ -527,7 +527,7 @@ Priorities:
 
    Use case ends.
 
-**Extensions**
+**Extensions:**
 
 * 2a. No contacts match the keywords.
   * 2a1. System shows a message, "No contacts found."
@@ -535,7 +535,7 @@ Priorities:
 
 #### Use case: Sort students by grades
 
-**MSS**
+**Main Success Scenario (MSS):**
 
 1. User requests to sort students by their grades.
 2. System retrieves all students and their corresponding grades.
@@ -544,7 +544,7 @@ Priorities:
 
    Use case ends.
 
-**Extensions**
+**Extensions:**
 
 * 3a. No students have grades recorded.
   * 3a1. System shows a message, "No grade data available for sorting."
@@ -552,7 +552,7 @@ Priorities:
 
 #### Use case: Delete students in bulk
 
-**MSS**
+**Main Success Scenario (MSS):**
 
 1. User requests to delete multiple students from the system.
 2. System prompts the user to confirm the deletion of the selected students.
@@ -561,7 +561,7 @@ Priorities:
 
    Use case ends.
 
-**Extensions**
+**Extensions:**
 
 * 1a. User does not select any students for deletion.
   * 1a1. System shows a message, "No students selected for deletion."
@@ -577,7 +577,7 @@ Priorities:
 
 #### Use case: Add filters to searches
 
-**MSS**
+**Main Success Scenario (MSS):**
 
 1. User requests to search for students with additional filters (e.g., by grade, tag, or other criteria).
 2. System prompts the user to specify the filters (e.g., grade range, specific tag, etc.).
@@ -586,7 +586,7 @@ Priorities:
 
    Use case ends.
 
-**Extensions**
+**Extensions:**
 
 * 2a. The provided filter is invalid.
   * 2a1. System shows an error message, "Invalid filter. Please provide valid criteria."
