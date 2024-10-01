@@ -38,22 +38,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Wong Zhian John
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/johnwz123.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+<!-- [[homepage](http://www.comp.nus.edu.sg/~damithch)] -->
+[[github](http://github.com/johnwz123)]
+<!-- [[portfolio](team/johndoe.md)] -->
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
