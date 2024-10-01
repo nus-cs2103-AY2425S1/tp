@@ -97,6 +97,20 @@ public class PersonTest {
     }
 
     @Test
+    public void markAsContacted() {
+        Person person = new PersonBuilder().build();
+        person.markAsContacted();
+        // 1 contact date added on initialisation and another added by markAsContacted
+        assertEquals(2, person.getContactDates().size());
+    }
+
+    @Test
+    public void getLastContacted() {
+        Person person = new PersonBuilder().build();
+        assertEquals(person.getContactDates().getLastContacted(), person.getLastContacted());
+    }
+
+    @Test
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{nric=" + ALICE.getNric()
                 + ", name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()

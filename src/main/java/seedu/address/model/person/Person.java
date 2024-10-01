@@ -8,6 +8,8 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.contactdate.ContactDate;
+import seedu.address.model.contactdate.ContactDateList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -25,11 +27,13 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final ContactDateList contactDates = new ContactDateList();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+            ContactDateList contactDates) {
         requireAllNonNull(nric, name, phone, email, address, tags);
         this.nric = nric;
         this.name = name;
@@ -37,6 +41,14 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.contactDates.addAll(contactDates);
+    }
+
+    /**
+     * For creating a new person. Every field but contact date must be present and not null.
+     */
+    public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+        this(nric, name, phone, email, address, tags, new ContactDateList(ContactDate.getCurrentDate()));
     }
 
     public Nric getNric() {
@@ -59,6 +71,14 @@ public class Person {
         return address;
     }
 
+    public ContactDateList getContactDates() {
+        return contactDates;
+    }
+
+    public ContactDate getLastContacted() {
+        return contactDates.getLastContacted();
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -68,7 +88,18 @@ public class Person {
     }
 
     /**
+     * <<<<<<< HEAD
+     * Mark the person as contacted today.
+     */
+    public void markAsContacted() {
+        contactDates.markAsContacted();
+    }
+
+    /**
+     * Returns true if both persons have the same name.
+     * =======
      * Returns true if both persons have the same nric.
+     * >>>>>>> master
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
