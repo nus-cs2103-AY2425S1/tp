@@ -1,4 +1,4 @@
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
+[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-F11-2/tp/actions)
 <style>
   a {
     color: white;
@@ -79,5 +79,8 @@ const PASS_KEY = 'GHI';
 
 <!-- Acknowledgements -->
 # Acknowledgements
-To fill in...
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+
+We would like to thank the SE-EDU team for their open-source contributions and for providing the foundation 
+upon which this project was built.
 
