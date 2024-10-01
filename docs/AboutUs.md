@@ -11,15 +11,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Darryl Shuck
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/shuckycheese.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/choonzies)]
+[[github](https://github.com/shuckycheese)]
+[[portfolio](team/shuckycheese)]
 
-* Role: Project Advisor
+
+* Role: Developer
+* Responsibilities: Code Quality, In charge of better search
 
 ### Poh Jing Choon
 
