@@ -287,14 +287,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​                                    | I want to …​                      | So that I can…​                                                        |
+|----------|--------------------------------------------|-----------------------------------|------------------------------------------------------------------------|
+| `* * *`  | real estate agent                          | add new properties to client grid | keep track of my client's property details                             |
+| `* * *`  | user                                       | add a new person                  |                                                                        |
+| `* * *`  | user                                       | delete a person                   | remove entries that I no longer need                                   |
+| `* * *`  | user                                       | find a person by name             | locate details of persons without having to go through the entire list |
+| `* *`    | user                                       | hide private contact details      | minimize chance of someone else seeing them by accident                |
+| `*`      | user with many persons in the address book | sort persons by name              | locate a person easily                                                 |
 
 *{More to be added}*
 
@@ -302,43 +302,47 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a property**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User inputs details of property
+2.  System outputs success message in user console
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. Invalid command detail symbols
 
-  Use case ends.
+    * 1a1. System outputs error message in user console
 
-* 3a. The given index is invalid.
+      Use case ends.
 
-    * 3a1. AddressBook shows an error message.
+* 1b. Postal code number contains invalid symbols and format typical in Singapore
 
-      Use case resumes at step 2.
+    * 1b1. System outputs error message in user console
 
-*{More to be added}*
+      Use case ends.
+
+* 1c. Unit number contains invalid symbols and format
+
+    * 1c1. System outputs error message in user console
+
+      Use case ends.
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1. Should be able to handle case of corrupted file
+2. Should work on any mainstream OS as long as it has Java 17 or above installed. 
+3. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage. 
+4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Corrupted file**: Missing file and invalid data
 
 --------------------------------------------------------------------------------------------------------------------
 
