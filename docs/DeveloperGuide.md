@@ -272,29 +272,41 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
-
-* has a need to manage a significant number of contacts
+**Target user profile**: Wedding planners who:
+* have a need to manage a significant number of contacts
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Wedding planners often have to deal with many contacts which can be troublesome. AB3 allows use of tags to keep track of clients, wedding photographers, wedding locations, guest lists and other important contacts. Using a CLI (Command Line Interface), clients can manage contacts faster than using a typical mouse/GUI driven app
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​          | I want to …​                                                             | So that I can…​                                                                              |
+|----------|------------------|--------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
+| `* * *`  | user             | see all of my client contacts and corresponding wedding services engaged | more effectively manage my clients' weddings                                                 |
+| `* * *`  | user             | add new contacts                                                         |                                                                                              |
+| `* * *`  | user             | delete contacts                                                          | get rid of unneeded contacts                                                                 |
+| `* * *`  | user             | tag contacts                                                             | organise my contacts                                                                         |
+| `* *`    | user             | edit contacts                                                            | correct mistakes made                                                                        |
+| `* * *`  | user             | view a list of all contacts                                              | retrieve the contact information                                                             |
+| `* *`    | user             | filter contacts by tags                                                  | find specific profiles that are of interest to me quickly                                    |
+| `*`      | user             | copy the email of the contact to clipboard                               | email contacts conveniently                                                                  |
+| `* *`    | user             | archive contacts                                                         | ensure that contact list is not too cluttered while not entirely getting rid of old contacts |
+| `* *`    | first-time user  | see help messages                                                        | learn how to use the app                                                                     |
+| `*`  | experienced user | customise the commands                                                   | more effectively add, delete and edit contacts                                               |
+| `*`  | user             | sort contacts alphabetically                                             | organise and access contacts more easily                                                     |
+| `*`  | forgetful user   | set reminders to talk to contacts                                        | remember to communicate with contacts                                                        |
+| `*`  | busy user        | schedule calls with contacts                                             | remember when to call people                                                                 |
+| `*`  | organised user   | create folders                                                           | organise my contacts into categories                                                         |
+| `*`  | efficient user   | make mass operations                                                     | add, delete or archive numerous contacts in one go                                           |
+| `*`  | user  | search contacts by name or tag                                           | quickly access a contact                                                                     |
+
+
 
 *{More to be added}*
 
