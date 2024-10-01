@@ -18,7 +18,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 
-
 ### Sun Weiyang
 
 <img src="images/artillerysun.png" width="200px">
@@ -39,3 +38,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: UI
+
+### Jaynon
+
+<img src="images/jaynon.png" width="200px">
+
+[[github](http://github.com/Jaynon)]
+[[portfolio](team/jaynon.md)]
+
+* Role: Developer
+* Responsibilities: Data
