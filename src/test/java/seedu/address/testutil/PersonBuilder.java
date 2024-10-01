@@ -104,6 +104,14 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Company} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withCompany(String company) {
+        this.company = new Company(company);
+        return this;
+    }
+
     public Person build() {
         if (!isVendor) {
             // TODO: Add case for guest here

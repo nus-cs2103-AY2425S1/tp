@@ -27,7 +27,7 @@ public class Company {
      */
     public Company(String company) {
         requireNonNull(company);
-        checkArgument(isValidCompanyName(company), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidCompany(company), MESSAGE_CONSTRAINTS);
         companyName = company;
     }
 
@@ -37,7 +37,7 @@ public class Company {
      * @param test The string to test.
      * @return True if the given string matches the validation regex, false otherwise.
      */
-    public static boolean isValidCompanyName(String test) {
+    public static boolean isValidCompany(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
