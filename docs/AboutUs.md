@@ -9,14 +9,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### Zhang Jinhan
+### John Doe
 
-<img src="images/jinhanjinhan.png" width="200px">
+<img src="images/johndoe.png" width="200px">
 
-[[github](https://github.com/jinhanjinhan)]
+[[homepage](http://www.comp.nus.edu.sg/~damithch)]
+[[github](https://github.com/johndoe)]
+[[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Software Developer
+* Role: Project Advisor
 
 ### Jane Doe
 
