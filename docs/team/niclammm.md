@@ -1,6 +1,6 @@
 ---
   layout: default.md
-  title: "Clarence's Project Portfolio Page"
+  title: "Nicholas Lam's Project Portfolio Page"
 ---
 
 ### Project: AddressBook Level 3
