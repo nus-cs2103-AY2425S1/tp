@@ -11,25 +11,25 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Jaymeson Koh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/blanklogic.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/erwin)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/erwin)]
+[[github](https://github.com/blanklogic)]
+[[portfolio](team/jaymeson.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Integration, Testing, Code Quality
+
+### Varun Shukla
+
+<img src="images/shux347.png" width="200px">
+
+[[github](http://github.com/Shux347)]
+[[portfolio](team/varun.md)]
+
+* Role: Developer
+* Responsibilities: Scheduling and tracking, deliverables and deadlines
 
 ### Erwin Soh
 
