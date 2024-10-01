@@ -33,4 +33,26 @@ public class ContactDateTest {
         assertTrue(ContactDate.isValidContactDate("2020-01-01"));
     }
 
+    @Test
+    public void equals() {
+        ContactDate contactDate = new ContactDate("2020-01-01");
+
+        // same values -> returns true
+        ContactDate contactDateCopy = new ContactDate("2020-01-01");
+        assertTrue(contactDate.equals(contactDateCopy));
+
+        // same object -> returns true
+        assertTrue(contactDate.equals(contactDate));
+
+        // null -> returns false
+        assertFalse(contactDate.equals(null));
+
+        // different type -> returns false
+        assertFalse(contactDate.equals(5.0f));
+
+        // different contact date -> returns false
+        ContactDate differentContactDate = new ContactDate("2020-01-02");
+        assertFalse(contactDate.equals(differentContactDate));
+    }
+
 }

@@ -57,12 +57,6 @@ public class ContactDateList extends ArrayList<ContactDate> {
             return true;
         }
 
-        // instanceof handles nulls
-        if (!(other instanceof ContactDateList)) {
-            return false;
-        }
-
-        ContactDateList otherList = (ContactDateList) other;
-        return this.equals(otherList);
+        return false;
     }
 }

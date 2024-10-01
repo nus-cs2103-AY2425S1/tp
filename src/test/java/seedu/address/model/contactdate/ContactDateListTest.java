@@ -1,6 +1,8 @@
 package seedu.address.model.contactdate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -27,5 +29,23 @@ public class ContactDateListTest {
         contactDateList.markAsContacted();
         assertEquals(1, contactDateList.size());
         assertEquals(contactDate, contactDateList.getLastContacted());
+    }
+
+    @Test
+    public void equals() {
+        ContactDateList contactDateList = new ContactDateList();
+        ContactDateList contactDateListCopy = new ContactDateList();
+
+        // same object -> returns true
+        assertTrue(contactDateList.equals(contactDateList));
+
+        // different object, same values -> returns false
+        assertFalse(contactDateList.equals(contactDateListCopy));
+
+        // null -> returns false
+        assertFalse(contactDateList.equals(null));
+
+        // different type -> returns false
+        assertFalse(contactDateList.equals(5.0f));
     }
 }
