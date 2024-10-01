@@ -338,7 +338,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to add a new contact by inputting the relevant contact details (name, email, phone number, module code, etc.)
 2.  ContactCS verifies the input format and checks for duplicate
-3.  If the input is valid, ContactCS adds the contact under the specified module
+3.  ContactCS adds the contact under the specified module
 
     Use case ends.
 
@@ -346,15 +346,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. Necessary input such as module code, name, or email is missing.
 
-  * 2a1. ContactCS shows an error message prompting the user to provide the required information.
+  * 2a1. ContactCS requests the user to provide the required information
+  * 2a2. User enters new data
+  * Steps 2a1 - 2a2 are repeated until the data entered are correct
         
-    Use case ends.
+    Use case resumes from step 2.
 
 * 3a. The given format is invalid.
 
-    * 3a1. ContactCS shows an error message prompting the user to provide the correct format and shows the valid command format
+    * 3a1. ContactCS requests the user to provide the correct format and shows the valid command format
+    * 3a2. User enters new input
+    * Steps 3a1 - 3a2 are repeated until the format for the entered input is correct
 
-      Use case ends.
+      Use case resumes from step 2.
 
 * 4a. The given contact is a duplicate.
 
@@ -379,15 +383,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. Necessary input such as module code, or category of the issue is missing.
 
-    * 2a1. ContactCS shows an error message prompting the user to provide the required information and shows the valid command format
+    * 2a1. ContactCS requests the user to provide the required information
+    * 2a2. User enters new input
+    * Steps 2a1 - 2a2 are repeated until all required fields in the input are complete
 
-        Use case ends.
+      Use case resumes from step 2.
 
 * 3a. The given format is invalid.
 
-    * 3a1. ContactCS shows an error message prompting the user to provide the correct format
+    * 3a1. ContactCS requests the user to provide the correct format and shows the valid command format
+    * 3a2. User enters new input
+    * Steps 3a1 - 3a2 are repeated until the format for the entered input is correct
 
-      Use case ends.
+      Use case resumes from step 2.
 
 * 4a. No matching contacts found.
 
@@ -407,14 +415,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The list is empty.
+  * 2a1. ContactCS displays a message to the user saying that the list is empty
 
-    Use case ends.
+      Use case ends.
 
 * 3a. The given index is invalid.
 
-    * 3a1. ContactCS shows an error message.
+    * 3a1. ContactCS requests the user to provide the correct index
+    * 3a2. User enters new index
+    * Steps 3a1 - 3a2 are repeated until the index entered are correct
 
-      Use case resumes at step 2.
+      Use case resumes from step 4.
 
 **Use case: Update contact information**
 
@@ -422,28 +433,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to list/search persons
 2.  ContactCS shows a list of persons
-3.  User requests to update contact information for a specific person in the list
-4.  ContactCS verifies and updates the contact details
+3.  User requests to update contact information for a specific person in the list, providing the new contact details.
+4.  ContactCS verifies the input format and updates the contact details based on the information provided by the user
 
     Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
+  * 2a1. ContactCS displays a message to the user saying that the list is empty
 
-    Use case ends.
+      Use case ends.
 
 * 3a. The given index is invalid.
 
-    * 3a1. ContactCS shows an error message.
+    * 3a1. ContactCS requests the user to provide the correct index
+    * 3a2. User enters new index
+    * Steps 3a1 - 3a2 are repeated until the index entered are correct
 
-      Use case resumes at step 2.
+      Use case resumes from step 4.
 
 * 4a. The given format is invalid.
 
-    * 4a1. ContactCS shows an error message prompting the user to provide the correct format
+    * 4a1. ContactCS requests the user to provide the correct format and shows the valid command format
+    * 4a2. User enters new input
+    * Steps 4a1 - 4a2 are repeated until the format for the entered input is correct
 
-      Use case resumes at step 2.
+      Use case resumes from step 4.
 
 **Use case: Mark frequently used contacts**
 
@@ -454,23 +470,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  User requests to mark certain contacts as frequently accessed
 4.  ContactCS marks these contacts for quick access
 
+    Use case ends.
+
 **Extensions**
 
 * 2a. The list is empty.
+  * 2a1. ContactCS displays a message to the user saying that the list is empty
 
-    Use case ends.
+      Use case ends.
 
 * 3a. The given index is invalid.
 
-    * 3a1. ContactCS shows an error message.
+    * 3a1. ContactCS requests the user to provide the correct index
+    * 3a2. User enters new index
+    * Steps 3a1 - 3a2 are repeated until the index entered are correct
 
-      Use case resumes at step 2.
+      Use case resumes from step 4.
 
 * 4a. The given format is invalid.
 
-    * 4a1. ContactCS shows an error message prompting the user to provide the correct format
+    * 4a1. ContactCS requests the user to provide the correct format and shows the valid command format
+    * 4a2. User enters new input
+    * Steps 4a1 - 4a2 are repeated until the format for the entered input is correct
 
-      Use case resumes at step 2.
+      Use case resumes from step 4.
 
 **Use case: Access frequently used contacts**
 
@@ -479,17 +502,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests to access frequently used contacts
 2.  ContactCS shows a list of persons
 
+    Use case ends.
+
 **Extensions**
 
 * 2a. The list is empty.
+  * 2a1. ContactCS displays a message to the user saying that the list is empty
 
     Use case ends.
 
 * 3a. The given format is invalid.
 
-    * 3a1. ContactCS shows an error message prompting the user to provide the correct format
+    * 3a1. ContactCS requests the user to provide the correct format and shows the valid command format
+    * 3a2. User enters new input
+    * Steps 3a1 - 3a2 are repeated until the format for the entered input is correct
 
-      Use case ends.
+      Use case resumes from step 2.
 
 **Use case: View usage instructions**
 
@@ -504,9 +532,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The given format is invalid.
 
-    * 2a1. ContactCS shows an error message prompting the user to provide the correct format
+    * 2a1. ContactCS requests the user to provide the correct format and shows the valid command format
+    * 2a2. User enters new input
+    * Steps 2a1 - 2a2 are repeated until the format for the entered input is correct
 
-        Use case ends.
+      Use case resumes from step 2.
 
 **Use case: View app with sample data**
 
@@ -522,19 +552,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The given format is invalid.
 
-    * 2a1. ContactCS shows an error message prompting the user to provide the correct format
+    * 2a1. ContactCS requests the user to provide the correct format and shows the valid command format
+    * 2a2. User enters new input
+    * Steps 2a1 - 2a2 are repeated until the format for the entered input is correct
 
-      Use case ends.
+      Use case resumes from step 2.
 
-**Use case: Redo/Undo actions**
+**Use case: Undo actions**
 
 **MSS**
 
 1.  User performs an action in ContactCS
 2.  User requests to undo the last action
 3.  ContactCS reverts to the state before the last action
-4.  If the user wishes to redo the action, they request a redo
-5.  ContactCS reapplies the last undone action
 
     Use case ends.
 
@@ -543,18 +573,42 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. No action has been performed yet.
     * 2a1. ContactCS shows an error message indicating that there is no action to undo
 
-       Use case ends.
+      Use case ends.
 
-* 3a. User tries to redo an action without having undone one first.
-    * 3a1. ContactCS shows an error message indicating that there is no action to redo
+* 3a. The given format is invalid.
+
+    * 3a1. ContactCS requests the user to provide the correct format and shows the valid command format
+    * 3a2. User enters new input
+    * Steps 3a1 - 3a2 are repeated until the format of the entered input is correct
+
+      Use case resumes from step 3.
+
+**Use case: Redo actions**
+
+**MSS**
+
+1.  User performs an action in ContactCS
+2.  User requests to undo the last action
+3.  ContactCS reverts to the state before the last action
+4.  User requests a redo
+5.  ContactCS reapplies the last undone action
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. User tries to redo an action without having undone one first.
+    * 2a1. ContactCS shows an error message indicating that there is no action to redo
 
         Use case ends.
 
-* 4a. The given format is invalid.
+* 3a. The given format is invalid.
 
-    * 4a1. ContactCS shows an error message prompting the user to provide the correct format
+    * 3a1. ContactCS requests the user to provide the correct format and shows the valid command format
+    * 3a2. User enters new input
+    * Steps 3a1 - 3a2 are repeated until the format of the entered input is correct
 
-      Use case ends.
+      Use case resumes from step 3.
 
 **Use case: Open Outlook for email communication**
 
@@ -572,41 +626,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case ends.
 
-* 3a. The selected contact does not have an email address.
-    * 3a1. ContactCS shows an error message indicating that the selected contact does not have an email associated.
-
-       Use case ends.
-
-* 4a. An error occurs while attempting to open the browser.
-    * 4a1. ContactCS shows an error message indicating that the request to open the browser failed
+* 3a. An error occurs while attempting to open the browser.
+    * 3a1. ContactCS shows an error message indicating that the request to open the browser failed
 
       Use case ends.
 
-* 5a. The given format is invalid.
+* 4a. The given format is invalid.
 
-    * 5a1. ContactCS shows an error message prompting the user to provide the correct format
+    * 4a1. ContactCS requests the user to provide the correct format and shows the valid command format
+    * 4a2. User enters new input
+    * Steps 4a1 - 4a2 are repeated until the format of the entered input is correct
 
-      Use case ends.
-
-**Use case: Automatic Saving and Loading of Contacts**
-
-**MSS**
-
-1.  User adds a new contact or updates an existing contact within ContactCS
-2.  ContactCS automatically saves the contact details to persistent storage (e.g., a file)
-3.  When the user opens the app, ContactCS loads the saved contacts from persistent storage
-
-**Extensions**
-
-* 2a. There is a failure in saving the contact (e.g., due to storage issues)
-    * 2a1. ContactCS shows an error message indicating that the contact could not be saved
-  
-      Use case ends.
-  
-* 3a. There is a failure in loading the contacts when the app starts
-    * 3a1. ContactCS shows an error message indicating that the contacts could not be loaded and may prompt the user to try again
-  
-      Use case ends.
+      Use case resumes from step 2.
 
 *{More to be added}*
 
