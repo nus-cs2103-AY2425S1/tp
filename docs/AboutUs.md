@@ -47,11 +47,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Jie Hui
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/blazechron.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](https://github.com/BlazeChron)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
