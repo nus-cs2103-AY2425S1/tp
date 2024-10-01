@@ -16,7 +16,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](http://github.com/kimberlytmq)] 
 
-* Role: Deadlines and Deliverables, Sheduling and Tracking
+* Role: Deadlines and Deliverables, Scheduling and Tracking
 * Responsibilities: Ensure that everyone is aware of the tasks and their respective deadlines
 
 
