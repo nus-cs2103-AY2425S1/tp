@@ -5,50 +5,37 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
-### John Doe
+### Suhail Loya
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/suhailloya.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/mongj)]
+[[github](https://github.com/SuhailLoya)]
+[[portfolio](team/suhailloya)]
 
-* Role: Project Advisor
 
-### Jane Doe
+### Celes Chai Jia Xuan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/celeschai.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/mongj)]
+[[github](https://github.com/celeschai)]
+[[portfolio](team/johndoe.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
 
-### Johnny Doe
 
-<img src="images/johndoe.png" width="200px">
+### Jem Zhang
 
-[[github](http://github.com/johndoe)] [[portfolio](team/mongj)]
+<img src="images/applejem.png" width="200px">
 
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/mongj)]
+[[github](http://github.com/AppleJem)]
+[[portfolio](team/applejem.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: developing things
 
-### James Doe
+### Zhang Ming Jun
 
 <img src="images/mongj.png" width="200px">
 
