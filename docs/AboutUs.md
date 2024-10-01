@@ -30,15 +30,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Dasha Sychova
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/dasha3412.png" width="200px">
 
-[[github](http://github.com/johndoe)] 
-[[portfolio](team/johndoe)]
+[[github](http://github.com/dasha3412)]
+[[portfolio](team/dasha3412.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: UI, Documentation, Scheduling and tracking
 
 ### Ricco Lim
 
