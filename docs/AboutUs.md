@@ -17,25 +17,25 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/johndoe)]
-[[portfolio](team/daronoh)]
+[[portfolio](team/choonzies)]
 
 * Role: Project Advisor
 
-### Jane Doe
+### Poh Jing Choon
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/choonzies.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/daronoh)]
+[[github](http://github.com/choonzies)]
+[[portfolio](team/choonzies.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Developer
+* Responsibilities: Storage management
 
 ### Johnny Doe
 
 <img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/daronoh)]
+[[github](http://github.com/johndoe)] [[portfolio](team/choonzies)]
 
 * Role: Developer
 * Responsibilities: Data
