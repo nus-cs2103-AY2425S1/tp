@@ -1,0 +1,5 @@
+{
+  "default": true,
+  "MD033": false, // inline HTML
+  "MD026": false // trailing punctuation :
+}

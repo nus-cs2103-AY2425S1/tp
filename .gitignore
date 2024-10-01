@@ -1,3 +1,13 @@
+# Java
+.mtj.tmp/
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+hs_err_pid*
+replay_pid*
+
 # Gradle build files
 /.gradle/
 /build/
@@ -7,6 +17,10 @@ src/main/resources/docs/
 /.idea/
 /out/
 /*.iml
+
+# VSCode
+.vscode/
+.code-workspace
 
 # Storage/log files
 /data/
@@ -22,3 +36,8 @@ src/test/data/sandbox/
 .DS_Store
 docs/_site/
 docs/_markbind/logs/
+
+# Markbind preview files
+/_markbind/
+
+# User-related files
