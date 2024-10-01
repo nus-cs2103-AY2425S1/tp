@@ -315,7 +315,7 @@ Priorities:
 
 #### **Use Case: Add a New Vendor to a Wedding**
 
-**MSS (Main Success Scenario):**
+**MSS:**
 
 1. Wedding Organizer selects the wedding they are managing.
 2. Bridal Boss displays the details of the selected wedding.
@@ -458,14 +458,8 @@ These non-functional requirements ensure that **Bridal Boss** remains a reliable
 - **Stakeholders:** All parties involved in the wedding event, including clients, vendors, and participants.
 - **Tag:** A label assigned to contacts or events to categorize and filter them (e.g., "Florist", "Wedding A").
 - **Contact:** An entry in the system containing information about a person or vendor.
-- **MSS (Main Success Scenario):** The standard sequence of steps in a use case where nothing goes wrong.
-- **Extensions:** Alternate paths in a use case that cover exceptions or variations from the main flow.
-- **GUI (Graphical User Interface):** The visual interface of the application that the user interacts with.
-- **CLI (Command-Line Interface):** A text-based user interface used to interact with the application through commands.
 - **Event Timeline:** A schedule outlining all tasks and deadlines related to a wedding event.
 - **RSVP:** A confirmation from an invited guest about their attendance at the wedding.
-- **Backup:** A copy of data stored separately for recovery in case the original data is lost or corrupted.
-- **Data Protection Regulations:** Legal requirements for handling personal data (e.g., GDPR).
 
 --------------------------------------------------------------------------------------------------------------------
 
