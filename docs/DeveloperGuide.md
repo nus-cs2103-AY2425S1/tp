@@ -272,7 +272,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ## **Appendix: Requirements**
 
-### Product scope
+### :fa-solid-compass: Product scope
 
 **Target user profile**: **Undergraduate Computer Science Student** who is a **Teaching Assistant (TA)**.
 
@@ -285,7 +285,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Value proposition**: manage student contacts faster than a typical mouse/GUI driven app
 
-### User stories
+### :fa-solid-book: User stories
 
 Priorities:
  <span style="color:#4CB140;">High (must have) - ★★★</span> |
@@ -319,12 +319,11 @@ Priorities:
 | <span style="color:#C9190B;">★</span>        | Intermediate      | Flag students with missing contact details            | Ensure all required student information is complete            |
 | <span style="color:#C9190B;">★</span>        | Beginner          | Set communication preferences for individual students | Communicate via their preferred method (Telegram, phone, etc.) |
 
-### Use cases
+### :fa-solid-user: Use cases
 
 (For all use cases below, the **System** is the `TAHub Contacts` and the **Actor** is the `user`, unless specified otherwise)
 
-
-**Use case: Add a contact**
+#### Use case: Add a contact
 
 **Main Success Scenario (MSS):**
 
@@ -342,18 +341,18 @@ Priorities:
 **Extensions**
 
 * 2a. The name is in an invalid format.
-    * 2a1. System shows an error message, "Invalid name format."
+  * 2a1. System shows an error message, "Invalid name format."
       Use case resumes at step 1.
 
 * 2b. The email is invalid or already exists.
-    * 2b1. System shows an error message, "Invalid email format." or "Contact already exists."
+  * 2b1. System shows an error message, "Invalid email format." or "Contact already exists."
       Use case resumes at step 1.
 
 * 2c. The phone number is invalid or already exists.
-    * 2c1. System shows an error message, "Invalid phone number format." or "Phone number already exists."
+  * 2c1. System shows an error message, "Invalid phone number format." or "Phone number already exists."
       Use case resumes at step 1.
 
-**Use case: View contacts**
+#### Use case: View contacts
 
 **MSS**
 
@@ -363,7 +362,7 @@ Priorities:
 
    Use case ends.
 
-**Use Case: Get Warnings Before Making Major Changes**
+#### Use Case: Get Warnings Before Making Major Changes
 
 1. Tutor initiates a major change (e.g., deleting a student record or modifying multiple student details at once).
 2. System detects the action as a major change.
@@ -376,10 +375,10 @@ Priorities:
 **Extensions:**
 
 * 2a. The list is empty.
-    * 2a1. System shows a message, "No contacts available."
+  * 2a1. System shows a message, "No contacts available."
       Use case ends.
 
-**Use case: Delete a contact**
+#### Use case: Delete a contact
 
 **MSS**
 
@@ -393,10 +392,10 @@ Priorities:
 **Extensions**
 
 * 2a. The index is out of bounds.
-    * 2a1. System shows an error message, "Invalid index."
+  * 2a1. System shows an error message, "Invalid index."
       Use case resumes at step 1.
 
-**Use case: Edit a contact**
+#### Use case: Edit a contact
 
 **MSS**
 
@@ -412,22 +411,22 @@ Priorities:
 **Extensions**
 
 * 2a. The index is out of bounds.
-    * 2a1. System shows an error message, "Invalid index."
+  * 2a1. System shows an error message, "Invalid index."
       Use case resumes at step 1.
 
 * 2b. The new name is invalid.
-    * 2b1. System shows an error message, "Invalid name format."
+  * 2b1. System shows an error message, "Invalid name format."
       Use case resumes at step 1.
 
 * 2c. The new email is invalid or already exists.
-    * 2c1. System shows an error message, "Invalid email format." or "Contact already exists."
+  * 2c1. System shows an error message, "Invalid email format." or "Contact already exists."
       Use case resumes at step 1.
 
 * 2d. The new phone number is invalid or already exists.
-    * 2d1. System shows an error message, "Invalid phone number format." or "Phone number already exists."
+  * 2d1. System shows an error message, "Invalid phone number format." or "Phone number already exists."
       Use case resumes at step 1.
 
-**Use case: Add essential data about students**
+#### Use case: Add essential data about students
 
 **MSS**
 
@@ -441,14 +440,14 @@ Priorities:
 **Extensions**
 
 * 2a. The provided data is invalid.
-    * 2a1. System shows an error message, "Invalid data format."
+  * 2a1. System shows an error message, "Invalid data format."
       Use case resumes at step 1.
 
 * 3a. The student does not exist in the system.
-    * 3a1. System shows an error message, "Student not found."
+  * 3a1. System shows an error message, "Student not found."
       Use case ends.
 
-**Use case: View essential data about students**
+#### Use case: View essential data about students
 
 **MSS**
 
@@ -461,14 +460,14 @@ Priorities:
 **Extensions**
 
 * 2a. The student does not exist in the system.
-    * 2a1. System shows an error message, "Student not found."
+  * 2a1. System shows an error message, "Student not found."
       Use case ends.
 
 * 2b. No essential data has been recorded for the student.
-    * 2b1. System shows a message, "No essential data available for this student."
+  * 2b1. System shows a message, "No essential data available for this student."
       Use case ends.
 
-**Use case: Delete essential data about students**
+#### Use case: Delete essential data about students
 
 **MSS**
 
@@ -482,18 +481,18 @@ Priorities:
 **Extensions**
 
 * 2a. The student does not exist in the system.
-    * 2a1. System shows an error message, "Student not found."
+  * 2a1. System shows an error message, "Student not found."
       Use case ends.
 
 * 3a. User cancels the deletion.
-    * 3a1. System aborts the deletion process.
+  * 3a1. System aborts the deletion process.
       Use case ends.
 
 * 4a. No essential data exists for the student.
-    * 4a1. System shows a message, "No essential data to delete for this student."
+  * 4a1. System shows a message, "No essential data to delete for this student."
       Use case ends.
 
-**Use case: Edit essential data about students**
+#### Use case: Edit essential data about students
 
 **MSS**
 
@@ -507,19 +506,18 @@ Priorities:
 **Extensions**
 
 * 2a. The student does not exist in the system.
-    * 2a1. System shows an error message, "Student not found."
+  * 2a1. System shows an error message, "Student not found."
       Use case ends.
 
 * 2b. The provided data is invalid.
-    * 2b1. System shows an error message, "Invalid data format."
+  * 2b1. System shows an error message, "Invalid data format."
       Use case resumes at step 1.
 
 * 4a. No changes were made to the data.
-    * 4a1. System shows a message, "No changes detected."
+  * 4a1. System shows a message, "No changes detected."
       Use case ends.
 
-
-**Use case: Search students**
+#### Use case: Search students
 
 **MSS**
 
@@ -532,10 +530,10 @@ Priorities:
 **Extensions**
 
 * 2a. No contacts match the keywords.
-    * 2a1. System shows a message, "No contacts found."
+  * 2a1. System shows a message, "No contacts found."
       Use case ends.
 
-**Use case: Sort students by grades**
+#### Use case: Sort students by grades
 
 **MSS**
 
@@ -549,10 +547,10 @@ Priorities:
 **Extensions**
 
 * 3a. No students have grades recorded.
-    * 3a1. System shows a message, "No grade data available for sorting."
+  * 3a1. System shows a message, "No grade data available for sorting."
       Use case ends.
 
-**Use case: Delete students in bulk**
+#### Use case: Delete students in bulk
 
 **MSS**
 
@@ -566,18 +564,18 @@ Priorities:
 **Extensions**
 
 * 1a. User does not select any students for deletion.
-    * 1a1. System shows a message, "No students selected for deletion."
+  * 1a1. System shows a message, "No students selected for deletion."
       Use case ends.
 
 * 2a. User cancels the deletion.
-    * 2a1. System aborts the bulk deletion process.
+  * 2a1. System aborts the bulk deletion process.
       Use case ends.
 
 * 4a. One or more of the selected students do not exist in the system.
-    * 4a1. System skips deleting non-existent students and completes deletion for valid students.
-    * 4a2. System shows a message, "Some students could not be deleted as they do not exist."
+  * 4a1. System skips deleting non-existent students and completes deletion for valid students.
+  * 4a2. System shows a message, "Some students could not be deleted as they do not exist."
 
-**Use case: Add filters to searches**
+#### Use case: Add filters to searches
 
 **MSS**
 
@@ -591,19 +589,19 @@ Priorities:
 **Extensions**
 
 * 2a. The provided filter is invalid.
-    * 2a1. System shows an error message, "Invalid filter. Please provide valid criteria."
+  * 2a1. System shows an error message, "Invalid filter. Please provide valid criteria."
       Use case resumes at step 2.
 
 * 4a. No students match the specified filters.
-    * 4a1. System shows a message, "No students found matching the filters."
+  * 4a1. System shows a message, "No students found matching the filters."
       Use case ends.
 
-- **4a. Tutor cancels the operation.**
-    - System aborts the change and returns to the previous state.
-    - System displays a message: "Operation cancelled."
-    - **Use case ends.**
+* **4a. Tutor cancels the operation.**
+  * System aborts the change and returns to the previous state.
+  * System displays a message: "Operation cancelled."
+  * **Use case ends.**
 
-**Use Case: Explore App with Sample Student Data**
+#### Use Case: Explore App with Sample Student Data
 
 **Main Success Scenario (MSS):**
 
@@ -616,7 +614,7 @@ Priorities:
 
    **Use case ends.**
 
-**Use Case: Access Help for Available Commands**
+#### Use Case: Access Help for Available Commands
 
 **Main Success Scenario (MSS):**
 
@@ -630,11 +628,11 @@ Priorities:
 
 **Extensions:**
 
-- **3a. Tutor requests help for an unsupported command.**
-    - System shows an error message: "Command not recognized. Please review the available commands."
-    - **Use case resumes at step 3.**
+* **3a. Tutor requests help for an unsupported command.**
+  * System shows an error message: "Command not recognized. Please review the available commands."
+  * **Use case resumes at step 3.**
 
-**Use Case: Bulk Import Student Data**
+#### Use Case: Bulk Import Student Data
 
 **Main Success Scenario (MSS):**
 
@@ -650,16 +648,16 @@ Priorities:
 
 **Extensions:**
 
-- **4a. File format is invalid.**
-    - System displays an error message: "Invalid file format. Please use the correct format (e.g., CSV)."
-    - **Use case resumes at step 2.**
+* **4a. File format is invalid.**
+  * System displays an error message: "Invalid file format. Please use the correct format (e.g., CSV)."
+  * **Use case resumes at step 2.**
 
-- **4b. Some student data is invalid.**
-    - System displays an error message: "Error importing [X] students due to invalid data (e.g., missing fields, invalid email format). Please correct the data and try again."
-    - System provides the option to retry the import after corrections.
-    - **Use case resumes at step 2.**
+* **4b. Some student data is invalid.**
+  * System displays an error message: "Error importing [X] students due to invalid data (e.g., missing fields, invalid email format). Please correct the data and try again."
+  * System provides the option to retry the import after corrections.
+  * **Use case resumes at step 2.**
 
-**Use Case: Export Contact List to a CSV**
+#### Use Case: Export Contact List to a CSV
 
 **Main Success Scenario (MSS):**
 
@@ -673,11 +671,11 @@ Priorities:
 
 **Extensions:**
 
-- **2a. Export fails due to file system error (e.g., permission denied).**
-    - System displays an error message: "Export failed. Please check your file permissions and try again."
-    - **Use case resumes at step 2.**
+* **2a. Export fails due to file system error (e.g., permission denied).**
+  * System displays an error message: "Export failed. Please check your file permissions and try again."
+  * **Use case resumes at step 2.**
 
-**Use Case: Merge Duplicate Student Entries**
+#### Use Case: Merge Duplicate Student Entries
 
 **Main Success Scenario (MSS):**
 
@@ -692,15 +690,15 @@ Priorities:
 
 **Extensions:**
 
-- **3a. No duplicates found.**
-    - System displays a message: "No duplicates found in the contact list."
-    - **Use case ends.**
+* **3a. No duplicates found.**
+  * System displays a message: "No duplicates found in the contact list."
+  * **Use case ends.**
 
-- **4a. Tutor cancels the merge.**
-    - System aborts the merge operation and returns to the previous screen.
-    - **Use case ends.**
+* **4a. Tutor cancels the merge.**
+  * System aborts the merge operation and returns to the previous screen.
+  * **Use case ends.**
 
-**Use Case: Filter Students by Attendance Status**
+#### Use Case: Filter Students by Attendance Status
 
 **Main Success Scenario (MSS):**
 
@@ -714,11 +712,11 @@ Priorities:
 
 **Extensions:**
 
-- **4a. No students match the selected attendance status.**
-    - System displays a message: "No students match the selected attendance status."
-    - **Use case ends.**
+* **4a. No students match the selected attendance status.**
+  * System displays a message: "No students match the selected attendance status."
+  * **Use case ends.**
 
-**Use Case: Sort Students Alphabetically**
+#### Use Case: Sort Students Alphabetically
 
 **Main Success Scenario (MSS):**
 
@@ -732,11 +730,11 @@ Priorities:
 
 **Extensions:**
 
-- **4a. Contact list is empty.**
-    - System displays a message: "No students available to sort."
-    - **Use case ends.**
+* **4a. Contact list is empty.**
+  * System displays a message: "No students available to sort."
+  * **Use case ends.**
 
-**Use Case: Add Comments to Student Profiles**
+#### Use Case: Add Comments to Student Profiles
 
 **Main Success Scenario (MSS):**
 
@@ -751,11 +749,11 @@ Priorities:
 
 **Extensions:**
 
-- **4a. Comment is empty or invalid.**
-    - System displays an error message: "Invalid comment. Please enter a valid comment."
-    - **Use case resumes at step 3.**
+* **4a. Comment is empty or invalid.**
+  * System displays an error message: "Invalid comment. Please enter a valid comment."
+  * **Use case resumes at step 3.**
 
-**Use Case: Assign Preferred Communication Methods to Parents**
+#### Use Case: Assign Preferred Communication Methods to Parents
 
 **Main Success Scenario (MSS):**
 
@@ -770,11 +768,11 @@ Priorities:
 
 **Extensions:**
 
-- **4a. No communication method selected.**
-    - System displays an error message: "Please select at least one communication method."
-    - **Use case resumes at step 3.**
+* **4a. No communication method selected.**
+  * System displays an error message: "Please select at least one communication method."
+  * **Use case resumes at step 3.**
 
-**Use Case: Flag Students with Missing Contact Details**
+#### Use Case: Flag Students with Missing Contact Details
 
 **Main Success Scenario (MSS):**
 
@@ -787,11 +785,11 @@ Priorities:
 
 **Extensions:**
 
-- **3a. No students with missing contact details.**
-    - System displays a message: "All student contact details are complete."
-    - **Use case ends.**
+* **3a. No students with missing contact details.**
+  * System displays a message: "All student contact details are complete."
+  * **Use case ends.**
 
-**Use Case: Set Communication Preferences for Individual Students**
+#### Use Case: Set Communication Preferences for Individual Students
 
 **Main Success Scenario (MSS):**
 
@@ -806,11 +804,11 @@ Priorities:
 
 **Extensions:**
 
-- **4a. No communication method selected.**
-    - System displays an error message: "Please select a communication method."
-    - **Use case resumes at step 3.**
+* **4a. No communication method selected.**
+  * System displays an error message: "Please select a communication method."
+  * **Use case resumes at step 3.**
 
-### Non-Functional Requirements
+### :fa-solid-clipboard-list: Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
@@ -818,7 +816,7 @@ Priorities:
 
 _{More to be added}_
 
-### Glossary
+### :fa-solid-circle-question: Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
