@@ -11,34 +11,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Han B1n
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/hanb1n.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/danzaseah.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/danzaseah.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/danzaseah.md)]
+[[github](https://github.com/HanB1n)]
+[[portfolio](team/HanB1n.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Developer
 
 ### Danza Seah
 
@@ -47,15 +28,35 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/DanzaSeah)]
 [[portfolio](team/danzaseah.md)]
 
+* Role: Team Lead
+* Responsibilities: UI
+
+### Dasha Sychova
+
+<img src="images/dasha3412.png" width="200px">
+
+[[github](http://github.com/dasha3412)]
+[[portfolio](team/dasha3412.md)]
+
+* Role: Developer
+* Responsibilities: UI, Documentation, Scheduling and tracking
+
+### Ricco Lim
+
+<img src="images/riccoljy.png" width="200px">
+
+[[github](http://github.com/riccoljy)]
+[[portfolio](team/riccoljy.md)]
+
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Peh Ting Xuan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/tingxuanp.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/danzaseah.md)]
+[[github](http://github.com/tingxuanp)]
+[[portfolio](team/tingxuanp.md)]
 
-* Role: Developer
+* Role: Developer, Documentation, Deliverables and deadlines
 * Responsibilities: UI
