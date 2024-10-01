@@ -307,8 +307,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | experienced user | use keyboard shortcuts                                                      | navigate the app faster                                           |
 | `*`      | sales rep        | contact my client quickly from the app                                      | avoid typing numbers repeatedly on my phone                       |
 
-*{More to be added}*
-
 ### Use cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
