@@ -280,8 +280,10 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
-
+**Value proposition**: 
+Manage and track deliveries faster than using a typical mouse/GUI driven app. 
+Plan and allocate manpower more effectively to prepare for future deliveries.
+Match with the appropriate suppliers to find products correctly.
 
 ### User stories
 
