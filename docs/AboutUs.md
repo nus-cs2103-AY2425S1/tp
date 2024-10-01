@@ -9,7 +9,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### ArtillerySun
+### Chiang Kai Jing Colin Adam
+
+<img src="images/colinac.png" width="200px">
+
+[[github](https://github.com/colinac)]
+[[portfolio](team/colinac.md)]
+
+* Role: Developer
+
+
+### Sun Weiyang
 
 <img src="images/artillerysun.png" width="200px">
 
@@ -19,36 +29,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Jane Doe
 
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/jellypenguinnn)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/jellypenguinnn)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/jellypenguinnn)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
+### Tea Li Hao
 
 <img src="images/jellypenguinnn.png" width="200px">
 
