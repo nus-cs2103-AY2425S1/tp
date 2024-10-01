@@ -35,7 +35,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](http://github.com/jinnsuke)] [[portfolio](https://www.linkedin.com/in/shoujinsugimoto/)]
 
-* Role: Developer 
+* Role: Developer
 * Responsibilities: Data
 
 ### Raviraj Talgeri
@@ -45,5 +45,5 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/johndoe)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer 
+* Role: Developer
 * Responsibilities: Dev Ops + Threading
