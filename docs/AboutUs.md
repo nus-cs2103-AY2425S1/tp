@@ -9,50 +9,51 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Jason Lek
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/sornsornah.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[github](https://github.com/sornsornah)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+* Role: Software Engineer
+* Responsibilities: Documentation
 
-### Jane Doe
+### Aditi Gawande
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/aditig0305.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/aditig0305)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Team Lead
+* Role: Developer
 * Responsibilities: UI
 
-### Johnny Doe
+### Samriddh Agarwal
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/samriddh2145.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/samriddh2145)] [[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Nihirra Kakkar
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/nihirraa.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/Nihirraa)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Nayana Mahesh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/nayanaamahesh.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](https://github.com/nayanaamahesh)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
