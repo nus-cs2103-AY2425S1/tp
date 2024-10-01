@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* Thanks to the CS2103T Teaching Team
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -262,42 +262,64 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* freelance software developers
+* value privacy 
+* self-hosting
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: manage contacts faster than a typical mouse/GUI driven app, along with privacy features.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+### User stories
 
-*{More to be added}*
+| Priority | As a …​                                         | I want to …​                                                     | So that I can…​                                                            |
+|----------|-------------------------------------------------|------------------------------------------------------------------|----------------------------------------------------------------------------|
+| `* * *`  | first-time user                                 | add contacts to my contact book                                  | store my contacts.                                                         |
+| `* * *`  | user                                            | add contacts to my contact book using only partial details       | store contacts that I may not have full information about.                 |
+| `* * *`  | user                                            | see all my contacts                                              | see and manage my contacts.                                                |
+| `* * *`  | user                                            | delete contacts                                                  | remove contacts I do not need anymore.                                     |
+| `* *`    | first-time user                                 | see sample contacts                                              | explore the apps features without adding real data.                        |
+| `* *`    | first-time user                                 | clear sample data and start fresh                                | input my real contacts securely.                                           |
+| `* *`    | first-time user                                 | view a tutorial on the app                                       | learn how to use the app quickly.                                          |
+| `* *`    | first-time user                                 | quickly access a CLI command cheat sheet                         | learn essential commands without slowing down.                             |
+| `* *`    | new user                                        | secure my contact data with a password                           | feel confident that my client information is protected.                    |
+| `* *`    | new user                                        | choose to encrypt the contact data that is stored                | ensure my client information cannot be accessed from the storage location. |
+| `* *`    | new and inexperienced user                      | undo actions like deletions (CTRL+Z)                             | recover data quickly if I make a mistake.                                  |
+| `* *`    | new and inexperienced user                      | be prompted with why an invalid command is invalid               | receive immediate and specific feedback if I type an invalid command.      |
+| `* *`    | new user                                        | open up a settings menu                                          | configure keyboard shortcuts.                                              |
+| `* *`    | returning user                                  | search contacts using partial details (name, email)              | find relevant contacts faster.                                             |
+| `* *`    | user                                            | edit contact details                                             | avoid errors when updating information.                                    |
+| `* *`    | user whose contacts span multiple projects      | tag contacts with a project or organisation name                 | organise my contacts better.                                               |
+| `* *`    | user                                            | filter contacts by project or organisation                       | quickly locate clients related to specific tasks.                          |
+| `* *`    | experienced user                                | use keyboard shortcuts to bring up the CLI                       | execute commands faster.                                                   |
+| `* *`    | experienced user                                | use keyboard shortcuts to manage contacts                        | manage my contacts faster.                                                 |
+| `* *`    | user                                            | confirm actions like deleting multiple contacts through a pop-up | avoid accidental deletions.                                                |
+| `*`      | new user                                        | import contacts from a CSV or another format (e.g. Apple's .vcf) | quickly populate my contact book without manual entry.                     |
+| `*`      | returning user                                  | customise the apps theme                                         | make my user experience more personalised as I use the app more.           |
+| `*`      | user                                            | multi-select contacts for deletion                               | manage my list more efficiently.                                           |
+| `*`      | frequent user                                   | navigate command history with arrow keys                         | quickly fill the search field and modify and execute previous commands.    |
+| `*`      | power user                                      | export my contact list to CSV or JSON format                     | use it in other tools or projects.                                         |
+| `*`      | programmer                                      | configure my shortcuts to be similar to my IDE shortcuts         | switch between my IDE and CipherContacts more effectively.                 |
+| `*`      | frequent user                                   | pin important contacts                                           | ensure they appear at the top of my list for easy access.                  |
+| `*`      | long-time user                                  | sync contacts with my mobile app or local contacts               | manage them across devices.                                                |
+| `*`      | user managing contacts across multiple projects | create custom fields for each contact                            | store specific information relevant to different clients or tasks.         |
+| `*`      | long time user                                  | archive old contacts                                             | clean up my contact book without having to delete contacts.                |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `VBook` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: Delete a person**
 
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  VBook shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  VBook deletes the person
 
     Use case ends.
 
@@ -309,22 +331,90 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. VBook shows an error message.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: Add a contact**
+
+**MSS**
+
+1. User requests to add a contact by providing all required details.
+2. VBook adds the contact to the list.
+3. Use case ends.
+
+**Extensions**
+
+* 1a. The name provided is invalid (empty or contains invalid characters).
+    * 1a1. VBook shows an error message: "Please input a valid name."
+    * Use case resumes at step 1.
+
+* 1b. The email provided is invalid (not in the correct format).
+    * 1b1. VBook shows an error message: "Please input a valid email."
+    * Use case resumes at step 1.
+
+* 1c. The phone number provided is invalid (does not match the expected regex pattern).
+    * 1c1. VBook shows an error message: "Please input a valid phone number."
+    * Use case resumes at step 1.
+
+* 1d. The location provided is invalid (contains forbidden special characters).
+    * 1d1. VBook shows an error message: "Please input a valid location."
+    * Use case resumes at step 1.
+
+* 2a. The contact already exists in the system.
+    * 2a1. VBook prompts: "You already have a contact with these details: Name: \<name\>, Email: \<email\>, Phone Number: \<number\>, Location: \<location\>. Are you sure you want to add this contact? (Y/N)"
+    * 2a2. User chooses to add the contact anyway.
+    * Use case resumes at step 2.
+
+**Use case: View contacts**
+
+**MSS**
+
+1. User requests to view the list of contacts.
+2. VBook shows the list of all contacts.
+3. Use case ends.
+
+**Extensions**
+
+* 2a. There are no contacts in the list.
+  * Use case ends.
+
+* 2b. An error occurs while trying to fetch the list of contacts.
+  * 2b1. VBook shows an error message: "Error listing contacts: \<error message\>."
+  * Use case ends.
+
+**Use case: Delete a contact by ID**
+
+**MSS**
+
+1. User requests to delete a contact by specifying the contact ID.
+2. VBook deletes the contact from the list.
+3. Use case ends.
+
+**Extensions**
+
+* 1a. The contact ID provided is invalid (non-numeric or empty).
+  * 1a1. VBook shows an error message: "Please input a valid ID."
+  * Use case resumes at step 1.
+
+* 2a. The contact with the given ID does not exist.
+  * 2a1. VBook shows an error message: "Error deleting contact: Contact not found."
+  * Use case resumes at step 1.
+
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. All commands should work within 1 second for a contact book of average size.
 
 *{More to be added}*
 
 ### Glossary
 
+* **Above average typing speed**: 120 words per minute
+* **Average Size**: 150 persons
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 
@@ -334,10 +424,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
+ **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
-</div>
 
 ### Launch and shutdown
 
