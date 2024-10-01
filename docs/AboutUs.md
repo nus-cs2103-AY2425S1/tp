@@ -29,6 +29,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Documentation
 
+### Rayner Lim Fang Yuh
+
+<img src="images/rayray39.png" width="200px">
+
+[[github](http://github.com/rayray39)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities: UI
+
 ### Rachael Chan
 <img src="images/rachael-chan.png" width="200px">
 
@@ -37,3 +47,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Software Engineer
 * Responsibilities: In charge of `Model`
+
