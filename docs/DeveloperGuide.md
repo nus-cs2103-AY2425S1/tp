@@ -287,44 +287,44 @@ Moreover, they can keep track of house visits via an events management system.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                                | So that I can…​                                                          |
-|----------|--------------------------------------------|---------------------------------------------|--------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions                      | refer to instructions when I forget how to use the App                   |
-| `* * *`  | user                                       | add a contact with their information        | I can view them later                                                    |
-| `* * *`  | user                                       | delete a person                             | remove entries that I no longer need                                     |
-| `* * *`  | user                                       | use a search bar to find my contact         | locate details of persons without having to go through the entire list   |
-| `* * *`  | user                                       | edit current contact details                | keep details of persons updated                                          |
-| `* * *`  | user                                       | search via tags                             | filter by different groups of people                                     |
-| `* * *`  | user                                       | partially fill contacts                     | add people that do not want to give me their full information            |
-| `* * *`  | user                                       | find contacts using their names             | I can view their contact details easily                                  |
-| `* *`    | user                                       | hide private contact details                | minimize chance of someone else seeing them by accident                  |
-| `* *`    | user                                       | keep track of client preferences            | use tags to categorize clients based on their interests                  |
-| `* *`    | user                                       | set reminders linked to contacts            | follow up with clients on time                                           |
-| `* *`    | user                                       | have an undo feature                        | prevent accidental loss of information when editing or deleting contacts |
-| `* *`    | new user                                   | see a guide on features                     | understand how to use the application                                    |
-| `* *`    | beginner                                   | see a help function for commands            | find guidance on command usage                                           |
-| `* *`    | user                                       | press [TAB] for command auto-complete       | save time typing full commands                                           |
-| `* *`    | user                                       | find commands by typing part of them        | remember commands more easily                                            |
-| `* *`    | user                                       | press [TAB] for attribute suggestions       | streamline command entry                                                 |
-| `* *`    | user                                       | see multiple attributes in command box      | know available commands without help guide                               |
-| `* *`    | user                                       | press [TAB] for value suggestions           | simplify command input                                                   |
-| `* *`    | user                                       | have colour highlighting for attributes     | enhance visibility of input                                              |
-| `* *`    | user                                       | see different colours for attributes        | improve organization of information                                      |
-| `* *`    | user                                       | see clear error messages                    | quickly identify input issues                                            |
-| `* *`    | user                                       | see exact reason for errors                 | input corrections efficiently                                            |
-| `* *`    | user with many contacts                    | tag certain contacts to show at the top     | easily access important contacts                                         |
-| `* *`    | user with a busy schedule                  | set reminders and see upcoming events       | stay on track with responsibilities                                      |
-| `* *`    | forgetful user                             | quickly reuse last searches                 | trace back activity efficiently                                          |
-| `* *`    | new user                                   | explore all features with a guide           | familiarize with functionalities                                         |
-| `* *`    | user with many things to remember          | add remarks/notes to users                  | recall important details for contacts                                    |
-| `* *`    | user with different friend groups          | manage all my tags                          | better organize contacts                                                 |
-| `* *`    | user who likes to categorise everything    | choose different colours for tags           | visually distinguish categories                                          |
-| `* *`    | impatient user                             | find and sort multiple tags at once         | speed up the searching process                                           |
-| `* *`    | user                                       | sort contacts in different ways             | view contacts flexibly                                                   |
-| `* *`    | user                                       | add and customize my own tags               | personalize the address book                                             |
-| `* *`    | user                                       | link property listings to specific contacts | market units effectively to the right clients                            |
-| `* *`    | user                                       | hide private contact details                | minimize chance of someone else seeing them by accident                  |
-| `*`      | user with many persons in the address book | sort persons by name                        | locate a person easily                                                   |
+| Priority | As a …​                                    | I want to …​                                  | So that I can…​                                                          |
+|----------|--------------------------------------------|-----------------------------------------------|--------------------------------------------------------------------------|
+| `* * *`  | new user                                   | see usage instructions                        | refer to instructions when I forget how to use the App                   |
+| `* * *`  | user                                       | add a contact with their information          | I can view them later                                                    |
+| `* * *`  | user                                       | delete a person                               | remove entries that I no longer need                                     |
+| `* * *`  | user                                       | use a search bar to find my contact           | locate details of persons without having to go through the entire list   |
+| `* * *`  | user                                       | edit current contact details                  | keep details of persons updated                                          |
+| `* * *`  | user                                       | search via tags                               | filter by different groups of people                                     |
+| `* * *`  | user                                       | partially fill contacts                       | add people that do not want to give me their full information            |
+| `* * *`  | user                                       | find contacts using their names               | I can view their contact details easily                                  |
+| `* *`    | user                                       | hide private contact details                  | minimize chance of someone else seeing them by accident                  |
+| `* *`    | user                                       | keep track of client preferences              | use tags to categorize clients based on their interests                  |
+| `* *`    | user                                       | set reminders linked to contacts              | follow up with clients on time                                           |
+| `* *`    | user                                       | have an undo feature                          | prevent accidental loss of information when editing or deleting contacts |
+| `* *`    | new user                                   | see a guide on features                       | understand how to use the application                                    |
+| `* *`    | beginner                                   | see a help function for commands              | find guidance on command usage                                           |
+| `* *`    | user                                       | suggest commands to user with auto-complete   | save time typing full commands                                           |
+| `* *`    | user                                       | find commands by typing part of them          | remember commands more easily                                            |
+| `* *`    | user                                       | press [TAB] for attribute suggestions         | streamline command entry                                                 |
+| `* *`    | user                                       | see multiple attributes in command box        | know available commands without help guide                               |
+| `* *`    | user                                       | press [TAB] for value suggestions             | simplify command input                                                   |
+| `* *`    | user                                       | have colour highlighting for attributes       | spot different attributes easily                                                                         |
+| `* *`    | user                                       | see different colours for attributes          | improve organization of information                                      |
+| `* *`    | user                                       | see clear error messages                      | quickly identify input issues                                            |
+| `* *`    | user                                       | see exact reason for errors                   | input corrections efficiently                                            |
+| `* *`    | user with many contacts                    | tag certain contacts to show at the top       | easily access important contacts                                         |
+| `* *`    | user with a busy schedule                  | set reminders and see upcoming events         | stay on track with responsibilities                                      |
+| `* *`    | forgetful user                             | quickly reuse last searches                   | trace back activity efficiently                                          |
+| `* *`    | new user                                   | explore all features with a guide             | familiarize with functionalities                                         |
+| `* *`    | user with many things to remember          | add remarks/notes to users                    | recall important details for contacts                                    |
+| `* *`    | user with different friend groups          | manage all my tags                            | better organize contacts                                                 |
+| `* *`    | user who likes to categorise everything    | choose different colours for tags             | visually distinguish categories                                          |
+| `* *`    | impatient user                             | find and sort multiple tags at once           | speed up the searching process                                           |
+| `* *`    | user                                       | sort contacts in different ways               | view contacts flexibly                                                   |
+| `* *`    | user                                       | add and customize my own tags                 | personalize the address book                                             |
+| `* *`    | user                                       | link property listings to specific contacts   | market units effectively to the right clients                            |
+| `* *`    | user                                       | hide private contact details                  | minimize chance of someone else seeing them by accident                  |
+| `*`      | user with many persons in the address book | sort persons by name                          | locate a person easily                                                   |
 
 *{More to be added}*
 
