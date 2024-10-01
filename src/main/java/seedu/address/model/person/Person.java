@@ -103,15 +103,14 @@ public class Person {
         return Objects.hash(name, phone, email, address, tags);
     }
 
-    @Override
-    public String toString() {
+
+    public ToStringBuilder toStringBuilder() {
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("tags", tags)
-                .toString();
+                .add("tags", tags);
     }
 
 }
