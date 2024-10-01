@@ -14,7 +14,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/al-ez.png" width="200px">
 
 [[github](https://github.com/Al-ez)]
-[[portfolio](team/alez.md)]
+[[portfolio](team/al-ez.md)]
 
 * Role: Developer
 * Responsibilities: [Backend, Testing]
