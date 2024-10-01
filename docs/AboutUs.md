@@ -1,61 +1,53 @@
----
-  layout: default.md
-  title: "About Us"
----
-
 # About Us
-
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
 You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
 
-<img src="images/johndoe.png" width="200px">
+### Althea Tan
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+<img src="images/althea28.png" width="200px">
 
-* Role: Project Advisor
+[[github](https://github.com/althea28)]
 
-### Jane Doe
+* Role: Developer
+* Responsibilities: Deliverables and deadlines, Documentation, UI
 
-<img src="images/johndoe.png" width="200px">
+### Jian Yi
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+<img src="images/jian7490.png" width="200px">
 
+[[github](http://github.com/jian7490)]
+[[portfolio](team/jian7490.md)]
+
+* Role: Developer
+* Responsibilities: Models + Code quality
+
+### Emmanuel Er
+<img src="images/emmannyyy.png" width="200px">
+
+[[github](http://github.com/emmannyyy)]
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### lm-44
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/lm-44.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/lm-44)]
+[[portfolio](team/lm-44.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Integration, Scheduling and tracking, In charge of Logic
 
-### James Doe
+### Avril Moh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/avrilmohh.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/avrilmohh)]
+[[portfolio](team/avrilmohh.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Testing, In charge of Main and Commons
