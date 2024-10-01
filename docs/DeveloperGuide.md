@@ -289,56 +289,56 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
 
 ### First time user
 
-| Role                         | Function                                                   | Benefit                                                             | Priority |
-|------------------------------|------------------------------------------------------------|---------------------------------------------------------------------|----------|
-| Potential user exploring app  | Have a guided tour showing the functions upon first opening | I can have a better idea and navigate easily when using the app.     | 3        |
-| Potential user exploring app  | See the test data inside the app (i.e. address book release)| I can easily see how the app functions when it is in use.            | 3        |
-| New user to the app           | Purge all test data                                        | I can start writing in my own data                                   | 3        |
+| As a                         | I want to                                                    | So that I can                                              | Priority |
+|------------------------------|--------------------------------------------------------------|------------------------------------------------------------|----------|
+| Potential user exploring app | Have a guided tour showing the functions upon first opening  | Have a better idea and navigate easily when using the app. | 3        |
+| Potential user exploring app | See the test data inside the app (i.e. address book release) | Easily see how the app functions when it is in use.        | 3        |
+| New user to the app          | Purge all test data                                          | Start writing in my own data                               | 3        |
 
 ### Beginner to the software
 
-| Role  | Function                                                   | Benefit                                                        | Priority |
-|-------|------------------------------------------------------------|----------------------------------------------------------------|----------|
-| Tutor | Add and delete my students' contacts                       | I keep track of my students                                     | MVP      |
-| Tutor | Add and delete my students' guardians' contacts            | I can keep track of my students’ guardians                      | 2        |
-| Tutor | Keep track of the house address of a student for home tuition | I can easily go to their house when their tuition starts         | MVP      |
-| Tutor | Keep track of Zoom meeting link of a student for online tuition | I can easily go to the online meeting room when tuition starts   | MVP      |
-| Tutor | Store what was done in the lessons                         | I can track what was done and plan for next lessons easier       | 2        |
-| Tutor | Create and delete lesson slots in my schedule              | I can keep track of my lessons                                  | MVP      |
-| Tutor | List all my lesson slots in my schedule                    | I can keep track of my lessons                                  | MVP      |
-| Tutor | List all my contacts                                       | I can keep track of my contacts                                 | MVP      |
-| Tutor | Categorize my students based on subjects or grade levels   | I know what type of lesson it is                                | 2        |
-| Tutor | Keep track of my students' exam dates                      | I can prepare my students adequately by then                    | 2        |
-| Tutor | Edit student details (address, fees, exam, subject, grade level, etc.) | I can ensure my students' details are up to date                | 2        |
+| As a  | I want to                                                              | So that I can                                            | Priority |
+|-------|------------------------------------------------------------------------|----------------------------------------------------------|----------|
+| Tutor | Add and delete my students' contacts                                   | Keep track of my students                                | MVP      |
+| Tutor | Add and delete my students' guardians' contacts                        | Keep track of my students’ guardians                     | 2        |
+| Tutor | Keep track of the house address of a student for home tuition          | Easily go to their house when their tuition starts       | MVP      |
+| Tutor | Keep track of Zoom meeting link of a student for online tuition        | Easily go to the online meeting room when tuition starts | MVP      |
+| Tutor | Store what was done in the lessons                                     | Track what was done and plan for next lessons easier     | 2        |
+| Tutor | Create and delete lesson slots in my schedule                          | Keep track of my lessons                                 | MVP      |
+| Tutor | List all my lesson slots in my schedule                                | Keep track of my lessons                                 | MVP      |
+| Tutor | List all my contacts                                                   | Keep track of my contacts                                | MVP      |
+| Tutor | Categorize my students based on subjects or grade levels               | Know what type of lesson it is                           | 2        |
+| Tutor | Keep track of my students' exam dates                                  | Prepare my students adequately by then                   | 2        |
+| Tutor | Edit student details (address, fees, exam, subject, grade level, etc.) | Ensure my students' details are up to date               | 2        |
 
 ### A little bit familiar with the software
 
-| Role  | Function                                                   | Benefit                                                                    | Priority |
-|-------|------------------------------------------------------------|----------------------------------------------------------------------------|----------|
-| Tutor | Mark a lesson as completed or cancelled                    | I can maintain accurate records of attendance and lesson statuses.          | 2        |
-| Tutor | Be able to make my lesson slots repeat every week           | I don't have to create the same lesson slot every week                      | 2        |
-| Tutor | Keep track of my students' homework (i.e., done status, deadline) | I can track the progress of my students and keep them accountable           | 2        |
-| Tutor | Change the lesson slot just for that week/all subsequent weeks | I can easily reschedule lessons                                             | 2        |
-| Tutor | Know if I have accidentally scheduled a class at a conflicting time slot | I do not have to trouble students to reschedule after agreeing on a time slot | 2        |
-| Tutor | Keep track of when and how much each student/guardian needs to pay | I can collect my fees timely and accurately                                 | 2        |
-| Tutor | Tag students under their guardian                          | If a paying guardian has multiple children having lessons under me, I can track total fees to collect | 2        |
-| Tutor | Automatically update the amount of fee I collect after a lesson | I do not have to manually update and track fees                             | 2        |
-| Tutor | Batch delete all scheduled lessons with a student           | When the student no longer needs tuition, I can remove all their classes     | 2        |
+| As a  | I want to                                                                | So that I can                                                        | Priority |
+|-------|--------------------------------------------------------------------------|----------------------------------------------------------------------|----------|
+| Tutor | Mark a lesson as completed or cancelled                                  | Maintain accurate records of attendance and lesson statuses.         | 2        |
+| Tutor | Be able to make my lesson slots repeat every week                        | Avoid creating the same lesson slot every week                       | 2        |
+| Tutor | Keep track of my students' homework (i.e., done status, deadline)        | Track the progress of my students and keep them accountable          | 2        |
+| Tutor | Change the lesson slot just for that week/all subsequent weeks           | Easily reschedule lessons                                            | 2        |
+| Tutor | Know if I have accidentally scheduled a class at a conflicting time slot | Avoid troubling students to reschedule after agreeing on a time slot | 2        |
+| Tutor | Keep track of when and how much each student/guardian needs to pay       | Collect my fees timely and accurately                                | 2        |
+| Tutor | Tag students under their guardian                                        | Track total fees to collect                                          | 2        |
+| Tutor | Automatically update the amount of fee I collect after a lesson          | Avoid manually update and track fees                                 | 2        |
+| Tutor | Batch delete all scheduled lessons with a student                        | Remove all students' classes                                          | 2        |
 
 ### (Expert user)
 
-| Role  | Function                                                   | Benefit                                                        | Priority |
-|-------|------------------------------------------------------------|----------------------------------------------------------------|----------|
-| Tutor | Export student progress reports (compiled lesson descriptions) | I can provide detailed updates to their guardians every term/semester | 3        |
-| Tutor | Set reminders for upcoming lessons                         | I am always prepared for a lesson and will not miss any         | 3        |
-| Tutor | Set reminders to collect payment                           | I can collect my fees on time                                   | 3        |
-| Tutor | View a history of all my previous lessons with each student | I can reference past lessons and track long-term progress       | 3        |
-| Tutor | Autofill commands with what is expected next               | I don't have to re-type long commands                           | 3        |
-| Tutor | Export previous years' data into a file                    | I can manage each year separately and not overcrowd my data     | 3        |
-| Tutor | Generate monthly or weekly reports of my hours worked/earnings | I can track my productivity and workload                        | 3        |
+| As a  | I want to                                                                | So that I can                                                                            | Priority |
+|-------|--------------------------------------------------------------------------|------------------------------------------------------------------------------------------|----------|
+| Tutor | Export student progress reports (compiled lesson descriptions)           | I can provide detailed updates to their guardians every term/semester                    | 3        |
+| Tutor | Set reminders for upcoming lessons                                       | I am always prepared for a lesson and will not miss any                                  | 3        |
+| Tutor | Set reminders to collect payment                                         | I can collect my fees on time                                                            | 3        |
+| Tutor | View a history of all my previous lessons with each student              | I can reference past lessons and track long-term progress                                | 3        |
+| Tutor | Autofill commands with what is expected next                             | I don't have to re-type long commands                                                    | 3        |
+| Tutor | Export previous years' data into a file                                  | I can manage each year separately and not overcrowd my data                              | 3        |
+| Tutor | Generate monthly or weekly reports of my hours worked/earnings           | I can track my productivity and workload                                                 | 3        |
 | Tutor | Know what I need to bring/prepare for all my lessons in the upcoming day | I can adequately prepare for each lesson and ensure my students have necessary materials | 3        |
-| Tutor | Tag various students under the same lesson slot for group lessons | I can cater to different lesson types and optimize time         | 3        |
-| Tutor | Manage multiple locations for students                     | I can adjust if students have multiple locations for tuition    | 3        |
+| Tutor | Tag various students under the same lesson slot for group lessons        | I can cater to different lesson types and optimize time                                  | 3        |
+| Tutor | Manage multiple locations for students                                   | I can adjust if students have multiple locations for tuition                             | 3        |
 
 ### Use cases
 
