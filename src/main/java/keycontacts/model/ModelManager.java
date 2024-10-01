@@ -19,25 +19,25 @@ import keycontacts.model.student.Student;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final StudentDirectory studentDirectory;
     private final UserPrefs userPrefs;
     private final FilteredList<Student> filteredStudents;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given studentDirectory and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyStudentDirectory studentDirectory, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(studentDirectory, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with student directory: " + studentDirectory + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.studentDirectory = new StudentDirectory(studentDirectory);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredStudents = new FilteredList<>(this.addressBook.getStudentList());
+        filteredStudents = new FilteredList<>(this.studentDirectory.getStudentList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new StudentDirectory(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -65,42 +65,42 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getStudentDirectoryFilePath() {
+        return userPrefs.getStudentDirectoryFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setStudentDirectoryFilePath(Path studentDirectoryFilePath) {
+        requireNonNull(studentDirectoryFilePath);
+        userPrefs.setStudentDirectoryFilePath(studentDirectoryFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== StudentDirectory ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setStudentDirectory(ReadOnlyStudentDirectory studentDirectory) {
+        this.studentDirectory.resetData(studentDirectory);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyStudentDirectory getStudentDirectory() {
+        return studentDirectory;
     }
 
     @Override
     public boolean hasStudent(Student student) {
         requireNonNull(student);
-        return addressBook.hasStudent(student);
+        return studentDirectory.hasStudent(student);
     }
 
     @Override
     public void deleteStudent(Student target) {
-        addressBook.removeStudent(target);
+        studentDirectory.removeStudent(target);
     }
 
     @Override
     public void addStudent(Student student) {
-        addressBook.addStudent(student);
+        studentDirectory.addStudent(student);
         updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
     }
 
@@ -108,14 +108,14 @@ public class ModelManager implements Model {
     public void setStudent(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
 
-        addressBook.setStudent(target, editedStudent);
+        studentDirectory.setStudent(target, editedStudent);
     }
 
     //=========== Filtered Student List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Student} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedStudentDirectory}
      */
     @Override
     public ObservableList<Student> getFilteredStudentList() {
@@ -140,7 +140,7 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
+        return studentDirectory.equals(otherModelManager.studentDirectory)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredStudents.equals(otherModelManager.filteredStudents);
     }

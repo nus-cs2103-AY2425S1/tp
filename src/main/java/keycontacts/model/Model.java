@@ -35,45 +35,45 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' student directory file path.
      */
-    Path getAddressBookFilePath();
+    Path getStudentDirectoryFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' student directory file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setStudentDirectoryFilePath(Path studentDirectoryFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces student directory data with the data in {@code studentDirectory}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setStudentDirectory(ReadOnlyStudentDirectory studentDirectory);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the StudentDirectory */
+    ReadOnlyStudentDirectory getStudentDirectory();
 
     /**
-     * Returns true if a student with the same identity as {@code student} exists in the address book.
+     * Returns true if a student with the same identity as {@code student} exists in the student directory.
      */
     boolean hasStudent(Student student);
 
     /**
      * Deletes the given student.
-     * The student must exist in the address book.
+     * The student must exist in the student directory.
      */
     void deleteStudent(Student target);
 
     /**
      * Adds the given student.
-     * {@code student} must not already exist in the address book.
+     * {@code student} must not already exist in the student directory.
      */
     void addStudent(Student student);
 
     /**
      * Replaces the given student {@code target} with {@code editedStudent}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in the student directory.
      * The student identity of {@code editedStudent} must not be the same
-     * as another existing student in the address book.
+     * as another existing student in the directory.
      */
     void setStudent(Student target, Student editedStudent);
 

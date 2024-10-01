@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import keycontacts.model.AddressBook;
-import keycontacts.model.ReadOnlyAddressBook;
+import keycontacts.model.ReadOnlyStudentDirectory;
+import keycontacts.model.StudentDirectory;
 import keycontacts.model.student.Address;
 import keycontacts.model.student.Email;
 import keycontacts.model.student.Name;
@@ -14,7 +14,7 @@ import keycontacts.model.student.Student;
 import keycontacts.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code StudentDirectory} with sample data.
  */
 public class SampleDataUtil {
     public static Student[] getSampleStudents() {
@@ -40,12 +40,12 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+    public static ReadOnlyStudentDirectory getSampleStudentDirectory() {
+        StudentDirectory sampleSd = new StudentDirectory();
         for (Student sampleStudent : getSampleStudents()) {
-            sampleAb.addStudent(sampleStudent);
+            sampleSd.addStudent(sampleStudent);
         }
-        return sampleAb;
+        return sampleSd;
     }
 
     /**

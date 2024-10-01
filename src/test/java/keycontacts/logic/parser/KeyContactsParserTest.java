@@ -29,9 +29,9 @@ import keycontacts.testutil.EditStudentDescriptorBuilder;
 import keycontacts.testutil.StudentBuilder;
 import keycontacts.testutil.StudentUtil;
 
-public class AddressBookParserTest {
+public class KeyContactsParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final KeyContactsParser parser = new KeyContactsParser();
 
     @Test
     public void parseCommand_add() throws Exception {

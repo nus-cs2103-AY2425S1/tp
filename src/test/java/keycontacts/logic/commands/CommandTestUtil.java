@@ -15,8 +15,8 @@ import java.util.List;
 
 import keycontacts.commons.core.index.Index;
 import keycontacts.logic.commands.exceptions.CommandException;
-import keycontacts.model.AddressBook;
 import keycontacts.model.Model;
+import keycontacts.model.StudentDirectory;
 import keycontacts.model.student.NameContainsKeywordsPredicate;
 import keycontacts.model.student.Student;
 import keycontacts.testutil.EditStudentDescriptorBuilder;
@@ -99,21 +99,21 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the address book, filtered student list and selected student in {@code actualModel} remain unchanged
+     * - the student directory, filtered student list and selected student in {@code actualModel} remain unchanged
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+        StudentDirectory expectedStudentDirectory = new StudentDirectory(actualModel.getStudentDirectory());
         List<Student> expectedFilteredList = new ArrayList<>(actualModel.getFilteredStudentList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedAddressBook, actualModel.getAddressBook());
+        assertEquals(expectedStudentDirectory, actualModel.getStudentDirectory());
         assertEquals(expectedFilteredList, actualModel.getFilteredStudentList());
     }
     /**
      * Updates {@code model}'s filtered list to show only the student at the given {@code targetIndex} in the
-     * {@code model}'s address book.
+     * {@code model}'s student directory.
      */
     public static void showStudentAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredStudentList().size());

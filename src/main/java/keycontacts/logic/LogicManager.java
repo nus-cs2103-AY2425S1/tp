@@ -11,10 +11,10 @@ import keycontacts.commons.core.LogsCenter;
 import keycontacts.logic.commands.Command;
 import keycontacts.logic.commands.CommandResult;
 import keycontacts.logic.commands.exceptions.CommandException;
-import keycontacts.logic.parser.AddressBookParser;
+import keycontacts.logic.parser.KeyContactsParser;
 import keycontacts.logic.parser.exceptions.ParseException;
 import keycontacts.model.Model;
-import keycontacts.model.ReadOnlyAddressBook;
+import keycontacts.model.ReadOnlyStudentDirectory;
 import keycontacts.model.student.Student;
 import keycontacts.storage.Storage;
 
@@ -31,7 +31,7 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final AddressBookParser addressBookParser;
+    private final KeyContactsParser keyContactsParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -39,7 +39,7 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new AddressBookParser();
+        keyContactsParser = new KeyContactsParser();
     }
 
     @Override
@@ -47,11 +47,11 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
+        Command command = keyContactsParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         try {
-            storage.saveAddressBook(model.getAddressBook());
+            storage.saveStudentDirectory(model.getStudentDirectory());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
@@ -62,8 +62,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return model.getAddressBook();
+    public ReadOnlyStudentDirectory getStudentDirectory() {
+        return model.getStudentDirectory();
     }
 
     @Override
@@ -72,8 +72,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+    public Path getStudentDirectoryFilePath() {
+        return model.getStudentDirectoryFilePath();
     }
 
     @Override

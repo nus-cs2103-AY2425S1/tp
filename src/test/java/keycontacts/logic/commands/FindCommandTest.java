@@ -5,7 +5,7 @@ import static keycontacts.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static keycontacts.testutil.TypicalStudents.CARL;
 import static keycontacts.testutil.TypicalStudents.ELLE;
 import static keycontacts.testutil.TypicalStudents.FIONA;
-import static keycontacts.testutil.TypicalStudents.getTypicalAddressBook;
+import static keycontacts.testutil.TypicalStudents.getTypicalStudentDirectory;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -24,8 +24,8 @@ import keycontacts.model.student.NameContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalStudentDirectory(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalStudentDirectory(), new UserPrefs());
 
     @Test
     public void equals() {

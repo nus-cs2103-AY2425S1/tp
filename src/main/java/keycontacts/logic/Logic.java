@@ -8,7 +8,7 @@ import keycontacts.logic.commands.CommandResult;
 import keycontacts.logic.commands.exceptions.CommandException;
 import keycontacts.logic.parser.exceptions.ParseException;
 import keycontacts.model.Model;
-import keycontacts.model.ReadOnlyAddressBook;
+import keycontacts.model.ReadOnlyStudentDirectory;
 import keycontacts.model.student.Student;
 
 /**
@@ -25,11 +25,11 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the AddressBook.
+     * Returns the StudentDirectory.
      *
-     * @see Model#getAddressBook()
+     * @see Model#getStudentDirectory()
      */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyStudentDirectory getStudentDirectory();
 
     /** Returns an unmodifiable view of the filtered list of students */
     ObservableList<Student> getFilteredStudentList();
@@ -37,7 +37,7 @@ public interface Logic {
     /**
      * Returns the user prefs' address book file path.
      */
-    Path getAddressBookFilePath();
+    Path getStudentDirectoryFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

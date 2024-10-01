@@ -4,9 +4,9 @@ import javafx.collections.ObservableList;
 import keycontacts.model.student.Student;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of a student directory.
  */
-public interface ReadOnlyAddressBook {
+public interface ReadOnlyStudentDirectory {
 
     /**
      * Returns an unmodifiable view of the students list.

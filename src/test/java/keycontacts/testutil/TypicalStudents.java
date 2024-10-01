@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import keycontacts.model.AddressBook;
+import keycontacts.model.StudentDirectory;
 import keycontacts.model.student.Student;
 
 /**
@@ -60,14 +60,14 @@ public class TypicalStudents {
     private TypicalStudents() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical students.
+     * Returns a {@code StudentDirectory} with all the typical students.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static StudentDirectory getTypicalStudentDirectory() {
+        StudentDirectory sd = new StudentDirectory();
         for (Student student : getTypicalStudents()) {
-            ab.addStudent(student);
+            sd.addStudent(student);
         }
-        return ab;
+        return sd;
     }
 
     public static List<Student> getTypicalStudents() {

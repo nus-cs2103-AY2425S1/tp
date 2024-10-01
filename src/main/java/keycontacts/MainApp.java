@@ -15,18 +15,18 @@ import keycontacts.commons.util.ConfigUtil;
 import keycontacts.commons.util.StringUtil;
 import keycontacts.logic.Logic;
 import keycontacts.logic.LogicManager;
-import keycontacts.model.AddressBook;
 import keycontacts.model.Model;
 import keycontacts.model.ModelManager;
-import keycontacts.model.ReadOnlyAddressBook;
+import keycontacts.model.ReadOnlyStudentDirectory;
 import keycontacts.model.ReadOnlyUserPrefs;
+import keycontacts.model.StudentDirectory;
 import keycontacts.model.UserPrefs;
 import keycontacts.model.util.SampleDataUtil;
-import keycontacts.storage.AddressBookStorage;
-import keycontacts.storage.JsonAddressBookStorage;
+import keycontacts.storage.JsonStudentDirectoryStorage;
 import keycontacts.storage.JsonUserPrefsStorage;
 import keycontacts.storage.Storage;
 import keycontacts.storage.StorageManager;
+import keycontacts.storage.StudentDirectoryStorage;
 import keycontacts.storage.UserPrefsStorage;
 import keycontacts.ui.Ui;
 import keycontacts.ui.UiManager;
@@ -48,7 +48,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing KeyContacts ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -57,8 +57,9 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StudentDirectoryStorage studentDirectoryStorage =
+                new JsonStudentDirectoryStorage(userPrefs.getStudentDirectoryFilePath());
+        storage = new StorageManager(studentDirectoryStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -68,26 +69,28 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
-     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
-     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
+     * Returns a {@code ModelManager} with the data from {@code storage}'s {@code studentDirectory}
+     * and {@code userPrefs}. <br>
+     * The data from the sample student directory will be used instead if {@code storage}'s {@code studentDirectory}
+     * is not found, or an empty student directory will be used instead if errors occur when reading {@code storage}'s
+     * {@code studentDirectory}.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        logger.info("Using data file : " + storage.getAddressBookFilePath());
+        logger.info("Using data file : " + storage.getStudentDirectoryFilePath());
 
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyStudentDirectory> studentDirectoryOptional;
+        ReadOnlyStudentDirectory initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Creating a new data file " + storage.getAddressBookFilePath()
-                        + " populated with a sample AddressBook.");
+            studentDirectoryOptional = storage.readStudentDirectory();
+            if (!studentDirectoryOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getStudentDirectoryFilePath()
+                        + " populated with a sample student directory.");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = studentDirectoryOptional.orElseGet(SampleDataUtil::getSampleStudentDirectory);
         } catch (DataLoadingException e) {
-            logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
-                    + " Will be starting with an empty AddressBook.");
-            initialData = new AddressBook();
+            logger.warning("Data file at " + storage.getStudentDirectoryFilePath() + " could not be loaded."
+                    + " Will be starting with an empty student directory.");
+            initialData = new StudentDirectory();
         }
 
         return new ModelManager(initialData, userPrefs);
@@ -170,13 +173,13 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting KeyContacts " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping AddressBook ] =============================");
+        logger.info("============================ [ Stopping KeyContacts ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {

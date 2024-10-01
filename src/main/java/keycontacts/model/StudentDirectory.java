@@ -10,10 +10,10 @@ import keycontacts.model.student.Student;
 import keycontacts.model.student.UniqueStudentList;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the student directory level.
  * Duplicates are not allowed (by .isSameStudent comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class StudentDirectory implements ReadOnlyStudentDirectory {
 
     private final UniqueStudentList students;
 
@@ -28,12 +28,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         students = new UniqueStudentList();
     }
 
-    public AddressBook() {}
+    public StudentDirectory() {}
 
     /**
-     * Creates an AddressBook using the Students in the {@code toBeCopied}
+     * Creates a StudentDirectory using the Students in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public StudentDirectory(ReadOnlyStudentDirectory toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -49,9 +49,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code StudentDirectory} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyStudentDirectory newData) {
         requireNonNull(newData);
 
         setStudents(newData.getStudentList());
@@ -88,7 +88,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
+     * Removes {@code key} from this {@code StudentDirectory}.
      * {@code key} must exist in the address book.
      */
     public void removeStudent(Student key) {
@@ -116,11 +116,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddressBook)) {
+        if (!(other instanceof StudentDirectory)) {
             return false;
         }
 
-        AddressBook otherAddressBook = (AddressBook) other;
+        StudentDirectory otherAddressBook = (StudentDirectory) other;
         return students.equals(otherAddressBook.students);
     }
 

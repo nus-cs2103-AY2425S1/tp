@@ -2,7 +2,7 @@ package keycontacts.logic.commands;
 
 import static keycontacts.logic.commands.CommandTestUtil.assertCommandFailure;
 import static keycontacts.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static keycontacts.testutil.TypicalStudents.getTypicalAddressBook;
+import static keycontacts.testutil.TypicalStudents.getTypicalStudentDirectory;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,14 +23,14 @@ public class AddCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalStudentDirectory(), new UserPrefs());
     }
 
     @Test
     public void execute_newStudent_success() {
         Student validStudent = new StudentBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getStudentDirectory(), new UserPrefs());
         expectedModel.addStudent(validStudent);
 
         assertCommandSuccess(new AddCommand(validStudent), model,
@@ -40,7 +40,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_duplicateStudent_throwsCommandException() {
-        Student studentInList = model.getAddressBook().getStudentList().get(0);
+        Student studentInList = model.getStudentDirectory().getStudentList().get(0);
         assertCommandFailure(new AddCommand(studentInList), model,
                 AddCommand.MESSAGE_DUPLICATE_STUDENT);
     }

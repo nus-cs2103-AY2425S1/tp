@@ -18,10 +18,10 @@ import javafx.collections.ObservableList;
 import keycontacts.commons.core.GuiSettings;
 import keycontacts.logic.Messages;
 import keycontacts.logic.commands.exceptions.CommandException;
-import keycontacts.model.AddressBook;
 import keycontacts.model.Model;
-import keycontacts.model.ReadOnlyAddressBook;
+import keycontacts.model.ReadOnlyStudentDirectory;
 import keycontacts.model.ReadOnlyUserPrefs;
+import keycontacts.model.StudentDirectory;
 import keycontacts.model.student.Student;
 import keycontacts.testutil.StudentBuilder;
 
@@ -109,12 +109,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getStudentDirectoryFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setStudentDirectoryFilePath(Path studentDirectoryFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -124,12 +124,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setStudentDirectory(ReadOnlyStudentDirectory newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyStudentDirectory getStudentDirectory() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -196,8 +196,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyStudentDirectory getStudentDirectory() {
+            return new StudentDirectory();
         }
     }
 

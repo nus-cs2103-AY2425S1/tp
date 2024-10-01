@@ -5,14 +5,14 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import keycontacts.commons.exceptions.DataLoadingException;
-import keycontacts.model.ReadOnlyAddressBook;
+import keycontacts.model.ReadOnlyStudentDirectory;
 import keycontacts.model.ReadOnlyUserPrefs;
 import keycontacts.model.UserPrefs;
 
 /**
  * API of the Storage component
  */
-public interface Storage extends AddressBookStorage, UserPrefsStorage {
+public interface Storage extends StudentDirectoryStorage, UserPrefsStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataLoadingException;
@@ -21,12 +21,12 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
     void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException;
 
     @Override
-    Path getAddressBookFilePath();
+    Path getStudentDirectoryFilePath();
 
     @Override
-    Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException;
+    Optional<ReadOnlyStudentDirectory> readStudentDirectory() throws DataLoadingException;
 
     @Override
-    void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
+    void saveStudentDirectory(ReadOnlyStudentDirectory studentDirectory) throws IOException;
 
 }

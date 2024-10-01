@@ -2,22 +2,22 @@ package keycontacts.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import keycontacts.model.AddressBook;
 import keycontacts.model.Model;
+import keycontacts.model.StudentDirectory;
 
 /**
- * Clears the address book.
+ * Clears the student directory.
  */
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
+    public static final String MESSAGE_SUCCESS = "Student directory has been cleared!";
 
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.setAddressBook(new AddressBook());
+        model.setStudentDirectory(new StudentDirectory());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

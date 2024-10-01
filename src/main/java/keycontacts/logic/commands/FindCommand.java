@@ -8,8 +8,8 @@ import keycontacts.model.Model;
 import keycontacts.model.student.NameContainsKeywordsPredicate;
 
 /**
- * Finds and lists all students in address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Finds and lists all students in the student directory whose name contains any of the argument keywords.
+ * Keyword matching is case-insensitive.
  */
 public class FindCommand extends Command {
 
