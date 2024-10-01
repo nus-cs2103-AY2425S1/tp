@@ -297,7 +297,7 @@ _{More to be added}_
 
 **MSS**
 
-1.  Actor requests to <u>list persons (UC2)</u>.
+1.  Actor requests to <u>list persons (UC No.)</u>.
 2.  Actor requests to delete a specific person in the list.
 3.  System deletes the person.
 4.  System <u>save contacts to save file (UC No.)</u>.
@@ -349,6 +349,35 @@ _{More to be added}_
   - 3.1a2. Actor` shows a warning message.
 
   Use case resumes at step 3.1.
+
+**Use case: UC3 - Save contact to save file**
+
+**Actor: `BizBook`**
+
+**Guarantees:** Updated contact list is saved to save file.
+
+**MSS**
+
+1.  Actor searches OS directory for save file.
+2.  OS returns save file object.
+3.  For each contact object.
+
+    - 3.1 Actor parses line into saveable format.
+    - 3.2 Actor writes line to save file.
+    - 3.3 Repeat steps 3.1 - 3.2 until all contacts are processed.
+
+4.  Actor finishes saving contacts into save file.
+
+    Use case ends.
+
+**Extensions**
+
+- 1a. Save file does not exist.
+
+  - 1a1. Actor shows a warning message.
+  - 1a2. Actor creates a new save file.
+
+  Use case resumes at step 2.
 
 ### Non-Functional Requirements
 
