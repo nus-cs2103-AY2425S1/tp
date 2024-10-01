@@ -57,5 +57,5 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/elliot-tang)]
 [[portfolio](team/elliot.md)]
 
-* Role: Scheduling and tracking
+* Role: Scheduling and tracking lead, deliverables and deadlines lead
 * Responsibilities: In charge of Logic component
