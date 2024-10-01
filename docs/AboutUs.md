@@ -17,7 +17,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/shuckycheese)]
-[[portfolio](team/DarrylShuck)]
+[[portfolio](team/shuckycheese)]
 
 * Role: Developer
 * Responsibilities: Code Quality, In charge of better search
@@ -27,7 +27,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/johndoe.png" width="200px">
 
 [[github](http://github.com/johndoe)]
-[[portfolio](team/DarrylShuck)]
+[[portfolio](team/shuckycheese)]
 
 * Role: Team Lead
 * Responsibilities: UI
@@ -36,7 +36,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/DarrylShuck)]
+[[github](http://github.com/johndoe)] [[portfolio](team/shuckycheese)]
 
 * Role: Developer
 * Responsibilities: Data
@@ -46,7 +46,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/johndoe.png" width="200px">
 
 [[github](http://github.com/johndoe)]
-[[portfolio](team/DarrylShuck)]
+[[portfolio](team/shuckycheese)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
@@ -56,7 +56,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/johndoe.png" width="200px">
 
 [[github](http://github.com/johndoe)]
-[[portfolio](team/DarrylShuck)]
+[[portfolio](team/shuckycheese)]
 
 * Role: Developer
 * Responsibilities: UI
