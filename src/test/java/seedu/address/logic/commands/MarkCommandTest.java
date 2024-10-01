@@ -61,7 +61,6 @@ public class MarkCommandTest {
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.markAsContacted(personToMark);
-        showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
 
         assertCommandSuccess(markCommand, model, expectedMessage, expectedModel);
     }
