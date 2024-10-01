@@ -2,7 +2,7 @@
 
 ![Ui](docs/images/Ui.png)
 
-* This is **a team project for Software Engineering (SE) students**.<br>
+* This is **a team project for Software Engineering (SE) students from NUS**.<br>
   Example usages:
   * as a starting point of a course project (as opposed to writing everything from scratch)
   * as a case study
