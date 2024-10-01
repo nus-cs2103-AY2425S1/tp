@@ -375,9 +375,9 @@ otherwise)
 
 **Extensions:**
 
-* 1a. TutorEase detects bad or wrongly formatted inputs.
-    * 1a1. TutorEase prompts Tutor with correct format.
-    * 1a2. Tutor enters new data.
+* **1a**. TutorEase detects bad or wrongly formatted inputs.
+    * **1a1**. TutorEase prompts Tutor with correct format.
+    * **1a2**. Tutor enters new data.
     Steps 1a1 to 1a2 are repeated until the data entered are correct.  
     Use case resumes from Step 2.
 
