@@ -46,8 +46,12 @@ public class ContactDateList extends ArrayList<ContactDate> {
     /**
      * Returns the last ContactDate in the ContactDateList.
      * @return the most recent ContactDate.
+     * @throws IndexOutOfBoundsException if the list is empty.
      */
     public ContactDate getLastContacted() {
+        if (this.size() == 0) {
+            throw new IndexOutOfBoundsException("No ContactDates in the list.");
+        }
         return this.get(this.size() - 1);
     }
 

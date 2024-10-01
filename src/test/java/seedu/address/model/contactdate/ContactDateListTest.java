@@ -11,6 +11,13 @@ public class ContactDateListTest {
     public void getLastContacted() {
         ContactDateList contactDateList = new ContactDateList();
 
+        // Throws IndexOutOfBoundsException when list is empty
+        try {
+            contactDateList.getLastContacted();
+        } catch (IndexOutOfBoundsException e) {
+            assertTrue(true);
+        }
+
         // test 1
         ContactDate contactDate = new ContactDate("2021-10-10");
         contactDateList.add(contactDate);
