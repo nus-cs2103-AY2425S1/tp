@@ -91,6 +91,13 @@ public class PersonTest {
     }
 
     @Test
+    public void markAsContacted() {
+        Person person = new PersonBuilder().build();
+        person.markAsContacted();
+        assertEquals(1, person.getContactDates().size());
+    }
+
+    @Test
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + "}";
