@@ -29,10 +29,14 @@ public class NricTest {
         assertFalse(Nric.isValidNric(" ")); // spaces only
         assertFalse(Nric.isValidNric("S64065D")); // only 5 digits
         assertFalse(Nric.isValidNric("S6406542Z")); // wrong checksum
+        assertFalse(Nric.isValidNric("P6406542D")); // starting with P
 
         // valid nric
         assertTrue(Nric.isValidNric("s6406542d")); // lowercase alphabets
         assertTrue(Nric.isValidNric("S6406542D")); // uppercase alphabets
+        assertTrue(Nric.isValidNric("T5517825E")); // starting with T
+        assertTrue(Nric.isValidNric("F3895385X")); // starting with F
+        assertTrue(Nric.isValidNric("G8413738W")); // starting with G
     }
 
     @Test
