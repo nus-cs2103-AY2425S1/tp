@@ -13,9 +13,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Han B1n
 
-<img src="images/HanB1n.png" width="200px">
+<img src="images/hanb1n.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/HanB1n)]
 [[portfolio](team/HanB1n.md)]
 
@@ -26,7 +25,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/johndoe.png" width="200px">
 
 [[github](http://github.com/johndoe)]
-[[portfolio](team/HanB1n)]
+[[portfolio](team/janedoe)]
 
 * Role: Team Lead
 * Responsibilities: UI
@@ -35,27 +34,28 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/HanB1n)]
+[[github](http://github.com/johndoe)] 
+[[portfolio](team/johndoe)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Ricco Lim
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/riccoljy.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/HanB1n)]
+[[github](http://github.com/riccoljy)]
+[[portfolio](team/riccoljy.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Peh Ting Xuan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/tingxuanp.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/HanB1n)]
+[[github](http://github.com/tingxuanp)]
+[[portfolio](team/tingxuanp.md)]
 
-* Role: Developer
+* Role: Developer, Documentation, Deliverables and deadlines
 * Responsibilities: UI
