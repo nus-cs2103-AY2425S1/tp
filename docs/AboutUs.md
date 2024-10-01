@@ -40,15 +40,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Ding Yi He
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/oneboz.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/oneBoz)]
+[[portfolio](team/oneBoz.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Code Quality Lead
+* Responsibilities: Code quality, Testing, UI
 
 ### James Doe
 
