@@ -287,14 +287,25 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​                    | I want to …​                                  | So that I can…​                                                          |
+|----------|----------------------------|-----------------------------------------------|--------------------------------------------------------------------------|
+| `* * *`  | user                       | save a client's personal information          | contact them easily                                                      |
+| `* * *`  | user                       | save a client's rental information            | view their respective properties                                         |
+| `* * *`  | user                       | edit a client's personal information          | modify their personal details                                            |
+| `* * *`  | user                       | edit a client's rental information            | modify their property's rental information                               |
+| `* * * ` | user                       | delete a client's personal information        | clear my application when he/she is no longer my client                  |
+| `* * *`  | user                       | delete a client's rental information          | clear my application when the property is not owned by my client anymore |
+| `* * *`  | user                       | find a client's personal information          | find the client easily                                                   |
+| `* * *`  | user                       | find a client's rental information            | find the client's property easily                                        |
+| `* *`    | user                       | colour code a client                          | differentiate more important clients                                     |
+| `* *`    | user                       | attach files to a client                      | attach important contracts to the respective clients                     |
+| `* *`    | user                       | assign tags to clients                        | differentiate clients by any interesting factors                         |
+| `* *`    | user                       | autofill CLI commands                         | easily assess the command line without typing the command again          |
+| `* *`    | user                       | export all client's personal information      | save it somewhere else                                                   |
+| `* *`    | user                       | export a specific client's rental information | save it somewhere else                                                   |
+| `*`      | user                       | send emails to a client                       | schedule meetings with them                                              |
+| `*`      | user                       | set reminders for a client                    | remember my schedule with individual client                              |
+| `*`      | user                       | lock my application                           | protect my data                                                          |
 
 *{More to be added}*
 
