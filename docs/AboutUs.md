@@ -9,6 +9,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Alez
+
+<img src="images/al-ez.png" width="200px">
+
+[[github](https://github.com/Al-ez)]
+[[portfolio](team/al-ez.md)]
+
+* Role: Developer
+* Responsibilities: [Backend, Testing]
+=======
 ### Chiang Kai Jing Colin Adam
 
 <img src="images/colinac.png" width="200px">
@@ -48,3 +58,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: Data
+
