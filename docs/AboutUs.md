@@ -28,7 +28,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/Shux347)]
 [[portfolio](team/varun.md)]
 
-* Role: Developer
+* Role: Product Manager
 * Responsibilities: Scheduling and tracking, deliverables and deadlines
 
 ### Erwin Soh
@@ -37,7 +37,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](http://github.com/meerkatboy)] [[portfolio](team/erwin.md)]
 
-* Role: Backend tester, code quality, UI developer
+* Role: Testing Lead, code quality, UI developer
 * Responsibilities:
   * Ensure that testing of the project code is done regularly and sufficiently
   * Look after code quality to ensure that good coding standards and guidelines are adhered to
