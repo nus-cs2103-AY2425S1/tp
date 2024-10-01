@@ -11,16 +11,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-
-### Liau Zhan Yi
-
-<img src="images/liauzhanyi.png" width="200px">
-
-[[github](https://github.com/liauzhanyi)]
-[[portfolio](team/liauzhanyi.md)]
-
-* Role: Integration
-
 ### Andrew Teoh
 
 <img src="images/andrew22teoh.png" width="200px">
@@ -58,4 +48,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Software Engineer
 * Responsibilities: In charge of `Model`
 
+### Liau Zhan Yi
 
+<img src="images/liauzhanyi.png" width="200px">
+
+[[github](https://github.com/liauzhanyi)]
+[[portfolio](team/liauzhanyi.md)]
+
+* Role: Integration
