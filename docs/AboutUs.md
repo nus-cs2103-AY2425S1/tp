@@ -11,15 +11,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Yik Jun Xian
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yikjunxian.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[github](https://yikjunxian.com/johndoe)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+* Role: UI developer
+* Responsibilities: Develop GUI features
+
 
 ### Jane Doe
 
@@ -59,3 +61,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: UI
+
