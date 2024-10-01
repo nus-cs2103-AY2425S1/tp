@@ -53,7 +53,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/raihahahan.png" width="200px">
 
 [[github](https://github.com/raihahahan)]
-[[portfolio](https://mraihan.dev)]
+[[portfolio](team/raihahahan.md)]
 
 * Role: Developer
 * Responsibilities: General Software Development
