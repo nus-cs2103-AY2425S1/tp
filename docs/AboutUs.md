@@ -43,7 +43,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/amitha2210.png" width="200px">
 
 [[github](https://github.com/amitha2210)]
-[[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
