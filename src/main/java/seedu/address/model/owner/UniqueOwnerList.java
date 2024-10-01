@@ -8,7 +8,6 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.owner.Owner;
 import seedu.address.model.owner.exceptions.DuplicateOwnerException;
 import seedu.address.model.owner.exceptions.OwnerNotFoundException;
 
