@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class Guest extends Person {
 
-    private Rsvp rsvp;
+    private final Rsvp rsvp;
 
     /**
      * Every field must be present and not null.
