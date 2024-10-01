@@ -7,6 +7,14 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project team
 
+### Suhail Loya
+
+<img src="images/suhailloya.png" width="200px">
+
+[[github](https://github.com/SuhailLoya)]
+[[portfolio](team/suhailloya)]
+
+
 ### Celes Chai Jia Xuan
 
 <img src="images/celeschai.png" width="200px">
@@ -16,34 +24,6 @@ We are a team based in the [School of Computing, National University of Singapor
 
 * Role: Team Lead
 
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
 
 ### Jem Zhang
 
