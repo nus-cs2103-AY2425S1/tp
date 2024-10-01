@@ -90,6 +90,7 @@ Examples:
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
 <div markdown="block" class="alert alert-info">:hourglass_flowing_sand: **Expected change in release v1.1**
+
 You will be able to add client specific details to the address book.
 
 Format: `add n/NAME c/CONTACT NUMBER e/EMAIL t/<buyer,seller>`
@@ -106,6 +107,7 @@ Shows a list of all persons in the address book.
 Format: `list`
 
 <div markdown="block" class="alert alert-info">:hourglass_flowing_sand: **Expected change in release v1.1**
+
 You will be able to view all people or filter by your contact type in the address book.
 
 Format: `view [t/<buyer,seller>]`
@@ -189,8 +191,9 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Meet up `[coming in next release]`
-<div markdown="block" class="alert alert-info">:hourglass_flowing_sand: **Expected change in release v1.1**
+### Meet up `[coming in v1.1]`
+<div markdown="block" class="alert alert-info">:hourglass_flowing_sand: **Expected feature in release v1.1**
+
 You will be able to schedule a meet-up event with your contacts.
 
 Format: `meetup n/NAME i/INFO`
@@ -199,7 +202,7 @@ Examples:
 * `meetup n/kennylewi i/Property viewing on saturday`
 </div>
 
-_More features coming soon ..._
+<br>_More features coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
