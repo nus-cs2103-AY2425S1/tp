@@ -88,7 +88,6 @@ public class Person {
     }
 
     /**
-     * <<<<<<< HEAD
      * Mark the person as contacted today.
      */
     public void markAsContacted() {
@@ -96,10 +95,7 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * =======
      * Returns true if both persons have the same nric.
-     * >>>>>>> master
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
