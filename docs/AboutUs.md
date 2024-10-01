@@ -56,4 +56,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/raihahahan.md)]
 
 * Role: Developer
-* Responsibilities: General Software Development
+* Responsibilities: General Software Development | Assist Team Members with technical issues
