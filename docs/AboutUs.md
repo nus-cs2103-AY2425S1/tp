@@ -3,7 +3,8 @@ layout: page
 title: About Us
 ---
 
-We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
+We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg). 
+Our aim is to create human friendly products that improve the productivity of everyday jobs. An example is our recent product, PROperty, a state of the art Address Book tailored to the intricate and fast pace needs of property agents 
 
 You can reach us at the email `e1113201@u.nus.edu`
 
