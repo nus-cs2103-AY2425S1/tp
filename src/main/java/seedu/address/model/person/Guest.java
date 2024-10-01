@@ -29,6 +29,23 @@ public class Guest extends Person {
         this.rsvp = rsvp;
     }
 
+
+    /**
+     * Creates a Guest with the specified details.
+     * The RSVP status will be set to PENDING by default if not specified.
+     * Every field must be present and not null.
+     *
+     * @param name The name of the guest.
+     * @param phone The phone number of the guest.
+     * @param email The email address of the guest.
+     * @param address The address of the guest.
+     * @param tags The tags associated with the guest.
+     */
+    public Guest(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+        super(name, phone, email, address, tags);
+        this.rsvp = new Rsvp("PENDING");
+    }
+
     /**
      * Returns true if the guest is coming, i.e., if their RSVP status is "ACCEPTED".
      *
