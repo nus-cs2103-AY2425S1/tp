@@ -31,14 +31,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Clarence
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/clarud.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/clarud)] [[portfolio](team/clarud.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Developer, Deliverables and deadlines
+* Responsibilities: Ensure project deliverables are done on time and in the right format, In charge of delete feature
 
 ### Jean Doe
 
