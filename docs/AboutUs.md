@@ -9,7 +9,6 @@ We are a team based in the [School of Computing, National University of Singapor
 
 You can reach us at the email `E1120956@u.nus.edu`
 
-## Project team
 
 ### Jeremy Too
 
@@ -20,24 +19,14 @@ You can reach us at the email `E1120956@u.nus.edu`
 * Role: Team Lead
 * Responsibilities: Git Expert
 
-### Jane Doe
+### Kimberly 
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kimberlytmq.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/kimberlytmq)] 
 
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
+* Role: Deadlines and Deliverables, Scheduling and Tracking
+* Responsibilities: Ensure that everyone is aware of the tasks and their respective deadlines
 
 ### Amelia Chow
 
@@ -65,4 +54,5 @@ You can reach us at the email `E1120956@u.nus.edu`
 
 * Role: Tester
 * Responsibilities: Ensures the testing of the project is done properly and on time.
+
 
