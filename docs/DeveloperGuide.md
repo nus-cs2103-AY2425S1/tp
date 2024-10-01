@@ -275,20 +275,23 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​             | I want to …​                                                              | So that I can…​                               |
+|----------|---------------------|---------------------------------------------------------------------------|-----------------------------------------------|
+| `* * *`  | financial advisor   | add a new client’s contact details                                        | easily manage my client base                  |
+| `* * *`  | financial advisor   | view all of a client’s details on one screen                              | have all necessary information in one place.  |
+| `* * *`  | financial advisor   | delete outdated client contact information                                | keep my database clean and relevant           |
+| `* *`    | financial advisor   | search for a client by name or company                                    | ensure that I always have the latest details  |
+| `* *`    | financial advisor   | categorize my clients (e.g., VIP, standard)                               | prioritize my communication with them         |
+| `*`      | financial advisor   | update a client’s contact information                                     | ensure that I always have the latest details  |
+| `*`      | financial advisor   | tag clients with specific keywords (e.g., investor, retiree)              | segment them for different services           |
+| `*`      | financial advisor   | add notes to a client’s profile                                           | track important interactions or discussions   |
+| `*`      | financial advisor   | assign tasks related to each client (e.g., "Review investment portfolio") | stay organized and focused                    |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `ClientHub` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: Delete a person**
 
