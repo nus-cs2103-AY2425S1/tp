@@ -50,12 +50,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Zhanzhi Lou
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/zzzlou.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/zzzlou)]
+[[portfolio](team/zzzlou.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: UI and Add Volunteer feature
