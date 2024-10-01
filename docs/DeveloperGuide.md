@@ -323,7 +323,7 @@ Priorities:
 
 (For all use cases below, the **System** is the `TAHub Contacts` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Add a contact
+<panel header="#### Use case: Add a contact" expanded>
 
 **Main Success Scenario (MSS):**
 
@@ -350,9 +350,9 @@ Priorities:
 
 * 2c. The phone number is invalid or already exists.
   * 2c1. System shows an error message, "Invalid phone number format." or "Phone number already exists."
-      Use case resumes at step 1.
+      Use case resumes at step 1.</panel>
 
-#### Use case: View contacts
+<panel header="#### Use case: View contacts" expanded>
 
 **Main Success Scenario (MSS):**
 
@@ -360,9 +360,11 @@ Priorities:
 2. System retrieves and displays the list of all contacts with their details (name, phone number, email, address, tags).
 3. User views the list to get an overview of student contact information.
 
-   Use case ends.
+   Use case ends.</panel>
 
-#### Use Case: Get Warnings Before Making Major Changes
+<panel header="#### Use Case: Get Warnings Before Making Major Changes" expanded>
+
+**Main Success Scenario (MSS):**
 
 1. Tutor initiates a major change (e.g., deleting a student record or modifying multiple student details at once).
 2. System detects the action as a major change.
@@ -370,15 +372,15 @@ Priorities:
 4. Tutor reviews the warning and confirms whether to proceed or cancel.
 5. If confirmed, the system proceeds with the requested changes and displays a success message.
 
-   **Use case ends.**
+   Use case ends.
 
 **Extensions:**
 
 * 2a. The list is empty.
   * 2a1. System shows a message, "No contacts available."
-      Use case ends.
+      Use case ends.</panel>
 
-#### Use case: Delete a contact
+<panel header="#### Use case: Delete a contact" expanded>
 
 **Main Success Scenario (MSS):**
 
@@ -393,9 +395,9 @@ Priorities:
 
 * 2a. The index is out of bounds.
   * 2a1. System shows an error message, "Invalid index."
-      Use case resumes at step 1.
+      Use case resumes at step 1.</panel>
 
-#### Use case: Edit a contact
+<panel header="#### Use case: Edit a contact" expanded>
 
 **Main Success Scenario (MSS):**
 
@@ -424,9 +426,9 @@ Priorities:
 
 * 2d. The new phone number is invalid or already exists.
   * 2d1. System shows an error message, "Invalid phone number format." or "Phone number already exists."
-      Use case resumes at step 1.
+      Use case resumes at step 1.</panel>
 
-#### Use case: Add essential data about students
+<panel header="#### Use case: Add essential data about students" expanded>
 
 **Main Success Scenario (MSS):**
 
@@ -445,9 +447,9 @@ Priorities:
 
 * 3a. The student does not exist in the system.
   * 3a1. System shows an error message, "Student not found."
-      Use case ends.
+      Use case ends.</panel>
 
-#### Use case: View essential data about students
+<panel header="#### Use case: View essential data about students" expanded>
 
 **Main Success Scenario (MSS):**
 
@@ -465,9 +467,9 @@ Priorities:
 
 * 2b. No essential data has been recorded for the student.
   * 2b1. System shows a message, "No essential data available for this student."
-      Use case ends.
+      Use case ends.</panel>
 
-#### Use case: Delete essential data about students
+<panel header="#### Use case: Delete essential data about students" expanded>
 
 **Main Success Scenario (MSS):**
 
@@ -490,9 +492,9 @@ Priorities:
 
 * 4a. No essential data exists for the student.
   * 4a1. System shows a message, "No essential data to delete for this student."
-      Use case ends.
+      Use case ends.</panel>
 
-#### Use case: Edit essential data about students
+<panel header="#### Use case: Edit essential data about students" expanded>
 
 **Main Success Scenario (MSS):**
 
@@ -515,9 +517,9 @@ Priorities:
 
 * 4a. No changes were made to the data.
   * 4a1. System shows a message, "No changes detected."
-      Use case ends.
+      Use case ends.</panel>
 
-#### Use case: Search students
+<panel header="#### Use case: Search students" expanded>
 
 **Main Success Scenario (MSS):**
 
@@ -531,9 +533,9 @@ Priorities:
 
 * 2a. No contacts match the keywords.
   * 2a1. System shows a message, "No contacts found."
-      Use case ends.
+      Use case ends.</panel>
 
-#### Use case: Sort students by grades
+<panel header="#### Use case: Sort students by grades" expanded>
 
 **Main Success Scenario (MSS):**
 
@@ -548,9 +550,9 @@ Priorities:
 
 * 3a. No students have grades recorded.
   * 3a1. System shows a message, "No grade data available for sorting."
-      Use case ends.
+      Use case ends.</panel>
 
-#### Use case: Delete students in bulk
+<panel header="#### Use case: Delete students in bulk" expanded>
 
 **Main Success Scenario (MSS):**
 
@@ -573,9 +575,9 @@ Priorities:
 
 * 4a. One or more of the selected students do not exist in the system.
   * 4a1. System skips deleting non-existent students and completes deletion for valid students.
-  * 4a2. System shows a message, "Some students could not be deleted as they do not exist."
+  * 4a2. System shows a message, "Some students could not be deleted as they do not exist."</panel>
 
-#### Use case: Add filters to searches
+<panel header="#### Use case: Add filters to searches" expanded>
 
 **Main Success Scenario (MSS):**
 
@@ -599,9 +601,9 @@ Priorities:
 * **4a. Tutor cancels the operation.**
   * System aborts the change and returns to the previous state.
   * System displays a message: "Operation cancelled."
-  * **Use case ends.**
+  * **Use case ends.**</panel>
 
-#### Use Case: Explore App with Sample Student Data
+<panel header="#### Use Case: Explore App with Sample Student Data" expanded>
 
 **Main Success Scenario (MSS):**
 
@@ -612,9 +614,9 @@ Priorities:
 5. Tutor completes the exploration of the app and returns to normal mode.
 6. System displays a message confirming that all changes made in the sample mode are not saved.
 
-   **Use case ends.**
+   **Use case ends.**</panel>
 
-#### Use Case: Access Help for Available Commands
+<panel header="#### Use Case: Access Help for Available Commands" expanded>
 
 **Main Success Scenario (MSS):**
 
@@ -630,9 +632,9 @@ Priorities:
 
 * **3a. Tutor requests help for an unsupported command.**
   * System shows an error message: "Command not recognized. Please review the available commands."
-  * **Use case resumes at step 3.**
+  * **Use case resumes at step 3.**</panel>
 
-#### Use Case: Bulk Import Student Data
+<panel header="#### Use Case: Bulk Import Student Data" expanded>
 
 **Main Success Scenario (MSS):**
 
@@ -655,9 +657,9 @@ Priorities:
 * **4b. Some student data is invalid.**
   * System displays an error message: "Error importing [X] students due to invalid data (e.g., missing fields, invalid email format). Please correct the data and try again."
   * System provides the option to retry the import after corrections.
-  * **Use case resumes at step 2.**
+  * **Use case resumes at step 2.**</panel>
 
-#### Use Case: Export Contact List to a CSV
+<panel header="#### Use Case: Export Contact List to a CSV" expanded>
 
 **Main Success Scenario (MSS):**
 
@@ -673,9 +675,9 @@ Priorities:
 
 * **2a. Export fails due to file system error (e.g., permission denied).**
   * System displays an error message: "Export failed. Please check your file permissions and try again."
-  * **Use case resumes at step 2.**
+  * **Use case resumes at step 2.**</panel>
 
-#### Use Case: Merge Duplicate Student Entries
+<panel header="#### Use Case: Merge Duplicate Student Entries" expanded>
 
 **Main Success Scenario (MSS):**
 
@@ -696,9 +698,9 @@ Priorities:
 
 * **4a. Tutor cancels the merge.**
   * System aborts the merge operation and returns to the previous screen.
-  * **Use case ends.**
+  * **Use case ends.**</panel>
 
-#### Use Case: Filter Students by Attendance Status
+<panel header="#### Use Case: Filter Students by Attendance Status" expanded>
 
 **Main Success Scenario (MSS):**
 
@@ -714,9 +716,9 @@ Priorities:
 
 * **4a. No students match the selected attendance status.**
   * System displays a message: "No students match the selected attendance status."
-  * **Use case ends.**
+  * **Use case ends.**</panel>
 
-#### Use Case: Sort Students Alphabetically
+<panel header="#### Use Case: Sort Students Alphabetically" expanded>
 
 **Main Success Scenario (MSS):**
 
@@ -732,9 +734,9 @@ Priorities:
 
 * **4a. Contact list is empty.**
   * System displays a message: "No students available to sort."
-  * **Use case ends.**
+  * **Use case ends.**</panel>
 
-#### Use Case: Add Comments to Student Profiles
+<panel header="#### Use Case: Add Comments to Student Profiles" expanded>
 
 **Main Success Scenario (MSS):**
 
@@ -751,9 +753,9 @@ Priorities:
 
 * **4a. Comment is empty or invalid.**
   * System displays an error message: "Invalid comment. Please enter a valid comment."
-  * **Use case resumes at step 3.**
+  * **Use case resumes at step 3.**</panel>
 
-#### Use Case: Assign Preferred Communication Methods to Parents
+<panel header="#### Use Case: Assign Preferred Communication Methods to Parents" expanded>
 
 **Main Success Scenario (MSS):**
 
@@ -770,9 +772,9 @@ Priorities:
 
 * **4a. No communication method selected.**
   * System displays an error message: "Please select at least one communication method."
-  * **Use case resumes at step 3.**
+  * **Use case resumes at step 3.**</panel>
 
-#### Use Case: Flag Students with Missing Contact Details
+<panel header="#### Use Case: Flag Students with Missing Contact Details" expanded>
 
 **Main Success Scenario (MSS):**
 
@@ -787,9 +789,9 @@ Priorities:
 
 * **3a. No students with missing contact details.**
   * System displays a message: "All student contact details are complete."
-  * **Use case ends.**
+  * **Use case ends.**</panel>
 
-#### Use Case: Set Communication Preferences for Individual Students
+<panel header="#### Use Case: Set Communication Preferences for Individual Students" expanded>
 
 **Main Success Scenario (MSS):**
 
@@ -806,7 +808,9 @@ Priorities:
 
 * **4a. No communication method selected.**
   * System displays an error message: "Please select a communication method."
-  * **Use case resumes at step 3.**
+  * **Use case resumes at step 3.**</panel>
+
+<br>
 
 ### :fa-solid-clipboard-list: Non-Functional Requirements
 
