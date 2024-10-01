@@ -41,10 +41,11 @@ public class Messages {
                 .append(person.getStudentId())
                 .append("; Email: ")
                 .append(person.getEmail())
-                .append("; Address: ")
+                .append("; Major: ")
                 .append(person.getMajor())
-                .append("; Tags: ");
-        person.getTags().forEach(builder::append);
+                .append("; Year: ")
+                .append(person.getYear());
+
         return builder.toString();
     }
 

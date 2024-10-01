@@ -30,6 +30,7 @@
       <FlowPane fx:id="tags" />
       <Label fx:id="studentId" styleClass="cell_small_label" text="\$studentId" />
       <Label fx:id="major" styleClass="cell_small_label" text="\$major" />
+      <Label fx:id="year" styleClass="cell_small_label" text="\$year" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
     </VBox>
   </GridPane>

@@ -23,17 +23,19 @@ public class Person {
 
     // Data fields
     private final Major major;
+    private final Year year;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, StudentId studentId, Email email, Major major, Set<Tag> tags) {
-        requireAllNonNull(name, studentId, email, major, tags);
+    public Person(Name name, StudentId studentId, Email email, Major major, Set<Tag> tags, Year year) {
+        requireAllNonNull(name, studentId, email, major, tags, year);
         this.name = name;
         this.studentId = studentId;
         this.email = email;
         this.major = major;
+        this.year = year;
         this.tags.addAll(tags);
     }
 
@@ -51,6 +53,10 @@ public class Person {
 
     public Major getMajor() {
         return major;
+    }
+
+    public Year getYear() {
+        return year;
     }
 
     /**
@@ -93,13 +99,14 @@ public class Person {
         return name.equals(otherPerson.name)
                 && studentId.equals(otherPerson.studentId)
                 && email.equals(otherPerson.email)
-                && major.equals(otherPerson.major);
+                && major.equals(otherPerson.major)
+                && year.equals(otherPerson.year);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, studentId, email, major, tags);
+        return Objects.hash(name, studentId, email, major, year, tags);
     }
 
     @Override
@@ -109,6 +116,7 @@ public class Person {
                 .add("studentId", studentId)
                 .add("email", email)
                 .add("major", major)
+                .add("year", year)
                 .add("tags", tags)
                 .toString();
     }

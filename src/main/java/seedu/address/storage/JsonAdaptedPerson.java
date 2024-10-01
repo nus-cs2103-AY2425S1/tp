@@ -15,6 +15,7 @@ import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.StudentId;
+import seedu.address.model.person.Year;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -28,6 +29,7 @@ class JsonAdaptedPerson {
     private final String studentId;
     private final String email;
     private final String major;
+    private final String year;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -35,12 +37,13 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("studentId") String studentId,
-            @JsonProperty("email") String email, @JsonProperty("major") String major,
+            @JsonProperty("email") String email, @JsonProperty("major") String major, @JsonProperty("year") String year,
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.studentId = studentId;
         this.email = email;
         this.major = major;
+        this.year = year;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -54,6 +57,7 @@ class JsonAdaptedPerson {
         studentId = source.getStudentId().value;
         email = source.getEmail().value;
         major = source.getMajor().value;
+        year = source.getYear().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -103,8 +107,13 @@ class JsonAdaptedPerson {
         }
         final Major modelAddress = new Major(major);
 
+        if (!Year.isValidYear(year)) {
+            throw new IllegalValueException(Year.MESSAGE_CONSTRAINTS);
+        }
+        final Year modelYear = new Year(year);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelStudentId, modelEmail, modelAddress, modelTags);
+        return new Person(modelName, modelStudentId, modelEmail, modelAddress, modelTags, modelYear);
     }
 
 }
