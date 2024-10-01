@@ -52,12 +52,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Integration, In charge of Search feature
 
-### James Doe
+### Nicholas Lam
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/niclammm.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/daronoh)]
+[[github](http://github.com/niclammm)]
+[[portfolio](team/niclammm.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Scheduling and tracking
+* Responsibilities: In charge of defining, assigning, and tracking project tasks.
