@@ -1,6 +1,5 @@
 package seedu.address.model.person;
 
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
 import java.util.Objects;
