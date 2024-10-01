@@ -308,7 +308,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 
-*{More to be added}*
 
 ### Use cases
 
@@ -452,8 +451,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4. Should be for a single user. 
+5. The software should work without requiring an installer
+6. The software should follow the Object-oriented paradigm primarily
+7. The GUI should work well for standard screen resolutions 1920x1080 and higher and for screen scales 100% and 125%
 
 ### Glossary
 
