@@ -50,12 +50,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Code Quality Lead
 * Responsibilities: Code quality, Testing, UI
 
-### James Doe
+### Elliot Tang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/elliot-tang.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/elliot-tang)]
+[[portfolio](team/elliot.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Scheduling and tracking lead, deliverables and deadlines lead
+* Responsibilities: In charge of Logic component
