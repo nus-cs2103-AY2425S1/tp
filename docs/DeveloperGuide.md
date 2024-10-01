@@ -327,18 +327,18 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
 
 ### (Expert user)
 
-| As a  | I want to                                                                | So that I can                                                                            | Priority |
-|-------|--------------------------------------------------------------------------|------------------------------------------------------------------------------------------|----------|
-| Tutor | Export student progress reports (compiled lesson descriptions)           | I can provide detailed updates to their guardians every term/semester                    | 3        |
-| Tutor | Set reminders for upcoming lessons                                       | I am always prepared for a lesson and will not miss any                                  | 3        |
-| Tutor | Set reminders to collect payment                                         | I can collect my fees on time                                                            | 3        |
-| Tutor | View a history of all my previous lessons with each student              | I can reference past lessons and track long-term progress                                | 3        |
-| Tutor | Autofill commands with what is expected next                             | I don't have to re-type long commands                                                    | 3        |
-| Tutor | Export previous years' data into a file                                  | I can manage each year separately and not overcrowd my data                              | 3        |
-| Tutor | Generate monthly or weekly reports of my hours worked/earnings           | I can track my productivity and workload                                                 | 3        |
-| Tutor | Know what I need to bring/prepare for all my lessons in the upcoming day | I can adequately prepare for each lesson and ensure my students have necessary materials | 3        |
-| Tutor | Tag various students under the same lesson slot for group lessons        | I can cater to different lesson types and optimize time                                  | 3        |
-| Tutor | Manage multiple locations for students                                   | I can adjust if students have multiple locations for tuition                             | 3        |
+| As a  | I want to                                                                | So that I can                                                                      | Priority |
+|-------|--------------------------------------------------------------------------|------------------------------------------------------------------------------------|----------|
+| Tutor | Export student progress reports (compiled lesson descriptions)           | Provide detailed updates to their guardians every term/semester                    | 3        |
+| Tutor | Set reminders for upcoming lessons                                       | Prepare for a lesson and will not miss any                                         | 3        |
+| Tutor | Set reminders to collect payment                                         | Collect my fees on time                                                            | 3        |
+| Tutor | View a history of all my previous lessons with each student              | Reference past lessons and track long-term progress                                | 3        |
+| Tutor | Autofill commands with what is expected next                             | Avoid re-typing long commands                                                      | 3        |
+| Tutor | Export previous years' data into a file                                  | Manage each year separately and not overcrowd my data                              | 3        |
+| Tutor | Generate monthly or weekly reports of my hours worked/earnings           | Track my productivity and workload                                                 | 3        |
+| Tutor | Know what I need to bring/prepare for all my lessons in the upcoming day | Adequately prepare for each lesson and ensure my students have necessary materials | 3        |
+| Tutor | Tag various students under the same lesson slot for group lessons        | Cater to different lesson types and optimize time                                  | 3        |
+| Tutor | Manage multiple locations for students                                   | Adjust if students have multiple locations for tuition                             | 3        |
 
 ### Use cases
 
