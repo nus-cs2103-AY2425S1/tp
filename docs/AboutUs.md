@@ -5,55 +5,57 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `e1113201@u.nus.edu`
 
 ## Project team
 
-### John Doe
+
+### Bing Heng
 
 <img src="images/johndoe.png" width="200px">
+
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[github](https://github.com/BuffWuff1712)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+* Role: Developer
 
-### Jane Doe
+### Dylan Chan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/vatinius.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+[[github](https://github.com/vatinius)]
 
-### Johnny Doe
+* Role: Developer
 
-<img src="images/johndoe.png" width="200px">
+### Tay Xuen Ye
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+<img src="images/tayxuenye.png" width="200px">
+
+[[github](http://github.com/tayxuenye)]
+[[portfolio](team/tayxuenye.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Teo Kai Xiang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/tkaixiang.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/tkaixiang)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Full-Stack (Frontend + Backend)
 
-### James Doe
+### Zhang Yao
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/sayomaki.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/sayomaki)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: UI & Dev Ops
