@@ -10,7 +10,7 @@ FinTrack is a comprehensive budget tracking and financial management application
 Given below are my contributions to the project
 * **User Interface**:
   * What it does: Optimum user experience through enhanced accessibility and colour gradients
-  * Justification: User retention, User personalisation, Ease of Access 
+  * Justification: User retention, User personalisation, Ease of Access
   * Highlights: Focus on colour contrasts and an intuitive interface allowing users to easily navigate through the app.
 
 * **Code contributed**:
