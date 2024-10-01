@@ -4,9 +4,9 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+# TrueRental User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+TrueRental is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, TrueRental can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -17,24 +17,24 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T15-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your TrueRental application.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar truerental.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list` : Lists all clients.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `cadd n/Steven Tan e/steventan@abc.com p/98765432` : Adds a client named `Steven Tan` to the TrueRental application.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `cdelete 3` : Deletes the 3rd client shown in the current list.
 
-   * `clear` : Deletes all contacts.
+   * `clear` : Deletes all clients.
 
    * `exit` : Exits the app.
 
@@ -49,13 +49,19 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 **Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `cadd n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+* Items without brackets are mandatory, you must provide a value.<br>
+  e.g. `n/NAME` for `cadd`, `c/CLIENT_INDEX` and `a/ADDRESS` for `radd`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Items in curly brackets "{}" are optional, you may choose not to have them in your command.<br>
+  e.g `radd` can be used as `radd c/1 a/BLK 123 Bishan` or as `radd c/1 a/BLK 123 Bishan m/3500`.
+
+* Items in square brackets "[]" are mandatory to have at least one of them, you should not use none of them in a command.<br>
+  e.g `cedit` can be used as `cedit 1 n/Steven Tan e/steventan@abc.com p/98765432` or as `cedit 1 n/Steven Tan p/98765432`.
+
+* Items with `...`​ after them can be used multiple times.<br>
+  e.g. `k/KEYWORDS` for `find` can be used as `find k/Steven Tan k/98765432` (2 times), `find k/98765432` (1 time), etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -194,12 +200,16 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
-**Help**   | `help`
+ Action                                     | Format, Examples                                                                                                                                                                                                                   
+--------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ **List all clients**                       | `list`                                                                                                                                                                                                                             
+ **Show manual (help)**                     | `help`                                                                                                                                                                                                                             
+ **Clear**                                  | `clear`                                                                                                                                                                                                                            
+ **Add a client**                           | `cadd n/NAME [p/PHONE_NUMBER] [e/EMAIL]` <br> e.g., `cadd n/Steven Tan e/steventan@abc.com p/98765432`                                                                                                                             
+ **Add rental information for a client**    | `radd c/CLIENT_INDEX a/ADDRESS {s/RENTAL_START_DATE} {e/RENTAL_END_DATE} {dd/RENT_DUE_DATE} {m/MONTHLY_RENT} {d/DEPOSIT} {c/CUSTOMER_LIST}` <br> e.g., `radd c/3 a/65 Den Road s/2024-09-01 e/2025-08-30 c/Steven Lim dd/20 m/2750`
+ **Find information**                       | `find k/KEYWORDS...`<br> e.g., `find k/Steven Tan k/98765432`                                                                                                                                                                      
+ **View rental information of a client**    | `rview CLIENT_INDEX` <br> e.g., `rview 1`                                                                                                                                                                                          
+ **Edit a client**                          | `cedit CLIENT_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL]` <br> e.g.,`cedit 1 n/Steven Tan e/steventan@abc.com p/98765432`                                                                                                           
+ **Edit rental information for a client**   | `redit c/CLIENT_INDEX r/RENTAL_INDEX [a/ADDRESS] [s/RENTAL_START_DATE] [e/RENTAL_END_DATE] [dd/RENT_DUE_DATE] [m/MONTHLY_RENT] [d/DEPOSIT] [c/CUSTOMER_LIST]` <br> e.g.,`redit c/1 r/1 a/65 Anderson Road m/3000 d/0`              
+ **Delete a client**                        | `cdelete CLIENT_INDEX` <br> e.g., `cdelete 3`                                                                                                                                                                                      
+ **Delete rental information for a client** | `rdelete c/CLIENT_INDEX r/RENTAL_INDEX` <br> e.g., `rdelete c/1 r/2`                                                                                                                                                               
