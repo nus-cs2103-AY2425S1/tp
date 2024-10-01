@@ -94,7 +94,8 @@ public class PersonTest {
     public void markAsContacted() {
         Person person = new PersonBuilder().build();
         person.markAsContacted();
-        assertEquals(1, person.getContactDates().size());
+        // 1 contact date added on initialisation and another added by markAsContacted
+        assertEquals(2, person.getContactDates().size());
     }
 
     @Test
