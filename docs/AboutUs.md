@@ -5,8 +5,6 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
 ### Suhail Loya
@@ -16,5 +14,23 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/SuhailLoya)]
 [[portfolio](team/suhailloya)]
 
-* Role: Developer
 
+### Celes Chai Jia Xuan
+
+<img src="images/celeschai.png" width="200px">
+
+[[github](https://github.com/celeschai)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Team Lead
+
+
+### Jem Zhang
+
+<img src="images/applejem.png" width="200px">
+
+[[github](http://github.com/AppleJem)]
+[[portfolio](team/applejem.md)]
+
+* Role: Developer
+* Responsibilities: developing things
