@@ -361,6 +361,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Pre-U Home Tuition Teacher**: A teacher who offers Primary to Junior College level tuition at the student’s home.
+* **Locale date time format**: The date time format the users’ computer uses.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
