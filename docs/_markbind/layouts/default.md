@@ -9,7 +9,7 @@
     <li><a href="{{baseUrl}}/UserGuide.html" class="nav-link">User Guide</a></li>
     <li><a href="{{baseUrl}}/DeveloperGuide.html" class="nav-link">Developer Guide</a></li>
     <li><a href="{{baseUrl}}/AboutUs.html" class="nav-link">About Us</a></li>
-    <li><a href="https://ay2425s1-cs2103t-w14-3.github.io" target="_blank" class="nav-link"><md>:fab-github:</md></a>
+    <li><a href="https://github.com/ay2425s1-cs2103t-w14-3/tp" target="_blank" class="nav-link"><md>:fab-github:</md></a>
     </li>
     <li slot="right">
       <form class="navbar-form">
