@@ -34,7 +34,7 @@ public class Rsvp {
     public Rsvp(String rsvp) {
         requireNonNull(rsvp);
         checkArgument(isValidRsvp(rsvp), MESSAGE_CONSTRAINTS);
-        this.rsvp = rsvp;
+        this.rsvp = rsvp.toUpperCase();
     }
 
     /**

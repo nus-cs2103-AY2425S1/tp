@@ -56,7 +56,7 @@ public class RsvpTest {
         assertFalse(rsvp.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(rsvp.equals( new Rsvp("Pending")));
+        assertFalse(rsvp.equals(new Rsvp("Pending")));
     }
 
 }
