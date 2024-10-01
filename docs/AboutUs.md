@@ -14,6 +14,8 @@ We are a team based in the [School of Computing, National University of Singapor
 [[github](https://github.com/SuhailLoya)]
 [[portfolio](team/suhailloya)]
 
+* Role: Developer
+* Responsibilities: developing things
 
 ### Celes Chai Jia Xuan
 
@@ -23,6 +25,7 @@ We are a team based in the [School of Computing, National University of Singapor
 [[portfolio](team/johndoe.md)]
 
 * Role: Team Lead
+* Responsibilities: lead team
 
 
 ### Jem Zhang
@@ -34,3 +37,14 @@ We are a team based in the [School of Computing, National University of Singapor
 
 * Role: Developer
 * Responsibilities: developing things
+
+### Zhang Ming Jun
+
+<img src="images/mongj.png" width="200px">
+
+[[github](http://github.com/mongj)]
+[[portfolio](team/mongj.md)]
+
+* Role: Developer
+* Responsibilities: Develop
+

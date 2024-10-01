@@ -1,3 +1,7 @@
+---
+layout: page
+title: Suhail's Project Portfolio Page
+---
 
 ### Project: CareConnect
 
