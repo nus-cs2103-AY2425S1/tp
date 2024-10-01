@@ -10,14 +10,26 @@ You can reach us at the following emails:
 - `e1290028@u.nus.edu`
 - `youngseopark@u.nus.edu`
 - `bryanchew@u.nus.edu`
+- `e1136836@u.nus.edu`
+- `e1155464@u.nus.edu`
 
 ## EventfulNUS Team
+
+### Aaron Sim
+
+<img src="https://ay2425s1-cs2103t-w14-4.github.io/tp/images/peanuts359.png" alt="Aaron's picture" width="200px" />
+
+[[Github](https://github.com/peanuts359)]
+[[About Me](team/peanuts359.md)]
+
+* Role: Developer
+* Responsibilities: Documentation, Code Quality
 
 ### Leonardo Wolf
 
 <img src="https://ay2425s1-cs2103t-w14-4.github.io/tp/images/leowolf275.png" alt="Leonardo Wolf's picture" width="200px" />
 
-[[github](https://github.com/leowolf275)]
+[[Github](https://github.com/leowolf275)]
 [[About Me](team/leowolf275.md)]
 
 * Role: Developer 
@@ -42,3 +54,13 @@ You can reach us at the following emails:
 
 * Role: Developer
 * Responsibilities: Tagging and Filtering, Testing
+
+### Eddy Fan
+
+<img src="https://ay2425s1-cs2103t-w14-4.github.io/tp/images/kaoxi998533.png" alt="Eddy Fan's picture" width="200px" />
+
+[[Github](http://github.com/kaoxi998533)]
+[[About Me](team/kaoxi998533.md)]
+
+* Role: Developer
+* Responsibilities: Integration, Documentation
