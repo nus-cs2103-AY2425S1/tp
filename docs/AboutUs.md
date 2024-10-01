@@ -38,15 +38,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Joshua Ng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/alphapyke.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/AlphaPyke)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Code Quality
+* Responsibilities: Looks after code quality, ensures adherence to coding standards and git standards.
 
 ### James Doe
 
