@@ -9,7 +9,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Chiang Kai Jing Colin Adam
 
 <img src="images/colinac.png" width="200px">
 
@@ -18,41 +18,24 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 
-### Jane Doe
 
-<img src="images/johndoe.png" width="200px">
+### Sun Weiyang
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/colinac)]
+<img src="images/artillerysun.png" width="200px">
 
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/colinac)]
+[[github](https://github.com/ArtillerySun)]
+[[portfolio](team/artillerysun.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
 
-<img src="images/johndoe.png" width="200px">
+### Tea Li Hao
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/colinac)]
+<img src="images/jellypenguinnn.png" width="200px">
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/colinac)]
+[[github](http://github.com/jellypenguinnn)]
+[[portfolio](team/jellypenguinnn.md)]
 
 * Role: Developer
 * Responsibilities: UI
