@@ -16,7 +16,9 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
+import seedu.address.testutil.PersonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for RemarkCommand.
@@ -69,10 +71,31 @@ public class RemarkCommandTest {
     }
 
     @Test
+    public void generateSuccessCommand_emptyRemark_success() {
+        Person person = new PersonBuilder().build();
+        Index validIndex = INDEX_FIRST_PERSON;
+        RemarkCommand emptyRemarkCommand = new RemarkCommand(validIndex, Remark.EMPTY_REMARK);
+        String expected = RemarkCommand.MESSAGE_DELETE_REMARK_SUCCESS.replace("%1$s", "")
+                + Messages.format(person);
+        assertEquals(expected, emptyRemarkCommand.generateSuccessMessage(person));
+    }
+
+    @Test
+    public void generateSuccessCommand_validRemark_success() {
+        Person person = new PersonBuilder().build();
+        Index validIndex = INDEX_FIRST_PERSON;
+        RemarkCommand validRemarkCommand = new RemarkCommand(validIndex, new Remark(REMARK_STUB));
+        String expected = RemarkCommand.MESSAGE_ADD_REMARK_SUCCESS.replace("%1$s", "")
+                + Messages.format(person);
+        assertEquals(expected, validRemarkCommand.generateSuccessMessage(person));
+    }
+
+    @Test
     public void toStringMethod() {
         Index index = Index.fromOneBased(1);
         RemarkCommand remarkCommand = new RemarkCommand(index, new Remark(REMARK_STUB));
-        String expected = RemarkCommand.class.getCanonicalName() + "{index=" + index + ", remark=" + REMARK_STUB + "}";
+        String expected = RemarkCommand.class.getCanonicalName() + "{index=" + index
+                + ", remark=" + REMARK_STUB + "}";
         assertEquals(expected, remarkCommand.toString());
     }
 }
