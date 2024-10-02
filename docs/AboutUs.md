@@ -11,35 +11,35 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Alqasim Elyas Zuhair A
+
+<img src="images/eru111.png" width="200px">
+
+[[github](https://github.com/eru111)]
+[[portfolio](team/alqasimelyaszuhaira.md)]
+
+* Role: Developer
+* Responsibilities: Storage
+
 ### Nicholas Chan
 
 <img src="images/kaajinn.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/kaajinn)]
 [[portfolio](team/kaajinn.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jane Doe
+### Zhao Yiheng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/linedoestrolling.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/linedoestrolling)]
+[[portfolio](team/zhaoyiheng.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: UI
 
 ### Jean Doe
 
