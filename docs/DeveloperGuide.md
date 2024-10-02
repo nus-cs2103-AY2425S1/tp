@@ -305,16 +305,40 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `UniNet` and the **Actor** is the `user`, unless specified otherwise)
+
+**Use case: Add a contact**
+
+**MSS**
+
+1. User requests to add a new contact
+2. User enters the required information (name and phone number) and optional information (email and tag)
+3. UniNet adds the contact and displays a success message
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given arguments are invalid.
+
+  * 2a1. UniNet shows an error message for the specific invalid field.
+    Use case resumes at step 2.
+
+
+* 3a. Contact with the same phone number already exists.
+
+  * 3a1. UniNet shows an error message about duplicate contact. 
+  
+    Use case resumes at step 2.
 
 **Use case: Delete a person**
 
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  UniNet shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  UniNet deletes the person
 
     Use case ends.
 
@@ -326,11 +350,49 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. UniNet shows an error message.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: Edit a contact**
+
+**MSS**
+
+1. User requests to list contacts
+2. UniNet shows a list of contacts
+3. User requests to delete a specific contact in the list
+4. UniNet deletes the contact
+5. User requests to add a new contact
+6. User enters the required information for the updated contact (name and phone number) and optional information (email and tag)
+7. UniNet adds the contact and displays a success message
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid
+
+  * 3a1. UniNet shows an error message
+
+    Use case resumes at step 2.
+
+* 6a. The given arguments are invalid.
+
+  * 6a1. UniNet shows an error message for the specific invalid field.
+
+    Use case resumes at step 6.
+
+
+* 7a. Contact with the same phone number already exists.
+
+    * 7a1. UniNet shows an error message about duplicate contact.
+
+      Use case resumes at step 6.
+
 
 ### Non-Functional Requirements
 
