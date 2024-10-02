@@ -21,6 +21,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: 
 
+### Ansel Chong
+
+<img src="images/ansel-ch.png" width="200px">
+
+[[github](https://github.com/Ansel-Ch)]
+[[portfolio](team/ansel-ch.md)]
+
+* Role:
+* Responsibilities:
+
 ### Jane Doe
 
 <img src="images/johndoe.png" width="200px">
