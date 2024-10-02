@@ -35,6 +35,7 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.tags.add(new Tag("pending"));
     }
 
     public Name getName() {
