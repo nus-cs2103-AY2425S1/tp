@@ -33,14 +33,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: Commons
 
-### Johnny Doe
+### Chua Chong Sun
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/chongsun2002.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[homepage](https://adventusfrontend-chongsun2002s-projects.vercel.app/)]
+[[github](https://github.com/chongsun2002)]
+[[portfolio](team/chongsun2002.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibility: Code quality and Integration
+  In charge of storage
 
 ### Jean Doe
 
