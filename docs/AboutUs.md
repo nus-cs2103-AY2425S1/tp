@@ -43,7 +43,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/jktang14.png" width="200px">
 
 [[github](http://github.com/johhttps://github.com/jktang14)]
-[[portfolio](team/johndoe.mdhttps://www.linkedin.com/in/tang-jun-kiat-0540582b6/)]
+[[portfolio](https://www.linkedin.com/in/tang-jun-kiat-0540582b6/)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
