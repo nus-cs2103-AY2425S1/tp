@@ -90,6 +90,8 @@ public class Assignment {
                 .add("name", name)
                 .add("MIN_SCORE", MIN_SCORE)
                 .add("maxScore", maxScore)
+                .add("score", score)
+                .add("hasSubmitted", hasSubmitted)
                 .toString();
     }
 
