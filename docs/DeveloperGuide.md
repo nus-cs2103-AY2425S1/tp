@@ -14,6 +14,8 @@
 ## **Acknowledgements**
 
 _{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -300,16 +302,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `StaffSync` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: Delete a person**
 
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  StaffSync shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  StaffSync deletes the person
 
     Use case ends.
 
@@ -321,11 +323,72 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. StaffSync shows an error message.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use Case: Add an employee**
+
+**MSS**
+
+1. User requests to add an employee.
+2. StaffSync saves the employee's information.
+
+    Use case ends.
+
+**Extensions**
+
+*1a. The input syntax is invalid.
+
+    * 1a1. StaffSync shows an error message.
+
+    Use case resumes at step 1.
+
+*1b. The user requests to add a potential hire.
+
+    *1b1. StaffSync saves the potential hire's information.
+
+    Use case ends.
+
+**Use case: Find a person**
+
+**MSS**
+
+1. User requests to find based on name.
+2. StaffSync displays a list of people who have the name.
+
+Use case ends.
+
+**Extensions**
+
+*1a. The input syntax is invalid
+
+    *1a1. StaffSync shows an error message.
+
+    Use case resumes at step 1.
+
+*1b. There is no name that fits the search.
+
+    *1b1. The list is empty.
+
+    Use case ends.
+
+**Use case: Ask for help**
+
+**MSS**
+
+1. User requests for help.
+2. StaffSync gives a list of commands.
+
+Use case ends.
+
+**Use case: Exit the program**
+
+**MSS**
+
+1. User requests to exit the program.
+2. StaffSync closes.
+
 
 ### Non-Functional Requirements
 
