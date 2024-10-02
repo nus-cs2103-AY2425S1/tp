@@ -11,7 +11,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Dominic
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/dominic2412.png" width="200px">
 
 [[homepage](https://github.com/dominic2412)]
 [[github](https://github.com/dominic2412)]
@@ -23,24 +23,24 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 - Responsibilities: lead the team, oversee the User guide
 
 
-### Jane Doe
+### Tung Yan Zuo
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/darren-tung.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/darren-tung)]
+[[portfolio](team/darrentung.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: To be confirmed
 
-### Johnny Doe
+### Stanley Tang Zhiheng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/stanleytangzh.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/stanleytangzh)] [[portfolio](team/stanleytang.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: to be added soon
 
 ### Jean Doe
 
@@ -54,7 +54,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### James Doe
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/adi_profile_picture.png" width="200px">
 
 [[github](http://github.com/johndoe)]
 [[portfolio](team/johndoe.md)]
