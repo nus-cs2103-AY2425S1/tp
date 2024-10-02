@@ -9,6 +9,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Amadeus Eka Kesuma
+<img src="images/amadeuseka.png" width="200px">
+
+[[github](https://github.com/AmadeusEka)]
+[[portfolio](team/amadeus.md)]
+
+* Role: Developer
+* Responsibilities: UI + Data + DevOps  
+
 ### Saw Jing Wen
 
 <img src="images/sawjingwen.png" width="200px">
@@ -19,16 +28,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: UI + DevOps
-
-### John Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
 
 ### Jagdeep Singh Hundal
 
@@ -49,22 +48,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data + DevSecOps
 
-### Jean Doe
 
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
