@@ -287,58 +287,199 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                              | I want to …​                                        | So that I can…​                                                       |
-|----------|------------------------------------------------------|-----------------------------------------------------|-----------------------------------------------------------------------|
-| `* * *`  | new user                                             | see usage instructions                              | refer to instructions when I forget how to use the App                |
-| `* * *`  | user that types fast                                 | utilize an easy to use CLI interface                | be more efficient while using the app                                 |
-| `*`      | user who prefers less screen clutter                 | toggle list view to be less detailed / more general |                                                                       |
-| `* * *`  | CS major planning to apply for internships           | find a specific company by name                     | retrieve info without having to go through the entire list            |
-| `* *`    | CS major planning to apply for internships           | add additional info about the company               |                                                                       |
-| `* *`    | CS major planning to apply for internships           | update the information for a specific company       | ensure my information is up-to-date                                   |
-| `* * *`  | CS major planning to apply for internships           | remove companies I am no longer interested in       | reduce clutter in my list of potential companies                      |
-| `*`      | CS major planning to apply for internships           | add referral contacts to companies                  | remember to include them when applying                                |
-| `*`      | CS major planning to apply for internships           | sort companies by hiring status                     | better prioritize certain companies                                   |
-| `*`      | CS major planning to apply for internships           | sort companies by location distance                 | better prioritize certain companies                                   |
-| `*`      | CS major planning to apply for internships           | sort companies by remote work availability          | better prioritize certain companies                                   |
-| `*`      | CS major planning to apply for internships           | sort companies by working hour flexibility          | better prioritize certain companies                                   |
-| `*`      | CS major planning to apply for internships           | sort companies by internship role                   | better prioritize certain companies                                   |
-| `* * *`  | CS major currently applying for internships          | add internship applications to a specific company   |                                                                       |
-| `* * *`  | CS major currently applying for internships          | mark the status of different applications           | keep track of the current progress of the application                 |
-| `* *`    | CS major currently applying for internships          | view upcoming interviews to applied companies       |                                                                       |
-| `*`      | CS major currently applying for internships          | add notes for upcoming / completed interviews       | find a specific piece of info for that interview in the future        |
-| `* *`    | CS major currently applying for internships          | filter applications by status                       | focus on applications that need immediate attention                   |
-| `*`      | CS major currently applying for internships          | organize interview timings                          | ensure that they do not overlap                                       |
-| `* * *`  | CS major who have previously applied for internships | delete internship application records               | remove irrelevant applications that clutter the screen                |
-| `* *`    | user                                                 | export my data out of InternBuddy                   | have a data backup and/or share company information with fellow peers |
+| Priority | As a …​                                                   | I want to …​                                                | So that I can…​                                                       |
+|----------|-----------------------------------------------------------|-------------------------------------------------------------|-----------------------------------------------------------------------|
+| `* * *`  | new user                                                  | see usage instructions                                      | refer to instructions when I forget how to use the App                |
+| `* * *`  | user that types fast                                      | utilize an easy to use CLI interface                        | be more efficient while using the app                                 |
+| `*`      | user who prefers less screen clutter                      | toggle list view to be less detailed / more general         |                                                                       |
+| `* *`    | user                                                      | export my data out of InternBuddy                           | have a data backup and/or share company information with fellow peers |
+| `* * *`  | CS major planning to apply for internships                | find a specific company by name                             | retrieve info without having to go through the entire list            |
+| `* *`    | CS major planning to apply for internships                | add additional info about the company                       |                                                                       |
+| `* *`    | CS major planning to apply for internships                | update the information for a specific company               | ensure my information is up-to-date                                   |
+| `*`      | CS major planning to apply for internships                | add referral contacts to companies                          | remember to include them when applying                                |
+| `*`      | CS major planning to apply for internships                | sort companies by hiring status                             | better prioritize certain companies                                   |
+| `*`      | CS major planning to apply for internships                | sort companies by location distance                         | better prioritize certain companies                                   |
+| `*`      | CS major planning to apply for internships                | sort companies by remote work availability                  | better prioritize certain companies                                   |
+| `*`      | CS major planning to apply for internships                | sort companies by working hour flexibility                  | better prioritize certain companies                                   |
+| `*`      | CS major planning to apply for internships                | sort companies by internship role                           | better prioritize certain companies                                   |
+| `* * *`  | CS major currently applying for internships               | update internship application status for a specific company | maintain an updated list of the companies I'm applying for            |
+| `* *`    | CS major currently applying for internships               | sort companies applications by status                       | focus on companies that need immediate attention                      |
+| `*`      | CS major currently applying for internships               | add notes for upcoming / completed interviews               | find a specific piece of info for that interview in the future        |
+| `*`      | CS major currently applying for internships               | organize interview timings                                  | ensure that they do not overlap                                       |
+| `* * *`  | CS major planning to apply or is applying for internships | remove companies which are no longer relevant to me         | reduce clutter in my list of potential companies                      |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `InternBuddy` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Add a company**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to add a company.
+2.  InternBuddy adds the company.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. User provides incomplete required information for the company (name or email).
+    * 1a1. InternBuddy shows an error message.
+
+      Use case restarts at step 1.
+
+* 1b. User specifies an optional company information that is empty (address, contact number, or tags).
+    * 1b1. InternBuddy shows an error message.
+
+      Use case restarts at step 1.
+
+* 1c. User provided email is in wrong format.
+    * 1c1. InternBuddy shows an error message.
+
+      Use case restarts at step 1.
+
+* 1d. User provided contact number is in wrong format.
+    * 1d1. InternBuddy shows an error message.
+
+      Use case restarts at step 1.
+
+* 1e. User provides an already saved company.
+    * 1e1. InternBuddy shows an error message.
+
+      Use case restarts at step 1.
+
+* 1f. User decides not to add the company.
+ 
+  Use case ends.
+
+**<a id="uc02"></a>Use case: UC02 - List all saved companies**
+
+**MSS**
+
+1.  User requests to list companies.
+2.  InternBuddy shows a list of companies.
+ 
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+     * 1a1. InternBuddy shows a message to indicate that the list is empty
+
+       Use case ends.
+
+**<a id="uc03"></a>Use case: UC03 - Find a company by name**
+
+**MSS**
+
+1.  User searches for a company's name.
+2.  InternBuddy shows the matching company(s).
+
+**Extension**
+
+* 1a. The list is empty.
+    * 1a1. InternBuddy shows an error message that the list is empty.
+
+      Use case ends.
+
+* 1b. User did not provide a name to search.
+    * 1b1. InternBuddy shows an error message.
+
+      Use case restarts at step 1.
+
+* 1c. User decides not to find a company.
+
+  Use case ends.
+
+* 2b. No companies with matching name found.
+    * 2b1. InternBuddy shows an error message to indicate no matches found.
+
+      Use case ends.
+
+**Use case: UC04 - Delete a saved company**
+
+**MSS**
+
+1.  User requests to [list saved companies (UC03)](#uc02) or [find a company (UC04)](#uc03)
+2.  User requests to delete a specific company in the list.
+3.  InternBuddy deletes the company.
+ 
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 2a. User decides not to edit a company.
 
   Use case ends.
 
 * 3a. The given index is invalid.
+    * 3a1. InternBuddy shows an error message.
 
-    * 3a1. AddressBook shows an error message.
+    Use case resumes at step 2.
 
-      Use case resumes at step 2.
+**Use case: UC05 - Edit company information**
+
+1.  User requests to [list saved companies (UC03)](#uc02) or [find a company (UC04)](#uc03)
+2.  User requests to edit a specific company in the list.
+3.  InternBuddy edits the company.
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 2a. User provides updated information in the wrong format.
+    * 2a1. InternBuddy shows an error message.
+
+  Use case resumes at step 2.
+
+* 2b. User provides already existing information.
+    * 2b1. InternBuddy shows an error message.
+
+  Use case resumes at step 2.
+
+* 2c. User decides not to edit a company.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+    * 3a1. InternBuddy shows an error message.
+
+  Use case resumes at step 2.
+ 
+**Use case: UC06 - Edit company application status**
+
+1.  User requests to [list saved companies (UC03)](#uc02) or [find a company (UC04)](#uc03)
+2.  User requests to edit a specific company in the list.
+3.  InternBuddy edits the company.
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 2a. User provides updated information in the wrong format.
+    * 2a1. InternBuddy shows an error message.
+
+  Use case resumes at step 2.
+
+* 2b. User provides updated information that already exists.
+    * 2b1. InternBuddy shows an error message.
+
+  Use case resumes at step 2.
+
+* 2c. User decides not to edit a company.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+    * 3a1. InternBuddy shows an error message.
+
+  Use case resumes at step 2.
 
 *{More to be added}*
 
