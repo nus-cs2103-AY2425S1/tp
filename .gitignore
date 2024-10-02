@@ -1,6 +1,7 @@
 # Gradle build files
 /.gradle/
 /build/
+/bin/
 src/main/resources/docs/
 
 # IDEA files
@@ -23,5 +24,3 @@ src/test/data/sandbox/
 docs/_site/
 
 .vscode/
-bin
-*.class
