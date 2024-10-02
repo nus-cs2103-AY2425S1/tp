@@ -29,7 +29,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/jerrelllee)]
 [[portfolio](team/jerrelllee.md)]
 
-* Role: Developer
+* Role:
+* Responsibilities:
+
+### Wee Kean
+
+<img src="images/edsel-tan.png" width="200px">
+
+[[github](http://github.com/edsel-tan)] [[portfolio](team/edsel-tan.md)]
+
+* Role: Senior Finance Manager
 * Responsibilities: 
 
 ### Ansel Chong
