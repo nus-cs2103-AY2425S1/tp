@@ -16,7 +16,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/isaacpangth.png" width="200px">
 
 [[github](https://github.com/IsaacPangTH)]
-[[portfolio](team/isaac.md)]
+[[portfolio](team/isaacpangth)]
 
 * Role: Documentation Lead
 * Responsibilities: Documentation, IntelliJ Expert, Git CLI Expert, In charge of Model
