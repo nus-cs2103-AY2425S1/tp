@@ -11,15 +11,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Chan Guan Yu
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/g_y_chan.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/G_Y_Chan)]
+[[portfolio](team/G_Y_Chan.md)]
 
-* Role: Project Advisor
+* Role: Git Expert
 
 ### Jane Doe
 
