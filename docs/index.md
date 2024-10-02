@@ -3,8 +3,8 @@ layout: page
 title: ConTActs
 ---
 
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
-[![codecov](https://codecov.io/gh/se-edu/addressbook-level3/branch/master/graph/badge.svg)](https://codecov.io/gh/se-edu/addressbook-level3)
+[![Java CI](https://github.com/AY2425S1-CS2103T-T10-3/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2425S1-CS2103T-T10-3/tp/actions/workflows/gradle.yml)
+[![codecov](https://codecov.io/gh/AY2425S1-CS2103T-T10-3/tp/graph/badge.svg?token=Y4KHEMF7YA)](https://codecov.io/gh/AY2425S1-CS2103T-T10-3/tp)
 
 ![Ui](images/Ui.png)
 
