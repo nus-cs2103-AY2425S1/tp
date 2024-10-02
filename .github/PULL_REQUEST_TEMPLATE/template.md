@@ -3,8 +3,9 @@ name: Pull Request
 about: Create a pull request
 title: ''
 labels: ''
-assignees: 'me'
+assignees: ''
 milestone: 'v1.1'
+project: 'AY2425S1-CS2103T-W13-2/4'
 
 ---
 ## Context
