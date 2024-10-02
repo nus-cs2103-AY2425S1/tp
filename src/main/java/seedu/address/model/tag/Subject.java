@@ -11,9 +11,9 @@ import static seedu.address.commons.util.EnumUtil.inEnum;
 public class Subject {
     enum Subjects {
         MATH,
-        PHYSIC, CHEM, BIO,
-        HIS, GEO,
-        ENG,
+        PHYSICS, CHEMISTRY, BIOLOGY,
+        LITERATURE, HISTORY, GEOGRAPHY,
+        ENGLISH, MOTHER_TONGUE
     }
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";

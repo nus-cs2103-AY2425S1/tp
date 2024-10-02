@@ -12,8 +12,8 @@ public class Level {
     enum Levels {
         K1, K2,
         P1, P2, P3, P4, P5, P6,
-        S1, S2, S3, S4,
-        J1, J2,
+        S1, S2, S3, S4, S5,
+        JC1, JC2,
 
     }
 
