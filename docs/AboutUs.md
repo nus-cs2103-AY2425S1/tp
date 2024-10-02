@@ -11,6 +11,18 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Wee Zhuo Lin
+
+<img src="images/jolwnn.png" width="200px">
+
+[[GitHub](https://github.com/jolwnn)]
+[[portfolio](https://jolynn-wee.vercel.app)]
+
+* Role: Integration
+* Responsibilities: In charge of versioning of the code, maintaining the code repository, integrating various parts of 
+* the software to create a whole. Handle delete property commands and documentation.
+
+
 ### John Doe
 
 <img src="images/johndoe.png" width="200px">
