@@ -45,15 +45,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Responsibility: Code quality and Integration
   In charge of storage
 
-### Jean Doe
+### Justin Yeo
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/justin-yeo.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/Justin-Yeo)] 
+[[portfolio](team/justinyeo.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities:
+  * Deliverables and Deadlines
+  * In charge of 'Ui'
 
 ### Zhanzhi Lou
 
