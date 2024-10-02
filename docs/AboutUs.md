@@ -19,15 +19,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Haleema Irfan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/haleemairfan.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/yyueyii)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Developer
+* Responsibilities: In charge of Logic
 
 ### Varatharaju Mithuna
 
@@ -57,15 +57,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: UI
-
-
-### Haleema Irfan
-
-<img src="images/haleemairfan.png" width="200px">
-
-[[github](http://github.com/yyueyii)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: In charge of Logic
 
