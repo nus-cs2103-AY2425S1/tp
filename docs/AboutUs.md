@@ -38,15 +38,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Kimaya Wanjari
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kimxw.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/kimxw)]
+[[portfolio](team/kimxw.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Team Lead
 
 ### Nathan Shew
 
