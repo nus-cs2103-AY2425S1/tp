@@ -6,48 +6,55 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
-    "tags" : [ "friends" ]
+    "tags" : [ "friends" ],
+    "contactDates" : [ "2024-09-28" ]
   }, {
     "nric" : "S0233700B",
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
-    "tags" : [ "owesMoney", "friends" ]
+    "tags" : [ "owesMoney", "friends" ],
+    "contactDates" : [ "2024-09-28" ]
   }, {
     "nric" : "S6192793Z",
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
-    "tags" : [ ]
+    "tags" : [ ],
+    "contactDates" : [ "2024-09-28" ]
   }, {
     "nric" : "S0589789J",
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
-    "tags" : [ "friends" ]
+    "tags" : [ "friends" ],
+    "contactDates" : [ "2024-09-28" ]
   }, {
     "nric" : "S5674593I",
     "name" : "Elle Meyer",
     "phone" : "9482224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
-    "tags" : [ ]
+    "tags" : [ ],
+    "contactDates" : [ "2024-09-28" ]
   }, {
     "nric" : "S1092693I",
     "name" : "Fiona Kunz",
     "phone" : "9482427",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
-    "tags" : [ ]
+    "tags" : [ ],
+    "contactDates" : [ "2024-09-28" ]
   }, {
     "nric" : "S8596794J",
     "name" : "George Best",
     "phone" : "9482442",
     "email" : "anna@example.com",
     "address" : "4th street",
-    "tags" : [ ]
+    "tags" : [ ],
+    "contactDates" : [ "2024-09-28" ]
   } ]
 }
