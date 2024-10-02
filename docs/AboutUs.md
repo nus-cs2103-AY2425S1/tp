@@ -59,3 +59,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: UI
+
+### Yaswitha Nalluri
+
+<img src="images/yastsc.png" width="200px">
+
+[[github](https://github.com/yastsc)]
+[[portfolio](team/yaswitha.md)]
+
+* Role: Developer
+* Responsibilities: Data
+
