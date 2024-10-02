@@ -36,8 +36,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/colinhia)] 
 [[portfolio](http://github.com/colinhia)]
 
-* Role: Developer: Testing, Deliverables and Deadlines
-* Responsibilities: Keeps track of deliverables and deadlines; helps with testing.
+* Role: Developer
+* Responsibilities: Deliverables & Deadlines, Testing
 
 ### Jean Doe
 
