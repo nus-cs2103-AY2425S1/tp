@@ -15,7 +15,7 @@ import seedu.address.model.person.Person;
 
 /**
  * Marks a person as contacted.
- * Identified using it's displayed index from the address book.
+ * Identified using it's displayed index or NRIC from the address book.
  */
 public class MarkCommand extends Command {
     public static final String COMMAND_WORD = "mark";
@@ -28,11 +28,21 @@ public class MarkCommand extends Command {
     private final Index targetIndex;
     private final Nric targetNric;
 
+    /**
+     * Creates a MarkCommand to mark person at the specified {@code Index} as called.
+     *
+     * @param targetIndex The {@code Index} of the person to be marked.
+     */
     public MarkCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
         this.targetNric = null;
     }
 
+    /**
+     * Creates a MarkCommand to mark person with the specified {@code Nric} as called.
+     *
+     * @param targetNric The {@code Nric} of the person to be marked.
+     */
     public MarkCommand(Nric targetNric) {
         this.targetNric = targetNric;
         this.targetIndex = null;
@@ -72,13 +82,15 @@ public class MarkCommand extends Command {
         }
 
         MarkCommand otherMarkCommand = (MarkCommand) other;
-        return targetIndex.equals(otherMarkCommand.targetIndex);
+        return (targetIndex != null && targetIndex.equals(otherMarkCommand.targetIndex))
+                || (targetNric != null && targetNric.equals(otherMarkCommand.targetNric));
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("targetIndex", targetIndex)
+                .add("targetNric", targetNric)
                 .toString();
     }
 }
