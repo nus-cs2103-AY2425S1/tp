@@ -332,8 +332,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Should not require an additional installer to use.
+5. Should be packaged entirely into a single JAR file (i.e. the user will only need to download a single JAR file to use the product).
+6. The size of the JAR file should not exceed 100MB.
+7. Additional files such as DG (Developer Guide) and UG (User Guide) should not exceed 15MB in size per file and should be PDF-friendly.
+8. The user interface should be intuitive enough for users who are not IT-savvy.
+9. User interface should be displayed in British english.
+10. Time zones and dates displayed are in Singapore Standard Time.
+11. Should be used only by a single user (i.e. the data file created by a user should not be accessed by another user and the product should not be used on a shared computer accessible to multiple users).
+12. The data file is stored locally into the user's hard disk.
+13. The data file is stored in an editable, .JSON, format.
+14. The information of a contact detail (address, contact number and date last visited) should be clear and visible.
 
-*{More to be added}*
 
 ### Glossary
 
