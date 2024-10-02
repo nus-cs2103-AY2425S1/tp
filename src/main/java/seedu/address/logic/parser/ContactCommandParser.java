@@ -1,12 +1,12 @@
 package seedu.address.logic.parser;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteContactCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.parser.DeleteContactCommandParser;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Parses input arguments and creates the appropriate ContactCommand objects.
