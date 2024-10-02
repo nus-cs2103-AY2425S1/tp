@@ -307,7 +307,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User issues the add-contact command with the contact details (name, optional phone number, address, email, and tags). 
-2.  The system adds the contact and displays a success message: "Contact added successfully."
+2.  The system adds the contact and displays a success message
 3.  The system shows the new contact in the address book.
 
     Use case ends.
@@ -315,51 +315,39 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. The system detects a name input error (duplicated or trailing whitespace).
-    * 1a1. The system displays an error message: “Names should not have any duplicated whitespaces or trailing white space.”
-    * 1a2. User corrects the command with the proper name and reissues the command.
-    * Steps 1a1-1a2 are repeated until the name is correct.
+    * 1a1. The system displays an error message
   
-        The use case resumes from step 2.
+        The use case ends.
   
   
 * 1b. The system detects a phone number input error (invalid format): 
-    * 1b1. The system displays an error message: “Phone number must match the format XXXXXXXX, no spaces or special characters are allowed.” 
-    * 1b1. User corrects the command with the valid phone number and reissues the command. 
-    * Steps 1b1-1b2 are repeated until the phone number is correct.
+    * 1b1. The system displays an error message stating the correct format
   
-        The use case resumes from step 2.
+        The use case ends.
   
   
 * 1c. The system detects an address input error (too long):
-    * 1c1. The system displays an error message: “Address must be under 200 characters.” 
-    * 1c2. User corrects the command with a valid address and reissues the command.
-    * Steps 1c1-1c2 are repeated until the address length is acceptable.
+    * 1c1. The system displays an error message stating the maximum length
   
-        The use case resumes from step 2.
+        The use case ends.
   
   
 * 1d. The system detects an email input error (invalid format):
-    * 1d1. The system displays an error message: “Email must be in the format xxxx@xxxx.xxxx and must follow the following rules: the characters preceding the “@” symbol must be +_.- or alphanumeric; no spaces are allowed; the domain labels after the “@” symbol must start and end with an alphanumeric character and may be hyphenated; the last domain label must be at least 2 characters long.” 
-    * 1d2. User corrects the command with a valid email and reissues the command.
-    * Steps 1d1-1d2 are repeated until the email format is correct.
+    * 1d1. The system displays an error message stating the correct format
   
-        The use case resumes from step 2.
+        The use case ends.
   
   
 * 1e. The system detects a duplicate phone number error:
-    * 1e1. The system displays an error message: “Phone number already exists for a different contact.” 
-    * 1e2. User provides a different phone number or removes the phone number from the command and reissues it.
-    * Steps 1e1-1e2 are repeated until the phone number entered is not a duplicate.
+    * 1e1. The system displays an error message mentioning the existence of a duplicate phone number
     
-        The use case resumes from step 2.
+        The use case ends.
         
 
 * 1f. The system detects an invalid tag input:
-    * 1f1. The system displays an error message: “Tag does not exist. Use the add-tag function to create new tags.” 
-    * 1f2. User either removes the tag, <ins>create the tag (UC07)</ins> , or corrects it to an existing tag in the command and reissues the command. 
-    * Steps 1f1-1f2 are repeated until the tag is acceptable.
+    * 1f1. The system displays an error message stating the tag is invalid
     
-        The use case resumes from step 2.
+        The use case ends.
 
 
 
@@ -372,7 +360,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User issues the add-phone command with a contact index and a phone number. 
-2.  The system updates or adds the phone number to the contact and displays a success message: "Phone number for user [CONTACT_INDEX] updated successfully to [PHONE_NUMBER]."
+2.  The system updates or adds the phone number to the contact and displays a success message
 3.  The system displays the updated contact information in the address book.
 
     Use case ends.
@@ -380,27 +368,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. The system detects an invalid contact index:
-    * 1a1. The system displays an error message: “Invalid contact index. Please provide a valid index from the contact list.”
-    * 1a2. User corrects the command with a different contact index and reissues the command.
-    * Steps 1a1-1a2 are repeated until the index entered is a valid contact index.
-  
+    * 1a1. The system displays an error message stating the contact index is invalid.
+
         The use case ends.
   
   
 * 1b. The system detects a phone number input error (invalid format):
-    * 1b1. The system displays an error message: “Phone number must match the format XXXXXXXX, no spaces or special characters are allowed.” 
-    * 1b2. User corrects the command with a valid phone number and reissues the command.
-    * Steps 1b1-1b2 are repeated until the phone number in the correct format.
+    * 1b1. The system displays an error message stating the correct format
     
-        The use case resumes from step 2.
+        The use case ends.
   
 
 * 1c. The system detects a duplicate phone number error:
-    * 1c1. The system displays an error message: “Phone number already exists for a different contact.” 
-    * 1c2. User provides a different phone number and reissues the command.
-    * Steps 1c1-1c2 are repeated until the phone number entered is unique.
+    * 1c1. The system displays an error message mentioning the existence of a duplicate phone number
     
-        The use case resumes from step 2.
+        The use case ends
 
 
 
@@ -409,7 +391,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User issues the add-address command with a contact index and an address. 
-2.  The system updates or adds the address to the contact and displays a success message: "Address for user [CONTACT_INDEX] updated successfully to [ADDRESS]."
+2.  The system updates or adds the address to the contact and displays a success message
 3.  The system displays the updated contact information in the address book.
 
     Use case ends.
@@ -417,19 +399,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. The system detects an invalid contact index:
-    * 1a1. The system displays an error message: “No contact exists with index [CONTACT_INDEX].”
-    * 1a2. User corrects the command with a valid contact index reissues the command.
-    * Steps 1a1-1a2 are repeated until the phone number entered is unique.
+    * 1a1. The system displays an error message stating the contact index is invalid.
 
-        The use case resumes from step 2.
+        The use case ends.
   
 
 * 1b. The system detects an address input error (too long):
-    * 1b1. The system displays an error message: “Address must be under 200 characters.” 
-    * 1b2. User corrects the command with a valid address and reissues the command.
-    * Steps 1b1-1b2 are repeated until the phone number entered is unique.
+    * 1b1. The system displays an error message stating the maximum length
       
-        The use case resumes from step 2.
+        The use case ends.
 
 
 **Use case: UC04 - Add or Update Email to Contact**
@@ -437,7 +415,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User issues the add-email command with a contact index and an email address. 
-2.  The system updates or adds the email address to the contact and displays a success message: "Email for user [CONTACT_INDEX] updated successfully to [EMAIL]."
+2.  The system updates or adds the email address to the contact and displays a success message
 3.  The system displays the updated contact information in the address book.
 
     Use case ends.
@@ -445,19 +423,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. The system detects an invalid contact index:
-    * 1a1. The system displays an error message: “No contact exists with index [CONTACT_INDEX].” 
-    * 1a2. User corrects the command with a valid contact index reissues the command.
-    * Steps 1a1-1a2 are repeated until the phone number entered is unique.
+    * 1a1. The system displays an error message stating the contact index is invalid.
 
-        The use case resumes from step 2.
+        The use case ends.
 
 
 * 1b. The system detects an email input error (invalid format):
-    * 1b1. The system displays an error message: “Email must be in the format xxxx@xxxx.xxxx and must follow the following rules: the characters preceding the “@” symbol must be +_.- or alphanumeric; no spaces are allowed; the domain labels after the “@” symbol must start and end with an alphanumeric character and may be hyphenated; the last domain label must be at least 2 characters long.” 
-    * 1b2. User corrects the command with a valid email address and reissues the command.
-    * Steps 1b1-1b2 are repeated until the phone number entered is unique.
-
-      The use case resumes from step 2.
+    * 1b1. The system displays an error message stating the correct format.
+  
+        The use case ends.
       
 
 
