@@ -47,3 +47,12 @@ We are a team based in the [School of Computing, National University of Singapor
 * Role: Developer
 * Responsibilities: make DDD work
 
+### Leslie
+
+<img src="images/leslieyip02.png" width="200px">
+
+[[github](http://github.com/leslieyip02)]
+[[portfolio](team/leslieyip02.md)]
+
+* Role: Developer
+* Responsibilities: UI
