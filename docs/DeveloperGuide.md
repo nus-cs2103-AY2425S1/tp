@@ -325,6 +325,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
+**Name: UC01 - Create Contact (Vendor/Client)**
+
+**Actor: Wedding Planner**
+
+**Main Success Scenario (MSS):**
+1. Wedding planner selects the option to create a new contact.
+2. System requests for the details of the contact (client or vendor).
+3. Wedding planner enters the required details (name, phone number, etc.).
+4. System validates the entered details (check for format, duplication, etc.).
+5. System creates the contact and assigns a unique ID to the contact.
+6. System displays a success message confirming the creation of the contact.
+
+**Extensions:**
+
+- 3a. System detects an error in the entered data (e.g., invalid phone number). 
+- 3b. System requests the correct data. 
+- 3c. Wedding planner enters new data. 
+- Use case resumes from step 4.
+
+
+- 5a. The contact already exists in the system (duplicate contact).
+- 5a1. System displays a message that the contact already exists.
+- Use case ends.
+
+**Guarantees:**
+
+The contact is successfully created and stored in the system if all input data is valid.
+Duplicate contacts will not be created.
+
+___
 **Use case: Delete a person**
 
 **MSS**
@@ -375,11 +405,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  The system should respond within two seconds.
-5.  The system should work on both 32-bit and 64-bit environments.
+
+1. Compatibility: Should work on any _mainstream OS_ (Windows/macOS/Linux) as long as it has Java `17` or above installed.
+2. Compatibility: The system should be usable on both desktop (Windows/macOS)
+3. Compatibility: The system should work on both 32-bit and 64-bit environments.
+4. User Experience: Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+5. User Experience: The system should respond within two seconds.
+6. User Experience: A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse. 
+8. Privacy: User data must remain on the local machine and not be shared or transmitted to any external services unless explicitly requested by the user (e.g., exporting contacts). 
+9. Portability: The system should allow easy exporting of data to be imported into other applications if needed.
 
 ### Glossary
 
