@@ -275,14 +275,41 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​         | I want to …​                     | So that I can…​                                                                                                                |
+| -------- |-----------------| ------------------------------ |--------------------------------------------------------------------------------------------------------------------------------|
+|`* * *`|admin|search for students' information using their name| quickly access students' information when needed                                                                               |
+|`* * *`|admin|remove ex-students' information from the address book| clean and organise the database                                                                                                |
+|`* * *`|admin|check for student's attendance for past weeks| send reminders to remind them to attend classes                                                                                |
+|`* * *`|admin|record how much a student have paid| check the remaining overdue amount                                                                                             |
+|`* * *`|admin|check when the is the payment deadline for the student| send reminders for student to get ready to pay/pay before the deadline                                                         |
+|`* * *`|admin|see the students' contacts(telegram, whatsapp, email)| chase/remind the students for payment                                                                                          |
+|`* * *`|admin|login to the address book| prevent other people from accessing and modifying the information                                                              |
+|`* * *`|admin|input student information| keep track of new students joining the center                                                                                  |
+|`* * *`|admin |mark attendance of the students for that week| arrange makeup lessons for students if necessary                                                                               |
+|`* * *`|new admin|be disallowed from keying in invalid grade| not enter invalid information                                                                                                  |
+|`* * *`|new admin|be disallowed from keying in invalid student contact information| not enter invalid information                                                                                                  |
+|`* * *`|new admin |see all students' contact information under their profile| easily contact students when required without having to learn how the database is organised and searching for required details |
+|`* *`|admin|check the number of students referred by a student | determine which referral reward the student is entitled to if the maximum limit has not been reached                           |
+|`* *`|admin|check the grades of students| make marketing posters through quick statistics                                                                                |
+|`* *`|admin|track the homework submitted by each students| keep track of their progress and inform tutor's easily as required                                                             |
+|`* *`|admin|access a help sheet of commands| be reminded of the commands                                                                                                    |
+|`* *`|admin|archive records of past students| make the data cleaner and easier to manage                                                                                     |
+|`* *`|admin|see which student have the most overdue amount| chase/remind the students for payment                                                                                          |
+|`* *`|admin|change the status of the student from existing to past-student| focus on tracking the exisiting students                                                                                       |
+|`* *`|expert admin|have a way to mass input new students into the system| enter a bigger influx of students more easily                                                                                  |
+|`* *`|expert admin|create shortcuts for mass marking student's attendance| speed up repetitive tasks                                                                                                      |
+|`* *`|new admin|be shown a template example for valid input| learn the proper input format                                                                                                  |
+|`* *`|tutor|track the grades of students| monitor the learning progess of my students                                                                                    |
+|`* *`|tutor |check the availability of the classrooms | schedule makeup lessons or consultations                                                                                       |
+|`*`|admin|see the availability of slots per class for a subject | easily shift students around to different available time slots if they were to make requests to attend different slots         |
+|`*`|admin|see all available classes for different subjects and the respective availabilities| inform new students of available classes easily                                                                                |
+|`*`|admin|view the week's class schedule and which student is inside| be clear on who is attending class and when, know who I am teaching, and if there are any conflicts in scheduling              |
+|`*`|admin |check students who are entitled to but have not received referral rewards| keep track and give out referral rewards to students more easily                                                               |
+|`*`|expert admin|can categorise students' profiles into different groups for different actions to be taken like those who need to pay fees, take tests, submit homework, etc| send appropriate reminders in a more organised manner                                                                          |
+|`*`|expert admin|automate admin tasks like sending reminders for payment, homework, etc| saved time from not doing these repetitive tasks every month                                                                   |
+|`*`|expert admin|do mass tracking for student counts or revenue| see if the tuition centre is doing well                                                                                        |
+|`*`|part-time admin|see specific categories of students that I am in charge in| focus on only managing the relevant student records without distractions                                                       |
+
 
 *{More to be added}*
 
