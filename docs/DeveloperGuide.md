@@ -28,8 +28,6 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **Design**
 
-<<<<<<< HEAD
-=======
 
 ### Architecture
 
