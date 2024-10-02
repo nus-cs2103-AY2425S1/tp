@@ -11,12 +11,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### Gavin Soh
+### Jarrell Chia
 
-<img src="images/gavinsoh.png" width="200px">
+<img src="images/johndoe.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/gavinsoh)]
+[[github](https://github.com/jarrellc1)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Project Advisor
@@ -31,31 +31,33 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Choo Yi Xiang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yixianggg.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/yixianggg)] 
+[[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Benjamin Lim
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/benjibase.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/benjiBase)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Data
 
-### James Doe
+### Chong Xin Wei
 
 <img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/xinweichong)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: UI
+
