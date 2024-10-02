@@ -10,6 +10,16 @@ We are a team based in the [School of Computing, National University of Singapor
 You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
+
+### Chan Guan Yu
+
+<img src="images/g_y_chan.png" width="200px">
+
+[[github](https://github.com/G_Y_Chan)]
+[[portfolio](team/G_Y_Chan.md)]
+
+* Role: Git Expert
+
 ### Chua Wee Kiat Nicholas
 
 <img src="images/nicholascwk.png" width="200px">
