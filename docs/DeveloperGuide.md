@@ -348,16 +348,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-| **Term**                      | **Definition**                                                                                                                                       |
-|-------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Mainstream OS                 | Windows, Linux, Unix, MacOS                                                                                                                          |
-| Private contact detail        | A contact detail that is not meant to be shared with others                                                                                          |
-| Engagement History            | A record of past interactions, such as donations, volunteer participation associated with a contact                                                  |
-| Human-Readable Format         | A file format that can be easily understood and edited by people without specialized software (e.g., plain text or CSV)                              |
-| Volunteer Participation Hours | A record of the number of hours a volunteer has contributed to activities or events                                                                  |
-| Tag                           | A keyword or label applied to a contact for easier filtering or searching                                                                            |
-| Search Query                  | A user-provided input (e.g., name or role) to filter contacts in the list                                                                            |
-| Reminder                      | A notification or prompt that alerts users to follow up on an important task, such as contacting a donor or updating volunteer participation hours   |
+| **Term**                      | **Definition**                                                                                                          |
+|-------------------------------|-------------------------------------------------------------------------------------------------------------------------|
+| Mainstream OS                 | Windows, Linux, Unix, MacOS                                                                                             |
+| Private contact detail        | A contact detail that is not meant to be shared with others                                                             |
+| Engagement History            | A record of past interactions, such as donations, volunteer participation associated with a contact                     |
+| Human-Readable Format         | A file format that can be easily understood and edited by people without specialized software (e.g., plain text or CSV) |
+| Volunteer Participation Hours | A record of the number of hours a volunteer has contributed to activities or events                                     |
+| Tag                           | A keyword or label applied to a contact for easier filtering or searching                                               |
+| Search Query                  | A user-provided input (e.g., name or role) to filter contacts in the list                                               |
+| Reminder                      | A notification or prompt that alerts users to follow up on an important task, such as donation drives                   |
 
 --------------------------------------------------------------------------------------------------------------------
 
