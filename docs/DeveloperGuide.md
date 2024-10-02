@@ -272,31 +272,42 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Target user profile**: 
 
-* has a need to manage a significant number of contacts
+* employees of a company's talent recruitment departments who need to manage contacts of job applicants.
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: This app streamlines the process of managing talent contact information by centralizing essential 
+contact details, making it easier to organise, search, and update information on potential candidates. 
+Its search and filtering capabilities help recruiters quickly find profiles based on specific criteria, 
+improving efficiency and reducing time spent on administrative tasks.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority     | As a …​                              | I want to …​                                                                 | So that I can…​                                                                                   |
+|--------------|--------------------------------------|------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
+| `* * *`      | user                                 | see the list of all contacts                                                 | see the contact of every applicants                                                               |
+| `* * *`      | user                                 | add a new contact                                                            | keep track of applicant's contact details                                                         |
+| `* * *`      | user                                 | delete a contact                                                             | remove contact of applicants who is no longer in the recruitment process                          |
+| `* * *`      | user                                 | find a contact by his/her name                                               | see particular applicant's contact detail without having to go through the entire list            |
+| `* * *`      | user                                 | tag applicants based on their stage in the recruitment process               | track their progress and determine the next steps in the recruitment process.                     |
+| `**`         | efficient user                       | filter contacts which fulfil several criteria                                | quickly access the list of contacts that matches my needs                                         |
+| `**`         | user                                 | sort the contacts based on certain criteria                                  | quickly access the contacts that I need to prioritize                                             |
+| `**`         | user with a high volume of applicants | batch update applicants stage in one action                                  | manage and progress multiple contacts efficiently without repetitive tasks                        |
+| `**`         | user                                 | change any detail of a contact                                               | update the contact details when needed                                                            |
+| `**`         | newbie user                          | get help on how to start using the program                                   | familiarize myself with how to use the program                                                    |
+| `**`         | senior user                          | know proportion of contacts who pass/fail in different recruitment stages    | get insightful data to help me adjust how much more/less to accept in the next recruitment period |
+| `**`         | user                                 | filter contacts with fuzzy match                                             | find relevant contacts easily without typing the exact keywords                                   |
+| `*`          | user                                 | highlight contact of applicant with criminal record or conflicts of interest | easily locate applicants who needs to be investigated further                                     |
+| `*`          | organized user                       | view visual timeline of each contact's recruitment stage                     | easily keep track of the position of each contact in the recruitment process                      |
+| `*`          | user | store applicant's resume                                                     | easily access and refer to their resume                                                           |
 
-*{More to be added}*
 
 ### Use Cases
 
