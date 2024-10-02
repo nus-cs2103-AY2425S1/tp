@@ -305,16 +305,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use Case: UC01 - Add student contact**
 
 **MSS**:
-1. Tutor keys in required fields to add student contact
-2. TutorEase adds the student contact
+1. Tutor keys in required fields to add student contact.
+2. TutorEase adds the student contact.
 Use case ends
 
 **Extensions**:
 * **1a.** TutorEase detects bad or wrongly formatted inputs.
-    * **1a1.** TutorEase prompts Tutor with correct format
+    * **1a1.** TutorEase prompts Tutor with correct format.
     * **1a2.** Tutor enters new data.
-    Steps 1a1 to 1a2 are repeated until the data entered are correct
-    Use case resumes from Step 2
+    Steps 1a1 to 1a2 are repeated until the data entered are correct.
+    Use case resumes from Step 2.
 
 **Use Case: UC02 - Delete student contact**
 
