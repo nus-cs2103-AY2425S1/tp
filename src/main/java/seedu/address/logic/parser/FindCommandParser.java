@@ -25,18 +25,13 @@ public class FindCommandParser implements Parser<FindCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        if (!trimmedArgs.contains("n/") && !trimmedArgs.contains("c/")) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        }
 
-        if (trimmedArgs.contains("n/")) {
-            String[] nameKeywords = parseName(trimmedArgs);
-            return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
-        }
 
-        String[] classIdKeywords = parseClassId(trimmedArgs);
-        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(classIdKeywords)));
+        String[] nameKeywords = parseName(trimmedArgs);
+        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+
+
+
 
 
     }
@@ -52,16 +47,7 @@ public class FindCommandParser implements Parser<FindCommand> {
 
     }
 
-    private String[] parseClassId(String args) throws ParseException {
-        String[] classIds = args.split("c/", 2);
-        if (classIds.length < 2 || classIds[1].trim().isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        }
-
-        return classIds[1].trim().split("\\s+");
-
-    }
+    
 
 
 
