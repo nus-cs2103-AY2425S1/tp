@@ -1,9 +1,9 @@
 package seedu.address.model.person;
 
-import seedu.address.model.tag.Tag;
-
 import java.util.Objects;
 import java.util.Set;
+
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Guest in the address book.
@@ -17,14 +17,14 @@ public class Guest extends Person {
      * Creates a Guest with the specified details.
      * Every field must be present and not null.
      *
-     * @param name The name of the guest.
-     * @param phone The phone number of the guest.
-     * @param email The email address of the guest.
+     * @param name    The name of the guest.
+     * @param phone   The phone number of the guest.
+     * @param email   The email address of the guest.
      * @param address The address of the guest.
-     * @param tags The tags associated with the guest.
-     * @param rsvp The RSVP status of the guest.
+     * @param tags    The tags associated with the guest.
+     * @param rsvp    The RSVP status of the guest.
      */
-    public Guest(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Rsvp rsvp) {
+    public Guest(Name name, Phone phone, Email email, Address address, Rsvp rsvp, Set<Tag> tags) {
         super(name, phone, email, address, tags);
         this.rsvp = rsvp;
     }
@@ -35,11 +35,11 @@ public class Guest extends Person {
      * The RSVP status will be set to PENDING by default if not specified.
      * Every field must be present and not null.
      *
-     * @param name The name of the guest.
-     * @param phone The phone number of the guest.
-     * @param email The email address of the guest.
+     * @param name    The name of the guest.
+     * @param phone   The phone number of the guest.
+     * @param email   The email address of the guest.
      * @param address The address of the guest.
-     * @param tags The tags associated with the guest.
+     * @param tags    The tags associated with the guest.
      */
     public Guest(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         super(name, phone, email, address, tags);
@@ -82,8 +82,7 @@ public class Guest extends Person {
      * Checks if this guest is equal to another object.
      *
      * @param other The object to compare with.
-     * @return true if the other object is an instance of Guest and has
-     *         the same attributes; false otherwise.
+     * @return true if the other object is an instance of Guest and has the same attributes; false otherwise.
      */
     @Override
     public boolean equals(Object other) {
@@ -97,8 +96,7 @@ public class Guest extends Person {
         }
 
         Guest otherGuest = (Guest) other;
-        return super.equals(other) &&
-                getRsvp().equals(otherGuest.getRsvp());
+        return super.equals(other) && getRsvp().equals(otherGuest.getRsvp());
     }
 
     /**

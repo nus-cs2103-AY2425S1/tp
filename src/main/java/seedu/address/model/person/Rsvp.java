@@ -13,7 +13,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Rsvp {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "RSVP Status should be 'ACCEPTED', 'DECLINED'";
+            "RSVP Status should be 'PENDING', 'ACCEPTED' or 'DECLINED'";
     private static final String[] RSVP_STATUS = {"PENDING", "ACCEPTED", "DECLINED"};
 
     /**
