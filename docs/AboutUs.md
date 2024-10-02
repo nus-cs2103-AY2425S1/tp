@@ -9,24 +9,23 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Hing Yen Xing (Joanne)
+
+<img src="images/joannehing.png" width="200px">
+
+[[github](https://github.com/joannehing)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer 
+
+### Khoo Yu Yien (Annabelle)
 
 <img src="images/johndoe.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[github](https://github.com/annabellekk)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
+* Role: Developer
 * Responsibilities: UI
 
 ### Adrian Tan
@@ -34,6 +33,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/adriantan101.png" width="200px">
 
 [[github](http://github.com/adriantan101)] [[portfolio](team/adriantan.md)]
+
+### Chong Wei Jin
+
+<img src="images/cweijin.png" width="200px">
+
+[[github](https://github.com/cweijin)] [[portfolio](team/johndoe.md)]
+
 
 * Role: Developer
 * Responsibilities: Data
