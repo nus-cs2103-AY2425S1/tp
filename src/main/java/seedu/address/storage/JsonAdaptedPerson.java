@@ -92,7 +92,8 @@ class JsonAdaptedPerson {
         final Phone modelPhone = new Phone(phone);
 
         if (emergencyContact == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, EmergencyContact.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    EmergencyContact.class.getSimpleName()));
         }
         if (!EmergencyContact.isValidPhone(emergencyContact)) {
             throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
