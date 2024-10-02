@@ -4,9 +4,8 @@
 ---
 
 # ContactCS
-
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
-[![codecov](https://codecov.io/gh/se-edu/addressbook-level3/branch/master/graph/badge.svg)](https://codecov.io/gh/se-edu/addressbook-level3)
+[![Java CI](https://github.com/AY2425S1-CS2103T-F12-1/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2425S1-CS2103T-F12-1/tp/actions/workflows/gradle.yml)
+[![codecov](https://codecov.io/gh/AY2425S1-CS2103T-F12-1/tp/graph/badge.svg?token=OT3DR42X9R)](https://codecov.io/gh/AY2425S1-CS2103T-F12-1/tp)
 
 ![Ui](images/Ui.png)
 
