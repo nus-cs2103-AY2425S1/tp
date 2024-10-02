@@ -32,7 +32,7 @@ public class Messages {
     }
 
     /**
-     * Formats the {@code person} for display to the user.
+     * Formats contact detail of {@code person} for display to the user.
      */
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
