@@ -38,15 +38,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Agarwal Ishan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ishan-agarwal-05.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/ishan-agarwal-05)]
+[[portfolio](team/ishan-agarwal-05.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Testing
 
 ### James Doe
 
