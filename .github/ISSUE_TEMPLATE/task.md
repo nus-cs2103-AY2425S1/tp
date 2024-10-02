@@ -5,6 +5,6 @@ title: ''
 labels: ''
 assignees: ''
 milestone: 'v1.1'
-project: 'AY2425S1-CS2103T-W13-2/4'
+projects: 'AY2425S1-CS2103T-W13-2/4'
 
 ---
