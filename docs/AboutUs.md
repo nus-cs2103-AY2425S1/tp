@@ -26,6 +26,8 @@ Value proposition: provides quick and efficient access to client details, tailor
 [[github](https://github.com/m-kew)]
 [[portfolio](team/m-kew.md)]
 
+* Role: Developer
+* Responsibilities: Team Lead
 
 
 
@@ -39,6 +41,7 @@ Value proposition: provides quick and efficient access to client details, tailor
 
 
 * Role: Developer
+* Responsibilities: Documentation
 
 ### Ong Juan Wen
 
