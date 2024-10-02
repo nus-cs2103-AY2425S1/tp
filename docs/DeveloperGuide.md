@@ -274,28 +274,32 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Real estate agent who needs to manage a significant number of clients and properties.
+* prefer desktop apps over other types.
+* can type fast.
+* prefers typing to mouse interactions.
+* is reasonably comfortable using CLI apps.
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: 
+
+ClientGrid is an address book designed for real estate agents to efficiently manage client contacts, including buyers and sellers. It provides a streamlined way to organize client data and monitor properties the agent is in charge of while maintaining core address book functionality.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                                | I want to …​                                     | So that I can…​                                                        |
-|----------|--------------------------------------------------------|--------------------------------------------------|------------------------------------------------------------------------|
-| `* * *`  | real estate agent                                 | add a new client (buyer or seller) to ClientGrid | keep all their contact information organized in one place
-| see usage instructions       | refer to instructions when I forget how to use the App |
-| `* * *`  | user                                                   | add a new person                                 |                                                                        |
-| `* * *`  | user                                                   | delete a person                                  | remove entries that I no longer need                                   |
-| `* * *`  | user                                                   | find a person by name                            | locate details of persons without having to go through the entire list |
-| `* *`    | user                                                   | hide private contact details                     | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book             | sort persons by name                             | locate a person easily                                                 |
+
+| Priority | As a …​           | I want to …​                                            | So that I can…​                                                        |
+|----------|-------------------|---------------------------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | real estate agent                                 | add a new client (buyer or seller) to ClientGrid        | keep all their contact information organized in one place
+| `* * *`  | real estate agent | delete a client (buyer or seller) from ClientGrid       | keep all their contact information organized in one place              |
+| `* * *`  | user              | add a new person                                        |                                                                        |
+| `* * *`  | user              | delete a person                                         | remove entries that I no longer need                                   |
+| `* * *`  | user              | find a person by name                                   | locate details of persons without having to go through the entire list |
+| `* *`    | real estate agent | indicate that a buyer wants to buy property X at Y price | keep track of the clients that are involved in the transaction         |
+| `* *`    | real estate agent | indicate that a seller wants to sell property X at Y price | keep track of the clients that are involved in the transaction                                                |
+
 
 *{More to be added}*
 
@@ -318,6 +322,24 @@ Extensions:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2a2. Real estate agent enters new data.
 
 Steps 2a1-2a2 are repeated until the data entered are correct.
+
+Use case ends.
+
+**Use case: UC2 - Delete Client**
+
+MSS:
+1. Real estate agent requests to delete a buyer or seller based on their phone number.
+2. ClientGrid will delete the respective client based on the phone number.
+
+Extensions:
+
+&nbsp;&nbsp;&nbsp;&nbsp;2a. ClientGrid detects an error in the phone number format provided by the real estate agent.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2a1. ClientGrid requests for the correct data 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2a2. Real estate agent enters new data
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Steps 2a1-2a2 are repeated until the data entered are correct. 
 
 Use case ends.
 
