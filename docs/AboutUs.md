@@ -29,6 +29,9 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/jerrelllee)]
 [[portfolio](team/jerrelllee.md)]
 
+* Role:
+* Responsibilities:
+
 ### Wee Kean
 
 <img src="images/edsel-tan.png" width="200px">
