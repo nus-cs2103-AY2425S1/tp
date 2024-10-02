@@ -307,16 +307,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `EduManage` and the **Actor** is the `tuition teacher`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Delete a student**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  Tuition teacher requests to list students.
+2.  EduManage shows a list of students.
+3.  Tuition teacher requests to delete a specific student in the list.
+4.  EduManage deletes the student.
 
     Use case ends.
 
@@ -328,7 +328,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. EduManage shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Add notes to a student**
+
+**MSS**
+
+1.  Tuition teacher requests to list students.
+2.  EduManage shows a list of students.
+3.  Tuition teacher requests to update the notes of a specific student in the list.
+4.  EduManage updates the notes details the student.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given name is invalid.
+
+    * 3a1. EduManage shows an error message.
 
       Use case resumes at step 2.
 
@@ -336,12 +359,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to add a task to a specific student in the list
-4.  AddressBook updates the student’s outstanding tasks list
-5.  User requests to view list of tasks of the student
-6.  AddressBook displays the student’s outstanding tasks list
+1.  Tuition teacher requests to list students.
+2.  EduManage shows a list of students.
+3.  Tuition teacher requests to add a task to a specific student in the list.
+4.  EduManage updates the student’s outstanding tasks list.
+5.  Tuition teacher requests to view list of tasks of the student.
+6.  EduManage displays the student’s outstanding tasks list.
 
     Use case ends.
 
@@ -351,27 +374,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given person is invalid/ cannot be found.
+* 3a. The given student is invalid/cannot be found.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. EduManage shows an error message.
 
       Use case resumes at step 2.
 
 * 3b. Wrong format for deadline was given.
 
-    * 3b1. AddressBook shows an error message.
+    * 3b1. EduManage shows an error message.
 
       Use case resumes at step 2.
 
 * 3c. No task description was given.
 
-    * 3c1. AddressBook shows an error message.
+    * 3c1. EduManage shows an error message.
 
       Use case resumes at step 2.
 
-* 5a. The given person is invalid/ cannot be found.
+* 5a. The given student is invalid/cannot be found.
 
-    * 5a1. AddressBook shows an error message.
+    * 5a1. EduManage shows an error message.
 
       Use case resumes at step 4.
 
@@ -379,10 +402,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to tag a specific student in the list according to his/ her school level and/ or subject
-4.  AddressBook updates the corresponding tags of the student
+1.  Tuition teacher requests to list students.
+2.  EduManage shows a list of students.
+3.  Tuition teacher requests to tag a specific student in the list according to his/her school level and/or subject.
+4.  EduManage updates the corresponding tags of the student.
 
     Use case ends.
 
@@ -392,23 +415,47 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given person is invalid/ cannot be found.
+* 3a. The given student is invalid/cannot be found.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. EduManage shows an error message.
 
       Use case resumes at step 2.
 
 * 3b. Multiple school level tags were given.
 
-    * 3b1. AddressBook shows an error message.
+    * 3b1. EduManage shows an error message.
 
       Use case resumes at step 2.
 
 * 3c. No tags were given.
 
-    * 3c1. AddressBook shows an error message.
+    * 3c1. EduManage shows an error message.
 
       Use case resumes at step 2.
+
+**Use case: View specific student**
+
+**MSS**
+
+1.  Tuition teacher requests to list students.
+2.  EduManage shows a list of students.
+3.  Tuition teacher requests to view a specific student.
+4.  EduManage shows the details from the student.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given student is invalid/cannot be found.
+
+    * 3a1. EduManage shows an error message.
+
+      Use case resumes at step 2.
+
 
 ### Non-Functional Requirements
 
