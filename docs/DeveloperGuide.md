@@ -291,15 +291,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `PhysioPal` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `PhysioPal` and the **Actor** is the `Physiotherapist`, unless specified otherwise)
 
-**Use case: Delete client's information**
+**Use case: UC01 - Delete client's information**
 
 **MSS**
 
-1.  User requests to list clients
+1.  Physiotherapist requests to list clients
 2.  PhysioPal shows a list of clients
-3.  User requests to delete a specific clients in the list
+3.  Physiotherapist requests to delete a specific clients in the list
 4.  PhysioPal deletes the client
 
     Use case ends.
@@ -316,13 +316,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Schedule an appointment**
+**Use case: UC02 - Schedule an appointment**
 
 **MSS**
 
-1.  User requests to schedule a new appointment for client
+1.  Physiotherapist requests to schedule a new appointment for client
 2.  PhysioPal prompts for date and time
-3.  User provides date and time
+3.  Physiotherapist provides date and time
 4.  PhysioPal creates appointment for client
 
     Use case ends.
@@ -331,7 +331,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. Client do not exist.
 
-    * 1a1. PhysioPal shows an error message.
+    * 1a1. PhysioPal requests for correct data.
+    * 1a2. Physiotherapist enters new data.
+    * Steps 1a1-1a2 are repeated until the data entered are correct.
+      Use case resumes from step 2.
 
 
 * 2a. The list is empty.
@@ -339,20 +342,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 
-* 3a. The given date and time is invalid / unavailable.
+* 3a. The given date and time is invalid or already contains an appointment.
 
-    * 3a1. PhysioPal shows an error message.
+    * 3a1. PhysioPal requests for correct data.
+    * 3a2. Physiotherapist enters new data.
+    * Steps 3a1-3a2 are repeated until the data entered are correct.
+      Use case resumes from step 4.
 
 ### Non-Functional Requirements
 
-1.  Should be able to handle at least 100 clients without performance issues.
-2.  Should be able to search for any client in less than 2 seconds.
-3.  The system should comply with healthcare regulations like PHMC and PDPA, so that I manage client data in a compliant manner.
+1.  Should be able to handle  all operations of at least 100 clients without a delay of more than 0.5 seconds
+2.  Should be able to search for any client in less than 1 second.
+3.  The system should comply with healthcare regulations like Private Hospital and Medical Clinics Act (PHMC) and Personal Data Protection Act (PDPA), so that I manage client data in a compliant manner.
 
 ### Glossary
 
 * **Client contact detail**: A contact detail that includes name, phone number, email address,
   address, appointment details, treatment history, payment details, etc.
+* **Appointment**: A scheduled meeting between a physiotherapist and a client for treatment. It includes date and time.
+* **Condition**: The client's specific physical or functional impairment, injury, or disorder that affects movement, strength, flexibility, or overall physical function.  
 
 --------------------------------------------------------------------------------------------------------------------
 
