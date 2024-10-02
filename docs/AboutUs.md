@@ -16,7 +16,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/hanb1n.png" width="200px">
 
 [[github](https://github.com/HanB1n)]
-[[portfolio](team/HanB1n.md)]
+[[portfolio](team/hanb1n.md)]
 
 * Role: Developer
 * Responsibilities: Developer
