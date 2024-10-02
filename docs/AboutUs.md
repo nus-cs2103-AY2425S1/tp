@@ -50,7 +50,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/maximus.md)]
 
 * Role: Developer
-* Responsibilities: DevOps + Threading
+* Responsibilities: Coding
 
 ### James Doe
 
