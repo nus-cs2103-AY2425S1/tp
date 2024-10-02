@@ -7,55 +7,61 @@
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `e1249111[at]u.nus.edu`
 
 ## Project team
 
-### John Doe
+### Toh Jia Han
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/tohjh.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/tohjh)]
+[[portfolio](team/tohjh.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Deliverables and deadline
 
-### Jean Doe
+### Wen Rui
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/currynia.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/currynia)]
+[[portfolio](team/currynia.md)]
+
+* Role: Code quality
+* Responsibilities: Looks after code quality, ensures adherence to coding standards, etc.
+
+### Lau Xiang Yu
+
+<img src="images/dessnowy.png" width="200px">
+
+[[github](http://github.com/DesSnowy)] 
+[[portfolio](team/dessnowy.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Integration
 
-### James Doe
 
-<img src="images/johndoe.png" width="200px">
+### Swaminathan Viswa
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+
+<img src="images/swaminathanviswa.png" width="200px">
+
+[[github](http://github.com/SwaminathanViswa)]
+[[portfolio](team/swaminathanviswa.md)]
+
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Responsible for quality of project documentations
+
+ ### Javier Tan Meng Wee
+
+<img src="images/incogdino.png" width="200px">
+
+
+[[github](http://github.com/incogdino)]
+[[portfolio](team/incogdino.md)]
+
+
+* Role: Testing
+* Responsibilities: Ensures the testing of the project is done properly and on time.
