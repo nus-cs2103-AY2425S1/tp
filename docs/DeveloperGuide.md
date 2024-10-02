@@ -325,8 +325,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
+* **API**: An application programming interface (API) is a way for computer programs to interact with one another by providing services
+* **CLI**: The command line interface (CLI) is a text-based interface that interacts with the computer's operating system
+* **Customer**: A contact that obtains the services of the user's business
+* **GUI**: The graphical user interface (GUI) is an interface users interact with that provides visuals, potentially with some point-and-click functionalities
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Partner**: A contact that provides mainly services for the user's business
+* **Point-of-Contact**: The person to contact for obtaining goods and/or services, usually from a larger organisation
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Supplier**: A contact that provides mainly goods for the user's business to run smmothly
+* **Tag**: A label attached to a contact for grouping purposes. Common tags are `Supplier`, `Customer` and `Partner`, but can be flexible to suit the user's needs
+* **UI**: The user interface (UI) is a form of interface that the user interacts with
 
 --------------------------------------------------------------------------------------------------------------------
 
