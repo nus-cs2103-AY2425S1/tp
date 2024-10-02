@@ -398,5 +398,3 @@ and do not require any installation by the user of your software and do not viol
 13. The GUI should work well for standard screen resolutions 1920x1080 and higher and for screen scales 100% and 125%.
 In addition, the GUI should be usable for resolutions 1280x720 and higher, and for screen scales 150%.
 14. Everything has to be packaged into a single JAR file.
-
-### Glossary
