@@ -337,6 +337,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 6.  System should gracefully recover from minor errors (e.g., incorrect or incomplete input) by either prompting the user to correct the issue, or using default values where applicable.
 7.  System should have well-written and accessible user and developer documentation to support both end-users and future developers in using and maintaining the application.
 8.  System should have a comprehensive suite of automated tests to ensure that new changes do not break existing functionality.
+9.  System should implement a data retention policy, ensuring that data and records older than a certain period are archived or deleted to optimize performance and comply with legal requirements.
+10. System should have easy-to-use backup and restore functionality, enabling users to create backups of their data, and restore their data in the event of data loss or corruption.
 
 ### Glossary
 
