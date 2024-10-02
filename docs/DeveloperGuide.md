@@ -274,11 +274,8 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+Computing Club Committee members are tech-savvy leaders who organize events, manage activities, 
+and foster community engagement. They connect members, sponsors, and industry partners, driving innovation and learning.
 
 **Value proposition**: manage contacts faster than a typical mouse/GUI driven app
 
