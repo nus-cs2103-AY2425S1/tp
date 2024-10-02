@@ -9,6 +9,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Sparsh Kumar
+
+<img src="images/justsparsh.png" width="200px">
+
+[[github](https://github.com/justsparsh)]
+[[portfolio](team/justsparsh.md)]
+
+* Role: Integration
+
 ### Ong Ye Hao Darren
 
 <img src="images/o-darren.png" width="200px">
@@ -46,24 +55,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Deliverables and deadlines
 * Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
 
