@@ -260,12 +260,13 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Banking Agents, that sell credit cards**:
 
 * has a need to manage a significant number of contacts
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
+* needs a fast way to access data, and see relevant customer information at a glance while on a call with the customer
 * is reasonably comfortable using CLI apps
 
 **Value proposition**: manage contacts faster than a typical mouse/GUI driven app
@@ -275,14 +276,29 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​         | I want to …​                                                               | So that I can…​                                                                                                                     |
+|----------|-----------------|----------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
+| `* * *`  | user            | save current data                                                          | when I close & open the app, details I have added persist                                                                           |
+| `* * *`  | user            | be able to edit data of my customer                                        | I can change customer details without having to delete a contact and re-add it with the new details                                 |
+| `* * *`  | banking agent   | add a customer                                                             | I can save the records and details of the new customer                                                                              |
+| `* * *`  | banking agent   | remove a customer                                                          | I can remove a customer that is no longer going to use our credit card services or is blacklisted                                   |
+| `* * *`  | banking agent   | view details of a customer                                                 | I need not ask customers for details again                                                                                          |
+| `* * *`  | banking agent   | save contact details of the customers                                      | I can contact customers who are more willing to spend money and call back customers with updates                                    |
+| `* * *`  | banking agent   | edit contact details of the customers                                      | I need not delete and re-add a customer just for a small change in detail (i.e. moved house)                                        |
+| `* * *`  | banking agent   | delete contact details                                                     | I can remove customers who are no longer valid or for whatever reason are not worth saving                                          |
+| `* * *`  | banking agent   | save a note/remarks about the customers                                    | I can recall any particular notable details about the customer (for e.g. This customer is very concerned about pricing)             |
+| `* *`    | banking agent   | check which credit card services or plans a customer has/had               | I avoid selling products that the customer already has                                                                              |
+| `* *`    | banking agent   | filter using details like occupation and income                            | I can target a group of customers more quickly                                                                                      |
+| `* *`    | first time user | have a walkthrough guide to show me the user interface                     | I am familiar with the features available and how I can find and use them                                                           |
+| `*`      | user            | export current data                                                        | I can backup the data regularly                                                                                                     |
+| `*`      | user            | import data from a backup                                                  | I can use my data backed up in case of data loss, or initialise the app with a set of data if I am transferring from a prior source |
+| `*`      | banking agent   | view common urls/card information                                          | I can read/send them to the customer quickly when inquired                                                                          |
+| `*`      | banking agent   | be reminded to call back a client when I open the application              | I can immediately know which client I need to follow up today                                                                       |
+| `*`      | impatient user  | get the results that falls into a specific group/category                  | I don’t waste time querying all the result in that category one by one                                                              |
+| `*`      | impatient user  | enter details quickly using a user-friendly interface                      | I can quickly add/view data and not get mad because it’s fast                                                                       |
+| `*`      | long time user  | access my most frequently used features easily                             | I can save time when accessing my most used features                                                                                |
+| `*`      | beginner user   | have a help menu                                                           | I know how to perform a particular task                                                                                             |
+| `*`      | beginner user   | have some sample customer data that has already been inputted into the app | I can find out information can be saved in the application                                                                          |
 
 *{More to be added}*
 
