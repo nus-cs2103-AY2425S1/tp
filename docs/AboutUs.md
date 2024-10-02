@@ -31,6 +31,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
+### Hans Delano
+
+<img src="images/hanscau.png" width="200px">
+
+[[github](http://github.com/hanscau)] [[portfolio](team/hanscau.md)]
+
+* Role: Developer
+* Responsibilities: Test & UI
+
+
 ### Kevin Pek
 
 <img src="images/kevin-pek.png" width="200px">
