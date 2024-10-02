@@ -11,15 +11,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Ansel Chong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ansel-ch.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/Ansel-Ch)]
+[[portfolio](team/ansel-ch.md)]
 
-* Role: Project Advisor
+* Role:
+* Responsibilities:
 
 ### Jane Doe
 
