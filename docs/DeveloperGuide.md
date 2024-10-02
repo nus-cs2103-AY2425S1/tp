@@ -274,42 +274,55 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
+* a sociable member of NUS School of Computing
+* either has reasonable experience in computing or in search of a contact who is
+* prefer desktop apps to keep track of their contacts
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: add superior convenience in managing contacts from NUS SoC
 
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+**Priorities:** 
+- High (must have) - `* * *`
+- Medium (nice to have) - `* *`
+- Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+**Users:** 
+- anUdder (refers to any type of user described below)
+- brUdders (refers to mentee users and/or those who wish to mentor as peers)
+- mUdders (refers to mentor users)
 
-*{More to be added}*
+| Priority | As a…​                                   | I want to…​                       | So that I can…​                                                         |
+|----------|-----------------------------------------|----------------------------------|------------------------------------------------------------------------|
+| `* * *`  | anUdder                                 | add a new contact                |                                                                        |
+| `* * *`  | anUdder                                 | edit an existing contact         | update the added contact with new information                          |
+| `* * *`  | lonely brUdder who seeks help           | schedule a meeting               | remind myself of future meetings with another contact                  |
+| `* * *`  | curious anUdder                         | view the details of a contact    | learn more about the contacts abilities                                |
+| `* * *`  | anUdder                                 | list all contacts                |                                                                        |
+| `* * *`  | anUdder                                 | list all meetings with a contact |                                                                        |
+| `* * *`  | anUdder                                 | delete a contact                 | remove contacts that I no longer need                                  |
+| `* * *`  | anUdder                                 | filter through my contacts       | locate details of persons without having to go through the entire list |
+| `* *`    | new anUdder                             | see usage instructions           | refer to instructions when I forget how to use the App                 |
+| `* *`    | anUdder                                 | edit details of a meeting        | update the meeting with new information                                |
+| `* *`    | anUdder                                 | delete a meeting                 | remove meetings that no longer exists                                  |
+| `*`      | anUdder                                 | favourite some of my contacts    | find my favourite contacts in an instant                               |
+| `*`      | anUdder                                 | unfavourite some of my contacts  | remove them from my favourites list                                    |
+| `*`      | more social anUdder                     | share my contacts with anUdder   |                                                                        |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `FindingbrUdders` and the **Actor** is the `anUdder`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Delete anUdder**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  anUdder requests to list all their contacts
+2.  FindingbrUdders shows a list of contacts
+3.  anUdder requests to delete a specific contact from the list
+4.  FindingbrUdders deletes the contact
 
     Use case ends.
 
@@ -317,23 +330,85 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The list is empty.
 
-  Use case ends.
+   * 2a1. FindingbrUdders shows a warning message.
+
+     Use case ends.
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. FindingbrUdders shows an error message.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: Schedule a meeting with a specific anUdder**
+
+**MSS**
+
+1.  anUdder filters to list all their contacts that fulfils a criteria
+2.  FindingbrUdders shows the corresponding list of contacts
+3.  anUdder requests to schedule a meeting with a specific contact from the list, adding details where available
+4.  FindingbrUdders creates the meeting with the contact written as an attendee
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Filter field is invalid.
+
+    * 1a1. FindingbrUdders shows an error message.
+
+      Use case ends.
+
+* 2a. The list is empty.
+
+  * 2a1. FindingbrUdders shows a warning message.
+
+     Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. FindingbrUdders shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The date/time clashes with another meeting.
+
+    * 3b1. FindingbrUdders shows a warning message.
+
+      Use case resumes at step 2.
+
+**Use case: View details of a specific mUdder**
+
+**MSS**
+
+1.  anUdder filters to list all their contacts that fulfils a criteria
+2.  FindingbrUdders shows the corresponding list of contacts
+3.  anUdder clicks the contact in the address list display
+4.  FindingbrUdders displays the details in the profile display tab
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Filter field is invalid.
+
+    * 1a1. FindingbrUdders shows an error message.
+
+      Use case ends.
+
+* 2a. The list is empty.
+
+  * 2a1. FindingbrUdders shows a warning message.
+
+     Use case ends.
+
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+2.  Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
+3.  A anUdder with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  The app should not feel awkward when switching between clicking the screens and typing commands.
 
 ### Glossary
 
