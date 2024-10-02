@@ -1,10 +1,16 @@
 title: "EduLog"
 theme: minima
+
 header_pages:
   - UserGuide.md
   - DeveloperGuide.md
   - AboutUs.md
+  
 markdown: kramdown
+
 repository: "se-edu/addressbook-level3"
+
+github_icon: "images/github-icon.png"
+
 plugins:
   - jemoji
