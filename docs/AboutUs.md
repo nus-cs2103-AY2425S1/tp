@@ -10,7 +10,6 @@ We are a team based in the [School of Computing, National University of Singapor
 You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
-
 ### Chua Wee Kiat Nicholas
 
 <img src="images/nicholascwk.png" width="200px">
@@ -20,15 +19,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Integration
 
-### Jane Doe
+### Nicholas Koh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/nicholaskoh1.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/Nicholaskoh1)]
+[[portfolio](team/nicholaskoh1.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Scheduling and Tracking
 
 ### Johnny Doe
 
