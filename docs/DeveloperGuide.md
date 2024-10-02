@@ -323,11 +323,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `Dream Day Designer` and the **Actor** is the `Wedding planner`, unless specified otherwise)
 
 **Name: UC01 - Create Contact (Vendor/Client)**
-
-**Actor: Wedding Planner**
 
 **Main Success Scenario (MSS):**
 1. Wedding planner selects the option to create a new contact.
@@ -355,16 +353,17 @@ The contact is successfully created and stored in the system if all input data i
 Duplicate contacts will not be created.
 
 ___
-**Use case: Delete a person**
+**Name: UC02 - Delete Contact (Vendor/Client)**
 
-**MSS**
-
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
-
-    Use case ends.
+**Main Success Scenario (MSS):**
+1. Wedding planner requests to list all contacts. 
+2. System displays a list of contacts. 
+3. Wedding planner specifies which contact he wishes to delete. 
+4. System requests for confirmation. 
+5. Wedding planner confirms the deletion of contact. 
+6. System displays a message for the successful deletion of contact.
+   
+   Use case ends.
 
 **Extensions**
 
@@ -372,13 +371,22 @@ ___
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 3a. System is unable to locate the contact to be deleted.
 
-    * 3a1. AddressBook shows an error message.
+  * 3a1. System displays an error message.
+    
+    Use case ends.
+  
+* 4a. The wedding planner chooses to abort the deletion of contact.
+  
+  * 4a1. System displays a message for aborting the deletion.
+  
+    Use case ends.
 
-      Use case resumes at step 2.
+**Guarantees**
+* The contact is successfully deleted from the system, and any persistent storage.
 
-**Use case: View Contacts**
+**Name: UC03 - View all Contacts**
 
 **Preconditions:**
 1. Contacts are saved properly.
@@ -387,8 +395,7 @@ ___
 1. The user's previously saved contacts will be listed with their details.
 2. Contacts are sorted alphabetically.
 
-**MSS**
-
+**Main Success Scenario (MSS):**
 1.  User requests for previously saved contacts.
 2.  System displays the saved contacts to the user.
 
@@ -397,14 +404,18 @@ ___
 **Extensions**
 
 * 2a. System is unable to get saved contacts. 
-* 2a1. System informs the user that the file is corrupted.
+  
+  * 2a1. System informs the user that the file is corrupted.
+    
     Use case ends.
+
 * 2b. The list is empty.
-* 2b1. System informs the user that there are no saved contacts.
+  
+  * 2b1. System informs the user that there are no saved contacts.
+    
     Use case ends.
 
 ### Non-Functional Requirements
-
 
 1. Compatibility: Should work on any _mainstream OS_ (Windows/macOS/Linux) as long as it has Java `17` or above installed.
 2. Compatibility: The system should be usable on both desktop (Windows/macOS)
