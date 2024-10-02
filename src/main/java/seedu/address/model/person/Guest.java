@@ -24,7 +24,7 @@ public class Guest extends Person {
      * @param tags    The tags associated with the guest.
      * @param rsvp    The RSVP status of the guest.
      */
-    public Guest(Name name, Phone phone, Email email, Address address, Rsvp rsvp, Set<Tag> tags) {
+    public Guest(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Rsvp rsvp) {
         super(name, phone, email, address, tags);
         this.rsvp = rsvp;
     }

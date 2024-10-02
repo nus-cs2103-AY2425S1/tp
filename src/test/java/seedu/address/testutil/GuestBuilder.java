@@ -103,7 +103,7 @@ public class GuestBuilder {
     }
 
     public Guest build() {
-        return new Guest(name, phone, email, address, rsvp, tags);
+        return new Guest(name, phone, email, address, tags, rsvp);
     }
 
 }

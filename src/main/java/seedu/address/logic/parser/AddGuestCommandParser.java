@@ -53,7 +53,7 @@ public class AddGuestCommandParser implements Parser<AddGuestCommand> {
         if (rsvp == null) {
             guest = new Guest(name, phone, email, address, tagList);
         } else {
-            guest = new Guest(name, phone, email, address, rsvp, tagList);
+            guest = new Guest(name, phone, email, address, tagList, rsvp);
         }
 
         return new AddGuestCommand(guest);

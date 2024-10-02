@@ -125,7 +125,7 @@ public class PersonBuilder {
 
     public Person build() {
         if (!isVendor) {
-            return new Guest(name, phone, email, address, rsvp, tags);
+            return new Guest(name, phone, email, address, tags, rsvp);
         }
         return new Vendor(name, phone, email, address, tags, company);
     }
