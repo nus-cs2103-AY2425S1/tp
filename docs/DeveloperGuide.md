@@ -354,8 +354,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The student does not exist in the system
-    * 2a1. Teletutors App displays an error message: `Student not found. Please check the name and try again`
+* 1a. The student does not exist in the system
+    * 1a1. Teletutors App displays an error message: `Student not found. Please check the name and try again`
 
       Use case resumes from Step 1.
 
