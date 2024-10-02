@@ -28,3 +28,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Team Member
 * Responsibilities: Frontend + Backend
+
+### Zachary
+
+<img src="images/zacharyxzz.png" width="200px">
+
+[[github](http://github.com/zacharyxzz)]
+
+* Role: Developer
+* Responsibilities: UI + Backend
+
