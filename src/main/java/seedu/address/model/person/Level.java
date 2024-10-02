@@ -1,8 +1,10 @@
-package seedu.address.model.tag;
+package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.EnumUtil.inEnum;
+
+import java.util.Arrays;
 
 /**
  * Represents a Level in the address book.
@@ -17,7 +19,8 @@ public class Level {
 
     }
 
-    public static final String MESSAGE_CONSTRAINTS = "Level names should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS = "Level names should be in list: "
+            + Arrays.toString(Levels.values());
 
     public final String levelName;
 

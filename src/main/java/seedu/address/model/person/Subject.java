@@ -1,8 +1,10 @@
-package seedu.address.model.tag;
+package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.EnumUtil.inEnum;
+
+import java.util.Arrays;
 
 /**
  * Represents a Subject in the address book.
@@ -16,7 +18,8 @@ public class Subject {
         ENGLISH, MOTHER_TONGUE
     }
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS = "Subjects should be in list: "
+            + Arrays.toString(Subjects.values());
 
     public final String subjectName;
 
