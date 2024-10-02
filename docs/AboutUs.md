@@ -48,11 +48,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Bhudisanont Kanit
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jumpyjay.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](https://github.com/JumpyJay)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
