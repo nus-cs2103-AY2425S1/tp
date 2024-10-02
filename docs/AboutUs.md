@@ -1,6 +1,6 @@
 ---
   layout: default.md
-  title: "About Us"
+title: "About Us"
 ---
 
 # About Us
@@ -10,6 +10,18 @@ We are a team based in the [School of Computing, National University of Singapor
 You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
+
+
+### Ryan Lim
+
+<img src="images/rynlwhh.png" width="200px">
+
+
+[[github](https://github.com/rynlwhh)]
+
+
+* Role: Developer
+* Responsibilities: Data
 
 ### Vince Goh
 
@@ -21,6 +33,7 @@ I like to read books and my favourite genre is mystery. I also like to run and p
 
 * Role: Developer
 * Reponsibilties: Code Quality
+
 
 ### Jane Doe
 
