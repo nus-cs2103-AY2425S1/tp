@@ -37,7 +37,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-F12-1/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-F12-1/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
-* At shut down, it shuts down the other components and invokes cleanup methods where necessary.
+* At shut down, it shuts down the other components and invokes _cleanup methods_ where necessary.
 
 The bulk of the app's work is done by the following four components:
 
@@ -366,7 +366,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 *{More to be added}*
 
 ### Glossary
-
+* **Architecture Diagram**: A visual representation of all the elements that make up part, or all, of a system
+* **high-level design**: Representing the system or architecture in an abstract way, without diving into technical details, implementation specifics, or granular components
+* **cleanup methods**: Functions or procedures that are invoked to release resources, close connections, or finalize tasks before an application or component shuts down
+* **Sequence Diagram**: A visual representation of the sequence of interactions between different objects, components, or actors in a system over time
+* **UI**: User Interface - the space where interactions between humans (users) and machines (software or hardware) occur
+* **API**: Application Programming Interface - A set of rules, protocols, and tools that allows different software applications to communicate and interact with each other
+* **GUI**: Graphical User Interface - A type of user interface that allows users to interact with software applications or devices through graphical elements rather than using text-based commands
+* **JavaFx**: A Java library used for building modern GUIs
+* **lifeline (in a Sequence Diagram)**: A graphical element that depicts the lifespan of an object or actor in the system as interactions occur over time
+* **JSON**: An open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of attribute–value pairs and arrays
+* **CLI app**: Command-Line Interface application - A software application that allows users to interact with it through a text-based interface by typing commands in a console or terminal
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 
