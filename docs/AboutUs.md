@@ -22,6 +22,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Testing, Integration, Code Quality
 
+### Chen Yu Bryan
+
+<img src="images/bryancheny.png" width="200px">
+
+[[github](https://github.com/bryancheny)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities: Model, Logic, Storage
+
 ### Isaac Ng
 
 <img src="images/izn432.png" width="200px">
