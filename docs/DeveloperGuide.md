@@ -350,7 +350,7 @@ Use case ends.
 **MSS**
 
 1.  User wants to delete a customer.
-2.  User chooses to <u>view all customers as a list (UC01)</u>.
+2.  User chooses to <ins>view all customers as a list (UC01)</ins>.
 3.  SellSavvy displays the list of customers.
 4.  User finds the customer index from the list.
 5.  User deletes the customer by his index.
@@ -369,7 +369,7 @@ Use case ends.
 **MSS**
 
 1.  User wants to view all orders made by a specific customer
-2.  User chooses to <u>view all customers as a list (UC01)</u>.
+2.  User chooses to <ins>view all customers as a list (UC01)</ins>.
 3.  User inputs command to list all orders, by the index of customer in contact list.
 4.  SellSavvy validates the input, and retrieves a list of all orders made by specified customer.
 5.  SellSavvy displays the orders in a list in GUI.
@@ -399,7 +399,7 @@ Use case ends.
 **MSS**
 
 1.  User wants to mark an order by a customer as completed. 
-2.  User chooses to </u>view all orders of a specified customer from contacts list (UC04)</u>.
+2.  User chooses to <ins>view all orders of a specified customer from contacts list (UC04)</ins>.
 3.  User marks the order as completed by the customer index and the order index.
 4.  SellSavvy updates the status of the order and indicates that the action is successful.
 
@@ -423,7 +423,7 @@ Use case ends.
 **MSS**
 
 1.  User wants to remove marking on an order due to mistake.
-2.  User chooses to </u>view all orders from the customer with that customer index (UC04)</u>.
+2.  User chooses to <ins>view all orders from the customer with that customer index (UC04)</ins>.
 3.  User inputs command to remove marking on the order by the customer index and the order index.
 4.  SellSavvy updates the status of the order and indicates that the action is successful.
 
@@ -447,7 +447,7 @@ Use case ends.
 **MSS**
 
 1.  User wants to delete an order.
-2.  User chooses to </u>view all orders of a specified customer from contacts list (UC04)</u>.
+2.  User chooses to <ins>view all orders of a specified customer from contacts list (UC04)</ins>.
 3.  User deletes the customer by the customer name and the order index.
 4.  SellSavvy updates the status of the order and indicates that the action is successful.
 
