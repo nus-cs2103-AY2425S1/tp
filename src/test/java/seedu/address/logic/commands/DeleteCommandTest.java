@@ -3,9 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -17,6 +15,7 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
 /**
@@ -80,7 +79,7 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void equals() {
+    public void equalsIndexCommandTest() {
         DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON);
         DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON);
 
@@ -102,11 +101,42 @@ public class DeleteCommandTest {
     }
 
     @Test
+    public void equalsNricCommandTest() {
+        DeleteCommand deleteFirstNric = new DeleteCommand(new Nric(VALID_NRIC_AMY));
+        DeleteCommand deleteSecondNric = new DeleteCommand(new Nric(VALID_NRIC_BOB));
+
+        // same object -> returns true
+        assertTrue(deleteFirstNric.equals(deleteFirstNric));
+
+        // same values -> returns true
+        DeleteCommand deleteFirstNricCopy = new DeleteCommand(new Nric(VALID_NRIC_AMY));
+        assertTrue(deleteFirstNric.equals(deleteFirstNricCopy));
+
+        // different types -> returns false
+        assertFalse(deleteFirstNric.equals(1));
+
+        // null -> returns false
+        assertFalse(deleteFirstNric.equals(null));
+
+        // different person -> returns false
+        assertFalse(deleteFirstNric.equals(deleteSecondNric));
+    }
+
+    @Test
     public void toStringMethod() {
+        // Test for Index
         Index targetIndex = Index.fromOneBased(1);
         DeleteCommand deleteCommand = new DeleteCommand(targetIndex);
-        String expected = DeleteCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
+        String expected = DeleteCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex
+                + ", targetNric=null}";
         assertEquals(expected, deleteCommand.toString());
+
+        // Test for NRIC
+        Nric targetNric = new Nric(VALID_NRIC_AMY);
+        DeleteCommand deleteCommandWithNric = new DeleteCommand(targetNric);
+        String expectedNricString = DeleteCommand.class.getCanonicalName() + "{targetIndex=null, targetNric="
+                + targetNric + "}";
+        assertEquals(expectedNricString, deleteCommandWithNric.toString());
     }
 
     /**

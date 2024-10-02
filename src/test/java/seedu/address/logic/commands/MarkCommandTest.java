@@ -129,10 +129,10 @@ public class MarkCommandTest {
     public void toStringMethod() {
         // Test for Index
         Index targetIndex = Index.fromOneBased(1);
-        MarkCommand markCommand = new MarkCommand(targetIndex);
-        String expected = MarkCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex
+        MarkCommand markCommandWithIndex = new MarkCommand(targetIndex);
+        String expectedIndexString = MarkCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex
                 + ", targetNric=null}";
-        assertEquals(expected, markCommand.toString());
+        assertEquals(expectedIndexString, markCommandWithIndex.toString());
 
         // Test for NRIC
         Nric targetNric = new Nric(VALID_NRIC_AMY);
