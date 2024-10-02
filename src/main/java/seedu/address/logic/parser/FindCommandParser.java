@@ -46,5 +46,4 @@ public class FindCommandParser implements Parser<FindCommand> {
         return names[1].trim().split("\\s+");
 
     }
-    
 }
