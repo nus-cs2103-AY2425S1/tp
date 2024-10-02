@@ -360,7 +360,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 2.
 
-**Use case: UC2 - Load contact from save file**
+**Use case: UC3 - Load contact from save file**
 
 **Actor: `BizBook`**
 
