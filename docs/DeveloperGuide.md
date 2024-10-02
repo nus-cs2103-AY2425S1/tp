@@ -283,18 +283,35 @@ Computing Club Committee members
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`, Exists - `EXISTS`, Not possible - `N.A.`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​                            | I want to …​                                                                        | So that I can…​                                                                     |
+|----------|------------------------------------|-------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
+| `* * *`  | Committee president                | Search contacts by multiple criteria (e.g., job title, tags)                        | Find the right contacts even if I don’t remember their names                        |
+| `* * *`  | Committee president                | Filter the contacts to different types of events                                    | Easily know who to contact for specific purposes, even with multiple ongoing events |
+| `* * *`  | Committee member                   | Detect and merge duplicate contacts easily                                          | Keep my address book clean and well-organized                                       |
+| `* * *`  | Committee president                | Mass delete contacts                                                                | Easily remove all contacts related to one event after it's over                     |
+| `* *`    | Committee president                | Assign tasks and responsibilities to committee members                              | Ensure all activities are covered without confusion                                 |
+| `* *`    | Committee member                   | Receive notifications for upcoming meetings and events                              | Stay informed and participate on time                                               |
+| `* *`    | Events coordinator                 | Send out event reminders and notifications to members                               | Keep everyone informed and boost engagement                                         |
+| `* *`    | Committee member                   | Import contacts from a CSV file                                                     | Quickly populate the address book                                                   |
+| `* *`    | Committee member                   | Export contacts to a CSV file                                                       | Share the contact list with others                                                  |
+| `* *`    | Committee member                   | Customize the app's interface                                                       | Tailor the app to my preferences                                                    |
+| `* *`    | Club member                        | View a list of upcoming events                                                      | Stay informed about club activities                                                 |
+| `* *`    | Committee member                   | Add a new event to the calendar                                                     | Plan club activities                                                                |
+| `*`      | Committee president                | Have a blacklist of participants                                                    | Keep track of people who are not allowed to join future events                      |
+| `*`      | Committee member                   | Track event attendance                                                              | See who participated                                                                |
+| `*`      | Secretary                          | Track meeting attendance                                                            | Maintain records of who participated in club activities                             |
+| `*`      | Committee member                   | View a member's participation history                                               | Recognize active members                                                            |
+| `EXISTS` | Committee member organizing events | Label each of my contacts                                                           | I can easily mass contact sponsors / participants / organizing committee, etc       |
+| `EXISTS` | Committee member                   | Add a new member to the address book                                                | Keep track of all members in the club                                               |
+| `EXISTS` | Committee president                | Delete contacts                                                                     | Avoid contacting people no longer involved with the committee                       |
+| `EXISTS` | Committee president                | Keep track of every member’s contact information, e.g., phone number, email address | Contact them during an emergency                                                    |
+| `N.A.`   | Committee member                   | Password-protect sensitive contact information                                      | Ensure my contacts remain private and secure                                        |
+| `N.A.`   | Communication committee member     | Log all interactions with sponsors and partners                                     | Reference past conversations and ensure nothing is overlooked                       |
+| `N.A.`   | Committee member                   | Send a group email to all members                                                   | Communicate important information quickly                                           |
+| `N.A.`   | Committee member                   | Set reminders for upcoming events                                                   | Ensure I don’t miss important activities                                            |
+| `N.A.`   | Committee member                   | Integrate the app with my calendar                                                  | Automatically sync important events and reminders                                   |
 
 ### Use cases
 
