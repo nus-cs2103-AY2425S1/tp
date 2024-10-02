@@ -300,30 +300,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `EventTory` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Create an event**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to create a new event by providing the event name and date in the correct format.
+2. System validates the input for the event name and date.
+3. System creates the event.
+4. System displays a confirmation message.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The event name is invalid or empty.
 
-  Use case ends.
+    * 2a1. System shows an error message.
 
-* 3a. The given index is invalid.
+      Use case resumes at step 1.
 
-    * 3a1. AddressBook shows an error message.
+* 2b. The date format is invalid.
 
-      Use case resumes at step 2.
+    * 2b1. System shows an error message.
+
+      Use case resumes at step 1.
 
 *{More to be added}*
 
