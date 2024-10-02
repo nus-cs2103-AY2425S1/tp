@@ -33,7 +33,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/nigellqx.png" width="200px">
 
-[[github](http://github.com/nigellqx)] 
+[[github](http://github.com/nigellqx)]
 [[portfolio](team/nigellqx.md)]
 
 * Role: Deliverables and deadlines
