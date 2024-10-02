@@ -338,7 +338,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Modular**: Codebase is divided into separate parts that can be updated without affecting other parts.
+* **Data retention policy**: Guidelines regarding what data should be kept, how long data should be kept and more.
+* **CLI application**: Any application that takes in input via text, not necessarily through a command console.
 
 --------------------------------------------------------------------------------------------------------------------
 
