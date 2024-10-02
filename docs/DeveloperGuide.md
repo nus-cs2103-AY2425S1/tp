@@ -338,7 +338,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  Tuition teacher requests to list students.
 2.  EduManage shows a list of students.
-3.  Tuition teacher requests to update the notes  of a specific student in the list.
+3.  Tuition teacher requests to update the notes of a specific student in the list.
 4.  EduManage updates the notes details the student.
 
     Use case ends.
@@ -402,8 +402,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  Tuition teacher requests to list persons.
-2.  EduManage shows a list of persons.
+1.  Tuition teacher requests to list students.
+2.  EduManage shows a list of students.
 3.  Tuition teacher requests to tag a specific student in the list according to his/her school level and/or subject.
 4.  EduManage updates the corresponding tags of the student.
 
@@ -439,7 +439,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  Tuition teacher requests to list students.
 2.  EduManage shows a list of students.
-3.  Tuition teacher requests to view a specific user.
+3.  Tuition teacher requests to view a specific student.
 4.  EduManage shows the details from the student.
 
     Use case ends.
