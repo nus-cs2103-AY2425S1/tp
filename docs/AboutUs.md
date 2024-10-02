@@ -17,7 +17,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/nicholas.md)]
 
 * Role: Developer
-
+* Role: Documentation
 ### Jane Doe
 
 <img src="images/johndoe.png" width="200px">
