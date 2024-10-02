@@ -20,6 +20,9 @@ public class MonthsPaid {
         return value;
     }
 
+    /**
+     * Returns true if a given string is a valid monthsPaid.
+     */
     public static boolean isValidMonthsPaid(String monthsPaid) {
         if (monthsPaid.isEmpty()) {
             return true;

@@ -28,7 +28,7 @@ public class ClassId {
     }
 
     /**
-     * Returns true if a given string is a valid email.
+     * Returns true if a given string is a valid classId.
      */
     public static boolean isValidClassId(String test) {
         return test.isEmpty() || test.matches(VALIDATION_REGEX);

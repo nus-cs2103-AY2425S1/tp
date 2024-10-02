@@ -3,8 +3,6 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.util.Objects;
-
 /**
  * Represents a Person's fees in the address book.
  */
@@ -31,7 +29,7 @@ public class Fees {
     }
 
     /**
-     * Returns true if a given string is a valid email.
+     * Returns true if a given string is a valid fees.
      */
     public static boolean isValidFees(String test) {
         return test.isEmpty() || test.matches(VALIDATION_REGEX);
