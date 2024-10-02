@@ -21,41 +21,42 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Storage
 
-### Jane Doe
+### Nicholas Chan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kaajinn.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/zhaoyiheng)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/zhaoyiheng)]
+[[github](https://github.com/kaajinn)]
+[[portfolio](team/kaajinn.md)]
 
 * Role: Developer
 * Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/zhaoyiheng)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
 
 ### Zhao Yiheng
 
 <img src="images/linedoestrolling.png" width="200px">
 
 [[github](http://github.com/linedoestrolling)]
-[[portfolio](team/zhaoyiheng)]
+[[portfolio](team/zhaoyiheng.md)]
+
+* Role: Developer
+* Responsibilities: UI
+
+### Jean Doe
+
+<img src="images/johndoe.png" width="200px">
+
+[[github](http://github.com/johndoe)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities: Dev Ops + Threading
+
+### James Doe
+
+<img src="images/johndoe.png" width="200px">
+
+[[github](http://github.com/johndoe)]
+[[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: UI
