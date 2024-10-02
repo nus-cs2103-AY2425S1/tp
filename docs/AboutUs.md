@@ -19,4 +19,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/fyl2003.md)]
 
 * Role: Developer
-* Responsibilities: ??
+* Responsibilities: make DDD work
