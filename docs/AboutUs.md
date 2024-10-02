@@ -14,6 +14,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/xgladiate.png" width="200px">
 
 [[github](https://github.com/xGladiate)]
-[[portfolio](team/sharonsoh)]
+[[portfolio](team/sharonsoh.md)]
 
 * Role: Developer
