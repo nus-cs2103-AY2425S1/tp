@@ -19,3 +19,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Team Lead
 * Responsibilities: Frontend
+
+### Ritul Kumar Singh
+
+<img src="images/ritulkrsingh.png" width="200px">
+
+[[github](http://github.com/ritulkrsingh)]
+
+* Role: Team Member
+* Responsibilities: Frontend + Backend
