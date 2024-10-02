@@ -279,8 +279,7 @@ Computing Club Committee members
 * Tech-savvy leaders who organize events, manage activities, and foster community engagement.
 * Connect members, sponsors, and industry partners, driving innovation and learning.
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
-
+**Value proposition**: Streamline computing club's communication and organization with our address book app. Effortlessly manage member details, sponsor contacts, and event participants in one place. Enhance collaboration, boost engagement, and ensure seamless planning, all while saving time and reducing administrative hassle.
 
 ### User stories
 
