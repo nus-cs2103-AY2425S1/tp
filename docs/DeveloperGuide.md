@@ -262,13 +262,17 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+Home-based healthcare providers who
+* Has a need to manage a significant number of patients information 
+* Needs to see their daily schedule of patient appointments
+* Needs to be reminded up upcoming appointments
+* Tag patients based on allergies and other medical information
+* Can type fast
+* Prefers typing to mouse interactions
+* Is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+
+**Value proposition**: Our patient management system empowers home-based healthcare providers to efficiently retrieve and analyze patient information, enabling them to provide personalized care and see their schedule for the day.
 
 
 ### User stories
