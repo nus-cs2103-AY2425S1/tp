@@ -294,28 +294,81 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a client**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to add a client and provides the required client details.
+2.  AddressBook validates the input 
+3.  AddressBook adds the client data.
+4.  AddressBook confirms the successful addition of the client.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a.  Invalid Input Format
+    * 2a1. AddressBook shows an error message.
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 2b. Duplicate Client
 
-    * 3a1. AddressBook shows an error message.
+    * 2b1. AddressBook shows an error message.
+      
+  Use case ends.
 
-      Use case resumes at step 2.
+
+**Use case: Delete client data**
+
+**MSS**
+
+1.  User requests to delete a client’s data and inputs the required client details.
+2.  AddressBook validates the input
+3.  AddressBook deletes the person
+
+    Use case ends.
+
+**Extensions**
+
+* 2a.  Invalid Input Format
+    * 2a1. AddressBook shows an error message.
+
+  Use case ends.
+
+* 2b. Duplicate Client
+
+    * 2b1. AddressBook shows an error message.
+
+  Use case ends.
+
+* 2c. Information mismatch
+
+    * 2c1. AddressBook shows an error message.
+
+  Use case ends.
+
+**Use case: Record Client Payment**
+
+**MSS**
+
+1.  User requests to record a payment by providing the client’s name, phone number, and amount paid.
+2.  AddressBook validates the input.
+3.  AddressBook records the payment.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a.  Invalid Input Format
+    * 2a1. AddressBook shows an error message.
+
+  Use case ends.
+
+* 2b.  Name and Phone Number mismatch
+    * 2b1. AddressBook shows an error message.
+
+  Use case ends.
 
 *{More to be added}*
 
