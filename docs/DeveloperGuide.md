@@ -363,7 +363,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Actor requests to <u>list all people saved in the System (UC2)</u>.
 2.  Actor requests to delete a specific person in the list.
 3.  System deletes the person.
-4.  System <u>save contacts to save file (UC No.)</u>.
+4.  System <u>save contacts to save file (UC5)</u>.
 
     Use case ends.
 
