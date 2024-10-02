@@ -300,28 +300,468 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TAchy` and the **Actor** is the `TA` (Teaching Assistant),
+unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a student**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. TA requests to add a student
+2. TAchy adds the student to the student list
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The student name is invalid.
+    * 1a1. TAchy shows an error message.
+  
+      Use case ends.
 
-  Use case ends.
+* 1b. The student name already exists.
+    * 1b1. TAchy shows a list of students with the same name in order of adding time.
+    * 1b2. TA adds a note for the student to distinguish them.
 
-* 3a. The given index is invalid.
+      Use case resumes at step 2.
 
-    * 3a1. AddressBook shows an error message.
+---
+
+**Use case: Delete a student**
+
+**MSS**
+
+1. TA requests to delete a student
+2. TAchy deletes the student from the student list
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The student name is not in the list.
+    * 1a1. TAchy displays a "no students found" message.
+
+      Use case ends.
+
+* 1a. There are multiple students with the name.
+    * 1a1. TAchy shows a list of students with the same name with indices.
+    * 1a2. TA deletes one of them by index.
+
+      Use case resumes at step 2.
+
+---
+
+**Use case: List students**
+
+**MSS**
+
+1. TA requests to list students.
+2. TAchy displays the list of students in the current class.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. No students found in the class.
+    * 1a1. TAchy displays a "no students" message.
+
+      Use case ends.
+
+---
+
+**Use case: Find a student**
+
+**MSS**
+
+1. TA requests to search for a student by name.
+2. TAchy displays the student(s) matching the search query.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. No student matches the query.
+    * 1a1. TAchy displays a "no students found" message.
+
+      Use case ends.
+
+---
+
+**Use case: Add assignment**
+
+**MSS**
+
+1. TA requests to add an assignment to a class.
+2. TAchy adds the assignment to the class assignment list.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The assignment name is invalid.
+    * 1a1. TAchy shows an error message.
+
+      Use case ends.
+
+---
+
+**Use case: Delete assignment**
+
+**MSS**
+
+1. TA requests to delete an assignment.
+2. TAchy removes the assignment from the class assignment list.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. No assignment matched the name.
+    * 1a1. TAchy displays a "this assignment does not exist" message.
+
+      Use case ends.
+
+---
+
+**Use case: View assignments**
+
+**MSS**
+
+1. TA requests to view the list of assignments.
+2. TAchy displays the list of assignments for the class.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. No assignments are found for the class.
+    * 1a1. TAchy displays a "no assignments found" message.
+
+      Use case ends.
+
+---
+
+**Use case: Grade assignment**
+
+**MSS**
+
+1. TA requests to add a grade for a student’s assignment.
+2. TAchy records the grade for the student’s assignment.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The assignment is not found.
+    * 1a1. TAchy shows an error message.
+
+      Use case ends.
+  
+* 1b. The student is not found.
+    * 1b1. TAchy shows an error message.
+
+      Use case ends.
+
+* 1c. The grade is invalid.
+    * 1c1. TAchy shows an error message.
+
+      Use case ends.
+
+* 1d. The student has already been graded for the assignment.
+    * 1d1. TAchy shows a warning message.
+    * 1d2. TAchy asks if the TA wants to overwrite the grade.
+    * 1d3. TA confirms the overwrite.
+    * 1d4. TAchy records the new grade.
+
+      Use case resumes at step 2.
+
+---
+
+**Use case: View student submissions for an assignment**
+
+**MSS**
+
+1. TA requests to list all assignments.
+2. TAchy displays the list of assignments. 
+3. TA requests to view submission status for an assignment by index.
+4. TAchy displays the list of submissions for the selected assignment.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. No assignments are found for the class.
+    * 1a1. TAchy displays a "no assignments found" message.
+
+      Use case ends.
+  
+* 3a. The assignment index is invalid.
+    * 3a1. TAchy shows an error message.
+
+      Use case ends.
+  
+* 4a. No submissions are found for the assignment.
+    * 4a1. TAchy displays a "no submissions found" message.
+
+      Use case ends.
+
+---
+
+**Use case: Add class**
+
+**MSS**
+
+1. TA requests to add a new class.
+2. TAchy adds the class to the course list.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The class already exists.
+    * 1a1. TAchy shows an error message.
+
+      Use case ends.
+
+---
+
+**Use case: Delete class**
+
+**MSS**
+
+1. TA requests to delete a class.
+2. TAchy removes the class from the course list.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The class does not exist.
+    * 1a1. TAchy shows an error message.
+
+      Use case ends.
+
+**Use case: View class timetable**
+
+**MSS**
+
+1. TA requests to view the class timetable.
+2. TAchy displays the class timetable for the current term.
+
+   Use case ends.
+
+---
+
+**Use case: Tag students in a class**
+
+**MSS**
+
+1. TA requests to list all students.
+2. TAchy displays the list of students.
+3. TA requests to tag a student or group of students by index with the current class.
+4. TAchy adds the tags to the students.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. No students found in the class.
+    * 1a1. TAchy displays a "no students" message.
+
+      Use case ends.
+    * 
+* 3a. The student index is invalid.
+    * 3a1. TAchy shows an error message.
+
+      Use case ends.
+
+---
+
+**Use case: Sort students by an assignment score**
+
+**MSS**
+
+1. TA requests to sort students by the score of an assignment.
+2. TAchy sorts the assignment results by score in ascending or descending order.
+
+   Use case ends.
+
+**Extensions**
+* 1a. The assignment does not exist.
+    * 1a1. TAchy shows an error message.
+
+      Use case ends.
+* 1b. The assignment has not been graded for all students.
+    * 1b1. TAchy shows a warning message.
+    * 1b2. TAchy asks if the TA wants to proceed.
+    * 1b3. TA confirms the action.
+
+      Use case resumes at step 2.
+* 1c. The assignment has not been graded for any student.
+    * 1c1. TAchy shows an error message.
+
+      Use case ends.
+
+   
+---
+
+**Use case: Link scanned PDF to a student**
+
+**MSS**
+
+1. TA requests to list all documents stored in a file directory.
+2. TAchy displays the list of documents.
+3. TA requests to link a document to a student by index by name.
+4. TAchy records the link.
+
+   Use case ends.
+
+**Extensions**
+* 1a. No documents found in the directory.
+    * 1a1. TAchy displays a "no documents found" message.
+
+      Use case ends.
+* 3a. The student name is not in the list.
+    * 3a1. TAchy displays a "no students found" message.
+
+      Use case ends.
+* 3b. There are multiple students with the name.
+    * 3b1. TAchy shows a list of students with the same name with indices.
+    * 3b2. TA links the document to one of them by index.
+
+      Use case resumes at step 4.
+---
+
+**Use case: View professor contact information**
+
+**MSS**
+
+1. TA requests to view a professor’s contact information.
+2. TAchy displays the professor’s contact details.
+
+   Use case ends.
+
+---
+
+**Use case: View professor’s office hours**
+
+**MSS**
+
+1. TA requests to view the time and location of a professor’s office hours.
+2. TAchy displays the professor’s office hours and location.
+
+   Use case ends.
+
+---
+
+**Use case: Compare class performance for an assignment**
+
+**MSS**
+
+1. TA requests to list all assignments.
+2. TAchy displays the list of assignments.
+3. TA selects one assignment by index.
+4. TAchy displays the class in order of performance for the selected assignment.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. No assignments are found.
+    * 1a1. TAchy displays a "no assignments found" message.
+
+      Use case ends.
+
+* 3a. The assignment index is invalid.
+    * 3a1. TAchy shows an error message.
+
+      Use case ends.
+
+---
+
+**Use case: Create student priority list**
+
+**MSS**
+
+1. TA requests to list students
+2. TA requests to create a list of students who need the most attention by indices.
+3. TAchy generates a list of selected students.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The student index is invalid.
+    * 2a1. TAchy shows an error message.
+
+      Use case ends.
+
+---
+
+**Use case: View or add files posted by professor**
+
+**MSS**
+
+1. TA requests to view or add files posted by the professor for a class.
+2. TAchy displays or allows files to be added to the class.
+
+   Use case ends.
+
+---
+
+**Use case: Mark attendance and manage participation**
+
+**MSS**
+
+1. TA requests to list all classes.
+2. TAchy displays the list of classes.
+3. TA selects one class by index.
+4. TAchy displays the list of students in the class.
+5. TA requests to mark attendance for a student by index.
+6. TAchy records the attendance.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. No classes are found.
+    * 1a1. TAchy displays a "no classes found" message.
+
+      Use case ends.
+  
+* 3a. The class index is invalid.
+    * 3a1. TAchy shows an error message.
+
+      Use case ends.
+  
+* 5a. The student index is invalid.
+    * 5a1. TAchy shows an error message.
+
+      Use case ends.
+
+---
+
+**Use case: Add remark for individual student**
+
+**MSS**
+
+1. TA requests to add a remark for a student.
+2. TAchy records the remark in the student’s profile.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The student is not found.
+    * 1a1. TAchy shows an error message.
+
+      Use case ends.
+
+* 1b. The student already has a remark.
+    * 1b1. TAchy shows a warning message.
+    * 1b2. TAchy asks if the TA wants to overwrite the remark.
+    * 1b3. TA confirms the overwrite.
+    * 1b4. TAchy records the new remark.
 
       Use case resumes at step 2.
 
