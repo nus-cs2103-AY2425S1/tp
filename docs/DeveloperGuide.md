@@ -322,6 +322,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2b2. User decides whether to overwrite or cancel the operation. 
     * Use case resumes at step 2 if user decides to proceed
 
+
 **Use case: Delete a person**
 
 **MSS**
@@ -348,6 +349,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4. AgentConnect sorts the clients based on the specified parameter and order.
 5. AgentConnect updates the client list in the GUI to reflect the new sorted order.
 6. AgentConnect shows a success message confirming the clients have been sorted.
+
     Use case ends.
 
 
@@ -361,6 +363,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2b. Sorting order are missing or invalid (e.g., asc, desc).
     * 2a1. AgentConnect shows an error message for the invalid sorting order.
     * 2a2. User corrects the sorting order and resubmits the command.
+    * Use case resumes from step 2.
+
+
+**Use case: Edit Client Details**
+
+**MSS**
+
+1.  User edits some details for an existing person by entering the edit command with index of the person and new details.
+2.  AgentConnect validates the input.
+3.  AgentConnect update the corresponding details of the person with the new details provided.
+4.  AgentConnect shows a success message confirming the details fo the person have been edited.
+
+**Extensions**
+
+* 2a. Some fields are invalid (e.g., name, phone, email).
+    * 2a1. AgentConnect shows an error message for the invalid fields.
+    * 2a2. User corrects the fields and resubmits the command.
+    * Use case resumes from step 2.
+
+* 2b. Person not found (Invalid index).
+    * 2b1. AgentConnect shows a warning message indicating index is invalid.
+    * 2b2. User resubmits the command with a valid index.
     * Use case resumes from step 2.
 
 *{More to be added}*
