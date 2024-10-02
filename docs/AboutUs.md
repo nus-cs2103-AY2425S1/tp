@@ -31,14 +31,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Ling Zi Yan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/lingziyann.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+Hello my name is ziyan and I love cs2103T and cs2101
+
+[[github](http://github.com/LingZiyann)] [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Testing + Deliverables
 
 ### Jean Doe
 
