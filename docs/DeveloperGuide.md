@@ -329,11 +329,50 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+**Performance Requirements**
+- P1: The system should be able to hold up to 1000 persons without noticeable sluggishness in performance for typical usage.
+- P2: The application should respond within two seconds for most user operations.
 
-*{More to be added}*
+**Usability Requirements**
+- U1: A user with above-average typing speed for regular English text (not code, not system admin commands) should be able to accomplish most tasks faster using keyboard commands than using the mouse.
+- U2: The application should target users who can type fast and prefer typing over other means of input, such as clicking buttons, selecting dropdowns and drag-and-drop means.
+- U3: The GUI should provide clear and user-friendly error messages when operations fail to assist users in correcting mistakes.
+- U4: The GUI should not cause any resolution-related inconveniences for standard screen resolutions of 1920x1080 and higher, and for screen scales of 100% and 125%.
+- U5: The GUI should be usable for resolutions of 1280x720 and higher, and for screen scales of 150%.
+
+**Compatibility Requirements**
+- C1: The application should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+- C2: The application should be platform-independent and work on Windows, Linux, and OS-X without relying on OS-dependent libraries or features.
+- C3: The application should not depend on the developer’s own remote server.
+- C4: The application should not use a Database Management System (DBMS) for data storage.
+
+**Data Requirements**
+- D1: Data stored in the address book should be stored locally, in a human-editable text file.
+- D2: The entire application should be packaged into a single JAR file.
+- D3: The JAR file size should be within 100 MB and should not be unnecessarily bloated.
+- D4: PDF documents generated for documentation should have a file size within 15 MB and should not be unnecessarily bloated.
+
+**Documentation Requirements**
+- Doc1: Documentation should be saved in PDF format using Chrome, not any other browser, and should be PDF-friendly (no expandable panels, embedded videos, or animated GIFs).
+- Doc2: The Developer Guide and User Guide should be well-structured and easily navigable in PDF format
+
+**Development Process Requirements**
+- DP1: The software should be developed in a breadth-first incremental manner over the project duration.
+- DP2: The project is expected to adhere to the milestone deadlines set for every week.
+
+**Security and Privacy Requirements**
+- S1: The application should ensure that data files created by one user are not accessible by another user during regular operations.
+
+**Reliability and Stability Requirements**
+- R1: The application should not crash under normal operations and should handle errors gracefully without data loss.
+- R2: The application should maintain a stable performance over extended usage periods.
+
+**Maintainability Requirements**
+- M1: The software should primarily follow the Object-Oriented programming paradigm. Having a modular structure allows for the addition of new features with minimal disruption to existing functionality.
+
+**Functional Requirements**
+- F1: The application should be designed for a single user and not intended for multi-user access. It should not be run on shared computers where different people may use it at different times, and data files created by one user should not be accessible by another user during regular operations.
+
 
 ### Glossary
 
