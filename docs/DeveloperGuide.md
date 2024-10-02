@@ -262,71 +262,142 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* struggle to look for eateries quickly
+* unable to find eateries based on location
+* struggle to find eateries that accommodate dietary restrictions
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: quick and efficient searches for local dining options, tailored to personal preferences.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​               | I want to …​ | So that I can…​         |
+|----------|-----------------------| - |-------------------------|
+| `* * *`  | Tourist               | find the best local delicacies | clear my itinerary       |
+| `* * *`  | Muslim                | find and filter down eateries that are halal and within my location | enjoy delicious food that is within my dietary restrictions |
+| `* * *`  | Person with Allergies  | find eateries that meet my restrictions | not worry about searching far and wide for every meal |
+| `* * *`  | Hungry person with cravings | find restaurants with the cuisine I'm craving for | fulfill my cravings      |
+| `* * *`  | Foodie                | review restaurant ratings and reviews | make an informed decision based on other diners' experiences |
+| `* *`    | Frequent Traveler      | find reliable and high-quality restaurants in new cities | enjoy great meals without extensive research |
+| `* *`    | thrifty individual     | find the cheapest food | survive the day          |
+| `* *`    | Deal Seeker           | find discounts and special offers at nearby restaurants | enjoy eating out without overspending |
+| `* *`    | Health-Conscious Diner | find restaurants that serve nutritious and diet-specific meals | maintain my healthy lifestyle while dining out |
+| `* *`    | Pet lover             | find restaurants that allow and accommodate for pets | enjoy my meal with my furry companion |
+| `*`      | Person with Disabilities | find accessible restaurants with features like ramps | dine out comfortably and independently |
+| `*`      | Crippled Person       | find a wheelchair-friendly restaurant | eat like a normal person |
+| `*`      | Office Worker         | plan what to eat given my 1hr lunch | fit lunch into my busy schedule |
+| `*`      | Food Connoisseur      | save my favorite restaurants | quickly access them later |
+| `*`      | Influencer            | find an atas restaurant | post them on Instagram   |
+| `*`      | introvert             | filter eateries based on delivery options | find places that offer food delivery and enjoy meals at home |
+| `*`      | Food Journalist       | discover restaurants to try and write opinion pieces | write engaging blogs to recommend to others |
+| `*`      | Carouser              | find the bars that offer happy hours | drink riotously          |
+| `*`      | Chef                  | eat at my competitors' restaurants | compare the quality of my food against theirs |
+| `*`      | Student               | find student deals for food | know places to eat that are affordable for me |
 
 ### Use cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+#### System: Grub Address Book (GAB)
 
-**MSS**
+**Use Case:** UC1 - Search by Vendor Name  
+**Actor:** User  
+**MSS:**
+1. User opens the application.
+2. GAB opens up to the home page.
+3. User enters the vendor name.
+4. GAB returns a list of vendors matching the name.
+5. Use case ends.
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+**Extensions:**
+3a. GAB detects an error in entered user input.  
+   3a1. GAB responds with a command error message and requests correct data.  
+   3a2. User enters new data.  
+   Steps 3a1-3a2 are repeated until the data entered is correct.  
+   Use case resumes at step 4.
 
-    Use case ends.
+3b. No matches found.  
+   3b1. GAB responds that there are no matching vendors.  
+   3b2. User enters new data.  
+   Steps 3b1-3b2 are repeated until the data entered can be found.  
+   Use case resumes at step 5.
 
-**Extensions**
+---
 
-* 2a. The list is empty.
+**Use Case:** UC2 - Filter by Tag Names  
+**Actor:** User  
+**MSS:**
+1. User opens the application.
+2. GAB opens up to the home page.
+3. User enters the tag name.
+4. GAB returns a list of vendors matching the tag name.
+5. Use case ends.
 
-  Use case ends.
+**Extensions:**
+3a. GAB detects an error in entered user command.  
+   3a1. GAB responds with a command error message and requests correct data.  
+   3a2. User enters new data.  
+   Steps 3a1-3a2 are repeated until the data entered is correct.  
+   Use case resumes at step 4.
 
-* 3a. The given index is invalid.
+3b. GAB detects an error in entered user tag.  
+   3b1. GAB responds with a command error message and requests correct data.  
+   3b2. User enters new data.  
+   Steps 3b1-3b2 are repeated until the data entered is correct.  
+   Use case resumes at step 4.
 
-    * 3a1. AddressBook shows an error message.
+---
 
-      Use case resumes at step 2.
+**Use Case:** UC3 - Filter by Price Range  
+**Actor:** User  
+**MSS:**
+1. User opens the application.
+2. GAB opens up to the home page.
+3. User enters a price range.
+4. GAB returns a list of vendors within the price range.
+5. Use case ends.
 
-*{More to be added}*
+**Extensions:**
+3a. No vendor found.  
+   3a1. GAB responds that there are no vendors within the price range.  
+   3a2. User enters new data.  
+   Steps 3a1-3a2 are repeated until a vendor can be found.  
+   Use case resumes at step 5.
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1. **Compatibility Requirement**: Should be compatible with any system where Java 17 and the corresponding JavaFX version is installed.
+2. **Capacity Requirement**: Should be able to store up to 100 vendors at a time.
+3. **Performance Requirement**: Vendor search results should be populated in under 500 ms.
+4. **Usability Requirement**: Should be easy to use any part of the app for users who can type fast and prefer typing over other interfaces.
+5. **Maintainability Requirement**: Codebase should be modular and easy to maintain until the end of this iteration of CS2103.
+6. **Persistency Requirement**: Vendor entries should be persisted between sessions.
+7. **Security Requirement**: Input sanitization should be implemented to prevent database corruption.
+8. **Documentation Requirement**: Code should be well documented, both in-code (with JavaDocs) and otherwise (GitHub Pages, README).
+9. **Robustness Requirement**: The app should handle errors such as network failures or incorrect user inputs, with clear error messages displayed in case of issues.
+10. **Testability Requirement**: The codebase should have sufficient unit test coverage and integrate with CI tools to automatically run tests on every code change.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Allergy-safe**:  
+  If a user filters using the keyword "Allergies," it is implied that restaurants with the associated tag can serve food that is completely free of any potential allergens. This typically means dishes will consist mainly of rice and vegetables.
+
+* **Cuisine**:  
+  A label used to categorize different restaurants based on the style of cooking and culinary traditions associated with a specific region or culture.
+
+* **Vendor**:  
+  A shop, typically a restaurant, that is listed on the app.
+
+* **Affordable Price ($)**:  
+  Expected price per meal per person to be \( x \leq \$10 \). This is a subjective estimate based on human input.
+
+* **Moderate Price ($$)**:  
+  Expected price per meal per person to be \( \$10 < x \leq \$20 \). This is a subjective estimate based on human input.
+
+* **Premium Price ($$$)**:  
+  Expected price per meal per person to be \( x > \$20 \). This is a subjective estimate based on human input.
 
 --------------------------------------------------------------------------------------------------------------------
 
