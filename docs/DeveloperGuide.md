@@ -287,14 +287,43 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​                                   | I want to …​                                                               | So that I can…​                                                                                        |    
+|----------|-------------------------------------------|----------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
+| `* * *`  | social worker                             | delete a contact                                                           | remove the contact when I no longer serve them so that the contact list do not get too long            |
+| `* * *`  | social worker/new user                    | add contact with phone number                                              | remember the person i serve                                                                            |
+| `* * *`  | social worker/new user                    | add address                                                                | easily look up without needed to look up database/files                                                |
+| `* * *`  | social worker                             | view my list of contacts                                                   | so that i can see the beneficiaries i serve                                                            |
+| `* *`    | overwhelmed with many households          | take note of how long it has been since I visited each house               | ensure that no house gets forgotten in my scheduling                                                   |
+| `* *`    | new user learning the interface           | check out basic commands that are frequently used with a help command      | learn the basic usage of the program more quickly                                                      |
+| `* *`    | user with multiple contacts per household | tag multiple users to be from the same household                           | simplify the process of contacting other household members                                             |
+| `* *`    | social worker                             | prioritize contacts                                                        | allow myself to have quick access to high priority household                                           |
+| `* *`    | social worker                             | add alternative contact method                                             | add a contact for elderly who do not have a phone                                                      |
+| `* *`    | social worker/expert user                 | look for emergency contact quickly                                         | inform next-of-kin when something happen                                                               |
+| `* *`    | social worker/expert user                 | add family contact                                                         | know how many people in the household                                                                  |
+| `* *`    | social worker/expert user                 | add notes                                                                  | remember if i need to take precaution before visiting the person/family or preparations i need to make |
+| `* *`    | social worker/expert user                 | sort contacts by lexicographical order                                     | find contact quickly if i remember the name                                                            |
+| `* *`    | social worker/expert user                 | search through contacts using keywords                                     | find contact quickly based on key words within the contact information                                 |
+| `* *`    | social worker/expert user                 | add alternative phone number                                               | incase beneficiary cannot be reached                                                                   |
+| `* *`    | social worker/new user                    | edit contact                                                               | edit the contact without the need to delete and create a new one                                       |
+| `* *`    | forgetful individual                      | add tags which explain what service the person needs                       | remember and be able to meet the needs of beneficiaries                                                |
+| `* *`    | holder of sensitive information           | lock the addressbook behind a password                                     | avoid having unsolicited sharing of personal information                                               |
+| `* *`    | max/expert user                           | add the medicinal information of beneficiaries                             | to know when to follow up on critical medicines                                                        |
+| `*`      | has rotating beneficiaries                | remove several contacts at once, when beneficiaries no longer require care | so that I can make space for new benficiaries and not keep track of old ones                           |
+| `*`      | max/expert user                           | know the households I need to visit on a certain day                       | so that I can schedule my day and not forget to visit any households                                   |
+| `*`      | user short on time                        | visit households that are geographically close in the same day/visit       | minimise the travelling time for myself                                                                |
+| `*`      | user switching devices                    | transfer the address book contacts from one device to another              | avoid having to manually re-enter all the current contacts                                             |
+| `*`      | max/expert user                           | export all contacts to a txt file/excel file                               | so that I have a copy of all beneficiaries, past and present, in a larger database                     |
+| `*`      | max/expert user                           | record social media credentials of a contact, if they have any             | so that I can get to know their lives better and establish a closer bond                               |
+| `*`      | max/expert user                           | send reminder to my email a day before my visit                            | so that I will not forget to visit a household                                                         |
+| `*`      | max/expert user                           | upload pictures of my beneficiaries                                        | so that I will not forget how they look like                                                           |
+| `*`      | max/expert user                           | view contacts on google maps                                               | so that I can directly see where and how to go to the household                                        |
+| `*`      | visual rememberer                         | add photos for each contact                                                | to match beneficiary names to their faces more easily                                                  |
+| `*`      | loyal user                                | save contact information into a shareable form                             | share contacts with colleagues as need be                                                              |
+| `*`      | experienced social worker                 | locate a link where I can share my views and suggestions on the app        | help the app be more user centered and helpful over time                                               |
+| `*`      | efficient person                          | create visit paths based on proximity of beneficiaries                     | to be able to serve the most beneficiaries a day                                                       |
+| `*`      | social person                             | add notes of on conversations with beneficiaries                           | develop stronger relationships by building rapport                                                     |
+
+
 
 *{More to be added}*
 
