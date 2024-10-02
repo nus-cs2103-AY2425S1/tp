@@ -11,9 +11,31 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Seah Minlong
+
+<img src="images/seah-minlong.png" width="200px">
+
+[[github](https://github.com/seah-minlong)]
+[[portfolio](team/seah-minlong.md)]
+
+* Role: Developer
+* Responsibilities: 
+  * Scheduling & tracking
+  * In charge of `Logic`
+
+### Xan Ng
+
+<img src="images/voldiemort.png" width="200px">
+
+[[github](http://github.com/voldiemort)]
+[[portfolio](team/voldiemort.md)]
+
+* Role: Team Lead
+* Responsibilities: Commons
+
 ### Chua Chong Sun
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/chongsun2002.png" width="200px">
 
 [[homepage](https://adventusfrontend-chongsun2002s-projects.vercel.app/)]
 [[github](https://github.com/chongsun2002)]
@@ -22,25 +44,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibility: Code quality and Integration
   In charge of storage
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
 
 ### Jean Doe
 
@@ -52,12 +55,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Zhanzhi Lou
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/zzzlou.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/zzzlou)]
+[[portfolio](team/zzzlou.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Documentation and in charge of Model
