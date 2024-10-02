@@ -22,7 +22,9 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Project Advisor
 
 ### Lewis 
+
 <img src="images/ghos7ie.png" width="200px">
+
 [[github](http://github.com/ghos7ie)]
 [[portfolio](team/johndoe.md)]
 
@@ -30,29 +32,31 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Responsibilities: Documentation
 
 ### Wang Hongyanyan
+
 <img src="images/yanyan-w.png" width="200px">
+
 [[github](http://github.com/YANYAN-w)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Deliverables and deadlines
 * Responsibilities: Ensure project deliverables are done on time and in the right format.
 
+### Tan Soo Yap
 
-### Johnny Doe
+<img src="images/sooyapphoto.png" width="200px">
 
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] 
+[[github](https://github.com/SooYap)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Developer and Testing
+* Responsibilities: Dev Ops + Code Testing
 
 ### Desiree Sng
 
 <img src="images/dez2003.png" width="200px">
 
 [[github](http://github.com/dez2003)]
+[[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Code Quality
