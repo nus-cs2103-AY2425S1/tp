@@ -298,34 +298,102 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
-### Use cases
+### Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `System` and the **Actor** is the `User`, unless specified otherwise.)
 
-**Use case: Delete a person**
+---
+
+#### **UC001: Add a contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to add a new contact by providing a name, phone number, email, job code, and tag.
+2. System validates the provided input.
+3. System checks if the contact already exists (name + phone number or email).
+4. System adds the contact to the system and displays a confirmation message.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The provided input is invalid (e.g., invalid phone number format, name too long).
 
-  Use case ends.
+    * 2a1. System shows an error message and prompts the user to correct the input.
 
-* 3a. The given index is invalid.
+      Use case ends.
 
-    * 3a1. AddressBook shows an error message.
+* 3a. A duplicate contact is found (same name and phone number/email).
 
-      Use case resumes at step 2.
+    * 3a1. System displays a duplicate contact error message.
 
-*{More to be added}*
+      Use case ends.
+
+---
+
+#### **UC002: Delete a contact**
+
+**MSS**
+
+1. User requests to delete a specific contact by name. Phone number or email is optional.
+2. System validates the provided input.
+3. System checks if the contact exists (name + phone number or email).
+4. System deletes the contact and displays a confirmation message.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The provided input is invalid (e.g., invalid phone number format, name too long).
+
+    * 2a1. System shows an error message and prompts the user to correct the input.
+
+      Use case ends.
+
+* 3a. No contact matches the provided identifier.
+
+    * 3a1. System shows an error message and prompts the user to correct the input an existing contact.
+
+      Use case ends.
+
+* 3b. Multiple contacts with the same name are found. This only happens if phone number and email are not provided by user.
+
+    * 3c1. System asks the user to provide additional details (phone number or email) to specify the contact to delete.
+
+      Use case ends.
+
+---
+
+#### **UC003: List all contacts**
+
+**MSS**
+
+1. User requests to list all contacts.
+2. System retrieves all stored contacts from the system.
+3. System displays the list of contacts.
+
+   Use case ends.
+
+---
+
+#### **UC004: Filter contacts**
+
+**MSS**
+
+1. User requests to filter contacts by job code or tag.
+2. System validates the filter criteria.
+3. System retrieves and displays the filtered contacts matching the job code or tag.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The filter criteria are invalid (e.g., tag not recognized or job code too long).
+
+    * 2a1. System shows an error message.
+
+      Use case ends.
+
 
 ### Non-Functional Requirements
 
