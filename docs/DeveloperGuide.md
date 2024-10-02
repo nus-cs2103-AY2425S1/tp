@@ -322,6 +322,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2b2. User decides whether to overwrite or cancel the operation. 
     * Use case resumes at step 2 if user decides to proceed
 
+**Use case: Sort Clients**
+
+**MSS**
+
+1. User sort the clients by entering the sort command with a valid parameter and order.
+2. AgentConnect validates the input.
+3. AgentConnect retrieves the current client list from storage.
+4. AgentConnect sorts the clients based on the specified parameter and order.
+5. AgentConnect updates the client list in the GUI to reflect the new sorted order.
+6. AgentConnect shows a success message confirming the clients have been sorted.
+    Use case ends.
+
+
+**Extensions**
+
+* 2a. Sorting parameter are missing or invalid (e.g., name, insurance type, address, policy renewal date).
+    * 2a1. AgentConnect shows an error message for the invalid sorting parameter.
+    * 2a2. User corrects the sorting parameter and resubmits the command.
+    * Use case resumes from step 2.
+
+* 2b. Sorting order are missing or invalid (e.g., asc, desc).
+    * 2a1. AgentConnect shows an error message for the invalid sorting order.
+    * 2a2. User corrects the sorting order and resubmits the command.
+    * Use case resumes from step 2.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
@@ -329,6 +354,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should be able to hold up to 1000 persons without noticeable lag for typical usage. 
 2.  A user with above-average typing speed for regular English text should be able to add a new contact (including insurance and appointment details) faster using commands than with the mouse. 
 3.  The system should provide real-time validation (e.g., when typing the phone number or email) to reduce error rates and ensure correct input formats.
+4.  Novice users should be able to complete a typical workflow in under 5 minutes, without external help.
+5.  The system codebase should allow for the introduction of new features with less than 10% of existing code modification.
 
 *{More to be added}*
 
