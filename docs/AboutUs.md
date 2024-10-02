@@ -11,15 +11,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Vince Goh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/vinceg4.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+I like to read books and my favourite genre is mystery. I also like to run and play badminton in my free time.
 
-* Role: Project Advisor
+[[github](https://github.com/vinceg4)]
+
+* Role: Developer
+* Reponsibilties: Code Quality
 
 ### Jane Doe
 
