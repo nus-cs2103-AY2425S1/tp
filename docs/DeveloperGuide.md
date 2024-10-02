@@ -347,13 +347,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. The system should retrieve and display student information for typical queries within 2 seconds.
+5. The system must be available 99.9% of the time, excluding scheduled maintenance.
+6. Data should be stored in a local human text editable file.
+7. Should contain an easy-to-read and detailed User and Developer Guides.
+8. The System should be run on the user's own computer.
+9. Users should be able to run the application directly from the downloaded JAR file without an installer.
+10. The code should follow coding standard and be well-documented with clear comments for ease of understanding.
+11. The code architecture should allow for the addition of new features without restructuring components.
 
-*{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Admin**: Admin at the tuition center who is in charge of all administrative processes
+* **System**: The Eduvault application
+* **Student**: Current and pat students who attended the tuition centre
+
 
 --------------------------------------------------------------------------------------------------------------------
 
