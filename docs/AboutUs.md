@@ -37,8 +37,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](http://github.com/orangecatloves)] [[portfolio](team/orangecatloves.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Code-Quality
+* Responsibilities: Ensures that coding quality is adhered and up to standard for every pull-request
 
 ### Jean Doe
 
