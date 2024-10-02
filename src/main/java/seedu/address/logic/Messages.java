@@ -48,4 +48,15 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Formats contact detail of {@code person} to display only name and phone
+     * to the user.
+     */
+    public static String formatShort(Person person) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(person.getName())
+                .append(String.format(" (%s)", person.getPhone()));
+        return builder.toString();
+    }
+
 }
