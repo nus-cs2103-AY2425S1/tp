@@ -24,7 +24,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/rahula1008.png" width="200px">
 
 [[github](http://github.com/rahula1008)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](http://linkedin.com/in/rahula1008)]
+
 
 * Role: Developer
 * Responsibilities: Data
@@ -33,7 +34,9 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](http://linkedin.com/in/rahula1008)]
+[[github](http://github.com/johndoe)] 
+[[portfolio](team/johndoe.md)]
+
 
 * Role: Developer
 * Responsibilities: Data
