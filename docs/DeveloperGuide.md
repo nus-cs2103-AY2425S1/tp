@@ -369,7 +369,7 @@ Priorities:
 * **Schedule**: A list of all patients' appointments, displaying the date and time and location of the appointments.
 * **Tag**: A label applied to a patient record, used to categorise and highlight specific medical information, such as allergies or conditions.
 * **Medical History**: Documentation of patient's past illnesses, treatments, surgeries and other medical related information.
-* **Inactive Client**: A client who is no longer receiving care or whose records have not been accessed in a signifcant amount of time
+* **Inactive Client**: A client who is no longer receiving care or whose records have not been accessed in a significant amount of time
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
