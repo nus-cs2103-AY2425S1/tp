@@ -401,110 +401,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: UC03 Delete a person**
+<a name="uc03"></a>
+
+**Use case: UC03 List contacts**
 
 **MSS**
 
-1.  User requests to list the contacts or [search (UC02)](#uc02) for contact(s)
-2.  ContactCS shows a list of contacts
-3.  User requests to delete a specific person in the list
-4.  ContactCS deletes the person
+1.  User requests to list the contacts
+2. ContactCS shows a list of contacts
 
-    Use case ends.
-
-**Extensions**
-
-* 1a. The list is empty.
-  * 1a1. ContactCS displays a message to the user saying that the list is empty
-
-      Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. ContactCS requests the user to provide the correct index
-    * 3a2. User enters new index
-    * Steps 3a1 - 3a2 are repeated until the index entered are correct
-
-      Use case resumes from step 4.
-
-**Use case: UC04 Update contact information**
-
-**MSS**
-
-1.  User requests to list the contacts or [search (UC02)](#uc02) for a contact
-2.  ContactCS shows a list of contacts
-3.  User requests to update contact information for a specific person in the list, providing the new contact details
-4.  ContactCS updates the contact details based on the information provided by the user
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. The list is empty.
-  * 1a1. ContactCS displays a message to the user saying that the list is empty
-
-      Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. ContactCS requests the user to provide the correct index
-    * 3a2. User enters new index
-    * Steps 3a1 - 3a2 are repeated until the index entered are correct
-
-      Use case resumes from step 4.
-
-* 3b. The given format is invalid.
-
-    * 3b1. ContactCS requests the user to provide the correct format and shows the valid command format
-    * 3b2. User enters new input
-    * Steps 3b1 - 3b2 are repeated until the format for the entered input is correct
-
-      Use case resumes from step 4.
-
-**Use case: UC05 Mark frequently used contacts**
-
-**MSS**
-
-1.  User requests to list the contacts or [search (UC02)](#uc02) for a contact
-2.  ContactCS shows a list of contacts
-3.  User requests to mark certain contacts as frequently accessed
-4.  ContactCS marks these contacts for quick access
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. The list is empty.
-  * 1a1. ContactCS displays a message to the user saying that the list is empty
-
-      Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. ContactCS requests the user to provide the correct index
-    * 3a2. User enters new index
-    * Steps 3a1 - 3a2 are repeated until the index entered are correct
-
-      Use case resumes from step 4.
-
-* 3b. The given format is invalid.
-
-    * 3b1. ContactCS requests the user to provide the correct format and shows the valid command format
-    * 3b2. User enters new input
-    * Steps 3b1 - 3b2 are repeated until the format for the entered input is correct
-
-      Use case resumes from step 4.
-
-**Use case: UC06 Unmark frequently used contacts**
-
-**MSS**
-
-1.  User requests to list the contacts or [search (UC02)](#uc02) for a contact
-2.  ContactCS shows a list of contacts
-3.  User requests to mark certain contacts as frequently accessed
-4.  ContactCS removes the marking from these contacts for quick access
-
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
@@ -513,23 +419,111 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 3a. The given index is invalid.
+**Use case: UC04 Delete a person**
 
-    * 3a1. ContactCS requests the user to provide the correct index
-    * 3a2. User enters new index
-    * Steps 3a1 - 3a2 are repeated until the index entered are correct
+**MSS**
 
-      Use case resumes from step 4.
+1. User requests to [list (UC03)](#uc03) the contacts or [search (UC02)](#uc02) for contact(s)
+2. User requests to delete a specific person in the list
+3. ContactCS deletes the person
 
-* 3b. The given format is invalid.
+    Use case ends.
 
-    * 3b1. ContactCS requests the user to provide the correct format and shows the valid command format
-    * 3b2. User enters new input
-    * Steps 3b1 - 3b2 are repeated until the format for the entered input is correct
+**Extensions**
 
-      Use case resumes from step 4.
+* 2a. The given index is invalid.
 
-**Use case: UC07 Access frequently used contacts**
+    * 2a1. ContactCS requests the user to provide the correct index
+    * 2a2. User enters new index
+    * Steps 2a1 - 2a2 are repeated until the index entered are correct
+
+      Use case resumes from step 3.
+
+**Use case: UC05 Update contact information**
+
+**MSS**
+
+1. User requests to [list (UC03)](#uc03) the contacts or [search (UC02)](#uc02) for a contact
+2. User requests to update contact information for a specific person in the list, providing the new contact details
+3. ContactCS updates the contact details based on the information provided by the user
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given index is invalid.
+
+    * 2a1. ContactCS requests the user to provide the correct index
+    * 2a2. User enters new index
+    * Steps 2a1 - 2a2 are repeated until the index entered are correct
+
+      Use case resumes from step 3.
+
+* 2b. The given format is invalid.
+
+    * 2b1. ContactCS requests the user to provide the correct format and shows the valid command format
+    * 2b2. User enters new input
+    * Steps 2b1 - 2b2 are repeated until the format for the entered input is correct
+
+      Use case resumes from step 3.
+
+**Use case: UC06 Mark frequently used contacts**
+
+**MSS**
+
+1. User requests to [list (UC03)](#uc03) the contacts or [search (UC02)](#uc02) for a contact
+2. User requests to mark certain contacts as frequently accessed
+3. ContactCS marks these contacts for quick access
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given index is invalid.
+
+    * 2a1. ContactCS requests the user to provide the correct index
+    * 2a2. User enters new index
+    * Steps 2a1 - 2a2 are repeated until the index entered are correct
+
+      Use case resumes from step 3.
+
+* 2b. The given format is invalid.
+
+    * 2b1. ContactCS requests the user to provide the correct format and shows the valid command format
+    * 2b2. User enters new input
+    * Steps 2b1 - 2b2 are repeated until the format for the entered input is correct
+
+      Use case resumes from step 3.
+
+**Use case: UC07 Unmark frequently used contacts**
+
+**MSS**
+
+1. User requests to [list (UC03)](#uc03) the contacts or [search (UC02)](#uc02) for a contact
+2. User requests to mark certain contacts as frequently accessed
+3. ContactCS removes the marking from these contacts for quick access
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given index is invalid.
+
+    * 2a1. ContactCS requests the user to provide the correct index
+    * 2a2. User enters new index
+    * Steps 2a1 - 2a2 are repeated until the index entered are correct
+
+      Use case resumes from step 3.
+
+* 2b. The given format is invalid.
+
+    * 2b1. ContactCS requests the user to provide the correct format and shows the valid command format
+    * 2b2. User enters new input
+    * Steps 2b1 - 2b2 are repeated until the format for the entered input is correct
+
+      Use case resumes from step 3.
+
+**Use case: UC08 Access frequently used contacts**
 
 **MSS**
 
@@ -540,8 +534,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The list is empty.
-  * 1a1. ContactCS displays a message to the user saying that the list is empty
+* 1a. The list for frequently used contacts is empty.
+  * 1a1. ContactCS displays a message to the user saying that there is no frequently used contact
 
     Use case ends.
 
@@ -553,7 +547,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 2.
 
-**Use case: UC08 View usage instructions**
+**Use case: UC09 View usage instructions**
 
 **MSS**
 
@@ -572,7 +566,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 2.
 
-**Use case: UC09 View app with sample data**
+**Use case: UC10 View app with sample data**
 
 **MSS**
 
@@ -591,9 +585,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 2.
 
-<a name="uc10"></a>
-
-**Use case: UC10 Undo actions**
+**Use case: UC11 Undo actions**
 
 **MSS**
 
@@ -617,7 +609,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 2.
 
-**Use case: UC11 Redo actions**
+**Use case: UC12 Redo actions**
 
 **MSS**
 
