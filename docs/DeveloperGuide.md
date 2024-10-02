@@ -337,15 +337,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions:**
 
-- 3a. System detects an error in the entered data (e.g., invalid phone number). 
-- 3b. System requests the correct data. 
-- 3c. Wedding planner enters new data. 
-- Use case resumes from step 4.
+* 3a. System detects an error in the entered data (e.g., invalid phone number). 
+  
+  * 3a1. System requests the correct data.
+  * 3a2. Wedding planner enters new data. 
+    
+    Use case resumes from step 4.
 
-
-- 5a. The contact already exists in the system (duplicate contact).
-- 5a1. System displays a message that the contact already exists.
-- Use case ends.
+* 5a. The contact already exists in the system (duplicate contact).
+  
+  * 5a1. System displays a message that the contact already exists.
+    
+    Use case ends.
 
 **Guarantees:**
 
@@ -414,7 +417,32 @@ ___
   * 2b1. System informs the user that there are no saved contacts.
     
     Use case ends.
+    
+**Name: UC04 - Save Contact (Client/Vendor)**
 
+**Preconditions:**
+1. The system should be operational.
+
+**Guarantees:**
+
+1. The file will be saved to the directory if the directory exists.
+2. If there is a duplicate file (file of the same name), it will be overwritten.
+3. If the directory is not valid, there will be no effect with the command.
+
+**Main Success Scenario (MSS):**
+1. The user specifies the directory to save data in.
+2. System displays a success message.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The directory does not exist.
+  
+  * 1a1. System prompts the user that the target directory does not exist.
+
+  Use case ends. 
+ 
 ### Non-Functional Requirements
 
 1. Compatibility: Should work on any _mainstream OS_ (Windows/macOS/Linux) as long as it has Java `17` or above installed.
@@ -430,6 +458,7 @@ ___
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Vendor**: A person who provides certain kinds of services
 * **32-bit and 64-bit environment**: The amount of memory that your computer can address. 64-bit machines are able to access much more memory than 32-bit machines.
 
 --------------------------------------------------------------------------------------------------------------------
