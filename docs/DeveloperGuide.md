@@ -300,32 +300,67 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TeleTutors App` and the **Actor** is the `tutor`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a new Task**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  Tutor requests to add a new task.
+2.  Teletutors App prompts for the task details.
+3.  Tutor provides the required task details.
+4.  Teletutors App confirms the task has been successfully added.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. Tutor enters an invalid deadline
+  * 1a1. Teletutors App displays an error message: `Invalid date format. Please use 'YYYY-MM-DD'.`
+  * 1a2. Tutor re-enters the correct date.
 
-  Use case ends.
+    Use case resumes from Step 3.
 
-* 3a. The given index is invalid.
+**Use case: Mark student Attendance**
 
-    * 3a1. AddressBook shows an error message.
+**MSS**
+1. Tutor requests to mark attendance for a student in a selected tutorial session.
 
-      Use case resumes at step 2.
+2. Teletutors App displays the list of students for the session.
 
-*{More to be added}*
+3. Tutor selects the student and specifies whether they are present or absent.
+
+4. Teletutors App updates the attendance record and confirms the action.
+
+    Use Case Ends.
+
+**Extensions**
+* 3a. Student is not found in the session list
+  * 3a1. Teletutors App displays an error message: `Student not found. Please check the name and try again.`
+  
+    Use case resumes from Step 2
+
+
+**Use case: Delete student details**
+
+**MSS**
+
+1.  Tutor requests to delete a student's details.
+2.  Teletutors App prompts for confirmation
+3.  Tutor confirms the deletion.
+4.  Teletutors App deletes the student and associated records.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The student does not exist in the system
+    * 2a1. Teletutors App displays an error message: `Student not found. Please check the name and try again`
+
+      Use case resumes from Step 3.
+
+
+
 
 ### Non-Functional Requirements
 
