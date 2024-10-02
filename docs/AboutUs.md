@@ -18,6 +18,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Integration
 
+### Ong Ye Hao Darren
+
+<img src="images/o-darren.png" width="200px">
+
+[[github](https://github.com/O-Darren)]
+[[portfolio](team/o-darren.md)]
+
+
+* Role: Scheduling and tracking
+
 ### Ian Cheah
 
 <img src="images/iancheah.png" width="200px">
@@ -35,3 +45,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Deliverables and deadlines
 * Responsibilities: Data
+
