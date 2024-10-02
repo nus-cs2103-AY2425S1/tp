@@ -13,4 +13,4 @@ ConTActs is a product catered to NUS CS Teaching Assistants(TAs) to allow of eas
 6. Mark Attendance (TBC)
 
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
-* This project is a part of the se-education.org initiative. If you would like to contribute code to this project, see se-education.org for more info. This project is based on the AddressBook-Level3 project created by the SE-EDU initiative.
+* This project is a part of the se-education.org initiative. If you would like to contribute code to this project, see se-education.org for more info.
