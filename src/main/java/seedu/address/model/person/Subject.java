@@ -38,6 +38,9 @@ public class Subject {
      * Returns true if a given string is a valid subject name.
      */
     public static boolean isValidSubjectName(String test) {
+        if (test == null) {
+            throw new NullPointerException();
+        }
         return inEnum(test, Subjects.class);
     }
 
@@ -52,8 +55,8 @@ public class Subject {
             return false;
         }
 
-        Subject otherTag = (Subject) other;
-        return subjectName.equals(otherTag.subjectName);
+        Subject otherSubject = (Subject) other;
+        return subjectName.equals(otherSubject.subjectName);
     }
 
     @Override
@@ -69,4 +72,3 @@ public class Subject {
     }
 
 }
-

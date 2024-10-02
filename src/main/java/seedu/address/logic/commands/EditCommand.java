@@ -5,7 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -27,7 +27,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Tag;
+import seedu.address.model.person.Subject;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -44,7 +44,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMERGENCY_CONTACT + "EMERGENCY_PHONE] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_SUBJECT + "SUBJECT]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 ";
 
@@ -101,9 +101,10 @@ public class EditCommand extends Command {
                 .orElse(personToEdit.getEmergencyContact());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Note updatedNote = editPersonDescriptor.getNote().orElse(personToEdit.getNote());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<Subject> updatedSubjects = editPersonDescriptor.getSubjects().orElse(personToEdit.getSubjects());
 
-        return new Person(updatedName, updatedPhone, updatedEmergencyContact, updatedAddress, updatedNote, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmergencyContact,
+                updatedAddress, updatedNote, updatedSubjects);
     }
 
     @Override
@@ -140,13 +141,13 @@ public class EditCommand extends Command {
         private EmergencyContact emergencyContact;
         private Address address;
         private Note note;
-        private Set<Tag> tags;
+        private Set<Subject> subjects;
 
         public EditPersonDescriptor() {}
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * A defensive copy of {@code subjects} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
@@ -154,14 +155,14 @@ public class EditCommand extends Command {
             setEmergencyContact(toCopy.emergencyContact);
             setAddress(toCopy.address);
             setNote(toCopy.note);
-            setTags(toCopy.tags);
+            setSubjects(toCopy.subjects);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, emergencyContact, address, note, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, emergencyContact, address, note, subjects);
         }
 
         public void setName(Name name) {
@@ -205,20 +206,20 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
+         * Sets {@code subjects} to this object's {@code subjects}.
+         * A defensive copy of {@code subjects} is used internally.
          */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setSubjects(Set<Subject> subjects) {
+            this.subjects = (subjects != null) ? new HashSet<>(subjects) : null;
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * Returns an unmodifiable subject set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Returns {@code Optional#empty()} if {@code subjects} is null.
          */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public Optional<Set<Subject>> getSubjects() {
+            return (subjects != null) ? Optional.of(Collections.unmodifiableSet(subjects)) : Optional.empty();
         }
 
         @Override
@@ -238,7 +239,7 @@ public class EditCommand extends Command {
                     && Objects.equals(emergencyContact, otherEditPersonDescriptor.emergencyContact)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(note, otherEditPersonDescriptor.note)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(subjects, otherEditPersonDescriptor.subjects);
         }
 
         @Override
@@ -249,7 +250,7 @@ public class EditCommand extends Command {
                     .add("emergencyContact", emergencyContact)
                     .add("address", address)
                     .add("note", note)
-                    .add("tags", tags)
+                    .add("subjects", subjects)
                     .toString();
         }
     }

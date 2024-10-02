@@ -23,20 +23,20 @@ public class Person {
     // Data fields
     private final Address address;
     private final Note note;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Set<Subject> subjects = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, EmergencyContact emergencyContact,
-                  Address address, Note note, Set<Tag> tags) {
-        requireAllNonNull(name, phone, address, tags);
+                  Address address, Note note, Set<Subject> subjects) {
+        requireAllNonNull(name, phone, address, subjects);
         this.name = name;
         this.phone = phone;
         this.emergencyContact = emergencyContact;
         this.address = address;
         this.note = note;
-        this.tags.addAll(tags);
+        this.subjects.addAll(subjects);
     }
 
     public Name getName() {
@@ -58,11 +58,11 @@ public class Person {
         return note;
     }
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable subject set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Set<Subject> getSubjects() {
+        return Collections.unmodifiableSet(subjects);
     }
 
     /**
@@ -99,13 +99,13 @@ public class Person {
                 && emergencyContact.equals(otherPerson.emergencyContact)
                 && address.equals(otherPerson.address)
                 && note.equals(otherPerson.note)
-                && tags.equals(otherPerson.tags);
+                && subjects.equals(otherPerson.subjects);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, emergencyContact, address, note, tags);
+        return Objects.hash(name, phone, emergencyContact, address, note, subjects);
     }
 
     @Override
@@ -116,7 +116,7 @@ public class Person {
                 .add("emergency contact", emergencyContact)
                 .add("address", address)
                 .add("note", note)
-                .add("tags", tags)
+                .add("subjects", subjects)
                 .toString();
     }
 

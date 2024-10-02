@@ -398,14 +398,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 4.
 
-**Use case: Add tags for a student**
+**Use case: Add subjects for a student**
 
 **MSS**
 
 1.  Tuition teacher requests to list students.
 2.  EduManage shows a list of students.
 3.  Tuition teacher requests to tag a specific student in the list according to his/her school level and/or subject.
-4.  EduManage updates the corresponding tags of the student.
+4.  EduManage updates the corresponding subjects of the student.
 
     Use case ends.
 
@@ -421,13 +421,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-* 3b. Multiple school level tags were given.
+* 3b. Multiple school level subjects were given.
 
     * 3b1. EduManage shows an error message.
 
       Use case resumes at step 2.
 
-* 3c. No tags were given.
+* 3c. No subjects were given.
 
     * 3c1. EduManage shows an error message.
 
