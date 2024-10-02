@@ -11,14 +11,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### Lim Yixiang
+### Nicholas Koh
 
-<img src="images/limyixiang.png" width="200px">
+<img src="images/nicholaskoh1.png" width="200px">
 
-[[github](https://github.com/limyixiang)]
-[[portfolio](team/limyixiang.md)]
+[[github](https://github.com/Nicholaskoh1)]
+[[portfolio](team/nicholaskoh1.md)]
 
-* Role: Testing
+* Role: Scheduling and Tracking
 
 ### Jane Doe
 
@@ -30,14 +30,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Lim Yixiang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/limyixiang.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/limyixiang)]
+[[portfolio](team/limyixiang.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Testing
 
 ### Jean Doe
 
