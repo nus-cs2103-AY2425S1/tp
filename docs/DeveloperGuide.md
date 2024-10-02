@@ -413,3 +413,32 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+### Non-Functional Requirements
+1. ABCLI should be a result of evolving/enhancing/morphing the given codebase.
+
+1. ABCLI should be targeting users who can type fast and prefer typing over other means of input.
+
+1. ABCLI should be for a single user.
+
+1. ABCLI needs to be developed in a breadth-first incremental manner over the project duration.
+
+1. ABCLI's data should be stored locally and should be in a human editable text file.
+
+1. ABCLI cannot use a DBMS to store data.
+
+1. ABCLI should follow the Object-oriented paradigm primarily.
+
+1. ABCLI should work on the Windows, Linux, and OS-X platforms.
+
+1. ABCLI should work on a computer that has version 17 of Java.
+
+1. ABCLI should work without requiring an installer.
+
+1. ABCLI should not depend on your own remote server.
+
+1. The use of third-party frameworks/libraries/services is allowed but only if they are free, open-source, and have permissive license terms and do not require any installation by users and do not violate other constraints.
+
+1. The GUI should work well for standard screen resolutions 1920x1080 and higher and for screen scales 100% and 125%. In addition, the GUI should be usable for resolutions 1280x720 and higher, and for screen scales 150%.
+
+1. ABCLI has to be packaged into a single JAR file.
