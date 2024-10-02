@@ -163,7 +163,7 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 If you want to save the data to somewhere else or rename it into a new file, you can also save the data by using the `save` command.
 
-Format: `save /dir DIRECTORY /name FILE_NAME`
+Format: `save /dir [directory] /name [name of the JSON file]`
 
 Examples:
 * `save /dir . /name contacts`
