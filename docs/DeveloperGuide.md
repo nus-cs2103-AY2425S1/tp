@@ -274,14 +274,18 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* Piano teachers with a significant number of piano students
+* wants to record information about students
+* looking to organize their schedule and teaching activities
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
-
+**Value proposition**: 
+* Manage students' schedules faster than a typical mouse/GUI driven app
+* Track income and the sale of learning materials, ensuring they get reimbursed while managing inventory effectively
+* Accommodate students who need to reschedule, making for a flexible scheduling tool
 
 ### User stories
 
