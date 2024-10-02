@@ -7,55 +7,32 @@
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
-### John Doe
+### Chen Yizhong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yizhong187.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/yizhong187)]
+[[portfolio](team/yizhong187.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
 
-### Johnny Doe
+### Casper Ng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/casperngeen.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/casperngeen)]
+[[portfolio](team/casperngeen.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: UI and Logic
 
-### James Doe
+### Mervyn
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/teddayz.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/teddayz)]
+[[portfolio](team/mervyn.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Project Advisor
