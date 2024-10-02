@@ -11,6 +11,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Nathan Loo
+
+<img src="images/natlv.png" width="200px">
+
+[[homepage](https://nathan-loo.vercel.app)]
+[[github](https://github.com/natlv)]
+[[portfolio](team/natlv.md)]
+
+* Role: 
+* Responsibilities: 
+
 ### Jerrell Lee
 
 <img src="images/jerrelllee.png" width="200px">
@@ -31,25 +42,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role:
 * Responsibilities:
 
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
 ### Hugh 
 
 <img src="images/gnoossk.png" width="200px">
@@ -60,12 +52,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Analyst
 * Responsibilities: Analyse
 
-### James Doe
 
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
