@@ -11,6 +11,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Li Yutong
+
+<img src="images/yu7ong.png" width="200px">
+
+[[github](http://github.com/yu7ong)]
+
+* Role: Team member 
+* Responsibilities: Code quality, Deliverables and deadlines
+
 ### Anvita
 
 <img src="images/anvita2110.png" width="200px">
