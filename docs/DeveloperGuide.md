@@ -287,51 +287,85 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​ | I want to …​                            | So that I can…​                      |
+|----------|---------|-----------------------------------------|--------------------------------------|
+| `* * *`  | nurse   | add in emergency contact numbers        | refer to them during an emergency.   |
+| `* * *`  | nurse   | delete emergency contact numbers        | remove irrelevant emergency contacts |
+| `* * *`  | nurse   | update a patient’s category             | reflect changes in their care status |
+| `* * *`  | nurse   | assign multiple categories to a patient | quickly identify the care level      |
+| `* *`    | nurse   | add tasks                               | track what task needs to be done     |
+| `*`      | nurse   | delete tasks                            | remove irrelevant taskss             |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `NovaCare` and the **Actor** is the `nurses`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01  - Add Task**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User chooses to add a new task.
+2. NovaCare asks for a patient ID and description of the task.
+3. User inputs the requested information.
+4. NovaCare outputs message showing successful task creation
+
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 3a. The list is empty.
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 3a. NovaCare detects an invalid patient ID.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. NovaCare requests for valid patient ID.
+    * 3a2. User enters a new patient ID and description of the task.
 
-      Use case resumes at step 2.
 
-*{More to be added}*
+      Steps 3a1-3a2 are repeated until the data entered is correct.
+      Use case resumes at step 2 if patient details are re-entered.
+
+**Use case: UC02  - Delete Emergency contact number**
+
+**MSS**
+
+1.  Nurse chooses to delete an emergency contact number for a patient.
+2.  NovaCare requests the patient's details to identify the patient.
+3.  NovaCare displays the list of current emergency contacts for the patient.
+4.  Nurse selects the contact to delete.
+5.  NovaCare requests confirmation from the nurse to delete the selected contact.
+6.  Nurse confirms the deletion.
+7.  NovaCare deletes the selected emergency contact and displays a confirmation message with the updated emergency contact list.
+
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The list is empty.
+
+  Use case ends.
+
+* 3a. NovaCare detects that the patient does not exist.
+
+    * 3a1. NovaCare notifies the nurse that the patient does not exist.
+    * 3a2. Nurse either re-enters the correct patient details or cancels the operation.
+
+
+      Use case resumes at step 2 if patient details are re-entered.
+
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  The GUI should work well for standard screen resolutions 1920x1080 and higher, and for screen scales 100% and 125%.
+5.  The codebase should be modular, allowing easy updates or feature additions without affecting other parts of the system.
 
 *{More to be added}*
 
