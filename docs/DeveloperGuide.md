@@ -287,33 +287,104 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 *{More to be added}*
 
 ### Use cases
+### **System:** NetBook  
+***
+**Use case:** UCO1 - Add New Contact  
+**Actor:** User
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+**Main Success Scenario (MSS)**
+1. User types in `add` command with necessary fields
+2. NetBook validates the inputs from the user
+3. NetBook adds the new contact to the list of contacts
+4. NetBook displays the new contact on the GUI
 
-**Use case: Delete a person**
-
-**MSS**
-
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
-
-    Use case ends.
+Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. A duplicate contact was added
+  * 2ai. NetBook displays the following error message:  
+  `This person's details have already been recording in NetBook!`
+  * **Use case ends.**
 
-  Use case ends.
 
-* 3a. The given index is invalid.
+* 2b. Invalid or missing data
+  * 2bi. NetBook displays an error message with the correct format for the `add` command
+  * 2bii. User re-enters `add` command with necessary fields
+  * 2biii. Steps 2bi and 2bii are repeated until the information entered is valid
+  * **Use case resumes from Step 3**
+***
+**Use case:** UCO2 - Delete Contact  
+**Actor:** User
 
-    * 3a1. AddressBook shows an error message.
+**Main Success Scenario (MSS)**
+1. User types in `delete` command with the index of the specified user
+2. NetBook validates the input from the user
+3. NetBook deletes the specified contact
+4. NetBook removes the specified contact from the GUI
 
-      Use case resumes at step 2.
+Use case ends.
 
-*{More to be added}*
+**Extensions**
+
+* 2a. Invalid index number
+    * 2bi. NetBook displays an error message stating that the given index is invalid
+    * 2bii. User re-enters delete command with valid index
+    * 2biii. Steps 2bi and 2bii are repeated until the information entered is valid
+    * **Use case resumes from Step 3**
+
+***
+**Use case:** UCO3 - Find Contact  
+**Actor:** User
+
+**Main Success Scenario (MSS)**
+1. User types in `find` command with a specified keyword
+2. NetBook validates the input from the user
+3. NetBook identifies users with the keyword in their name
+4. NetBook displays the relevant users in the GUI, and displays a message stating the number of contacts displayed
+
+Use case ends.
+***
+**Use case:** UCO4 - List All Contacts  
+**Actor:** User
+
+**Main Success Scenario (MSS)**
+1. User types in `list` command
+2. NetBook displays the all registered contacts in the GUI, and displays the following message:
+`All contacts are being displayed!`
+
+Use case ends.
+***
+
+**Use case:** UCO5 - Open Help Page  
+**Actor:** New User
+
+**Main Success Scenario (MSS)**
+1. User types in `help` command
+2. NetBook displays the help page to the user
+
+Use case ends.
+***
+**Use case:** UCO6 - Assign Priority To Contact   
+**Actor:** User
+
+**Main Success Scenario (MSS)**
+1. User types in `priority` command, followed by the relevant fields
+2. NetBook validates the input from the user
+3. NetBook assigns the stated priority to the stated contact
+4. NetBook displays the priority for the contact on the GUI
+
+Use case ends.
+
+**Extensions**
+
+* 2a. Invalid or missing fields
+    * 2bi. NetBook displays an error message with the correct format for the `priority` command
+    * 2bii. User re-enters `priority` command with necessary fields
+    * 2biii. Steps 2bi and 2bii are repeated until the information entered is valid
+    * **Use case resumes from Step 3**
+***
+
 
 ### Non-Functional Requirements
 
