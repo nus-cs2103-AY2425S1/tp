@@ -1,17 +1,10 @@
-remote_theme: pages-themes/cayman@v0.2.0
-title: "AB-3"
-
+title: "EduLog"
+theme: minima
 header_pages:
   - UserGuide.md
   - DeveloperGuide.md
   - AboutUs.md
-
 markdown: kramdown
-
 repository: "se-edu/addressbook-level3"
-github_icon: "images/github-icon.png"
-
 plugins:
   - jemoji
-  - jekyll-remote-theme
-show_downloads: ["true"]
