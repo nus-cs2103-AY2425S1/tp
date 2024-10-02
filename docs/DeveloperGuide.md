@@ -331,7 +331,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   - 1a1 System shows an error message.
 
-  Use case resumes at step 1.
+    Use case resumes at step 1.
 
 **Use case: UC2 - List all people saved in the System**
 
@@ -348,13 +348,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   - 1a1 System informs Actor that they have no contacts stored.
 
-  Use case ends.
+    Use case ends.
 
 - 1b. The System detects an error in the entered command.
 
   - 1b1 System requests for a valid command.
 
-  Use case resumes at step 1.
+    Use case resumes at step 1.
 
 **Use case: UC3 - Delete a person**
 
@@ -404,14 +404,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   - 1a2. Actor creates a new save file.
   - 1a3. Actor loads an empty contact list.
 
-  Use case ends.
+    Use case ends.
 
 - 3.1a. Line does not fit proper contact format.
 
   - 3.1a1. Actor ignores line.
   - 3.1a2. Actor` shows a warning message.
 
-  Use case resumes at step 3.1.
+    Use case resumes at step 3.1.
 
 **Use case: UC5 - Save contact to save file**
 
@@ -440,7 +440,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   - 1a1. Actor shows a warning message.
   - 1a2. Actor creates a new save file.
 
-  Use case resumes at step 2.
+    Use case resumes at step 2.
 
 ### Non-Functional Requirements
 
