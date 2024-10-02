@@ -13,6 +13,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Rsvp;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -93,6 +94,23 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String rsvp} into an {@code Rsvp}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code email} is invalid.
+     */
+    public static Rsvp parseRsvp(String rsvp) throws ParseException {
+        if (rsvp == null) {
+            return null;
+        }
+        String trimmedRsvp = rsvp.trim();
+        if (!Rsvp.isValidRsvp(trimmedRsvp)) {
+            throw new ParseException(Rsvp.MESSAGE_CONSTRAINTS);
+        }
+        return new Rsvp(trimmedRsvp);
     }
 
     /**

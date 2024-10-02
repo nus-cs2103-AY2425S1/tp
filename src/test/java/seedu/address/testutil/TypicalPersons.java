@@ -1,5 +1,18 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -7,37 +20,10 @@ import java.util.List;
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
 
-import static seedu.address.logic.commands.CommandTestUtil.*;
-
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
  */
 public class TypicalPersons {
-
-    public static final Person AVA = new PersonBuilder().withName("Ava Johnson")
-            .withAddress("123, Jurong West Ave 6, #08-111").withEmail("ava.johnson@example.com")
-            .withPhone("94351253")
-            .withTags("friends")
-            .withRsvp("Accepted").build();
-    public static final Person BRIAN = new PersonBuilder().withName("Brian Lee")
-            .withAddress("311, Clementi Ave 2, #02-25")
-            .withEmail("brian.lee@example.com").withPhone("98765432")
-            .withTags("owesMoney", "friends")
-            .withRsvp("Pending").build();
-    public static final Person CAM = new PersonBuilder().withName("Cameron White").withPhone("95352563")
-            .withEmail("cameron.white@example.com").withAddress("wall street").withRsvp("Pending").build();
-    public static final Person DAVID = new PersonBuilder().withName("David Brown").withPhone("87652533")
-            .withEmail("david.brown@example.com").withAddress("10th street").withTags("friends")
-            .withRsvp("Declined").build();
-    public static final Person ELLA = new PersonBuilder().withName("Ella Thompson").withPhone("9482224")
-            .withEmail("ella.thompson@example.com").withAddress("michegan ave")
-            .withRsvp("Pending").build();
-    public static final Person FAITH = new PersonBuilder().withName("Faith Garcia").withPhone("9482427")
-            .withEmail("faith.garcia@example.com").withAddress("little tokyo")
-            .withRsvp("Pending").build();
-    public static final Person GAVIN = new PersonBuilder().withName("Gavin Kim").withPhone("9482442")
-            .withEmail("gavin.kim@example.com").withAddress("4th street")
-            .withRsvp("Pending").build();
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
@@ -75,7 +61,8 @@ public class TypicalPersons {
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
-    private TypicalPersons() {} // prevents instantiation
+    private TypicalPersons() {
+    } // prevents instantiation
 
     /**
      * Returns an {@code AddressBook} with all the typical persons.
@@ -88,20 +75,7 @@ public class TypicalPersons {
         return ab;
     }
 
-    public static AddressBook getTypicalAddressBookGuests() {
-        AddressBook ab = new AddressBook();
-        for (Person person : getTypicalPersons()) {
-            ab.addPerson(person);
-        }
-        return ab;
-    }
-
-
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
-    }
-
-    public static List<Person> getTypicalGuestPersons() {
-        return new ArrayList<>(Arrays.asList(AVA, BRIAN, CAM, DAVID, ELLA, GAVIN));
     }
 }

@@ -4,7 +4,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -100,6 +99,14 @@ public abstract class Person {
     @Override
     public abstract int hashCode();
 
+    /**
+     * Creates a {@code ToStringBuilder} instance for this object.
+     * The builder is initialized with the current object's fields,
+     * allowing for a structured string representation.
+     *
+     * @return A {@code ToStringBuilder} object containing the string representation
+     *         of this instance with the included fields.
+     */
     public ToStringBuilder toStringBuilder() {
         return new ToStringBuilder(this)
                 .add("name", name)
