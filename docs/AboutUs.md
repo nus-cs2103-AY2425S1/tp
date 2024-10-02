@@ -24,7 +24,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/itsmenengyi.png" width="200px">
 
 [[github](http://github.com/itsmenengyi)]
-[[portfolio](team/itemenenyi.md)]
+[[portfolio](team/itemenengyi.md)]
 
 * Role: In charge of UI
 * Responsibilities: Ensure quality of design, development, and implementation of UI.
