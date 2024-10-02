@@ -145,6 +145,16 @@ Format: `exit`
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
+If you want to save the data to somewhere else or rename it into a new file, you can also save the data by using the `save` command.
+
+Format: `save /dir [directory] /name [name of the JSON file]`
+
+Examples:
+* `save /dir . /name contacts`
+* `save /dir ../data/ /name food_provider`
+* `save /dir ~/Desktop/ /name all_names`
+
+
 ### Editing the data file
 
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
