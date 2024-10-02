@@ -52,12 +52,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Coding
 
-### James Doe
+### Divya Lath
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/devivy.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/devivy)]
+[[portfolio](team/divya.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: backend, UI
