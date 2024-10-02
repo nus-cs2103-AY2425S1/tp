@@ -270,75 +270,196 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ## **Appendix: Requirements**
 
-### Product scope
+## Product Scope
 
-**Target user profile**:
+### Target User Profile
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+A **wedding organizer** responsible for planning and managing weddings. They coordinate with vendors, clients (brides, grooms, and their families), and participants (guests, photographers, caterers, etc.). Their work involves juggling multiple tasks and deadlines to ensure that each wedding runs smoothly. They may need to manage multiple weddings simultaneously and prefer efficient tools that help streamline their workflow. They are comfortable using desktop applications and can type quickly, preferring typing over mouse interactions.
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+### Value Proposition
 
+**Bridal Boss** enables wedding organizers to manage multiple weddings simultaneously while maintaining detailed vendor and client records. It offers fast and efficient access to information, helping organizers categorize and update contacts related to each wedding easily. By providing streamlined management of vendor contacts, client preferences, and event timelines, Bridal Boss helps wedding organizers accommodate last-minute changes effectively and keep everything up to date.
 
-### User stories
+### User Stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Priorities:
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+- High (must have) - `* * *`
+- Medium (nice to have) - `* *`
+- Low (unlikely to have) - `*`
 
-*{More to be added}*
+| Priority | As a...                    | I want to...                                       | So that I can...                                                        |
+|----------|----------------------------|----------------------------------------------------|-------------------------------------------------------------------------|
+| `* * *`  | Wedding organizer          | create separate profiles for each wedding          | manage multiple weddings without confusion                              |
+| `* * *`  | Wedding organizer          | view an overview of all ongoing weddings           | manage multiple events at once without losing track                     |
+| `* * *`  | Wedding organizer          | add and categorize vendors                         | keep track of service providers for each wedding                        |
+| `* * *`  | Wedding organizer          | view stakeholders related to each specific wedding | easily check their schedules                                            |
+| `* * *`  | Wedding organizer          | update client preferences easily                   | accommodate last-minute changes and keep everything up to date          |
+| `* * *`  | Wedding organizer          | access previous client details                     | refer back to past weddings when planning new ones                      |
+| `* * *`  | Wedding organizer          | delete profiles and tags                           | remove outdated or incorrect information                                |
+| `* * *`  | Wedding organizer          | quickly search for specific contacts or vendors    | access critical information without delays                              |
+| `* * *`  | Wedding organizer          | filter contacts based on tags                      | retrieve contacts of stakeholders involved in a wedding or of a specific type |
+| `* *`    | Wedding organizer          | archive completed weddings                         | focus on current and upcoming events without clutter                    |
+| `* *`    | Wedding organizer          | track expenses for each wedding                    | manage the overall wedding budget efficiently                           |
+| `* *`    | Wedding organizer          | set reminders for important tasks or deadlines     | ensure critical milestones are not missed                               |
+| `* *`    | Wedding organizer          | track RSVPs from clients                           | keep an accurate guest count for each wedding                           |
+| `* *`    | Wedding organizer          | generate reports on completed tasks                | review progress and share updates with clients                          |
+| `* *`    | Wedding organizer          | assign tasks to team members                       | delegate responsibilities and track progress efficiently                |
+| `*`      | Wedding organizer          | upload important documents (e.g., contracts)       | access them quickly during planning                                     |
+| `*`      | Wedding organizer          | send automated reminders to vendors and clients    | ensure they stay informed of upcoming deadlines                         |
+| `*`      | Wedding organizer          | set up recurring tasks for common preparations     | avoid manually creating the same tasks for each event                   |
 
-### Use cases
+### Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is *Bridal Boss* and the **Actor** is the *Wedding Organizer*.)
 
-**Use case: Delete a person**
+#### **Use Case: Add a New Vendor to a Wedding**
 
-**MSS**
+**MSS:**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. Wedding Organizer selects the wedding they are managing.
+2. Bridal Boss displays the details of the selected wedding.
+3. Wedding Organizer requests to add a new vendor.
+4. Bridal Boss prompts for vendor details.
+5. Wedding Organizer enters the vendor's details (e.g., name, contact information, services provided).
+6. Bridal Boss saves the vendor information and associates it with the selected wedding.
+7. Bridal Boss confirms that the vendor has been added.
 
-    Use case ends.
+   Use case ends.
 
-**Extensions**
+**Extensions:**
 
-* 2a. The list is empty.
+- **4a.** Wedding Organizer cancels the operation.
+    - **4a1.** Bridal Boss returns to the wedding details view.
+        - Use case ends.
 
-  Use case ends.
+- **5a.** Wedding Organizer enters incomplete or invalid vendor details.
+    - **5a1.** Bridal Boss displays an error message indicating the problem.
+    - **5a2.** Wedding Organizer re-enters the vendor's details.
+        - Steps 5a1-5a2 are repeated until the data entered are valid.
+        - Use case resumes from step 6.
 
-* 3a. The given index is invalid.
+#### **Use Case: Update Client Preferences**
 
-    * 3a1. AddressBook shows an error message.
+**MSS:**
 
-      Use case resumes at step 2.
+1. Wedding Organizer selects the client's wedding profile.
+2. Bridal Boss displays the client's current preferences.
+3. Wedding Organizer requests to update client preferences.
+4. Bridal Boss prompts for the updated preferences.
+5. Wedding Organizer enters the updated preferences.
+6. Bridal Boss saves the updated preferences.
+7. Bridal Boss confirms that the preferences have been updated.
 
-*{More to be added}*
+   Use case ends.
+
+**Extensions:**
+
+- **4a.** Wedding Organizer cancels the operation.
+    - **4a1.** Bridal Boss returns to the client's wedding profile without making changes.
+        - Use case ends.
+
+- **5a.** Wedding Organizer enters invalid preference data.
+    - **5a1.** Bridal Boss displays an error message indicating the issue.
+    - **5a2.** Wedding Organizer re-enters the updated preferences.
+        - Steps 5a1-5a2 are repeated until the data entered are valid.
+        - Use case resumes from step 6.
+
+#### **Use Case: Filter Contacts by Tags**
+
+**MSS:**
+
+1. Wedding Organizer requests to filter contacts by specific tag(s).
+2. Bridal Boss prompts for the tag(s) to filter by.
+3. Wedding Organizer enters the desired tag(s) (e.g., "Florist", "Wedding A").
+4. Bridal Boss displays a list of contacts that match the specified tag(s).
+
+   Use case ends.
+
+**Extensions:**
+
+- **1a.** Wedding Organizer provides multiple tags to filter by.
+    - Bridal Boss will display contacts that match all specified tags.
+        - Use case resumes from step 4.
+
+- **3a.** No contacts match the specified tag(s).
+    - **3a1.** Bridal Boss displays a message indicating that no contacts were found.
+        - Use case ends.
+
+- **3b.** Wedding Organizer enters an invalid or nonexistent tag.
+    - **3b1.** Bridal Boss displays an error message indicating the tag is invalid.
+    - **3b2.** Wedding Organizer re-enters the tag(s).
+        - Steps 3b1-3b2 are repeated until valid tag(s) are entered.
+        - Use case resumes from step 4.
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. **Performance Requirements:**
+    - **Response Time:** The system should respond to user commands within 2 seconds under normal operating conditions (e.g., managing up to 100 weddings and 1,000 contacts). This should ensure that the system performs well for fast typists, complying with the typing-preferred constraint.
+    - **Startup Time:** The system should start up and be fully usable within 5 seconds on modern machines (with at least 8GB RAM and SSD storage), ensuring it is portable and doesn't rely on any installer or external dependencies.
 
-*{More to be added}*
+2. **Scalability:**
+    - The system should be designed for future scalability to support new features like advanced budgeting tools, contact management enhancements, and more, while maintaining object-oriented principles.
+    - The application should scale to handle up to 500 weddings and 10,000 contacts without significant performance degradation.
 
+3. **Portability:**
+    - The system must work cross-platform on Windows, macOS, and Linux running Java 17 and above, avoiding the use of platform-specific libraries or features. This ensures that it can be used by a wide range of users across different environments.
+    - The product must be packaged in a single JAR file to comply with the single-file packaging constraint, avoiding external dependencies that could complicate installation or distribution.
+
+4. **Usability:**
+    - The system should offer a CLI-first experience optimized for fast typists, with a user interface that caters to wedding organizers who prefer text-based commands. The GUI should primarily provide feedback but allow command-based input to be the primary interaction method.
+    - The system must comply with the CLI-first recommendation, ensuring that typing tasks (e.g., adding vendors, managing profiles) is faster than using a GUI-only interface.
+
+5. **Data Security and Privacy:**
+    - All sensitive information should be stored in a human-editable text file and should not require a DBMS, per the human-editable and no-DBMS constraints. Encryption should only be used if the system provides a simple way to decrypt and edit manually, to preserve the human-editability of the data file.
+    - The system must comply with data protection regulations such as PDPA, ensuring that data is stored and processed securely. However, storing data locally in a text file should assume that the system is used in a secure, password-protected environment.
+
+6. **Data Backup and Recovery:**
+    - Users should be able to back up and restore their data easily. Since data is stored locally in human-editable text files, users should be able to create backups manually by copying the text file, ensuring minimal disruption in the event of failure.
+
+7. **Interoperability:**
+    - The system should be able to import/export data in common formats such as CSV or PDF, making it compatible with other wedding management software or services without relying on a remote server.
+    - The system should not depend on external APIs, avoiding dependency on unreliable networks (following the recommendation to minimize network reliance).
+
+8. **Reliability and Fault Tolerance:**
+    - The system should have robust error handling that gives users clear feedback when errors occur.
+    - In case of errors, the system should allow users to retry operations or resolve issues without losing data.
+
+9. **Maintainability:**
+    - The codebase should follow **OOP principles** and be modular to facilitate future maintenance and extension. Each component should be documented and follow best practices to ensure maintainability.
+    - Incremental updates are recommended to align with the **Incremental Delivery** constraint, ensuring that the product evolves gradually rather than in big, risky jumps.
+
+10. **Testability:**
+    - The system should include unit and integration tests for at least **80%** of the codebase to ensure high test coverage. Testability must be a priority, avoiding features that make testing difficult (e.g., account-based logins, reliance on external APIs).
+    - Manual testing should also be easy to perform, with clear feedback provided to testers.
+
+11. **Documentation:**
+    - Both **user documentation** and **developer documentation** must be provided. User documentation should explain how to interact with the CLI and manage wedding data, while developer documentation should detail system architecture and extensions.
+
+12. **Compliance:**
+    - The system must follow the **no-remote-server** constraint, ensuring it can operate entirely offline without dependence on a remote server.
+    - Legal compliance should include industry standards for data encryption and storage, even though it stores data locally.
+
+13. **Environmental Requirements:**
+    - The system should operate efficiently across different environments, such as machines with varying processing power, ensuring that the product runs smoothly on modern systems (with at least 8GB RAM).
+    - It should also work offline by default, only relying on internet access for optional features like calendar syncing, but without any dependency on continuous network access.
+
+14. **Graphical Interface:**
+    - The GUI must be designed to work on **common screen resolutions** (1920x1080 and higher) and should remain usable at lower resolutions like 1280x720 and higher, following the **screen resolution** constraints. The interface should be scalable to accommodate different screen sizes without compromising usability.
+
+---
+
+These non-functional requirements ensure that **Bridal Boss** remains a reliable, secure, and scalable application tailored to the needs of wedding organizers. They address critical aspects like performance, security, usability, and maintainability, ensuring the system meets both current and future needs.
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+- **Wedding Organizer:** A professional responsible for planning and managing wedding events, coordinating with clients and vendors.
+- **Vendor:** A service provider involved in the wedding (e.g., florist, caterer, photographer).
+- **Client:** The individuals who have hired the wedding organizer, typically the bride and groom.
+- **Stakeholders:** All parties involved in the wedding event, including clients, vendors, and participants.
+- **Tag:** A label assigned to contacts or events to categorize and filter them (e.g., "Florist", "Wedding A").
+- **Contact:** An entry in the system containing information about a person or vendor.
+- **Event Timeline:** A schedule outlining all tasks and deadlines related to a wedding event.
+- **RSVP:** A confirmation from an invited guest about their attendance at the wedding.
 
 --------------------------------------------------------------------------------------------------------------------
 
