@@ -7,55 +7,52 @@
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
-### John Doe
+### Chen Yizhong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yizhong187.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/yizhong187)]
+[[portfolio](team/yizhong187.md)]
+
+* Role: Team Lead
+
+### Casper Ng
+
+<img src="images/casperngeen.png" width="200px">
+
+[[github](http://github.com/casperngeen)]
+[[portfolio](team/casperngeen.md)]
+
+* Role: Developer
+* Responsibilities: UI and Logic
+
+### Mervyn
+
+<img src="images/teddayz.png" width="200px">
+
+[[github](https://github.com/teddayz)]
+[[portfolio](team/mervyn.md)]
 
 * Role: Project Advisor
 
-### Jane Doe
+### Feng Yilong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/fyl2003.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/FYL2003)]
+[[portfolio](team/fyl2003.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: make DDD work
 
-### Jean Doe
+### Leslie
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/leslieyip02.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/leslieyip02)]
+[[portfolio](team/leslieyip02.md)]
 
 * Role: Developer
 * Responsibilities: UI
