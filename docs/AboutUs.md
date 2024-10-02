@@ -38,15 +38,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Cliff Koes
+### Jean Doe
 
-<img src="images/domokunx.png" width="200px">
+<img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/domokunx)]
-[[More About Cliff](team/cliff.md)]
+[[github](http://github.com/johndoe)]
+[[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Testing
+* Responsibilities: Dev Ops + Threading
 
 ### James Doe
 
