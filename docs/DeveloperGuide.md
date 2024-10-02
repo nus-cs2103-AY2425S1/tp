@@ -337,8 +337,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Contact**: An individual or organization associated with wedding planning, such as a client or vendor.
+* **Vendor:**: A service provider for weddings, e.g., caterers, florists, or photographers.
+* **Event Tag:** A label assigned to a contact to associate them with a specific wedding event, can be assigned to 
+multiple contacts involved in the same wedding event.
+* **Priority:** The relative importance of a user story or task, often categorized as must-have, should-have, or could-have.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
