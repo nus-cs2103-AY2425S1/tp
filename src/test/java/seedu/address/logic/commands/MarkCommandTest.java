@@ -3,12 +3,14 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.*;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,6 +19,7 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
 /**
@@ -79,7 +82,7 @@ public class MarkCommandTest {
     }
 
     @Test
-    public void equals() {
+    public void equalsIndexCommandTest() {
         MarkCommand markFirstCommand = new MarkCommand(INDEX_FIRST_PERSON);
         MarkCommand markSecondCommand = new MarkCommand(INDEX_SECOND_PERSON);
 
@@ -101,10 +104,63 @@ public class MarkCommandTest {
     }
 
     @Test
+    public void equalsNricCommandTest() {
+        MarkCommand markFirstNric = new MarkCommand(new Nric(VALID_NRIC_AMY));
+        MarkCommand markSecondNric = new MarkCommand(new Nric(VALID_NRIC_BOB));
+
+        // same object -> returns true
+        assertTrue(markFirstNric.equals(markFirstNric));
+
+        // same values -> returns true
+        MarkCommand markFirstNricCopy = new MarkCommand(new Nric(VALID_NRIC_AMY));
+        assertTrue(markFirstNric.equals(markFirstNricCopy));
+
+        // different types -> returns false
+        assertFalse(markFirstNric.equals(1));
+
+        // null -> returns false
+        assertFalse(markFirstNric.equals(null));
+
+        // different person -> returns false
+        assertFalse(markFirstNric.equals(markSecondNric));
+    }
+
+    @Test
     public void toStringMethod() {
+        // Test for Index
         Index targetIndex = Index.fromOneBased(1);
         MarkCommand markCommand = new MarkCommand(targetIndex);
-        String expected = MarkCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
+        String expected = MarkCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex
+                + ", targetNric=null}";
         assertEquals(expected, markCommand.toString());
+
+        // Test for NRIC
+        Nric targetNric = new Nric(VALID_NRIC_AMY);
+        MarkCommand markCommandWithNric = new MarkCommand(targetNric);
+        String expectedNricString = MarkCommand.class.getCanonicalName() + "{targetIndex=null, targetNric="
+                + targetNric + "}";
+        assertEquals(expectedNricString, markCommandWithNric.toString());
+    }
+
+    @Test
+    public void execute_validNric_success() {
+        Person personToMark = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        MarkCommand markCommand = new MarkCommand(personToMark.getNric());
+
+        String expectedMessage = String.format(MarkCommand.MESSAGE_MARK_PERSON_SUCCESS,
+                Messages.format(personToMark));
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.markAsContacted(personToMark);
+
+        assertCommandSuccess(markCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_invalidNric_throwsCommandException() {
+        Nric unregisteredNric = new Nric("S5419807H");
+        MarkCommand markCommand = new MarkCommand(unregisteredNric);
+
+        assertCommandFailure(markCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NRIC);
     }
 }
