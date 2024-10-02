@@ -56,6 +56,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Integration Lead
 * Responsibilities: Ensure proper version control and every PR is reviewed thoroughly
 
+
 ### Isaac Teo
 
 <img src="images/itzxitzx.png" width="200px">
