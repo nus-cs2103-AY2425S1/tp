@@ -336,17 +336,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5. Use case ends.
 
 **Extensions:**
-3a. GAB detects an error in entered user command.  
-   3a1. GAB responds with a command error message and requests correct data.  
-   3a2. User enters new data.  
-   Steps 3a1-3a2 are repeated until the data entered is correct.  
-   Use case resumes at step 4.
+* 3a. GAB detects an error in entered user command.  
+   * 3a1. GAB responds with a command error message and requests correct data.  
+   * 3a2. User enters new data.  
+   * Steps 3a1-3a2 are repeated until the data entered is correct.  
+   * Use case resumes at step 4.
 
-3b. GAB detects an error in entered user tag.  
-   3b1. GAB responds with a command error message and requests correct data.  
-   3b2. User enters new data.  
-   Steps 3b1-3b2 are repeated until the data entered is correct.  
-   Use case resumes at step 4.
+* 3b. GAB detects an error in entered user tag.  
+   * 3b1. GAB responds with a command error message and requests correct data.  
+   * 3b2. User enters new data.  
+   * Steps 3b1-3b2 are repeated until the data entered is correct.  
+   * Use case resumes at step 4.
 
 ---
 
@@ -360,11 +360,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5. Use case ends.
 
 **Extensions:**
-3a. No vendor found.  
-   3a1. GAB responds that there are no vendors within the price range.  
-   3a2. User enters new data.  
-   Steps 3a1-3a2 are repeated until a vendor can be found.  
-   Use case resumes at step 5.
+* 3a. No vendor found.  
+   * 3a1. GAB responds that there are no vendors within the price range.  
+   * 3a2. User enters new data.  
+   * Steps 3a1-3a2 are repeated until a vendor can be found.  
+   * Use case resumes at step 5.
 
 ### Non-Functional Requirements
 
