@@ -9,50 +9,51 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Chew Tsze Honn
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/zeonchew0324.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[github](https://github.com/zeonchew0324)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Project Advisor
+* Responsibilities: Project Management
 
-### Jane Doe
+### Jia Xin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jiaxinnns.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/jiaxinnns)]
+[[portfolio](team/jiaxin.md)]
 
-* Role: Team Lead
+* Role: Developer
 * Responsibilities: UI
 
-### Johnny Doe
+### Chew ZhiJian Sherman
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/sherchew27.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/SherChew27)] [[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Kavan Tan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kvernnn.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/kvernnn)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Harith Hakim Bin Mazlan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/harithh07.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/harithh07)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
