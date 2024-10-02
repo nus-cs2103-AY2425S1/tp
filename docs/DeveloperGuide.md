@@ -287,16 +287,39 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​                            | I want to …​                                                | So that I can…​                                                                       |
+|----------|------------------------------------|-------------------------------------------------------------|---------------------------------------------------------------------------------------|
+| `***`    | forgetful user                     | see a list of all upcoming events                           | plan ahead and allocate my time effectively                                           |
+| `***`    | normal user                        | create a new event                                          | keep track of which vendors and clients are associated with an event                  |
+| `***`    | normal user                        | view all current events                                     | quickly see what events are coming up soon                                            |
+| `***`    | normal user                        | search for a specific vendor                                | quickly access vendor details without manually looking through the whole address book |
+| `***`    | normal user                        | tag vendors by categories                                   | quickly filter clients who require a specific service                                 |
+| `***`    | normal user                        | save my work at any time using a save button                | avoid losing important information when I take a break                                |
+| `***`    | user with erratic work schedule    | close the app and return later to continue where I left off | resume planning without disruption                                                    |
+| `***`    | user with many clients             | view all client details from a single dashboard             | get a quick summary of my clients' needs                                              |
+| `***`    | normal user                        | view contacts by their tags                                 | quickly access client or vendor details related to a particular category              |
+| `***`    | user with many vendors             | view all vendor details from a single dashboard             | have a comprehensive overview of all available services                               |
+| `**`     | seasoned user                      | use keyboard shortcuts                                      | work more quickly                                                                     |
+| `**`     | forgetful user                     | assign due dates for tasks related to an event              | manage timelines more effectively                                                     |
+| `**`     | meticulous user                    | add notes to each vendor                                    | track special considerations or preferences for future references                     |
+| `**`     | normal user                        | delete an existing event                                    | remove events when my clients cancel on me                                            |
+| `**`     | normal user                        | tag clients by event type or size                           | quickly filter clients who require similar services                                   |
+| `**`     | normal user                        | add new clients/vendors on the go                           | input information immediately after meeting them                                      |
+| `**`     | normal user                        | mark tasks as completed                                     | track progress of the event and ensure no missed steps                                |
+| `**`     | user with many clients             | edit existing client details                                | accommodate any changes to their event preferences                                    |
+| `**`     | user with many clients             | assign multiple clients to the same event type              | group similar wedding themes or sizes together                                        |
+| `**`     | user with many clients and vendors | add notes to each client                                    | remember specific requirements for their event                                        |
+| `**`     | user with many vendors             | edit existing vendor details                                | update contact information or service offerings as needed                             |
+| `**`     | user with many vendors             | assign multiple vendors to the same category                | compare and choose vendors more easily                                                |
+| `**`     | user with many vendors             | filter my vendors by availability                           | choose the ones who are available for the event date                                  |
+| `*`      | wannabe multitask user             | switch between different events quickly                     | easily manage multiple events at once                                                 |
+| `*`      | busy user                          | see an overview of my workload for the week/month           | better manage my time and commitments                                                 |
+| `*`      | normal user                        | update vendors of an existing event                         | change the vendors when there are changes in requirements or circumstances            |
+| `*`      | normal user                        | attach files (contracts, proposals) to vendors/clients      | have all necessary documents in one place                                             |
+| `*`      | normal user                        | customize how data is displayed (list view, card view)      | organize information in a way that suits my preferred workflow                        |
+| `*`      | user with many events              | archive old events                                          | keep my dashboard uncluttered with only active events displayed                       |
+| `*`      | user with many events              | quickly restore archived events                             | revisit previous event details if needed for reference                                |
+| `*`      | user with many vendors/client data | quickly access old data for vendors and clients             | avoid re-entering details when planning similar events                                |
 
 ### Use cases
 

@@ -113,6 +113,21 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
+### Locating contacts by tag: `view /tag`
+
+View all contacts based on tags.
+
+Format: `view /tag [TAG_NAME]`
+
+* Only one tag name can be specified each time. 
+* If more than one word is entered, the entire phrase will be treated as one tag.
+* Casing does not matter. e.g. `Vendor` will match `vendor`
+* Only full words will be matched e.g. `Clients` will not match `Client`
+
+Examples:
+* `view /tag Catering` returns all contacts that have the tag `Catering` or `catering`
+  ![result for 'view /tag Catering'](images/view-tag-example.png)
+
 ### Deleting a contact : `delete`
 
 Deletes an existing contact (client or vendor) from the contact list using the contact's unique contact ID.
@@ -188,14 +203,14 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Create Vendor Contact** | `add vendor /name [name] /hp [phone number] /email [email] /address [address] /service [service type]` <br> e.g., `add vendor /name ABC Catering /hp 98765432 /email contact@abccatering.com /address Blk 123 Bukit Merah St 7 /service Catering`
-**Create Client Contact** | `add client /name [name] /hp [phone number] /email [email] /address [address] /date [wedding date] ` <br> e.g., `add client /name Jane Doe /hp 91234567 /email jane.doe@example.com /address Blk 231 Sembawang St 4 /date 2024-12-15`
-**Clear**  | `clear`
-**Create Vendor Contact** | `delete vendor /id [contact ID]`<br> e.g., `delete vendor /id 123`
-**Create Client Contact** | `delete client /id [contact ID]`<br> e.g., `delete client /id 456`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**View**   | `view`
-**Help**   | `help`
+| Action                    | Format, Examples                                                                                                                                                                                                                                  |
+|---------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Create Vendor Contact** | `add vendor /name [name] /hp [phone number] /email [email] /address [address] /service [service type]` <br> e.g., `add vendor /name ABC Catering /hp 98765432 /email contact@abccatering.com /address Blk 123 Bukit Merah St 7 /service Catering` |
+| **Create Client Contact** | `add client /name [name] /hp [phone number] /email [email] /address [address] /date [wedding date] ` <br> e.g., `add client /name Jane Doe /hp 91234567 /email jane.doe@example.com /address Blk 231 Sembawang St 4 /date 2024-12-15`             |
+| **Clear**                 | `clear`                                                                                                                                                                                                                                           |
+| **Create Vendor Contact** | `delete vendor /id [contact ID]`<br> e.g., `delete vendor /id 123`                                                                                                                                                                                |
+| **Create Client Contact** | `delete client /id [contact ID]`<br> e.g., `delete client /id 456`                                                                                                                                                                                |
+| **Edit**                  | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                                                       |
+| **Find**                  | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                        |
+| **View**                  | `view`                                                                                                                                                                                                                                            |
+| **Help**                  | `help`                                                                                                                                                                                                                                            |
