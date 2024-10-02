@@ -26,9 +26,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/yanyan-w.png" width="200px">
 
 [[github](http://github.com/YANYAN-w)]
+[[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops
+* Role: Deliverables and deadlines
+* Responsibilities: Ensure project deliverables are done on time and in the right format.
 
 ### Johnny Doe
 
