@@ -322,6 +322,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2b2. User decides whether to overwrite or cancel the operation. 
     * Use case resumes at step 2 if user decides to proceed
 
+**Use case: Edit Client Details**
+
+**MSS**
+
+1.  User edits some details for an existing person by entering the edit command with index of the person and new details.
+2.  AgentConnect validates the input.
+3.  AgentConnect update the corresponding details of the person with the new details provided.
+4.  AgentConnect shows a success message confirming the details fo the person have been edited.
+
+    Use case ends.
+
+
+**Extensions**
+
+* 2a. Some fields are invalid (e.g., name, phone, email).
+    * 2a1. AgentConnect shows an error message for the invalid fields.
+    * 2a2. User corrects the fields and resubmits the command.
+    * Use case resumes from step 2.
+
+* 2b. Person not found (Invalid index).
+    * 2b1. AgentConnect shows a warning message indicating index is invalid.
+    * 2b2. User resubmits the command with a valid index.
+    * Use case resumes from step 2.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
