@@ -36,7 +36,7 @@ public class Messages {
      */
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(person.getName())
+        builder.append(String.format("%s - %s", person.getNric(), person.getName()))
                 .append("; Phone: ")
                 .append(person.getPhone())
                 .append("; Email: ")

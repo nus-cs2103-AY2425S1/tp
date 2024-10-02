@@ -8,6 +8,8 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.contactdate.ContactDate;
+import seedu.address.model.contactdate.ContactDateList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -17,6 +19,7 @@ import seedu.address.model.tag.Tag;
 public class Person {
 
     // Identity fields
+    private final Nric nric;
     private final Name name;
     private final Phone phone;
     private final Email email;
@@ -24,17 +27,32 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final ContactDateList contactDates = new ContactDateList();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+            ContactDateList contactDates) {
+        requireAllNonNull(nric, name, phone, email, address, tags);
+        this.nric = nric;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.contactDates.addAll(contactDates);
+    }
+
+    /**
+     * For creating a new person. Every field but contact date must be present and not null.
+     */
+    public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+        this(nric, name, phone, email, address, tags, new ContactDateList(ContactDate.getCurrentDate()));
+    }
+
+    public Nric getNric() {
+        return nric;
     }
 
     public Name getName() {
@@ -53,6 +71,14 @@ public class Person {
         return address;
     }
 
+    public ContactDateList getContactDates() {
+        return contactDates;
+    }
+
+    public ContactDate getLastContacted() {
+        return contactDates.getLastContacted();
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -62,7 +88,14 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Mark the person as contacted today.
+     */
+    public void markAsContacted() {
+        contactDates.markAsContacted();
+    }
+
+    /**
+     * Returns true if both persons have the same nric.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
@@ -71,7 +104,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getNric().equals(getNric());
     }
 
     /**
@@ -90,7 +123,8 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
+        return nric.equals(otherPerson.nric)
+                && name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
@@ -100,12 +134,13 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(nric, name, phone, email, address, tags);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .add("nric", nric)
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
