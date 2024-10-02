@@ -18,7 +18,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[homepage](https://nathan-loo.vercel.app)]
 [[github](http://github.com/natlv)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/natlv.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
