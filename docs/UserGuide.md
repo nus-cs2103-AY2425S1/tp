@@ -28,7 +28,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `view` : Lists all contacts.
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
@@ -74,27 +74,27 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+### Create a new contact: `add`
 
-### Adding a person: `add`
+Add new contact (client or vendor) to contact list.
 
-Adds a person to the address book.
-
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
+Format:
+`add vendor /name [name] /hp [phone number] /email [email] /address [address] /service [service type]`
+`add client /name [name] /hp [phone number] /email [email] /address [address] /date [wedding date]`
 <box type="tip" seamless>
 
 **Tip:** A person can have any number of tags (including 0)
 </box>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add vendor /name ABC Catering /hp 98765432 /email contact@abccatering.com /address Blk 123 Bukit Merah St 7 /service Catering`
+* `add client /name Jane Doe /hp 91234567 /email jane.doe@example.com /address Blk 231 Sembawang St 4 /date 2024-12-15`
 
-### Listing all persons : `list`
+### Listing all persons : `view`
 
-Shows a list of all persons in the address book.
+Shows a list of all contacts in the address book, sorted alphabetically.
 
-Format: `list`
+Format: `view`
 
 ### Editing a person : `edit`
 
@@ -113,37 +113,21 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Deleting a contact : `delete`
 
-Finds persons whose names contain any of the given keywords.
+Deletes an existing contact (client or vendor) from the contact list using the contact's unique contact ID.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: 
+`delete vendor /id [contact ID]` 
+`delete client /id [contact ID]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-
-### Deleting a person : `delete`
-
-Deletes the specified person from the address book.
-
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the contact of the specific type with the specified `contact ID`.
+* The contact ID is **guaranteed to be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `delete vendor /id 123`
+* `delete client /id 456`
 
 ### Clearing all entries : `clear`
 
@@ -206,10 +190,12 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Create Vendor Contact** | `add vendor /name [name] /hp [phone number] /email [email] /address [address] /service [service type]` <br> e.g., `add vendor /name ABC Catering /hp 98765432 /email contact@abccatering.com /address Blk 123 Bukit Merah St 7 /service Catering`
+**Create Client Contact** | `add client /name [name] /hp [phone number] /email [email] /address [address] /date [wedding date] ` <br> e.g., `add client /name Jane Doe /hp 91234567 /email jane.doe@example.com /address Blk 231 Sembawang St 4 /date 2024-12-15`
 **Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Create Vendor Contact** | `delete vendor /id [contact ID]`<br> e.g., `delete vendor /id 123`
+**Create Client Contact** | `delete client /id [contact ID]`<br> e.g., `delete client /id 456`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
+**View**   | `view`
 **Help**   | `help`
