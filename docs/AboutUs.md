@@ -19,15 +19,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Leong Soon Mun Stephane
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/leongsoonmunstephane.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/stephaneleong)]
+[[portfolio](team/stephaneleong.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Developer
+* Responsibilities: Storage
 
 ### Johnny Doe
 
