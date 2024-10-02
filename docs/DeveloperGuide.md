@@ -319,7 +319,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 2a1. UniLink shows an error message
   * 2a2. User enters new data
   
-    Steps 2a1-2a2 are repeated until the data entered is correct
+    Steps 2a1-2a2 are repeated until the data entered is correct.
 
     Use case resumes from step 3.
 
