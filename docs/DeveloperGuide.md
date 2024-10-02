@@ -773,12 +773,21 @@ unless specified otherwise)
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
-*{More to be added}*
+- Business/domain rules: Each student must be uniquely identifiable by their student ID, Assignments must have deadlines that  cannot be set on a date that has passed, Each class should not exceed 50 students, Assignments must be submitted by students up to the deadline set by the TA
+- Constraints: The system must be backward compatible with data produced by earlier versions of the system, The total project cost should be $0, The project is offered as a free service, TAs are only allowed to store up to 5 GB of data 
+- Technical requirements: The system should work on both 32-bit and 64-bit environment, The system should be compatible with Windows, macOS and Linux operating systems.
+- Performance requirements: The system should respond to user inputs within five seconds, The system should be able to handle a large number of students, classes, and assignments without degradation in performance, Data retrieval should not take longer than 2 seconds.
+- Quality requirements: The system should be usable by a novice who has never used AB3 before, The system should have clear user documentation to guide users through its features, Intuitive error messages will be displayed to the user so that they know what is the correct method of using the system
+- Process requirements: The project is expected to adhere to the milestones which are added every week
+- Notes about project scope: The system is not required to integrate with third-party systems (e.g. Canvas), The system is not required to generate or print detailed reports of class performance or assignment scores, The system will only support English as the user interface language, The system will not be deployed on the cloud and will only run locally
+- Any other noteworthy points: The system must ensure data privary by adhering to relevant data protection regulations, The system should not use any langauge or imagery that may be offensive to students or faculty members from different cultural backgrounds.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **TA** : Abbreviation of Teaching Assistant, a person responsible for assisting instructors in managing courses
+* **Class**: A group of students taking the same course assigned to a specific tutorial, sectional, laboratory or recitation which a TA is responsible for.
 
 --------------------------------------------------------------------------------------------------------------------
 
