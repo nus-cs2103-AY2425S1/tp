@@ -333,7 +333,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  Codebase should be modular and easy to update, so that future developers can easily add new features or fix bugs.
-5.  App should have the ability to handle a data file that is corrupted without crashing, and inform the user of the issue.
+5.  App should have the ability to gracefully handle a data file that is corrupted without crashing, and inform the user of the issue.
 6.  System should gracefully recover from minor errors (e.g., incorrect or incomplete input) by either prompting the user to correct the issue, or using default values where applicable.
 7.  System should have well-written and accessible user and developer documentation to support both end-users and future developers in using and maintaining the application.
 8.  System should have a comprehensive suite of automated tests to ensure that new changes do not break existing functionality.
