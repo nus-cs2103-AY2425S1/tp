@@ -302,32 +302,156 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+**Use case 1: View List of Customers**
 
-**Use case: Delete a person**
+* **System**: SellSavvy
+* **Actor**: User
+* **Use Case**: UC01 - View List of Customers
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User chooses to view the list of customers.
+2.  SellSavvy retrieves all customers from the database.
+3.  SellSavvy displays all customers along with their details.
 
-    Use case ends.
+Use case ends.
+
+**Use case 2: View List of Customers**
+
+* **System**: SellSavvy
+* **Actor**: User
+* **Use Case**: UC02 - Add Customer
+* **Guarantees**:
+  * Customer will be added to contact list if input parameters are valid.
+
+**MSS**
+
+1.  User chooses to add a new customer.
+2.  SellSavvy validates the input and adds the customer to the database.
+3.  SellSavvy confirms the addition by displaying the newly added customer's details.
+
+Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. SellSavvy detects required details missing.
+  * 1a1. SellSavvy displays an error message “Missing details of customer!”.
+    
+  Use case ends.
+
+**Use case 3: Delete Customer and All Orders Related to The Customer**
+
+* **System**: SellSavvy
+* **Actor**: User
+* **Use Case**: UC03 - Delete Customer and All Orders related to the customer
+* **Guarantees**:
+    * Customer and all their orders will be deleted if input parameters are valid.
+
+**MSS**
+
+1.  User wants to delete a customer.
+2.  User chooses to <ins>view all customers as a list (UC01)</ins>.
+3.  SellSavvy displays the list of customers.
+4.  User finds the customer index from the list.
+5.  User deletes the customer by his index.
+6.  SellSavvy updates the list of customers and indicates that delete is successful.
+
+Use case ends.
+
+**Use case 4: List Orders by Customer**
+
+* **System**: SellSavvy
+* **Actor**: User
+* **Use Case**: UC04 - List Orders by Customer
+* **Guarantees**:
+    * Orders made by specific customer will be displayed as a list, if input parameters are valid.
+
+**MSS**
+
+1.  User wants to view all orders made by a specific customer
+2.  User chooses to <ins>view all customers as a list (UC01)</ins>.
+3.  User inputs command to list all orders, by the index of customer in contact list.
+4.  SellSavvy validates the input, and retrieves a list of all orders made by specified customer.
+5.  SellSavvy displays the orders in a list in GUI.
+
+Use case ends.
+
+**Extensions**
+
+* 3a. SellSavvy detects required details missing.
+    * 3a1. SellSavvy displays an error message “Missing details of customer!”.
+    
+    Use case ends.
+
+* 3b. User can list orders made by a customer using their username.
+    * 3b1. User inputs command to list all orders using the username of the intended customer.
+
+    Use case resumes from step 4.
+
+**Use case 5: Mark Order as Completed**
+
+* **System**: SellSavvy
+* **Actor**: User
+* **Use Case**: UC05 - Mark Order as Completed
+* **Guarantees**:
+    * Specified order will be marked as “Completed” if the input parameters are valid.
+
+**MSS**
+
+1.  User wants to mark an order by a customer as completed. 
+2.  User chooses to <ins>view all orders of a specified customer from contacts list (UC04)</ins>.
+3.  User marks the order as completed by the customer index and the order index.
+4.  SellSavvy updates the status of the order and indicates that the action is successful.
+
+Use case ends.
+
+**Extensions**
+
+* 3a.  The specified order is already marked as "Completed".
+    * 3a1. SellSavvy displays a message stating that the order is already marked as completed.
+
+    Use case ends.
+
+**Use case 6: Remove “Completed” Marking from Order**
+
+* **System**: SellSavvy
+* **Actor**: User
+* **Use Case**: UC06 - Remove “Completed” Marking from Order
+* **Guarantees**:
+    * Specified order will have “Completed” Marking removed if the input parameters are valid..
+
+**MSS**
+
+1.  User wants to remove marking on an order due to mistake.
+2.  User chooses to <ins>view all orders from the customer with that customer index (UC04)</ins>.
+3.  User inputs command to remove marking on the order by the customer index and the order index.
+4.  SellSavvy updates the status of the order and indicates that the action is successful.
+
+Use case ends.
+
+**Extensions**
+
+* 3a.  The specified order is not marked as “Completed” in the first place.
+    * 3a1. SellSavvy displays a message stating that the order is not marked as completed in the first place.
 
   Use case ends.
 
-* 3a. The given index is invalid.
+**Use case 7: Delete an order**
 
-    * 3a1. AddressBook shows an error message.
+* **System**: SellSavvy
+* **Actor**: User
+* **Use Case**: UC07 - Delete an Order
+* **Guarantees**:
+    * An order made by the specified customer will be deleted if input parameters are valid.
 
-      Use case resumes at step 2.
+**MSS**
 
-*{More to be added}*
+1.  User wants to delete an order.
+2.  User chooses to <ins>view all orders of a specified customer from contacts list (UC04)</ins>.
+3.  User deletes the customer by the customer name and the order index.
+4.  SellSavvy updates the status of the order and indicates that the action is successful.
+
+Use case ends.
 
 ### Non-Functional Requirements
 
