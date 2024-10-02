@@ -262,24 +262,35 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
+* Insurance agents tracking their clients
+* Has a need to manage and track a significant number of clients with detailed insurance-related information.
+* Frequently engages with clients, requiring automated reminders for appointments, renewals, and follow-ups.
+* Prefers desktop apps that support fast and efficient data management over mobile or web alternatives.
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:  provides quick and efficient access to client details, tailored for insurance agents who need a streamlined interface to manage contacts, track policy updates, and schedule client follow-ups.
+
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                | I want to …​                               | So that I can…​                                                               |
-| -------- | -------------------------------------- |--------------------------------------------|-------------------------------------------------------------------------------|
-| `* * *`  | user                                   | add new client                             | keep track of all of my clients' data and refer when needed                   |
-| `* * *`  | user                                   | know if client has been added successfully | so that I can proceed with the next steps or take corrective action if needed |
-
+| Priority | As a …​ | I want to …​                                       | So that I can…​                                                               |
+|----------|---------|----------------------------------------------------|-------------------------------------------------------------------------------|
+| `* * *`  | user    | add clients to my existing addressbook             | store their contacts and respective information                               |
+| `* * *`  | user    | know if client has been added successfully         | so that I can proceed with the next steps or take corrective action if needed |
+| `* * *`  | user    | know my last and next appointment dates            | remember to attend to the appointment                                         |
+| `* * *`  | user    | know when is my client's next insurance payment    |                                                                               |
+| `* * *`  | user    | know when is my client's birthday                  | reach out to build rapport                                                    |
+| `* * *`  | user    | know when was my client's last appointment         | track when to follow up                                                       |
+| `* * *`  | user    | update existing client details                     | keep their information up to date.                                            |
+| `* * *`  | user    | categorise my clients based on policies            | easily organise and filter my client list                                     |
+| `* * *`  | user    | record client's email address                      | contact them through email                                                    |
+| `* * *`  | user    | sort clients by renewal dates                      | prioritize my outreach efforts                                                |
+| `* * *`  | user    | remove clients should they change insurance agents |                                                                               |
 
 *{More to be added}*
 
