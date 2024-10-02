@@ -19,14 +19,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Jia Xin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jiaxinnns.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/jiaxinnns)]
+[[portfolio](team/jiaxin.md)]
 
-* Role: Team Lead
+* Role: Developer
 * Responsibilities: UI
 
 ### Johnny Doe
