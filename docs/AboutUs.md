@@ -11,15 +11,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Chua Chong Sun
 
 <img src="images/johndoe.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[homepage](https://adventusfrontend-chongsun2002s-projects.vercel.app/)]
+[[github](https://github.com/chongsun2002)]
+[[portfolio](team/chongsun2002.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibility: Code quality and Integration
+  In charge of storage
 
 ### Jane Doe
 
