@@ -55,5 +55,5 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/jalenleeruixian)]
 [[portfolio](AY2425S1-CS2103T-T16-1/jalenleeruixian.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: In charge of documentation
+* Responsibilities: Responsible for the quality of various project documents.
