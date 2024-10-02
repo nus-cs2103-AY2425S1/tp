@@ -48,12 +48,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Prakamya Singh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/dinoman44.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/Dinoman44)]
+[[portfolio](https://prakamya-singh.vercel.app/)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Developer - Testing, Code Quality
+* Responsibilities: Commands, UI
