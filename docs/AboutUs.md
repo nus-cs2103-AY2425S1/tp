@@ -27,7 +27,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/jagdeep.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Ensure proper code quality and standards are met in the source code
 
 ### Johnny Doe
 
