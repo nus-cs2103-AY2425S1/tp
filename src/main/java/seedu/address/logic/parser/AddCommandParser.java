@@ -36,6 +36,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
+        // TODO: fees, classid, monthspaid are set to basic default values by default
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
 
@@ -49,9 +50,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Fees fees = ParserUtil.parseFees(argMultimap.getValue(PREFIX_FEES).orElse("0"));
-        ClassId classId = ParserUtil.parseClassId(argMultimap.getValue(PREFIX_CLASSID).orElse("0"));
-        MonthsPaid monthsPaid = ParserUtil.parseMonthsPaid(argMultimap.getValue(PREFIX_MONTHSPAID).orElse("0"));
+        Fees fees = new Fees("564");
+        ClassId classId = new ClassId("1");
+        MonthsPaid monthsPaid = new MonthsPaid("2024-01 2024-02");
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Person person = new Person(name, phone, email, address, fees, classId, monthsPaid, tagList);

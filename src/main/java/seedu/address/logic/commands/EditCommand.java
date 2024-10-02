@@ -102,9 +102,9 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Fees updatedFees = editPersonDescriptor.getFees().orElse(personToEdit.getFees());
-        ClassId updatedClassId = editPersonDescriptor.getClassId().orElse(personToEdit.getClassId());
-        MonthsPaid updatedMonthsPaid = editPersonDescriptor.getMonthsPaid().orElse(personToEdit.getMonthsPaid());
+        Fees updatedFees = personToEdit.getFees();
+        ClassId updatedClassId = personToEdit.getClassId();
+        MonthsPaid updatedMonthsPaid = personToEdit.getMonthsPaid();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedFees, updatedClassId,
@@ -244,18 +244,6 @@ public class EditCommand extends Command {
                     .add("address", address)
                     .add("tags", tags)
                     .toString();
-        }
-
-        public Optional<Fees> getFees() {
-            return null;
-        }
-
-        public Optional<ClassId> getClassId() {
-            return null;
-        }
-
-        public Optional<MonthsPaid> getMonthsPaid() {
-            return null;
         }
     }
 }

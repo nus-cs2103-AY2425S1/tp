@@ -6,9 +6,9 @@ import java.util.Objects;
  * Represents a Person's months paid in the address book.
  */
 public class MonthsPaid {
-    public static final String MESSAGE_CONSTRAINTS = "MonthsPaid should take a string in the format"
-            + "YYYY-MM, and it should only be blank for a new student";
-
+    public static final String MESSAGE_CONSTRAINTS = "MonthsPaid should take a string with the pattern"
+            + " YYYY-MM, where one or of such patterns can be included if separated by a space.";
+    public static final String SPLIT_VALIDATION_REGEX = "^[0-9]{4}-[0-9]{2}$";
     public final String value;
 
     public MonthsPaid(String monthsPaid) {
@@ -21,7 +21,15 @@ public class MonthsPaid {
     }
 
     public static boolean isValidMonthsPaid(String monthsPaid) {
-        return monthsPaid.matches("^[0-9]{4}-[0-9]{2}$");
+        if (monthsPaid.isEmpty()) {
+            return true;
+        }
+        for (String i : monthsPaid.split(" ")) {
+            if (!i.matches(SPLIT_VALIDATION_REGEX)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override

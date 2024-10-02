@@ -1,27 +1,42 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 /**
- * Represents a Person's class ID in the address book.
+ * Represents a Person's fees in the address book.
  */
 public class ClassId {
-    public static final String MESSAGE_CONSTRAINTS = "Class ID can take any values, and it should not be blank";
 
-    public final int value;
+    public static final String MESSAGE_CONSTRAINTS =
+            "ClassId should only contain numbers, and it should be at least 1 digit long.";
+
+    /*
+     * The first character of the address must not be a whitespace,
+     * otherwise " " (a blank string) becomes a valid input.
+     */
+    public static final String VALIDATION_REGEX = "\\d{1,}";
+    public final String value;
 
     /**
-     * Constructs a {@code ClassId}.
+     * Constructs a {@code Fees}.
      */
-    public ClassId(int classId) {
-        this.value = classId;
+    public ClassId(String classId) {
+        requireNonNull(classId);
+        checkArgument(isValidClassId(classId), MESSAGE_CONSTRAINTS);
+        value = classId;
     }
 
-    public static boolean isValidClassId(int classId) {
-        return classId >= 0;
+    /**
+     * Returns true if a given string is a valid email.
+     */
+    public static boolean isValidClassId(String test) {
+        return test.isEmpty() || test.matches(VALIDATION_REGEX);
     }
 
     @Override
     public String toString() {
-        return Integer.toString(this.value);
+        return value;
     }
 
     @Override
@@ -31,15 +46,16 @@ public class ClassId {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ClassId otherClassId)) {
+        if (!(other instanceof ClassId)) {
             return false;
         }
 
-        return value == otherClassId.value;
+        ClassId otherClassId = (ClassId) other;
+        return value.equals(otherClassId.value);
     }
 
     @Override
     public int hashCode() {
-        return Integer.hashCode(value);
+        return value.hashCode();
     }
 }
