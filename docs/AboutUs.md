@@ -13,6 +13,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## NUStates
 
+### Trisha Patodia
+
+<img src="images/triishaa.png" width="200px">
+
+[[github](http://github.com/triishaa)]
+[[portfolio](team/triishaa.md)]
+
+* Role: Documentation
+* Responsibilities: Responsible for the quality of various project documents.
+
+
 ### Low Wei Bin
 
 <img src="images/orangecatloves.png" width="200px">
