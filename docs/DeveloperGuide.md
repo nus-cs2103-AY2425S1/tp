@@ -276,8 +276,12 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
+* has a need to manage a significant number of employees and potential hires 
+* has a need to match potential hires with available job openings
+* has a need to find details about an employee or potential hire quickly
+* has a need to search for employees or potential hires with relevant details
+* forgets commands and requires a list of commands to use the application
+* prefer desktop applications over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
