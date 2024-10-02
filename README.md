@@ -45,7 +45,7 @@ To get a local copy up and running, follow the these [simple steps below](#prere
 
 <!-- Prerequisites -->
 ### Prerequisites
-You need to have XXX installed! To install it, enter the following code:  
+You need to have XXX installed! To install it, enter the following code:
 ```sh
 install XXX now
 ```
@@ -55,7 +55,7 @@ install XXX now
 1. Clone ABC
 ```sh
 git clone ABC
-``` 
+```
 2. Install DEF packages
 ```sh
 install DEF
@@ -81,6 +81,6 @@ const PASS_KEY = 'GHI';
 # Acknowledgements
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
-We would like to thank the SE-EDU team for their open-source contributions and for providing the foundation 
+We would like to thank the SE-EDU team for their open-source contributions and for providing the foundation
 upon which this project was built.
 
