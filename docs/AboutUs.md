@@ -36,3 +36,14 @@ We are a team based in the [School of Computing, National University of Singapor
 [[portfolio](team/mervyn.md)]
 
 * Role: Project Advisor
+
+### Feng Yilong
+
+<img src="images/fyl2003.png" width="200px">
+
+[[github](http://github.com/FYL2003)]
+[[portfolio](team/fyl2003.md)]
+
+* Role: Developer
+* Responsibilities: make DDD work
+
