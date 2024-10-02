@@ -8,17 +8,6 @@ We are a team based in the [School of Computing, National University of Singapor
 You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
-
-### John Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
 ### Caleb Chong
 
 <img src="images/calebchongsj.png.jpg" width="200px">
@@ -31,6 +20,16 @@ mistake that may not align with the standard code practice.
 
 * Role: Code Quality by ensuring that the code adheres to the standard in CS2103T
 * Responsibilities: Storage, Logic and Main
+
+### John Doe
+
+<img src="images/johndoe.png" width="200px">
+
+[[homepage](http://www.comp.nus.edu.sg/~damithch)]
+[[github](https://github.com/johndoe)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Project Advisor
 
 ### Johnny Doe
 
