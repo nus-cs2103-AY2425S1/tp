@@ -9,6 +9,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### You Zeyuan(Jerry)
+
+<img src="images/slipperybara.jpg" width="200px">
+
+[[homepage](http://www.comp.nus.edu.sg/~damithch)]
+[[github](https://github.com/johndoe)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Project member
+
 ### Zhang Jinhan
 
 <img src="images/jinhanjinhan.png" width="200px">
@@ -38,21 +48,20 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Amitha Vuputuri
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/amitha2210.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/amitha2210)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Jie Hui
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/blazechron.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](https://github.com/BlazeChron)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
