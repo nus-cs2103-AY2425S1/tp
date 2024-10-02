@@ -409,7 +409,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Modular**: Codebase is divided into separate parts that can be updated without affecting other parts.
 * **Gracefully recover**: Provides an appropriate solution without crashing the application.
 * **Data retention policy**: Guidelines regarding what data should be kept, how long data should be kept and more.
-* **CLI - interface**: Any application that takes in input via text, not necessarily through a command console.
+* **CLI - interface**: Any application that mainly takes in input via text, not necessarily through a command console.
 * **Privacy**: Personal details that are not meant to be shared with others. 
 
 --------------------------------------------------------------------------------------------------------------------
