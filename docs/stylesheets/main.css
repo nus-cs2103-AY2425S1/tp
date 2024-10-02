@@ -13,9 +13,9 @@ mark {
   width: 100%;
 }
 
-/* <box seamless></box> */
-.alert box[seamless] {
-  color: black; /* Need this to allow for <box seamless></box> elements */
+/* Need this to allow for <box seamless></box> elements */
+div.alert.box-container.seamless {
+  color: black;
 }
 
 /* Scrollbar */
