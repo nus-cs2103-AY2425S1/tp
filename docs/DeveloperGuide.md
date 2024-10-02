@@ -300,16 +300,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `WedLinker` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+> Use Cases beginning with 'UC' cover core AddressBook functionality.
+> 
+> Use Cases beginning with 'UCSH' cover non-core AddressBook functionality.
+
+**Use case: UCSH01 Edit details for a contact**
 
 **MSS**
 
 1.  User requests to list persons
 2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+3.  User requests to edit the details of a person and specifies what they want to change the details to
+4.  AddressBook changes the existing details to the specified details and shows list of persons with new details
 
     Use case ends.
 
@@ -321,11 +325,186 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. System shows an error message prompting the user to put in a valid index.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+* 3b. The user does not specify what type of details they want to change.
+
+    * 3b1. System shows an error message prompting the user to put in the type of details they want to edit.
+
+      Use case resumes at step 2.
+
+* 3c. The user does not specify what the new details should be.
+
+    * 3b1. System shows an error message prompting the user to put in the new details.
+
+      Use case resumes at step 2.
+
+* 3d. The user specifies details that do not meet the requirements of the detail type.
+
+    * 3b1. System shows an error message prompting the user with the correct detail type format and requirements.
+
+      Use case resumes at step 2.
+
+**Use case: UCSH02 Clear all contacts from the system**
+
+**MSS**
+
+Guarantees: no persons will be left in the system.
+
+1. User requests to clear all contact
+2. System deletes all contacts and shows a blank list of persons
+
+    Use case ends.
+
+**Use case: UCSH03 Receive a prompt when deleting a contact**
+
+**MSS**
+
+1.  User requests to list persons
+2.  System shows a list of persons
+3.  User requests to delete a contact
+4.  System gives a prompt to confirm whether the user wants to delete the contact
+5.  User confirms they want to delete the contact
+6.  System deletes the contact and shows the updated list of persons
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. System shows an error message prompting the user to put in a valid index.
+
+      Use case resumes at step 2.
+
+* 4a. User says they do not want to delete the contact.
+
+    * 4a1. System shows a message indicating the contact was not deleted.
+
+      Use case ends.
+
+**Use case: UCSH04 Receive a prompt when clearing the system**
+
+**MSS**
+
+1. User requests to clear the system of all persons
+2. System gives a prompt to confirm whether the user wants to clear all contacts
+3. User confirms they want to clear all contacts
+4. System deletes all contacts and shows a blank list of persons
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. User says they do not want to clear all their contacts.
+
+    * 2a1. System shows a message indicating the system was not cleared.
+
+      Use case ends.
+
+
+**Use case: UCSH05 Assign dietary requirement to contact**
+
+**MSS**
+
+1.  User requests to list persons
+2.  System shows a list of persons
+3.  User requests to add a dietary status to the person
+4.  System adds the dietary status to the contact and shows list of persons with new details
+    
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. System shows an error message prompting the user to put in a valid index.
+
+      Use case resumes at step 2.
+
+**Use case: UCSH06 Sort contacts in alphabetical order**
+
+**MSS**
+
+1.  User requests to show a list of persons sorted alphabetically
+2.  System shows the list of persons sorted in alphabetical order
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+**Use case: UCSH07 Add additional information for a person**
+
+**MSS**
+
+1.  User requests to list persons
+2.  System shows a list of persons
+3.  User requests to add additional information for a person
+4.  System adds the additional information to the contact and shows list of persons with new details
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. System shows an error message prompting the user to put in a valid index.
+
+      Use case resumes at step 2.
+
+* 3a. The additional information is blank.
+
+    * 3a1. System shows an error message prompting the user to type in the additional information.
+
+      Use case resumes at step 2.
+
+**Use case: UCSH08 See sample contacts in the system before starting to modify it**
+
+Preconditions: User has not added or modified the system previously
+
+**MSS**
+
+1.  User opens the application
+2.  System shows a list of sample contacts
+
+    Use case ends.
+
+**Use case: UCSH09 Reload sample contacts in the system**
+
+**MSS**
+
+1.  User requests to reload sample contacts into the system
+2.  System deletes all current persons in the system and shows a list of sample contacts
+
+    Use case ends.
+
+**Use case: UCSH10 See a list of all possible commands**
+
+**MSS**
+
+1.  User requests to see a list of all possible commands they can use in the system
+2.  System shows a list of commands with their corresponding input format
+
+    Use case ends.
+
 
 ### Non-Functional Requirements
 
