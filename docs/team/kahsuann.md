@@ -1,11 +1,11 @@
 ---
   layout: default.md
-  title: "John Doe's Project Portfolio Page"
+  title: "Kah Suan's Project Portfolio Page"
 ---
 
-### Project: AddressBook Level 3
+### Project: Eventory
 
-AddressBook - Level 3 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+Eventory is an innovative address book designed to simplify tasks for event planners. It offers an intuitive platform to organize vendors and events, providing powerful tools to categorize, track, and manage every detail. With Eventory, planners can easily tag vendors based on services, budgets, and ratings, allowing for quick access to the right contacts.
 
 Given below are my contributions to the project.
 
