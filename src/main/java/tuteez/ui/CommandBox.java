@@ -4,7 +4,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
-import tuteez.logic.Logic;
 import tuteez.logic.commands.CommandResult;
 import tuteez.logic.commands.exceptions.CommandException;
 import tuteez.logic.parser.exceptions.ParseException;
@@ -78,7 +77,7 @@ public class CommandBox extends UiPart<Region> {
         /**
          * Executes the command and returns the result.
          *
-         * @see Logic#execute(String)
+         * @see tuteez.logic.Logic#execute(String)
          */
         CommandResult execute(String commandText) throws CommandException, ParseException;
     }

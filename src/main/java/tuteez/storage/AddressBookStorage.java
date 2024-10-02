@@ -6,10 +6,9 @@ import java.util.Optional;
 
 import tuteez.commons.exceptions.DataLoadingException;
 import tuteez.model.ReadOnlyAddressBook;
-import tuteez.model.AddressBook;
 
 /**
- * Represents a storage for {@link AddressBook}.
+ * Represents a storage for {@link tuteez.model.AddressBook}.
  */
 public interface AddressBookStorage {
 

@@ -8,7 +8,6 @@ import tuteez.logic.commands.CommandResult;
 import tuteez.logic.commands.exceptions.CommandException;
 import tuteez.logic.parser.exceptions.ParseException;
 import tuteez.model.ReadOnlyAddressBook;
-import tuteez.model.Model;
 import tuteez.model.person.Person;
 
 /**
@@ -27,7 +26,7 @@ public interface Logic {
     /**
      * Returns the AddressBook.
      *
-     * @see Model#getAddressBook()
+     * @see tuteez.model.Model#getAddressBook()
      */
     ReadOnlyAddressBook getAddressBook();
 
