@@ -19,7 +19,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/Potatoad88)]
 [[portfolio](team/dylan)]
 
-* Role: Developer
+* Role: Testing
+* Responsibilities: Ensure testing is done properly and on time
 
 ### Jane Doe
 
