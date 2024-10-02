@@ -11,25 +11,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Jabez Tho
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jasperabez.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/jasperabez)]
+[[portfolio](/team/jasperabez.md)]
 
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Developer
+* Responsibilities: Deliverables and deadlines, Scheduling and tracking
 
 ### Hans Delano
 
@@ -40,7 +30,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Test & UI
 
-
 ### Kevin Pek
 
 <img src="images/kevin-pek.png" width="200px">
@@ -50,16 +39,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: Integration, Storage
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
 
 ### Kok Bo Chang
 
