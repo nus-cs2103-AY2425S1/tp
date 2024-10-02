@@ -298,7 +298,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AgentConnect` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Add a person**
+**Use case: Add a person** 
 
 **MSS**
 
@@ -321,6 +321,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2b1. AgentConnect shows a warning message about the duplicate entry. 
     * 2b2. User decides whether to overwrite or cancel the operation. 
     * Use case resumes at step 2 if user decides to proceed
+
+**Use case: Delete a person**
+
+**MSS**
+
+1. User enters the delete command with the Index of the person to be deleted.
+2. AgentConnect validates the input.
+3. AgentConnect confirms the deletion request by showing the contact details.
+4. AgentConnect deletes the contact and shows a success message
+    
+    Use case ends.
+
+**Extensions**
+* 2a. Contact not found (Invalid Index)
+  * 2a1. AgentConnect shows an error message indicating Index is invalid.
+  * 2a2. User can retry with a valid Index
 
 *{More to be added}*
 
