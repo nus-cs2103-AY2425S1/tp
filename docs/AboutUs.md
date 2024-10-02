@@ -11,25 +11,23 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### Ansel Chong
+### Nathan Loo
 
-<img src="images/ansel-ch.png" width="200px">
+<img src="images/natlv.png" width="200px">
 
-[[github](https://github.com/Ansel-Ch)]
-[[portfolio](team/ansel-ch.md)]
+[[homepage](https://nathan-loo.vercel.app)]
+[[github](https://github.com/natlv)]
+[[portfolio](team/natlv.md)]
 
-* Role:
-* Responsibilities:
+* Role: 
+* Responsibilities: 
 
-### Jane Doe
+### Jerrell Lee
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jerrelllee.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
+[[github](https://github.com/jerrelllee)]
+[[portfolio](team/jerrelllee.md)]
 
 ### Wee Kean
 
@@ -40,22 +38,24 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Senior Finance Manager
 * Responsibilities: 
 
-### Jean Doe
+### Ansel Chong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ansel-ch.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/Ansel-Ch)]
+[[portfolio](team/ansel-ch.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role:
+* Responsibilities:
 
-### James Doe
+### Hugh 
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/gnoossk.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/gnoossk)]
+[[portfolio](team/gnoossk.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Analyst
+* Responsibilities: Analyse
+
+
