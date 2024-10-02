@@ -386,7 +386,7 @@ testers are expected to do more *exploratory* testing.
 Our product name.
 
 1. **CLI**  
-Command line interface. the text box presented to the user.
+Command line interface. The text box presented to the user.
 
 1. **Command Line**   
 A text box where you enter commands.
@@ -404,4 +404,4 @@ A programming language.
 A value that you need to provide for the command to work. e.g in `/add /n <name>`, `<name>` is a parameter.
 
 1. **Windows**  
-An operating system
+An operating system.
