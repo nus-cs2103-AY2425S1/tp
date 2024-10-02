@@ -29,24 +29,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Software Developer
 
-### Jane Doe
+### Gladwin Tan Ye Kai
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/gladwintan.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/gladwintan)]
 
 * Role: Developer
-* Responsibilities: Data
 
 ### Amitha Vuputuri
 
