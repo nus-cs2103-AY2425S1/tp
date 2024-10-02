@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
@@ -24,7 +25,7 @@ public class PersonBuilder {
 
     private Name name;
     private Phone phone;
-    private Phone emergencyContact;
+    private EmergencyContact emergencyContact;
     private Address address;
     private Note note;
     private Set<Tag> tags;
@@ -35,7 +36,7 @@ public class PersonBuilder {
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
-        emergencyContact = new Phone(DEFAULT_EMERGENCY_CONTACT);
+        emergencyContact = new EmergencyContact(DEFAULT_EMERGENCY_CONTACT);
         address = new Address(DEFAULT_ADDRESS);
         note = new Note(DEFAULT_NOTE);
         tags = new HashSet<>();
@@ -97,7 +98,7 @@ public class PersonBuilder {
      * Sets the {@code EmergencyContact} of the {@code Person} that we are building.
      */
     public PersonBuilder withEmergencyContact(String phone) {
-        this.emergencyContact = new Phone(phone);
+        this.emergencyContact = new EmergencyContact(phone);
         return this;
     }
 

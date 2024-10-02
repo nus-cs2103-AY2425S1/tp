@@ -19,7 +19,7 @@ public class Person {
     // Identity fields
     private final Name name;
     private final Phone phone;
-    private final Phone emergencyContact;
+    private final EmergencyContact emergencyContact;
 
     // Data fields
     private final Address address;
@@ -29,7 +29,7 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Phone emergencyContact, Address address, Note note, Set<Tag> tags) {
+    public Person(Name name, Phone phone, EmergencyContact emergencyContact, Address address, Note note, Set<Tag> tags) {
         requireAllNonNull(name, phone, address, tags);
         this.name = name;
         this.phone = phone;
@@ -47,7 +47,7 @@ public class Person {
         return phone;
     }
 
-    public Phone getEmergencyContact() {
+    public EmergencyContact getEmergencyContact() {
         return emergencyContact;
     }
 
