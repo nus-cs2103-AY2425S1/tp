@@ -10,10 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.ClassId;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Fees;
-import seedu.address.model.person.MonthsPaid;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -123,17 +120,5 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
-    }
-
-    public static Fees parseFees(String s) {
-        return null;
-    }
-
-    public static ClassId parseClassId(String s) {
-        return null;
-    }
-
-    public static MonthsPaid parseMonthsPaid(String s) {
-        return null;
     }
 }
