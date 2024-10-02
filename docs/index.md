@@ -5,7 +5,7 @@
 
 # HallPointer
 
-[![CI Status](https://github.com/ay2425s1-cs2103t-w14-3/tp/workflows/Java%20CI/badge.svg)](https://github.com/ay2425s1-cs2103t-w14-3/tp/actions)
+[![CI Status](https://github.com/AY2425S1-CS2103T-W14-3/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2425S1-CS2103T-W14-3/tp/actions/workflows/gradle.yml)
 [![codecov](https://codecov.io/gh/ay2425s1-cs2103t-w14-3/tp/branch/master/graph/badge.svg)](https://codecov.io/gh/ay2425s1-cs2103t-w14-3/tp)
 
 ![Ui](images/Ui.png)
