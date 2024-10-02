@@ -39,7 +39,7 @@ You can reach us at the email `E1120956@u.nus.edu`
 
 ### Wen Kang
 
-<img src="images/SlothyCat.png" width="200px">
+<img src="images/slothycat.png" width="200px">
 
 [[github](http://github.com/SlothyCat)]
 
