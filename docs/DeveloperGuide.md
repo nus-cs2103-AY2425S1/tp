@@ -260,15 +260,19 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Target user profile**: School of Computing students
 
-* has a need to manage a significant number of contacts
+* has a need to manage a significant number of contacts of other students, recruiters, potential employers in
+networking events
 * prefer desktop apps over other types
-* can type fast
+* can type fast due to the nature of their course
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Allows SoC students to quickly and easily manage the relationships they form with others in
+school and on their journey to acquire internships. SoC students are likely to prefer a CLI due to their background 
+in computing. Also, they can most likely type fast.
+
 
 
 ### User stories
@@ -411,7 +415,7 @@ Use case ends.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
-*{More to be added}*
+4. *{More to be added}* 
 
 ### Glossary
 
