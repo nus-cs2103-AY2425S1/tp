@@ -267,24 +267,31 @@ _{Explain here how the data archiving feature will be implemented}_
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
+* small business owners
+* sole proprietors 
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Since these businesses are single-individual teams, keeping track of different stakeholders alone is a hassle. These individuals work on their computers at least for their networking purposes, making the product compatible with their existing workflows. The product is an easy-to-use contact management app that manages customers, business partners and suppliers.
+
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​       | I want to …​                                               | So that I can…​                                             |
+|----------|---------------|------------------------------------------------------------|-------------------------------------------------------------|
+| `* * *`  | new user      | understand the interface easily                            | start using my addressbook with little trouble              |
+| `* * *`  | new user      | add a new contact                                          | start storing my existing contacts                          |
+| `* * *`  | familiar user | delete/archive a contact                                   | remove those that are no longer working with me             |
+| `* * *`  | new user      | find a contact by name                                     | retrieve their contact information                          |
+| `* * *`  | familiar user | group my contacts into categories                          | group all users of one category (eg. just customers)        |
+| `* * *`  | familiar user | retrieve all contacts from a specific group                | find my customers, suppliers, business partners, etc easily |
+| `* * `   | familiar user | sort my contacts alphabetically                            | find my contacts by their name                              |
+| `* *`    | familiar user | add any extra remarks to my contacts                       | be aware of each contact's notable information              |
+| `* * `   | familiar user | update/edit contact details                                | update any recent changes to the contact                    |
+| `*`      | expert user   | create shortcut commands to add specific types of contacts | add people of similar profiles faster                       |
+| `*`      | expert user   | add remainders                                             | be reminded to follow up with specific contacts             |
 
-*{More to be added}*
 
 ### Use cases
 
