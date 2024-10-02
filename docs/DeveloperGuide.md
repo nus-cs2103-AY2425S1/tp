@@ -272,7 +272,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**: **Insurance Agent**
+**Target user profile**: **Insurance Agents**
 
 * has a need to manage a significant number of insurance clients
 * prefer desktop apps over other types
@@ -280,7 +280,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: Our app help insurance agents keep track of new and existing clients. This allows them to maximise their reach to their contacts and optimise their profits each month.
+**Value proposition**: Our app helps insurance agents effortlessly manage new and existing clients, offering features for tracking insurance plans and claims, all while staying organised and efficient."
 
 
 ### User stories
