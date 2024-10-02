@@ -35,7 +35,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/orangecatloves.png" width="200px">
 
-[[github](http://github.com/orangecatlove)] [[portfolio](team/orangecatloves.md)]
+[[github](http://github.com/orangecatloves)] [[portfolio](team/orangecatloves.md)]
 
 * Role: Developer
 * Responsibilities: Data
