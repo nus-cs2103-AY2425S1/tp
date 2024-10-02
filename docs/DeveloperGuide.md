@@ -262,27 +262,43 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* requires efficient management of extensive databases for volunteers, events, and donors
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: This application serves to streamline volunteer and donor management for organisations. 
+It provides essential tools to track volunteers, donors, and events efficiently, enabling organisations to 
+maintain accurate records and enhance their operational capabilities.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​       | I want to …​                     | So that I can…​                                                   |
+|----------|---------------|----------------------------------|-------------------------------------------------------------------|
+| `* * *`  | new user      | add volunteer                    | track volunteer hours and donations                               |
+| `* * *`  | user          | remove volunteer                 | ensure the volunteer list is updated                              |
+| `* * *`  | user          | view volunteers                  | easily see available volunteers                                   |
+| `* * *`  | user          | add donor                        | track the details of the donors                                   |
+| `* * *`  | new user      | remove donor                     | ensure the donor list is updated                                  |
+| `* * *`  | new user      | view donor                       | access donor information easily                                   |
+| `* * *`  | user          | create volunteer event           | organise new volunteer events                                     |
+| `* * *`  | user          | remove volunteer event           | remove outdated or cancelled events                               |
+| `* * *`  | user          | view all events                  | get an overview of upcoming events                                |
+| `* *`    | user          | edit volunteer information       | update volunteer details                                          |
+| `* *`    | user          | filter donor by type of donation | easily find donors for a particular event                         |
+| `* *`    | user          | set the type of donations        | categorise donors by donation type                                |
+| `* *`    | user          | edit donor                       | update donor information without re-adding or deleting            |
+| `* *`    | user          | search/filter event by name      | quickly find specific event information                           |
+| `* *`    | user          | view recent events               | review recent activities or reports                               |
+| `* *`    | user          | export volunteer information     | provide data for reports                                          |
+| `*`      | user          | filter volunteer by availability | see who is available for a particular event                       |
+| `*`      | user          | auto-create recurring events     | reduce repetitive work of adding recurring events                 |
+| `*`      | user          | dark mode                        | cater to preference for dark mode                                 |
+| `*`      | user          | accessibility features           | accommodate vision impairments with larger fonts or color schemes |
 
 *{More to be added}*
 
