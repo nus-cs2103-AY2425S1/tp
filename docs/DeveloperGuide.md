@@ -273,30 +273,55 @@ _{Explain here how the data archiving feature will be implemented}_
 ### Product scope
 
 **Target user profile**:
+* General Practitioners (GPs) at small clinics
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
-
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Time spent looking through paper medical documents should be spent in other life-saving activities. Our product resolves this issue by creating fast access to patient contact details as well as their relevant appointment/treatment details, allowing GPs to contact and monitor their patients easily.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​              | I want to …​                                       | So that I can…​                                                      |
+|----------|----------------------|----------------------------------------------------|----------------------------------------------------------------------|
+| `* * *`  | doctor               | add appointments                                   | find them in the future for reference                                |
+| `* * *`  | doctor               | schedule a new patient appointment                 | ensure that the patient is properly booked for consultation          |
+| `* * *`  | doctor               | remove an appointment that is no longer needed     | free up time slots for other patients and avoid scheduling conflicts |
+| `* * *`  | doctor               | view all upcoming appointments for better planning | organize my day effectively and ensure no appointments are missed    |
+| `* * *`  | administrative staff | manage patient contact information                 | easily communicate with patients                                     |
+| `* * *`  | administrative staff | update patient details                             | maintain accurate records                                            |
+| `* * *`  | administrative staff | get details on a specific patient's appointments   | keep track of the patient                                            |
+| `* * *`  | administrative staff | store all patients information                     | retrieve them in the future                                          |
+| `* * *`  | nurse                | track appointments                                 | get ready to serve patients                                          |
+| `* *`    | doctor               | access appointment history                         | understand patient visit patterns                                    |
+| `* *`    | doctor               | categorize patients by conditions or treatments    | easily track patient groups                                          |
+| `* *`    | doctor               | find free slots in the appointments                | find gaps for appointments or holidays                               |
+| `* *`    | administrative staff | get details on appointments for the day            | keep track of the day's appointments                                 |
+| `* *`    | doctor               | shift appointments to a different time             | change appointments based on holidays, etc.                          |
+| `* *`    | administrative staff | schedule follow-up appointments                    | keep track of patients' appointments                                 |
+| `* *`    | doctor               | add mood status to appointment details             | keep track of patient health each time we meet                       |
+| `* *`    | doctor               | sort patients by closest future appointment date   | see which patient to see next                                        |
+| `* *`    | doctor               | find duplicate errors within the system            | not have erroneous appointments                                      |
+| `* *`    | doctor               | organize appointments                              | arrange my schedule accordingly                                      |
+| `* *`    | doctor               | set holidays/free days                             | disallow appointments during certain dates                           |
+| `* * `   | doctor               | categorise patients based on certain factors       | easily track patients with certain statuses                          |
+| `* * `   | doctor               | add list of allergies for a certain patient        | not prescribe them stuff that will kill them                         |
+| `*`      | doctor               | view patient's medical history                     | make informed treatment decisions                                    |
+| `*`      | doctor               | access test results for patients                   | review and discuss results with patients                             |
+| `*`      | doctor               | set reminders for specific patient actions         | ensure follow-up on important tasks                                  |
+| `*`      | doctor               | retrieve medical certificates of patients          | gather patient information quickly                                   |
+| `*`      | doctor               | record the medications given to patients           | keep track of personal medication records of patients                |
+| `*`      | administrative staff | search for patient files by name or ID             | quickly retrieve specific records                                    |
+| `*`      | administrative staff | check prescription assigned by the doctor          | print out prescription for patient                                   |
+| `*`      | doctor               | search up medicine to prescribe                    | give prescription to patient                                         |
+| `*`      | doctor               | add notes to patient files                         | reference them during future visits                                  |
+| `*`      | doctor               | change the time frame for receiving reminders      | receive reminders more frequently or less frequently                 |
+| `*`      | doctor               | add guardian/parental contacts to patient          | contact patient indirectly                                           |
+| `*`      | doctor               | update patient status                              | keep track of patient's condition                                    |
+| `*`      | doctor               | copy treatments                                    | duplicate medication plans for similar patients                      |
+| `*`      | doctor               | receive reminders on upcoming appointments         | prepare for them                                                     |
+| `*`      | doctor               | retrieve specific treatment information            | treat them appropriately                                             |
+| `*`      | doctor               | generate an automated document for a patient       | give it to them as reference                                         |
 
 ### Use cases
 
