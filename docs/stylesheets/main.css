@@ -15,7 +15,7 @@ mark {
 
 /* Need this to allow for <box seamless></box> elements */
 div.alert.box-container.seamless {
-  color: black; 
+  color: black;
 }
 
 /* Scrollbar */
