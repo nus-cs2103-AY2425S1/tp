@@ -290,15 +290,18 @@ ClientGrid is an address book designed for real estate agents to efficiently man
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 
-| Priority | As a …​           | I want to …​                                            | So that I can…​                                                        |
-|----------|-------------------|---------------------------------------------------------|------------------------------------------------------------------------|
-| `* * *`  | real estate agent                                 | add a new client (buyer or seller) to ClientGrid        | keep all their contact information organized in one place
-| `* * *`  | real estate agent | delete a client (buyer or seller) from ClientGrid       | keep all their contact information organized in one place              |
-| `* * *`  | user              | add a new person                                        |                                                                        |
-| `* * *`  | user              | delete a person                                         | remove entries that I no longer need                                   |
-| `* * *`  | user              | find a person by name                                   | locate details of persons without having to go through the entire list |
-| `* *`    | real estate agent | indicate that a buyer wants to buy property X at Y price | keep track of the clients that are involved in the transaction         |
-| `* *`    | real estate agent | indicate that a seller wants to sell property X at Y price | keep track of the clients that are involved in the transaction                                                |
+| Priority | As a …​           | I want to …​                                               | So that I can…​                                                        |
+|----------|-------------------|------------------------------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | real estate agent                                 | add a new client (buyer or seller) to ClientGrid           | keep all their contact information organized in one place              
+| `* * *`  | real estate agent | delete a client (buyer or seller) from ClientGrid          | keep all their contact information organized in one place              |
+| `* * *`  | user              | add a new person                                           |                                                                        |
+| `* * *`  | user              | delete a person                                            | remove entries that I no longer need                                   |
+| `* * *`  | user              | find a person by name                                      | locate details of persons without having to go through the entire list |
+| `* *`    | real estate agent | indicate that a buyer wants to buy property X at Y price   | keep track of the clients that are involved in the transaction         |
+| `* *`    | real estate agent | indicate that a seller wants to sell property X at Y price | keep track of the clients that are involved in the transaction         |
+| `* * *`  | real estate agent    | list information about properties                          | easily manage my portfolio of available properties                     |
+| `* * *`  | real estate agent    | list information about buyers                              | match buyers with suitable properties based on their preferences        |
+| `* * *`  | real estate agent    | list information about sellers                             | manage relationships and property listings efficiently                 |
 
 
 *{More to be added}*
@@ -325,6 +328,7 @@ Steps 2a1-2a2 are repeated until the data entered are correct.
 
 Use case ends.
 
+
 **Use case: UC2 - Delete Client**
 
 MSS:
@@ -340,6 +344,15 @@ Extensions:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2a2. Real estate agent enters new data
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Steps 2a1-2a2 are repeated until the data entered are correct. 
+
+Use case ends.
+
+**Use case: UC3 - List buyers, sellers, clients or properties**
+
+MSS:
+
+1. Real Estate Agent requests to view a list of buyers, sellers, clients or properties
+2. ClientGrid will respond with the corresponding list
 
 Use case ends.
 
