@@ -412,6 +412,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **User**: A letting agent that is using TrueRental to manage the contact information of their clients
+* **Client**: An individual that is renting a property from a letting agent
+* **Letting agent**: An individual that facilitates a property rental agreement
 
 --------------------------------------------------------------------------------------------------------------------
 
