@@ -11,14 +11,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### Sirui Li
+### John Doe
 
-<img src="images/siriousguy.png" width="200px">
+<img src="images/johndoe.png" width="200px">
 
-[[github](https://github.com/siriousguy)]
-[[portfolio](team/siriousguy.md)]
+[[github](https://github.com/johndoe)]
+[[portfolio](team/johndoe.md)]
 
-* Role: Team Lead
+* Role: Project Advisor
 
 ### Jane Doe
 
@@ -30,11 +30,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Li Sirui
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/siriousguy.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/siriousguy)] [[portfolio](team/siriousguy.md)]
 
 * Role: Developer
 * Responsibilities: Data
