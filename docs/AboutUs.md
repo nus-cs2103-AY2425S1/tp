@@ -9,15 +9,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Nicholas Tang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/nicholast1.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/nicholast1)]
+[[portfolio](team/nicholas.md)]
 
-* Role: Project Advisor
+* Role: Developer
 
 ### Jane Doe
 
