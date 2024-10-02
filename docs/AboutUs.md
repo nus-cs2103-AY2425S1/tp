@@ -9,15 +9,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Chew Tsze Honn
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/zeonchew0324.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[github](https://github.com/zeonchew0324)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Project Advisor
+* Responsibilities: Project Management
 
 ### Jane Doe
 
