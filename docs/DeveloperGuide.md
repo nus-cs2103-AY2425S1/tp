@@ -277,18 +277,44 @@ Home-based healthcare providers who
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Priorities: 
+- High (must have): `***`
+- Medium (nice to have) - `**`
+- Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​                        | I want to …​                                                           | So that I can…​                                                                              |
+|----------|--------------------------------|------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
+| `***`    | home-based healthcare provider | add the data of new clients                                            | register new clients in the system for tracking                                              |
+| `**`     | home-based healthcare provider | tag patients based on their urgency                                    | prioritise higher-risk patients                                                              |
+| `**`     | home-based healthcare provider | tag a client's entry or information                                    | keep track of special instructions, preferences, medical allergies or urgency                |
+| `**`     | home-based healthcare provider | store prescription                                                     | add prescription records to keep track of which medications patients should take             |
+| `**`     | home-based healthcare provider | add relevant reports such as X-rays                                    | access such details for reference when explaining the conditions to patients                 |
+| `**`     | home-based healthcare provider | add notes for reference during future visits                           | recall important details upon next visit                                                     |
+| `*`      | home-based healthcare provider | record patients' feedback                                              | address them in future visits                                                                |
+| `*`      | home-based healthcare provider | be notified of overlapping names and addresses                         | avoid duplicate client entries                                                               |
+| `***`    | home-based healthcare provider | see my patients' records                                               | understand how my patient is doing                                                           |
+| `***`    | home-based healthcare provider | see my patients' allergies                                             | provide the correct prescription for my patients                                             |
+| `***`    | home-based healthcare provider | view my patient's emergency contacts quickly                           | reach them in case of emergency                                                              |
+| `*`      | home-based healthcare provider | view all clients sorted by their last visit date                       | priortise follow up visits                                                                   |
+| `*`      | home-based healthcare provider | track medicine and medical equipment used for each patient's treatment | maintain an accurate log and ensure consistency in care plan                                 |
+| `*`      | home-based healthcare provider | check number of visits for a particular patient in a given time period | ensure balance between patients' needs and my availability                                   |
+| `***`    | home-based healthcare provider | delete the records of patients whom I am not seeing anymore            | keep my address book concise and clutter-free                                                |
+| `***`    | home-based healthcare provider | remove old or inactive clients from the address book                   | keep the list relevant                                                                       |
+| `***`    | home-based healthcare provider | edit the details of my clients' address                                | locate a person easily                                                                       |
+| `***`    | home-based healthcare provider | have the contact details of my patients for easy access                | update the details accordingly if there are any changes                                      |
+| `***`    | home-based healthcare provider | add new appointment details                                            | add appointments in my schedule for tracking later on                                        |
+| `***`    | home-based healthcare provider | see my schedule for the day                                            | organise my time and ensure that there are no clashes in appointments                        |
+| `**`     | home-based healthcare provider | be reminded of my clients' appointments nearer to the date             | organise my time                                                                             |
+| `*`      | home-based healthcare provider | generate the route for the day                                         | efficiently travel to different locations and save time                                      |
+| `*`      | home-based healthcare provider | send notifications to patients                                         | they can expect my arrival                                                                   |
+| `*`      | home-based healthcare provider | schedule recurring visits for clients directly in the address book     | avoid re-entering their information each time                                                |
+| `*`      | home-based healthcare provider | check last month's payment and visits summary                          | track my workload                                                                            |
+| `*`      | home-based healthcare provider | group patients according to patient and priority                       | save travel time or focus on more urgent cases                                               |
+| `*`      | home-based healthcare provider | get notifications in the event an emergency occurs                     | respond as quickly as possible and know whether there is a need to go to the patient's house |
+| `**`     | home-based healthcare provider | see the services provided for each patient                             | know how much I should be charging my patients                                               |
+| `**`     | home-based healthcare provider | see which of my patients have paid                                     | keep track of how much my patients owe me                                                    |
+| `**`     | home-based healthcare provider | record when my patients pay for their appointment                      | keep track of which patients have paid for my services                                                                     
+| `**`     | home-based healthcare provider | show insurance details for patients                                    | generate patient's bill accordingly
 
 ### Use cases
 
@@ -321,17 +347,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage. 
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse. 
+4. The system should respond within 5 seconds for any commands given.
+5. Command syntax should be consistent throughout the application to minimize the learning curve.
+6. Users should be able to run the application from the downloaded JAR file without an additional installer.
+7. The system should provide meaningful, yet concise error messages for the user to easily make the necessary changes.
+8. The codebase should be modular to facilitate easy maintenance and future enhancements.
+9. The code should be well-documented with clear comments to assist future developers.
+10. The application should have a smooth user experience that is intuitive and easy to use.
+11. The system should be customised for operations by a single user and need not handle multiple user-access.
+12. Configuration and data files should use standard formats to ensure compatibility with text editors and other applications.
+13. The system should validate all user inputs to prevent errors when saving the information.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-
+* **Patient Record**: A collection of patient's personal and medical information. This includes, but is not limited to, name, contact number, email, address, allergies, injuries sustained.
+* **Appointment**: A scheduled session between the healthcare provider and patient for medical consultation or treatment. This is marked in the AddressBook by the time, location and patient.
+* **Schedule**: A list of all patients' appointments, displaying the date and time and location of the appointments.
+* **Tag**: A label applied to a patient record, used to categorise and highlight specific medical information, such as allergies or conditions.
+* **Medical History**: Documentation of patient's past illnesses, treatments, surgeries and other medical related information.
+* **Inactive Client**: A client who is no longer receiving care or whose records have not been accessed in a signifcant amount of time
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
