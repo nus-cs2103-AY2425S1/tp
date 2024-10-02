@@ -11,15 +11,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Clarence Yeo
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/clarenceeey.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/clarenceeey)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/clarence.md)]
 
 * Role: Project Advisor
 
-### Han Yi
+### John Doe
 
 <img src="images/johndoe.png" width="200px">
 
@@ -29,7 +29,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Marcus
+### John Doe
 
 <img src="images/johndoe.png" width="200px">
 
@@ -38,7 +38,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Sky
+### John Doe
 
 <img src="images/johndoe.png" width="200px">
 
@@ -48,7 +48,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### Max
+### John Doe
 
 <img src="images/johndoe.png" width="200px">
 
