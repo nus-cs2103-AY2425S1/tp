@@ -18,3 +18,12 @@ We are a team based in the [School of Computing, National University of Singapor
 
 * Role: Developer
 * Responsibilities: UI and Logic
+
+### Mervyn
+
+<img src="images/teddayz.png" width="200px">
+
+[[github](https://github.com/teddayz)]
+[[portfolio](team/mervyn.md)]
+
+* Role: Project Advisor
