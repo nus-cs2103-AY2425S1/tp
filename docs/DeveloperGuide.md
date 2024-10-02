@@ -293,8 +293,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | nurse   | delete emergency contact numbers        | remove irrelevant emergency contacts |
 | `* * *`  | nurse   | update a patient’s category             | reflect changes in their care status |
 | `* * *`  | nurse   | assign multiple categories to a patient | quickly identify the care level      |
-| `* *`    | nurse   | add tasks                               | track what task needs to be done     |
-| `*`      | nurse   | delete tasks                            | remove irrelevant tasks              |
+| `* * *`  | nurse   | add tasks                               | track what task needs to be done     |
+| `* * *`  | nurse   | delete tasks                            | remove irrelevant tasks              |
 
 *{More to be added}*
 
