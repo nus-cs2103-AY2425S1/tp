@@ -24,10 +24,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/calebchongsj.png.jpg" width="200px">
 
 [[github](http://github.com/calebchongsj)]
-[[portfolio](members/calebchong.md)]
+[[profile](members/calebchong.md)]
 
-* Role: Code Quality
-* Responsibilities: Storage
+I am analytical and detail oriented. With my attention to detail, I feel I can spot any
+mistake that may not align with the standard code practice.
+
+* Role: Code Quality by ensuring that the code adheres to the standard in CS2103T
+* Responsibilities: Storage, Logic and Main
 
 ### Johnny Doe
 
