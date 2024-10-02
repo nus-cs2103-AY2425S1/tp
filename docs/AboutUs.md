@@ -9,8 +9,18 @@ We are a team based in the [School of Computing, National University of Singapor
 
 You can reach us at the email `seer[at]comp.nus.edu.sg`
 
-## Project team
+[[About Us](https://ay2425s1-cs2103t-f10-3.github.io/tp/)]
 
+## NUStates
+
+### Low Wei Bin
+
+<img src="images/orangecatloves.png" width="200px">
+
+[[github](http://github.com/orangecatloves)] [[portfolio](team/orangecatloves.md)]
+
+* Role: Code-Quality
+* Responsibilities: Ensures that coding quality is adhered and up to standard for every pull-request
 
 ### Dylan Wong
 
