@@ -302,12 +302,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC-01 Add a contact**
+**Use case: UC01 - List all contacts**
 
 **MSS**
 
-1.  User issues the add-contact command with the contact details (name, optional phone number, address, email, and tags). 
-2.  The system adds the contact and displays a success message
+1.  User issues the list command.
+2.  The system retrieves and displays the list of all contacts to the user.
+
+    Use case ends.
+
+
+
+**Use case: UC02 - Add a contact**
+
+**MSS**
+
+1.  User issues the add-contact command with the corresponding details.
+2.  The system adds the contact and displays a success message.
 3.  The system shows the new contact in the address book.
 
     Use case ends.
@@ -315,43 +326,43 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. The system detects a name input error (duplicated or trailing whitespace).
-    * 1a1. The system displays an error message
+    * 1a1. The system displays an error message.
   
         The use case ends.
   
   
 * 1b. The system detects a phone number input error (invalid format): 
-    * 1b1. The system displays an error message stating the correct format
+    * 1b1. The system displays an error message stating the correct format.
   
         The use case ends.
   
   
 * 1c. The system detects an address input error (too long):
-    * 1c1. The system displays an error message stating the maximum length
+    * 1c1. The system displays an error message stating the maximum length.
   
         The use case ends.
   
   
 * 1d. The system detects an email input error (invalid format):
-    * 1d1. The system displays an error message stating the correct format
+    * 1d1. The system displays an error message stating the correct format.
   
         The use case ends.
   
   
 * 1e. The system detects a duplicate phone number error:
-    * 1e1. The system displays an error message mentioning the existence of a duplicate phone number
+    * 1e1. The system displays an error message mentioning the existence of a duplicate phone number.
     
         The use case ends.
         
 
 * 1f. The system detects an invalid tag input:
-    * 1f1. The system displays an error message stating the tag is invalid
+    * 1f1. The system displays an error message stating the tag is invalid.
     
         The use case ends.
 
 
 
-**Use case: UC02 - Add Phone Number to Contact**
+**Use case: UC03 - Add Phone Number to Contact**
 
 **Guarantees:**
 * No duplicate phone numbers will exist across different contacts.
@@ -359,79 +370,98 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User issues the add-phone command with a contact index and a phone number. 
-2.  The system adds the phone number to the contact and displays a success message
-3.  The system displays the updated contact information in the address book.
+1. User <ins>lists all contacts (UC01)</ins>.
+2. User issues the add-phone command with the corresponding details.
+3. The system adds the phone number to the contact and displays a success message.
+4. The system displays the updated contact information in the address book.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The system detects an invalid contact index:
-    * 1a1. The system displays an error message stating the contact index is invalid.
+* 1a. The list is empty.
 
-        The use case ends.
+  The use case ends.
+
+
+* 2a. The system detects an invalid contact index:
+    * 2a1. The system displays an error message stating the contact index is invalid.
+
+        The use case resumes at step 2.
   
   
-* 1b. The system detects a phone number input error (invalid format):
-    * 1b1. The system displays an error message stating the correct format
+* 2b. The system detects a phone number input error (invalid format):
+    * 2b1. The system displays an error message stating the correct format.
     
-        The use case ends.
+        The use case resumes at step 2.
   
 
-* 1c. The system detects a duplicate phone number error:
-    * 1c1. The system displays an error message mentioning the existence of a duplicate phone number
+* 2c. The system detects a duplicate phone number error:
+    * 2c1. The system displays an error message mentioning the existence of a duplicate phone number.
     
-        The use case ends
+        The use case resumes at step 2.
 
 
 
-**Use case: UC03 - Add Address to Contact**
+**Use case: UC04 - Add Address to Contact**
 
 **MSS**
 
-1.  User issues the add-address command with a contact index and an address. 
-2.  The system adds the address to the contact and displays a success message
-3.  The system displays the updated contact information in the address book.
+1. User <ins>lists all contacts (UC01)</ins>.
+2. User issues the add-address command with the corresponding details.
+3. The system adds the address to the contact and displays a success message
+4. The system displays the updated contact information in the address book.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The system detects an invalid contact index:
-    * 1a1. The system displays an error message stating the contact index is invalid.
+* 1a. The list is empty.
 
-        The use case ends.
+    The use case ends.
+
+
+* 2a. The system detects an invalid contact index:
+    * 2a1. The system displays an error message stating the contact index is invalid.
+
+        The use case resumes at step 2.
   
 
-* 1b. The system detects an address input error (too long):
-    * 1b1. The system displays an error message stating the maximum length
-      
-        The use case ends.
+* 2b. The system detects an address input error (too long):
+    * 2b1. The system displays an error message stating the maximum length
+
+        The use case resumes at step 2.
 
 
-**Use case: UC04 - Add Email to Contact**
+
+**Use case: UC05 - Add Email to Contact**
 
 **MSS**
 
-1.  User issues the add-email command with a contact index and an email address. 
-2.  The system adds the email address to the contact and displays a success message
-3.  The system displays the updated contact information in the address book.
+1. User <ins>lists all contacts (UC01)</ins>.
+2. User issues the add-email command with the corresponding details. 
+3. The system adds the email address to the contact and displays a success message
+4. The system displays the updated contact information in the address book.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The system detects an invalid contact index:
-    * 1a1. The system displays an error message stating the contact index is invalid.
+* 1a. The list is empty.
 
-        The use case ends.
+    The use case ends.
 
 
-* 1b. The system detects an email input error (invalid format):
-    * 1b1. The system displays an error message stating the correct format.
+* 2a. The system detects an invalid contact index:
+    * 2a1. The system displays an error message stating the contact index is invalid.
+
+        The use case resumes at step 2.
+
+
+* 2b. The system detects an email input error (invalid format):
+    * 2b1. The system displays an error message stating the correct format.
   
-        The use case ends.
+        The use case resumes at step 2.
       
 
 
