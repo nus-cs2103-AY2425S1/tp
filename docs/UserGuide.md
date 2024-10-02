@@ -6,7 +6,7 @@
 
 # ClubConnect User Guide
 
-ClubConnect is a desktop address book application used to streamline the computing club's communication and organization. You can effortlessly manage member details, sponsor contacts, and event participants in one place. Enhance collaboration, boost engagement, and ensure seamless planning, all while saving time and reducing administrative hassle.
+ClubConnect is a **desktop address book application used to streamline the computing club's communication and organization.** You can effortlessly manage member details, sponsor contacts, and event participants in one place. Enhance collaboration, boost engagement, and ensure seamless planning, all while saving time and reducing administrative hassle.
 
 <!-- * Table of Contents -->
 <page-nav-print />
