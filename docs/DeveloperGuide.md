@@ -330,8 +330,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
+* **CLI**: Stands for Command-Line Interface, a text-based interface where you can input commands that interact with the program.
+* **GUI**: Stands for Graphical User Interface, a user interface where you interact with a program through graphical icons and visual indicators.
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **PlantUML**: A tool that allows users to create UML diagrams (such as sequence diagrams and class diagrams) using simple text descriptions. The app uses `.puml` files for generating diagrams in the documentation.
+* **User preferences**: The GUI settings and student directory data file path, stored in the `preferences.json` data file.
 
 --------------------------------------------------------------------------------------------------------------------
 
