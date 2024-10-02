@@ -137,4 +137,25 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Checks if {@code String args} contains index
+     */
+    public static boolean isParsingIndex(String args) {
+        try {
+            ParserUtil.parseIndex(args);
+            return true;
+        } catch (ParseException pe) {
+            return false;
+        }
+    }
+
+    public static boolean isParsingNric(String args) {
+        try {
+            ParserUtil.parseNric(args);
+            return true;
+        } catch (ParseException pe) {
+            return false;
+        }
+    }
 }

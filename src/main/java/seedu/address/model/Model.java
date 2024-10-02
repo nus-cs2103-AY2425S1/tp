@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
 /**
@@ -81,6 +82,8 @@ public interface Model {
      * The person must exist in the address book.
      */
     void markAsContacted(Person target);
+
+    Person getPersonByNric(Nric nric);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
