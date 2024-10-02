@@ -294,7 +294,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list all people saved in the System by entering a command.
+1.  Actor requests to list all people saved in the System by entering a command.
 2.  System shows a list of persons.
 
     Use case ends.
@@ -303,7 +303,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 1a. If there are no contacts stored in the system.
 
-  - 1a1 System informs user that they have no contacts stored.
+  - 1a1 System informs Actor that they have no contacts stored.
 
   Use case ends.
 
