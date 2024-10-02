@@ -9,25 +9,26 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Wong Ke Xin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/wkxcass.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[github](https://github.com/wkxcass)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+* Role: Code quality
+* Responsibilities: Looks after code quality, ensures adherence to coding standards, etc.
 
-### Jane Doe
+### Wu Jiawei
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/wujiaweijoanna.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/wujiaweijoanna)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Documentation
+* Responsibilities: Responsible for the quality of various project documents.
 
 ### Johnny Doe
 
@@ -38,22 +39,22 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Prisha V Prakash
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/prisha.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/PrishaVP)]
+[[portfolio](team/prisha.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Scheduling and tracking
+* Responsibilities: In charge of defining, assigning, and tracking project tasks.
 
-### James Doe
+### Sanchita Dhareshwar
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/sannie-beep.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/sannie-beep)]
+[[portfolio](team/sanchita.md)]
 
 * Role: Developer
 * Responsibilities: UI
