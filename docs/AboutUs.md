@@ -19,15 +19,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Caleb Chong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/calebchongsj.png.jpg" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/calebchongsj)]
+[[portfolio](members/calebchong.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Code Quality
+* Responsibilities: Storage
 
 ### Johnny Doe
 
