@@ -9,15 +9,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Wong Ke Xin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/wkxcass.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[github](https://github.com/wkxcass)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+* Role: Code quality
+* Responsibilities: Looks after code quality, ensures adherence to coding standards, etc.
 
 ### Jane Doe
 
