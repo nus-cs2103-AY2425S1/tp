@@ -397,11 +397,11 @@ In our context, a flag is something preceded by a /, but is not the initial comm
 1. **GUI**  
 Graphical user interface. The screen you see when opening the application.
 
-1. **Java**  
+1. [**Java**](https://www.java.com/en/)  
 A programming language.
 
 1. **Parameter**  
 A value that you need to provide for the command to work. e.g in `add n/NAME`, `NAME` is a parameter.
 
-1. **Windows**  
+1. [**Windows**](https://en.wikipedia.org/wiki/Microsoft_Windows)  
 An operating system.
