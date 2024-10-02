@@ -19,6 +19,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project member
 
+### Zhang Jinhan
+
+<img src="images/jinhanjinhan.png" width="200px">
+
+
+[[github](https://github.com/jinhanjinhan)]
+
+* Role: Developer
+* Responsibilities: Software Developer
+
 ### Jane Doe
 
 <img src="images/johndoe.png" width="200px">
