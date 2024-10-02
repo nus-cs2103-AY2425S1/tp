@@ -15,6 +15,7 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
+    public static final Tag DEFAULT_TAG_PENDING = new Tag("pending");
 
     // Identity fields
     private final Name name;
@@ -35,6 +36,7 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.tags.add(DEFAULT_TAG_PENDING);
     }
 
     public Name getName() {
