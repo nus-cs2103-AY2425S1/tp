@@ -11,4 +11,3 @@ any other relevant business information such as purchased goods & services, date
 ### Contributions
 
 1. Add persistent data storage
-2. 
