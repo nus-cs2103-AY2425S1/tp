@@ -9,9 +9,6 @@
 <!-- * Table of Contents -->
 <page-nav-print />
 
-- Table of Contents
-  {:toc}
-
 ---
 
 ## **Acknowledgements**
