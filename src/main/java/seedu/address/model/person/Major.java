@@ -4,12 +4,12 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's address in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
+ * Represents a Person's major in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidMajor(String)}
  */
-public class Address {
+public class Major {
 
-    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Major can take any values";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -20,20 +20,20 @@ public class Address {
     public final String value;
 
     /**
-     * Constructs an {@code Address}.
+     * Constructs an {@code Major}.
      *
-     * @param address A valid address.
+     * @param major A valid major.
      */
-    public Address(String address) {
-        requireNonNull(address);
-        checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
-        value = address;
+    public Major(String major) {
+        requireNonNull(major);
+        checkArgument(isValidMajor(major), MESSAGE_CONSTRAINTS);
+        value = major;
     }
 
     /**
-     * Returns true if a given string is a valid email.
+     * Returns true if a given string is a valid major.
      */
-    public static boolean isValidAddress(String test) {
+    public static boolean isValidMajor(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
@@ -49,12 +49,12 @@ public class Address {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Address)) {
+        if (!(other instanceof Major)) {
             return false;
         }
 
-        Address otherAddress = (Address) other;
-        return value.equals(otherAddress.value);
+        Major otherMajor = (Major) other;
+        return value.equals(otherMajor.value);
     }
 
     @Override
