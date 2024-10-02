@@ -9,7 +9,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 ### Caleb Chong
-
 <img src="images/calebchongsj.png.jpg" width="200px">
 
 [[github](http://github.com/calebchongsj)]
@@ -21,24 +20,31 @@ mistake that may not align with the standard code practice.
 * Role: Code Quality by ensuring that the code adheres to the standard in CS2103T
 * Responsibilities: Storage, Logic and Main
 
-### John Doe
+### Ryan Lim
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ryenl.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[github](https://github.com/ryenl)]
 [[portfolio](team/johndoe.md)]
 
+* Role: Testing
+
+### Lucas Sam
+
+<img src="images/yikyak02.png" width="200px">
+
+[[github](http://github.com/yikyak02)]
+[[portfolio](./members/lucas.md)]
+
 * Role: Project Advisor
+### Qiao Bowen
 
-### Johnny Doe
+<img src="images/bbryant824.png" width="200px">
 
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/bbryant824)] [[portfolio](team/bowen.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: UI
 
 ### Jean Doe
 
