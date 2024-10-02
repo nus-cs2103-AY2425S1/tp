@@ -11,6 +11,18 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+
+### Tan Xin Quan
+
+<img src="images/xqtann.png" width="200px">
+
+[[homepage](http://www.comp.nus.edu.sg/~damithch)]
+[[github](http://github.com/xqtann)]
+[[portfolio](team/xinquan.md)]
+
+* Role: Integration Lead
+* Responsibilities: Ensure proper version control and every PR is reviewed thoroughly
+
 ### Isaac Teo
 
 <img src="images/itzxitzx.png" width="200px">
@@ -20,7 +32,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/isaac.md)]
 
 * Role: Team Lead
-* Responsibilities: 
+* Responsibilities: Responsible for overall project coordination.
+
 
 ### Jane Doe
 
@@ -50,13 +63,3 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
-
-### Isaac Teo
-
-<img src="images/itzxitzx.png" width="200px">
-
-[[github](http://github.com/itzxitzx)]
-[[portfolio](team/isaac.md)]
-
-* Role: Developer
-* Responsibilities: UI
