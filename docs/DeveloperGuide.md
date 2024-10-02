@@ -447,54 +447,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  The application should start up in under 3 seconds on a standard machine with Java 17 installed.
-5.  Command syntax should be consistent throughout the application to minimize the learning curve.
-6.  Users should be able to undo the previous command to correct mistakes.
-7.  The application should provide interactive help commands to assist users without referring to external documentation.
-8.  Users should be able to customize the CLI interface with different themes and fonts for a comfortable user experience.
-9.  Sensitive student data must be encrypted when stored locally to prevent unauthorized access.
-10. Automated backups should be encrypted to secure data during storage and transfer.
-11. Users should be able to run the application directly from the downloaded JAR file without an installer.
-12. The system should handle errors gracefully without crashing and provide meaningful error messages to the user.
-13. In the event of a failure or unexpected shutdown, the system should preserve data integrity and allow recovery to a stable state.
-14. The codebase should be modular to facilitate easy maintenance and future enhancements.
-15. The code should be well-documented with clear comments to assist future developers.
-16. The architecture should allow for the addition of new features without significant restructuring.
-17. The application should be fully operable via keyboard commands to accommodate fast typers.
-18. Customizable themes should include options for high contrast and font size adjustments for visual accessibility.
-19. The system should perform automated backups daily, with the option for users to initiate manual backups.
-20. The application should provide a smooth and intuitive user experience tailored for tech-savvy tutors.
-21. The system is optimized for single-user operation and does not need to handle multi-user access.
-22. The system should allow exporting and importing data in common formats (e.g., CSV) for interoperability with other tools.
-23. Configuration and data files should use standard formats to ensure compatibility with text editors and other applications.
-24. Updates to the application should be backward compatible with data from previous versions.
-25. The system should validate all user inputs to prevent errors and security vulnerabilities.
-26. The application should be optimized for low CPU and memory usage to run smoothly on standard hardware.
-27. The application should be reliable enough for continuous use during working hours without the need for frequent restarts.
-28. The application size should be minimal to facilitate easy distribution and storage.
-29. The application should be compatible with assistive technologies to accommodate users with disabilities.
+1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. The application should start up in under 3 seconds on a standard machine with Java 17 installed.
+5. Automated backups should be encrypted to secure data during storage and transfer. 
+6. Customizable themes should include options for high contrast and font size adjustments for visual accessibility. 
+7. The system is optimized for single-user operation and does not need to handle multi-user access.
+8. The application should be optimized for low CPU and memory usage to run smoothly on standard hardware.
+9. The application should be reliable enough for continuous use during working hours without the need for frequent restarts.
+10. The application size should be less than 50mb to facilitate easy distribution and storage.
 
 ### Glossary
 
+* **AB-3**: The code name for the AddressBook Level 3 application, which serves as the base framework for the student management system being developed.
+* **NUS SOC**: National University of Singapore, School of Computing. The application is designed for tutors within this institution to manage student progress effectively.
+* **Tutor**: The primary user of the application—an NUS School of Computing tutor responsible for tracking students' progress, attendance, and assignments.
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-* **API (Application Programming Interface)**: A set of rules that allow components of a system to communicate with each other.
 * **CLI (Command Line Interface)**: A text-based interface where users interact with the application by typing commands rather than using graphical elements like buttons.
 * **GUI (Graphical User Interface)**: A visual interface that allows users to interact with the application through graphical elements like windows, buttons, and menus.
-* **UI (User Interface)**: The component that handles interactions with the user, displaying information, and receiving user input.
-* **Interface**: An abstract type in Java that defines a set of method signatures without implementations, used for defining contracts in code.
-* **Commit**: The process of saving the current state of the system or data, typically before making changes.
 * **JSON (JavaScript Object Notation)**: A lightweight data format used for data storage and transmission, typically for configuration or file storage.
 * **Parser**: A component that interprets user commands and converts them into actions or objects that the system can process.
 * **MSS (Main Success Scenario)**: The primary sequence of steps in a use case where everything proceeds as expected without any errors.
 * **JAR File**: Java ARchive file; a package file format that bundles Java class files and associated metadata for distribution.
-* **Interoperability**: The ability of different systems or software applications to communicate and exchange data effectively.
-* **Backward Compatible**:  The property of a system that allows for interoperability with older legacy systems or data formats.
-* **ObservableList**: A list structure that allows listeners to be notified of changes, often used in data binding with UI elements.
-* **Asynchronous Operations**: Processes that occur independently of the main program flow, allowing the application to remain responsive.
 
 --------------------------------------------------------------------------------------------------------------------
 
