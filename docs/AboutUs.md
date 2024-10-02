@@ -11,6 +11,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Jerrell Lee
+
+<img src="images/jerrelllee.png" width="200px">
+
+[[github](https://github.com/jerrelllee)]
+[[portfolio](team/jerrelllee.md)]
+
+* Role: Developer
+* Responsibilities: 
+
 ### Ansel Chong
 
 <img src="images/ansel-ch.png" width="200px">
