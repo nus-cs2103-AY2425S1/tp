@@ -50,12 +50,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Kok Bo Chang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/c5hives.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/c5hives)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities:
+  * Documentation
+  * Code Quality
+  * In charge of Logic Component
