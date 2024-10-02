@@ -9,6 +9,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Saw Jing Wen
+
+<img src="images/sawjingwen.png" width="200px">
+
+[[homepage](https://jwen.cc)]
+[[github](https://github.com/shotnothing)]
+[[portfolio](https://jwen.cc)]
+
+* Role: Developer
+* Responsibilities: UI + DevOps
+
 ### John Doe
 
 <img src="images/johndoe.png" width="200px">
@@ -19,24 +30,24 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Jagdeep Singh Hundal
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jagdeepsinghnus.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/JagdeepSinghNUS)]
+[[portfolio](team/jagdeep.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Ensure proper code quality and standards are met in the source code
 
-### Johnny Doe
+### Wong Wei Han
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/weihanwong.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/weihanwong)] [[portfolio](team/weihanwong.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Data + DevSecOps
 
 ### Jean Doe
 
