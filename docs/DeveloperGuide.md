@@ -386,13 +386,13 @@ testers are expected to do more *exploratory* testing.
 Our product name.
 
 1. **CLI**  
-Command line interface. The text box presented to the user.
+The command line interface is a way to interact with a computer by typing text commands instead of using a mouse to click on icons.
 
 1. **Command Line**   
 A text box where you enter commands.
 
 1. **Flag**  
-In our context, a flag is something preceded by a /, but is not the initial command. e.g in `/add /n <name>`,  `/n` is a flag but `/view` is not.
+In our context, a flag is something preceded by a /, but is not the initial command. e.g in `add n/<name>`,  `n/` is a flag but `add` is not.
 
 1. **GUI**  
 Graphical user interface. The screen you see when opening the application.
@@ -401,7 +401,7 @@ Graphical user interface. The screen you see when opening the application.
 A programming language.
 
 1. **Parameter**  
-A value that you need to provide for the command to work. e.g in `/add /n <name>`, `<name>` is a parameter.
+A value that you need to provide for the command to work. e.g in `add n/<name>`, `<name>` is a parameter.
 
 1. **Windows**  
 An operating system.
