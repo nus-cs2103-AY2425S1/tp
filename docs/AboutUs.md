@@ -9,19 +9,19 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Nikhil Sultania
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/timenikhil.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/kimxw.md)]
+[[LinkedIn](www.linkedin.com/in/timenikhil)]
+[[github](https://github.com/Timenikhil)]
+[[portfolio](team/NikhilSultania.md)]
 
-* Role: Project Advisor
+* Role: Team Lead
 
-### Jane Doe
+### Theodore Lim
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/obrona.png" width="200px">
 
 [[github](http://github.com/johndoe)]
 [[portfolio](team/kimxw.md)]
@@ -29,11 +29,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Josh Thoo Jen Sen
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/joshthoo.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/kimxw.md)]
+[[github](http://github.com/joshthoo)] [[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Data
@@ -48,12 +48,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Team Lead
 
-### James Doe
+### Nathan Shew
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/nathanshew.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/kimxw.md)]
+[[github](http://github.com/nathanshew)]
+[[portfolio](team/nathanshew.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Project Management
