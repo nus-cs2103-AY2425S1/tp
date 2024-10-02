@@ -52,3 +52,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
   * Documentation
   * Code Quality
   * In charge of Logic Component
+
+### Kah Suan
+
+<img src="images/kahsuann.png" width="200px">
+
+[[github](http://github.com/kahsuann)]
+[[portfolio](team/kahsuann.md)]
+
+* Role: Developer
+* Responsibilities: Model
