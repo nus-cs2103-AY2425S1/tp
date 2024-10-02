@@ -14,7 +14,6 @@ public class Rsvp {
 
     public static final String MESSAGE_CONSTRAINTS =
             "RSVP Status should be 'PENDING', 'ACCEPTED' or 'DECLINED'";
-    private static final String[] RSVP_STATUS = {"PENDING", "ACCEPTED", "DECLINED"};
 
     /**
      * The first character of the address must not be a whitespace,
@@ -22,19 +21,21 @@ public class Rsvp {
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    private String rsvp;
+    private static final String[] RSVP_STATUS = {"PENDING", "ACCEPTED", "DECLINED"};
+
+    public final String value;
 
     /**
      * Constructs an {@code Rsvp} object with the specified RSVP status.
      *
      * @param rsvp A valid RSVP status.
-     * @throws NullPointerException if the given rsvp is null.
+     * @throws NullPointerException     if the given rsvp is null.
      * @throws IllegalArgumentException if the given rsvp is invalid.
      */
     public Rsvp(String rsvp) {
         requireNonNull(rsvp);
         checkArgument(isValidRsvp(rsvp), MESSAGE_CONSTRAINTS);
-        this.rsvp = rsvp.toUpperCase();
+        this.value = rsvp.toUpperCase();
     }
 
     /**
@@ -65,7 +66,7 @@ public class Rsvp {
      */
     @Override
     public String toString() {
-        return rsvp;
+        return value;
     }
 
     /**
@@ -86,7 +87,7 @@ public class Rsvp {
         }
 
         Rsvp otherName = (Rsvp) other;
-        return rsvp.equals(otherName.rsvp);
+        return value.equals(otherName.value);
     }
 
     /**
@@ -96,7 +97,7 @@ public class Rsvp {
      */
     @Override
     public int hashCode() {
-        return rsvp.hashCode();
+        return value.hashCode();
     }
 
 }

@@ -1,99 +1,101 @@
 package seedu.address.model.person;
 
 
-import org.junit.jupiter.api.Test;
-import seedu.address.testutil.PersonBuilder;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_RSVP_PENDING;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.testutil.TypicalGuests.AMY;
+import static seedu.address.testutil.TypicalGuests.BOB;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.logic.commands.CommandTestUtil.*;
-import static seedu.address.testutil.TypicalPersons.AVA;
-import static seedu.address.testutil.TypicalPersons.BRIAN;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.testutil.GuestBuilder;
 
 
 public class GuestTest {
-    private final Guest GUEST_AVA = (Guest) AVA;
-    private final Guest GUEST_BRIAN = (Guest) BRIAN;
 
     @Test
-    public void isSamePerson() {
+    public void isSameGuest() {
         // same object -> returns true
-        assertTrue(AVA.isSamePerson(AVA));
+        assertTrue(AMY.isSamePerson(AMY));
 
         // null -> returns false
-        assertFalse(AVA.isSamePerson(null));
+        assertFalse(AMY.isSamePerson(null));
 
         // same name, all other attributes different -> returns true
-        Person editedAlice = new PersonBuilder(AVA).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+        Guest editedAmy = new GuestBuilder(AMY).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(AVA.isSamePerson(editedAlice));
+        assertTrue(AMY.isSamePerson(editedAmy));
 
         // different name, all other attributes same -> returns false
-        editedAlice = new PersonBuilder(AVA).withName(VALID_NAME_BOB).build();
-        assertFalse(AVA.isSamePerson(editedAlice));
+        editedAmy = new GuestBuilder(AMY).withName(VALID_NAME_BOB).build();
+        assertFalse(AMY.isSamePerson(editedAmy));
 
         // name differs in case, all other attributes same -> returns false
-        Person editedBrian = new PersonBuilder(BRIAN).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BRIAN.isSamePerson(editedBrian));
+        Guest editedBob = new GuestBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
+        assertFalse(BOB.isSamePerson(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
-        editedBrian = new PersonBuilder(BRIAN).withName(nameWithTrailingSpaces).build();
-        assertFalse(BRIAN.isSamePerson(editedBrian));
-
-        // name has trailing spaces, all other attributes same -> returns false
-        editedBrian = new PersonBuilder(BRIAN).withRsvp(VALID_RSVP_ACCEPTED).build();
-        assertFalse(BRIAN.isSamePerson(editedBrian));
-        
+        editedBob = new GuestBuilder(BOB).withName(nameWithTrailingSpaces).build();
+        assertFalse(BOB.isSamePerson(editedBob));
     }
 
     @Test
     public void equals() {
         // same values -> returns true
-        Person aliceCopy = new PersonBuilder(AVA).build();
-        assertTrue(AVA.equals(aliceCopy));
+        Guest amyCopy = new GuestBuilder(AMY).build();
+        assertTrue(AMY.equals(amyCopy));
 
         // same object -> returns true
-        assertTrue(AVA.equals(AVA));
+        assertTrue(AMY.equals(AMY));
 
         // null -> returns false
-        assertFalse(AVA.equals(null));
+        assertFalse(AMY.equals(null));
 
         // different type -> returns false
-        assertFalse(AVA.equals(5));
+        assertFalse(AMY.equals(5));
 
-        // different person -> returns false
-        assertFalse(AVA.equals(BRIAN));
+        // different guest -> returns false
+        assertFalse(AMY.equals(BOB));
 
         // different name -> returns false
-        Person editedAlice = new PersonBuilder(AVA).withName(VALID_NAME_BOB).build();
-        assertFalse(AVA.equals(editedAlice));
+        Guest editedAmy = new GuestBuilder(AMY).withName(VALID_NAME_BOB).build();
+        assertFalse(AMY.equals(editedAmy));
 
         // different phone -> returns false
-        editedAlice = new PersonBuilder(AVA).withPhone(VALID_NAME_BOB).build();
-        assertFalse(AVA.equals(editedAlice));
+        editedAmy = new GuestBuilder(AMY).withPhone(VALID_PHONE_BOB).build();
+        assertFalse(AMY.equals(editedAmy));
 
         // different email -> returns false
-        editedAlice = new PersonBuilder(AVA).withEmail(VALID_NAME_BOB).build();
-        assertFalse(AVA.equals(editedAlice));
+        editedAmy = new GuestBuilder(AMY).withEmail(VALID_EMAIL_BOB).build();
+        assertFalse(AMY.equals(editedAmy));
 
         // different address -> returns false
-        editedAlice = new PersonBuilder(AVA).withAddress(VALID_NAME_BOB).build();
-        assertFalse(AVA.equals(editedAlice));
+        editedAmy = new GuestBuilder(AMY).withAddress(VALID_ADDRESS_BOB).build();
+        assertFalse(AMY.equals(editedAmy));
+
+        // different rsvp -> returns false
+        editedAmy = new GuestBuilder(AMY).withRsvp(VALID_RSVP_PENDING).build();
+        assertFalse(AMY.equals(editedAmy));
 
         // different tags -> returns false
-        editedAlice = new PersonBuilder(AVA).withTags(VALID_TAG_HUSBAND).build();
-        assertFalse(AVA.equals(editedAlice));
-
-        // different tags -> returns false
-        editedAlice = new PersonBuilder(AVA).withTags(VALID_RSVP_PENDING).build();
-        assertFalse(AVA.equals(editedAlice));
+        editedAmy = new GuestBuilder(AMY).withTags(VALID_TAG_HUSBAND).build();
+        assertFalse(AMY.equals(editedAmy));
     }
 
     @Test
     public void toStringMethod() {
-        String expected = Person.class.getCanonicalName() + "{name=" + AVA.getName() + ", phone=" + AVA.getPhone()
-                + ", email=" + AVA.getEmail() + ", address=" + AVA.getAddress() + ", tags=" + AVA.getTags() + "}";
-        assertEquals(expected, AVA.toString());
+        String expected = Guest.class.getCanonicalName() + "{name=" + AMY.getName() + ", phone=" + AMY.getPhone()
+                + ", email=" + AMY.getEmail() + ", address=" + AMY.getAddress() + ", tags=" + AMY.getTags() + ", RSVP="
+                + AMY.getRsvp() + "}";
+        assertEquals(expected, AMY.toString());
     }
 
 }

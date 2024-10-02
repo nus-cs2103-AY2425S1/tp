@@ -119,7 +119,7 @@ public class Guest extends Person {
     @Override
     public String toString() {
         return super.toStringBuilder()
-                .add("RSVP status", rsvp)
+                .add("RSVP", rsvp)
                 .toString();
     }
 

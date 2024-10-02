@@ -13,7 +13,6 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Guest;
-import seedu.address.model.person.Person;
 
 /**
  * Adds a person to the address book.
@@ -40,7 +39,7 @@ public class AddGuestCommand extends Command {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New guest added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This guest already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_GUEST = "This guest already exists in the address book";
 
     private final Guest toAdd;
 
@@ -57,7 +56,7 @@ public class AddGuestCommand extends Command {
         requireNonNull(model);
 
         if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_GUEST);
         }
 
         model.addPerson(toAdd);
