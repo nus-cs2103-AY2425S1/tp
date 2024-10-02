@@ -9,6 +9,15 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project team
 
+### Chen Yizhong
+
+<img src="images/yizhong187.png" width="200px">
+
+[[github](https://github.com/yizhong187)]
+[[portfolio](team/yizhong187.md)]
+
+* Role: Team Lead
+
 ### Casper Ng
 
 <img src="images/casperngeen.png" width="200px">
