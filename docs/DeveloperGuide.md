@@ -297,15 +297,19 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
-
+| Priority             | As a …​    | I want to …​                                                     | So that I can…​                                                   |
+|----------------------|------------|------------------------------------------------------------------|-------------------------------------------------------------------|
+| `* * *`              | HR Manager | View phone number of my employees/potential hire                 | I can easily contact them if required                             |
+| `* * *`              | HR Manager | Insert phone number of my employees/potential hire               | I can retrieve their phone number if required                     |
+| `* * *`              | HR Manager | View email addresses of employees/potential hire                 | I can contact them if its not an emergency                        |
+| `* * *`              | HR Manager | Insert phone number of my employees/potential hire               | I can retrieve their email address if required                    |
+| `* * *`              | HR Manager | Delete data through the UI                                       | I can delete users who are incorrectly added                      |
+| `* * *`              | HR Manager | View address of employees/potential hire                         | I can view the address of the user to decide where to deploy them |
+| `* *`                | New user   | Be shown some basic functions                                    | I can learn the basic functions of the product                    |
+| `* *`                | New user   | View the user guide easily                                       | I can learn more functions of the product whenever I want         |
+| `* *`                | New user   | Purge the sample data in the tutorial                            | I can input my own data to use                                    |
+| `*`                  | HR Manager | View the emergency contact details of employees                  | I can quickly respond in case of an emergency                     |
+| `*`                  | HR Manager | Sort the employee information by when their contract will expire | I can better plan out when to resign contracts                    |
 *{More to be added}*
 
 ### Use cases
