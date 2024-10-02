@@ -262,29 +262,62 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+A real estate agent who...
+* has a need to manage a significant number of client contacts
+* frequently needs to track client information, such as property preferences, deal statuses, and meetings
+* hopes to ensure smooth communication with clients by sending updates on listings, reminders for follow-ups, and managing appointments
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Using CLI to streamline management of client contacts and communications will make it more efficient than a typical mouse/GUI driven app
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​                   | I want to …​                                                                                               | So that I can…​                                                            |
+|--------|---------------------------|------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------|
+| `* * *` | new user                  | see usage instructions                                                                                     | refer to instructions when I forget how to use the App                     |
+| `* * *` | user                      | add a new client                                                                                           | keep track of their information                                            |
+| `* * *` | user                      | delete a client                                                                                            | remove entries that I no longer need                                       |
+| `* * *` | user                      | find a client by name                                                                                      | locate details of persons without having to go through the entire list     |
+| `* * *` | user                      | categorize clients as buyers, sellers and renters                                                          | easily filter and manage different client types                            |
+| `* * *` | user                      | filter contacts by tags (e.g. `Meeting Time`, `High` or `Low Priority`)                                    |                                                                            |
+| `* * *` | user                      | send bulk emails to groups of clients                                                                      | inform them of new property listing                                        |
+| `* * *` | user                      | view my contacts using commands                                                                            | track them better                                                          |
+| `* * *` | user                      | collect the name, contact number and email of my clients                                                   |                                                                            |
+| `* * *` | user                      | have a meeting schedule                                                                                    | keep track of future meetings                                              |
+| `* * * ` | user                      | tag clients with labels like `high priority` or `first time buyer`                                         | prioritise my outreach efforts                                             |
+| `* *`  | long-term user of the app | archive old client contacts                                                                                | my address book remains up-to-date without deleting past information       |
+| `* *`  | long-term user of the app | mark clients as `inactive` or `closed deal`                                                                | focus on active prospects                                                  |
+| `* *`  | user                      | hide private contact details                                                                               | minimize chance of someone else seeing them by accident                    |
+| `* *`  | user                      | store notes about clients' property preferences                                                            | tailor property recommendations to their needs                             |
+| `* *`  | user                      | set reminders for client follow-ups                                                                        | don't miss important communications                                        |
+| `* *`  | user                      | group clients by location preferences                                                                      | easily send property updates                                               |
+| `* *`  | user                      | track status of property deals for each client (e.g. `interested`, `offer made`, `contract signed`)        | stay organised                                                             |
+| `* *`  | long-term user of the app | log the last interaction date with the client                                                              | maintain regular communication                                             |
+| `* *`  | expert user               | export my contact list to Excel or CSV                                                                     | share it with colleagues or for reporting purposes                         |
+| `* *`  | expert user               | import contacts from my phone or other databases                                                           | quickly build by address book                                              |
+| `* *`  | user                      | add notes to client interactions                                                                           | capture important details discussed in meetings or phone calls             |
+| `* *`  | user                      | set a follow-up frequency for each client                                                                  | stay in regular contact                                                    |
+| `* *`  | user                      | track a client's viewing history                                                                           | know which client have been shown to which property                        |
+| `* *`  | user                      | filter clients by their buying timelines (e.g. immediate, next 5 months)                                   | focus on urgent leads                                                      |
+| `* *`  | user                      | set up reminders for key seller-related milestones (e.g. contract expiration, price reduction discussions) | never miss an important deadline                                           |
+| `* *`  | user                      | track client communication preferences                                                                     | engage them through their preferred channels                               |
+| `* *`  | user                      | generate a visual itmeline of a property's selling process                                                 | easily communicate progress to sellers                                     |
+| `* *`  | user                      | collect budget preference, neighbourhood preference and property of my buyer and seller                    |                                                                            |
+| `*`    | user                      | receive notifications when it's time to follow up with a client                                            | not forget                                                                 |
+| `*`    | user                      | assign a lead source to each client, e.g. referral, open house, website                                    | know where my business is coming from                                      |
+| `*`    | real estate agent         | schedule and track open house events                                                                       | ensure smooth operations and follow up with attendees                      |
+| `*`    | user                      | monitor competing listings in the same area                                                                | adjust pricing and marketing strategies accordingly                        |
+| `*`    | user                      | track commission details for each property sale                                                            | keep accurate financial records                                            |
+| `*`    | user                      | generate reports on the number of leads genrated per listing                                               | show sellers the interest their property is receiving                      |
+| `*`    | user                      | manage and log referral partner interactions (e.g. contractors, photographers)                             | maintain strong professional relationships                                 |
+| `*`    | user                      | send property performance updates to sellers (e.g. number of views, showings)                              | keep them informed and engaged                                             |
+| `*`    | user                      | track which clients were referre by past clients                                                           | send personalised appreciation messages and foster long-term relationships |
 
 ### Use cases
 
@@ -380,6 +413,35 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+### Non-Functional Requirements
+1. ABCLI should be a result of evolving/enhancing/morphing the given codebase.
+
+1. ABCLI should be targeting users who can type fast and prefer typing over other means of input.
+
+1. ABCLI should be for a single user.
+
+1. ABCLI needs to be developed in a breadth-first incremental manner over the project duration.
+
+1. ABCLI's data should be stored locally and should be in a human editable text file.
+
+1. ABCLI cannot use a DBMS to store data.
+
+1. ABCLI should follow the Object-oriented paradigm primarily.
+
+1. ABCLI should work on the Windows, Linux, and OS-X platforms.
+
+1. ABCLI should work on a computer that has version 17 of Java.
+
+1. ABCLI should work without requiring an installer.
+
+1. ABCLI should not depend on your own remote server.
+
+1. The use of third-party frameworks/libraries/services is allowed but only if they are free, open-source, and have permissive license terms and do not require any installation by users and do not violate other constraints.
+
+1. The GUI should work well for standard screen resolutions 1920x1080 and higher and for screen scales 100% and 125%. In addition, the GUI should be usable for resolutions 1280x720 and higher, and for screen scales 150%.
+
+1. ABCLI has to be packaged into a single JAR file.
 
 ### Glossary
 1. **ABCLI**  

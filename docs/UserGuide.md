@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+Address Book Command Line Interface (ABCLI) is a **desktop app made specially for Real Estate Agents to manage contacts and is optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you are a real estate agent and can type fast, ABCLI can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -14,15 +14,15 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F13-2/tp/releases/).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your application.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar abcli.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
@@ -35,7 +35,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -50,6 +50,9 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+
+* Items in angle brackets represent input choices.<br>
+    e.g `t/<buyer,seller>` can be used as `t/buyer` or as `t/seller` only.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -86,11 +89,33 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
+<div markdown="block" class="alert alert-info">:hourglass_flowing_sand: **Expected change in release v1.1**
+
+You will be able to add client specific details to the address book.
+
+Format: `add n/NAME c/CONTACT NUMBER e/EMAIL t/<buyer,seller>`
+
+Examples: 
+* `add n/kennylewi c/81234567 e/kennylewi@email.com t/buyer`
+* `add n/ngzixin t/seller e/ngzixin@email.com c/91234567`
+</div>
+
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
 
 Format: `list`
+
+<div markdown="block" class="alert alert-info">:hourglass_flowing_sand: **Expected change in release v1.1**
+
+You will be able to view all people or filter by your contact type in the address book.
+
+Format: `view [t/<buyer,seller>]`
+
+Examples:
+* `view t/buyer`
+* `view`
+</div>
 
 ### Editing a person : `edit`
 
@@ -166,10 +191,18 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Archiving data files `[coming in v2.0]`
+### Meet up `[coming in v1.1]`
+<div markdown="block" class="alert alert-info">:hourglass_flowing_sand: **Expected feature in release v1.1**
 
-_Details coming soon ..._
+You will be able to schedule a meet-up event with your contacts.
 
+Format: `meetup n/NAME i/INFO`
+
+Examples:
+* `meetup n/kennylewi i/Property viewing on saturday`
+</div>
+
+<br>_More features coming soon ..._
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
