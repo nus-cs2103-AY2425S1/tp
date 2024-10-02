@@ -50,12 +50,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Zhou Zibo
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/zzibo.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+Zibo, Y2 CS undergraduate
+
+[[github](http://github.com/zzibo)]
+[[portfolio](team/zibo.md)]
 
 * Role: Developer
 * Responsibilities: UI
