@@ -293,28 +293,81 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `ClientHub` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a new client's contact details**
 
 **MSS**
-
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User inputs `add n/<NAME> p/<PHONE_NUMBER> c/<CLIENT_TYPE> e/<EMAIL> [a/ADDRESS] [d/DESCRIPTION]`
+2. ClientHub shows successful output message
+3. ClientHub saves the client's information to the list of clients
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. Invalid input format
 
-  Use case ends.
+  * 1a1. ClientHub shows an error message and shows the correct format for the wrong input
+    
+      Use case ends.
+  
+* 1b.Missing fields
 
-* 3a. The given index is invalid.
+  * 1b1. ClientHub shows an error message informing user that required field(s) are missing
 
-    * 3a1. AddressBook shows an error message.
+      Use case ends.
 
-      Use case resumes at step 2.
+* 1c. Duplicate handling
+
+  * 1c1. ClientHub informs user that there is more than one contact with the same name and prompts for confirmation
+  
+  * 1c2. User inputs y/n 
+  
+    Use case resumes at step 2 if user input is y, else use case ends.
+
+**Use case: Delete a person**
+
+**MSS**
+
+1. User inputs `delete <NAME>`
+2. ClientHub deletes the person 
+3. ClientHub shows successful output message
+4. ClientHub saves the changes to the file
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given input is invalid
+
+    * 1a1. ClientHub shows an error message that the input is in the wrong format
+
+      Use case ends.
+  
+* 1b. Input name is not found in the list.
+    
+    * 1b1. ClientHub shows an error message that the name is not in the list
+
+        Use case ends.
+
+* 1c. Duplicate handling
+
+    * 1c1. ClientHub informs the user that there is more than one contact with the same name and informs user to input the full name of the client
+
+        Use case ends.
+  
+**Use case: List contacts**
+
+**MSS**
+1. User inputs `list` 
+2. ClientHub shows the list of all contacts saved
+
+**Extensions**
+
+* 1a. Invalid input command
+  
+  * 1a1. ClientHub shows an error message 
+  
+    Use case ends.
 
 *{More to be added}*
 
