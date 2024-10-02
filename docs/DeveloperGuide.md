@@ -297,7 +297,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to add a contact
     ```
-    > /add /n Kori Sendra /c 91234567 /e kori_sendra@gmail.com /t buyer
+    add n/Kori Sendra c/91234567 e/kori_sendra@gmail.com t/buyer
     ```
 2.  ABCLI adds the person
 3.  ABCLI shows a success message
@@ -318,7 +318,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2a1. ABCLI shows an error message
     ```
-    Invalid /add command format!
+    Invalid add command format!
     ```
 
     * Use case ends.
@@ -332,7 +332,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to list contacts
     ```
-    /view
+    view
     ```
 2.  ABCLI shows the list of contacts on its interface
     ```
@@ -340,7 +340,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     ```
 3.  User requests to delete a specific contact
     ```
-    /delete 1
+    delete 1
     ```
 4.  ABCLI deletes the contact
 5.  ABCLI shows a success message
@@ -382,7 +382,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 1.  User requests to add a meetup
     ```
-    /meetup /n Adams Apple /i Meeting with Adams Apple at 12pm on Saturday at Marina Bay Sands VIP Lounge.
+    meetup n/Adams Apple i/Meeting with Adams Apple at 12pm on Saturday at Marina Bay Sands VIP Lounge.
     ```
 2.  ABCLI adds the meetup
 3.  ABCLI shows a success message
@@ -408,13 +408,57 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - 3a. The command is missing a flag
   - 3a1. ABCLI shows an error message
     ```
-    No /i or /n flag is provided!
+    No i/ or n/ flag is provided!
     You need provide the missing flags.
     ```
   - Use case ends
 </details>
 
+<details>
+    <summary><b>Use Case 4: Viewing contacts</b></summary>
 
+**MSS**
+1.  User requests to view all contacts
+    ```
+    view
+    ```
+2.  ABCLI shows the list of contacts on its interface
+    ```
+    1) Name: John Doe, Contact Number: 94738334, Email: johndoezzz@gmail.com, Type: Seller
+    2) Name: Jamer Boliver, Contact Number: 91111111, Email: boliverman@gmail.com, Type: Buyer
+    ```
+    
+- Use case ends
+
+**Extensions**
+- 2a. Viewing buyer and seller contacts
+
+    - 2a1. User requests to view buyer contacts
+      ```
+      view t/buyer
+      ```
+    - 2a2. ABCLI shows the list of contacts of buyers on its interface
+      ```
+      1) Name: Jamer Boliver, Contact Number: 91111111, Email: boliverman@gmail.com, Type: Buyer
+      ```
+    - 2a3. User requests to view seller contacts
+      ```
+      view t/seller
+      ```
+    - 2a4. ABCLI shows the list of contacts of sellers on its interface
+      ```
+      1) Name: John Doe, Contact Number: 94738334, Email: johndoezzz@gmail.com, Type: Seller
+      ```
+    - Use case ends
+- 3a. t/ flag has invalid contact type
+    - 3a1. ABCLI shows an error message
+      ```
+      Invalid contact type!
+      Please indicate only buyer or seller.
+      ```
+    - Use case ends
+
+</details>
 
 
 
