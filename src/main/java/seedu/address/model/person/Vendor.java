@@ -1,10 +1,9 @@
 package seedu.address.model.person;
 
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
-
 import java.util.Objects;
 import java.util.Set;
+
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Vendor in the address book.
@@ -20,12 +19,12 @@ public class Vendor extends Person {
      * Constructs a {@code Vendor} with the specified details.
      * Every field must be present and not null.
      *
-     * @param name Name of the vendor.
+     * @param name    Name of the vendor.
      * @param company Company associated with the vendor.
-     * @param phone Phone number of the vendor.
-     * @param email Email address of the vendor.
+     * @param phone   Phone number of the vendor.
+     * @param email   Email address of the vendor.
      * @param address Residential or business address of the vendor.
-     * @param tags Tags associated with the vendor.
+     * @param tags    Tags associated with the vendor.
      */
     public Vendor(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Company company) {
         super(name, phone, email, address, tags);

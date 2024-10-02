@@ -117,12 +117,11 @@ public class PersonBuilder {
         return this;
     }
 
-    public PersonBuilder withRsvp(String rsvp) {
-        this.rsvp = new Rsvp(rsvp);
-        this.isVendor = false;
-        return this;
-    }
-
+    /**
+     * Builds and returns a {@code Person} object based on the current state of the builder.
+     *
+     * @return A {@code Person} object, which will either be a {@code Guest} or a {@code Vendor}.
+     */
     public Person build() {
         if (!isVendor) {
             return new Guest(name, phone, email, address, tags, rsvp);

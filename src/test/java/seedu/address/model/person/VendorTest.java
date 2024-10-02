@@ -1,17 +1,25 @@
 package seedu.address.model.person;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.testutil.PersonBuilder;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import org.junit.jupiter.api.Test;
+
+import seedu.address.testutil.PersonBuilder;
+
 public class VendorTest {
-    private final Vendor VENDOR_ALICE = (Vendor) ALICE;
-    private final Vendor VENDOR_BOB = (Vendor) BOB;
+    private static final Vendor VENDOR_ALICE = (Vendor) ALICE;
+    private static final Vendor VENDOR_BOB = (Vendor) BOB;
 
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
@@ -94,7 +102,7 @@ public class VendorTest {
         String expected = Person.class.getCanonicalName() + "{name=" + VENDOR_ALICE.getName() + ", phone="
                 + VENDOR_ALICE.getPhone() + ", email=" + VENDOR_ALICE.getEmail() + ", address="
                 + VENDOR_ALICE.getAddress() + ", tags=" + VENDOR_ALICE.getTags() + ", company="
-                + VENDOR_ALICE.getCompany() +"}";
+                + VENDOR_ALICE.getCompany() + "}";
         assertEquals(expected, VENDOR_ALICE.toString());
     }
 }
