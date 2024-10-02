@@ -294,14 +294,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to add a new person by entering a command.
+1.  Actor requests to add a new person by entering a command.
 2.  System displays a success message along with the details of the newly added person.
 
     Use case ends.
 
 **Extensions**
 
-- 1a. There is an error in the user's command.
+- 1a. There is an error in the Actor's command.
   - 1a1 System shows an error message.
 
   Use case resumes at step 1.
