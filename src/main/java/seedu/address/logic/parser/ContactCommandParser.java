@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteContactCommand;
+import seedu.address.logic.commands.ListContactCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 
@@ -29,6 +30,8 @@ public class ContactCommandParser implements Parser<Command> {
         switch (subCommand) {
         case DeleteContactCommand.SUB_COMMAND_WORD:
             return new DeleteContactCommandParser().parse(subArguments);
+        case ListContactCommand.SUB_COMMAND_WORD:
+            return new ListContactCommand();
         // Future sub-commands like add, edit can be handled here
         default:
             throw new ParseException("Unknown contact sub-command: " + subCommand);
