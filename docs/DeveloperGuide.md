@@ -287,7 +287,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * is reasonably comfortable using CLI apps
 
 **Value proposition**: 
-* manage a significant number of employees and potential hires faster than a typical mouse/GUI driven app
+* manage a significant number of employees and potential hires faster than a typical mouse/_GUI_ driven app
 * find details about an employee or potential hire faster than a spreadsheet
 * matches potential hires with available job openings faster than a spreadsheet
 * for organizations seeking to manage employees and potential hires, our application offers a more specialized solution than an address book application
@@ -423,6 +423,7 @@ Use case ends.
 
 ### Glossary
 
+* **GUI**: Graphical User Interface - User interface which allows users interact with the application through components such as icons, buttons and menus
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **MVP**: Minimum Viable Product - The minimum set of features that is required to make the product usable by the target user
