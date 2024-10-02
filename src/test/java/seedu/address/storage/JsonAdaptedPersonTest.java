@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.BENSON;
@@ -13,12 +14,14 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.ClassId;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Fees;
+import seedu.address.model.person.MonthsPaid;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 
 public class JsonAdaptedPersonTest {
-    // TODO add tests for invalid class_id, fees, months_paid
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
@@ -125,6 +128,69 @@ public class JsonAdaptedPersonTest {
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_FEES,
                         VALID_CLASS_ID, VALID_MONTHS_PAID, invalidTags);
         assertThrows(IllegalValueException.class, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullFees_success() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, null, VALID_CLASS_ID,
+                        VALID_MONTHS_PAID, VALID_TAGS);
+        try {
+            assert person.toModelType().getFees().value.isEmpty();
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void toModelType_invalidFees_throwsIllegalValueException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, INVALID_FEES, VALID_CLASS_ID,
+                        VALID_MONTHS_PAID, VALID_TAGS);
+        String expectedMessage = Fees.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullClassId_success() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_FEES, null,
+                        VALID_MONTHS_PAID, VALID_TAGS);
+        try {
+            assert person.toModelType().getClassId().value.isEmpty();
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void toModelType_invalidClassId_throwsIllegalValueException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_FEES, INVALID_CLASS_ID,
+                        VALID_MONTHS_PAID, VALID_TAGS);
+        String expectedMessage = ClassId.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullMonthsPaid_success() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_FEES, VALID_CLASS_ID,
+                        null, VALID_TAGS);
+        try {
+            assert person.toModelType().getMonthsPaid().value.isEmpty();
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void toModelType_invalidMonthsPaid_throwsIllegalValueException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_FEES, VALID_CLASS_ID,
+                        INVALID_MONTHS_PAID, VALID_TAGS);
+        String expectedMessage = MonthsPaid.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
 }

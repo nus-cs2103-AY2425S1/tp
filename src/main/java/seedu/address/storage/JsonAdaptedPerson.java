@@ -127,29 +127,19 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        // Check fees TODO
-        if (fees == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Fees.class.getSimpleName()));
-        }
+        // Check fees
         if (!Fees.isValidFees(fees)) {
-            throw new IllegalValueException(ClassId.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Fees.MESSAGE_CONSTRAINTS);
         }
         final Fees modelFees = new Fees(fees);
 
-        // Check classId TODO
-        if (classId == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ClassId.class.getSimpleName()));
-        }
+        // Check classId
         if (!ClassId.isValidClassId(classId)) {
             throw new IllegalValueException(ClassId.MESSAGE_CONSTRAINTS);
         }
         final ClassId modelClassId = new ClassId(classId);
 
-        // Check monthsPaid TODO
-        if (monthsPaid == null) {
-            throw new IllegalValueException(String.format(
-                    MISSING_FIELD_MESSAGE_FORMAT, MonthsPaid.class.getSimpleName()));
-        }
+        // Check monthsPaid
         if (!MonthsPaid.isValidMonthsPaid(monthsPaid)) {
             throw new IllegalValueException(MonthsPaid.MESSAGE_CONSTRAINTS);
         }

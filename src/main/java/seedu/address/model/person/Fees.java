@@ -8,15 +8,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Fees {
 
-
     public static final String MESSAGE_CONSTRAINTS =
-            "Fees should only contain numbers, and it should be at least 1 digit long.";
+            "Fees should be a positive integer, only contain numbers, and should be at least 1 digit long.";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "\\d{1,}";
+    public static final String VALIDATION_REGEX = "^\\d{1,}$";
     public final String value;
 
     /**
