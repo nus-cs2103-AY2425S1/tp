@@ -400,3 +400,10 @@ In addition, the GUI should be usable for resolutions 1280x720 and higher, and f
 14. Everything has to be packaged into a single JAR file.
 
 ### Glossary
+1. **ABCLI** - our product name
+1. **GUI** - graphical user interface. The screen you see when opening the application.
+1. **CLI** - command line interface. the text box presented to the user.
+1. **Command Line** - a text box where you enter commands
+1. **Java** - a programming language
+1. **Parameter** - a value that you need to provide for the command to work. e.g in /add <name>, <name> is a parameter.
+1. **Windows** - an operation system
