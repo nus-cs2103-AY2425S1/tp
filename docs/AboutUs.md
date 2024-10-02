@@ -19,12 +19,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Jagdeep Singh Hundal
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jagdeepsinghnus.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/JagdeepSinghNUS)]
+[[portfolio](team/jagdeep.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
