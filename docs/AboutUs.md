@@ -9,57 +9,9 @@ We are a team based in the [School of Computing, National University of Singapor
 
 You can reach us at the email `seer[at]comp.nus.edu.sg`
 
-## Project team
+[[About Us](https://ay2425s1-cs2103t-f10-3.github.io/tp/)]
 
-### John Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/triishaa)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/triishaa)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/triishaa)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/triishaa)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/triishaa)]
-
-* Role: Developer
-* Responsibilities: UI
-
+## NUStates
 
 ### Trisha Patodia
 
@@ -68,5 +20,49 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/triishaa)]
 [[portfolio](team/triishaa.md)]
 
-* Role: Developer
+* Role: Documentation
 * Responsibilities: Responsible for the quality of various project documents.
+
+
+### Low Wei Bin
+
+<img src="images/orangecatloves.png" width="200px">
+
+[[github](http://github.com/orangecatloves)] [[portfolio](team/orangecatloves.md)]
+
+* Role: Code-Quality
+* Responsibilities: Ensures that coding quality is adhered and up to standard for every pull-request
+
+### Dylan Wong
+
+<img src="images/potatoad88.png" width="200px">
+
+[[homepage](http://www.comp.nus.edu.sg/~damithch)]
+[[github](https://github.com/Potatoad88)]
+[[portfolio](team/dylan)]
+
+* Role: Testing
+* Responsibilities: Ensure testing is done properly and on time
+
+
+### Tan Xin Quan
+
+<img src="images/xqtann.png" width="200px">
+
+[[homepage](http://www.comp.nus.edu.sg/~damithch)]
+[[github](http://github.com/xqtann)]
+[[portfolio](team/xinquan.md)]
+
+* Role: Integration Lead
+* Responsibilities: Ensure proper version control and every PR is reviewed thoroughly
+
+### Isaac Teo
+
+<img src="images/itzxitzx.png" width="200px">
+
+[[homepage](http://www.comp.nus.edu.sg/~damithch)]
+[[github](https://github.com/itzxitzx)]
+[[portfolio](team/isaac.md)]
+
+* Role: Team Lead
+* Responsibilities: Responsible for overall project coordination.
