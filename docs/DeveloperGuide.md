@@ -285,6 +285,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | computing student                    | be able to save the contact's Github username                        |                                                   |
 | `* * *`  | user trying to make connections      | be able to label a contact as a "follow-up"                          | remember to contact them                          |  
 | `* * *`  | student looking for an internship    | have a feature to rank the priority of my contacts                   | focus more on internships with a higher chance    |
+| `* * *`  | student trying to make connections   | have a feature to add potential meeting date with my contact         | keep track of my schedule                         | 
 | `* *`    | user trying to make connections      | be able to tag the contacts by association                           | know how I met them                               |
 | `* *`    | user trying to make connections      | be able to assign the current connection (eg. connected on LinkedIn) | know how close I am to each contact               |
 | `* *`    | user                                 | be able to mark each action (e.g. connected on LinkedIn) with a date | keep track of these details                       |
