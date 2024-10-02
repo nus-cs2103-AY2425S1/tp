@@ -16,7 +16,7 @@ ResearchRoster is a desktop application designed for researchers managing large 
 - [ ] Exit the application
 
 
-## Additional Information  
+## Additional Information
 * The project simulates an ongoing software project for a desktop application used for managing contact details.
 * It is written in OOP fashion. It provides a reasonably well-written code base bigger (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
   * It comes with a reasonable level of user and developer documentation.
