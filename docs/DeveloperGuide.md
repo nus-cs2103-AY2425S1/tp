@@ -347,7 +347,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   * 1a1. ContactCS requests the user to provide the required information
   * 1a2. User enters new data
-  * Steps 2a1 - 2a2 are repeated until the data entered are correct
+  * Steps 1a1 - 1a2 are repeated until the data entered are correct
         
     Use case resumes from step 2.
 
@@ -371,7 +371,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to search for a contact by inputting either:
+1.  User requests to search for a contact by inputting exactly one of them:
      * The name of the contact,
      * The module code (optionally including the role), or
      * The category of the issue
@@ -405,7 +405,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list the contacts or [search (UC02)](#uc02) for a contact
+1.  User requests to list the contacts or [search (UC02)](#uc02) for contact(s)
 2.  ContactCS shows a list of contacts
 3.  User requests to delete a specific person in the list
 4.  ContactCS deletes the person
@@ -495,7 +495,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 4.
 
-**Use case: UC06 Mark frequently used contacts**
+**Use case: UC06 Unmark frequently used contacts**
 
 **MSS**
 
@@ -597,51 +597,49 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User performs an action in ContactCS
-2.  User requests to undo the last action
-3.  ContactCS reverts to the state before the last action
+1. User requests to undo the last action
+2. ContactCS reverts to the state before the last action
 
     Use case ends.
 
 **Extensions**
 
-* 2a. No action has been performed yet.
-    * 2a1. ContactCS shows an error message indicating that there is no action to undo
+* 1a. No action has been performed yet.
+    * 1a1. ContactCS shows an error message indicating that there is no action to undo
 
       Use case ends.
 
-* 2b. The given format is invalid.
+* 1b. The given format is invalid.
 
-    * 2b1. ContactCS requests the user to provide the correct format and shows the valid command format
-    * 2b2. User enters new input
-    * Steps 2b1 - 2b2 are repeated until the format of the entered input is correct
+    * 1b1. ContactCS requests the user to provide the correct format and shows the valid command format
+    * 1b2. User enters new input
+    * Steps 1b1 - 1b2 are repeated until the format of the entered input is correct
 
-      Use case resumes from step 3.
+      Use case resumes from step 2.
 
 **Use case: UC11 Redo actions**
 
 **MSS**
 
-1. User performs an [undo (UC10)](#uc10) action
-2. User requests a redo
-3. ContactCS reapplies the last undone action
+1. User requests a redo
+2. ContactCS reapplies the last undone action
 
     Use case ends.
 
 **Extensions**
 
-* 2a. User tries to redo an action without having undone one first.
-    * 2a1. ContactCS shows an error message indicating that there is no action to redo
+* 1a. User tries to redo an action without having undone one first.
+    * 1a1. ContactCS shows an error message indicating that there is no action to redo
 
         Use case ends.
 
-* 2b. The given format is invalid.
+* 1b. The given format is invalid.
 
-    * 2b1. ContactCS requests the user to provide the correct format and shows the valid command format
-    * 2b2. User enters new input
-    * Steps 2b1 - 2b2 are repeated until the format of the entered input is correct
+    * 1b1. ContactCS requests the user to provide the correct format and shows the valid command format
+    * 1b2. User enters new input
+    * Steps 1b1 - 1b2 are repeated until the format of the entered input is correct
 
-      Use case resumes from step 3.
+      Use case resumes from step 2.
 
 *{More to be added}*
 
