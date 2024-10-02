@@ -5,11 +5,11 @@
 
 * Teacher's pet is **an application for NUS teaching students to handle their students information**.<br>
   Example usages:
-  * As a tutor I can use this application to efficiently handle the information of my students. 
-  * When a tutor arrives to class, they can start this application to view all their students' information. 
-  * Tutors can add, delete, list, filter and edit their students information to effectively handle their students admin details. 
+  * As a tutor I can use this application to efficiently handle the information of my students.
+  * * When a tutor arrives to class, they can start this application to view all their students' information.
+  * Tutors can add, delete, list, filter and edit their students information to effectively handle their students admin details.
 * The project builds on an ongoing software project for a desktop application (called _AddressBook_) used for managing contact details.
-  * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC).
+* * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC).
   * It comes with a **reasonable level of user and developer documentation**.
 * It is named `Teacher's pet` (`TP` for short) because it will aid teachers as one would expect from a "teacher's pet".
 * It was initially created as a part of a series of `AddressBook` projects (`Level 1`, `Level 2`, `Level 3` ...).
