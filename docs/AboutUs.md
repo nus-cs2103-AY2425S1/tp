@@ -12,6 +12,18 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 ## Project team
 
 
+### Dylan Wong
+
+<img src="images/potatoad88.png" width="200px">
+
+[[homepage](http://www.comp.nus.edu.sg/~damithch)]
+[[github](https://github.com/Potatoad88)]
+[[portfolio](team/dylan)]
+
+* Role: Testing
+* Responsibilities: Ensure testing is done properly and on time
+
+
 ### Tan Xin Quan
 
 <img src="images/xqtann.png" width="200px">
@@ -33,33 +45,3 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Team Lead
 * Responsibilities: Responsible for overall project coordination.
-
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
