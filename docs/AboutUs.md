@@ -18,3 +18,20 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Integration
 
+### Ian Cheah
+
+<img src="images/iancheah.png" width="200px">
+
+[[github](http://github.com/IanCheah)]
+[[portfolio](team/johndoe.md)]
+
+* Role: team member
+
+### Liu Yinze
+
+<img src="images/yinze66.png" width="200px">
+
+[[github](http://github.com/yinze66)] [[portfolio](team/yinze66.md)]
+
+* Role: Deliverables and deadlines
+* Responsibilities: Data
