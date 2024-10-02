@@ -37,11 +37,18 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: UI
 
+### Adrian Tan
+
+<img src="images/adriantan101.png" width="200px">
+
+[[github](http://github.com/adriantan101)] [[portfolio](team/adriantan.md)]
+
 ### Chong Wei Jin
 
 <img src="images/cweijin.png" width="200px">
 
 [[github](https://github.com/cweijin)] [[portfolio](team/johndoe.md)]
+
 
 * Role: Developer
 * Responsibilities: Data
