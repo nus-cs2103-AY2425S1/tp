@@ -4,7 +4,7 @@ ConTActs is a product catered to NUS CS Teaching Assistants(TAs) to allow of eas
 * Good for CS TAs since it is favours those adept at CLI.
 ![Ui](docs/images/Ui.png)
 
-## Features ![User Guide](https://AY2425S1-CS2103T-T10-3.github.io/tp)
+## Features ([User Guide](https://AY2425S1-CS2103T-T10-3.github.io/tp))
 1. Add 
 2. Remove 
 3. List 
