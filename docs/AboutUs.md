@@ -9,15 +9,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Tan Xin Quan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/xqtann.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/xqtann)]
+[[portfolio](team/xinquan.md)]
 
-* Role: Project Advisor
+* Role: Integration Lead
+* Responsibilities: Ensure proper version control and every PR is reviewed thoroughly
 
 ### Jane Doe
 
@@ -38,12 +39,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Tan Xin Quan
+### Jean Doe
 
-<img src="images/xqtann.png" width="200px">
+<img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/xqtann)]
-[[portfolio](team/xinquan.md)]
+[[github](http://github.com/johndoe)]
+[[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
