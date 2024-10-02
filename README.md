@@ -10,4 +10,4 @@
   * It is **written in OOP fashion**.
 * It is named `PhysioPal` because it was created to allow physiotherapists with a large client base to manage client information efficiently.
 * For the detailed documentation of this project, see the **[PhysioPal Product Website](https://ay2425s1-cs2103t-w11-4.github.io/tp/)**.
-
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
