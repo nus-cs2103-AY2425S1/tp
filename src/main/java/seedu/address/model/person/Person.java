@@ -20,6 +20,7 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    public static final Tag DEFAULT_TAG_PENDING = new Tag("pending");
 
     // Data fields
     private final Address address;
@@ -35,7 +36,7 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.tags.add(new Tag("pending"));
+        this.tags.add(DEFAULT_TAG_PENDING);
     }
 
     public Name getName() {
