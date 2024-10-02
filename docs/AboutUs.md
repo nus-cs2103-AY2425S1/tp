@@ -34,7 +34,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/raageth.png" width="200px">
 
 [[github](http://github.com/raageth)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/raageth.md)]
 
 * Role: Developer
 * Responsibilities: Data
