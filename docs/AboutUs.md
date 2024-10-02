@@ -35,7 +35,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/justin-yeo.png.png" width="200px">
 
-[[github](http://github.com/Justin-Yeo)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/Justin-Yeo)] [[portfolio](team/justinyeo.md)]
 
 * Role: Developer
 * Responsibilities: 
