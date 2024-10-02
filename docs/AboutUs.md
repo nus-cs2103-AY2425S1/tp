@@ -57,3 +57,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: UI
+
+### Shaun Lee
+
+<img src="images/hoodini231.png" width="200px">
+
+[[github](http://github.com/hoodini231)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Back-end Developer
+* Responsibilities: Database
