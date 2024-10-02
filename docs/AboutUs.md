@@ -28,7 +28,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/Shux347)]
 [[portfolio](team/varun.md)]
 
-* Role: Product Manager
+* Role: Project Manager
 * Responsibilities: Scheduling and tracking, Deliverables and deadlines
 
 ### Erwin Soh
