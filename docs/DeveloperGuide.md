@@ -275,14 +275,32 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                              | I want to …​                                                           | So that I can…​                                    |
+| -------- | ------------------------------------ | -------------------------------------------------------------------- | ------------------------------------------------- |
+| `* * *`  | computer science student             | have a CLI                                                           | navigate around the app easier                    |
+| `* * *`  | school of computing student          | have an option of adding new contacts quickly                        | quickyl track people while socializing            |
+| `* * *`  | user                                 | be able to edit contact information                                  | so that I can change lines quickly                |
+| `* * *`  | user                                 | be able to delete contacts                                           |                                                   |
+| `* * *`  | first time user                      | have a user guide for the app                                        | navigate around easily                            |
+| `* * *`  | computing student                    | be able to save the contact's Github username                        |                                                   |
+| `* * *`  | user trying to make connections      | be able to label a contact as a "follow-up"                          | remember to contact them                          |  
+| `* * *`  | student looking for an internship    | have a feature to rank the priority of my contacts                   | focus more on internships with a higher chance    |
+| `* *`    | user trying to make connections      | be able to tag the contacts by association                           | know how I met them                               |
+| `* *`    | user trying to make connections      | be able to assign the current connection (eg. connected on LinkedIn) | know how close I am to each contact               |
+| `* *`    | user                                 | be able to mark each action (e.g. connected on LinkedIn) with a date | keep track of these details                       |
+| `* *`    | user                                 | be able to filter my contact list by association                     |                                                   |
+| `* *`    | user                                 | be able to filter my contact list by current stage                   |                                                   |
+| `* *`    | user                                 | be able to filter my contact list by last action date                |                                                   |
+| `*`      | student                              | be able to create contacts with empty fields                         | remember people who I am starting to get to know  |
+| `*`      | frequent user                        | be able to change my default sort                                    | keep my preferred sort                            |
+| `*`      | user                                 | be able to use CLI to open up a new window                           | show all details for a given contact              |
+| `*`      | user                                 | be able to archive all my current contacts                           | save less-contacted                               |
+| `*`      | lazy user                            | use short commands                                                   | obtain results quicker                            |
+| `*`      | user who is not strong at connecting | get prompted for potential actions                                   | connect with my contacts easier                   |
+| `*`      | user looking to expand my network    | be able to view other student's email                                | contact them                                      |
+| `*`      | student looking for an internship    | be able to set reminders                                             | remember to follow up with people I meet          |
+| `*`      | advanced user                        | have a visualisation of my connections progress                      | have a gauge of my network connections            |
+
 
 *{More to be added}*
 
