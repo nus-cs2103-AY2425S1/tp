@@ -1,6 +1,10 @@
 package seedu.address.model.person;
 
-public class EmergencyContact extends Phone{
+/**
+ * Represents a Person's emergency contact number in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
+ */
+public class EmergencyContact extends Phone {
     /**
      * Constructs a {@code EmergencyContact}.
      *

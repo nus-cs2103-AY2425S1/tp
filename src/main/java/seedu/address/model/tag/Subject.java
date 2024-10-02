@@ -4,8 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.EnumUtil.inEnum;
 
-import seedu.address.commons.util.EnumUtil;
-
 /**
  * Represents a Subject in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidSubjectName(String)}
