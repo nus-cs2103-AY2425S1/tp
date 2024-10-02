@@ -1,9 +1,11 @@
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-F08-2/tp/actions)
 [![codecov](https://codecov.io/gh/AY2425S1-CS2103-F08-2/tp/graph/badge.svg?token=CW6C84Z7R4)](https://codecov.io/gh/AY2425S1-CS2103-F08-2/tp)
 
+
 ![Ui](docs/images/Ui.png)
 # ResearchRoster
 ResearchRoster is a desktop application designed for researchers managing large groups of study participants. ResearchRoster allows for all participants' details to be consolidated and kept track of in a single program. It is optimized for research studies as it allows researches to efficiently consolidate contacts based on specific experimental criteria, and export it to an easy-to-read format for better data organization.
+
 
 
 ## Features
