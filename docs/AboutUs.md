@@ -40,7 +40,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Prisha V Prakash
 
-<img src="images/prisha.png" width="200px">
+<img src="images/prishavp.png" width="200px">
 
 [[github](http://github.com/PrishaVP)]
 [[portfolio](team/prisha.md)]
