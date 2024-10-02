@@ -323,18 +323,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `Dream Day Designer` and the **Actor** is the `Wedding planner`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Delete a contact from the address book**
+
+Name: UC02 - Delete Contact
 
 **MSS**
-
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
-
-    Use case ends.
+1. Wedding planner requests to list all contacts. 
+2. System displays a list of contacts. 
+3. Wedding planner specifies which contact he wishes to delete. 
+4. System requests for confirmation. 
+5. Wedding planner confirms the deletion of contact. 
+6. System displays a message for the successful deletion of contact.
+   
+   Use case ends.
 
 **Extensions**
 
@@ -342,13 +345,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 3a. System is unable to locate the contact to be deleted.
 
-    * 3a1. AddressBook shows an error message.
+  * 3a1. System displays an error message.
+    
+    Use case ends.
+  
+* 4a. The wedding planner chooses to abort the deletion of contact.
+  
+  * 4a1. System displays a message for aborting the deletion.
+  
+    Use case ends.
 
-      Use case resumes at step 2.
+**Guarantees**
+* The contact is successfully deleted from the system, and any persistent storage.
 
-*{More to be added}*
 
 ### Non-Functional Requirements
 
