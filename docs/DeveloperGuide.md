@@ -382,10 +382,22 @@ testers are expected to do more *exploratory* testing.
 1. _{ more test cases …​ }_
 
 ### Glossary
-1. **ABCLI** - our product name
-1. **GUI** - graphical user interface. The screen you see when opening the application.
-1. **CLI** - command line interface. the text box presented to the user.
-1. **Command Line** - a text box where you enter commands
-1. **Java** - a programming language
-1. **Parameter** - a value that you need to provide for the command to work. e.g in /add <name>, <name> is a parameter.
-1. **Windows** - an operation system
+1. **ABCLI**  
+Our product name
+
+1. **CLI**  
+Command line interface. the text box presented to the user.
+
+1. **Command Line**   
+A text box where you enter commands
+
+1. **GUI**  
+Graphical user interface. The screen you see when opening the application.
+
+1. **Java**  
+A programming language
+1. **Parameter**  
+A value that you need to provide for the command to work. e.g in /add <name>, <name> is a parameter.
+
+1. **Windows**  
+An operating system
