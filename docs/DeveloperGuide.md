@@ -333,7 +333,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Admin**: Admin at the tuition center who is in charge of all administrative processes
 * **System**: The Eduvault application
 * **Student**: Current and pat students who attended the tuition centre
