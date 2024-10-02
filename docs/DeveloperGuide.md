@@ -260,31 +260,34 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
+**Product name**: PhysioPal
+
+**Target user**: Physiotherapists
+
 **Target user profile**:
+Physiotherapists with a large client base who prefer typing over other means of input, thus require an 
+organised system to manage the details of the clients.
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+**Value proposition**: A cost-effective, customisable solution for managing patient contacts,
+scheduling appointments, tracking treatment history, and generating health progress reports,
+all without subscription or licensing fees. It saves time, money, and manpower on repetitive tasks,
+allowing flexibility to tailor the address book to specific needs.
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​                                | I want to …​                                        | So that I can…​                                                  |
+|----------|----------------------------------------|-----------------------------------------------------|------------------------------------------------------------------|
+| `* * *`  | new user                               | see usage instructions                              | refer to instructions when I forget how to use the App           |
+| `* * *`  | physiotherapist                        | add new client contact information                  | retrieve client details when needed.                             |
+| `* * *`  | physiotherapist                        | delete outdated or irrelevant patient information   | keep my database clean and relevant                              |
+| `* * *`  | physiotherapist                        | search for client contact information by name or ID | quickly access the required client’s details                     |
+| `* * *`  | physiotherapist                        | schedule appointments for my clients                | keep track of my daily sessions and avoid double bookings        |
+| `* *`    | physiotherapist with many appointments | set reminders for myself for follow-up appointments | ensure that no patient is missed                                 |
+| `* *`    | physiotherapist with many appointments | see upcoming appointments listed at the top         | prominently see what I need to do in order to manage my schedule |
 
 ### Use cases
 
@@ -317,16 +320,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1.  Should be able to handle at least 100 clients without performance issues.
+2.  Should be able to search for any client in less than 2 seconds.
+3.  The system should comply with healthcare regulations like PHMC and PDPA, so that I manage client data in a compliant manner.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Client contact detail**: A contact detail that includes name, phone number, email address, 
+address, appointment details, treatment history, payment details, etc.
 
 --------------------------------------------------------------------------------------------------------------------
 
