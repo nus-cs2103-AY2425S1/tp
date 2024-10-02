@@ -40,15 +40,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Hugh 
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/gnoossk.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/gnoossk)]
+[[portfolio](team/gnoossk.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Analyst
+* Responsibilities: Analyse
 
 ### James Doe
 
