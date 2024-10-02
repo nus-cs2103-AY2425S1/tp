@@ -17,7 +17,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/triishaa)]
 
 * Role: Project Advisor
 
@@ -26,7 +26,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/johndoe.png" width="200px">
 
 [[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/triishaa)]
 
 * Role: Team Lead
 * Responsibilities: UI
@@ -35,7 +35,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/johndoe)] [[portfolio](team/triishaa)]
 
 * Role: Developer
 * Responsibilities: Data
@@ -45,7 +45,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/johndoe.png" width="200px">
 
 [[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/triishaa)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
@@ -55,7 +55,18 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/johndoe.png" width="200px">
 
 [[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/triishaa)]
 
 * Role: Developer
 * Responsibilities: UI
+
+
+### Trisha Patodia
+
+<img src="images/triishaa.png" width="200px">
+
+[[github](http://github.com/triishaa)]
+[[portfolio](team/triishaa.md)]
+
+* Role: Developer
+* Responsibilities: Responsible for the quality of various project documents.
