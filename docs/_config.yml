@@ -1,6 +1,5 @@
 remote_theme: pages-themes/cayman@v0.2.0
 title: "AB-3"
-theme: minima
 
 header_pages:
   - UserGuide.md
