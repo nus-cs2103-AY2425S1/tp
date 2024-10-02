@@ -57,3 +57,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: UI
+
+
+### Haleema Irfan
+
+<img src="images/haleemairfan.png" width="200px">
+
+[[github](http://github.com/yyueyii)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities: In charge of Logic
+
