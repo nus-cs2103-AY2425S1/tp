@@ -46,7 +46,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[More About Cliff](team/cliff.md)]
 
 * Role: Developer
-* Responsibilities: Command Module
+* Responsibilities: Testing
 
 ### James Doe
 
