@@ -14,6 +14,8 @@ based on specific criteria, improving efficiency and reducing time spent on
 administrative tasks.
 
 * This is **a software development project for CS2103**.<br>
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+
   Example usages:
   * Adding and deleting contact with email, phone number, job code applied for, and interview stage
   * Searching contacts based on attributes like email and phone number.
