@@ -290,57 +290,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Save a student's contact
+#### Use case: Save a student
 
 **MSS**
 
-1. User enters command to save a student's contact.
-2. LMS parses the contact details from the user's command.
-3. LMS requests for confirmation.
-4. User confirms the details.
-5. LMS saves the contact and notifies the user.
+1. User enters command to save a student's contact and address.
+2. KeyContacts parses the contact details from the user's command.
+5. KeyContacts saves the contact and notifies the user.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. LMS detects an error in the entered data.
-  * 2a1. LMS requests for the correct data.
+* 2a. KeyContacts detects an error in the entered data.
+  * 2a1. KeyContacts requests for the correct data.
   * 2a2. User enters new data.
   * Steps 2a1-2a2 are repeated until the data entered are correct.
   * Use case resumes from step 3.
-
-* \*a. At any time, User chooses to cancel the saving process.
-  * \*a1. LMS requests to confirm the cancellation of the process.
-  * \*a2. User confirms the cancellation of the process.
-  * Use case ends.
-
----
-
-#### Use case: Save a student's address
-
-**MSS**
-
-1. User enters command to save a student's address.
-2. LMS parses the address details from the user's command.
-3. LMS requests for confirmation.
-4. User confirms the details.
-5. LMS saves the student's address and notifies the user.
-
-   Use case ends.
-
-**Extensions**
-
-* 2a. LMS detects an error in the entered data.
-  * 2a1. LMS requests for the correct data.
-  * 2a2. User enters new data.
-  * Steps 2a1-2a2 are repeated until the data entered are correct.
-  * Use case resumes from step 3.
-
-* \*a. At any time, User chooses to cancel the saving process.
-  * \*a1. LMS requests to confirm the cancellation of the process.
-  * \*a2. User confirms the cancellation of the process.
-  * Use case ends.
 
 ---
 
@@ -349,25 +315,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User enters command to save a student's lesson timing.
-2. LMS parses the lesson timing details from the user's command.
-3. LMS requests for confirmation.
-4. User confirms the details.
-5. LMS saves the lesson timing and notifies the user.
+2. KeyContacts parses the lesson timing details from the user's command.
+5. KeyContacts saves the lesson timing and notifies the user.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. LMS detects an error in the entered data.
-  * 2a1. LMS requests for the correct data.
+* 2a. KeyContacts detects an error in the entered data.
+  * 2a1. KeyContacts requests for the correct data.
   * 2a2. User enters new data.
   * Steps 2a1-2a2 are repeated until the data entered are correct.
   * Use case resumes from step 3.
-
-* \*a. At any time, User chooses to cancel the saving process.
-  * \*a1. LMS requests to confirm the cancellation of the process.
-  * \*a2. User confirms the cancellation of the process.
-  * Use case ends.
 
 ---
 
@@ -376,25 +335,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User enters command to add a piano piece to a student.
-2. LMS parses the piano piece details from the user's command.
-3. LMS requests for confirmation.
-4. User confirms the addition.
-5. LMS adds the piano piece to the student's record and notifies the user.
+2. KeyContacts parses the piano piece details from the user's command.
+5. KeyContacts adds the piano piece to the student's record and notifies the user.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. LMS detects an error in the entered data.
-  * 2a1. LMS requests for the correct data.
+* 2a. KeyContacts detects an error in the entered data.
+  * 2a1. KeyContacts requests for the correct data.
   * 2a2. User enters new data.
   * Steps 2a1-2a2 are repeated until the data entered are correct.
   * Use case resumes from step 3.
-
-* \*a. At any time, User chooses to cancel the addition process.
-  * \*a1. LMS requests to confirm the cancellation of the process.
-  * \*a2. User confirms the cancellation of the process.
-  * Use case ends.
 
 ---
 
@@ -403,21 +355,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User enters command to view a student's grade level.
-2. LMS parses the student's details from the user's command.
-3. LMS retrieves the student's grade level from the database.
-4. LMS displays the student's grade level to the user.
+2. KeyContacts parses the student's details from the user's command.
+3. KeyContacts retrieves the student's grade level from the list.
+4. KeyContacts displays the student's grade level to the user.
 
    Use case ends.
 
 **Extensions**
 
-* 3a. LMS detects an error while retrieving the grade level.
-  * 3a1. LMS shows an error message.
-  * Use case ends.
-
-* \*a. At any time, User chooses to cancel the process.
-  * \*a1. LMS requests to confirm the cancellation of the process.
-  * \*a2. User confirms the cancellation of the process.
+* 3a. KeyContacts detects an error while retrieving the grade level.
+  * 3a1. KeyContacts shows an error message.
   * Use case ends.
 
 ---
@@ -427,15 +374,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User enters command to view a list of all students.
-2. LMS retrieves the list of students from the database.
-3. LMS displays the list of students to the user.
+2. KeyContacts retrieves the list of students from the storage.
+3. KeyContacts displays the list of students to the user.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. LMS detects an error while retrieving the list.
-  * 2a1. LMS shows an error message.
+* 2a. KeyContacts detects an error while retrieving the storage.
+  * 2a1. KeyContacts shows an error message.
   * Use case ends.
 
 ---
@@ -445,25 +392,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User enters command to cancel a lesson session.
-2. LMS parses the lesson session details from the user's command.
-3. LMS requests for confirmation.
-4. User confirms the cancellation.
-5. LMS cancels the lesson session and notifies the user.
+2. KeyContacts parses the lesson session details from the user's command.
+5. KeyContacts cancels the lesson session and notifies the user.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. LMS detects an error in the entered data.
-  * 2a1. LMS requests for the correct data.
+* 2a. KeyContacts detects an error in the entered data.
+  * 2a1. KeyContacts requests for the correct data.
   * 2a2. User enters new data.
   * Steps 2a1-2a2 are repeated until the data entered are correct.
   * Use case resumes from step 3.
-
-* \*a. At any time, User chooses to cancel the cancellation process.
-  * \*a1. LMS requests to confirm the cancellation of the process.
-  * \*a2. User confirms the cancellation of the process.
-  * Use case ends.
 
 ---
 
@@ -472,26 +412,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User enters command to schedule a make-up lesson.
-2. LMS parses the make-up lesson details from the user's command.
-3. LMS requests for confirmation.
-4. User confirms the scheduling.
-5. LMS schedules the make-up lesson and notifies the user.
+2. KeyContacts parses the make-up lesson details from the user's command.
+5. KeyContacts schedules the make-up lesson and notifies the user.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. LMS detects an error in the entered data.
-  * 2a1. LMS requests for the correct data.
+* 2a. KeyContacts detects an error in the entered data.
+  * 2a1. KeyContacts requests for the correct data.
   * 2a2. User enters new data.
   * Steps 2a1-2a2 are repeated until the data entered are correct.
   * Use case resumes from step 3.
-
-* \*a. At any time, User chooses to cancel the scheduling process.
-  * \*a1. LMS requests to confirm the cancellation of the process.
-  * \*a2. User confirms the cancellation of the process.
-  * Use case ends.
-
 ---
 
 #### Use case: Delete a student
@@ -499,25 +431,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User enters command to delete a student.
-2. LMS parses the student details from the user's command.
-3. LMS requests for confirmation.
-4. User confirms the deletion.
-5. LMS deletes the student from the database and notifies the user.
+2. KeyContacts parses the student details from the user's command.
+5. KeyContacts deletes the student from the storage and notifies the user.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. LMS detects an error in the entered data.
-  * 2a1. LMS requests for the correct data.
+* 2a. KeyContacts detects an error in the entered data.
+  * 2a1. KeyContacts requests for the correct data.
   * 2a2. User enters new data.
   * Steps 2a1-2a2 are repeated until the data entered are correct.
   * Use case resumes from step 3.
-
-* \*a. At any time, User chooses to cancel the deletion process.
-  * \*a1. LMS requests to confirm the cancellation of the process.
-  * \*a2. User confirms the cancellation of the process.
-  * Use case ends.
 
 ---
 
@@ -526,40 +451,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User enters command to view the list of commands.
-2. LMS retrieves the list of available commands.
-3. LMS displays the list of commands to the user.
+2. KeyContacts retrieves the list of available commands.
+3. KeyContacts displays the list of commands to the user.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. LMS detects an error while retrieving the list.
-  * 2a1. LMS shows an error message.
-  * Use case ends.
-
----
-
-#### Use case: Save and retrieve data after application restart
-
-**MSS**
-
-1. User enters data into the application.
-2. User chooses to save the data.
-3. LMS saves the data to persistent storage.
-4. User turns off the application.
-5. User restarts the application.
-6. LMS retrieves the data from persistent storage and displays it to the user.
-
-   Use case ends.
-
-**Extensions**
-
-* 3a. LMS detects an error while saving the data.
-  * 3a1. LMS shows an error message.
-  * Use case ends.
-
-* 6a. LMS detects an error while retrieving the data.
-  * 6a1. LMS shows an error message.
+* 2a. KeyContacts detects an error while retrieving the list.
+  * 2a1. KeyContacts shows an error message.
   * Use case ends.
 
 ### Non-Functional Requirements
