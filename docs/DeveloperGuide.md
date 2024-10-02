@@ -316,11 +316,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `Bizbook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC1 - Delete a person**
+**Use case: UC1 - List all people saved in the System**
 
 **MSS**
 
-1.  Actor requests to <u>list persons (UC2)</u>.
+1.  Actor requests to list all people saved in the System by entering a command.
+2.  System shows a list of persons.
+
+    Use case ends.
+
+**Extensions**
+
+- 1a. If there are no contacts stored in the system.
+
+    - 1a1 System informs Actor that they have no contacts stored.
+
+  Use case ends.
+
+
+- 1b. The System detects an error in the entered command.
+
+    - 1b1 System requests for a valid command.
+
+  Use case resumes at step 1.
+
+
+**Use case: UC2 - Delete a person**
+
+**MSS**
+
+1.  Actor requests to <u>list pall people saved in the System (UC1)</u>.
 2.  Actor requests to delete a specific person in the list.
 3.  System deletes the person.
 4.  System <u>save contacts to save file (UC No.)</u>.
@@ -335,7 +360,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 2.
 
-**Use case: UC2 - Load contact from save file**
+**Use case: UC3 - Load contact from save file**
 
 **Actor: `BizBook`**
 
