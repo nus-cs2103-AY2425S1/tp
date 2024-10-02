@@ -49,12 +49,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Code Quality
 * Responsibilities: Looks after code quality, ensures adherence to coding standards and git standards.
 
-### James Doe
+### Tiew Wei Xuan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/fymbc.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/fymbc)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Team Lead
+* Responsibilities: Scheduling, Tracking, Deliverables, Deadlines
