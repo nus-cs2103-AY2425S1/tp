@@ -393,9 +393,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
   
-* 4a. The updated information is invalid.
+* 5a. The updated information is invalid.
    
-    * 4a1. AddressBook shows an error message specifying the mistake.
+    * 5a1. AddressBook shows an error message specifying the mistake.
 
       Use case resumes at step 5.
 
