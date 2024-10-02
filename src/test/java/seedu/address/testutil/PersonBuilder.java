@@ -47,7 +47,7 @@ public class PersonBuilder {
         tags = new HashSet<>();
         company = new Company(DEFAULT_COMPANY);
         rsvp = new Rsvp(DEFAULT_RSVP);
-        isVendor = true;
+        isVendor = false;
     }
 
     /**
