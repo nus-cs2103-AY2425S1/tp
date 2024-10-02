@@ -27,15 +27,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/johndoe.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Ensure tasks are done on time
 
-### Johnny Doe
+### Nigel Low Qi Xiang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/nigellqx.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/nigellqx)] 
+[[portfolio](team/nigellqx.md)]
 
-* Role: Developer
+* Role: Deliverables and deadlines
 * Responsibilities: Data
 
 ### Jean Doe
