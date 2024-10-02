@@ -275,16 +275,29 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​                                              | I want to …​                                                        | So that I can…​                                        |
+|----------|------------------------------------------------------|---------------------------------------------------------------------|--------------------------------------------------------|
+| `* * *`  | new user                                             | be able to see the list of commands I can use                       | learn the CLI much faster                              |
+| `* * *`  | new user                                             | be able to see a sample command                                     | easily follow the format to test out how it works      |
+| `* * *`  | user                                                 | add contacts                                                        | save the trouble of remembering every contact          |
+| `* * *`  | user                                                 | delete contacts                                                     | remove incorrect or unnecessary entries                |
+| `* * *`  | user                                                 | view contacts                                                       | access the contacts' details                           |
+| `* * *`  | user                                                 | mark attendance for each tutorial session                           | easily keep a record of student participation          |
+| `* *`    | user with many persons in my address book            | search for a student by keywords (e.g. name/student ID)             | quickly access their details                           |
+| `* *`    | user with a large address book with diverse contacts | be able to sort my contacts using specific attributes               | find contacts based on the attributes more easily      |
+| `* *`    | user                                                 | filter students by their performance                                | identify those that need additional help               |
+| `* *`    | user                                                 | update a student's contact information                              | maintain accurate records                              |
+| `* *`    | user                                                 | flag students that have missed several tutorials                    | follow up on their well-being                          |
+| `* *`    | user                                                 | keep track of class participation                                   | award marks accordingly easily                         |
+| `* *`    | user                                                 | add additional notes to each contact                                | write important information and remarks I might forget |
+| `*`      | user                                                 | add multiple phone numbers to a contact                             | accommodate people who have more than 1 contact number |
+| `*`      | user                                                 | assign and manage student project groups                            | track group work and collaboration effectively         |
+| `*`      | user                                                 | generate weekly or monthly reports of student attendance and grades | review their progress over time                        |
+| `*`      | frequent user                                        | have shorter commands                                               | type faster and execute more commands                  |
+| `*`      | user                                                 | track each student’s individual attributes                          | provide personalised feedback                          |
+| `*`      | forgetful user                                       | set reminders for upcoming tutorials or deadlines                   | stay on track with my schedule                         |
+| `*`      | user                                                 | export attendance and grades data to a CSV file                     | share or analyze student data further                  |
+| `*`      | new user                                             | customize the CLI interface                                         | use it according to my personal preferences            |
 
 ### Use cases
 
