@@ -315,11 +315,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. Tutor enters an invalid deadline
-  * 1a1. Teletutors App displays an error message: `Invalid date format. Please use 'YYYY-MM-DD'.`
-  * 1a2. Tutor re-enters the correct date.
+* 3a. Tutor enters an invalid deadline
+  * 3a1. Teletutors App displays an error message: `Invalid date format. Please use 'YYYY-MM-DD'.`
+  * 3a2. Tutor re-enters the correct date.
 
-    Use case resumes from Step 3.
+    Use case resumes from Step 4.
 
 **Use case: Mark student Attendance**
 
@@ -336,7 +336,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 * 3a. Student is not found in the session list
-  * 3a1. Teletutors App displays an error message: `Student not found. Please check the name and try again.`
+  * 3a1. Teletutors App displays an default placeholder message: `No students found.`
   
     Use case resumes from Step 2
 
@@ -357,7 +357,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The student does not exist in the system
     * 2a1. Teletutors App displays an error message: `Student not found. Please check the name and try again`
 
-      Use case resumes from Step 3.
+      Use case resumes from Step 1.
 
 
 
