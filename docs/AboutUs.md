@@ -15,9 +15,40 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/jasperabez.png" width="200px">
 
-[[homepage](https://www.jabeztho.com)]
 [[github](https://github.com/jasperabez)]
 [[portfolio](/team/jasperabez.md)]
 
 * Role: Developer
 * Responsibilities: Deliverables and deadlines, Scheduling and tracking
+
+### Hans Delano
+
+<img src="images/hanscau.png" width="200px">
+
+[[github](http://github.com/hanscau)] [[portfolio](team/hanscau.md)]
+
+* Role: Developer
+* Responsibilities: Test & UI
+
+### Kevin Pek
+
+<img src="images/kevin-pek.png" width="200px">
+
+[[github](http://github.com/kevin-pek)]
+[[portfolio](team/kevin-pek.md)]
+
+* Role: Developer
+* Responsibilities: Integration, Storage
+
+### Kok Bo Chang
+
+<img src="images/c5hives.png" width="200px">
+
+[[github](http://github.com/c5hives)]
+[[portfolio](team/c5hives.md)]
+
+* Role: Developer
+* Responsibilities:
+  * Documentation
+  * Code Quality
+  * In charge of Logic Component
