@@ -20,6 +20,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Code quality
 * Responsibilities: Looks after code quality, ensures adherence to coding standards, etc.
 
+
+### Ng Kay Hian
+
+<img src="images/k-hian.png" width="200px">
+
+[[github](http://github.com/k-hian)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Deliverables and deadlines
+* Responsibilities: Ensure project deliverables are done on time and in the right format.
+
 ### Wu Jiawei
 
 <img src="images/wujiaweijoanna.png" width="200px">
@@ -29,15 +40,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Documentation
 * Responsibilities: Responsible for the quality of various project documents.
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
 
 ### Prisha V Prakash
 
