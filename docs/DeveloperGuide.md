@@ -327,15 +327,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * The data should be stored locally in a human-editable text file (allowing advanced users to modify data directly).
 * The software should have minimal reliance on network connectivity and include fallback mechanisms for any network-dependent features.
 * The software should not depend on the developer’s remote server.
-* The software should be distributed as a single JAR file. If that is not feasible, the JAR file and any required files should be packaged into a single zip file.
-* The software should not exceed 100 MB in size, and document files (i.e., PDFs of documentation) should not exceed 15 MB each. Neither should be unnecessarily bloated.
+* The software should be distributed as a single `.jar` file. If that is not feasible, the `.jar` file and any required files should be packaged into a single `.zip` file.
+* The software should not exceed 100 MB in size, and document files (i.e., `PDF`s of documentation) should not exceed 15 MB each. Neither should be unnecessarily bloated.
 * Any third-party frameworks, libraries or services used should be free, open-source (except for services) and permissively licensed. They should not require users to install additional software or create accounts.
-* The developer and user guides should be PDF-friendly (by avoiding expandable panels, embedded videos, animated GIFs etc.).
+* The developer and user guides should be `PDF`-friendly (by avoiding expandable panels, embedded videos, animated `GIF`s etc.).
 
 #### Quality
 
 * The software should be optimized for the target users: fast typists should be able to complete most tasks more efficiently using the _CLI_ than a _GUI_.
-* The software should be intuitive and easy for first-time users to navigate (by providing sample data, a command to access the help guide etc.).
+* The software should be intuitive and easy for first-time users to navigate (by providing sample data, a `help` command to access the user guide etc.).
 * Multistep commands for onboarding (if any) should have a streamlined, one-step equivalent for regular or expert users.
 * The _GUI_ should be intuitive for users who are not tech-savvy.
 
@@ -345,7 +345,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### Scalability
 
-* The software should be able to accommodate up to 5000 contacts, without a noticeable sluggishness in performance for typical usage.
+* The software should be able to accommodate up to 5,000 contacts, without a noticeable sluggishness in performance for typical usage.
 
 #### Reliability
 
@@ -363,7 +363,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 #### Portability
 
 * The software should work without requiring an installer.
-* The software should run on any _mainstream OS_ that has Java 17 (and no other Java version installed).
+* The software should run on any _mainstream OS_ that has `Java 17` (and no other Java version installed).
 * The _GUI_ should be free from resolution-related inconveniences for standard screen resolutions (1920x1080 or higher) and screen scales (100% and 125%).
 * The _GUI_ should remain functional, though not necessarily optimized, for resolutions of 1280x720 or higher and screen scales of 150%.
 
