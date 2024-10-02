@@ -9,6 +9,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+
+### Ethan Wang
+
+<img src="images/ethanwangkangen.png" width="200px">
+
+[[homepage](http://www.comp.nus.edu.sg/~damithch)]
+[[github](https://github.com/ethanwangkangen)]
+[[portfolio](team/ethanwang.md)]
+
 ### Hing Yen Xing (Joanne)
 
 <img src="images/joannehing.png" width="200px">
@@ -37,16 +46,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
 ### James Doe
 
 <img src="images/johndoe.png" width="200px">
@@ -55,4 +54,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Logic
