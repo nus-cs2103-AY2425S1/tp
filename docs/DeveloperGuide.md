@@ -272,10 +272,12 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Target user profile**: 
 
-Computing Club Committee members are tech-savvy leaders who organize events, manage activities, 
-and foster community engagement. They connect members, sponsors, and industry partners, driving innovation and learning.
+Computing Club Committee members
+
+* Tech-savvy leaders who organize events, manage activities, and foster community engagement.
+* Connect members, sponsors, and industry partners, driving innovation and learning.
 
 **Value proposition**: manage contacts faster than a typical mouse/GUI driven app
 
