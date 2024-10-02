@@ -42,6 +42,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: to be added soon
 
+### Jean Doe
+
+<img src="images/johndoe.png" width="200px">
+
+[[github](http://github.com/johndoe)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities: Dev Ops + Threading
+
 ### Aditya Joshi
 
 <img src="images/thisisaditya17.png" width="200px">
@@ -51,15 +61,5 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: To be confirmed
-
-### James Doe
-
-<img src="images/adi_profile_picture.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
 
 
