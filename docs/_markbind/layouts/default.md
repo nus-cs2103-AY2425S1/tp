@@ -53,7 +53,7 @@
   </div>
   <nav id="page-nav">
     <div class="nav-component slim-scroll">
-      <page-nav />
+      <page-nav> </page-nav>
     </div>
   </nav>
   <scroll-top-button></scroll-top-button>
