@@ -43,7 +43,7 @@ public class VendorBuilder {
     }
 
     /**
-     * Initializes the VendorBuilder with the data of {@code guestToCopy}.
+     * Initializes the VendorBuilder with the data of {@code vendorToCopy}.
      */
     public VendorBuilder(Vendor vendorToCopy) {
         name = vendorToCopy.getName();

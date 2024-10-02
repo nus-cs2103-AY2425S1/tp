@@ -20,12 +20,12 @@ import seedu.address.testutil.VendorBuilder;
 public class VendorTest {
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Person person = new VendorBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> person.getTags().remove(0));
+        Vendor vendor = new VendorBuilder().build();
+        assertThrows(UnsupportedOperationException.class, () -> vendor.getTags().remove(0));
     }
 
     @Test
-    public void isSamePerson() {
+    public void isSameVendor() {
         // same object -> returns true
         assertTrue(ALICE.isSamePerson(ALICE));
 
@@ -33,7 +33,7 @@ public class VendorTest {
         assertFalse(ALICE.isSamePerson(null));
 
         // same name, all other attributes different -> returns true
-        Person editedAlice = new VendorBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+        Vendor editedAlice = new VendorBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
@@ -42,7 +42,7 @@ public class VendorTest {
         assertFalse(ALICE.isSamePerson(editedAlice));
 
         // name differs in case, all other attributes same -> returns false
-        Person editedBob = new VendorBuilder(ALICE).withName(VALID_NAME_BOB.toLowerCase()).build();
+        Vendor editedBob = new VendorBuilder(ALICE).withName(VALID_NAME_BOB.toLowerCase()).build();
         assertFalse(BOB.isSamePerson(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
