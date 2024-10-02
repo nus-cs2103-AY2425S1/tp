@@ -5,38 +5,38 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `e0969203[at]u.nus.edu`
 
 ## Project team
 
-### John Doe
+### Zen Koh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/zenkoh1.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/ziying)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/ziying)]
+[[github](https://github.com/Zenkoh1)]
+[[portfolio](team/zenkoh1.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Logic
 
-### Johnny Doe
+### Linette Goh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/linette-g.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/ziying)]
+[[github](http://github.com/linette-g)]
+[[portfolio](team/linette.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: UI
+
+### Brendan Ng
+
+<img src="images/brendanng7.png" width="200px">
+
+[[github](http://github.com/brendanng7)] [[portfolio](team/brendanng7.md)]
+
+* Role: Developer
+* Responsibilities: DevOps
 
 ### Ziying
 
@@ -48,12 +48,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Gabriel Chang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/gabrielcwt.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/ziying)]
+[[github](http://github.com/gabrielcwt)]
+[[portfolio](team/gabrielcwt.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Testing
