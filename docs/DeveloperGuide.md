@@ -290,7 +290,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a client**
+
+**MSS**
+
+1.  User provides client details to add 
+2.  AddressBook adds the client
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The client's name is not provided
+
+   * 1a1. AddressBook shows an error message
+   * 1a2. User reenters new command 
+   Steps 1a1-1a2 are repeated until the command entered is correct
+
+  Use case resumes at step 1.
+
+* 1b. Input fields are incorrectly formatted
+
+    * 1b1. AddressBook shows an error message.
+    * 1b2. User reenters command 
+    Steps 1b1-1b2 are repeated until the command entered is correct
+
+   Use case resumes at step 1.
+
+**Use case: Delete a client**
 
 **MSS**
 
@@ -313,7 +340,38 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-*{More to be added}*
+
+
+**Use case: Modify a client's details**
+
+**MSS**
+
+1.  User requests to list persons
+2.  AddressBook shows a list of persons
+3.  User selects the client they wish to modify and provides the updated details
+4.  AddressBook updates that client's details
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The given details are invalid
+
+    * 3b1. AddressBook shows an error message.
+
+    Use case resumes at step 2
+
+
 
 ### Non-Functional Requirements
 
