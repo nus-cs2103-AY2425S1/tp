@@ -404,8 +404,51 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
 
 ### Use cases
 
-(For all use cases below, the **System** is the `TutorEase` and the **Actor** is the `Tutor`, unless specified
-otherwise)
+(For all use cases below, the **System** is the `TutorEase` and the **Actor** is the `user`, unless specified otherwise)
+
+**Use Case: UC01 - Add student contact**
+
+**MSS**:
+1. Tutor keys in required fields to add student contact.
+2. TutorEase adds the student contact.  
+   Use case ends.
+
+**Extensions**:
+* **1a.** TutorEase detects bad or wrongly formatted inputs.
+    * **1a1.** TutorEase prompts Tutor with correct format.
+    * **1a2.** Tutor enters new data.  
+      Steps 1a1 to 1a2 are repeated until the data entered are correct.  
+      Use case resumes from Step 2.
+
+
+**Use Case: UC02 - Delete student contact**
+
+**MSS**:
+1. Tutor keys in required fields to delete student contact.
+2. TutorEase deletes the student contact.  
+   Use case ends.
+
+**Extensions**:
+* **1a**. TutorEase detects bad or wrongly formatted inputs.
+    * **1a1**. TutorEase prompts Tutor with correct format.
+    * **1a2**. Tutor enters new data.  
+      Steps 1a1 to 1a2 are repeated until the data entered are correct.  
+      Use case resumes from Step 2.
+
+**Use Case: UC03 - List student contacts**
+
+**MSS**:
+1. Tutor keys in required fields to list student contacts.
+2. TutorEase lists the student contact.  
+   Use case ends.
+
+**Extensions**:
+* **1a**. TutorEase detects bad or wrongly formatted inputs.
+    * **1a1**. TutorEase prompts Tutor with correct format.
+    * **1a2**. Tutor enters new data.  
+      Steps 1a1 to 1a2 are repeated until the data entered are correct.              
+      Use case resumes from Step 2.
+
 
 **Use Case: UC04 - Add lesson for student**  
 **MSS:**
@@ -418,7 +461,7 @@ otherwise)
 
 * **1a**. TutorEase detects bad or wrongly formatted inputs.
     * **1a1**. TutorEase prompts Tutor with correct format.
-    * **1a2**. Tutor enters new data.
+    * **1a2**. Tutor enters new data.  
     Steps 1a1 to 1a2 are repeated until the data entered are correct.  
     Use case resumes from Step 2.
 
@@ -463,6 +506,7 @@ otherwise)
     * **1a2.** Tutor enters new data.  
       Steps 1a1 to 1a2 are repeated until the data entered are correct.  
       Use case resumes from Step 2.
+
 
 ### Non-Functional Requirements
 
