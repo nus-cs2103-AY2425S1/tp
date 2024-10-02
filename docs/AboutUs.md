@@ -14,4 +14,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 {% include AboutUs/seeyangzhi.md %}
 {% include AboutUs/seanlim.md %}
 {% include AboutUs/qianbo.md %}
-{% include AboutUs/jamesdoe.md %}
+{% include AboutUs/heyiheng.md %}
