@@ -9,15 +9,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Hing Yen Xing (Joanne)
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/joannehing.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[github](https://github.com/joannehing)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+* Role: Developer 
 
 ### Khoo Yu Yien (Annabelle)
 
