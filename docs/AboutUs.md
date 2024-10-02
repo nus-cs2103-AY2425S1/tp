@@ -22,7 +22,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/sawjingwen.png" width="200px">
 
-[[homepage](https://jwen.cc)]
+[[homepage](team/sawjingwen.md)]
 [[github](https://github.com/shotnothing)]
 [[portfolio](https://jwen.cc)]
 
