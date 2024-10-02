@@ -31,7 +31,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Qiao Bowen
 
-<img src="images/bowen.png" width="200px">
+<img src="images/bbryant824.png" width="200px">
 
 [[github](http://github.com/bbryant824)] [[portfolio](team/bowen.md)]
 
