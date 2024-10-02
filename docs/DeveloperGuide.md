@@ -260,15 +260,18 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Target user profile**: Tuition center administrative staff
 
-* has a need to manage a significant number of contacts
+* has a need to manage a significant number of students
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: 
+
+* manage student contacts faster than a typical mouse/GUI driven app
+* one-shot command focus for significantly quicker usage
 
 
 ### User stories
@@ -297,53 +300,39 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 #### **Use Case UC01: Add Student**
 **Actor**: Administrator
 
----
-
 **Main Success Scenario (MSS)**:
-1. Administrator types the command to add a new student with the required details in a single line:
-   ```
-   add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 f/250 c/1
-   ```
+1. Administrator types the command to add a new student with the required details in a single line. 
 2. EduTuTu validates the input details.
 3. EduTuTu adds the new student to the system and logs the action.
-4. **Use case ends.**
 
----
+Use case ends.
 
 **Extensions**:
 
 - **Invalid or Missing Data**:
     - EduTuTu logs an error message specifying the invalid fields.
-    - Administrator corrects the input and re-executes the command.
-    - *These steps repeat until all data are valid.*
-    - **Use case resumes from step 2.**
+    - **Use case resumes from step 1.**
 
 - **Duplicate Student Detected**:
-    - EduTuTu logs an error message: "This student already exists in the system."
-    - **Use case ends.**
+    - EduTuTu logs an error message.
+    - **Use case resumes from step 1.**
 
 ---
 
 #### **Use Case UC02: Delete Student**
 **Actor**: Administrator
 
----
-
 **Main Success Scenario (MSS)**:
 1. Administrator types the command to delete a student using their unique index:
-   ```
-   delete 5
-   ```
 2. EduTuTu validates the index.
 3. EduTuTu deletes the student and logs the details of the deleted student.
-4. **Use case ends.**
 
----
+Use case ends.
 
 **Extensions**:
 
 - **Invalid Index Entered**:
-    - EduTuTu logs an error message: "Invalid student index provided."
+    - EduTuTu logs an error message.
     - **Use case resumes from step 1.**
 
 ---
@@ -351,41 +340,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 #### **Use Case UC03: List All Students**
 **Actor**: Administrator
 
----
-
 **Main Success Scenario (MSS)**:
-1. Administrator types the command to list all students:
-   ```
-   list
-   ```
+1. Administrator types the command to list all students.
 2. EduTuTu retrieves all student records and outputs the list in the terminal with unique indices.
-3. **Use case ends.**
 
----
-
-**Extensions**:
-
-- **No Students in System**:
-    - EduTuTu logs a message: "No students found in the system."
-    - **Use case ends.**
+Use case ends.
 
 ---
 
 #### **Use Case UC04: Find Students**
 **Actor**: Administrator
 
----
-
 **Main Success Scenario (MSS)**:
-1. Administrator types the command to search for students by name or class ID:
-   ```
-   find n/Alex
-   ```
+1. Administrator types the command to search for students by name or class ID.
 2. EduTuTu validates the search criteria.
 3. EduTuTu searches the system and outputs matching students with unique indices.
-4. **Use case ends.**
 
----
+Use case ends.
 
 **Extensions**:
 
@@ -393,36 +364,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - EduTuTu logs an error message specifying the invalid input.
     - **Use case resumes from step 1.**
 
-- **No Matching Students Found**:
-    - EduTuTu logs a message: "No matching students found."
-    - **Use case ends.**
-
 ---
 
 #### **Use Case UC05: Mark Fees as Paid**
 **Actor**: Administrator
 
----
-
 **Main Success Scenario (MSS)**:
-1. Administrator types the command to mark a student's fees as paid, including the student index and date:
-   ```
-   markpaid 5 d/2024-09
-   ```
-2. EduTuTu validates the student index and date format.
-3. EduTuTu updates the student's record and logs the payment confirmation.
-4. **Use case ends.**
+1. Administrator first searches for the student using the find command.
+2. EduTuTu displays a list of students with unique indices.
+3. Administrator types the command to mark a student's fees as paid, including the student index and date:
+4. EduTuTu validates the student index and date format.
+5. EduTuTu updates the student's record and logs the payment confirmation.
 
----
+Use case ends.
 
 **Extensions**:
 
 - **Invalid Index Entered**:
-    - EduTuTu logs an error message: "Invalid student index."
+    - EduTuTu logs an error message.
     - **Use case resumes from step 1.**
 
 - **Invalid Date Format or Month**:
-    - EduTuTu logs an error message: "Date format must be YYYY-MM with a valid month."
+    - EduTuTu logs an error message.
     - **Use case resumes from step 1.**
 
 ---
@@ -437,22 +400,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Throughput**: Capable of processing **concurrent commands** from multiple administrators without significant delay.
 - **Capacity**: Should handle up to **1,000 students** without noticeable sluggishness in performance for typical usage.
 
----
-
 **2. Maintainability Requirements**
 
 - **Code Quality**: The codebase should be **modular**, well-documented, and adhere to standard coding conventions to facilitate maintenance.
 - **Documentation**: Provide **comprehensive technical documentation** for future developers and maintainers.
 - **Automated Testing**: Implement **unit tests** and **integration tests** to ensure that new changes do not break existing functionality.
 
----
-
 **3. Portability Requirements**
 
 - **Cross-Platform Compatibility**: The application must run on any mainstream operating system (**Windows, macOS, Linux**) with **Java 17** or above installed.
 - **Minimal Dependencies**: Avoid platform-specific dependencies to ensure **ease of deployment** across different environments.
-
----
 
 **4. Ethical Requirements**
 
