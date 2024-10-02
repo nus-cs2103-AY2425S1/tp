@@ -23,8 +23,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/obrona.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/obrona)]
+[[portfolio](http://github.com/obrona)]
 
 * Role: Team Lead
 * Responsibilities: UI
