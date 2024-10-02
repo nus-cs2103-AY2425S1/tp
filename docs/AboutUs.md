@@ -28,14 +28,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Scheduling and Tracking
 
-### Johnny Doe
+### Lim Yixiang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/limyixiang.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/limyixiang)]
+[[portfolio](team/limyixiang.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Testing
 
 ### Jean Doe
 
