@@ -31,11 +31,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Yang Hanming
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/hm-yang1.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/hm-yang1)]
+[[portfolio](team/hm-yang1.md)]
 
 * Role: Developer
 * Responsibilities: Data
