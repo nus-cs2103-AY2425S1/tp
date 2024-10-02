@@ -29,11 +29,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Josh Thoo Jen Sen
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/joshthoo.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/joshthoo)] [[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Data
