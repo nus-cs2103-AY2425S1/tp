@@ -11,6 +11,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+
 ### Ryan Lim
 
 <img src="images/rynlwhh.png" width="200px">
@@ -22,6 +23,18 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
+### Vince Goh
+
+<img src="images/vinceg4.png" width="200px">
+
+I like to read books and my favourite genre is mystery. I also like to run and play badminton in my free time.
+
+[[github](https://github.com/vinceg4)]
+
+* Role: Developer
+* Reponsibilties: Code Quality
+
+
 ### Jane Doe
 
 <img src="images/johndoe.png" width="200px">
@@ -32,14 +45,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Ling Zi Yan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/lingziyann.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+Hello my name is ziyan and I love cs2103T and cs2101
+
+[[github](http://github.com/LingZiyann)] [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Testing + Deliverables
 
 ### Jean Doe
 
