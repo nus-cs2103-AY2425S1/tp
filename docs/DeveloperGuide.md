@@ -275,51 +275,49 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                | I want to …​                               | So that I can…​                                                               |
+| -------- | -------------------------------------- |--------------------------------------------|-------------------------------------------------------------------------------|
+| `* * *`  | user                                   | add new client                             | keep track of all of my clients' data and refer when needed                   |
+| `* * *`  | user                                   | know if client has been added successfully | so that I can proceed with the next steps or take corrective action if needed |
+
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `AgentConnect` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a person**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User adds a new person by entering the command with name, phone number, email, address, insurance type, and appointment dates. 
+2.  AgentConnect validates the input. 
+3.  AgentConnect adds the new person with all the details provided. 
+4.  AgentConnect shows a success message confirming the person has been added.
 
     Use case ends.
 
+
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. Some fields are invalid (e.g., name, phone, email).
+  * 2a1. AgentConnect shows an error message for the invalid fields. 
+  * 2a2. User corrects the fields and resubmits the command. 
+  * Use case resumes from step 2.
 
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. AddressBook shows an error message.
-
-      Use case resumes at step 2.
+* 2b. Duplicate person detected (same name + address).
+    * 2b1. AgentConnect shows a warning message about the duplicate entry. 
+    * 2b2. User decides whether to overwrite or cancel the operation. 
+    * Use case resumes at step 2 if user decides to proceed
 
 *{More to be added}*
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1.  Should be able to hold up to 1000 persons without noticeable lag for typical usage. 
+2.  A user with above-average typing speed for regular English text should be able to add a new contact (including insurance and appointment details) faster using commands than with the mouse. 
+3.  The system should provide real-time validation (e.g., when typing the phone number or email) to reduce error rates and ensure correct input formats.
 
 *{More to be added}*
 
