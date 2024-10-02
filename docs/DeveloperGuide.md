@@ -432,7 +432,7 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
 * **1a**. TutorEase detects bad or wrongly formatted inputs.
     * **1a1**. TutorEase prompts Tutor with correct format.
     * **1a2**. Tutor enters new data.
-      Steps 1a1 to 1a2 are repeated until the data entered are correct. 
+      Steps 1a1 to 1a2 are repeated until the data entered are correct.  
       Use case resumes from Step 2.
 
 **Use Case: UC03 - List student contacts**
