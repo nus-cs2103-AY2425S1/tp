@@ -145,4 +145,13 @@ public class JsonAdaptedPersonTest {
         assertThrows(IllegalValueException.class, person::toModelType);
     }
 
+    @Test
+    public void toModelType_emptyContactDates_returnsPerson() throws Exception {
+        List<JsonAdaptedContactDate> emptyContactDates = new ArrayList<>();
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NRIC, VALID_NAME, VALID_PHONE, VALID_EMAIL,
+                VALID_ADDRESS,
+                VALID_TAGS, emptyContactDates);
+        assertThrows(IllegalValueException.class, person::toModelType);
+    }
+
 }
