@@ -315,7 +315,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
-Below is an updated version of the **Non-Functional Requirements (NFRs)** and **Glossary** sections for your **Developer Guide**, including additional constraints and relevant definitions to enhance clarity and completeness.
 
 ---
 
@@ -353,23 +352,23 @@ Below is an updated version of the **Non-Functional Requirements (NFRs)** and **
 
 ### Glossary
 
-- **Mainstream OS**: Refers to commonly used operating systems, including Windows, macOS, and Linux distributions.
-- **Task**: A unit of work or activity managed by the Vinegar Task Manager, which can be a Todo, Deadline, or Event.
-- **Todo**: A basic task without any specific time constraints.
-- **Deadline**: A task that needs to be completed by a specific date or time.
-- **Event**: A task that occurs within a specific time frame, with a defined start and end time.
-- **Command**: A user input string that triggers a specific action within the Vinegar application.
-- **User Interface (UI)**: The part of the application that users interact with, which includes graphical components like command boxes and task lists.
-- **CLI (Command Line Interface)**: A text-based user interface through which users interact with the application by typing commands.
-- **Scalability**: The capacity of the system to handle increasing amounts of data or user load without performance degradation.
-- **JavaFX**: A software platform used for creating and delivering desktop applications with graphical user interfaces in Java.
-- **Data Persistence**: The characteristic of data that outlives the execution of the process that created it, usually achieved through saving data to a file or database.
-- **Parser**: A component that interprets user input (commands) and converts them into actions for the application.
-- **Error Handling**: The process of identifying, diagnosing, and responding to errors or exceptions that occur during program execution.
-- **Encryption**: The process of converting information or data into a code, especially to prevent unauthorized access.
-- **Data Backup**: The process of copying and archiving data to prevent loss in case of system failure or data corruption.
-- **Extensibility**: The ability of the software to be extended with new features or components with minimal impact on existing functionality.
-- **Reliability**: The measure of the system’s ability to operate without failure and produce consistent results under specified conditions.
+* **Mainstream OS**: Refers to commonly used operating systems, including Windows, macOS, and Linux distributions.
+* **Task**: A unit of work or activity managed by the Vinegar Task Manager, which can be a Todo, Deadline, or Event.
+* **Todo**: A basic task without any specific time constraints.
+* **Deadline**: A task that needs to be completed by a specific date or time.
+* **Event**: A task that occurs within a specific time frame, with a defined start and end time.
+* **Command**: A user input string that triggers a specific action within the Vinegar application.
+* **User Interface (UI)**: The part of the application that users interact with, which includes graphical components like command boxes and task lists.
+* **CLI (Command Line Interface)**: A text-based user interface through which users interact with the application by typing commands.
+* **Scalability**: The capacity of the system to handle increasing amounts of data or user load without performance degradation.
+* **JavaFX**: A software platform used for creating and delivering desktop applications with graphical user interfaces in Java.
+* **Data Persistence**: The characteristic of data that outlives the execution of the process that created it, usually achieved through saving data to a file or database.
+* **Parser**: A component that interprets user input (commands) and converts them into actions for the application.
+* **Error Handling**: The process of identifying, diagnosing, and responding to errors or exceptions that occur during program execution.
+* **Encryption**: The process of converting information or data into a code, especially to prevent unauthorized access.
+* **Data Backup**: The process of copying and archiving data to prevent loss in case of system failure or data corruption.
+* **Extensibility**: The ability of the software to be extended with new features or components with minimal impact on existing functionality.
+* **Reliability**: The measure of the system’s ability to operate without failure and produce consistent results under specified conditions.
 
 -----------------------------------------------------------------------------------------------------------------------
 
