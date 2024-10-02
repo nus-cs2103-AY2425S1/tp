@@ -272,73 +272,166 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Target user profile**: 
+* Financial consultants who manage a large number of clients (potentially 1000s)
+* Each client has a complex transaction history (potentially 100s of transactions)
+* Prefers command-line interfaces for quick and efficient data entry and retrieval
+* Can type fast and is comfortable with text-based interfaces
+* Requires quick access to financial data and transaction histories
+* May need to work with the system for extended periods, necessitating efficiency and ease of use
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
-
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
-
+**Value proposition**: Manage client contacts and transaction history/info faster than a typical mouse/GUI driven app, tailored specifically for financial consultants dealing with numerous clients and their associated transactions.
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a … | I want to … | So that I can… |
+|----------|--------|-------------|----------------|
+| `***` | financial consultant | add a new client (add) | track and store client details |
+| `***` | financial consultant with fast turnaround on clients | delete a client (delete) | remove contacts I no longer need |
+| `***` | financial consultant with many clients | view a list of all clients (list) | quickly glance all clients' broad information |
+| `***` | financial consultant with many clients | search for a client by name (find) | quickly find their information |
+| `***` | financial consultant | add transactions to a client's record (addt) | keep track of financial activities for each client |
+| `***` | financial consultant with clients having complex transaction histories | view a list of transactions for a specific client (listt) | assess their financial history at a glance |
+| `***` | financial consultant | delete a transaction from a client's record (deletet) | correct errors or remove outdated information |
+| `**` | financial consultant prone to making typos | use fuzzy search | find clients even when I'm not sure of the exact spelling |
+| `**` | financial consultant with clients having complex transaction histories | calculate the balance for a client | quickly assess their overall financial standing |
+| `**` | financial consultant with clients from various industries | tag clients based on industry or other characteristics | easily group and categorise my client base |
+| `**` | financial consultant with volatile clients | edit an existing client's details | update their information when needed |
+| `**` | financial consultant managing clients with interrelated businesses | use nested tags | simulate relationships between clients more accurately |
+| `**` | financial consultant dealing with many transactions | search transactions by description (findt) | quickly locate specific financial activities |
+| `*` | financial consultant with a growing client base | import and export client data | easily transfer information between systems or share with colleagues |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `Clientell` and the **Actor** is the `financial consultant`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a new client**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
-
-    Use case ends.
+1. Financial consultant enters the command to add a new client with all required details
+2. Clientell validates the input and adds the new client
+3. Clientell displays a confirmation message
+Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The financial consultant enters invalid client details.
+    * 2a1. Clientell shows an error message.
+    * Use case ends.
 
-  Use case ends.
+**Use case: Delete a client**
 
-* 3a. The given index is invalid.
+**MSS**
 
-    * 3a1. AddressBook shows an error message.
+1. Financial consultant enters the delete command with the client index
+2. Clientell removes the specified client from the system
+3. Clientell displays a confirmation message
+Use case ends.
 
-      Use case resumes at step 2.
+**Extensions**
 
-*{More to be added}*
+* 2a. The financial consultant enters an invalid client index.
+    * 2a1. Clientell shows an error message.
+    * Use case ends.
+
+**Use case: List all clients**
+
+**MSS**
+
+1. Financial consultant enters the list command
+2. Clientell displays a list of all clients
+Use case ends.
+
+**Use case: Search for a client by name**
+
+**MSS**
+
+1. Financial consultant enters the find command with the client name or search criteria
+2. Clientell processes the search and returns a list of the matching clients
+Use case ends.
+
+**Extensions**
+
+* 2a. No matching clients found.
+    * 2a1. Clientell informs the financial consultant that no matches were found.
+    * Use case ends.
+
+**Use case: Add a transaction to a client's record**
+
+**MSS**
+
+1. Financial consultant enters the command to add a transaction with all required details
+2. Clientell validates the input and adds the new transaction to the specified client's record
+3. Clientell displays a confirmation message
+Use case ends.
+
+**Extensions**
+
+* 2a. The financial consultant enters invalid transaction details or an invalid client index.
+    * 2a1. Clientell shows an error message.
+    * Use case ends.
+
+**Use case: View list of transactions for a specific client**
+
+**MSS**
+
+1. Financial consultant enters the listt command with the client index
+2. Clientell displays a list of all transactions for the specified client
+Use case ends.
+
+**Extensions**
+
+* 2a. The financial consultant enters an invalid client index.
+    * 2a1. Clientell shows an error message.
+    * Use case ends.
+
+**Use case: Delete a transaction from a client's record**
+
+**MSS**
+
+1. Financial consultant enters the deletet command with the client index and transaction index
+2. Clientell removes the specified transaction from the client's record
+3. Clientell displays a confirmation message
+Use case ends.
+
+**Extensions**
+
+* 2a. The financial consultant enters an invalid client index or transaction index.
+    * 2a1. Clientell shows an error message.
+    * Use case ends.
+
+**Use case: Search transactions by description**
+
+**MSS**
+
+1. Financial consultant enters the findt command with description keywords
+2. Clientell processes the search and displays matching transactions
+Use case ends.
+
+**Extensions**
+
+* 2a. No matching transactions found.
+    * 2a1. Clientell informs the financial consultant that no matches were found.
+    * Use case ends.
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1. Should work on any mainstream OS as long as it has Java `17` or above installed.
+2. Should be able to hold up to 1000 clients, each with hundreds of transactions, without a noticeable sluggishness in performance for typical usage.
+3. A financial consultant with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Should respond to commands within 2 seconds for operations not involving complex calculations or large data retrieval.
+5. Should be usable by financial consultants with minimal training, leveraging intuitive CLI commands.
+6. All client and transaction data should be encrypted at rest to ensure confidentiality.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Mainstream OS**: Windows, Linux, Unix, macOS
+* **Transaction**: A record of a financial activity associated with a client, including details such as amount, description, and date
+* **Tag**: A label used to categorise and group clients based on various characteristics (e.g., industry, importance, company)
+* **Fuzzy search**: A search technique that finds matches even when the search query is misspelled or only partially correct
 
 --------------------------------------------------------------------------------------------------------------------
 
