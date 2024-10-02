@@ -34,6 +34,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](http://github.com/yinze66)] [[portfolio](team/yinze66.md)]
 
+* Role: Team Lead
+* Responsibilities: Ensure tasks are done on time
+
+### Nigel Low Qi Xiang
+
+<img src="images/nigellqx.png" width="200px">
+
+[[github](http://github.com/nigellqx)]
+[[portfolio](team/nigellqx.md)]
+
 * Role: Deliverables and deadlines
 * Responsibilities: Data
 
