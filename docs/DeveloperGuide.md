@@ -330,15 +330,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Preconditions:**
 1. Contacts are saved properly.
 
-**Guarantees: **
+**Guarantees:**
 1. The user's previously saved contacts will be listed with their details.
 2. Contacts are sorted alphabetically.
 
 **MSS**
 
-1.  User wishes to view his previously saved contacts.
-2.  System gets the saved contacts.
-3.  System shows the saved contacts to the user.
+1.  User requests for previously saved contacts.
+2.  System displays the saved contacts to the user.
 
     Use case ends.
 
