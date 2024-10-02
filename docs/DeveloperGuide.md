@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This document is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -268,7 +268,8 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: offers a streamlined tool for TAs to efficiently manage student contacts and work progress, 
+optimized for users who are fast typers, it’s portable, battery-efficient(light-weight), easy to learn and use.
 
 
 ### User stories
@@ -290,7 +291,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add contact**
+
+**MSS**
+1. User requests to add a person
+2. AddressBook adds the contact to the list
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Parameters contain unacceptable values.
+
+    * 1a1. AddressBook shows an error message.
+
+      Use case resumes at step 1.
+
+* 1b. Contact already exists.
+
+    * 1b1. AddressBook shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: Delete contact**
 
 **MSS**
 
@@ -313,7 +336,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: View contacts**
+
+**MSS**
+
+1. User requests to list persons with parameters e.g. number of contacts, reset sorting order
+2. AddressBook displays the list of persons
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Parameters contain unacceptable values.
+
+    * 1a1. AddressBook shows an error message.
+
+      Use case resumes at step 1.
+
+* 2a. The list is empty.
+    
+  * 2a1. AddressBook shows a message that the list is empty.
+    
+    Use case ends.
+
+
 
 ### Non-Functional Requirements
 
