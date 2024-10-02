@@ -51,6 +51,9 @@ Address Book Command Line Interface (ABCLI) is a **desktop app made specially fo
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
+* Items in angle brackets represent input choices.<br>
+    e.g `t/<buyer,seller>` can be used as `t/buyer` or as `t/seller` only.
+
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
@@ -86,11 +89,33 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
+<div markdown="block" class="alert alert-info">:hourglass_flowing_sand: **Expected change in release v1.1**
+
+You will be able to add client specific details to the address book.
+
+Format: `add n/NAME c/CONTACT NUMBER e/EMAIL t/<buyer,seller>`
+
+Examples: 
+* `add n/kennylewi c/81234567 e/kennylewi@email.com t/buyer`
+* `add n/ngzixin t/seller e/ngzixin@email.com c/91234567`
+</div>
+
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
 
 Format: `list`
+
+<div markdown="block" class="alert alert-info">:hourglass_flowing_sand: **Expected change in release v1.1**
+
+You will be able to view all people or filter by your contact type in the address book.
+
+Format: `view [t/<buyer,seller>]`
+
+Examples:
+* `view t/buyer`
+* `view`
+</div>
 
 ### Editing a person : `edit`
 
@@ -166,6 +191,18 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
+### Meet up `[coming in v1.1]`
+<div markdown="block" class="alert alert-info">:hourglass_flowing_sand: **Expected feature in release v1.1**
+
+You will be able to schedule a meet-up event with your contacts.
+
+Format: `meetup n/NAME i/INFO`
+
+Examples:
+* `meetup n/kennylewi i/Property viewing on saturday`
+</div>
+
+<br>_More features coming soon ..._
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
