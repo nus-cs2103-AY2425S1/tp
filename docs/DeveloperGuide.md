@@ -311,30 +311,75 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TrueRental` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a client**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User chooses to add a client
+2.  User types in a command consisting various flags and options
+3.  User enters client's information
+4.  TrueRental updates new client information
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. TrueRental detects error for incorrect flag
+
+    * 2a1. TrueRental prompts error for incorrect flag used
+    * 2a2. User enters correct flag
+
+    Use case ends.
+ 
+* 3a. TrueRental detects error within client's information
+
+    * 2a1. TrueRental prompts error for incorrect client's information
+    * 2a2. User enters correct client's information
+
+    Use case ends.
+
+* 3b. TrueRental detects duplicated client's information
+
+    * 2a1. TrueRental prompts error for duplicated client's information
+    * 2a2. User enters correct non-duplicated client's information
+
+    Use case ends.
+
+**Use case: Add a client's rental information**
+
+**MSS**
+
+1.  User chooses to add rental information to a specific client
+2.  User types in a command consisting various flags and options
+3.  User enters client's rental information
+4.  TrueRental updates new client information
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. TrueRental detects error for incorrect flag or option
+
+    * 2a1. TrueRental prompts error for incorrect flag or option used
+    * 2a2. User enters correct flag or option
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 3a. TrueRental detects error within client's rental information
 
-    * 3a1. AddressBook shows an error message.
+    * 2a1. TrueRental prompts error for incorrect client's rental information
+    * 2a2. User enters correct client's rental information
 
-      Use case resumes at step 2.
+  Use case ends.
+
+* 3b. TrueRental detects duplicated client's rental information
+
+    * 2a1. TrueRental prompts error for duplicated client's rental information
+    * 2a2. User enters correct non-duplicated client's information
+
+  Use case ends.
 
 *{More to be added}*
 
@@ -343,6 +388,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  A user should be able to see clearly with reasonably large texts.
 
 *{More to be added}*
 
