@@ -37,7 +37,7 @@ src/test/data/sandbox/
 docs/_site/
 docs/_markbind/logs/
 *.iml
-# bin/
+bin/
 
 # Markbind preview files
 /_markbind/
