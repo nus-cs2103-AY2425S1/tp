@@ -9,44 +9,44 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Nikhil Sultania
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/timenikhil.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[LinkedIn](www.linkedin.com/in/timenikhil)]
+[[github](https://github.com/Timenikhil)]
+[[portfolio](team/NikhilSultania.md)]
 
-* Role: Project Advisor
+* Role: Team Lead
 
 ### Theodore Lim
 
 <img src="images/obrona.png" width="200px">
 
 [[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/kimxw.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Josh Thoo Jen Sen
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/joshthoo.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/joshthoo)] [[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Kimaya Wanjari
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kimxw.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/kimxw)]
+[[portfolio](team/kimxw.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Team Lead
 
 ### Nathan Shew
 
