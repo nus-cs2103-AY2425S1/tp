@@ -351,8 +351,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+2.  Should work on Mac as long as javafx and java '17' both installed.
+3.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+4.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+5.  Should take less than 100 millisecond to finish every command operation
+6.  Should take less 1 gigabytes of storage
+7.  Should have an upper limit of 10000 contacts on the list
+8.  Should take no more than one contact for each person
+9.  Should take no more than 1 emergency contact for each person
 
 *{More to be added}*
 
