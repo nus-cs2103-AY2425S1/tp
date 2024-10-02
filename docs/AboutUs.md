@@ -7,38 +7,37 @@
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
-### Vincent Ng
+### Clement Oh
 
-<img src="images/nws321.png" width="200px">
+<img src="images/gra7ityic3.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/nws321)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Software Developer
-
-### Wei Zhi
-
-<img src="images/leongwz.png" width="200px">
-
-[[github](http://github.com/leongwz)]
+[[github](https://github.com/Gra7ityIC3)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: TBC
 
-### Johnny Doe
+### Wei Zhi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/leongwz.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/LeongWZ)]
+[[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: TBC
+
+### Vincent Ng
+
+<img src="images/nws321.png" width="200px">
+
+[[github](https://github.com/nws321)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities: TBC
 
 ### Arjun Kumanan
 
@@ -58,4 +57,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: TBC
