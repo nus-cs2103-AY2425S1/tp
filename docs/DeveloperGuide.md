@@ -385,6 +385,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2b. Person not found (Invalid index).
     * 2b1. AgentConnect shows a warning message indicating index is invalid.
     * 2b2. User resubmits the command with a valid index.
+    * Use case resumes from step 2.
 
 *{More to be added}*
 
