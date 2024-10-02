@@ -5,7 +5,7 @@ header_pages:
   - UserGuide.md
   - DeveloperGuide.md
   - AboutUs.md
-  
+
 markdown: kramdown
 
 repository: "se-edu/addressbook-level3"
