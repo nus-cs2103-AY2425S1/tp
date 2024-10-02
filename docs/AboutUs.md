@@ -38,12 +38,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Tan Wen Xuan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/e1121208.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/e1121208)]
+[[portfolio](team/e1121208.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
