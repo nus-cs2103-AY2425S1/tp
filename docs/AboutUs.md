@@ -9,6 +9,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Saw Jing Wen
+
+<img src="images/sawjingwen.png" width="200px">
+
+[[homepage](https://jwen.cc)]
+[[github](https://github.com/shotnothing)]
+[[portfolio](https://jwen.cc)]
+
+* Role: Developer
+* Responsibilities: UI + DevOps
+
 ### John Doe
 
 <img src="images/johndoe.png" width="200px">
