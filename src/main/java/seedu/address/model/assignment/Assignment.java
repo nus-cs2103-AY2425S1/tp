@@ -15,12 +15,12 @@ public class Assignment {
 
     public static final String MESSAGE_CONSTRAINTS =
             "The maximum score should be greater than or equal to the minimum score of 0";
+    private static final int MIN_SCORE = 0;
 
     // Identity fields
     private final Name name;
 
     // Data fields
-    private final static int minScore = 0;
     private final int maxScore;
     private int score = 0;
     private boolean hasSubmitted = false;
@@ -39,7 +39,7 @@ public class Assignment {
      * Returns true if a given maxScore is a valid score.
      */
     public static boolean isValidScore(int test) {
-        return test >= minScore;
+        return test >= MIN_SCORE;
     }
 
     /**
@@ -72,7 +72,7 @@ public class Assignment {
 
         Assignment otherAssignment = (Assignment) other;
         return name.equals(otherAssignment.name)
-                && minScore == otherAssignment.minScore
+                && MIN_SCORE == otherAssignment.MIN_SCORE
                 && maxScore == otherAssignment.maxScore
                 && score == otherAssignment.score
                 && hasSubmitted == otherAssignment.hasSubmitted;
@@ -81,14 +81,14 @@ public class Assignment {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, minScore, maxScore);
+        return Objects.hash(name, MIN_SCORE, maxScore);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
-                .add("minScore", minScore)
+                .add("MIN_SCORE", MIN_SCORE)
                 .add("maxScore", maxScore)
                 .toString();
     }
