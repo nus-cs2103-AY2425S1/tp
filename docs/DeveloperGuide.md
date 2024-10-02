@@ -287,58 +287,53 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​                                                | I want to …​                                     | So that I can…​                                                        |
+|----------|--------------------------------------------------------|--------------------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | real estate agent                                 | add a new client (buyer or seller) to ClientGrid | keep all their contact information organized in one place
+| see usage instructions       | refer to instructions when I forget how to use the App |
+| `* * *`  | user                                                   | add a new person                                 |                                                                        |
+| `* * *`  | user                                                   | delete a person                                  | remove entries that I no longer need                                   |
+| `* * *`  | user                                                   | find a person by name                            | locate details of persons without having to go through the entire list |
+| `* *`    | user                                                   | hide private contact details                     | minimize chance of someone else seeing them by accident                |
+| `*`      | user with many persons in the address book             | sort persons by name                             | locate a person easily                                                 |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `ClientGrid` and the **Actor** is the `real estate agent`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC1 - Add Client (Buyer or Seller)**
 
-**MSS**
+MSS:
+1. Real estate agent requests to add a buyer/ seller to ClientGrid and passes in the buyer/ seller's name, phone number and email.
+2. ClientGrid will add the buyer/ seller with the name, phone number, and email specified by the real estate agent.
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+Extensions:
 
-    Use case ends.
+&nbsp;&nbsp;&nbsp;&nbsp;2a. ClientGrid detects an error in the name/ phone number/ email format provided by the real estate agent.
 
-**Extensions**
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2a1. ClientGrid requests for the correct data.
 
-* 2a. The list is empty.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2a2. Real estate agent enters new data.
 
-  Use case ends.
+Steps 2a1-2a2 are repeated until the data entered are correct.
 
-* 3a. The given index is invalid.
-
-    * 3a1. AddressBook shows an error message.
-
-      Use case resumes at step 2.
-
-*{More to be added}*
+Use case ends.
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 clients and 500 properties without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. The client and property databases should be updated after every command successfully executed by ClientGrid.
 
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Clients**: Buyers or Sellers of properties the real estate agent is managing
 
 --------------------------------------------------------------------------------------------------------------------
 
