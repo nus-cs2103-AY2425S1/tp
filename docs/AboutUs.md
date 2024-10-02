@@ -36,7 +36,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/weihanwong)] [[portfolio](team/weihanwong.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Data + DevSecOps
 
 ### Jean Doe
 
