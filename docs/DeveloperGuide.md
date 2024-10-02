@@ -300,7 +300,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `ClubConnect` and the **Actor** is the `User`, unless specified otherwise)
 
 ---
 
@@ -390,7 +390,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor:** User  
 **MSS:**
 1. User specifies criteria and keywords.
-2. App shows a list of contacts that match the provided criteria and keywords.
+2. App shows a list of contacts that match the provided criteria and keywords.  
+   Use case ends.
 
 **Extensions:**
 * 1a. No criteria is provided.
@@ -435,19 +436,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor:** User  
 **MSS:**
 1. User requests to mass delete contacts by providing a list of contact IDs.
-2. AddressBook validates the provided contact IDs.
-3. AddressBook deletes the valid contacts.
-4. AddressBook logs the success message indicating the number of contacts deleted.  
+2. App validates the provided contact IDs.
+3. App deletes the valid contacts.
+4. App logs the success message indicating the number of contacts deleted.  
    Use case ends.
 
 **Extensions:**
 * 2a. No contact IDs provided.  
-  Use case ends.
+    * 1a1. App shows an error message to tell the user that the given name does not exist.  
+      Use case ends.
 * 2b. Invalid contact ID(s) provided.
-    * 2b1. AddressBook throws an IllegalArgumentException with the message "Invalid contact ID(s): [invalidID]. Please provide valid contact IDs."  
+    * 2b1. App shows an error message to tell the user that the contact is invalid and ask the user to provide valid contact IDs  
       Use case ends.
 * 2c. Duplicate contact IDs provided.
-    * 2c1. AddressBook handles duplicates internally, ensuring each ID is processed once.
+    * 2c1. App handles duplicates internally, ensuring each ID is processed once.
     * 2c2. Logs the message "Successfully deleted [number] contacts."  
       Use case resumes at step 2.
 
@@ -457,19 +459,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor:** User  
 **MSS:**
 1. User requests to filter contacts by specifying an event type.
-2. AddressBook validates the provided event type.
-3. AddressBook retrieves and returns the list of contacts associated with the specified event type.
-4. AddressBook logs the message indicating the number of contacts filtered.  
+2. App validates the provided event type.
+3. App retrieves and returns the list of contacts associated with the specified event type.
+4. App logs the message indicating the number of contacts filtered.  
    Use case ends.
 
 **Extensions:**
 * 2a. Invalid event type provided.
-    * 2a1. AddressBook throws an IllegalArgumentException with the message "Invalid event type: [eventType]. Please provide a valid event type."  
+    * 2a1. App tells the user that the event is invalid and asks the user to provide a valid event type.  
       Use case ends.
 * 2b. No contacts associated with the specified event type.
-    * 2b1. AddressBook returns an empty list.
+    * 2b1. App returns an empty list.
     * 2b2. Logs the message "Filtered 0 contacts for event type: [eventType]."  
       Use case ends.
+
+---
 
 ### Non-Functional Requirements
 
