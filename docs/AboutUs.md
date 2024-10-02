@@ -9,22 +9,30 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Ong Ye Hao Darren
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/o-darren.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[github](https://github.com/O-Darren)]
+[[portfolio](team/o-darren.md)]
+
+
+* Role: Scheduling and tracking
+
+### Ian Cheah
+
+<img src="images/iancheah.png" width="200px">
+
+[[github](http://github.com/IanCheah)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+* Role: team member
 
-### Jane Doe
+### Liu Yinze
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yinze66.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/yinze66)] [[portfolio](team/yinze66.md)]
 
 * Role: Team Lead
 * Responsibilities: Ensure tasks are done on time
@@ -58,3 +66,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: UI
+
