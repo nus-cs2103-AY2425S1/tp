@@ -383,21 +383,25 @@ testers are expected to do more *exploratory* testing.
 
 ### Glossary
 1. **ABCLI**  
-Our product name
+Our product name.
 
 1. **CLI**  
 Command line interface. the text box presented to the user.
 
 1. **Command Line**   
-A text box where you enter commands
+A text box where you enter commands.
+
+1. **Flag**  
+In our context, a flag is something preceded by a /, but is not the initial command. e.g in `/add /n <name>`,  `/n` is a flag but `/view` is not.
 
 1. **GUI**  
 Graphical user interface. The screen you see when opening the application.
 
 1. **Java**  
-A programming language
+A programming language.
+
 1. **Parameter**  
-A value that you need to provide for the command to work. e.g in /add <name>, <name> is a parameter.
+A value that you need to provide for the command to work. e.g in `/add /n <name>`, `<name>` is a parameter.
 
 1. **Windows**  
 An operating system
