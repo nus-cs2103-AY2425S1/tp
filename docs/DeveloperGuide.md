@@ -351,7 +351,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 
-**Use case: UC02 - Add or Update Phone Number to Contact**
+**Use case: UC02 - Add Phone Number to Contact**
 
 **Guarantees:**
 * No duplicate phone numbers will exist across different contacts.
@@ -360,7 +360,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User issues the add-phone command with a contact index and a phone number. 
-2.  The system updates or adds the phone number to the contact and displays a success message
+2.  The system adds the phone number to the contact and displays a success message
 3.  The system displays the updated contact information in the address book.
 
     Use case ends.
@@ -386,12 +386,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 
-**Use case: UC03 - Add or Update Address to Contact**
+**Use case: UC03 - Add Address to Contact**
 
 **MSS**
 
 1.  User issues the add-address command with a contact index and an address. 
-2.  The system updates or adds the address to the contact and displays a success message
+2.  The system adds the address to the contact and displays a success message
 3.  The system displays the updated contact information in the address book.
 
     Use case ends.
@@ -410,12 +410,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
         The use case ends.
 
 
-**Use case: UC04 - Add or Update Email to Contact**
+**Use case: UC04 - Add Email to Contact**
 
 **MSS**
 
 1.  User issues the add-email command with a contact index and an email address. 
-2.  The system updates or adds the email address to the contact and displays a success message
+2.  The system adds the email address to the contact and displays a success message
 3.  The system displays the updated contact information in the address book.
 
     Use case ends.
