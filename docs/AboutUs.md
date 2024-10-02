@@ -14,7 +14,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Nathan Loo
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/natlv.png" width="200px">
 
 [[homepage](https://nathan-loo.vercel.app)]
 [[github](http://github.com/natlv)]
