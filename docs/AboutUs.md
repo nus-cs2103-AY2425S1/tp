@@ -31,32 +31,22 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
+### Sharon Soh
+
+<img src="images/xgladiate.png" width="200px">
+
+[[github](https://github.com/xGladiate)]
+[[portfolio](team/sharonsoh.md)]
+
+* Role: Developer
+* Responsibilities: UI
+
 ### Zhao Yiheng
 
 <img src="images/linedoestrolling.png" width="200px">
 
 [[github](http://github.com/linedoestrolling)]
 [[portfolio](team/zhaoyiheng.md)]
-
-* Role: Developer
-* Responsibilities: UI
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: UI
