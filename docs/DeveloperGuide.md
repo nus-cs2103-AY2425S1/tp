@@ -289,12 +289,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​ | I want to …​                            | So that I can…​                      |
 |----------|---------|-----------------------------------------|--------------------------------------|
-| `* * *`  | nurse   | add in emergency contact numbers        | refer to them during an emergency.   |
+| `* * *`  | nurse   | add in emergency contact numbers        | refer to them during an emergency    |
 | `* * *`  | nurse   | delete emergency contact numbers        | remove irrelevant emergency contacts |
 | `* * *`  | nurse   | update a patient’s category             | reflect changes in their care status |
 | `* * *`  | nurse   | assign multiple categories to a patient | quickly identify the care level      |
 | `* *`    | nurse   | add tasks                               | track what task needs to be done     |
-| `*`      | nurse   | delete tasks                            | remove irrelevant taskss             |
+| `*`      | nurse   | delete tasks                            | remove irrelevant tasks              |
 
 *{More to be added}*
 
@@ -309,7 +309,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User chooses to add a new task.
 2. NovaCare asks for a patient ID and description of the task.
 3. User inputs the requested information.
-4. NovaCare outputs message showing successful task creation
+4. NovaCare outputs message showing successful task creation.
 
 
     Use case ends.
