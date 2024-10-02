@@ -266,38 +266,101 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-- has a need to manage a significant number of contacts
+A sales and customer relations representative working in the F&B industry. In
+particular, this representative works with B2B sales.
+
+- has a need to manage a significant number of business contacts
 - prefer desktop apps over other types
 - can type fast
 - prefers typing to mouse interactions
 - is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Efficiently manage and organise a large number of contacts
+faster than a typical mouse/GUI driven app
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ---------------------------- | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
-
-_{More to be added}_
+| Priority | As a …           | I want to …                                                                 | So that I can …                                                        |
+| -------- | ---------------- | --------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `* * *`  | user             | add new contacts                                                            | save the contact information of people                                 |
+| `* * *`  | user             | delete a contact                                                            | free up space in my app                                                |
+| `* * *`  | user             | view all contact                                                            | retrieve contact information                                           |
+| `* * *`  | user             | save all contact                                                            | retain all information for when i reopen the app                       |
+| `* * *`  | sales rep        | have a low query time                                                       | avoid wasting much time querying my desired contact                    |
+| `* *`    | user             | find a person by name                                                       | locate details of persons without having to go through the entire list |
+| `* *`    | user             | search through my contacts                                                  | find a specific person                                                 |
+| `* *`    | new user         | see usage instructions                                                      | know how to use the app                                                |
+| `* *`    | user             | edit contact                                                                | update contact with new information                                    |
+| `* *`    | user             | sort contact by name                                                        | see whose contact I have saved                                         |
+| `* *`    | user             | archive contact                                                             | hide less frequently used contacts without deleting them               |
+| `* *`    | user             | be alerted when a contact already exist                                     | avoid accidentally creating a duplicate                                |
+| `* *`    | user             | hide private contact details                                                | minimize chance of someone else seeing them by accident                |
+| `* *`    | user             | undo a command                                                              | fix a mistake I made                                                   |
+| `* *`    | new user         | import all contact details into the app                                     | start using without manual setup                                       |
+| `* *`    | sales rep        | keep track of clients I have contacted by seeing when I last contacted them | avoid wasting time calling them again about the same product           |
+| `* *`    | sales rep        | view my most popular/active clients                                         | promote the new product                                                |
+| `* *`    | sales rep        | remember the client's preferred products                                    | recommend related products                                             |
+| `* *`    | sales rep        | add notes to client's contact                                               | keep track of my conversation with them                                |
+| `* *`    | sales rep        | group my clients by industry                                                | tell if sales are doing well in that industry among other metrics      |
+| `* *`    | sales rep        | add tags to clients                                                         | categorize them                                                        |
+| `* *`    | sales rep        | keep note of my client's email addresses                                    | potentially send promotions or survey forms                            |
+| `* *`    | sales rep        | export a list of contact emails                                             | add them to a mailing list                                             |
+| `* *`    | sales rep        | add a tag to multiple clients                                               | tag the clients more easily                                            |
+| `*`      | user             | sort contacts by name                                                       | locate a person easily                                                 |
+| `*`      | experienced user | use keyboard shortcuts                                                      | navigate the app faster                                                |
+| `*`      | sales rep        | contact my client quickly from the app                                      | avoid typing numbers repeatedly on my phone                            |
 
 ### Use cases
 
 (For all use cases below, the **System** is the `Bizbook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC1 - Delete a person**
+**Use case: UC1 - Add a person**
 
 **MSS**
 
-1.  Actor requests to <u>list persons (UC No.)</u>.
+1.  Actor requests to add a new person by entering a command.
+2.  System displays a success message along with the details of the newly added person.
+
+    Use case ends.
+
+**Extensions**
+
+- 1a. There is an error in the Actor's command.
+
+  - 1a1 System shows an error message.
+
+  Use case resumes at step 1.
+
+**Use case: UC2 - List all people saved in the System**
+
+**MSS**
+
+1.  Actor requests to list all people saved in the System by entering a command.
+2.  System shows a list of persons.
+
+    Use case ends.
+
+**Extensions**
+
+- 1a. If there are no contacts stored in the System.
+
+  - 1a1 System informs Actor that they have no contacts stored.
+
+  Use case ends.
+
+- 1b. The System detects an error in the entered command.
+
+  - 1b1 System requests for a valid command.
+
+  Use case resumes at step 1.
+
+**Use case: UC3 - Delete a person**
+
+**MSS**
+
+1.  Actor requests to <u>list all people saved in the System (UC2)</u>.
 2.  Actor requests to delete a specific person in the list.
 3.  System deletes the person.
 4.  System <u>save contacts to save file (UC No.)</u>.
@@ -312,7 +375,7 @@ _{More to be added}_
 
     Use case resumes at step 2.
 
-**Use case: UC2 - Load contact from save file**
+**Use case: UC4 - Load contact from save file**
 
 **Actor: `BizBook`**
 
@@ -350,7 +413,7 @@ _{More to be added}_
 
   Use case resumes at step 3.1.
 
-**Use case: UC3 - Save contact to save file**
+**Use case: UC5 - Save contact to save file**
 
 **Actor: `BizBook`**
 
