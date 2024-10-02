@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.DateTimeException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,6 +10,9 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.goods.Date;
+import seedu.address.model.goods.GoodsCategories;
+import seedu.address.model.goods.GoodsName;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -48,6 +52,20 @@ public class ParserUtil {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String goodsName} into a {@code GoodsName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code goodsName} is invalid.
+     */
+    public static GoodsName parseGoodsName(String goodsName) throws ParseException {
+        String trimmedName = goodsName.trim();
+        if (!GoodsName.isValidName(trimmedName)) {
+            throw new ParseException(GoodsName.MESSAGE_CONSTRAINTS);
+        }
+        return new GoodsName(trimmedName);
     }
 
     /**
@@ -120,5 +138,43 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses {@code String category} into a {@code GoodsCategories}
+     * @param category A string containing the category name
+     *
+     * @throws ParseException if the given {@code category} is invalid
+     */
+    public static GoodsCategories parseGoodsCategory(String category) throws ParseException {
+        requireNonNull(category);
+        switch (category) {
+        case "CONSUMABLES":
+            return GoodsCategories.CONSUMABLES;
+        case "LIFESTYLE":
+            return GoodsCategories.LIFESTYLE;
+        case "SPECIALTY":
+            return GoodsCategories.SPECIALTY;
+        default:
+            throw new ParseException(GoodsCategories.MESSAGE_UNKNOWN_CATEGORY);
+        }
+    }
+
+    /**
+     * Parses {@code String dateTime} into a {@code Date}
+     * @param dateTime A string containing the datetime string
+     *
+     * @throws ParseException if the given {@code dateTime} does not match the format
+     */
+    public static Date parseDateTimeValues(String dateTime) throws ParseException {
+        requireNonNull(dateTime);
+        Date date;
+        try {
+            date = new Date(dateTime);
+        } catch (DateTimeException e) {
+            throw new ParseException(Date.MESSAGE_INVALID_FORMAT);
+        }
+
+        return date;
     }
 }
