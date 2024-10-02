@@ -442,3 +442,28 @@ testers are expected to do more *exploratory* testing.
 1. The GUI should work well for standard screen resolutions 1920x1080 and higher and for screen scales 100% and 125%. In addition, the GUI should be usable for resolutions 1280x720 and higher, and for screen scales 150%.
 
 1. ABCLI has to be packaged into a single JAR file.
+
+### Glossary
+1. **ABCLI**  
+Our product name.
+
+1. **CLI**  
+The command line interface is a way to interact with a computer by typing text commands instead of using a mouse to click on icons.
+
+1. **Command Line**   
+A text box where you enter commands.
+
+1. **Flag**  
+In our context, a flag is something preceded by a /, but is not the initial command. e.g in `add n/NAME`,  `n/` is a flag but `add` is not.
+
+1. **GUI**  
+Graphical user interface. The screen you see when opening the application.
+
+1. [**Java**](https://www.java.com/en/)  
+A programming language.
+
+1. **Parameter**  
+A value that you need to provide for the command to work. e.g in `add n/NAME`, `NAME` is a parameter.
+
+1. [**Windows**](https://en.wikipedia.org/wiki/Microsoft_Windows)  
+An operating system.
