@@ -287,38 +287,36 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: Very high (must have) - `****`,  High (good to have) - `***`, Medium (should have) - `**`, Low (unlikely to have) -  `*`,
 
-| Priority | As a …​                                    | I want to …​                                           | So that I can…​                                                        |
-|----------|--------------------------------------------|--------------------------------------------------------|------------------------------------------------------------------------|
-| `****`   | TA with multiple students                  | add a new student                                      | store important data about my students                                 |
-| `****`   | TA with multiple students                  | view my students                                       | see who is in my class                                                 |
-| `****`   | TA                                         | delete a student's information                         | remove students who are no longer part of my class                     |
-| `****`   | TA having many classes                     | add assignments                                        | track assignments for students                                         |
-| `****`   | TA having many classes                     | add an assignment score to a student                   | grade my students                                                      |
-| `****`   | TA having many classes                     | view assignments                                       | have an overview of the assignments                                    |
-| `****`   | TA having many classes                     | delete assignments                                     | remove old assignments                                                 |
-| `****`   | TA                                         | save data locally                                      | access them at a later time                                            |
-| `****`   | TA who grades assignments                  | edit status of submitted assignments                   | keep track if a student has submitted an assignment                    |
-| `***`    | TA                                         | store contacts of parents                              | communicate important information with parents                         |
-| `***`    | TA                                         | create remark for individual students                  | not forget any special consideration for certain students              |
-| `***`    | TA having many classes                     | add a class                                            | tag students to be part of a class                                     |
-| `***`    | TA having many classes                     | delete a class                                         | remove old/expired classes                                             |
-| `***`    | TA with multiple classes                   | tag students within the same class                     | sort deliverables and progress by tags                                 |
-| `***`    | TA                                         | edit class groups                                      | keep an up-to-date list of students in each group                      |
-| `***`    | TA                                         | edit assignments                                       | ensure that the assignments are up to date                             |
-| `***`    | TA having multiple classes                 | tag an assignment to a class                           | know which classes have which assignments                              |
-| `***`    | TA                                         | view my student's contact information                  | know how I can contact them if there are any issues                    |
-| `***`    | TA                                         | view student submissions for a class                   | know who has submitted                                                 |
-| `***`    | TA                                         | view my class timetable                                | know when my classes are                                               |
-| `***`    | TA                                         | view the submission deadlines                          | know when to remind my students                                        |
-| `***`    | forgetful TA                               | be reminded on deadlines due in 2 days                 | prioritize which assignments to mark                                   |
-| `***`    | TA                                         | sort an assignment by score                            | see the best and worst performers                                      |
-| `**`     | TA                                         | link scanned PDF files (URL) to a student              | keep track of previous assignments for each student                    |
-| `**`     | TA                                         | view all the files (or just file names) submitted by the student before | not waste time finding them somewhere else              |
-| `**`     | TA who wants to improve grades             | compare average student performance between sections or classes | know which teaching methods are most effective          |
-| `**`     | TA who wants to improve grades             | create a priority list of students who need the most attention | allocate my time effectively                            |
-| `*`      | TA                                         | view a student's attendance history                    | mark their attendance scores throughout the whole semester             |
-| `*`      | TA who manages billing                     | check if students have paid correct fees               | remind students/parents if they have not paid their monthly fees       |
-| `*`      | TA                                         | mark attendance and manage participation marks for different students in real time | not need to update from paper every time               |
+| Priority | As a …​                                    | I want to …​                                           | So that I can…​                                                       |
+|----------|--------------------------------------------|--------------------------------------------------------|-----------------------------------------------------------------------|
+| `****`   | TA with multiple students                  | add a new student                                      | store important data about my students                                |
+| `****`   | TA with multiple students                  | view my students                                       | see who is in my class                                                |
+| `****`   | TA                                         | delete a student's information                         | remove students who are no longer part of my class                    |
+| `****`   | TA having many classes                     | add assignments                                        | track assignments for students                                        |
+| `****`   | TA having many classes                     | add an assignment score to a student                   | grade my students                                                     |
+| `****`   | TA having many classes                     | view assignments                                       | have an overview of the assignments                                   |
+| `****`   | TA having many classes                     | delete assignments                                     | remove old assignments                                                |
+| `****`   | TA                                         | save data locally                                      | access them at a later time                                           |
+| `****`   | TA who grades assignments                  | edit status of submitted assignments                   | keep track if a student has submitted an assignment                   |
+| `***`    | TA                                         | create remark for individual students                  | not forget any special consideration for certain students             |
+| `***`    | TA having many classes                     | add a class                                            | tag students to be part of a class                                    |
+| `***`    | TA having many classes                     | delete a class                                         | remove old/expired classes                                            |
+| `***`    | TA with multiple classes                   | tag students within the same class                     | sort deliverables and progress by tags                                |
+| `***`    | TA                                         | edit class groups                                      | keep an up-to-date list of students in each group                     |
+| `***`    | TA                                         | edit assignments                                       | ensure that the assignments are up to date                            |
+| `***`    | TA having multiple classes                 | tag an assignment to a class                           | know which classes have which assignments                             |
+| `***`    | TA                                         | view my student's contact information                  | know how I can contact them if there are any issues                   |
+| `***`    | TA                                         | view student submissions for a class                   | know who has submitted                                                |
+| `***`    | TA                                         | view my class timetable                                | know when my classes are                                              |
+| `***`    | TA                                         | view the submission deadlines                          | know when to remind my students                                       |
+| `***`    | forgetful TA                               | be reminded on deadlines due in 2 days                 | prioritize which assignments to mark                                  |
+| `***`    | TA                                         | sort an assignment by score                            | see the best and worst performers                                     |
+| `**`     | TA                                         | link scanned PDF files (URL) to a student              | keep track of previous assignments for each student                   |
+| `**`     | TA                                         | view all the files (or just file names) submitted by the student before | not waste time finding them somewhere else           |
+| `**`     | TA who wants to improve grades             | compare average student performance between sections or classes | know which teaching methods are most effective         |
+| `**`     | TA who wants to improve grades             | create a priority list of students who need the most attention | allocate my time effectively                           |
+| `*`      | TA                                         | view a student's attendance history                    | mark their attendance scores throughout the whole semester            |
+| `*`      | TA                                         | mark attendance and manage participation marks for different students in real time | not need to update from paper every time              |
 
 *{More to be added}*
 
