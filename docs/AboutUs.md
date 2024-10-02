@@ -21,12 +21,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Jane Doe
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yimjianbing.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/yimjianbing)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Team Lead
+* Role: Frontend designer
 * Responsibilities: UI
 
 ### Martin NGGGGGG
