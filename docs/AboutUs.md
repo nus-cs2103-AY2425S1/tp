@@ -11,9 +11,19 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Gavin Soh
+
+<img src="images/gavinsoh.png" width="200px">
+
+[[github](http://github.com/gavinsoh)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Team Lead
+* Responsibilities: UI
+
 ### Jarrell Chia
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jarrellc1.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/jarrellc1)]
@@ -21,15 +31,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
 
 ### Choo Yi Xiang
 
@@ -53,7 +54,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Chong Xin Wei
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/xinweichong.png" width="200px">
 
 [[github](http://github.com/xinweichong)]
 [[portfolio](team/johndoe.md)]
