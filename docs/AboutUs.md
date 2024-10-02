@@ -19,6 +19,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Integration
 
+### Haixin
+
+<img src="images/lihaixin000.png" width="200px">
+
+[[homepage](http://www.comp.nus.edu.sg/~damithch)]
+[[github](https://github.com/LiHaixin000)]
+[[portfolio](team/lihaixin000.md)]
+
+* Role: Code Quality
+
 ### Nicholas Koh
 
 <img src="images/nicholaskoh1.png" width="200px">
