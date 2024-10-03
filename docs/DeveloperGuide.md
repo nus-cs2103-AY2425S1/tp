@@ -403,6 +403,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case ends.
 
+**Use case: UC05 - View patient**
+
+**MSS**
+
+1. Doctor request to list patients
+2. WardWatch shows a list of patients
+3. Doctor request to view a specific patient from the list
+4. WardWatch displays information about the specific patient
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty
+
+    * 2a1. WardWatch shows that list is empty
+
+      Use case ends.
+
+* 3a. The patient entered does not exist
+
+    * 3a1. WardWatch shows an error message.
+
+      Use case resumes at step 2.
+
+
+
 *{More to be added}*
 
 ### Non-Functional Requirements
