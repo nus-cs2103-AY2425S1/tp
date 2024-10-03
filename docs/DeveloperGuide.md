@@ -302,7 +302,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is `Prudy` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case 1: Delete a client**
+**Use case: UC1 - List clients
+
+**MSS**
+
+1.  User requests to list clients
+1.  Prudy shows a list of clients
+
+    Use case ends.
+
+**Use case: UC2 - Delete a client**
+
+**Preconditions: User has done __UC1 - List clients__
 
 **MSS**
 
@@ -362,6 +373,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. Prudy shows an error message.
 
       Use case resumes at step 2.
+
+**Use case 4: Add a policy to client**
+
+1.  User requests to list clients
+1.  Prudy shows a list of clients
+1.  User requests to add a policy (or multiple policies) to a specific client in the list
+1.  Prudy adds the policy under the client
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given 
 
 ### Non-Functional Requirements
 
