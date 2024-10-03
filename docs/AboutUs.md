@@ -47,10 +47,10 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Zachery Ng
 
-<img src="images/RohitSharma.jpg" width="200px">
+<img src="images/bbbbcccd.png" alt="Zachery's profile photo" width="200px">
 
 [[github](http://github.com/bbbbcccd)]
 [[portfolio](team/zachery.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Everything
