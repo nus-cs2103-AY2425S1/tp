@@ -260,60 +260,154 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Target user profile**: School of Computing students
 
-* has a need to manage a significant number of contacts
+* has a need to manage a significant number of contacts of other students, recruiters, potential employers in
+networking events
 * prefer desktop apps over other types
-* can type fast
+* can type fast due to the nature of their course
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Allows SoC students to quickly and easily manage the relationships they form with others in
+school and on their journey to acquire internships. SoC students are likely to prefer a CLI due to their background 
+in computing. Also, they can most likely type fast.
+
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                              | I want to …​                                                           | So that I can…​                                    |
+| -------- | ------------------------------------ | -------------------------------------------------------------------- | ------------------------------------------------- |
+| `* * *`  | computer science student             | have a CLI                                                           | navigate around the app easier                    |
+| `* * *`  | school of computing student          | have an option of adding new contacts quickly                        | quickyl track people while socializing            |
+| `* * *`  | user                                 | be able to edit contact information                                  | so that I can change lines quickly                |
+| `* * *`  | user                                 | be able to delete contacts                                           |                                                   |
+| `* * *`  | first time user                      | have a user guide for the app                                        | navigate around easily                            |
+| `* * *`  | computing student                    | be able to save the contact's Github username                        |                                                   |
+| `* * *`  | user trying to make connections      | be able to label a contact as a "follow-up"                          | remember to contact them                          |  
+| `* * *`  | student looking for an internship    | have a feature to rank the priority of my contacts                   | focus more on internships with a higher chance    |
+| `* * *`  | student trying to make connections   | have a feature to add potential meeting date with my contact         | keep track of my schedule                         | 
+| `* *`    | user trying to make connections      | be able to tag the contacts by association                           | know how I met them                               |
+| `* *`    | user trying to make connections      | be able to assign the current connection (eg. connected on LinkedIn) | know how close I am to each contact               |
+| `* *`    | user                                 | be able to mark each action (e.g. connected on LinkedIn) with a date | keep track of these details                       |
+| `* *`    | user                                 | be able to filter my contact list by association                     |                                                   |
+| `* *`    | user                                 | be able to filter my contact list by current stage                   |                                                   |
+| `* *`    | user                                 | be able to filter my contact list by last action date                |                                                   |
+| `*`      | student                              | be able to create contacts with empty fields                         | remember people who I am starting to get to know  |
+| `*`      | frequent user                        | be able to change my default sort                                    | keep my preferred sort                            |
+| `*`      | user                                 | be able to use CLI to open up a new window                           | show all details for a given contact              |
+| `*`      | user                                 | be able to archive all my current contacts                           | save less-contacted                               |
+| `*`      | lazy user                            | use short commands                                                   | obtain results quicker                            |
+| `*`      | user who is not strong at connecting | get prompted for potential actions                                   | connect with my contacts easier                   |
+| `*`      | user looking to expand my network    | be able to view other student's email                                | contact them                                      |
+| `*`      | student looking for an internship    | be able to set reminders                                             | remember to follow up with people I meet          |
+| `*`      | advanced user                        | have a visualisation of my connections progress                      | have a gauge of my network connections            |
+
 
 *{More to be added}*
 
 ### Use cases
+### **System:** NetBook  
+***
+**Use case:** UCO1 - Add New Contact  
+**Actor:** User
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+**Main Success Scenario (MSS)**
+1. User types in `add` command with necessary fields
+2. NetBook validates the inputs from the user
+3. NetBook adds the new contact to the list of contacts
+4. NetBook displays the new contact on the GUI
 
-**Use case: Delete a person**
-
-**MSS**
-
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
-
-    Use case ends.
+Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. A duplicate contact was added
+  * 2ai. NetBook displays the following error message:  
+  `This person's details have already been recording in NetBook!`
+  * **Use case ends.**
 
-  Use case ends.
 
-* 3a. The given index is invalid.
+* 2b. Invalid or missing data
+  * 2bi. NetBook displays an error message with the correct format for the `add` command
+  * 2bii. User re-enters `add` command with necessary fields
+  * 2biii. Steps 2bi and 2bii are repeated until the information entered is valid
+  * **Use case resumes from Step 3**
+***
+**Use case:** UCO2 - Delete Contact  
+**Actor:** User
 
-    * 3a1. AddressBook shows an error message.
+**Main Success Scenario (MSS)**
+1. User types in `delete` command with the index of the specified user
+2. NetBook validates the input from the user
+3. NetBook deletes the specified contact
+4. NetBook removes the specified contact from the GUI
 
-      Use case resumes at step 2.
+Use case ends.
 
-*{More to be added}*
+**Extensions**
+
+* 2a. Invalid index number
+    * 2bi. NetBook displays an error message stating that the given index is invalid
+    * 2bii. User re-enters delete command with valid index
+    * 2biii. Steps 2bi and 2bii are repeated until the information entered is valid
+    * **Use case resumes from Step 3**
+
+***
+**Use case:** UCO3 - Find Contact  
+**Actor:** User
+
+**Main Success Scenario (MSS)**
+1. User types in `find` command with a specified keyword
+2. NetBook validates the input from the user
+3. NetBook identifies users with the keyword in their name
+4. NetBook displays the relevant users in the GUI, and displays a message stating the number of contacts displayed
+
+Use case ends.
+***
+**Use case:** UCO4 - List All Contacts  
+**Actor:** User
+
+**Main Success Scenario (MSS)**
+1. User types in `list` command
+2. NetBook displays the all registered contacts in the GUI, and displays the following message:
+`All contacts are being displayed!`
+
+Use case ends.
+***
+
+**Use case:** UCO5 - Open Help Page  
+**Actor:** New User
+
+**Main Success Scenario (MSS)**
+1. User types in `help` command
+2. NetBook displays the help page to the user
+
+Use case ends.
+***
+**Use case:** UCO6 - Assign Priority To Contact   
+**Actor:** User
+
+**Main Success Scenario (MSS)**
+1. User types in `priority` command, followed by the relevant fields
+2. NetBook validates the input from the user
+3. NetBook assigns the stated priority to the stated contact
+4. NetBook displays the priority for the contact on the GUI
+
+Use case ends.
+
+**Extensions**
+
+* 2a. Invalid or missing fields
+    * 2bi. NetBook displays an error message with the correct format for the `priority` command
+    * 2bii. User re-enters `priority` command with necessary fields
+    * 2biii. Steps 2bi and 2bii are repeated until the information entered is valid
+    * **Use case resumes from Step 3**
+***
+
 
 ### Non-Functional Requirements
 
@@ -321,7 +415,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
-*{More to be added}*
+4. *{More to be added}* 
 
 ### Glossary
 
