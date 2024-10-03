@@ -19,6 +19,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
+### Suhayl Pervez
+
+<img src="images/suhayl13.png" width="200px">
+
+[[github](https://github.com/suhayl13)]
+[[portfolio](team/johndoe.md)]
+
 ### Subramanian Pon Harish
 
 <img src="images/ponharish.png" width="200px">
@@ -33,8 +40,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/lavanyagarg112)]
 [[portfolio](team/lavanyagarg112.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Testing
+* Responsibilities: Ensures the testing of the project is done properly and on time.
 
 ### Johnny Doe
 
