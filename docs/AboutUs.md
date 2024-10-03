@@ -5,40 +5,39 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
-### John Doe
+### Clarence Yeo
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/clarenceeey.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/clarenceeey)]
+[[portfolio](team/clarence.md)]
 
 * Role: Project Advisor
 
-### Jane Doe
 
-<img src="images/johndoe.png" width="200px">
+### notnotmax
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+<img src="images/notnotmax.png" width="200px">
 
-* Role: Team Lead
-* Responsibilities: UI
+[[github](https://github.com/notnotmax)]
+[[portfolio](team/notnotmax.md)]
 
-### Johnny Doe
+* Role: Developer
+* Responsibilities: Deliverables, Deadlines, Scheduling and Tracking
 
-<img src="images/johndoe.png" width="200px">
+### Marcus Ang
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+<img src="images/marcusjhang.png" width="200px">
+
+[[github](http://github.com/marcusjhang)] [[portfolio](team/marcusjhang.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### John Doe
 
 <img src="images/johndoe.png" width="200px">
 
