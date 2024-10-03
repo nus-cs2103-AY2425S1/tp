@@ -41,13 +41,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Yuan Cheng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yuanchengg.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/yuanchengg)]
+[[portfolio](team/yuanchengg.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Check grammar
 
 ### Yugan
 
@@ -56,5 +56,5 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/yugan01)]
 [[portfolio](team/yugan01.md)]
 
-* Role: God Emperor 
+* Role: God Emperor
 * Responsibilities: MLOps + Quant Trading
