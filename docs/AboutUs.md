@@ -49,10 +49,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### James Doe
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/1st2getthisname.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/1st2getthisname)]
+[[portfolio](team/1st2getthisname.md)]
 
 * Role: Developer
 * Responsibilities: UI
