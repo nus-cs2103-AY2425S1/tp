@@ -7,6 +7,61 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Target User 
+
+Independent Geriatricians managing elderly patients with chronic conditions, someone who can type fast, prefers CLI over GUI, and often needs to manage several patients.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Value proposition
+
+Existing software don’t fulfill the needs of independent Geriatricians as they are either generic or integrated into hospitals. They can be time-consuming and complicated.
+
+We specifically target Geriatricians by tailoring to their requirements of managing elderly patients when it comes to tracking chronic conditions, coordinating care, and maintaining regular follow-ups.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## User stories
+
+### First Use (New User)
+
+1. As a new user, I can use sample data to walk through the features of the app.
+2. As a new user, I can remove sample data to start using the application for my own use.
+3. As a new user, I can set up a doctor profile to customize the system based on my needs.
+4. As a new user, I can add patient details quickly using a CLI to efficiently manage a heavy patient load.
+5. As a new user, I can use the help command to see available commands and how to use them.
+
+### Second Use  (Regular User)
+
+6. As a regular user, I can store patient data so that it can be viewed across different days without adding the same information again.
+7. As a regular user, I can distinguish between duplicate patients to avoid confusion when patients have the same name.
+8. As a regular user, I can edit patient data if the patient’s contact details change.
+9. As a regular user, I can delete patient data for patients who no longer need to be tracked.
+10. As a regular user, I can schedule follow-up appointments to update details quickly.
+
+### Tenth Use (Novice User)
+
+11. As a novice user, I can filter appointments by date to plan out my day more effectively.
+12. As a novice user, I can filter by condition to quickly prioritize patients based on their medical conditions.
+13. As a novice user, I can filter by patients to find those with higher health risks and follow up with them.
+14. As a novice user, I can send email reminders to patients about their upcoming appointments.
+
+### Hundredth Use (Experienced User)
+
+15. As an experienced user, I can batch update patient contact records to streamline the workflow after a mass screening.
+16. As an experienced user, I can batch delete patient contact records to declutter the system after a mass screening.
+17. As an experienced user, I can figure out a patient’s medication history to retrieve it quickly in emergencies.
+18. As an experienced user, I can retrieve caregiver information to inform them and enhance patient care.
+19. As an experienced user, I can use aliases for commands to speed up the usage of the CLI app.
+20. As an experienced user, I can remove inactive patients from the default view to declutter the app and display active patients.
+21. As an experienced user, I can use fuzzy search to retrieve patient details even with partial information.
+22. As an experienced user, I can export patient data to a CSV file to backup data and view it using other applications.
+23. As an experienced user, I can import patient data using a CSV file to restore backups or transfer data from another system.
+
+
+*User stories for the MVP:* Stories 4, 6 and 9 are for the MVP
+*User stories for the final version:* Stories 1 - 13 are for the final version.
+
 ## **Acknowledgements**
 
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
@@ -380,3 +435,4 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
