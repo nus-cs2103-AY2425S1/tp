@@ -360,7 +360,7 @@ _{More to be added}_
 
   Use case ends.
 
-- 3a. The given contact details/ index is invalid.
+- 3a. The given contact details/index is invalid.
 
   - 3a1. AddressBook shows an error message.
 
@@ -435,7 +435,7 @@ _{More to be added}_
 
   Use case ends.
 
-- 3a. The given concert details/ index is invalid.
+- 3a. The given concert details/index is invalid.
 
   - 3a1. AddressBook shows an error message.
 
@@ -466,7 +466,7 @@ _{More to be added}_
 
   Use case ends.
 
-- 5a. The given person/ concert is invalid.
+- 5a. The given person/concert is invalid.
 
   - 5a1. AddressBook shows an error message.
 
