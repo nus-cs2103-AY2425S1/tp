@@ -29,6 +29,8 @@ public class AddressBookParser {
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile(
             "(?<commandWord>\\S+)(?:\\s+(?<commandData>\\S+))?(?:\\s+(?<arguments>.*))?");
+
+
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 
     /**
@@ -47,7 +49,7 @@ public class AddressBookParser {
         final String commandWord = matcher.group("commandWord");
         final String commandData = matcher.group("commandData");
 
-        final String command = commandWord + (commandData != null ? " " + commandData: "");
+        final String command = commandWord + (commandData != null ? " " + commandData : "");
 
         final String arguments = matcher.group("arguments");
 
