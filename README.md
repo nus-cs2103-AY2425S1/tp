@@ -5,7 +5,7 @@
 InternBuddy is a desktop application used for managing contact details.
 
 ## Target user
-> This product is for niversity students majoring in Computer Science, specifically those seeking summer internships. They are typically busy with assignments while applying for summer internships. As a result, they may lose track of key information about companies they have applied for in a constantly increasing list of applications made.
+> This product is for university students majoring in Computer Science, specifically those seeking summer internships. They are typically busy with assignments while applying for summer internships. As a result, they may lose track of key information about companies they have applied for in a constantly increasing list of applications made.
 
 ## Value proposition
 > InternBuddy aims to simplify and efficiently manage internship application details, optimised for fast typers who prefer a CLI interface. It enables users to track key information such as HR contacts, interview dates, and application statues, all while maintaining portability across multiple operating systems without requiring a remote server.
