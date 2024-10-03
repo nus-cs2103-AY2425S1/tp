@@ -4,5 +4,5 @@
 
 [[github](http://github.com/rollingpencil)]
 
-- Role: Developer
-- Responsibilities: Integration
+- Role: In charge of `Storage`, Integration
+- Responsibilities: Ensure data format are consistent. Ensure high level components are integrated with no conflict.
