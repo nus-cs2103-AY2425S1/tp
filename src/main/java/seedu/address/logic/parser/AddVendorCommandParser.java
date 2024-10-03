@@ -16,10 +16,10 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Company;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Guest;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Vendor;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -47,17 +47,11 @@ public class AddVendorCommandParser implements Parser<AddVendorCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Company company = ParserUtil.parseCompany(argMultimap.getValue(PREFIX_COMPANY).orElse(null));
+        Company company = ParserUtil.parseCompany(argMultimap.getValue(PREFIX_COMPANY).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Guest guest;
-        if (rsvp == null) {
-            guest = new Guest(name, phone, email, address, tagList);
-        } else {
-            guest = new Guest(name, phone, email, address, tagList, rsvp);
-        }
-
-        return new AddGuestCommand(guest);
+        Vendor vendor = new Vendor(name, phone, email, address, tagList, company);
+        return new AddVendorCommand(vendor);
     }
 
     /**
