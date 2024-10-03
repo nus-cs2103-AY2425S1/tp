@@ -320,7 +320,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User chooses to add a client
 2.  User enters client's information
 3.  System validates user input
-4.  System updates new client information
+4.  System adds new client information
+5.  System notifies user upon successful add operation
 
     Use case ends.
 
@@ -359,6 +360,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  User enters client's rental information
 4.  System validates user input
 5.  System updates new client information
+6.  System notifies user upon successful add operation
 
     Use case ends.
 
@@ -434,11 +436,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 clients without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  A user should be able to see clearly with reasonably large texts.
 5.  The user interface should be simple, functional, and visually inoffensive to the majority of users.
 6.  A new user should be able to view information intuitively, even if they do not know the commands used to perform tasks.
+7.  Should be able to type up to 2000 characters without a noticeable lag.
 
 *{More to be added}*
 
@@ -449,7 +452,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **User**: A letting agent that is using TrueRental to manage the contact information of their clients
 * **Client**: An individual that is renting a property from a letting agent
 * **Letting agent**: An individual that facilitates a property rental agreement
-
+* **System**: TrueRental desktop application
+* **Client's information**: A client's information containing name, phone number and email, not meant to be shared with others.
+* **Client's rental information**: A client's rental information containing address, rental start date, rental end date, rent due date, monthly rent amount, deposit amount, tenant list, not meant to be shared with others.
+* **MSS**: Main Success Scenario.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
