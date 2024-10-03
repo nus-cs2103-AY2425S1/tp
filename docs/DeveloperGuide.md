@@ -270,8 +270,8 @@ _{Explain here how the data archiving feature will be implemented}_
 * Prefers typing to mouse interactions
 * Familiar with the workings of CLI and commands
 
-**Value proposition**: Instead of using separate apps for meetings, contacts, and payments, use our app to track client 
-contacts, payments, and job referrals, optimised for users who prefer CLI.
+**Value proposition**: Our address book seamlessly combines client contacts, 
+payment tracking and more in one efficient package, tailored specifically for freelance software developers.
 
 
 ### User stories
