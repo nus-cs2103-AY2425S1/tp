@@ -374,6 +374,7 @@ Testability Requirements
 
 ### Glossary
 
+* **Breadth-first Incremental Manner**: An approach to software development where features are implemented across the entire scope of the project in shallow layers, gradually adding depth and complexity over time. This method ensures that all major components of the system are developed in parallel, allowing for early integration and testing of the overall system structure.
 * **CLI (Command-Line Interface)**: A text-based interface where users interact with the system by typing commands, as opposed to using a graphical interface with mouse clicks.
 * **CRUD Operations**: Refers to Create, Read, Update, and Delete operations. In this system, CRUD applies to managing supplier contacts and delivery information.
 * **DBMS (Database Management System)**: A software system that enables users to define, create, maintain and control access to a database. It provides an organised way of managing, storing, and retrieving vast amounts of data.
@@ -383,6 +384,10 @@ Testability Requirements
 * **Mainstream OS**: Windows, Linux, Unix, macOS
 * **OOP (Object-Oriented Programming)**: A programming paradigm based on the concept of objects, which can contain data and methods.
 * **Supplier Contact**: A record containing information about a supplier, including name, contact details, and associated products.
+* **Unit and Integration Testing**:
+  * **Unit Testing**: A software testing method where individual units or components of the software are tested in isolation to ensure they work correctly. 
+  * **Integration Testing**: A phase of software testing where individual software modules are combined and tested as a group to verify that they work correctly together.
+
   
 *{More to be added}*
 
