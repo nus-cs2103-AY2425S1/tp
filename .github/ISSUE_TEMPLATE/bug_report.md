@@ -2,10 +2,8 @@
 name: Bug report
 about: Create a report for a bug in the application
 title: ''
-labels: 'type.Bug'
+labels: type.Bug
 assignees: ''
-milestone: '1'
-projects: 'AY2425S1-CS2103T-W13-2/4'
 
 ---
 
