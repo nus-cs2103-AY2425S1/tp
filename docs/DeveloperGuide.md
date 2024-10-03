@@ -261,30 +261,46 @@ _{Explain here how the data archiving feature will be implemented}_
 ### Product scope
 
 **Target user profile**:
-
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
+School teachers looking to manage the details of both students and other teachers
+* needs to keep track of many students at a time
 * can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* prefers to type in a command line interface
+* uses a small set of commands
+* makes frequent typos but hates to backtrack with backspace
+* likes to have an autocomplete suggestion
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: EduConnect will provide a faster and more convenient way to manage details of students and teachers than other apps.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority​ | As a …​                   | I want to …​                                                                                                  | So that I can…​                                                       |
+|-----------|---------------------------|---------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
+| `* * *`   | new user                  | see usage instructions                                                                                        | refer to instructions when I forget how to use the App                |
+| `* * *`   | teacher                   | add a new student and their details                                                                           |                                                                       |
+| `* * *`   | teacher                   | remove/delete a student from the app                                                                          | remove entries that I no longer need                                  |
+| `* * *`   | teacher                   | add a new teacher and their details                                                                           | find information on other teachers if need be                         |
+| `* * *`   | teacher                   | remove/delete a teacher from the app                                                                          | remove entries that I no longer need                                  |
+| `* * *`   | teacher                   | edit or update information of a student                                                                       | keep the data stored accurate and up to date                          |
+| `* *`     | teacher                   | clear all student/class data from the previous semester/year                                                  | reset the app for the new semester/year                               |
+| `* *`     | teacher                   | search for students by some partial information                                                               | quickly find a list of students without recalling specific details    |
+| `* *`     | teacher                   | tag and filter students based on specific attributes                                                          | access relevant groups without manually searching every time          |
+| `*`       | teacher new to EduConnect | see a sample version of how the app will look with sample data                                                | better visualise the workflow or how the app will work or look        |
+| `*`       | teacher who makes typos   | have flexibility in typos for the commands                                                                    | continue writing commands without needing to rewrite or backspace     |
+| `*`       | teacher familiar with CLI | use shortcuts or linux-like commands                                                                          | enter commands faster and more familiar to me                         |
+| `*`       | teacher                   | export student list and contact information to various formats                                                | share and archive data easily for administrative purposes             |
+| `*`       | teacher                   | switch between different classes using keybinds                                                               | navigate between different groups of students efficiently             |
+| `*`       | teacher                   | have an undo/redo command for recent actions                                                                  | quickly correct mistakes or revert changes                            |
+| `*`       | teacher                   | create custom command aliases for frequently used commands                                                    | streamline my workflow and reduce the number of keystrokes needed     |
+| `*`       | teacher                   | have built-in calendar integration that links student info with important dates (e.g. parent meetings, exams) | easily access all relevant student data when preparing for key events |
+| `*`       | teacher                   | quickly generate printable class rosters with selected details (e.g. names, contact info, emergency contacts) | have a physical copy for field trips or offline use                   |
+| `*`       | teacher                   | have a dark mode or customizable themes for the interface                                                     | reduce eye strain while managing student data at night                |
+| `*`       | teacher                   | use natural language input for commands (e.g. "add student John Doe to class 5a")                             | enter commands more intuitively without memorising specific syntax    |
+| `*`       | teacher                   | group students based on customizable criteria (e.g. performance level, participation)                         | easily view and manage students with similar needs                    |
+| `*`       | teacher                   | get the contact details of a frequently searched contact                                                      | quickly use it to contact a student                                   |
+| `*`       | teacher                   | systematically add the contact details of twins who share similar details                                     | have a smaller chance of having errors                                |
 
 ### Use cases
 
