@@ -13,10 +13,10 @@ MATER (Mechanical Assistance Tracker for Efficient Repairs) is a car workshop ma
 # Features
 ### 1. Add Client
 
-Onboard new clients into the system by providing basic details such as name, phone number, email address, and home address. Car details like vehicle registration number, VIN, make, and model can be added either during or after client creation.
+Onboard new clients into the system by providing basic details such as name, phone number, email address, and home address. Car details like vehicle registration number, VIN, make, and model are added during client creation.
 
 
-Command: `add-client n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS a/HOME_ADDRESS [vrn/VEHICLE_REGISTERATION_NUMBER vin/VEHICLE_IDENTIFICATION_NUMBER make/VEHICLE_MAKE model/VEHICLE_MODEL]`
+Command: `add-client n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS a/HOME_ADDRESS vrn/VEHICLE_REGISTERATION_NUMBER vin/VEHICLE_IDENTIFICATION_NUMBER make/VEHICLE_MAKE model/VEHICLE_MODEL`
 
 
 ### Delete Client
