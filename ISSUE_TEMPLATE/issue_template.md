@@ -6,38 +6,19 @@ labels: ''
 assignees: ''
 ---
 
-**Description**
+## Description
 A clear and concise description of the issue or suggestion.
 
-**Issue Type** (select one):
-- [ ] Story
-- [ ] Epic
-- [ ] Enhancement
-- [ ] Bug Fix
+## Issue Type
+Story / Epic / Enhancement
 
-**Description**
-A clear and concise description of the story, epic, enhancement, or bug fix.
-
-**Acceptance Criteria** (for stories/enhancements)
+## Acceptance Criteria
 - [ ] Criterion 1
 - [ ] Criterion 2
 - [ ] Criterion 3
 
-**Steps to Reproduce** (for bug fixes)
-1. Step one
-2. Step two
-3. ...
-
-**Expected Behavior** (for bug fixes)
-A clear description of what you expected to happen.
-
-**Screenshots/Visuals** (if applicable)
+## Screenshots/Visuals
 If applicable, add screenshots or visuals to help explain the issue or enhancement.
 
-**Environment** (if applicable)
-- OS: [e.g., Windows, macOS]
-- Browser: [e.g., Chrome, Firefox]
-- Version: [e.g., app version]
-
-**Additional Context**
+## Additional Context
 Any other information that may be helpful for understanding or implementing the story, epic, enhancement, or bug fix.
