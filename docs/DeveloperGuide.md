@@ -272,15 +272,17 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Target user profile**: Professional Wedding Planners
 
 * has a need to manage a significant number of contacts
+* has a need to manage multiple weddings happening at differing times
+* has a need to manage contacts across multiple weddings
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: compilation of all contacts necessary in weddings in one location making management easier
 
 
 ### User stories
