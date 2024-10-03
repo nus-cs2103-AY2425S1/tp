@@ -9,7 +9,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Karthick KC
 
-<img src="images/KKC.png" width="200px">
+<img src="images/karthickkc.png" width="200px" alt="KKC profile pic">
 
 [[github](https://github.com/karthickkc)]
 [[portfolio](team/karthickkc.md)]
