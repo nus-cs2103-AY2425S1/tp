@@ -1,8 +1,3 @@
----
-  layout: default.md
-  title: "About Us"
----
-
 # About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
@@ -10,6 +5,15 @@ We are a team based in the [School of Computing, National University of Singapor
 You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
+
+### Chengke
+
+<img src="images/ckaayy.png" width="200px">
+
+[[github](https://github.com/ckaayy)]
+
+* Role: Developer
+* Responsibilities: Expiring Policy alerts
 
 ### John Doe
 
@@ -31,31 +35,32 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Jeriel Chan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/nimastic.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/nimastic)] [[portfolio](team/nimastic.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Software Developement, Dev Ops
 
-### James Doe
+### Rithik Lenin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/rithiklenin.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/rithiklenin)]
+[[portfolio](team/rithiklenin.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: In charge of ```Client management```
+
+### Toh Yi Hui
+
+<img src="images/yihuididi.png" width="200px">
+
+[[github](http://github.com/yihuididi)]
+[[portfolio](team/yihuididi.md)]
+
+* Role: Developer
+* Responsibilities: In charge of `Policy`
+
