@@ -275,37 +275,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                     | I want to …​                                                                 | So that I can…​                                                                  |
-|----------|-----------------------------|------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
-| `* * *`  | new user                    | see usage instructions                                                       | refer to instructions when I forget how to use the App                           |
-| `* * *`  | sales rep                   | add a new contact with minimal keystrokes                                    | quickly capture lead information during a call without losing focus              |
-| `* * *`  | sales rep                   | delete contacts                                                              | remove outdated leads                                                            |
-| `* * *`  | sales rep                   | view an overview of key details with a single command                        | quickly refresh my memory before speaking with the contact                       |
-| `* *`    | sales rep                   | search for contacts using partial name matches or aliases                    | quickly find the right person even if I don't remember their full name           |
-| `* *`    | sales rep                   | assign and update sales stages for each contact                              | assign and update sales stages for each contact                                  |
-| `* *`    | sales rep                   | use intuitive CLI commands with aliases and shortcuts                        | perform frequent operations quickly and efficiently                              |
-| `* *`    | sales rep                   | attach quick notes to contact profiles during calls                          | capture important information without interrupting the conversation flow         |
-| `* *`    | sales rep                   | view recent contact activity with a single command                           | quickly reference past interactions before making a new outreach                 |
-| `* *`    | sales rep                   | tag contacts with custom labels                                              | prioritize my interactions more effectively                                      |
-| `* *`    | mobile sales rep            | access and update contact information while on the go                        | stay productive even outside the office                                          |
-| `* *`    | sales rep                   | filter my contact list by custom fields                                      | focus on the most relevant contacts for a particular outreach                    |
-| `* *`    | sales rep                   | sort contacts by custom fields using text commands                           | organize leads according to specific criteria                                    |
-| `* *`    | sales rep                   | save business cards or website links to the client's background              | read up on their information at a later date or to refresh my memory             |
-| `* *`    | analytical sales rep        | track how much I've been able to sell to each specific customer              | keep track of the most profitable customers and sell more to them                |
-| `* *`    | sales rep                   | keep track of scheduled meetings and calls                                   | resolve schedule clashing                                                        |
-| `* *`    | sales rep                   | find free spaces in my schedule                                              | quickly find time to make appointments with clients                              |
-| `* *`    | sales rep                   | edit my client's details                                                     | fix errors or update outdated information without deleting and reading           |
-| `*`      | sales rep                   | view log calls, emails, and meetings with timestamps and brief notes         | keep track of all interactions with a contact in one place                       |
-| `*`      | sales rep                   | import contacts from a CSV file                                              | quickly populate my contact list without manual data entry                       |
-| `*`      | sales rep working in a team | collaborate by sharing specific contact details with colleagues              | collaborate by sharing specific contact details with colleagues                  |
-| `*`      | organized sales rep         | archive inactive contacts automatically after a set period of no interaction | maintain a clean and focused contact list                                        |
-| `*`      | sales rep                   | able to view my notes/reports on contact interactions                        | assess outreach effectiveness                                                    |
-| `*`      | sales rep                   | attach documents to contact profiles                                         | easily access relevant files                                                     |
-| `*`      | sales rep                   | create custom keyboard shortcuts for frequent actions                        | streamline my workflow                                                           |
-| `*`      | sales rep                   | export contact information using a command                                   | easily backup or share my contacts list with other colleagues                    |
-| `*`      | analytical sales rep        | analyze statistics of frequency of client responses and profitability data   | find central tendencies of the statistics and choose which customers to sell to  |
-
-
+| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
+| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
+| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
+| `* * *`  | user                                       | add a new person               |                                                                        |
+| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
+| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
+| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
+| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
 
 *{More to be added}*
 
@@ -335,54 +312,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. AddressBook shows an error message.
 
       Use case resumes at step 2.
-
-**Use case: Add a Contact**
-
-**MSS**
-
-1.  User requests to add a new contact
-2.  AddressBook prompts the user to provide contact details (name, phone number, email, etc.)
-3.  User provides the required contact information
-4.  AddressBook adds the new contact and confirms successful addition
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The user provides incomplete contact information
-
-  * 2a1. AddressBook shows an error message and prompts for the missing details
-    
-    Use case resumes at step 3
-
-* 3a. The contact already exists
-
-    * 2a1. AddressBook shows an error message indicating a duplicate contact
-
-      Use case ends
-
-**Use case: View an Overview of a Contact**
-
-**MSS**
-
-1. User requests to view details of a specific contact
-2. AddressBook displays the contact’s detailed information (name, phone, email, address, etc.)
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. The requested contact does not exist
-
-    * 1a1. AddressBook shows an error message
-
-      Use case ends
-
-* 2a. AddressBook is unable to retrieve the contact details due to a technical error
-
-    * 2a1. AddressBook shows an error message indicating the technical issue
-
-      Use case ends
 
 *{More to be added}*
 
