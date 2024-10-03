@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# WardWatch Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -274,64 +274,146 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* healthcare professionals
+* has a need to manage a significant number of patients
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: 
 
+* manage patients faster than a typical mouse/GUI driven app
+* reduce time spent on administrative tasks by centralizing information, allowing user to focus more on patient care
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​                     | I want to …​                                                                                     | So that I can…​                                                                  |
+|----------|-----------------------------|--------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
+| `* * *`  | new user                    | see usage instructions                                                                           | refer to instructions when I forget how to use the App                           |
+| `* * *`  | doctor                      | add a new patient                                                                                |                                                                                  |
+| `* * *`  | doctor                      | delete a patient                                                                                 | remove entries that I no longer need                                             |
+| `* * *`  | doctor                      | search for patients by name or ID                                                                | quickly find and review specific patient information                             |
+| `* *`    | doctor                      | hide private contact details                                                                     | minimize chance of someone else seeing them by accident                          |
+| `*`      | tech-savvy doctor           | have advanced search and filter options to quickly find and organize patient information         | easily manage large volumes of data                                              |
+| `***`    | nurse                       | view a patient's medication and treatment schedule, ward location and diagnosis all in one place | I can ensure medications are administered on time and in the correct dosage      |
+| `**`     | nurse                       | access a list of patients I am responsible for during my shift                                   | I can manage my time efficiently and ensure that all patients receive timely care |
+| `* * *`  | As a detail-oriented doctor | add notes to patients                                                                            | manage information about the patient                
+| `* * *`  | doctor                      | edit my patients' information                                                                    | I can update their conditions as they change                             
+| `* * *`  | forgetful doctor            | receive daily reminders on the current day's appointment                                         | I don’t overlook any important tasks or visit schedules.                             
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `WardWatch` and the **Actor** is the `doctor`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Add a patient**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. Doctor submits new patient information
+2. WardWatch displays information of new patient
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The information format entered is invalid
+
+    * 1a1. AddressBook shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: UC02 - Delete a patient**
+
+**MSS**
+
+1. Doctor request to list patients
+2. WardWatch shows a list of patients
+3. Doctor request to delete a specific patient from the list
+4. WardWatch deletes the patient
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The list is empty
 
-  Use case ends.
+    * 2a1. WardWatch shows that list is empty
 
-* 3a. The given index is invalid.
+      Use case ends.
 
-    * 3a1. AddressBook shows an error message.
+* 3a. The given field is invalid
+
+    * 2a1. WardWatch shows an error message.
 
       Use case resumes at step 2.
+
+* 3b. The parameter field is invalid.
+
+    * 2b1. WardWatch shows an error message.
+
+      Use case resumes at step 2. 
+
+**Use case: UC03 - Update a patient**
+
+**MSS**
+
+1. Doctor submits new patient information of specific patient
+2. WardWatch displays information of updated patient
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The information format entered is invalid
+
+    * 1a1. AddressBook shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: UC04 - Search a patient**
+
+**MSS**
+
+1. Doctor searches for patients
+2. WardWatch shows a list of patients matching the search
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The search field is invalid.
+    * 2a1. AddressBook shows an error message.
+        
+        Use case resumes at step 1.
+
+* 2b. The parameter field is invalid.
+
+    * 2b1. AddressBook shows an error message.
+  
+        Use case resumes at step 1.
+
+* 2c. There is no patient that matches the search
+
+    * 2c1. AddressBook shows that there is no matching patient.
+
+        Use case ends.
 
 *{More to be added}*
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. The system should respond to user actions within 1 second under normal load.
+5. Will not have a server or cloud storage system. All data will be stored in local storage.
+6. The system should handle errors gracefully, providing meaningful messages to users without crashing.
+7. The system should be able to work offline, in the absence of internet connection.
 
 *{More to be added}*
 
@@ -339,6 +421,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Patient**: A person that has been designated to be under the care of the user(i.e. a doctor or nurse).
+* **Local Storage**: A text file, with read and write properties, located relative to the application file.
 
 --------------------------------------------------------------------------------------------------------------------
 
