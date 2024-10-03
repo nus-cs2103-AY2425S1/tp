@@ -315,8 +315,67 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** refers to the `Eduvault` application and the **Actor** is the `Administrators` at tuition centers, unless specified otherwise)
 
+<br><br>
+**UC01 - View all students’ details**
+
+**Actor: Admin**
+
+**MSS:**
+1. Admin logs in (UC03).
+2. Sees list of all students with their respective details with their names.
+
+Use case ends.
+
+<br><br>
+**UC02 - Add student**
+
+**Actor: Admin**
+
+**MSS:**
+1. Admin logs in (UC03).
+2. Admin prompts the system to add a student.
+3. System prompts the admin to key in details of the student.
+4. Admin key in details. 
+5. System adds the student and display success status.
+
+Use case ends.
+
+**Extensions:**
+* 4a. Admin keyed in the information in the wrong format.
+    * 4a1. System display wrong format status.
+    * 4a2. System prompt admin to key in information again.
+    * 4a3. Admin key in information again.
+
+        Repeat 4a1 to 4a3 until Admin key in the right information.
+    * 4a4. System adds the student and display success status.
+
+    Use case ends.
+
+<br><br>
+**UC03 - Log into system**
+
+**Actor: Admin**
+
+**MSS:**
+
+1. Admin enters username.
+2. Admin enters password.
+3. Admin gets logged in.
+
+Use case ends.
+
+**Extensions:**
+* 3a. System detects mismatch in either username or password or both.
+    * 3a1. System notifies user of wrong username or password.
+    * 3a2. System requests for correct username and password.
+
+        Repeat 3a1 to 3a2 until the data entered is correct.
+
+    Use case ends.
+
+<br><br>
 **UC04 - Mark payment of students**
 
 **Actor: Admin**
@@ -327,6 +386,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. System prompts the admin to key in details of this student.
 4. Admin key in details.
 5. System marks the payment for the student and returns a success message.
+
 Use case ends.
 
 **Extensions:**
@@ -336,9 +396,10 @@ Use case ends.
   * 4a2. System prompt admin to key in information again.
   * 4a3. Admin key in information again.
   
-    Repeat 4a1 to 4a3 until Admin key in the right information
+    Repeat 4a1 to 4a3 until Admin key in the right information.
   * 4a4. System adds the student and display success status
-    Use case ends.
+    
+  Use case ends.
 
 * 5a. Payment of the student has already being marked.
   * 5a1. System returns a message on payment of student being marked already.
@@ -346,30 +407,30 @@ Use case ends.
   
   Use case ends.
 
-
+<br><br>
 **UC05 - Delete student from system**
 
 **Actor: Admin**
 
 **MSS:**
 
-1. Admin decides student to be deleted from the system
-2. Admin selects that student
-3. System requests for confirmation
-4. Admin confirms
-5. System deletes the student information 
+1. Admin decides student to be deleted from the system.
+2. Admin selects that student.
+3. System requests for confirmation.
+4. Admin confirms.
+5. System deletes the student information. 
 
-Use case ends
+Use case ends.
 
 **Extensions:**
 
-* *a. At any time, user chooses to cancel the deletion
-    * *a1. System requests to confirm the cancellation
-    * *a2. Admin confirms the cancellation 
+* *a. At any time, user chooses to cancel the deletion.
+    * *a1. System requests to confirm the cancellation.
+    * *a2. Admin confirms the cancellation. 
   
-  Use case ends
+  Use case ends.
 
-
+<br><br>
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
