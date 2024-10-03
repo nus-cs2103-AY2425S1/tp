@@ -12,4 +12,4 @@
 
 * It is named ClubConnect because it was created as a way to streamline Computing Club's communication and organization.
 
-* For the detailed documentation of this project, see the **[Address Book Product Website](https://ay2425s1-cs2103t-f09-1.github.io/tp/)**.
+* For the detailed documentation of this project, see the **[ClubConnect Product Website](https://ay2425s1-cs2103t-f09-1.github.io/tp/)**.
