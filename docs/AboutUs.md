@@ -7,55 +7,41 @@
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
+### Juan Carlo Vieri
 
-### John Doe
+<img src="images/juancarlovieri.png" width="200px">
 
-<img src="images/johndoe.png" width="200px">
-
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[homepage](http://www.comp.nus.edu.sg/~juancv)]
+[[github](https://github.com/juancarlovieri)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Algo developer
 
-### Johnny Doe
 
-<img src="images/johndoe.png" width="200px">
+### Albert Ariel Putra
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+<img src="images/hpcman.png" width="200px">
+
+[[github](http://github.com/hpcman)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### River Koh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/oceankoh.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/oceankoh)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: UI
 
-### James Doe
+### Dominic Koh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/dominopizzaaaa.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/dominopizzaaaa)]
 
 * Role: Developer
 * Responsibilities: UI
