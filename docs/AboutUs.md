@@ -47,3 +47,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: UI + Backend
 
+### Udit Sanghi
+
+<img src="images/T1duS.png" width="200px">
+
+[[github](https://github.com/T1duS)]
+
+* Role: Team Member
+* Responsibilities: Code quality, Deliverables
