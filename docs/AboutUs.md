@@ -37,7 +37,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Karthikeyan
 
-<img src="images/RohitSharma.jpg" width="200px">
+<img src="images/skarthikeyan28.png" alt="Karthikeyan's profile photo" width="200px">
 
 [[github](http://github.com/SKarthikeyan28)]
 [[portfolio](team/karthikeyan.md)]
