@@ -330,9 +330,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 100 events, 1000 vendors and 100 vendors that are linked to the events without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  Should have persistent data that is human readable.
+2.  Should be able to hold up to 100 events and 1000 vendors without a noticeable sluggishness in performance for typical usage.
+3.  Should be able to assign up to 100 vendors to an event without any issue.  
+3.  A user with an above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Persistent data stored by the system should be in a human-readable format.
 
 ### Glossary
 
