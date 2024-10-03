@@ -59,3 +59,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: UI
+
+
+### Christopher Tan
+
+<img src="images/chrisjohntan.png" width="200px">
+
+[[github](http://github.com/chrisjohntan)]
+[[portfolio](team/chrisjohntan.md)]
+
+* Role: Developer
+* Responsibilities: Integration
