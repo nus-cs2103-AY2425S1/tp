@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# InvenTrack Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -300,32 +300,102 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Inventory Records` and the **Actor** is the `Inventory Manager`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Assign Products to Suppliers**
+
+Preconditions:
+* The Inventory Manager is logged into the InvenTrack system.
+* At least one product and one supplier have been created in the system.
+
+**MSS**
+1. Inventory Manager enters the command: ASSIGN <Product Name> <Supplier Name>
+2. System validates that the product name & supplier name exists in the list. 
+3. The system assigns the specified product to the specified supplier. 
+4. System confirms the assignment with a success message. 
+5. System updates the product-supplier relationship in the list.
+   Use case ends.
+
+**Extensions**
+
+1. Product name does not exist (Step 2):
+   1. System displays an error message: "Assigning failed: <Product Name> not found in the existing list!"
+   2. System prompts the Inventory Manager to re-enter the command. 
+   3. Use case resumes at step 1.
+
+2. Supplier name does not exist (Step 2):
+   1. System displays an error message: "Assigning failed: <Supplier Name> not found in the existing list!"
+   2. System prompts the Inventory Manager to re-enter the command or exit the function.
+   3. Use case resumes at step 1.
+
+**Use case: Delete Suppliers/Products**
+
+Preconditions:
+* The Inventory Manager is logged into the InvenTrack system.
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. Inventory Manager enters the command: DELETE <Supplier Name> or DELETE <Product Name>.
+2. System validates that the entered name exists in the list.
+3. System checks if product or supplier exists which is to be deleted.
+4. System removes the specified supplier or product from the list.
+5. System confirms the deletion with a success message.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+1. Entered product or supplier name does not exist:
+   1. System displays an error message: "Delete failed: Supplier/Product not found in the existing list!"
+   2. System prompts the Inventory Manager to re-enter the command.
+   3. Use case resumes at step 3.
 
-  Use case ends.
 
-* 3a. The given index is invalid.
+**Use case: Set Minimum Thresholds for Products Stock**
 
-    * 3a1. AddressBook shows an error message.
+Preconditions:
+* The Inventory Manager is logged into the InvenTrack system.
+* The product for which the threshold is being set exists in the system.
 
-      Use case resumes at step 2.
+**MSS**
+1. Inventory Manager enters the command: THRESHOLD <PRODUCT NAME> <AMOUNT>
+2. System validates that the product name exists in the list.
+3. System validates that the threshold amount is a positive integer.
+4. System sets the specified threshold for the product. 
+5. System updates the product information in the list.
+6. System confirms the threshold setting with a success message.
 
-*{More to be added}*
+**Extensions**
+1. Product name does not exist (Step 2):
+   1. System displays an error message: "Product not found. Please use an existing product name."
+   2. System prompts the Inventory Manager to re-enter the command or exit the function. 
+   3. Use case resumes at step 1.
+
+2. Threshold amount is invalid (Step 3):
+   1. System displays an error message: "Invalid threshold amount. Please enter a positive integer."
+   2. System prompts the Inventory Manager to re-enter the command or exit the function. 
+   3. Use case resumes at step 1.
+
+**Use case: Access help guide**
+* User - Any user with access to the system
+
+**Preconditions:**
+* The user is logged into the InvenTrack system.
+* The product for which the threshold is being set exists in the system.
+
+**MSS**
+1. User enters the command: HELP 
+2. System opens a new window or panel displaying the user guide. 
+3. User guide includes sections on features, respective commands, FAQs, and a command summary. 
+4. User reviews the guide. 
+5. User closes the guide when finished.
+
+**Extensions**
+1. System unable to open user guide:
+   1. System displays an error message: "Unable to open user guide. Please try again later."
+   2. System logs the error for technical support to review. 
+   
+      Use case ends.
 
 ### Non-Functional Requirements
 
