@@ -260,15 +260,12 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Target user profile**: Administrative assistants for palliative care facilities
+* needs to manage a significant number of patient details
+* can type fast and prefers CLI to GUI
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
-
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: efficient text-based navigation and access to patient data, allowing quick retrieval and logging
+of patient information
 
 
 ### User stories
