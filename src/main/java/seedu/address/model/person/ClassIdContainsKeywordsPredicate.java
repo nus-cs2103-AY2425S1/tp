@@ -6,6 +6,9 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.util.ToStringBuilder;
 
+/**
+ * Tests that a {@code Person}'s {@code ClassId} matches any of the keywords given.
+ */
 public class ClassIdContainsKeywordsPredicate implements Predicate<Person> {
 
     private final List<String> keywords;
@@ -36,7 +39,8 @@ public class ClassIdContainsKeywordsPredicate implements Predicate<Person> {
             return false;
         }
 
-        ClassIdContainsKeywordsPredicate otherClassIdContainsKeywordsPredicate = (ClassIdContainsKeywordsPredicate) other;
+        ClassIdContainsKeywordsPredicate otherClassIdContainsKeywordsPredicate = (ClassIdContainsKeywordsPredicate)
+                other;
         return keywords.equals(otherClassIdContainsKeywordsPredicate.keywords);
     }
 

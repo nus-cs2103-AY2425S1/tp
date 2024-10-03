@@ -18,7 +18,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.ClassId;
 import seedu.address.model.person.ClassIdContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
@@ -37,7 +36,8 @@ public class FindCommandTest {
                 new NameContainsKeywordsPredicate(Collections.singletonList("second"));
         ClassIdContainsKeywordsPredicate thirdPredicate = new ClassIdContainsKeywordsPredicate(
                 Collections.singletonList("third"));
-        ClassIdContainsKeywordsPredicate fourthPredicate = new ClassIdContainsKeywordsPredicate(Collections.singletonList("fourth"));
+        ClassIdContainsKeywordsPredicate fourthPredicate = new ClassIdContainsKeywordsPredicate(
+                Collections.singletonList("fourth"));
 
 
         FindCommand findFirstCommand = new FindCommand(firstPredicate);
@@ -97,7 +97,8 @@ public class FindCommandTest {
         String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, findCommand.toString());
 
-        ClassIdContainsKeywordsPredicate classIdPredicate = new ClassIdContainsKeywordsPredicate(Arrays.asList("keyword"));
+        ClassIdContainsKeywordsPredicate classIdPredicate = new ClassIdContainsKeywordsPredicate(
+                Arrays.asList("keyword"));
         FindCommand findCommandClassId = new FindCommand(classIdPredicate);
         String expectedClassId = FindCommand.class.getCanonicalName() + "{predicate=" + classIdPredicate + "}";
         assertEquals(expectedClassId, findCommandClassId.toString());
