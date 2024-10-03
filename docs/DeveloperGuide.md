@@ -311,7 +311,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `TrueRental` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TrueRental` system and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: Add a client**
 
@@ -320,29 +320,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User chooses to add a client
 2.  User types in a command consisting various flags and options
 3.  User enters client's information
-4.  TrueRental updates new client information
+4.  System updates new client information
 
     Use case ends.
 
 **Extensions**
 
-* 2a. TrueRental detects error for incorrect flag
+* 2a. System detects error for incorrect flag
 
-    * 2a1. TrueRental prompts error for incorrect flag used
+    * 2a1. System prompts error for incorrect flag used
     * 2a2. User enters correct flag
 
     Use case ends.
  
-* 3a. TrueRental detects error within client's information
+* 3a. System detects error within client's information
 
-    * 2a1. TrueRental prompts error for incorrect client's information
+    * 2a1. System prompts error for incorrect client's information
     * 2a2. User enters correct client's information
 
     Use case ends.
 
-* 3b. TrueRental detects duplicated client's information
+* 3b. System detects duplicated client's information
 
-    * 2a1. TrueRental prompts error for duplicated client's information
+    * 2a1. System prompts error for duplicated client's information
     * 2a2. User enters correct non-duplicated client's information
 
     Use case ends.
@@ -354,29 +354,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User chooses to add rental information to a specific client
 2.  User types in a command consisting various flags and options
 3.  User enters client's rental information
-4.  TrueRental updates new client information
+4.  System updates new client information
 
     Use case ends.
 
 **Extensions**
 
-* 2a. TrueRental detects error for incorrect flag or option
+* 2a. System detects error for incorrect flag or option
 
-    * 2a1. TrueRental prompts error for incorrect flag or option used
+    * 2a1. System prompts error for incorrect flag or option used
     * 2a2. User enters correct flag or option
 
   Use case ends.
 
-* 3a. TrueRental detects error within client's rental information
+* 3a. System detects error within client's rental information
 
-    * 2a1. TrueRental prompts error for incorrect client's rental information
+    * 2a1. System prompts error for incorrect client's rental information
     * 2a2. User enters correct client's rental information
 
   Use case ends.
 
-* 3b. TrueRental detects duplicated client's rental information
+* 3b. System detects duplicated client's rental information
 
-    * 2a1. TrueRental prompts error for duplicated client's rental information
+    * 2a1. System prompts error for duplicated client's rental information
     * 2a2. User enters correct non-duplicated client's information
 
   Use case ends.
@@ -387,7 +387,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User enter keywords and requests to find a person
-2.  TrueRental find a list of persons matching the keywords
+2.  System find a list of persons matching the keywords
 
     Use case ends.
 
