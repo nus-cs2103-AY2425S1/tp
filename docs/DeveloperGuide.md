@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# LegacyLink Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -13,7 +13,7 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -274,42 +274,81 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Has a large extended family with numerous contacts to manage
+* Values maintaining connections with various family branches (direct family, paternal side, maternal side, in-laws)
+* Organizes or participates in frequent family gatherings and events
+* Desires an efficient way to keep family contact information up-to-date
+* Appreciates tools that help navigate complex family dynamics
+* Is comfortable using digital tools for personal organization
+* Ranges from young adults to seniors who want to stay connected with their extended family
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
-
-
+**Value proposition**: LegacyLink offers a comprehensive family contact management system that simplifies the organization of large family trees, streamlines event planning, and helps maintain family connections more effectively than traditional contact management methods. 
+It revolutionizes the "family experience"!
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​         | I want to …​                                                 | So that I can…​                                                       |
+|----------|-----------------|--------------------------------------------------------------|-----------------------------------------------------------------------|
+| `* * *`  | As a user       | add contact information of the family member                 | I can retrieve their contact information                              |
+| `* * *`  | As a user       | add the relationship of the family members                   | I can know the relationship between people                            |
+| `* * *`  | As a user       | update the information of family members in the contact list | I can keep the latest information of my family                        |
+| `* * *`  | As a user       | add events tied to family members(e.g birthdays)             | I can set reminders on that date so that I don't ever forget about it |
+| `* * *`  | As an attendee  | see who is attending the event                               | I can make a more informed decision of whether I want to attend       |
+| `* * *`  | As an attendee  | see the venue and time of the event                          | I can make a more informed decision of whether I want to attend       |
+| `* * *`  | As an organizer | track RSVPs and attendance for each event                    | I know who is attending the event and can plan accordingly            |
+| `* * *`  | As an organizer | schedule family events                                       | I can plan and coordinate events                                      |
+| `* * *`  | As an organizer | see the contact list of family members                       | I know whose contacts that I have not added yet and add them          |
+| `* * *`  | As an organizer | update the event's information after creating it             | attendees can see the updated event details                           |
+| `* * *`  | As an organizer | delete an event                                              | I can cancel an event                                                 |
+
+
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `LegacyLink` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case 1: Add contact**
+
+**MSS**
+1. User enters name and relationship of the contact.
+2. User confirms details of the contact.
+3. System adds the contact.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User enters phone number of the contact.
+* 1b. User enters the email of the contact
+
+    Use case resumes at step 2.
+
+
+* 1c. Given phone number is invalid.
+
+    * 1c1. System shows an error message.
+        
+      Use case resumes at step 1.
+
+
+* 1d. Given email is invalid.
+
+    * 1d1. System shows an error message.
+
+      Use case resumes at step 1.
+
+
+**Use case 2: Delete contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User views all contacts (UC-3).
+2.  System shows a list of persons.
+3.  User requests to delete a specific contact in the list.
+4.  System deletes the person.
 
     Use case ends.
 
@@ -319,11 +358,171 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. System shows an error message.
 
       Use case resumes at step 2.
+
+**Use case 3: View contacts**
+
+**MSS**
+
+1. User requests to view the list of contacts.
+2. Systems displays list of contacts.
+
+    Use case ends.
+
+**Use case 4: Update information of contact**
+
+**MSS**
+
+1. User views all contacts (UC-3).
+2. User selects contact to update.
+3. User can edit name / phone number / email / relationship of contact.
+4. System registers the changes.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given index is invalid.
+
+    * 1a1. System shows an error message.
+
+      Use case resumes at step 2.
+
+
+* 3a. The changed details are invalid.
+
+  * 3a1. System shows an error message.
+
+    Use case resumes at step 3.
+
+*a. At anytime, User can choose to cancel updating the contact.
+
+    *a1. System does not update any contact details.
+    Use case ends.
+
+
+**Use case 5: Add event**
+
+**MSS**
+
+1. User enters name and date of the event.
+2. User confirms the details of the event.
+3. System adds the event.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User enters the name of people attending.
+
+    Use case resumes at step 2.
+
+
+* 1b. The inputs are invalid
+
+    * 1b1. System shows an error message
+
+        Use case resumes at step 1.
+
+
+*a At any time, Users chooses to cancel the adding.
+
+    a1. System requests to confirm the cancellation.
+    a2. System cancels the adding process.
+    Use case ends.
+
+
+**Use case 6: Delete an event**
+
+**Preconditions:**
+
+1. Event list must have at least one event.
+
+
+**MSS**
+
+1. User lists all events(UC-7).
+2. System shows a list of events.
+3. User selects an event to delete.
+4. User is prompted for confirmation to delete the event.
+5. User confirms their intention and the event is deleted.
+6. User is given feedback that the event is deleted successfully. 
+7. User no longer sees the event in the event list.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The given index is invalid.
+
+    * 3a1. System shows an error message.
+
+      Use case resumes at step 3.
+
+
+* 4a. If the User cancels deleting the event, the event is kept and the use case ends.
+
+*a. If the user exists the application without confirming, the event is kept and the use case ends.
+
+**Use case 7: View all upcoming events**
+
+**MSS**
+
+1. User navigates to the "Events" panel.
+2. The system displays a list of all upcoming events, sorted by latest date.
+3. For each event, the event name, date and time, location and number of family members invited are displayed.
+4. User can scroll through the list to see all the events listed.
+5. User can click on an event to view more details.
+
+    Use case ends
+
+**Extensions**
+
+* 1a. No upcoming events.
+  * 1a1. System displays a message to prompt users to add events.
+  * 1a2. System provides a button to add event(UC-5).
+
+**Use case 8: Update event information**
+
+**MSS**
+
+1. User views all events(UC-7).
+2. User selects event to edit.
+3. User changes the relevant event details.
+4. User saves the information.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given index is invalid.
+
+    * 2a1. System shows an error message.
+
+      Use case resumes at step 2.
+
+
+* 3a. User does not change event details.
+
+    Use case resumes at step 2.
+
+
+* 3b. The changed details are invalid.
+
+    * 3b1. System shows an error message.
+
+        Use case resumes at step 3.
+
+
+*a At any time, User chooses to cancel the edit.
+
+    *a1. System requests to confirm the cancellation.
+    Use case ends.
 
 *{More to be added}*
 
