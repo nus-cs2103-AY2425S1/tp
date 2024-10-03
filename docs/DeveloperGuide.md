@@ -330,30 +330,309 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `ContactCS` and the **Actor** is the `CS freshman`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 Add a contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to add a new contact by inputting the relevant contact details (name, email, phone number, module code, etc.)
+2. ContactCS adds the contact under the specified module
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. Necessary input such as module code, name, or email is missing.
 
-  Use case ends.
+  * 1a1. ContactCS requests the user to provide the required information
+  * 1a2. User enters new data
+  * Steps 1a1 - 1a2 are repeated until the data entered are correct
+        
+    Use case resumes from step 2.
 
-* 3a. The given index is invalid.
+* 1b. The given format is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 1b1. ContactCS requests the user to provide the correct format and shows the valid command format
+    * 1b2. User enters new input
+    * Steps 1b1 - 1b2 are repeated until the format for the entered input is correct
 
-      Use case resumes at step 2.
+      Use case resumes from step 2.
+
+* 1c. The given contact is a duplicate.
+
+    * 1c1. ContactCS shows an error message telling the user that the contact already exists in ContactCS
+
+      Use case ends.
+
+<a name="uc02"></a>
+
+**Use case: UC02 Search contact(s)**
+
+**MSS**
+
+1.  User requests to search for contact(s) by inputting one or more of the following:
+     * The name of the contact,
+     * The module code (optionally including the role), or
+     * The category of the issue
+2. ContactCS shows a list of matching contacts
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Necessary input such as module code, or category of the issue is missing.
+
+    * 1a1. ContactCS requests the user to provide the required information
+    * 1a2. User enters new input
+    * Steps 1a1 - 1a2 are repeated until all required fields in the input are complete
+
+      Use case resumes from step 2.
+
+* 1b. The given format is invalid.
+
+    * 1b1. ContactCS requests the user to provide the correct format and shows the valid command format
+    * 1b2. User enters new input
+    * Steps 1b1 - 1b2 are repeated until the format for the entered input is correct
+
+      Use case resumes from step 2.
+
+* 1c. No matching contacts found.
+  * 1c1. ContactCS displays a message to the user saying that there is no matching contacts found
+
+      Use case ends.
+
+<a name="uc03"></a>
+
+**Use case: UC03 List contacts**
+
+**MSS**
+
+1. User requests to list the contacts
+2. ContactCS shows a list of contacts
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+    * 1a1. ContactCS displays a message to the user saying that the list is empty
+
+      Use case ends.
+
+**Use case: UC04 Delete a person**
+
+**MSS**
+
+1. User requests to [list (UC03)](#uc03) the contacts or [search (UC02)](#uc02) for contact(s)
+2. User requests to delete a specific person in the list
+3. ContactCS deletes the person
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given index is invalid.
+
+    * 2a1. ContactCS requests the user to provide the correct index
+    * 2a2. User enters new index
+    * Steps 2a1 - 2a2 are repeated until the index entered are correct
+
+      Use case resumes from step 3.
+
+**Use case: UC05 Update contact information**
+
+**MSS**
+
+1. User requests to [list (UC03)](#uc03) the contacts or [search (UC02)](#uc02) for contact(s)
+2. User requests to update contact information for a specific person in the list, providing the new contact details
+3. ContactCS updates the contact details based on the information provided by the user
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given index is invalid.
+
+    * 2a1. ContactCS requests the user to provide the correct index
+    * 2a2. User enters new index
+    * Steps 2a1 - 2a2 are repeated until the index entered are correct
+
+      Use case resumes from step 3.
+
+* 2b. The given format is invalid.
+
+    * 2b1. ContactCS requests the user to provide the correct format and shows the valid command format
+    * 2b2. User enters new input
+    * Steps 2b1 - 2b2 are repeated until the format for the entered input is correct
+
+      Use case resumes from step 3.
+
+**Use case: UC06 Mark frequently used contacts**
+
+**MSS**
+
+1. User requests to [list (UC03)](#uc03) the contacts or [search (UC02)](#uc02) for contact(s)
+2. User requests to mark certain contacts as frequently accessed
+3. ContactCS marks these contacts for quick access
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given index is invalid.
+
+    * 2a1. ContactCS requests the user to provide the correct index
+    * 2a2. User enters new index
+    * Steps 2a1 - 2a2 are repeated until the index entered are correct
+
+      Use case resumes from step 3.
+
+* 2b. The given format is invalid.
+
+    * 2b1. ContactCS requests the user to provide the correct format and shows the valid command format
+    * 2b2. User enters new input
+    * Steps 2b1 - 2b2 are repeated until the format for the entered input is correct
+
+      Use case resumes from step 3.
+
+**Use case: UC07 Unmark frequently used contacts**
+
+**MSS**
+
+1. User requests to [list (UC03)](#uc03) the contacts or [search (UC02)](#uc02) for contact(s)
+2. User requests to unmark certain contacts as frequently accessed
+3. ContactCS removes the marking from these contacts for quick access
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given index is invalid.
+
+    * 2a1. ContactCS requests the user to provide the correct index
+    * 2a2. User enters new index
+    * Steps 2a1 - 2a2 are repeated until the index entered are correct
+
+      Use case resumes from step 3.
+
+* 2b. The given format is invalid.
+
+    * 2b1. ContactCS requests the user to provide the correct format and shows the valid command format
+    * 2b2. User enters new input
+    * Steps 2b1 - 2b2 are repeated until the format for the entered input is correct
+
+      Use case resumes from step 3.
+
+**Use case: UC08 Access frequently used contacts**
+
+**MSS**
+
+1.  User requests to access frequently used contacts
+2.  ContactCS shows a list of matching contacts
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list for frequently used contacts is empty.
+  * 1a1. ContactCS displays a message to the user saying that there is no frequently used contact
+
+    Use case ends.
+
+* 1b. The given format is invalid.
+
+    * 1b1. ContactCS requests the user to provide the correct format and shows the valid command format
+    * 1b2. User enters new input
+    * Steps 1b1 - 1b2 are repeated until the format for the entered input is correct
+
+      Use case resumes from step 2.
+
+**Use case: UC09 View usage instructions**
+
+**MSS**
+
+1.  User requests to view usage instructions for the app
+2.  ContactCS displays the usage instructions and commands available for the user
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given format is invalid.
+
+    * 1a1. ContactCS requests the user to provide the correct format and shows the valid command format
+    * 1a2. User enters new input
+    * Steps 1a1 - 1a2 are repeated until the format for the entered input is correct
+
+      Use case resumes from step 2.
+
+**Use case: UC10 View app with sample data**
+
+**MSS**
+
+1.  User requests to view app with sample data
+2.  ContactCS populates the interface with sample data for demonstration purposes
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given format is invalid.
+
+    * 1a1. ContactCS requests the user to provide the correct format and shows the valid command format
+    * 1a2. User enters new input
+    * Steps 1a1 - 1a2 are repeated until the format for the entered input is correct
+
+      Use case resumes from step 2.
+
+**Use case: UC11 Undo actions**
+
+**MSS**
+
+1. User requests to undo the last action
+2. ContactCS reverts to the state before the last action
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. No action has been performed yet.
+    * 1a1. ContactCS shows an error message indicating that there is no action to undo
+
+      Use case ends.
+
+* 1b. The given format is invalid.
+
+    * 1b1. ContactCS requests the user to provide the correct format and shows the valid command format
+    * 1b2. User enters new input
+    * Steps 1b1 - 1b2 are repeated until the format of the entered input is correct
+
+      Use case resumes from step 2.
+
+**Use case: UC12 Redo actions**
+
+**MSS**
+
+1. User requests a redo
+2. ContactCS reapplies the last undone action
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User tries to redo an action without having undone one first.
+    * 1a1. ContactCS shows an error message indicating that there is no action to redo
+
+        Use case ends.
+
+* 1b. The given format is invalid.
+
+    * 1b1. ContactCS requests the user to provide the correct format and shows the valid command format
+    * 1b2. User enters new input
+    * Steps 1b1 - 1b2 are repeated until the format of the entered input is correct
+
+      Use case resumes from step 2.
 
 *{More to be added}*
 
