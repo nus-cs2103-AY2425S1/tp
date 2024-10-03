@@ -27,7 +27,7 @@ AY2425S1-CS2103T-F14a-4
 <img src="images/yooplo.png" width="200px">
 
 [[github](http://github.com/yooplo)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/justin.md)]
 
 * Role: Developer
 * Responsibilities: UI
