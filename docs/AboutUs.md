@@ -21,14 +21,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Murali Shruthi
 
-<img src="images/johndoe.png" width="200px">
+![shruthiiii03.png](images%2Fshruthiiii03.png)
 
-[[github](http://github.com/johndoe)]
+https://github.com/Shruthiiii03
 [[portfolio](team/johndoe.md)]
 
-* Role: Team Lead
+* Role: Developer
 * Responsibilities: UI
 
 ### Johnny Doe
