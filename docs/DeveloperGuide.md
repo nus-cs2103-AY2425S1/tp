@@ -276,10 +276,10 @@ _{Explain here how the data archiving feature will be implemented}_
 
 * Tertiary Teacher/Educator
 * has a need to manage a significant number of contacts
-* requires tools to keep communication organised across large groups
-* require support for efficient tracking of academic progress
+* requires a tool to keep communication organised across large groups
+* requires support for efficient tracking of academic progress
 
-**Value proposition**: saves important time through simplification of student-parent contact management, enhancement in communication tracking and integrated progress reports
+**Value proposition**: save important time through simplification of student-parent contact management, enhancement in communication tracking and integrated progress reports
 
 
 ### User stories
