@@ -414,7 +414,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Client**: An individual who the `User` engages
+* **Client**: An individual whom the `User` engages
 
 --------------------------------------------------------------------------------------------------------------------
 
