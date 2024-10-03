@@ -360,6 +360,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Dorm**: A university or college hall of residence / hotel for students and teachers
+* **Dorm resident**: Student and / or teacher currently staying in a dorm
+* **Dorm manager**: User of Dormanager Pro that has to keep track of the residents in their dorm
+* **Profile**: Collection of information related to a resident that serves as a block of interrelated data in Dormanger
+Pro. Consists of name, contact number, room number and emergency contact.
+* **Emergency contact**: Person to contact when the resident related to said contact gets into an emergency (injury, 
+immigration related issues etc.). Consists of a name and contact number.
+* **Dorm room**: Rooms of the dorm where residents stay in. Has a room number and upper limit of 4 people.
 
 --------------------------------------------------------------------------------------------------------------------
 
