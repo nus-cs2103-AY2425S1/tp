@@ -19,3 +19,13 @@ We are a team based in the [School of Computing, National University of Singapor
 
 * Role: Team Lead
 * Responsibilities: Algo developer
+
+### River Koh
+
+<img src="images/oceankoh.png" width="200px">
+
+[[github](http://github.com/oceankoh)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities: UI
