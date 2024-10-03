@@ -318,7 +318,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User chooses to add a client
-2.  User types in a command consisting various flags and options
+2.  User enters the required instructions
 3.  User enters client's information
 4.  System updates new client information
 
@@ -326,61 +326,68 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. System detects error for incorrect flag
+* 2a. System detects error for invalid instruction
 
-    * 2a1. System prompts error for incorrect flag used
-    * 2a2. User enters correct flag
-
-    Use case ends.
+    * 2a1. System prompts error for invalid instruction
+    * 2a2. User enters valid instruction 
+    
+    Use case continues from step 3.
  
-* 3a. System detects error within client's information
+* 3a. System detects error in client's information
 
-    * 2a1. System prompts error for incorrect client's information
-    * 2a2. User enters correct client's information
+    * 2a1. System prompts error for invalid client's information
+    * 2a2. User enters valid client's information
 
-    Use case ends.
+    Use case continues from step 4.
 
 * 3b. System detects duplicated client's information
 
     * 2a1. System prompts error for duplicated client's information
-    * 2a2. User enters correct non-duplicated client's information
+    * 2a2. User enters non-duplicated client's information
 
-    Use case ends.
+    Use case continues from step 4.
 
 **Use case: Add a client's rental information**
 
 **MSS**
 
 1.  User chooses to add rental information to a specific client
-2.  User types in a command consisting various flags and options
-3.  User enters client's rental information
-4.  System updates new client information
+2.  User enters the required instruction
+3.  User selects client
+4.  User enters client's rental information
+5.  System updates new client information
 
     Use case ends.
 
 **Extensions**
 
-* 2a. System detects error for incorrect flag or option
+* 2a. System detects error for invalid instruction
 
-    * 2a1. System prompts error for incorrect flag or option used
-    * 2a2. User enters correct flag or option
+    * 2a1. System prompts error for invalid instruction
+    * 2a2. User enters valid instruction
 
-  Use case ends.
+    Use case continues from step 3.
 
-* 3a. System detects error within client's rental information
+* 3a. System detects error for invalid client
 
-    * 2a1. System prompts error for incorrect client's rental information
-    * 2a2. User enters correct client's rental information
+    * 2a1. System prompts error for invalid client
+    * 2a2. User enters valid client
 
-  Use case ends.
+    Use case continues from step 4.
 
-* 3b. System detects duplicated client's rental information
+* 4a. System detects error in client's rental information
 
-    * 2a1. System prompts error for duplicated client's rental information
-    * 2a2. User enters correct non-duplicated client's information
+    * 2a1. System prompts error for invalid client's rental information
+    * 2a2. User enters valid client's rental information
 
-  Use case ends.
+    Use case continues from step 5.
 
+* 4b. System detects duplicated client's rental information
+
+    * 4a1. System prompts error for duplicated client's rental information
+    * 4a2. User enters correct non-duplicated client's information
+
+    Use case continues from step 5.
 
 **Use case: Find a person based on keyword**
 
