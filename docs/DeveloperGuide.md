@@ -304,32 +304,192 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the System is EduConnect and the Actor is a Teacher (User), unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Add a student**
+
+**Preconditions**
+* User has the student’s details, i.e. name, gender, contact, classes, subject and email
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
-
+1. Teacher enters the add student command
+2. EduConnect verifies the command inputs
+3. EduConnect adds the student’s contact details to the address book
+4. EduConnect displays a success message
+    
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. Parameter(s) missing in command format
+  * 2a1. EduConnect displays an error message, e.g. “Email parameter is missing! Ensure that you give values for /name /gender /contact /classes /subject /email”
+  
+    Use case ends.
 
-  Use case ends.
+* 2b. Invalid/Unsupported parameter tag used
+  * 2b1. EduConnect displays an error message, e.g. “Invalid detail to add! Please use the following options: name, gender, contact, classes, subject, email”
 
-* 3a. The given index is invalid.
+    Use case ends.
 
-    * 3a1. AddressBook shows an error message.
+* 2c. Invalid argument for a parameter given
+  * 2c1. EduConnect displays an error message, e.g. “Name given is invalid! Please give a name that fits: First name and last name (with optional middle names)”
 
-      Use case resumes at step 2.
+    Use case ends.
 
-*{More to be added}*
+* 2d. Existing contact or email given
+  * 2d1. EduConnect displays an error message, e.g. “The email boydanderson@gmail.com is already in use”
+    
+    Use case ends.
+
+**Use case: UC02 - Add a teacher**
+
+**Preconditions**
+* User has the teacher’s details, i.e. name, gender, contact, classes, subject and email.
+
+**MSS**
+1. Teacher enters the add teacher command
+2. EduConnect verifies the command inputs
+3. EduConnect adds the teacher’s contact details to the address book
+4. EduConnect displays a success message
+   
+    Use case ends.
+
+**Extensions**
+* 2a. Parameter(s) missing in command format
+  * 2a1. EduConnect displays an error message, e.g. “Email parameter is missing! Ensure that you give values for /name /gender /contact /classes /subject /email”
+    
+    Use case ends.
+
+* 2b. Invalid/Unsupported parameter tag used
+  * 2b1. EduConnect displays an error message, e.g. “Invalid detail to add! Please use the following options: name, gender, contact, classes, subject, email”
+    
+    Use case ends.
+
+* 2c. Invalid argument for a parameter given 
+  * 2c1. EduConnect displays an error message, e.g. “Name given is invalid! Please give a name that fits: First name and last name (with optional middle names)”
+    
+    Use case ends.
+
+* 2d. Existing contact or email given
+  * 2d1. EduConnect displays an error message, e.g. “The email boydanderson@gmail.com is already in use”
+    
+    Use case ends.
+
+**Use case: UC-03 Delete a contact**
+
+**Preconditions**
+* The address book contains at least one contact 
+* User knows the index of the contact to be deleted
+
+**MSS**
+1. Teacher enters the delete contact command
+2. EduConnect verifies the index validity
+3. EduConnect deletes the contact from the address book
+4. EduConnect displays a success message
+   
+    Use case ends.
+
+**Extensions**
+* 2a. Invalid index provided
+  * 2a1. EduConnect displays an error message, e.g. “Invalid index provided, enter an integer between [0, 10)”
+    
+    Use case ends.
+
+**Use case: UC-04 List contacts**
+
+**Preconditions**
+* User may optionally specify filter criteria using tags
+
+**MSS**
+1. Teacher enters the list command
+2. EduConnect displays a list of all contacts in the address book 
+
+    Use case ends.
+
+**Extensions**
+* 1a. Teacher specifies some filter criteria using valid tags
+  * 1a1. EduConnect displays a list of all contacts that fit that criteria in the address book
+    
+    Use case ends.
+  
+* 1b. Teacher uses invalid tags to filter
+  * 1b1. EduConnect displays an error message, e.g. “Invalid detail to find with! Please use one of the following options: name, gender, contact, classes, subject, email”
+    
+    Use case ends.
+
+**Use case: UC-05 Edit a contact**
+
+**Preconditions**
+* The address book contains at least one contact
+* User knows the index of the contact to be edited
+
+**MSS**
+* Teacher enters the edit command
+* EduConnect verifies the command inputs
+* EduConnect edits the specified contact in the address book
+* EduConnect displays a success message 
+
+    Use case ends.
+
+**Extensions**
+* 2a. Invalid index provided
+  * 2a1. EduConnect displays an error message, e.g. “Invalid index provided, enter an integer between [0, 10)”
+
+    Use case ends.
+
+* 2b. Invalid/Unsupported parameter tag used
+  * 2b1. EduConnect displays an error message, e.g. “Invalid detail to edit! Please use the following options: name, gender, contact, classes, subject, email”
+  
+    Use case ends.
+  
+* 2c. Invalid new argument for a parameter given
+  * 2c1. EduConnect displays an error message, e.g. “New name given is invalid! Please give a name that fits: First name and last name (with optional middle names)”
+    
+    Use case ends.
+
+* 2d. Duplicate contact or email provided
+  * 2d1. EduConnect displays an error message, e.g. “The email boydanderson@gmail.com is already in use”
+  
+    Use case ends.
+
+**Use case: UC-06 Clear**
+
+**Preconditions**
+* User may optionally specify the occupation (teacher or student) and tags to filter which contacts are cleared
+
+**MSS**
+1. Teacher enters the clear command
+2. EduConnect clears all contacts in the address book
+3. EduConnect displays a success message
+
+    Use case ends.
+
+**Extensions**
+* 1a. Teacher specifies an occupation to clear
+  * 1a1. EduConnect clears all contacts of that occupation in the address book
+  
+    Use case ends.
+
+* 1b. Teacher specifies an invalid occupation
+  * 1b1. EduConnect displays an error message, e.g. “Invalid occupation to clear, please specify either teacher or student”
+  
+    Use case ends.
+
+* 1c. Teacher specifies a tag to clear 
+  * 1c1. EduConnect clears all contacts with that tag value in the address book
+
+    Use case ends.
+
+* 1d. Teacher specifies an invalid tag
+  * 1d1. EduConnect displays an error message, e.g. “Invalid detail to clear with! Please use one of the following options: name, gender, contact, classes, subject, email”
+
+    Use case ends.
+
+* 1e. Teacher specifies an occupation or tag with no matching contacts
+  * 1e1. EduConnect displays a warning, e.g. “No contacts matching the specified filter, no changes made to address book”
+
+    Use case ends.
 
 ### Non-Functional Requirements
 
