@@ -397,6 +397,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+
+**Use case: Delete a client**
+
+**MSS**
+
+1.  User chooses to delete a client and all related rental information
+2.  User types in a command consisting the index of the client
+3.  TrueRental deletes that client and all related rental information
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The provided index is not valid
+
+    * 2a1. TrueRental prompts error for invalid index
+
+  Use case ends.
+
+
 *{More to be added}*
 
 ### Non-Functional Requirements
