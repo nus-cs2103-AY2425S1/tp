@@ -50,7 +50,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Gia Hien
 
-<img src="images/giahien.png" width="200px">
+<img src="images/mrnobody0505.png" width="200px">
 
 [[github](http://github.com/mrnobody0505)]
 [[portfolio](team/mrnobody0505)]
