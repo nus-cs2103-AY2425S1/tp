@@ -60,3 +60,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
+
+
+### Zhang Yuxiang
+        
+<img src="images/therarefox.png" width="200px">
+
+[[github](http://github.com/TheRareFox)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Code quality
+* Responsibilities: Looks after code quality, ensures adherence to coding standards, etc.
+
