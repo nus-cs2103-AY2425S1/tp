@@ -329,14 +329,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  The system should be able to store data related to university students, including personal and contact information. (Data)
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage. (Efficiency and performance)
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse. (Accessibility)
-4.  The system should work on common desktop operating systems, including Windows, macOS, and Linux. (Environment)
-5.  The system must include comprehensive user and developer documentation to support easy onboarding for both end-users and future developers. (Documentation)
-6.  The system should be modular and follow an OOP (Object-Oriented Programming) approach, allowing for easy feature extensions or modifications. (maintainability)
-7.  The system’s user interface should be intuitive and require no more than 10 minutes of learning for a new user. (UX)
-8.  The system should undergo regular code reviews to maintain high code quality. (Quality)
+1. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage. (Efficiency and performance)
+2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse. (Accessibility)
+3. The system should work on common desktop operating systems, including Windows, macOS, and Linux. (Environment)
+4. The system must include comprehensive user and developer documentation to support easy onboarding for both end-users and future developers. (Documentation)
+5. The system should be modular and follow an OOP (Object-Oriented Programming) approach, allowing for easy feature extensions or modifications. (maintainability)
+6. The system’s user interface should be intuitive and require no more than 10 minutes of learning for a new user. (UX)
+7. The system should undergo regular code reviews to maintain high code quality. (Quality)
 
 *{More to be added}*
 
