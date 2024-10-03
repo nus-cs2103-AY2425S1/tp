@@ -304,12 +304,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    **Extensions**
 
 * 2a. The format of the details provided are incorrect.
-  * 2a1. AddressBook shows an error message.
-  * 2a2. AddressBook shows what the expected format should be.
+  * 2a1. AddressBook requests input in correct format.
   
     Use case resumes at step 2
 * 2b. The student entered has already been added. 
-  * 2b1. AddressBook shows a message that there has already been an entry for the student.
+  * 2b1. AddressBook indicates that there has already been an entry for the student.
   
     Use case resumes at step 2
 
