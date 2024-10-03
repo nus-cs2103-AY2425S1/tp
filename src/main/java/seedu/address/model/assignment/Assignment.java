@@ -18,7 +18,7 @@ public class Assignment {
     private static final int MIN_SCORE = 0;
 
     // Identity fields
-    private final Name name;
+    private final AssignmentName assignmentName;
 
     // Data fields
     private final int maxScore;
@@ -28,9 +28,9 @@ public class Assignment {
     /**
      * Every field must be present and not null.
      */
-    public Assignment(Name name, int maxScore) {
+    public Assignment(AssignmentName name, int maxScore) {
         requireNonNull(name);
-        this.name = name;
+        this.assignmentName = name;
         checkArgument(isValidScore(maxScore), MESSAGE_CONSTRAINTS);
         this.maxScore = maxScore;
     }
@@ -43,7 +43,7 @@ public class Assignment {
     }
 
     /**
-     * Returns true if both assignments have the same name.
+     * Returns true if both assignments have the same assignmentName.
      * This defines a weaker notion of equality between two assignments.
      */
     public boolean isSameAssignment(Assignment otherAssignment) {
@@ -52,7 +52,7 @@ public class Assignment {
         }
 
         return otherAssignment != null
-                && otherAssignment.name.equals(name);
+                && otherAssignment.assignmentName.equals(assignmentName);
     }
 
     /**
@@ -71,23 +71,23 @@ public class Assignment {
         }
 
         Assignment otherAssignment = (Assignment) other;
-        return name.equals(otherAssignment.name)
-                && MIN_SCORE == otherAssignment.MIN_SCORE
-                && maxScore == otherAssignment.maxScore
-                && score == otherAssignment.score
-                && hasSubmitted == otherAssignment.hasSubmitted;
+        return assignmentName.equals(otherAssignment.assignmentName)
+               && MIN_SCORE == otherAssignment.MIN_SCORE
+               && maxScore == otherAssignment.maxScore
+               && score == otherAssignment.score
+               && hasSubmitted == otherAssignment.hasSubmitted;
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, MIN_SCORE, maxScore, score, hasSubmitted);
+        return Objects.hash(assignmentName, MIN_SCORE, maxScore, score, hasSubmitted);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("name", name)
+                .add("assignmentName", assignmentName)
                 .add("MIN_SCORE", MIN_SCORE)
                 .add("maxScore", maxScore)
                 .add("score", score)
