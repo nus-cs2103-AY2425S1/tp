@@ -363,9 +363,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-
+* **Mainstream OS**: Common operating systems like Windows, Linux, Unix, and macOS supported by the application.
+* **CLI (Command Line Interface)**: A text-based interface where users interact with the app by typing commands instead of using a graphical interface (mouse-driven).
+* **Banking Agent**: A user of the system responsible for selling credit cards to customers. 
+* **Contact**: A record in the AgentAssist system that contains personal and financial details of a customer.
+* **Customer**: A person whose details are managed within the AgentAssist system. This could be a potential or existing client of the banking agent interested in or already using credit card services.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
