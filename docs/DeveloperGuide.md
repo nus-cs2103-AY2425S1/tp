@@ -325,9 +325,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-
+* **Volunteer**: An individual who participates in a community event without monetary compensation.
+* **Event**: A planned activity organised by a community or non-profit organisation, requiring volunteer coordination.
+* **Donor**: An individual or organization that contributes funds or resources to support community events.
+* **Recurring Events**: Events that occur repeatedly on a set schedule.
+* **CLI (Command-Line Interface)**: A text-based interface where users input commands to interact with the application.
+* **NFR (Non-Functional Requirement)**: System attributes like performance, scalability, and usability that don’t affect specific functional behaviors.
+* **MVP (Minimum Viable Product)**: The simplest version of a product that contains essential features to provide immediate value to users.
+* **Duplicate Handling**: A system feature that prevents the creation of identical entries.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
