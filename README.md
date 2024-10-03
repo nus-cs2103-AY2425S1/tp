@@ -13,10 +13,10 @@ Manage various contacts and stakeholders, track VIP relationships, and schedule 
 
 ---
 TalentHub currently supports the following features:
-- [ ] Client Management: Add, view, and delete clients 
+- [ ] Client Management: Add, view, and delete clients
 - [ ] Event Management: Add, view, and delete events
 
-> **Note:** The features listed above are not exhaustive and TalentHub is still in development. 
+> **Note:** The features listed above are not exhaustive and TalentHub is still in development.
 > For more information, please refer to our [TalentHub's product website](https://ay2425s1-cs2103t-w12-4.github.io/tp/).
 
 ## Reference
