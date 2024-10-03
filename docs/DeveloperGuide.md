@@ -304,7 +304,7 @@ Priorities: High (must have) - `* * *`, Medium (Good to have) - `* *`, Low (nice
 
 #### **Use case 1: List out all students**
 
-**MSS**
+**Main Success Scenario**
 
 1.  User requests to list students
 2.  StoreClass shows a list of students
