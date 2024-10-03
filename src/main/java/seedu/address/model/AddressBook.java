@@ -150,6 +150,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("persons", persons)
+                .add("tasks", tasks)
                 .toString();
     }
 
