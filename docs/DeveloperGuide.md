@@ -275,16 +275,32 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​              | I want to …​                                                         | So that I can…​                                                                           |
+|----------|----------------------|----------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
+| `* * *`  | new user             | view a help page with a list of available commands                   | refer to instructions to understand how to use the app                                    |
+| `* * *`  | user                 | add the contact information of a patient                             | keep track of the patient base of the clinic                                              |
+| `* * *`  | user                 | delete a patient                                                     | remove their data from the patient list after they leave the facility                     |
+| `* * *`  | user                 | display a list of patients and their information                     |                                                                                           |
+| `* * *`  | user                 | search for a patient's information using a command/keyword           | access a patient's details quickly without delay                                          |
+| `* * *`  | user                 | add an appointment of a patient                                      | view the appointment activity of a patient                                                |
+| `* *`    | user                 | edit the information of a patient                                    | update a patient's condition and contact details if there are changes                     |
+| `* *`    | user                 | add notes to a patient                                               | be reminded of important updates, observations or instructions related to their care      |
+| `* *`    | user                 | export a patient's information as a file (eg. PDF, CSV)              | store or share the information externally, especially for offline access                  |
+| `* *`    | user                 | log the patient's treatment progress over time                       | understand how a patient is responding to his/her respective treatment meth               |
+| `* *`    | user                 | edit the appointment of a patient                                    | reschedule an appointment for a patient easily                                            |
+| `* *`    | user                 | view appointments in the form of a schedule                          | easily see all appointments on a specific day                                             |
+| `* *`    | user                 | tag patients                                                         | categorise my patients based on keywords/conditions                                       |
+| `* *`    | user                 | search for a patient's information even if keyword matches partially | find patients quicker without having to type full details (eg. full name)                 |
+| `* *`    | user                 | sort list of patients                                                | view patient's details based on specified criteria                                        |
+| `* *`    | user                 | filter patients based on medical condition                           | view patients based on certain conditions or severity                                     |
+| `* *`    | user                 | see a popup alert on the day of a patient's appointment              | remind myself and prepare for a patient's appointment if needed                           |
+| `*`      | CLI experienced user | have access to command completion features                           | complete tasks faster without typing commands fully                                       |
+| `*`      | CLI experienced user | customize command shortcuts                                          | access these commands quickly and more comfortably                                        |
+| `*`      | user                 | import contact details from external sources                         | quickly populate the list without manually adding each patient                            |
+| `*`      | user                 | archive patient information                                          | have a back up record of their information, even after they are no longer in the facility |
+| `*`      | user                 | log when certain changes are made with a timestamp                   | revise my patient history with a reference to a time or date                              |
+| `*`      | user                 | set recurring appointment details for patients                       | avoid repetitive tasks                                                                    |
 
-*{More to be added}*
 
 ### Use cases
 
