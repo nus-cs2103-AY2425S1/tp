@@ -282,7 +282,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * Is comfortable using digital tools for personal organization
 * Ranges from young adults to seniors who want to stay connected with their extended family
 
-**Value proposition**: LegacyLink offers a comprehensive family contact management system that simplifies the organization of large family trees, streamlines event planning, and helps maintain family connections more effectively than traditional contact management methods. 
+**Value proposition**: LegacyLink offers a comprehensive family contact management system that simplifies the organization of large family trees, streamlines event planning, and helps maintain family connections more effectively than traditional contact management methods.
 It revolutionizes the "family experience"!
 ### User stories
 
@@ -330,7 +330,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1c. Given phone number is invalid.
 
     * 1c1. System shows an error message.
-        
+
       Use case resumes at step 1.
 
 
@@ -451,7 +451,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. User selects an event to delete.
 4. User is prompted for confirmation to delete the event.
 5. User confirms their intention and the event is deleted.
-6. User is given feedback that the event is deleted successfully. 
+6. User is given feedback that the event is deleted successfully.
 7. User no longer sees the event in the event list.
 
     Use case ends.

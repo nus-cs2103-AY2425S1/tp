@@ -4,8 +4,8 @@
 
 ![Ui](docs/images/Ui.png)
 
-LegacyLink is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having 
-the benefits of a Graphical User Interface (GUI). If you can type fast, LegacyLink can get your 
+LegacyLink is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having
+the benefits of a Graphical User Interface (GUI). If you can type fast, LegacyLink can get your
 contact management tasks done faster than traditional GUI apps.
 
 * The User Guide and Developer Guide can be found [here](https://ay2425s1-cs2103t-t10-4.github.io/tp/index.html).
