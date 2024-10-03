@@ -274,27 +274,42 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
+* Wedding planners who aim to organise weddings
 * has a need to manage a significant number of contacts
-* prefer desktop apps over other types
+* need to categorize all stakeholders in a wedding
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Manage contacts of all stakeholders of a wedding with ease and convenience 
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​         | I want to …​                                                           | So that I can…​                                                              |
+|----------|-----------------|------------------------------------------------------------------------|------------------------------------------------------------------------------|
+| `* * *`  | Wedding Planner | Add contact details                                                    | I can find contacts easily                                                   |
+| `* * *`  | Wedding Planner | Delete contacts                                                        | I can keep information organized.                                            |
+| `* * *`  | Wedding Planner | View the calendar easily                                               | I can be aware of when the events are                                        |
+| `* *`    | Wedding Planner | Filter based on location                                               | Depending on the wedding venue, which is more suitable                       |
+| `* *`    | Wedding Planner | Edit contact details                                                   | I can keep information as up-to-date and accurate as possible.               |
+| `* *`    | Wedding Planner | Search for contacts by name, tags, or number                           | I can quickly find the contact I need                                        |
+| `* *`    | Wedding Planner | Mark guests as attending or not attending                              | I can provide accurate headcounts to vendors                                 |
+| `* *`    | Wedding Planner | Store different methods of contact (phone number, email address, etc.) | I can reach them in more than one way                                        |
+| `* *`    | Wedding Planner | Tag contacts with custom labels                                        | I can categorize vendors based on unique criteria for my clients.            |
+| `* *`    | Wedding Planner | Filter based on type of contractor                                     | It is easier to find the right people for the right job.                     |
+| `* *`    | Wedding Planner | Create an event for each wedding                                       | I can manage all details specific to that event.                             |
+| `*`      | Wedding Planner | Show my clients all the contacts they need to know about the wedding   | My clients don't need to worry about finding the contacts themselves         |
+| `*`      | Wedding Planner | Assign contacts to specific events                                     | I can keep track of all parties involved in a wedding                        |
+| `*`      | Wedding Planner | Send out a PSA to all parties involved                                 | I can conveniently send out important updates to relevant people when needed |
+| `*`      | Wedding Planner | Create and manage guest lists for each wedding                         | I can track RSVPs and dietary preferences                                    |
+| `*`      | Wedding Planner | Track vendor bookings for each wedding                                 | I can ensure all necessary services are confirmed                            |
+| `*`      | Wedding Planner | Rate or review vendors after each event                                | I can assess their performance for future recommendations                    |
+| `*`      | Wedding Planner | Separate my contacts into categories                                   | I can locate their contact easily and boost my efficiency                    |
+| `*`      | Wedding Planner | Export guest lists and vendor details                                  | I can share them with clients or print them for use during events            |
+| `*`      | Wedding Planner | Set reminders to contact specific vendors/clients                      | I can correspond with them on time without missing any important deadlines.  |
 
 *{More to be added}*
 
