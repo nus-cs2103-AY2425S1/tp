@@ -329,11 +329,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1.  The system should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2.  The system should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using keyboard commands than using the mouse.
+4.  The system should return a response to commands that are inputted by the user within three seconds.
+5.  The codebase should be compliant with AB3 architecture and logic to faclilitate easier testing and debugging.
+6.  The system should be operational and responsive 24/7.
 
 ### Glossary
 
