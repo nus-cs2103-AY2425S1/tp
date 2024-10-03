@@ -329,16 +329,60 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `SocialBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: View all contacts**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list contacts
+2.  SocialBook shows a list of contacts
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+**Use case: Add a contact**
+
+**MSS**
+
+1.  User requests to add a contact into the list with the specified details
+2.  SocialBook adds the contact and displays the newly added contact
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given specified details is empty.
+
+    * 2a1. SocialBook shows an error message.
+
+      Use case ends.
+
+* 2b. The given name and phone number is detected as duplicate.
+
+    * 2b1. SocialBook shows an error message.
+
+      Use case ends.
+
+* 2c. There is an error in any of the specified details.
+
+    * 2c1. SocialBook shows an error message.
+
+      Use case ends.
+
+**Use case: Delete a contact**
+
+**MSS**
+
+1.  User requests to list contacts
+2.  SocialBook shows a list of contacts
+3.  User requests to delete a specific contact in the list
+4.  SocialBook deletes the contact
 
     Use case ends.
 
@@ -350,10 +394,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. SocialBook shows an error message.
 
       Use case resumes at step 2.
-
+  
 *{More to be added}*
 
 ### Non-Functional Requirements
