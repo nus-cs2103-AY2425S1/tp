@@ -358,7 +358,6 @@ Preconditions:
 
 Preconditions:
 * The Inventory Manager is logged into the InvenTrack system.
-* The product for which the threshold is being set exists in the system.
 
 **MSS**
 1. Inventory Manager tries to set a threshold for a product.
