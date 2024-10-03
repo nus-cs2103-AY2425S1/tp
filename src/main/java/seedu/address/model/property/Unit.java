@@ -46,7 +46,7 @@ public class Unit {
             return false;
         }
 
-        Unit otherUnit= (Unit) other;
+        Unit otherUnit = (Unit) other;
         return value.equals(otherUnit.value);
     }
 

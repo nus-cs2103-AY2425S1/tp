@@ -13,13 +13,14 @@ import seedu.address.model.person.exceptions.DuplicatePersonException;
 /**
  * A list of properties that enforces uniqueness between its elements and does not allow nulls.
  * A property is considered unique by comparing using {@code Property#isSameProperty(Property)}.
- * As such, adding and updating of properties uses {@code Property#isSameProperty(Property)} for equality to ensure uniqueness.
+ * As such, adding and updating of properties uses {@code Property#isSameProperty(Property)}
+ * for equality to ensure uniqueness.
  *
  * Supports a minimal set of list operations.
  *
  * @see Property#isSameProperty(Property)
  */
-public class UniquePropertiesList implements Iterable<Property>{
+public class UniquePropertiesList implements Iterable<Property> {
 
     private final ObservableList<Property> internalList = FXCollections.observableArrayList();
     private final ObservableList<Property> internalUnmodifiableList =
@@ -66,7 +67,9 @@ public class UniquePropertiesList implements Iterable<Property>{
         internalList.add(toAdd);
     }
 
-
+    /**
+     * Returns true if the list contains an equivalent property as the given argument.
+     */
     public boolean contains(Property toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSameProperty);
@@ -85,5 +88,4 @@ public class UniquePropertiesList implements Iterable<Property>{
         }
         return true;
     }
-
 }
