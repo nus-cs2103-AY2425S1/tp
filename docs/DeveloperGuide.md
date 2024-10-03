@@ -320,7 +320,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 3a. The given contact name is invalid.
 
     * 3a1. KnottyPlanner shows an error message.
 
