@@ -260,16 +260,33 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Target user**: Private School teachers, administrators.
 
-* private school teachers who manage multiple classes
+**Value proposition**: Simplifies contact management by providing an all-in-one user-friendly interface for teachers/staff in private education institutions. Ease their pain of manually tracking things like attendance and parents/students’ contact.
+
+**Target user profile 1**: Independent Private School Teachers
+
+* private school teachers, often working independently, managing their classes and responsibilities on their own.
+* private school teachers who manage multiple classes of different levels
 * have a need to track and organise details of students and parents/guardians (e.g. phone numbers, emails, addresses)
-* have a need to efficiently access information regarding students and parents/guardians for communication during various situations (e.g. parent-teacher meetings, emergencies, administrative tasks)
-* have a need to edit data regarding students and parents/guardians to track attendance
+* have a need to efficiently access information regarding students and parents/guardians for communication during various situations (e.g. parent-teacher meetings, emergencies, administrative tasks, payment)
+* have a need to edit data regarding students and parents/guardians in case of updates
 
-**Value proposition**: simplifies contact management by providing an all-in-one user-friendly interface for teachers in private education institutions. Ease their pain of manually tracking things like attendance and parents/students’ contact.
+**Target user profile 2**: Private School Teachers working under administrations
 
+* private school teachers who work alongside or under the supervision of education administrators or managers.
+* private school teachers who manage multiple classes across various subjects
+* have a need to track and organise details of students (e.g. phone numbers, emails, addresses)
+* Parent/Guardian contacts are overseen by institution admin staff
+* have a need to efficiently access information regarding students for communication during various situations (e.g. emergencies, administrative tasks, class schedules)
+* have a need to edit data regarding students in case of updates
 
+**Target user profile 3**: Private Education Institution Managers
+
+* Managing the overall administration of the institution
+* have a need to track and organise details of students, parents/guardians, teachers and vendors (e.g. phone numbers, emails, addresses)
+* have a need to efficiently access information regarding students, parents/guardians, teachers and vendors for communication during various situations (e.g. parent-teacher meetings, emergencies, administrative tasks)
+* have a need to edit data regarding students, parents/guardians, teachers and vendors in case of updates in contact information
 
 ### User stories
 
