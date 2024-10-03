@@ -91,7 +91,7 @@ Examples:
 
 ### Listing all persons : `view`
 
-Shows a list of all contacts in the address book, sorted alphabetically.
+Shows a list of all contacts in DDD, sorted alphabetically.
 
 Format: `view`
 
@@ -129,7 +129,7 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from DDD.
 
 Format: `clear`
 
@@ -155,7 +155,7 @@ Examples:
 
 ### Editing the data file
 
-DDD data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+DDD data are saved automatically as a JSON file `[JAR file location]/data/ddd.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
