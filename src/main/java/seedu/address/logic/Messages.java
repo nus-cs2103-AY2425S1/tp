@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Guest;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Vendor;
 
 /**
  * Container for user visible messages.
@@ -65,6 +66,25 @@ public class Messages {
                 .append(guest.getRsvp())
                 .append("; Tags: ");
         guest.getTags().forEach(builder::append);
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code vendor} for display to the user.
+     */
+    public static String format(Vendor vendor) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(vendor.getName())
+                .append("; Phone: ")
+                .append(vendor.getPhone())
+                .append("; Email: ")
+                .append(vendor.getEmail())
+                .append("; Address: ")
+                .append(vendor.getAddress())
+                .append("; Company: ")
+                .append(vendor.getCompany())
+                .append("; Tags: ");
+        vendor.getTags().forEach(builder::append);
         return builder.toString();
     }
 }
