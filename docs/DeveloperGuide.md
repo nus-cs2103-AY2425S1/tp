@@ -376,6 +376,46 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**Use case: UC6 - Showing all commands**
+
+**MSS**
+
+1.  User requests to show all commands
+2.  GOATS outputs a link to the user guide and the summarised list of commands supported by the application.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given command is invalid.
+
+    * 2a1. GOATS shows an error message.
+
+      Use case ends.
+
+**Use case: UC7 - Clearing all contacts**
+
+**MSS**
+
+1.  User requests to clear all contacts
+2.  GOATS removes all contacts
+3.  GOATS outputs an empty list
+4.  GOATS shows success message
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+    *  Use case ends.
+
+* 2a. The given command is invalid.
+
+    * 2a1. GOATS shows an error message.
+
+      Use case ends.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
