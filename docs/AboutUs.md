@@ -17,7 +17,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/johndoe)]
 [[portfolio](team/mrnobody0505)]
 
-- Role: Project Advisor
+* Role: Project Advisor
 
 ### Gan Ren Yick
 
