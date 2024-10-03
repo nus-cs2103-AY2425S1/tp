@@ -57,3 +57,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: UI
+
+### Amos Chee Tian Ee
+
+<img src="images/amoschee.png" width="200px">
+
+[[github](https://github.com/amoschee)]
+[[portfolio](team/amoschee.md)]
