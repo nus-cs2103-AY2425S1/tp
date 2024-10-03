@@ -1,18 +1,28 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
+/**
+ * Parses user input to create a ListCommand object.
+ * <p>
+ * This class implements the {@link Parser} interface and is responsible for
+ * interpreting the user input specific to listing commands. It validates the
+ * input format and ensures that it complies with the expected structure.
+ * </p>
+ */
 public class ListCommandParser implements Parser<ListCommand> {
     /**
-     * Parses the given user input and creates a ListCommand object.
+     * Parses user input to create a ListCommand object.
+     * <p>
+     * This class implements the {@link Parser} interface and is responsible for
+     * interpreting the user input specific to listing commands. It validates the
+     * input format and ensures that it complies with the expected structure.
+     * </p>
      *
-     * @param userInput the input string provided by the user.
-     * @throws ParseException if the user input is not in the expected format
-     *                        or if it contains unexpected arguments.
-     * @return a ListCommand object.
+     * @author gabriellegtw
      */
     public ListCommand parse(String userInput) throws ParseException {
         String[] words = userInput.split(" ");
