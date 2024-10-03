@@ -300,16 +300,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `KnottyPlanner` and the **Actor** is the `User`, unless specified otherwise)
 
-**Use case: Delete a person**
+
+**Use case: Delete a contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list contacts
+2.  KnottyPlanner shows a list of contacts
+3.  User requests to delete a specific contact in the list
+4.  KnottyPlanner deletes the contact
 
     Use case ends.
 
@@ -321,11 +322,135 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. KnottyPlanner shows an error message.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: Add a tag to a contact**
+
+**MSS**
+
+1.  User requests to list contact
+2.  KnottyPlaner shows a list of contact
+3.  User requests to add a tag to a specific contact in the list
+4.  KnottyPlanner adds the tag to that contact
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given name is invalid.
+
+    * 3a1. KnottyPlanner shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Delete a tag from a contact**
+
+**MSS**
+
+1.  User requests to list contacts
+2.  KnottyPlanner shows a list of contacts
+3.  User requests to delete a tag from a specific contact in the list
+4.  KnottyPlanner deletes the tag from that contact
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given name is invalid.
+
+    * 3a1. KnottyPlanner shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: View all event tags for a contact**
+
+**MSS**
+
+1.  User requests to list contacts
+2.  KnottyPlanner shows a list of contacts
+3.  User requests to view all tags for a specific contact
+4.  KnottyPlanner shows all tags for that contact
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given name is invalid.
+
+    * 3a1. KnottyPlanner shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Search for a specific contact**
+
+**MSS**
+
+1. User requests to list contacts
+2. KnottyPlanner shows a list of contacts
+3. User requests to search for contacts using a specific criteria 
+4. KnottyPlanner shows a list of contacts that match the criteria
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given criterion is invalid.
+
+    * 3a1. KnottyPlanner shows an error message.
+
+      Use case resumes at step 2.
+
+* 4a. The list is empty.
+
+  Use case ends.
+
+**Use case: Edit a contact's details**
+
+**MSS**
+
+1. User requests to list contacts
+2. KnottyPlanner shows a list of contacts
+3. User requests to edit details of a specific contact
+4. KnottyPlanner updates the details for that contact
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given contact name is invalid.
+
+    * 3a1. KnottyPlanner shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The new contact details given are invalid.
+
+  * 3b1. KnottyPlanner shows an error message.
+  
+    Use case resumes at step 2.
+
 
 ### Non-Functional Requirements
 
