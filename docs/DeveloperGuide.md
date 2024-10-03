@@ -262,7 +262,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-Tech-savvy inside sales representatives in the sales industry who
+Tech-savvy sales representatives in the insurance industry who
 - Manage 200+ leads and customers
 - Work remotely or in fast-paced office environments
 - Prioritize speed and efficiency in their daily operations
