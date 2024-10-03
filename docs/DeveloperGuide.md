@@ -291,16 +291,54 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `PlanPal` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**UC01: Add a contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User specifies the command that they want to add a new user
+2.  User specifies the information of the user they want to add
+3.  PlanPal shows a success message
+4.  PlanPal shows the new User Object that has been created
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Tagging a contact with a role
+  * 1a1. User specifies what role the contact belongs to
+    Use case resumes from 3.
+
+    Use case ends.
+  
+
+* 1b. Adding Telegram Contact
+  * 1b1. User specifies the Telegram username that the contact belongs to
+  
+  * Use case resumes from 3.
+
+**UC02: Listing Contacts**
+
+**MSS**
+1. User specifies a command to request to list persons
+2. PlanPal shows the list of all contacts
+   Use case ends.
+
+**Extensions:**
+* 2a PlanPal detects error in process to list user
+  * 2a1 PlanPal shows an error message that the command was called wrongly.
+    
+    Use case ends.
+
+
+**UC03: Delete a contact**
+
+**MSS**
+
+1.  User requests to list persons(UC02)
+2.  User requests to delete a specific person in the list
+3.  AddressBook deletes the person
 
     Use case ends.
 
@@ -310,13 +348,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 3a.  PlanPal detects that the command given is invalid
 
     * 3a1. AddressBook shows an error message.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**UC04 List Contacts by Role**
+
+**MSS**
+1. User requests to list contacts by role.
+2. PlanPal shows the contacts grouped by their assigned role (attendee, vendor, volunteer, sponsor).
+
+**Extensions**
+* 1a. PlanPal detects that the command given is invalid
+    * 1a1. AddressBook shows an error message.
+    
+        Use case resumes at step 1.
+
+
+* 2a. No contacts are found for the requested role.
+    * 2a1. PlanPal shows a message: "No contacts found for the specified role."
+    
+        Use case ends.
+
 
 ### Non-Functional Requirements
 
