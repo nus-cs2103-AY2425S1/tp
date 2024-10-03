@@ -19,6 +19,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
+### Subramanian Pon Harish
+
+<img src="images/ponharish.png" width="200px">
+
+[[github](http://github.com/ponharish)]
+[[portfolio](team/ponharish.md)]
+
 ### Lavanya Garg
 
 <img src="images/lavanyagarg112.png" width="200px">
