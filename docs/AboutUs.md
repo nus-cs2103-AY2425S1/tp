@@ -1,6 +1,6 @@
 ---
   layout: default.md
-  title: "About Us"
+    title: "About Us"
 ---
 
 # About Us
@@ -11,14 +11,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Julian Tay
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/juliantayyc.png" width="200px">
 
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+[[github](https://github.com/juliantayyc)]cd 
+[[portfolio](team/juliantayyc.md)]
+
+* Role: Team Lead
 
 ### Jane Doe
 
