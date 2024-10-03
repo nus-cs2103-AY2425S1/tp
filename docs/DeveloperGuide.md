@@ -304,7 +304,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC1 - Delete a person**
 
 **MSS**
 
@@ -327,7 +327,163 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 2.
 
-_{More to be added}_
+---
+
+**Use case: UC2 - Add a person**
+
+**MSS**
+
+1.  User requests to list persons
+2.  AddressBook shows a list of persons
+3.  User requests to add a person not in the list
+4.  AddressBook adds the person
+
+    Use case ends.
+
+**Extensions**
+
+- 3a. The list contains the person's name.
+
+  Use case ends.
+
+- 3b. The given contact details is invalid.
+
+  - 3b1. AddressBook shows an error message.
+
+    Use case resumes at step 2.
+
+---
+
+**Use case: UC3 - Edit a person**
+
+**MSS**
+
+1.  User requests to list persons
+2.  AddressBook shows a list of persons
+3.  User requests to edit a person in the list
+4.  AddressBook edits the person
+
+    Use case ends.
+
+**Extensions**
+
+- 2a. The list does not contain the person.
+
+  Use case ends.
+
+- 3a. The given contact details/index is invalid.
+
+  - 3a1. AddressBook shows an error message.
+
+    Use case resumes at step 2.
+
+---
+
+**Use case: UC4 - Delete a concert**
+
+**MSS**
+
+1.  User requests to list concerts
+2.  AddressBook shows a list of concerts
+3.  User requests to delete a concert in the list
+4.  AddressBook adds the concert
+
+    Use case ends.
+
+**Extensions**
+
+- 2a. The list is empty.
+
+  Use case ends.
+
+- 3a. The given index is invalid.
+
+  - 3a1. AddressBook shows an error message.
+
+    Use case resumes at step 2.
+
+---
+
+**Use case: UC5 - Add a concert**
+
+**MSS**
+
+1.  User requests to list concerts
+2.  AddressBook shows a list of concerts
+3.  User requests to add a concert not in the list
+4.  AddressBook adds the concert
+
+    Use case ends.
+
+**Extensions**
+
+- 2a. The list contains the concert.
+
+  Use case ends.
+
+- 3a. The given concert details is invalid.
+
+  - 3a1. AddressBook shows an error message.
+
+    Use case resumes at step 2.
+
+---
+
+**Use case: UC6 - Edit a concert**
+
+**MSS**
+
+1.  User requests to list concerts
+2.  AddressBook shows a list of concerts
+3.  User requests to edit a concert in the list
+4.  AddressBook edits the concert
+
+    Use case ends.
+
+**Extensions**
+
+- 2a. The list does not contain the concert.
+
+  Use case ends.
+
+- 3a. The given concert details/index is invalid.
+
+  - 3a1. AddressBook shows an error message.
+
+    Use case resumes at step 2.
+
+---
+
+**Use case: UC7 - Assign person to a concert**
+
+**MSS**
+
+1.  User requests to list concerts
+2.  AddressBook shows a list of concerts
+3.  User requests to list persons
+4.  AddressBook shows a list of persons
+5.  User requests to assign a person to a concert in the list
+6.  AddressBook assigns the person to the concert
+
+    Use case ends.
+
+**Extensions**
+
+- 2a. The list does not contain the concert.
+
+  Use case ends.
+
+- 4a. The list does not contain the person.
+
+  Use case ends.
+
+- 5a. The given person/concert is invalid.
+
+  - 5a1. AddressBook shows an error message.
+
+    Use case resumes at step 2.
+
+---
 
 ### Non-Functional Requirements
 
