@@ -287,102 +287,107 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | TA                                         | view a student's details      | view the student's details to understand him/her better and contact him/her |
 | `* *`    | TA                                         | track student's attendance    | award credit appropriately                                                  |
 | `*`      | user with many persons in the address book | sort persons by name          | locate a person easily                                                      |
-| `*`      | user with many persons in the address book | sort persons by name          | locate a person easily                                                      |
 
 ## Use cases
 
-Software System: Teacher’s Pet (TP)
-Use Case: UC1 - Add a Student
-Actors: TA
+(For all use cases below, the System is Teacher's Pet (TP) and the Actor is the Teaching Assistant (TA), unless specified otherwise)
+
+
+**Use Case: UC1 - Add a Student**  
+
+**MSS:**  
+
+1. TA enters student details
+2. TP shows the new student record  
+Use case ends.
+
+**Extensions:**  
+
+- 1a. TA does not enter enough data for TP to add a student  
+  - 1a1. TP informs TA of the missing data required  
+    Use case resumes from step 1.
+
+
+- 1b. TP detects that data is entered in an incorrect format
+  - 1b1. TP informs TA of the correct format  
+  Use case resumes from step 1.
+
+    
+**Use Case: UC2 - Delete student**  
+Preconditions: There is some student data available
+
+**MSS:**  
+
+1. TA <ins> views students (UC3 or UC4) <ins/>
+2. TP shows all students based on specified view
+3. TA deletes students
+4. TP shows new list with the student deleted  
+Use case ends.
+
+**Extensions:**
+
+- 3a. TA does not enter enough information for TP to delete a student
+  - 3a1. TP informs TA of the missing data required  
+Use case resumes from step 1.
+  
+
+- 3b. TP detects that data is entered in an incorrect format
+  - 3b1. TP informs TA of the correct format  
+  Use case resumes from step 1.
+
+
+**Use Case: UC3 - List student**  
 Preconditions: Installed the application
 
-MSS:
-TA enters student details
-TP shows the new student record
+**MSS:**
+
+1. TA requests a list of students
+2. TP shows a list of all student data  
 Use case ends.
 
-Extensions:
-1a. TA does not enter enough data for TP to add a student
-1a1. TP informs TA of the missing data required
-Use case resumes from step 1.
+**Extensions:**
 
-1b. TP detects that data is entered in an incorrect format
-1b1. TP informs TA of the correct format
-Use case resumes from step 1.
+- 2a. There is no student data found in the list
+  - 2a1. TP shows an empty list of students  
+  Use case ends.
 
 
-Software System: Teacher’s Pet
-Use Case: UC2 -  Delete student
-Actors: TA
-Preconditions: There are some student data available
+**Use Case: UC4 - Find Student**  
 
-MSS:
-TA views students (UC3 or UC4)
-TP shows all students based on specified view
-TA deletes student
-TP shows new list with the student deleted
+**MSS:**
+
+1. TA enters the find command with at least one valid search parameter (e.g., /n <Name>, /id <Student ID>).
+2. Teacher’s Pet (TP) validates the input parameters.
+3. TP searches the student database for records matching all the specified criteria.
+4. TP displays a list of students matching the search criteria.  
 Use case ends.
 
-Extensions:
-3a. TA does not enter enough information for TP to delete a student
-3a1. TP informs TA of the missing data required
-Use case resumes from step 1.
+**Extensions:**
 
-3b. TP detects that data is entered in an incorrect format
-3b1. TP informs TA of the correct format
-Use case resumes from step 1.
-
-Software System: Teacher’s Pet
-Use Case: UC3 - List student
-Actors: TA
-Preconditions:  Installed the application
-
-MSS:
-TA enters `list` in text bar
-List of all student data are shown
-Use case ends
-
-Extensions:
-2a. There are no student data found in the list
-2a1. The will be no students shown
-
-
-Software System: Teacher’s Pet
-Use Case: UC4 - Find Student
-Actors: Teaching Assistant (TA)
-Preconditions: There are existing student records in the system.
-
-Main Success Scenario (MSS):
-TA enters the find command with at least one valid search parameter (e.g., /n <Name>, /id <Student ID>).
-Teacher’s Pet (TP) validates the input parameters.
-TP searches the student database for records matching all the specified criteria.
-TP displays a list of students matching the search criteria.
-Use case ends.
-
-Extensions:
-
-1a. TA does not provide any search parameters.
-1a1. TP displays an error message:
-- "At least one search parameter must be provided."
+- 1a. TA does not provide any search parameters.
+  - 1a1. TP displays an error message: "At least one search parameter must be provided."  
   Use case resumes at step 1.
+  
 
-1b. TA provides unknown or invalid prefixes.
-1b1. TP displays an error message:
-- "Unknown prefix '/x'. Valid prefixes are /n, /id."
+- 2a. TA provides search parameters in a wrong format
+  - 2a1. 
+- 1b. TA provides unknown or invalid prefixes.
+  - 1b1. TP displays an error message: "Unknown prefix '/x'. Valid prefixes are /n, /id."  
   Use case resumes at step 1.
+  
 
-1c. TA provides duplicate prefixes.
-1c1. TP displays an error message:
-- "Duplicate prefix '/n' found. Please provide each parameter only once."
+- 1c. TA provides duplicate prefixes.
+  - 1c1. TP displays an error message: "Duplicate prefix '/n' found. Please provide each parameter only once."
   Use case resumes at step 1.
+  
 
-2a. TA provides invalid input format for parameters.
-- 2a1. For Name (/n):
-    - If the name is empty:
-        - TP displays: "Name cannot be empty."
+- 2a. TA provides invalid input format for parameters. 
+  - 2a1. For Name (/n):
+      - If the name is empty:
+          - TP displays: "Name cannot be empty."
 
-    - If the name contains the '/' character:
-        - TP displays: "Invalid character '/' in name."
+      - If the name contains the '/' character:
+          - TP displays: "Invalid character '/' in name."
 
 - 2a2. For Student ID (/id):
 
@@ -391,27 +396,28 @@ Extensions:
 
 Use case resumes at step 1.
 
-4a. No students match the criteria.
-4a1. TP displays a message:
-- "No students found matching the criteria."
+- 4a. No students match the criteria.
+  - 4a1. TP displays a message:"No students found matching the criteria."  
   Use case ends.
 
 ## Non-functional requirements
 
-The system shall be capable of handling an increase in users (up to 10,000) without requiring a complete redesign.
-The system works on Linux, Mac and Windows.
-The system shall support at least 100 concurrent users without degradation in performance.
-The system shall respond to user queries within 2 seconds under normal load conditions.
+1. The system shall be capable of handling an increase in users (up to 10,000) without requiring a complete redesign.
+2. The system works on Linux, Mac and Windows. 
+3. The system shall support at least 100 concurrent users without degradation in performance. 
+4. The system shall respond to user queries within 2 seconds under normal load conditions.
 
 ## Glossary
 
-Teaching Assistant (TA): An individual, sometimes also a student, in NUS who is in charge of instructing students for
+- **Teaching Assistant (TA)**: An individual, sometimes also a student, in NUS who is in charge of instructing students for
 a particular module, course or program, usually in small classes of less than 30 students.
 
-Student: An individual enrolled in a module, course or program in NUS who is receiving instruction and evaluation
+
+- **Student**: An individual enrolled in a module, course or program in NUS who is receiving instruction and evaluation
 from educators or teaching assistants.
 
-Student Profile: A collection of information about an individual student, including name, contact information, year,
+
+- **Student Profile**: A collection of information about an individual student, including name, contact information, year,
 major and academic records.
 
 ## **Appendix: Instructions for manual testing**
