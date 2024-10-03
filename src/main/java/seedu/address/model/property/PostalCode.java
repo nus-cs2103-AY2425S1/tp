@@ -3,6 +3,10 @@ package seedu.address.model.property;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a property postal code in the address book.
+ * Guarantees: immutable; postal code is valid as declared in {@link #isValidPostalCode(String)}.
+ */
 public class PostalCode {
     public static final String MESSAGE_CONSTRAINTS =
             "Postal Code numbers should only contain positive numbers, and it should be exactly 6 digits long";
@@ -21,7 +25,7 @@ public class PostalCode {
     }
 
     /**
-     * Returns true if a given string is a valid phone number.
+     * Returns true if a given string is a valid postcal code.
      */
     public static boolean isValidPostalCode(String test) {
         return test.matches(VALIDATION_REGEX);

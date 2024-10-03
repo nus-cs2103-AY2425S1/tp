@@ -6,8 +6,11 @@ import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
 
+/**
+ * Represents a Property in the address book.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 public class Property {
-    // Identity fields
     private final PostalCode postalCode;
     private final Unit unit;
 
@@ -28,6 +31,10 @@ public class Property {
         return unit;
     }
 
+    /**
+     * Returns true if both properties have the same unit number and postal code.
+     * This defines a weaker notion of equality between two persons.
+     */
     public boolean isSameProperty(Property otherProperty) {
         if (otherProperty == this) {
             return true;
@@ -39,8 +46,8 @@ public class Property {
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both properties have the same identity and data fields.
+     * This defines a stronger notion of equality between two properties.
      */
     @Override
     public boolean equals(Object other) {
@@ -62,7 +69,6 @@ public class Property {
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(postalCode, unit);
     }
 
