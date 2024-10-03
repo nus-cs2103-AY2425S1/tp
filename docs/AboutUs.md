@@ -38,15 +38,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: member
 * Responsibilities: Data
 
-### Jean Doe
+### Eng Yu Han
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/engyuhan.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/engyuhan)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: member
+* Responsibilities: none
 
 ### James Doe
 
