@@ -12,12 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.contactdate.ContactDate;
 import seedu.address.model.contactdate.ContactDateList;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Nric;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -33,6 +28,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedContactDate> contactDates = new ArrayList<>();
+    private final String callFrequency;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -43,12 +39,14 @@ class JsonAdaptedPerson {
                              @JsonProperty("phone") String phone, @JsonProperty("email") String email,
                              @JsonProperty("address") String address,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
-                             @JsonProperty("contactDates") List<JsonAdaptedContactDate> contactDates) {
+                             @JsonProperty("contactDates") List<JsonAdaptedContactDate> contactDates,
+                             @JsonProperty("callFrequency") String callFrequency) {
         this.nric = nric;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.callFrequency = callFrequency;
         if (contactDates != null) {
             this.contactDates.addAll(contactDates);
         }
@@ -66,6 +64,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        callFrequency = source.getCallFrequency().value;
         contactDates.addAll(source.getContactDates().stream()
                 .map(JsonAdaptedContactDate::new)
                 .collect(Collectors.toList()));
@@ -134,9 +133,19 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        if (callFrequency == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    CallFrequency.class.getSimpleName()));
+        }
+        if (!CallFrequency.isValidCallFrequency(callFrequency)) {
+            throw new IllegalValueException(CallFrequency.MESSAGE_CONSTRAINTS);
+        }
+        final CallFrequency modelCallFrequency = new CallFrequency(callFrequency);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
         final ContactDateList modelContactDates = new ContactDateList(personContactDates);
-        return new Person(modelNric, modelName, modelPhone, modelEmail, modelAddress, modelTags, modelContactDates);
+        return new Person(modelNric, modelName, modelPhone, modelEmail, modelAddress, modelTags,
+                modelContactDates, modelCallFrequency);
     }
 
 }
