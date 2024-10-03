@@ -276,8 +276,8 @@ _{Explain here how the data archiving feature will be implemented}_
 
 * nurse in the healthcare industry managing patients
 * has many patients across different wards with varying care levels
-* prefers typing to mouse interactions
 * is comfortable using CLI
+* rather use typing over mouse input
 
 **Value proposition**: 
 provides a patient management system for nurses to use which is faster than GUI/mouse driven apps
