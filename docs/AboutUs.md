@@ -38,9 +38,9 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Haris Irfan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/Haris-Irfan.png" width="200px">
 
 [[github](http://github.com/johndoe)]
 [[portfolio](team/johndoe.md)]
