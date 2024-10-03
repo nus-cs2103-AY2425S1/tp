@@ -9,7 +9,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 ### Caleb Chong
-<img src="images/calebchongsj.png.jpg" width="200px">
+<img src="images/calebchongsj.png" width="200px">
 
 [[github](http://github.com/calebchongsj)]
 [[profile](members/calebchong.md)]
