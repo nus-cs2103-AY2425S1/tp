@@ -262,27 +262,36 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+Researchers who..
+* have a need to manage a significant number of study participants
+* need an easy way to contact different experimental groups
+* need quick access to study participants' information
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
+As researchers have to handle large groups of participants across multiple studies, *ResearchRoster* allows them to 
+* have all participants consolidated in a single program. 
+* consolidate a list of contact details based on **specific experimental criteria**
+* export it to an easy-to-read format for better data organization.
+
+Thus, *ResearchRoster* allows researchers to save time, effort and energy whilst keeping their participant data well-organised.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​    | I want to …​                      | So that I can…​                            |
+| -------- |------------|-----------------------------------|--------------------------------------------|
+| `* * *`  | user       | add a new persson                 | store a new person in my contact list      |
+| `* * *`  | user       | add details to contacts           | store details of people in my contact list |
+| `* * *`  | researcher | add multiple tags to participants | tag contacts to multiple study groups      |
+| `* * *`  | user       | delete contacts                   | remove old/ contacts that I no longer need |
+| `* *`    | user       | save my contact list              | keep my contacts between sessions          |
+| `*`      | user       | exit the program                  | clear up my processes                      |
 
 *{More to be added}*
 
@@ -326,7 +335,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **GUI**: Graphical User Interface - A visual-based interface where users interact with the system through graphical elements like icons and windows.
+* **CLI**: Command Line interface - A text-based interface where users interact with the system by typing commands.
 
 --------------------------------------------------------------------------------------------------------------------
 
