@@ -303,7 +303,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 (For all use cases below, the **System** is the `KnottyPlanner` and the **Actor** is the `User`, unless specified otherwise)
 
 
-**Use case: Delete a contact**
+**Use case: UC01 - Delete a contact**
 
 **MSS**
 
@@ -326,7 +326,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Add a tag to a contact**
+**Use case: UC02 - Add a tag to a contact**
 
 **MSS**
 
@@ -349,7 +349,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Delete a tag from a contact**
+**Use case: UC03 - Delete a tag from a contact**
 
 **MSS**
 
@@ -372,7 +372,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: View all event tags for a contact**
+**Use case: UC04 - View all event tags for a contact**
 
 **MSS**
 
@@ -395,7 +395,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Search for a specific contact**
+**Use case: UC05 - Search for a specific contact**
 
 **MSS**
 
@@ -422,7 +422,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: Edit a contact's details**
+**Use case: UC06 - Edit a contact's details**
 
 **MSS**
 
