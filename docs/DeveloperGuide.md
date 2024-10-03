@@ -262,7 +262,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-- HR professional of a tech company with over 1000 employees with different skill sets and roles
+- HR professional of a tech company with many employees with different skill sets and roles
 - works in a team of HR professionals
 - manages recruitment and manpower allocation for company projects
 - has a need to manage a significant number of contacts
@@ -328,10 +328,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list employees
-2. HRConnect shows a list of employees with their ids
-3. User requests to delete a specific employee in the list by their id
-4. HRConnect deletes the person
+1. User requests to list employees.
+2. HRConnect shows a list of employees with their ids.
+3. User requests to delete a specific employee in the list by their id.
+4. HRConnect deletes the person.
 
    Use case ends.
 
@@ -353,10 +353,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list projects
-2. HRConnect shows a list of projects with their ids
-3. User requests to delete a specific project in the list by its id
-4. HRConnect deletes the project
+1. User requests to list projects.
+2. HRConnect shows a list of projects with their ids.
+3. User requests to delete a specific project in the list by its id.
+4. HRConnect deletes the project.
 
    Use case ends.
 
@@ -378,12 +378,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list employees
-2. HRConnect shows a list of employees with their ids
-3. User requests to list projects
-4. HRConnect shows a list of projects with their ids
-5. User requests to assign a specific employee by their id to a specific project by its id
-6. HRConnect assigns the employee to the project
+1. User requests to list employees.
+2. HRConnect shows a list of employees with their ids.
+3. User requests to list projects.
+4. HRConnect shows a list of projects with their ids.
+5. User requests to assign a specific employee by their id to a specific project by its id.
+6. HRConnect assigns the employee to the project.
 
    Use case ends.
 
@@ -409,12 +409,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list projects
-2. HRConnect shows a list of projects with their ids
-3. User selects a project by its id
-4. HRConnect shows a list of employees assigned to the project
-5. User requests to un-assign a specific employee by their id from the selected project
-6. HRConnect un-assigns the employee from the project
+1. User requests to list projects.
+2. HRConnect shows a list of projects with their ids.
+3. User selects a project by its id.
+4. HRConnect shows a list of employees assigned to the project.
+5. User requests to un-assign a specific employee by their id from the selected project.
+6. HRConnect un-assigns the employee from the project.
 
    Use case ends.
 
@@ -440,11 +440,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list skills the employees in the company have
-2. HRConnect shows a list of skills
-3. User selects a few skills
-4. User requests to list all employees with all of the skills selected
-5. HRConnect lists all employees with all of the skills selected
+1. User requests to list skills the employees in the company have.
+2. HRConnect shows a list of skills.
+3. User selects a few skills.
+4. User requests to list all employees with all of the skills selected.
+5. HRConnect lists all employees with all of the skills selected.
 
    Use case ends.
 
@@ -477,11 +477,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-- **Mainstream OS**: Windows, Linux, Unix, MacOS
+- **Mainstream OS**: Windows, Linux, Unix, MacOS.
 - **CLI**: Command Line Interface - A way of interacting with a computer system by inputting lines of text. The keyboard is primarily used.
 - **GUI**: Graphical User Interface - A way of interacting with a computer system where graphical elements such as windows, buttons, and menus are used.
-- **Private contact detail**: A contact detail that is not meant to be shared with others
-- **HR**: Human Resource - people responsible for finding, hiring, and training employees
+- **Private contact detail**: A contact detail that is not meant to be shared with others.
+- **HR**: Human Resources - A department responsible for finding, hiring, and training employees.
 - **Job candidate**: An applicant who is being considered for a job. The applicant is not yet an employee.
 
 ## **Appendix: Instructions for manual testing**
