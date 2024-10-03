@@ -331,7 +331,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  The system should be able to store data related to university students, including personal and contact information. (Data)
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage. (Efficiency and performance)
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse. (Accessibility)
+3.  A user with above average typing speed for regular text should be able to accomplish most of the tasks faster using commands than using the mouse. (Accessibility)
 4.  The system should work on common desktop operating systems, including Windows, macOS, and Linux. (Environment)
 5.  The system must include comprehensive user and developer documentation to support easy onboarding for both end-users and future developers. (Documentation)
 6.  The system should be modular and follow an OOP (Object-Oriented Programming) approach, allowing for easy feature extensions or modifications. (maintainability)
