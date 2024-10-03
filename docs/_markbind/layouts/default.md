@@ -4,7 +4,7 @@
 
 <header sticky>
   <navbar type="dark">
-    <a slot="brand" href="{{baseUrl}}/index.html" title="Home" class="navbar-brand">MyProduct</a>
+    <a slot="brand" href="{{baseUrl}}/index.html" title="Home" class="navbar-brand">MindMap</a>
     <li><a href="{{baseUrl}}/index.html" class="nav-link">Home</a></li>
     <li><a href="{{baseUrl}}/UserGuide.html" class="nav-link">User Guide</a></li>
     <li><a href="{{baseUrl}}/DeveloperGuide.html" class="nav-link">Developer Guide</a></li>
@@ -40,10 +40,6 @@
   * [Documentation, logging, testing, configuration, dev-ops]({{ baseUrl }}/DeveloperGuide.html#documentation-logging-testing-configuration-dev-ops)
   * [Appendix: Requirements]({{ baseUrl }}/DeveloperGuide.html#appendix-requirements)
   * [Appendix: Instructions for manual testing]({{ baseUrl }}/DeveloperGuide.html#appendix-instructions-for-manual-testing)
-* Tutorials
-  * [Tracing code]({{ baseUrl }}/tutorials/TracingCode.html)
-  * [Adding a command]({{ baseUrl }}/tutorials/AddRemark.html)
-  * [Removing Fields]({{ baseUrl }}/tutorials/RemovingFields.html)
 * [About Us]({{ baseUrl }}/AboutUs.html)
       </site-nav>
     </div>
