@@ -274,15 +274,16 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Has a large extended family with numerous contacts to manage
+* Values maintaining connections with various family branches (direct family, paternal side, maternal side, in-laws)
+* Organizes or participates in frequent family gatherings and events
+* Desires an efficient way to keep family contact information up-to-date
+* Appreciates tools that help navigate complex family dynamics
+* Is comfortable using digital tools for personal organization
+* Ranges from young adults to seniors who want to stay connected with their extended family
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
-
-
+**Value proposition**: LegacyLink offers a comprehensive family contact management system that simplifies the organization of large family trees, streamlines event planning, and helps maintain family connections more effectively than traditional contact management methods. 
+It revolutionizes the "family experience"!
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
