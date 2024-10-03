@@ -9,3 +9,4 @@ the benefits of a Graphical User Interface (GUI). If you can type fast, LegacyLi
 contact management tasks done faster than traditional GUI apps.
 
 * The User Guide and Developer Guide can be found [here](https://ay2425s1-cs2103t-t10-4.github.io/tp/index.html).
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
