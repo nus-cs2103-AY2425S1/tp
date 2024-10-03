@@ -102,7 +102,7 @@ public class TypicalVendors {
     /**
      * Returns an {@code AddressBook} with all the typical guests.
      */
-    public static AddressBook getTypicalAddressBookWithGuests() {
+    public static AddressBook getTypicalAddressBookWithVendors() {
         AddressBook ab = new AddressBook();
         for (Person person : getTypicalVendors()) {
             ab.addPerson(person);
