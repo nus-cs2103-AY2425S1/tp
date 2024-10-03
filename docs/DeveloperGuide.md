@@ -275,20 +275,43 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                           | I want to …​                       | So that I can…​                                                         |
+|----------|-----------------------------------|------------------------------------|-------------------------------------------------------------------------|
+| `* * *`  | administrator of a tuition centre | view all students' contact details | easily access everyone's details at one place??                         |
+| `* * *`  | administrator of a tuition centre | add a new person                   | add new contacts for newly enrolled students                            |
+| `* * *`  | administrator of a tuition centre | delete a student                   | remove students that are no longer enrolled                             |
+| `* * *`  | administrator of a tuition centre | find a student by name             | locate details of students without having to go through the entire list |
+| `* *`    |                                   |                                    |                                                                         |
+| `*`      | new user                          | see what commands are available    | refer to instructions when I forget how to use the App                  |
+| `*`      | administrator                     | add emergency contact to a student | quickly find out who to contact at once glance if the situation arises  |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `administrator`, unless specified otherwise)
+
+**Use case: Add a person**
+
+**MSS**
+
+1. User requests to add a student
+2. User provides the details of the student
+3. AddressBook adds the person
+
+    Use case ends.
+
+   **Extensions**
+
+* 2a. The format of the details provided are incorrect.
+  * 2a1. AddressBook shows an error message.
+  * 2a2. AddressBook shows what the expected format should be.
+  
+    Use case resumes at step 2
+* 2b. The student entered has already been added. 
+  * 2b1. AddressBook shows a message that there has already been an entry for the student.
+  
+    Use case resumes at step 2
 
 **Use case: Delete a person**
 
@@ -326,7 +349,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Administrator**: Tutors and admin staff at the tuition centre.
 
 --------------------------------------------------------------------------------------------------------------------
 
