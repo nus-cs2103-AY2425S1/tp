@@ -1,7 +1,7 @@
 ---
   layout: default.md
-  title: "Developer Guide"
-  pageNav: 3
+    title: "Developer Guide"
+    pageNav: 3
 ---
 
 # AB-3 Developer Guide
@@ -241,13 +241,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 
@@ -466,17 +466,66 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 ### Non-Functional Requirements
+1.  **Data Requirements**
+    - EduContacts must be capable of storing up to 1000 students’ contact details and academic data without significant performance degradation
+    - Contact and student data will not change frequently, but updates must be handled seamlessly (e.g., adding, updating, or deleting student details).
+2. **Portability**
+    - Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+    - EduContacts must be packaged in a single JAR file (or ZIP if additional resources are required). It should not require installation, making it easy to use on any system that supports Java 17.
+    - All data must be stored locally in human-readable text files, making it easy to back up or transfer data between systems.
+3. **Scalability**
+    - The system should be designed with extensibility in mind, allowing new features (e.g., tracking student behavior) to be added without significantly altering the existing codebase.
+    - The system should be capable of supporting more than 1000 contacts if needed, with the ability to upgrade to handle larger datasets without performance degradation.
+4. **Accessibility**
+    - A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+    - The user interface should be accessible to users with disabilities, adhering to standard accessibility guidelines to accommodate screen readers and keyboard navigation.
+    - The system should be easy to use for educators, with a simple CLI for fast input and an intuitive GUI for viewing contact information and reports.
+5. **Efficiency**
+    - The system should respond within 1 second for typical operations (e.g., adding a student, searching for a contact) with up to 1000 records. For larger datasets, response time should not exceed 3 seconds.
+    - Operations such as adding, deleting, and modifying student details should not cause noticeable performance degradation, even as the dataset grows.
+6. **Documentation**
+    - The system should include comprehensive documentation for both command-line and GUI operations, along with access to user support for troubleshooting and guidance.
+    - The codebase should be documented for future developers, making it easy to maintain, debug, and extend the system.
+7. **Robustness**
+    - The system must provide informative error messages for incorrect input or failures (e.g., invalid student ID).
+    - The system should not crash unexpectedly, and all errors must be logged for debugging.
+8. **Security**
+    - A login page should be implemented in order to prevent unauthorised users from signing in to other accounts.
+    - Student and parent data should be encrypted to prevent unauthorized access, while still being editable by advanced users.
+9. **Testability**
+    - The system should be compatible with automated testing frameworks, and all major features should be covered by unit and integration tests.
+    - All features should be easy to test manually without requiring complex setups.
+10. **Reliability**
+    - The application must be reliable and available for use during critical hours, such as during class or exam periods, without crashing or losing data.
+11. **Compliance**
+    - EduContacts must comply with relevant data protection laws (e.g., GDPR, PDPA) to ensure student and parent information is stored securely and is accessible only by authorized users.
+    - The system should provide options to manage and delete student data upon request, to comply with legal requirements.
+12. **Interoperability**
+    - EduContacts should be able to sync data with external platforms, such as Coursemology or Canvas, through API or manual import/export mechanisms.
+    - The system should support exporting and importing data in common file formats (e.g., CSV) for ease of use and integration.
+13. **Disaster Recovery**
+    - The system should support manual and automatic backups to prevent data loss. In case of a critical failure, the data should be easily recoverable.
+    - There should be clear steps for restoring data from a backup after a system failure, ensuring minimal downtime.
+14. **Fault Tolerance**
+    - All critical errors should be logged, allowing developers to troubleshoot and resolve issues. Minor errors should not crash the system but allow users to continue their tasks.
+    - In the event of a system fault, the system should continue operating in a degraded mode without losing functionality.
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
-*{More to be added}*
+
+
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Command-line Interface (CLI)**: A text-based interface used to interact with the software by typing commands. It is preferred by users who can type quickly and need to perform tasks efficiently without relying on graphical elements.
+* **Graphical User Interface (GUI)**: The visual component of EduContacts where users can interact with the application through graphical elements (e.g., buttons, forms) rather than text-based commands.
+* **JAR File**: A Java Archive (JAR) file that contains the EduContacts application. This single file allows the program to be executed on any machine that supports Java 17, without needing installation.
+* **Human-readable File**: A text file that can be easily opened, read, and understood by a person. Typically, such files are plain text and do not require specialized software to interpret or modify.
+* **JavaScript Object Notation (JSON)**: A lightweight, text-based format for representing structured data. It is used to exchange data between a server and a web application or store configuration settings.
+* **Comma-Separated Values (CSV)**: A plain-text file format used to store tabular data (numbers and text) in a structured way. Each line of the file corresponds to a row in the table, and the values are separated by commas (or other delimiters like semicolons or tabs).
+* **Duplicate Entry**: A situation where a student or contact already exists in the address book based on a matching unique identifier (e.g., Student ID). In such cases, EduContacts will reject the duplicate entry and display an error message.
+* **Error Message**: A notification provided to the user when an invalid input or action is detected. For example, entering a student ID in the wrong format will prompt an error message such as "Please enter a valid student ID!"
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -495,15 +544,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
@@ -512,16 +561,16 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete 0`<br>
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 
@@ -529,6 +578,6 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_

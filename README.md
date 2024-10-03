@@ -34,7 +34,7 @@ school LMS (Learning Management Systems).
 
 ## Getting Started
 
-[//]: # (For the detailed documentation of this project, see the **[EduContacts Product Website]&#40;https://link_to_website&#41;**.)
+[//]: For the detailed documentation of this project, see the **[EduContacts Product Website]&#40;https://ay2425s1-cs2103t-f15-2.github.io/tp/index.html&#41**)
 
 Our product website is currently in development. Check back soon!
 
