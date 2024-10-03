@@ -9,16 +9,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
 ### Suhayl Pervez
 
 <img src="images/suhayl13.png" width="200px">
@@ -26,12 +16,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/suhayl13)]
 [[portfolio](team/johndoe.md)]
 
+
 ### Subramanian Pon Harish
 
 <img src="images/ponharish.png" width="200px">
 
 [[github](http://github.com/ponharish)]
 [[portfolio](team/ponharish.md)]
+
+* Role: Develop
+* Responsibilities: Backend Logic
+
 
 ### Lavanya Garg
 
@@ -43,6 +38,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Testing
 * Responsibilities: Ensures the testing of the project is done properly and on time.
 
+
 ### Ang Peng Xuan
 
 <img src="images/angpengxuan.png" width="200px">
@@ -52,19 +48,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
 
 ### Pradyumna Shyama Prasad
 
-<img src="images/pradyuprasad" width="200px">
+<img src="images/pradyuprasad.png" width="200px">
 
 [[github](http://github.com/pradyuprasad)]
 [[portfolio](team/johndoe.md)]
