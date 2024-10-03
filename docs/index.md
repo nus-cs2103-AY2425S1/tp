@@ -10,7 +10,7 @@
 
 ![Ui](images/Ui.png)
 
-**MindMap is a desktop application for managing your contact details.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
+**MindMap is a desktop app for quickly logging patient information and session details.** The CLI-based approach prioritizes quick data entry and organization while maintaining privacy by storing data locally, addressing the need for secure, fuss-free patient record management during sessions.
 
 * If you are interested in using MindMap, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
 * If you are interested about developing MindMap, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
