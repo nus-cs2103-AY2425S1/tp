@@ -329,15 +329,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. Operations like adding, deleting, or editing clients shall complete in less than 1 second for a single transaction.
-5. The Command-Line Interface (CLI) and any Graphical User Interface (GUI) components shall be intuitive and easy to navigate.
-6. The codebase shall follow established coding standards for readability and ease of maintenance.
-7. The application shall be compatible with major operating systems, including Windows, macOS, and Linux.
-8. The system shall handle errors gracefully without crashing.
-9. All exceptions shall be caught and managed appropriately to maintain system stability.
+1.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3. Operations like adding, deleting, or editing clients shall complete in less than 1 second for a single transaction.
+4. The Command-Line Interface (CLI) and any Graphical User Interface (GUI) components shall be intuitive and easy to navigate.
+5. The codebase shall follow established coding standards for readability and ease of maintenance.
+6. The application shall be compatible with major operating systems, including Windows, macOS, and Linux.
+7. The system shall handle errors gracefully without crashing.
+8. All exceptions shall be caught and managed appropriately to maintain system stability.
 
 *{More to be added}*
 
