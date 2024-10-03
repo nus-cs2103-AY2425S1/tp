@@ -383,8 +383,14 @@ otherwise)
 
 ### Glossary
 
+* **Client**: A pet owner who seeks services from the veterinary clinic for their pet(s)
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Pet Owners**: An individual who has registered their pet with the veterinary clinic for treatment or checkups
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Profile**: A detailed record containing information about a pet or pet owner, including the owner's name and contact details, as well as the pet's name, species, breed, age, and sex
+* **Veterinarian**: A licensed medical professional who provides care and treatment to animals
+* **Vaccination**: The administration of a vaccine to a pet to stimulate an immune response against specific diseases
+* **Workflow**: The sequence of processes involved in providing veterinary care, including appointment scheduling, examination, treatment, and follow-up
 
 --------------------------------------------------------------------------------------------------------------------
 
