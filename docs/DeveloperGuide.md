@@ -252,7 +252,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * [Testing guide](Testing.md)
 * [Logging guide](Logging.md)
 * [Configuration guide](Configuration.md)
-* [DevOps guide](DevOps.md)
+* [DevOps guide](DevOps.md) 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -345,6 +345,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Subject**: The subject the student / teacher is taking
+* **Class**: The class the student / teacher is taking
+* **Command Line Interface (CLI)**: Text-based user interface that allows the user to input
+* **Next-of-Kin**: The contact of the closest relative of the current contact
+* **Database**: An organized collection of structured information or data, typically stored electronically.
+* **GUI (Graphical User Interface)**: A visual user interface that allows users to interact with an application through graphical elements like buttons, icons, and menus, instead of typing commands.
+* **Encryption**: The process of converting plain text data into a coded format to prevent unauthorized access.
+* **Version Control**: A system that records changes to a file or set of files over time, allowing developers to track and manage revisions.
 
 --------------------------------------------------------------------------------------------------------------------
 
