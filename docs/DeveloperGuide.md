@@ -290,54 +290,54 @@ High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have
 
 Those without any stars are user stories that were considered but will not be implemented at this time.
 
-| Priority | As a …​                   | I want to …​                                                                                                         | So that…​                                                                                                                                                           |
-|:--------:|---------------------------|----------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `* * *`  | user                      | add tag(s) to each contact based on created tags such as florist, musician etc.                                      | I can easily understand the group this person belongs to.                                                                                                           |
-| `* * *`  | user                      | add a phone number associated with each contact                                                                      | I can easily find the contact information for each contact.                                                                                                         |
-| `* * *`  | user                      | add the address associated with each contact                                                                         | I can easily find the address of each contact.                                                                                                                      |
-| `* * *`  | user                      | filter contacts by tag                                                                                               | I can quickly see all the groups under the same tag, and find the right vendor based on the type of services provided.                                              |
-| `* * *`  | user                      | add new contacts into WedLinker                                                                                      | I can store the contact details of new contacts.                                                                                                                    |
-| `* * *`  | user                      | delete contacts that are no longer needed                                                                            | I can remove unnecessary contacts and have a more organised address book.                                                                                           |
-| `* * *`  | user                      | search for contact by name                                                                                           | I can find specific contacts that I am looking for.                                                                                                                 |
-| `* * *`  | user                      | create tags                                                                                                          | I can have special categories for non traditional vendors.                                                                                                          |
-|  `* *`   | user                      | edit information such as the contact number and address of each contact                                              | all contacts have the most updated information.                                                                                                                     |
-|  `* *`   | user                      | clear all the contacts in the system                                                                                 | I can clear all my contacts quickly without having to individually delete them if I want to add in a completely new set of contacts.                                |
-|  `* *`   | careless user             | receive a prompt that requires me to key in a confirmation that I want to delete a contact or clear the address book | I will not lose all my contacts when I accidentally type delete/ clear.                                                                                             |
-|  `* *`   | user                      | assign each guest contact its dietary requirements status                                                            | I can track the dietary requirement of each guest.                                                                                                                  |
-|  `* *`   | user                      | sort contacts by alphabetical order                                                                                  | I can easily find the contacts required in a large address book.                                                                                                    |
-|  `* *`   | user                      | assign additional information for each contact                                                                       | I can include important notes that may not fit into other categories, such as reminders for what the contact might need.                                            |
-|  `* *`   | first-time user           | see some sample contacts already available in the app                                                                | I can try out the different features without needing to add my own data (e.g allocating people to wedding, allocating task to contacts).                            |
-|  `* *`   | careless, first-time user | reload the sample contacts into the app                                                                              | I can continue trying out different features without needing to add my own data in case I accidentally cleared the contacts.                                        |
-|  `* *`   | first-time user           | see a help message showing all the commands/feature I can use                                                        | I can try out all the different features by referring to the message.                                                                                               |
-|   `*`    | user                      | assign tasks to contacts                                                                                             | I can track which tasks have been assigned to each contact.                                                                                                         |
-|   `*`    | user                      | update the status of tasks of contacts                                                                               | I can track the status of completion of the tasks assigned to contacts.                                                                                             |
-|   `*`    | user                      | add a tag to each guest indicating their table number                                                                | track the table each guest is seated at.                                                                                                                            |
-|   `*`    | user                      | key in the table number and get the list of guests seated at that table                                              | I can quickly identify all the groups seated at one table.                                                                                                          |
-|   `*`    | user                      | assign a rating out of 5 to each vendor                                                                              | I can track the experience with this vendor for future reference.                                                                                                   |
-|   `*`    | busy user                 | add multiple wedding events                                                                                          | I can track contacts for multiple weddings at once.                                                                                                                 |
-|   `*`    | busy user                 | tag each contact to a wedding                                                                                        | I can easily see which contacts are relevant to which wedding.                                                                                                      |
-|   `*`    | user                      | assign dates to a wedding                                                                                            | I can keep track of when different weddings are scheduled.                                                                                                          |
-|   `*`    | user                      | assign dates to a wedding                                                                                            | I can keep track of when different weddings are scheduled.                                                                                                          |
-|   `*`    | user                      | filter contacts by wedding                                                                                           | I can keep track of which contacts are relevant for each wedding.                                                                                                   |
-|   `*`    | user                      | send out (standardised formatted) information (text/email) from the application                                      | I can efficiently send out information without any mistakes.                                                                                                        |
-|   `*`    | user                      | share the contact details to relevant third-parties for bookings (eg: venue bookings, suit/dress rental, etc.)       | I can easily send out all relevant information (including dietary restriction, and other tags) to all the third-parties.                                            | 
-|   `*`    | user                      | exclude tags from search and filter                                                                                  | I can focus on contacts that are relevant to certain events or requirements without being overwhelmed by unnecessary information.                                   |
-|   `*`    | busy user                 | autocomplete existing tags when user is inputting tag information                                                    | I can quickly assign roles for people that might be working with others I have already input into the system and not have to type the same roles in multiple times. |
-|   `*`    | user                      | assign availability to vendors                                                                                       | I can check who will be available for a particular wedding.                                                                                                         |
-|   `*`    | user                      | filter availability of vendors                                                                                       | I can easily find vendors that can cater to a wedding.                                                                                                              |
-|   `*`    | user                      | store multiple contact methods                                                                                       | I can contact the vendors through different means.                                                                                                                  |
-|   `*`    | user                      | re-assign tasks to another contact                                                                                   | I can account for vendors suddenly being unavailable.                                                                                                               |
-|   `*`    | user                      | set reminders for tasks to different contacts                                                                        | I can easily track and follow up with clients and vendors for deliverables.                                                                                         |
-|   `*`    | user                      | see a list of all tasks and reminders I have assigned to contacts in its own window                                  | I can quickly and easily see what my earliest priorities are and act on them quickly.                                                                               |
-|   `*`    | user                      | see a calendar view of tasks, reminders, and weddings I have assigned                                                | I can see the whole timelines of my planned weddings and see how much time there is between tasks.                                                                  |
-|   `*`    | user                      | set privacy setting for different contacts                                                                           | I can keep personal and sensitive information private when sharing address book.                                                                                    |
-|   `*`    | forgetful user            | create links between different contacts, such as assigning a vendor to a bride or groom in a wedding                 | I can easily navigate from key stakeholders in the wedding that I remember better to vendors who I might not remember as well.                                      |
-|   `*`    | user                      | add certain vendors as favorites                                                                                     | I can remember which vendors performed well and see if they are favorites.                                                                                          |
-|   `*`    | user                      | access a list of all my favorite vendors                                                                             | I can easily check who the best vendors were that I previously engaged with.                                                                                        |
-|          | user                      | generate a checklist of all the contacts for a particular wedding, grouped by roles                                  | I can keep track of who is meant to be present at the wedding.                                                                                                      |
-|          | user                      | assign a time for each contact for when they are meant to arrive                                                     | I can easily keep track of which people are on time and check who to contact in case they have not arrived yet.                                                     |
-|          | user                      | attach extra documents as a file to various contacts                                                                 | I can store all the information in one place, eg. Invoices from a vendor.                                                                                           |
-|          | user                      | categorize tasks based on its nature (e.g. procurement, arrangement)                                                 | I can view tasks in a more organised manner.                                                                                                                        |
+| Priority | As a …​                   | I want to …​                                                                                                         | So that…​                                                                                                                                                          |
+|:--------:|---------------------------|----------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `* * *`  | user                      | add tag(s) to each contact based on created tags such as florist, musician etc.                                      | I can easily understand the group this person belongs to                                                                                                           |
+| `* * *`  | user                      | add a phone number associated with each contact                                                                      | I can easily find the contact information for each contact.                                                                                                        |
+| `* * *`  | user                      | add the address associated with each contact                                                                         | I can easily find the address of each contact.                                                                                                                     |
+| `* * *`  | user                      | filter contacts by tag                                                                                               | I can quickly see all the groups under the same tag, and find the right vendor based on the type of services provided                                              |
+| `* * *`  | user                      | add new contacts into WedLinker                                                                                      | I can store the contact details of new contacts                                                                                                                    |
+| `* * *`  | user                      | delete contacts that are no longer needed                                                                            | I can remove unnecessary contacts and have a more organised address book                                                                                           |
+| `* * *`  | user                      | search for contact by name                                                                                           | I can find specific contacts that I am looking for                                                                                                                 |
+| `* * *`  | user                      | create tags                                                                                                          | I can have special categories for non traditional vendors                                                                                                          |
+|  `* *`   | user                      | edit information such as the contact number and address of each contact                                              | all contacts have the most updated information                                                                                                                     |
+|  `* *`   | user                      | clear all the contacts in the system                                                                                 | I can clear all my contacts quickly without having to individually delete them if I want to add in a completely new set of contacts                                |
+|  `* *`   | careless user             | receive a prompt that requires me to key in a confirmation that I want to delete a contact or clear the address book | I will not lose all my contacts when I accidentally type delete/ clear                                                                                             |
+|  `* *`   | user                      | assign each guest contact its dietary requirements status                                                            | I can track the dietary requirement of each guest.                                                                                                                 |
+|  `* *`   | user                      | sort contacts by alphabetical order                                                                                  | I can easily find the contacts required in a large address book.                                                                                                   |
+|  `* *`   | user                      | assign additional information for each contact                                                                       | I can include important notes that may not fit into other categories, such as reminders for what the contact might need                                            |
+|  `* *`   | first-time user           | see some sample contacts already available in the app                                                                | I can try out the different features without needing to add my own data (e.g allocating people to wedding, allocating task to contacts)                            |
+|  `* *`   | careless, first-time user | reload the sample contacts into the app                                                                              | I can continue trying out different features without needing to add my own data in case I accidentally cleared the contacts                                        |
+|  `* *`   | first-time user           | see a help message showing all the commands/feature I can use                                                        | I can try out all the different features by referring to the message                                                                                               |
+|   `*`    | user                      | assign tasks to contacts                                                                                             | I can track which tasks have been assigned to each contact.                                                                                                        |
+|   `*`    | user                      | update the status of tasks of contacts                                                                               | I can track the status of completion of the tasks assigned to contacts                                                                                             |
+|   `*`    | user                      | add a tag to each guest indicating their table number                                                                | track the table each guest is seated at                                                                                                                            |
+|   `*`    | user                      | key in the table number and get the list of guests seated at that table                                              | I can quickly identify all the groups seated at one table                                                                                                          |
+|   `*`    | user                      | assign a rating out of 5 to each vendor                                                                              | I can track the experience with this vendor for future reference                                                                                                   |
+|   `*`    | busy user                 | add multiple wedding events                                                                                          | I can track contacts for multiple weddings at once                                                                                                                 |
+|   `*`    | busy user                 | tag each contact to a wedding                                                                                        | I can easily see which contacts are relevant to which wedding                                                                                                      |
+|   `*`    | user                      | assign dates to a wedding                                                                                            | I can keep track of when different weddings are scheduled                                                                                                          |
+|   `*`    | user                      | assign dates to a wedding                                                                                            | I can keep track of when different weddings are scheduled                                                                                                          |
+|   `*`    | user                      | filter contacts by wedding                                                                                           | I can keep track of which contacts are relevant for each wedding                                                                                                   |
+|   `*`    | user                      | send out (standardised formatted) information (text/email) from the application                                      | I can efficiently send out information without any mistakes                                                                                                        |
+|   `*`    | user                      | share the contact details to relevant third-parties for bookings (eg: venue bookings, suit/dress rental, etc.)       | I can easily send out all relevant information (including dietary restriction, and other tags) to all the third-parties                                            | 
+|   `*`    | user                      | exclude tags from search and filter                                                                                  | I can focus on contacts that are relevant to certain events or requirements without being overwhelmed by unnecessary information                                   |
+|   `*`    | busy user                 | autocomplete existing tags when user is inputting tag information                                                    | I can quickly assign roles for people that might be working with others I have already input into the system and not have to type the same roles in multiple times |
+|   `*`    | user                      | assign availability to vendors                                                                                       | I can check who will be available for a particular wedding                                                                                                         |
+|   `*`    | user                      | filter availability of vendors                                                                                       | I can easily find vendors that can cater to a wedding                                                                                                              |
+|   `*`    | user                      | store multiple contact methods                                                                                       | I can contact the vendors through different means                                                                                                                  |
+|   `*`    | user                      | re-assign tasks to another contact                                                                                   | I can account for vendors suddenly being unavailable                                                                                                               |
+|   `*`    | user                      | set reminders for tasks to different contacts                                                                        | I can easily track and follow up with clients and vendors for deliverables                                                                                         |
+|   `*`    | user                      | see a list of all tasks and reminders I have assigned to contacts in its own window                                  | I can quickly and easily see what my earliest priorities are and act on them quickly                                                                               |
+|   `*`    | user                      | see a calendar view of tasks, reminders, and weddings I have assigned                                                | I can see the whole timelines of my planned weddings and see how much time there is between tasks                                                                  |
+|   `*`    | user                      | set privacy setting for different contacts                                                                           | I can keep personal and sensitive information private when sharing address book                                                                                    |
+|   `*`    | forgetful user            | create links between different contacts, such as assigning a vendor to a bride or groom in a wedding                 | I can easily navigate from key stakeholders in the wedding that I remember better to vendors who I might not remember as well                                      |
+|   `*`    | user                      | add certain vendors as favorites                                                                                     | I can remember which vendors performed well and see if they are favorites                                                                                          |
+|   `*`    | user                      | access a list of all my favorite vendors                                                                             | I can easily check who the best vendors were that I previously engaged with                                                                                        |
+|          | user                      | generate a checklist of all the contacts for a particular wedding, grouped by roles                                  | I can keep track of who is meant to be present at the wedding                                                                                                      |
+|          | user                      | assign a time for each contact for when they are meant to arrive                                                     | I can easily keep track of which people are on time and check who to contact in case they have not arrived yet                                                     |
+|          | user                      | attach extra documents as a file to various contacts                                                                 | I can store all the information in one place, eg. Invoices from a vendor                                                                                           |
+|          | user                      | categorize tasks based on its nature (e.g. procurement, arrangement)                                                 | I can view tasks in a more organised manner                                                                                                                        |
 
 ### Use cases
 
@@ -347,18 +347,16 @@ Those without any stars are user stories that were considered but will not be im
 > 
 > Use Cases beginning with 'UCSH' cover non-core AddressBook functionality.
 
-**Use case: UC01 List all Contacts**
+**Use case: UC01 List all contacts**
 
 **MSS**
 
 1.  User issues the list command.
 2.  The system retrieves and displays the list of all contacts to the user.
-
     Use case ends.
 
 
-
-**Use case: UC02 Add a Contact**
+**Use case: UC02 Add a contact**
 
 **MSS**
 
@@ -379,31 +377,31 @@ Those without any stars are user stories that were considered but will not be im
 * 1b. The system detects a phone number input error (invalid format).
     * 1b1. The system displays an error message stating the correct format.
   
-      Use case ends.
+        Use case ends.
   
   
 * 1c. The system detects an address input error (too long).
     * 1c1. The system displays an error message stating the maximum length.
   
-      Use case ends.
+        Use case ends.
   
   
 * 1d. The system detects an email input error (invalid format).
     * 1d1. The system displays an error message stating the correct format.
   
-      Use case ends.
+        Use case ends.
   
   
 * 1e. The system detects a duplicate phone number error.
     * 1e1. The system displays an error message mentioning the existence of a duplicate phone number.
     
-      Use case ends.
+        Use case ends.
         
 
 * 1f. The system detects an invalid tag input.
     * 1f1. The system displays an error message stating the tag is invalid.
     
-      Use case ends.
+        Use case ends.
 
 
 
@@ -411,6 +409,7 @@ Those without any stars are user stories that were considered but will not be im
 
 **Guarantees:**
 * No duplicate phone numbers will be stored in two different contacts.
+
 
 **MSS**
 
@@ -431,19 +430,19 @@ Those without any stars are user stories that were considered but will not be im
 * 2a. The system detects an invalid contact index.
     * 2a1. The system displays an error message stating the contact index is invalid.
 
-      Use case resumes at step 1.
+        Use case resumes at step 1.
   
   
 * 2b. The system detects a phone number input error (invalid format).
     * 2b1. The system displays an error message stating the correct format.
     
-      Use case resumes at step 1.
+        Use case resumes at step 1.
   
 
 * 2c. The system detects a duplicate phone number error.
     * 2c1. The system displays an error message mentioning the existence of a duplicate phone number.
     
-      Use case resumes at step 1.
+        Use case resumes at step 1.
 
 
 
@@ -453,28 +452,28 @@ Those without any stars are user stories that were considered but will not be im
 
 1. User <ins>lists all contacts (UC01)</ins>.
 2. User requests to add address for a contact with the corresponding details.
-3. The system adds the address to the contact and displays a success message.
+3. The system adds the address to the contact and displays a success message
 4. The system displays the updated contact information in the address book.
 
-   Use case ends.
+    Use case ends.
 
 **Extensions**
 
 * 1a. The list is empty.
 
-  Use case ends.
+    Use case ends.
 
 
 * 2a. The system detects an invalid contact index.
     * 2a1. The system displays an error message stating the contact index is invalid.
 
-      Use case resumes at step 1.
+        Use case resumes at step 1.
   
 
 * 2b. The system detects an address input error (too long).
-    * 2b1. The system displays an error message stating the maximum length.
+    * 2b1. The system displays an error message stating the maximum length
 
-      Use case resumes at step 1.
+        Use case resumes at step 1.
 
 
 
@@ -484,10 +483,10 @@ Those without any stars are user stories that were considered but will not be im
 
 1. User <ins>lists all contacts (UC01)</ins>.
 2. User requests to add email address for a contact with the corresponding details. 
-3. The system adds the email address to the contact and displays a success message.
+3. The system adds the email address to the contact and displays a success message
 4. The system displays the updated contact information in the address book.
 
-   Use case ends.
+    Use case ends.
 
 **Extensions**
 
@@ -499,26 +498,21 @@ Those without any stars are user stories that were considered but will not be im
 * 2a. The system detects an invalid contact index.
     * 2a1. The system displays an error message stating the contact index is invalid.
 
-      Use case resumes at step 1.
+        Use case resumes at step 1.
 
 
 * 2b. The system detects an email input error (invalid format).
     * 2b1. The system displays an error message stating the correct format.
   
-      Use case resumes at step 1.  
+        Use case resumes at step 1.  
   
 
-
-**Use case: UC06 Search for Contacts by Name**
+**Use case: UC06 Search for contacts by Name**
 
 **MSS**
 
 1.  User searches for the contact by name.
 2.  System shows a list of contacts containing the name.
-
-    Use case ends.
-
-
 
 **Use case: UC07 Filter by Tag**
 
@@ -534,7 +528,6 @@ Those without any stars are user stories that were considered but will not be im
 * 1a. The list is empty.
 
   Use case ends.
-
 
 
 **Use case: UC08 Create Tags**
@@ -553,7 +546,6 @@ Those without any stars are user stories that were considered but will not be im
     * 1a2. System informs the user the tag already exists.
 
       Use case ends.
-
 
 
 **Use case: UC09 Tagging a contact with a specified tag**
@@ -575,7 +567,7 @@ Those without any stars are user stories that were considered but will not be im
 
 * 2a. System detects that the tag does not exist.
 
-    * 2a1. System <ins>creates a new tag (UC08)</ins>.
+    * 2a1. System <ins>creates a new tag (UC08)</ins>
 
       Use case resumes at step 3.
 
@@ -584,8 +576,6 @@ Those without any stars are user stories that were considered but will not be im
     * 2b1. System shows an error message prompting the user to enter a valid index.
 
       Use case resumes at step 1.
-
-
 
 **Use case: UC10 Delete Contact**
 
@@ -611,14 +601,13 @@ Those without any stars are user stories that were considered but will not be im
       Use case resumes at step 1.
 
 
-
 **Use case: UCSH01 Edit details for a contact**
 
 **MSS**
 
-1. User <ins>lists all contacts (UC01)</ins>.
-2. User requests to edit the details of a person and specifies what they want to change the details to.
-3. AddressBook changes the existing details to the specified details and shows list of persons with new details.
+1. User <ins>lists all contacts (UC01)</ins>
+2. User requests to edit the details of a person and specifies what they want to change the details to
+3. AddressBook changes the existing details to the specified details and shows list of persons with new details
 
 **Extensions**
 
@@ -655,7 +644,6 @@ Those without any stars are user stories that were considered but will not be im
       Use case resumes at step 1.
 
 
-
 **Use case: UCSH02 Clear all contacts from the system**
 
 **Guarantees:** 
@@ -663,8 +651,8 @@ Those without any stars are user stories that were considered but will not be im
 
 **MSS**
 
-1. User requests to clear all contact.
-2. System deletes all contacts and shows a blank list of persons.
+1. User requests to clear all contact
+2. System deletes all contacts and shows a blank list of persons
 
     Use case ends.
 
@@ -672,11 +660,11 @@ Those without any stars are user stories that were considered but will not be im
 
 **MSS**
 
-1. User <ins>lists all contacts (UC01)</ins>.
-2. User requests to delete a contact.
-3. System gives a prompt to confirm whether the user wants to delete the contact.
-4. User confirms they want to delete the contact.
-5. System deletes the contact and shows the updated list of persons.
+1. User <ins>lists all contacts (UC01)</ins>
+2. User requests to delete a contact
+3. System gives a prompt to confirm whether the user wants to delete the contact
+4. User confirms they want to delete the contact
+5. System deletes the contact and shows the updated list of persons
 
     Use case ends.
 
@@ -701,15 +689,14 @@ Those without any stars are user stories that were considered but will not be im
       Use case ends.
 
 
-
 **Use case: UCSH04 Receive a prompt when clearing the system**
 
 **MSS**
 
-1. User requests to clear the system of all persons.
-2. System gives a prompt to confirm whether the user wants to clear all contacts.
-3. User confirms they want to clear all contacts.
-4. System deletes all contacts and shows a blank list of persons.
+1. User requests to clear the system of all persons
+2. System gives a prompt to confirm whether the user wants to clear all contacts
+3. User confirms they want to clear all contacts
+4. System deletes all contacts and shows a blank list of persons
 
     Use case ends.
 
@@ -722,14 +709,13 @@ Those without any stars are user stories that were considered but will not be im
       Use case ends.
 
 
-
 **Use case: UCSH05 Assign dietary requirement to contact**
 
 **MSS**
 
-1. User <ins>lists all contacts (UC01)</ins>.
-2. User requests to add a dietary status to the person.
-3. System adds the dietary status to the contact and shows list of persons with new details.
+1. User <ins>lists all contacts (UC01)</ins>
+2. User requests to add a dietary status to the person
+3. System adds the dietary status to the contact and shows list of persons with new details
     Use case ends.
 
 **Extensions**
@@ -745,13 +731,12 @@ Those without any stars are user stories that were considered but will not be im
       Use case resumes at step 1.
 
 
-
 **Use case: UCSH06 Sort contacts in alphabetical order**
 
 **MSS**
 
-1.  User requests to show a list of persons sorted alphabetically.
-2.  System shows the list of persons sorted in alphabetical order.
+1.  User requests to show a list of persons sorted alphabetically
+2.  System shows the list of persons sorted in alphabetical order
 
     Use case ends.
 
@@ -761,15 +746,13 @@ Those without any stars are user stories that were considered but will not be im
 
   Use case ends.
 
-
-
 **Use case: UCSH07 Add additional information for a person**
 
 **MSS**
 
-1. User <ins>lists all contacts (UC01)</ins>.
-2. User requests to add additional information for a person.
-3. System adds the additional information to the contact and shows list of persons with new details.
+1. User <ins>lists all contacts (UC01)</ins>
+2. User requests to add additional information for a person
+3. System adds the additional information to the contact and shows list of persons with new details
 
     Use case ends.
 
@@ -796,37 +779,32 @@ Those without any stars are user stories that were considered but will not be im
 
 **Use case: UCSH08 See sample contacts in the system before starting to modify it**
 
-Preconditions: User has not added or edited contacts previously.
+Preconditions: User has not added or edited contacts previously
 
 **MSS**
 
-1.  User opens the application.
-2.  System shows a list of sample contacts.
+1.  User opens the application
+2.  System shows a list of sample contacts
 
     Use case ends.
-
-
 
 **Use case: UCSH09 Reload sample contacts in the system**
 
 **MSS**
 
-1.  User requests to reload sample contacts into the system.
-2.  System deletes all current persons in the system and shows a list of sample contacts.
+1.  User requests to reload sample contacts into the system
+2.  System deletes all current persons in the system and shows a list of sample contacts
 
     Use case ends.
-
-
 
 **Use case: UCSH10 See a list of all possible commands**
 
 **MSS**
 
-1.  User requests to see a list of all possible commands they can use in the system.
-2.  System shows a list of commands with their corresponding input format.
+1.  User requests to see a list of all possible commands they can use in the system
+2.  System shows a list of commands with their corresponding input format
 
     Use case ends.
-
 
 
 ### Non-Functional Requirements
