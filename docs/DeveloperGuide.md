@@ -306,44 +306,38 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list clients
-1.  Prudy shows a list of clients
+1. User requests to list clients
+1. Prudy shows a list of clients
 
-    Use case ends.
+   Use case ends.
 
 **Use case: UC2 - Delete a client**
 
-**Preconditions: User has done __UC1 - List clients__
+**Preconditions: User has done <u>UC1 - List clients</u>
 
 **MSS**
 
-1.  User requests to list clients
-1.  Prudy shows a list of clients
-1.  User requests to delete a specific client in the list
-1.  Prudy deletes the client
+1. User requests to delete a specific client in the list
+1. Prudy deletes the client
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The given index is invalid.
 
-  Use case ends.
+    * 1a1. Prudy shows an error message.
 
-* 3a. The given index is invalid.
+      Use case ends.
 
-    * 3a1. Prudy shows an error message.
-
-      Use case resumes at step 2.
-
-**Use case 2: Add a client**
+**Use case: UC3 - Add a client**
 
 **MSS**
 
-1.  User requests to add client
-1.  Prudy deletes the client
+1. User requests to add client
+1. Prudy deletes the client
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
@@ -353,43 +347,51 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case 3: Edit a client details (does not include editing of client policies or claims)**
+**Use case: UC4 - Edit a client details (does not include editing of client policies or claims)**
 
-1.  User requests to list clients
-1.  Prudy shows a list of clients
-1.  User requests to edit a specific client in the list with the specified changes
-1.  Prudy edits the client details
+**Preconditions: User has done <u>UC1 - List clients</u>
 
-    Use case ends.
+**MSS**
 
-**Extensions**
+1. User requests to edit a specific client in the list with the specified changes
+1. Prudy edits the client details
 
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. Prudy shows an error message.
-
-      Use case resumes at step 2.
-
-**Use case 4: Add a policy to client**
-
-1.  User requests to list clients
-1.  Prudy shows a list of clients
-1.  User requests to add a policy (or multiple policies) to a specific client in the list
-1.  Prudy adds the policy under the client
-
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The given index is invalid.
 
-  Use case ends.
+    * 1a1. Prudy shows an error message.
 
-* 3a. The given 
+      Use case ends.
+
+**Use case: UC5 - Add a policy to client**
+
+1. User requests to add a policy (or multiple policies) to a specific client in the list
+1. Prudy adds the policy under the client
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The given index is invalid.
+
+    * 1a1. Prudy shows an error message.
+
+      Use case ends.
+
+* 1b1. The client already has the stated policy.
+
+    * 1b1. Prudy shows an error message.
+
+      Use case ends.
+
+* 1c1. The user indicated an invalid policy.
+
+    * 1c1. Prudy shows an error message.
+
+      Use case ends.
 
 ### Non-Functional Requirements
 
