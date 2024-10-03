@@ -332,13 +332,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4.  Reliability: The application should automatically save changes to the local data file, and it should be able to recover from unexpected shutdowns or power failures without data loss.
+5.  Responsiveness: The application should have a responsive and intuitive user interface that works well across different screen resolutions (1920 x 1080 or higher).
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Command-line Interface (CLI)**: A text-based user interface where the user interacts with the application by typing commands, as opposed to a Graphical User Interface (GUI).
+* **Typical Usage**: The expected day-to-day usage of the application by the target user, which should not cause significant performance degradation.
+* **Above-average Typing Speed**: A typing speed that is higher than the average user, allowing the user to input commands and data more efficiently.
 
 --------------------------------------------------------------------------------------------------------------------
 
