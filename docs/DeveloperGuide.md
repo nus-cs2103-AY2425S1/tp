@@ -283,15 +283,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user    | add clients to my existing addressbook             | store their contacts and respective information                               |
 | `* * *`  | user    | know if client has been added successfully         | so that I can proceed with the next steps or take corrective action if needed |
 | `* * *`  | user    | know my last and next appointment dates            | remember to attend to the appointment                                         |
-| `* * *`  | user    | know when is my client's next insurance payment    |                                                                               |
-| `* * *`  | user    | know when is my client's birthday                  | reach out to build rapport                                                    |
-| `* * *`  | user    | know when was my client's last appointment         | track when to follow up                                                       |
 | `* * *`  | user    | update existing client details                     | keep their information up to date.                                            |
-| `* * *`  | user    | categorise my clients based on policies            | easily organise and filter my client list                                     |
 | `* * *`  | user    | record client's email address                      | contact them through email                                                    |
 | `* * *`  | user    | sort clients by renewal dates                      | prioritize my outreach efforts                                                |
 | `* * *`  | user    | remove clients should they change insurance agents |                                                                               |
-
+| `* * *`  | user    | categorise my clients based on policies            | easily organise and filter my client list                                     |
+| `* * *`  | user    | know when was my client's last appointment         | track when to follow up                                                       |
+| `* * *`  | user    | know when is my client's birthday                  | reach out to build rapport                                                    |
+| `* * *`  | user    | know when is my client's next insurance payment    | so that I can keep track of client's payment                                  |
 *{More to be added}*
 
 ### Use cases
@@ -386,6 +385,89 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2b1. AgentConnect shows a warning message indicating index is invalid.
     * 2b2. User resubmits the command with a valid index.
     * Use case resumes from step 2.
+
+**Use case: Categorise client by policy**
+
+**MSS**
+
+1.  User requests to list clients.
+2.  User selects a client to assign a policy.
+3.  AgentConnect assigns the policy to the client.
+4.  AgentConnect shows updated client information.  
+    Use case ends.
+
+**Extensions**
+
+* 2a. Client does not exist.
+    * 2a1. AgentConnect shows an error message for the invalid client.
+    * 2a2. AgentConnect prompts the user to either enter a valid client name or add the client to AgentConnect.
+    * Use case resumes from step 2.
+
+* 2b. Policy type is not valid.
+    * 2b1. AgentConnect shows an error message for the invalid policy type.
+    * 2b2. AgentConnect prompts the user to enter a valid policy type.
+    * Use case resumes from step 2.
+
+**Use case: Retrieve appointment date**
+
+**MSS**
+
+1.  User requests to list clients.
+2.  User requests to view a client’s appointment dates.
+3.  AgentConnect retrieves and displays the requested appointment date.  
+    Use case ends.
+
+**Extensions**
+
+* 2a. No appointment data available.
+    * 2a1. AgentConnect shows a message indicating no appointment date available.
+    * Use case ends.
+
+* 2b. Invalid client name.
+    * 2b1. AgentConnect shows an error message for the invalid client.
+    * 2b2. AgentConnect prompts the user to either enter a valid client name or add the client to AgentConnect.
+    * Use case resumes from step 1.
+
+
+**Use case: Retrieve client's birthday**
+
+**MSS**
+
+1.  User requests to list clients.
+2.  User requests to view a specific client’s birthday.
+3.  AgentConnect retrieves and displays the client’s birthday.  
+    Use case ends.
+
+**Extensions**
+
+* 2a. No birthday data available.
+    * 2a1. AgentConnect shows a message indicating no birthday date available.
+    * Use case ends.
+
+* 2b. Invalid client name.
+    * 2b1. AgentConnect shows an error message for the invalid client.
+    * 2b2. AgentConnect prompts the user to either enter a valid client name or add the client to AgentConnect.
+    * Use case resumes from step 1.
+
+**Use case: Retrieve next payment date**
+
+**MSS**
+
+1.  User requests to list clients.
+2.  User requests to view a client's payment date.
+3.  AgentConnect retrieves and display the next payment date.  
+    Use case ends.
+
+**Extensions**
+
+* 2a. No payment data available.
+    * 2a1. AgentConnect shows a message indicating no payment data available.
+    * Use case ends.
+
+* 2b. Invalid client name.
+    * 2b1. AgentConnect shows an error message for the invalid client.
+    * 2b2. AgentConnect prompts the user to either enter a valid client name or add the client to AgentConnect.
+    * Use case resumes from step 1.
 
 *{More to be added}*
 
