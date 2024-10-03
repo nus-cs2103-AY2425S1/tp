@@ -115,7 +115,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String rsvp} into an {@code Rsvp}.
+     * Parses a {@code String company} into an {@code Company}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code email} is invalid.
