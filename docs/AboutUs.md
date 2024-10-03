@@ -40,15 +40,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: In charge of code quality
 * Responsibilities: Responsible for quality of code
 
-### Jean Doe
+### Jinhan Wu
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/WuJinhan1.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/WuJinhan1)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: In charge of testing
 
 ### Jalen Lee Rui Xian
 
