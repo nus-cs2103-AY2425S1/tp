@@ -3,9 +3,10 @@ layout: page
 title: Developer Guide
 ---
 * Table of Contents
-{:toc}
+  {:toc}
 
---------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
+---
 
 ## **Acknowledgements**
 
@@ -24,6 +25,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+
 </div>
 
 ### Architecture
@@ -37,6 +39,7 @@ Given below is a quick overview of main components and how they interact with ea
 **Main components of the architecture**
 
 **`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -101,24 +104,25 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
+
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
+
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
-
 
 The `Model` component,
 
@@ -133,7 +137,6 @@ The `Model` component,
 
 </div>
 
-
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
@@ -141,6 +144,7 @@ The `Model` component,
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
+
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
@@ -229,11 +233,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
+
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
+  
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
@@ -242,7 +248,6 @@ _{more aspects and alternatives to be added}_
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -262,27 +267,69 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Property Agents who type fast
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+Their responsibilities include managing a large list of property listings,
+coordinating with clients and potential buyers, conducting property viewings, negotiating deals,
+and handling paperwork related to real estate transactions. They are often mobile, needing quick and easy
+access to information, and manage a large client and property database.
 
+**Value proposition**:
+Agents often have difficulty keeping track of the large client and property database.
+Our address book allows property agents to manage prospective and existing customers by sorting them into
+different categories including housing type and income level.
+Moreover, they can keep track of house visits via an events management system.
+
+* Allows property agents to manage prospective and existing customers easily by sorting them into different
+  categories such as by housing type, income level, rent/sell/buy
+* Agents can sort by customer status: unresponsive,
+* Keep track of the various landlords who own the houses
+* Easy for agent to remember who to try to sell unit to
+* Events for scheduling visits to houses - reminders for agents when they open the app on any upcoming visits
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+
+| Priority | As a …​                                    | I want to …​                                  | So that I can…​                                                          |
+|----------|--------------------------------------------|-----------------------------------------------|--------------------------------------------------------------------------|
+| `* * *`  | new user                                   | see usage instructions                        | refer to instructions when I forget how to use the App                   |
+| `* * *`  | user                                       | add a contact with their information          | I can view them later                                                    |
+| `* * *`  | user                                       | delete a person                               | remove entries that I no longer need                                     |
+| `* * *`  | user                                       | use a search bar to find my contact           | locate details of persons without having to go through the entire list   |
+| `* * *`  | user                                       | edit current contact details                  | keep details of persons updated                                          |
+| `* * *`  | user                                       | search via tags                               | filter by different groups of people                                     |
+| `* * *`  | user                                       | partially fill contacts                       | add people that do not want to give me their full information            |
+| `* * *`  | user                                       | find contacts using their names               | I can view their contact details easily                                  |
+| `* *`    | user                                       | hide private contact details                  | minimize chance of someone else seeing them by accident                  |
+| `* *`    | user                                       | keep track of client preferences              | use tags to categorize clients based on their interests                  |
+| `* *`    | user                                       | set reminders linked to contacts              | follow up with clients on time                                           |
+| `* *`    | user                                       | have an undo feature                          | prevent accidental loss of information when editing or deleting contacts |
+| `* *`    | new user                                   | see a guide on features                       | understand how to use the application                                    |
+| `* *`    | beginner                                   | see a help function for commands              | find guidance on command usage                                           |
+| `* *`    | user                                       | suggest commands to user with auto-complete   | save time typing full commands                                           |
+| `* *`    | user                                       | find commands by typing part of them          | remember commands more easily                                            |
+| `* *`    | user                                       | press [TAB] for attribute suggestions         | streamline command entry                                                 |
+| `* *`    | user                                       | see multiple attributes in command box        | know available commands without help guide                               |
+| `* *`    | user                                       | press [TAB] for value suggestions             | simplify command input                                                   |
+| `* *`    | user                                       | have colour highlighting for attributes       | spot different attributes easily                                                                         |
+| `* *`    | user                                       | see different colours for attributes          | improve organization of information                                      |
+| `* *`    | user                                       | see clear error messages                      | quickly identify input issues                                            |
+| `* *`    | user                                       | see exact reason for errors                   | input corrections efficiently                                            |
+| `* *`    | user with many contacts                    | tag certain contacts to show at the top       | easily access important contacts                                         |
+| `* *`    | user with a busy schedule                  | set reminders and see upcoming events         | stay on track with responsibilities                                      |
+| `* *`    | forgetful user                             | quickly reuse last searches                   | trace back activity efficiently                                          |
+| `* *`    | new user                                   | explore all features with a guide             | familiarize with functionalities                                         |
+| `* *`    | user with many things to remember          | add remarks/notes to users                    | recall important details for contacts                                    |
+| `* *`    | user with different friend groups          | manage all my tags                            | better organize contacts                                                 |
+| `* *`    | user who likes to categorise everything    | choose different colours for tags             | visually distinguish categories                                          |
+| `* *`    | impatient user                             | find and sort multiple tags at once           | speed up the searching process                                           |
+| `* *`    | user                                       | sort contacts in different ways               | view contacts flexibly                                                   |
+| `* *`    | user                                       | add and customize my own tags                 | personalize the address book                                             |
+| `* *`    | user                                       | link property listings to specific contacts   | market units effectively to the right clients                            |
+| `* *`    | user                                       | hide private contact details                  | minimize chance of someone else seeing them by accident                  |
+| `*`      | user with many persons in the address book | sort persons by name                          | locate a person easily                                                   |
 
 *{More to be added}*
 
@@ -294,34 +341,39 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to list persons
 
-    Use case ends.
+2. AddressBook shows a list of persons
+
+3. User requests to delete a specific person in the list
+
+4. AddressBook deletes the person
+   
+   Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
-
+  
   Use case ends.
 
 * 3a. The given index is invalid.
-
-    * 3a1. AddressBook shows an error message.
-
-      Use case resumes at step 2.
+  
+  * 3a1. AddressBook shows an error message.
+    
+    Use case resumes at step 2.
 
 *{More to be added}*
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Should work on any screen size from (`13'` laptop screens to `32'` widescreen monitors)
+5. Should reliably store contact information across different sessions with minimal chance of corruption
+6. Should not contain any vulnerabilities, protect user data and ensure system integrity
+7. Should be easy to maintain for developers to add new features and exensions in the future
 
 ### Glossary
 
@@ -342,41 +394,42 @@ testers are expected to do more *exploratory* testing.
 ### Launch and shutdown
 
 1. Initial launch
-
+   
    1. Download the jar file and copy into an empty folder
+   
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
-
-1. Saving window preferences
-
+2. Saving window preferences
+   
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+   
+   2. Re-launch the app by double-clicking the jar file.<br>
 
-   1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. _{ more test cases …​ }_
 
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-
-   1. Test case: `delete 1`<br>
+   
+   2. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-
-   1. Test case: `delete 0`<br>
+   
+   3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
-
+   
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
