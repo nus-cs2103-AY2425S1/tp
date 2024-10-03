@@ -104,6 +104,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
+* As of v1.1, this feature does not support the editing of remarks. Refer to [remark command to edit remarks.](#adding-a-remark-to-a-contact-remark)
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -149,6 +150,8 @@ Format: `remark INDEX [r/REMARK]`
 * Adds a remark to the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* Edit command does not yet support editing of remarks, the only way to edit an existing remark is to use the 
+  `remark` command.
 
 Examples:
 * `list` followed by `remark 2 r/He is very rich` adds the remark "He is very rich" to the 2nd person in the address book.
