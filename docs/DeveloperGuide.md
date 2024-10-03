@@ -286,6 +286,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * Manage students' schedules faster than a typical mouse/GUI driven app
 * Track income and the sale of learning materials, ensuring they get reimbursed while managing inventory effectively
 * Accommodate students who need to reschedule, making for a flexible scheduling tool
+* Track students' progress over time, enabling piano teachers to monitor improvement on piano pieces 
 
 ### User stories
 
