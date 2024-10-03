@@ -46,16 +46,6 @@ mistake that may not align with the standard code practice.
 * Role: Developer
 * Responsibilities: UI
 
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
 ### Samuel Then Shi Jie
 
 <img src="images/samuelthen.png" width="200px">
