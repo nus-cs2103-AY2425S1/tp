@@ -6,19 +6,19 @@ labels: ''
 assignees: ''
 ---
 
-##Description##
+## Description
 A clear and concise description of the issue or suggestion.
 
-##Issue Type##
+## Issue Type
 Story / Epic / Enhancement
 
-##Acceptance Criteria##
+## Acceptance Criteria
 - [ ] Criterion 1
 - [ ] Criterion 2
 - [ ] Criterion 3
 
-##Screenshots/Visuals## (if applicable)
+## Screenshots/Visuals
 If applicable, add screenshots or visuals to help explain the issue or enhancement.
 
-##Additional Context##
+## Additional Context
 Any other information that may be helpful for understanding or implementing the story, epic, enhancement, or bug fix.
