@@ -321,8 +321,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  The user interface should be optimized for CLI interaction. Users should be able to accomplish tasks more efficiently using commands than using the mouse.
 4.  The system should provide clear, informative error messages in the event of invalid inputs or commands, without crashing or entering undefined states.
-5.  The contacts data, such as student details and tutorial attendance, must be stored in a durable format that supports easy retrieval.
-6.  In the event of corrupted data, the discarded data should be kept to a minimal, limiting the scope only to the affected contact.
+5.  The contacts data, such as student details and tutorial attendance, should be stored in a durable format that supports easy retrieval.
+6.  Should only discard the affected contact in the event of corrupted data, to keep impact to a minimum.
 
 ### Glossary
 
@@ -330,6 +330,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **CLI**: Command Line Interface, a text-based user interface used to interact with the app by typing commands.
 * **Contact**: A student's information stored in the system, including name, NUS Net ID, phone number, email address and tutorial attendance.
 * **NUS Net ID**: A unique username and identifier for NUS students associated with most of NUS platforms such as Canvas, EduRec. It should follow the format “eXXXXXXX” (one letter 'e' followed by seven digits).
+* **Invalid Commands**: Commands entered into the CLI that do not match any recognized system commands.
+* **Invalid Inputs**: Data provided by the user that does not meet the required format or validation criteria for the specific command.
 * **Corrupted Data**: Data stored in the wrong format or with missing/invalid mandatory information.
 
 --------------------------------------------------------------------------------------------------------------------
