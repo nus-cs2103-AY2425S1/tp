@@ -294,10 +294,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 |----------|-------------------|------------------------------------------------------------|------------------------------------------------------------------------|
 | `* * *`  | real estate agent | add a new client (buyer or seller) to ClientGrid           | keep all their contact information organized in one place
 | `* * *`  | real estate agent | delete a client (buyer or seller) from ClientGrid          | keep all their contact information organized in one place              |
+| `* * *`  | real estate agent | add new properties to client grid | keep track of my client's property details                             |
 | `* * *`  | real estate agent | delete a property entry from ClientGrid                    | remove entries that I no longer need                                   |
 | `* *`    | real estate agent | indicate that a buyer wants to buy property X at Y price   | keep track of the clients that are involved in the transaction         |
 | `* *`    | real estate agent | indicate that a seller wants to sell property X at Y price | keep track of the clients that are involved in the transaction                                                |
-
 
 *{More to be added}*
 
@@ -339,6 +339,35 @@ Extensions:
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Steps 1a1-1a2 are repeated until the data entered are correct.
 
+**Use case: UC3 - Add a property**
+
+**MSS**
+
+1.  User inputs details of property
+2.  System outputs success message in user console
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Invalid command detail symbols
+
+    * 1a1. System outputs error message in user console
+
+      Use case ends.
+
+* 1b. Postal code number contains invalid symbols and format typical in Singapore
+
+    * 1b1. System outputs error message in user console
+
+      Use case ends.
+
+* 1c. Unit number contains invalid symbols and format
+
+    * 1c1. System outputs error message in user console
+
+      Use case ends.
+
 **Use case: UC4 - Delete Property**
 
 Guarantees:
@@ -367,20 +396,21 @@ Extensions:
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use case ends.
 
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 clients and 500 properties without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. The client and property databases should be updated after every command successfully executed by ClientGrid.
-
-*{More to be added}*
+5. Should be able to handle case of corrupted file
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Clients**: Buyers or Sellers of properties the real estate agent is managing
-
+* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Corrupted file**: Missing file and invalid data
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
