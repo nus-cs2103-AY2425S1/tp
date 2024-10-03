@@ -287,14 +287,21 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​         | I want to …​                                                 | So that I can…​                                                       |
+|----------|-----------------|--------------------------------------------------------------|-----------------------------------------------------------------------|
+| `* * *`  | As a user       | add contact information of the family member                 | I can retrieve their contact information                              |
+| `* * *`  | As a user       | add the relationship of the family members                   | I can know the relationship between people                            |
+| `* * *`  | As a user       | update the information of family members in the contact list | I can keep the latest information of my family                        |
+| `* * *`  | As a user       | add events tied to family members(e.g birthdays)             | I can set reminders on that date so that I don't ever forget about it |
+| `* * *`  | As an attendee  | see who is attending the event                               | I can make a more informed decision of whether I want to attend       |
+| `* * *`  | As an attendee  | see the venue and time of the event                          | I can make a more informed decision of whether I want to attend       |
+| `* * *`  | As an organizer | track RSVPs and attendance for each event                    | I know who is attending the event and can plan accordingly            |
+| `* * *`  | As an organizer | schedule family events                                       | I can plan and coordinate events                                      |
+| `* * *`  | As an organizer | see the contact list of family members                       | I know whose contacts that I have not added yet and add them          |
+| `* * *`  | As an organizer | update the event's information after creating it             | attendees can see the updated event details                           |
+| `* * *`  | As an organizer | delete an event                                              | I can cancel an event                                                 |
+
+
 
 *{More to be added}*
 
