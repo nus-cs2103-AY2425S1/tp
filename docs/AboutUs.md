@@ -9,10 +9,31 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project team
 
+### Juan Carlo Vieri
+
+<img src="images/juancarlovieri.png" width="200px">
+
+[[homepage](http://www.comp.nus.edu.sg/~juancv)]
+[[github](https://github.com/juancarlovieri)]
+
+* Role: Team Lead
+* Responsibilities: Algo developer
+
+
 ### Albert Ariel Putra
 
 <img src="images/hpcman.png" width="200px">
 
 [[github](http://github.com/hpcman)]
+
+* Role: Developer
+* Responsibilities: Data
+
+### River Koh
+
+<img src="images/oceankoh.png" width="200px">
+
+[[github](http://github.com/oceankoh)]
+[[portfolio](team/johndoe.md)]
 
 * Role: Developer
