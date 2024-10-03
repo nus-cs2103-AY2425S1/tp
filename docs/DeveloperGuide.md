@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# GOATS Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -274,27 +274,55 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Private Tutor
+* Teaches many students
+* Prefer desktop apps over other types
+* Can type fast
+* Prefers typing to mouse interactions
+* Is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Tutors find it challenging to keep track of student information if they are teaching multiple students. They could be juggling additional administrative duties with their teaching duties. GOATS can enhance their efficiency by managing student and parent data, freeing up their time and allowing them to focus on other tasks.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​                                                                     | I want to …​                                                                                 | So that I can…​                                                                                                                     |
+|----------|-----------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
+| `* * *`  | detail-oriented private tutor                                               | add my students' contact details, educational levels and subjects taught to the address book | I can keep track of all these details effectively                                                                                   |
+| `* * *`  | tutor                                                                       | view all my students                                                                         | I know who are my students                                                                                                          |
+| `* * *`  | long-time private tutor                                                     | delete contacts                                                                              | I can keep my address book concise and remove all unneeded contacts                                                                 |
+| `* *`    | concerned private tutor                                                     | add my students' parents' contact details to the address book                                | I am able to contact them regarding their child’s academic progress                                                                 |
+| `* *`    | organised private tutor                                                     | link each student to their parents in the address book                                       | I can contact related users at once                                                                                                 |
+| `* *`    | private tutor with multiple students                                        | tag students based on characteristics                                                        | I can keep track of additional information on students if required                                                                  |
+| `* *`    | non-tech savvy private tutor                                                | have a help sheet with the provided commands                                                 | I do not have to spend too much time memorising commands in order to use the app                                                    |
+| `* *`    | private tutor                                                               | filter the contact details in the address book by name and tag                               | I can find the relevant contact details more quickly                                                                                |
+| `* *`    | organised private tutor                                                     | view all related users (e.g. students and parents) in one page                               | I do not have to manually search or filter for them                                                                                 |
+| `* *`    | user                                                                        | find my students by name                                                                     | I will be able to quickly find their contact information                                                                            |
+| `*`      | busy private tutor with too many students                                   | have a prompt for non-clients to be deleted automatically                                    | I do not have to manually keep track and delete them                                                                                |
+| `*`      | user concerned with aesthetics                                              | edit the look of the GUI and select from several themes                                      | I can customise the look of the address book to suit my aesthetic preferences                                                       |
+| `*`      | user who prefers CLI                                                        | customise the format of inputting contact data in the command line                           | I can use the app in a way that suits my workflow                                                                                   |
+| `*`      | potential user exploring the address book                                   | try out the app's features with sample data                                                  | I can easily see how the app will look when it is in use                                                                            |
+| `*`      | user ready to start using the app                                           | delete all existing data                                                                     | I can get rid of sample/experimental data I used for exploring the app                                                              |
+| `*`      | private tutor who is juggling multiple subjects                             | filter students and parents by subject                                                       | I can contact all parties easily and at once when I need to make an announcement that concerns all students of a particular subject |
+| `*`      | private tutor who has to schedule lessons manually by myself                | filter students by availability                                                              | I can keep track of when students are available when planning make-up or additional lessons                                         |
+| `*`      | impatient user                                                              | execute tasks at low latency                                                                 | I do not spend unnecessary time waiting for the address book to load and handle my commands and can thus work more efficiently      |
+| `*`      | user who prefers pictures over words                                        | attach a picture with the contact                                                            | I can have a more enjoyable GUI experience                                                                                          |
+| `*`      | tutor who teaches students across different time zones                      | have a tag that tracks the difference in timezones                                           | I do not have to manually keep track of time zones and potentially make mistakes                                                    |
+| `*`      | private tutor who may expand my business                                    | download all my data into a .csv file                                                        | I can transfer data across different digital platforms                                                                              |
+| `*`      | private tutor who is starting to use the app                                | upload data of a collection of clients into the app                                          | It seamlessly stores all the previous clients data with minimal setup steps                                                         |
+| `*`      | private tutor that specializes in special needs education                   | search, filter and categorize students by their needs                                        | I can better tailor my teaching to each individual needs                                                                            |
+| `*`      | private tutor who contacts certain students or parents more frequently      | pin certain students to the top of the contact list                                          | I can access frequently contacted students or parents immediately                                                                   |
+| `*`      | private tutor performing a task on my contact list (e.g. deleting contacts) | select multiple users and perform a single task on them                                      | I do not have to perform each task individually                                                                                     |
+| `*`      | private tutor who wishes to organise my students more effectively           | add multiple users to a list and save it                                                     | I can keep track of them better and I do not need to perform tasks on them individually                                             |
+| `*`      | tutor with compromised eyesight                                             | zoom in to the address book GUI                                                              | I do not have to strain my eyes to read what is on the screen                                                                       |
+| `*`      | colorblind tutor                                                            | use a colorblind mode                                                                        | I would not confuse colors of the tags                                                                                              |
+| `*`      | private tutor offering both online and in-person sessions                   | mark the preferred mode of learning for each student                                         | I can plan my schedule and resources accordingly                                                                                    |
+| `*`      | tutor who receives payments from parents                                    | add payment statuses to each student                                                         | I can manage my finance-related tasks efficiently                                                                                   |
+| `*`      | private tutor involved in long-term academic planning                       | keep a history of each student's progress and achievements                                   | I can monitor their growth over time and adjust my teaching strategies accordingly                                                  |
+| `*`      | expert user of the addressbook                                              | set macros for filters/sort                                                                  | I would be able to quickly organise without typing long commands                                                                    |
+
 
 *{More to be added}*
 
