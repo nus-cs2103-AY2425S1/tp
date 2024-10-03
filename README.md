@@ -19,7 +19,7 @@
 - Give a participation score to a student 
 
 ## Example of Expected Usage
-- **Tutor's Use Case:**
+- **Tutor's Simplified Usage:**
   - As a tutor when I arrive to class, I can immediately start up the TP application 
   - I can add any new students to my list of students.
   - I can then edit/delete/list and filter students based on the criteria I need.
@@ -38,8 +38,6 @@ with many still relying on pen and paper.
 - TA will solve this inefficiency and improve the quality of life for TAs.
 
 ## Other Details
-* The application is named **Teacher's Pet** (`TP` for short) to reflect its role in assisting teachers,
-similar to a "teacher's pet."
 * The project builds on an ongoing software project for a desktop application (called _AddressBook_),
 which is used for managing contact details.
 * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC).
