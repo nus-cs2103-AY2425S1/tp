@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# AB- 3 Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -352,6 +352,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**Use case: UC3 - List contacts**
+
+**MSS**
+
+1.  User requests to list contact list.
+2.  GOATS outputs list of all contacts
+
+       Use case ends.
+
+**Use case: UC4 - Exit application**
+
+**MSS**
+
+1.  User requests to exit application
+2.  GOATS closes
+
+    Use case ends.
+
 **Use case: UC5 - Edit a contact**
 
 **MSS**
@@ -373,6 +391,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The given command or index is invalid.
 
     * 2a1. GOATS shows an error message.
+
+      Use case ends.
+
+**Use case: UC6 - Find contacts by name**
+
+**MSS**
+
+1.  User requests to find person with name
+2.  GOATS outputs list of all contacts with matching name
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User does not enter a name.
+
+    * 1a1. GOATS shows an error message.
+
+      Use case ends.
+
+* 2a. There is no matching name in list of contacts.
+
+    * 2a1. GOATS shows an empty list.
 
       Use case ends.
 
