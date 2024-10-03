@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# InternBuddy Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -35,7 +35,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-T09-1/tp/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-T09-1/tp/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -67,13 +67,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-T09-1/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-T09-1/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-T09-1/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -84,7 +84,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-T09-1/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -116,7 +116,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-T09-1/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
@@ -139,7 +139,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-T09-1/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -274,7 +274,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* has a need to manage a significant number of contacts for potential companies for internships
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
@@ -287,43 +287,199 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​                                                   | I want to …​                                                | So that I can…​                                                       |
+|----------|-----------------------------------------------------------|-------------------------------------------------------------|-----------------------------------------------------------------------|
+| `* * *`  | new user                                                  | see usage instructions                                      | refer to instructions when I forget how to use the App                |
+| `* * *`  | user that types fast                                      | utilize an easy to use CLI interface                        | be more efficient while using the app                                 |
+| `*`      | user who prefers less screen clutter                      | toggle list view to be less detailed / more general         |                                                                       |
+| `* *`    | user                                                      | export my data out of InternBuddy                           | have a data backup and/or share company information with fellow peers |
+| `* * *`  | CS major planning to apply for internships                | find a specific company by name                             | retrieve info without having to go through the entire list            |
+| `* *`    | CS major planning to apply for internships                | add additional info about the company                       |                                                                       |
+| `* *`    | CS major planning to apply for internships                | update the information for a specific company               | ensure my information is up-to-date                                   |
+| `*`      | CS major planning to apply for internships                | add referral contacts to companies                          | remember to include them when applying                                |
+| `*`      | CS major planning to apply for internships                | sort companies by hiring status                             | better prioritize certain companies                                   |
+| `*`      | CS major planning to apply for internships                | sort companies by location distance                         | better prioritize certain companies                                   |
+| `*`      | CS major planning to apply for internships                | sort companies by remote work availability                  | better prioritize certain companies                                   |
+| `*`      | CS major planning to apply for internships                | sort companies by working hour flexibility                  | better prioritize certain companies                                   |
+| `*`      | CS major planning to apply for internships                | sort companies by internship role                           | better prioritize certain companies                                   |
+| `* * *`  | CS major currently applying for internships               | update internship application status for a specific company | maintain an updated list of the companies I'm applying for            |
+| `* *`    | CS major currently applying for internships               | sort companies applications by status                       | focus on companies that need immediate attention                      |
+| `*`      | CS major currently applying for internships               | add notes for upcoming / completed interviews               | find a specific piece of info for that interview in the future        |
+| `*`      | CS major currently applying for internships               | organize interview timings                                  | ensure that they do not overlap                                       |
+| `* * *`  | CS major planning to apply or is applying for internships | remove companies which are no longer relevant to me         | reduce clutter in my list of potential companies                      |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `InternBuddy` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Add a company**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to add a company.
+2.  InternBuddy adds the company.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. User provides incomplete required information for the company (name or email).
+    * 1a1. InternBuddy shows an error message.
+
+      Use case restarts at step 1.
+
+* 1b. User specifies an optional company information that is empty (address, contact number, or tags).
+    * 1b1. InternBuddy shows an error message.
+
+      Use case restarts at step 1.
+
+* 1c. User provided email is in wrong format.
+    * 1c1. InternBuddy shows an error message.
+
+      Use case restarts at step 1.
+
+* 1d. User provided contact number is in wrong format.
+    * 1d1. InternBuddy shows an error message.
+
+      Use case restarts at step 1.
+
+* 1e. User provides an already saved company.
+    * 1e1. InternBuddy shows an error message.
+
+      Use case restarts at step 1.
+
+* 1f. User decides not to add the company.
+ 
+  Use case ends.
+
+**<a id="uc02"></a>Use case: UC02 - List all saved companies**
+
+**MSS**
+
+1.  User requests to list companies.
+2.  InternBuddy shows a list of companies.
+ 
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+     * 1a1. InternBuddy shows a message to indicate that the list is empty
+
+       Use case ends.
+
+**<a id="uc03"></a>Use case: UC03 - Find a company by name**
+
+**MSS**
+
+1.  User searches for a company's name.
+2.  InternBuddy shows the matching company(s).
+
+**Extension**
+
+* 1a. The list is empty.
+    * 1a1. InternBuddy shows an error message that the list is empty.
+
+      Use case ends.
+
+* 1b. User did not provide a name to search.
+    * 1b1. InternBuddy shows an error message.
+
+      Use case restarts at step 1.
+
+* 1c. User decides not to find a company.
+
+  Use case ends.
+
+* 2b. No companies with matching name found.
+    * 2b1. InternBuddy shows an error message to indicate no matches found.
+
+      Use case ends.
+
+**Use case: UC04 - Delete a saved company**
+
+**MSS**
+
+1.  User requests to [list saved companies (UC03)](#uc02) or [find a company (UC04)](#uc03)
+2.  User requests to delete a specific company in the list.
+3.  InternBuddy deletes the company.
+ 
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 2a. User decides not to edit a company.
 
   Use case ends.
 
 * 3a. The given index is invalid.
+    * 3a1. InternBuddy shows an error message.
 
-    * 3a1. AddressBook shows an error message.
+    Use case resumes at step 2.
 
-      Use case resumes at step 2.
+**Use case: UC05 - Edit company information**
+
+1.  User requests to [list saved companies (UC03)](#uc02) or [find a company (UC04)](#uc03)
+2.  User requests to edit a specific company in the list.
+3.  InternBuddy edits the company.
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 2a. User provides updated information in the wrong format.
+    * 2a1. InternBuddy shows an error message.
+
+  Use case resumes at step 2.
+
+* 2b. User provides already existing information.
+    * 2b1. InternBuddy shows an error message.
+
+  Use case resumes at step 2.
+
+* 2c. User decides not to edit a company.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+    * 3a1. InternBuddy shows an error message.
+
+  Use case resumes at step 2.
+ 
+**Use case: UC06 - Edit company application status**
+
+1.  User requests to [list saved companies (UC03)](#uc02) or [find a company (UC04)](#uc03)
+2.  User requests to edit a specific company in the list.
+3.  InternBuddy edits the company.
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 2a. User provides updated information in the wrong format.
+    * 2a1. InternBuddy shows an error message.
+
+  Use case resumes at step 2.
+
+* 2b. User provides updated information that already exists.
+    * 2b1. InternBuddy shows an error message.
+
+  Use case resumes at step 2.
+
+* 2c. User decides not to edit a company.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+    * 3a1. InternBuddy shows an error message.
+
+  Use case resumes at step 2.
 
 *{More to be added}*
 
@@ -332,13 +488,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  The system should respond to user commands without noticeable lag for most operations.
+5.  The application should allow for seamless data export in common formats (e.g., CSV or JSON) for external backup or sharing.
 
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **CLI**: Command Line Interface, a method of interacting with software using typed commands rather than a graphical interface.
+* **PR**: Pull Request, a request submitted by a contributor to merge code changes into a repository's main codebase, commonly used in GitHub for code reviews and collaboration.
+* **CSV**: Comma Separated Values, a text file format that uses commas to separate values, and newlines to separate records.
+* **JSON**: JavaScript Object Notation, a lightweight data-interchange [format](https://www.json.org/json-en.html).
 
 --------------------------------------------------------------------------------------------------------------------
 
