@@ -295,55 +295,53 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User chooses to add contact.
-2. User enters add contact command with the contact details.
-3. Cher add contact to memory.
-4. Cher [<u>Save to disk</u>](#use-case-uc4---save-to-disk).
-5. Cher show success message.
+1. User enters add contact command with the contact details.
+2. Cher add contact to memory.
+3. Cher [<u>Save to disk</u>](#use-case-uc4---save-to-disk).
+4. Cher show success message.
 
    Use case ends.
    
 **Extensions**
 
-* 2a. Cher detects error in user input.
-  - 2a1. Cher raises error.
-  - 2a2. Cher shows correct input format.
+* 1a. Cher detects error in user input.
+  - 1a1. Cher raises error.
+  - 1a2. Cher shows correct input format.
   
   Use case ends.
   
-* 2b. Cher detects duplicate contacts.
-  - 2b1. Cher raises error.
+* 1b. Cher detects duplicate contacts.
+  - 1b1. Cher raises error.
   
   Use case ends.
    
 #### Use case: UC2 - Delete a contact
 
 **MSS**
-1. User chooses to delete a contact.
-2. User enters delete contact command with the contact's full name.
-3. Cher shows list of contacts with name that matches user input.
-4. Cher request the index of the contact the user wants to delete.
-5. User enters the index.
-6. Cher prompts for delete confirmation.
-7. User confirms deletion.
-8. Cher deletes the contact from memory.
-9. Cher [<u>Save to disk</u>](#use-case-uc4---save-to-disk).
-10. Cher shows a success message.
+1. User enters delete contact command with the contact's full name.
+2. Cher shows list of contacts with name that matches user input.
+3. Cher request the index of the contact the user wants to delete.
+4. User enters the index.
+5. Cher prompts for delete confirmation.
+6. User confirms deletion.
+7. Cher deletes the contact from memory.
+8. Cher [<u>Save to disk</u>](#use-case-uc4---save-to-disk).
+9. Cher shows a success message.
 
-     Use case ends.
+    Use case ends.
 
 **Extensions**
 
-* 2a. Cher detects error in user input.
-  - 2a1. Cher shows correct input format.
+* 1a. Cher detects error in user input.
+  - 1a1. Cher shows correct input format.
 
   Use case ends.
-* 4b. User no longer wants to delete a contact.
-    - 4b1. User gives empty input.
+* 3b. User no longer wants to delete a contact.
+    - 3b1. User gives empty input.
   
   Use Case ends.
-* 5a. Cher detects error in user input.
-    - ba1. Cher shows error message.
+* 4a. Cher detects error in user input.
+    - 4a1. Cher shows error message.
 
     Use case ends.
 
@@ -351,16 +349,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User chooses to see current contacts.
-2. User enters view contacts command.
-3. Cher displays all contacts in memory to user.
+1. User enters view contacts command.
+2. Cher displays all contacts in memory to user.
    
     Use case ends.
 
 **Extensions**
 
-* 2a. Cher detects error in user input.
-    - 2a1. Cher shows correct input format.
+* 1a. Cher detects error in user input.
+    - 1a1. Cher shows correct input format.
 
   Use case ends.
 
