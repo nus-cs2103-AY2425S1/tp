@@ -26,6 +26,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/ponharish)]
 [[portfolio](team/ponharish.md)]
 
+### Lavanya Garg
+
+<img src="images/lavanyagarg112.png" width="200px">
+
+[[github](http://github.com/lavanyagarg112)]
+[[portfolio](team/lavanyagarg112.md)]
+
 * Role: Team Lead
 * Responsibilities: UI
 
