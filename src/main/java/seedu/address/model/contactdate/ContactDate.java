@@ -1,5 +1,7 @@
 package seedu.address.model.contactdate;
 
+import seedu.address.model.person.CallFrequency;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -8,7 +10,7 @@ import java.time.format.DateTimeParseException;
 
 /**
  * Represents a Person's contacted date in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidContactDate(String)}
  */
 public class ContactDate {
     public static final String MESSAGE_CONSTRAINTS =
@@ -47,6 +49,19 @@ public class ContactDate {
      */
     public static ContactDate getCurrentDate() {
         return new ContactDate(LocalDate.now().toString());
+    }
+
+    /**
+     * Returns a new {@code ContactDate} that is a specified number of days after the current date.
+     * The number of days is determined by the {@code callFrequency}.
+     *
+     * @param callFrequency The frequency of calls, represented as a {@code CallFrequency} object,
+     *                      which determines how many days to add to the current date.
+     * @return A new {@code ContactDate} that is {@code callFrequency} days after the current date.
+     */
+    public ContactDate add(CallFrequency callFrequency) {
+        int daysToAdd = Integer.parseInt(callFrequency.value); // Parse the number of days from callFrequency
+        return new ContactDate(value.plusDays(daysToAdd).toString()); // Create and return a new ContactDate
     }
 
     @Override
