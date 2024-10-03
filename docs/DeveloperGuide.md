@@ -315,14 +315,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Delete a contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
+1.  User requests to list contacts
+2.  BlitzBiz shows a list of contacts
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  BlitzBiz deletes the person
 
     Use case ends.
 
@@ -337,6 +337,55 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. AddressBook shows an error message.
 
       Use case resumes at step 2.
+
+**Use case: Add a contact**
+
+**MSS**
+
+1.  User requests to add a contact
+2.  BlitzBiz requests for name, phone number, and email address minimally
+3.  User enters contact details
+4.  BlitzBiz asks for confirmation
+5.  User confirms
+6.  BlitzBiz adds the contact
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The entered details do not follow the correct format.
+   *  3a1. BlitzBiz requests for the correct details.
+      3a2. User enters new details.
+      Steps 3a1-3a2 are repeated until the data entered are correct.
+      Use case resumes from step 4.
+
+* *a. At any time, User chooses to cancel the transfer.
+      *a1. BlitzBiz requests to confirm the cancellation.
+      *a2. User confirms the cancellation.
+      Use case ends.
+
+**Use case: Find contacts by name**
+
+**MSS**
+
+1.  User requests to view a contact by name
+2.  BlitzBiz requests for a prefix of the contact name
+3.  User enters name prefix
+4.  BlitzBiz displays all contacts containing the prefix in their name
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The command does not follow the correct format.
+   *  3a1. BlitzBiz displays an error message.
+      3a2. User enters new command.
+      Steps 3a1-3a2 are repeated until the command format entered is correct.
+      Use case resumes from step 4.
+
+* 4a. There are no contacts containing the prefix in their name.
+      4a1. BlitzBiz informs the user that there were no matches found.
+      Use case ends.
 
 *{More to be added}*
 
