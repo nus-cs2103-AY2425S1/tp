@@ -7,7 +7,7 @@
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `cs2103t-w13-3@outlook.com`
 
 ## MindMap [W13-3]
 
@@ -32,9 +32,9 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Lee Zhi Yi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/zhiyi12345.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/zhiyi12345)] [[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Data
