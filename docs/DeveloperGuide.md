@@ -339,8 +339,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  The data should be stored locally in a JSON file.
-3.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-4.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3.  The data should be stored in a way that complies with the Personal Data Protection Act, Singapore [[PDPA](https://www.pdpc.gov.sg/overview-of-pdpa/the-legislation/personal-data-protection-act)]
+4.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+5.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+6.  The app should display results within 2 seconds when searching for a client.
+7.  The app should save the data entered even if it exits unexpectedly while running.
+8.  The app should have a log of user actions for debugging purposes
 
 *{More to be added}*
 
