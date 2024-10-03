@@ -38,11 +38,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Nihal Ramesh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/nihalramesh12629.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/nihalramesh12629)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
