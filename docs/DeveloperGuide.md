@@ -302,28 +302,61 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a person**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to add person
+2.  AddressBook adds the person
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. Given contact has invalid or duplicate fields.
+    * 1a1. AddressBook shows an error message.
 
-  Use case ends.
+      Use case ends.
 
-* 3a. The given index is invalid.
+    
+**Use case: Delete a person**
 
-    * 3a1. AddressBook shows an error message.
+**MSS**
 
+1.  User requests to delete person
+2.  AddressBook deletes the person
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given person is not in the AddressBook
+    * 1a1. AddressBook shows an error message.
+  
+      Use case ends.
+
+* 1b. Multiple matching persons in the AddressBook
+    * 1b1. AddressBook shows list of all matching persons.
+    * 1b2. User enters index of person to delete
+  
       Use case resumes at step 2.
+
+
+**Use case: Search for person**
+
+**MSS**
+
+1.  User requests to search for person
+2.  AddressBook shows list of all matching persons
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User did not provide the search input
+    * 1a1. AddressBook shows an error message.
+
+      Use case ends.
 
 *{More to be added}*
 
@@ -332,6 +365,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+
+
+**Use case: View all contacts**
+
+**MSS**
+
+1.  User requests to view all contacts
+2.  AddressBook shows list of all contacts
+
+    Use case ends.
 
 *{More to be added}*
 
