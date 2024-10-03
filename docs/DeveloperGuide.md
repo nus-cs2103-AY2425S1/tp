@@ -329,30 +329,101 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to add a new contact by providing the required details.
+2.  AddressBook validates the provided details.
+3.  AddressBook adds the new contact to the list.
+4.  AddressBook shows a success message with the contact details.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The provided details are invalid.
+    * 2a1. AddressBook shows an error message indicating the invalid fields.
+    * 2a2. User corrects the invalid details.
+    * 2a3. AddressBook re-validates the details.
 
-  Use case ends.
+      Use case resumes at step 3.
 
-* 3a. The given index is invalid.
+* 2b. The contact already exists in the AddressBook.
+    * 2b1. AddressBook shows an error message indicating the duplicate contact.
 
-    * 3a1. AddressBook shows an error message.
+      Use case ends.
 
-      Use case resumes at step 2.
+* 2c. Required fields are missing.
+    * 2c1. AddressBook shows an error message indicating the missing fields.
+    * 2c2. User provides the missing details.
+    * 2c3. AddressBook re-validates the details.
 
-*{More to be added}*
+      Use case resumes at step 3.
+
+**Use case: Delete a contact**
+
+**MSS**
+
+1.  User requests to delete a contact by providing the index.
+2.  AddressBook validates the provided index.
+3.  AddressBook deletes the contact from the list.
+4.  AddressBook shows a success message with the deleted contact details.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The provided index is missing or not a positive integer.
+    * 2a1. AddressBook shows an error message indicating the invalid index.
+
+      Use case ends.
+
+* 2b. The provided index is more than the number of contacts in the list.
+    * 2b1. AddressBook shows an error message indicating the invalid index.
+
+      Use case ends.
+
+**Use case: List all contacts**
+
+**MSS**
+
+1.  User requests to list all contacts.
+2.  AddressBook lists all contacts.
+3.  AddressBook shows a success message indicating all contacts are listed.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User provides additional arguments after the `list` command.
+    * 1a1. AddressBook shows an error message indicating that the `list` command takes no arguments.
+
+      Use case ends.
+
+**Use case: Search for a contact**
+
+**MSS**
+
+1.  User requests to search for a contact by providing a keyword.
+2.  AddressBook validates the provided keyword.
+3.  AddressBook searches for contacts matching the keyword.
+4.  AddressBook shows a list of matching contacts with their details.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The provided keyword is missing or invalid.
+    * 2a1. AddressBook shows an error message indicating the invalid keyword.
+
+      Use case ends.
+
+* 3a. No contacts match the provided keyword.
+    * 3a1. AddressBook shows a message indicating no contacts were found.
+
+      Use case ends.
+
 
 ### Non-Functional Requirements
 
