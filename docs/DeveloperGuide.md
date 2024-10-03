@@ -290,14 +290,12 @@ ClientGrid is an address book designed for real estate agents to efficiently man
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 
-| Priority | As a …​           | I want to …​                                            | So that I can…​                                                        |
-|----------|-------------------|---------------------------------------------------------|------------------------------------------------------------------------|
-| `* * *`  | real estate agent                                 | add a new client (buyer or seller) to ClientGrid        | keep all their contact information organized in one place
-| `* * *`  | real estate agent | delete a client (buyer or seller) from ClientGrid       | keep all their contact information organized in one place              |
-| `* * *`  | user              | add a new person                                        |                                                                        |
-| `* * *`  | user              | delete a person                                         | remove entries that I no longer need                                   |
-| `* * *`  | user              | find a person by name                                   | locate details of persons without having to go through the entire list |
-| `* *`    | real estate agent | indicate that a buyer wants to buy property X at Y price | keep track of the clients that are involved in the transaction         |
+| Priority | As a …​           | I want to …​                                               | So that I can…​                                                        |
+|----------|-------------------|------------------------------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | real estate agent | add a new client (buyer or seller) to ClientGrid           | keep all their contact information organized in one place
+| `* * *`  | real estate agent | delete a client (buyer or seller) from ClientGrid          | keep all their contact information organized in one place              |
+| `* * *`  | real estate agent | delete a property entry from ClientGrid                    | remove entries that I no longer need                                   |
+| `* *`    | real estate agent | indicate that a buyer wants to buy property X at Y price   | keep track of the clients that are involved in the transaction         |
 | `* *`    | real estate agent | indicate that a seller wants to sell property X at Y price | keep track of the clients that are involved in the transaction                                                |
 
 
@@ -312,36 +310,62 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 MSS:
 1. Real estate agent requests to add a buyer/ seller to ClientGrid and passes in the buyer/ seller's name, phone number and email.
 2. ClientGrid will add the buyer/ seller with the name, phone number, and email specified by the real estate agent.
+Use case ends.
 
 Extensions:
 
-&nbsp;&nbsp;&nbsp;&nbsp;2a. ClientGrid detects an error in the name/ phone number/ email format provided by the real estate agent.
+&nbsp;&nbsp;&nbsp;&nbsp;1a. ClientGrid detects an error in the name/ phone number/ email format provided by the real estate agent.
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2a1. ClientGrid requests for the correct data.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1a1. ClientGrid requests for the correct data.
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2a2. Real estate agent enters new data.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1a2. Real estate agent enters new data.
 
-Steps 2a1-2a2 are repeated until the data entered are correct.
-
-Use case ends.
+Steps 1a1-1a2 are repeated until the data entered are correct.
 
 **Use case: UC2 - Delete Client**
 
 MSS:
 1. Real estate agent requests to delete a buyer or seller based on their phone number.
 2. ClientGrid will delete the respective client based on the phone number.
+Use case ends.
 
 Extensions:
 
-&nbsp;&nbsp;&nbsp;&nbsp;2a. ClientGrid detects an error in the phone number format provided by the real estate agent.
+&nbsp;&nbsp;&nbsp;&nbsp;1a. ClientGrid detects an error in the phone number format provided by the real estate agent .
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2a1. ClientGrid requests for the correct data 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1a1. ClientGrid requests for the correct data 
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2a2. Real estate agent enters new data
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1a2. Real estate agent enters new data
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Steps 2a1-2a2 are repeated until the data entered are correct. 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Steps 1a1-1a2 are repeated until the data entered are correct.
 
+**Use case: UC4 - Delete Property**
+
+Guarantees:
+* If property listing was in the database originally, it would be removed from property database with no side effects.
+
+MSS:
+1. Real estate agent requests to delete a property listing based on the property’s postal code and unit number.
+2. ClientGrid will delete the respective property listing and indicate success.
 Use case ends.
+
+Extensions:
+
+&nbsp;&nbsp;&nbsp;&nbsp;1a. ClientGrid detects an error in the postal code or unit number format provided by the real estate agent, .
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1a1. ClientGrid requests for the correct data.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1a2. Real estate agent enters new data.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Steps 1a1-1a2 are repeated until the data entered are correct.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+
+&nbsp;&nbsp;&nbsp;&nbsp;1b. ClientGrid is unable to find a matching property listing entry in the database.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1b1. ClientGrid informs real estate agent that the property listing does not exist in the database.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use case ends.
 
 ### Non-Functional Requirements
 
