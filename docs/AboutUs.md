@@ -42,7 +42,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Shashank Gorantla
 
-<img src="images/shadhankkk.jpg" width="200px">
+<img src="images/shadhankkk.png" width="200px">
 
 [[github](http://github.com/shadhankkk)]
 [[portfolio](team/shadhankkk.md)]
