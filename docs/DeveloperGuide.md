@@ -329,23 +329,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3a. System detects error for invalid instruction
 
     * 3a1. System prompts error for invalid instruction
-    * 3a2. User enters valid instruction 
+    * 3a2. User enters new instruction 
+    * Steps 3a1-3a2 are repeated until instruction is valid
     
-    Use case continues from step 2.
+    Use case continues from step 3.
  
 * 3b. System detects error in client's information
 
     * 3b1. System prompts error for invalid client's information
-    * 3b2. User enters valid client's information
-
+    * 3b2. User enters new client's information
+    * Steps 3b1-3b2 are repeated until client's information is valid
+  
     Use case continues from step 3.
 
 * 3c. System detects duplicated client's information
 
     * 3c1. System prompts error for duplicated client's information
-    * 3c2. User enters non-duplicated client's information
+    * 3c2. User enters new non-duplicated client's information
+    * Steps 3c1-3c2 are repeated until client's information is valid
 
-    Use case continues from step 3.
+    Use case continues from step 4.
 
 **Use case: Add a client's rental information**
 
@@ -364,30 +367,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 4a. System detects error for invalid instruction
 
     * 4a1. System prompts error for invalid instruction
-    * 4a2. User enters valid instruction
+    * 4a2. User enters new instruction
+    * Steps 4a1-4a2 are repeated until instruction is valid
 
-    Use case continues from step 2.
+    Use case continues from step 4.
 
 * 4b. System detects error for invalid client
 
     * 4b1. System prompts error for invalid client
-    * 4b2. User enters valid client
+    * 4b2. User selects new client
+    * Steps 4b1-4b2 are repeated until selected client is valid
 
-    Use case continues from step 3.
+    Use case continues from step 4.
 
 * 4c. System detects error in client's rental information
 
     * 4c1. System prompts error for invalid client's rental information
-    * 4c2. User enters valid client's rental information
-
+    * 4c2. User enters new client's rental information
+    * Steps 4c1-4c2 are repeated until client's rental information is valid
+  
     Use case continues from step 4.
 
 * 4d. System detects duplicated client's rental information
 
     * 4d1. System prompts error for duplicated client's rental information
-    * 4d2. User enters correct non-duplicated client's information
+    * 4d2. User enters new non-duplicated client's rental information
+    * Steps 4d1-4d2 are repeated until client's rental information is valid
 
-    Use case continues from step 4.
+    Use case continues from step 5.
 
 **Use case: Find a client**
 
@@ -405,16 +412,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3a. System detects error for invalid instruction
 
     * 3a1. System prompts error for invalid instruction
-    * 3a2. User enters valid instruction
-
-    Use case continues from step 2.
+    * 3a2. User enters new instruction
+    * Steps 3a1-3a2 are repeated until instruction is valid
+  
+    Use case continues from step 3.
 
 * 3b. System detects error for invalid keyword
 
     * 3b1. System prompts error for invalid keyword
-    * 3b2. User enters valid keyword
-
-    Use case continues from step 3.
+    * 3b2. User enters new keyword
+    * Steps 3b1-3b2 are repeated until keyword is valid
+  
+    Use case continues from step 4.
 
 * 4a. The list is empty.
 
