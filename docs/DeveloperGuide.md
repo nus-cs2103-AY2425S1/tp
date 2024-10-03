@@ -330,6 +330,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **PlanPal**: A software system designed to manage contact information specifically for student event planners, supporting functions like adding, updating, and deleting contacts, with data stored locally.
+* **CLI (Command Line Interface)**: A text-based user interface where the user interacts with the system by typing commands.
+* **Contact**: An individual or entity whose information is stored in PlanPal, typically including name, phone number, email, address, role, and optionally a Telegram handle.
+* **Role**: A category assigned to a contact to indicate their relationship to an event, such as "attendee," "vendor," "volunteer," or "sponsor."
+* **Tag**: A label that is applied to a contact to categorize them (e.g., as an attendee, vendor, volunteer, or sponsor) for easy organization and filtering.
+* **Telegram Handle**: A unique username used on the Telegram messaging platform, which can be optionally stored as part of a contact's information in PlanPal.
+* **User Object**: The data structure in PlanPal that holds the information of a contact, including details like name, phone number, email, address, role, and Telegram handle.
+* **Single User**: PlanPal is designed to support only one user per system. It is not intended for multiple users on the same computer.
+* **Local Storage**: PlanPal stores all contact data on the user's local machine, without relying on external databases or cloud storage.
+* **Standard** Screen Resolution: PlanPal is optimized for display on screens with a resolution of 1920x1080 or higher, and it supports screen scaling up to 150% for better visibility on high-resolution displays.
+* **JAR File**: A Java Archive file that contains all the compiled code, libraries, and resources required for PlanPal to run.
+* **Index**: A numerical identifier used to specify a contact in a list for actions like deletion or updating. The index corresponds to the contact's position in the displayed list.
 
 --------------------------------------------------------------------------------------------------------------------
 
