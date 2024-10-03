@@ -300,6 +300,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | beginner user   | have a help menu                                                           | I know how to perform a particular task                                                                                             |
 | `*`      | beginner user   | have some sample customer data that has already been inputted into the app | I can find out information can be saved in the application                                                                          |
 
+*{More to be added}*
+
 ### Use cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
