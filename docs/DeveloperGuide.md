@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# WardWatch Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -304,37 +304,45 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `WardWatch` and the **Actor** is the `doctor`, unless specified otherwise)
 
 **Use case: Delete a person**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. Doctor request to list patients
+2. WardWatch shows a list of patients
+3. Doctor request to delete a specific patient from the list
+4. WardWatch deletes the patient
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The list is empty
 
-  Use case ends.
+    * 2a1. WardWatch shows that list is empty
 
-* 3a. The given index is invalid.
+      Use case ends.
 
-    * 3a1. AddressBook shows an error message.
+* 3a. The given field is invalid
+
+    * 2a1. WardWatch shows an error message.
 
       Use case resumes at step 2.
 
+* 3b. The parameter field is invalid.
+
+    * 2b1. WardWatch shows an error message.
+
+      Use case resumes at step 2.
+  
 **Use case: Search a person**
 
 **MSS**
 
 1. Doctor searches for patients
-2. AddressBook shows a list of patients matching the search
+2. WardWatch shows a list of patients matching the search
 
     Use case ends.
 
