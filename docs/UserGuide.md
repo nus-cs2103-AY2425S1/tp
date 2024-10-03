@@ -4,9 +4,9 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+# Dream Day Designer User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+Dream Day Designer (DDD) is a **desktop app for wedding planners to keep track of clients' requirements and vendor services, optimized for use via a Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, DDD can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -19,9 +19,9 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your DDD.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar dreamdaydesigner.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -30,7 +30,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `view` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to DDD.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -49,16 +49,13 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 **Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. in `view /tag [TAG]`, `TAG` is a parameter which can be used as `view /tag `.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `/tag [TAG]…​` can be used as ` ` (i.e. 0 times), `/tag catering`, `/tag budget conscious /tag small scale` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `/name [NAME] /hp [PHONE_NUMBER]`, `/hp [PHONE_NUMBER] /name [NAME]` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -68,7 +65,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -79,8 +76,10 @@ Format: `help`
 Add new contact (client or vendor) to contact list.
 
 Format:
-`add vendor /name [name] /hp [phone number] /email [email] /address [address] /service [service type]`
-`add client /name [name] /hp [phone number] /email [email] /address [address] /date [wedding date]`
+
+`add vendor /name [NAME] /hp [PHONE_NUMBER] /email [EMAIL] /address [ADDRESS] /service [SERVICE_TYPE] /tag [TAG]…​`
+
+`add client /name [NAME] /hp [PHONE_NUMBER] /email [EMAIL] /address [ADDRESS] /date [WEDDING_DATE] /tag [TAG]…​`
 <box type="tip" seamless>
 
 **Tip:** A person can have any number of tags (including 0)
@@ -92,32 +91,15 @@ Examples:
 
 ### Listing all persons : `view`
 
-Shows a list of all contacts in the address book, sorted alphabetically.
+Shows a list of all contacts in DDD, sorted alphabetically.
 
 Format: `view`
-
-### Editing a person : `edit`
-
-Edits an existing person in the address book.
-
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
-
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
-
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
 ### Locating contacts by tag: `view /tag`
 
 View all contacts based on tags.
 
-Format: `view /tag [TAG_NAME]`
+Format: `view /tag [TAG]`
 
 * Only one tag name can be specified each time. 
 * If more than one word is entered, the entire phrase will be treated as one tag.
@@ -133,8 +115,9 @@ Examples:
 Deletes an existing contact (client or vendor) from the contact list using the contact's unique contact ID.
 
 Format: 
-`delete vendor /id [contact ID]` 
-`delete client /id [contact ID]`
+`delete vendor /id [CONTACT_ID]` 
+
+`delete client /id [CONTACTID]`
 
 
 * Deletes the contact of the specific type with the specified `contact ID`.
@@ -146,7 +129,7 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from DDD.
 
 Format: `clear`
 
@@ -158,11 +141,11 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+DDD data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 If you want to save the data to somewhere else or rename it into a new file, you can also save the data by using the `save` command.
 
-Format: `save /dir [directory] /name [name of the JSON file]`
+Format: `save /dir [DIRECTORY] /name [NAME_OF_JSON_FILE]`
 
 Examples:
 * `save /dir . /name contacts`
@@ -172,13 +155,13 @@ Examples:
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+DDD data are saved automatically as a JSON file `[JAR file location]/data/ddd.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, DDD will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the DDD to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -190,7 +173,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous DDD home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -203,14 +186,14 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action                    | Format, Examples                                                                                                                                                                                                                                  |
-|---------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Create Vendor Contact** | `add vendor /name [name] /hp [phone number] /email [email] /address [address] /service [service type]` <br> e.g., `add vendor /name ABC Catering /hp 98765432 /email contact@abccatering.com /address Blk 123 Bukit Merah St 7 /service Catering` |
-| **Create Client Contact** | `add client /name [name] /hp [phone number] /email [email] /address [address] /date [wedding date] ` <br> e.g., `add client /name Jane Doe /hp 91234567 /email jane.doe@example.com /address Blk 231 Sembawang St 4 /date 2024-12-15`             |
-| **Clear**                 | `clear`                                                                                                                                                                                                                                           |
-| **Create Vendor Contact** | `delete vendor /id [contact ID]`<br> e.g., `delete vendor /id 123`                                                                                                                                                                                |
-| **Create Client Contact** | `delete client /id [contact ID]`<br> e.g., `delete client /id 456`                                                                                                                                                                                |
-| **Edit**                  | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                                                       |
-| **Find**                  | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                        |
-| **View**                  | `view`                                                                                                                                                                                                                                            |
-| **Help**                  | `help`                                                                                                                                                                                                                                            |
+| Action                    | Format, Examples                                                                                                                                                                                                                                                     |
+|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Create Vendor Contact** | `add vendor /name [NAME] /hp [PHONE_NUMBER] /email [EMAIL] /address [ADDRESS] /service [SERVICE_TYPE] /tag [TAG]…​` <br> e.g., `add vendor /name ABC Catering /hp 98765432 /email contact@abccatering.com /address Blk 123 Bukit Merah St 7 /service Catering`       |
+| **Create Client Contact** | `add client /name [NAME] /hp [phone number] /hp [PHONE_NUMBER] /email [EMAIL] /address [ADDRESS] /date [WEDDING_DATE] /tag [TAG]…​` <br> e.g., `add client /name Jane Doe /hp 91234567 /email jane.doe@example.com /address Blk 231 Sembawang St 4 /date 2024-12-15` |
+| **Clear**                 | `clear`                                                                                                                                                                                                                                                              |
+| **Delete Vendor Contact** | `delete vendor /id [CONTACT_ID]`<br> e.g., `delete vendor /id 123`                                                                                                                                                                                                   |
+| **Delete Client Contact** | `delete client /id [CONTACT_ID]`<br> e.g., `delete client /id 456`                                                                                                                                                                                                   |
+| **View**                  | `view /tag [TAG]`<br> e.g., `view /tag entertaining`                                                                                                                                                                                                                 |
+| **View All**              | `view`                                                                                                                                                                                                                                                               |
+| **Save**                  | `save /dir [DIRECTORY] /name [NAME_OF_JSON_FILE]`<br> e.g., `save /dir ~/Desktop/ /name all_names`                                                                                                                                                                   |
+| **Help**                  | `help`                                                                                                                                                                                                                                                               |
