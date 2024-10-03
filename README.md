@@ -1,14 +1,56 @@
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
+# **MindMap**
+
+[![Java CI](https://github.com/AY2425S1-CS2103T-W13-3/tp/actions/workflows/gradle.yml/badge.svg?branch=master)]
+(https://github.com/AY2425S1-CS2103T-W13-3/tp/actions/workflows/gradle.yml)
 
 ![Ui](docs/images/Ui.png)
 
-* This is **a sample project for Software Engineering (SE) students**.<br>
-  Example usages:
-  * as a starting point of a course project (as opposed to writing everything from scratch)
-  * as a case study
-* The project simulates an ongoing software project for a desktop application (called _AddressBook_) used for managing contact details.
-  * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
-  * It comes with a **reasonable level of user and developer documentation**.
-* It is named `AddressBook Level 3` (`AB3` for short) because it was initially created as a part of a series of `AddressBook` projects (`Level 1`, `Level 2`, `Level 3` ...).
-* For the detailed documentation of this project, see the **[Address Book Product Website](https://se-education.org/addressbook-level3)**.
-* This project is a **part of the se-education.org** initiative. If you would like to contribute code to this project, see [se-education.org](https://se-education.org/#contributing-to-se-edu) for more info.
+---
+
+## **Overview**
+
+**MindMap** is a desktop application that provides an efficient way for psychologists and psychiatrists to log patient information and session details with minimal disruption. Its **CLI-based approach** prioritizes quick data entry and organization while ensuring privacy by storing data locally, addressing the need for secure, fuss-free patient record management during sessions.
+
+---
+
+## **Key Features**
+
+- **Fast and Efficient Data Entry**: Use a Command Line Interface (CLI) for quick logging of patient information.
+- **Privacy and Security**: Patient data is stored locally, ensuring confidentiality during sessions.
+- **Session Management**: Organize and maintain session records easily without interrupting workflow.
+- **User and Developer Documentation**: Comes with detailed documentation for both users and developers.
+
+---
+
+## **Target Audience**
+
+- **Primary Users**: Psychologists and Psychiatrists
+- **Value Proposition**: Minimize disruption during sessions while maintaining accurate, private records.
+
+---
+
+## **Getting Started**
+
+To get started with **MindMap**, refer to the following resources:
+
+- [User Guide](https://ay2425s1-cs2103t-w13-3.github.io/tp/UserGuide.html)
+- [Developer Guide](https://ay2425s1-cs2103t-w13-3.github.io/tp/DeveloperGuide.html)
+
+For a detailed breakdown of the project structure, visit the 
+**[MindMap Product Website](https://ay2425s1-cs2103t-w13-3.github.io/tp/)**.
+
+---
+
+## **Technical Details**
+
+- **Written in**: Java
+- **Design Paradigm**: Object-Oriented Programming (OOP)
+- **Code Base Size**: Approximately 6 KLoC (thousand lines of code)
+- **Documentation**: Includes comprehensive user and developer documentation to support both users and contributors.
+
+---
+
+## **Acknowledgements**
+
+**MindMap** is inspired by the `AddressBook Level 3` project, originally developed as part of the SE 
+(Software Engineering) module series at [se-education.org](https://se-education.org).
