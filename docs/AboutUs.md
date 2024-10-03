@@ -11,6 +11,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+
 ### Travis sim
 
 <img src="images/travisim.png" width="200px">
@@ -19,7 +20,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/travisim)]
 [[portfolio](https://github.com/travisim)]
 
-* Role: Project Advisor
+### Alexander Liswandy
+
+<img src="images/airiinnn.png" width="200px">
+
+[[github](https://github.com/airiinnn)]
+[[portfolio](team/johndoe.md)]
+
+
+* Role: Developer
+* Responsibilities: Integration, Git expert
 
 ### Jane Doe
 
