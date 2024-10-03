@@ -59,3 +59,9 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: UI
+
+### Michael Yang
+
+<img src="images/michaelyql.png" width="200px">
+
+[[github](http://github.com/michaelyql)] [[portfolio](team/michaelyql.md)]
