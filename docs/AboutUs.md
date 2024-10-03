@@ -31,14 +31,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Project Tester
 * Responsibilities: Ensure each method is unit tested well
 
-### Johnny Doe
+### Chen Zi Yi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/zi-yii.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/zi-yii)] 
+[[portfolio](team/chenziyi.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Code quality checker
+* Responsibilities: Ensure code follows the coding standard
 
 ### Jean Doe
 
