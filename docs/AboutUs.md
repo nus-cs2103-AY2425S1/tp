@@ -9,16 +9,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
 ### Lam Rong Yi
 
 <img src="images/lrongyi.png" width="200px">
@@ -52,6 +42,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/muhdbhz.png" width="200px">
 
 [[github](http://github.com/johndoe)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer, Testing
+* Responsibilities: UI
+
+### Wang Haozhen
+
+<img src="images/wang-h-z.png" width="200px">
+
+[[github](http://github.com/wang-h-z)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer, Testing
