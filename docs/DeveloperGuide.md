@@ -451,6 +451,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  A user should be able to see clearly with reasonably large texts.
+5.  The user interface should be simple, functional, and visually inoffensive to the majority of users.
+6.  A new user should be able to view information intuitively, even if they do not know the commands used to perform tasks.
 
 *{More to be added}*
 
@@ -458,6 +460,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **User**: A letting agent that is using TrueRental to manage the contact information of their clients
+* **Client**: An individual that is renting a property from a letting agent
+* **Letting agent**: An individual that facilitates a property rental agreement
 
 --------------------------------------------------------------------------------------------------------------------
 
