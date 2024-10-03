@@ -11,7 +11,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-
 ### Travis sim
 
 <img src="images/travisim.png" width="200px">
@@ -19,6 +18,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[homepage]([http://www.comp.nus.edu.sg/~damithch](https://github.com/travisim))]
 [[github](https://github.com/travisim)]
 [[portfolio](https://github.com/travisim)]
+
+### Nicholas Chong Yao Xuan
+
+<img src="images/nicholascyx.png" width="200px">
+
+[[homepage](http://www.comp.nus.edu.sg/~damithch)]
+[[github](https://github.com/nicholascyx)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities: UI
 
 ### Alexander Liswandy
 
@@ -59,13 +69,3 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
