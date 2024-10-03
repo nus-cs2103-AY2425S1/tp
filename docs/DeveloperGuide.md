@@ -363,15 +363,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 3a. The given name and phone number is detected as duplicate.
+* 2b. The given name and phone number is detected as duplicate.
 
-    * 3a1. SocialBook shows an error message.
+    * 2b1. SocialBook shows an error message.
 
       Use case ends.
 
-* 4a. There is an error in any of the specified details.
+* 2c. There is an error in any of the specified details.
 
-    * 4a1. SocialBook shows an error message.
+    * 2c1. SocialBook shows an error message.
 
       Use case ends.
 
