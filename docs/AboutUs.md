@@ -15,7 +15,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/mrnobody0505)]
 
 - Role: Project Advisor
 
@@ -48,12 +48,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Testing
 * Responsibilities: Ensures the testing of the project is done properly and on time.
 
-### Samuel Foo
+### Gia Hien
 
-<img src="images/samuelfoo.png" width="200px">
+<img src="images/mrnobody0505.png" width="200px">
 
-[[github](http://github.com/samuelfoo)]
-[[portfolio](team/samuelfoo.md)]
+[[github](http://github.com/mrnobody0505)]
+[[portfolio](team/mrnobody0505)]
 
-- Role: Integration
-- Responsibilities: In charge of versioning of the code, maintaining the code repository, integrating various parts of the software to create a whole.
+* Role: In charge of backend storage
+* Responsibilities: Ensure that the data is stored and
+* retrieved correctly.
