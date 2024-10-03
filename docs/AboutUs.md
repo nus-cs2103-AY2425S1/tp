@@ -19,34 +19,43 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Lam Rong Yi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/lrongyi.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/lrongyi)]
 
-* Role: Team Lead
+* Role: Developer
 * Responsibilities: UI
 
-### Johnny Doe
+### Sean Kevin Dias
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/seandias.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/seandias)] [[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Tan Wen Xuan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/e1121208.png" width="200px">
+
+[[github](http://github.com/e1121208)]
+[[portfolio](team/e1121208.md)]
+
+* Role: Developer
+* Responsibilities: Dev Ops + Threading
+
+### Muhammad
+
+<img src="images/muhdbhz.png" width="200px">
 
 [[github](http://github.com/johndoe)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Developer, Testing
+* Responsibilities: UI
 
 ### Wang Haozhen
 
