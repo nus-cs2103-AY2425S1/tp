@@ -16,6 +16,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/suhayl13)]
 [[portfolio](team/johndoe.md)]
 
+* Role: Testing
+* Responsibilities: Testing of all logic
 
 ### Subramanian Pon Harish
 
