@@ -300,30 +300,81 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `GOATS` application and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC1 - Add a contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User enters name, phone number, email and address
+2.  User submits details
+3.  GOATS adds the person
+4.  GOATS outputs list of all contacts
+5.  GOATS shows success message
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. User enters a tag
 
-  Use case ends.
+    * Use case resumes at step 2.
 
-* 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+* 2a. The given command or data is invalid.
 
-      Use case resumes at step 2.
+    * 2a1. GOATS shows an error message.
+
+      Use case ends.
+
+
+**Use case: UC2 - Delete a contact**
+
+**MSS**
+
+1.  User requests to <u>list persons (UC3)</u>
+2.  User requests to delete a specific person in the list
+3.  GOATS deletes the person
+4.  GOATS outputs list of all contacts
+5.  GOATS shows success message
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+    *  Use case ends.
+
+* 2a. The given command or index is invalid.
+
+    * 2a1. GOATS shows an error message.
+
+      Use case ends.
+
+**Use case: UC5 - Edit a contact**
+
+**MSS**
+
+1.  User requests to <u>list persons (UC3)</u>
+2.  User requests to edit a specific person in the list
+3.  GOATS edits the person
+4.  GOATS outputs list of all contacts
+5.  GOATS shows success message
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+    *  Use case ends.
+
+* 2a. The given command or index is invalid.
+
+    * 2a1. GOATS shows an error message.
+
+      Use case ends.
 
 *{More to be added}*
 
