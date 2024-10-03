@@ -1,4 +1,4 @@
-x---
+---
 layout: page
 title: About Us
 ---
