@@ -1,6 +1,6 @@
 ---
-  layout: default.md
-  title: "About Us"
+layout: default.md
+title: "About Us"
 ---
 
 # About Us
@@ -15,9 +15,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/johndoe.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/jyl27)]
 
 * Role: Project Advisor
 
@@ -26,7 +25,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/johndoe.png" width="200px">
 
 [[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/jyl27)]
 
 * Role: Team Lead
 * Responsibilities: UI
@@ -35,7 +34,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/johndoe)] [[portfolio](team/jyl27)]
 
 * Role: Developer
 * Responsibilities: Data
@@ -45,17 +44,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/johndoe.png" width="200px">
 
 [[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/jyl27)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Jun Yu
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jyl27.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/jyl27)]
+[[portfolio](team/jyl27.md)]
 
 * Role: Developer
 * Responsibilities: UI
