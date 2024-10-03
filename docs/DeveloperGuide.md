@@ -287,8 +287,8 @@ Priorities: High (must have) - `* * *`, Medium (Good to have) - `* *`, Low (nice
 | `* *`    | educator | categorize students into groups                  |                                                                |
 | `* *`    | educator | record students grades for tests and assignments |                                                                |
 | `* *`    | educator | view a summary of each student's grade           |                                                                |
-| `* *`    | educator | tag students with relevant labels                | prioritize based on their status                               |
-| `* *`    | educator | record notes on student behaviour                | address issues                                                 |
+| `* *`    | educator | tag students with relevant labels                | prioritize students based on their status                      |
+| `* *`    | educator | record notes on student behaviour                | easily track issues related to their behaviour                 |
 | `* *`    | educator | archive old student data                         | keep my AB clean while being able to retrieve old information  |
 | `*`      | educator | set learning goals                               | track their progress towards these goals                       |
 | `*`      | educator | undo/redo any changes                            | avoid re-entering the data during a mis-entry                  |
@@ -345,7 +345,7 @@ Priorities: High (must have) - `* * *`, Medium (Good to have) - `* *`, Low (nice
 
 **Extensions**
 
-* 1a. The provided information is incorrect.
+* 1a. The provided information is invalid.
 
     * 1a1. StoreClass displays the corresponding data error message.
 
@@ -371,11 +371,10 @@ Priorities: High (must have) - `* * *`, Medium (Good to have) - `* *`, Low (nice
 
 **Main Success Scenario**
 
-1.  User requests to list students.
-2.  StoreClass shows a list of students.
-3. User selects the specific student from the list to update.
-4. User enters the new information.
-5. StoreClass updates the student's details and display a success message. </br>
+1.  User requests to <u>list students (UC1)</u>.
+2. User selects the specific student from the list to update.
+3. User enters the new information.
+4. StoreClass updates the student's details and display a success message. </br>
     Use case ends.
 
 **Extensions**
@@ -390,11 +389,10 @@ Priorities: High (must have) - `* * *`, Medium (Good to have) - `* *`, Low (nice
 
 **Main Success Scenario**
 
-1.  User requests to list students.
-2.  StoreClass shows a list of students.
-3. User selects the specific student to record a grade.
-4. User enters the grade information.
-5. StoreClass updates the student's grades and display a success message. </br>
+1. User requests to <u>list students (UC1)</u>.
+2. User selects the specific student to record a grade.
+3. User enters the grade information.
+4. StoreClass updates the student's grades and display a success message. </br>
     Use case ends.
 
 **Extensions**
@@ -409,12 +407,11 @@ Priorities: High (must have) - `* * *`, Medium (Good to have) - `* *`, Low (nice
 
 **Main Success Scenario**
 
-1.  User requests to list students.
-2.  StoreClass shows a list of students.
-3. User selects one or more students to be categorized.
-4. StoreClass requests the group to assign the students to.
-5. User selects the group or creates a new one.
-6. StoreClass categorize the student(s) and display a success message. </br>
+1. User requests to <u>list students (UC1)</u>.
+2. User selects one or more students to be categorized.
+3. StoreClass requests for the group to assign the students to.
+4. User selects the group.
+5. StoreClass categorize the student(s) and display a success message. </br>
     Use case ends.
 
 **Extensions**
@@ -430,21 +427,20 @@ Priorities: High (must have) - `* * *`, Medium (Good to have) - `* *`, Low (nice
 
 **Main Success Scenario**
 
-1.  User requests to list students.
-2.  StoreClass shows a list of students.
-3. User selects one or more students to be tagged.
-4. StoreClass requests the tag(s) to assign the students to.
-5. User enters the tag(s)
-6. StoreClass applies the tags to the selected student(s) and display a success message. </br>
+1. User requests to <u>list students (UC1)</u>.
+2. User selects one or more students to be tagged.
+3. StoreClass requests for the tag(s) to assign the students to.
+4. User enters the tag(s)
+5. StoreClass applies the tags to the selected student(s) and display a success message. </br>
     Use case ends.
 
 **Extensions**
 
-* 4a. StoreClass detects that and invalid tags.
+* 4a. StoreClass detects an invalid tag(s).
 
     * 4a1. StoreClass requests a valid tag.
-    * 4a2. User enters a valid tag.
-
+    * 4a2. User enters a valid tag. </br>
+      Steps 4a1-4a2 are repeated until a valid tag is entered. </br>
       Use case resumes from step 6.
 
 #### **Use case 9: Archive Student Data**
@@ -480,9 +476,9 @@ Priorities: High (must have) - `* * *`, Medium (Good to have) - `* *`, Low (nice
 
 **Extensions**
 
-* *a. StoreClass is unable to export the data.
+* *4a. StoreClass is unable to export the data.
 
-    * *a1. StoreClass returns an error message.
+    * *4a1. StoreClass returns an error message.
 
       Use case ends.
 
@@ -508,9 +504,9 @@ Priorities: High (must have) - `* * *`, Medium (Good to have) - `* *`, Low (nice
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  The product should be an offline product that can run without accessing the internet.
-5. Sensitive student data such as contact details, grades and payment information should be protected to prevent unauthorized access.
-6. The system should be able to manage an increasing number of students and additional data fields.
+4.  The product should be an offline product that can run without accessing the internet, allowing access to core features such as adding, deleting, listing and archiving.
+5. Sensitive student data such as contact details, grades and payment information should be protected through encryption or password protection to prevent unauthorized access.
+6. The system should be able to manage an increasing number of students and additional data fields without significant performance degradation, ensuring that response times remains under 200ms.
 
 
 ### Glossary
