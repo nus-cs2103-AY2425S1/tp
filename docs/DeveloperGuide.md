@@ -343,9 +343,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 5.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 6.  The app should display results within 2 seconds when searching for a client.
-7.  The app should be live 24 hours a day.
-8.  The app should save the data entered even if it exits unexpectedly while running.
-9.  The app should have a log of user activity to identify malicious actors
+7.  The app should save the data entered even if it exits unexpectedly while running.
+8.  The app should have a log of user activity to identify malicious actors
 
 *{More to be added}*
 
