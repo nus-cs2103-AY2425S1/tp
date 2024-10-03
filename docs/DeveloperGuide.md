@@ -351,6 +351,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case continues from step 4.
 
+* *a. At any time, user chooses not proceed on with the operation.
+
+    Use case ends.
+
 **Use case: Add a client's rental information**
 
 **MSS**
@@ -398,6 +402,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case continues from step 5.
 
+* *a. At any time, user chooses not proceed on with the operation.
+
+  Use case ends.
+
 **Use case: Find a client**
 
 **MSS**
@@ -430,6 +438,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 4a. The list is empty.
 
     Use case ends.
+
+* *a. At any time, user chooses not proceed on with the operation.
+
+  Use case ends.
 
 *{More to be added}*
 
