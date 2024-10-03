@@ -38,7 +38,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Then Jan Kai
 
 <img src="images/Jan Kai.png.jpg" width="200px">
 
