@@ -1,7 +1,7 @@
 ---
   layout: default.md
-  title: "Developer Guide"
-  pageNav: 3
+    title: "Developer Guide"
+    pageNav: 3
 ---
 
 # AB-3 Developer Guide
@@ -241,13 +241,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 
@@ -298,47 +298,151 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
+---
+
 ### Use cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+<br>
+
+#### **Use Case: Add a Contact**
+**System**: UniVerse  
+**Actor**: User  
+**Use Case ID**: UC01 - Add a Contact
 
 **MSS**
-
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
-
-    Use case ends.
+1. User requests to add a new contact.
+2. UniVerse creates the contact and provides confirmation to the user.
+3. Use case ends.
 
 **Extensions**
+- **1a**: The Name/Email/Phone Number/Address/University/Major of contact has an invalid format.
+    - **1a1**: UniVerse displays an error message.
+    - **1a2**: Use case resumes at step 1.
 
-* 2a. The list is empty.
+<br>
 
-  Use case ends.
+#### **Use Case: Delete a Contact**
+**System**: UniVerse  
+**Actor**: User  
+**Use Case ID**: UC02 - Delete a Contact
 
-* 3a. The given index is invalid.
+**MSS**
+1. User requests to view a list of contacts.
+2. System displays the current list of contacts.
+3. User requests to delete a specific contact.
+4. System deletes the selected contact.
+5. System confirms that the contact has been deleted.
+6. Use case ends.
 
-    * 3a1. AddressBook shows an error message.
+**Extensions**
+- **2a**: The list of contacts is empty.
+    - **2a1**: System shows a message that there are no contacts available.
+    - **2a2**: Use case ends.
+- **3a**: The given contact index is invalid.
+    - **3a1**: System shows an error message indicating an invalid index.
+    - **3a2**: Use case resumes at step 2.
 
-      Use case resumes at step 2.
+<br>
 
-*{More to be added}*
+#### **Use Case: Search for Contacts by Major**
+**System**: UniVerse  
+**Actor**: User  
+**Use Case ID**: UC03 - Search for Contacts by Major
+
+**MSS**
+1. User requests to search contacts by major.
+2. System prompts user to enter a major.
+3. User enters the desired major.
+4. System searches and retrieves matching contacts.
+5. System displays a list of contacts with the specified major.
+6. Use case ends.
+
+**Extensions**
+- **3a**: The entered major is invalid or does not exist.
+    - **3a1**: System shows an error message requesting a valid major.
+    - **3a2**: User re-enters the major.
+    - **3a3**: Use case resumes at step 4.
+- **4a**: No contacts found for the entered major.
+    - **4a1**: System displays a message indicating no contacts were found.
+    - **4a2**: Use case ends.
+
+<br>
+
+#### **Use Case: Add Internship or Work Experience**
+**System**: UniVerse  
+**Actor**: User  
+**Use Case ID**: UC04 - Add Internship/Work Experience to a Contact
+
+**MSS**
+1. User requests to add internship/work experience to an existing contact.
+2. System prompts for the contact’s name and internship details (role, company, year).
+3. User provides the details.
+4. System validates the contact and internship details.
+5. System updates the contact with the new internship details.
+6. System confirms that the internship has been successfully added.
+7. Use case ends.
+
+**Extensions**
+- **2a**: The specified contact does not exist.
+    - **2a1**: System shows an error message that the contact could not be found.
+    - **2a2**: User is prompted to re-enter the contact name.
+    - **2a3**: Use case resumes at step 2.
+- **4a**: The internship details are incomplete or incorrectly formatted.
+    - **4a1**: System displays an error message indicating the issues.
+    - **4a2**: User corrects the details.
+    - **4a3**: Use case resumes at step 4.
+
+
+<br>
+
+#### **Use Case: Add Interests or Hobbies**
+**System**: UniVerse  
+**Actor**: User  
+**Use Case ID**: UC05 - Add Interest/Hobby to a Contact
+
+**MSS**
+1. User requests to add an interest or hobby to an existing contact.
+2. System prompts for the contact’s name and the interest/hobby to add.
+3. User provides the details.
+4. System checks for duplicates and validates the interest.
+5. System updates the contact with the new interest.
+6. System confirms that the interest has been successfully added.
+7. Use case ends.
+
+**Extensions**
+- **2a**: The specified contact does not exist.
+    - **2a1**: System shows an error message that the contact could not be found.
+    - **2a2**: User re-enters the contact name.
+    - **2a3**: Use case resumes at step 2.
+- **4a**: The interest already exists for the contact.
+    - **4a1**: System shows an error message indicating a duplicate interest.
+    - **4a2**: User decides whether to re-enter a different interest or cancel the action.
+    - **4a3**: Use case ends if the user cancels.
+
+---
+
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  The system should be easy to use for **university students**, even those with minimal experience in professional networking tools.
+5.  Users should be able to achieve common tasks (e.g., **adding a contact, updating information, or deleting a contact**) through a **command interface** faster than using a mouse, provided they type at an **average typing speed**.
+6.  Error messages should be clear and instructive, providing enough information for users to correct mistakes (e.g., improper data formatting or missing required fields).
+7.  The system must provide **auto-save functionality** so that user data is never lost in case of an unexpected shutdown.
 
-*{More to be added}*
+--- 
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Command Interface**: A text-based interface where users interact with the system by typing commands instead of using graphical controls like buttons.
+* **Error Messages**: Messages provided to users to indicate problems and guide corrective actions.
+* **Auto-Save**: A feature that saves changes automatically without requiring explicit user action to prevent data loss.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -357,15 +461,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
@@ -374,16 +478,16 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete 0`<br>
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 
@@ -391,6 +495,6 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
