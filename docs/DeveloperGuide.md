@@ -306,6 +306,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | Insurance agent                | Filter my client list by policy type, claim status | I can quickly create a targeted list for campaigns or follow-up actions.|
 | `* * *`  | Insurance agent                | Remove clients who are no longer insured under my policies | I can declutter my addressbook. |
 | `* * *`  | New user                       | see a list of available commands                 | have a brief idea of the app capabilities                                       |
+| `* * *`  | Insurance agent                        | add new claims or resolve old ones                | I can organize my actionables. |
+
 
 
 *{More to be added}*
