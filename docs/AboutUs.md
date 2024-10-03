@@ -50,12 +50,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Chen Le
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/chenle.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/chenle228)]
+[[portfolio](https://github.com/chenle228)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Deliverables and deadlines
