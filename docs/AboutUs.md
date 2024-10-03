@@ -56,3 +56,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: finish my equal share of this project
+
+### Huang Yining
+
+<img src="images/kitty-001.png" width="200px">
+
+[[github](https://github.com/Kitty-001)]
+[[portfolio](team/kitty-001.md)]
+
+* Role: Developer
+* Responsibilities: learn skills and try to finish my equal share
