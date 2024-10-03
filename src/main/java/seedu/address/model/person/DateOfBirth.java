@@ -1,23 +1,30 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import seedu.address.commons.util.DateUtil;
+import java.time.LocalDate;
 
+import seedu.address.commons.util.DateUtil;
 /**
  * Represents a patient's date of birth in MediBase3.
+ * Guarantees: immutable; is valid as declared in {@link #isValidDateOfBirth(String)}
  */
 public class DateOfBirth extends DateUtil {
     public static final String MESSAGE_CONSTRAINTS = "Date of birth should not be after today's date";
 
+    public final LocalDate value;
+    public final String dateOfBirthString;
     /**
      * Constructs a {@code DateOfBirth}.
      *
      * @param dob A valid date of birth.
      */
     public DateOfBirth(String dob) {
-        super(dob);
-        checkArgument(isValidDate(dob), MESSAGE_CONSTRAINTS);
+        requireNonNull(dob);
+        checkArgument(isValidDateOfBirth(dob), MESSAGE_CONSTRAINTS);
+        this.value = DateUtil.formatDate(dob);
+        this.dateOfBirthString = dob;
     }
 
     /**
@@ -26,6 +33,31 @@ public class DateOfBirth extends DateUtil {
      * @param dob The date of birth to be checked.
      */
     public static boolean isValidDateOfBirth(String dob) {
-        return isAfterToday(dob);
+        return !(DateUtil.isAfterToday(dob));
+    }
+
+    @Override
+    public String toString() {
+        return this.dateOfBirthString;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof DateOfBirth)) {
+            return false;
+        }
+
+        DateOfBirth otherDob = (DateOfBirth) other;
+        return value.equals(otherDob.value);
+    }
+
+    @Override
+    public int hashCode() {
+        return value.hashCode();
     }
 }

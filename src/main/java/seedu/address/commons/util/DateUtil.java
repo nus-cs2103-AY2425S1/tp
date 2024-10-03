@@ -1,6 +1,5 @@
 package seedu.address.commons.util;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.DateTimeException;
@@ -19,19 +18,11 @@ public class DateUtil {
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT);
 
     /**
-     * Constructs a {@code DateUtil} Object.
-     */
-    public DateUtil(String date) {
-        checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
-    }
-
-    /**
      * Returns if a given string is a valid date.
      *
      * @param date The date to be checked.
      */
     public static boolean isValidDate(String date) {
-        requireNonNull(date);
         try {
             LocalDate parsedDate = LocalDate.parse(date, DATE_FORMATTER);
             return true;
@@ -50,5 +41,14 @@ public class DateUtil {
         checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
         LocalDate parsedDate = LocalDate.parse(date, DATE_FORMATTER);
         return parsedDate.isAfter(LocalDate.now());
+    }
+
+    /**
+     * Returns the formatted date.
+     *
+     * @param date The date to be formatted.
+     */
+    public static LocalDate formatDate(String date) {
+        return LocalDate.parse(date, DATE_FORMATTER);
     }
 }
