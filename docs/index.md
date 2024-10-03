@@ -12,8 +12,8 @@ title: PlanPal
 * PlanPal offers a centralized platform to organize, track, and access contact information, ensuring efficient coordination and smooth communication throughout the event planning process.
 * While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
-* If you are interested in using AddressBook, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
-* If you are interested about developing AddressBook, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+* If you are interested in using PlanPal, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
+* If you are interested about developing PlanPal, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
 
 **Acknowledgements**
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
