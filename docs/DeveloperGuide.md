@@ -317,30 +317,58 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**UC04 - Mark payment of students**
 
-**MSS**
+**Actor: Admin**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+**MSS:**
+1. Admin logs in (UG03).
+2. Admin prompts the system to mark payment.
+3. System prompts the admin to key in details of this student.
+4. Admin key in details.
+5. System marks the payment for the student and returns a success message.
+Use case ends.
 
+**Extensions:**
+
+* 4a. Admin keyed in the information in the wrong format.
+  * 4a1. System display wrong format status.
+  * 4a2. System prompt admin to key in information again.
+  * 4a3. Admin key in information again.
+  
+    Repeat 4a1 to 4a3 until Admin key in the right information
+  * 4a4. System adds the student and display success status
     Use case ends.
 
-**Extensions**
-
-* 2a. The list is empty.
-
+* 5a. Payment of the student has already being marked.
+  * 5a1. System returns a message on payment of student being marked already.
+  * 5a2. System returns a fail status.
+  
   Use case ends.
 
-* 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+**UC05 - Delete student from system**
 
-      Use case resumes at step 2.
+**Actor: Admin**
 
-*{More to be added}*
+**MSS:**
+
+1. Admin decides student to be deleted from the system
+2. Admin selects that student
+3. System requests for confirmation
+4. Admin confirms
+5. System deletes the student information 
+
+Use case ends
+
+**Extensions:**
+
+* *a. At any time, user chooses to cancel the deletion
+    * *a1. System requests to confirm the cancellation
+    * *a2. Admin confirms the cancellation 
+  
+  Use case ends
+
 
 ### Non-Functional Requirements
 
