@@ -262,73 +262,227 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+- HR professional of a tech company with many employees with different skill sets and roles
+- works in a team of HR professionals
+- manages recruitment and manpower allocation for company projects
+- has a need to manage a significant number of contacts
+- prefer desktop apps over other types
+- can type fast
+- prefers typing and keyboard shortcuts to mouse interactions
+- is reasonably comfortable using and prefers CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
 
+HRConnect provides fast access to employee, project, and candidate contact details, optimized for HR professionals who prefer a CLI. It allows quick updates, talent pool organization, and candidate tracking, all through a streamlined, command-based interface designed for speed and efficiency. It also helps with assignment of HR staff to HR events and cases.
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​                                                      | I want to …​                                                                     | So that I can…​                                                                     |
+| -------- | ------------------------------------------------------------ | -------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `* * *`  | new user                                                     | see usage instructions and tips                                                  | refer to instructions and tips when I forget how to use the App                     |
+| `* * *`  | user                                                         | add a new employee                                                               |                                                                                     |
+| `* * *`  | user                                                         | add a new project                                                                |                                                                                     |
+| `* * *`  | user                                                         | add a new job candidate                                                          |                                                                                     |
+| `* * *`  | user                                                         | remove an employee                                                               | remove entries that I no longer need                                                |
+| `* * *`  | user                                                         | remove a project                                                                 | remove entries that I no longer need                                                |
+| `* * *`  | user                                                         | remove a job candidate                                                           | remove entries that I no longer need                                                |
+| `* * *`  | user                                                         | search for employee details by name or ID                                        | locate employee details without having to go through the entire list                |
+| `* * *`  | user                                                         | search for project details by name or ID                                         | locate project details without having to go through the entire list                 |
+| `* * *`  | user                                                         | search for job candidates by name or ID                                          | locate candidate details without having to go through the entire list               |
+| `* * *`  | user                                                         | assign employees to projects                                                     | update manpower allocation                                                          |
+| `* * *`  | user                                                         | un-assign employees to projects                                                  | update manpower allocation                                                          |
+| `* *`    | user                                                         | search for employees by skill sets                                               | find employees with desired skills without having to go through the entire list     |
+| `* *`    | user                                                         | search for projects by description                                               | find projects that match a description without having to go through the entire list |
+| `* *`    | user                                                         | search for job candidates by interview status                                    | track the number of candidates at each stage of the hiring pipeline                 |
+| `* *`    | user                                                         | update employee details                                                          | update an entry without having to delete and re-create it                           |
+| `* *`    | user                                                         | update project details                                                           | update an entry without having to delete and re-create it                           |
+| `* *`    | user                                                         | update job candidate details                                                     | update an entry without having to delete and re-create it                           |
+| `* *`    | user                                                         | hide private contact details                                                     | minimize chance of someone else seeing them by accident                             |
+| `* *`    | user managing many employees                                 | categorize employees by their departments                                        | organize employees based on their department                                        |
+| `* *`    | user managing many employees                                 | categorize employees into talent pools by skill sets                             | organize employees based on their skills                                            |
+| `* *`    | user managing many projects                                  | sort projects by their deadlines                                                 | focus on projects due earlier                                                       |
+| `* *`    | user that tracks project progress                            | list employees with project deliverables due soon                                | remind employees of their upcoming deliverables                                     |
+| `* *`    | user that tracks project progress                            | list employees with project deliverables overdue                                 | remind employees to complete overdue deliverables                                   |
+| `* *`    | user doing manpower allocation                               | filter employees with certain skill sets                                         | assign suitable people to projects                                                  |
+| `* *`    | user that recruits job candidates for projects               | filter job candidates with certain skill sets                                    | contact job candidates with skill sets sought after by the company                  |
+| `* *`    | frequent user                                                | see a summary of upcoming interviews and project deadlines upon starting the App | stay updated without searching or filtering for details                             |
+| `* *`    | busy user                                                    | have most responses return within 200 ms                                         | perform actions smoothly and quickly                                                |
+| `*`      | user with many persons in the App                            | sort persons by name                                                             | locate a person easily                                                              |
+| `*`      | user that has entered a lot of wrong data                    | reset the data to its default state                                              | start over with fresh data                                                          |
+| `*`      | user with a lot of old data                                  | archive outdated records                                                         | keep the database clutter-free and relevant                                         |
+| `*`      | user that prefers short-form commands and keyboard shortcuts | use short-form commands and keyboard shortcuts to perform regular functions      | perform actions more efficiently                                                    |
+| `*`      | user in-charge of employee up-skilling                       | track employees' learning of new skills                                          | monitor employees' progress in learning new skills                                  |
+| `*`      | user in-charge many manpower allocations                     | assign multiple employees to different projects using batch commands             | manage manpower at scale                                                            |
+| `*`      | user returning after a long break                            | see recent changes made to the records                                           | get back up to speed quickly                                                        |
+| `*`      | HR team lead                                                 | delegate manpower allocation tasks to team members                               | manage the HR team efficiently                                                      |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `HRConnect` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+---
+
+**Use case: Remove an employee**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to list employees.
+2. HRConnect shows a list of employees with their ids.
+3. User requests to delete a specific employee in the list by their id.
+4. HRConnect deletes the person.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+- 2a. The list is empty.
 
   Use case ends.
 
-* 3a. The given index is invalid.
+- 3a. The given id is invalid.
 
-    * 3a1. AddressBook shows an error message.
+  - 3a1. HRConnect shows an error message.
 
-      Use case resumes at step 2.
+    Use case resumes at step 2.
 
-*{More to be added}*
+---
+
+**Use case: Remove a project**
+
+**MSS**
+
+1. User requests to list projects.
+2. HRConnect shows a list of projects with their ids.
+3. User requests to delete a specific project in the list by its id.
+4. HRConnect deletes the project.
+
+   Use case ends.
+
+**Extensions**
+
+- 2a. The list is empty.
+
+  Use case ends.
+
+- 3a. The given id is invalid.
+
+  - 3a1. HRConnect shows an error message.
+
+    Use case resumes at step 2.
+
+---
+
+**Use case: Assign an employee to a project**
+
+**MSS**
+
+1. User requests to list employees.
+2. HRConnect shows a list of employees with their ids.
+3. User requests to list projects.
+4. HRConnect shows a list of projects with their ids.
+5. User requests to assign a specific employee by their id to a specific project by its id.
+6. HRConnect assigns the employee to the project.
+
+   Use case ends.
+
+**Extensions**
+
+- 2a. The list is empty.
+
+  Use case ends.
+
+- 4a. The list is empty.
+
+  Use case ends.
+
+- 5a. Either of the given ids is invalid.
+
+  - 5a1. HRConnect shows an error message.
+
+    HRConnect displays the list of projects if the project id is invalid and the list of employees if the employee id is invalid. Use case resume at step 4.
+
+---
+
+**Use case: Un-assign an employee from a project**
+
+**MSS**
+
+1. User requests to list projects.
+2. HRConnect shows a list of projects with their ids.
+3. User selects a project by its id.
+4. HRConnect shows a list of employees assigned to the project.
+5. User requests to un-assign a specific employee by their id from the selected project.
+6. HRConnect un-assigns the employee from the project.
+
+   Use case ends.
+
+**Extensions**
+
+- 2a. The list is empty.
+
+  Use case ends.
+
+- 4a. The list is empty.
+
+  Use case ends.
+
+- 5a. The given id is invalid.
+
+  - 5a1. HRConnect shows an error message.
+
+    Use case resumes at step 4.
+
+---
+
+**Use case: Filter employees with desired skills**
+
+**MSS**
+
+1. User requests to list skills the employees in the company have.
+2. HRConnect shows a list of skills.
+3. User selects a few skills.
+4. User requests to list all employees with all of the skills selected.
+5. HRConnect lists all employees with all of the skills selected.
+
+   Use case ends.
+
+**Extensions**
+
+- 2a. The list of skills is empty.
+
+  Use case ends.
+
+- 3a. User selects invalid skills.
+
+  - 3a1. HRConnect shows an error message.
+
+    Use case resumes at step 2.
+
+---
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1.  _Technical Requirement_: The App should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2.  _Performance Requirement_: Should be able to hold up to 1000 employees without a noticeable sluggishness in performance for typical usage.
+3.  _Performance Requirement_: The App should respond to most commands within 200 milliseconds.
+4.  _Quality Requirement_: A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+5.  _Quality Requirement_: A HR professional who has never used software to manage manpower should be able to learn basic operations like adding, deleting and assigning employees to projects within the first 10 minutes of reading the user guide.
+6.  _Fault Tolerance_: The App should be able to handle corrupted data without crashing.
+7.  _Documentation_: The code should be well-documented so that maintainers new to the project can quickly understand and contribute to the codebase.
+8.  _Constraints_: The App should be backward compatible with data produced by earlier versions of the App.
+9.  _Privacy Requirement_: The App should comply with the Personal Data Protection Act (PDPA) in handling personal information.
+10. _Notes about project scope_: The App is not required to handle the actual firing / hiring of an employee or the completion or termination of a project.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-
---------------------------------------------------------------------------------------------------------------------
+- **Mainstream OS**: Windows, Linux, Unix, MacOS.
+- **CLI**: Command Line Interface - A way of interacting with a computer system by inputting lines of text. The keyboard is primarily used.
+- **GUI**: Graphical User Interface - A way of interacting with a computer system where graphical elements such as windows, buttons, and menus are used.
+- **Private contact detail**: A contact detail that is not meant to be shared with others.
+- **HR**: Human Resources - A department responsible for finding, hiring, and training employees.
+- **Job candidate**: An applicant who is being considered for a job. The applicant is not yet an employee.
 
 ## **Appendix: Instructions for manual testing**
 
