@@ -341,24 +341,26 @@ Those without any stars are user stories that were considered but will not be im
 
 ### Use cases
 
-(For all use cases below, the **System** is the `WedLinker` and the **Actor** is the `User`, unless specified otherwise)
+(For all use cases below, the **System** is the `WedLinker` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 - List all contacts**
+> Use Cases beginning with 'UC' cover core AddressBook functionality.
+> 
+> Use Cases beginning with 'UCSH' cover non-core AddressBook functionality.
+
+**Use case: UC01 List all contacts**
 
 **MSS**
 
 1.  User issues the list command.
 2.  The system retrieves and displays the list of all contacts to the user.
-
     Use case ends.
 
 
-
-**Use case: UC02 - Add a contact**
+**Use case: UC02 Add a contact**
 
 **MSS**
 
-1.  User issues the add-contact command with the corresponding details.
+1.  User requests to add contact with the corresponding details.
 2.  The system adds the contact and displays a success message.
 3.  The system shows the new contact in the address book.
 
@@ -372,38 +374,38 @@ Those without any stars are user stories that were considered but will not be im
         Use case ends.
   
   
-* 1b. The system detects a phone number input error (invalid format): 
+* 1b. The system detects a phone number input error (invalid format).
     * 1b1. The system displays an error message stating the correct format.
   
         Use case ends.
   
   
-* 1c. The system detects an address input error (too long):
+* 1c. The system detects an address input error (too long).
     * 1c1. The system displays an error message stating the maximum length.
   
         Use case ends.
   
   
-* 1d. The system detects an email input error (invalid format):
+* 1d. The system detects an email input error (invalid format).
     * 1d1. The system displays an error message stating the correct format.
   
         Use case ends.
   
   
-* 1e. The system detects a duplicate phone number error:
+* 1e. The system detects a duplicate phone number error.
     * 1e1. The system displays an error message mentioning the existence of a duplicate phone number.
     
         Use case ends.
         
 
-* 1f. The system detects an invalid tag input:
+* 1f. The system detects an invalid tag input.
     * 1f1. The system displays an error message stating the tag is invalid.
     
         Use case ends.
 
 
 
-**Use case: UC03 - Add Phone Number to Contact**
+**Use case: UC03 Add Phone Number to Contact**
 
 **Guarantees:**
 * No duplicate phone numbers will be stored in two different contacts.
@@ -412,7 +414,7 @@ Those without any stars are user stories that were considered but will not be im
 **MSS**
 
 1. User <ins>lists all contacts (UC01)</ins>.
-2. User issues the add-phone command with the corresponding details.
+2. User requests to add phone number for a contact with the corresponding details.
 3. The system adds the phone number to the contact and displays a success message.
 4. The system displays the updated contact information in the address book.
 
@@ -425,31 +427,31 @@ Those without any stars are user stories that were considered but will not be im
   Use case ends.
 
 
-* 2a. The system detects an invalid contact index:
+* 2a. The system detects an invalid contact index.
     * 2a1. The system displays an error message stating the contact index is invalid.
 
-        Use case resumes at step 2.
+        Use case resumes at step 1.
   
   
-* 2b. The system detects a phone number input error (invalid format):
+* 2b. The system detects a phone number input error (invalid format).
     * 2b1. The system displays an error message stating the correct format.
     
-        Use case resumes at step 2.
+        Use case resumes at step 1.
   
 
-* 2c. The system detects a duplicate phone number error:
+* 2c. The system detects a duplicate phone number error.
     * 2c1. The system displays an error message mentioning the existence of a duplicate phone number.
     
-        Use case resumes at step 2.
+        Use case resumes at step 1.
 
 
 
-**Use case: UC04 - Add Address to Contact**
+**Use case: UC04 Add Address to Contact**
 
 **MSS**
 
 1. User <ins>lists all contacts (UC01)</ins>.
-2. User issues the add-address command with the corresponding details.
+2. User requests to add address for a contact with the corresponding details.
 3. The system adds the address to the contact and displays a success message
 4. The system displays the updated contact information in the address book.
 
@@ -462,25 +464,25 @@ Those without any stars are user stories that were considered but will not be im
     Use case ends.
 
 
-* 2a. The system detects an invalid contact index:
+* 2a. The system detects an invalid contact index.
     * 2a1. The system displays an error message stating the contact index is invalid.
 
-        Use case resumes at step 2.
+        Use case resumes at step 1.
   
 
-* 2b. The system detects an address input error (too long):
+* 2b. The system detects an address input error (too long).
     * 2b1. The system displays an error message stating the maximum length
 
-        Use case resumes at step 2.
+        Use case resumes at step 1.
 
 
 
-**Use case: UC05 - Add Email to Contact**
+**Use case: UC05 Add Email to Contact**
 
 **MSS**
 
 1. User <ins>lists all contacts (UC01)</ins>.
-2. User issues the add-email command with the corresponding details. 
+2. User requests to add email address for a contact with the corresponding details. 
 3. The system adds the email address to the contact and displays a success message
 4. The system displays the updated contact information in the address book.
 
@@ -492,108 +494,318 @@ Those without any stars are user stories that were considered but will not be im
 
   Use case ends.
   
-* 2a. The system detects an invalid contact index:
+
+* 2a. The system detects an invalid contact index.
     * 2a1. The system displays an error message stating the contact index is invalid.
 
-        Use case resumes at step 2.
+        Use case resumes at step 1.
 
 
-* 2b. The system detects an email input error (invalid format):
+* 2b. The system detects an email input error (invalid format).
     * 2b1. The system displays an error message stating the correct format.
   
-        Use case resumes at step 2.  
+        Use case resumes at step 1.  
   
-  **Use case: UC06 Search for contacts by Name**
+
+**Use case: UC06 Search for contacts by Name**
 
 **MSS**
 
 1.  User searches for the contact by name.
-2.  WedLinker shows a list of contacts containing the name.
+2.  System shows a list of contacts containing the name.
 
 **Use case: UC07 Filter by Tag**
 
 **MSS**
 
 1. User filters for contacts with a specified tag.
-2. WedLinker only shows a list of contact with the specified tag.
+2. System only shows a list of contact with the specified tag.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The list is empty.
 
   Use case ends.
+
 
 **Use case: UC08 Create Tags**
 
 **MSS**
 
-1. User creates a tag.
-2. WedLinker displays the successful creation of tag.
+1. User requests to create a tag.
+2. System displays the successful creation of tag.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The tag already exists.
-  * 2a1. WedLinker does not create a new tag.
-  * 2a2. WedLinker informs the user the tag already exists.
+* 1a. The tag already exists.
+    * 1a1. System does not create a new tag.
+    * 1a2. System informs the user the tag already exists.
 
-    Use case ends.
+      Use case ends.
+
 
 **Use case: UC09 Tagging a contact with a specified tag**
 
 **MSS**
 
-1. User searches for the contact to be tagged (UC06).
-2. WedLinker shows a list of contacts for the search.
-3. User adds the tag to the contact based on the index of the list.
-4. WedLinker informs the user the contact is tagged.
-5. WedLinker shows the user the final result of the contact.
+1. User <ins>lists all contacts (UC01)</ins>.
+2. User adds the tag to the contact.
+3. System informs the user the contact is tagged.
+4. System shows the user the final result of the contact.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The list is empty.
 
   Use case ends.
 
-* 3a. WedLinker detects that the tag does not exist.
+* 2a. System detects that the tag does not exist.
 
-    * 3a1. WedLinker creates a new tag (UC08)
+    * 2a1. System <ins>creates a new tag (UC08)</ins>
 
-      Use case resumes at step 4
+      Use case resumes at step 3.
 
-* 3b. The given index is invalid.
+* 2b. The given index is invalid.
 
-    * 3b1. WedLinker shows an error message prompting the user to enter a valid index.
+    * 2b1. System shows an error message prompting the user to enter a valid index.
+
+      Use case resumes at step 1.
 
 **Use case: UC10 Delete Contact**
 
 **MSS**
 
-1. WedLinker shows a list of contacts containing the name (UC01).
-2. User requests to delete a specific person in the list based on the index.
-3. WedLinker deletes the contact.
+1. User <ins>lists all contacts (UC01)</ins>.
+2. User requests to delete a specific person in the list.
+3. System deletes the contact.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The list is empty.
 
   Use case ends.
 
-* 4a. The given index is invalid.
 
-    * 4a1. WedLinker shows an error message prompting the user to enter a valid index.
+* 2a. The given index is invalid.
 
-      Use case resumes at step 2.
+    * 2a1. System shows an error message prompting the user to enter a valid index.
+
+      Use case resumes at step 1.
 
 
-*{More to be added}*
+**Use case: UCSH01 Edit details for a contact**
+
+**MSS**
+
+1. User <ins>lists all contacts (UC01)</ins>
+2. User requests to edit the details of a person and specifies what they want to change the details to
+3. AddressBook changes the existing details to the specified details and shows list of persons with new details
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+
+* 2a. The given index is invalid.
+
+    * 2a1. System shows an error message prompting the user to put in a valid index.
+
+      Use case resumes at step 1.
+
+
+* 2b. The user does not specify what type of details they want to change.
+
+    * 2b1. System shows an error message prompting the user to put in the type of details they want to edit.
+
+      Use case resumes at step 1.
+
+
+* 2c. The user does not specify what the new details should be.
+
+    * 2c1. System shows an error message prompting the user to put in the new details.
+
+      Use case resumes at step 1.
+
+
+* 2d. The user specifies details that do not meet the requirements of the detail type.
+
+    * 2d1. System shows an error message prompting the user with the correct detail type format and requirements.
+
+      Use case resumes at step 1.
+
+
+**Use case: UCSH02 Clear all contacts from the system**
+
+**Guarantees:** 
+* No persons will be left in the system.
+
+**MSS**
+
+1. User requests to clear all contact
+2. System deletes all contacts and shows a blank list of persons
+
+    Use case ends.
+
+**Use case: UCSH03 Receive a prompt when deleting a contact**
+
+**MSS**
+
+1. User <ins>lists all contacts (UC01)</ins>
+2. User requests to delete a contact
+3. System gives a prompt to confirm whether the user wants to delete the contact
+4. User confirms they want to delete the contact
+5. System deletes the contact and shows the updated list of persons
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+
+* 2a. The given index is invalid.
+
+    * 2a1. System shows an error message prompting the user to put in a valid index.
+
+      Use case resumes at step 1.
+
+
+* 3a. User says they do not want to delete the contact.
+
+    * 3a1. System shows a message indicating the contact was not deleted.
+
+      Use case ends.
+
+
+**Use case: UCSH04 Receive a prompt when clearing the system**
+
+**MSS**
+
+1. User requests to clear the system of all persons
+2. System gives a prompt to confirm whether the user wants to clear all contacts
+3. User confirms they want to clear all contacts
+4. System deletes all contacts and shows a blank list of persons
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. User says they do not want to clear all their contacts.
+
+    * 2a1. System shows a message indicating the system was not cleared.
+
+      Use case ends.
+
+
+**Use case: UCSH05 Assign dietary requirement to contact**
+
+**MSS**
+
+1. User <ins>lists all contacts (UC01)</ins>
+2. User requests to add a dietary status to the person
+3. System adds the dietary status to the contact and shows list of persons with new details
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+  Use case ends.
+
+
+* 2a. The given index is invalid.
+
+    * 2a1. System shows an error message prompting the user to put in a valid index.
+
+      Use case resumes at step 1.
+
+
+**Use case: UCSH06 Sort contacts in alphabetical order**
+
+**MSS**
+
+1.  User requests to show a list of persons sorted alphabetically
+2.  System shows the list of persons sorted in alphabetical order
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+**Use case: UCSH07 Add additional information for a person**
+
+**MSS**
+
+1. User <ins>lists all contacts (UC01)</ins>
+2. User requests to add additional information for a person
+3. System adds the additional information to the contact and shows list of persons with new details
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+
+* 2a. The given index is invalid.
+
+    * 2a1. System shows an error message prompting the user to put in a valid index.
+
+      Use case resumes at step 1.
+
+
+* 2a. The additional information is blank.
+
+    * 2a1. System shows an error message prompting the user to type in the additional information.
+
+      Use case resumes at step 1.
+
+
+**Use case: UCSH08 See sample contacts in the system before starting to modify it**
+
+Preconditions: User has not added or edited contacts previously
+
+**MSS**
+
+1.  User opens the application
+2.  System shows a list of sample contacts
+
+    Use case ends.
+
+**Use case: UCSH09 Reload sample contacts in the system**
+
+**MSS**
+
+1.  User requests to reload sample contacts into the system
+2.  System deletes all current persons in the system and shows a list of sample contacts
+
+    Use case ends.
+
+**Use case: UCSH10 See a list of all possible commands**
+
+**MSS**
+
+1.  User requests to see a list of all possible commands they can use in the system
+2.  System shows a list of commands with their corresponding input format
+
+    Use case ends.
+
 
 ### Non-Functional Requirements
 
