@@ -15,6 +15,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/juliantayyc.png" width="200px">
 
+
 [[github](https://github.com/juliantayyc)]cd 
 [[portfolio](team/juliantayyc.md)]
 
@@ -39,15 +40,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Deliverables and Deadlines
 
-### Jean Doe
+### Jessica
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jessica2828.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/jessica2828)]
+[[portfolio](team/jessica2828.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Scheduling and Tracking
+* Responsibilities: Assigning and managing tasks
 
 ### James Doe
 
