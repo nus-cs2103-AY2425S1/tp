@@ -304,29 +304,48 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `AgentAssist` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Delete a contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list contacts.
+2.  AgentAssist shows a list of contacts.
+3.  User requests to delete a specific contact in the list.
+4.  AgentAssist ask user for confirmation. 
+5.  User confirms. 
+6.  AgentAssist deletes the contact.
 
     Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
-
   Use case ends.
 
 * 3a. The given index is invalid.
+    * 3a1. AgentAssist shows an error message.
+      Use case resumes at step 2.
 
-    * 3a1. AddressBook shows an error message.
+**Use case: Add remark to a contact**
 
+**MSS**
+
+1.  User requests to list contacts.
+2.  AgentAssist shows a list of contacts.
+3.  User requests to add a remark to a specific contact in the list.
+4.  AgentAssist adds the remark to the contact.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+  Use case ends.
+
+* 3a. The given index is invalid.
+    * 3a1. AgentAssist shows an error message.
       Use case resumes at step 2.
 
 *{More to be added}*
@@ -364,7 +383,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **CLI (Command Line Interface)**: A text-based interface where users enter commands to perform specific tasks. It is typically faster compared to graphical user interfaces (GUIs) for fast-typing users.
+* **Banking Agent**: A user of the system responsible for selling credit cards to customers. 
+* **Contact**: A record in the AgentAssist system that contains personal and financial details of a customer.
+* **Customer**: A person whose details are managed within the AgentAssist system. They are potential or existing clients of the banking agents who are interested in or already using credit card services.
 
 --------------------------------------------------------------------------------------------------------------------
 
