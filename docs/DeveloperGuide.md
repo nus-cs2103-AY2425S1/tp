@@ -300,16 +300,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `Prudy` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case 1: Delete a client**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list clients
+1.  Prudy shows a list of clients
+1.  User requests to delete a specific client in the list
+1.  Prudy deletes the client
 
     Use case ends.
 
@@ -321,11 +321,47 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. Prudy shows an error message.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case 2: Add a client**
+
+**MSS**
+
+1.  User requests to add client
+1.  Prudy deletes the client
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The client already exists.
+
+    * 1a1. Prudy shows that the client already exists.
+
+      Use case ends.
+
+**Use case 3: Edit a client details (does not include editing of client policies or claims)**
+
+1.  User requests to list clients
+1.  Prudy shows a list of clients
+1.  User requests to edit a specific client in the list with the specified changes
+1.  Prudy edits the client details
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. Prudy shows an error message.
+
+      Use case resumes at step 2.
 
 ### Non-Functional Requirements
 
