@@ -47,12 +47,12 @@ We are a team based in the [School of Computing, National University of Singapor
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### John Doe
+### Sky Lim Kai Yi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/s-k-y-light.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/S-K-Y-Light)]
+[[portfolio](team/sky.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Project Developer
+* Responsibilities: Documentation
