@@ -21,7 +21,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Siow Rui Ming
 
-<img src="images/ruiming97.png.jpg" width="200px">
+<img src="images/ruiming97.png" width="200px">
 
 [[github](http://github.com/ruiming97)]
 [[portfolio](team/ruiming97.md)]
