@@ -275,29 +275,72 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​   | I want to …​                                         | So that I can…​                                         |
+|----------|-----------|------------------------------------------------------|---------------------------------------------------------|
+| `High`   | New User  | have a place to store my client details              | manage my large number of client details                |
+| `High`   | New User  | create a new client profile                          | store new clients                                       |
+| `High`   | New User  | delete a client profile                              | remove clients I no longer serve                        |
+| `High`   | New User  | search for a client by name                          | quickly access the profile of the client of interest    |
+| `High`   | New User  | be able to add my client's age to their profile      | know old he/she iss                                     |
+| `High`   | New User  | create appointments with my clients                  | manage my appointments with my clients                  |
+| `High`   | New User  | delete appointments                                  | remove appointments I have already cleared              |
+| `Medium` | New User  | assign a status to a client                          | easily categorise clients by priority                   |
+| `Medium` | New User  | search by appointments                               | pinpoint which client I am serving for that appointment |
+| `Medium` | Busy User | be able to keep track of all my appointments         | plan out my schedule efficiently                        |
+| `Medium` | Busy User | be able to know what appointments I have for the day | make immediate changes to my schedule                   |
+
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `EZSTATES` and the **Actor** is the `User`, unless specified otherwise)
+
+**Use case: Add a client**
+
+**MSS**
+
+1.  `User` adds a client name
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The client name already exists 
+    * 2a1. `EZSTATES` shows an error message
+  
+        Use Case resumes at step 1.
 
 **Use case: Delete a person**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  `User` lists all clients
+2. `EZSTATES` shows a list of all clients
+3. `User` identifies a client to remove
+4. `User` requests to delete that client from the list
+5. `EZSTATES` deletes the requested user
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. List is empty 
+    
+    Use case ends
+
+
+* 3a. The client does not exist
+    * 3a1. `EZSTATES` shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: List all profiles**
+
+**MSS**
+
+1.  `User` requests to list all clients
+2.  `EZSTATES` shows a list of all clients
 
     Use case ends.
 
@@ -307,12 +350,55 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is invalid.
+**Use case: Create Appointment**
 
-    * 3a1. AddressBook shows an error message.
+**MSS**
 
-      Use case resumes at step 2.
+1.  `User` requests to add an appointment with one client
+2.  `User` enters relevant appointment time
+3. `EZSTATES` adds the appointment
 
+    Use case ends.
+
+**Extensions**
+
+* 2a. Client name not specified
+    * 2a1. `EZSTATES` shows an error message
+        
+        Use case resumes at step 1
+
+* 3a. Client already has an appointment
+    * 3a1. `EZSTATES` shows an error message
+    
+        Use case resumes at step 1
+
+**Use case: Delete Appointment**
+
+**MSS**
+
+1. `User` requests a list of all profiles
+2. `User` chooses a certain client's appointment
+3. `User` requests to delete an appointment with a certain client
+4. `EZSTATES` removes the appointment
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. Client name not specified
+
+    Use case ends
+
+* 3a. Client name not specified
+    * 3a1. `EZSTATES` shows an error message
+
+      Use case resumes at step 1
+
+* 4a. Client already has an appointment
+    * 4a1. `EZSTATES` shows an error message
+
+      Use case resumes at step 1
+  
 *{More to be added}*
 
 ### Non-Functional Requirements
@@ -320,6 +406,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  The app should be intuitive and require no more than three user actions to perform any major task.
+5.  The codebase should adhere to clear coding principles to allow easy updates and bug fixes.
 
 *{More to be added}*
 
