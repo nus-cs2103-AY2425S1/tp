@@ -309,11 +309,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `LegacyLink` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case 1: Add contact**
+
+**MSS**
+1. User enters name and relationship of the contact
+2. User confirms details of the contact
+3. System adds the contact
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User enters phone number of the contact
+* 1b. User enters the email of the contact
+
+    Use case resumes at step 3.
+
+**Use case 2: Delete contact**
 
 **MSS**
 
-1.  User requests to list persons
+1.  User [views all contacts (UC-3)]()
 2.  System shows a list of persons
 3.  User requests to delete a specific person in the list
 4.  System deletes the person
@@ -331,6 +347,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. System shows an error message.
 
       Use case resumes at step 2.
+
+**Use case 3: View contacts**
+
+**MSS**
+
+1. User requests to view the list of contacts
+2. Systems displays list of contacts
+
+    Use case ends.
 
 *{More to be added}*
 
