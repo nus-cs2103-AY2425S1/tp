@@ -34,15 +34,16 @@ You can reach us at our emails:
 * Role: Documentation
 * Responsibilities: Ensure well-maintained documentation for the project. Handle command to add clients (buyers/ sellers).
 
-### Jane Doe
+### Hrishiraj Mandal
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/virusrwj223.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/Virusrwj223)]
+[[portfolio](https://virusrwj223.github.io/hm)]
+[[linkedin](https://www.linkedin.com/in/hrishiraj-mandal)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Tester
+* Responsibilities: Ensures the testing of the project is done properly and on time. Handle add property to database
 
 ### Johnny Doe
 
