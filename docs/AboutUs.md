@@ -20,6 +20,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
+### Gilbert Iskandar
+
+<img src="images/gilbb.png" width="200px">
+
+[[github](http://github.com/gilbb)] [[portfolio](team/gilbb.md)]
+
+* Role: Developer
+* Responsibilities: Data
 
 ### Marc Lim
 
@@ -28,13 +36,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/marchjlim)]
 [[portfolio](team/marchjlim.md)]
 
+* Role: Developer
+* Responsibilities: Dev Ops + Threading
+
 ### Shashank Gorantla
 
 <img src="images/shadhankkk.png" width="200px">
 
 [[github](http://github.com/shadhankkk)]
 [[portfolio](team/shadhankkk.md)]
-
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
