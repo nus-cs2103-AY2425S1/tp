@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# NUStates Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -13,7 +13,6 @@
 
 ## **Acknowledgements**
 
-[//]: # (_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_)
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
@@ -273,7 +272,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Target user profile**: Real Estate Agents
 
 * has a need to manage a significant number of contacts
 * prefer desktop apps over other types
@@ -281,58 +280,158 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: organize and categorize client and seller contacts, schedule appointments, contact clients about new property listings that match their client's preferences, and be notified to contact clients on key dates or at regular intervals.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​                                                                  | I want to …​                                                       | So that I can…​                                                                                    |
+|----------|--------------------------------------------------------------------------|--------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|
+| `* * *`  | Busy Real Estate Agent                                                   | search for contacts fast                                           | save time when trying to contact a person                                                          |
+| `* * *`  | Real Estate Agent                                                        | be able to add contacts                                            | contact and find details about a person                                                            |
+| `* * *`  | Real Estate Agent                                                        | delete contacts of a client                                        | remove irrelevant clients from my list                                                             |
+| `* * *`  | Real Estate Agent                                                        | be able to keep track of all the properties listed                 | help my clients quickly find the best-suited property for them                                     |
+| `* * *`  | Real Estate Agent                                                        | search for properties under me                                     | identify the specific property I want to find                                                      |
+| `* * *`  | Real Estate Agent                                                        | view all my clients                                                | browse and find clients                                                                            |
+| `* *`    | Real Estate Agent                                                        | know my total list of clients who are actively searching for homes | have a full view of all of my clients                                                              |
+| `* *`    | Real Estate Agent                                                        | view full details of a particular client                           | view all saved details of the client in one place                                                  |
+| `* *`    | Real Estate Agent                                                        | easily update contact details                                      | keep my address book up to date and accurate                                                       |
+| `* *`    | Real Estate Agent                                                        | filter contacts based on names                                     | find contacts I am familiar with via name                                                          |
+| `* *`    | Real Estate Agent                                                        | store multiple contacts for each client                            | contact them via their most comfortable means                                                      |
+| `*`      | Forgetful Real Estate Agent                                              | keep track of the client birthdays                                 | send them well wishes to maintain relations                                                        |
+| `*`      | Forgetful Real Estate Agent                                              | remember what my clients preferences are                           | contact them when a new property matching their criteria is available                              |
+| `*`      | Busy Real Estate Agent                                                   | be able to mass delete clients                                     | avoid having to do it individually                                                                 |
+| `*`      | Forgetful Real Estate Agent who wish to deal with more important clients | categorize different clients/contacts under different priority     | remember which contacts are more important                                                         |
+| `*`      | Real Estate Agent                                                        | filter clients based on some specified criteria                    | find clients relevant to what I am looking for                                                     |
+| `*`      | Busy Real Estate Agent                                                   | be able to have multiple accounts/phone numbers                    | separate contacts from my work life and personal life                                              |
+| `*`      | Systematic Real Estate Agent                                             | be able to tag my contacts under different labels                  | have quick search for people by searching for the tag                                              |
+| `*`      | Busy Real Estate Agent                                                   | be able to edit client details and contacts                        | save time when changing the client details without having to delete and recreate them              |
+| `*`      | Real Estate Agent                                                        | pin certain clients at the top of my list                          | quickly access those contacts                                                                      |
+| `*`      | Real Estate Agent                                                        | be able to undo a command                                          | recover accidentally executed commands                                                             |
+| `*`      | Real Estate Agent                                                        | receive validation feedback when entering client details           | avoid entering invalid or incorrect details                                                        |
+| `*`      | Real Estate Agent                                                        | be able detect duplicate client contacts                           | avoid having multiple entries for the same client                                                  |
+| `*`      | Real Estate Agent                                                        | hide/archive client details                                        | hide completed transactions and past client details, keeping my contact list updated and organized |
+| `*`      | Busy Real Estate Agent                                                   | be able to see a list of my most recently added client contacts    | quickly find and access them                                                                       |
+| `*`      | Real Estate Agent                                                        | sort the client list                                               | organize the client list based on my preference                                                    |
+| `*`      | Real Estate Agent                                                        | view the history of interactions with each contact                 | remember past conversations and follow-up                                                          |
+| `*`      | Real Estate Agent                                                        | filter contacts based on their preferred location or address       | find contacts which are in a specific area or region quickly                                       |
+| `*`      | Strategic Real Estate Agent                                              | add custom notes to each contact profile                           | record specific details or preferences that they have so that I can personalize my service         |
+| `*`      | Real Estate Agent                                                        | set priority levels for different contacts                         | focus more attention on the more urgent/important clients                                          |
+| `*`      | Real Estate Agent                                                        | categorize contacts by their preferred language                    | communicate with the client with their preferred language of choice                                |
+| `*`      | Real Estate Agent                                                        | tag contacts based on the type of property they are interested in  | quickly match properties to the right clients                                                      |
+| `*`      | Real Estate Agent                                                        | segment my contact list by geographic region                       | target my outreach based on specific property locations or markets                                 |
 
 ### Use cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to add a new contact by providing the required details.
+2.  AddressBook validates the provided details.
+3.  AddressBook adds the new contact to the list.
+4.  AddressBook shows a success message with the contact details.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The provided details are invalid.
+    * 2a1. AddressBook shows an error message indicating the invalid fields.
+    * 2a2. User corrects the invalid details.
+    * 2a3. AddressBook re-validates the details.
 
-  Use case ends.
+      Use case resumes at step 3.
 
-* 3a. The given index is invalid.
+* 2b. The contact already exists in the AddressBook.
+    * 2b1. AddressBook shows an error message indicating the duplicate contact.
 
-    * 3a1. AddressBook shows an error message.
+      Use case ends.
 
-      Use case resumes at step 2.
+* 2c. Required fields are missing.
+    * 2c1. AddressBook shows an error message indicating the missing fields.
+    * 2c2. User provides the missing details.
+    * 2c3. AddressBook re-validates the details.
 
-*{More to be added}*
+      Use case resumes at step 3.
+
+**Use case: Delete a contact**
+
+**MSS**
+
+1.  User requests to delete a contact by providing the index.
+2.  AddressBook validates the provided index.
+3.  AddressBook deletes the contact from the list.
+4.  AddressBook shows a success message with the deleted contact details.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The provided index is missing or not a positive integer.
+    * 2a1. AddressBook shows an error message indicating the invalid index.
+
+      Use case ends.
+
+* 2b. The provided index is more than the number of contacts in the list.
+    * 2b1. AddressBook shows an error message indicating the invalid index.
+
+      Use case ends.
+
+**Use case: List all contacts**
+
+**MSS**
+
+1.  User requests to list all contacts.
+2.  AddressBook lists all contacts.
+3.  AddressBook shows a success message indicating all contacts are listed.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User provides additional arguments after the `list` command.
+    * 1a1. AddressBook shows an error message indicating that the `list` command takes no arguments.
+
+      Use case ends.
+
+**Use case: Search for a contact**
+
+**MSS**
+
+1.  User requests to search for a contact by providing a keyword.
+2.  AddressBook validates the provided keyword.
+3.  AddressBook searches for contacts matching the keyword.
+4.  AddressBook shows a list of matching contacts with their details.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The provided keyword is missing or invalid.
+    * 2a1. AddressBook shows an error message indicating the invalid keyword.
+
+      Use case ends.
+
+* 3a. No contacts match the provided keyword.
+    * 3a1. AddressBook shows a message indicating no contacts were found.
+
+      Use case ends.
+
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Client searches should provide results even with partial or incomplete input and return results instantly (within 1 second).
+5.  The system should be available 99.9% of the time to ensure real-estate agents can access it whenever they need to.
+6.  The system should gracefully handle failures, ensuring no data loss during system crashes or unexpected outages.
+7.  All code should be well-documented to ensure future developers can easily understand and modify the application.
 
 *{More to be added}*
 
