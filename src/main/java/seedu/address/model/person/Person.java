@@ -24,17 +24,19 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final PriorityLevel priorityLevel;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, PriorityLevel priorityLevel) {
+        requireAllNonNull(name, phone, email, address, tags, priorityLevel);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.priorityLevel = priorityLevel;
     }
 
     public Name getName() {
@@ -59,6 +61,10 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public PriorityLevel getPriorityLevel() {
+        return priorityLevel;
     }
 
     /**
@@ -94,7 +100,8 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && otherPerson.getPriorityLevel().equals(getPriorityLevel());
     }
 
     @Override
