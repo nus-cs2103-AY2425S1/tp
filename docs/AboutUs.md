@@ -31,21 +31,21 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Gilbert Iskandar
+### Johnny Doe
 
-<img src="images/gilbb.png" width="200px">
+<img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/gilbb)] [[portfolio](team/gilbb.md)]
+[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Marc Lim
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/marchjlim.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/marchjlim)]
+[[portfolio](team/marchjlim.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
