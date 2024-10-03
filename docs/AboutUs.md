@@ -28,11 +28,11 @@ We are a team based in the [School of Computing, National University of Singapor
 * Role: Developer
 * Responsibilities: Deliverables, Deadlines, Scheduling and Tracking
 
-### John Doe
+### Marcus Ang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/marcusjhang.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/marcusjhang)] [[portfolio](team/marcusjhang.md)]
 
 * Role: Developer
 * Responsibilities: Data
