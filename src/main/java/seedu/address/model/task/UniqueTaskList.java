@@ -69,7 +69,7 @@ public class UniqueTaskList implements Iterable<Task> {
      * Removes the equivalent task from the list.
      * The task must exist in the list.
      */
-    public void remove(String toRemove) {
+    public void remove(Task toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
             throw new TaskNotFoundException();
