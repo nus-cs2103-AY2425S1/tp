@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_COMPANY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
@@ -124,59 +125,64 @@ public class AddVendorCommandParserTest {
         assertParseFailure(parser, INVALID_ADDRESS_DESC + validExpectedVendorString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
 
-        // invalid rsvp
-//        assertParseFailure(parser, INVALID_RSVP_DESC + validExpectedVendorString,
-//                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_RSVP));
+        // invalid company
+        assertParseFailure(parser, INVALID_COMPANY_DESC + validExpectedVendorString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_COMPANY));
 
         // valid value followed by invalid value
 
         // invalid name
-        assertParseFailure(parser, validExpectedGuestString + INVALID_NAME_DESC,
+        assertParseFailure(parser, validExpectedVendorString + INVALID_NAME_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // invalid email
-        assertParseFailure(parser, validExpectedGuestString + INVALID_EMAIL_DESC,
+        assertParseFailure(parser, validExpectedVendorString + INVALID_EMAIL_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
 
         // invalid phone
-        assertParseFailure(parser, validExpectedGuestString + INVALID_PHONE_DESC,
+        assertParseFailure(parser, validExpectedVendorString + INVALID_PHONE_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // invalid address
-        assertParseFailure(parser, validExpectedGuestString + INVALID_ADDRESS_DESC,
+        assertParseFailure(parser, validExpectedVendorString + INVALID_ADDRESS_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
 
-        // invalid rsvp
-        assertParseFailure(parser, validExpectedGuestString + INVALID_RSVP_DESC,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_RSVP));
+        // invalid company
+        assertParseFailure(parser, validExpectedVendorString + INVALID_COMPANY_DESC,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_COMPANY));
     }
 
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Guest expectedGuest = new GuestBuilder(BOB).withTags().build();
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
-                new AddGuestCommand(expectedGuest));
+        Vendor expectedVendor = new VendorBuilder(BOB).withTags().build();
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + VALID_COMPANY_BOB,
+                new AddVendorCommand(expectedVendor));
     }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGuestCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddVendorCommand.MESSAGE_USAGE);
 
         // missing name prefix
-        assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
+        assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + VALID_COMPANY_BOB,
                 expectedMessage);
 
         // missing phone prefix
-        assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
+        assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + VALID_COMPANY_BOB,
                 expectedMessage);
 
         // missing email prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB,
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB
+                        + VALID_COMPANY_BOB,
                 expectedMessage);
 
         // missing address prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB,
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB
+                        + VALID_COMPANY_BOB,
                 expectedMessage);
 
         // all prefixes missing
