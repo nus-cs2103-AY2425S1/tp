@@ -323,30 +323,170 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+#### Use case: Save a student
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User enters command to save a student's contact and address.
+2. KeyContacts parses the contact details from the user's command.
+3. KeyContacts saves the contact and notifies the user.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. KeyContacts detects an error in the entered data.
+  * 2a1. KeyContacts requests for the correct data.
+  * 2a2. User enters new data.
+  * Steps 2a1-2a2 are repeated until the data entered are correct.
+  * Use case resumes from step 3.
 
-  Use case ends.
+---
 
-* 3a. The given index is invalid.
+#### Use case: Save a student's regular lesson timing
 
-    * 3a1. AddressBook shows an error message.
+**MSS**
 
-      Use case resumes at step 2.
+1. User enters command to save a student's lesson timing.
+2. KeyContacts parses the lesson timing details from the user's command.
+3. KeyContacts saves the lesson timing and notifies the user.
 
-*{More to be added}*
+   Use case ends.
+
+**Extensions**
+
+* 2a. KeyContacts detects an error in the entered data.
+  * 2a1. KeyContacts requests for the correct data.
+  * 2a2. User enters new data.
+  * Steps 2a1-2a2 are repeated until the data entered are correct.
+  * Use case resumes from step 3.
+
+---
+
+#### Use case: Add a piano piece to a student
+
+**MSS**
+
+1. User enters command to add a piano piece to a student.
+2. KeyContacts parses the piano piece details from the user's command.
+3. KeyContacts adds the piano piece to the student's record and notifies the user.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. KeyContacts detects an error in the entered data.
+  * 2a1. KeyContacts requests for the correct data.
+  * 2a2. User enters new data.
+  * Steps 2a1-2a2 are repeated until the data entered are correct.
+  * Use case resumes from step 3.
+
+---
+
+#### Use case: View a student's details
+
+**MSS**
+
+1. User enters command to view a student's details, such as grade level, and pieces.
+2. KeyContacts parses the student's index from the user's command.
+3. KeyContacts retrieves the student's details from the list.
+4. KeyContacts displays the student's details to the user.
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. KeyContacts detects an error while retrieving the details.
+  * 3a1. KeyContacts shows an error message.
+  * Use case ends.
+
+---
+
+#### Use case: View a list of all students
+
+**MSS**
+
+1. User enters command to view a list of all students.
+2. KeyContacts retrieves the list of students from the list.
+3. KeyContacts displays the list of students to the user.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. KeyContacts detects an error while retrieving the list.
+  * 2a1. KeyContacts shows an error message.
+  * Use case ends.
+
+---
+
+#### Use case: Cancel a lesson session
+
+**MSS**
+
+1. User enters command to cancel a lesson session.
+2. KeyContacts parses the lesson session details from the user's command.
+3. KeyContacts cancels the lesson session and notifies the user.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. KeyContacts detects an error in the entered data.
+  * 2a1. KeyContacts requests for the correct data.
+  * 2a2. User enters new data.
+  * Steps 2a1-2a2 are repeated until the data entered are correct.
+  * Use case resumes from step 3.
+
+---
+
+#### Use case: Schedule a make-up lesson
+
+**MSS**
+
+1. User enters command to schedule a make-up lesson.
+2. KeyContacts parses the make-up lesson details from the user's command.
+3. KeyContacts schedules the make-up lesson and notifies the user.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. KeyContacts detects an error in the entered data.
+  * 2a1. KeyContacts requests for the correct data.
+  * 2a2. User enters new data.
+  * Steps 2a1-2a2 are repeated until the data entered are correct.
+  * Use case resumes from step 3.
+---
+
+#### Use case: Delete a student
+
+**MSS**
+
+1. User enters command to delete a student.
+2. KeyContacts parses the student index from the user's command.
+3. KeyContacts deletes the student from the list and notifies the user.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. KeyContacts detects an error in the entered data.
+  * 2a1. KeyContacts requests for the correct data.
+  * 2a2. User enters new data.
+  * Steps 2a1-2a2 are repeated until the data entered are correct.
+  * Use case resumes from step 3.
+
+---
+
+#### Use case: View the list of commands
+
+**MSS**
+
+1. User enters command to view the list of commands.
+2. KeyContacts displays the dialog box with a link to the user guide.
+
+   Use case ends.
 
 ### Non-Functional Requirements
 
