@@ -296,7 +296,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User enters command to save a student's contact and address.
 2. KeyContacts parses the contact details from the user's command.
-5. KeyContacts saves the contact and notifies the user.
+3. KeyContacts saves the contact and notifies the user.
 
    Use case ends.
 
@@ -310,13 +310,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-#### Use case: Save a student's lesson timing
+#### Use case: Save a student's regular lesson timing
 
 **MSS**
 
 1. User enters command to save a student's lesson timing.
 2. KeyContacts parses the lesson timing details from the user's command.
-5. KeyContacts saves the lesson timing and notifies the user.
+3. KeyContacts saves the lesson timing and notifies the user.
 
    Use case ends.
 
@@ -336,7 +336,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User enters command to add a piano piece to a student.
 2. KeyContacts parses the piano piece details from the user's command.
-5. KeyContacts adds the piano piece to the student's record and notifies the user.
+3. KeyContacts adds the piano piece to the student's record and notifies the user.
 
    Use case ends.
 
@@ -350,20 +350,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-#### Use case: View a student's grade level
+#### Use case: View a student's details
 
 **MSS**
 
-1. User enters command to view a student's grade level.
-2. KeyContacts parses the student's details from the user's command.
-3. KeyContacts retrieves the student's grade level from the list.
-4. KeyContacts displays the student's grade level to the user.
+1. User enters command to view a student's details, such as grade level, and pieces.
+2. KeyContacts parses the student's index from the user's command.
+3. KeyContacts retrieves the student's details from the list.
+4. KeyContacts displays the student's details to the user.
 
    Use case ends.
 
 **Extensions**
 
-* 3a. KeyContacts detects an error while retrieving the grade level.
+* 3a. KeyContacts detects an error while retrieving the details.
   * 3a1. KeyContacts shows an error message.
   * Use case ends.
 
@@ -374,14 +374,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User enters command to view a list of all students.
-2. KeyContacts retrieves the list of students from the storage.
+2. KeyContacts retrieves the list of students from the list.
 3. KeyContacts displays the list of students to the user.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. KeyContacts detects an error while retrieving the storage.
+* 2a. KeyContacts detects an error while retrieving the list.
   * 2a1. KeyContacts shows an error message.
   * Use case ends.
 
@@ -393,7 +393,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User enters command to cancel a lesson session.
 2. KeyContacts parses the lesson session details from the user's command.
-5. KeyContacts cancels the lesson session and notifies the user.
+3. KeyContacts cancels the lesson session and notifies the user.
 
    Use case ends.
 
@@ -413,7 +413,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User enters command to schedule a make-up lesson.
 2. KeyContacts parses the make-up lesson details from the user's command.
-5. KeyContacts schedules the make-up lesson and notifies the user.
+3. KeyContacts schedules the make-up lesson and notifies the user.
 
    Use case ends.
 
@@ -431,8 +431,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User enters command to delete a student.
-2. KeyContacts parses the student details from the user's command.
-5. KeyContacts deletes the student from the storage and notifies the user.
+2. KeyContacts parses the student index from the user's command.
+3. KeyContacts deletes the student from the list and notifies the user.
 
    Use case ends.
 
@@ -451,16 +451,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User enters command to view the list of commands.
-2. KeyContacts retrieves the list of available commands.
-3. KeyContacts displays the list of commands to the user.
+2. KeyContacts displays the dialog box with a link to the user guide.
 
    Use case ends.
-
-**Extensions**
-
-* 2a. KeyContacts detects an error while retrieving the list.
-  * 2a1. KeyContacts shows an error message.
-  * Use case ends.
 
 ### Non-Functional Requirements
 
