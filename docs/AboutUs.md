@@ -21,15 +21,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Hu Hong Rui
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/muller317.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](https://github.com/muller317)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: member
+* Responsibilities: Data
 
 ### Johnny Doe
 
