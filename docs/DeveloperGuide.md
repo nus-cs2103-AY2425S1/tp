@@ -290,16 +290,16 @@ ClientGrid is an address book designed for real estate agents to efficiently man
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 
-| Priority | As a …​           | I want to …​                                            | So that I can…​                                                        |
-|----------|-------------------|---------------------------------------------------------|------------------------------------------------------------------------|
-| `* * *`  | real estate agent                                 | add a new client (buyer or seller) to ClientGrid        | keep all their contact information organized in one place
-| `* * *`  | real estate agent | delete a client (buyer or seller) from ClientGrid       | keep all their contact information organized in one place              |
-| `* * *`  | user              | add a new person                                        |                                                                        |
-| `* * *`  | user              | delete a person                                         | remove entries that I no longer need                                   |
-| `* * *`  | user              | find a person by name                                   | locate details of persons without having to go through the entire list |
+| Priority | As a …​           | I want to …​                                           | So that I can…​                                                        |
+|----------|-------------------|--------------------------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | real estate agent        | add a new client (buyer or seller) to ClientGrid       | keep all their contact information organized in one place
+| `* * *`  | real estate agent | delete a client (buyer or seller) from ClientGrid      | keep all their contact information organized in one place              |
+| `* * *`  | user              | add a new person                                       |                                                                        |
+| `* * *`  | user              | delete a person                                        | remove entries that I no longer need                                   |
+| `* * *`  | user              | find a person by name                                  | locate details of persons without having to go through the entire list |
 | `* *`    | real estate agent | indicate that a buyer wants to buy property X at Y price | keep track of the clients that are involved in the transaction         |
 | `* *`    | real estate agent | indicate that a seller wants to sell property X at Y price | keep track of the clients that are involved in the transaction                                                |
-| `* * *`  | real estate agent                          | add new properties to client grid | keep track of my client's property details                             |
+| `* * *`  | real estate agent | add new properties to client grid | keep track of my client's property details                             |
 
 *{More to be added}*
 
