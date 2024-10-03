@@ -21,15 +21,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Team Lead
 
-### Jane Doe
+### Ethan Goh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ethan-goh.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/jyl27)]
+[[github](http://github.com/ethan-goh)]
+[[portfolio](team/ethan-g.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Code Quality
+* Responsibilities: Ensure code follows the code quality requirements as outlined by the course.
 
 ### Brandon Tan
 
