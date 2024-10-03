@@ -1,6 +1,6 @@
 ---
   layout: default.md
-  title: "About Us"
+title: "About Us"
 ---
 
 # About Us
@@ -33,9 +33,21 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Asveen Elavarasan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ashea10.png" width="200px">
 
 [[github](http://github.com/ashea10)] [[portfolio](team/ashea10.md)]
+
+* Role: Developer
+* Responsibilities: Data
+
+### Gilbert Iskandar
+
+
+<img src="images/gilbb.png" width="200px">
+
+
+[[github](http://github.com/gilbb)] [[portfolio](team/gilbb.md)]
+
 
 * Role: Developer
 * Responsibilities: Data
