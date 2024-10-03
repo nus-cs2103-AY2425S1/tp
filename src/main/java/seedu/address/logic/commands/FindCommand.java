@@ -1,11 +1,13 @@
 package seedu.address.logic.commands;
-
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
+import seedu.address.model.person.ClassIdContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+
+
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -22,10 +24,25 @@ public class FindCommand extends Command {
 
     private final NameContainsKeywordsPredicate predicate;
 
+    private final ClassIdContainsKeywordsPredicate predicateClassId;
 
 
+    /**
+     * Stores the predicate to be used to filter the list of persons
+     * @param predicate the predicate to be used to filter the list of persons
+     */
     public FindCommand(NameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
+        this.predicateClassId = null;
+    }
+
+    /**
+     * Stores the predicate to be used to filter the list of persons
+     * @param predicate the predicate to be used to filter the list of persons
+     */
+    public FindCommand(ClassIdContainsKeywordsPredicate predicate) {
+        this.predicateClassId = predicate;
+        this.predicate = null;
     }
 
 
@@ -33,7 +50,13 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
+
+        if (predicate != null) {
+            model.updateFilteredPersonList(predicate);
+        } else if (predicateClassId != null) {
+            model.updateFilteredPersonList(predicateClassId);
+        }
+
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
@@ -50,13 +73,21 @@ public class FindCommand extends Command {
         }
 
         FindCommand otherFindCommand = (FindCommand) other;
-        return predicate.equals(otherFindCommand.predicate);
+        return (predicate != null ? predicate.equals(otherFindCommand.predicate)
+                : predicateClassId.equals(otherFindCommand.predicateClassId));
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("predicate", predicate)
-                .toString();
+        if (predicate != null) {
+            return new ToStringBuilder(this)
+                    .add("predicate", predicate)
+                    .toString();
+        } else {
+            return new ToStringBuilder(this)
+                    .add("predicate", predicateClassId)
+                    .toString();
+        }
+
     }
 }
