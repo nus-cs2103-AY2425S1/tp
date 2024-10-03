@@ -48,12 +48,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Storage, Contact
 
-### James Doe
+### Lim Jiale
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jialegitgud.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/jialegitgud)]
+[[portfolio](team/jialegitgud.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Deliverables and Deadlines, Scheduling and Tracking
+* Responsibilities: In charge of Goods, Goods-Supplier Integrations
