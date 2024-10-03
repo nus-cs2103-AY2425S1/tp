@@ -329,16 +329,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3. Should be for a single user i.e. (not a multi-user product) and should not involve data sharing across users.
+4. The data should be stored locally and should be in a human-readable format.
+5. Should work without a remote server.
+6. Should work as a standalone executable without additional setup beyond Java installation.
+7. Should not use a database management system.
+8. GUI should _work well_ (i.e., should not cause any resolution-related inconveniences to the user) for standard screen resolutions 1920x1080 and higher, and, for screen scales 100% and 125%.
+9. GUI should be _usable_ (i.e., all functions can be used even if the user experience is not optimal) for resolutions 1280x720 and higher, and, for screen scales 150%.
+10. Product should be in a single JAR or zip file.
+11. The final JAR or zip file should not exceed 100MB.
+12. The User Guide and Developer Guide must not exceed 15MB per file.
+13. Developer Guide and User Guide should be PDF-friendly.
+14. The final product should follow the object-oriented paradigm
 
-*{More to be added}*
+--------------------------------------------------------------------------------------------------------------------
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+| **Term**                      | **Definition**                                                                                                          |
+|-------------------------------|-------------------------------------------------------------------------------------------------------------------------|
+| Mainstream OS                 | Windows, Linux, Unix, MacOS                                                                                             |
+| Private contact detail        | A contact detail that is not meant to be shared with others                                                             |
+| Engagement History            | A record of past interactions, such as donations, volunteer participation associated with a contact                     |
+| Human-Readable Format         | A file format that can be easily understood and edited by people without specialized software (e.g., plain text or CSV) |
+| Volunteer Participation Hours | A record of the number of hours a volunteer has contributed to activities or events                                     |
+| Tag                           | A keyword or label applied to a contact for easier filtering or searching                                               |
+| Search Query                  | A user-provided input (e.g., name or role) to filter contacts in the list                                               |
+| Reminder                      | A notification or prompt that alerts users to follow up on an important task, such as donation drives                   |
 
 --------------------------------------------------------------------------------------------------------------------
 
