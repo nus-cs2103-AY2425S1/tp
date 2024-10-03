@@ -270,7 +270,7 @@ Tech-savvy sales representatives in the insurance industry who
 - Need quick access to contact information during calls or email communications
 - Require efficient follow-up management and interaction tracking
 
-**Value proposition**: Empowers SaaS inside sales reps with lightning-fast, CLI-driven contact management. 
+**Value proposition**: Empowers insurance sales reps with lightning-fast, CLI-driven contact management. 
 It offers instant access to lead details, interaction histories, and follow-up schedules, maximizing call and email productivity for high-volume, rapid-paced sales environments.
 
 
