@@ -58,3 +58,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: Code Quality
+
+### Shun Ren
+
+<img src="images/zshunren.png" width="200px">
+
+[[github](https://github.com/ZShunRen)]
+[[portfolio](https://zshunren.github.io/)]
+
+* Role: Developer
+* Responsibilities: Testing, Integration
