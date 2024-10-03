@@ -274,13 +274,19 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+This application is aimed towards convenience store managers who often need to manage their inventories. This application will help convenience store managers who:
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+* Manage a significant number of information about their suppliers
+* Manage a significant number of information about their products
+* Monitor the performance of their suppliers
+* Maintain a streamline communication, ensuring smooth operations and minimizing errors in stock replenishment
+* Regularly order products and prefer a user-friendly interface which could possibly automate their orders
+* prefer a fast, efficient typing interface over mouse or voice commands
+
+**Value proposition**: 
+
+InvenTrack enables inventory managers to efficiently manage large number of supplier contact information and streamline communication, ensuring smooth operations and minimizing errors in stock replenishment, all through a typing-optimized interface
+
 
 
 ### User stories
