@@ -26,11 +26,11 @@ public class CompanyTest {
 
         // invalid Company
         assertFalse(Company.isValidCompany("")); // empty string
-        assertFalse(Company.isValidCompany(" ")); // spaces only
-        assertFalse(Company.isValidCompany("^")); // only non-alphanumeric characters
-        assertFalse(Company.isValidCompany("peter*")); // contains non-alphanumeric characters
+        assertFalse(Company.isValidCompany("   ")); // spaces only
 
         // valid Company
+        assertTrue(Company.isValidCompany("^")); // only non-alphanumeric characters
+        assertTrue(Company.isValidCompany("peter*")); // contains non-alphanumeric characters
         assertTrue(Company.isValidCompany("peter jack")); // alphabets only
         assertTrue(Company.isValidCompany("12345")); // numbers only
         assertTrue(Company.isValidCompany("peter the 2nd")); // alphanumeric characters

@@ -5,18 +5,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Company's name in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidCompanyName(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidCompany(String)}
  */
 public class Company {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Company name should only contain alphanumeric characters and spaces, and it should not be blank";
-
-    /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+            "Company name should not be blank";
 
     public final String companyName;
 
@@ -38,9 +32,8 @@ public class Company {
      * @return True if the given string matches the validation regex, false otherwise.
      */
     public static boolean isValidCompany(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return !test.isBlank();
     }
-
 
     @Override
     public String toString() {
