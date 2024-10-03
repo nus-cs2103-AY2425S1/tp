@@ -19,16 +19,16 @@ import seedu.address.model.task.exceptions.TaskNotFoundException;
  *
  * Supports a minimal set of list operations.
  */
-public class UniqueTaskList implements Iterable<String> {
+public class UniqueTaskList implements Iterable<Task> {
 
-    private final ObservableList<String> internalList = FXCollections.observableArrayList();
-    private final ObservableList<String> internalUnmodifiableList =
+    private final ObservableList<Task> internalList = FXCollections.observableArrayList();
+    private final ObservableList<Task> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
      * Returns true if the list contains an equivalent task as the given argument.
      */
-    public boolean contains(String toCheck) {
+    public boolean contains(Task toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::equals);
     }
@@ -37,7 +37,7 @@ public class UniqueTaskList implements Iterable<String> {
      * Adds a task to the list.
      * The task must not already exist in the list.
      */
-    public void add(String toAdd) {
+    public void add(Task toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
             throw new DuplicateTaskException();
@@ -50,7 +50,7 @@ public class UniqueTaskList implements Iterable<String> {
      * {@code target} must exist in the list.
      * The task identity of {@code editedTask} must not be the same as another existing task in the list.
      */
-    public void setTask(String target, String editedTask) {
+    public void setTask(Task target, Task editedTask) {
         requireAllNonNull(target, editedTask);
 
         int index = internalList.indexOf(target);
@@ -85,7 +85,7 @@ public class UniqueTaskList implements Iterable<String> {
      * Replaces the contents of this list with {@code tasks}.
      * {@code tasks} must not contain duplicate tasks.
      */
-    public void setTasks(List<String> tasks) {
+    public void setTasks(List<Task> tasks) {
         requireAllNonNull(tasks);
         if (!tasksAreUnique(tasks)) {
             throw new DuplicateTaskException();
@@ -97,12 +97,12 @@ public class UniqueTaskList implements Iterable<String> {
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
-    public ObservableList<String> asUnmodifiableObservableList() {
+    public ObservableList<Task> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
     }
 
     @Override
-    public Iterator<String> iterator() {
+    public Iterator<Task> iterator() {
         return internalList.iterator();
     }
 
@@ -132,7 +132,7 @@ public class UniqueTaskList implements Iterable<String> {
     /**
      * Returns true if {@code tasks} contains only unique tasks.
      */
-    private boolean tasksAreUnique(List<String> tasks) {
+    private boolean tasksAreUnique(List<Task> tasks) {
         for (int i = 0; i < tasks.size() - 1; i++) {
             for (int j = i + 1; j < tasks.size(); j++) {
                 if (tasks.get(i).equals(tasks.get(j))) {
