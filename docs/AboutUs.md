@@ -31,11 +31,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Chen Yixun
+### Zheng Jie
 
-<img src="images/cyx22222003.png" width="200px">
+<img src="images/krashkart.png" width="200px">
 
-[[github](http://github.com/cyx22222003)] [[portfolio](team/cyx22222003.md)]
+[[github](https://github.com/KrashKart)] [[portfolio](team/krashkart.md)]
 
 * Role: Developer
 * Responsibilities: Data
