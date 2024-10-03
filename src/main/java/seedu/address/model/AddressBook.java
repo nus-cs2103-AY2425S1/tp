@@ -6,8 +6,11 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.assignment.Assignment;
+import seedu.address.model.assignment.UniqueAssignmentList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+
 
 /**
  * Wraps all data at the address-book level
@@ -16,6 +19,7 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final UniqueAssignmentList assignments;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -26,6 +30,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        assignments = new UniqueAssignmentList();
     }
 
     public AddressBook() {}
@@ -49,11 +54,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the assignment list with {@code assignments}.
+     * {@code assignments} must not contain duplicate assignments.
+     */
+    public void setAssignments(List<Assignment> assignments) {
+        this.assignments.setAssignments(assignments);
+    }
+
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-
         setPersons(newData.getPersonList());
     }
 
@@ -94,12 +107,51 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    //// assignment-level operations
+
+    /**
+     * Returns true if an assignment with the same identity as {@code assignment} exists in the app.
+     */
+    public boolean hasAssignment(Assignment assignment) {
+        requireNonNull(assignment);
+        return assignments.contains(assignment);
+    }
+
+    /**
+     * Adds an assignment to the app.
+     * The assignment must not already exist in the app.
+     */
+    public void addAssignment(Assignment a) {
+        assignments.add(a);
+    }
+
+    /**
+     * Replaces the given Assignment {@code assignment} in the list with {@code editedAssignment}.
+     * {@code assignment} must exist in the address book.
+     * The assignment identity of {@code editedAssignment} must not be the same as another existing assignment in the
+     * app.
+     */
+    public void setAssignment(Assignment target, Assignment editedAssignment) {
+        requireNonNull(editedAssignment);
+
+        assignments.setAssignment(target, editedAssignment);
+    }
+
+    /**
+     * Removes {@code key} from this {@code app}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeAssignment(Assignment key) {
+        assignments.remove(key);
+    }
+
     //// util methods
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("persons", persons)
+                .add("assignments", assignments)
                 .toString();
     }
 
@@ -107,7 +159,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
     }
-
+    @Override
+    public ObservableList<Assignment> getAssignmentList() { return assignments.asUnmodifiableObservableList(); }
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -120,7 +173,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons);
+        return persons.equals(otherAddressBook.persons) && assignments.equals(otherAddressBook.assignments);
     }
 
     @Override

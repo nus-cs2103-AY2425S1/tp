@@ -9,6 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.assignment.AssignmentName;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -108,6 +109,37 @@ public class ParserUtil {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
         return new Tag(trimmedTag);
+    }
+    /**
+     * Parses a {@code String assignment name} into a {@code AssignmentName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code assignment name} is invalid.
+     */
+    public static AssignmentName parseAssignmentName(String assignmentName) throws ParseException {
+        requireNonNull(assignmentName);
+        String trimmedAssignmentName = assignmentName.trim();
+        if (!Tag.isValidTagName(trimmedAssignmentName)) {
+            throw new ParseException(AssignmentName.MESSAGE_CONSTRAINTS);
+        }
+        return new AssignmentName(assignmentName);
+    }
+    /**
+     * Parses a {@code String max score} into a {@code int}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code max score} is invalid.
+     */
+    public static int parseMaxScore(String maxScore) throws ParseException {
+        requireNonNull(maxScore);
+        String trimmedMaxScore = maxScore.trim();
+        int parsedScore;
+        try {
+            parsedScore = Integer.parseInt(trimmedMaxScore);
+        } catch (NumberFormatException e) {
+            throw new ParseException("The score must be an integer!");
+        }
+        return parsedScore;
     }
 
     /**

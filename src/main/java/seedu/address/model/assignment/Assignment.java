@@ -94,5 +94,11 @@ public class Assignment {
                 .add("hasSubmitted", hasSubmitted)
                 .toString();
     }
+    public String getName() {
+        return this.assignmentName.assignmentName;
+    }
+    public int getScore() {
+        return this.score;
+    }
 
 }
