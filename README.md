@@ -35,7 +35,6 @@ To get started with **MindMap**, refer to the following resources:
 
 - [User Guide](https://ay2425s1-cs2103t-w13-3.github.io/tp/UserGuide.html)
 - [Developer Guide](https://ay2425s1-cs2103t-w13-3.github.io/tp/DeveloperGuide.html)
-- [Contributing Guidelines](docs/Contributing.md)
 
 For a detailed breakdown of the project structure, visit the 
 **[MindMap Product Website](https://ay2425s1-cs2103t-w13-3.github.io/tp/)**.
