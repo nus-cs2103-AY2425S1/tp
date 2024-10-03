@@ -1,12 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -23,12 +18,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.contactdate.ContactDateList;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Nric;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -47,6 +37,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_CALL_FREQUENCY + "CALL FREQUENCY] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -106,9 +97,12 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         ContactDateList contactDates = editPersonDescriptor.getContactDates().orElse(personToEdit.getContactDates());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        CallFrequency updatedCallFrequency =
+                editPersonDescriptor.getCallFrequency().orElse(personToEdit.getCallFrequency());
+
 
         return new Person(updatedNric, updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-                contactDates);
+                contactDates, updatedCallFrequency);
     }
 
     @Override
@@ -147,6 +141,7 @@ public class EditCommand extends Command {
         private Address address;
         private ContactDateList contactDates;
         private Set<Tag> tags;
+        private CallFrequency callFrequency;
 
         public EditPersonDescriptor() {
         }
@@ -163,6 +158,7 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setContactDates(toCopy.contactDates);
             setTags(toCopy.tags);
+            setCallFrequency(toCopy.callFrequency);
         }
 
         /**
@@ -220,6 +216,14 @@ public class EditCommand extends Command {
             this.contactDates = contactDates;
         }
 
+        public Optional<CallFrequency> getCallFrequency() {
+            return Optional.ofNullable(callFrequency);
+        }
+
+        public void setCallFrequency(CallFrequency callFrequency) {
+            this.callFrequency = callFrequency;
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -254,7 +258,8 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(callFrequency, otherEditPersonDescriptor.callFrequency);
         }
 
         @Override
@@ -266,6 +271,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("tags", tags)
+                    .add("call frequency", callFrequency)
                     .toString();
         }
     }
