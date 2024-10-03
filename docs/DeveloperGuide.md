@@ -343,8 +343,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to load within 4 seconds while holding up to 1000 contacts.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  The system should have an uptime of 99.9%.
+5.  The product must be intuitive to people without technical background.
+6.  For critical user actions such as searching for a contact or updating information, the system must respond within 1 second for up to 90% of operations.
+7.  The program should have a size of less than 100MB even with 1000 contacts.
+8.  The application should function fully when offline.
+9.  When a user executes a command there should be clear feedback on whether the task was successful.
+10. The user should be notified on the reason why the command they give is not working(i.e. incorrect input, lack of contacts in system)
 
 *{More to be added}*
 
