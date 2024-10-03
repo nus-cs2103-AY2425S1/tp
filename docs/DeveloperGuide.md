@@ -287,14 +287,26 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​                        | I want to …​                                      | So that I can…​                                                                 |
+|----------|--------------------------------|--------------------------------------------------|---------------------------------------------------------------------------------|
+| `* * *`  | Insurance agent                | quickly retrieve a client’s insurance policy details | efficiently provide relevant information during meetings or calls               |
+| `* * *`  | Responsible insurance agent    | receive timely reminders for clients' policies which are expiring soon | remind individual clients to renew their policies           |
+| `* * *`  | Forgetful insurance agent      | track the status of my clients' claims           | keep track of pending claims that require my attention                          |
+| `* * *`  | Insurance agent                | store all my client contact information in one place | easily access their details and communicate with them without searching across multiple platforms |
+| `* *`    | Busy insurance agent           | have a powerful search function that allows me to quickly find clients by name, policy type, or claims | respond promptly to inquiries                                                   |
+| `* *`    | Busy insurance agent           | receive notifications when a client’s claim has not been resolved after a long time | be reminded to prioritize actioning these claims                                 |
+| `* *`    | Organized insurance agent      | have a visual dashboard that shows me a summary of my client portfolio at a glance, including policy types, claims, and follow-up tasks | plan my activities without having to navigate too much                           |
+| `*`      | Eager insurance agent          | receive reminders for key client milestones (e.g., birthdays, policy anniversaries) | send personalized messages or offers, strengthening client relationships         |
+| `*`      | Responsible insurance agent    | Track the status of any claims my clients have made | I can provide updates and assistance throughout the claim process. |
+| `*`      | Insurance agent                | import and export client data                    | work with the data outside of the platform when necessary                       |
+| `*`      | Forgetful insurance agent      | set reminders for client meetings                | never miss important meetings or calls                                          |
+| `* * *`  | Insurance agent                | track clients' claims and their remark status    | ensure all client issues are addressed promptly and effectively                 |
+| `*`      | Insurance agent                | view detailed information about client referrals and their referees | know which of my clients are related and show my appreciation to clients with large referrals |
+| `*`      | Time-efficient insurance agent | assign different priority levels to my clients based on factors like policy value or renewal date | prioritize my work and focus on the most important or time-sensitive client needs |
+| `* *`    | Insurance agent                | Filter my client list by policy type, claim status | I can quickly create a targeted list for campaigns or follow-up actions.|
+| `* * *`  | Insurance agent                | Remove clients who are no longer insured under my policies | I can declutter my addressbook. |
+| `* * *`  | New user                       | see a list of available commands                 | have a brief idea of the app capabilities                                       |
+
 
 *{More to be added}*
 
@@ -330,15 +342,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 clients without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Should be intuitive, agents can perform core functions with 30 minutes training
+5.  The system should provide feedback for user inputs for basic commands (eg. add client, update client) within 1 second.
+6.  The app should not exceed 500MB of memory.
+7.  Should give clear actionable error messages that would guide the user in correcting invalid inputs
+8.  Input data should have checks to prevent wrong entries.
 
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Client**: A person who purchased or about to purchase a policy from the agent
+* **Policy**: An insurance policy that contains the type, premium and coverage
+* **Claim**: A request for payment based on the policy
+* **Commands**: A text instruction that triggers a defined function in the app (e.g., add-client, list-policies).
+* **Command Prefix**: A marker used in commands to specify the type of input (e.g., n/ for name, p/ for phone number).
+* **Premium**: Amount of money paid for an insurance policy
+* **Coverage amount**: Maximum amount an insurance company will pay under a policy.
+* **Claim Status**: The current state of a claim, such as Pending, In Progress, Resolved, or Closed.
+* **Error Message**: Message displayed to the user providing guidance on how to correct the issue.
 
 --------------------------------------------------------------------------------------------------------------------
 
