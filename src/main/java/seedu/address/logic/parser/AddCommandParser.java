@@ -44,7 +44,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        EmergencyContact emergencyContact = new EmergencyContact("", ""); // add command does not allow adding remarks straight away
+        // add command does not allow adding remarks straight away
+        EmergencyContact emergencyContact = new EmergencyContact("", "");
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Person person = new Person(name, phone, email, address, emergencyContact, tagList);
