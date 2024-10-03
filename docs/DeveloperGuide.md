@@ -279,8 +279,9 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefer desktop apps to keep track of their contacts
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: add superior convenience in managing contacts from NUS SoC
+**Value proposition**: schedule meetings and manage contacts from NUS SoC easily
 
+<br>
 
 ### User stories
 
@@ -294,26 +295,30 @@ _{Explain here how the data archiving feature will be implemented}_
 - brUdders (refers to mentee users and/or those who wish to mentor as peers)
 - mUdders (refers to mentor users)
 
-| Priority | As a…​                                   | I want to…​                       | So that I can…​                                                         |
-|----------|-----------------------------------------|----------------------------------|------------------------------------------------------------------------|
-| `* * *`  | anUdder                                 | add a new contact                |                                                                        |
-| `* * *`  | anUdder                                 | edit an existing contact         | update the added contact with new information                          |
-| `* * *`  | lonely brUdder who seeks help           | schedule a meeting               | remind myself of future meetings with another contact                  |
-| `* * *`  | curious anUdder                         | view the details of a contact    | learn more about the contacts abilities                                |
-| `* * *`  | anUdder                                 | list all contacts                |                                                                        |
-| `* * *`  | anUdder                                 | list all meetings with a contact |                                                                        |
-| `* * *`  | anUdder                                 | delete a contact                 | remove contacts that I no longer need                                  |
-| `* * *`  | anUdder                                 | filter through my contacts       | locate details of persons without having to go through the entire list |
-| `* *`    | new anUdder                             | see usage instructions           | refer to instructions when I forget how to use the App                 |
-| `* *`    | anUdder                                 | edit details of a meeting        | update the meeting with new information                                |
-| `* *`    | anUdder                                 | delete a meeting                 | remove meetings that no longer exists                                  |
-| `*`      | anUdder                                 | favourite some of my contacts    | find my favourite contacts in an instant                               |
-| `*`      | anUdder                                 | unfavourite some of my contacts  | remove them from my favourites list                                    |
-| `*`      | more social anUdder                     | share my contacts with anUdder   |                                                                        |
+| Priority | As a…​                        | I want to…​                      | So that I can…​                                                        |
+|----------|-------------------------------|----------------------------------|------------------------------------------------------------------------|
+| `* * *`  | anUdder                       | add a new contact                |                                                                        |
+| `* * *`  | anUdder                       | edit an existing contact         | update the added contact with new information                          |
+| `* * *`  | lonely brUdder who seeks help | schedule a meeting               | remind myself of future meetings with another contact                  |
+| `* * *`  | curious anUdder               | view the details of a contact    | learn more about the contacts abilities                                |
+| `* * *`  | anUdder                       | list all contacts                |                                                                        |
+| `* * *`  | anUdder                       | list all meetings with a contact |                                                                        |
+| `* * *`  | anUdder                       | delete a contact                 | remove contacts that I no longer need                                  |
+| `* * *`  | anUdder                       | filter through my contacts       | locate details of persons without having to go through the entire list |
+| `* *`    | new anUdder                   | get help                         | refer to instructions when I forget how to use the App                 |
+| `* *`    | anUdder                       | edit details of a meeting        | update the meeting with new information                                |
+| `* *`    | anUdder                       | delete a meeting                 | remove meetings that no longer exists                                  |
+| `*`      | anUdder                       | favourite some of my contacts    | find my favourite contacts in an instant                               |
+| `*`      | anUdder                       | unfavourite some of my contacts  | remove them from my favourites list                                    |
+| `*`      | more social anUdder           | share my contacts with anUdder   |                                                                        |
+
+<br>
 
 ### Use cases
 
 (For all use cases below, the **System** is the `FindingbrUdders` and the **Actor** is the `anUdder`, unless specified otherwise)
+
+<br>
 
 **Use case: Delete anUdder**
 
@@ -339,6 +344,8 @@ _{Explain here how the data archiving feature will be implemented}_
     * 3a1. FindingbrUdders shows an error message.
 
       Use case resumes at step 2.
+
+<br>
 
 **Use case: Schedule a meeting with a specific anUdder**
 
@@ -377,6 +384,8 @@ _{Explain here how the data archiving feature will be implemented}_
 
       Use case resumes at step 2.
 
+<br>
+
 **Use case: View details of a specific mUdder**
 
 **MSS**
@@ -402,6 +411,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
      Use case ends.
 
+<br>
 
 ### Non-Functional Requirements
 
