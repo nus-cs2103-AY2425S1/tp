@@ -28,12 +28,13 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final ContactDateList contactDates = new ContactDateList();
+    private final CallFrequency callFrequency;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-            ContactDateList contactDates) {
+            ContactDateList contactDates, CallFrequency callFrequency) {
         requireAllNonNull(nric, name, phone, email, address, tags);
         this.nric = nric;
         this.name = name;
@@ -42,13 +43,15 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
         this.contactDates.addAll(contactDates);
+        this.callFrequency = callFrequency;
     }
 
     /**
      * For creating a new person. Every field but contact date must be present and not null.
      */
-    public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        this(nric, name, phone, email, address, tags, new ContactDateList(ContactDate.getCurrentDate()));
+    public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+                  CallFrequency callFrequency) {
+        this(nric, name, phone, email, address, tags, new ContactDateList(ContactDate.getCurrentDate()), callFrequency);
     }
 
     public Nric getNric() {
@@ -77,6 +80,14 @@ public class Person {
 
     public ContactDate getLastContacted() {
         return contactDates.getLastContacted();
+    }
+
+    public CallFrequency getCallFrequency() {
+        return callFrequency;
+    }
+
+    public ContactDate getNextContactDate() {
+        return getLastContacted().add(callFrequency);
     }
 
     /**
