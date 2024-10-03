@@ -21,15 +21,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Frontend Engineer
 
-### Jane Doe
+### Rezwan Ahmed
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/Rezwan15107.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/RezwanAhmed123)]
+[[portfolio](team/rezwanahmed.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Project Tester
+* Responsibilities: Ensure each method is unit tested well
 
 ### Johnny Doe
 
