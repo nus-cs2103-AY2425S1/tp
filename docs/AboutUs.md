@@ -9,15 +9,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Sandy Kristian Waluyo
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/sandyk0105.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/sandyk0105)]
+[[portfolio](team/sandyk0105.md)]
 
-* Role: Advisor
+* Role: Developer
+* Responsibilities: Code Quality
 
 ### Nigel Teo
 
@@ -48,12 +49,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### Sandy Kristian Waluyo
+### Axel
 
-<img src="images/sandyk0105.png" width="200px">
+<img src="images/shinichi04.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/shinichi04)]
+[[portfolio](team/shinichi04.md)]
 
 * Role: Developer
 * Responsibilities: Data
