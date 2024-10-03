@@ -58,7 +58,7 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        priorityLevel.setText("Priority: " + person.getPriorityLevel().toString());
+        priorityLevel.setText("Priority: " + person.getPriorityLevel().getValue());
 
     }
 }

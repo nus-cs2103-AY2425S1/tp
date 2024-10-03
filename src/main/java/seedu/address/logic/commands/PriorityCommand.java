@@ -15,6 +15,8 @@ public class PriorityCommand extends Command {
             + "the index number used in the displayed person list.\n"
             + "Parameters: id INDEX (must be a positive integer) /level LEVEL (must be 1, 2, or 3)\n"
             + "Example: " + COMMAND_WORD + " /id 1 /level 2";
+    public static final String MESSAGE_ADD_PRIORITY_SUCCESS = "Priority successfully added.";
+    public static final String MESSAGE_INVALID_PRIORITY_LEVEL = "Invalid priority.";
 
     private final int index;
     private final int priorityLevel;
@@ -51,5 +53,17 @@ public class PriorityCommand extends Command {
         } catch (IllegalArgumentException e) {
             throw new CommandException("Invalid priority level. Please enter 1/2/3 as the priority level.");
         }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other == null || getClass() != other.getClass()) {
+            return false;
+        }
+        PriorityCommand that = (PriorityCommand) other;
+        return index == that.index && priorityLevel == that.priorityLevel;
     }
 }

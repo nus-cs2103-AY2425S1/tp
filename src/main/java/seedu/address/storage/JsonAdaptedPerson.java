@@ -109,6 +109,7 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final PriorityLevel modelPriorityLevel;
+
         if (priorityLevel >= 1 && priorityLevel <= 3) {
             modelPriorityLevel = new PriorityLevel(priorityLevel);
         } else {

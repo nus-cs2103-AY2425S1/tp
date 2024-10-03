@@ -40,6 +40,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        priorityLevel = new PriorityLevel(DEFAULT_PRIORITY_LEVEL);
     }
 
     /**
@@ -51,6 +52,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+        priorityLevel = personToCopy.getPriorityLevel();
     }
 
     /**

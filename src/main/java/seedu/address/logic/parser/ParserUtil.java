@@ -134,6 +134,9 @@ public class ParserUtil {
     public static PriorityLevel parsePriorityLevel(String priorityLevel) throws ParseException {
         requireNonNull(priorityLevel);
         String trimmedPriorityLevel = priorityLevel.trim();
+        if (trimmedPriorityLevel.isEmpty()) {
+            return new PriorityLevel(3); // default level if none provided
+        }
         int level;
         try {
             level = Integer.parseInt(trimmedPriorityLevel);
