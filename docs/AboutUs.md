@@ -42,7 +42,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/Haris-Irfan.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/Haris-Irfan)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
