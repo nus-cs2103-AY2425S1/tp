@@ -38,15 +38,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Feature In-Charge, IntelliJ Expert
 
-### Jean Doe
+### Then Jan Kai
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/Jan Kai.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/jan-kai1)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Scheduling + Integration
 
 ### James Doe
 
