@@ -274,71 +274,232 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
+* Logistic coordinator for logistic companies
 * has a need to manage a significant number of contacts
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
-
+**Value proposition**: Enables the company to have an organized way to track all their shipments, plan their deliveries, calculate shipping, etc., as well as an easy and fast way to access information of all their customers and clients
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​ | I want to …​ | So that I can…​ |
+|---|---------|--------------|----------------|
+| * * * | new user | add customer contacts | I can store their information for easy access later. |
+| * * * | user | delete customer contacts | I can get rid of contacts that are no longer customers |
+| * * * | user  | view all customer contacts | I can have an overview of what contacts I have |
+| * | first time user | view a demo shipment and contact data | I can understand how the app will look and function when fully populated. |
+| * | new user | be guided through setting up my company's logistics data | I can start using the app immediately. |
+| * | user ready to start | remove any demo/sample data | I can work with only my own company’s data. |
+| * * * | logistics coordinator | input delivery schedules for each contact | I can plan and track upcoming shipments. |
+| * * * | logistics coordinator | add information about each shipment’s ETA | I can easily inform clients of expected arrival times. |
+| * * | logistics coordinator | assign products to a shipment | I can track what goods are being delivered. |
+| * * | logistics coordinator | calculate and view the estimated cost of a shipment | I can provide accurate quotes to clients. |
+| * * | regular user | filter my delivery list by date | I can focus on immediate shipments. |
+| * | regular user | see a visual timeline of my delivery schedules | I can easily plan ahead. |
+| * * | logistics coordinator | update the shipment status (e.g., in transit, delivered) for each delivery | I can track its progress. |
+| * * | logistics coordinator | add notes to each contact | I can record special instructions or preferences for future deliveries. |
+| * * | user | search for a specific client or contact using a search bar | I can find them quickly. |
+| * | logistics manager | categorize customers by priority or frequency | I can manage key accounts effectively. |
+| * | logistics coordinator | add multiple points of contact for a client | I can communicate with various stakeholders within the same company. |
+| * * | logistics coordinator | deactivate contacts that are no longer active | my list remains organized without deleting old records. |
+| * * | long-time user | archive past shipments that have been delivered | I can focus on current and future deliveries. |
+| * | regular user | generate reports showing all shipments for a particular client | I can easily present the information when needed. |
+| * | logistics coordinator | export customer and shipment data into a spreadsheet | I can share information with clients. |
+| * * | logistic coordinator | schedule repeated deliveries | I can ensure consistency in service. |
+| * | logistics manager | assign priority levels to deliveries | I can ensure critical deliveries are handled first. |
+| * * | logistics manager | record any delays or issues with deliveries | I can review them later and work on improving delivery times. |
+| * * | logistics manager | view the delivery history of individual worker | I can evaluate their performance and workload over time. |
+| * * | logistics manager | edit delivery details | I can make adjustments when plans change or errors are identified. |
+| * | logistics manager | print a hard copy of the daily or weekly delivery schedule | I have a physical reference for planning or sharing with others. |
+| * | logistics manager | import and export delivery data in a standard file format | I can back up data or share it with other systems or stakeholders. |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `LogiLink` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use Case 1: Add Contact**
+
+**Preconditions:** User in default page.
+
+**Postconditions:** The contact is successfully added to the LogiLink with the provided details.
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to add a new contact by providing the necessary details (name, phone number, email, address, and tags).
+2.  LogiLink validates the input details (e.g., ensuring name is not empty, phone number and email are in valid formats, etc.).
+3.  User confirms the addition.
+4.  LogiLink adds the contact and displays a success message.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. Invalid input format provided.
+    * 2a1. LogiLink shows an error message indicating which field has invalid input.
+    * 2a2. Use case resumes at step 1.
 
-  Use case ends.
+      Use case resumes at step 1.
 
-* 3a. The given index is invalid.
+* 2b. Duplicate contact detected.
+    * 2b1. LogiLink warns about duplicate name, phone number, or email.
+    * 2b2. User can modify the input or cancel the action.
 
-    * 3a1. AddressBook shows an error message.
+      Use case resumes at step 1.
+
+**Use Case 2: List All Contacts**
+
+**Preconditions:** User in default page.
+
+**Postconditions:** All contacts are displayed.
+
+**MSS**
+
+1.  User requests to list all contacts.
+2.  LogiLink retrieves and displays all contacts on the GUI.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. No contacts available.
+    * 2a1. LogiLink shows a message stating that no contacts are available.
+
+      Use case ends.
+
+**Use Case 3: Delete Contact**
+
+**Preconditions:** User in default page.
+
+**Postconditions:** The specified contact is deleted.
+
+**MSS**
+
+1.  User requests to list contacts.
+2.  LogiLink displays the list of contacts.
+3.  User requests to delete one or more contacts by ID.
+4.  LogiLink deletes the selected contacts and confirms deletion.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. No contacts available.
+    * 2a1. LogiLink informs the user that there are no contacts to delete.
+
+      Use case ends.
+
+* 3a. Invalid or missing ID.
+    * 3a1. LogiLink shows an error message indicating the ID is invalid or missing.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use Case 4: Inspect Contact**
+
+**Preconditions:** User in default page.
+
+**Postconditions:** The LogiLink displays the contact details, and the user enters inspection mode.
+
+**MSS**
+
+1.  User requests to inspect a contact by providing the contact index.
+2.  LogiLink retrieves the details of the specified contact and enters inspection mode.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Invalid contact index.
+    * 2a1. LogiLink shows an error message indicating an invalid index.
+
+      Use case resumes at step 1.
+
+**Use Case 5: Add Delivery for Contact**
+
+**Preconditions:** User is in inspection mode for a contact and wants to add a delivery.
+
+**Postconditions:** A new delivery is successfully added to the contact.
+
+**MSS**
+
+1.  User requests to add a delivery with specific details (time, date, ETA, address, cost).
+2.  LogiLink validates the delivery details.
+3.  User confirms the addition.
+4.  LogiLink adds the delivery to the contact and displays a success message.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Invalid input format.
+    * 2a1. LogiLink shows an error message indicating which delivery field is invalid.
+
+      Use case resumes at step 1.
+
+**Use Case 6: Delete Delivery for Contact**
+
+**Preconditions:** User is in inspection mode and wants to delete a delivery for a contact.
+
+**Postconditions:** The specified delivery is deleted from the contact.
+
+**MSS**
+
+1.  User requests to delete a delivery by providing the delivery number.
+2.  LogiLink deletes the selected delivery and confirms deletion.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Invalid or missing delivery number.
+    * 2a1. LogiLink shows an error message indicating an invalid or missing delivery number.
+
+      Use case resumes at step 1.
+
+**Use Case 7: View Deliveries for Contact**
+
+**Preconditions:** User is in inspection mode and wants to view the deliveries for a contact.
+
+**Postconditions:** The specified deliveries are displayed.
+
+**MSS**
+
+1.  User requests to view deliveries by providing the delivery number(s).
+2.  LogiLink retrieves and displays the specified deliveries.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Invalid delivery number.
+    * 2a1. LogiLink shows an error message indicating an invalid delivery number.
+
+      Use case resumes at step 1.
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4.  The system should support horizontal and vertical scaling to handle increasing users and data as the business grows, ensuring seamless performance.
+5.  Should have 99.9% uptime with robust disaster recovery mechanisms and failover systems to prevent data loss and maintain system availability.
+6.  Should provide an intuitive, user-friendly interface that supports accessibility.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Inspection Mode**: A feature that enables the user to enter a specific contact and view detailed information. In this mode, the user can also manage deliveries, such as adding or deleting them, for the selected contact.
+* **Default Page**: The main page that the user is presented with upon launching the application. It serves as the starting point for all primary actions, including adding, viewing, and deleting contacts.
+* **ETA (Estimated Time of Arrival)**: The estimated time when a delivery is expected to reach its destination. This is one of the key delivery details used in planning and tracking shipments.
+* **Tag**: A label that can be assigned to a contact for organizational purposes. Tags help categorize and filter contacts, making it easier to manage them.
+* **Contact**: An individual or business entity stored in the LogiLink system. A contact holds personal or business information, such as name, phone number, email, address, and associated deliveries.
+* **Delivery**: A shipment or consignment associated with a specific contact. Each delivery includes details such as the time, date, ETA, delivery address, and cost.
+* **Shipment**: A package or group of packages sent from one location to another. In the context of the LogiLink app, shipments are tracked within deliveries linked to contacts.
+* **Logistics Coordinator**: A user of the LogiLink system responsible for managing shipments, deliveries, and customer information. This role typically oversees the planning and execution of transportation processes.
 
 --------------------------------------------------------------------------------------------------------------------
 
