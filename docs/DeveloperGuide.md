@@ -274,16 +274,27 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Priorities: High (must have) - `* * *`, Medium (Good to have) - `* *`, Low (nice to have) - `*`
 
-| Priority | As a …​  | I want to …​                                     | So that I can…​                                                     |
-|----------|----------|--------------------------------------------------| ------------------------------------------------------------------- |
-| `* * *`  | educator | add students into the database                   | easily refer to their information when needed             |
-| `* * *`  | educator | list all students to view the number of students |I can collate that information                                       |
-| `* * *`  | educator | delete a student                                 |remove entries that I no longer need                                 |
-| `* * *`  | educator | find a person by name                            |I can find the relevant person without scrolling through a long list |
-| `* *`    | educator | clear all information                            |I can start anew for a new academic year              |
-| `* *`    | educator | update details easily when there are changes     |I can have the most updated information                                            |
+| Priority | As a …​  | I want to …​                                     | So that I can…​                                                |
+|----------|----------|--------------------------------------------------|----------------------------------------------------------------|
+| `* * *`  | educator | add students into the database                   | easily refer to their information when needed                  |
+| `* * *`  | educator | list all students to view the number of students | collate that information                                       |
+| `* * *`  | educator | delete a student                                 | remove entries that I no longer need                           |
+| `* * *`  | educator | find a person by name                            | find the relevant person without scrolling through a long list |
+| `* *`    | educator | clear all information                            | start anew for a new academic year                             |
+| `* *`    | educator | update details easily when there are changes     | have the most updated information                              |
+| `* *`    | educator | categorize students into groups                  |                                                                |
+| `* *`    | educator | record students grades for tests and assignments |                                                                |
+| `* *`    | educator | view a summary of each student's grade           |                                                                |
+| `* *`    | educator | tag students with relevant labels                | prioritize based on their status                               |
+| `* *`    | educator | record notes on student behaviour                | address issues                                                 |
+| `* *`    | educator | archive old student data                         | keep my AB clean while being able to retrieve old information  |
+| `*`      | educator | set learning goals                               | track their progress towards these goals                       |
+| `*`      | educator | undo/redo any changes                            | avoid re-entering the data during a mis-entry                  |
+| `*`      | educator | export student data                              | share the information with others                              |
+| `*`      | educator | keep track of meetings with students             | keep track of my commitments                                   |
+| `*`      | educator | see sample data                                  | try out the app's feature without adding my own student data   |
 
 
 
@@ -291,7 +302,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `StoreClass` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case 1: List out all students**
+#### **Use case 1: List out all students**
 
 **MSS**
 
@@ -300,9 +311,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case 2: Delete a student**
+#### **Use case 2: Delete a student**
 
-**MSS**
+**Main Success Scenario**
 
 1.  User requests to list students
 2.  StoreClass shows a list of students
@@ -323,9 +334,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case 3: Add a student**
+#### **Use case 3: Add a student**
 
-**MSS**
+**Main Success Scenario**
 
 1.  User requests to add persons and type in the relevant information
 2.  StoreClass adds the new student
@@ -334,26 +345,183 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The given index is invalid.
+* 1a. The provided information is incorrect.
 
-    * 1a1. AddressBook shows an error message.
+    * 1a1. StoreClass displays the corresponding data error message.
 
       Use case resumes at step 1.
 
+#### **Use case 4: Search for student**
 
+**Main Success Scenario**
 
+1.  User requests to search for student with the relevant search query.
+2.  StoreClass displays the relevant student(s) matching the query. <br>
+    Use case ends.
+
+**Extensions**
+
+* 1a. StoreClass is unable to find any matching results.
+
+    * 1a1. StoreClass displays a message indicating that not students match the search query.
+
+      Use case ends.
+
+#### **Use case 5: Update Student Information**
+
+**Main Success Scenario**
+
+1.  User requests to list students.
+2.  StoreClass shows a list of students.
+3. User selects the specific student from the list to update.
+4. User enters the new information.
+5. StoreClass updates the student's details and display a success message. </br>
+    Use case ends.
+
+**Extensions**
+
+* 4a. StoreClass detects an error in the entered information.
+
+    * 1a1. StoreClass displays a message indicating which fields are invalid.
+
+      Use case ends.
+
+#### **Use case 6: Record Student Grades**
+
+**Main Success Scenario**
+
+1.  User requests to list students.
+2.  StoreClass shows a list of students.
+3. User selects the specific student to record a grade.
+4. User enters the grade information.
+5. StoreClass updates the student's grades and display a success message. </br>
+    Use case ends.
+
+**Extensions**
+
+* 4a. StoreClass detects an error in the entered information.
+
+    * 1a1. StoreClass displays a message indicating which fields are invalid.
+
+      Use case ends.
+
+#### **Use case 7: Categorize Students**
+
+**Main Success Scenario**
+
+1.  User requests to list students.
+2.  StoreClass shows a list of students.
+3. User selects one or more students to be categorized.
+4. StoreClass requests the group to assign the students to.
+5. User selects the group or creates a new one.
+6. StoreClass categorize the student(s) and display a success message. </br>
+    Use case ends.
+
+**Extensions**
+
+* 4a. StoreClass detects that no groups exist.
+
+    * 4a1. StoreClass allows the user to create a new group.
+    * 4a2. StoresClass creates a new group.
+
+      Use case resumes from step 6.
+
+#### **Use case 8: Tag Students**
+
+**Main Success Scenario**
+
+1.  User requests to list students.
+2.  StoreClass shows a list of students.
+3. User selects one or more students to be tagged.
+4. StoreClass requests the tag(s) to assign the students to.
+5. User enters the tag(s)
+6. StoreClass applies the tags to the selected student(s) and display a success message. </br>
+    Use case ends.
+
+**Extensions**
+
+* 4a. StoreClass detects that and invalid tags.
+
+    * 4a1. StoreClass requests a valid tag.
+    * 4a2. User enters a valid tag.
+
+      Use case resumes from step 6.
+
+#### **Use case 9: Archive Student Data**
+
+**Main Success Scenario**
+
+1.  User requests to archive student data.
+2.  StoreClass requests confirmation for archiving.
+3. User confirms.
+4. StoreClass archives the students data and removes them from the current interface.
+5. StoreClass displays a success message. </br>
+    Use case ends.
+
+**Extensions**
+
+* *a. User wishes to view the archived data.
+
+    * *a1. StoreClass lists all available archives.
+    * *a2. User selects the archive.
+    * *a3. StoreClass displays the archives information.
+
+      Use case ends
+
+#### **Use case 10: Export Student Data**
+
+**Main Success Scenario**
+
+1.  User chooses to export student data.
+2.  StoreClass requests confirmation for exporting.
+3. User confirms.
+4. StoreClass exports the students data and displays a success message. </br>
+   Use case ends.
+
+**Extensions**
+
+* *a. StoreClass is unable to export the data.
+
+    * *a1. StoreClass returns an error message.
+
+      Use case ends.
+
+#### **Use case 11: Undo/Redo Actions**
+
+**Main Success Scenario**
+
+1.  User performs an action/command.
+2.  User chooses to undo the action.
+3. StoreClass reverses the action and displays a success message. </br>
+   Use case ends.
+
+**Extensions**
+
+* *a. User chooses to redo the action.
+
+    * *a1. StoreClass restores the previous action and display a success message.
+
+      Use case ends.
+  
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. The product should be an offline product that can run without accessing the internet.
+4.  The product should be an offline product that can run without accessing the internet.
+5. Sensitive student data such as contact details, grades and payment information should be protected to prevent unauthorized access.
+6. The system should be able to manage an increasing number of students and additional data fields.
 
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Archive**: A feature that allows users to store old data for use later without cluttering the current interface.
+* **Export**: Saving the student data in a file format such as `.csv` or `.txt` for external use.
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Student Number**: A unique identifier assigned to each student.
+* **Tag**: A label that can be added to a student for categorization or searching.
+* **Undo/Redo**: The ability to reverse an action/command made in the application.
 
 --------------------------------------------------------------------------------------------------------------------
 
