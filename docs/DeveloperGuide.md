@@ -337,7 +337,8 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* freelance pre-university home tutors
+* has a need to manage a significant number of students, their contacts and relevant information
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
