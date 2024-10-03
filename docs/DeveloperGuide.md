@@ -317,16 +317,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2. Should work without the usage of an external database.
+3. Should work without any connection to a remote server or use of any cloud computing service.
+4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks
+5. The system should be able to handle storage of over 1000 contacts without a noticeable sluggishness in performance for typical usage.
+6. The product is not required to have its own messaging service.
+7. Queries to the system (find, list, paid etc.) should be responded to within 3 seconds.
+8. The product should not use any images / comments / jokes deemed offensive to Financial Advisors.
+9. The system should be usable by a novice with basic command-line knowledge.
+10. Any lists or iterables should be 1-indexed assuming the user does not have programming experience.
+11. The product is catered for use by a single user and interaction between users is not supported.
+12. Data collected should be stored locally, and be human editable.
+13. The product should be packaged in a single `jar` file without the need for other installers.
+14. The GUI should be optimised for standard screen resolutions 1920x1080 and higher, and screen scales 100% and 125%.
+15. The size of the product should not exceed 100mb.
+16. Visuals and text should be a large enough size for clarity.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Financial Advisor**: A professional who provides expertise for clients' decisions around money matters, personal finances, and investments
+* **Client**: A financial advisor's contact
+* **GUI**: Graphical User Interface, a type of user interface through which users interact with electronic devices via visual indicator representations
+* **Payment frequency**: The frequency of which a Financial Advisor receives payments from their clients. Typically, every 3, 6, 9 or 12 months
+* **Policy**: An agreement between the Financial Advisor and their client on the financial advisory services provided
 
 --------------------------------------------------------------------------------------------------------------------
 
