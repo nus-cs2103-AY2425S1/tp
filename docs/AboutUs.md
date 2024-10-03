@@ -36,7 +36,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](http://github.com/marcusjhang)] [[portfolio](team/marcusjhang.md)]
 
-* Role: Developer
+* Role: Software Developer
 * Responsibilities: Data
 
 ### Han Yi
