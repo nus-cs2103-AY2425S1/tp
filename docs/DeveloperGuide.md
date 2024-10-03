@@ -62,6 +62,67 @@ We specifically target Geriatricians by tailoring to their requirements of manag
 *User stories for the MVP:* Stories 4, 6 and 9 are for the MVP
 *User stories for the final version:* Stories 1 - 13 are for the final version.
 
+--------------------------------------------------------------------------------------------------------------------
+
+## Use Case 1: Add a New Patient
+
+**System**: CareLink  
+**Use Case**: UC01 - Add New Patient  
+**Actor**: Geriatrician (Fred)  
+
+### Preconditions:
+- Fred is logged into CareLink.
+- Fred is at the patient details entry screen.
+
+### Guarantees:
+- Patient details are saved only if the input data is valid.
+- Duplicates are not created (NRIC uniqueness is enforced).
+
+### Main Success Scenario (MSS):
+1. Fred selects the option to add a new patient.
+2. CareLink requests patient details (first name, last name, NRIC, phone, address, email).
+3. Fred enters the patient details.
+4. CareLink validates the input data.
+5. CareLink saves the patient details to the system.
+6. CareLink displays a success message and shows the newly added patient in the system.
+
+### Extensions:
+- **3a. Invalid patient data entered**:
+    - CareLink displays an error message indicating which data is invalid.
+    - Fred corrects the input, and the use case resumes from step 3.
+
+
+---
+
+## Use Case 2: View Patient Details
+
+**System**: CareLink  
+**Use Case**: UC02 - View Patient Details  
+**Actor**: Geriatrician (Fred)  
+
+### Preconditions:
+- Fred is logged into CareLink.
+- The patient exists in the system.
+
+### Guarantees:
+- The patient's details are successfully retrieved and displayed.
+- The correct patient's information is displayed without errors.
+
+### Main Success Scenario (MSS):
+1. Fred selects the option to view a patient's details.
+2. CareLink requests the patient’s NRIC.
+3. Fred enters the patient’s NRIC.
+4. CareLink retrieves the patient’s details (e.g., first name, last name, phone number, address, email).
+5. CareLink displays the patient's details to Fred.
+
+### Extensions:
+- **3a. Invalid or nonexistent patient NRIC entered**:
+    - CareLink displays an error message and prompts Fred to re-enter the correct NRIC.
+    - Fred corrects the NRIC, and the use case resumes from step 3.
+
+
+
+
 ## **Acknowledgements**
 
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
