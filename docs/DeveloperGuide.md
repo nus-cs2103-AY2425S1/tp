@@ -274,33 +274,38 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Real estate agent who needs to manage a significant number of clients and properties.
+* prefer desktop apps over other types.
+* can type fast.
+* prefers typing to mouse interactions.
+* is reasonably comfortable using CLI apps.
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: 
+
+ClientGrid is an address book designed for real estate agents to efficiently manage client contacts, including buyers and sellers. It provides a streamlined way to organize client data and monitor properties the agent is in charge of while maintaining core address book functionality.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                      | So that I can…​                                                        |
-|----------|--------------------------------------------|-----------------------------------|------------------------------------------------------------------------|
+
+| Priority | As a …​           | I want to …​                                            | So that I can…​                                                        |
+|----------|-------------------|---------------------------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | real estate agent                                 | add a new client (buyer or seller) to ClientGrid        | keep all their contact information organized in one place
+| `* * *`  | real estate agent | delete a client (buyer or seller) from ClientGrid       | keep all their contact information organized in one place              |
+| `* * *`  | user              | add a new person                                        |                                                                        |
+| `* * *`  | user              | delete a person                                         | remove entries that I no longer need                                   |
+| `* * *`  | user              | find a person by name                                   | locate details of persons without having to go through the entire list |
+| `* *`    | real estate agent | indicate that a buyer wants to buy property X at Y price | keep track of the clients that are involved in the transaction         |
+| `* *`    | real estate agent | indicate that a seller wants to sell property X at Y price | keep track of the clients that are involved in the transaction                                                |
 | `* * *`  | real estate agent                          | add new properties to client grid | keep track of my client's property details                             |
-| `* * *`  | user                                       | add a new person                  |                                                                        |
-| `* * *`  | user                                       | delete a person                   | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name             | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details      | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name              | locate a person easily                                                 |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `ClientGrid` and the **Actor** is the `real estate agent`, unless specified otherwise)
 
 **Use case: Add a property**
 
@@ -331,19 +336,56 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**Use case: UC1 - Add Client (Buyer or Seller)**
+
+MSS:
+1. Real estate agent requests to add a buyer/ seller to ClientGrid and passes in the buyer/ seller's name, phone number and email.
+2. ClientGrid will add the buyer/ seller with the name, phone number, and email specified by the real estate agent.
+
+Extensions:
+
+&nbsp;&nbsp;&nbsp;&nbsp;2a. ClientGrid detects an error in the name/ phone number/ email format provided by the real estate agent.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2a1. ClientGrid requests for the correct data.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2a2. Real estate agent enters new data.
+
+Steps 2a1-2a2 are repeated until the data entered are correct.
+
+Use case ends.
+
+**Use case: UC2 - Delete Client**
+
+MSS:
+1. Real estate agent requests to delete a buyer or seller based on their phone number.
+2. ClientGrid will delete the respective client based on the phone number.
+
+Extensions:
+
+&nbsp;&nbsp;&nbsp;&nbsp;2a. ClientGrid detects an error in the phone number format provided by the real estate agent.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2a1. ClientGrid requests for the correct data 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2a2. Real estate agent enters new data
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Steps 2a1-2a2 are repeated until the data entered are correct. 
+
+Use case ends.
+
 ### Non-Functional Requirements
 
-1. Should be able to handle case of corrupted file
-2. Should work on any mainstream OS as long as it has Java 17 or above installed. 
-3. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage. 
-4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2.  Should be able to hold up to 1000 clients and 500 properties without a noticeable sluggishness in performance for typical usage.
+3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. The client and property databases should be updated after every command successfully executed by ClientGrid.
+5. Should be able to handle case of corrupted file
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Clients**: Buyers or Sellers of properties the real estate agent is managing
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Corrupted file**: Missing file and invalid data
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
