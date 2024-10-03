@@ -352,7 +352,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - The system must provide informative error messages for incorrect input or failures (e.g., invalid student ID).
     - The system should not crash unexpectedly, and all errors must be logged for debugging.
 8. **Security**
-    - All sensitive data, including student contact information and grades, should be protected using some form of user authentication.
+    - A login page should be implemented in order to prevent unauthorised users from signing in to other accounts.
     - Student and parent data should be encrypted to prevent unauthorized access, while still being editable by advanced users.
 9. **Testability**
     - The system should be compatible with automated testing frameworks, and all major features should be covered by unit and integration tests.
