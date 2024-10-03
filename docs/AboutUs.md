@@ -17,7 +17,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/johndoe)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+- Role: Project Advisor
 
 ### Jane Doe
 
@@ -26,17 +26,18 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/johndoe)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+- Role: Team Lead
+- Responsibilities: UI
 
-### Johnny Doe
+### Reiden Ong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/reidenong.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/reidenong)]
+[[portfolio]()]
 
-* Role: Developer
-* Responsibilities: Data
+- Role: Developer
+- Responsibilities: Data
 
 ### Lim Juntong
 
@@ -44,16 +45,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](http://github.com/lim-jt)]
 [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+- Role: Developer
+- Responsibilities: Dev Ops + Threading
 
 ### Zhang Yuan
 
 <img src="images/volleyballkickedme.png" width="200px">
 
 [[github](http://github.com/volleyballkickedme)]
-
 [[portfolio](team/johndoe.md)]
 * Name: Zhang Yuan
 * Role: Developer
