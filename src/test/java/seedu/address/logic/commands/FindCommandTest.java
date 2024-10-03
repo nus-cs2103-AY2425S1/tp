@@ -18,6 +18,8 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.ClassId;
+import seedu.address.model.person.ClassIdContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
@@ -33,19 +35,33 @@ public class FindCommandTest {
                 new NameContainsKeywordsPredicate(Collections.singletonList("first"));
         NameContainsKeywordsPredicate secondPredicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("second"));
+        ClassIdContainsKeywordsPredicate thirdPredicate = new ClassIdContainsKeywordsPredicate(
+                Collections.singletonList("third"));
+        ClassIdContainsKeywordsPredicate fourthPredicate = new ClassIdContainsKeywordsPredicate(Collections.singletonList("fourth"));
+
 
         FindCommand findFirstCommand = new FindCommand(firstPredicate);
         FindCommand findSecondCommand = new FindCommand(secondPredicate);
+        FindCommand findThirdCommand = new FindCommand(thirdPredicate);
+        FindCommand findFourthCommand = new FindCommand(fourthPredicate);
+
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
+        assertTrue(findThirdCommand.equals(findThirdCommand));
 
         // same values -> returns true
         FindCommand findFirstCommandCopy = new FindCommand(firstPredicate);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
+        FindCommand findThirdCommandCopy = new FindCommand(thirdPredicate);
+        assertTrue(findThirdCommand.equals(findThirdCommandCopy));
+
+
         // different types -> returns false
         assertFalse(findFirstCommand.equals(1));
+        assertFalse(findThirdCommand.equals(findFirstCommand));
+        assertFalse(findThirdCommand.equals(findFourthCommand));
 
         // null -> returns false
         assertFalse(findFirstCommand.equals(null));
@@ -80,6 +96,11 @@ public class FindCommandTest {
         FindCommand findCommand = new FindCommand(predicate);
         String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, findCommand.toString());
+
+        ClassIdContainsKeywordsPredicate classIdPredicate = new ClassIdContainsKeywordsPredicate(Arrays.asList("keyword"));
+        FindCommand findCommandClassId = new FindCommand(classIdPredicate);
+        String expectedClassId = FindCommand.class.getCanonicalName() + "{predicate=" + classIdPredicate + "}";
+        assertEquals(expectedClassId, findCommandClassId.toString());
     }
 
     /**
