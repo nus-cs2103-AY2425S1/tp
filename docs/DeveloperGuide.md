@@ -306,26 +306,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to create a new event by providing the event name and date in the correct format.
-2. System validates the input for the event name and date.
-3. System creates the event.
-4. System displays a confirmation message.
+1. User requests to create a new event by providing the event name and date.
+2. System creates the event.
+3. System displays a confirmation message.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The event name is invalid or empty.
+* 1a. The event name is invalid or empty.
 
-    * 2a1. System shows an error message.
+    * 1a1. System shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
 
-* 2b. The date format is invalid.
+* 1b. The date format is invalid.
 
-    * 2b1. System shows an error message.
+    * 1b1. System shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
 
 *{More to be added}*
 
