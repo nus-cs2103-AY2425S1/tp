@@ -386,18 +386,47 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
+**Use case: Find a person**
+
+**MSS**
+
+1.  User requests to find persons with a case-insensitive keyword
+2.  AddressBook shows a list of all persons that includes the keyword in its `contact name`
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given keyword contains illegal characters
+
+    * 1a1. AddressBook shows an error message.
+
+      Use case resumes at step 1.
+
+* 2a. The search result or list is empty.
+
+  Use case ends.
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4. Should be lightweight and use low resources (i.e. minimum 1GB RAM, CPU 2.0 GHz) for low-end systems.
+5. The system should be usable by a novice who has never used a CLI.
+6. Code should be well-commented and follow clean coding standards to facilitate easy understanding and future scalability.
+7. Should be compliant with _data retention policies_, highlighting and aiding in removing information that violates policies.
+8. Should be able to handle invalid inputs and errors gracefully without crashing, and providing actionable error reports.
+9. Should be able to log and track user actions, for monitoring.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **CLI**: Command-line Interface, where user input is primarily done through the terminal prompt
+* **Data Retention Policies**: Includes policies set by user's company, PDPA, and privacy laws
+* **Invalid Input**: Non-alphanumeric characters, and non-english characters
+* **Logs**: A text file output in the application directory holding information about the app usage
 
 --------------------------------------------------------------------------------------------------------------------
 
