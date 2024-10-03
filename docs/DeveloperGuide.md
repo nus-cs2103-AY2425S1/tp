@@ -280,7 +280,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions.
 * is reasonably comfortable using CLI apps.
 
-**Value proposition**: 
+**Value proposition**:
 
 ClientGrid is an address book designed for real estate agents to efficiently manage client contacts, including buyers and sellers. It provides a streamlined way to organize client data and monitor properties the agent is in charge of while maintaining core address book functionality.
 

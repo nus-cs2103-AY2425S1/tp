@@ -1,6 +1,6 @@
 ---
   layout: default.md
-  title: "About Us"
+    title: "About Us"
 ---
 
 # About Us
@@ -20,6 +20,12 @@ You can reach us at our emails:
 - `tan_shixin@u.nus.edu`
 
 ## Project team
+### Tan Shi Xin
+
+<img src="images/apollo-tan.png" width="200px">
+
+[[github](http://github.com/apollo-tan)]
+* Role: Project Advisor. Handle the list feature and its documentation
 
 ### Anthony Hermanto
 
