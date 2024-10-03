@@ -1,9 +1,10 @@
 ---
 layout: page
-title: About Us
+title: About Us (ConcertPhonebook)
 ---
 
-We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
+We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg). 
+We are working on an address book for Concert Managers to manage their contacts.
 
 ## Project team
 
@@ -15,6 +16,7 @@ We are a team based in the [School of Computing, National University of Singapor
 [[portfolio](team/karthickkc.md)]
 
 - Role: Project Advisor
+- Responsibilities: Checks on the different PR Requests and helps in reviewing
 
 ### Ng Hong Jing
 
@@ -24,7 +26,7 @@ We are a team based in the [School of Computing, National University of Singapor
 [[portfolio](team/hongjing.md)]
 
 - Role: Team Lead
-- Responsibilities: UI
+- Responsibilities: Work on UI aspect
 
 ### Wesley Wong
 
@@ -33,7 +35,7 @@ We are a team based in the [School of Computing, National University of Singapor
 [[github](http://github.com/wes-w-z-h)] [[portfolio](team/wesley.md)]
 
 - Role: Developer
-- Responsibilities: Add commands
+- Responsibilities: Add new commands to match features 
 
 ### Karthikeyan
 
@@ -43,7 +45,7 @@ We are a team based in the [School of Computing, National University of Singapor
 [[portfolio](team/karthikeyan.md)]
 
 - Role: Developer
-- Responsibilities: Dev Ops + Threading
+- Responsibilities: Dev Ops, Enhance existing commands to specialise for concert managers  
 
 ### Zachery Ng
 
@@ -53,5 +55,6 @@ We are a team based in the [School of Computing, National University of Singapor
 [[portfolio](team/zachery.md)]
 
 - Role: Developer
-- Responsibilities: Everything
+- Responsibilities: Assign work (creating different issues) to different team members
+- Responsibilities: Work on features listed for ConcertPhoneBook
 
