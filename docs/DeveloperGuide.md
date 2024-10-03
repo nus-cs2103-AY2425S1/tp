@@ -478,13 +478,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  The system should provide real-time validation (e.g., when typing the phone number or email) to reduce error rates and ensure correct input formats.
 4.  Novice users should be able to complete a typical workflow in under 5 minutes, without external help.
 5.  The system codebase should allow for the introduction of new features with less than 10% of existing code modification.
-
-*{More to be added}*
+6.  The system should validate all inputs (e.g., phone number, email, insurance details) according to predefined formats (e.g., email must follow a standard email format) to maintain data consistency and integrity.
+7.  AgentConnect should detect and handle duplicate entries (based on client name + address) by prompting users to resolve conflicts before adding a new entry.
+8.  If the system encounters an unexpected error, it should display a user-friendly error message without exposing technical details and allow the user to retry the action.
+9.  The system should respond to common user actions (e.g., adding or deleting a person, sorting clients) within 1 second, ensuring a smooth and responsive experience.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Appointment**: A scheduled meeting or event between the user and a client, managed within AgentConnect, with details like date and purpose.
+* **Policy**: An insurance or financial agreement purchased by a client, which can be categorized based on its type (e.g., Life Insurance, Health Insurance, Home Insurance).
+* **Client**: A person whose details (e.g., contact information, insurance policies, appointments) are stored and managed within AgentConnect.
+* **Duplicate Entry**: When a person with identical details (e.g., same name and address) already exists in the system, the system will flag this as a potential duplicate to avoid redundancy.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
