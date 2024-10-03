@@ -11,15 +11,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Teng Wei Loon
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/bunnyhoppp.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/bunnyhoppp)]
+[[portfolio](team/bunnyhoppp.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: Testing
 
 ### Tan ZiYang Henry
 
@@ -31,31 +31,30 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: UI
 
-### Johnny Doe
+### Murali Shruthi
 
-<img src="images/johndoe.png" width="200px">
+![shruthiiii03.png](images%2Fshruthiiii03.png)
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+https://github.com/shruthiiii03
+[[portfolio](team/shruthiiii03.md)]
+
+* Role: Developer
+* Responsibilities: UI
+
+### Goh Qing Khang
+
+<img src="images/gohqingkhang.png" width="200px">
+
+[[github](http://github.com/gohqingkhang)] [[portfolio](team/gohqingkhang.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Jason Chuah
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jason-chuah.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/jason-chuah)]
+[[portfolio](team/jason-chuah.md)]
 
 * Role: Developer
-* Responsibilities: UI
