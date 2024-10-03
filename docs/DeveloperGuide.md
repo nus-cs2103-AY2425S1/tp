@@ -306,82 +306,95 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Cher` and the **Actor** is the `User`, unless specified otherwise)
 
-**Use case: Add a contact**
+#### Use case: UC1 - Add contact
 
 **MSS**
 
-1. User requests to add a contact using the command format: add n/[name] a/[address] c/[contact]
-2. Addressbook checks if command is in the valid format 
-3. Addressbook adds the contact to the existing list
-4. Addressbook displays a success message to the user: [Contact name] successfully added to list.
+1. User enters add contact command with the contact details.
+2. Cher add contact to memory.
+3. Cher [<u>Save to disk</u>](#use-case-uc4---save-to-disk).
+4. Cher show success message.
 
    Use case ends.
    
 **Extensions**
 
-* 3a. Addressbook displays an error message: Invalid command foramt. Please use add n/[name] a/[address] c/[contact]
-
+* 1a. Cher detects error in user input.
+  - 1a1. Cher raises error.
+  - 1a2. Cher shows correct input format.
+  
   Use case ends.
   
-* 4a. Addressbook displays an error message: Invalid Name
+* 1b. Cher detects duplicate contacts.
+  - 1b1. Cher raises error.
   
   Use case ends.
    
-**Use case: Delete a contact**
+#### Use case: UC2 - Delete a contact
 
 **MSS**
-
-1.  User requests to delete a contact using the command format: delete [full name]
-2.  Addressbook checks if command is in the valid format
-3.  Addressbook checks if the entered name matches any contact(s) (case-insensitive match)
-4.  Addresbook shows the full entry of the relevant contact
-5.  Addressbook prompts the user to review and confirm deletion: Are you sure you want to delete [full name]’s contact? (y/n)
-6.  User confirms deletion by entering 'y'
-7.  Addressbook deletes the contact
-8.  Addressbook displays a success message: the contact [full name] was successfully deleted
+1. User enters delete contact command with the contact's full name.
+2. Cher shows list of contacts with name that matches user input.
+3. Cher request the index of the contact the user wants to delete.
+4. User enters the index.
+5. Cher prompts for delete confirmation.
+6. User confirms deletion.
+7. Cher deletes the contact from memory.
+8. Cher [<u>Save to disk</u>](#use-case-uc4---save-to-disk).
+9. Cher shows a success message.
 
     Use case ends.
 
 **Extensions**
 
-* 3a. Addressbook displays an error message: Invalid command format. Please use delete [full name]. Do not add extra spaces in the middle of the name
+* 1a. Cher detects error in user input.
+  - 1a1. Cher shows correct input format.
 
   Use case ends.
+* 3b. User no longer wants to delete a contact.
+    - 3b1. User gives empty input.
+  
+  Use Case ends.
+* 4a. Cher detects error in user input.
+    - 4a1. Cher shows error message.
 
-* 4a. Addressbook shows all matching entries 
+    Use case ends.
 
-    * 4a1. Addressbook prompts the user to select the right contact to delete: Please input the index num of the contact you want to delete
-    * 4a2. User chooses the right contact to delete by inputting the relevant list number
-
-      Use case resumes at step 5.
-
-* 4a. Addressbook displays an error message: Contact [full name] does not exist in the address book
-
-**Use case: View contacts**
+#### Use case: UC3 - View contacts
 
 **MSS**
 
-1.  User requests to view all contacts use the command: view
-2.  Addressbook checks if command is in the valid format
-3.  Addressbook retrieves all contacts
-4.  Addressbook displays all contacts to user as a list
-5.  Each contact's full name, contact number and address is displayed in the list
+1. User enters view contacts command.
+2. Cher displays all contacts in memory to user.
    
     Use case ends.
 
 **Extensions**
 
-* 3a. Addressbook displays an empty list
+* 1a. Cher detects error in user input.
+    - 1a1. Cher shows correct input format.
 
   Use case ends.
 
-* 3b. Addressbook displays an error message: Invalid command input. Please use 'view' to see the contact list
+#### Use case: UC4 - Save to disk
 
-  Use case ends.
+**MSS**
 
-*{More to be added}*
+1. Cher opens a local file.
+2. Cher saves contacts in memory into local file.
+
+    Use case ends.
+
+**Use case: UC5 - Sync disk and memory**
+
+**MSS**
+
+1. Cher reads from local file.
+2. Cher store contact data to memory.
+
+    Use case ends.
 
 ### Non-Functional Requirements
 
