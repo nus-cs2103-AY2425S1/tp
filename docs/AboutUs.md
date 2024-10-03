@@ -40,7 +40,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Then Jan Kai
 
-<img src="images/Jan Kai.png.jpg" width="200px">
+<img src="images/Jan Kai.png" width="200px">
 
 [[github](http://github.com/jan-kai1)]
 [[portfolio](team/johndoe.md)]
