@@ -1,6 +1,7 @@
 ---
-  layout: default.md
-    title: "About Us"
+layout: default.md
+title: "About Us"
+
 ---
 
 # About Us
@@ -15,7 +16,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/juliantayyc.png" width="200px">
 
-
 [[github](https://github.com/juliantayyc)]cd 
 [[portfolio](team/juliantayyc.md)]
 
@@ -26,7 +26,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/johndoe.png" width="200px">
 
 [[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/jyl27)]
 
 * Role: Team Lead
 * Responsibilities: UI
@@ -36,6 +36,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/btbrandon.png" width="200px">
 
 [[github](http://github.com/btbrandon)] [[portfolio](team/btbrandon.md)]
+
 
 * Role: Developer
 * Responsibilities: Deliverables and Deadlines
@@ -50,12 +51,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Scheduling and Tracking
 * Responsibilities: Assigning and managing tasks
 
-### James Doe
+### Jun Yu
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jyl27.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/jyl27)]
+[[portfolio](team/jyl27.md)]
 
 * Role: Developer
 * Responsibilities: UI
