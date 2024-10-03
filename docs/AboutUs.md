@@ -15,7 +15,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/mrnobody0505)]
 
 * Role: Project Advisor
 
@@ -48,12 +48,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Testing
 * Responsibilities: Ensures the testing of the project is done properly and on time.
 
-### James Doe
+### Gia Hien
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/mrnobody0505.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/mrnobody0505)]
+[[portfolio](team/mrnobody0505)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: In charge of backend storage
+* Responsibilities: Ensure that the data is stored and
+* retrieved correctly.
