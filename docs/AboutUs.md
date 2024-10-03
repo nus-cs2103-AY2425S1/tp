@@ -9,7 +9,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### Qiao Yi
+### Lim Qiao Yi
 
 <img src="images/meatyturtle.png" width="200px">
 
@@ -24,7 +24,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/shantaa.png" width="200px">
 
 [[github](http://github.com/shantaa)]
-[[portfolio](team/johndoe.md)]
+[portfolio]
 
 * Role: Documentation
 * Responsibilities: Responsible for the quality of various project documents.
@@ -34,7 +34,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/justin-aw46.png" width="200px">
 
 [[github](http://github.com/Justin-Aw46)]
-[[portfolio](team/johndoe.md)]
+[portfolio]
 
 * Role: Developer
 * Responsibilities: Testing
@@ -44,7 +44,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/alphapyke.png" width="200px">
 
 [[github](http://github.com/AlphaPyke)]
-[[portfolio](team/johndoe.md)]
+[portfolio]
 
 * Role: Code Quality
 * Responsibilities: Looks after code quality, ensures adherence to coding standards and git standards.
@@ -54,7 +54,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/fymbc.png" width="200px">
 
 [[github](http://github.com/fymbc)]
-[[portfolio](team/johndoe.md)]
+[portfolio]
 
 * Role: Team Lead
 * Responsibilities: Scheduling, Tracking, Deliverables, Deadlines
