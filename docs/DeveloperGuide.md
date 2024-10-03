@@ -490,6 +490,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  The user interface should be intuitive enough for users who are not IT-savvy.
+5.  The product is offered as a free _offline_ service.
+6.  The response to any action should become visible within 5 seconds.
+7.  The source code should be open source.
+8.  Major bug fixes should be accompanied with a new release.
+9.  The app should not have any offensive UI elements.
+10. Features should complement each other soundly.
 
 _{More to be added}_
 
