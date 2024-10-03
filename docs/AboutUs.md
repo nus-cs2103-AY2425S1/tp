@@ -26,6 +26,20 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/suhayl13)]
 [[portfolio](team/johndoe.md)]
 
+### Subramanian Pon Harish
+
+<img src="images/ponharish.png" width="200px">
+
+[[github](http://github.com/ponharish)]
+[[portfolio](team/ponharish.md)]
+
+### Lavanya Garg
+
+<img src="images/lavanyagarg112.png" width="200px">
+
+[[github](http://github.com/lavanyagarg112)]
+[[portfolio](team/lavanyagarg112.md)]
+
 * Role: Testing
 * Responsibilities: Ensures the testing of the project is done properly and on time.
 
