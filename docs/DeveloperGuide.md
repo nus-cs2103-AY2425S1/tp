@@ -266,13 +266,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-- has a need to manage a significant number of contacts
+- concert organisers who manages many different groups of contacts
+- for different concerts
 - prefer desktop apps over other types
 - can type fast
 - prefers typing to mouse interactions
 - is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: ConcertPhonebook allows concert organisers to add, delete and quickly sift through many contacts, from whom to obtain required resources or fulfill their professional obligations. Contacts will include roles, such as band, audience and staff. It provides an efficient CLI optimised for fast typists, complemented by a GUI for convenience.
 
 ### User stories
 
