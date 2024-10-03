@@ -407,10 +407,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  The system should respond to user actions within 1 second under normal load.
+1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. The system should respond to user actions within 1 second under normal load.
+5. Will not have a server or cloud storage system. All data will be stored in local storage.
+6. The system should handle errors gracefully, providing meaningful messages to users without crashing.
+7. The system should be able to work offline, in the absence of internet connection.
 
 *{More to be added}*
 
@@ -418,7 +421,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-* **patient**: A person that has been designated to be under the care of the user(i.e. a doctor or nurse).
+* **Patient**: A person that has been designated to be under the care of the user(i.e. a doctor or nurse).
+* **Local Storage**: A text file, with read and write properties, located relative to the application file.
 
 --------------------------------------------------------------------------------------------------------------------
 
