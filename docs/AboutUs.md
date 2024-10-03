@@ -11,6 +11,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Travis sim
+
+<img src="images/travisim.png" width="200px">
+
+[[homepage]([http://www.comp.nus.edu.sg/~damithch](https://github.com/travisim))]
+[[github](https://github.com/travisim)]
+[[portfolio](https://github.com/travisim)]
+
 ### Nicholas Chong Yao Xuan
 
 <img src="images/nicholascyx.png" width="200px">
@@ -28,6 +36,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](https://github.com/airiinnn)]
 [[portfolio](team/johndoe.md)]
+
 
 * Role: Developer
 * Responsibilities: Integration, Git expert
