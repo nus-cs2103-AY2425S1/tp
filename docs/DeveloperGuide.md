@@ -317,9 +317,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. The system should work on any mainstream OS with Java 17 or above.
+2. The system should be able to handle up to 1000 volunteers, events, and donors without noticeable performance degradation.
+3. A user should be able to perform common tasks (add, delete, view) within 5 seconds for typical usage.
+4. The system should have a simple and intuitive command-line interface that minimizes the learning curve for new users.
+5. System response time for any action should be less than 1 second for all operations.
+6. The system should be able to support concurrent users without data corruption or errors.
+7. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 *{More to be added}*
 
