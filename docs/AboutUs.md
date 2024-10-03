@@ -40,7 +40,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Haris Irfan
 
-<img src="images/haris.png" width="200px">
+<img src="images/Haris-Irfan.png" width="200px">
 
 [[github](http://github.com/Haris-Irfan)]
 [[portfolio](team/johndoe.md)]
