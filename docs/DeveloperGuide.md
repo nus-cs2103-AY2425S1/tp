@@ -306,7 +306,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 > 
 > Use Cases beginning with 'UCSH' cover non-core AddressBook functionality.
 
-**Use case: UC01 - List all contacts**
+**Use case: UC01 List all contacts**
 
 **MSS**
 
@@ -315,7 +315,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 
-**Use case: UC02 - Add a contact**
+**Use case: UC02 Add a contact**
 
 **MSS**
 
@@ -364,7 +364,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 
-**Use case: UC03 - Add Phone Number to Contact**
+**Use case: UC03 Add Phone Number to Contact**
 
 **Guarantees:**
 * No duplicate phone numbers will be stored in two different contacts.
@@ -405,7 +405,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 
-**Use case: UC04 - Add Address to Contact**
+**Use case: UC04 Add Address to Contact**
 
 **MSS**
 
@@ -436,7 +436,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 
-**Use case: UC05 - Add Email to Contact**
+**Use case: UC05 Add Email to Contact**
 
 **MSS**
 
@@ -466,7 +466,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
         Use case resumes at step 1.  
   
 
-  **Use case: UC06 Search for contacts by Name**
+**Use case: UC06 Search for contacts by Name**
 
 **MSS**
 
