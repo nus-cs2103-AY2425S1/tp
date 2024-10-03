@@ -27,28 +27,28 @@ public class AddVendorCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
-            + "[" + PREFIX_RSVP + "RSVP_STATUS]"
+            + "[" + PREFIX_COMPANY + "COMPANY]"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_RSVP + "accepted "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_ADDRESS + "311, Clementi Mall, #02-25 "
+            + PREFIX_COMPANY + "John's Florist "
+            + PREFIX_TAG + "florist "
+            + PREFIX_TAG + "responsible";
 
-    public static final String MESSAGE_SUCCESS = "New guest added: %1$s";
-    public static final String MESSAGE_DUPLICATE_GUEST = "This guest already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New vendor added: %1$s";
+    public static final String MESSAGE_DUPLICATE_VENDOR = "This vendor already exists in the address book";
 
-    private final Guest toAdd;
+    private final Vendor toAdd;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public AddGuestCommand(Guest guest) {
-        requireNonNull(guest);
-        toAdd = guest;
+    public AddVendorCommand(Vendor vendor) {
+        requireNonNull(vendor);
+        toAdd = vendor;
     }
 
     @Override
@@ -56,7 +56,7 @@ public class AddVendorCommand extends Command {
         requireNonNull(model);
 
         if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_GUEST);
+            throw new CommandException(MESSAGE_DUPLICATE_VENDOR);
         }
 
         model.addPerson(toAdd);
@@ -70,11 +70,11 @@ public class AddVendorCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddGuestCommand)) {
+        if (!(other instanceof AddVendorCommand)) {
             return false;
         }
 
-        AddGuestCommand otherAddCommand = (AddGuestCommand) other;
+        AddVendorCommand otherAddCommand = (AddVendorCommand) other;
         return toAdd.equals(otherAddCommand.toAdd);
     }
 
