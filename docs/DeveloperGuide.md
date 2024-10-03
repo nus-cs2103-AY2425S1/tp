@@ -288,21 +288,46 @@ _{Explain here how the data archiving feature will be implemented}_
 * have a need to efficiently access information regarding students, parents/guardians, teachers and vendors for communication during various situations (e.g. parent-teacher meetings, emergencies, administrative tasks)
 * have a need to edit data regarding students, parents/guardians, teachers and vendors in case of updates in contact information
 
+
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                     | I want to …​                    | So that I can…​                                                         |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | novice user                                | view contact information       | view the contact information of my student, Peter                      |
-| `* * *`  | novice user                                | add new contact information (phone-number, email) | keep the contact information in one place           |
-| `* * *`  | novice user                                | delete existing contact if I no longer need to have their contact| store relevant contacts only         |
-| `* *`    | new user                                   | view the help  guide easily    | learn how to use the app                                               |
-| `* *`    | intermediate user                          | filter the user by lesson day and time | find all students in a class at once                           |
-| `* *`    | intermediate user                          | sort students by last name     | view the contacts as a sorted list                                     |
-| `*`      | conservative user                          | set up an access pasword       | safeguard the information                                              |
+Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (Won't-Have))
 
-*{More to be added}*
+
+| Priority      | As a/an           | I want to …                                                      | So that I can…                                                     |
+|---------------|-------------------|------------------------------------------------------------------|--------------------------------------------------------------------|
+| **Must-Have** | Novice user       | add new contact information (phone-number, email)                | keep the contact information in one place                          |
+| **Must-Have** | Novice user       | view contact information                                         | view the contact information of my student, Peter                  |
+| **Must-Have** | Novice user       | delete existing contact                                          | ensure all contacts stored are relevant                            |
+| **Must-Have** | Any user          | have my data automatically saved                                 | access my information seamlessly the next time I open the software |
+| Nice-to-Have  | New user          | view the help guide easily                                       | learn how to use the app                                           |
+| Nice-to-Have  | Novice user       | edit the existing contact of Peter                               | correct the contact typo                                           |
+| Nice-to-Have  | Any user          | filter the students by lesson day and time                       | find all students in a class at once                               |
+| Nice-to-Have  | Any user          | sort students by last name                                       | have the contacts sorted                                           |
+| Nice-to-Have  | Any user          | group students by class timings                                  | send class cancellations out quicker                               |
+| Nice-to-Have  | Any user          | find Peter by his last name                                      | inform Peter of homework-related matters                           |
+| Nice-to-Have  | Any user          | filter the students by subjects                                  | view the students taking the subject                               |
+| Nice-to-Have  | Any user          | edit timing of lessons of students                               | allow students to change their lesson timing to fit their schedule |
+| Nice-to-Have  | Any user          | find Peter's parents' contact info by Peter's name               | retrieve parents' contact information quicker                      |
+| Nice-to-Have  | Elderly user      | zoom in on the smaller texts                                     | see the contact information easily                                 |
+| Nice-to-Have  | Intermediate user | tag certain contacts                                             | know the contacts' roles (e.g., admin)                             |
+| Nice-to-Have  | Any user          | find the admin user by the role                                  | discuss matters with him/her                                       |
+| Nice-to-Have  | Any user          | group some students                                              | contact students having classes at the same time slot easily       |
+| Nice-to-Have  | Any user          | find exact student based on NRIC                                 | find the correct person with many similar names                    |
+| Nice-to-Have  | Intermediate user | retrieve students' profile information (pic, name, school, etc.) | verify/track them for security purposes                            |
+| Nice-to-Have  | Intermediate user | retrieve staffs' profile information (pic, name, etc.)           | verify/track them for security purposes                            |
+| Nice-to-Have  | Admin user        | import data from my previous system                              | use this new app quickly without loss of data                      |
+| Nice-to-Have  | Admin user        | export data from the app                                         | switch over to another app or view in Excel                        |
+| Nice-to-Have  | Teacher           | create a note of student performance                             | discuss it with parents later                                      |
+| Could-Have    | Conservative user | set up an access password                                        | safeguard the information                                          |
+| Could-Have    | Advance user      | provide feedback to the developer                                | add desired features                                               |
+| Could-Have    | Intermediate user | use shortcuts (del instead of delete)                            | navigate the app quicker                                           |
+| Could-Have    | Teacher           | take note of a temporary class change                            | prepare accordingly                                                |
+| Could-Have    | Any user          | find a student's parents                                         | discuss the student's performance with his/her parents             |
+| Could-Have    | Admin user        | contact the vendors working for the tuition center               | settle admin matters                                               |
+| Won't-Have    | new user          | create notes for the features                                    | understand and remind myself what each feature does                |
+| Won't-Have    | Teacher           | swap class lesson with my colleagues                             | ensure someone can cover in my absence                             |
 
 ### Use cases
 
