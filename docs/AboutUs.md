@@ -11,6 +11,55 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### John Doe
+
+<img src="images/johndoe.png" width="200px">
+
+[[homepage](http://www.comp.nus.edu.sg/~damithch)]
+[[github](https://github.com/johndoe)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Project Advisor
+
+### Jane Doe
+
+<img src="images/johndoe.png" width="200px">
+
+[[github](http://github.com/johndoe)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Team Lead
+* Responsibilities: UI
+
+### Johnny Doe
+
+<img src="images/johndoe.png" width="200px">
+
+[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities: Data
+
+### Ivan Jerrick Koh
+
+<img src="images/kohkakohla.png" width="200px">
+
+[[github](http://github.com/kohkakohla)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities: Integration
+
+### James Doe
+
+<img src="images/johndoe.png" width="200px">
+
+[[github](http://github.com/johndoe)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities: UI
+
 ### Mingyang
 
 <img src="images/mingyang143.png" width="200px">
