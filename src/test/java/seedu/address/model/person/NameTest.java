@@ -6,7 +6,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-public class AssignmentNameTest {
+public class NameTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
@@ -40,10 +40,10 @@ public class AssignmentNameTest {
 
     @Test
     public void equals() {
-        Name name = new Name("Valid AssignmentName");
+        Name name = new Name("Valid Name");
 
         // same values -> returns true
-        assertTrue(name.equals(new Name("Valid AssignmentName")));
+        assertTrue(name.equals(new Name("Valid Name")));
 
         // same object -> returns true
         assertTrue(name.equals(name));
@@ -55,6 +55,6 @@ public class AssignmentNameTest {
         assertFalse(name.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(name.equals(new Name("Other Valid AssignmentName")));
+        assertFalse(name.equals(new Name("Other Valid Name")));
     }
 }

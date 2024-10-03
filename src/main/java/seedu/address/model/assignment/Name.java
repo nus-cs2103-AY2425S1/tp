@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents an Assignment's name in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
-public class AssignmentName {
+public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters and spaces, and it should not be blank";
@@ -21,14 +21,14 @@ public class AssignmentName {
     public final String fullName;
 
     /**
-     * Constructs a {@code AssignmentName}.
+     * Constructs a {@code Name}.
      *
-     * @param assignmentName A valid assignmentName.
+     * @param name A valid name.
      */
-    public AssignmentName(String assignmentName) {
-        requireNonNull(assignmentName);
-        checkArgument(isValidName(assignmentName), MESSAGE_CONSTRAINTS);
-        fullName = assignmentName;
+    public Name(String name) {
+        requireNonNull(name);
+        checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
+        fullName = name;
     }
 
     /**
@@ -51,12 +51,12 @@ public class AssignmentName {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AssignmentName)) {
+        if (!(other instanceof Name)) {
             return false;
         }
 
-        AssignmentName otherAssignmentName = (AssignmentName) other;
-        return fullName.equals(otherAssignmentName.fullName);
+        Name otherName = (Name) other;
+        return fullName.equals(otherName.fullName);
     }
 
     @Override
