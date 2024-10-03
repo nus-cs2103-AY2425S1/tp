@@ -267,25 +267,50 @@ _{Explain here how the data archiving feature will be implemented}_
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
+* small business owners
+* sole proprietors 
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Since these businesses are single-individual teams, keeping track of different stakeholders alone is a hassle. These individuals work on their computers at least for their networking purposes, making the product compatible with their existing workflows. The product is an easy-to-use contact management app that manages customers, business partners and suppliers.
+
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
-
+| Priority | As a …​       | I want to …​                                                                | So that I can…​                                                             |
+|----------|---------------|-----------------------------------------------------------------------------|-----------------------------------------------------------------------------|
+| `* * *`  | new user      | understand the interface easily                                             | start using my addressbook with little trouble                              |
+| `* * *`  | new user      | add a new contact                                                           | start storing my existing contacts                                          |
+| `* * *`  | new user      | find a contact by name                                                      | retrieve their contact information                                          |
+| `* * *`  | familiar user | delete/archive a contact                                                    | remove those that are no longer working with me                             |
+| `* * *`  | familiar user | group my contacts into categories                                           | group all users of one category (eg. just customers)                        |
+| `* * *`  | familiar user | retrieve all contacts from a specific group                                 | find my customers, suppliers, business partners, etc easily                 |
+| `* * `   | new user      | easily import my contact from my phone address book                         | set up faster                                                               |
+| `* *`    | new user      | call/text my contacts                                                       | easily speak to them                                                        |
+| `* * `   | new user      | retrieve all the emails (or some other info) of contacts in my current view | easily email all these contacts                                             |
+| `* * `   | new user      | see my contact history                                                      | know when contacts were added                                               |
+| `* *`    | familiar user | add any extra remarks to my contacts                                        | be aware of each contact's notable information                              |
+| `* * `   | familiar user | update/edit contact details                                                 | update any recent changes to the contact                                    |
+| `* * `   | familiar user | add additional information to each contact                                  | take note of special considerations from different customer                 |
+| `* *`    | familiar user | sort the contacts by product deadlines                                      | easily know which products I have to send out                               |
+| `* * `   | familiar user | filter contacts by criteria                                                 | search for specific types of people with certain characteristics            |
+| `* *`    | familiar user | sort my contacts alphabetically                                             | find my contacts by their name                                              |
+| `* * `   | familiar user | add profile photos to my contacts                                           | have a idea of how my contacts look like if i have not seen them for awhile |
+| `* * `   | familiar user | export and share a contact with others                                      | share a contact with others potentially to discuss about                    |
+| `* *`    | familiar user | pin contacts                                                                | quickly find those that are important to my business                        |
+| `* * `   | familiar user | see alerts on duplicate contacts                                            | delete it and keep my address book clean                                    |
+| `* * `   | familiar user | quickly retrieve my previous command                                        | not need to retype similar complex commands                                 |
+| `* * `   | familiar user | link my contacts' social media accounts                                     | access their social media easily, especially if relevant to our deal        |
+| `* *`    | familiar user | have a shortcut to user addresses                                           | easily determine where to send products to                                  |
+| `* * `   | familiar user | undo deletions                                                              | restore contacts incase of accidental deletion                              |
+| `* *`    | familiar user | rename tags                                                                 | change the group of names when my business needs change                     |
+| `* * `   | familiar user | create temporary groups                                                     | group contacts based on projects, rather than just their affiliations       |
+| `*`      | familiar user | colour code my contacts by their categories                                 | easily spot them                                                            |
+| `* `     | expert user   | perform mass edits                                                          | change in the information of groups of contacts at one shot                 |
+| `*`      | expert user   | add nicknames / aliases to contacts                                         | find them not just by their name, but what i remember them by               |
+| `* `     | expert user   | add reminders                                                               | be reminded to follow up with specific contacts                             |
+| `* `     | expert user   | create shortcut commands to add specific types of contacts                  | add people of similar profiles faster                                       |
 ### Use cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
