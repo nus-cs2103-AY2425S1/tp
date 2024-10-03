@@ -258,75 +258,359 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ## **Appendix: Requirements**
 
-### Product scope
+### Product Scope
 
-**Target user profile**:
+---
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+#### **Target User Profile:**
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+- **User Role:** Healthcare Administrator
+- **Workplace:** Old folks home for dementia patients
+- **Responsibilities:**
+    - Manage and update contact details for patients, doctors, and next-of-kin.
+    - Respond quickly to emergency situations by accessing relevant contacts.
+    - Maintain communication efficiency with minimal manual processes.
 
+- **Key Characteristics:**
+    - Handles large volumes of contact data on a daily basis.
+    - Prefers using desktop applications over mobile or web-based alternatives.
+    - Skilled at typing and prefers keyboard shortcuts over mouse interactions for speed.
+    - Comfortable with using command-line interfaces (CLI) for fast data entry and retrieval.
+
+    
+#### **Value Proposition:**
+
+MedConnect offers a **streamlined contact management system** tailored for healthcare administrators. Its key features include:
+
+- **Efficient Lookup and Update:** Quickly find and update contact information for patients, their emergency contacts, and healthcare staff.
+- **Time-Sensitive Operations:** When every second counts, MedConnect ensures that administrators can contact the right person immediately.
+- **Command-Line First:** Optimized for users who prefer CLI, allowing for rapid data entry and navigation without reliance on graphical interfaces.
+- **Comprehensive Contact Database:** Centralizes all relevant contact details, reducing the need for multiple systems and improving response times in emergencies.
+
+---
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+### Beginner User Stories
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                  | I want to …​                                 | So that I can…​                                                            |
+|----------|--------------------------|----------------------------------------------|----------------------------------------------------------------------------|
+| `* * *`  | new user                 | familiarise myself with the app              | play around with dummy data without compromising real patient data         |
+| `* * *`  | healthcare administrator | add new hospital staff and patients          | easily reach out to them when needed                                       |
+| `* * *`  | healthcare administrator | update contact details                       | ensure all contact information is accurate and current                     |
+| `* *`    | healthcare administrator | search contacts by name, role, or department | quickly find and connect with the right person in high-pressure situations |
+| `* * *`  | healthcare administrator | view patient emergency contact details       | notify next-of-kin during urgent medical events                            |
+| `* *`    | healthcare administrator | add multiple contact methods for each person | reach them through different channels when needed                          |
+| `* *`    | healthcare administrator | assign doctors to patients                   | easily track which doctor is responsible for each patient                  |
 
-*{More to be added}*
+### Intermediate User Stories
+
+| Priority | As a …​                  | I want to …​                             | So that I can…​                                                              |
+|----------|--------------------------|------------------------------------------|------------------------------------------------------------------------------|
+| `* *`    | healthcare administrator | filter contacts by department            | streamline communication during different situations                         |
+| `*`      | healthcare administrator | create custom groups                     | efficiently contact the right team during emergencies                        |
+| `* *`    | healthcare administrator | mark on-call staff                       | know whom to contact during off-hours                                        |
+| `* *`    | healthcare administrator | access frequently contacted individuals  | save time during routine interactions                                        |
+| `* *`    | healthcare administrator | filter contacts by shift or availability | quickly reach staff who are currently on duty                                |
+| `* *`    | healthcare administrator | archive outdated contacts                | maintain a clean and relevant contact list without losing historical records |
+
+### Advanced User Stories
+
+| Priority | As a …​                  | I want to …​                                  | So that I can…​                                                      |
+|----------|--------------------------|-----------------------------------------------|----------------------------------------------------------------------|
+| `*`      | healthcare administrator | view a history of previous interactions       | have a complete record of communications for reference               |
+| `*`      | healthcare administrator | set reminders for follow-up actions           | ensure I don’t miss important tasks                                  |
+| `* *`    | healthcare administrator | import contact data in bulk                   | keep the database up-to-date without manual entry                    |
+| `* *`    | healthcare administrator | export contact information                    | provide it to others or have a backup in case of system failures     |
+| `* *`    | healthcare administrator | create templates for emergency communications | send critical messages quickly during emergencies                    |
+| `*`      | healthcare administrator | secure access with user authentication        | ensure only authorized personnel can access or update sensitive data |
+| `* * *`  | healthcare administrator | delete outdated patient/staff contacts        | ensure all information is relevant and current                       |
+
+---
 
 ### Use cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+---
+### Use Case: Add a New Contact
 
-**MSS**
+**System:** MedConnect  
+**Actor:** Healthcare Administrator
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+#### **Main Success Scenario (MSS):**
+1. User requests to add a new patient contact.
+2. MedConnect prompts the user to enter patient details:
+    - Name
+    - Phone Number
+    - Address
+    - Emergency Contact Name
+    - Emergency Contact Phone Number
+3. User enters the required details.
+4. MedConnect validates the provided information.
+5. MedConnect successfully adds the new contact to the address book.
+6. MedConnect confirms that the contact was added successfully.
 
-    Use case ends.
+   **Use case ends.**
 
-**Extensions**
+#### **Extensions:**
 
-* 2a. The list is empty.
+**3a.** The entered details are invalid (e.g., phone number contains letters).
+- **3a1.** MedConnect informs the user of the invalid details.
+- **3a2.** User corrects the invalid details and resubmits.
 
-  Use case ends.
+  **Use case resumes from step 4.**
 
-* 3a. The given index is invalid.
+**3b.** Some required fields are missing.
+- **3b1.** MedConnect prompts the user to complete the missing fields.
+- **3b2.** User provides the missing information.
 
-    * 3a1. AddressBook shows an error message.
+  **Use case resumes from step 4.**
 
-      Use case resumes at step 2.
+**6a.** The contact already exists in the system (e.g., duplicate phone number).
+- **6a1.** MedConnect notifies the user of the duplicate entry.
 
-*{More to be added}*
+  **Use case ends.**
 
-### Non-Functional Requirements
+---
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+### Use Case: Delete a Contact
 
-*{More to be added}*
+**System:** MedConnect  
+**Actor:** Healthcare Administrator
+
+
+#### **Main Success Scenario (MSS):**
+1. User requests to list all contacts.
+2. MedConnect retrieves and shows a list of all contacts.
+3. User requests to delete a specific contact by index.
+4. MedConnect confirms that the contact has been deleted.
+5. MedConnect removes the contact from the database.
+
+   **Use case ends.**
+
+
+#### **Extensions:**
+
+**2a.** The contact list is empty.
+- **Use case ends.**
+
+**3a.** The given index is invalid (e.g., out of range).
+- **3a1.** MedConnect informs the user of the invalid index.
+
+  **Use case resumes from step 2.**
+
+**3b.** User cancels the deletion before confirmation.
+- **3b1.** MedConnect acknowledges the cancellation.
+
+  **Use case ends.**
+---
+### Use Case: View Emergency Contacts
+
+**System:** MedConnect  
+**Actor:** Healthcare Administrator
+
+#### **Main Success Scenario (MSS):**
+1. User requests to view the emergency contact information for a specific patient.
+2. MedConnect requests the patient’s ID or name.
+3. User provides the patient ID or name.
+4. MedConnect retrieves the emergency contact details for the specified patient.
+5. MedConnect provides the emergency contact details, including the name, relationship, and phone number.
+
+   **Use case ends.**
+
+
+#### **Extensions:**
+
+**3a.** The patient does not exist in the system.
+- **3a1.** MedConnect informs the user that no contact was found.
+
+  **Use case resumes from step 2.**
+
+**3b.** Multiple patients share the same name.
+- **3b1.** MedConnect requests additional information (e.g., birthdate, address) to identify the correct patient.
+- **3b2.** User provides the required additional information.
+
+  **Use case resumes from step 4.**
+---
+
+### Use Case: Archive Outdated Contacts
+
+**System:** MedConnect  
+**Actor:** Healthcare Administrator
+
+#### **Main Success Scenario (MSS):**
+1. User requests to archive a specific contact.
+2. MedConnect retrieves and presents a list of available contacts.
+3. User selects a contact to archive by index.
+4. MedConnect confirms that the contact has been archived.
+5. The selected contact is removed from the main contact list and stored in the archive.
+
+   **Use case ends.**
+
+#### **Extensions:**
+
+**3a.** The given index is invalid.
+- **3a1.** MedConnect informs the user of the invalid index.
+
+  **Use case resumes from step 2.**
+
+**3b.** User cancels the archive action before confirmation.
+- **3b1.** MedConnect acknowledges the cancellation.
+
+  **Use case ends.**
+---
+
+### Use Case: Multiple Contact Methods
+
+**System:** MedConnect  
+**Actor:** Healthcare Administrator
+
+
+#### **Main Success Scenario (MSS):**
+1. User requests to view contact methods for a specific patient using their patient ID and a modifier (e.g., to view all contact methods or only the primary contact method).
+2. MedConnect requests the patient’s ID and modifier.
+3. User provides the patient’s ID and the desired modifier (e.g., "primary," "all," "email," or "phone").
+4. MedConnect retrieves the specified contact methods based on the modifier provided.
+5. MedConnect provides the contact information as per the user’s request.
+
+   **Use case ends.**
+
+#### **Extensions:**
+
+**3a.** The patient ID provided does not exist.
+- **3a1.** MedConnect informs the user that no contact was found for the provided ID.
+
+  **Use case resumes from step 2.**
+
+**3b.** No valid modifier is provided.
+- **3b1.** MedConnect informs the user of the missing or invalid modifier and assumes the default modifier ("primary").
+
+  **Use case resumes from step 4.**
+
+**3c.** Additional invalid modifiers are provided after the valid modifier.
+- **3c1.** MedConnect ignores the invalid modifiers and proceeds with the valid one.
+
+  **Use case resumes from step 4.**
+---
+
+### Use Case: Delete Outdated Contacts (Hard Delete)
+
+**System:** MedConnect  
+**Actor:** Healthcare Administrator
+
+#### **Main Success Scenario (MSS):**
+1. User requests to permanently delete a patient’s data by their patient ID.
+2. MedConnect requests confirmation of the deletion for the given patient ID.
+3. User confirms the deletion request.
+4. MedConnect removes the patient’s contact data from the address book.
+5. MedConnect confirms that the patient’s data has been deleted permanently.
+
+   **Use case ends.**
+
+#### **Extensions:**
+
+**3a.** The patient ID provided does not exist in the system.
+- **3a1.** MedConnect informs the user that no contact was found with the provided ID.
+
+  **Use case resumes from step 2.**
+
+**3b.** User cancels the deletion before confirmation.
+- **3b1.** MedConnect acknowledges the cancellation of the deletion.
+
+  **Use case ends.**
+---
+
+### Non-Functional Requirements (NFRs) 
+
+#### 1. Performance Requirements:
+- **Responsiveness:**  
+  The system should respond to user commands (e.g., adding, updating, or viewing contacts) within **2 seconds** for typical operations under normal usage conditions (i.e., up to 1000 contacts in the database).
+
+- **Scalability:**  
+  MedConnect should support operations with **up to 5000 contacts** without performance degradation. Basic operations such as retrieving or adding contacts should not exceed a response time of **3 seconds** under this load.
+
+#### 2. Reliability and Availability:
+- **System Uptime:**  
+  MedConnect must be available for use at least **99% of the time**, especially during hospital operating hours (24/7 access). Regular maintenance should be scheduled during off-peak times.
+
+- **Disaster Recovery and Backup:**  
+  Contact data must be backed up **daily** to prevent data loss. The system should be able to recover from backup within **2 hours** of a failure.
+
+#### 3. Usability Requirements:
+- **Typing Efficiency:**  
+  The system should be optimized for keyboard-only interactions. A user familiar with the system should be able to complete key operations (e.g., adding a new contact, viewing emergency contacts) in less than **30 seconds** using only the keyboard.
+
+- **Error Handling and Feedback:**  
+  The system must provide **immediate feedback** (within 1 second) when an error occurs, such as invalid input or missing fields. The user should be able to correct errors without restarting the operation.
+
+#### 4. Security and Privacy Requirements:
+- **Data Encryption:**  
+  All sensitive patient and contact information must be encrypted when stored locally. The system should implement industry-standard encryption (e.g., AES-256) for both storage and transmission of data.
+
+- **User Authentication (Future Consideration):**  
+  If the system evolves to handle multiple users, it must implement **role-based access control** with password authentication. Healthcare administrators should have different access levels than general staff.
+
+#### 5. Data and Storage Requirements:
+- **Human-Editable File Format:**  
+  Contact information should be stored in a **human-readable and editable format** (e.g., `.txt` or `.csv`) so that administrators can manually access and modify data if needed.
+
+- **Data Integrity:**  
+  The system must ensure that no data is lost or corrupted during common operations (e.g., adding, updating, or deleting contacts). **Transaction-like behavior** must be implemented to ensure all data operations either succeed fully or fail without partially corrupting data.
+
+#### 6. Compatibility and Portability:
+- **Cross-Platform Support:**  
+  MedConnect must be compatible with **mainstream operating systems** (Windows, macOS, Linux) and function seamlessly on systems with **Java 17 or higher** installed.
+
+#### 7. Compliance Requirements:
+- **Healthcare Data Regulations:**  
+  MedConnect must adhere to local and international healthcare data protection regulations, such as **HIPAA** in the US, or similar regulations in other regions, ensuring the privacy and security of sensitive medical information.
+
+#### 8. Maintainability and Extensibility:
+- **Modular Design:**  
+  The system must be designed with a modular structure, allowing future extensions such as additional data fields or user roles without requiring significant rework.
+
+- **Testability:**  
+  MedConnect must be **easily testable**, with automated tests that can cover at least **80% of the codebase**. Each core feature (e.g., adding a contact, deleting outdated contacts) should have dedicated test cases.
+---
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+- **Mainstream OS**: Windows, Linux, Unix, MacOS
+
+- **MedConnect**: A healthcare application designed to help healthcare administrators manage patient and staff contact information efficiently.
+
+- **Healthcare Administrator**: The primary user of MedConnect, responsible for managing patient and staff contact details in a healthcare environment. They ensure that the contact information is up-to-date for communication during critical situations.
+
+- **Emergency Contact**: The designated person or persons to be notified in case of a patient emergency, usually including details such as their name, phone number, and relationship to the patient.
+
+- **Primary Contact Method**: The main communication method for a person in the system, typically used for emergency situations.
+
+- **Command-Line Interface (CLI)**: A method of interacting with MedConnect through typed text commands, allowing fast input for users who prefer typing over graphical interfaces.
+
+- **Modifier**: An additional parameter in commands used to filter or customize operations, such as viewing only specific types of contact details (e.g., emergency, email, phone).
+
+- **Mainstream Operating Systems**: Common operating systems on which MedConnect can run, including Windows, macOS, and Linux.
+
+- **Encryption**: The process of encoding sensitive data, such as patient information, to protect it from unauthorized access.
+
+- **HIPAA**: The Health Insurance Portability and Accountability Act, a US regulation that ensures the security and privacy of patient data. MedConnect must comply with such regulations in healthcare environments.
+
+- **Java 17**: The version of Java required to run MedConnect, which ensures compatibility and performance across different operating systems.
+
+- **Human-Editable File**: A data file format (e.g., `.txt` or `.csv`) that can be easily accessed and modified by healthcare administrators without needing special software.
+
+- **Role-Based Access Control (RBAC)**: A security mechanism that restricts access to data based on the user’s role, allowing different permissions for administrators and general staff (for future implementation).
+
+- **System Uptime**: The percentage of time that MedConnect is available and operational, measured as part of reliability goals.
+
+- **Backup**: The process of creating copies of MedConnect's data to ensure it can be restored in the event of data loss or system failure.
+
+- **Test Coverage**: The percentage of the system's code that is covered by automated tests, ensuring that key features and functionality are reliably tested.
+
+- **AES-256**: A widely-used encryption standard that secures sensitive data using a 256-bit encryption key, ensuring strong protection of patient information.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
