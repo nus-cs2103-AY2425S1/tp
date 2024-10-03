@@ -5,8 +5,9 @@
 
 # NUStates
 
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-F10-3/tp/actions)
-[![codecov](https://codecov.io/gh/se-edu/addressbook-level3/branch/master/graph/badge.svg)](https://app.codecov.io/gh/AY2425S1-CS2103T-F10-3/tp)
+[![CI Status](https://github.com/AY2425S1-CS2103T-F10-3/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-F10-3/tp/actions)
+
+[![codecov](https://codecov.io/gh/AY2425S1-CS2103T-F10-3/tp/graph/badge.svg?token=Y7MHE94H5W)](https://codecov.io/gh/AY2425S1-CS2103T-F10-3/tp)
 
 ![Ui](images/Ui.png)
 
