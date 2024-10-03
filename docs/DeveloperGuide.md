@@ -638,9 +638,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. The AddressBook should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2. The AddressBook should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. The UI should not lag or freeze anytime during normal usage.
+5. All usage of data related to NUS should abide by NUS regulations.
+6. The AddressBook should remain backwards compatible, namely all data generated in previous versions should be usable in newer versions.
+7. The AddressBook should be easily usable by NUS year 1 Computer Science students with any skill level.
+8. Managing contacts will remain as the core feature in all iterations.
+9. The AddressBook should not crash for any input given by the user.
+10. The AddressBook will remain as a CLI based application.
 
 *{More to be added}*
 
