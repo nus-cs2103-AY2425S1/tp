@@ -1,17 +1,27 @@
 package seedu.address.model.task;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
+/**
+ * Represents a Task in the address book.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 public class Task {
 
     private final Person patient;
 
     private final String description;
 
+    /**
+     * Every field must be present and not null.
+     */
     public Task(Person patient, String description) {
+        requireAllNonNull(patient, description);
         this.patient = patient;
         this.description = description;
     }
