@@ -336,13 +336,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2c. The user does not specify what the new details should be.
 
-    * 2b1. System shows an error message prompting the user to put in the new details.
+    * 2c1. System shows an error message prompting the user to put in the new details.
 
       Use case resumes at step 2.
 
 * 2d. The user specifies details that do not meet the requirements of the detail type.
 
-    * 2b1. System shows an error message prompting the user with the correct detail type format and requirements.
+    * 2d1. System shows an error message prompting the user with the correct detail type format and requirements.
 
       Use case resumes at step 2.
 
@@ -474,7 +474,7 @@ Guarantees: no persons will be left in the system.
 
 **Use case: UCSH08 See sample contacts in the system before starting to modify it**
 
-Preconditions: User has not added or modified the system previously
+Preconditions: User has not added or edited contacts previously
 
 **MSS**
 
