@@ -388,21 +388,21 @@ Use case ends.
 
 Extensions:
 
-&nbsp;&nbsp;&nbsp;&nbsp;1a. ClientGrid detects an error in the postal code or unit number format provided by the real estate agent, .
+* 1a. ClientGrid detects an error in the postal code or unit number format provided by the real estate agent, .
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1a1. ClientGrid requests for the correct data.
+    * 1a1. ClientGrid requests for the correct data.
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1a2. Real estate agent enters new data.
+    * 1a2. Real estate agent enters new data.
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Steps 1a1-1a2 are repeated until the data entered are correct.
+    * Steps 1a1-1a2 are repeated until the data entered are correct.
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+    * Use case resumes from step 2.
 
-&nbsp;&nbsp;&nbsp;&nbsp;1b. ClientGrid is unable to find a matching property listing entry in the database.
+* 1b. ClientGrid is unable to find a matching property listing entry in the database.
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1b1. ClientGrid informs real estate agent that the property listing does not exist in the database.
+    * 1b1. ClientGrid informs real estate agent that the property listing does not exist in the database.
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use case ends.
+    * Use case ends.
 
 **Use case: UC5 - List buyers, sellers, clients or properties**
 
