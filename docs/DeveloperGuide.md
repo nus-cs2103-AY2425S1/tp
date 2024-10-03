@@ -260,13 +260,8 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
-
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+**Target user profile**: NUS CS TAs who are adept and prefer CLI to GUI, 
+and have to keep track of their tutorial students’ contact and progress.
 
 **Value proposition**: offers a streamlined tool for TAs to efficiently manage student contacts and work progress, 
 optimized for users who are fast typers, it’s portable, battery-efficient(light-weight), easy to learn and use.
@@ -289,13 +284,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `ConTActs` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Add contact**
+**UC01: Add contact**
 
 **MSS**
 1. User requests to add a person
-2. AddressBook adds the contact to the list
+2. ConTActs adds the contact to the list
 
     Use case ends.
 
@@ -303,24 +298,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. Parameters contain unacceptable values.
 
-    * 1a1. AddressBook shows an error message.
+    * 1a1. ConTActs shows an error message.
 
       Use case resumes at step 1.
 
 * 1b. Contact already exists.
 
-    * 1b1. AddressBook shows an error message.
+    * 1b1. ConTActs shows an error message.
 
       Use case resumes at step 1.
 
-**Use case: Delete contact**
+**UC02: Delete contact**
 
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  ConTActs shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  ConTActs deletes the person
 
     Use case ends.
 
@@ -332,16 +327,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. ConTActs shows an error message.
 
       Use case resumes at step 2.
 
-**Use case: View contacts**
+**UC03: View contacts**
 
 **MSS**
 
 1. User requests to list persons with parameters e.g. number of contacts, reset sorting order
-2. AddressBook displays the list of persons
+2. ConTActs displays the list of persons
 
     Use case ends.
 
@@ -349,13 +344,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. Parameters contain unacceptable values.
 
-    * 1a1. AddressBook shows an error message.
+    * 1a1. ConTActs shows an error message.
 
       Use case resumes at step 1.
 
 * 2a. The list is empty.
     
-  * 2a1. AddressBook shows a message that the list is empty.
+  * 2a1. ConTActs shows a message that the list is empty.
     
     Use case ends.
 
