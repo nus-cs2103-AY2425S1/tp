@@ -274,28 +274,32 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* healthcare professionals
+* has a need to manage a significant number of patients
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: 
 
+* manage patients faster than a typical mouse/GUI driven app
+* reduce time spent on administrative tasks by centralizing information, allowing user to focus more on patient care
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
-
+| Priority | As a …​           | I want to …​                                                                                     | So that I can…​                                                                   |
+|----------|-------------------|--------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|
+| `* * *`  | new user          | see usage instructions                                                                           | refer to instructions when I forget how to use the App                            |
+| `* * *`  | doctor            | add a new patient                                                                                |                                                                                   |
+| `* * *`  | doctor            | delete a patient                                                                                 | remove entries that I no longer need                                              |
+| `* * *`  | doctor            | search for patients by name or ID                                                                | quickly find and review specific patient information                              |
+| `* *`    | doctor            | hide private contact details                                                                     | minimize chance of someone else seeing them by accident                           |
+| `*`      | tech-savvy doctor | have advanced search and filter options to quickly find and organize patient information         | easily manage large volumes of data                                               |
+| `***`    | nurse             | view a patient's medication and treatment schedule, ward location and diagnosis all in one place | I can ensure medications are administered on time and in the correct dosage       |
+| `**`     | nurse             | access a list of patients I am responsible for during my shift                                   | I can manage my time efficiently and ensure that all patients receive timely care |
 *{More to be added}*
 
 ### Use cases
@@ -325,6 +329,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Search a person**
+
+**MSS**
+
+1. Doctor searches for patients
+2. AddressBook shows a list of patients matching the search
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The search field is invalid.
+
+    * 2a1. AddressBook shows an error message.
+        
+        Use case resumes at step 1.
+
+* 2b. The parameter field is invalid.
+
+    * 2b1. AddressBook shows an error message.
+  
+        Use case resumes at step 1.
+
+* 2c. There is no patient that matches the search
+
+    * 2c1. AddressBook shows that there is no matching patient.
+
+        Use case ends.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
@@ -332,6 +365,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  The system should respond to user actions within 1 second under normal load.
 
 *{More to be added}*
 
@@ -339,6 +373,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **patient**: A person that has been designated to be under the care of the user(i.e. a doctor or nurse).
 
 --------------------------------------------------------------------------------------------------------------------
 
