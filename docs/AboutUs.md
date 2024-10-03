@@ -21,12 +21,22 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Testing
 
+### Tan ZiYang Henry
+
+<img src="images/tanziyanghenry.png" width="200px">
+
+[[github](http://github.com/tanziyanghenry)]
+[[portfolio](team/tanziyanghenry.md)]
+
+* Role: Developer
+* Responsibilities: UI
+
 ### Murali Shruthi
 
 ![shruthiiii03.png](images%2Fshruthiiii03.png)
 
-https://github.com/Shruthiiii03
-[[portfolio](team/johndoe.md)]
+https://github.com/shruthiiii03
+[[portfolio](team/shruthiiii03.md)]
 
 * Role: Developer
 * Responsibilities: UI
@@ -48,13 +58,3 @@ https://github.com/Shruthiiii03
 [[portfolio](team/jason-chuah.md)]
 
 * Role: Developer
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
