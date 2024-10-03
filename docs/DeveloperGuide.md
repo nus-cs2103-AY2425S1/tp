@@ -274,13 +274,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* social worker
+* has a need to manage a significant number of beneficiaries
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: the address book acts as an easy way to locate/contact families and keep track of how long it has been since their last visit.
 
 
 ### User stories
