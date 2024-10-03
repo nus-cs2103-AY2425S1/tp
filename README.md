@@ -6,7 +6,7 @@
 # Teacher's Pet (TP)
 
 - **Teacher's Pet** is an application for NUS Teaching Assistants (TAs) to handle students' information with ease.
-- TP utilizes a Command Line Interface (CLI) which improves the speed and efficiency of handling administrative tasks.
+- **TP** utilizes a Command Line Interface (CLI) which improves the speed and efficiency of handling administrative tasks.
 
 ## Features
 - Add a student
@@ -31,7 +31,7 @@
 **[Teacher's pet Product Website](https://ay2425s1-cs2103t-w10-1.github.io/tp/)**
 
 ## Naming & Origins 
-- The application is named **Teacher's Pet** (`TP` for short) to reflect its role in assisting TAs,
+- The application is named **Teacher's Pet** (**TP** for short) to reflect its role in assisting TAs,
 similar to a "teacher's pet."
 - We developed this application as we saw a real inefficiency in how TAs were managing their students information,
 with many still relying on pen and paper.
@@ -45,7 +45,6 @@ which is used for managing contact details.
 * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC).
 * It comes with a **reasonable level of user and developer documentation**.
 * It was initially created as a part of a series of `AddressBook` projects (`Level 1`, `Level 2`, `Level 3` ...).
-* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 ## Acknowledgments
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
