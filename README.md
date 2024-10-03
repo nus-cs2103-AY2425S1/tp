@@ -1,4 +1,6 @@
-[![CI Status]()][![Java CI](https://github.com/AY2425S1-CS2103T-W11-1a/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2425S1-CS2103T-W11-1a/tp/actions/workflows/gradle.yml)
+[![Java CI](https://github.com/AY2425S1-CS2103T-W11-1a/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2425S1-CS2103T-W11-1a/tp/actions/workflows/gradle.yml)
+
+[![codecov](https://codecov.io/gh/AY2425S1-CS2103T-W11-1a/tp/graph/badge.svg?token=XF5SCDUEMW)](https://codecov.io/gh/AY2425S1-CS2103T-W11-1a/tp)
 
 ![Ui](docs/images/Ui.png)
 
