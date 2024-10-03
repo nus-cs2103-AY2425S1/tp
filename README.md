@@ -4,13 +4,23 @@
 
 ![Ui](docs/images/Ui.png)
 
-* This is **a sample project for Software Engineering (SE) students**.<br>
-  Example usages:
-  * as a starting point of a course project (as opposed to writing everything from scratch)
-  * as a case study
-* The project simulates an ongoing software project for a desktop application (called _AddressBook_) used for managing contact details.
-  * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
-  * It comes with a **reasonable level of user and developer documentation**.
-* It is named `AddressBook Level 3` (`AB3` for short) because it was initially created as a part of a series of `AddressBook` projects (`Level 1`, `Level 2`, `Level 3` ...).
-* For the detailed documentation of this project, see the **[Address Book Product Website](https://se-education.org/addressbook-level3)**.
-* This project is a **part of the se-education.org** initiative. If you would like to contribute code to this project, see [se-education.org](https://se-education.org/#contributing-to-se-edu) for more info
+# MediBase3
+
+* **MediBase3** is a desktop application designed for doctors and medical professionals to manage patient contact details, appointments, medical conditions, allergies, and more.
+  * Example usages:
+    * A doctor can track patient information, medical history, and contact details efficiently.
+    * Medical professionals can schedule, update, and delete patient appointments.
+    * Easily manage patient medical conditions and track allergies to ensure safe treatment.
+
+* Key features include:
+  * **Add, edit, or delete patient details** such as name, NRIC, gender, contact information, and medical records.
+  * **Schedule and manage appointments** for patients with details like date and time.
+  * **Track medical conditions** and allergies associated with each patient.
+  * **Prioritize patients** based on urgency levels (low, medium, high).
+  * **Search and filter** patients by name, condition, or other relevant information.
+
+* MediBase3 is built with scalability in mind, allowing **doctors and healthcare workers** to store and manage a large number of patient records easily and securely. The interface is user-friendly, with **clear and concise inputs** for adding or modifying patient data.
+
+* The system ensures **data accuracy** and prevents duplicate entries by using NRIC as a unique identifier for each patient.
+
+* For more detailed documentation on usage and features, please refer to the **[MediBase3 Product Website]** (link to be added).

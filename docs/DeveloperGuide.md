@@ -262,71 +262,266 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* doctors who are busy managing their patients and appointments
+* doctors who need to know their patient's status
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: manage patients and appointments faster than a typical mouse/GUI driven app
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​               | I want to …​ | So that I can…​         |
+|----------|-----------------------| - |-------------------------|
+| `* * *`  | time-sensitive doctor |have relevant contacts ready at fingertips | no time is wasted tending to a patient's urgent needs |
+| `* * *`  | organised doctor      | able to add new contacts | keep track of my patients' details |
+| `* * *`  | busy doctor           | search for a patient by name | quickly access their records |
+| `* * *`  | doctor                | schedule an appointment with a patient | manage their daily workload effectively |
+| `* * *`  | doctor                | delete outdated or incorrect records | keep the database clean and organised |
+| `* *`    | doctor                | view all my appointments  | know the appointments I have on a certain day |
+| `* *`    | meticulous doctor     | assign a specific condition to a patient | locate a person easily  |
+| `*`      | focused doctor        | want to search patients by medical condition | focus on those with similar treatment plans |
+| `*`      | doctor                | assign a priority level to a patient | manage urgent cases effectively |
+| `*`      | doctor                | update the contact information of a patient | maintain accurate records |
+| `*`      | busy doctor           | view all my urgent cases | attend to those with urgent needs first |
+| `*`      | doctor           | see a patient’s allergy information | avoid prescribing harmful medications |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Medibase 3` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case:** UC1 - Add Patient
+**MSS:**
+1. User keys in the patient details.
+2. MB3 adds the patient and displays a success message.  
+   Use case ends.
 
-**MSS**
+**Extensions:**
+1a. MB3 detects an error when adding patient data.  
+1a1. MB3 does not add patient data and shows an error message.  
+Use case ends.
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+---
 
+**Use case:** UC2 - Edit Patient
+
+**MSS:**
+1. User requests MB3 to edit the patient data.
+2. MB3 updates the patient data and displays a success message.  
+   Use case ends.
+
+**Extensions:**
+* 1a. MB3 detects an error when editing patient data.
+  * 1a1. MB3 does not update patient data and shows an error message.  
     Use case ends.
 
-**Extensions**
+---
 
-* 2a. The list is empty.
+**Use case:** UC3 - Find Patient by Name
+**MSS:**
+1. User keys in the patient name.
+2. MB3 prints the selected patient information and displays a success message.  
+   Use case ends.
 
-  Use case ends.
+**Extensions:**
+* 1a. MB3 detects an error when finding patient data.  
+  * 1a1. MB3 does not print patient data and shows an error message.  
+        Use case ends.
 
-* 3a. The given index is invalid.
+---
+ 
+**Use case:** UC4 - List Patients
+**MSS:**
+1. User requests MB3 to list patients.
+2. MB3 lists the patient data sequentially and displays a success message.  
+   Use case ends.
 
-    * 3a1. AddressBook shows an error message.
+**Extensions:**
+* 1a. MB3 detects an error when listing patient data.  
+  * 1a1. MB3 does not list patient data and shows an error message.  
+Use case ends.
 
-      Use case resumes at step 2.
+---
+ 
+**Use case:** UC5 - Add Appointment
+**MSS:**
+1. User keys in the appointment details.
+2. MB3 adds the appointment and displays a success message.  
+   Use case ends.
 
-*{More to be added}*
+**Extensions:**
+* 1a. MB3 detects an error when adding an appointment.  
+  * 1a1. MB3 does not add the appointment and shows an error message.  
+Use case ends.
+
+---
+ 
+**Use case:** UC6 - Add Medical Condition
+**MSS:**
+1. User keys in the patient’s medical condition.
+2. MB3 adds the medical condition and displays a success message.  
+   Use case ends.
+
+**Extensions:**
+* 1a. MB3 detects an error when adding the patient’s medical condition.  
+  * 1a1. MB3 does not add the medical condition and shows an error message.  
+Use case ends.
+
+---
+ 
+**Use case:** UC7 - Update Patient’s Priority
+**MSS:**
+1. User requests MB3 to update a selected patient’s priority.
+2. MB3 updates the patient’s priority and displays a success message.  
+   Use case ends.
+
+**Extensions:**
+* 1a. MB3 detects an error when updating the patient’s priority.  
+  * 1a1. MB3 does not update the patient’s priority and shows an error message.  
+Use case ends.
+
+---
+ 
+**Use case:** UC8 - Add Allergies to Patients
+**MSS:**
+1. User keys in the patient’s allergies to MB3.
+2. MB3 adds the allergies and displays a success message.  
+   Use case ends.
+
+**Extensions:**
+* 1a. MB3 detects an error when adding the patient’s allergies.  
+  * 1a1. MB3 does not add the allergies and shows an error message.  
+Use case ends.
+
+---
+
+**Use case:** UC9 - Delete Patient Contact
+**MSS:**
+1. User requests MB3 to delete a selected patient’s contact.
+2. MB3 deletes the patient’s contact and displays a success message.  
+   Use case ends.
+
+**Extensions:**
+* 1a. MB3 detects an error when deleting a patient’s contact.  
+  * 1a1. MB3 does not delete the patient’s contact and shows an error message.  
+Use case ends.
+
+---
+ 
+**Use case:** UC10 - Delete Patient Condition   
+**MSS:**
+1. User requests MB3 to delete a selected patient’s condition.
+2. MB3 deletes the patient’s condition and displays a success message.  
+   Use case ends.
+
+**Extensions:**
+* 1a. MB3 detects an error when deleting a patient’s condition.  
+  * 1a1. MB3 does not delete the patient’s condition and shows an error message.  
+Use case ends.
+
+---
+ 
+**Use case:** UC11 - Delete Patient Allergies
+**MSS:**
+1. User requests MB3 to delete a selected patient’s allergies.
+2. MB3 deletes the allergies and displays a success message.  
+   Use case ends.
+
+**Extensions:**
+* 1a. MB3 detects an error when deleting a patient’s allergies.  
+  * 1a1. MB3 does not delete the allergies and shows an error message.  
+Use case ends.
+
+---
+
+**Use case:** UC12 - Delete Patient Appointment
+**MSS:**
+1. User requests MB3 to delete a selected patient’s appointment.
+2. MB3 deletes the appointment and displays a success message.  
+   Use case ends.
+
+**Extensions:**
+* 1a. MB3 detects an error when deleting a patient’s appointment.  
+  * 1a1. MB3 does not delete the appointment and shows an error message.  
+Use case ends.
+
+---
+ 
+**Use case:** UC13 - List Patients By Condition
+**MSS:**
+1. User requests MB3 to list patients’ details by condition.
+2. MB3 lists patients' details by condition and displays a success message.  
+   Use case ends.
+
+**Extensions:**
+* 1a. MB3 detects an error when listing patients by condition.  
+  * 1a1. MB3 does not list the patients by condition and shows an error message.  
+Use case ends.
+
+---
+
+**Use case:** UC14 - List Patients By Priority
+**MSS:**
+1. User requests MB3 to list patients’ details by priority.
+2. MB3 lists patients' details by priority and displays a success message.  
+   Use case ends.
+
+**Extensions:**
+* 1a. MB3 detects an error when listing patients by priority.  
+  * 1a1. MB3 does not list the patients by priority and shows an error message.  
+Use case ends.
+
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  The programme should be able to startup within 3s (minimum startup time)
+5.  Error messages and prompts should be clear and easy to understand for users of all technical skill levels.
+6. Data stored locally should be encrypted and only accessible via the app with correct authentication.
 
-*{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+  **Patient Contact**:  
+  Refers to the personal and medical information of an individual being treated, including name, NRIC, phone number, and medical details.
+
+* **Medical Condition**:  
+A diagnosis or health issue assigned to a patient, such as "Diabetes Type 2" or "Hypertension." This helps track and manage a patient's health status.
+
+* **Appointment**:  
+A scheduled meeting between a patient and a medical professional, stored with details like date, time, and purpose.
+
+* **NRIC**:  
+National Registration Identity Card, a unique 9-character identifier used to distinguish each patient or medical worker.
+
+* **Priority Level**:  
+Indicates the urgency of a patient’s condition, with values like low, medium, or high to assist medical professionals in managing urgent cases.
+
+* **Allergy**:  
+A specific substance or condition that a patient has a sensitivity or adverse reaction to, such as "Peanuts" or "Lactose."
+
+* **Contact List**:  
+A list of all patients and their associated information, which can be searched or filtered by various criteria like name or condition.
+
+* **Doctor**:  
+A medical professional who uses MediBase3 to manage patient information, schedule appointments, and track medical conditions.
+
+* **Appointment Date and Time**:  
+The specific day and time when a patient is scheduled to see a doctor, formatted as `YYYY-MM-DD` and `HH:MM`.
+
+* **Medical History**:  
+A chronological record of a patient’s past medical conditions, treatments, allergies, and appointments.
+
+* **Search by Condition**:  
+A feature that allows users to filter and display patients based on specific medical conditions.
 
 --------------------------------------------------------------------------------------------------------------------
 
