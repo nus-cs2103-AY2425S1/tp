@@ -10,6 +10,7 @@ We are a team based in the [School of Computing, National University of Singapor
 You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
+AY2425S1-CS2103T-F14a-4
 
 ### John Doe
 
@@ -21,14 +22,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Justin Jiang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yooplo.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/yooplo)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Team Lead
+* Role: Developer
 * Responsibilities: UI
 
 ### Johnny Doe
