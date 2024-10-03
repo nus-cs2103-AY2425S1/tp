@@ -38,8 +38,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/zi-yii)] 
 [[portfolio](team/chenziyi.md)]
 
-* Role: Developer
-* Responsibilities: Scheduling and tracking of project tasks
+* Role: Code quality checker
+* Responsibilities: Ensure code follows the coding standard
 
 ### Jean Doe
 
