@@ -302,30 +302,156 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Add a student**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User chooses to add a student to the list of contacts
+2. User enters details of student they wish to add to the list
+3. AddressBook adds the student and updates the list of contacts to include the added student
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The given data is invalid.
+
+    * 2a1. AddressBook shows an error message.
+
+      Use case ends.
+
+**Use case: UC02 - Find a student**
+
+**Preconditions: The list of contacts is not empty**
+
+**MSS**
+
+1. User enters a description of the student they wish to find
+2. AddressBook returns a list of students that fits the description
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The given data is invalid.
+
+    * 1a1. AddressBook shows an error message.
+
+      Use case ends.
+
+* 2a. No student in the list fits the given description.
 
   Use case ends.
 
-* 3a. The given index is invalid.
+**Use case: UC03 - Add a grade for a student**
 
-    * 3a1. AddressBook shows an error message.
+**MSS**
 
-      Use case resumes at step 2.
+1. User <u>finds the student they wish to add a grade for (UC02)</u>
+2. User sends a request to AddressBook to add a grade for the student in the list
+3. AddressBook adds the grade for the student and updates the list of contacts
 
-*{More to be added}*
+   Use case ends.
+
+**Extensions**
+
+* 1a. User is unable to find the student.
+
+  Use case ends.
+
+* 2a. The given data is invalid.
+
+    * 2a1. AddressBook shows an error message.
+
+      Use case ends.
+
+**Use case: UC04 - Delete a student**
+
+**MSS**
+
+1. User <u>finds the student they wish to delete from the list (UC02)</u>
+2. User sends a request to AddressBook to delete the student in the list
+3. AddressBook deletes the student and updates the list of contacts
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User is unable to find the student.
+
+  Use case ends.
+
+* 2a. The given data is invalid.
+
+    * 2a1. AddressBook shows an error message.
+
+      Use case ends.
+
+**Use case: UC05 - Edit a student's details**
+
+**MSS**
+
+1. User <u>finds the student they wish to edit (UC02)</u>
+2. User sends a request to AddressBook to edit the details of the student in the list
+3. AddressBook edits the student's details and updates the list of contacts
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User is unable to find the student.
+
+  Use case ends.
+
+* 2a. The given data is invalid.
+
+    * 2a1. AddressBook shows an error message.
+
+      Use case ends.
+
+**Use case: UC06 - Add a tag to a student**
+
+**MSS**
+
+1. User <u>finds the student they wish to edit (UC02)</u>
+2. User sends a request to AddressBook to add a tag to the student in the list
+3. AddressBook adds the tag to the student and updates the list of contacts
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User is unable to find the student.
+
+  Use case ends.
+
+* 2a. The given data is invalid.
+
+    * 2a1. AddressBook shows an error message.
+
+      Use case ends.
+
+**Use case: UC07 - Add contacts of next-of-kins of a student**
+
+**MSS**
+
+1. User <u>finds the student they wish to add contacts of next-of-kins for (UC02)</u>
+2. User sends a request to AddressBook to add contacts of next-of-kins of the student in the list
+3. AddressBook adds the contacts and updates the list of contacts
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User is unable to find the student.
+
+  Use case ends.
+
+* 2a. The given data is invalid.
+
+    * 2a1. AddressBook shows an error message.
+
+      Use case ends.
 
 ### Non-Functional Requirements
 
