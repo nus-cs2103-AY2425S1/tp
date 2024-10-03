@@ -5,7 +5,7 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `xingye[at]u.nus.edu`
 
 ## Project team
 
@@ -13,36 +13,36 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/zhou-colla.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[homepage](https://66f99fbb84cc0e45d28ec44b--teal-baklava-6bd705.netlify.app/)]
+[[github](https://github.com/zhou-colla)]
+[[portfolio](team/zhouxingye.md)]
 
 * Role: Project Advisor
 
-### Jane Doe
+### Haleema Irfan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/haleemairfan.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/yyueyii)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Developer
+* Responsibilities: In charge of Logic
 
-### Johnny Doe
+### Varatharaju Mithuna
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/miuna9890.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/miuna9890/tp)] [[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Li Yueyi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yyueyii.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/yyueyii)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
@@ -52,8 +52,9 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/minkhanteain.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/minkhanteain)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: UI
+

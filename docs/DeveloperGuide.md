@@ -262,27 +262,28 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* private school teachers who manage multiple classes
+* have a need to track and organise details of students and parents/guardians (e.g. phone numbers, emails, addresses)
+* have a need to efficiently access information regarding students and parents/guardians for communication during various situations (e.g. parent-teacher meetings, emergencies, administrative tasks)
+* have a need to edit data regarding students and parents/guardians to track attendance
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: simplifies contact management by providing an all-in-one user-friendly interface for teachers in private education institutions. Ease their pain of manually tracking things like attendance and parents/students’ contact.
+
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
+| Priority | As a …​                                     | I want to …​                    | So that I can…​                                                         |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| `* * *`  | novice user                                | view contact information       | view the contact information of my student, Peter                      |
+| `* * *`  | novice user                                | add new contact information (phone-number, email) | keep the contact information in one place           |
+| `* * *`  | novice user                                | delete existing contact if I no longer need to have their contact| store relevant contacts only         |
+| `* *`    | new user                                   | view the help  guide easily    | learn how to use the app                                               |
+| `* *`    | intermediate user                          | filter the user by lesson day and time | find all students in a class at once                           |
+| `* *`    | intermediate user                          | sort students by last name     | view the contacts as a sorted list                                     |
+| `*`      | conservative user                          | set up an access pasword       | safeguard the information                                              |
 
 *{More to be added}*
 
@@ -290,28 +291,78 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to add a contact using the command format: add n/[name] a/[address] c/[contact]
+2. Addressbook checks if command is in the valid format 
+3. Addressbook adds the contact to the existing list
+4. Addressbook displays a success message to the user: [Contact name] successfully added to list.
+
+   Use case ends.
+   
+**Extensions**
+
+* 3a. Addressbook displays an error message: Invalid command foramt. Please use add n/[name] a/[address] c/[contact]
+
+  Use case ends.
+  
+* 4a. Addressbook displays an error message: Invalid Name
+  
+  Use case ends.
+   
+**Use case: Delete a contact**
+
+**MSS**
+
+1.  User requests to delete a contact using the command format: delete [full name]
+2.  Addressbook checks if command is in the valid format
+3.  Addressbook checks if the entered name matches any contact(s) (case-insensitive match)
+4.  Addresbook shows the full entry of the relevant contact
+5.  Addressbook prompts the user to review and confirm deletion: Are you sure you want to delete [full name]’s contact? (y/n)
+6.  User confirms deletion by entering 'y'
+7.  Addressbook deletes the contact
+8.  Addressbook displays a success message: the contact [full name] was successfully deleted
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 3a. Addressbook displays an error message: Invalid command format. Please use delete [full name]. Do not add extra spaces in the middle of the name
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 4a. Addressbook shows all matching entries 
 
-    * 3a1. AddressBook shows an error message.
+    * 4a1. Addressbook prompts the user to select the right contact to delete: Please input the index num of the contact you want to delete
+    * 4a2. User chooses the right contact to delete by inputting the relevant list number
 
-      Use case resumes at step 2.
+      Use case resumes at step 5.
+
+* 4a. Addressbook displays an error message: Contact [full name] does not exist in the address book
+
+**Use case: View contacts**
+
+**MSS**
+
+1.  User requests to view all contacts use the command: view
+2.  Addressbook checks if command is in the valid format
+3.  Addressbook retrieves all contacts
+4.  Addressbook displays all contacts to user as a list
+5.  Each contact's full name, contact number and address is displayed in the list
+   
+    Use case ends.
+
+**Extensions**
+
+* 3a. Addressbook displays an empty list
+
+  Use case ends.
+
+* 3b. Addressbook displays an error message: Invalid command input. Please use 'view' to see the contact list
+
+  Use case ends.
 
 *{More to be added}*
 
@@ -320,6 +371,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  The user interface should be intuitive for teachers with minimal technical expertise
 
 *{More to be added}*
 
@@ -327,6 +379,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Command-Line Interface (CLI)**: A text-based interface that allows users to interact with the system by typing commands
+* **Case-insensitive**: Refers to functionality where uppercase and lowercase letters are treated as the same (e.g., "Peter Tan" is the same as "peter tan")
+* **Novice user**: A user with limited experience or familiarity with the system, requiring guidance and simple, intuitive interfaces to perform tasks effectively
+* **Intermediate user**: A user with some experience and familiarity with the system, capable of performing tasks with minimal guidance but not yet an expert
 
 --------------------------------------------------------------------------------------------------------------------
 
