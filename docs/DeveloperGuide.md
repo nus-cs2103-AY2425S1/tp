@@ -287,15 +287,25 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
-
+| Priority | As a …​           | I want to …​                                                                          | So that I can…​                                                        |
+|----------|-------------------|---------------------------------------------------------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | new user          | have a quick tutorial of the CLI commands                                             | refer to instructions when I forget how to use the App                 |
+| `* * *`  | receptionist      | quickly retrieve the contact details of clients using simple CLI commands             | contact them promptly about updates or issues                          |
+| `* * *`  | mechanic          | be able to add new cars to the list                                                   | accommodate new clients                                                |
+| `* * *`  | mechanic          | have access to the full history log of each car that includes all visits and services | quickly check on the logs of cars                                      |
+| `* *`    | frequent CLI user | be able to customize commands and shortcuts                                           | tweak my experience/improve productivity                               |
+| `* *`    | mechanic          | generate reports on the most common issues faced by cars of a specific model          |                                                                        |
+| `* *`    | user              | have a good user interface                                                            | use the app with greater ease                                          |
+| `* *`    | mechanic          | track how long I have taken for each issue                                            | not waste too much time on a single issue                              |
+| `* *`    | mechanic          | receive the most urgent issues                                                        | focus on the issues from the most important to the least               |
+| `* *`    | mechanic          | be notified when a returning client's car is brought in                               | check their car's history before starting any new work                 |
+| `* *`    | admin             | flag vehicles as priority                                                             | inform the mechanic on which vehicles to work on first                 |
+| `*`      | admin             | track vehicles whose service dates are coming soon                                    | recommend and schedule servicing for car owners                        |
+| `* *`    | mechanic          | categorize issues based on severity                                                   | prioritize the most critical repairs and address urgent problems first |
+| `* *`    | mechanic          | add notes/statements belonging to certain cars as they may be important               |                                                                        |
+| `*`      | mechanic          | list out all cars which are "unserviced"                                              | to know how much workload I have left                                  |
+| `*`      | mechanic          | be able to see when marks like "serviced" or "unserviced" were added                  | cover an absent/on-leave coworker if needed                            |
+| `* *`    | mechanic          | know who did work on what car                                                         | pinpoint the working staff if there were issues with a repair job      |
 *{More to be added}*
 
 ### Use cases
