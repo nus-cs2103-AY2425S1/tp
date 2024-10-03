@@ -306,7 +306,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User wishes to add a student to the list of contacts
+1. User chooses to add a student to the list of contacts
 2. User enters details of student they wish to add to the list
 3. AddressBook adds the student and updates the list of contacts to include the added student
 
@@ -348,7 +348,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User <u>finds the student they wish to add a grade for (UC02)</u>
-2. User requests to add a grade for the student in the list
+2. User sends a request to AddressBook to add a grade for the student in the list
 3. AddressBook adds the grade for the student and updates the list of contacts
 
    Use case ends.
@@ -370,7 +370,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User <u>finds the student they wish to delete from the list (UC02)</u>
-2. User requests to delete the student in the list
+2. User sends a request to AddressBook to delete the student in the list
 3. AddressBook deletes the student and updates the list of contacts
 
    Use case ends.
@@ -392,7 +392,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User <u>finds the student they wish to edit (UC02)</u>
-2. User requests to edit the details of the student in the list
+2. User sends a request to AddressBook to edit the details of the student in the list
 3. AddressBook edits the student's details and updates the list of contacts
 
    Use case ends.
@@ -414,7 +414,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User <u>finds the student they wish to edit (UC02)</u>
-2. User requests to add a tag to the student in the list
+2. User sends a request to AddressBook to add a tag to the student in the list
 3. AddressBook adds the tag to the student and updates the list of contacts
 
    Use case ends.
@@ -436,7 +436,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User <u>finds the student they wish to add contacts of next-of-kins for (UC02)</u>
-2. User requests to add contacts of next-of-kins of the student in the list
+2. User sends a request to AddressBook to add contacts of next-of-kins of the student in the list
 3. AddressBook adds the contacts and updates the list of contacts
 
    Use case ends.
