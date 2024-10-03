@@ -35,7 +35,7 @@ public class ClassIdContainsKeywordsPredicate implements Predicate<Person> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof NameContainsKeywordsPredicate)) {
+        if (!(other instanceof ClassIdContainsKeywordsPredicate)) {
             return false;
         }
 
