@@ -40,15 +40,14 @@ https://github.com/Shruthiiii03
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Jason Chuah
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jason-chuah.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/jason-chuah)]
+[[portfolio](team/jason-chuah.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
 
 ### James Doe
 
