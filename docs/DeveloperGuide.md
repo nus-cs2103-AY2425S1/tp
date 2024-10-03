@@ -366,6 +366,71 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    * Steps 3a1-3a2 are repeated until a vendor can be found.  
    * Use case resumes at step 5.
 
+**Use Case:** UC4 - Create new vendor  
+**Actor:** User  
+**MSS:**
+1. User opens the application.
+2. GAB opens up to the home page.
+3. User enters /add vendorsName location contactNumber
+4. GAB displays the added vendor
+5. Use case ends.
+
+**Extensions:**
+* 3a. Wrong add command
+    * 3a1. GAB responds with wrong command format error message
+    * 3a2. User enters new data
+    * Steps 3a1-3a2 are repeated until the right add vendor command format is recognised
+    * Use case resumes at step 4.
+* 3b. Adding tags
+    * 3b1. User enters /add vendorsName location contactNumber /tag tag
+    * 3b2. GAB returns added vendor
+    * Steps 3b1-3b2 are repeated until the right add vendor command format is recognised
+    * Use case resumes at step 4.
+
+**Use Case:** UC5 - Update vendor
+**Actor:** User  
+**MSS:**
+1. User opens the application.
+2. GAB opens up to the home page.
+3. User enters /update listIndex vendorsName location contactNumber
+4. GAB displays the updated vendor
+5. Use case ends.
+
+**Extensions:**
+* 3a. Wrong add command
+    * 3a1. GAB responds with wrong command format error message
+    * 3a2. User enters new data
+    * Steps 3a1-3a2 are repeated until the right update vendor command format is recognised
+    * Use case resumes at step 4.
+* 3b. Multiple saved vendors with the same name
+    * 3a1. User first <u>searches for vendors name (UC1).</u>
+    * 3a2. GAB returns search result
+    * 3a3. User identifies the index of the right vendor to be updated
+    * Steps 3b1-3b3 are repeated until user identifies the right vendor
+    * Use case resumes at step 4.
+
+**Use Case:** UC6 - Adding tags
+**Actor:** User  
+**MSS:**
+1. User opens the application.
+2. GAB opens up to the home page.
+3. User enters /update listIndex vendorsName /tag tag
+4. GAB displays the updated vendor
+5. Use case ends.
+
+**Extensions:**
+* 3a. Wrong add command
+    * 3a1. GAB responds with wrong command format error message
+    * 3a2. User enters new data
+    * Steps 3a1-3a2 are repeated until the right update vendor command format is recognised
+    * Use case resumes at step 4.
+* 3b. Multiple saved vendors with the same name
+    * 3a1. User first <u>searches for vendors name (UC1).</u>
+    * 3a2. GAB returns search result
+    * 3a3. User identifies the index of the right vendor to be updated
+    * Steps 3b1-3b3 are repeated until user identifies the right vendor
+    * Use case resumes at step 4.
+
 ### Non-Functional Requirements
 
 1. **Compatibility Requirement**: Should be compatible with any system where Java 17 and the corresponding JavaFX version is installed.
