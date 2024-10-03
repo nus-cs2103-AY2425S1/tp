@@ -335,13 +335,23 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* CS2103 tutor
+* has a need to manage a significant number of students
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: 
+
+* Manage contacts faster than a typical mouse/GUI driven app
+* Helps to track the following:
+  * Students
+  * Their groups
+  * Group projects’ progress
+  * TA will create Groups and assign tasks
+    * Mark the tasks as the groups complete them
+
 
 ### User stories
 
