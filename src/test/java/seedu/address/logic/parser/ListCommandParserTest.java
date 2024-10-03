@@ -1,13 +1,15 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.fail;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 
 public class ListCommandParserTest {
 
@@ -25,6 +27,7 @@ public class ListCommandParserTest {
 
     @Test
     public void parse_throwsParseException() {
-        assertParseFailure(parser, "list all", String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "list all",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
     }
 }
