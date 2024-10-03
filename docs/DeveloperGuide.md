@@ -296,6 +296,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | real estate agent | delete a client (buyer or seller) from ClientGrid          | keep all their contact information organized in one place              |
 | `* * *`  | real estate agent | add new properties to client grid | keep track of my client's property details                             |
 | `* * *`  | real estate agent | delete a property entry from ClientGrid                    | remove entries that I no longer need                                   |
+| `* * *`  | real estate agent    | list information about properties                          | easily manage my portfolio of available properties                     |
+| `* * *`  | real estate agent    | list information about buyers                              | match buyers with suitable properties based on their preferences        |
+| `* * *`  | real estate agent    | list information about sellers                             | manage relationships and property listings efficiently                 |
 | `* *`    | real estate agent | indicate that a buyer wants to buy property X at Y price   | keep track of the clients that are involved in the transaction         |
 | `* *`    | real estate agent | indicate that a seller wants to sell property X at Y price | keep track of the clients that are involved in the transaction                                                |
 
@@ -321,6 +324,7 @@ Extensions:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1a2. Real estate agent enters new data.
 
 Steps 1a1-1a2 are repeated until the data entered are correct.
+
 
 **Use case: UC2 - Delete Client**
 
@@ -396,6 +400,14 @@ Extensions:
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use case ends.
 
+**Use case: UC5 - List buyers, sellers, clients or properties**
+
+MSS:
+
+1. Real Estate Agent requests to view a list of buyers, sellers, clients or properties
+2. ClientGrid will respond with the corresponding list
+
+Use case ends.
 
 ### Non-Functional Requirements
 
