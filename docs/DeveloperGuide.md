@@ -318,100 +318,107 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User chooses to add a client
-2.  User enters the required instructions
-3.  User enters client's information
+2.  User enters client's information
+3.  System validates user input
 4.  System updates new client information
 
     Use case ends.
 
 **Extensions**
 
-* 2a. System detects error for invalid instruction
+* 3a. System detects error for invalid instruction
 
-    * 2a1. System prompts error for invalid instruction
-    * 2a2. User enters valid instruction 
+    * 3a1. System prompts error for invalid instruction
+    * 3a2. User enters valid instruction 
     
-    Use case continues from step 3.
+    Use case continues from step 2.
  
-* 3a. System detects error in client's information
+* 3b. System detects error in client's information
 
-    * 2a1. System prompts error for invalid client's information
-    * 2a2. User enters valid client's information
+    * 3b1. System prompts error for invalid client's information
+    * 3b2. User enters valid client's information
 
-    Use case continues from step 4.
+    Use case continues from step 3.
 
-* 3b. System detects duplicated client's information
+* 3c. System detects duplicated client's information
 
-    * 2a1. System prompts error for duplicated client's information
-    * 2a2. User enters non-duplicated client's information
+    * 3c1. System prompts error for duplicated client's information
+    * 3c2. User enters non-duplicated client's information
 
-    Use case continues from step 4.
+    Use case continues from step 3.
 
 **Use case: Add a client's rental information**
 
 **MSS**
 
-1.  User chooses to add rental information to a specific client
-2.  User enters the required instruction
-3.  User selects client
-4.  User enters client's rental information
+1.  User chooses to add rental information
+2.  User selects client
+3.  User enters client's rental information
+4.  System validates user input
 5.  System updates new client information
 
     Use case ends.
 
 **Extensions**
 
-* 2a. System detects error for invalid instruction
+* 4a. System detects error for invalid instruction
 
-    * 2a1. System prompts error for invalid instruction
-    * 2a2. User enters valid instruction
+    * 4a1. System prompts error for invalid instruction
+    * 4a2. User enters valid instruction
+
+    Use case continues from step 2.
+
+* 4b. System detects error for invalid client
+
+    * 4b1. System prompts error for invalid client
+    * 4b2. User enters valid client
 
     Use case continues from step 3.
 
-* 3a. System detects error for invalid client
+* 4c. System detects error in client's rental information
 
-    * 2a1. System prompts error for invalid client
-    * 2a2. User enters valid client
+    * 4c1. System prompts error for invalid client's rental information
+    * 4c2. User enters valid client's rental information
 
     Use case continues from step 4.
 
-* 4a. System detects error in client's rental information
+* 4d. System detects duplicated client's rental information
 
-    * 2a1. System prompts error for invalid client's rental information
-    * 2a2. User enters valid client's rental information
+    * 4d1. System prompts error for duplicated client's rental information
+    * 4d2. User enters correct non-duplicated client's information
 
-    Use case continues from step 5.
-
-* 4b. System detects duplicated client's rental information
-
-    * 4a1. System prompts error for duplicated client's rental information
-    * 4a2. User enters correct non-duplicated client's information
-
-    Use case continues from step 5.
+    Use case continues from step 4.
 
 **Use case: Find a client**
 
 **MSS**
 
 1.  User chooses to find a client
-2.  User enters the required instruction
-3.  User enters keyword
+2.  User enters keyword
+3.  System validates user input
 4.  System filters list of client based on keyword
 
     Use case ends.
 
 **Extensions**
 
-* 2a. System detects error for invalid instruction
+* 3a. System detects error for invalid instruction
 
-    * 2a1. System prompts error for invalid instruction
-    * 2a2. User enters valid instruction
+    * 3a1. System prompts error for invalid instruction
+    * 3a2. User enters valid instruction
+
+    Use case continues from step 2.
+
+* 3b. System detects error for invalid keyword
+
+    * 3b1. System prompts error for invalid keyword
+    * 3b2. User enters valid keyword
 
     Use case continues from step 3.
 
 * 4a. The list is empty.
 
-  Use case ends.
+    Use case ends.
 
 *{More to be added}*
 
