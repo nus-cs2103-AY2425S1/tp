@@ -11,6 +11,8 @@ You can reach us at our emails:
 
 - `E1113234@u.nus.edu.sg`
 
+- `kheehou.yong@u.nus.edu`
+
 ## Project team
 
 ### Anthony Hermanto
@@ -22,6 +24,15 @@ You can reach us at our emails:
 
 * Role: Team Lead
 * Responsibilities: Manage the team. Handle the logic for delete commands. (delete buyer and delete seller)
+
+### Yong Khee Hou
+
+![Khee Hou picture](./images/yongkheehou.png)
+
+[[github](https://github.com/yongkheehou)]
+
+* Role: Documentation
+* Responsibilities: Ensure well-maintained documentation for the project. Handle command to add clients (buyers/ sellers).
 
 ### Jane Doe
 

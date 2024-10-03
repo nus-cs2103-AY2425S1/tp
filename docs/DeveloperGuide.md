@@ -274,72 +274,143 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Real estate agent who needs to manage a significant number of clients and properties.
+* prefer desktop apps over other types.
+* can type fast.
+* prefers typing to mouse interactions.
+* is reasonably comfortable using CLI apps.
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: 
+
+ClientGrid is an address book designed for real estate agents to efficiently manage client contacts, including buyers and sellers. It provides a streamlined way to organize client data and monitor properties the agent is in charge of while maintaining core address book functionality.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+
+| Priority | As a …​           | I want to …​                                               | So that I can…​                                                        |
+|----------|-------------------|------------------------------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | real estate agent | add a new client (buyer or seller) to ClientGrid           | keep all their contact information organized in one place
+| `* * *`  | real estate agent | delete a client (buyer or seller) from ClientGrid          | keep all their contact information organized in one place              |
+| `* * *`  | real estate agent | add new properties to client grid | keep track of my client's property details                             |
+| `* * *`  | real estate agent | delete a property entry from ClientGrid                    | remove entries that I no longer need                                   |
+| `* *`    | real estate agent | indicate that a buyer wants to buy property X at Y price   | keep track of the clients that are involved in the transaction         |
+| `* *`    | real estate agent | indicate that a seller wants to sell property X at Y price | keep track of the clients that are involved in the transaction                                                |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `ClientGrid` and the **Actor** is the `real estate agent`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC1 - Add Client (Buyer or Seller)**
+
+MSS:
+1. Real estate agent requests to add a buyer/ seller to ClientGrid and passes in the buyer/ seller's name, phone number and email.
+2. ClientGrid will add the buyer/ seller with the name, phone number, and email specified by the real estate agent.
+Use case ends.
+
+Extensions:
+
+&nbsp;&nbsp;&nbsp;&nbsp;1a. ClientGrid detects an error in the name/ phone number/ email format provided by the real estate agent.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1a1. ClientGrid requests for the correct data.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1a2. Real estate agent enters new data.
+
+Steps 1a1-1a2 are repeated until the data entered are correct.
+
+**Use case: UC2 - Delete Client**
+
+MSS:
+1. Real estate agent requests to delete a buyer or seller based on their phone number.
+2. ClientGrid will delete the respective client based on the phone number.
+Use case ends.
+
+Extensions:
+
+&nbsp;&nbsp;&nbsp;&nbsp;1a. ClientGrid detects an error in the phone number format provided by the real estate agent .
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1a1. ClientGrid requests for the correct data 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1a2. Real estate agent enters new data
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Steps 1a1-1a2 are repeated until the data entered are correct.
+
+**Use case: UC3 - Add a property**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User inputs details of property
+2.  System outputs success message in user console
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. Invalid command detail symbols
 
-  Use case ends.
+    * 1a1. System outputs error message in user console
 
-* 3a. The given index is invalid.
+      Use case ends.
 
-    * 3a1. AddressBook shows an error message.
+* 1b. Postal code number contains invalid symbols and format typical in Singapore
 
-      Use case resumes at step 2.
+    * 1b1. System outputs error message in user console
 
-*{More to be added}*
+      Use case ends.
+
+* 1c. Unit number contains invalid symbols and format
+
+    * 1c1. System outputs error message in user console
+
+      Use case ends.
+
+**Use case: UC4 - Delete Property**
+
+Guarantees:
+* If property listing was in the database originally, it would be removed from property database with no side effects.
+
+MSS:
+1. Real estate agent requests to delete a property listing based on the property’s postal code and unit number.
+2. ClientGrid will delete the respective property listing and indicate success.
+Use case ends.
+
+Extensions:
+
+&nbsp;&nbsp;&nbsp;&nbsp;1a. ClientGrid detects an error in the postal code or unit number format provided by the real estate agent, .
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1a1. ClientGrid requests for the correct data.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1a2. Real estate agent enters new data.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Steps 1a1-1a2 are repeated until the data entered are correct.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 2.
+
+&nbsp;&nbsp;&nbsp;&nbsp;1b. ClientGrid is unable to find a matching property listing entry in the database.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1b1. ClientGrid informs real estate agent that the property listing does not exist in the database.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use case ends.
+
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 clients and 500 properties without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4. The client and property databases should be updated after every command successfully executed by ClientGrid.
+5. Should be able to handle case of corrupted file
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Clients**: Buyers or Sellers of properties the real estate agent is managing
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-
+* **Corrupted file**: Missing file and invalid data
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
