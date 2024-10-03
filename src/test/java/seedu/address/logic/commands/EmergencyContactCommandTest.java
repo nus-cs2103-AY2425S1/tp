@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.EmergencyContact;
 
 public class EmergencyContactCommandTest {
 
@@ -24,20 +25,18 @@ public class EmergencyContactCommandTest {
 
     @Test
     public void execute() {
-        final String emergencyContactName = "Lily";
-        final String emergencyContactNumber = "12345678";
-        assertCommandFailure(new EmergencyContactCommand(INDEX_FIRST_PERSON, emergencyContactName,
-                        emergencyContactNumber), model,
-                String.format(MESSAGE_ARGUMENTS, INDEX_FIRST_PERSON.getOneBased(), emergencyContactName,
-                        emergencyContactNumber));
+        final EmergencyContact emergencyContact = new EmergencyContact("Lily", "12345678");
+        assertCommandFailure(new EmergencyContactCommand(INDEX_FIRST_PERSON, emergencyContact), model,
+                String.format(MESSAGE_ARGUMENTS, INDEX_FIRST_PERSON.getOneBased(), emergencyContact.getName(),
+                        emergencyContact.getNumber()));
     }
     @Test
     public void equals() {
         final EmergencyContactCommand standardCommand = new EmergencyContactCommand(INDEX_FIRST_PERSON,
-                VALID_EMERGENCY_CONTACT_NAME_AMY, VALID_EMERGENCY_CONTACT_NUMBER_AMY);
+                new EmergencyContact(VALID_EMERGENCY_CONTACT_NAME_AMY, VALID_EMERGENCY_CONTACT_NUMBER_AMY));
         // same values -> returns true
         EmergencyContactCommand commandWithSameValues = new EmergencyContactCommand(INDEX_FIRST_PERSON,
-                VALID_EMERGENCY_CONTACT_NAME_AMY, VALID_EMERGENCY_CONTACT_NUMBER_AMY);
+                new EmergencyContact(VALID_EMERGENCY_CONTACT_NAME_AMY, VALID_EMERGENCY_CONTACT_NUMBER_AMY));
         assertTrue(standardCommand.equals(commandWithSameValues));
         // same object -> returns true
         assertTrue(standardCommand.equals(standardCommand));
@@ -47,9 +46,9 @@ public class EmergencyContactCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
         // different index -> returns false
         assertFalse(standardCommand.equals(new EmergencyContactCommand(INDEX_SECOND_PERSON,
-                VALID_EMERGENCY_CONTACT_NAME_AMY, VALID_EMERGENCY_CONTACT_NUMBER_AMY)));
+                new EmergencyContact(VALID_EMERGENCY_CONTACT_NAME_AMY, VALID_EMERGENCY_CONTACT_NUMBER_AMY))));
         // different remark -> returns false
         assertFalse(standardCommand.equals(new EmergencyContactCommand(INDEX_FIRST_PERSON,
-                VALID_EMERGENCY_CONTACT_NAME_BOB, VALID_EMERGENCY_CONTACT_NUMBER_BOB)));
+                new EmergencyContact(VALID_EMERGENCY_CONTACT_NAME_BOB, VALID_EMERGENCY_CONTACT_NUMBER_BOB))));
     }
 }
