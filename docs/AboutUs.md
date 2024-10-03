@@ -20,21 +20,22 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Jane Doe
+### Wei Zhi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/w3izhi.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/W3iZhi)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Developer
+* Responsibilities: Data
 
 ### Yao Hejun
 
 <img src="images/testing1234567891011121314.png" width="200px">
 
 [[github](http://github.com/testing1234567891011121314)] [[portfolio](team/johndoe.md)]
+
 
 * Role: In charge of code quality
 * Responsibilities: Responsible for quality of code
