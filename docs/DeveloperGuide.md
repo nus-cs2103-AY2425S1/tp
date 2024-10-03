@@ -310,40 +310,39 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to edit the details of a person and specifies what they want to change the details to
-4.  AddressBook changes the existing details to the specified details and shows list of persons with new details
+1. User <ins>lists all contacts (UC01)</ins>
+2. User requests to edit the details of a person and specifies what they want to change the details to
+3. AddressBook changes the existing details to the specified details and shows list of persons with new details
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The list is empty.
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 2a. The given index is invalid.
 
-    * 3a1. System shows an error message prompting the user to put in a valid index.
-
-      Use case resumes at step 2.
-
-* 3b. The user does not specify what type of details they want to change.
-
-    * 3b1. System shows an error message prompting the user to put in the type of details they want to edit.
+    * 2a1. System shows an error message prompting the user to put in a valid index.
 
       Use case resumes at step 2.
 
-* 3c. The user does not specify what the new details should be.
+* 2b. The user does not specify what type of details they want to change.
 
-    * 3b1. System shows an error message prompting the user to put in the new details.
+    * 2b1. System shows an error message prompting the user to put in the type of details they want to edit.
 
       Use case resumes at step 2.
 
-* 3d. The user specifies details that do not meet the requirements of the detail type.
+* 2c. The user does not specify what the new details should be.
 
-    * 3b1. System shows an error message prompting the user with the correct detail type format and requirements.
+    * 2b1. System shows an error message prompting the user to put in the new details.
+
+      Use case resumes at step 2.
+
+* 2d. The user specifies details that do not meet the requirements of the detail type.
+
+    * 2b1. System shows an error message prompting the user with the correct detail type format and requirements.
 
       Use case resumes at step 2.
 
@@ -362,30 +361,29 @@ Guarantees: no persons will be left in the system.
 
 **MSS**
 
-1.  User requests to list persons
-2.  System shows a list of persons
-3.  User requests to delete a contact
-4.  System gives a prompt to confirm whether the user wants to delete the contact
-5.  User confirms they want to delete the contact
-6.  System deletes the contact and shows the updated list of persons
+1. User <ins>lists all contacts (UC01)</ins>
+2. User requests to delete a contact
+3. System gives a prompt to confirm whether the user wants to delete the contact
+4. User confirms they want to delete the contact
+5. System deletes the contact and shows the updated list of persons
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The list is empty.
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 2a. The given index is invalid.
 
-    * 3a1. System shows an error message prompting the user to put in a valid index.
+    * 2a1. System shows an error message prompting the user to put in a valid index.
 
       Use case resumes at step 2.
 
-* 4a. User says they do not want to delete the contact.
+* 3a. User says they do not want to delete the contact.
 
-    * 4a1. System shows a message indicating the contact was not deleted.
+    * 3a1. System shows a message indicating the contact was not deleted.
 
       Use case ends.
 
@@ -413,22 +411,21 @@ Guarantees: no persons will be left in the system.
 
 **MSS**
 
-1.  User requests to list persons
-2.  System shows a list of persons
-3.  User requests to add a dietary status to the person
-4.  System adds the dietary status to the contact and shows list of persons with new details
+1. User <ins>lists all contacts (UC01)</ins>
+2. User requests to add a dietary status to the person
+3. System adds the dietary status to the contact and shows list of persons with new details
     
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The list is empty.
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 2a. The given index is invalid.
 
-    * 3a1. System shows an error message prompting the user to put in a valid index.
+    * 2a1. System shows an error message prompting the user to put in a valid index.
 
       Use case resumes at step 2.
 
@@ -451,28 +448,27 @@ Guarantees: no persons will be left in the system.
 
 **MSS**
 
-1.  User requests to list persons
-2.  System shows a list of persons
-3.  User requests to add additional information for a person
-4.  System adds the additional information to the contact and shows list of persons with new details
+1. User <ins>lists all contacts (UC01)</ins>
+2. User requests to add additional information for a person
+3. System adds the additional information to the contact and shows list of persons with new details
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The list is empty.
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 2a. The given index is invalid.
 
-    * 3a1. System shows an error message prompting the user to put in a valid index.
+    * 2a1. System shows an error message prompting the user to put in a valid index.
 
       Use case resumes at step 2.
 
-* 3a. The additional information is blank.
+* 2a. The additional information is blank.
 
-    * 3a1. System shows an error message prompting the user to type in the additional information.
+    * 2a1. System shows an error message prompting the user to type in the additional information.
 
       Use case resumes at step 2.
 
