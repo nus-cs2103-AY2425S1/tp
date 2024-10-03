@@ -344,21 +344,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The tag already exists.
-* 2b. WedLinker does not create a new tag.
-* 2c. WedLinker informs the user the tag already exists.
+  * 2a1. WedLinker does not create a new tag.
+  * 2a2. WedLinker informs the user the tag already exists.
 
-  Use case ends.
+    Use case ends.
 
 **Use case: UC09 Tagging a contact with a specified tag**
 
 **MSS**
 
-1. User searches for the contact to be tagged (UC05).
+1. User searches for the contact to be tagged (UC06).
 2. WedLinker shows a list of contacts for the search.
-3. User looks for the index to be tagged.
-4. User adds the tag to the contact.
-5. WedLinker informs the user the contact is tagged.
-6. WedLinker shows the user the final result of the contact.
+3. User adds the tag to the contact based on the index of the list.
+4. WedLinker informs the user the contact is tagged.
+5. WedLinker shows the user the final result of the contact.
 
    Use case ends.
 
@@ -368,15 +367,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 4a. WedLinker detects that the tag does not exist.
+* 3a. WedLinker detects that the tag does not exist.
 
-    * 4a1. WedLinker informs the user the tag failed.
+    * 3a1. WedLinker creates a new tag (UC08)
 
-      Use case ends.
+      Use case resumes at step 4
 
-* 4b. The given index is invalid.
+* 3b. The given index is invalid.
 
-    * 4b1. WedLinker shows an error message.
+    * 3b1. WedLinker shows an error message prompting the user to enter a valid index.
 
       Use case resumes at step 2.
 
@@ -384,10 +383,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User searches for the contact by name (UC06).
-2. WedLinker shows a list of contacts containing the name.
-3. User looks for the index to be deleted.
-4. WedLinker deletes the contact.
+1. WedLinker shows a list of contacts containing the name (UC01).
+2. User requests to delete a specific person in the list based on the index.
+3. WedLinker deletes the contact.
 
    Use case ends.
 
@@ -399,7 +397,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 4a. The given index is invalid.
 
-    * 4a1. WedLinker shows an error message.
+    * 4a1. WedLinker shows an error message prompting the user to enter a valid index.
 
       Use case resumes at step 2.
 
