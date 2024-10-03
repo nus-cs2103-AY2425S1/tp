@@ -274,13 +274,24 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+Individuals responsible for planning and managing events who need to communicate with multiple stakeholders concurrently.
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+Examples:
+* corporate event managers
+* wedding planners
+* social event coordinators.
+
+User Characteristics:
+* has a need to manage a significant number of contacts and events
+* prefers typing to mouse interactions
+* can type fast
+* is comfortable using CLI apps
+
+**Value proposition**:
+
+EventTory simplifies the process of organizing events, from small gatherings to large-scale corporate functions, and is optimized for users who prefer a CLI-like interface.
+
+With the ability to track event details and contact information for various vendors, EventTory allows users to manage the status of multiple events with ease.
 
 
 ### User stories
