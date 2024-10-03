@@ -9,7 +9,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to
+* the original source as well}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -258,77 +259,160 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ## **Appendix: Requirements**
 
-### Product scope
+## Product scope
 
-**Target user profile**:
+Product name: Teacher’s Pet
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+Target user profile: Teaching assistants (NUS)
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+Teaching assistants in the National University of Singapore (NUS) who manage multiple students' information and need an
+efficient way to track academic progress, contact details, and other relevant data for each student.
 
+Value proposition:
 
-### User stories
+Teacher’s Pet streamlines the management of student information by consolidating contact details, grades,
+and additional pertinent data into one accessible platform. This efficient tool simplifies tracking student
+performance and communication, enhancing organisational efficiency for teaching assistants.
+
+## User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                    | I want to …​                  | So that I can…​                                                             |
+| -------- |--------------------------------------------|-------------------------------|-----------------------------------------------------------------------------|
+| `* * *`  | TA                                         | add students to the list      | handle new students and have a virtual representation of them               |
+| `* * *`  | TA                                         | delete students from the list | remove students who dropped out of the class                                |
+| `* * *`  | TA                                         | modify a student's details    | rectify any mistakes found in the student's details                         |
+| `* * *`  | TA                                         | find a student by name or ID  | locate details of the student without having to go through the entire list  |
+| `* * *`  | TA                                         | view a student's details      | view the student's details to understand him/her better and contact him/her |
+| `* *`    | TA                                         | track student's attendance    | award credit appropriately                                                  |
+| `*`      | user with many persons in the address book | sort persons by name          | locate a person easily                                                      |
+| `*`      | user with many persons in the address book | sort persons by name          | locate a person easily                                                      |
 
-*{More to be added}*
+## Use cases
 
-### Use cases
+Software System: Teacher’s Pet (TP)
+Use Case: UC1 - Add a Student
+Actors: TA
+Preconditions: Installed the application
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+MSS:
+TA enters student details
+TP shows the new student record
+Use case ends.
 
-**Use case: Delete a person**
+Extensions:
+1a. TA does not enter enough data for TP to add a student
+1a1. TP informs TA of the missing data required
+Use case resumes from step 1.
 
-**MSS**
+1b. TP detects that data is entered in an incorrect format
+1b1. TP informs TA of the correct format
+Use case resumes from step 1.
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
 
-    Use case ends.
+Software System: Teacher’s Pet
+Use Case: UC2 -  Delete student
+Actors: TA
+Preconditions: There are some student data available
 
-**Extensions**
+MSS:
+TA views students (UC3 or UC4)
+TP shows all students based on specified view
+TA deletes student
+TP shows new list with the student deleted
+Use case ends.
 
-* 2a. The list is empty.
+Extensions:
+3a. TA does not enter enough information for TP to delete a student
+3a1. TP informs TA of the missing data required
+Use case resumes from step 1.
 
+3b. TP detects that data is entered in an incorrect format
+3b1. TP informs TA of the correct format
+Use case resumes from step 1.
+
+Software System: Teacher’s Pet
+Use Case: UC3 - List student
+Actors: TA
+Preconditions:  Installed the application
+
+MSS:
+TA enters `list` in text bar
+List of all student data are shown
+Use case ends
+
+Extensions:
+2a. There are no student data found in the list
+2a1. The will be no students shown
+
+
+Software System: Teacher’s Pet
+Use Case: UC4 - Find Student
+Actors: Teaching Assistant (TA)
+Preconditions: There are existing student records in the system.
+
+Main Success Scenario (MSS):
+TA enters the find command with at least one valid search parameter (e.g., /n <Name>, /id <Student ID>).
+Teacher’s Pet (TP) validates the input parameters.
+TP searches the student database for records matching all the specified criteria.
+TP displays a list of students matching the search criteria.
+Use case ends.
+
+Extensions:
+
+1a. TA does not provide any search parameters.
+1a1. TP displays an error message:
+- "At least one search parameter must be provided."
+  Use case resumes at step 1.
+
+1b. TA provides unknown or invalid prefixes.
+1b1. TP displays an error message:
+- "Unknown prefix '/x'. Valid prefixes are /n, /id."
+  Use case resumes at step 1.
+
+1c. TA provides duplicate prefixes.
+1c1. TP displays an error message:
+- "Duplicate prefix '/n' found. Please provide each parameter only once."
+  Use case resumes at step 1.
+
+2a. TA provides invalid input format for parameters.
+- 2a1. For Name (/n):
+    - If the name is empty:
+        - TP displays: "Name cannot be empty."
+
+    - If the name contains the '/' character:
+        - TP displays: "Invalid character '/' in name."
+
+- 2a2. For Student ID (/id):
+
+    - If the Student ID does not match the required format:
+        - TP displays: "Invalid Student ID format. It should be 9 characters with letters at the start and end, and digits in between (e.g., 'A1234567E')."
+
+Use case resumes at step 1.
+
+4a. No students match the criteria.
+4a1. TP displays a message:
+- "No students found matching the criteria."
   Use case ends.
 
-* 3a. The given index is invalid.
+## Non-functional requirements
 
-    * 3a1. AddressBook shows an error message.
+The system shall be capable of handling an increase in users (up to 10,000) without requiring a complete redesign.
+The system works on Linux, Mac and Windows.
+The system shall support at least 100 concurrent users without degradation in performance.
+The system shall respond to user queries within 2 seconds under normal load conditions.
 
-      Use case resumes at step 2.
+## Glossary
 
-*{More to be added}*
+Teaching Assistant (TA): An individual, sometimes also a student, in NUS who is in charge of instructing students for
+a particular module, course or program, usually in small classes of less than 30 students.
 
-### Non-Functional Requirements
+Student: An individual enrolled in a module, course or program in NUS who is receiving instruction and evaluation
+from educators or teaching assistants.
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
-
-### Glossary
-
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-
---------------------------------------------------------------------------------------------------------------------
+Student Profile: A collection of information about an individual student, including name, contact information, year,
+major and academic records.
 
 ## **Appendix: Instructions for manual testing**
 
