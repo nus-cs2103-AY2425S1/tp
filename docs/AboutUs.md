@@ -19,6 +19,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Documentation
 
+
 ### Lu Ruijian
 
 <img src="images/ruijianlu.png" width="200px">
@@ -27,13 +28,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: member
 
-### Johnny Doe
 
-<img src="images/johndoe.png" width="200px">
+### Hu Hong Rui
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+<img src="images/muller317.png" width="200px">
 
-* Role: Developer
+[[github](http://github.com/muller317)] [[portfolio](team/johndoe.md)]
+
+* Role: member
 * Responsibilities: Data
 
 ### Jean Doe
