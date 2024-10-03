@@ -51,12 +51,12 @@ AY2425S1-CS2103T-F14a-4
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Nguyen Tien Hoang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/nguyen.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/blackpanther9229)]
+[[portfolio](team/nguyen.md)]
 
 * Role: Developer
 * Responsibilities: UI
