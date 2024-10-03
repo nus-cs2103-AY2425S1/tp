@@ -275,14 +275,23 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​       | I want to …​                                     | So that I can…​                                        |
+|----------|---------------|--------------------------------------------------|--------------------------------------------------------|
+| `* * *`  | veterinarian  | create and store profiles for pet owners         | quickly access their information                       |
+| `* * *`  | veterinarian  | create and store profiles for pets               | quickly access their information                       |
+| `* * *`  | veterinarian  | search for pet owners by key details             | quickly find the information I need                    |
+| `* * *`  | veterinarian  | search for pets by key details                   | quickly find the information I need                    |
+| `* * *`  | veterinarian  | list all pet owners and pets                     | quickly access and review my client base               |
+| `* * *`  | veterinarian  | delete profiles for pet owners and pets          | keep my records up to date                             |
+| `* * *`  | veterinarian  | exit PawPatrol                                   | save my data and close my session safely               |
+| `* *`    | veterinarian  | link each pet owner to their pet(s)              | easily manage owners and their associated pet(s)       |
+| `* *`    | veterinarian  | edit profiles for pet owners                     | update profile information and ensure accurate records |
+| `* *`    | veterinarian  | edit profiles for pets                           | update profile information and ensure accurate records |
+| `* *`    | veterinarian  | clear all pet owners' and pets' profiles         | reset the system by removing all records at once       |
+| `* *`    | veterinarian  | view all the commands available to me            | utilize PawPatrols features effectively                |
+| `*`      | veterinarian  | log the vaccination schedule for each pet        | track when each pet's next vaccine is due              |
+| `*`      | veterinarian  | filter for clients with overdue vaccinations     | prioritize these clients for follow-up actions         |
+| `*`      | veterinarian  | view and track payments and outstanding balances | manage clinic revenue and follow up on unpaid invoices |
 
 *{More to be added}*
 
