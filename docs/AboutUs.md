@@ -33,9 +33,9 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Murali Shruthi
 
-![shruthiiii03.png](images%2Fshruthiiii03.png)
+<img src="images/shruthiiii03.png" width="200px">
 
-https://github.com/shruthiiii03
+[[github](https://github.com/shruthiiii03)]
 [[portfolio](team/shruthiiii03.md)]
 
 * Role: Developer
