@@ -286,6 +286,11 @@ This application is aimed towards convenience store managers who often need to m
 **Value proposition**: 
 
 InvenTrack enables inventory managers to efficiently manage large number of supplier contact information and streamline communication, ensuring smooth operations and minimizing errors in stock replenishment, all through a typing-optimized interface
+The three main aspects of this product are:
+
+* **Streamlined Supplier Management**: The product simplifies managing relationships with multiple suppliers, providing tools to track orders, monitor supplier performance, and automate reordering.
+* **Efficient Inventory Control**: It offers features for real-time inventory tracking and automated reordering based on predefined thresholds, helping prevent stockouts and overstocking.
+* **Performance Insights**: The product provides analytics and performance metrics to evaluate supplier reliability and order accuracy, facilitating better decision-making.
 
 
 
