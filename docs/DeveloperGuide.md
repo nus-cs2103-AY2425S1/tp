@@ -310,37 +310,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 MSS:
 1. Real estate agent requests to add a buyer/ seller to ClientGrid and passes in the buyer/ seller's name, phone number and email.
 2. ClientGrid will add the buyer/ seller with the name, phone number, and email specified by the real estate agent.
+Use case ends.
 
 Extensions:
 
-&nbsp;&nbsp;&nbsp;&nbsp;2a. ClientGrid detects an error in the name/ phone number/ email format provided by the real estate agent.
+&nbsp;&nbsp;&nbsp;&nbsp;1a. ClientGrid detects an error in the name/ phone number/ email format provided by the real estate agent.
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2a1. ClientGrid requests for the correct data.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1a1. ClientGrid requests for the correct data.
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2a2. Real estate agent enters new data.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1a2. Real estate agent enters new data.
 
-Steps 2a1-2a2 are repeated until the data entered are correct.
-
-Use case ends.
+Steps 1a1-1a2 are repeated until the data entered are correct.
 
 **Use case: UC2 - Delete Client**
 
 MSS:
 1. Real estate agent requests to delete a buyer or seller based on their phone number.
 2. ClientGrid will delete the respective client based on the phone number.
+Use case ends.
 
 Extensions:
 
-&nbsp;&nbsp;&nbsp;&nbsp;2a. ClientGrid detects an error in the phone number format provided by the real estate agent.
+&nbsp;&nbsp;&nbsp;&nbsp;1a. ClientGrid detects an error in the phone number format provided by the real estate agent .
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2a1. ClientGrid requests for the correct data 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1a1. ClientGrid requests for the correct data 
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2a2. Real estate agent enters new data
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1a2. Real estate agent enters new data
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Steps 2a1-2a2 are repeated until the data entered are correct. 
-
-Use case ends.
-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Steps 1a1-1a2 are repeated until the data entered are correct.
 
 **Use case: UC4 - Delete Property**
 
@@ -354,7 +351,7 @@ Use case ends.
 
 Extensions:
 
-&nbsp;&nbsp;&nbsp;&nbsp;1a. ClientGrid detects an error in the postal code or unit number format provided by the real estate agent.
+&nbsp;&nbsp;&nbsp;&nbsp;1a. ClientGrid detects an error in the postal code or unit number format provided by the real estate agent, .
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1a1. ClientGrid requests for the correct data.
 
