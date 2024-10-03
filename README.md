@@ -1,13 +1,20 @@
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
-
-[![codecov](https://codecov.io/gh/AY2425S1-CS2103T-T09-1/tp/graph/badge.svg?token=IPPD93O9IR)](https://codecov.io/gh/AY2425S1-CS2103T-T09-1/tp)
+# [InternBuddy](https://ay2425s1-cs2103t-t09-1.github.io/tp/) &middot; [![CI Status](https://github.com/AY2425S1-CS2103T-T09-1/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-T09-1/tp/actions) [![codecov](https://codecov.io/gh/AY2425S1-CS2103T-T09-1/tp/graph/badge.svg?token=IPPD93O9IR)](https://codecov.io/gh/AY2425S1-CS2103T-T09-1/tp)
 
 ![Ui](docs/images/Ui.png)
 
-* This is **a sample project for Software Engineering (SE) students**.<br>
-  Example usages:
-  * as a starting point of a course project (as opposed to writing everything from scratch)
-  * as a case study
+InternBuddy is a desktop application used for managing contact details.
+
+## Target user
+> This product is for university students majoring in Computer Science, specifically those seeking summer internships. They are typically busy with assignments while applying for summer internships. As a result, they may lose track of key information about companies they have applied for in a constantly increasing list of applications made.
+
+## Value proposition
+> InternBuddy aims to simplify and efficiently manage internship application details, optimised for fast typers who prefer a CLI interface. It enables users to track key information such as HR contacts, interview dates, and application statues, all while maintaining portability across multiple operating systems without requiring a remote server.
+
+## Project notes
+See [here](https://docs.google.com/document/d/18DnZEyYiCFxt_Ajr6h_bGZwW8NYn5JeZz8Yt1XOGvDw/edit?usp=sharing)
+
+## Acknowledgements
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 * The project simulates an ongoing software project for a desktop application (called _AddressBook_) used for managing contact details.
   * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
   * It comes with a **reasonable level of user and developer documentation**.
