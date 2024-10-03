@@ -9,15 +9,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
 
-<img src="images/johndoe.png" width="200px">
+### Yao Kexiang
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+<img src="images/publicmain.png" width="200px">
+
+[[github](http://github.com/publicmain)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+* Role: Team Lead
+* Responsibilities: UI
 
 ### Wei Zhi
 
@@ -29,15 +30,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Johnny Doe
+### Yao Hejun
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/testing1234567891011121314.png" width="200px">
 
-[[github](http://github.com/johndoe)] 
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/testing1234567891011121314)] [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Data
+
+* Role: In charge of code quality
+* Responsibilities: Responsible for quality of code
 
 ### Jean Doe
 
@@ -49,12 +50,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Jalen Lee Rui Xian
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jalenleeruixian.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/jalenleeruixian)]
+[[portfolio](AY2425S1-CS2103T-T16-1/jalenleeruixian.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: In charge of documentation
+* Responsibilities: Responsible for the quality of various project documents.
