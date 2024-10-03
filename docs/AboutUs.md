@@ -16,8 +16,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/samuelfoo)]
 [[portfolio](team/samuelfoo.md)]
 
-- Role: Integration
-- Responsibilities: In charge of versioning of the code, maintaining the code repository, integrating various parts of the software to create a whole.
+* Role: Integration
+* Responsibilities: In charge of versioning of the code, maintaining the code repository, integrating various parts of the software to create a whole.
 
 ### Gan Ren Yick
 
