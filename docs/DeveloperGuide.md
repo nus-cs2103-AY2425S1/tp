@@ -321,32 +321,179 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `ABCLI` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+<details>
+    <summary><b>Use Case 1: Adding a contact</b></summary>
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to add a contact
+    ```
+    add n/Kori Sendra c/91234567 e/kori_sendra@gmail.com t/buyer
+    ```
+2.  ABCLI adds the person
+3.  ABCLI shows a success message
+    ```
+    Kori Sendra successfully added to contacts!
+    ```
+4.  ABCLI shows the updated list of contacts on its interface
+    ```
+    1) Name: Kori Sendra, Contact Number: 91234567, Email: kori_sendra@gmail.com, Type: Buyer
+    2) Name: Adams Apple, Contact Number: 97654321, Email: adamsapple00@gmail.com, Type: Seller
+    ```
 
-    Use case ends.
+- Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The contact format is invalid
 
-  Use case ends.
+    * 2a1. ABCLI shows an error message
+    ```
+    Invalid add command format!
+    ```
 
-* 3a. The given index is invalid.
+    * Use case ends.
 
-    * 3a1. AddressBook shows an error message.
+</details>
 
-      Use case resumes at step 2.
+<details>
+    <summary><b>Use Case 2: Deleting a contact</b></summary>
 
-*{More to be added}*
+**MSS**
+
+1.  User requests to list contacts
+    ```
+    view
+    ```
+2.  ABCLI shows the list of contacts on its interface
+    ```
+    1) Name: Kori Sendra, Contact Number: 91234567, Email: kori_sendra@gmail.com, Type: Buyer
+    ```
+3.  User requests to delete a specific contact
+    ```
+    delete 1
+    ```
+4.  ABCLI deletes the contact
+5.  ABCLI shows a success message
+    ```
+    Deleted Contact: Kori Sendra; 91234567; kori_sendra@gmail.com; Buyer 
+    ```
+6.  ABCLI shows the updated list of contacts on its interface
+    ```
+    1) Name: Adams Apple, Contact Number: 97654321, Email: adamsapple00@gmail.com, Type: Seller
+    ```
+    
+- Use case ends
+
+**Extensions**
+- 2a. The index for deletion is not a positive whole number
+  - 2a1. ABCLI shows an error message
+  ```
+   Invalid command format!
+   -----------------------
+   delete: Deletes the person identified by the index number used in the displayed contact list.
+   
+   Parameters: INDEX (must be a positive integer)
+   
+  ```
+  - Use case ends
+- 3a. The index for deletion is out of range
+  - 3a1. ABCLI shows an error message
+  ```
+  Invalid command format!
+  
+  The contact index is invalid.
+  ```
+  - Use case ends
+</details>
+
+<details>
+    <summary><b>Use Case 3: Adding a meetup</b></summary>
+
+**MSS**
+1.  User requests to add a meetup
+    ```
+    meetup n/Adams Apple i/Meeting with Adams Apple at 12pm on Saturday at Marina Bay Sands VIP Lounge.
+    ```
+2.  ABCLI adds the meetup
+3.  ABCLI shows a success message
+    ```
+    Meetup with Adams Apple successfully added!
+    ```
+4.  ABCLI shows the updated list of meetups on its interface
+    ```
+    1. Meeting with: Adams Apple
+       Meeting info: Meeting with Adams Apple at 12pm on Saturday at Marina Bay Sands VIP Lounge.
+    ```
+- Use case ends
+
+**Extensions**
+- 2a. The command is missing a name
+
+  - 2a1. ABCLI shows an error message
+    ```
+    No name provided!
+    You need to provide a name for whom you are meeting up with.
+    ```
+  - Use case ends
+- 3a. The command is missing a flag
+  - 3a1. ABCLI shows an error message
+    ```
+    No i/ or n/ flag is provided!
+    You need provide the missing flags.
+    ```
+  - Use case ends
+</details>
+
+<details>
+    <summary><b>Use Case 4: Viewing contacts</b></summary>
+
+**MSS**
+1.  User requests to view all contacts
+    ```
+    view
+    ```
+2.  ABCLI shows the list of contacts on its interface
+    ```
+    1) Name: John Doe, Contact Number: 94738334, Email: johndoezzz@gmail.com, Type: Seller
+    2) Name: Jamer Boliver, Contact Number: 91111111, Email: boliverman@gmail.com, Type: Buyer
+    ```
+    
+- Use case ends
+
+**Extensions**
+- 2a. Viewing buyer and seller contacts
+
+    - 2a1. User requests to view buyer contacts
+      ```
+      view t/buyer
+      ```
+    - 2a2. ABCLI shows the list of contacts of buyers on its interface
+      ```
+      1) Name: Jamer Boliver, Contact Number: 91111111, Email: boliverman@gmail.com, Type: Buyer
+      ```
+    - 2a3. User requests to view seller contacts
+      ```
+      view t/seller
+      ```
+    - 2a4. ABCLI shows the list of contacts of sellers on its interface
+      ```
+      1) Name: John Doe, Contact Number: 94738334, Email: johndoezzz@gmail.com, Type: Seller
+      ```
+    - Use case ends
+- 3a. t/ flag has invalid contact type
+    - 3a1. ABCLI shows an error message
+      ```
+      Invalid contact type!
+      Please indicate only buyer or seller.
+      ```
+    - Use case ends
+
+</details>
+
+
 
 ### Non-Functional Requirements
 
