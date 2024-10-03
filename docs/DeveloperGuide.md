@@ -275,39 +275,40 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                                        | I want to …​                                                  | So that I can…​                                     |
-|------|----------------------------------------------------------------|---------------------------------------------------------------|-----------------------------------------------------|
-| `* * *` | Celebrity Talent Manager                                       | add new contacts to my address book                           | keep track of important stakeholders                |
-| `* * *` | Celebrity Talent Manager                                       | use command-line shortcuts to manage my contacts and schedule | work faster and more efficiently                    |
-| `* * *` | Celebrity Talent Manager                                       | delete a contact                                              | remove entries that I no longer need                |
-| `* * *` | Celebrity Talent Manager                                       | view details of a specific contact                            | quickly access specific information when needed     |
-| `* * *` | Celebrity Talent Manager                                       | list my contacts                                              | see an overview of my contacts                      |
-| `* * *` | Celebrity Talent Manager                                       | add important events and deadlines                            | quickly view my important tasks                     |
-| `* * *` | Celebrity Talent Manager                                       | add remarks and people to my events and deadlines             | view who is involved with specific tasks            |
-| `* * *` | Celebrity Talent Manager                                       | view the event details a client has                           | see and plan around their schedule                  |
-| `* * *` | Celebrity Talent Manager                                       | view all my events                                            | have an overview of my timetable                    |
-| `* * *` | Celebrity Talent Manager                                       | delete an event                                               | remove outdated entries                             |
-| `* * *` | Celebrity Talent Manager                                       | save my data                                                  | come back to it next time                           |
-| `* *` | Celebrity Talent Manager dealing with various groups           | group and tag my contacts                                     | group contacts based on specific tags               |
-| `* *` | Celebrity Talent Manager with many contacts                    | search for clients using tags                                 | quickly find individuals in a specific group        |
-| `* *` | Celebrity Talent Manager with many contacts                    | search for clients using names                                | quickly find specific individuals                   |
-| `* *` | Celebrity Talent Manager                                       | delete a contact only after confirmation                      | prevent accidental deletion of something still important |
-| `* *` | Celebrity Talent Manager                                       | edit contact information                                      | update ay changes in their information              |
-| `* *` | Celebrity Talent Manager who can be forgetful                  | be alerted when I add duplicate entries                       | avoid duplicate entries                             |
-| `* *` | Celebrity Talent Manager who is new to the application         | access a help guide in the application                        | find out the command I need when I forget it        |
-| `* *` | Celebrity Talent Manager                                       | perform mass deletion of entries                              | save time when I have to delete a lot of entries    |
-| `* *` | Celebrity Talent Manager                                       | set customisable remark fields for entries                    | save information specific to the contact            |
-| `* *` | Celebrity Talent Manager who works with international partners | view the calendar different timezones                         | work with clients of different timezones easily     |
-| `* *` | Celebrity Talent Manager                                       | be alerted when events clash                                  | identify clashes and resolve them easily            |
-| `* *` | Celebrity Talent Manager                                       | mark events as over or ended                                  | keep track my schedule                              |
-| `* *` | Celebrity Talent Manager                                       | unmark events as over or ended                                | mark tasks as undone or ongoing again               |
-| `*`  | Celebrity Talent Manager                                       | flag priority contacts                                        | identify contacts that require immediate focus      |
-| `*`  | Celebrity Talent Manager                                       | export and import client data                                 | safely transfer information on different devices    |
-| `*`  | Celebrity Talent Manager who can be careless at times          | undo my last command                                          | quickly revert my changes when they are wrong       |
-| `*`  | Celebrity Talent Manager                                       | set reminders for tasks                                       | get reminded of upcoming tasks that are due soon    |
-| `*`  | Celebrity Talent Manager                                       | set visual indicators for my contacts based on availability   | quickly see if someone is available or not          |
-| `*`  | Celebrity Talent Manager                                       | customise my data storage location                            | change where my data is kept locally                |
-| `*`  | Celebrity Talent Manager                                       | set my own CLI shortcuts                                      | use the commands faster based on my preferences     |
+| Priority | As a …​                                          | I want to …​                                                  | So that I can…​                                          |
+|------|--------------------------------------------------|---------------------------------------------------------------|----------------------------------------------------------|
+| `* * *` | Celebrity Talent Manager                         | add new contacts to my address book                           | keep track of important stakeholders                     |
+| `* * *` | Celebrity Talent Manager                         | use command-line shortcuts to manage my contacts and schedule | work faster and more efficiently                         |
+| `* * *` | Celebrity Talent Manager                         | delete a contact                                              | remove entries that I no longer need                     |
+| `* * *` | Celebrity Talent Manager                         | view details of a specific contact                            | quickly access specific information when needed          |
+| `* * *` | Celebrity Talent Manager                         | list my contacts                                              | see an overview of my contacts                           |
+| `* * *` | Celebrity Talent Manager                         | add important events and deadlines                            | quickly view my important tasks                          |
+| `* * *` | Celebrity Talent Manager                         | add remarks and people to my events and deadlines             | view who is involved with specific tasks                 |
+| `* * *` | Celebrity Talent Manager                         | view the event details a client has                           | see and plan around their schedule                       |
+| `* * *` | Celebrity Talent Manager                         | view all my events                                            | have an overview of my timetable                         |
+| `* * *` | Celebrity Talent Manager                         | delete an event                                               | remove outdated entries                                  |
+| `* * *` | Celebrity Talent Manager                         | save my data                                                  | come back to it next time                                |
+| `* *` | Celebrity Talent Manager dealing with various groups | group and tag my contacts                                     | group contacts based on specific tags                    |
+| `* *` | Celebrity Talent Manager with many contacts      | search for clients using tags                                 | quickly find individuals in a specific group             |
+| `* *` | Celebrity Talent Manager with many contacts      | search for clients using names                                | quickly find specific individuals                        |
+| `* *` | Celebrity Talent Manager                         | delete a contact only after confirmation                      | prevent accidental deletion of something still important |
+| `* *` | Celebrity Talent Manager                         | edit contact information                                      | update ay changes in their information                   |
+| `* *` | Celebrity Talent Manager who can be forgetful    | be alerted when I add duplicate entries                       | avoid duplicate entries                                  |
+| `* *` | Celebrity Talent Manager who is new to the application | access a help guide in the application                        | find out the command I need when I forget it             |
+| `* *` | Celebrity Talent Manager                         | perform mass deletion of entries                              | save time when I have to delete a lot of entries         |
+| `* *` | Celebrity Talent Manager                         | set customisable remark fields for entries                    | save information specific to the contact                 |
+| `* *` | Celebrity Talent Manager who works with international partners | view the calendar different timezones                         | work with clients of different timezones easily          |
+| `* *` | Celebrity Talent Manager                         | be alerted when events clash                                  | identify clashes and resolve them easily                 |
+| `* *` | Celebrity Talent Manager                         | mark events as over or ended                                  | keep track my schedule                                   |
+| `* *` | Celebrity Talent Manager                         | unmark events as over or ended                                | mark tasks as undone or ongoing again                    |
+| `* *` | Celebrity Talent Manager                         | add a photo for my contacts                                   | easily remember or recognise the contact                 |
+| `*`  | Celebrity Talent Manager                         | flag priority contacts                                        | identify contacts that require immediate focus           |
+| `*`  | Celebrity Talent Manager                         | export and import client data                                 | safely transfer information on different devices         |
+| `*`  | Celebrity Talent Manager who can be careless at times | undo my last command                                          | quickly revert my changes when they are wrong            |
+| `*`  | Celebrity Talent Manager                         | set reminders for tasks                                       | get reminded of upcoming tasks that are due soon         |
+| `*`  | Celebrity Talent Manager                         | set visual indicators for my contacts based on availability   | quickly see if someone is available or not               |
+| `*`  | Celebrity Talent Manager                         | customise my data storage location                            | change where my data is kept locally                     |
+| `*`  | Celebrity Talent Manager                         | set my own CLI shortcuts                                      | use the commands faster based on my preferences          |
 
 ### Use cases
 
