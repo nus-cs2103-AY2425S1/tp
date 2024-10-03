@@ -45,3 +45,12 @@ We are a team based in the [School of Computing, National University of Singapor
 
 * Role: Developer
 * Responsibilities: UI
+
+### Rafael Kristoforus Yanto
+
+<img src="images/rafael.png" width="200px">
+
+[[github](https://github.com/izruff)]
+
+* Role: Developer
+* Responsibilities: DevOps
