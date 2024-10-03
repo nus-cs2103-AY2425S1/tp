@@ -15,7 +15,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/johndoe)]
-[[portfolio](team/amoschee)]
+[[portfolio](team/johndoe.md)]
 
 * Role: Project Advisor
 
@@ -24,7 +24,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/johndoe.png" width="200px">
 
 [[github](http://github.com/johndoe)]
-[[portfolio](team/amoschee)]
+[[portfolio](team/johndoe.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
@@ -33,7 +33,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/amoschee)]
+[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Data
@@ -43,13 +43,24 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/johndoe.png" width="200px">
 
 [[github](http://github.com/johndoe)]
-[[portfolio](team/amoschee)]
+[[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
+
+### Adrian Leonardo Liang
+
+<img src="images/agenthagu.png" width="200px">
+
+[[github](http://github.com/AgentHagu)]
+[[portfolio](team/agenthagu.md)]
+
+* Role: Developer
+* Responsibilities: UI
 
 ### Amos Chee Tian Ee
 
 <img src="images/amoschee.png" width="200px">
 
 [[github](https://github.com/amoschee)]
+[[portfolio](team/amoschee.md)]
