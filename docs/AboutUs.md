@@ -43,7 +43,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Tan Soo Yap
 
-<img src="images/sooyapphoto.png" width="200px">
+<img src="images/sooyap.png" width="200px">
 
 [[github](https://github.com/SooYap)]
 [[portfolio](team/johndoe.md)]
