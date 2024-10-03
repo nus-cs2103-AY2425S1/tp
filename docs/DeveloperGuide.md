@@ -56,7 +56,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 
 Each of the four main components (also shown in the diagram above),
 
-* defines its *API* in an `interface` with the same name as the Component.
+* defines its *API* in an `interface` with the same assignmentName as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
@@ -112,7 +112,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command assignmentName e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -336,13 +336,13 @@ unless specified otherwise)
 
 **Extensions**
 
-* 1a. The student name is invalid.
+* 1a. The student assignmentName is invalid.
     * 1a1. TAchy shows an error message.
   
       Use case ends.
 
-* 1b. The student name already exists.
-    * 1b1. TAchy shows a list of students with the same name in order of adding time.
+* 1b. The student assignmentName already exists.
+    * 1b1. TAchy shows a list of students with the same assignmentName in order of adding time.
     * 1b2. TA adds a note for the student to distinguish them.
 
       Use case resumes at step 2.
@@ -360,13 +360,13 @@ unless specified otherwise)
 
 **Extensions**
 
-* 1a. The student name is not in the list.
+* 1a. The student assignmentName is not in the list.
     * 1a1. TAchy displays a "no students found" message.
 
       Use case ends.
 
-* 1a. There are multiple students with the name.
-    * 1a1. TAchy shows a list of students with the same name with indices.
+* 1a. There are multiple students with the assignmentName.
+    * 1a1. TAchy shows a list of students with the same assignmentName with indices.
     * 1a2. TA deletes one of them by index.
 
       Use case resumes at step 2.
@@ -395,7 +395,7 @@ unless specified otherwise)
 
 **MSS**
 
-1. TA requests to search for a student by name.
+1. TA requests to search for a student by assignmentName.
 2. TAchy displays the student(s) matching the search query.
 
    Use case ends.
@@ -420,7 +420,7 @@ unless specified otherwise)
 
 **Extensions**
 
-* 1a. The assignment name is invalid.
+* 1a. The assignment assignmentName is invalid.
     * 1a1. TAchy shows an error message.
 
       Use case ends.
@@ -438,7 +438,7 @@ unless specified otherwise)
 
 **Extensions**
 
-* 1a. No assignment matched the name.
+* 1a. No assignment matched the assignmentName.
     * 1a1. TAchy displays a "this assignment does not exist" message.
 
       Use case ends.
@@ -633,7 +633,7 @@ unless specified otherwise)
 
 1. TA requests to list all documents stored in a file directory.
 2. TAchy displays the list of documents.
-3. TA requests to link a document to a student by index by name.
+3. TA requests to link a document to a student by index by assignmentName.
 4. TAchy records the link.
 
    Use case ends.
@@ -643,12 +643,12 @@ unless specified otherwise)
     * 1a1. TAchy displays a "no documents found" message.
 
       Use case ends.
-* 3a. The student name is not in the list.
+* 3a. The student assignmentName is not in the list.
     * 3a1. TAchy displays a "no students found" message.
 
       Use case ends.
-* 3b. There are multiple students with the name.
-    * 3b1. TAchy shows a list of students with the same name with indices.
+* 3b. There are multiple students with the assignmentName.
+    * 3b1. TAchy shows a list of students with the same assignmentName with indices.
     * 3b2. TA links the document to one of them by index.
 
       Use case resumes at step 4.
