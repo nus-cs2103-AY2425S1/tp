@@ -320,9 +320,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Operation of PlanPal must be done through CLI
+2. PlanPal should not have multiple users on a shared computer
+3. PlanPal should only support a single user
+4. PlanPal data should be stored locally
+5. PlanPal should not rely on external database
+6. PlanPal should work on Windows, Linux and OS-X systems
+7. PlanPal should not depend on a remote server
+8. Third party frameworks/libraries/services used must be
+9. Free, open source and have permissive licence terms
+10. Do not require installation by user
+11. Do not violate other constraints
+12. PlanPal should work well for standard screen resolutions 1920x1080 and higher and for screen scales 150%
+13. PlanPal should be packaged into a single JAR file
+14. JAR file should not be above 100MB
 
 *{More to be added}*
 
