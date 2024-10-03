@@ -262,11 +262,13 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Needs to manage a variety of sections, such as client names, email, payment status and more
+* Desire to track all client statuses in one place
+* Wants to avoid tracking clients using multiple applications 
+* Wants to easily change statuses of a client upon completion of project
+* Can type fast
+* Prefers typing to mouse interactions
+* Familiar with the workings of CLI and commands
 
 **Value proposition**: Instead of using separate apps for meetings, contacts, and payments, use our app to track client 
 contacts, payments, and job referrals, optimised for users who prefer CLI.
