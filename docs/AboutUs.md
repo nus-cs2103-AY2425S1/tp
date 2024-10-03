@@ -11,33 +11,31 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Park Seyouong (Judy)
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/judy1x4.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/Judy1x4)]
 
-* Role: Project Advisor
+* Role: Documentation
+
+
+### Lu Ruijian
+
+<img src="images/ruijianlu.png" width="200px">
+
+[[github](http://github.com/RuijianLu)]
+
+* Role: member
+
 
 ### Hu Hong Rui
 
 <img src="images/muller317.png" width="200px">
 
-[[github](https://github.com/muller317)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/muller317)] [[portfolio](team/johndoe.md)]
 
 * Role: member
-* Responsibilities: Data
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
 * Responsibilities: Data
 
 ### Jean Doe
