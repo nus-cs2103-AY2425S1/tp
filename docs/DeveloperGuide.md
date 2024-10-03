@@ -262,13 +262,17 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+Tech-savvy sales representatives in the insurance industry who
+- Manage 200+ leads and customers
+- Work remotely or in fast-paced office environments
+- Prioritize speed and efficiency in their daily operations
+- Are comfortable with command-line interfaces and prefer keyboard input
+- Need quick access to contact information during calls or email communications
+- Require efficient follow-up management and interaction tracking
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Empowers insurance sales reps with lightning-fast, CLI-driven contact management. 
+It offers instant access to lead details, interaction histories, and follow-up schedules, maximizing call and email productivity for high-volume, rapid-paced sales environments.
+
 
 
 ### User stories
