@@ -28,7 +28,7 @@ public class AddressBookParser {
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile(
-            "(?<commandWord>\\S+)(?:\\s+(?<commandData>\\S+))?(?:\\s+(?<arguments>.*))?");
+            "(?<commandWord>\\S+)(?:\\s+(?<commandData>\\S+))?(?:\\s+)?(?<arguments>.*)?");
 
 
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
@@ -51,7 +51,7 @@ public class AddressBookParser {
 
         final String command = commandWord + (commandData != null ? " " + commandData : "");
 
-        final String arguments = matcher.group("arguments");
+        final String arguments = " " + matcher.group("arguments");
 
         // Note to developers: Change the log level in config.json to enable lower level (i.e., FINE, FINER and lower)
         // log messages such as the one below.
