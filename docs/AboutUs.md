@@ -7,7 +7,7 @@
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer@comp.nus.edu.sg`
+You can reach us at the email `e1122550@u.nus.edu`
 
 ## Project team
 
