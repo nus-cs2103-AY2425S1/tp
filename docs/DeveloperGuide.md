@@ -367,11 +367,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <a name="uc02"></a>
 
-**Use case: UC02 Search contact**
+**Use case: UC02 Search contact(s)**
 
 **MSS**
 
-1.  User requests to search for a contact by inputting exactly one of them:
+1.  User requests to search for contact(s) by inputting one or more of the following:
      * The name of the contact,
      * The module code (optionally including the role), or
      * The category of the issue
@@ -398,8 +398,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes from step 2.
 
 * 1c. No matching contacts found.
+  * 1c1. ContactCS displays a message to the user saying that there is no matching contacts found
 
-    Use case ends.
+      Use case ends.
 
 <a name="uc03"></a>
 
@@ -407,7 +408,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list the contacts
+1. User requests to list the contacts
 2. ContactCS shows a list of contacts
 
    Use case ends.
@@ -443,7 +444,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to [list (UC03)](#uc03) the contacts or [search (UC02)](#uc02) for a contact
+1. User requests to [list (UC03)](#uc03) the contacts or [search (UC02)](#uc02) for contact(s)
 2. User requests to update contact information for a specific person in the list, providing the new contact details
 3. ContactCS updates the contact details based on the information provided by the user
 
@@ -471,7 +472,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to [list (UC03)](#uc03) the contacts or [search (UC02)](#uc02) for a contact
+1. User requests to [list (UC03)](#uc03) the contacts or [search (UC02)](#uc02) for contact(s)
 2. User requests to mark certain contacts as frequently accessed
 3. ContactCS marks these contacts for quick access
 
@@ -499,8 +500,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to [list (UC03)](#uc03) the contacts or [search (UC02)](#uc02) for a contact
-2. User requests to mark certain contacts as frequently accessed
+1. User requests to [list (UC03)](#uc03) the contacts or [search (UC02)](#uc02) for contact(s)
+2. User requests to unmark certain contacts as frequently accessed
 3. ContactCS removes the marking from these contacts for quick access
 
     Use case ends.
