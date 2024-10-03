@@ -302,7 +302,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is `Prudy` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC1 - List clients
+**Use case: UC1 - List clients**
 
 **MSS**
 
@@ -313,7 +313,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: UC2 - Delete a client**
 
-**Preconditions: User has done <u>UC1 - List clients</u>
+**Preconditions: User has done <u>UC1 - List clients</u>**
 
 **MSS**
 
@@ -349,7 +349,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: UC4 - Edit a client details (does not include editing of client policies or claims)**
 
-**Preconditions: User has done <u>UC1 - List clients</u>
+**Preconditions: User has done <u>UC1 - List clients</u>**
 
 **MSS**
 
@@ -381,13 +381,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 1b1. The client already has the stated policy.
+* 1b. The client already has the stated policy.
 
     * 1b1. Prudy shows an error message.
 
       Use case ends.
 
-* 1c1. The user indicated an invalid policy.
+* 1c. The user indicated an invalid policy.
 
     * 1c1. Prudy shows an error message.
 
