@@ -288,28 +288,81 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `CareConnect` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC1 - Add New Beneficiary**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to add a new beneficiary with the relevant information.
+2.  CareConnect confirms the new beneficiary has been added.
+    
+    Use case ends.
+
+**Extensions**
+
+* 1a. The user provides incomplete / invalid information.
+
+    * 1a1. CareConnect displays an error message.
+
+      Use case resumes at step 1.
+
+**Use case: UC2 - List All Beneficiary Information**
+
+**MSS**
+
+1.  User requests to list beneficiaries
+2.  CareConnect shows a list of beneficiaries to the user
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The list is empty
 
-  Use case ends.
+    * 2a1. CareConnect shows that the list is empty.
+  
+      Use case ends.
 
-* 3a. The given index is invalid.
+**Use case: UC3 - Edit Beneficiary Information**
 
-    * 3a1. AddressBook shows an error message.
+**MSS**
+
+1.  User lists all beneficiary information (as per UC2)
+2.  User requests to edit a specific beneficiary in the list with the new information
+3.  CareConnect confirms the beneficiary information has been edited.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given index is invalid.
+
+    * 2a1. CareConnect shows an error message.
+
+      Use case resumes at step 2.
+
+* 2b. The user provides invalid information.
+
+    * 2b1. CareConnect displays an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC4 - Delete Beneficiary Information**
+
+**MSS**
+
+1.  User lists all beneficiary information (as per UC2)
+2.  User requests to delete a specific beneficiary in the list
+3.  CareConnect deletes the beneficiary
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given index is invalid.
+
+    * 2a1. CareConnect shows an error message.
 
       Use case resumes at step 2.
 
