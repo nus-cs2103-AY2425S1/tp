@@ -389,18 +389,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case continues from step 5.
 
-**Use case: Find a person based on keyword**
+**Use case: Find a client**
 
 **MSS**
 
-1.  User enter keywords and requests to find a person
-2.  System find a list of persons matching the keywords
+1.  User chooses to find a client
+2.  User enters the required instruction
+3.  User enters keyword
+4.  System filters list of client based on keyword
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. System detects error for invalid instruction
+
+    * 2a1. System prompts error for invalid instruction
+    * 2a2. User enters valid instruction
+
+    Use case continues from step 3.
+
+* 4a. The list is empty.
 
   Use case ends.
 
