@@ -333,11 +333,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+#### Platform Compatibility
+- **Description**: AgentAssist must be operational on any mainstream operating system (Windows, macOS, Linux) as long as Java 17 or newer is installed.
 
-*{More to be added}*
+#### Performance and Capacity
+- **Description**: The system should efficiently handle up to 1000 customer records without noticeable sluggishness in typical usage scenarios.
+- **Performance Goal**: All commands should execute and return a response within two seconds to maintain a fluid user experience.
+
+#### User Efficiency
+- **Description**: Designed for users with above-average typing speed in regular English text; such users should find executing tasks via commands faster than using a mouse.
+
+#### System Architecture
+- **Description**: AgentAssist is designed for single-user scenarios, ensuring personalized and secure data management without the complexities of multi-user capabilities.
+
+#### Data Management
+- **Description**: All customer data should be stored locally in a human-editable text file format, allowing for easy access and manual modifications if required.
+
+#### Documentation
+- **Description**: Provide comprehensive, easy-to-read User and Developer Guides detailing functionality, usage, and system requirements.
+- **Additional**: Both guides should be formatted to be printer-friendly, particularly in PDF format, facilitating easy distribution and referencing.
+
+#### Installation and Distribution
+- **Description**: AgentAssist should be accessible without the need for a traditional installer. The application should be distributable as a single JAR file, simplifying setup and use.
+- **Dependency**: The software should operate independently without requiring connections to any remote servers owned or managed by the developer.
+
+#### User Interface
+- **Description**: While the primary interface is command-line based, any graphical user interface (GUI) elements should be optimized for standard screen resolutions (1920x1080 and higher) and screen scales (100% and 125%), ensuring clarity and usability across various devices.
+
 
 ### Glossary
 
