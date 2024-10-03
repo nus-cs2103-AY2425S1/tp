@@ -31,14 +31,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Jeriel Chan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/nimastic.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/nimastic)] [[portfolio](team/nimastic.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Software Developement, Dev Ops
 
 ### Rithik Lenin
 
