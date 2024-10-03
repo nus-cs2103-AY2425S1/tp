@@ -7,15 +7,16 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project team
 
-### John Doe
+### Clarence Yeo
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/clarenceeey.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/clarenceeey)]
+[[portfolio](team/clarence.md)]
 
 * Role: Project Advisor
+
 
 ### notnotmax
 
@@ -27,7 +28,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Role: Developer
 * Responsibilities: Deliverables, Deadlines, Scheduling and Tracking
 
-### Johnny Doe
+### John Doe
 
 <img src="images/johndoe.png" width="200px">
 
@@ -36,7 +37,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### John Doe
 
 <img src="images/johndoe.png" width="200px">
 
@@ -46,7 +47,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### John Doe
 
 <img src="images/johndoe.png" width="200px">
 
