@@ -44,6 +44,7 @@ We are a team based in the [School of Computing, National University of Singapor
 [[github](http://github.com/dominopizzaaaa)]
 
 * Role: Developer
+* Responsibilities: UI
 
 ### Rafael Kristoforus Yanto
 
