@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -91,8 +93,15 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_emergenctContact() throws Exception {
-        assertTrue(parser.parseCommand(EmergencyContactCommand.COMMAND_WORD) instanceof EmergencyContactCommand);
+    public void parseCommand_emergencyContact() throws Exception {
+        final String emergencyContactName = "Lily";
+        final String emergencyContactNumber = "12345678";
+        EmergencyContactCommand command = (EmergencyContactCommand) parser.parseCommand(
+                EmergencyContactCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_NAME + emergencyContactName + " "
+                        + PREFIX_PHONE + emergencyContactNumber);
+        assertEquals(new EmergencyContactCommand(INDEX_FIRST_PERSON, emergencyContactName, emergencyContactNumber),
+                command);
     }
 
     @Test
