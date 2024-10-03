@@ -1,7 +1,7 @@
 {
   "baseUrl": "",
-  "titlePrefix": "",
-  "titleSuffix": "AddressBook Level-3",
+  "titlePrefix": "Teletutors",
+  "titleSuffix": "",
   "faviconPath": "images/SeEduLogo.png",
   "style": {
     "codeTheme": "light"

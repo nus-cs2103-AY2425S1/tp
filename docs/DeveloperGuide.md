@@ -1,10 +1,10 @@
 ---
   layout: default.md
-  title: "Developer Guide"
-  pageNav: 3
+    title: "Developer Guide"
+    pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# Teletutors Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -241,13 +241,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 
@@ -272,29 +272,57 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Target user profile**: Tutors managing students
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
-
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
+* Easier management of administrative tasks
+* Easier for users who are more proficient with _CLI - interface_
+* Separate work and personal tasks / messages
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As …​                                                                       | I want to …​                                                                                                 | So that …​                                                                                                                                                     |
+|----------|-----------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `* * *`  | a tutor who gives homework                                                  | easily keep track of my students' assignments                                                                | I know whether they have submitted them or not, and whether I need to grade them or remind them to submit work                                                 |
+| `* * *`  | a tutor who wants to keep his personal and work life separate               | keep in contact with students and their parents without needing to give them my personal email or number     | my privacy is kept intact and my personal information is not shared                                                                                            |
+| `* * *`  | a tutor who cares about his students' progress                              | easily keep track of my students' performance in school as well as his participation and learning in tuition | I am better equipped to help my students do well                                                                                                               |
+| `* * *`  | a not so tech-savvy tutor                                                   | easily understand the appications' functions and uses, and how to navigate through the application smoothly  | I would not have any issues using the app to better organise my tasks and schedule as a tutor                                                                  |
+| `* * *`  | a part-time tutor (student) with tight deadlines                            | take a glance through the app to see exactly what needs my attention                                         | I can instantly filter out the important tasks that I need to do, like marking and preparing for tutorials, so i can shift my focus back to my other deadlines |
+| `* * *`  | a tutor ready to start using the app                                        | import the data of all my students                                                                           | I can use the app instantly                                                                                                                                    |
+| `* * *`  | a first time user                                                           | get a list of commands that cover the main features of the app                                               | I can explore and get a feel for the functionalities                                                                                                           |
+| `* * *`  | a tutor who prefers CLI to GUI                                              | use the keyboard for all purposes in the app instead of needing to scroll and click using a mouse            | I am comfortable and enjoy using the app                                                                                                                       |
+| `* * *`  | a veteran tutor with a set of pre-existing students                         | synchronize list of contacts into the app                                                                    | I do not need to manually enter each contact which is a hassle                                                                                                 |
+| `* * *`  | a private home tutor                                                        | access student address location using the app                                                                | I know where to travel to for a specific appointment                                                                                                           |
+| `*`      | a tutor                                                                     | have timely reminders for upcoming deadlines                                                                 | I can make sure the students submit them on time                                                                                                               |
+| `*`      | a tutor who wants to keep tabs on a student's grades                        | track the scores of students across several assessments                                                      | I can determine which student requires more attention                                                                                                          |
+| `*`      | a full-time tutor                                                           | track the hours I've worked each week                                                                        | I can ensure accurate payment                                                                                                                                  |
+| `*`      | a tutor who has different classes of students                               | sort my students by their class                                                                              | I can find the appropriate information quickly                                                                                                                 |
+| `*`      | a tutor                                                                     | quickly search for tasks or appointments based on keywords                                                   | I can find specific tasks or sessions easily                                                                                                                   |
+| `*`      | a tutor                                                                     | set recurring tasks (like weekly lesson planning)                                                            | I don't have to manually input them every time                                                                                                                 |
+| `*`      | a forgetful tutor                                                           | receive notifications when new sessions or tasks are coming up                                               | the task of remembering these timings can be relegated to the app                                                                                              |
+| `*`      | a 1-1 tutor                                                                 | keep track of individual student progress and test scores                                                    | I can better tailor tuition efforts to improve outcomes                                                                                                        |
+| `*`      | an organised tutor                                                          | set task priorities (high, medium. low)                                                                      | I can focus on the most important tasks first                                                                                                                  |
+| `*`      | a tutor                                                                     | update contact details                                                                                       | students information are up to date                                                                                                                            |
+| `* *`    | a detailed tutor                                                            | add notes to contact details                                                                                 | I can track important information                                                                                                                              |
+| `* *`    | a tutor of a class of students                                              | mark the attendance of students of the class I am currently teaching                                         | I can monitor which students did not attend the class for that week so that I can contact their parents                                                        |
+| `* * *`  | a tutor                                                                     | add new students manually                                                                                    | new students that join the class midway can be added                                                                                                           |
+| `* *`    | an organised tutor                                                          | color-code tasks and appointments based on their type (tutorials, marking, meetings)                         | I can visually differentiate between various commitments                                                                                                       |
+| `* *`    | a tutor                                                                     | search students by certain attribute (e.g. name)                                                             | I can access all details about them                                                                                                                            |
+| `* * *`  | a long time tutor                                                           | clear the data of my ex students                                                                             | I can keep my contacts organised                                                                                                                               |
+| `* *`    | a tutor with a messy filing system for notes and other additional content   | use the app to organise these contents based on the class                                                    | it will be more efficient for finding the notes required for that class                                                                                        |
+| `* *`    | a tutor                                                                     | be notified when an input task or session overlaps with another commitment                                   | I can avoid scheduling conflicts                                                                                                                               |
+| `* *`    | a paranoid tutor                                                            | backup my contacts to a local file                                                                           | I do not accidentally lose all contacts                                                                                                                        |
+| `* *`    | a tutor                                                                     | extend or adjust deadlines if needed                                                                         | I can manage unexpected delays without losing track                                                                                                            |
+| `*`      | a tutor who would like the option of switching between light and dark theme | switch between the modes in the application                                                                  | I would get my preferred layout theme                                                                                                                          |
+| `* *`    | a data-centric tutor                                                        | view a summary of all contacts                                                                               | I can analyze key information about my students                                                                                                                |
+| `* *`    | a tutor who doesn't use a mouse                                             | use the keyboard shortcuts provided by the application                                                       | I can utilize and learn the features efficiently                                                                                                               |
+| `* *`    | a tutor with a long history of students                                     | archive certain contacts                                                                                     | I only keep track of currently active students                                                                                                                 |
+| `* *`    | a careless tutor                                                            | undo latest command                                                                                          | I can easily update contacts                                                                                                                                   |
+| `* *`    | a tutor                                                                     | receive alerts when upcoming tasks and lessons are nearing                                                   | I can better stay on schedule                                                                                                                                  |
+| `*`      | a tech savvy tutor                                                          | set up macros to quickly switch between commonly used features                                               | I can customise the application to my preferences and master the features of the application                                                                   |
 
 *{More to be added}*
 
@@ -315,11 +343,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. Tutor enters an invalid deadline
-  * 1a1. Teletutors App displays an error message: `Invalid date format. Please use 'YYYY-MM-DD'.`
-  * 1a2. Tutor re-enters the correct date.
+* 3a. Tutor enters an invalid deadline
+    * 3a1. Teletutors App displays an error message: `Invalid date format. Please use 'YYYY-MM-DD'.`
+    * 3a2. Tutor re-enters the correct date.
 
-    Use case resumes from Step 3.
+      Use case resumes from Step 4.
 
 **Use case: Mark student Attendance**
 
@@ -332,13 +360,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 4. Teletutors App updates the attendance record and confirms the action.
 
-    Use Case Ends.
+   Use Case Ends.
 
 **Extensions**
 * 3a. Student is not found in the session list
-  * 3a1. Teletutors App displays an error message: `Student not found. Please check the name and try again.`
-  
-    Use case resumes from Step 2
+    * 3a1. Teletutors App displays an default placeholder message: `No students found.`
+
+      Use case resumes from Step 2
 
 
 **Use case: Delete student details**
@@ -354,10 +382,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The student does not exist in the system
-    * 2a1. Teletutors App displays an error message: `Student not found. Please check the name and try again`
+* 1a. The student does not exist in the system
+    * 1a1. Teletutors App displays an error message: `Student not found. Please check the name and try again`
 
-      Use case resumes from Step 3.
+      Use case resumes from Step 1.
 
 
 
@@ -367,13 +395,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4.  Codebase should be _modular_ and easy to update, so that future developers can easily add new features or fix bugs.
+5.  App should have the ability to gracefully handle a data file that is corrupted without crashing, and inform the user of the issue.
+6.  System should _gracefully recover_ from minor errors (e.g., incorrect or incomplete input) by either prompting the user to correct the issue, or using default values where applicable.
+7.  System should have well-written and accessible user and developer documentation to support both end-users and future developers in using and maintaining the application.
+8.  System should have a comprehensive suite of automated tests to ensure that new changes do not break existing functionality.
+9.  System should implement a _data retention policy_, ensuring that data and records older than a certain period are archived or deleted to optimize performance and comply with legal requirements.
+10. System should have easy-to-use backup and restore functionality, enabling users to create backups of their data, and restore their data in the event of data loss or corruption.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Modular**: Codebase is divided into separate parts that can be updated without affecting other parts.
+* **Gracefully recover**: Provides an appropriate solution without crashing the application.
+* **Data retention policy**: Guidelines regarding what data should be kept, how long data should be kept and more.
+* **CLI - interface**: Any application that mainly takes in input via text, not necessarily through a command console.
+* **Privacy**: Personal details that are not meant to be shared with others.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -392,15 +429,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
@@ -409,16 +446,16 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete 0`<br>
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 
@@ -426,6 +463,6 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
