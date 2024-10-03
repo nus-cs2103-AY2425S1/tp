@@ -13,10 +13,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Toh Leong Chuan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/t-leongchuan.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[github](https://github.com/t-leongchuan)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Project Advisor
@@ -32,9 +32,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Lee Zhi Yi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/zhiyi12345.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/zhiyi12345)] 
+[[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Data
@@ -51,9 +52,9 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Ler Jun Yi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/junyi73.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/junyi73)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
