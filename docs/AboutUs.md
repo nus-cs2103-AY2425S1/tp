@@ -31,11 +31,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Goh Qing Khang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/gohqingkhang.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/gohqingkhang)] [[portfolio](team/gohqingkhang.md)]
 
 * Role: Developer
 * Responsibilities: Data
