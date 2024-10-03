@@ -287,25 +287,25 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                    | I want to …​                                  | So that I can…​                                                          |
-|----------|----------------------------|-----------------------------------------------|--------------------------------------------------------------------------|
-| `* * *`  | user                       | save a client's personal information          | contact them easily                                                      |
-| `* * *`  | user                       | save a client's rental information            | view their respective properties                                         |
-| `* * *`  | user                       | edit a client's personal information          | modify their personal details                                            |
-| `* * *`  | user                       | edit a client's rental information            | modify their property's rental information                               |
-| `* * * ` | user                       | delete a client's personal information        | clear my application when he/she is no longer my client                  |
-| `* * *`  | user                       | delete a client's rental information          | clear my application when the property is not owned by my client anymore |
-| `* * *`  | user                       | find a client's personal information          | find the client easily                                                   |
-| `* * *`  | user                       | find a client's rental information            | find the client's property easily                                        |
-| `* *`    | user                       | colour code a client                          | differentiate more important clients                                     |
-| `* *`    | user                       | attach files to a client                      | attach important contracts to the respective clients                     |
-| `* *`    | user                       | assign tags to clients                        | differentiate clients by any interesting factors                         |
-| `* *`    | user                       | autofill CLI commands                         | easily assess the command line without typing the command again          |
-| `* *`    | user                       | export all client's personal information      | save it somewhere else                                                   |
-| `* *`    | user                       | export a specific client's rental information | save it somewhere else                                                   |
-| `*`      | user                       | send emails to a client                       | schedule meetings with them                                              |
-| `*`      | user                       | set reminders for a client                    | remember my schedule with individual client                              |
-| `*`      | user                       | lock my application                           | protect my data                                                          |
+| Priority | As a …​                 | I can …​                                  | So that I can…​                                                        |
+|----------|----------------------------|----------------------------------------------|---------------------------------------------------------------------------|
+| `* * *`  | user                       | save a client's personal information         | contact them easily                                                       |
+| `* * *`  | user                       | save a client's rental information           | view their respective properties                                          |
+| `* * *`  | user                       | edit a client's personal information         | modify their personal details                                             |
+| `* * *`  | user                       | edit a client's rental information           | modify their property's rental information                                |
+| `* * * ` | user                       | delete a client's personal information       | clear my application when he/she is no longer my client                   |
+| `* * *`  | user                       | delete a client's rental information         | clear my application when the property is not owned by my client anymore  |
+| `* * *`  | user                       | find a client's personal information         | find the client easily                                                    |
+| `* * *`  | user                       | find a client's rental information           | find the client's property easily                                         |
+| `* *`    | user                       | colour code a client                         | differentiate more important clients                                      |
+| `* *`    | user                       | attach files to a client                     | attach important contracts to the respective clients                      |
+| `* *`    | user                       | assign tags to clients                       | differentiate clients by any interesting factors                          |
+| `* *`    | user                       | autofill CLI commands                        | easily assess the command line without typing the command again           |
+| `* *`    | user                       | export all client's personal information     | save it somewhere else                                                    |
+| `* *`    | user                       | export a specific client's rental information | save it somewhere else                                                    |
+| `*`      | user                       | send emails to a client                      | schedule meetings with them                                               |
+| `*`      | user                       | set reminders for a client                   | remember my schedule with individual client                               |
+| `*`      | user                       | lock my application                          | protect my data                                                           |
 
 *{More to be added}*
 
@@ -399,7 +399,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 4d1. System prompts error for duplicated client's rental information
     * 4d2. User enters new non-duplicated client's rental information
     * Steps 4d1-4d2 are repeated until client's rental information is valid
-
+    
     Use case continues from step 5.
 
 * *a. At any time, user chooses not proceed on with the operation.
@@ -440,6 +440,86 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 * *a. At any time, user chooses not proceed on with the operation.
+
+  Use case ends.
+  
+**Use case: Edit a client's information**
+
+**MSS**
+
+1.  User chooses to edit a client's information. 
+2.  User enters the client information that he / she wants to update.
+3.  System validates user input. 
+4.  System updates the client's information as requested. 
+5.  System notifies user for successful modification. 
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. System detects error for invalid instruction.
+
+    * 3a1. System prompts error for invalid instruction.
+    * 3a2. User enters new instruction.
+    * Steps 3a1-3a2 are repeated until the instruction is valid.
+
+  Use case resumes from step 3.
+
+* 3b. System detects error for invalid client information.
+
+    * 3b1. System prompts error for invalid client information.
+    * 3b2. User enters new client information.
+    * Steps 3b1-3b2 are repeated until the client information is valid.
+  
+  Use case resumes from step 3.
+    
+* 4a. System fails to update the client's information.
+
+    * 4a1. System prompts user that edit has failed. 
+  
+  Use case resumes from step 1 or user choose not to proceed and use case ends.
+    
+* *a. At any time, User chooses not to proceed with the operation. 
+
+  Use case ends.
+
+**Use case: Edit a client's rental information**
+
+**MSS**
+
+1.  User chooses to edit a client's rental information.
+2.  User enters the rental information that he / she wants to update.
+3.  System validates user input.
+4.  System updates the client's rental information as requested.
+5.  System notifies user for successful modification.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. System detects error for invalid instruction.
+
+    * 3a1. System prompts error for invalid instruction.
+    * 3a2. User enters new instruction.
+    * Steps 3a1-3a2 are repeated until the instruction is valid.
+  
+  Use case resumes from step 3.
+
+* 3b. System detects error for invalid rental information.
+
+    * 3b1. System prompts error for invalid rental information.
+    * 3b2. User enters new rental information.
+    * Steps 3b1-3b2 are repeated until the rental information is valid.
+  
+  Use case resumes from step 3.
+  
+* 4a. System fails to update the client's rental information.
+
+    * 3a1. System prompts user that edit has failed.
+
+  Use case resumes from step 1 or user choose not to proceed and use case ends.
+
+* *a. At any time, User chooses not to proceed with the operation.
 
   Use case ends.
 
