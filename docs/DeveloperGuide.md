@@ -300,8 +300,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | beginner user   | have a help menu                                                           | I know how to perform a particular task                                                                                             |
 | `*`      | beginner user   | have some sample customer data that has already been inputted into the app | I can find out information can be saved in the application                                                                          |
 
-*{More to be added}*
-
 ### Use cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
@@ -320,30 +318,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The list is empty.
+
   Use case ends.
 
 * 3a. The given index is invalid.
+
     * 3a1. AddressBook shows an error message.
-      Use case resumes at step 2.
 
-**Use case: U3. Add remark to a contact**
-
-**MSS**
-
-1.  User requests to list contacts.
-2.  AgentAssist shows a list of contacts.
-3.  User requests to add a remark to a specific contact in the list.
-4.  AgentAssist adds the remark to the contact.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-  Use case ends.
-
-* 3a. The given index is invalid.
-    * 3a1. AgentAssist shows an error message.
       Use case resumes at step 2.
 
 *{More to be added}*
