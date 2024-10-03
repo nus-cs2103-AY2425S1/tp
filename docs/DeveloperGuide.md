@@ -320,9 +320,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  The user interface should be optimized for CLI interaction. Users should be able to accomplish tasks more efficiently using commands than using the mouse.
-4.  The system should provide clear, informative error messages in the event of invalid inputs or commands, without crashing or entering undefined states.
+4.  Should provide clear, informative error messages in the event of invalid inputs or commands to provide sufficient guidance on how to correct it.
 5.  The contacts data, such as student details and tutorial attendance, should be stored in a durable format that supports easy retrieval.
 6.  Should only discard the affected contact in the event of corrupted data, to keep impact to a minimum.
+7.  Should work without internet connection.
+8.  All commands should run under 2 seconds.
+9.  Contact data stored should be secure and adhere to local laws such as PDPA.
 
 ### Glossary
 
