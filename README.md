@@ -3,7 +3,7 @@
 
 ![Ui](docs/images/Ui.png)
 
-- **CareLink**.<br>
+**Product name: CareLink**.<br>
 
 **Target User** <br>
 
