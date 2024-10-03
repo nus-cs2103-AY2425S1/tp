@@ -9,7 +9,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 ### Caleb Chong
-<img src="images/calebchongsj.png.jpg" width="200px">
+<img src="images/calebchongsj.png" width="200px">
 
 [[github](http://github.com/calebchongsj)]
 [[profile](members/calebchong.md)]
@@ -45,16 +45,6 @@ mistake that may not align with the standard code practice.
 
 * Role: Developer
 * Responsibilities: UI
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
 
 ### Samuel Then Shi Jie
 
