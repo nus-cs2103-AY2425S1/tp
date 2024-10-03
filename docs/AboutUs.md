@@ -56,12 +56,12 @@ mistake that may not align with the standard code practice.
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Samuel Then Shi Jie
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/samuelthen.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/samuelthen)]
+[[portfolio](members/samuelthen.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Backend
