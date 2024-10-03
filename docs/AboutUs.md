@@ -52,7 +52,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Zhang Yuxiang
         
-<img src="images/therarefox.png.png" width="200px">
+<img src="images/therarefox.png" width="200px">
 
 [[github](http://github.com/TheRareFox)]
 [[portfolio](team/johndoe.md)]
