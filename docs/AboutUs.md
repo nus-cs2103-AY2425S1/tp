@@ -26,8 +26,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/wnayar)]
 [[portfolio](team/wnayar.md)]
 
-* Role: Project Developer 
-* Responsibilities: Backend 
+* Role: Project Developer
+* Responsibilities: Backend
 
 ### Gabrielle Gianna Tan-Winings
 
