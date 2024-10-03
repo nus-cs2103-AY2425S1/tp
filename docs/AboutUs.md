@@ -11,51 +11,51 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Mohammad Tahir Bin Hairul
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/meowloid.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[github](https://github.com/meowloid)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Project Advisor
 
-### Jane Doe
+### Han Yu
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/xhamyo.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/xhamyo)]
+[[portfolio](team/xhamyo.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Caleb Ng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/calebyyy.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/calebyyy)] [[portfolio](team/calebng.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Yu Quan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/limyuquan.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/limyuquan)]
+[[portfolio](team/limyuquan.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Sean Wong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/seanwong2.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/seanwong2)]
+[[portfolio](team/seanwong2.md)]
 
 * Role: Developer
 * Responsibilities: UI
