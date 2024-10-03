@@ -288,9 +288,99 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+### **Use case: Add a person**
 
-**Use case: Delete a person**
+**MSS**
+
+1.  User requests to add a new person.
+2.  The system prompts the user to enter the person's details (name, phone number, email, address).
+3.  User provides the required details.
+4.  The system adds the person to the database.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The user does not provide all required details.
+
+    * 2a1. The system shows an error message indicating missing fields.
+
+      Use case resumes at step 2.
+
+* 3a. User enters invalid information.
+
+    * 3a1. The system shows an error message indicating invalid input.
+
+      Use case resumes at step 2.
+
+---
+
+### **Use case: Edit a person's information**
+
+**MSS**
+
+1.  User requests to list persons.
+2.  The system displays a list of persons.
+3.  User requests to edit a specific person's information.
+4.  The system prompts the user to enter updated information.
+5.  User provides the updated details.
+6.  The system updates the person's information.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+    Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. The system shows an error message.
+
+      Use case resumes at step 2.
+
+---
+
+### **Use case: Add appointment information**
+
+**MSS**
+
+1.  User requests to add an appointment for a specific person.
+2.  The system prompts the user to enter appointment details (date, time, description).
+3.  User provides the appointment details.
+4.  The system adds the appointment information.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. User provides invalid appointment details (e.g., invalid date/time format).
+
+    * 2a1. The system shows an error message indicating invalid input.
+
+      Use case resumes at step 2.
+
+---
+
+### **Use case: Display a list of patients and information**
+
+**MSS**
+
+1.  User requests to display a list of patients.
+2.  The system displays a list of patients with relevant information (name, contact details, appointments).
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+    Use case ends.
+
+---
+
+### **Use case: Delete a person**
 
 **MSS**
 
@@ -313,20 +403,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-*{More to be added}*
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed. The app should hence not depend on any third-party software that is not available on all mainstream OS.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4. Data should be stored in a local file in a format that is easy to read and edit manually.
+5. The app should be able to recover from common errors (e.g. invalid user input) gracefully, without crashing.
+6. The app should avoid very high usage of system resources (CPU, memory) to ensure it can run efficiently even on systems with limited hardware capacity.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Mainstream OS**: Windows, Linux, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Patient ID**: A unique identifier for a patient in a medical system
+* **Medical record**: A collection of data about a patient’s health history
+* **Description**: A textual summary associated with a appointment or medical record
 
 --------------------------------------------------------------------------------------------------------------------
 
