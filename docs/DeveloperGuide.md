@@ -269,11 +269,11 @@ _{Explain here how the data archiving feature will be implemented}_
 A sales and customer relations representative working in the F&B industry. In
 particular, this representative works with B2B sales.
 
-* has a need to manage a significant number of business contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+- has a need to manage a significant number of business contacts
+- prefer desktop apps over other types
+- can type fast
+- prefers typing to mouse interactions
+- is reasonably comfortable using CLI apps
 
 **Value proposition**: Efficiently manage and organise a large number of contacts
 faster than a typical mouse/GUI driven app
@@ -283,7 +283,7 @@ faster than a typical mouse/GUI driven app
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …           | I want to …                                                                 | So that I can …                                                        |
-|----------|------------------|-----------------------------------------------------------------------------|------------------------------------------------------------------------|
+| -------- | ---------------- | --------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
 | `* * *`  | user             | add new contacts                                                            | save the contact information of people                                 |
 | `* * *`  | user             | delete a contact                                                            | free up space in my app                                                |
 | `* * *`  | user             | view all contact                                                            | retrieve contact information                                           |
@@ -328,10 +328,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 - 1a. There is an error in the Actor's command.
-    - 1a1 System shows an error message.
 
-  Use case resumes at step 1.
+  - 1a1 System shows an error message.
 
+    Use case resumes at step 1.
 
 **Use case: UC2 - List all people saved in the System**
 
@@ -346,17 +346,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 1a. If there are no contacts stored in the System.
 
-    - 1a1 System informs Actor that they have no contacts stored.
+  - 1a1 System informs Actor that they have no contacts stored.
 
-  Use case ends.
-
+    Use case ends.
 
 - 1b. The System detects an error in the entered command.
 
-    - 1b1 System requests for a valid command.
+  - 1b1 System requests for a valid command.
 
-  Use case resumes at step 1.
-
+    Use case resumes at step 1.
 
 **Use case: UC3 - Delete a person**
 
@@ -365,7 +363,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Actor requests to <u>list all people saved in the System (UC2)</u>.
 2.  Actor requests to delete a specific person in the list.
 3.  System deletes the person.
-4.  System <u>save contacts to save file (UC No.)</u>.
+4.  System <u>save contacts to save file (UC5)</u>.
 
     Use case ends.
 
@@ -406,14 +404,43 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   - 1a2. Actor creates a new save file.
   - 1a3. Actor loads an empty contact list.
 
-  Use case ends.
+    Use case ends.
 
 - 3.1a. Line does not fit proper contact format.
 
   - 3.1a1. Actor ignores line.
   - 3.1a2. Actor` shows a warning message.
 
-  Use case resumes at step 3.1.
+    Use case resumes at step 3.1.
+
+**Use case: UC5 - Save contact to save file**
+
+**Actor: `BizBook`**
+
+**Guarantees:** Updated contact list is saved to save file.
+
+**MSS**
+
+1.  Actor searches OS directory for save file.
+2.  OS returns save file object.
+3.  For each contact object.
+
+    - 3.1 Actor parses line into saveable format.
+    - 3.2 Actor writes line to save file.
+    - 3.3 Repeat steps 3.1 - 3.2 until all contacts are processed.
+
+4.  Actor finishes saving contacts into save file.
+
+    Use case ends.
+
+**Extensions**
+
+- 1a. Save file does not exist.
+
+  - 1a1. Actor shows a warning message.
+  - 1a2. Actor creates a new save file.
+
+    Use case resumes at step 2.
 
 ### Non-Functional Requirements
 
