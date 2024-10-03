@@ -13,6 +13,12 @@ You can reach us at our emails:
 
 - `kheehou.yong@u.nus.edu`
 
+- `e1113214@u.nus.edu`
+
+- `e1155920@u.nus.edu`
+
+- `tan_shixin@u.nus.edu`
+
 ## Project team
 
 ### Anthony Hermanto
@@ -44,6 +50,17 @@ You can reach us at our emails:
 
 * Role: Tester
 * Responsibilities: Ensures the testing of the project is done properly and on time. Handle add property to database
+
+### Wee Zhuo Lin
+
+<img src="images/jolwnn.png" width="200px">
+
+[[GitHub](https://github.com/jolwnn)]
+[[portfolio](https://jolynn-wee.vercel.app)]
+
+* Role: Integration
+* Responsibilities: In charge of versioning of the code, maintaining the code repository, integrating various parts of 
+* the software to create a whole. Handle delete property commands and documentation.
 
 ### Johnny Doe
 
