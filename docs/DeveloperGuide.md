@@ -307,35 +307,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `ClientGrid` and the **Actor** is the `real estate agent`, unless specified otherwise)
 
-**Use case: Add a property**
-
-**MSS**
-
-1.  User inputs details of property
-2.  System outputs success message in user console
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. Invalid command detail symbols
-
-    * 1a1. System outputs error message in user console
-
-      Use case ends.
-
-* 1b. Postal code number contains invalid symbols and format typical in Singapore
-
-    * 1b1. System outputs error message in user console
-
-      Use case ends.
-
-* 1c. Unit number contains invalid symbols and format
-
-    * 1c1. System outputs error message in user console
-
-      Use case ends.
-
 **Use case: UC1 - Add Client (Buyer or Seller)**
 
 MSS:
@@ -371,6 +342,35 @@ Extensions:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Steps 2a1-2a2 are repeated until the data entered are correct. 
 
 Use case ends.
+
+**Use case: UC3 - Add a property**
+
+**MSS**
+
+1.  User inputs details of property
+2.  System outputs success message in user console
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Invalid command detail symbols
+
+    * 1a1. System outputs error message in user console
+
+      Use case ends.
+
+* 1b. Postal code number contains invalid symbols and format typical in Singapore
+
+    * 1b1. System outputs error message in user console
+
+      Use case ends.
+
+* 1c. Unit number contains invalid symbols and format
+
+    * 1c1. System outputs error message in user console
+
+      Use case ends.
 
 ### Non-Functional Requirements
 
