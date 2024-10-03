@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# InvenTrack Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -300,32 +300,107 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Inventory Records` and the **Actor** is the `Inventory Manager`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Assign Products to Suppliers**
+
+**Preconditions:**
+* The Inventory Manager is logged into the InvenTrack system.
 
 **MSS**
-
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
-
+1. Inventory Manager tries to assign a product to a supplier.
+2. System validates that the product name & supplier name exists in the list. 
+3. The system assigns the specified product to the specified supplier. 
+4. System updates the product-supplier relationship in the list.
+5. System confirms the assignment with a success message.
+   
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. Product/Supplier name is in invalid format:
+  * 1a1. System displays an error message.
+  * 1a2. System prompts the Inventory Manager to re-enter the command.
+  * 1a3. Use case resumes at step 1.
 
+* 2a. Product/Supplier name does not exist:
+  * 2a1. System displays an error message.
+  * 2a2. System prompts the Inventory Manager to re-enter the command. 
+  * 2a3. Use case resumes at step 1.
+
+**Use case: Delete Suppliers/Products**
+
+Preconditions:
+* The Inventory Manager is logged into the InvenTrack system.
+
+**MSS**
+
+1. Inventory Manager tries to delete a particular product or supplier.
+2. System checks if product or supplier exists which is to be deleted.
+3. System removes the specified supplier or product from the list.
+4. System confirms the deletion with a success message.
+   
+    Use case ends.
+
+**Extensions**
+
+* 1a. Product/Supplier name is in invalid format:
+    * 1a1. System displays an error message.
+    * 1a2. System prompts the Inventory Manager to re-enter the command.
+    * 1a3. Use case resumes at step 1.
+
+* 2a. Product/Supplier name does not exist:
+    * 2a1. System displays an error message.
+    * 2a2. System prompts the Inventory Manager to re-enter the command.
+    * 2a3. Use case resumes at step 1.
+
+**Use case: Set Minimum Thresholds for Products Stock**
+
+Preconditions:
+* The Inventory Manager is logged into the InvenTrack system.
+
+**MSS**
+1. Inventory Manager tries to set a threshold for a product.
+2. System validates that the product name exists in the list.
+3. System sets the specified threshold for the product. 
+4. System updates the product information in the list.
+5. System confirms the threshold setting with a success message.
+   
+    Use case ends.
+
+**Extensions**
+* 1a. Threshold amount is in invalid format(not numeric):
+    * 1a1. System displays an error message.
+    * 1a2. System prompts the Inventory Manager to re-enter the command.
+    * 1a3. Use case resumes at step 1.
+
+* 2a. Product name does not exist:
+    * 2a1. System displays an error message.
+    * 2a2. System prompts the Inventory Manager to re-enter the command.
+    * 2a3. Use case resumes at step 1.
+
+**Use case: Access help guide**
+* User - Any user with access to the system
+
+**Preconditions:**
+* The user is logged into the InvenTrack system.
+* The product for which the threshold is being set exists in the system.
+
+**MSS**
+1. User requests for help guide.
+2. System opens a new window or panel displaying the user guide. 
+3. User reviews the guide. 
+4. User closes the guide when finished.
+   
+    Use case ends.
+
+**Extensions**
+* 1a. System unable to open user guide:
+    * 1a1. System displays an error message.
+    * 1a2. System prompts the Inventory Manager to re-enter the command.
+    * 1a3. Use case resumes at step 1.
+  
   Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. AddressBook shows an error message.
-
-      Use case resumes at step 2.
-
-*{More to be added}*
 
 ### Non-Functional Requirements
 
