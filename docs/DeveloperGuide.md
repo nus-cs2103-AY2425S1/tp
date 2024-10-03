@@ -274,29 +274,41 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
+* Tertiary Teacher/Educator
 * has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* requires a tool to keep communication organised across large groups
+* requires support for efficient tracking of academic progress
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: save important time through simplification of student-parent contact management, enhancement in communication tracking and integrated progress reports
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​            | I want to …​                                   | So that I can…​                                                            |
+|----------|--------------------|------------------------------------------------|----------------------------------------------------------------------------|
+| `* * *`  | new teacher        | add a contact                                  | keep track of them                                                         |
+| `* * *`  | teacher            | delete a contact                               | remove contacts that I no longer need                                      |
+| `* * *`  | teacher            | add a grade to a contact                       | keep track of a student's grades                                           |
+| `* * *`  | teacher            | add a student's details                        | keep track of the students under me                                        |
+| `* *`    | teacher            | edit a contact                                 | correct a mistake made without having to delete it                         |
+| `* *`    | teacher            | search for a contact                           | find the contact I am looking for without having to scroll                 |
+| `* *`    | frequent teacher   | add tags or labels to contacts                 | group the many contacts that are in the application by a commonality       |
+| `* *`    | frequent teacher   | filter contacts by labels or tags              | filter out irrelevant contacts                                             |
+| `* *`    | frequent teacher   | mass add contacts                              | add a group of contacts without having to do so one by one                 |
+| `* *`    | frequent teacher   | mass delete contacts                           | delete multiple contacts without having to do so one by one                |
+| `* *`    | teacher            | add next of kins' contacts                     | contact the relevant individual in case of emergencies                     |
+| `*`      | frequent teacher   | do custom sorts for contacts                   | shift relevant contacts near the top of the list of contacts               |
+| `*`      | new teacher        | see guided tours and tooltips                  | familiarise myself with the application interface                          |
+| `*`      | long-time teacher  | archive contacts                               | reduce clutter in the application without permanently deleting the contact |
+| `*`      | long-time teacher  | refactor tags or labels                        | mass edit tags or labels if any changes occur                              |
+| `*`      | new teacher        | see the application populated with sample data | see what the application interface looks like                              |
+| `*`      | frequent teacher   | add descriptions to contacts                   | be reminded of various traits a particular individual might have           |
+| `*`      | frequent teacher   | undo previous action                           | undo a mistake without having to delete or edit any contacts               |
+| `*`      | long-time teacher  | export contact data                            | have a backup data file in case anything happens to the application        |
+| `*`      | long-time teacher  | import contact data                            | load data from a file to restore lost or missing data                      |
+| `*`      | long-time teacher  | access communication history                   | well-prepared for upcoming meetings                                        |
 
 ### Use cases
 
