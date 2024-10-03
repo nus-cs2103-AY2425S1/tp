@@ -260,31 +260,29 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
-Student event planners at NUS who:
-* need to manage contacts like attendees, vendors, sponsors and volunteers for their events.
-* need a centralized platform to organize, track and access contact information and details of event
+Target user profile:
+
+* has a need to manage a significant number of contacts
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: For student planners who need a seamless way to manage contacts, our address book provides a centralized platform to organize, track, and access the contact information and details of attendees, vendors, sponsors and volunteers, thus enabling effortless coordination of logistics and ensures smooth communication for every event
-
+Value proposition: manage contacts faster than a typical mouse/GUI driven app
 
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Priorities: High (must have) - * * *, Medium (nice to have) - * *, Low (unlikely to have) - *
 
-| Priority | As a …​                                                                             | I want to …​                                                             | So that I can…​                                                                                                          |
-| -------- |-------------------------------------------------------------------------------------|--------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
-| `* * *`  | Student Event Planner who handles contact information of many people                | Add contact details of event attendees, vendors, sponsors and volunteers | Store their contact details and have a platform to view the contact information of the relevant parties all in one place |
-| `* * *`  | Student event planner who can type fast and prefer typing over other means of input | Perform the functions of the app solely by typing                        | Speed up the process of accessing and managing information                                                               |
-| `* * *`  | Student Event Planner                                                               | delete a person                                                          | Keep my contacts up-to-date                                                                                              |
-| `* * *`  | Student Event Planner                                                    | View the list of all contacts and number of contacts        | quickly get an overview of contact information of all attendees, vendors, sponsors and volunteer saved so far                            |
-| `* *`    | user                                                                                | hide private contact details                                             | minimize chance of someone else seeing them by accident                                                                  |
-| `*`      | user with many persons in the address book                                          | sort persons by name                                                     | locate a person easily                                                                                                   |
+| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
+| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
+| * * *  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
+| * * *  | user                                       | add a new person               |                                                                        |
+| * * *  | user                                       | delete a person                | remove entries that I no longer need                                   |
+| * * *  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
+| * *    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
+| *      | user with many persons in the address book | sort persons by name           | locate a person easily
 
 *{More to be added}*
 
