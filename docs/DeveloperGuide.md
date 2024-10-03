@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This document is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -260,15 +260,11 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Target user profile**: NUS CS TAs who are adept and prefer CLI to GUI, 
+and have to keep track of their tutorial students’ contact and progress.
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
-
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: offers a streamlined tool for TAs to efficiently manage student contacts and work progress, 
+optimized for users who are fast typers, it’s portable, battery-efficient(light-weight), easy to learn and use.
 
 
 ### User stories
@@ -301,16 +297,38 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `ConTActs` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**UC01: Add contact**
+
+**MSS**
+1. User requests to add a person
+2. ConTActs adds the contact to the list
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Parameters contain unacceptable values.
+
+    * 1a1. ConTActs shows an error message.
+
+      Use case resumes at step 1.
+
+* 1b. Contact already exists.
+
+    * 1b1. ConTActs shows an error message.
+
+      Use case resumes at step 1.
+
+**UC02: Delete contact**
 
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  ConTActs shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  ConTActs deletes the person
 
     Use case ends.
 
@@ -322,11 +340,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. ConTActs shows an error message.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**UC03: View contacts**
+
+**MSS**
+
+1. User requests to list persons with parameters e.g. number of contacts, reset sorting order
+2. ConTActs displays the list of persons
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Parameters contain unacceptable values.
+
+    * 1a1. ConTActs shows an error message.
+
+      Use case resumes at step 1.
+
+* 2a. The list is empty.
+    
+  * 2a1. ConTActs shows a message that the list is empty.
+    
+    Use case ends.
+
+
 
 ### Non-Functional Requirements
 
