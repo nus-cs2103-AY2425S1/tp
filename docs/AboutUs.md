@@ -18,7 +18,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Ng Hong Jing
 
-<img src="images/RohitSharma.jpg" width="200px">
+<img src="images/hj235.png" width="200px" alt="Hong Jing's profile photo">
 
 [[github](http://github.com/hj235)]
 [[portfolio](team/hongjing.md)]
