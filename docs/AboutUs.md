@@ -9,6 +9,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+
+### Lee Jun Long Matthew
+<img src="images/flyingsalsa.png" width="200px">
+
+[[github](https://github.com/flyingsalsa)]
+[[portfolio](team/flyingsalsa.md)]
+
 ### Zheng Xiangcheng
 
 <img src="images/xczheng0105.png" width="200px">
