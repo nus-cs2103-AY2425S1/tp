@@ -341,16 +341,50 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+Performance Requirements
+1. The system should respond to user input within 2 seconds for all CRUD operations on contacts and deliveries (e.g., adding, deleting, searching).
+2. The application should take no longer than 5 seconds to launch and load all necessary data (e.g., contacts, deliveries) on any supported platform.
+
+Scalability Requirements
+3. The system should be able to handle at least 1,000 contacts and 1000 deliveries without noticeable degradation in performance
+
+Usability Requirements
+4. A user with typing speed of more than 50 words per minute for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse
+
+Compatibility / Portability Requirements
+5. Should work on any mainstream OS as long as it has Java 17 or above installed without requiring platform-specific dependencies
+6. The product should work as a standalone JAR file, not exceeding 100MB in size without needing an installer.
+
+Data Requirements
+7. The system should not use any Database Management System (DBMS) for data storage. The contacts and deliveries data should be stored locally in a human-editable file.
+8. The system should ensure that the data file remains consistent and free from corruption across system crashes or improper shutdowns.
+
+Security Requirements
+9. The system should ensure that user data (e.g., supplier contacts, delivery information) is only accessible by the user of the local machine
+
+Maintainability Requirements
+10. The system should follow Object-Oriented Programming (OOP) principles to facilitate future maintenance and feature additions.
+11. The project should be developed in a breadth-first incremental manner, with consistent delivery of features over the course of the development cycle.
+
+Testability Requirements
+12. The system should be designed to support unit and integration testing, with testable modules and clearly defined boundaries.
+13. The application should not depend on any external remote servers for its core functionality, ensuring that the product can be tested and used offline without network dependencies.
 
 *{More to be added}*
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **CLI (Command-Line Interface)**: A text-based interface where users interact with the system by typing commands, as opposed to using a graphical interface with mouse clicks.
+* **CRUD Operations**: Refers to Create, Read, Update, and Delete operations. In this system, CRUD applies to managing supplier contacts and delivery information.
+* **DBMS (Database Management System)**: A software system that enables users to define, create, maintain and control access to a database. It provides an organised way of managing, storing, and retrieving vast amounts of data.
+* **Delivery Information**: Details about a specific delivery, including date, supplier, products, and status.
+* **Human-Editable File**: A plain text file that can be easily opened, read, and modified by users, typically in formats such as JSON, CSV, or TXT, without needing specialised software.
+* **JAR File**: A Java ARchive file, which is a package file format that aggregates many Java class files and associated resources (text, images, etc.) into one file for distribution.
+* **Mainstream OS**: Windows, Linux, Unix, macOS
+* **OOP (Object-Oriented Programming)**: A programming paradigm based on the concept of objects, which can contain data and methods.
+* **Supplier Contact**: A record containing information about a supplier, including name, contact details, and associated products.
+  
+*{More to be added}*
 
 --------------------------------------------------------------------------------------------------------------------
 
