@@ -5,6 +5,8 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
 
+You can reach us at the email `seer[at]comp.nus.edu.sg`
+
 ## Project team
 
 ### Clarence Yeo
@@ -15,7 +17,7 @@ We are a team based in the [School of Computing, National University of Singapor
 [[github](https://github.com/clarenceeey)]
 [[portfolio](team/clarence.md)]
 
-* Role: Project Advisor
+* Role: Project Developer
 
 
 ### notnotmax
@@ -37,12 +39,13 @@ We are a team based in the [School of Computing, National University of Singapor
 * Role: Developer
 * Responsibilities: Data
 
-### John Doe
+### Han Yi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yhanyi.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[homepage](http://www.comp.nus.edu.sg/~damithch)]
+[[github](https://github.com/yhanyi)]
+[[portfolio](team/yhanyi.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
