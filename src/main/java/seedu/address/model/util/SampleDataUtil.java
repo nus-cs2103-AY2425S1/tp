@@ -59,26 +59,6 @@ public class SampleDataUtil {
         };
     }
 
-    public static Person[] getSampleVendors() {
-        return new Person[]{
-                new Vendor(new Name("Alex Yeoh"), new Phone("83238717"), new Email("alexyeoh@example.com"),
-                        new Address("Blk 50 Geylang Street 31, #03-40"),
-                        getTagSet("hotelier"), new Company("MBS Hotel")),
-                new Vendor(new Name("Brian Smith"), new Phone("99311258"), new Email("brainsmith@example.com"),
-                        new Address("Blk 30 Lorong 3 Serangoon Gardens, #10-20"),
-                        getTagSet("florist", "responsible"), new Company("Brian's Florist")),
-                new Vendor(new Name("Catherine Lee"), new Phone("93212323"), new Email("catherine@example.com"),
-                        new Address("Blk 131 Ang Mo Kio Street 77, #01-04"),
-                        getTagSet("irresponsible"), new Company("Decoration Co.")),
-                new Vendor(new Name("David Nguyen"), new Phone("87134653"), new Email("nguyen@example.com"),
-                        new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                        getTagSet("puncutual"), new Company("David Whiskey Co")),
-                new Vendor(new Name("Tony Stark"), new Phone("83129340"), new Email("stark@example.com"),
-                        new Address("Blk 50 Aljunied Street 91, #05-31"),
-                        getTagSet("caterer"), new Company("Best Food Company"))
-        };
-    }
-
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
