@@ -9,15 +9,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Zheng Xiangcheng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/xczheng0105.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[github](https://github.com/xczheng0105)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+* Role: Member
 
 ### Jane Doe
 
@@ -29,14 +29,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Chen Lei Yu
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/chenleiyu.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/ChenLeiyu)] [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Data
 
 ### Jean Doe
 
