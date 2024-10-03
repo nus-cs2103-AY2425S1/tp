@@ -1,5 +1,5 @@
 {
-  "_comment": "Student directory save file which contains the same Student values as in TypicalStudents#getTypicalAddressBook()",
+  "_comment": "Student directory save file which contains the same Student values as in TypicalStudents#getTypicalStudentDirectory()",
   "students" : [ {
     "name" : "Alice Pauline",
     "phone" : "94351253",
