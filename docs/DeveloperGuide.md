@@ -304,18 +304,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AgentAssist` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a contact**
+**Use case: Delete a person**
 
 **MSS**
 
-1.  User requests to list contacts.
-2.  AgentAssist shows a list of contacts.
-3.  User requests to delete a specific contact in the list.
-4.  AgentAssist ask user for confirmation. 
-5.  User confirms. 
-6.  AgentAssist deletes the contact.
+1.  User requests to list persons
+2.  AddressBook shows a list of persons
+3.  User requests to delete a specific person in the list
+4.  AddressBook deletes the person
 
     Use case ends.
 
@@ -325,10 +323,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 * 3a. The given index is invalid.
-    * 3a1. AgentAssist shows an error message.
+    * 3a1. AddressBook shows an error message.
       Use case resumes at step 2.
 
-**Use case: Add remark to a contact**
+**Use case: U3. Add remark to a contact**
 
 **MSS**
 
