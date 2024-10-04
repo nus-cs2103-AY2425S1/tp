@@ -330,7 +330,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - The system should be able to scale to handle **up to 10,000 patient records** without performance degradation.
 
 5. **Security**:
-    - Users should **automatically log out after 10 minutes** of inactivity to prevent unauthorized access.
     - **Sensitive patient information** (e.g., medical records, contact details) must be accessible only by **authorized personnel** (e.g., clinic staff, administrators).
     - Access to sensitive information should be tracked with **audit logs**.
 
