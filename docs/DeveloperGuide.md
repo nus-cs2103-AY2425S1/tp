@@ -308,7 +308,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to create a new event by providing the event name and date.
 2. System creates the event.
-3. System displays a confirmation message.
+3. System displays a success message.
 
     Use case ends.
 
