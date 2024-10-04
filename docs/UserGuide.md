@@ -41,7 +41,7 @@ Now, open a command terminal:
 
 Navigate your terminal to the folder where you saved the AgentAssist application:
 
-* Type **`cd `** (with a space after it), then drag and drop the folder where you placed the `.jar` file into the terminal window. Press Enter.<br>
+* Type **`cd `** (with a space after it), then drag and drop the folder where you placed the `.jar` file into the terminal window. The command should look similar to this: `cd '/Users/name/AgentAssistFolder'`. Press Enter.<br>
 
 Type the following command: **`java -jar agentassist.jar`** and press **Enter**.
 
@@ -55,7 +55,7 @@ In the application window, you will see a **command box**. This is where you typ
 * Type a command in the command box and press **Enter** to make the app do something.
 * Typing `help` and pressing Enter will open the help window.
 
-Here are some commands you can try:
+Here are some example commands you can try:
 
 * `list` : Lists all contacts.
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
