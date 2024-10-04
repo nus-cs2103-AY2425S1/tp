@@ -39,6 +39,12 @@
           </padding>
         </StackPane>
 
+        <StackPane VBox.vgrow="ALWAYS" fx:id="taskListPanelPlaceholder" styleClass="pane-with-border">
+          <padding>
+            <Insets top="5" right="10" bottom="5" left="10" />
+          </padding>
+        </StackPane>
+
         <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
                    minHeight="100" prefHeight="100" maxHeight="100">
           <padding>

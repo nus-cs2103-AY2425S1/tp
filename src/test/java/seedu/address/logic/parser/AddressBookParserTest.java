@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -28,6 +29,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.PriorityCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.EmergencyContact;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -116,11 +118,22 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_addTask() throws Exception {
+        String taskDescription = "Buy medication";
+        Name personName = new Name("John Doe");
+
+        AddTaskCommand expectedCommand = new AddTaskCommand(taskDescription, personName);
+
+        String userInput = AddTaskCommand.COMMAND_WORD + " d/" + taskDescription + " p/" + personName.fullName;
+
+        AddTaskCommand command = (AddTaskCommand) parser.parseCommand(userInput);
+        assertEquals(expectedCommand, command);
+    }
+    @Test
     public void parseCommand_priorityMissingLevel_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 PriorityCommand.MESSAGE_USAGE), () -> parser.parseCommand(
                                 PriorityCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()));
     }
-
 
 }
