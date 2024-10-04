@@ -394,6 +394,7 @@ Use case ends.
 ---
  
 **Use case:** UC8 - Add Allergies to Patients
+
 **MSS:**
 1. User keys in the patient’s allergies to MB3.
 2. MB3 adds the allergies and displays a success message.  
