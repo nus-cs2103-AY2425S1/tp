@@ -323,7 +323,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is `DorManagerPro`, and the 
 **Actor** is the `user` who refers to university dormitory managers 
-unless specified otherwise.
+unless specified otherwise.)
 
 **Use Case: UC01 - Add a profile**
 
@@ -332,7 +332,7 @@ unless specified otherwise.
 1.  User requests to add a specific profile, specifying name and contact number.
 2.  DorManagerPro adds the profile.
 
-    Use case ends
+    Use case ends.
 
 **Extensions:**
 
@@ -363,7 +363,11 @@ unless specified otherwise.
 
     Use case resumes from step 2.
 
-**Use Case: UC02 - Add room number to profile)**
+* *a. At any time, User chooses to stop adding a profile.
+
+  Use case ends.
+
+**Use Case: UC02 - Add room number to profile**
 
 **Precondition: There is at least one profile added into DorManagerPro**
 
@@ -372,7 +376,7 @@ unless specified otherwise.
 1.  User requests to add room number information to a specific profile.
 2.  DorManagerPro updates the profile to include the room number.
 
-    Use case ends
+    Use case ends.
 
 **Extensions:**
 
@@ -412,6 +416,10 @@ unless specified otherwise.
 
     Use case resumes from step 2.
 
+* *a. At any time, User chooses to stop adding a room number.
+
+  Use case ends.
+
 **Use Case: UC03 - Add emergency contact to profile**
 
 **Precondition: There is at least one profile added into DorManagerPro**
@@ -421,7 +429,7 @@ unless specified otherwise.
 1.  User requests to add emergency contact information to a specific profile.
 2.  DorManagerPro updates the profile to include the emergency contact.
 
-    Use case ends
+    Use case ends.
 
 **Extensions:**
 
@@ -452,6 +460,10 @@ unless specified otherwise.
 
     Use case resumes from step 2.
 
+* *a. At any time, User chooses to stop adding an emergency contact.
+
+  Use case ends.
+
 **Use Case: UC04 - View profiles**
 
 **Precondition: There is at least one profile added into DorManagerPro**
@@ -461,7 +473,7 @@ unless specified otherwise.
 1.  User requests to view profiles.
 2.  DorManagerPro displays all profiles with all attached information.
 
-    Use case ends
+    Use case ends.
 
 **Extensions:**
 
@@ -473,6 +485,10 @@ unless specified otherwise.
     Steps 1a1-1a2 are repeated until the command is correct.
 
     Use case resumes from step 2.
+
+* *a. At any time, User chooses to stop viewing a profile.
+
+  Use case ends.
 
 **Use Case: UC05 - Delete a profile**
 
@@ -528,6 +544,10 @@ unless specified otherwise.
 * 3b. User expresses they do not want to delete the profile after all.
     * 3b1. DorManagerPro acknowledges the rejection.
   
+    Use case ends.
+
+* *a. At any time, User chooses to stop deleting a profile.
+    
     Use case ends.
 
 ### Non-Functional Requirements
