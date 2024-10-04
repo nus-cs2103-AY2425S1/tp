@@ -98,12 +98,11 @@ public class PersonTest {
 
     @Test
     public void toStringMethod() {
-        String expected = "seedu.address.model.person.Person{name=" + ALICE.getName().fullName
-                + ", phone=" + ALICE.getPhone().value
-                + ", email=" + ALICE.getEmail().value
-                + ", address=" + ALICE.getAddress().value
+        String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
+                + ", email=" + ALICE.getEmail()
+                + ", address=" + ALICE.getAddress()
                 + ", emergency contact=" + ALICE.getEmergencyContact()
-                + ", tags=" + ALICE.getTags().toString()
+                + ", tags=" + ALICE.getTags()
                 + ", priorityLevel=" + ALICE.getPriorityLevel().toString() + "}";
         assertEquals(expected, ALICE.toString());
     }
