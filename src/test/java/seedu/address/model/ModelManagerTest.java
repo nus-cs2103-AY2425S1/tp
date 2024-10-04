@@ -16,7 +16,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.task.Task;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.TaskBuilder;
 
 public class ModelManagerTest {
 
@@ -92,6 +94,25 @@ public class ModelManagerTest {
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
     }
+
+    @Test
+    public void hasTask_taskNotInAddressBook_returnsFalse() {
+        Task task = new TaskBuilder().withDescription("Buy medication").build();
+        assertFalse(modelManager.hasTask(task));
+    }
+
+    @Test
+    public void hasTask_taskInAddressBook_returnsTrue() {
+        Task task = new TaskBuilder().withDescription("Buy medication").build();
+        modelManager.addTask(task);
+        assertTrue(modelManager.hasTask(task));
+    }
+
+    @Test
+    public void getFilteredTaskList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredTaskList().remove(0));
+    }
+
 
     @Test
     public void equals() {
