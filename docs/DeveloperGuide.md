@@ -301,33 +301,77 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 *{More to be added}*
 
 ### Use cases
+**System: EventfulNUS**\
+**Use case: UC5 - Update participant’s details**\
+**Actor: User**\
+**Guarantee: MSS → The specified participant’s details will be updated**
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+MSS:
+1. User requests to update a participant’s details
+2. System updates and displays the specified participant’s data
 
-**Use case: Delete a person**
+Extensions:\
+1a. System detects an error in the entered data.\
+1a1. System prompts user to re-enter data\
+1a2. User enters new data\
+Steps 1a1-1a2 are repeated until the data entered is correct.\
+Use case resumes from step 2.
 
-**MSS**
+1b. System does not find the specified participant in the system\
+1b1. System prompts user to re-enter data\
+1b2. User enters new data\
+Steps 1b1-1b2 are repeated until the data entered is correct.\
+Use case resumes from step 2.
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+<hr>
 
-    Use case ends.
+**System: EventfulNUS**\
+**Use case: UC6 - Assign participants to specific sub-events**\
+**Actor: User**\
+**Guarantee: MSS → The specified participant will be assigned to a specified sub-event**\
 
-**Extensions**
+MSS:
+1. User requests to assign a participant to a sub-event
+2. System updates and displays the specified participant’s sub-event
 
-* 2a. The list is empty.
+Extensions:\
+1a. System detects an error in the entered data.\
+1a1. System prompts user to re-enter data\
+1a2. User enters new data\
+Steps 1a1-1a2 are repeated until the data entered is correct.
+Use case resumes from step 2.
 
-  Use case ends.
+1b. System does not find specified participant in the system\
+1b1. System prompts user to re-enter data\
+1b2. User enters new data\
+Steps 1b1-1b2 are repeated until the data entered is correct.\
+Use case resumes from step 2.
 
-* 3a. The given index is invalid.
+<hr>
 
-    * 3a1. AddressBook shows an error message.
+**System: EventfulNUS**\
+**Use case: UC7 - Delete participant**\
+**Actor: User**\
+**Guarantee: MSS → The specified participant will be deleted from the system**
 
-      Use case resumes at step 2.
+MSS:
+1. User requests to delete a participant
+2. System requests for confirmation
+3. User confirms
+4. System deletes the participant and displays a message indicating no errors.
 
-*{More to be added}*
+Extensions:\
+1a. System detects an error in the entered data.\
+1a1. System prompts user to re-enter data\
+1a2. User enters new data\
+Steps 1a1-1a2 are repeated until the data entered is correct.\
+Use case resumes from step 2.
+
+1b. System does not find specified participant in the system\
+1b1. System prompts user to re-enter data\
+1b2. User enters new data\
+Steps 1b1-1b2 are repeated until the data entered is correct.\
+Use case resumes from step 2.
 
 ### Non-Functional Requirements
 
