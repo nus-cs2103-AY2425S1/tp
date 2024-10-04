@@ -56,7 +56,7 @@ AY2425S1-CS2103T-F14a-4
 <img src="images/nguyen.png" width="200px">
 
 [[github](https://github.com/blackpanther9229)]
-[[portfolio](team/nguyen.md)]
+[[portfolio](team/blackpanther9229)]
 
 * Role: Developer
 * Responsibilities: UI
