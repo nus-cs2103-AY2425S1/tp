@@ -331,10 +331,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Recurring Events**: Events that occur repeatedly on a set schedule.
 * **CLI (Command-Line Interface)**: A text-based interface where users input commands to interact with the application.
 * **NFR (Non-Functional Requirement)**: System attributes like performance, scalability, and usability that don’t affect specific functional behaviors.
-* **MVP (Minimum Viable Product)**: The simplest version of a product that contains essential features to provide immediate value to users.
 * **Duplicate Handling**: A system feature that prevents the creation of identical entries.
 --------------------------------------------------------------------------------------------------------------------
 
+## **Appendix: Instructions for manual testing**
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
