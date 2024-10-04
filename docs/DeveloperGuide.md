@@ -262,29 +262,61 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+Researchers who,
+* have a need to manage a significant number of study participants
+* need an easy way to contact different experimental groups
+* need quick access to study participants' information
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* is reasonably comfortable using *CLI* apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
+
+As researchers have to handle large groups of participants across multiple studies, `ResearchRoster` allows them to 
+* have all participants consolidated in a single program 
+* consolidate a list of contact details based on **specific experimental criteria**
+* export it to an easy-to-read format for better data organization
+
+Thus, *ResearchRoster* allows researchers to save time, effort and energy whilst keeping their participant data well-organised.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​     | I want to …​                                                                               | So that I can …​                                                                     |
+|----------|-------------|--------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|
+| `* * *`  | user        | add a new person                                                                           | store a new person in my contact list                                                |
+| `* * *`  | user        | add details to contacts                                                                    | store details of people in my contact list                                           |
+| `* * *`  | researcher  | add multiple tags to participants                                                          | tag contacts to multiple study groups                                                |
+| `* * *`  | user        | delete contacts                                                                            | remove old/ contacts that I no longer need                                           |
+| `* *`    | user        | save my contact list                                                                       | keep my contacts between sessions                                                    |
+| `*`      | user        | exit the program                                                                           | clear up my processes                                                                |
+| `* * *`  | user        | use a program that is fast                                                                 | retrieve information quickly                                                         |
+| `* * *`  | user        | work on a clean, user-friendly *UI*                                                        | navigate the platform with ease                                                      |
+| `* * *`  | user        | list all contacts                                                                          | view my list of contacts                                                             |
+| `* * *`  | user        | see usage instructions                                                                     | refer to instructions when I forget how to use the app                               |
+| `* *`    | user        | be given a prompt on what format to enter details                                          | easily use commands without having to memorise the accepted format for the CLI entry |
+| `* *`    | user        | edit contacts                                                                              | update details of my contacts                                                        |
+| `* * *`  | researcher  | update participant information in bulk                                                     | quickly make changes to large groups of participants                                 |
+| `* *`    | researcher  | archive participants who are no longer active                                              | keep my current participant list uncluttered                                         |
+| `* *`    | user        | clear all entries                                                                          | efficiently restart my progress                                                      |
+| `* * *`  | user        | search contacts by name                                                                    | locate contacts without having to go through the entire list                         |
+| `* * *`  | researcher  | search for participants based on study                                                     | quickly locate specific groups of participants                                       |
+| `* * *`  | researcher  | tag participants with specific attributes (e.g., age, gender, study criteria)              | quickly filter and sort participants                                                 |
+| `* * *`  | researcher  | change tag details                                                                         | update the contacts with experimental details                                        |
+| `* * *`  | user        | filter contacts by tags                                                                    | view my contacts by specific groups                                                  |
+| `* * *`  | user        | sort my contact list by name                                                               | locate a person easily                                                               |
+| `* * *`  | researcher  | categorize participants by their participation status (e.g., active, completed, withdrawn) | easily manage ongoing studies                                                        |
+| `* *`    | user        | hide private contact details                                                               | prevent others from viewing them without permission                                  |
+| `* *`    | researcher  | export contacts emails (or other details) into easy to copy-paste format                   | copy the details (like emails) into other places easily                              |
+| `* *`    | researcher  | anonymize participant data when exporting or sharing                                       | ensure participant confidentiality and legal compliance                              |
+| `* *`    | researcher  | assign participants randomly into sample groups                                            | easily obtain samples for experiments                                                |
+| `* *`    | researcher  | get reminders about upcoming sessions                                                      | be reminded of the time without manually noting it down                              |
+| `* *`    | researcher  | receive reminders when participant data is missing or needs updates                        | keep participant records thorough and current                                        |
+| `* *`    | researcher  | track the progress and completion of tasks related to participants                         | ensure all administrative tasks are completed                                        |
+| `* *`    | user        | undo the most recent command                                                               | easily undo commands if I key in the wrong information                               |
 
 ### Use cases
 
@@ -747,6 +779,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **UI**: User Interface - The medium through which users interact with a system, encompassing both graphical (*GUI*) and text-based (*CLI*) elements
+* **GUI**: Graphical User Interface - A visual-based interface where users interact with the system through graphical elements like icons and windows
+* **CLI**: Command Line Interface - A text-based interface where users interact with the system by typing commands
 
 --------------------------------------------------------------------------------------------------------------------
 
