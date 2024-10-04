@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.EmergencyContact;
 
 /**
  * Changes the remark of an existing person in the address book.
@@ -29,25 +30,22 @@ public class EmergencyContactCommand extends Command {
             + "Emergency Contact Number: %3$s";
 
     private final Index index;
-    private final String emergencyContactName;
-    private final String emergencyContactNumber;
+    private final EmergencyContact emergencyContact;
 
     /**
      * @param index of the person in the filtered person list to edit the emergency contact details
-     * @param emergencyContactName of the person to be updated to
-     * @param emergencyContactNumber of the person to be updated to
+     * @param emergencyContact of the person to be updated to
      */
-    public EmergencyContactCommand(Index index, String emergencyContactName, String emergencyContactNumber) {
-        requireAllNonNull(index, emergencyContactName, emergencyContactNumber);
+    public EmergencyContactCommand(Index index, EmergencyContact emergencyContact) {
+        requireAllNonNull(index, emergencyContact);
         this.index = index;
-        this.emergencyContactName = emergencyContactName;
-        this.emergencyContactNumber = emergencyContactNumber;
+        this.emergencyContact = emergencyContact;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        throw new CommandException(String.format(MESSAGE_ARGUMENTS, index.getOneBased(), emergencyContactName,
-                emergencyContactNumber));
+        throw new CommandException(String.format(MESSAGE_ARGUMENTS, index.getOneBased(), emergencyContact.getName(),
+                emergencyContact.getNumber()));
     }
 
     @Override
@@ -63,7 +61,7 @@ public class EmergencyContactCommand extends Command {
         // state check
         EmergencyContactCommand e = (EmergencyContactCommand) other;
         return index.equals(e.index)
-                && emergencyContactName.equals(e.emergencyContactName)
-                && emergencyContactNumber.equals(e.emergencyContactNumber);
+                && emergencyContact.getName().equals(e.emergencyContact.getName())
+                && emergencyContact.getNumber().equals(e.emergencyContact.getNumber());
     }
 }

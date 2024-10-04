@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EmergencyContactCommand;
+import seedu.address.model.person.EmergencyContact;
 
 public class EmergencyContactCommandParserTest {
     private EmergencyContactCommandParser parser = new EmergencyContactCommandParser();
@@ -23,12 +24,12 @@ public class EmergencyContactCommandParserTest {
         String userInput = targetIndex.getOneBased() + " " + PREFIX_NAME + nonEmptyEmergencyContactName + " "
                 + PREFIX_PHONE + nonEmptyEmergencyContactNumber;
         EmergencyContactCommand expectedCommand = new EmergencyContactCommand(INDEX_FIRST_PERSON,
-                nonEmptyEmergencyContactName, nonEmptyEmergencyContactNumber);
+                new EmergencyContact(nonEmptyEmergencyContactName, nonEmptyEmergencyContactNumber));
         assertParseSuccess(parser, userInput, expectedCommand);
         // no remark
         userInput = targetIndex.getOneBased() + " " + PREFIX_NAME + " " + PREFIX_PHONE;
         expectedCommand = new EmergencyContactCommand(INDEX_FIRST_PERSON,
-                "", "");
+                new EmergencyContact("", ""));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
     @Test

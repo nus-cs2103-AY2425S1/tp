@@ -26,7 +26,9 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.PriorityCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -96,14 +98,12 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_emergencyContact() throws Exception {
-        final String emergencyContactName = "Lily";
-        final String emergencyContactNumber = "12345678";
+        final EmergencyContact emergencyContact = new EmergencyContact("Lily", "12345678");
         EmergencyContactCommand command = (EmergencyContactCommand) parser.parseCommand(
                 EmergencyContactCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_NAME + emergencyContactName + " "
-                        + PREFIX_PHONE + emergencyContactNumber);
-        assertEquals(new EmergencyContactCommand(INDEX_FIRST_PERSON, emergencyContactName, emergencyContactNumber),
-                command);
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_NAME + emergencyContact.getName() + " "
+                        + PREFIX_PHONE + emergencyContact.getNumber());
+        assertEquals(new EmergencyContactCommand(INDEX_FIRST_PERSON, emergencyContact), command);
     }
 
     @Test
@@ -129,6 +129,11 @@ public class AddressBookParserTest {
         AddTaskCommand command = (AddTaskCommand) parser.parseCommand(userInput);
         assertEquals(expectedCommand, command);
     }
-
+    @Test
+    public void parseCommand_priorityMissingLevel_throwsParseException() {
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                PriorityCommand.MESSAGE_USAGE), () -> parser.parseCommand(
+                                PriorityCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()));
+    }
 
 }

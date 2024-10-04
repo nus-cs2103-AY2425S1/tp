@@ -17,7 +17,8 @@ public class JsonAdaptedTaskTest {
     private static final JsonAdaptedPerson VALID_PATIENT = new JsonAdaptedPerson(BENSON);
     private static final JsonAdaptedPerson INVALID_PATIENT = new JsonAdaptedPerson("R@chel", BENSON.getPhone().value,
             BENSON.getEmail().value, BENSON.getAddress().value,
-            BENSON.getTags().stream().map(JsonAdaptedTag::new).toList());
+            BENSON.getTags().stream().map(JsonAdaptedTag::new).toList(),
+            BENSON.getPriorityLevel().getValue());
 
     @Test
     public void toModelType_validTaskDetails_returnsTask() throws Exception {
