@@ -8,7 +8,7 @@ import seedu.address.commons.util.DateUtil;
  * Represents a patient's date of birth in MediBase3.
  * Guarantees: immutable; is valid as declared in {@link #isValidDateOfBirth(String)}
  */
-public class DateOfBirth extends DateUtil {
+public class DateOfBirth {
     public static final String MESSAGE_CONSTRAINTS = "Date of birth should not be after today's date";
 
     public final String value;
