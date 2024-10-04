@@ -287,34 +287,57 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
-### Use cases
+# Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `EduLog` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+## UC9: View students (Nikhil)
 
-**MSS**
+**System:** EduLog  
+**Actor:** Teacher  
+**Precondition:** The teacher is logged into the app.
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+### Main Success Scenario:
 
-    Use case ends.
+1. Teacher requests to see students enrolled under him/her.  
+2. System displays the students enrolled under her.  
+   Use case ends.
 
-**Extensions**
+### **Extension:**
 
-* 2a. The list is empty.
+**1a.** **Teacher requested to view invalid student**
 
-  Use case ends.
+**1a1.** System notifies the teacher that the student is not present in her set of students.
 
-* 3a. The given index is invalid.
+**1a2.** System requests the teacher for the correct student name.
 
-    * 3a1. AddressBook shows an error message.
+Steps 1a1-1a2 are repeated until an existing student is selected.
 
-      Use case resumes at step 2.
+Use case resumes from Step 2.
 
-*{More to be added}*
+## UC10: Remove student (Nikhil)
+
+**System:** EduLog  
+**Actor:** Teacher  
+**Precondition:** The teacher is logged into the app, the student is present in the list of students enrolled under the teacher.  
+**Postcondition:** The student is removed from the teacher’s list of students.
+
+### Main Success Scenario:
+
+1. Teacher views the students enrolled under him/her through U1. View Students  
+2. Teacher selects a student to delete.  
+3. Teacher requests to delete the student.  
+4. System confirms that the student has been removed.  
+   Teacher repeats steps 3-5 for any remaining students they wish to remove.  
+   Use case ends.
+
+### **Extension:**
+
+**3a.** **Student no longer exists in the list of the teacher’s students:**
+
+**3a1.** System notifies the teacher that the student is not present in her set of students.
+
+Use case ends.
 
 ### Non-Functional Requirements
 
