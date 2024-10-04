@@ -130,10 +130,10 @@ public class DeleteCommandTest {
     public void toStringMethod() {
         // Test for Index
         Index targetIndex = Index.fromOneBased(1);
-        DeleteCommand deleteCommand = new DeleteCommand(targetIndex);
-        String expected = DeleteCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex
+        DeleteCommand deleteCommandForIndex = new DeleteCommand(targetIndex);
+        String expectedIndexString = DeleteCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex
                 + ", targetNric=null}";
-        assertEquals(expected, deleteCommand.toString());
+        assertEquals(expectedIndexString, deleteCommandForIndex.toString());
 
         // Test for NRIC
         Nric targetNric = new Nric(VALID_NRIC_AMY);

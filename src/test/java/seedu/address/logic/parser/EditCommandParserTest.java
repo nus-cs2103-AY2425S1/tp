@@ -83,6 +83,21 @@ public class EditCommandParserTest {
 
         // invalid prefix being parsed as preamble
         assertParseFailure(parser, "1 q/ string", MESSAGE_INVALID_FORMAT);
+
+        // invalid NRIC that fails NRIC validation
+        assertParseFailure(parser, "S1234567Z", MESSAGE_INVALID_FORMAT);
+    }
+
+    @Test
+    public void parse_validNric_returnsEditCommand() {
+        Nric targetNric = new Nric(VALID_NRIC_AMY);
+        String userInput = targetNric + PHONE_DESC_BOB;
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withPhone(VALID_PHONE_BOB).build();
+
+        EditCommand expectedCommand = new EditCommand(targetNric, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
