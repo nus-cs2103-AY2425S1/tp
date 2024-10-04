@@ -427,6 +427,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   System alerts the teacher if any of the entered details are invalid.  
   System prompts the teacher to correct the information before proceeding.
 
+**UC7: Delete tag**
+
+**System**: EduLog  
+**Actor**: Teacher
+
+**Main Success Scenario:**
+1. Teacher selects a tag to delete.
+2. System prompts the teacher for confirmation before permanently deleting the tag.
+3. System deletes the tag.
+
+**Extensions:**
+
+- **1a. Tag does not exist**  
+  System alerts the teacher that the tag does not exist and cannot be deleted.
+
+- **2a. Teacher wants to abort the ‘delete tag’ process:**  
+  Teacher cancels the operation and exits the procedure without deleting the tag.
+
 
 ### Non-Functional Requirements
 
