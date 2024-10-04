@@ -288,7 +288,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `ResearchRoster` and the **Actor** is the `researcher`, unless specified otherwise)
+(For all use cases below, the **System** is the `ResearchRoster` and the **Actor** is the `user/researcher`, unless specified otherwise.)
 
 #### **Use Case: UC01 - Add a new person**
 * *Preconditions:* -
@@ -296,8 +296,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User request to add new person with provided details.
-2.  ResearchRoster adds new person.
+1.  User requests to add a new person with provided details.
+2.  ResearchRoster adds a new person.
 
     Use case ends.
 
@@ -316,10 +316,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests a list of persons ([UC05](#use-case-uc05---list-all-persons), [UC06](#use-case-uc06---find-persons-by-criterias)).
-2.  ResearchRoster shows the list of persons
-3.  User requests to delete a specific person in the list
-4.  ResearchRoster deletes the person
+1.  User requests a list of persons ([UC05](#use-case-uc05---list-all-persons), [UC06](#use-case-uc06---find-persons-by-criteria)).
+2.  ResearchRoster shows the list of persons.
+3.  User requests to delete a specific person in the list.
+4.  ResearchRoster deletes the person.
 
     Use case ends.
 
@@ -342,8 +342,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests a list of persons ([UC05](#use-case-uc05---list-all-persons), [UC06](#use-case-uc06---find-persons-by-criterias)).
-2.  ResearchRoster shows a list of persons.
+1.  User requests a list of persons ([UC05](#use-case-uc05---list-all-persons), [UC06](#use-case-uc06---find-persons-by-criteria)).
+2.  ResearchRoster shows the list of persons.
 3.  User requests to edit a person's record with provided details.
 4.  ResearchRoster edits the person's record.
 
@@ -374,10 +374,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests a filtered list of persons ([UC06](#use-case-uc06---find-persons-by-criterias)).
+1.  User requests a filtered list of persons ([UC06](#use-case-uc06---find-persons-by-criteria)).
 2.  ResearchRoster shows the filtered list of persons.
 3.  User requests to apply a change to all records in the list.
-4.  ResearchRoster applies change to all records in the list.
+4.  ResearchRoster applies the change to all records in the list.
 
     Use case ends.
 
@@ -387,7 +387,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The change is invalid.
+* 3a. The given input is invalid.
 
     * 3a1. ResearchRoster shows an error message.
 
@@ -398,44 +398,46 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * *Preconditions:* user has added person(s) previously
 * *Guarantees:* list of person record(s) is shown
 
-1.  User adds new person(s) to system ([UC01](#use-case-uc01---add-a-new-person)).
-2.  User requests to list persons.
-3.  ResearchRoster shows a list of persons.
+**MSS**
+
+1.  User requests to list persons.
+2.  ResearchRoster shows the list of persons.
 
     Use case ends.
 
 **Extensions**
 
-* 3a. No existing person record.
+* 2a. No existing person records.
 
-    * 3a1. ResearchRoster shows an error message.
+    * 2a1. ResearchRoster shows a message indicating the list is empty.
+    * 2a2. ResearchRoster shows an empty list.
 
       Use case ends.
 
 
-#### **Use Case: UC06 - Find persons by criteria(s)**
+#### **Use Case: UC06 - Find persons by criteria**
 * *Preconditions:* user has added person(s) previously
-* *Guarantees:* list of person record(s) that match the criteria(s) is shown
+* *Guarantees:* list of person record(s) that match the criteria is shown
 
 **MSS**
 
-1.  User adds new person(s) to system ([UC01](#use-case-uc01---add-a-new-person)).
-2.  User requests to list persons that match criteria(s).
-3.  ResearchRoster shows the list of persons.
+1.  User requests to list persons that match the criteria.
+2.  ResearchRoster shows the list of persons.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. No criteria is provided.
+* 1a. The criteria is missing from the given input.
+
+    * 1a1. ResearchRoster shows a message indicating the filtered list is empty.
+    * 1a2. ResearchRoster shows an empty filtered list.
+
+      Use case restarts.
+
+* 2a. No person records that matches the criteria.
 
     * 2a1. ResearchRoster shows an error message.
-
-      Use case resumes at step 1.
-
-* 3a. The keyword matches no person records.
-
-    * 3a1. ResearchRoster shows an error message.
 
       Use case ends.
 
@@ -446,10 +448,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests a list of persons ([UC05](#use-case-uc05---list-all-persons), [UC06](#use-case-uc06---find-persons-by-criterias)).
-2.  ResearchRoster shows a list of persons.
-3.  User requests to add a study group tag(s) to a person's record.
-4.  ResearchRoster adds the tag to the person's record.
+1.  User requests a list of persons ([UC05](#use-case-uc05---list-all-persons), [UC06](#use-case-uc06---find-persons-by-criteria)).
+2.  ResearchRoster shows the list of persons.
+3.  User requests to add study group tag(s) to a person's record.
+4.  ResearchRoster adds the tag(s) to the person's record.
 
     Use case ends.
 
@@ -465,7 +467,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-* 3b. The given input is missing tag(s) to add.
+* 3b. The tag(s) to add are missing from the given input.
 
     * 3b1. ResearchRoster shows an error message.
 
@@ -478,31 +480,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User adds study group tag(s) to person ([UC07](#use-case-uc07---add-study-group-tags-to-person)).
-2.  User requests a list of persons ([UC05](#use-case-uc05---list-all-persons), [UC06](#use-case-uc06---find-persons-by-criterias)).
-3.  ResearchRoster shows a list of persons.
-4.  User requests to remove a study group tag(s) from a person's record.
-5.  ResearchRoster removes the tag from the person's record.
+1.  User requests a list of persons ([UC05](#use-case-uc05---list-all-persons), [UC06](#use-case-uc06---find-persons-by-criteria)).
+2.  ResearchRoster shows the list of persons.
+3.  User requests to remove study group tag(s) from a person's record.
+4.  ResearchRoster removes the tag(s) from the person's record.
 
     Use case ends.
 
 **Extensions**
 
-* 3a. The list is empty.
+* 2a. The list is empty.
 
   Use case ends.
 
-* 4a. The given index is invalid.
+* 3a. The given index is invalid.
 
-    * 4a1. ResearchRoster shows an error message.
+    * 3a1. ResearchRoster shows an error message.
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
-* 4b. The given input is missing tag(s) to remove.
+* 3b. The tag(s) to remove are missing from the given input.
 
-    * 4b1. ResearchRoster shows an error message.
+    * 3b1. ResearchRoster shows an error message.
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
 
 #### **Use Case: UC09 - Add progress status to person record**
@@ -511,9 +512,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests a list of persons ([UC05](#use-case-uc05---list-all-persons), [UC06](#use-case-uc06---find-persons-by-criterias)).
-2.  ResearchRoster shows a list of persons.
-3.  User requests to add progress status to person's record.
+1.  User requests a list of persons ([UC05](#use-case-uc05---list-all-persons), [UC06](#use-case-uc06---find-persons-by-criteria)).
+2.  ResearchRoster shows the list of persons.
+3.  User requests to add progress status to a person's record.
 4.  ResearchRoster adds the status to the person's record.
 
     Use case ends.
@@ -543,8 +544,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests a list of persons ([UC05](#use-case-uc05---list-all-persons), [UC06](#use-case-uc06---find-persons-by-criterias)).
-2.  ResearchRoster shows a list of persons.
+1.  User requests a list of persons ([UC05](#use-case-uc05---list-all-persons), [UC06](#use-case-uc06---find-persons-by-criteria)).
+2.  ResearchRoster shows the list of persons.
 3.  User requests to export contacts of persons in the list.
 4.  ResearchRoster adds the list of persons' contacts to a text file for the user.
 
@@ -556,7 +557,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 4a. ResearchRoster is unable to write to file.
+* 4a. ResearchRoster is unable to write to the text file.
 
     * 4a1. ResearchRoster shows an error message.
 
@@ -569,9 +570,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests a list of persons ([UC05](#use-case-uc05---list-all-persons), [UC06](#use-case-uc06---find-persons-by-criterias)).
-2.  ResearchRoster shows a list of persons.
-3.  User requests to randomly assign list of persons into sample groups.
+1.  User requests a list of persons ([UC05](#use-case-uc05---list-all-persons), [UC06](#use-case-uc06---find-persons-by-criteria)).
+2.  ResearchRoster shows the list of persons.
+3.  User requests to randomly assign the list of persons into sample groups.
 4.  ResearchRoster assigns the list of persons into sample groups by adding study group tags to each record.
 
     Use case ends.
@@ -582,7 +583,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given input is missing study parameters.
+* 3a. The study parameters are missing from the given input.
 
     * 3a1. ResearchRoster shows an error message.
 
@@ -595,31 +596,37 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User performs an action.
-2.  User requests to undo the last action.
-3.  ResearchRoster restores records to before the last action.
+1.  User requests to undo the last action.
+2.  ResearchRoster restores records to before the last action.
 
     Use case ends.
 
 
-#### **Use Case: UC13 - Set reminders for session**
+#### **Use Case: UC13 - Create a session reminder**
 * *Preconditions:* -
 * *Guarantees:* a reminder is set and triggered before the session
 
 **MSS**
 
-1.  User requests to set a reminder for a session.
-2.  ResearchRoster notes the reminder, and prompts the user before the session
+1.  User requests to create a session reminder.
+2.  ResearchRoster shows a message confirming reminder is set.
+2.  ResearchRoster prompts the user accordingly before the session.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The given input is missing session details.
+* 1a. The session details are missing from the given input.
 
-    * 1b1. ResearchRoster shows an error message.
+    * 1a1. ResearchRoster shows an error message.
 
       Use case restarts.
+
+* *a. At any time, User chooses to cancels the session reminder.
+
+    * *a1. ResearchRoster shows a message confirming reminder is cancelled.
+
+      Use case ends.
 
 
 #### **Use Case: UC14 - Track study progress**
@@ -628,19 +635,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User adds progress status to person records ([UC09](#use-case-uc09---add-progress-status-to-person-record)).
-2.  User requests to track progress for study.
-3.  ResearchRoster shows the progress status of persons in the study.
+1.  User requests to track progress for a study.
+2.  ResearchRoster shows the progress status of persons in the study.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The given input is invalid.
+* 1a. The given input is invalid.
 
-    * 2a1. ResearchRoster shows an error message.
+    * 1a1. ResearchRoster shows an error message.
 
-      Use case resumes at step 1.
+      Use case restarts.
 
 
 #### **Use Case: UC15 - Archive old records**
@@ -649,14 +655,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests a list of persons ([UC05](#use-case-uc05---list-all-persons), [UC06](#use-case-uc06---find-persons-by-criterias)).
-2.  ResearchRoster shows a list of persons.
+1.  User requests a list of persons ([UC05](#use-case-uc05---list-all-persons), [UC06](#use-case-uc06---find-persons-by-criteria)).
+2.  ResearchRoster shows the list of persons.
 3.  User requests to archive a person's record.
 4.  ResearchRoster archives the person's record.
 
     Use case ends.
 
 **Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
 
 * 3a. The given index is invalid.
 
