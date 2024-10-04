@@ -385,7 +385,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  A user should be able to accomplish all tasks just through typing commands (so no clickable buttons for instance).
 5.  Command usage and help messages should be clear enough to a user with at least some CLI experience.
-6.  The window must look good on a screen that has a resolution of 980x720 or higher (i.e. lines must not bleed out of the window edge, input field must allow for flowing text etc.).
+6.  The window must look good on a screen that has a resolution of 980x720 or higher (i.e. lines must not bleed out of the window edge).
 7.  A more technical user must be able to interpret the contents of the stored JSON file.
 8.  A user must be updated on the status of their command within (at most) 2 seconds.
 
