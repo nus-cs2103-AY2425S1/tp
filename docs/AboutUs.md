@@ -18,7 +18,7 @@ I am analytical and detail oriented. With my attention to detail, I feel I can s
 mistake that may not align with the standard code practice.
 
 * Role: Code Quality by ensuring that the code adheres to the standard in CS2103T
-* Responsibilities: Storage, Logic and Main
+* Responsibilities: Team leader, Storage, Logic and Main
 
 ### Ryan Lim
 
