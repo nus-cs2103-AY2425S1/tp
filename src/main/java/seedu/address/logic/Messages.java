@@ -20,6 +20,7 @@ public class Messages {
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_NONEXISTENT_PERSON =
                 "The person '%1$s' does not exist in the system!";
+    public static final String MESSAGE_INVALID_TASK_DISPLAYED_INDEX = "The task index provided is invalid";
 
 
     /**
