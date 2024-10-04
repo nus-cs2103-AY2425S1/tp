@@ -51,5 +51,5 @@ For a detailed breakdown of the project structure, visit the
 ---
 
 ## **Acknowledgements**
- **MindMap** is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org)
+**MindMap** is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org)
  
