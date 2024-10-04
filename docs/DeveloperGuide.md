@@ -262,29 +262,34 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Needs to manage a variety of sections, such as client names, email, payment status and more
+* Desire to track all client statuses in one place
+* Wants to avoid tracking clients using multiple applications 
+* Wants to easily change statuses of a client upon completion of project
+* Can type fast
+* Prefers typing to mouse interactions
+* Familiar with the workings of CLI and commands
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Our address book seamlessly combines client contacts, 
+payment tracking and more in one efficient package, tailored specifically for freelance software developers.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​            | I want to …​                                                     | So that I can…​                                          |
+|----------|--------------------|------------------------------------------------------------------|----------------------------------------------------------|
+| `* * *`  | software developer | add clients                                                      | update my address book.                                  |
+| `* * *`  | software developer | remove clients                                                   | ensure my address book is not cluttered                  |
+| `* * *`  | software developer | view my clients and their details                                | keep track of my clients and what tasks to do            |
+| `* * *`  | software developer | update my clients' details                                       | ensure my address book details are updated               |
+| `* * *`  | software developer | view a client's payment status, project status and client status | keep track of the work I have to do and who has not paid |
+| `* *`    | software developer | filter my clients' based on sections                             | more easily find my clients                              |
+| `* *`    | software developer | sort clients by category                                         | more easily find my clients                              |
+| `* *`    | software developer | set deadlines                                                    | ensure projects are completed before deadlines           |
+| `*`      | software developer | keep notes for each client                                       | take note of important details from meetings             |
+| `*`      | software developer | undo previous commands                                           | easily undo errors                                       |
 
 ### Use cases
 
