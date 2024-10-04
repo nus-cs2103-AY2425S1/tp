@@ -290,11 +290,6 @@ _{Explain here how the data archiving feature will be implemented}_
 - Medium (nice to have) - `* *`
 - Low (unlikely to have) - `*`
 
-**Users:** 
-- anUdder (refers to any type of user described below)
-- brUdders (refers to mentee users and/or those who wish to mentor as peers)
-- mUdders (refers to mentor users)
-
 | Priority | As a…​                        | I want to…​                      | So that I can…​                                                        |
 |----------|-------------------------------|----------------------------------|------------------------------------------------------------------------|
 | `* * *`  | anUdder                       | add a new contact                |                                                                        |
@@ -425,6 +420,12 @@ _{Explain here how the data archiving feature will be implemented}_
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 
+<br>
+
+* **Users**:
+  - anUdder (refers to any type of user described below)
+  - brUdders (refers to mentee users and/or those who wish to mentor as peers)
+  - mUdders (refers to mentor users)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
