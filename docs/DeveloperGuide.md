@@ -278,7 +278,7 @@ As researchers have to handle large groups of participants across multiple studi
 * consolidate a list of contact details based on **specific experimental criteria**
 * export it to an easy-to-read format for better data organization
 
-Thus, *ResearchRoster* allows researchers to save time, effort and energy whilst keeping their participant data well-organised
+Thus, *ResearchRoster* allows researchers to save time, effort and energy whilst keeping their participant data well-organised.
 
 
 ### User stories
