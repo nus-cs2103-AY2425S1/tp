@@ -385,7 +385,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Index**: A numeric value that acts as an identifier to refer to a specific entity in the system.
+* **Tag**: A label to categorize the contacts in the address book.
+* **Bookmark**: A feature to allow users to save a company for future reference. This also provides users quick access to these companies.
 
 --------------------------------------------------------------------------------------------------------------------
 
