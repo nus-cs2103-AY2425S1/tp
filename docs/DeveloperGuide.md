@@ -290,6 +290,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
+<s>
 **Use case: Delete a person**
 
 **MSS**
@@ -314,6 +315,85 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
 
 *{More to be added}*
+</s>
+
+#### UC1: Delete a contact
+
+- Precondition: -
+- Postcondition: Specified contact is deleted
+
+##### MSS
+
+1. User submits contact information to be deleted.
+2. System checks if contact information is properly formatted.
+3. System checks if contact exists.
+4. System deletes the specified contact.
+
+##### Extensions
+
+- 2a. Contact information is not properly formatted.
+
+    - 2ai. System displays an error message.
+
+      Use case ends.
+
+- 3a. Contact does not exist.
+
+    - 3ai. System displays an error message.
+
+  Use case ends.
+
+#### UC2: Add a contact
+
+- Precondition: -
+- Postcondition: Contact is added to system.
+
+##### MSS
+
+1. User submits contact information.
+2. System checks contact information is properly formatted.
+3. System checks if it doesn't exist already.
+4. System adds contact information.
+
+##### Extensions
+
+- 2a. The contact information is not properly formatted.
+
+  - 2a1. System shows an error message
+  
+  Use case ends.
+
+- 3a. The contact information already exists (i.e. duplicated contact names)
+
+    - 3ai. System shows an error message
+
+    Use case ends.
+
+#### UC3: Add notes to contact
+
+- Precondition: -
+- Postcondition: Notes added to specified contact.
+
+##### MSS
+
+1. User submits contact and new note information.
+2. System checks information is properly formatted.
+3. System checks if contact exists.
+4. System adds new note to contact.
+
+##### Extensions
+
+- 2a. Information is not properly formatted.
+
+    - 2a1. System shows an error message.
+
+    Use case ends.
+
+- 3a. Contact does not exist.
+
+    - 3a1. System shows an error message.
+
+    Use case ends.
 
 ### Non-Functional Requirements
 
