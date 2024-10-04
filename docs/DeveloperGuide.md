@@ -315,13 +315,41 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
-### Non-Functional Requirements
+### **Non-Functional Requirements**
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. **Compatibility**: 
+    - Should work on any _mainstream OS_ (e.g., **Windows, macOS, Linux**) as long as it has **Java 17** or above installed.
 
-*{More to be added}*
+2. **Performance**:
+    - Should be able to hold up to **1,000 patient records** within 2 seconds for typical usage.
+    - The system must support up to **10,000 patient records** without performance degradation under heavy load.
+
+3. **User Efficiency**:
+    - A user with typing speed above **40 words per minute** for regular English text (i.e., not code, not system admin commands) should be able to accomplish most tasks faster using commands than the mouse.
+
+4. **Scalability**: 
+    - The system should be able to scale to handle **up to 10,000 patient records** without performance degradation.
+
+5. **Security**:
+    - **Sensitive patient information** (e.g., medical records, contact details) must be accessible only by **authorized personnel** (e.g., clinic staff, administrators).
+
+6. **Data Processing**:
+    - The system must process and display patient information (e.g., patient records) within **2 seconds** of a user request under normal operating conditions (up to **1,000 records**).
+
+7. **Usability**:
+    - New users, such as clinic staff, should be able to learn basic operations (e.g., create, update, search, delete records) within **6 hours of hands-on training**.
+    - The system must be accessible to users with basic computer skills, ensuring that text and interface elements are **clear and easy to understand**.
+
+8. **Error Handling**:
+    - The system must provide **clear error messages** in case of invalid input and revert to a stable state in the event of system errors.
+
+9. **Data Recovery**:
+    - In the event of a system crash, patient data should not be lost. 
+    - The system must recover data from the **last automatic backup**, with no more than **5% data loss** in the worst-case scenario.
+
+10. **Maintainability and Extensibility**:
+    - The system should be designed in a way that future updates (e.g., adding new features or fixing bugs) can be made **easily** and **without extensive rewrites** to existing code.
+    - The codebase should follow **industry-standard practices** such as **modular design**, **consistent naming conventions**, and **proper documentation** to facilitate maintenance and future feature additions.
 
 ### Glossary
 
