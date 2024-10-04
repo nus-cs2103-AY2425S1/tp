@@ -636,7 +636,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **GUI (Graphical User Interface)**: A visual-based interface involving icons, buttons, and other graphical elements, as opposed to text commands. Although not prioritized, some users may prefer a GUI for ease of use.
+* **CLI (Command Line Interface)**: A text-based interface where users interact with the system by typing in commands. This is the primary interface for the App.
+* **Client**: A customer whose personal details and associated car information are stored in the system. This refers to anyone bringing a vehicle in for servicing. 
+* **Car**: A vehicle brought in by a client for servicing. Each car is associated with a client.
+* **Issue**: A problem or task that needs to be addressed for a specific car with its status and details. Each car can have multiple issues associated with it.
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
