@@ -262,13 +262,17 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+This product is for admin at tuition centres and has to track a large number of student records. Besides requiring to manage a large number of records, the admin also:
+
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: 
+
+Enable easy management and fast access to student records for administrators working at tuition centres. We aim to provide easy tracking of payments to send reminders, learning progress of students and shifting of classes etc. This also helps tuition centres save time by reducing administrative burdens on their staff.
+
 
 
 ### User stories
@@ -322,9 +326,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor: Admin**
 
+**Preconditions:** Admin is logged in (UG03).
+
 **MSS:**
-1. Admin logs in (UC03).
-2. Sees list of all students with their respective details with their names.
+1. Admin prompts the system to list all students' details.
+2. System returns a list of all students with their respective details with their names.
 
 Use case ends.
 
@@ -333,23 +339,24 @@ Use case ends.
 
 **Actor: Admin**
 
+**Preconditions:** Admin is logged in (UG03).
+
 **MSS:**
-1. Admin logs in (UC03).
-2. Admin prompts the system to add a student.
-3. System prompts the admin to key in details of the student.
-4. Admin key in details. 
-5. System adds the student and display success status.
+1. Admin prompts the system to add a student.
+2. System prompts the admin to key in details of the student.
+3. Admin key in details. 
+4. System adds the student and display success status.
 
 Use case ends.
 
 **Extensions:**
-* 4a. Admin keyed in the information in the wrong format.
-    * 4a1. System display wrong format status.
-    * 4a2. System prompt admin to key in information again.
-    * 4a3. Admin key in information again.
+* 3a. Admin keyed in the information in the wrong format.
+    * 3a1. System display wrong format status.
+    * 3a2. System prompt admin to key in information again.
+    * 3a3. Admin key in information again.
 
         Repeat 4a1 to 4a3 until Admin key in the right information.
-    * 4a4. System adds the student and display success status.
+    * 3a4. System adds the student and display success status.
 
     Use case ends.
 
@@ -380,30 +387,32 @@ Use case ends.
 
 **Actor: Admin**
 
+**Preconditions:** Admin is logged in (UG03).
+
 **MSS:**
-1. Admin logs in (UG03).
-2. Admin prompts the system to mark payment.
-3. System prompts the admin to key in details of this student.
-4. Admin key in details.
-5. System marks the payment for the student and returns a success message.
+
+1. Admin prompts the system to mark payment.
+2. System prompts the admin to key in details of this student.
+3. Admin key in details.
+4. System marks the payment for the student and returns a success message.
 
 Use case ends.
 
 **Extensions:**
 
-* 4a. Admin keyed in the information in the wrong format.
-  * 4a1. System display wrong format status.
-  * 4a2. System prompt admin to key in information again.
-  * 4a3. Admin key in information again.
+* 3a. Admin keyed in the information in the wrong format.
+  * 3a1. System display wrong format status.
+  * 3a2. System prompt admin to key in information again.
+  * 3a3. Admin key in information again.
   
-    Repeat 4a1 to 4a3 until Admin key in the right information.
-  * 4a4. System adds the student and display success status
+    Repeat 3a1 to 3a3 until Admin key in the right information.
+  * 3a4. System adds the student and display success status
     
   Use case ends.
 
-* 5a. Payment of the student has already being marked.
-  * 5a1. System returns a message on payment of student being marked already.
-  * 5a2. System returns a fail status.
+* 4a. Payment of the student has already being marked.
+  * 4a1. System returns a message on payment of student being marked already.
+  * 4a2. System returns a fail status.
   
   Use case ends.
 
@@ -411,6 +420,8 @@ Use case ends.
 **UC05 - Delete student from system**
 
 **Actor: Admin**
+
+**Preconditions:** Admin is logged in (UG03).
 
 **MSS:**
 
