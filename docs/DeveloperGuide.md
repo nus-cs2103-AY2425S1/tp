@@ -350,8 +350,8 @@ Use case ends.
 
 **MSS**
 
-1. Talent Manager <u>list contacts (UC06)</u>
-2. Talent Manager <u>delete contact (UC04)</u>
+1. Talent Manager <span style="border-bottom:1px solid;">list contacts (UC06)</span>
+2. Talent Manager <span style="border-bottom:1px solid;">delete contact (UC04)</span>
 
    Use case ends.
 
@@ -359,8 +359,8 @@ Use case ends.
 
 **MSS**
 
-1. Talent Manager <u>find contacts (UC05)</u>
-2. Talent Manager <u>delete contact (UC04)</u>
+1. Talent Manager <span style="border-bottom:1px solid;">find contacts (UC05)</span>
+2. Talent Manager <span style="border-bottom:1px solid;">delete contact (UC04)</span>
 
    Use case ends.
 
@@ -487,7 +487,7 @@ Use case ends.
 
 **MSS**
 
-1. Talent Manager <u>List Events (UC08)</u>
+1. Talent Manager <span style="border-bottom:1px solid;">List Events (UC08)</span>
 2. Talent Manager requests to delete a specific event in the list
 3. TalentHub deletes the event
 
