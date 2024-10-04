@@ -300,32 +300,166 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `CampusConnect` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Add a person's contact**
 
 **MSS**
+1. User requests to add contact.
+2. CampusConnect adds new contact to contact list.
+3. CampusConnect displays success message.
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
-
-    Use case ends.
+   Use case ends.
 
 **Extensions**
+* 1a. Input format is invalid.
+    * 1a1. CampusConnect shows error message.
+    * 1b1. User enters input again.
 
-* 2a. The list is empty.
+      Steps 1a1-1a2 repeat until input format is valid.
+
+      Use case ends.
+
+
+* 1b. Another contact with the same name and contact number exists in the list.
+    * 1b1. CampusConnect shows error message.
+    * 1b2. User enters input again.
+
+      Steps 1b1-1b2 repeat until input format is valid.
+
+      Use case ends.
+
+
+**Use case: UC02 - Delete a person's contact**
+
+**MSS**
+1. User requests to delete contact.
+2. CampusConnect finds and deletes contact.
+3. CampusConnect displays success message.
+
+   Use case ends.
+
+**Extensions**
+* 1a. Input format is invalid.
+    * 1a1. CampusConnect shows error message.
+    * 1a2. User enters input again.
+
+      Steps 1a1-1a2 repeat until input format is valid.
+
+      Use case ends.
+
+
+* 1b. Contact to delete does not exist.
+    * 1b1. CampusConnect shows error message.
+
+      Use case ends.
+
+**Use case: UC03 - Find a person's contact**
+
+**MSS**
+1. User requests to find contact.
+2. CampusConnect searches the contact list and displays the details of the contact found.
+
+   Use case ends.
+
+**Extensions**
+* 1a. Input format is invalid.
+    * 1a1. CampusConnect shows error message.
+    * 1a2. User enters input again.
+
+      Steps 1a1-1a2 repeat until input format is valid.
+
+      Use case ends.
+
+
+* 1b. Contact to find does not exist.
+    * 1b1. CampusConnect shows error message.
+    * 1b2. User enters input again.
+
+      Steps 1b1-1b2 repeat until input format is valid.
+
+      Use case ends.
+
+**Use case: UC04 - Add notes to a contact**\
+**Precondition**: Contact to add notes to already exists
+
+**MSS**
+1. User requests to add notes to a contact.
+2. CampusConnect searches the contact list and finds the correct contact.
+3. CampusConnect add notes to the contact.
+4. CampusConnect displays success message.
+
+   Use case ends.
+
+**Extensions**
+* 1a. Input format is invalid.
+    * 1a1. CampusConnect shows error message.
+    * 1a2 User enters input again.
+
+      Steps 1a1-1a2 repeat until input format is valid.
+
+      Use case ends.
+
+
+* 1b. Note already exists for the contact
+    * 1b1. CampusConnect deletes old note from the contact.
+    * 1b2. CampusConnect adds new note for the contact.
+
+      Use case ends.
+
+
+**Use case: UC05 - Sort contacts by criterion**
+
+**MSS**
+1. User requests to sort list by criterion.
+2. CampusConnect sorts the list.
+3. CampusConnect displays the sorted list.
+
+   Use case ends.
+
+**Extensions**
+* 1a. Contact list is empty
 
   Use case ends.
 
-* 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+* 1b. Input format is invalid.
+    * 1b1. CampusConnect shows error message.
+    * 1b2. User enters input again.
 
-      Use case resumes at step 2.
+      Steps 1b1-1b2 repeat until input format is valid.
 
-*{More to be added}*
+      Use case ends.
+
+
+* 1c. Invalid criterion input.
+    * 1c1. CampusConnect shows error message.
+    * 1c2. User enters input again.
+
+      Steps 1c1-1c2 repeat until input format is valid.
+
+      Use case ends.
+
+
+**Use case: UC06 - Pin contacts to the top of the list**\
+**Precondition**: Contact list is not empty
+
+**MSS**
+1. User requests to pin contact to the top of the list.
+2. CampusConnect marks contact as pinned.
+3. CampusConnect displays success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Input format is invalid.
+    * 1a1. CampusConnect shows error message.
+    * 1a2. User enters input again.
+
+      Steps 1a1-1a2 repeat until input format is valid.
+
+      Use case ends.
 
 ### Non-Functional Requirements
 
