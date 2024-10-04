@@ -12,9 +12,7 @@
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
-
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
-
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -312,30 +310,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `MindMap` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: U01 Add Patient Detail**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User inputs the command to add a patient's contact details
+2. System validates the input fields.
+3. System check to confirm patient does not exist
+4. System adds the patient's contact details to the contact list.
+5. System displays a success message
+6. System updates the contact list to reflect the new entry
 
-    Use case ends.
+Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The input fields are invalid
+    * 2a1. System display an error message
+    * 2a2. System request for correct data.
+    * 2a3. User enters new data. 
+  
+        Steps 2a1-2a3 are repeated until the data entered are correct.
+        Use case resumes from step 3.
 
-  Use case ends.
+* 3a. Patient exists in contact details
 
-* 3a. The given index is invalid.
-
-    * 3a1. AddressBook shows an error message.
-
-      Use case resumes at step 2.
+    * 3a1. System System display an error message.
+        
+        Use case ends.
 
 *{More to be added}*
 
