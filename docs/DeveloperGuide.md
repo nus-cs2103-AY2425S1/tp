@@ -306,7 +306,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to create a new event by providing the event name and date.
+1. User requests to create a new event.
 2. System creates the event.
 3. System displays a success message.
 
