@@ -330,26 +330,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-
-**Use Case: Read/Print Out Entries**
-
-**MSS**
-1. User requests to view or print all people.
-2. System displays or prints the list of all people.
-
-   Use case ends.
-
-**Extensions**
-* 1a. The input command was invalid (i.e. spelling error, etc.).
-    * 1a1. System tells the user the command is unrecognised.
-
-      Use case ends.
-
-* 2a. No entries exist.
-
-  Use case ends.
-
-
 **Use Case: Update Details of Person**
 
 **MSS**
