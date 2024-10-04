@@ -380,7 +380,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   System prompts the teacher to first create the tag using <u>UC5: Create a Tag</u>.
 
 
-**UC6: Create Tag**
+**UC5: Create Tag**
 
 **System**: EduLog  
 **Actor**: Teacher
@@ -400,6 +400,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   System alerts the teacher that the tag exists and no new tag is created.
 
 - **3b. Invalid tag details:**  
+  System alerts the teacher if any of the entered details are invalid.  
+  System prompts the teacher to correct the information before proceeding.
+
+**UC6: Edit tag**
+
+**System**: EduLog  
+**Actor**: Teacher
+
+**Main Success Scenario:**
+1. Teacher initiates the process to edit an existing tag.
+2. System displays the required fields for tag editing.
+3. Teacher supplies the necessary information for the updated tag.
+4. System validates the provided information to ensure it meets specified criteria.
+5. System confirms that the tag has been successfully updated and is available for use.
+
+**Extensions:**
+- **2a. Teacher wants to abort the ‘edit tag’ process:**  
+  Teacher clears the fields and exits the procedure without saving any data.
+
+- **3a. Tag with new name already exists**  
+  System alerts the teacher that the tag exists.  
+  System requests to add another name.
+
+- **3b. Invalid tag details (see features):**  
   System alerts the teacher if any of the entered details are invalid.  
   System prompts the teacher to correct the information before proceeding.
 
