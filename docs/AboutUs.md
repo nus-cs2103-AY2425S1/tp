@@ -39,7 +39,7 @@ You can reach us at the email `e1155908@u.nus.edu.sg`
 
 ### Liu Rui
 
-<img src="images/liurui.png" width="200px">
+<img src="images/l-rrrr.png" width="200px">
 
 [[github](http://github.com/L-rrrr)]
 [[portfolio](team/johndoe.md)]
