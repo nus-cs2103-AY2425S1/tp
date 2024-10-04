@@ -312,38 +312,231 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TalentHub` and the **Actor** is the `celebrity talent manager`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Add Contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. Talent Manager requests to add a specific contact
+2. TalentHub adds the person
 
-    Use case ends.
+Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The command format is incorrect.
 
-  Use case ends.
+  * 1a1. TalentHub outputs a generic error message about incorrect command format.
 
-* 3a. The given index is invalid.
+    Use case ends.
+  
+* 1b. Any parameter is missing or invalid.
 
-    * 3a1. AddressBook shows an error message.
+  * 1b1. TalentHub outputs an error message specifying the issue.
 
-      Use case resumes at step 2.
+    Use case ends.
 
-*{More to be added}*
+* 1c. An identical phone number is detected.
+
+  * 1c1. TalentHub outputs an error message specifying the issue.
+
+    Use case ends.
+
+**Use case: UC02 - Delete Contact after List**
+
+**MSS**
+
+1. Talent Manager [list contacts (UC06)](#)
+2. Talent Manager [delete contact (UC04)](#)
+
+   Use case ends.
+
+**Use case: UC03 - Delete Contact after Find**
+
+**MSS**
+
+1. Talent Manager [find contacts (UC05)](#)
+2. Talent Manager [delete contact (UC04)](#)
+
+   Use case ends.
+
+**Use case: UC04 - Delete Contact**
+
+**MSS**
+
+1. Talent Manager requests to delete a specific person in the list
+2. TalentHub deletes the person
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The command format is incorrect.
+
+  * 1a1. TalentHub outputs a generic error message about incorrect command format.
+
+    Use case ends.
+
+* 1b. The list is empty.
+
+  * 1b1. System shows an error message specifying the list is empty.
+
+    Use case ends.
+
+* 1c. The given index is invalid.
+
+  * 1c1. System shows an error message.
+
+    Use case ends.
+
+**Use case: UC05 - Find Contact**
+
+**MSS**
+
+1. User requests to find persons with with `keywords`
+2. System processes and list person with `keywords`
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The command format is incorrect.
+
+  * 1a1. TalentHub outputs a generic error message about incorrect command format.
+
+    Use case ends.
+
+* 1b. The keyword is empty.
+
+  * 1b1. System shows an error message.
+
+    Use case ends.
+
+
+**Use case: UC06 - List All Contacts**
+
+**MSS**
+
+1. Talent Manager requests to list contacts
+2. System shows a list of all contacts
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The command format is incorrect.
+
+  * 1a1. TalentHub outputs a generic error message about incorrect command format.
+
+    Use case ends.
+
+
+**Use case: UC07 - Add Events**
+
+**MSS**
+
+1. Talent Manager requests to add a event for a specific contact
+2. System adds the event
+
+Use case ends.
+
+**Extensions**
+
+* 1a. The command format is incorrect.
+
+  * 1a1. TalentHub outputs a generic error message about incorrect command format.
+
+    Use case ends.
+
+* 1b. A duplicate event is detected:
+  
+  * 1b1. System displays a message informing the Talent Manager of the duplicate event and does not add it.
+
+    Use case ends.
+
+    
+**Use case: UC08 - List All Events**
+
+**MSS**
+
+1. Talent Manager requests to list all events.
+2. System retrieves and displays all events in chronological order.
+   
+   Use case ends.
+
+**Extensions**
+
+* 1a. The command format is invalid.
+
+  * 1a1. TalentHub outputs a generic error message about incorrect command format.
+
+    Use case ends.
+
+* 2a. If no events are scheduled.
+
+  * 2a1. System displays a message stating "No events.".
+
+    User case ends.
+
+
+**Use case: UC09 - Delete Event after List**
+
+**MSS**
+
+1. Talent Manager [List Events (UC08)](#)
+2. Talent Manager [Delete Event (UC10)](#)
+
+   Use case ends.
+
+**Use case: UC10 - Delete Event**
+
+1. Talent Manager requests to delete a specific event in the list
+1. TalentHub deletes the event
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The command format is invalid.
+
+  * 1a1. TalentHub outputs a generic error message about incorrect command format.
+
+    Use case ends.
+
+* 1b. The list is empty.
+
+    * 1b1. System shows an error message specifying the list is empty.
+
+      Use case ends.
+  
+* 1c. The given index is invalid.
+
+  * 1c1. TalentHub shows an error message.
+
+    Use case ends.
+
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3. The application should respond to user commands within 0.5 seconds, ensuring fast interactions.
+4. Regular tasks (e.g., adding a contact, listing events) should be executable within a few milliseconds to maintain efficiency and not interrupt the user’s workflow.
+5. The system should efficiently handle a large database of contacts and events (e.g., 10,000+ entries), allowing for fast searches, retrievals, and modifications without performance degradation.
+6. The application should be able to handle up to 5 concurrent users without noticeable performance degradation for typical usage.
+7. The system must ensure that no data is lost, duplicated, or corrupted during any operations (e.g., when adding or deleting contacts/events).
+8. As the app is an offline tool, it should be robust and able to run for extended periods without crashing. Downtime should be limited to under 1% (if any issues require restarting).
+9. The system should be able to recover from crashes within 5 seconds, ensuring minimal disruption to the user’s workflow.
+10. Since celebrity data is highly sensitive, the application must store all information securely (e.g. locally) and ensure no unauthorized access can occur, even in an offline environment.
+11. The app should allow password protection and encryption options to ensure that only authorized users can access or modify sensitive data.
+12. The system should log all critical operations (e.g., adding or deleting contacts) for auditing purposes, ensuring traceability of actions.
+13. The system should provide a way to export and import data in a standard format (e.g., CSV) to allow for easy backups and data transfer between devices.
+14. The system should provide a way to archive old data to reduce clutter and improve performance, ensuring that archived data can be easily retrieved if needed.
+15. New commands or features should be easily added or modified without impacting the existing system. This includes the ability to update or patch the app efficiently.
+16. Since the app is intended to be an offline tool, it should function fully without any internet connection. All features, including scheduling and contact management, must be operable offline.
+17. The application should be lightweight, with minimal CPU and memory usage, allowing it to run smoothly on a wide variety of machines, including low-spec systems.
+18. The system should provide a user-friendly and intuitive interface with clear instructions and feedback to guide users who are not IT-savvy in using the command-line interface effectively.
 
 *{More to be added}*
 
@@ -351,7 +544,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-
+* **Talents**: Well known or up-and-coming individuals who partake in the entertainment industry in one way or another
+* **Industry Professional**: Individuals that talents make contact for events
+* **Events**: Social and networking events organised by third parties e.g. award shows, brand events
+* **Talent Manager**: Industry professionals involved in managing and planning talent schedules
+* **Model-View-Controller (MVC)**: A design pattern that separates an application into three main logical components: the Model, the View, and the Controller. 
+* **Logic Component**: A part of the architecture responsible for handling user commands and parsing them. 
+* **Model Component**: Manages the application’s data and handles the business logic of the application. 
+* **Storage Component**: Manages reading from and writing to the persistent storage. 
+* **VersionedAddressBook**: A class responsible for implementing the undo/redo feature by maintaining different states of the address book.  
+* **Person**: Refers to a contact object within the address book application. 
+* **Index**: Refers to the position of an individuals contact in the address book
+* **Tag**: The associated description with said contact based on common groups
+* **Undo/Redo Feature**: A functionality that allows reverting or reapplying actions taken by the user within the application. 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
