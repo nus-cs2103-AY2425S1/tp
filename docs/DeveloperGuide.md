@@ -318,17 +318,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on Windows, MacOS and Linux as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Edulog should work on any mainstream OS, as long as the system has `java 17 jdk` installed.
+2. The app should work on any mainstream computer architecture.
+3. The app should also work on 32-bit and 64-bit architecture.
+4.  Any command inputted by the user must be resolved within 1 second.
+5. The app should be able to store 1000 student entries without any noticeable lag.
+6. The app should not need any additional installation steps to run. The user only needs to run `java -jar Edulog.jar` to run the app.
+7. The app should work without internet connection.
+8. The app should work in devices with at least 4 GB of RAM and 64G of storage.
+9. The app should take up at most 100MB of space, but this does not include user data.
+10. The user needs only a keyboard to utilise all functionalities of the app.
+11. Any external libraries used must be open sourced.
+12. The app must not use a DBMS to store user data.
+13. The GUI must work well (i.e everything displayed appropriately) for screen resolutions of 1920X1080 and higher.
 
-*{More to be added}*
+
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-
+1. Mainstream OS: Ubuntu, Mint, Windows, MacOS
+2. Mainstream computer architecture: x86\_64, arm64
+3. Java 17 jdk: The java 17 development kit, which runs a java 17 program in a virtual environment
+4. CLI: command line interface
+5. MSS: Main success scenario
+6. 32-bit, 64-bit: refers to how many bits a cpu can process
+7. RAM: random access memory
+8. DBMS: Database management system
+9. GUI: Graphic user interface
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
