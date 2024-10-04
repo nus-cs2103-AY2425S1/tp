@@ -274,71 +274,166 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* is a Prudential insurance agent
+* has a need to manage a significant number of clients
+* has a need to manage clients policies and claims
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: We firstly improve efficiency through easy client management. Agents can quickly retrieve key information such as a client's insurance policies. Next, also improve client relationships. Ensures agents never miss a client policy renewal. Manage clients pending claims effectively.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​                        | I want to …​                                      | So that I can…​                                                                 |
+|----------|--------------------------------|--------------------------------------------------|---------------------------------------------------------------------------------|
+| `* * *`  | Insurance agent                | quickly retrieve a client’s insurance policy details | efficiently provide relevant information during meetings or calls               |
+| `* * *`  | Responsible insurance agent    | receive timely reminders for clients' policies which are expiring soon | remind individual clients to renew their policies           |
+| `* * *`  | Forgetful insurance agent      | track the status of my clients' claims           | keep track of pending claims that require my attention                          |
+| `* * *`  | Insurance agent                | store all my client contact information in one place | easily access their details and communicate with them without searching across multiple platforms |
+| `* *`    | Busy insurance agent           | have a powerful search function that allows me to quickly find clients by name, policy type, or claims | respond promptly to inquiries                                                   |
+| `* *`    | Busy insurance agent           | receive notifications when a client’s claim has not been resolved after a long time | be reminded to prioritize actioning these claims                                 |
+| `* *`    | Organized insurance agent      | have a visual dashboard that shows me a summary of my client portfolio at a glance, including policy types, claims, and follow-up tasks | plan my activities without having to navigate too much                           |
+| `*`      | Eager insurance agent          | receive reminders for key client milestones (e.g., birthdays, policy anniversaries) | send personalized messages or offers, strengthening client relationships         |
+| `*`      | Responsible insurance agent    | Track the status of any claims my clients have made | I can provide updates and assistance throughout the claim process. |
+| `*`      | Insurance agent                | import and export client data                    | work with the data outside of the platform when necessary                       |
+| `*`      | Forgetful insurance agent      | set reminders for client meetings                | never miss important meetings or calls                                          |
+| `* * *`  | Insurance agent                | track clients' claims and their remark status    | ensure all client issues are addressed promptly and effectively                 |
+| `*`      | Insurance agent                | view detailed information about client referrals and their referees | know which of my clients are related and show my appreciation to clients with large referrals |
+| `*`      | Time-efficient insurance agent | assign different priority levels to my clients based on factors like policy value or renewal date | prioritize my work and focus on the most important or time-sensitive client needs |
+| `* *`    | Insurance agent                | Filter my client list by policy type, claim status | I can quickly create a targeted list for campaigns or follow-up actions.|
+| `* * *`  | Insurance agent                | Remove clients who are no longer insured under my policies | I can declutter my addressbook. |
+| `* * *`  | New user                       | see a list of available commands                 | have a brief idea of the app capabilities                                       |
+| `* * *`  | Insurance agent                        | add new claims or resolve old ones                | I can organize my actionables. |
+
+
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `Prudy` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC1 - List clients**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to list clients
+1. Prudy shows a list of clients
 
-    Use case ends.
+   Use case ends.
+
+**Use case: UC2 - Delete a client**
+
+**Preconditions: User has done <u>UC1 - List clients</u>**
+
+**MSS**
+
+1. User requests to delete a specific client in the list
+1. Prudy deletes the client
+
+   Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The given index is invalid.
 
-  Use case ends.
+    * 1a1. Prudy shows an error message.
 
-* 3a. The given index is invalid.
+      Use case ends.
 
-    * 3a1. AddressBook shows an error message.
+**Use case: UC3 - Add a client**
 
-      Use case resumes at step 2.
+**MSS**
 
-*{More to be added}*
+1. User requests to add client
+1. Prudy deletes the client
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The client already exists.
+
+    * 1a1. Prudy shows that the client already exists.
+
+      Use case ends.
+
+**Use case: UC4 - Edit a client details (does not include editing of client policies or claims)**
+
+**Preconditions: User has done <u>UC1 - List clients</u>**
+
+**MSS**
+
+1. User requests to edit a specific client in the list with the specified changes
+1. Prudy edits the client details
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The given index is invalid.
+
+    * 1a1. Prudy shows an error message.
+
+      Use case ends.
+
+**Use case: UC5 - Add a policy to client**
+
+1. User requests to add a policy (or multiple policies) to a specific client in the list
+1. Prudy adds the policy under the client
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The given index is invalid.
+
+    * 1a1. Prudy shows an error message.
+
+      Use case ends.
+
+* 1b. The client already has the stated policy.
+
+    * 1b1. Prudy shows an error message.
+
+      Use case ends.
+
+* 1c. The user indicated an invalid policy.
+
+    * 1c1. Prudy shows an error message.
+
+      Use case ends.
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 clients without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Should be intuitive, agents can perform core functions with 30 minutes training
+5.  The system should provide feedback for user inputs for basic commands (eg. add client, update client) within 1 second.
+6.  The app should not exceed 500MB of memory.
+7.  Should give clear actionable error messages that would guide the user in correcting invalid inputs
+8.  Input data should have checks to prevent wrong entries.
 
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Client**: A person who purchased or about to purchase a policy from the agent
+* **Policy**: An insurance policy that contains the type, premium and coverage
+* **Claim**: A request for payment based on the policy
+* **Commands**: A text instruction that triggers a defined function in the app (e.g., add-client, list-policies).
+* **Command Prefix**: A marker used in commands to specify the type of input (e.g., n/ for name, p/ for phone number).
+* **Premium**: Amount of money paid for an insurance policy
+* **Coverage amount**: Maximum amount an insurance company will pay under a policy.
+* **Claim Status**: The current state of a claim, such as Pending, In Progress, Resolved, or Closed.
+* **Error Message**: Message displayed to the user providing guidance on how to correct the issue.
 
 --------------------------------------------------------------------------------------------------------------------
 
