@@ -362,7 +362,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | beginner TA            | add students into the system                  |                                                   |
 | `* * *`  | busy TA                | remove projects/tasks                         | not feel overwhelmed                              |
 | `* * *`  | TA that prefers typing | carry out all the functions through CLI       | just use my keyboard                              |
-| `* * *`  | disorganized TA        | mark a team’s tasks as complete or incomplete | keep track of my students’ progress               |
+| `* * *`  | disorganized TA        | mark a team’s tasks as complete               | keep track of my students’ progress               |
 | `* * *`  | disorganized TA        | sort students by their groupings              | keep track of all the groups under my instruction |
 | `* * *`  | disorganized TA        | remove students no longer taking this module  | keep the contact list relevant                    |
 | `* * *`  | disorganized TA        | search for a student by name or project group | quickly find their contact details                |
@@ -524,7 +524,7 @@ Use case ends.
 
 * 3b. The Student is already in a different Group.
 
-    * 3a1. T_Assistant shows an error message.
+    * 3b1. T_Assistant shows an error message.
 
       Use case resumes at step 2.
 
@@ -540,6 +540,132 @@ Use case ends.
 
       Use case resumes at step 2.
 
+**Use case: Mark Team's task as Complete**
+
+**MSS**
+
+1. User marks task as complete.
+2. T_Assistant marks the task accordingly.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. The Group/Task parameters are invalid.
+
+    * 1a1.  T_Assistant shows an error message.
+
+      Use case ends.
+
+* 1b. The user marks an already complete task.
+
+    * 1b1.  T_Assistant shows an error message.
+
+      Use case ends.
+
+**Use case: Delete Student from Group**
+
+**MSS**
+
+1. User requests to list all students.
+2. T_Assistant shows all students.
+3. User deletes a student from a specified group.
+4. T_Assistant adds student to the group.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 3a. The Student/Group parameters are invalid.
+
+    * 3a1. T_Assistant shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The Student is already in a different Group.
+
+    * 3b1. T_Assistant shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: List all Groups**
+
+**MSS**
+
+1. User lists all groups.
+2. T_Assistant displays all groups.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. There are currently no groups.
+
+    * 1a1.  T_Assistant shows an error message.
+
+      Use case ends.
+
+**Use case: List all Tasks**
+
+**MSS**
+
+1. User lists all tasks.
+2. T_Assistant displays all groups.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. There are currently no tasks.
+
+    * 1a1.  T_Assistant shows an error message.
+
+      Use case ends.
+
+**Use case: Add Task to Group**
+
+**MSS**
+
+1. User adds a task to a specified group.
+2. T_Assistant displays all current tasks for the group.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. The Group/Task parameters are invalid.
+
+    * 1a1.  T_Assistant shows an error message.
+
+      Use case ends.
+
+* 1b. A duplicate task is entered.
+
+    * 1b1.  T_Assistant informs user that the task already exists.
+
+      Use case resumes at step 2.
+
+**Use case: Delete Task from Group**
+
+**MSS**
+
+1. User removes a task from a specified group.
+2. T_Assistant displays all current tasks for the group.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. The Group/Task parameters are invalid.
+
+    * 1a1.  T_Assistant shows an error message.
+
+      Use case ends.
+  
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
@@ -552,7 +678,8 @@ Use case ends.
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Student Number**: Unique identifier for each student
+* **Group Name**: Unique identifier for each group
 
 --------------------------------------------------------------------------------------------------------------------
 
