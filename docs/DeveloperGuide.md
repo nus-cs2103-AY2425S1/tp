@@ -288,7 +288,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TAHub` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: Delete a person**
 
@@ -312,6 +312,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. AddressBook shows an error message.
 
       Use case resumes at step 2.
+
+**Use case: Add a student**
+
+**MSS**
+
+1.	User requests to add a student by providing the necessary details (name, contact, courses, email).
+2.	AddressBook validates the inputs.
+3.	AddressBook adds the student with the provided details.
+4.	The GUI displays the updated student list.
+    Use case ends.
+
+**Extensions**
+
+* 2a. One or more input parameters are missing or invalid.
+
+    * 2a1. AddressBook shows an error message indicating the missing or invalid field(s).
+    * 2a2. Use case resumes at step 1.
+
+* 2b. The student already exists (both name and contact match an existing student).
+
+    * 2b1. AddressBook shows a duplicate error message.
+    * 2b2. Use case resumes at step 1.
 
 *{More to be added}*
 
