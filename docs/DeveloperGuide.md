@@ -310,32 +310,203 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
-### Use cases
+### Use cases 
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+**System**: Vendor Vault (VV)
 
-**Use case: Delete a person**
+**Use Case**: UC01 - Add Supplier Information
 
-**MSS**
+**Actor**: Grocer
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+**Main Success Scenario (MSS)**:
+1. User chooses to add supplier information with the required supplier details (name, contact, email, company, products).
+2. VV successfully adds the supplier and displays the updated list of suppliers.  
+   Use case ends.
 
-    Use case ends.
+**Extensions**:
+- **1a.** VV detects missing or incorrectly formatted data.
+    - **1a1.** VV displays an appropriate error message.  
+      Use case ends.
 
-**Extensions**
 
-* 2a. The list is empty.
+- **1b.** User enters duplicate supplier information.
+    - **1b1.** VV displays an error message.  
+      Use case ends.
 
-  Use case ends.
 
-* 3a. The given index is invalid.
+- **1c.** User omits supplier name.
+    - **1c1.** VV displays an error message.  
+      Use case ends.
 
-    * 3a1. AddressBook shows an error message.
 
-      Use case resumes at step 2.
+- **1d.** User omits or provides an invalid contact number.
+    - **1d1.** VV displays an error message.  
+      Use case ends.
+
+
+- **1e.** User omits or provides an invalid email address.
+    - **1e1.** VV displays an error message.  
+      Use case ends.
+
+
+- **1f.** User omits the address or provides an invalid format.
+    - **1f1.** VV displays an error message.  
+      Use case ends.
+
+
+- **1g.** User omits the company name.
+    - **1g1.** VV displays an error message.  
+      Use case ends.
+
+
+- **1h.** User omits product information entry.
+    - **1h1.** VV displays an error message.  
+      Use case ends.
+
+      
+- **1i.** User provides duplicate supplier information (e.g., an entry with the same name and contact details already exists).
+    - **1i1.** VV displays an error message.  
+      Use case ends.
+
+___
+**System**: Vendor Vault (VV)
+
+**Use Case**: UC02 - Delete Supplier
+
+**Actor**: Grocer
+
+**Main Success Scenario (MSS)**:
+1. User chooses to delete a supplier.
+2. VV deletes the supplier and displays the updated supplier list.  
+   Use case ends.
+
+**Extensions**:
+- **1a.** VV detects that the supplier index is missing or invalid.
+    - **1a1.** VV displays an error message.  
+      Use case ends.
+
+      
+- **1b.** The entered supplier index does not exist in the supplier list.
+    - **1b1.** VV displays an error message.  
+      Use case ends.
+
+___
+**System**: Vendor Vault (VV)
+
+**Use Case**: UC03 - Mark Supplier Status
+
+**Actor**: Grocer
+
+**Main Success Scenario (MSS)**:
+1. User chooses to mark a supplier's status as active or inactive.
+2. VV updates the supplier's status and displays the updated supplier list.  
+   Use case ends.
+
+**Extensions**:
+- **1a.** VV detects that the supplier index is missing or invalid.
+    - **1a1.** VV displays an error message.  
+      Use case ends.
+
+
+- **1b.** VV detects that the supplier index does not exist in the list.
+    - **1b1.** VV displays an error message.  
+      Use case ends.
+
+
+- **1c.** VV detects that the status (active/inactive) is missing or invalid.
+    - **1c1.** VV displays an error message.  
+      Use case ends.
+
+___
+**System**: Vendor Vault (VV)
+
+**Use Case**: UC04 - Add Deliveries
+
+**Actor**: Grocer
+
+**Main Success Scenario (MSS)**:
+1. User chooses to add a new delivery by entering the details for the new delivery (date and time, supplier index, product name, quantity, cost).
+2. VV adds the delivery entry to the list and displays the updated list of deliveries.  
+   Use case ends.
+
+**Extensions**:
+- **1a.** VV detects that the date or time format is invalid.
+    - **1a1.** VV displays an error message.  
+      Use case ends.
+
+
+- **1b.** VV detects that the supplier index is missing or invalid.
+    - **1b1.** VV displays an error message.  
+      Use case ends.
+
+
+- **1c.** VV detects that the product name is missing.
+    - **1c1.** VV displays an error message.  
+      Use case ends.
+
+
+- **1d.** VV detects that the quantity or cost is missing or invalid.
+    - **1d1.** VV displays an error message.  
+      Use case ends.
+
+
+- **1e.** VV detects a duplicate delivery (matching date, time, supplier index, and product name).
+    - **1e1.** VV displays an error message.  
+      Use case ends.
+
+___
+**System**: Vendor Vault (VV)
+
+**Use Case**: UC05 - Delete Delivery
+
+**Actor**: Grocer
+
+**Main Success Scenario (MSS)**:
+1. User chooses to delete a delivery entry.
+2. VV removes the delivery entry from the list and displays the updated list of deliveries.  
+   Use case ends.
+
+**Extensions**:
+- **1a.** VV detects that the delivery index is missing or invalid.
+    - **1a1.** VV displays an error message.  
+      Use case ends.
+
+
+- **1b.** VV detects invalid formatting.
+    - **1b1.** VV displays an error message.  
+      Use case ends.
+
+___
+**System**: Vendor Vault (VV)
+
+**Use Case**: UC06 - Set the Status of Deliveries
+
+**Actor**: Grocer
+
+**Main Success Scenario (MSS)**:
+1. User chooses to set the status of a delivery as pending, delivered, or cancelled.
+2. VV displays a confirmation message and the updated list of deliveries.  
+   Use case ends.
+
+**Extensions**:
+- **1a.** VV detects that the delivery index is missing or invalid.
+    - **1a1.** VV displays an error message.  
+      Use case ends.
+
+
+- **1b.** VV detects that the status is missing.
+    - **1b1.** VV displays an error message.  
+      Use case ends.
+
+
+- **1c.** VV detects that the status is not one of the accepted values (pending, delivered, or cancelled).
+    - **1c1.** VV displays an error message.  
+      Use case ends.
+
+
+- **1d.** VV detects invalid formatting.
+    - **1d1.** VV displays an error message.  
+      Use case ends.
 
 *{More to be added}*
 
