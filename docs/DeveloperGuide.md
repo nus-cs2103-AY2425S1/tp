@@ -484,8 +484,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4.  The application should respond within two seconds after user input commands.
+5.  The application is not required to interact any other online system or applications.
+6.  The application should not use offensive and obscene images or visuals.
+7.  The record should bot be lost when a system fault occurs.
 
 ### Glossary
 
