@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -14,75 +13,89 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.TaskBuilder;
 
-public class AddCommandTest {
+public class AddTaskCommandTest {
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+    public void constructor_nullTaskDescription_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddTaskCommand(null, new Name("John Doe")));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+    public void constructor_nullPersonName_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddTaskCommand("Buy medication", null));
+    }
+
+    @Test
+    public void execute_taskAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingTaskAdded modelStub = new ModelStubAcceptingTaskAdded();
         Person validPerson = new PersonBuilder().build();
+        modelStub.addPerson(validPerson);
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+        Task validTask = new Task(validPerson, "Buy medication");
+        AddTaskCommand addTaskCommand = new AddTaskCommand(validTask.getDescription(), validPerson.getName());
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+        CommandResult commandResult = addTaskCommand.execute(modelStub);
+
+        assertEquals(String.format(AddTaskCommand.MESSAGE_SUCCESS, validTask.getDescription()),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(Arrays.asList(validTask), modelStub.tasksAdded);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+    public void execute_duplicateTask_throwsCommandException() {
+        ModelStubAcceptingTaskAdded modelStub = new ModelStubAcceptingTaskAdded();
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        Person validPerson = new PersonBuilder().withName("Amy Bee").build();
+
+        modelStub.addPerson(validPerson);
+
+        Task validTask = new Task(validPerson, "Buy medication");
+
+        modelStub.addTask(validTask);
+
+        AddTaskCommand addTaskCommand = new AddTaskCommand(validTask.getDescription(), validPerson.getName());
+
+        assertThrows(CommandException.class, AddTaskCommand.MESSAGE_DUPLICATE_TASK, () ->
+                addTaskCommand.execute(modelStub));
     }
+
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        Task task1 = new TaskBuilder().withDescription("Buy meds").build();
+        Task task2 = new TaskBuilder().withDescription("Visit hospital").build();
+        AddTaskCommand addTask1Command = new AddTaskCommand(task1.getDescription(), task1.getPatient().getName());
+        AddTaskCommand addTask2Command = new AddTaskCommand(task2.getDescription(), task2.getPatient().getName());
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(addTask1Command.equals(addTask1Command));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        AddTaskCommand addTask1CommandCopy = new AddTaskCommand(task1.getDescription(), task1.getPatient().getName());
+        assertTrue(addTask1Command.equals(addTask1CommandCopy));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(addTask1Command.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(addTask1Command.equals(null));
 
-        // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
-    }
-
-    @Test
-    public void toStringMethod() {
-        AddCommand addCommand = new AddCommand(ALICE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
-        assertEquals(expected, addCommand.toString());
+        // different task -> returns false
+        assertFalse(addTask1Command.equals(addTask2Command));
     }
 
     /**
@@ -100,12 +113,21 @@ public class AddCommandTest {
         }
 
         @Override
+        public void setGuiSettings(GuiSettings guiSettings) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public GuiSettings getGuiSettings() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setGuiSettings(GuiSettings guiSettings) {
+        public void setAddressBookFilePath(Path addressBookFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        public void setAddressBook(ReadOnlyAddressBook addressBook) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -115,21 +137,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void addPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
 
-        public void addTask(Task task) {
-            throw new AssertionError("This method should not be called.");
-        }
-
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void addTask(Task task) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -143,6 +156,7 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
         public boolean hasTask(Task task) {
             throw new AssertionError("This method should not be called.");
         }
@@ -179,33 +193,40 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single task.
      */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Person person;
+    private class ModelStubWithTask extends ModelStub {
+        private final Task task;
 
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
+        ModelStubWithTask(Task task) {
+            requireNonNull(task);
+            this.task = task;
         }
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
+        public boolean hasTask(Task task) {
+            requireNonNull(task);
+            return this.task.equals(task);
         }
+
+        @Override
+        public ObservableList<Task> getFilteredTaskList() {
+            return FXCollections.observableArrayList(task);
+        }
+
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accepts the task being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
+    private class ModelStubAcceptingTaskAdded extends ModelStub {
+        final ArrayList<Task> tasksAdded = new ArrayList<>();
         final ArrayList<Person> personsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
+        public void addTask(Task task) {
+            requireNonNull(task);
+            tasksAdded.add(task);
         }
 
         @Override
@@ -215,9 +236,24 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasPerson(Person person) {
+            return personsAdded.stream().anyMatch(person::isSamePerson);
+        }
+
+        @Override
+        public ObservableList<Person> getFilteredPersonList() {
+            return FXCollections.observableArrayList(personsAdded);
+        }
+
+        @Override
+        public boolean hasTask(Task task) {
+            requireNonNull(task);
+            return tasksAdded.stream().anyMatch(t -> t.equals(task));
+        }
+
+        @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
         }
     }
-
 }

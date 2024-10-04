@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -38,6 +39,7 @@ public class CommandTestUtil {
     public static final String VALID_EMERGENCY_CONTACT_NAME_BOB = "Xiao Ming";
     public static final String VALID_EMERGENCY_CONTACT_NUMBER_AMY = "33333333";
     public static final String VALID_EMERGENCY_CONTACT_NUMBER_BOB = "44444444";
+    public static final String VALID_TASK_DESCRIPTION_BUY_MEDICATION = "Buy medication";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
@@ -57,6 +59,7 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_TASK_DESCRIPTION_DESC = " " + PREFIX_TASK_DESCRIPTION + "";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

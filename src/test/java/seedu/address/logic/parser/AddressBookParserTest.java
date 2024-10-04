@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -26,6 +27,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -113,6 +115,19 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+    }
+
+    @Test
+    public void parseCommand_addTask() throws Exception {
+        String taskDescription = "Buy medication";
+        Name personName = new Name("John Doe");
+
+        AddTaskCommand expectedCommand = new AddTaskCommand(taskDescription, personName);
+
+        String userInput = AddTaskCommand.COMMAND_WORD + " d/" + taskDescription + " p/" + personName.fullName;
+
+        AddTaskCommand command = (AddTaskCommand) parser.parseCommand(userInput);
+        assertEquals(expectedCommand, command);
     }
 
 
