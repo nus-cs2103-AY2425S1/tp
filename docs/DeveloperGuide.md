@@ -352,7 +352,7 @@ Use case ends.
 
    Use case ends.
 
-**Use case: UC03 - Delete Contact after List**
+**Use case: UC03 - Delete Contact after Find**
 
 **MSS**
 
@@ -414,12 +414,12 @@ Use case ends.
     Use case resumes at step 1. 
 
 
-**Use case: UC06 - List Contact**
+**Use case: UC06 - List All Contact**
 
 **MSS**
 
-1. Talent Manager requests to list persons
-2. System shows a list of persons
+1. Talent Manager requests to list contacts
+2. System shows a list of all contacts
 
    Use case ends.
 
@@ -456,7 +456,7 @@ Use case ends.
     Use case resumes at step 1.
 
     
-**Use case: UC08 - List Events**
+**Use case: UC08 - List All Events**
 
 **MSS**
 
@@ -480,25 +480,36 @@ Use case ends.
     User case ends.
 
 
-**Use case: UC09 - Delete Events**
+**Use case: UC09 - Delete Event after List**
 
 **MSS**
 
 1. Talent Manager [List Events (UC08)](#)
-2. Talent Manager requests to delete a specific event in the list
-3. TalentHub deletes the event
+2.  Talent Manager [Delete Event (UC10)](#)
+
+
+**Use case: UC10 - Delete Event**
+
+1. Talent Manager requests to delete a specific event in the list
+1. TalentHub deletes the event
 
 **Extensions**
 
-* 2a. The command format is invalid.
+* 1a. The command format is invalid.
 
-  * 2a1. TalentHub outputs a generic error message about incorrect command format.
+  * 1a1. TalentHub outputs a generic error message about incorrect command format.
 
     Use case resumes at step 1.
-  
-* 2b. The given index is invalid.
 
-  * 2b1. TalentHub shows an error message.
+* 1b. The list is empty.
+
+    * 1b1. System shows an error message specifying the list is empty.
+
+      Use case resumes at step 1.
+  
+* 1c. The given index is invalid.
+
+  * 1c1. TalentHub shows an error message.
 
     Use case resumes at step 1.
 
