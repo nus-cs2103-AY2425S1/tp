@@ -4,7 +4,7 @@
     pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# UniVerse Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -272,29 +272,29 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Target user profile**: University students who
 
-* has a need to manage a significant number of contacts
+*  want to make friends and grow their professional networks by having an all-in-one platform that consolidates all the information (contact details, interests, academic backgrounds and work experience).
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: It offers university students one-stop access to professional networks and allows them to easily build, manage and maintain their contact information, interests, academic backgrounds and work experience.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​                     | I want to …​                              | So that I can…​                                           |
+|----------|-----------------------------|-------------------------------------------|-----------------------------------------------------------|
+| `* * *`  | university student          | add a new contact with basic details like name, university, and major | start building my professional network from school        |
+| `* * *`  | university student          | delete a contact from my network          | keep my contact list clean and up-to-date                 |
+| `* * *`  | university student          | search for contacts by their major        | connect with peers in the same academic field             |
+| `* * *`  | aspiring university student | add internship or work experience to a contact | network with people who have relevant industry experience |
+| `* *`    | lonely university student   | add interests and hobbies to a contact    | remember what we have in common                           |
+| `*`      | sociable university student | add social media links (e.g., LinkedIn, Instagram) to a contact| connect with people on other social platforms             |
 
 *{More to be added}*
 
