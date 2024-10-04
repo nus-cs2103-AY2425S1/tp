@@ -292,7 +292,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | new user          | have a quick tutorial of the CLI commands                                             | refer to instructions when I forget how to use the App                 |
 | `* * *`  | receptionist      | quickly retrieve the contact details of clients using simple CLI commands             | contact them promptly about updates or issues                          |
 | `* * *`  | mechanic          | be able to add new cars to the list                                                   | accommodate new clients                                                |
-| `* * *`  | mechanic          | have access to the full history log of each car that includes all visits and services | quickly check on the logs of cars                                      |
+| `* * *`  | mechanic          | edit the client's details                                                             | make changes if needed                                                 |
+| `* * *`  | mechanic          | delete clients data                                                                   | remove unneeded data                                                   |
+| `*`      | mechanic          | have access to the full history log of each car that includes all visits and services | quickly check on the logs of cars                                      |
 | `* *`    | frequent CLI user | be able to customize commands and shortcuts                                           | tweak my experience/improve productivity                               |
 | `* *`    | mechanic          | generate reports on the most common issues faced by cars of a specific model          |                                                                        |
 | `* *`    | user              | have a good user interface                                                            | use the app with greater ease                                          |
