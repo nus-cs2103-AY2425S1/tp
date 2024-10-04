@@ -274,13 +274,24 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+Individuals responsible for planning and managing events who need to communicate with multiple stakeholders concurrently.
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+Examples:
+* corporate event managers
+* wedding planners
+* social event coordinators.
+
+User Characteristics:
+* has a need to manage a significant number of contacts and events
+* prefers typing to mouse interactions
+* can type fast
+* is comfortable using CLI apps
+
+**Value proposition**:
+
+EventTory simplifies the process of organizing events, from small gatherings to large-scale corporate functions, and is optimized for users who prefer a CLI-like interface.
+
+With the ability to track event details and contact information for various vendors, EventTory allows users to manage the status of multiple events with ease.
 
 
 ### User stories
@@ -330,10 +341,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+2.  Should be able to hold up to 100 events and 1000 vendors without a noticeable sluggishness in performance for typical usage.
+3.  Should be able to assign up to 100 vendors to an event without any issue.  
+4.  A user with an above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+5.  Persistent data stored by the system should be in a human-readable format.
 
 ### Glossary
 
