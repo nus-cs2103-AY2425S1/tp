@@ -1,11 +1,8 @@
 package seedu.address.logic.commands;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Name;
-
-import javax.swing.text.View;
 
 /**
  * Changes the remark of an existing person in the address book.
@@ -26,14 +23,20 @@ public class ViewStatusCommand extends Command {
     private final Name name;
     private final String job;
 
+    /**
+     * @param name Name of the candidate
+     * @param job Job the candidate is applying for
+     */
     public ViewStatusCommand(Name name, String job) {
         this.name = name;
         this.job = job;
     }
 
+    /**
+     * Throws a simple exception
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        throw new CommandException( "Remark command not implemented yet");
+        throw new CommandException("Remark command not implemented yet");
     }
-
 }
