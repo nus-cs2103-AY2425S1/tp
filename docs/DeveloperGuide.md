@@ -377,10 +377,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+2.  Should be able to hold up to 1000 client's contact without a noticeable sluggishness in performance for typical usage.
+3.  Should be able to load client's contact within 2 seconds to provide a smooth user experience.
+4.  As the number of clients increases, the app should be able to handle the increased data load without significant degradation in performance.
+5.  A financial advisor with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+6.  The application should have an intuitive and easy-to-navigate UI so that financial advisors can quickly find clients and input data without much training.
+7.  The system should be designed to easily accommodate new features or updates.
 
-*{More to be added}*
 
 ### Glossary
 
