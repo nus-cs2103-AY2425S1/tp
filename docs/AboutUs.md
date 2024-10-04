@@ -15,7 +15,10 @@ We are a team based in the [School of Computing, National University of Singapor
 
 [[github](https://github.com/estellelim)]
 [[portfolio](team/estellelim.md)]
-=======
+
+* Role: Developer
+* Responsibilities: UI
+
 ### Lincoln Yao
 
 <img src="images/plishh.png" width="200px">
@@ -25,7 +28,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 * Role: Developer
 * Responsibilities: Data
-=======
+
 ### Evan Siah
 
 <img src="images/jollybomber.png" width="200px">
