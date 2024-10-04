@@ -428,7 +428,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: UC06 - List patient**
 
+**MSS**
+
+1. Doctor request to list patients
+2. WardWatch shows a list of patients
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty
+
+    * 2a1. WardWatch shows that list is empty
+
+      Use case ends.
+  
+* 2b. System is unable to retrieve the patient list.
+  
+    * 2b1. WardWatch displays an error message indicating the failure to load the patient list.
+    * 2b2. The doctor is prompted to try again later or contact support.
+  
+      Use case ends.
 
 *{More to be added}*
 

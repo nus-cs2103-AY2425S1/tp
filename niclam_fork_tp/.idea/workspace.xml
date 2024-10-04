@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="be266d60-7939-4fae-946f-a0daaa6d8936" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../src/main/java/seedu/address/logic/commands/EditCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/main/java/seedu/address/logic/commands/EditCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/java/seedu/address/logic/parser/AddCommandParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/main/java/seedu/address/logic/parser/AddCommandParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/java/seedu/address/logic/parser/AddressBookParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/main/java/seedu/address/logic/parser/AddressBookParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/java/seedu/address/logic/parser/CliSyntax.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/main/java/seedu/address/logic/parser/CliSyntax.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/java/seedu/address/model/person/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/main/java/seedu/address/model/person/Person.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/java/seedu/address/model/util/SampleDataUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/main/java/seedu/address/model/util/SampleDataUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/java/seedu/address/storage/JsonAdaptedPerson.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/main/java/seedu/address/storage/JsonAdaptedPerson.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/java/seedu/address/ui/PersonCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/main/java/seedu/address/ui/PersonCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/view/PersonListCard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../src/main/resources/view/PersonListCard.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/test/java/seedu/address/testutil/PersonBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/test/java/seedu/address/testutil/PersonBuilder.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2msaNi8we8CkqsuVkQ08jbmSkni" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.C:/Users/nicla/OneDrive/Desktop/Cs2103/tp stuff/niclam_fork_tp [run].executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/nicla/OneDrive/Desktop/Cs2103/tp stuff",
+    "onboarding.tips.debug.path": "C:/Users/nicla/OneDrive/Desktop/Cs2103/tp stuff/niclam_fork_tp/src/Main.java",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.691954"
+  }
+}]]></component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="./gradlew run" />
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="C:/Users/nicla/OneDrive/Desktop/Cs2103/tp stuff/niclam_fork_tp [run]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="run" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.C:/Users/nicla/OneDrive/Desktop/Cs2103/tp stuff/niclam_fork_tp [run]" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-17.0.10-corretto-17.0.10-4caba194b151-5cd809f4" />
+        <option value="jdk-21.0.1-openjdk-21.0.1-4caba194b151-23eed401" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="be266d60-7939-4fae-946f-a0daaa6d8936" name="Changes" comment="" />
+      <created>1727867699790</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1727867699790</updated>
+    </task>
+    <servers />
+  </component>
+</project>
