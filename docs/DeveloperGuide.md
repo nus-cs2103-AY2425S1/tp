@@ -285,10 +285,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | --- |-----------------------------|------------------------------------------|-----------------------------------------------------------------------------|
 | `* * *` | teaching assistant          | categorise students by course or section | quickly find contact information for students relevant to a specific course |
 | `* *` | teaching assistant          | filter students                         | prioritise communication with specific groups                              |
-| `* *` | teaching assistant          | view a guided tutorial on how to use the platform                    | quickly get familiar with managing student details      |
 | `*` | teaching asssitant          | add notes to a student’s profile                          | rtrack personal or academic progress that might influence communication                                        |
-| `*` | forgetful student           |  update my own contact information             | ensure my TA and teacher always have the most accurate information                     |
-| `*` | cautious teaching assistant | review changes before saving them                     | ensure the accuracy of student details before they are updated                                                      |
 
 *{More to be added}*
 
@@ -296,13 +293,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete Student by Index**
+Use case: **UC1** - Delete Student by Index
 
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
+2.  AddressBook shows a list of persons, which includes the index of the person
+3.  User requests to delete a specific person in the list by index
 4.  AddressBook deletes the person
 
     Use case ends.
@@ -329,6 +326,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4. The system should be able to scale to accommodate a growing number of users (teachers, TAs, students) without requiring significant reengineering.
 5. The platform should have a clean, intuitive user interface that allows new users to complete basic tasks (like searching for a student) with minimal training.
 6. Any search query should return results within 1 second for up to 10,000 student records.
+7. Product should be for a single user.
+8. The data should be stored locally and should be in a human editable text file.
+9. The software should work without requiring an installer.
 
 *{More to be added}*
 
