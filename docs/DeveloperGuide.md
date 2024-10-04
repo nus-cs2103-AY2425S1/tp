@@ -306,7 +306,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AgentAssist` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: U1. Delete a person**
+**Use case: U1 - Delete a person**
 
 **MSS**
 
@@ -329,7 +329,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: U2. Add a Person**
+**Use case: U2 - Add a Person**
 
 **MSS**
 
@@ -346,7 +346,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
         
       Use case resumes at step 1.
 
-**Use case: U3. View a person**
+**Use case: U3 - View a person**
 
 **MSS**
 
@@ -362,18 +362,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
       Use case resumes at step 1.
 
-**Use case: U4. Add remarks about a person**
+**Use case: U4 - Add remarks about a person**
 
 **MSS**
 
 1.  User performs <u>View a person (U3)</u> 
 2.  AgentAssist returns the person
 3.  User requests to add a remark about the person
-4.  AgentAssist adds a comment for the person
+4.  AgentAssist adds a remark for the person
 
     Use case ends.
 
-**Use case: U5. Exit**
+**Use case: U5 - Exit**
 
 **MSS**
 
