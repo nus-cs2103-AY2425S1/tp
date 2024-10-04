@@ -382,7 +382,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC5 - Add a policy to client**
+**Use case: UC5 - Add policy to client**
+
+**Preconditions: User has done <u>UC1 - List clients</u>**
+
+**MSS**
 
 1. User requests to add a policy (or multiple policies) to a specific client in the list
 1. Prudy adds the policy under the client
@@ -406,6 +410,79 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1c. The user indicated an invalid policy.
 
     * 1c1. Prudy shows an error message.
+
+      Use case ends.
+
+**Use case: UC6 - Delete policy from client**
+
+**Precondtions: User has done <u>UC1 - List clients</u>**
+
+**MSS**
+
+1. User request to delete a policy (or multiple policies) to a specific client in the list
+1. Prudy deletes the policy from the client
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The given index is invalid.
+
+    * 1a1. Prudy shows an error message.
+
+      Use case ends.
+
+* 1b. The client does not have the stated policy to be deleted
+
+    * 1b1. Prudy shows an error message.
+
+      Use case ends.
+
+**Use case: UC7 - List client policy**
+
+**Preconditions: User has done <u>UC1 - List clients</u>**
+
+**MSS**
+
+1. User request to list out the policies of a specific client in the list
+1. Prudy list out client's insured policies.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The given index is invalid.
+
+    * 1a1. Prudy shows an error message.
+
+      Use case ends.
+
+* 1b. The client does not have any policies.
+
+      Use case ends.
+
+**Use case: UC8 - Edit a client policy**
+
+**Preconditions: User has done <u>UC1 - List clients</u> and <u>UC7 - List client policy</u>**
+
+**MSS**
+
+1. User request to edit client policy details
+1. Prudy edits the policy
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The given index is invalid.
+
+    * 1a1. Prudy shows an error message.
+
+      Use case ends.
+
+* 1b. The client does not have the stated policy to edit.
+
+    * 1b1. Prudy shows an error message.
 
       Use case ends.
 
