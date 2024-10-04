@@ -273,17 +273,45 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Priorities:
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-|`* * *`   | user                                       | add a subject to a student     | track what subject students are taking                                 |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+- Essential (must have)
+- Novel (nice to have)
+- Typical (unlikely to have)
+
+| Priority | As a                   | I want to | So that I can |
+| :---- |:-----------------------| :---- | :---- |
+| Essential | Teacher                | track class schedules | I can schedule students |
+| Essential | Teacher                | manage student parent's contact | I know who to contact and how to contact |
+| Essential | Teacher                | manage student address | I will be able to mail the student things |
+| Essential | Teacher                | manage student phone number | I know who to contact and how to contact |
+| Essential | Teacher                | manage student email | I am able to send email attachments |
+| Essential | Teacher                | tag attendance of students in class | I can monitor student engagement |
+| Essential | Teacher                | overview of level of student attendance in classes |  |
+| Essential | Teacher                | manage teaching materials | I can easily access and update resources for each lesson. |
+| Essential | Teacher                | tag students based on how much help they need | I can give each student the appropriate amount of help |
+| Essential | Teacher                | create student progress reports | I can communicate progress to parents effectively. |
+| Essential | Teacher                | track student participation in class discussions | I can identify students who need encouragement to engage. |
+| Novel | Teacher                | provide automated lesson plans | I can save time creating good lesson plans |
+| Novel | Teacher                | conduct online assessments | I can monitor student understanding remotely. |
+| Novel | Tuition Business Owner | manage staff schedules | classes are appropriately covered |
+| Novel | Tuition Business Owner | monitor student enrollments | adjust course offerings accordingly. |
+| Novel | Tuition Business Owner | track expenses | manage budget effectively |
+| Novel | Tuition Business Owner | track revenue | manage budget effectively |
+| Novel | Tuition Business Owner | view monthly financial reports | I have a clear understanding of the business's financial health. |
+| Novel | Tuition Business Owner | integrate with a payroll system | I can manage staff salaries more efficiently. |
+| Typical | Teacher                | Track how much students have paid | I know whether to collect the payment |
+| Typical | Teacher                | track when students need to pay | I know whether to collect the payment |
+| Typical | Teacher                | know what my student is scoring | I can adjust my teaching procedures |
+| Typical | Teacher                | rank my students | I can adjust my teaching procedures |
+| Typical | Teacher                | reminder for class schedule | I never miss or forget a class |
+| Typical | Teacher                | allow assignment names to be tagged to classes |  |
+| Typical | Teacher                | allow assignments to be tagged with deadlines | they are aware of upcoming tasks , and I know what i have assigned |
+| Typical | Teacher                | allow tracking of deadlines in the class schedule | they are aware of upcoming tasks , and I know what i have assigned |
+| Typical | Teacher                | be alerted if a student is not around for too long | I can monitor student engagement |
+| Typical | Teacher                | track course progress | know when to review material |
+| Typical | Teacher                | set reminders for student homework deadlines | I can ensure students submit work on time. |
+| Typical | Teacher                | manage feedback from students | I can adjust my teaching approach based on student input. |
 
 *{More to be added}*
 
