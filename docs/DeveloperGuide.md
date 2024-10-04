@@ -300,32 +300,118 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Mechanical Assistance Tracker for Efficient Repairs (MATER)` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC1 - Add a client**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to add a client.
+2.  MATER adds the client and displays a confirmation message.
+    
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given client particulars is invalid.
+
+    * 1a1. MATER shows an error message.
+
+      Use case resumes from step 1.
+
+**Use case: UC2 - List clients**
+
+**MSS**
+
+1.  User requests to list a limited number of clients.
+2.  MATER shows the list of clients and displays a confirmation message.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The given list size limit is invalid.
+    * 1a1. MATER shows an error message.
+
+      Use case resumes from step 1.
+
+**Use case: UC3 - Delete a client**
+
+**MSS**
+
+1.  User <u>list clients (UC2)</u>.
+2.  User requests to delete a specific client in the list.
+3.  MATER deletes the client and displays a confirmation message.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
 
   Use case ends.
 
-* 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+* 2a. The given client identification number is invalid.
+    * 2a1. MATER shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes from step 2.
 
-*{More to be added}*
+**Use case: UC4 - Edit a person**
+
+**MSS**
+
+1.  User <u>list clients (UC2)</u>.
+2.  User requests to edit a specific field of a specific client in the list.
+3.  MATER edits the field of the client and displays a confirmation message.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+
+* 2a. The given client identification number is invalid.
+    * 2a1. MATER shows an error message.
+
+      Use case resumes from step 2.
+
+
+* 2b. The given field identification tag is invalid.
+    * 2b1. MATER shows an error message.
+
+      Use case resumes from step 2.
+
+
+* 2c. The given new value is invalid.
+    * 2c1. MATER shows an error message.
+
+      Use case resumes from step 2.
+
+**Use case: UC5 - View a client**
+
+**MSS**
+
+1.  User <u>list clients (UC2)</u>.
+2.  User requests to view a specific client in the list.
+3.  MATER shows the client information and displays a confirmation message.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+
+* 2a. The given client identification number is invalid.
+    * 2a1. MATER shows an error message.
+
+      Use case resumes from step 2.
 
 ### Non-Functional Requirements
 

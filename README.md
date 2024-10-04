@@ -29,7 +29,7 @@ Command: `delete-client CLIENT_ID`
 ### Edit Client
 
 Edit a client's profile, including personal information and car details.
-Command: `edit-client CLIENT_ID FIELD NEW_VALUE`
+Command: `edit-client CLIENT_ID FIELD_TAG NEW_VALUE`
 ### List Clients
 
 View a list of clients with details, limiting the number of entries returned based on usage needs.
