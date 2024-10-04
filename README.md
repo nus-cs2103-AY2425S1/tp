@@ -18,7 +18,7 @@ ClinicBuddy aims to enhance the patient management process for small clinics, cr
 
 ---
 ## Sample of User Interface
-![Ui](docs/images/Ui.png)
+![Ui](docs/images/Ui.png?)
 
 ---
 
