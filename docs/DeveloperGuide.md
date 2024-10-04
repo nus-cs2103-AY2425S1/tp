@@ -291,68 +291,77 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `EduLog` and the **Actor** is the `Teacher`, unless specified otherwise)
 
-## UC9: View students (Nikhil)
+## UC1: Add a class
+* Postcondition: A class, with at least a name, date, and time is created
 
-**System:** EduLog  
-**Actor:** Teacher  
-**Precondition:** The teacher is logged into the app.
+**MSS**
 
-### Main Success Scenario:
-
-1. Teacher requests to see students enrolled under him/her.  
-2. System displays the students enrolled under her.  
-   Use case ends.
-
-### **Extension:**
-
-**1a.** **Teacher requested to view invalid student**
-
-**1a1.** System notifies the teacher that the student is not present in her set of students.
-
-**1a2.** System requests the teacher for the correct student name.
-
-Steps 1a1-1a2 are repeated until an existing student is selected.
-
-Use case resumes from Step 2.
-
-## UC10: Remove student (Nikhil)
-
-**System:** EduLog  
-**Actor:** Teacher  
-**Precondition:** The teacher is logged into the app, the student is present in the list of students enrolled under the teacher.  
-**Postcondition:** The student is removed from the teacher’s list of students.
-
-### Main Success Scenario:
-
-1. Teacher views the students enrolled under him/her through U1. View Students  
-2. Teacher selects a student to delete.  
-3. Teacher requests to delete the student.  
-4. System confirms that the student has been removed.  
-   Teacher repeats steps 3-5 for any remaining students they wish to remove.  
-   Use case ends.
-
-### **Extension:**
-
-**3a.** **Student no longer exists in the list of the teacher’s students:**
-
-**3a1.** System notifies the teacher that the student is not present in her set of students.
-
+1.  Teacher initiates the process to add a new class in EduLog
+2.  System provides the required fields for class information
+3.  Teacher supplies the information
+4.  System validates the provided information to ensure it meets any specified criteria (e.g., uniqueness).
+5.  System confirms that class has been added
 Use case ends.
 
-**UC3: Add student**
+### **Extension:**
+
+* **2a. Teacher wants to abort the ‘add class’ process**
+
+    * 2a1. Teacher can clear fields and exit the procedure
+
+* **4a. Class with description already exists**
+
+    * 4a1. System alerts the teacher that the class exists and displays its details
+
+* **4b. Invalid class details (see features)**
+
+    * 4b1. System alerts the teacher and prompts them to correct the invalid information
+
+
+## UC2: Delete a class
+
+* Postcondition: An existing class is deleted
+
+**MSS**
+
+1.  Teacher initiates the process to delete a new class in EduLog
+2.  System provides the required fields for class information
+3.  Teacher supplies the information
+4.  System validates the provided information to ensure it meets any specified criteria.
+5.  System confirms that class has been deleted
+Use case ends.
+
+### **Extension:**
+
+* **2a. Teacher wants to abort the ‘delete class’ process**
+
+    * 2a1. Teacher can clear fields and exit the procedure
+
+* **4a. Class with description does not exist**
+
+    * 4a1. System alerts the teacher that the class does not exist, and prompts user to check again
+
+* **4b. Invalid class details (see features)**
+
+    * 4b1. System alerts the teacher and prompts them to correct the invalid information
+
+## UC3: Add student
 
 **System**: EduLog  
 **Actor**: Teacher  
 **Postcondition**: A student, with at least a name, is successfully enrolled in at least one class
 
-**Main Success Scenario:**
+**MSS:**
+
 1. Teacher initiates the process to add a new student in EduLog.
 2. System provides the required fields for student information.
 3. Teacher supplies the information.
 4. System validates the provided information to ensure it meets any specified criteria (e.g., uniqueness).
 5. System confirms that the student has been added.
+Use case ends.
 
-**Extensions:**
+### **Extension:**
+
 - **2a. Teacher wants to abort the ‘add student’ process**  
   Teacher can clear fields and exit the procedure.
 
@@ -371,19 +380,20 @@ Use case ends.
 - **4e. Tag does not exist**  
   System prompts the teacher to first create the tag using <u>UC5: Create a Tag</u>.
 
-**UC4: Edit student**
+## UC4: Edit student
 
 **System**: EduLog  
 **Actor**: Teacher  
 
-**Main Success Scenario:**
+**MSS:**
 1. Teacher initiates the process to edit an existing student in EduLog.
 2. System provides the required fields for student information.
 3. Teacher supplies the updated information.
 4. System validates the provided information to ensure it meets any specified criteria (e.g., uniqueness).
 5. System confirms that the student has been successfully updated.
+Use case ends.
 
-**Extensions:**
+### **Extension:**
 - **2a. Teacher wants to abort the ‘edit student’ process:**  
   Teacher can clear fields and exit the procedure.
 
@@ -402,20 +412,20 @@ Use case ends.
 - **4e. Tag does not exist**  
   System prompts the teacher to first create the tag using <u>UC5: Create a Tag</u>.
 
-
-**UC5: Create Tag**
+## UC5: Create Tag
 
 **System**: EduLog  
 **Actor**: Teacher
 
-**Main Success Scenario:**
+**MSS:**
 1. Teacher initiates the process to create a new tag.
 2. System displays the required fields for tag creation.
 3. Teacher supplies the necessary information for the new tag.
 4. System validates the provided information to ensure it meets specified criteria.
 5. System confirms that the tag has been successfully created and is available for use.
+Use case ends.
 
-**Extensions:**
+### **Extension:**
 - **2a. Teacher wants to abort the ‘create tag’ process:**  
   Teacher clears the fields and exits the procedure without saving any data.
 
@@ -426,19 +436,20 @@ Use case ends.
   System alerts the teacher if any of the entered details are invalid.  
   System prompts the teacher to correct the information before proceeding.
 
-**UC6: Edit tag**
+## UC6: Edit tag
 
 **System**: EduLog  
 **Actor**: Teacher
 
-**Main Success Scenario:**
+**MSS:**
 1. Teacher initiates the process to edit an existing tag.
 2. System displays the required fields for tag editing.
 3. Teacher supplies the necessary information for the updated tag.
 4. System validates the provided information to ensure it meets specified criteria.
 5. System confirms that the tag has been successfully updated and is available for use.
+Use case ends.
 
-**Extensions:**
+### **Extension:**
 - **2a. Teacher wants to abort the ‘edit tag’ process:**  
   Teacher clears the fields and exits the procedure without saving any data.
 
@@ -450,23 +461,74 @@ Use case ends.
   System alerts the teacher if any of the entered details are invalid.  
   System prompts the teacher to correct the information before proceeding.
 
-**UC7: Delete tag**
+## UC7: Delete tag
 
 **System**: EduLog  
 **Actor**: Teacher
 
-**Main Success Scenario:**
+**MSS:**
+
 1. Teacher selects a tag to delete.
 2. System prompts the teacher for confirmation before permanently deleting the tag.
 3. System deletes the tag.
+Use case ends.
 
-**Extensions:**
+### **Extension:**
 
 - **1a. Tag does not exist**  
   System alerts the teacher that the tag does not exist and cannot be deleted.
 
 - **2a. Teacher wants to abort the ‘delete tag’ process:**  
   Teacher cancels the operation and exits the procedure without deleting the tag.
+
+## UC8: View students (Nikhil)
+
+**System:** EduLog  
+**Actor:** Teacher  
+**Precondition:** The teacher is logged into the app.
+
+**MSS:**
+
+1. Teacher requests to see students enrolled under him/her.  
+2. System displays the students enrolled under him/her.
+Use case ends.
+
+### **Extension:**
+
+**1a.** **Teacher requested to view invalid student**
+
+**1a1.** System notifies the teacher that the student is not present in her set of students.
+
+**1a2.** System requests the teacher for the correct student name.
+
+Steps 1a1-1a2 are repeated until an existing student is selected.
+
+Use case resumes from Step 2.
+
+## UC9: Remove student (Nikhil)
+
+**System:** EduLog  
+**Actor:** Teacher  
+**Precondition:** The teacher is logged into the app, the student is present in the list of students enrolled under the teacher.  
+**Postcondition:** The student is removed from the teacher’s list of students.
+
+**MSS:**
+
+1. Teacher views the students enrolled under him/her through U1. View Students  
+2. Teacher selects a student to delete.  
+3. Teacher requests to delete the student.  
+4. System confirms that the student has been removed.  
+   Teacher repeats steps 3-5 for any remaining students they wish to remove.
+   Use case ends.
+
+### **Extension:**
+
+**3a.** **Student no longer exists in the list of the teacher’s students:**
+
+**3a1.** System notifies the teacher that the student is not present in her set of students.
+
+Use case ends.
+
 
 
 ### Non-Functional Requirements
