@@ -291,7 +291,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `EduLog` and the **Actor** is the `Teacher`, unless specified otherwise)
 
-**Use case: Add a class**
+**Use case 1: Add a class**
 * Postcondition: A class, with at least a name, date, and time is created
 
 **MSS**
@@ -326,7 +326,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 
-**Use case: Delete a class**
+**Use case 2: Delete a class**
 * Postcondition: An existing class is deleted
 
 **MSS**
