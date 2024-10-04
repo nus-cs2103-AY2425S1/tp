@@ -6,7 +6,10 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Schedule;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 
@@ -29,7 +32,8 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
         try {
             String name = argMultimap.getPreamble();
             String date = argMultimap.getValue(PREFIX_DATE).orElse("");
-            return new ScheduleCommand(name, date);
+            LocalDateTime dateTime = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+            return new ScheduleCommand(name, new Schedule(date));
         } catch (DateTimeParseException e) {
             throw new ParseException(MESSAGE_INVALID_DATE_FORMAT);
         }
