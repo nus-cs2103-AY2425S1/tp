@@ -341,9 +341,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3. The application should respond to user commands within 0.5 seconds, ensuring fast interactions.
+4. Regular tasks (e.g., adding a contact, listing events) should be executable within a few milliseconds to maintain efficiency and not interrupt the user’s workflow.
+5. The system should efficiently handle a large database of contacts and events (e.g., 10,000+ entries), allowing for fast searches, retrievals, and modifications without performance degradation.
+6. The application should be able to handle up to 5 concurrent users without noticeable performance degradation for typical usage.
+7. The system must ensure that no data is lost, duplicated, or corrupted during any operations (e.g., when adding or deleting contacts/events).
+8. As the app is an offline tool, it should be robust and able to run for extended periods without crashing. Downtime should be limited to under 1% (if any issues require restarting).
+9. The system should be able to recover from crashes within 5 seconds, ensuring minimal disruption to the user’s workflow.
+10. Since celebrity data is highly sensitive, the application must store all information securely (e.g. locally) and ensure no unauthorized access can occur, even in an offline environment.
+11. The app should allow password protection and encryption options to ensure that only authorized users can access or modify sensitive data.
+12. The system should log all critical operations (e.g., adding or deleting contacts) for auditing purposes, ensuring traceability of actions.
+13. The system should provide a way to export and import data in a standard format (e.g., CSV) to allow for easy backups and data transfer between devices.
+14. The system should provide a way to archive old data to reduce clutter and improve performance, ensuring that archived data can be easily retrieved if needed.
+15. New commands or features should be easily added or modified without impacting the existing system. This includes the ability to update or patch the app efficiently.
+16. Since the app is intended to be an offline tool, it should function fully without any internet connection. All features, including scheduling and contact management, must be operable offline.
+17. The application should be lightweight, with minimal CPU and memory usage, allowing it to run smoothly on a wide variety of machines, including low-spec systems.
+18. The system should provide a user-friendly and intuitive interface with clear instructions and feedback to guide users who are not IT-savvy in using the command-line interface effectively.
 
 *{More to be added}*
 
