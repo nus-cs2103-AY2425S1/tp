@@ -99,11 +99,17 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Role} of the {@code Person} that we are building.
+     */
     public PersonBuilder withRole(String role) {
         this.role = new Role(role);
         return this;
     }
 
+    /**
+     * Sets the {@code Major} of the {@code Person} that we are building.
+     */
     public PersonBuilder withMajor(String major) {
         this.major = new Major(major);
         return this;
