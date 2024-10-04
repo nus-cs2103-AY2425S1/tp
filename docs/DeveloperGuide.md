@@ -296,6 +296,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 (For all use cases below, the **System** is the `Medibase 3` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case:** UC1 - Add Patient
+
 **MSS:**
 1. User keys in the patient details.
 2. MB3 adds the patient and displays a success message.  
@@ -323,6 +324,7 @@ Use case ends.
 ---
 
 **Use case:** UC3 - Find Patient by Name
+
 **MSS:**
 1. User keys in the patient name.
 2. MB3 prints the selected patient information and displays a success message.  
@@ -336,6 +338,7 @@ Use case ends.
 ---
  
 **Use case:** UC4 - List Patients
+
 **MSS:**
 1. User requests MB3 to list patients.
 2. MB3 lists the patient data sequentially and displays a success message.  
@@ -349,6 +352,7 @@ Use case ends.
 ---
  
 **Use case:** UC5 - Add Appointment
+
 **MSS:**
 1. User keys in the appointment details.
 2. MB3 adds the appointment and displays a success message.  
@@ -362,6 +366,7 @@ Use case ends.
 ---
  
 **Use case:** UC6 - Add Medical Condition
+
 **MSS:**
 1. User keys in the patient’s medical condition.
 2. MB3 adds the medical condition and displays a success message.  
@@ -375,6 +380,7 @@ Use case ends.
 ---
  
 **Use case:** UC7 - Update Patient’s Priority
+
 **MSS:**
 1. User requests MB3 to update a selected patient’s priority.
 2. MB3 updates the patient’s priority and displays a success message.  
@@ -401,6 +407,7 @@ Use case ends.
 ---
 
 **Use case:** UC9 - Delete Patient Contact
+
 **MSS:**
 1. User requests MB3 to delete a selected patient’s contact.
 2. MB3 deletes the patient’s contact and displays a success message.  
@@ -414,6 +421,7 @@ Use case ends.
 ---
  
 **Use case:** UC10 - Delete Patient Condition   
+
 **MSS:**
 1. User requests MB3 to delete a selected patient’s condition.
 2. MB3 deletes the patient’s condition and displays a success message.  
@@ -427,6 +435,7 @@ Use case ends.
 ---
  
 **Use case:** UC11 - Delete Patient Allergies
+
 **MSS:**
 1. User requests MB3 to delete a selected patient’s allergies.
 2. MB3 deletes the allergies and displays a success message.  
@@ -440,6 +449,7 @@ Use case ends.
 ---
 
 **Use case:** UC12 - Delete Patient Appointment
+
 **MSS:**
 1. User requests MB3 to delete a selected patient’s appointment.
 2. MB3 deletes the appointment and displays a success message.  
@@ -453,6 +463,7 @@ Use case ends.
 ---
  
 **Use case:** UC13 - List Patients By Condition
+
 **MSS:**
 1. User requests MB3 to list patients’ details by condition.
 2. MB3 lists patients' details by condition and displays a success message.  
@@ -466,6 +477,7 @@ Use case ends.
 ---
 
 **Use case:** UC14 - List Patients By Priority
+
 **MSS:**
 1. User requests MB3 to list patients’ details by priority.
 2. MB3 lists patients' details by priority and displays a success message.  
@@ -493,35 +505,25 @@ Use case ends.
   **Patient Contact**:  
   Refers to the personal and medical information of an individual being treated, including name, NRIC, phone number, and medical details.
 
-* **Medical Condition**:  
-A diagnosis or health issue assigned to a patient, such as "Diabetes Type 2" or "Hypertension." This helps track and manage a patient's health status.
+* **Medical Condition**: A diagnosis or health issue assigned to a patient, such as "Diabetes Type 2" or "Hypertension." This helps track and manage a patient's health status.
 
-* **Appointment**:  
-A scheduled meeting between a patient and a medical professional, stored with details like date, time, and purpose.
+* **Appointment**: A scheduled meeting between a patient and a medical professional, stored with details like date, time, and purpose.
 
-* **NRIC**:  
-National Registration Identity Card, a unique 9-character identifier used to distinguish each patient or medical worker.
+* **NRIC**: National Registration Identity Card, a unique 9-character identifier used to distinguish each patient or medical worker.
 
-* **Priority Level**:  
-Indicates the urgency of a patient’s condition, with values like low, medium, or high to assist medical professionals in managing urgent cases.
+* **Priority Level**: Indicates the urgency of a patient’s condition, with values like low, medium, or high to assist medical professionals in managing urgent cases.
 
-* **Allergy**:  
-A specific substance or condition that a patient has a sensitivity or adverse reaction to, such as "Peanuts" or "Lactose."
+* **Allergy**: A specific substance or condition that a patient has a sensitivity or adverse reaction to, such as "Peanuts" or "Lactose."
 
-* **Contact List**:  
-A list of all patients and their associated information, which can be searched or filtered by various criteria like name or condition.
+* **Contact List**: A list of all patients and their associated information, which can be searched or filtered by various criteria like name or condition.
 
-* **Doctor**:  
-A medical professional who uses MediBase3 to manage patient information, schedule appointments, and track medical conditions.
+* **Doctor**: A medical professional who uses MediBase3 to manage patient information, schedule appointments, and track medical conditions.
 
-* **Appointment Date and Time**:  
-The specific day and time when a patient is scheduled to see a doctor, formatted as `YYYY-MM-DD` and `HH:MM`.
+* **Appointment Date and Time**: The specific day and time when a patient is scheduled to see a doctor, formatted as `YYYY-MM-DD` and `HH:MM`.
 
-* **Medical History**:  
-A chronological record of a patient’s past medical conditions, treatments, allergies, and appointments.
+* **Medical History**: A chronological record of a patient’s past medical conditions, treatments, allergies, and appointments.
 
-* **Search by Condition**:  
-A feature that allows users to filter and display patients based on specific medical conditions.
+* **Search by Condition**: A feature that allows users to filter and display patients based on specific medical conditions.
 
 --------------------------------------------------------------------------------------------------------------------
 
