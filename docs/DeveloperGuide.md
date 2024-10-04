@@ -300,32 +300,71 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
-
-**Use case: Delete a person**
+**System: TechConnect (TC)**
+<br/>
+**Use case: UC1 - Add a Company**
+<br/>
+**Actor: User**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User enters the detail of a company into the system
+2.  TC add the company to the contact list, and shows a success message to the user.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The input format is not correct.
 
-  Use case ends.
+    * 1a1. TC shows an error message.
+  
+    Use case resumes at step 1.
 
-* 3a. The given index is invalid.
+* 3a. The given company already exists in the contact list.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. TC will not add the company to the contact list.
 
-      Use case resumes at step 2.
+    Use case ends.
 
-*{More to be added}*
+<br/>
+
+**System: TechConnect (TC)**
+<br/>
+**Use case: UC2 - Remove a Company**
+<br/>
+**Actor: User**
+
+**MSS**
+
+1.  User choose a company to remove from the contact list.
+2.  TC removes the company from the contact list, and shows a success message to the user.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The input format is not correct.
+
+    * 1a1. TC shows an error message.
+
+    Use case resumes at step 1.
+
+<br/>
+
+**System: TechConnect (TC)**
+<br/>
+**Use case: UC3 - Show all Company**
+<br/>
+**Actor: User**
+
+**MSS**
+
+1.  User requests to see all companies in the contact list.
+2.  TC shows all companies in the contact list.
+
+    Use case ends.
+
 
 ### Non-Functional Requirements
 
