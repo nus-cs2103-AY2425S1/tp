@@ -52,7 +52,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Chen Le
 
-<img src="images/chenle.png" width="200px">
+<img src="images/chenle228.png" width="200px">
 
 [[github](https://github.com/chenle228)]
 [[portfolio](https://github.com/chenle228)]
