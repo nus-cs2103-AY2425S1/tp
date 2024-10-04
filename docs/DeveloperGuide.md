@@ -285,7 +285,12 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Our CLI-based contact management tool allows Non-Governmental Organisations (NGOs) to 
+manage contacts faster than a typical mouse/GUI driven app. 
+
+Staff of NGOs will be able to streamline operations
+such as sending mass emails to specific groups of users of their choice and visualising data about their contacts
+without the need for expensive software or a high level of technical expertise.
 
 
 ### User stories
