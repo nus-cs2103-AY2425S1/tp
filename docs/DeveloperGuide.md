@@ -262,13 +262,16 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Tech-savvy Independent Financial Advisors who manage more than 50 clients.
+* Have a need to efficiently manage a large volume of client details, such as insurance policies and financial plans.
+* Prefer desktop apps over other types of interfaces for their daily work.
+* Can type quickly and are comfortable using CLI applications, favoring typing over mouse-based interactions for efficiency.
+* Require a simple and streamlined tool that makes it easy to access and track client information with minimal clicks.
+* Value simplicity and efficiency in their tools to save time and focus on client relationships.
+* Need a system that provides quick access to relevant client information, including financial plans, policy expiration dates, and contact details.
+* Often handle tasks that involve tracking insurance policies, renewals, and financial documents.
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Our product provides independent financial advisors with a streamlined tool to manage client details (eg. Track insurance policies). Optimized for simplicity and efficiency, this product makes the lives of financial advisors easier by offering easier access to relevant information for their clients.
 
 
 ### User stories
