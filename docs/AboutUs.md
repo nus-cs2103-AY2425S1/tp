@@ -11,34 +11,35 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Matthew Yip
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/matthewyip1511.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/matthewyip1511)]
+[[portfolio](team/matthewyip.md)]
 
-* Role: Project Advisor
+* Role: Frontend Engineer
 
-### Jane Doe
+### Rezwan Ahmed
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/Rezwan15107.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/RezwanAhmed123)]
+[[portfolio](team/rezwanahmed.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Project Tester
+* Responsibilities: Ensure each method is unit tested well
 
-### Johnny Doe
+### Chen Zi Yi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/zi-yii.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/zi-yii)] 
+[[portfolio](team/chenziyi.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Code quality checker
+* Responsibilities: Ensure code follows the coding standard
 
 ### Jean Doe
 
@@ -50,12 +51,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Ho Yan Qi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yanqiyqh.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/yanqiyqh)]
+[[portfolio](team/yanqiyqh.md)]
 
 * Role: Developer
 * Responsibilities: UI

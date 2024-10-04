@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# InSUREance Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -272,29 +272,37 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Target user profile**: **Insurance Agents**
 
-* has a need to manage a significant number of contacts
+* has a need to manage a significant number of insurance clients
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Our app helps insurance agents effortlessly manage new and existing clients, offering features for tracking insurance plans and claims, all while staying organised and efficient."
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​           | I want to …​                                                        | So that I can…​                                                                  |
+|----------|-------------------|---------------------------------------------------------------------|----------------------------------------------------------------------------------|
+| `* * *`  | new user          | view the help page                                                  | refer to instructions when I forget how to use the App                           |
+| `* * *`  | basic user        | add a client                                                        | keep track of a client's contact details                                         |
+| `* * *`  | basic user        | delete a client                                                     | remove a client's contact details that I no longer need                          |
+| `* *`    | intermediate user | edit a client                                                       | update a client's contact when necessary                                         |
+| `* * *`  | basic user        | list all my clients                                                 | view all my clients in my address book                                           |
+| `* * *`  | efficient user    | find a client by name                                               | quickly retrieve a client's contact when required                                |
+| `* * *`  | basic user        | add an insurance plan to a client                                   | keep track of the insurance plan the client has purchased                        |
+| `* * *`  | basic user        | delete an insurance plan from a client                              | remove an insurance plan that was previously purchased by the client             |
+| `* *`    | intermediate user | add a claim to an insurance plan purchased by a client              | keep track of a claim filed against the insurance plan                           |
+| `* *`    | intermediate user | view a claim filed against an insurance plan purchased by a client  | view the details of the claim                                                    |
+| `* *`    | intermediate user | close a claim filed against an insurance plan purchased by a client | mark the claim as closed                                                         |
+| `* *`    | intermediate user | edit a claim filed against an insurance plan purchased by a client  | modify details of the claim                                                      |
+| `* *`    | intermediate user | view all claims of a client                                         | see all the claims filed for the various insurance plans purchased by the client |
+| `* * *`  | basic user        | exit the app                                                        | close the app when I am done using it                                            |
 
 *{More to be added}*
 
@@ -330,15 +338,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+2.  The data should be stored locally in a JSON file.
+3.  The data should be stored in a way that complies with the Personal Data Protection Act, Singapore [[PDPA](https://www.pdpc.gov.sg/overview-of-pdpa/the-legislation/personal-data-protection-act)]
+4.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+5.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+6.  The app should display results within 2 seconds when searching for a client.
+7.  The app should save the data entered even if it exits unexpectedly while running.
+8.  The app should have a log of user actions for debugging purposes
 
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
 
