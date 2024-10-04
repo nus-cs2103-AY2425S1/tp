@@ -289,7 +289,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 # Use cases
 
-(For all use cases below, the **System** is `EduLog` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `EduLog` and the **Actor** is the `Teacher`, unless specified otherwise)
 
 ## UC9: View students (Nikhil)
 
@@ -338,6 +338,136 @@ Use case resumes from Step 2.
 **3a1.** System notifies the teacher that the student is not present in her set of students.
 
 Use case ends.
+
+**UC3: Add student**
+
+**System**: EduLog  
+**Actor**: Teacher  
+**Postcondition**: A student, with at least a name, is successfully enrolled in at least one class
+
+**Main Success Scenario:**
+1. Teacher initiates the process to add a new student in EduLog.
+2. System provides the required fields for student information.
+3. Teacher supplies the information.
+4. System validates the provided information to ensure it meets any specified criteria (e.g., uniqueness).
+5. System confirms that the student has been added.
+
+**Extensions:**
+- **2a. Teacher wants to abort the ‘add student’ process**  
+  Teacher can clear fields and exit the procedure.
+
+- **4a. Student with the same name already exists**  
+  System alerts the teacher that the student exists and displays their details.
+
+- **4b. Invalid student details**  
+  System alerts the teacher and prompts them to correct the invalid information.
+
+- **4c. Subject does not exist**  
+  System prompts the teacher to first create the tag using <u>UC7: Create a Subject</u>.
+
+- **4d. Class does not exist**  
+  System prompts the teacher to first create the class using <u>UC1: Add a Class</u>.
+
+- **4e. Tag does not exist**  
+  System prompts the teacher to first create the tag using <u>UC5: Create a Tag</u>.
+
+**UC4: Edit student**
+
+**System**: EduLog  
+**Actor**: Teacher  
+
+**Main Success Scenario:**
+1. Teacher initiates the process to edit an existing student in EduLog.
+2. System provides the required fields for student information.
+3. Teacher supplies the updated information.
+4. System validates the provided information to ensure it meets any specified criteria (e.g., uniqueness).
+5. System confirms that the student has been successfully updated.
+
+**Extensions:**
+- **2a. Teacher wants to abort the ‘edit student’ process:**  
+  Teacher can clear fields and exit the procedure.
+
+- **4a. Student with new name already exists**  
+  System alerts the teacher that the student exists and displays their details.
+
+- **4b. Invalid student details (see features):**  
+  System alerts the teacher and prompts them to correct the invalid information.
+
+- **4c. Subject does not exist**  
+  System prompts the teacher to first create the tag using <u>UC7: Create a Subject</u>.
+
+- **4d. Class does not exist**  
+  System prompts the teacher to first create the class using <u>UC1: Add a Class</u>.
+
+- **4e. Tag does not exist**  
+  System prompts the teacher to first create the tag using <u>UC5: Create a Tag</u>.
+
+
+**UC5: Create Tag**
+
+**System**: EduLog  
+**Actor**: Teacher
+
+**Main Success Scenario:**
+1. Teacher initiates the process to create a new tag.
+2. System displays the required fields for tag creation.
+3. Teacher supplies the necessary information for the new tag.
+4. System validates the provided information to ensure it meets specified criteria.
+5. System confirms that the tag has been successfully created and is available for use.
+
+**Extensions:**
+- **2a. Teacher wants to abort the ‘create tag’ process:**  
+  Teacher clears the fields and exits the procedure without saving any data.
+
+- **3a. Tag with the same name already exists**  
+  System alerts the teacher that the tag exists and no new tag is created.
+
+- **3b. Invalid tag details:**  
+  System alerts the teacher if any of the entered details are invalid.  
+  System prompts the teacher to correct the information before proceeding.
+
+**UC6: Edit tag**
+
+**System**: EduLog  
+**Actor**: Teacher
+
+**Main Success Scenario:**
+1. Teacher initiates the process to edit an existing tag.
+2. System displays the required fields for tag editing.
+3. Teacher supplies the necessary information for the updated tag.
+4. System validates the provided information to ensure it meets specified criteria.
+5. System confirms that the tag has been successfully updated and is available for use.
+
+**Extensions:**
+- **2a. Teacher wants to abort the ‘edit tag’ process:**  
+  Teacher clears the fields and exits the procedure without saving any data.
+
+- **3a. Tag with new name already exists**  
+  System alerts the teacher that the tag exists.  
+  System requests to add another name.
+
+- **3b. Invalid tag details (see features):**  
+  System alerts the teacher if any of the entered details are invalid.  
+  System prompts the teacher to correct the information before proceeding.
+
+**UC7: Delete tag**
+
+**System**: EduLog  
+**Actor**: Teacher
+
+**Main Success Scenario:**
+1. Teacher selects a tag to delete.
+2. System prompts the teacher for confirmation before permanently deleting the tag.
+3. System deletes the tag.
+
+**Extensions:**
+
+- **1a. Tag does not exist**  
+  System alerts the teacher that the tag does not exist and cannot be deleted.
+
+- **2a. Teacher wants to abort the ‘delete tag’ process:**  
+  Teacher cancels the operation and exits the procedure without deleting the tag.
+
 
 ### Non-Functional Requirements
 
