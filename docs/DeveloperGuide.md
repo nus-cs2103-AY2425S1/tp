@@ -300,32 +300,313 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Mechanical Assistance Tracker for Efficient Repairs (MATER)` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC1 - Add a Client**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to add a Client.
+2.  MATER adds the Client and displays a confirmation message.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The given Client's particulars is invalid.
+    * 1a1. MATER shows an error message.
+
+      Use case resumes from step 1.
+
+**Use case: UC2 - List Clients**
+
+**MSS**
+
+1.  User requests to list a limited number of Clients.
+2.  MATER shows the list of Clients and displays a confirmation message.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given list size limit is invalid.
+    * 1a1. MATER shows an error message.
+
+      Use case resumes from step 1.
+
+**Use case: UC3 - Delete a Client**
+
+**MSS**
+
+1.  User <u>list Clients (UC2)</u>.
+2.  User requests to delete a specific Client in the list.
+3.  MATER deletes the Client and displays a confirmation message.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
 
   Use case ends.
 
-* 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+* 2a. The given Client id is invalid.
+    * 2a1. MATER shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes from step 2.
 
-*{More to be added}*
+**Use case: UC4 - Edit a Client**
+
+**MSS**
+
+1.  User <u>list Clients (UC2)</u>.
+2.  User requests to edit a specific field of a specific Client in the list.
+3.  MATER edits the field of the Client and displays a confirmation message.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+
+* 2a. The given Client id is invalid.
+    * 2a1. MATER shows an error message.
+
+      Use case resumes from step 2.
+
+
+* 2b. The given field tag is invalid.
+    * 2b1. MATER shows an error message.
+
+      Use case resumes from step 2.
+
+
+* 2c. The given new value is invalid.
+    * 2c1. MATER shows an error message.
+
+      Use case resumes from step 2.
+
+**Use case: UC5 - View a Client**
+
+**MSS**
+
+1.  User <u>list Clients (UC2)</u>.
+2.  User requests to view a specific Client in the list.
+3.  MATER shows the Client's particulars and Car details and displays a confirmation message.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+
+* 2a. The given Client id is invalid.
+    * 2a1. MATER shows an error message.
+
+      Use case resumes from step 2.
+
+**Use case: UC6 - Add Car to Client**
+
+**MSS**
+
+1.  User <u>list Clients (UC2)</u>.
+2.  User requests to add a Car to a specific Client in the list.
+3.  MATER adds the Car to the Client and displays a confirmation message.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+
+* 2a. The given Client id is invalid.
+    * 2a1. MATER shows an error message.
+
+      Use case resumes from step 2.
+
+
+* 2b. The given Car details is invalid.
+    * 2b1. MATER shows an error message.
+
+      Use case resumes from step 2.
+
+
+* 2c. The Client already has a Car associated to them.
+    * 2c1. MATER shows an error message.
+
+      Use case resumes from step 2.   
+
+**Use case: UC7 - Delete Car from Client**
+
+**MSS**
+
+1.  User <u>list Clients (UC2)</u>.
+2.  User requests to delete the Car from a specific Client in the list.
+3.  MATER removes the Car from the Client and displays a confirmation message.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+
+* 2a. The Client does not have a Car associated to them.
+    * 2a1. MATER shows an error message.
+
+      Use case resumes from step 2.
+
+
+* 2b. The given Client id is invalid.
+    * 2b1. MATER shows an error message.
+
+      Use case resumes from step 2.
+
+**Use case: UC8 - Edit a Car of a Client**
+
+**MSS**
+
+1.  User <u>views a Client (UC5)</u>.
+2.  User requests to edit a specific field of the Client's Car.
+3.  MATER edits the field of the Client's Car and displays a confirmation message.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The Client does not have a Car associated to them.
+    * 2a1. MATER shows an error message.
+
+      Use case resumes from step 1.
+
+
+* 2b. The given Client id is invalid.
+    * 2b1. MATER shows an error message.
+
+      Use case resumes from step 2.
+
+
+* 2c. The given field tag is invalid.
+    * 2c1. MATER shows an error message.
+
+      Use case resumes from step 2.
+
+
+* 2d. The given new value is invalid.
+    * 2d1. MATER shows an error message.
+
+      Use case resumes from step 2.
+
+**Use case: UC9 - Add Issue to Client's Car**
+
+**MSS**
+
+1.  User <u>views a Client (UC5)</u>.
+2.  User requests to add an Issue to the Client's Car.
+3.  MATER adds the Issue to the Client's Car and displays a confirmation message.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The Client does not have a Car associated to them.
+    * 2a1. MATER shows an error message.
+
+      Use case resumes from step 1.
+
+
+* 2b. The given Client id is invalid.
+    * 2b1. MATER shows an error message.
+
+      Use case resumes from step 2.
+
+
+* 2c. The given Issue description is invalid.
+    * 2b1. MATER shows an error message.
+
+      Use case resumes from step 2.
+
+**Use case: UC10 - Delete Issue from Client's Car**
+
+**MSS**
+
+1.  User <u>views a Client (UC5)</u>.
+2.  User requests to delete an Issue from the Client's Car.
+3.  MATER deletes the Issue from the Client's Car and displays a confirmation message.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The Client does not have a Car associated to them.
+    * 2a1. MATER shows an error message.
+
+      Use case resumes from step 1.
+
+
+* 2b. The Car does not have an Issue associated to it.
+    * 2b1. MATER shows an error message.
+
+      Use case resumes from step 1.
+
+
+* 2c. The given Client id number is invalid.
+    * 2c1. MATER shows an error message.
+
+      Use case resumes from step 2.
+
+
+* 2d. The given Issue id is invalid.
+    * 2d1. MATER shows an error message.
+
+      Use case resumes from step 2.
+
+**Use case: UC11 - Edit Issue of Client's Car**
+
+**MSS**
+
+1.  User <u>views a Client (UC5)</u>.
+2.  User requests to edit an Issue of the Client's Car
+3.  MATER edits the Issue of the Client's Car and displays a confirmation message.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The Client does not have a Car associated to them.
+    * 2a1. MATER shows an error message.
+
+      Use case resumes from step 1.
+
+
+* 2b. The given Client id is invalid.
+    * 2b1. MATER shows an error message.
+
+      Use case resumes from step 2.
+
+
+* 2c. The given Issue id is invalid.
+    * 2c1. MATER shows an error message.
+
+      Use case resumes from step 2.
+
+
+* 2d. The given new Issue description is invalid.
+    * 2d1. MATER shows an error message.
+
+      Use case resumes from step 2.
 
 ### Non-Functional Requirements
 
