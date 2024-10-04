@@ -1,18 +1,24 @@
 package seedu.address.logic.commands;
 
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Schedule;
+import static java.util.Objects.hash;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Schedule;
 
+/**
+ * Schedules an appointment for a person in the address book.
+ * The command ensures that the appointment is within valid working hours
+ * (weekdays from 9 AM to 5 PM) and that the selected time slot is available.
+ */
 public class ScheduleCommand extends Command {
 
     public static final String COMMAND_WORD = "schedule";
@@ -23,11 +29,29 @@ public class ScheduleCommand extends Command {
     public static final String MESSAGE_INVALID_NAME = "Person not found";
     private String name;
     private Schedule date;
+
+    /**
+     * Constructs a ScheduleCommand to schedule an appointment for the specified person.
+     *
+     * @param name The name of the person.
+     * @param date The schedule date and time.
+     */
     public ScheduleCommand(String name, Schedule date) {
         this.name = name;
         this.date = date;
     }
 
+
+    /**
+     * Executes the schedule command.
+     * Schedules an appointment for a person, ensuring that the time slot is available,
+     * and the appointment is within valid working hours.
+     *
+     * @param model The model containing the list of persons.
+     * @return CommandResult indicating success of scheduling.
+     * @throws CommandException If the person's name is not found, the time slot is already taken,
+     *                          or the scheduled time is invalid.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -103,5 +127,28 @@ public class ScheduleCommand extends Command {
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // Short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ScheduleCommand)) {
+            return false;
+        }
+
+        // State check
+        ScheduleCommand otherCommand = (ScheduleCommand) other;
+        return name.equals(otherCommand.name)
+                && date.equals(otherCommand.date);
+    }
+
+    @Override
+    public int hashCode() {
+        return hash(name, date);
     }
 }

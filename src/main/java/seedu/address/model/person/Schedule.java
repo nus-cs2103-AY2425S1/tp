@@ -1,8 +1,5 @@
 package seedu.address.model.person;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -13,6 +10,12 @@ public class Schedule {
 
     public final String dateTime;
 
+    /**
+     * Constructs a {@code Schedule} object with the given date and time.
+     *
+     * @param dateTime The date and time of the scheduled appointment.
+     * @throws NullPointerException if the {@code dateTime} is null.
+     */
     public Schedule(String dateTime) {
         requireNonNull(dateTime);
         this.dateTime = dateTime;

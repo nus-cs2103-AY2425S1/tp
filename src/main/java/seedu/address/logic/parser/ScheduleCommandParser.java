@@ -1,22 +1,20 @@
 package seedu.address.logic.parser;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.ScheduleCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Schedule;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.List;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+import seedu.address.logic.commands.ScheduleCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Schedule;
+
+/**
+ * Parses input arguments and creates a new ScheduleCommand object.
+ */
 public class ScheduleCommandParser implements Parser<ScheduleCommand> {
 
     /**
