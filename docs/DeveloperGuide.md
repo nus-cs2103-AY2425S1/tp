@@ -361,11 +361,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
-**Use Case: Search Clients or Pets**
+**Use Case: Search for pets**
 
 **MSS**
 
-1. User requests to search for a client or pet by entering the command along with the relevant data type and search value.
+1. User requests to search for a pet with the relevant data type and search value.
 2. PawPatrol validates the input.
 3. PawPatrol performs the search and retrieves matching records.
 4. PawPatrol displays the list of contacts matching the `dataType` and `searchValue`.
