@@ -42,6 +42,7 @@ public class PriorityCommand extends Command {
                     personToEdit.getPhone(),
                     personToEdit.getEmail(),
                     personToEdit.getAddress(),
+                    personToEdit.getEmergencyContact(),
                     personToEdit.getTags(),
                     new PriorityLevel(priorityLevel));
 
