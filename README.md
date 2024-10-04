@@ -5,7 +5,7 @@
 Product Name: HRHelper
 Target User Profile: Companies’ HR trying to keep track of their employees’ data
 Value proposition: Optimised for fast typers instead of being slowed down by GUI. Better filtration of date that updates real time.
-
+# Markdown 
 * This is **a sample project for Software Engineering (SE) students**.<br>
   Example usages:
   * as a starting point of a course project (as opposed to writing everything from scratch)
