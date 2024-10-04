@@ -348,6 +348,62 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **4e. Tag does not exist**  
   System prompts the teacher to first create the tag using <u>UC5: Create a Tag</u>.
 
+**UC4: Edit student**
+
+**System**: EduLog  
+**Actor**: Teacher  
+
+**Main Success Scenario:**
+1. Teacher initiates the process to edit an existing student in EduLog.
+2. System provides the required fields for student information.
+3. Teacher supplies the updated information.
+4. System validates the provided information to ensure it meets any specified criteria (e.g., uniqueness).
+5. System confirms that the student has been successfully updated.
+
+**Extensions:**
+- **2a. Teacher wants to abort the ‘edit student’ process:**  
+  Teacher can clear fields and exit the procedure.
+
+- **4a. Student with new name already exists**  
+  System alerts the teacher that the student exists and displays their details.
+
+- **4b. Invalid student details (see features):**  
+  System alerts the teacher and prompts them to correct the invalid information.
+
+- **4c. Subject does not exist**  
+  System prompts the teacher to first create the tag using <u>UC7: Create a Subject</u>.
+
+- **4d. Class does not exist**  
+  System prompts the teacher to first create the class using <u>UC1: Add a Class</u>.
+
+- **4e. Tag does not exist**  
+  System prompts the teacher to first create the tag using <u>UC5: Create a Tag</u>.
+
+
+**UC6: Create Tag**
+
+**System**: EduLog  
+**Actor**: Teacher
+
+**Main Success Scenario:**
+1. Teacher initiates the process to create a new tag.
+2. System displays the required fields for tag creation.
+3. Teacher supplies the necessary information for the new tag.
+4. System validates the provided information to ensure it meets specified criteria.
+5. System confirms that the tag has been successfully created and is available for use.
+
+**Extensions:**
+- **2a. Teacher wants to abort the ‘create tag’ process:**  
+  Teacher clears the fields and exits the procedure without saving any data.
+
+- **3a. Tag with the same name already exists**  
+  System alerts the teacher that the tag exists and no new tag is created.
+
+- **3b. Invalid tag details:**  
+  System alerts the teacher if any of the entered details are invalid.  
+  System prompts the teacher to correct the information before proceeding.
+
+
 ### Non-Functional Requirements
 
 1.  Should work on Windows, MacOS and Linux as long as it has Java `17` or above installed.
