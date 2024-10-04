@@ -130,7 +130,7 @@ The `Model` component,
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Subject` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Subject` object per unique subject, instead of each `Person` needing their own `Subject` objects.<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
@@ -398,14 +398,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 4.
 
-**Use case: Add tags for a student**
+**Use case: Add subjects for a student**
 
 **MSS**
 
 1.  Tuition teacher requests to list students.
 2.  EduManage shows a list of students.
 3.  Tuition teacher requests to tag a specific student in the list according to his/her school level and/or subject.
-4.  EduManage updates the corresponding tags of the student.
+4.  EduManage updates the corresponding subjects of the student.
 
     Use case ends.
 
@@ -421,13 +421,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-* 3b. Multiple school level tags were given.
+* 3b. Multiple school level subjects were given.
 
     * 3b1. EduManage shows an error message.
 
       Use case resumes at step 2.
 
-* 3c. No tags were given.
+* 3c. No subjects were given.
 
     * 3c1. EduManage shows an error message.
 

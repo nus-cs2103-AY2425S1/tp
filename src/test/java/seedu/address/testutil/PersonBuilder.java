@@ -9,7 +9,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Subject;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -28,7 +28,7 @@ public class PersonBuilder {
     private EmergencyContact emergencyContact;
     private Address address;
     private Note note;
-    private Set<Tag> tags;
+    private Set<Subject> subjects;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -39,7 +39,7 @@ public class PersonBuilder {
         emergencyContact = new EmergencyContact(DEFAULT_EMERGENCY_CONTACT);
         address = new Address(DEFAULT_ADDRESS);
         note = new Note(DEFAULT_NOTE);
-        tags = new HashSet<>();
+        subjects = new HashSet<>();
     }
 
     /**
@@ -51,7 +51,7 @@ public class PersonBuilder {
         emergencyContact = personToCopy.getEmergencyContact();
         address = personToCopy.getAddress();
         note = personToCopy.getNote();
-        tags = new HashSet<>(personToCopy.getTags());
+        subjects = new HashSet<>(personToCopy.getSubjects());
     }
 
     /**
@@ -63,10 +63,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code subjects} into a {@code Set<Subject>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
+    public PersonBuilder withSubjects(String ... subjects) {
+        this.subjects = SampleDataUtil.getSubjectSet(subjects);
         return this;
     }
 
@@ -103,7 +103,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, emergencyContact, address, note, tags);
+        return new Person(name, phone, emergencyContact, address, note, subjects);
     }
 
 }
