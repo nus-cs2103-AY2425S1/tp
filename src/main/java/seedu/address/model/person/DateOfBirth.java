@@ -3,8 +3,6 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.time.LocalDate;
-
 import seedu.address.commons.util.DateUtil;
 /**
  * Represents a patient's date of birth in MediBase3.
