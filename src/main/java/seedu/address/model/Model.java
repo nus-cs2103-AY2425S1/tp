@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.property.Property;
 
 /**
  * The API of the Model component.
@@ -84,4 +85,30 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Returns the user prefs' property book file path.
+     */
+    Path getPropertyBookFilePath();
+
+    /**
+     * Sets the user prefs' address book file path.
+     */
+    void setPropertyBookFilePath(Path propertyBookFilePath);
+
+    /**
+     * Returns the user prefs.
+     */
+    ReadOnlyPropertyBook getPropertyBook();
+
+    /**
+     * Returns true if a person with the same identity as {@code property} exists in the address book.
+     */
+    boolean hasProperty(Property property);
+
+    /**
+     * Adds the given property.
+     * {@code property} must not already exist in the address book.
+     */
+    void addProperty(Property property);
 }
