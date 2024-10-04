@@ -7,9 +7,9 @@ import spleetwaise.core.commons.core.GuiSettings;
 import spleetwaise.core.logic.commands.CommandResult;
 import spleetwaise.core.logic.commands.exceptions.CommandException;
 import spleetwaise.core.logic.parser.exceptions.ParseException;
+import spleetwaise.core.model.Model;
 import spleetwaise.core.model.ReadOnlyAddressBook;
 import spleetwaise.core.model.person.Person;
-import spleetwaise.core.model.Model;
 
 /**
  * API of the Logic component

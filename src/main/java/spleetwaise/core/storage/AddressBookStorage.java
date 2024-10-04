@@ -5,8 +5,8 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import spleetwaise.core.commons.exceptions.DataLoadingException;
-import spleetwaise.core.model.ReadOnlyAddressBook;
 import spleetwaise.core.model.AddressBook;
+import spleetwaise.core.model.ReadOnlyAddressBook;
 
 /**
  * Represents a storage for {@link AddressBook}.

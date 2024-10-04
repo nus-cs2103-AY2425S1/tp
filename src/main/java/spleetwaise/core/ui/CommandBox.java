@@ -4,10 +4,10 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
+import spleetwaise.core.logic.Logic;
 import spleetwaise.core.logic.commands.CommandResult;
 import spleetwaise.core.logic.commands.exceptions.CommandException;
 import spleetwaise.core.logic.parser.exceptions.ParseException;
-import spleetwaise.core.logic.Logic;
 
 /**
  * The UI component that is responsible for receiving user command inputs.

@@ -1,7 +1,6 @@
 package spleetwaise.core.commons.util;
 
 import static java.util.Objects.requireNonNull;
-import static spleetwaise.core.commons.util.AppUtil.checkArgument;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;

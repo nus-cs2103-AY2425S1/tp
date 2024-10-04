@@ -1,15 +1,13 @@
 package spleetwaise.core.model.person;
 
-import static spleetwaise.core.commons.util.CollectionUtil.requireAllNonNull;
-
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import spleetwaise.core.commons.util.CollectionUtil;
 import spleetwaise.core.commons.util.ToStringBuilder;
 import spleetwaise.core.model.tag.Tag;
-import spleetwaise.core.commons.util.CollectionUtil;
 
 /**
  * Represents a Person in the address book.

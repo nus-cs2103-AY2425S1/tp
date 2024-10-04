@@ -1,7 +1,7 @@
 package spleetwaise.core.model.tag;
 
 import static java.util.Objects.requireNonNull;
-import static spleetwaise.core.commons.util.AppUtil.checkArgument;
+
 import spleetwaise.core.commons.util.AppUtil;
 
 /**
