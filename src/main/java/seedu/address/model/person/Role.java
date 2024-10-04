@@ -8,7 +8,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Role {
 
-    public static final String MESSAGE_CONSTRAINTS = "Roles should only be 'udder' or 'mUdder' and it can't be blank.";
+    public static final String MESSAGE_CONSTRAINTS = "Roles should only be 'brUdder' or 'mUdder' and it can't be blank.";
 
     public String role;
 
@@ -27,7 +27,7 @@ public class Role {
      * Returns true if a given role string is a valid role.
      */
     public static boolean isValidRole(String test) {
-        return test.equals("udder") || test.equals("mUdder");
+        return test.equals("brUdder") || test.equals("mUdder");
     }
 
     @Override
