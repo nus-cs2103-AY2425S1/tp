@@ -4,10 +4,13 @@ import javafx.scene.layout.HBox;
 
 /**
  * Represents the main window panel of the application that organizes layout and display of subpanels.
- * This class extends {@link HBox}, a horizontal box layout container in JavaFX, which arranges its children in a single horizontal row.
+ * This class extends {@link HBox}, a horizontal box layout container in JavaFX, which arranges its children in a single
+ * horizontal row.
  *
- * <p>This panel is designed to include a list panel on one side and a details or additional operations panel on the other side.
- * It ensures that the application's main interface is divided into distinct sections for displaying lists of items and their details or related operations.
+ * <p>This panel is designed to include a list panel on one side and a details or additional operations panel on the
+ * other side.
+ * It ensures that the application's main interface is divided into distinct sections for displaying lists of items and
+ * their details or related operations.
  *
  * <p>Usage example:
  * <pre>
