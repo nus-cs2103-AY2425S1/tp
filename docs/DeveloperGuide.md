@@ -300,15 +300,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  System provides the required fields for class information
 3.  Teacher supplies the information
 4.  System validates the provided information to ensure it meets any specified criteria (e.g., uniqueness).
-5. System confirms that class has been added
+5.  System confirms that class has been added
+
+    Use case ends.
 
 ### **Extension:**
 
 * 2a. Teacher wants to abort the ‘add class’ process
 
-  * 2a1. Teacher can clear fields and exit the procedure
+    * 2a1. Teacher can clear fields and exit the procedure
   
-    Use case ends.
+      Use case ends.
 
 * 4a. Class with description already exists
 
@@ -323,7 +325,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 
-## UC2: Delete a class**
+## UC2: Delete a class
 
 * Postcondition: An existing class is deleted
 
@@ -333,8 +335,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  System provides the required fields for class information
 3.  Teacher supplies the information
 4.  System validates the provided information to ensure it meets any specified criteria.
-5. System confirms that class has been deleted
-
+5.  System confirms that class has been deleted
 
     Use case ends.
 
@@ -342,9 +343,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. Teacher wants to abort the ‘delete class’ process
 
-  * 2a1. Teacher can clear fields and exit the procedure
+    * 2a1. Teacher can clear fields and exit the procedure
   
-  Use case ends.
+      Use case ends.
 
 * 4a. Class with description does not exist
 
@@ -365,11 +366,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Postcondition**: A student, with at least a name, is successfully enrolled in at least one class
 
 **MSS:**
+
 1. Teacher initiates the process to add a new student in EduLog.
 2. System provides the required fields for student information.
 3. Teacher supplies the information.
 4. System validates the provided information to ensure it meets any specified criteria (e.g., uniqueness).
 5. System confirms that the student has been added.
+
+   Use case ends.
 
 ### **Extension:**
 
@@ -403,6 +407,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4. System validates the provided information to ensure it meets any specified criteria (e.g., uniqueness).
 5. System confirms that the student has been successfully updated.
 
+   Use case ends.
+
 ### **Extension:**
 - **2a. Teacher wants to abort the ‘edit student’ process:**  
   Teacher can clear fields and exit the procedure.
@@ -435,6 +441,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4. System validates the provided information to ensure it meets specified criteria.
 5. System confirms that the tag has been successfully created and is available for use.
 
+   Use case ends.
+
 ### **Extension:**
 - **2a. Teacher wants to abort the ‘create tag’ process:**  
   Teacher clears the fields and exits the procedure without saving any data.
@@ -458,6 +466,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4. System validates the provided information to ensure it meets specified criteria.
 5. System confirms that the tag has been successfully updated and is available for use.
 
+   Use case ends.
+
 ### **Extension:**
 - **2a. Teacher wants to abort the ‘edit tag’ process:**  
   Teacher clears the fields and exits the procedure without saving any data.
@@ -476,9 +486,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor**: Teacher
 
 **MSS:**
+
 1. Teacher selects a tag to delete.
 2. System prompts the teacher for confirmation before permanently deleting the tag.
 3. System deletes the tag.
+
+   Use case ends.
 
 ### **Extension:**
 
@@ -497,7 +510,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS:**
 
 1. Teacher requests to see students enrolled under him/her.  
-2. System displays the students enrolled under her.  
+2. System displays the students enrolled under him/her.
+    
    Use case ends.
 
 ### **Extension:**
@@ -525,7 +539,8 @@ Use case resumes from Step 2.
 2. Teacher selects a student to delete.  
 3. Teacher requests to delete the student.  
 4. System confirms that the student has been removed.  
-   Teacher repeats steps 3-5 for any remaining students they wish to remove.  
+   Teacher repeats steps 3-5 for any remaining students they wish to remove.
+   
    Use case ends.
 
 ### **Extension:**
