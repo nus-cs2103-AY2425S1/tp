@@ -7,6 +7,7 @@
 ClinicBuddy aims to enhance the patient management process for small clinics, creating a platform to track patient information such as their treatment, contact information, visit records and future appointments.
 
 ---
+
 ## Features
 
 <b>ClinicBuddy</b> allows you to
@@ -17,8 +18,9 @@ ClinicBuddy aims to enhance the patient management process for small clinics, cr
 5. <b>Backup<b> patient records 
 
 ---
+
 ## Sample of User Interface
-![Ui](docs/images/Ui.png?   )
+![Ui](docs/images/Ui.png?)
 
 ---
 
