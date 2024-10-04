@@ -13,6 +13,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.PriorityLevel;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -120,5 +121,32 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String priorityLevel} into a {@code PriorityLevel}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param priorityLevel The string to parse.
+     * @return The parsed PriorityLevel object.
+     * @throws ParseException if the given {@code priorityLevel} is invalid.
+     */
+    public static PriorityLevel parsePriorityLevel(String priorityLevel) throws ParseException {
+        requireNonNull(priorityLevel);
+        String trimmedPriorityLevel = priorityLevel.trim();
+        if (trimmedPriorityLevel.isEmpty()) {
+            return new PriorityLevel(3); // default level if none provided
+        }
+        int level;
+        try {
+            level = Integer.parseInt(trimmedPriorityLevel);
+        } catch (NumberFormatException e) {
+            throw new ParseException("Priority level must be a number.");
+        }
+
+        if (level < 1 || level > 3) {
+            throw new ParseException("Invalid priority level. Please enter 1, 2, or 3.");
+        }
+        return new PriorityLevel(level);
     }
 }

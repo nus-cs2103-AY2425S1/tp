@@ -9,7 +9,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
 
-
 /**
  * An UI component that displays information of a {@code Person}.
  */
@@ -43,6 +42,8 @@ public class PersonCard extends UiPart<Region> {
     private Label emergencyContact;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label priorityLevel;
 
 
     /**
@@ -59,5 +60,7 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        priorityLevel.setText("Priority: " + person.getPriorityLevel().getValue());
+
     }
 }

@@ -9,6 +9,7 @@ import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.PriorityLevel;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -24,6 +25,7 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_EMERGENCY_CONTACT_NAME = "";
     public static final String DEFAULT_EMERGENCY_CONTACT_NUMBER = "";
+    public static final int DEFAULT_PRIORITY_LEVEL = 3;
 
     private Name name;
     private Phone phone;
@@ -31,6 +33,7 @@ public class PersonBuilder {
     private Address address;
     private EmergencyContact emergencyContact;
     private Set<Tag> tags;
+    private PriorityLevel priorityLevel;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -42,6 +45,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         emergencyContact = new EmergencyContact(DEFAULT_EMERGENCY_CONTACT_NAME, DEFAULT_EMERGENCY_CONTACT_NUMBER);
         tags = new HashSet<>();
+        priorityLevel = new PriorityLevel(DEFAULT_PRIORITY_LEVEL);
     }
 
     /**
@@ -54,6 +58,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         emergencyContact = personToCopy.getEmergencyContact();
         tags = new HashSet<>(personToCopy.getTags());
+        priorityLevel = personToCopy.getPriorityLevel();
     }
 
     /**
@@ -104,9 +109,21 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code PriorityLevel} of the {@code Person} that we are building.
+     *
+     * @param priorityLevel The priority level to be assigned to the person, represented as an integer.
+     *                      Must be a valid priority level (typically within a predefined range, e.g., 1-3).
+     * @return The current instance of {@code PersonBuilder} with the updated priority level.
+     */
+    public PersonBuilder withPriorityLevel(int priorityLevel) {
+        this.priorityLevel = new PriorityLevel(priorityLevel);
+        return this;
+    }
+
 
     public Person build() {
-        return new Person(name, phone, email, address, emergencyContact, tags);
+        return new Person(name, phone, email, address, emergencyContact, tags, priorityLevel);
     }
 
 }
