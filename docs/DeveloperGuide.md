@@ -303,7 +303,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extension**
 
-* 1a. The given input is missing Name.
+* 1a. The necessary details are missing from the given input.
 
     * 1a1. ResearchRoster shows an error message.
 
@@ -361,7 +361,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-* 3b. The given input is missing all optional fields.
+* 3b. The changes to make are missing from the given input.
 
     * 3b1. ResearchRoster shows an error message.
 
