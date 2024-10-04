@@ -326,7 +326,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor: Admin**
 
-**Preconditions:** Admin is logged in (UG03).
+**Preconditions:** Admin is logged in (UC03).
 
 **MSS:**
 1. Admin prompts the system to list all students' details.
@@ -339,7 +339,7 @@ Use case ends.
 
 **Actor: Admin**
 
-**Preconditions:** Admin is logged in (UG03).
+**Preconditions:** Admin is logged in (UC03).
 
 **MSS:**
 1. Admin prompts the system to add a student.
@@ -377,8 +377,9 @@ Use case ends.
 * 3a. System detects mismatch in either username or password or both.
     * 3a1. System notifies user of wrong username or password.
     * 3a2. System requests for correct username and password.
+    * 3a3. User enters new username and password.
 
-        Repeat 3a1 to 3a2 until the data entered is correct.
+        Repeat 3a1 to 3a3 until the data entered is correct.
 
     Use case ends.
 
@@ -387,7 +388,7 @@ Use case ends.
 
 **Actor: Admin**
 
-**Preconditions:** Admin is logged in (UG03).
+**Preconditions:** Admin is logged in (UC03).
 
 **MSS:**
 
@@ -421,7 +422,7 @@ Use case ends.
 
 **Actor: Admin**
 
-**Preconditions:** Admin is logged in (UG03).
+**Preconditions:** Admin is logged in (UC03).
 
 **MSS:**
 
