@@ -300,7 +300,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                    | I want to …​                                                     | So that I can…​                                                                  |
 |----------|----------------------------|------------------------------------------------------------------|----------------------------------------------------------------------------------|
 | `* * *`  | forgetful wedding planner  | add a new guest/vendor into the contact list                     | easily track and manage guests/vendors for the wedding                           |
-| `* * *`  | organized wedding planner  | view a list of guests/vendors                                    | easily access and reference their details.                                       |
+| `* * *`  | organized wedding planner  | view a list of guests/vendors                                    | easily access and reference their details                                        |
 | `* * *`  | organized wedding planner  | delete a guest/vendor contact that I no longer need              | keep my contact list organised and clutter-free                                  |
 | `* * *`  | meticulous wedding planner | edit the details of an existing guest/vendor in the contact list | correct mistakes and ensure that all information remains accurate and up-to-date |
 | `* *`    | organised wedding planner  | categorise attendees (family members, friends, vendors)          | keep track of different groups involved in the wedding                           |
@@ -428,7 +428,6 @@ Accessibility
 7. Provide command-line help documentation that can be accessed at any time with a simple command (help).
 
 Capacity
-
 8. The system should be able to handle data storage for up to 100 simultaneous weddings, each containing up to 500 guests and 50 vendors.
 
 Fault Tolerance
