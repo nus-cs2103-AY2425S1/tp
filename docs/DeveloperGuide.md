@@ -523,6 +523,61 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+
+**Use case: Delete a client**
+
+**MSS**
+
+1.  User chooses to delete a client and all related rental information
+2.  User types in a command consisting the index of the client
+3.  System prompts the user for confirmation
+4.  User confirms the deletion
+5.  System deletes that client and all related rental information
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The provided index is not valid
+
+    * 2a1. System prompts error for invalid index
+    * 2a2. User enters new instruction
+    * Steps 2a1-2a2 are repeated until the instruction is valid
+
+  Use case resumes from step 3.
+
+* 4a. User cancels the deletion
+  
+  Use case ends.
+
+
+**Use case: Delete a rental information from a client**
+
+**MSS**
+
+1.  User chooses to delete a specific rental information from a client
+2.  User types in a command consisting the index of the client and rental information
+3.  System prompts the user for confirmation
+4.  User confirms the deletion
+5.  System deletes that rental information
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The provided index is not valid
+
+    * 2a1. System prompts error for invalid index
+    * 2a2. User enters new instruction
+    * Steps 2a1-2a2 are repeated until the instruction is valid
+
+  Use case resumes from step 3.
+
+* 4a. User cancels the deletion
+
+  Use case ends.
+
+
 *{More to be added}*
 
 ### Non-Functional Requirements
