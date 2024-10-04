@@ -339,6 +339,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Architecture Diagram**: A visual representation of the system's structure, showing components and their relationships.
+* **JSON**: JavaScript Object Notation, /    A lightweight data-interchange format used to represent structured data, often in key-value pairs.
 
 --------------------------------------------------------------------------------------------------------------------
 
