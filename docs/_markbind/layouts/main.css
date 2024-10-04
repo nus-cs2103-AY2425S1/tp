@@ -1,0 +1,107 @@
+/* main.css - Styles for the HR Helper MarkBind Layout */
+
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #212529;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header styling */
+header {
+    background-color: #343a40;
+    color: #ffffff;
+    padding: 10px 0;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.nav-link {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px;
+}
+
+.nav-link:hover {
+    color: #adb5bd;
+    text-decoration: underline;
+}
+
+/* Sticky header styling */
+header[sticky] {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Sidebar styling */
+#site-nav {
+    background-color: #ffffff;
+    padding: 15px;
+    border-right: 1px solid #dee2e6;
+}
+
+.site-nav-top {
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.nav-component ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.nav-component li {
+    margin: 5px 0;
+}
+
+.nav-component a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.nav-component a:hover {
+    text-decoration: underline;
+}
+
+/* Footer styling */
+footer {
+    background-color: #343a40;
+    color: #ffffff;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 0.875rem;
+}
+
+footer a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Scroll-to-top button styling */
+scroll-top-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+scroll-top-button:hover {
+    background-color: #0056b3;
+}
