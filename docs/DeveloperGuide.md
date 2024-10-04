@@ -424,7 +424,7 @@ Use case ends.
 
 * 3a. Patient does not exist in contact details
 
-    * 3a1. System System display an error message.
+    * 3a1. System display an error message.
 
       Use case ends.
 
