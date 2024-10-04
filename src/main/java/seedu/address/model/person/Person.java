@@ -1,14 +1,12 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
+//import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
@@ -19,22 +17,29 @@ public class Person {
     // Identity fields
     private final Name name;
     private final Phone phone;
-    private final Email email;
+    //private final Email email;
+    private final StudentId studentId;
 
     // Data fields
     private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Course course;
+    private final HashMap<Module, Grade> moduleGrades = new HashMap<>();
+    //private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(StudentId studentId, Name name, Phone phone, Address address, Course course) {
+        requireAllNonNull(studentId, name, phone, address, course);
+        this.studentId = studentId;
         this.name = name;
         this.phone = phone;
-        this.email = email;
         this.address = address;
-        this.tags.addAll(tags);
+        this.course = course;
+    }
+
+    public StudentId getStudentId() {
+        return studentId;
     }
 
     public Name getName() {
@@ -45,21 +50,55 @@ public class Person {
         return phone;
     }
 
-    public Email getEmail() {
-        return email;
-    }
+//    public Email getEmail() {
+//        return email;
+//    }
 
     public Address getAddress() {
         return address;
     }
 
+    public Course getCourse() {
+        return course;
+    }
+
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Sets the module grades to the provided map.
+     *
+     * @param newModuleGrades A map of Module and Grade pairs to set.
+     */
+    public void setModuleGrades(Map<Module, Grade> newModuleGrades) {
+        moduleGrades.clear();
+        moduleGrades.putAll(newModuleGrades);
+    }
+
+    /**
+     * Adds a module grade. If the module already exists, it updates the grade.
+     *
+     * @param module The module for which to add or update the grade.
+     * @param grade The grade to associate with the module.
+     */
+    public void addModuleGrade(Module module, Grade grade) {
+        requireNonNull(module, "Module cannot be null");
+        requireNonNull(grade, "Grade cannot be null");
+        moduleGrades.put(module, grade);
+    }
+
+    /**
+     * Returns an immutable course grades map, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Map<Module, Grade> getModuleGrades() {
+        return Collections.unmodifiableMap(moduleGrades);
     }
+
+//    /**
+//     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+//     * if modification is attempted.
+//     */
+//    public Set<Tag> getTags() {
+//        return Collections.unmodifiableSet(tags);
+//    }
 
     /**
      * Returns true if both persons have the same name.
@@ -90,27 +129,29 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
+        return studentId.equals(otherPerson.studentId)
+                && name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && course.equals(otherPerson.course)
+                && moduleGrades.equals(otherPerson.moduleGrades);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(studentId, name, phone, address, course, moduleGrades);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .add("studentId", studentId)
                 .add("name", name)
                 .add("phone", phone)
-                .add("email", email)
                 .add("address", address)
-                .add("tags", tags)
+                .add("course", course)
+                .add("module grades", moduleGrades)
                 .toString();
     }
 
