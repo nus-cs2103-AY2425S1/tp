@@ -484,8 +484,10 @@ Use case resumes from step 2.
 
 ### Glossary
 
-MED*Mainstream OS**: Windows, Linux, Unix, MacOS
-MED*Private contact detail**: A contact detail that is not meant to be shared with others
+* **CLI**: Short for Command Line Interface, is a text-based interface where the user types commands for the system to pick up
+* **GUI**: Short for Graphical User Interface, is an interface made up of a set of buttons/menus which the user can use to make the system run specific tasks.
+* **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
 
