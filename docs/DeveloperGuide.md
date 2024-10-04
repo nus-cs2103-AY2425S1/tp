@@ -425,10 +425,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * User knows the index of the contact to be edited
 
 **MSS**
-* Teacher enters the edit command
-* EduConnect verifies the command inputs
-* EduConnect edits the specified contact in the address book
-* EduConnect displays a success message 
+1. Teacher enters the edit command
+2. EduConnect verifies the command inputs
+3. EduConnect edits the specified contact in the address book
+4. EduConnect displays a success message 
 
     Use case ends.
 
