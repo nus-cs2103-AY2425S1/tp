@@ -355,7 +355,7 @@ Use case ends.
     * 3a2. System prompt admin to key in information again.
     * 3a3. Admin key in information again.
 
-        Repeat 4a1 to 4a3 until Admin key in the right information.
+        Repeat 3a1 to 3a3 until Admin key in the right information.
     * 3a4. System adds the student and display success status.
 
     Use case ends.
