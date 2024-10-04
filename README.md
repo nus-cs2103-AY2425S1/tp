@@ -29,24 +29,24 @@ TO BE UPDATED
 
 ## How to Use the Project
 1. Add a new pet owner: `owner add <n/ownerName> <hp/ownerNumber> <ad/ownerAddress> <e/ownerEmail>`  
-Example:  
-```owner add n/mr bobby hp/96667899 ad/3 lentil gardens e/bobby@gmail.com```  
+   Example:  
+   ```owner add n/mr bobby hp/96667899 ad/3 lentil gardens e/bobby@gmail.com```
 
 2. Add a new pet: `pet add <n/AnimalName> <s/Species> <b/Breed> <a/Age> <s/Sex> <o/owner>`  
-Example:  
-```pet add n/Tom s/Cat b/domestic shorthair cat a/7 s/male```  
+   Example:  
+   ```pet add n/Tom s/Cat b/domestic shorthair cat a/7 s/male```
 
 3. Search for clients or pets: `search <dataType> <searchValue>`   
-Example:  
-```search CLIENT mr bobby```  
+   Example:  
+   ```search CLIENT mr bobby```
 
 4. Delete an owner or pet: `delete <dataType> <index>`  
-Example:  
-```delete PET 2```
+   Example:  
+   ```delete PET 2```
 
 5. List owners or pets: `list <dataType>`  
-Example:  
-```list CLIENT```
+   Example:  
+   ```list CLIENT```
 
 ## Contributors
 This project was done by Aaron, Jordan, Clarissa, David and Jonathan.
