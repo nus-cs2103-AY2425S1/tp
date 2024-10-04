@@ -91,7 +91,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Replaces the given student {@code target} in the list with {@code editedStudent}.
      * {@code target} must exist in the address book.
-     * The student identity of {@code editedStudent} must not be the same as another existing student in the address book.
+     * The student identity of {@code editedStudent} must not be the same as another existing student in the address
+     * book.
      */
     public void setPerson(Student target, Student editedStudent) {
         requireNonNull(editedStudent);
@@ -159,8 +160,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     public ObservableList<Student> getPersonList() {
         return persons.asUnmodifiableObservableList();
     }
+
     @Override
-    public ObservableList<Assignment> getAssignmentList() { return assignments.asUnmodifiableObservableList(); }
+    public ObservableList<Assignment> getAssignmentList() {
+        return assignments.asUnmodifiableObservableList();
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
