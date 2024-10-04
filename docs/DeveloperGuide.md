@@ -330,10 +330,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  File storing user's data should be small and not exceed 10MB per 1000 companies and 10,000 tags
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  The app should have a simple and intuitive user interface.
+5. Data retrieval and saving should be reliable to prevent data loss
+6. The code should be modular and easily maintainable, following Java coding standards.
+7. The app should not require internet access, ensuring that the user's data remain private within their local system.
+8. The app should efficiently handle up to 1000 companies and 10,000 tags without a noticeable performance degradation.
+9. The application should be well-tested, with automated tests to ensure reliability and maintainability
 
-*{More to be added}*
 
 ### Glossary
 
