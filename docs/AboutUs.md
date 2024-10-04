@@ -34,7 +34,7 @@ You can reach us at the email `cs2103t-w13-3@outlook.com`
 
 <img src="images/zhiyi12345.png" width="200px">
 
-[[github](http://github.com/zhiyi12345)] 
+[[github](http://github.com/zhiyi12345)]
 [[portfolio](team/johndoe.md)]
 
 
