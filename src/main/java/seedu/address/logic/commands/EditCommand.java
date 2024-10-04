@@ -272,12 +272,12 @@ public class EditCommand extends Command {
         public String toString() {
             return new ToStringBuilder(this)
                     .add("name", name)
+                    .add("nric", nric)
+                    .add("gender", gender)
+                    .add("dateOfBirth", dateOfBirth)
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
-                    .add("gender", gender)
-                    .add("dateOfBirth", dateOfBirth)
-                    .add("nric", nric)
                     .add("tags", tags)
                     .toString();
         }
