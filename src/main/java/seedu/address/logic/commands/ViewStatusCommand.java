@@ -20,8 +20,8 @@ public class ViewStatusCommand extends Command {
             + "Example: " + COMMAND_WORD
             + "n/ John Doe."
             + "j/ Software Engineer";
-    private final Name name;
-    private final String job;
+    public final Name name;
+    public final String job;
 
     /**
      * @param name Name of the candidate
