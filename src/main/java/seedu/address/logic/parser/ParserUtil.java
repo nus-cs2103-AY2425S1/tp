@@ -61,7 +61,7 @@ public class ParserUtil {
         requireNonNull(job);
         String trimmedJob = job.trim();
         if (!Job.isValidJob(trimmedJob)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Job.MESSAGE_CONSTRAINTS);
         }
         return new Job(trimmedJob);
     }
