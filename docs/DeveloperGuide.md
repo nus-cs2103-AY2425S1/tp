@@ -529,7 +529,19 @@ Use case ends.
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-
+* **Talents**: Well known or up-and-coming individuals who partake in the entertainment industry in one way or another
+* **Industry Professional**: Individuals that talents make contact for events
+* **Events**: Social and networking events organised by third parties e.g. award shows, brand events
+* **Talent Manager**: Industry professionals involved in managing and planning talent schedules
+* **Model-View-Controller (MVC)**: A design pattern that separates an application into three main logical components: the Model, the View, and the Controller. 
+* **Logic Component**: A part of the architecture responsible for handling user commands and parsing them. 
+* **Model Component**: Manages the application’s data and handles the business logic of the application. 
+* **Storage Component**: Manages reading from and writing to the persistent storage. 
+* **VersionedAddressBook**: A class responsible for implementing the undo/redo feature by maintaining different states of the address book.  
+* **Person**: Refers to a contact object within the address book application. 
+* **Index**: Refers to the position of an individuals contact in the address book
+* **Tag**: The associated description with said contact based on common groups
+* **Undo/Redo Feature**: A functionality that allows reverting or reapplying actions taken by the user within the application. 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
