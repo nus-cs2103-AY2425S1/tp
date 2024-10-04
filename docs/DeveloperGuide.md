@@ -154,7 +154,7 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.address.commons` package.
+Classes used by multiple components are in the `tahub.contacts.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
