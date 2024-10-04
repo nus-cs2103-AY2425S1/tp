@@ -541,8 +541,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The provided index is not valid
 
     * 2a1. System prompts error for invalid index
+    * 2a2. User enters new instruction
+    * Steps 2a1-2a2 are repeated until the instruction is valid
 
-  Use case ends.
+  Use case resumes from step 3.
 
 * 4a. User cancels the deletion
   
@@ -563,11 +565,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 3a. The provided index is not valid
+* 2a. The provided index is not valid
 
-    * 3a1. System prompts error for invalid index
+    * 2a1. System prompts error for invalid index
+    * 2a2. User enters new instruction
+    * Steps 2a1-2a2 are repeated until the instruction is valid
 
-  Use case ends.
+  Use case resumes from step 3.
 
 * 4a. User cancels the deletion
 
