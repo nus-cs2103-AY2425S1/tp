@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
 
 /**
  * The API of the Model component.
@@ -64,6 +65,11 @@ public interface Model {
     void deletePerson(Person target);
 
     /**
+     * Deletes task from the list of a person.
+     */
+    void deleteTask(Task task);
+
+    /**
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */
@@ -78,6 +84,9 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
+
+    /** Returns an unmodifiable view of the task list */
+    ObservableList<Task> getFilteredTaskList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.

@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -99,6 +100,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteTask(Task task) {
+        addressBook.removeTask(task);
+    }
+
+    @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -126,6 +132,15 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Task} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Task> getFilteredTaskList() {
+        return addressBook.getTaskList();
     }
 
     @Override

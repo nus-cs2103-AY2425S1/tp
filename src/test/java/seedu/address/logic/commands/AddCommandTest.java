@@ -23,6 +23,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -144,12 +145,22 @@ public class AddCommandTest {
         }
 
         @Override
+        public void deleteTask(Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setPerson(Person target, Person editedPerson) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public ObservableList<Person> getFilteredPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Task> getFilteredTaskList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -175,6 +186,7 @@ public class AddCommandTest {
             requireNonNull(person);
             return this.person.isSamePerson(person);
         }
+
     }
 
     /**
