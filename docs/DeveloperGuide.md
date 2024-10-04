@@ -274,7 +274,12 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* administrator of a small Non-Governmental Organisation (NGO) of less than 20 full-time staff
+* responsible for managing a large network of donors, volunteers, and partners
+* combined total of approximately 200 contacts 
+* has a need to manage volunteers participation hours 
+* comfortable using and editing human-readable text files for the management and storage of contact data
+* works independently as a single user on a personal machine with no need for multi-user setups or shared data
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions

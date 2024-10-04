@@ -2,6 +2,7 @@
 # ContactsForGood (CFG)
 ![Ui](docs/images/Ui.png)
 
+* This project is based on the `AddressBook-Level3 (AB3)` project created by the [SE-EDU initiative](https://se-education.org).
 * This project, `ContactsForGood (CFG)` is an extension of the `AB3` project targeted towards NGO administrators.'
 * It contains improvements and new features which are of specific benefit to NGO administrators and their work.
 * The details of the original AB3 project are included below:
