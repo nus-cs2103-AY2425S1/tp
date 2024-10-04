@@ -318,8 +318,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-*{More to be added}*
-
 **Use case: Screen a job listing**
 
 **MSS**
@@ -346,6 +344,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 4a. The list is empty.
 
   Use case ends.
+
+**Use case: Add contact ** 
+
+**MSS**
+
+1. User requests to add contact
+2. AddressBook returns an updated list of contacts with a success message
+
+**Extensions** 
+
+* 1a. The given parameters are invalid. 
+
+    * 1a1. Application shows an error message
+  
+      Use case ends. 
 
 ### Non-Functional Requirements
 
