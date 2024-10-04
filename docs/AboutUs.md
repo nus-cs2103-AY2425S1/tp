@@ -12,15 +12,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 ## Project team
 AY2425S1-CS2103T-F14a-4
 
-### John Doe
+### Nguyen Tien Hoang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/nguyen.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/blackpanther9229)]
+[[portfolio](team/nguyen.md)]
 
-* Role: Project Advisor
+* Role: Team Lead
+* Responsibilities: UI
 
 ### Justin Jiang
 
@@ -50,16 +50,6 @@ AY2425S1-CS2103T-F14a-4
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
-
-### Nguyen Tien Hoang
-
-<img src="images/nguyen.png" width="200px">
-
-[[github](https://github.com/blackpanther9229)]
-[[portfolio](team/nguyen.md)]
-
-* Role: Developer
-* Responsibilities: UI
 
 
 ### Christopher Tan
