@@ -1,6 +1,6 @@
 [![CI Status](https://github.com/AY2425S1-CS2103T-T14-3/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-T14-3/tp/actions)
 
-![Status](https://app.codecov.io/gh/AY2425S1-CS2103-T14-3/tp/settings/badge)
+[![codecov](https://codecov.io/gh/AY2425S1-CS2103-T14-3/tp/branch/master/graph/badge.svg)](https://codecov.io/gh/AY2425S1-CS2103-T14-3/tp/)
 
 # MATER - Car Workshop Management System
 
