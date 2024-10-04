@@ -308,45 +308,218 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `InSUREance` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+---
+**Use case 01: Add a client**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to add a new client
+2. System checks new client details.
+3. System assigns client an ID.
+4. System shows successfully added a new client message.
 
-    Use case ends.
+Use case ends.
+
+**Extensions**
+
+* 2a. Client details are invalid.
+    * 2a1. System shows invalid client details error message.
+    * 2a2. User enters new client details.
+
+    Steps 2a1-2a2 are repeated until the data entered is correct
+
+    Use case resumes from step 3.
+
+* 2b. Client name is identical to another client that already exists inside the system.
+    * 2b1. System sends a warning about identical client to user.
+
+    Use case resumes from step 3.
+---
+<a name = "UC02"></a> **Use case 02: Select a client**
+
+**MSS**
+
+1. User requests to select a client.
+2. System checks if the index is valid.
+3. System selects the client.
+
+Use case ends.
+
+**Extensions**
+
+* 2a. Client index is invalid.
+    * 2a1. System shows invalid index invalid error message.
+    * 2a2. User enters new index.
+
+    Steps 2a1-2a2 are repeated until the index is valid.
+  
+    Use case resumes from step 3.
+---
+**Use case 03: Delete a client**
+
+**MSS**
+
+1.  User requests to list clients.
+2.  System shows a list of clients.
+3.  User [selects a client](#UC02) to delete.
+4.  System deletes the person.
+
+Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
 
-  Use case ends.
+Use case ends.
 
-* 3a. The given index is invalid.
+---
+<a name = "UC04"></a>**Use case 04: Select an insurance plan**
 
-    * 3a1. AddressBook shows an error message.
+**MSS**
 
-      Use case resumes at step 2.
+1.  User selects an insurance plan ID.
+2.  System checks if the ID is valid.
+3.  System has selected the insurance plan ID.
 
-*{More to be added}*
+Use case ends.
+
+**Extensions**
+
+* 3a. The client does not have the specified insurance plan.
+    * 3a1. System shows an error message to user.
+
+    Use case ends.
+
+* 3b. The insurance plan id is invalid.
+    * 3b1. System shows an error message to user.
+
+    Use case ends.
+---
+**Use case 05: Add an insurance plan to a client**
+
+**MSS**
+
+1.  User requests to list clients.
+2.  System shows a list of clients.
+3.  User [selects a client](#UC02) and [selects an insurance plan](#UC04) to be added to the specified client.
+4.  System adds the insurance plan to the client.
+
+Use case ends.
+
+**Extensions**
+
+* 3a. The client already has the given insurance plan.
+
+    * 3a1. System shows an error message.
+
+    Use case ends.
+---
+**Use case 06: Remove an insurance plan to a client**
+
+**MSS**
+
+1.  User requests to list clients.
+2.  System shows a list of clients.
+3.  User [selects a client](#UC02), [selects an insurance plan](#UC04) of that client and requests it to be deleted.
+4.  System removes the insurance plan from the client.
+
+Use case ends.
+
+**Extensions**
+
+* 3a. The client does not have the specified insurance plan.
+    * 3a1. System shows an error message to user.
+
+    Use case ends.
+---
+**Use case 07: View all claims of a client**
+
+**MSS**
+
+1.  User [selects a client](#UC02) and requests to view all claims of that client.
+2.  System shows all claims for the client.
+
+Use case ends.
+
+**Extensions**
+
+* 2a. There are no claims for the client.
+    * 2a1. An appropriate message about the client having no claims will be shown.
+
+    Use case ends.
+---
+<a name = "UC08"></a>**Use case 08: Select a claim of a client**
+
+**MSS**
+
+1.  User [selects a client](#UC02), [selects a insurance plan](#UC04) of the client and requests to select a claim of that specific insurance plan.
+2.  System selects the claim specified by the user.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. Claim ID is invalid.
+    * 1a1. An appropriate error message will be shown.
+
+    Use case ends.
+---
+**Use case 09: Add a claim to a client**
+
+**MSS**
+
+1.  User [selects a client](#UC02) and [an insurance plan](#UC04) of that client and requests to add a claim to selected insurance plan.
+2.  System adds the claim to the insurance plan.
+
+Use case ends.
+
+**Extensions**
+
+* 3a. The claim already exists for the client.
+
+    * 3a1. System shows an error message.
+
+    Use case ends.
+---
+**Use case 09: Close a claim for a client**
+
+**MSS**
+
+1.  User [selects a claim](#UC08) requests to close that claim for the specified client.
+2.  System closes the claim for the client.
+
+Use case ends.
+
+**Extensions**
+
+* 3a. The claim has already been closed for the client.
+
+    * 3a1. System shows an error message.
+
+    Use case ends.
+---
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  The data should be stored locally in a JSON file.
-3.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-4.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3.  The data should be stored in a way that complies with the Personal Data Protection Act, Singapore [[PDPA](https://www.pdpc.gov.sg/overview-of-pdpa/the-legislation/personal-data-protection-act)]
+4.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+5.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+6.  The app should display results within 2 seconds when searching for a client.
+7.  The app should save the data entered even if it exits unexpectedly while running.
+8.  The app should have a log of user actions for debugging purposes
 
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Claims**: A formal request by a client for reimbursement for losses that are covered by specific insurance plans.
+<!-- (the above definition was obtained from: https://www.iciciprulife.com/insurance-claim.html) -->
+* **Claim ID**: A formal claim ID provided by the Insurance Provider when an insurance agent submits a claim on behalf of the client.
 
 --------------------------------------------------------------------------------------------------------------------
 
