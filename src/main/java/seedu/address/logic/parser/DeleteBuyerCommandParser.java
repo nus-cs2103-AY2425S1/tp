@@ -25,15 +25,10 @@ public class DeleteBuyerCommandParser implements Parser<DeleteBuyerCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_PHONE);
 
         String phoneNumber = argMultimap.getValue(PREFIX_PHONE).orElse("");
-        if (phoneNumber.isEmpty()) {
+        if (phoneNumber.isEmpty() || !phoneNumber.matches("\\d+")) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteBuyerCommand.MESSAGE_USAGE));
         }
-        try {
-            return new DeleteBuyerCommand(phoneNumber);
-        } catch (IllegalArgumentException e) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteBuyerCommand.MESSAGE_USAGE), e);
-        }
+        return new DeleteBuyerCommand(phoneNumber);
     }
 }
