@@ -27,7 +27,7 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide:
-    *
+    * Designed the UI mockup for Prudy
   * Developer Guide:
     *
 
