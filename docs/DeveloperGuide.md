@@ -292,14 +292,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+Use case: **UC1** - Find student by name
 
 **MSS**
 
 1.  User requests to list persons
 2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+3.  User requests to find a student by name
+4.  AddressBook displays names
 
     Use case ends.
 
@@ -309,11 +309,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 3a. The given string is not unique.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. AddressBook displays all student names with input string as prefix
 
-      Use case resumes at step 2.
+      Use case resumes at step 4.
 
 *{More to be added}*
 
@@ -325,6 +325,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4. The system should be able to scale to accommodate a growing number of users (teachers, TAs, students) without requiring significant reengineering.
 5. The platform should have a clean, intuitive user interface that allows new users to complete basic tasks (like searching for a student) with minimal training.
 6. Any search query should return results within 1 second for up to 10,000 student records.
+7. Product should be for a single user.
+8. The data should be stored locally and should be in a human editable text file.
+9. The software should work without requiring an installer.
 
 *{More to be added}*
 
