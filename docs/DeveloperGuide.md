@@ -1,7 +1,7 @@
 ---
   layout: default.md
-    title: "Developer Guide"
-    pageNav: 3
+  title: "Developer Guide"
+  pageNav: 3
 ---
 
 # T_Assistant Developer Guide
