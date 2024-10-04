@@ -370,31 +370,9 @@ Use case ends.
   
 
 - 2a. TA provides search parameters in a wrong format
-  - 2a1. 
-- 1b. TA provides unknown or invalid prefixes.
-  - 1b1. TP displays an error message: "Unknown prefix '/x'. Valid prefixes are /n, /id."  
+  - 2a1. TP displays an error message and informs TA of the correct format  
   Use case resumes at step 1.
-  
 
-- 1c. TA provides duplicate prefixes.
-  - 1c1. TP displays an error message: "Duplicate prefix '/n' found. Please provide each parameter only once."
-  Use case resumes at step 1.
-  
-
-- 2a. TA provides invalid input format for parameters. 
-  - 2a1. For Name (/n):
-      - If the name is empty:
-          - TP displays: "Name cannot be empty."
-
-      - If the name contains the '/' character:
-          - TP displays: "Invalid character '/' in name."
-
-- 2a2. For Student ID (/id):
-
-    - If the Student ID does not match the required format:
-        - TP displays: "Invalid Student ID format. It should be 9 characters with letters at the start and end, and digits in between (e.g., 'A1234567E')."
-
-Use case resumes at step 1.
 
 - 4a. No students match the criteria.
   - 4a1. TP displays a message:"No students found matching the criteria."  
