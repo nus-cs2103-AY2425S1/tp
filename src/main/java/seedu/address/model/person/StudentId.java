@@ -10,14 +10,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class StudentId {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Student ID should only contain numbers, and it should be exactly 8 digits long";
+            "StudentId should only contain numbers, and it should be exactly 8 digits long";
     public static final String VALIDATION_REGEX = "\\d{8}";
     public final String studentId;
 
     /**
      * Constructs a {@code StudentId}.
      *
-     * @param studentId A valid Student ID.
+     * @param studentId A valid StudentId.
      */
     public StudentId(String studentId) {
         requireNonNull(studentId);
@@ -26,7 +26,7 @@ public class StudentId {
     }
 
     /**
-     * Returns true if a given string is a valid Student ID.
+     * Returns true if a given string is a valid StudentId.
      */
     public static boolean isValidStudentId(String test) {
         return test.matches(VALIDATION_REGEX);

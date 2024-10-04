@@ -16,25 +16,25 @@ public class StudentIdTest {
     @Test
     public void constructor_invalidStudentId_throwsIllegalArgumentException() {
         String invalidStudentId = "";
-        assertThrows(IllegalArgumentException.class, () -> new Phone(invalidStudentId));
+        assertThrows(IllegalArgumentException.class, () -> new StudentId(invalidStudentId));
     }
 
     @Test
     public void isValidStudentId() {
-        // null Student ID
+        // null StudentId
         assertThrows(NullPointerException.class, () -> StudentId.isValidStudentId(null));
 
-        // invalid Student IDs
-        assertFalse(Phone.isValidPhone("")); // empty string
-        assertFalse(Phone.isValidPhone(" ")); // spaces only
-        assertFalse(Phone.isValidPhone("51")); // less than 8 digits
-        assertFalse(Phone.isValidPhone("123456789")); // more than 8 digits
-        assertFalse(Phone.isValidPhone("studentid")); // non-numeric
-        assertFalse(Phone.isValidPhone("1e34t678")); // alphabets within digits
-        assertFalse(Phone.isValidPhone("1234 5678")); // spaces within digits
+        // invalid StudentIds
+        assertFalse(StudentId.isValidStudentId("")); // empty string
+        assertFalse(StudentId.isValidStudentId(" ")); // spaces only
+        assertFalse(StudentId.isValidStudentId("51")); // less than 8 digits
+        assertFalse(StudentId.isValidStudentId("123456789")); // more than 8 digits
+        assertFalse(StudentId.isValidStudentId("studentId")); // non-numeric
+        assertFalse(StudentId.isValidStudentId("1e34t678")); // alphabets within digits
+        assertFalse(StudentId.isValidStudentId("1234 5678")); // spaces within digits
 
-        // valid phone numbers
-        assertTrue(Phone.isValidPhone("3219692")); // exactly 8 numbers
+        // valid StudentIds
+        assertTrue(StudentId.isValidStudentId("3219692")); // exactly 8 numbers
     }
 
     @Test
@@ -42,7 +42,7 @@ public class StudentIdTest {
         StudentId studentId = new StudentId("12345678");
 
         // same values -> returns true
-        assertTrue(studentId.equals(new Phone("12345678")));
+        assertTrue(studentId.equals(new StudentId("12345678")));
 
         // same object -> returns true
         assertTrue(studentId.equals(studentId));
