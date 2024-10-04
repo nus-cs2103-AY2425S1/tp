@@ -289,32 +289,76 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `EduLog` and the **Actor** is the `Teacher`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a class**
+* Postcondition: A class, with at least a name, date, and time is created
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  Teacher initiates the process to add a new class in EduLog
+2.  System provides the required fields for class information
+3.  Teacher supplies the information
+4.  System validates the provided information to ensure it meets any specified criteria (e.g., uniqueness).
+5. System confirms that class has been added
+
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. Teacher wants to abort the ‘add class’ process
 
+  * 2a1. Teacher can clear fields and exit the procedure
+  
   Use case ends.
 
-* 3a. The given index is invalid.
+* 4a. Class with description already exists
 
-    * 3a1. AddressBook shows an error message.
+    * 4a1. System alerts the teacher that the class exists and displays its details
 
-      Use case resumes at step 2.
+      Use case ends.
 
-*{More to be added}*
+* 4b. Invalid class details (see features)
+
+    * 4b1. System alerts the teacher and prompts them to correct the invalid information
+
+      Use case ends.
+
+
+**Use case: Delete a class**
+* Postcondition: An existing class is deleted
+
+**MSS**
+
+1.  Teacher initiates the process to delete a new class in EduLog
+2.  System provides the required fields for class information
+3.  Teacher supplies the information
+4.  System validates the provided information to ensure it meets any specified criteria.
+5. System confirms that class has been deleted
+
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Teacher wants to abort the ‘delete class’ process
+
+  * 2a1. Teacher can clear fields and exit the procedure
+  
+  Use case ends.
+
+* 4a. Class with description does not exist
+
+    * 4a1. System alerts the teacher that the class does not exist, and prompts user to check again
+
+      Use case ends.
+
+* 4b. Invalid class details (see features)
+
+    * 4b1. System alerts the teacher and prompts them to correct the invalid information
+
+      Use case ends.
 
 ### Non-Functional Requirements
 
