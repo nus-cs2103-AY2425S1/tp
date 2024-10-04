@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -72,11 +73,17 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_deleteBuyer() throws Exception {
-        assertTrue(parser.parseCommand(DeleteBuyerCommand.COMMAND_WORD) instanceof DeleteBuyerCommand);
+        final String phoneNumber = "12345678";
+        DeleteBuyerCommand command = (DeleteBuyerCommand) parser.parseCommand(
+                DeleteBuyerCommand.COMMAND_WORD + " " + PREFIX_PHONE + phoneNumber);
+        assertEquals(new DeleteBuyerCommand(phoneNumber), command);
     }
     @Test
     public void parseCommand_deleteSeller() throws Exception {
-        assertTrue(parser.parseCommand(DeleteSellerCommand.COMMAND_WORD) instanceof DeleteSellerCommand);
+        final String phoneNumber = "12345678";
+        DeleteSellerCommand command = (DeleteSellerCommand) parser.parseCommand(
+                DeleteSellerCommand.COMMAND_WORD + " " + PREFIX_PHONE + phoneNumber);
+        assertEquals(new DeleteSellerCommand(phoneNumber), command);
     }
 
     @Test

@@ -79,9 +79,9 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
         case DeleteBuyerCommand.COMMAND_WORD:
-            return new DeleteBuyerCommand();
+            return new DeleteBuyerCommandParser().parse(arguments);
         case DeleteSellerCommand.COMMAND_WORD:
-            return new DeleteSellerCommand();
+            return new DeleteSellerCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

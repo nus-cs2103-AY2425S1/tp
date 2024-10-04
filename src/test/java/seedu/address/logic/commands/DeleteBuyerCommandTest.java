@@ -1,7 +1,11 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.DeleteBuyerCommand.MESSAGE_NOT_IMPLEMENTED_YET;
+import static seedu.address.logic.commands.DeleteBuyerCommand.MESSAGE_ARGUMENTS;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -13,6 +17,23 @@ public class DeleteBuyerCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     @Test
     public void execute() {
-        assertCommandFailure(new DeleteBuyerCommand(), model, MESSAGE_NOT_IMPLEMENTED_YET);
+        final String phoneNumber = "12345678";
+        assertCommandFailure(new DeleteBuyerCommand(phoneNumber), model,
+                String.format(MESSAGE_ARGUMENTS, phoneNumber));
+    }
+    @Test
+    public void equals() {
+        final DeleteBuyerCommand standardCommand = new DeleteBuyerCommand(VALID_PHONE_AMY);
+        // same values -> returns true
+        DeleteBuyerCommand commandWithSameValues = new DeleteBuyerCommand(VALID_PHONE_AMY);
+        assertTrue(standardCommand.equals(commandWithSameValues));
+        // same object -> returns true
+        assertTrue(standardCommand.equals(standardCommand));
+        // null -> returns false
+        assertFalse(standardCommand.equals(null));
+        // different types -> returns false
+        assertFalse(standardCommand.equals(new ClearCommand()));
+        // different buyer -> return false
+        assertFalse(standardCommand.equals(new DeleteBuyerCommand(VALID_PHONE_BOB)));
     }
 }
