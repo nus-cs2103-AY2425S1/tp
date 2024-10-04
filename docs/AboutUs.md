@@ -11,6 +11,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Lincoln Yao
+
+<img src="images/plishh.png" width="200px">
+
+[[github](http://github.com/plishh)]
+[[portfolio](team/plishh.md)]
+
+* Role: Developer
+* Responsibilities: Data
+=======
 ### Evan Siah
 
 <img src="images/jollybomber.png" width="200px">
@@ -40,3 +50,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: UI, testing
+* 
