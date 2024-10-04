@@ -20,19 +20,19 @@ Given below are my contributions to the project.
 * **Code contributed**:
 
 * **Project management**:
-  * 
+  *
 
 * **Enhancements to existing features**:
-  * 
+  *
 
 * **Documentation**:
   * User Guide:
-    * 
+    *
   * Developer Guide:
-    * 
+    *
 
 * **Community**:
   * Create new issue labels of `type`, `priority`, and `severity` and new milestones `v1.1` - `v1.6`.
 
 * **Tools**:
-  * 
+  *
