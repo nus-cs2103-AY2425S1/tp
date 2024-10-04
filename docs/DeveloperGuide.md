@@ -381,6 +381,78 @@ Use case resumes from step 2.
 
 <hr>
 
+**System: EventfulNUS**\
+**Use case: UC5 - Update participant’s details**\
+**Actor: User**\
+**Guarantee: MSS → The specified participant’s details will be updated**
+
+MSS:
+1. User requests to update a participant’s details
+2. System updates and displays the specified participant’s data
+
+Extensions:\
+1a. System detects an error in the entered data.\
+1a1. System prompts user to re-enter data\
+1a2. User enters new data\
+Steps 1a1-1a2 are repeated until the data entered is correct.\
+Use case resumes from step 2.
+
+1b. System does not find the specified participant in the system\
+1b1. System prompts user to re-enter data\
+1b2. User enters new data\
+Steps 1b1-1b2 are repeated until the data entered is correct.\
+Use case resumes from step 2.
+
+<hr>
+
+**System: EventfulNUS**\
+**Use case: UC6 - Assign participants to specific sub-events**\
+**Actor: User**\
+**Guarantee: MSS → The specified participant will be assigned to a specified sub-event**\
+
+MSS:
+1. User requests to assign a participant to a sub-event
+2. System updates and displays the specified participant’s sub-event
+
+Extensions:\
+1a. System detects an error in the entered data.\
+1a1. System prompts user to re-enter data\
+1a2. User enters new data\
+Steps 1a1-1a2 are repeated until the data entered is correct.
+Use case resumes from step 2.
+
+1b. System does not find specified participant in the system\
+1b1. System prompts user to re-enter data\
+1b2. User enters new data\
+Steps 1b1-1b2 are repeated until the data entered is correct.\
+Use case resumes from step 2.
+
+<hr>
+
+**System: EventfulNUS**\
+**Use case: UC7 - Delete participant**\
+**Actor: User**\
+**Guarantee: MSS → The specified participant will be deleted from the system**
+
+MSS:
+1. User requests to delete a participant
+2. System requests for confirmation
+3. User confirms
+4. System deletes the participant and displays a message indicating no errors.
+
+Extensions:\
+1a. System detects an error in the entered data.\
+1a1. System prompts user to re-enter data\
+1a2. User enters new data\
+Steps 1a1-1a2 are repeated until the data entered is correct.\
+Use case resumes from step 2.
+
+1b. System does not find specified participant in the system\
+1b1. System prompts user to re-enter data\
+1b2. User enters new data\
+Steps 1b1-1b2 are repeated until the data entered is correct.\
+Use case resumes from step 2.
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
