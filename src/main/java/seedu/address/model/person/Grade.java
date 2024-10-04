@@ -14,7 +14,7 @@ public class Grade {
 
     // Valid grades
     private static final String[] VALID_GRADES = {
-            "A+", "A", "A-", "B+", "B", "B-", "C+", "C", "D+", "D", "F"
+        "A+", "A", "A-", "B+", "B", "B-", "C+", "C", "D+", "D", "F"
     };
 
     public final String grade;
