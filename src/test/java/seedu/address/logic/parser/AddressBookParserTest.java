@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -22,7 +23,9 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ViewStatusCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -97,5 +100,22 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+    }
+
+    @Test
+    public void parseCommand_viewStatus() throws Exception {
+        String userInput = "view n/John Doe j/Software engineer";
+        ViewStatusCommand command = (ViewStatusCommand) parser.parseCommand(userInput);
+
+        // Check that the parsed command is an instance of ViewStatusCommand
+        assertTrue(command instanceof ViewStatusCommand);
+
+        // Verify the parsed command details
+        Name expectedName = new Name("John Doe");
+        ViewStatusCommand expectedCommand = new ViewStatusCommand(expectedName, "Software engineer");
+
+        // Assert the values of the parsed command match the expected command
+        assertEquals(expectedCommand.name, command.name);
+        assertEquals(expectedCommand.job, command.job);
     }
 }
