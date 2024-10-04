@@ -1,8 +1,8 @@
 # Xingye Zhou
 
-**Address:** NUS Cinnamon College  
-**Phone:** +65 84266607  
-**Email:** [xingyechou@gmail.com](mailto:xingyechou@gmail.com)  
+**Address:** NUS Cinnamon College
+**Phone:** +65 84266607
+**Email:** [xingyechou@gmail.com](mailto:xingyechou@gmail.com)
 **LinkedIn:** [linkedin.com/in/xingye-zhou-57859320b](https://linkedin.com/in/xingye-zhou-57859320b)
 
 ---
