@@ -41,124 +41,279 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 ## Features Overview
 
-### Ability to Save Current Data
+### Feature 1: Ability to Save Current Data
 
-**Purpose:** When you close and open the app, the details you have added persist.
+**Purpose:**  
+This feature ensures that any details you add to the app are saved automatically. When you close and reopen the app, all your data will still be there.
 
-**Details:** Data is automatically saved without the need for manual intervention.
+**How it Works:**  
+- **Command Format and Example:** Not applicable, as this process is automatic.
 
-### Add New Customer
+#### Parameters
+- **Flags and Parameters:** There are no parameters needed for this feature.
 
-**Purpose:** To save the records and details of a new customer.
+#### What to Expect
+- **If Successful:** You can access all the data you've entered previously.
+- **If There is an Error:** There's a chance that the data might not be saved due to an error, and you could lose information.
 
-**Command:**
+---
+
+### Feature 2: Add New Customer
+
+**Purpose:**  
+This feature allows you to enter and save detailed records for new customers. Each customer's record includes their name, contact number, email, occupation, and income.
+
+**How to Use It:**  
+- **Command Format:** 
 ```
 add --name <customer name> --contact <customer contact> --email <customer email> --job <job name> --income <customer income>
+ ```
+- **Example:** 
+```
+add --name TAN LESHEW --contact 66997788 --email mrtan@ntu.com --job doctor of computer science --income 1000000000
 ```
 
-**Details:**
-- **Name:** Should be in all caps; alphanumeric characters only.
-- **Contact:** Must be an integer.
-- **Email:** Must contain an "@" and a domain.
-- **Occupation:** Describes the customer's job.
-- **Income:** The customer's income level.
+#### Parameters
+| Parameter | Expected Format                              | Explanation                                                |
+|-----------|----------------------------------------------|------------------------------------------------------------|
+| name      | Alphanumeric, capitalized                    | Names are in block letters for clarity and consistency.    |
+| contact   | 8-digit number, starts with 8 or 9           | Ensures the contact number is valid in Singapore.          |
+| email     | Must include "@" and domain, case insensitive| Verifies that the email address is in a standard format.   |
+| job       | Any text, case insensitive                   | Accepts all job titles without case sensitivity.           |
+| income    | Non-negative integers                        | Only positive numbers or zero are valid for income fields. |
 
-**Examples:**
-- `add --name JOHN DOE --contact 1234567890 --email john.doe@example.com --job Engineer --income 50000`
+#### What to Expect
+- **If Successful:** You'll see a message: "New Contact added. Their ID is `<new customer ID>`."
+- **If There is an Error:** 
+  - Missing name: "Customer requires a name."
+  - Incorrect email format: "Please give a valid email address."
+  - Invalid income entry: "Please use a non-negative number for income."
 
-### Remove Old Customer
+**Handling Duplicates:**  
+If a customer with the same name, email, job, and income is already saved, you'll get a message: "This customer is already saved as a contact. Their ID is `<new customer ID>`."
 
-**Purpose:** Remove a customer who no longer uses the credit card service.
+---
 
-**Command:**
+### Feature 3: Remove Old Customer
+
+**Purpose:**  
+This feature allows you to remove records of customers who are no longer using your credit card services.
+
+**How to Use It:**  
+- **Command Format:** 
 ```
 del <customer id>
 ```
+- **Example:** 
+```
+del 69
+```
 
-**Details:** 
-- **ID:** Integer specifying the customer to delete.
-  
-**Example:** `del 69`
+#### Parameters
+| Parameter | Expected Format             | Explanation                                         |
+|-----------|-----------------------------|-----------------------------------------------------|
+| ID        | Integer (0 to the last ID)  | The ID must be a valid integer within the registered range. |
 
-### View Details of a Customer
+#### What to Expect
+- **If Successful:** You'll see a message: "Customer `<Customer ID>` has been deleted."
+- **If There is an Error:** 
+  - Invalid ID: "No customer with `<Customer ID>` exists. Please recheck the ID."
 
-**Purpose:** See detailed information related to the customer.
+**Handling Duplicates:**  
+Since customer IDs are unique identifiers:
+- No two customers can have the same ID due to the uniqueness constraint on customer IDs.
+- Even if a customer record appears duplicated due to data file modifications, the system assigns a unique ID upon loading the data, preventing actual duplicates in the database.
 
-**Command:**
+---
+
+### Feature 4: View Details of a Customer
+
+**Purpose:**  
+Allows users to view detailed information about a specific customer.
+
+**How to Use It:**  
+- **Command Format:** 
 ```
 view <customer id>
 ```
-
-**Details:** 
-- **ID:** Integer of the customer to view.
-
-**Example:** `view 69`
-
-### Find Customers by Details
-
-**Purpose:** Find customers by their name or user ID, especially useful for returning customers.
-
-**Command:**
+- **Example:** 
 ```
-filter --name <customer name>
-filter --id <customer id>
-filter --job <job name>
+view 69
 ```
 
-**Details:**
-- **Name:** Case-sensitive, alphanumeric.
-- **ID:** Must be an integer.
-- **Job:** Case-insensitive, alphanumeric.
+#### Parameters
+| Parameter | Expected Format             | Explanation                                         |
+|-----------|-----------------------------|-----------------------------------------------------|
+| ID        | Integer (0 to the last ID)  | The ID must be a valid integer within the registered range. This ensures you can view details for an existing customer. |
 
-**Examples:**
-- `filter --name John Doe`
-- `filter --id 69`
-- `filter --job doctor`
+#### What to Expect
+- **If Successful:** The details of the customer with the specified ID will be displayed.
+- **If There is an Error:** 
+  - Invalid ID: "No customer with `<Customer ID>` exists. Please recheck the ID."
 
-### Save Notes/Remarks About Customers
+**Handling Duplicates:**  
+- There can be no duplicate customer IDs due to system constraints on ID uniqueness.
+- While other information like name and address can be duplicated, each customer ID is unique, ensuring you always retrieve the correct customer record.
 
-**Purpose:** To recall any particular notable details about the customer.
+---
+### Feature 5: Find a Customer by Details
 
-**Command:**
+**Purpose:**  
+Enables users to search for and display all customers who match the specified details such as name, job, or ID.
+
+**How to Use It:**  
+- **Command Format:** 
 ```
-note <customer id> <note>
+filter --<flag> <flag field>
+```
+- **Examples:** 
+```
+filter --name TAN LESHEW
+filter --job doctor of computer science
+filter --id 69
 ```
 
-**Details:** Just a string input.
+#### Parameters
+| Parameter | Expected Format       | Explanation                                                                 |
+|-----------|-----------------------|-----------------------------------------------------------------------------|
+| name      | Any string            | Input will be converted to block letters for consistent and accurate search.|
+| job       | Any string            | Searches are case-insensitive, reflecting the non-sensitive nature of job titles.|
+| id        | Integer number        | Must be an integer as IDs are unique identifiers for each customer.         |
 
-**Example:** `note 55 Mr. Tan is a problematic customer, complaining about scams for the 404th time. Just ignore him.`
+#### What to Expect
+- **If Successful:** 
+  - Message: "Here are all the customers that match your search: (List of customers)."
+- **If There is an Error:** 
+  - Missing field: "Please provide a name/job/id." (Specific to the flag used)
+  - Invalid or unsupported flag: "Please provide a valid flag."
+  - No matching customers: "No customers were found. Please check the name/job/id." (Specific to the flag)
 
-### Add/Replace the Decision of Which Tier of Credit Card to Assign
+**Handling Duplicates:**  
+- For `name` and `job` fields: Multiple customers can have the same names or jobs. The command will list all matching entries.
+- For the `id` field: Since customer IDs are intended to be unique, finding multiple customers with the same ID will
+  trigger a warning: 
+  - "There seems to be multiple customers tagged to the same ID, use the delete command to remove all customers with the affected ID, and re-add customers accordingly."
+---
 
-**Purpose:** Assign a credit card tier to a new or returning customer.
+### Feature 6: Save Remarks About Customers
 
-**Command:**
+**Purpose:**  
+Allows users to save specific notes or remarks about a customer, which can be viewed later to recall notable details.
+
+**How to Use It:**  
+- **Command Format:** 
+```
+note <customer id> <note here>
+```
+- **Example:** 
+```
+note 55 He is a problematic customer.
+```
+
+#### Parameters
+| Parameter | Expected Format       | Explanation                                                              |
+|-----------|-----------------------|--------------------------------------------------------------------------|
+| ID        | Integer (0 to the last ID) | Ensures the note is attached to a valid customer ID.                     |
+| Note      | Any string            | Notes are case-insensitive and can include any textual information.      |
+
+#### What to Expect
+- **If Successful:** 
+  - Message: "Note has been added to Customer `<Customer ID>`."
+- **If There is an Error:** 
+  - Invalid ID: "No customer with `<Customer ID>` exists. Please input a valid ID."
+
+**Handling Duplicates:**  
+- Although customer IDs should be unique, in the rare case where duplicates are detected, the following error message will be shown:
+  - "Sorry, it appears that multiple customers with id: `<Customer ID>` exist. Please use the delete command to remove the duplicated customer ID."
+
+---
+
+### Feature 7: Add/Replace Credit Card Tier
+
+**Purpose:**  
+Allows users to assign or update the credit card tier for a customer. This is particularly useful for managing new, existing, or returning customers who may not have been assigned a credit card tier initially or who need their current tier updated.
+
+**How to Use It:**  
+- **Command Format:** 
 ```
 tag <customer id> <tier>
 ```
+- **Example:** 
+```
+tag 69 reject
+```
 
-**Details:**
-- **Tier:** One of 'gold', 'silver', 'bronze', 'reject' (case-insensitive).
+#### Parameters
+| Parameter | Expected Format       | Explanation                                                              |
+|-----------|-----------------------|--------------------------------------------------------------------------|
+| ID        | Integer (0 to the last ID) | Ensures the command targets a valid customer ID.                        |
+| Tier      | String (gold, silver, bronze, reject) | Defines the specific credit card tier to be assigned or updated.        |
 
-**Example:** `tag 69 gold`
+#### What to Expect
+- **If Successful:** 
+  - Message: "Customer `<Customer ID>` has been tagged with <tier> tier."
+- **If There is an Error:** 
+  - Invalid ID: "No customer with `<Customer ID>` exists. Please recheck the ID."
+  - Invalid tier: "No tier named `<tier>` exists. Please recheck the tier name."
 
-### View the Help Menu
+**Handling Duplicates:**  
+- If a customer already has a tier assigned and a new `tag` command is issued, the existing tier will be updated to the new tier specified. This ensures that customers always have the most appropriate tier based on their current status or eligibility.
 
-**Purpose:** Allow users to view a guide and list of commands.
+---
+### Feature 8: Help
 
-**Command:**
+**Purpose:**  
+This feature provides users with quick access to the user guide for the application, helping them understand how to use various features effectively.
+
+**How to Use It:**  
+- **Command Format:** 
+```
+help
+```
+- **Example:** 
 ```
 help
 ```
 
-### Exit the Program
+#### Parameters
+- **Flag:** N/A
+  - There are no parameters required for this command.
 
-**Purpose:** To close the program gracefully.
+#### What to Expect
+- **If Successful:** 
+  - No immediate message is displayed in the command interface.
+  - Opens up a dialog box that provides a link to the user guide markdown file, allowing users to easily access detailed instructions and information.
 
-**Command:**
+**Handling Duplicates:**  
+- N/A as this command does not involve processing or displaying data that could involve duplicates.
+
+---
+### Feature 9: Exit
+
+**Purpose:**  
+Allows users to exit the application through a simple command, eliminating the need to use the window's close button or external controls.
+
+**How to Use It:**  
+- **Command Format:** 
 ```
 exit
 ```
+- **Example:** 
+```
+exit
+```
+
+#### Parameters
+- **Flag:** N/A
+  - No parameters are needed to execute this command.
+
+#### What to Expect
+- **If Successful:** 
+  - The message "Terminating program…" is displayed.
+  - The program will then exit after a short delay, effectively closing the application.
+
+**Handling Duplicates:**  
+- N/A as this command is unique and does not process data that could involve duplicates.
 
 --------------------------------------------------------------------------------------------------------------------
 
