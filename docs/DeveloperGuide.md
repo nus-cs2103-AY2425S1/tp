@@ -416,7 +416,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 Data Requirements
 1. Size: The system should support storage for up to 500 guests and 50 vendors per wedding. Data size should not exceed 10 MB for each wedding event.
 2. Volatility: Guest lists and vendor details may change frequently, especially closer to the event date. Therefore, the system must accommodate dynamic data updates and edits.
-3. Persistency: All guest, vendor, and event information must be saved persistently in a txt file and remain accessible even after system shutdown or failure.
+3. Persistency: All guest, vendor, and event information must be saved persistently in a text file and remain accessible even after system shutdown or failure.
 4. Backup Frequency: Automatic backups of data should be created whenever the application is closed.
 
 Environment Requirements
