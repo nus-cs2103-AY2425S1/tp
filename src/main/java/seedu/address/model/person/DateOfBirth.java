@@ -13,8 +13,8 @@ import seedu.address.commons.util.DateUtil;
 public class DateOfBirth extends DateUtil {
     public static final String MESSAGE_CONSTRAINTS = "Date of birth should not be after today's date";
 
-    public final LocalDate value;
-    public final String dateOfBirthString;
+    public final String value;
+
     /**
      * Constructs a {@code DateOfBirth}.
      *
@@ -23,8 +23,7 @@ public class DateOfBirth extends DateUtil {
     public DateOfBirth(String dob) {
         requireNonNull(dob);
         checkArgument(isValidDateOfBirth(dob), MESSAGE_CONSTRAINTS);
-        this.value = DateUtil.formatDate(dob);
-        this.dateOfBirthString = dob;
+        this.value = dob;
     }
 
     /**
@@ -38,7 +37,7 @@ public class DateOfBirth extends DateUtil {
 
     @Override
     public String toString() {
-        return this.dateOfBirthString;
+        return this.value;
     }
 
     @Override

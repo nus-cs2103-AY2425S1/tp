@@ -42,13 +42,4 @@ public class DateUtil {
         LocalDate parsedDate = LocalDate.parse(date, DATE_FORMATTER);
         return parsedDate.isAfter(LocalDate.now());
     }
-
-    /**
-     * Returns the formatted date.
-     *
-     * @param date The date to be formatted.
-     */
-    public static LocalDate formatDate(String date) {
-        return LocalDate.parse(date, DATE_FORMATTER);
-    }
 }
