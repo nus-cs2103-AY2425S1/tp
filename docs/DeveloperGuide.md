@@ -339,9 +339,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-
---------------------------------------------------------------------------------------------------------------------
-
+* **CLI**: Command Line Interface, allows users to interact with the application by typing commands instead of using a graphical interface.
+* **Macro**: A feature that automates repetitive tasks by allowing users to combine multiple commands into one.
+* **Logging**: The process of documenting patient session details, actions taken, and other relevant data.
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
