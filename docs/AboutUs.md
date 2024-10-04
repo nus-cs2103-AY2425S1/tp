@@ -52,3 +52,14 @@ Hello my name is ziyan and I love cs2103T and cs2101
 
 - Role: Developer
 - Responsibilities: Testing + Deliverables
+
+### Teo Choon Keong
+
+<img src="images/tckeong.png" width="200px">
+
+Hello my name is Choon Keong and I like singing.
+
+[[github](https://github.com/tckeong)] [[portfolio](team/johndoe.md)]
+
+- Role: Developer
+- Responsibilities: Logic
