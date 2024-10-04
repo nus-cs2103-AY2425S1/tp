@@ -10,6 +10,7 @@ We are a team based in the [School of Computing, National University of Singapor
 You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
+AY2425S1-CS2103T-F14a-4
 
 ### John Doe
 
@@ -21,41 +22,52 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Justin Jiang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yooplo.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/yooplo)]
+[[portfolio](team/justin.md)]
 
-* Role: Team Lead
+* Role: Developer
 * Responsibilities: UI
 
-### Johnny Doe
+### Zheng Jie
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/krashkart.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/KrashKart)] [[portfolio](team/krashkart.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Chen Yixun
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/cyx22222003.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/cyx22222003)]
+[[portfolio](team/cyx22222003.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Nguyen Tien Hoang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/nguyen.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/blackpanther9229)]
+[[portfolio](team/nguyen.md)]
 
 * Role: Developer
 * Responsibilities: UI
+
+
+### Christopher Tan
+
+<img src="images/chrisjohntan.png" width="200px">
+
+[[github](http://github.com/chrisjohntan)]
+[[portfolio](team/chrisjohntan.md)]
+
+* Role: Developer
+* Responsibilities: Integration
