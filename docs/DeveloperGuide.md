@@ -343,20 +343,20 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
 4. Cher show success message.
 
    Use case ends.
-   
+
 **Extensions**
 
 * 1a. Cher detects error in user input.
   - 1a1. Cher raises error.
   - 1a2. Cher shows correct input format.
-  
+
   Use case ends.
-  
+
 * 1b. Cher detects duplicate contacts.
   - 1b1. Cher raises error.
-  
+
   Use case ends.
-   
+
 #### Use case: UC2 - Delete a contact
 
 **MSS**
@@ -380,7 +380,7 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
   Use case ends.
 * 3b. User no longer wants to delete a contact.
     - 3b1. User gives empty input.
-  
+
   Use Case ends.
 * 4a. Cher detects error in user input.
     - 4a1. Cher shows error message.
@@ -393,7 +393,7 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
 
 1. User enters view contacts command.
 2. Cher displays all contacts in memory to user.
-   
+
     Use case ends.
 
 **Extensions**
