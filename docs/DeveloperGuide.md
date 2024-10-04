@@ -330,15 +330,15 @@ Use case ends.
 * 2a. The input fields are invalid
     * 2a1. System display an error message
     * 2a2. System request for correct data.
-    * 2a3. User enters new data. 
-  
+    * 2a3. User enters new data.
+
         Steps 2a1-2a3 are repeated until the data entered are correct.
         Use case resumes from step 3.
 
 * 3a. Patient exists in contact details
 
     * 3a1. System System display an error message.
-        
+
         Use case ends.
 
 **Use case: U02 Delete Patient Detail**
