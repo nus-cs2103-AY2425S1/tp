@@ -13,7 +13,7 @@ You can reach us at the email `e1113201@u.nus.edu`
 
 ### Bing Heng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/buffwuff1712.png" width="200px">
 
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
