@@ -272,15 +272,18 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Target user profile**:  university students   
+   
+* has a need to manage a significant number of contacts  
+* prefer desktop apps over other types   
+* can type fast  
+* prefers typing to mouse interactions  
+* is reasonably comfortable using CLI apps  
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
-
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: 
+* manage contacts faster than a typical mouse/GUI driven app  
+* can connect people in the same modules/class/clubs/hobby, creating an active environment.  
+* make it easier for users to look for contacts of profs and teaching staff.  
 
 
 ### User stories
