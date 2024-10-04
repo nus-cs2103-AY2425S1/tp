@@ -329,19 +329,19 @@ Use case ends.
 
   * 1a1. TalentHub outputs a generic error message about incorrect command format.
 
-    Use case resumes at step 1.
+    Use case ends.
   
 * 1b. Any parameter is missing or invalid.
 
   * 1b1. TalentHub outputs an error message specifying the issue.
 
-    Use case resumes at step 1.
+    Use case ends.
 
 * 1c. An identical phone number is detected.
 
   * 1c1. TalentHub outputs an error message specifying the issue.
 
-    Use case resumes at step 1.
+    Use case ends.
 
 **Use case: UC02 - Delete Contact after List**
 
@@ -376,19 +376,19 @@ Use case ends.
 
   * 1a1. TalentHub outputs a generic error message about incorrect command format.
 
-    Use case resumes at step 1.
+    Use case ends.
 
 * 1b. The list is empty.
 
   * 1b1. System shows an error message specifying the list is empty.
 
-    Use case resumes at step 1.
+    Use case ends.
 
 * 1c. The given index is invalid.
 
   * 1c1. System shows an error message.
 
-    Use case resumes at step 1.
+    Use case ends.
 
 **Use case: UC05 - Find Contact**
 
@@ -405,13 +405,13 @@ Use case ends.
 
   * 1a1. TalentHub outputs a generic error message about incorrect command format.
 
-    Use case resumes at step 1.
+    Use case ends.
 
 * 1b. The keyword is empty.
 
   * 1b1. System shows an error message.
 
-    Use case resumes at step 1. 
+    Use case ends.
 
 
 **Use case: UC06 - List All Contacts**
@@ -429,7 +429,7 @@ Use case ends.
 
   * 1a1. TalentHub outputs a generic error message about incorrect command format.
 
-    Use case resumes at step 1.
+    Use case ends.
 
 
 **Use case: UC07 - Add Events**
@@ -447,13 +447,13 @@ Use case ends.
 
   * 1a1. TalentHub outputs a generic error message about incorrect command format.
 
-    Use case resumes at step 1.
+    Use case ends.
 
 * 1b. A duplicate event is detected:
   
   * 1b1. System displays a message informing the Talent Manager of the duplicate event and does not add it.
 
-    Use case resumes at step 1.
+    Use case ends.
 
     
 **Use case: UC08 - List All Events**
@@ -471,7 +471,7 @@ Use case ends.
 
   * 1a1. TalentHub outputs a generic error message about incorrect command format.
 
-    Use case resumes at step 1.
+    Use case ends.
 
 * 2a. If no events are scheduled.
 
@@ -502,19 +502,19 @@ Use case ends.
 
   * 1a1. TalentHub outputs a generic error message about incorrect command format.
 
-    Use case resumes at step 1.
+    Use case ends.
 
 * 1b. The list is empty.
 
     * 1b1. System shows an error message specifying the list is empty.
 
-      Use case resumes at step 1.
+      Use case ends.
   
 * 1c. The given index is invalid.
 
   * 1c1. TalentHub shows an error message.
 
-    Use case resumes at step 1.
+    Use case ends.
 
 
 ### Non-Functional Requirements
