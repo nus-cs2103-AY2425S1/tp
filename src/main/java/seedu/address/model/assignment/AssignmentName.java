@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents an Assignment's name in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
-public class Name {
+public class AssignmentName {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters and spaces, and it should not be blank";
@@ -18,17 +18,17 @@ public class Name {
      */
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
-    public final String fullName;
+    public final String assignmentName;
 
     /**
      * Constructs a {@code Name}.
      *
-     * @param name A valid name.
+     * @param assignmentName A valid name.
      */
-    public Name(String name) {
-        requireNonNull(name);
-        checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        fullName = name;
+    public AssignmentName(String assignmentName) {
+        requireNonNull(assignmentName);
+        checkArgument(isValidName(assignmentName), MESSAGE_CONSTRAINTS);
+        this.assignmentName = assignmentName;
     }
 
     /**
@@ -41,7 +41,7 @@ public class Name {
 
     @Override
     public String toString() {
-        return fullName;
+        return assignmentName;
     }
 
     @Override
@@ -51,17 +51,17 @@ public class Name {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Name)) {
+        if (!(other instanceof AssignmentName)) {
             return false;
         }
 
-        Name otherName = (Name) other;
-        return fullName.equals(otherName.fullName);
+        AssignmentName otherName = (AssignmentName) other;
+        return assignmentName.equals(otherName.assignmentName);
     }
 
     @Override
     public int hashCode() {
-        return fullName.hashCode();
+        return assignmentName.hashCode();
     }
 
 }

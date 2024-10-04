@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Person;
 
 /**
@@ -68,7 +69,6 @@ public interface Model {
      * {@code person} must not already exist in the address book.
      */
     void addPerson(Person person);
-
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
@@ -84,4 +84,13 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+    /**
+     * Adds the given assignment.
+     * {@code Assignment} must not already exist in the address book.
+     */
+    void addAssignment(Assignment assignment);
+    /**
+     * Returns true if a assignment with the same identity as {@code assignment} exists in the app.
+     */
+    boolean hasAssignment(Assignment assignment);
 }
