@@ -485,13 +485,16 @@ Use case ends.
 **MSS**
 
 1. Talent Manager [List Events (UC08)](#)
-2.  Talent Manager [Delete Event (UC10)](#)
+2. Talent Manager [Delete Event (UC10)](#)
 
+   Use case ends.
 
 **Use case: UC10 - Delete Event**
 
 1. Talent Manager requests to delete a specific event in the list
 1. TalentHub deletes the event
+
+   Use case ends.
 
 **Extensions**
 
