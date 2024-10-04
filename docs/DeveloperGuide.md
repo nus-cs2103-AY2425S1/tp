@@ -262,27 +262,48 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* Financial advisors who frequently or specialise primarily in client outreach
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
+* manage contacts faster than a typical mouse/GUI driven app
+* Keep track of who has and has not been contacted recently
+* Sort clients based on various categories
+* Filter for clients by above categories
+* 
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                            | I want to …​                                                               | So that I can…​                                          |
+|----------|----------------------------------------------------|----------------------------------------------------------------------------|----------------------------------------------------------|
+| `*`      | Forgetful Financial Advisor                        | Have a quick view of the contacts I need to contact                        | Keep track of them without using my own memory           |
+| `**`     | Financial Advisor with many clients                | Note who I have contacted and have not contacted in a specific time period | Contact those who I have not reached out to recently     |
+| `**`     | Financial Advisor with many clients                | Keep a template of catch-up messages to send to clients                    | Efficiently send messages to clients when necessary      |
+| `*`      | Freshly registered Financial Advisor               | Import contacts from my phone via CSV file                                 | Have a starting list of contacts to work with            |
+| `**`     | Forgetful Financial Advisor                        | Have automated reminders when I have not contacted a client in a while     | Be reminded to catch up with them                        |
+| `***`    | Financial Advisor who just met someone new         | Add contacts                                                               | Have the contact in my list                              |
+| `***`    | Retiring Financial Advisor                         | Delete contacts                                                            | Get rid of contacts that are no longer useful            |
+| `*`      | Organised Financial Advisor                        | Create folders to group contacts under predetermined/self-created groups   | Sort my contacts accordingly                             |
+| `**`     | Meticulous Financial Advisor                       | Edit contact details                                                       | Update when their details as necessary                   |
+| `***`    | Meticulous Financial Advisor                       | Assign tags to my contacts                                                 | Easily sort my contacts by certain tags                  |
+| `**`     | Financial Advisor who woke up with someone in mind | Filter my contacts based on attributes                                     | Find that one contact quickly                            |
+| `*`      | Meticulous Financial Advisor                       | Add clients’ policies to their contact                                     | Keep track of what policies the client is under          |
+| `***`    | Financially Struggling Financial Advisor           | Keep track of which clients have made payments                             | Keep track of commissions                                |
+| `**`     | Boomer Financial Advisor                           | Run through a tutorial on how to use the app                               | Understand how the functions work                        |
+| `*`      | Financial Advisor who just downloaded the app      | See sample data                                                            | See how a populated version of the app will look like    |
+| `*`      | Meticulous Financial Advisor                       | Upload copies of clients’ PDF policies to their contact                    | Keep record of clients’ contracts for easy reference     |
+| `**`     | Financial Advisor who is being chased by his boss  | Add reminders on when clients' contracts need to be renewed                | Ensure clients are always up to date on their contracts  |
+| `*`      | Financial Advisor who just downloaded the app      | Delete sample/dummy data                                                   | Start using the app in a fresh state                     |
+| `*`      | Financial Advisor with many clients                | Add profile pictures to my clients                                         | Recognize my clients when I meet them in person          |
+| `*`      | Financial Advisor who does his job too well        | Attach my clients' likes/dislikes                                          | Connect with them on a more personal level               |
+| `***`    | Lost Financial Advisor                             | See a help page of all commands                                            | Refer back to the page anytime I forget the instructions |
+| `***`    | Forgetful Financial Advisor                        | See all my contacts                                                        | View my entire contact list                              |
 
 *{More to be added}*
 
@@ -290,28 +311,92 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to add a new contact.
+2.  AddressBook adds new contact and shows a confirmation message.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. AddressBook detects an error in the provided details.
+
+    * 1a1. AddressBook shows an error message.
+
+      Use case ends.
+
+* 1a. AddressBook detects the existence of a duplicate contact.
+
+    * 1a1. AddressBook requests for confirmation to add new contact.
+        * 1a1a1. User confirms.
+        * 1a1a2. AddressBook adds the new contact and displays a confirmation message.
+      
+          Use case ends.
+      
+        * 1a1b1. User declines.
+        * 1a1b2. AddressBook displays a confirmation message.
+      
+          Use case ends.
+
+**Use case: Find a contact**
+
+**MSS**
+
+1.  User requests to find a contact.
+2.  AddressBook shows a list of related contacts.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
 
   Use case ends.
 
-* 3a. The given index is invalid.
+**Use case: Mark a contact as paid or unpaid**
 
-    * 3a1. AddressBook shows an error message.
+**MSS**
 
-      Use case resumes at step 2.
+1.  User requests to mark or unmark a contact.
+2.  AddressBook marks or unmarks contact and shows a confirmation message.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given index is invalid.
+
+    * 1a1. AddressBook shows an error message.
+
+      Use case ends.
+
+**Use case: Delete a contact**
+
+**MSS**
+
+1.  User requests to delete a contact.
+2.  AddressBook requests confirmation.
+3. User confirms.
+4. AddressBook deletes the contact and shows a confirmation message.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given index is invalid.
+
+    * 1a1. AddressBook shows an error message.
+
+      Use case ends.
+  
+* 2a. User declines.
+
+    * AddressBook shows a confirmation meesage.
+  
+      Use case ends.
 
 *{More to be added}*
 
