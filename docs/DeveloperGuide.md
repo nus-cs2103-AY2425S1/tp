@@ -359,7 +359,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-* **UI**: User Interface: The medium through which users interact with a system, encompassing both graphical *(GUI)* and text-based *(CLI)* elements.
+* **UI**: User Interface: The medium through which users interact with a system, encompassing both graphical *(GUI)* and text-based *(CLI)* elements
 * **GUI**: Graphical User Interface - A visual-based interface where users interact with the system through graphical elements like icons and windows
 * **CLI**: Command Line Interface - A text-based interface where users interact with the system by typing commands
 
