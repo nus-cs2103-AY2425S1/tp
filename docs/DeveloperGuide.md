@@ -291,8 +291,6 @@ The three main aspects of this product are:
 * **Efficient Inventory Control**: It offers features for real-time inventory tracking and stock alerts based on predefined thresholds, helping prevent stockouts and overstocking.
 * **Performance Insights**: The product provides performance metrics to evaluate supplier reliability and order accuracy, facilitating better decision-making.
 
-
-
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
@@ -300,13 +298,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
 |----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
 | `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| `* * *`  | inventory manager                          | add a new supplier           |                                                                        |
+| `* * *`  | inventory manager                          | add a new product           |                                                                        |
+| `* * *`  | inventory manager                          | assign products to suppliers  | collectively manage products which corresponding suppliers supply                |
+| `* * `  | inventory manager                          | remove suppliers/products              | prune obsolete data   |
+| `* * `  | inventory manager                          | track order status for a supplier              | avoid delays and ensure timely stock replenishment   |
+| `* * `  | inventory manager                          | set pre-defined max stock level for products              | determine quantity to request for an order   |
+| `* * `  | experienced inventory manager                          | set pre-defined minimum stock level for a product              | ensure availability of the product at all times   |
+| `* * `  | experienced inventory manager                          | request an order from a supplier | replenish stocks of the corresponding products |
+| `* *`      | inventory manager             | set up automatic reordering based on stock levels and pre-defined thresholds | prevent stockouts and overstocking efficiently |
+| `* * `  | novice inventory manager                          | easily search suppliers/products      | browse large datasets quickly                            |
+| `* *`      | inventory manager             | receive automated re-order alerts | reduce the risk of stockouts or overstocking |
+| `* *`      | inventory manager             | view payment/order history for a supplier | so that I have a clear understanding of past cash flow and plan future expenses |
+| `* *`      | inventory manager             | get alerts in case of any supplier issues        | find a convenient replacement in time  |
+| `* *`      | inventory manager             | quickly send standardized communication to suppliers via email or messaging without leaving the interface        | streamline communication and reduce errors  |
+| `* *`      | inventory manager             | I can store contracts and terms of agreements with suppliers in the system        | quickly refer to them when negotiating orders  |
+| `* *`      | inventory manager             | be able to get printable txt of relevant information  |  get hard-copy of the information  |
+| `*`      | experienced inventory manager             | sort suppliers by some criterion        | organize data based on my needs |
+| `*`      | experienced inventory manager             | customize my dashboard to show only the relevant information        | work more efficiently based on my specific needs |
+| `*`      | inventory manager             | weekly summaries of inventory levels, orders and supplier communications | stay on top of opertions without manually checking the system |
+| `*`      | experienced inventory manager             | assign a product to multiple suppliers | have alternative options if one supplier is unable to fulfil the order |
+| `*`      | experienced inventory manager             | create macros/shortcuts for frequently used commands | save time |
+| `*`      | experienced inventory manager             | be able to see most used commands | make common processes faster |
+| `* `      | inventory manager             | update supplier information        | organize data based on my needs      |
+| `*`      | inventory manager             | be able to generate insights on supplier performance based on past interactions (e.g., delivery timeliness, order accuracy)  | make informed decisions about ongoing supplier relationships.  |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -415,15 +431,36 @@ Preconditions:
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+2.  Should be able to handle up to 50 suppliers and 3000 products without a noticeable sluggishness in performance for typical usage.
+3.  The system should respond to user commands within 500ms, even with large data.
+4.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+5.  All private supplier and store data must be encrypted to protect sensitive information.
+6.  The system should automatically back up critical data and support easy recovery in case of abrupt power or network loss.
+7.  Error messages should be clear, helping users understand and rectify their mistakes.
+8.  The system’s architecture must allow developers to easily update components without affecting the overall functionality.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Architecture Diagram**: A visual representation showing the structure of the system and how its components interact.
+* **Main Component**: Refers to the core functional modules of the app, including UI, Logic, Model, and Storage.
+* **UI (User Interface)**: The visual part of the system that allows users to interact with the application (e.g., command box, result display).
+* **CommandBox**: A UI element where users input commands to interact with the application.
+* **Logic Component**: This handles command execution and interacts with the model to perform operations like adding, deleting, or listing suppliers and inventory items.
+* **Model Component**: Holds and manages in-memory data, such as supplier and inventory information.
+* **Storage Component**: Responsible for reading from and writing to the disk, including saving user preferences and inventory data in JSON format.
+* **ObservableList**: A list that the UI can listen to and update itself automatically when the data changes.
+* **API (Application Programming Interface)**: A set of methods that different components use to interact with each other.
+* **Parser**: Converts user commands (entered as text) into objects the system can understand and execute.
+* **Undo/Redo**: A feature allowing users to reverse or reapply previous actions, supported by a history-tracking mechanism in the system.
+* **Tag**: A label associated with items in the inventory or suppliers to categorize them, stored centrally to avoid redundancy.
+* **VersionedAddressBook**: A data structure used to support the undo/redo functionality, storing multiple states of the address book.
+* **JavaFX**: A framework used to build the graphical user interface, managing visual elements like windows and buttons.
+* **.fxml Files**: XML-based files used to define the layout of the UI components in JavaFX.
+* **CommandResult**: Encapsulates the result of a command execution, such as success or error messages.
+* **Sequence Diagram**: A type of diagram that shows how different components of the system interact over time during a specific process (e.g., command execution).
+* **Supplier**: A contact responsible for supplying products for the store.
+* **Stock Level**: Current inventory, or the number of items of that product SKU, in the store.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -479,3 +516,4 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
