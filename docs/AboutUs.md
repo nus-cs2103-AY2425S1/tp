@@ -9,15 +9,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Abicharan Bhaskaran
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/abicharan.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/thenosewizard)]
+[[portfolio](team/abicharan.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: Storage & Add supplier contact
+
 
 ### Leong Soon Mun Stephane
 
@@ -26,34 +28,33 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/stephaneleong)]
 [[portfolio](team/stephaneleong.md)]
 
+
+### Chua Zhao Lin (Jasper)
+
+<img src="images/chuazhaolin.png" width="200px">
+
+[[github](http://github.com/ossaris56)]
+[[portfolio](team/chuazhaolin.md)]
+
 * Role: Developer
 * Responsibilities: Storage
 
-### Johnny Doe
+### Yan Hwee
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yanhwee.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/yanhwee)]
+[[portfolio](team/yanhwee.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Storage, Contact
 
-### James Doe
+### Lim Jiale
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jialegitgud.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/jialegitgud)]
+[[portfolio](team/jialegitgud.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Deliverables and Deadlines, Scheduling and Tracking
+* Responsibilities: In charge of Goods, Goods-Supplier Integrations
