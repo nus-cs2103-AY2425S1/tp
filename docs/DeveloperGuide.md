@@ -287,63 +287,71 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                    | I want to …​                                  | So that I can…​                                                          |
-|----------|----------------------------|-----------------------------------------------|--------------------------------------------------------------------------|
-| `* * *`  | user                       | save a client's personal information          | contact them easily                                                      |
-| `* * *`  | user                       | save a client's rental information            | view their respective properties                                         |
-| `* * *`  | user                       | edit a client's personal information          | modify their personal details                                            |
-| `* * *`  | user                       | edit a client's rental information            | modify their property's rental information                               |
-| `* * * ` | user                       | delete a client's personal information        | clear my application when he/she is no longer my client                  |
-| `* * *`  | user                       | delete a client's rental information          | clear my application when the property is not owned by my client anymore |
-| `* * *`  | user                       | find a client's personal information          | find the client easily                                                   |
-| `* * *`  | user                       | find a client's rental information            | find the client's property easily                                        |
-| `* *`    | user                       | colour code a client                          | differentiate more important clients                                     |
-| `* *`    | user                       | attach files to a client                      | attach important contracts to the respective clients                     |
-| `* *`    | user                       | assign tags to clients                        | differentiate clients by any interesting factors                         |
-| `* *`    | user                       | autofill CLI commands                         | easily assess the command line without typing the command again          |
-| `* *`    | user                       | export all client's personal information      | save it somewhere else                                                   |
-| `* *`    | user                       | export a specific client's rental information | save it somewhere else                                                   |
-| `*`      | user                       | send emails to a client                       | schedule meetings with them                                              |
-| `*`      | user                       | set reminders for a client                    | remember my schedule with individual client                              |
-| `*`      | user                       | lock my application                           | protect my data                                                          |
+| Priority | As a …​                 | I can …​                                  | So that I can…​                                                        |
+|----------|----------------------------|----------------------------------------------|---------------------------------------------------------------------------|
+| `* * *`  | user                       | save a client's personal information         | contact them easily                                                       |
+| `* * *`  | user                       | save a client's rental information           | view their respective properties                                          |
+| `* * *`  | user                       | edit a client's personal information         | modify their personal details                                             |
+| `* * *`  | user                       | edit a client's rental information           | modify their property's rental information                                |
+| `* * * ` | user                       | delete a client's personal information       | clear my application when he/she is no longer my client                   |
+| `* * *`  | user                       | delete a client's rental information         | clear my application when the property is not owned by my client anymore  |
+| `* * *`  | user                       | find a client's personal information         | find the client easily                                                    |
+| `* * *`  | user                       | find a client's rental information           | find the client's property easily                                         |
+| `* *`    | user                       | colour code a client                         | differentiate more important clients                                      |
+| `* *`    | user                       | attach files to a client                     | attach important contracts to the respective clients                      |
+| `* *`    | user                       | assign tags to clients                       | differentiate clients by any interesting factors                          |
+| `* *`    | user                       | autofill CLI commands                        | easily assess the command line without typing the command again           |
+| `* *`    | user                       | export all client's personal information     | save it somewhere else                                                    |
+| `* *`    | user                       | export a specific client's rental information | save it somewhere else                                                    |
+| `*`      | user                       | send emails to a client                      | schedule meetings with them                                               |
+| `*`      | user                       | set reminders for a client                   | remember my schedule with individual client                               |
+| `*`      | user                       | lock my application                          | protect my data                                                           |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `TrueRental` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TrueRental` system and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: Add a client**
 
 **MSS**
 
 1.  User chooses to add a client
-2.  User types in a command consisting various flags and options
-3.  User enters client's information
-4.  TrueRental updates new client information
+2.  User enters client's information
+3.  System validates user input
+4.  System adds new client information
+5.  System notifies user upon successful add operation
 
     Use case ends.
 
 **Extensions**
 
-* 2a. TrueRental detects error for incorrect flag
+* 3a. System detects error for invalid instruction
 
-    * 2a1. TrueRental prompts error for incorrect flag used
-    * 2a2. User enters correct flag
-
-    Use case ends.
+    * 3a1. System prompts error for invalid instruction
+    * 3a2. User enters new instruction 
+    * Steps 3a1-3a2 are repeated until instruction is valid
+    
+    Use case continues from step 3.
  
-* 3a. TrueRental detects error within client's information
+* 3b. System detects error in client's information
 
-    * 2a1. TrueRental prompts error for incorrect client's information
-    * 2a2. User enters correct client's information
+    * 3b1. System prompts error for invalid client's information
+    * 3b2. User enters new client's information
+    * Steps 3b1-3b2 are repeated until client's information is valid
+  
+    Use case continues from step 3.
 
-    Use case ends.
+* 3c. System detects duplicated client's information
 
-* 3b. TrueRental detects duplicated client's information
+    * 3c1. System prompts error for duplicated client's information
+    * 3c2. User enters new non-duplicated client's information
+    * Steps 3c1-3c2 are repeated until client's information is valid
 
-    * 2a1. TrueRental prompts error for duplicated client's information
-    * 2a2. User enters correct non-duplicated client's information
+    Use case continues from step 4.
+
+* *a. At any time, user chooses not proceed on with the operation.
 
     Use case ends.
 
@@ -351,49 +359,167 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User chooses to add rental information to a specific client
-2.  User types in a command consisting various flags and options
+1.  User chooses to add rental information
+2.  User selects client
 3.  User enters client's rental information
-4.  TrueRental updates new client information
+4.  System validates user input
+5.  System updates new client information
+6.  System notifies user upon successful add operation
 
     Use case ends.
 
 **Extensions**
 
-* 2a. TrueRental detects error for incorrect flag or option
+* 4a. System detects error for invalid instruction
 
-    * 2a1. TrueRental prompts error for incorrect flag or option used
-    * 2a2. User enters correct flag or option
+    * 4a1. System prompts error for invalid instruction
+    * 4a2. User enters new instruction
+    * Steps 4a1-4a2 are repeated until instruction is valid
+
+    Use case continues from step 4.
+
+* 4b. System detects error for invalid client
+
+    * 4b1. System prompts error for invalid client
+    * 4b2. User selects new client
+    * Steps 4b1-4b2 are repeated until selected client is valid
+
+    Use case continues from step 4.
+
+* 4c. System detects error in client's rental information
+
+    * 4c1. System prompts error for invalid client's rental information
+    * 4c2. User enters new client's rental information
+    * Steps 4c1-4c2 are repeated until client's rental information is valid
+  
+    Use case continues from step 4.
+
+* 4d. System detects duplicated client's rental information
+
+    * 4d1. System prompts error for duplicated client's rental information
+    * 4d2. User enters new non-duplicated client's rental information
+    * Steps 4d1-4d2 are repeated until client's rental information is valid
+    
+    Use case continues from step 5.
+
+* *a. At any time, user chooses not proceed on with the operation.
 
   Use case ends.
 
-* 3a. TrueRental detects error within client's rental information
-
-    * 2a1. TrueRental prompts error for incorrect client's rental information
-    * 2a2. User enters correct client's rental information
-
-  Use case ends.
-
-* 3b. TrueRental detects duplicated client's rental information
-
-    * 2a1. TrueRental prompts error for duplicated client's rental information
-    * 2a2. User enters correct non-duplicated client's information
-
-  Use case ends.
-
-
-**Use case: Find a person based on keyword**
+**Use case: Find a client**
 
 **MSS**
 
-1.  User enter keywords and requests to find a person
-2.  TrueRental find a list of persons matching the keywords
+1.  User chooses to find a client
+2.  User enters keyword
+3.  System validates user input
+4.  System filters list of client based on keyword
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 3a. System detects error for invalid instruction
+
+    * 3a1. System prompts error for invalid instruction
+    * 3a2. User enters new instruction
+    * Steps 3a1-3a2 are repeated until instruction is valid
+  
+    Use case continues from step 3.
+
+* 3b. System detects error for invalid keyword
+
+    * 3b1. System prompts error for invalid keyword
+    * 3b2. User enters new keyword
+    * Steps 3b1-3b2 are repeated until keyword is valid
+  
+    Use case continues from step 4.
+
+* 4a. The list is empty.
+
+    Use case ends.
+
+* *a. At any time, user chooses not proceed on with the operation.
+
+  Use case ends.
+  
+**Use case: Edit a client's information**
+
+**MSS**
+
+1.  User chooses to edit a client's information. 
+2.  User enters the client information that he / she wants to update.
+3.  System validates user input. 
+4.  System updates the client's information as requested. 
+5.  System notifies user for successful modification. 
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. System detects error for invalid instruction.
+
+    * 3a1. System prompts error for invalid instruction.
+    * 3a2. User enters new instruction.
+    * Steps 3a1-3a2 are repeated until the instruction is valid.
+
+  Use case resumes from step 3.
+
+* 3b. System detects error for invalid client information.
+
+    * 3b1. System prompts error for invalid client information.
+    * 3b2. User enters new client information.
+    * Steps 3b1-3b2 are repeated until the client information is valid.
+  
+  Use case resumes from step 3.
+    
+* 4a. System fails to update the client's information.
+
+    * 4a1. System prompts user that edit has failed. 
+  
+  Use case resumes from step 1 or user choose not to proceed and use case ends.
+    
+* *a. At any time, User chooses not to proceed with the operation. 
+
+  Use case ends.
+
+**Use case: Edit a client's rental information**
+
+**MSS**
+
+1.  User chooses to edit a client's rental information.
+2.  User enters the rental information that he / she wants to update.
+3.  System validates user input.
+4.  System updates the client's rental information as requested.
+5.  System notifies user for successful modification.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. System detects error for invalid instruction.
+
+    * 3a1. System prompts error for invalid instruction.
+    * 3a2. User enters new instruction.
+    * Steps 3a1-3a2 are repeated until the instruction is valid.
+  
+  Use case resumes from step 3.
+
+* 3b. System detects error for invalid rental information.
+
+    * 3b1. System prompts error for invalid rental information.
+    * 3b2. User enters new rental information.
+    * Steps 3b1-3b2 are repeated until the rental information is valid.
+  
+  Use case resumes from step 3.
+  
+* 4a. System fails to update the client's rental information.
+
+    * 3a1. System prompts user that edit has failed.
+
+  Use case resumes from step 1 or user choose not to proceed and use case ends.
+
+* *a. At any time, User chooses not to proceed with the operation.
 
   Use case ends.
 
@@ -448,11 +574,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 clients without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  A user should be able to see clearly with reasonably large texts.
 5.  The user interface should be simple, functional, and visually inoffensive to the majority of users.
 6.  A new user should be able to view information intuitively, even if they do not know the commands used to perform tasks.
+7.  Should be able to type up to 2000 characters without a noticeable lag.
 
 *{More to be added}*
 
@@ -463,7 +590,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **User**: A letting agent that is using TrueRental to manage the contact information of their clients
 * **Client**: An individual that is renting a property from a letting agent
 * **Letting agent**: An individual that facilitates a property rental agreement
-
+* **System**: TrueRental desktop application
+* **Client's information**: A client's information containing name, phone number and email, not meant to be shared with others.
+* **Client's rental information**: A client's rental information containing address, rental start date, rental end date, rent due date, monthly rent amount, deposit amount, tenant list, not meant to be shared with others.
+* **MSS**: Main Success Scenario.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
