@@ -2,15 +2,16 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.DateUtil.isAfterToday;
+import static seedu.address.commons.util.DateUtil.isValidDate;
 
-import seedu.address.commons.util.DateUtil;
 /**
  * Represents a patient's date of birth in MediBase3.
  * Guarantees: immutable; is valid as declared in {@link #isValidDateOfBirth(String)}
  */
 public class DateOfBirth {
-    public static final String MESSAGE_CONSTRAINTS = "Date of birth should not be after today's date";
-
+    public static final String MESSAGE_CONSTRAINTS_FUTURE_DATE = "Date of birth should not be after today's date";
+    public static final String MESSAGE_CONSTRAINTS_WRONG_FORMAT = "Date of birth should be in the format of yyyy-MM-dd";
     public final String value;
 
     /**
@@ -20,7 +21,8 @@ public class DateOfBirth {
      */
     public DateOfBirth(String dob) {
         requireNonNull(dob);
-        checkArgument(isValidDateOfBirth(dob), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidDate(dob), MESSAGE_CONSTRAINTS_WRONG_FORMAT);
+        checkArgument(isValidDateOfBirth(dob), MESSAGE_CONSTRAINTS_FUTURE_DATE);
         this.value = dob;
     }
 
@@ -30,7 +32,7 @@ public class DateOfBirth {
      * @param dob The date of birth to be checked.
      */
     public static boolean isValidDateOfBirth(String dob) {
-        return !(DateUtil.isAfterToday(dob));
+        return !(isAfterToday(dob));
     }
 
     @Override

@@ -11,7 +11,7 @@ public class Nric {
     public static final String MESSAGE_CONSTRAINTS = "NRIC should start with S, T, F or G, "
             + "followed by 7 digits, and end with a letter.";
     //Regex accounts for both uppercase and lowercase NRIC and FIN formats
-    public static final String VALIDATION_REGEX = "^[STFG]\\d{7}[A-Z]$";
+    public static final String VALIDATION_REGEX = "(?i)^[STFG]\\d{7}[A-Z]$";
 
     public final String value;
 
@@ -32,6 +32,11 @@ public class Nric {
      */
     public static boolean isValidNric(String nric) {
         return nric.matches(VALIDATION_REGEX);
+    }
+
+    @Override
+    public String toString() {
+        return this.value;
     }
 
     @Override
