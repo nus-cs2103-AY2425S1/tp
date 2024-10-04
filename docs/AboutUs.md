@@ -21,7 +21,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Lewis 
+### Lewis Lye
 
 <img src="images/ghos7ie.png" width="200px">
 
