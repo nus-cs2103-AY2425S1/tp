@@ -36,7 +36,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-W13-1/tp/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-W13-1/tp/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -68,13 +68,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-W13-1/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-W13-1/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-W13-1/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -85,7 +85,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-W13-1/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -115,7 +115,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-W13-1/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -136,7 +136,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-W13-1/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -260,66 +260,173 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Target user**: Private School teachers, administrators.
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+**Value proposition**: Simplifies contact management by providing an all-in-one user-friendly interface for teachers/staff in private education institutions. Ease their pain of manually tracking things like attendance and parents/students’ contact.
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Target user profile 1**: Independent Private School Teachers
+
+* private school teachers, often working independently, managing their classes and responsibilities on their own.
+* private school teachers who manage multiple classes of different levels
+* have a need to track and organise details of students and parents/guardians (e.g. phone numbers, emails, addresses)
+* have a need to efficiently access information regarding students and parents/guardians for communication during various situations (e.g. parent-teacher meetings, emergencies, administrative tasks, payment)
+* have a need to edit data regarding students and parents/guardians in case of updates
+
+**Target user profile 2**: Private School Teachers working under administrations
+
+* private school teachers who work alongside or under the supervision of education administrators or managers.
+* private school teachers who manage multiple classes across various subjects
+* have a need to track and organise details of students (e.g. phone numbers, emails, addresses)
+* Parent/Guardian contacts are overseen by institution admin staff
+* have a need to efficiently access information regarding students for communication during various situations (e.g. emergencies, administrative tasks, class schedules)
+* have a need to edit data regarding students in case of updates
+
+**Target user profile 3**: Private Education Institution Managers
+
+* Managing the overall administration of the institution
+* have a need to track and organise details of students, parents/guardians, teachers and vendors (e.g. phone numbers, emails, addresses)
+* have a need to efficiently access information regarding students, parents/guardians, teachers and vendors for communication during various situations (e.g. parent-teacher meetings, emergencies, administrative tasks)
+* have a need to edit data regarding students, parents/guardians, teachers and vendors in case of updates in contact information
 
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (Won't-Have))
 
-*{More to be added}*
+
+| Priority      | As a/an           | I want to …                                                      | So that I can…                                                     |
+|---------------|-------------------|------------------------------------------------------------------|--------------------------------------------------------------------|
+| **Must-Have** | Novice user       | add new contact information (phone-number, email)                | keep the contact information in one place                          |
+| **Must-Have** | Novice user       | view contact information                                         | view the contact information of my student, Peter                  |
+| **Must-Have** | Novice user       | delete existing contact                                          | ensure all contacts stored are relevant                            |
+| **Must-Have** | Any user          | have my data automatically saved                                 | access my information seamlessly the next time I open the software |
+| Nice-to-Have  | New user          | view the help guide easily                                       | learn how to use the app                                           |
+| Nice-to-Have  | Novice user       | edit the existing contact of Peter                               | correct the contact typo                                           |
+| Nice-to-Have  | Any user          | filter the students by lesson day and time                       | find all students in a class at once                               |
+| Nice-to-Have  | Any user          | sort students by last name                                       | have the contacts sorted                                           |
+| Nice-to-Have  | Any user          | group students by class timings                                  | send class cancellations out quicker                               |
+| Nice-to-Have  | Any user          | find Peter by his last name                                      | inform Peter of homework-related matters                           |
+| Nice-to-Have  | Any user          | filter the students by subjects                                  | view the students taking the subject                               |
+| Nice-to-Have  | Any user          | edit timing of lessons of students                               | allow students to change their lesson timing to fit their schedule |
+| Nice-to-Have  | Any user          | find Peter's parents' contact info by Peter's name               | retrieve parents' contact information quicker                      |
+| Nice-to-Have  | Elderly user      | zoom in on the smaller texts                                     | see the contact information easily                                 |
+| Nice-to-Have  | Intermediate user | tag certain contacts                                             | know the contacts' roles (e.g., admin)                             |
+| Nice-to-Have  | Any user          | find the admin user by the role                                  | discuss matters with him/her                                       |
+| Nice-to-Have  | Any user          | group some students                                              | contact students having classes at the same time slot easily       |
+| Nice-to-Have  | Any user          | find exact student based on NRIC                                 | find the correct person with many similar names                    |
+| Nice-to-Have  | Intermediate user | retrieve students' profile information (pic, name, school, etc.) | verify/track them for security purposes                            |
+| Nice-to-Have  | Intermediate user | retrieve staffs' profile information (pic, name, etc.)           | verify/track them for security purposes                            |
+| Nice-to-Have  | Admin user        | import data from my previous system                              | use this new app quickly without loss of data                      |
+| Nice-to-Have  | Admin user        | export data from the app                                         | switch over to another app or view in Excel                        |
+| Nice-to-Have  | Teacher           | create a note of student performance                             | discuss it with parents later                                      |
+| Could-Have    | Conservative user | set up an access password                                        | safeguard the information                                          |
+| Could-Have    | Advance user      | provide feedback to the developer                                | add desired features                                               |
+| Could-Have    | Intermediate user | use shortcuts (del instead of delete)                            | navigate the app quicker                                           |
+| Could-Have    | Teacher           | take note of a temporary class change                            | prepare accordingly                                                |
+| Could-Have    | Any user          | find a student's parents                                         | discuss the student's performance with his/her parents             |
+| Could-Have    | Admin user        | contact the vendors working for the tuition center               | settle admin matters                                               |
+| Won't-Have    | new user          | create notes for the features                                    | understand and remind myself what each feature does                |
+| Won't-Have    | Teacher           | swap class lesson with my colleagues                             | ensure someone can cover in my absence                             |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Cher` and the **Actor** is the `User`, unless specified otherwise)
 
-**Use case: Delete a person**
+#### Use case: UC1 - Add contact
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User enters add contact command with the contact details.
+2. Cher add contact to memory.
+3. Cher [<u>Save to disk</u>](#use-case-uc4---save-to-disk).
+4. Cher show success message.
+
+   Use case ends.
+   
+**Extensions**
+
+* 1a. Cher detects error in user input.
+  - 1a1. Cher raises error.
+  - 1a2. Cher shows correct input format.
+  
+  Use case ends.
+  
+* 1b. Cher detects duplicate contacts.
+  - 1b1. Cher raises error.
+  
+  Use case ends.
+   
+#### Use case: UC2 - Delete a contact
+
+**MSS**
+1. User enters delete contact command with the contact's full name.
+2. Cher shows list of contacts with name that matches user input.
+3. Cher request the index of the contact the user wants to delete.
+4. User enters the index.
+5. Cher prompts for delete confirmation.
+6. User confirms deletion.
+7. Cher deletes the contact from memory.
+8. Cher [<u>Save to disk</u>](#use-case-uc4---save-to-disk).
+9. Cher shows a success message.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. Cher detects error in user input.
+  - 1a1. Cher shows correct input format.
+
+  Use case ends.
+* 3b. User no longer wants to delete a contact.
+    - 3b1. User gives empty input.
+  
+  Use Case ends.
+* 4a. Cher detects error in user input.
+    - 4a1. Cher shows error message.
+
+    Use case ends.
+
+#### Use case: UC3 - View contacts
+
+**MSS**
+
+1. User enters view contacts command.
+2. Cher displays all contacts in memory to user.
+   
+    Use case ends.
+
+**Extensions**
+
+* 1a. Cher detects error in user input.
+    - 1a1. Cher shows correct input format.
 
   Use case ends.
 
-* 3a. The given index is invalid.
+#### Use case: UC4 - Save to disk
 
-    * 3a1. AddressBook shows an error message.
+**MSS**
 
-      Use case resumes at step 2.
+1. Cher opens a local file.
+2. Cher saves contacts in memory into local file.
 
-*{More to be added}*
+    Use case ends.
+
+**Use case: UC5 - Sync disk and memory**
+
+**MSS**
+
+1. Cher reads from local file.
+2. Cher store contact data to memory.
+
+    Use case ends.
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  The user interface should be intuitive for teachers with minimal technical expertise
 
 *{More to be added}*
 
@@ -327,6 +434,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Command-Line Interface (CLI)**: A text-based interface that allows users to interact with the system by typing commands
+* **Case-insensitive**: Refers to functionality where uppercase and lowercase letters are treated as the same (e.g., "Peter Tan" is the same as "peter tan")
+* **Novice user**: A user with limited experience or familiarity with the system, requiring guidance and simple, intuitive interfaces to perform tasks effectively
+* **Intermediate user**: A user with some experience and familiarity with the system, capable of performing tasks with minimal guidance but not yet an expert
 
 --------------------------------------------------------------------------------------------------------------------
 
