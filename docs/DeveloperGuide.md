@@ -260,29 +260,31 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
-
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
-
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+Teaching Assistants (TAs) in academic institutions such as universities, colleges, and online learning platforms.
+- Role: TAs supporting professors and lecturers in managing course-related tasks.
+- Experience Level: New and experienced TAs handling multiple responsibilities.
+- Needs: Efficient management of student information and tasks.
+- Has a need to manage a significant number of contacts
+- Prefer desktop apps over other types
+- Can type fast
+- Prefers typing to mouse interactions
+- Is reasonably comfortable using CLI apps
+  **Value proposition**: TAHub simplifies the role of Teaching Assistants by providing a centralized hub to organize student information, and efficiently manage course-related tasks. This platform empowers TAs to focus more on enhancing student learning and less on administrative chaos.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​            | I want to …​                                                                                 | So that I can…​                                                                 |
+|----------|--------------------|----------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------|
+| `* * *`  | teaching assistant | export student data in various formats (e.g., CSV, PDF)                                      | I can easily share information with professors or use it in other applications  |
+| `* *`    | teaching assistant | easily view all a list of students that match my current search query without typing in full | handle mass search queries for convenience                                      |
+| `* *`    | teaching assistant | use a command to backup my student database to a local file                                  | ensure data safety and practice file management                                 |
+| `* *`    | teaching asssitant | use a command to import student data from a CSV file                                         | quickly populate my address book at the beginning of a semester                 |
+| `* *`    | teaching assitant  | use a command to merge duplicate student entries                                             | maintain a clean and accurate database                                          |
+| `* *`    | teaching asssitant | use a command to import student data from a CSV file                                         | quickly populate my address book at the beginning of a semester                 |
+| `*`      | teaching assistant | use a command to generate a list of students who haven't submitted an assignment             | easily follow up with them                                                      |
 
 *{More to be added}*
 
@@ -320,6 +322,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. The system should be able to scale to accommodate a growing number of users (teachers, TAs, students) without requiring significant reengineering.
+5. The platform should have a clean, intuitive user interface that allows new users to complete basic tasks (like searching for a student) with minimal training.
+6. Any search query should return results within 1 second for up to 10,000 student records.
 
 *{More to be added}*
 
@@ -327,6 +332,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **TA**: Teaching assistant
+* **Student Record**: A collection of data fields that stores information about a student, including their name, contact information, course enrollment, and other relevant details (e.g., performance data or group assignments).
 
 --------------------------------------------------------------------------------------------------------------------
 
