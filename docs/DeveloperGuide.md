@@ -276,11 +276,10 @@ _{Explain here how the data archiving feature will be implemented}_
 
 This application is aimed towards convenience store managers who often need to manage their inventories. This application will help convenience store managers who:
 
-* Manage a significant number of information about their suppliers
-* Manage a significant number of information about their products
+* Manage a significant number of information about their suppliers and products
 * Monitor the performance of their suppliers
 * Maintain a streamline communication, ensuring smooth operations and minimizing errors in stock replenishment
-* Regularly order products and prefer a user-friendly interface which could possibly automate their orders
+* Regularly order products and prefer a user-friendly interface
 * prefer a fast, efficient typing interface over mouse or voice commands
 
 **Value proposition**: 
@@ -288,9 +287,9 @@ This application is aimed towards convenience store managers who often need to m
 InvenTrack enables inventory managers to efficiently manage large number of supplier contact information and streamline communication, ensuring smooth operations and minimizing errors in stock replenishment, all through a typing-optimized interface
 The three main aspects of this product are:
 
-* **Streamlined Supplier Management**: The product simplifies managing relationships with multiple suppliers, providing tools to track orders, monitor supplier performance, and automate reordering.
-* **Efficient Inventory Control**: It offers features for real-time inventory tracking and automated reordering based on predefined thresholds, helping prevent stockouts and overstocking.
-* **Performance Insights**: The product provides analytics and performance metrics to evaluate supplier reliability and order accuracy, facilitating better decision-making.
+* **Streamlined Supplier Management**: The product simplifies managing relationships with multiple suppliers, providing tools to track orders, and monitor supplier performance.
+* **Efficient Inventory Control**: It offers features for real-time inventory tracking and stock alerts based on predefined thresholds, helping prevent stockouts and overstocking.
+* **Performance Insights**: The product provides performance metrics to evaluate supplier reliability and order accuracy, facilitating better decision-making.
 
 
 
