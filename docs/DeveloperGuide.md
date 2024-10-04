@@ -321,32 +321,234 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `DorManagerPro`, and the 
+**Actor** is the `user` who refers to university dormitory managers 
+unless specified otherwise.)
 
-**Use case: Delete a person**
+**Use Case: UC01 - Add a profile**
 
-**MSS**
+**MSS:**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to add a specific profile, specifying name and contact number.
+2.  DorManagerPro adds the profile.
 
     Use case ends.
 
-**Extensions**
+**Extensions:**
 
-* 2a. The list is empty.
+* 1a. DorManagerPro detects an error in the command format.
+
+    * 1a1. DorManagerPro requests for the correct command format.
+    * 1a2. User enters command again.
+  
+    Steps 1a1-1a2 are repeated until the command is correct.
+
+    Use case resumes from step 2.
+
+* 1c. DorManagerPro detects that the specified profile already exists.
+
+    * 1c1. DorManagerPro informs the user and asks for another profile to add.
+    * 1c2. User specifies another profile to add.
+  
+    Steps 1c1-1c2 are repeated until a valid profile is indicated.
+
+    Use case resumes from step 2.
+
+* 1d. DorManagerPro detects invalid parameters specified by user.
+
+    * 1d1. DorManagerPro requests for valid parameters.
+    * 1d2. User re-supplies parameters.
+  
+    Steps 1d1-1d2 are repeated until the parameters are valid.
+
+    Use case resumes from step 2.
+
+* *a. At any time, User chooses to stop adding a profile.
 
   Use case ends.
 
-* 3a. The given index is invalid.
+**Use Case: UC02 - Add room number to profile**
 
-    * 3a1. AddressBook shows an error message.
+**Precondition: There is at least one profile added into DorManagerPro**
 
-      Use case resumes at step 2.
+**MSS:**
 
-*{More to be added}*
+1.  User requests to add room number information to a specific profile.
+2.  DorManagerPro updates the profile to include the room number.
+
+    Use case ends.
+
+**Extensions:**
+
+* 1a. DorManagerPro detects an error in the command format.
+
+    * 1a1. DorManagerPro requests for the correct command format.
+    * 1a2. User enters command again.
+  
+    Steps 1a1-1a2 are repeated until the command is correct.
+
+    Use case resumes from step 2.
+
+* 1b. DorManagerPro cannot find the specified profile to update.
+
+    * 1b1. DorManagerPro requests for a profile that exists to update.
+    * 1b2. User specifies profile again.
+  
+    Steps 1b1-1b2 are repeated until the command is correct.
+
+    Use case resumes from step 2.
+
+* 1c. DorManagerPro detects that that room capacity is already full.
+
+    * 1c1. DorManagerPro requests for a room number that is not already occupied.
+    * 1c2. User specifies room number again.
+  
+    Steps 1c1-1c2 are repeated until a valid room number is provided.
+
+    Use case resumes from step 2.
+
+* 1d. DorManagerPro detects invalid parameters specified by user.
+
+    * 1d1. DorManagerPro requests for valid parameters.
+    * 1d2. User re-supplies parameters.
+  
+    Steps 1d1-1d2 are repeated until the parameters are valid.
+
+    Use case resumes from step 2.
+
+* *a. At any time, User chooses to stop adding a room number.
+
+  Use case ends.
+
+**Use Case: UC03 - Add emergency contact to profile**
+
+**Precondition: There is at least one profile added into DorManagerPro**
+
+**MSS:**
+
+1.  User requests to add emergency contact information to a specific profile.
+2.  DorManagerPro updates the profile to include the emergency contact.
+
+    Use case ends.
+
+**Extensions:**
+
+* 1a. DorManagerPro detects an error in the command format.
+
+    * 1a1. DorManagerPro requests for the correct command format.
+    * 1a2. User enters command again.
+  
+    Steps 1a1-1a2 are repeated until the command is correct.
+
+    Use case resumes from step 2.
+
+* 1b. DorManagerPro cannot find the specified profile to update.
+
+    * 1b1. DorManagerPro requests for a profile that exists to update.
+    * 1b2. User specifies profile again.
+  
+    Steps 1b1-1b2 are repeated until the command is correct.
+
+    Use case resumes from step 2.
+
+* 1c. DorManagerPro detects invalid parameters specified by user.
+
+    * 1c1. DorManagerPro requests for valid parameters.
+    * 1c2. User re-supplies parameters.
+  
+    Steps 1c1-1c2 are repeated until the parameters are valid.
+
+    Use case resumes from step 2.
+
+* *a. At any time, User chooses to stop adding an emergency contact.
+
+  Use case ends.
+
+**Use Case: UC04 - View profiles**
+
+**Precondition: There is at least one profile added into DorManagerPro**
+
+**MSS:**
+
+1.  User requests to view profiles.
+2.  DorManagerPro displays all profiles with all attached information.
+
+    Use case ends.
+
+**Extensions:**
+
+* 1a. DorManagerPro detects an error in the command format.
+
+    * 1a1. DorManagerPro requests for the correct command format.
+    * 1a2. User enters command again.
+  
+    Steps 1a1-1a2 are repeated until the command is correct.
+
+    Use case resumes from step 2.
+
+* *a. At any time, User chooses to stop viewing a profile.
+
+  Use case ends.
+
+**Use Case: UC05 - Delete a profile**
+
+**Precondition: There is at least one profile added into DorManagerPro**
+
+**MSS:**
+
+1.  User requests to delete a specific profile.
+2.  DorManagerPro asks if user to confirm they want to delete the profile.
+3.  User confirms.
+4.  DorManagerPro deletes the profile.
+
+    Use case ends.
+
+**Extensions:**
+
+* 1a. DorManagerPro detects an error in the command format.
+
+    * 1a1. DorManagerPro requests for the correct command format.
+    * 1a2. User enters command again.
+  
+    Steps 1a1-1a2 are repeated until the command is correct.
+
+    Use case resumes from step 2.
+
+* 1b. DorManagerPro cannot find the specified profile to delete.
+
+    * 1b1. DorManagerPro requests for a profile that exists to delete.
+    * 1b2. User specifies profile again.
+  
+    Steps 1b1-1b2 are repeated until the command is correct.
+
+    Use case resumes from step 2.
+
+* 1c. DorManagerPro detects invalid parameters specified by user.
+
+    * 1c1. DorManagerPro requests for valid parameters.
+    * 1c2. User re-supplies parameters.
+  
+    Steps 1c1-1c2 are repeated until the parameters are valid.
+
+    Use case resumes from step 2.
+
+* 3a. DorManagerPro detects an error in the confirmation message sent by the User
+
+    * 3a1. DorManagerPro asks the user for confirmation to delete the profile again.
+    * 3a2. User confirms again.
+    
+    Steps 3a1-3a2 are repeated until the confirmation is correct.
+
+    Use case resumes from step 4.
+
+* 3b. User expresses they do not want to delete the profile after all.
+    * 3b1. DorManagerPro acknowledges the rejection.
+  
+    Use case ends.
+
+* *a. At any time, User chooses to stop deleting a profile.
+    
+    Use case ends.
 
 ### Non-Functional Requirements
 
