@@ -1,9 +1,11 @@
 ---
-layout: page
-title: About Us
+  layout: default.md
+  title: "About Us"
 ---
 
-We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
+# About Us
+
+We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
 You can reach us at the email `seer[at]comp.nus.edu.sg`
 
@@ -20,15 +22,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Jane Doe
+### Wei Zhi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/w3izhi.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/W3iZhi)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Developer
+* Responsibilities: Data
 
 ### Yao Hejun
 
@@ -36,18 +38,19 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](http://github.com/testing1234567891011121314)] [[portfolio](team/johndoe.md)]
 
+
 * Role: In charge of code quality
 * Responsibilities: Responsible for quality of code
 
-### Jean Doe
+### Jinhan Wu
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/WuJinhan1.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/WuJinhan1)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: In charge of testing
 
 ### Jalen Lee Rui Xian
 
