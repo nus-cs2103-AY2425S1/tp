@@ -414,7 +414,7 @@ Use case ends.
     Use case resumes at step 1. 
 
 
-**Use case: UC06 - List All Contact**
+**Use case: UC06 - List All Contacts**
 
 **MSS**
 
