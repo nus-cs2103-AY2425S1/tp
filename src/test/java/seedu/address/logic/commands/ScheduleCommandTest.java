@@ -77,4 +77,44 @@ public class ScheduleCommandTest {
 
         assertCommandFailure(command, model, ScheduleCommand.MESSAGE_INVALID_NAME);
     }
+    @Test
+    public void execute_scheduleOnWeekend_throwsCommandException() {
+        Person personToSchedule = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Schedule weekendSchedule = new Schedule("2024-10-06 1000"); // Saturday
+
+        ScheduleCommand command = new ScheduleCommand(personToSchedule.getName().toString(), weekendSchedule);
+
+        assertCommandFailure(command, model, ScheduleCommand.MESSAGE_INVALID_TIME);
+    }
+
+    @Test
+    public void execute_scheduleBeforeWorkingHours_throwsCommandException() {
+        Person personToSchedule = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Schedule earlySchedule = new Schedule("2024-10-04 0800"); // Before 9 AM
+
+        ScheduleCommand command = new ScheduleCommand(personToSchedule.getName().toString(), earlySchedule);
+
+        assertCommandFailure(command, model, ScheduleCommand.MESSAGE_INVALID_TIME);
+    }
+
+    @Test
+    public void execute_scheduleAfterWorkingHours_throwsCommandException() {
+        Person personToSchedule = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Schedule lateSchedule = new Schedule("2024-10-04 1800"); // After 5 PM
+
+        ScheduleCommand command = new ScheduleCommand(personToSchedule.getName().toString(), lateSchedule);
+
+        assertCommandFailure(command, model, ScheduleCommand.MESSAGE_INVALID_TIME);
+    }
+
+    @Test
+    public void execute_scheduleNotOnTheHour_throwsCommandException() {
+        Person personToSchedule = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Schedule notOnTheHourSchedule = new Schedule("2024-10-04 1015"); // Not on the hour
+
+        ScheduleCommand command = new ScheduleCommand(personToSchedule.getName().toString(), notOnTheHourSchedule);
+
+        assertCommandFailure(command, model, ScheduleCommand.MESSAGE_INVALID_TIME);
+    }
+
 }

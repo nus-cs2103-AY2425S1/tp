@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.hash;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -145,10 +144,5 @@ public class ScheduleCommand extends Command {
         ScheduleCommand otherCommand = (ScheduleCommand) other;
         return name.equals(otherCommand.name)
                 && date.equals(otherCommand.date);
-    }
-
-    @Override
-    public int hashCode() {
-        return hash(name, date);
     }
 }
