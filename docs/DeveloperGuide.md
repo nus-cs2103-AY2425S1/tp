@@ -517,7 +517,8 @@ Use case ends.
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Client**: A person who purchased at least one insurance plan from the insurance agent.
+* **Insurance Agent**: The user of the app.
+* **Client**: A potential customer who is keen on purchasing an insurance plan or a customer who has purchased at least one insurance plan from the insurance agent.
 * **Insurance Plan ID**: A unique ID assigned to the insurance plan by the system.
 * **Valid Insurance Plan ID**: An insurance plan ID that exists in the system.
 * **Claim**: A formal request by a client for reimbursement for losses that are covered by specific insurance plans.
