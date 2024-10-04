@@ -1,5 +1,6 @@
+[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions) [![codecov](https://codecov.io/gh/AY2425S1-CS2103T-T13-3/tp/graph/badge.svg?token=L39TRCVDDB)](https://codecov.io/gh/AY2425S1-CS2103T-T13-3/tp)
 # PawPatrol: Veterinary Address Book and Patient Management System
-
+![Ui](docs/images/Ui.png)  
 PawPatrol is designed to be a core tool for veterinary clinics to manage client and patient data efficiently. Its primary function is as an address book for pet owners, with extensions to handle detailed patient records for animals. The goal is to provide a lightweight but scalable system for veterinarians to track essential information, including medical history, appointments, and billing.
 
 ## Key Features
