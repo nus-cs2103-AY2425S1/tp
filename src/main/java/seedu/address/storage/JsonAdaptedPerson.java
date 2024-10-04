@@ -110,10 +110,12 @@ class JsonAdaptedPerson {
 
         final PriorityLevel modelPriorityLevel;
 
-        if (priorityLevel >= 1 && priorityLevel <= 3) {
+        if (priorityLevel == 0) {
+            modelPriorityLevel = new PriorityLevel(3); // default priority level
+        } else if (priorityLevel >= 1 && priorityLevel <= 3) {
             modelPriorityLevel = new PriorityLevel(priorityLevel);
         } else {
-            modelPriorityLevel = new PriorityLevel(3); // default priority level
+            throw new IllegalValueException(PriorityLevel.MESSAGE_CONSTRAINTS);
         }
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
