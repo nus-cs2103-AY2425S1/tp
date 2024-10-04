@@ -118,11 +118,22 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_addTask() throws Exception {
+        String taskDescription = "Buy medication";
+        Name personName = new Name("John Doe");
+
+        AddTaskCommand expectedCommand = new AddTaskCommand(taskDescription, personName);
+
+        String userInput = AddTaskCommand.COMMAND_WORD + " d/" + taskDescription + " p/" + personName.fullName;
+
+        AddTaskCommand command = (AddTaskCommand) parser.parseCommand(userInput);
+        assertEquals(expectedCommand, command);
+    }
+    @Test
     public void parseCommand_priorityMissingLevel_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 PriorityCommand.MESSAGE_USAGE), () -> parser.parseCommand(
                                 PriorityCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()));
     }
-
 
 }
