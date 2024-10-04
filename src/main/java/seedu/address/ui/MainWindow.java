@@ -49,6 +49,9 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane resultDisplayPlaceholder;
 
     @FXML
+    private StackPane detailPanelPlaceholder;
+
+    @FXML
     private StackPane statusbarPlaceholder;
 
     @FXML
@@ -121,6 +124,9 @@ public class MainWindow extends UiPart<Stage> {
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+
+        DetailPanel detailPanel = new DetailPanel();
+        detailPanelPlaceholder.getChildren().add(detailPanel.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
