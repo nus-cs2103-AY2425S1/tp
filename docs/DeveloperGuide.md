@@ -315,15 +315,25 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Target user profile**: A veterinarian running a private veterinary clinic
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* **Needs**:
+    * Managing a large number of clients and pets efficiently.
+    * Keeping track of client information, including contact details and pets' records.
+    * The ability to quickly search, update, and manage records.
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+* **Skills & Preferences**:
+    * Prefers desktop applications to web or mobile apps.
+    * Comfortable with fast typing and more inclined toward keyboard-centric workflows.
+    * Prefers typing commands over using a mouse for navigation and interaction, reducing time spent on manual GUI tasks.
+    * Familiar with using CLI apps, or open to adopting them given their efficiency and speed.
+
+* **Pain Points**:
+    * Frustration with slow, clunky, or over-complicated GUI-based systems.
+    * Loss of time due to extensive clicks and navigation through multiple screens.
+    * Difficulty managing and organizing client and pet records using existing software.
+
+**Value proposition**: Manage clients and their pets faster than a typical mouse/GUI driven app
 
 ### User stories
 
