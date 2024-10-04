@@ -484,7 +484,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **2a. Teacher wants to abort the ‘delete tag’ process:**  
   Teacher cancels the operation and exits the procedure without deleting the tag.
 
-## UC9: View students (Nikhil)
+## UC8: View students (Nikhil)
 
 **System:** EduLog  
 **Actor:** Teacher  
@@ -508,7 +508,7 @@ Steps 1a1-1a2 are repeated until an existing student is selected.
 
 Use case resumes from Step 2.
 
-## UC10: Remove student (Nikhil)
+## UC9: Remove student (Nikhil)
 
 **System:** EduLog  
 **Actor:** Teacher  
