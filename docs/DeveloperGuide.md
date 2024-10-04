@@ -514,8 +514,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User <u>views a Client (UC5)</u>.
-2.  User requests to add an issue to the Client's Car.
-3.  MATER adds the issue to the Client's Car and displays a confirmation message.
+2.  User requests to add an Issue to the Client's Car.
+3.  MATER adds the Issue to the Client's Car and displays a confirmation message.
 
     Use case ends.
 
@@ -533,7 +533,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes from step 2.
 
 
-* 2c. The given issue description is invalid.
+* 2c. The given Issue description is invalid.
     * 2b1. MATER shows an error message.
 
       Use case resumes from step 2.
@@ -543,8 +543,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User <u>views a Client (UC5)</u>.
-2.  User requests to delete an issue from the Client's Car.
-3.  MATER deletes the issue from the Client's Car and displays a confirmation message.
+2.  User requests to delete an Issue from the Client's Car.
+3.  MATER deletes the Issue from the Client's Car and displays a confirmation message.
 
     Use case ends.
 
@@ -556,7 +556,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes from step 1.
 
 
-* 2b. The Car does not have an issue associated to it.
+* 2b. The Car does not have an Issue associated to it.
     * 2b1. MATER shows an error message.
 
       Use case resumes from step 1.
@@ -568,7 +568,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes from step 2.
 
 
-* 2d. The given issue id is invalid.
+* 2d. The given Issue id is invalid.
     * 2d1. MATER shows an error message.
 
       Use case resumes from step 2.
@@ -578,8 +578,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User <u>views a Client (UC5)</u>.
-2.  User requests to edit an issue of the Client's Car
-3.  MATER edits the issue of the Client's Car and displays a confirmation message.
+2.  User requests to edit an Issue of the Client's Car
+3.  MATER edits the Issue of the Client's Car and displays a confirmation message.
 
     Use case ends.
 
@@ -597,13 +597,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes from step 2.
 
 
-* 2c. The given issue id is invalid.
+* 2c. The given Issue id is invalid.
     * 2c1. MATER shows an error message.
 
       Use case resumes from step 2.
 
 
-* 2d. The given new issue description is invalid.
+* 2d. The given new Issue description is invalid.
     * 2d1. MATER shows an error message.
 
       Use case resumes from step 2.
