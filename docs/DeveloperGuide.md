@@ -229,11 +229,11 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+MED*Alternative 1 (current choice):** Saves the entire address book.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
+MED*Alternative 2:** Individual command knows how to undo/redo by
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
@@ -287,18 +287,39 @@ without having to dig through paperwork / NUSync.
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Priorities: High (must have) - `HIGH`, Medium (nice to have) - `MED`, Low (unlikely to have) - `LOW`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​         | I want to …​                                                                      | So that I can…​                                                        |
+|----------|-----------------|-----------------------------------------------------------------------------------|------------------------------------------------------------------------|
+| `HIGH`   | first-time user | view a brief tutorial on using CLI commands                                       | understand the basic functions and navigation of the app               |
+| `HIGH`   | first-time user | see a list of available commands and their descriptions                           | familiarize myself with the list of commands and app functions         |
+| `HIGH`   | first-time user | add a new participant                                                             | start building my participant list from scratch                        |
+| `HIGH`   | first-time user | view a summary of all participants grouped by their sport categories              | get an overview of participant distribution                            |
+| `HIGH`   | first-time user | search for participants by name or ID                                             | locate details of persons without having to go through the entire list |
+| `HIGH`   | first-time user | view a list of participants for a specific sub-event                              | understand how participants are scheduled and grouped                  |
+| `HIGH`   | first-time user | save the current participant list and details to a file                           | back up my participant records and access them later                   |
+| `HIGH`   | familiar user   | update a participant's details                                                    | keep participant records current and accurate                          |
+| `HIGH`   | familiar user   | assign participants to specific sub-events                                        | track their involvement and ensure proper scheduling                   |
+| `HIGH`   | familiar user   | group participants by their faculty membership                                    | manage and organize participants according to faculty membership       |
+| `HIGH`   | familiar user   | delete a participant                                                              | remove outdated or incorrect participant records                       |
+| `MED`    | first-time user | view detailed information about a participant on a separate tab from main search  | ensure I have accurate and complete information on a participant       |
+| `MED`    | first-time user | view a sample event schedule with participants' relevant details shown            | understand how to manage and track participants' involvement           |
+| `MED`    | first-time user | access help documentation directly from the CLI                                   | get assistance with using various features of the application          |
+| `MED`    | familiar user   | search for participants based on multiple criteria                                | find specific groups of participants efficiently                       |
+| `MED`    | familiar user   | view a summary of a participant’s involvement in past sub-events                  | understand their history and performance in previous events            |
+| `MED`    | familiar user   | import participant details from a CSV file                                        | quickly add multiple participants                                      |
+| `MED`    | expert user     | create custom participant fields specific to different types of events            | tailor the application to various event requirements                   |
+| `MED`    | expert user     | customize CLI command shortcuts and aliases for frequently used actions           | enhance productivity and streamline workflows                          |
+| `MED`    | expert user     | use advanced search filters to find participants                                  | find participants based on specific information with precision         |
+| `MED`    | familiar user   | export participant details to a CSV file                                          | share participant records with others                                  |
+| `LOW`    | familiar user   | view a report of participants based on their sport category or faculty membership | understand how participants are distributed                            |
+| `LOW`    | familiar user   | view edit history of participant details                                          | track updates and maintain data integrity                              |
+| `LOW`    | expert user     | bulk import participant details from multiple CSV files                           | treamline data entry for large-scale events                            |
+| `LOW`    | expert user     | set up automated notifications for participants based on their roles              | keep them informed without manual follow-up                            |
+| `LOW`    | expert user     | bulk update participant details or sub-event assignments                          | efficiently manage changes for large numbers of participants           |
+| `LOW`    | expert user     | generate complex, customized reports combining multiple data points               | gain detailed insights into event management                           |
+| `LOW`    | expert user     | schedule regular backups of participant database                                  | ensure data is protected and recoverable in case of issues             |
 
-*{More to be added}*
 
 ### Use cases
 **System: EventfulNUS**\
