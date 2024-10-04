@@ -677,11 +677,71 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+#### General requirements
 
-*{More to be added}*
+* The software should be offered as a free product/service.
+* The source code should be open source.
+
+#### Constraints
+
+* The data should be stored locally in a human-editable text file (allowing advanced users to modify data directly).
+* The software should have minimal reliance on network connectivity and include fallback mechanisms for any network-dependent features.
+* The software should not depend on the developer’s remote server.
+* The software should be distributed as a single `.jar` file. If that is not feasible, the `.jar` file and any required files should be packaged into a single `.zip` file.
+* The software should not exceed 100 MB in size, and document files (i.e., `PDF`s of documentation) should not exceed 15 MB each. Neither should be unnecessarily bloated.
+* Any third-party frameworks, libraries or services used should be free, open-source (except for services) and permissively licensed. They should not require users to install additional software or create accounts.
+* The developer and user guides should be `PDF`-friendly (by avoiding expandable panels, embedded videos, animated `GIF`s etc.).
+
+#### Quality
+
+* The software should be optimized for the target users: fast typists should be able to complete most tasks more efficiently using the _CLI_ than a _GUI_.
+* The software should be intuitive and easy for first-time users to navigate (by providing sample data, a `help` command to access the user guide etc.).
+* Multistep commands for onboarding (if any) should have a streamlined, one-step equivalent for regular or expert users.
+* The _GUI_ should be intuitive for users who are not tech-savvy.
+
+#### Performance and Efficiency
+
+* The software should respond to user actions within 5 seconds.
+
+#### Scalability
+
+* The software should be able to accommodate up to 5,000 contacts, without a noticeable sluggishness in performance for typical usage.
+
+#### Reliability
+
+* The software should maintain stable operation (i.e., function as intended) at least 99.9% of the time.
+
+#### Robustness
+
+* **Disaster Recovery and Fault Tolerance:** The software should gracefully handle exceptional events (e.g., errors or failures) without losing data or compromising functionality (e.g., crashing).
+* **Error Handling:** Clear, informative error messages should be provided, and errors logged to aid troubleshooting and support.
+
+#### Compliance
+
+* The software should protect research participants' confidentiality and comply with relevant legal standards (by safeguarding _private contact details_).
+
+#### Portability
+
+* The software should work without requiring an installer.
+* The software should run on any _mainstream OS_ that has `Java 17` (and no other Java version installed).
+* The _GUI_ should be free from resolution-related inconveniences for standard screen resolutions (1920x1080 or higher) and screen scales (100% and 125%).
+* The _GUI_ should remain functional, though not necessarily optimized, for resolutions of 1280x720 or higher and screen scales of 150%.
+
+#### Maintainability
+
+* **Code Quality:** The code should be well-maintained and follow best practices.
+* **Documentation:** Clear, consistent and accurate documentation is required.
+* **Testability:** Implemented features should not impede testing or make the software difficult to test.
+
+#### Process Requirements
+
+* The project should follow a development schedule that delivers incremental versions on a weekly basis.
+
+#### Notes about project scope
+
+* Input should primarily be via the _CLI_, with the _GUI_ mainly providing visual feedback.
+* The software does not need to support the printing of reports or contacting research participants.
+* The software is intended for single-user operation, not multi-user functionality.
 
 ### Glossary
 
