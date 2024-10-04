@@ -301,28 +301,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  Teacher supplies the information
 4.  System validates the provided information to ensure it meets any specified criteria (e.g., uniqueness).
 5.  System confirms that class has been added
-
-    Use case ends.
+Use case ends.
 
 ### **Extension:**
 
-* 2a. Teacher wants to abort the ‘add class’ process
+* **2a. Teacher wants to abort the ‘add class’ process**
 
     * 2a1. Teacher can clear fields and exit the procedure
-  
-      Use case ends.
 
-* 4a. Class with description already exists
+* **4a. Class with description already exists**
 
     * 4a1. System alerts the teacher that the class exists and displays its details
 
-      Use case ends.
-
-* 4b. Invalid class details (see features)
+* **4b. Invalid class details (see features)**
 
     * 4b1. System alerts the teacher and prompts them to correct the invalid information
-
-      Use case ends.
 
 
 ## UC2: Delete a class
@@ -336,28 +329,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  Teacher supplies the information
 4.  System validates the provided information to ensure it meets any specified criteria.
 5.  System confirms that class has been deleted
-
-    Use case ends.
+Use case ends.
 
 ### **Extension:**
 
-* 2a. Teacher wants to abort the ‘delete class’ process
+* **2a. Teacher wants to abort the ‘delete class’ process**
 
     * 2a1. Teacher can clear fields and exit the procedure
-  
-      Use case ends.
 
-* 4a. Class with description does not exist
+* **4a. Class with description does not exist**
 
     * 4a1. System alerts the teacher that the class does not exist, and prompts user to check again
 
-      Use case ends.
-
-* 4b. Invalid class details (see features)
+* **4b. Invalid class details (see features)**
 
     * 4b1. System alerts the teacher and prompts them to correct the invalid information
-
-      Use case ends.
 
 ## UC3: Add student
 
@@ -372,8 +358,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. Teacher supplies the information.
 4. System validates the provided information to ensure it meets any specified criteria (e.g., uniqueness).
 5. System confirms that the student has been added.
-
-   Use case ends.
+Use case ends.
 
 ### **Extension:**
 
@@ -406,8 +391,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. Teacher supplies the updated information.
 4. System validates the provided information to ensure it meets any specified criteria (e.g., uniqueness).
 5. System confirms that the student has been successfully updated.
-
-   Use case ends.
+Use case ends.
 
 ### **Extension:**
 - **2a. Teacher wants to abort the ‘edit student’ process:**  
@@ -428,7 +412,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **4e. Tag does not exist**  
   System prompts the teacher to first create the tag using <u>UC5: Create a Tag</u>.
 
-
 ## UC5: Create Tag
 
 **System**: EduLog  
@@ -440,8 +423,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. Teacher supplies the necessary information for the new tag.
 4. System validates the provided information to ensure it meets specified criteria.
 5. System confirms that the tag has been successfully created and is available for use.
-
-   Use case ends.
+Use case ends.
 
 ### **Extension:**
 - **2a. Teacher wants to abort the ‘create tag’ process:**  
@@ -465,8 +447,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. Teacher supplies the necessary information for the updated tag.
 4. System validates the provided information to ensure it meets specified criteria.
 5. System confirms that the tag has been successfully updated and is available for use.
-
-   Use case ends.
+Use case ends.
 
 ### **Extension:**
 - **2a. Teacher wants to abort the ‘edit tag’ process:**  
@@ -490,8 +471,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Teacher selects a tag to delete.
 2. System prompts the teacher for confirmation before permanently deleting the tag.
 3. System deletes the tag.
-
-   Use case ends.
+Use case ends.
 
 ### **Extension:**
 
@@ -511,8 +491,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. Teacher requests to see students enrolled under him/her.  
 2. System displays the students enrolled under him/her.
-    
-   Use case ends.
+Use case ends.
 
 ### **Extension:**
 
@@ -540,7 +519,6 @@ Use case resumes from Step 2.
 3. Teacher requests to delete the student.  
 4. System confirms that the student has been removed.  
    Teacher repeats steps 3-5 for any remaining students they wish to remove.
-   
    Use case ends.
 
 ### **Extension:**
