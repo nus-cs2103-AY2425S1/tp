@@ -7,21 +7,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
-
-
-
-
 public class FeeTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Fee(null));
+        assertThrows(NullPointerException.class, () -> generateFee(null));
     }
 
     @Test
     public void constructor_invalidFee_throwsIllegalArgumentException() {
         String invalidFee = "";
-        assertThrows(IllegalArgumentException.class, () -> new Fee(invalidFee));
+        assertThrows(IllegalArgumentException.class, () -> generateFee(invalidFee));
     }
     @Test
     public void isValidFee() {
@@ -44,21 +40,21 @@ public class FeeTest {
 
     @Test
     public void toStringTest() {
-        Fee fee = new Fee("1.23");
+        Fee fee = generateFee("1.23");
         assertEquals("1.23", fee.toString());
 
-        Fee fee2 = new Fee("1.0");
+        Fee fee2 = generateFee("1.0");
         assertEquals("1.00", fee2.toString());
 
-        Fee fee3 = new Fee("0");
+        Fee fee3 = generateFee("0");
         assertEquals("0.00", fee3.toString());
     }
 
     @Test
     public void equals() {
-        Fee fee = new Fee("1.23");
-        Fee sameFee = new Fee("1.23");
-        Fee differentFee = new Fee("2.34");
+        Fee fee = generateFee("1.23");
+        Fee sameFee = generateFee("1.23");
+        Fee differentFee = generateFee("2.34");
 
         // same values -> returns true
         assertTrue(fee.equals(sameFee));
@@ -78,12 +74,18 @@ public class FeeTest {
 
     @Test
     public void hashCodeTest() {
-        Fee fee = new Fee("1.23");
-        Fee sameFee = new Fee("1.23");
-        Fee differentFee = new Fee("2.34");
+        Fee fee = generateFee("1.23");
+        Fee sameFee = generateFee("1.23");
+        Fee differentFee = generateFee("2.34");
 
         // same values -> returns true
         assertEquals(fee.hashCode(), sameFee.hashCode());
         assertNotEquals(fee.hashCode(), differentFee.hashCode());
+    }
+
+    public Fee generateFee(String fee) {
+        return new Fee(fee) {
+
+        };
     }
 }

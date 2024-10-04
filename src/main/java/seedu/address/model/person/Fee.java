@@ -6,7 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 /**
  * Represents a fee amount in the address book.
  */
-public class Fee {
+public abstract class Fee {
 
     public static final String MESSAGE_CONSTRAINTS = """
             should adhere to the following constraints:
