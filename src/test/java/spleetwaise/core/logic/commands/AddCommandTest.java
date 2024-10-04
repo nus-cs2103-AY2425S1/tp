@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static spleetwaise.core.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -22,8 +21,8 @@ import spleetwaise.core.model.Model;
 import spleetwaise.core.model.ReadOnlyAddressBook;
 import spleetwaise.core.model.ReadOnlyUserPrefs;
 import spleetwaise.core.model.person.Person;
-import spleetwaise.core.testutil.PersonBuilder;
 import spleetwaise.core.testutil.Assert;
+import spleetwaise.core.testutil.PersonBuilder;
 import spleetwaise.core.testutil.TypicalPersons;
 
 public class AddCommandTest {
@@ -41,7 +40,7 @@ public class AddCommandTest {
         CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
-                commandResult.getFeedbackToUser());
+            commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
     }
 
@@ -51,7 +50,8 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        Assert.assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        Assert.assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () ->
+            addCommand.execute(modelStub));
     }
 
     @Test
@@ -89,6 +89,7 @@ public class AddCommandTest {
      * A default model stub that have all of the methods failing.
      */
     private class ModelStub implements Model {
+
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
@@ -164,6 +165,7 @@ public class AddCommandTest {
      * A Model stub that contains a single person.
      */
     private class ModelStubWithPerson extends ModelStub {
+
         private final Person person;
 
         ModelStubWithPerson(Person person) {
@@ -182,6 +184,7 @@ public class AddCommandTest {
      * A Model stub that always accept the person being added.
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
+
         final ArrayList<Person> personsAdded = new ArrayList<>();
 
         @Override

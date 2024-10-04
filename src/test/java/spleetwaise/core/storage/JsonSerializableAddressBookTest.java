@@ -1,7 +1,6 @@
 package spleetwaise.core.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static spleetwaise.core.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -11,8 +10,8 @@ import org.junit.jupiter.api.Test;
 import spleetwaise.core.commons.exceptions.IllegalValueException;
 import spleetwaise.core.commons.util.JsonUtil;
 import spleetwaise.core.model.AddressBook;
-import spleetwaise.core.testutil.TypicalPersons;
 import spleetwaise.core.testutil.Assert;
+import spleetwaise.core.testutil.TypicalPersons;
 
 public class JsonSerializableAddressBookTest {
 

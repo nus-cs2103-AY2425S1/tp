@@ -1,8 +1,8 @@
 package spleetwaise.core.model.tag;
 
-import static spleetwaise.core.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
+
 import spleetwaise.core.testutil.Assert;
 
 public class TagTest {

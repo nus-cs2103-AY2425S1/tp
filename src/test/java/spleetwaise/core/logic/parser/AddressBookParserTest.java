@@ -2,7 +2,6 @@ package spleetwaise.core.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static spleetwaise.core.testutil.Assert.assertThrows;
 
 import java.util.Arrays;
 import java.util.List;
@@ -10,6 +9,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import spleetwaise.core.logic.Messages;
 import spleetwaise.core.logic.commands.AddCommand;
 import spleetwaise.core.logic.commands.ClearCommand;
 import spleetwaise.core.logic.commands.DeleteCommand;
@@ -22,11 +22,10 @@ import spleetwaise.core.logic.commands.ListCommand;
 import spleetwaise.core.logic.parser.exceptions.ParseException;
 import spleetwaise.core.model.person.NameContainsKeywordsPredicate;
 import spleetwaise.core.model.person.Person;
+import spleetwaise.core.testutil.Assert;
 import spleetwaise.core.testutil.EditPersonDescriptorBuilder;
 import spleetwaise.core.testutil.PersonBuilder;
 import spleetwaise.core.testutil.PersonUtil;
-import spleetwaise.core.logic.Messages;
-import spleetwaise.core.testutil.Assert;
 import spleetwaise.core.testutil.TypicalIndexes;
 
 public class AddressBookParserTest {
@@ -49,7 +48,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + TypicalIndexes.INDEX_FIRST_PERSON.getOneBased());
+            DeleteCommand.COMMAND_WORD + " " + TypicalIndexes.INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteCommand(TypicalIndexes.INDEX_FIRST_PERSON), command);
     }
 
@@ -58,7 +57,8 @@ public class AddressBookParserTest {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + TypicalIndexes.INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+            + TypicalIndexes.INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(
+            descriptor));
         assertEquals(new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON, descriptor), command);
     }
 
@@ -72,7 +72,7 @@ public class AddressBookParserTest {
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+            FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
@@ -90,12 +90,14 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
-        Assert.assertThrows(ParseException.class, String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(""));
+        Assert.assertThrows(ParseException.class,
+            String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
+                -> parser.parseCommand(""));
     }
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        Assert.assertThrows(ParseException.class, Messages.MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+        Assert.assertThrows(ParseException.class, Messages.MESSAGE_UNKNOWN_COMMAND, () ->
+            parser.parseCommand("unknownCommand"));
     }
 }

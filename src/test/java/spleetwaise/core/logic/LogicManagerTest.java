@@ -1,7 +1,6 @@
 package spleetwaise.core.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static spleetwaise.core.testutil.Assert.assertThrows;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -13,6 +12,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 import spleetwaise.core.logic.commands.AddCommand;
 import spleetwaise.core.logic.commands.CommandResult;
+import spleetwaise.core.logic.commands.CommandTestUtil;
 import spleetwaise.core.logic.commands.ListCommand;
 import spleetwaise.core.logic.commands.exceptions.CommandException;
 import spleetwaise.core.logic.parser.exceptions.ParseException;
@@ -24,9 +24,8 @@ import spleetwaise.core.model.person.Person;
 import spleetwaise.core.storage.JsonAddressBookStorage;
 import spleetwaise.core.storage.JsonUserPrefsStorage;
 import spleetwaise.core.storage.StorageManager;
-import spleetwaise.core.testutil.PersonBuilder;
-import spleetwaise.core.logic.commands.CommandTestUtil;
 import spleetwaise.core.testutil.Assert;
+import spleetwaise.core.testutil.PersonBuilder;
 import spleetwaise.core.testutil.TypicalPersons;
 
 public class LogicManagerTest {

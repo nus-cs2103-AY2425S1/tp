@@ -2,7 +2,6 @@ package spleetwaise.core.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static spleetwaise.core.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
-import static spleetwaise.core.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
 import java.util.List;

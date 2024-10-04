@@ -1,7 +1,5 @@
 package spleetwaise.core.logic.commands;
 
-import static spleetwaise.core.logic.commands.CommandTestUtil.assertCommandSuccess;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

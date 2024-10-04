@@ -1,8 +1,7 @@
 package spleetwaise.core.model;
 
-import static spleetwaise.core.testutil.Assert.assertThrows;
-
 import org.junit.jupiter.api.Test;
+
 import spleetwaise.core.testutil.Assert;
 
 public class UserPrefsTest {
