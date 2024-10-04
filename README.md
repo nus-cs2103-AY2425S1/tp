@@ -1,5 +1,11 @@
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
+[![Java CI](https://github.com/AY2425S1-CS2103T-T16-3/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2425S1-CS2103T-T16-3/tp/actions/workflows/gradle.yml)
+
+[![MarkBind Action](https://github.com/AY2425S1-CS2103T-T16-3/tp/actions/workflows/docs.yml/badge.svg)](https://github.com/AY2425S1-CS2103T-T16-3/tp/actions/workflows/docs.yml)
+
+[![pages-build-deployment](https://github.com/AY2425S1-CS2103T-T16-3/tp/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/AY2425S1-CS2103T-T16-3/tp/actions/workflows/pages/pages-build-deployment)
+
 # ContactsForGood (CFG)
+
 ![Ui](docs/images/Ui.png)
 
 * This project is based on the `AddressBook-Level3 (AB3)` project created by the [SE-EDU initiative](https://se-education.org).
