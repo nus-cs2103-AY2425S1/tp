@@ -123,32 +123,6 @@ We specifically target Geriatricians by tailoring to their requirements of manag
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Non-Functional Requirements
-
-1. **Typing-Preferred**  
-   - **Category:** User Efficiency  
-   - **Requirement:** The product should be optimized for users who can type fast and prefer typing over other forms of input, with a command-line interface (CLI) that allows quick and efficient task completion.
-   - **User Benefit:** This allows users who prefer typing to accomplish tasks faster without relying on slower point-and-click methods.
-
-2. **Platform-Independent**  
-   - **Category:** Environment Requirements  
-   - **Requirement:** The software must work seamlessly on Windows, Linux, and OS-X platforms.
-   - **User Benefit:** Users can run the application on any operating system they prefer, ensuring flexibility and convenience without worrying about compatibility issues.
-
-3. **No-DBMS**  
-   - **Category:** Technical Requirements  
-   - **Requirement:** The system should not rely on a database management system (DBMS) for data storage.
-   - **User Benefit:** Users don't need to set up complex database systems, making the software easier to install and maintain, with simple file-based data storage.
-
-4. **Human-Editable File**  
-   - **Category:** Data Requirements  
-   - **Requirement:** The system's data should be stored locally in a human-readable and editable text file format.
-   - **User Benefit:** Users can directly view and modify their data without needing specialized tools, providing more control and flexibility for advanced users.
-
-5. **Single-User**  
-   - **Category:** User Constraints  
-   - **Requirement:** The product is designed for use by a single user, and data should not be shared between multiple users.
-   - **User Benefit:** Users can have confidence that their data is secure and private, without interference from other users, ensuring data integrity and ease of use.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -488,11 +462,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. **Typing-Preferred**  
+   - **Category:** User Efficiency  
+   - **Requirement:** The product should be optimized for users who can type fast and prefer typing over other forms of input, with a command-line interface (CLI) that allows quick and efficient task completion.
+   - **User Benefit:** This allows users who prefer typing to accomplish tasks faster without relying on slower point-and-click methods.
 
-*{More to be added}*
+2. **Platform-Independent**  
+   - **Category:** Environment Requirements  
+   - **Requirement:** The software must work seamlessly on Windows, Linux, and OS-X platforms.
+   - **User Benefit:** Users can run the application on any operating system they prefer, ensuring flexibility and convenience without worrying about compatibility issues.
+
+3. **No-DBMS**  
+   - **Category:** Technical Requirements  
+   - **Requirement:** The system should not rely on a database management system (DBMS) for data storage.
+   - **User Benefit:** Users don't need to set up complex database systems, making the software easier to install and maintain, with simple file-based data storage.
+
+4. **Human-Editable File**  
+   - **Category:** Data Requirements  
+   - **Requirement:** The system's data should be stored locally in a human-readable and editable text file format.
+   - **User Benefit:** Users can directly view and modify their data without needing specialized tools, providing more control and flexibility for advanced users.
+
+5. **Single-User**  
+   - **Category:** User Constraints  
+   - **Requirement:** The product is designed for use by a single user, and data should not be shared between multiple users.
+   - **User Benefit:** Users can have confidence that their data is secure and private, without interference from other users, ensuring data integrity and ease of use.
+
 
 ### Glossary
 
