@@ -385,7 +385,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Private Contact Detail**: A contact detail that is not meant to be shared with others
+* **Client**: A person or company that is in the contact list
+* **Client Type**: A category used to describe the relationship or status of a client, such as VIP and standard.
+* **Contact**: A client's information saved in the system, which includes details such as name, phone number, email, address, client type, and optional descriptions.
+* **Financial Advisor**: The primary user of ClientHub, responsible for managing a large number of client contacts and using the system to track details, tasks, and interactions with clients.
+* **Tag**: Keywords assigned to clients, such as "investor" or "retiree," used to categorize and segment clients for better management and service delivery.
 
 --------------------------------------------------------------------------------------------------------------------
 
