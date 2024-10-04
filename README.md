@@ -51,6 +51,4 @@ For a detailed breakdown of the project structure, visit the
 ---
 
 ## **Acknowledgements**
-
-**MindMap** is inspired by the `AddressBook Level 3` project, originally developed as part of the SE 
-(Software Engineering) module series at [se-education.org](https://se-education.org).
+ **MindMap** is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org)
