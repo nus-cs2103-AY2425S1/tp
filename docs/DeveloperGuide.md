@@ -6,178 +6,6 @@ title: Developer Guide
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
-
-## Target User 
-
-Independent Geriatricians managing elderly patients with chronic conditions, someone who can type fast, prefers CLI over GUI, and often needs to manage several patients.
-
---------------------------------------------------------------------------------------------------------------------
-
-## Value proposition
-
-Existing software don’t fulfill the needs of independent Geriatricians as they are either generic or integrated into hospitals. They can be time-consuming and complicated.
-
-We specifically target Geriatricians by tailoring to their requirements of managing elderly patients when it comes to tracking chronic conditions, coordinating care, and maintaining regular follow-ups.
-
---------------------------------------------------------------------------------------------------------------------
-
-## User stories
-
-### First Use (New User)
-
-1. As a new user, I can use sample data to walk through the features of the app.
-2. As a new user, I can remove sample data to start using the application for my own use.
-3. As a new user, I can set up a doctor profile to customize the system based on my needs.
-4. As a new user, I can add patient details quickly using a CLI to efficiently manage a heavy patient load.
-5. As a new user, I can use the help command to see available commands and how to use them.
-
-### Second Use  (Regular User)
-
-6. As a regular user, I can store patient data so that it can be viewed across different days without adding the same information again.
-7. As a regular user, I can distinguish between duplicate patients to avoid confusion when patients have the same name.
-8. As a regular user, I can edit patient data if the patient’s contact details change.
-9. As a regular user, I can delete patient data for patients who no longer need to be tracked.
-10. As a regular user, I can schedule follow-up appointments to update details quickly.
-
-### Tenth Use (Novice User)
-
-11. As a novice user, I can filter appointments by date to plan out my day more effectively.
-12. As a novice user, I can filter by condition to quickly prioritize patients based on their medical conditions.
-13. As a novice user, I can filter by patients to find those with higher health risks and follow up with them.
-14. As a novice user, I can send email reminders to patients about their upcoming appointments.
-
-### Hundredth Use (Experienced User)
-
-15. As an experienced user, I can batch update patient contact records to streamline the workflow after a mass screening.
-16. As an experienced user, I can batch delete patient contact records to declutter the system after a mass screening.
-17. As an experienced user, I can figure out a patient’s medication history to retrieve it quickly in emergencies.
-18. As an experienced user, I can retrieve caregiver information to inform them and enhance patient care.
-19. As an experienced user, I can use aliases for commands to speed up the usage of the CLI app.
-20. As an experienced user, I can remove inactive patients from the default view to declutter the app and display active patients.
-21. As an experienced user, I can use fuzzy search to retrieve patient details even with partial information.
-22. As an experienced user, I can export patient data to a CSV file to backup data and view it using other applications.
-23. As an experienced user, I can import patient data using a CSV file to restore backups or transfer data from another system.
-
-
-*User stories for the MVP:* Stories 4, 6 and 9 are for the MVP
-*User stories for the final version:* Stories 1 - 13 are for the final version.
-
---------------------------------------------------------------------------------------------------------------------
-
-## Use Case 1: Add a New Patient
-
-**System**: CareLink  
-**Use Case**: UC01 - Add New Patient  
-**Actor**: Geriatrician (Fred)  
-
-### Preconditions:
-- Fred is logged into CareLink.
-- Fred is at the patient details entry screen.
-
-### Guarantees:
-- Patient details are saved only if the input data is valid.
-- Duplicates are not created (NRIC uniqueness is enforced).
-
-### Main Success Scenario (MSS):
-1. Fred selects the option to add a new patient.
-2. CareLink requests patient details (first name, last name, NRIC, phone, address, email).
-3. Fred enters the patient details.
-4. CareLink validates the input data.
-5. CareLink saves the patient details to the system.
-6. CareLink displays a success message and shows the newly added patient in the system.
-
-### Extensions:
-- **3a. Invalid patient data entered**:
-    - CareLink displays an error message indicating which data is invalid.
-    - Fred corrects the input, and the use case resumes from step 3.
-
-
----
-
-## Use Case 2: View Patient Details
-
-**System**: CareLink  
-**Use Case**: UC02 - View Patient Details  
-**Actor**: Geriatrician (Fred)  
-
-### Preconditions:
-- Fred is logged into CareLink.
-- The patient exists in the system.
-
-### Guarantees:
-- The patient's details are successfully retrieved and displayed.
-- The correct patient's information is displayed without errors.
-
-### Main Success Scenario (MSS):
-1. Fred selects the option to view a patient's details.
-2. CareLink requests the patient’s NRIC.
-3. Fred enters the patient’s NRIC.
-4. CareLink retrieves the patient’s details (e.g., first name, last name, phone number, address, email).
-5. CareLink displays the patient's details to Fred.
-
-### Extensions:
-- **3a. Invalid or nonexistent patient NRIC entered**:
-    - CareLink displays an error message and prompts Fred to re-enter the correct NRIC.
-    - Fred corrects the NRIC, and the use case resumes from step 3.
-
-
---------------------------------------------------------------------------------------------------------------------
-
-## Non-Functional Requirements
-
-1. **Typing-Preferred**  
-   - **Category:** User Efficiency  
-   - **Requirement:** The product should be optimized for users who can type fast and prefer typing over other forms of input, with a command-line interface (CLI) that allows quick and efficient task completion.
-   - **User Benefit:** This allows users who prefer typing to accomplish tasks faster without relying on slower point-and-click methods.
-
-2. **Platform-Independent**  
-   - **Category:** Environment Requirements  
-   - **Requirement:** The software must work seamlessly on Windows, Linux, and OS-X platforms.
-   - **User Benefit:** Users can run the application on any operating system they prefer, ensuring flexibility and convenience without worrying about compatibility issues.
-
-3. **No-DBMS**  
-   - **Category:** Technical Requirements  
-   - **Requirement:** The system should not rely on a database management system (DBMS) for data storage.
-   - **User Benefit:** Users don't need to set up complex database systems, making the software easier to install and maintain, with simple file-based data storage.
-
-4. **Human-Editable File**  
-   - **Category:** Data Requirements  
-   - **Requirement:** The system's data should be stored locally in a human-readable and editable text file format.
-   - **User Benefit:** Users can directly view and modify their data without needing specialized tools, providing more control and flexibility for advanced users.
-
-5. **Single-User**  
-   - **Category:** User Constraints  
-   - **Requirement:** The product is designed for use by a single user, and data should not be shared between multiple users.
-   - **User Benefit:** Users can have confidence that their data is secure and private, without interference from other users, ensuring data integrity and ease of use.
-
-
---------------------------------------------------------------------------------------------------------------------
-
-## Glossary
-
-- **Patient Record**: The complete set of data related to a patient, including their contact information, medical notes, medication history, appointment schedules, and caregiver details.
-
-- **Caregiver**: A person associated with a patient who helps in managing the patient’s healthcare needs, often involved in emergency contacts or follow-ups.
-
-- **Follow-up Appointment**: An appointment scheduled after an initial consultation or visit to monitor the patient's ongoing condition or treatment progress.
-
-- **CLI (Command-Line Interface)**: A method of interacting with CareLink by typing commands, designed to optimize efficiency for users who prefer typing over using graphical interfaces.
-
-- **NRIC**: National Registration Identity Card, a unique identification number used in Singapore to identify individuals, and used in CareLink to uniquely identify patient records.
-
-- **Batch Update**: A feature in CareLink that allows the user to make changes to multiple patient records at once, such as updating contact information for a group of patients.
-
-- **Active Patient**: A patient who is currently being treated by the geriatrician and appears in the default view of CareLink.
-
-- **Inactive Patient**: A patient who is no longer actively being treated but whose records are kept in the system for historical reference; they do not appear in the default view.
-
-- **Fuzzy Search**: A search feature that allows users to find patient records using partial or approximate information, such as a part of the patient’s name or NRIC.
-
-- **Alias**: A shortcut or simplified command that users can define to speed up repetitive tasks within the CLI, making CareLink more efficient to use for experienced users.
-
-
---------------------------------------------------------------------------------------------------------------------
-
 ## **Acknowledgements**
 
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
@@ -433,71 +261,157 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Independent Geriatricians managing elderly patients
+* Those patients have chronic conditions
+* Geriatrician can type fast
+* Prefers CLI over GUI
+* Needs to manage several patients
+**Value proposition**: We specifically target Geriatricians by tailoring to their requirements of managing elderly patients when it comes to tracking chronic conditions, coordinating care, and maintaining regular follow-ups.
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
-
-
-### User stories
+### User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a...                                      | I want to...                              | So that I can...                                                        |
+| -------- | -------------------------------------------- | ----------------------------------------- | ----------------------------------------------------------------------- |
+| `* * *`  | new user                                     | use sample data to walk through features  | explore the app without inputting my own data                           |
+| `* * *`  | new user                                     | remove sample data                        | start using the app for my own data                                     |
+| `* * *`  | new user                                     | set up a doctor profile                   | customize the system based on my professional needs                     |
+| `* * *`  | new user                                     | add patient details via CLI               | efficiently manage a heavy patient load                                 |
+| `* * *`  | new user                                     | use the help command                      | refer to available commands and usage instructions                      |
+| `* * *`  | regular user                                 | store patient data                        | view patient details across multiple sessions without re-entering       |
+| `* * *`  | regular user                                 | distinguish between duplicate patients    | avoid confusion when patients have the same name                        |
+| `* * *`  | regular user                                 | edit patient data                         | update patient information such as contact details                      |
+| `* * *`  | regular user                                 | delete patient data                       | remove patients who no longer need to be tracked                        |
+| `* * *`  | regular user                                 | schedule follow-up appointments           | quickly update and track patient follow-ups                             |
+| `* * *`  | novice user                                  | filter appointments by date               | plan my day effectively by viewing scheduled appointments               |
+| `* * *`  | novice user                                  | filter by condition                       | prioritize patients based on their medical conditions                   |
+| `* * *`  | novice user                                  | filter by patients                        | find patients with higher health risks to follow up with them           |
+| `* *`  | novice user                                  | send email reminders to patients          | remind patients about upcoming appointments                             |
+| `* *`  | experienced user                             | batch update patient contact records      | streamline updates after events like mass screenings                    |
+| `*`  | experienced user                             | batch delete patient contact records      | declutter the system by removing multiple patients at once              |
+| `*`  | experienced user                             | retrieve patient medication history       | quickly find past medications in emergency situations                   |
+| `*`  | experienced user                             | retrieve caregiver information            | inform caregivers to enhance patient care                               |
+| `*`  | experienced user                             | use aliases for commands                  | speed up command usage in the CLI app                                   |
+| `*`  | experienced user                             | remove inactive patients from default view| declutter the app and focus on active patients                          |
+| `*`  | experienced user                             | use fuzzy search to retrieve patient details | find patient information even with partial or incomplete data         |
+| `*`  | experienced user                             | export patient data to a CSV file         | backup data and use it in other applications                            |
+| `*`  | experienced user                             | import patient data from a CSV file       | restore backups or transfer data from other systems                     |
 
-*{More to be added}*
+*User stories for the MVP:* Stories 4, 6 and 9 are for the MVP
+*User stories for the final version:* Stories 1 - 13 are for the final version.
 
 ### Use cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use Case 1: Add a New Patient**
+
+**System**: CareLink  
+**Use Case**: UC01 - Add New Patient  
+**Actor**: Geriatrician (Fred)  
+
+**Preconditions**
+- Fred is logged into CareLink.
+- Fred is at the patient details entry screen.
+
+**Guarantees**
+- Patient details are saved only if the input data is valid.
+- Duplicates are not created (NRIC uniqueness is enforced).
 
 **MSS**
-
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
-
-    Use case ends.
+1. Fred selects the option to add a new patient.
+2. CareLink requests patient details (first name, last name, NRIC, phone, address, email).
+3. Fred enters the patient details.
+4. CareLink validates the input data.
+5. CareLink saves the patient details to the system.
+6. CareLink displays a success message and shows the newly added patient in the system.
 
 **Extensions**
+- **3a. Invalid patient data entered**:
+    - CareLink displays an error message indicating which data is invalid.
+    - Fred corrects the input, and the use case resumes from step 3.
 
-* 2a. The list is empty.
 
-  Use case ends.
+**Use Case 2: View Patient Details**
 
-* 3a. The given index is invalid.
+**System**: CareLink  
+**Use Case**: UC02 - View Patient Details  
+**Actor**: Geriatrician (Fred)  
 
-    * 3a1. AddressBook shows an error message.
+**Preconditions**
+- Fred is logged into CareLink.
+- The patient exists in the system.
 
-      Use case resumes at step 2.
+**Guarantees**
+- The patient's details are successfully retrieved and displayed.
+- The correct patient's information is displayed without errors.
+
+**Main Success Scenario (MSS)**
+1. Fred selects the option to view a patient's details.
+2. CareLink requests the patient’s NRIC.
+3. Fred enters the patient’s NRIC.
+4. CareLink retrieves the patient’s details (e.g., first name, last name, phone number, address, email).
+5. CareLink displays the patient's details to Fred.
+
+**Extensions**
+- **3a. Invalid or nonexistent patient NRIC entered**:
+    - CareLink displays an error message and prompts Fred to re-enter the correct NRIC.
+    - Fred corrects the NRIC, and the use case resumes from step 3.
+
 
 *{More to be added}*
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. **Typing-Preferred**  
+   - **Category:** User Efficiency  
+   - **Requirement:** The product should be optimized for users who can type fast and prefer typing over other forms of input, with a command-line interface (CLI) that allows quick and efficient task completion.
+   - **User Benefit:** This allows users who prefer typing to accomplish tasks faster without relying on slower point-and-click methods.
 
-*{More to be added}*
+2. **Platform-Independent**  
+   - **Category:** Environment Requirements  
+   - **Requirement:** The software must work seamlessly on Windows, Linux, and OS-X platforms.
+   - **User Benefit:** Users can run the application on any operating system they prefer, ensuring flexibility and convenience without worrying about compatibility issues.
+
+3. **No-DBMS**  
+   - **Category:** Technical Requirements  
+   - **Requirement:** The system should not rely on a database management system (DBMS) for data storage.
+   - **User Benefit:** Users don't need to set up complex database systems, making the software easier to install and maintain, with simple file-based data storage.
+
+4. **Human-Editable File**  
+   - **Category:** Data Requirements  
+   - **Requirement:** The system's data should be stored locally in a human-readable and editable text file format.
+   - **User Benefit:** Users can directly view and modify their data without needing specialized tools, providing more control and flexibility for advanced users.
+
+5. **Single-User**  
+   - **Category:** User Constraints  
+   - **Requirement:** The product is designed for use by a single user, and data should not be shared between multiple users.
+   - **User Benefit:** Users can have confidence that their data is secure and private, without interference from other users, ensuring data integrity and ease of use.
+
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+- **Patient Record**: The complete set of data related to a patient, including their contact information, medical notes, medication history, appointment schedules, and caregiver details.
+
+- **Caregiver**: A person associated with a patient who helps in managing the patient’s healthcare needs, often involved in emergency contacts or follow-ups.
+
+- **Follow-up Appointment**: An appointment scheduled after an initial consultation or visit to monitor the patient's ongoing condition or treatment progress.
+
+- **CLI (Command-Line Interface)**: A method of interacting with CareLink by typing commands, designed to optimize efficiency for users who prefer typing over using graphical interfaces.
+
+- **NRIC**: National Registration Identity Card, a unique identification number used in Singapore to identify individuals, and used in CareLink to uniquely identify patient records.
+
+- **Batch Update**: A feature in CareLink that allows the user to make changes to multiple patient records at once, such as updating contact information for a group of patients.
+
+- **Active Patient**: A patient who is currently being treated by the geriatrician and appears in the default view of CareLink.
+
+- **Inactive Patient**: A patient who is no longer actively being treated but whose records are kept in the system for historical reference; they do not appear in the default view.
+
+- **Fuzzy Search**: A search feature that allows users to find patient records using partial or approximate information, such as a part of the patient’s name or NRIC.
+
+- **Alias**: A shortcut or simplified command that users can define to speed up repetitive tasks within the CLI, making CareLink more efficient to use for experienced users.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
