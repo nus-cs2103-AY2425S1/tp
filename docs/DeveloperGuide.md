@@ -289,7 +289,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `EduLog` and the **Actor** is the `teacher`, unless specified otherwise)
 
 **Use case: Delete a person**
 
@@ -315,6 +315,38 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
 
 *{More to be added}*
+
+**UC3: Add student**
+
+**System**: EduLog  
+**Actor**: Teacher  
+**Postcondition**: A student, with at least a name, is successfully enrolled in at least one class
+
+**Main Success Scenario:**
+1. Teacher initiates the process to add a new student in EduLog.
+2. System provides the required fields for student information.
+3. Teacher supplies the information.
+4. System validates the provided information to ensure it meets any specified criteria (e.g., uniqueness).
+5. System confirms that the student has been added.
+
+**Extensions:**
+- **2a. Teacher wants to abort the ‘add student’ process**  
+  Teacher can clear fields and exit the procedure.
+
+- **4a. Student with the same name already exists**  
+  System alerts the teacher that the student exists and displays their details.
+
+- **4b. Invalid student details**  
+  System alerts the teacher and prompts them to correct the invalid information.
+
+- **4c. Subject does not exist**  
+  System prompts the teacher to first create the tag using <u>UC7: Create a Subject</u>.
+
+- **4d. Class does not exist**  
+  System prompts the teacher to first create the class using <u>UC1: Add a Class</u>.
+
+- **4e. Tag does not exist**  
+  System prompts the teacher to first create the tag using <u>UC5: Create a Tag</u>.
 
 ### Non-Functional Requirements
 
