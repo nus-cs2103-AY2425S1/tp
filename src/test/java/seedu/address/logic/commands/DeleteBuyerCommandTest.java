@@ -4,22 +4,28 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.DeleteBuyerCommand.MESSAGE_ARGUMENTS;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.DeleteBuyerCommand.MESSAGE_DELETE_PERSON_SUCCESS;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Person;
 public class DeleteBuyerCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     @Test
-    public void execute() {
-        final String phoneNumber = "12345678";
-        assertCommandFailure(new DeleteBuyerCommand(phoneNumber), model,
-                String.format(MESSAGE_ARGUMENTS, phoneNumber));
+    public void execute_phoneNumberFound_assertCommandSuccess() {
+        final String phoneNumber = "94351253";
+        DeleteBuyerCommand deleteBuyerCommand = new DeleteBuyerCommand(phoneNumber);
+        Person personToDelete = model.getFilteredPersonList().stream()
+                .filter(person -> person.getPhone().toString().equals(phoneNumber))
+                .findFirst().orElseThrow(() -> new AssertionError("Phone number not found in the model"));
+        String expectedMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete));
+        assertCommandSuccess(deleteBuyerCommand, model, expectedMessage, model);
     }
     @Test
     public void equals() {

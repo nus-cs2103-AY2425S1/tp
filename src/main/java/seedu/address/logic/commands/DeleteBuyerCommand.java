@@ -1,10 +1,15 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
+import java.util.List;
+
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
 /**
  * Represents a command to delete a buyer in the buyer management system.
  */
@@ -37,7 +42,21 @@ public class DeleteBuyerCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        throw new CommandException(String.format(MESSAGE_ARGUMENTS, phoneNumber));
+        requireNonNull(model);
+        List<Person> lastShownList = model.getFilteredPersonList();
+        // Search for the person with the specified phone number
+        Person personToDelete = null;
+        for (Person person : lastShownList) {
+            if (person.getPhone().toString().equals(phoneNumber)) {
+                personToDelete = person;
+                break;
+            }
+        }
+        if (personToDelete == null) {
+            throw new CommandException(String.format("Person not found. ", phoneNumber));
+        }
+        model.deletePerson(personToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 
     /**
