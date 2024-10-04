@@ -306,9 +306,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to add a client.
+1. User requests to add a client.
 2.  MATER adds the client and displays a confirmation message.
-    
+
     Use case ends.
 
 **Extensions**
@@ -463,13 +463,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 
-* 2a. The given client identification number is invalid.
+* 2a. The client does not have a car associated to them.
     * 2a1. MATER shows an error message.
 
       Use case resumes from step 2.
 
 
-* 2b. The client does not have a car associated to them.
+* 2b. The given client identification number is invalid.
     * 2b1. MATER shows an error message.
 
       Use case resumes from step 2.
@@ -478,27 +478,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User <u>list clients (UC2)</u>.
-2.  User requests to edit a specific field of the car from a specific client in the list.
+1.  User <u>views a client (UC5)</u>.
+2.  User requests to edit a specific field of the client's car.
 3.  MATER edits the field of the car of the client and displays a confirmation message.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The list is empty.
-
-  Use case ends.
-
-
-* 2a. The given client identification number is invalid.
+* 2a. The client does not have a car associated to them.
     * 2a1. MATER shows an error message.
+
+      Use case resumes from step 1.
+
+
+* 2b. The given client identification number is invalid.
+    * 2b1. MATER shows an error message.
 
       Use case resumes from step 2.
 
 
-* 2b. The client does not have a car associated to them.
-    * 2b1. MATER shows an error message.
+* 2c. The given field identification tag is invalid.
+    * 2c1. MATER shows an error message.
+
+      Use case resumes from step 2.
+
+
+* 2d. The given new value is invalid.
+    * 2d1. MATER shows an error message.
 
       Use case resumes from step 2.
 
@@ -506,26 +513,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User <u>list clients (UC2)</u>.
-2.  User requests to add an issue to the car from a specific client in the list.
-3.  MATER adds the issue to client's car and displays a confirmation message.
+1.  User <u>views a client (UC5)</u>.
+2.  User requests to add an issue to the client's car.
+3.  MATER adds the issue to the client's car and displays a confirmation message.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The list is empty.
-
-  Use case ends.
-
-
-* 2a. The given client identification number is invalid.
+* 2a. The client does not have a car associated to them.
     * 2a1. MATER shows an error message.
+
+      Use case resumes from step 1.
+
+
+* 2b. The given client identification number is invalid.
+    * 2b1. MATER shows an error message.
 
       Use case resumes from step 2.
 
 
-* 2b. The client does not have a car associated to them.
+* 2c. The given issue description is invalid.
     * 2b1. MATER shows an error message.
 
       Use case resumes from step 2.
@@ -534,38 +542,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User <u>list clients (UC2)</u>.
-2.  User requests to delete an issue of the car from a specific client in the list.
+1.  User <u>views a client (UC5)</u>.
+2.  User requests to delete an issue of the car from the client's car.
 3.  MATER deletes the issue from the client's car and displays a confirmation message.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The list is empty.
-
-  Use case ends.
-
-
-* 2a. The given client identification number is invalid.
+* 2a. The client does not have a car associated to them.
     * 2a1. MATER shows an error message.
 
-      Use case resumes from step 2.
+      Use case resumes from step 1.
 
 
-* 2b. The given issue identification number is invalid.
+* 2b. The car does not have an issue associated to it.
     * 2b1. MATER shows an error message.
 
-      Use case resumes from step 2.
+      Use case resumes from step 1.
 
 
-* 2c. The client does not have a car associated to them.
+* 2c. The given client identification number is invalid.
     * 2c1. MATER shows an error message.
 
       Use case resumes from step 2.
 
 
-* 2d. The car does not have an issue associated to it.
+* 2d. The given issue identification number is invalid.
     * 2d1. MATER shows an error message.
 
       Use case resumes from step 2.
@@ -574,38 +577,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User <u>list clients (UC2)</u>.
-2.  User requests to edit an issue of the car from a specific client in the list.
+1.  User <u>views a client (UC5)</u>.
+2.  User requests to edit an issue of the client's car
 3.  MATER edits the issue of the client's car and displays a confirmation message.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The list is empty.
-
-  Use case ends.
-
-
-* 2a. The given client identification number is invalid.
+* 2a. The client does not have a car associated to them.
     * 2a1. MATER shows an error message.
 
-      Use case resumes from step 2.
+      Use case resumes from step 1.
 
 
-* 2b. The given issue identification number is invalid.
+* 2b. The given client identification number is invalid.
     * 2b1. MATER shows an error message.
 
       Use case resumes from step 2.
 
 
-* 2c. The client does not have a car associated to them.
+* 2c. The given issue identification number is invalid.
     * 2c1. MATER shows an error message.
 
       Use case resumes from step 2.
 
 
-* 2d. The car does not have an issue associated to it.
+* 2d. The given new issue description is invalid.
     * 2d1. MATER shows an error message.
 
       Use case resumes from step 2.
