@@ -317,10 +317,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### **Non-Functional Requirements**
 
-1. **Compatibility**: Should work on any _mainstream OS_ (e.g., **Windows, macOS, Linux**) as long as it has **Java 17** or above installed.
+1. **Compatibility**: 
+    - Should work on any _mainstream OS_ (e.g., **Windows, macOS, Linux**) as long as it has **Java 17** or above installed.
 
 2. **Performance**:
-    - Should be able to hold up to **1,000 patient records** without noticeable sluggishness in performance for typical usage.
+    - Should be able to hold up to **1,000 patient records** within 2 seconds for typical usage.
     - The system must support up to **10,000 patient records** without performance degradation under heavy load.
 
 3. **User Efficiency**:
@@ -344,7 +345,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 9. **Data Recovery**:
     - In the event of a system crash, patient data should not be lost. 
-    - The system must recover data from the **last automatic backup**, with no more than **1% data loss** in the worst-case scenario.
+    - The system must recover data from the **last automatic backup**, with no more than **5% data loss** in the worst-case scenario.
 
 10. **Maintainability and Extensibility**:
     - The system should be designed in a way that future updates (e.g., adding new features or fixing bugs) can be made **easily** and **without extensive rewrites** to existing code.
