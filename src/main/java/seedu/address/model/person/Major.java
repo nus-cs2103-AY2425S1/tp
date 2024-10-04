@@ -1,10 +1,10 @@
 package seedu.address.model.person;
 
-import java.util.Arrays;
-import java.util.List;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Represents a Person's major in the address book.
@@ -20,8 +20,8 @@ public class Major {
      */
     public static final String VALIDATION_REGEX = "[a-zA-Z]+";
 
-    public static final List<String> valid_majors = Arrays.asList("cs", "bza", "ceg", "isys", "isec");
-    public String major;
+    public static final List<String> VALID_MAJORS = Arrays.asList("cs", "bza", "ceg", "isys", "isec");
+    private String major;
 
     /**
      * Constructs a {@code Major}.
@@ -38,7 +38,7 @@ public class Major {
      * Returns if a given major string is a valid role.
      */
     public static boolean isValidMajor(String test) {
-        return test.matches(VALIDATION_REGEX) && valid_majors.contains(test);
+        return test.matches(VALIDATION_REGEX) && VALID_MAJORS.contains(test);
     }
 
     @Override

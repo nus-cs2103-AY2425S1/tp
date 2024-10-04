@@ -57,9 +57,13 @@ public class Person {
         return address;
     }
 
-    public Role getRole() {return role;}
+    public Role getRole() {
+        return role;
+    }
 
-    public Major getMajor() {return major;}
+    public Major getMajor() {
+        return major;
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}

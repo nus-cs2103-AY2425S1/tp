@@ -8,9 +8,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Role {
 
-    public static final String MESSAGE_CONSTRAINTS = "Roles should only be 'brUdder' or 'mUdder' and it can't be blank.";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Roles should only be 'brUdder' or 'mUdder' and it can't be blank.";
 
-    public String role;
+    private String role;
 
     /**
      * Constructs a {@code Role}.
