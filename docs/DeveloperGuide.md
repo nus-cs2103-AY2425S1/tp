@@ -294,7 +294,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | mechanic          | be able to add new cars to the list                                                   | accommodate new clients                                                |
 | `* * *`  | mechanic          | edit the client's details                                                             | make changes if needed                                                 |
 | `* * *`  | mechanic          | delete clients data                                                                   | remove unneeded data                                                   |
-| `*`      | mechanic          | have access to the full history log of each car that includes all visits and services | quickly check on the logs of cars                                      |
 | `* *`    | frequent CLI user | be able to customize commands and shortcuts                                           | tweak my experience/improve productivity                               |
 | `* *`    | mechanic          | generate reports on the most common issues faced by cars of a specific model          |                                                                        |
 | `* *`    | user              | have a good user interface                                                            | use the app with greater ease                                          |
@@ -302,12 +301,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | mechanic          | receive the most urgent issues                                                        | focus on the issues from the most important to the least               |
 | `* *`    | mechanic          | be notified when a returning client's car is brought in                               | check their car's history before starting any new work                 |
 | `* *`    | admin             | flag vehicles as priority                                                             | inform the mechanic on which vehicles to work on first                 |
-| `*`      | admin             | track vehicles whose service dates are coming soon                                    | recommend and schedule servicing for car owners                        |
+| `* *`    | mechanic          | know who did work on what car                                                         | pinpoint the working staff if there were issues with a repair job      |
 | `* *`    | mechanic          | categorize issues based on severity                                                   | prioritize the most critical repairs and address urgent problems first |
 | `* *`    | mechanic          | add notes/statements belonging to certain cars as they may be important               |                                                                        |
 | `*`      | mechanic          | list out all cars which are "unserviced"                                              | to know how much workload I have left                                  |
 | `*`      | mechanic          | be able to see when marks like "serviced" or "unserviced" were added                  | cover an absent/on-leave coworker if needed                            |
-| `* *`    | mechanic          | know who did work on what car                                                         | pinpoint the working staff if there were issues with a repair job      |
+| `*`      | mechanic          | have access to the full history log of each car that includes all visits and services | quickly check on the logs of cars                                      |
+| `*`      | admin             | track vehicles whose service dates are coming soon                                    | recommend and schedule servicing for car owners                        |
 *{More to be added}*
 
 ### Use cases
