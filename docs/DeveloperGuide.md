@@ -331,7 +331,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 5. **Security**:
     - **Sensitive patient information** (e.g., medical records, contact details) must be accessible only by **authorized personnel** (e.g., clinic staff, administrators).
-    - Access to sensitive information should be tracked with **audit logs**.
 
 6. **Data Processing**:
     - The system must process and display patient information (e.g., patient records) within **2 seconds** of a user request under normal operating conditions (up to **1,000 records**).
