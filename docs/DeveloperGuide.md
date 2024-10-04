@@ -428,6 +428,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: UC06 - List patients**
+
 **MSS**
 
 1. Doctor request to list patients
