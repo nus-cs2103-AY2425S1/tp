@@ -130,7 +130,7 @@ The `Model` component,
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Subject` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Subject` object per unique subject, instead of each `Person` needing their own `Subject` objects.<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
