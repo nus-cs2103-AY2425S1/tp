@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# VolunTier Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -274,29 +274,44 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* has a need to manage a significant number of volunteer records and site locations
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
+* has a need to generate and visualize reports (e.g., volunteer hours, visit frequency) in a simple and efficient way
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: manage volunteer records and site visits faster than a typical mouse/GUI-driven app, while efficiently scheduling and tracking volunteer engagement
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​    | I want to …​                                          | So that I can…​                                                            |
+|----------|------------|-------------------------------------------------------|----------------------------------------------------------------------------|
+| `* * *`  | new user   | see usage instructions                                | refer to instructions when I forget how to use the App                     |
+| `* * *`  | supervisor | view the contact details of volunteers                | reach out to them for administrative matters                               |
+| `* * *`  | supervisor | add a new volunteer and their details                 | arrange their site visits                                                  |
+| `* * *`  | supervisor | add a new location                                    | arrange site visits                                                        |
+| `* * *`  | supervisor | update a volunteer's contact information              | keep the details accurate                                                  |
+| `* * *`  | supervisor | delete details of an inactive volunteer               | keep the database up-to-date                                               |
+| `* * *`  | supervisor | view the address of volunteers                        | arrange site visits to locations that are convenient for them              |
+| `* * *`  | supervisor | update a volunteer's address                          | keep the database up-to-date                                               |
+| `* * *`  | supervisor | update a volunteer's total volunteer hours            | keep track of the number of hours they have put into volunteering          |
+| `* * *`  | supervisor | update a volunteer's visitation records               | keep track of their site visits                                            |
+| `* * *`  | supervisor | view a volunteer's total volunteer hours              | track their productivity and contributions over time                       |
+| `* * *`  | supervisor | interact with the application's GUI easily            | enjoy the application and use it intuitively                               |
+| `* * *`  | supervisor | find a volunteer by name                              | locate details of volunteers without going through the entire list         |
+| `* *`    | supervisor | view the availability of volunteers                   | schedule site visits that matches their availability                       |
+| `* *`    | supervisor | add the available timeslots of volunteers             | allow site visits to be arranged                                           |
+| `* *`    | supervisor | update the available timeslots of volunteers          | ensure volunteers can conduct site visits as scheduled                     |
+| `* *`    | supervisor | view a volunteer's total hours in graphs or charts    | easily analyze volunteer engagement and allocate resources efficiently     |
+| `* *`    | supervisor | view volunteer visit frequency by location in a graph | identify the most and least visited sites and adjust resources accordingly |
+| `*`      | supervisor | sort volunteers in different orders                   | locate a volunteer easily                                                  |
+| `*`      | supervisor | filter the volunteers by certain categories           | locate a volunteer easily                                                  |
+| `*`      | supervisor | download a report of a volunteer's hours              | use it for book-keeping or share with the volunteer upon request           |
+| `*`      | supervisor | hide private contact details                          | minimize chance of someone else seeing them by accident                    |
 
 ### Use cases
 
@@ -325,15 +340,75 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: Add a new volunteer**
+
+**MSS**
+
+1.  User requests to add a new volunteer
+2.  AddressBook prompts the user to input the volunteer's details (e.g., name, contact details, address)
+3.  User provides the relevant details
+4.  AddressBook saves the new volunteer in the system
+5.  AddressBook confirms that the volunteer has been successfully added
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. User inputs a name that already exists.
+    
+    * 2a1. AddressBook notifies the user that the volunteer already exists.
+  
+    * 2a2. User is prompted to input a different name, update the existing record or confirm that it is a different person.
+
+  Use case resumes at step 2.
+
+* 3a. User inputs invalid or incomplete details.
+
+    * 3a1. AddressBook shows an error message indicating the missing or invalid fields.
+
+      Use case resumes at step 2.
+
+**Use case: Update a volunteer's contact information**
+
+**MSS**
+
+1.  User requests to list persons
+2.  AddressBook shows a list of persons
+3.  User requests to update the contact details of a specific person on the list
+4.  AddressBook displays the volunteer's current contact information
+5.  User provides the updated contact information
+6.  AddressBook updates the volunteer's contact details in the database
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+  
+* 5a. The updated information is invalid.
+   
+    * 5a1. AddressBook shows an error message specifying the mistake.
+
+      Use case resumes at step 5.
+
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  The command syntax should follow a consistent pattern, so users can easily learn new commands without extensive documentation.
+5.  The codebase should be modular, ensuring that future features can be implemented without major refactoring.
+6.  The app must ensure data accuracy by validating inputs (e.g., checking valid phone numbers or dates for site visits) before updating the database.
 
-*{More to be added}*
 
 ### Glossary
 
