@@ -23,24 +23,31 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final EmergencyContact emergencyContact;
     private final Set<Tag> tags = new HashSet<>();
     private final PriorityLevel priorityLevel;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, PriorityLevel priorityLevel) {
+    public Person(Name name, Phone phone, Email email, Address address, EmergencyContact emergencyContact,
+                  Set<Tag> tags, PriorityLevel priorityLevel) {
         requireAllNonNull(name, phone, email, address, tags, priorityLevel);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.emergencyContact = emergencyContact;
         this.tags.addAll(tags);
         this.priorityLevel = priorityLevel;
     }
 
     public Name getName() {
         return name;
+    }
+
+    public EmergencyContact getEmergencyContact() {
+        return emergencyContact;
     }
 
     public Phone getPhone() {
@@ -117,6 +124,7 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("emergency contact", emergencyContact)
                 .add("tags", tags)
                 .add("priorityLevel", priorityLevel)
                 .toString();

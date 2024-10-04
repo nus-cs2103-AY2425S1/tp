@@ -15,6 +15,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -46,11 +47,13 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+        // add command does not allow adding remarks straight away
+        EmergencyContact emergencyContact = new EmergencyContact("", "");
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         // set default prioritylevel as 3
         PriorityLevel priorityLevel = ParserUtil.parsePriorityLevel(argMultimap.getValue(PREFIX_PRIORITY).orElse("3"));
 
-        Person person = new Person(name, phone, email, address, tagList, priorityLevel);
+        Person person = new Person(name, phone, email, address, emergencyContact, tagList, priorityLevel);
 
         return new AddCommand(person);
     }

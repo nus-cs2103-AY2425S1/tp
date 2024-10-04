@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -108,6 +109,9 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        final EmergencyContact modelEmergencyContact = new EmergencyContact("", "");
+        //TODO: Implement parsing and marshalling in the storage commit.
+
         final PriorityLevel modelPriorityLevel;
 
         if (priorityLevel == 0) {
@@ -120,7 +124,8 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelPriorityLevel);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress,
+                modelEmergencyContact, modelTags, modelPriorityLevel);
     }
 
 }
