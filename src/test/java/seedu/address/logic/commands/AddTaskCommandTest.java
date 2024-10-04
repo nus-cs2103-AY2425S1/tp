@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.AddTaskCommand.MESSAGE_NONEXISTENT_PERSON;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -19,6 +20,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Name;
@@ -29,6 +31,8 @@ import seedu.address.testutil.TaskBuilder;
 
 public class AddTaskCommandTest {
 
+    private final ModelManager model = new ModelManager();
+
     @Test
     public void constructor_nullTaskDescription_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddTaskCommand(null, new Name("John Doe")));
@@ -37,6 +41,16 @@ public class AddTaskCommandTest {
     @Test
     public void constructor_nullPersonName_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddTaskCommand("Buy medication", null));
+    }
+
+    @Test
+    public void execute_personDoesNotExist_throwsCommandException() {
+        Name nonExistentPersonName = new Name("Non Existent Person");
+        AddTaskCommand addTaskCommand = new AddTaskCommand("Take medication", nonExistentPersonName);
+
+        assertThrows(CommandException.class,
+                String.format(MESSAGE_NONEXISTENT_PERSON, nonExistentPersonName.fullName), () ->
+                        addTaskCommand.execute(model));
     }
 
     @Test
