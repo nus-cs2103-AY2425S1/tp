@@ -300,20 +300,43 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `HRHelper` and the **Actor** is the `HR staff`, unless specified otherwise)
+
+**Use case: Add a person**
+
+**MSS**
+
+1. User requests to add a specific person in the list
+2. HRHelper adds the person
+    Use case ends.
+
+**Extensions**
+
+* 1a. The user does not have the authority to add the person.
+
+  Use case ends.
+
+* 2a. HRHelper reconfirms the decision with the user.
+
+  Use case ends.
+
 
 **Use case: Delete a person**
 
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  HRHelper shows a list of staff members
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  HRHelper deletes the person
 
     Use case ends.
 
 **Extensions**
+
+* 1a. The user does not have the authority to delete the person.
+
+  Use case ends.
 
 * 2a. The list is empty.
 
@@ -325,7 +348,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-*{More to be added}*
+* 4a. HRHelper reconfirms the decision with the user.
+
+  Use case ends.
+
+**Use case: Search a person**
+
+**MSS**
+
+1.  User requests to list persons
+2.  HRHelper shows a list of staff members
+3.  User requests to search for a specific person in the list (by name/contact/other information etc.)
+4.  HRHelper shows the person/people matching the description
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 2a. The given description is invalid.
+
+    * 2a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+  
+* 3a. HRHelper gives user the option to view the given person
+
+  Use case ends.
 
 ### Non-Functional Requirements
 
