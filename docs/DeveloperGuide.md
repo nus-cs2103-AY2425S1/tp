@@ -476,11 +476,42 @@ Use case resumes from step 2.
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+#### 1. Additional Requirements
+1.1. The system should work on any **mainstream OS** as long as it has **Java 17** or above installed.  
+1.2. The system should be able to hold up to **1,000 persons** without noticeable sluggishness in performance for typical usage.  
+1.3. A user with **above average typing speed** for regular English text (i.e. not code, not system admin commands) should be able to accomplish most tasks faster using commands than using the mouse.
 
-*{More to be added}*
+#### 2. Performance
+2.1. The system should respond within **2 seconds** after the user types in a command.  
+2.2. The system should start up within **5 seconds**.
+
+#### 3. Scalability
+3.1. The system should be able to handle up to **10,000+ users** without degradation in performance.  
+3.2. An event should be able to handle **1,000+ participants**.  
+3.3. A participant should be able to keep track of **10+ events** at once.
+
+#### 4. Portability
+4.1. The system should run on **all OS systems** (e.g. Windows, Mac, Linux).  
+4.2. The system should work on both **32-bit and 64-bit environments**.
+
+#### 5. Security
+5.1. Sensitive data should be **safely encrypted**.
+
+#### 6. Maintainability
+6.1. Codebase should be easy to maintain and follow **industry-standard design practices**.  
+6.2. **Coupling** should be reduced to allow for easier testing of features.  
+6.3. Codebase should aim for **high cohesion** to increase the understandability of individual components.
+
+#### 7. Usability
+7.1. The system should be **easy-to-use** for a novice, who does not have a lot of experience using CLI-based apps.  
+7.2. The system should offer a **user-friendly** and **intuitive CLI syntax**, minimizing the learning curve for new users.
+
+#### 8. Process
+8.1. The project is expected to incrementally improve the app by adding **new features each week**.
+
+#### 9. Reliability
+9.1. The system should be able to **recover from failures** without losing data or interrupting service.
+
 
 ### Glossary
 
