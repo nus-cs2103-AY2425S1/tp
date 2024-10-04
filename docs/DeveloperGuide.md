@@ -351,23 +351,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Celebrity Manager**: Industry professionals involved in managing and planning celebrity schedules
-* **API**: Application Programming Interface, a set of functions and procedures that allow the creation of applications which access features or data of an operating system, application, or other service.
-* **CLI**: Command-Line Interface, a text-based user interface used to operate software and perform tasks.
-* **UI (User Interface)**: The visual part of the application that users interact with. 
+* **Talents**: Well known or up-and-coming individuals who partake in the entertainment industry in one way or another
+* **Industry Professional**: Individuals that talents make contact for events
+* **Events**: Social and networking events organised by third parties e.g. award shows, brand events
+* **Talent Manager**: Industry professionals involved in managing and planning talent schedules
 * **Model-View-Controller (MVC)**: A design pattern that separates an application into three main logical components: the Model, the View, and the Controller. 
-* **JavaFX**: A software platform for creating and delivering desktop applications, as well as rich Internet applications (RIAs). 
-* **FXML**: An XML-based language used to define the user interface in JavaFX applications.
 * **Logic Component**: A part of the architecture responsible for handling user commands and parsing them. 
 * **Model Component**: Manages the application’s data and handles the business logic of the application. 
 * **Storage Component**: Manages reading from and writing to the persistent storage. 
-* **VersionedAddressBook**: A class responsible for implementing the undo/redo feature by maintaining different states of the address book. 
-* **PlantUML**: A tool used for creating UML diagrams from plain text descriptions. 
-* **UML (Unified Modeling Language)**: A standardized modeling language used to visualize the design of a system. 
-* **Observer Pattern**: A design pattern where an object (Observable) maintains a list of dependents (Observers) and notifies them of any state changes. 
+* **VersionedAddressBook**: A class responsible for implementing the undo/redo feature by maintaining different states of the address book.  
 * **Person**: Refers to a contact object within the address book application. 
+* **Index**: Refers to the position of an individuals contact in the address book
+* **Tag**: The associated description with said contact based on common groups
 * **Undo/Redo Feature**: A functionality that allows reverting or reapplying actions taken by the user within the application. 
-* **ObservableList**: A JavaFX list that allows listeners to track changes made to the list.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
