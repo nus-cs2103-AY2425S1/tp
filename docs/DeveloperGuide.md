@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# TechConnect Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -280,24 +280,27 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: TechConnect is targeted at students who are looking at jobs in the tech industry.
+TechConnect helps students to organize a list of companies that they are interested in and find relevant companies that matches their needs.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
-
-*{More to be added}*
-
+| Priority | As a …​                                                 | I want to …​                                    | So that I can…​                                                                   |
+|----------|---------------------------------------------------------|-------------------------------------------------|-----------------------------------------------------------------------------------|
+| `* * *`  | new user                                                | see usage instructions                          | refer to instructions when I forget how to use the App                            |
+| `* * *`  | user                                                    | add a new company                               | refer to the company later                                                        |
+| `* * *`  | user                                                    | delete a company                                | remove entries that I no longer need                                              |
+| `* * *`  | user                                                    | find a company by name                          | locate details of the company without having to go through the entire list        |
+| `* *`    | user                                                    | bookmark a company                              | locate a company that I am interested in                                          |
+| `*`      | user with many companies in the address book            | filter companies by a criterion                 | locate a company relevant to my needs easily                                      |
+| `*`      | user with many bookmarked companies in the address book | see all my bookmarked companies                 | locate a company easily                                                           |
+| `*`      | user                                                    | tag a company                                   | associate them with the given tag                                                 |
+| `*`      | user                                                    | see which company I have contacted              | keep track of which companies I have contacted                                    |
+| `*`      | user                                                    | receive news about companies in my address book | stay informed about events or job opportunities from companies in my address book |
+| `*`      | new user                                                | create a personal profile with my skills        | find a company that matches my profile                                            |
 ### Use cases
 
 **System: TechConnect (TC)**
@@ -382,7 +385,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Index**: A numeric value that acts as an identifier to refer to a specific entity in the system.
+* **Tag**: A label to categorize the contacts in the address book.
+* **Bookmark**: A feature to allow users to save a company for future reference. This also provides users quick access to these companies.
 
 --------------------------------------------------------------------------------------------------------------------
 
