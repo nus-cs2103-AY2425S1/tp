@@ -26,6 +26,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -94,14 +95,12 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_emergencyContact() throws Exception {
-        final String emergencyContactName = "Lily";
-        final String emergencyContactNumber = "12345678";
+        final EmergencyContact emergencyContact = new EmergencyContact("Lily", "12345678");
         EmergencyContactCommand command = (EmergencyContactCommand) parser.parseCommand(
                 EmergencyContactCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_NAME + emergencyContactName + " "
-                        + PREFIX_PHONE + emergencyContactNumber);
-        assertEquals(new EmergencyContactCommand(INDEX_FIRST_PERSON, emergencyContactName, emergencyContactNumber),
-                command);
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_NAME + emergencyContact.getName() + " "
+                        + PREFIX_PHONE + emergencyContact.getNumber());
+        assertEquals(new EmergencyContactCommand(INDEX_FIRST_PERSON, emergencyContact), command);
     }
 
     @Test

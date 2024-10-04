@@ -9,6 +9,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.EmergencyContactCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.EmergencyContact;
 
 /**
  * Parses input arguments and creates a new {@code RemarkCommand} object
@@ -31,6 +32,6 @@ public class EmergencyContactCommandParser implements Parser<EmergencyContactCom
         }
         String contactName = argMultimap.getValue(PREFIX_NAME).orElse("");
         String contactNumber = argMultimap.getValue(PREFIX_PHONE).orElse("");
-        return new EmergencyContactCommand(index, contactName, contactNumber);
+        return new EmergencyContactCommand(index, new EmergencyContact(contactName, contactNumber));
     }
 }
