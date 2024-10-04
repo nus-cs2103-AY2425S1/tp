@@ -320,6 +320,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
+**Use case: Screen a job listing**
+
+**MSS**
+
+1.  User requests to list job listings
+2.  AddressBook shows a list of job listings
+3.  User requests to screen all contact based on the requirements of a job listing
+4.  AddressBook return a list of contacts that fits the job requirements
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. Application shows an error message.
+
+      Use case resumes at step 2.
+
+* 4a. The list is empty.
+
+  Use case ends.
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
