@@ -318,8 +318,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**  
 
 1.  User requests to add a new pet owner by providing the owner's name, contact number, address, and email.  
-2.  AddressBook validates input.  
-3.  AddressBook successfully adds the new pet owner to the list.  
+2.  PawPatrol validates input.  
+3.  PawPatrol successfully adds the new pet owner to the list.  
 
     Use case ends.  
 
@@ -368,7 +368,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to search for a client or pet by entering the command along with the relevant data type and search value.
 2. PawPatrol validates the input.
 3. PawPatrol performs the search and retrieves matching records.
-4. AddressBook displays the list of contacts matching the `dataType` and `searchValue`.
+4. PawPatrol displays the list of contacts matching the `dataType` and `searchValue`.
 
    Use case ends.
 
