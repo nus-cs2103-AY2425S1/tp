@@ -302,6 +302,86 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 **System: EventfulNUS**\
+**Use case: UC1 - Add participant**\
+**Actor: User**\
+**Guarantee: MSS → Participant details are successfully added**
+
+MSS:
+1. User requests to add a participant
+2. System requests for confirmation
+3. User confirms
+4. System adds the participant and displays a message indicating no errors.
+
+Extensions:\
+1a. System detects an error in the entered data.\
+1a1. System prompts user to re-enter data\
+1a2. User enters new data\
+Steps 1a1-1a2 are repeated until the data entered is correct.
+Use case resumes from step 2.
+
+<hr>
+
+**System: EventfulNUS**\
+**Use case: UC2 - Search for participant**\
+**Actor: User**\
+**Guarantee: MSS → The details of the participant being searched for will be displayed**
+
+MSS:
+1. User requests to search for participant
+2. System finds the participant and displays the participant’s data
+
+Extensions:\
+1a. System detects an error in the entered data.\
+1a1. System prompts user to re-enter data\
+1a2. User enters new data\
+Steps 1a1-1a2 are repeated until the data entered is correct.
+Use case resumes from step 2.
+
+1b. System does not find any matching participant in the system\
+1b1. System prompts user to re-enter data\
+1b2. User enters new data\
+Steps 1b1-1b2 are repeated until the data entered is correct.
+Use case resumes from step 2.
+
+<hr>
+
+**System: EventfulNUS**\
+**Use case: UC3 - See tutorial / list of commands**\
+**Actor: User**\
+**Guarantee: MSS → The tutorial / list of commands will be displayed**
+
+MSS:
+1. User requests to see tutorial / list of commands.
+2. System displays the tutorial / list of commands
+
+Extensions:\
+1a. System detects an unknown command\
+1a1. System prompts user to re-enter the command\
+1a2. User enters new command\
+Steps 1a1-1a2 are repeated until the data entered is correct.
+Use case resumes from step 2.
+
+<hr>
+
+**System: EventfulNUS**\
+**Use case: UC4 - View a list of participants for a specific sub-event**\
+**Actor: User**\
+**Guarantee: MSS → The list of participants for the specified sub-event will be displayed**
+
+MSS:
+1. User requests to view list of participants for sub-event
+2. System displays list of participants for sub-event
+
+Extensions:\
+1a. System detects an error in the entered data.\
+1a1. System prompts user to re-enter data\
+1a2. User enters new data\
+Steps 1a1-1a2 are repeated until the data entered is correct.
+Use case resumes from step 2.
+
+<hr>
+
+**System: EventfulNUS**\
 **Use case: UC5 - Update participant’s details**\
 **Actor: User**\
 **Guarantee: MSS → The specified participant’s details will be updated**
