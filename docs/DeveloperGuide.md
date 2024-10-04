@@ -313,6 +313,91 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Add a pet owner**
+
+**MSS**  
+
+1.  User requests to add a new pet owner by providing the owner's name, contact number, address, and email.  
+2.  AddressBook validates input.  
+3.  AddressBook successfully adds the new pet owner to the list.  
+
+    Use case ends.  
+
+**Extensions**  
+
+* 2a. Invalid owner name format.  
+
+    * 2a1. PawPatrol shows an error message:
+
+      Use case resumes at step 1.
+
+* 2b. Invalid phone number format.
+
+    * 2b1. PawPatrol shows an error message:
+
+      Use case resumes at step 1.
+
+* 2c. Owner name exceeds 50 characters.
+
+    * 2c1. PawPatrol shows an error message:  
+
+      Use case resumes at step 1.
+
+* 2d. Owner address exceeds 100 characters.
+
+    * 2d1. PawPatrol shows an error message:  
+
+      Use case resumes at step 1.
+
+* 2e. Owner email exceeds 50 characters.
+
+    * 2e1. PawPatrol shows an error message:  
+
+      Use case resumes at step 1.
+
+* **2f. Duplicate owner number or address.**
+
+    * 2f1. PawPatrol shows an error message:  
+
+      Use case resumes at step 1.
+
+**Use Case: Search Clients or Pets**
+
+**MSS**
+
+1. User requests to search for a client or pet by entering the command along with the relevant data type and search value.
+2. PawPatrol validates the input.
+3. PawPatrol performs the search and retrieves matching records.
+4. AddressBook displays the list of contacts matching the `dataType` and `searchValue`.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. Invalid data type.  
+
+    * 2a1. PawPatrol shows an error message:  
+      
+      Use case resumes at step 1.  
+
+* 2b. No matching contacts found.  
+
+    * 2b1. PawPatrol shows an error message:  
+      
+      Use case resumes at step 1.  
+
+* 2c. Empty search value.  
+
+    * 2c1. PawPatrol shows an error message:  
+      
+      Use case resumes at step 1.
+
+* 2d. Invalid characters in search value.  
+
+    * 2d1. PawPatrol shows an error message:  
+
+      Use case resumes at step 1.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
