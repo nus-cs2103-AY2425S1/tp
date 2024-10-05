@@ -7,7 +7,7 @@ A seamless platform for undergraduate students to exchange contact information a
 
 # Features
 CampusConnect not only provides basic contact information storage solutions, but also custom tagging, searching, and
-sorting features for quicker and easier organisation contact retrieval.
+sorting features for quicker and easier organisation and contact retrieval.
 
 # Acknowledgements
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
