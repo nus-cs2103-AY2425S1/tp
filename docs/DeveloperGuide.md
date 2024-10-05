@@ -279,8 +279,13 @@ _{Explain here how the data archiving feature will be implemented}_
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
+* frequently uses contacts for work (business)
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+
+**Value proposition**:
+
+* manage contacts faster than a typical mouse/GUI driven app
+* prioritise contacts for scheduling and work efficiency
 
 
 ### User stories
@@ -294,6 +299,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
 | `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
 | `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
+| `* *`    | user with many persons in the address book | filter a person by tags      | locate persons by category without having to go through the entire list|
+| `* *`    | user with many persons in the address book | export contacts to csv       | share and combine address books                                        |
+| `*`      | user with many persons in the address book | import contacts from csv     | combine and update existing address books easily                       |
 | `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
 
 *{More to be added}*
@@ -325,24 +333,98 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Add a person**
+
+**MSS**
+
+1.  User requests to add person
+2.  AddressBook shows a input form for person's details
+3.  User enters person details like name, phone number, email, tags etc
+4.  AddressBook validates user input
+5.  AddressBook saves the person
+
+    Use case ends.
+
+**Extensions**
+
+* 4a. The user input is invalid.
+
+   * 4a1. AddressBook shows an error message.
+   * 4a2. AddressBook requests for the correct data.
+   * 4a3. User enters new data.
+   * Steps 4a1-4a2 are repeated until the data entered are correct.
+   * Use case resumes at step 5.
+
+**Use case: Filter by tag**
+
+**MSS**
+
+1.  User requests to filter persons by tag
+2.  AddressBook shows a input search bar
+3.  User enters input related to key or value of a tag
+4.  AddressBook shows a list of persons with matching tag key or value
+
+    Use case ends.
+
+**Extensions**
+
+* 4a. The list is empty.
+
+  Use case ends.
+
+
+**Use case: Export to CSV**
+
+**MSS**
+
+1.  User requests to export file to CSV
+2.  AddressBook opens file manager for user to choose destination directory
+3.  User enters destination directory and file name
+4.  AddressBook outputs list of persons to CSV file in corresponding destination
+5.  AddressBook opens destination directory containing CSV file
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. AddressBook is unable to open file manager.
+
+   * 2a1. AddressBook shows an error message.
+     Use case ends.
+
+
 *{More to be added}*
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  Reliability: The application should automatically save changes to the local data file, and it should be able to recover from unexpected shutdowns or power failures without data loss.
-5.  Responsiveness: The application should have a responsive and intuitive user interface that works well across different screen resolutions (1920 x 1080 or higher).
+2.  Should work on any _mainstream OS_ without requiring any further installation or additional platform-specific dependencies
+3.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+4.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+5.  Should automatically save changes to the local data file, and it should be able to recover from unexpected shutdowns or power failures without data loss.
+6.  Should have a responsive and intuitive user interface that works well across different screen resolutions (1920 x 1080 or higher).
+7.  Should be easy to use and provide clear instructions and feedback to the user for common tasks like adding, filtering, and exporting contacts.
+8.  Should be designed to accommodate future growth in the number of persons and additional features without major rewriting of code.
+9.  Should not store or transmit sensitive data  insecurely.
+10. Should be modular and easy to test to support automated unit testing.
+
+*{More to be added}*
 
 ### Glossary
-
+.
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Private contact detail**: A contact detail that is not meant to be shared with others.
 * **Command-line Interface (CLI)**: A text-based user interface where the user interacts with the application by typing commands, as opposed to a Graphical User Interface (GUI).
 * **Typical Usage**: The expected day-to-day usage of the application by the target user, which should not cause significant performance degradation.
 * **Above-average Typing Speed**: A typing speed that is higher than the average user, allowing the user to input commands and data more efficiently.
+* **Platform-specific dependencies**:  Additional software required to run the application due to differences in Mainstream OS.
+* **Local data file**: File stored on and only on the user's computer/device running the application.
+* **Sensitive Data**: Data in any form (often text) that may harm the user or persons if exposed to unwanted parties (e.g. financial data, credit card info)
+* **File Manager**: OS-specific software that allows user to view and manage (create, delete etc) files on their computer/device. Often comes pre-installed as part of the OS.
+* **CSV**: Type of format of file that stores data in an ordered fashion using rows and columns. Often used in third-party spreadsheet software such as Microsoft Excel.
+* **Tag**: Form of text-based labelling to categorise persons or data for organisation.
 
+*{More to be added}*
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
