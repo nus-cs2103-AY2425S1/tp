@@ -124,6 +124,7 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
         public void addTask(Task task) {
             throw new AssertionError("This method should not be called.");
         }
@@ -143,6 +144,7 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
         public boolean hasTask(Task task) {
             throw new AssertionError("This method should not be called.");
         }
@@ -199,7 +201,6 @@ public class AddCommandTest {
             requireNonNull(person);
             return this.person.isSamePerson(person);
         }
-
     }
 
     /**
