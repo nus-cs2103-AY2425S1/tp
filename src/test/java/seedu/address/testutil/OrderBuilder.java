@@ -1,9 +1,9 @@
 package seedu.address.testutil;
 
-import seedu.address.model.order.Item;
 import seedu.address.model.order.Count;
-import seedu.address.model.order.Order;
 import seedu.address.model.order.Date;
+import seedu.address.model.order.Item;
+import seedu.address.model.order.Order;
 
 /**
  * A utility class to help with building Order objects.

@@ -3,6 +3,9 @@ package seedu.address.logic.commands;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 
+/**
+ * Contains helper methods for testing Order commands.
+ */
 public class OrderCommandTestUtil {
 
     public static final String VALID_COUNT_ATLAS = "5";

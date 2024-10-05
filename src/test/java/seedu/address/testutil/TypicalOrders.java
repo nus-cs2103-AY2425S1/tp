@@ -13,6 +13,9 @@ import java.util.List;
 
 import seedu.address.model.order.Order;
 
+/**
+ * A utility class containing a list of {@code Order} objects to be used in tests.
+ */
 public class TypicalOrders {
     public static final Order ABACUS = new OrderBuilder().withItem("Abacus")
             .withCount("2").withDate("10-10-2025").build();

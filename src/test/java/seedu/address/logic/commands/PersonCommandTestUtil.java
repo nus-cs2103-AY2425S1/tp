@@ -22,7 +22,7 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
- * Contains helper methods for testing commands.
+ * Contains helper methods for testing Person commands.
  */
 public class PersonCommandTestUtil {
 
