@@ -28,3 +28,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 
+### Ng Yan Yee
+
+<img src="images/yyanyee.png" width="200px">
+
+[[github](http://github.com/yyanyee)]
+[[portfolio](team/yyanyee.md)]
+
+* Role: Developer
+* Responsibilities: UI
+
