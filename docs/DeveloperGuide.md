@@ -547,6 +547,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Testability**: The ease with which the system can be tested to ensure its correct behavior, including automated and manual testing.
 * **Persistence**: A characteristic of data that ensures it is stored and available even after the application is closed and reopened.
 * **Modular Design**: A software architecture approach that divides the system into independent components for easier maintenance and scalability.
+* **Field**: A specific attribute or category in the context of a student's details, such as name or class, used for sorting or filtering information.
+* **Command**: A specific instruction or request issued by the user to perform a certain action within the application.
+* **Invalid Input**: Data or commands entered by the user that do not conform to the expected format or criteria, resulting in an error or rejection of the command.
+* **Contact Details**: Information related to a student or staff member, including their name, phone number, email, and any other relevant identifiers.
 
 --------------------------------------------------------------------------------------------------------------------
 
