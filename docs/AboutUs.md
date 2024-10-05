@@ -27,15 +27,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Member
 
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
 
 ### Chen Lei Yu
 
@@ -44,16 +35,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/ChenLeiyu)] [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
 
 ### Tan Jia Jun
 
