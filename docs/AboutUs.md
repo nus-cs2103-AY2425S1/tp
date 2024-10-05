@@ -22,7 +22,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Dominic Khoo
 
-<img src="images/dominickhoo.png" width="200px">
+<img src="images/Dominic-Khoo.png" width="200px">
 
 [[github](http://github.com/Dominic-Khoo)]
 [[portfolio](team/johndoe.md)]
