@@ -350,7 +350,7 @@ Use case ends.
 **Extensions**
 
 * 2a. Client index is invalid.
-    * 2a1. System shows invalid index invalid error message.
+    * 2a1. System shows invalid index error message.
     * 2a2. User enters new index.
 
     Steps 2a1-2a2 are repeated until the index is valid.
@@ -363,7 +363,7 @@ Use case ends.
 
 1.  User requests to list clients.
 2.  System shows a list of clients.
-3.  User [selects a client](#UC02) to delete.
+3.  User [select a client](#UC02) to delete.
 4.  System deletes the person.
 
 Use case ends.
@@ -387,15 +387,16 @@ Use case ends.
 
 **Extensions**
 
+* 2b. The insurance plan id is invalid.
+    * 2b1. System shows an error message to user.
+
+    Use case ends.
+
 * 3a. The client does not have the specified insurance plan.
     * 3a1. System shows an error message to user.
 
     Use case ends.
 
-* 3b. The insurance plan id is invalid.
-    * 3b1. System shows an error message to user.
-
-    Use case ends.
 ---
 **Use case 05: Add an insurance plan to a client**
 
@@ -403,7 +404,7 @@ Use case ends.
 
 1.  User requests to list clients.
 2.  System shows a list of clients.
-3.  User [selects a client](#UC02) and [selects an insurance plan](#UC04) to be added to the specified client.
+3.  User [select a client](#UC02) and [select an insurance plan](#UC04) to be added to the specified client.
 4.  System adds the insurance plan to the client.
 
 Use case ends.
@@ -411,7 +412,6 @@ Use case ends.
 **Extensions**
 
 * 3a. The client already has the given insurance plan.
-
     * 3a1. System shows an error message.
 
     Use case ends.
@@ -422,7 +422,7 @@ Use case ends.
 
 1.  User requests to list clients.
 2.  System shows a list of clients.
-3.  User [selects a client](#UC02), [selects an insurance plan](#UC04) of that client and requests it to be deleted.
+3.  User [select a client](#UC02), [select an insurance plan](#UC04) of that client and requests it to be deleted.
 4.  System removes the insurance plan from the client.
 
 Use case ends.
@@ -438,7 +438,7 @@ Use case ends.
 
 **MSS**
 
-1.  User [selects a client](#UC02) and requests to view all claims of that client.
+1.  User [select a client](#UC02) and requests to view all claims of that client.
 2.  System shows all claims for the client.
 
 Use case ends.
@@ -454,7 +454,7 @@ Use case ends.
 
 **MSS**
 
-1.  User [selects a client](#UC02), [selects a insurance plan](#UC04) of the client and requests to select a claim of that specific insurance plan.
+1.  User [select a client](#UC02), [select an insurance plan](#UC04) of the client and requests to select a claim of that specific insurance plan.
 2.  System selects the claim specified by the user.
 
 Use case ends.
@@ -470,16 +470,15 @@ Use case ends.
 
 **MSS**
 
-1.  User [selects a client](#UC02) and [an insurance plan](#UC04) of that client and requests to add a claim to selected insurance plan.
+1.  User [select a client](#UC02) and [select an insurance plan](#UC04) of that client and requests to add a claim to selected insurance plan.
 2.  System adds the claim to the insurance plan.
 
 Use case ends.
 
 **Extensions**
 
-* 3a. The claim already exists for the client.
-
-    * 3a1. System shows an error message.
+* 2a. The claim already exists for the client.
+    * 2a1. System shows an error message.
 
     Use case ends.
 ---
@@ -487,7 +486,7 @@ Use case ends.
 
 **MSS**
 
-1.  User [selects a claim](#UC08) requests to close that claim for the specified client.
+1.  User [select a client](#UC02), [select a claim](#UC08) and requests to close that claim for the specified client.
 2.  System closes the claim for the client.
 
 Use case ends.
@@ -495,7 +494,6 @@ Use case ends.
 **Extensions**
 
 * 3a. The claim has already been closed for the client.
-
     * 3a1. System shows an error message.
 
     Use case ends.
