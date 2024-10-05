@@ -432,11 +432,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    **Extensions**
 
-* 1a. User enters an incorrect format or invalid name
-  * 1a1. System requests for input in correct format
+* 1a. User enters an invalid name/missing name
+  * 1a1. System requests for name in correct format
   * 1a2. User re-enters the correct input
 
-    Steps 1a1-1a2 are repeated until the correct command is entered.
+    Steps 1a1-1a2 are repeated until the correct name is entered.
     Use case resumes from step 2.
 
 * 1b. No matching student found in the system
@@ -446,6 +446,67 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
+**Use case: UC6 - Clearing the app**
+
+**MSS**
+
+1. User clears the app of all contact data
+2. System displays a success message
+
+    Use case ends
+
+   **Extensions**
+
+* 1a. User enters an incorrect format
+  * 1a1. System displays an error message and prompts user to try again
+  * 1a2. User re-enters the correct clear command
+    
+    Steps 1a1-1a2 are repeated until the correct command is entered
+    Use case resumes from step 2
+
+* 1b. System encounters an internal error while trying to clear the contact book
+  * 1b1. System displays an error message
+
+    Use case ends
+
+---
+
+**Use case: UC7 - Displaying a User Guide**
+
+**MSS**
+
+1. User uses the help command
+2. System shows user a list of commands and their functionality 
+
+    Use case ends
+
+---
+
+**Use case: UC8 - Sorting**
+
+**MSS**
+
+1. User tries to sort students by their name/class
+2. System arranges the students in alphabetical order by name/class
+3. System displays students sorted by their name/class in ascending order
+
+    Use case ends
+
+   **Extensions**
+
+* 1a. User tries to sort by an invalid field
+  * 1a1. System informs user to sort using only name or class
+  * 1a2. User re-enters the command with a valid field.
+    
+    Steps 1a1-1a2 are repeated until only name or class is entered as the field
+    Use case resumes from step 2.
+
+* 2a. There are no students added 
+  * 2a1. System shows a blank screen 
+
+    Use case ends
+
+---
 
 *{More to be added}*
 
