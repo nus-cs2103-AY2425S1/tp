@@ -277,7 +277,7 @@ _{Explain here how the data archiving feature will be implemented}_
 Mater, (yes, eponymously named), works as a mechanic at a car workshop. He is not the sole mechanic, and works shifts
 with other mechanics. Without the use of technology, storing customer information, as well as information about their
 cars and repair work performed, would be stored in pen and paper. This is obviously inconvenient. Mater (and his coworkers)
-believes in the advent of technology, and thus dreams of leaving behind tedious paperwork, like how he often 
+believes in the advent of technology, and thus dreams of leaving behind tedious paperwork, like how he often
 (unknowingly) leaves oil prints on the dossiers of their customers.
 
 Mater can be described as so:
@@ -289,7 +289,7 @@ Mater can be described as so:
 * would appreciate being able to share details relevant to cars with other coworkers who are not working concurrently with him
 
 MATER (the CLI in development), shall help Mater and his colleagues by implementing a CLI to keep track of the workshop's customers,
-as well as other details about their cars. It will be hosted locally on one machine, with no servers and remote access 
+as well as other details about their cars. It will be hosted locally on one machine, with no servers and remote access
 to the CLI, for simplicity, to fit budget constraints and for security. (and the scope of the CS2103T course. Haha.)
 
 **Value proposition**: Manage customer/car-related details easily on a shared workshop computer
@@ -469,7 +469,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2c. The Client already has a Car associated to them.
     * 2c1. MATER shows an error message.
 
-      Use case resumes from step 2.   
+      Use case resumes from step 2.
 
 **Use case: UC7 - Delete Car from Client**
 
@@ -651,7 +651,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **GUI (Graphical User Interface)**: A visual-based interface involving icons, buttons, and other graphical elements, as opposed to text commands. Although not prioritized, some users may prefer a GUI for ease of use.
 * **CLI (Command Line Interface)**: A text-based interface where users interact with the system by typing in commands. This is the primary interface for the App.
-* **Client**: A customer whose personal details and associated car information are stored in the system. This refers to anyone bringing a vehicle in for servicing. 
+* **Client**: A customer whose personal details and associated car information are stored in the system. This refers to anyone bringing a vehicle in for servicing.
 * **Car**: A vehicle brought in by a client for servicing. Each car is associated with a client.
 * **Issue**: A problem or task that needs to be addressed for a specific car with its status and details. Each car can have multiple issues associated with it.
 
