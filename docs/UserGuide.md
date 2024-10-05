@@ -1,6 +1,8 @@
 # AcademyAssist User Guide
 
-AcademyAssist is a **desktop app for managing student contacts in a tuition center, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AcademyAssist can get your contact management tasks done faster than traditional GUI apps.
+AcademyAssist is a **desktop app for managing student contacts in a tuition center, optimized for use via a Command 
+Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, 
+AcademyAssist can get your contact management tasks done faster than traditional GUI apps.
 
 ## Quick start
 
@@ -12,7 +14,8 @@ AcademyAssist is a **desktop app for managing student contacts in a tuition cent
 
 4. Double-click the file to start the app. The GUI should appear in a few seconds.
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will 
+open the help window.
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -32,10 +35,12 @@ AcademyAssist is a **desktop app for managing student contacts in a tuition cent
 * Parameters can be in any order.
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will 
+be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple 
+lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
 </div>
 
@@ -145,16 +150,21 @@ Format: `exit`
 
 ### Saving the data
 
-AcademyAssist data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+AcademyAssist data are saved in the hard disk automatically after any command that changes the data. There is no need
+to save manually.
 
 ### Editing the data file
 
-AcademyAssist data are saved automatically as a JSON file `[JAR file location]/data/academyassist.json`. Advanced users are welcome to update data directly by editing that data file.
+AcademyAssist data are saved automatically as a JSON file `[JAR file location]/data/academyassist.json`. Advanced users
+are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">
 :exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AcademyAssist will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AcademyAssist to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, AcademyAssist will discard all data and start with an empty 
+data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the AcademyAssist to behave in unexpected ways (e.g., if a value entered is 
+outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it 
+correctly.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -162,7 +172,8 @@ Furthermore, certain edits can cause the AcademyAssist to behave in unexpected w
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AcademyAssist folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains 
+the data of your previous AcademyAssist folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
