@@ -275,17 +275,22 @@ Teaching Assistants (TAs) in academic institutions such as universities, college
 
 **Value proposition**: TAHub simplifies the role of Teaching Assistants by providing a centralized hub to organize student information, and efficiently manage course-related tasks. This platform empowers TAs to focus more on enhancing student learning and less on administrative chaos.
 
-
-
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                     | I want to …​                             | So that I can…​                                                             |
-| --- |-----------------------------|------------------------------------------|-----------------------------------------------------------------------------|
-| `* * *` | teaching assistant          | categorise students by course or section | quickly find contact information for students relevant to a specific course |
-| `* *` | teaching assistant          | filter students                         | prioritise communication with specific groups                              |
-| `*` | teaching asssitant          | add notes to a student’s profile                          | rtrack personal or academic progress that might influence communication                                        |
+| Priority | As a …​            | I want to …​                                                                                 | So that I can…​                                                                 |
+|----------|--------------------|----------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------|
+| `* * *`  | teaching assistant | export student data in various formats (e.g., CSV, PDF)                                      | I can easily share information with professors or use it in other applications  |
+| `* * *`  | teaching assistant | categorise students by course or section                                                     | quickly find contact information for students relevant to a specific course     |
+| `* *`    | teaching assistant | easily view all a list of students that match my current search query without typing in full | handle mass search queries for convenience                                      |
+| `* *`    | teaching assistant | filter students                                                                              | prioritise communication with specific groups                                   |
+| `* *`    | teaching assistant | use a command to backup my student database to a local file                                  | ensure data safety and practice file management                                 |
+| `* *`    | teaching asssitant | use a command to import student data from a CSV file                                         | quickly populate my address book at the beginning of a semester                 |
+| `* *`    | teaching assistant | use a command to merge duplicate student entries                                             | maintain a clean and accurate database                                          |
+| `* *`    | teaching asssitant | use a command to import student data from a CSV file                                         | quickly populate my address book at the beginning of a semester                 |
+| `*`      | teaching assistant | use a command to generate a list of students who haven't submitted an assignment             | easily follow up with them                                                      |
+| `*`      | teaching asssitant | add notes to a student’s profile                                                             | track personal or academic progress that might influence communication          |
 
 *{More to be added}*
 
@@ -293,30 +298,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `TAHub` and the **Actor** is the `user`, unless specified otherwise)
 
-Use case: **UC1** - Delete Student by Index
-
-**MSS**
-
-1.  User requests to list persons
-2.  AddressBook shows a list of persons, which includes the index of the person
-3.  User requests to delete a specific person in the list by index
-4.  AddressBook deletes the person
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. AddressBook shows an error message.
-
-      Use case resumes at step 2.
-
-**Use case: Add a student**
+**Use case **UC1**: Add a student**
 
 **MSS**
 
@@ -324,7 +306,7 @@ Use case: **UC1** - Delete Student by Index
 2.	AddressBook validates the inputs.
 3.	AddressBook adds the student with the provided details.
 4.	The GUI displays the updated student list.
-    Use case ends.
+Use case ends.
 
 **Extensions**
 
@@ -337,6 +319,44 @@ Use case: **UC1** - Delete Student by Index
 
     * 2b1. AddressBook shows a duplicate error message.
     * 2b2. Use case resumes at step 1.
+
+**Use case: **UC2** - Find student by name**
+
+**MSS**
+
+1.  User requests to list persons
+2.  AddressBook shows a list of persons
+3.  User requests to find a student by name
+4.  AddressBook displays names
+Use case ends.
+  
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given string is not unique.
+
+    * 3a1. AddressBook displays all student names with input string as prefix
+
+      Use case resumes at step 4.
+
+**Use case: **UC3** - Delete Student by Index**
+
+**MSS**
+
+1.  User requests to list persons
+2.  AddressBook shows a list of persons, which includes the index of the person
+3.  User requests to delete a specific person in the list by index
+4.  AddressBook deletes the person
+    Use case ends.
+    
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
 
 *{More to be added}*
 

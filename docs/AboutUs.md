@@ -33,7 +33,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/marcusjhang.png" width="200px">
 
-[[github](http://github.com/marcusjhang)] [[portfolio](team/marcusjhang.md)]
+[[github](http://github.com/marcusjhang)]
+[[portfolio](team/marcusjhang.md)]
 
 * Role: Software Developer
 * Responsibilities: Data
@@ -42,7 +43,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/yhanyi.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/yhanyi)]
 [[portfolio](team/yhanyi.md)]
 
