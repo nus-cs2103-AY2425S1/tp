@@ -3,7 +3,11 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
@@ -29,7 +33,8 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(StudentId studentId, Name name, Phone phone, Email email, Address address, Course course, Set<Tag> tags) {
+    public Person(StudentId studentId, Name name, Phone phone, Email email, Address address, Course course,
+                  Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.studentId = studentId;
         this.name = name;

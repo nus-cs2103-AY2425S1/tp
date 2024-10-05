@@ -2,7 +2,13 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -52,7 +58,8 @@ public class CommandTestUtil {
     public static final String TAG_DESC_STUDENT = " " + PREFIX_TAG + VALID_TAG_STUDENT;
     public static final String TAG_DESC_TUTOR = " " + PREFIX_TAG + VALID_TAG_TUTOR;
 
-    public static final String INVALID_STUDENTID_DESC = " " + PREFIX_STUDENTID + "@1234567"; // '@' not allowed in studentIds
+    public static final String INVALID_STUDENTID_DESC = " " + PREFIX_STUDENTID
+            + "@1234567"; // '@' not allowed in studentIds
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
@@ -67,12 +74,24 @@ public class CommandTestUtil {
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
 
     static {
-        DESC_AMY = new EditPersonDescriptorBuilder().withStudentId(VALID_STUDENTID_AMY).withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withCourse(VALID_COURSE_AMY)
-                .withTags(VALID_TAG_STUDENT).build();
-        DESC_BOB = new EditPersonDescriptorBuilder().withStudentId(VALID_STUDENTID_BOB).withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withCourse(VALID_COURSE_BOB)
-                .withTags(VALID_TAG_TUTOR, VALID_TAG_STUDENT).build();
+        DESC_AMY = new EditPersonDescriptorBuilder()
+                .withStudentId(VALID_STUDENTID_AMY)
+                .withName(VALID_NAME_AMY)
+                .withPhone(VALID_PHONE_AMY)
+                .withEmail(VALID_EMAIL_AMY)
+                .withAddress(VALID_ADDRESS_AMY)
+                .withCourse(VALID_COURSE_AMY)
+                .withTags(VALID_TAG_STUDENT)
+                .build();
+        DESC_BOB = new EditPersonDescriptorBuilder()
+                .withStudentId(VALID_STUDENTID_BOB)
+                .withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB)
+                .withEmail(VALID_EMAIL_BOB)
+                .withAddress(VALID_ADDRESS_BOB)
+                .withCourse(VALID_COURSE_BOB)
+                .withTags(VALID_TAG_TUTOR, VALID_TAG_STUDENT)
+                .build();
     }
 
     /**

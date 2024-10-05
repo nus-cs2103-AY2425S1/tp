@@ -1,10 +1,21 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -12,8 +23,13 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.*;
-import seedu.address.model.person.Module;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Course;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.StudentId;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -91,7 +107,8 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Course updatedCourse = editPersonDescriptor.getCourse().orElse(personToEdit.getCourse());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        return new Person(updatedStudentId, updatedName, updatedPhone, updatedEmail, updatedAddress, updatedCourse, updatedTags);
+        return new Person(updatedStudentId, updatedName, updatedPhone, updatedEmail, updatedAddress,
+                updatedCourse, updatedTags);
     }
 
     @Override
@@ -158,7 +175,9 @@ public class EditCommand extends Command {
             this.studentId = studentId;
         }
 
-        public Optional<StudentId> getStudentId() { return Optional.ofNullable(studentId); }
+        public Optional<StudentId> getStudentId() {
+            return Optional.ofNullable(studentId);
+        }
 
         public void setName(Name name) {
             this.name = name;
@@ -196,7 +215,9 @@ public class EditCommand extends Command {
             this.course = course;
         }
 
-        public Optional<Course> getCourse() { return Optional.ofNullable(course); }
+        public Optional<Course> getCourse() {
+            return Optional.ofNullable(course);
+        }
 
         /**
          * Sets {@code tags} to this object's {@code tags}.
