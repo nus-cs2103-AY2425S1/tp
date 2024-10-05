@@ -9,15 +9,23 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
 
-<img src="images/johndoe.png" width="200px">
+### Lee Jun Long Matthew
+<img src="images/flyingsalsa.png" width="200px">
+
+[[github](https://github.com/flyingsalsa)]
+[[portfolio](team/flyingsalsa.md)]
+
+### Zheng Xiangcheng
+
+<img src="images/xczheng0105.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[github](https://github.com/xczheng0105)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+
+* Role: Member
 
 ### Jane Doe
 
@@ -29,14 +37,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Chen Lei Yu
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/chenleiyu.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/ChenLeiyu)] [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Data
 
 ### Jean Doe
 
@@ -48,12 +55,22 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Tan Jia Jun
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/JJtan2002.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/JJtan2002)]
+[[portfolio](team/JJtan2002.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: finish my equal share of this project
+
+### Huang Yining
+
+<img src="images/kitty-001.png" width="200px">
+
+[[github](https://github.com/Kitty-001)]
+[[portfolio](team/kitty-001.md)]
+
+* Role: Developer
+* Responsibilities: learn skills and try to finish my equal share
