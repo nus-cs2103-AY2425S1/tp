@@ -239,11 +239,11 @@ Allows users to save specific notes or remarks about a customer, which can be vi
 **How to Use It:**  
 - **Command Format:** 
 ```
-remark <INDEX> /r <REMARK>
+remark <INDEX> r/ <REMARK>
 ```
 - **Example:** 
 ```
-remark 55 /r He is a problematic customer.
+remark 55 r/ He is a problematic customer.
 ```
 
 #### Parameters
@@ -272,11 +272,11 @@ Allows users to assign or update the credit card tier for a customer. This is pa
 **How to Use It:**  
 - **Command Format:** 
 ```
-tag <INDEX> /t <TIER>
+tag <INDEX> t/ <TIER>
 ```
 - **Example:** 
 ```
-tag 69 /t reject
+tag 69 t/ reject
 ```
 
 #### Parameters
@@ -376,7 +376,7 @@ exit
 | **View Details of a Customer**  | `view <INDEX>`                                                                               | `view 69`                                                                  |
 | **Edit Existing Customer**      | `edit <INDEX> n/<NAME> p/<PHONE> e/<EMAIL> a/<ADDRESS> j/<JOBNAME> i/<INCOME> [t/<TAG>]`     | `edit 69 n/TAN LESHEW p/77337733 e/mrtan@ntu.sg a/COM3 j/doctor i/1000000000` |
 | **Find a Customer by Details**  | `filter /<FLAG> <FLAG FIELD>`                                                                | `filter /n TAN LESHEW`                                                      |
-| **Save Remarks About Customers**| `remark <INDEX> /r <REMARK>`                                                                 | `remark 55 He is a problematic customer.`                                   |
-| **Add/Replace Credit Card Tier**| `tag <INDEX> /t <TIER>`                                                                      | `tag 69 reject`                                                             |
+| **Save Remarks About Customers**| `remark <INDEX> r/ <REMARK>`                                                                 | `remark 55 He is a problematic customer.`                                   |
+| **Add/Replace Credit Card Tier**| `tag <INDEX> t/ <TIER>`                                                                      | `tag 69 reject`                                                             |
 | **Help**                        | `help`                                                                                       | `help`                                                                     |
 | **Exit**                        | `exit`                                                                                       | `exit`                                                                     |
