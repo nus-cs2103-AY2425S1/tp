@@ -1,8 +1,7 @@
 package spleetwaise.transaction.logic.commands;
 
-import spleetwaise.address.logic.commands.Command;
 import spleetwaise.address.logic.commands.CommandResult;
-import spleetwaise.address.model.Model;
+import spleetwaise.transaction.model.Model;
 
 /**
  * This class represents a command for adding transactions.
@@ -13,7 +12,7 @@ public class AddCommand extends Command {
     /**
      * The word used to trigger this command in the input.
      */
-    public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_WORD = "addTxn";
 
     /**
      * The message usage string that explains how to use this command.

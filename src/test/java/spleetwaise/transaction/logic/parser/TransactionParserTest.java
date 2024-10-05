@@ -6,17 +6,25 @@ import org.junit.jupiter.api.Test;
 
 import spleetwaise.address.logic.parser.exceptions.ParseException;
 import spleetwaise.transaction.logic.commands.AddCommand;
+import spleetwaise.transaction.logic.commands.Command;
 import spleetwaise.transaction.testutil.TransactionUtil;
 
 
-public class SpleetWaiseParserTest {
+public class TransactionParserTest {
 
-    private final SpleetWaiseParser parser = new SpleetWaiseParser();
+    private final TransactionParser parser = new TransactionParser();
 
     @Test
     public void parseCommand_add() throws Exception {
         AddCommand command = (AddCommand) parser.parseCommand(TransactionUtil.getAddCommand());
-        assert (command != null);
+        assert command != null;
+    }
+
+    @Test
+    public void parseCommand_unknown() throws Exception {
+        Command command = (Command) parser.parseCommand(
+            "420YoloSwag");
+        assertNull(command);
     }
 
     @Test

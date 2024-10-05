@@ -5,26 +5,21 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import spleetwaise.address.commons.core.LogsCenter;
-import spleetwaise.address.logic.commands.Command;
 import spleetwaise.address.logic.parser.exceptions.ParseException;
 import spleetwaise.transaction.logic.commands.AddCommand;
+import spleetwaise.transaction.logic.commands.Command;
 
 /**
  * Parses user input.
  */
-public class SpleetWaiseParser {
-
-    /**
-     * Command prefix for spleetwaise
-     */
-    public static final String SPLEETWAISE_COMMAND_PREFIX = "txn";
+public class TransactionParser {
 
     /**
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT =
-        Pattern.compile(SPLEETWAISE_COMMAND_PREFIX + "\\s+(?<commandWord>\\S+)(?<arguments>.*)");
-    private static final Logger logger = LogsCenter.getLogger(SpleetWaiseParser.class);
+        Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    private static final Logger logger = LogsCenter.getLogger(TransactionParser.class);
 
     /**
      * Parses user input into command for execution.
