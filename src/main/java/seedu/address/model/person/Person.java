@@ -1,17 +1,13 @@
 package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.commands.ViewStatusCommand.MESSAGE_VIEW_SUCCESS;
 
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
-import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.tag.Tag;
 
 /**
