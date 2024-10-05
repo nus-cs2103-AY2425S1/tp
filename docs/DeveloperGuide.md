@@ -304,16 +304,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `AgentAssist` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: U1 - Delete a person**
 
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  AgentAssist shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  AgentAssist deletes the person
 
     Use case ends.
 
@@ -325,11 +325,62 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. AgentAssist shows an error message.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: U2 - Add a Person**
+
+**MSS**
+
+1.  User requests to add a user
+2.  AgentAssist adds a person
+3.  AgentAssist returns the unique user ID tagged to the new user
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given parameters are invalid.
+    * 1a1. AgentAssist shows an invalid parameter error message.
+        
+      Use case resumes at step 1.
+
+**Use case: U3 - View a person**
+
+**MSS**
+
+1.  User requests to view a person with a specific user ID
+2.  AgentAssist returns the user with the corresponding ID
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given user ID is invalid.
+    * 1a1. AgentAssist shows an invalid parameter error message.
+  
+      Use case resumes at step 1.
+
+**Use case: U4 - Add remarks about a person**
+
+**MSS**
+
+1.  User performs <u>View a person (U3)</u> 
+2.  AgentAssist returns the person
+3.  User requests to add a remark about the person
+4.  AgentAssist adds a remark for the person
+
+    Use case ends.
+
+**Use case: U5 - Exit**
+
+**MSS**
+
+1.  User requests to exit
+2.  AgentAssist exits
+
+    Use case ends.
 
 ### Non-Functional Requirements
 
