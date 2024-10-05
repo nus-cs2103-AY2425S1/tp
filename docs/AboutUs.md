@@ -9,51 +9,45 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Soh Wei Kiat
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jovensoh.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[homepage](jovensoh.github.io)]
+[[github](https://github.com/jovensoh)]
+[[portfolio](team/jovensoh.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: UI/UX, DevOps
 
-### Jane Doe
+### Kan Jun Hong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/fluffykan.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/Fluffykan)]
 
-* Role: Team Lead
+* Role: Developer
 * Responsibilities: UI
 
-### Johnny Doe
+### Keerthi G Kaarthik
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/keerthigkaarthik.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/keerthigkaartik)]
 
-* Role: Developer
-* Responsibilities: Data
+### Tseng Tzu En
 
-### Jean Doe
+<img src="images/tzuennn.png" width="200px">
 
-<img src="images/johndoe.png" width="200px">
+[[github](http://github.com/tzuennn)]
+[[portfolio](team/tzuennn.md)]
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+### Tseng Tzu Che
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+<img src="images/ttzuche.png" width="200px">
 
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/ttzuche)]
+[[portfolio](team/ttzuche.md)]
 
 * Role: Developer
 * Responsibilities: UI
