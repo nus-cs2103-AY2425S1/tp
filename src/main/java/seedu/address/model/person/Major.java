@@ -15,10 +15,10 @@ public class Major {
             "Major is invalid. Please choose one of the following: ‘cs’, ‘bza’, ‘ceg’, ‘isys’, ‘isec’.";
 
     /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * Validates input containing only alphabetic characters (a-z, A-Z), with no leading
+     * and no trailing whitespaces.
      */
-    public static final String VALIDATION_REGEX = "[a-zA-Z]+";
+    public static final String VALIDATION_REGEX = "^[a-zA-Z]+$";
 
     public static final List<String> VALID_MAJORS = Arrays.asList("cs", "bza", "ceg", "isys", "isec");
     private String major;
