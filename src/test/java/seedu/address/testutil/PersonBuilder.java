@@ -97,11 +97,17 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code financialInfo} of the {@code Person} that we are building.
+     */
     public PersonBuilder withFinancialInfo(String financialInfo) {
         this.financialInfo = financialInfo;
         return this;
     }
 
+    /**
+     * Sets the {@code socialMediaHandle} of the {@code Person} that we are building.
+     */
     public PersonBuilder withSocialMediaHandle(String socialMediaHandle) {
         this.socialMediaHandle = socialMediaHandle;
         return this;

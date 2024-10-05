@@ -142,7 +142,8 @@ public class AddCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags, no financial info or social media handle
-        Person expectedPerson = new PersonBuilder(AMY).withTags().withFinancialInfo("").withSocialMediaHandle("").build();
+        Person expectedPerson = new PersonBuilder(AMY).withTags().withFinancialInfo("")
+                .withSocialMediaHandle("").build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
                 new AddCommand(expectedPerson));
     }
