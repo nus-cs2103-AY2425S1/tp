@@ -302,8 +302,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 |----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
 | `* * *`  | event planner           | create a new event with date, time and location  | easily see upcomings events in my schedule                                                     |
 | `* * *`  | event planner           | add a vendor                                     |                                                                                                |
-| `* * *`  | event planner           | assign a vendor to an event                      | check whether arrangesments have already been made for the event                               |
-| `* *`    | event planner           | find a vendor by name and tags                   | choose a suitable fast for a new event                                                         |
+| `* * *`  | event planner           | assign a vendor to an event                      | verify if arrangements for that aspect of the event have been completed                        |
+| `* *`    | event planner           | find a vendor by name and tags                   | choose a suitable vendor fast for a new event                                                  |
 | `* *`    | event planner           | categorise vendors                               | easily see what services a vendor provides                                                     |
 | `* *`    | event planner           | modify event and vendor details                  | correct any mistakes or changes made to an event or vendor                                     |
 | `* *`    | forgetful event planner | write additional notes for an event or vendor    | keep track of miscellanous information regarding each events or remarks regarding a vendor     |
@@ -311,12 +311,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | event planner           | open whatsapp or telegram from the app           | easily contact vendors without 'leaving' the address book                                      |
 | `* *`    | fast typer              | chain multiple commands together before entering | accomplish multiple actions without worrying about hitting the 'Enter' key after every command |
 | `* *`    | no mouse person         | navigate the address book using only keyboard    | use the app without a mouse                                                                    |
-| `* *`    | event planner           | set a progress status to an event or vendor      | keep track of completed and uncompleted transactions                                           |
+| `* *`    | event planner           | set a progress status to a vendor                | keep track where vendor deliverables have been completed                                       |
 | `* *`    | event planner           | archive events                                   | clear events that are completed                                                                |
-| `* *`    | event planner           | block vendors                                    | avoid vendors that I had bad experiences with                                                  |
-| `*`      | finance administrator   | export event and vendor information into Excel   | use the information to create reports, track expenses, etc                                     |
-| `*`      | event planner           | add an attachment to an event                    | keep working files in the same location                                                        |
-| `*`      | event planner           | view attachments of an event                     | view working files in the same location                                                        |
+| `* *`    | event planner           | block vendors                                    | keep the address book remains less cluttered but does not forget vendors to avoid              |
+| `* *`    | event planner           | set list of type of vendors I need for a event   | know what manpower or vendor I am missing for the event                                        |
+| `* *`    | fast typer              | map commands to (shorter) aliases                | customise commands that I use often into a more convenient phrases                             |
+| `* *`    | fast typer              | autocomplete half-typed commands                 | be even faster                                                                                 |
+| `* *`    | event planner           | view all my events on a calender                 | easily monitor the events that I have across the week/month/year                               |
+| `* *`    | event planner           | tag a cost range for each vendor                 | easily find appropriate vendors according to the budget of specific events                     |
 
 ### Use cases
 
