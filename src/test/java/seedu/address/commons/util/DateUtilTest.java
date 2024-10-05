@@ -1,12 +1,14 @@
 package seedu.address.commons.util;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.commons.util.DateUtil.isValidDate;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.util.DateUtil.isAfterToday;
-
-import org.junit.jupiter.api.Test;
+import static seedu.address.commons.util.DateUtil.isValidDate;
 
 import java.time.LocalDate;
+
+import org.junit.jupiter.api.Test;
 
 public class DateUtilTest {
 
