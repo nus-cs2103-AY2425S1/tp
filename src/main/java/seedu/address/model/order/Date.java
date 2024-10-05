@@ -41,13 +41,14 @@ public class Date {
     public static boolean isValidDate(String test) {
         if (!test.matches(REGEX_DATE)) {
             return false;
+        } else {
+            try {
+                ParserUtil.parseLocalDate(test);
+            } catch (ParseException e) {
+                return false;
+            }
+            return true;
         }
-        try {
-            ParserUtil.parseLocalDate(test);
-        } catch (ParseException e) {
-            return false;
-        }
-        return true;
     }
 
     @Override
