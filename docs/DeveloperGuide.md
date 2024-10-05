@@ -332,6 +332,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Data changes should be automatically saved to avoid loss of data.
+5.  Should validate data entries to ensure consistency and correctness (eg. check that email format is correct etc.)
+6.  Should be able to accommodate increasing member data over time.
+7.  Should be able to retrieve and display member data within 2 seconds.
+8.  User Interface should be intuitive even for new users.
 
 *{More to be added}*
 
