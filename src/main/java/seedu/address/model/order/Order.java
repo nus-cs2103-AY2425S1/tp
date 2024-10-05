@@ -29,7 +29,7 @@ public class Order {
         this.date = date;
     }
 
-    public Item getDescription() {
+    public Item getItem() {
         return item;
     }
 
@@ -51,7 +51,7 @@ public class Order {
         }
 
         return otherOrder != null
-                && otherOrder.getDescription().equals(getDescription());
+                && otherOrder.getItem().equals(getItem());
     }
 
     /**

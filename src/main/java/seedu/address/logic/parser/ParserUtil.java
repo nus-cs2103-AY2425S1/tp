@@ -183,8 +183,7 @@ public class ParserUtil {
         requireNonNull(date);
         String trimmedDate = date.trim();
         try {
-            DateTimeFormatter formatter = DateTimeFormatter
-                    .ofPattern(Date.DATE_FORMATTER)
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(Date.DATE_FORMATTER)
                     .withResolverStyle(ResolverStyle.STRICT);
             return LocalDate.parse(trimmedDate, formatter);
         } catch (DateTimeParseException e) {
