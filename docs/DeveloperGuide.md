@@ -288,48 +288,100 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+# UML Use Cases: Contact Management Application for Volunteer Organizations
 
-**Use case: Delete a person**
+## Actors
+- Management Staff
 
-**MSS**
+## Use Cases
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+### 1. Create Volunteer Event
 
-    Use case ends.
+**Actor**: Management Staff
 
-**Extensions**
+**Description**: Create a new volunteer event in the system.
 
-* 2a. The list is empty.
+**Preconditions**:
+- User is logged in with management privileges
 
-  Use case ends.
+**Main Flow**:
+1. User selects "Create New Event" option
+2. System displays event creation form
+3. User enters event details (name, date, time, location, required roles)
+4. User submits the form
+5. System validates the information
+6. System creates the new event and confirms creation to the user
 
-* 3a. The given index is invalid.
+**Alternative Flows**:
+- 5a. If information is invalid, system displays error and returns to step 3
+- 6a. If event creation fails, system notifies user and provides option to try again
 
-    * 3a1. AddressBook shows an error message.
+**Postconditions**:
+- New event is stored in the system
 
-      Use case resumes at step 2.
+### 2. Add Volunteer to Event
 
-*{More to be added}*
+**Actor**: Management Staff
+
+**Description**: Assign a volunteer to a specific event.
+
+**Preconditions**:
+- Volunteer event exists in the system
+- Volunteer is registered in the system
+
+**Main Flow**:
+1. User navigates to the event details page
+2. User selects "Add Volunteer" option
+3. System displays list of available volunteers
+4. User selects a volunteer
+5. System prompts for role assignment and availability
+6. User provides role and availability information
+7. System adds the volunteer to the event and confirms addition
+
+**Extensions**:
+- 4a. If desired volunteer is not in the list, user can add a new volunteer
+- 7a. If addition fails, system notifies user and provides option to try again
+
+**Postconditions**:
+- Volunteer is associated with the event in the system
+
+## UML Use Case Diagram
+
+```mermaid
+graph TD
+    A[Management Staff] -->|Creates| B(Create Volunteer Event)
+    A -->|Assigns| C(Add Volunteer to Event)
+    B -->|Enables| C
+    B -->|Enables| D
+```
+
+This diagram shows the main actor (Management Staff) and their interactions with the three primary use cases we've defined. The arrows indicate the relationships between the actor and the use cases, as well as dependencies between use cases.
+
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. The system should work on any mainstream OS with Java 17 or above.
+2. The system should be able to handle up to 1000 volunteers, events, and donors without noticeable performance degradation.
+3. A user should be able to perform common tasks (add, delete, view) within 5 seconds for typical usage.
+4. The system should have a simple and intuitive command-line interface that minimizes the learning curve for new users.
+5. System response time for any action should be less than 1 second for all operations.
+6. The system should be able to support concurrent users without data corruption or errors.
+7. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 *{More to be added}*
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-
+* **Volunteer**: An individual who participates in a community event without monetary compensation.
+* **Event**: A planned activity organised by a community or non-profit organisation, requiring volunteer coordination.
+* **Donor**: An individual or organization that contributes funds or resources to support community events.
+* **Recurring Events**: Events that occur repeatedly on a set schedule.
+* **CLI (Command-Line Interface)**: A text-based interface where users input commands to interact with the application.
+* **NFR (Non-Functional Requirement)**: System attributes like performance, scalability, and usability that don’t affect specific functional behaviors.
+* **Duplicate Handling**: A system feature that prevents the creation of identical entries.
 --------------------------------------------------------------------------------------------------------------------
 
+## **Appendix: Instructions for manual testing**
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.

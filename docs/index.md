@@ -1,4 +1,7 @@
-# VolunSync
+---
+layout: page
+title: VolunSync
+---
 
 **VolunSync** is a volunteer-focused Human Resource Management System (HRMS) designed to streamline nonprofit operations. It provides robust tools for managing volunteers, coordinating events, tracking hours, and facilitating communications.
 
