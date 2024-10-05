@@ -44,9 +44,20 @@ public class ViewStatusCommandTest {
 
     @Test
     public void execute_viewSuccess() {
+        // tests the viewing of status for the first person in TypicalAddressBook
         Person person = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         ViewStatusCommand viewStatusCommand = new ViewStatusCommand(person.getName(), person.getJob());
         String expectedMessage = String.format(ViewStatusCommand.MESSAGE_VIEW_SUCCESS, Messages.formatStatus(person));
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+
+        assertCommandSuccess(viewStatusCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_viewFailure() {
+        // amy doesn't exist in the typical address book
+        ViewStatusCommand viewStatusCommand = new ViewStatusCommand(amyName, amyJob);
+        String expectedMessage = String.format(ViewStatusCommand.MESSAGE_VIEW_FAILURE, amyName, amyJob);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
         assertCommandSuccess(viewStatusCommand, model, expectedMessage, expectedModel);
