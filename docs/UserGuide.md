@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+AgentAssist is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AgentAssist can get your sales tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -12,32 +12,60 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+### 1. Install Java
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+Make sure you have **Java 17 or above** installed on your computer. You may skip this step if you already have it installed.
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+Installing Java:
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+* Download Java [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html). Follow the instructions on that page to install Java.
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+### 2. Download the AgentAssist application
 
-   * `list` : Lists all contacts.
+Go to this [link](https://github.com/AY2425S1-CS2103T-T14-4/tp/releases) and download the latest version of the `.jar` file.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+### 3. Choose a Folder
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+Find or create a folder on your computer where you want to store the AgentAssist information. <br>
+Move the `.jar` file you just downloaded into this folder.
 
-   * `clear` : Deletes all contacts.
+### 4. Open a Command Terminal
 
-   * `exit` : Exits the app.
+Now, open a command terminal:
 
-1. Refer to the [Features](#features) below for details of each command.
+* On Windows, press the **Windows Key** and type **`Command Prompt`** in the search bar. Click on the **Command Prompt** application to open it.
+* On macOS, press **Cmd + Space**, type **`Terminal`** into the search bar, and press **Enter**.
+* On Linux, open your Terminal application.
 
---------------------------------------------------------------------------------------------------------------------
+### 5. Run the applicaton
+
+Navigate your terminal to the folder where you saved the AgentAssist application:
+
+* Type **`cd `** (with a space after it), then drag and drop the folder where you placed the `.jar` file into the terminal window. The command should look similar to this: `cd '/Users/name/AgentAssistFolder'`. Press Enter.<br>
+
+Type the following command: **`java -jar agentassist.jar`** and press **Enter**.
+
+* A window similar to the below image should appear in a few seconds. You will see a graphical user interface with sample contact information already added.<br>
+  ![Ui](images/Ui.png)
+
+### 6. Using AgentAssist
+
+In the application window, you will see a **command box**. This is where you type commands to manage your contacts.
+
+* Type a command in the command box and press **Enter** to make the app do something.
+* Typing `help` and pressing Enter will open the help window.
+
+Here are some example commands you can try:
+
+* `list` : Lists all contacts.
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+* `delete 3` : Deletes the 3rd contact shown in the current list.
+* `clear` : Deletes all contacts.
+* `exit` : Exits the app.
+
+Refer to the [Features](#features) section for details of each command.
+
+---
 
 ## Features Overview
 
