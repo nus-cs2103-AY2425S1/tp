@@ -16,6 +16,9 @@ import seedu.address.model.tag.Tag;
  */
 public class Person {
     public static final Tag DEFAULT_TAG_PENDING = new Tag("pending");
+    // tags for marking status of candidate
+    public static final Tag TAG_HIRED = new Tag("hired");
+    public static final Tag TAG_REJECTED = new Tag("fired");
 
     // Identity fields
     private final Name name;
