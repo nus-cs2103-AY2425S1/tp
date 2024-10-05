@@ -5,7 +5,7 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
 
-You can reach us at the email `AcademyAssit@gmail.com`
+You can reach us at the email `AcademyAssist@gmail.com`
 
 ## Project team
 
@@ -28,7 +28,7 @@ You can reach us at the email `AcademyAssit@gmail.com`
 
 ### Khoo Yu Yien (Annabelle)
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/annabellekk.png" width="200px">
 
 [[github](https://github.com/annabellekk)]
 [[portfolio](team/johndoe.md)]
