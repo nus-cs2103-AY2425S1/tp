@@ -16,7 +16,7 @@ import seedu.address.model.person.Name;
 public class ViewStatusCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
-    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Remark: %2$s";
+    public static final String MESSAGE_ARGUMENTS = "Name: %1$s, Job: %2$s";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": View the status of a person in the address book. "
             + "Parameters: "
@@ -40,7 +40,8 @@ public class ViewStatusCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        throw new CommandException(" View command not implemented yet");
+        throw new CommandException(
+                String.format(MESSAGE_ARGUMENTS, this.name, this.job));
     }
 
     @Override

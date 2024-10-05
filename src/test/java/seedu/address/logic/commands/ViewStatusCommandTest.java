@@ -8,6 +8,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_JOB_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_JOB_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.ViewStatusCommand.MESSAGE_ARGUMENTS;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,30 +26,23 @@ public class ViewStatusCommandTest {
     public final Name bob = new Name(VALID_NAME_BOB);
     public final Job amyJob = new Job(VALID_JOB_AMY);
     public final Job bobJob = new Job(VALID_JOB_BOB);
+    public final Model model = new ModelManager();
 
     @Test
     public void constructor_validInput_success() {
-        Name name = new Name("John Doe");
-        Job job = new Job("Software Engineer");
-
-        ViewStatusCommand command = new ViewStatusCommand(name, job);
+        ViewStatusCommand command = new ViewStatusCommand(amy, amyJob);
 
         // Verify that the name and job are correctly initialized
-        assertEquals(name, command.name);
-        assertEquals(job, command.job);
+        assertEquals(amy, command.name);
+        assertEquals(amyJob, command.job);
     }
 
     @Test
     public void execute_commandNotImplementedYet_throwsCommandException() {
-        Model model = new ModelManager();
-        Name name = new Name("John Doe");
-        Job job = new Job("Software Engineer");
+        ViewStatusCommand command = new ViewStatusCommand(amy, amyJob);
 
-        ViewStatusCommand command = new ViewStatusCommand(name, job);
-
-        // Expect the CommandException with a specific message
-        assertThrows(CommandException.class, () -> command.execute(model),
-                "View command not implemented yet");
+        assertCommandFailure(command, model,
+                String.format(MESSAGE_ARGUMENTS, amy, amyJob));
     }
 
     @Test
