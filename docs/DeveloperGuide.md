@@ -4,6 +4,8 @@
   pageNav: 3
 ---
 
+*Last edited by: somethingfishyfishy 10/06/24 12:55 AM*
+
 # AB-3 Developer Guide
 
 <!-- * Table of Contents -->
@@ -274,13 +276,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-Administrative Directors of CCAs in NUS who have to manage the database of the members. 
+Administrative Directors of CCAs in NUS who wish to manage a database of the CCA members more effectively. 
 The database size is around 50 students. These directors are tech savvy who can type fast.
 
 
 **Value proposition**: Enables users to efficiently and easily manage large CCA membership database 
-(including creation, edit, and deletion of data entries).
+(including creation, edition, and deletion of data entries).
 
+--------------------------------------------------------------------------------------------------------------------
 
 ### User stories
 
@@ -302,9 +305,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user                        | view the PDPA stance the members have in terms of sending of info the 3rd parties                                                                                                        | know whether I am allowed to send member’s personal details to 3rd parties                                                       |
 
 
-### Use cases
+--------------------------------------------------------------------------------------------------------------------
+
+### use cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+
 
 **Use case: Add a person**
 
@@ -321,8 +327,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. AddressBook shows an error message.
 
       Use case ends.
+      
+* 1b. Given contact has duplicate 'name' field.
+    * 1a1. AddressBook shows an error message and prompts user to re-enter with nickname.
 
-    
+      Use case ends.
+      
 **Use case: Delete a person**
 
 **MSS**
@@ -362,7 +372,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**Use case: View all contacts**
+
+**MSS**
+
+1.  User requests to view all contacts
+2.  AddressBook shows list of all contacts
+
+    Use case ends.
+
+    
 *{More to be added}*
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Non-Functional Requirements
 
@@ -375,17 +397,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 7.  Should be able to retrieve and display member data within 2 seconds.
 8.  User Interface should be intuitive even for new users.
 
-
-**Use case: View all contacts**
-
-**MSS**
-
-1.  User requests to view all contacts
-2.  AddressBook shows list of all contacts
-
-    Use case ends.
-
-*{More to be added}*
+--------------------------------------------------------------------------------------------------------------------
 
 ### Glossary
 
