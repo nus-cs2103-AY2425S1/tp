@@ -279,15 +279,19 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                           | I want to …​                       | So that I can…​                                                         |
-|----------|-----------------------------------|------------------------------------|-------------------------------------------------------------------------|
-| `* * *`  | administrator of a tuition centre | view all students' contact details | easily access everyone's details in a consolidated place                         |
-| `* * *`  | administrator of a tuition centre | add a new person                   | add new contacts for newly enrolled students                      |
-| `* * *`  | administrator of a tuition centre | delete a student                   | remove students that are no longer enrolled                      |
-| `* * *`  | administrator of a tuition centre | find a student by name             | locate details of students without having to go through the entire list       |
-|  `**`    | administrator of a tuition centre | edit a student's details           | update their details accordingly when there are changes to be made            |
-| `*`      | new user                          | see what commands are available    | refer to instructions when I forget how to use the App                           |
-| `*`      | administrator of a tuition centre | add emergency contact to a student | quickly find out who to contact at once glance if the situation arises          |
+| Priority | As a …​                           | I want to …​                        | So that I can…​                                                         |
+|----------|-----------------------------------|-------------------------------------|-------------------------------------------------------------------------|
+| `* * *`  | administrator of a tuition centre | view all students' contact details  | easily access everyone's details at one place                           |
+| `* * *`  | administrator of a tuition centre | add a new person                    | add new contacts for newly enrolled students                            |
+| `* * *`  | administrator of a tuition centre | delete a student                    | remove students that are no longer enrolled                             |
+| `* * *`  | administrator of a tuition centre | find a student by name              | locate details of students without having to go through the entire list |
+| `* * *`  | administrator of a tuition centre | add class taken by student          | see what class a student is currently taking                            |
+| `* *`    | administrator of a tuition centre | filter students based on a category | easily see all students that fall under that category                   |
+| `* *`    | administrator of a tuition centre | edit student contact                | update student details when they are changed                            |
+| `* *`    | new user                          | see what commands are available     | refer to instructions when I forget how to use the App                  |
+| `*`      | administrator of a tuition centre | clear all contacts                  | empty the address book for a new academic year                          |
+| `*`      | administrator of a tuition centre | track class size                    | see if classes are nearing capacity or undersubscribed                  |
+| `*`      | administrator                     | add emergency contact to a student  | quickly find out who to contact at once glance if the situation arises  |
 
 *{More to be added}*
 
@@ -306,7 +310,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends
 
    **Extensions**
-
+    
 * 2a. The name is not provided/invalid format
   * 2a1. System requests name in correct format
   * 2a2. User re-enters the correct/missing name
@@ -366,6 +370,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1a2. User re-enters the correct/missing details
 
     Steps 1a1-1a2 are repeated until the fields in the specified format are provided
+    
     Use case resumes at step 2
 
 ---
