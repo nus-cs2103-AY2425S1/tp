@@ -443,12 +443,8 @@ Preconditions:
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Architecture Diagram**: A visual representation showing the structure of the system and how its components interact.
-* **Main Component**: Refers to the core functional modules of the app, including UI, Logic, Model, and Storage.
 * **UI (User Interface)**: The visual part of the system that allows users to interact with the application (e.g., command box, result display).
 * **CommandBox**: A UI element where users input commands to interact with the application.
-* **Logic Component**: This handles command execution and interacts with the model to perform operations like adding, deleting, or listing suppliers and inventory items.
-* **Model Component**: Holds and manages in-memory data, such as supplier and inventory information.
-* **Storage Component**: Responsible for reading from and writing to the disk, including saving user preferences and inventory data in JSON format.
 * **ObservableList**: A list that the UI can listen to and update itself automatically when the data changes.
 * **API (Application Programming Interface)**: A set of methods that different components use to interact with each other.
 * **Parser**: Converts user commands (entered as text) into objects the system can understand and execute.
@@ -458,7 +454,6 @@ Preconditions:
 * **JavaFX**: A framework used to build the graphical user interface, managing visual elements like windows and buttons.
 * **.fxml Files**: XML-based files used to define the layout of the UI components in JavaFX.
 * **CommandResult**: Encapsulates the result of a command execution, such as success or error messages.
-* **Sequence Diagram**: A type of diagram that shows how different components of the system interact over time during a specific process (e.g., command execution).
 * **Supplier**: A contact responsible for supplying products for the store.
 * **Stock Level**: Current inventory, or the number of items of that product SKU, in the store.
 
