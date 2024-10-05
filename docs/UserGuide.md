@@ -1,4 +1,7 @@
-# AcademyAssist User Guide
+---
+layout: page
+title: AcademyAssist User Guide
+---
 
 AcademyAssist is a **desktop app for managing student contacts in a tuition center, optimized for use via a Command 
 Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, 
