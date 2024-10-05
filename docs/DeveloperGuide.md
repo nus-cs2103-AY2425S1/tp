@@ -355,6 +355,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **API (Application Programming Interface)**: A set of rules and protocols for building and interacting with software applications, specifying how components communicate
+* **Parser**: A component that interprets user commands and translates them into Command objects for execution
+* **AddressBook**: A digital record that stores contact information for individuals including names, addresses, phone numbers, and other relevant details
+* **Command**: A directive issued by a user to a software application to perform a specific action or operation
+* **CommandResult**: An object that encapsulates the result of executing a command, including success status and any output messages
 
 --------------------------------------------------------------------------------------------------------------------
 
