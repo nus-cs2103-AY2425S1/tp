@@ -1,10 +1,9 @@
 package seedu.address.logic.commands;
 
-import java.util.List;
-import java.util.Set;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+
+import java.util.List;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -21,7 +20,9 @@ import seedu.address.model.tag.Tag;
 public class ViewStatusCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
-
+    public static final String MESSAGE_VIEW_SUCCESS = "Viewing status of person: %1$s";
+    public static final String MESSAGE_VIEW_FAILURE = "There are no matching persons with name: %1$s"
+            + " and job: %2$s";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": View the status of a person in the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
@@ -29,10 +30,6 @@ public class ViewStatusCommand extends Command {
 
     public final Name name;
     public final Job job;
-
-    public static final String MESSAGE_VIEW_SUCCESS = "Viewing status of person: %1$s";
-    public static final String MESSAGE_VIEW_FAILURE = "There are no matching persons with name: %1$s"
-                                                    + " and job: %2$s";
 
     /**
      * @param name Name of the candidate
@@ -61,11 +58,9 @@ public class ViewStatusCommand extends Command {
      * failure message
      */
     private CommandResult findMatchingPerson(List<Person> lastShownList) {
-        Person current;
-        for (int i = 0; i < lastShownList.size(); i++) {
-            current = lastShownList.get(i);
-            if (foundMatchingName(current)) {
-                return new CommandResult(String.format(MESSAGE_VIEW_SUCCESS, Messages.formatStatus(current)));
+        for (Person person: lastShownList) {
+            if (foundMatchingName(person)) {
+                return new CommandResult(String.format(MESSAGE_VIEW_SUCCESS, Messages.formatStatus(person)));
             }
         }
 

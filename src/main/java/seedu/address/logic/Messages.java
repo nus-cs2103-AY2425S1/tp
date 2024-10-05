@@ -1,5 +1,9 @@
 package seedu.address.logic;
 
+import static seedu.address.model.person.Person.TAG_HIRED;
+import static seedu.address.model.person.Person.TAG_REJECTED;
+import static seedu.address.model.person.Person.DEFAULT_TAG_PENDING;
+
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -7,10 +11,6 @@ import java.util.stream.Stream;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
-
-import static seedu.address.model.person.Person.DEFAULT_TAG_PENDING;
-import static seedu.address.model.person.Person.TAG_HIRED;
-import static seedu.address.model.person.Person.TAG_REJECTED;
 
 /**
  * Container for user visible messages.
