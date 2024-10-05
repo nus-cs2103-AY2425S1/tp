@@ -14,7 +14,7 @@ import seedu.address.model.tag.Tag;
  * Represents a Contact in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-abstract public class Contact {
+public abstract class Contact {
 
     // Identity fields
     private final Name name;

@@ -1,15 +1,19 @@
 package seedu.address.model.person;
 
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 import java.util.Set;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.tag.Tag;
 
+/**
+ * Represents a Client in the address book.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 public class Client extends Contact {
-    Date date;
+    private Date date;
     public Client(Name name, Phone phone, Email email, Address address, Date date, Set<Tag> tags) {
         super(name, phone, email, address, tags);
         requireAllNonNull(date);
