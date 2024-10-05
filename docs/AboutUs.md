@@ -9,44 +9,24 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
 
-<img src="images/johndoe.png" width="200px">
+### Jia Sheng
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+<img src="images/rimgik.png" width="200px">
 
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/rimgik)]
+[[portfolio](team/rimgik.md)]
 
 * Role: Developer
-* Responsibilities: Data
 
-### Jean Doe
+### Toh Heng Xing
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/tohhengxing.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/tohhengxing)]
+[[portfolio](team/tohhengxing.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
 
 ### Ng Yan Yee
 
@@ -57,3 +37,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: UI
+
