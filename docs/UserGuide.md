@@ -67,149 +67,316 @@ Refer to the [Features](#features) section for details of each command.
 
 ---
 
-## Features
+## Features Overview
 
-<div markdown="block" class="alert alert-info">
+### Feature 1: Ability to Save Current Data
 
-**:information_source: Notes about the command format:**<br>
+**Purpose:**  
+This feature ensures that any details you add to the app are saved automatically. When you close and reopen the app, all your data will still be there.
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+**How it Works:**  
+- **Command Format and Example:** Not applicable, as this process is automatic.
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+#### Parameters
+- **Flags and Parameters:** There are no parameters needed for this feature.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+#### What to Expect
+- **If Successful:** You can access all the data you've entered previously.
+- **If There is an Error:** There's a chance that the data might not be saved due to an error, and you could lose information.
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+---
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+### Feature 2: Add New Customer
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</div>
+**Purpose:**  
+This feature allows you to enter and save detailed records for new customers. Each customer's record includes their name, contact number, email, occupation, and income.
 
-### Viewing help : `help`
+**How to Use It:**  
+- **Command Format:** 
+```
+add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOBNAME> i/ <INCOME> [t/ <TAG>] [r/ <REMARK>]
+ ```
+- **Example:** 
+```
+add n/ TAN LESHEW p/ 99007766 e/ mrtan@ntu.sg a/ com3 j/ doctor i/ 99999
+add n/ TAN LESHEW p/ 99007766 e/ mrtan@ntu.sg a/ com3 j/ doctor i/ 99999 t/ gold r/ got anger issue
+```
 
-Shows a message explaning how to access the help page.
+#### Parameters
+| Parameter | Expected Format                                  | Explanation                                                                       |
+|-----------|--------------------------------------------------|-----------------------------------------------------------------------------------|
+| NAME      | Alphanumeric, capitalized                        | Names are in block letters for clarity and consistency.                           |
+| PHONE     | 8-digit number, starts with 8 or 9               | Ensures the contact number is valid in Singapore.                                 |
+| EMAIL     | Must include "@" and domain, case insensitive    | Verifies that the email address is in a standard format.                          |
+| ADDRESS   | Any text, case insensitive                       | Accepts all addresses without case sensitivity. Addresses can have numbers and symbol alike /. |
+| JOB       | Any text, case insensitive                       | Accepts all job titles without case sensitivity.                                  |
+| INCOME    | Non-negative integers                            | Only positive numbers or zero are valid for income fields.                        |
+| TAG       | [optional] String (gold, silver, bronze, reject) | Defines the specific credit card tier to be assigned or updated.                  |
+| REMARK    | [optional] Any string                            | Notes are case-insensitive and can include any textual information.               |
 
-![help message](images/helpMessage.png)
+#### What to Expect
+- **If Successful:** You'll see a message: "New person added: `<NAME>`; Phone: `<PHONE>`; Email: `<EMAIL>`; Address: `<ADDRESS>`; Job: `<JOB>`;  Income: `<INCOME>`; Tag: `<TAG>`; Remark: `<REMARK>`". It's noted that if "Tag" and "Remark" are not added, they will be defined as "N/A."
+- **If There is an Error:** 
+  - "Please verify that your input is in the correct format. Include the following details: n/ `<NAME>` p/ `<PHONE>` e/ `<EMAIL>` a/ `<ADDRESS>` j/ `<JOBNAME>` i/ `<INCOME>` [t/ `<TAG>`] [r/ `<REMARK>`]."
 
-Format: `help`
+**Handling Duplicates:**  
+If a customer with the same name, email, job, and income is already saved, you'll get a message: "This customer is already saved as a contact."
 
+---
 
-### Adding a person: `add`
+### Feature 3: Remove Old Customer
 
-Adds a person to the address book.
+**Purpose:**  
+This feature allows you to remove records of customers who are no longer using your credit card services.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+**How to Use It:**  
+- **Command Format:** 
+```
+del <INDEX>
+```
+- **Example:** 
+```
+del 69
+```
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+#### Parameters
+| Parameter | Expected Format             | Explanation                                                                                                                              |
+|-----------|-----------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
+| INDEX        | Integer (0 to the last INDEX)  | The INDEX must be a valid integer within the registered range (either the original list or any filtered list after using `filter` command). |
 
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+#### What to Expect
+- **If Successful:** You'll see a message: "Customer `<INDEX>` has been deleted."
+- **If There is an Error:** 
+  - Invalid index: "No customer with `<INDEX>` exists. Please recheck the index."
 
-### Listing all persons : `list`
+**Handling Duplicates:**  
+Since customer INDEX are unique identifiers:
+- No two customers can have the same index due to the uniqueness constraint on customer index.
+- Even if a customer record appears duplicated due to data file modifications, the system assigns a unique index upon loading the data, preventing actual duplicates in the database.
 
-Shows a list of all persons in the address book.
+---
 
-Format: `list`
+### Feature 4: View Details of a Customer
 
-### Editing a person : `edit`
+**Purpose:**  
+Allows users to view detailed information about a specific customer.
 
-Edits an existing person in the address book.
+**How to Use It:**  
+- **Command Format:** 
+```
+view <INDEX>
+```
+- **Example:** 
+```
+view 69
+```
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+#### Parameters
+| Parameter | Expected Format               | Explanation                                                                                                                                 |
+|-----------|-------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| INDEX        | Integer (0 to the last index) | The index must be a valid integer within the registered range (either the original list or any filtered list after using `filter` command). |
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+#### What to Expect
+- **If Successful:** The details of the customer with the specified index will be displayed.
+- **If There is an Error:** 
+  - Invalid index: "No customer with `<INDEX>` exists. Please recheck the index."
 
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+**Handling Duplicates:**  
+- There can be no duplicate customer index due to system constraints on index uniqueness.
+- While other information like name and address can be duplicated, each customer index is unique, ensuring you always retrieve the correct customer record.
+---
 
-### Locating persons by name: `find`
+### Feature 5: Edit the existing customer
 
-Finds persons whose names contain any of the given keywords.
+**Purpose:**  
+This feature enables users to update the details of an existing customer, apart from the remark as of v1.1, in the database. It is designed to accommodate changes in a customer’s information such as contact details, address, job information, or any other relevant data.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+**How to Use It:**
+- **Command Format:**
+```
+edit <INDEX> n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> [t/ <TAG>]
+```
+- **Examples:**
+```
+edit 69 n/ TAN LESHEW p/ 77337733 e/ mrtan@ntu.sg a/ COM3 j/ doctor i/ 1000000000
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+```
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+#### Parameters
+| Parameter  | Expected Format                   | Explanation                                                                                 |
+|------------|-----------------------------------|---------------------------------------------------------------------------------------------|
+| INDEX        | Integer (0 to the last index) | The index must be a valid integer within the registered range (either the original list or any filtered list after using `filter` command). |
+| NAME      | Alphanumeric, capitalized                        | Names are in block letters for clarity and consistency.                           |
+| PHONE     | 8-digit number, starts with 8 or 9               | Ensures the contact number is valid in Singapore.                                 |
+| EMAIL     | Must include "@" and domain, case insensitive    | Verifies that the email address is in a standard format.                          |
+| ADDRESS   | Any text, case insensitive                       | Accepts all addresses without case sensitivity. Addresses can have numbers and symbol alike /. |
+| JOB       | Any text, case insensitive                       | Accepts all job titles without case sensitivity.                                  |
+| INCOME    | Non-negative integers                            | Only positive numbers or zero are valid for income fields.                        |
+| TAG       | [optional] String (gold, silver, bronze, reject) | Defines the specific credit card tier to be assigned or updated.                  |
 
-### Deleting a person : `delete`
+#### What to Expect
+- **If Successful:**
+  - Message: "Customer `<INDEX>` has been updated successfully."
+- **If There is an Error:**
+  - "Failed to update customer `<INDEX>`. Please verify that your input matches the expected formats and all fields are correct."
 
-Deletes the specified person from the address book.
-`
-Format: `delete INDEX`
+**Handling Duplicates:**
+- No two customers can have the same index due to the uniqueness constraint on customer index.
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+---
+### Feature 6: Find a Customer by Details
 
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+**Purpose:**  
+Enables users to search for and display all customers who match the specified details such as name, job, or index.
 
-### Adding a remark to a contact: `remark`
+**How to Use It:**  
+- **Command Format:** 
+```
+filter <FLAG>/ <FLAG FIELD>
+```
+- **Examples:** 
+```
+filter n/ <NAME> 
+e.g. filter n/ TAN LESHEW
 
-Adds a remark to the specified person from the address book. If there's an existing remark, it is overwritten by the new remark.
-Format: `remark INDEX [r/REMARK]`
+filter j/ <JOB> 
+e.g. filter j/ doctor
+```
 
-* Adds a remark to the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+#### Parameters
+| Parameter  | Expected Format                   | Explanation                                                                                 |
+|------------|-----------------------------------|---------------------------------------------------------------------------------------------|
+| FLAG       | Refer to `add` syntax constraints | Indicates the type of data to filter. Use n/ for name, p/ for phone number, etc.            |                                                                          |
+| FLAG FIELD | Refer to `add` parameter constraints for format | Fields should be input as follows: n/<NAME>, p/<PHONE>, etc. Searches are case-insensitive. |
 
-Examples:
-* `list` followed by `remark 2 r/He is very rich` adds the remark "He is very rich" to the 2nd person in the address book.
-* `find Betsy` followed by `remark 1 r/"She is my friend"` adds the remark "She is my friend" to the 1st person in the results of the `find` command.
+#### What to Expect
+- **If Successful:** 
+  - Message: "Here are all the customers that match your search: (List of customers)."
+- **If There is an Error:** 
+  - "Please correct your input and ensure it matches the expected format. Refer to the guidelines for each parameter as specified."
 
-### Clearing all entries : `clear`
+**Handling Duplicates:**  
+- For `NAME` and `JOB` fields: Multiple customers can have the same names or jobs. The command will list all matching entries.
+---
 
-Clears all entries from the address book.
+### Feature 7: Save Remarks About Customers
 
-Format: `clear`
+**Purpose:**  
+Allows users to save specific notes or remarks about a customer, which can be viewed later to recall notable details.
 
-### Exiting the program : `exit`
+**How to Use It:**  
+- **Command Format:** 
+```
+remark <INDEX> r/ <REMARK>
+```
+- **Example:** 
+```
+remark 55 r/ He is a problematic customer.
+```
 
-Exits the program.
+#### Parameters
+| Parameter | Expected Format               | Explanation                                                                                                                                 |
+|-----------|-------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| INDEX     | Integer (0 to the last index) | The index must be a valid integer within the registered range (either the original list or any filtered list after using `filter` command). |
+| REMARK    | Any string                    | Remarks are case-insensitive and can include any textual information.                                                                       |
 
-Format: `exit`
+#### What to Expect
+- **If Successful:** 
+  - Message: "Remark has been added to Customer `<INDEX>`."
+- **If There is an Error:** 
+  - Invalid index: "No customer with `<INDEX>` exists. Please input a valid index."
 
-### Saving the data
+**Handling Duplicates:**  
+- Although customer index should be unique, in the rare case where duplicates are detected, the following error message will be shown:
+  - "Sorry, it appears that multiple customers with index: `<INDEX>` exist. Please use the delete command to remove the duplicated customer index."
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+---
 
-### Editing the data file
+### Feature 8: Add/Replace Credit Card Tier
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+**Purpose:**  
+Allows users to assign or update the credit card tier for a customer. This is particularly useful for managing new, existing, or returning customers who may not have been assigned a credit card tier initially or who need their current tier updated.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</div>
+**How to Use It:**  
+- **Command Format:** 
+```
+tag <INDEX> t/ <TIER>
+```
+- **Example:** 
+```
+tag 69 t/ reject
+```
 
-### Archiving data files `[coming in v2.0]`
+#### Parameters
+| Parameter | Expected Format                       | Explanation                                                                                                                                 |
+|-----------|---------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| INDEX     | Integer (0 to the last index)         | The index must be a valid integer within the registered range (either the original list or any filtered list after using `filter` command). |
+| TIER      | String (gold, silver, bronze, reject) | Defines the specific credit card tier to be assigned or updated.                                                                            |
 
-_Details coming soon ..._
+#### What to Expect
+- **If Successful:** 
+  - Message: "Customer `<INDEX>` has been tagged with `<TIER>` tier."
+- **If There is an Error:** 
+  - "Unable to process the request. Please ensure the index is within the valid range and the tier is specified as either 'gold', 'silver', 'bronze', or 'reject'."
+
+**Handling Duplicates:**  
+- If a customer already has a tier assigned and a new `tag` command is issued, the existing tier will be updated to the new tier specified. This ensures that customers always have the most appropriate tier based on their current status or eligibility.
+
+---
+### Feature 9: Help
+
+**Purpose:**  
+This feature provides users with quick access to the user guide for the application, helping them understand how to use various features effectively.
+
+**How to Use It:**  
+- **Command Format:** 
+```
+help
+```
+- **Example:** 
+```
+help
+```
+
+#### Parameters
+- **Flag:** N/A
+  - There are no parameters required for this command.
+
+#### What to Expect
+- **If Successful:** 
+  - No immediate message is displayed in the command interface.
+  - Opens up a dialog box that provides a link to the user guide markdown file, allowing users to easily access detailed instructions and information.
+
+**Handling Duplicates:**  
+- N/A as this command does not involve processing or displaying data that could involve duplicates.
+
+---
+### Feature 10: Exit
+
+**Purpose:**  
+Allows users to exit the application through a simple command, eliminating the need to use the window's close button or external controls.
+
+**How to Use It:**  
+- **Command Format:** 
+```
+exit
+```
+- **Example:** 
+```
+exit
+```
+
+#### Parameters
+- **Flag:** N/A
+  - No parameters are needed to execute this command.
+
+#### What to Expect
+- **If Successful:** 
+  - The message "Terminating program…" is displayed.
+  - The program will then exit after a short delay, effectively closing the application.
+
+**Handling Duplicates:**  
+- N/A as this command is unique and does not process data that could involve duplicates.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -227,14 +394,17 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## Command Summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+| Action                          | Command Format                                                                                   | Example                                                                                               |
+|---------------------------------|--------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|
+| **Save Data Automatically**     | *Automatic*                                                                                      | *No command required*                                                                                 |
+| **Add New Customer**            | `add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> [t/ <TAG>] [r/ <REMARK>]` | `add n/ TAN LESHEW p/ 99007766 e/ mrtan@ntu.sg a/ com3 j/ doctor i/ 99999 t/ gold r/ got anger issue` |
+| **Remove Old Customer**         | `del <INDEX>`                                                                                    | `del 69`                                                                                              |
+| **View Details of a Customer**  | `view <INDEX>`                                                                                   | `view 69`                                                                                             |
+| **Edit Existing Customer**      | `edit <INDEX> n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> [t/ <TAG>]`      | `edit 69 n/ TAN LESHEW p/ 77337733 e/ mrtan@ntu.sg a/ COM3 j/ doctor i/ 1000000000`                   |
+| **Find a Customer by Details**  | `filter <FLAG>/ <FLAG FIELD>`                                                                    | `filter n/ TAN LESHEW`                                                                                |
+| **Save Remarks About Customers**| `remark <INDEX> r/ <REMARK>`                                                                     | `remark 55 r/ He is a problematic customer.`                                                          |
+| **Add/Replace Credit Card Tier**| `tag <INDEX> t/ <TIER>`                                                                          | `tag 69 t/ reject`                                                                                    |
+| **Help**                        | `help`                                                                                           | `help`                                                                                                |
+| **Exit**                        | `exit`                                                                                           | `exit`                                                                                                |
