@@ -262,29 +262,33 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* Administrative staff in small clinics
+* has a need an organized system for managing patient data
+* has a need to manage a significant number of patient data entries
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
+
+Small, private clinics do not have access to advanced administration systems to manage patients as they are expensive and meant for bigger hospitals.
+ClinicBuddy enhances the patient management process for small clinics, creating a platform to track patient information such as contact information, address and other basic personal data.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                    | I want to …​                       | So that I can…​                                                                                                   |
+|----------|----------------------------|------------------------------------|-------------------------------------------------------------------------------------------------------------------|
+| `* * *`  | user                       | add a new patient                  | I can create new patient records                                                                                  |
+| `* * *`  | user                       | edit a record after submitting it  | I can make modifications to erroneous records which may have been submitted after keying a command in too quickly |
+| `* * *`  | user                       | delete a patient's record          | remove entries that I no longer need                                                                              |
+| `* * *`  | user                       | search for a patient by name or ID | I can quickly access their information when needed                                                                |
+| `* * *`  | user                       | archive data 	                     | Patients data can be restored should the records be corrupted                                                     |
+| `* * `   | user who may make mistakes | undo commands                      | I can reverse recently executed commands if the command should not have been executed                             |
 
-*{More to be added}*
 
 ### Use cases
 
