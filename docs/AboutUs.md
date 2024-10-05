@@ -19,8 +19,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/nicholascyx)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: UI Expert, Developer
+* Responsibilities: Helps other team member with Ui matters
 
 ### Alexander Liswandy
 
@@ -29,8 +29,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/airiinnn)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Integration, Git expert
+* Role: Git Expert, IntelliJ Expert,Integration,Deliverables and deadlines, Developer
+* Responsibilities: In charge of versioning of the code, maintaining the code repository, integrating various parts of the software to create a whole. Helps other team member with Git and IntelliJ matters
 
 ### Travis Sim
 
@@ -39,29 +39,18 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/travisim)]
 [[portfolio](team/travisim.md)]
 
-* Role: Deliverables and deadlines
-* Responsibilities: Ensure project deliverables are done on time and in the right format.
+* Role: Deliverables and deadlines, Scheduling and tracking, Blockchain expert, Developer
+* Responsibilities: Ensure project deliverables are done on time and in the right format. In charge of defining, assigning, and tracking project tasks. Helps other team member with Blockchain matters
 
-### CHong Tze Zhao
+### Chong Tze Zhao
 
 <img src="images/chongtzezhao.png" width="200px">
 
 [[github](http://github.com/chongtzezhao)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Looks after feature development
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
+* Role: Deliverables and deadlines, Developer
+* Responsibilities: Ensure project deliverables are done on time and in the right format.
 
 ### Zhang Yuxiang
         
@@ -70,6 +59,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/TheRareFox)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Code quality
-* Responsibilities: Looks after code quality, ensures adherence to coding standards, etc.
+* Role: Code quality, Deliverables and deadlines, Developer
+* Responsibilities: Looks after code quality, ensures adherence to coding standards, etc. Ensure project deliverables are done on time and in the right format.
 
