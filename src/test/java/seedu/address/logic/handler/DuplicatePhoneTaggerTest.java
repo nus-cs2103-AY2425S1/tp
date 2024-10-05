@@ -3,8 +3,11 @@ package seedu.address.logic.handler;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -13,12 +16,11 @@ import seedu.address.model.person.Phone;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
 
-import java.util.List;
+
+
+
 
 public class DuplicatePhoneTaggerTest {
-    private DuplicatePhoneTagger duplicatePhoneTagger = new DuplicatePhoneTagger();
-    private AddressBookBuilder testAB = new AddressBookBuilder();
-    private Model testModel;
 
     private static final String TEST_PHONE_ONE = "11111111";
     private static final String TEST_PHONE_TWO = "12345678";
@@ -27,8 +29,6 @@ public class DuplicatePhoneTaggerTest {
     private static final String TEST_PHONE_FIVE = "32323232";
     private static final String TEST_PHONE_SIX = "45454545";
     private static final String TEST_PHONE_SEVEN = "54545454";
-
-
     private static final Person AIKEN = new PersonBuilder().withName("Aiken").withPhone(TEST_PHONE_ONE)
             .withEmail("aiken@gmail.com").withAddress("Kent Ridge MRT").build();
     private static final Person ALEX = new PersonBuilder().withName("Alex").withPhone(TEST_PHONE_TWO)
@@ -41,8 +41,12 @@ public class DuplicatePhoneTaggerTest {
             .withEmail("adriel@gmail.com").withAddress("UTown").build();
     private static final Person TAN_AH_KOW = new PersonBuilder().withName("Tan Ah Kow").withPhone(TEST_PHONE_SIX)
             .withEmail("tak@hotmail.com").withAddress("Woodlands MRT").build();
-    private static final Person BART_BILL = new PersonBuilder().withName("Bartholomew Billiams").withPhone(TEST_PHONE_SEVEN)
-            .withEmail("barbill@gmail.com").withAddress("United Kingdom").build();
+    private static final Person BART_BILL = new PersonBuilder().withName("Bartholomew Billiams")
+            .withPhone(TEST_PHONE_SEVEN).withEmail("barbill@gmail.com").withAddress("United Kingdom").build();
+
+    private DuplicatePhoneTagger duplicatePhoneTagger = new DuplicatePhoneTagger();
+    private AddressBookBuilder testAB = new AddressBookBuilder();
+    private Model testModel;
 
     @BeforeEach
     public void setUp() {
@@ -66,7 +70,7 @@ public class DuplicatePhoneTaggerTest {
 
     @Test
     public void duplicatesPresentTest() {
-        Person AARON = new PersonBuilder().withName("Aaron").withPhone(TEST_PHONE_TWO)
+        Person testPerson = new PersonBuilder().withName("Aaron").withPhone(TEST_PHONE_TWO)
                 .withEmail("aiken@example.com").withAddress("Kent Ridge MRT").build();
         testAB.withPerson(AARON);
         testModel = new ModelManager(testAB.build(), new UserPrefs());
@@ -78,7 +82,7 @@ public class DuplicatePhoneTaggerTest {
 
     @Test
     public void duplicatePhoneTest() {
-        Person AARON = new PersonBuilder().withName("Aaron").withPhone(TEST_PHONE_TWO)
+        Person testPerson = new PersonBuilder().withName("Aaron").withPhone(TEST_PHONE_TWO)
                 .withEmail("aiken@example.com").withAddress("Kent Ridge MRT").build();
         testAB.withPerson(AARON);
         testModel = new ModelManager(testAB.build(), new UserPrefs());
