@@ -6,6 +6,9 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -270,5 +273,32 @@ public class ParserUtilTest {
         String dateWithWhitespace = WHITESPACE + VALID_DATE + WHITESPACE;
         Date expectedDate = new Date(VALID_DATE);
         assertEquals(expectedDate, ParserUtil.parseDate(dateWithWhitespace));
+    }
+
+    @Test
+    public void parseLocalDate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseLocalDate((String) null));
+    }
+
+    @Test
+    public void parseLocalDate_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseLocalDate(INVALID_DATE));
+    }
+
+    @Test
+    public void parseLocalDate_validValueWithoutWhitespace_returnsDate() throws Exception {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(Date.DATE_FORMATTER)
+                .withResolverStyle(ResolverStyle.STRICT);
+        LocalDate expectedDate = LocalDate.parse(VALID_DATE, formatter);
+        assertEquals(expectedDate, ParserUtil.parseLocalDate(VALID_DATE));
+    }
+
+    @Test
+    public void parseLocalDate_validValueWithWhitespace_returnsTrimmedDate() throws Exception {
+        String dateWithWhitespace = WHITESPACE + VALID_DATE + WHITESPACE;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(Date.DATE_FORMATTER)
+                .withResolverStyle(ResolverStyle.STRICT);
+        LocalDate expectedDate = LocalDate.parse(VALID_DATE, formatter);
+        assertEquals(expectedDate, ParserUtil.parseLocalDate(dateWithWhitespace));
     }
 }

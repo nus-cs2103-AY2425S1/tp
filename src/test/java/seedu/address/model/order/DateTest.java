@@ -32,7 +32,7 @@ public class DateTest {
         assertFalse(Date.isValidDate("02-22-2002")); // invalid month
         assertFalse(Date.isValidDate("02-02-2222")); // not within 21st century
         assertFalse(Date.isValidDate("02/02/2002")); // non-hyphen non-numeric characters
-        assertFalse(Date.isValidDate("30/02/2002")); // invalid calender date
+        assertFalse(Date.isValidDate("30-02-2002")); // invalid calender date
 
         // valid dates
         assertTrue(Date.isValidDate("02-02-2002"));
