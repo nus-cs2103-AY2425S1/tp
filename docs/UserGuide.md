@@ -368,15 +368,15 @@ exit
 
 ## Command Summary
 
-| Action                          | Command Format                                                                               | Example                                                                    |
-|---------------------------------|----------------------------------------------------------------------------------------------|----------------------------------------------------------------------------|
-| **Save Data Automatically**     | *Automatic*                                                                                  | *No command required*                                                      |
+| Action                          | Command Format                                                                               | Example                                                                                       |
+|---------------------------------|----------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
+| **Save Data Automatically**     | *Automatic*                                                                                  | *No command required*                                                                         |
 | **Add New Customer**            | `add n/<NAME> p/<PHONE> e/<EMAIL> a/<ADDRESS> j/<JOBNAME> i/<INCOME> [t/<TAG>] [r/<REMARK>]` | `add n/TAN LESHEW p/99007766 e/mrtan@ntu.sg a/com3 j/doctor i/99999 t/gold r/got anger issue` |
-| **Remove Old Customer**         | `del <INDEX>`                                                                                | `del 69`                                                                   |
-| **View Details of a Customer**  | `view <INDEX>`                                                                               | `view 69`                                                                  |
-| **Edit Existing Customer**      | `edit <INDEX> n/<NAME> p/<PHONE> e/<EMAIL> a/<ADDRESS> j/<JOBNAME> i/<INCOME> [t/<TAG>]`     | `edit 69 n/TAN LESHEW p/77337733 e/mrtan@ntu.sg a/COM3 j/doctor i/1000000000` |
-| **Find a Customer by Details**  | `filter /<FLAG> <FLAG FIELD>`                                                                | `filter /n TAN LESHEW`                                                      |
-| **Save Remarks About Customers**| `remark <INDEX> r/ <REMARK>`                                                                 | `remark 55 He is a problematic customer.`                                   |
-| **Add/Replace Credit Card Tier**| `tag <INDEX> t/ <TIER>`                                                                      | `tag 69 reject`                                                             |
-| **Help**                        | `help`                                                                                       | `help`                                                                     |
-| **Exit**                        | `exit`                                                                                       | `exit`                                                                     |
+| **Remove Old Customer**         | `del <INDEX>`                                                                                | `del 69`                                                                                      |
+| **View Details of a Customer**  | `view <INDEX>`                                                                               | `view 69`                                                                                     |
+| **Edit Existing Customer**      | `edit <INDEX> n/<NAME> p/<PHONE> e/<EMAIL> a/<ADDRESS> j/<JOBNAME> i/<INCOME> [t/<TAG>]`     | `edit 69 n/TAN LESHEW p/77337733 e/mrtan@ntu.sg a/COM3 j/doctor i/1000000000`                 |
+| **Find a Customer by Details**  | `filter /<FLAG> <FLAG FIELD>`                                                                | `filter /n TAN LESHEW`                                                                        |
+| **Save Remarks About Customers**| `remark <INDEX> r/ <REMARK>`                                                                 | `remark 55 r/ He is a problematic customer.`                                                  |
+| **Add/Replace Credit Card Tier**| `tag <INDEX> t/ <TIER>`                                                                      | `tag 69 t/ reject`                                                                            |
+| **Help**                        | `help`                                                                                       | `help`                                                                                        |
+| **Exit**                        | `exit`                                                                                       | `exit`                                                                                        |
