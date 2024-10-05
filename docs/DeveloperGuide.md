@@ -306,28 +306,61 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a person**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to add person
+2.  AddressBook adds the person
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. Given contact has invalid or duplicate fields.
+    * 1a1. AddressBook shows an error message.
 
-  Use case ends.
+      Use case ends.
 
-* 3a. The given index is invalid.
+    
+**Use case: Delete a person**
 
-    * 3a1. AddressBook shows an error message.
+**MSS**
 
+1.  User requests to delete person
+2.  AddressBook deletes the person
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given person is not in the AddressBook
+    * 1a1. AddressBook shows an error message.
+  
+      Use case ends.
+
+* 1b. Multiple matching persons in the AddressBook
+    * 1b1. AddressBook shows list of all matching persons.
+    * 1b2. User enters index of person to delete
+  
       Use case resumes at step 2.
+
+
+**Use case: Search for person**
+
+**MSS**
+
+1.  User requests to search for person
+2.  AddressBook shows list of all matching persons
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User did not provide the search input
+    * 1a1. AddressBook shows an error message.
+
+      Use case ends.
 
 *{More to be added}*
 
@@ -341,6 +374,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 6.  Should be able to accommodate increasing member data over time.
 7.  Should be able to retrieve and display member data within 2 seconds.
 8.  User Interface should be intuitive even for new users.
+
+
+**Use case: View all contacts**
+
+**MSS**
+
+1.  User requests to view all contacts
+2.  AddressBook shows list of all contacts
+
+    Use case ends.
 
 *{More to be added}*
 
