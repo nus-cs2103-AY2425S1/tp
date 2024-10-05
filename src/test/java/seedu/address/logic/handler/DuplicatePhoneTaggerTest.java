@@ -44,8 +44,8 @@ public class DuplicatePhoneTaggerTest {
     private static final Person BART_BILL = new PersonBuilder().withName("Bartholomew Billiams")
             .withPhone(TEST_PHONE_SEVEN).withEmail("barbill@gmail.com").withAddress("United Kingdom").build();
 
-    private DuplicatePhoneTagger duplicatePhoneTagger = new DuplicatePhoneTagger();
-    private AddressBookBuilder testAB = new AddressBookBuilder();
+    private final DuplicatePhoneTagger duplicatePhoneTagger = new DuplicatePhoneTagger();
+    private final AddressBookBuilder testAB = new AddressBookBuilder();
     private Model testModel;
 
     @BeforeEach
@@ -72,7 +72,7 @@ public class DuplicatePhoneTaggerTest {
     public void duplicatesPresentTest() {
         Person testPerson = new PersonBuilder().withName("Aaron").withPhone(TEST_PHONE_TWO)
                 .withEmail("aiken@example.com").withAddress("Kent Ridge MRT").build();
-        testAB.withPerson(AARON);
+        testAB.withPerson(testPerson);
         testModel = new ModelManager(testAB.build(), new UserPrefs());
 
         List<Person> persons = testModel.getFilteredPersonList();
@@ -84,7 +84,7 @@ public class DuplicatePhoneTaggerTest {
     public void duplicatePhoneTest() {
         Person testPerson = new PersonBuilder().withName("Aaron").withPhone(TEST_PHONE_TWO)
                 .withEmail("aiken@example.com").withAddress("Kent Ridge MRT").build();
-        testAB.withPerson(AARON);
+        testAB.withPerson(testPerson);
         testModel = new ModelManager(testAB.build(), new UserPrefs());
 
         List<Person> persons = testModel.getFilteredPersonList();
