@@ -1,0 +1,84 @@
+package seedu.address.model.person;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+import org.junit.jupiter.api.Test;
+
+public class MeetingTest {
+
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+    private LocalDateTime startTime = LocalDateTime.parse("30-07-2024 11:00", formatter);
+    private LocalDateTime endTime = LocalDateTime.parse("30-07-2024 12:00", formatter);
+    private String location = "A Valid Location";
+
+    @Test
+    public void constructor_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new Meeting(startTime, endTime, null));
+        assertThrows(NullPointerException.class, () -> new Meeting(startTime, null, location));
+        assertThrows(NullPointerException.class, () -> new Meeting(null, endTime, location));
+    }
+
+    @Test
+    public void constructor_invalidLocation_throwsIllegalArgumentException() {
+        String invalidLocation = "";
+        assertThrows(IllegalArgumentException.class, () -> new Meeting(startTime, endTime, invalidLocation));
+    }
+
+    @Test
+    public void isValidLocation() {
+        // null location
+        assertThrows(NullPointerException.class, () -> Meeting.isValidLocation(null));
+
+        // invalid location
+        assertFalse(Meeting.isValidLocation("")); // empty string
+        assertFalse(Meeting.isValidLocation(" ")); // spaces only
+
+        // valid location
+        assertTrue(Meeting.isValidLocation("Whitley Road, Scoots Street, #01-355"));
+        assertTrue(Meeting.isValidLocation("-")); // one character
+        assertTrue(Meeting.isValidLocation("Re Inc, 4321 Vendor's St; Gum Gum Island SBY 345000; ID")); // long address
+    }
+
+    @Test
+    public void isValidStartAndEndTime() {
+        LocalDateTime otherStartTime = LocalDateTime.parse("20-12-2024 00:00", formatter);
+        LocalDateTime otherEndTime = LocalDateTime.parse("20-12-2024 01:00", formatter);
+
+        // invalid endTime before startTime
+        assertFalse(Meeting.isValidStartAndEndTime(otherEndTime, otherStartTime)); // place endTime before startTime
+
+        // valid startTime and endTime
+        assertTrue(Meeting.isValidStartAndEndTime(otherStartTime, otherEndTime)); // place endTime before startTime
+    }
+
+    @Test
+    public void equals() {
+        Meeting meeting = new Meeting(startTime, endTime, location);
+
+        // same values -> returns true
+        assertTrue(meeting.equals(new Meeting(startTime, endTime, location)));
+
+        // same object -> returns true
+        assertTrue(meeting.equals(meeting));
+
+        // null -> returns false
+        assertFalse(meeting.equals(null));
+
+        // different types -> returns false
+        assertFalse(meeting.equals(5.0f));
+
+        LocalDateTime otherStartTime = LocalDateTime.parse("30-01-2024 11:00", formatter);
+        LocalDateTime otherEndTime = LocalDateTime.parse("30-12-2024 12:00", formatter);
+        String otherLocation = "Other Valid Location";
+
+        // different values -> returns false
+        assertFalse(meeting.equals(new Meeting(otherStartTime, endTime, location)));
+        assertFalse(meeting.equals(new Meeting(startTime, otherEndTime, location)));
+        assertFalse(meeting.equals(new Meeting(startTime, endTime, otherLocation)));
+    }
+}

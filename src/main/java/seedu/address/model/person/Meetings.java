@@ -2,7 +2,7 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -37,9 +37,9 @@ public class Meetings {
     public int findIndex(Meeting toAdd) {
         for (int i = 0; i < internalList.size() - 1; i++) {
             Meeting temp = internalList.get(i);
-            Date endTimeTemp = temp.endTime;
+            LocalDateTime endTimeTemp = temp.endTime;
 
-            if (toAdd.startTime.after(endTimeTemp)) {
+            if (toAdd.startTime.isAfter(endTimeTemp)) {
                 return i;
             }
         }
