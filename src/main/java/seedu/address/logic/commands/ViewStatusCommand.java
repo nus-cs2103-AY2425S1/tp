@@ -57,7 +57,7 @@ public class ViewStatusCommand extends Command {
      */
     private CommandResult findMatchingPerson(List<Person> lastShownList) {
         for (Person person: lastShownList) {
-            if (foundMatchingName(person)) {
+            if (foundMatchingPerson(person)) {
                 return new CommandResult(String.format(MESSAGE_VIEW_SUCCESS, Messages.formatStatus(person)));
             }
         }
@@ -65,8 +65,8 @@ public class ViewStatusCommand extends Command {
         return new CommandResult(String.format(MESSAGE_VIEW_FAILURE, this.name, this.job));
     }
 
-    private boolean foundMatchingName(Person current) {
-        return current.getName().equals(this.name);
+    private boolean foundMatchingPerson(Person current) {
+        return current.getName().equals(this.name) && current.getJob().equals(this.job);
     }
 
     @Override
