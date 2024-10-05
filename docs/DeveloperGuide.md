@@ -342,10 +342,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified
-otherwise)
+(For all use cases below, the **System** is the `PawPatrol` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Delete a pet**
+
+**MSS**
+
+1.  User keys in "delete PET" followed by a particular attribute such as name or species
+2.  PawPatrol shows the list of pets that match the searched attribute
+3.  User requests to delete a specific pet by keying in index
+4.  PawPatrol deletes the pet
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. PawPatrol shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: Add a pet profile**
 
 **MSS**
 
