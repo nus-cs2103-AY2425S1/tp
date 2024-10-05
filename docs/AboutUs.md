@@ -9,6 +9,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+
 ### Jia Sheng
 
 <img src="images/rimgik.png" width="200px">
@@ -17,3 +18,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/rimgik.md)]
 
 * Role: Developer
+
+### Toh Heng Xing
+
+<img src="images/tohhengxing.png" width="200px">
+
+[[github](https://github.com/tohhengxing)]
+[[portfolio](team/tohhengxing.md)]
+
+* Role: Developer
+
