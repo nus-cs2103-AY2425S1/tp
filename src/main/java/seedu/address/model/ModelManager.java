@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,6 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.NRICMatchesPredicate;
 import seedu.address.model.person.Person;
 
 /**
@@ -143,6 +146,16 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
+    }
+
+    //=========== Filtered Person List Accessors =============================================================
+    @Override
+    public Optional<Person> fetchPersonIfPresent(NRICMatchesPredicate nricPredicate) {
+        List<Person> allPersonList = addressBook.getPersonList();
+
+        return allPersonList.stream()
+                .filter(nricPredicate::test)
+                .findFirst();
     }
 
 }
