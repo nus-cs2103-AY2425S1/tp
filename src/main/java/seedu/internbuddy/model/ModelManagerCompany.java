@@ -20,7 +20,7 @@ public class ModelManagerCompany implements ModelCompany {
     private static final Logger logger = LogsCenter.getLogger(ModelManagerCompany.class);
 
     private final AddressBookCompany addressBook;
-    private final UserPrefs userPrefs;
+    private final UserPrefsCompany userPrefs;
     private final FilteredList<Company> filteredCompanies;
 
     /**
@@ -32,12 +32,12 @@ public class ModelManagerCompany implements ModelCompany {
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBookCompany(addressBook);
-        this.userPrefs = new UserPrefs(userPrefs);
+        this.userPrefs = new UserPrefsCompany(userPrefs);
         filteredCompanies = new FilteredList<>(this.addressBook.getCompanyList());
     }
 
     public ModelManagerCompany() {
-        this(new AddressBookCompany(), new UserPrefs());
+        this(new AddressBookCompany(), new UserPrefsCompany());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -72,7 +72,7 @@ public class ModelManagerCompany implements ModelCompany {
     @Override
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+        userPrefs.setAddressBookCompanyFilePath(addressBookFilePath);
     }
 
     //=========== AddressBook ================================================================================
