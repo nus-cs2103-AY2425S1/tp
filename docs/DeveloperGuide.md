@@ -295,7 +295,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | HR manager                                 | delete an employee                                           | remove entries that I no longer need.                                               |
 | `* * *`  | HR manager                                 | find an employee by name                                     | locate details of employee quickly.                                                 |
 | `* * *`  | HR manager                                 | Automate data entry from existing spreadsheets               | save time on repetitive tasks.                                                      |
-| `* *`    | HR manager                                 | find an employee by department                               | find information regarding the department without having to go through all entries. |     
+| `* *`    | HR manager                                 | find an employee by department                               | find information regarding the department without having to go through all entries. |
 | `* *`    | HR manager                                 | Set permissions for different team members                   | ensure sensitive data is only accessible to authorised users.                       |
 | `* *`    | HR manager                                 | Export employee data in multiple formats                     | easily share it with stakeholders.                                                  |
 | `* *`    | HR manager                                 | Create and manage employee onboarding checklists             | ensure all necessary steps are completed for new hires.                             |
@@ -307,16 +307,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | HR manager                                 | Access the app on mobile devices                             | manage employee data on the go.                                                     |
 | `*`      | HR manager                                 | Set reminders for performance review cycles                  | ensure timely evaluations.                                                          |
 | `*`      | HR manager                                 | Access help resources directly within the app                | troubleshoot issues without external assistance.                                    |
-| `*`      | HR manager                                 | Track employee attendance and leave requests                 | manage staffing levels effectively.                                                 |                                   
+| `*`      | HR manager                                 | Track employee attendance and leave requests                 | manage staffing levels effectively.                                                 |
 | `*`      | HR manager                                 | Create custom fields for employee data                       | capture information specific to my company's needs.                                 |                                 
 | `*`      | HR manager                                 | Search employee data with custom fields                      | quickly find relevant groups of employees.                                          |
-| `*`      | HR manager                                 | Link employee records to health and safety training          | compliance requirements are easily met.                                             |                                
+| `*`      | HR manager                                 | Link employee records to health and safety training          | compliance requirements are easily met.                                             |
 | `*`      | HR manager                                 | Set up automated reminders for employee training renewals    | ensure everyone stays compliant.                                                    |
 | `*`      | HR manager                                 | Integrate employee feedback forms                            | gather insights and improve workplace culture.                                      |
-| `*`      | HR manager                                 | Manage document uploads                                      | have all relevant files in one place.                                               |     
-| `*`      | HR manager                                 | Receive alerts for data discrepancies or errors              | maintain data accuracy and integrity.                                               |        
-| `*`      | HR manager                                 | Track promotions and role changes                            | keep employee profiles up to date.                                                  |    
-| `*`      | HR manager                                 | Customize my dashboard                                       | prioritize my tasks effectively.                                                    |      
+| `*`      | HR manager                                 | Manage document uploads                                      | have all relevant files in one place.                                               |
+| `*`      | HR manager                                 | Receive alerts for data discrepancies or errors              | maintain data accuracy and integrity.                                               |
+| `*`      | HR manager                                 | Track promotions and role changes                            | keep employee profiles up to date.                                                  |
+| `*`      | HR manager                                 | Customize my dashboard                                       | prioritize my tasks effectively.                                                    |
 
 *{More to be added}*
 
@@ -396,7 +396,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. AddressBook shows an error message.
 
       Use case resumes at step 2.
-  
+
 * 3a. HRHelper gives user the option to view the given person
 
   Use case ends.
