@@ -314,7 +314,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `TAHub` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC1 - Add a student**
+**<u>Use case: UC1 - Add a student</u>**
 
 **MSS:**
 
@@ -325,19 +325,39 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5. Use case ends.
 
 **Extensions:**
-
 * 2a. One or more input parameters are missing or invalid.
-
     * 2a1. TAHub shows an error message indicating the missing or invalid field(s).
     * 2a2. Use case resumes at step 1.
 
 
 * 2b. The student already exists (both name and contact match an existing student).
-
     * 2b1. TAHub shows a duplicate error message.
     * 2b2. Use case resumes at step 1.
 
-**Use case: UC2 - Find student by name**
+<br>
+
+**<u>Use case: UC2 - Find students by Course</u>**
+
+**MSS:**
+
+1. User requests to find students enrolled in a particular course.
+2. TAHub shows a list of students enrolled in that particular course.
+3. Use case ends.
+
+**Extensions:**
+
+* 2a. There are no students enrolled in the given course.
+    * 2a1. TAHub will show a message indicating there are no students found.
+    * 2a2. Use case continues from 3.
+
+
+* 2b. There are multiple courses containing the given string as a prefix.
+    * 2b1. TAHub will display a list of all students enrolled in those courses.
+    * 2b2. Use case continues from 3.
+
+<br>
+
+**<u>Use case: UC3 - Find student by name</u>**
 
 **MSS:**
 
@@ -351,7 +371,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 2a1. TAHub displays a message that there were no students found.
   * 2a2. Use case ends.
 
-**Use case: UC3 - Delete Student by Index**
+<br>
+
+**<u>Use case: UC4 - Update Student Information</u>**
+
+**Precondition:** The Updated Student exists in Database
+
+**MSS:**
+
+1. User requests to update a student's information by providing the index and necessary details (name, contact, courses, email).
+2. TAHub validates the inputs.
+3. TAHub updates the student with the provided details.
+4. TAHub displays the updated student's information.
+5. Use case ends.
+
+**Extensions:**
+
+* 2a. One or more input parameters are missing or invalid.
+  * 2a1. TAHub shows an error message indicating the missing or invalid field(s).
+  * 2a2. User enters new data.
+  * 2a3. Steps 3a1-3a2 are repeated until the data entered are correct.<br>
+  Use case resumes from step 3
+
+<br>
+
+**<u>Use case: UC5 - Delete Student by Index</u>**
 
 **MSS:**
 
@@ -365,25 +409,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The given index is invalid.
   * 2a1. TAHub shows an error message stating that the index is invalid.
   * 2a2. Use case ends.
-
-**Use case: UC4 - Find students by Course**
-
-**MSS:**
-
-1. User requests to find students enrolled in a particular course.
-2. TAHub shows a list of students enrolled in that particular course.
-3. Use case ends.
-
-**Extensions:**
-
-* 2a. There are no students enrolled in the given course.
-  * 2a1. TAHub will show a message indicating there are no students found. 
-  * 2a2. Use case continues from 3.
-
-
-* 2b. There are multiple courses containing the given string as a prefix.
-  * 2b1. TAHub will display a list of all students enrolled in those courses.
-  * 2b2. Use case continues from 3.
 
 *{More to be added}*
 
