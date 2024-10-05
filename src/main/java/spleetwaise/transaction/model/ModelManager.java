@@ -18,4 +18,22 @@ public class ModelManager implements Model {
         logger.fine("Initializing Transaction Model...");
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Model)) {
+            return false;
+        }
+
+        // TODO: model properties equality checks
+        //  ModelManager otherModelManager = (ModelManager) other;
+        //  ...
+        // Return true for now as Model has no values
+        return true;
+    }
+
 }
