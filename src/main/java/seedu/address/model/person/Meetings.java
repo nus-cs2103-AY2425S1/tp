@@ -48,7 +48,7 @@ public class Meetings {
 
     /**
      * Adds a meeting to the list.
-     * The meeting must clash with other meetings in the list.
+     * The meeting must not clash with other meetings in the list.
      */
     public void add(Meeting toAdd) {
         requireNonNull(toAdd);

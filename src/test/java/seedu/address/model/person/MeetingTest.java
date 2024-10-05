@@ -30,6 +30,41 @@ public class MeetingTest {
     }
 
     @Test
+    public void isValidStartAndEndTime() {
+        LocalDateTime otherStartTime = LocalDateTime.parse("20-12-2024 00:00", formatter);
+        LocalDateTime otherEndTime = LocalDateTime.parse("20-12-2024 01:00", formatter);
+
+        // invalid endTime before startTime
+        assertFalse(Meeting.isValidStartAndEndTime(otherEndTime, otherStartTime)); // place endTime before startTime
+
+        // valid startTime and endTime
+        assertTrue(Meeting.isValidStartAndEndTime(otherStartTime, otherEndTime)); // place endTime before startTime
+    }
+
+    @Test
+    public void isOverlap() {
+        LocalDateTime time1030 = LocalDateTime.parse("30-07-2024 10:30", formatter);
+        LocalDateTime time1045 = LocalDateTime.parse("30-07-2024 10:45", formatter);
+        LocalDateTime time1100 = LocalDateTime.parse("30-07-2024 11:00", formatter);
+        LocalDateTime time1130 = LocalDateTime.parse("30-07-2024 11:30", formatter);
+        LocalDateTime time1145 = LocalDateTime.parse("30-07-2024 11:45", formatter);
+        LocalDateTime time1200 = LocalDateTime.parse("30-07-2024 12:00", formatter);
+
+        Meeting defaultMeeting = new Meeting(time1045, time1145, location);
+
+        // overlapping meeting timings
+        assertTrue(defaultMeeting.isOverlap(new Meeting(time1030, time1100, location)));
+        assertTrue(defaultMeeting.isOverlap(new Meeting(time1130, time1200, location)));
+        assertTrue(defaultMeeting.isOverlap(new Meeting(time1100, time1130, location)));
+        assertTrue(defaultMeeting.isOverlap(new Meeting(time1030, time1145, location)));
+        assertTrue(defaultMeeting.isOverlap(new Meeting(time1045, time1200, location)));
+
+        // valid timings
+        assertFalse(defaultMeeting.isOverlap(new Meeting(time1030, time1045, location))); // defaultMeeting after
+        assertFalse(defaultMeeting.isOverlap(new Meeting(time1145, time1200, location))); // defaultMeeting before
+    }
+
+    @Test
     public void isValidLocation() {
         // null location
         assertThrows(NullPointerException.class, () -> Meeting.isValidLocation(null));
@@ -42,18 +77,6 @@ public class MeetingTest {
         assertTrue(Meeting.isValidLocation("Whitley Road, Scoots Street, #01-355"));
         assertTrue(Meeting.isValidLocation("-")); // one character
         assertTrue(Meeting.isValidLocation("Re Inc, 4321 Vendor's St; Gum Gum Island SBY 345000; ID")); // long address
-    }
-
-    @Test
-    public void isValidStartAndEndTime() {
-        LocalDateTime otherStartTime = LocalDateTime.parse("20-12-2024 00:00", formatter);
-        LocalDateTime otherEndTime = LocalDateTime.parse("20-12-2024 01:00", formatter);
-
-        // invalid endTime before startTime
-        assertFalse(Meeting.isValidStartAndEndTime(otherEndTime, otherStartTime)); // place endTime before startTime
-
-        // valid startTime and endTime
-        assertTrue(Meeting.isValidStartAndEndTime(otherStartTime, otherEndTime)); // place endTime before startTime
     }
 
     @Test
