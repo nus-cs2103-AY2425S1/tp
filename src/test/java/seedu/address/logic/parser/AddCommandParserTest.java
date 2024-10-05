@@ -50,18 +50,28 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
-
-        // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
-
-
-        // multiple tags - all accepted
-        Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+        // Single tag, with financial info and social media handle
+        Person expectedPerson = new PersonBuilder(BOB)
+                .withTags(VALID_TAG_FRIEND)
+                .withFinancialInfo("some financial info sm/@bob_handle")
+                .withSocialMediaHandle("")
                 .build();
-        assertParseSuccess(parser,
-                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+
+        // Test with whitespace only preamble and all fields present
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                        + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + " fi/some financial info sm/@bob_handle",
+                new AddCommand(expectedPerson));
+
+        // Multiple tags, with financial info and social media handle
+        Person expectedPersonMultipleTags = new PersonBuilder(BOB)
+                .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+                .withFinancialInfo("some financial info sm/@bob_handle")
+                .withSocialMediaHandle("")
+                .build();
+
+        // Test with multiple tags, financial info, and social media handle
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + " fi/some financial info sm/@bob_handle",
                 new AddCommand(expectedPersonMultipleTags));
     }
 
@@ -131,8 +141,8 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_optionalFieldsMissing_success() {
-        // zero tags
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        // zero tags, no financial info or social media handle
+        Person expectedPerson = new PersonBuilder(AMY).withTags().withFinancialInfo("").withSocialMediaHandle("").build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
                 new AddCommand(expectedPerson));
     }

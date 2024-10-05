@@ -3,8 +3,10 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FINANCIAL_INFO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SOCIAL_MEDIA_HANDLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -43,7 +45,10 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TAG]"
+            + "[" + PREFIX_FINANCIAL_INFO + "FINANCIAL INFO] "
+            + "[" + PREFIX_SOCIAL_MEDIA_HANDLE + "SOCIAL MEDIA HANDLE] "
+            + "...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -100,8 +105,12 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        String updatedFinancialInfo = editPersonDescriptor.getFinancialInfo().orElse(personToEdit.getFinancialInfo());
+        String updatedSocialMediaHandle = editPersonDescriptor.getSocialMediaHandle()
+                                    .orElse(personToEdit.getSocialMediaHandle());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
+                            updatedFinancialInfo, updatedSocialMediaHandle);
     }
 
     @Override
@@ -138,6 +147,8 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private String financialInfo;
+        private String socialMediaHandle;
 
         public EditPersonDescriptor() {}
 
@@ -192,6 +203,22 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
+        public void setFinancialInfo(String info) {
+            this.financialInfo = info;
+        }
+
+        public Optional<String> getFinancialInfo() {
+            return Optional.ofNullable(financialInfo);
+        }
+
+        public void setSocialMediaHandle(String handle) {
+            this.socialMediaHandle = handle;
+        }
+
+        public Optional<String> getSocialMediaHandle() {
+            return Optional.ofNullable(socialMediaHandle);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -225,7 +252,9 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(financialInfo, otherEditPersonDescriptor.financialInfo)
+                    && Objects.equals(socialMediaHandle, otherEditPersonDescriptor.socialMediaHandle);
         }
 
         @Override
@@ -236,6 +265,8 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("tags", tags)
+                    .add("financial info", financialInfo)
+                    .add("social media handle", socialMediaHandle)
                     .toString();
         }
     }
