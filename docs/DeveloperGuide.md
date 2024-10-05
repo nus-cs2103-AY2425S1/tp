@@ -288,32 +288,86 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `ClinicConnect` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a patient**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User types command to add patient
+2.  ClinicConnect requests relevant information
+3.  User keys in relevant information
+4.  ClinicConnect adds patient to the system
+5.  ClinicConnect shows a success message
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The given information is invalid.
 
-  Use case ends.
+  * 2a1. ClinicConnect shows an error message
+  * 2a2. ClinicConnect requests for the information again
 
-* 3a. The given index is invalid.
+    Steps 2a1-2a2 are repeated until the information entered is valid.
+  
+    Use case resumes from step 2.
 
-    * 3a1. AddressBook shows an error message.
+* 3a. The given patient's NRIC already exists in the system.
 
-      Use case resumes at step 2.
+    * 3a1. ClinicConnect shows an error message
+  
+        Use case ends.
 
-*{More to be added}*
+**Use case: Book appointment for patient**
+
+**MSS**
+
+1.  User types command to book appointment time with date, time and patient's NRIC
+2.  ClinicConnect creates a new appointment in the system
+3.  ClinicConnect shows a success message
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given information is invalid.
+
+    * 2a1. ClinicConnect shows an error message 
+
+        Use case ends.
+
+* 3a. The given appointment time already exists for the patient.
+
+    * 3a1. ClinicConnect shows an error message
+
+        Use case ends.
+
+
+**Use case: Delete a patient**
+
+**MSS**
+
+1.  User types command to delete with patient's NRIC
+2.  ClinicConnect removes the patient from the system
+3.  ClinicConnect shows a success message
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given NRIC is invalid.
+
+    * 2a1. ClinicConnect shows an error message
+
+        Use case ends.
+
+* 3a. The given NRIC does not exist in the system.
+
+    * 3a1. ClinicConnect shows an error message
+
+      Use case ends.
+
 
 ### Non-Functional Requirements
 
