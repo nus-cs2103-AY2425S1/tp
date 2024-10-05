@@ -262,13 +262,17 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
+* people who work in management/administration of tuition centres
+* has a need to manage a significant number of staff/students
+* tuition centre managed is of small to medium size (roughly a few hundred students)
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Centralizes contact details, tracks student data, maintains a teacher directory, and offers functions that improve administrative efficiency and organization for a tuition centre.
+
+
 
 
 ### User stories
@@ -293,59 +297,246 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `administrator`, unless specified otherwise)
+(For all use cases below, the **System** is the `AcademyAssist` and the **Actor** is the `administrator`, unless specified otherwise)
 
-**Use case: Add a person**
+**Use case: UC1 - Add a person**
 
 **MSS**
 
 1. User requests to add a student
 2. User provides the details of the student
-3. AddressBook adds the person
+3. System confirms student has been added and displays list of updated students 
 
-    Use case ends.
+    Use case ends
 
    **Extensions**
-
-* 2a. The format of the details provided are incorrect.
-  * 2a1. AddressBook requests input in correct format.
-  
-    Use case resumes at step 2
-* 2b. The student entered has already been added. 
-  * 2b1. AddressBook indicates that there has already been an entry for the student.
     
-    Use case resumes at step 2
+* 2a. The name is not provided/invalid format
+  * 2a1. System requests name in correct format
+  * 2a2. User re-enters the correct/missing name
 
-**Use case: Delete a person**
+    Steps 2a1-2a2 are repeated until the name in the specified format is provided
+    Use case resumes at step 3
+
+* 2b. The student entered has already been added
+  * 2b1. System indicates that there has already been an entry for the student
+  
+    Use case ends
+
+* 2c. The phone number is missing or invalid
+  * 2c1. System requests for a valid phone number
+  * 2c2. User re-enters the correct phone number.
+
+    Steps 2c1-2c2 are repeated until a valid phone number is provided
+    Use case resumes from step 3
+
+* 2d. The IC/FIN number is missing or invalid
+  * 2d1. System requests for a valid IC/FIN number
+  * 2d2. User re-enters the correct IC/FIN number
+
+    Steps 2d1-2d2 are repeated until a valid IC/FIN number is provided
+    Use case resumes from step 3
+
+* 2e. The email is invalid
+  * 2e1. System requests for a valid email
+  * 2e2. User re-enters the correct email
+
+    Steps 2e1-2e2 are repeated until a valid email is provided
+    Use case resumes from step 3
+
+* 2f. The class taken/academic year is missing or invalid 
+  * 2f1. System requests for a valid class/academic year
+  * 2f2. User re-enters the correct class/academic year
+
+    Steps 2f1-2f2 are repeated until a valid class/academic year is provided
+    Use case resumes from step 3
+
+---
+
+**Use case: UC2 - Delete a person**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User chooses to delete a student
+2. System deletes the student's information
+3. System informs user that the student has been successfully deleted
 
-    Use case ends.
+    Use case ends
 
-**Extensions**
+   **Extensions**
 
-* 2a. The list is empty.
+* 1a. The format of the details provided are incorrect
+  * 1a1. System requests input in correct format
+  * 1a2. User re-enters the correct/missing details
 
-  Use case ends.
+    Steps 1a1-1a2 are repeated until the fields in the specified format are provided
+    
+    Use case resumes at step 2
 
-* 3a. The given index is invalid.
+---
 
-    * 3a1. AddressBook shows an error message.
+**Use case: UC3 - Edit a person**
 
-      Use case resumes at step 2.
+**MSS**
+
+1. User chooses to edit a student's details
+2. System updates the student's details based on new input
+3. System informs user that details have been updated
+
+    Use case ends
+
+   **Extensions**
+
+* 1a. User enters an incorrect format for the Student ID
+  * 1a1. System requests input in correct format
+  * 1a2. User re-enters the correct Student ID
+
+    Steps 1a1-1a2 are repeated until the correct format is entered
+    Use case resumes from step 2
+
+* 1b. User enters an invalid format for the field or new input.
+  * 1b1. System requests for input in correct format
+  * 1b2. User re-enters the correct field and new input
+
+    Steps 1b1-1b2 are repeated until the correct format is entered.
+    Use case resumes from step 2.
+
+---
+
+**Use case: UC4 - View all people**
+
+**MSS**
+
+1. User chooses to view all student contact details 
+2. System displays a list of students with their relevant details
+
+    Use case ends 
+
+   **Extensions**
+
+* 1a. System encounters an internal error while retrieving student details
+  * 1a1. System displays an error message
+
+    Use case ends
+
+* 1b. No students are found in the system
+  * 1b1. System informs user that there are no students added 
+
+    Use case ends
+
+---
+
+**Use case: UC5 - Finding a person**
+
+**MSS**
+
+1. User initiates a search for a specific student
+2. System displays the details of the matching student(s)
+
+    Use case ends
+
+   **Extensions**
+
+* 1a. User enters an invalid name/missing name
+  * 1a1. System requests for name in correct format
+  * 1a2. User re-enters the correct input
+
+    Steps 1a1-1a2 are repeated until the correct name is entered.
+    Use case resumes from step 2.
+
+* 1b. No matching student found in the system
+  * 1b1. System informs user that there are no such students found
+
+    Use case ends
+
+---
+
+**Use case: UC6 - Clearing the app**
+
+**MSS**
+
+1. User clears the app of all contact data
+2. System displays a success message
+
+    Use case ends
+
+   **Extensions**
+
+* 1a. User enters an incorrect format
+  * 1a1. System displays an error message and prompts user to try again
+  * 1a2. User re-enters the correct clear command
+    
+    Steps 1a1-1a2 are repeated until the correct command is entered
+    Use case resumes from step 2
+
+* 1b. System encounters an internal error while trying to clear the contact book
+  * 1b1. System displays an error message
+
+    Use case ends
+
+---
+
+**Use case: UC7 - Displaying a User Guide**
+
+**MSS**
+
+1. User uses the help command
+2. System shows user a list of commands and their functionality 
+
+    Use case ends
+
+---
+
+**Use case: UC8 - Sorting**
+
+**MSS**
+
+1. User tries to sort students by their name/class
+2. System arranges the students in alphabetical order by name/class
+3. System displays students sorted by their name/class in ascending order
+
+    Use case ends
+
+   **Extensions**
+
+* 1a. User tries to sort by an invalid field
+  * 1a1. System informs user to sort using only name or class
+  * 1a2. User re-enters the command with a valid field.
+    
+    Steps 1a1-1a2 are repeated until only name or class is entered as the field
+    Use case resumes from step 2.
+
+* 2a. There are no students added 
+  * 2a1. System shows a blank screen 
+
+    Use case ends
+
+---
 
 *{More to be added}*
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+#### Data Requirements
+1.  Should be able to hold up to 500 persons including personal details, contact information, and emergency contacts, without a significant performance drop.
+2.  All data should be persistent, meaning it must be saved even after the application is closed, ensuring no data loss between sessions.
+
+#### Environment Requirements
+3.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+4.   A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+
+#### Documentation
+5.  Comprehensive user guides and FAQs should be provided to guide users through installation, configuration, and typical use cases.
+
+#### Maintainability
+6.  Codebase should follow industry best practices for readability, including consistent naming conventions for easy maintenance.
+7.  The app should follow a modular design so that individual components can be updated without affecting the entire app.
+
+#### Robustness 
+8.  The system should gracefully handle unexpected inputs, preventing crashes and allowing users to recover from errors.
+
+#### Testability
+9.  The system should include automated unit tests and integration tests to validate all major components.
 
 *{More to be added}*
 
@@ -353,6 +544,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Administrator**: Tutors and admin staff at the tuition centre.
+* **CLI (Command Line Interface)**: A text-based interface that allows users to interact with software by typing commands.
+* **Emergency Contact**: A secondary contact person, typically a guardian or family member, to reach out in case of an emergency involving a student.
+* **MSS (Main Success Scenario)**: The primary flow of actions in a use case that leads to a successful outcome.
+* **Extension (in use cases)**: Alternative flows that might arise due to errors or exceptions while performing the main success scenario.
+* **NFR (Non-Functional Requirements)**: Specifications that describe the qualities and constraints of a system, such as performance, reliability, and security, rather than its specific functions.
+* **Testability**: The ease with which the system can be tested to ensure its correct behavior, including automated and manual testing.
+* **Persistence**: A characteristic of data that ensures it is stored and available even after the application is closed and reopened.
+* **Modular Design**: A software architecture approach that divides the system into independent components for easier maintenance and scalability.
+* **Field**: A specific attribute or category in the context of a student's details, such as name or class, used for sorting or filtering information.
+* **Command**: A specific instruction or request issued by the user to perform a certain action within the application.
+* **Invalid Input**: Data or commands entered by the user that do not conform to the expected format or criteria, resulting in an error or rejection of the command.
+* **Contact Details**: Information related to a student or staff member, including their name, phone number, email, and any other relevant identifiers.
 
 --------------------------------------------------------------------------------------------------------------------
 
