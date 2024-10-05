@@ -166,7 +166,7 @@ This feature enables users to update the details of an existing customer, apart 
 **How to Use It:**
 - **Command Format:**
 ```
-edit <INDEX> n/ <CUSTOMER NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOBNAME> i/ <INCOME> [t/ <TAG>]
+edit <INDEX> n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> [t/ <TAG>]
 ```
 - **Examples:**
 ```
@@ -199,26 +199,26 @@ edit 69 n/ TAN LESHEW p/ 77337733 e/ mrtan@ntu.sg a/ COM3 j/ doctor i/ 100000000
 ### Feature 6: Find a Customer by Details
 
 **Purpose:**  
-Enables users to search for and display all customers who match the specified details such as name, job, or ID.
+Enables users to search for and display all customers who match the specified details such as name, job, or index.
 
 **How to Use It:**  
 - **Command Format:** 
 ```
-filter /<FLAG> <FLAG FIELD>
+filter <FLAG>/ <FLAG FIELD>
 ```
 - **Examples:** 
 ```
-filter /n <NAME> 
-e.g. filter /n TAN LESHEW
+filter n/ <NAME> 
+e.g. filter n/ TAN LESHEW
 
-filter /j <JOB> 
-e.g. filter /j doctor
+filter j/ <JOB> 
+e.g. filter j/ doctor
 ```
 
 #### Parameters
 | Parameter  | Expected Format                   | Explanation                                                                                 |
 |------------|-----------------------------------|---------------------------------------------------------------------------------------------|
-| FLAG       | Refer to `add` syntax constraints | Indicates the type of data to filter. Use /n for name, /p for phone number, etc.            |                                                                          |
+| FLAG       | Refer to `add` syntax constraints | Indicates the type of data to filter. Use n/ for name, p/ for phone number, etc.            |                                                                          |
 | FLAG FIELD | Refer to `add` parameter constraints for format | Fields should be input as follows: n/<NAME>, p/<PHONE>, etc. Searches are case-insensitive. |
 
 #### What to Expect
@@ -256,11 +256,11 @@ remark 55 r/ He is a problematic customer.
 - **If Successful:** 
   - Message: "Remark has been added to Customer `<INDEX>`."
 - **If There is an Error:** 
-  - Invalid ID: "No customer with `<INDEX>` exists. Please input a valid index."
+  - Invalid index: "No customer with `<INDEX>` exists. Please input a valid index."
 
 **Handling Duplicates:**  
 - Although customer index should be unique, in the rare case where duplicates are detected, the following error message will be shown:
-  - "Sorry, it appears that multiple customers with id: `<INDEX>` exist. Please use the delete command to remove the duplicated customer ID."
+  - "Sorry, it appears that multiple customers with index: `<INDEX>` exist. Please use the delete command to remove the duplicated customer index."
 
 ---
 
@@ -368,15 +368,15 @@ exit
 
 ## Command Summary
 
-| Action                          | Command Format                                                                               | Example                                                                                       |
-|---------------------------------|----------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
-| **Save Data Automatically**     | *Automatic*                                                                                  | *No command required*                                                                         |
-| **Add New Customer**            | `add n/<NAME> p/<PHONE> e/<EMAIL> a/<ADDRESS> j/<JOBNAME> i/<INCOME> [t/<TAG>] [r/<REMARK>]` | `add n/TAN LESHEW p/99007766 e/mrtan@ntu.sg a/com3 j/doctor i/99999 t/gold r/got anger issue` |
-| **Remove Old Customer**         | `del <INDEX>`                                                                                | `del 69`                                                                                      |
-| **View Details of a Customer**  | `view <INDEX>`                                                                               | `view 69`                                                                                     |
-| **Edit Existing Customer**      | `edit <INDEX> n/<NAME> p/<PHONE> e/<EMAIL> a/<ADDRESS> j/<JOBNAME> i/<INCOME> [t/<TAG>]`     | `edit 69 n/TAN LESHEW p/77337733 e/mrtan@ntu.sg a/COM3 j/doctor i/1000000000`                 |
-| **Find a Customer by Details**  | `filter /<FLAG> <FLAG FIELD>`                                                                | `filter /n TAN LESHEW`                                                                        |
-| **Save Remarks About Customers**| `remark <INDEX> r/ <REMARK>`                                                                 | `remark 55 r/ He is a problematic customer.`                                                  |
-| **Add/Replace Credit Card Tier**| `tag <INDEX> t/ <TIER>`                                                                      | `tag 69 t/ reject`                                                                            |
-| **Help**                        | `help`                                                                                       | `help`                                                                                        |
-| **Exit**                        | `exit`                                                                                       | `exit`                                                                                        |
+| Action                          | Command Format                                                                                   | Example                                                                                               |
+|---------------------------------|--------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|
+| **Save Data Automatically**     | *Automatic*                                                                                      | *No command required*                                                                                 |
+| **Add New Customer**            | `add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> [t/ <TAG>] [r/ <REMARK>]` | `add n/ TAN LESHEW p/ 99007766 e/ mrtan@ntu.sg a/ com3 j/ doctor i/ 99999 t/ gold r/ got anger issue` |
+| **Remove Old Customer**         | `del <INDEX>`                                                                                    | `del 69`                                                                                              |
+| **View Details of a Customer**  | `view <INDEX>`                                                                                   | `view 69`                                                                                             |
+| **Edit Existing Customer**      | `edit <INDEX> n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> [t/ <TAG>]`      | `edit 69 n/ TAN LESHEW p/ 77337733 e/ mrtan@ntu.sg a/ COM3 j/ doctor i/ 1000000000`                   |
+| **Find a Customer by Details**  | `filter <FLAG>/ <FLAG FIELD>`                                                                    | `filter n/ TAN LESHEW`                                                                                |
+| **Save Remarks About Customers**| `remark <INDEX> r/ <REMARK>`                                                                     | `remark 55 r/ He is a problematic customer.`                                                          |
+| **Add/Replace Credit Card Tier**| `tag <INDEX> t/ <TIER>`                                                                          | `tag 69 t/ reject`                                                                                    |
+| **Help**                        | `help`                                                                                           | `help`                                                                                                |
+| **Exit**                        | `exit`                                                                                           | `exit`                                                                                                |
