@@ -262,71 +262,143 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* educators who need to micromanage multiple students
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Goon Book is specialised to help educators with keeping track of their students. It can be used to record their students with their details, and access relevant information easily and conveniently
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​    | I want to …​                                                               | So that I can…​                                                               |
+|----------|------------|----------------------------------------------------------------------------|-------------------------------------------------------------------------------|
+| `* * *`  | educator   | add a new student                                                          | include all students I have currently in my app                               |
+| `* * *`  | educator   | delete a student                                                           | keep my database of students concise with only currently relevant students    |
+| `* * *`  | educator   | search for students by name                                                | find information about specific students                                      |
+| `* *`    | educator   | store additional information about students on grades, attendance or notes | better access and organise student information                                |
+| `* *`    | educator   | edit a student details                                                     | correct mistakes or update new information about the student                  |
+| `* *`    | educator   | filter searched students by grades, attendance or notes                    | quickly find specific students or groups based on specific criteria           |
+| `*`      | educator   | group students                                                             | efficiently manage classes, group-based activities, assignments, and projects |
+| `*`      | educator   | import and export student data from other systems                          | streamline data management and avoid manual entry, ensuring compatibility with school databases or grade books |
+| `*`      | educator   | use security measures for student data                                     | protect sensitive information and control access to parental data |
 
-*{More to be added}*
 
 ### Use cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 – Add new student**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. Educator enters a student’s name.
+2. Educator enters the student’s class.
+3. Educator enters the student’s contacts.
+4. Educator submits the form.
+5. New student with class and contact is added to list.
 
-    Use case ends.
+Use case ends.
+
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. Educator submits the form.
+
+    * 2a1. New student without class and contact is added to list.
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 2b. Educator enters the student’s contacts.
 
-    * 3a1. AddressBook shows an error message.
+    * 2b1. Educator submits the form.
+      
+    * 2b2. New student with contact is added to list.
+      
+  Use case ends.
 
-      Use case resumes at step 2.
+* 3a. Educator submits the form.
 
-*{More to be added}*
+    * 3a1. New student with class is added to list.
+
+  Use case ends.
+
+* 4a. Goon Book detects that the entered student is a duplicate.
+
+    * 4a1. Goon Book cancels the adding.
+    
+  User case ends.
+
+* 4b. Goon Book detects a non-alphabet in the name input.
+
+    * 4b1. Goon Book requests for the correct input.
+  
+    * 4b2. Educator enters new data.
+  
+    Steps 4b1-4b2 are repeated until the data entered are correct.
+    Use case resumes from step 5.
+
+* 4c. Goon Book detects a non-number in the contact input
+
+    * 4c1. Goon Book requests for the correct input. 
+  
+    * 4c2. Educator enters new data. 
+  
+    Steps 4c1-4c2 are repeated until the data entered are correct. 
+    Use case resumes from step 5.
+
+
+**Use case: UC01 – Add new student**
+
+**MSS**
+
+1. User chooses to search for student.
+2. User enters a student’s name.
+3. Student’s contact with class information appears.
+
+Use case ends.
+
+**Extensions**
+
+* 2a. GoonBook detects that the student does not exist. 
+
+  * 2a1. GoonBook displays an error message.
+  
+  User case ends.
+
+
+**Use case: UC03 - Delete student**
+
+**MSS**
+
+1. Educator searches for a student (UC02)
+2. Educator presses delete button
+3. GoonBook requests for confirmation
+4. Educator confirms
+5. Student’s name with information successfully deleted
+
+User case ends.
+
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  should be usable by an Educator who has never used a command line interface.
+5.  should not terminate unless exit command given.
+6.  Parents should not be able to remove students.
 
-*{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Educator**: Primary, secondary, JC, poly teacher
+* **Duplicate**: Student with the same name and contact number
 
 --------------------------------------------------------------------------------------------------------------------
 
