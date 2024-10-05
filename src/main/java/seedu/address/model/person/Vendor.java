@@ -14,6 +14,16 @@ import seedu.address.model.tag.Tag;
  */
 public class Vendor extends Contact {
     private Service service;
+    /**
+     * Constructs a {@code Vendor}.
+     *
+     * @param name    A valid name.
+     * @param phone   A valid phone number.
+     * @param email   A valid email address.
+     * @param address A valid address.
+     * @param service A valid service.
+     * @param tags    A set of tags associated with the client.
+     */
     public Vendor(Name name, Phone phone, Email email, Address address, Service service, Set<Tag> tags) {
         super(name, phone, email, address, tags);
         requireAllNonNull(service);

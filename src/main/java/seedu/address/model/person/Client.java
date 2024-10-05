@@ -14,6 +14,16 @@ import seedu.address.model.tag.Tag;
  */
 public class Client extends Contact {
     private Date date;
+    /**
+     * Constructs a {@code Client}.
+     *
+     * @param name    A valid name.
+     * @param phone   A valid phone number.
+     * @param email   A valid email address.
+     * @param address A valid address.
+     * @param date    A valid date.
+     * @param tags    A set of tags associated with the client.
+     */
     public Client(Name name, Phone phone, Email email, Address address, Date date, Set<Tag> tags) {
         super(name, phone, email, address, tags);
         requireAllNonNull(date);
