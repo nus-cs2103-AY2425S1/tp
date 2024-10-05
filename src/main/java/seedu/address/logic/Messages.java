@@ -1,8 +1,8 @@
 package seedu.address.logic;
 
+import static seedu.address.model.person.Person.DEFAULT_TAG_PENDING;
 import static seedu.address.model.person.Person.TAG_HIRED;
 import static seedu.address.model.person.Person.TAG_REJECTED;
-import static seedu.address.model.person.Person.DEFAULT_TAG_PENDING;
 
 import java.util.Set;
 import java.util.stream.Collectors;

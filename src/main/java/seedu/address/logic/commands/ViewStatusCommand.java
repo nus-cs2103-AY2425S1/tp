@@ -11,8 +11,6 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Job;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
-
 
 /**
  * View the status of an existing person in the address book.
@@ -55,7 +53,7 @@ public class ViewStatusCommand extends Command {
      * finds person with matching name and job in lastShownList
      *
      * @return CommandResult with success message and message with matching person's name and job or
-     * failure message
+     *     failure message
      */
     private CommandResult findMatchingPerson(List<Person> lastShownList) {
         for (Person person: lastShownList) {
