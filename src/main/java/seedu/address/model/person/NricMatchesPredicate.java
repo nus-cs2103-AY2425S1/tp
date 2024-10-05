@@ -41,6 +41,6 @@ public class NricMatchesPredicate implements Predicate<Person> {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).toString();
+        return new ToStringBuilder(this).add("nric", nric).toString();
     }
 }
