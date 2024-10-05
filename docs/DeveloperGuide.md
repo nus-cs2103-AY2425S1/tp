@@ -320,8 +320,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - Duplicates are not created (NRIC uniqueness is enforced).
 
 **MSS**
-1. Fred selects the option to `add` a new patient.
-2. CareLink requests patient details (first name, last name, NRIC, phone, address, email).
+1. Fred enters command to `add` a new patient.
+2. CareLink requests patient details.
 3. Fred enters the patient details.
 4. CareLink validates the input data.
 5. CareLink saves the patient details to the system.
@@ -349,8 +349,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - The correct patient's information is displayed without errors.
 
 **Main Success Scenario (MSS)**
-1. Fred selects the option to `view` a patient's details.
-2. CareLink retrieves the patient’s details (e.g., first name, last name, phone number, address, email).
+1. Fred enters command to `view` a patient's details.
+2. CareLink retrieves the patient’s details.
 3. CareLink displays the patient's details to Fred.
 4. Use case ends.
 
@@ -375,7 +375,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - The caregiver is correctly linked to the specified patient.
 
 ### MSS
-1. Fred selects `add caregiver` and enters the necessary details, including the patient ID.
+1. Fred enters command to `add caregiver` and enters the necessary details, including the patient ID.
 2. CareLink validates all input details against criteria.
 3. CareLink saves the caregiver's details and links them to the specified patient ID.
 4. CareLink confirms the addition and linking with a success message.
@@ -383,7 +383,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Extensions
 - **2a. Validation Fails**:
-    - 2a.1: If any validation fails (e.g., invalid email format), CareLink displays an error message, and the caregiver is not added.
+    - 2a.1: If any validation fails, CareLink displays an error message, and the caregiver is not added.
     - Use case ends.
 
 - **2b. Specified Patient ID Does Not Exist**:
@@ -403,7 +403,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - The patient’s details are successfully updated in the system.
 
 ### Main Success Scenario (MSS)
-1. Fred selects `update` and provides the NRIC of patient and new details.
+1. Fred enters command to `update` and provides the NRIC of patient and new details.
 2. CareLink validates the new input.
 3. CareLink updates the records and confirms the update with a success message.
 4. Use case ends.
@@ -433,8 +433,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - The patient's details are successfully removed from the system.
 
 ### Main Success Scenario (MSS)
-1. Fred selects to `delete` a patient’s details.
-2. CareLink searches retrieves the patient's information.
+1. Fred enters command to `delete` a patient’s details.
+2. CareLink retrieves the patient's information.
 3. CareLink deletes the patient's record.
 4. Use case ends.
 
@@ -457,7 +457,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - The CSV file is successfully exported and available for download.
 
 ### Main Success Scenario (MSS)
-1. Fred selects the option to export all patient data to CSV.
+1. Fred enters command to export all patient data to CSV.
 2. CareLink asks the destination for copying the file to.
 3. Fred provides the destination address
 4. CareLink makes a copy of the file at the specified location.
@@ -510,7 +510,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - Data is successfully filtered by the specified date range and displayed.
 
 ### Main Success Scenario (MSS)
-1. Fred selects the option to filter patient data by date.
+1. Fred enters command to filter patient data by date.
 2. CareLink prompts Fred to input a date range.
 3. Fred enters the desired start and end dates.
 4. CareLink filters the patient data based on the specified date range.
@@ -527,10 +527,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - Use case ends.
 
 
-**Use Case 9: Filter Data by Condition**
+**Use Case 9: Filter Data by Medical Condition**
 
 **System**: CareLink  
-**Use Case**: UC09 - Filter Data by Condition  
+**Use Case**: UC09 - Filter Data by Medical Condition  
 **Actor**: Geriatrician (Fred)
 
 ### Preconditions
@@ -540,16 +540,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - Data is successfully filtered by the specified condition and displayed.
 
 ### Main Success Scenario (MSS)
-1. Fred selects the option to filter patient data by condition.
-2. CareLink prompts Fred to input the condition (e.g., diabetes, hypertension).
-3. Fred enters the condition.
-4. CareLink filters the patient data based on the specified condition.
+1. Fred enters command to `filter` patient data by medical condition.
+2. CareLink prompts Fred to input the medical condition.
+3. Fred enters the medical condition.
+4. CareLink filters the patient data based on the specified medical condition.
 5. CareLink displays the filtered data to Fred.
 6. Use case ends.
 
 ### Extensions
 - **3a. Invalid Condition**:
-    - 3a.1: If Fred enters a condition that doesn't exist in the system, CareLink displays an error message and prompts Fred to re-enter the condition.
+    - 3a.1: If Fred enters a medical condition that doesn't exist in the system, CareLink displays an error message and prompts Fred to re-enter the condition.
     - Use case resumes from step 3.
 
 - **4a. No Data Found for Condition**:
@@ -569,7 +569,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - Data is successfully filtered by the specified patient(s) and displayed.
 
 ### Main Success Scenario (MSS)
-1. Fred selects the option to filter patient data by specific patients.
+1. Fred enters the command to filter patient data by specific patients.
 2. CareLink prompts Fred to input patient identifiers.
 3. Fred enters the patient identifiers.
 4. CareLink filters the patient data based on the specified patient identifiers.
@@ -599,9 +599,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - A follow-up appointment is successfully scheduled and confirmed.
 
 ### Main Success Scenario (MSS)
-1. Fred selects the option to schedule a follow-up appointment for a patient.
+1. Fred enters the command to schedule a follow-up appointment for a patient.
 2. CareLink prompts Fred to input the patient’s details and select a date and time.
-3. Fred enters the patient details and chooses an available date and time for the appointment.
+3. Fred enters the patient details and an available date and time for the appointment.
 4. CareLink confirms the follow-up appointment and saves it in the system.
 5. CareLink displays a confirmation message with the appointment details.
 6. Use case ends.
@@ -624,7 +624,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - Fred’s doctor profile is successfully created or updated.
 
 ### Main Success Scenario (MSS)
-1. Fred selects the option to set up his doctor profile.
+1. Fred enters command to set up his doctor profile.
 2. CareLink prompts Fred to enter profile details.
 3. Fred enters all required details.
 4. CareLink saves Fred’s profile and confirms the setup with a success message.
@@ -636,6 +636,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 4a.1: If CareLink encounters an error while saving the profile, an error message is displayed, and the setup process is halted.
     - Use case ends.
 
+### Use Case 13: Filter Patients by Risk Level
+
+**System**: CareLink\
+**Use Case**: UC13 - Filter Patients by Risk Level\
+**Actor**: Geriatrician (Fred)
+
+### Preconditions
+Fred is logged into CareLink.
+The system contains patient data with risk levels.
+### Guarantees
+The patients are successfully filtered by their risk level and displayed.
+Main Success Scenario (MSS)
+Fred enters a command to filter patients by risk level.
+CareLink prompts Fred to input the risk level.
+Fred enters the risk level (e.g., high).
+CareLink filters the patients based on the specified risk level and displays the results.
+Use case ends.
+### Extensions
+**3a.** Invalid Risk Level Entered:
+
+**3a.1**: If Fred enters an invalid risk level, CareLink displays an error message and prompts Fred to re-enter the risk level.
+Use case resumes from step 3.
+
+**4a.** No Data Found for Risk Level:
+
+**4a.1**: If no patients exist with the specified risk level, CareLink informs Fred that no records were found.
+Use case ends.
 
 *{More to be added}*
 
@@ -690,7 +717,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Follow-up Appointment**: An appointment scheduled after an initial consultation or visit to monitor the patient's ongoing condition or treatment progress.
 
 - **CLI (Command-Line Interface)**: A method of interacting with CareLink by typing commands, designed to optimize efficiency for users who prefer typing over using graphical interfaces.
-
+- **API (Application Programming Interface)**: A set of functions and procedures allowing applications to access the features or data of another service, application, or system.
+- **Sequence Diagram**: A type of diagram that shows how objects interact with each other over time, specifically highlighting the sequence of messages exchanged.
+- **Model**: In software design, the component responsible for representing the application's data, including logic for accessing and modifying that data.
 - **NRIC**: National Registration Identity Card, a unique identification number used in Singapore to identify individuals, and used in CareLink to uniquely identify patient records.
 
 - **Batch Update**: A feature in CareLink that allows the user to make changes to multiple patient records at once, such as updating contact information for a group of patients.
@@ -760,5 +789,5 @@ testers are expected to do more *exploratory* testing.
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+1. _{ more test cases ...​ }_
 
