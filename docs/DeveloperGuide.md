@@ -321,26 +321,87 @@ Use case ends.
 
 * 1a. The NRIC is not of the correct format
   - 1a1. ClinicBuddy shows an error message. 
-  - Use case ends
+  - Use case ends.
 * 2a. The NRIC is not in the records.
   - 2a1. ClinicBuddy provides an error message informing the user of the error. 
   - Use case ends.
-
-
-
-
-
+ 
 **Use case: Edit a patient record**
 
-**Use case: (Search)**
+**MSS**
+
+1. User inputs the NRIC of the patient and the parameters to update.
+2. ClinicBuddy update the record.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. The NRIC is not of the correct format
+    - 1a1. ClinicBuddy shows an error message.
+    - Use case ends.
+* 1b. The NRIC is not in the records.
+    - 1b1. ClinicBuddy provides an error message informing the user of the error.
+    - Use case ends.
+* 1c. The parameter format is invalid.
+    - 1c1. ClinicBuddy provides an error message informing the user of the error.
+    - Use case ends.
+
+**Use case: Search a record**
+
+**MSS**
+
+1. User inputs the NRIC or the name of the patient to search for.
+2. ClinicBuddy search and return the record.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. The NRIC is not of the correct format
+    - 1a1. ClinicBuddy shows an error message.
+    - Use case ends.
+* 1b. No matching patient records are found.
+    - 1b1. ClinicBuddy displays a message indicating no matches were found.
+    - Use case ends.
 
 **Use case: Backup data**
 
+**MSS**
+
+1. User inputs the command with the destination path to store the file.
+2. ClinicBuddy creates a backup file in the destination path.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. The destination path is invalid
+    - 1a1. ClinicBuddy displays an error message to inform the user.
+    - Use case ends.
+* 1b. Backup failure due to system issues
+    - 1b1. ClinicBuddy displays an error message to inform the user.
+    - Use case ends.
+* 2a. Backup file with the same name already exists
+    - 2a1. ClinicBuddy prompts the user to confirm if they want to overwrite the existing file.
+        If Yes: The backup file is overwritten.
+        If No: The user is prompted to provide a new destination path or filename.
+    - Use case ends.
+
 **Use case: Undo a command**
 
+**MSS**
 
+1. User requests to undo the last command.
+2. ClinicBuddy reverts the system state to before the last command.
 
+Use case ends.
 
+**Extensions**
+
+* 1a. There are no commands to undo.
+    - 1a1. ClinicBuddy informs the user that there is no action to undo.
+    - Use case ends.
 
 
 Example
