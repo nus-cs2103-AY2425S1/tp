@@ -320,17 +320,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - Duplicates are not created (NRIC uniqueness is enforced).
 
 **MSS**
-1. Fred selects the option to add a new patient.
+1. Fred selects the option to `add` a new patient.
 2. CareLink requests patient details (first name, last name, NRIC, phone, address, email).
 3. Fred enters the patient details.
 4. CareLink validates the input data.
 5. CareLink saves the patient details to the system.
 6. CareLink displays a success message and shows the newly added patient in the system.
+7. Use case ends.
 
 **Extensions**
 - **3a. Invalid patient data entered**:
     - CareLink displays an error message indicating which data is invalid.
     - Fred corrects the input, and the use case resumes from step 3.
+    - Use case ends.
 
 
 **Use Case 2: View Patient Details**
@@ -341,23 +343,298 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Preconditions**
 - Fred is logged into CareLink.
-- The patient exists in the system.
 
 **Guarantees**
 - The patient's details are successfully retrieved and displayed.
 - The correct patient's information is displayed without errors.
 
 **Main Success Scenario (MSS)**
-1. Fred selects the option to view a patient's details.
-2. CareLink requests the patient’s NRIC.
-3. Fred enters the patient’s NRIC.
-4. CareLink retrieves the patient’s details (e.g., first name, last name, phone number, address, email).
-5. CareLink displays the patient's details to Fred.
+1. Fred selects the option to `view` a patient's details.
+2. CareLink retrieves the patient’s details (e.g., first name, last name, phone number, address, email).
+3. CareLink displays the patient's details to Fred.
+4. Use case ends.
 
 **Extensions**
 - **3a. Invalid or nonexistent patient NRIC entered**:
     - CareLink displays an error message and prompts Fred to re-enter the correct NRIC.
     - Fred corrects the NRIC, and the use case resumes from step 3.
+    - Use case ends.
+
+**Use Case 3: Adding a Caregiver and Linking to an Existing Patient**
+
+**System**: CareLink  
+**Use Case**: UC03 - Adding a Caregiver and Linking to an Existing Patient  
+**Actor**: Geriatrician (Fred)
+
+### Preconditions
+- Fred is logged into CareLink.
+
+### Guarantees
+- Caregiver details are saved only if the input data is valid.
+- Duplicates are not created
+- The caregiver is correctly linked to the specified patient.
+
+### MSS
+1. Fred selects `add caregiver` and enters the necessary details, including the patient ID.
+2. CareLink validates all input details against criteria.
+3. CareLink saves the caregiver's details and links them to the specified patient ID.
+4. CareLink confirms the addition and linking with a success message.
+5. Use case ends.
+
+### Extensions
+- **2a. Validation Fails**:
+    - 2a.1: If any validation fails (e.g., invalid email format), CareLink displays an error message, and the caregiver is not added.
+    - Use case ends.
+
+- **2b. Specified Patient ID Does Not Exist**:
+    - 2b.1: If the specified patient ID does not exist, CareLink displays an error message.
+    - Use case ends.
+
+**Use Case 4: Update Patient Details**
+
+**System**: CareLink  
+**Use Case**: UC04 - Update Patient Details  
+**Actor**: Geriatrician (Fred)
+
+### Preconditions
+- Fred is logged into CareLink.
+
+### Guarantees
+- The patient’s details are successfully updated in the system.
+
+### Main Success Scenario (MSS)
+1. Fred selects `update` and provides the NRIC of patient and new details.
+2. CareLink validates the new input.
+3. CareLink updates the records and confirms the update with a success message.
+4. Use case ends.
+
+### Extensions
+- **2a. Record Does Not Exist**:
+    - 2a.1: If the record does not exist, CareLink informs Fred.
+    - Use case ends.
+
+- **2b. Input Validation Fails**:
+    - 2b.1: If input validation fails, CareLink displays an error message and does not update the record.
+    - Use case ends.
+
+
+
+**Use Case 5: Delete Patient Details**
+
+**System**: CareLink  
+**Use Case**: UC05 - Delete Patient Details  
+**Actor**: Geriatrician (Fred)
+
+### Preconditions
+- Fred is logged into CareLink.
+- The patient exists in the system.
+
+### Guarantees
+- The patient's details are successfully removed from the system.
+
+### Main Success Scenario (MSS)
+1. Fred selects to `delete` a patient’s details.
+2. CareLink searches retrieves the patient's information.
+3. CareLink deletes the patient's record.
+4. Use case ends.
+
+### Extensions
+- **2a. Patient Does Not Exist**:
+    - 2a.1: If no patient record matches the given details, CareLink displays an error message.
+    - Use case ends.
+
+
+**Use Case 6: Export All Patient Data to CSV**
+
+**System**: CareLink  
+**Use Case**: UC06 - Export All Patient Data to CSV  
+**Actor**: Geriatrician (Fred)
+
+### Preconditions
+- Fred is logged into CareLink.
+
+### Guarantees
+- The CSV file is successfully exported and available for download.
+
+### Main Success Scenario (MSS)
+1. Fred selects the option to export all patient data to CSV.
+2. CareLink asks the destination for copying the file to.
+3. Fred provides the destination address
+4. CareLink makes a copy of the file at the specified location.
+5. Use case ends.
+
+### Extensions
+
+- **3a. File Copy Error**:
+    - 3a.1: If CareLink encounters an error during the copy process, an error message is displayed.
+    - Use case ends.
+
+
+**Use Case 7: Import Patient Data using CSV**
+
+**System**: CareLink  
+**Use Case**: UC07 - Import Patient Data using CSV  
+**Actor**: Geriatrician (Fred)
+
+### Preconditions
+- Fred is logged into CareLink.
+- A CSV file containing patient data is available for import, and the format is correct.
+
+### Guarantees
+- The patient data from the CSV file is successfully imported into CareLink.
+
+### Main Success Scenario (MSS)
+1. Fred selects the option to import patient data using a CSV file.
+2. Fred provides the CSV file.
+3. CareLink validates the contents of the CSV file.
+4. CareLink imports the patient data from the CSV file into the system.
+5. CareLink confirms the successful import of the data with a success message.
+6. Use case ends.
+
+### Extensions
+- **3a. CSV Format Invalid**:
+    - 3a.1: If the CSV file is incorrectly formatted, CareLink displays an error message and the data is not imported.
+    - Use case ends.
+
+
+**Use Case 8: Filter Data by Date**
+
+**System**: CareLink  
+**Use Case**: UC08 - Filter Data by Date  
+**Actor**: Geriatrician (Fred)
+
+### Preconditions
+- Fred is logged into CareLink.
+
+### Guarantees
+- Data is successfully filtered by the specified date range and displayed.
+
+### Main Success Scenario (MSS)
+1. Fred selects the option to filter patient data by date.
+2. CareLink prompts Fred to input a date range.
+3. Fred enters the desired start and end dates.
+4. CareLink filters the patient data based on the specified date range.
+5. CareLink displays the filtered data to Fred.
+6. Use case ends.
+
+### Extensions
+- **3a. Invalid Date Format**:
+    - 3a.1: If Fred enters an invalid date format, CareLink displays an error message and prompts Fred to re-enter the date range.
+    - Use case resumes from step 3.
+
+- **4a. No Data Found for Date Range**:
+    - 4a.1: If no patient data exists for the specified date range, CareLink informs Fred that no records were found.
+    - Use case ends.
+
+
+**Use Case 9: Filter Data by Condition**
+
+**System**: CareLink  
+**Use Case**: UC09 - Filter Data by Condition  
+**Actor**: Geriatrician (Fred)
+
+### Preconditions
+- Fred is logged into CareLink.
+
+### Guarantees
+- Data is successfully filtered by the specified condition and displayed.
+
+### Main Success Scenario (MSS)
+1. Fred selects the option to filter patient data by condition.
+2. CareLink prompts Fred to input the condition (e.g., diabetes, hypertension).
+3. Fred enters the condition.
+4. CareLink filters the patient data based on the specified condition.
+5. CareLink displays the filtered data to Fred.
+6. Use case ends.
+
+### Extensions
+- **3a. Invalid Condition**:
+    - 3a.1: If Fred enters a condition that doesn't exist in the system, CareLink displays an error message and prompts Fred to re-enter the condition.
+    - Use case resumes from step 3.
+
+- **4a. No Data Found for Condition**:
+    - 4a.1: If no patient data exists for the specified condition, CareLink informs Fred that no records were found.
+    - Use case ends.
+
+**Use Case 10: Filter Data by Patients**
+
+**System**: CareLink  
+**Use Case**: UC10 - Filter Data by Patients  
+**Actor**: Geriatrician (Fred)
+
+### Preconditions
+- Fred is logged into CareLink.
+
+### Guarantees
+- Data is successfully filtered by the specified patient(s) and displayed.
+
+### Main Success Scenario (MSS)
+1. Fred selects the option to filter patient data by specific patients.
+2. CareLink prompts Fred to input patient identifiers.
+3. Fred enters the patient identifiers.
+4. CareLink filters the patient data based on the specified patient identifiers.
+5. CareLink displays the filtered data to Fred.
+6. Use case ends.
+
+### Extensions
+- **3a. Invalid Patient Identifier**:
+    - 3a.1: If Fred enters an invalid patient identifier, CareLink displays an error message and prompts Fred to re-enter the identifier.
+    - Use case resumes from step 3.
+
+- **4a. No Data Found for Patients**:
+    - 4a.1: If no patient data exists for the specified patients, CareLink informs Fred that no records were found.
+    - Use case ends.
+
+**Use Case 11: Schedule Follow-up Appointments**
+
+**System**: CareLink  
+**Use Case**: UC11 - Schedule Follow-up Appointments  
+**Actor**: Geriatrician (Fred)
+
+### Preconditions
+- Fred is logged into CareLink.
+- The patient exists in the system.
+
+### Guarantees
+- A follow-up appointment is successfully scheduled and confirmed.
+
+### Main Success Scenario (MSS)
+1. Fred selects the option to schedule a follow-up appointment for a patient.
+2. CareLink prompts Fred to input the patient’s details and select a date and time.
+3. Fred enters the patient details and chooses an available date and time for the appointment.
+4. CareLink confirms the follow-up appointment and saves it in the system.
+5. CareLink displays a confirmation message with the appointment details.
+6. Use case ends.
+
+### Extensions
+- **2a. Patient Does Not Exist**:
+    - 2a.1: If the entered patient identifier does not exist, CareLink displays an error message.
+    - Use case ends.
+
+**Use Case 12: Set Up Doctor Profile**
+
+**System**: CareLink  
+**Use Case**: UC12 - Set Up Doctor Profile  
+**Actor**: Geriatrician (Fred)
+
+### Preconditions
+- Fred is logged into CareLink for the first time or his profile setup is incomplete.
+
+### Guarantees
+- Fred’s doctor profile is successfully created or updated.
+
+### Main Success Scenario (MSS)
+1. Fred selects the option to set up his doctor profile.
+2. CareLink prompts Fred to enter profile details.
+3. Fred enters all required details.
+4. CareLink saves Fred’s profile and confirms the setup with a success message.
+5. Use case ends.
+
+### Extensions
+
+- **4a. Profile Save Error**:
+    - 4a.1: If CareLink encounters an error while saving the profile, an error message is displayed, and the setup process is halted.
+    - Use case ends.
 
 
 *{More to be added}*
@@ -389,6 +666,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    - **Requirement:** The product is designed for use by a single user, and data should not be shared between multiple users.
    - **User Benefit:** Users can have confidence that their data is secure and private, without interference from other users, ensuring data integrity and ease of use.
 
+6. **Portability**
+    - **Category:** System Constraints
+    - **Requirement:** The product must support downloading CSV files that can be easily loaded and used on another system.
+    - **User Benefit:** Users can seamlessly transfer and access their data across different systems, providing flexibility and ease of use.
+
+7. **Readable Font Size**
+    - **Category:** Usability
+    - **Requirement:** The font size should be reasonably large to ensure readability, particularly for users who may have difficulty reading smaller text.
+    - **User Benefit:** Ensures users can comfortably read information on the interface, improving accessibility and user experience.
+
+8. **Simplicity**
+    - **Category:** Usability
+    - **Requirement:** The interface should be intuitive, with straightforward workflows that make it easy to navigate and use.
+    - **User Benefit:** Reduces the learning curve for new users, allowing for efficient and hassle-free operation, improving overall user satisfaction.
 
 ### Glossary
 
@@ -412,6 +703,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - **Alias**: A shortcut or simplified command that users can define to speed up repetitive tasks within the CLI, making CareLink more efficient to use for experienced users.
 
+- **CSV (Comma-Separated Values)**: A simple file format used to store tabular data where each field is separated by a comma.
+
+- **AB3 (Address Book 3)**: A contact management application that allows users to store, manage, and search contact details. It is designed for maintaining a digital address book, often used as a foundation for developing further CLI-based applications.
+
+- **Geriatricians**: Doctors specializing in the healthcare of elderly patients, focusing on the prevention, diagnosis, and treatment of diseases and conditions that commonly affect older adults, often playing a key role in managing chronic illnesses and improving quality of life.
 
 --------------------------------------------------------------------------------------------------------------------
 
