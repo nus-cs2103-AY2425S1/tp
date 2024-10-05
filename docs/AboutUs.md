@@ -14,6 +14,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 ![Vinoth-K.JPG](..%2F..%2F..%2F..%2F..%2FDownloads%2FVinoth-K.JPG)
 
 [[github](https://github.com/noth-k)]
+[[portfolio](team/vinoth.md)]
 
 * Role: Search Name Developer
 
