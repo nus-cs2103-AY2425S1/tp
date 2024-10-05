@@ -1,6 +1,7 @@
 package spleetwaise.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
@@ -9,7 +10,6 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import spleetwaise.address.logic.Messages;
 import spleetwaise.address.logic.commands.AddCommand;
 import spleetwaise.address.logic.commands.ClearCommand;
 import spleetwaise.address.logic.commands.DeleteCommand;
@@ -22,7 +22,6 @@ import spleetwaise.address.logic.commands.ListCommand;
 import spleetwaise.address.logic.parser.exceptions.ParseException;
 import spleetwaise.address.model.person.NameContainsKeywordsPredicate;
 import spleetwaise.address.model.person.Person;
-import spleetwaise.address.testutil.Assert;
 import spleetwaise.address.testutil.EditPersonDescriptorBuilder;
 import spleetwaise.address.testutil.PersonBuilder;
 import spleetwaise.address.testutil.PersonUtil;
@@ -89,15 +88,12 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_unrecognisedInput_throwsParseException() {
-        Assert.assertThrows(ParseException.class,
-            String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-                -> parser.parseCommand(""));
+    public void parseCommand_unrecognisedInput_returnsNull() throws ParseException {
+        assertNull(parser.parseCommand(""));
     }
 
     @Test
-    public void parseCommand_unknownCommand_throwsParseException() {
-        Assert.assertThrows(ParseException.class, Messages.MESSAGE_UNKNOWN_COMMAND, () ->
-            parser.parseCommand("unknownCommand"));
+    public void parseCommand_unknownCommand_returnsNull() throws ParseException {
+        assertNull(parser.parseCommand("unknownCommand"));
     }
 }

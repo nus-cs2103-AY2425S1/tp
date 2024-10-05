@@ -1,31 +1,24 @@
-package spleetwaise.address.logic.parser;
+package spleetwaise.transaction.logic.parser;
 
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import spleetwaise.address.commons.core.LogsCenter;
-import spleetwaise.address.logic.commands.AddCommand;
-import spleetwaise.address.logic.commands.ClearCommand;
 import spleetwaise.address.logic.commands.Command;
-import spleetwaise.address.logic.commands.DeleteCommand;
-import spleetwaise.address.logic.commands.EditCommand;
-import spleetwaise.address.logic.commands.ExitCommand;
-import spleetwaise.address.logic.commands.FindCommand;
-import spleetwaise.address.logic.commands.HelpCommand;
-import spleetwaise.address.logic.commands.ListCommand;
 import spleetwaise.address.logic.parser.exceptions.ParseException;
+import spleetwaise.transaction.logic.commands.AddCommand;
 
 /**
  * Parses user input.
  */
-public class AddressBookParser {
+public class SpleetWaiseParser {
 
     /**
      * Used for initial separation of command word and args.
      */
-    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
-    private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
+    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("txn\\s+(?<commandWord>\\S+)(?<arguments>.*)");
+    private static final Logger logger = LogsCenter.getLogger(SpleetWaiseParser.class);
 
     /**
      * Parses user input into command for execution.
@@ -50,28 +43,7 @@ public class AddressBookParser {
 
         switch (commandWord) {
         case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
-
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
-
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
-
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
-
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
-
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
-
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
-
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
+            return new AddCommand();
         default:
             return null;
         }
