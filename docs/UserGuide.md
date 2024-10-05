@@ -4,9 +4,9 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+# DLTbook User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+DLTbook is a **desktop app for managing contacts and DLT public addresses, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, DLTbook can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -17,11 +17,11 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T08-1/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar DLTbook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -30,13 +30,21 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/travis p/91234567 e/travis@Linkifyai.com a/1 Travis Avenue, Singapore, Sinapore` : Adds a contact named `Travis` to the Address Book.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
    * `clear` : Deletes all contacts.
 
    * `exit` : Exits the app.
+   
+   * `addPublicAddress c/ETH n/Travis w/wallet1 pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2` : Adds a public address to a contact
+
+   * `retrievePublicAddress c/BTC n/Travis w/wallet1` : Retrieves the public address of a contact
+
+   * `deletePublicAddress c/BTC n/Travis w/wallet1` : Deletes the public address of a contact
+
+   * `publicAddresSearch pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2` : Searches for a public address
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -157,24 +165,84 @@ Exits the program.
 
 Format: `exit`
 
+
+### Adding a public address to a contact : `addPublicAddress`
+
+Adds a public address to a contact.
+
+Format: `addPublicAddress c/NETWORK n/NAME w/WALLET_NAME pa/PUBLIC_ADDRESS`
+
+* Adds a public address to a contact based on the NAME
+* The contact is identified by the `NAME` and `WALLET_NAME` provided.
+* The `NETWORK` parameter specifies the ticker name for each network and should be in all CAPS (e.g., `BTC`, `ETH`, `SOL`, `SUI`, etc.).
+* the `NAME` parameter specifies the name of the contact to which the public address belongs.
+* The `PUBLIC_ADDRESS` parameter specifies the public address to be added, this fields is not cap sensitive.
+* The `WALLET_NAME` parameter specifies the wallet name to which the public address belongs.
+
+Examples:
+* `addPublicAddress c/ETH n/Travis w/wallet1 pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2` adds a public address to a contact named `Travis` with the wallet name `wallet1` and the public address `0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2`.
+
+### Retrieving a public address of a contact : `retrievePublicAddress`
+
+Retrieves the public address of a contact.
+
+Format: `retrievePublicAddress c/NETWORK n/NAME w/WALLET_NAME`
+
+* Retrieves the public address of a contact based on the NAME
+* The contact is identified by the `NAME` and `WALLET_NAME` provided.
+* The `NETWORK` parameter specifies the ticker name for each network and should be in all CAPS (e.g., `BTC`, `ETH`, `SOL`, `SUI`, etc.).
+* the `NAME` parameter specifies the name of the contact to which the public address belongs.
+
+Examples:
+* `retrievePublicAddress c/BTC n/Travis w/wallet1` retrieves the public address of a contact named `Travis` with the wallet name `wallet1`.
+
+### Deleting a public address of a contact : `deletePublicAddress`
+
+Deletes the public address of a contact.
+
+Format: `deletePublicAddress c/NETWORK n/NAME w/WALLET_NAME`
+
+* Deletes the public address of a contact based on the NAME
+* The contact is identified by the `NAME` and `WALLET_NAME` provided.
+* The `NETWORK` parameter specifies the ticker name for each network and should be in all CAPS (e.g., `BTC`, `ETH`, `SOL`, `SUI`, etc.).
+
+Examples:
+* `deletePublicAddress c/BTC n/Travis w/wallet1` deletes the public address of a contact named `Travis` with the wallet name `wallet1`.
+
+### Searching for a public address : `publicAddressSearch`
+
+Searches for a public address.
+
+Format: `publicAddressSearch pa/PUBLIC_ADDRESS`
+
+* Searches for a public address based on the `PUBLIC_ADDRESS` provided.
+* The `PUBLIC_ADDRESS` parameter specifies the public address to be searched.
+* This fields is not cap sensitive.
+
+
+Examples:
+* `publicAddressSearch pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2` searches for a public address `0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2` and displays the contact and wallet to which it belongs.
+
+--------------------------------------------------------------------------------------------------------------------
+
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+DLTbook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+DLTbook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+If your changes to the data file makes its format invalid, DLTbook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-### Archiving data files `[coming in v2.0]`
 
-_Details coming soon ..._
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -203,3 +271,9 @@ Action     | Format, Examples
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
 **Help**   | `help`
+**Exit**   | `exit`
+**Add Public Address** | `addPublicAddress c/NETWORK n/NAME w/WALLET_NAME pa/PUBLIC_ADDRESS`<br> e.g., `addPublicAddress c/ETH n/Travis w/wallet1 pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2`
+**Retrieve Public Address** | `retrievePublicAddress c/NETWORK n/NAME w/WALLET_NAME`<br> e.g., `retrievePublicAddress c/BTC n/Travis w/wallet1`
+**Delete Public Address** | `deletePublicAddress c/NETWORK n/NAME w/WALLET_NAME`<br> e.g., `deletePublicAddress c/BTC n/Travis w/wallet1`
+**Public Address Search** | `searchPublicAddress pa/PUBLIC_ADDRESS`<br> e.g., `publicAddressSearch pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2`
+
