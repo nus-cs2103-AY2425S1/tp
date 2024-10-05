@@ -279,18 +279,34 @@ Teaching Assistants (TAs) in academic institutions such as universities, college
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​            | I want to …​                                                                                 | So that I can…​                                                                 |
-|----------|--------------------|----------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------|
-| `* * *`  | teaching assistant | export student data in various formats (e.g., CSV, PDF)                                      | I can easily share information with professors or use it in other applications  |
-| `* * *`  | teaching assistant | categorise students by course or section                                                     | quickly find contact information for students relevant to a specific course     |
-| `* *`    | teaching assistant | easily view all a list of students that match my current search query without typing in full | handle mass search queries for convenience                                      |
-| `* *`    | teaching assistant | filter students                                                                              | prioritise communication with specific groups                                   |
-| `* *`    | teaching assistant | use a command to backup my student database to a local file                                  | ensure data safety and practice file management                                 |
-| `* *`    | teaching asssitant | use a command to import student data from a CSV file                                         | quickly populate my address book at the beginning of a semester                 |
-| `* *`    | teaching assistant | use a command to merge duplicate student entries                                             | maintain a clean and accurate database                                          |
-| `* *`    | teaching asssitant | use a command to import student data from a CSV file                                         | quickly populate my address book at the beginning of a semester                 |
-| `*`      | teaching assistant | use a command to generate a list of students who haven't submitted an assignment             | easily follow up with them                                                      |
-| `*`      | teaching asssitant | add notes to a student’s profile                                                             | track personal or academic progress that might influence communication          |
+| Priority | As a …             | I want to …                                                               | So that I can …                                                          |
+|----------|--------------------|---------------------------------------------------------------------------|--------------------------------------------------------------------------|
+| `* * *`  | teaching assistant | add students to my course roster                                          | keep track of all students under my supervision                          |
+| `* * *`  | teaching assistant | update student information                                                | keep student records up-to-date and accurate                             |
+| `* * *`  | teaching assistant | search for a student by their name                                        | quickly find a specific student when needed                              |
+| `* * *`  | teaching assistant | search for students enrolled in a course                                  | quickly find all students enrolled in a certain course                   |
+| `* * *`  | teaching assistant | filter students by homework submission status                             | quickly get to grading and providing feedback                            |
+| `* * *`  | teaching assistant | mark students' attendance in my tutorial                                  | leverage my fast typing to quickly take attendance                       |
+| `* * *`  | teaching assistant | assign participation marks to each student                                | keep track of student participation easily to assign a grade later       |
+| `* * *`  | teaching assistant | export student data as a CSV                                              | easily share information with professors or use in other applications    |
+| `* *`    | teaching assistant | assign tasks and deadlines to students                                    | track their responsibilities and ensure they stay on schedule            |
+| `* *`    | teaching assistant | set reminders for important tasks or deadlines                            | stay notified of upcoming responsibilities and avoid missing them        |
+| `* *`    | teaching assistant | view a calendar showing all upcoming student deadlines and my TA duties   | manage my time effectively and avoid scheduling conflicts                |
+| `* *`    | teaching assistant | filter students by academic performance                                   | prioritise communication with students in need of help                   |
+| `* *`    | teaching assistant | manually tag students in need of help                                     | remember to give these students additional support to help them catch up |
+| `* *`    | teaching assistant | filter students by their attendance                                       | reach out to them if they have not attended for long periods of time     |
+| `* *`    | teaching assistant | mark students who will be absent with a valid reason                      | keep track of special cases when taking attendance                       |
+| `* *`    | teaching assistant | search for the availability of students during a certain time             | find the preferred timing to host a consultation session                 |
+| `* *`    | teaching assistant | view a list of students that match my search query without typing in full | handle mass search queries for convenience                               |
+| `* *`    | teaching assistant | merge duplicate student entries                                           | maintain a clean and accurate database                                   |
+| `* *`    | teaching assistant | backup my student database to a local file                                | ensure data safety and practice file management                          |
+| `* *`    | teaching assistant | use a command to import student data from a CSV file                      | quickly populate my database at the start of a semester                  |
+| `*`      | teaching assistant | add notes to a student's profile                                          | keep track of special considerations for each student                    |
+| `*`      | teaching assistant | assign a profile picture to each student                                  | have a visual aid to recognise who is who in my tutorial                 |
+| `*`      | teaching assistant | toggle between light and dark mode                                        | select my preferred viewing mode                                         |
+| `*`      | teaching assistant | redesign the TAHub GUI layout                                             | select my preferred visual layout                                        |
+| `*`      | teaching assistant | press up and down to navigate command history                             | quickly reuse recently used commands                                     |
+| `*`      | teaching assistant | generate a statistical summary of class performance                       | quickly assess overall class trends in scores/attendance etc.            |
 
 *{More to be added}*
 
@@ -298,65 +314,76 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `TAHub` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case **UC1**: Add a student**
+**Use case: UC1 - Add a student**
 
-**MSS**
+**MSS:**
 
-1.	User requests to add a student by providing the necessary details (name, contact, courses, email).
-2.	AddressBook validates the inputs.
-3.	AddressBook adds the student with the provided details.
-4.	The GUI displays the updated student list.
-Use case ends.
+1. User requests to add a student by providing the necessary details (name, contact, courses, email).
+2. TAHub validates the inputs.
+3. TAHub adds the student with the provided details.
+4. The GUI displays the updated student list.
+5. Use case ends.
 
-**Extensions**
+**Extensions:**
 
 * 2a. One or more input parameters are missing or invalid.
 
-    * 2a1. AddressBook shows an error message indicating the missing or invalid field(s).
+    * 2a1. TAHub shows an error message indicating the missing or invalid field(s).
     * 2a2. Use case resumes at step 1.
+
 
 * 2b. The student already exists (both name and contact match an existing student).
 
-    * 2b1. AddressBook shows a duplicate error message.
+    * 2b1. TAHub shows a duplicate error message.
     * 2b2. Use case resumes at step 1.
 
-**Use case: **UC2** - Find student by name**
+**Use case: UC2 - Find student by name**
 
-**MSS**
+**MSS:**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to find a student by name
-4.  AddressBook displays names
-Use case ends.
+1. User requests to find a student by name.
+2. TAHub displays a list of students whose names contain the input string as a prefix.
+3. Use case ends.
   
-**Extensions**
+**Extensions:**
 
 * 2a. The list is empty.
+  * 2a1. TAHub displays a message that there were no students found.
+  * 2a2. Use case ends.
 
-  Use case ends.
+**Use case: UC3 - Delete Student by Index**
 
-* 3a. The given string is not unique.
+**MSS:**
 
-    * 3a1. AddressBook displays all student names with input string as prefix
-
-      Use case resumes at step 4.
-
-**Use case: **UC3** - Delete Student by Index**
-
-**MSS**
-
-1.  User requests to list persons
-2.  AddressBook shows a list of persons, which includes the index of the person
-3.  User requests to delete a specific person in the list by index
-4.  AddressBook deletes the person
-    Use case ends.
+1. User requests to delete a specific person in the list by index.
+2. TAHub verifies the given index.
+3. TAHub deletes the student at the index in the list.
+4. Use case ends.
     
-**Extensions**
+**Extensions:**
 
-* 2a. The list is empty.
+* 2a. The given index is invalid.
+  * 2a1. TAHub shows an error message stating that the index is invalid.
+  * 2a2. Use case ends.
 
-  Use case ends.
+**Use case: UC4 - Find students by Course**
+
+**MSS:**
+
+1. User requests to find students enrolled in a particular course.
+2. TAHub shows a list of students enrolled in that particular course.
+3. Use case ends.
+
+**Extensions:**
+
+* 2a. There are no students enrolled in the given course.
+  * 2a1. TAHub will show a message indicating there are no students found. 
+  * 2a2. Use case continues from 3.
+
+
+* 2b. There are multiple courses containing the given string as a prefix.
+  * 2b1. TAHub will display a list of all students enrolled in those courses.
+  * 2b2. Use case continues from 3.
 
 *{More to be added}*
 
