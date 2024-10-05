@@ -13,7 +13,7 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Vendor extends Contact {
-    Service service;
+    private Service service;
     public Vendor(Name name, Phone phone, Email email, Address address, Service service, Set<Tag> tags) {
         super(name, phone, email, address, tags);
         requireAllNonNull(service);
