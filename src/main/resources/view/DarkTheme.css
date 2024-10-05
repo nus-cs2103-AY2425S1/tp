@@ -133,7 +133,6 @@
 }
 
 .stack-pane {
-     /*-fx-background-color: derive(#1d1d1d, 20%); */
      -fx-background-color: #FFE7E7;
      -fx-padding: 10px;
 }
