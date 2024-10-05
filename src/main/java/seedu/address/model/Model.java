@@ -78,6 +78,11 @@ public interface Model {
     void deleteTask(Task task);
 
     /**
+     * Deletes all tasks associated with the given person.
+     */
+    void deleteAssociatedTasks(Person target);
+
+    /**
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */

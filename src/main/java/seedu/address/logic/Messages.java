@@ -21,6 +21,7 @@ public class Messages {
     public static final String MESSAGE_NONEXISTENT_PERSON =
             "The person '%1$s' does not exist in the system!";
     public static final String MESSAGE_INVALID_TASK_DISPLAYED_INDEX = "The task index provided is invalid";
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */

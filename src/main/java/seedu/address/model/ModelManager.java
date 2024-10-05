@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -110,6 +112,25 @@ public class ModelManager implements Model {
     @Override
     public void deleteTask(Task task) {
         addressBook.removeTask(task);
+    }
+
+    @Override
+    public void deleteAssociatedTasks(Person personToDelete) {
+        List<Task> allTasks = getFilteredTaskList();
+
+        // Create a new list to store tasks to be deleted
+        List<Task> tasksToDelete = new ArrayList<>();
+
+        for (Task task : allTasks) {
+            if (task.getPatient().equals(personToDelete)) {
+                tasksToDelete.add(task);
+            }
+        }
+
+        // Delete all tasks associated with the person
+        for (Task task : tasksToDelete) {
+            deleteTask(task);
+        }
     }
 
     @Override

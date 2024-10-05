@@ -113,6 +113,23 @@ public class ModelManagerTest {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredTaskList().remove(0));
     }
 
+    @Test
+    public void deleteAssociatedTasks_personWithTasks_tasksDeleted() {
+        Task task1 = new TaskBuilder().withDescription("Task 1").withPatient(ALICE).build();
+        Task task2 = new TaskBuilder().withDescription("Task 2").withPatient(ALICE).build();
+
+        // Add the tasks to the model
+        modelManager.addTask(task1);
+        modelManager.addTask(task2);
+
+        assertTrue(modelManager.hasTask(task1));
+        assertTrue(modelManager.hasTask(task2));
+
+        modelManager.deleteAssociatedTasks(ALICE);
+
+        assertFalse(modelManager.hasTask(task1));
+        assertFalse(modelManager.hasTask(task2));
+    }
 
     @Test
     public void equals() {
