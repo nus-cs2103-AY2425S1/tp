@@ -520,17 +520,31 @@ Use case ends.
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-3. The application should respond to user commands within 0.5 seconds, ensuring fast interactions.
-4. Regular tasks (e.g., adding a contact, listing events) should be executable within a few milliseconds to maintain efficiency and not interrupt the user’s workflow.
-5. The system should efficiently handle a large database of contacts and events (e.g., 1,000+ entries), allowing for fast searches, retrievals, and modifications without performance degradation.
-8. As the app is an offline tool, it should be robust and able to run for extended periods without crashing. Downtime should be limited to under 1% (if any issues require restarting).
-9. The system should be able to recover from crashes within 5 seconds, ensuring minimal disruption to the user’s workflow.
-10. Since celebrity data is highly sensitive, the application must store all information securely (e.g. locally) and ensure no unauthorized access can occur, even in an offline environment.
-11. The app should allow password protection and encryption options to ensure that only authorized users can access or modify sensitive data.
-16. Since the app is intended to be an offline tool, it should function fully without any internet connection. All features, including scheduling and contact management, must be operable offline.
-17. The application should be lightweight, with minimal CPU and memory usage, allowing it to run smoothly on a wide variety of machines, including low-spec systems.
-18. The system should provide a user-friendly and intuitive interface with clear instructions and feedback to guide users who are not IT-savvy in using the command-line interface effectively.
+2. The software should work without requiring an installer.
+3. The software should not depend on your own remote server. 
+4. Since the app is intended to be an offline tool, it should function fully without any internet connection.
+5. The application should be packaged into a single JAR file.
+6. The file sizes of the deliverables should be reasonable and not exceed the limits given below. 
+   - Product (i.e., the JAR/ZIP file): 100MB
+   - Documents (i.e., PDF files): 15MB/file
+7. The final JAR/PDF files cannot be bloated unnecessarily.
+8. The developer guide and user guide should be PDF-friendly. Don't use expandable panels, embedded videos, animated GIFs etc.
+9. The use of third-party libraries/frameworks/services are not allowed unless they are approved by the teaching team.
+10. The software should follow the Object-oriented paradigm primarily.
+11. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+12. The application should prioritise one-shot commands over multi-step commands as they are faster. If a multi-step command is provided to help new users, a one-shot equivalent should also be provided for regular/expert users.
+13. The application should respond to user commands within 0.5 seconds, ensuring fast interactions.
+14. Regular tasks (e.g., adding a contact, listing events) should be executable within a few milliseconds to maintain efficiency and not interrupt the user’s workflow.
+15. The system should efficiently handle a large database of contacts and events (e.g., 1,000+ entries), allowing for fast searches, retrievals, and modifications without performance degradation.
+16. The data should be stored locally and should be in a human editable text file.
+17. The data should not be stored using a Database Management System.
+18. The data should be able to be loaded using a data file if the network is down.
+19. The app should allow password protection and encryption options to ensure that only authorized users can access or modify sensitive data.
+20. The system should provide a user-friendly and intuitive interface with clear instructions and feedback to guide users who are not IT-savvy in using the command-line interface effectively.
+21. The GUI should work well (i.e., should not cause any resolution-related inconveniences to the user) for standard screen resolutions 1920x1080 and higher and for screen scales 100% and 125%.
+22. the GUI should be usable (i.e., all functions can be used even if the user experience is not optimal) for resolutions 1280x720 and higher and for screen scales 150%.
+23. As the app is an offline tool, it should be robust and able to run for extended periods without crashing. Downtime should be limited to under 1% (if any issues require restarting).
+24. The system should be able to recover from crashes within 5 seconds, ensuring minimal disruption to the user’s workflow.
 
 *{More to be added}*
 
