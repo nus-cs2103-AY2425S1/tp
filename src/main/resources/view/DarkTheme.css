@@ -133,7 +133,9 @@
 }
 
 .stack-pane {
-     -fx-background-color: derive(#1d1d1d, 20%);
+     /*-fx-background-color: derive(#1d1d1d, 20%); */
+     -fx-background-color: #FFE7E7;
+     -fx-padding: 10px;
 }
 
 .pane-with-border {
@@ -317,15 +319,38 @@
     -fx-text-fill: #F70D1A;
 }
 
+#inputContainer {
+    -fx-background-color: #F3EDF7;
+    -fx-padding: 5;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
 #commandTextField {
     -fx-background-color: transparent #383838 transparent #383838;
     -fx-background-insets: 0;
-    -fx-border-color: #383838 #383838 #ffffff #383838;
     -fx-border-insets: 0;
-    -fx-border-width: 1;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
-    -fx-text-fill: white;
+    -fx-text-fill: black;
+}
+
+#sendButton {
+    -fx-background-color: #E8DEF8;
+    -fx-cursor: hand;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-border-color: transparent;
+    -fx-font-size: 13pt;
+}
+
+/* Hover effect */
+#sendButton:hover {
+    -fx-background-color: #D0BDF2; /* Lighter shade when hovered */
+}
+
+/* Click (pressed) effect */
+#sendButton:pressed {
+    -fx-background-color: #B09BE1; /* Darker shade when clicked */
 }
 
 #filterField, #personListPanel, #personWebpage {
