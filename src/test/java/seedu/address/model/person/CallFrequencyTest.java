@@ -56,4 +56,5 @@ public class CallFrequencyTest {
         // different values -> returns false
         assertFalse(callFrequency.equals(new CallFrequency("5")));
     }
+
 }
