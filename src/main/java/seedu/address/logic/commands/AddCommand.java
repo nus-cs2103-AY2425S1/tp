@@ -10,7 +10,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.handler.DuplicatePhoneTagger;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
@@ -41,9 +40,6 @@ public class AddCommand extends Command {
 
     private final Person toAdd;
 
-    // Handle duplicate phone numbers
-    private final DuplicatePhoneTagger duplicatePhoneTagger = new DuplicatePhoneTagger();
-
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
@@ -61,8 +57,6 @@ public class AddCommand extends Command {
         }
 
         model.addPerson(toAdd);
-
-        duplicatePhoneTagger.tagPhoneDuplicates(model);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }

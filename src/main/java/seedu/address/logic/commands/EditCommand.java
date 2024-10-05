@@ -20,7 +20,6 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.handler.DuplicatePhoneTagger;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -56,9 +55,6 @@ public class EditCommand extends Command {
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
 
-    // Handle duplicate phone numbers
-    private final DuplicatePhoneTagger duplicatePhoneTagger = new DuplicatePhoneTagger();
-
     /**
      * @param index of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
@@ -89,8 +85,6 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-
-        duplicatePhoneTagger.tagPhoneDuplicates(model);
 
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
