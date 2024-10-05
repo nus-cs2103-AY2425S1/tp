@@ -292,8 +292,58 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `ClinicBuddy` and the **Actor** is the `user`, unless specified otherwise)
 
+**Use case: Add a new patient**
+
+**MSS**
+
+1. User chooses to add a patient record.
+2. ClinicBuddy adds a record.
+
+Use case ends.
+
+Extensions:
+- 1a. Patient information contains fields with incorrect format.
+  - 1a1. ClinicBuddy provides an error message informing the user of the error. 
+  - Use case ends.
+
+**Use case: Delete a person**
+
+**MSS**
+
+1.  User inputs the NRIC of the patient whose record they want to delete to request for ClinicBuddy to delete that record.
+2. ClinicBuddy deletes the record.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. The NRIC is not of the correct format
+  - 1a1. Clinic Buddy shows an error message. 
+  - Use case ends
+* 2a. The NRIC is not in the records.
+  - 2a1. ClinicBuddy provides an error message informing the user of the error. 
+  - Use case ends.
+
+
+
+
+
+**Use case: Edit a patient record**
+
+**Use case: (Search)**
+
+**Use case: Archive data**
+
+**Use case: Undo a command**
+
+
+
+
+
+
+Example
 **Use case: Delete a person**
 
 **MSS**
