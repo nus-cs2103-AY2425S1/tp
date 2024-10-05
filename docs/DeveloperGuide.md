@@ -315,7 +315,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | diligent teacher                                    | add a new test for all my students              | keep track of all the students' results                    |
 | `* *`    | diligent teacher                                    | add the scores of the students                  | have an overview of everyone's results                     |
 | `*`      | picky teacher                                       | customize the app settings                      | align the configuration with my preferences                |
-| `*`      | teacher who likes to everything in one app          | create a seating arrangement for the class      | edit the seating arrangement any time                      |
+| `*`      | teacher who likes to have everything in one app     | create a seating arrangement for the class      | edit the seating arrangement any time                      |
 | `*`      | diligent teacher                                    | export information of all my graduated students | store them into the school database.                       |
 
 
