@@ -1,14 +1,12 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static researchroster.logic.commands.HelpCommand.SHOWING_HELP_MESSAGE;
+import static seedu.address.logic.commands.HelpCommand.SHOWING_HELP_MESSAGE;
 
 import org.junit.jupiter.api.Test;
 
-import researchroster.logic.commands.CommandResult;
-import researchroster.logic.commands.HelpCommand;
-import researchroster.model.Model;
-import researchroster.model.ModelManager;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 
 public class HelpCommandTest {
     private Model model = new ModelManager();

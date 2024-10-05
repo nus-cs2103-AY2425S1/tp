@@ -5,8 +5,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import researchroster.commons.util.AppUtil;
-
 public class AppUtilTest {
 
     @Test

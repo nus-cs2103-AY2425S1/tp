@@ -2,9 +2,8 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import researchroster.logic.commands.Command;
-import researchroster.logic.parser.Parser;
-import researchroster.logic.parser.exceptions.ParseException;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Contains helper methods for testing command parsers.
@@ -16,7 +15,7 @@ public class CommandParserTestUtil {
      * equals to {@code expectedCommand}.
      */
     public static void assertParseSuccess(Parser<? extends Command> parser, String userInput,
-                                          Command expectedCommand) {
+            Command expectedCommand) {
         try {
             Command command = parser.parse(userInput);
             assertEquals(expectedCommand, command);

@@ -12,7 +12,6 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
-import researchroster.AppParameters;
 import javafx.application.Application;
 
 public class AppParametersTest {
