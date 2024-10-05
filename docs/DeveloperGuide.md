@@ -363,6 +363,55 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `PawPatrol` and the **Actor** is the `user`, unless specified otherwise)
 
+
+**Use case: Add a pet owner**
+
+**MSS**  
+
+1.  User requests to add a new pet owner by providing the owner's name, contact number, address, and email.  
+2.  PawPatrol validates input.  
+3.  PawPatrol successfully adds the new pet owner to the list.  
+
+    Use case ends.  
+
+**Extensions**  
+
+* 2a. Invalid owner name format.  
+
+    * 2a1. PawPatrol shows an error message:
+
+      Use case resumes at step 1.
+
+* 2b. Invalid phone number format.
+
+    * 2b1. PawPatrol shows an error message:
+
+      Use case resumes at step 1.
+
+* 2c. Owner name exceeds 50 characters.
+
+    * 2c1. PawPatrol shows an error message:  
+
+      Use case resumes at step 1.
+
+* 2d. Owner address exceeds 100 characters.
+
+    * 2d1. PawPatrol shows an error message:  
+
+      Use case resumes at step 1.
+
+* 2e. Owner email exceeds 50 characters.
+
+    * 2e1. PawPatrol shows an error message:  
+
+      Use case resumes at step 1.
+
+* **2f. Duplicate owner number or address.**
+
+    * 2f1. PawPatrol shows an error message:  
+
+      Use case resumes at step 1.
+
 **Use case: Delete a pet**
 
 **MSS**
@@ -386,28 +435,42 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
-**Use case: Add a pet profile**
+**Use Case: Search for pets**
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person
+1. User requests to search for a pet with the relevant data type and search value.
+2. PawPatrol validates the input.
+3. PawPatrol performs the search and retrieves matching records.
+4. PawPatrol displays the list of contacts matching the `dataType` and `searchValue`.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. Invalid data type.  
 
-  Use case ends.
+    * 2a1. PawPatrol shows an error message:  
+      
+      Use case resumes at step 1.  
 
-* 3a. The given index is invalid.
+* 2b. No matching contacts found.  
 
-    * 3a1. AddressBook shows an error message.
+    * 2b1. PawPatrol shows an error message:  
+      
+      Use case resumes at step 1.  
 
-      Use case resumes at step 2.
+* 2c. Empty search value.  
+
+    * 2c1. PawPatrol shows an error message:  
+      
+      Use case resumes at step 1.
+
+* 2d. Invalid characters in search value.  
+
+    * 2d1. PawPatrol shows an error message:  
+
+      Use case resumes at step 1.
 
 *{More to be added}*
 
