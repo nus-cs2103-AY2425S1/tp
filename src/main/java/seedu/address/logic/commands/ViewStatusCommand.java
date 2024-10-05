@@ -13,7 +13,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
- * View the status of an existing person in the address book.
+ * Views the status of an existing person in the address book.
  */
 public class ViewStatusCommand extends Command {
 
@@ -38,23 +38,13 @@ public class ViewStatusCommand extends Command {
         this.job = job;
     }
 
-    /**
-     * Throws a simple exception
-     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
-        Person current;
 
         return findMatchingPerson(lastShownList);
     }
 
-    /**
-     * finds person with matching name and job in lastShownList
-     *
-     * @return CommandResult with success message and message with matching person's name and job or
-     *     failure message
-     */
     private CommandResult findMatchingPerson(List<Person> lastShownList) {
         for (Person person: lastShownList) {
             if (foundMatchingPerson(person)) {
@@ -68,6 +58,13 @@ public class ViewStatusCommand extends Command {
     private boolean foundMatchingPerson(Person current) {
         return current.getName().equals(this.name) && current.getJob().equals(this.job);
     }
+
+    /**
+     * Finds person with matching name and job in lastShownList
+     *
+     * @return CommandResult with success message and message with matching person's name and job or
+     *     failure message
+     */
 
     @Override
     public boolean equals(Object other) {
