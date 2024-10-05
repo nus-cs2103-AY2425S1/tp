@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import spleetwaise.address.commons.core.GuiSettings;
 import spleetwaise.address.logic.commands.AddCommand;
 import spleetwaise.address.logic.commands.CommandResult;
 import spleetwaise.address.logic.commands.CommandTestUtil;
@@ -45,6 +46,28 @@ public class LogicManagerTest {
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
         logic = new LogicManager(addressBookModel, transactionModel, storage);
+    }
+
+    @Test
+    public void getAddressBook() {
+        assertEquals(addressBookModel.getAddressBook(), logic.getAddressBook());
+    }
+
+    @Test
+    public void getAddressBookFilePath() {
+        assertEquals(addressBookModel.getAddressBookFilePath(), logic.getAddressBookFilePath());
+    }
+
+    @Test
+    public void getGuiSettings() {
+        assertEquals(addressBookModel.getGuiSettings(), logic.getGuiSettings());
+    }
+
+    @Test
+    public void setGuiSettings() {
+        GuiSettings settings = new GuiSettings();
+        logic.setGuiSettings(settings);
+        assertEquals(addressBookModel.getGuiSettings(), settings);
     }
 
     @Test
