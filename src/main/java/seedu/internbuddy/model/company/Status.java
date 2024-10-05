@@ -1,5 +1,8 @@
 package seedu.internbuddy.model.company;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.internbuddy.commons.util.AppUtil.checkArgument;
+
 /**
  * Represents a Company's status in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidStatus(String)}
@@ -15,6 +18,8 @@ public class Status {
      * @param status A valid status.
      */
     public Status(String status) {
+        requireNonNull(status);
+        checkArgument(isValidStatus(status), MESSAGE_CONSTRAINTS);
         value = status.toUpperCase();
     }
 
