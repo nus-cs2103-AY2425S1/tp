@@ -20,6 +20,7 @@ You can reach us at the email `nowherenearyou[at]comp.nus.edu.sg`
 
 ### Chua Tse Hui
 Materials Science and Engineering Student.
+
 <img src="images/cth06-Github.png" width="200px">
 
 [[Google](http://www.google.com.sg)]
@@ -40,7 +41,7 @@ Materials Science and Engineering Student.
 
 ### Wu Zengfu
 
-<img src="images/zengfu.png" width="200px">
+<img src="images/wuzengfu.png" width="200px">
 
 [[github](https://github.com/wuzengfu)]
 [[portfolio](team/zengfu.md)]
