@@ -29,7 +29,7 @@ public class Client extends Contact {
                 .add("phone", this.getPhone())
                 .add("email", this.getEmail())
                 .add("address", this.getAddress())
-                .add("service", this.date)
+                .add("date", this.date)
                 .add("tags", this.getTags())
                 .toString();
     }
