@@ -108,6 +108,10 @@ public class Person {
                 && tags.equals(otherPerson.tags);
     }
 
+    public boolean hasJobAndStatus(Name name, Job job) {
+        return this.getName().equals(name) && this.getJob().equals(job);
+    }
+
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own

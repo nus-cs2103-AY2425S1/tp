@@ -47,16 +47,12 @@ public class ViewStatusCommand extends Command {
 
     private CommandResult findMatchingPerson(List<Person> lastShownList) {
         for (Person person: lastShownList) {
-            if (foundMatchingPerson(person)) {
+            if (person.hasJobAndStatus(this.name, this.job)) {
                 return new CommandResult(String.format(MESSAGE_VIEW_SUCCESS, Messages.formatStatus(person)));
             }
         }
 
         return new CommandResult(String.format(MESSAGE_VIEW_FAILURE, this.name, this.job));
-    }
-
-    private boolean foundMatchingPerson(Person current) {
-        return current.getName().equals(this.name) && current.getJob().equals(this.job);
     }
 
     /**
