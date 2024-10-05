@@ -344,16 +344,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS** 
 
 1. User enters command to assign a vendor to an event.
-2. System verifies that both the vendor and event exist.
-3. System verifies that the vendor is not already assigned to the event.
-4. System assigns the vendor to the event.
-5. System displays a success message.
+2. System assigns the vendor to the event.
+3. System displays a success message.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The command entered by the user does not exist.
+* 1a. The command format entered by the user is invalid.
 
   * 1a1. System shows an error message and displays the correct command format.
 
@@ -371,9 +369,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 3a. The vendor has already been assigned to the event.
+* 2c. The vendor has already been assigned to the event.
 
-  * 3a1. System shows an error message.
+  * 2c1. System shows an error message.
 
       Use case ends.
 
