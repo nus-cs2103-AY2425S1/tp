@@ -345,7 +345,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### Data Requirements
 1.  Should be able to hold up to 500 persons including personal details, contact information, and emergency contacts, without a significant performance drop.
-2.  All data should be persistent, meaning it must be saved locally/cloud-based database even after the application is closed, ensuring no data loss between sessions.
+2.  All data should be persistent, meaning it must be saved even after the application is closed, ensuring no data loss between sessions.
 
 #### Environment Requirements
 3.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
@@ -372,7 +372,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Administrator**: Tutors and admin staff at the tuition centre.
 * **CLI (Command Line Interface)**: A text-based interface that allows users to interact with software by typing commands.
 * **Emergency Contact**: A secondary contact person, typically a guardian or family member, to reach out in case of an emergency involving a student.
-
+* **MSS (Main Success Scenario)**: The primary flow of actions in a use case that leads to a successful outcome.
+* **Extension (in use cases)**: Alternative flows that might arise due to errors or exceptions while performing the main success scenario.
+* **NFR (Non-Functional Requirements)**: Specifications that describe the qualities and constraints of a system, such as performance, reliability, and security, rather than its specific functions.
+* **Testability**: The ease with which the system can be tested to ensure its correct behavior, including automated and manual testing.
+* **Persistence**: A characteristic of data that ensures it is stored and available even after the application is closed and reopened.
+* **Modular Design**: A software architecture approach that divides the system into independent components for easier maintenance and scalability.
 
 --------------------------------------------------------------------------------------------------------------------
 
