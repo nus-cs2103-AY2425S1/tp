@@ -11,14 +11,14 @@ import seedu.address.model.person.Name;
 
 
 /**
- * Changes the remark of an existing person in the address book.
+ * View the status of an existing person in the address book.
  */
 public class ViewStatusCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Remark: %2$s";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": View the status of a person in the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_JOB + "JOB ";
