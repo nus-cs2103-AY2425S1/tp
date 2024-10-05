@@ -34,6 +34,8 @@ public class Schedule {
 
     public final LocalTime endTimeValue;
 
+    public final String value;
+
     /**
      * Constructs a {@code Time}.
      *
@@ -42,6 +44,7 @@ public class Schedule {
     public Schedule(String time) {
         requireNonNull(time);
         checkArgument(isValidSchedule(time), MESSAGE_CONSTRAINTS);
+        this.value = time;
         this.dayValue = getDayComponent(time);
         this.startTimeValue = getStartTimeComponent(time);
         this.endTimeValue = getEndTimeComponent(time);

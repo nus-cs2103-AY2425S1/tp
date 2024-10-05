@@ -101,7 +101,7 @@ public class ParserUtil {
         requireNonNull(schedule);
         String trimmedSchedule = schedule.trim();
         if (!Schedule.isValidSchedule(trimmedSchedule)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Schedule.MESSAGE_CONSTRAINTS);
         }
         return new Schedule(trimmedSchedule);
     }
