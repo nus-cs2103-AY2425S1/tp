@@ -262,27 +262,33 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* has a need to manage a significant number (50-100) of wedding invitees
+* only needs to plan 1 wedding at a time
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: reduce the time taken to filter and contact invitees, allowing planners to focus on the wedding program.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                         | I want to …​                                 | So that I can…​                                                         |
+|----------|---------------------------------|----------------------------------------------|-------------------------------------------------------------------------|
+| `* * *`  | new user                        | see usage instructions                       | refer to instructions when I forget how to use the App                  |
+| `* * *`  | user                            | add a new person to the guest list           |                                                                         |
+| `* * *`  | user                            | delete a person                              | remove someone that has been uninvited or is not attending              |
+| `* * *`  | user                            | view the entire guest list                   | get an overview of my guest status                                      |
+| `* * *`  | user                            | find a guest by name                         | locate details of invitees without having to go through the entire list |
+| `* * *`  | user                            | add customisable tags to guests              | categorise my guests easily                                             |
+| `* * *`  | user                            | delete tags associated with guests           | recategorise my guests if needed                                        |
+| `* * *`  | user                            | track the RSVP status of each guest          | track who is attending the wedding                                      |
+| `* *`    | user                            | filter guests according to their RSVP status | get an overview of who is attending the wedding                         |
+| `* *`    | user with many groups of guests | filter guests according to their tags        | get an overview of each individual group                                |
+| `*`      | user with many guests           | delete multiple guests at once               | quickly remove large groups from my guest list                          |
 
 *{More to be added}*
 
