@@ -44,7 +44,7 @@ You can reach us at the email `dreamdaydesigners@comp.nus.edu.sg`
 <img src="images/leslieyip02.png" width="200px">
 
 [[github](http://github.com/leslieyip02)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/leslieyip02.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
@@ -54,7 +54,7 @@ You can reach us at the email `dreamdaydesigners@comp.nus.edu.sg`
 <img src="images/fyl2003.png" width="200px">
 
 [[github](http://github.com/fyl2003)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/fyl2003.md)]
 
 * Role: Developer
 * Responsibilities: UI
