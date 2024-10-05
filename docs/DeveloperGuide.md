@@ -332,7 +332,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **GUI**: Graphical User Interface allows users to interact with the address book codebase through visual representation
+* **CLI**: Command Line Interface accepts text input to execute functions of the application
+* **JAR file**: A package file that contains many class files, associated metadata and resources that build the application
+* **RSVP status**: A tag on each contact that indicates if the guest has responded to the wedding invitation
+* **Customisable tags**: Tags on contacts containing text written by user, which can be used for filtering purposes
+* **Delete**: Removes a contact and all details regarding the contact from the address book
+* **Add**: Creates and saves a new contact into the address book
+* **Filter**: Only show contacts that contains the text input by the user
 
 --------------------------------------------------------------------------------------------------------------------
 
