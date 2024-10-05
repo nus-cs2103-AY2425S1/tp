@@ -1,13 +1,18 @@
 package seedu.address.logic.commands;
 
+import java.util.List;
+import java.util.Set;
+
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Job;
 import seedu.address.model.person.Name;
-
+import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 
 /**
@@ -16,7 +21,6 @@ import seedu.address.model.person.Name;
 public class ViewStatusCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
-    public static final String MESSAGE_ARGUMENTS = "Name: %1$s, Job: %2$s";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": View the status of a person in the address book. "
             + "Parameters: "
@@ -25,6 +29,10 @@ public class ViewStatusCommand extends Command {
 
     public final Name name;
     public final Job job;
+
+    public static final String MESSAGE_VIEW_SUCCESS = "Viewing status of person: %1$s";
+    public static final String MESSAGE_VIEW_FAILURE = "There are no matching persons with name: %1$s"
+                                                    + " and job: %2$s";
 
     /**
      * @param name Name of the candidate
@@ -40,8 +48,32 @@ public class ViewStatusCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        throw new CommandException(
-                String.format(MESSAGE_ARGUMENTS, this.name, this.job));
+        List<Person> lastShownList = model.getFilteredPersonList();
+        Person current;
+
+        return findMatchingPerson(lastShownList);
+    }
+
+    /**
+     * finds person with matching name and job in lastShownList
+     *
+     * @return CommandResult with success message and message with matching person's name and job or
+     * failure message
+     */
+    private CommandResult findMatchingPerson(List<Person> lastShownList) {
+        Person current;
+        for (int i = 0; i < lastShownList.size(); i++) {
+            current = lastShownList.get(i);
+            if (foundMatchingName(current)) {
+                return new CommandResult(String.format(MESSAGE_VIEW_SUCCESS, Messages.formatStatus(current)));
+            }
+        }
+
+        return new CommandResult(String.format(MESSAGE_VIEW_FAILURE, this.name, this.job));
+    }
+
+    private boolean foundMatchingName(Person current) {
+        return current.getName().equals(this.name);
     }
 
     @Override
