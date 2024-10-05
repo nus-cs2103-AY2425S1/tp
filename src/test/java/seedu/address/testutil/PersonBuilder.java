@@ -3,6 +3,11 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.car.Car;
+import seedu.address.model.car.CarMake;
+import seedu.address.model.car.CarModel;
+import seedu.address.model.car.Vin;
+import seedu.address.model.car.Vrn;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -26,6 +31,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private Car car = null;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -46,6 +52,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        car = personToCopy.getCar();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -89,7 +96,21 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Car} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withCar(String vrn, String vin, String make, String model) {
+        this.car = new Car(new Vrn(vrn), new Vin(vin), new CarMake(make), new CarModel(model));
+        return this;
+    }
+
+    /**
+     * Builds a person object with the given details.
+     */
     public Person build() {
+        if (car != null) {
+            return new Person(name, phone, email, address, tags, car);
+        }
         return new Person(name, phone, email, address, tags);
     }
 

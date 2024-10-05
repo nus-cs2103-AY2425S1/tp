@@ -4,9 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MAKE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VIN;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VRN;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -25,6 +29,25 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
  * Contains helper methods for testing commands.
  */
 public class CommandTestUtil {
+
+    public static final String VALID_CAR_VIN_A = "11111111111111111";
+    public static final String VALID_CAR_VIN_B = "22222222222222222";
+    public static final String VALID_CAR_VRN_A = "SJH 9514 P";
+    public static final String VALID_CAR_VRN_B = "SH 8942 L";
+    public static final String VALID_CAR_MAKE_A = "Toyota";
+    public static final String VALID_CAR_MAKE_B = "Honda";
+    public static final String VALID_CAR_MODEL_A = "Corolla";
+    public static final String VALID_CAR_MODEL_B = "Civic";
+
+    public static final String INVALID_CAR_VIN_0 = "0";
+    public static final String INVALID_CAR_VIN_18_DIGITS = "111111111111111111";
+
+    public static final String INVALID_CAR_VRN_0 = "0";
+    public static final String INVALID_CAR_VRN_9 = "SHA 7891 A (Z)";
+
+    public static final String INVALID_CAR_MAKE = "toyota";
+    public static final String INVALID_CAR_MODEL = "corolla";
+
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
@@ -47,6 +70,12 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String CAR_DESC_A = " " + PREFIX_VRN + VALID_CAR_VRN_A + " " + PREFIX_VIN
+                                            + VALID_CAR_VIN_A + " " + PREFIX_MAKE + VALID_CAR_MAKE_A
+                                            + " " + PREFIX_MODEL + VALID_CAR_MODEL_A;
+    public static final String CAR_DESC_B = " " + PREFIX_VRN + VALID_CAR_VRN_B + " "
+                                            + PREFIX_VIN + VALID_CAR_VIN_B + " " + PREFIX_MAKE
+                                            + VALID_CAR_MAKE_B + " " + PREFIX_MODEL + VALID_CAR_MODEL_B;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones

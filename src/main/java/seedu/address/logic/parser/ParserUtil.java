@@ -9,11 +9,19 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.car.Car;
+import seedu.address.model.car.CarMake;
+import seedu.address.model.car.CarModel;
+import seedu.address.model.car.Vin;
+import seedu.address.model.car.Vrn;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+
+
+
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -94,6 +102,43 @@ public class ParserUtil {
         }
         return new Email(trimmedEmail);
     }
+
+    /**
+     * Parses a {@code String vrn} into a {@code Vrn}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code vrn} is invalid.
+     */
+    public static Car parseCar(String vrn, String vin, String make, String model) throws ParseException {
+        requireNonNull(vrn);
+        requireNonNull(vin);
+        requireNonNull(make);
+        requireNonNull(model);
+
+        if (!Vin.isValidVin(vin)) {
+            throw new ParseException(Vin.MESSAGE_CONSTRAINTS);
+        }
+
+        if (!Vrn.isValidVrn(vrn)) {
+            throw new ParseException(Vrn.MESSAGE_CONSTRAINTS);
+        }
+
+        if (!CarMake.isValidCarMake(make)) {
+            throw new ParseException(CarMake.MESSAGE_CONSTRAINTS);
+        }
+
+        if (!CarModel.isValidCarModel(model)) {
+            throw new ParseException(CarModel.MESSAGE_CONSTRAINTS);
+        }
+
+        Vrn vrnObj = new Vrn(vrn.trim());
+        Vin vinObj = new Vin(vin.trim());
+        CarMake makeObj = new CarMake(make.trim());
+        CarModel modelObj = new CarModel(model.trim());
+
+        return new Car(vrnObj, vinObj, makeObj, modelObj);
+    }
+
 
     /**
      * Parses a {@code String tag} into a {@code Tag}.
