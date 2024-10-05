@@ -300,14 +300,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
 |----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
-
-*{More to be added}*
+| `* * *`  | event planner           | create a new event with date, time and location  | easily see upcomings events in my schedule                                                     |
+| `* * *`  | event planner           | add a vendor                                     |                                                                                                |
+| `* * *`  | event planner           | assign a vendor to an event                      | check whether arrangesments have already been made for the event                               |
+| `* *`    | event planner           | find a vendor by name and tags                   | choose a suitable fast for a new event                                                         |
+| `* *`    | event planner           | categorise vendors                               | easily see what services a vendor provides                                                     |
+| `* *`    | event planner           | modify event and vendor details                  | correct any mistakes or changes made to an event or vendor                                     |
+| `* *`    | forgetful event planner | write additional notes for an event or vendor    | keep track of miscellanous information regarding each events or remarks regarding a vendor     |
+| `* *`    | event planner           | rate vendors in the system                       | keep track of how good past experiences of working with the vendor were                        |
+| `* *`    | event planner           | open whatsapp or telegram from the app           | easily contact vendors without 'leaving' the address book                                      |
+| `* *`    | fast typer              | chain multiple commands together before entering | accomplish multiple actions without worrying about hitting the 'Enter' key after every command |
+| `* *`    | no mouse person         | navigate the address book using only keyboard    | use the app without a mouse                                                                    |
+| `* *`    | event planner           | set a progress status to an event or vendor      | keep track of completed and uncompleted transactions                                           |
+| `* *`    | event planner           | archive events                                   | clear events that are completed                                                                |
+| `* *`    | event planner           | block vendors                                    | avoid vendors that I had bad experiences with                                                  |
+| `*`      | finance administrator   | export event and vendor information into Excel   | use the information to create reports, track expenses, etc                                     |
+| `*`      | event planner           | add an attachment to an event                    | keep working files in the same location                                                        |
+| `*`      | event planner           | view attachments of an event                     | view working files in the same location                                                        |
 
 ### Use cases
 
