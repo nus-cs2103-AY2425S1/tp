@@ -324,7 +324,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5.  Should start up in less than 5 seconds on an average device running any _mainstream OS_ with Java `17` or above installed.
 6.  Should have automated backups of patient data every 6 hours. Daily full backups should be stored offsite.
 7.  In the event of data loss, the system must be able to recover from the latest backup with minimal data loss (less than 30 minutes of data).
-8.  A first-time user should be able to navigate and perform basic tasks (e.g., adding a patient, searching for records) within 10 minutes of using the platform without prior training.
+8.  A first-time user should be able to navigate and perform basic tasks (e.g. adding a patient, searching for records) within 10 minutes of using the platform without prior training.
 9.  The system should maintain comprehensive logs of all user actions, especially concerning patient record access, modifications, and deletions. These logs should be easily accessible for auditing purposes and stored for at least 5 years.
 
 ### Glossary
