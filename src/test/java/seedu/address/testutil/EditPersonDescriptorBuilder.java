@@ -81,6 +81,14 @@ public class EditPersonDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Paid} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withPaid(Boolean paid) {
+        descriptor.setPaid(paid);
+        return this;
+    }
+
     public EditPersonDescriptor build() {
         return descriptor;
     }
