@@ -39,11 +39,11 @@
   * [Implementation]({{ baseUrl }}/DeveloperGuide.html#implementation)
   * [Documentation, logging, testing, configuration, dev-ops]({{ baseUrl }}/DeveloperGuide.html#documentation-logging-testing-configuration-dev-ops)
   * [Appendix: Requirements]({{ baseUrl }}/DeveloperGuide.html#appendix-requirements)
-    *[Product Scope]({{ baseUrl }}/DeveloperGuide.html#product-scope)
-    *[User Stories]({{ baseUrl }}/DeveloperGuide.html#user-stories)
-    *[Use Cases]({{ baseUrl }}/DeveloperGuide.html#use-cases)
-    *[Non-Functional Requirements]({{ baseUrl }}/
-    *[Glossary]({{ baseUrl }}/DeveloperGuide.html#glossary)
+    * [Product Scope]({{ baseUrl }}/DeveloperGuide.html#product-scope)
+    * [User Stories]({{ baseUrl }}/DeveloperGuide.html#user-stories)
+    * [Use Cases]({{ baseUrl }}/DeveloperGuide.html#use-cases)
+    * [Non-Functional Requirements]({{ baseUrl }}/
+    * [Glossary]({{ baseUrl }}/DeveloperGuide.html#glossary)
   * [Appendix: Instructions for manual testing]({{ baseUrl }}/DeveloperGuide.html#appendix-instructions-for-manual-testing)
 * [About Us]({{ baseUrl }}/AboutUs.html)
       </site-nav>
