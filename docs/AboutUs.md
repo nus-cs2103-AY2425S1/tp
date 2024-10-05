@@ -10,7 +10,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 ## Project team
 
 ### Vinoth K.
-
 ![Vinoth-K.JPG](..%2F..%2F..%2F..%2F..%2FDownloads%2FVinoth-K.JPG)
 
 [[github](https://github.com/noth-k)]
@@ -18,41 +17,40 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Search Name Developer
 
-### Jane Doe
+### Goel Arnav
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/arnav-goel10.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/arnav-goel10)]
+[[portfolio](team/arnav-goel10.md)]
 
 * Role: Developer
-* Responsibilities: Data
 
-### Jean Doe
+### Jia Sheng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/rimgik.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/rimgik)]
+[[portfolio](team/rimgik.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Toh Heng Xing
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/tohhengxing.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/tohhengxing)]
+[[portfolio](team/tohhengxing.md)]
+
+* Role: Developer
+
+### Ng Yan Yee
+
+<img src="images/yyanyee.png" width="200px">
+
+[[github](http://github.com/yyanyee)]
+[[portfolio](team/yyanyee.md)]
 
 * Role: Developer
 * Responsibilities: UI
+
