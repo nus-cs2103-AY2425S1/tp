@@ -29,6 +29,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Member
 
+
 ### Chen Lei Yu
 
 <img src="images/chenleiyu.png" width="200px">

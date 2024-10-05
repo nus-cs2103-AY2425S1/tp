@@ -287,14 +287,16 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​                                    | I want to …​                                | So that I can…​                                                              |
+|----------|--------------------------------------------|---------------------------------------------|------------------------------------------------------------------------------|
+| `* * *`  | new user                                   | see usage instructions                      | refer to instructions when I forget how to use the App                       |
+| `* * *`  | gamer                                      | add a new gaming contact to my address book | keep track of my gaming friends and their details.                           |
+| `* * *`  | gamer                                      | delete a gaming contact                     | keep my address book up-to-date by removing inactive or irrelevant contacts. |
+| `* * *`  | gamer                                      | view my contact list                        | see who I have contact with                                                  |
+| `* * *`  | gamer                                      | tag my contacts with specific games         | easily find friends who play specific games                                  |
+| `* * *`  | user                                       | find a person by name                       | locate details of persons without having to go through the entire list       |
+| `* *`    | user                                       | hide private contact details                | minimize chance of someone else seeing them by accident                      |
+| `*`      | user with many persons in the address book | sort persons by name                        | locate a person easily                                                       |
 
 *{More to be added}*
 
