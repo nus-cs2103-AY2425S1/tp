@@ -286,7 +286,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                       | edit a record after submitting it  | I can make modifications to erroneous records which may have been submitted after keying a command in too quickly |
 | `* * *`  | user                       | delete a patient's record          | remove entries that I no longer need                                                                              |
 | `* * *`  | user                       | search for a patient by name or ID | I can quickly access their information when needed                                                                |
-| `* * *`  | user                       | Backup data 	                      | Patients data can be restored should the records be corrupted                                                     |
+| `* * *`  | user                       | backup data 	                      | Patients data can be restored should the records be corrupted                                                     |
 | `* * `   | user who may make mistakes | undo commands                      | I can reverse recently executed commands if the command should not have been executed                             |
 
 
