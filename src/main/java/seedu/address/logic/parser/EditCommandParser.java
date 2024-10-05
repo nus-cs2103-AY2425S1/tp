@@ -19,6 +19,7 @@ import java.util.Set;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.NRICMatchesPredicate;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.person.Nric;
 /**
@@ -77,7 +78,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(patientNric, editPersonDescriptor);
+        return new EditCommand(new NRICMatchesPredicate(patientNric), editPersonDescriptor);
     }
 
     /**

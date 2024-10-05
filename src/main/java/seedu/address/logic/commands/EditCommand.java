@@ -13,12 +13,12 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
+import java.util.logging.Logger;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.commons.core.index.Index;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -52,7 +52,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Patient: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This patient already exists in the address book.";
-
+    private static final Logger logger = LogsCenter.getLogger(EditCommand.class);
     private final NRICMatchesPredicate predicate;
     private final EditPersonDescriptor editPersonDescriptor;
 
@@ -116,12 +116,12 @@ public class EditCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditPersonDescriptor)) {
+        if (!(other instanceof EditCommand)) {
             return false;
         }
 
-        EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
-        return editPersonDescriptor.equals(otherEditPersonDescriptor.editPersonDescriptor);
+        EditCommand otherEditCommand = (EditCommand) other;
+        return editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
     }
 
     @Override
