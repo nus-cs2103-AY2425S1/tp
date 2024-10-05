@@ -57,7 +57,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Tan Jia Jun
 
-<img src="images/JJtan2002.png" width="200px">
+<img src="images/jjtan2002.png" width="200px">
 
 [[github](http://github.com/JJtan2002)]
 [[portfolio](team/JJtan2002.md)]
