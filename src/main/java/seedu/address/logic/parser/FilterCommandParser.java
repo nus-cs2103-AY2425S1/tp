@@ -2,19 +2,18 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import seedu.address.logic.commands.FilterCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-
-import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.address.logic.commands.FilterCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses input for filter and creates an instance of FilterCommand
  */
 public class FilterCommandParser implements Parser<FilterCommand> {
     //regex to filter the input to extract NAME and/or TAG
     private static final Pattern FILTER_COMMAND_FORMAT = Pattern.compile("(?i)(n/(?<name>\\S+))?\\s*(t/(?<tag>\\S+))?");
+
     /**
      * Parses the given {@code String} of arguments in the context of the FilterCommand
      * and returns a FilterCommand object for execution.

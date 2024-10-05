@@ -27,7 +27,7 @@ public class FilterCommand extends Command {
     private final String tagName;
 
     /**
-    * Class that handles FilterCommand
+     * Class that handles FilterCommand
      */
     public FilterCommand(String name, String tagName) {
         this.name = name;
@@ -43,7 +43,8 @@ public class FilterCommand extends Command {
                     || person.getName().toString().toLowerCase().contains(name.toLowerCase());
             boolean tagMatches = tagName == null || tagName.isEmpty()
                     || person.getTags().stream().anyMatch(tag -> tag.tagName.equalsIgnoreCase(tagName));
-            return nameMatches && tagMatches;
+            return nameMatches
+                    && tagMatches;
         };
 
         model.updateFilteredPersonList(predicate);
@@ -83,11 +84,11 @@ public class FilterCommand extends Command {
 
         FilterCommand otherCommand = (FilterCommand) other;
 
-        boolean isNameEqual = (name == null && otherCommand.name == null) ||
-                (name != null && name.equals(otherCommand.name));
+        boolean isNameEqual = (name == null && otherCommand.name == null)
+                || (name != null && name.equals(otherCommand.name));
 
-        boolean isTagNameEqual = (tagName == null && otherCommand.tagName == null) ||
-                (tagName != null && tagName.equals(otherCommand.tagName));
+        boolean isTagNameEqual = (tagName == null && otherCommand.tagName == null)
+                || (tagName != null && tagName.equals(otherCommand.tagName));
 
         return isNameEqual && isTagNameEqual;
     }
