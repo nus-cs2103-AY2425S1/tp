@@ -274,6 +274,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
+* User is a event organiser / planner
 * has a need to manage a significant number of contacts
 * prefer desktop apps over other types
 * can type fast
@@ -332,34 +333,132 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
-### Use cases
+### Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Eventory` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+---
 
-**MSS**
+#### **Use Case 1: Delete a person**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+**Main Success Scenario (MSS)**
 
-    Use case ends.
+1. User requests to list persons.
+2. Eventory shows a list of persons.
+3. User requests to delete a specific person in the list.
+4. Eventory deletes the person.
 
 **Extensions**
 
-* 2a. The list is empty.
+- **2a.** The list is empty.  
+  *Use case ends.*
 
-  Use case ends.
+- **3a.** The given index is invalid.  
+    - **3a1.** Eventory shows an error message.  
+      *Use case resumes at step 2.*
 
-* 3a. The given index is invalid.
+  *Use case ends.*
 
-    * 3a1. AddressBook shows an error message.
+---
 
-      Use case resumes at step 2.
+#### **Use Case 2: Add a person**
 
-*{More to be added}*
+**Main Success Scenario (MSS)**
+
+1. User requests to add a person.
+2. Eventory adds the person.
+
+**Extensions**
+
+- **2a.** The given format is invalid.  
+    - **2a1.** Eventory shows an error message.  
+      *Use case resumes at step 1.*
+
+  *Use case ends.*
+
+---
+
+#### **Use Case 3: Editing a person**
+
+**Main Success Scenario (MSS)**
+
+1. User requests to list persons.
+2. Eventory shows a list of persons.
+3. User requests to edit a person.
+4. Eventory edits the person.  
+   *Use case ends.*
+
+**Extensions**
+
+- **2a.** The list is empty.  
+  *Use case ends.*
+
+- **3a.** The given index is invalid.  
+    - **3a1.** Eventory shows an error message.  
+      *Use case resumes at step 2.*
+
+  *Use case ends.*
+
+---
+
+#### **Use Case 4: Finding a person**
+
+**Main Success Scenario (MSS)**
+
+1. User requests to find a person.
+2. Eventory returns a list of relevant people.  
+   *Use case ends.*
+
+- **2a.** The list is empty.  
+  *Use case ends.*
+  
+---
+
+#### **Use Case 5: Clearing the Eventory**
+
+**Main Success Scenario (MSS)**
+
+1. User requests to clear Eventory contacts.
+2. Eventory removes all contacts in memory. 
+   *Use case ends.*
+
+---
+
+#### **Use Case 6: Listing contacts**
+
+**Main Success Scenario (MSS)**
+
+1. User requests for list of contacts in Eventory.
+2. Eventory shows all contacts.
+
+**Extensions**
+
+- **2a.** The list is empty.  
+  *Use case ends.*
+
+*Use case ends.*
+
+---
+
+#### **Use Case 7: Requesting for help**
+
+**Main Success Scenario (MSS)**
+
+1. User requests help in Eventory.
+2. Eventory displays all commands.
+   *Use case ends.*
+
+---
+
+#### **Use Case 8: Exiting programme**
+
+**Main Success Scenario (MSS)**
+
+1. User exits the programme.
+2. Eventory closes.  
+   *Use case ends.*
+
+---
 
 ### Non-Functional Requirements
 
