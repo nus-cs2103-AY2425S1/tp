@@ -5,6 +5,7 @@
     "phone": "9482424",
     "email": "invalid@email!3e",
     "address": "4th street",
-    "contactDates" : [ "2024-09-28" ]
+    "contactDates" : [ "2024-09-28" ],
+    "callFrequency" : "7"
   } ]
 }

@@ -7,7 +7,8 @@
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "tags" : [ "friends" ],
-    "contactDates" : [ "2024-09-28" ]
+    "contactDates" : [ "2024-09-28" ],
+    "callFrequency": "7"
   }, {
     "nric" : "S0233700B",
     "name" : "Benson Meier",
@@ -15,7 +16,8 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "tags" : [ "owesMoney", "friends" ],
-    "contactDates" : [ "2024-09-28" ]
+    "contactDates" : [ "2024-09-28" ],
+    "callFrequency": "7"
   }, {
     "nric" : "S6192793Z",
     "name" : "Carl Kurz",
@@ -23,7 +25,8 @@
     "email" : "heinz@example.com",
     "address" : "wall street",
     "tags" : [ ],
-    "contactDates" : [ "2024-09-28" ]
+    "contactDates" : [ "2024-09-28" ],
+    "callFrequency": "7"
   }, {
     "nric" : "S0589789J",
     "name" : "Daniel Meier",
@@ -31,7 +34,8 @@
     "email" : "cornelia@example.com",
     "address" : "10th street",
     "tags" : [ "friends" ],
-    "contactDates" : [ "2024-09-28" ]
+    "contactDates" : [ "2024-09-28" ],
+    "callFrequency": "7"
   }, {
     "nric" : "S5674593I",
     "name" : "Elle Meyer",
@@ -39,7 +43,8 @@
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "tags" : [ ],
-    "contactDates" : [ "2024-09-28" ]
+    "contactDates" : [ "2024-09-28" ],
+    "callFrequency": "7"
   }, {
     "nric" : "S1092693I",
     "name" : "Fiona Kunz",
@@ -47,7 +52,8 @@
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "tags" : [ ],
-    "contactDates" : [ "2024-09-28" ]
+    "contactDates" : [ "2024-09-28" ],
+    "callFrequency": "7"
   }, {
     "nric" : "S8596794J",
     "name" : "George Best",
@@ -55,6 +61,7 @@
     "email" : "anna@example.com",
     "address" : "4th street",
     "tags" : [ ],
-    "contactDates" : [ "2024-09-28" ]
+    "contactDates" : [ "2024-09-28" ],
+    "callFrequency": "7"
   } ]
 }
