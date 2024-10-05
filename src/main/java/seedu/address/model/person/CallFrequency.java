@@ -15,6 +15,11 @@ public class CallFrequency {
 
     public final String value;
 
+    /**
+     * Constructs a {@code CallFrequency}.
+     *
+     * @param callFrequency A valid date.
+     */
     public CallFrequency(String callFrequency) {
         requireNonNull(callFrequency);
         checkArgument(isValidCallFrequency(callFrequency), MESSAGE_CONSTRAINTS);

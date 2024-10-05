@@ -1,12 +1,12 @@
 package seedu.address.model.contactdate;
 
-import seedu.address.model.person.CallFrequency;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
+import seedu.address.model.person.CallFrequency;
 
 /**
  * Represents a Person's contacted date in the address book.
