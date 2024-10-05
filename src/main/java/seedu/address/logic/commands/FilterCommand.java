@@ -2,12 +2,12 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.List;
+import java.util.function.Predicate;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-
-import java.util.List;
-import java.util.function.Predicate;
 
 /**
  * Filters the contact list based on name and/or tags.
@@ -26,7 +26,9 @@ public class FilterCommand extends Command {
     private final String name;
     private final String tagName;
 
-
+    /**
+    * Class that handles FilterCommand
+     */
     public FilterCommand(String name, String tagName) {
         this.name = name;
         this.tagName = tagName;
@@ -37,10 +39,10 @@ public class FilterCommand extends Command {
         requireNonNull(model);
 
         Predicate<Person> predicate = person -> {
-            boolean nameMatches = name == null || name.isEmpty() ||
-                    person.getName().toString().toLowerCase().contains(name.toLowerCase());
-            boolean tagMatches = tagName == null || tagName.isEmpty() ||
-                    person.getTags().stream().anyMatch(tag -> tag.tagName.equalsIgnoreCase(tagName));
+            boolean nameMatches = name == null || name.isEmpty()
+                    || person.getName().toString().toLowerCase().contains(name.toLowerCase());
+            boolean tagMatches = tagName == null || tagName.isEmpty()
+                    || person.getTags().stream().anyMatch(tag -> tag.tagName.equalsIgnoreCase(tagName));
             return nameMatches && tagMatches;
         };
 

@@ -40,7 +40,9 @@ public class FilterCommandParserTest {
     //input with flag but no name or tag
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "n/   t/", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "n/   t/",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
     }
 
 }
+
