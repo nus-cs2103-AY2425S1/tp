@@ -262,13 +262,17 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
+* people who work in management/administration of tuition centres
+* has a need to manage a significant number of staff/students
+* tuition centre managed is of small to medium size (roughly a few hundred students)
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Centralizes contact details, tracks student data, maintains a teacher directory, and offers functions that improve administrative efficiency and organization for a tuition centre.
+
+
 
 
 ### User stories
@@ -277,13 +281,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                           | I want to …​                       | So that I can…​                                                         |
 |----------|-----------------------------------|------------------------------------|-------------------------------------------------------------------------|
-| `* * *`  | administrator of a tuition centre | view all students' contact details | easily access everyone's details at one place??                         |
-| `* * *`  | administrator of a tuition centre | add a new person                   | add new contacts for newly enrolled students                            |
-| `* * *`  | administrator of a tuition centre | delete a student                   | remove students that are no longer enrolled                             |
-| `* * *`  | administrator of a tuition centre | find a student by name             | locate details of students without having to go through the entire list |
-| `* *`    |                                   |                                    |                                                                         |
-| `*`      | new user                          | see what commands are available    | refer to instructions when I forget how to use the App                  |
-| `*`      | administrator                     | add emergency contact to a student | quickly find out who to contact at once glance if the situation arises  |
+| `* * *`  | administrator of a tuition centre | view all students' contact details | easily access everyone's details in a consolidated place                         |
+| `* * *`  | administrator of a tuition centre | add a new person                   | add new contacts for newly enrolled students                      |
+| `* * *`  | administrator of a tuition centre | delete a student                   | remove students that are no longer enrolled                      |
+| `* * *`  | administrator of a tuition centre | find a student by name             | locate details of students without having to go through the entire list       |
+|  `**`    | administrator of a tuition centre | edit a student's details           | update their details accordingly when there are changes to be made            |
+| `*`      | new user                          | see what commands are available    | refer to instructions when I forget how to use the App                           |
+| `*`      | administrator of a tuition centre | add emergency contact to a student | quickly find out who to contact at once glance if the situation arises          |
 
 *{More to be added}*
 
@@ -339,9 +343,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+#### Data Requirements
+1.  Should be able to hold up to 500 persons including personal details, contact information, and emergency contacts, without a significant performance drop.
+2.  All data should be persistent, meaning it must be saved locally/cloud-based database even after the application is closed, ensuring no data loss between sessions.
+
+#### Environment Requirements
+3.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+4.   A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+
+#### Documentation
+5.  Comprehensive user guides and FAQs should be provided to guide users through installation, configuration, and typical use cases.
+
+#### Maintainability
+6.  Codebase should follow industry best practices for readability, including consistent naming conventions for easy maintenance.
+7.  The app should follow a modular design so that individual components can be updated without affecting the entire app.
+
+#### Robustness 
+8.  The system should gracefully handle unexpected inputs, preventing crashes and allowing users to recover from errors.
+
+#### Testability
+9.  The system should include automated unit tests and integration tests to validate all major components.
 
 *{More to be added}*
 
@@ -349,6 +370,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Administrator**: Tutors and admin staff at the tuition centre.
+* **CLI (Command Line Interface)**: A text-based interface that allows users to interact with software by typing commands.
+* **Emergency Contact**: A secondary contact person, typically a guardian or family member, to reach out in case of an emergency involving a student.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
