@@ -15,6 +15,11 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "addTxn";
 
     /**
+     * The message that is displayed upon successful execution of this command.
+     */
+    public static final String MESSAGE_SUCCESS = "TODO: implement add";
+
+    /**
      * The message usage string that explains how to use this command.
      */
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add a new transaction.\n"
@@ -29,7 +34,7 @@ public class AddCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult("TODO: implement add", false, false);
+        return new CommandResult(MESSAGE_SUCCESS, false, false);
     }
 
 }

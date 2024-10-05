@@ -61,8 +61,13 @@ public class LogicManagerTest {
 
     @Test
     public void execute_validCommand_success() throws Exception {
+        // Test both addressBook and transaction command
         String listCommand = ListCommand.COMMAND_WORD;
+        String addTxnCommand = spleetwaise.transaction.logic.commands.AddCommand.COMMAND_WORD;
+
         assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, addressBookModel, transactionModel);
+        assertCommandSuccess(addTxnCommand, spleetwaise.transaction.logic.commands.AddCommand.MESSAGE_SUCCESS,
+            addressBookModel, transactionModel);
     }
 
     @Test
