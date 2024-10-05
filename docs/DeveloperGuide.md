@@ -300,16 +300,44 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `UniLink` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC001 - Add a new contact**
+
+**MSS**
+
+1.  User requests to add a new contact
+2.  User enters the required contact details
+3.  UniLink adds the new contact
+4.  UniLink displays the updated contact list
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The entered data is invalid
+  * 2a1. UniLink shows an error message
+  * 2a2. User enters new data
+  
+    Steps 2a1-2a2 are repeated until the data entered is correct.
+
+    Use case resumes from step 3.
+
+* 2b. User enters a duplicate contact.
+
+    * 2b1. UniLink shows an error message.
+
+      Use case ends.
+
+
+**Use case: UC002 - Delete a person**
 
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  UniLink shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  UniLink deletes the person
 
     Use case ends.
 
@@ -321,11 +349,62 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. UniLink shows an error message.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: UC003 - Edit a contact**
+
+**MSS**
+
+1.  User requests to list persons
+2.  UniLink shows a list of persons
+3.  User requests to edit a specific person in the list
+4.  User enters the new details to be updated 
+5.  UniLink updates the contact
+6.  UniLink displays the updated contact list
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. UniLink shows an error message.
+
+      Use case resumes at step 2.
+
+* 4a. The entered data is invalid
+    * 4a1. UniLink shows an error message
+    * 4a2. User enters new data
+
+  Steps 4a1-4a2 are repeated until the data entered is correct.
+
+  Use case resumes from step 5.
+
+* 4b. The edited contact results in a duplicate
+  * 4b1. UniLink shows an error message
+    Use case ends.
+
+**Use case: UC004 - View contact list**
+
+**MSS**
+
+1.  User requests to list persons
+2.  UniLink shows a list of persons
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
 
 ### Non-Functional Requirements
 
