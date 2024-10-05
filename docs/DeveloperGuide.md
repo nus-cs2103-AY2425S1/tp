@@ -293,51 +293,159 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `administrator`, unless specified otherwise)
+(For all use cases below, the **System** is the `AcademyAssist` and the **Actor** is the `administrator`, unless specified otherwise)
 
-**Use case: Add a person**
+**Use case: UC1 - Add a person**
 
 **MSS**
 
 1. User requests to add a student
 2. User provides the details of the student
-3. AddressBook adds the person
+3. System confirms student has been added and displays list of updated students 
 
-    Use case ends.
+    Use case ends
 
    **Extensions**
 
-* 2a. The format of the details provided are incorrect.
-  * 2a1. AddressBook requests input in correct format.
-  
-    Use case resumes at step 2
-* 2b. The student entered has already been added. 
-  * 2b1. AddressBook indicates that there has already been an entry for the student.
-  
-    Use case resumes at step 2
+* 2a. The name is not provided/invalid format
+  * 2a1. System requests name in correct format
+  * 2a2. User re-enters the correct/missing name
 
-**Use case: Delete a person**
+    Steps 2a1-2a2 are repeated until the name in the specified format is provided
+    Use case resumes at step 3
+
+* 2b. The student entered has already been added
+  * 2b1. System indicates that there has already been an entry for the student
+  
+    Use case ends
+
+* 2c. The phone number is missing or invalid
+  * 2c1. System requests for a valid phone number
+  * 2c2. User re-enters the correct phone number.
+
+    Steps 2c1-2c2 are repeated until a valid phone number is provided
+    Use case resumes from step 3
+
+* 2d. The IC/FIN number is missing or invalid
+  * 2d1. System requests for a valid IC/FIN number
+  * 2d2. User re-enters the correct IC/FIN number
+
+    Steps 2d1-2d2 are repeated until a valid IC/FIN number is provided
+    Use case resumes from step 3
+
+* 2e. The email is invalid
+  * 2e1. System requests for a valid email
+  * 2e2. User re-enters the correct email
+
+    Steps 2e1-2e2 are repeated until a valid email is provided
+    Use case resumes from step 3
+
+* 2f. The class taken/academic year is missing or invalid 
+  * 2f1. System requests for a valid class/academic year
+  * 2f2. User re-enters the correct class/academic year
+
+    Steps 2f1-2f2 are repeated until a valid class/academic year is provided
+    Use case resumes from step 3
+
+---
+
+**Use case: UC2 - Delete a person**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User chooses to delete a student
+2. System deletes the student's information
+3. System informs user that the student has been successfully deleted
 
-    Use case ends.
+    Use case ends
 
-**Extensions**
+   **Extensions**
 
-* 2a. The list is empty.
+* 1a. The format of the details provided are incorrect
+  * 1a1. System requests input in correct format
+  * 1a2. User re-enters the correct/missing details
 
-  Use case ends.
+    Steps 1a1-1a2 are repeated until the fields in the specified format are provided
+    Use case resumes at step 2
 
-* 3a. The given index is invalid.
+---
 
-    * 3a1. AddressBook shows an error message.
+**Use case: UC3 - Edit a person**
 
-      Use case resumes at step 2.
+**MSS**
+
+1. User chooses to edit a student's details
+2. System updates the student's details based on new input
+3. System informs user that details have been updated
+
+    Use case ends
+
+   **Extensions**
+
+* 1a. User enters an incorrect format for the Student ID
+  * 1a1. System requests input in correct format
+  * 1a2. User re-enters the correct Student ID
+
+    Steps 1a1-1a2 are repeated until the correct format is entered
+    Use case resumes from step 2
+
+* 1b. User enters an invalid format for the field or new input.
+  * 1b1. System requests for input in correct format
+  * 1b2. User re-enters the correct field and new input
+
+    Steps 1b1-1b2 are repeated until the correct format is entered.
+    Use case resumes from step 2.
+
+---
+
+**Use case: UC4 - View all people**
+
+**MSS**
+
+1. User chooses to view all student contact details 
+2. System displays a list of students with their relevant details
+
+    Use case ends 
+
+   **Extensions**
+
+* 1a. System encounters an internal error while retrieving student details
+  * 1a1. System displays an error message
+
+    Use case ends
+
+* 1b. No students are found in the system
+  * 1b1. System informs user that there are no students added 
+
+    Use case ends
+
+---
+
+**Use case: UC5 - Finding a person**
+
+**MSS**
+
+1. User initiates a search for a specific student
+2. System displays the details of the matching student(s)
+
+    Use case ends
+
+   **Extensions**
+
+* 1a. User enters an incorrect format or invalid name
+  * 1a1. System requests for input in correct format
+  * 1a2. User re-enters the correct input
+
+    Steps 1a1-1a2 are repeated until the correct command is entered.
+    Use case resumes from step 2.
+
+* 1b. No matching student found in the system
+  * 1b1. System informs user that there are no such students found
+
+    Use case ends
+
+---
+
 
 *{More to be added}*
 
