@@ -374,7 +374,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. AddressBook shows an error message.
 
       Use case resumes at step 2.
-  
+
 * 3a. HRHelper gives user the option to view the given person
 
   Use case ends.
