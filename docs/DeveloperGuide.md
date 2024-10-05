@@ -332,8 +332,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4.  Should be for a single user (i.e. not a multi-user product).
+5.  Data should be stored locally and should be in a human editable text file.
+6.  Should not use DBMS to store data.
+7.  Should follow the Object-oriented paradigm primarily.
+8.  Should work without requiring an installer.
+9.  Should not depend on any remote server.
+10. Use of third-party frameworks/libraries/services is subject to approval by the teaching team.
+11. GUI should work well (i.e., should not cause any resolution-related inconveniences to the user) for standard screen resolutions 1920x1080 and higher and for screen scales 100% and 125%. In addition, the GUI should be usable (i.e., all functions can be used even if the user experience is not optimal) for resolutions 1280x720 and higher and for screen scales 150%.
+12. Should be packaged into a single JAR file not exceeding 100MB.
+13. Documents should not exceed 15MB/file.
+14. DG and UG should be PDF-friendly (no expandable panels, embedded videos, animated GIFs etc.).
+15. Should primarily take in command line interface (CLI) inputs (i.e. input should primarily be text commands with minimal non-CLI inputs such as clicking).
+16. All user operations should complete within 100 ms.
+17. Product should be developed in a breadth-first incremental manner over the project duration.
+18. Final product should be a result of evolving/enhancing/morphing the given codebase.
 
 ### Glossary
 
