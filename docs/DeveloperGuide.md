@@ -123,7 +123,7 @@ How the parsing works:
 
 The `Model` component,
 
-* `Vendor` and `Guest` both extend from the abstract `People` class, which defines common attributes and behaviors shared by both types of entities.
+* `Vendor` and `Guest` both extend from the abstract `Person` class, which defines common attributes and behaviors shared by both types of entities.
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
@@ -300,7 +300,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                    | I want to …​                                                     | So that I can…​                                                                  |
 |----------|----------------------------|------------------------------------------------------------------|----------------------------------------------------------------------------------|
 | `* * *`  | forgetful wedding planner  | add a new guest/vendor into the contact list                     | easily track and manage guests/vendors for the wedding                           |
-| `* * *`  | organized wedding planner  | view a list of guests/vendors                                    | easily access and reference their details.                                       |
+| `* * *`  | organized wedding planner  | view a list of guests/vendors                                    | easily access and reference their details                                        |
 | `* * *`  | organized wedding planner  | delete a guest/vendor contact that I no longer need              | keep my contact list organised and clutter-free                                  |
 | `* * *`  | meticulous wedding planner | edit the details of an existing guest/vendor in the contact list | correct mistakes and ensure that all information remains accurate and up-to-date |
 | `* *`    | organised wedding planner  | categorise attendees (family members, friends, vendors)          | keep track of different groups involved in the wedding                           |
@@ -329,26 +329,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. System tells the user the command is unrecognised.
 
       Use case ends.
-
-
-**Use Case: Read/Print Out Entries**
-
-**MSS**
-1. User requests to view or print all people.
-2. System displays or prints the list of all people.
-
-   Use case ends.
-
-**Extensions**
-* 1a. The input command was invalid (i.e. spelling error, etc.).
-    * 1a1. System tells the user the command is unrecognised.
-
-      Use case ends.
-
-* 2a. No entries exist.
-
-  Use case ends.
-
 
 **Use Case: Update Details of Person**
 
@@ -436,7 +416,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 Data Requirements
 1. Size: The system should support storage for up to 500 guests and 50 vendors per wedding. Data size should not exceed 10 MB for each wedding event.
 2. Volatility: Guest lists and vendor details may change frequently, especially closer to the event date. Therefore, the system must accommodate dynamic data updates and edits.
-3. Persistency: All guest, vendor, and event information must be saved persistently in a txt file and remain accessible even after system shutdown or failure.
+3. Persistency: All guest, vendor, and event information must be saved persistently in a text file and remain accessible even after system shutdown or failure.
 4. Backup Frequency: Automatic backups of data should be created whenever the application is closed.
 
 Environment Requirements
@@ -448,20 +428,16 @@ Accessibility
 7. Provide command-line help documentation that can be accessed at any time with a simple command (help).
 
 Capacity
-
 8. The system should be able to handle data storage for up to 100 simultaneous weddings, each containing up to 500 guests and 50 vendors.
 
-Compliance with Regulations
-9. The system must comply with data privacy regulations, including GDPR, ensuring that personal information such as guest addresses and phone numbers are securely handled and stored.
-
 Fault Tolerance
-10. The system should handle errors such as missing commands or invalid input gracefully, providing clear error messages without causing system crashes.
-11. Ensure that invalid input (e.g., incorrect phone format) does not result in data corruption.
+9. The system should handle errors such as missing commands or invalid input gracefully, providing clear error messages without causing system crashes.
+10. Ensure that invalid input (e.g., incorrect phone format) does not result in data corruption.
 
 Performance Requirements
-12. The system should respond to user input within two seconds, even for lists of up to 500 guests and 50 vendors.
-13. Backup operations must complete within five seconds for a wedding list of up to 500 entries.
-14. System startup time should not exceed five seconds on standard hardware.
+11. The system should respond to user input within two seconds, even for lists of up to 500 guests and 50 vendors. 
+12. Backup operations must complete within five seconds for a wedding list of up to 500 entries. 
+13. System startup time should not exceed five seconds on standard hardware.
 
 
 ### Glossary
