@@ -16,8 +16,6 @@ import spleetwaise.address.logic.commands.CommandTestUtil;
 import spleetwaise.address.logic.commands.ListCommand;
 import spleetwaise.address.logic.commands.exceptions.CommandException;
 import spleetwaise.address.logic.parser.exceptions.ParseException;
-import spleetwaise.address.model.Model;
-import spleetwaise.address.model.ModelManager;
 import spleetwaise.address.model.ReadOnlyAddressBook;
 import spleetwaise.address.model.UserPrefs;
 import spleetwaise.address.model.person.Person;
@@ -29,6 +27,7 @@ import spleetwaise.address.testutil.PersonBuilder;
 import spleetwaise.address.testutil.TypicalPersons;
 
 public class LogicManagerTest {
+
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
     private static final IOException DUMMY_AD_EXCEPTION = new AccessDeniedException("dummy access denied exception");
 
@@ -42,7 +41,7 @@ public class LogicManagerTest {
     @BeforeEach
     public void setUp() {
         JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
+            new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
         logic = new LogicManager(addressBookModel, transactionModel, storage);
@@ -63,19 +62,19 @@ public class LogicManagerTest {
     @Test
     public void execute_validCommand_success() throws Exception {
         String listCommand = ListCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, addressBookModel);
+        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, addressBookModel, transactionModel);
     }
 
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
         assertCommandFailureForExceptionFromStorage(DUMMY_IO_EXCEPTION, String.format(
-                LogicManager.FILE_OPS_ERROR_FORMAT, DUMMY_IO_EXCEPTION.getMessage()));
+            LogicManager.FILE_OPS_ERROR_FORMAT, DUMMY_IO_EXCEPTION.getMessage()));
     }
 
     @Test
     public void execute_storageThrowsAdException_throwsCommandException() {
         assertCommandFailureForExceptionFromStorage(DUMMY_AD_EXCEPTION, String.format(
-                LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT, DUMMY_AD_EXCEPTION.getMessage()));
+            LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT, DUMMY_AD_EXCEPTION.getMessage()));
     }
 
     @Test
@@ -84,22 +83,27 @@ public class LogicManagerTest {
     }
 
     /**
-     * Executes the command and confirms that
-     * - no exceptions are thrown <br>
-     * - the feedback message is equal to {@code expectedMessage} <br>
-     * - the internal model manager state is the same as that in {@code expectedModel} <br>
-     * @see #assertCommandFailure(String, Class, String, Model)
+     * Executes the command and confirms that - no exceptions are thrown <br> - the feedback message is equal to
+     * {@code expectedMessage} <br> - the internal model manager state is the same as that in {@code expectedModel}
+     * <br>
+     *
+     * @see #assertCommandFailure(String, Class, String, spleetwaise.address.model.Model,
+     * spleetwaise.transaction.model.Model)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
-            Model expectedModel) throws CommandException, ParseException {
+        spleetwaise.address.model.Model expectedAddressBookModel,
+        spleetwaise.transaction.model.Model expectedTransactionModel) throws CommandException, ParseException {
         CommandResult result = logic.execute(inputCommand);
         assertEquals(expectedMessage, result.getFeedbackToUser());
-        assertEquals(expectedModel, addressBookModel);
+        assertEquals(expectedAddressBookModel, addressBookModel);
+        assertEquals(expectedTransactionModel, transactionModel);
     }
 
     /**
      * Executes the command, confirms that a ParseException is thrown and that the result message is correct.
-     * @see #assertCommandFailure(String, Class, String, Model)
+     *
+     * @see #assertCommandFailure(String, Class, String, spleetwaise.address.model.Model,
+     * spleetwaise.transaction.model.Model)
      */
     private void assertParseException(String inputCommand, String expectedMessage) {
         assertCommandFailure(inputCommand, ParseException.class, expectedMessage);
@@ -107,7 +111,9 @@ public class LogicManagerTest {
 
     /**
      * Executes the command, confirms that a CommandException is thrown and that the result message is correct.
-     * @see #assertCommandFailure(String, Class, String, Model)
+     *
+     * @see #assertCommandFailure(String, Class, String, spleetwaise.address.model.Model,
+     * spleetwaise.transaction.model.Model)
      */
     private void assertCommandException(String inputCommand, String expectedMessage) {
         assertCommandFailure(inputCommand, CommandException.class, expectedMessage);
@@ -115,31 +121,40 @@ public class LogicManagerTest {
 
     /**
      * Executes the command, confirms that the exception is thrown and that the result message is correct.
-     * @see #assertCommandFailure(String, Class, String, Model)
+     *
+     * @see #assertCommandFailure(String, Class, String, spleetwaise.address.model.Model,
+     * spleetwaise.transaction.model.Model)
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
-            String expectedMessage) {
-        Model expectedModel = new ModelManager(addressBookModel.getAddressBook(), new UserPrefs());
-        assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
+        String expectedMessage) {
+        spleetwaise.address.model.Model expectedAddressBookModel =
+            new spleetwaise.address.model.ModelManager(addressBookModel.getAddressBook(), new UserPrefs());
+
+        spleetwaise.transaction.model.Model expectedTransactionModel = new spleetwaise.transaction.model.ModelManager();
+        assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedAddressBookModel,
+            expectedTransactionModel);
     }
 
     /**
-     * Executes the command and confirms that
-     * - the {@code expectedException} is thrown <br>
-     * - the resulting error message is equal to {@code expectedMessage} <br>
-     * - the internal model manager state is the same as that in {@code expectedModel} <br>
-     * @see #assertCommandSuccess(String, String, Model)
+     * Executes the command and confirms that - the {@code expectedException} is thrown <br> - the resulting error
+     * message is equal to {@code expectedMessage} <br> - the internal model manager state is the same as that in
+     * {@code expectedModel} <br>
+     *
+     * @see #assertCommandSuccess(String, String, spleetwaise.address.model.Model, spleetwaise.transaction.model.Model)
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
-            String expectedMessage, Model expectedModel) {
+        String expectedMessage,
+        spleetwaise.address.model.Model expectedAddressBookModel,
+        spleetwaise.transaction.model.Model expectedTransactionModel) {
         Assert.assertThrows(expectedException, expectedMessage, () -> logic.execute(inputCommand));
-        assertEquals(expectedModel, addressBookModel);
+        assertEquals(expectedAddressBookModel, addressBookModel);
+        assertEquals(expectedTransactionModel, transactionModel);
     }
 
     /**
      * Tests the Logic component's handling of an {@code IOException} thrown by the Storage component.
      *
-     * @param e the exception to be thrown by the Storage component
+     * @param e               the exception to be thrown by the Storage component
      * @param expectedMessage the message expected inside exception thrown by the Logic component
      */
     private void assertCommandFailureForExceptionFromStorage(IOException e, String expectedMessage) {
@@ -148,24 +163,29 @@ public class LogicManagerTest {
         // Inject LogicManager with an AddressBookStorage that throws the IOException e when saving
         JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(prefPath) {
             @Override
-            public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath)
-                    throws IOException {
+            public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
                 throw e;
             }
         };
 
         JsonUserPrefsStorage userPrefsStorage =
-                new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
+            new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
         logic = new LogicManager(addressBookModel, transactionModel, storage);
 
         // Triggers the saveAddressBook method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + CommandTestUtil.NAME_DESC_AMY + CommandTestUtil.PHONE_DESC_AMY
-                + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.ADDRESS_DESC_AMY;
+            + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.ADDRESS_DESC_AMY;
         Person expectedPerson = new PersonBuilder(TypicalPersons.AMY).withTags().build();
-        ModelManager expectedModel = new ModelManager();
-        expectedModel.addPerson(expectedPerson);
-        assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
+
+        spleetwaise.address.model.Model expectedAddressBookModel = new spleetwaise.address.model.ModelManager();
+        expectedAddressBookModel.addPerson(expectedPerson);
+
+        spleetwaise.transaction.model.Model expectedTransactionModel =
+            new spleetwaise.transaction.model.ModelManager();
+
+        assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedAddressBookModel,
+            expectedTransactionModel);
     }
 }
