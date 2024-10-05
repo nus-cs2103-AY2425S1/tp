@@ -24,6 +24,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ViewStatusCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Job;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -103,7 +104,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_viewStatus() throws Exception {
-        String userInput = "view n/John Doe j/Software engineer";
+        String userInput = "view n/John Doe j/Software Engineer";
         ViewStatusCommand command = (ViewStatusCommand) parser.parseCommand(userInput);
 
         // Check that the parsed command is an instance of ViewStatusCommand
@@ -111,7 +112,8 @@ public class AddressBookParserTest {
 
         // Verify the parsed command details
         Name expectedName = new Name("John Doe");
-        ViewStatusCommand expectedCommand = new ViewStatusCommand(expectedName, "Software engineer");
+        Job job = new Job("Software Engineer");
+        ViewStatusCommand expectedCommand = new ViewStatusCommand(expectedName, job);
 
         // Assert the values of the parsed command match the expected command
         assertEquals(expectedCommand.name, command.name);

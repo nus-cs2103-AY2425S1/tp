@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.ViewStatusCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Job;
 import seedu.address.model.person.Name;
 
 /**
@@ -30,8 +31,9 @@ public class ViewStatusCommandParser {
         }
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        Job job = ParserUtil.parseJob(argMultimap.getValue(PREFIX_JOB).get());
 
-        return new ViewStatusCommand(name, "Software engineer");
+        return new ViewStatusCommand(name, job);
     }
 
     /**

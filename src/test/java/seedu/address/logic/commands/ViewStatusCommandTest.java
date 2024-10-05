@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.person.Job;
 import seedu.address.model.person.Name;
 
 
@@ -17,7 +18,7 @@ public class ViewStatusCommandTest {
     @Test
     public void constructor_validInput_success() {
         Name name = new Name("John Doe");
-        String job = "Software Engineer";
+        Job job = new Job("Software Engineer");
 
         ViewStatusCommand command = new ViewStatusCommand(name, job);
 
@@ -30,7 +31,7 @@ public class ViewStatusCommandTest {
     public void execute_commandNotImplementedYet_throwsCommandException() {
         Model model = new ModelManager();
         Name name = new Name("John Doe");
-        String job = "Software Engineer";
+        Job job = new Job("Software Engineer");
 
         ViewStatusCommand command = new ViewStatusCommand(name, job);
 
