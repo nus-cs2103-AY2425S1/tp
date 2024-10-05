@@ -40,6 +40,22 @@ public class ViewStatusCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        throw new CommandException("Remark command not implemented yet");
+        throw new CommandException(" View command not implemented yet");
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ViewStatusCommand)) {
+            return false;
+        }
+
+        ViewStatusCommand e = (ViewStatusCommand) other;
+        return name.equals(e.name)
+                && job.equals(e.job);
     }
 }
