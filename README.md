@@ -5,9 +5,8 @@
 
 # GoonBook
 
-Our application is specialised to help educators with keeping track of their students. They can use our application to
-record their students with their details, and access relevant information easily. Goon Book is able to provide a new
-convenience in the specific context of school education that no other project is able to provide as of current.
+Goon Book is specialised to help educators with keeping track of their students. It can be used to record their students
+with their details, and access relevant information easily and conveniently
 
 ![Ui](docs/images/basic_command_flowchart.png)
 
