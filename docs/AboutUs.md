@@ -9,6 +9,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Vinoth K.
+![Vinoth-K.JPG](..%2F..%2F..%2F..%2F..%2FDownloads%2FVinoth-K.JPG)
+
+[[github](https://github.com/noth-k)]
+[[portfolio](team/vinoth.md)]
+
+* Role: Search Name Developer
+
 ### Goel Arnav
 
 <img src="images/arnav-goel10.png" width="200px">
@@ -17,7 +25,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/arnav-goel10.md)]
 
 * Role: Developer
-
 
 ### Jia Sheng
 
