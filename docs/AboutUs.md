@@ -20,7 +20,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Project Advisor
 * Responsibilities: Project Management
 
-### Jia Xin
+### Loh Jia Xin
 
 <img src="images/jiaxinnns.png" width="200px">
 
