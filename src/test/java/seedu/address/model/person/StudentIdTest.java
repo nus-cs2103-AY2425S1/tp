@@ -34,7 +34,7 @@ public class StudentIdTest {
         assertFalse(StudentId.isValidStudentId("1234 5678")); // spaces within digits
 
         // valid StudentIds
-        assertTrue(StudentId.isValidStudentId("3219692")); // exactly 8 numbers
+        assertTrue(StudentId.isValidStudentId("32196932")); // exactly 8 numbers
     }
 
     @Test
