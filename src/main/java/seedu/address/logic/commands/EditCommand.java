@@ -13,10 +13,10 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.logging.Logger;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.CollectionUtil;
@@ -24,7 +24,15 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.DateOfBirth;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Gender;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
+import seedu.address.model.person.NricMatchesPredicate;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -53,7 +61,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This patient already exists in the address book.";
     private static final Logger logger = LogsCenter.getLogger(EditCommand.class);
-    private final NRICMatchesPredicate predicate;
+    private final NricMatchesPredicate predicate;
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
@@ -63,7 +71,7 @@ public class EditCommand extends Command {
      * @param predicate of the person to edit.
      * @param editPersonDescriptor details to edit the person with.
      */
-    public EditCommand(NRICMatchesPredicate predicate, EditPersonDescriptor editPersonDescriptor) {
+    public EditCommand(NricMatchesPredicate predicate, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(predicate);
         requireNonNull(editPersonDescriptor);
 

@@ -13,7 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.NRICMatchesPredicate;
+import seedu.address.model.person.NricMatchesPredicate;
 import seedu.address.model.person.Person;
 
 /**
@@ -150,7 +150,7 @@ public class ModelManager implements Model {
 
     //=========== Filtered Person List Accessors =============================================================
     @Override
-    public Optional<Person> fetchPersonIfPresent(NRICMatchesPredicate nricPredicate) {
+    public Optional<Person> fetchPersonIfPresent(NricMatchesPredicate nricPredicate) {
         List<Person> allPersonList = addressBook.getPersonList();
 
         return allPersonList.stream()

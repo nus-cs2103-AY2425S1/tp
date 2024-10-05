@@ -4,11 +4,19 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
 
-public class NRICMatchesPredicate implements Predicate<Person> {
+/**
+ * Tests that a {@code Person}'s {@code Nric} matches the given NRIC.
+ */
+public class NricMatchesPredicate implements Predicate<Person> {
 
     private final Nric nric;
 
-    public NRICMatchesPredicate(Nric nric) {
+    /**
+     * Creates a NricMatchesPredicate to test if a person's NRIC matches the given NRIC.
+     *
+     * @param nric The NRIC to test against.
+     */
+    public NricMatchesPredicate(Nric nric) {
         this.nric = nric;
     }
 
@@ -23,11 +31,11 @@ public class NRICMatchesPredicate implements Predicate<Person> {
             return true;
         }
 
-        if (!(other instanceof NRICMatchesPredicate)) {
+        if (!(other instanceof NricMatchesPredicate)) {
             return false;
         }
 
-        NRICMatchesPredicate predicate = (NRICMatchesPredicate) other;
+        NricMatchesPredicate predicate = (NricMatchesPredicate) other;
         return nric.equals(predicate.nric);
     }
 
