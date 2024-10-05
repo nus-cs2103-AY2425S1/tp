@@ -16,10 +16,12 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import researchroster.model.AddressBook;
+import researchroster.model.ReadOnlyAddressBook;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
+import researchroster.model.person.Person;
+import researchroster.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {

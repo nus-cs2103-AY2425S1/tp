@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import researchroster.logic.commands.CommandResult;
+
 public class CommandResultTest {
     @Test
     public void equals() {

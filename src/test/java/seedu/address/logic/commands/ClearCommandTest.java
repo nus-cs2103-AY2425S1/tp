@@ -5,10 +5,11 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
+import researchroster.logic.commands.ClearCommand;
+import researchroster.model.AddressBook;
+import researchroster.model.Model;
+import researchroster.model.ModelManager;
+import researchroster.model.UserPrefs;
 
 public class ClearCommandTest {
 

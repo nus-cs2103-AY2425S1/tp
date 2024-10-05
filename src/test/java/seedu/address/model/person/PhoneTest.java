@@ -6,6 +6,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import researchroster.model.person.Phone;
+
 public class PhoneTest {
 
     @Test

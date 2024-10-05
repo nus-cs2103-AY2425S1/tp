@@ -10,8 +10,9 @@ import java.nio.file.Path;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import researchroster.ui.UiPart;
 import javafx.fxml.FXML;
-import seedu.address.MainApp;
+import researchroster.MainApp;
 
 public class UiPartTest {
 

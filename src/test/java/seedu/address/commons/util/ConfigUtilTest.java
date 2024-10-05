@@ -13,8 +13,9 @@ import java.util.logging.Level;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import seedu.address.commons.core.Config;
-import seedu.address.commons.exceptions.DataLoadingException;
+import researchroster.commons.core.Config;
+import researchroster.commons.exceptions.DataLoadingException;
+import researchroster.commons.util.ConfigUtil;
 
 public class ConfigUtilTest {
 
