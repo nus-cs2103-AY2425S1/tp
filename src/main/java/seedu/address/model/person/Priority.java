@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's priority in the address book.
@@ -27,9 +28,7 @@ public class Priority {
      */
     public Priority(String priority) {
         requireNonNull(priority);
-        if (!isValidPriority(priority)) {
-            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
-        }
+        checkArgument(isValidPriority(priority), MESSAGE_CONSTRAINTS);
         this.priority = priority;
     }
 
