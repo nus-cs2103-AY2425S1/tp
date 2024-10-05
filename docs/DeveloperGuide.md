@@ -311,13 +311,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 3a. User inputs invalid contact number (e.g. invalid spaces).
-  * 3a1. System displays error message.
+  * 3a1. System displays error message and prompts for contact number.
   * Use case resumes at step 3.
 
 
 * 3b. User enters duplicate guest name.
-
-    * 3a1. System displays an error message, showing user already exists and prompts for a new name.
+    * 3b1. System displays an error message, showing user already exists and prompts for a new name.
     * Use case resumes at step 3.
 
 **Use case 2: Delete Guest**
