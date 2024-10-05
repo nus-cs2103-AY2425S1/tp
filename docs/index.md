@@ -3,15 +3,24 @@ layout: page
 title: AddressBook Level-3
 ---
 
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
-[![codecov](https://codecov.io/gh/se-edu/addressbook-level3/branch/master/graph/badge.svg)](https://codecov.io/gh/se-edu/addressbook-level3)
+[![Java CI](https://github.com/AY2425S1-CS2103T-W11-1a/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2425S1-CS2103T-W11-1a/tp/actions/workflows/gradle.yml)
 
-![Ui](images/Ui.png)
+[![codecov](https://codecov.io/gh/AY2425S1-CS2103T-W11-1a/tp/graph/badge.svg?token=XF5SCDUEMW)](https://codecov.io/gh/AY2425S1-CS2103T-W11-1a/tp)
 
-**AddressBook is a desktop application for managing your contact details.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
+![Ui](./images/Ui.png)
 
-* If you are interested in using AddressBook, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
-* If you are interested about developing AddressBook, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+
+* Murphy's List is **contact management platform for institutes providing palliative care**. It helps users efficiently manage and organize patient contact information, ensuring proper care coordination<br>
+  Example usages:
+    * Keep track of current patients of the clinic
+    * View pertinent medical information about the patient at a glance
+    * Keep track of patient appointment dates
+* The project simulates an address book in the form of a desktop application ued for managing contact details.
+    * It is **written in OOP fashion**. It provides a **reasonably well-written** code base.
+    * It is **well-designed and documented**.
+* It is named `Murphy's List` (`ML` for short) because it was named after the medical prodigy `Sean Murphy` from the popular show `The Good Doctor`
+* For the detailed documentation of this project, see our **[Developer Guide](https://github.com/AY2425S1-CS2103T-W11-1a/tp/blob/master/docs/DeveloperGuide.md)**.
 
 
 **Acknowledgements**
