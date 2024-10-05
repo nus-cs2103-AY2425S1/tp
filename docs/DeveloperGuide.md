@@ -287,14 +287,24 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​       | I can …​                                                     | So that I can…​                                                                |
+|----------|---------------|--------------------------------------------------------------|--------------------------------------------------------------------------------|
+| `* * *`  | new user      | view the how to guide                                        | familiarise myself with the functionalities of the app.                        |
+| `* * *`  | social worker | add information of different families                        | keep track of families requiring assistance in one place.                      |
+| `* * *`  | social worker | view the information of different families I have added      | retrieve their information more quickly.                                       |
+| `* * *`  | social worker | delete the information of a family                           | remove the data of a family that I no longer need to keep track of.            |
+| `* * *`  | social worker | edit a family's information                                  | keep their information up-to-date for future use.                              |
+| `* *`    | social worker | tag families                                                 | manage and organize families according to their needs.                         |
+| `* *`    | social worker | filter through the list of families                          | navigate the contact list more efficiently.                                    |
+| `* *`    | social worker | sort families                                                | view families in a more suitable order.                                        |
+| `* *`    | social worker | toggle between list view and individual family view          | focus on a specific family's information when I need to.                       |
+| `* *`    | social worker | create custom command aliases for frequently used commands   | execute commands faster and reduce my typing effort.                           |
+| `* *`    | social worker | archive families that no longer need assistance              | keep my contact list focused on active cases.                                  |
+| `* *`    | social worker | see the overall statistics of families based on location     | allocate my manpower better to areas with more help needed.                    |
+| `*`      | social worker | synchronize the app with my personal calendar                | view all my appointments and reminders in one place.                           |
+| `*`      | social worker | attach documents or images to family profiles                | make all relevant information accessible within each family’s contact details. |
+| `*`      | social worker | generate and export reports on family progress or case notes | share updates with my team or supervisors efficiently.                         |
+| `*`      | social worker | share contacts                                               | allow multiple parties to assist the families at once.                         |
 
 *{More to be added}*
 
