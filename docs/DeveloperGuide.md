@@ -286,7 +286,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                       | edit a record after submitting it  | I can make modifications to erroneous records which may have been submitted after keying a command in too quickly |
 | `* * *`  | user                       | delete a patient's record          | remove entries that I no longer need                                                                              |
 | `* * *`  | user                       | search for a patient by name or ID | I can quickly access their information when needed                                                                |
-| `* * *`  | user                       | archive data 	                     | Patients data can be restored should the records be corrupted                                                     |
+| `* * *`  | user                       | backup data 	                      | Patients data can be restored should the records be corrupted                                                     |
 | `* * `   | user who may make mistakes | undo commands                      | I can reverse recently executed commands if the command should not have been executed                             |
 
 
@@ -312,7 +312,7 @@ Extensions:
 
 **MSS**
 
-1.  User inputs the NRIC of the patient whose record they want to delete to request for ClinicBuddy to delete that record.
+1. User inputs the NRIC of the patient whose record they want to delete to request for ClinicBuddy to delete that record.
 2. ClinicBuddy deletes the record.
 
 Use case ends.
@@ -320,7 +320,7 @@ Use case ends.
 **Extensions**
 
 * 1a. The NRIC is not of the correct format
-  - 1a1. Clinic Buddy shows an error message. 
+  - 1a1. ClinicBuddy shows an error message. 
   - Use case ends
 * 2a. The NRIC is not in the records.
   - 2a1. ClinicBuddy provides an error message informing the user of the error. 
@@ -334,7 +334,7 @@ Use case ends.
 
 **Use case: (Search)**
 
-**Use case: Archive data**
+**Use case: Backup data**
 
 **Use case: Undo a command**
 
