@@ -274,13 +274,26 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+Mater, (yes, eponymously named), works as a mechanic at a car workshop. He is not the sole mechanic, and works shifts
+with other mechanics. Without the use of technology, storing customer information, as well as information about their
+cars and repair work performed, would be stored in pen and paper. This is obviously inconvenient. Mater (and his coworkers)
+believes in the advent of technology, and thus dreams of leaving behind tedious paperwork, like how he often 
+(unknowingly) leaves oil prints on the dossiers of their customers.
+
+Mater can be described as so:
+
+* has a need to manage a significant number of contacts of customers
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* would appreciate being able to share details relevant to cars with other coworkers who are not working concurrently with him
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+MATER (the CLI in development), shall help Mater and his colleagues by implementing a CLI to keep track of the workshop's customers,
+as well as other details about their cars. It will be hosted locally on one machine, with no servers and remote access 
+to the CLI, for simplicity, to fit budget constraints and for security. (and the scope of the CS2103T course. Haha.)
+
+**Value proposition**: Manage customer/car-related details easily on a shared workshop computer
+as compared to the pen and paper alternative.
 
 
 ### User stories
