@@ -296,30 +296,88 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case 1: Add Guest**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User selects the options to add a guest.
+2.  The system prompts the user for name and contact number.
+3.  User inputs their name and contact number.
+4.  The system validates the input.
+5.  The system saves the guest and display confirmation message.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 3a. User inputs invalid contact number (e.g. invalid spaces).
+  * 3a1. System displays error message and prompts for contact number.
+  * Use case resumes at step 3.
 
-  Use case ends.
 
-* 3a. The given index is invalid.
+* 3b. User enters duplicate guest name.
+    * 3b1. System displays an error message, showing user already exists and prompts for a new name.
+    * Use case resumes at step 3.
 
-    * 3a1. AddressBook shows an error message.
+**Use case 2: Delete Guest**
 
-      Use case resumes at step 2.
+**MSS**
 
-*{More to be added}*
+1.  User selects the options to delete a guest.
+2.  The system prompts for guest's index in the list.
+3.  User enters the index.
+4.  The system verifies the index.
+5.  The system deletes the guest and display confirmation message.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. User inputs invalid index (e.g. index lesser than 1 or greater than list length).
+    * 3a1. System displays error message and prompts for valid index.
+    * Use case resumes at step 3.
+
+**Use case 3: Find Guest By Name**
+
+**MSS**
+
+1.  User selects the options to find a guest.
+2.  The system prompts for the guest's name.
+3.  User enters the name.
+4.  The system searches for the guest.
+5.  The system displays a list of matching guest(s).
+
+    Use case ends.
+    
+**Extensions**
+
+* 3a. No guests match the keyword
+    * 3a1. System displays a message indicating no guest found.
+  
+
+
+**Use case 4: Toggle RSVP status**
+
+**MSS**
+
+1.  User selects the options to toggle RSVP status.
+2.  The system prompts for the guest's index in the list.
+3.  User enters the index.
+4.  The system verifies the index.
+5.  The system updates the list and show confirmation message.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. User enters an invalid index (e.g. outside valid range)
+    * 3a1. System displays error message and prompt for index.
+    * Use case resumes at step 3.
+
+
+* 4a. Guest is already in the desired RSVP status.
+    * 4a1. System displays a message indicating the guest is already in the desired status.
+    * Use case ends.
 
 ### Non-Functional Requirements
 
