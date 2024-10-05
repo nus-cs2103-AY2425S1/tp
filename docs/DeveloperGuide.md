@@ -313,7 +313,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `EventTory` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Create an event**
+**Use case: UC01 - Create an event**
 
 **MSS**
 
@@ -337,11 +337,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**System: EventTory** 
+---
 
 **Use case: UC02 - Assign a vendor to an event** 
-
-**Actors: User**
 
 **MSS** 
 
