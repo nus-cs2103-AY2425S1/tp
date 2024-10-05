@@ -15,9 +15,15 @@ import spleetwaise.transaction.logic.commands.AddCommand;
 public class SpleetWaiseParser {
 
     /**
+     * Command prefix for spleetwaise
+     */
+    public static final String SPLEETWAISE_COMMAND_PREFIX = "txn";
+
+    /**
      * Used for initial separation of command word and args.
      */
-    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("txn\\s+(?<commandWord>\\S+)(?<arguments>.*)");
+    private static final Pattern BASIC_COMMAND_FORMAT =
+        Pattern.compile(SPLEETWAISE_COMMAND_PREFIX + "\\s+(?<commandWord>\\S+)(?<arguments>.*)");
     private static final Logger logger = LogsCenter.getLogger(SpleetWaiseParser.class);
 
     /**
