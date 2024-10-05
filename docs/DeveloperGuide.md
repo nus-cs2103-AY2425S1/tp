@@ -300,32 +300,139 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `SocialBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add new family**
 
-**MSS**
+**MSS:**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User enters the command to add a family with the specified details
+2. SocialBook adds the family and displays the newly added family
 
     Use case ends.
 
-**Extensions**
+**Extensions:**
 
-* 2a. The list is empty.
+* 2a. SocialBook detects missing or invalid input.
 
-  Use case ends.
+    * 2a1. SocialBook displays an error message and prompts the user to try again
 
-* 3a. The given index is invalid.
+    * 2a2. User corrects the input and enters the command again
+    
+        Steps 2a1-2a2 are repeated until the user enters the correct input
 
-    * 3a1. AddressBook shows an error message.
+        Use case ends.
 
-      Use case resumes at step 2.
+* 2b. SocialBook detects a duplicate family entry.
 
-*{More to be added}*
+    * 2b1. SocialBook displays an error message showing the duplicated family
+  
+        Use case ends.
+
+
+**Use case: View information of different families**
+
+**MSS:**
+
+1. User enters the command to view all families
+2. SocialBook displays all families whose info has been added
+
+    Use case ends.
+
+**Extensions:** 
+
+* 2a. No families have been added to SocialBook yet.
+
+    * 2a1. SocialBook displays a message to inform the user that no family has been added by them yet
+        
+        Use case ends.
+
+
+**Use case: Delete information of different families**
+
+**MSS:**
+
+1. User indicates family whose member they want to delete
+2. SocialBook displays all family members in that family
+3. User selects and deletes the member
+4. SocialBook removes the member’s details from the display
+
+    Use case ends.
+	
+**Extensions:**
+
+* 1a. SocialBook detects no such family exist in the list.
+
+    * 1a1. SocialBook informs user that no such family exist in the list
+	    
+        Use case ends.
+
+* 3a. User selects the primary contact of the family to be deleted.
+	
+    * 3a1. SocialBook informs user they cannot delete primary contact and to swap it to someone else if they wish to do so
+
+        Use case ends.
+
+
+**Use case: Display command manual** 
+
+**MSS:**
+
+1. User keys in command to open command manual
+2. SocialBook displays command manual
+3. User keys in command to close command manual
+4. SocialBook displays previously shown screen
+	
+    Use case ends.
+
+**Extensions:**
+
+* 1a. User chooses more detailed manual.
+
+    * 1a1. SocialBook displays detailed command manual
+
+    * 1a2. User keys in command to close command manual
+
+    * 1a3. SocialBook displays previously shown screen
+
+    Use case ends.
+
+	
+**Use case: Edit existing information of a family**
+
+**MSS:**
+
+1. User chooses which information fields to update
+2. User only enters the fields he wishes to update
+3. SocialBook only updates the fields which user had updated and displays all information about the family
+
+    Use case ends.
+
+**Extensions:**
+
+* 2a. SocialBook suggests a list of fields as user is typing input.
+
+    * 2a1. User enters one field
+    
+    * 2a2. SocialBook shows possible fields to be updated
+
+    * 2a3. User types finishes the field he wishes to update
+
+    * 2a4. SocialBook stops showing possible fields
+
+    * 2a5. User enters updated value
+        
+        If User chooses to update other fields, repeat step 2a1-2a4.
+        Otherwise, use case resumes from step 3.
+
+  * 3a. SocialBook detects an error in the entered data.
+
+      * 3a1. SocialBook should not update any fields
+  
+      * 3a2. SocialBook displays errors encountered with respect to the field
+    
+          Use case ends.
+
 
 ### Non-Functional Requirements
 
