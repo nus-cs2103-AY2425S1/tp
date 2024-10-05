@@ -4,10 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Car's Model in MATER.
- * Guarantees: immutable; is valid as declared in {@link #isValidModel(String)}
+ * Represents a CarModel in MATER.
+ * Guarantees: immutable; is valid as declared in {@link #isValidCarModel(String)}
  */
-public class Model {
+public class CarModel {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Car model should only contain alphanumeric characters, "
@@ -15,30 +15,30 @@ public class Model {
                     + "and it should not be blank.";
     public static final String VALIDATION_REGEX = "[A-Z0-9][\\p{Alnum} .-]*";
 
-    public final String model;
+    public final String carModel;
 
     /**
-     * Constructs a {@code Model}.
+     * Constructs a {@code CarModel}.
      *
-     * @param model A valid model.
+     * @param carModel A valid carModel.
      */
-    public Model(String model) {
-        requireNonNull(model);
-        checkArgument(isValidModel(model), MESSAGE_CONSTRAINTS);
-        this.model = model;
+    public CarModel(String carModel) {
+        requireNonNull(carModel);
+        checkArgument(isValidCarModel(carModel), MESSAGE_CONSTRAINTS);
+        this.carModel = carModel;
     }
 
     /**
-     * Returns true if a given string is a valid Model.
+     * Returns true if a given string is a valid CarModel.
      */
-    public static boolean isValidModel(String test) {
+    public static boolean isValidCarModel(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
 
     @Override
     public String toString() {
-        return this.model;
+        return this.carModel;
     }
 
     @Override
@@ -48,17 +48,17 @@ public class Model {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Model)) {
+        if (!(other instanceof CarModel)) {
             return false;
         }
 
-        Model otherName = (Model) other;
-        return this.model.equals(otherName.model);
+        CarModel otherCarModel = (CarModel) other;
+        return this.carModel.equals(otherCarModel.carModel);
     }
 
     @Override
     public int hashCode() {
-        return model.hashCode();
+        return carModel.hashCode();
     }
 }
 

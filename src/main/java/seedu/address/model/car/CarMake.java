@@ -4,10 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Car's Make in MATER.
- * Guarantees: immutable; is valid as declared in {@link #isValidMake(String)}
+ * Represents a CarMake in MATER.
+ * Guarantees: immutable; is valid as declared in {@link #isValidCarMake(String)}
  */
-public class Make {
+public class CarMake {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Car make should only contain alphanumeric characters, "
@@ -15,29 +15,29 @@ public class Make {
                     + "and it should not contain spaces nor be blank.";
     public static final String VALIDATION_REGEX = "[A-Z][\\p{Alnum}]*";
 
-    public final String make;
+    public final String carMake;
 
     /**
-     * Constructs a {@code Make}.
+     * Constructs a {@code CarMake}.
      *
-     * @param make A valid make.
+     * @param carMake A valid carMake.
      */
-    public Make(String make) {
-        requireNonNull(make);
-        checkArgument(isValidMake(make), MESSAGE_CONSTRAINTS);
-        this.make = make;
+    public CarMake(String carMake) {
+        requireNonNull(carMake);
+        checkArgument(isValidCarMake(carMake), MESSAGE_CONSTRAINTS);
+        this.carMake = carMake;
     }
 
     /**
-     * Returns true if a given string is a valid Make.
+     * Returns true if a given string is a valid CarMake.
      */
-    public static boolean isValidMake(String test) {
+    public static boolean isValidCarMake(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
     @Override
     public String toString() {
-        return this.make;
+        return this.carMake;
     }
 
     @Override
@@ -47,17 +47,17 @@ public class Make {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Make)) {
+        if (!(other instanceof CarMake)) {
             return false;
         }
 
-        Make otherName = (Make) other;
-        return this.make.equals(otherName.make);
+        CarMake otherCarMake = (CarMake) other;
+        return this.carMake.equals(otherCarMake.carMake);
     }
 
     @Override
     public int hashCode() {
-        return make.hashCode();
+        return carMake.hashCode();
     }
 
 }

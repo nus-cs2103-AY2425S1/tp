@@ -10,23 +10,23 @@ public class CarTest {
 
     private static final Car ALICE_HYUNDAI_KONA = new Car(new Vrn("SJH 9514 P"),
             new Vin("KMHGH4JH3EU073801"),
-            new Make("Hyundai"),
-            new Model("Kona 1.6T"));
+            new CarMake("Hyundai"),
+            new CarModel("Kona 1.6T"));
 
     private static final Car ALICE_HYUNDAI_KONA_COPY = new Car(new Vrn("SJH 9514 P"),
             new Vin("KMHGH4JH3EU073801"),
-            new Make("Hyundai"),
-            new Model("Kona 1.6T"));
+            new CarMake("Hyundai"),
+            new CarModel("Kona 1.6T"));
 
     private static final Car BOB_HYUNDAI_KONA = new Car(new Vrn("S 6780 S"),
             new Vin("ABCDE12345ABCDE12"),
-            new Make("Hyundai"),
-            new Model("Kona 1.6T"));
+            new CarMake("Hyundai"),
+            new CarModel("Kona 1.6T"));
 
     private static final Car ALICE_BMW = new Car(new Vrn("SJH 9514 P"),
             new Vin("KMHGH4JH3EU073801"),
-            new Make("BMW"),
-            new Model("520i"));
+            new CarMake("BMW"),
+            new CarModel("520i"));
 
     @Test
     public void isSameCar() {
@@ -69,8 +69,8 @@ public class CarTest {
         String expected = Car.class.getCanonicalName()
                 + "{vrn=" + ALICE_HYUNDAI_KONA.getVrn()
                 + ", vin=" + ALICE_HYUNDAI_KONA.getVin()
-                + ", make=" + ALICE_HYUNDAI_KONA.getMake()
-                + ", model=" + ALICE_HYUNDAI_KONA.getModel() + "}";
+                + ", make=" + ALICE_HYUNDAI_KONA.getCarMake()
+                + ", model=" + ALICE_HYUNDAI_KONA.getCarModel() + "}";
         assertEquals(expected, ALICE_HYUNDAI_KONA.toString());
     }
 }

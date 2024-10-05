@@ -14,18 +14,18 @@ public class Car {
 
     private final Vrn vrn; // Vehicle Registration Number (Vrn).
     private final Vin vin; // Vehicle Identification Number (Vin).
-    private final Make make; // e.g. Honda, Toyota, Mitsubishi
-    private final Model model; // e.g. Jazz, Vios, Lancer
+    private final CarMake carMake; // e.g. Honda, Toyota, Mitsubishi
+    private final CarModel carModel; // e.g. Jazz, Vios, Lancer
 
     /**
      * Every field must be present and not null.
      */
-    public Car(Vrn vrn, Vin vin, Make make, Model model) {
-        requireAllNonNull(vrn, vin, make, model);
+    public Car(Vrn vrn, Vin vin, CarMake carMake, CarModel carModel) {
+        requireAllNonNull(vrn, vin, carMake, carModel);
         this.vrn = vrn;
         this.vin = vin;
-        this.make = make;
-        this.model = model;
+        this.carMake = carMake;
+        this.carModel = carModel;
     }
 
     public Vrn getVrn() {
@@ -36,16 +36,16 @@ public class Car {
         return this.vin;
     }
 
-    public Make getMake() {
-        return this.make;
+    public CarMake getCarMake() {
+        return this.carMake;
     }
 
-    public Model getModel() {
-        return this.model;
+    public CarModel getCarModel() {
+        return this.carModel;
     }
 
     /**
-     * Returns true if both Cars have the same make and model.
+     * Returns true if both Cars have the same CarMake and CarModel.
      * This defines a weaker notion of equality between two Cars.
      */
     public boolean isSameCar(Car otherCar) {
@@ -57,11 +57,12 @@ public class Car {
             return false;
         }
 
-        return otherCar.getMake().equals(getMake()) && otherCar.getModel().equals(getModel());
+        return otherCar.getCarMake().equals(getCarMake())
+                && otherCar.getCarModel().equals(getCarModel());
     }
 
     /**
-     * Returns true if both Cars have the same vrn, vin, make and model.
+     * Returns true if both Cars have the same Vrn, Vin, CarMake and CarModel.
      * This defines a stronger notion of equality between two Cars.
      */
     @Override
@@ -78,14 +79,14 @@ public class Car {
         Car otherPerson = (Car) other;
         return this.vrn.equals(otherPerson.vrn)
             && this.vin.equals(otherPerson.vin)
-            && this.make.equals(otherPerson.make)
-            && this.model.equals(otherPerson.model);
+            && this.carMake.equals(otherPerson.carMake)
+            && this.carModel.equals(otherPerson.carModel);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(this.vrn, this.vin, this.make, this.model);
+        return Objects.hash(this.vrn, this.vin, this.carMake, this.carModel);
     }
 
     @Override
@@ -93,8 +94,8 @@ public class Car {
         return new ToStringBuilder(this)
             .add("vrn", this.vrn)
             .add("vin", this.vin)
-            .add("make", this.make)
-            .add("model", this.model)
+            .add("make", this.carMake)
+            .add("model", this.carModel)
             .toString();
     }
 
