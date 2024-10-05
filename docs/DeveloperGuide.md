@@ -396,6 +396,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
+* **API (Application Programming Interface)**: A set of rules and tools that allows one piece of software to communicate with another.
+* **Component**: A modular part of a software system that has a well-defined purpose.
+* **Command**: A specific instruction given to the system to perform an action.
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 
