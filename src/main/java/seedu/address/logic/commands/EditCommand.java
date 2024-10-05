@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -22,6 +23,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Schedule;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -38,9 +40,11 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_SCHEDULE + "SCHEDULE]] "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_EMAIL + "johndoe@example.com"
+            + PREFIX_SCHEDULE + "Saturday-1000-1200";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -93,8 +97,9 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        Schedule updatedSchedule = editPersonDescriptor.getSchedule().orElse(personToEdit.getSchedule());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedSchedule);
     }
 
     @Override
@@ -130,6 +135,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
+        private Schedule schedule;
 
         public EditPersonDescriptor() {}
 
@@ -141,13 +147,14 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setSchedule(toCopy.schedule);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, schedule);
         }
 
         public void setName(Name name) {
@@ -182,6 +189,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
+        public void setSchedule(Schedule schedule) {
+            this.schedule = schedule;
+        }
+
+        public Optional<Schedule> getSchedule() {
+            return Optional.ofNullable(schedule);
+        }
+
 
         @Override
         public boolean equals(Object other) {
@@ -198,7 +213,8 @@ public class EditCommand extends Command {
             return Objects.equals(name, otherEditPersonDescriptor.name)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
-                    && Objects.equals(address, otherEditPersonDescriptor.address);
+                    && Objects.equals(address, otherEditPersonDescriptor.address)
+                    && Objects.equals(schedule, otherEditPersonDescriptor.schedule);
         }
 
         @Override
@@ -208,7 +224,9 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
+                    .add("schedule", schedule)
                     .toString();
         }
+
     }
 }

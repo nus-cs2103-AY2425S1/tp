@@ -42,7 +42,9 @@ public class Messages {
                 .append("; Email: ")
                 .append(person.getEmail())
                 .append("; Address: ")
-                .append(person.getAddress());
+                .append(person.getAddress())
+                .append("; Schedule: ")
+                .append(person.getSchedule());
 
         return builder.toString();
     }
