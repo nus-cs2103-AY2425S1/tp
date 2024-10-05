@@ -11,34 +11,46 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Nicholas Chong Yao Xuan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/nicholascyx.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[github](https://github.com/nicholascyx)]
 [[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: UI
+
+### Alexander Liswandy
+
+<img src="images/airiinnn.png" width="200px">
+
+[[github](https://github.com/airiinnn)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities: Integration, Git expert
+
+### Travis Sim
+
+<img src="images/travisim.png" width="200px">
+
+[[github](http://github.com/travisim)]
+[[portfolio](team/travisim.md)]
+
+* Role: Deliverables and deadlines
+* Responsibilities: Ensure project deliverables are done on time and in the right format.
+
+### CHong Tze Zhao
+
+<img src="images/chongtzezhao.png" width="200px">
+
+[[github](http://github.com/chongtzezhao)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities: Looks after feature development
 
 ### Jean Doe
 
@@ -50,12 +62,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
 
-<img src="images/johndoe.png" width="200px">
+### Zhang Yuxiang
+        
+<img src="images/therarefox.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/TheRareFox)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Code quality
+* Responsibilities: Looks after code quality, ensures adherence to coding standards, etc.
+
