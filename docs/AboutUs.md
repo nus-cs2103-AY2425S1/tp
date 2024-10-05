@@ -9,6 +9,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Goel Arnav
+
+<img src="images/arnav-goel10.png" width="200px">
+
+[[github](https://github.com/arnav-goel10)]
+[[portfolio](team/arnav-goel10.md)]
+
+* Role: Developer
+
 
 ### Jia Sheng
 
