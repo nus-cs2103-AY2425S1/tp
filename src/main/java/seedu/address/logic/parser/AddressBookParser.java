@@ -11,8 +11,6 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.eventCommands.EventCommand;
-import seedu.address.logic.commands.volunteerCommands.VolunteerCommand;
 import seedu.address.logic.parser.eventCommandParser.EventCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.volunteerCommandParser.VolunteerCommandParser;
@@ -28,6 +26,8 @@ public class AddressBookParser {
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
+    private static final String EVENT_COMMAND_INDICATOR = "/e";
+    private static final String VOLUNTEER_COMMAND_INDICATOR = "/v";
 
     /**
      * Parses user input into command for execution.
@@ -51,10 +51,10 @@ public class AddressBookParser {
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
         switch (commandWord) {
-        case EventCommand.COMMAND_WORD:
+        case EVENT_COMMAND_INDICATOR:
             return new EventCommandParser().parseCommand(arguments);
 
-        case VolunteerCommand.COMMAND_WORD:
+        case VOLUNTEER_COMMAND_INDICATOR:
             return new VolunteerCommandParser().parseCommand(arguments);
 
         case ExitCommand.COMMAND_WORD:
