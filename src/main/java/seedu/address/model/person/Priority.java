@@ -55,7 +55,8 @@ public class Priority {
      * Two {@code Priority} objects are considered equal if they have the same priority level.
      *
      * @param other The object to compare with.
-     * @return {@code true} if the other object is a {@code Priority} with the same priority level, otherwise {@code false}.
+     * @return {@code true} if the other object is a {@code Priority} with the same priority level,
+     *     otherwise {@code false}.
      */
     @Override
     public boolean equals(Object other) {
