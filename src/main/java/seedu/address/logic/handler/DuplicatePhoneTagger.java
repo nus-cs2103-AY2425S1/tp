@@ -78,6 +78,8 @@ public class DuplicatePhoneTagger {
         Phone phone = person.getPhone();
         Email email = person.getEmail();
         Address address = person.getAddress();
+        String financialInfo = person.getFinancialInfo();
+        String socialMediaHandle = person.getSocialMediaHandle();
 
         Set<Tag> newTags = new HashSet<>();
         newTags.addAll(person.getTags());
@@ -87,7 +89,7 @@ public class DuplicatePhoneTagger {
         } else {
             newTags.removeIf(tag -> tag.equals(DUPLICATE_TAG));
         }
-        return new Person(name, phone, email, address, newTags);
+        return new Person(name, phone, email, address, newTags, financialInfo, socialMediaHandle);
     }
 
 }
