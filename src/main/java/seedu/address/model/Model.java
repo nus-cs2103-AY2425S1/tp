@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 
 /**
@@ -56,6 +57,7 @@ public interface Model {
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
     boolean hasPerson(Person person);
+    boolean hasEvent(Event event);
 
     /**
      * Deletes the given person.
@@ -68,6 +70,7 @@ public interface Model {
      * {@code person} must not already exist in the address book.
      */
     void addPerson(Person person);
+    void addEvent(Event event);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
