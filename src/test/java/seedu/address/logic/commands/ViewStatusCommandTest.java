@@ -22,7 +22,6 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Job;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
 
 public class ViewStatusCommandTest {
     public final Name amyName = new Name(VALID_NAME_AMY);
