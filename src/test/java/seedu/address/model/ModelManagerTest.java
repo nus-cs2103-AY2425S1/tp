@@ -209,4 +209,27 @@ public class ModelManagerTest {
         assertEquals(modelManager.getStorage().getClass(),
                 StorageManager.class, "Storage should be an instance of StorageManager.");
     }
+
+    /**
+     * Tests the constructor that initializes ModelManager with null storage.
+     */
+    @Test
+    public void constructor_nullStorage_success() {
+        ModelManager modelManagerWithoutStorage = new ModelManager(new AddressBook(), new UserPrefs(), null);
+        assertNotNull(modelManagerWithoutStorage,
+                "ModelManager should be created successfully even with null storage.");
+    }
+
+    /**
+     * Tests the backupData method when storage is null.
+     */
+    @Test
+    public void backupData_nullStorage_throwsIoException() {
+        ModelManager modelManagerWithoutStorage = new ModelManager(new AddressBook(), new UserPrefs(), null);
+        String backupPath = temporaryFolder.resolve("backup.json").toString();
+
+        assertThrows(IOException.class, () -> modelManagerWithoutStorage.backupData(backupPath),
+                "Expected IOException when trying to back up with null storage.");
+    }
+
 }

@@ -34,7 +34,8 @@ public class ModelManager implements Model {
      * @param storage The storage to be used by the model.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, Storage storage) {
-        requireAllNonNull(addressBook, userPrefs, storage);
+        requireNonNull(addressBook);
+        requireNonNull(userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook
                 + ", user prefs " + userPrefs
@@ -42,7 +43,7 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        this.storage = storage;
+        this.storage = storage; // Storage can be null now.
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
     }
 
