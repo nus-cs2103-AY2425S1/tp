@@ -61,6 +61,9 @@ public class PersonUtil {
                 tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
             }
         }
+        descriptor.getFinancialInfo().ifPresent(info -> sb.append(PREFIX_FINANCIAL_INFO).append(info).append(" "));
+        descriptor.getSocialMediaHandle().ifPresent(handle -> sb.append(PREFIX_SOCIAL_MEDIA_HANDLE)
+                                                    .append(handle).append(" "));
         return sb.toString();
     }
 }

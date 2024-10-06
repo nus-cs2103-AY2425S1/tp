@@ -22,6 +22,7 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_FINANCIAL_INFO = "Good credit history";
     public static final String DEFAULT_SOCIAL_MEDIA_HANDLE = "alice_p";
+    public static final String DEFAULT_TAG = "friend";
 
     private Name name;
     private Phone phone;
@@ -40,6 +41,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        tags.add(new Tag(DEFAULT_TAG));
         financialInfo = DEFAULT_FINANCIAL_INFO;
         socialMediaHandle = DEFAULT_SOCIAL_MEDIA_HANDLE;
     }
