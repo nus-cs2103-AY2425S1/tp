@@ -7,8 +7,8 @@ import static java.util.Objects.requireNonNull;
  */
 public class Ic {
     public static final String MESSAGE_CONSTRAINTS =
-            "IcNumber should only contain alphanumeric characters and spaces, " +
-                    "and should follow the format of Singaporean IC and FIN numbers (e.g., S1234567A)";
+            "IcNumber should only contain alphanumeric characters and spaces, "
+                    + "and should follow the format of Singaporean IC and FIN numbers (e.g., S1234567A)";
 
     public final String IcNumber;
 

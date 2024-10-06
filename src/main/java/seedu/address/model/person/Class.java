@@ -18,7 +18,7 @@ public class Class {
      */
     public Class(String className) {
         requireNonNull(className);
-//      todo: checkArgument(isValidClassName(className), MESSAGE_CONSTRAINTS);
+        // todo: checkArgument(isValidClassName(className), MESSAGE_CONSTRAINTS);
         this.className = className;
     }
 
