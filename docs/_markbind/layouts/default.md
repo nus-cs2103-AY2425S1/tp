@@ -42,7 +42,7 @@
     * [Product Scope]({{ baseUrl }}/DeveloperGuide.html#product-scope)
     * [User Stories]({{ baseUrl }}/DeveloperGuide.html#user-stories)
     * [Use Cases]({{ baseUrl }}/DeveloperGuide.html#use-cases)
-    * [Non-Functional Requirements]({{ baseUrl }}/
+    * [Non-Functional Requirements]({{ baseUrl }}/DeveloperGuide.html#non-functional-requirements)
     * [Glossary]({{ baseUrl }}/DeveloperGuide.html#glossary)
   * [Appendix: Instructions for manual testing]({{ baseUrl }}/DeveloperGuide.html#appendix-instructions-for-manual-testing)
 * [About Us]({{ baseUrl }}/AboutUs.html)
