@@ -15,6 +15,6 @@ public class CliSyntax {
 
     /* Prefix definitions for task-related data */
     public static final Prefix PREFIX_TASK_DESCRIPTION = new Prefix("d/");
-    public static final Prefix PREFIX_TASK_PATIENT = new Prefix("p/");
+    public static final Prefix PREFIX_TASK_INDEX = new Prefix(" ");
 
 }

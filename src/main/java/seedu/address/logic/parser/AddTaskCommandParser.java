@@ -2,8 +2,9 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_PATIENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
@@ -20,16 +21,16 @@ public class AddTaskCommandParser implements Parser<AddTaskCommand> {
      */
     public AddTaskCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_TASK_DESCRIPTION, PREFIX_TASK_PATIENT);
+                ArgumentTokenizer.tokenize(args, PREFIX_TASK_DESCRIPTION, PREFIX_TASK_INDEX);
 
         if (!argMultimap.getValue(PREFIX_TASK_DESCRIPTION).isPresent()
-                || !argMultimap.getValue(PREFIX_TASK_PATIENT).isPresent()) {
+                || !argMultimap.getValue(PREFIX_TASK_INDEX).isPresent()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTaskCommand.MESSAGE_USAGE));
         }
 
         String taskDescription = argMultimap.getValue(PREFIX_TASK_DESCRIPTION).get();
-        Name personName = ParserUtil.parseName(argMultimap.getValue(PREFIX_TASK_PATIENT).get());
+        Index target = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_TASK_INDEX).get());
 
-        return new AddTaskCommand(taskDescription, personName);
+        return new AddTaskCommand(target, taskDescription);
     }
 }
