@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.MESSAGE_NONEXISTENT_PERSON;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -35,21 +36,22 @@ public class AddTaskCommandTest {
 
     @Test
     public void constructor_nullTaskDescription_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddTaskCommand(null, new Name("John Doe")));
+
+        assertThrows(NullPointerException.class, () -> new AddTaskCommand(Index.fromOneBased(1), null));
     }
 
     @Test
-    public void constructor_nullPersonName_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddTaskCommand("Buy medication", null));
+    public void constructor_nullIndex_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddTaskCommand(null, "Buy medication"));
     }
 
     @Test
-    public void execute_personDoesNotExist_throwsCommandException() {
-        Name nonExistentPersonName = new Name("Non Existent Person");
-        AddTaskCommand addTaskCommand = new AddTaskCommand("Take medication", nonExistentPersonName);
+    public void execute_indexDoesNotExist_throwsCommandException() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        AddTaskCommand addTaskCommand = new AddTaskCommand(outOfBoundIndex, "Take medication");
 
         assertThrows(CommandException.class,
-                String.format(MESSAGE_NONEXISTENT_PERSON, nonExistentPersonName.fullName), () ->
+                String.format(MESSAGE_INVALID_TASK_DISPLAYED_INDEX), () ->
                         addTaskCommand.execute(model));
     }
 
@@ -57,15 +59,19 @@ public class AddTaskCommandTest {
     public void execute_taskAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingTaskAdded modelStub = new ModelStubAcceptingTaskAdded();
         Person validPerson = new PersonBuilder().build();
-        modelStub.addPerson(validPerson);
-
         Task validTask = new Task(validPerson, "Buy medication");
-        AddTaskCommand addTaskCommand = new AddTaskCommand(validTask.getDescription(), validPerson.getName());
+        modelStub.addPerson(validPerson);
+        Index index = Index.fromOneBased(1);
+
+        AddTaskCommand addTaskCommand = new AddTaskCommand(index, validTask.getDescription());
 
         CommandResult commandResult = addTaskCommand.execute(modelStub);
 
+        modelStub.addPerson(validPerson);
+
         assertEquals(String.format(AddTaskCommand.MESSAGE_SUCCESS, validTask.getDescription()),
                 commandResult.getFeedbackToUser());
+
         assertEquals(Arrays.asList(validTask), modelStub.tasksAdded);
     }
 
@@ -81,7 +87,9 @@ public class AddTaskCommandTest {
 
         modelStub.addTask(validTask);
 
-        AddTaskCommand addTaskCommand = new AddTaskCommand(validTask.getDescription(), validPerson.getName());
+        Index index = Index.fromOneBased(1);
+
+        AddTaskCommand addTaskCommand = new AddTaskCommand(index, validTask.getDescription());
 
         assertThrows(CommandException.class, AddTaskCommand.MESSAGE_DUPLICATE_TASK, () ->
                 addTaskCommand.execute(modelStub));

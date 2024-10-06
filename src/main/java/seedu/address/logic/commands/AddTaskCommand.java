@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_NONEXISTENT_PERSON;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -18,8 +18,8 @@ public class AddTaskCommand extends Command {
     public static final String COMMAND_WORD = "addtask";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task list. "
-            + "Parameters: d/DESCRIPTION p/PERSON\n"
-            + "Example: " + COMMAND_WORD + " d/Buy medication p/John Doe";
+            + "Parameters: INDEX d/DESCRIPTION\n"
+            + "Example: " + COMMAND_WORD + " 1 d/Buy medication";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task list";
@@ -44,7 +44,7 @@ public class AddTaskCommand extends Command {
         requireNonNull(model);
 
         if (target.getZeroBased() >= model.getFilteredPersonList().size()) {
-            throw new CommandException(MESSAGE_NONEXISTENT_PERSON);
+            throw new CommandException(MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
         Person patient = model.getFilteredPersonList().get(target.getZeroBased());
@@ -56,20 +56,6 @@ public class AddTaskCommand extends Command {
 
         model.addTask(taskToAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, taskToAdd.getDescription()));
-    }
-
-    /**
-     * Helper method to find a person by name in the model.
-     * @param name The name of the person to search for.
-     * @return The Person object if found, or null if not found.
-     */
-    private Person findPersonByName(Name name, Model model) {
-        for (Person person : model.getFilteredPersonList()) {
-            if (person.getName().equals(name)) {
-                return person;
-            }
-        }
-        return null;
     }
 
     @Override

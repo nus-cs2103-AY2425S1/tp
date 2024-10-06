@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.model.person.Name;
 
@@ -16,10 +17,10 @@ public class AddTaskCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        AddTaskCommand expectedCommand = new AddTaskCommand("Buy medication", new Name("John Doe"));
+        AddTaskCommand expectedCommand = new AddTaskCommand(Index.fromOneBased(1), "Buy medication");
 
         // Correct format with `d/` and `p/`
-        assertParseSuccess(parser, " d/Buy medication p/John Doe", expectedCommand);
+        assertParseSuccess(parser, "1 d/Buy medication", expectedCommand);
     }
 
     @Test
