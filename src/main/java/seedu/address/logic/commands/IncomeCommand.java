@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+
 import seedu.address.model.Model;
 
 
@@ -15,14 +16,14 @@ public class IncomeCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        int fees_owed = 0;
-        int fees_earned = 0;
-//        ObservableList<Person> personList = model.getFilteredPersonList();
-//        for (Person person: personList) {
-//            fees_owed += person.getFeeOwed();
-//            fees_earned += person.getFeeEarned();
-//        }
-        return new CommandResult("Fees owed: " + fees_owed + ", fees earned: "
-                + fees_earned);
+        int feesOwed = 0;
+        int feesEarned = 0;
+        //ObservableList<Person> personList = model.getFilteredPersonList();
+        //for (Person person: personList) {
+        //fees_owed += person.getFeeOwed();
+        //fees_earned += person.getFeeEarned();
+        //}
+        return new CommandResult("Fees owed: " + feesOwed + ", fees earned: "
+                + feesEarned);
     }
 }
