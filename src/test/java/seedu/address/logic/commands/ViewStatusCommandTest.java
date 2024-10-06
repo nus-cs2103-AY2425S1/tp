@@ -7,12 +7,16 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_JOB_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_JOB_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.model.person.Person.TAG_HIRED;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -21,6 +25,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Job;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.PersonBuilder;
 
 public class ViewStatusCommandTest {
     public final Name amyName = new Name(VALID_NAME_AMY);
@@ -39,7 +44,7 @@ public class ViewStatusCommandTest {
     }
 
     @Test
-    public void execute_viewSuccess() {
+    public void execute_viewSuccessPending() {
         // tests the viewing of status for the first person in TypicalAddressBook
         Person person = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         ViewStatusCommand viewStatusCommand = new ViewStatusCommand(person.getName(), person.getJob());
@@ -50,11 +55,37 @@ public class ViewStatusCommandTest {
     }
 
     @Test
-    public void execute_viewFailure() {
+    public void execute_viewFailurePending() {
         // amy doesn't exist in the typical address book
         ViewStatusCommand viewStatusCommand = new ViewStatusCommand(amyName, amyJob);
         String expectedMessage = String.format(ViewStatusCommand.MESSAGE_VIEW_FAILURE, amyName, amyJob);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+
+        assertCommandSuccess(viewStatusCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_viewSuccessHired() {
+        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
+        Person hiredPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        String expectedMessage = String.format(ViewStatusCommand.MESSAGE_VIEW_SUCCESS,
+                Messages.formatStatus(hiredPerson));
+        ViewStatusCommand viewStatusCommand = new ViewStatusCommand(hiredPerson.getName(), hiredPerson.getJob());
+
+        assertCommandSuccess(viewStatusCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_viewSuccessRejected() {
+        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
+        Person rejectedPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased() - 1);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        String expectedMessage = String.format(ViewStatusCommand.MESSAGE_VIEW_SUCCESS,
+                Messages.formatStatus(rejectedPerson));
+        ViewStatusCommand viewStatusCommand = new ViewStatusCommand(rejectedPerson.getName(), rejectedPerson.getJob());
 
         assertCommandSuccess(viewStatusCommand, model, expectedMessage, expectedModel);
     }
