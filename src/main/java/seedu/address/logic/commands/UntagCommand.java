@@ -20,14 +20,6 @@ public class UntagCommand extends Command {
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid.";
     public static final String MESSAGE_TAG_NOT_FOUND = "Some tags were not found in the person's tag list.";
 
-    private final Index index;
-    private final List<Tag> tagsToRemove;
-
-    public UntagCommand(Index index, List<Tag> tagsToRemove) {
-        this.index = index;
-        this.tagsToRemove = tagsToRemove;
-    }
-
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Removes one or multiple tags from the person identified "
             + "by the index number used in the last person listing.\n"
@@ -36,6 +28,21 @@ public class UntagCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + "t/florist t/photographer.";
 
+    private final Index index;
+    private final List<Tag> tagsToRemove;
+
+
+
+    /**
+     * Constructs an UntagCommand to remove tags from a person.
+     *
+     * @param index The index of the person in the person list.
+     * @param tagsToRemove The list of tags to be removed.
+     */
+    public UntagCommand(Index index, List<Tag> tagsToRemove) {
+        this.index = index;
+        this.tagsToRemove = tagsToRemove;
+    }
 
     /**
      * Generates a command execution success message showing the removed tags and the person.
