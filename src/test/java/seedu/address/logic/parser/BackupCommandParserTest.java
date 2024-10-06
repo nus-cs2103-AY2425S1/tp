@@ -26,4 +26,13 @@ public class BackupCommandParserTest {
     public void parse_nullArgs_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> parser.parse(null));
     }
+
+    @Test
+    public void parseCommandBackupInvalidArgsThrowsParseException() {
+        BackupCommandParser parser = new BackupCommandParser();
+        String invalidArgs = ""; // Empty argument
+
+        assertThrows(ParseException.class, () -> parser.parse(invalidArgs));
+    }
+
 }

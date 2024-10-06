@@ -162,4 +162,14 @@ public class ModelManagerTest {
         assertFalse(modelManagerCopy.equals(
                 new ModelManager(addressBook, differentUserPrefs, modelManager.getStorage())));
     }
+
+    @Test
+    public void backupData_validPath_success() throws Exception {
+        Path backupPath = temporaryFolder.resolve("backup.json");
+        modelManager.backupData(backupPath.toString());
+
+        // Assert that the file was created successfully.
+        assertTrue(backupPath.toFile().exists());
+    }
+
 }
