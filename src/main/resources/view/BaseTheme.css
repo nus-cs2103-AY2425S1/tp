@@ -417,16 +417,11 @@
     -fx-padding: 12px 20px;
 }
 
-#tags {
-    -fx-hgap: 7;
-    -fx-vgap: 3;
-}
-
-#tags .label {
+#relationship .label {
     -fx-text-fill: white;
-    -fx-background-color: #3e7b91;
-    -fx-padding: 1 3 1 3;
-    -fx-border-radius: 2;
-    -fx-background-radius: 2;
-    -fx-font-size: 11;
+    -fx-background-color: #B36BE7;
+    -fx-padding: 1 12;
+    -fx-border-radius: 0;
+    -fx-background-radius: 7;
+    -fx-font-size: 13;
 }
