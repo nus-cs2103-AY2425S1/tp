@@ -13,7 +13,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class ContactCommandParser implements Parser<Command> {
     public static final String COMMAND_WORD = "contact";
-    private static final Pattern CONTACT_COMMAND_FORMAT = Pattern.compile("(?<subCommand>\\S+)\\s*(?<subArguments>.*)");
+    private static final Pattern CONTACT_COMMAND_FORMAT = Pattern.compile("(?<subCommand>\\S+)(?<subArguments>.*)");
 
     @Override
     public Command parse(String args) throws ParseException {
