@@ -353,7 +353,7 @@ Those without any stars are user stories that were considered but will not be im
 
 **MSS**
 
-1.  User issues the list command.
+1.  User requests to view all contacts.
 2.  The system retrieves and displays the list of all contacts to the user.
 
     Use case ends.
@@ -372,41 +372,10 @@ Those without any stars are user stories that were considered but will not be im
 
 **Extensions**
 
-* 1a. The system detects a name input error (duplicated or trailing whitespace).
+* 1a. The system detects an error in the entered data.
     * 1a1. The system displays an error message.
 
       Use case ends.
-
-
-* 1b. The system detects a phone number input error (invalid format).
-    * 1b1. The system displays an error message stating the correct format.
-
-      Use case ends.
-
-
-* 1c. The system detects an address input error (too long).
-    * 1c1. The system displays an error message stating the maximum length.
-
-      Use case ends.
-
-
-* 1d. The system detects an email input error (invalid format).
-    * 1d1. The system displays an error message stating the correct format.
-
-      Use case ends.
-
-
-* 1e. The system detects a duplicate phone number error.
-    * 1e1. The system displays an error message mentioning the existence of a duplicate phone number.
-
-      Use case ends.
-
-
-* 1f. The system detects an invalid tag input.
-    * 1f1. The system displays an error message stating the tag is invalid.
-
-      Use case ends.
-
 
 
 **Use case: UC03 Add Phone Number to Contact**
@@ -430,20 +399,8 @@ Those without any stars are user stories that were considered but will not be im
   Use case ends.
 
 
-* 2a. The system detects an invalid contact index.
-    * 2a1. The system displays an error message stating the contact index is invalid.
-
-      Use case resumes at step 1.
-
-
-* 2b. The system detects a phone number input error (invalid format).
-    * 2b1. The system displays an error message stating the correct format.
-
-      Use case resumes at step 1.
-
-
-* 2c. The system detects a duplicate phone number error.
-    * 2c1. The system displays an error message mentioning the existence of a duplicate phone number.
+* 2a. The system detects an error in the entered data.
+    * 2a1. The system displays an error message 
 
       Use case resumes at step 1.
 
@@ -467,16 +424,11 @@ Those without any stars are user stories that were considered but will not be im
   Use case ends.
 
 
-* 2a. The system detects an invalid contact index.
-    * 2a1. The system displays an error message stating the contact index is invalid.
+* 2a. The system detects an error in the entered data.
+    * 2a1. The system displays an error message.
 
       Use case resumes at step 1.
 
-
-* 2b. The system detects an address input error (too long).
-    * 2b1. The system displays an error message stating the maximum length.
-
-      Use case resumes at step 1.
 
 
 
@@ -498,14 +450,8 @@ Those without any stars are user stories that were considered but will not be im
   Use case ends.
 
 
-* 2a. The system detects an invalid contact index.
-    * 2a1. The system displays an error message stating the contact index is invalid.
-
-      Use case resumes at step 1.
-
-
-* 2b. The system detects an email input error (invalid format).
-    * 2b1. The system displays an error message stating the correct format.
+* 2a. The system detects an error in the entered data.
+    * 2a1. The system displays an error message.
 
       Use case resumes at step 1.
 
