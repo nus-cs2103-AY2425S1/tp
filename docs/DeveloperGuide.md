@@ -320,47 +320,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  Actor requests to add a new person by entering a command.
-2.  System displays a success message along with the details of the newly added person.
+1.  Actor requests to add a new person.
+2.  System shows details of the newly added person.
+3.  System <u>save contacts to save file (UC5)</u>.
 
     Use case ends.
 
-**Extensions**
-
-- 1a. There is an error in the Actor's command.
-
-  - 1a1 System shows an error message.
-
-    Use case resumes at step 1.
-
-**Use case: UC2 - List all people saved in the System**
+**Use case: UC2 - List all people**
 
 **MSS**
 
-1.  Actor requests to list all people saved in the System by entering a command.
+1.  Actor requests to list all people saved in the System.
 2.  System shows a list of persons.
 
     Use case ends.
 
 **Extensions**
 
-- 1a. If there are no contacts stored in the System.
+- 2a. No contacts stored in the System.
 
-  - 1a1 System informs Actor that they have no contacts stored.
+  - 2a1 System informs Actor that they have no contacts stored.
 
     Use case ends.
-
-- 1b. The System detects an error in the entered command.
-
-  - 1b1 System requests for a valid command.
-
-    Use case resumes at step 1.
 
 **Use case: UC3 - Delete a person**
 
 **MSS**
 
-1.  Actor requests to <u>list all people saved in the System (UC2)</u>.
+1.  Actor performs <u>list all people (UC2)</u>.
 2.  Actor requests to delete a specific person in the list.
 3.  System deletes the person.
 4.  System <u>save contacts to save file (UC5)</u>.
@@ -369,7 +356,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- 2a. The given index is invalid.
+- 2a. The given person is invalid.
 
   - 2a1. System shows an error message.
 
@@ -383,16 +370,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  Actor searches OS directory for save file.
-2.  OS returns save file object.
-3.  For each line of save file.
+1.  Actor retrieve save file object.
+2.  For each line of save file.
 
-    - 3.1 Actor reads a line from the file.
-    - 3.2 Actor parses the line into a contact object.
-    - 3.3 Actor adds the contact object to the contact list.
-    - 3.4 Repeat steps 3.1 - 3.3 until all lines are processed.
+    - 2.1 Actor reads a line from the file.
+    - 2.2 Actor parses the line into a contact object.
+    - 2.3 Actor adds the contact object to the contact list.
 
-4.  Actor finishes loading contacts into the contact list.
+      Repeat steps 2.1 - 2.3 until all lines are processed.
 
     Use case ends.
 
@@ -406,12 +391,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-- 3.1a. Line does not fit proper contact format.
+- 2.2a. Line does not fit proper contact format.
 
-  - 3.1a1. Actor ignores line.
-  - 3.1a2. Actor` shows a warning message.
+  - 2.2a1. Actor ignores line.
+  - 2.2a2. Actor shows a warning message.
 
-    Use case resumes at step 3.1.
+    Use case resumes at step 2.1.
 
 **Use case: UC5 - Save contact to save file**
 
@@ -421,15 +406,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  Actor searches OS directory for save file.
-2.  OS returns save file object.
-3.  For each contact object.
+1.  Actor retrieve save file.
+2.  For each contact.
 
-    - 3.1 Actor parses line into saveable format.
-    - 3.2 Actor writes line to save file.
-    - 3.3 Repeat steps 3.1 - 3.2 until all contacts are processed.
+    - 2.1 Actor parses line into saveable format.
+    - 2.2 Actor writes line to save file.
 
-4.  Actor finishes saving contacts into save file.
+      Repeat steps 2.1 - 2.2 until all contacts are processed.
 
     Use case ends.
 
