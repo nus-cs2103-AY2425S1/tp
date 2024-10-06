@@ -129,6 +129,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public boolean equals(Object other) {
         if (other == this) {
+
             return true;
         }
 
@@ -143,8 +144,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("persons", persons)
-                .toString();
+        return new ToStringBuilder(this).add("persons", persons)
+                                        .toString();
     }
 }
