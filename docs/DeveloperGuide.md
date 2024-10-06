@@ -372,7 +372,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **DBMS (Database Management System)**: Software for storing, retrieving, and managing data
+* **Developer Guide (DG)**: A document that provides technical details about the product's design and implementation
+* **User Guide (UG)**: A document that provides instructions for users on how to use the product's features
+* **CLI (Command Line Interface)**: An interface where the user types commands to interact with the software
+* **Class Grouping**: The division of students into their respective classes, which can be managed and organized in the app for easy access
+* **Project Grouping**: The arrangement of students into smaller groups for project purposes
+* **Tags**: Labels assigned to students to indicate specific roles or characteristics
+* **Student Profile**: A record within the system that contains information about a specific student
 
 --------------------------------------------------------------------------------------------------------------------
 
