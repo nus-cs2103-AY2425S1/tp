@@ -17,9 +17,14 @@ public class MessagesTest {
 
     @Test
     public void formatStatus_correctFormatting() {
-        // if tag is pending
+        // if tag is hired
         Person hiredPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased() + 2);
-        assertTrue(formatStatus(hiredPerson).equals("Carl Kurz; Job: Software Engineer L3; Status: pending"));
-        //TODO: When tag is hired or rejected.
+        assertTrue(formatStatus(hiredPerson).equals("Carl Kurz; Job: Software Engineer L3; Status: hired"));
+        //if tag is rejected
+        Person rejectedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased() + 3);
+        assertTrue(formatStatus(rejectedPerson).equals("Daniel Meier; Job: Software Engineer L4; Status: rejected"));
+        // if tag is pending
+        Person pendingPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        assertTrue(formatStatus(pendingPerson).equals("Alice Pauline; Job: Software Engineer L1; Status: pending"));
     }
 }
