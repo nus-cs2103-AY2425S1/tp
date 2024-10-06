@@ -7,10 +7,12 @@ import static seedu.address.testutil.Assert.assertThrows;
 import org.junit.jupiter.api.Test;
 
 public class NoteTest {
+
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Name(null));
     }
+
     @Test
     public void equals() {
         Note note = new Note("Valid Name");

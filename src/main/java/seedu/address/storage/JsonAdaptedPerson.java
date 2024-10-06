@@ -108,6 +108,9 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        if (note == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Note.class.getSimpleName()));
+        }
         final Note modelNote = new Note(note);
 
         final Set<Subject> modelSubjects = new HashSet<>(personSubjects);
