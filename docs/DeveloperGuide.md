@@ -297,16 +297,24 @@ without the need for expensive software or a high level of technical expertise.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​                                    | I want to …​                                                              | So that I can…​                                                                                         |
+|----------|--------------------------------------------|---------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|
+| ***      | NGO administrator | view all contacts in the contact list                                     | I can quickly find relevant information                                                                 |
+| ***      | NGO administrator | search for contacts by name, role                                         | I can quickly find relevant personnel                                                                   |
+| ***      | NGO administrator | create groups of contacts (e.g., volunteers, donors, partners)            | I can manage communications more efficiently                                                            |
+| ***      | NGO administrator | add a new volunteer's contact information                                 | I can add volunteers to my organisation                                                                 |
+| ***      | NGO administrator | set a volunteer's participation hours                                     | I can see volunteer's participation hours                                                               |
+| ***      | NGO administrator | edit a volunteer's information                                            | I can keep volunteer records up to date                                                                 |
+| ***      | NGO administrator | delete a volunteer's contact information                                  | I can remove irrelevant or erroneous entries                                                            |
+| **       | NGO administrator | sort contacts by alphabetical or insertion order                          | that I can easily locate and manage contacts efficiently.                                               |
+| **       | NGO administrator | see a dashboard of recent activity and upcoming tasks                     | I can have an overview of key engagements at a glance.                                                  |
+| **       | NGO administrator | merge duplicate contact entries                                           | I can maintain a clean and organized address book                                                       |
+| **       | NGO administrator | archive contacts who are no longer active                                 | I can keep the active contact list clean without deleting important data                                |
+| **       | NGO administrator | set communication preferences for each contact (e.g., email, SMS)         | I can ensure contacts are reached via their preferred channels                                          |
+| **       | NGO administrator | copy to clipboard a list of all emails of addressees in the current search | I can easily send out a mass email to relevant personnel                                                |
+| **       | NGO administrator | be able to send an email directly from the application                    | I do not need to copy the contact information out of the command line                                   |
+| **       | NGO administrator | be able to send templated emails from the application, with customizations | I can conveniently contact people I frequently contact about the same thing, with slight customizations |
+| **       | NGO administrator | export the contact list and engagement history to CSV or Excel            | I can share data with other team members or for reporting purposes.                                     |
 
 ### Use cases
 
