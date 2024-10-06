@@ -58,18 +58,18 @@ public class DuplicatePhoneTaggerTest {
                 .withPerson(TAN_AH_KOW)
                 .withPerson(BART_BILL);
     }
-
+    // Test for identifying no duplicates
     @Test
-    public void noDuplicatesTest() {
+    public void execute_isDuplicatePresent_noDuplicates() {
         testModel = new ModelManager(testAB.build(), new UserPrefs());
 
         List<Person> persons = testModel.getFilteredPersonList();
         duplicatePhoneTagger.updateFrequenciesOfPhones(persons);
         assertFalse(duplicatePhoneTagger.isDuplicatePresent());
     }
-
+    // Test for identifying duplicates
     @Test
-    public void duplicatesPresentTest() {
+    public void execute_isDuplicatePresent_withDuplicates() {
         Person testPerson = new PersonBuilder().withName("Aaron").withPhone(TEST_PHONE_TWO)
                 .withEmail("aiken@example.com").withAddress("Kent Ridge MRT").build();
         testAB.withPerson(testPerson);
@@ -79,9 +79,9 @@ public class DuplicatePhoneTaggerTest {
         duplicatePhoneTagger.updateFrequenciesOfPhones(persons);
         assertTrue(duplicatePhoneTagger.isDuplicatePresent());
     }
-
+    // Test for identifying correct duplicate
     @Test
-    public void duplicatePhoneTest() {
+    public void identify_correct_duplicate() {
         Person testPerson = new PersonBuilder().withName("Aaron").withPhone(TEST_PHONE_TWO)
                 .withEmail("aiken@example.com").withAddress("Kent Ridge MRT").build();
         testAB.withPerson(testPerson);
