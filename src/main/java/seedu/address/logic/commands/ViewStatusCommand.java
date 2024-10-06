@@ -24,7 +24,11 @@ public class ViewStatusCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": View the status of a person in the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
-            + PREFIX_JOB + "JOB ";
+            + PREFIX_JOB + "JOB \n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NAME + "John Doe "
+            + PREFIX_JOB + "Software Engineer ";
+
 
     public final Name name;
     public final Job job;
