@@ -303,9 +303,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
 **System: StudentManagerPro**
+
 **Use case: UC01 Add Student's Name**
+
 **Actor: User**
+
 **Preconditions: User is logged in.**
+
 **Guarantees:**
 * If successful, the student's name is added to the system and can be used to track their academic progress.
 * If an invalid name is given as input, a corresponding error message is displayed.
@@ -336,11 +340,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 **System: StudentManagerPro**
+
 **Use case: UC02 Add Student's Email**
+
 **Actor: User**
+
 **Preconditions:**
 * User is logged in.
 * Student profile has been created through the <u>addition of the student name(UC01).</u>
+
 **Guarantees:**
 * If successful, the student's email is added to the student profile and saved in the system.
 * If an invalid email is given as input, a corresponding error message is displayed.
@@ -370,11 +378,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 **System: StudentManagerPro**
+
 **Use case: UC03 Add Student's Register Number**
+
 **Actor: User**
+
 **Preconditions:**
 * User is logged in.
 * Student profile has been created through the <u>addition of the student name(UC01).</u>
+
 **Guarantees:**
 * If successful, the student's register number is added to the student profile and saved in the system.
 * If an invalid register number is given as input, a corresponding error message is displayed.
@@ -404,11 +416,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 **System: StudentManagerPro**
+
 **Use case: UC04 Add Student's Sex**
+
 **Actor: User**
+
 **Preconditions:**
 * User is logged in.
 * Student profile has been created through the <u>addition of the student name(UC01).</u>
+
 **Guarantees:**
 * If successful, the student's sex is added to the student profile and saved in the system.
 * If an invalid sex is given as input, a corresponding error message is displayed.
@@ -434,11 +450,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 **System: StudentManagerPro**
+
 **Use case: UC05 Add Student's Address**
+
 **Actor: User**
+
 **Preconditions:**
 * User is logged in.
 * Student profile has been created through the <u>addition of the student name(UC01).</u>
+
 **Guarantees:**
 * If successful, the student's address is added to the student profile and saved in the system.
 * If an invalid address is given as input, a corresponding error message is displayed.
@@ -464,11 +484,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 **System: StudentManagerPro**
+
 **Use case: UC06 Add Student's Contact Number**
+
 **Actor: User**
+
 **Preconditions:**
 * User is logged in.
 * Student profile has been created through the <u>addition of the student name(UC01).</u>
+
 **Guarantees:**
 * If successful, the student's contact number is added to the student profile and saved in the system.
 * If an invalid contact number is given as input, a corresponding error message is displayed.
@@ -499,11 +523,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 **System: StudentManagerPro**
+
 **Use case: UC07 Add Student's Emergency Contact Name**
+
 **Actor: User**
+
 **Preconditions:**
 * User is logged in.
 * Student profile has been created through the <u>addition of the student name(UC01).</u>
+
 **Guarantees:**
 * If successful, the student's emergency contact name is added to the student profile and saved in the system.
 * If an invalid name is given as input, a corresponding error message is displayed.
@@ -530,11 +558,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 **System: StudentManagerPro**
+
 **Use case: UC08 Add Student's Emergency Contact Number**
+
 **Actor: User**
+
 **Preconditions:**
 * User is logged in.
 * Student profile has been created through the <u>addition of the student name(UC01).</u>
+
 **Guarantees:**
 * If successful, the student's emergency contact number is added to the student profile and saved in the system.
 * If an invalid contact number is given as input, a corresponding error message is displayed.
@@ -560,12 +592,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 **System: StudentManagerPro**
+
 **Use case: UC9 Group Students Into Their Classes**
+
 **Actor: User**
+
 **Preconditions:**
 * User is logged in.
 * Student profile has been created through the <u>addition of the student name(UC01).</u>
 * Student profile has been updated with <u>additional details from UC02 to UC08.</u>
+
 **Guarantees:**
 * If successful, the student's class is added to the student profile.
 * If an invalid data is entered, a corresponding error message is displayed.
@@ -592,11 +628,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 **System: StudentManagerPro**
+
 **Use case: UC11 Remove Student from the System**
+
 **Actor: User**
+
 **Preconditions:**
 * User is logged in.
 * Student to be removed exists in the system.
+
 **Guarantees:**
 * If successful, the student will be removed from the system.
 * If student does not exist or an invalid input is entered, a corresponding error message is displayed.
