@@ -1,7 +1,6 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's class in the address book.
@@ -23,14 +22,6 @@ public class Class {
         this.className = className;
     }
 
-    /**
-     * Returns true if a given string is a valid class.
-     */
-// todo
-//    public static boolean isValidClassName(String test) {
-//        return test.matches(VALIDATION_REGEX);
-//    }
-
     @Override
     public String toString() {
         return className;
@@ -47,8 +38,8 @@ public class Class {
             return false;
         }
 
-        Class otherName = (Class) other;
-        return className.equals(otherName.className);
+        Class otherClass = (Class) other;
+        return className.equals(otherClass.className);
     }
 
     @Override
