@@ -13,10 +13,10 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Company;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Rsvp;
 import seedu.address.storage.JsonAdaptedTag;
 
 public class JsonAdaptedGuestTest extends JsonAdaptedPersonTest {
@@ -98,15 +98,15 @@ public class JsonAdaptedGuestTest extends JsonAdaptedPersonTest {
     public void toModelType_nullAddress_throwsIllegalValueException() {
         JsonAdaptedGuest guest = new JsonAdaptedGuest(VALID_NAME, VALID_PHONE, VALID_EMAIL, null,
                 VALID_RSVP, VALID_TAGS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Company.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, guest::toModelType);
     }
 
     @Test
-    public void toModelType_nullCompany_throwsIllegalValueException() {
+    public void toModelType_nullRsvp_throwsIllegalValueException() {
         JsonAdaptedGuest guest = new JsonAdaptedGuest(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                 null, VALID_TAGS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Company.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Rsvp.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, guest::toModelType);
     }
 
