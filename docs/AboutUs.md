@@ -48,7 +48,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Rafael Kristoforus Yanto
 
-<img src="images/rafael.png" width="200px">
+<img src="images/izruff.png" width="200px">
 
 [[github](https://github.com/izruff)]
 
