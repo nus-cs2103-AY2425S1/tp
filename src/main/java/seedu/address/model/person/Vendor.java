@@ -98,4 +98,10 @@ public class Vendor extends Person {
                 .add("company", company)
                 .toString();
     }
+
+    @Override
+    public String reflectType() {
+        return "Vendor";
+    }
 }
+

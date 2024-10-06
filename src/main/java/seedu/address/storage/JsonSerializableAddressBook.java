@@ -11,7 +11,12 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.person.Guest;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Vendor;
+import seedu.address.storage.person.JsonAdaptedGuest;
+import seedu.address.storage.person.JsonAdaptedPerson;
+import seedu.address.storage.person.JsonAdaptedVendor;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -37,7 +42,18 @@ class JsonSerializableAddressBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
-        persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        persons.addAll(source.getPersonList()
+                .stream()
+                .map(this::mappingFunction)
+                .collect(Collectors.toList()));
+    }
+
+    private JsonAdaptedPerson mappingFunction(Person person) {
+        if (person.reflectType().equals("Guest")) {
+            return new JsonAdaptedGuest((Guest) person);
+        } else {
+            return new JsonAdaptedVendor((Vendor) person);
+        }
     }
 
     /**

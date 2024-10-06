@@ -123,4 +123,8 @@ public class Guest extends Person {
                 .toString();
     }
 
+    @Override
+    public String reflectType() {
+        return "Guest";
+    }
 }
