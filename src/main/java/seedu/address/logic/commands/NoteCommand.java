@@ -15,7 +15,7 @@ import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 
 /**
- * Changes the notes of an existing person in the address book.
+ * * Changes the notes of an existing person in the address book.
  */
 public class NoteCommand extends Command {
 
@@ -52,8 +52,8 @@ public class NoteCommand extends Command {
         List<Person> allStudents = model.getAddressBook().getPersonList();
         Person personToEdit = null;
 
-        for(Person person : allStudents) {
-            if(person.getName().toString().equals(name.toString())) {
+        for (Person person : allStudents) {
+            if (person.getName().toString().equals(name.toString())) {
                 personToEdit = person;
             }
         }
@@ -91,7 +91,7 @@ public class NoteCommand extends Command {
         if (!(other instanceof NoteCommand)) {
             return false;
         }
-        
+
         NoteCommand e = (NoteCommand) other;
         return name.equals(e.name)
                 && note.equals(e.note);
