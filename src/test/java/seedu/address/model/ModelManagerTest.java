@@ -202,6 +202,11 @@ public class ModelManagerTest {
         }
     }
 
-
+    @Test
+    public void getStorage_returnsValidStorage() {
+        assertNotNull(modelManager.getStorage(), "Storage should not be null.");
+        assertEquals(modelManager.getStorage().getClass(),
+                StorageManager.class, "Storage should be an instance of StorageManager.");
+    }
 
 }

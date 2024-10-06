@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
@@ -63,8 +64,26 @@ public class BackupCommand extends Command {
         }
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof BackupCommand)) {
+            return false;
+        }
+
+        BackupCommand otherCommand = (BackupCommand) other;
+        return Objects.equals(destinationPath, otherCommand.destinationPath);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(destinationPath);
+    }
+
     public String getDestinationPath() {
         return destinationPath;
     }
-
 }
