@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.logic.commands.HistoryCommand.MESSAGE_SHOW_HISTORY_SUCCESS;
+
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -16,6 +18,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.contactdate.ContactDateList;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -49,6 +52,11 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane callHistoryPanelPlaceholder;
+
+    private CallHistoryPanel callHistoryPanel;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -121,6 +129,10 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        callHistoryPanel = new CallHistoryPanel();
+        callHistoryPanelPlaceholder.getChildren().add(callHistoryPanel.getRoot());
+        callHistoryPanelPlaceholder.setVisible(false);
     }
 
     /**
@@ -186,11 +198,23 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            String personName = commandResult.getPersonName();
+
+            if (commandResult.getFeedbackToUser().contains(String.format(MESSAGE_SHOW_HISTORY_SUCCESS, personName))) {
+                showCallHistoryPanel(logic.getCallHistory());
+            }
+
             return commandResult;
         } catch (CommandException | ParseException e) {
-            logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    private void showCallHistoryPanel(ContactDateList history) {
+        personListPanelPlaceholder.setVisible(false);
+        callHistoryPanelPlaceholder.setVisible(true);
+        System.out.println("History size before initialization: " + history.size());
+        callHistoryPanel.initializeCallHistory(history);
     }
 }

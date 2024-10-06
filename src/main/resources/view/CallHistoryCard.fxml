@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <Label fx:id="contactDateLabel" styleClass="cell_big_label"/> <!-- Change fx:id to match Java code -->
+    <VBox alignment="CENTER_LEFT" minHeight="105">
+        <padding>
+            <Insets bottom="5" left="15" right="5" top="5" />
+        </padding>
+        <HBox alignment="CENTER_LEFT" spacing="0.5">
+            <Label fx:id="contactDate" styleClass="cell_big_label" />
+        </HBox>
+    </VBox>
+</HBox>
+

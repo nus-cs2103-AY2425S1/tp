@@ -21,6 +21,7 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -94,6 +95,13 @@ public class AddressBookParserTest {
         MarkCommand command = (MarkCommand) parser.parseCommand(
                 MarkCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new MarkCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_history() throws Exception {
+        HistoryCommand command = (HistoryCommand) parser.parseCommand(
+                HistoryCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new HistoryCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test

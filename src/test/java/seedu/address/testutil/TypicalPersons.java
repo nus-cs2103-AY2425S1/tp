@@ -18,6 +18,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.contactdate.ContactDate;
+import seedu.address.model.contactdate.ContactDateList;
 import seedu.address.model.person.Person;
 
 /**
@@ -25,16 +27,32 @@ import seedu.address.model.person.Person;
  */
 public class TypicalPersons {
 
+    public static final ContactDate CONTACT_DATE_1 = new ContactDate("2023-01-01");
+    public static final ContactDate CONTACT_DATE_2 = new ContactDate("2023-02-01");
+    public static final ContactDate CONTACT_DATE_3 = new ContactDate("2023-03-01");
+    public static final ContactDate CONTACT_DATE_4 = new ContactDate("2023-01-15");
+    public static final ContactDate CONTACT_DATE_5 = new ContactDate("2023-03-10");
+
+
     public static final Person ALICE = new PersonBuilder().withNric("S5207047C")
             .withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253")
-            .withTags("friends").build();
+            .withTags("friends")
+            .withContactDates(new ContactDateList(
+                    new ArrayList<>(Arrays.asList(
+                            CONTACT_DATE_1,
+                            CONTACT_DATE_2,
+                            CONTACT_DATE_3)))).build();
     public static final Person BENSON = new PersonBuilder().withNric("S0233700B")
             .withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withTags("owesMoney", "friends").build();
+            .withTags("owesMoney", "friends")
+            .withContactDates(new ContactDateList(
+                    new ArrayList<>(Arrays.asList(
+                            CONTACT_DATE_4,
+                            CONTACT_DATE_5)))).build();
     public static final Person CARL = new PersonBuilder().withNric("S6192793Z")
             .withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").build();

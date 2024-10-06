@@ -19,7 +19,7 @@ public class ContactDate {
     /**
      * Constructs a {@code ContactDate}.
      *
-     * @param date A valid date.
+     * @param date A valid date and time.
      */
     public ContactDate(String date) {
         requireNonNull(date);
@@ -72,5 +72,9 @@ public class ContactDate {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    public LocalDate getDate() {
+        return value;
     }
 }
