@@ -287,58 +287,179 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
+| Priority | As a …​                                    | I want to …​                 | So that …​                                                        |
 |----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
-
-*{More to be added}*
+| `* * *` | Teaching Assistant | add a new student's contact | I can keep track of all my students in my course |
+| `* * *` | Teaching Assistant | view a student's contact information | I can contact a student directly if required |
+| `* * *` | Teaching Assistant | view a students' grades | I can have a comprehensive overview of each students' performance |
+| `* * *` | Teaching Assistant | record student grades | I can keep accurate records of their performance |
+| `* * *` | Teaching Assistant | list out all students | I can see who's contacts I have saved |
+| `* * *` | Teaching Assistant | view students' attendance | I can keep track of when a student has not shown up to class |
+| `* * *` | Teaching Assistant | mark students' attendance | I can keep track of who goes to class |
+| `* *` | Teaching Assistant | import student contact information from a csv | I can quickly add multiple students at once |
+| `*` | Teaching Assistant | collect students contact information | I can keep track and make use of it if required |
+| `*` | Teaching assistant with bad student management ability | automate student management | I can manage my students better |
+| `* *` | Experienced teaching assistant | Migrate/get used to the app easily | it doesn't take so much time to get used to the new app to increase my productivity |
+| `* *` | Teaching Assistant | tag my students with different labels | it is easy for me to find/search them based on their tags |
+| `* *` | Teaching Assistant | link with my Canvas account | I can save time exporting grades |
+| `* *` | busy Teaching Assistant | view a help message | I can quickly learn how to use the app |
+| `* *` | Teaching Assistant | separate my work (TA) contacts with my personal contact | I can have privacy and a line between work and life |
+| `* *` | Teaching Assistant that values privacy | sort students by performance metrics like attendance or participation | I can identify students who may need additional support. |
+| `* *` | Helpful Teaching Assistant | set up notifications for missing assignment or attendance | I can address potential issues with students |
+| `* *` | Teaching Assistant | track communication history with each student | I can refer to past discussions when addressing their needs |
+| `* *` | Teaching Assistant | sort student details by name | I can view student details in alphabetical order |
+| `* *` | Teaching Assistant | sort student details by grades | I can view students who are struggling with the course |
+| `* *` | Teaching Assistant | set up alerts for low attendance or poor participation | I can help struggling students early in the course |
+| `* *` | Responsible Teaching Assistant | attach remarks for each student | I can keep track of additional things to remember for each student |
+| `* *` | Teaching Assistant | add a custom column/property on the student database | I can personalize my contacts based on my own needs |
+| `*` | Student | upload my MC to my TA through the app | I can easily send an MC without sending it through other mediums |
+| `*` | Teaching Assistant | draft an email to the student with a summary of their grades and participation | notify students about their progress |
+| `*` | Teaching Assistant | access and archive past year exam papers | I can distribute the practice papers to students |
+| `* *` | Student | Submit questions to my TA | I can easily contact him and get an answer |
+| `* *` | Teaching Assistant | view assignment submission status for each student | I can find which students have not submitted assignments |
+| `* *` | Teaching Assistant | create notes for each student | I can track any special considerations |
+| `* *` | SoC Teaching Assistant | Link my account with github | I can review my students' code |
+| `* *` | Student | I can submit feedback to my TA | he can improve his teaching |
+| `* *` | Teaching Assistant | view feedback from my students | I can improve my teaching |
+| `* *` | Teaching Assistant | view only feedback scores lower than 2/5 | I can focus on improving on areas that are more important |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+### **1\. Use Case: Add a New Student Contact**
 
-**Use case: Delete a person**
+**System:** TAHub  
+**Actor:** Teaching Assistant (TA)  
+**Use Case ID:** UC01 \- Add Contact  
+**Main Success Scenario (MSS):**
 
-**MSS**
+1. TA adds a new student contact.  
+2. TAHub displays that the contact has been successfully added.
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+Use case ends.
 
-    Use case ends.
+**Extensions:**
 
-**Extensions**
-
-* 2a. The list is empty.
-
+* **1a.** TAHub detects invalid input (e.g., invalid email or phone number).  
+  1a1. TAHub requests correction of the invalid input.  
+  Use case ends.  
+* **1b.** TAHub detects that the contact already exists  
+  1b1. TAHub ignores the entry and notifies the TA.  
   Use case ends.
 
-* 3a. The given index is invalid.
+**Actors:** Teaching Assistant
 
-    * 3a1. AddressBook shows an error message.
+---
 
-      Use case resumes at step 2.
+### **2\. Use Case: View Student Contact Information**
 
-*{More to be added}*
+**System:** TAHub  
+**Actor:** Teaching Assistant (TA)  
+**Use Case ID:** UC02 \- View Contact  
+**Main Success Scenario (MSS):**
+
+1. TA requests to view a specific student’s contact information.  
+2. TAHub displays the student's name, phone number, email, Telegram ID, matriculation number, and other relevant details.
+
+Use case ends.
+
+**Extensions:**
+
+* **1a.** TA enters a number that is out of bounds or not a number.  
+  1a1. TAHub notifies the TA with an error message (e.g., "Index out of bounds" or "Please input a number").  
+  Use case ends.
+
+**Actors:** Teaching Assistant
+
+---
+
+### **3\. Use Case: Record Student Grade**
+
+**System:** TAHub  
+**Actor:** Teaching Assistant (TA)  
+**Use Case ID:** UC03 \- Record Grade  
+**Main Success Scenario (MSS):**
+
+1. TA records a grade for a student.  
+2. TAHub confirms the successful recording of the grade.
+
+Use case ends.
+
+**Extensions:**
+
+* **1a.** TAHub detects invalid input for the grade  
+  1a1. TAHub requests correction of the invalid input.  
+  Use case ends.  
+* **1b.** TA attempts to record a grade for a test that has already been recorded.  
+  1b1. TAHub overwrites the previous grade and notifies the TA.  
+  Use case ends.
+
+**Actors:** Teaching Assistant
+
+---
+
+### **4\. Use Case: View Student Grades**
+
+**System:** TAHub  
+**Actor:** Teaching Assistant (TA)  
+**Use Case ID:** UC04 \- View Grades  
+**Main Success Scenario (MSS):**
+
+1. TA views a student’s grades.  
+2. TAHub displays the student's grades for all tests.
+
+Use case ends.
+
+**Extensions:**
+
+* **1a.** TA enters a number that is out of bounds or not a number.  
+  1a1. TAHub notifies the TA with an error message (e.g., "Index out of bounds" or "Please input a number").  
+  Use case ends.
+
+**Actors:** Teaching Assistant
+
+---
+
+### **5\. Use Case: Mark Attendance**
+
+**System:** TAHub  
+**Actor:** Teaching Assistant (TA)  
+**Use Case ID:** UC05 \- Mark Attendance  
+**Main Success Scenario (MSS):**
+
+1. TA records attendance for a student.  
+2. TAHub outputs the successful recording of attendance.
+
+Use case ends.
+
+**Extensions:**
+
+* **1a.** TAHub detects invalid input for the date.  
+  1a1. TAHub requests correction of the invalid input.  
+  1a2. TA provides corrected input.  
+  Use case ends.  
+* **1b.** TA attempts to record attendance for a date where attendance has already been marked.  
+  1b1. TAHub overwrites the previous attendance and notifies the TA.  
+  Use case ends.
+
+**Actors:** Teaching Assistant
+
+---
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 500 students without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Should be a standalone application and must not depend on any external or remote servers
+5. Should respond to user input (e.g., adding a student contact, viewing information) within two seconds under normal operating conditions.
 
-*{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Duplicate Entry**: An attempt to add a student contact, grade, or record that already exists in the system. TAHub identifies and prevents duplicate entries based on specific criteria (e.g., matriculation number).
+* **Index**: A numerical value representing the position of a student’s contact in the TAHub system. TAs use this index to refer to a student’s record in commands.
 
 --------------------------------------------------------------------------------------------------------------------
 
