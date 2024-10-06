@@ -5,6 +5,8 @@
       "phone": "94351253",
       "email": "alice@example.com",
       "address": "123, Jurong West Ave 6, #08-111",
+      "emergency contact name" : "",
+      "emergency contact number" : "",
       "tags": ["friends"]
     },
     {
@@ -12,6 +14,8 @@
       "phone": "98765432",
       "email": "johnd@example.com",
       "address": "311, Clementi Ave 2, #02-25",
+      "emergency contact name" : "",
+      "emergency contact number" : "",
       "tags": ["owesMoney", "friends"]
     }
   ],
@@ -23,6 +27,8 @@
         "phone": "94351253",
         "email": "alice@example.com",
         "address": "123, Jurong West Ave 6, #08-111",
+        "emergency contact name" : "",
+        "emergency contact number" : "",
         "tags": ["friends"]
       }
     },
@@ -33,6 +39,8 @@
         "phone": "98765432",
         "email": "johnd@example.com",
         "address": "311, Clementi Ave 2, #02-25",
+        "emergency contact name" : "",
+        "emergency contact number" : "",
         "tags": ["owesMoney", "friends"]
       }
     }
