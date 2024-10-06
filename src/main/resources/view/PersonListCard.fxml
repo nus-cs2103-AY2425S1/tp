@@ -31,6 +31,10 @@
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+      <Label fx:id="VRN" styleClass="cell_small_label" text="\$vrn" />
+      <Label fx:id="VIN" styleClass="cell_small_label" text="\$vin" />
+      <Label fx:id="carMake" styleClass="cell_small_label" text="\$nissan or something idk" />
+      <Label fx:id="carModel" styleClass="cell_small_label" text="\$Skyline GT-R" />
     </VBox>
   </GridPane>
 </HBox>
