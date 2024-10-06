@@ -37,9 +37,9 @@ public class GuestTest {
         editedAmy = new GuestBuilder(AMY).withName(VALID_NAME_BOB).build();
         assertFalse(AMY.isSamePerson(editedAmy));
 
-        // name differs in case, all other attributes same -> returns false
+        // name differs in case, all other attributes same -> returns true
         Guest editedBob = new GuestBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        assertTrue(BOB.isSamePerson(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
