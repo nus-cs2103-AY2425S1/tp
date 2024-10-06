@@ -35,4 +35,24 @@ public class CompanyNameTest {
         assertTrue(CompanyName.isValidName("Wells 12345!")); // with ASCII characters
         assertTrue(CompanyName.isValidName("Abc & 123 Alphabet Incorporated")); // long names
     }
+
+    @Test
+    public void equals() {
+        CompanyName companyName = new CompanyName("NUS");
+
+        // same object -> returns true
+        assertTrue(companyName.equals(companyName));
+
+        // same values -> returns true
+        assertTrue(companyName.equals(new CompanyName("NUS")));
+
+        // null -> returns false
+        assertFalse(companyName.equals(null));
+
+        // different types -> returns false
+        assertFalse(companyName.equals(5));
+
+        // different values -> returns false
+        assertFalse(companyName.equals(new CompanyName("MUS")));
+    }
 }

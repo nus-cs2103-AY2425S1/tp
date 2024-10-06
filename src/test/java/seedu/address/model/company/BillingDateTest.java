@@ -35,4 +35,23 @@ public class BillingDateTest {
         assertTrue(BillingDate.isValidBillingDate("12")); // middle of range
         assertTrue(BillingDate.isValidBillingDate("28")); // last in range
     }
+
+    @Test
+    public void equals() {
+        // object equal to itself
+        BillingDate billingDate = new BillingDate("5");
+        assertTrue(billingDate.equals(billingDate));
+
+        // object equal to one with the same values
+        assertTrue(billingDate.equals(new BillingDate("5")));
+
+        // null -> returns false
+        assertFalse(billingDate.equals(null));
+
+        // different types -> returns false
+        assertFalse(billingDate.equals(5));
+
+        // different values -> returns false
+        assertFalse(billingDate.equals("6"));
+    }
 }
