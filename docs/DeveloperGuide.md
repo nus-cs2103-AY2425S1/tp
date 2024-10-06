@@ -275,8 +275,7 @@ particular, this representative works with B2B sales.
 - prefers typing to mouse interactions
 - is reasonably comfortable using CLI apps
 
-**Value proposition**: Efficiently manage and organise a large number of contacts
-faster than a typical mouse/GUI driven app
+**Value proposition**: This product aims to streamline and simplify sales management for Food and Beverage outlets. By providing an organized, easy-to-use platform for managing business contacts, it helps sales representatives save time and improve efficiency.
 
 ### User stories
 
@@ -284,9 +283,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …           | I want to …                                                                 | So that I can …                                                        |
 | -------- | ---------------- | --------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `* * *`  | user             | add new contacts                                                            | save the contact information of people                                 |
+| `* * *`  | user             | add a new contact                                                           | save the contact information of people                                 |
 | `* * *`  | user             | delete a contact                                                            | free up space in my app                                                |
-| `* * *`  | user             | view all contact                                                            | retrieve contact information                                           |
+| `* * *`  | user             | view all contact                                                            | see the full list of contacts                                          |
+| `* * *`  | user             | view a contact                                                              | retrieve contact information of a person                               |
 | `* * *`  | user             | save all contact                                                            | retain all information for when i reopen the app                       |
 | `* * *`  | sales rep        | have a low query time                                                       | avoid wasting much time querying my desired contact                    |
 | `* *`    | user             | find a person by name                                                       | locate details of persons without having to go through the entire list |
@@ -310,7 +310,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | sales rep        | add a tag to multiple clients                                               | tag the clients more easily                                            |
 | `*`      | user             | sort contacts by name                                                       | locate a person easily                                                 |
 | `*`      | experienced user | use keyboard shortcuts                                                      | navigate the app faster                                                |
-| `*`      | sales rep        | contact my client quickly from the app                                      | avoid typing numbers repeatedly on my phone                            |
+| `*`      | sales rep        | contact my client quickly from the app                                      | avoid typing numbers repeatedly on my device                           |
 
 ### Use cases
 
