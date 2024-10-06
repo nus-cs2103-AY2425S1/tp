@@ -310,7 +310,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | sales rep        | add a tag to multiple clients                                               | tag the clients more easily                                            |
 | `*`      | user             | sort contacts by name                                                       | locate a person easily                                                 |
 | `*`      | experienced user | use keyboard shortcuts                                                      | navigate the app faster                                                |
-| `*`      | sales rep        | contact my client quickly from the app                                      | avoid typing numbers repeatedly on my device                           |
+| `*`      | sales rep        | contact my client quickly from the app                                      | avoid typing numbers repeatedly on my _device_                         |
 
 ### Use cases
 
@@ -451,6 +451,7 @@ _{More to be added}_
 
 - **Mainstream OS**: Windows, Linux, Unix, MacOS
 - **Private contact detail**: A contact detail that is not meant to be shared with others
+- **device**: system with dialing and calling capabilities
 
 ---
 
