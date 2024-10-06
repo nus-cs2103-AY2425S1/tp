@@ -62,4 +62,9 @@ public class BackupCommand extends Command {
             throw new CommandException(String.format(MESSAGE_FAILURE, e.getMessage()));
         }
     }
+
+    public String getDestinationPath() {
+        return destinationPath;
+    }
+
 }

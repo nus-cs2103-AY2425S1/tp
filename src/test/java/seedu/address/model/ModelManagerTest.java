@@ -2,12 +2,15 @@ package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -171,5 +174,34 @@ public class ModelManagerTest {
         // Assert that the file was created successfully.
         assertTrue(backupPath.toFile().exists());
     }
+
+    @Test
+    public void modelManager_initialization_validStorage() {
+        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(Paths.get("data/addressBook.json"));
+        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(Paths.get("data/userPrefs.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+
+        ModelManager modelManager = new ModelManager(new AddressBook(), new UserPrefs(), storage);
+        assertNotNull(modelManager.getStorage());
+        assertEquals(storage, modelManager.getStorage());
+    }
+
+    @Test
+    public void backupData_withValidStorage_noException() {
+        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(Paths.get("data/addressBook.json"));
+        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(Paths.get("data/userPrefs.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+
+        ModelManager modelManager = new ModelManager(new AddressBook(), new UserPrefs(), storage);
+        String backupPath = "data/backup.json";
+
+        try {
+            modelManager.backupData(backupPath);
+        } catch (IOException e) {
+            fail("Backup should not throw IOException with valid storage: " + e.getMessage());
+        }
+    }
+
+
 
 }
