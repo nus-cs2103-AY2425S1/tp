@@ -463,20 +463,31 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
+1. Deleting a person while all potential hires/employees are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all potential hires/employees using the `list ph` or `list e` command. potential hires/employees persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   1. Test case: `delete ph 1`<br>
+      Expected: First potential hire is deleted from the list. Details of the deleted potential hires/employees shown in the status message. Timestamp in the status bar is updated. The numbering system is 1 based indexing.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   1. Test case: `delete ph 0`<br>
+      Expected: No potential hire is deleted. Error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+   1. Test case: `Delete E 1`<br>
+      Expected: Unrecognised command. Error is due to capitalisation of `Delete` and/or `E` instead of `delete` and/or `e`. Captialisation matters.
 
-1. _{ more test cases …​ }_
+   1. Test case: `delete e`<br>
+      Expected: There are missing parameters. A guide on how to use the command will be shown in the status message.
+
+   1. Other incorrect delete commands to try: `delete ph`, `delete e x`, `delete e 1 2`, `delete e    1     `,  `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous points. If the syntax is incorrect, the command is not recognised. Otherwise, the command is recognised but the action is invalid and a specific status message is shown.
+
+1. Deleting a person with no potential hires/employees
+
+   1. Prerequisites: List all potential hires/employees using the `list ph` or `list e` command. No potential hires/employees is shown.
+
+   1. Test case: `delete ph 1`<br>
+      Expected: No potential hires/employees are deleted. The error message will show that there are no potential hires/employees to delete.
 
 ### Saving data
 
