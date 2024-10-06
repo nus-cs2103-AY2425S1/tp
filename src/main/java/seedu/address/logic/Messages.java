@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * Container for user visible messages.
@@ -45,6 +46,15 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code tag} for display to the user.
+     */
+    public static String format(Tag tag) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(tag.getTagName());
         return builder.toString();
     }
 
