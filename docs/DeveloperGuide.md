@@ -302,8 +302,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**System: AddressBook**
-**Use case: UC01 Add Student Name**
+**System: StudentManagerPro**
+**Use case: UC01 Add Student's Name**
 **Actor: User**
 **Preconditions: User is logged in.**
 **Guarantees:**
@@ -312,9 +312,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User gives the command to add a student's name to the AddressBook.
-2.  System validates the input.
-3.  System validates the input's format. 
+1.  User gives the command to add a student's name to the StudentManagerPro. 
+2.  System validates the input's format.
+3.  System validates the input.
 4.  System adds the student to the system. 
 5.  System adds the student name to the student profile. 
 6.  System confirms the success by displaying a success message.
@@ -322,21 +322,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. User leaves the name field empty.
-    * 2a1. System displays an error message to ask for a valid name.
+* 2a. User enters invalid characters.
+    * 2a1. System displays an error message to ask for a valid name command format, with no special characters.
       Use case ends.
 
-* 3a. User enters invalid characters.
-    * 3a1. System displays an error message to ask for a valid name command.
+* 3a. User leaves the name field empty.
+    * 3a1. System displays an error message to ask for a valid name.
       Use case ends.
 
-* 6a. User enters a duplicate name.
-    * 6a1. System displays an error message notifying that the name already exists in the system.
+* 3b. User enters a duplicate name.
+    * 3b1. System displays an error message notifying that the name already exists in the system.
       Use case ends.
 
 
-**System: AddressBook**
-**Use case: UC02 Add Student Email**
+**System: StudentManagerPro**
+**Use case: UC02 Add Student's Email**
 **Actor: User**
 **Preconditions:**
 * User is logged in.
@@ -347,29 +347,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User gives the command to add a student's email to a student's profile in the AddressBook.
-2.  System validates the input.
-3.  System validates the input's format.
+1.  User gives the command to add a student's email to a student's profile in the StudentManagerPro.
+2.  System validates the input's format.
+3.  System validates the input.
 4.  System adds the email to the student profile in the system. 
 5.  System confirms the success by displaying a success message.
     Use case ends.
 
 **Extensions**
 
-* 2a. User leaves the email field empty.
-    * 2a1. System displays an error message to ask for a valid email.
+* 2a. User enters invalid characters.
+    * 2a1. System displays an error message to ask for a valid email command format, with no special characters.
       Use case ends.
 
-* 3a. User enters invalid characters.
-    * 3a1. System displays an error message to ask for a valid email command.
+* 3a. User leaves the email field empty.
+    * 3a1. System displays an error message to ask for a valid email.
       Use case ends.
 
-* 6a. User enters a duplicate email.
-    * 6a1. System displays an error message notifying that the email already exists in the system.
+* 3b. User enters a duplicate email.
+    * 3b1. System displays an error message notifying that the email already exists in the system.
       Use case ends.
 
-**System: AddressBook**
-**Use case: UC03 Add Student Register Number**
+
+**System: StudentManagerPro**
+**Use case: UC03 Add Student's Register Number**
 **Actor: User**
 **Preconditions:**
 * User is logged in.
@@ -380,29 +381,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User gives the command to add a student's register number to a student's profile in the AddressBook.
-2.  System validates the input.
-3.  System validates the input's format.
+1.  User gives the command to add a student's register number to a student's profile in the StudentManagerPro.
+2.  System validates the input's format.
+3.  System validates the input.
 4.  System adds the register number to the student profile in the system.
 5.  System confirms the success by displaying a success message.
     Use case ends.
 
 **Extensions**
 
-* 2a. User leaves the register number field empty.
-    * 2a1. System displays an error message to ask for a valid register number.
+* 2a. User enters invalid characters.
+    * 2a1. System displays an error message to ask for a valid register number command format, with no 
+      special characters.
       Use case ends.
 
-* 3a. User enters invalid characters.
-    * 3a1. System displays an error message to ask for a valid register number command.
+* 3a. User leaves the register number field empty.
+    * 3a1. System displays an error message to ask for a valid register number.
       Use case ends.
 
-* 6a. User enters a duplicate register number.
-    * 6a1. System displays an error message notifying that the register number already exists in the system.
+* 3b. User enters a duplicate register number.
+    * 3b1. System displays an error message notifying that the register number already exists in the system.
       Use case ends.
 
-**System: AddressBook**
-**Use case: UC04 Add Student Sex**
+**System: StudentManagerPro**
+**Use case: UC04 Add Student's Sex**
 **Actor: User**
 **Preconditions:**
 * User is logged in.
@@ -413,25 +415,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User gives the command to add a student's sex to a student's profile in the AddressBook.
-2.  System validates the input.
-3.  System validates the input's format.
+1.  User gives the command to add a student's sex to a student's profile in the StudentManagerPro.
+2.  System validates the input's format.
+3.  System validates the input.
 4.  System adds the sex to the student profile in the system.
 5.  System confirms the success by displaying a success message.
     Use case ends.
 
 **Extensions**
 
-* 2a. User leaves the sex field empty.
-    * 2a1. System displays an error message to ask for a valid sex.
+* 2a. User enters invalid characters.
+    * 2a1. System displays an error message to ask for a valid sex command format, with no
+      special characters.
       Use case ends.
 
-* 3a. User enters invalid characters.
-    * 3a1. System displays an error message to ask for a valid sex command.
+* 3a. User leaves the sex field empty.
+    * 3a1. System displays an error message to ask for a valid sex.
       Use case ends.
 
-**System: AddressBook**
-**Use case: UC05 Add Student Address**
+**System: StudentManagerPro**
+**Use case: UC05 Add Student's Address**
 **Actor: User**
 **Preconditions:**
 * User is logged in.
@@ -442,25 +445,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User gives the command to add a student's address to a student's profile in the AddressBook.
-2.  System validates the input.
-3.  System validates the input's format.
+1.  User gives the command to add a student's address to a student's profile in the StudentManagerPro.
+2.  System validates the input's format.
+3.  System validates the input.
 4.  System adds the address to the student profile in the system.
 5.  System confirms the success by displaying a success message.
     Use case ends.
 
 **Extensions**
 
-* 2a. User leaves the address field empty.
-    * 2a1. System displays an error message to ask for a valid address.
+* 2a. User enters invalid characters.
+    * 2a1. System displays an error message to ask for a valid address command format, with only acceptable
+      special characters.
       Use case ends.
 
-* 3a. User enters invalid characters.
-    * 3a1. System displays an error message to ask for a valid address command.
+* 3a. User leaves the address field empty.
+    * 3a1. System displays an error message to ask for a valid address.
       Use case ends.
 
-**System: AddressBook**
-**Use case: UC06 Add Student Contact Number**
+**System: StudentManagerPro**
+**Use case: UC06 Add Student's Contact Number**
 **Actor: User**
 **Preconditions:**
 * User is logged in.
@@ -471,29 +475,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User gives the command to add a student's contact number to a student's profile in the AddressBook.
-2.  System validates the input.
-3.  System validates the input's format.
+1.  User gives the command to add a student's contact number to a student's profile in the StudentManagerPro.
+2.  System validates the input's format.
+3.  System validates the input.
 4.  System adds the contact number to the student profile in the system.
 5.  System confirms the success by displaying a success message.
     Use case ends.
 
 **Extensions**
 
-* 2a. User leaves the contact number field empty.
-    * 2a1. System displays an error message to ask for a valid contact number.
+* 2a. User enters invalid characters.
+    * 2a1. System displays an error message to ask for a valid contact number command format, with no
+      special characters.
       Use case ends.
 
-* 3a. User enters invalid characters.
-    * 3a1. System displays an error message to ask for a valid contact number command.
+* 3a. User leaves the contact number field empty.
+    * 3a1. System displays an error message to ask for a valid contact number.
       Use case ends.
 
-* 6a. User enters a duplicate contact number.
-    * 6a1. System displays an error message notifying that the contact number already exists in the system.
+* 3b. User enters a duplicate contact number.
+    * 3b1. System displays an error message notifying that the contact number already exists in the system.
       Use case ends.
 
-**System: AddressBook**
-**Use case: UC07 Add Student Emergency Contact Name**
+
+**System: StudentManagerPro**
+**Use case: UC07 Add Student's Emergency Contact Name**
 **Actor: User**
 **Preconditions:**
 * User is logged in.
@@ -504,59 +510,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User gives the command to add a student's emergency contact name to a student's profile in the AddressBook.
-2.  System validates the input.
-3.  System validates the input's format.
+1.  User gives the command to add a student's emergency contact name to a student's profile in the StudentManagerPro.
+2.  System validates the input's format.
+3.  System validates the input.
 4.  System adds the emergency contact name to the student profile in the system.
 5.  System confirms the success by displaying a success message.
     Use case ends.
 
 **Extensions**
 
-* 2a. User leaves the emergency contact name field empty.
-    * 2a1. System displays an error message to ask for a valid emergency contact name.
+* 2a. User enters invalid characters.
+    * 2a1. System displays an error message to ask for a valid emergency contact name command format, with no
+      special characters.
       Use case ends.
 
-* 3a. User enters invalid characters.
-    * 3a1. System displays an error message to ask for a valid emergency contact name command.
-      Use case ends.
-
-**System: AddressBook**
-**Use case: UC08 Add Student Contact Number**
-**Actor: User**
-**Preconditions:**
-* User is logged in.
-* Student profile has been created through the <u>addition of the student name(UC01).</u>
-**Guarantees:**
-* If successful, the student's contact number is added to the student profile and saved in the system.
-* If an invalid contact number is given as input, a corresponding error message is displayed.
-
-**MSS**
-
-1.  User gives the command to add a student's contact number to a student's profile in the AddressBook.
-2.  System validates the input.
-3.  System validates the input's format.
-4.  System adds the contact number to the student profile in the system.
-5.  System confirms the success by displaying a success message.
-    Use case ends.
-
-**Extensions**
-
-* 2a. User leaves the contact number field empty.
-    * 2a1. System displays an error message to ask for a valid contact number.
-      Use case ends.
-
-* 3a. User enters invalid characters.
-    * 3a1. System displays an error message to ask for a valid contact number command.
-      Use case ends.
-
-* 6a. User enters a duplicate contact number.
-    * 6a1. System displays an error message notifying that the contact number already exists in the system.
+* 3a. User leaves the emergency contact name field empty.
+    * 3a1. System displays an error message to ask for a valid emergency contact name.
       Use case ends.
 
 
-**System: AddressBook**
-**Use case: UC09 Add Student Emergency Contact Number**
+**System: StudentManagerPro**
+**Use case: UC08 Add Student's Emergency Contact Number**
 **Actor: User**
 **Preconditions:**
 * User is logged in.
@@ -567,56 +541,57 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User gives the command to add a student's emergency contact number to a student's profile in the AddressBook.
-2.  System validates the input.
-3.  System validates the input's format.
+1.  User gives the command to add a student's emergency contact number to a student's profile in the StudentManagerPro.
+2.  System validates the input's format.
+3.  System validates the input.
 4.  System adds the emergency contact number to the student profile in the system.
 5.  System confirms the success by displaying a success message.
     Use case ends.
 
 **Extensions**
 
-* 2a. User leaves the emergency contact number field empty.
-    * 2a1. System displays an error message to ask for a valid emergency contact number.
+* 2a. User enters invalid characters.
+    * 2a1. System displays an error message to ask for a valid emergency contact number command format, with no
+      special characters.
       Use case ends.
 
-* 3a. User enters invalid characters.
-    * 3a1. System displays an error message to ask for a valid emergency contact number command.
+* 3a. User leaves the emergency contact number field empty.
+    * 3a1. System displays an error message to ask for a valid emergency contact number.
       Use case ends.
 
-
-**System: AddressBook**
-**Use case: UC10 Group Students Into Their Classes**
+**System: StudentManagerPro**
+**Use case: UC9 Group Students Into Their Classes**
 **Actor: User**
 **Preconditions:**
 * User is logged in.
 * Student profile has been created through the <u>addition of the student name(UC01).</u>
-* Student profile has been updated with <u>additional details from UC02 to UC09.</u>
+* Student profile has been updated with <u>additional details from UC02 to UC08.</u>
 **Guarantees:**
 * If successful, the student's class is added to the student profile.
 * If an invalid data is entered, a corresponding error message is displayed.
 
 **MSS**
 
-1.  User gives the command to add a student's class to a student's profile in the AddressBook.
-2.  System validates the input.
-3.  System validates the input's format.
+1.  User gives the command to add a student's class to a student's profile in the StudentManagerPro.
+2.  System validates the input's format.
+3.  System validates the input.
 4.  System adds the class to the student profile in the system.
 5.  System confirms the success by displaying a success message.
     Use case ends.
 
 **Extensions**
 
-* 2a. User leaves the class field empty.
-    * 2a1. System displays an error message to ask for a valid class.
+* 2a. User enters invalid characters.
+    * 2a1. System displays an error message to ask for a valid class command format, with no
+      special characters.
       Use case ends.
 
-* 3a. User enters invalid characters.
-    * 3a1. System displays an error message to ask for a valid class command.
+* 3a. User leaves the class field empty.
+    * 3a1. System displays an error message to ask for a valid class.
       Use case ends.
 
 
-**System: AddressBook**
+**System: StudentManagerPro**
 **Use case: UC11 Remove Student from the System**
 **Actor: User**
 **Preconditions:**
@@ -628,25 +603,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User gives the command to remove a student from the AddressBook.
-2.  System validates the input.
-3.  System validates the input's format.
+1.  User gives the command to remove a student from the StudentManagerPro.
+2.  System validates the input's format.
+3.  System validates the input.
 4.  System removes the student from the system.
 5.  System confirms the success by displaying a success message.
     Use case ends.
 
 **Extensions**
 
-* 2a. User leaves the name field empty.
-    * 2a1. System displays an error message to ask for a valid name of the student to be removed.
+* 2a. User enters invalid characters.
+    * 2a1. System displays an error message to ask for a valid name command format, with no
+      special characters.
       Use case ends.
 
-* 2b. User enters a name that does not exist in the system.
-    * 2b1. System displays an error message to ask for a valid name of a student in the system.
-      Use case ends.
-
-* 3a. User enters invalid characters.
+* 3a. User leaves the name field empty.
     * 3a1. System displays an error message to ask for a valid name.
+      Use case ends.
+
+* 3b. User enters a name that does not exist in the system.
+    * 3b1. System displays an error message to ask for a valid name of a student in the system.
       Use case ends.
 
 
