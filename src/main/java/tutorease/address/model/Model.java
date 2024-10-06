@@ -42,12 +42,12 @@ public interface Model {
     /**
      * Sets the user prefs' address book file path.
      */
-    void setTutorEaseFilePath(Path TutorEaseFilePath);
+    void setTutorEaseFilePath(Path tutorEaseFilePath);
 
     /**
      * Replaces address book data with the data in {@code TutorEase}.
      */
-    void setTutorEase(ReadOnlyTutorEase TutorEase);
+    void setTutorEase(ReadOnlyTutorEase tutorEase);
 
     /** Returns the TutorEase */
     ReadOnlyTutorEase getTutorEase();

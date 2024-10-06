@@ -18,10 +18,10 @@ import javafx.collections.ObservableList;
 import tutorease.address.commons.core.GuiSettings;
 import tutorease.address.logic.Messages;
 import tutorease.address.logic.commands.exceptions.CommandException;
-import tutorease.address.model.TutorEase;
 import tutorease.address.model.Model;
 import tutorease.address.model.ReadOnlyTutorEase;
 import tutorease.address.model.ReadOnlyUserPrefs;
+import tutorease.address.model.TutorEase;
 import tutorease.address.model.person.Person;
 import tutorease.address.testutil.PersonBuilder;
 

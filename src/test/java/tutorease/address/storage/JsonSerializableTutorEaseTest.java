@@ -24,9 +24,9 @@ public class JsonSerializableTutorEaseTest {
     public void toModelType_typicalPersonsFile_success() throws Exception {
         JsonSerializableTutorEase dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_FILE,
                 JsonSerializableTutorEase.class).get();
-        TutorEase TutorEaseFromFile = dataFromFile.toModelType();
+        TutorEase tutorEaseFromFile = dataFromFile.toModelType();
         TutorEase typicalPersonsTutorEase = TypicalPersons.getTypicalTutorEase();
-        assertEquals(TutorEaseFromFile, typicalPersonsTutorEase);
+        assertEquals(tutorEaseFromFile, typicalPersonsTutorEase);
     }
 
     @Test

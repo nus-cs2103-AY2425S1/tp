@@ -2,8 +2,8 @@ package tutorease.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import tutorease.address.model.TutorEase;
 import tutorease.address.model.Model;
+import tutorease.address.model.TutorEase;
 
 /**
  * Clears the address book.

@@ -16,8 +16,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import tutorease.address.commons.exceptions.DataLoadingException;
-import tutorease.address.model.TutorEase;
 import tutorease.address.model.ReadOnlyTutorEase;
+import tutorease.address.model.TutorEase;
 
 public class JsonTutorEaseStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonTutorEaseStorageTest");

@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import tutorease.address.commons.core.GuiSettings;
-import tutorease.address.model.TutorEase;
 import tutorease.address.model.ReadOnlyTutorEase;
+import tutorease.address.model.TutorEase;
 import tutorease.address.model.UserPrefs;
 
 public class StorageManagerTest {

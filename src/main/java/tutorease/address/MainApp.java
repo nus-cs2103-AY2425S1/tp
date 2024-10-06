@@ -15,18 +15,18 @@ import tutorease.address.commons.util.ConfigUtil;
 import tutorease.address.commons.util.StringUtil;
 import tutorease.address.logic.Logic;
 import tutorease.address.logic.LogicManager;
-import tutorease.address.model.TutorEase;
 import tutorease.address.model.Model;
 import tutorease.address.model.ModelManager;
 import tutorease.address.model.ReadOnlyTutorEase;
 import tutorease.address.model.ReadOnlyUserPrefs;
+import tutorease.address.model.TutorEase;
 import tutorease.address.model.UserPrefs;
 import tutorease.address.model.util.SampleDataUtil;
-import tutorease.address.storage.TutorEaseStorage;
 import tutorease.address.storage.JsonTutorEaseStorage;
 import tutorease.address.storage.JsonUserPrefsStorage;
 import tutorease.address.storage.Storage;
 import tutorease.address.storage.StorageManager;
+import tutorease.address.storage.TutorEaseStorage;
 import tutorease.address.storage.UserPrefsStorage;
 import tutorease.address.ui.Ui;
 import tutorease.address.ui.UiManager;
@@ -57,8 +57,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        TutorEaseStorage TutorEaseStorage = new JsonTutorEaseStorage(userPrefs.getTutorEaseFilePath());
-        storage = new StorageManager(TutorEaseStorage, userPrefsStorage);
+        TutorEaseStorage tutorEaseStorage = new JsonTutorEaseStorage(userPrefs.getTutorEaseFilePath());
+        storage = new StorageManager(tutorEaseStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -75,15 +75,15 @@ public class MainApp extends Application {
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getTutorEaseFilePath());
 
-        Optional<ReadOnlyTutorEase> TutorEaseOptional;
+        Optional<ReadOnlyTutorEase> tutorEaseOptional;
         ReadOnlyTutorEase initialData;
         try {
-            TutorEaseOptional = storage.readTutorEase();
-            if (!TutorEaseOptional.isPresent()) {
+            tutorEaseOptional = storage.readTutorEase();
+            if (!tutorEaseOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getTutorEaseFilePath()
                         + " populated with a sample TutorEase.");
             }
-            initialData = TutorEaseOptional.orElseGet(SampleDataUtil::getSampleTutorEase);
+            initialData = tutorEaseOptional.orElseGet(SampleDataUtil::getSampleTutorEase);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getTutorEaseFilePath() + " could not be loaded."
                     + " Will be starting with an empty TutorEase.");

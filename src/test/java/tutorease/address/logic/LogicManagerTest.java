@@ -45,10 +45,10 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonTutorEaseStorage TutorEaseStorage =
-                new JsonTutorEaseStorage(temporaryFolder.resolve("TutorEase.json"));
+        JsonTutorEaseStorage tutorEaseStorage =
+                new JsonTutorEaseStorage(temporaryFolder.resolve("tutorease.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(TutorEaseStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(tutorEaseStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -150,9 +150,9 @@ public class LogicManagerTest {
         Path prefPath = temporaryFolder.resolve("ExceptionUserPrefs.json");
 
         // Inject LogicManager with an TutorEaseStorage that throws the IOException e when saving
-        JsonTutorEaseStorage TutorEaseStorage = new JsonTutorEaseStorage(prefPath) {
+        JsonTutorEaseStorage tutorEaseStorage = new JsonTutorEaseStorage(prefPath) {
             @Override
-            public void saveTutorEase(ReadOnlyTutorEase TutorEase, Path filePath)
+            public void saveTutorEase(ReadOnlyTutorEase tutorEase, Path filePath)
                     throws IOException {
                 throw e;
             }
@@ -160,7 +160,7 @@ public class LogicManagerTest {
 
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(TutorEaseStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(tutorEaseStorage, userPrefsStorage);
 
         logic = new LogicManager(model, storage);
 

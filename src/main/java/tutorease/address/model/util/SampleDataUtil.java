@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import tutorease.address.model.TutorEase;
 import tutorease.address.model.ReadOnlyTutorEase;
+import tutorease.address.model.TutorEase;
 import tutorease.address.model.person.Address;
 import tutorease.address.model.person.Email;
 import tutorease.address.model.person.Name;

@@ -5,9 +5,9 @@ import static tutorease.address.testutil.TypicalPersons.getTypicalTutorEase;
 
 import org.junit.jupiter.api.Test;
 
-import tutorease.address.model.TutorEase;
 import tutorease.address.model.Model;
 import tutorease.address.model.ModelManager;
+import tutorease.address.model.TutorEase;
 import tutorease.address.model.UserPrefs;
 
 public class ClearCommandTest {

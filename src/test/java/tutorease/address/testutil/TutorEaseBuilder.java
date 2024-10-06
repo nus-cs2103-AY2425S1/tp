@@ -10,25 +10,25 @@ import tutorease.address.model.person.Person;
  */
 public class TutorEaseBuilder {
 
-    private TutorEase TutorEase;
+    private TutorEase tutorEase;
 
     public TutorEaseBuilder() {
-        TutorEase = new TutorEase();
+        tutorEase = new TutorEase();
     }
 
-    public TutorEaseBuilder(TutorEase TutorEase) {
-        this.TutorEase = TutorEase;
+    public TutorEaseBuilder(TutorEase tutorEase) {
+        this.tutorEase = tutorEase;
     }
 
     /**
      * Adds a new {@code Person} to the {@code TutorEase} that we are building.
      */
     public TutorEaseBuilder withPerson(Person person) {
-        TutorEase.addPerson(person);
+        tutorEase.addPerson(person);
         return this;
     }
 
     public TutorEase build() {
-        return TutorEase;
+        return tutorEase;
     }
 }

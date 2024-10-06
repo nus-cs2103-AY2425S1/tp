@@ -15,8 +15,8 @@ import java.util.List;
 
 import tutorease.address.commons.core.index.Index;
 import tutorease.address.logic.commands.exceptions.CommandException;
-import tutorease.address.model.TutorEase;
 import tutorease.address.model.Model;
+import tutorease.address.model.TutorEase;
 import tutorease.address.model.person.NameContainsKeywordsPredicate;
 import tutorease.address.model.person.Person;
 import tutorease.address.testutil.EditPersonDescriptorBuilder;

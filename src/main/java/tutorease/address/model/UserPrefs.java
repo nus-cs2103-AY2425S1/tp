@@ -14,7 +14,7 @@ import tutorease.address.commons.core.GuiSettings;
 public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
-    private Path TutorEaseFilePath = Paths.get("data" , "tutorease.json");
+    private Path tutorEaseFilePath = Paths.get("data" , "tutorease.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -48,12 +48,12 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     }
 
     public Path getTutorEaseFilePath() {
-        return TutorEaseFilePath;
+        return tutorEaseFilePath;
     }
 
-    public void setTutorEaseFilePath(Path TutorEaseFilePath) {
-        requireNonNull(TutorEaseFilePath);
-        this.TutorEaseFilePath = TutorEaseFilePath;
+    public void setTutorEaseFilePath(Path tutorEaseFilePath) {
+        requireNonNull(tutorEaseFilePath);
+        this.tutorEaseFilePath = tutorEaseFilePath;
     }
 
     @Override
@@ -69,19 +69,19 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
         UserPrefs otherUserPrefs = (UserPrefs) other;
         return guiSettings.equals(otherUserPrefs.guiSettings)
-                && TutorEaseFilePath.equals(otherUserPrefs.TutorEaseFilePath);
+                && tutorEaseFilePath.equals(otherUserPrefs.tutorEaseFilePath);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, TutorEaseFilePath);
+        return Objects.hash(guiSettings, tutorEaseFilePath);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings);
-        sb.append("\nLocal data file location : " + TutorEaseFilePath);
+        sb.append("\nLocal data file location : " + tutorEaseFilePath);
         return sb.toString();
     }
 

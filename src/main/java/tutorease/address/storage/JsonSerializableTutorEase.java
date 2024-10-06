@@ -9,8 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import tutorease.address.commons.exceptions.IllegalValueException;
-import tutorease.address.model.TutorEase;
 import tutorease.address.model.ReadOnlyTutorEase;
+import tutorease.address.model.TutorEase;
 import tutorease.address.model.person.Person;
 
 /**
