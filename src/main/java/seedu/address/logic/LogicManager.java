@@ -74,7 +74,6 @@ public class LogicManager implements Logic {
 
     @Override
     public ObservableList<Contact> getFilteredContactList() {
-        logger.info(model.getFilteredContactList().toString());
         return model.getFilteredContactList();
     }
 
