@@ -96,4 +96,5 @@ public class NoteCommand extends Command {
         return name.equals(e.name)
                 && note.equals(e.note);
     }
+
 }
