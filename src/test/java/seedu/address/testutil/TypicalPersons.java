@@ -43,6 +43,7 @@ public class TypicalPersons {
             .withEmail("heinz@example.com").withAddress("wall street")
             .withFinancialInfo("Unknown")
             .withSocialMediaHandle("carl_k")
+            .withTags("friends")
             .build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street")
@@ -53,16 +54,19 @@ public class TypicalPersons {
             .withEmail("werner@example.com").withAddress("michegan ave")
             .withFinancialInfo("Unknown")
             .withSocialMediaHandle("elle_m")
+            .withTags("friends")
             .build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withEmail("lydia@example.com").withAddress("little tokyo")
             .withFinancialInfo("Unknown")
             .withSocialMediaHandle("fiona_k")
+            .withTags("friends")
             .build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street")
             .withFinancialInfo("Unknown")
             .withSocialMediaHandle("george_b")
+            .withTags("friends")
             .build();
 
     // Manually added
@@ -70,11 +74,13 @@ public class TypicalPersons {
             .withEmail("stefan@example.com").withAddress("little india")
             .withFinancialInfo("Unknown")
             .withSocialMediaHandle("hoon_m")
+            .withTags("friends")
             .build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").withAddress("chicago ave")
             .withFinancialInfo("Unknown")
             .withSocialMediaHandle("ida_m")
+            .withTags("friends")
             .build();
 
 
