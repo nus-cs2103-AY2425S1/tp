@@ -37,20 +37,20 @@ public interface Model {
     /**
      * Returns the user prefs' address book file path.
      */
-    Path getAddressBookFilePath();
+    Path getTutorEaseFilePath();
 
     /**
      * Sets the user prefs' address book file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setTutorEaseFilePath(Path TutorEaseFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces address book data with the data in {@code TutorEase}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setTutorEase(ReadOnlyTutorEase TutorEase);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the TutorEase */
+    ReadOnlyTutorEase getTutorEase();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.

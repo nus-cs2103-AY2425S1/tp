@@ -2,7 +2,7 @@ package tutorease.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import tutorease.address.model.AddressBook;
+import tutorease.address.model.TutorEase;
 import tutorease.address.model.Model;
 
 /**
@@ -17,7 +17,7 @@ public class ClearCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.setAddressBook(new AddressBook());
+        model.setTutorEase(new TutorEase());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

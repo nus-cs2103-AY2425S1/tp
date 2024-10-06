@@ -6,7 +6,7 @@ import tutorease.address.model.person.Person;
 /**
  * Unmodifiable view of an address book
  */
-public interface ReadOnlyAddressBook {
+public interface ReadOnlyTutorEase {
 
     /**
      * Returns an unmodifiable view of the persons list.

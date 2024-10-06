@@ -7,7 +7,7 @@ import static tutorease.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB
 import static tutorease.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static tutorease.address.testutil.Assert.assertThrows;
 import static tutorease.address.testutil.TypicalPersons.ALICE;
-import static tutorease.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static tutorease.address.testutil.TypicalPersons.getTypicalTutorEase;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -22,9 +22,9 @@ import tutorease.address.model.person.Person;
 import tutorease.address.model.person.exceptions.DuplicatePersonException;
 import tutorease.address.testutil.PersonBuilder;
 
-public class AddressBookTest {
+public class TutorEaseTest {
 
-    private final AddressBook addressBook = new AddressBook();
+    private final TutorEase addressBook = new TutorEase();
 
     @Test
     public void constructor() {
@@ -37,8 +37,8 @@ public class AddressBookTest {
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
+    public void resetData_withValidReadOnlyTutorEase_replacesData() {
+        TutorEase newData = getTypicalTutorEase();
         addressBook.resetData(newData);
         assertEquals(newData, addressBook);
     }
@@ -49,7 +49,7 @@ public class AddressBookTest {
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPersons);
+        TutorEaseStub newData = new TutorEaseStub(newPersons);
 
         assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
     }
@@ -60,18 +60,18 @@ public class AddressBookTest {
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasPerson_personNotInTutorEase_returnsFalse() {
         assertFalse(addressBook.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasPerson_personInTutorEase_returnsTrue() {
         addressBook.addPerson(ALICE);
         assertTrue(addressBook.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasPerson_personWithSameIdentityFieldsInTutorEase_returnsTrue() {
         addressBook.addPerson(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
@@ -85,17 +85,17 @@ public class AddressBookTest {
 
     @Test
     public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
+        String expected = TutorEase.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
         assertEquals(expected, addressBook.toString());
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyTutorEase whose persons list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class TutorEaseStub implements ReadOnlyTutorEase {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons) {
+        TutorEaseStub(Collection<Person> persons) {
             this.persons.setAll(persons);
         }
 

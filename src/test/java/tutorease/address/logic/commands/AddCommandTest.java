@@ -18,9 +18,9 @@ import javafx.collections.ObservableList;
 import tutorease.address.commons.core.GuiSettings;
 import tutorease.address.logic.Messages;
 import tutorease.address.logic.commands.exceptions.CommandException;
-import tutorease.address.model.AddressBook;
+import tutorease.address.model.TutorEase;
 import tutorease.address.model.Model;
-import tutorease.address.model.ReadOnlyAddressBook;
+import tutorease.address.model.ReadOnlyTutorEase;
 import tutorease.address.model.ReadOnlyUserPrefs;
 import tutorease.address.model.person.Person;
 import tutorease.address.testutil.PersonBuilder;
@@ -109,12 +109,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getTutorEaseFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setTutorEaseFilePath(Path addressBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -124,12 +124,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setTutorEase(ReadOnlyTutorEase newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyTutorEase getTutorEase() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -196,8 +196,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyTutorEase getTutorEase() {
+            return new TutorEase();
         }
     }
 

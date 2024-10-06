@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import tutorease.address.model.AddressBook;
-import tutorease.address.model.ReadOnlyAddressBook;
+import tutorease.address.model.TutorEase;
+import tutorease.address.model.ReadOnlyTutorEase;
 import tutorease.address.model.person.Address;
 import tutorease.address.model.person.Email;
 import tutorease.address.model.person.Name;
@@ -14,7 +14,7 @@ import tutorease.address.model.person.Phone;
 import tutorease.address.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code TutorEase} with sample data.
  */
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
@@ -40,8 +40,8 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+    public static ReadOnlyTutorEase getSampleTutorEase() {
+        TutorEase sampleAb = new TutorEase();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }

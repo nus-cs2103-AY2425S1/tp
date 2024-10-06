@@ -8,7 +8,7 @@ import static tutorease.address.logic.commands.CommandTestUtil.assertCommandSucc
 import static tutorease.address.testutil.TypicalPersons.CARL;
 import static tutorease.address.testutil.TypicalPersons.ELLE;
 import static tutorease.address.testutil.TypicalPersons.FIONA;
-import static tutorease.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static tutorease.address.testutil.TypicalPersons.getTypicalTutorEase;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -24,8 +24,8 @@ import tutorease.address.model.person.NameContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalTutorEase(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalTutorEase(), new UserPrefs());
 
     @Test
     public void equals() {

@@ -2,7 +2,7 @@ package tutorease.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static tutorease.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static tutorease.address.testutil.TypicalPersons.getTypicalTutorEase;
 
 import java.nio.file.Path;
 
@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import tutorease.address.commons.core.GuiSettings;
-import tutorease.address.model.AddressBook;
-import tutorease.address.model.ReadOnlyAddressBook;
+import tutorease.address.model.TutorEase;
+import tutorease.address.model.ReadOnlyTutorEase;
 import tutorease.address.model.UserPrefs;
 
 public class StorageManagerTest {
@@ -24,7 +24,7 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(getTempFilePath("ab"));
+        JsonTutorEaseStorage addressBookStorage = new JsonTutorEaseStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
         storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
     }
@@ -51,18 +51,18 @@ public class StorageManagerTest {
     public void addressBookReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link JsonAddressBookStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
+         * {@link JsonTutorEaseStorage} class.
+         * More extensive testing of UserPref saving/reading is done in {@link JsonTutorEaseStorageTest} class.
          */
-        AddressBook original = getTypicalAddressBook();
-        storageManager.saveAddressBook(original);
-        ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
-        assertEquals(original, new AddressBook(retrieved));
+        TutorEase original = getTypicalTutorEase();
+        storageManager.saveTutorEase(original);
+        ReadOnlyTutorEase retrieved = storageManager.readTutorEase().get();
+        assertEquals(original, new TutorEase(retrieved));
     }
 
     @Test
-    public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+    public void getTutorEaseFilePath() {
+        assertNotNull(storageManager.getTutorEaseFilePath());
     }
 
 }

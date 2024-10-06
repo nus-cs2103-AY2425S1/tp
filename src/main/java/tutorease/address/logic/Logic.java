@@ -7,7 +7,7 @@ import tutorease.address.commons.core.GuiSettings;
 import tutorease.address.logic.commands.CommandResult;
 import tutorease.address.logic.commands.exceptions.CommandException;
 import tutorease.address.logic.parser.exceptions.ParseException;
-import tutorease.address.model.ReadOnlyAddressBook;
+import tutorease.address.model.ReadOnlyTutorEase;
 import tutorease.address.model.person.Person;
 
 /**
@@ -24,11 +24,11 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the AddressBook.
+     * Returns the TutorEase.
      *
-     * @see tutorease.address.model.Model#getAddressBook()
+     * @see tutorease.address.model.Model#getTutorEase()
      */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyTutorEase getTutorEase();
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
@@ -36,7 +36,7 @@ public interface Logic {
     /**
      * Returns the user prefs' address book file path.
      */
-    Path getAddressBookFilePath();
+    Path getTutorEaseFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

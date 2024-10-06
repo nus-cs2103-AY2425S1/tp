@@ -11,10 +11,10 @@ import tutorease.address.commons.core.LogsCenter;
 import tutorease.address.logic.commands.Command;
 import tutorease.address.logic.commands.CommandResult;
 import tutorease.address.logic.commands.exceptions.CommandException;
-import tutorease.address.logic.parser.AddressBookParser;
+import tutorease.address.logic.parser.TutorEaseParser;
 import tutorease.address.logic.parser.exceptions.ParseException;
 import tutorease.address.model.Model;
-import tutorease.address.model.ReadOnlyAddressBook;
+import tutorease.address.model.ReadOnlyTutorEase;
 import tutorease.address.model.person.Person;
 import tutorease.address.storage.Storage;
 
@@ -31,7 +31,7 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final AddressBookParser addressBookParser;
+    private final TutorEaseParser TutorEaseParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -39,7 +39,7 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new AddressBookParser();
+        TutorEaseParser = new TutorEaseParser();
     }
 
     @Override
@@ -47,11 +47,11 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
+        Command command = TutorEaseParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         try {
-            storage.saveAddressBook(model.getAddressBook());
+            storage.saveTutorEase(model.getTutorEase());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
@@ -62,8 +62,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return model.getAddressBook();
+    public ReadOnlyTutorEase getTutorEase() {
+        return model.getTutorEase();
     }
 
     @Override
@@ -72,8 +72,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+    public Path getTutorEaseFilePath() {
+        return model.getTutorEaseFilePath();
     }
 
     @Override

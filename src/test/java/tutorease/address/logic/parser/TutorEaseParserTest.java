@@ -29,9 +29,9 @@ import tutorease.address.testutil.EditPersonDescriptorBuilder;
 import tutorease.address.testutil.PersonBuilder;
 import tutorease.address.testutil.PersonUtil;
 
-public class AddressBookParserTest {
+public class TutorEaseParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final TutorEaseParser parser = new TutorEaseParser();
 
     @Test
     public void parseCommand_add() throws Exception {
