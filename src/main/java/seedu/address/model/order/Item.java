@@ -37,8 +37,7 @@ public class Item {
     public static boolean isValidItem(String test) {
         return test.matches(VALIDATION_REGEX);
     }
-
-
+    
     @Override
     public String toString() {
         return fullDescription;

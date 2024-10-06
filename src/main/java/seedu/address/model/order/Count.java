@@ -9,7 +9,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Count {
 
-
     public static final String MESSAGE_CONSTRAINTS =
             "Item count should be a positive integer";
     public static final String VALIDATION_REGEX = "^[1-9]\\d*$";
