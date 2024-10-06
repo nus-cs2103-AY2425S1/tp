@@ -65,7 +65,7 @@ public class EditCommand extends Command {
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * Creates an EditCommand to edit the details of the patient with the specified {@code nric}
+     * Creates an EditCommand to edit the details of the person with the specified {@code nric}
      * using the fields in {@code editPersonDescriptor}.
      *
      * @param predicate of the person to edit.

@@ -12,11 +12,11 @@ public class NricMatchesPredicateTest {
 
     @Test
     public void equals() {
-        Nric nric = new Nric("T1234567A");
-        Nric nric2 = new Nric("T1234567B");
-        NricMatchesPredicate firstPredicate = new NricMatchesPredicate(nric);
-        NricMatchesPredicate secondPredicate = new NricMatchesPredicate(nric);
-        NricMatchesPredicate thirdPredicate = new NricMatchesPredicate(nric2);
+        Nric firstNric = new Nric("T1234567A");
+        Nric secondNric = new Nric("T1234567B");
+        NricMatchesPredicate firstPredicate = new NricMatchesPredicate(firstNric);
+        NricMatchesPredicate secondPredicate = new NricMatchesPredicate(firstNric);
+        NricMatchesPredicate thirdPredicate = new NricMatchesPredicate(secondNric);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
