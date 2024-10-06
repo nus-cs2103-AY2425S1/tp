@@ -24,7 +24,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/shantaa.png" width="200px">
 
 [[github](http://github.com/shantaa)]
-[portfolio]
 
 * Role: Documentation
 * Responsibilities: Responsible for the quality of various project documents.
@@ -34,7 +33,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/justin-aw46.png" width="200px">
 
 [[github](http://github.com/Justin-Aw46)]
-[portfolio]
 
 * Role: Developer
 * Responsibilities: Testing
@@ -44,7 +42,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/alphapyke.png" width="200px">
 
 [[github](http://github.com/AlphaPyke)]
-[portfolio]
 
 * Role: Code Quality
 * Responsibilities: Looks after code quality, ensures adherence to coding standards and git standards.
@@ -54,7 +51,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/fymbc.png" width="200px">
 
 [[github](http://github.com/fymbc)]
-[portfolio]
 
 * Role: Team Lead
 * Responsibilities: Scheduling, Tracking, Deliverables, Deadlines
