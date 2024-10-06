@@ -6,5 +6,4 @@ public class JsonAdaptedPersonTest {
     protected static final String INVALID_ADDRESS = " ";
     protected static final String INVALID_EMAIL = "example.com";
     protected static final String INVALID_TAG = "#friend";
-
 }

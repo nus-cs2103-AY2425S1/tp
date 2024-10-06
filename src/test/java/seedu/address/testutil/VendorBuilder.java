@@ -20,7 +20,7 @@ public class VendorBuilder extends PersonBuilder<VendorBuilder> {
     }
 
     /**
-     * Initializes the VendorBuilder with the data of {@code vendorToCopy}.
+     * Initializes the {@code VendorBuilder} with the data of {@code vendorToCopy}.
      */
     public VendorBuilder(Vendor vendorToCopy) {
         super(vendorToCopy);

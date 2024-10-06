@@ -17,13 +17,13 @@ import seedu.address.model.tag.Tag;
 import seedu.address.storage.JsonAdaptedTag;
 
 /**
- * Class that manages a {@code Vendor} in JSON form.
+ * Jackson friendly version of {@link Vendor}
  */
 public class JsonAdaptedVendor extends JsonAdaptedPerson {
     private final String company;
 
     /**
-     * Constructs a {@code JsonAdaptedVendor} with the given person details.
+     * Constructs a {@code JsonAdaptedVendor} with the given vendor details.
      */
     @JsonCreator
     public JsonAdaptedVendor(@JsonProperty("type") String type,
@@ -39,9 +39,7 @@ public class JsonAdaptedVendor extends JsonAdaptedPerson {
     }
 
     /**
-     * Serializes a {@code Vendor} from {@code Model} form to JSON form.
-     *
-     * @param source {@code Vendor} object in {@code Model} form.
+     * Converts a given {@code Vendor} into this class for Jackson use.
      */
     public JsonAdaptedVendor(Vendor source) {
         super(source);
@@ -65,9 +63,7 @@ public class JsonAdaptedVendor extends JsonAdaptedPerson {
     }
 
     /**
-     * Convert {@code Vendor} from JSON form into {@code Model} form.
-     *
-     * @return {@code Vendor} in {@code Model} form.
+     * Converts this Jackson-friendly version of {@code Vendor} into the model's version of {@code Vendor}.
      */
     @Override
     public Vendor toModelType() throws IllegalValueException {

@@ -29,6 +29,7 @@ public class JsonAdaptedGuestTest extends JsonAdaptedPersonTest {
     private static final List<JsonAdaptedTag> VALID_TAGS = BRIAN.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
+
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
         JsonAdaptedGuest guest = new JsonAdaptedGuest(BRIAN);

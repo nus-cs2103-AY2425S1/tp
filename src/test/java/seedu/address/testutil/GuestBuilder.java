@@ -20,7 +20,7 @@ public class GuestBuilder extends PersonBuilder<GuestBuilder> {
     }
 
     /**
-     * Initializes the GuestBuilder with the data of {@code guestToCopy}.
+     * Initializes the {@code GuestBuilder} with the data of {@code guestToCopy}.
      */
     public GuestBuilder(Guest guestToCopy) {
         super(guestToCopy);

@@ -24,7 +24,7 @@ import seedu.address.storage.JsonAdaptedTag;
  * Jackson-friendly version of {@link Person}.
  * The annotation is required to let deserializer use the concrete child classes.
  * To convert from JSON form to {@code Model} form.
- * Each JSON string must be labelled with a {@code type} field.
+ * Each JSON data must be labelled with a {@code type} field.
  * That tells deserializer which concrete child class to use.
  * Adopted from: <a href="https://www.baeldung.com/jackson-inheritance">here</a>
  */
@@ -77,7 +77,7 @@ public abstract class JsonAdaptedPerson {
     }
 
     /**
-     * Validates the essential person fields (name, phone, email, address, tags).
+     * Validates the essential {@code Person} fields (name, phone, email, address, tags).
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */

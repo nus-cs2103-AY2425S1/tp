@@ -18,13 +18,13 @@ import seedu.address.storage.JsonAdaptedTag;
 
 
 /**
- * Class that manages a {@code Guest} in JSON form.
+ * Jackson friendly version of {@link Guest}
  */
 public class JsonAdaptedGuest extends JsonAdaptedPerson {
     private final String rsvp;
 
     /**
-     * Constructs a {@code JsonAdaptedGuest} with the given person details.
+     * Constructs a {@code JsonAdaptedGuest} with the given guest details.
      */
     @JsonCreator
     public JsonAdaptedGuest(@JsonProperty("type") String type,
@@ -40,9 +40,7 @@ public class JsonAdaptedGuest extends JsonAdaptedPerson {
     }
 
     /**
-     * Serializes a {@code Guest} from {@code Model} form to JSON form.
-     *
-     * @param source {@code Guest} object in {@code Model} form.
+     * Converts a given {@code Guest} into this class for Jackson use.
      */
     public JsonAdaptedGuest(Guest source) {
         super(source);
@@ -66,9 +64,7 @@ public class JsonAdaptedGuest extends JsonAdaptedPerson {
     }
 
     /**
-     * Convert {@code Guest} from JSON form into {@code Model} form.
-     *
-     * @return {@code Guest} in {@code Model} form.
+     * Converts this Jackson-friendly version of {@code Guest} into the model's version of {@code Guest}.
      */
     @Override
     public Guest toModelType() throws IllegalValueException {
