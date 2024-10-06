@@ -70,11 +70,11 @@ public class Messages {
 
         // checks status of person p here
         if (tagList.contains(TAG_HIRED)) {
-            sb.append("pending");
-        } else if (tagList.contains(TAG_REJECTED)) {
             sb.append("hired");
-        } else if (tagList.contains(DEFAULT_TAG_PENDING)) {
+        } else if (tagList.contains(TAG_REJECTED)) {
             sb.append("rejected");
+        } else if (tagList.contains(DEFAULT_TAG_PENDING)) {
+            sb.append("pending");
         }
         return sb.toString();
     }
