@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalCompanies.NUS;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.testutil.CompanyBuilder;
 
 public class CompanyTest {
