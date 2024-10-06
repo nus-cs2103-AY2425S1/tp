@@ -56,5 +56,5 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/jialegitgud)]
 [[portfolio](team/jialegitgud.md)]
 
-* Role: Deliverables and Deadlines, Scheduling and Tracking
+* Role: Developer, Deliverables and Deadlines, Scheduling and Tracking
 * Responsibilities: In charge of Goods, Goods-Supplier Integrations
