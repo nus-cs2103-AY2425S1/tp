@@ -1,0 +1,9 @@
+{
+  "persons" : [ {
+    "name" : "John Doe",
+    "phone" : "98765432",
+    "email" : "john.doe@example.com",
+    "address" : "123 Baker Street",
+    "tags" : [ ]
+  } ]
+}

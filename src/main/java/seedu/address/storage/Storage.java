@@ -29,4 +29,13 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
     @Override
     void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
 
+    /**
+     * Saves the address book to the specified file path.
+     *
+     * @param addressBook The address book data to save.
+     * @param filePath The file path where the address book will be saved.
+     * @throws IOException if there is an error saving the address book.
+     */
+    void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException;
+
 }

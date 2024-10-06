@@ -12,16 +12,43 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.StorageManager;
 import seedu.address.testutil.AddressBookBuilder;
 
+/**
+ * Contains unit tests for {@code ModelManager}.
+ */
 public class ModelManagerTest {
 
-    private ModelManager modelManager = new ModelManager();
+    @TempDir
+    public Path temporaryFolder;
+    private ModelManager modelManager;
 
+    /**
+     * Sets up the test environment with the required storage.
+     */
+    @BeforeEach
+    public void setUp() {
+        JsonAddressBookStorage addressBookStorage =
+                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonUserPrefsStorage userPrefsStorage =
+                new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+
+        modelManager = new ModelManager(new AddressBook(), new UserPrefs(), storage);
+    }
+
+    /**
+     * Tests whether the constructor initializes the model correctly.
+     */
     @Test
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
@@ -100,33 +127,39 @@ public class ModelManagerTest {
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
-        assertTrue(modelManager.equals(modelManagerCopy));
+        ModelManager modelManagerCopy =
+                new ModelManager(addressBook, userPrefs, modelManager.getStorage());
+        ModelManager modelManagerWithSameValues =
+                new ModelManager(addressBook, userPrefs, modelManager.getStorage());
+        assertTrue(modelManagerCopy.equals(modelManagerWithSameValues));
 
         // same object -> returns true
-        assertTrue(modelManager.equals(modelManager));
+        assertTrue(modelManagerCopy.equals(modelManagerCopy));
 
         // null -> returns false
-        assertFalse(modelManager.equals(null));
+        assertFalse(modelManagerCopy.equals(null));
 
         // different types -> returns false
-        assertFalse(modelManager.equals(5));
+        assertFalse(modelManagerCopy.equals(5));
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
+        assertFalse(modelManagerCopy.equals(
+                new ModelManager(differentAddressBook, userPrefs, modelManager.getStorage())));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        modelManagerCopy.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        ModelManager modelWithFilteredPersons =
+                new ModelManager(addressBook, userPrefs, modelManager.getStorage());
+        assertFalse(modelManagerCopy.equals(modelWithFilteredPersons));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManagerCopy.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+        assertFalse(modelManagerCopy.equals(
+                new ModelManager(addressBook, differentUserPrefs, modelManager.getStorage())));
     }
 }
