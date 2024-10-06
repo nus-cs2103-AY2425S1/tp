@@ -118,7 +118,7 @@ public class UntagCommandTest {
                 new seedu.address.model.person.Phone("99999999"),
                 new seedu.address.model.person.Email("test@example.com"),
                 new seedu.address.model.person.Address("123, Test Street"),
-                new HashSet<>()  // No tags
+                new HashSet<>() // No tags
         );
 
         model.setPerson(model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased()), personWithoutTags);

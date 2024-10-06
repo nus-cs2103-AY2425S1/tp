@@ -34,9 +34,11 @@ public class UntagCommandParserTest {
     @Test
     public void parse_invalidArgs_throwsParseException() {
         // Invalid index (non-numeric)
-        assertParseFailure(parser, "a t/friends", String.format(MESSAGE_INVALID_COMMAND_FORMAT, UntagCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "a t/friends", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                UntagCommand.MESSAGE_USAGE));
 
         // Missing tags (no tags specified)
-        assertParseFailure(parser, "1", String.format(MESSAGE_INVALID_COMMAND_FORMAT, UntagCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "1", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                UntagCommand.MESSAGE_USAGE));
     }
 }
