@@ -16,6 +16,9 @@ import seedu.address.model.tag.Tag;
  */
 public class Person {
     public static final Tag DEFAULT_TAG_PENDING = new Tag("pending");
+    // tags for marking status of candidate
+    public static final Tag TAG_HIRED = new Tag("hired");
+    public static final Tag TAG_REJECTED = new Tag("rejected");
 
     // Identity fields
     private final Name name;
@@ -103,6 +106,10 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags);
+    }
+
+    public boolean hasJobAndStatus(Name name, Job job) {
+        return this.getName().equals(name) && this.getJob().equals(job);
     }
 
     @Override

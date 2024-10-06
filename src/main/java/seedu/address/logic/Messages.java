@@ -1,11 +1,16 @@
 package seedu.address.logic;
 
+import static seedu.address.model.person.Person.DEFAULT_TAG_PENDING;
+import static seedu.address.model.person.Person.TAG_HIRED;
+import static seedu.address.model.person.Person.TAG_REJECTED;
+
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * Container for user visible messages.
@@ -48,6 +53,30 @@ public class Messages {
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
         return builder.toString();
+    }
+
+    /**
+     * Formats person to display just name, job and status to user
+     */
+    public static String formatStatus(Person p) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(p.getName())
+                .append("; Job: ")
+                .append(p.getJob())
+                .append("; Status: ");
+
+        Set<Tag> tagList = p.getTags();
+
+        // checks status of person p here
+        if (tagList.contains(TAG_HIRED)) {
+            sb.append("hired");
+        } else if (tagList.contains(TAG_REJECTED)) {
+            sb.append("rejected");
+        } else if (tagList.contains(DEFAULT_TAG_PENDING)) {
+            sb.append("pending");
+        }
+        return sb.toString();
     }
 
 }

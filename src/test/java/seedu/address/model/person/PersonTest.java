@@ -5,7 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_JOB_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_JOB_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -50,6 +52,20 @@ public class PersonTest {
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
         assertFalse(BOB.isSamePerson(editedBob));
+    }
+
+    @Test
+    public void hasJobAndStatus() {
+        Job amyJob = new Job(VALID_JOB_AMY);
+        Name amyName = new Name(VALID_NAME_AMY);
+        Name bobName = new Name(VALID_NAME_BOB);
+        Job bobJob = new Job(VALID_JOB_BOB);
+        // same object - > same job and status -> true
+        assertTrue(BOB.hasJobAndStatus(bobName, bobJob));
+        // different name, same job -> returns false
+        assertFalse(BOB.hasJobAndStatus(amyName, amyJob));
+        // different job same name -> returns true
+        assertFalse(BOB.hasJobAndStatus(bobName, amyJob));
     }
 
     @Test

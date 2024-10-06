@@ -15,7 +15,6 @@ import seedu.address.model.person.Name;
  * Parses input arguments and creates a new ViewStatusCommand object
  */
 public class ViewStatusCommandParser {
-
     /**
      * Parses the given {@code String} of arguments in the context of the ViewStatusCommand
      * and returns an ViewStatusCommand object for execution.
