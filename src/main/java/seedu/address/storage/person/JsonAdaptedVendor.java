@@ -26,13 +26,15 @@ public class JsonAdaptedVendor extends JsonAdaptedPerson {
      * Constructs a {@code JsonAdaptedVendor} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedVendor(@JsonProperty("name") String name,
+    public JsonAdaptedVendor(@JsonProperty("type") String type,
+             @JsonProperty("name") String name,
              @JsonProperty("phone") String phone,
              @JsonProperty("email") String email,
              @JsonProperty("address") String address,
              @JsonProperty("company") String company,
              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         super(name, phone, email, address, tags);
+        setType(type);
         this.company = company;
     }
 

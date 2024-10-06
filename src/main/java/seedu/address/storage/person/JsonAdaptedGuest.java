@@ -27,13 +27,15 @@ public class JsonAdaptedGuest extends JsonAdaptedPerson {
      * Constructs a {@code JsonAdaptedGuest} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedGuest(@JsonProperty("name") String name,
+    public JsonAdaptedGuest(@JsonProperty("type") String type,
+            @JsonProperty("name") String name,
             @JsonProperty("phone") String phone,
             @JsonProperty("email") String email,
             @JsonProperty("address") String address,
             @JsonProperty("rsvp") String rsvp,
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         super(name, phone, email, address, tags);
+        setType(type);
         this.rsvp = rsvp;
     }
 

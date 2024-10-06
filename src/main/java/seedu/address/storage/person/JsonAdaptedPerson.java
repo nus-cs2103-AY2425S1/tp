@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
@@ -20,11 +22,24 @@ import seedu.address.storage.JsonAdaptedTag;
 
 /**
  * Jackson-friendly version of {@link Person}.
+ * The annotation is required to let deserializer use the concrete child classes.
+ * To convert from JSON form to {@code Model} form.
+ * Each JSON string must be labelled with a {@code type} field.
+ * That tells deserializer which concrete child class to use.
+ * Adopted from: <a href="https://www.baeldung.com/jackson-inheritance">here</a>
  */
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    include = JsonTypeInfo.As.PROPERTY,
+    property = "type")
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = JsonAdaptedGuest.class, name = "Guest"),
+    @JsonSubTypes.Type(value = JsonAdaptedVendor.class, name = "Vendor")
+})
 public abstract class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
-
+    private String type;
     private final String name;
     private final String phone;
     private final String email;
@@ -51,6 +66,7 @@ public abstract class JsonAdaptedPerson {
      * Converts a given {@code Person} into this class for Jackson use.
      */
     public JsonAdaptedPerson(Person source) {
+        type = source.reflectType();
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
@@ -116,6 +132,10 @@ public abstract class JsonAdaptedPerson {
             personTags.add(tag.toModelType());
         }
         return new HashSet<>(personTags);
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public abstract Person toModelType() throws IllegalValueException;
