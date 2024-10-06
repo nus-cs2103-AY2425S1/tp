@@ -91,7 +91,7 @@ public class NoteCommand extends Command {
         if (!(other instanceof NoteCommand)) {
             return false;
         }
-
+        
         NoteCommand e = (NoteCommand) other;
         return name.equals(e.name)
                 && note.equals(e.note);
