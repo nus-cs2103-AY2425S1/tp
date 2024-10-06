@@ -26,5 +26,6 @@ public class MessagesTest {
         // if tag is pending
         Person pendingPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         assertTrue(formatStatus(pendingPerson).equals("Alice Pauline; Job: Software Engineer L1; Status: pending"));
+        //TODO: Change the pending, rejected, hired person's status from pending to respective status.
     }
 }
