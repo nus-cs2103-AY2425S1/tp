@@ -37,6 +37,8 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
         descriptor.setTags(person.getTags());
+        descriptor.setFinancialInfo((person.getFinancialInfo()));
+        descriptor.setSocialMediaHandle(person.getSocialMediaHandle());
     }
 
     /**
@@ -78,6 +80,22 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
+        return this;
+    }
+
+    /**
+     * Sets the {@code financialInfo} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withFinancialInfo(String info) {
+        descriptor.setFinancialInfo(info);
+        return this;
+    }
+
+    /**
+     * Sets the {@code socialMediaHandle} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withSocialMediaHandle(String handle) {
+        descriptor.setSocialMediaHandle(handle);
         return this;
     }
 
