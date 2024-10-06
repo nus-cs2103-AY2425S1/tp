@@ -129,12 +129,14 @@ public class EditCommand extends Command {
         }
 
         EditCommand otherEditCommand = (EditCommand) other;
-        return editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
+        return editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor)
+                && predicate.equals(otherEditCommand.predicate);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .add("predicate", predicate)
                 .add("editPersonDescriptor", editPersonDescriptor)
                 .toString();
     }

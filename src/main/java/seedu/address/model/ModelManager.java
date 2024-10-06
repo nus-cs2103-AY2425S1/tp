@@ -148,7 +148,7 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Unfiltered Person List Accessors =============================================================
     @Override
     public Optional<Person> fetchPersonIfPresent(NricMatchesPredicate nricPredicate) {
         List<Person> allPersonList = addressBook.getPersonList();
