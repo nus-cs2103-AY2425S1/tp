@@ -29,7 +29,7 @@ public class AddClientCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS " // + "[" + PREFIX_TAG + "TAG]...\n"
-            + PREFIX_VRN + " VEHCILE REGISTRATION NUMBER (OPTIONAL) "
+            + PREFIX_VRN + " VEHICLE REGISTRATION NUMBER (OPTIONAL) "
             + PREFIX_VIN + " VEHICLE IDENTIFICATION NUMBER (OPTIONAL) "
             + PREFIX_MAKE + " VEHICLE MAKE (OPTIONAL) "
             + PREFIX_MODEL + " VEHICLE MODEL (OPTIONAL) \n"

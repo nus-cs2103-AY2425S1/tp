@@ -62,8 +62,13 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        //vrn.setText(person.getCar().getVrn().vrn);
-        //vin.setText(person.getCar().getVin().vin);
+        if (this.person.getCar() != null) {
+            vrn.setText(person.getCar().getVrn().vrn);
+            vin.setText(person.getCar().getVin().vin);
+            carMake.setText(person.getCar().getCarMake().carMake);
+            carModel.setText(person.getCar().getCarModel().carModel);
+        }
+
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
