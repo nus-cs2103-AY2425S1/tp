@@ -32,6 +32,7 @@ public class BillingDate {
      * @return true if valid.
      */
     public static boolean isValidBillingDate(String test) {
+        requireNonNull(test);
         try {
             int intTest = Integer.parseInt(test);
             return ((intTest >= 1) && (intTest <= 28));
