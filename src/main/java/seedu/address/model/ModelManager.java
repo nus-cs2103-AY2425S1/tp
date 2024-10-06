@@ -7,13 +7,13 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.contactdate.ContactDate;
 import seedu.address.model.contactdate.ContactDateList;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
 /**
@@ -135,6 +135,16 @@ public class ModelManager implements Model {
     public void markAsContacted(Person target) {
         requireNonNull(target);
         target.markAsContacted();
+    }
+
+    @Override
+    public Person getPersonByNric(Nric nric) {
+        for (Person person : filteredPersons) {
+            if (person.getNric().equals(nric)) {
+                return person;
+            }
+        }
+        return null;
     }
 
     //=========== Filtered Person List Accessors =============================================================

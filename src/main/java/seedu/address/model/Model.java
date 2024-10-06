@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.Nric;
 import seedu.address.model.contactdate.ContactDateList;
 import seedu.address.model.person.Person;
 
@@ -99,6 +100,8 @@ public interface Model {
      * Returns the displayed call history.
      */
     ContactDateList getDisplayedCallHistory();
+
+    Person getPersonByNric(Nric nric);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

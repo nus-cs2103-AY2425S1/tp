@@ -1,8 +1,10 @@
 {
   "persons": [ {
-    "name": "Person with invalid name field: Ha!ns Mu@ster",
+    "nric": "S5614593I",
+    "name": "Person Name",
     "phone": "9482424",
     "email": "hans@example.com",
-    "address": "4th street"
+    "address": "4th street",
+    "contactDates" : [ "2024-09-28" ]
   } ]
 }

@@ -86,6 +86,11 @@ class JsonAdaptedPerson {
             personTags.add(tag.toModelType());
         }
 
+        if (contactDates.isEmpty()) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ContactDateList.class.getSimpleName()));
+        }
+
         for (JsonAdaptedContactDate contactDate : contactDates) {
             personContactDates.add(contactDate.toModelType());
         }

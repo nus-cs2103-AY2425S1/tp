@@ -39,9 +39,9 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+            + "by the index number used in the displayed person list or NRIC. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: INDEX (must be a positive integer) or NRIC (must be government issued) "
             + "[" + PREFIX_NRIC + "NRIC] "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
@@ -57,6 +57,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
     private final Index index;
+    private final Nric nric;
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
@@ -68,6 +69,20 @@ public class EditCommand extends Command {
         requireNonNull(editPersonDescriptor);
 
         this.index = index;
+        this.nric = null;
+        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+    }
+
+    /**
+     * @param nric of the person in the filtered person list to edit
+     * @param editPersonDescriptor details to edit the person with
+     */
+    public EditCommand(Nric nric, EditPersonDescriptor editPersonDescriptor) {
+        requireNonNull(nric);
+        requireNonNull(editPersonDescriptor);
+
+        this.nric = nric;
+        this.index = null;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 
@@ -75,18 +90,27 @@ public class EditCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+        Person personToEdit;
+        Person editedPerson;
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        if (index != null) {
+            if (index.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
+
+            personToEdit = lastShownList.get(index.getZeroBased());
+            editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        } else {
+            personToEdit = model.getPersonByNric(nric);
+            if (personToEdit == null) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NRIC);
+            }
+            editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
         }
-
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
-
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
@@ -123,14 +147,17 @@ public class EditCommand extends Command {
         }
 
         EditCommand otherEditCommand = (EditCommand) other;
-        return index.equals(otherEditCommand.index)
-                && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
+        return (index != null && index.equals(otherEditCommand.index)
+                && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor))
+                || (nric != null && nric.equals(otherEditCommand.nric)
+                && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor));
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("index", index)
+                .add("nric", nric)
                 .add("editPersonDescriptor", editPersonDescriptor)
                 .toString();
     }

@@ -137,4 +137,34 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Checks if the provided argument can be parsed as an {@code Index}.
+     *
+     * @param args The string argument to be parsed.
+     * @return {@code true} if the argument can be parsed as an {@code Index}, {@code false} otherwise.
+     */
+    public static boolean isParsingIndex(String args) {
+        try {
+            ParserUtil.parseIndex(args);
+            return true;
+        } catch (ParseException pe) {
+            return false;
+        }
+    }
+
+    /**
+     * Checks if the provided argument can be parsed as an {@code Nric}.
+     *
+     * @param args The string argument to be parsed.
+     * @return {@code true} if the argument can be parsed as an {@code Nric}, {@code false} otherwise.
+     */
+    public static boolean isParsingNric(String args) {
+        try {
+            ParserUtil.parseNric(args);
+            return true;
+        } catch (ParseException pe) {
+            return false;
+        }
+    }
 }

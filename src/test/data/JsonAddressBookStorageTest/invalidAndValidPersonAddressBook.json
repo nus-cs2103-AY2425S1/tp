@@ -1,13 +1,17 @@
 {
   "persons": [ {
+    "nric": "S5674593I",
     "name": "Valid Person",
     "phone": "9482424",
     "email": "hans@example.com",
-    "address": "4th street"
+    "address": "4th street",
+    "contactDates" : [ "2024-09-28" ]
   }, {
-    "name": "Person With Invalid Phone Field",
-    "phone": "948asdf2424",
+    "nric": "S5624593I",
+    "name": "Person With Invalid NRIC",
+    "phone": "9482424",
     "email": "hans@example.com",
-    "address": "4th street"
+    "address": "4th street",
+    "contactDates" : [ "2024-09-28" ]
   } ]
 }
