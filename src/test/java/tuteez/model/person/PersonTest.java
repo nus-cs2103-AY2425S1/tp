@@ -1,6 +1,5 @@
 package tuteez.model.person;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tuteez.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
