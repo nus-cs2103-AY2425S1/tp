@@ -13,7 +13,6 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -82,6 +81,7 @@ public class ViewStatusCommandTest {
         ViewStatusCommand viewStatusCommand = new ViewStatusCommand(rejectedPerson.getName(), rejectedPerson.getJob());
 
         assertCommandSuccess(viewStatusCommand, model, expectedMessage, expectedModel);
+        //TODO: Mark hiredPerson or rejectedPerson before assertCommandSuccess.
     }
 
     @Test
