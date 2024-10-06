@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.ELLE;
@@ -60,11 +59,11 @@ public class FilterCommandTest {
     //Test case for filtering using tag only
     @Test
     public void execute_tagKeyword_personsFound() {
-        String expectedMessage = FilterCommand.constructSuccessMessage(null, "friends");
-        FilterCommand command = new FilterCommand(null, "friends");
+        String expectedMessage = FilterCommand.constructSuccessMessage(null, "owesMoney");
+        FilterCommand command = new FilterCommand(null, "owesMoney");
         CommandResult result = command.execute(model);
         assertEquals(expectedMessage, result.getFeedbackToUser());
-        assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(BENSON), model.getFilteredPersonList());
     }
     //Test case for fitlering usign both
     @Test
