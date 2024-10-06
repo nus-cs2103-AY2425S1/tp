@@ -24,16 +24,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/obrona.png" width="200px">
 
 [[github](http://github.com/obrona)]
-[[portfolio](http://github.com/obrona)]
+[[portfolio](team/obrona.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
 
 ### Josh Thoo Jen Sen
 
-<img src="images/joshthoo.png" width="200px">
+<img src="images/josh1248.png" width="200px">
 
-[[github](http://github.com/joshthoo)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/josh1248)]
+[[portfolio](team/josh1248.md)]
 
 * Role: Developer
 * Responsibilities: Data
