@@ -268,16 +268,12 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Include management of students and classes faster than a typical mouse/GUI driven app
 
 
 ### User stories
 
-Priorities:
-
-- Essential (must have)
-- Novel (nice to have)
-- Typical (unlikely to have)
+Priorities: Essential (must have), Novel (nice to have), Typical (unlikely to have)
 
 | Priority | As a                   | I want to | So that I can |
 | :---- |:-----------------------| :---- | :---- |
