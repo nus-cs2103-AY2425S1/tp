@@ -8,7 +8,11 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.*;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -49,13 +53,13 @@ public class EditCommandTest {
 
     @Test
     public void execute_noFieldSpecified_success() {
-        EditCommand editCommand = new EditCommand(new NricMatchesPredicate(DANIEL.getNric())
-                , new EditPersonDescriptor());
+        EditCommand editCommand = new EditCommand(new NricMatchesPredicate(DANIEL.getNric()),
+                new EditPersonDescriptor());
         Person editedPerson = model.fetchPersonIfPresent(new NricMatchesPredicate(DANIEL.getNric()))
                 .orElse(null);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS
-                , Messages.format(editedPerson));
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
