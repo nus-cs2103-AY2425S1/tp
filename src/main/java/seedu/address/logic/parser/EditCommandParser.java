@@ -18,6 +18,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Nric;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -36,12 +37,17 @@ public class EditCommandParser implements Parser<EditCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NRIC, PREFIX_NAME,
                                            PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
 
-        Index index;
+        String preamble = argMultimap.getPreamble();
+        Index index = null;
+        Nric nric = null;
 
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+        if (ParserUtil.isParsingIndex(preamble)) {
+            index = ParserUtil.parseIndex(preamble);
+        } else if (ParserUtil.isParsingNric(preamble)) {
+            nric = ParserUtil.parseNric(preamble);
+        } else {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NRIC, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
@@ -69,7 +75,11 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index, editPersonDescriptor);
+        if (index != null) {
+            return new EditCommand(index, editPersonDescriptor);
+        } else {
+            return new EditCommand(nric, editPersonDescriptor);
+        }
     }
 
     /**
