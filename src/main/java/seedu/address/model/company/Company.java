@@ -2,13 +2,15 @@ package seedu.address.model.company;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Objects;
+
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Phone;
 import seedu.address.commons.util.ToStringBuilder;
 
-import java.util.Objects;
-
-
+/**
+ * Represents a company in the address book.
+ */
 public class Company {
     private final CompanyName name;
     private final Address address;
