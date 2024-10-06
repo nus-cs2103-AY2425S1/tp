@@ -33,6 +33,8 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_FINANCIAL_INFO = "Salary: $5000";
+    private static final String VALID_SOCIAL_MEDIA_HANDLE = "@johndoe";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -192,5 +194,41 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseFinancialInfo_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseFinancialInfo(null));
+    }
+
+    @Test
+    public void parseFinancialInfo_validValueWithoutWhitespace_returnsFinancialInfo() throws Exception {
+        String expectedFinancialInfo = VALID_FINANCIAL_INFO;
+        assertEquals(expectedFinancialInfo, ParserUtil.parseFinancialInfo(VALID_FINANCIAL_INFO));
+    }
+
+    @Test
+    public void parseFinancialInfo_validValueWithWhitespace_returnsTrimmedFinancialInfo() throws Exception {
+        String financialInfoWithWhitespace = WHITESPACE + VALID_FINANCIAL_INFO + WHITESPACE;
+        String expectedFinancialInfo = VALID_FINANCIAL_INFO;
+        assertEquals(expectedFinancialInfo, ParserUtil.parseFinancialInfo(financialInfoWithWhitespace));
+    }
+
+    @Test
+    public void parseSocialMediaHandle_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSocialMediaHandle(null));
+    }
+
+    @Test
+    public void parseSocialMediaHandle_validValueWithoutWhitespace_returnsSocialMediaHandle() throws Exception {
+        String expectedSocialMediaHandle = VALID_SOCIAL_MEDIA_HANDLE;
+        assertEquals(expectedSocialMediaHandle, ParserUtil.parseSocialMediaHandle(VALID_SOCIAL_MEDIA_HANDLE));
+    }
+
+    @Test
+    public void parseSocialMediaHandle_validValueWithWhitespace_returnsTrimmedSocialMediaHandle() throws Exception {
+        String socialMediaHandleWithWhitespace = WHITESPACE + VALID_SOCIAL_MEDIA_HANDLE + WHITESPACE;
+        String expectedSocialMediaHandle = VALID_SOCIAL_MEDIA_HANDLE;
+        assertEquals(expectedSocialMediaHandle, ParserUtil.parseSocialMediaHandle(socialMediaHandleWithWhitespace));
     }
 }

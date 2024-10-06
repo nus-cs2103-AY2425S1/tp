@@ -121,4 +121,28 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses a {@code String info} into an {@code String financialInfo}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code String financialInfo} is invalid.
+     */
+    public static String parseFinancialInfo(String info) throws ParseException {
+        requireNonNull(info);
+        String trimmedInfo = info.trim();
+        return trimmedInfo;
+    }
+
+    /**
+     * Parses a {@code String info} into an {@code String socialMediaHandle}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code String info} is invalid.
+     */
+    public static String parseSocialMediaHandle(String info) throws ParseException {
+        requireNonNull(info);
+        String trimmedInfo = info.trim();
+        return trimmedInfo;
+    }
 }
