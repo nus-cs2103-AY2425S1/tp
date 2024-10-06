@@ -69,11 +69,11 @@ public class Messages {
         Set<Tag> tagList = p.getTags();
 
         // checks status of person p here
-        if (tagList.contains(DEFAULT_TAG_PENDING)) {
+        if (tagList.contains(TAG_HIRED)) {
             sb.append("pending");
-        } else if (tagList.contains(TAG_HIRED)) {
-            sb.append("hired");
         } else if (tagList.contains(TAG_REJECTED)) {
+            sb.append("hired");
+        } else if (tagList.contains(DEFAULT_TAG_PENDING)) {
             sb.append("rejected");
         }
         return sb.toString();

@@ -62,8 +62,7 @@ public class ViewStatusCommandTest {
 
     @Test
     public void execute_viewSuccessHired() {
-        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
-        Person hiredPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
+        Person hiredPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased() + 2);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         String expectedMessage = String.format(ViewStatusCommand.MESSAGE_VIEW_SUCCESS,
@@ -75,8 +74,7 @@ public class ViewStatusCommandTest {
 
     @Test
     public void execute_viewSuccessRejected() {
-        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
-        Person rejectedPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased() - 1);
+        Person rejectedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased() + 3);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         String expectedMessage = String.format(ViewStatusCommand.MESSAGE_VIEW_SUCCESS,
