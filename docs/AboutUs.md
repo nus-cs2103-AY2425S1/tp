@@ -10,7 +10,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 ## Project team
 
 ### Vinoth K.
-![Vinoth-K.JPG](..%2F..%2F..%2F..%2F..%2FDownloads%2FVinoth-K.JPG)
+<img src="images/noth-k.png" width="200px">
 
 [[github](https://github.com/noth-k)]
 [[portfolio](team/vinoth.md)]
