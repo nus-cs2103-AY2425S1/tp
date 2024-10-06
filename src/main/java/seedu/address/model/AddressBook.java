@@ -6,6 +6,8 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.job.Job;
+import seedu.address.model.job.UniqueJobList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -16,6 +18,7 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final UniqueJobList jobs;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -23,12 +26,13 @@ public class AddressBook implements ReadOnlyAddressBook {
      *
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
-     */
-    {
+     */ {
         persons = new UniquePersonList();
+        jobs = new UniqueJobList();
     }
 
-    public AddressBook() {}
+    public AddressBook() {
+    }
 
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
@@ -48,6 +52,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.persons.setPersons(persons);
     }
 
+    /** Replaces the contents of the job list with {@code jobs}. */
+    public void setJobs(List<Job> jobs) {
+        this.jobs.setJobs(jobs);
+    }
+
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
@@ -55,6 +64,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setJobs(newData.getJobList());
     }
 
     //// person-level operations
@@ -73,6 +83,11 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addPerson(Person p) {
         persons.add(p);
+    }
+
+    /** Adds a job to the address book. */
+    public void addJob(Job j) {
+        jobs.add(j);
     }
 
     /**
@@ -97,15 +112,18 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// util methods
 
     @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("persons", persons)
-                .toString();
+    public ObservableList<Person> getPersonList() {
+        return persons.asUnmodifiableObservableList();
     }
 
     @Override
-    public ObservableList<Person> getPersonList() {
-        return persons.asUnmodifiableObservableList();
+    public ObservableList<Job> getJobList() {
+        return jobs.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public int hashCode() {
+        return persons.hashCode();
     }
 
     @Override
@@ -124,7 +142,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public int hashCode() {
-        return persons.hashCode();
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("persons", persons)
+                .toString();
     }
 }

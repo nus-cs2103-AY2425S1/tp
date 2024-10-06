@@ -63,6 +63,10 @@ public class CommandResult {
     public boolean isExit() {
         return exit;
     }
+    
+    public Mode getMode() {
+        return mode;
+    }
 
     @Override
     public int hashCode() {
