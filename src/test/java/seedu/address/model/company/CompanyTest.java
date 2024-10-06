@@ -3,11 +3,9 @@ package seedu.address.model.company;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalCompanies.NUS;
 
 import org.junit.jupiter.api.Test;
-import seedu.address.model.person.Person;
 import seedu.address.testutil.CompanyBuilder;
 
 public class CompanyTest {
