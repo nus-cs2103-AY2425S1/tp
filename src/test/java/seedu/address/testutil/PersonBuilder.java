@@ -23,8 +23,8 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_EMERGENCY_CONTACT_NAME = "";
-    public static final String DEFAULT_EMERGENCY_CONTACT_NUMBER = "";
+    public static final String DEFAULT_EMERGENCY_CONTACT_NAME = "Billy";
+    public static final String DEFAULT_EMERGENCY_CONTACT_NUMBER = "77777777";
     public static final int DEFAULT_PRIORITY_LEVEL = 3;
 
     private Name name;

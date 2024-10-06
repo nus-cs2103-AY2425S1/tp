@@ -32,7 +32,10 @@ public class EmergencyContact {
     }
     @Override
     public String toString() {
-        return contactName + ": " + contactNumber;
+        if (contactName.isEmpty() || contactNumber.isEmpty()) {
+            return "No Emergency Contact";
+        }
+        return "Emergency Contact: " + contactName + ", " + contactNumber;
     }
     @Override
     public boolean equals(Object other) {

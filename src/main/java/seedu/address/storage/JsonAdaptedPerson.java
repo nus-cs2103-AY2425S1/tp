@@ -31,6 +31,8 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final String emergencyContactName;
+    private final String emergencyContactNumber;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final int priorityLevel;
 
@@ -40,12 +42,16 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
+                             @JsonProperty("emergency contact name") String emergencyContactName,
+                             @JsonProperty("emergency contact number") String emergencyContactNumber,
                              @JsonProperty("tagged") List<JsonAdaptedTag> tags,
                              @JsonProperty("priorityLevel") int priorityLevel) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.emergencyContactName = emergencyContactName;
+        this.emergencyContactNumber = emergencyContactNumber;
         this.priorityLevel = priorityLevel;
         if (tags != null) {
             this.tags.addAll(tags);
@@ -60,6 +66,8 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        emergencyContactName = source.getEmergencyContact().contactName;
+        emergencyContactNumber = source.getEmergencyContact().contactNumber;
         priorityLevel = source.getPriorityLevel().getValue();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -109,8 +117,12 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        final EmergencyContact modelEmergencyContact = new EmergencyContact("", "");
-        //TODO: Implement parsing and marshalling in the storage commit.
+        if (emergencyContactName == null || emergencyContactNumber == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    EmergencyContact.class.getSimpleName()));
+        }
+        final EmergencyContact modelEmergencyContact = new EmergencyContact(emergencyContactName,
+                emergencyContactNumber);
 
         final PriorityLevel modelPriorityLevel;
 
