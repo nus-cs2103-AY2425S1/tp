@@ -8,17 +8,17 @@ package seedu.address.model.person;
  */
 public enum RoleType {
     /**
-     * Represents student studying under a specific course
+     * Represents a student studying under a course
      */
     STUDENT,
 
     /**
-     * Represents tutor teaching/mentoring tutorial/labs of a course
+     * Represents a tutor teaching/mentoring tutorials/labs of a course
      */
     TUTOR,
 
     /**
-     * Represents professors who are in charge of teaching/managing the course
+     * Represents a professor who is in charge of teaching/managing a course
      */
     PROFESSOR
 }
