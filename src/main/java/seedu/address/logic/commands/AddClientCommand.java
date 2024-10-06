@@ -46,6 +46,7 @@ public class AddClientCommand extends Command {
     public static final String VEHICLE_DETAILS_MISSING =
             "Vehicle details are missing. Please provide all vehicle details. \n" + MESSAGE_USAGE;
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
+    public static final String MESSAGE_SUCCESS_WITH_CAR = "with VIN: ";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
     private final Person toAdd;
@@ -72,7 +73,10 @@ public class AddClientCommand extends Command {
         }
 
         model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        if (toAdd.getCar() == null) {
+            return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        } else return new CommandResult(String.format(MESSAGE_SUCCESS,
+                Messages.format(toAdd)) + MESSAGE_SUCCESS_WITH_CAR + Messages.formatCar(toAdd));
     }
 
     @Override
