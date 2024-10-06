@@ -14,26 +14,42 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new {@code UntagCommand} object
+ * Parses input arguments and creates a new {@code UntagCommand} object.
  */
 public class UntagCommandParser implements Parser<UntagCommand> {
+
     /**
      * Parses the given {@code String} of arguments in the context of the {@code UntagCommand}
      * and returns a {@code UntagCommand} object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     *
+     * @param args the user input string containing the index and tags to be removed
+     * @return a new {@code UntagCommand} object that contains the parsed index and list of tags
+     * @throws ParseException if the input does not conform to the expected format (i.e., invalid index or missing tags)
      */
     public UntagCommand parse(String args) throws ParseException {
         requireNonNull(args);
+
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG);
+
         Index index;
+
         try {
+            // Parse the index from the preamble
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UntagCommand.MESSAGE_USAGE), ive);
         }
-        List<Tag> tag = argMultimap.getAllValues(PREFIX_TAG).stream()
+
+        List<String> tagValues = argMultimap.getAllValues(PREFIX_TAG);
+        if (tagValues.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UntagCommand.MESSAGE_USAGE));
+        }
+
+        // Convert tag values to Tag objects
+        List<Tag> tags = tagValues.stream()
                 .map(Tag::new)
                 .collect(Collectors.toList());
-        return new UntagCommand(index, tag);
+
+        return new UntagCommand(index, tags);
     }
 }

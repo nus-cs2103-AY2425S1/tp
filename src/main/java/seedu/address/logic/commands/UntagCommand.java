@@ -19,6 +19,7 @@ public class UntagCommand extends Command {
     public static final String COMMAND_WORD = "untag";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid.";
     public static final String MESSAGE_TAG_NOT_FOUND = "Some tags were not found in the person's tag list.";
+    public static final String MESSAGE_REMOVE_TAG_SUCCESS = "Removed tag(s) %1$s from %2$s.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Removes one or multiple tags from the person identified "
@@ -52,9 +53,9 @@ public class UntagCommand extends Command {
      */
     private String generateSuccessMessage(Person personToEdit) {
         String removedTags = tagsToRemove.stream()
-                .map(Tag::toString)
+                .map(tag -> tag.toString().replaceAll("[\\[\\]]", ""))
                 .collect(Collectors.joining(", "));
-        return String.format("Removed tag(s) %s from %s", removedTags, personToEdit.getName().toString());
+        return String.format(MESSAGE_REMOVE_TAG_SUCCESS, removedTags, personToEdit.getName().toString());
     }
 
 
@@ -67,7 +68,15 @@ public class UntagCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Set<Tag> updatedTags = new HashSet<>(personToEdit.getTags()); // Copy the current tags
+        Set<Tag> updatedTags = new HashSet<>(personToEdit.getTags());
+
+        if (personToEdit.getTags().isEmpty()) {
+            throw new CommandException(MESSAGE_TAG_NOT_FOUND);
+        }
+
+        if (tagsToRemove.isEmpty()) {
+            throw new CommandException(MESSAGE_TAG_NOT_FOUND);
+        }
 
         if (!updatedTags.containsAll(tagsToRemove)) {
             throw new CommandException(MESSAGE_TAG_NOT_FOUND);
