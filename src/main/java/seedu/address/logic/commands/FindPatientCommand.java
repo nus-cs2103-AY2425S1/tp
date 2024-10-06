@@ -9,9 +9,10 @@ import seedu.address.model.Model;
  */
 public class FindPatientCommand extends Command {
     public static final String COMMAND_WORD = "find-patient";
+    public static final String MESSAGE_NOT_IMPLEMENTED_YET = "find-patient command not implemented yet";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        throw new CommandException("find-patient command not implemented yet");
+        throw new CommandException(MESSAGE_NOT_IMPLEMENTED_YET);
     }
 }
