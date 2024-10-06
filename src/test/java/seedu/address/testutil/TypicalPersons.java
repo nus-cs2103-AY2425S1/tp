@@ -43,7 +43,7 @@ public class TypicalPersons {
             .withNric("S1234167F").withDateOfBirth("2000-01-05").withGender("M")
             .withEmail("heinz@example.com").withAddress("wall street").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withNric("T0234567A").withDateOfBirth("2005-01-01").withGender("M")
+            .withNric("T0234567B").withDateOfBirth("2005-01-01").withGender("M")
             .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
             .withNric("T0234567F").withDateOfBirth("2001-01-01").withGender("F")
@@ -57,10 +57,10 @@ public class TypicalPersons {
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
-            .withNric("S1234567A").withDateOfBirth("2000-01-01").withGender("F")
+            .withNric("S1234568A").withDateOfBirth("2000-01-01").withGender("F")
             .withEmail("stefan@example.com").withAddress("little india").build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
-            .withNric("S1234567A").withDateOfBirth("2000-01-01").withGender("F")
+            .withNric("S1234567Z").withDateOfBirth("2000-01-01").withGender("F")
             .withEmail("hans@example.com").withAddress("chicago ave").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
