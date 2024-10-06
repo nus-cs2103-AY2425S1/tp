@@ -22,7 +22,7 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_FINANCIAL_INFO = "Good credit history";
     public static final String DEFAULT_SOCIAL_MEDIA_HANDLE = "alice_p";
-    public static final String DEFAULT_TAG = "friend";
+    public static final String DEFAULT_TAG = "^";
 
     private Name name;
     private Phone phone;
