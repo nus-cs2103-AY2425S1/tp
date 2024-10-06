@@ -24,20 +24,20 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private final Boolean paid;
+    private final Boolean hasPaid;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address,
-                  Set<Tag> tags, Boolean paid) {
-        requireAllNonNull(name, phone, email, address, tags, paid);
+                  Set<Tag> tags, Boolean hasPaid) {
+        requireAllNonNull(name, phone, email, address, tags, hasPaid);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.paid = paid;
+        this.hasPaid = hasPaid;
     }
 
     public Name getName() {
@@ -64,8 +64,8 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
-    public Boolean getPaid() {
-        return paid;
+    public Boolean getHasPaid() {
+        return hasPaid;
     }
 
     /**
@@ -102,13 +102,13 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
-                && paid == otherPerson.paid;
+                && hasPaid == otherPerson.hasPaid;
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, paid);
+        return Objects.hash(name, phone, email, address, tags, hasPaid);
     }
 
     @Override
@@ -119,7 +119,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
-                .add("paid", paid)
+                .add("hasPaid", hasPaid)
                 .toString();
     }
 

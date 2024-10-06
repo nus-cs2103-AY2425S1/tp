@@ -82,10 +82,10 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Paid} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code HasPaid} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withPaid(Boolean paid) {
-        descriptor.setPaid(paid);
+    public EditPersonDescriptorBuilder withHasPaid(Boolean hasPaid) {
+        descriptor.setHasPaid(hasPaid);
         return this;
     }
 
