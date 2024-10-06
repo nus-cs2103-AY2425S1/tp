@@ -313,7 +313,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `EventTory` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Create an event**
+**Use case: UC01 - Create an event**
 
 **MSS**
 
@@ -334,6 +334,44 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1b. The date format is invalid.
 
     * 1b1. System shows an error message.
+
+      Use case ends.
+
+---
+
+**Use case: UC02 - Assign a vendor to an event** 
+
+**MSS** 
+
+1. User enters command to assign a vendor to an event.
+2. System assigns the vendor to the event.
+3. System displays a success message.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The command format entered by the user is invalid.
+
+  * 1a1. System shows an error message and displays the correct command format.
+
+      Use case ends.
+
+* 2a. The event does not exist.
+
+  * 2a1. System shows an error message.
+
+      Use case ends.
+
+* 2b. The vendor does not exist.
+
+  * 2b1. System shows an error message.
+
+      Use case ends.
+
+* 2c. The vendor has already been assigned to the event.
+
+  * 2c1. System shows an error message.
 
       Use case ends.
 
