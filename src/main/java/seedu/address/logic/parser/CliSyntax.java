@@ -14,4 +14,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_FINANCIAL_INFO = new Prefix("fi/");
     public static final Prefix PREFIX_SOCIAL_MEDIA_HANDLE = new Prefix("s/");
 
+
 }
