@@ -153,4 +153,18 @@ public class BackupCommandTest {
             }
         };
     }
+
+    @Test
+    public void executeBackupCommand_success() throws Exception {
+        String backupFilePath = temporaryFolder.resolve("backup.json").toString();
+        BackupCommand backupCommand = new BackupCommand(backupFilePath);
+
+        String expectedMessage = String.format(BackupCommand.MESSAGE_SUCCESS, backupFilePath);
+
+        assertCommandSuccess(backupCommand, model, expectedMessage, expectedModel);
+
+        // Step to validate that backupData() was called
+        assertTrue(Path.of(backupFilePath).toFile().exists(), "Backup file should have been created.");
+    }
+
 }

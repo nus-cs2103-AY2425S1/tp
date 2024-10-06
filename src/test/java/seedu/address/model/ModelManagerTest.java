@@ -2,11 +2,12 @@ package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
@@ -134,27 +135,27 @@ public class ModelManagerTest {
                 new ModelManager(addressBook, userPrefs, modelManager.getStorage());
         ModelManager modelManagerWithSameValues =
                 new ModelManager(addressBook, userPrefs, modelManager.getStorage());
-        assertTrue(modelManagerCopy.equals(modelManagerWithSameValues));
+        assertEquals(modelManagerCopy, modelManagerWithSameValues);
 
         // same object -> returns true
-        assertTrue(modelManagerCopy.equals(modelManagerCopy));
+        assertEquals(modelManagerCopy, modelManagerCopy);
 
         // null -> returns false
-        assertFalse(modelManagerCopy.equals(null));
+        assertNotEquals(null, modelManagerCopy);
 
         // different types -> returns false
-        assertFalse(modelManagerCopy.equals(5));
+        assertNotEquals(5, modelManagerCopy);
 
         // different addressBook -> returns false
-        assertFalse(modelManagerCopy.equals(
-                new ModelManager(differentAddressBook, userPrefs, modelManager.getStorage())));
+        assertNotEquals(modelManagerCopy,
+                new ModelManager(differentAddressBook, userPrefs, modelManager.getStorage()));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManagerCopy.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         ModelManager modelWithFilteredPersons =
                 new ModelManager(addressBook, userPrefs, modelManager.getStorage());
-        assertFalse(modelManagerCopy.equals(modelWithFilteredPersons));
+        assertNotEquals(modelManagerCopy, modelWithFilteredPersons);
 
         // resets modelManager to initial state for upcoming tests
         modelManagerCopy.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -162,8 +163,8 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManagerCopy.equals(
-                new ModelManager(addressBook, differentUserPrefs, modelManager.getStorage())));
+        assertNotEquals(modelManagerCopy,
+                new ModelManager(addressBook, differentUserPrefs, modelManager.getStorage()));
     }
 
     @Test
@@ -172,7 +173,7 @@ public class ModelManagerTest {
         modelManager.backupData(backupPath.toString());
 
         // Assert that the file was created successfully.
-        assertTrue(backupPath.toFile().exists());
+        assertTrue(backupPath.toFile().exists(), "Backup file should have been created successfully.");
     }
 
     @Test
@@ -182,8 +183,8 @@ public class ModelManagerTest {
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
         ModelManager modelManager = new ModelManager(new AddressBook(), new UserPrefs(), storage);
-        assertNotNull(modelManager.getStorage());
-        assertEquals(storage, modelManager.getStorage());
+        assertNotNull(modelManager.getStorage(), "Storage should not be null.");
+        assertEquals(storage, modelManager.getStorage(), "Storage should be initialized properly.");
     }
 
     @Test
@@ -208,5 +209,4 @@ public class ModelManagerTest {
         assertEquals(modelManager.getStorage().getClass(),
                 StorageManager.class, "Storage should be an instance of StorageManager.");
     }
-
 }

@@ -64,6 +64,7 @@ public class BackupCommand extends Command {
         }
     }
 
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
