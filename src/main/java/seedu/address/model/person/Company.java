@@ -18,7 +18,7 @@ public class Company {
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public final String companyName;
+    public final String value;
 
     /**
      * Constructs a {@code Name}.
@@ -28,7 +28,7 @@ public class Company {
     public Company(String company) {
         requireNonNull(company);
         checkArgument(isValidCompany(company), MESSAGE_CONSTRAINTS);
-        companyName = company;
+        value = company;
     }
 
     /**
@@ -44,7 +44,7 @@ public class Company {
 
     @Override
     public String toString() {
-        return companyName;
+        return value;
     }
 
     @Override
@@ -59,12 +59,12 @@ public class Company {
         }
 
         Company otherName = (Company) other;
-        return companyName.equals(otherName.companyName);
+        return value.equals(otherName.value);
     }
 
     @Override
     public int hashCode() {
-        return companyName.hashCode();
+        return value.hashCode();
     }
 
 }
