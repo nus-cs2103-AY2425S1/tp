@@ -26,7 +26,7 @@ public class CallHistoryPanel extends UiPart<VBox> {
         super(FXML);
         items = FXCollections.observableArrayList();
         callHistoryView.setItems(items);
-        callHistoryView.setCellFactory(param -> new ListCell<ContactDate>() {
+        callHistoryView.setCellFactory(param -> new ListCell<>() {
             @Override
             protected void updateItem(ContactDate contactDate, boolean empty) {
                 super.updateItem(contactDate, empty);
@@ -34,8 +34,9 @@ public class CallHistoryPanel extends UiPart<VBox> {
                     setGraphic(null);
                     setText(null);
                 } else {
-                    CallHistoryCard card = new CallHistoryCard(contactDate);
-                    setGraphic(card.getRoot()); // Use CallHistoryCard for display
+                    int index = getIndex() + 1;
+                    CallHistoryCard card = new CallHistoryCard(contactDate, index);
+                    setGraphic(card.getRoot());
                 }
             }
         });
@@ -48,7 +49,7 @@ public class CallHistoryPanel extends UiPart<VBox> {
         System.out.println("Initializing call history...");
         items.clear();
         items.addAll(FXCollections.observableArrayList(history));
-        System.out.println("New history size: " + items.size());
+
         callHistoryView.refresh();
     }
 }

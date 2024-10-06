@@ -12,13 +12,16 @@ public class CallHistoryCard extends UiPart<HBox> {
     private static final String FXML = "CallHistoryCard.fxml";
 
     @FXML
+    private Label indexLabel;
+    @FXML
     private Label contactDateLabel;
 
     /**
      * Creates a {@code CallHistoryCard} with the given {@code CallHistory} and index to display.
      */
-    public CallHistoryCard(ContactDate contactDate) {
+    public CallHistoryCard(ContactDate contactDate, int index) {
         super(FXML);
+        indexLabel.setText(index + ". ");
         contactDateLabel.setText(contactDate.getDate().toString());
     }
 }

@@ -104,14 +104,6 @@ public class PersonBuilder {
         return this;
     }
 
-    /**
-     * Sets the {@code ContactDateList} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withContactDates(ContactDateList contactDates) {
-        this.contactDates = contactDates;
-        return this;
-    }
-
     public Person build() {
         return new Person(nric, name, phone, email, address, tags);
     }

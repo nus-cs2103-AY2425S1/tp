@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <Label fx:id="indexLabel" styleClass="cell_big_label" />
     <Label fx:id="contactDateLabel" styleClass="cell_big_label"/> <!-- Change fx:id to match Java code -->
     <VBox alignment="CENTER_LEFT" minHeight="105">
         <padding>

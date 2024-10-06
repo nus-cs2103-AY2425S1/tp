@@ -127,9 +127,40 @@ public class MarkCommandTest {
 
     @Test
     public void toStringMethod() {
+        // Test for Index
         Index targetIndex = Index.fromOneBased(1);
-        MarkCommand markCommand = new MarkCommand(targetIndex);
-        String expected = MarkCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
-        assertEquals(expected, markCommand.toString());
+        MarkCommand markCommandWithIndex = new MarkCommand(targetIndex);
+        String expectedIndexString = MarkCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex
+                + ", targetNric=null}";
+        assertEquals(expectedIndexString, markCommandWithIndex.toString());
+
+        // Test for NRIC
+        Nric targetNric = new Nric(VALID_NRIC_AMY);
+        MarkCommand markCommandWithNric = new MarkCommand(targetNric);
+        String expectedNricString = MarkCommand.class.getCanonicalName() + "{targetIndex=null, targetNric="
+                + targetNric + "}";
+        assertEquals(expectedNricString, markCommandWithNric.toString());
+    }
+
+    @Test
+    public void execute_validNric_success() {
+        Person personToMark = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        MarkCommand markCommand = new MarkCommand(personToMark.getNric());
+
+        String expectedMessage = String.format(MarkCommand.MESSAGE_MARK_PERSON_SUCCESS,
+                Messages.format(personToMark));
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.markAsContacted(personToMark);
+
+        assertCommandSuccess(markCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_invalidNric_throwsCommandException() {
+        Nric unregisteredNric = new Nric("S5419807H");
+        MarkCommand markCommand = new MarkCommand(unregisteredNric);
+
+        assertCommandFailure(markCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NRIC);
     }
 }

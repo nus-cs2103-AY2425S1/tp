@@ -3,35 +3,30 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-//import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-//import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
-//import static seedu.address.testutil.TypicalPersons.CONTACT_DATE_1;
-//import static seedu.address.testutil.TypicalPersons.CONTACT_DATE_2;
-//import static seedu.address.testutil.TypicalPersons.CONTACT_DATE_3;
-//import static seedu.address.testutil.TypicalPersons.CONTACT_DATE_4;
-//import static seedu.address.testutil.TypicalPersons.CONTACT_DATE_5;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
-//import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-//import seedu.address.model.person.Person;
+import seedu.address.model.contactdate.ContactDateList;
+import seedu.address.model.person.Nric;
+import seedu.address.model.person.Person;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code HistoryCommand}.
  */
 public class HistoryCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
     @Test
     public void equals() {
@@ -55,28 +50,6 @@ public class HistoryCommandTest {
         assertFalse(firstHistoryCommand.equals(secondHistoryCommand));
     }
 
-    /*
-    @Test
-    public void execute_personContacted_historyDisplayed() throws CommandException {
-        Person personToMark = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        MarkCommand markCommand = new MarkCommand(INDEX_FIRST_PERSON);
-
-        markCommand.execute(model);
-
-        HistoryCommand firstHistoryCommand = new HistoryCommand(INDEX_FIRST_PERSON);
-
-        String expectedMessage = String.format(HistoryCommand.MESSAGE_SHOW_HISTORY_SUCCESS,
-                Messages.format());
-
-        expectedModel.markAsContacted(personToMark);
-
-        System.out.println("Expected Message: " + expectedMessage);
-        System.out.println("Actual Model State: " + model);
-
-        assertCommandSuccess(firstHistoryCommand, model, expectedMessage, expectedModel);
-    }
-    */
-
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
@@ -89,45 +62,107 @@ public class HistoryCommandTest {
         assertCommandFailure(historyCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
-    /*
     @Test
-    public void executeHistoryCommand_personHasCallHistory_returnsCorrectHistory() throws CommandException {
-        HistoryCommand firstHistoryCommand = new HistoryCommand(INDEX_FIRST_PERSON);
+    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        HistoryCommand historyCommand = new HistoryCommand(outOfBoundIndex);
 
-        CommandResult result1 = firstHistoryCommand.execute(model);
+        assertCommandFailure(historyCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
 
-        System.out.println("Actual result: " + result1);
+    @Test
+    public void execute_validIndexUnfilteredList_success() {
+        Person personToViewHistory = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        HistoryCommand historyCommand = new HistoryCommand(INDEX_FIRST_PERSON);
 
-        assertTrue(result1.getFeedbackToUser().contains("Call history for Alice Pauline:"));
-        assertTrue(result1.getFeedbackToUser().contains(CONTACT_DATE_1.toString()));
-        assertTrue(result1.getFeedbackToUser().contains(CONTACT_DATE_2.toString()));
-        assertTrue(result1.getFeedbackToUser().contains(CONTACT_DATE_3.toString()));
+        String expectedMessage = String.format(HistoryCommand.MESSAGE_SHOW_HISTORY_SUCCESS,
+                personToViewHistory.getName());
 
-        HistoryCommand secondHistoryCommand = new HistoryCommand(INDEX_SECOND_PERSON);
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ContactDateList expectedCallHistory = expectedModel.getCallHistory(personToViewHistory);
+        expectedModel.updateDisplayedList(expectedCallHistory);
 
-        CommandResult result2 = secondHistoryCommand.execute(model);
+        assertCommandSuccess(historyCommand, model, expectedMessage, expectedModel);
+    }
 
-        assertTrue(result2.getFeedbackToUser().contains("Call history for Benson Meier:"));
-        assertTrue(result2.getFeedbackToUser().contains(CONTACT_DATE_4.toString()));
-        assertTrue(result2.getFeedbackToUser().contains(CONTACT_DATE_5.toString()));
+    @Test
+    public void equalsIndexCommandTest() {
+        HistoryCommand historyFirstCommand = new HistoryCommand(INDEX_FIRST_PERSON);
+        HistoryCommand historySecondCommand = new HistoryCommand(INDEX_SECOND_PERSON);
+
+        // same object -> returns true
+        assertTrue(historyFirstCommand.equals(historyFirstCommand));
+
+        // same values -> returns true
+        HistoryCommand historyFirstCommandCopy = new HistoryCommand(INDEX_FIRST_PERSON);
+        assertTrue(historyFirstCommand.equals(historyFirstCommandCopy));
+
+        // different types -> returns false
+        assertFalse(historyFirstCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(historyFirstCommand.equals(null));
+
+        // different person -> returns false
+        assertFalse(historyFirstCommand.equals(historySecondCommand));
+    }
+
+    @Test
+    public void execute_validIndex_success() {
+        Person personToViewHistory = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        HistoryCommand historyCommand = new HistoryCommand(INDEX_FIRST_PERSON);
+
+        String expectedMessage = String.format(HistoryCommand.MESSAGE_SHOW_HISTORY_SUCCESS,
+                personToViewHistory.getName());
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ContactDateList expectedCallHistory = expectedModel.getCallHistory(personToViewHistory);
+        expectedModel.updateDisplayedList(expectedCallHistory);
+
+        assertCommandSuccess(historyCommand, model, expectedMessage, expectedModel);
     }
 
 
     @Test
-    public void executeHistoryCommand_personHasNoCallHistory_returnsCorrectMessage() throws CommandException {
-        Person target = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
-        HistoryCommand historyCommand = new HistoryCommand(INDEX_THIRD_PERSON);
-        CommandResult result = historyCommand.execute(model);
-        assertEquals(String.format(Messages.MESSAGE_NO_CALL_HISTORY, target.getName()), result.getFeedbackToUser());
+    public void execute_invalidIndex_throwsCommandException() {
+        // Create an out-of-bounds index
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        HistoryCommand historyCommand = new HistoryCommand(outOfBoundIndex);
+
+        assertCommandFailure(historyCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
-    */
+
+    @Test
+    public void execute_validIndexFilteredList_success() {
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+
+        Person personToViewHistory = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        HistoryCommand historyCommand = new HistoryCommand(INDEX_FIRST_PERSON);
+
+        String expectedMessage = String.format(HistoryCommand.MESSAGE_SHOW_HISTORY_SUCCESS,
+                personToViewHistory.getName());
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
+        ContactDateList expectedCallHistory = expectedModel.getCallHistory(personToViewHistory);
+        expectedModel.updateDisplayedList(expectedCallHistory);
+
+        assertCommandSuccess(historyCommand, model, expectedMessage, expectedModel);
+    }
 
     @Test
     public void toStringMethod() {
         Index targetIndex = Index.fromOneBased(1);
-        HistoryCommand historyCommand = new HistoryCommand(targetIndex);
-        String expected = HistoryCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
-        assertEquals(expected, historyCommand.toString());
+        HistoryCommand historyCommandWithIndex = new HistoryCommand(targetIndex);
+        String expected = HistoryCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex
+                + ", targetNric=null}";
+        assertEquals(expected, historyCommandWithIndex.toString());
+
+        Nric targetNric = new Nric(VALID_NRIC_AMY);
+        HistoryCommand historyCommandWithNric = new HistoryCommand(targetNric);
+        String expectedNricString = HistoryCommand.class.getCanonicalName() + "{targetIndex=null, targetNric="
+                + targetNric + "}";
+        assertEquals(expectedNricString, historyCommandWithNric.toString());
     }
 
 }

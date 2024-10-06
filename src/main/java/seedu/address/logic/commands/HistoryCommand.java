@@ -54,12 +54,17 @@ public class HistoryCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
         Person personFound;
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        if (targetIndex != null) {
+            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
+            personFound = lastShownList.get(targetIndex.getZeroBased());
+        } else {
+            personFound = model.getPersonByNric(targetNric);
+            if (personFound == null) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NRIC);
+            }
         }
-        personFound = lastShownList.get(targetIndex.getZeroBased());
-
-        //Get person by NRIC (to be implemented)
 
         ContactDateList callHistory = model.getCallHistory(personFound);
 
@@ -93,6 +98,7 @@ public class HistoryCommand extends Command {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("targetIndex", targetIndex)
+                .add("targetNric", targetNric)
                 .toString();
     }
 }
