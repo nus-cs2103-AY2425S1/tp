@@ -15,8 +15,7 @@ import seedu.address.model.util.SampleDataUtil;
 /**
  * A utility class to help with building Person objects.
  */
-public class PersonBuilder {
-
+public class PersonBuilder<T extends PersonBuilder<T>> {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
@@ -50,44 +49,72 @@ public class PersonBuilder {
         tags = new HashSet<>(personToCopy.getTags());
     }
 
+    public Name getName() {
+        return name;
+    }
+
+    public Phone getPhone() {
+        return phone;
+    }
+
+    public Email getEmail() {
+        return email;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public Set<Tag> getTags() {
+        return tags;
+    }
+
+    @SuppressWarnings("unchecked")
+    // T can only be GuestBuilder or VendorBuilder
+    // Both are subtypes of PersonBuilder
+    // Hence, this narrowing type conversion is safe!
+    protected T self() {
+        return (T) this;
+    }
+
     /**
      * Sets the {@code Name} of the {@code Person} that we are building.
      */
-    public PersonBuilder withName(String name) {
+    public T withName(String name) {
         this.name = new Name(name);
-        return this;
+        return self();
     }
 
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
+    public T withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
-        return this;
+        return self();
     }
 
     /**
      * Sets the {@code Address} of the {@code Person} that we are building.
      */
-    public PersonBuilder withAddress(String address) {
+    public T withAddress(String address) {
         this.address = new Address(address);
-        return this;
+        return self();
     }
 
     /**
      * Sets the {@code Phone} of the {@code Person} that we are building.
      */
-    public PersonBuilder withPhone(String phone) {
+    public T withPhone(String phone) {
         this.phone = new Phone(phone);
-        return this;
+        return self();
     }
 
     /**
      * Sets the {@code Email} of the {@code Person} that we are building.
      */
-    public PersonBuilder withEmail(String email) {
+    public T withEmail(String email) {
         this.email = new Email(email);
-        return this;
+        return self();
     }
 
     /**
@@ -96,7 +123,7 @@ public class PersonBuilder {
      * @return A {@code Person} object, which will either be a {@code Guest} or a {@code Vendor}.
      */
     public Person build() {
-        // TODO: FIX THIS STUPID WORKAROUND
+        // TODO: FIX THIS STUPID WORKAROUND (By removing dependencies on PersonBuilder)
         return new Guest(name, phone, email, address, tags);
     }
 }
