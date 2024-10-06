@@ -75,8 +75,10 @@ public class AddClientCommand extends Command {
         model.addPerson(toAdd);
         if (toAdd.getCar() == null) {
             return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
-        } else return new CommandResult(String.format(MESSAGE_SUCCESS,
-                Messages.format(toAdd)) + MESSAGE_SUCCESS_WITH_CAR + Messages.formatCar(toAdd));
+        } else {
+            return new CommandResult(String.format(MESSAGE_SUCCESS,
+                    Messages.format(toAdd)) + MESSAGE_SUCCESS_WITH_CAR + Messages.formatCar(toAdd));
+        }
     }
 
     @Override
