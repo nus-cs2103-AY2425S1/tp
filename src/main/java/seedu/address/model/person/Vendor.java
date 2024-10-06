@@ -49,8 +49,7 @@ public class Vendor extends Person {
      */
     @Override
     public boolean isSamePerson(Person otherPerson) {
-        return super.isSamePerson(otherPerson)
-                && (otherPerson instanceof Vendor);
+        return super.isSamePerson(otherPerson);
     }
 
     /**

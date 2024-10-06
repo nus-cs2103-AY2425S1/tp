@@ -74,8 +74,7 @@ public class Guest extends Person {
      */
     @Override
     public boolean isSamePerson(Person otherPerson) {
-        return super.isSamePerson(otherPerson)
-                && (otherPerson instanceof Guest);
+        return super.isSamePerson(otherPerson);
     }
 
     /**
