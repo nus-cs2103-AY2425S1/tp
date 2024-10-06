@@ -6,7 +6,9 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Contact;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.UniqueContactList;
 import seedu.address.model.person.UniquePersonList;
 
 /**
@@ -26,6 +28,19 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+    }
+
+    private final UniqueContactList contacts;
+
+    /*
+     * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
+     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
+     *
+     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
+     *   among constructors.
+     */
+    {
+        contacts = new UniqueContactList();
     }
 
     public AddressBook() {}
@@ -49,12 +64,21 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * TODO
+     */
+    public void setContacts(List<Contact> contacts) {
+        this.contacts.setContacts(contacts);
+    }
+
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setContacts(newData.getContactList());
     }
 
     //// person-level operations
@@ -94,18 +118,31 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    /**
+     * TODO
+     */
+    public void addContact(Contact c) {
+        contacts.add(c);
+    }
+
     //// util methods
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("persons", persons)
+                // .add("persons", persons)
+                .add("contacts", contacts)
                 .toString();
     }
 
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Contact> getContactList() {
+        return contacts.asUnmodifiableObservableList();
     }
 
     @Override
