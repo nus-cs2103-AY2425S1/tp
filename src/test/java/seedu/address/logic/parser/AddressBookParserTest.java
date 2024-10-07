@@ -17,6 +17,7 @@ import seedu.address.logic.commands.AddClientCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditCommand.EditCarDescriptor;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
@@ -54,15 +55,14 @@ public class AddressBookParserTest {
         assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
     }
 
-    // TODO: Uncomment this test after implementing EditCommand
-    // @Test
-    // public void parseCommand_edit() throws Exception {
-    //     Person person = new PersonBuilder().build();
-    //     EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
-    //     EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-    //             + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-    //     assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
-    // }
+    @Test
+    public void parseCommand_edit() throws Exception {
+        Person person = new PersonBuilder().build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor, new EditCarDescriptor(), true, false), command);
+    }
 
     @Test
     public void parseCommand_exit() throws Exception {

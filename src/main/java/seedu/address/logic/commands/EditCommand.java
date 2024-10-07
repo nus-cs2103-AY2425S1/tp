@@ -99,11 +99,14 @@ public class EditCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
-        Car carToEdit = personToEdit.getCar();
-        Car editedCar = createEditedCar(carToEdit, editCarDescriptor);
+        Car editedCar = null;
 
-        if (carToEdit.equals(editedCar) && model.hasCar(editedCar) && isCarEdited) {
-            throw new CommandException(MESSAGE_DUPLICATE_CAR);
+        if (personToEdit.getCar() != null) {
+            Car carToEdit = personToEdit.getCar();
+            editedCar = createEditedCar(carToEdit, editCarDescriptor);
+            if (carToEdit.equals(editedCar) && model.hasCar(editedCar) && isCarEdited) {
+                throw new CommandException(MESSAGE_DUPLICATE_CAR);
+            }
         }
 
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor, editedCar);
@@ -113,6 +116,7 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        System.out.println(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
@@ -135,7 +139,6 @@ public class EditCommand extends Command {
     }
 
     private static Car createEditedCar(Car carToEdit, EditCarDescriptor editCarDescriptor) {
-        assert carToEdit != null;
 
         Vrn updatedVrn = editCarDescriptor.getVrn().orElse(carToEdit.getVrn());
         Vin updatedVin = editCarDescriptor.getVin().orElse(carToEdit.getVin());
@@ -179,6 +182,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private Car car;
 
         public EditPersonDescriptor() {}
 
@@ -192,13 +196,14 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setCar(toCopy.car);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, car);
         }
 
         public void setName(Name name) {
@@ -250,6 +255,14 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        public void setCar(Car car) {
+            this.car = car;
+        }
+
+        public Optional<Car> getCar() {
+            return Optional.ofNullable(car);
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -266,7 +279,8 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(car, otherEditPersonDescriptor.car);
         }
 
         @Override
@@ -277,6 +291,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("tags", tags)
+                    .add("car", car)
                     .toString();
         }
     }

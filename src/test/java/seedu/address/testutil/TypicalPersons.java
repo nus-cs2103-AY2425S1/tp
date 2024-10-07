@@ -107,11 +107,23 @@ public class TypicalPersons {
         return ab;
     }
 
+    public static AddressBook getTypiAddressBookAllWithCars() {
+        AddressBook ab = new AddressBook();
+        for (Person person : getTypicalPersonsAllWithCars()) {
+            ab.addPerson(person);
+        }
+        return ab;
+    }
+
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 
     public static List<Person> getTypicalPersonsSomeWithCars() {
-        return new ArrayList<>(Arrays.asList(CARL, DANIEL, ELLE, FIONA, GEORGE, ALICE_WITH_CAR, BENSON_WITH_CAR));
+        return new ArrayList<>(Arrays.asList(AMY_WITH_CAR, CARL, DANIEL, ELLE, FIONA, GEORGE, BENSON_WITH_CAR));
+    }
+
+    public static List<Person> getTypicalPersonsAllWithCars() {
+        return new ArrayList<>(Arrays.asList(BOB_WITH_CAR, AMY_WITH_CAR));
     }
 }
