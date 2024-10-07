@@ -2,10 +2,7 @@ package seedu.address.model.student;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
@@ -22,6 +19,7 @@ public class Student {
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
+    private final Optional<String> group;
 
     /**
      * Every field must be present and not null.
@@ -31,6 +29,15 @@ public class Student {
         this.name = name;
         this.email = email;
         this.tags.addAll(tags);
+        this.group = Optional.empty();
+    }
+
+    public Student(Name name, Email email, Set<Tag> tags, Optional<String> group) {
+        requireAllNonNull(name, email, tags, group);
+        this.name = name;
+        this.email = email;
+        this.tags.addAll(tags);
+        this.group = group;
     }
 
     public Name getName() {
@@ -39,6 +46,10 @@ public class Student {
 
     public Email getEmail() {
         return email;
+    }
+
+    public Optional<String> getGroup {
+        return group;
     }
 
 
