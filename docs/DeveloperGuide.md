@@ -287,55 +287,147 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                                | So that I can…​                                                              |
-|----------|--------------------------------------------|---------------------------------------------|------------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions                      | refer to instructions when I forget how to use the App                       |
-| `* * *`  | gamer                                      | add a new gaming contact to my address book | keep track of my gaming friends and their details.                           |
-| `* * *`  | gamer                                      | delete a gaming contact                     | keep my address book up-to-date by removing inactive or irrelevant contacts. |
-| `* * *`  | gamer                                      | view my contact list                        | see who I have contact with                                                  |
-| `* * *`  | gamer                                      | tag my contacts with specific games         | easily find friends who play specific games                                  |
-| `* * *`  | user                                       | find a person by name                       | locate details of persons without having to go through the entire list       |
-| `* *`    | user                                       | hide private contact details                | minimize chance of someone else seeing them by accident                      |
-| `*`      | user with many persons in the address book | sort persons by name                        | locate a person easily                                                       |
+| Priority | As a …​  | I want to …​                          | So that I can…​                                                              |
+|----------|----------|---------------------------------------|------------------------------------------------------------------------------|
+| `* * *`  | new user | see usage instructions                | refer to instructions when I forget how to use the App                       |
+| `* * *`  | gamer    | add a new gaming contact              | keep track of my gaming friends and their details.                           |
+| `* * *`  | gamer    | delete a gaming contact               | keep my address book up-to-date by removing inactive or irrelevant contacts. |
+| `* * *`  | gamer    | view my contact list                  | see who I have contact with                                                  |
+| `* * *`  | gamer    | tag my contacts with specific games   | easily find friends who play specific games                                  |
+| `* * *`  | gamer    | find a contact by name                | locate details of persons without having to go through the entire list       |
+| `* *`    | gamer    | find a contact by game                | quickly find contacts who play a specific game                               |
+| `* *`    | gamer    | tag my contacts with different groups | manage my contacts into teams                                                |
+| `* *`    | gamer    | tag contacts as inactive              | hide inactive contacts without deleting their  information                   |
+| `* *`    | gamer    | add links to contacts                 | quickly find a contact's socials and other links                             |
+| `*`      | gamer    | aff custom fields to each contact     | add various details to each contact, such as timezone, skill level, etc.     |
 
+<!--
 *{More to be added}*
+-->
 
 ### Use cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
-
+#### Use Case: UC1 - Add a Contact
 **MSS**
-
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
-
-    Use case ends.
+1. User requests to add contact
+2. GamerBook adds the contact
+Use case ends.
 
 **Extensions**
+* 1a. User adds contact incorrectly.
+  * 1a1. GamerBook notifies user that the command was entered incorrectly.
+  
+    Use case ends.
+* 1b. User tries to add a duplicate contact.
+    * 1b1. GamerBook notifies the user that the contact already exists.
+  
+      Use case ends.
 
-* 2a. The list is empty.
+* 1c. User leaves mandatory fields empty.
+    * 1c1. GamerBook prompts the user to fill in the required fields.
 
-  Use case ends.
+      Use case ends.
 
-* 3a. The given index is invalid.
+#### Use Case: UC2 - Delete a Contact
+**MSS**
+1. User list the contacts.
+2. User requests to delete a contact.
+3. GamerBook deletes the contact.
+Use case ends.
 
-    * 3a1. AddressBook shows an error message.
+**Extensions**
+* 2a. User attempts to delete a contact that does not exist.
+    * 2a1. GamerBook notifies the user that the contact does not exist.
 
-      Use case resumes at step 2.
+      Use case ends.
+* 2b. User cancels the delete operation.
+    * 2b1. GamerBook returns to the contact list without making any changes.
+
+      Use case ends.
+
+#### Use Case: UC3 - Find a Contact by Name
+**MSS**
+1. User try to find a contact by name.
+2. GamerBook shows the corresponding contact.
+Use case ends.
+
+**Extensions**
+* 1a.  User enters a name that does not exist.
+    * 1a1. GamerBook notifies the user that no contacts were found.
+
+      Use case ends.
+* 1b. User types a partial name.
+    * 1b1. GamerBook returns all contacts that match the partial name.
+
+      Use case ends.
+
+#### Use Case: UC4 - Tag a Contact
+**MSS**
+1. User request to tag a contact.
+2. GamerBook tags the contact.
+Use case ends.
+
+**Extensions**
+* 1a. User tries to tag a contact that does not exist.
+    * 1a1. GamerBook notifies the user that the contact cannot be found.
+
+      Use case ends.
+* 1b. User attempts to tag a contact with an invalid game name.
+    * 1b1. GamerBook shows an error message indicating the game name is invalid.
+
+      Use case ends.
+
+
+<!-- 
+TEMPLATE FOR ADDING USE CASE
+
+#### Use Case: 
+**MSS**
+1. 
+2. 
+Use case ends.
+
+**Extensions**
+* 1a. 
+  * 1a1. 
+  
+    Use case ends.
+* 1b. 
+    * 1b1. 
+  
+      Use case ends.
 
 *{More to be added}*
+-->
 
 ### Non-Functional Requirements
-
+#### Compatibility
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
+#### Performance
+1. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+   (eg. addition, deletion, and search operations)
+
+#### Usability
+1. The application should provide clear and concise error messages and usage instructions to assist the user in operating the system effectively.
+
+#### Efficiency
+1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+
+#### Security
+1. The application should ensure that user data is securely stored and that sensitive information (like social media links) is not exposed unintentionally.
+
+#### Data Integrity
+1. The application should implement mechanisms to prevent data corruption and ensure that contacts are not lost during operations.
+
+#### Scalability
+1. The system should be designed to accommodate future enhancements, such as additional fields for contacts or new functionalities without requiring significant rework.
+
+<!--
 *{More to be added}*
+-->
 
 ### Glossary
 
