@@ -7,6 +7,11 @@ import java.util.stream.Collectors;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.job.Job;
+import seedu.address.model.job.JobCompany;
+import seedu.address.model.job.JobDescription;
+import seedu.address.model.job.JobName;
+import seedu.address.model.job.JobRequirements;
+import seedu.address.model.job.JobSalary;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -60,20 +65,30 @@ public class SampleDataUtil {
 
     public static Job[] getSampleJobs() {
         return new Job[]{new Job(
-                "Software Engineer, Google Pay, Core",
-                "Google",
-                "$100/m",
-                "Experience with mobile development, 2 years of experience with software development",
-                "As a software engineer, you will work on a specific project critical to Google’s needs with "
-                + "opportunities to switch teams and projects as you and our fast-paced business grow and evolve. "
+                new JobName("Software Engineer, Google Pay, Core"),
+                new JobCompany("Google"),
+                new JobSalary("100"),
+                new JobRequirements(
+                        "Experience with mobile development, 2 years of experience with software development"),
+                new JobDescription(
+                        "As a software engineer, you will work on a specific project critical to Google’s needs with "
+                        + "opportunities to switch teams and projects as you and our fast-paced business grow and "
+                        + "evolve. ")
         ), new Job(
-                "Software Engineering Manager II, YouTube",
-                "YouTube",
-                "$200/m",
-                "8 years of experience with software development in one or more programming languages (e.g., Python, "
-                + "C, C++, Java, JavaScript)",
-                "As a Software Engineering Manager you manage your project goals, contribute to product strategy and "
-                + "help develop your team. "
+                new JobName("Software Engineering Manager II, YouTube"),
+                new JobCompany("YouTube"),
+                new JobSalary("200"),
+                new JobRequirements("8 years of experience with software development in one or more programming "
+                                    + "languages (e.g., Python, C, C++, Java, JavaScript)"),
+                new JobDescription(
+                        "As a Software Engineering Manager you manage your project goals, contribute to product "
+                        + "strategy and help develop your team. ")
+        ), new Job(
+                new JobName("Test Job"),
+                new JobCompany("Test Company"),
+                new JobSalary("300"),
+                new JobRequirements(null),
+                new JobDescription(null)
         )};
     }
 
@@ -93,9 +108,7 @@ public class SampleDataUtil {
      * Returns a tag set containing the list of strings given.
      */
     public static Set<Tag> getTagSet(String... strings) {
-        return Arrays.stream(strings)
-                     .map(Tag::new)
-                     .collect(Collectors.toSet());
+        return Arrays.stream(strings).map(Tag::new).collect(Collectors.toSet());
     }
 
 }

@@ -6,17 +6,18 @@ import seedu.address.commons.util.ToStringBuilder;
  * Represents a Job Listing in the address book.
  */
 public class Job {
-    private final String name;
-    private final String company;
-    private final String salary;
-    private final String requirements;
-    private final String description;
+    private final JobName name;
+    private final JobCompany company;
+    private final JobSalary salary;
+    private final JobRequirements requirements;
+    private final JobDescription description;
 
     /**
      * TODO: Implement data validation
      * Every field has no validation for now.
      */
-    public Job(String name, String company, String salary, String requirements, String description) {
+    public Job(JobName name, JobCompany company, JobSalary salary, JobRequirements requirements,
+            JobDescription description) {
         this.name = name;
         this.company = company;
         this.salary = salary;
@@ -24,23 +25,23 @@ public class Job {
         this.description = description;
     }
 
-    public String getName() {
+    public JobName getName() {
         return name;
     }
 
-    public String getCompany() {
+    public JobCompany getCompany() {
         return company;
     }
 
-    public String getSalary() {
+    public JobSalary getSalary() {
         return salary;
     }
 
-    public String getRequirements() {
+    public JobRequirements getRequirements() {
         return requirements;
     }
 
-    public String getDescription() {
+    public JobDescription getDescription() {
         return description;
     }
 
