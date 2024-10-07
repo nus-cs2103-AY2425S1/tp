@@ -290,20 +290,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | a tutor who wants to keep his personal and work life separate               | keep in contact with students and their parents without needing to give them my personal email or number     | my privacy is kept intact and my personal information is not shared                                                                                            |
 | `* * *`  | a tutor who cares about his students' progress                              | easily keep track of my students' performance in school as well as his participation and learning in tuition | I am better equipped to help my students do well                                                                                                               |
 | `* * *`  | a not so tech-savvy tutor                                                   | easily understand the appications' functions and uses, and how to navigate through the application smoothly  | I would not have any issues using the app to better organise my tasks and schedule as a tutor                                                                  |
-| `* * *`  | a part-time tutor (student) with tight deadlines                            | take a glance through the app to see exactly what needs my attention                                         | I can instantly filter out the important tasks that I need to do, like marking and preparing for tutorials, so i can shift my focus back to my other deadlines |
+| `* * *`  | a part-time tutor (person) with tight deadlines                            | take a glance through the app to see exactly what needs my attention                                         | I can instantly filter out the important tasks that I need to do, like marking and preparing for tutorials, so i can shift my focus back to my other deadlines |
 | `* * *`  | a tutor ready to start using the app                                        | import the data of all my students                                                                           | I can use the app instantly                                                                                                                                    |
 | `* * *`  | a first time user                                                           | get a list of commands that cover the main features of the app                                               | I can explore and get a feel for the functionalities                                                                                                           |
 | `* * *`  | a tutor who prefers CLI to GUI                                              | use the keyboard for all purposes in the app instead of needing to scroll and click using a mouse            | I am comfortable and enjoy using the app                                                                                                                       |
 | `* * *`  | a veteran tutor with a set of pre-existing students                         | synchronize list of contacts into the app                                                                    | I do not need to manually enter each contact which is a hassle                                                                                                 |
-| `* * *`  | a private home tutor                                                        | access student address location using the app                                                                | I know where to travel to for a specific appointment                                                                                                           |
+| `* * *`  | a private home tutor                                                        | access person address location using the app                                                                | I know where to travel to for a specific appointment                                                                                                           |
 | `*`      | a tutor                                                                     | have timely reminders for upcoming deadlines                                                                 | I can make sure the students submit them on time                                                                                                               |
-| `*`      | a tutor who wants to keep tabs on a student's grades                        | track the scores of students across several assessments                                                      | I can determine which student requires more attention                                                                                                          |
+| `*`      | a tutor who wants to keep tabs on a person's grades                        | track the scores of students across several assessments                                                      | I can determine which person requires more attention                                                                                                          |
 | `*`      | a full-time tutor                                                           | track the hours I've worked each week                                                                        | I can ensure accurate payment                                                                                                                                  |
 | `*`      | a tutor who has different classes of students                               | sort my students by their class                                                                              | I can find the appropriate information quickly                                                                                                                 |
 | `*`      | a tutor                                                                     | quickly search for tasks or appointments based on keywords                                                   | I can find specific tasks or sessions easily                                                                                                                   |
 | `*`      | a tutor                                                                     | set recurring tasks (like weekly lesson planning)                                                            | I don't have to manually input them every time                                                                                                                 |
 | `*`      | a forgetful tutor                                                           | receive notifications when new sessions or tasks are coming up                                               | the task of remembering these timings can be relegated to the app                                                                                              |
-| `*`      | a 1-1 tutor                                                                 | keep track of individual student progress and test scores                                                    | I can better tailor tuition efforts to improve outcomes                                                                                                        |
+| `*`      | a 1-1 tutor                                                                 | keep track of individual person progress and test scores                                                    | I can better tailor tuition efforts to improve outcomes                                                                                                        |
 | `*`      | an organised tutor                                                          | set task priorities (high, medium. low)                                                                      | I can focus on the most important tasks first                                                                                                                  |
 | `*`      | a tutor                                                                     | update contact details                                                                                       | students information are up to date                                                                                                                            |
 | `* *`    | a detailed tutor                                                            | add notes to contact details                                                                                 | I can track important information                                                                                                                              |
@@ -349,14 +349,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes from Step 4.
 
-**Use case: Mark student Attendance**
+**Use case: Mark person Attendance**
 
 **MSS**
-1. Tutor requests to mark attendance for a student in a selected tutorial session.
+1. Tutor requests to mark attendance for a person in a selected tutorial session.
 
 2. Teletutors App displays the list of students for the session.
 
-3. Tutor selects the student and specifies whether they are present or absent.
+3. Tutor selects the person and specifies whether they are present or absent.
 
 4. Teletutors App updates the attendance record and confirms the action.
 
@@ -369,20 +369,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case resumes from Step 2
 
 
-**Use case: Delete student details**
+**Use case: Delete person details**
 
 **MSS**
 
-1.  Tutor requests to delete a student's details.
+1.  Tutor requests to delete a person's details.
 2.  Teletutors App prompts for confirmation
 3.  Tutor confirms the deletion.
-4.  Teletutors App deletes the student and associated records.
+4.  Teletutors App deletes the person and associated records.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The student does not exist in the system
+* 1a. The person does not exist in the system
     * 1a1. Teletutors App displays an error message: `Student not found. Please check the name and try again`
 
       Use case resumes from Step 1.
