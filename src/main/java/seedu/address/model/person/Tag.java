@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,9 +31,7 @@ public class Tag {
      */
     public Tag(String tag) {
         requireNonNull(tag);
-        if (!isValidTag(tag)) {
-            throw new InvalidTagException(MESSAGE_CONSTRAINTS);
-        }
+        checkArgument(isValidTag(tag), MESSAGE_CONSTRAINTS);
         this.role = tag;
     }
 
