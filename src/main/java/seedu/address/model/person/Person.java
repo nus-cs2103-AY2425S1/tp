@@ -34,7 +34,19 @@ public class Person {
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = Optional.ofNullable(address);
+        this.address = Optional.of(address);
+        this.tags.addAll(tags);
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Person(Name name, Phone phone, Email email, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = Optional.empty();
         this.tags.addAll(tags);
     }
 
@@ -106,13 +118,14 @@ public class Person {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
+        ToStringBuilder builder = new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
-                .add("email", email)
-                .add("address", address.orElse(null))
-                .add("tags", tags)
-                .toString();
+                .add("email", email);
+        address.ifPresent(addr -> builder.add("address", this.getAddress()));
+        builder.add("tags", tags);
+
+        return builder.toString();
     }
 
 }
