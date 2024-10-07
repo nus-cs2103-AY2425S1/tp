@@ -13,7 +13,7 @@ public class ModuleCode {
     /**
      * Constructs a {@code ModuleCode}.
      *
-     * @param String A module code.
+     * @param moduleCode A module code.
      */
     public ModuleCode(String moduleCode) {
         requireNonNull(moduleCode);
