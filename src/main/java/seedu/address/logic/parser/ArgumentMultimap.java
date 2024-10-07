@@ -19,6 +19,14 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class ArgumentMultimap {
 
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    public boolean arePrefixesPresent(Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> this.getValue(prefix).isPresent());
+    }
+
     /** Prefixes mapped to their respective arguments**/
     private final Map<Prefix, List<String>> argMultimap = new HashMap<>();
 
