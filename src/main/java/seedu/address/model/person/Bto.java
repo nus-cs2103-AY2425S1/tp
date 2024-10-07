@@ -1,11 +1,18 @@
 package seedu.address.model.person;
 
-public class BTO extends Property {
+public class Bto extends Property {
 
     public static final String MESSAGE_CONSTRAINTS = "BTO names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+"; // Checks if the BTO name is alphanumeric
 
-    public BTO(String btoName, String unitNumber, String price) {
+    /**
+     * Constructs a {@code BTO}.
+     *
+     * @param btoName A valid BTO name.
+     * @param unitNumber A valid unit number.
+     * @param price A valid price.
+     */
+    public Bto(String btoName, String unitNumber, String price) {
         super(btoName, unitNumber, price);
     }
 

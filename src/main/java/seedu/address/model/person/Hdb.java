@@ -1,12 +1,12 @@
 package seedu.address.model.person;
 
-public class HDB extends Property {
+public class Hdb extends Property {
 
     public static final String MESSAGE_CONSTRAINTS = "HDB names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+"; // Checks if the HDB name is alphanumeric
 
 
-    public HDB(String hdbName, String unitNumber, String price) {
+    public Hdb(String hdbName, String unitNumber, String price) {
         super(hdbName, unitNumber, price);
     }
 
