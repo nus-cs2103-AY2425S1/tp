@@ -262,72 +262,154 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Physiotherapists who:
+  * Has a significant number of patients to manage
+  * Prefers a solution that minimizes data entry and retrieval time
+  * Needs quick access to contact details and conditions of patients
+  * Needs to monitor and track the progress of recurring / returning patients over a long period of time
+  * Prefers typing to mouse interactions and reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Provide a more specialised one-stop-for-all medical related information to their patients, schedules, appointments and to keep track of their medical information, progression, medical history etc. The simple CLI app is optimised for physiotherapists’ routine use during consultations, designed for physiotherapists who prioritise speed when accessing and updating patients’ information and details on a regular basis.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
-
+| Priority | As a …​ | I want to …​                                                          | So that I can…​                                                                       |
+|----------|---------|-----------------------------------------------------------------------|---------------------------------------------------------------------------------------|
+| `* * *`  | Doctor  | create a new patient profile                                          | I can record their details and track their progress                                   |
+| `* * *`  | Doctor  | delete a patient profile                                              | get rid of patient's information that I no longer need /  no longer a patient of mine |
+| `* * *`  | Doctor  | add recurring appointments for a patient                              | manage their treatment schedule efficiently                                           |
+| `* * *`  | Doctor  | update patient details                                                | keep their medical information current                                                |
+| `* * *`  | Doctor  | add notes to a patient’s record after each session                    | track their progress over time                                                        |
+| `* * *`  | Doctor  | see which patients have upcoming appointments today                   | I can prepare in advance                                                              |
+| `* * *`  | Doctor  | view the history of treatments for a patient                          | monitor their improvement                                                             |
+| `* * `   | Doctor  | filter patients by condition or treatment type                        | search patients of a particular condition or treatment for more follow-up actions     |
+| `* * `   | Doctor  | track my own schedule for the week                                    | I can plan my workload                                                                || `* * *`  | Doctor | view the history of treatments for a patient           | monitor their improvement                                                 |
+| `* * `   | Doctor  | automatically schedule follow-up appointments for recurring patients  | I don’t have to manually book each appointment                                        |
+| `* * `   | Doctor  | set reminders for follow-up appointments                              | I don’t miss any important sessions                                                   | |
+| `* * `   | Doctor  | assign different exercises or treatments to a patient                 | their care plan is personalized                                                       |
+| `* * `   | Doctor  | mark a patient’s session as completed                                 | I can know which patients have been seen                                              |
+| `* * `   | Doctor  | add vital signs data (e.g., blood pressure, heart rate) for a patient | I can monitor their health metrics                                                    |
+| `* * `   | Doctor  | track patient feedback after each session                             | I can adjust their treatment plan if needed                                           |
+| `* * `   | Doctor  | set goals for a patient’s treatment plan                              | I can measure their progress against these goals                                      |
+| `* * `   | Doctor  | record billing information for each session                           | I can manage payments and invoicing                                                   |
+| `* * `   | Doctor  | access a summary of all my patients                                   | I can get an overview of their conditions and treatments                              |
+| `* * `   | Doctor  | view all the sessions a patient has missed                            | I can follow up with them and arrange for make-up session                             |
+| `* `     | Doctor  | collaborate with other doctors by sharing patient information         | we can coordinate care                                                                |
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `MedDict` and the **Actor** is the `physiotherapist`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case - UC01: Delete a person**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  The user searches for the patient in the list by name
+2.  MedDict displays all matching patients
+3.  The user selects the specific patient profile to delete
+4.  The user requests to delete a specific patient in the list
+5.  MedDict deletes the patient profile from the system and notifies the user that the profile has been successfully deleted
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a: The list of patients is empty.
 
-  Use case ends.
+    * 2a1. MedDict informs the doctor that no patients are available for deletion
+    * Use case ends
 
-* 3a. The given index is invalid.
+* 3a. The given index or patient selection is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. MedDict shows an error message indicating that the selected patient profile is invalid or does not exist
 
-      Use case resumes at step 2.
+      Use case resumes from step 2
 
-*{More to be added}*
+  
+**Use case - UC02: Add Appointment**
+
+**MSS**
+
+1.  User requests to make a new appointment
+2.  MedDict displays the list of available time slots for appointments
+3.  User selects a specific time slot
+4.  User searches for the patient by name or the ID
+5.  User requests to assign the time slot to a patient
+6.  MedDict assigns the selected time slot to the chosen patient and confirms the appointment
+
+    Use case ends.
+
+**Extensions**
+
+* 2a: No available time slots.
+
+    * 2a1. MedDict notifies the doctor that no time slots are available
+    * 2a2. The doctor chooses to wait for a cancellation or manually opens additional time slots
+    * Use case ends
+
+* 4a. The selected patient is not found in the system.
+
+    * 4a1. MedDict informs the doctor that the patient is not found
+    * 4a2. The doctor is given the option to create a new patient profile or re-enter the patient's name
+
+      Use case resumes from step 4
+
+
+**Use case - UC03: Mark patient’s appointment as completed**
+
+**MSS**
+
+1.  User requests to view all his appointments for the day
+2.  MedDict displays all appointments that the user has for the day
+3.  User selects the patient that he has just viewed
+4.  User requests to mark the patient’s appointment status as completed
+5.  System marks the patient’s appointment for the day as completed
+
+    Use case ends.
+
+**Extensions**
+
+* 2a: The user has no patients for that day.
+
+    * 2a1. MedDict displays an empty appointment list for the day
+    * Use case ends
+
+* 3a. The patient selected is invalid / doesn't exist.
+
+    * 3a1. MedDict alerts the user that the selected patient profile is invalid or does not exist
+
+      Use case resumes from step 2
+  
+* 4a. The patient’s status has already been marked as completed
+
+    * 4a1. MedDict alerts to the user that the appointment has already been marked as completed
+    * Use case ends
+
+
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any mainstream OS as long as it has Java 17 or above installed.
+2. Should run efficiently on low-powered machines, such as older clinic computers, without consuming excessive CPU or memory resources (less than 100 MB of RAM usage)
+3. The system should allow physiotherapists to find a contact by name or ID within 1-2 seconds to ensure minimal disruption during patient interactions.
+4. Command structures should be simple enough for physiotherapists to memorize frequently used operations
+5. The searching functionality should not be case-sensitive.
+6. The system must be able to handle unexpected errors (e.g., incorrect input, unavailable commands) gracefully by providing clear, actionable error messages
+7. The system should automatically back up patient contact data at least once per day to ensure data integrity. Backups should be encrypted and stored in a secure location
+8. All sensitive contact information, including patient names, phone numbers, and addresses, must be encrypted when stored on disk.
+9. Only authorized users (e.g., licensed physiotherapists) should be able to access or modify patient details.
+10. Authorized users will only have access to the patients under their patient-doctor bond (PDB).
+11. should also be scalable to accommodate larger clinics that may need to store 10,000+ patient records
 
-*{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
---------------------------------------------------------------------------------------------------------------------
+
+* **Patient-Doctor Bond (PDB)**: A relationship between a doctor and a patient where the doctor is assigned to the patient for physiotherapy treatment
+
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
