@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INSURANCE_ID;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -11,28 +12,34 @@ import seedu.address.model.Model;
  */
 public class AddInsuranceCommand extends Command {
     public static final String COMMAND_WORD = "addInsurance";
-    public static final String MESSAGE_NOT_IMPLEMENTED_YET = "Add Insurance command not implemented yet";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Adds an insurance plan to the client identified "
+            + "by their name. \n"
+            + "Parameters: INDEX (must be a positive integer) "
+            + ", INSURANCE_PLAN_ID (must be a valid ID) \n"
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_INSURANCE_ID + " 0";
 
-    public static final String MESSAGE_ARGUMENTS = "Client Name: %1$s, InsuranceID: %2$d";
+    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, InsuranceID: %2$s";
 
-    private final String clientName;
+    private final Index index;
     private final int insuranceID;
 
     /**
-     * @param clientName of the person in the filtered person list to edit the remark
+     * @param index of the person in the filtered person list to edit the remark
      * @param insuranceID of the person to be updated to
      */
-    public AddInsuranceCommand(String clientName, int insuranceID) {
-        requireAllNonNull(clientName, insuranceID);
+    public AddInsuranceCommand(Index index, int insuranceID) {
+        requireAllNonNull(index, insuranceID);
 
-        this.clientName = clientName;
+        this.index = index;
         this.insuranceID = insuranceID;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         throw new CommandException(
-                String.format(MESSAGE_ARGUMENTS, clientName, insuranceID));
+                String.format(MESSAGE_ARGUMENTS, index.getOneBased(), insuranceID));
     }
 
     @Override
@@ -46,6 +53,6 @@ public class AddInsuranceCommand extends Command {
             return false;
         }
 
-        return clientName.equals(e.clientName) && insuranceID == e.insuranceID;
+        return index.equals(e.index) && insuranceID == e.insuranceID;
     }
 }

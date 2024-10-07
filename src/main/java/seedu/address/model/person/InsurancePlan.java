@@ -19,6 +19,12 @@ public abstract class InsurancePlan {
         return insurancePlanId;
     }
 
+    public static boolean checkValidPlan(int insurancePlanId) {
+        int validMaxId = 1;
+        int validMinId = 0;
+        return insurancePlanId > validMinId && insurancePlanId < validMaxId;
+    }
+
     /**
      * Returns a string representation of the insurance plan.
      *
