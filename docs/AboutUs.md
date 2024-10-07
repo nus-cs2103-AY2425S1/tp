@@ -9,51 +9,52 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Sandy Kristian Waluyo
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/sandyk0105.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/sandyk0105)]
+[[portfolio](team/sandyk0105.md)]
 
-* Role: Advisor
+* Role: Developer
+* Responsibilities: Code Quality
 
-### Jane Doe
+### Nigel Teo
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/nigeltzy.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/nigeltzy)]
+[[portfolio](team/nigeltzy.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Tham Yao Xiang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/tyxiangs.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/tyxiangs)] [[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities: Data
+
+### Cheng Zihao
+
+<img src="images/chengzihao123.png" width="200px">
+
+[[github](http://github.com/chengzihao123)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: UI and testing
 
-### James Doe
+### Axel
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/shinichi04.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/shinichi04)]
+[[portfolio](team/shinichi04.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Data
