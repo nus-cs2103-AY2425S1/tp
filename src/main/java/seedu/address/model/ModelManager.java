@@ -97,14 +97,30 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasJob(Job job) {
+        requireNonNull(job);
+        return addressBook.hasJob(job);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
 
     @Override
+    // Todo: In a second PR when I add the deleteJob feature
+    public void deleteJob(Job target) {}
+
+    @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void addJob(Job job) {
+        addressBook.addJob(job);
+        updateFilteredJobList(PREDICATE_SHOW_ALL_JOBS);
     }
 
     @Override
