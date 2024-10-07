@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Mode;
 
 /**
  * Represents the result of a command execution.
@@ -19,6 +20,20 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    private final Mode mode;
+
+    /**
+     * Constructs a {@code CommandResult} with the additional fields
+     * to update the mode of the app after a command.
+     */
+    // TODO: Terrible solution, should consider leveraging polymorphism via Command class
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, Mode mode) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = showHelp;
+        this.exit = exit;
+        this.mode = mode;
+    }
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
@@ -26,6 +41,7 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.mode = Mode.CONTACT;
     }
 
     /**
@@ -48,6 +64,15 @@ public class CommandResult {
         return exit;
     }
 
+    public Mode getMode() {
+        return mode;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(feedbackToUser, showHelp, exit);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -60,23 +85,16 @@ public class CommandResult {
         }
 
         CommandResult otherCommandResult = (CommandResult) other;
-        return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-                && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return feedbackToUser.equals(otherCommandResult.feedbackToUser) && showHelp == otherCommandResult.showHelp
+               && exit == otherCommandResult.exit;
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("feedbackToUser", feedbackToUser)
-                .add("showHelp", showHelp)
-                .add("exit", exit)
-                .toString();
+        return new ToStringBuilder(this).add("feedbackToUser", feedbackToUser)
+                                        .add("showHelp", showHelp)
+                                        .add("exit", exit)
+                                        .toString();
     }
 
 }
