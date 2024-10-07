@@ -115,6 +115,7 @@ public class Person {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
+                .add("gender", gender)
                 .add("address", address)
                 .add("tags", tags)
                 .toString();
