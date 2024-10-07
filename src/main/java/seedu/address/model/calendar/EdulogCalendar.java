@@ -1,14 +1,15 @@
 package seedu.address.model.calendar;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Calendar class
  */
-public class Calendar {
-    private ArrayList<Lesson> lessons;
+public class EdulogCalendar {
+    private List<Lesson> lessons;
 
-    public Calendar() {
+    public EdulogCalendar() {
         lessons = new ArrayList<>();
     }
 
