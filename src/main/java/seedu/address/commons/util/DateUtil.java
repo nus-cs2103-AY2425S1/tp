@@ -38,7 +38,9 @@ public class DateUtil {
      * @return true if the date is after today, false otherwise.
      */
     public static boolean isAfterToday(String date) {
-        checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
+        if (!isValidDate(date)) {
+            return false;
+        }
         LocalDate parsedDate = LocalDate.parse(date, DATE_FORMATTER);
         return parsedDate.isAfter(LocalDate.now());
     }

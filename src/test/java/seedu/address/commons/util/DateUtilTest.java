@@ -7,11 +7,11 @@ import static seedu.address.commons.util.DateUtil.isAfterToday;
 import static seedu.address.commons.util.DateUtil.isValidDate;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
 public class DateUtilTest {
-
     @Test
     public void isValidDate_validDate_returnsTrue() {
         assertTrue(isValidDate("2022-02-02"));
@@ -29,13 +29,13 @@ public class DateUtilTest {
 
     @Test
     public void isAfterToday_dateAfterToday_returnsTrue() {
-        String futureDate = LocalDate.now().plusDays(2).toString();
+        String futureDate = LocalDate.now().plusDays(2).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         assertTrue(isAfterToday(futureDate)); // far future date
     }
 
     @Test
     public void isAfterToday_dateBeforeToday_returnsFalse() {
-        String today = LocalDate.now().toString();
+        String today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         assertFalse(isAfterToday("2000-01-01")); // past date
         assertFalse(isAfterToday(today)); // today's date or past date
     }
