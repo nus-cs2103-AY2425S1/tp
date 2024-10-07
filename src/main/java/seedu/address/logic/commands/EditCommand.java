@@ -3,9 +3,12 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MAKE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VIN;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VRN;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -21,6 +24,11 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.car.Car;
+import seedu.address.model.car.CarMake;
+import seedu.address.model.car.CarModel;
+import seedu.address.model.car.Vin;
+import seedu.address.model.car.Vrn;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -33,7 +41,7 @@ import seedu.address.model.tag.Tag;
  */
 public class EditCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD = "edit-client";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
@@ -43,28 +51,41 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_VRN + "VEHICLE REGISTRATION NUMBER] "
+            + "[" + PREFIX_VIN + "VEHICLE IDENTIFICATION NUMBER] "
+            + "[" + PREFIX_MAKE + "VEHICLE MAKE] "
+            + "[" + PREFIX_MODEL + "VEHICLE MODEL] "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
-
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_CAR = "This car already exists in the address book.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
+    private final EditCarDescriptor editCarDescriptor;
+    private final Boolean isPersonEdited;
+    private final Boolean isCarEdited;
 
     /**
      * @param index of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditCommand(
+        Index index, EditPersonDescriptor editPersonDescriptor,
+        EditCarDescriptor editCarDescriptor, Boolean isPersonEdited,
+        Boolean isCarEdited
+    ) {
         requireNonNull(index);
         requireNonNull(editPersonDescriptor);
 
         this.index = index;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.editCarDescriptor = new EditCarDescriptor(editCarDescriptor);
+        this.isPersonEdited = isPersonEdited;
+        this.isCarEdited = isCarEdited;
     }
 
     @Override
@@ -77,9 +98,16 @@ public class EditCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+        Car carToEdit = personToEdit.getCar();
+        Car editedCar = createEditedCar(carToEdit, editCarDescriptor);
+
+        if (carToEdit.equals(editedCar) && model.hasCar(editedCar) && isCarEdited) {
+            throw new CommandException(MESSAGE_DUPLICATE_CAR);
+        }
+
+        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor, editedCar);
+        if (personToEdit.equals(editedPerson) && model.hasPerson(editedPerson) && isPersonEdited) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
@@ -92,7 +120,9 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static Person createEditedPerson(Person personToEdit,
+        EditPersonDescriptor editPersonDescriptor, Car editedCar
+    ) {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
@@ -100,8 +130,19 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Car updatedCar = editedCar;
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedCar);
+    }
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+    private static Car createEditedCar(Car carToEdit, EditCarDescriptor editCarDescriptor) {
+        assert carToEdit != null;
+
+        Vrn updatedVrn = editCarDescriptor.getVrn().orElse(carToEdit.getVrn());
+        Vin updatedVin = editCarDescriptor.getVin().orElse(carToEdit.getVin());
+        CarMake updatedMake = editCarDescriptor.getMake().orElse(carToEdit.getCarMake());
+        CarModel updatedModel = editCarDescriptor.getModel().orElse(carToEdit.getCarModel());
+
+        return new Car(updatedVrn, updatedVin, updatedMake, updatedModel);
     }
 
     @Override
@@ -236,6 +277,97 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("tags", tags)
+                    .toString();
+        }
+    }
+
+    /**
+     * Stores the details to edit the car with. Each non-empty field value will replace the
+     * corresponding field value of the car.
+     */
+    public static class EditCarDescriptor {
+        private Vrn vrn;
+        private Vin vin;
+        private CarMake make;
+        private CarModel model;
+
+        public EditCarDescriptor() {}
+
+        /**
+         * Copy constructor.
+         * A defensive copy of {@code tags} is used internally.
+         */
+        public EditCarDescriptor(EditCarDescriptor toCopy) {
+            setVrn(toCopy.vrn);
+            setVin(toCopy.vin);
+            setMake(toCopy.make);
+            setModel(toCopy.model);
+        }
+
+        /**
+         * Returns true if at least one field is edited.
+         */
+        public boolean isAnyFieldEdited() {
+            return CollectionUtil.isAnyNonNull(vrn, vin, make, model);
+        }
+
+        public void setVrn(Vrn vrn) {
+            this.vrn = vrn;
+        }
+
+        public Optional<Vrn> getVrn() {
+            return Optional.ofNullable(vrn);
+        }
+
+        public void setVin(Vin vin) {
+            this.vin = vin;
+        }
+
+        public Optional<Vin> getVin() {
+            return Optional.ofNullable(vin);
+        }
+
+        public void setMake(CarMake make) {
+            this.make = make;
+        }
+
+        public Optional<CarMake> getMake() {
+            return Optional.ofNullable(make);
+        }
+
+        public void setModel(CarModel model) {
+            this.model = model;
+        }
+
+        public Optional<CarModel> getModel() {
+            return Optional.ofNullable(model);
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (other == this) {
+                return true;
+            }
+
+            // instanceof handles nulls
+            if (!(other instanceof EditCarDescriptor)) {
+                return false;
+            }
+
+            EditCarDescriptor otherEditCarDescriptor = (EditCarDescriptor) other;
+            return Objects.equals(vrn, otherEditCarDescriptor.vrn)
+                    && Objects.equals(vin, otherEditCarDescriptor.vin)
+                    && Objects.equals(make, otherEditCarDescriptor.make)
+                    && Objects.equals(model, otherEditCarDescriptor.model);
+        }
+
+        @Override
+        public String toString() {
+            return new ToStringBuilder(this)
+                    .add("vrn", vrn)
+                    .add("vin", vin)
+                    .add("make", make)
+                    .add("model", model)
                     .toString();
         }
     }
