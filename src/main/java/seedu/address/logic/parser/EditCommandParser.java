@@ -4,9 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MAKE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VIN;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VRN;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -15,6 +19,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditCommand.EditCarDescriptor;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
@@ -32,7 +37,8 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
+                    PREFIX_VRN, PREFIX_VIN, PREFIX_MAKE, PREFIX_MODEL);
 
         Index index;
 
@@ -42,30 +48,61 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_VRN,
+            PREFIX_VIN, PREFIX_MAKE, PREFIX_MODEL);
+
+        EditCarDescriptor editCarDescriptor = new EditCarDescriptor();
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
+        Boolean isPersonEdited = false;
+        Boolean isCarEdited = false;
+
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+            isPersonEdited = true;
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
             editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
+            isPersonEdited = true;
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
             editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
+            isPersonEdited = true;
         }
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
+            isPersonEdited = true;
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
+        if (argMultimap.getValue(PREFIX_VRN).isPresent()) {
+            editCarDescriptor.setVrn(ParserUtil.parseVrn(argMultimap.getValue(PREFIX_VRN).get()));
+            isCarEdited = true;
+        }
+
+        if (argMultimap.getValue(PREFIX_VIN).isPresent()) {
+            editCarDescriptor.setVin(ParserUtil.parseVin(argMultimap.getValue(PREFIX_VIN).get()));
+            isCarEdited = true;
+        }
+
+        if (argMultimap.getValue(PREFIX_MAKE).isPresent()) {
+            editCarDescriptor.setMake(ParserUtil.parseCarMake(argMultimap.getValue(PREFIX_MAKE).get()));
+            isCarEdited = true;
+        }
+
+        if (argMultimap.getValue(PREFIX_MODEL).isPresent()) {
+            editCarDescriptor.setModel(ParserUtil.parseCarModel(argMultimap.getValue(PREFIX_MODEL).get()));
+            isCarEdited = true;
+        }
+
+        if (!editPersonDescriptor.isAnyFieldEdited() && !editCarDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index, editPersonDescriptor);
+        return new EditCommand(index, editPersonDescriptor, editCarDescriptor, isPersonEdited, isCarEdited);
     }
+
 
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.

@@ -48,7 +48,7 @@ public class CommandTestUtil {
     public static final String INVALID_CAR_MAKE = "toyota";
     public static final String INVALID_CAR_MODEL = "corolla";
 
-
+    public static final String VALID_NAME_RACHEL = "Rachel Bee";
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "11111111";
@@ -110,6 +110,7 @@ public class CommandTestUtil {
             assertEquals(expectedCommandResult, result);
             assertEquals(expectedModel, actualModel);
         } catch (CommandException ce) {
+            System.out.println("Test failed with error: " + ce.getMessage());
             throw new AssertionError("Execution of command should not fail.", ce);
         }
     }

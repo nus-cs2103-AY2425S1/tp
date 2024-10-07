@@ -104,6 +104,66 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String vin} into a {@code Vin}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code vin} is invalid.
+     */
+    public static Vin parseVin(String vin) throws ParseException {
+        requireNonNull(vin);
+        String trimmedVin = vin.trim();
+        if (!Vin.isValidVin(trimmedVin)) {
+            throw new ParseException(Vin.MESSAGE_CONSTRAINTS);
+        }
+        return new Vin(trimmedVin);
+    }
+
+    /**
+     * Parses a {@code String vrn} into a {@code Vrn}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code vrn} is invalid.
+     */
+    public static Vrn parseVrn(String vrn) throws ParseException {
+        requireNonNull(vrn);
+        String trimmedVrn = vrn.trim();
+        if (!Vrn.isValidVrn(trimmedVrn)) {
+            throw new ParseException(Vrn.MESSAGE_CONSTRAINTS);
+        }
+        return new Vrn(trimmedVrn);
+    }
+
+    /**
+     * Parses a {@code String make} into a {@code CarMake}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code make} is invalid.
+     */
+    public static CarMake parseCarMake(String make) throws ParseException {
+        requireNonNull(make);
+        String trimmedMake = make.trim();
+        if (!CarMake.isValidCarMake(trimmedMake)) {
+            throw new ParseException(CarMake.MESSAGE_CONSTRAINTS);
+        }
+        return new CarMake(trimmedMake);
+    }
+
+    /**
+     * Parses a {@code String model} into a {@code CarModel}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code model} is invalid.
+     */
+    public static CarModel parseCarModel(String model) throws ParseException {
+        requireNonNull(model);
+        String trimmedModel = model.trim();
+        if (!CarModel.isValidCarModel(trimmedModel)) {
+            throw new ParseException(CarModel.MESSAGE_CONSTRAINTS);
+        }
+        return new CarModel(trimmedModel);
+    }
+
+    /**
      * Parses a {@code String vrn} into a {@code Vrn}.
      * Leading and trailing whitespaces will be trimmed.
      *
