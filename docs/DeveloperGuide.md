@@ -439,7 +439,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Contact**: An entity representing a client. It contains personal details such as name, phone number, email and address. Contact can also include preferences like seller or buyer ranges and associated properties.
+* **Property**: A real estate asset associated to a contact. Each property has details such as name, address, price, number of rooms and optional tags(property type/condition/ownership type, etc.) 
+* **Index**: A numerical identifier used to refer to a specific contact or property in the system. These are used for operations like deletion, updating, or viewing details.
+* **Tag**: A label used to categorize contacts or properties. Examples can include "Investor", "Luxury", "Renter", etc. They are used to provide additional context and for easy filtering and searching. 
+* **Seller Preferred Range (SPR)**: A price range that indicates the seller's preferred selling range for properties. Used for matching potential sellers with buyers.  
+* **Buyer Preferred Range (BPR)**: A price range that indicates the buyer's preferred range for purchasing properties. Helps in identifying properties that match a buyer's preference.
+* **Keyword**: A term or phrase used to search for specific contacts or properties. They can match any stored attribute such as name, address, tag, etc.
 
 --------------------------------------------------------------------------------------------------------------------
 
