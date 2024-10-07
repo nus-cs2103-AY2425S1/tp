@@ -1,7 +1,7 @@
 ---
   layout: default.md
-  title: "Developer Guide"
-  pageNav: 3
+    title: "Developer Guide"
+    pageNav: 3
 ---
 
 # AB-3 Developer Guide
@@ -241,13 +241,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 
@@ -287,14 +287,29 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​                                     | I want to …​                        | So that I can…​                                                                                     |
+|----------|---------------------------------------------|-------------------------------------|-----------------------------------------------------------------------------------------------------|
+| `* * *`  | CSR                                         | add customers to the list           | store their info for the next time they call in                                                     |
+| `* * *`  | CSR                                         | delete a customer                   | remove entries that I no longer need                                                                |
+| `* * *`  | CSR                                         | find a person by name               | locate details of customers without having to go through the entire list                            |
+| `* * *`  | CSR                                         | edit customer profiles              | keep their information up to date in the case where it changes (e.g. due to moving house)           |
+| `* *`    | CSR with many customers in the address book | sort customers by last update       | access the most recent data easily                                                                  |
+| `* *`    | CSR                                         | create tags                         | use them to categorise customers                                                                    |
+| `* *`    | CSR                                         | tag customers with custom tags      | categorise customers                                                                                |
+| `* *`    | CSR                                         | search customers by tags            | easily access customer groups                                                                       |
+| `* *`    | CSR                                         | add additional remarks to customers | record any special circumstances regarding that customer (e.g. agitates easily)                     |
+| `* *`    | new CSR                                     | use a "help" command                | see how to use the app or refer to the syntax of a lesser-used command                              |
+| `* *`    | CSR                                         | add reminders for follow up calls   | follow up with customers on later dates                                                             |
+| `*`      | experienced CSR                             | set custom keybinds/shortcuts       | use commands faster                                                                                 |
+| `* *`    | CSR                                         | add reminders for follow up calls   | recover from mistakes/accidents                                                                     |
+| `* *`    | CSR                                         | add reminders for follow up calls   | remove customers I have finished serving but still have access to their profile if needed in future |
+| `* *`    | CSR                                         | add reminders for follow up calls   | designate them as requiring extra care                                                              |
+| `*`      | potential CSR                               | add reminders for follow up calls   | see how the app looks when it is in use                                                             |
+| `*`      | new CSR                                     | add reminders for follow up calls   | get rid of the sample customer contact I used for exploring the app                                 |
+| `*`      | CSR                                         | add reminders for follow up calls   | recover data accidentally purged                                                                    |
+| `* *`    | international CSR                           | add reminders for follow up calls   | support internationalization (?)                                                                    |
+| `* *`    | CSR taking over another CSR                 | add reminders for follow up calls   | transfer old customer profiles from another CSR                                                     |
+| `*`      | CSR                                         | add reminders for follow up calls   | so that I can follow up with customers                                                              |
 
 *{More to be added}*
 
@@ -357,15 +372,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
@@ -374,16 +389,16 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete 0`<br>
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 
@@ -391,6 +406,6 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
