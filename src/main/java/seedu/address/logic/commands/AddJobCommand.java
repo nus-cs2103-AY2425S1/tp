@@ -14,7 +14,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REQUIREMENTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 
-public class AddJobCommand {
+public class AddJobCommand extends Command {
 
     public static final String COMMAND_WORD = "add_job";
 
