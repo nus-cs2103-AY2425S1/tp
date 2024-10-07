@@ -49,7 +49,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Udit Sanghi
 
-<img src="images/T1duS.png" width="200px">
+<img src="images/t1dus.png" width="200px">
 
 [[github](https://github.com/T1duS)]
 
