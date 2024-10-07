@@ -1,10 +1,10 @@
 ---
   layout: default.md
-    title: "Developer Guide"
-    pageNav: 3
+  title: "Developer Guide"
+  pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# T_Assistant Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -125,7 +125,7 @@ How the `Logic` component works:
    a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which
    is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a student).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take
    several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -220,13 +220,13 @@ initial address book state, and the `currentStatePointer` pointing to that singl
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls
+Step 2. The user executes `delete 5` command to delete the 5th student in the address book. The `delete` command calls
 `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be
 saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls
+Step 3. The user executes `add n/David …​` to add a new student. The `add` command also calls
 `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
@@ -238,7 +238,7 @@ not be saved into the `addressBookStateList`.
 
 </box>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the
+Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the
 `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once
 to the left, pointing it to the previous address book state, and restores the address book to that state.
 
@@ -307,7 +307,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
@@ -362,7 +362,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | beginner TA            | add students into the system                  |                                                   |
 | `* * *`  | busy TA                | remove projects/tasks                         | not feel overwhelmed                              |
 | `* * *`  | TA that prefers typing | carry out all the functions through CLI       | just use my keyboard                              |
-| `* * *`  | disorganized TA        | mark a team’s tasks as complete or incomplete | keep track of my students’ progress               |
+| `* * *`  | disorganized TA        | mark a team’s tasks as complete               | keep track of my students’ progress               |
 | `* * *`  | disorganized TA        | sort students by their groupings              | keep track of all the groups under my instruction |
 | `* * *`  | disorganized TA        | remove students no longer taking this module  | keep the contact list relevant                    |
 | `* * *`  | disorganized TA        | search for a student by name or project group | quickly find their contact details                |
@@ -524,7 +524,7 @@ Use case ends.
 
 * 3b. The Student is already in a different Group.
 
-    * 3a1. T_Assistant shows an error message.
+    * 3b1. T_Assistant shows an error message.
 
       Use case resumes at step 2.
 
@@ -540,10 +540,136 @@ Use case ends.
 
       Use case resumes at step 2.
 
+**Use case: Mark Team's task as Complete**
+
+**MSS**
+
+1. User marks task as complete.
+2. T_Assistant marks the task accordingly.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. The Group/Task parameters are invalid.
+
+    * 1a1.  T_Assistant shows an error message.
+
+      Use case ends.
+
+* 1b. The user marks an already complete task.
+
+    * 1b1.  T_Assistant shows an error message.
+
+      Use case ends.
+
+**Use case: Delete Student from Group**
+
+**MSS**
+
+1. User requests to list all students.
+2. T_Assistant shows all students.
+3. User deletes a student from a specified group.
+4. T_Assistant adds student to the group.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 3a. The Student/Group parameters are invalid.
+
+    * 3a1. T_Assistant shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The Student is already in a different Group.
+
+    * 3b1. T_Assistant shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: List all Groups**
+
+**MSS**
+
+1. User lists all groups.
+2. T_Assistant displays all groups.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. There are currently no groups.
+
+    * 1a1.  T_Assistant shows an error message.
+
+      Use case ends.
+
+**Use case: List all Tasks**
+
+**MSS**
+
+1. User lists all tasks.
+2. T_Assistant displays all groups.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. There are currently no tasks.
+
+    * 1a1.  T_Assistant shows an error message.
+
+      Use case ends.
+
+**Use case: Add Task to Group**
+
+**MSS**
+
+1. User adds a task to a specified group.
+2. T_Assistant displays all current tasks for the group.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. The Group/Task parameters are invalid.
+
+    * 1a1.  T_Assistant shows an error message.
+
+      Use case ends.
+
+* 1b. A duplicate task is entered.
+
+    * 1b1.  T_Assistant informs user that the task already exists.
+
+      Use case resumes at step 2.
+
+**Use case: Delete Task from Group**
+
+**MSS**
+
+1. User removes a task from a specified group.
+2. T_Assistant displays all current tasks for the group.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. The Group/Task parameters are invalid.
+
+    * 1a1.  T_Assistant shows an error message.
+
+      Use case ends.
+  
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
    able to accomplish most of the tasks faster using commands than using the mouse.
 
@@ -552,7 +678,8 @@ Use case ends.
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Student Number**: Unique identifier for each student
+* **Group Name**: Unique identifier for each group
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -585,18 +712,18 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a student
 
-1. Deleting a person while all persons are being shown
+1. Deleting a student while all students are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
     1. Test case: `delete 1`<br>
        Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
        Timestamp in the status bar is updated.
 
     1. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+       Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
 
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
