@@ -73,5 +73,4 @@ public class Date {
     public int hashCode() {
         return date.hashCode();
     }
-
 }
