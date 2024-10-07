@@ -6,14 +6,12 @@ package seedu.address.model.person;
  */
 public class TravelPlan extends InsurancePlan {
 
-    /** Unique identifier for the travel insurance plan. Initialized to 1 by default. */
-    private int insurancePlanId = 1;
-
     /**
      * Default constructor for the {@code TravelPlan} class.
      * Initializes a new instance of the travel insurance plan with default values.
      */
     public TravelPlan() {
+        this.insurancePlanId = 1;
     }
 
     /**
