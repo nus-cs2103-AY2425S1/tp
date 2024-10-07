@@ -11,7 +11,9 @@ import seedu.address.model.student.Student;
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
+    /**
+     * {@code Predicate} that always evaluate to true
+     */
     Predicate<Student> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     /**
@@ -49,7 +51,9 @@ public interface Model {
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
-    /** Returns the AddressBook */
+    /**
+     * Returns the AddressBook
+     */
     ReadOnlyAddressBook getAddressBook();
 
     /**
@@ -72,15 +76,19 @@ public interface Model {
     /**
      * Replaces the given student {@code target} with {@code editedStudent}.
      * {@code target} must exist in the address book.
-     * The student identity of {@code editedStudent} must not be the same as another existing student in the address book.
+     * The student identity of {@code editedStudent} must not
+     * be the same as another existing student in the address book.
      */
     void setPerson(Student target, Student editedStudent);
 
-    /** Returns an unmodifiable view of the filtered student list */
+    /**
+     * Returns an unmodifiable view of the filtered student list
+     */
     ObservableList<Student> getFilteredPersonList();
 
     /**
      * Updates the filter of the filtered student list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Student> predicate);
