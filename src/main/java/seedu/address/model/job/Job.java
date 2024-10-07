@@ -44,6 +44,15 @@ public class Job {
         return description;
     }
 
+    /** Returns true if both jobs have the same name and company. */
+    public boolean isSameJob(Job otherJob) {
+        if (otherJob == this) {
+            return true;
+        }
+
+        return otherJob != null && otherJob.getName().equals(getName()) && otherJob.getCompany().equals(getCompany());
+    }
+
     /**
      * Returns true if both jobs have the same identity and data fields.
      */

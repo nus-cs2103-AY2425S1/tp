@@ -8,10 +8,10 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.job.exceptions.DuplicateJobException;
 
 /**
- * // TODO: Not unique yet
- * A list of jobs.
+ * A list of unique jobs.
  */
 public class UniqueJobList implements Iterable<Job> {
 
@@ -24,7 +24,9 @@ public class UniqueJobList implements Iterable<Job> {
      */
     public void add(Job toAdd) {
         requireNonNull(toAdd);
-        // TODO: Add data invalidation
+        if (contains(toAdd)) {
+            throw new DuplicateJobException();
+        }
         internalList.add(toAdd);
     }
 
@@ -39,8 +41,33 @@ public class UniqueJobList implements Iterable<Job> {
      */
     public void setJobs(List<Job> jobs) {
         requireAllNonNull(jobs);
-        // TODO: Add data invalidation
+        if (!jobsAreUnique(jobs)) {
+            throw new DuplicateJobException();
+        }
+
         internalList.setAll(jobs);
+    }
+
+    /**
+     * Returns true if the list contains an equivalent jobs as the given argument.
+     */
+    public boolean contains(Job toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isSameJob);
+    }
+
+    /**
+     * Returns true if {@code jobs} contains only unique jobs.
+     */
+    private boolean jobsAreUnique(List<Job> jobs) {
+        for (int i = 0; i < jobs.size() - 1; i++) {
+            for (int j = i + 1; j < jobs.size(); j++) {
+                if (jobs.get(i).isSameJob(jobs.get(j))) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     /**
