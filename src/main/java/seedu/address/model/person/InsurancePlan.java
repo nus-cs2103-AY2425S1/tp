@@ -8,7 +8,7 @@ package seedu.address.model.person;
 public abstract class InsurancePlan {
 
     /** Unique identifier for the insurance plan, to be determined in each class separately. */
-    protected int insurancePlanId = - 1;
+    protected int insurancePlanId = -1;
 
     /**
      * Retrieves the insurance plan's unique identifier.
