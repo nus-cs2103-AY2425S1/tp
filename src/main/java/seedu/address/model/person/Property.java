@@ -53,6 +53,6 @@ public abstract class Property {
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + postalCode + ']'  + " Unit Number: " + unitNumber;
+        return '[' + postalCode + ']' + " Unit Number: " + unitNumber;
     }
 }
