@@ -1,6 +1,6 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.commands.AddInsuranceCommand.MESSAGE_NOT_IMPLEMENTED_YET;
+import static seedu.address.logic.commands.AddInsuranceCommand.MESSAGE_ARGUMENTS;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -16,6 +16,9 @@ class AddInsuranceCommandTest {
 
     @Test
     void execute() {
-        assertCommandFailure(new AddInsuranceCommand(), model, MESSAGE_NOT_IMPLEMENTED_YET);
+        String fakeClientName = "some client";
+        int fakePlanID = -1;
+        assertCommandFailure(new AddInsuranceCommand(fakeClientName, fakePlanID), model,
+                String.format(MESSAGE_ARGUMENTS, fakeClientName, fakePlanID));
     }
 }
