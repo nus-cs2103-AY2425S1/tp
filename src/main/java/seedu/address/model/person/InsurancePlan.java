@@ -44,4 +44,3 @@ public abstract class InsurancePlan {
                 && insurancePlanId == ((InsurancePlan) other).getInsurancePlanId(); // check plan id
     }
 }
-
