@@ -1,7 +1,10 @@
-package seedu.address.model.person;
+package seedu.address.model.calendar;
 
 import java.util.ArrayList;
 
+/**
+ * Calendar class
+ */
 public class Calendar {
     private ArrayList<Lesson> lessons;
 
