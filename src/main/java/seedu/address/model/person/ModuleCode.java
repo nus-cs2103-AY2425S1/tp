@@ -3,7 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Represents a module code in the address book.
+ * Represents a module code of a NUS module in the address book.
  * Guarantees: immutable
  */
 public class ModuleCode {
