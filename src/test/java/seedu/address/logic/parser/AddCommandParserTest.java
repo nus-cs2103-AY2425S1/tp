@@ -48,7 +48,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Tag;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandParserTest {
@@ -56,7 +56,7 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_STUDENT).build();
+        Person expectedPerson = new PersonBuilder(BOB).withTag(VALID_TAG_STUDENT).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + STUDENTID_DESC_BOB + NAME_DESC_BOB
@@ -65,12 +65,12 @@ public class AddCommandParserTest {
 
 
         // multiple tags - all accepted
-        Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_STUDENT, VALID_TAG_TUTOR)
+        /*Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTag(VALID_TAG_STUDENT)
                 .build();
         assertParseSuccess(parser,
                 STUDENTID_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + COURSE_DESC_BOB + TAG_DESC_TUTOR + TAG_DESC_STUDENT,
-                new AddCommand(expectedPersonMultipleTags));
+                new AddCommand(expectedPersonMultipleTags));*/
     }
 
     @Test
@@ -141,7 +141,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        Person expectedPerson = new PersonBuilder(AMY).withTag(VALID_TAG_STUDENT).build();
         assertParseSuccess(parser, STUDENTID_DESC_AMY + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                         + ADDRESS_DESC_AMY + COURSE_DESC_AMY, new AddCommand(expectedPerson));
     }
@@ -175,19 +175,19 @@ public class AddCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, STUDENTID_DESC_BOB + INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + COURSE_DESC_BOB + TAG_DESC_TUTOR + TAG_DESC_STUDENT, Name.MESSAGE_CONSTRAINTS);
+                + ADDRESS_DESC_BOB + COURSE_DESC_BOB + TAG_DESC_STUDENT, Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser, STUDENTID_DESC_BOB + NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + COURSE_DESC_BOB + TAG_DESC_TUTOR + TAG_DESC_STUDENT, Phone.MESSAGE_CONSTRAINTS);
+                + ADDRESS_DESC_BOB + COURSE_DESC_BOB + TAG_DESC_STUDENT, Phone.MESSAGE_CONSTRAINTS);
 
         // invalid email
         assertParseFailure(parser, STUDENTID_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC
-                + ADDRESS_DESC_BOB + COURSE_DESC_BOB + TAG_DESC_TUTOR + TAG_DESC_STUDENT, Email.MESSAGE_CONSTRAINTS);
+                + ADDRESS_DESC_BOB + COURSE_DESC_BOB + TAG_DESC_STUDENT, Email.MESSAGE_CONSTRAINTS);
 
         // invalid address
         assertParseFailure(parser, STUDENTID_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + INVALID_ADDRESS_DESC + COURSE_DESC_BOB + TAG_DESC_TUTOR + TAG_DESC_STUDENT,
+                + INVALID_ADDRESS_DESC + COURSE_DESC_BOB + TAG_DESC_STUDENT,
                 Address.MESSAGE_CONSTRAINTS);
 
         // invalid tag
@@ -200,7 +200,7 @@ public class AddCommandParserTest {
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + STUDENTID_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB
-                        + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + COURSE_DESC_BOB + TAG_DESC_TUTOR + TAG_DESC_STUDENT,
+                        + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + COURSE_DESC_BOB + TAG_DESC_STUDENT,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }

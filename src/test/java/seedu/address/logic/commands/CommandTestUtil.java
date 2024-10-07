@@ -81,7 +81,7 @@ public class CommandTestUtil {
                 .withEmail(VALID_EMAIL_AMY)
                 .withAddress(VALID_ADDRESS_AMY)
                 .withCourse(VALID_COURSE_AMY)
-                .withTags(VALID_TAG_STUDENT)
+                .withTag(VALID_TAG_STUDENT)
                 .build();
         DESC_BOB = new EditPersonDescriptorBuilder()
                 .withStudentId(VALID_STUDENTID_BOB)
@@ -90,7 +90,7 @@ public class CommandTestUtil {
                 .withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB)
                 .withCourse(VALID_COURSE_BOB)
-                .withTags(VALID_TAG_TUTOR, VALID_TAG_STUDENT)
+                .withTag(VALID_TAG_STUDENT)
                 .build();
     }
 
