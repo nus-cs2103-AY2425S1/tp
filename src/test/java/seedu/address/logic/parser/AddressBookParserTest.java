@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.logic.commands.ClearCommand;
@@ -120,15 +121,16 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_addTask() throws Exception {
         String taskDescription = "Buy medication";
-        Name personName = new Name("John Doe");
+        Index index1 = INDEX_FIRST_PERSON;
 
-        AddTaskCommand expectedCommand = new AddTaskCommand(taskDescription, personName);
+        AddTaskCommand expectedCommand = new AddTaskCommand(index1, taskDescription);
 
-        String userInput = AddTaskCommand.COMMAND_WORD + " d/" + taskDescription + " p/" + personName.fullName;
+        String userInput = AddTaskCommand.COMMAND_WORD + " 1" + " d/" + taskDescription;
 
         AddTaskCommand command = (AddTaskCommand) parser.parseCommand(userInput);
         assertEquals(expectedCommand, command);
     }
+
     @Test
     public void parseCommand_priorityMissingLevel_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,

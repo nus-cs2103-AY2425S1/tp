@@ -100,18 +100,17 @@ public class AddTaskCommandTest {
     public void equals() {
         Task task1 = new TaskBuilder().withDescription("Buy meds").build();
         Task task2 = new TaskBuilder().withDescription("Visit hospital").build();
-        Task taskWithSamePersonDifferentDescription = new TaskBuilder().withDescription("Take vitamins")
-                .withPatient(task1.getPatient()).build();
-        Task taskWithSameDescriptionDifferentPerson = new TaskBuilder().withDescription("Buy meds")
-                .withPatient(task2.getPatient()).build();
-        AddTaskCommand addTask1Command = new AddTaskCommand(task1.getDescription(), task1.getPatient().getName());
-        AddTaskCommand addTask2Command = new AddTaskCommand(task2.getDescription(), task2.getPatient().getName());
+
+        Index index1 = Index.fromOneBased(1);
+        Index index2 = Index.fromOneBased(2);
+        AddTaskCommand addTask1Command = new AddTaskCommand(index1, task1.getDescription());
+        AddTaskCommand addTask2Command = new AddTaskCommand(index2, task2.getDescription());
 
         // same object -> returns true
         assertTrue(addTask1Command.equals(addTask1Command));
 
         // same values -> returns true
-        AddTaskCommand addTask1CommandCopy = new AddTaskCommand(task1.getDescription(), task1.getPatient().getName());
+        AddTaskCommand addTask1CommandCopy = new AddTaskCommand(index1, task1.getDescription());
         assertTrue(addTask1Command.equals(addTask1CommandCopy));
 
         // different types -> returns false
@@ -126,26 +125,33 @@ public class AddTaskCommandTest {
     }
 
     @Test
-    public void equals_sameTaskDescriptionDifferentPersonName_returnsFalse() {
+    public void equals_sameTaskDescriptionDifferentIndex_returnsFalse() {
         Task task1 = new TaskBuilder().withDescription("Buy meds")
                 .withPatient(new PersonBuilder().withName("Alice").build()).build();
         Task task2 = new TaskBuilder().withDescription("Buy meds")
                 .withPatient(new PersonBuilder().withName("Bob").build()).build();
-        AddTaskCommand addTask1Command = new AddTaskCommand(task1.getDescription(), task1.getPatient().getName());
-        AddTaskCommand addTask2Command = new AddTaskCommand(task2.getDescription(), task2.getPatient().getName());
+
+        Index index1 = Index.fromOneBased(1);
+        Index index2 = Index.fromOneBased(2);
+
+        AddTaskCommand addTask1Command = new AddTaskCommand(index1, task1.getDescription());
+        AddTaskCommand addTask2Command = new AddTaskCommand(index2, task2.getDescription());
 
         // Different personName should return false
         assertFalse(addTask1Command.equals(addTask2Command));
     }
 
     @Test
-    public void equals_sameNameDifferentPersonObjects_returnsTrue() {
+    public void equals_sameIndexDifferentDescriptionObjects_returnsTrue() {
         Task task1 = new TaskBuilder().withDescription("Buy meds")
                 .withPatient(new PersonBuilder().withName("Alice").build()).build();
         Task task2 = new TaskBuilder().withDescription("Buy meds")
                 .withPatient(new PersonBuilder().withName("Alice").build()).build();
-        AddTaskCommand addTask1Command = new AddTaskCommand(task1.getDescription(), task1.getPatient().getName());
-        AddTaskCommand addTask2Command = new AddTaskCommand(task2.getDescription(), task2.getPatient().getName());
+
+        Index index1 = Index.fromOneBased(1);
+
+        AddTaskCommand addTask1Command = new AddTaskCommand(index1, task1.getDescription());
+        AddTaskCommand addTask2Command = new AddTaskCommand(index1, task2.getDescription());
 
         // Different Person objects but same name, should return true
         assertTrue(addTask1Command.equals(addTask2Command));
