@@ -46,6 +46,11 @@ public class MainApp extends Application {
     protected Model model;
     protected Config config;
 
+    /**
+     * Initializes the application.
+     *
+     * @throws Exception if initialization fails.
+     */
     @Override
     public void init() throws Exception {
         logger.info("=============================[ Initializing AddressBook ]===========================");
@@ -72,7 +77,7 @@ public class MainApp extends Application {
      * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
-    private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
+    protected Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getAddressBookFilePath());
 
         Optional<ReadOnlyAddressBook> addressBookOptional;
@@ -90,7 +95,7 @@ public class MainApp extends Application {
             initialData = new AddressBook();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        return new ModelManager(initialData, userPrefs, storage);
     }
 
     private void initLogging(Config config) {
@@ -168,12 +173,20 @@ public class MainApp extends Application {
         return initializedPrefs;
     }
 
+    /**
+     * Starts the application UI.
+     *
+     * @param primaryStage The primary stage for the application.
+     */
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting AddressBook " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
+    /**
+     * Stops the application and saves user preferences.
+     */
     @Override
     public void stop() {
         logger.info("============================ [ Stopping AddressBook ] =============================");
@@ -183,4 +196,5 @@ public class MainApp extends Application {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }
     }
+
 }
