@@ -6,7 +6,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import seedu.address.model.person.exceptions.InvalidTagException;
 
 
 
