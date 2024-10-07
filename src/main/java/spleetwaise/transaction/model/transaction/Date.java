@@ -48,6 +48,10 @@ public class Date {
         return date;
     }
 
+    public static Date getNowDate() {
+        return new Date(LocalDate.now().format(VALIDATION_FORMATTER));
+    }
+
     @Override
     public String toString() {
         return date.format(DISPLAY_FORMATTER);

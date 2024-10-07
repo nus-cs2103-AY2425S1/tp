@@ -25,7 +25,7 @@ public class Description {
     public Description(String description) {
         requireNonNull(description);
         AppUtil.checkArgument(isValidDescription(description), MESSAGE_CONSTRAINTS);
-        this.description = description;
+        this.description = description.trim();
     }
 
     public static boolean isValidDescription(String testString) {
