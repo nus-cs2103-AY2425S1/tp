@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 
 import seedu.internbuddy.commons.core.index.Index;
 import seedu.internbuddy.model.Model;
-import seedu.internbuddy.model.person.Person;
+import seedu.internbuddy.model.person.Company;
 
 /**
  * A utility class for test cases.
@@ -49,7 +49,7 @@ public class TestUtil {
     /**
      * Returns the person in the {@code model}'s person list at {@code index}.
      */
-    public static Person getPerson(Model model, Index index) {
+    public static Company getPerson(Model model, Index index) {
         return model.getFilteredPersonList().get(index.getZeroBased());
     }
 }

@@ -9,10 +9,12 @@ import java.util.Set;
 import seedu.internbuddy.commons.core.index.Index;
 import seedu.internbuddy.commons.util.StringUtil;
 import seedu.internbuddy.logic.parser.exceptions.ParseException;
-import seedu.internbuddy.model.person.Address;
-import seedu.internbuddy.model.person.Email;
-import seedu.internbuddy.model.person.Name;
-import seedu.internbuddy.model.person.Phone;
+import seedu.internbuddy.model.company.Address;
+import seedu.internbuddy.model.company.Email;
+import seedu.internbuddy.model.company.Name;
+import seedu.internbuddy.model.company.Phone;
+import seedu.internbuddy.model.company.Status;
+import seedu.internbuddy.model.person.*;
 import seedu.internbuddy.model.tag.Tag;
 
 /**

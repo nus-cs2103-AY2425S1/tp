@@ -13,12 +13,12 @@ import seedu.internbuddy.commons.exceptions.IllegalValueException;
 import seedu.internbuddy.model.person.Address;
 import seedu.internbuddy.model.person.Email;
 import seedu.internbuddy.model.person.Name;
-import seedu.internbuddy.model.person.Person;
+import seedu.internbuddy.model.person.Company;
 import seedu.internbuddy.model.person.Phone;
 import seedu.internbuddy.model.tag.Tag;
 
 /**
- * Jackson-friendly version of {@link Person}.
+ * Jackson-friendly version of {@link Company}.
  */
 class JsonAdaptedPerson {
 
@@ -49,7 +49,7 @@ class JsonAdaptedPerson {
     /**
      * Converts a given {@code Person} into this class for Jackson use.
      */
-    public JsonAdaptedPerson(Person source) {
+    public JsonAdaptedPerson(Company source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
@@ -64,7 +64,7 @@ class JsonAdaptedPerson {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
-    public Person toModelType() throws IllegalValueException {
+    public Company toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
@@ -103,7 +103,7 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Company(modelName, modelPhone, modelEmail, modelAddress, modelTags);
     }
 
 }

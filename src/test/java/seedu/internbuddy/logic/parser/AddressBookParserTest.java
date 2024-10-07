@@ -17,14 +17,14 @@ import seedu.internbuddy.logic.commands.AddCommand;
 import seedu.internbuddy.logic.commands.ClearCommand;
 import seedu.internbuddy.logic.commands.DeleteCommand;
 import seedu.internbuddy.logic.commands.EditCommand;
-import seedu.internbuddy.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.internbuddy.logic.commands.EditCommand.EditCompanyDescriptor;
 import seedu.internbuddy.logic.commands.ExitCommand;
 import seedu.internbuddy.logic.commands.FindCommand;
 import seedu.internbuddy.logic.commands.HelpCommand;
 import seedu.internbuddy.logic.commands.ListCommand;
 import seedu.internbuddy.logic.parser.exceptions.ParseException;
 import seedu.internbuddy.model.person.NameContainsKeywordsPredicate;
-import seedu.internbuddy.model.person.Person;
+import seedu.internbuddy.model.person.Company;
 import seedu.internbuddy.testutil.EditPersonDescriptorBuilder;
 import seedu.internbuddy.testutil.PersonBuilder;
 import seedu.internbuddy.testutil.PersonUtil;
@@ -35,7 +35,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
+        Company person = new PersonBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
         assertEquals(new AddCommand(person), command);
     }
@@ -55,8 +55,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Person person = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        Company person = new PersonBuilder().build();
+        EditCompanyDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);

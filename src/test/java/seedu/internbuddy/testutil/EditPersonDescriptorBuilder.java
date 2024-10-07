@@ -4,11 +4,11 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import seedu.internbuddy.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.internbuddy.logic.commands.EditCommand.EditCompanyDescriptor;
 import seedu.internbuddy.model.person.Address;
 import seedu.internbuddy.model.person.Email;
 import seedu.internbuddy.model.person.Name;
-import seedu.internbuddy.model.person.Person;
+import seedu.internbuddy.model.person.Company;
 import seedu.internbuddy.model.person.Phone;
 import seedu.internbuddy.model.tag.Tag;
 
@@ -17,21 +17,21 @@ import seedu.internbuddy.model.tag.Tag;
  */
 public class EditPersonDescriptorBuilder {
 
-    private EditPersonDescriptor descriptor;
+    private EditCompanyDescriptor descriptor;
 
     public EditPersonDescriptorBuilder() {
-        descriptor = new EditPersonDescriptor();
+        descriptor = new EditCompanyDescriptor();
     }
 
-    public EditPersonDescriptorBuilder(EditPersonDescriptor descriptor) {
-        this.descriptor = new EditPersonDescriptor(descriptor);
+    public EditPersonDescriptorBuilder(EditCompanyDescriptor descriptor) {
+        this.descriptor = new EditCompanyDescriptor(descriptor);
     }
 
     /**
      * Returns an {@code EditPersonDescriptor} with fields containing {@code person}'s details
      */
-    public EditPersonDescriptorBuilder(Person person) {
-        descriptor = new EditPersonDescriptor();
+    public EditPersonDescriptorBuilder(Company person) {
+        descriptor = new EditCompanyDescriptor();
         descriptor.setName(person.getName());
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
@@ -81,7 +81,7 @@ public class EditPersonDescriptorBuilder {
         return this;
     }
 
-    public EditPersonDescriptor build() {
+    public EditCompanyDescriptor build() {
         return descriptor;
     }
 }

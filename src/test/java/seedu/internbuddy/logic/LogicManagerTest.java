@@ -27,7 +27,7 @@ import seedu.internbuddy.model.Model;
 import seedu.internbuddy.model.ModelManager;
 import seedu.internbuddy.model.ReadOnlyAddressBook;
 import seedu.internbuddy.model.UserPrefs;
-import seedu.internbuddy.model.person.Person;
+import seedu.internbuddy.model.person.Company;
 import seedu.internbuddy.storage.JsonAddressBookStorage;
 import seedu.internbuddy.storage.JsonUserPrefsStorage;
 import seedu.internbuddy.storage.StorageManager;
@@ -167,7 +167,7 @@ public class LogicManagerTest {
         // Triggers the saveAddressBook method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        Company expectedPerson = new PersonBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);

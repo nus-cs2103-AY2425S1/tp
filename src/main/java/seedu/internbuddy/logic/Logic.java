@@ -8,7 +8,7 @@ import seedu.internbuddy.logic.commands.CommandResult;
 import seedu.internbuddy.logic.commands.exceptions.CommandException;
 import seedu.internbuddy.logic.parser.exceptions.ParseException;
 import seedu.internbuddy.model.ReadOnlyAddressBook;
-import seedu.internbuddy.model.person.Person;
+import seedu.internbuddy.model.person.Company;
 
 /**
  * API of the Logic component
@@ -31,7 +31,7 @@ public interface Logic {
     ReadOnlyAddressBook getAddressBook();
 
     /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Person> getFilteredPersonList();
+    ObservableList<Company> getFilteredPersonList();
 
     /**
      * Returns the user prefs' address book file path.

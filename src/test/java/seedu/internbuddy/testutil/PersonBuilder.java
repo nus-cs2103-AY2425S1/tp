@@ -3,11 +3,8 @@ package seedu.internbuddy.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.internbuddy.model.person.Address;
-import seedu.internbuddy.model.person.Email;
-import seedu.internbuddy.model.person.Name;
+import seedu.internbuddy.model.person.*;
 import seedu.internbuddy.model.person.Person;
-import seedu.internbuddy.model.person.Phone;
 import seedu.internbuddy.model.tag.Tag;
 import seedu.internbuddy.model.util.SampleDataUtil;
 

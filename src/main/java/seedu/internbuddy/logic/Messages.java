@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.internbuddy.logic.parser.Prefix;
+import seedu.internbuddy.model.company.Company;
 import seedu.internbuddy.model.person.Person;
 
 /**
@@ -32,8 +33,24 @@ public class Messages {
     }
 
     /**
-     * Formats the {@code person} for display to the user.
+     * Formats the {@code company} for display to the user.
      */
+    public static String format(Company company) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(company.getName())
+                .append("; Phone: ")
+                .append(company.getPhone())
+                .append("; Email: ")
+                .append(company.getEmail())
+                .append("; Address: ")
+                .append(company.getAddress())
+                .append("; Tags: ");
+        company.getTags().forEach(builder::append);
+        builder.append("; Status: ")
+                .append(company.getStatus());
+        return builder.toString();
+    }
+
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName())

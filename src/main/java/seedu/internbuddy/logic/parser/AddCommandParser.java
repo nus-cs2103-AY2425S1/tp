@@ -12,11 +12,7 @@ import java.util.stream.Stream;
 
 import seedu.internbuddy.logic.commands.AddCommand;
 import seedu.internbuddy.logic.parser.exceptions.ParseException;
-import seedu.internbuddy.model.person.Address;
-import seedu.internbuddy.model.person.Email;
-import seedu.internbuddy.model.person.Name;
-import seedu.internbuddy.model.person.Person;
-import seedu.internbuddy.model.person.Phone;
+import seedu.internbuddy.model.company.*;
 import seedu.internbuddy.model.tag.Tag;
 
 /**

@@ -9,8 +9,8 @@ import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.Set;
 
 import seedu.internbuddy.logic.commands.AddCommand;
-import seedu.internbuddy.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.internbuddy.model.person.Person;
+import seedu.internbuddy.logic.commands.EditCommand.EditCompanyDescriptor;
+import seedu.internbuddy.model.person.Company;
 import seedu.internbuddy.model.tag.Tag;
 
 /**
@@ -21,14 +21,14 @@ public class PersonUtil {
     /**
      * Returns an add command string for adding the {@code person}.
      */
-    public static String getAddCommand(Person person) {
+    public static String getAddCommand(Company person) {
         return AddCommand.COMMAND_WORD + " " + getPersonDetails(person);
     }
 
     /**
      * Returns the part of command string for the given {@code person}'s details.
      */
-    public static String getPersonDetails(Person person) {
+    public static String getPersonDetails(Company person) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + person.getName().fullName + " ");
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
@@ -43,7 +43,7 @@ public class PersonUtil {
     /**
      * Returns the part of command string for the given {@code EditPersonDescriptor}'s details.
      */
-    public static String getEditPersonDescriptorDetails(EditPersonDescriptor descriptor) {
+    public static String getEditPersonDescriptorDetails(EditCompanyDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));

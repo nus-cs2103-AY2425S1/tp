@@ -37,11 +37,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.internbuddy.logic.Messages;
 import seedu.internbuddy.logic.commands.AddCommand;
-import seedu.internbuddy.model.person.Address;
-import seedu.internbuddy.model.person.Email;
-import seedu.internbuddy.model.person.Name;
+import seedu.internbuddy.model.person.*;
 import seedu.internbuddy.model.person.Person;
-import seedu.internbuddy.model.person.Phone;
 import seedu.internbuddy.model.tag.Tag;
 import seedu.internbuddy.testutil.PersonBuilder;
 
