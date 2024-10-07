@@ -528,7 +528,7 @@ Use case ends.
    - Product (i.e., the JAR/ZIP file): 100MB
    - Documents (i.e., PDF files): 15MB/file
 7. The developer guide and user guide should be PDF-friendly. Don't use expandable panels, embedded videos, animated GIFs etc.
-8. The use of third-party libraries/frameworks/services are not allowed to improve security and stability of the application.
+8. The use of third-party libraries/frameworks/services should not be used so as to improve security and stability of the application.
 9. Talent managers with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 10. The application should prioritise one-shot commands over multi-step commands as they are faster. If a multi-step command is provided to help new users, a one-shot equivalent should also be provided for regular/expert users.
 11. Regular tasks (e.g., adding a contact, listing events) should be executable within a few milliseconds to maintain efficiency and not interrupt the talent manager’s workflow.
