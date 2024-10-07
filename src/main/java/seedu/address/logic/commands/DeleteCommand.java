@@ -9,6 +9,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -19,16 +20,17 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + ": Deletes the person identified by the name used in the displayed person list.\n"
+            + "Parameters: NAME (must be the name used in the displayed person list)\n"
+            + "Example: " + COMMAND_WORD + " John Doe";
 
+    public static final String MESSAGE_INVALID_NAME = "Person not found";
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
-    private final Index targetIndex;
+    private Name name;
 
-    public DeleteCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
+    public DeleteCommand(Name name) {
+        this.name = name;
     }
 
     @Override
@@ -36,11 +38,19 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        int index = -1;
+        for (int i = 0; i < lastShownList.size(); i++) {
+            if (lastShownList.get(i).getName().toString().equals(name.toString())) {
+                index = i;
+                break;
+            }
         }
 
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+        if (index == -1) {
+            throw new CommandException(MESSAGE_INVALID_NAME);
+        }
+
+        Person personToDelete = lastShownList.get(index);
         model.deletePerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
@@ -57,13 +67,13 @@ public class DeleteCommand extends Command {
         }
 
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return targetIndex.equals(otherDeleteCommand.targetIndex);
+        return name.equals(otherDeleteCommand.name);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("targetIndex", targetIndex)
+                .add("name", name)
                 .toString();
     }
 }
