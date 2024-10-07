@@ -1,2 +1,59 @@
-package seedu.address.model.person;public class Github {
+package seedu.address.model.person;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
+/**
+ * Represents a Person's github account in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidGithubUsername(String)}
+ */
+public class Github {
+    public static final String MESSAGE_CONSTRAINTS =
+            "Github usernames should only contain - and alphanumeric characters";
+    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9-]+$";
+    public String username;
+
+    /**
+     * Constructs an {@code Github}.
+     *
+     * @param githubUsername A valid GitHub username.
+     */
+    public Github(String githubUsername) {
+        requireNonNull(githubUsername);
+        checkArgument(isValidGithubUsername(githubUsername), MESSAGE_CONSTRAINTS);
+        username = githubUsername;
+    }
+
+    /**
+     * Returns if a given string is a valid email.
+     */
+    public static boolean isValidGithubUsername(String test) {
+        return test.matches(VALIDATION_REGEX);
+    }
+
+    @Override
+    public String toString() {
+        return this.username;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Github)) {
+            return false;
+        }
+
+        Github otherGithub = (Github) other;
+        return username.equals(otherGithub.username);
+    }
+
+    @Override
+    public int hashCode() {
+        return username.hashCode();
+    }
+
 }
