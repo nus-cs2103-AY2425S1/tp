@@ -320,7 +320,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Search for person(s)**
+
+**MSS**
+
+1.  User searches for a person by name
+2.  AddressBook shows a list of persons which fit the criteria
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User can also search by tag/role... etc.
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+**Use case: UC02 - Delete a person**
 
 **MSS**
 
@@ -333,6 +350,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
+* 1a. User could also search for persons by name/tag/role... etc. (UC01)
+
 * 2a. The list is empty.
 
   Use case ends.
@@ -342,6 +361,51 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. AddressBook shows an error message.
 
       Use case resumes at step 2.
+
+**Use case: UC03 - Add volunteer hours**
+
+**MSS**
+
+1.  User requests to list persons
+2.  AddressBook shows a list of persons
+3.  User requests to add some number of volunteer hours to a specific person in the list
+4.  AddressBook adds the specified number of volunteer hours to the specified person's existing hours
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User could also search for persons by name/tag/role... etc. (UC01)
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC04 - Get emails**
+
+**MSS**
+
+1.  User requests to list persons
+2.  AddressBook shows a list of persons
+3.  User requests to get emails of persons on the list
+4.  AddressBook copies to the user's clipboard a list of all emails of persons on the list
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User could also search for persons by name/tag/role... etc. (UC01)
+
+* 2a. The list is empty.
+
+  Use case ends.
+
 
 *{More to be added}*
 
