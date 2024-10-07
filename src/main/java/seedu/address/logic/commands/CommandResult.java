@@ -93,7 +93,7 @@ public class CommandResult {
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
                 && showView == otherCommandResult.showView
-                && client.equals(otherCommandResult.client);
+                && Objects.equals(client, otherCommandResult.client);
     }
 
     @Override

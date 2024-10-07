@@ -86,10 +86,9 @@ public class ViewClientWindow extends UiPart<Stage> {
         clientPhoneLabel.setText("Phone: " + client.getPhone());
         clientEmailLabel.setText("Email: " + client.getEmail());
         clientAddressLabel.setText("Address: " + client.getAddress());
-        
-        if (client.getCar() != null) { 
-            Car car = client.getCar();  
-            String carDetails = String.format("VRN: %s, VIN: %s, Make: %s, Model: %s", 
+        if (client.getCar() != null) {
+            Car car = client.getCar();
+            String carDetails = String.format("VRN: %s, VIN: %s, Make: %s, Model: %s",
                                               car.getVrn(), car.getVin(), car.getCarMake(), car.getCarModel());
             clientCarDetailsLabel.setText("Car Details: " + carDetails);
         } else {
@@ -104,3 +103,4 @@ public class ViewClientWindow extends UiPart<Stage> {
         getRoot().close();
     }
 }
+
