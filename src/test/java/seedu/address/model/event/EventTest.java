@@ -2,12 +2,13 @@ package seedu.address.model.event;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 import java.util.Optional;
+
+import org.junit.jupiter.api.Test;
 
 public class EventTest {
 
@@ -28,7 +29,9 @@ public class EventTest {
     @Test
     public void eventConstructor_validValues_createsEvent() {
         Name name = new Name("Conference");
-        TimeRange timeRange = new TimeRange(LocalDateTime.of(2024, 10, 10, 14, 0), Optional.of(LocalDateTime.of(2024, 10, 10, 16, 0)));
+        TimeRange timeRange = new TimeRange(
+                LocalDateTime.of(2024, 10, 10, 14, 0),
+                Optional.of(LocalDateTime.of(2024, 10, 10, 16, 0)));
         Location location = new Location("Main Hall");
         Description description = Description.ofNullable("Annual tech conference");
 
@@ -105,13 +108,16 @@ public class EventTest {
     @Test
     public void toString_checkFormat() {
         Name name = new Name("Conference");
-        TimeRange timeRange = new TimeRange(LocalDateTime.of(2024, 10, 10, 14, 0), Optional.of(LocalDateTime.of(2024, 10, 10, 16, 0)));
+        TimeRange timeRange = new TimeRange(
+                LocalDateTime.of(2024, 10, 10, 14, 0),
+                Optional.of(LocalDateTime.of(2024, 10, 10, 16, 0)));
         Location location = new Location("Main Hall");
         Description description = Description.ofNullable("Annual tech conference");
 
         Event event = new Event(name, timeRange, location, description);
 
-        String expected = Event.class.getCanonicalName() + "{name=Conference, timeRange=Start: 2024-10-10T14:00, End: 2024-10-10T16:00, location=Main Hall, description=Annual tech conference}";
+        String expected = Event.class.getCanonicalName() + "{name=Conference, timeRange=Start: 2024-10-10T14:00, "
+                + "End: 2024-10-10T16:00, location=Main Hall, description=Annual tech conference}";
         assertEquals(expected, event.toString());
     }
 }

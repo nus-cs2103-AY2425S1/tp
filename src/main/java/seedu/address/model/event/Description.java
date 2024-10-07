@@ -1,8 +1,5 @@
 package seedu.address.model.event;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
-
 /**
  * Represents an Event's description.
  * Handles optional descriptions by defaulting to a standard message if the input is blank or null.
@@ -11,7 +8,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Description {
 
     public static final String DEFAULT_DESCRIPTION = "No description provided";
-    public static final String MESSAGE_CONSTRAINTS = "Descriptions can take any string value, but it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Descriptions can take any string value, "
+            + "but it should not be blank";
 
     /*
      * The description must not be blank.
