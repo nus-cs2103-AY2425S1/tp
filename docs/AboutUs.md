@@ -21,7 +21,7 @@ You can reach us at the email `nowherenearyou[at]comp.nus.edu.sg`
 ### Chua Tse Hui
 Materials Science and Engineering Student.
 
-<img src="images/cth06-Github.png" width="200px">
+<img src="images/cth06-github.png" width="200px">
 
 [[Google](http://www.google.com.sg)]
 [[github](https://github.com/cth06-Github)]
