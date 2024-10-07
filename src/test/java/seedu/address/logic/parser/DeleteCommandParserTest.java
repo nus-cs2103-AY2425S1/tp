@@ -7,7 +7,13 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DELETE_INDEX;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -22,7 +28,9 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_PERSON));
+        Set<Index> firstIndexSet = new HashSet<>();
+        firstIndexSet.add(INDEX_FIRST_PERSON);
+        assertParseSuccess(parser, PREFIX_DELETE_INDEX + "1", new DeleteCommand(firstIndexSet));
     }
 
     @Test
