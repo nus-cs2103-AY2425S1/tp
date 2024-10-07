@@ -46,7 +46,7 @@ public class PersonBuilder {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
-        address = Optional.ofNullable(personToCopy.getAddress());
+        address = Optional.ofNullable(personToCopy.getAddress().orElse(null));
         tags = new HashSet<>(personToCopy.getTags());
     }
 
