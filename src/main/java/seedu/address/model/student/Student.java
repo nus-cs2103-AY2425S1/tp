@@ -48,7 +48,7 @@ public class Student {
         return email;
     }
 
-    public Optional<String> getGroup {
+    public Optional<String> getGroup() {
         return group;
     }
 
