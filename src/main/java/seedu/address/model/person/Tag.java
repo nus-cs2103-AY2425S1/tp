@@ -1,23 +1,25 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import seedu.address.model.person.exceptions.InvalidTagException;
 
-import static java.util.Objects.requireNonNull;
+
 
 /**
  * Represents a Person's Tag in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidTag(String)}
  */
 public class Tag {
-    public final String role;
-
     public static final ArrayList<String> VALIDTAGS = new ArrayList<>(Arrays.asList("Student", "Tutor"));
-
     public static final String MESSAGE_CONSTRAINTS =
             "Your tag should either be a student or tutor.";
+    public final String role;
+
+
 
 
 
