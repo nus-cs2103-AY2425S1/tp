@@ -16,6 +16,7 @@ import seedu.address.model.person.EmployeeId;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.skill.Skill;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -31,6 +32,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedSkill> skills = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -38,7 +40,8 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("employeeId") String employeeId, @JsonProperty("name") String name,
             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
-            @JsonProperty("address") String address, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("address") String address, @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("skills") List<JsonAdaptedSkill> skills) {
         this.employeeId = employeeId;
         this.name = name;
         this.phone = phone;
@@ -46,6 +49,9 @@ class JsonAdaptedPerson {
         this.address = address;
         if (tags != null) {
             this.tags.addAll(tags);
+        }
+        if (skills != null) {
+            this.skills.addAll(skills);
         }
     }
 
@@ -61,6 +67,9 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        skills.addAll(source.getSkills().stream()
+                .map(JsonAdaptedSkill::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -72,6 +81,11 @@ class JsonAdaptedPerson {
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
+        }
+
+        final List<Skill> personSkills = new ArrayList<>();
+        for (JsonAdaptedSkill skill : skills) {
+            personSkills.add(skill.toModelType());
         }
 
         if (employeeId == null) {
@@ -116,7 +130,9 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelEmployeeId, modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        final Set<Skill> modelSkills = new HashSet<>(personSkills);
+        return new Person(modelEmployeeId, modelName, modelPhone,
+                modelEmail, modelAddress, modelTags, modelSkills);
     }
 
 }

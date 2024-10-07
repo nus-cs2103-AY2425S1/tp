@@ -14,6 +14,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.EmployeeId;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.skill.Skill;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -136,5 +137,32 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String skill} into a {@code Skill}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code skill} is invalid.
+     */
+    public static Skill parseSkill(String skill) throws ParseException {
+        requireNonNull(skill);
+        String trimmedSkill = skill.trim();
+        if (!Skill.isValidSkill(trimmedSkill)) {
+            throw new ParseException(Skill.MESSAGE_CONSTRAINTS);
+        }
+        return new Skill(trimmedSkill);
+    }
+
+    /**
+     * Parses {@code Collection<String> skill} into a {@code Set<Skill>}.
+     */
+    public static Set<Skill> parseSkills(Collection<String> skills) throws ParseException {
+        requireNonNull(skills);
+        final Set<Skill> skillSet = new HashSet<>();
+        for (String skill : skills) {
+            skillSet.add(parseSkill(skill));
+        }
+        return skillSet;
     }
 }
