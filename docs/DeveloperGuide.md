@@ -309,30 +309,98 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
-
+#### Use Case: UC1 - Add a Contact
 **MSS**
-
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
-
-    Use case ends.
+1. User requests to add contact
+2. GamerBook adds the contact
+Use case ends.
 
 **Extensions**
+* 1a. User adds contact incorrectly.
+  * 1a1. GamerBook notifies user that the command was entered incorrectly.
+  
+    Use case ends.
+* 1b. User tries to add a duplicate contact.
+    * 1b1. GamerBook notifies the user that the contact already exists.
+  
+      Use case ends.
 
-* 2a. The list is empty.
+* 1c. User leaves mandatory fields empty.
+    * 1c1. GamerBook prompts the user to fill in the required fields.
 
-  Use case ends.
+      Use case ends.
 
-* 3a. The given index is invalid.
+#### Use Case: UC2 - Delete a Contact
+**MSS**
+1. User list the contacts.
+2. User requests to delete a contact.
+3. GamerBook deletes the contact.
+Use case ends.
 
-    * 3a1. AddressBook shows an error message.
+**Extensions**
+* 2a. User attempts to delete a contact that does not exist.
+    * 2a1. GamerBook notifies the user that the contact does not exist.
 
-      Use case resumes at step 2.
+      Use case ends.
+* 2b. User cancels the delete operation.
+    * 2b1. GamerBook returns to the contact list without making any changes.
+
+      Use case ends.
+
+#### Use Case: UC3 - Find a Contact by Name
+**MSS**
+1. User try to find a contact by name.
+2. GamerBook shows the corresponding contact.
+Use case ends.
+
+**Extensions**
+* 1a.  User enters a name that does not exist.
+    * 1a1. GamerBook notifies the user that no contacts were found.
+
+      Use case ends.
+* 1b. User types a partial name.
+    * 1b1. GamerBook returns all contacts that match the partial name.
+
+      Use case ends.
+
+#### Use Case: UC4 - Tag a Contact
+**MSS**
+1. User request to tag a contact.
+2. GamerBook tags the contact.
+Use case ends.
+
+**Extensions**
+* 1a. User tries to tag a contact that does not exist.
+    * 1a1. GamerBook notifies the user that the contact cannot be found.
+
+      Use case ends.
+* 1b. User attempts to tag a contact with an invalid game name.
+    * 1b1. GamerBook shows an error message indicating the game name is invalid.
+
+      Use case ends.
+
+
+<!-- 
+TEMPLATE FOR ADDING USE CASE
+
+#### Use Case: 
+**MSS**
+1. 
+2. 
+Use case ends.
+
+**Extensions**
+* 1a. 
+  * 1a1. 
+  
+    Use case ends.
+* 1b. 
+    * 1b1. 
+  
+      Use case ends.
 
 *{More to be added}*
+-->
 
 ### Non-Functional Requirements
 #### Compatibility
@@ -357,7 +425,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 #### Scalability
 1. The system should be designed to accommodate future enhancements, such as additional fields for contacts or new functionalities without requiring significant rework.
 
+<!--
 *{More to be added}*
+-->
 
 ### Glossary
 
