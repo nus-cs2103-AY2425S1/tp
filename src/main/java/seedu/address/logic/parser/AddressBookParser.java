@@ -80,7 +80,7 @@ public class AddressBookParser {
             return new HelpCommand();
 
         case FindPatientCommand.COMMAND_WORD:
-            return new FindPatientCommand();
+            return new FindPatientCommandParser().parse(arguments);
 
         case FindDoctorCommand.COMMAND_WORD:
             return new FindDoctorCommand();
