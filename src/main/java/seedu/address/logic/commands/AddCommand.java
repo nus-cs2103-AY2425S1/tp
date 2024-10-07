@@ -31,12 +31,14 @@ public class AddCommand extends Command {
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
+            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25, S120300 "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PHONE = "Warning! There is a person with the same phone number\n";
+    public static final String MESSAGE_DUPLICATE_EMAIL = "Warning! There is a person with the same email\n";
 
     private final Person toAdd;
 
@@ -51,13 +53,24 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
+        //Checks if name already exist
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        boolean hasPhone = model.hasPhone(toAdd);
+        boolean hasEmail = model.hasEmail(toAdd);
+        String warning = "\n";
+        //Check if phone number duplicate
+        if (hasPhone) {
+            warning += MESSAGE_DUPLICATE_PHONE;
+        }
+        //Check if email duplicate
+        if (hasEmail) {
+            warning += MESSAGE_DUPLICATE_EMAIL;
+        }
         model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS + warning, Messages.format(toAdd)));
     }
 
     @Override
