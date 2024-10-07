@@ -23,8 +23,8 @@ class JsonAdaptedJob {
      * Constructs a {@code JsonAdaptedJob} with the given job details.
      */
     @JsonCreator
-    public JsonAdaptedJob(@JsonProperty("name") String name, @JsonProperty("company") String company,
-            @JsonProperty("salary") String salary, @JsonProperty("requirements") String requirements,
+    public JsonAdaptedJob(@JsonProperty("name") String name, @JsonProperty("company") String company, @JsonProperty(
+            "salary") String salary, @JsonProperty("requirements") String requirements,
             @JsonProperty("description") String description) {
         this.name = name;
         this.company = company;
@@ -47,7 +47,7 @@ class JsonAdaptedJob {
     /**
      * Converts this Jackson-friendly adapted job object into the model's {@code Job} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted job.
      */
     public Job toModelType() throws IllegalValueException {
 

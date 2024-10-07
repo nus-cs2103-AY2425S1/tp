@@ -7,7 +7,7 @@ import seedu.address.logic.Mode;
 import seedu.address.model.Model;
 
 /**
- * Lists all persons in the address book to the user.
+ * Lists all jobs in the address book to the user.
  */
 public class ListJobCommand extends Command {
 

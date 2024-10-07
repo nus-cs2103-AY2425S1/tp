@@ -139,12 +139,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons);
+        return persons.equals(otherAddressBook.persons) && jobs.equals(otherAddressBook.jobs);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("persons", persons)
-                                        .toString();
+        return new ToStringBuilder(this).add("persons", persons).add("jobs", jobs).toString();
     }
 }

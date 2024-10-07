@@ -11,7 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.job.Job;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of jobs.
  */
 public class JobListPanel extends UiPart<Region> {
     private static final String FXML = "JobListPanel.fxml";
@@ -21,7 +21,7 @@ public class JobListPanel extends UiPart<Region> {
     private ListView<Job> jobListView;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code JobListPanel} with the given {@code ObservableList}.
      */
     public JobListPanel(ObservableList<Job> jobList) {
         super(FXML);
@@ -30,7 +30,7 @@ public class JobListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Job} using a {@code JobCard}.
      */
     class JobListViewCell extends ListCell<Job> {
         @Override

@@ -19,8 +19,8 @@ public class UniqueJobList implements Iterable<Job> {
     private final ObservableList<Job> internalUnmodifiableList = FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Adds a person to the list.
-     * The person must not already exist in the list.
+     * Adds a job to the list.
+     * The job must not already exist in the list.
      */
     public void add(Job toAdd) {
         requireNonNull(toAdd);
@@ -34,13 +34,13 @@ public class UniqueJobList implements Iterable<Job> {
     }
 
     /**
-     * Replaces the contents of this list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of this list with {@code jobs}.
+     * {@code jobs} must not contain duplicate jobs.
      */
-    public void setJobs(List<Job> persons) {
-        requireAllNonNull(persons);
+    public void setJobs(List<Job> jobs) {
+        requireAllNonNull(jobs);
         // TODO: Add data invalidation
-        internalList.setAll(persons);
+        internalList.setAll(jobs);
     }
 
     /**

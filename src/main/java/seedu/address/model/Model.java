@@ -91,5 +91,6 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+    /** Updates the filter of the filtered job list to filter by the given {@code predicate}. */
     void updateFilteredJobList(Predicate<Job> predicate);
 }
