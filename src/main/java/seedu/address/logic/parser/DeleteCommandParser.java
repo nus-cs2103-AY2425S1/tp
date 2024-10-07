@@ -4,14 +4,14 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DELETE_INDEX;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
+
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Parses input arguments and creates a new DeleteCommand object
@@ -30,7 +30,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_DELETE_INDEX);
 
-        if (argMultimap.arePrefixesPresent(PREFIX_DELETE_INDEX)
+        if (!argMultimap.arePrefixesPresent(PREFIX_DELETE_INDEX)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
@@ -39,7 +39,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
 
             Set<Index> indices;
             Optional<Set<Index>> optionalIndices = parseIndicesForDelete(argMultimap.getAllValues(PREFIX_DELETE_INDEX));
-            if (optionalIndices.isPresent()) {
+            if (optionalIndices.isPresent() && !optionalIndices.get().isEmpty()) {
                 indices = optionalIndices.get();
                 return new DeleteCommand(indices);
             } else {
