@@ -1,7 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DELETE_INDEX;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -22,10 +24,10 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Parameters: " + PREFIX_DELETE_INDEX + "INDEX (must be a positive integer)...\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_DELETE_INDEX + "1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person(s):\n%1$s";
 
     private final Set<Index> targetIndices;
 
@@ -38,25 +40,33 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
+        boolean throwException = false;
+        ArrayList<Index> outOfBounds = new ArrayList<>();
+
         for (Index item: targetIndices) {
             if (item.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(String.format(Messages.MESSAGE_INVALID_INDEX_SHOWN, item.getOneBased()));
+                throwException = true;
+                outOfBounds.add(item);
             }
         }
 
+        if (throwException) {
+            String formattedOutOfBoundIndices = outOfBounds.stream()
+                    .map(index -> String.valueOf(index.getOneBased()))
+                    .collect(Collectors.joining(", "));
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_INDEX_SHOWN, formattedOutOfBoundIndices));
+        }
 
         List<Person> deletedPeople = targetIndices.stream()
                 .map(targetIndex -> lastShownList.get(targetIndex.getZeroBased()))
                 .toList();
 
-        targetIndices.stream().forEach(targetIndex -> {
-            Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-            model.deletePerson(personToDelete);
-        });
+
+        deletedPeople.forEach(model::deletePerson);
 
         String formattedDeletedPeople = deletedPeople.stream()
-                .map(Messages::format) // Format each person using Messages::format
-                .collect(Collectors.joining(", ")); // Join them with a separator (comma in this case)
+                .map(Messages::format)
+                .collect(Collectors.joining("\n"));
 
 
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, formattedDeletedPeople));
