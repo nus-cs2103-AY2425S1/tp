@@ -213,9 +213,10 @@ public class EditCommand extends Command {
             this.gender = gender;
         }
 
-        public Optional<Gender> getGender() { return Optional.ofNullable(gender); }
+        public Optional<Gender> getGender() {
+            return Optional.ofNullable(gender); }
 
-        public void setAge(Address address) {
+        public void setAge(Age age) {
             this.age = age;
         }
 

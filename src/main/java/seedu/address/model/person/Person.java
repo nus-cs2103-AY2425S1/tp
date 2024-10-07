@@ -60,11 +60,14 @@ public class Person {
         return address;
     }
 
-    public Gender getGender() { return gender; }
+    public Gender getGender() {
+        return gender; }
 
-    public Age getAge() { return age; }
+    public Age getAge() {
+        return age; }
 
-    public Detail getDetail() { return detail; }
+    public Detail getDetail() {
+        return detail; }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}

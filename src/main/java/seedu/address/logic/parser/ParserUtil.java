@@ -137,7 +137,9 @@ public class ParserUtil {
     public static Detail parseDetail(String detail) throws ParseException {
         requireNonNull(detail);
         String trimmedDetail = detail.trim();
-        // Assume details can be any string (additional validation can be added if needed)
+        if (!Detail.isValidDetail(trimmedDetail)) {
+            throw new ParseException(Detail.MESSAGE_CONSTRAINTS);
+        }
         return new Detail(trimmedDetail);
     }
 
