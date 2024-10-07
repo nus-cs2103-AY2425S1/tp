@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import seedu.address.model.person.exceptions.InvalidStudentIdException;
 
 /**
  * Represents a Person's Student ID in the address book.
@@ -21,7 +22,9 @@ public class StudentId {
      */
     public StudentId(String studentId) {
         requireNonNull(studentId);
-        checkArgument(isValidStudentId(studentId), MESSAGE_CONSTRAINTS);
+        if (!isValidStudentId(studentId)) {
+            throw new InvalidStudentIdException(MESSAGE_CONSTRAINTS);
+        }
         this.studentId = studentId;
     }
 

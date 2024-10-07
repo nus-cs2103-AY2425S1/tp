@@ -52,8 +52,12 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        person.getTags().stream()
+        FlowPane singleTagFlowPane = new FlowPane();
+        Label tagLabel = new Label(person.getTag().role);
+        singleTagFlowPane.getChildren().add(tagLabel);
+        tags.getChildren().add(singleTagFlowPane);
+        /*person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));*/
     }
 }
