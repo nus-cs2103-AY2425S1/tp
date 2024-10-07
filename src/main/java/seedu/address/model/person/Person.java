@@ -56,7 +56,9 @@ public class Person {
         return address;
     }
 
-    public Telegram getTelegram() { return telegram; }
+    public Telegram getTelegram() {
+        return telegram;
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
