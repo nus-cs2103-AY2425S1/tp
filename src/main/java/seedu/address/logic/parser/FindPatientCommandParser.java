@@ -26,6 +26,6 @@ public class FindPatientCommandParser {
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
 
-         return new FindPatientCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        return new FindPatientCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
     }
 }
