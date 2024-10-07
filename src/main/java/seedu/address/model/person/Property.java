@@ -30,7 +30,6 @@ public abstract class Property {
     public static boolean isValidPropertyName(String test) {
         return test.matches(VALIDATION_REGEX);
     }
-    
     @Override
     public boolean equals(Object other) {
         if (other == this) {
