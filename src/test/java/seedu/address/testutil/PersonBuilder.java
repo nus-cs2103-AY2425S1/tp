@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.model.student.Email;
@@ -20,6 +21,7 @@ public class PersonBuilder {
     private Name name;
     private Email email;
     private Set<Tag> tags;
+    private Optional<String> group;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -28,6 +30,7 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         email = new Email(DEFAULT_EMAIL);
         tags = new HashSet<>();
+        group = Optional.empty();
     }
 
     /**
@@ -37,6 +40,7 @@ public class PersonBuilder {
         name = studentToCopy.getName();
         email = studentToCopy.getEmail();
         tags = new HashSet<>(studentToCopy.getTags());
+        group = studentToCopy.getGroup();
     }
 
     /**
@@ -56,6 +60,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code String} group name of the {@code Student} that we are building.
+     */
+    public PersonBuilder withGroup(String group) {
+        this.group = Optional.of(group);
+        return this;
+    }
+
+    /**
      * Sets the {@code Email} of the {@code Student} that we are building.
      */
     public PersonBuilder withEmail(String email) {
@@ -64,7 +76,7 @@ public class PersonBuilder {
     }
 
     public Student build() {
-        return new Student(name, email, tags);
+        return group.isPresent() ? new Student(name, email, tags, group) : new Student(name, email, tags);
     }
 
 }

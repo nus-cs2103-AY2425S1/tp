@@ -114,6 +114,7 @@ public class Student {
             .add("name", name)
             .add("email", email)
             .add("tags", tags)
+            .add("group", group.orElse(""))
             .toString();
     }
 
