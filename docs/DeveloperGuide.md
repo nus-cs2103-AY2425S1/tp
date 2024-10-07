@@ -335,10 +335,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 *{More to be added}*
 
 ### Non-Functional Requirements
-
+#### Compatibility
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+
+#### Performance
+1. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+   (eg. addition, deletion, and search operations)
+
+#### Usability
+1. The application should provide clear and concise error messages and usage instructions to assist the user in operating the system effectively.
+
+#### Efficiency
+1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+
+#### Security
+1. The application should ensure that user data is securely stored and that sensitive information (like social media links) is not exposed unintentionally.
+
+#### Data Integrity
+1. The application should implement mechanisms to prevent data corruption and ensure that contacts are not lost during operations.
+
+#### Scalability
+1. The system should be designed to accommodate future enhancements, such as additional fields for contacts or new functionalities without requiring significant rework.
 
 *{More to be added}*
 
