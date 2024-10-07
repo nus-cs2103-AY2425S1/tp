@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DELETE_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.AMY;
 
@@ -34,7 +35,6 @@ import seedu.address.storage.StorageManager;
 import seedu.address.testutil.PersonBuilder;
 
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DELETE_INDEX;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
@@ -64,7 +64,7 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete " + PREFIX_DELETE_INDEX + "9";
-        assertCommandException(deleteCommand, String.format(MESSAGE_INVALID_INDEX_SHOWN, 9));
+        assertCommandException(deleteCommand, String.format(MESSAGE_INVALID_INDEX_SHOWN, "9"));
     }
 
     @Test
