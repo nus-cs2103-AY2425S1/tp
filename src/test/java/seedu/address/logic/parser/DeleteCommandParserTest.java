@@ -27,10 +27,19 @@ public class DeleteCommandParserTest {
     private DeleteCommandParser parser = new DeleteCommandParser();
 
     @Test
-    public void parse_validArgs_returnsDeleteCommand() {
+    public void parse_singleDeleteValidArgs_returnsDeleteCommand() {
         Set<Index> firstIndexSet = new HashSet<>();
         firstIndexSet.add(INDEX_FIRST_PERSON);
-        assertParseSuccess(parser, PREFIX_DELETE_INDEX + "1", new DeleteCommand(firstIndexSet));
+        assertParseSuccess(parser, " " + PREFIX_DELETE_INDEX + "1", new DeleteCommand(firstIndexSet));
+    }
+
+    @Test
+    public void parse_multiDeleteValidArgs_returnsDeleteCommand() {
+        Set<Index> indexSet = new HashSet<>();
+        indexSet.add(INDEX_FIRST_PERSON);
+        indexSet.add(INDEX_SECOND_PERSON);
+        assertParseSuccess(parser, " " + PREFIX_DELETE_INDEX + "1 " + PREFIX_DELETE_INDEX + "2 ",
+                new DeleteCommand(indexSet));
     }
 
     @Test

@@ -49,6 +49,28 @@ public class DeleteCommandTest {
     }
 
     @Test
+    public void execute_multipleValidIndexUnfilteredList_success() {
+        ArrayList<Person> personToDelete = new ArrayList<>();
+        personToDelete.add(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()));
+        personToDelete.add(model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased()));
+        Set<Index> indexSet = new HashSet<>();
+        indexSet.add(INDEX_FIRST_PERSON);
+        indexSet.add(INDEX_SECOND_PERSON);
+        DeleteCommand deleteCommand = new DeleteCommand(indexSet);
+
+        String formattedDeletedPeople = personToDelete.stream()
+                .map(Messages::format)
+                .collect(Collectors.joining("\n"));
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                formattedDeletedPeople);
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        personToDelete.forEach(expectedModel::deletePerson);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         Set<Index> outOfBoundIndexSet = new HashSet<>();
@@ -56,7 +78,37 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndexSet);
 
         assertCommandFailure(deleteCommand, model, String.format(Messages.MESSAGE_INVALID_INDEX_SHOWN,
-                outOfBoundIndex.getOneBased()));
+                String.valueOf(outOfBoundIndex.getOneBased())));
+    }
+
+    @Test
+    public void execute_multipleInvalidIndexUnfilteredList_throwsCommandException() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex2 = Index.fromOneBased(model.getFilteredPersonList().size() + 2);
+        Set<Index> outOfBoundIndexSet = new HashSet<>();
+        outOfBoundIndexSet.add(outOfBoundIndex);
+        outOfBoundIndexSet.add(outOfBoundIndex2);
+        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndexSet);
+
+        String formattedOutOfBoundIndices = outOfBoundIndex.getOneBased() + ", " + outOfBoundIndex2.getOneBased();
+
+
+        assertCommandFailure(deleteCommand, model, String.format(Messages.MESSAGE_INVALID_INDEX_SHOWN,
+                formattedOutOfBoundIndices));
+    }
+
+    @Test
+    public void execute_oneInvalidIndexUnfilteredList_throwsCommandException() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Set<Index> outOfBoundIndexSet = new HashSet<>();
+        outOfBoundIndexSet.add(outOfBoundIndex);
+        outOfBoundIndexSet.add(INDEX_FIRST_PERSON);
+        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndexSet);
+
+
+
+        assertCommandFailure(deleteCommand, model, String.format(Messages.MESSAGE_INVALID_INDEX_SHOWN,
+                String.valueOf(outOfBoundIndex.getOneBased())));
     }
 
     @Test
