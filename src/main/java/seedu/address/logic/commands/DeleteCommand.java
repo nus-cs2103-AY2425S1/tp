@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -25,7 +26,8 @@ public class DeleteCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person(s):\nFix %1$s";
+
 
     private final Index[] targetIndexArray;
 
@@ -38,26 +40,21 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
         List<Person> personsToDelete = new ArrayList<>();
-        StringBuilder builder = new StringBuilder();
 
         for (Index targetIndex : targetIndexArray) {
             if (targetIndex.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX + ": "
+                        + targetIndex.getOneBased());
             }
             personsToDelete.add(lastShownList.get(targetIndex.getZeroBased()));
         }
 
-        for (int i = 0; i < personsToDelete.size(); i++) {
-            Person personToDelete = personsToDelete.get(i);
-            model.deletePerson(personToDelete);
-            builder.append(Messages.format(personToDelete));
+        String resultMessage = personsToDelete.stream()
+                .peek(model::deletePerson)
+                .map(Messages::format)
+                .collect(Collectors.joining("\n"));
 
-            if (i < personsToDelete.size() - 1) {
-                builder.append("\n");
-            }
-        }
-
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, builder));
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, resultMessage));
     }
 
     @Override
