@@ -61,6 +61,21 @@ public class UniqueJobList implements Iterable<Job> {
     }
 
     @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof UniqueJobList)) {
+            return false;
+        }
+
+        UniqueJobList otherUniqueJobList = (UniqueJobList) other;
+        return internalList.equals(otherUniqueJobList.internalList);
+    }
+
+    @Override
     public String toString() {
         return internalList.toString();
     }

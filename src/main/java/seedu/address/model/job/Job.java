@@ -44,14 +44,32 @@ public class Job {
         return description;
     }
 
+    /**
+     * Returns true if both jobs have the same identity and data fields.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Job)) {
+            return false;
+        }
+
+        Job otherJob = (Job) other;
+        return name.equals(otherJob.name) && company.equals(otherJob.company) && salary.equals(otherJob.salary)
+               && requirements.equals(otherJob.requirements) && description.equals(otherJob.description);
+    }
+
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("name", name)
-                .add("company", company)
-                .add("salary", salary)
-                .add("requirements", requirements)
-                .add("description", description)
-                .toString();
+        return new ToStringBuilder(this).add("name", name)
+                                        .add("company", company)
+                                        .add("salary", salary)
+                                        .add("requirements", requirements)
+                                        .add("description", description)
+                                        .toString();
     }
 }
