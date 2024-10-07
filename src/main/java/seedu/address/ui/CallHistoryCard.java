@@ -21,6 +21,7 @@ public class CallHistoryCard extends UiPart<HBox> {
      */
     public CallHistoryCard(ContactDate contactDate, int index) {
         super(FXML);
+        System.out.println("Creating call history card...");
         indexLabel.setText(index + ". ");
         contactDateLabel.setText(contactDate.getDate().toString());
     }

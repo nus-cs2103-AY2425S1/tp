@@ -49,7 +49,5 @@ public class CallHistoryPanel extends UiPart<VBox> {
         System.out.println("Initializing call history...");
         items.clear();
         items.addAll(FXCollections.observableArrayList(history));
-
-        callHistoryView.refresh();
     }
 }

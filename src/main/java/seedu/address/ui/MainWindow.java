@@ -202,10 +202,14 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.getFeedbackToUser().contains(String.format(MESSAGE_SHOW_HISTORY_SUCCESS, personName))) {
                 showCallHistoryPanel(logic.getCallHistory());
+            } else {
+                personListPanelPlaceholder.setVisible(true);
+                callHistoryPanelPlaceholder.setVisible(false);
             }
 
             return commandResult;
         } catch (CommandException | ParseException e) {
+            logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
@@ -214,7 +218,7 @@ public class MainWindow extends UiPart<Stage> {
     private void showCallHistoryPanel(ContactDateList history) {
         personListPanelPlaceholder.setVisible(false);
         callHistoryPanelPlaceholder.setVisible(true);
-        System.out.println("History size before initialization: " + history.size());
+
         callHistoryPanel.initializeCallHistory(history);
     }
 }

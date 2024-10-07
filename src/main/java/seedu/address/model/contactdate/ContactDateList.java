@@ -69,6 +69,20 @@ public class ContactDateList extends ArrayList<ContactDate> {
             return true;
         }
 
+        if (!(other instanceof ContactDateList)) {
+            return false;
+        }
+
+        ContactDateList that = (ContactDateList) other;
+
+        if (this.size() == that.size()) {
+            for (int i = 0; i < this.size(); i++) {
+                if (!this.get(i).equals(that.get(i))) {
+                    return false;
+                }
+            }
+            return true;
+        }
         return false;
     }
 }
