@@ -19,8 +19,8 @@ public class ViewCommand extends Command {
             + ": Views the details of the client identified by the index number used in the displayed client list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
-    public static final String MESSAGE_SUCCESS = "Client %1$s (ID: %2$s)’s Details:\n"
-            + "H/P: %3$s\nEMAIL: %4$s\nADDRESS: %5$s\n";
+    public static final String MESSAGE_SUCCESS = "Client %1$s’s Details:\n"
+            + "H/P: %2$s\nEMAIL: %3$s\nADDRESS: %4$s\n";
     public static final String MESSAGE_FAILURE = "Error! Please check if the client’s index is valid.";
 
     private final Index index;

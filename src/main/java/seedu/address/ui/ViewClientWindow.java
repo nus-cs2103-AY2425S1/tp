@@ -3,6 +3,7 @@ package seedu.address.ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import seedu.address.model.car.Car;
 import seedu.address.model.person.Person;
 
 /**
@@ -10,7 +11,7 @@ import seedu.address.model.person.Person;
  */
 public class ViewClientWindow extends UiPart<Stage> {
 
-    private static final String FXML = "ClientDetailsWindow.fxml";
+    private static final String FXML = "ViewClientWindow.fxml";
 
     @FXML
     private Label clientNameLabel;
@@ -31,16 +32,16 @@ public class ViewClientWindow extends UiPart<Stage> {
     private Label clientCarDetailsLabel;
 
     /**
-     * Creates a new ClientDetailsWindow.
+     * Creates a new ViewClientWindow.
      *
-     * @param root Stage to use as the root of the ClientDetailsWindow.
+     * @param root Stage to use as the root of the ViewClientWindow.
      */
     public ViewClientWindow(Stage root) {
         super(FXML, root);
     }
 
     /**
-     * Creates a new ClientDetailsWindow.
+     * Creates a new ViewClientWindow.
      */
     public ViewClientWindow() {
         this(new Stage());
@@ -85,7 +86,15 @@ public class ViewClientWindow extends UiPart<Stage> {
         clientPhoneLabel.setText("Phone: " + client.getPhone());
         clientEmailLabel.setText("Email: " + client.getEmail());
         clientAddressLabel.setText("Address: " + client.getAddress());
-        clientCarDetailsLabel.setText("Car Details: " + client.getCar());
+        
+        if (client.getCar() != null) { 
+            Car car = client.getCar();  
+            String carDetails = String.format("VRN: %s, VIN: %s, Make: %s, Model: %s", 
+                                              car.getVrn(), car.getVin(), car.getCarMake(), car.getCarModel());
+            clientCarDetailsLabel.setText("Car Details: " + carDetails);
+        } else {
+            clientCarDetailsLabel.setText("No car currently associated with client.");
+        }
     }
 
     /**
