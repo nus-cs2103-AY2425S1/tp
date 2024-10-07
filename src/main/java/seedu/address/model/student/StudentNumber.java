@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class StudentNumber {
     public static final String MESSAGE_CONSTRAINTS =
             """
-            Student numbers should only two alphabets (one at the beginning and one at the end", 
+            Student numbers should only two alphabets (one at the beginning and one at the end",
             and there should be strictly 7 digits in between these alphabets
             """;
 
