@@ -1,5 +1,7 @@
 package seedu.address.logic.parser;
 
+import seedu.address.model.student.TutorialClass;
+
 /**
  * Contains Command Line Interface (CLI) syntax definitions common to multiple commands
  */
@@ -11,5 +13,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_EMAIL = new Prefix("e/");
     public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
+    public static final Prefix PREFIX_STUDENTID = new Prefix("s/");
+    public static final Prefix PREFIX_TUTORIALCLASS = new Prefix("c/");
 
 }
