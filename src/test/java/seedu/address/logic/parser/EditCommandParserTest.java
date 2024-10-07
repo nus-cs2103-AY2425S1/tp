@@ -156,7 +156,7 @@ public class EditCommandParserTest {
 
         // tags
         userInput = targetIndex.getOneBased() + TAG_DESC_STUDENT;
-        descriptor = new EditPersonDescriptorBuilder().withTags(VALID_TAG_STUDENT).build();
+        descriptor = new EditPersonDescriptorBuilder().withTag(VALID_TAG_STUDENT).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

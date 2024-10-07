@@ -1,9 +1,9 @@
 package seedu.address.model.person;
 
-import seedu.address.model.person.exceptions.InvalidTagException;
-
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import seedu.address.model.person.exceptions.InvalidTagException;
 
 import static java.util.Objects.requireNonNull;
 
@@ -14,10 +14,12 @@ import static java.util.Objects.requireNonNull;
 public class Tag {
     public final String role;
 
+    public static final ArrayList<String> VALIDTAGS = new ArrayList<>(Arrays.asList("Student", "Tutor"));
+
     public static final String MESSAGE_CONSTRAINTS =
             "Your tag should either be a student or tutor.";
 
-    public static final ArrayList<String> validTags = new ArrayList<>(Arrays.asList("Student", "Tutor"));
+
 
     /**
      * Constructs a {@code Tag}.
@@ -36,7 +38,7 @@ public class Tag {
      * Returns true if a given string is a valid tag.
      */
     public static boolean isValidTag(String test) {
-        return validTags.contains(test);
+        return VALIDTAGS.contains(test);
     }
     @Override
     public String toString() {
