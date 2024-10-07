@@ -1,5 +1,9 @@
 package seedu.address.model.person;
 
+/**
+ * Represents an Apartment in the address book. A subclass of Property class
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 public class Apartment extends Property {
 
     public static final String MESSAGE_CONSTRAINTS = "Apartment names should be alphanumeric";

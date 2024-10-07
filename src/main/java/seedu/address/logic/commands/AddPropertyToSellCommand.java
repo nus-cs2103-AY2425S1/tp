@@ -24,8 +24,8 @@ public class AddPropertyToSellCommand extends Command {
             + "1000000";
 
     public static final String MESSAGE_SUCCESS = "New property added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PROPERTY = "This property already exists " +
-            "in the list of properties to sell";
+    public static final String MESSAGE_DUPLICATE_PROPERTY = "This property already exists "
+            + "in the list of properties to sell";
 
     private final Property propertyToSellToBeAdded;
 

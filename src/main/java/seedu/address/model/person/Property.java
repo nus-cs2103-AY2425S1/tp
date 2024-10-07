@@ -1,6 +1,9 @@
 package seedu.address.model.person;
 
-
+/**
+ * Represents a Property in the address book.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 public abstract class Property {
 
     public static final String MESSAGE_CONSTRAINTS = "Property names should be alphanumeric";
@@ -27,8 +30,7 @@ public abstract class Property {
     public static boolean isValidPropertyName(String test) {
         return test.matches(VALIDATION_REGEX);
     }
-
-
+    
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -48,7 +50,6 @@ public abstract class Property {
     public int hashCode() {
         return postalCode.hashCode();
     }
-
     /**
      * Format state as text for viewing.
      */

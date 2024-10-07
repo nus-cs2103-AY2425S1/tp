@@ -1,5 +1,9 @@
 package seedu.address.model.person;
 
+/**
+ * Represents a BTO in the address book.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 public class Bto extends Property {
 
     public static final String MESSAGE_CONSTRAINTS = "BTO names should be alphanumeric";
@@ -19,7 +23,7 @@ public class Bto extends Property {
     /**
      * Returns true if a given string is a valid BTO name.
      */
-    public static boolean isValidBTOName(String test) {
+    public static boolean isValidBtoName(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 

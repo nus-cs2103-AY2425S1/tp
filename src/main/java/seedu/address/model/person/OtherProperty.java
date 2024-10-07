@@ -1,5 +1,9 @@
 package seedu.address.model.person;
 
+/**
+ * Represents an Other Property in the address book.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 public class OtherProperty extends Property {
 
     public static final String MESSAGE_CONSTRAINTS = "Other Property names should be alphanumeric";

@@ -1,5 +1,9 @@
 package seedu.address.model.person;
 
+/**
+ * Represents an HDB in the address book.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 public class Hdb extends Property {
 
     public static final String MESSAGE_CONSTRAINTS = "HDB names should be alphanumeric";
