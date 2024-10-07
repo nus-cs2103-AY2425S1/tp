@@ -407,9 +407,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Patient-Doctor Bond (PDB)**: A relationship between a doctor and a patient where the doctor is assigned to the patient for physiotherapy treatment
 
---------------------------------------------------------------------------------------------------------------------
+* **Patient-Doctor Bond (PDB)**: A relationship between a doctor and a patient where the doctor is assigned to the patient for physiotherapy treatment
 
 ## **Appendix: Instructions for manual testing**
 
