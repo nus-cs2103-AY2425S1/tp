@@ -2,7 +2,11 @@ package seedu.address.model.student;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
@@ -32,6 +36,9 @@ public class Student {
         this.group = Optional.empty();
     }
 
+    /**
+     * Every field must be present and not null.
+     */
     public Student(Name name, Email email, Set<Tag> tags, Optional<String> group) {
         requireAllNonNull(name, email, tags, group);
         this.name = name;
