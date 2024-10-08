@@ -123,13 +123,15 @@
 .cell_big_label {
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 16px;
-    -fx-text-fill: #010504;
+    /*-fx-text-fill: #010504;*/
+    -fx-text-fill: #000000;
 }
 
 .cell_small_label {
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13px;
-    -fx-text-fill: #010504;
+    /*-fx-text-fill: #010504;*/
+    -fx-text-fill: #000000;
 }
 
 .stack-pane {
@@ -308,8 +310,9 @@
 }
 
 #cardPane {
-    -fx-background-color: transparent;
-    -fx-border-width: 0;
+    -fx-background-color: #c5e3f9;
+    -fx-border-color: black;
+    -fx-border-width: 1 1 0 1;
 }
 
 #commandTypeLabel {
