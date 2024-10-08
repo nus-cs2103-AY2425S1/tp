@@ -24,9 +24,6 @@ public class DeleteContactCommand extends Command {
             + "Example: " + COMMAND_WORD + " contact 1";
     public static final String MESSAGE_DELETE_CONTACT_SUCCESS = "Candidate %1$s - %2$s - %3$s "
             + "has been successfully deleted.";
-    public static final String MESSAGE_MISSING_INDEX = "Please include an index.";
-    public static final String MESSAGE_INVALID_INDEX = "Invalid index in the contact list. "
-            + "Please enter an appropriate index from the contact list.";
 
     private final Index targetIndex;
 
@@ -44,8 +41,12 @@ public class DeleteContactCommand extends Command {
         }
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+        String name = personToDelete.getName().toString();
+        String phone = personToDelete.getPhone().toString();
+        String email = personToDelete.getEmail().toString();
+
         model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_CONTACT_SUCCESS, Messages.format(personToDelete)));
+        return new CommandResult(String.format(MESSAGE_DELETE_CONTACT_SUCCESS, name, phone, email));
     }
 
     @Override
