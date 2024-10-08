@@ -6,8 +6,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMEPERIOD;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
@@ -112,17 +116,19 @@ public class AddApptCommand extends Command {
         Gender updatedGender = personToEdit.getGender();
         Nric updatedNric = personToEdit.getNric();
         Set<Tag> updatedTags = personToEdit.getTags();
-        Set<Appointment> updatedAppointments = personToEdit.getAppointments();
-        for (Appointment a : updatedAppointments) {
+
+        ArrayList<Appointment> oldAppointmentList = new ArrayList<>(personToEdit.getAppointments());
+        for (Appointment a : oldAppointmentList) {
             if (a.isClashing(newApptDate, newApptTime)) {
                 throw new CommandException(String.format(MESSAGE_DUPLICATE_APPT_1S, a));
             }
         }
 
-        updatedAppointments.add(new Appointment(newApptName, newApptDate, newApptTime));
+        oldAppointmentList.add(new Appointment(newApptName, newApptDate, newApptTime));
+        Set<Appointment> newAppointments = new HashSet<>(oldAppointmentList);
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedNric, updatedAddress, updatedDateOfBirth,
-                          updatedGender, updatedTags, updatedAppointments);
+                          updatedGender, updatedTags, newAppointments);
     }
 
     @Override
