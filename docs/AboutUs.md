@@ -31,7 +31,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Chua Zhao Lin (Jasper)
 
-<img src="images/chuazhaolin.png" width="200px">
+<img src="images/ossaris56.png" width="200px">
 
 [[github](http://github.com/ossaris56)]
 [[portfolio](team/chuazhaolin.md)]
