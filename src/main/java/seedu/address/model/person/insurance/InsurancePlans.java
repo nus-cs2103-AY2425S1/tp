@@ -45,13 +45,13 @@ public class InsurancePlans {
     public String toString() {
         StringBuilder plans = new StringBuilder("Insurance Plans: ");
         for (InsurancePlan plan : insurancePlans) {
-            plans.append(plan.toString());
+            plans.append(plan.toString()).append(", ");
         }
 
         if (!insurancePlans.isEmpty()) {
             plans.append("None");
         } else {
-            plans.setLength(plans.length() - 2);  // Remove trailing ", "
+            plans.setLength(plans.length() - 2); // Remove trailing ", "
         }
 
         return plans.toString();
