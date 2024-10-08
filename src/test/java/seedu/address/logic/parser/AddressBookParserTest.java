@@ -48,9 +48,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_deleteContact() throws Exception {
-        String CONTACT = "contact";
         DeleteContactCommand command = (DeleteContactCommand) parser.parseCommand(
-                DeleteContactCommand.COMMAND_WORD + " " + CONTACT + " " + INDEX_FIRST_PERSON.getOneBased());
+                DeleteContactCommand.COMMAND_WORD + " contact " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteContactCommand(INDEX_FIRST_PERSON), command);
     }
 
