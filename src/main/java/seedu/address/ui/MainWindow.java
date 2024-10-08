@@ -34,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private JobListPanel jobListPanel;
+    private CompanyListPanel companyListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -122,9 +123,16 @@ public class MainWindow extends UiPart<Stage> {
                 .getRoot()
                 .setVisible(false);
 
+        companyListPanel = new CompanyListPanel(logic.getFilteredCompanyList());
+        companyListPanel
+                .getRoot()
+                .setVisible(false);
+
         personListPanelPlaceholder
                 .getChildren()
-                .addAll(personListPanel.getRoot(), jobListPanel.getRoot());
+                .addAll(personListPanel.getRoot(),
+                        jobListPanel.getRoot(),
+                        companyListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder
@@ -192,20 +200,33 @@ public class MainWindow extends UiPart<Stage> {
 
     // TODO: Not sure if this is the best approach, for further discussion
     private void updateListPanel(Mode mode) {
-        if (mode == Mode.JOB) {
-            personListPanel
-                    .getRoot()
-                    .setVisible(false);
+        personListPanel
+                .getRoot()
+                .setVisible(false);
+        jobListPanel
+                .getRoot()
+                .setVisible(false);
+        companyListPanel
+                .getRoot()
+                .setVisible(false);
+        switch (mode) {
+        case JOB:
             jobListPanel
                     .getRoot()
                     .setVisible(true);
-        } else {
+            break;
+        case COMPANY:
+            companyListPanel
+                    .getRoot()
+                    .setVisible(true);
+            break;
+        case CONTACT:
             personListPanel
                     .getRoot()
                     .setVisible(true);
-            jobListPanel
-                    .getRoot()
-                    .setVisible(false);
+            break;
+        default:
+            assert(false); // this should never happen
         }
     }
 
