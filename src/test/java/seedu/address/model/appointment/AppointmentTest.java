@@ -98,7 +98,7 @@ class AppointmentTest {
     @Test
     public void testToString() {
         Appointment a = new Appointment(validApptName, validApptDate, validApptTime);
-        String expected = validApptName + '[' + validApptDate + ' ' + validApptTime + ']';
+        String expected = validApptName + " [ " + validApptDate + " @ " + validApptTime + " ]";
         Assertions.assertEquals(expected, a.toString());
     }
 

@@ -47,11 +47,11 @@ class JsonAdaptedAppointment {
             throw new IllegalValueException(Appointment.MESSAGE_CONSTRAINTS);
         }
 
-        if (Appointment.isValidAppointmentName(appointmentDeserialised[0])) {
+        if (!Appointment.isValidAppointmentName(appointmentDeserialised[0])) {
             throw new IllegalValueException(Appointment.MESSAGE_CONSTRAINTS);
         }
 
-        if (DateUtil.isValidDate(appointmentDeserialised[1])) {
+        if (!DateUtil.isValidDate(appointmentDeserialised[1])) {
             throw new IllegalValueException(Appointment.MESSAGE_CONSTRAINTS_APPT_DATE_WRONG_FORMAT);
         }
 

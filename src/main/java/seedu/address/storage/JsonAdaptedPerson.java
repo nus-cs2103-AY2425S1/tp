@@ -49,7 +49,7 @@ class JsonAdaptedPerson {
             @JsonProperty("gender") String gender,
             @JsonProperty("nric") String nric,
             @JsonProperty("tags") List<JsonAdaptedTag> tags,
-            @JsonProperty("appointment") List<JsonAdaptedAppointment> appointments) {
+            @JsonProperty("appointments") List<JsonAdaptedAppointment> appointments) {
         this.name = name;
         this.phone = phone;
         this.email = email;
