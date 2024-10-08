@@ -60,13 +60,6 @@ public class AddClientCommand extends Command {
         toAdd = person;
     }
 
-    /**
-     * This particular method handles whether the Person/model to be added has a Car as well.
-     *
-     * @param model {@code Model} which the command should operate on.
-     * @return
-     * @throws CommandException
-     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
