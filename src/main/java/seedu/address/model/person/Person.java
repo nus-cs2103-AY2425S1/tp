@@ -17,24 +17,27 @@ import seedu.address.model.tag.Tag;
 public class Person {
 
     // Identity fields
+    private final Id id;
     private final Name name;
-    private final Phone phone;
-    private final Email email;
-
-    // Data fields
-    private final Address address;
+    private final Ward ward;
+    private final Diagnosis diagnosis;
+    private final Medication medication;
+//    private final Phone phone;
+//    private final Email email;
+//
+//    // Data fields
+//    private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Id id, Name name, Ward ward, Diagnosis diagnosis, Medication medication){
+        this.id = id
         this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
+        this.ward = ward;
+        this.diagnosis = diagnosis;
+        this.medication = medication;
     }
 
     public Name getName() {
