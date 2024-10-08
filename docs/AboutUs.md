@@ -37,6 +37,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/wassilililily.md)]
 
 
+
 * Role: Developer
 * Responsibilities: Integration: In charge of versioning of the code, maintaining the code repository, integrating various parts of the software to create a whole.
 
@@ -59,4 +60,5 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: Code quality
+
 
