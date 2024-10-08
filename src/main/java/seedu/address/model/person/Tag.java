@@ -3,11 +3,6 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
-
-
 
 /**
  * Represents a Person's Tag in the address book.
@@ -54,7 +49,7 @@ public class Tag {
             return false;
         }
     }
-    
+
     public static final String MESSAGE_CONSTRAINTS =
             "Your tag should either be a student or tutor.";
     public static final String VALIDATION_REGEX = "^[a-zA-Z]+$";
