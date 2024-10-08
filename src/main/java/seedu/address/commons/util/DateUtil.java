@@ -12,9 +12,6 @@ import java.time.format.DateTimeFormatter;
 public class DateUtil {
 
     private static final String DATE_FORMAT = "yyyy-MM-dd";
-
-    public static final String MESSAGE_CONSTRAINTS = "Date should be in the format of " + DATE_FORMAT;
-
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT);
 
     /**

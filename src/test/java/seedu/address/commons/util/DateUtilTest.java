@@ -22,6 +22,7 @@ public class DateUtilTest {
     public void isValidDate_invalidDate_returnsFalse() {
         assertFalse(isValidDate("")); // empty string
         assertFalse(isValidDate(" ")); // spaces only
+        assertFalse(isValidDate("example")); // non-numeric
         assertFalse(isValidDate("2022-13-01")); // invalid month
         assertFalse(isValidDate("2022-12-32")); // invalid day
         assertFalse(isValidDate("2022/12/12")); // invalid format
