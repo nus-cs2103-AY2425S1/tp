@@ -75,6 +75,9 @@ public class AddressBookParser {
         case HireCommand.COMMAND_WORD:
             return new HireCommandParser().parse(arguments);
 
+        case RejectCommand.COMMAND_WORD:
+            return new RejectCommandParser().parse(arguments);
+
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

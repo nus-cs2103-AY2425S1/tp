@@ -43,7 +43,7 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        if (!isHired()) {
+        if (!isHired() && !isRejected()) {
             this.tags.add(DEFAULT_TAG_PENDING);
         }
     }
@@ -107,14 +107,26 @@ public class Person {
 
     public void markAsHired() {
         this.status = "hired";
+        removeTag(TAG_REJECTED);
         removeTag(DEFAULT_TAG_PENDING);
         addTag(TAG_HIRED);
     }
+
 
     public boolean isHired() {
         return tags.contains(TAG_HIRED);
     }
 
+    public void markAsRejected() {
+        this.status = "rejected";
+        removeTag(DEFAULT_TAG_PENDING);
+        removeTag(TAG_HIRED);
+        addTag(TAG_REJECTED);
+    }
+
+    public boolean isRejected() {
+        return tags.contains(TAG_REJECTED);
+    }
     /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
