@@ -1,14 +1,18 @@
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
+[![Java CI](https://github.com/AY2425S1-CS2103T-W11-1a/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2425S1-CS2103T-W11-1a/tp/actions/workflows/gradle.yml)
+
+[![codecov](https://codecov.io/gh/AY2425S1-CS2103T-W11-1a/tp/graph/badge.svg?token=XF5SCDUEMW)](https://codecov.io/gh/AY2425S1-CS2103T-W11-1a/tp)
 
 ![Ui](docs/images/Ui.png)
 
-* This is **a sample project for Software Engineering (SE) students**.<br>
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+
+* Murphy's List is **contact management platform for institutes providing palliative care**. It helps users efficiently manage and organize patient contact information, ensuring proper care coordination<br>
   Example usages:
-  * as a starting point of a course project (as opposed to writing everything from scratch)
-  * as a case study
-* The project simulates an ongoing software project for a desktop application (called _AddressBook_) used for managing contact details.
-  * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
-  * It comes with a **reasonable level of user and developer documentation**.
-* It is named `AddressBook Level 3` (`AB3` for short) because it was initially created as a part of a series of `AddressBook` projects (`Level 1`, `Level 2`, `Level 3` ...).
-* For the detailed documentation of this project, see the **[Address Book Product Website](https://se-education.org/addressbook-level3)**.
-* This project is a **part of the se-education.org** initiative. If you would like to contribute code to this project, see [se-education.org](https://se-education.org/#contributing-to-se-edu) for more info.
+  * Keep track of current patients of the clinic
+  * View pertinent medical information about the patient at a glance
+  * Keep track of patient appointment dates
+* The project simulates an address book in the form of a desktop application ued for managing contact details.
+  * It is **written in OOP fashion**. It provides a **reasonably well-written** code base.
+  * It is **well-designed and documented**.
+* It is named `Murphy's List` (`ML` for short) because it was named after the medical prodigy `Sean Murphy` from the popular show `The Good Doctor` 
+* For the detailed documentation of this project, see our **[Developer Guide](https://github.com/AY2425S1-CS2103T-W11-1a/tp/blob/master/docs/DeveloperGuide.md)**.
