@@ -3,7 +3,6 @@ package hallpointer.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import hallpointer.address.model.member.Email;
 import hallpointer.address.model.member.Member;
 import hallpointer.address.model.member.Name;
 import hallpointer.address.model.member.Phone;
@@ -18,12 +17,10 @@ public class MemberBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
     private Phone phone;
-    private Email email;
     private Room room;
     private Set<Tag> tags;
 
@@ -33,7 +30,6 @@ public class MemberBuilder {
     public MemberBuilder() {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
-        email = new Email(DEFAULT_EMAIL);
         room = new Room(DEFAULT_ADDRESS);
         tags = new HashSet<>();
     }
@@ -44,7 +40,6 @@ public class MemberBuilder {
     public MemberBuilder(Member memberToCopy) {
         name = memberToCopy.getName();
         phone = memberToCopy.getPhone();
-        email = memberToCopy.getEmail();
         room = memberToCopy.getRoom();
         tags = new HashSet<>(memberToCopy.getTags());
     }
@@ -81,16 +76,9 @@ public class MemberBuilder {
         return this;
     }
 
-    /**
-     * Sets the {@code Email} of the {@code Member} that we are building.
-     */
-    public MemberBuilder withEmail(String email) {
-        this.email = new Email(email);
-        return this;
-    }
 
     public Member build() {
-        return new Member(name, phone, email, room, tags);
+        return new Member(name, phone, room, tags);
     }
 
 }

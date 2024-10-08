@@ -19,7 +19,6 @@ public class Member {
     // Identity fields
     private final Name name;
     private final Phone phone;
-    private final Email email;
 
     // Data fields
     private final Room room;
@@ -28,11 +27,10 @@ public class Member {
     /**
      * Every field must be present and not null.
      */
-    public Member(Name name, Phone phone, Email email, Room room, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, room, tags);
+    public Member(Name name, Phone phone, Room room, Set<Tag> tags) {
+        requireAllNonNull(name, phone, room, tags);
         this.name = name;
         this.phone = phone;
-        this.email = email;
         this.room = room;
         this.tags.addAll(tags);
     }
@@ -43,10 +41,6 @@ public class Member {
 
     public Phone getPhone() {
         return phone;
-    }
-
-    public Email getEmail() {
-        return email;
     }
 
     public Room getRoom() {
@@ -92,7 +86,6 @@ public class Member {
         Member otherMember = (Member) other;
         return name.equals(otherMember.name)
                 && phone.equals(otherMember.phone)
-                && email.equals(otherMember.email)
                 && room.equals(otherMember.room)
                 && tags.equals(otherMember.tags);
     }
@@ -100,7 +93,7 @@ public class Member {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, room, tags);
+        return Objects.hash(name, phone, room, tags);
     }
 
     @Override
@@ -108,7 +101,6 @@ public class Member {
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
-                .add("email", email)
                 .add("room", room)
                 .add("tags", tags)
                 .toString();

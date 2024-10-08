@@ -1,9 +1,8 @@
 package hallpointer.address.model.member;
 
-import static hallpointer.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static hallpointer.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static hallpointer.address.logic.commands.CommandTestUtil.VALID_ROOM_BOB;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static hallpointer.address.testutil.Assert.assertThrows;
 import static hallpointer.address.testutil.TypicalMembers.ALICE;
@@ -33,8 +32,8 @@ public class MemberTest {
         assertFalse(ALICE.isSameMember(null));
 
         // same name, all other attributes different -> returns true
-        Member editedAlice = new MemberBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withRoom(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+        Member editedAlice = new MemberBuilder(ALICE).withPhone(VALID_PHONE_BOB)
+                .withRoom(VALID_ROOM_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameMember(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -77,12 +76,8 @@ public class MemberTest {
         editedAlice = new MemberBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different email -> returns false
-        editedAlice = new MemberBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
-
         // different address -> returns false
-        editedAlice = new MemberBuilder(ALICE).withRoom(VALID_ADDRESS_BOB).build();
+        editedAlice = new MemberBuilder(ALICE).withRoom(VALID_ROOM_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
@@ -93,7 +88,7 @@ public class MemberTest {
     @Test
     public void toStringMethod() {
         String expected = Member.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", room=" + ALICE.getRoom() + ", tags=" + ALICE.getTags() + "}";
+                + ", room=" + ALICE.getRoom() + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

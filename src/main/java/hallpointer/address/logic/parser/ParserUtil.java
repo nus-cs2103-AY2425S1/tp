@@ -9,7 +9,6 @@ import java.util.Set;
 import hallpointer.address.commons.core.index.Index;
 import hallpointer.address.commons.util.StringUtil;
 import hallpointer.address.logic.parser.exceptions.ParseException;
-import hallpointer.address.model.member.Email;
 import hallpointer.address.model.member.Name;
 import hallpointer.address.model.member.Phone;
 import hallpointer.address.model.member.Room;
@@ -78,21 +77,6 @@ public class ParserUtil {
             throw new ParseException(Room.MESSAGE_CONSTRAINTS);
         }
         return new Room(trimmedRoom);
-    }
-
-    /**
-     * Parses a {@code String email} into an {@code Email}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code email} is invalid.
-     */
-    public static Email parseEmail(String email) throws ParseException {
-        requireNonNull(email);
-        String trimmedEmail = email.trim();
-        if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
-        }
-        return new Email(trimmedEmail);
     }
 
     /**

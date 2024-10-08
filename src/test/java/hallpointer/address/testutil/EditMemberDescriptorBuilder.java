@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import hallpointer.address.logic.commands.EditCommand.EditMemberDescriptor;
-import hallpointer.address.model.member.Email;
 import hallpointer.address.model.member.Member;
 import hallpointer.address.model.member.Name;
 import hallpointer.address.model.member.Phone;
@@ -34,7 +33,6 @@ public class EditMemberDescriptorBuilder {
         descriptor = new EditMemberDescriptor();
         descriptor.setName(member.getName());
         descriptor.setPhone(member.getPhone());
-        descriptor.setEmail(member.getEmail());
         descriptor.setRoom(member.getRoom());
         descriptor.setTags(member.getTags());
     }
@@ -52,14 +50,6 @@ public class EditMemberDescriptorBuilder {
      */
     public EditMemberDescriptorBuilder withPhone(String phone) {
         descriptor.setPhone(new Phone(phone));
-        return this;
-    }
-
-    /**
-     * Sets the {@code Email} of the {@code EditMemberDescriptor} that we are building.
-     */
-    public EditMemberDescriptorBuilder withEmail(String email) {
-        descriptor.setEmail(new Email(email));
         return this;
     }
 
