@@ -2,9 +2,9 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import seedu.address.commons.util.ToStringBuilder;
-
 import java.util.Objects;
+
+import seedu.address.commons.util.ToStringBuilder;
 
 /**
  * Represents a Person's emergency contact in the address book.
