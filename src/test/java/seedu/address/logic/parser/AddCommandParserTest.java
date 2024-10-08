@@ -37,8 +37,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.model.person.*;
-import seedu.address.model.person.Client;
+import seedu.address.model.client.*;
+import seedu.address.model.client.Client;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
