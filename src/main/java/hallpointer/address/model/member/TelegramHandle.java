@@ -4,10 +4,10 @@ import static hallpointer.address.commons.util.AppUtil.checkArgument;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Represents a Member's phone number in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
+ * Represents a Member's telegram handle in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidTelegramHandle(String)}
  */
-public class Phone {
+public class TelegramHandle {
 
 
     public static final String MESSAGE_CONSTRAINTS =
@@ -16,20 +16,20 @@ public class Phone {
     public final String value;
 
     /**
-     * Constructs a {@code Phone}.
+     * Constructs a {@code TelegramHandle}.
      *
-     * @param phone A valid phone number.
+     * @param telegramHandle A valid telegram handle.
      */
-    public Phone(String phone) {
-        requireNonNull(phone);
-        checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
-        value = phone;
+    public TelegramHandle(String telegramHandle) {
+        requireNonNull(telegramHandle);
+        checkArgument(isValidTelegramHandle(telegramHandle), MESSAGE_CONSTRAINTS);
+        value = telegramHandle;
     }
 
     /**
-     * Returns true if a given string is a valid phone number.
+     * Returns true if a given string is a valid telegram handle.
      */
-    public static boolean isValidPhone(String test) {
+    public static boolean isValidTelegramHandle(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
@@ -45,12 +45,12 @@ public class Phone {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Phone)) {
+        if (!(other instanceof TelegramHandle)) {
             return false;
         }
 
-        Phone otherPhone = (Phone) other;
-        return value.equals(otherPhone.value);
+        TelegramHandle otherTelegramHandle = (TelegramHandle) other;
+        return value.equals(otherTelegramHandle.value);
     }
 
     @Override

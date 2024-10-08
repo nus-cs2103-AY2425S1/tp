@@ -1,7 +1,7 @@
 {
   "members": [ {
     "name": "Member with invalid name field: Ha!ns Mu@ster",
-    "phone": "98765432",
+    "telegramHandle": "98765432",
     "room": "9/8/7"
   } ]
 }

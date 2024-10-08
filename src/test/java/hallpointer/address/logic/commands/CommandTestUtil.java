@@ -1,9 +1,9 @@
 package hallpointer.address.logic.commands;
 
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static hallpointer.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_ROOM;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static hallpointer.address.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
 import static hallpointer.address.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -27,8 +27,8 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
-    public static final String VALID_PHONE_AMY = "11111111";
-    public static final String VALID_PHONE_BOB = "22222222";
+    public static final String VALID_TELEGRAM_HANDLE_AMY = "11111111";
+    public static final String VALID_TELEGRAM_HANDLE_BOB = "22222222";
     public static final String VALID_ROOM_AMY = "10/10/9";
     public static final String VALID_ROOM_BOB = "3/1/90";
     public static final String VALID_TAG_HUSBAND = "husband";
@@ -36,15 +36,16 @@ public class CommandTestUtil {
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
-    public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
-    public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
+    public static final String TELEGRAM_HANDLE_DESC_AMY = " " + PREFIX_TELEGRAM_HANDLE + VALID_TELEGRAM_HANDLE_AMY;
+    public static final String TELEGRAM_HANDLE_DESC_BOB = " " + PREFIX_TELEGRAM_HANDLE + VALID_TELEGRAM_HANDLE_BOB;
     public static final String ROOM_DESC_AMY = " " + PREFIX_ROOM + VALID_ROOM_AMY;
     public static final String ROOM_DESC_BOB = " " + PREFIX_ROOM + VALID_ROOM_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
-    public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
+    public static final String INVALID_TELEGRAM_HANDLE_DESC = " "
+            + PREFIX_TELEGRAM_HANDLE + "911a"; // 'a' not allowed in telegram handles
     public static final String INVALID_ROOM_DESC = " " + PREFIX_ROOM + "1/1/1a"; // 'a' npt allowed in rooms
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
@@ -56,10 +57,10 @@ public class CommandTestUtil {
 
     static {
         DESC_AMY = new EditMemberDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withRoom(VALID_ROOM_AMY)
+                .withTelegramHandle(VALID_TELEGRAM_HANDLE_AMY).withRoom(VALID_ROOM_AMY)
                 .withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditMemberDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withRoom(VALID_ROOM_BOB)
+                .withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB).withRoom(VALID_ROOM_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 

@@ -16,7 +16,7 @@ Class UniqueMemberList
 Class Member
 Class Address
 Class Name
-Class Phone
+Class TelegramHandle
 Class Tag
 
 Class I #FFFFFF
@@ -37,15 +37,15 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 AddressBook *--> "1" UniqueMemberList
 UniqueMemberList --> "~* all" Member
 Member *--> Name
-Member *--> Phone
+Member *--> TelegramHandle
 Member *--> Address
 Member *--> "*" Tag
 
 Member -[hidden]up--> I
 UniqueMemberList -[hidden]right-> I
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
+Name -[hidden]right-> TelegramHandle
+TelegramHandle -[hidden]right-> Address
 
 ModelManager --> "~* filtered" Member
 @enduml
