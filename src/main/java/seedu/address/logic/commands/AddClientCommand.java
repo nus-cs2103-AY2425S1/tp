@@ -60,6 +60,13 @@ public class AddClientCommand extends Command {
         toAdd = person;
     }
 
+    /**
+     * This particular method handles whether the Person/model to be added has a Car as well.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return
+     * @throws CommandException
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -73,12 +80,13 @@ public class AddClientCommand extends Command {
         }
 
         model.addPerson(toAdd);
-        if (toAdd.getCar() == null) {
-            return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
-        } else {
-            return new CommandResult(String.format(MESSAGE_SUCCESS,
-                    Messages.format(toAdd)) + MESSAGE_SUCCESS_WITH_CAR + Messages.formatCar(toAdd));
+
+        String message = String.format(MESSAGE_SUCCESS, Messages.format(toAdd));
+        if (toAdd.getCar() != null) {
+            message += MESSAGE_SUCCESS_WITH_CAR + Messages.formatCar(toAdd);
         }
+
+        return new CommandResult(message);
     }
 
     @Override
