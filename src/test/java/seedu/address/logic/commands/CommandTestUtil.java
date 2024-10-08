@@ -69,6 +69,12 @@ public class CommandTestUtil {
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 
+    public static final String VALID_PARAMETER_NAME = "name";
+
+    public static final String VALID_ORDER_ASC = "asc";
+
+    public static final String VALID_ORDER_DESC = "desc";
+
     /**
      * Executes the given {@code command}, confirms that <br>
      * - the returned {@link CommandResult} matches {@code expectedCommandResult} <br>
