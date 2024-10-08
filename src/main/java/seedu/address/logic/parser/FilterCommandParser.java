@@ -4,18 +4,26 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.logging.Filter;
-
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.tag.Tag;
 
 public class FilterCommandParser implements Parser<FilterCommand> {
     public FilterCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG);
+        argumentMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TAG);
 
-        String tag = argumentMultimap.getValue(PREFIX_TAG).orElse("");
+        String tagString = argumentMultimap.getValue(PREFIX_TAG).orElse("");
+        if (tagString.equals("")) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+        }
 
-        return new FilterCommand(tag);
+        try {
+            Tag tag = new Tag(tagString);
+            return new FilterCommand(tag);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+        }
     }
 }

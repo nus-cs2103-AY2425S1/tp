@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.function.Predicate;
 
@@ -20,23 +19,22 @@ public class FilterCommand extends Command {
             + "Example: " + COMMAND_WORD + "t/ friends";
 
     public static final String MESSAGE_SUCCESS =
-            "Listed all contacts with tag: %1$s";
+            "Listed all contacts with tag: %1$s \n"
+            + "Type \"list\" to see all contacts.";
 
     public final Predicate<Person> predicatePersonTaggedWithTag;
 
     private final Tag tag;
 
-    public FilterCommand(String tag) {
-        this.tag = new Tag(tag);
+    public FilterCommand(Tag tag) {
+        this.tag = tag;
         this.predicatePersonTaggedWithTag = new PersonTaggedWithPredicate(this.tag);
-
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.updateFilteredPersonList(predicatePersonTaggedWithTag);
-
         return new CommandResult(String.format(MESSAGE_SUCCESS, tag));
     }
 }
