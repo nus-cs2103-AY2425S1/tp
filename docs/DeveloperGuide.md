@@ -354,7 +354,7 @@ Use case ends.
     * 2a2. User enters new index.
 
     Steps 2a1-2a2 are repeated until the index is valid.
-  
+
     Use case resumes from step 3.
 ---
 **Use case 03: Delete a client**

@@ -7,14 +7,12 @@ package seedu.address.model.person;
  */
 public class BasicPlan extends InsurancePlan {
 
-    /** Unique identifier for the basic insurance plan. Initialized to 0 by default. */
-    private int insurancePlanId = 0;
-
     /**
      * Default constructor for the {@code BasicPlan} class.
      * Initializes a new instance of the basic insurance plan with default values.
      */
     public BasicPlan() {
+        this.insurancePlanId = 0;
     }
 
     /**
