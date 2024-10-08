@@ -286,7 +286,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | Doctor  | see which patients have upcoming appointments today                   | I can prepare in advance                                                              |
 | `* * *`  | Doctor  | view the history of treatments for a patient                          | monitor their improvement                                                             |
 | `* * `   | Doctor  | filter patients by condition or treatment type                        | search patients of a particular condition or treatment for more follow-up actions     |
-| `* * `   | Doctor  | track my own schedule for the week                                    | I can plan my workload                                                                || `* * *`  | Doctor | view the history of treatments for a patient           | monitor their improvement                                                 |
+| `* * `   | Doctor  | track my own schedule for the week                                    | I can plan my workload                                                                |
 | `* * `   | Doctor  | automatically schedule follow-up appointments for recurring patients  | I don’t have to manually book each appointment                                        |
 | `* * `   | Doctor  | set reminders for follow-up appointments                              | I don’t miss any important sessions                                                   | |
 | `* * `   | Doctor  | assign different exercises or treatments to a patient                 | their care plan is personalized                                                       |
@@ -297,7 +297,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * `   | Doctor  | record billing information for each session                           | I can manage payments and invoicing                                                   |
 | `* * `   | Doctor  | access a summary of all my patients                                   | I can get an overview of their conditions and treatments                              |
 | `* * `   | Doctor  | view all the sessions a patient has missed                            | I can follow up with them and arrange for make-up session                             |
-| `* `     | Doctor  | collaborate with other doctors by sharing patient information         | we can coordinate care                                                                |
+| `* `     | Doctor  | collaborate with other doctors by sharing patient information         | we can coordinate care                                                                |  
+  
 ### Use cases
 
 (For all use cases below, the **System** is the `MedDict` and the **Actor** is the `physiotherapist`, unless specified otherwise)
