@@ -71,8 +71,11 @@ public class StudentTest {
 
     @Test
     public void toStringMethod() {
-        String expected = Student.class.getCanonicalName() + "{name=" + HUGH.getName() + ", contactNumber=" + HUGH.getContactNumber()
-                + ", tutorialGroup=" + HUGH.getTutorialGroup() + ", studentNumber=" + HUGH.getStudentNumber() + "}";
+        String expected = Student.class.getCanonicalName()
+                + "{name=" + HUGH.getName()
+                + ", contactNumber=" + HUGH.getContactNumber()
+                + ", tutorialGroup=" + HUGH.getTutorialGroup()
+                + ", studentNumber=" + HUGH.getStudentNumber() + "}";
         assertEquals(expected, HUGH.toString());
     }
 }

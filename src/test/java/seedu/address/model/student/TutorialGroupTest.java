@@ -1,13 +1,12 @@
 package seedu.address.model.student;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
-public class
-TutorialGroupTest {
+import org.junit.jupiter.api.Test;
+
+public class TutorialGroupTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
