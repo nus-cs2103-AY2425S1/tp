@@ -110,7 +110,7 @@ public class SampleDataUtil {
                 new CompanyName("Amazon"),
                 new Address("23 Church St, #10-01, Singapore 049481"),
                 new BillingDate("3"),
-                new Phone("6722 0300")
+                new Phone("67220300")
         )};
     }
 

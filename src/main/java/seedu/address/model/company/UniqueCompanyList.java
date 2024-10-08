@@ -148,7 +148,7 @@ public class UniqueCompanyList implements Iterable<Company> {
      */
     private boolean companiesAreUnique(List<Company> companies) {
         for (int i = 0; i < companies.size() - 1; i++) {
-            for (int j = i + 1; i < companies.size(); i++) {
+            for (int j = i + 1; j < companies.size(); j++) {
                 if (companies.get(i).equals(companies.get(j))) {
                     return false;
                 }
