@@ -29,6 +29,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String nric;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -36,11 +37,12 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("nric") String nric) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.nric = nric;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -54,15 +56,16 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
+        nric = source.getNric().value; // to be implemented
+        tags.addAll(source.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted person object into the model's
+     * {@code Person} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in
+     *                               the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
@@ -101,6 +104,14 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
         final Address modelAddress = new Address(address);
+
+        if (nric == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "NRIC"));
+        }
+        if (!Nric.isValidNric(nric)) {
+            throw new IllegalValueException(Nric.MESSAGE_CONSTRAINTS);
+        }
+        final Nric modelNric = nric;
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
