@@ -37,8 +37,6 @@ public class MemberCard extends UiPart<Region> {
     @FXML
     private Label room;
     @FXML
-    private Label email;
-    @FXML
     private FlowPane tags;
 
     /**
@@ -51,7 +49,6 @@ public class MemberCard extends UiPart<Region> {
         name.setText(member.getName().fullName);
         phone.setText(member.getPhone().value);
         room.setText(member.getRoom().value);
-        email.setText(member.getEmail().value);
         member.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

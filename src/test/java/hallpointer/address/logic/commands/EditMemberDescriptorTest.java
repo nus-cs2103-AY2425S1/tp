@@ -2,10 +2,9 @@ package hallpointer.address.logic.commands;
 
 import static hallpointer.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static hallpointer.address.logic.commands.CommandTestUtil.DESC_BOB;
-import static hallpointer.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static hallpointer.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static hallpointer.address.logic.commands.CommandTestUtil.VALID_ROOM_BOB;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -44,12 +43,8 @@ public class EditMemberDescriptorTest {
         editedAmy = new EditMemberDescriptorBuilder(DESC_AMY).withPhone(VALID_PHONE_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different email -> returns false
-        editedAmy = new EditMemberDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_BOB).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
-
         // different address -> returns false
-        editedAmy = new EditMemberDescriptorBuilder(DESC_AMY).withRoom(VALID_ADDRESS_BOB).build();
+        editedAmy = new EditMemberDescriptorBuilder(DESC_AMY).withRoom(VALID_ROOM_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false
@@ -62,8 +57,7 @@ public class EditMemberDescriptorTest {
         EditMemberDescriptor editMemberDescriptor = new EditMemberDescriptor();
         String expected = EditMemberDescriptor.class.getCanonicalName() + "{name="
                 + editMemberDescriptor.getName().orElse(null) + ", phone="
-                + editMemberDescriptor.getPhone().orElse(null) + ", email="
-                + editMemberDescriptor.getEmail().orElse(null) + ", room="
+                + editMemberDescriptor.getPhone().orElse(null) + ", room="
                 + editMemberDescriptor.getRoom().orElse(null) + ", tags="
                 + editMemberDescriptor.getTags().orElse(null) + "}";
         assertEquals(expected, editMemberDescriptor.toString());

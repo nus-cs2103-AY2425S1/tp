@@ -1,30 +1,25 @@
 package hallpointer.address.logic.parser;
 
 import static hallpointer.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static hallpointer.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static hallpointer.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
-import static hallpointer.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static hallpointer.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static hallpointer.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
-import static hallpointer.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static hallpointer.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static hallpointer.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static hallpointer.address.logic.commands.CommandTestUtil.INVALID_ROOM_DESC;
 import static hallpointer.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static hallpointer.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static hallpointer.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static hallpointer.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static hallpointer.address.logic.commands.CommandTestUtil.ROOM_DESC_AMY;
+import static hallpointer.address.logic.commands.CommandTestUtil.ROOM_DESC_BOB;
 import static hallpointer.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static hallpointer.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static hallpointer.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
-import static hallpointer.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static hallpointer.address.logic.commands.CommandTestUtil.VALID_ROOM_AMY;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static hallpointer.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static hallpointer.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static hallpointer.address.logic.parser.CliSyntax.PREFIX_ROOM;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static hallpointer.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static hallpointer.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -38,7 +33,6 @@ import hallpointer.address.commons.core.index.Index;
 import hallpointer.address.logic.Messages;
 import hallpointer.address.logic.commands.EditCommand;
 import hallpointer.address.logic.commands.EditCommand.EditMemberDescriptor;
-import hallpointer.address.model.member.Email;
 import hallpointer.address.model.member.Name;
 import hallpointer.address.model.member.Phone;
 import hallpointer.address.model.member.Room;
@@ -85,12 +79,11 @@ public class EditCommandParserTest {
     public void parse_invalidValue_failure() {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
-        assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
-        assertParseFailure(parser, "1" + INVALID_ADDRESS_DESC, Room.MESSAGE_CONSTRAINTS); // invalid room
+        assertParseFailure(parser, "1" + INVALID_ROOM_DESC, Room.MESSAGE_CONSTRAINTS); // invalid room
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
 
-        // invalid phone followed by valid email
-        assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
+        // invalid phone followed by valid room
+        assertParseFailure(parser, "1" + INVALID_PHONE_DESC + ROOM_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Member} being edited,
         // parsing it together with a valid tag results in error
@@ -99,7 +92,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_ADDRESS_AMY + VALID_PHONE_AMY,
+        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_ROOM_DESC + VALID_PHONE_AMY,
                 Name.MESSAGE_CONSTRAINTS);
     }
 
@@ -107,10 +100,10 @@ public class EditCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_MEMBER;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HUSBAND
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
+                + ROOM_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
 
         EditMemberDescriptor descriptor = new EditMemberDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withRoom(VALID_ADDRESS_AMY)
+                .withPhone(VALID_PHONE_BOB).withRoom(VALID_ROOM_AMY)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -120,10 +113,10 @@ public class EditCommandParserTest {
     @Test
     public void parse_someFieldsSpecified_success() {
         Index targetIndex = INDEX_FIRST_MEMBER;
-        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + EMAIL_DESC_AMY;
+        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + ROOM_DESC_AMY;
 
         EditMemberDescriptor descriptor = new EditMemberDescriptorBuilder().withPhone(VALID_PHONE_BOB)
-                .withEmail(VALID_EMAIL_AMY).build();
+                .withRoom(VALID_ROOM_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -144,15 +137,9 @@ public class EditCommandParserTest {
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // email
-        userInput = targetIndex.getOneBased() + EMAIL_DESC_AMY;
-        descriptor = new EditMemberDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
-
         // room
-        userInput = targetIndex.getOneBased() + ADDRESS_DESC_AMY;
-        descriptor = new EditMemberDescriptorBuilder().withRoom(VALID_ADDRESS_AMY).build();
+        userInput = targetIndex.getOneBased() + ROOM_DESC_AMY;
+        descriptor = new EditMemberDescriptorBuilder().withRoom(VALID_ROOM_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -180,19 +167,19 @@ public class EditCommandParserTest {
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // mulltiple valid fields repeated
-        userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY
-                + TAG_DESC_FRIEND + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_FRIEND
-                + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB + TAG_DESC_HUSBAND;
+        userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + ROOM_DESC_AMY
+                + TAG_DESC_FRIEND + PHONE_DESC_AMY + ROOM_DESC_AMY + TAG_DESC_FRIEND
+                + PHONE_DESC_BOB + ROOM_DESC_BOB + TAG_DESC_HUSBAND;
 
         assertParseFailure(parser, userInput,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_ROOM));
 
         // multiple invalid values
-        userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + INVALID_ADDRESS_DESC + INVALID_EMAIL_DESC
-                + INVALID_PHONE_DESC + INVALID_ADDRESS_DESC + INVALID_EMAIL_DESC;
+        userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + INVALID_ROOM_DESC + INVALID_PHONE_DESC
+                + INVALID_ROOM_DESC;
 
         assertParseFailure(parser, userInput,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_ROOM));
     }
 
     @Test

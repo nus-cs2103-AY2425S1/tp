@@ -1,6 +1,6 @@
 package hallpointer.address.model;
 
-import static hallpointer.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static hallpointer.address.logic.commands.CommandTestUtil.VALID_ROOM_BOB;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static hallpointer.address.testutil.Assert.assertThrows;
 import static hallpointer.address.testutil.TypicalMembers.ALICE;
@@ -46,7 +46,7 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicateMembers_throwsDuplicateMemberException() {
         // Two members with the same identity fields
-        Member editedAlice = new MemberBuilder(ALICE).withRoom(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Member editedAlice = new MemberBuilder(ALICE).withRoom(VALID_ROOM_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Member> newMembers = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newMembers);
@@ -73,7 +73,7 @@ public class AddressBookTest {
     @Test
     public void hasMember_memberWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addMember(ALICE);
-        Member editedAlice = new MemberBuilder(ALICE).withRoom(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Member editedAlice = new MemberBuilder(ALICE).withRoom(VALID_ROOM_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(addressBook.hasMembers(editedAlice));
     }
