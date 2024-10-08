@@ -3,10 +3,10 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Comparator;
-import seedu.address.model.Model;
-import seedu.address.model.person.Person;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.person.Person;
 
 /**
  * Sorts the contact list based on the specified parameter and order.
@@ -21,12 +21,17 @@ public class SortCommand extends Command {
             + "Example: " + COMMAND_WORD + " name asc";
 
     public static final String MESSAGE_SUCCESS = "Contacts have been sorted by %1$s in %2$s order.";
-    public static final String MESSAGE_INVALID_PARAMETER = "Invalid parameter. Use one of the following: name, insurance type, address, or renewal_date.";
-    public static final String MESSAGE_INVALID_ORDER = "Invalid order. Use `asc` for ascending or `desc` for descending.";
+    public static final String MESSAGE_INVALID_PARAMETER = "Invalid parameter. Use one of the following: "
+            + "name, " + "insurance type, address, or renewal_date.";
+    public static final String MESSAGE_INVALID_ORDER = "Invalid order. Use `asc` for ascending or "
+            + "`desc` for descending.";
 
     private final String parameter;
     private final String order;
 
+    /**
+     * Creates a SortCommand to sort the contact list by the specified parameter and order.
+     */
     public SortCommand(String parameter, String order) {
         requireNonNull(parameter);
         requireNonNull(order);

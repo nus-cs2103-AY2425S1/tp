@@ -112,6 +112,12 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public void sortPersonList(Comparator<Person> comparator) {
+        requireNonNull(comparator);
+        addressBook.sortPersons(comparator);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -127,11 +133,6 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
-    }
-
-    @Override
-    public void sortPersonList(Comparator<Person> comparator) {
-        filteredPersons.sort(comparator);
     }
 
     @Override
