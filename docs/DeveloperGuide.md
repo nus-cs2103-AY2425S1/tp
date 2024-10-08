@@ -507,7 +507,7 @@ None.
     A visual interface that allows users to interact with the application using graphical components like buttons and menus, in addition to CLI commands.
 
 4.  **Member:**\
-    A participant or member of a CCA (Co-Curricular Activity) in NUS Halls, whose details are tracked in the Hall Pointer system (e.g., name, phone number, points, and attendance).
+    A participant or member of a CCA (Co-Curricular Activity) in NUS Halls, whose details are tracked in the Hall Pointer system (e.g., name, telegram handle, points, and attendance).
 
 5.  **Points Allocation:**\
     The process of awarding hall points to members based on their participation in activities. CCA leaders can customize the criteria for point allocation.

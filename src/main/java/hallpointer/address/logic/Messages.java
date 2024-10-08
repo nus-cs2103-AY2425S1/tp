@@ -37,8 +37,8 @@ public class Messages {
     public static String format(Member member) {
         final StringBuilder builder = new StringBuilder();
         builder.append(member.getName())
-                .append("; Phone: ")
-                .append(member.getPhone())
+                .append("; Telegram Handle: ")
+                .append(member.getTelegramHandle())
                 .append("; Room: ")
                 .append(member.getRoom())
                 .append("; Tags: ");

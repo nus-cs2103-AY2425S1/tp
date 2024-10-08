@@ -1,9 +1,9 @@
 package hallpointer.address.model.member;
 
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static hallpointer.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_ROOM_BOB;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static hallpointer.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_HANDLE_BOB;
 import static hallpointer.address.testutil.Assert.assertThrows;
 import static hallpointer.address.testutil.TypicalMembers.ALICE;
 import static hallpointer.address.testutil.TypicalMembers.BOB;
@@ -32,7 +32,7 @@ public class MemberTest {
         assertFalse(ALICE.isSameMember(null));
 
         // same name, all other attributes different -> returns true
-        Member editedAlice = new MemberBuilder(ALICE).withPhone(VALID_PHONE_BOB)
+        Member editedAlice = new MemberBuilder(ALICE).withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB)
                 .withRoom(VALID_ROOM_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameMember(editedAlice));
 
@@ -72,8 +72,8 @@ public class MemberTest {
         Member editedAlice = new MemberBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different phone -> returns false
-        editedAlice = new MemberBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
+        // different telegram handle -> returns false
+        editedAlice = new MemberBuilder(ALICE).withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different address -> returns false
@@ -87,8 +87,9 @@ public class MemberTest {
 
     @Test
     public void toStringMethod() {
-        String expected = Member.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", room=" + ALICE.getRoom() + ", tags=" + ALICE.getTags() + "}";
+        String expected = Member.class.getCanonicalName() + "{name=" + ALICE.getName()
+                + ", telegramHandle=" + ALICE.getTelegramHandle() + ", room=" + ALICE.getRoom()
+                + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

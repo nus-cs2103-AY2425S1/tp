@@ -18,7 +18,7 @@ public class Member {
 
     // Identity fields
     private final Name name;
-    private final Phone phone;
+    private final TelegramHandle telegramHandle;
 
     // Data fields
     private final Room room;
@@ -27,10 +27,10 @@ public class Member {
     /**
      * Every field must be present and not null.
      */
-    public Member(Name name, Phone phone, Room room, Set<Tag> tags) {
-        requireAllNonNull(name, phone, room, tags);
+    public Member(Name name, TelegramHandle telegramHandle, Room room, Set<Tag> tags) {
+        requireAllNonNull(name, telegramHandle, room, tags);
         this.name = name;
-        this.phone = phone;
+        this.telegramHandle = telegramHandle;
         this.room = room;
         this.tags.addAll(tags);
     }
@@ -39,8 +39,8 @@ public class Member {
         return name;
     }
 
-    public Phone getPhone() {
-        return phone;
+    public TelegramHandle getTelegramHandle() {
+        return telegramHandle;
     }
 
     public Room getRoom() {
@@ -85,7 +85,7 @@ public class Member {
 
         Member otherMember = (Member) other;
         return name.equals(otherMember.name)
-                && phone.equals(otherMember.phone)
+                && telegramHandle.equals(otherMember.telegramHandle)
                 && room.equals(otherMember.room)
                 && tags.equals(otherMember.tags);
     }
@@ -93,14 +93,14 @@ public class Member {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, room, tags);
+        return Objects.hash(name, telegramHandle, room, tags);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
-                .add("phone", phone)
+                .add("telegramHandle", telegramHandle)
                 .add("room", room)
                 .add("tags", tags)
                 .toString();
