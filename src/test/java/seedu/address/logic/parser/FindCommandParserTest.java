@@ -18,7 +18,8 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "     ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -29,7 +30,8 @@ public class FindCommandParserTest {
         assertParseSuccess(parser, " " + PREFIX_NAME + "Alice " + PREFIX_NAME + "Bob", expectedFindCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n " + PREFIX_NAME + "Alice \n \t " + PREFIX_NAME + "Bob  \t", expectedFindCommand);
+        assertParseSuccess(parser, " \n " + PREFIX_NAME + "Alice \n \t " + PREFIX_NAME + "Bob  \t",
+                expectedFindCommand);
     }
 
 }
