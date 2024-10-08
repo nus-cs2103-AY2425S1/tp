@@ -76,7 +76,14 @@ public class SampleDataUtil {
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
-
+    /**
+     * Parses a date string in the format "dd/MM/yyyy" and converts it to a {@link TutDate} object.
+     * If the input string does not match the expected format, a {@link ParseException} is thrown.
+     *
+     * @param date The date string in the format "dd/MM/yyyy".
+     * @return A {@link TutDate} object representing the parsed date.
+     * @throws ParseException If the date string cannot be parsed due to an invalid format.
+     */
     public static TutDate parseDate(String date) throws ParseException {
         Date d = new SimpleDateFormat("dd/MM/yyyy").parse(date);
         return new TutDate(d);
