@@ -61,7 +61,7 @@ public class Messages {
                 .append("; End Time: ")
                 .append(event.getEndTime())
                 .append("; Description: ")
-                .append(event.getDescripton());
+                .append(event.getDescription());
         return builder.toString();
     }
 
