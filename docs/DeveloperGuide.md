@@ -297,7 +297,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * `   | Doctor  | record billing information for each session                           | I can manage payments and invoicing                                                   |
 | `* * `   | Doctor  | access a summary of all my patients                                   | I can get an overview of their conditions and treatments                              |
 | `* * `   | Doctor  | view all the sessions a patient has missed                            | I can follow up with them and arrange for make-up session                             |
-| `* `     | Doctor  | collaborate with other doctors by sharing patient information         | we can coordinate care                                                                |
+| `* `     | Doctor  | collaborate with other doctors by sharing patient information         | we can coordinate care                                                                |  
+  
 ### Use cases
 
 (For all use cases below, the **System** is the `MedDict` and the **Actor** is the `physiotherapist`, unless specified otherwise)
