@@ -309,7 +309,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | HR manager | Set reminders for performance review cycles                  | ensure timely evaluations.                                                          |
 | `*`      | HR manager | Access help resources directly within the app                | troubleshoot issues without external assistance.                                    |
 | `*`      | HR manager | Track employee attendance and leave requests                 | manage staffing levels effectively.                                                 |
-| `*`      | HR manager | Create custom fields for employee data                       | capture information specific to my company's needs.                                 |                                 
+| `*`      | HR manager | Create custom fields for employee data                       | capture information specific to my company's needs.                                 |
 | `*`      | HR manager | Search employee data with custom fields                      | quickly find relevant groups of employees.                                          |
 | `*`      | HR manager | Link employee records to health and safety training          | compliance requirements are easily met.                                             |
 | `*`      | HR manager | Set up automated reminders for employee training renewals    | ensure everyone stays compliant.                                                    |
