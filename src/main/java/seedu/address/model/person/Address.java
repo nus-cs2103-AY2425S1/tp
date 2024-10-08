@@ -18,7 +18,7 @@ public class Address {
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[^\\s].*";
-    public static final String POSTAL_CODE_REGEX = "#\\d{2,3}-\\d{2,4}";
+    public static final String DOOR_NUMBER_REGEX = "#\\d{2,3}-\\d{2,4}";
 
     public final String value;
 
@@ -37,7 +37,7 @@ public class Address {
      * Returns true if a given string is a valid email.
      */
     public static boolean isValidAddress(String test) {
-        boolean isValid = Pattern.compile(POSTAL_CODE_REGEX).matcher(test).find();
+        boolean isValid = Pattern.compile(DOOR_NUMBER_REGEX).matcher(test).find();
 
         return test.matches(VALIDATION_REGEX) && isValid;
 
