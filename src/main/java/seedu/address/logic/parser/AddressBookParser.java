@@ -86,9 +86,6 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
-        case ListJobCommand.COMMAND_WORD:
-            return new ListJobCommand();
-
         case DeleteCompanyCommand.COMMAND_WORD:
             return new DeleteCompanyCommandParser().parse(arguments);
 

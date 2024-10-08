@@ -125,10 +125,6 @@ public class ModelManager implements Model {
     public void deleteCompany(Company target) {
         addressBook.removeCompany(target);
     }
-    @Override
-    public void deleteCompany(Company target) {
-        addressBook.removeCompany(target);
-    }
 
     @Override
     public void addPerson(Person person) {
