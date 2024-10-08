@@ -29,7 +29,7 @@ public class Appointment implements Comparable<Appointment> {
     public static final String NAME_VALIDATION_REGEX = "\\p{Alnum}[\\p{Alnum} ]*";
     static final String TIME_VALIDATION_REGEX = "([01]?[0-9]|2[0-3])[0-5][0-9]-([01]?[0-9]|2[0-3])[0-5][0-9]";
 
-    public final String appointmentName;
+    private final String appointmentName;
     private final String appointmentDate;
     private final String appointmentTimePeriod;
     
@@ -149,7 +149,7 @@ public class Appointment implements Comparable<Appointment> {
      */
     @Override
     public String toString() {
-        return appointmentName + '[' + appointmentDate + ' ' + appointmentTimePeriod + ']';
+        return appointmentName + " [ " + appointmentDate + " @ " + appointmentTimePeriod + " ]";
     }
 
     /**
@@ -161,10 +161,22 @@ public class Appointment implements Comparable<Appointment> {
      */
     @Override
     public int compareTo(Appointment other) {
-        return getStartDateTime().compareTo(other.getStartDateTime());
+        return getAppointmentStartDateTime().compareTo(other.getAppointmentStartDateTime());
     }
 
-    private LocalDateTime getStartDateTime() {
+    public String getAppointmentName() {
+        return appointmentName;
+    }
+
+    public String getAppointmentDate() {
+        return appointmentDate;
+    }
+
+    public String getAppointmentTimePeriod() {
+        return appointmentTimePeriod;
+    }
+
+    public LocalDateTime getAppointmentStartDateTime() {
         return LocalDateTime.of(LocalDate.parse(appointmentDate), appointmentStartTime);
     }
 }

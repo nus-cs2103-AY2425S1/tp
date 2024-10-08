@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.DateUtil;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
@@ -36,6 +37,7 @@ class JsonAdaptedPerson {
     private final String gender;
     private final String nric;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedAppointment> appointments = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -46,7 +48,8 @@ class JsonAdaptedPerson {
             @JsonProperty("dateOfBirth") String dateOfBirth,
             @JsonProperty("gender") String gender,
             @JsonProperty("nric") String nric,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("appointment") List<JsonAdaptedAppointment> appointments) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -56,6 +59,9 @@ class JsonAdaptedPerson {
         this.nric = nric;
         if (tags != null) {
             this.tags.addAll(tags);
+        }
+        if (appointments != null) {
+            this.appointments.addAll(appointments);
         }
     }
 
@@ -70,9 +76,14 @@ class JsonAdaptedPerson {
         dateOfBirth = source.getDateOfBirth().value;
         gender = source.getGender().value;
         nric = source.getNric().value;
-        tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
+        tags.addAll(source.getTags()
+                          .stream()
+                          .map(JsonAdaptedTag::new)
+                          .toList());
+        appointments.addAll(source.getAppointments()
+                                  .stream()
+                                  .map(JsonAdaptedAppointment::new)
+                                  .toList());
     }
 
     /**
@@ -82,6 +93,12 @@ class JsonAdaptedPerson {
      */
     public Person toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
+        final List<Appointment> personAppointments = new ArrayList<>();
+
+        for (JsonAdaptedAppointment appointment : appointments) {
+            personAppointments.add(appointment.toModelType());
+        }
+
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
         }
@@ -147,8 +164,11 @@ class JsonAdaptedPerson {
         final Nric modelNric = new Nric(nric);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
+
+        final Set<Appointment> modelAppointments = new HashSet<>(personAppointments);
+
         return new Person(modelName, modelPhone, modelEmail, modelNric, modelAddress, modelDateOfBirth,
-                modelGender, modelTags);
+                modelGender, modelTags, modelAppointments);
     }
 
 }

@@ -101,9 +101,8 @@ public class SampleDataUtil {
      * Returns a tag set containing the list of strings given.
      */
     public static Set<Tag> getTagSet(String... strings) {
-        return Arrays.stream(strings)
-                .map(Tag::new)
-                .collect(Collectors.toSet());
+        Set<Tag> collect = Arrays.stream(strings).map(Tag::new).collect(Collectors.toSet());
+        return collect;
     }
 
     /**

@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Person;
 
 /**
@@ -63,11 +64,13 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        person.getTags().stream()
+        person.getTags()
+              .stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        person.getAppointments().stream()
-              .sorted()
+        person.getAppointments()
+              .stream()
+              .sorted(Comparator.comparing(Appointment::getAppointmentStartDateTime))
               .forEach(appointment -> appointments.getChildren().add(new Label(appointment.toString())));
     }
 }
