@@ -8,12 +8,12 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
- * Adds an InsurancePlan to an existing person in the address book.
+ * Removes an InsurancePlan from an existing person in the address book.
  */
-public class AddInsuranceCommand extends Command {
-    public static final String COMMAND_WORD = "addInsurance";
+public class DeleteInsuranceCommand extends Command {
+    public static final String COMMAND_WORD = "deleteInsurance";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Adds an insurance plan to the client identified "
+            + ": Deletes an insurance plan from a client identified "
             + "by their client id. \n"
             + "Parameters: INDEX (must be a positive integer) "
             + ", INSURANCE_PLAN_ID (must be a valid ID) \n"
@@ -26,10 +26,10 @@ public class AddInsuranceCommand extends Command {
     private final int insuranceID;
 
     /**
-     * @param index of the person in the filtered person list to edit the remark
+     * @param index of the person in the filtered person list remove the insurance plan from
      * @param insuranceID of the person to be updated to
      */
-    public AddInsuranceCommand(Index index, int insuranceID) {
+    public DeleteInsuranceCommand(Index index, int insuranceID) {
         requireAllNonNull(index, insuranceID);
 
         this.index = index;
@@ -49,7 +49,7 @@ public class AddInsuranceCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddInsuranceCommand e)) {
+        if (!(other instanceof DeleteInsuranceCommand e)) {
             return false;
         }
 
