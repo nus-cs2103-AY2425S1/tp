@@ -11,6 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.Job;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -46,6 +48,16 @@ public class ModelManager implements Model {
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
         requireNonNull(userPrefs);
         this.userPrefs.resetData(userPrefs);
+    }
+
+    @Override
+    public Person findPersonByNameAndJob(Name name, Job job) {
+        for (Person person : addressBook.getPersonList()) {
+            if (person.getName().equals(name) && person.getJob().equals(job)) {
+                return person;
+            }
+        }
+        return null;
     }
 
     @Override

@@ -16,7 +16,6 @@ import seedu.address.model.tag.Tag;
  */
 public class Person {
     public static final Tag DEFAULT_TAG_PENDING = new Tag("pending");
-    // tags for marking status of candidate
     public static final Tag TAG_HIRED = new Tag("hired");
     public static final Tag TAG_REJECTED = new Tag("rejected");
 
@@ -30,6 +29,9 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
+    // Status fields
+    private String status;
+
     /**
      * Every field must be present and not null.
      */
@@ -41,7 +43,9 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.tags.add(DEFAULT_TAG_PENDING);
+        if (!isHired()) {
+            this.tags.add(DEFAULT_TAG_PENDING);
+        }
     }
 
     public Name getName() {
@@ -71,6 +75,15 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+
+    public void addTag(Tag tag) {
+        tags.add(tag);
+    }
+
+    public void removeTag(Tag tag) {
+        tags.remove(tag);
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
@@ -82,6 +95,24 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void markAsHired() {
+        this.status = "hired";
+        removeTag(DEFAULT_TAG_PENDING);
+        addTag(TAG_HIRED);
+    }
+
+    public boolean isHired() {
+        return tags.contains(TAG_HIRED);
     }
 
     /**

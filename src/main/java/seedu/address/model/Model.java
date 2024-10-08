@@ -5,6 +5,8 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.Job;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -18,6 +20,11 @@ public interface Model {
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
     void setUserPrefs(ReadOnlyUserPrefs userPrefs);
+
+    /**
+     * Returns true if the person exists in the address book.
+     */
+    Person findPersonByNameAndJob(Name name, Job job);
 
     /**
      * Returns the user prefs.

@@ -22,6 +22,8 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_NAME = "Error: Invalid name. Please enter a valid first and last name.";
+    public static final String MESSAGE_INVALID_JOB = "Error: Invalid job title.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -46,7 +48,7 @@ public class ParserUtil {
         requireNonNull(name);
         String trimmedName = name.trim();
         if (!Name.isValidName(trimmedName)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+            throw new ParseException(MESSAGE_INVALID_NAME);
         }
         return new Name(trimmedName);
     }
@@ -61,7 +63,7 @@ public class ParserUtil {
         requireNonNull(job);
         String trimmedJob = job.trim();
         if (!Job.isValidJob(trimmedJob)) {
-            throw new ParseException(Job.MESSAGE_CONSTRAINTS);
+            throw new ParseException(MESSAGE_INVALID_JOB);
         }
         return new Job(trimmedJob);
     }
