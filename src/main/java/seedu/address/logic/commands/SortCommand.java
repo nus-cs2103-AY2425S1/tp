@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Comparator;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -76,5 +77,13 @@ public class SortCommand extends Command {
         SortCommand otherSortCommand = (SortCommand) other;
         return parameter.equals(otherSortCommand.parameter)
                 && order.equals(otherSortCommand.order);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("parameter", parameter)
+                .add("order", order)
+                .toString();
     }
 }
