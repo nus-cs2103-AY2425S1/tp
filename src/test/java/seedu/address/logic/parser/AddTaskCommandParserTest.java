@@ -17,7 +17,8 @@ public class AddTaskCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        AddTaskCommand expectedCommand = new AddTaskCommand(Index.fromOneBased(1), "Buy medication");
+        Index index1 = Index.fromOneBased(1);
+        AddTaskCommand expectedCommand = new AddTaskCommand(index1, "Buy medication");
 
         // Correct format with `d/` and `p/`
         assertParseSuccess(parser, "1 d/Buy medication", expectedCommand);
@@ -37,15 +38,13 @@ public class AddTaskCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
 
-        // invalid person name (format is correct but name is invalid)
-        assertParseFailure(parser, "addtask d/Buy medication p/R@chel", Name.MESSAGE_CONSTRAINTS);
-
-        // invalid task description and valid person name
-        assertParseFailure(parser, "addtask p/!nv@l!d description p/John Doe",
+        // invalid task description and valid index
+        assertParseFailure(parser, "addtask 1 p/!nv@l!d description",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTaskCommand.MESSAGE_USAGE));
 
-        // valid task description and invalid person name
-        assertParseFailure(parser, "addtask d/Buy medication p/R@chel", Name.MESSAGE_CONSTRAINTS);
+        // valid task description and invalid index
+        assertParseFailure(parser, "addtask a d/Buy medication",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTaskCommand.MESSAGE_USAGE));
     }
 
 

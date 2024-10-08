@@ -95,7 +95,7 @@ public class LogicManagerTest {
         Person amy = new PersonBuilder(AMY).build();
         model.addPerson(amy);
 
-        String addTaskCommand = AddTaskCommand.COMMAND_WORD + " d/Buy medication p/Amy Bee";
+        String addTaskCommand = AddTaskCommand.COMMAND_WORD + " 1" + " d/Buy medication";
         Task expectedTask = new Task(amy, "Buy medication");
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(amy);
