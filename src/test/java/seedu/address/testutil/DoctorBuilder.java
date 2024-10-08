@@ -38,6 +38,36 @@ public class DoctorBuilder extends PersonBuilder {
     }
 
     @Override
+    public DoctorBuilder withName(String name) {
+        super.withName(name);
+        return this;
+    }
+
+    @Override
+    public DoctorBuilder withTags(String ... tags) {
+        super.withTags(tags);
+        return this;
+    }
+
+    @Override
+    public DoctorBuilder withAddress(String address) {
+        super.withAddress(address);
+        return this;
+    }
+
+    @Override
+    public DoctorBuilder withPhone(String phone) {
+        super.withPhone(phone);
+        return this;
+    }
+
+    @Override
+    public DoctorBuilder withEmail(String email) {
+        super.withEmail(email);
+        return this;
+    }
+
+    @Override
     public Doctor build() {
         Person person = super.build();
         return new Doctor(

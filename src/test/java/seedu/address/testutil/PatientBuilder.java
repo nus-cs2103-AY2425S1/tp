@@ -12,7 +12,7 @@ public class PatientBuilder extends PersonBuilder {
 
     public static final String DEFAULT_DATE_OF_BIRTH = "01-01-2000";
     public static final String DEFAULT_GENDER = "M";
-    
+
     private DateOfBirth dateOfBirth;
     private Gender gender;
 
@@ -47,6 +47,36 @@ public class PatientBuilder extends PersonBuilder {
      */
     public PatientBuilder withGender(String gender) {
         this.gender = new Gender(gender);
+        return this;
+    }
+
+    @Override
+    public PatientBuilder withName(String name) {
+        super.withName(name);
+        return this;
+    }
+
+    @Override
+    public PatientBuilder withTags(String ... tags) {
+        super.withTags(tags);
+        return this;
+    }
+
+    @Override
+    public PatientBuilder withAddress(String address) {
+        super.withAddress(address);
+        return this;
+    }
+
+    @Override
+    public PatientBuilder withPhone(String phone) {
+        super.withPhone(phone);
+        return this;
+    }
+
+    @Override
+    public PatientBuilder withEmail(String email) {
+        super.withEmail(email);
         return this;
     }
 

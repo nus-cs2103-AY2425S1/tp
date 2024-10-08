@@ -54,7 +54,7 @@ public class Patient extends Person {
      * Returns true if both patients have the same name and phone number.
      * This defines a weaker notion of equality between two patients.
      */
-    public boolean isSameDoctor(Patient otherPatient) {
+    public boolean isSamePatient(Patient otherPatient) {
         if (otherPatient == this) {
             return true;
         }
