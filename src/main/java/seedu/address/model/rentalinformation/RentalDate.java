@@ -39,4 +39,29 @@ public class RentalDate {
     public static boolean isValidRentalDate(String test) {
         return test.matches(VALIDATION_REGEX);
     }
+
+    @Override
+    public String toString() {
+        return RentalUtil.convertLocalDateToStringWithFormat(rentalDate, "dd MMM yyyy");
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof RentalDate)) {
+            return false;
+        }
+
+        RentalDate otherRentalDate = (RentalDate) other;
+        return rentalDate.isEqual(otherRentalDate.rentalDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return rentalDate.hashCode();
+    }
 }

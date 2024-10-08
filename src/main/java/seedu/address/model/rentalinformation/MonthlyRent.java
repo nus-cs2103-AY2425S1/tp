@@ -35,4 +35,29 @@ public class MonthlyRent {
     public static boolean isValidMonthlyRent(String test) {
         return test.matches(VALIDATION_REGEX);
     }
+
+    @Override
+    public String toString() {
+        return Double.toString(monthlyRent);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof MonthlyRent)) {
+            return false;
+        }
+
+        MonthlyRent otherMonthlyRent = (MonthlyRent) other;
+        return this.monthlyRent == otherMonthlyRent.monthlyRent;
+    }
+
+    @Override
+    public int hashCode() {
+        return Double.valueOf(monthlyRent).hashCode();
+    }
 }

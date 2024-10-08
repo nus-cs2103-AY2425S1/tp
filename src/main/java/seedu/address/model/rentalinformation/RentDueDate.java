@@ -35,4 +35,29 @@ public class RentDueDate {
     public static boolean isValidDueDate(String test) {
         return test.matches(VALIDATION_REGEX);
     }
+
+    @Override
+    public String toString() {
+        return rentDueDate;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof RentDueDate)) {
+            return false;
+        }
+
+        RentDueDate otherRentDueDate = (RentDueDate) other;
+        return rentDueDate.equals(otherRentDueDate.rentDueDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return rentDueDate.hashCode();
+    }
 }

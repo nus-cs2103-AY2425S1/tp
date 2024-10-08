@@ -14,7 +14,7 @@ import seedu.address.commons.util.RentalUtil;
 public class CustomerList {
     public static final String MESSAGE_CONSTRAINTS =
             "Customer list should separate the names by ; if there is more than one customer";
-    public static final String VALIDATION_REGEX = "^(?!;)([^;]+(;[^;]+)*)?$";
+    public static final String VALIDATION_REGEX = "^(?!;)(?!\\s*$)([^;]+(;[^;]+)*)?$";
 
     public final ArrayList<String> customerList;
 
@@ -38,5 +38,43 @@ public class CustomerList {
      */
     public static boolean isValidCustomerList(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    public ArrayList<String> getCustomerList() {
+        return customerList;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder allNames = new StringBuilder();
+        for (int i = 0; i < customerList.size(); i++) {
+            if (i < customerList.size() - 1) {
+                allNames.append(customerList.get(i)).append(";");
+            } else {
+                allNames.append(customerList.get(i));
+            }
+        }
+
+        return allNames.toString();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof CustomerList)) {
+            return false;
+        }
+
+        CustomerList otherCustomerList = (CustomerList) other;
+        return RentalUtil.isCustomerListSame(this, otherCustomerList);
+    }
+
+    @Override
+    public int hashCode() {
+        return customerList.hashCode();
     }
 }

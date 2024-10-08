@@ -35,4 +35,29 @@ public class Deposit {
     public static boolean isValidDeposit(String test) {
         return test.matches(VALIDATION_REGEX);
     }
+
+    @Override
+    public String toString() {
+        return Double.toString(deposit);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Deposit)) {
+            return false;
+        }
+
+        Deposit otherDeposit = (Deposit) other;
+        return this.deposit == otherDeposit.deposit;
+    }
+
+    @Override
+    public int hashCode() {
+        return Double.valueOf(deposit).hashCode();
+    }
 }
