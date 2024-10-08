@@ -1,10 +1,8 @@
-package seedu.address.model.appt.appointment;
+package seedu.address.model.appointment;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.DateUtil.isValidDate;
-
-import seedu.address.model.appt.Appointment;
 
 /**
  * Represents an Appointment in the MediBase.
