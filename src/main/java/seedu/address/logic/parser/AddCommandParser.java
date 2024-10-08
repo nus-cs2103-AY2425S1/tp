@@ -54,7 +54,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
             return new AddPersonCommand(person);
         case APPOINTMENT_ENTITY_STRING:
-            //TODO: Add prefix checking for appointment entity 
+            //TODO: Instantiate and return AddAppointmentCommand
         default:
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }

@@ -64,5 +64,5 @@ public abstract class AddCommand extends Command {
     /**
      * Formats the entity for displaying in the success message.
      */
-    protected abstract Object formatEntity();
+    protected abstract String formatEntity();
 }

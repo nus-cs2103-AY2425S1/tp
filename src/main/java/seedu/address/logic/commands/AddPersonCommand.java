@@ -67,7 +67,7 @@ public class AddPersonCommand extends AddCommand {
     }
 
     @Override
-    protected Object formatEntity() {
+    protected String formatEntity() {
         return Messages.formatPerson(toAdd);
     }
 
@@ -82,8 +82,8 @@ public class AddPersonCommand extends AddCommand {
             return false;
         }
 
-        AddPersonCommand otherAddCommand = (AddPersonCommand) other;
-        return toAdd.equals(otherAddCommand.toAdd);
+        AddPersonCommand otherAddPersonCommand = (AddPersonCommand) other;
+        return toAdd.equals(otherAddPersonCommand.toAdd);
     }
 
     @Override
