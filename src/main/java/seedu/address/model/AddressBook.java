@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.company.Company;
 import seedu.address.model.job.Job;
 import seedu.address.model.job.UniqueJobList;
 import seedu.address.model.person.Person;
@@ -29,6 +30,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         persons = new UniquePersonList();
         jobs = new UniqueJobList();
+        companies = new UniqueCompanyList();
     }
 
     public AddressBook() {
@@ -107,6 +109,10 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+
+    public void removeCompany(Company key) {
+        companies.remove(key);
     }
 
     //// util methods
