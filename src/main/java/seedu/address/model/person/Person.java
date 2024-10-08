@@ -105,6 +105,11 @@ public class Person {
         this.status = status;
     }
 
+    /**
+     * Marks the person as hired.
+     * Sets the status to "hired", removes the "rejected" and "pending" tags if present,
+     * and adds the "hired" tag.
+     */
     public void markAsHired() {
         this.status = "hired";
         removeTag(TAG_REJECTED);
@@ -117,6 +122,11 @@ public class Person {
         return tags.contains(TAG_HIRED);
     }
 
+    /**
+     * Marks the person as rejected.
+     * Sets the status to "rejected", removes the "pending" and "hired" tags if present,
+     * and adds the "rejected" tag.
+     */
     public void markAsRejected() {
         this.status = "rejected";
         removeTag(DEFAULT_TAG_PENDING);
@@ -138,11 +148,10 @@ public class Person {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Person otherPerson)) {
             return false;
         }
 
-        Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
                 && job.equals(otherPerson.job)
                 && phone.equals(otherPerson.phone)

@@ -6,9 +6,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Job;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Job;
 
 /**
  * Changes the status of a candidate to rejected.
@@ -59,11 +59,10 @@ public class RejectCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof RejectCommand)) {
+        if (!(other instanceof RejectCommand otherCommand)) {
             return false;
         }
 
-        RejectCommand otherCommand = (RejectCommand) other;
         return name.equals(otherCommand.name)
                 && job.equals(otherCommand.job);
     }
