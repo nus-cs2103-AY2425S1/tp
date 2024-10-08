@@ -26,6 +26,8 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.policy.LifePolicy;
+import seedu.address.model.policy.PolicyMap;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -91,7 +93,14 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_addPolicy() throws Exception {
-        assertTrue(parser.parseCommand(AddPolicyCommand.COMMAND_WORD) instanceof AddPolicyCommand);
+        // This is hardcoded for now.
+        // Will change in future commits.
+        AddPolicyCommand command = (AddPolicyCommand) parser.parseCommand(
+                AddPolicyCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+                + " pt/life");
+        PolicyMap policies = new PolicyMap();
+        policies.add(new LifePolicy());
+        assertEquals(new AddPolicyCommand(INDEX_FIRST_PERSON, policies), command);
     }
 
     @Test
