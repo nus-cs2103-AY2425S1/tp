@@ -89,11 +89,11 @@ public class ParserUtil {
      */
     public static Email parseEmail(String email) throws ParseException {
         requireNonNull(email);
-        String trimmedEmail = email.trim();
-        if (!Email.isValidEmail(trimmedEmail)) {
+        String trimmedLowerCaseEmail = email.trim().toLowerCase();
+        if (!Email.isValidEmail(trimmedLowerCaseEmail)) {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
-        return new Email(trimmedEmail);
+        return new Email(trimmedLowerCaseEmail);
     }
 
     /**
