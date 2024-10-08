@@ -32,7 +32,6 @@ import seedu.address.testutil.PersonUtil;
 public class AddressBookParserTest {
 
     private final AddressBookParser parser = new AddressBookParser();
-    private final String CONTACT = "contact";
 
     @Test
     public void parseCommand_add() throws Exception {
@@ -49,6 +48,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_deleteContact() throws Exception {
+        String CONTACT = "contact";
         DeleteContactCommand command = (DeleteContactCommand) parser.parseCommand(
                 DeleteContactCommand.COMMAND_WORD + " " + CONTACT + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteContactCommand(INDEX_FIRST_PERSON), command);
