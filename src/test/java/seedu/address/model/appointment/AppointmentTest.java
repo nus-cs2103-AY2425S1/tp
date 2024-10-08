@@ -69,7 +69,7 @@ class AppointmentTest {
     }
 
     @Test
-    public void compareTo() {
+    public void testCompareTo() {
         Appointment a = new Appointment("Some bone appointment", "2024-10-25","1000-1235");
         Appointment same_date_before = new Appointment("Some bone appointment", "2024-10-25","0900-1235");
         Appointment same_date_time = new Appointment("Some bone appointment", "2024-10-25","1000-1235");
@@ -94,4 +94,60 @@ class AppointmentTest {
         Assertions.assertTrue(0 > a.compareTo(later_date_after));
     }
 
+    @Test
+    public void testToString() {
+        Appointment a = new Appointment(validAppointmentName, validAppointmentDate, validAppointmentTime);
+        String expected = validAppointmentName + '[' + validAppointmentDate + ' ' + validAppointmentTime + ']';
+        Assertions.assertEquals(expected, a.toString());
+    }
+
+    @SuppressWarnings(
+            {
+                    "ConstantValue",
+                    "EqualsWithItself",
+                    "SimplifiableAssertion"
+            }
+    )
+    @Test
+    public void testEquals() {
+        Appointment a = new Appointment("Some bone appointment", "2024-10-25","1000-1235");
+        Appointment same_date_before = new Appointment("Some bone appointment", "2024-10-25","0900-1235");
+        Appointment same_date_time = new Appointment("Some bone appointment", "2024-10-25","1000-1235");
+        Appointment same_date_after = new Appointment("Some bone appointment", "2024-10-25","1100-1235");
+
+        Appointment early_date_before = new Appointment("Some bone appointment", "2024-10-20","0900-1235");
+        Appointment early_date_same = new Appointment("Some bone appointment", "2024-10-20","1000-1235");
+        Appointment early_date_after = new Appointment("Some bone appointment", "2024-10-20","1100-1235");
+
+        Appointment later_date_before = new Appointment("Some bone appointment", "2024-11-25","0900-1235");
+        Appointment later_date_same = new Appointment("Some bone appointment", "2024-11-25","1000-1235");
+        Appointment later_date_after = new Appointment("Some bone appointment", "2024-11-25","1100-1235");
+
+        Assertions.assertFalse(a.equals(null));
+        Assertions.assertTrue(a.equals(a));
+        Assertions.assertFalse(a.equals(same_date_before));
+        Assertions.assertTrue(a.equals(same_date_time));
+        Assertions.assertFalse(a.equals(same_date_after));
+        Assertions.assertFalse(a.equals(early_date_before));
+        Assertions.assertFalse(a.equals(early_date_same));
+        Assertions.assertFalse(a.equals(early_date_after));
+        Assertions.assertFalse(a.equals(later_date_before));
+        Assertions.assertFalse(a.equals(later_date_same));
+        Assertions.assertFalse(a.equals(later_date_after));
+    }
+
+    @Test
+    public void testIsClashing() {
+        Appointment a = new Appointment("Some bone appointment", "2024-10-25","1000-1235");
+        Assertions.assertFalse(a.isClashing("2024-10-25","0900-1235")); // "same_date_before"
+        Assertions.assertTrue(a.isClashing("2024-10-25","1000-1235")); // "same_date_time"
+        Assertions.assertFalse(a.isClashing("2024-10-25","1100-1235")); // "same_date_after"
+        Assertions.assertFalse(a.isClashing("2024-10-20","0900-1235")); // "early_date_before"
+        Assertions.assertFalse(a.isClashing("2024-10-20","1000-1235")); // "early_date_same"
+        Assertions.assertFalse(a.isClashing("2024-10-20","1100-1235")); // "early_date_after"
+        Assertions.assertFalse(a.isClashing("2024-11-25","0900-1235")); // "later_date_before"
+        Assertions.assertFalse(a.isClashing("2024-11-25","1000-1235")); // "later_date_same"
+        Assertions.assertFalse(a.isClashing("2024-11-25","1100-1235")); // "later_date_after"
+
+    }
 }
