@@ -51,7 +51,12 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Course course = ParserUtil.parseCourse(argMultimap.getValue(PREFIX_COURSE).get());
-        Tag tag = ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG).get());
+        Tag tag;
+        if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
+            tag = ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG).get());
+        } else {
+            tag = new Tag("Student");
+        }
 
         Person person = new Person(studentId, name, phone, email, address, course, tag);
 

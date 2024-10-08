@@ -52,7 +52,7 @@ public class TypicalPersons {
             .withEmail("heinz@example.com")
             .withAddress("wall street")
             .withCourse("nursing")
-            .withTag("Teacher")
+            .withTag("Tutor")
             .build();
     public static final Person DANIEL = new PersonBuilder()
             .withStudentId("53289012")
@@ -79,7 +79,7 @@ public class TypicalPersons {
             .withEmail("lydia@example.com")
             .withAddress("little tokyo")
             .withCourse("Data Science")
-            .withTag("Teacher")
+            .withTag("Tutor")
             .build();
     public static final Person GEORGE = new PersonBuilder()
             .withStudentId("28184003")
@@ -99,7 +99,7 @@ public class TypicalPersons {
             .withEmail("stefan@example.com")
             .withAddress("little india")
             .withCourse("Mechanical engineering")
-            .withTag("Teacher")
+            .withTag("Tutor")
             .build();
     public static final Person IDA = new PersonBuilder()
             .withStudentId("48883999")

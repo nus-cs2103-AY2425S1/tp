@@ -21,7 +21,6 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_STUDENT_ID = "12345678";
     public static final String DEFAULT_COURSE = "Computer Science";
-
     public static final String DEFAULT_TAG = "Student";
 
     private StudentId studentId;

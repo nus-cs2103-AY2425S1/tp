@@ -23,7 +23,7 @@
     "email" : "heinz@example.com",
     "address" : "wall street",
     "course": "nursing",
-    "tag" : "Student"
+    "tag" : "Tutor"
   }, {
     "studentId": "53289012",
     "name" : "Daniel Meier",
@@ -47,7 +47,7 @@
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "course": "Data Science",
-    "tag" : "Student"
+    "tag" : "Tutor"
   }, {
     "studentId": "28184003",
     "name" : "George Best",

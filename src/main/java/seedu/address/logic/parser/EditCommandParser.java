@@ -64,7 +64,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setCourse(ParserUtil.parseCourse(argMultimap.getValue(PREFIX_COURSE).get()));
         }
         if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
-            editPersonDescriptor.setCourse(ParserUtil.parseCourse(argMultimap.getValue(PREFIX_TAG).get()));
+            editPersonDescriptor.setTag(ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG).get()));
         }
 
 

@@ -17,6 +17,7 @@ public class Tag {
     public static final ArrayList<String> VALIDTAGS = new ArrayList<>(Arrays.asList("Student", "Tutor"));
     public static final String MESSAGE_CONSTRAINTS =
             "Your tag should either be a student or tutor.";
+    public static final String VALIDATION_REGEX = "^[a-zA-Z]+$";
     public final String role;
 
 
@@ -38,7 +39,8 @@ public class Tag {
      * Returns true if a given string is a valid tag.
      */
     public static boolean isValidTag(String test) {
-        return VALIDTAGS.contains(test);
+
+        return test.matches(VALIDATION_REGEX) && VALIDTAGS.contains(test);
     }
     @Override
     public String toString() {

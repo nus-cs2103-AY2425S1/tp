@@ -159,7 +159,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("course", course)
-                .add("tags", tag)
+                .add("tag", tag)
                 .toString();
     }
 
