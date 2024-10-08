@@ -14,7 +14,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
 /**
- * A utility class for StudentTest.
+ * A utility class for Person.
  */
 public class PersonUtil {
 
