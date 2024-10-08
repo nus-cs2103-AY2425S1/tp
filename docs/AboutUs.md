@@ -23,7 +23,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Leong Soon Mun Stephane
 
-<img src="images/leongsoonmunstephane.png" width="200px">
+<img src="images/stephaneleong.png" width="200px">
 
 [[github](http://github.com/stephaneleong)]
 [[portfolio](team/stephaneleong.md)]
