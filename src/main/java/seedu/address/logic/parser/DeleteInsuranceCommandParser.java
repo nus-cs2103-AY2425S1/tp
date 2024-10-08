@@ -33,8 +33,8 @@ public class DeleteInsuranceCommandParser implements Parser<DeleteInsuranceComma
             }
             insuranceId = ParserUtil.parseInsurancePlan(argMultimap.getValue(PREFIX_INSURANCE_ID).get());
         } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteInsuranceCommand.MESSAGE_USAGE),
-                    ive);
+            throw new ParseException(String.format(
+                    MESSAGE_INVALID_COMMAND_FORMAT, DeleteInsuranceCommand.MESSAGE_USAGE), ive);
         }
         return new DeleteInsuranceCommand(index, insuranceId);
     }
