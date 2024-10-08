@@ -6,10 +6,14 @@ import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.event.Date;
+import seedu.address.model.event.Description;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.EventName;
+import seedu.address.model.event.Location;
+import seedu.address.model.event.Time;
 
 
-import java.util.Set;
 import java.util.stream.Stream;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -33,18 +37,20 @@ public class EventAddCommandParser {
 
 
         argMultimap.verifyNoDuplicatePrefixesFor(EVENT_PREFIX_NAME, EVENT_PREFIX_LOCATION, EVENT_PREFIX_DATE, EVENT_PREFIX_START_TIME, EVENT_PREFIX_END_TIME, EVENT_PREFIX_DESCRIPTION);
-//        Will wait for Event and EventAddCommand implementation
-//        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-//        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-//        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-//        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-//        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        EventName eventName = ParserUtil.parseEventName(argMultimap.getValue(EVENT_PREFIX_NAME).get());
+        Location location = ParserUtil.parseLocation(argMultimap.getValue(EVENT_PREFIX_LOCATION).get());
+        Date date = ParserUtil.parseDate(argMultimap.getValue(EVENT_PREFIX_DATE).get());
+        Time start_time = ParserUtil.parseTime(argMultimap.getValue(EVENT_PREFIX_START_TIME).get());
+        Time end_time = ParserUtil.parseTime(argMultimap.getValue(EVENT_PREFIX_END_TIME).get());
+        Description description = ParserUtil.parseDescription(argMultimap.getValue(EVENT_PREFIX_DESCRIPTION).get());
+
 
         Event event;
         if (arePrefixesPresent(argMultimap, EVENT_PREFIX_DESCRIPTION)) {
-            event = new Event(name, location, date, start_time, end_time, description);
+            event = new Event(eventName, location, date, start_time, end_time, description);
+        } else {
+            event = new Event(eventName, location, date, start_time, end_time);
         }
-        event = new Event(name, location, date, start_time, end_time);
 
         return new EventAddCommand(event);
     }

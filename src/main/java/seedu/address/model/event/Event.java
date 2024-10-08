@@ -2,13 +2,9 @@ package seedu.address.model.event;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
 
 /**
  * Represents an Event in the address book.
@@ -17,7 +13,7 @@ import seedu.address.model.tag.Tag;
 public class Event {
 
     // Identity fields
-    private final Name name;
+    private final EventName eventName;
     private final Location location;
     private final Date date;
     private final Time startTime;
@@ -27,9 +23,9 @@ public class Event {
     /**
      * Every field must be present and not null.
      */
-    public Event(Name name, Location location, Date date, Time start_time, Time end_time, Description description) {
-        requireAllNonNull(name, location, date, start_time, end_time, description);
-        this.name = name;
+    public Event(EventName eventName, Location location, Date date, Time start_time, Time end_time, Description description) {
+        requireAllNonNull(eventName, location, date, start_time, end_time, description);
+        this.eventName = eventName;
         this.location = location;
         this.date = date;
         this.startTime = start_time;
@@ -37,9 +33,9 @@ public class Event {
         this.description = description;
     }
 
-    public Event(Name name, Location location, Date date, Time start_time, Time end_time) {
-        requireAllNonNull(name, location, date, start_time, end_time);
-        this.name = name;
+    public Event(EventName eventName, Location location, Date date, Time start_time, Time end_time) {
+        requireAllNonNull(eventName, location, date, start_time, end_time);
+        this.eventName = eventName;
         this.location = location;
         this.date = date;
         this.startTime = start_time;
@@ -47,8 +43,8 @@ public class Event {
         this.description = new Description();
     }
 
-    public Name getName() {
-        return name;
+    public EventName getName() {
+        return eventName;
     }
 
     public Location getLocation() {
@@ -100,7 +96,7 @@ public class Event {
         }
 
         Event otherEvent = (Event) other;
-        return name.equals(otherEvent.name)
+        return eventName.equals(otherEvent.eventName)
                 && location.equals(otherEvent.location)
                 && date.equals(otherEvent.date)
                 && startTime.equals(otherEvent.startTime)
@@ -111,13 +107,13 @@ public class Event {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, location, date, startTime, endTime, description);
+        return Objects.hash(eventName, location, date, startTime, endTime, description);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("name", name)
+                .add("name", eventName)
                 .add("location", location)
                 .add("date", date)
                 .add("startTime", startTime)
