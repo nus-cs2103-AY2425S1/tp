@@ -27,9 +27,9 @@ class JsonAdaptedPerson {
 
     private final String name;
     private final String phone;
-    private final String email;
-    private final String address;
-    private final String remark;
+//    private final String email;
+//    private final String address;
+//    private final String remark;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -41,9 +41,9 @@ class JsonAdaptedPerson {
                 @JsonProperty("remark") String remark, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.remark = remark;
+//        this.email = email;
+//        this.address = address;
+//        this.remark = remark;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -55,12 +55,12 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
-        email = source.getEmail().value;
-        address = source.getAddress().value;
-        remark = source.getRemark().value;
-        tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
+//        email = source.getEmail().value;
+//        address = source.getAddress().value;
+//        remark = source.getRemark().value;
+//        tags.addAll(source.getTags().stream()
+//                .map(JsonAdaptedTag::new)
+//                .collect(Collectors.toList()));
     }
 
     /**
@@ -90,7 +90,7 @@ class JsonAdaptedPerson {
         }
         final Phone modelPhone = new Phone(phone);
 
-        if (email == null) {
+/*        if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
         }
         if (!Email.isValidEmail(email)) {
@@ -110,9 +110,9 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
         }
         final Remark modelRemark = new Remark(remark);
-
+*/
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRemark, modelTags);
+        return new Person(modelName, modelPhone);
     }
 
 }
