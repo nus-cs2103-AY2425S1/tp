@@ -34,7 +34,7 @@ public class TypicalPersons {
             .withEmail("alice@example.com")
             .withPhone("94351253")
             .withCourse("Math")
-            .withTags("Student")
+            .withTag("Student")
             .build();
     public static final Person BENSON = new PersonBuilder()
             .withStudentId("19191919")
@@ -43,7 +43,7 @@ public class TypicalPersons {
             .withEmail("johnd@example.com")
             .withPhone("98765432")
             .withCourse("Medicine")
-            .withTags("Student")
+            .withTag("Student")
             .build();
     public static final Person CARL = new PersonBuilder()
             .withStudentId("21212121")
@@ -52,6 +52,7 @@ public class TypicalPersons {
             .withEmail("heinz@example.com")
             .withAddress("wall street")
             .withCourse("nursing")
+            .withTag("Tutor")
             .build();
     public static final Person DANIEL = new PersonBuilder()
             .withStudentId("53289012")
@@ -60,7 +61,7 @@ public class TypicalPersons {
             .withEmail("cornelia@example.com")
             .withAddress("10th street")
             .withCourse("Dentistry")
-            .withTags("Student")
+            .withTag("Student")
             .build();
     public static final Person ELLE = new PersonBuilder()
             .withStudentId("25252525")
@@ -69,6 +70,7 @@ public class TypicalPersons {
             .withEmail("werner@example.com")
             .withAddress("michegan ave")
             .withCourse("biomedical engineering")
+            .withTag("Student")
             .build();
     public static final Person FIONA = new PersonBuilder()
             .withStudentId("98989898")
@@ -77,6 +79,7 @@ public class TypicalPersons {
             .withEmail("lydia@example.com")
             .withAddress("little tokyo")
             .withCourse("Data Science")
+            .withTag("Tutor")
             .build();
     public static final Person GEORGE = new PersonBuilder()
             .withStudentId("28184003")
@@ -85,6 +88,7 @@ public class TypicalPersons {
             .withEmail("anna@example.com")
             .withAddress("4th street")
             .withCourse("Dentistry")
+            .withTag("Student")
             .build();
 
     // Manually added
@@ -95,6 +99,7 @@ public class TypicalPersons {
             .withEmail("stefan@example.com")
             .withAddress("little india")
             .withCourse("Mechanical engineering")
+            .withTag("Tutor")
             .build();
     public static final Person IDA = new PersonBuilder()
             .withStudentId("48883999")
@@ -103,6 +108,7 @@ public class TypicalPersons {
             .withEmail("hans@example.com")
             .withAddress("chicago ave")
             .withCourse("Architecture")
+            .withTag("Student")
             .build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
@@ -113,7 +119,7 @@ public class TypicalPersons {
             .withEmail(VALID_EMAIL_AMY)
             .withAddress(VALID_ADDRESS_AMY)
             .withCourse(VALID_COURSE_AMY)
-            .withTags(VALID_TAG_STUDENT).build();
+            .withTag(VALID_TAG_STUDENT).build();
     public static final Person BOB = new PersonBuilder()
             .withStudentId(VALID_STUDENTID_BOB)
             .withName(VALID_NAME_BOB)
@@ -121,7 +127,7 @@ public class TypicalPersons {
             .withEmail(VALID_EMAIL_BOB)
             .withAddress(VALID_ADDRESS_BOB)
             .withCourse(VALID_COURSE_BOB)
-            .withTags(VALID_TAG_TUTOR, VALID_TAG_STUDENT)
+            .withTag(VALID_TAG_TUTOR)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

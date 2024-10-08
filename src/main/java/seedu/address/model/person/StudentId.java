@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+
 /**
  * Represents a Person's Student ID in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidStudentId(String)}

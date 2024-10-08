@@ -10,12 +10,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -30,7 +27,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.StudentId;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Tag;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -106,9 +103,9 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Course updatedCourse = editPersonDescriptor.getCourse().orElse(personToEdit.getCourse());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Tag updatedTag = editPersonDescriptor.getTag().orElse(personToEdit.getTag());
         return new Person(updatedStudentId, updatedName, updatedPhone, updatedEmail, updatedAddress,
-                updatedCourse, updatedTags);
+                updatedCourse, updatedTag);
     }
 
     @Override
@@ -146,7 +143,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Course course;
-        private Set<Tag> tags;
+        private Tag tag;
 
         public EditPersonDescriptor() {}
 
@@ -161,14 +158,14 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setCourse(toCopy.course);
-            setTags(toCopy.tags);
+            setTag(toCopy.tag);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tag);
         }
 
         public void setStudentId(StudentId studentId) {
@@ -223,8 +220,8 @@ public class EditCommand extends Command {
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
          */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setTag(Tag tag) {
+            this.tag = tag;
         }
 
         /**
@@ -232,8 +229,8 @@ public class EditCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public Optional<Tag> getTag() {
+            return Optional.ofNullable(tag);
         }
 
         @Override
@@ -254,7 +251,7 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(course, otherEditPersonDescriptor.course)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tag, otherEditPersonDescriptor.tag);
         }
 
         @Override
@@ -266,7 +263,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("course", course)
-                    .add("tags", tags)
+                    .add("tags", tag)
                     .toString();
         }
     }
