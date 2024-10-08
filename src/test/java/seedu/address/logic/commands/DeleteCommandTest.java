@@ -143,4 +143,32 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(new Name("Invalid Name"));
         assertThrows(CommandException.class, () -> deleteCommand.execute(model));
     }
+
+    @Test
+    public void equals_sameTargetName_returnsTrue() {
+        Name targetName = new Name("John Doe");
+        DeleteCommand deleteCommand1 = new DeleteCommand(targetName);
+        DeleteCommand deleteCommand2 = new DeleteCommand(targetName);
+
+        assertTrue(deleteCommand1.equals(deleteCommand2));
+    }
+
+    @Test
+    public void equals_differentTargetName_returnsFalse() {
+        Name targetName1 = new Name("John Doe");
+        Name targetName2 = new Name("Jane Doe");
+        DeleteCommand deleteCommand1 = new DeleteCommand(targetName1);
+        DeleteCommand deleteCommand2 = new DeleteCommand(targetName2);
+
+        assertFalse(deleteCommand1.equals(deleteCommand2));
+    }
+
+    @Test
+    public void equals_nullTargetName_returnsFalse() {
+        Name targetName = new Name("John Doe");
+        DeleteCommand deleteCommand1 = new DeleteCommand(targetName);
+        DeleteCommand deleteCommand2 = new DeleteCommand((Name) null);
+
+        assertFalse(deleteCommand1.equals(deleteCommand2));
+    }
 }
