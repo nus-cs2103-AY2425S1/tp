@@ -24,10 +24,11 @@ public class HelpWindow extends UiPart<Stage> {
                 4. edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]: Edits a contact’s details.
                 5. tag INDEX t/TAG1 [t/TAG2] ... : Adds one or more tags to a contact.
                 6. untag INDEX t/TAG [t/TAG2] ... : Removes one or more tags from a contact.
-                7. find KEYWORD [MORE_KEYWORDS]: Finds contacts with any of the given keywords in their name.
-                8. delete INDEX: Deletes the contact in the specified index.
-                9. clear: Clears all contacts (following a confirmation message).
-                10. exit: Exits the program.
+                7. filter t/TAG: Filters contacts by the specified tag.
+                8. find KEYWORD [MORE_KEYWORDS]: Finds contacts with any of the given keywords in their name.
+                9. delete INDEX: Deletes the contact in the specified index.
+                10. clear: Clears all contacts (following a confirmation message).
+                11. exit: Exits the program.
             \n
             For more detailed help, refer to the PlanPerfect User Guide:""" + ' ' + USERGUIDE_URL;
 
