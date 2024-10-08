@@ -126,11 +126,6 @@ public class ModelManager implements Model {
         addressBook.removeCompany(target);
     }
     @Override
-    public void deleteCompany(Company target) {
-        addressBook.removeCompany(target);
-    }
-
-    @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
