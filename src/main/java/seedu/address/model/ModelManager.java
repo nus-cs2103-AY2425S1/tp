@@ -139,6 +139,12 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
     }
+    @Override
+    public void markAsHired(Person person) {
+        // Implementation to mark the person as hired
+        // For example, setting a hired flag or updating the person's status
+        person.markAsHired(); // Assuming Person class has a setHired method
+    }
 
     @Override
     public boolean equals(Object other) {
