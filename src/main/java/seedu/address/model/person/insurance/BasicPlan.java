@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.person.insurance;
 
 /**
  * The {@code BasicPlan} class represents a basic type of insurance plan.

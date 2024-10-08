@@ -193,4 +193,17 @@ public class ParserUtilTest {
 
         assertEquals(expectedTagSet, actualTagSet);
     }
+
+    @Test
+    void parseInsurancePlan_success() throws Exception {
+        String insuranceIdString = "0";
+        int insuranceId = ParserUtil.parseInsurancePlan(insuranceIdString);
+        assertEquals(insuranceId, 0);
+    }
+
+    @Test
+    void parseInsurancePlan_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseInsurancePlan("-1"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseInsurancePlan("a"));
+    }
 }

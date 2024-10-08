@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.person.insurance;
 
 /**
  * The {@code TravelPlan} class represents a specific type of insurance plan tailored for travel purposes.

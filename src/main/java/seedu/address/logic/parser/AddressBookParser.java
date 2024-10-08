@@ -79,7 +79,7 @@ public class AddressBookParser {
             return new HelpCommand();
 
         case AddInsuranceCommand.COMMAND_WORD:
-            return new AddInsuranceCommand();
+            return new AddInsuranceCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
