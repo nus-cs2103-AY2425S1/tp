@@ -274,8 +274,8 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
-
+Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`  
+  
 | Priority | As a …​ | I want to …​                                                          | So that I can…​                                                                       |
 |----------|---------|-----------------------------------------------------------------------|---------------------------------------------------------------------------------------|
 | `* * *`  | Doctor  | create a new patient profile                                          | I can record their details and track their progress                                   |
