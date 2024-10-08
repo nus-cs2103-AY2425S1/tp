@@ -1,8 +1,11 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.lang.reflect.Field;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,12 +29,26 @@ public class AddCommandIntegrationTest {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     }
 
+    @BeforeEach
+    public void resetCounter() throws Exception {
+        // Use reflection to reset the personIDCounter
+        Field personIdCounterField = Person.class.getDeclaredField("personIDCounter");
+
+        personIdCounterField.setAccessible(true);
+
+        // Reset counter to 0 before each test
+        personIdCounterField.setInt(null, 0);
+    }
+
     @Test
     public void execute_newPerson_success() {
         Person validPerson = new PersonBuilder().build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addPerson(validPerson);
+
+        // Verify personId increments correctly
+        assertEquals(1, validPerson.getPersonId());
 
         assertCommandSuccess(new AddCommand(validPerson), model,
                 String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
