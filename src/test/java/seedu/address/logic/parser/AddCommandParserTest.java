@@ -189,6 +189,10 @@ public class AddCommandParserTest {
         //invalid date of birth format
         assertParseFailure(parser, validExpectedPersonString + INVALID_DOB_FORMAT_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DOB));
+
+        //invalid date of birth value
+        assertParseFailure(parser, validExpectedPersonString + INVALID_DOB_VALUE_DESC,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DOB));
     }
 
     @Test
