@@ -1,9 +1,9 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_DIDDY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_HUGH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DIDDY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_HUGH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_DIDDY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_HUGH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_DIDDY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_HUGH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIAL_GROUP_DIDDY;
