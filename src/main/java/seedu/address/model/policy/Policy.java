@@ -8,7 +8,7 @@ import seedu.address.model.person.Person;
  * An abstract class to capture all type of policies.
  */
 public abstract class Policy {
-    public static final String MESSAGE_DUPLICATES = "Duplicate policies. found.";
+    public static final String MESSAGE_DUPLICATES = "Duplicate policies found.";
     public static final String MESSAGE_CONSTRAINTS = "Policy can only be " + getValidPolicyTypesAsString() + ".";
 
     private Person insuree;
