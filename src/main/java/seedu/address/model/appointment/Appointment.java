@@ -61,6 +61,7 @@ public class Appointment {
         if (other == this) {
             return true;
         }
+
         // instanceof handles nulls
         if (!(other instanceof Appointment)) {
             return false;
