@@ -10,11 +10,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import hallpointer.address.commons.exceptions.IllegalValueException;
-import hallpointer.address.model.member.Address;
 import hallpointer.address.model.member.Email;
 import hallpointer.address.model.member.Member;
 import hallpointer.address.model.member.Name;
 import hallpointer.address.model.member.Phone;
+import hallpointer.address.model.member.Room;
 import hallpointer.address.model.tag.Tag;
 
 /**
@@ -53,7 +53,7 @@ class JsonAdaptedMember {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
-        address = source.getAddress().value;
+        address = source.getRoom().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -95,15 +95,15 @@ class JsonAdaptedMember {
         final Email modelEmail = new Email(email);
 
         if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Room.class.getSimpleName()));
         }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+        if (!Room.isValidRoom(address)) {
+            throw new IllegalValueException(Room.MESSAGE_CONSTRAINTS);
         }
-        final Address modelAddress = new Address(address);
+        final Room modelRoom = new Room(address);
 
         final Set<Tag> modelTags = new HashSet<>(memberTags);
-        return new Member(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Member(modelName, modelPhone, modelEmail, modelRoom, modelTags);
     }
 
 }

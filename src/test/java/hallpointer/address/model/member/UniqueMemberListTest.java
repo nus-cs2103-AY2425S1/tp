@@ -42,7 +42,7 @@ public class UniqueMemberListTest {
     @Test
     public void contains_memberWithSameIdentityFieldsInList_returnsTrue() {
         uniqueMemberList.add(ALICE);
-        Member editedAlice = new MemberBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Member editedAlice = new MemberBuilder(ALICE).withRoom(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(uniqueMemberList.contains(editedAlice));
     }
@@ -85,7 +85,7 @@ public class UniqueMemberListTest {
     @Test
     public void setMember_editedMemberHasSameIdentity_success() {
         uniqueMemberList.add(ALICE);
-        Member editedAlice = new MemberBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Member editedAlice = new MemberBuilder(ALICE).withRoom(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         uniqueMemberList.setMember(ALICE, editedAlice);
         UniqueMemberList expectedUniqueMemberList = new UniqueMemberList();

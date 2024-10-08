@@ -49,7 +49,7 @@ public class EditMemberDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different address -> returns false
-        editedAmy = new EditMemberDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
+        editedAmy = new EditMemberDescriptorBuilder(DESC_AMY).withRoom(VALID_ADDRESS_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false
@@ -63,8 +63,8 @@ public class EditMemberDescriptorTest {
         String expected = EditMemberDescriptor.class.getCanonicalName() + "{name="
                 + editMemberDescriptor.getName().orElse(null) + ", phone="
                 + editMemberDescriptor.getPhone().orElse(null) + ", email="
-                + editMemberDescriptor.getEmail().orElse(null) + ", address="
-                + editMemberDescriptor.getAddress().orElse(null) + ", tags="
+                + editMemberDescriptor.getEmail().orElse(null) + ", room="
+                + editMemberDescriptor.getRoom().orElse(null) + ", tags="
                 + editMemberDescriptor.getTags().orElse(null) + "}";
         assertEquals(expected, editMemberDescriptor.toString());
     }

@@ -17,5 +17,5 @@ Member -up-> "*" Tag
 Member *--> Name
 Member *--> Phone
 Member *--> Email
-Member *--> Address
+Member *--> Room
 @enduml

@@ -21,11 +21,11 @@ import hallpointer.address.commons.util.ToStringBuilder;
 import hallpointer.address.logic.Messages;
 import hallpointer.address.logic.commands.exceptions.CommandException;
 import hallpointer.address.model.Model;
-import hallpointer.address.model.member.Address;
 import hallpointer.address.model.member.Email;
 import hallpointer.address.model.member.Member;
 import hallpointer.address.model.member.Name;
 import hallpointer.address.model.member.Phone;
+import hallpointer.address.model.member.Room;
 import hallpointer.address.model.tag.Tag;
 
 /**
@@ -98,10 +98,10 @@ public class EditCommand extends Command {
         Name updatedName = editMemberDescriptor.getName().orElse(memberToEdit.getName());
         Phone updatedPhone = editMemberDescriptor.getPhone().orElse(memberToEdit.getPhone());
         Email updatedEmail = editMemberDescriptor.getEmail().orElse(memberToEdit.getEmail());
-        Address updatedAddress = editMemberDescriptor.getAddress().orElse(memberToEdit.getAddress());
+        Room updatedRoom = editMemberDescriptor.getRoom().orElse(memberToEdit.getRoom());
         Set<Tag> updatedTags = editMemberDescriptor.getTags().orElse(memberToEdit.getTags());
 
-        return new Member(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Member(updatedName, updatedPhone, updatedEmail, updatedRoom, updatedTags);
     }
 
     @Override
@@ -136,7 +136,7 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
-        private Address address;
+        private Room room;
         private Set<Tag> tags;
 
         public EditMemberDescriptor() {}
@@ -149,7 +149,7 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
-            setAddress(toCopy.address);
+            setRoom(toCopy.room);
             setTags(toCopy.tags);
         }
 
@@ -157,7 +157,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, room, tags);
         }
 
         public void setName(Name name) {
@@ -184,12 +184,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setAddress(Address address) {
-            this.address = address;
+        public void setRoom(Room room) {
+            this.room = room;
         }
 
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
+        public Optional<Room> getRoom() {
+            return Optional.ofNullable(room);
         }
 
         /**
@@ -224,7 +224,7 @@ public class EditCommand extends Command {
             return Objects.equals(name, otherEditMemberDescriptor.name)
                     && Objects.equals(phone, otherEditMemberDescriptor.phone)
                     && Objects.equals(email, otherEditMemberDescriptor.email)
-                    && Objects.equals(address, otherEditMemberDescriptor.address)
+                    && Objects.equals(room, otherEditMemberDescriptor.room)
                     && Objects.equals(tags, otherEditMemberDescriptor.tags);
         }
 
@@ -234,7 +234,7 @@ public class EditCommand extends Command {
                     .add("name", name)
                     .add("phone", phone)
                     .add("email", email)
-                    .add("address", address)
+                    .add("room", room)
                     .add("tags", tags)
                     .toString();
         }
