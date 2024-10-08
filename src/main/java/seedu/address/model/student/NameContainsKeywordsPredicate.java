@@ -1,7 +1,7 @@
 package seedu.address.model.student;
 
-import java.util.function.Predicate;
 import java.util.List;
+import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
