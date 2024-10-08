@@ -23,7 +23,8 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             return new DeleteCommand(index);
         } catch (ParseException pe) {
             try {
-                Name name = ParserUtil.parseName(args);
+                Name name = ParserUtil.parseName(args, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        DeleteCommand.MESSAGE_USAGE));
                 return new DeleteCommand(name);
             } catch (ParseException pe2) {
                 throw new ParseException(

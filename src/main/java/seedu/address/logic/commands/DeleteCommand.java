@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -30,11 +29,21 @@ public class DeleteCommand extends Command {
     private final Index targetIndex;
     private final Name targetName;
 
+    /**
+     * Creates a DeleteCommand to delete the person at the specified {@code Index}.
+     *
+     * @param targetIndex Index of the person to delete.
+     */
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
         this.targetName = null;
     }
 
+    /**
+     * Creates a DeleteCommand to delete the person with the specified {@code Name}.
+     *
+     * @param targetName Name of the person to delete.
+     */
     public DeleteCommand(Name targetName) {
         this.targetIndex = null;
         this.targetName = targetName;
@@ -86,9 +95,10 @@ public class DeleteCommand extends Command {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("targetIndex", targetIndex)
-                .add("targetName", targetName)
-                .toString();
+        if (targetIndex != null) {
+            return getClass().getCanonicalName() + "{targetIndex=" + targetIndex + "}";
+        } else {
+            return getClass().getCanonicalName() + "{targetName=" + targetName + "}";
+        }
     }
 }
