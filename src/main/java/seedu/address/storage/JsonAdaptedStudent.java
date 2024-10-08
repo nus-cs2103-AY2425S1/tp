@@ -14,6 +14,7 @@ import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
+import seedu.address.model.student.PresentDates;
 import seedu.address.model.student.Student;
 import seedu.address.model.tag.Tag;
 
@@ -29,14 +30,15 @@ class JsonAdaptedStudent {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
-
+    private final JsonAdaptedPresentDates presentDates;
     /**
      * Constructs a {@code JsonAdaptedStudent} with the given student details.
      */
     @JsonCreator
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                               @JsonProperty("email") String email, @JsonProperty("address") String address,
-                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                              @JsonProperty("attendance") JsonAdaptedPresentDates presentDates) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -44,6 +46,7 @@ class JsonAdaptedStudent {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.presentDates = presentDates;
     }
 
     /**
@@ -57,6 +60,7 @@ class JsonAdaptedStudent {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        presentDates = new JsonAdaptedPresentDates(source.getPresentDates());
     }
 
     /**
@@ -103,7 +107,16 @@ class JsonAdaptedStudent {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(studentTags);
-        return new Student(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+
+        final PresentDates modelPresentDates;
+
+        if (presentDates != null) {
+            modelPresentDates = presentDates.toModelType();
+        } else {
+            modelPresentDates = new PresentDates(new ArrayList<>());
+        }
+
+        return new Student(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelPresentDates);
     }
 
 }

@@ -2,13 +2,16 @@ package seedu.address.model.student;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tut.TutDate;
 
 /**
  * Represents a Student in the address book.
@@ -25,16 +28,19 @@ public class Student {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
+    private final PresentDates presentDates;
+
     /**
      * Every field must be present and not null.
      */
-    public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags, PresentDates presentDates) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.presentDates = presentDates != null ? presentDates : new PresentDates(new ArrayList<>());
     }
 
     public Name getName() {
@@ -51,6 +57,10 @@ public class Student {
 
     public Address getAddress() {
         return address;
+    }
+
+    public PresentDates getPresentDates() {
+        return presentDates;
     }
 
     /**

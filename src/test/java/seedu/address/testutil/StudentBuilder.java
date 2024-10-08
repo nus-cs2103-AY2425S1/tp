@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -7,6 +8,7 @@ import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
+import seedu.address.model.student.PresentDates;
 import seedu.address.model.student.Student;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -20,12 +22,14 @@ public class StudentBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final PresentDates DEFAULT_PRESENT_DATES = new PresentDates(new ArrayList<>());
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private PresentDates presentDates;
 
     /**
      * Creates a {@code StudentBuilder} with the default details.
@@ -36,6 +40,7 @@ public class StudentBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        presentDates = DEFAULT_PRESENT_DATES;
     }
 
     /**
@@ -47,6 +52,7 @@ public class StudentBuilder {
         email = studentToCopy.getEmail();
         address = studentToCopy.getAddress();
         tags = new HashSet<>(studentToCopy.getTags());
+        presentDates = studentToCopy.getPresentDates();
     }
 
     /**
@@ -58,7 +64,7 @@ public class StudentBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Student} that we are building.
+     * Parses the {@code tags} into a {@code Set<Tag>} and sets it to the {@code Student} that we are building.
      */
     public StudentBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
@@ -89,8 +95,16 @@ public class StudentBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code PresentDates} of the {@code Student} that we are building.
+     */
+    public StudentBuilder withPresentDates(PresentDates presentDates) {
+        this.presentDates = presentDates;
+        return this;
+    }
+
     public Student build() {
-        return new Student(name, phone, email, address, tags);
+        return new Student(name, phone, email, address, tags, presentDates);
     }
 
 }

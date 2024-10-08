@@ -2,7 +2,10 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,7 +16,9 @@ import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
+import seedu.address.model.student.PresentDates;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tut.TutDate;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -120,5 +125,23 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    public static TutDate parseDate(String date) throws ParseException {
+        try {
+            Date d = new SimpleDateFormat("dd/MM/yyyy").parse(date);
+            return new TutDate(d);
+        } catch (java.text.ParseException e) {
+            throw new ParseException(TutDate.MESSAGE_CONSTRAINTS);
+        }
+    }
+
+    public static PresentDates parseDates(Collection<String> presentDates) throws ParseException {
+        requireNonNull(presentDates);
+        final ArrayList<TutDate> dates = new ArrayList<>();
+        for (String date : presentDates) {
+            dates.add(parseDate(date));
+        }
+        return new PresentDates(dates);
     }
 }
