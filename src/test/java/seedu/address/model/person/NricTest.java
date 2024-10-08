@@ -27,9 +27,11 @@ public class NricTest {
         // invalid nric
         assertFalse(Nric.isValidNric("")); // empty string
         assertFalse(Nric.isValidNric(" ")); // spaces only
+        assertFalse(Nric.isValidNric("232323")); // just numbers
         assertFalse(Nric.isValidNric("S64065D")); // only 5 digits
         assertFalse(Nric.isValidNric("S6406542Z")); // wrong checksum
         assertFalse(Nric.isValidNric("P6406542D")); // starting with P
+        assertFalse(Nric.isValidNric("S6406542232Z")); // too long
 
         // valid nric
         assertTrue(Nric.isValidNric("s6406542d")); // lowercase alphabets
@@ -45,6 +47,9 @@ public class NricTest {
 
         // same values -> returns true
         assertTrue(nric.equals(new Nric("S6406542D")));
+
+        // same values with different case -> returns true
+        assertTrue(nric.equals(new Nric("s6406542d")));
 
         // same object -> returns true
         assertTrue(nric.equals(nric));
