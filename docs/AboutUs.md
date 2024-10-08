@@ -28,6 +28,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/stephaneleong)]
 [[portfolio](team/stephaneleong.md)]
 
+* Role: Developer
+* Responsibilities: Storage
 
 ### Chua Zhao Lin (Jasper)
 
