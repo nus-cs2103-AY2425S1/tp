@@ -113,8 +113,6 @@ public class TypicalStudents {
             .withPresentDates(SAMPLE_PRESENT_DATES)
             .build();
 
-    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
-
     private TypicalStudents() {} // prevents instantiation
 
     /**
