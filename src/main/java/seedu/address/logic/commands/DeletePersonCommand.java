@@ -33,7 +33,7 @@ public class DeletePersonCommand extends DeleteCommand {
     }
 
     @Override
-    protected void deleteEntity(Model model, Object entity) throws CommandException {        
+    protected void deleteEntity(Model model, Object entity) throws CommandException {
         requireNonNull(entity);
 
         assert entity instanceof Person;

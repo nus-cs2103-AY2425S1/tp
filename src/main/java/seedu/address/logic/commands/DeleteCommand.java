@@ -21,6 +21,9 @@ public abstract class DeleteCommand extends Command {
 
     protected final Index targetIndex;
 
+    /**
+     * @param targetIndex Index of entity to be deleted.
+     */
     public DeleteCommand(Index targetIndex) {
         requireNonNull(targetIndex);
         this.targetIndex = targetIndex;

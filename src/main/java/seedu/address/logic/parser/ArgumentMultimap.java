@@ -43,7 +43,7 @@ public class ArgumentMultimap {
         return values.isEmpty() ? Optional.empty() : Optional.of(values.get(values.size() - 1));
     }
 
-     /**
+    /**
      * Returns the last value of {@code prefix}.
      */
     public String getEntityType() {
