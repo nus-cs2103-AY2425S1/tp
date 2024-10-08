@@ -1,6 +1,8 @@
 package seedu.address.model.rentalinformation;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -57,5 +59,17 @@ public class RentDueDateTest {
 
         // different values -> returns false
         assertFalse(rentDueDate.equals(new RentDueDate("1")));
+    }
+
+    @Test
+    public void isSameToString() {
+        RentDueDate rentDueDate = new RentDueDate("15");
+
+        // Same rent due date
+        assertEquals(rentDueDate.toString(), new RentDueDate("15").toString());
+
+        // Different rent due date
+        assertNotEquals(rentDueDate.toString(), new RentDueDate("10").toString());
+        assertNotEquals(rentDueDate.toString(), new RentDueDate("30").toString());
     }
 }

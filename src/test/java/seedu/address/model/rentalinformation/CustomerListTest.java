@@ -1,6 +1,8 @@
 package seedu.address.model.rentalinformation;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -56,5 +58,17 @@ public class CustomerListTest {
 
         // different values -> returns false
         assertFalse(customerList.equals(new CustomerList("David")));
+    }
+
+    @Test
+    public void isSameToString() {
+        CustomerList customerList = new CustomerList("David;Steven");
+
+        // Same customer list
+        assertEquals(customerList.toString(), new CustomerList("David;Steven").toString());
+
+        // Different customer list
+        assertNotEquals(customerList.toString(), new CustomerList("David").toString());
+        assertNotEquals(customerList.toString(), new CustomerList("Steven;David").toString());
     }
 }
