@@ -286,7 +286,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | Doctor  | see which patients have upcoming appointments today                   | I can prepare in advance                                                              |
 | `* * *`  | Doctor  | view the history of treatments for a patient                          | monitor their improvement                                                             |
 | `* * `   | Doctor  | filter patients by condition or treatment type                        | search patients of a particular condition or treatment for more follow-up actions     |
-| `* * `   | Doctor  | track my own schedule for the week                                    | I can plan my workload                                                                || `* * *`  | Doctor | view the history of treatments for a patient           | monitor their improvement                                                 |
+| `* * `   | Doctor  | track my own schedule for the week                                    | I can plan my workload                                                                |
 | `* * `   | Doctor  | automatically schedule follow-up appointments for recurring patients  | I don’t have to manually book each appointment                                        |
 | `* * `   | Doctor  | set reminders for follow-up appointments                              | I don’t miss any important sessions                                                   | |
 | `* * `   | Doctor  | assign different exercises or treatments to a patient                 | their care plan is personalized                                                       |
