@@ -33,7 +33,7 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Id id, Name name, Ward ward, Diagnosis diagnosis, Medication medication){
-        this.id = id
+        this.id = id;
         this.name = name;
         this.ward = ward;
         this.diagnosis = diagnosis;
