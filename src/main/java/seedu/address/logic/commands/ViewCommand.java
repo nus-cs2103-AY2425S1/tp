@@ -25,6 +25,11 @@ public class ViewCommand extends Command {
 
     private final Index index;
 
+    /**
+     * Constructs a {@code ViewCommand} to view details of the client at the specified index.
+     *
+     * @param index of the person to view details
+     */
     public ViewCommand(Index index) {
         this.index = index;
     }
@@ -43,5 +48,22 @@ public class ViewCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, clientToView.getName(),
                 clientToView.getPhone(), clientToView.getEmail(), clientToView.getAddress()),
                 false, false, true, clientToView);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof ViewCommand)) {
+            return false;
+        }
+        ViewCommand otherCommand = (ViewCommand) other;
+        return index.equals(otherCommand.index);
+    }
+
+    @Override
+    public int hashCode() {
+        return index.hashCode();
     }
 }

@@ -24,6 +24,7 @@ public class CommandResult {
     /** Information about user should be shown. */
     private final boolean showView;
 
+    /** The client to be viewed, if applicable. */
     private final Person client;
 
     /**
