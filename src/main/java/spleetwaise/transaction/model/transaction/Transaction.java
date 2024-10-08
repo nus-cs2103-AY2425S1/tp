@@ -1,7 +1,5 @@
 package spleetwaise.transaction.model.transaction;
 
-import java.util.UUID;
-
 import spleetwaise.address.commons.util.CollectionUtil;
 import spleetwaise.address.model.person.Person;
 
