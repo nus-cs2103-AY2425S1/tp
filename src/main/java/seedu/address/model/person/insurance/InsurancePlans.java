@@ -3,6 +3,10 @@ package seedu.address.model.person.insurance;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The {@code InsurancePlans} class represents a list of InsurancePlans that a client has purchased.
+ * This class provides methods to add and remove insurance plans.
+ */
 public class InsurancePlans {
 
     private final List<InsurancePlan> insurancePlans;
@@ -30,6 +34,13 @@ public class InsurancePlans {
         insurancePlans.remove(plan);
     }
 
+    /**
+     * Returns a string representation of the insurance plans.
+     * The string will contain the names of all insurance plans in the list.
+     * If no plans exist, it returns "Insurance Plans: None".
+     *
+     * @return A string listing all the insurance plans or "None" if the list is empty.
+     */
     @Override
     public String toString() {
         StringBuilder plans = new StringBuilder("Insurance Plans: ");
