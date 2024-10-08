@@ -3,9 +3,10 @@ package seedu.address.model.contactdate;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
-
+import seedu.address.model.person.CallFrequency;
 
 public class ContactDateTest {
     @Test
@@ -31,6 +32,15 @@ public class ContactDateTest {
 
         // valid contact date
         assertTrue(ContactDate.isValidContactDate("2020-01-01"));
+    }
+
+    @Test
+    public void addCallFrequency_validCallFrequency_success() {
+        ContactDate contactDate = new ContactDate("2020-01-01");
+        CallFrequency callFrequency = new CallFrequency("7");
+        ContactDate newContactDate = contactDate.add(callFrequency);
+        ContactDate targetContactDate = new ContactDate("2020-01-08");
+        assertEquals(newContactDate, targetContactDate);
     }
 
     @Test
