@@ -24,8 +24,6 @@ public class Student extends Person {
     private static final Set<Tag> DUMMY_TAG = new HashSet<>();
 
     // Identity fields
-//    private final Name name;
-//    private final ContactNumber contactNumber;
     private final TutorialGroup tutorialGroup;
     private final StudentNumber studentNumber;
 
@@ -35,19 +33,17 @@ public class Student extends Person {
     public Student(Name name, Phone phone, TutorialGroup tutorialGroup, StudentNumber studentNumber) {
         super(name, phone, DUMMY_EMAIL, DUMMY_ADDRESS, DUMMY_TAG);
         requireAllNonNull(tutorialGroup, studentNumber);
-//        this.name = name;
-//        this.contactNumber = contactNumber;
         this.tutorialGroup = tutorialGroup;
         this.studentNumber = studentNumber;
     }
 
-//    public Name getName() {
-//        return name;
-//    }
-//
-//    public ContactNumber getContactNumber() {
-//        return contactNumber;
-//    }
+    // public Name getName() {
+    //     return name;
+    // }
+    //
+    // public ContactNumber getContactNumber() {
+    //     return contactNumber;
+    // }
 
     public TutorialGroup getTutorialGroup() {
         return tutorialGroup;
