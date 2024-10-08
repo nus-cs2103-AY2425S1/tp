@@ -12,25 +12,25 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes a contact identified using it's displayed index from the address book.
  */
-public class DeleteCommand extends Command {
+public class DeleteContactCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the entity identified by subcommand 'contact', 'company' or 'job' "
-            + "the index number used in the displayed person list.\n"
-            + "Parameters: [contact/job/company] INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " contact  1";
-
-    public static final String MESSAGE_INVALID_SUBCOMMAND = "Invalid delete subcommand. "
-            + "Please specify 'contact' or 'job'. Example: delete contact 1";
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+            + ": Deletes the contact identified by the index number used in the displayed contact list.\n"
+            + "Parameters: contact INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " contact 1";
+    public static final String MESSAGE_DELETE_CONTACT_SUCCESS = "Candidate %1$s - %2$s - %3$s "
+            + "has been successfully deleted.";
+    public static final String MESSAGE_MISSING_INDEX = "Please include an index.";
+    public static final String MESSAGE_INVALID_INDEX = "Invalid index in the contact list. "
+            + "Please enter an appropriate index from the contact list.";
 
     private final Index targetIndex;
 
-    public DeleteCommand(Index targetIndex) {
+    public DeleteContactCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -45,7 +45,7 @@ public class DeleteCommand extends Command {
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+        return new CommandResult(String.format(MESSAGE_DELETE_CONTACT_SUCCESS, Messages.format(personToDelete)));
     }
 
     @Override
@@ -55,12 +55,12 @@ public class DeleteCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteCommand)) {
+        if (!(other instanceof DeleteContactCommand)) {
             return false;
         }
 
-        DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return targetIndex.equals(otherDeleteCommand.targetIndex);
+        DeleteContactCommand otherDeleteContactCommand = (DeleteContactCommand) other;
+        return targetIndex.equals(otherDeleteContactCommand.targetIndex);
     }
 
     @Override
