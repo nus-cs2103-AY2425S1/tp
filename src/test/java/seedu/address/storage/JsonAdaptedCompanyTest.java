@@ -6,9 +6,9 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalCompanies.NUS;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.company.BillingDate;
-import seedu.address.model.company.Company;
 import seedu.address.model.company.CompanyName;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Phone;
