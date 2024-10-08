@@ -14,8 +14,14 @@ public class FilterCommand extends Command {
     public static final String MESSAGE_NOT_IMPLEMENTED_YET =
             "Filter command not implemented yet";
 
+    private final String tag;
+
+    public FilterCommand(String tag) {
+        this.tag = tag;
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        throw new CommandException(MESSAGE_NOT_IMPLEMENTED_YET);
+        throw new CommandException(tag);
     }
 }
