@@ -4,6 +4,11 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.DateUtil.isValidDate;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represents an Appointment in the MediBase.
  * Guarantees: immutable; name is valid as declared in {@link #isValidAppointmentName(String)}; date is valid as
@@ -116,15 +121,19 @@ public class Appointment implements Comparable<Appointment> {
      */
     @Override
     public int compareTo(Appointment other) {
-        return appointmentTimePeriod.compareTo(other.appointmentTimePeriod);
+        return getStartDateTime().compareTo(other.getStartDateTime());
+    }
+
+    private LocalDateTime getStartDateTime() {
+        return LocalDateTime.of(LocalDate.parse(appointmentDate), appointmentTimePeriod.getStartTime());
     }
 
     /**
      * Convenience class for ease of checking and comparing.
      */
-    static class TimePeriod implements Comparable<TimePeriod> {
+     class TimePeriod implements Comparable<TimePeriod> {
 
-        static final String TIME_VALIDATION_REGEX = "^([01]?[0-9]|2[0-3])[0-5][0-9]-([01]?[0-9]|2[0-3]):[0-5][0-9]$";
+        static final String TIME_VALIDATION_REGEX = "([01]?[0-9]|2[0-3])[0-5][0-9]-([01]?[0-9]|2[0-3])[0-5][0-9]";
 
         private String timePeriod;
         private final int startTime;
@@ -134,6 +143,7 @@ public class Appointment implements Comparable<Appointment> {
             assert isValidAppointmentTimePeriodFormat(timePeriod);
             assert isValidAppointmentTimePeriodOrder(timePeriod);
 
+            this.timePeriod = timePeriod;
             startTime = Integer.parseInt(timePeriod.substring(0, 4));
             endTime = Integer.parseInt(timePeriod.substring(5,9));
         }
@@ -201,7 +211,11 @@ public class Appointment implements Comparable<Appointment> {
          */
         @Override
         public int compareTo(TimePeriod other) {
-            return startTime - other.startTime;
+            return getStartTime().compareTo(other.getStartTime());
+        }
+
+        public LocalTime getStartTime() {
+            return LocalTime.parse(timePeriod.substring(0, 4), DateTimeFormatter.ofPattern("HHmm"));
         }
     }
 }
