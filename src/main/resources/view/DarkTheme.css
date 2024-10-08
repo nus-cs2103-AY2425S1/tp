@@ -100,14 +100,17 @@
 }
 
 .list-cell:filled:even {
-    -fx-background-color: #3c3e3f;
+    /* even list cells, 0,2,4... */
+    -fx-background-color: #c5e3f9;
 }
 
 .list-cell:filled:odd {
-    -fx-background-color: #515658;
+    /* odd list cells, 1,3,5... */
+    -fx-background-color: #c5e3f9;
 }
 
 .list-cell:filled:selected {
+    /* controls the cell that is selected by user */
     -fx-background-color: #424d5f;
 }
 
@@ -116,22 +119,25 @@
     -fx-border-width: 1;
 }
 
-.list-cell .label {
+.list-cell:filled:selected .label {
+    /* the label for the cell that is selected by user */
     -fx-text-fill: white;
+}
+
+.list-cell .label {
+    -fx-text-fill: black;
 }
 
 .cell_big_label {
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 16px;
     /*-fx-text-fill: #010504;*/
-    -fx-text-fill: #000000;
 }
 
 .cell_small_label {
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13px;
     /*-fx-text-fill: #010504;*/
-    -fx-text-fill: #000000;
 }
 
 .stack-pane {
@@ -310,7 +316,8 @@
 }
 
 #cardPane {
-    -fx-background-color: #c5e3f9;
+    /* controls the entire cell (HBox) */
+    /*-fx-background-color: #c5e3f9;*/
     -fx-border-color: black;
     -fx-border-width: 1 1 0 1;
 }
