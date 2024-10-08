@@ -32,7 +32,6 @@ public class Appointment implements Comparable<Appointment> {
     private final String appointmentName;
     private final String appointmentDate;
     private final String appointmentTimePeriod;
-    
     private final LocalTime appointmentStartTime;
     private final LocalTime appointmentEndTime;
 
@@ -120,7 +119,7 @@ public class Appointment implements Comparable<Appointment> {
     }
 
     private static Boolean isValidAppointmentTimePeriodOrder(String test) {
-        return Integer.parseInt(test.substring(0, 4)) < Integer.parseInt(test.substring(5,9));
+        return Integer.parseInt(test.substring(0, 4)) < Integer.parseInt(test.substring(5, 9));
     }
 
     @Override
@@ -157,7 +156,7 @@ public class Appointment implements Comparable<Appointment> {
      *
      * @param other the other appointment to be compared.
      * @return <code>0</code> if they start at the same time, <code><0</code> if <code>other</code> starts later,
-     * and <code>>0</code> if <code>other</code> starts earlier.
+     *         and <code>>0</code> if <code>other</code> starts earlier.
      */
     @Override
     public int compareTo(Appointment other) {

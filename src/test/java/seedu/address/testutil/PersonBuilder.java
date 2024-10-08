@@ -77,7 +77,8 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code appointments} into a {@code Set<Appointment>} and set it to the {@code Person} that we are building.
+     * Parses the {@code appointments} into a {@code Set<Appointment>} and set it to the {@code Person} that we are
+     * building.
      */
     public PersonBuilder withAppointments(String ... appointments) {
         this.appointments = SampleDataUtil.getAppointmentSet(appointments);

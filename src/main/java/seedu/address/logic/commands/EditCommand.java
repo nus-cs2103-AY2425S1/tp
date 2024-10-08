@@ -113,7 +113,8 @@ public class EditCommand extends Command {
         Gender updatedGender = editPersonDescriptor.getGender().orElse(personToEdit.getGender());
         Nric updatedNric = editPersonDescriptor.getNric().orElse(personToEdit.getNric());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        Set<Appointment> updatedAppointments = editPersonDescriptor.getAppointments().orElse(personToEdit.getAppointments());
+        Set<Appointment> updatedAppointments = editPersonDescriptor.getAppointments()
+                                                                   .orElse(personToEdit.getAppointments());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedNric, updatedAddress, updatedDateOfBirth,
                 updatedGender, updatedTags, updatedAppointments);
