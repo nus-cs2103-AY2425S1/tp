@@ -63,7 +63,7 @@ public class ParserUtil {
         requireNonNull(date);
         date = date.trim();
         if (!Date.isValidDate(date)) {
-            throw new ParseException(Description.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
         }
         return new Date(date);
     }

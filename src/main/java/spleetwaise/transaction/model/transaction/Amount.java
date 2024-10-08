@@ -21,6 +21,8 @@ public class Amount {
      */
     public static final String VALIDATION_REGEX = "^(\\+|\\-)([\\d]+$|[\\d]+\\.[\\d]{1,2}$)";
 
+    private static final int MAX_DECIMAL_PLACES = 2;
+
     public final BigDecimal amount;
 
     /**
@@ -31,7 +33,7 @@ public class Amount {
     public Amount(String amount) {
         requireNonNull(amount);
         AppUtil.checkArgument(isValidAmount(amount), MESSAGE_CONSTRAINTS);
-        this.amount = new BigDecimal(amount).setScale(2, RoundingMode.HALF_UP);
+        this.amount = new BigDecimal(amount).setScale(MAX_DECIMAL_PLACES, RoundingMode.HALF_UP);
     }
 
     /**

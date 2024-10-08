@@ -26,6 +26,8 @@ import spleetwaise.address.storage.StorageManager;
 import spleetwaise.address.testutil.Assert;
 import spleetwaise.address.testutil.PersonBuilder;
 import spleetwaise.address.testutil.TypicalPersons;
+import spleetwaise.transaction.logic.parser.ParserUtil;
+import spleetwaise.transaction.model.transaction.TransactionIdUtil;
 
 public class LogicManagerTest {
 
@@ -86,11 +88,19 @@ public class LogicManagerTest {
     public void execute_validCommand_success() throws Exception {
         // Test both addressBook and transaction command
         String listCommand = ListCommand.COMMAND_WORD;
-        String addTxnCommand = spleetwaise.transaction.logic.commands.AddCommand.COMMAND_WORD;
+
+        addressBookModel.addPerson(TypicalPersons.ALICE);
+        ParserUtil.setAddressBookModel(addressBookModel);
+
+        String addTxnCommand = "addTxn p/94351253 amt/+12.3 desc/Test";
+        String expectedMessageSuccess = String.format(spleetwaise.transaction.logic.commands.AddCommand.MESSAGE_SUCCESS,
+                "[test-uuid] Alice Pauline(94351253): Test on 08/10/2024 for $+12.30");
+
 
         assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, addressBookModel, transactionModel);
-        assertCommandSuccess(addTxnCommand, spleetwaise.transaction.logic.commands.AddCommand.MESSAGE_SUCCESS,
-            addressBookModel, transactionModel);
+        TransactionIdUtil.setDeterminate(true);
+        assertCommandSuccess(addTxnCommand, expectedMessageSuccess, addressBookModel, transactionModel);
+        TransactionIdUtil.setDeterminate(false);
     }
 
     @Test
