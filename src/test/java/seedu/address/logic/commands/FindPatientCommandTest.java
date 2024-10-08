@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.FindPatientCommand.MESSAGE_NOT_IMPLEMENTED_YET;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Collections;
@@ -44,5 +46,12 @@ public class FindPatientCommandTest {
 
         // different person -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
+    }
+
+    @Test
+    public void execute() {
+        NameContainsKeywordsPredicate firstPredicate =
+                new NameContainsKeywordsPredicate(Collections.singletonList("first"));
+        assertCommandFailure(new FindPatientCommand(firstPredicate), model, MESSAGE_NOT_IMPLEMENTED_YET);
     }
 }

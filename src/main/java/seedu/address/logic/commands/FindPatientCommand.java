@@ -28,7 +28,7 @@ public class FindPatientCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        throw new CommandException(MESSAGE_NOT_IMPLEMENTED_YET + "Keywords: " + predicate);
+        throw new CommandException(MESSAGE_NOT_IMPLEMENTED_YET);
     }
 
     @Override
