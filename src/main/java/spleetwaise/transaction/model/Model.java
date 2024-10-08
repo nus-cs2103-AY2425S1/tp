@@ -27,6 +27,11 @@ public interface Model {
     void addTransaction(Transaction transaction);
 
     /**
+     * Returns true if a transaction with the same details as an existing transaction exist in the transaction book.
+     */
+    boolean hasTransaction(Transaction transaction);
+
+    /**
      * Returns an unmodifiable view of the filtered transaction list.
      */
     ObservableList<Transaction> getFilteredTransactionList();
