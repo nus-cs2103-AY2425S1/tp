@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteContactCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
@@ -32,6 +32,7 @@ import seedu.address.testutil.PersonUtil;
 public class AddressBookParserTest {
 
     private final AddressBookParser parser = new AddressBookParser();
+    private final String CONTACT = "contact";
 
     @Test
     public void parseCommand_add() throws Exception {
@@ -47,10 +48,10 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_delete() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+    public void parseCommand_deleteContact() throws Exception {
+        DeleteContactCommand command = (DeleteContactCommand) parser.parseCommand(
+                DeleteContactCommand.COMMAND_WORD + " " + CONTACT + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DeleteContactCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test
@@ -96,6 +97,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, ()
+                -> parser.parseCommand("unknownCommand"));
     }
 }
