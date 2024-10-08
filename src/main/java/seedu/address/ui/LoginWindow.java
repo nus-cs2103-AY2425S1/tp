@@ -10,9 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import seedu.address.MainApp;
 import seedu.address.authentication.Authentication;
-import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 
 /**
@@ -27,7 +25,7 @@ public class LoginWindow extends UiPart<Stage> {
     private String passWord;
 
     @FXML
-    public Button loginButton;
+    private Button loginButton;
     @FXML
     private PasswordField password;
     @FXML
