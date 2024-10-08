@@ -51,7 +51,7 @@ public class Session {
 
     /**
      * Updates the set of members in the session.
-     * 
+     *
      * @param newMembers New set of members.
      */
     public Session updateMembers(Set<Member> newMembers) {
