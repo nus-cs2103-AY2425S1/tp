@@ -10,8 +10,11 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Age;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -48,6 +51,33 @@ public class ParserUtil {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
+    }
+
+    public static Age parseAge(String age) throws ParseException {
+        requireNonNull(age);
+        String trimmedAge = age.trim();
+        if (!Name.isValidName(trimmedAge)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        return new Age(trimmedAge);
+    }
+
+    public static Gender parseGender(String gender) throws ParseException {
+        requireNonNull(gender);
+        String trimmedGender = gender.trim();
+        if (!Name.isValidName(trimmedGender)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        return new Gender(trimmedGender);
+    }
+
+    public static Nric parseNric(String nric) throws ParseException {
+        requireNonNull(nric);
+        String trimmedNric = nric.trim();
+        if (!Name.isValidName(trimmedNric)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        return new Nric(trimmedNric);
     }
 
     /**
