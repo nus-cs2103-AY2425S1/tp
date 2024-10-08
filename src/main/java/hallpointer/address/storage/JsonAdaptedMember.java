@@ -25,7 +25,7 @@ class JsonAdaptedMember {
 
     private final String name;
     private final String phone;
-    private final String address;
+    private final String room;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -33,11 +33,11 @@ class JsonAdaptedMember {
      */
     @JsonCreator
     public JsonAdaptedMember(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                             @JsonProperty("address") String address,
+                             @JsonProperty("room") String room,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
-        this.address = address;
+        this.room = room;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -49,7 +49,7 @@ class JsonAdaptedMember {
     public JsonAdaptedMember(Member source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
-        address = source.getRoom().value;
+        room = source.getRoom().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -82,13 +82,13 @@ class JsonAdaptedMember {
         }
         final Phone modelPhone = new Phone(phone);
 
-        if (address == null) {
+        if (room == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Room.class.getSimpleName()));
         }
-        if (!Room.isValidRoom(address)) {
+        if (!Room.isValidRoom(room)) {
             throw new IllegalValueException(Room.MESSAGE_CONSTRAINTS);
         }
-        final Room modelRoom = new Room(address);
+        final Room modelRoom = new Room(room);
 
         final Set<Tag> modelTags = new HashSet<>(memberTags);
         return new Member(modelName, modelPhone, modelRoom, modelTags);

@@ -53,6 +53,10 @@ public class NameContainsKeywordsPredicateTest {
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("Bob", "Carol"));
         assertTrue(predicate.test(new MemberBuilder().withName("Alice Carol").build()));
 
+        // Two matching keywords, out of order
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Bob", "Carol", "Alice"));
+        assertTrue(predicate.test(new MemberBuilder().withName("Alice Carol").build()));
+
         // Mixed-case keywords
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("aLIce", "bOB"));
         assertTrue(predicate.test(new MemberBuilder().withName("Alice Bob").build()));
@@ -68,10 +72,10 @@ public class NameContainsKeywordsPredicateTest {
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("Carol"));
         assertFalse(predicate.test(new MemberBuilder().withName("Alice Bob").build()));
 
-        // Keywords match phone and address, but does not match name
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("12345", "Main", "Street"));
+        // Keywords match phone and room, but does not match name
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("12345", "1/2/3"));
         assertFalse(predicate.test(new MemberBuilder().withName("Alice").withPhone("12345")
-                .withRoom("Main Street").build()));
+                .withRoom("1/2/3").build()));
     }
 
     @Test

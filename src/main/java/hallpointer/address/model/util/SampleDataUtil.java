@@ -19,22 +19,22 @@ public class SampleDataUtil {
     public static Member[] getSampleMembers() {
         return new Member[] {
             new Member(new Name("Alex Yeoh"), new Phone("87438807"),
-                new Room("Blk 30 Geylang Street 29, #06-40"),
+                new Room("2/3/1"),
                 getTagSet("friends")),
             new Member(new Name("Bernice Yu"), new Phone("99272758"),
-                new Room("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
+                new Room("8/10/100"),
                 getTagSet("colleagues", "friends")),
             new Member(new Name("Charlotte Oliveiro"), new Phone("93210283"),
-                new Room("Blk 11 Ang Mo Kio Street 74, #11-04"),
+                new Room("9/5/59"),
                 getTagSet("neighbours")),
             new Member(new Name("David Li"), new Phone("91031282"),
-                new Room("Blk 436 Serangoon Gardens Street 26, #16-43"),
+                new Room("3/2/10"),
                 getTagSet("family")),
             new Member(new Name("Irfan Ibrahim"), new Phone("92492021"),
-                new Room("Blk 47 Tampines Street 20, #17-35"),
+                new Room("20/10/294"),
                 getTagSet("classmates")),
             new Member(new Name("Roy Balakrishnan"), new Phone("92624417"),
-                new Room("Blk 45 Aljunied Street 85, #11-31"),
+                new Room("4/5/37"),
                 getTagSet("colleagues"))
         };
     }

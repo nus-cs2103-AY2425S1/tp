@@ -2,11 +2,11 @@
   "members": [ {
     "name": "Alice Pauline",
     "phone": "94351253",
-    "address": "123, Jurong West Ave 6, #08-111",
+    "room": "9/8/7",
     "tags": [ "friends" ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
-    "address": "4th street"
+    "room": "9/8/7"
   } ]
 }

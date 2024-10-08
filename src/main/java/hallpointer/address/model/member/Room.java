@@ -9,29 +9,29 @@ import static java.util.Objects.requireNonNull;
  */
 public class Room {
 
-    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Room should be in the format <block>/<floor>/<room_number>";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final String VALIDATION_REGEX = "^[0-9]+/[0-9]+/[0-9]+$";
 
     public final String value;
 
     /**
      * Constructs an {@code Room}.
      *
-     * @param address A valid address.
+     * @param room A valid room.
      */
-    public Room(String address) {
-        requireNonNull(address);
-        checkArgument(isValidRoom(address), MESSAGE_CONSTRAINTS);
-        value = address;
+    public Room(String room) {
+        requireNonNull(room);
+        checkArgument(isValidRoom(room), MESSAGE_CONSTRAINTS);
+        value = room;
     }
 
     /**
-     * Returns true if a given string is a valid address.
+     * Returns true if a given string is a valid room.
      */
     public static boolean isValidRoom(String test) {
         return test.matches(VALIDATION_REGEX);
