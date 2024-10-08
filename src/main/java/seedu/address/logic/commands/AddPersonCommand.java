@@ -15,11 +15,10 @@ import seedu.address.model.person.Person;
 /**
  * Adds a person to the address book.
  */
-public abstract class AddPersonCommand extends AddCommand {
+public class AddPersonCommand extends AddCommand {
 
-    public static final String ENTITY_STRING = "person";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + "person" 
+            + ": Adds a person to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
