@@ -59,6 +59,6 @@ public class Relationship {
 
     @Override
     public int hashCode() {
-        return this.relationship.hashCode();
+        return relationship.hashCode();
     }
 }
