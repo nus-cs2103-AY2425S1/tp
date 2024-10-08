@@ -315,6 +315,84 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
+#### UC4: View contacts
+
+- Precondition: -
+- Postcondition: Contacts stored (if any) are displayed to the user.
+- Actors: User
+
+#### MSS
+
+1. User chooses to view contacts.
+2. System displays details of the contact.
+
+   Use case ends.
+
+#### Extensions
+
+- 2a. There are no recorded contacts
+  - 2a1. System displays an error message.
+
+    Use case ends.
+
+#### UC5: Add goods to a contact
+
+- Precondition: At least one contact exists.
+- Postcondition: Goods are added to the contact.
+- Actors: User
+
+#### MSS
+
+1. User chooses to add goods to a contact.
+2. User inputs the goods to add to the contact.
+3. System adds goods to the contact.
+
+   Use case ends.
+
+#### UC6: Delete goods from contact
+
+- Precondition: The contact has goods tagged to it.
+- Postcondition: The specified goods is removed from the contact.
+- Actors: User
+
+#### MSS
+
+1. User chooses a contact
+2. User chooses to delete goods from the contact.
+3. System asks for confirmation of deletion.
+4. User confirms.
+5. The specified goods is deleted from the contact.
+
+   Use case ends.
+
+#### UC7: Edit contact
+
+- Precondition: At least one contact exists.
+- Postcondition: Selected contact is edited to the user's specifications.
+- Actors: User
+
+#### MSS
+
+1. User chooses a contact.
+2. User chooses to edit the contact.
+3. System prompts user for their edits.
+4. User submits contact information.
+5. System checks if the contact information is properly formatted.
+6. System checks if the contact already exists in the system.
+7. System updates contact information.
+
+#### Extensions
+
+- 5a. The contact information is not properly formatted.
+  - 2a1. System displays an error message.
+
+    Use case ends.
+
+- 6a. The contact information already exists in the system (i.e. duplicated contact names)
+  - 6a1. System displays an error message.
+
+    Use case ends.
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
