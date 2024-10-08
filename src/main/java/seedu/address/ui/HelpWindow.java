@@ -15,8 +15,21 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String USERGUIDE_URL = "https://ay2425s1-cs2103t-t12-2.github.io/tp/UserGuide.html";
+    public static final String HELP_MESSAGE = """
+            Replace UPPERCASE content with relevant details. Items in Square Brackets are OPTIONAL.
+                1. help: Shows a help message with a link to the User Guide.
+                2. add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]: Adds a contact with any number of tags.
+                3. list: Shows all saved contacts.
+                4. edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]: Edits a contact’s details.
+                5. tag INDEX t/TAG1 [t/TAG2] ... : Adds one or more tags to a contact.
+                6. untag INDEX t/TAG [t/TAG2] ... : Removes one or more tags from a contact.
+                7. find KEYWORD [MORE_KEYWORDS]: Finds contacts with any of the given keywords in their name.
+                8. delete INDEX: Deletes the contact in the specified index.
+                9. clear: Clears all contacts (following a confirmation message).
+                10. exit: Exits the program.
+            \n
+            For more detailed help, refer to the PlanPerfect User Guide:""" + ' ' + USERGUIDE_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
