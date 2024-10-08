@@ -145,15 +145,15 @@ public class MainWindow extends UiPart<Stage> {
         if (width < MIN_WIDTH_FOR_SPLIT) {
             // Hide the rightPane and replace personList with transactionList in leftPane
             mainSplitPane.getItems().remove(rightPane);
-            // if the command is transaction related, and replace personList with transactionList
-            //            if (!leftPane.getChildren().contains(transactionListPanelPlaceholder)) {
-            //                leftPane.getChildren().remove(personListPanelPlaceholder);
-            //                leftPane.getChildren().add(transactionListPanelPlaceholder);
-            //            }
+            // TODO: if the command is transaction related, and replace personList with transactionList
+            // if (!leftPane.getChildren().contains(transactionListPanelPlaceholder)) {
+            //    leftPane.getChildren().remove(personListPanelPlaceholder);
+            //    leftPane.getChildren().add(transactionListPanelPlaceholder);
+            //}
         } else {
             // Show both personList and transactionList in the split pane
             if (!mainSplitPane.getItems().contains(rightPane)) {
-                mainSplitPane.getItems().add(rightPane);  // Add the rightPane if not already in the SplitPane
+                mainSplitPane.getItems().add(rightPane); // Add the rightPane if not already in the SplitPane
             }
             if (!leftPane.getChildren().contains(personListPanelPlaceholder)) {
                 leftPane.getChildren().remove(transactionListPanelPlaceholder);

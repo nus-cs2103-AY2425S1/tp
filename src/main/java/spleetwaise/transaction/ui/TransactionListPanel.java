@@ -1,5 +1,7 @@
 package spleetwaise.transaction.ui;
 
+import java.util.logging.Logger;
+
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -7,8 +9,6 @@ import javafx.scene.layout.Region;
 import spleetwaise.address.commons.core.LogsCenter;
 import spleetwaise.address.ui.UiPart;
 import spleetwaise.transaction.model.transaction.Transaction;
-
-import java.util.logging.Logger;
 
 /**
  * Panel containing the list of transactions.
