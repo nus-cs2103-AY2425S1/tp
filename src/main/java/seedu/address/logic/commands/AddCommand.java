@@ -1,84 +1,50 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
 
 /**
- * Adds a person to the address book.
+ * Adds an entity (person or appointment) to the address book.
  */
-public class AddCommand extends Command {
+public abstract class AddCommand extends Command {
 
-    public static final String COMMAND_WORD = "add person";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
-            + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
-            + PREFIX_PHONE + "98765432 "
-            + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
-
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
-
-    private final Person toAdd;
-
-    /**
-     * Creates an AddCommand to add the specified {@code Person}
-     */
-    public AddCommand(Person person) {
-        requireNonNull(person);
-        toAdd = person;
-    }
+    public static final String COMMAND_WORD = "add";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (alreadyExists(model)) {
+            throw new CommandException(getDuplicateEntityMessage());
         }
 
-        model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        addEntity(model);
+        return new CommandResult(String.format(getSuccessMessage(), formatEntity()));
     }
 
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
+    /*
+     * Checks if the entity being added to model already exists.
+     */
+    protected abstract boolean alreadyExists(Model model);
 
-        // instanceof handles nulls
-        if (!(other instanceof AddCommand)) {
-            return false;
-        }
+    /*
+     * Adds the entity to the model.
+     */
+    protected abstract void addEntity(Model model);
 
-        AddCommand otherAddCommand = (AddCommand) other;
-        return toAdd.equals(otherAddCommand.toAdd);
-    }
+    /*
+     * Returns success message to display upon adding entity.
+     */
+    protected abstract String getSuccessMessage();
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("toAdd", toAdd)
-                .toString();
-    }
+    /*
+     * Returns the message to display when there is a duplicate.
+     */
+    protected abstract String getDuplicateEntityMessage();
+
+    /**
+     * Formats the entity for displaying in the success message.
+     */
+    protected abstract Object formatEntity();
 }
