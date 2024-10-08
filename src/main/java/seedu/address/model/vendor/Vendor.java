@@ -12,7 +12,8 @@ import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Vendor in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Guarantees: details are present and not null, field values are validated,
+ * immutable.
  */
 public class Vendor {
 
@@ -37,6 +38,18 @@ public class Vendor {
         this.tags.addAll(tags);
     }
 
+    /**
+     * Alternate constructor for basic Vendor with name, phone
+     */
+    public Vendor(Name name, Phone phone) {
+        requireAllNonNull(name, phone);
+        this.name = name;
+        this.phone = phone;
+        // TODO: decide if email and address should be included in Vendor
+        this.email = new Email("dummyemail@phony.com");
+        this.address = new Address("Dummy Address");
+    }
+
     public Name getName() {
         return name;
     }
@@ -54,7 +67,8 @@ public class Vendor {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable tag set, which throws
+     * {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
