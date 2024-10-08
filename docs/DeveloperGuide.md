@@ -274,46 +274,92 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* working in the human resource department
+* has a need to manage a significant number of employees
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: manage employee data faster than a typical mouse/GUI driven app
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​    | I want to …​                                                 | So that I can…​                                                                     |
+|----------|------------|--------------------------------------------------------------|-------------------------------------------------------------------------------------|
+| `* * *`  | new user   | see usage instructions                                       | refer to instructions when I forget how to use the HRHelper app.                    |
+| `* * *`  | new user   | create an account using company email                        | my data remains secure and verified.                                                |
+| `* * *`  | HR manager | add new employee profiles                                    | keep the data current.                                                              |
+| `* * *`  | HR manager | delete an employee                                           | remove entries that I no longer need.                                               |
+| `* * *`  | HR manager | find an employee by name                                     | locate details of employee quickly.                                                 |
+| `* * *`  | HR manager | Automate data entry from existing spreadsheets               | save time on repetitive tasks.                                                      |
+| `* *`    | HR manager | find an employee by department                               | find information regarding the department without having to go through all entries. |
+| `* *`    | HR manager | Set permissions for different team members                   | ensure sensitive data is only accessible to authorised users.                       |
+| `* *`    | HR manager | Export employee data in multiple formats                     | easily share it with stakeholders.                                                  |
+| `* *`    | HR manager | Create and manage employee onboarding checklists             | ensure all necessary steps are completed for new hires.                             |
+| `*`      | HR manager | Categorise employees by teams or projects                    | manage group data more effectively.                                                 |
+| `*`      | HR manager | Link employee profiles to training and certification records | track development and compliance needs.                                             |
+| `*`      | HR manager | Review historical changes made to employee profiles          | track data integrity and compliance.                                                |
+| `*`      | HR manager | Integrate the app with our existing HR tools                 | streamline processes and reduce data entry errors.                                  |
+| `*`      | HR manager | Archive profiles of former employees                         | maintain an organized database without clutter.                                     |
+| `*`      | HR manager | Access the app on mobile devices                             | manage employee data on the go.                                                     |
+| `*`      | HR manager | Set reminders for performance review cycles                  | ensure timely evaluations.                                                          |
+| `*`      | HR manager | Access help resources directly within the app                | troubleshoot issues without external assistance.                                    |
+| `*`      | HR manager | Track employee attendance and leave requests                 | manage staffing levels effectively.                                                 |
+| `*`      | HR manager | Create custom fields for employee data                       | capture information specific to my company's needs.                                 |                                 
+| `*`      | HR manager | Search employee data with custom fields                      | quickly find relevant groups of employees.                                          |
+| `*`      | HR manager | Link employee records to health and safety training          | compliance requirements are easily met.                                             |
+| `*`      | HR manager | Set up automated reminders for employee training renewals    | ensure everyone stays compliant.                                                    |
+| `*`      | HR manager | Integrate employee feedback forms                            | gather insights and improve workplace culture.                                      |
+| `*`      | HR manager | Manage document uploads                                      | have all relevant files in one place.                                               |
+| `*`      | HR manager | Receive alerts for data discrepancies or errors              | maintain data accuracy and integrity.                                               |
+| `*`      | HR manager | Track promotions and role changes                            | keep employee profiles up to date.                                                  |
+| `*`      | HR manager | Customize my dashboard                                       | prioritize my tasks effectively.                                                    |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `HRHelper` and the **Actor** is the `HR staff`, unless specified otherwise)
+
+**Use case: Add a person**
+
+**MSS**
+
+1. User requests to add a specific person in the list
+2. HRHelper adds the person
+    Use case ends.
+
+**Extensions**
+
+* 1a. The user does not have the authority to add the person.
+
+  Use case ends.
+
+* 2a. HRHelper reconfirms the decision with the user.
+
+  Use case ends.
+
 
 **Use case: Delete a person**
 
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  HRHelper shows a list of staff members
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  HRHelper deletes the person
 
     Use case ends.
 
 **Extensions**
+
+* 1a. The user does not have the authority to delete the person.
+
+  Use case ends.
 
 * 2a. The list is empty.
 
@@ -325,15 +371,46 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-*{More to be added}*
+* 4a. HRHelper reconfirms the decision with the user.
+
+  Use case ends.
+
+**Use case: Search a person**
+
+**MSS**
+
+1.  User requests to list persons
+2.  HRHelper shows a list of staff members
+3.  User requests to search for a specific person in the list (by name/contact/other information etc.)
+4.  HRHelper shows the person/people matching the description
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 2a. The given description is invalid.
+
+    * 2a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+* 3a. HRHelper gives user the option to view the given person
+
+  Use case ends.
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  The system should be able to return search within 5 seconds
+5.  Users' data should be easily found with a quick search
+6.  Only authorized HR personnel should have access to the data
 
-*{More to be added}*
 
 ### Glossary
 
