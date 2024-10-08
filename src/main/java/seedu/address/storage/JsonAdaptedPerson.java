@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -28,6 +29,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final String appointment; // Appointment stored as String in the correct format
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -35,12 +37,14 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("email") String email, @JsonProperty("address") String address, 
+            @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("appointment") String appointment) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.appointment = appointment; // Store appointment string in "dd-MM-yyyy HH:MM" format
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -54,6 +58,9 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        appointment = (source.getAppointment() != null) 
+            ? source.getAppointment().toString() // Use Appointment's toString() which returns the formatted date
+            : null;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -102,8 +109,18 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        // Restore appointment from string (if present) using the Appointment constructor
+        Appointment modelAppointment = null;
+        if (appointment != null) {
+            try {
+                modelAppointment = new Appointment(appointment); // Pass the appointment string directly
+            } catch (IllegalArgumentException e) {
+                throw new IllegalValueException("Invalid appointment date-time format!");
+            }
+        }
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelAppointment);
     }
 
 }
