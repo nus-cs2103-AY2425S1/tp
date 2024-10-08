@@ -17,6 +17,7 @@ import spleetwaise.address.logic.parser.exceptions.ParseException;
 import spleetwaise.address.model.ReadOnlyAddressBook;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.storage.Storage;
+import spleetwaise.transaction.logic.parser.ParserUtil;
 import spleetwaise.transaction.logic.parser.TransactionParser;
 
 /**
@@ -47,6 +48,7 @@ public class LogicManager implements Logic {
         this.storage = storage;
         addressBookParser = new AddressBookParser();
         transactionParser = new TransactionParser();
+        ParserUtil.setAddressBookModel(addressBookModel);
     }
 
     @Override
