@@ -39,9 +39,24 @@ public class Person {
         this.diagnosis = diagnosis;
         this.medication = medication;
     }
+    public Id getId() {
+        return id;
+    }
 
     public Name getName() {
         return name;
+    }
+
+    public Ward getWard() {
+        return ward;
+    }
+
+    public Diagnosis getDiagnosis() {
+        return diagnosis;
+    }
+
+    public Medication getMedication() {
+        return medication;
     }
 
     public Phone getPhone() {
@@ -76,11 +91,11 @@ public class Person {
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
     }
+/**
+ * Returns true if both persons have the same identity and data fields.
+ * This defines a stronger notion of equality between two persons.
+ */
 
-    /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
-     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -93,27 +108,27 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+        return id.equals(otherPerson.id)
+                && name.equals(otherPerson.name)
+                && ward.equals(otherPerson.ward)
+                && diagnosis.equals(otherPerson.diagnosis)
+                && medication.equals(otherPerson.medication);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(id ,name, ward, diagnosis, medication);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .add("id", id)
                 .add("name", name)
-                .add("phone", phone)
-                .add("email", email)
-                .add("address", address)
-                .add("tags", tags)
+                .add("ward", ward)
+                .add("diagnosis", diagnosis)
+                .add("medication", medication)
                 .toString();
     }
 
