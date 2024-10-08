@@ -1,8 +1,39 @@
 package spleetwaise.transaction.model;
 
+import java.util.function.Predicate;
+
+import javafx.collections.ObservableList;
+import spleetwaise.transaction.model.transaction.Transaction;
+
 /**
- * The API of the transaction component
+ * The API of the transaction component.
  */
 public interface Model {
 
+    /**
+     * Replaces address book data with the data in {@code replacementBook}.
+     */
+    void setTransactionBook(ReadOnlyTransactionBook replacementBook);
+
+    /**
+     * Returns the transaction book.
+     */
+    ReadOnlyTransactionBook getTransactionBook();
+
+    /**
+     * Adds the given transaction.
+     * {@code transaction} must not already exist in the address book.
+     */
+    void addTransaction(Transaction transaction);
+
+    /**
+     * Returns an unmodifiable view of the filtered transaction list.
+     */
+    ObservableList<Transaction> getFilteredTransactionList();
+
+    /**
+     * Updates the filter of the filtered transaction list to filter by the given {@code predicate}.
+     * Set to null to clear existing filters.
+     */
+    void updateFilteredTransactionList(Predicate<Transaction> predicate);
 }
