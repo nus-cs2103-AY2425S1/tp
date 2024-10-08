@@ -2,6 +2,8 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -77,6 +79,21 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    /**
+     * Returns true if the person has an upcoming appointment after the given datetime.
+     *
+     * @param now The current datetime to compare against.
+     * @return true if the person has an upcoming appointment, false otherwise.
+     */
+    public boolean hasUpcomingAppointment(LocalDateTime now) {
+        if (schedule == null || schedule.dateTime.isEmpty()) {
+            return false;
+        }
+        LocalDateTime appointmentDateTime = LocalDateTime.parse(schedule.dateTime,
+                DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+        return appointmentDateTime.isAfter(now);
     }
 
     /**

@@ -16,6 +16,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.PersonBuilder;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class PersonTest {
 
     @Test
@@ -88,6 +91,24 @@ public class PersonTest {
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
+    }
+
+    @Test
+    public void hasUpcomingAppointment() {
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+
+        // Person with future appointment
+        Person personWithFutureAppointment = new PersonBuilder().withSchedule(now.plusDays(1).format(formatter)).build();
+        assertTrue(personWithFutureAppointment.hasUpcomingAppointment(now));
+
+        // Person with past appointment
+        Person personWithPastAppointment = new PersonBuilder().withSchedule(now.minusDays(1).format(formatter)).build();
+        assertFalse(personWithPastAppointment.hasUpcomingAppointment(now));
+
+        // Person with no appointment
+        Person personWithNoAppointment = new PersonBuilder().withSchedule("").build();
+        assertFalse(personWithNoAppointment.hasUpcomingAppointment(now));
     }
 
     @Test
