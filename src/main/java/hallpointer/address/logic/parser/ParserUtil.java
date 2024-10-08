@@ -9,10 +9,10 @@ import java.util.Set;
 import hallpointer.address.commons.core.index.Index;
 import hallpointer.address.commons.util.StringUtil;
 import hallpointer.address.logic.parser.exceptions.ParseException;
-import hallpointer.address.model.member.Address;
 import hallpointer.address.model.member.Email;
 import hallpointer.address.model.member.Name;
 import hallpointer.address.model.member.Phone;
+import hallpointer.address.model.member.Room;
 import hallpointer.address.model.tag.Tag;
 
 /**
@@ -66,18 +66,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
+     * Parses a {@code String room} into an {@code Room}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code address} is invalid.
+     * @throws ParseException if the given {@code room} is invalid.
      */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+    public static Room parseRoom(String room) throws ParseException {
+        requireNonNull(room);
+        String trimmedAddress = room.trim();
+        if (!Room.isValidRoom(trimmedAddress)) {
+            throw new ParseException(Room.MESSAGE_CONSTRAINTS);
         }
-        return new Address(trimmedAddress);
+        return new Room(trimmedAddress);
     }
 
     /**

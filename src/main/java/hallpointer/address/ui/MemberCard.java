@@ -35,7 +35,7 @@ public class MemberCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
-    private Label address;
+    private Label room;
     @FXML
     private Label email;
     @FXML
@@ -50,7 +50,7 @@ public class MemberCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(member.getName().fullName);
         phone.setText(member.getPhone().value);
-        address.setText(member.getAddress().value);
+        room.setText(member.getRoom().value);
         email.setText(member.getEmail().value);
         member.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

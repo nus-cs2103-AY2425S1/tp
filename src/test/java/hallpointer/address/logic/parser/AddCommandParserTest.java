@@ -37,11 +37,11 @@ import org.junit.jupiter.api.Test;
 
 import hallpointer.address.logic.Messages;
 import hallpointer.address.logic.commands.AddCommand;
-import hallpointer.address.model.member.Address;
 import hallpointer.address.model.member.Email;
 import hallpointer.address.model.member.Member;
 import hallpointer.address.model.member.Name;
 import hallpointer.address.model.member.Phone;
+import hallpointer.address.model.member.Room;
 import hallpointer.address.model.tag.Tag;
 import hallpointer.address.testutil.MemberBuilder;
 
@@ -82,7 +82,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, EMAIL_DESC_AMY + validExpectedMemberString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
 
-        // multiple addresses
+        // multiple rooms
         assertParseFailure(parser, ADDRESS_DESC_AMY + validExpectedMemberString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
 
@@ -106,7 +106,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, INVALID_PHONE_DESC + validExpectedMemberString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
-        // invalid address
+        // invalid room
         assertParseFailure(parser, INVALID_ADDRESS_DESC + validExpectedMemberString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
 
@@ -124,7 +124,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, validExpectedMemberString + INVALID_PHONE_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
-        // invalid address
+        // invalid room
         assertParseFailure(parser, validExpectedMemberString + INVALID_ADDRESS_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
     }
@@ -153,7 +153,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB,
                 expectedMessage);
 
-        // missing address prefix
+        // missing room prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB,
                 expectedMessage);
 
@@ -176,9 +176,9 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
 
-        // invalid address
+        // invalid room
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Address.MESSAGE_CONSTRAINTS);
+                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Room.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
