@@ -18,6 +18,7 @@ import spleetwaise.address.model.ReadOnlyAddressBook;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.storage.Storage;
 import spleetwaise.transaction.logic.parser.TransactionParser;
+import spleetwaise.transaction.model.transaction.Transaction;
 
 /**
  * The main LogicManager of the app.
@@ -115,5 +116,10 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         addressBookModel.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public ObservableList<Transaction> getFilteredTransactionList() {
+        return transactionModel.getFilteredTransactionList();
     }
 }
