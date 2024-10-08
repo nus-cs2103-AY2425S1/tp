@@ -11,11 +11,10 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Client in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
-
+public class Client {
     // Identity fields
     private final Name name;
     private final Phone phone;
@@ -28,7 +27,7 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Client(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -65,13 +64,13 @@ public class Person {
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
-    public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
+    public boolean isSamePerson(Client otherClient) {
+        if (otherClient == this) {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        return otherClient != null
+                && otherClient.getName().equals(getName());
     }
 
     /**
@@ -85,16 +84,16 @@ public class Person {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Client)) {
             return false;
         }
 
-        Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+        Client otherClient = (Client) other;
+        return name.equals(otherClient.name)
+                && phone.equals(otherClient.phone)
+                && email.equals(otherClient.email)
+                && address.equals(otherClient.address)
+                && tags.equals(otherClient.tags);
     }
 
     @Override
