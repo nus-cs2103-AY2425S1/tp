@@ -1,7 +1,6 @@
 package seedu.address.commons.util;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.util.DateUtil.isAfterToday;
 import static seedu.address.commons.util.DateUtil.isValidDate;
@@ -31,18 +30,23 @@ public class DateUtilTest {
     @Test
     public void isAfterToday_dateAfterToday_returnsTrue() {
         String futureDate = LocalDate.now().plusDays(2).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        assertTrue(isAfterToday(futureDate)); // far future date
+        assertTrue(isAfterToday(futureDate)); // future date
     }
 
     @Test
     public void isAfterToday_dateBeforeToday_returnsFalse() {
         String today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         assertFalse(isAfterToday("2000-01-01")); // past date
-        assertFalse(isAfterToday(today)); // today's date or past date
+        assertFalse(isAfterToday(today)); // today's date
     }
 
     @Test
-    public void isAfterToday_invalidDate_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> isAfterToday("invalid-date"));
+    public void isafterToday_invalidDate_returnsFalse() {
+        assertFalse(isAfterToday("")); // empty string
+        assertFalse(isAfterToday(" ")); // spaces only
+        assertFalse(isAfterToday("example")); // non-numeric
+        assertFalse(isAfterToday("2022-13-01")); // invalid month
+        assertFalse(isAfterToday("2022-12-32")); // invalid day
+        assertFalse(isAfterToday("2022/12/12")); // invalid format
     }
 }
