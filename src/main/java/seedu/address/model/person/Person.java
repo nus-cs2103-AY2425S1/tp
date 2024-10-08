@@ -2,10 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
@@ -51,6 +48,13 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    /**
+     * Returns a comparator that compares persons by name in lexicographic order.
+     */
+    public static Comparator<Person> getNameComparator() {
+        return Comparator.comparing(person -> person.getName().fullName.toLowerCase());
     }
 
     /**
