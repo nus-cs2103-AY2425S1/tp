@@ -16,6 +16,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
+import java.util.Optional;
 import java.util.Set;
 
 public class AddGradeCommand extends Command {
@@ -39,8 +40,8 @@ public class AddGradeCommand extends Command {
                     + "Ex09 "
                     + PREFIX_SCORE
                     + "9 ";
+
     private final AddGradeCommandFormat addGradeCommandFormat;
-    private Person person;
 
     public AddGradeCommand(AddGradeCommandFormat addGradeCommandFormat) {
         this.addGradeCommandFormat = addGradeCommandFormat;
@@ -49,28 +50,38 @@ public class AddGradeCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        // to add error handling
 
-        person =
-                model.getAddressBook().getPersonList().stream()
-                        .filter(person -> person.getName().equals(addGradeCommandFormat.getName()))
-                        .toList()
-                        .get(0);
-        model.setPerson(person, createGradeToAddToPerson());
-        System.out.println(model.getAddressBook().getPersonList().toString());
-        return new CommandResult(""); // placeholder string to be added
+        // Find the person based on the provided name
+        Optional<Person> personOptional = model.getAddressBook().getPersonList().stream()
+                .filter(p -> p.getName().equals(addGradeCommandFormat.getName()))
+                .findFirst();
+
+        if (personOptional.isEmpty()) {
+            throw new CommandException("Person not found");
+        }
+
+        Person person = personOptional.get();
+
+        // Create a new Person object with the updated assignment
+        Person updatedPerson = createGradeToAddToPerson(person);
+
+        // Update the model with the new Person
+        model.setPerson(person, updatedPerson);
+
+        return new CommandResult("Grade added successfully for " + addGradeCommandFormat.getName());
     }
 
-    private Person createGradeToAddToPerson() {
-        assert person != null;
+    private Person createGradeToAddToPerson(Person person) {
         Name name = person.getName();
         Phone phone = person.getPhone();
         Email email = person.getEmail();
         Address address = person.getAddress();
         Set<Tag> tags = person.getTags();
-        Assignment assignment =
-                new Assignment(addGradeCommandFormat.assignment, addGradeCommandFormat.score);
 
+        // Create new assignment with the given score
+        Assignment assignment = new Assignment(addGradeCommandFormat.assignment, addGradeCommandFormat.score);
+
+        // Return a new Person object with the same details but with the updated assignment
         return new Person(name, phone, email, address, tags, assignment);
     }
 

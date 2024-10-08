@@ -21,6 +21,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -100,8 +101,10 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Assignment updatedAssignment = editPersonDescriptor.getAssignment()
+                .orElse(personToEdit.getAssignment()); // Fallback to existing assignment if not updated
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedAssignment);
     }
 
     @Override
@@ -137,6 +140,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
+        private Assignment assignment;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -151,6 +155,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setAssignment(toCopy.assignment);
         }
 
         /**
@@ -237,6 +242,12 @@ public class EditCommand extends Command {
                     .add("address", address)
                     .add("tags", tags)
                     .toString();
+        }
+        public void setAssignment(Assignment assignment) {
+            this.assignment = assignment;
+        }
+        public Optional<Assignment> getAssignment() {
+            return Optional.ofNullable(assignment);
         }
     }
 }

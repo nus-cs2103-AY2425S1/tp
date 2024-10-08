@@ -28,13 +28,14 @@ public class Person {
     private Assignment assignment;
 
     /** Every field must be present and not null. */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Assignment assignment, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.assignment = assignment;
     }
 
     public Person(
@@ -53,6 +54,15 @@ public class Person {
         this.assignment = assignment;
     }
 
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+    }
+
     public Name getName() {
         return name;
     }
@@ -67,6 +77,9 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+    public Assignment getAssignment() {
+        return assignment;
     }
 
     /**
