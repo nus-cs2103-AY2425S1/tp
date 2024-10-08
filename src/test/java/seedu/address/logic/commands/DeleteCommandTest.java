@@ -17,6 +17,7 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -103,10 +104,17 @@ public class DeleteCommandTest {
 
     @Test
     public void toStringMethod() {
+        // Test with index
         Index targetIndex = Index.fromOneBased(1);
-        DeleteCommand deleteCommand = new DeleteCommand(targetIndex);
-        String expected = DeleteCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
-        assertEquals(expected, deleteCommand.toString());
+        DeleteCommand deleteCommandWithIndex = new DeleteCommand(targetIndex);
+        String expectedIndexString = DeleteCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
+        assertEquals(expectedIndexString, deleteCommandWithIndex.toString());
+
+        // Test with name
+        Name targetName = new Name("John Doe");
+        DeleteCommand deleteCommandWithName = new DeleteCommand(targetName);
+        String expectedNameString = DeleteCommand.class.getCanonicalName() + "{targetName=" + targetName + "}";
+        assertEquals(expectedNameString, deleteCommandWithName.toString());
     }
 
     /**
