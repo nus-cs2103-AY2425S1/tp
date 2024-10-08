@@ -329,7 +329,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User lists all beneficiary information (as per UC2)
+1.  User lists all beneficiary information <u>(as per UC2)</u>
 2.  User requests to edit a specific beneficiary in the list with the new information
 3.  CareConnect confirms the beneficiary information has been edited.
 
@@ -353,7 +353,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User lists all beneficiary information (as per UC2)
+1.  User lists all beneficiary information <u>(as per UC2)</u>
 2.  User requests to delete a specific beneficiary in the list
 3.  CareConnect deletes the beneficiary
 
