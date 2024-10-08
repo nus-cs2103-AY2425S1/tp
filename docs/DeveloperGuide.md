@@ -57,7 +57,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 
 Each of the four main components (also shown in the diagram above),
 
-* defines its *API* in an `interface` with the same eventName as the Component.
+* defines its *API* in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
@@ -111,7 +111,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command eventName e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -291,9 +291,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | HR department employee                  | Remove event from volunteer            | Keep the events list for the volunteer clean and up to date                          | 
 | `* *`    | HR department employee                  | Edit volunteer information             | Update volunteer details such as availability, hours, etc.                           | 
 | `* *`    | Events director                         | Filter volunteers by availability      | Find available volunteers for a particular event                                     | 
-| `* *`    | Events director, HR department employee | Search/filter event by eventName            | Locate specific events quickly                                                       | 
+| `* *`    | Events director, HR department employee | Search/filter event by name            | Locate specific events quickly                                                       | 
 | `* *`    | Events director                         | View volunteers for a particular event | Find out how many volunteers have signed up for the event                            | 
-| `* *`    | Events director, HR department employee | Search volunteers by eventName              | Find a specific volunteer by their eventName                                              | 
+| `* *`    | Events director, HR department employee | Search volunteers by name              | Find a specific volunteer by their name                                              | 
 | `* *`    | HR department employee                  | Track volunteer hours                  | Monitor and log the hours each volunteer has worked                                  | 
 | `*`      | General user                            | View event details per volunteer       | See which events a volunteer participated in                                         | 
 | `*`      | HR department employee                  | View volunteer participation history   | Track volunteer engagement with past events                                          | 
