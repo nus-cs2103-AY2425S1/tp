@@ -196,7 +196,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseName_withCustomErrorMessage_null_throwsNullPointerException() {
+    public void parseName_nullCustomErrorMessage_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseName(null, CUSTOM_ERROR_MESSAGE));
     }
 }
