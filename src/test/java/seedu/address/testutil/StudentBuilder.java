@@ -1,7 +1,7 @@
 package seedu.address.testutil;
 
-import seedu.address.model.student.ContactNumber;
-import seedu.address.model.student.Name;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Phone;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
 import seedu.address.model.student.TutorialGroup;
@@ -16,7 +16,7 @@ public class StudentBuilder {
     public static final String DEFAULT_STUDENT_NUMBER = "A1234567A";
 
     private Name name;
-    private ContactNumber contactNumber;
+    private Phone phone;
     private TutorialGroup tutorialGroup;
     private StudentNumber studentNumber;
 
@@ -25,7 +25,7 @@ public class StudentBuilder {
      */
     public StudentBuilder() {
         name = new Name(DEFAULT_NAME);
-        contactNumber = new ContactNumber(DEFAULT_CONTACT_NUMBER);
+        phone = new Phone(DEFAULT_CONTACT_NUMBER);
         tutorialGroup = new TutorialGroup(DEFAULT_TUTORIAL_GROUP);
         studentNumber = new StudentNumber(DEFAULT_STUDENT_NUMBER);
     }
@@ -35,7 +35,7 @@ public class StudentBuilder {
      */
     public StudentBuilder(Student studentToCopy) {
         name = studentToCopy.getName();
-        contactNumber = studentToCopy.getContactNumber();
+        phone = studentToCopy.getPhone();
         tutorialGroup = studentToCopy.getTutorialGroup();
         studentNumber = studentToCopy.getStudentNumber();
     }
@@ -49,10 +49,10 @@ public class StudentBuilder {
     }
 
     /**
-     * Sets the {@code ContactNumber} of the {@code StudentTest} that we are building.
+     * Sets the {@code Phone} of the {@code StudentTest} that we are building.
      */
-    public StudentBuilder withContactNumber(String contactNumber) {
-        this.contactNumber = new ContactNumber(contactNumber);
+    public StudentBuilder withPhone(String phone) {
+        this.phone = new Phone(phone);
         return this;
     }
 
@@ -73,6 +73,6 @@ public class StudentBuilder {
     }
 
     public Student build() {
-        return new Student(name, contactNumber, tutorialGroup, studentNumber);
+        return new Student(name, phone, tutorialGroup, studentNumber);
     }
 }

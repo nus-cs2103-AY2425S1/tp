@@ -28,8 +28,8 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_HUGH = "Hugh Jackman";
     public static final String VALID_NAME_DIDDY = "Puff Daddy";
-    public static final String VALID_CONTACT_NUMBER_HUGH = "33333333";
-    public static final String VALID_CONTACT_NUMBER_DIDDY = "44444444";
+    public static final String VALID_PHONE_HUGH = "33333333";
+    public static final String VALID_PHONE_DIDDY = "44444444";
     public static final String VALID_TUTORIAL_GROUP_HUGH = "G03";
     public static final String VALID_TUTORIAL_GROUP_DIDDY = "G04";
     public static final String VALID_STUDENT_NUMBER_HUGH = "A1234567A";

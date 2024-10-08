@@ -3,7 +3,7 @@ package seedu.address.model.student;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTACT_NUMBER_DIDDY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_DIDDY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DIDDY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_DIDDY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIAL_GROUP_DIDDY;
@@ -24,7 +24,7 @@ public class StudentTest {
         assertFalse(HUGH.isSameStudent(null));
 
         // same student number, all other attributes different -> returns true
-        Student editedHugh = new StudentBuilder(HUGH).withContactNumber(VALID_CONTACT_NUMBER_DIDDY)
+        Student editedHugh = new StudentBuilder(HUGH).withPhone(VALID_PHONE_DIDDY)
                 .withTutorialGroup(VALID_TUTORIAL_GROUP_DIDDY).withName(VALID_NAME_DIDDY).build();
         assertTrue(HUGH.isSameStudent(editedHugh));
 
@@ -56,7 +56,7 @@ public class StudentTest {
         assertFalse(HUGH.equals(editedHugh));
 
         // different contact number -> returns false
-        editedHugh = new StudentBuilder(HUGH).withContactNumber(VALID_CONTACT_NUMBER_DIDDY).build();
+        editedHugh = new StudentBuilder(HUGH).withPhone(VALID_PHONE_DIDDY).build();
         assertFalse(HUGH.equals(editedHugh));
 
         // different tutorial group -> returns false
@@ -72,7 +72,7 @@ public class StudentTest {
     public void toStringMethod() {
         String expected = Student.class.getCanonicalName()
                 + "{name=" + HUGH.getName()
-                + ", contactNumber=" + HUGH.getContactNumber()
+                + ", contactNumber=" + HUGH.getPhone()
                 + ", tutorialGroup=" + HUGH.getTutorialGroup()
                 + ", studentNumber=" + HUGH.getStudentNumber() + "}";
         assertEquals(expected, HUGH.toString());
