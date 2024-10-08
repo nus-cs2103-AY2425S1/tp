@@ -5,7 +5,6 @@ import seedu.address.logic.commands.AppointmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-
 /**
  * Parses input arguments and creates a new AppointmentCommand object.
  */
