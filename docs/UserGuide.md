@@ -45,7 +45,7 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 
    * `list ph` : Lists all potential hires.
 
-   * `add ph n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `employee n/John Doe p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics ced/01-01-2021` : Adds an employee named `John Doe` to StaffSync.
 
    * `delete ph 1` : Deletes the 1st potential hire shown in the current list.
 
@@ -90,27 +90,43 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 
   >Shows a message explaning how to access the help page.
   >
-  >![help message](images/helpMessage.png)
+  >![Ui](images/Ui.png)
   >
   >Format: `?` or `help`
 </details>
 
 
 <details>
-  <summary>&nbsp&nbsp<h3>Adding a person: <code>add</code></h3></summary>
+  <summary>&nbsp&nbsp<h3>Adding an employee: <code>employee</code></h3></summary>
   
-  >Adds a person to the address book.
+  >Adds an employee to StaffSync.
   >
-  >Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+  >Format: `employee n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE ced/CONTRACT_END_DATE`
   >
   ><box type="tip" seamless>
   >
-  >**Tip:** A person can have any number of tags (including 0)
+  >**Tip:** All fields are mandatory
   ></box>
   >
   >Examples:
-  >* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-  >* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+  >* `employee n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics ced/01-01-2021`
+</details>
+
+
+<details>
+  <summary>&nbsp&nbsp<h3>Adding a potential hire: <code>potential</code></h3></summary>
+  
+  >Adds a potential hire to StaffSync.
+  >
+  >Format: `potential n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE`
+  >
+  ><box type="tip" seamless>
+  >
+  >**Tip:** All fields are mandatory
+  ></box>
+  >
+  >Examples:
+  >* `employee n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics`
 </details>
 
 <details>
@@ -202,13 +218,14 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 Action     | Format                                                            | Examples
 -----------|-------------------------------------------------------------------|--------------------------------------------------------------------------------------------------
 **Help**   | `?` or `help` |
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` | `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear**  | `clear` | 
 **Delete** | `delete e INDEX` <br> `delete ph INDEX` | `delete e 3`<br> `delete ph 1`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` | `edit 2 n/James Lee e/jameslee@example.com`
+**Employee**| `employee n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE ced/CONTRACT_END_DATE​` | `employee n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics ced/01-01-2021`
 **Exit**   | `exit` | 
-**Find**   | `find KEYWORD [MORE_KEYWORDS]` | `find James Jake`
+**Find**   | `find e [KEYWORDS]` <br> `find ph [KEYWORDS]` | `find e Jake` <br> `find ph Jake`
 **List**   | `list` | 
+**Potential Hire**| `potential n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE​` | `potential n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics`
 
 --------------------------------------------------------------------------------------------------------------------
 
