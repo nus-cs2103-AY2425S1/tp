@@ -10,6 +10,9 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonTaggedWithPredicate;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Displays a list of contacts who have been tagged with the specified tag.
+ */
 public class FilterCommand extends Command {
     public static final String COMMAND_WORD = "filter";
 
@@ -26,6 +29,10 @@ public class FilterCommand extends Command {
 
     private final Tag tag;
 
+    /**
+     * Creates a FilterCommand object with the specified tag.
+     * @param tag
+     */
     public FilterCommand(Tag tag) {
         this.tag = tag;
         this.predicatePersonTaggedWithTag = new PersonTaggedWithPredicate(this.tag);
