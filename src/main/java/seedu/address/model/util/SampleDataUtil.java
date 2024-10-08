@@ -6,6 +6,9 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.company.BillingDate;
+import seedu.address.model.company.Company;
+import seedu.address.model.company.CompanyName;
 import seedu.address.model.job.Job;
 import seedu.address.model.job.JobCompany;
 import seedu.address.model.job.JobDescription;
@@ -92,6 +95,25 @@ public class SampleDataUtil {
         )};
     }
 
+    public static Company[] getSampleCompanies() {
+        return new Company[]{new Company(
+                new CompanyName("Google"),
+                new Address("70 Pasir Panjang Rd, #03-71 Mapletree Business City II, Singapore 117371"),
+                new BillingDate("1"),
+                new Phone("65218000")
+        ), new Company(
+                new CompanyName("Meta"),
+                new Address("9 Straits View, Marina One, Singapore 018937"),
+                new BillingDate("2"),
+                new Phone("12345678")
+        ), new Company(
+                new CompanyName("Amazon"),
+                new Address("23 Church St, #10-01, Singapore 049481"),
+                new BillingDate("3"),
+                new Phone("6722 0300")
+        )};
+    }
+
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
@@ -100,6 +122,9 @@ public class SampleDataUtil {
         }
         for (Job sampleJob : getSampleJobs()) {
             sampleAb.addJob(sampleJob);
+        }
+        for (Company sampleCompany : getSampleCompanies()) {
+            sampleAb.addCompany(sampleCompany);
         }
         return sampleAb;
     }

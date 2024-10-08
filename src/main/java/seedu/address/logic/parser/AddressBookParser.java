@@ -17,6 +17,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListCompanyCommand;
 import seedu.address.logic.commands.ListJobCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -72,14 +73,17 @@ public class AddressBookParser {
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
+        case ListJobCommand.COMMAND_WORD:
+            return new ListJobCommand();
+
+        case ListCompanyCommand.COMMAND_WORD:
+            return new ListCompanyCommand();
+
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
-
-        case ListJobCommand.COMMAND_WORD:
-            return new ListJobCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
