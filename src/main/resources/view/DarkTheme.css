@@ -138,8 +138,10 @@
 }
 
 .pane-with-border {
-     -fx-background-color: derive(#1d1d1d, 20%);
-     -fx-border-color: derive(#1d1d1d, 10%);
+     /*-fx-background-color: derive(#1d1d1d, 20%);
+     -fx-border-color: derive(#1d1d1d, 10%);*/
+     -fx-background-color: #FDF5F5;
+     -fx-border-color: #FDF5F5;
      -fx-border-top-width: 1px;
 }
 
@@ -151,7 +153,7 @@
     -fx-background-color: transparent;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
-    -fx-text-fill: white;
+    -fx-text-fill: #5B4A82;
 }
 
 .result-display .label {
@@ -194,13 +196,14 @@
 }
 
 .menu-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    /*-fx-background-color: derive(#1d1d1d, 20%);*/
+    -fx-background-color: #FDF7FE;
 }
 
 .menu-bar .label {
     -fx-font-size: 14pt;
     -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: white;
+    -fx-text-fill: #5B4A82;
     -fx-opacity: 0.9;
 }
 
@@ -357,7 +360,7 @@
 }
 
 #resultDisplay .content {
-    -fx-background-color: transparent, #383838, transparent, #383838;
+    -fx-background-color: transparent, #F2EDF6, transparent, #F2EDF6;
     -fx-background-radius: 0;
 }
 
