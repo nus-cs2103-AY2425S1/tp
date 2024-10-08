@@ -27,10 +27,14 @@ public class Appointment implements Comparable<Appointment> {
                                                                                     + "time of appointment";
     public static final String MESSAGE_CONSTRAINTS = "Appointment names should be alphanumeric";
     public static final String NAME_VALIDATION_REGEX = "\\p{Alnum}[\\p{Alnum} ]*";
+    static final String TIME_VALIDATION_REGEX = "([01]?[0-9]|2[0-3])[0-5][0-9]-([01]?[0-9]|2[0-3])[0-5][0-9]";
 
     public final String appointmentName;
     private final String appointmentDate;
-    private final TimePeriod appointmentTimePeriod;
+    private final String appointmentTimePeriod;
+    
+    private final LocalTime appointmentStartTime;
+    private final LocalTime appointmentEndTime;
 
     /**
      * Constructs an {@code Appointment}.
@@ -48,7 +52,14 @@ public class Appointment implements Comparable<Appointment> {
 
         requireNonNull(appointmentTimePeriod);
         checkIsTimePeriodValid(appointmentTimePeriod);
-        this.appointmentTimePeriod = new TimePeriod(appointmentTimePeriod);
+        this.appointmentTimePeriod = appointmentTimePeriod;
+        this.appointmentStartTime = getTimeFromString(appointmentTimePeriod.substring(0, 4));
+        this.appointmentEndTime = getTimeFromString(appointmentTimePeriod.substring(5, 9));
+
+    }
+
+    private LocalTime getTimeFromString(String time) {
+        return LocalTime.parse(time, DateTimeFormatter.ofPattern("HHmm"));
     }
 
 
@@ -63,7 +74,28 @@ public class Appointment implements Comparable<Appointment> {
         requireNonNull(date);
         requireNonNull(timePeriod);
         checkIsTimePeriodValid(timePeriod);
-        return date.equals(appointmentDate) && appointmentTimePeriod.isIntersecting(new TimePeriod(timePeriod));
+        LocalTime startTime = getTimeFromString(timePeriod.substring(0, 4));
+        LocalTime endTime = getTimeFromString(timePeriod.substring(5, 9));
+
+        if (!date.equals(appointmentDate)) {
+            return false;
+        }
+
+        if (timePeriod.equals(appointmentTimePeriod)) {
+            return true;
+        }
+
+        boolean isTimePeriodStartingDuringAppt = startTime.isAfter(appointmentStartTime)
+                                                 && startTime.isBefore(appointmentEndTime);
+        boolean isTimePeriodEndingDuringAppt = endTime.isAfter(appointmentStartTime)
+                                               && endTime.isBefore(appointmentEndTime);
+        boolean isApptWithinTimePeriod = startTime.isBefore(appointmentStartTime)
+                                         && endTime.isAfter(appointmentEndTime);
+        boolean isOverlapping = startTime.equals(appointmentStartTime) || endTime.equals(appointmentEndTime);
+        return isTimePeriodEndingDuringAppt
+               || isApptWithinTimePeriod
+               || isTimePeriodStartingDuringAppt
+               || isOverlapping;
     }
 
     /**
@@ -77,10 +109,18 @@ public class Appointment implements Comparable<Appointment> {
      *  checks if a given string is a valid appointment time period.
      */
     public static void checkIsTimePeriodValid(String test) {
-        checkArgument(TimePeriod.isValidAppointmentTimePeriodFormat(test),
+        checkArgument(isValidAppointmentTimePeriodFormat(test),
                       MESSAGE_CONSTRAINTS_APPT_TIME_PERIOD_WRONG_FORMAT);
-        checkArgument(TimePeriod.isValidAppointmentTimePeriodOrder(test),
+        checkArgument(isValidAppointmentTimePeriodOrder(test),
                       MESSAGE_CONSTRAINTS_APPT_TIME_PERIOD_INVALID_ORDER);
+    }
+
+    private static Boolean isValidAppointmentTimePeriodFormat(String test) {
+        return test.matches(TIME_VALIDATION_REGEX);
+    }
+
+    private static Boolean isValidAppointmentTimePeriodOrder(String test) {
+        return Integer.parseInt(test.substring(0, 4)) < Integer.parseInt(test.substring(5,9));
     }
 
     @Override
@@ -125,97 +165,6 @@ public class Appointment implements Comparable<Appointment> {
     }
 
     private LocalDateTime getStartDateTime() {
-        return LocalDateTime.of(LocalDate.parse(appointmentDate), appointmentTimePeriod.getStartTime());
-    }
-
-    /**
-     * Convenience class for ease of checking and comparing.
-     */
-     class TimePeriod implements Comparable<TimePeriod> {
-
-        static final String TIME_VALIDATION_REGEX = "([01]?[0-9]|2[0-3])[0-5][0-9]-([01]?[0-9]|2[0-3])[0-5][0-9]";
-
-        private String timePeriod;
-        private final int startTime;
-        private final int endTime;
-
-        public TimePeriod(String timePeriod) {
-            assert isValidAppointmentTimePeriodFormat(timePeriod);
-            assert isValidAppointmentTimePeriodOrder(timePeriod);
-
-            this.timePeriod = timePeriod;
-            startTime = Integer.parseInt(timePeriod.substring(0, 4));
-            endTime = Integer.parseInt(timePeriod.substring(5,9));
-        }
-
-        /**
-         * Checks if another TimePeriods intersects. The start and end times are exclusive.
-         *
-         * @param o the other TimePeriod to compare.
-         * @return true if the TimePeriods intersect, else false.
-         */
-        public boolean isIntersecting(TimePeriod o) {
-            return (o.startTime <= startTime) && (startTime < o.endTime) // starts during other TimePeriod; or
-                   || (o.startTime < endTime) && (endTime <= o.endTime); // ends during other TimePeriod.
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (o == this) {
-                return true;
-            }
-
-            // instanceof handles nulls
-            if (!(o instanceof TimePeriod otherTimePeriod)) {
-                return false;
-            }
-
-            // integer equality faster than string equality (2 vs 9 comparisons)
-            return otherTimePeriod.startTime == startTime
-                   && otherTimePeriod.endTime == endTime;
-        }
-
-        @Override
-        public int hashCode() {
-            return timePeriod.hashCode();
-        }
-
-        /**
-         * Format state as text for viewing.
-         */
-        @Override
-        public String toString() {
-            return timePeriod;
-        }
-
-        /**
-         * Returns true if a given string is a valid appointment time period format.
-         */
-        public static boolean isValidAppointmentTimePeriodFormat(String test) {
-            return test.matches(TIME_VALIDATION_REGEX);
-        }
-
-        /**
-         * Returns true if a given string is a valid appointment's starting and ending times are valid.
-         */
-        public static boolean isValidAppointmentTimePeriodOrder(String test) {
-            return Integer.parseInt(test.substring(0, 4)) < Integer.parseInt(test.substring(5,9));
-        }
-
-        /**
-         * Compares the time period's <b>starting time</b>.
-         *
-         * @param other the object to be compared.
-         * @return <code>0</code> if they start at the same time, <code><0</code> if <code>other</code> starts later,
-         * and <code>>0</code> if <code>other</code> starts earlier.
-         */
-        @Override
-        public int compareTo(TimePeriod other) {
-            return getStartTime().compareTo(other.getStartTime());
-        }
-
-        public LocalTime getStartTime() {
-            return LocalTime.parse(timePeriod.substring(0, 4), DateTimeFormatter.ofPattern("HHmm"));
-        }
+        return LocalDateTime.of(LocalDate.parse(appointmentDate), appointmentStartTime);
     }
 }

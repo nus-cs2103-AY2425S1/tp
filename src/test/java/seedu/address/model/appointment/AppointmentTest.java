@@ -6,56 +6,57 @@ import org.junit.jupiter.api.Test;
 
 class AppointmentTest {
 
-    private final String validAppointmentName = "Some bone appointment";
-    private final String validAppointmentDate = "2024-10-25";
-    private final String validAppointmentTime = "1000-1235";
+    private final String validApptName = "Some bone appointment";
+    private final String validApptDate = "2024-10-25";
+    private final String validApptTime = "1000-1235";
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Appointment(null, "", ""));
-        assertThrows(NullPointerException.class, () -> new Appointment("", null, ""));
-        assertThrows(NullPointerException.class, () -> new Appointment("", "", null));
+        assertThrows(NullPointerException.class, () -> new Appointment(null, validApptDate, validApptTime));
+        assertThrows(NullPointerException.class, () -> new Appointment(validApptName, null, validApptTime));
+        assertThrows(NullPointerException.class, () -> new Appointment(validApptName, validApptDate, null));
     }
 
     @Test
-    public void constructor_invalidAppointmentName_throwsIllegalArgumentException() {
-        String invalidAppointmentName = "";
-        assertThrows(IllegalArgumentException.class, () -> new Appointment(invalidAppointmentName,
-                                                                           validAppointmentDate,
-                                                                           validAppointmentTime));
+    public void constructor_invalidApptName_throwsIllegalArgumentException() {
+        String invalidApptName = "";
+        assertThrows(IllegalArgumentException.class, () -> new Appointment(invalidApptName,
+                                                                           validApptDate,
+                                                                           validApptTime));
     }
 
     @Test
-    public void constructor_invalidAppointmentDate_throwsIllegalArgumentException() {
-        String invalidAppointmentDate = "";
-        assertThrows(IllegalArgumentException.class, () -> new Appointment(validAppointmentName,
-                                                                           invalidAppointmentDate,
-                                                                           validAppointmentTime));
-        String invalidAppointmentDate2 = "2024-23-11";
-        assertThrows(IllegalArgumentException.class, () -> new Appointment(validAppointmentName,
-                                                                           invalidAppointmentDate2,
-                                                                           validAppointmentTime));
+    public void constructor_invalidApptDate_throwsIllegalArgumentException() {
+        String invalidApptDate = "";
+        assertThrows(IllegalArgumentException.class, () -> new Appointment(validApptName,
+                                                                           invalidApptDate,
+                                                                           validApptTime));
+        String invalidApptDate2 = "2024-23-11";
+        assertThrows(IllegalArgumentException.class, () -> new Appointment(validApptName,
+                                                                           invalidApptDate2,
+                                                                           validApptTime));
     }
 
     @Test
-    public void constructor_invalidAppointmentTimePeriod_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> new Appointment(validAppointmentName,
-                                                                           validAppointmentDate,
+    public void constructor_invalidApptTimePeriod_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> new Appointment(validApptName,
+                                                                           validApptDate,
                                                                            ""));
-        assertThrows(IllegalArgumentException.class, () -> new Appointment(validAppointmentName,
-                                                                           validAppointmentDate,
+        assertThrows(IllegalArgumentException.class, () -> new Appointment(validApptName,
+                                                                           validApptDate,
                                                                            "5512-1345"));
-        assertThrows(IllegalArgumentException.class, () -> new Appointment(validAppointmentName,
-                                                                           validAppointmentDate,
+        assertThrows(IllegalArgumentException.class, () -> new Appointment(validApptName,
+                                                                           validApptDate,
                                                                            "5512"));
-        assertThrows(IllegalArgumentException.class, () -> new Appointment(validAppointmentName,
-                                                                           validAppointmentDate,
+        assertThrows(IllegalArgumentException.class, () -> new Appointment(validApptName,
+                                                                           validApptDate,
                                                                            "asd1200-1223asd"));
-        assertThrows(IllegalArgumentException.class, () -> new Appointment(validAppointmentName,
-                                                                           validAppointmentDate,
+        assertThrows(IllegalArgumentException.class, () -> new Appointment(validApptName,
+                                                                           validApptDate,
                                                                            "2300-1200"));
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     @Test
     public void isValidAppointmentName() {
         // null appointment name
@@ -96,8 +97,8 @@ class AppointmentTest {
 
     @Test
     public void testToString() {
-        Appointment a = new Appointment(validAppointmentName, validAppointmentDate, validAppointmentTime);
-        String expected = validAppointmentName + '[' + validAppointmentDate + ' ' + validAppointmentTime + ']';
+        Appointment a = new Appointment(validApptName, validApptDate, validApptTime);
+        String expected = validApptName + '[' + validApptDate + ' ' + validApptTime + ']';
         Assertions.assertEquals(expected, a.toString());
     }
 
@@ -139,15 +140,28 @@ class AppointmentTest {
     @Test
     public void testIsClashing() {
         Appointment a = new Appointment("Some bone appointment", "2024-10-25","1000-1235");
-        Assertions.assertFalse(a.isClashing("2024-10-25","0900-1235")); // "same_date_before"
-        Assertions.assertTrue(a.isClashing("2024-10-25","1000-1235")); // "same_date_time"
-        Assertions.assertFalse(a.isClashing("2024-10-25","1100-1235")); // "same_date_after"
-        Assertions.assertFalse(a.isClashing("2024-10-20","0900-1235")); // "early_date_before"
-        Assertions.assertFalse(a.isClashing("2024-10-20","1000-1235")); // "early_date_same"
-        Assertions.assertFalse(a.isClashing("2024-10-20","1100-1235")); // "early_date_after"
-        Assertions.assertFalse(a.isClashing("2024-11-25","0900-1235")); // "later_date_before"
-        Assertions.assertFalse(a.isClashing("2024-11-25","1000-1235")); // "later_date_same"
-        Assertions.assertFalse(a.isClashing("2024-11-25","1100-1235")); // "later_date_after"
+        Assertions.assertFalse(a.isClashing("2024-10-25","0900-0935")); // "same_date_before"
+        Assertions.assertTrue(a.isClashing("2024-10-25","0900-1235")); // "same_date_before"
+        Assertions.assertTrue(a.isClashing("2024-10-25","0845-1300")); // "same_date_time_enclose"
+        Assertions.assertTrue(a.isClashing("2024-10-25","1000-1235")); // "same_date_time_inside"
+        Assertions.assertTrue(a.isClashing("2024-10-25","1045-1200")); // "same_date_time"
+        Assertions.assertTrue(a.isClashing("2024-10-25","1100-1235")); // "same_date_after"
+        Assertions.assertFalse(a.isClashing("2024-10-25","1235-1345")); // "same_date_after"
 
+        Assertions.assertFalse(a.isClashing("2024-09-25","0900-0935")); // "earlier_date_before"
+        Assertions.assertFalse(a.isClashing("2024-09-25","0900-1235")); // "earlier_date_before"
+        Assertions.assertFalse(a.isClashing("2024-09-25","0845-1300")); // "earlier_date_time_enclose"
+        Assertions.assertFalse(a.isClashing("2024-09-25","1000-1235")); // "earlier_date_time_inside"
+        Assertions.assertFalse(a.isClashing("2024-09-25","1045-1200")); // "earlier_date_time"
+        Assertions.assertFalse(a.isClashing("2024-09-25","1100-1235")); // "earlier_date_after"
+        Assertions.assertFalse(a.isClashing("2024-09-25","1235-1345")); // "earlier_date_after"
+
+        Assertions.assertFalse(a.isClashing("2024-11-25","0900-0935")); // "later_date_before"
+        Assertions.assertFalse(a.isClashing("2024-11-25","0900-1235")); // "later_date_before"
+        Assertions.assertFalse(a.isClashing("2024-11-25","0845-1300")); // "later_date_time_enclose"
+        Assertions.assertFalse(a.isClashing("2024-11-25","1000-1235")); // "later_date_time_inside"
+        Assertions.assertFalse(a.isClashing("2024-11-25","1045-1200")); // "later_date_time"
+        Assertions.assertFalse(a.isClashing("2024-11-25","1100-1235")); // "later_date_after"
+        Assertions.assertFalse(a.isClashing("2024-11-25","1235-1345")); // "later_date_after"
     }
 }
