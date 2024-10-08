@@ -54,8 +54,7 @@ public class Tag {
             return false;
         }
     }
-
-    public static final ArrayList<String> VALIDTAGS = new ArrayList<>(Arrays.asList("Student", "Tutor"));
+    
     public static final String MESSAGE_CONSTRAINTS =
             "Your tag should either be a student or tutor.";
     public static final String VALIDATION_REGEX = "^[a-zA-Z]+$";
