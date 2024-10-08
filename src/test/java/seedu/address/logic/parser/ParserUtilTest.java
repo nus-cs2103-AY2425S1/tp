@@ -199,4 +199,23 @@ public class ParserUtilTest {
     public void parseName_nullCustomErrorMessage_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseName(null, CUSTOM_ERROR_MESSAGE));
     }
+
+    @Test
+    public void parseName_invalidValueCustomErrorMessage_throwsParseException() {
+        assertThrows(ParseException.class,
+                CUSTOM_ERROR_MESSAGE, () -> ParserUtil.parseName(INVALID_NAME, CUSTOM_ERROR_MESSAGE));
+    }
+
+    @Test
+    public void parseName_validValueWithoutWhitespaceCustomErrorMessage_returnsName() throws Exception {
+        Name expectedName = new Name(VALID_NAME);
+        assertEquals(expectedName, ParserUtil.parseName(VALID_NAME, CUSTOM_ERROR_MESSAGE));
+    }
+
+    @Test
+    public void parseName_validValueWithWhitespaceCustomErrorMessage_returnsTrimmedName() throws Exception {
+        String nameWithWhitespace = WHITESPACE + VALID_NAME + WHITESPACE;
+        Name expectedName = new Name(VALID_NAME);
+        assertEquals(expectedName, ParserUtil.parseName(nameWithWhitespace, CUSTOM_ERROR_MESSAGE));
+    }
 }
