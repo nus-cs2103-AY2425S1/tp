@@ -35,7 +35,7 @@ public class PersonUtil {
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
         sb.append(PREFIX_COURSE + person.getCourse().course + " ");
-        sb.append(PREFIX_TAG + person.getTag().role + " ");
+        sb.append(PREFIX_TAG + person.getTag().toString() + " ");
         return sb.toString();
     }
 

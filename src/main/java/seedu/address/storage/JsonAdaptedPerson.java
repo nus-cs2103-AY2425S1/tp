@@ -58,7 +58,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         course = source.getCourse().course;
-        tag = source.getTag().role;
+        tag = source.getTag().toString();
     }
 
     /**

@@ -14,13 +14,52 @@ import java.util.Arrays;
  * Guarantees: immutable; is valid as declared in {@link #isValidTag(String)}
  */
 public class Tag {
+
+    /**
+     * Enum representing the valid tag types for a person.
+     * The available tag types are "Student" and "Tutor".
+     *
+     * <p>Each enum constant has a corresponding string representation that can be used
+     * to compare tags, retrieve the role, and validate tag values.</p>
+     */
+    public enum TagType {
+        STUDENT("Student"),
+        TUTOR("Tutor");
+        private final String role;
+        /**
+         * Constructs a {@code TagType} enum constant with the specified role.
+         *
+         * @param role The string representation of the tag type (e.g., "Student" or "Tutor").
+         */
+        TagType(String role) {
+            this.role = role;
+        }
+
+        public String getRole() {
+            return role;
+        }
+
+        /**
+         * Checks if the given string is a valid tag by comparing it to the available tag types.
+         *
+         * @param test The string to be checked against the valid tag types.
+         * @return {@code true} if the string matches any valid tag type, {@code false} otherwise.
+         */
+        public static boolean isValidTag(String test) {
+            for (TagType tag : TagType.values()) {
+                if (tag.role.equalsIgnoreCase(test)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+
     public static final ArrayList<String> VALIDTAGS = new ArrayList<>(Arrays.asList("Student", "Tutor"));
     public static final String MESSAGE_CONSTRAINTS =
             "Your tag should either be a student or tutor.";
     public static final String VALIDATION_REGEX = "^[a-zA-Z]+$";
-    public final String role;
-
-
+    public final TagType role;
 
 
 
@@ -32,19 +71,18 @@ public class Tag {
     public Tag(String tag) {
         requireNonNull(tag);
         checkArgument(isValidTag(tag), MESSAGE_CONSTRAINTS);
-        this.role = tag;
+        this.role = TagType.valueOf(tag.toUpperCase());
     }
 
     /**
      * Returns true if a given string is a valid tag.
      */
     public static boolean isValidTag(String test) {
-
-        return test.matches(VALIDATION_REGEX) && VALIDTAGS.contains(test);
+        return test.matches(VALIDATION_REGEX) && TagType.isValidTag(test);
     }
     @Override
     public String toString() {
-        return role;
+        return role.getRole();
     }
     @Override
     public boolean equals(Object other) {

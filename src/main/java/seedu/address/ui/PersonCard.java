@@ -51,7 +51,7 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         FlowPane singleTagFlowPane = new FlowPane();
-        Label tagLabel = new Label(person.getTag().role);
+        Label tagLabel = new Label(person.getTag().toString());
         singleTagFlowPane.getChildren().add(tagLabel);
         tags.getChildren().add(singleTagFlowPane);
         /*person.getTags().stream()
