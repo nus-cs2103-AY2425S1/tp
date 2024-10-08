@@ -105,6 +105,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    //// tag-level operations
+
     /**
      * Adds a tag to the address book.
      * The tag must not already exist in the address book.
@@ -129,6 +131,12 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         tags.setTag(target, editedTag);
     }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeTag(Tag key) { tags.remove(key); }
 
     //// util methods
 

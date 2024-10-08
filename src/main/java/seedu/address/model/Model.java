@@ -105,4 +105,13 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredTagList(Predicate<Tag> predicate);
+
+    /** Returns an unmodifiable view of the filtered tag list */
+    ObservableList<Tag> getFilteredTagList();
+
+    /**
+     * Deletes the given tag.
+     * The tag must exist in the AddressBook.
+     */
+    void deleteTag(Tag toDelete);
 }
