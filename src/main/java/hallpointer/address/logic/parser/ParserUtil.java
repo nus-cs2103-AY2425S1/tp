@@ -73,11 +73,11 @@ public class ParserUtil {
      */
     public static Room parseRoom(String room) throws ParseException {
         requireNonNull(room);
-        String trimmedAddress = room.trim();
-        if (!Room.isValidRoom(trimmedAddress)) {
+        String trimmedRoom = room.trim();
+        if (!Room.isValidRoom(trimmedRoom)) {
             throw new ParseException(Room.MESSAGE_CONSTRAINTS);
         }
-        return new Room(trimmedAddress);
+        return new Room(trimmedRoom);
     }
 
     /**
