@@ -1,5 +1,6 @@
 package seedu.address.logic;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -45,6 +46,17 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+        return builder.toString();
+    }
+
+    /**
+     * Formats the list of {@code person} for display to the user.
+     */
+    public static String listFormat(List<Person> personList) {
+        final StringBuilder builder = new StringBuilder();
+        for (Person person : personList) {
+            builder.append(format(person)).append("\n");
+        }
         return builder.toString();
     }
 

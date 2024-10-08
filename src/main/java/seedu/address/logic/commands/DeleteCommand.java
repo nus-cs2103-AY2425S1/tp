@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -25,24 +26,30 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
-    private final Index targetIndex;
+    private final List<Index> indexList;
 
-    public DeleteCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
+    public DeleteCommand(List<Index> indexList) {
+        this.indexList = indexList;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> personToDeleteList = new ArrayList<>();
+        
+        //Want to arrange the indexList as descending order
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        for (Index targetIndex : indexList) {
+            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
+
+            Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+            personToDeleteList.add(personToDelete);
+            model.deletePerson(personToDelete);
         }
-
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.listFormat(personToDeleteList)));
     }
 
     @Override
