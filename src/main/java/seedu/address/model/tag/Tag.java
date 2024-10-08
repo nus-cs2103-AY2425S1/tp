@@ -30,6 +30,13 @@ public class Tag {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns true if this tag is considered the same as {@code otherTag}.
+     * Two tags are considered the same if they have the same {@code TagName}.
+     *
+     * @param otherTag The tag to compare with.
+     * @return {@code true} if the tags are the same, {@code false} otherwise.
+     */
     public boolean isSameTag(Tag otherTag) {
         if (otherTag == this) {
             return true;
@@ -39,7 +46,9 @@ public class Tag {
                 && otherTag.getTagName().equals(getTagName());
     }
 
-    public TagName getTagName() { return tagName; }
+    public TagName getTagName() {
+        return tagName;
+    }
 
     @Override
     public boolean equals(Object other) {
@@ -67,5 +76,4 @@ public class Tag {
     public String toString() {
         return '[' + tagName.toString() + ']';
     }
-
 }

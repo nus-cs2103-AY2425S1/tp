@@ -48,7 +48,7 @@ public class TagCommandParser implements Parser<TagCommand> {
 
         // Convert tag values to Tag objects
         List<Tag> tags = tagValues.stream()
-                .map(TagName::new)  // Convert each string to a TagName object
+                .map(TagName::new) // Convert each string to a TagName object
                 .map(Tag::new)
                 .collect(Collectors.toList());
 

@@ -66,7 +66,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Replaces the contents of the tag list with {@code tags}.
      * {@code tags} must not contain duplicate tags.
      */
-    public void setTags(List<Tag> tags) { this.tags.setTags(tags); }
+    public void setTags(List<Tag> tags) {
+        this.tags.setTags(tags);
+    }
 
     //// person-level operations
 
@@ -109,7 +111,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Adds a tag to the address book.
      * The tag must not already exist in the address book.
      */
-    public void addTag(Tag tag) { tags.add(tag); }
+    public void addTag(Tag tag) {
+        tags.add(tag);
+    }
 
     /**
      * Returns true if a tag with the same name as {@code tag} exists in the address book.
@@ -145,7 +149,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<Tag> getTagList() { return tags.asUnmodifiableObservableList(); }
+    public ObservableList<Tag> getTagList() {
+        return tags.asUnmodifiableObservableList();
+    }
 
     @Override
     public boolean equals(Object other) {
@@ -166,6 +172,4 @@ public class AddressBook implements ReadOnlyAddressBook {
     public int hashCode() {
         return persons.hashCode();
     }
-
-
 }

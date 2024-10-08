@@ -67,6 +67,11 @@ public class UniqueTagList implements Iterable<Tag> {
         internalList.set(index, editedPerson);
     }
 
+    public void setTag(UniqueTagList replacement) {
+        requireNonNull(replacement);
+        internalList.setAll(replacement.internalList);
+    }
+
     /**
      * Removes the equivalent tag from the list.
      * The tag must exist in the list.
@@ -76,11 +81,6 @@ public class UniqueTagList implements Iterable<Tag> {
         if (!internalList.remove(toRemove)) {
             throw new TagNotFoundException();
         }
-    }
-
-    public void setTag(UniqueTagList replacement) {
-        requireNonNull(replacement);
-        internalList.setAll(replacement.internalList);
     }
 
     /**
@@ -101,6 +101,20 @@ public class UniqueTagList implements Iterable<Tag> {
      */
     public ObservableList<Tag> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
+    }
+
+    /**
+     * Returns true if {@code tags} contains only unique tags.
+     */
+    private boolean tagsAreUnique(List<Tag> tags) {
+        for (int i = 0; i < tags.size() - 1; i++) {
+            for (int j = i + 1; j < tags.size(); j++) {
+                if (tags.get(i).isSameTag(tags.get(j))) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     @Override
@@ -131,19 +145,5 @@ public class UniqueTagList implements Iterable<Tag> {
     @Override
     public String toString() {
         return internalList.toString();
-    }
-
-    /**
-     * Returns true if {@code tags} contains only unique tags.
-     */
-    private boolean tagsAreUnique(List<Tag> tags) {
-        for (int i = 0; i < tags.size() - 1; i++) {
-            for (int j = i + 1; j < tags.size(); j++) {
-                if (tags.get(i).isSameTag(tags.get(j))) {
-                    return false;
-                }
-            }
-        }
-        return true;
     }
 }
