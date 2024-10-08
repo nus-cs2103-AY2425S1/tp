@@ -35,6 +35,7 @@ public class ParserUtilTest {
     private static final String VALID_TAG_2 = "neighbour";
 
     private static final String WHITESPACE = " \t\r\n";
+    private static final String CUSTOM_ERROR_MESSAGE = "Custom error message";
 
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
@@ -192,5 +193,10 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseName_withCustomErrorMessage_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseName(null, CUSTOM_ERROR_MESSAGE));
     }
 }
