@@ -8,7 +8,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AddInsuranceCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.InsurancePlan;
 
 /**
  * Parses input arguments and creates a new {@code AddInsurance} object
@@ -25,20 +24,18 @@ public class AddInsuranceCommandParser implements Parser<AddInsuranceCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_INSURANCE_ID);
         Index index;
+        int insuranceId;
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            if (argMultimap.getValue(PREFIX_INSURANCE_ID).isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        AddInsuranceCommand.MESSAGE_USAGE));
+            }
+            insuranceId = ParserUtil.parseInsurancePlan(argMultimap.getValue(PREFIX_INSURANCE_ID).get());
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddInsuranceCommand.MESSAGE_USAGE),
                     ive);
         }
-
-        String insuranceIdString = argMultimap.getValue(PREFIX_INSURANCE_ID).orElse("");
-        int insuranceId = Integer.parseInt(insuranceIdString.trim());
-
-        if (!InsurancePlan.checkValidPlan(insuranceId)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddInsuranceCommand.MESSAGE_USAGE));
-        }
-
         return new AddInsuranceCommand(index, insuranceId);
     }
 }

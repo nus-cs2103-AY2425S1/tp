@@ -1,4 +1,6 @@
-package seedu.address.model.person;
+package seedu.address.model.person.insurance;
+
+import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
  * The {@code InsurancePlan} abstract class represents a general blueprint for an insurance plan.
@@ -6,6 +8,8 @@ package seedu.address.model.person;
  * This class is meant to be extended by specific insurance plan implementations.
  */
 public abstract class InsurancePlan {
+
+    public static final String INVALID_PLAN_ID_MESSAGE = "The insurance plan id is not valid";
 
     /** Unique identifier for the insurance plan, to be determined in each class separately. */
     protected int insurancePlanId = -1;
@@ -19,10 +23,19 @@ public abstract class InsurancePlan {
         return insurancePlanId;
     }
 
-    public static boolean checkValidPlan(int insurancePlanId) {
-        int validMaxId = 1;
+
+    /**
+     * Checks if the insurance plan id exists within the current plans.
+     *
+     * @param insurancePlanId the integer representing the id of the plan to be selected by the system.
+     * @throws IllegalValueException thrown if the id does not exist within the correct range.
+     */
+    public static void checkValidPlan(int insurancePlanId) throws IllegalValueException {
         int validMinId = 0;
-        return insurancePlanId > validMinId && insurancePlanId < validMaxId;
+        int validMaxId = 1;
+        if (insurancePlanId < validMinId || insurancePlanId > validMaxId) {
+            throw new IllegalValueException(INVALID_PLAN_ID_MESSAGE);
+        }
     }
 
     /**
