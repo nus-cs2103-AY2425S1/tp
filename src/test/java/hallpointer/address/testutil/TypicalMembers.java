@@ -22,29 +22,29 @@ import hallpointer.address.model.member.Member;
 public class TypicalMembers {
 
     public static final Member ALICE = new MemberBuilder().withName("Alice Pauline")
-            .withRoom("123, Jurong West Ave 6, #08-111")
+            .withRoom("6/3/20")
             .withPhone("94351253")
             .withTags("friends").build();
     public static final Member BENSON = new MemberBuilder().withName("Benson Meier")
-            .withRoom("311, Clementi Ave 2, #02-25")
+            .withRoom("6/10/95")
             .withPhone("98765432")
             .withTags("owesMoney", "friends").build();
     public static final Member CARL = new MemberBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withRoom("wall street").build();
+            .withRoom("7/8/10").build();
     public static final Member DANIEL = new MemberBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withRoom("10th street").withTags("friends").build();
+            .withRoom("1/3/3").withTags("friends").build();
     public static final Member ELLE = new MemberBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withRoom("michegan ave").build();
+            .withRoom("4/5/55").build();
     public static final Member FIONA = new MemberBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withRoom("little tokyo").build();
+            .withRoom("8/10/300").build();
     public static final Member GEORGE = new MemberBuilder().withName("George Best").withPhone("9482442")
-            .withRoom("4th street").build();
+            .withRoom("90/2/8").build();
 
     // Manually added
     public static final Member HOON = new MemberBuilder().withName("Hoon Meier").withPhone("8482424")
-            .withRoom("little india").build();
+            .withRoom("7/7/45").build();
     public static final Member IDA = new MemberBuilder().withName("Ida Mueller").withPhone("8482131")
-            .withRoom("chicago ave").build();
+            .withRoom("6/4/38").build();
 
     // Manually added - Member's details found in {@code CommandTestUtil}
     public static final Member AMY = new MemberBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)

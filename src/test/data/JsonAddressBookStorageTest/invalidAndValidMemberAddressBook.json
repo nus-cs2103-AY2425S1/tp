@@ -2,10 +2,10 @@
   "members": [ {
     "name": "Valid Member",
     "phone": "9482424",
-    "room": "4th street"
+    "room": "4/3/8"
   }, {
     "name": "Member With Invalid Phone Field",
     "phone": "948asdf2424",
-    "room": "4th street"
+    "room": "4/3/8"
   } ]
 }

@@ -17,7 +17,7 @@ public class MemberBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_ROOM = "5/12/207";
 
     private Name name;
     private Phone phone;
@@ -30,7 +30,7 @@ public class MemberBuilder {
     public MemberBuilder() {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
-        room = new Room(DEFAULT_ADDRESS);
+        room = new Room(DEFAULT_ROOM);
         tags = new HashSet<>();
     }
 
