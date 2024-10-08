@@ -1,7 +1,15 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
+import java.util.function.Predicate;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonTaggedWithPredicate;
+import seedu.address.model.tag.Tag;
 
 public class FilterCommand extends Command {
     public static final String COMMAND_WORD = "filter";
@@ -11,17 +19,24 @@ public class FilterCommand extends Command {
             + "Parameters: t/ [TAG]\n"
             + "Example: " + COMMAND_WORD + "t/ friends";
 
-    public static final String MESSAGE_NOT_IMPLEMENTED_YET =
-            "Filter command not implemented yet";
+    public static final String MESSAGE_SUCCESS =
+            "Listed all contacts with tag: %1$s";
 
-    private final String tag;
+    public final Predicate<Person> predicatePersonTaggedWithTag;
+
+    private final Tag tag;
 
     public FilterCommand(String tag) {
-        this.tag = tag;
+        this.tag = new Tag(tag);
+        this.predicatePersonTaggedWithTag = new PersonTaggedWithPredicate(this.tag);
+
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        throw new CommandException(tag);
+        requireNonNull(model);
+        model.updateFilteredPersonList(predicatePersonTaggedWithTag);
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, tag));
     }
 }
