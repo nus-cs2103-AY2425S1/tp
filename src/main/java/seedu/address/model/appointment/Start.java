@@ -21,7 +21,6 @@ public class Start {
         if (other == this) {
             return true;
         }
-
         // instanceof handles nulls
         if (!(other instanceof Start)) {
             return false;
