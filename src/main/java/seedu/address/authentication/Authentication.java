@@ -5,8 +5,8 @@ package seedu.address.authentication;
  */
 public class Authentication {
     // Using default username for testing
-    private static final String hrStaff = "group1";
-    private static final String staffPassword = "cooked";
+    private static final String hrStaff = "test";
+    private static final String staffPassword = "test";
 
     /**
      * Checks if user is allowed to log in.
