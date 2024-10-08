@@ -309,7 +309,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | HR manager | Set reminders for performance review cycles                  | ensure timely evaluations.                                                          |
 | `*`      | HR manager | Access help resources directly within the app                | troubleshoot issues without external assistance.                                    |
 | `*`      | HR manager | Track employee attendance and leave requests                 | manage staffing levels effectively.                                                 |
-| `*`      | HR manager | Create custom fields for employee data                       | capture information specific to my company's needs.                                 |                                 
+| `*`      | HR manager | Create custom fields for employee data                       | capture information specific to my company's needs.                                 |
 | `*`      | HR manager | Search employee data with custom fields                      | quickly find relevant groups of employees.                                          |
 | `*`      | HR manager | Link employee records to health and safety training          | compliance requirements are easily met.                                             |
 | `*`      | HR manager | Set up automated reminders for employee training renewals    | ensure everyone stays compliant.                                                    |
@@ -325,12 +325,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `HRHelper` and the **Actor** is the `HR staff`, unless specified otherwise)
 
+**Use case: Authentication**
+
+**MSS**
+
+1.  HR staff opens up HRHelper
+2.  HRHelper prompts for user to enter Username and Password
+3.  HR staff keys in Username and Password
+4.  Authentication is successful, program continues.
+
+    Use case ends.
+
+**Extensions**
+* 1a. To be implemented
+
 **Use case: Add a person**
 
 **MSS**
 
-1. User requests to add a specific person in the list
-2. HRHelper adds the person
+1.  User requests to add a specific person in the list
+2.  HRHelper adds the person
+
     Use case ends.
 
 **Extensions**
