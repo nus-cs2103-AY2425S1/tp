@@ -23,6 +23,9 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final Name parentName = new Name("parent1");
+    private final Phone parentPhone = new Phone("5555555555");
+    private final Email parentEmail = new Email("parent@email.com");
     private final Set<Tag> tags = new HashSet<>();
 
     /**
