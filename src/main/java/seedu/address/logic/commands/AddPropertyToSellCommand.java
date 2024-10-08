@@ -1,5 +1,10 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSING_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SELLING_PRICE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_UNIT_NUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POSTAL_CODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -11,17 +16,21 @@ import seedu.address.model.person.Property;
  */
 public class AddPropertyToSellCommand extends Command {
     public static final String COMMAND_WORD = "addSell";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a property to the list of properties to sell. "
-            + "Parameters: "
-            + "PROPERTY_TYPE "
-            + "PROPERTY_NAME "
-            + "UNIT_NUMBER "
-            + "PRICE "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a property to the list of properties to sell"
+            + "for the specific contact."
+            + "Parameters: INDEX (Must be a positive integer)"
+            + PREFIX_HOUSING_TYPE + "[HOUSING_TYPE]"
+            + PREFIX_SELLING_PRICE + "[SELLING_PRICE]"
+            + PREFIX_POSTAL_CODE + "[POSTAL_CODE]"
+            + PREFIX_UNIT_NUMBER + "[UNIT_NUMBER]"
+            + PREFIX_TAG + "[TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + "Condo "
-            + "The Florence Residences "
-            + "01-01 "
-            + "1000000";
+            + PREFIX_HOUSING_TYPE + "Condo "
+            + PREFIX_SELLING_PRICE + "1.65M "
+            + PREFIX_POSTAL_CODE + "567510 "
+            + PREFIX_UNIT_NUMBER + "10-65 "
+            + PREFIX_TAG + "Extremely spacious "
+            + PREFIX_TAG + "Near MRT";
 
     public static final String MESSAGE_SUCCESS = "New property added: %1$s";
     public static final String MESSAGE_DUPLICATE_PROPERTY = "This property already exists "
@@ -35,6 +44,10 @@ public class AddPropertyToSellCommand extends Command {
     public AddPropertyToSellCommand(Property property) {
         requireNonNull(property);
         this.propertyToSellToBeAdded = property;
+    }
+
+    public AddPropertyToSellCommand() {
+        this.propertyToSellToBeAdded = null;
     }
 
     @Override
