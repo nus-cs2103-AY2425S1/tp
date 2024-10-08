@@ -1,7 +1,6 @@
 package seedu.address.model.tag;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Tag in the address book.
@@ -12,16 +11,15 @@ public class Tag {
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
-    public final String tagName;
+    private final TagName tagName;
 
     /**
      * Constructs a {@code Tag}.
      *
      * @param tagName A valid tag name.
      */
-    public Tag(String tagName) {
+    public Tag(TagName tagName) {
         requireNonNull(tagName);
-        checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
         this.tagName = tagName;
     }
 
@@ -31,6 +29,17 @@ public class Tag {
     public static boolean isValidTagName(String test) {
         return test.matches(VALIDATION_REGEX);
     }
+
+    public boolean isSameTag(Tag otherTag) {
+        if (otherTag == this) {
+            return true;
+        }
+
+        return otherTag != null
+                && otherTag.getTagName().equals(getTagName());
+    }
+
+    public TagName getTagName() { return tagName; }
 
     @Override
     public boolean equals(Object other) {
@@ -56,7 +65,7 @@ public class Tag {
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + tagName + ']';
+        return '[' + tagName.toString() + ']';
     }
 
 }
