@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -35,6 +36,10 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
 
         NameContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (NameContainsKeywordsPredicate) other;
         return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
+    }
+
+    public List<String> getKeywords() {
+        return Collections.unmodifiableList(keywords);
     }
 
     @Override
