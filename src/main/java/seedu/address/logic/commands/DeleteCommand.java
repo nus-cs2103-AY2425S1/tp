@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -37,8 +38,9 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
         List<Person> personToDeleteList = new ArrayList<>();
-        
+
         //Want to arrange the indexList as descending order
+        indexList.sort(Comparator.comparing(Index::getZeroBased).reversed());
 
         for (Index targetIndex : indexList) {
             if (targetIndex.getZeroBased() >= lastShownList.size()) {
@@ -52,6 +54,12 @@ public class DeleteCommand extends Command {
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.listFormat(personToDeleteList)));
     }
 
+    /**
+     * Check if the list to be deleted are exactly equal
+     *
+     * @param other
+     * @return
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -64,13 +72,20 @@ public class DeleteCommand extends Command {
         }
 
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return targetIndex.equals(otherDeleteCommand.targetIndex);
+        boolean output = true;
+        for (int i = 0; i < indexList.size(); i++) {
+            Index targetIndex = indexList.get(i);
+            Index otherIndex = otherDeleteCommand.indexList.get(i);
+            output = output && targetIndex.equals(otherIndex);
+        }
+        return output;
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("targetIndex", targetIndex)
+                .add("targetIndices", indexList != null ? indexList.toString() : "[]")
                 .toString();
     }
+
 }

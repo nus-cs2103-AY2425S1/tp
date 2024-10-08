@@ -26,16 +26,16 @@ public class ParserUtil {
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static List<Index> parseIndex(String oneBasedIndex) throws ParseException {
-        String[] trimmedIndexes = oneBasedIndex.trim().split("\\s+"); // Split by spaces
-        List<Index> indexes = new ArrayList<>();
+        String[] parts = oneBasedIndex.trim().split("\\s+"); // Split by spaces
+        List<Index> indexList = new ArrayList<>();
 
-        for (String trimmedIndex : trimmedIndexes) {
-            if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+        for (String part : parts) {
+            if (!StringUtil.isNonZeroUnsignedInteger(part)) {
                 throw new ParseException(MESSAGE_INVALID_INDEX);
             }
-            indexes.add(Index.fromOneBased(Integer.parseInt(trimmedIndex))); // Convert to Index and add to list
+            indexList.add(Index.fromOneBased(Integer.parseInt(part.trim()))); // Convert to Index and add to list
         }
-        return indexes;
+        return indexList;
     }
 
     /**

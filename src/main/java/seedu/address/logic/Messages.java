@@ -55,7 +55,7 @@ public class Messages {
     public static String listFormat(List<Person> personList) {
         final StringBuilder builder = new StringBuilder();
         for (Person person : personList) {
-            builder.append(format(person)).append("\n");
+            builder.append("\n").append(format(person));
         }
         return builder.toString();
     }
