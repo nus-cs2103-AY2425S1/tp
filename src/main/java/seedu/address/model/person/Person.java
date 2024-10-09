@@ -24,17 +24,24 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Gender gender;
+    private final Age age;
+    private final Detail detail;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Gender gender, Age age, Set<Tag> tags,
+                  Detail detail) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.gender = gender;
+        this.age = age;
+        this.detail = detail;
     }
 
     public Name getName() {
@@ -52,6 +59,15 @@ public class Person {
     public Address getAddress() {
         return address;
     }
+
+    public Gender getGender() {
+        return gender; }
+
+    public Age getAge() {
+        return age; }
+
+    public Detail getDetail() {
+        return detail; }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -100,7 +116,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, gender, age, tags, detail);
     }
 
     @Override
@@ -110,7 +126,10 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("gender", gender)
+                .add("age", age)
                 .add("tags", tags)
+                .add("detail", detail)
                 .toString();
     }
 
