@@ -161,7 +161,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void markAsContacted(Person target) {
+        public void markAsContacted(Person target, ContactDate notes) {
             throw new AssertionError("This method should not be called.");
         }
 

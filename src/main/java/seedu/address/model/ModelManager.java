@@ -118,9 +118,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void markAsContacted(Person target) {
+    public void markAsContacted(Person target, ContactDate contactDate) {
         requireNonNull(target);
-        target.markAsContacted();
+        target.markAsContacted(contactDate);
     }
 
     @Override

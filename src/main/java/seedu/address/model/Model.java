@@ -82,7 +82,7 @@ public interface Model {
      * Marks the given person as contacted.
      * The person must exist in the address book.
      */
-    void markAsContacted(Person target);
+    void markAsContacted(Person target, ContactDate contactDate);
 
     /**
      * Returns the call history of the given person in the address book.

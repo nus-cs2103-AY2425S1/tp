@@ -39,8 +39,8 @@ public class ContactDateList extends ArrayList<ContactDate> {
     /**
      * Adds the current date to the ContactDateList.
      */
-    public void markAsContacted() {
-        this.add(ContactDate.getCurrentDate());
+    public void markAsContacted(String notes) {
+        this.add(ContactDate.createCurrentDate(notes));
     }
 
     /**
