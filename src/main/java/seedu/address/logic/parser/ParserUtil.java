@@ -148,7 +148,6 @@ public class ParserUtil {
     /**
      *  Parses a {@code String requirements} into a {@code JobRequirements}.
      *  Leading and trailing whitespaces will be trimmed.
-     *  Note that there is no validation for this.
      */
     public static JobRequirements parseRequirements(String requirements) {
         requireNonNull(requirements);
@@ -159,8 +158,6 @@ public class ParserUtil {
     /**
      *  Parses a {@code String description} into a {@code JobDescription}.
      *  Leading and trailing whitespaces will be trimmed.
-     *  Note that there is no validation for this.
-     *
      */
     public static JobDescription parseDescription(String description) {
         requireNonNull(description);
