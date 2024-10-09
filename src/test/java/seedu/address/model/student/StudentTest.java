@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.JASON;
 
 import org.junit.jupiter.api.Test;
 
@@ -26,6 +27,7 @@ public class StudentTest {
     public void isSamePerson() {
         // same object -> returns true
         assertTrue(ALICE.isSamePerson(ALICE));
+        assertTrue(JASON.isSamePerson(JASON));
 
         // null -> returns false
         assertFalse(ALICE.isSamePerson(null));
@@ -84,7 +86,7 @@ public class StudentTest {
     public void toStringMethod() {
         String expected =
             Student.class.getCanonicalName() + "{name=" + ALICE.getName() + ", email=" + ALICE.getEmail()
-                + ", tags=" + ALICE.getTags() + "}";
+                + ", tags=" + ALICE.getTags() + ", group=" + ALICE.getGroup().orElse("") + "}";
         assertEquals(expected, ALICE.toString());
     }
 }
