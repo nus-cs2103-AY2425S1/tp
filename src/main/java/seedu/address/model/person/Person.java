@@ -65,8 +65,9 @@ public class Person {
     public Set<Subject> getSubjects() {
         return Collections.unmodifiableSet(subjects);
     }
-
-    public Level getSchoolLevel() { return schoolLevel; }
+    public Level getSchoolLevel() {
+        return schoolLevel;
+    }
 
     /**
      * Returns true if both persons have the same name.

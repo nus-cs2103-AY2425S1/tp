@@ -10,8 +10,16 @@ import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 
+/**
+ * Parses input arguments and creates a new TagCommand object
+ */
 public class TagCommandParser {
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the TagCommand
+     * and returns an TagCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public TagCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultiMap =

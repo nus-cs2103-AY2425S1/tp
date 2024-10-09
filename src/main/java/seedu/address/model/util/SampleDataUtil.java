@@ -6,12 +6,12 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.Level;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
 

@@ -18,6 +18,9 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
 
+/**
+ * Tags an existing student in the address book with a subject, school level or both.
+ */
 public class TagCommand extends Command {
 
     public static final String COMMAND_WORD = "tag";
@@ -29,6 +32,10 @@ public class TagCommand extends Command {
     private final Name nameToTag;
     private final EditCommand.EditPersonDescriptor tagsToAdd;
 
+    /**
+     * @param nameToTag name of the person in the address book to tag
+     * @param tagsToAdd details to tag the person with
+     */
     public TagCommand(Name nameToTag, EditCommand.EditPersonDescriptor tagsToAdd) {
         this.nameToTag = nameToTag;
         this.tagsToAdd = tagsToAdd;
