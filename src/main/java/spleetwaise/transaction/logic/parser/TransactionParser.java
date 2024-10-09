@@ -44,7 +44,7 @@ public class TransactionParser {
 
         switch (commandWord) {
         case AddCommand.COMMAND_WORD:
-            return new AddCommand();
+            return new AddCommandParser().parse(arguments);
         default:
             return null;
         }

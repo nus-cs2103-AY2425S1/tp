@@ -8,10 +8,11 @@ import spleetwaise.transaction.logic.commands.AddCommand;
 public class TransactionUtil {
 
     /**
-     * TODO: Pass a transaction object and stringify it
-     * @return
+     * Retrieves a test add transaction command.
+     * @return A test add transaction command.
      */
     public static String getAddCommand() {
-        return AddCommand.COMMAND_WORD;
+        // Using TypicalPerson.ALICE contact details
+        return AddCommand.COMMAND_WORD + " p/94351253 amt/+12.3 desc/Test";
     }
 }

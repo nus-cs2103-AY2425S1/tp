@@ -58,6 +58,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasTransaction(Transaction transaction) {
+        requireNonNull(transaction);
+        return transactionBook.containsTransaction(transaction);
+    }
+
+    @Override
     public ObservableList<Transaction> getFilteredTransactionList() {
         return filteredTransactions;
     }

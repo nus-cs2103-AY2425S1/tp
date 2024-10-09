@@ -1,7 +1,5 @@
 package spleetwaise.transaction.model.transaction;
 
-import java.util.UUID;
-
 import spleetwaise.address.commons.util.CollectionUtil;
 import spleetwaise.address.model.person.Person;
 
@@ -27,7 +25,7 @@ public class Transaction {
      */
     public Transaction(Person person, Amount amount, Description description, Date date) {
         CollectionUtil.requireAllNonNull(person, amount, description, date);
-        this.id = UUID.randomUUID().toString();
+        this.id = TransactionIdUtil.getUuid();
         this.person = person;
         this.amount = amount;
         this.description = description;
