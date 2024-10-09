@@ -54,7 +54,9 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
-        address = source.getAddress().value;
+        address = (source.getAddress() == null
+                ? null
+                : source.getAddress().value);
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -102,9 +104,9 @@ class JsonAdaptedPerson {
         final Address modelAddress = address != null ? new Address(address) : null;
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        return modelAddress == null
+        return (modelAddress == null
                 ? new Person(modelName, modelPhone, modelEmail, modelTags)
-                : new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+                : new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags));
     }
 
 }
