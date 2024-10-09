@@ -54,12 +54,21 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the student list with {@code students}.
+     * {@code students} must not contain duplicate students.
+     */
+    public void setGroups(List<Group> groups) {
+        this.groups.setGroups(groups);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
         setStudents(newData.getStudentList());
+        setGroups(newData.getGroupList());
     }
 
     //// student-level operations
