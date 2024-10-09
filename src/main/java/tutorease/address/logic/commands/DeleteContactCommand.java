@@ -26,11 +26,14 @@ public class DeleteContactCommand extends Command {
             + "Example: contact delete 1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Contact [%1$s] deleted successfully";
-    public static final String MESSAGE_DELETE_PERSON_FAILURE = "Deleting of contact has failed due to: %s";
+    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
 
     private final Index targetIndex;
 
     public DeleteContactCommand(Index targetIndex) {
+        if (targetIndex == null) {
+            throw new NullPointerException("Index cannot be null");
+        }
         this.targetIndex = targetIndex;
     }
 
