@@ -154,7 +154,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public  ObservableList<Tag> getFilteredTagList() {
+    public ObservableList<Tag> getFilteredTagList() {
         return filteredTags;
     }
 

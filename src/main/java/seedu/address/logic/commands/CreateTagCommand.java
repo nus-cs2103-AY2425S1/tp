@@ -23,7 +23,7 @@ public class CreateTagCommand extends Command {
             + PREFIX_TAG + "florist";
 
     public static final String MESSAGE_SUCCESS = "New tag added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This tag already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_TAG = "This tag already exists in the address book";
 
     private final Tag toAdd;
 
@@ -40,7 +40,7 @@ public class CreateTagCommand extends Command {
         requireNonNull(model);
 
         if (model.hasTag(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_TAG);
         }
 
         model.addTag(toAdd);
