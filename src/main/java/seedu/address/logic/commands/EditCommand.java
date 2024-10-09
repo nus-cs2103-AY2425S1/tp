@@ -1,9 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -22,6 +20,7 @@ import seedu.address.model.Model;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentNumber;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -35,7 +34,7 @@ public class EditCommand extends Command {
         + "by the index number used in the displayed student list. "
         + "Existing values will be overwritten by the input values.\n"
         + "Parameters: INDEX (must be a positive integer) "
-        + "[" + PREFIX_NAME + "NAME] "
+        + "[" + PREFIX_STUDENT_NAME + "NAME] "
         + "[" + PREFIX_EMAIL + "EMAIL] "
         + "[" + PREFIX_TAG + "TAG]...\n"
         + "Example: " + COMMAND_WORD + " 1 "
@@ -91,8 +90,10 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(studentToEdit.getName());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(studentToEdit.getEmail());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(studentToEdit.getTags());
+        StudentNumber updatedStudentNumber = editPersonDescriptor.getStudentNumber()
+                .orElse(studentToEdit.getStudentNumber());
 
-        return new Student(updatedName, updatedEmail, updatedTags);
+        return new Student(updatedName, updatedEmail, updatedTags, updatedStudentNumber);
     }
 
     @Override
@@ -127,6 +128,7 @@ public class EditCommand extends Command {
         private Name name;
         private Email email;
         private Set<Tag> tags;
+        private StudentNumber studentNumber;
 
         public EditPersonDescriptor() {
         }
@@ -139,6 +141,7 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setEmail(toCopy.email);
             setTags(toCopy.tags);
+            setStudentNumber(studentNumber);
         }
 
         /**
@@ -161,6 +164,10 @@ public class EditCommand extends Command {
             this.email = email;
         }
 
+        public void setStudentNumber(StudentNumber studentNumber) {
+            this.studentNumber = studentNumber;
+        }
+
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
         }
@@ -180,6 +187,10 @@ public class EditCommand extends Command {
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
+        public Optional<StudentNumber> getStudentNumber() {
+            return Optional.ofNullable(studentNumber);
         }
 
         @Override

@@ -9,6 +9,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentNumber;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -18,17 +19,17 @@ public class SampleDataUtil {
     public static Student[] getSamplePersons() {
         return new Student[]{
             new Student(new Name("Alex Yeoh"), new Email("alexyeoh@example.com"),
-                getTagSet("friends")),
+                getTagSet("friends"), new StudentNumber("A0123456A")),
             new Student(new Name("Bernice Yu"), new Email("berniceyu@example.com"),
-                getTagSet("colleagues", "friends")),
+                getTagSet("colleagues", "friends"), new StudentNumber("A0123456B")),
             new Student(new Name("Charlotte Oliveiro"), new Email("charlotte@example.com"),
-                getTagSet("neighbours")),
+                getTagSet("neighbours"), new StudentNumber("A0123456C")),
             new Student(new Name("David Li"), new Email("lidavid@example.com"),
-                getTagSet("family")),
+                getTagSet("family"), new StudentNumber("A0123456D")),
             new Student(new Name("Irfan Ibrahim"), new Email("irfan@example.com"),
-                getTagSet("classmates")),
+                getTagSet("classmates"), new StudentNumber("A0123456E")),
             new Student(new Name("Roy Balakrishnan"), new Email("royb@example.com"),
-                getTagSet("colleagues"))
+                getTagSet("colleagues"), new StudentNumber("A0123456F"))
         };
     }
 

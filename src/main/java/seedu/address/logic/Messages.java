@@ -18,6 +18,7 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_STUDENT_NO_NOT_FOUND = "The student number provided is not found";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -37,10 +38,10 @@ public class Messages {
     public static String format(Student student) {
         final StringBuilder builder = new StringBuilder();
         builder.append(student.getName())
-                .append("; Phone: ")
+                .append("; Student Number:")
+                .append(student.getStudentNumber())
                 .append("; Email: ")
                 .append(student.getEmail())
-                .append("; Address: ")
                 .append("; Tags: ");
         student.getTags().forEach(builder::append);
         return builder.toString();
