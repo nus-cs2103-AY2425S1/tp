@@ -66,7 +66,7 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + REGISTER_NUMBER_DESC_BOB + SEX_DESC_BOB  + TAG_DESC_FRIEND,
+                + ADDRESS_DESC_BOB + REGISTER_NUMBER_DESC_BOB + SEX_DESC_BOB + TAG_DESC_FRIEND,
                 new AddCommand(expectedPerson));
 
 
