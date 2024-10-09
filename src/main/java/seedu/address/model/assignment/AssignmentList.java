@@ -2,6 +2,8 @@ package seedu.address.model.assignment;
 
 import java.util.ArrayList;
 
+import seedu.address.model.assignment.exceptions.DuplicateAssignmentException;
+
 /**
  * Represents a list of assignments.
  */
@@ -30,7 +32,10 @@ public class AssignmentList {
      * @param assignment The assignment to be added.
      */
     public void addAssignment(Assignment assignment) {
-        this.assignments.add(assignment);
+        if (hasAssignment(assignment)) {
+            throw new DuplicateAssignmentException();
+        }
+        assignments.add(assignment);
     }
 
     public ArrayList<Assignment> getAssignments() {
@@ -54,5 +59,17 @@ public class AssignmentList {
             sb.append(i).append(". ").append(assignments.get(i).toString()).append("\n");
         }
         return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof AssignmentList)) {
+            return false;
+        }
+        AssignmentList otherList = (AssignmentList) other;
+        return this.assignments.equals(otherList.assignments);
     }
 }

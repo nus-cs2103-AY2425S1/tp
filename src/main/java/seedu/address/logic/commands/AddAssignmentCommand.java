@@ -4,9 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DUEDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.assignment.Assignment;
-import seedu.address.model.assignment.exceptions.DuplicateAssignmentException;
 
 /**
  * Command to add an assignment to the model.
@@ -20,7 +20,7 @@ public class AddAssignmentCommand extends Command {
             + PREFIX_DUEDATE + "yyyy-MM-dd HHmm (Due date)\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "2024-10-23 1230";
-    public static final String MESSAGE_SUCCESS = "Assignment added successfully!";
+    public static final String MESSAGE_DUPLICATE_ASSIGNMENT = "This assignment already exists!";
 
     private final Assignment assignment;
 
@@ -34,11 +34,11 @@ public class AddAssignmentCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
         if (model.hasAssignment(assignment)) {
-            throw new DuplicateAssignmentException();
+            throw new CommandException(MESSAGE_DUPLICATE_ASSIGNMENT);
         }
 
         model.addAssignment(assignment);
