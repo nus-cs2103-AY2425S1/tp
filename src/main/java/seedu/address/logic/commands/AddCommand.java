@@ -38,7 +38,7 @@ public class AddCommand extends Command {
             + PREFIX_DETAIL + "Some detail here "
             + PREFIX_TAG + "friends Group1";
 
-    public static final String MESSAGE_SUCCESS = "Added successfully! Added person: %1$s";
+    public static final String MESSAGE_SUCCESS = "Added successfully! Added participant: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book!";
 
     private final Person toAdd;
