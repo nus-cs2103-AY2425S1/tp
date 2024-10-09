@@ -8,6 +8,9 @@ import javafx.scene.layout.StackPane;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 
+/**
+ * An UI component that displays the details and list of {@code Person}.
+ */
 public class ContactList extends UiPart<Region> {
 
     private static final String FXML = "ContactList.fxml";
@@ -23,6 +26,11 @@ public class ContactList extends UiPart<Region> {
     @FXML
     private StackPane personListPanelPlaceholder;
 
+    /**
+     * Creates a {@code ContactList} given a list of {@code Person}.
+     *
+     * @param logic the component responsible for handling backend requests.
+     */
     public ContactList(Logic logic) {
         super(FXML);
 
@@ -31,12 +39,20 @@ public class ContactList extends UiPart<Region> {
         this.initaliseComponents();
     }
 
+    /**
+     * Create a list of {@code Person} to be displayed to the user.
+     */
     private void initaliseComponents() {
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
     }
 
+    /**
+     * Retrieves the panel containing the lists of people.
+     *
+     * @return a panel containing the list of people.
+     */
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
