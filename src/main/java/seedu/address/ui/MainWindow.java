@@ -8,7 +8,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
@@ -115,7 +114,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), this::onPersonSelected);
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         BlankDetailsPanel blankDetailsPanel = new BlankDetailsPanel();
@@ -134,16 +133,11 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Updates the details panel to the selected person.
      */
-    private void onPersonSelected(MouseEvent event) {
-        Person person = personListPanel.getPersonListView().getSelectionModel().getSelectedItem();
-        int index = personListPanel.getPersonListView().getSelectionModel().getSelectedIndex();
+    private void updateDetailsPanel(Person person, int index) {
+        personDetailsPanelPlaceholder.getChildren().clear();
 
-        if (person != null) {
-            personDetailsPanelPlaceholder.getChildren().clear();
-
-            PersonDetailsPanel personDetailsPanel = new PersonDetailsPanel(person, index + 1);
-            personDetailsPanelPlaceholder.getChildren().add(personDetailsPanel.getRoot());
-        }
+        PersonDetailsPanel personDetailsPanel = new PersonDetailsPanel(person, index + 1);
+        personDetailsPanelPlaceholder.getChildren().add(personDetailsPanel.getRoot());
     }
 
     /**
@@ -200,6 +194,10 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            if (commandResult.isPerson()) {
+                updateDetailsPanel(commandResult.getPerson(), commandResult.getPersonIndex());
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
