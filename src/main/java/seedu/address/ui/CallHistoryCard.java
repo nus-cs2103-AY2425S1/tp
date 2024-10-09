@@ -22,7 +22,7 @@ public class CallHistoryCard extends UiPart<HBox> {
     public CallHistoryCard(ContactDate contactDate, int index) {
         super(FXML);
         indexLabel.setText(index + ". ");
-        contactDateLabel.setText(contactDate.getDate().toString());
+        contactDateLabel.setText(contactDate.toString());
     }
 }
 

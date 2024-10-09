@@ -60,4 +60,27 @@ public class CommandResultTest {
                 + ", exit=" + commandResult.isExit() + "}";
         assertEquals(expected, commandResult.toString());
     }
+
+    @Test
+    public void getPersonName() {
+        // Test case 1: Valid format with a name
+        CommandResult commandResult = new CommandResult("User: John Doe");
+        assertEquals("John Doe", commandResult.getPersonName());
+
+        // Test case 2: No colon in feedbackToUser
+        commandResult = new CommandResult("User John Doe");
+        assertEquals("", commandResult.getPersonName());
+
+        // Test case 3: Empty string in feedbackToUser
+        commandResult = new CommandResult("");
+        assertEquals("", commandResult.getPersonName());
+
+        // Test case 4: Colon but no name after it
+        commandResult = new CommandResult("User: ");
+        assertEquals("", commandResult.getPersonName());
+
+        // Test case 5: Colon with spaces and name after it
+        commandResult = new CommandResult("User:     Jane Doe  ");
+        assertEquals("Jane Doe", commandResult.getPersonName());
+    }
 }

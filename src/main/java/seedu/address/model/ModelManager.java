@@ -42,21 +42,6 @@ public class ModelManager implements Model {
         this.displayedCallHistory = FXCollections.observableArrayList();
     }
 
-    /**
-     * Initializes a ModelManager with the given addressBook, userPrefs and displayedCallHistory.
-     */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs,
-                        ObservableList<String> displayedCallHistory) {
-        requireAllNonNull(addressBook, userPrefs, displayedCallHistory);
-
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
-
-        this.addressBook = new AddressBook(addressBook);
-        this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        this.displayedCallHistory = displayedCallHistory;
-    }
-
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
     }
@@ -185,12 +170,8 @@ public class ModelManager implements Model {
     public ContactDateList getDisplayedCallHistory() {
         ContactDateList callHistory = new ContactDateList();
         for (String call : displayedCallHistory) {
-            try {
-                ContactDate contactDate = new ContactDate(call);
-                callHistory.add(contactDate);
-            } catch (IllegalArgumentException e) {
-                logger.warning("Invalid date format for: " + call + ". Expected format: YYYY-MM-DD");
-            }
+            ContactDate contactDate = new ContactDate(call);
+            callHistory.add(contactDate);
         }
         return callHistory;
     }

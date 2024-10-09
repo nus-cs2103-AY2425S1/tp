@@ -89,7 +89,4 @@ public class ContactDate {
         return value.hashCode();
     }
 
-    public LocalDate getDate() {
-        return value;
-    }
 }

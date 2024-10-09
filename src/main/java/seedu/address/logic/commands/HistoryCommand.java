@@ -68,11 +68,6 @@ public class HistoryCommand extends Command {
 
         ContactDateList callHistory = model.getCallHistory(personFound);
 
-        if (callHistory.isEmpty()) {
-            return new CommandResult(String.format(Messages.MESSAGE_NO_CALL_HISTORY,
-                    personFound.getName()));
-        }
-
         model.updateDisplayedList(callHistory);
 
         return new CommandResult(String.format(MESSAGE_SHOW_HISTORY_SUCCESS, personFound.getName()));
