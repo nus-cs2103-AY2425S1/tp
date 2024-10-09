@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import seedu.address.model.Model;
 
 /**
- * Adds or deletes a tag of an existing person in the address book.
+ * Adds, deletes or views a tag of an existing person in the address book.
  */
 public class TagCommand extends Command {
 
