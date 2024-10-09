@@ -22,7 +22,7 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final Priority DEFAULT_PRIORITY = Priority.LOW;
+    public static final String DEFAULT_PRIORITY = "LOW";
     public static final String DEFAULT_REMARK = "";
 
     private Name name;
@@ -41,7 +41,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        priority = DEFAULT_PRIORITY;
+        priority = Priority.valueOf(DEFAULT_PRIORITY);
         remark = new Remark(DEFAULT_REMARK);
         tags = new HashSet<>();
     }
@@ -94,8 +94,8 @@ public class PersonBuilder {
     /**
      * Sets the {@code Priority} of the {@code Person} that we are building.
      */
-    public PersonBuilder withPriority(Priority priority) {
-        this.priority = priority;
+    public PersonBuilder withPriority(String priority) {
+        this.priority = Priority.valueOf(priority);
         return this;
     }
 
