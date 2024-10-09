@@ -3,7 +3,7 @@ package seedu.internbuddy.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.internbuddy.model.ModelCompany.PREDICATE_SHOW_ALL_COMPANIES;
+import static seedu.internbuddy.model.Model.PREDICATE_SHOW_ALL_COMPANIES;
 import static seedu.internbuddy.testutil.Assert.assertThrows;
 import static seedu.internbuddy.testutil.TypicalCompanies.GOOGLE;
 import static seedu.internbuddy.testutil.TypicalCompanies.MICROSOFT;
@@ -23,7 +23,7 @@ import seedu.internbuddy.testutil.AddressBookCompanyBuilder;
  */
 public class ModelManagerTestCompany {
 
-    private ModelManagerCompany modelManager = new ModelManagerCompany();
+    private ModelManager modelManager = new ModelManager();
 
     /**
      * Test for constructor
@@ -32,7 +32,7 @@ public class ModelManagerTestCompany {
     public void constructor() {
         assertEquals(new UserPrefsCompany(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(new AddressBookCompany(), new AddressBookCompany(modelManager.getAddressBook()));
+        assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
     }
 
     @Test
@@ -108,14 +108,14 @@ public class ModelManagerTestCompany {
      */
     @Test
     public void equals() {
-        AddressBookCompany addressBook = new AddressBookCompanyBuilder()
+        AddressBook addressBook = new AddressBookCompanyBuilder()
             .withCompany(GOOGLE).withCompany(MICROSOFT).build();
-        AddressBookCompany differentAddressBook = new AddressBookCompany();
+        AddressBook differentAddressBook = new AddressBook();
         UserPrefsCompany userPrefs = new UserPrefsCompany();
 
         // same values -> returns true
-        modelManager = new ModelManagerCompany(addressBook, userPrefs);
-        ModelManagerCompany modelManagerCopy = new ModelManagerCompany(addressBook, userPrefs);
+        modelManager = new ModelManager(addressBook, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -128,12 +128,12 @@ public class ModelManagerTestCompany {
         assertFalse(modelManager.equals(5));
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManagerCompany(differentAddressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
         // different filteredList -> returns false
         String[] keywords = GOOGLE.getName().fullName.split("\\s+");
         modelManager.updateFilteredCompanyList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManagerCompany(addressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);
@@ -141,6 +141,6 @@ public class ModelManagerTestCompany {
         // different userPrefs -> returns false
         UserPrefsCompany differentUserPrefs = new UserPrefsCompany();
         differentUserPrefs.setAddressBookCompanyFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManagerCompany(addressBook, differentUserPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
     }
 }

@@ -27,7 +27,7 @@ import seedu.internbuddy.testutil.CompanyBuilder;
  */
 public class AddressBookTestCompany {
 
-    private final AddressBookCompany addressBook = new AddressBookCompany();
+    private final AddressBook addressBook = new AddressBook();
 
     @Test
     public void constructor() {
@@ -45,7 +45,7 @@ public class AddressBookTestCompany {
      */
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBookCompany newData = getTypicalAddressBook();
+        AddressBook newData = getTypicalAddressBook();
         addressBook.resetData(newData);
         assertEquals(newData, addressBook);
     }
@@ -108,7 +108,7 @@ public class AddressBookTestCompany {
      */
     @Test
     public void toStringMethod() {
-        String expected = AddressBookCompany.class.getCanonicalName() + "{companies="
+        String expected = AddressBook.class.getCanonicalName() + "{companies="
             + addressBook.getCompanyList() + "}";
         assertEquals(expected, addressBook.toString());
     }
@@ -116,7 +116,7 @@ public class AddressBookTestCompany {
     /**
      * A stub ReadOnlyAddressBook whose companies list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBookCompany {
+    private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Company> companies = FXCollections.observableArrayList();
 
         AddressBookStub(Collection<Company> companies) {
