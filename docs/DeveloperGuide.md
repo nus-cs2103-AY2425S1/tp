@@ -273,14 +273,20 @@ _{Explain here how the data archiving feature will be implemented}_
 ### Product scope
 
 **Target user profile**:
-
+* Jane is a customer service representative at a food delivery company
 * has a need to manage a significant number of contacts
+* needs to provide quick support and personal assistance
+* her main responsibilities include: responding to general inquiries and resolving issues and complaints
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+  * is reasonably comfortable using CLI apps
+* works independently and does not share her computer physically with others
+* occasionally need to share customer profile databases with other customer service representatives
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: 
+
+ServiceTrack offers users **convenient features** through CLI-first optimization, sorting, and classification, enhancing operational efficiency. Additionally, it enables personalized customer interactions by providing **quick access to information** such as customer profiles, details, and remarks, thereby resolving inquiries more effectively and improving the customer satisfaction rate in food delivery customer service.
 
 
 ### User stories
@@ -309,7 +315,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | CSR                                         | find a backup of the data                                      | recover data accidentally purged                                                                    |
 | `* *`    | international CSR                           | use different languages for customer data                      | support internationalization (?)                                                                    |
 | `* *`    | CSR taking over another CSR                 | import customer profiles                                       | transfer old customer profiles from another CSR                                                     |
-| `*`      | CSR                                         | add multiple comments to customers                             | so that I can follow up with customers                                                              |
+| `*`      | CSR                                         | export customer profiles                                       | so that I can transfer current customer profiles to another CSR                                     |
 
 *{More to be added}*
 
