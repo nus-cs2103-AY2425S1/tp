@@ -322,7 +322,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  Actor requests to add a new person.
 2.  System shows details of the newly added person.
-3.  System <u>save contacts to save file (UC5)</u>.
 
     Use case ends.
 
@@ -349,83 +348,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  Actor performs <u>list all people (UC2)</u>.
 2.  Actor requests to delete a specific person in the list.
-3.  System deletes the person.
-4.  System <u>save contacts to save file (UC5)</u>.
+3.  System shows details of deleted person.
 
     Use case ends.
 
 **Extensions**
 
-- 2a. The given person is invalid.
+- 2a. The specified person is invalid.
 
   - 2a1. System shows an error message.
 
     Use case resumes at step 2.
 
-**Use case: UC4 - Load contact from save file**
-
-**Actor: `BizBook`**
-
-**Guarantees:** Contact list is initialized with available data.
-
-**MSS**
-
-1.  Actor retrieve save file object.
-2.  For each line of save file.
-
-    - 2.1 Actor reads a line from the file.
-    - 2.2 Actor parses the line into a contact object.
-    - 2.3 Actor adds the contact object to the contact list.
-
-      Repeat steps 2.1 - 2.3 until all lines are processed.
-
-    Use case ends.
-
-**Extensions**
-
-- 1a. Save file does not exist.
-
-  - 1a1. Actor shows a warning message.
-  - 1a2. Actor creates a new save file.
-  - 1a3. Actor loads an empty contact list.
-
-    Use case ends.
-
-- 2.2a. Line does not fit proper contact format.
-
-  - 2.2a1. Actor ignores line.
-  - 2.2a2. Actor shows a warning message.
-
-    Use case resumes at step 2.1.
-
-**Use case: UC5 - Save contact to save file**
-
-**Actor: `BizBook`**
-
-**Guarantees:** Updated contact list is saved to save file.
-
-**MSS**
-
-1.  Actor retrieve save file.
-2.  For each contact.
-
-    - 2.1 Actor parses line into saveable format.
-    - 2.2 Actor writes line to save file.
-
-      Repeat steps 2.1 - 2.2 until all contacts are processed.
-
-    Use case ends.
-
-**Extensions**
-
-- 1a. Save file does not exist.
-
-  - 1a1. Actor shows a warning message.
-  - 1a2. Actor creates a new save file.
-
-    Use case resumes at step 2.
-
-**Use case: UC6 - View person contact**
+**Use case: UC4 - View person contact**
 
 **MSS**
 
