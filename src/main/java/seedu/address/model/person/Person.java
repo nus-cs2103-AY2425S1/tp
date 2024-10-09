@@ -6,7 +6,6 @@ import java.util.Objects;
 import java.util.Set;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
@@ -24,6 +23,7 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Price price;
 
     /**
      * Every field must be present and not null.
@@ -35,6 +35,9 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+
+        // Price is set to 0.0 for now, will have functionality added in the next milestone
+        this.price = new Price(0.0);
     }
 
     public Name getName() {
@@ -51,6 +54,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Price getPrice() {
+        return price;
     }
 
     /**
@@ -111,6 +118,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("price", price)
                 .toString();
     }
 
