@@ -21,7 +21,13 @@ class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
 
+    public static final String MESSAGE_DUPLICATE_CLIENT = "Clients list contains duplicate client(s).";
+    public static final String MESSAGE_DUPLICATE_VENDOR = "Vendors list contains duplicate vendor(s).";
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    /*
+    private final List<JsonAdaptedClient> clients = new ArrayList<>();
+    private final List<JsonAdaptedVendor> vendors = new ArrayList<>();
+     */
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given persons.
@@ -30,7 +36,16 @@ class JsonSerializableAddressBook {
     public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
         this.persons.addAll(persons);
     }
-
+    /*
+    @JsonCreator
+    public JsonSerializableAddressBook(@JsonProperty("clients") List<JsonAdaptedClient> clients) {
+        this.clients.addAll(clients);
+    }
+    @JsonCreator
+    public JsonSerializableAddressBook(@JsonProperty("vendors") List<JsonAdaptedVendor> vendors) {
+        this.vendors.addAll(vendors);
+    }
+     */
     /**
      * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
      *
@@ -39,7 +54,11 @@ class JsonSerializableAddressBook {
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
     }
-
+    /*
+    public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
+        clients.addAll(source.getClientList().stream().map(JsonAdaptedClient::new).collect(Collectors.toList()));
+        vendors.addAll(source.getVendorList().stream().map(JsonAdaptedVendor::new).collect(Collectors.toList()));
+     */
     /**
      * Converts this address book into the model's {@code AddressBook} object.
      *
@@ -56,5 +75,24 @@ class JsonSerializableAddressBook {
         }
         return addressBook;
     }
-
+    /*
+    public AddressBook toModelType() throws IllegalValueException {
+        AddressBook addressBook = new AddressBook();
+        for (JsonAdaptedClient jsonAdaptedClient : clients) {
+            Client client = jsonAdaptedClient.toModelType();
+            if (addressBook.hasClient(client)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_CLIENT);
+            }
+            addressBook.addClient(client);
+        }
+        for (JsonAdaptedVendor jsonAdaptedVendor : vendors) {
+            Vendor vendor = jsonAdaptedVendor.toModelType();
+            if (addressBook.hasVendor(vendor)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_VENDOR);
+            }
+            addressBook.addVendor(vendor);
+        }
+        return addressBook;
+    }
+     */
 }

@@ -54,7 +54,6 @@ public class Messages {
         person.getTags().forEach(builder::append);
         return builder.toString();
     }
-
     /**
      * Formats the {@code client} for display to the user.
      */
@@ -68,7 +67,7 @@ public class Messages {
                 .append("; Address: ")
                 .append(client.getAddress())
                 .append("; Date: ")
-                .append(client.getDate())
+                //.append(client.getDate())
                 .append("; Tags: ");
         client.getTags().forEach(builder::append);
         return builder.toString();
