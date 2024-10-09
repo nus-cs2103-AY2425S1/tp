@@ -50,4 +50,3 @@ public class CallHistoryPanel extends UiPart<VBox> {
         items.addAll(FXCollections.observableArrayList(history));
     }
 }
-
