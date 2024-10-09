@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Github;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -22,6 +23,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEEFAULT_TELEGRAM = "@viswa";
+    public static final String DEFAULT_GITHUB = "Amy";
 
     private Name name;
     private Phone phone;
@@ -29,6 +31,7 @@ public class PersonBuilder {
     private Address address;
     private Telegram telegram;
     private Set<Tag> tags;
+    private Github github;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -40,6 +43,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         telegram = new Telegram(DEEFAULT_TELEGRAM);
         tags = new HashSet<>();
+        github = new Github(DEFAULT_GITHUB);
     }
 
     /**
@@ -52,6 +56,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         telegram = personToCopy.getTelegram();
         tags = new HashSet<>(personToCopy.getTags());
+        github = personToCopy.getGithub();
     }
 
     /**
@@ -102,8 +107,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code GitHub} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withGithub(String username) {
+        this.github = new Github(username);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, telegram, tags);
+        return new Person(name, phone, email, address, telegram, tags, github);
     }
 
 }

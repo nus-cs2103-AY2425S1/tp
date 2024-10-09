@@ -20,6 +20,7 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final Github github;
 
     // Data fields
     private final Address address;
@@ -30,14 +31,16 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Telegram telegram, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, telegram, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Telegram telegram,
+                  Set<Tag> tags, Github github) {
+        requireAllNonNull(name, phone, email, address, telegram, tags, github);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.telegram = telegram;
         this.tags.addAll(tags);
+        this.github = github;
     }
 
     public Name getName() {
@@ -68,6 +71,9 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+    public Github getGithub() {
+        return github;
+    }
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
@@ -102,13 +108,14 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && telegram.equals(otherPerson.telegram)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && github.equals(otherPerson.github);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, telegram, tags);
+        return Objects.hash(name, phone, email, address, telegram, tags, github);
     }
 
     @Override
@@ -120,6 +127,7 @@ public class Person {
                 .add("address", address)
                 .add("telegram", telegram)
                 .add("tags", tags)
+                .add("github", github)
                 .toString();
     }
 
