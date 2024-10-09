@@ -1,17 +1,19 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
 import java.util.Arrays;
-import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.predicates.LevelContainsKeywordsPredicate;
-import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
-import seedu.address.model.person.predicates.SubjectContainsKeywordsPredicate;
+import seedu.address.model.person.Level;
+import seedu.address.model.person.Subject;
+import seedu.address.model.person.predicate.LevelContainsKeywordsPredicate;
+import seedu.address.model.person.predicate.NameContainsKeywordsPredicate;
+import seedu.address.model.person.predicate.SubjectContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -46,10 +48,16 @@ public class FindCommandParser implements Parser<FindCommand> {
         } else if (isByLevel) {
             String toFind = argMultimap.getValue(PREFIX_LEVEL).get();
             String[] levelKeywords = toFind.split("\\s+");
+            if (Arrays.stream(levelKeywords).anyMatch(level -> !Level.isValidLevelName(level))) {
+                throw new ParseException(Level.MESSAGE_CONSTRAINTS);
+            }
             return new FindCommand(new LevelContainsKeywordsPredicate(Arrays.asList(levelKeywords)));
         } else if (isBySubject) {
             String toFind = argMultimap.getValue(PREFIX_SUBJECT).get();
             String[] subjectKeywords = toFind.split("\\s+");
+            if (Arrays.stream(subjectKeywords).anyMatch(subject -> !Subject.isValidSubjectName(subject))) {
+                throw new ParseException(Subject.MESSAGE_CONSTRAINTS);
+            }
             return new FindCommand(new SubjectContainsKeywordsPredicate(Arrays.asList(subjectKeywords)));
         }
         throw new ParseException(
