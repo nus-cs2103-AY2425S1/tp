@@ -38,6 +38,9 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        parentName = new Name("parent1");
+        parentEmail = new Email("parent@email.com");
+        parentPhone = new Phone("5555555555");
         tags = new HashSet<>();
     }
 
