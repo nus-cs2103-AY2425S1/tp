@@ -26,4 +26,14 @@ public class InsurancePlanFactory {
         }
     }
 
+    public static InsurancePlan createInsurancePlan(String insurancePlanName) throws ParseException {
+        if (insurancePlanName.equals("Basic Plan")) {
+            return new BasicPlan();
+        } else if (insurancePlanName.equals("Travel Plan")) {
+            return new TravelPlan();
+        } else {
+            throw new ParseException(INVALID_PLAN_ID_MESSAGE);
+        }
+    }
+
 }

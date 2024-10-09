@@ -21,7 +21,7 @@ public class TravelPlan extends InsurancePlan {
      */
     @Override
     public String toString() {
-        return "Travel Insurance Plan";
+        return "Travel Plan";
     }
 }
 

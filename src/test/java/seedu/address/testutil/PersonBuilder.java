@@ -3,12 +3,14 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.insurance.InsurancePlan;
+import seedu.address.model.person.insurance.InsurancePlanFactory;
 import seedu.address.model.person.insurance.InsurancePlansManager;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -97,8 +99,15 @@ public class PersonBuilder {
     /**
      * Sets the {@code InsurancePlansManager} of the {@code Person} that we are building.
      */
-    public PersonBuilder withInsurancePlansManager(InsurancePlan insurancePlan) {
-        this.insurancePlansManager.addPlan(insurancePlan);
+    public PersonBuilder withInsurancePlansManager(String... insurancePlans) {
+        try {
+            for (String insurancePlanName : insurancePlans) {
+                InsurancePlan planToBeAdded = InsurancePlanFactory.createInsurancePlan(insurancePlanName);
+                this.insurancePlansManager.addPlan(planToBeAdded);
+            }
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
         return this;
     }
 

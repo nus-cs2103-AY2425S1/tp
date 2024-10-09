@@ -88,7 +88,7 @@ public class InsurancePlansManager {
      */
     @Override
     public String toString() {
-        StringBuilder plans = new StringBuilder("Insurance Plans: ");
+        StringBuilder plans = new StringBuilder("");
         for (InsurancePlan plan : insurancePlans) {
             plans.append(plan.toString()).append(", ");
         }
