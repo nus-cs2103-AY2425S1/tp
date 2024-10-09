@@ -8,11 +8,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidId(String)}
  */
 public class Id {
-    private final String value;
+    public final String value;
     public Id(String id) {
         requireNonNull(id);
 //        checkArgument(isValidId(id), MESSAGE_CONSTRAINTS);
         this.value = id;
+    }
+    public static boolean isValidId(String test) {
+        return true;
     }
 
     @Override

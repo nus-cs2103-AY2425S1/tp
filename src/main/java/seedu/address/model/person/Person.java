@@ -59,17 +59,17 @@ public class Person {
         return medication;
     }
 
-    public Phone getPhone() {
-        return phone;
-    }
-
-    public Email getEmail() {
-        return email;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
+//    public Phone getPhone() {
+//        return phone;
+//    }
+//
+//    public Email getEmail() {
+//        return email;
+//    }
+//
+//    public Address getAddress() {
+//        return address;
+//    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}

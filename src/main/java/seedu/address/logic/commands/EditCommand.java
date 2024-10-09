@@ -21,11 +21,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -95,13 +91,17 @@ public class EditCommand extends Command {
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
+        Id updatedId = editPersonDescriptor.getId().orElse(personToEdit.getId());
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        Ward updatedWard = editPersonDescriptor.getWard().orElse(personToEdit.getWard());
+        Diagnosis updatedDiagnosis = editPersonDescriptor.getDiagnosis().orElse(personToEdit.getDiagnosis());
+        Medication updatedMedication = editPersonDescriptor.getMedication().orElse(personToEdit.getMedication());
+//        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
+//        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
+//        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedId, updatedName, updatedWard, updatedDiagnosis, updatedMedication);
     }
 
     @Override
@@ -133,10 +133,15 @@ public class EditCommand extends Command {
      * corresponding field value of the person.
      */
     public static class EditPersonDescriptor {
+
+        private Id id;
         private Name name;
-        private Phone phone;
-        private Email email;
-        private Address address;
+        private Ward ward;
+        private Diagnosis diagnosis;
+        private Medication medication;
+//        private Phone phone;
+//        private Email email;
+//        private Address address;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -146,20 +151,31 @@ public class EditCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+            setId(toCopy.id);
             setName(toCopy.name);
-            setPhone(toCopy.phone);
-            setEmail(toCopy.email);
-            setAddress(toCopy.address);
-            setTags(toCopy.tags);
+            setWard(toCopy.ward);
+            setDiagnosis(toCopy.diagnosis);
+            setMedication(toCopy.medication);
+//            setPhone(toCopy.phone);
+//            setEmail(toCopy.email);
+//            setAddress(toCopy.address);
+//            setTags(toCopy.tags);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(id, name, ward, diagnosis, medication);
         }
 
+        public void setId(Id id) {
+            this.id = id;
+        }
+
+        public Optional<Id> getId() {
+            return Optional.ofNullable(id);
+        }
         public void setName(Name name) {
             this.name = name;
         }
@@ -168,29 +184,55 @@ public class EditCommand extends Command {
             return Optional.ofNullable(name);
         }
 
-        public void setPhone(Phone phone) {
-            this.phone = phone;
+        public void setWard(Ward ward) {
+            this.ward = ward;
         }
 
-        public Optional<Phone> getPhone() {
-            return Optional.ofNullable(phone);
+        public Optional<Ward> getWard() {
+            return Optional.ofNullable(ward);
         }
 
-        public void setEmail(Email email) {
-            this.email = email;
+        public void setDiagnosis(Diagnosis diagnosis) {
+            this.diagnosis = diagnosis;
         }
 
-        public Optional<Email> getEmail() {
-            return Optional.ofNullable(email);
+        public Optional<Diagnosis> getDiagnosis() {
+            return Optional.ofNullable(diagnosis);
         }
 
-        public void setAddress(Address address) {
-            this.address = address;
+        public void setMedication(Medication medication) {
+            this.medication = medication;
         }
 
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
+        public Optional<Medication> getMedication() {
+            return Optional.ofNullable(medication);
         }
+
+
+
+//        public void setPhone(Phone phone) {
+//            this.phone = phone;
+//        }
+//
+//        public Optional<Phone> getPhone() {
+//            return Optional.ofNullable(phone);
+//        }
+//
+//        public void setEmail(Email email) {
+//            this.email = email;
+//        }
+//
+//        public Optional<Email> getEmail() {
+//            return Optional.ofNullable(email);
+//        }
+//
+//        public void setAddress(Address address) {
+//            this.address = address;
+//        }
+//
+//        public Optional<Address> getAddress() {
+//            return Optional.ofNullable(address);
+//        }
 
         /**
          * Sets {@code tags} to this object's {@code tags}.
@@ -221,21 +263,30 @@ public class EditCommand extends Command {
             }
 
             EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
-            return Objects.equals(name, otherEditPersonDescriptor.name)
-                    && Objects.equals(phone, otherEditPersonDescriptor.phone)
-                    && Objects.equals(email, otherEditPersonDescriptor.email)
-                    && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+            return Objects.equals(id, otherEditPersonDescriptor.id)
+                    && Objects.equals(name, otherEditPersonDescriptor.name)
+                    && Objects.equals(ward, otherEditPersonDescriptor.ward)
+                    && Objects.equals(diagnosis, otherEditPersonDescriptor.diagnosis)
+                    && Objects.equals(medication, otherEditPersonDescriptor.medication);
+
+//                    && Objects.equals(phone, otherEditPersonDescriptor.phone)
+//                    && Objects.equals(email, otherEditPersonDescriptor.email)
+//                    && Objects.equals(address, otherEditPersonDescriptor.address)
+//                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this)
+                    .add("id", id)
                     .add("name", name)
-                    .add("phone", phone)
-                    .add("email", email)
-                    .add("address", address)
-                    .add("tags", tags)
+                    .add("ward", ward)
+                    .add("diagnosis", diagnosis)
+                    .add("medication", medication)
+//                    .add("phone", phone)
+//                    .add("email", email)
+//                    .add("address", address)
+//                    .add("tags", tags)
                     .toString();
         }
     }

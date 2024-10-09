@@ -9,11 +9,15 @@ import static java.util.Objects.requireNonNull;
  * Guarantees: immutable; is valid as declared in {@link #isValidDiagnosis(String)}
  */
 public class Diagnosis {
-    private final String value;
+    public final String value;
     public Diagnosis(String diagnosis) {
         requireNonNull(diagnosis);
 //        checkArgument(isValidDiagnosis(diagnosis), MESSAGE_CONSTRAINTS);
         this.value = diagnosis;
+    }
+
+    public static boolean isValidDiagnosis(String test) {
+        return true;
     }
 
     @Override

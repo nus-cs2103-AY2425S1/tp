@@ -7,11 +7,14 @@ import static java.util.Objects.requireNonNull;
  * Guarantees: immutable; is valid as declared in {@link #isValidMedication(String)}
  */
 public class Medication {
-    private final String value;
+    public final String value;
     public Medication(String medication) {
         requireNonNull(medication);
 //        checkArgument(isValidMedication(medication), MESSAGE_CONSTRAINTS);
         this.value = medication;
+    }
+    public static boolean isValidMedication(String test) {
+        return true;
     }
     @Override
     public String toString() {

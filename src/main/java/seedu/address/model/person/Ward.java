@@ -7,13 +7,16 @@ import static java.util.Objects.requireNonNull;
  * Guarantees: immutable; is valid as declared in {@link #isValidWard(String)}
  */
 public class Ward {
-    private final String value;
+    public final String value;
     public Ward(String ward) {
         requireNonNull(ward);
 //        checkArgument(isValidWard(ward), MESSAGE_CONSTRAINTS);
         this.value = ward;
     }
 
+    public static boolean isValidWard(String test) {
+        return true;
+    }
     @Override
     public String toString() {
         return value;
