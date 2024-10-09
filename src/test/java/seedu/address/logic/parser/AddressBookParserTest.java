@@ -104,7 +104,6 @@ public class AddressBookParserTest {
                 + " "
                 + PREFIX_INSURANCE_ID
                 + " 0 ";
-        System.out.println(userInput);
         AddInsuranceCommand command = (AddInsuranceCommand) parser.parseCommand(userInput);
         assertEquals(new AddInsuranceCommand(INDEX_FIRST_PERSON, 0), command);
     }
