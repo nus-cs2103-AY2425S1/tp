@@ -1,11 +1,16 @@
 package seedu.address.model.contactdate;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTES;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
+
+import seedu.address.testutil.ContactDateBuilder;
 
 
 public class ContactDateTest {
@@ -35,11 +40,19 @@ public class ContactDateTest {
     }
 
     @Test
+    public void createCurrentDate() {
+        LocalDate currentDate = LocalDate.now();
+        ContactDate contactDate = ContactDate.createCurrentDate(VALID_NOTES);
+        assertEquals(contactDate.value, currentDate);
+        assertEquals(contactDate.getNotes(), VALID_NOTES);
+    }
+
+    @Test
     public void equals() {
-        ContactDate contactDate = new ContactDate("2020-01-01", VALID_NOTES);
+        ContactDate contactDate = new ContactDateBuilder().build();
 
         // same values -> returns true
-        ContactDate contactDateCopy = new ContactDate("2020-01-01", VALID_NOTES);
+        ContactDate contactDateCopy = new ContactDateBuilder().build();
         assertTrue(contactDate.equals(contactDateCopy));
 
         // same object -> returns true
@@ -52,8 +65,12 @@ public class ContactDateTest {
         assertFalse(contactDate.equals(5.0f));
 
         // different contact date -> returns false
-        ContactDate differentContactDate = new ContactDate("2020-01-02", VALID_NOTES);
+        ContactDate differentContactDate = new ContactDateBuilder().withDate("2020-01-02").build();
         assertFalse(contactDate.equals(differentContactDate));
+
+        // different notes -> returns false
+        ContactDate differentNotes = new ContactDateBuilder().withNotes("Different notes").build();
+        assertFalse(contactDate.equals(differentNotes));
     }
 
 }
