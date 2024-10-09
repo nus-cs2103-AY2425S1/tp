@@ -5,6 +5,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_MISSING_INDEX;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteContactCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -31,18 +32,19 @@ public class DeleteCommandParser implements Parser<DeleteContactCommand> {
 
         String entityType = splitArgs[0]; // either "contact, "job" or "company"
         String indexString = splitArgs[1];
-        try {
-            Index index = ParserUtil.parseIndex(indexString);
 
-            switch (entityType) {
-            case "contact":
-                return new DeleteContactCommand(index);
-            default:
-                throw new ParseException(DELETE_COMMAND_USAGE);
-            }
+        Index index;
+        try {
+            index = ParserUtil.parseIndex(indexString);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteContactCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+        }
+        switch (entityType) {
+        case DeleteContactCommand.ENTITY_WORD:
+            return new DeleteContactCommand(index);
+        default:
+            throw new ParseException(DELETE_COMMAND_USAGE);
         }
     }
 
