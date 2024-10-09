@@ -358,7 +358,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   - 2a1. System shows an error message.
 
-    Use case resumes at step 2.
+    Use case ends.
 
 **Use case: UC4 - View person contact**
 
@@ -367,6 +367,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Actor performs <u>list all people (UC2)</u>.
 2.  Actor request to see specific person.
 3.  System shows person's contact details.
+
+    Use case ends.
+
+**Extensions**
+
+- 2a. The specified person is invalid.
+
+  - 2a1. System shows an error message.
 
     Use case ends.
 
