@@ -35,6 +35,7 @@ public class ParserUtilTest {
     private static final String VALID_TAG_2 = "neighbour";
 
     private static final String WHITESPACE = " \t\r\n";
+    private static final String CUSTOM_ERROR_MESSAGE = "Custom error message";
 
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
@@ -192,5 +193,29 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseName_nullCustomErrorMessage_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseName(null, CUSTOM_ERROR_MESSAGE));
+    }
+
+    @Test
+    public void parseName_invalidValueCustomErrorMessage_throwsParseException() {
+        assertThrows(ParseException.class,
+                CUSTOM_ERROR_MESSAGE, () -> ParserUtil.parseName(INVALID_NAME, CUSTOM_ERROR_MESSAGE));
+    }
+
+    @Test
+    public void parseName_validValueWithoutWhitespaceCustomErrorMessage_returnsName() throws Exception {
+        Name expectedName = new Name(VALID_NAME);
+        assertEquals(expectedName, ParserUtil.parseName(VALID_NAME, CUSTOM_ERROR_MESSAGE));
+    }
+
+    @Test
+    public void parseName_validValueWithWhitespaceCustomErrorMessage_returnsTrimmedName() throws Exception {
+        String nameWithWhitespace = WHITESPACE + VALID_NAME + WHITESPACE;
+        Name expectedName = new Name(VALID_NAME);
+        assertEquals(expectedName, ParserUtil.parseName(nameWithWhitespace, CUSTOM_ERROR_MESSAGE));
     }
 }

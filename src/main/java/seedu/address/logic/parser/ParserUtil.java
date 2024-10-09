@@ -51,6 +51,24 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String name} into a {@code Name} with a custom error message.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param name The name to be parsed.
+     * @param customErrorMessage The custom error message to be used if the name is invalid.
+     * @return A {@code Name} object if the given {@code name} is valid.
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static Name parseName(String name, String customErrorMessage) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!Name.isValidName(trimmedName)) {
+            throw new ParseException(customErrorMessage);
+        }
+        return new Name(trimmedName);
+    }
+
+    /**
      * Parses a {@code String phone} into a {@code Phone}.
      * Leading and trailing whitespaces will be trimmed.
      *
