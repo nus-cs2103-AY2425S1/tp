@@ -1,5 +1,7 @@
 package tutorease.address.logic.parser;
 
+import static tutorease.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -7,6 +9,7 @@ import tutorease.address.logic.commands.Command;
 import tutorease.address.logic.commands.DeleteContactCommand;
 import tutorease.address.logic.commands.ListContactCommand;
 import tutorease.address.logic.parser.exceptions.ParseException;
+
 
 
 /**
@@ -21,7 +24,7 @@ public class ContactCommandParser implements Parser<Command> {
         final Matcher matcher = CONTACT_COMMAND_FORMAT.matcher(args.trim());
 
         if (!matcher.matches()) {
-            throw new ParseException("Invalid contact command format. Please refer to the help for usage.");
+            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
         }
 
         final String subCommand = matcher.group("subCommand").toLowerCase();
