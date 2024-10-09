@@ -29,6 +29,7 @@ public class RejectCommand extends Command {
             "Candidate %1$s has been successfully marked as rejected.";
     public static final String MESSAGE_ALREADY_REJECTED = "Error: Candidate %1$s is already marked as rejected.";
     public static final String MESSAGE_PERSON_NOT_FOUND = "This candidate does not exist in the address book.";
+    public static final String MESSAGE_JOB_NOT_FOUND = "Error: Job not found.";
 
     private final Name name;
     private final Job job;
@@ -49,6 +50,9 @@ public class RejectCommand extends Command {
         Person personToReject = model.findPersonByNameAndJob(name, job);
 
         if (personToReject == null) {
+            if (!model.isJobPresent(job)) {
+                throw new CommandException(MESSAGE_JOB_NOT_FOUND);
+            }
             throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
         }
 
@@ -57,7 +61,7 @@ public class RejectCommand extends Command {
         }
         personToReject.markAsRejected();
         return new CommandResult(String.format(MESSAGE_REJECT_PERSON_SUCCESS,
-                personToReject.getName()));
+                this.name));
     }
 
     public Name getName() {

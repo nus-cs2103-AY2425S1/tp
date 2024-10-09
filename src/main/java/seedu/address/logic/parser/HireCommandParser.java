@@ -18,7 +18,7 @@ public class HireCommandParser implements Parser<HireCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the HireCommand
      * and returns a HireCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException if the user input does not conform to the expected format
      */
     public HireCommand parse(String args) throws ParseException {
         requireNonNull(args);

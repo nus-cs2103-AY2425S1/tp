@@ -78,6 +78,8 @@ public interface Model {
 
     void markAsHired(Person person);
 
+    boolean isJobPresent(Job job);
+
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.

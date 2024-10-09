@@ -21,8 +21,9 @@ public class HireCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Candidate %1$s has been successfully marked as hired.";
     public static final String MESSAGE_ALREADY_HIRED = "Error: Candidate %1$s is already marked as hired.";
-    public static final String MESSAGE_NAME_NOT_SPECIFIED = "Error: Name not specified. "
+    public static final String MESSAGE_NAME_NOT_SPECIFIED = "Error: Person with name does not exist. "
             + "Please provide the name of the candidate that you wish to change the status of.";
+    public static final String MESSAGE_JOB_NOT_FOUND = "Error: Job not found.";
 
     private final Name name;
     private final Job job;
@@ -41,18 +42,21 @@ public class HireCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        Person personToHire = model.findPersonByNameAndJob(name, job);
+        Person personToHire = model.findPersonByNameAndJob(this.name, job);
 
         if (personToHire == null) {
+            if (!model.isJobPresent(job)) {
+                throw new CommandException(MESSAGE_JOB_NOT_FOUND);
+            }
             throw new CommandException(MESSAGE_NAME_NOT_SPECIFIED);
         }
 
         if (personToHire.isHired()) {
-            throw new CommandException(String.format(MESSAGE_ALREADY_HIRED, name));
+            throw new CommandException(String.format(MESSAGE_ALREADY_HIRED, this.name));
         }
 
         personToHire.markAsHired();
-        return new CommandResult(String.format(MESSAGE_SUCCESS, name));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, this.name));
     }
 
     public Name getName() {
@@ -69,10 +73,10 @@ public class HireCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof HireCommand e)) {
+        if (!(other instanceof HireCommand otherHireCommand)) {
             return false;
         }
 
-        return name.equals(e.name) && job.equals(e.job);
+        return name.equals(otherHireCommand.name) && job.equals(otherHireCommand.job);
     }
 }

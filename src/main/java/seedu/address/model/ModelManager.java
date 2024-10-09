@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -143,7 +144,14 @@ public class ModelManager implements Model {
     public void markAsHired(Person person) {
         // Implementation to mark the person as hired
         // For example, setting a hired flag or updating the person's status
-        person.markAsHired(); // Assuming Person class has a setHired method
+        person.markAsHired();
+    }
+
+    @Override
+    public boolean isJobPresent(Job job) {
+        Objects.requireNonNull(job);
+        return addressBook.getPersonList().stream()
+                .anyMatch(person -> person.getJob().equals(job));
     }
 
     @Override
