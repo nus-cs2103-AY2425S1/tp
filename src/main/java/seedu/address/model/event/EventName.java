@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Event's name in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
-public class Name {
+public class EventName {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Event names should only contain alphanumeric characters and spaces, and it should not be blank";
@@ -25,7 +25,7 @@ public class Name {
      *
      * @param name A valid name.
      */
-    public Name(String name) {
+    public EventName(String name) {
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
         eventName = name;
@@ -51,12 +51,12 @@ public class Name {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Name)) {
+        if (!(other instanceof EventName)) {
             return false;
         }
 
-        Name otherName = (Name) other;
-        return eventName.equals(otherName.eventName);
+        EventName otherEventName = (EventName) other;
+        return eventName.equals(otherEventName.eventName);
     }
 
     @Override
