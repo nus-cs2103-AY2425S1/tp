@@ -8,7 +8,15 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.InspectCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses input arguments and creates a new InspectCommand object
+ */
 public class InspectCommandParser implements Parser<InspectCommand> {
+    /**
+     * Parses the given {@code String} of arguments in the context of the InspectCommand
+     * and returns a InspectCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public InspectCommand parse(String args) throws ParseException {
         requireNonNull(args);
 

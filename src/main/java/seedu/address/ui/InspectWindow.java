@@ -17,6 +17,10 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * The Inspect Window. Provides information about the contact being inspected
+ * and takes commands to manage deliveries under this contact.
+ */
 public class InspectWindow extends UiPart<Stage> {
 
     private static final String FXML = "InspectWindow.fxml";

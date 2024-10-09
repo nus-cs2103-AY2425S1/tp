@@ -10,6 +10,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
+/**
+ * Inspects a contact identified using it's displayed index from the address book.
+ */
 public class InspectCommand extends Command {
 
     public static final String COMMAND_WORD = "inspect";
@@ -20,13 +23,11 @@ public class InspectCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_INSPECT_SUCCESS = "Inspected person: %1$s";
-
-    public static final String MESSAGE_NOT_IMPLEMENTED_YET =
-            "Inspect command not implemented yet";
-
-    public static final String MESSAGE_ARGUMENTS = "Index: %1$d";
     private final Index index;
 
+    /**
+     * @param index of the contact to be inspected
+     */
     public InspectCommand(Index index) {
         requireAllNonNull(index);
 
