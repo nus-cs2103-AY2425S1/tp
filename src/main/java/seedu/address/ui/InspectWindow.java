@@ -163,6 +163,15 @@ public class InspectWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    private void handleList(CommandResult commandResult) {
+        logger.info("Changing UI back to main window...");
+
+        MainWindow mainWindow = new MainWindow(primaryStage, logic);
+        mainWindow.show();
+        mainWindow.fillInnerParts();
+        mainWindow.getResultDisplay().setFeedbackToUser(commandResult.getFeedbackToUser());
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
@@ -186,6 +195,8 @@ public class InspectWindow extends UiPart<Stage> {
                 handleHelp();
             } else if (commandResult.isExit()) {
                 handleExit();
+            } else if (commandResult.isList()) {
+                handleList(commandResult);
             } else {
                 throw new CommandException("Not yet implemented");
             }
