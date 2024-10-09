@@ -4,9 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.*;
+import static seedu.address.testutil.TypicalPersons.FLORIST;
+import static seedu.address.testutil.TypicalPersons.PHOTOGRAPHER;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -32,7 +35,6 @@ public class DeleteTagCommandTest {
 
     @Test void execute_invalidNotFoundDeleteTagCommand() {
         Tag tagToDelete = model.getFilteredTagList().get(0);
-        DeleteTagCommand deleteTagCommand = new DeleteTagCommand(tagToDelete);
 
         String expectedMessage = String.format(DeleteTagCommand.MESSAGE_DELETE_TAG_FAILURE_NOT_FOUND,
                 Messages.format(tagToDelete));
