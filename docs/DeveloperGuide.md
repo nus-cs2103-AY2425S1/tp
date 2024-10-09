@@ -389,13 +389,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4.  Process Requirement: The product needs to be developed in a breadth-first incremental manner over the project duration.
+5.  Accessibility Requirement: The data should be stored locally and should be in a human-editable text file.
+6.  Environment Requirement: The software should not depend on your own remote server.
+7.  Environment Requirement: The use of third-party frameworks/libraries/services is allowed but only if they:
+    - are free, open-source (this doesn't apply to services), and have permissive license terms.
+    - do not require any installation by the user of your software.
+    - In case of services, requiring the user to create an account on a third-party service is strongly discouraged as it can result in your product being considered 'low testability'.
+8.  Quality Requirement: The GUI should work well (i.e., should not cause any resolution-related inconveniences to the user) for:
+    - Standard screen resolutions 1920x1080 and higher, and
+    - Screen scales 100% and 125%.
+9.  Quality Requirement: The GUI should be usable (i.e., all functions can be used even if the user experience is not optimal) for:
+    - Resolutions 1280x720 and higher, and
+    - Screen scales 150%.
+10.  Portability Requirement: Package everything into a single JAR file. If you are unable to package everything into a JAR file, package the JAR file and other files needed into a single zip file.
+11.  Size Requirement: The file sizes of the deliverables should be reasonable and not exceed the limits given below.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **DBMS**: Database Management System e.g., MySQL
 
 --------------------------------------------------------------------------------------------------------------------
 
