@@ -24,7 +24,7 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for RemarkCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for NoteCommand.
  */
 public class NoteCommandTest {
 
@@ -47,12 +47,12 @@ public class NoteCommandTest {
     public void execute_deleteNote_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson).withNote("").build();
-        NoteCommand remarkCommand = new NoteCommand(firstPerson.getName(),
+        NoteCommand noteCommand = new NoteCommand(firstPerson.getName(),
                 new Note(editedPerson.getNote().toString()));
         String expectedMessage = String.format(NoteCommand.MESSAGE_DELETE_NOTE_SUCCESS, editedPerson);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
-        assertCommandSuccess(remarkCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(noteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -82,7 +82,7 @@ public class NoteCommandTest {
         // different index -> returns false
         assertFalse(standardCommand.equals(new NoteCommand(BOB.getName(), new Note(VALID_NOTE_AMY))));
 
-        // different remark -> returns false
+        // different note -> returns false
         assertFalse(standardCommand.equals(new NoteCommand(AMY.getName(), new Note(VALID_NOTE_BOB))));
     }
 }
