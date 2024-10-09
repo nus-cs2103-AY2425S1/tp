@@ -1,15 +1,26 @@
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
+[![Java CI](https://github.com/AY2425S1-CS2103-F09-2/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2425S1-CS2103-F09-2/tp/actions/workflows/gradle.yml)
 
 ![Ui](docs/images/Ui.png)
 
-* This is **a sample project for Software Engineering (SE) students**.<br>
-  Example usages:
-  * as a starting point of a course project (as opposed to writing everything from scratch)
-  * as a case study
-* The project simulates an ongoing software project for a desktop application (called _AddressBook_) used for managing contact details.
-  * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
-  * It comes with a **reasonable level of user and developer documentation**.
-* It is named `AddressBook Level 3` (`AB3` for short) because it was initially created as a part of a series of `AddressBook` projects (`Level 1`, `Level 2`, `Level 3` ...).
-* For the detailed documentation of this project, see the **[Address Book Product Website](https://se-education.org/addressbook-level3)**.
-* This project is a **part of the se-education.org** initiative. If you would like to contribute code to this project, see [se-education.org](https://se-education.org/#contributing-to-se-edu) for more info.
-* More will be added soon.
+# RealConnect
+
+**RealConnect** is a user-friendly address book designed specifically for **real estate sales agents**. It streamlines the process of managing client information by offering an organized and efficient approach to storing, categorizing, and retrieving contacts.
+
+## Target User Profile:
+Real estate sales agents who need an easy-to-use system for managing client data and automating follow-ups with buyers, sellers, and leads.
+
+## Value Proposition:
+RealConnect simplifies contact management for real estate professionals by allowing users to categorize clients into groups (buyers, sellers, leads), automate reminders, and organize client information, ensuring agents never miss an opportunity to engage with their clients and prospects.
+
+## Key Features:
+- **Add new contacts** with fields for name, phone number, physical address, birthday, and email address. Optional fields include social media handles.
+- **Search functionality** to quickly filter contacts by name.
+- **Alphabetical sorting** of contacts by name for easier navigation.
+- A **single-page view** displaying the full contact details.
+- **Duplicate contact detection** with error notifications to avoid redundancies.
+- Mark contacts as **favorites** to prioritize key clients.
+- A **confirmation prompt** before deleting any contacts, ensuring accidental deletions are avoided.
+- **Success notifications** for actions like adding, editing, and deleting contacts.
+- **Field validation** (phone number, email, etc.) during contact creation and editing to maintain accurate client data.
+
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
