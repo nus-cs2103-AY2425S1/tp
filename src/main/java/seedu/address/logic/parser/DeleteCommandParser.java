@@ -25,7 +25,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             }
 
             String studentIdString = trimmedArg.substring(3).trim();
-            StudentId studentId = new StudentId(studentIdString);
+            StudentId studentId = ParserUtil.parseStudentId(studentIdString);
             return new DeleteCommand(studentId);
 
         } catch (IllegalArgumentException e) {

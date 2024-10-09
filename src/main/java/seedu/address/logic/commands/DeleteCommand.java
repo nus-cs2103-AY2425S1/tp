@@ -28,7 +28,7 @@ public class DeleteCommand extends Command {
             + PREFIX_STUDENTID + "12345678";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Student: %1$s";
-
+    public static final String MESSAGE_PERSON_NOT_FOUND = "No student is found with Student ID: %1$s";
     private final StudentId studentId;
 
     public DeleteCommand(StudentId studentId) {
@@ -40,21 +40,21 @@ public class DeleteCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-        Person personToDelete = null;
+        Person toDelete = null;
 
         for (Person person : lastShownList) {
             if (person.getStudentId().equals(studentId)) {
-                personToDelete = person;
+                toDelete = person;
                 break;
             }
         }
 
-        if (personToDelete == null) {
-            throw new CommandException(String.format(Messages.MESSAGE_INVALID_STUDENT_ID, studentId));
+        if (toDelete == null) {
+            throw new CommandException(String.format(MESSAGE_PERSON_NOT_FOUND, studentId));
         }
 
-        model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+        model.deletePerson(toDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(toDelete)));
     }
 
     @Override

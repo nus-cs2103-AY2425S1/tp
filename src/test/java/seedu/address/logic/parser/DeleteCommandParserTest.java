@@ -23,7 +23,7 @@ public class DeleteCommandParserTest {
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
         StudentId validStudentId = new StudentId("12345678");
-        String input = "id/" + validStudentId.toString();
+        String input = "id/" + validStudentId;
         assertParseSuccess(parser, input, new DeleteCommand(validStudentId));
     }
 
