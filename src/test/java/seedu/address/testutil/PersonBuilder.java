@@ -94,6 +94,9 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Status} of the {@code Person} that we are building.
+     */
     public PersonBuilder withStatus(String status) {
         this.status = new Status(status);
         return this;
