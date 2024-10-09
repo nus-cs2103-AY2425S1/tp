@@ -25,7 +25,7 @@ public class Project {
      * Every field must be present and not null.
      */
     public Project(Name name, Id id) {
-        requireAllNonNull(name, phone, email, address, tags);
+        requireAllNonNull(name, id);
         this.name = name;
         this.id = id;
     }
