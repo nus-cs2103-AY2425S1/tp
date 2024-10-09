@@ -28,8 +28,10 @@ public class ListAppointmentsCommandTest {
     public void execute_addressBookWithUpcomingAppointments_success() {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-        Person personWithUpcomingAppointment = new PersonBuilder().withName("Alice").withSchedule(now.plusDays(1).format(formatter)).build();
-        Person personWithPastAppointment = new PersonBuilder().withName("Bob").withSchedule(now.minusDays(1).format(formatter)).build();
+        Person personWithUpcomingAppointment = new PersonBuilder().withName("Alice")
+                .withSchedule(now.plusDays(1).format(formatter)).build();
+        Person personWithPastAppointment = new PersonBuilder().withName("Bob")
+                .withSchedule(now.minusDays(1).format(formatter)).build();
         model.addPerson(personWithUpcomingAppointment);
         model.addPerson(personWithPastAppointment);
         expectedModel.addPerson(personWithUpcomingAppointment);
@@ -47,9 +49,12 @@ public class ListAppointmentsCommandTest {
     public void execute_addressBookWithMultipleUpcomingAppointments_success() {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-        Person person1 = new PersonBuilder().withName("Alice").withSchedule(now.plusDays(1).format(formatter)).build();
-        Person person2 = new PersonBuilder().withName("Bob").withSchedule(now.plusDays(2).format(formatter)).build();
-        Person person3 = new PersonBuilder().withName("Charlie").withSchedule(now.minusDays(1).format(formatter)).build();
+        Person person1 = new PersonBuilder().withName("Alice")
+                .withSchedule(now.plusDays(1).format(formatter)).build();
+        Person person2 = new PersonBuilder().withName("Bob")
+                .withSchedule(now.plusDays(2).format(formatter)).build();
+        Person person3 = new PersonBuilder().withName("Charlie")
+                .withSchedule(now.minusDays(1).format(formatter)).build();
         model.addPerson(person1);
         model.addPerson(person2);
         model.addPerson(person3);
