@@ -16,6 +16,7 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
     private final String email;
     private final String role;
     private final String major;
+    private final String address;
     private final List<String> tags;
 
     /**
@@ -29,12 +30,13 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
      * @param tags Tags of person in List of String.
      */
     public PersonContainsKeywordsPredicate(String name, String phone, String email,
-                                           String role, String major, List<String> tags) {
+                                           String role, String major, String address, List<String> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.role = role;
         this.major = major;
+        this.address = address;
         this.tags = tags;
     }
 
@@ -45,6 +47,7 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
                 && (email == null || StringUtil.containsWordIgnoreCase(person.getEmail().value, email))
                 && (role == null || StringUtil.containsWordIgnoreCase(person.getRole().toString(), role))
                 && (major == null || StringUtil.containsWordIgnoreCase(person.getMajor().toString(), major))
+                && (address == null || StringUtil.containsWordIgnoreCase(person.getAddress().value, address))
                 && (tags == null || tags.isEmpty() || tags.stream().allMatch(tag -> person.getTags().stream().anyMatch(personTag -> StringUtil.containsWordIgnoreCase(personTag.tagName, tag))));
     }
 
@@ -65,6 +68,7 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
                 && Objects.equals(email, otherPredicate.email)
                 && Objects.equals(role, otherPredicate.role)
                 && Objects.equals(major, otherPredicate.major)
+                && Objects.equals(address, otherPredicate.address)
                 && Objects.equals(tags, otherPredicate.tags);
     }
 
@@ -76,6 +80,7 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
                 .add("email", email != null ? email : "null")
                 .add("role", role != null ? role : "null")
                 .add("major", major != null ? major : "null")
+                .add("address", address != null ? address : "null")
                 .add("tags", tags != null ? tags : "null")
                 .toString();
     }
