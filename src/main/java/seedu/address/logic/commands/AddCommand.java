@@ -60,7 +60,12 @@ public class AddCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
-    private String generateDuplicatePersonMessage() {
+    /**
+     * Generates a message for duplicate person with the specified {@code Person}
+     *
+     * @return message with person's name
+     */
+    public String generateDuplicatePersonMessage() {
         return String.format(MESSAGE_DUPLICATE_PERSON, toAdd.getName());
     }
 
