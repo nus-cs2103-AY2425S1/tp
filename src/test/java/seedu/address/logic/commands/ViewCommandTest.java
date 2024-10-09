@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.ViewCommand;
+
 
 public class ViewCommandTest {
 
