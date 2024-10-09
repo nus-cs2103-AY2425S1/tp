@@ -3,11 +3,15 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a Person's Age in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidAge(String)}
+ */
 public class Age {
     public static final String MESSAGE_CONSTRAINTS =
            "TBA";
 
-    /*
+    /**
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
@@ -27,7 +31,7 @@ public class Age {
     }
 
     /**
-     * Returns true if a given string is a valid name.
+     * Returns true if a given string is a valid age.
      */
     public static boolean isValidAge(String test) {
         return test.matches(VALIDATION_REGEX);
