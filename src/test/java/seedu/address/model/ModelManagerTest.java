@@ -30,6 +30,7 @@ public class ModelManagerTest {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
         assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
+        assertEquals(new ClientBook(), new ClientBook(modelManager.getClientBook()));
     }
 
     @Test
@@ -41,6 +42,7 @@ public class ModelManagerTest {
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setAddressBookFilePath(Paths.get("address/book/file/path"));
+        userPrefs.setClientBookFilePath(Paths.get("client/book/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
@@ -48,6 +50,7 @@ public class ModelManagerTest {
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
         userPrefs.setAddressBookFilePath(Paths.get("new/address/book/file/path"));
+        userPrefs.setClientBookFilePath(Paths.get("new/client/book/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -76,6 +79,20 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void setClientBookFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setClientBookFilePath(null));
+    }
+
+    @Test
+    public void setClientBookFilePath_validPath_setsClientBookFilePath() {
+        Path path = Paths.get("data/clientbook.json");
+        modelManager.setClientBookFilePath(path);
+        assertEquals(path, modelManager.getClientBookFilePath());
+    }
+
+    // ==================== AddressBook Related Tests ====================
+
+    @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasPerson(null));
     }
@@ -95,6 +112,31 @@ public class ModelManagerTest {
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
     }
+
+    // ==================== ClientBook Related Tests ====================
+
+    @Test
+    public void hasClient_nullClient_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasClient(null));
+    }
+
+    @Test
+    public void hasClient_clientNotInClientBook_returnsFalse() {
+        assertFalse(modelManager.hasClient(CARL));
+    }
+
+    @Test
+    public void hasClient_clientInClientBook_returnsTrue() {
+        modelManager.addClient(CARL);
+        assertTrue(modelManager.hasClient(CARL));
+    }
+
+    @Test
+    public void getFilteredClientList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredClientList().remove(0));
+    }
+
+    // ==================== Equality Tests ====================
 
     @Test
     public void equals() {
