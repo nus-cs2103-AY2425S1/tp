@@ -5,24 +5,24 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.ContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
  * Keyword matching is case-insensitive.
  */
-public class FindCommand extends Command {
+public abstract class AbstractFindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names, contacts or emails "
             + "contain any of the specified keywords (case-insensitive) and displays them as a list with indices.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final ContainsKeywordsPredicate predicate;
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
+    public AbstractFindCommand(ContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -41,11 +41,11 @@ public class FindCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FindCommand)) {
+        if (!(other instanceof AbstractFindCommand)) {
             return false;
         }
 
-        FindCommand otherFindCommand = (FindCommand) other;
+        AbstractFindCommand otherFindCommand = (AbstractFindCommand) other;
         return this.predicate.equals(otherFindCommand.predicate);
     }
 
