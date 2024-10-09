@@ -4,11 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
-<<<<<<<< HEAD:src/main/java/seedu/address/model/rentalinformation/Address.java
  * Represents a Rental Information's address in the address book.
-========
- * Represents a Client's address in the address book.
->>>>>>>> pr/63:src/main/java/seedu/address/model/client/Address.java
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  */
 public class Address {

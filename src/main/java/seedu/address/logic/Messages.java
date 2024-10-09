@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.client.Client;
+import seedu.address.model.rentalinformation.RentalInformation;
 
 /**
  * Container for user visible messages.
@@ -45,6 +46,29 @@ public class Messages {
 //                .append(client.getAddress())
                 .append("; Tags: ");
         client.getTags().forEach(builder::append);
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code RentalInformation} for display to the user.
+     */
+    public static String formatRentalInformation(RentalInformation rentalInformation) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("Address: ")
+                .append(rentalInformation.getAddress())
+                .append("; Rental Start Date: ")
+                .append(rentalInformation.getRentalStartDate())
+                .append("; Rental End Date: ")
+                .append(rentalInformation.getRentalEndDate())
+                .append("; Rent Due Date: ")
+                .append(rentalInformation.getRentDueDate())
+                .append("; Monthly Rent: ")
+                .append(rentalInformation.getMonthlyRent())
+                .append("; Deposit: ")
+                .append(rentalInformation.getDeposit())
+                .append("; Customer List: ")
+                .append(rentalInformation.getCustomerList());
+//        client.getTags().forEach(builder::append);
         return builder.toString();
     }
 
