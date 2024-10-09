@@ -1,11 +1,12 @@
 package seedu.address.model;
 
-import java.nio.file.Path;
-import java.util.function.Predicate;
-
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.product.Product;
+
+import java.nio.file.Path;
+import java.util.function.Predicate;
 
 /**
  * The API of the Model component.
@@ -56,6 +57,10 @@ public interface Model {
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
     boolean hasPerson(Person person);
+    /**
+     * Returns true if a product with the same identity as {@code product} exists in InvenTrack.
+     */
+    boolean hasProduct(Product product);
 
     /**
      * Deletes the given person.
@@ -68,6 +73,13 @@ public interface Model {
      * {@code person} must not already exist in the address book.
      */
     void addPerson(Person person);
+
+    /**
+     * Adds the given product.
+     * {@code product} must not already exist in InvenTrack.
+     */
+    void addProduct(Product product);
+
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
