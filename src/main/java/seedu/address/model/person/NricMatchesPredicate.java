@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import java.util.function.Predicate;
+
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
@@ -28,8 +29,8 @@ public class NricMatchesPredicate implements Predicate<Person> {
             return false;
         }
 
-        NricMatchesPredicate otherNRICMatchesPredicate = (NricMatchesPredicate) other;
-        return nric.equalsIgnoreCase(otherNRICMatchesPredicate.nric);
+        NricMatchesPredicate otherNricMatchesPredicate = (NricMatchesPredicate) other;
+        return nric.equalsIgnoreCase(otherNricMatchesPredicate.nric);
     }
 
     @Override

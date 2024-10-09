@@ -10,7 +10,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Nric {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "NRIC should be 9 characters long, starting and ending with an alphabet, with 7 digits in between. E.g., S1234567D";
+            "NRIC should be 9 characters long, starting and ending with an alphabet, "
+                    + "with 7 digits in between. E.g., S1234567D";
 
     /*
      * NRIC must follow the format:
