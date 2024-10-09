@@ -89,17 +89,17 @@ public class VersionTest {
         another = new Version(2, 15, 5, false);
         assertTrue(one.compareTo(another) < 0);
 
-        // Tests early access vs not early access on same version number
+        // Tests early access vs not early access on same version value
         one = new Version(2, 15, 0, true);
         another = new Version(2, 15, 0, false);
         assertTrue(one.compareTo(another) < 0);
 
-        // Tests early access lower version vs not early access higher version compare by version number first
+        // Tests early access lower version vs not early access higher version compare by version value first
         one = new Version(2, 15, 0, true);
         another = new Version(2, 15, 5, false);
         assertTrue(one.compareTo(another) < 0);
 
-        // Tests early access higher version vs not early access lower version compare by version number first
+        // Tests early access higher version vs not early access lower version compare by version value first
         one = new Version(2, 15, 0, false);
         another = new Version(2, 15, 5, true);
         assertTrue(one.compareTo(another) < 0);
