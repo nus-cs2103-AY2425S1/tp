@@ -9,19 +9,18 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class RoomNumber {
 
-    public static final int MIN_FLOOR_DIGITS = 2;
-    public static final int MAX_FLOOR_DIGITS = 2;
-    public static final int MIN_ROOM_DIGITS = 2;
-    public static final int MAX_ROOM_DIGITS = 2;
+    public static final String MESSAGE_CONSTRAINTS = "A string no longer than length 7 in the form of “xx-xxxx” " +
+            "x are integers from “0” to “9”. E.g. “05-5053”. The first 2 integers are floor numbers and the other 4 " +
+            "integers are the room number on the floor. No spaces are allowed in between each character.";
 
-    public static final String MESSAGE_CONSTRAINTS = "Room Numbers should be in the form \"#Floor-Room\", and it should not be blank. Eg #01-01";
 
     /*
-     * The first character of the address must be a "#",
-     * the floor and room numbers must be separated with a "-"
+     * The first 2 integers are floor numbers,
+     * the other 4 integers are the room number on the floor,
+     * and no spaces are allowed in between each character.
+     * Floor and Room are separated by a "-".
      */
-    public static final String VALIDATION_REGEX = String.format("#\\d{%d,%d}-\\d{%d,%d}",
-            MIN_FLOOR_DIGITS, MAX_FLOOR_DIGITS, MIN_ROOM_DIGITS, MAX_ROOM_DIGITS);
+    public static final String VALIDATION_REGEX = "\\d{2}-\\d{4}";
 
     public final String value;
 
