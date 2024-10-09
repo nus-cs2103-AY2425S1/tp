@@ -1,13 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
@@ -15,17 +13,19 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.PersonTaggedWithPredicate;
 import seedu.address.model.tag.Tag;
 
-public class UntagCommand extends Command{
+/**
+ * Command to remove tags from a person.
+ */
+public class UntagCommand extends Command {
 
     public static final String COMMAND_WORD = "untag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": untags specific contact \n"
             + "Parameters: 'index t/ [TAG TO REMOVE]' OR 'index t/ all' (this removes everything)\n"
-            + "Examples: " + COMMAND_WORD + "1 t/ friends" + " " + COMMAND_WORD + " 1 t/ all";
+            + "Examples: " + COMMAND_WORD + "1 t/ friends," + " " + COMMAND_WORD + " 1 t/ all";
 
     public static final String MESSAGE_UNTAG_SUCCESS = "Untagged the person: %1$s";
     private final Index index;
@@ -66,6 +66,12 @@ public class UntagCommand extends Command{
         return new CommandResult(generateSuccessMessage(editedPerson, tagsToRemoveFromPerson));
     }
 
+    /**
+     * Removes the specified tags from the original tags of the person.
+     * @param originalTags the original set of tags
+     * @param tagsToRemove the set of tags to remove
+     * @return the modified set of tags
+     */
     public Set<Tag> removeTags(Set<Tag> originalTags, Set<Tag> tagsToRemove) {
         Set<Tag> modifiedTags = new HashSet<>(originalTags);
         modifiedTags.removeAll(tagsToRemove);
@@ -73,8 +79,10 @@ public class UntagCommand extends Command{
     }
 
     /**
-     * Generates a command execution success message when the person has been untagged
-     * {@code personToEdit}.
+     * Generates a success message after tags are removed.
+     * @param personToEdit the person being edited
+     * @param removedTags the tags that were removed
+     * @return the success message
      */
     private String generateSuccessMessage(Person personToEdit, Set<Tag> removedTags) {
         String removedTagsString = removedTags.isEmpty()
