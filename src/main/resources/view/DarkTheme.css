@@ -150,6 +150,12 @@
     -fx-text-fill: white;
 }
 
+.details-pane {
+    -fx-background-color: #3c3e3f;
+    -fx-border-color: derive(#1d1d1d, 10%);
+    -fx-border-top-width: 1px;
+}
+
 .stack-pane {
      -fx-background-color: derive(#1d1d1d, 20%);
 }

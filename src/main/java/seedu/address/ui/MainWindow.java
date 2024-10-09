@@ -8,6 +8,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
@@ -18,6 +19,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
+
 
 import static seedu.address.model.util.SampleDataUtil.getTagSet;
 
@@ -117,17 +119,11 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), this::onPersonSelected);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        //BlankDetailsPanel blankDetailsPanel = new BlankDetailsPanel();
-        //personDetailsPanelPlaceholder.getChildren().add(blankDetailsPanel.getRoot());
-
-        Person person = new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new Address("Blk 30 Geylang Street 29, #06-40"),
-                getTagSet("friends"));
-        PersonDetailsPanel personDetailsPanel = new PersonDetailsPanel(person, 1);
-        personDetailsPanelPlaceholder.getChildren().add(personDetailsPanel.getRoot());
+        BlankDetailsPanel blankDetailsPanel = new BlankDetailsPanel();
+        personDetailsPanelPlaceholder.getChildren().add(blankDetailsPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -137,6 +133,21 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    private void onPersonSelected(MouseEvent event) {
+        Person selectedPerson = personListPanel.getPersonListView().getSelectionModel().getSelectedItem();
+        int personIndex = personListPanel.getPersonListView().getSelectionModel().getSelectedIndex();
+        if (selectedPerson != null) {
+            updateDetailsPanel(selectedPerson, personIndex);
+        }
+    }
+
+    private void updateDetailsPanel(Person person, int index) {
+        personDetailsPanelPlaceholder.getChildren().clear();
+
+        PersonDetailsPanel personDetailsPanel = new PersonDetailsPanel(person, index + 1);
+        personDetailsPanelPlaceholder.getChildren().add(personDetailsPanel.getRoot());
     }
 
     /**
