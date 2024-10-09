@@ -1,14 +1,13 @@
-package seedu.address.model.person;
+package seedu.address.model.rentalinformation;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's address in the address book.
+ * Represents a Rental Information's address in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  */
 public class Address {
-
     public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
 
     /*
@@ -61,5 +60,4 @@ public class Address {
     public int hashCode() {
         return value.hashCode();
     }
-
 }
