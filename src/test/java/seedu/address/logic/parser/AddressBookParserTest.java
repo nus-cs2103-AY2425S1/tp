@@ -21,6 +21,7 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListAppointmentsCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ReminderCommand;
 import seedu.address.logic.commands.ScheduleCommand;
@@ -103,6 +104,11 @@ public class AddressBookParserTest {
         assertEquals(expectedCommand, actualCommand);
     }
 
+    @Test
+    public void parseCommand_listAppointments() throws Exception {
+        assertTrue(parser.parseCommand(ListAppointmentsCommand.COMMAND_WORD) instanceof ListAppointmentsCommand);
+    }
+  
     @Test
     public void parseCommand_reminder() throws Exception {
         String appointmentDateTime = "2024-10-04 1000";
