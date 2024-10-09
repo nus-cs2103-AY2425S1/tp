@@ -159,6 +159,7 @@ public class EditCommand extends Command {
             setTags(toCopy.tags);
         }
 
+        
         /**
          * Returns true if at least one field is edited.
          */
