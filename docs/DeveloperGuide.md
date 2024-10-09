@@ -286,29 +286,29 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​            | I want to …​                                   | So that I can…​                                                            |
-|----------|--------------------|------------------------------------------------|----------------------------------------------------------------------------|
-| `* * *`  | new teacher        | add a contact                                  | keep track of them                                                         |
-| `* * *`  | teacher            | delete a contact                               | remove contacts that I no longer need                                      |
-| `* * *`  | teacher            | add a grade to a contact                       | keep track of a student's grades                                           |
-| `* * *`  | teacher            | add a student's details                        | keep track of the students under me                                        |
-| `* *`    | teacher            | edit a contact                                 | correct a mistake made without having to delete it                         |
-| `* *`    | teacher            | search for a contact                           | find the contact I am looking for without having to scroll                 |
-| `* *`    | frequent teacher   | add tags or labels to contacts                 | group the many contacts that are in the application by a commonality       |
-| `* *`    | frequent teacher   | filter contacts by labels or tags              | filter out irrelevant contacts                                             |
-| `* *`    | frequent teacher   | mass add contacts                              | add a group of contacts without having to do so one by one                 |
-| `* *`    | frequent teacher   | mass delete contacts                           | delete multiple contacts without having to do so one by one                |
-| `* *`    | teacher            | add next of kins' contacts                     | contact the relevant individual in case of emergencies                     |
-| `*`      | frequent teacher   | do custom sorts for contacts                   | shift relevant contacts near the top of the list of contacts               |
-| `*`      | new teacher        | see guided tours and tooltips                  | familiarise myself with the application interface                          |
-| `*`      | long-time teacher  | archive contacts                               | reduce clutter in the application without permanently deleting the contact |
-| `*`      | long-time teacher  | refactor tags or labels                        | mass edit tags or labels if any changes occur                              |
-| `*`      | new teacher        | see the application populated with sample data | see what the application interface looks like                              |
-| `*`      | frequent teacher   | add descriptions to contacts                   | be reminded of various traits a particular individual might have           |
-| `*`      | frequent teacher   | undo previous action                           | undo a mistake without having to delete or edit any contacts               |
-| `*`      | long-time teacher  | export contact data                            | have a backup data file in case anything happens to the application        |
-| `*`      | long-time teacher  | import contact data                            | load data from a file to restore lost or missing data                      |
-| `*`      | long-time teacher  | access communication history                   | well-prepared for upcoming meetings                                        |
+| Priority | As a …​            | I want to …​                                   | So that I can…​                                                             |
+|----------|--------------------|------------------------------------------------|-----------------------------------------------------------------------------|
+| `* * *`  | new teacher        | add a contact                                  | keep track of them                                                          |
+| `* * *`  | teacher            | delete a contact                               | remove contacts that I no longer need                                       |
+| `* * *`  | teacher            | add a grade to a contact                       | keep track of a student's grades                                            |
+| `* * *`  | teacher            | add a student's details                        | keep track of the students under me                                         |
+| `* *`    | teacher            | edit a contact                                 | update contact information without having to delete it                      |
+| `* *`    | teacher            | search for a contact                           | find the contact I am looking for without having to scroll through the list |
+| `* *`    | frequent teacher   | add tags or labels to contacts                 | group the many contacts that are in the application by a commonality        |
+| `* *`    | frequent teacher   | filter contacts by labels or tags              | filter out irrelevant contacts                                              |
+| `* *`    | frequent teacher   | mass add contacts                              | add multiple contacts without having to do so one by one                    |
+| `* *`    | frequent teacher   | mass delete contacts                           | delete multiple contacts without having to do so one by one                 |
+| `* *`    | teacher            | add next of kins' contacts                     | contact the relevant individual in case of emergencies                      |
+| `*`      | frequent teacher   | do custom sorts for contacts                   | shift relevant contacts near the top of the list of contacts                |
+| `*`      | new teacher        | see guided tours and tooltips                  | familiarise myself with the application interface                           |
+| `*`      | long-time teacher  | archive contacts                               | reduce clutter in the application without permanently deleting the contact  |
+| `*`      | long-time teacher  | refactor tags or labels                        | mass edit tags or labels if necessary                                       |
+| `*`      | new teacher        | see the application populated with sample data | see what the application interface looks like                               |
+| `*`      | frequent teacher   | add descriptions to contacts                   | be reminded of various traits a particular individual might have            |
+| `*`      | frequent teacher   | undo previous action                           | undo a mistake without having to delete or edit any contacts                |
+| `*`      | long-time teacher  | export contact data                            | have a backup data file in case anything happens to the application         |
+| `*`      | long-time teacher  | import contact data                            | load data from a file to restore lost or missing data                       |
+| `*`      | long-time teacher  | access communication history                   | be well-prepared for upcoming meetings                                      |
 
 ### Use cases
 
@@ -318,17 +318,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User chooses to add a student to the list of contacts
-2. User enters details of student they wish to add to the list
-3. AddressBook adds the student and updates the list of contacts to include the added student
+1. User adds a student to the list of contacts.
+2. AddressBook updates the list of contacts.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The given data is invalid.
+* 1a. AddressBook detects an error in the given data.
 
-    * 2a1. AddressBook shows an error message.
+    * 1a1. AddressBook shows an error message.
 
       Use case ends.
 
@@ -338,30 +337,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User enters a description of the student they wish to find
-2. AddressBook returns a list of students that fits the description
+1. User finds a student.
+2. AddressBook displays the student.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The given data is invalid.
+* 1a. AddressBook detects an error in the given data.
 
     * 1a1. AddressBook shows an error message.
 
       Use case ends.
 
-* 2a. No student in the list fits the given description.
+* 2a. AddressBook displays an empty list.
 
   Use case ends.
+
+* 2b. AddressBook displays a list of multiple students.
+    
+    * 2b1. User manually locates the student in the list.
+      
+      Use case ends.
 
 **Use case: UC03 - Add a grade for a student**
 
 **MSS**
 
-1. User <u>finds the student they wish to add a grade for (UC02)</u>
-2. User sends a request to AddressBook to add a grade for the student in the list
-3. AddressBook adds the grade for the student and updates the list of contacts
+1. User <u>finds the student they wish to add a grade for (UC02).</u>
+2. User adds a grade for the student.
+3. AddressBook updates the list of contacts.
 
    Use case ends.
 
@@ -371,7 +376,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 2a. The given data is invalid.
+* 2a. AddressBook detects an error in the given data.
 
     * 2a1. AddressBook shows an error message.
 
@@ -381,9 +386,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User <u>finds the student they wish to delete from the list (UC02)</u>
-2. User sends a request to AddressBook to delete the student in the list
-3. AddressBook deletes the student and updates the list of contacts
+1. User <u>finds the student they wish to delete from the list (UC02).</u>
+2. User deletes the student in the list.
+3. AddressBook updates the list of contacts.
 
    Use case ends.
 
@@ -393,7 +398,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 2a. The given data is invalid.
+* 2a. AddressBook detects an error in the given data.
 
     * 2a1. AddressBook shows an error message.
 
@@ -403,9 +408,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User <u>finds the student they wish to edit (UC02)</u>
-2. User sends a request to AddressBook to edit the details of the student in the list
-3. AddressBook edits the student's details and updates the list of contacts
+1. User <u>finds the student they wish to edit (UC02).</u>
+2. User edits the details of the student in the list.
+3. AddressBook updates the list of contacts.
 
    Use case ends.
 
@@ -415,7 +420,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 2a. The given data is invalid.
+* 2a. AddressBook detects an error in the given data.
 
     * 2a1. AddressBook shows an error message.
 
@@ -425,9 +430,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User <u>finds the student they wish to edit (UC02)</u>
-2. User sends a request to AddressBook to add a tag to the student in the list
-3. AddressBook adds the tag to the student and updates the list of contacts
+1. User <u>finds the student they wish to edit the details of (UC02).</u>
+2. User adds a tag to the student in the list.
+3. AddressBook adds the tag to the student and updates the list of contacts.
 
    Use case ends.
 
@@ -437,7 +442,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 2a. The given data is invalid.
+* 2a. AddressBook detects an error in the given data.
 
     * 2a1. AddressBook shows an error message.
 
@@ -447,9 +452,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User <u>finds the student they wish to add contacts of next-of-kins for (UC02)</u>
-2. User sends a request to AddressBook to add contacts of next-of-kins of the student in the list
-3. AddressBook adds the contacts and updates the list of contacts
+1. User <u>finds the student they wish to add contacts of next-of-kins for (UC02).</u>
+2. User adds contacts of next-of-kins of the student in the list.
+3. AddressBook updates the list of contacts.
 
    Use case ends.
 
@@ -459,7 +464,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 2a. The given data is invalid.
+* 2a. AddressBook detects an error in the given data.
 
     * 2a1. AddressBook shows an error message.
 
