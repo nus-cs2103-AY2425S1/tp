@@ -26,6 +26,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Reminder;
 import seedu.address.model.person.Schedule;
 import seedu.address.model.tag.Tag;
 
@@ -101,9 +102,11 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Schedule updatedSchedule = editPersonDescriptor.getSchedule().orElse(personToEdit.getSchedule());
+        Reminder updatedReminder = editPersonDescriptor.getReminder().orElse(personToEdit.getReminder());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedSchedule, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
+                updatedSchedule, updatedReminder, updatedTags);
     }
 
     @Override
@@ -140,6 +143,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Schedule schedule;
+        private Reminder reminder;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -154,6 +158,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setSchedule(toCopy.schedule);
+            setReminder(toCopy.reminder);
             setTags(toCopy.tags);
         }
 
@@ -204,6 +209,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(schedule);
         }
 
+        public void setReminder(Reminder reminder) {
+            this.reminder = reminder;
+        }
+
+        public Optional<Reminder> getReminder() {
+            return Optional.ofNullable(reminder);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -238,6 +251,7 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(schedule, otherEditPersonDescriptor.schedule)
+                    && Objects.equals(reminder, otherEditPersonDescriptor.reminder)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -249,6 +263,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("schedule", schedule)
+                    .add("reminder", reminder)
                     .add("tags", tags)
                     .toString();
         }
