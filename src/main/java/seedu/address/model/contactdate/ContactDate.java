@@ -64,7 +64,7 @@ public class ContactDate {
      */
     public ContactDate add(CallFrequency callFrequency) {
         int daysToAdd = Integer.parseInt(callFrequency.value); // Parse the number of days from callFrequency
-        return new ContactDate(value.plusDays(daysToAdd).toString()); // Create and return a new ContactDate
+        return new ContactDate(value.plusDays(daysToAdd).toString(), ""); // Create and return a new ContactDate
     }
 
     @Override
