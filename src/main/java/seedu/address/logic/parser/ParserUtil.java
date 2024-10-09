@@ -105,10 +105,10 @@ public class ParserUtil {
     public static PersonType parsePersonType(String personType) throws ParseException {
         requireNonNull(personType);
         String trimmedPersonType = personType.trim();
-        if (!Email.isValidEmail(trimmedPersonType)) {
+        if (!PersonType.isValidType(trimmedPersonType)) {
             throw new ParseException(PersonType.MESSAGE_CONSTRAINTS);
         }
-        return new PersonType(personType);
+        return new PersonType(trimmedPersonType);
     }
 
     /**
