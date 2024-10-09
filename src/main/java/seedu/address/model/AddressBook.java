@@ -103,7 +103,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("persons", persons)
+                .add("suppliers", persons)
                 .toString();
     }
 
