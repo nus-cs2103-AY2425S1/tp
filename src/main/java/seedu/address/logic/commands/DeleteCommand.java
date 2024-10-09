@@ -1,10 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
 
 import java.util.List;
-
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -36,6 +35,13 @@ public class DeleteCommand extends Command {
         this.studentId = studentId;
     }
 
+    /**
+     * Executes the delete command and removes a person identified by the given studentID.
+     *
+     * @param model the model that contains the data of persons
+     * @return a CommandResult that shows the outcome of the command
+     * @throws CommandException if the studentID is invalid or not found
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
