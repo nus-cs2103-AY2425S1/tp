@@ -8,18 +8,19 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddTaskCommand;
-import seedu.address.model.person.Name;
 
 public class AddTaskCommandParserTest {
     private AddTaskCommandParser parser = new AddTaskCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        AddTaskCommand expectedCommand = new AddTaskCommand("Buy medication", new Name("John Doe"));
+        Index index1 = Index.fromOneBased(1);
+        AddTaskCommand expectedCommand = new AddTaskCommand(index1, "Buy medication");
 
         // Correct format with `d/` and `p/`
-        assertParseSuccess(parser, " d/Buy medication p/John Doe", expectedCommand);
+        assertParseSuccess(parser, "1 d/Buy medication", expectedCommand);
     }
 
     @Test
@@ -36,15 +37,13 @@ public class AddTaskCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
 
-        // invalid person name (format is correct but name is invalid)
-        assertParseFailure(parser, "addtask d/Buy medication p/R@chel", Name.MESSAGE_CONSTRAINTS);
-
-        // invalid task description and valid person name
-        assertParseFailure(parser, "addtask p/!nv@l!d description p/John Doe",
+        // invalid task description and valid index
+        assertParseFailure(parser, "addtask 1 p/!nv@l!d description",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTaskCommand.MESSAGE_USAGE));
 
-        // valid task description and invalid person name
-        assertParseFailure(parser, "addtask d/Buy medication p/R@chel", Name.MESSAGE_CONSTRAINTS);
+        // valid task description and invalid index
+        assertParseFailure(parser, "addtask a d/Buy medication",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTaskCommand.MESSAGE_USAGE));
     }
 
 

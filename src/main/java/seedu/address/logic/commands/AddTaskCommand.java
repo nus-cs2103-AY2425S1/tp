@@ -1,11 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_NONEXISTENT_PERSON;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 
@@ -17,60 +17,44 @@ public class AddTaskCommand extends Command {
     public static final String COMMAND_WORD = "addtask";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task list. "
-            + "Parameters: d/DESCRIPTION p/PERSON\n"
-            + "Example: " + COMMAND_WORD + " d/Buy medication p/John Doe";
+            + "Parameters: INDEX d/DESCRIPTION\n"
+            + "Example: " + COMMAND_WORD + " 1 d/Buy medication";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task list";
 
     private final String taskDescription;
-    private final Name personName;
+    private final Index target;
 
     /**
      * Creates an AddTaskCommand to add the specified {@code Task} and associate it with {@code Person}.
      */
-    public AddTaskCommand(String taskDescription, Name personName) {
+    public AddTaskCommand(Index target, String taskDescription) {
         requireNonNull(taskDescription);
-        requireNonNull(personName);
+        requireNonNull(target);
         this.taskDescription = taskDescription;
-        this.personName = personName;
+        this.target = target;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        // Validate if the person (patient) exists in the system
-        Person patient = findPersonByName(personName, model);
-        if (patient == null) {
-            throw new CommandException(String.format(MESSAGE_NONEXISTENT_PERSON, personName.fullName));
+        requireNonNull(model);
+
+        if (target.getZeroBased() >= model.getFilteredPersonList().size()) {
+            throw new CommandException(MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        // Create the task with the valid patient
-        Task taskToAdd = new Task(patient, taskDescription);
+        Person patient = model.getFilteredPersonList().get(target.getZeroBased());
 
-        // Check for duplicate task
+        Task taskToAdd = new Task(patient, taskDescription);
         if (model.hasTask(taskToAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
-        // Add the task to the model
         model.addTask(taskToAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, taskToAdd.getDescription()));
-    }
-
-    /**
-     * Helper method to find a person by name in the model.
-     * @param name The name of the person to search for.
-     * @return The Person object if found, or null if not found.
-     */
-    private Person findPersonByName(Name name, Model model) {
-        for (Person person : model.getFilteredPersonList()) {
-            if (person.getName().equals(name)) {
-                return person;
-            }
-        }
-        return null;
     }
 
     @Override
@@ -86,6 +70,6 @@ public class AddTaskCommand extends Command {
 
         AddTaskCommand otherAddTaskCommand = (AddTaskCommand) other;
         return taskDescription.equals(otherAddTaskCommand.taskDescription)
-                && personName.equals(otherAddTaskCommand.personName);
+                && target.equals(otherAddTaskCommand.target);
     }
 }

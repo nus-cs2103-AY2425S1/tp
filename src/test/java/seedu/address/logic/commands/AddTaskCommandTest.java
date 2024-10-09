@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.MESSAGE_NONEXISTENT_PERSON;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -17,13 +17,13 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.PersonBuilder;
@@ -35,21 +35,22 @@ public class AddTaskCommandTest {
 
     @Test
     public void constructor_nullTaskDescription_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddTaskCommand(null, new Name("John Doe")));
+
+        assertThrows(NullPointerException.class, () -> new AddTaskCommand(Index.fromOneBased(1), null));
     }
 
     @Test
-    public void constructor_nullPersonName_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddTaskCommand("Buy medication", null));
+    public void constructor_nullIndex_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddTaskCommand(null, "Buy medication"));
     }
 
     @Test
-    public void execute_personDoesNotExist_throwsCommandException() {
-        Name nonExistentPersonName = new Name("Non Existent Person");
-        AddTaskCommand addTaskCommand = new AddTaskCommand("Take medication", nonExistentPersonName);
+    public void execute_indexDoesNotExist_throwsCommandException() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        AddTaskCommand addTaskCommand = new AddTaskCommand(outOfBoundIndex, "Take medication");
 
         assertThrows(CommandException.class,
-                String.format(MESSAGE_NONEXISTENT_PERSON, nonExistentPersonName.fullName), () ->
+                String.format(MESSAGE_INVALID_TASK_DISPLAYED_INDEX), () ->
                         addTaskCommand.execute(model));
     }
 
@@ -57,15 +58,19 @@ public class AddTaskCommandTest {
     public void execute_taskAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingTaskAdded modelStub = new ModelStubAcceptingTaskAdded();
         Person validPerson = new PersonBuilder().build();
-        modelStub.addPerson(validPerson);
-
         Task validTask = new Task(validPerson, "Buy medication");
-        AddTaskCommand addTaskCommand = new AddTaskCommand(validTask.getDescription(), validPerson.getName());
+        modelStub.addPerson(validPerson);
+        Index index = Index.fromOneBased(1);
+
+        AddTaskCommand addTaskCommand = new AddTaskCommand(index, validTask.getDescription());
 
         CommandResult commandResult = addTaskCommand.execute(modelStub);
 
+        modelStub.addPerson(validPerson);
+
         assertEquals(String.format(AddTaskCommand.MESSAGE_SUCCESS, validTask.getDescription()),
                 commandResult.getFeedbackToUser());
+
         assertEquals(Arrays.asList(validTask), modelStub.tasksAdded);
     }
 
@@ -81,7 +86,9 @@ public class AddTaskCommandTest {
 
         modelStub.addTask(validTask);
 
-        AddTaskCommand addTaskCommand = new AddTaskCommand(validTask.getDescription(), validPerson.getName());
+        Index index = Index.fromOneBased(1);
+
+        AddTaskCommand addTaskCommand = new AddTaskCommand(index, validTask.getDescription());
 
         assertThrows(CommandException.class, AddTaskCommand.MESSAGE_DUPLICATE_TASK, () ->
                 addTaskCommand.execute(modelStub));
@@ -92,18 +99,17 @@ public class AddTaskCommandTest {
     public void equals() {
         Task task1 = new TaskBuilder().withDescription("Buy meds").build();
         Task task2 = new TaskBuilder().withDescription("Visit hospital").build();
-        Task taskWithSamePersonDifferentDescription = new TaskBuilder().withDescription("Take vitamins")
-                .withPatient(task1.getPatient()).build();
-        Task taskWithSameDescriptionDifferentPerson = new TaskBuilder().withDescription("Buy meds")
-                .withPatient(task2.getPatient()).build();
-        AddTaskCommand addTask1Command = new AddTaskCommand(task1.getDescription(), task1.getPatient().getName());
-        AddTaskCommand addTask2Command = new AddTaskCommand(task2.getDescription(), task2.getPatient().getName());
+
+        Index index1 = Index.fromOneBased(1);
+        Index index2 = Index.fromOneBased(2);
+        AddTaskCommand addTask1Command = new AddTaskCommand(index1, task1.getDescription());
+        AddTaskCommand addTask2Command = new AddTaskCommand(index2, task2.getDescription());
 
         // same object -> returns true
         assertTrue(addTask1Command.equals(addTask1Command));
 
         // same values -> returns true
-        AddTaskCommand addTask1CommandCopy = new AddTaskCommand(task1.getDescription(), task1.getPatient().getName());
+        AddTaskCommand addTask1CommandCopy = new AddTaskCommand(index1, task1.getDescription());
         assertTrue(addTask1Command.equals(addTask1CommandCopy));
 
         // different types -> returns false
@@ -118,26 +124,33 @@ public class AddTaskCommandTest {
     }
 
     @Test
-    public void equals_sameTaskDescriptionDifferentPersonName_returnsFalse() {
+    public void equals_sameTaskDescriptionDifferentIndex_returnsFalse() {
         Task task1 = new TaskBuilder().withDescription("Buy meds")
                 .withPatient(new PersonBuilder().withName("Alice").build()).build();
         Task task2 = new TaskBuilder().withDescription("Buy meds")
                 .withPatient(new PersonBuilder().withName("Bob").build()).build();
-        AddTaskCommand addTask1Command = new AddTaskCommand(task1.getDescription(), task1.getPatient().getName());
-        AddTaskCommand addTask2Command = new AddTaskCommand(task2.getDescription(), task2.getPatient().getName());
+
+        Index index1 = Index.fromOneBased(1);
+        Index index2 = Index.fromOneBased(2);
+
+        AddTaskCommand addTask1Command = new AddTaskCommand(index1, task1.getDescription());
+        AddTaskCommand addTask2Command = new AddTaskCommand(index2, task2.getDescription());
 
         // Different personName should return false
         assertFalse(addTask1Command.equals(addTask2Command));
     }
 
     @Test
-    public void equals_sameNameDifferentPersonObjects_returnsTrue() {
+    public void equals_sameIndexDifferentDescriptionObjects_returnsTrue() {
         Task task1 = new TaskBuilder().withDescription("Buy meds")
                 .withPatient(new PersonBuilder().withName("Alice").build()).build();
         Task task2 = new TaskBuilder().withDescription("Buy meds")
                 .withPatient(new PersonBuilder().withName("Alice").build()).build();
-        AddTaskCommand addTask1Command = new AddTaskCommand(task1.getDescription(), task1.getPatient().getName());
-        AddTaskCommand addTask2Command = new AddTaskCommand(task2.getDescription(), task2.getPatient().getName());
+
+        Index index1 = Index.fromOneBased(1);
+
+        AddTaskCommand addTask1Command = new AddTaskCommand(index1, task1.getDescription());
+        AddTaskCommand addTask2Command = new AddTaskCommand(index1, task2.getDescription());
 
         // Different Person objects but same name, should return true
         assertTrue(addTask1Command.equals(addTask2Command));
