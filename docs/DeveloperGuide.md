@@ -438,6 +438,11 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
 * **Case-insensitive**: Refers to functionality where uppercase and lowercase letters are treated as the same (e.g., "Peter Tan" is the same as "peter tan")
 * **Novice user**: A user with limited experience or familiarity with the system, requiring guidance and simple, intuitive interfaces to perform tasks effectively
 * **Intermediate user**: A user with some experience and familiarity with the system, capable of performing tasks with minimal guidance but not yet an expert
+* **Use case**: A description of a sequences of actions that the user or system performs, resulting in an observable outcome
+* **Actor**: In the context of use cases, actor refers to the role played by the user
+* **Main Success Scenario (MSS)**: The sequence of interactions that is the most straightforward and assumes that nothing goes wrong
+* **Non-Functional Requirements**: A set of specifications that describes the system's operation capabilities, instead of its function
+
 
 --------------------------------------------------------------------------------------------------------------------
 
