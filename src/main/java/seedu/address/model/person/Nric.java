@@ -97,4 +97,9 @@ public class Nric {
         Nric otherNric = (Nric) other;
         return this.nric.equals(otherNric.nric);
     }
+
+    @Override
+    public int hashCode() {
+        return nric.hashCode();
+    }
 }
