@@ -19,13 +19,19 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
     public DeleteCommand parse(String args) throws ParseException {
         String trimmedArg = args.trim();
         try {
+            if (!trimmedArg.startsWith("id/")) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+            }
+
+            String studentIdString = trimmedArg.substring(3).trim();
 
             if (!StudentId.isValidStudentId(trimmedArg)) {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
             }
 
-            StudentId studentId = new StudentId(trimmedArg);
+            StudentId studentId = new StudentId(studentIdString);
             return new DeleteCommand(studentId);
 
         } catch (IllegalArgumentException e) {
