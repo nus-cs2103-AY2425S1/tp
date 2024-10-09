@@ -88,8 +88,14 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Builds a {@code Student}.
+     *
+     * @returns A Student.
+     */
     public Student build() {
-        return group.isPresent() ? new Student(name, email, tags, studentNumber, group) : new Student(name, email, tags, studentNumber);
+        return group.isPresent()
+                ? new Student(name, email, tags, studentNumber, group) : new Student(name, email, tags, studentNumber);
     }
 
 }
