@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -24,6 +25,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Rate;
 import seedu.address.model.person.Schedule;
 import seedu.address.model.person.Subject;
 
@@ -44,11 +46,13 @@ public class EditCommand extends Command {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_SCHEDULE + "SCHEDULE] "
             + "[" + PREFIX_SUBJECT + "SUBJECT]] "
+            + "[" + PREFIX_RATE + "RATE] "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com"
             + PREFIX_SCHEDULE + "Saturday-1000-1200"
-            + PREFIX_SUBJECT + "Mathematics";
+            + PREFIX_SUBJECT + "Mathematics"
+            + PREFIX_RATE + "300";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -103,8 +107,11 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Schedule updatedSchedule = editPersonDescriptor.getSchedule().orElse(personToEdit.getSchedule());
         Subject updatedSubject = editPersonDescriptor.getSubject().orElse(personToEdit.getSubject());
+        Rate updatedRate = editPersonDescriptor.getRate().orElse(personToEdit.getRate());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedSchedule, updatedSubject);
+        return new Person(
+                updatedName, updatedPhone, updatedEmail, updatedAddress, updatedSchedule, updatedSubject, updatedRate
+        );
     }
 
     @Override
@@ -142,6 +149,7 @@ public class EditCommand extends Command {
         private Address address;
         private Schedule schedule;
         private Subject subject;
+        private Rate rate;
 
         public EditPersonDescriptor() {}
 
@@ -155,13 +163,14 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setSchedule(toCopy.schedule);
             setSubject(toCopy.subject);
+            setRate(toCopy.rate);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, schedule);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, schedule, rate);
         }
 
         public void setName(Name name) {
@@ -211,6 +220,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(subject);
         }
 
+        public void setRate(Rate rate) {
+            this.rate = rate;
+        }
+
+        public Optional<Rate> getRate() {
+            return Optional.ofNullable(rate);
+        }
+
 
         @Override
         public boolean equals(Object other) {
@@ -229,7 +246,8 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(schedule, otherEditPersonDescriptor.schedule)
-                    && Objects.equals(subject, otherEditPersonDescriptor.subject);
+                    && Objects.equals(subject, otherEditPersonDescriptor.subject)
+                    && Objects.equals(rate, otherEditPersonDescriptor.rate);
         }
 
         @Override
@@ -241,6 +259,7 @@ public class EditCommand extends Command {
                     .add("address", address)
                     .add("schedule", schedule)
                     .add("subject", subject)
+                    .add("rate", rate)
                     .toString();
         }
 

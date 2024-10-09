@@ -6,6 +6,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Rate;
 import seedu.address.model.person.Schedule;
 import seedu.address.model.person.Subject;
 
@@ -35,6 +36,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setAddress(person.getAddress());
         descriptor.setSchedule(person.getSchedule());
         descriptor.setSubject(person.getSubject());
+        descriptor.setRate(person.getRate());
     }
 
     /**
@@ -82,6 +84,14 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withSubject(String subject) {
         descriptor.setSubject(new Subject(subject));
+        return this;
+    }
+
+    /*
+     * Sets the {@code Rate} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withRate(String rate) {
+        descriptor.setRate(new Rate(rate));
         return this;
     }
 

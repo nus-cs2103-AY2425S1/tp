@@ -43,13 +43,13 @@ public class RateTest {
     @Test
     void toStringTest() {
         Rate rate = new Rate("1.23");
-        assertEquals("1.23/h", rate.toString());
+        assertEquals("1.23", rate.toString());
 
         Rate rate2 = new Rate("1.0");
-        assertEquals("1.00/h", rate2.toString());
+        assertEquals("1.00", rate2.toString());
 
         Rate rate3 = new Rate("0");
-        assertEquals("0.00/h", rate3.toString());
+        assertEquals("0.00", rate3.toString());
     }
 
     @Test

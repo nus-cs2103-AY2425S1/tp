@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -39,6 +40,8 @@ public class CommandTestUtil {
     public static final String VALID_SCHEDULE_BOB = "Monday-1800-1900";
     public static final String VALID_SUBJECT_AMY = "Mathematics";
     public static final String VALID_SUBJECT_BOB = "Mathematics";
+    public static final String VALID_RATE_AMY = "250.00";
+    public static final String VALID_RATE_BOB = "300.25";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -52,6 +55,8 @@ public class CommandTestUtil {
     public static final String SCHEDULE_DESC_BOB = " " + PREFIX_SCHEDULE + VALID_SCHEDULE_BOB;
     public static final String SUBJECT_DESC_AMY = " " + PREFIX_SUBJECT + VALID_SUBJECT_AMY;
     public static final String SUBJECT_DESC_BOB = " " + PREFIX_SUBJECT + VALID_SUBJECT_BOB;
+    public static final String RATE_DESC_AMY = " " + PREFIX_RATE + VALID_RATE_AMY;
+    public static final String RATE_DESC_BOB = " " + PREFIX_RATE + VALID_RATE_BOB;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -60,6 +65,7 @@ public class CommandTestUtil {
     public static final String INVALID_SCHEDULE_DESC = " " + PREFIX_SCHEDULE + "Sunday 1800-1900";
     public static final String INVALID_SUBJECT_DESC = " " + PREFIX_SUBJECT + "Physical education";
 
+    public static final String INVALID_RATE_DESC = " " + PREFIX_RATE + "12.398";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
