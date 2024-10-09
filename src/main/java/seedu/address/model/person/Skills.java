@@ -15,6 +15,11 @@ public class Skills {
     public static final String VALIDATION_REGEX = "^[a-zA-Z]+(, [a-zA-Z]+)*$";
     public final String value;
 
+    /**
+     * Constructs a {@code Skills}.
+     *
+     * @param skills A valid skills string.
+     */
     public Skills(String skills) {
         requireNonNull(skills);
         checkArgument(isValidSkillsString(skills), MESSAGE_CONSTRAINTS);
