@@ -324,7 +324,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Main Flow**:
 1. User selects "Create New Event" option
 2. System displays event creation form
-3. User enters event details (name, date, time, location, required roles)
+3. User enters event details (eventName, date, time, location, required roles)
 4. User submits the form
 5. System validates the information
 6. System creates the new event and confirms creation to the user
