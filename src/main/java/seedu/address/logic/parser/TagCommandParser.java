@@ -1,12 +1,15 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.TagCommand;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.tag.Tag;
+
+import java.util.Set;
 
 /**
  * Parses the given {@code String} of arguments in the context of the TagCommand
@@ -20,9 +23,11 @@ public class TagCommandParser implements Parser<TagCommand> {
         ArgumentMultimap multimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG);
         try {
             Index index = ParserUtil.parseIndex(multimap.getPreamble());
+            Set<Tag> tagList = ParserUtil.parseTags(multimap.getAllValues(PREFIX_TAG)); //the list of tags to be added
+            return new TagCommand(index, tagList);
+
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE), pe);
         }
-        throw new ParseException("Tag Command Parser not implemented yet.");
     }
 }
