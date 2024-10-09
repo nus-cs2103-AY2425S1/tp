@@ -174,12 +174,13 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String appointment} into a {@code Appointment}.
+     * Parses a serialised {@code String appointment} into a {@code Appointment}.
+     *
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code appointment} is invalid.
      */
-    public static Appointment parseAppointment(String appointment) throws ParseException {
+    public static Appointment parseSerialisedAppointment(String appointment) throws ParseException {
         requireNonNull(appointment);
         String[] trimmedAppointments = appointment.trim().split(":");
         if (trimmedAppointments.length < 3) {
@@ -241,7 +242,7 @@ public class ParserUtil {
 
         final Set<Appointment> appointmentSet = new HashSet<>();
         for (String appointmentName : appointments) {
-            appointmentSet.add(parseAppointment(appointmentName));
+            appointmentSet.add(parseSerialisedAppointment(appointmentName));
         }
         return appointmentSet;
     }
