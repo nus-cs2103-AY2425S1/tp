@@ -15,7 +15,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -23,6 +22,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.EmergencyContact;
+import seedu.address.model.person.Level;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
@@ -30,41 +30,41 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Updates the details of an existing person in the address book.
  */
-public class EditCommand extends Command {
+public class UpdateCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD = "update";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates the details of the person identified "
+            + "by their full name in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: NAME (full name) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMERGENCY_CONTACT + "EMERGENCY_PHONE] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_SUBJECT + "SUBJECT]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "Example: " + COMMAND_WORD + " Cristiano Ronaldo "
             + PREFIX_PHONE + "91234567 ";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_UPDATE_PERSON_SUCCESS = "Updated Person: %1$s";
+    public static final String MESSAGE_NOT_UPDATED = "At least one field to be updated must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
-    private final Index index;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final Name name;
+    private final UpdatePersonDescriptor updatePersonDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param name of the person in the filtered person list to update
+     * @param updatePersonDescriptor details to update the person with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
-        requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
+    public UpdateCommand(Name name, UpdatePersonDescriptor updatePersonDescriptor) {
+        requireNonNull(name);
+        requireNonNull(updatePersonDescriptor);
 
-        this.index = index;
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.name = name;
+        this.updatePersonDescriptor = new UpdatePersonDescriptor(updatePersonDescriptor);
     }
 
     @Override
@@ -72,39 +72,43 @@ public class EditCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        if (name.equals("")) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_UPDATE);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Person personToUpdate = lastShownList.stream()
+                .filter(person -> person.getName().fullName.equals(name.toString()))
+                .findFirst()
+                .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_PERSON_UPDATE));
+        Person updatedPerson = createUpdatedPerson(personToUpdate, updatePersonDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+        if (!personToUpdate.isSamePerson(updatedPerson) && model.hasPerson(updatedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.setPerson(personToEdit, editedPerson);
+        model.setPerson(personToUpdate, updatedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        return new CommandResult(String.format(MESSAGE_UPDATE_PERSON_SUCCESS, Messages.format(updatedPerson)));
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Person} with the details of {@code personToUpdate}
+     * updated with {@code updatePersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+    private static Person createUpdatedPerson(Person personToUpdate, UpdatePersonDescriptor updatePersonDescriptor) {
+        assert personToUpdate != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        EmergencyContact updatedEmergencyContact = editPersonDescriptor.getEmergencyContact()
-                .orElse(personToEdit.getEmergencyContact());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Note updatedNote = editPersonDescriptor.getNote().orElse(personToEdit.getNote());
-        Set<Subject> updatedSubjects = editPersonDescriptor.getSubjects().orElse(personToEdit.getSubjects());
+        Name updatedName = updatePersonDescriptor.getName().orElse(personToUpdate.getName());
+        Phone updatedPhone = updatePersonDescriptor.getPhone().orElse(personToUpdate.getPhone());
+        EmergencyContact updatedEmergencyContact = updatePersonDescriptor.getEmergencyContact()
+                .orElse(personToUpdate.getEmergencyContact());
+        Address updatedAddress = updatePersonDescriptor.getAddress().orElse(personToUpdate.getAddress());
+        Note updatedNote = updatePersonDescriptor.getNote().orElse(personToUpdate.getNote());
+        Set<Subject> updatedSubjects = updatePersonDescriptor.getSubjects().orElse(personToUpdate.getSubjects());
+        Level updatedLevel = updatePersonDescriptor.getLevel().orElse(personToUpdate.getLevel());
 
         return new Person(updatedName, updatedPhone, updatedEmergencyContact,
-                updatedAddress, updatedNote, updatedSubjects);
+                updatedAddress, updatedNote, updatedSubjects, updatedLevel);
     }
 
     @Override
@@ -114,54 +118,56 @@ public class EditCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
+        if (!(other instanceof UpdateCommand)) {
             return false;
         }
 
-        EditCommand otherEditCommand = (EditCommand) other;
-        return index.equals(otherEditCommand.index)
-                && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
+        UpdateCommand otherUpdateCommand = (UpdateCommand) other;
+        return name.equals(otherUpdateCommand.name)
+                && updatePersonDescriptor.equals(otherUpdateCommand.updatePersonDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("index", index)
-                .add("editPersonDescriptor", editPersonDescriptor)
+                .add("name", name)
+                .add("updatePersonDescriptor", updatePersonDescriptor)
                 .toString();
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
+     * Stores the details to update the person with. Each non-empty field value will replace the
      * corresponding field value of the person.
      */
-    public static class EditPersonDescriptor {
+    public static class UpdatePersonDescriptor {
         private Name name;
         private Phone phone;
         private EmergencyContact emergencyContact;
         private Address address;
         private Note note;
         private Set<Subject> subjects;
+        private Level level;
 
-        public EditPersonDescriptor() {}
+        public UpdatePersonDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code subjects} is used internally.
          */
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+        public UpdatePersonDescriptor(UpdatePersonDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmergencyContact(toCopy.emergencyContact);
             setAddress(toCopy.address);
             setNote(toCopy.note);
             setSubjects(toCopy.subjects);
+            setLevel(toCopy.level);
         }
 
         /**
-         * Returns true if at least one field is edited.
+         * Returns true if at least one field is updated.
          */
-        public boolean isAnyFieldEdited() {
+        public boolean isAnyFieldUpdated() {
             return CollectionUtil.isAnyNonNull(name, phone, emergencyContact, address, note, subjects);
         }
 
@@ -205,6 +211,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(note);
         }
 
+        public void setLevel(Level level) {
+            this.level = level;
+        }
+
+        public Optional<Level> getLevel() {
+            return Optional.ofNullable(level);
+        }
+
         /**
          * Sets {@code subjects} to this object's {@code subjects}.
          * A defensive copy of {@code subjects} is used internally.
@@ -229,17 +243,18 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof UpdatePersonDescriptor)) {
                 return false;
             }
 
-            EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
-            return Objects.equals(name, otherEditPersonDescriptor.name)
-                    && Objects.equals(phone, otherEditPersonDescriptor.phone)
-                    && Objects.equals(emergencyContact, otherEditPersonDescriptor.emergencyContact)
-                    && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(note, otherEditPersonDescriptor.note)
-                    && Objects.equals(subjects, otherEditPersonDescriptor.subjects);
+            UpdatePersonDescriptor otherUpdatePersonDescriptor = (UpdatePersonDescriptor) other;
+            return Objects.equals(name, otherUpdatePersonDescriptor.name)
+                    && Objects.equals(phone, otherUpdatePersonDescriptor.phone)
+                    && Objects.equals(emergencyContact, otherUpdatePersonDescriptor.emergencyContact)
+                    && Objects.equals(address, otherUpdatePersonDescriptor.address)
+                    && Objects.equals(note, otherUpdatePersonDescriptor.note)
+                    && Objects.equals(subjects, otherUpdatePersonDescriptor.subjects)
+                    && Objects.equals(level, otherUpdatePersonDescriptor.level);
         }
 
         @Override
@@ -250,6 +265,7 @@ public class EditCommand extends Command {
                     .add("emergencyContact", emergencyContact)
                     .add("address", address)
                     .add("note", note)
+                    .add("level", level)
                     .add("subjects", subjects)
                     .toString();
         }

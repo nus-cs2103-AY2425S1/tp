@@ -11,6 +11,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.EmergencyContact;
+import seedu.address.model.person.Level;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Phone;
@@ -121,6 +122,21 @@ public class ParserUtil {
             throw new ParseException(Subject.MESSAGE_CONSTRAINTS);
         }
         return new Subject(trimmedSubject);
+    }
+
+    /**
+     * Parses a {@code String level} into a {@code Level}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code level} is invalid.
+     */
+    public static Level parseLevel(String level) throws ParseException {
+        requireNonNull(level);
+        String trimmedLevel = level.trim();
+        if (!Level.isValidLevelName(trimmedLevel)) {
+            throw new ParseException(Level.MESSAGE_CONSTRAINTS);
+        }
+        return new Level(trimmedLevel);
     }
 
     /**

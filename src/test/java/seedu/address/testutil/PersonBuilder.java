@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.EmergencyContact;
+import seedu.address.model.person.Level;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
@@ -22,6 +23,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMERGENCY_CONTACT = "93838383";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_NOTE = "";
+    public static final String DEFAULT_LEVEL = "P3";
 
     private Name name;
     private Phone phone;
@@ -29,6 +31,7 @@ public class PersonBuilder {
     private Address address;
     private Note note;
     private Set<Subject> subjects;
+    private Level level;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -40,6 +43,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         note = new Note(DEFAULT_NOTE);
         subjects = new HashSet<>();
+        level = new Level(DEFAULT_LEVEL);
     }
 
     /**
@@ -52,6 +56,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         note = personToCopy.getNote();
         subjects = new HashSet<>(personToCopy.getSubjects());
+        level = personToCopy.getLevel();
     }
 
     /**
@@ -102,8 +107,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Level} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withLevel(String level) {
+        this.level = !level.equals("") ? new Level(level) : new Level("NONE");
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, emergencyContact, address, note, subjects);
+        return new Person(name, phone, emergencyContact, address, note, subjects, level);
     }
 
 }

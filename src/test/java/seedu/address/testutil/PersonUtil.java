@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -10,7 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.UpdateCommand.UpdatePersonDescriptor;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Subject;
 
@@ -35,6 +36,7 @@ public class PersonUtil {
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(PREFIX_EMERGENCY_CONTACT + person.getEmergencyContact().value + " ");
         sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
+        sb.append(PREFIX_LEVEL + person.getLevel().levelName + " ");
         person.getSubjects().stream().forEach(
             s -> sb.append(PREFIX_SUBJECT + s.subjectName + " ")
         );
@@ -44,7 +46,7 @@ public class PersonUtil {
     /**
      * Returns the part of command string for the given {@code EditPersonDescriptor}'s details.
      */
-    public static String getEditPersonDescriptorDetails(EditPersonDescriptor descriptor) {
+    public static String getUpdatePersonDescriptorDetails(UpdatePersonDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
@@ -52,6 +54,7 @@ public class PersonUtil {
                 .ifPresent(phone -> sb.append(PREFIX_EMERGENCY_CONTACT).append(phone.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         descriptor.getNote().ifPresent(note -> sb.append(PREFIX_NOTE).append(note.value).append(" "));
+        descriptor.getLevel().ifPresent(level -> sb.append(PREFIX_LEVEL).append(level.levelName).append(" "));
         if (descriptor.getSubjects().isPresent()) {
             Set<Subject> subjects = descriptor.getSubjects().get();
             if (subjects.isEmpty()) {
