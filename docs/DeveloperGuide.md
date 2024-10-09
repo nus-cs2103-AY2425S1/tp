@@ -371,7 +371,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS:**
 1. User opens the application.
 2. GAB opens up to the home page.
-3. User enters /add vendorsName location contactNumber
+3. User enters the add command
 4. GAB displays the added vendor
 5. Use case ends.
 
@@ -382,7 +382,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * Steps 3a1-3a2 are repeated until the right add vendor command format is recognised
     * Use case resumes at step 4.
 * 3b. Adding tags
-    * 3b1. User enters /add vendorsName location contactNumber /tag tag
+    * 3b1. User enters the add command along with the tag
     * 3b2. GAB returns added vendor
     * Steps 3b1-3b2 are repeated until the right add vendor command format is recognised
     * Use case resumes at step 4.
@@ -392,7 +392,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS:**
 1. User opens the application.
 2. GAB opens up to the home page.
-3. User enters /update listIndex vendorsName location contactNumber
+3. User enters the update command
 4. GAB displays the updated vendor
 5. Use case ends.
 
@@ -414,7 +414,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS:**
 1. User opens the application.
 2. GAB opens up to the home page.
-3. User enters /update listIndex vendorsName /tag tag
+3. User adds tag after <u>initiating the update command (UC5)</u>
 4. GAB displays the updated vendor
 5. Use case ends.
 
