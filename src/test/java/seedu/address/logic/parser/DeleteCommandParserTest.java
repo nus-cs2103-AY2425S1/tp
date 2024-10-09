@@ -27,7 +27,7 @@ public class DeleteCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_Phone_Number_returnsDeleteCommand() {
+    public void parse_validArgsPhoneNumber_returnsDeleteCommand() {
         assertParseSuccess(parser, "85355255", new DeleteCommand(PHONE_NUM_1));
     }
 
