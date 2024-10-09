@@ -75,4 +75,18 @@ public class ArgumentMultimap {
             throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
         }
     }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values, false otherwise.
+     */
+    public boolean arePrefixesPresent(Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> getValue(prefix).isPresent());
+    }
+
+    /**
+     * Returns true if the preamble is not empty, false otherwise.
+     */
+    public boolean isPreamblePresent() {
+        return !getPreamble().isEmpty();
+    }
 }

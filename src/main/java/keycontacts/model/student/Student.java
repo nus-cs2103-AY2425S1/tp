@@ -8,11 +8,12 @@ import java.util.Objects;
 import java.util.Set;
 
 import keycontacts.commons.util.ToStringBuilder;
+import keycontacts.model.lesson.RegularLesson;
 import keycontacts.model.tag.Tag;
 
 /**
- * Represents a Student in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Represents a Student in the student directory.
+ * Guarantees: details are present and not null (except for optional fields), field values are validated, immutable.
  */
 public class Student {
 
@@ -24,6 +25,9 @@ public class Student {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+
+    // Optional fields (can be null)
+    private final RegularLesson regularLesson;
 
     /**
      * Every field must be present and not null.

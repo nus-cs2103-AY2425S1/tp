@@ -1,0 +1,47 @@
+package keycontacts.logic.parser;
+
+import static keycontacts.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static keycontacts.logic.parser.CliSyntax.PREFIX_DAY;
+import static keycontacts.logic.parser.CliSyntax.PREFIX_END_TIME;
+import static keycontacts.logic.parser.CliSyntax.PREFIX_START_TIME;
+
+import keycontacts.commons.core.index.Index;
+import keycontacts.logic.commands.ScheduleCommand;
+import keycontacts.logic.parser.exceptions.ParseException;
+import keycontacts.model.lesson.Day;
+import keycontacts.model.lesson.RegularLesson;
+import keycontacts.model.lesson.Time;
+
+public class ScheduleCommandParser {
+    /**
+     * Parses the given {@code String} of arguments in the context of the ScheduleCommand
+     * and returns a ScheduleCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
+    public ScheduleCommand parse(String args) throws ParseException {
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_DAY, PREFIX_START_TIME, PREFIX_END_TIME);
+
+        if (argMultimap.arePrefixesPresent(PREFIX_DAY, PREFIX_START_TIME, PREFIX_END_TIME)
+                || !argMultimap.isPreamblePresent()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE));
+        }
+
+        Index index;
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE), pe);
+        }
+
+        argMultimap.verifyNoDuplicatePrefixesFor( PREFIX_DAY, PREFIX_START_TIME, PREFIX_END_TIME);
+        Day lessonDay = ParserUtil.parseDay(argMultimap.getValue(PREFIX_DAY).get());
+        Time startTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_START_TIME).get());
+        Time endTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_END_TIME).get());
+
+        RegularLesson regularLesson = new RegularLesson(lessonDay, startTime, endTime);
+
+        return new ScheduleCommand(index, regularLesson);
+    }
+
+}
