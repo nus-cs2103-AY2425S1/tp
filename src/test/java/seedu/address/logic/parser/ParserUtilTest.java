@@ -7,8 +7,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON_LIST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SECOND_PERSON_LIST;
 
-import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
