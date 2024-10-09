@@ -9,9 +9,12 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Student;
 
 /**
@@ -33,7 +36,7 @@ public class TypicalPersons {
     public static final Student GEORGE = new PersonBuilder().withName("George Best")
         .withEmail("anna@example.com").build();
     public static final Student JASON = new PersonBuilder().withName("Jason Derulo")
-            .withEmail("jason@example.com").withGroup("Group 1").build();
+            .withEmail("jason@example.com").withGroup(new Group(new GroupName("Group 1"), new HashSet<>())).build();
 
     // Manually added
     public static final Student HOON = new PersonBuilder().withName("Hoon Meier")

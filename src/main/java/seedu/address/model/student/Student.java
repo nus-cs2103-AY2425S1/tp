@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.model.group.Group;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
@@ -23,7 +24,7 @@ public class Student {
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
-    private final Optional<String> group;
+    private final Optional<Group> group;
 
     /**
      * Every field must be present and not null.
@@ -39,7 +40,7 @@ public class Student {
     /**
      * Every field must be present and not null.
      */
-    public Student(Name name, Email email, Set<Tag> tags, Optional<String> group) {
+    public Student(Name name, Email email, Set<Tag> tags, Optional<Group> group) {
         requireAllNonNull(name, email, tags, group);
         this.name = name;
         this.email = email;
@@ -55,7 +56,7 @@ public class Student {
         return email;
     }
 
-    public Optional<String> getGroup() {
+    public Optional<Group> getGroup() {
         return group;
     }
 
@@ -99,7 +100,11 @@ public class Student {
         Student otherStudent = (Student) other;
         return name.equals(otherStudent.name)
             && email.equals(otherStudent.email)
-            && tags.equals(otherStudent.tags);
+            && tags.equals(otherStudent.tags)
+            && group.isPresent() == otherStudent.getGroup().isPresent()
+            && (group.isPresent() && otherStudent.getGroup().isPresent()
+                ? group.get().equals(otherStudent.getGroup().get())
+                : true);
     }
 
     @Override
@@ -114,7 +119,7 @@ public class Student {
             .add("name", name)
             .add("email", email)
             .add("tags", tags)
-            .add("group", group.orElse(""))
+            .add("group", group.isPresent() ? group.get() : "This student does not belong to any group yet!")
             .toString();
     }
 
