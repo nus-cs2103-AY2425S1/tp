@@ -85,6 +85,6 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-    /** Returns an unmodifiable view of filtered person based on contacts list */
-    ObservableList<Person> getFilteredContactList();
+    /** Returns an unmodifiable view of filtered person based on their phone number */
+    ObservableList<Person> getFilteredPhoneNumberList();
 }

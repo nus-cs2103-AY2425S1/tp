@@ -129,7 +129,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ObservableList<Person> getFilteredContactList() {
+    public ObservableList<Person> getFilteredPhoneNumberList() {
         return filteredPersons;
     }
     @Override

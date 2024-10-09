@@ -5,24 +5,24 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.ContactContainsKeywordPredicate;
+import seedu.address.model.person.PhoneNumberContainsKeywordPredicate;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
  * Keyword matching is case-insensitive.
  */
-public class FindContactCommand extends Command {
+public class FindPhoneNumberCommand extends Command {
 
-    public static final String COMMAND_WORD = "findc";
+    public static final String COMMAND_WORD = "findp";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds the person whose contact matches any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " 12345678 98765432";
 
-    private final ContactContainsKeywordPredicate predicate;
+    private final PhoneNumberContainsKeywordPredicate predicate;
 
-    public FindContactCommand(ContactContainsKeywordPredicate predicate) {
+    public FindPhoneNumberCommand(PhoneNumberContainsKeywordPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -31,7 +31,7 @@ public class FindContactCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredContactList().size()));
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPhoneNumberList().size()));
     }
 
     @Override
@@ -41,12 +41,12 @@ public class FindContactCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FindNameCommand)) {
+        if (!(other instanceof FindPhoneNumberCommand)) {
             return false;
         }
 
-        FindContactCommand otherFindContactCommand = (FindContactCommand) other;
-        return predicate.equals(otherFindContactCommand.predicate);
+        FindPhoneNumberCommand otherFindPhoneNumberCommand = (FindPhoneNumberCommand) other;
+        return predicate.equals(otherFindPhoneNumberCommand.predicate);
     }
 
     @Override

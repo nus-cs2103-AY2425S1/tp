@@ -154,7 +154,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<Person> getFilteredContactList() {
+        public ObservableList<Person> getFilteredPhoneNumberList() {
             throw new AssertionError("This method should not be called.");
         }
         @Override
