@@ -90,6 +90,9 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Builds the {@code Person} that we are testing.
+     */
     public Person build() {
         if (address.isEmpty()) {
             return new Person(name, phone, email, tags);
@@ -97,6 +100,9 @@ public class PersonBuilder {
         return new Person(name, phone, email, address.orElse(null), tags);
     }
 
+    /**
+     * Builds the {@code Person} that we are testing without address.
+     */
     public Person buildEmptyAddressPerson() {
         return new Person(name, phone, email, tags);
     }
