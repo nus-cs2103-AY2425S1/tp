@@ -9,10 +9,11 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes a person identified using it's displayed index or NRIC from the address book.
  */
 public class DeleteCommand extends Command {
 
@@ -20,27 +21,50 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Parameters: INDEX (must be a positive integer) or NRIC (must be government issued)\n"
+            + "Example: " + COMMAND_WORD + " 1 or " + COMMAND_WORD + " S6253285H";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
     private final Index targetIndex;
+    private final Nric targetNric;
 
+    /**
+     * Creates a DeleteCommand to delete person at the specified {@code Index}.
+     *
+     * @param targetIndex The {@code Index} of the person to be deleted.
+     */
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
+        this.targetNric = null;
+    }
+
+    /**
+     * Creates a DeleteCommand to delete person with the specified {@code Nric}.
+     * @param targetNric The {@code Nric} of the person to be deleted.
+     */
+    public DeleteCommand(Nric targetNric) {
+        this.targetNric = targetNric;
+        this.targetIndex = null;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+        Person personToDelete;
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        if (targetIndex != null) {
+            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
+            personToDelete = lastShownList.get(targetIndex.getZeroBased());
+        } else {
+            personToDelete = model.getPersonByNric(targetNric);
+            if (personToDelete == null) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NRIC);
+            }
         }
-
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
@@ -57,13 +81,15 @@ public class DeleteCommand extends Command {
         }
 
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return targetIndex.equals(otherDeleteCommand.targetIndex);
+        return (targetIndex != null && targetIndex.equals(otherDeleteCommand.targetIndex))
+                || (targetNric != null && targetNric.equals(otherDeleteCommand.targetNric));
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("targetIndex", targetIndex)
+                .add("targetNric", targetNric)
                 .toString();
     }
 }

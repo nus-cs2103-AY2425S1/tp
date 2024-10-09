@@ -7,10 +7,14 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.contactdate.ContactDate;
+import seedu.address.model.contactdate.ContactDateList;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
 /**
@@ -22,6 +26,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final ObservableList<String> displayedCallHistory;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +39,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.displayedCallHistory = FXCollections.observableArrayList();
     }
 
     public ModelManager() {
@@ -111,6 +117,22 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public void markAsContacted(Person target, ContactDate contactDate) {
+        requireNonNull(target);
+        target.markAsContacted(contactDate);
+    }
+
+    @Override
+    public Person getPersonByNric(Nric nric) {
+        for (Person person : filteredPersons) {
+            if (person.getNric().equals(nric)) {
+                return person;
+            }
+        }
+        return null;
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -128,6 +150,32 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    //=========== Call History ================================================================================
+    @Override
+    public ContactDateList getCallHistory(Person target) {
+        requireNonNull(target);
+        return target.getContactDates();
+    }
+
+    @Override
+    public void updateDisplayedList(ContactDateList callHistory) {
+        requireNonNull(callHistory);
+        displayedCallHistory.clear();
+        for (ContactDate date : callHistory) {
+            displayedCallHistory.add(date.toString());
+        }
+    }
+
+    @Override
+    public ContactDateList getDisplayedCallHistory() {
+        ContactDateList callHistory = new ContactDateList();
+        for (String call : displayedCallHistory) {
+            ContactDate contactDate = new ContactDate(call, "");
+            callHistory.add(contactDate);
+        }
+        return callHistory;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -142,7 +190,8 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && displayedCallHistory.equals(otherModelManager.displayedCallHistory);
     }
 
 }

@@ -10,8 +10,10 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.CallFrequency;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -33,6 +35,21 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses a {@code String nric} into a {@code Nric}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code nric} is invalid.
+     */
+    public static Nric parseNric(String nric) throws ParseException {
+        requireNonNull(nric);
+        String trimmedNric = nric.trim();
+        if (!Nric.isValidNric(trimmedNric)) {
+            throw new ParseException(Nric.MESSAGE_CONSTRAINTS);
+        }
+        return new Nric(trimmedNric);
     }
 
     /**
@@ -96,6 +113,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String callFrequency} into an {@code CallFrequency}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code callFrequency} is invalid.
+     */
+    public static CallFrequency parseCallFrequency(String callFrequency) throws ParseException {
+        requireNonNull(callFrequency);
+        String trimmedCallFrequency = callFrequency.trim();
+        if (!CallFrequency.isValidCallFrequency(trimmedCallFrequency)) {
+            throw new ParseException(CallFrequency.MESSAGE_CONSTRAINTS);
+        }
+        return new CallFrequency(trimmedCallFrequency);
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -120,5 +152,35 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Checks if the provided argument can be parsed as an {@code Index}.
+     *
+     * @param args The string argument to be parsed.
+     * @return {@code true} if the argument can be parsed as an {@code Index}, {@code false} otherwise.
+     */
+    public static boolean isParsingIndex(String args) {
+        try {
+            ParserUtil.parseIndex(args);
+            return true;
+        } catch (ParseException pe) {
+            return false;
+        }
+    }
+
+    /**
+     * Checks if the provided argument can be parsed as an {@code Nric}.
+     *
+     * @param args The string argument to be parsed.
+     * @return {@code true} if the argument can be parsed as an {@code Nric}, {@code false} otherwise.
+     */
+    public static boolean isParsingNric(String args) {
+        try {
+            ParserUtil.parseNric(args);
+            return true;
+        } catch (ParseException pe) {
+            return false;
+        }
     }
 }

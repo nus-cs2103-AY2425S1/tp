@@ -5,6 +5,9 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.contactdate.ContactDate;
+import seedu.address.model.contactdate.ContactDateList;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
 /**
@@ -75,6 +78,31 @@ public interface Model {
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
     void setPerson(Person target, Person editedPerson);
+
+    /**
+     * Marks the given person as contacted.
+     * The person must exist in the address book.
+     */
+    void markAsContacted(Person target, ContactDate contactDate);
+
+    /**
+     * Returns the call history of the given person in the address book.
+     * The person must exist in the address book.
+     */
+    ContactDateList getCallHistory(Person target);
+
+    /**
+     * Updates the displayed list to show the call history of the given person.
+     * The call history must not be empty.
+     */
+    void updateDisplayedList(ContactDateList callHistory);
+
+    /**
+     * Returns the displayed call history.
+     */
+    ContactDateList getDisplayedCallHistory();
+
+    Person getPersonByNric(Nric nric);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
