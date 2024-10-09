@@ -16,6 +16,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Sex;
+import seedu.address.model.person.StudentClass;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -30,6 +31,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final String sex;
+    private final String studentClass;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -38,12 +40,14 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("sex") String sex, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("sex") String sex, @JsonProperty("studentClass") String studentClass,
+            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.sex = sex;
+        this.studentClass = studentClass;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -58,6 +62,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         sex = source.getSex().value;
+        studentClass = source.getStudentClass().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -114,8 +119,17 @@ class JsonAdaptedPerson {
         }
         final Sex modelSex = new Sex(sex);
 
+        if (studentClass == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    StudentClass.class.getSimpleName()));
+        }
+        if (!StudentClass.isValidStudentClass(studentClass)) {
+            throw new IllegalValueException(StudentClass.MESSAGE_CONSTRAINTS);
+        }
+        final StudentClass modelStudentClass = new StudentClass(studentClass);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelSex, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelSex, modelStudentClass, modelTags);
     }
 
 }
