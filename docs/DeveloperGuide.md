@@ -312,17 +312,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5. Use case ends.
 
 **Extensions:**
-3a. GAB detects an error in entered user input.  
-   3a1. GAB responds with a command error message and requests correct data.  
-   3a2. User enters new data.  
-   Steps 3a1-3a2 are repeated until the data entered is correct.  
-   Use case resumes at step 4.
+* 3a. GAB detects an error in entered user input.
+  * 3a1. GAB responds with a command error message and requests correct data.
+  * 3a2. User enters new data.
+  * Steps 3a1-3a2 are repeated until the data entered is correct.
+  * Use case resumes at step 4.
 
-3b. No matches found.  
-   3b1. GAB responds that there are no matching vendors.  
-   3b2. User enters new data.  
-   Steps 3b1-3b2 are repeated until the data entered can be found.  
-   Use case resumes at step 5.
+* 4a. No matches found.
+  * 4a1. GAB responds that there are no matching vendors.
+  * 4a2. User enters new data.
+  * Steps 4a1-4a2 are repeated until the data entered can be found.
+  * Use case resumes at step 5.
 
 ---
 
@@ -360,10 +360,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5. Use case ends.
 
 **Extensions:**
-* 3a. No vendor found.  
-   * 3a1. GAB responds that there are no vendors within the price range.  
-   * 3a2. User enters new data.  
-   * Steps 3a1-3a2 are repeated until a vendor can be found.  
+* 4a. No vendor found.  
+   * 4a1. GAB responds that there are no vendors within the price range.  
+   * 4a2. User enters new data.  
+   * Steps 4a1-4a2 are repeated until a vendor can be found.  
    * Use case resumes at step 5.
 
 **Use Case:** UC4 - Create new vendor  
