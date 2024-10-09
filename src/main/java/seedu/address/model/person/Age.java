@@ -8,8 +8,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidAge(String)}
  */
 public class Age {
-    public static final String MESSAGE_CONSTRAINTS =
-            "Age should only contain numeric values";
+
+    public static final String MESSAGE_CONSTRAINTS = "Age should only contain numeric values";
 
     /*
      * The age must be a non-negative integer.
@@ -60,4 +60,5 @@ public class Age {
     public int hashCode() {
         return value.hashCode();
     }
+
 }
