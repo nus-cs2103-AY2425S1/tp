@@ -30,6 +30,12 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_PERSON_NOT_FOUND = "No student is found with Student ID: %1$s";
     private final StudentId studentId;
 
+    /**
+     * Creates a DeleteCommand to delete the person identified by the specified {@code StudentId}.
+     *
+     * @param studentId The student ID of the person to be deleted.
+     * @throws NullPointerException if the {@code studentId} is null.
+     */
     public DeleteCommand(StudentId studentId) {
         requireNonNull(studentId);
         this.studentId = studentId;
