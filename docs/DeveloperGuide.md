@@ -292,11 +292,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​         | I want to …​                                                  | So that I can…​                                               |
 | -------- | -------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `* * *`  | new user       | add a new contact with multiple phone numbers (e.g. home, mobile, email address) | manage patient contact information and have multiple options for reaching them in an emergency. |
-| `* * *`  | user           | delete a contact                                             | remove outdated or incorrect contact information             |
-| `* * *`  | user           | list all contacts in one dashboard                           | easily view all the contacts that I have added.              |
-| `* * *`  | user           | find the patient contact by a keyword                        | I can search the patients’ contact instantly.                |
-| `* *`    | user           | edit an existing patient contact                             | I can update their details when necessary.                   |
+| `* * *`  | New user       | add a new contact with multiple phone numbers (e.g. home, mobile, email address) | manage patient contact information and have multiple options for reaching them in an emergency. |
+| `* * *`  | User           | delete a contact                                             | remove outdated or incorrect contact information             |
+| `* * *`  | User           | list all contacts in one dashboard                           | easily view all the contacts that I have added.              |
+| `* * *`  | User           | find the patient contact by a keyword                        | I can search the patients’ contact instantly.                |
+| `* *`    | User           | edit an existing patient contact                             | I can update their details when necessary.                   |
 | `* *`    | User           | click on the patient contact in a dashboard                  | I can view more details and retrieve information faster during busy hours. |
 | `* *`    | User           | see all the texts and UI clearly                             | I don’t have to squint my eyes                               |
 | `* *`    | User           | import contacts from a file                                  | I can quickly fill in the address book with existing contact information. |
@@ -309,10 +309,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | User           | tag patients with recurring appointments                     | I know those who need regular follow ups                     |
 | `* *`    | Expert User    | categorize patients based on medical conditions, assigned doctor(s) and/or treatment plan | I can prioritize urgent conditions and streamline patient management. |
 | `* *`    | User           | add notes to a contact                                       | I can remember important information about that person.      |
-| `*`      | user           | filter patients based on appointment dates                   | I can contact and remind them.                               |
-| `*`      | potential user | see the app populated with some sample commands              | locate a person easily                                       |
-| `*`      | user           | use the app to work offline                                  | I can use it even when there is no internet connection.      |
-| `*`      | user           | save addresses                                               | I have their location readily available.                     |
+| `*`      | User           | filter patients based on appointment dates                   | I can contact and remind them.                               |
+| `*`      | Potential user | see the app populated with some sample commands              | I can easily learn how to use the app.                       |
+| `*`      | User           | use the app to work offline                                  | I can use it even when there is no internet connection.      |
+| `*`      | User           | save addresses                                               | I have their location readily available.                     |
 | `*`      | User           | filter patients based on age groups                          | I can prioritize certain medical procedures                  |
 | `*`      | User           | export details of patients filtered by different criterias   | I can share them easily                                      |
 | `*`      | User           | view when each contact was added or last updated             | I know how up-to-date the information is                     |
@@ -323,8 +323,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | User           | manually log contact history with patients                   | I have a record of all communications and their corresponding dates |
 | `*`      | User           | receive alerts when a patient’s contact information hasn’t been updated in 5 years | I can reach out to check if it is updated                    |
 | `*`      | User           | set privacy preferences for each patient                     | their personal data is protected and only able to be accessed by authorized staff |
-
-*{More to be added}*
 
 ### Use cases
 
@@ -376,17 +374,50 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: Find a person**
+
+**MSS**
+
+1. User requests to find contact
+2. User inputs the find command with contact details
+3. Medicontact shows a list of persons matching details
+   Use case ends.
+
+**Extensions**
+
+- 2a. Necessary field is missing
+  - 2a1. Medicontact shows an error message indicating which field is missing
+  - 2a2. Use case ends.
+- 2b. Wrong format in input
+  - 2b1.Medicontact shows an error message specifying the incorrect format.
+  - 2b2. Use case ends.
+- 2c. No match in users
+  - 2b1.Medicontact shows an error message specifying that there are no users that match the query.
+  - 2b2. Use case ends.
+
+**Use case: List contacts**
+
+**MSS**
+
+1. User requests to list contacts
+2. User inputs the list command
+3. Medicontact shows a list of contacts
+   Use case ends.
 
 ### Non-Functional Requirements
 
-1.  Technical: Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Performance:
+1. Technical: 
+   - Should work on any *mainstream OS* as long as it has Java 17 or above installed.
+   - Should work on both 32-bit and 64-bit environments.
+2. Performance:
    - Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
    - The response to any use action should become visible within 3 seconds.
-3.  Quality: The system should be easy to use for a novice who has never use CLI before
-4.  Note to project: Security measures like encryption will not be implemented in this project 
-*{More to be added}*
+   - Should not crash when the input is too long.
+3. Quality: 
+   - Should be easy to use for a novice who has never use CLI before
+   - The product is offered as a free online service.
+
+Note to project: Security measures like encryption will not be implemented in this project 
 
 ### Glossary
 
