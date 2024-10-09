@@ -8,8 +8,8 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Module;
 import seedu.address.model.person.Gender;
+import seedu.address.model.person.Module;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -31,8 +31,8 @@ public class SampleDataUtil {
                     new Gender("male"), new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), new Module("LS1301"),
                 getTagSet("neighbours")),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                    new Gender("female"), new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), new Module("EL1101"),
-                getTagSet("family")),
+                    new Gender("female"), new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
+                    new Module("EL1101"), getTagSet("family")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                     new Gender("male"), new Address("Blk 47 Tampines Street 20, #17-35"), new Module("EL1101"),
                 getTagSet("classmates")),
