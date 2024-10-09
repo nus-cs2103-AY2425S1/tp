@@ -58,47 +58,47 @@ public class PersonTest {
     public void equals() {
         // same values -> returns true
         Person aliceCopy = new PersonBuilder(ALICE).build();
-        assertTrue(ALICE.equals(aliceCopy));
+        assertEquals(ALICE, aliceCopy);
 
         // same object -> returns true
-        assertTrue(ALICE.equals(ALICE));
+        assertEquals(ALICE, ALICE);
 
         // null -> returns false
-        assertFalse(ALICE.equals(null));
+        assertNotEquals(null, ALICE);
 
         // different type -> returns false
-        assertFalse(ALICE.equals(5));
+        assertNotEquals(5, ALICE);
 
         // different person -> returns false
-        assertFalse(ALICE.equals(BOB));
+        assertNotEquals(ALICE, BOB);
 
         // different name -> returns false
         Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        assertNotEquals(ALICE, editedAlice);
 
         // different phone -> returns false
         editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        assertNotEquals(ALICE, editedAlice);
 
         // different email -> returns false
         editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        assertNotEquals(ALICE, editedAlice);
 
         // different address -> returns false
         editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        assertNotEquals(ALICE, editedAlice);
 
         // different telegram -> returns false
         editedAlice = new PersonBuilder(ALICE).withTelegram(VALID_TELEGRAM_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        assertNotEquals(ALICE, editedAlice);
 
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
-        assertFalse(ALICE.equals(editedAlice));
+        assertNotEquals(ALICE, editedAlice);
 
         // different GitHub account -> returns false
         editedAlice = new PersonBuilder(ALICE).withGithub(VALID_GITHUB_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        assertNotEquals(ALICE, editedAlice);
     }
 
     @Test

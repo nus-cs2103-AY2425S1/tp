@@ -33,9 +33,15 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Telegram telegram,
-                  Set<Tag> tags, Github github) {
-        requireAllNonNull(name, phone, email, address, telegram, tags, github);
+    public Person(
+            Name name,
+            Phone phone,
+            Email email,
+            Address address,
+            Telegram telegram,
+            Set<Tag> tags,
+            Github github) {
+
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -53,10 +59,14 @@ public class Person {
             Name name,
             Phone phone,
             Email email,
+            Github github,
             Address address,
             Set<Tag> tags,
+            Telegram telegram,
             Assignment assignment) {
-        requireAllNonNull(name, phone, email, address, tags, assignment);
+        requireAllNonNull(name, phone, email, address, telegram, tags, github, assignment);
+        this.github = github;
+        this.telegram = telegram;
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -104,6 +114,7 @@ public class Person {
     public Github getGithub() {
         return github;
     }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
@@ -131,13 +142,14 @@ public class Person {
             return false;
         }
 
-        return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && telegram.equals(otherPerson.telegram)
-                && tags.equals(otherPerson.tags)
-                && github.equals(otherPerson.github);
+        return
+                name.equals(otherPerson.name)
+                        && phone.equals(otherPerson.phone)
+                        && email.equals(otherPerson.email)
+                        && address.equals(otherPerson.address)
+                        && telegram.equals(otherPerson.telegram)
+                        && tags.equals(otherPerson.tags)
+                        && github.equals(otherPerson.github);
     }
 
     @Override
