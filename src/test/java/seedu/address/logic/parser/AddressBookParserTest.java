@@ -6,6 +6,10 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.ASSIGNMENT_DESC_ONE;
+import static seedu.address.logic.commands.CommandTestUtil.SCORE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ASSIGNMENT_ONE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SCORE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -16,6 +20,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddGradeCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -94,11 +99,18 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(""));
+                -> parser.parseCommand(""));
     }
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+    }
+
+    @Test
+    public void parseCommand_addGrade() throws Exception {
+        String arguments = NAME_DESC_AMY + ASSIGNMENT_DESC_ONE + SCORE_DESC;
+        AddGradeCommand command = (AddGradeCommand) parser.parseCommand(AddGradeCommand.COMMAND_WORD + arguments);
+        assertEquals(command, new AddGradeCommand(VALID_NAME_AMY, Float.parseFloat(VALID_SCORE), VALID_ASSIGNMENT_ONE));
     }
 }
