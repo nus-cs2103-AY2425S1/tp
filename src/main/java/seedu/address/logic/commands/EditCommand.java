@@ -100,8 +100,8 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        String updatedInterest = editPersonDescriptor.getInterest().orElse(personToEdit.getInterest());
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, "");
     }
 
     @Override
@@ -138,7 +138,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
-
+        private String interest;
         public EditPersonDescriptor() {}
 
         /**
@@ -182,6 +182,14 @@ public class EditCommand extends Command {
 
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
+        }
+
+        public void setInterest(String interest) {
+            this.interest = interest;
+        }
+
+        public Optional<String> getInterest() {
+            return Optional.ofNullable(interest);
         }
 
         public void setAddress(Address address) {
