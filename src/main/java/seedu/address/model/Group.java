@@ -11,6 +11,9 @@ import seedu.address.model.person.UniquePersonList;
 public class Group extends UniquePersonList {
     private String name;
 
+    /**
+     * Creates a group named {@code name}.
+     */
     public Group(String name) {
         super();
         this.name = name;
