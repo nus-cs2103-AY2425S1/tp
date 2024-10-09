@@ -11,7 +11,12 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddJobCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.job.*;
+import seedu.address.model.job.Job;
+import seedu.address.model.job.JobCompany;
+import seedu.address.model.job.JobDescription;
+import seedu.address.model.job.JobName;
+import seedu.address.model.job.JobRequirements;
+import seedu.address.model.job.JobSalary;
 
 /**
  * Parses input arguments and creates a new AddCommand object
