@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.DayOfWeek;
+import java.time.LocalTime;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,6 +11,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.calendar.Lesson;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -120,5 +123,69 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String description}
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the description is not within 1 and 100 characters long.
+     */
+    public static String parseDescription(String description) throws ParseException {
+        requireNonNull(description);
+
+        String trimmed = description.trim();
+        if (trimmed.isEmpty()) {
+            throw new ParseException(Lesson.DESCRIPTION_EMPTY);
+        } else if (trimmed.length() > 100) {
+            throw new ParseException(Lesson.DESCRIPTION_TOO_LONG);
+        }
+
+        return trimmed;
+    }
+
+    /**
+     * Parses a {@code DayOfWeek}
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static DayOfWeek parseDayOfWeek(String day) throws ParseException {
+        requireNonNull(day);
+        switch (day.toLowerCase()) {
+        case "monday":
+            return DayOfWeek.MONDAY;
+        case "tuesday":
+            return DayOfWeek.TUESDAY;
+        case "wednesday":
+            return DayOfWeek.WEDNESDAY;
+        case "thursday":
+            return DayOfWeek.THURSDAY;
+        case "friday":
+            return DayOfWeek.FRIDAY;
+        case "saturday":
+            return DayOfWeek.SATURDAY;
+        case "sunday":
+            return DayOfWeek.SUNDAY;
+        default:
+            throw new ParseException(Lesson.INVALID_DAY_OF_WEEK);
+        }
+    }
+
+    public static LocalTime parseLocalTime(String time) throws ParseException {
+        String trimmed = time.trim();
+
+        // Does not fit the length of a 24-hour time
+        if (trimmed.length() != 4) {
+            throw new ParseException(Lesson.NOT_24H_FORMAT);
+        }
+
+        String hour = trimmed.substring(0, 2);
+        String minute = trimmed.substring(2);
+
+        // Hour is not between 00 and 23, or minute is not between 00 and 59
+        if (hour.compareTo("23") > 0 || minute.compareTo("59") > 0) {
+            throw new ParseException(Lesson.NOT_24H_FORMAT);
+        }
+
+        return LocalTime.of(Integer.parseInt(hour), Integer.parseInt(minute), 0);
     }
 }

@@ -5,6 +5,7 @@ import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 import java.time.LocalTime;
+import java.time.DayOfWeek;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Collections;
@@ -20,6 +21,21 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 public class Lesson {
     public static final String NO_SAME_TIME =
             "Lessons cannot start and end at the same time.";
+
+    public static final String INVALID_DAY_OF_WEEK =
+            "Day of the week must be spelt as " +
+            "'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', or 'Sunday'" +
+            "only (non case-sensitive).";
+
+    public static final String DESCRIPTION_EMPTY =
+            "Lesson description cannot be empty.";
+
+    public static final String DESCRIPTION_TOO_LONG =
+            "Lesson description should be at most 100 characters long (whitespace-inclusive).";
+
+    public static final String NOT_24H_FORMAT =
+            "Times provided must be in 24-hour time format. Examples: 0000, 1027, 1830, 2215, 2359.";
+
 
     public static final DateTimeFormatter FORMAT_24H = DateTimeFormatter.ofPattern("HHmm");
 
@@ -57,8 +73,15 @@ public class Lesson {
     /**
      * Checks that lesson times are not ambiguous, i.e. not the same start and end time.
      */
-    private static Boolean checkValidTimes(LocalTime time1, LocalTime time2) {
+    private static boolean checkValidTimes(LocalTime time1, LocalTime time2) {
         return !time1.equals(time2);
+    }
+
+    /**
+     * Returns if the lesson spans 2 days, e.g. Monday 2000 to 0000, or Tuesday 2200 to 0100.
+     */
+    public boolean spansTwoDays() {
+        return startTime.isBefore(endTime);
     }
 
 
@@ -109,8 +132,8 @@ public class Lesson {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("description", description)
-                .add("Start day: ", startDay)
-                .add("Time: ", startTime.format(FORMAT_24H) + "H to " + endTime.format(FORMAT_24H) + "H")
+                .add("From: ", startDay + " " + startTime.format(FORMAT_24H))
+                .add("To: ", startDay.plus(spansTwoDays() ? 1 : 0) + " " + endTime.format(FORMAT_24H))
                 .toString();
     }
 }
