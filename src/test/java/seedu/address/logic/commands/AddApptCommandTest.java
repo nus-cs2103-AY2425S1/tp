@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -34,11 +35,15 @@ public class AddApptCommandTest {
 
     @Test
     public void execute_allFieldsSpecified_success() {
-        Nric nric = ((Model) new ModelManager(getTypicalAddressBook(), new UserPrefs())).getFilteredPersonList().get(0).getNric();
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Nric nric = (model).getFilteredPersonList().get(0).getNric();
         AddApptCommand addApptCommand = new AddApptCommand(new NricMatchesPredicate(nric), VALID_APPOINTMENT_NAME_AMY,
-                                                           VALID_APPOINTMENT_DATE_AMY, VALID_APPOINTMENT_TIMEPERIOD_AMY);
+                                                           VALID_APPOINTMENT_DATE_AMY,
+                                                           VALID_APPOINTMENT_TIMEPERIOD_AMY);
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        String expectedAppt = VALID_APPOINTMENT_NAME_AMY + ":" + VALID_APPOINTMENT_DATE_AMY + ":" + VALID_APPOINTMENT_TIMEPERIOD_AMY;
+        String expectedAppt = VALID_APPOINTMENT_NAME_AMY + ":"
+                              + VALID_APPOINTMENT_DATE_AMY + ":"
+                              + VALID_APPOINTMENT_TIMEPERIOD_AMY;
         Person newApptPerson = new PersonBuilder()
                 .withNric(expectedModel.getFilteredPersonList().get(0).getNric().value)
                 .withName(expectedModel.getFilteredPersonList().get(0).getName().fullName)
@@ -54,9 +59,8 @@ public class AddApptCommandTest {
         String expectedMessage = String.format(AddApptCommand.MESSAGE_SUCCESS_4S, nric.value,
                                                VALID_APPOINTMENT_NAME_AMY, VALID_APPOINTMENT_DATE_AMY,
                                                VALID_APPOINTMENT_TIMEPERIOD_AMY);
-        expectedModel.setPerson(
-                ((Model) new ModelManager(getTypicalAddressBook(), new UserPrefs())).getFilteredPersonList().get(0), newApptPerson);
-        assertCommandSuccess(addApptCommand, new ModelManager(getTypicalAddressBook(), new UserPrefs()), expectedMessage, expectedModel);
+        expectedModel.setPerson(model.getFilteredPersonList().get(0), newApptPerson);
+        assertCommandSuccess(addApptCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -69,16 +73,16 @@ public class AddApptCommandTest {
         assertCommandFailure(addApptPersonCommand, new ModelManager(getTypicalAddressBook(), new UserPrefs()),
                              Messages.MESSAGE_PERSON_NRIC_NOT_FOUND);
     }
-    
+
     @Test
     public void execute_patientDuplicateAppointments_failure() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model model = new ModelManager(new AddressBook(), new UserPrefs());
         Nric nric = new Nric(VALID_NRIC_AMY);
         NricMatchesPredicate nricAmy = new NricMatchesPredicate(nric);
-        Person person = new PersonBuilder().withAppointments(VALID_APPOINTMENT_NAME_AMY,
-                                                             VALID_APPOINTMENT_DATE_AMY,
-                                                             VALID_APPOINTMENT_TIMEPERIOD_AMY)
-                                           .withNric(VALID_NRIC_AMY)
+        Person person = new PersonBuilder().withNric(VALID_NRIC_AMY)
+                                           .withAppointments(VALID_APPOINTMENT_NAME_AMY
+                                                             + ":" + VALID_APPOINTMENT_DATE_AMY
+                                                             + ":" + VALID_APPOINTMENT_TIMEPERIOD_AMY)
                                            .build();
         model.addPerson(person);
         String expectedErrorMessage = String.format(AddApptCommand.MESSAGE_DUPLICATE_APPT_1S,
