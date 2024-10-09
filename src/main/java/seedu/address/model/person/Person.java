@@ -133,6 +133,9 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("parent name", parentName)
+                .add("parent phone", parentPhone)
+                .add("parent email", parentEmail)
                 .add("tags", tags)
                 .toString();
     }
