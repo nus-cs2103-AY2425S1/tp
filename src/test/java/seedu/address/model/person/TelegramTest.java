@@ -13,11 +13,11 @@ public class TelegramTest {
         assertThrows(NullPointerException.class, () -> new Telegram(null));
     }
 
-//    @Test
-//    public void constructor_invalidTelegram_throwsIllegalArgumentException() {
-//        String invalidTelegram = "";
-//        assertThrows(IllegalArgumentException.class, () -> new Telegram(invalidTelegram));
-//    }
+    @Test
+    public void constructor_invalidTelegram_throwsIllegalArgumentException() {
+        String invalidTelegram = "";
+        assertThrows(IllegalArgumentException.class, () -> new Telegram(invalidTelegram));
+    }
 
     @Test
     public void isValidTelegram() {
