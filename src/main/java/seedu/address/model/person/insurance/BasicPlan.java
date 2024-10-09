@@ -22,6 +22,6 @@ public class BasicPlan extends InsurancePlan {
      */
     @Override
     public String toString() {
-        return "Basic Plan";
+        return "Basic Insurance Plan";
     }
 }
