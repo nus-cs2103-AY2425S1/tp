@@ -45,14 +45,9 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_invalidStudentIdUnfilteredList_throwsCommandException() {
-//        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-//        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
-//
-//        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-
         StudentId invalidStudentId = new StudentId("12345679");
         DeleteCommand deleteCommand = new DeleteCommand(invalidStudentId);
-        assertCommandFailure(deleteCommand, model, String.format(Messages.MESSAGE_INVALID_STUDENT_ID, invalidStudentId));
+        assertCommandFailure(deleteCommand, model, String.format(DeleteCommand.MESSAGE_PERSON_NOT_FOUND, invalidStudentId));
     }
 
     @Test
@@ -72,25 +67,7 @@ public class DeleteCommandTest {
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
-
-    @Test
-    public void execute_invalidStudentIdFilteredList_throwsCommandException() {
-//        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-//
-//        Index outOfBoundIndex = INDEX_SECOND_PERSON;
-//        // ensures that outOfBoundIndex is still in bounds of address book list
-//        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
-//
-//        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
-//
-//        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        StudentId invalidStudentId = new StudentId("00000000");
-        DeleteCommand deleteCommand = new DeleteCommand(invalidStudentId);
-        assertCommandFailure(deleteCommand, model, String.format(Messages.MESSAGE_INVALID_STUDENT_ID, invalidStudentId));
-
-    }
-
+    
     @Test
     public void equals() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());

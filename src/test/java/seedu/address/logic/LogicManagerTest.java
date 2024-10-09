@@ -22,6 +22,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -63,7 +64,7 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete id/00000000";
-        assertCommandException(deleteCommand, String.format(MESSAGE_INVALID_STUDENT_ID, "00000000"));
+        assertCommandException(deleteCommand, String.format(DeleteCommand.MESSAGE_PERSON_NOT_FOUND, "00000000"));
     }
 
     @Test
