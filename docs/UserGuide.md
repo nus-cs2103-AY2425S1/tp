@@ -27,7 +27,7 @@ Address Book Command Line Interface (ABCLI) is a **desktop app made specially fo
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 u/buyer` : Adds a contact named `John Doe` to the Address Book.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -79,26 +79,15 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS u/<buyer,seller> [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
-
-<div markdown="block" class="alert alert-info">:hourglass_flowing_sand: **Expected change in release v1.1**
-
-You will be able to add client specific details to the address book.
-
-Format: `add n/NAME c/CONTACT NUMBER e/EMAIL t/<buyer,seller>`
-
-Examples: 
-* `add n/kennylewi c/81234567 e/kennylewi@email.com t/buyer`
-* `add n/ngzixin t/seller e/ngzixin@email.com c/91234567`
-</div>
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 u/buyer`
+* `add n/Betsy Crowe t/friend u/seller e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
 ### Listing all persons : `list`
 
@@ -106,7 +95,7 @@ Shows a list of all persons in the address book.
 
 Format: `list`
 
-<div markdown="block" class="alert alert-info">:hourglass_flowing_sand: **Expected change in release v1.1**
+<div markdown="block" class="alert alert-info">:hourglass_flowing_sand: **Expected change in release v1.2**
 
 You will be able to view all people or filter by your contact type in the address book.
 
@@ -191,8 +180,8 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Meet up `[coming in v1.1]`
-<div markdown="block" class="alert alert-info">:hourglass_flowing_sand: **Expected feature in release v1.1**
+### Meet up `[coming in v1.2]`
+<div markdown="block" class="alert alert-info">:hourglass_flowing_sand: **Expected feature in release v1.2**
 
 You will be able to schedule a meet-up event with your contacts.
 
