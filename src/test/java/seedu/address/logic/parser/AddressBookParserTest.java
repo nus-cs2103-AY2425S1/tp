@@ -88,8 +88,8 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
 
         // Test changed to match list command format of SocialBook
-        assertThrows(ParseException.class, String.format(LIST_MESSAGE_INVALID_COMMAND),
-                () -> parser.parseCommand(ListCommand.COMMAND_WORD + " 3"));
+        assertThrows(ParseException.class, String.format(LIST_MESSAGE_INVALID_COMMAND), ()
+                -> parser.parseCommand(ListCommand.COMMAND_WORD + " 3"));
     }
 
     @Test
