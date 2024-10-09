@@ -3,7 +3,7 @@ package seedu.address.logic.parser.volunteerCommandParser;
 import seedu.address.logic.commands.volunteerCommands.VolunteerAddCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
-import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.VolunteerParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.volunteer.Date;
@@ -44,14 +44,14 @@ public class VolunteerAddCommandParser {
                 VOLUNTEER_PREFIX_EMAIL, VOLUNTEER_PREFIX_AVAILABLE_DATE,
                 VOLUNTEER_PREFIX_START_TIME, VOLUNTEER_PREFIX_END_TIME);
 
-        Name name = ParserUtil.parseVolunteerName(argMultimap.getValue(VOLUNTEER_PREFIX_NAME).get());
-        Phone phone = ParserUtil.parseVolunteerPhone(argMultimap.getValue(VOLUNTEER_PREFIX_PHONE).get());
-        Email email = ParserUtil.parseVolunteerEmail(argMultimap.getValue(VOLUNTEER_PREFIX_EMAIL).get());
-        Date availableDate = ParserUtil.parseVolunteerDate(argMultimap.getValue(VOLUNTEER_PREFIX_AVAILABLE_DATE).get());
-        Time startTime = ParserUtil.parseVolunteerTime(argMultimap.getValue(VOLUNTEER_PREFIX_START_TIME).get());
-        Time endTime = ParserUtil.parseVolunteerTime(argMultimap.getValue(VOLUNTEER_PREFIX_END_TIME).get());
+        Name name = VolunteerParserUtil.parseName(argMultimap.getValue(VOLUNTEER_PREFIX_NAME).get());
+        Phone phone = VolunteerParserUtil.parsePhone(argMultimap.getValue(VOLUNTEER_PREFIX_PHONE).get());
+        Email email = VolunteerParserUtil.parseEmail(argMultimap.getValue(VOLUNTEER_PREFIX_EMAIL).get());
+        Date availableDate = VolunteerParserUtil.parseDate(argMultimap.getValue(VOLUNTEER_PREFIX_AVAILABLE_DATE).get());
+        Time startTime = VolunteerParserUtil.parseTime(argMultimap.getValue(VOLUNTEER_PREFIX_START_TIME).get());
+        Time endTime = VolunteerParserUtil.parseTime(argMultimap.getValue(VOLUNTEER_PREFIX_END_TIME).get());
 
-        Volunteer volunteer = new Volunteer(name, phone, email, date, time);
+        Volunteer volunteer = new Volunteer(name, phone, email, availableDate, startTime, endTime);
         return new VolunteerAddCommand(volunteer);
     }
 

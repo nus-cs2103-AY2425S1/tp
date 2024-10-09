@@ -3,7 +3,7 @@ package seedu.address.logic.parser.eventCommandParser;
 import seedu.address.logic.commands.eventCommands.EventAddCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
-import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.EventParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Date;
@@ -37,12 +37,12 @@ public class EventAddCommandParser {
 
 
         argMultimap.verifyNoDuplicatePrefixesFor(EVENT_PREFIX_NAME, EVENT_PREFIX_LOCATION, EVENT_PREFIX_DATE, EVENT_PREFIX_START_TIME, EVENT_PREFIX_END_TIME, EVENT_PREFIX_DESCRIPTION);
-        EventName eventName = ParserUtil.parseEventName(argMultimap.getValue(EVENT_PREFIX_NAME).get());
-        Location location = ParserUtil.parseLocation(argMultimap.getValue(EVENT_PREFIX_LOCATION).get());
-        Date date = ParserUtil.parseDate(argMultimap.getValue(EVENT_PREFIX_DATE).get());
-        Time start_time = ParserUtil.parseTime(argMultimap.getValue(EVENT_PREFIX_START_TIME).get());
-        Time end_time = ParserUtil.parseTime(argMultimap.getValue(EVENT_PREFIX_END_TIME).get());
-        Description description = ParserUtil.parseDescription(argMultimap.getValue(EVENT_PREFIX_DESCRIPTION).get());
+        EventName eventName = EventParserUtil.parseEventName(argMultimap.getValue(EVENT_PREFIX_NAME).get());
+        Location location = EventParserUtil.parseLocation(argMultimap.getValue(EVENT_PREFIX_LOCATION).get());
+        Date date = EventParserUtil.parseDate(argMultimap.getValue(EVENT_PREFIX_DATE).get());
+        Time start_time = EventParserUtil.parseTime(argMultimap.getValue(EVENT_PREFIX_START_TIME).get());
+        Time end_time = EventParserUtil.parseTime(argMultimap.getValue(EVENT_PREFIX_END_TIME).get());
+        Description description = EventParserUtil.parseDescription(argMultimap.getValue(EVENT_PREFIX_DESCRIPTION).get());
 
 
         Event event;

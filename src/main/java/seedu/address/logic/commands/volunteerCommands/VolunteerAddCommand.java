@@ -17,7 +17,6 @@ import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_END_TIME;
 
 
 public class VolunteerAddCommand extends Command {
-    // Should the command word be add? or addVolunteer since we have to differentiate with add event?
     public static final String COMMAND_WORD = "addv";
     private static final String MESSAGE_DUPLICATE_VOLUNTEER = "This volunteer already exists!";
     private static final String MESSAGE_SUCCESS = "Volunteer added successfully!";
