@@ -1,13 +1,11 @@
 package seedu.ddd.model.person;
 
-import static seedu.ddd.commons.util.CollectionUtil.requireAllNonNull;
-
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.ddd.commons.util.CollectionUtil;
 import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.model.tag.Tag;
-import seedu.ddd.commons.util.CollectionUtil;
 
 /**
  * Represents a Vendor in the address book.

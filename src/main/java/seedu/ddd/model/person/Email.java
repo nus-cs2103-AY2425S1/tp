@@ -1,9 +1,8 @@
 package seedu.ddd.model.person;
 
-import seedu.ddd.commons.util.AppUtil;
-
 import static java.util.Objects.requireNonNull;
-import static seedu.ddd.commons.util.AppUtil.checkArgument;
+
+import seedu.ddd.commons.util.AppUtil;
 
 /**
  * Represents a Person's email in the address book.

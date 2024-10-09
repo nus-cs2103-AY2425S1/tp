@@ -1,9 +1,8 @@
 package seedu.ddd.model.tag;
 
-import seedu.ddd.commons.util.AppUtil;
-
 import static java.util.Objects.requireNonNull;
-import static seedu.ddd.commons.util.AppUtil.checkArgument;
+
+import seedu.ddd.commons.util.AppUtil;
 
 /**
  * Represents a Tag in the address book.

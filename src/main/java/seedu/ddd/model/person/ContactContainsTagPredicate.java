@@ -3,7 +3,6 @@ package seedu.ddd.model.person;
 import java.util.Set;
 import java.util.function.Predicate;
 
-import seedu.ddd.commons.util.StringUtil;
 import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.model.tag.Tag;
 

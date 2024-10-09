@@ -1,7 +1,6 @@
 package seedu.ddd.model;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.ddd.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.function.Predicate;
@@ -11,9 +10,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.ddd.commons.core.GuiSettings;
 import seedu.ddd.commons.core.LogsCenter;
+import seedu.ddd.commons.util.CollectionUtil;
 import seedu.ddd.model.person.Contact;
 import seedu.ddd.model.person.Person;
-import seedu.ddd.commons.util.CollectionUtil;
 
 /**
  * Represents the in-memory model of the address book data.

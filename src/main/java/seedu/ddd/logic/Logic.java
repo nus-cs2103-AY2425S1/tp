@@ -7,10 +7,10 @@ import seedu.ddd.commons.core.GuiSettings;
 import seedu.ddd.logic.commands.CommandResult;
 import seedu.ddd.logic.commands.exceptions.CommandException;
 import seedu.ddd.logic.parser.exceptions.ParseException;
+import seedu.ddd.model.Model;
 import seedu.ddd.model.ReadOnlyAddressBook;
 import seedu.ddd.model.person.Contact;
 import seedu.ddd.model.person.Person;
-import seedu.ddd.model.Model;
 
 /**
  * API of the Logic component

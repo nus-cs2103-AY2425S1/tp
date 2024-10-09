@@ -1,16 +1,15 @@
 package seedu.ddd.model.person;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.ddd.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.ddd.commons.util.CollectionUtil;
 import seedu.ddd.model.person.exceptions.DuplicatePersonException;
 import seedu.ddd.model.person.exceptions.PersonNotFoundException;
-import seedu.ddd.commons.util.CollectionUtil;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
