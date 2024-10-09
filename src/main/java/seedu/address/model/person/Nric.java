@@ -3,6 +3,10 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a Person's Nric in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidNric(String)}
+ */
 public class Nric {
 
     public static final String MESSAGE_CONSTRAINTS = "NRIC should adhere to the following format and constraints:\n"
@@ -18,12 +22,19 @@ public class Nric {
 
     public final String nric;
 
+    /**
+     * Constructs an {@code Nric}
+     * @param nric A valid Nric
+     */
     public Nric(String nric) {
         requireNonNull(nric);
         checkArgument(isValidNric(nric), MESSAGE_CONSTRAINTS);
         this.nric = nric;
     }
 
+    /**
+     * Returns true if given Nric is valid
+     */
     public static boolean isValidNric(String nric) {
         // Check if the input is 9 characters long
         if (nric == null || nric.length() != 9) {
