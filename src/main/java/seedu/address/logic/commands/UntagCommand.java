@@ -30,7 +30,7 @@ public class UntagCommand extends Command {
             + "florist photographer.";
 
     private final Index index;
-    private final List<Tag> tagsToRemove;
+    private final HashSet<Tag> tagsToRemove;
 
 
 
@@ -40,7 +40,7 @@ public class UntagCommand extends Command {
      * @param index The index of the person in the person list.
      * @param tagsToRemove The list of tags to be removed.
      */
-    public UntagCommand(Index index, List<Tag> tagsToRemove) {
+    public UntagCommand(Index index, HashSet<Tag> tagsToRemove) {
         this.index = index;
         this.tagsToRemove = tagsToRemove;
     }

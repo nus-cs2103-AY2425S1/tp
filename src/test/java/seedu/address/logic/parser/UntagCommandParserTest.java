@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import java.util.Arrays;
+import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +25,7 @@ public class UntagCommandParserTest {
         Tag tag1 = new Tag("friends");
         Tag tag2 = new Tag("owesMoney");
 
-        UntagCommand expectedCommand = new UntagCommand(targetIndex, Arrays.asList(tag1, tag2));
+        UntagCommand expectedCommand = new UntagCommand(targetIndex, new HashSet<>(Arrays.asList(tag1, tag2)));
 
         String userInput = "1 friends owesMoney";
 
