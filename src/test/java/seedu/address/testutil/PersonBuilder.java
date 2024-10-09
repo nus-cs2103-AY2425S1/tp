@@ -83,8 +83,11 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Income} of the {@code Person} that we are building.
+     */
     public PersonBuilder withIncome(int income) {
-        this.income  = new Income(income);
+        this.income = new Income(income);
         return this;
     }
 

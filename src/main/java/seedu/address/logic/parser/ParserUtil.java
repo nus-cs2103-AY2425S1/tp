@@ -96,6 +96,12 @@ public class ParserUtil {
         return new Email(trimmedEmail);
     }
 
+    /**
+     * Parses a {@code String email} into an {@code Income}.
+     * Leading and trailing whitespaces will be trimmed.
+     * The string is parsed into a primitive int.
+     * @throws ParseException if the given {@code email} is invalid.
+     */
     public static Income parseIncome(String potentialIncome) throws ParseException {
         requireNonNull(potentialIncome);
         String trimmedIncome = potentialIncome.trim();
