@@ -16,6 +16,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
+import seedu.address.model.LessonSchedule;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -24,7 +25,9 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonLessonScheduleStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.LessonScheduleStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
@@ -58,7 +61,8 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        LessonScheduleStorage lessonScheduleStorage = new JsonLessonScheduleStorage(userPrefs.getLessonScheduleFilePath());
+        storage = new StorageManager(addressBookStorage, userPrefsStorage, lessonScheduleStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -76,7 +80,9 @@ public class MainApp extends Application {
         logger.info("Using data file : " + storage.getAddressBookFilePath());
 
         Optional<ReadOnlyAddressBook> addressBookOptional;
+        Optional<LessonSchedule> lessonScheduleOptional;
         ReadOnlyAddressBook initialData;
+        LessonSchedule initialLessonSchedule;
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
@@ -84,13 +90,20 @@ public class MainApp extends Application {
                         + " populated with a sample AddressBook.");
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            lessonScheduleOptional = storage.readLessonSchedule(initialData);
+            if (!lessonScheduleOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getLessonScheduleFilePath()
+                        + " populated with a sample LessonSchedule.");
+            }
+            initialLessonSchedule = lessonScheduleOptional.orElseGet(SampleDataUtil::getSampleLessonSchedule);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");
             initialData = new AddressBook();
+            initialLessonSchedule = new LessonSchedule();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        return new ModelManager(initialData, userPrefs, initialLessonSchedule);
     }
 
     private void initLogging(Config config) {

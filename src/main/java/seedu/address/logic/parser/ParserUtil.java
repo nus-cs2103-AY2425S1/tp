@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.DateTimeUtil.INVALID_DATETIME_FORMAT;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -9,6 +10,10 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.lesson.EndDateTime;
+import seedu.address.model.lesson.LocationIndex;
+import seedu.address.model.lesson.StartDateTime;
+import seedu.address.model.lesson.StudentId;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -120,5 +125,39 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    public static StudentId parseStudentId(String studentId) throws ParseException {
+        requireNonNull(studentId);
+        if (!StudentId.isValidStudentId(studentId)) {
+            throw new ParseException(StudentId.MESSAGE_CONSTRAINTS);
+        }
+        return new StudentId(studentId);
+    }
+
+    public static LocationIndex parseLocationIndex(String locationIndex) throws ParseException {
+        requireNonNull(locationIndex);
+        if (!LocationIndex.isValidLocationIndex(locationIndex)) {
+            throw new ParseException(LocationIndex.MESSAGE_CONSTRAINTS);
+        }
+        return new LocationIndex(locationIndex);
+    }
+
+    public static StartDateTime parseStartDateTime(String startDateTime) throws ParseException {
+        requireNonNull(startDateTime);
+        String trimmedStartDateTime = startDateTime.trim();
+        if (!StartDateTime.isValidStartDateTime(trimmedStartDateTime)) {
+            throw new ParseException(StartDateTime.START_DATE_MESSAGE_CONSTRAINTS);
+        }
+        return StartDateTime.createStartDateTime(trimmedStartDateTime);
+    }
+
+    public static EndDateTime parseEndDateTime(StartDateTime startDateTime, String hoursToAdd) throws ParseException {
+        requireNonNull(startDateTime);
+        requireNonNull(hoursToAdd);
+        if (!EndDateTime.isValidHoursToAdd(hoursToAdd)) {
+            throw new ParseException(EndDateTime.HOURS_MESSAGE_CONSTRAINTS);
+        }
+        return EndDateTime.createEndDateTime(startDateTime, hoursToAdd);
     }
 }

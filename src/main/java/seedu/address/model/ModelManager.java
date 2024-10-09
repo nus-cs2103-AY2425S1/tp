@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
 
 /**
@@ -21,23 +22,26 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
+    private final LessonSchedule lessonSchedule;
     private final FilteredList<Person> filteredPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, LessonSchedule lessonSchedule) {
+        requireAllNonNull(addressBook, userPrefs, lessonSchedule);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs +
+                " and lesson schedule " + lessonSchedule);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.lessonSchedule = new LessonSchedule(lessonSchedule);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new UserPrefs(), new LessonSchedule());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -145,4 +149,21 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
 
+    //=========== LessonSchedule ================================================================================
+
+    @Override
+    public LessonSchedule getLessonSchedule() {
+        return lessonSchedule;
+    }
+
+    @Override
+    public void addLesson(Lesson lesson) {
+        lessonSchedule.addLesson(lesson);
+    }
+
+    @Override
+    public boolean hasLessons(Lesson lesson) {
+        requireNonNull(lesson);
+        return lessonSchedule.hasLesson(lesson);
+    }
 }
