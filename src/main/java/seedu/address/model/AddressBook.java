@@ -78,7 +78,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Replaces the given supplier {@code target} in the list with {@code editedSupplier}.
      * {@code target} must exist in the address book.
-     * The supplier identity of {@code editedSupplier} must not be the same as another existing supplier in the address book.
+     * The supplier identity of {@code editedSupplier} must not be
+     * the same as another existing supplier in the address book.
      */
     public void setPerson(Supplier target, Supplier editedSupplier) {
         requireNonNull(editedSupplier);

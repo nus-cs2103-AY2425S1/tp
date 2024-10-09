@@ -72,7 +72,8 @@ public interface Model {
     /**
      * Replaces the given supplier {@code target} with {@code editedSupplier}.
      * {@code target} must exist in the address book.
-     * The supplier identity of {@code editedSupplier} must not be the same as another existing supplier in the address book.
+     * The supplier identity of {@code editedSupplier} must not be
+     * the same as another existing supplier in the address book.
      */
     void setPerson(Supplier target, Supplier editedSupplier);
 
