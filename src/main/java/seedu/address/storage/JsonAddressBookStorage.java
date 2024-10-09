@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import static java.util.Objects.requireNonNull;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
@@ -13,6 +14,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A class to access AddressBook data stored as a json file on the hard disk.
@@ -55,6 +57,10 @@ public class JsonAddressBookStorage implements AddressBookStorage {
             return Optional.of(jsonAddressBook.get().toModelType());
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
+            File myObj = new File(String.valueOf(filePath));
+            if (myObj.delete()) {
+                logger.info("Corrupted file purged");
+            }
             throw new DataLoadingException(ive);
         }
     }

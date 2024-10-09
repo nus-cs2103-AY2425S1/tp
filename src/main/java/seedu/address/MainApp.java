@@ -84,10 +84,21 @@ public class MainApp extends Application {
                         + " populated with a sample AddressBook.");
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
-        } catch (DataLoadingException e) {
-            logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
-                    + " Will be starting with an empty AddressBook.");
-            initialData = new AddressBook();
+            storage.saveAddressBook(initialData);
+        } catch (DataLoadingException | IOException e) {
+            try{
+                addressBookOptional = storage.readAddressBook();
+                if (!addressBookOptional.isPresent()) {
+                    logger.info("Creating a new data file " + storage.getAddressBookFilePath()
+                            + " populated with a sample AddressBook.");
+                }
+                initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+                storage.saveAddressBook(initialData);
+            } catch (DataLoadingException | IOException f) {
+                logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
+                        + " Will be starting with an empty AddressBook.");
+                initialData = new AddressBook();
+            }
         }
 
         return new ModelManager(initialData, userPrefs);
