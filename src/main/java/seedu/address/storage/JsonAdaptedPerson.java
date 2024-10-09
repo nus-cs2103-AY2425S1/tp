@@ -5,10 +5,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.ContractEndDate;
+import seedu.address.model.person.Department;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Role;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -21,17 +24,25 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final String department;
+    private final String role;
+    private final String contractEndDate;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address) {
+            @JsonProperty("email") String email, @JsonProperty("address") String address,
+                             @JsonProperty("department") String department, @JsonProperty("role") String role,
+                             @JsonProperty("contractEndDate") String contractEndDate) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.department = department;
+        this.role = role;
+        this.contractEndDate = contractEndDate;
     }
 
     /**
@@ -42,6 +53,9 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        department = source.getDepartment().value;
+        role = source.getRole().value;
+        contractEndDate = source.getContractEndDate().value;
     }
 
     /**
@@ -82,7 +96,35 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress);
+        if (department == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Department.class.getSimpleName()));
+        }
+        if (!Department.isValidDepartment(department)) {
+            throw new IllegalValueException(Department.MESSAGE_CONSTRAINTS);
+        }
+        final Department modelDepartment = new Department(department);
+
+        if (role == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Role.class.getSimpleName()));
+        }
+        if (!Role.isValidRole(role)) {
+            throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
+        }
+        final Role modelRole = new Role(role);
+
+        if (contractEndDate == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ContractEndDate.class.getSimpleName()));
+        }
+        if (!ContractEndDate.isValidDate(contractEndDate)) {
+            throw new IllegalValueException(ContractEndDate.MESSAGE_CONSTRAINTS);
+        }
+        final ContractEndDate modelContractEndDate = new ContractEndDate(contractEndDate);
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelDepartment, modelRole,
+                modelContractEndDate);
     }
 
 }
