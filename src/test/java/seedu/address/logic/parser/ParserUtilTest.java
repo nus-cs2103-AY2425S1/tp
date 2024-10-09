@@ -104,23 +104,23 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseAddress_null_throwsNullPointerException() {
+    public void parseRole_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((String) null));
     }
 
     @Test
-    public void parseAddress_invalidValue_throwsParseException() {
+    public void parseRole_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseAddress(INVALID_ROLE));
     }
 
     @Test
-    public void parseAddress_validValueWithoutWhitespace_returnsAddress() throws Exception {
+    public void parseRole_validValueWithoutWhitespace_returnsAddress() throws Exception {
         Address expectedAddress = new Address(VALID_ROLE);
         assertEquals(expectedAddress, ParserUtil.parseAddress(VALID_ROLE));
     }
 
     @Test
-    public void parseAddress_validValueWithWhitespace_returnsTrimmedAddress() throws Exception {
+    public void parseRole_validValueWithWhitespace_returnsTrimmedAddress() throws Exception {
         String addressWithWhitespace = WHITESPACE + VALID_ROLE + WHITESPACE;
         Address expectedAddress = new Address(VALID_ROLE);
         assertEquals(expectedAddress, ParserUtil.parseAddress(addressWithWhitespace));
@@ -150,47 +150,47 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTag_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseSkills(null));
+    public void parseSkill_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSkills((String) null));
     }
 
     @Test
-    public void parseTag_invalidValue_throwsParseException() {
+    public void parseSkill_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseSkills(INVALID_SKILL));
     }
 
     @Test
-    public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
-        Tag expectedTag = new Tag(VALID_SKILL_1);
-        assertEquals(expectedTag, ParserUtil.parseSkills(VALID_SKILL_1));
+    public void parseSkill_validValueWithoutWhitespace_returnsTag() throws Exception {
+        Skill expectedSkill = new Skill(VALID_SKILL_1);
+        assertEquals(expectedSkill, ParserUtil.parseSkills(VALID_SKILL_1));
     }
 
     @Test
-    public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
+    public void parseSkill_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
         String tagWithWhitespace = WHITESPACE + VALID_SKILL_1 + WHITESPACE;
         Tag expectedTag = new Tag(VALID_SKILL_1);
         assertEquals(expectedTag, ParserUtil.parseTag(tagWithWhitespace));
     }
 
     @Test
-    public void parseTags_null_throwsNullPointerException() {
+    public void parseSkills_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseSkills((String) null));
     }
 
     @Test
-    public void parseTags_collectionWithInvalidTags_throwsParseException() {
+    public void parseSkills_collectionWithInvalidTags_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseSkills(Arrays.asList(VALID_SKILL_1, INVALID_SKILL)));
     }
 
     @Test
-    public void parseTags_emptyCollection_returnsEmptySet() throws Exception {
+    public void parseSkills_emptyCollection_returnsEmptySet() throws Exception {
         assertTrue(ParserUtil.parseSkills(Collections.emptyList()).isEmpty());
     }
 
     @Test
-    public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
+    public void parseSkills_collectionWithValidTags_returnsTagSet() throws Exception {
         Set<Skill> actualTagSet = ParserUtil.parseSkills(Arrays.asList(VALID_SKILL_1, VALID_SKILL_2));
-        Set<Skill> expectedTagSet = new HashSet<Skill>(Arrays.asList(new Skill(VALID_SKILL_1), new Skill(VALID_SKILL_1)));
+        Set<Skill> expectedTagSet = new HashSet<Skill>(Arrays.asList(new Skill(VALID_SKILL_1), new Skill(VALID_SKILL_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
     }
