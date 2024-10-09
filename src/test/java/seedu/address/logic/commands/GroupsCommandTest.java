@@ -11,7 +11,8 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for GroupsCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for
+ * GroupsCommand.
  */
 public class GroupsCommandTest {
 
@@ -26,8 +27,7 @@ public class GroupsCommandTest {
 
     @Test
     public void execute_groupsWhileEmpty_showsEmptyGroups() {
-        assertCommandSuccess(new GroupsCommand(), model,
-                "[]\n" + GroupsCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new GroupsCommand(), model, "[]\n" + GroupsCommand.MESSAGE_SUCCESS, expectedModel);
     }
-    //TODO MORE TESTS
+    // TODO MORE TESTS
 }
