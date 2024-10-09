@@ -145,6 +145,29 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd client in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st client in the results of the `find` command.
 
+### Adding an insurance plan to a client
+
+Adds the insurance plan (by id) to the client (also by id)
+
+Format: `addInsurance <client_id> id/ <insurance_id>`
+
+* If the <client_id> or <insurance_id> is invalid, the user will be informed with an error message.
+
+Examples:
+* `addInsurance 1 id/ 1` adds the insurance plan with id 1 to the client with id 1
+
+### Deleting an insurance plan from a client
+
+Deletes the insurance plan (by id) from the client (also by id)
+
+Format: `deleteInsurance <client_id> id/ <insurance_id>`
+
+* If the <client_id> is invalid or the user does not have the insurance plan <insurance_id>, 
+the user will be informed with an error message.
+
+Examples:
+* `deleteInsurance 1 id/ 1` deletes the insurance plan of id 1 from the client with id 1
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -201,5 +224,7 @@ Action     | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**AddInsurance**   | `addInsurance [CLIENT_ID] id/ [INSURANCE_ID]`<br> eg., `addInsurance 1 id/ 1`
+**DeleteInsurance**   | `deleteInsurance [CLIENT_ID] id/ [INSURANCE_ID]`<br> eg., `deleteInsurance 1 id/ 1`
 **List**   | `list`
 **Help**   | `help`
