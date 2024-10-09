@@ -9,6 +9,7 @@ import seedu.address.model.person.Github;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -21,13 +22,14 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEEFAULT_TELEGRAM = "@viswa";
     public static final String DEFAULT_GITHUB = "Amy";
-
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
+    private Telegram telegram;
     private Set<Tag> tags;
     private Github github;
 
@@ -39,6 +41,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        telegram = new Telegram(DEEFAULT_TELEGRAM);
         tags = new HashSet<>();
         github = new Github(DEFAULT_GITHUB);
     }
@@ -51,6 +54,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        telegram = personToCopy.getTelegram();
         tags = new HashSet<>(personToCopy.getTags());
         github = personToCopy.getGithub();
     }
@@ -80,6 +84,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Telegram} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withTelegram(String telegram) {
+        this.telegram = new Telegram(telegram);
+        return this;
+    }
+
+    /**
      * Sets the {@code Phone} of the {@code Person} that we are building.
      */
     public PersonBuilder withPhone(String phone) {
@@ -104,7 +116,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, tags, github);
+        return new Person(name, phone, email, address, telegram, tags, github);
     }
 
 }

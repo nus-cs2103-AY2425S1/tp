@@ -27,6 +27,7 @@ import seedu.address.model.person.Github;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -100,10 +101,13 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        Telegram updatedTelegram = editPersonDescriptor.getTelegram().orElse(personToEdit.getTelegram());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Github updatedGithub = editPersonDescriptor.getGithub().orElse(personToEdit.getGithub());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedGithub);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
+                updatedTelegram, updatedTags, updatedGithub);
+
     }
 
     @Override
@@ -139,6 +143,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
+        private Telegram telegram;
         private Set<Tag> tags;
         private Github github;
 
@@ -153,6 +158,7 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setTelegram(toCopy.telegram);
             setTags(toCopy.tags);
             setGithub(toCopy.github);
         }
@@ -161,7 +167,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, github);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, telegram, tags, github);
         }
 
         public void setName(Name name) {
@@ -194,6 +200,14 @@ public class EditCommand extends Command {
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
+        }
+
+        public void setTelegram(Telegram telegram) {
+            this.telegram = telegram;
+        }
+
+        public Optional<Telegram> getTelegram() {
+            return Optional.ofNullable(telegram);
         }
 
         /**
@@ -237,6 +251,7 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
+                    && Objects.equals(telegram, otherEditPersonDescriptor.telegram)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
                     && Objects.equals(github, otherEditPersonDescriptor.github);
         }
@@ -248,6 +263,7 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
+                    .add("telegram", telegram)
                     .add("tags", tags)
                     .add("github", github)
                     .toString();
