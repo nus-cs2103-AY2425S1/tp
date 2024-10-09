@@ -10,8 +10,8 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.person.CallFrequency;
 import seedu.address.testutil.ContactDateBuilder;
-
 
 public class ContactDateTest {
     @Test
@@ -45,6 +45,14 @@ public class ContactDateTest {
         ContactDate contactDate = ContactDate.createCurrentDate(VALID_NOTES);
         assertEquals(contactDate.value, currentDate);
         assertEquals(contactDate.getNotes(), VALID_NOTES);
+    }
+
+    public void addCallFrequency_validCallFrequency_success() {
+        ContactDate contactDate = new ContactDateBuilder().withDate("2020-01-01").build();
+        CallFrequency callFrequency = new CallFrequency("7");
+        ContactDate newContactDate = contactDate.add(callFrequency);
+        ContactDate targetContactDate = new ContactDateBuilder().withDate("2020-01-08").build();
+        assertEquals(newContactDate, targetContactDate);
     }
 
     @Test

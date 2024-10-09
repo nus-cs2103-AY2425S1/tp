@@ -28,13 +28,14 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final ContactDateList contactDates = new ContactDateList();
+    private final CallFrequency callFrequency;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-            ContactDateList contactDates) {
-        requireAllNonNull(nric, name, phone, email, address, tags);
+            ContactDateList contactDates, CallFrequency callFrequency) {
+        requireAllNonNull(nric, name, phone, email, address, tags, contactDates, callFrequency);
         this.nric = nric;
         this.name = name;
         this.phone = phone;
@@ -42,13 +43,16 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
         this.contactDates.addAll(contactDates);
+        this.callFrequency = callFrequency;
     }
 
     /**
      * For creating a new person. Every field but contact date must be present and not null.
      */
-    public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        this(nric, name, phone, email, address, tags, new ContactDateList(ContactDate.createCurrentDate("")));
+    public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+            CallFrequency callFrequency) {
+        this(nric, name, phone, email, address, tags, new ContactDateList(ContactDate.createCurrentDate("")),
+                callFrequency);
     }
 
     public Nric getNric() {
@@ -77,6 +81,14 @@ public class Person {
 
     public ContactDate getLastContacted() {
         return contactDates.getLastContacted();
+    }
+
+    public CallFrequency getCallFrequency() {
+        return callFrequency;
+    }
+
+    public ContactDate getNextContactDate() {
+        return getLastContacted().add(callFrequency);
     }
 
     /**
@@ -134,7 +146,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(nric, name, phone, email, address, tags);
+        return Objects.hash(nric, name, phone, email, address, tags, callFrequency);
     }
 
     @Override
@@ -146,6 +158,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("call frequency", callFrequency)
                 .toString();
     }
 

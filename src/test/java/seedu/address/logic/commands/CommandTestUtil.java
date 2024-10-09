@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CALL_FREQUENCY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTES;
@@ -41,6 +42,8 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_NOTES = "This is a note";
+    public static final String VALID_CALL_FREQUENCY_AMY = "7";
+    public static final String VALID_CALL_FREQUENCY_BOB = "5";
 
     public static final String NRIC_DESC_AMY = " " + PREFIX_NRIC + VALID_NRIC_AMY;
     public static final String NRIC_DESC_BOB = " " + PREFIX_NRIC + VALID_NRIC_BOB;
@@ -55,6 +58,10 @@ public class CommandTestUtil {
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String NOTES_DESC = " " + PREFIX_NOTES + VALID_NOTES;
+    public static final String CALL_FREQUENCY_DESC_AMY =
+            " " + PREFIX_CALL_FREQUENCY + VALID_CALL_FREQUENCY_AMY;
+    public static final String CALL_FREQUENCY_DESC_BOB =
+            " " + PREFIX_CALL_FREQUENCY + VALID_CALL_FREQUENCY_BOB;
 
     public static final String INVALID_NRIC_DESC = " " + PREFIX_NRIC + "S1234567A"; // 'A' is not a valid checksum
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
@@ -62,6 +69,8 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_CALL_FREQUENCY_DESC =
+            " " + PREFIX_CALL_FREQUENCY + "8"; // Call frequency must be at most 7 days
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -72,10 +81,11 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withNric(VALID_NRIC_AMY).withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_FRIEND).withCallFrequency(VALID_CALL_FREQUENCY_AMY).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withNric(VALID_NRIC_BOB).withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withCallFrequency(VALID_CALL_FREQUENCY_AMY)
+                .build();
     }
 
     /**

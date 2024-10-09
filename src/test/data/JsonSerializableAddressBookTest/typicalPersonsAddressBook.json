@@ -10,7 +10,8 @@
     "contactDates" : [ {
         "date": "2024-09-28",
         "notes": ""
-        } ]
+        } ],
+    "callFrequency": "7"
   }, {
     "nric" : "S0233700B",
     "name" : "Benson Meier",
@@ -21,7 +22,8 @@
     "contactDates" : [ {
         "date": "2024-09-28",
         "notes": ""
-        } ]
+        } ],
+    "callFrequency": "7"
   }, {
     "nric" : "S6192793Z",
     "name" : "Carl Kurz",
@@ -32,7 +34,8 @@
     "contactDates" : [ {
         "date": "2024-09-28",
         "notes": ""
-        } ]
+        } ],
+    "callFrequency": "7"
   }, {
     "nric" : "S0589789J",
     "name" : "Daniel Meier",
@@ -43,7 +46,8 @@
     "contactDates" : [ {
         "date": "2024-09-28",
         "notes": ""
-        } ]
+        } ],
+    "callFrequency": "7"
   }, {
     "nric" : "S5674593I",
     "name" : "Elle Meyer",
@@ -54,7 +58,8 @@
     "contactDates" : [ {
         "date": "2024-09-28",
         "notes": ""
-        } ]
+        } ],
+    "callFrequency": "7"
   }, {
     "nric" : "S1092693I",
     "name" : "Fiona Kunz",
@@ -65,7 +70,8 @@
     "contactDates" : [ {
         "date": "2024-09-28",
         "notes": ""
-        } ]
+        } ],
+    "callFrequency": "7"
   }, {
     "nric" : "S8596794J",
     "name" : "George Best",
@@ -76,6 +82,7 @@
     "contactDates" : [ {
         "date": "2024-09-28" ,
         "notes": ""
-        } ]
+        } ],
+    "callFrequency": "7"
   } ]
 }
