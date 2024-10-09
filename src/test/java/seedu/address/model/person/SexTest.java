@@ -24,7 +24,7 @@ public class SexTest {
         // null sex
         assertThrows(NullPointerException.class, () -> Sex.isValidSex(null));
 
-        // invalid addresses
+        // invalid sexes
         assertFalse(Sex.isValidSex("")); // empty string
         assertFalse(Sex.isValidSex(" ")); // spaces only
         assertFalse(Sex.isValidSex("G")); // not 'M' or 'F'
