@@ -75,7 +75,7 @@ public class EditPersonDescriptorBuilder {
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
      * that we are building.
      */
-    public EditPersonDescriptorBuilder withTags(String... tags) {
+    public EditPersonDescriptorBuilder withTiers(String... tags) {
         Set<Tier> tierSet = Stream.of(tags).map(Tier::new).collect(Collectors.toSet());
         descriptor.setTags(tierSet);
         return this;
