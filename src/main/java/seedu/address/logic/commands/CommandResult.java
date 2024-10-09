@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.ClearCommand.MESSAGE_CONFIRMATION;
 
 import java.util.Objects;
 
@@ -19,13 +20,17 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** The clear command confirmation is pending */
+    private boolean pendingClear;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean pendingClear) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.pendingClear = pendingClear;
     }
 
     /**
@@ -33,7 +38,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false, feedbackToUser.contains(MESSAGE_CONFIRMATION));
     }
 
     public String getFeedbackToUser() {
@@ -46,6 +51,10 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public boolean isPendingClear() {
+        return pendingClear;
     }
 
     @Override
