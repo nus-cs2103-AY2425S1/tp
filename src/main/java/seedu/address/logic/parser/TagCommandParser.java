@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
@@ -16,7 +15,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
  */
 public class TagCommandParser implements Parser<TagCommand> {
     public static final int MAX_LENGTH = 50;
-    public static final String VALIDATION_REGEX = "[\\p{Alnum} ]+";
+
     /**
      * Parses the given {@code String} of arguments in the context of the TagCommand
      * and returns a TagCommand object for execution.
@@ -37,9 +36,8 @@ public class TagCommandParser implements Parser<TagCommand> {
         String trimmedTagName = argMultimap.getValue(PREFIX_TAG).get().trim();
         boolean isEmpty = trimmedTagName.isEmpty();
         boolean isTooLong = trimmedTagName.length() > MAX_LENGTH;
-        boolean isAlphanumeric = trimmedTagName.matches(VALIDATION_REGEX);
 
-        if (isEmpty || !isAlphanumeric) {
+        if (isEmpty) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
         }
 

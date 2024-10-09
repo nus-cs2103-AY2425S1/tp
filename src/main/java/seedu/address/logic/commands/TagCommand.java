@@ -8,6 +8,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -22,7 +23,7 @@ public class TagCommand extends Command {
     public static final String COMMAND_WORD = "tag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Tags the person identified by the index number used in the displayed person list with a predefined alphanumerical tag. \n"
+            + ": Tags the person identified by the index number used in the displayed person list with a predefined tag. \n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -64,8 +65,9 @@ public class TagCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_TAG);
         }
 
-        Set<Tag> newTags = Set.copyOf(personToTag.getTags());
+        Set<Tag> newTags = new HashSet<>(personToTag.getTags());
         newTags.add(tag);
+
         Person updatedPerson = new Person(personToTag.getName(), personToTag.getPhone(), personToTag.getEmail(), personToTag.getAddress(), newTags);
         model.setPerson(personToTag, updatedPerson);
 
