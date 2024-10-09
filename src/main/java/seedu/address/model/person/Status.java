@@ -1,10 +1,10 @@
 package seedu.address.model.person;
 
-import java.util.Arrays;
-import java.util.List;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Represents a Person's application status in the address book.
