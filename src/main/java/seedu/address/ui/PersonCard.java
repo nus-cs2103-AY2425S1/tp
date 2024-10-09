@@ -53,10 +53,16 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        priority.setText(person.getPriority().name());
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+
+        priority.getStyleClass().add(switch (person.getPriority()) {
+        case HIGH -> "priority-high";
+        case MEDIUM -> "priority-medium";
+        case LOW -> "priority-low";
+        });
+        priority.setText(person.getPriority().name());
 
         String value = person.getRemark().value;
         remark.setText(value);

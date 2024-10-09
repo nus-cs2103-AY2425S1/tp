@@ -26,7 +26,11 @@
           </minWidth>
         </Label>
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
-        <Label fx:id="priority" text="\$priority" styleClass="cell_big_label" />
+        <Label fx:id="priority" text="\$priority">
+          <HBox.margin>
+            <Insets left="4" />
+          </HBox.margin>
+        </Label>
       </HBox>
       <FlowPane fx:id="tags" />
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
