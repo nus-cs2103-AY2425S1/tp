@@ -105,5 +105,4 @@ public class PersonBuilder {
     public Person build() {
         return new Person(name, company, phone, email, address, tags);
     }
-
 }
