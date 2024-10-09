@@ -353,7 +353,7 @@ Those without any stars are user stories that were considered but will not be im
 
 **MSS**
 
-1.  User issues the list command.
+1.  User requests to list all contacts.
 2.  The system retrieves and displays the list of all contacts to the user.
 
     Use case ends.
@@ -372,7 +372,7 @@ Those without any stars are user stories that were considered but will not be im
 
 **Extensions**
 
-* 1a. The system detects a name input error (duplicated or trailing whitespace).
+* 1a. The system detects an er
     * 1a1. The system displays an error message.
 
       Use case ends.
