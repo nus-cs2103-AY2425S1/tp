@@ -9,28 +9,27 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_SCHEDULE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_RATE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_SCHEDULE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.SCHEDULE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.SCHEDULE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.RATE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.RATE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.SCHEDULE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.SCHEDULE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHEDULE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_RATE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_RATE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHEDULE_AMY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -47,8 +46,8 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Schedule;
 import seedu.address.model.person.Rate;
+import seedu.address.model.person.Schedule;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 public class EditCommandParserTest {
@@ -185,7 +184,8 @@ public class EditCommandParserTest {
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // multiple valid fields repeated
-        userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + SCHEDULE_DESC_AMY + RATE_DESC_AMY
+        userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + SCHEDULE_DESC_AMY
+                + RATE_DESC_AMY
                 + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + SCHEDULE_DESC_AMY + RATE_DESC_AMY
                 + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB + SCHEDULE_DESC_BOB + RATE_DESC_BOB;
 
@@ -195,8 +195,8 @@ public class EditCommandParserTest {
 
         // multiple invalid values
         userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + INVALID_ADDRESS_DESC + INVALID_EMAIL_DESC
-                + INVALID_SCHEDULE_DESC + INVALID_RATE_DESC + INVALID_PHONE_DESC + INVALID_ADDRESS_DESC + INVALID_EMAIL_DESC
-                + INVALID_SCHEDULE_DESC + INVALID_RATE_DESC;
+                + INVALID_SCHEDULE_DESC + INVALID_RATE_DESC + INVALID_PHONE_DESC + INVALID_ADDRESS_DESC
+                + INVALID_EMAIL_DESC + INVALID_SCHEDULE_DESC + INVALID_RATE_DESC;
 
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
