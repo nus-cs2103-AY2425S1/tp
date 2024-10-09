@@ -9,9 +9,10 @@ import static java.util.Objects.requireNonNull;
 public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     private final TagName tagName;
+    private int taggedCount;
 
     /**
      * Constructs a {@code Tag}.
@@ -21,6 +22,7 @@ public class Tag {
     public Tag(TagName tagName) {
         requireNonNull(tagName);
         this.tagName = tagName;
+        this.taggedCount = 0;
     }
 
     /**
@@ -31,11 +33,8 @@ public class Tag {
     }
 
     /**
-     * Returns true if this tag is considered the same as {@code otherTag}.
-     * Two tags are considered the same if they have the same {@code TagName}.
-     *
-     * @param otherTag The tag to compare with.
-     * @return {@code true} if the tags are the same, {@code false} otherwise.
+     * Returns true if another tag has the same TagName as this tag.
+     * @param otherTag A tag to compare with.
      */
     public boolean isSameTag(Tag otherTag) {
         if (otherTag == this) {
@@ -46,8 +45,24 @@ public class Tag {
                 && otherTag.getTagName().equals(getTagName());
     }
 
-    public TagName getTagName() {
-        return tagName;
+    public TagName getTagName() { return tagName; }
+
+    public int getNumberOfPersonsTagged() { return taggedCount; }
+
+    public void increaseTaggedCount() {
+        taggedCount++;
+    }
+
+    public void decreaseTaggedCount() {
+        taggedCount--;
+    }
+
+    /**
+     * Returns true if the tag can be deleted.
+     * The tag can be deleted if TaggedCount is 0.
+     */
+    public boolean canBeDeleted() {
+        return taggedCount == 0;
     }
 
     @Override
@@ -76,4 +91,5 @@ public class Tag {
     public String toString() {
         return '[' + tagName.toString() + ']';
     }
+
 }
