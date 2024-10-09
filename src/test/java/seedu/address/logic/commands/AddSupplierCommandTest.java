@@ -22,8 +22,8 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.supplier.Supplier;
 import seedu.address.model.product.Product;
+import seedu.address.model.supplier.Supplier;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddSupplierCommandTest {
@@ -51,8 +51,8 @@ public class AddSupplierCommandTest {
         AddSupplierCommand addSupplierCommand = new AddSupplierCommand(validSupplier);
         ModelStub modelStub = new ModelStubWithPerson(validSupplier);
 
-        assertThrows(CommandException.class, AddSupplierCommand.MESSAGE_DUPLICATE_PERSON,
-                () -> addSupplierCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddSupplierCommand.MESSAGE_DUPLICATE_PERSON, () ->
+                addSupplierCommand.execute(modelStub));
     }
 
     @Test
