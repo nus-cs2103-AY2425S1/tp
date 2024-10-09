@@ -86,7 +86,7 @@ public class MainApp extends Application {
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
             storage.saveAddressBook(initialData);
         } catch (DataLoadingException | IOException e) {
-            try{
+            try {
                 addressBookOptional = storage.readAddressBook();
                 if (!addressBookOptional.isPresent()) {
                     logger.info("Creating a new data file " + storage.getAddressBookFilePath()
