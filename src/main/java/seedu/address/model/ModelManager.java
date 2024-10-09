@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.supplier.Supplier;
+import seedu.address.model.product.Product;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -39,8 +40,6 @@ public class ModelManager implements Model {
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
     }
-
-    //=========== UserPrefs ==================================================================================
 
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
@@ -75,8 +74,6 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
-
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
         this.addressBook.resetData(addressBook);
@@ -98,6 +95,11 @@ public class ModelManager implements Model {
         addressBook.removePerson(target);
     }
 
+    public boolean hasProduct(Product product) {
+        System.out.println("has Product in model manager.");
+        return true;
+    }
+
     @Override
     public void addPerson(Supplier supplier) {
         addressBook.addPerson(supplier);
@@ -107,8 +109,13 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Supplier target, Supplier editedSupplier) {
         requireAllNonNull(target, editedSupplier);
-
         addressBook.setPerson(target, editedSupplier);
+    }
+
+    @Override
+    public void addProduct(Product product) {
+        System.out.println("Add Product in model manager.");
+
     }
 
     //=========== Filtered Supplier List Accessors =============================================================

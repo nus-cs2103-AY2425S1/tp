@@ -1,11 +1,11 @@
 package seedu.address.model;
-
 import java.nio.file.Path;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.supplier.Supplier;
+import seedu.address.model.product.Product;
 
 /**
  * The API of the Model component.
@@ -56,6 +56,10 @@ public interface Model {
      * Returns true if a supplier with the same identity as {@code supplier} exists in the address book.
      */
     boolean hasPerson(Supplier supplier);
+    /**
+     * Returns true if a product with the same identity as {@code product} exists in InvenTrack.
+     */
+    boolean hasProduct(Product product);
 
     /**
      * Deletes the given supplier.
@@ -70,7 +74,18 @@ public interface Model {
     void addPerson(Supplier supplier);
 
     /**
+<<<<<<< HEAD
      * Replaces the given supplier {@code target} with {@code editedSupplier}.
+=======
+     * Adds the given product.
+     * {@code product} must not already exist in InvenTrack.
+     */
+    void addProduct(Product product);
+
+
+    /**
+     * Replaces the given person {@code target} with {@code editedPerson}.
+>>>>>>> upstream/master
      * {@code target} must exist in the address book.
      * The supplier identity of {@code editedSupplier} must not be
      * the same as another existing supplier in the address book.

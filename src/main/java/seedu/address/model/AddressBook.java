@@ -9,6 +9,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.supplier.Supplier;
 import seedu.address.model.supplier.UniquePersonList;
 
+
 /**
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
@@ -67,6 +68,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.contains(supplier);
     }
 
+
     /**
      * Adds a supplier to the address book.
      * The supplier must not already exist in the address book.
@@ -74,6 +76,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void addPerson(Supplier p) {
         persons.add(p);
     }
+
 
     /**
      * Replaces the given supplier {@code target} in the list with {@code editedSupplier}.
