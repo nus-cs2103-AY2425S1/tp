@@ -38,6 +38,9 @@ public class RentalUtil {
      * @return a formatted string representation of the {@link LocalDate}.
      */
     public static String convertLocalDateToStringWithFormat(LocalDate date, String format) {
+        requireNonNull(date);
+        requireNonNull(format);
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
 
         return date.format(formatter);
@@ -66,6 +69,9 @@ public class RentalUtil {
      *         {@code false} otherwise.
      */
     public static boolean isCustomerListSame(CustomerList firstList, CustomerList secondList) {
+        requireNonNull(firstList);
+        requireNonNull(secondList);
+
         HashSet<String> firstHashSet = new HashSet<>(firstList.getCustomerList());
         HashSet<String> secondHashSet = new HashSet<>(secondList.getCustomerList());
 
