@@ -27,7 +27,8 @@ public class DeletePolicyCommandParser implements Parser<DeletePolicyCommand> {
 
             // Check if the policy type is present
             if (!argMultimap.getValue(PREFIX_POLICY_TYPE).isPresent()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletePolicyCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        DeletePolicyCommand.MESSAGE_USAGE));
             }
 
             PolicyMap policyDel = ParserUtil.parsePolicies(argMultimap.getAllValues(PREFIX_POLICY_TYPE));
