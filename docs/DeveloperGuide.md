@@ -321,47 +321,41 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is `DorManagerPro`, and the 
-**Actor** is the `user` who refers to university dormitory managers unless specified otherwise.)
+(For all use cases below, the **System** is `DorManagerPro`, and the **Actor** is the `user` who refers to university dormitory managers unless specified otherwise.)
 
 **Use Case: UC01 - Add a profile**
 
 **MSS:**
 
-1.  User requests to add a specific profile, specifying name and contact number.
-2.  DorManagerPro adds the profile.
+1. User requests to add a specific profile, specifying name and contact number.
+2. DorManagerPro adds the profile.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions:**
 
 * 1a. DorManagerPro detects an error in the command format.
-
     * 1a1. DorManagerPro requests for the correct command format.
     * 1a2. User enters command again.
-  
-    Steps 1a1-1a2 are repeated until the command is correct.
-    Use case resumes from step 2.
+
+  Steps 1a1-1a2 are repeated until the command is correct.
+  Use case resumes from step 2.
 
 * 1c. DorManagerPro detects that the specified profile already exists.
-
     * 1c1. DorManagerPro informs the user and asks for another profile to add.
     * 1c2. User specifies another profile to add.
-  
-    Steps 1c1-1c2 are repeated until a valid profile is indicated.
-    Use case resumes from step 2.
+
+  Steps 1c1-1c2 are repeated until a valid profile is indicated.
+  Use case resumes from step 2.
 
 * 1d. DorManagerPro detects invalid parameters specified by user.
-
     * 1d1. DorManagerPro requests for valid parameters.
     * 1d2. User re-supplies parameters.
-  
-    Steps 1d1-1d2 are repeated until the parameters are valid.
 
-    Use case resumes from step 2.
+  Steps 1d1-1d2 are repeated until the parameters are valid.
+  Use case resumes from step 2.
 
 * *a. At any time, User chooses to stop adding a profile.
-
   Use case ends.
 
 **Use Case: UC02 - Add room number to profile**
@@ -370,51 +364,42 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 
-1.  User requests to add room number information to a specific profile.
-2.  DorManagerPro updates the profile to include the room number.
+1. User requests to add room number information to a specific profile.
+2. DorManagerPro updates the profile to include the room number.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions:**
 
 * 1a. DorManagerPro detects an error in the command format.
-
     * 1a1. DorManagerPro requests for the correct command format.
     * 1a2. User enters command again.
-  
-    Steps 1a1-1a2 are repeated until the command is correct.
 
-    Use case resumes from step 2.
+  Steps 1a1-1a2 are repeated until the command is correct.
+  Use case resumes from step 2.
 
 * 1b. DorManagerPro cannot find the specified profile to update.
-
     * 1b1. DorManagerPro requests for a profile that exists to update.
     * 1b2. User specifies profile again.
-  
-    Steps 1b1-1b2 are repeated until the command is correct.
 
-    Use case resumes from step 2.
+  Steps 1b1-1b2 are repeated until the command is correct.
+  Use case resumes from step 2.
 
-* 1c. DorManagerPro detects that that room capacity is already full.
-
+* 1c. DorManagerPro detects that the room capacity is already full.
     * 1c1. DorManagerPro requests for a room number that is not already occupied.
     * 1c2. User specifies room number again.
-  
-    Steps 1c1-1c2 are repeated until a valid room number is provided.
 
-    Use case resumes from step 2.
+  Steps 1c1-1c2 are repeated until a valid room number is provided.
+  Use case resumes from step 2.
 
 * 1d. DorManagerPro detects invalid parameters specified by user.
-
     * 1d1. DorManagerPro requests for valid parameters.
     * 1d2. User re-supplies parameters.
-  
-    Steps 1d1-1d2 are repeated until the parameters are valid.
 
-    Use case resumes from step 2.
+  Steps 1d1-1d2 are repeated until the parameters are valid.
+  Use case resumes from step 2.
 
 * *a. At any time, User chooses to stop adding a room number.
-
   Use case ends.
 
 **Use Case: UC03 - Add emergency contact to profile**
@@ -423,42 +408,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 
-1.  User requests to add emergency contact information to a specific profile.
-2.  DorManagerPro updates the profile to include the emergency contact.
+1. User requests to add emergency contact information to a specific profile.
+2. DorManagerPro updates the profile to include the emergency contact.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions:**
 
 * 1a. DorManagerPro detects an error in the command format.
-
     * 1a1. DorManagerPro requests for the correct command format.
     * 1a2. User enters command again.
-  
-    Steps 1a1-1a2 are repeated until the command is correct.
 
-    Use case resumes from step 2.
+  Steps 1a1-1a2 are repeated until the command is correct.
+  Use case resumes from step 2.
 
 * 1b. DorManagerPro cannot find the specified profile to update.
-
     * 1b1. DorManagerPro requests for a profile that exists to update.
     * 1b2. User specifies profile again.
-  
-    Steps 1b1-1b2 are repeated until the command is correct.
 
-    Use case resumes from step 2.
+  Steps 1b1-1b2 are repeated until the command is correct.
+  Use case resumes from step 2.
 
 * 1c. DorManagerPro detects invalid parameters specified by user.
-
     * 1c1. DorManagerPro requests for valid parameters.
     * 1c2. User re-supplies parameters.
-  
-    Steps 1c1-1c2 are repeated until the parameters are valid.
 
-    Use case resumes from step 2.
+  Steps 1c1-1c2 are repeated until the parameters are valid.
+  Use case resumes from step 2.
 
 * *a. At any time, User chooses to stop adding an emergency contact.
-
   Use case ends.
 
 **Use Case: UC04 - View profiles**
@@ -467,24 +445,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 
-1.  User requests to view profiles.
-2.  DorManagerPro displays all profiles with all attached information.
+1. User requests to view profiles.
+2. DorManagerPro displays all profiles with all attached information.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions:**
 
 * 1a. DorManagerPro detects an error in the command format.
-
     * 1a1. DorManagerPro requests for the correct command format.
     * 1a2. User enters command again.
-  
-    Steps 1a1-1a2 are repeated until the command is correct.
 
-    Use case resumes from step 2.
+  Steps 1a1-1a2 are repeated until the command is correct.
+  Use case resumes from step 2.
 
 * *a. At any time, User chooses to stop viewing a profile.
-
   Use case ends.
 
 **Use Case: UC05 - Delete a profile**
@@ -493,71 +468,62 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 
-1.  User requests to delete a specific profile.
-2.  DorManagerPro asks if user to confirm they want to delete the profile.
-3.  User confirms.
-4.  DorManagerPro deletes the profile.
+1. User requests to delete a specific profile.
+2. DorManagerPro asks if user to confirm they want to delete the profile.
+3. User confirms.
+4. DorManagerPro deletes the profile.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions:**
 
 * 1a. DorManagerPro detects an error in the command format.
-
     * 1a1. DorManagerPro requests for the correct command format.
     * 1a2. User enters command again.
-  
-    Steps 1a1-1a2 are repeated until the command is correct.
 
-    Use case resumes from step 2.
+  Steps 1a1-1a2 are repeated until the command is correct.
+  Use case resumes from step 2.
 
 * 1b. DorManagerPro cannot find the specified profile to delete.
-
     * 1b1. DorManagerPro requests for a profile that exists to delete.
     * 1b2. User specifies profile again.
-  
-    Steps 1b1-1b2 are repeated until the command is correct.
 
-    Use case resumes from step 2.
+  Steps 1b1-1b2 are repeated until the command is correct.
+  Use case resumes from step 2.
 
 * 1c. DorManagerPro detects invalid parameters specified by user.
-
     * 1c1. DorManagerPro requests for valid parameters.
     * 1c2. User re-supplies parameters.
-  
-    Steps 1c1-1c2 are repeated until the parameters are valid.
 
-    Use case resumes from step 2.
+  Steps 1c1-1c2 are repeated until the parameters are valid.
+  Use case resumes from step 2.
 
 * 3a. DorManagerPro detects an error in the confirmation message sent by the User
-
     * 3a1. DorManagerPro asks the user for confirmation to delete the profile again.
     * 3a2. User confirms again.
-    
-    Steps 3a1-3a2 are repeated until the confirmation is correct.
 
-    Use case resumes from step 4.
+  Steps 3a1-3a2 are repeated until the confirmation is correct.
+  Use case resumes from step 4.
 
 * 3b. User expresses they do not want to delete the profile after all.
     * 3b1. DorManagerPro acknowledges the rejection.
-  
-    Use case ends.
+
+  Use case ends.
 
 * *a. At any time, User chooses to stop deleting a profile.
-    
-    Use case ends.
+  Use case ends.
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should work on Mac as long as javafx and java '17' both installed.
-3.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-4.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-5.  Should take less than 1000 millisecond to finish every command operation
-6.  Should take less 1 gigabytes of storage
-7.  Should have an upper limit of 10000 contacts on the list
-8.  Should take no more than one contact for each person
-9.  Should take no more than 1 emergency contact for each person
+1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2. Should work on Mac as long as javafx and java '17' both installed.
+3. Should be able to hold up to 1000 persons without noticeable sluggishness in performance for typical usage.
+4. A user with above average typing speed for regular English text (i.e., not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+5. Should take less than 1000 milliseconds to finish every command operation.
+6. Should take less 1 gigabyte of storage.
+7. Should have an upper limit of 10000 contacts on the list.
+8. Should take no more than one contact for each person.
+9. Should take no more than 1 emergency contact for each person.
 
 *{More to be added}*
 
@@ -568,11 +534,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Dorm**: A university or college hall of residence / hotel for students and teachers
 * **Dorm resident**: Student and / or teacher currently staying in a dorm
 * **Dorm manager**: User of Dormanager Pro that has to keep track of the residents in their dorm
-* **Profile**: Collection of information related to a resident that serves as a block of interrelated data in Dormanger
-Pro. Consists of name, contact number, room number and emergency contact.
-* **Emergency contact**: Person to contact when the resident related to said contact gets into an emergency (injury, 
-immigration related issues etc.). Consists of a name and contact number.
-* **Dorm room**: Rooms of the dorm where residents stay in. Has a room number and upper limit of 4 people.
+* **Profile**: Collection of information related to a resident that serves as a block of interrelated data in Dormanger Pro. Consists of name, contact number, room number, and emergency contact.
+* **Emergency contact**: Person to contact when the resident related to said contact gets into an emergency (injury, immigration related issues etc.). Consists of a name and contact number.
+* **Dorm room**: Rooms of the dorm where residents stay in. Has a room number and upper limit of
 
 --------------------------------------------------------------------------------------------------------------------
 
