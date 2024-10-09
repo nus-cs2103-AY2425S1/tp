@@ -1,10 +1,11 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCORE;
 
-import static java.util.Objects.requireNonNull;
+import java.util.Set;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -16,8 +17,9 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
-import java.util.Set;
-
+/**
+ * Add assignment grades to an existing person in the address book.
+ */
 public class AddGradeCommand extends Command {
     public static final String COMMAND_WORD = "addGrade";
     public static final String MESSAGE_USAGE =
@@ -42,6 +44,9 @@ public class AddGradeCommand extends Command {
     private final AddGradeCommandFormat addGradeCommandFormat;
     private Person person;
 
+    /**
+     * @param addGradeCommandFormat assignment and grades to add to the person.
+     */
     public AddGradeCommand(AddGradeCommandFormat addGradeCommandFormat) {
         this.addGradeCommandFormat = addGradeCommandFormat;
     }
@@ -74,6 +79,9 @@ public class AddGradeCommand extends Command {
         return new Person(name, phone, email, address, tags, assignment);
     }
 
+    /**
+     * Wrapper for the details of the assignment to be added and person to be added to.
+     */
     public static class AddGradeCommandFormat {
         private Name name;
         private String assignment;
