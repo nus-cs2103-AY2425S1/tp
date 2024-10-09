@@ -145,8 +145,10 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code DayOfWeek}
+     * Parses a provided String into a {@code DayOfWeek}
      * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if not spelt exactly as the full day of the week, like "Monday", "Wednesday", etc.
      */
     public static DayOfWeek parseDayOfWeek(String day) throws ParseException {
         requireNonNull(day);
@@ -170,6 +172,12 @@ public class ParserUtil {
         }
     }
 
+    /**
+     * Parses a String representing a 24-hour time format to a {@code LocalTime}
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if time provided is not a 24-hour time format like "1200" or "2359" without space
+     */
     public static LocalTime parseLocalTime(String time) throws ParseException {
         String trimmed = time.trim();
 

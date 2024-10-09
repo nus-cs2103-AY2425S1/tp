@@ -63,12 +63,12 @@ public class SampleDataUtil {
 
     private static Lesson[] getSampleLessons() {
         return new Lesson[] {
-                new Lesson("Sec 4 Chemistry Class A", DayOfWeek.MONDAY,
-                        LocalTime.of(20, 0), LocalTime.of(22, 0)),
-                new Lesson("Late night math catchup for P6 students", DayOfWeek.FRIDAY,
-                        LocalTime.of(23, 15), LocalTime.of(0, 45)),
-                new Lesson("(Relief slot) Sec 4 Chemistry Class B", DayOfWeek.MONDAY,
-                        LocalTime.of(19,0), LocalTime.of(21, 0))
+            new Lesson("Sec 4 Chemistry Class A", DayOfWeek.MONDAY,
+                LocalTime.of(20, 0), LocalTime.of(22, 0)),
+            new Lesson("Late night math catchup for P6 students", DayOfWeek.FRIDAY,
+                LocalTime.of(23, 15), LocalTime.of(0, 45)),
+            new Lesson("(Relief slot) Sec 4 Chemistry Class B", DayOfWeek.MONDAY,
+                LocalTime.of(19, 0), LocalTime.of(21, 0))
         };
     }
 

@@ -1,19 +1,15 @@
 package seedu.address.model.calendar;
 
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.*;
-import seedu.address.model.tag.Tag;
-
-import java.time.LocalTime;
-import java.time.DayOfWeek;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-import java.util.Collections;
-import java.util.Objects;
-import java.util.Set;
-
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.time.DayOfWeek;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.Objects;
+
+import seedu.address.commons.util.ToStringBuilder;
 
 /**
  * Lesson class, representing a weekly recurring time slot for a lesson.
@@ -23,9 +19,9 @@ public class Lesson {
             "Lessons cannot start and end at the same time.";
 
     public static final String INVALID_DAY_OF_WEEK =
-            "Day of the week must be spelt as " +
-            "'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', or 'Sunday'" +
-            "only (non case-sensitive).";
+            "Day of the week must be spelt as "
+            + "'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', or 'Sunday'"
+            + "only (non case-sensitive).";
 
     public static final String DESCRIPTION_EMPTY =
             "Lesson description cannot be empty.";
@@ -39,10 +35,10 @@ public class Lesson {
 
     public static final DateTimeFormatter FORMAT_24H = DateTimeFormatter.ofPattern("HHmm");
 
-    String description;
-    DayOfWeek startDay;
-    LocalTime startTime;
-    LocalTime endTime;
+    private String description;
+    private DayOfWeek startDay;
+    private LocalTime startTime;
+    private LocalTime endTime;
 
     /**
      * Every field must be present and not null.
@@ -58,9 +54,13 @@ public class Lesson {
         this.endTime = endTime;
     }
 
-    public String getDescription() { return description; }
+    public String getDescription() {
+        return description;
+    }
 
-    public DayOfWeek getStartDay() { return startDay; }
+    public DayOfWeek getStartDay() {
+        return startDay;
+    }
 
     public LocalTime getStartTime() {
         return startTime;
