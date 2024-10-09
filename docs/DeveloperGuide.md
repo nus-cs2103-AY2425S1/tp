@@ -262,42 +262,96 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+Researchers who,
+* have a need to manage a significant number of study participants
+* need an easy way to contact different experimental groups
+* need quick access to study participants' information
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* is reasonably comfortable using *CLI* apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
+
+As researchers have to handle large groups of participants across multiple studies, `ResearchRoster` allows them to 
+* have all participants consolidated in a single program 
+* consolidate a list of contact details based on **specific experimental criteria**
+* export it to an easy-to-read format for better data organization
+
+Thus, *ResearchRoster* allows researchers to save time, effort and energy whilst keeping their participant data well-organised.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​     | I want to …​                                                                               | So that I can …​                                                                     |
+|----------|-------------|--------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|
+| `* * *`  | user        | add a new person                                                                           | store a new person in my contact list                                                |
+| `* * *`  | user        | add details to contacts                                                                    | store details of people in my contact list                                           |
+| `* * *`  | researcher  | add multiple tags to participants                                                          | tag contacts to multiple study groups                                                |
+| `* * *`  | user        | delete contacts                                                                            | remove old/ contacts that I no longer need                                           |
+| `* *`    | user        | save my contact list                                                                       | keep my contacts between sessions                                                    |
+| `*`      | user        | exit the program                                                                           | clear up my processes                                                                |
+| `* * *`  | user        | use a program that is fast                                                                 | retrieve information quickly                                                         |
+| `* * *`  | user        | work on a clean, user-friendly *UI*                                                        | navigate the platform with ease                                                      |
+| `* * *`  | user        | list all contacts                                                                          | view my list of contacts                                                             |
+| `* * *`  | user        | see usage instructions                                                                     | refer to instructions when I forget how to use the app                               |
+| `* *`    | user        | be given a prompt on what format to enter details                                          | easily use commands without having to memorise the accepted format for the CLI entry |
+| `* *`    | user        | edit contacts                                                                              | update details of my contacts                                                        |
+| `* * *`  | researcher  | update participant information in bulk                                                     | quickly make changes to large groups of participants                                 |
+| `* *`    | researcher  | archive participants who are no longer active                                              | keep my current participant list uncluttered                                         |
+| `* *`    | user        | clear all entries                                                                          | efficiently restart my progress                                                      |
+| `* * *`  | user        | search contacts by name                                                                    | locate contacts without having to go through the entire list                         |
+| `* * *`  | researcher  | search for participants based on study                                                     | quickly locate specific groups of participants                                       |
+| `* * *`  | researcher  | tag participants with specific attributes (e.g., age, gender, study criteria)              | quickly filter and sort participants                                                 |
+| `* * *`  | researcher  | change tag details                                                                         | update the contacts with experimental details                                        |
+| `* * *`  | user        | filter contacts by tags                                                                    | view my contacts by specific groups                                                  |
+| `* * *`  | user        | sort my contact list by name                                                               | locate a person easily                                                               |
+| `* * *`  | researcher  | categorize participants by their participation status (e.g., active, completed, withdrawn) | easily manage ongoing studies                                                        |
+| `* *`    | user        | hide private contact details                                                               | prevent others from viewing them without permission                                  |
+| `* *`    | researcher  | export contacts emails (or other details) into easy to copy-paste format                   | copy the details (like emails) into other places easily                              |
+| `* *`    | researcher  | anonymize participant data when exporting or sharing                                       | ensure participant confidentiality and legal compliance                              |
+| `* *`    | researcher  | assign participants randomly into sample groups                                            | easily obtain samples for experiments                                                |
+| `* *`    | researcher  | get reminders about upcoming sessions                                                      | be reminded of the time without manually noting it down                              |
+| `* *`    | researcher  | receive reminders when participant data is missing or needs updates                        | keep participant records thorough and current                                        |
+| `* *`    | researcher  | track the progress and completion of tasks related to participants                         | ensure all administrative tasks are completed                                        |
+| `* *`    | user        | undo the most recent command                                                               | easily undo commands if I key in the wrong information                               |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `ResearchRoster` and the **Actor** is the `user/researcher`, unless specified otherwise.)
 
-**Use case: Delete a person**
+#### **Use Case: UC01 - Add a new person**
+* *Preconditions:* -
+* *Guarantees:* new person record in the system
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to add a new person with provided details.
+2.  ResearchRoster adds a new person.
+
+    Use case ends.
+
+**Extension**
+
+* 1a. The necessary details are missing from the given input.
+
+    * 1a1. ResearchRoster shows an error message.
+
+      Use case restarts.
+
+
+#### **Use case: UC02 - Delete a person**
+* *Preconditions:* user has added person(s) previously
+* *Guarantees:* person to delete is removed from the system
+
+**MSS**
+
+1.  User requests a list of persons ([UC05](#use-case-uc05---list-all-persons), [UC06](#use-case-uc06---find-persons-by-criteria)).
+2.  ResearchRoster shows the list of persons.
+3.  User requests to delete a specific person in the list.
+4.  ResearchRoster deletes the person.
 
     Use case ends.
 
@@ -309,24 +363,425 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. ResearchRoster shows an error message.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+
+#### **Use Case: UC03 - Edit a person's record**
+* *Preconditions:* user has added person(s) previously
+* *Guarantees:* person record is edited on the system
+
+**MSS**
+
+1.  User requests a list of persons ([UC05](#use-case-uc05---list-all-persons), [UC06](#use-case-uc06---find-persons-by-criteria)).
+2.  ResearchRoster shows the list of persons.
+3.  User requests to edit a person's record with provided details.
+4.  ResearchRoster edits the person's record.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. ResearchRoster shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The changes to make are missing from the given input.
+
+    * 3b1. ResearchRoster shows an error message.
+
+      Use case resumes at step 2.
+
+
+#### **Use Case: UC04 - Edit records in bulk**
+* *Preconditions:* user has added person(s) previously
+* *Guarantees:* person record(s) is/are edited on the system
+
+**MSS**
+
+1.  User requests a filtered list of persons ([UC06](#use-case-uc06---find-persons-by-criteria)).
+2.  ResearchRoster shows the filtered list of persons.
+3.  User requests to apply a change to all records in the list.
+4.  ResearchRoster applies the change to all records in the list.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given input is invalid.
+
+    * 3a1. ResearchRoster shows an error message.
+
+      Use case resumes at step 2.
+
+
+#### **Use Case: UC05 - List all persons**
+* *Preconditions:* user has added person(s) previously
+* *Guarantees:* list of person record(s) is shown
+
+**MSS**
+
+1.  User requests to list persons.
+2.  ResearchRoster shows the list of persons.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. No existing person records.
+
+    * 2a1. ResearchRoster shows a message indicating the list is empty.
+    * 2a2. ResearchRoster shows an empty list.
+
+      Use case ends.
+
+
+#### **Use Case: UC06 - Find persons by criteria**
+* *Preconditions:* user has added person(s) previously
+* *Guarantees:* list of person record(s) that match the criteria is shown
+
+**MSS**
+
+1.  User requests to list persons that match the criteria.
+2.  ResearchRoster shows the list of persons.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The criteria is missing from the given input.
+
+    * 1a1. ResearchRoster shows a message indicating the filtered list is empty.
+    * 1a2. ResearchRoster shows an empty filtered list.
+
+      Use case restarts.
+
+* 2a. No person records that matches the criteria.
+
+    * 2a1. ResearchRoster shows an error message.
+
+      Use case ends.
+
+
+#### **Use Case: UC07 - Add study group tag(s) to person**
+* *Preconditions:* user has added person(s) previously
+* *Guarantees:* study group tag(s) is/are added to person record
+
+**MSS**
+
+1.  User requests a list of persons ([UC05](#use-case-uc05---list-all-persons), [UC06](#use-case-uc06---find-persons-by-criteria)).
+2.  ResearchRoster shows the list of persons.
+3.  User requests to add study group tag(s) to a person's record.
+4.  ResearchRoster adds the tag(s) to the person's record.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. ResearchRoster shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The tag(s) to add are missing from the given input.
+
+    * 3b1. ResearchRoster shows an error message.
+
+      Use case resumes at step 2.
+
+
+#### **Use Case: UC08 - Remove study group tag(s) from person**
+* *Preconditions:* user has added person(s) previously, user has added study group tag(s) to person record previously
+* *Guarantees:* study group tag(s) is/are removed from person record
+
+**MSS**
+
+1.  User requests a list of persons ([UC05](#use-case-uc05---list-all-persons), [UC06](#use-case-uc06---find-persons-by-criteria)).
+2.  ResearchRoster shows the list of persons.
+3.  User requests to remove study group tag(s) from a person's record.
+4.  ResearchRoster removes the tag(s) from the person's record.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. ResearchRoster shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The tag(s) to remove are missing from the given input.
+
+    * 3b1. ResearchRoster shows an error message.
+
+      Use case resumes at step 2.
+
+
+#### **Use Case: UC09 - Add progress status to person record**
+* *Preconditions:* user has added person(s) previously
+* *Guarantees:* progress status is added to person record
+
+**MSS**
+
+1.  User requests a list of persons ([UC05](#use-case-uc05---list-all-persons), [UC06](#use-case-uc06---find-persons-by-criteria)).
+2.  ResearchRoster shows the list of persons.
+3.  User requests to add progress status to a person's record.
+4.  ResearchRoster adds the status to the person's record.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. ResearchRoster shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The given status is invalid.
+
+    * 3b1. ResearchRoster shows an error message.
+
+      Use case resumes at step 2.
+
+
+#### **Use Case: UC10 - Export contacts of list**
+* *Preconditions:* user has added person(s) with email previously
+* *Guarantees:* a text document with list of contacts in plain text
+
+**MSS**
+
+1.  User requests a list of persons ([UC05](#use-case-uc05---list-all-persons), [UC06](#use-case-uc06---find-persons-by-criteria)).
+2.  ResearchRoster shows the list of persons.
+3.  User requests to export contacts of persons in the list.
+4.  ResearchRoster adds the list of persons' contacts to a text file for the user.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 4a. ResearchRoster is unable to write to the text file.
+
+    * 4a1. ResearchRoster shows an error message.
+
+      Use case resumes at step 2.
+
+
+#### **Use Case: UC11 - Assign sample groups**
+* *Preconditions:* user has added person(s) previously
+* *Guarantees:* study group tags are randomly added to person records based on study parameters
+
+**MSS**
+
+1.  User requests a list of persons ([UC05](#use-case-uc05---list-all-persons), [UC06](#use-case-uc06---find-persons-by-criteria)).
+2.  ResearchRoster shows the list of persons.
+3.  User requests to randomly assign the list of persons into sample groups.
+4.  ResearchRoster assigns the list of persons into sample groups by adding study group tags to each record.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The study parameters are missing from the given input.
+
+    * 3a1. ResearchRoster shows an error message.
+
+      Use case resumes at step 2.
+
+
+#### **Use Case: UC12 - Undo last action**
+* *Preconditions:* user has performed an action
+* *Guarantees:* system state is restored to before last action performed
+
+**MSS**
+
+1.  User requests to undo the last action.
+2.  ResearchRoster restores records to before the last action.
+
+    Use case ends.
+
+
+#### **Use Case: UC13 - Create a session reminder**
+* *Preconditions:* -
+* *Guarantees:* a reminder is set and triggered before the session
+
+**MSS**
+
+1.  User requests to create a session reminder.
+2.  ResearchRoster shows a message confirming reminder is set.
+2.  ResearchRoster prompts the user accordingly before the session.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The session details are missing from the given input.
+
+    * 1a1. ResearchRoster shows an error message.
+
+      Use case restarts.
+
+* *a. At any time, User chooses to cancels the session reminder.
+
+    * *a1. ResearchRoster shows a message confirming reminder is cancelled.
+
+      Use case ends.
+
+
+#### **Use Case: UC14 - Track study progress**
+* *Preconditions:* user has added progress status to person(s) record previously
+* *Guarantees:* progress status for study is shown
+
+**MSS**
+
+1.  User requests to track progress for a study.
+2.  ResearchRoster shows the progress status of persons in the study.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given input is invalid.
+
+    * 1a1. ResearchRoster shows an error message.
+
+      Use case restarts.
+
+
+#### **Use Case: UC15 - Archive old records**
+* *Preconditions:* user has added person(s) previously
+* *Guarantees:* person records are archived
+
+**MSS**
+
+1.  User requests a list of persons ([UC05](#use-case-uc05---list-all-persons), [UC06](#use-case-uc06---find-persons-by-criteria)).
+2.  ResearchRoster shows the list of persons.
+3.  User requests to archive a person's record.
+4.  ResearchRoster archives the person's record.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. ResearchRoster shows an error message.
+
+      Use case resumes at step 2.
+
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+#### General requirements
 
-*{More to be added}*
+* The software should be offered as a free product/service.
+* The source code should be open source.
+
+#### Constraints
+
+* The data should be stored locally in a human-editable text file (allowing advanced users to modify data directly).
+* The software should have minimal reliance on network connectivity and include fallback mechanisms for any network-dependent features.
+* The software should not depend on the developer’s remote server.
+* The software should be distributed as a single `.jar` file. If that is not feasible, the `.jar` file and any required files should be packaged into a single `.zip` file.
+* The software should not exceed 100 MB in size, and document files (i.e., `PDF`s of documentation) should not exceed 15 MB each. Neither should be unnecessarily bloated.
+* Any third-party frameworks, libraries or services used should be free, open-source (except for services) and permissively licensed. They should not require users to install additional software or create accounts.
+* The developer and user guides should be `PDF`-friendly (by avoiding expandable panels, embedded videos, animated `GIF`s etc.).
+
+#### Quality
+
+* The software should be optimized for the target users: fast typists should be able to complete most tasks more efficiently using the _CLI_ than a _GUI_.
+* The software should be intuitive and easy for first-time users to navigate (by providing sample data, a `help` command to access the user guide etc.).
+* Multistep commands for onboarding (if any) should have a streamlined, one-step equivalent for regular or expert users.
+* The _GUI_ should be intuitive for users who are not tech-savvy.
+
+#### Performance and Efficiency
+
+* The software should respond to user actions within 5 seconds.
+
+#### Scalability
+
+* The software should be able to accommodate up to 5,000 contacts, without a noticeable sluggishness in performance for typical usage.
+
+#### Reliability
+
+* The software should maintain stable operation (i.e., function as intended) at least 99.9% of the time.
+
+#### Robustness
+
+* **Disaster Recovery and Fault Tolerance:** The software should gracefully handle exceptional events (e.g., errors or failures) without losing data or compromising functionality (e.g., crashing).
+* **Error Handling:** Clear, informative error messages should be provided, and errors logged to aid troubleshooting and support.
+
+#### Compliance
+
+* The software should protect research participants' confidentiality and comply with relevant legal standards (by safeguarding _private contact details_).
+
+#### Portability
+
+* The software should work without requiring an installer.
+* The software should run on any _mainstream OS_ that has `Java 17` (and no other Java version installed).
+* The _GUI_ should be free from resolution-related inconveniences for standard screen resolutions (1920x1080 or higher) and screen scales (100% and 125%).
+* The _GUI_ should remain functional, though not necessarily optimized, for resolutions of 1280x720 or higher and screen scales of 150%.
+
+#### Maintainability
+
+* **Code Quality:** The code should be well-maintained and follow best practices.
+* **Documentation:** Clear, consistent and accurate documentation is required.
+* **Testability:** Implemented features should not impede testing or make the software difficult to test.
+
+#### Process Requirements
+
+* The project should follow a development schedule that delivers incremental versions on a weekly basis.
+
+#### Notes about project scope
+
+* Input should primarily be via the _CLI_, with the _GUI_ mainly providing visual feedback.
+* The software does not need to support the printing of reports or contacting research participants.
+* The software is intended for single-user operation, not multi-user functionality.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **UI**: User Interface - The medium through which users interact with a system, encompassing both graphical (*GUI*) and text-based (*CLI*) elements
+* **GUI**: Graphical User Interface - A visual-based interface where users interact with the system through graphical elements like icons and windows
+* **CLI**: Command Line Interface - A text-based interface where users interact with the system by typing commands
 
 --------------------------------------------------------------------------------------------------------------------
 

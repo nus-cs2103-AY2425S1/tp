@@ -24,17 +24,24 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Gender gender;
+    private final Age age;
+    private final Detail detail;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Gender gender, Age age, Set<Tag> tags,
+                  Detail detail) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.gender = gender;
+        this.age = age;
+        this.detail = detail;
     }
 
     public Name getName() {
@@ -53,6 +60,15 @@ public class Person {
         return address;
     }
 
+    public Gender getGender() {
+        return gender; }
+
+    public Age getAge() {
+        return age; }
+
+    public Detail getDetail() {
+        return detail; }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -62,8 +78,8 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both persons have the same email.
+     * This allows researchers to differentiate persons by email
      */
     public boolean isSamePerson(Person otherPerson) {
         if (otherPerson == this) {
@@ -71,7 +87,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getEmail().equals(getEmail());
     }
 
     /**
@@ -100,7 +116,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, gender, age, tags, detail);
     }
 
     @Override
@@ -110,7 +126,10 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("gender", gender)
+                .add("age", age)
                 .add("tags", tags)
+                .add("detail", detail)
                 .toString();
     }
 
