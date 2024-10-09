@@ -1,16 +1,15 @@
 package spleetwaise.address.logic.commands.exceptions;
 
+import spleetwaise.commons.exceptions.SpleetWaiseCommandException;
+
 /**
- * Represents an error which occurs during execution of a {@link Command}.
+ * Represents an error that occurs during command execution in the address component.
  */
-public class CommandException extends Exception {
+public class CommandException extends SpleetWaiseCommandException {
     public CommandException(String message) {
         super(message);
     }
 
-    /**
-     * Constructs a new {@code CommandException} with the specified detail {@code message} and {@code cause}.
-     */
     public CommandException(String message, Throwable cause) {
         super(message, cause);
     }

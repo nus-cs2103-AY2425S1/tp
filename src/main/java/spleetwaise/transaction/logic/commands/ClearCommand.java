@@ -6,6 +6,9 @@ import spleetwaise.address.logic.commands.CommandResult;
 import spleetwaise.transaction.model.Model;
 import spleetwaise.transaction.model.TransactionBook;
 
+/**
+ * Represents a command to clear the transaction book.
+ */
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clearTxn";

@@ -14,8 +14,8 @@ import spleetwaise.address.commons.core.GuiSettings;
 import spleetwaise.address.commons.core.LogsCenter;
 import spleetwaise.address.logic.Logic;
 import spleetwaise.address.logic.commands.CommandResult;
-import spleetwaise.address.logic.commands.exceptions.CommandException;
 import spleetwaise.address.logic.parser.exceptions.ParseException;
+import spleetwaise.commons.exceptions.SpleetWaiseCommandException;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -27,28 +27,21 @@ public class MainWindow extends UiPart<Stage> {
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-    private Stage primaryStage;
-    private Logic logic;
-
+    private final Stage primaryStage;
+    private final Logic logic;
+    private final HelpWindow helpWindow;
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
-    private HelpWindow helpWindow;
+    @FXML private StackPane commandBoxPlaceholder;
 
-    @FXML
-    private StackPane commandBoxPlaceholder;
+    @FXML private MenuItem helpMenuItem;
 
-    @FXML
-    private MenuItem helpMenuItem;
+    @FXML private StackPane personListPanelPlaceholder;
 
-    @FXML
-    private StackPane personListPanelPlaceholder;
+    @FXML private StackPane resultDisplayPlaceholder;
 
-    @FXML
-    private StackPane resultDisplayPlaceholder;
-
-    @FXML
-    private StackPane statusbarPlaceholder;
+    @FXML private StackPane statusbarPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -78,6 +71,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -156,8 +150,9 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleExit() {
-        GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
+        GuiSettings guiSettings =
+            new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(), (int) primaryStage.getX(),
+                (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
@@ -172,7 +167,7 @@ public class MainWindow extends UiPart<Stage> {
      *
      * @see Logic#execute(String)
      */
-    private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
+    private CommandResult executeCommand(String commandText) throws SpleetWaiseCommandException, ParseException {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
@@ -187,7 +182,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             return commandResult;
-        } catch (CommandException | ParseException e) {
+        } catch (SpleetWaiseCommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
