@@ -13,7 +13,9 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.ProjectStatus;
 import seedu.address.model.tag.Tag;
+
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -120,5 +122,20 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String projectStatus} into a {@code ProjectStatus}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code projectStatus} is invalid.
+     */
+    public static ProjectStatus parseProjectStatus(String projectStatus) throws ParseException {
+        requireNonNull(projectStatus);
+        String trimmedProjectStatus = projectStatus.trim();
+        if (!ProjectStatus.isValidProjectStatus(trimmedProjectStatus)) {
+            throw new ParseException(ProjectStatus.MESSAGE_CONSTRAINTS);
+        }
+        return new ProjectStatus(trimmedProjectStatus);
     }
 }
