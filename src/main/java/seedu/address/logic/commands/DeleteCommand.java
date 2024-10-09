@@ -107,7 +107,11 @@ public class DeleteCommand extends Command {
         }
 
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return targetIndex.equals(otherDeleteCommand.targetIndex);
+        if (targetIndex != null) {
+            return targetIndex.equals(otherDeleteCommand.targetIndex);
+        } else {
+            return phoneNumber.equals(otherDeleteCommand.phoneNumber);
+        }
     }
 
     @Override
