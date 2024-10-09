@@ -1,5 +1,8 @@
 package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -25,9 +28,19 @@ public class TagCommand extends Command {
 
     public static final String COMMAND_WORD = "tag";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + "Tags students";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Tags students with a given subject, level or both. "
+            + "Parameters: "
+            + PREFIX_NAME + "NAME "
+            + "[" + PREFIX_SUBJECT + "SUBJECT]"
+            + PREFIX_LEVEL + "LEVEL...\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NAME + "John Doe "
+            + PREFIX_SUBJECT + "MATH "
+            + PREFIX_LEVEL + "JC1";
 
-    public static final String MESSAGE_TAG_PERSON_SUCCESS = "Tagged Student: %1$s";
+    public static final String MESSAGE_TAG_STUDENT_SUCCESS = "Tagged Student: %1$s";
+    public static final String MESSAGE_STUDENT_NOT_FOUND = "Student does not exist in address book.";
+
 
     private final Name nameToTag;
     private final EditCommand.EditPersonDescriptor tagsToAdd;
@@ -56,7 +69,7 @@ public class TagCommand extends Command {
         if (optionalPersonToTag.isPresent()) {
             personToTag = optionalPersonToTag.get();
         } else {
-            throw new CommandException("Student does not exist in address book");
+            throw new CommandException(MESSAGE_STUDENT_NOT_FOUND);
         }
 
         Person personWithTags = createPersonWithTags(personToTag, tagsToAdd);
@@ -64,7 +77,7 @@ public class TagCommand extends Command {
         model.setPerson(personToTag, personWithTags);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(String.format(MESSAGE_TAG_PERSON_SUCCESS, Messages.format(personWithTags)));
+        return new CommandResult(String.format(MESSAGE_TAG_STUDENT_SUCCESS, Messages.format(personWithTags)));
 
     }
 

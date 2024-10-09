@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
@@ -31,7 +32,7 @@ public class TagCommandParser {
         if (argMultiMap.getValue(PREFIX_NAME).isPresent()) {
             personToTag = ParserUtil.parseName(argMultiMap.getValue(PREFIX_NAME).get());
         } else {
-            throw new ParseException("Name not given.");
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
         }
 
         EditCommand.EditPersonDescriptor editPersonTags = new EditCommand.EditPersonDescriptor();
@@ -51,7 +52,7 @@ public class TagCommandParser {
 
         if (argMultiMap.getValue(PREFIX_SUBJECT).isEmpty()) {
             if (argMultiMap.getValue(PREFIX_LEVEL).isEmpty()) {
-                throw new ParseException("Provide either a subject or a school level to tag with");
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
             }
         }
 
