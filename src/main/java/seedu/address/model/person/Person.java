@@ -20,21 +20,27 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final Github github;
 
     // Data fields
     private final Address address;
+
+    private final Telegram telegram;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Telegram telegram,
+                  Set<Tag> tags, Github github) {
+        requireAllNonNull(name, phone, email, address, telegram, tags, github);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.telegram = telegram;
         this.tags.addAll(tags);
+        this.github = github;
     }
 
     public Name getName() {
@@ -53,6 +59,10 @@ public class Person {
         return address;
     }
 
+    public Telegram getTelegram() {
+        return telegram;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -61,6 +71,9 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+    public Github getGithub() {
+        return github;
+    }
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
@@ -94,13 +107,15 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && telegram.equals(otherPerson.telegram)
+                && tags.equals(otherPerson.tags)
+                && github.equals(otherPerson.github);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, telegram, tags, github);
     }
 
     @Override
@@ -110,7 +125,9 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("telegram", telegram)
                 .add("tags", tags)
+                .add("github", github)
                 .toString();
     }
 
