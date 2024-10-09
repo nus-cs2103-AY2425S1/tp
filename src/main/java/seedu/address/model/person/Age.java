@@ -9,13 +9,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Age {
     public static final String MESSAGE_CONSTRAINTS =
-           "TBA";
+           "Age should only contain numbers and should be between 1 to 3 digits long inclusive";
 
     /**
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = ".*"; // to change
+    public static final String VALIDATION_REGEX = "\\d{1,3}";
 
     public final String value;
 

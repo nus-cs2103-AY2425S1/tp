@@ -8,14 +8,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidNric(String)}
  */
 public class Nric {
-    public static final String MESSAGE_CONSTRAINTS = "NRIC must start with 'S' or 'T', "
-            + "with 8 numbers and then ending with a letter, it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "NRIC must start with S, T, F, G or M, "
+            + "with 7 numbers and then ending with a letter, it should not be blank";
 
     /**
      * The first character of the NRIC must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = ".*"; // to change
+    public static final String VALIDATION_REGEX = "^[STFG]\\d{7}[A-Z]$";
 
     public final String fullNric;
 

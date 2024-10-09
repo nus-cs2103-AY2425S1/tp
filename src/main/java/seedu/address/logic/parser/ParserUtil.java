@@ -62,8 +62,8 @@ public class ParserUtil {
     public static Age parseAge(String age) throws ParseException {
         requireNonNull(age);
         String trimmedAge = age.trim();
-        if (!Name.isValidName(trimmedAge)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        if (!Age.isValidAge(trimmedAge)) {
+            throw new ParseException(Age.MESSAGE_CONSTRAINTS);
         }
         return new Age(trimmedAge);
     }
@@ -77,8 +77,8 @@ public class ParserUtil {
     public static Gender parseGender(String gender) throws ParseException {
         requireNonNull(gender);
         String trimmedGender = gender.trim();
-        if (!Name.isValidName(trimmedGender)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        if (!Gender.isValidGender(trimmedGender)) {
+            throw new ParseException(Gender.MESSAGE_CONSTRAINTS);
         }
         return new Gender(trimmedGender);
     }
@@ -92,8 +92,8 @@ public class ParserUtil {
     public static Nric parseNric(String nric) throws ParseException {
         requireNonNull(nric);
         String trimmedNric = nric.trim();
-        if (!Name.isValidName(trimmedNric)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        if (!Nric.isValidNric(trimmedNric)) {
+            throw new ParseException(Nric.MESSAGE_CONSTRAINTS);
         }
         return new Nric(trimmedNric);
     }

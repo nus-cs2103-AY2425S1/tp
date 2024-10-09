@@ -9,13 +9,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Gender {
     public static final String MESSAGE_CONSTRAINTS =
-            "TBA";
+            "Gender is for biological gender and should only contain M for Male or F for Female";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = ".*";
+    public static final String VALIDATION_REGEX = "^[MF]$";
 
     public final String value;
 
