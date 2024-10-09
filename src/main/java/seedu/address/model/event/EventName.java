@@ -4,7 +4,7 @@ package seedu.address.model.event;
  * Represents an Event name in the address book.
  * Guarantees: details are present and not null, field values are validated.
  */
-public class Name {
+public class EventName {
     private String eventName;
 
     /**
@@ -12,11 +12,11 @@ public class Name {
      *
      * @param eventName A valid name.
      */
-    public Name(String eventName) {
+    public EventName(String eventName) {
         this.eventName = eventName;
     }
 
-    public String getName() {
+    public String getEventName() {
         return eventName;
     }
 
