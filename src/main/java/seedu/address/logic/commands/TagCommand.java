@@ -8,7 +8,9 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.*;
@@ -32,9 +34,9 @@ public class TagCommand extends Command {
     public static final String MESSAGE_DUPLICATE_TAG = "This person already has this tag.";
 
     private final Index targetIndex;
-    private final String tag;
+    private final Tag tag;
 
-    public TagCommand(Index targetIndex, String tag) {
+    public TagCommand(Index targetIndex, Tag tag) {
         requireNonNull(targetIndex);
         requireNonNull(tag);
 
@@ -51,8 +53,27 @@ public class TagCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
+        if (tag.tagName.length() > 50) {
+            throw new CommandException(Messages.MESSAGE_INPUT_LENGTH_EXCEEDED);
+        }
+
         Person personToTag = lastShownList.get(targetIndex.getZeroBased());
-        //
+
+        /*
+        if (!model.hasTag(tag)) {
+            throw new CommandException(MESSAGE_TAG_NOT_CREATED);
+        }
+        */
+
+        if (personToTag.getTags().contains(tag)) {
+            throw new CommandException(MESSAGE_DUPLICATE_TAG);
+        }
+
+        Set<Tag> newTags = Set.copyOf(personToTag.getTags());
+        newTags.add(tag);
+        Person updatedPerson = new Person(personToTag.getName(), personToTag.getPhone(), personToTag.getEmail(), personToTag.getAddress(), newTags);
+        model.setPerson(personToTag, updatedPerson);
+
         return new CommandResult(String.format(MESSAGE_TAG_PERSON_SUCCESS, Messages.format(personToTag)));
     }
 
