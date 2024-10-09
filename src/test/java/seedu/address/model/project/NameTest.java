@@ -1,12 +1,10 @@
 package seedu.address.model.project;
 
-import seedu.address.model.project.Name;
-
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+
+import org.junit.jupiter.api.Test;
 
 public class NameTest {
 
@@ -30,14 +28,15 @@ public class NameTest {
         assertFalse(seedu.address.model.project.Name.isValidName("")); // empty string
         assertFalse(seedu.address.model.project.Name.isValidName(" ")); // spaces only
         assertFalse(seedu.address.model.project.Name.isValidName("^")); // only non-alphanumeric characters
-        assertFalse(seedu.address.model.project.Name.isValidName("project*")); // contains non-alphanumeric characters
+        assertFalse(seedu.address.model.project.Name.isValidName("project*")); // contains non-alphanumeric chars
 
         // valid name
         assertTrue(seedu.address.model.project.Name.isValidName("project alpha")); // alphabets only
         assertTrue(seedu.address.model.project.Name.isValidName("12345")); // numbers only
         assertTrue(seedu.address.model.project.Name.isValidName("project alpha 2")); // alphanumeric characters
         assertTrue(seedu.address.model.project.Name.isValidName("Capital Project A")); // with capital letters
-        assertTrue(seedu.address.model.project.Name.isValidName("Capital Project A Version 5 Revision 2")); // long names
+        assertTrue(seedu.address.model.project.Name.isValidName(
+                "Capital Project A Version 5 Revision 2")); // long names
     }
 
     @Test
