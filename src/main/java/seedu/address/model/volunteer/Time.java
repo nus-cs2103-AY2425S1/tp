@@ -8,7 +8,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Event's time in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isvalidTime(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidTime(String)}
  * Throws: DateTimeParseException if an invalid time is provided
  */
 public class Time {
@@ -30,14 +30,14 @@ public class Time {
      */
     public Time(String time) throws DateTimeParseException {
         requireNonNull(time);
-        checkArgument(isvalidTime(time), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidTime(time), MESSAGE_CONSTRAINTS);
         this.eventTime = LocalTime.parse(time);
     }
 
     /**
      * Returns true if a given string is a valid time.
      */
-    public static boolean isvalidTime(String test) {
+    public static boolean isValidTime(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
@@ -66,5 +66,7 @@ public class Time {
     public int hashCode() {
         return eventTime.hashCode();
     }
+
+
 
 }

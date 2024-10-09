@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.eventCommands;
+package seedu.address.logic.commands.volunteerCommands;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
