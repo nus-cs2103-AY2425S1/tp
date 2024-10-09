@@ -19,7 +19,11 @@ import seedu.address.model.tag.Tag;
 public class UntagCommandParser implements Parser<UntagCommand> {
 
     /**
-     * Removes the specified tags from the person being referenced
+     * Parses the given {@code String} of arguments in the context of the UntagCommand
+     * and returns an UntagCommand object for execution.
+     * @param args the user input arguments
+     * @return UntagCommand object to be executed
+     * @throws ParseException if the user input does not conform to the expected format
      */
     public UntagCommand parse(String args) throws ParseException {
         requireNonNull(args);

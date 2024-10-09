@@ -32,6 +32,11 @@ public class UntagCommand extends Command {
 
     private final Set<Tag> tagsToRemove;
 
+    /**
+     * Constructs an UntagCommand to remove tags from the person at the specified index.
+     * @param index the index of the person in the filtered person list
+     * @param tagsToRemove the set of tags to be removed from the person
+     */
     public UntagCommand(Index index, Set<Tag> tagsToRemove) {
         requireNonNull(index);
         //requireNonNull(tagsToRemove);
