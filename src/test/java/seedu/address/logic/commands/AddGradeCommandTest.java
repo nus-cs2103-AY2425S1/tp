@@ -31,9 +31,17 @@ public class AddGradeCommandTest {
     @Test
     public void execute_validPersonGrade_success() throws Exception {
         Person testPerson = TypicalPersons.ALICE;
-        AddGradeCommand command = new AddGradeCommand(testPerson.getName().toString(), 9.0f, "Ex09");
+        AddGradeCommand command = new AddGradeCommand(
+                testPerson.getName().toString(),
+                9.0f,
+                "Ex09");
         command.execute(model);
-        assertEquals(model.getAddressBook().getPersonList().stream().filter(person -> person.getName().equals(testPerson.getName())).toList().get(0).getAssignment().getScore(), 9.0f);
+        assertEquals(model
+                .getAddressBook()
+                .getPersonList()
+                .stream().filter(person -> person
+                        .getName()
+                        .equals(testPerson.getName())).toList().get(0).getAssignment().getScore(), 9.0f);
 
     }
 }

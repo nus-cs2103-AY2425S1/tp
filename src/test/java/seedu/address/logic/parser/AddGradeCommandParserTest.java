@@ -20,7 +20,10 @@ public class AddGradeCommandParserTest {
     @Test
     public void parse_allFieldsSpecified_success() throws ParseException {
         String userInput = NAME_DESC_AMY + ASSIGNMENT_DESC_ONE + SCORE_DESC;
-        AddGradeCommand expectedCommand = new AddGradeCommand(VALID_NAME_AMY, Float.parseFloat(VALID_SCORE), VALID_ASSIGNMENT_ONE);
+        AddGradeCommand expectedCommand = new AddGradeCommand(
+                VALID_NAME_AMY,
+                Float.parseFloat(VALID_SCORE),
+                VALID_ASSIGNMENT_ONE);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 }
