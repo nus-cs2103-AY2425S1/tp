@@ -83,7 +83,7 @@ public class AddressBookParser {
             return new FindPatientCommandParser().parse(arguments);
 
         case FindDoctorCommand.COMMAND_WORD:
-            return new FindDoctorCommand();
+            return new FindDoctorCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
