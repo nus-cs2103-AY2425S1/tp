@@ -4,6 +4,11 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.product.Product;
+
+import java.util.List;
+
+import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
@@ -67,11 +72,20 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.contains(person);
     }
 
+    public boolean hasProduct(Product product) {
+        requireNonNull(product);
+        return persons.contains(product);
+    }
+
     /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
     public void addPerson(Person p) {
+        persons.add(p);
+    }
+
+    public void addProduct(Product p) {
         persons.add(p);
     }
 

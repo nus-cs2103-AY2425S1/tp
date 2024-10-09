@@ -41,8 +41,6 @@ public class ModelManager implements Model {
         this(new AddressBook(), new UserPrefs());
     }
 
-    //=========== UserPrefs ==================================================================================
-
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
         requireNonNull(userPrefs);
@@ -95,6 +93,7 @@ public class ModelManager implements Model {
     }
 
     @Override
+
     public boolean hasProduct (Product product) {
         System.out.println("has Product in model manager.");
         return true;
@@ -114,6 +113,7 @@ public class ModelManager implements Model {
     @Override
     public void addProduct(Product product) {
         System.out.println("Add Product in model manager.");
+
     }
 
     @Override
