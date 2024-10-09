@@ -28,19 +28,19 @@ public class TypicalPersons {
             .withPhone("94351253")
             .withTags("friends").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
-            .withJobCode("HR1234")
+            .withJobCode("HRD2025")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").withJobCode("HRD3511").build();
+            .withEmail("heinz@example.com").withJobCode("INTERN087").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").withJobCode("12589323TR").withTags("friends").build();
+            .withEmail("cornelia@example.com").withJobCode("HRD").withTags("friends").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withEmail("werner@example.com").withJobCode("ABRWC3355").build();
+            .withEmail("werner@example.com").withJobCode("135800PLS").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withEmail("lydia@example.com").withJobCode("ITRE353").build();
+            .withEmail("lydia@example.com").withJobCode("CCN32").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
-            .withEmail("anna@example.com").withJobCode("AFWQ232").build();
+            .withEmail("anna@example.com").withJobCode("345").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
