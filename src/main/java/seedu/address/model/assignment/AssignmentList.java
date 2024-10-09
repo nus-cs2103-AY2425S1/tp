@@ -33,6 +33,10 @@ public class AssignmentList {
         this.assignments.add(assignment);
     }
 
+    public ArrayList<Assignment> getAssignments() {
+        return this.assignments;
+    }
+
     /**
      * Checks if the list contains a specific assignment.
      *

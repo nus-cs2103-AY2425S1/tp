@@ -114,6 +114,13 @@ public class ModelManager implements Model {
         addressBook.setStudent(target, editedStudent);
     }
 
+    //=========== Assignment ================================================================================
+
+    @Override
+    public AssignmentList getAssignmentList() {
+        return assignmentList;
+    }
+
     @Override
     public boolean hasAssignment(Assignment assignment) {
         requireNonNull(assignment);
