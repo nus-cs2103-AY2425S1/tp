@@ -20,16 +20,16 @@ public class Nric {
 
     public static final String VALIDATION_REGEX = "\\d{7}";
 
-    public final String nric;
+    public final String value;
 
     /**
      * Constructs an {@code Nric}
-     * @param nric A valid Nric
+     * @param value A valid Nric
      */
-    public Nric(String nric) {
-        requireNonNull(nric);
-        checkArgument(isValidNric(nric), MESSAGE_CONSTRAINTS);
-        this.nric = nric;
+    public Nric(String value) {
+        requireNonNull(value);
+        checkArgument(isValidNric(value), MESSAGE_CONSTRAINTS);
+        this.value = value;
     }
 
     /**
@@ -91,7 +91,7 @@ public class Nric {
 
     @Override
     public String toString() {
-        return nric;
+        return value;
     }
 
     @Override
@@ -106,11 +106,11 @@ public class Nric {
         }
 
         Nric otherNric = (Nric) other;
-        return this.nric.equals(otherNric.nric);
+        return this.value.equals(otherNric.value);
     }
 
     @Override
     public int hashCode() {
-        return nric.hashCode();
+        return value.hashCode();
     }
 }
