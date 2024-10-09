@@ -19,6 +19,7 @@ public class Module {
     public static final String VALIDATION_REGEX = "^[a-zA-Z0-9]+$";
 
     public final String module;
+    private Grade grade;
 
     /**
      * Constructs an {@code Module}.
@@ -38,9 +39,13 @@ public class Module {
         return test.matches(VALIDATION_REGEX);
     }
 
+    public void setGrade(Grade grade) {
+        this.grade = grade;
+    }
+
     @Override
     public String toString() {
-        return module;
+        return module + ": " + (grade == null ? "Grade not assigned" : grade.toString());
     }
 
     @Override
@@ -62,5 +67,4 @@ public class Module {
     public int hashCode() {
         return module.hashCode();
     }
-
 }
