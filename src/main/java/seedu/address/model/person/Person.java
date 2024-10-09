@@ -122,7 +122,7 @@ public class Person {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email);
-        address.ifPresent(addr -> builder.add("address", this.getAddress()));
+        address.ifPresent(addr -> builder.add("address", addr));
         builder.add("tags", tags);
 
         return builder.toString();
