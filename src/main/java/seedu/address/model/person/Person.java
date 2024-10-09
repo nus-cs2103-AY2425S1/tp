@@ -4,9 +4,11 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static java.util.Objects.requireNonNull;
 
 
-
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -28,7 +30,7 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
-    private final Set<Attendance> attendanceRecords = new HashSet<>();
+    private final Map<LocalDate, Attendance> attendanceRecords = new HashMap<>();
 
     /**
      * Every field must be present and not null.
@@ -66,15 +68,14 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
-    public void addAttendance(Attendance attendance) {
-        requireNonNull(attendance);
-        this.attendanceRecords.add(attendance);
+    public void markAttendance(LocalDate date, String status) {
+        Attendance attendance = new Attendance(status);
+        attendanceRecords.put(date, attendance);
     }
 
-    public Set<Attendance> getAttendanceRecords() {
-        return Collections.unmodifiableSet(attendanceRecords);
+    public Attendance getAttendance(LocalDate date) {
+        return attendanceRecords.get(date);
     }
-
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
