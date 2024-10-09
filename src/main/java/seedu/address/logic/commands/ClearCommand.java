@@ -12,8 +12,8 @@ public class ClearCommand extends Command {
     public static final String COMMAND_WORD = "clear";
     public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
     public static final String MESSAGE_FAILURE = "Address book has not been cleared!";
-    public static final String MESSAGE_CONFIRMATION = "Are you sure you want to clear all your contacts? This is an "
-            + "irreversible action. (Y/Yes or N/No)";
+    public static final String MESSAGE_CONFIRMATION = "Are you sure you want to permanently clear all your contacts? "
+            + "\nType 'Y'/'Yes' to confirm, or any other input to cancel";
 
     @Override
     public CommandResult execute(Model model) {
