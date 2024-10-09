@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -18,8 +19,16 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword));
+        // Convert the full name to lowercase and split by space or comma
+        String[] nameParts = person.getName().fullName.toLowerCase().split("[,\\s]+");
+
+        return keywords.stream().anyMatch(keyword -> {
+            String lowerCaseKeyword = keyword.toLowerCase();
+
+            // Check if any part of the name starts with the keyword
+            return Arrays.stream(nameParts)
+                    .anyMatch(namePart -> namePart.startsWith(lowerCaseKeyword));
+        });
     }
 
     @Override
