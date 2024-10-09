@@ -89,7 +89,7 @@ public class ParserUtil {
     public static StudentClass parseClass(String studentClass) throws ParseException {
         requireNonNull(studentClass);
         String studentClassTrimmed = studentClass.trim();
-        if (StudentClass.isValidClass(studentClassTrimmed)) {
+        if (!StudentClass.isValidClass(studentClassTrimmed)) {
             throw new ParseException(StudentClass.MESSAGE_CONSTRAINTS);
         }
         return new StudentClass(studentClassTrimmed);
