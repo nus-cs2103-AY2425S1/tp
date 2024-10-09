@@ -42,4 +42,17 @@ public class Event {
     public String toString() {
         return name + " " + time + " " + venue + " " + person;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return false; //To implement
+    }
+
+    /**
+     * Returns true if both events have the same identity and data fields.
+     * This defines a stronger notion of equality between two events.
+     */
+    public boolean isSameEvent(Event otherEvent) {
+        return this.equals(otherEvent); //To implement
+    }
 }
