@@ -15,10 +15,10 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class DeleteInsuranceCommandParser implements Parser<DeleteInsuranceCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the {@code RemarkCommand}
-     * and returns a {@code AddInsuranceCommand} object for execution.
+     * Parses the given {@code String} of arguments in the context of the {@code DeleteInsuranceCommand}
+     * and returns a {@code DeleteInsuranceCommand} object for execution.
      *
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public DeleteInsuranceCommand parse(String args) throws ParseException {
         requireNonNull(args);
