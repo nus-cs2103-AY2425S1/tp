@@ -17,7 +17,7 @@ AY2425S1-CS2103T-F14a-4
 <img src="images/blackpanther9229.png" width="200px">
 
 [[github](https://github.com/blackpanther9229)]
-[[portfolio](team/nguyen.md)]
+[[portfolio](team/blackpanther9229.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
@@ -50,7 +50,6 @@ AY2425S1-CS2103T-F14a-4
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
-
 
 ### Christopher Tan
 
