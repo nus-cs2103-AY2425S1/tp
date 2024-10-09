@@ -16,11 +16,12 @@ public class Nric {
 
     public static final String VALIDATION_REGEX = "\\d{7}";
 
-    public String nric;
+    public final String nric;
 
     public Nric(String nric) {
         requireNonNull(nric);
         checkArgument(isValidNric(nric), MESSAGE_CONSTRAINTS);
+        this.nric = nric;
     }
 
     public static boolean isValidNric(String nric) {
@@ -80,5 +81,20 @@ public class Nric {
     @Override
     public String toString() {
         return nric;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Nric)) {
+            return false;
+        }
+
+        Nric otherNric = (Nric) other;
+        return this.nric.equals(otherNric.nric);
     }
 }
