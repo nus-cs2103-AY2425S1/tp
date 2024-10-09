@@ -75,6 +75,16 @@ public class DeleteCommandTest {
     }
 
     @Test
+    public void execute_duplicateIndexUnfilteredList_throwsCommandException() {
+        List<Index> outOfBoundIndexList = new ArrayList<>();
+        outOfBoundIndexList.add(INDEX_FIRST_PERSON);
+        outOfBoundIndexList.add(INDEX_FIRST_PERSON);
+        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndexList);
+
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
     public void execute_invalidMultipleIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         List<Index> outOfBoundIndexList = new ArrayList<>();
@@ -113,6 +123,22 @@ public class DeleteCommandTest {
         outOfBoundIndexList.add(INDEX_SECOND_PERSON);
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+
+        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndexList);
+
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_duplicateIndexFilteredList_throwsCommandException() {
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+
+        Index duplicateIndex = INDEX_FIRST_PERSON;
+        List<Index> outOfBoundIndexList = new ArrayList<>();
+        outOfBoundIndexList.add(INDEX_SECOND_PERSON);
+        outOfBoundIndexList.add(INDEX_SECOND_PERSON);
+        // ensures that outOfBoundIndex is still in bounds of address book list
+        assertTrue(duplicateIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndexList);
 

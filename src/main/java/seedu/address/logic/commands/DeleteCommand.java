@@ -2,10 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -43,8 +40,10 @@ public class DeleteCommand extends Command {
         //Want to arrange the indexList as descending order
         indexList.sort(Comparator.comparing(Index::getZeroBased).reversed());
 
+        boolean duplicate = hasDuplicates(indexList);
+
         for (Index targetIndex : indexList) {
-            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            if (targetIndex.getZeroBased() >= lastShownList.size() || duplicate) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
 
@@ -56,6 +55,22 @@ public class DeleteCommand extends Command {
         List<Person> reversedPersonToDeleteList = new ArrayList<>(personToDeleteList);
         Collections.reverse(reversedPersonToDeleteList);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.listFormat(reversedPersonToDeleteList)));
+    }
+
+    /**
+     * Checks if a list of indexes has any duplicates.
+     *
+     * @param indexList the list of indexes to check
+     * @return true if the list has duplicates, false otherwise
+     */
+    private boolean hasDuplicates(List<Index> indexList) {
+        Set<Integer> uniqueIndices = new HashSet<>();
+        for (Index index : indexList) {
+            if (!uniqueIndices.add(index.getZeroBased())) {
+                return true; // duplicate found
+            }
+        }
+        return false; // no duplicates found
     }
 
     /**
