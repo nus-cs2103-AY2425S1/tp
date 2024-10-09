@@ -8,7 +8,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
- * Adds an InsurancePlan to an existing person in the address book.
+ * Adds an InsurancePlan to an existing client in the address book.
  */
 public class AddInsuranceCommand extends Command {
     public static final String COMMAND_WORD = "addInsurance";
@@ -26,8 +26,8 @@ public class AddInsuranceCommand extends Command {
     private final int insuranceID;
 
     /**
-     * @param index of the person in the filtered person list to edit the remark
-     * @param insuranceID of the person to be updated to
+     * @param index of the client in the filtered client list to edit the remark
+     * @param insuranceID of the client to be updated to
      */
     public AddInsuranceCommand(Index index, int insuranceID) {
         requireAllNonNull(index, insuranceID);
