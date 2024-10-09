@@ -49,7 +49,7 @@ public class SampleDataUtil {
         return new Contact[] {
             new Client(new Name("A"), new Phone("12345678"), new Email("a@a.com"), new Address("A"),
                 new Date("01 Jan 2000"),
-                getTagSet("test")),
+                getTagSet("another")),
             new Vendor(new Name("B"), new Phone("12345678"), new Email("b@b.com"), new Address("B"),
                 new Service("Catering"),
                 getTagSet("test")),
