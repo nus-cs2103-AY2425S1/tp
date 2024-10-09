@@ -47,6 +47,9 @@ public class PianoPieceTest {
         assertTrue(piece1.equals(piece1));
         assertTrue(piece1.equals(piece1duplicate));
         assertTrue(piece1duplicate.equals(piece1));
+
+        assertFalse(piece1.equals(null));
+        assertFalse(piece1.equals(""));
     }
 
     @Test
