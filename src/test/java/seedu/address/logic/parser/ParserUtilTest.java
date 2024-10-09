@@ -190,8 +190,8 @@ public class ParserUtilTest {
     @Test
     public void parseSkills_collectionWithValidTags_returnsTagSet() throws Exception {
         Set<Skill> actualTagSet = ParserUtil.parseSkills(Arrays.asList(VALID_SKILL_1, VALID_SKILL_2));
-        Set<Skill> expectedTagSet = new HashSet<Skill>(Arrays.asList(new Skill(VALID_SKILL_1), new Skill(VALID_SKILL_2)));
-
+        Set<Skill> expectedTagSet = new HashSet<Skill>(
+                Arrays.asList(new Skill(VALID_SKILL_1), new Skill(VALID_SKILL_2)));
         assertEquals(expectedTagSet, actualTagSet);
     }
 }
