@@ -158,10 +158,10 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleExit() {
+        // Disable commandBox upon exiting
+        commandBoxPlaceholder.getChildren().get(0).setDisable(true);
         new Thread(() -> {
             try {
-                // Disable commandBox upon exiting
-                commandBoxPlaceholder.getChildren().get(0).setDisable(true);
                 // Display FeedbackToUser for 3 seconds before exiting
                 Thread.sleep(3000);
             } catch (InterruptedException e) {
