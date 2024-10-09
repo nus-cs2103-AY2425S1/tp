@@ -35,7 +35,10 @@ class JsonSerializableAddressBook {
             @JsonProperty("projects") List<JsonAdaptedProject> projects
     ) {
         this.persons.addAll(persons);
-        this.projects.addAll(projects);
+
+        if (projects != null) {
+            this.projects.addAll(projects);
+        }
     }
 
     /**
@@ -65,7 +68,7 @@ class JsonSerializableAddressBook {
         for (JsonAdaptedProject jsonAdaptedProject : projects) {
             Project project = jsonAdaptedProject.toModelType();
             if (addressBook.hasProject(project)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+                throw new IllegalValueException(MESSAGE_DUPLICATE_PROJECT);
             }
             addressBook.addProject(project);
         }
