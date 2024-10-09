@@ -4,7 +4,7 @@ title: "Developer Guide"
 pageNav: 3
 ---
 
-# DLTBook Developer Guide
+# DLTbook Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
