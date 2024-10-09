@@ -13,7 +13,7 @@ import seedu.address.logic.commands.ListPatientCommand;
  */
 public class ListPatientCommandParserTest {
 
-    private ListPatientCommandParser parser = new ListPatientCommandParser();
+    private final ListPatientCommandParser parser = new ListPatientCommandParser();
 
     @Test
     public void parse_validArgs_returnsListPatientCommand() {

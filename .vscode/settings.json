@@ -1,3 +1,3 @@
 {
-  "java.checkstyle.configuration": "${workspaceFolder}/config/checkstyle/checkstyle.xml"
+    "java.checkstyle.configuration": "${workspaceFolder}/config/checkstyle/checkstyle.xml"
 }

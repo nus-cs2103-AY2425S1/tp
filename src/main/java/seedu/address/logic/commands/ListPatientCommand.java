@@ -36,7 +36,7 @@ public class ListPatientCommand extends Command {
         throw new CommandException(MESSAGE_NOT_IMPLEMENTED_YET);
     }
 
-     /**
+    /**
      * Returns the string representation of the command.
      */
     @Override

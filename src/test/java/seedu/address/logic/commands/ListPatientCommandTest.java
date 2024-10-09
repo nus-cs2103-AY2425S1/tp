@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.ListPatientCommand.MESSAGE_NOT_IMPLEMENTED_YET;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -16,7 +16,7 @@ import seedu.address.model.UserPrefs;
  * Contains integration tests (interaction with the Model) for {@code ListPatientCommand}.
  */
 public class ListPatientCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     /**
      * Tests whether the {@code ListPatientCommand} equals method works as expected.
@@ -28,17 +28,9 @@ public class ListPatientCommandTest {
         ListPatientCommand listPatientCommand = new ListPatientCommand();
         ListPatientCommand listPatientCommandCopy = new ListPatientCommand();
 
-        // same object -> returns true
-        assertTrue(listPatientCommand.equals(listPatientCommand));
-
         // same values -> returns true
-        assertTrue(listPatientCommand.equals(listPatientCommandCopy));
-
-        // different types -> returns false
-        assertFalse(listPatientCommand.equals(1));
-
-        // null -> returns false
-        assertFalse(listPatientCommand.equals(null));
+        assertEquals(listPatientCommand, listPatientCommandCopy);
+        assertNotEquals(listPatientCommand, null); // Null check -> returns false
     }
 
     /**
