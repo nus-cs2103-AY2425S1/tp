@@ -13,10 +13,11 @@ import seedu.address.model.supplier.exceptions.PersonNotFoundException;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A supplier is considered unique by comparing using {@code Supplier#isSamePerson(Supplier)}. As such, adding and updating of
- * persons uses Supplier#isSamePerson(Supplier) for equality so as to ensure that the supplier being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a supplier uses Supplier#equals(Object) so
- * as to ensure that the supplier with exactly the same fields will be removed.
+ * A supplier is considered unique by comparing using {@code Supplier#isSamePerson(Supplier)}.
+ * As such, adding and updating of persons uses Supplier#isSamePerson(Supplier) for equality to ensure that
+ * the supplier being added or updated is unique in terms of identity in the UniquePersonList.
+ * However, the removal of a supplier uses Supplier#equals(Object) to ensure that the supplier
+ * with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
