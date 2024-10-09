@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.project.Project;
 
 /**
  * The API of the Model component.
@@ -75,6 +76,30 @@ public interface Model {
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
     void setPerson(Person target, Person editedPerson);
+
+    /**
+     * Returns true if a project with the same identity as {@code project} exists in the address book.
+     */
+    boolean hasProject(Project project);
+
+    /**
+     * Deletes the given project.
+     * The project must exist in the address book.
+     */
+    void deleteProject(Project target);
+
+    /**
+     * Adds the given project.
+     * {@code project} must not already exist in the address book.
+     */
+    void addProject(Project project);
+
+    /**
+     * Replaces the given project {@code target} with {@code project}.
+     * {@code project} must exist in the address book.
+     * The person identity of {@code project} must not be the same as another existing project in the address book.
+     */
+    void setProject(Project target, Project editedProject);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

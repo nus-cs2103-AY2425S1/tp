@@ -7,7 +7,9 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
+import seedu.address.model.project.Project;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.project.UniqueProjectList;
 
 /**
  * Wraps all data at the address-book level
@@ -16,6 +18,7 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final UniqueProjectList projects;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -26,6 +29,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        projects = new UniqueProjectList();
     }
 
     public AddressBook() {}
@@ -92,6 +96,44 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+
+
+    //// project-level operations
+
+    /**
+     * Returns true if a project with the same identity as {@code project} exists in the address book.
+     */
+    public boolean hasProject(Project project) {
+        requireNonNull(project);
+        return projects.contains(project);
+    }
+
+    /**
+     * Adds a project to the address book.
+     * The project must not already exist in the address book.
+     */
+    public void addProject(Project p) {
+        projects.add(p);
+    }
+
+    /**
+     * Replaces the given project {@code target} in the list with {@code editedProject}.
+     * {@code target} must exist in the address book.
+     * The project identity of {@code editedProject} must not be the same as another existing project in the address book.
+     */
+    public void setProject(Project target, Project editedProject) {
+        requireNonNull(editedProject);
+
+        projects.setProject(target, editedProject);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeProject(Project key) {
+        projects.remove(key);
     }
 
     //// util methods
