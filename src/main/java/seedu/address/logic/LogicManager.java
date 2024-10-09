@@ -32,6 +32,7 @@ public class LogicManager implements Logic {
     private final Model model;
     private final Storage storage;
     private final AddressBookParser addressBookParser;
+    private boolean pendingClear;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -40,11 +41,17 @@ public class LogicManager implements Logic {
         this.model = model;
         this.storage = storage;
         addressBookParser = new AddressBookParser();
+
     }
 
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
+
+        if (pendingClear) {
+            addressBookParser.setClearPendingStatus(true);
+            this.pendingClear = false;
+        }
 
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
@@ -59,6 +66,10 @@ public class LogicManager implements Logic {
         }
 
         return commandResult;
+    }
+
+    public void setClearPendingStatus(boolean isPending) {
+        this.pendingClear = isPending;
     }
 
     @Override
