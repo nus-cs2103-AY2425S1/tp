@@ -3,12 +3,12 @@ package seedu.address.model.student;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a Student's student number in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidStudentNumber(String)}
+ */
 public class StudentNumber {
 
-    /**
-     * Represents a Student's student number in the address book.
-     * Guarantees: immutable; is valid as declared in {@link #isValidStudentNumber(String)}
-     */
     public static final String MESSAGE_CONSTRAINTS =
             "Student numbers should be of the format A01234567X"
             + "and adhere to the following constraints:\n"
