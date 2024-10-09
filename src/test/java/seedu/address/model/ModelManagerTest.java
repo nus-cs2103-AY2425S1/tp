@@ -7,6 +7,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.FLORIST;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -16,6 +17,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagName;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -91,6 +94,41 @@ public class ModelManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void hasTag_nullTag_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasTag(null));
+    }
+
+    @Test
+    public void hasTag_tagNotInAddressBook_returnsFalse() {
+        Tag newTag = new Tag(new TagName("newTag"));
+        assertFalse(modelManager.hasTag(newTag));
+    }
+
+    @Test
+    public void hasTag_tagInAddressBook_returnsTrue() {
+        modelManager.addTag(FLORIST);
+        assertTrue(modelManager.hasTag(FLORIST));
+    }
+
+    @Test
+    public void addTag_validTag_addsTagSuccessfully() {
+        Tag newTag = new Tag(new TagName("colleague"));
+        modelManager.addTag(newTag);
+        assertTrue(modelManager.hasTag(newTag));
+    }
+
+    @Test
+    public void setTag_nullTag_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setTag(null, FLORIST));
+        assertThrows(NullPointerException.class, () -> modelManager.setTag(FLORIST, null));
+    }
+
+    @Test
+    public void updateFilteredTagList_nullPredicate_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.updateFilteredTagList(null));
     }
 
     @Test
