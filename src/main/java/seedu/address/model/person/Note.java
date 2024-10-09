@@ -2,11 +2,16 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 
+/**
+ * Represents a note/remark given by the HR recruiters in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidNote(String)}
+ */
 public class Note {
-    public final String value;
 
     public static final String MESSAGE_CONSTRAINTS =
             "Notes should not be more than 200 characters long and it should not be blank";
+
+    public final String value;
 
     /**
      * Constructs a {@code Note}.
