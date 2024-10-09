@@ -6,8 +6,12 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.UniqueEventList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.volunteer.Volunteer;
+import seedu.address.model.volunteer.UniqueVolunteerList;
 
 /**
  * Wraps all data at the address-book level
@@ -16,6 +20,11 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+
+    private final UniqueVolunteerList volunteers;
+
+    private final UniqueEventList events;
+
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -26,6 +35,11 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+
+        volunteers = new UniqueVolunteerList();
+
+        events = new UniqueEventList();
+
     }
 
     public AddressBook() {}
@@ -48,6 +62,18 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.persons.setPersons(persons);
     }
 
+    public void setVolunteers(List<Volunteer> volunteers) {
+        this.volunteers.setVolunteers(volunteers);
+    }
+
+    /**
+     * Replaces the contents of the event list with {@code events}.
+     * {@code events} must not contain duplicate events.
+     */
+    public void setEvents(List<Event> events) {
+        this.events.setEvents(events);
+    }
+
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
@@ -55,6 +81,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setEvents(newData.getEventList());
     }
 
     //// person-level operations
@@ -94,6 +121,83 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+
+    //// volunteer-level operations
+
+    /**
+     * Returns true if a volunteer with the same identity as {@code volunteer} exists in the volunteer book.
+     */
+    public boolean hasVolunteer(Volunteer volunteer) {
+        requireNonNull(volunteer);
+        return volunteers.contains(volunteer);
+    }
+
+    /**
+     * Adds a volunteer to the volunteer book.
+     * The volunteer must not already exist in the volunteer book.
+     */
+    public void addVolunteer(Volunteer v) {
+        volunteers.add(v);
+    }
+
+    /**
+     * Replaces the given volunteer {@code target} in the list with {@code editedVolunteer}.
+     * {@code target} must exist in the volunteer book.
+     * The volunteer identity of {@code editedVolunteer} must not be the same as another existing volunteer in the volunteer book.
+     */
+    public void setVolunteer(Volunteer target, Volunteer editedVolunteer) {
+        requireNonNull(editedVolunteer);
+
+        volunteers.setVolunteer(target, editedVolunteer);
+    }
+
+    /**
+     * Removes {@code key} from this {@code VolunteerBook}.
+     * {@code key} must exist in the volunteer book.
+     */
+    public void removeVolunteer(Volunteer key) {
+        volunteers.remove(key);
+
+    //// event level operations
+
+    /**
+     * Returns true if an event with the same identity as {@code event} exists in the address book.
+     */
+    public boolean hasEvent(Event event) {
+        requireNonNull(event);
+        return events.contains(event);
+    }
+
+    /**
+     * Adds an event to the address book.
+     * The event must not already exist in the address book.
+     */
+    public void addEvent(Event event) {
+        events.add(event);
+    }
+
+    /**
+     * Replaces the given event {@code target} in the list with {@code editedEvent}.
+     * {@code target} must exist in the address book.
+     * The event identity of {@code editedEvent} must not be the same as another existing event in the address book.
+     *
+     * NOTE: This method is used for editing events, which is NOT SUPPORTED YET
+     */
+    public void setEvents(Event target, Event editedEvent) {
+        requireNonNull(editedEvent);
+
+        events.setEvent(target, editedEvent);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeEvent(Event key) {
+        events.remove(key);
+
+    }
+
     //// util methods
 
     @Override
@@ -106,6 +210,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Event> getEventList() {
+        return events.asUnmodifiableObservableList();
     }
 
     @Override

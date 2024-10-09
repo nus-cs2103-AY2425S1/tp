@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.model.volunteer.Volunteer;
 
 /**
  * Container for user visible messages.
@@ -49,6 +50,26 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Formats the {@code volunteer} for display to the user.
+     */
+    public static String format(Volunteer volunteer) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(volunteer.getName())
+                .append("; Phone: ")
+                .append(volunteer.getPhone())
+                .append("; Email: ")
+                .append(volunteer.getEmail())
+                .append("; Available Date: ")
+                .append(volunteer.getAvailableDate())
+                .append("; Start Time Availability: ")
+                .append(volunteer.getStartTimeAvailability())
+                .append("; End Time Availability: ")
+                .append(volunteer.getEndTimeAvailability());
+        return builder.toString();
+    }
+
+
     public static String format(Event event) {
         final StringBuilder builder = new StringBuilder();
         builder.append(event.getName())
@@ -61,7 +82,7 @@ public class Messages {
                 .append("; End Time: ")
                 .append(event.getEndTime())
                 .append("; Description: ")
-                .append(event.getDescripton());
+                .append(event.getDescription());
         return builder.toString();
     }
 
