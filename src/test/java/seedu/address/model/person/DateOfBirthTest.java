@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +24,7 @@ public class DateOfBirthTest {
 
     @Test
     public void isValidDateOfBirth() {
-        String futureDate = LocalDate.now().plusDays(2).toString();
+        String futureDate = LocalDate.now().plusDays(2).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         // null date of birth
         assertThrows(NullPointerException.class, () -> DateOfBirth.isValidDateOfBirth(null));
 
