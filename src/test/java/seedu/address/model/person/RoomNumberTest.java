@@ -39,10 +39,13 @@ public class RoomNumberTest {
 
     @Test
     public void equals() {
-        RoomNumber roomNumber = new RoomNumber("Valid Room Number");
+        String validRoomNumber = "01-0123";
+        String otherValidRoomNumber = "05-0523";
+
+        RoomNumber roomNumber = new RoomNumber(validRoomNumber);
 
         // same values -> returns true
-        assertTrue(roomNumber.equals(new RoomNumber("Valid Room Number")));
+        assertTrue(roomNumber.equals(new RoomNumber(validRoomNumber)));
 
         // same object -> returns true
         assertTrue(roomNumber.equals(roomNumber));
@@ -54,6 +57,6 @@ public class RoomNumberTest {
         assertFalse(roomNumber.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(roomNumber.equals(new RoomNumber("Other Valid Room Number")));
+        assertFalse(roomNumber.equals(new RoomNumber(otherValidRoomNumber)));
     }
 }
