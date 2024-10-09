@@ -1,11 +1,13 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -17,8 +19,13 @@ public class FindCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+            + "Parameters: "
+            + PREFIX_NAME + "KEYWORD ["
+            + PREFIX_NAME + "MORE_KEYWORDS]...\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NAME + "alice "
+            + PREFIX_NAME + "bob "
+            + PREFIX_NAME + "charlie";
 
     private final NameContainsKeywordsPredicate predicate;
 
@@ -31,7 +38,10 @@ public class FindCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW,
+                        model.getFilteredPersonList().size(),
+                        String.join(" ", predicate.getKeywords()))
+        );
     }
 
     @Override
