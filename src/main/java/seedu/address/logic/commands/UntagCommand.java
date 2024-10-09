@@ -25,9 +25,9 @@ public class UntagCommand extends Command {
             + ": Removes one or multiple tags from the person identified "
             + "by the index number used in the last person listing.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "t/[TAG]... (can specify multiple tags)\n"
+            + "[TAG]... (can specify multiple tags)\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "t/florist t/photographer.";
+            + "florist photographer.";
 
     private final Index index;
     private final List<Tag> tagsToRemove;

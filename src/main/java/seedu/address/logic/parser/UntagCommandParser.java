@@ -2,8 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,24 +29,30 @@ public class UntagCommandParser implements Parser<UntagCommand> {
     public UntagCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG);
+        // Trim and split input to separate index from tags
+        String trimmedArgs = args.trim();
+        String[] splitArgs = trimmedArgs.split("\\s+", 2);
+
+        if (splitArgs.length < 2) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UntagCommand.MESSAGE_USAGE));
+        }
 
         Index index;
-
         try {
-            // Parse the index from the preamble
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            // Parse the index from the first part of the split arguments
+            index = ParserUtil.parseIndex(splitArgs[0]);
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UntagCommand.MESSAGE_USAGE), ive);
         }
 
-        List<String> tagValues = argMultimap.getAllValues(PREFIX_TAG);
-        if (tagValues.isEmpty()) {
+        // Split the second part (tags) by whitespace
+        String[] tagValues = splitArgs[1].split("\\s+");
+        if (tagValues.length == 0) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UntagCommand.MESSAGE_USAGE));
         }
 
         // Convert tag values to Tag objects
-        List<Tag> tags = tagValues.stream()
+        List<Tag> tags = Arrays.stream(tagValues)
                 .map(Tag::new)
                 .collect(Collectors.toList());
 

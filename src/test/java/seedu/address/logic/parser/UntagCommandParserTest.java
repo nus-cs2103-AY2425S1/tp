@@ -26,7 +26,7 @@ public class UntagCommandParserTest {
 
         UntagCommand expectedCommand = new UntagCommand(targetIndex, Arrays.asList(tag1, tag2));
 
-        String userInput = "1 t/friends t/owesMoney";
+        String userInput = "1 friends owesMoney";
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -34,7 +34,7 @@ public class UntagCommandParserTest {
     @Test
     public void parse_invalidArgs_throwsParseException() {
         // Invalid index (non-numeric)
-        assertParseFailure(parser, "a t/friends", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseFailure(parser, "a friends", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 UntagCommand.MESSAGE_USAGE));
 
         // Missing tags (no tags specified)
