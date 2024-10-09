@@ -94,7 +94,7 @@ public class LogicManagerTest {
     @Test
     public void getCallHistory_modifyList_throwsUnsupportedOperationException() {
         ContactDateList callHistory = new ContactDateList();
-        callHistory.add(new ContactDate("2021-01-01"));
+        callHistory.add(new ContactDate("2021-01-01", ""));
         model.updateDisplayedList(callHistory);
         assertEquals(callHistory, model.getDisplayedCallHistory());
     }

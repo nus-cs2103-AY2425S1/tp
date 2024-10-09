@@ -54,7 +54,7 @@ public class ContactDateListTest {
     public void equals() {
         ContactDateList contactDateList = new ContactDateList();
         ContactDateList contactDateListCopy = new ContactDateList();
-        ContactDateList contactDateListCopy2 = new ContactDateList(new ContactDate("2021-10-10"));
+        ContactDateList contactDateListCopy2 = new ContactDateList(new ContactDate("2021-10-10", ""));
 
         // same object -> returns true
         assertTrue(contactDateList.equals(contactDateList));

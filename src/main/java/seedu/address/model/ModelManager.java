@@ -170,7 +170,7 @@ public class ModelManager implements Model {
     public ContactDateList getDisplayedCallHistory() {
         ContactDateList callHistory = new ContactDateList();
         for (String call : displayedCallHistory) {
-            ContactDate contactDate = new ContactDate(call);
+            ContactDate contactDate = new ContactDate(call, "");
             callHistory.add(contactDate);
         }
         return callHistory;

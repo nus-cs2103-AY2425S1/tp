@@ -22,6 +22,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.contactdate.ContactDate;
 import seedu.address.model.contactdate.ContactDateList;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
