@@ -274,13 +274,15 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* has a need to manage a large number of gaming contacts
+* prefer desktop apps over web apps or mobile apps
+* is proficient in typing and prefers keyboard inputs over mouse interactions
+* feels comfortable using CLI applications
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: 
+
+* manage contacts more quickly than a typical mouse/GUI driven app
+* managing contacts specifically for gaming
 
 
 ### User stories
