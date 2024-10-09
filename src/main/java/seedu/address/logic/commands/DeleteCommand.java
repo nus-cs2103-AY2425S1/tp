@@ -24,7 +24,7 @@ public class DeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted successfully!\n"
-            + "Deleted participant info: %1$s";
+            + "Deleted participant: %1$s";
 
     private final Index targetIndex;
 
