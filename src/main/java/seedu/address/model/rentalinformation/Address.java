@@ -1,8 +1,4 @@
-<<<<<<<< HEAD:src/main/java/seedu/address/model/rentalinformation/Address.java
 package seedu.address.model.rentalinformation;
-========
-package seedu.address.model.client;
->>>>>>>> pr/63:src/main/java/seedu/address/model/client/Address.java
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;

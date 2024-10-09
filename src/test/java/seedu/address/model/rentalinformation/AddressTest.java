@@ -1,8 +1,4 @@
-<<<<<<<< HEAD:src/test/java/seedu/address/model/rentalinformation/AddressTest.java
 package seedu.address.model.rentalinformation;
-========
-package seedu.address.model.client;
->>>>>>>> pr/63:src/test/java/seedu/address/model/client/AddressTest.java
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
