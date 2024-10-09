@@ -6,6 +6,15 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+/**
+ * A list of events that enforces uniqueness between its elements and does not allow nulls.
+ * A event is considered unique by comparing using {@code Event#isSameEvent(Event)}. As such, adding and updating of
+ * events uses Event#isSameEvent(Event) for equality so as to ensure that the event being added or updated is
+ * unique in terms of identity in the UniqueEventList. However, the removal of a event uses Event#equals(Object) so
+ * as to ensure that the event with exactly the same fields will be removed.
+ * Supports a minimal set of list operations.
+ *
+ */
 public class UniqueEventList implements Iterable<Event> {
 
     private final ObservableList<Event> internalList = FXCollections.observableArrayList();
@@ -20,8 +29,8 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
-     * Adds a person to the list.
-     * The person must not already exist in the list.
+     * Adds an event to the list.
+     * The event must not already exist in the list.
      */
     public void add(Event toAdd) {
     // To implement
@@ -29,8 +38,8 @@ public class UniqueEventList implements Iterable<Event> {
 
 
     /**
-     * Removes the equivalent person from the list.
-     * The person must exist in the list.
+     * Removes the equivalent event from the list.
+     * The event must exist in the list.
      */
     public void remove(Event toRemove) {
         //To implement
@@ -65,7 +74,7 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
-     * Returns true if {@code persons} contains only unique persons.
+     * Returns true if {@code events} contains only unique persons.
      */
     private boolean personsAreUnique(List<Event> persons) {
         return true; //Implement in future
