@@ -5,6 +5,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 public class StudentNumber {
 
+    /**
+     * Represents a Student's student number in the address book.
+     * Guarantees: immutable; is valid as declared in {@link #isValidStudentNumber(String)}
+     */
     public static final String MESSAGE_CONSTRAINTS =
             "Student numbers should be of the format A01234567X"
             + "and adhere to the following constraints:\n"
@@ -19,6 +23,11 @@ public class StudentNumber {
 
     public final String value;
 
+    /**
+     * Constructs an {@code Email}.
+     *
+     * @param studentNumber A valid student number.
+     */
     public StudentNumber(String studentNumber) {
         requireNonNull(studentNumber);
         checkArgument(isValidStudentNumber(studentNumber), MESSAGE_CONSTRAINTS);
@@ -26,7 +35,7 @@ public class StudentNumber {
     }
 
     /**
-     * Returns if a given string is a valid email.
+     * Returns if a given string is a valid student number.
      */
     public static boolean isValidStudentNumber(String test) {
         return test.matches(VALIDATION_REGEX);
