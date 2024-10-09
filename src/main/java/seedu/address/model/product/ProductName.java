@@ -50,7 +50,7 @@ public class ProductName {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof seedu.address.model.person.Name)) {
+        if (!(other instanceof seedu.address.model.product.ProductName)) {
             return false;
         }
 

@@ -10,19 +10,19 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.supplier.Address;
+import seedu.address.model.supplier.Email;
+import seedu.address.model.supplier.Name;
+import seedu.address.model.supplier.Phone;
+import seedu.address.model.supplier.Supplier;
 import seedu.address.model.tag.Tag;
 
 /**
- * Jackson-friendly version of {@link Person}.
+ * Jackson-friendly version of {@link Supplier}.
  */
 class JsonAdaptedPerson {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Supplier's %s field is missing!";
 
     private final String name;
     private final String phone;
@@ -31,7 +31,7 @@ class JsonAdaptedPerson {
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Constructs a {@code JsonAdaptedPerson} with the given supplier details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
@@ -47,9 +47,9 @@ class JsonAdaptedPerson {
     }
 
     /**
-     * Converts a given {@code Person} into this class for Jackson use.
+     * Converts a given {@code Supplier} into this class for Jackson use.
      */
-    public JsonAdaptedPerson(Person source) {
+    public JsonAdaptedPerson(Supplier source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
@@ -60,11 +60,11 @@ class JsonAdaptedPerson {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted supplier object into the model's {@code Supplier} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted supplier.
      */
-    public Person toModelType() throws IllegalValueException {
+    public Supplier toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
@@ -103,7 +103,7 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Supplier(modelName, modelPhone, modelEmail, modelAddress, modelTags);
     }
 
 }

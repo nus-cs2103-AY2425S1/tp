@@ -11,8 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
 import seedu.address.model.product.Product;
+import seedu.address.model.supplier.Supplier;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,7 +22,7 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Supplier> filteredSuppliers;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,7 +34,7 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredSuppliers = new FilteredList<>(this.addressBook.getPersonList());
     }
 
     public ModelManager() {
@@ -85,27 +85,32 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public boolean hasPerson(Supplier supplier) {
+        requireNonNull(supplier);
+        return addressBook.hasPerson(supplier);
     }
 
     @Override
+    public void deletePerson(Supplier target) {
+        addressBook.removePerson(target);
+    }
 
+    @Override
     public boolean hasProduct(Product product) {
         System.out.println("has Product in model manager.");
         return true;
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+    public void addPerson(Supplier supplier) {
+        addressBook.addPerson(supplier);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void setPerson(Supplier target, Supplier editedSupplier) {
+        requireAllNonNull(target, editedSupplier);
+        addressBook.setPerson(target, editedSupplier);
     }
 
     @Override
@@ -114,28 +119,21 @@ public class ModelManager implements Model {
 
     }
 
-    @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        addressBook.setPerson(target, editedPerson);
-    }
-
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Supplier List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Supplier} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Supplier> getFilteredPersonList() {
+        return filteredSuppliers;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredPersonList(Predicate<Supplier> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredSuppliers.setPredicate(predicate);
     }
 
     @Override
@@ -152,7 +150,7 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredSuppliers.equals(otherModelManager.filteredSuppliers);
     }
 
 }

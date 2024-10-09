@@ -11,13 +11,13 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
+import seedu.address.model.supplier.Supplier;
 import seedu.address.testutil.PersonBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code AddCommand}.
+ * Contains integration tests (interaction with the Model) for {@code AddSupplierCommand}.
  */
-public class AddCommandIntegrationTest {
+public class AddSupplierCommandIntegrationTest {
 
     private Model model;
 
@@ -28,21 +28,21 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_newPerson_success() {
-        Person validPerson = new PersonBuilder().build();
+        Supplier validSupplier = new PersonBuilder().build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addPerson(validPerson);
+        expectedModel.addPerson(validSupplier);
 
-        assertCommandSuccess(new AddCommand(validPerson), model,
-                String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+        assertCommandSuccess(new AddSupplierCommand(validSupplier), model,
+                String.format(AddSupplierCommand.MESSAGE_SUCCESS, Messages.format(validSupplier)),
                 expectedModel);
     }
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Person personInList = model.getAddressBook().getPersonList().get(0);
-        assertCommandFailure(new AddCommand(personInList), model,
-                AddCommand.MESSAGE_DUPLICATE_PERSON);
+        Supplier supplierInList = model.getAddressBook().getPersonList().get(0);
+        assertCommandFailure(new AddSupplierCommand(supplierInList), model,
+                AddSupplierCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
 }
