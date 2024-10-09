@@ -10,7 +10,8 @@ import java.util.stream.Collectors;
  *     e.g. {@code some preamble text t/ 11.00 t/12.00 k/ m/ July}  where prefixes are {@code t/ k/ m/}.<br>
  * 1. An argument's value can be an empty string e.g. the value of {@code k/} in the above example.<br>
  * 2. Leading and trailing whitespaces of an argument value will be discarded.<br>
- * 3. An argument may be repeated and all its values will be accumulated e.g. the value of {@code t/}
+ * 3. Consecutive whitespace will be replaced with a single space.<br>
+ * 4. An argument may be repeated and all its values will be accumulated e.g. the value of {@code t/}
  *    in the above example.<br>
  */
 public class ArgumentTokenizer {
@@ -18,14 +19,16 @@ public class ArgumentTokenizer {
     /**
      * Tokenizes an arguments string and returns an {@code ArgumentMultimap} object that maps prefixes to their
      * respective argument values. Only the given prefixes will be recognized in the arguments string.
+     * Consecutive whitespace will also be replaced with a single space.
      *
      * @param argsString Arguments string of the form: {@code preamble <prefix>value <prefix>value ...}
      * @param prefixes   Prefixes to tokenize the arguments string with
      * @return           ArgumentMultimap object that maps prefixes to their arguments
      */
     public static ArgumentMultimap tokenize(String argsString, Prefix... prefixes) {
-        List<PrefixPosition> positions = findAllPrefixPositions(argsString, prefixes);
-        return extractArguments(argsString, positions);
+        List<PrefixPosition> positions = findAllPrefixPositions(
+                argsString.replaceAll("\\s+", " "), prefixes);
+        return extractArguments(argsString.replaceAll("\\s+", " "), positions);
     }
 
     /**
