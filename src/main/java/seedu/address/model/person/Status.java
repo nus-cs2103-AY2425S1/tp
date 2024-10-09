@@ -38,7 +38,7 @@ public class Status {
      * Returns true if a given string is a valid email.
      */
     public static boolean isValidStatus(String test) {
-        return !test.trim().isEmpty() && VALID_STATUSES.contains(test);
+        return !test.isEmpty() && VALID_STATUSES.contains(test);
     }
 
     @Override
