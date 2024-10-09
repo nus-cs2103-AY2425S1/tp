@@ -14,7 +14,7 @@ import seedu.address.model.person.Remark;
  */
 public class RemarkCommandParser implements Parser {
 
-    private static final Prefix PREFIX_REMARK = new Prefix("r/");
+    private static final Prefix PREFIX_REMARK = new Prefix("-r");
 
     /**
      * Parses the given {@code String} of arguments in the context of the RemarkCommand
