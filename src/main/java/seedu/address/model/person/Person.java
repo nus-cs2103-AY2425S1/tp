@@ -55,6 +55,16 @@ public class Person {
     public Address getAddress() {
         return address;
     }
+    public Name getParentName() {
+        return parentName;
+    }
+    public Phone getParentPhone() {
+        return parentPhone;
+    }
+    public Email getParentEmail() {
+        return parentEmail;
+    }
+
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
