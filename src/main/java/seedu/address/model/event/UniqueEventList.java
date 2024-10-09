@@ -1,5 +1,8 @@
 package seedu.address.model.event;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -36,6 +39,25 @@ public class UniqueEventList implements Iterable<Event> {
     // To implement
     }
 
+    /**
+     * Replaces the event {@code target} in the list with {@code editedEvent}.
+     * {@code target} must exist in the list.
+     * The event identity of {@code editedEvent} must not be the same as another existing event in the list.
+     */
+    public void setEvent(Event target, Event editedEvent) {
+        requireAllNonNull(target, editedEvent);
+
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            // throw new EventNotFoundException(); //To implement
+        }
+
+        if (!target.isSameEvent(editedEvent) && contains(editedEvent)) {
+            // throw new DuplicateEventException();
+        }
+
+        internalList.set(index, editedEvent);
+    }
 
     /**
      * Removes the equivalent event from the list.
@@ -43,6 +65,24 @@ public class UniqueEventList implements Iterable<Event> {
      */
     public void remove(Event toRemove) {
         //To implement
+    }
+
+    public void setEvents(UniqueEventList replacement) {
+        requireNonNull(replacement);
+        internalList.setAll(replacement.internalList);
+    }
+
+    /**
+     * Replaces the contents of this list with {@code persons}.
+     * {@code persons} must not contain duplicate persons.
+     */
+    public void setEvents(List<Event> events) {
+        requireAllNonNull(events);
+        if (!eventsAreUnique(events)) {
+            // throw new DuplicateEventException();
+        }
+
+        internalList.setAll(events);
     }
 
     /**
@@ -76,8 +116,9 @@ public class UniqueEventList implements Iterable<Event> {
     /**
      * Returns true if {@code events} contains only unique persons.
      */
-    private boolean personsAreUnique(List<Event> persons) {
+    private boolean eventsAreUnique(List<Event> events) {
         return true; //Implement in future
     }
+
 }
 
