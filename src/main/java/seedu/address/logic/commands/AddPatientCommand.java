@@ -36,7 +36,7 @@ public class AddPatientCommand extends Command {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New patient added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This patient already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PATIENT = "This patient already exists in the address book";
 
     private final Patient patientToAdd;
 
@@ -53,7 +53,7 @@ public class AddPatientCommand extends Command {
         requireNonNull(model);
 
         if (model.hasPerson(patientToAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_PATIENT);
         }
 
         model.addPerson(patientToAdd);
