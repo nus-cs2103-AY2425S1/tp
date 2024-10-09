@@ -12,10 +12,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Priority {
 
     // Regex to validate the priority value (LOW, MEDIUM, or HIGH).
-    public static final String VALIDATION_REGEX = "LOW|MEDIUM|HIGH";
+    public static final String VALIDATION_REGEX = "NONE|LOW|MEDIUM|HIGH";
 
     // Error message for invalid priority values.
-    public static final String MESSAGE_CONSTRAINTS = "Priority should only be 'LOW', 'MEDIUM', or 'HIGH'.";
+    public static final String MESSAGE_CONSTRAINTS = "Priority should only be 'NONE', 'LOW', 'MEDIUM', or 'HIGH'.";
 
     private final String priority;
 
@@ -23,7 +23,7 @@ public class Priority {
      * Constructs a {@code Priority} object with the specified priority string.
      *
      * @param priority The priority value for the person.
-     *                 Must be either "LOW", "MEDIUM", or "HIGH".
+     *                 Must be either "NONE", "LOW", "MEDIUM", or "HIGH".
      * @throws IllegalArgumentException if the {@code priority} is invalid.
      */
     public Priority(String priority) {
@@ -33,7 +33,7 @@ public class Priority {
     }
 
     /**
-     * Checks if the given priority is valid (LOW, MEDIUM, or HIGH).
+     * Checks if the given priority is valid (NONE, LOW, MEDIUM, or HIGH).
      *
      * @param test The priority string to check.
      * @return {@code true} if the priority is valid, otherwise {@code false}.
@@ -45,7 +45,7 @@ public class Priority {
     /**
      * Returns the priority level of the person.
      *
-     * @return The priority string (LOW, MEDIUM, or HIGH).
+     * @return The priority string (NONE, LOW, MEDIUM, or HIGH).
      */
     public String getPriority() {
         return priority;
@@ -84,5 +84,15 @@ public class Priority {
     @Override
     public int hashCode() {
         return priority.hashCode();
+    }
+
+    /**
+     * Checks if the priority is set to "NONE".
+     *
+     * @return True if the priority is "NONE", indicating that no priority is assigned;
+     *         false otherwise.
+     */
+    public boolean isEmpty() {
+        return this.priority.equals("NONE");
     }
 }

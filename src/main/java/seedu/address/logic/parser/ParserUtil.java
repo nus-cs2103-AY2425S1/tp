@@ -19,6 +19,7 @@ import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Priority;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -203,6 +204,24 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a string representing a priority and returns a {@link Priority} object.
+     *
+     * @param priorityStr the string representing the priority to be parsed.
+     * @return A {@link Priority} object corresponding to the provided priority string.
+     * @throws ParseException if the provided string does not conform to the expected
+     *         format or is invalid as per the priority constraints defined in the
+     *         {@link Priority} class.
+     */
+    public static Priority parsePriority(String priorityStr) throws ParseException {
+        requireNonNull(priorityStr);
+        String trimmedPriority = priorityStr.trim();
+        if (!Priority.isValidPriority(trimmedPriority)) {
+            throw new ParseException(Priority.MESSAGE_CONSTRAINTS);
+        }
+        return new Priority(trimmedPriority);
     }
 
     /**
