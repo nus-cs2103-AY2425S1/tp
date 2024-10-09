@@ -35,9 +35,6 @@ public class DeleteCommand extends Command {
 
     public DeleteCommand(StudentId studentId) {
         requireNonNull(studentId);
-        if (!isValidStudentId(studentId.studentId)) {
-            throw new InvalidStudentIdException(studentId.studentId);
-        }
         this.studentId = studentId;
     }
 
