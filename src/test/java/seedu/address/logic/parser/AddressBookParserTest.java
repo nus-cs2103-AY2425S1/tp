@@ -92,8 +92,8 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_remark() throws Exception {
-        final Note note = new Note("Some remark.");
+    public void parseCommand_note() throws Exception {
+        final Note note = new Note("Some note.");
         NoteCommand command = (NoteCommand) parser.parseCommand(NoteCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_NOTE + note.value);
         assertEquals(new NoteCommand(INDEX_FIRST_PERSON, note), command);
