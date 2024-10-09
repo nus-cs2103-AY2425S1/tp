@@ -1,21 +1,21 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
-import javax.swing.text.View;
-
 import java.util.List;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
+/**
+ * Expands the details of a person identified using it's displayed index from the address book.
+ */
 public class ViewStudentCommand extends Command {
-
-    private final Index targetIndex;
 
     public static final String COMMAND_WORD = "view_student";
 
@@ -25,6 +25,8 @@ public class ViewStudentCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_VIEW_PERSON_SUCCESS = "Displayed Person: %1$s";
+
+    private final Index targetIndex;
 
     /**
      * @param index index of the person to display the details of
