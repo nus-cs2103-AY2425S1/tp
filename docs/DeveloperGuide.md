@@ -456,10 +456,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   A shop, typically a restaurant, that is listed on the app.
 
 * **Affordable Price ($)**:  
-  Expected price per meal per person to be \( x \leq \$10 \). This is a subjective estimate based on human input.
+  Expected price per meal per person to be \( x <= \$10 \). This is a subjective estimate based on human input.
 
 * **Moderate Price ($$)**:  
-  Expected price per meal per person to be \( \$10 < x \leq \$20 \). This is a subjective estimate based on human input.
+  Expected price per meal per person to be \( \$10 < x <= \$20 \). This is a subjective estimate based on human input.
 
 * **Premium Price ($$$)**:  
   Expected price per meal per person to be \( x > \$20 \). This is a subjective estimate based on human input.
