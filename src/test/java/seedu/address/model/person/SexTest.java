@@ -29,7 +29,7 @@ public class SexTest {
         assertFalse(Sex.isValidSex(" ")); // spaces only
         assertFalse(Sex.isValidSex("G")); // not 'M' or 'F'
 
-        // valid addresses
+        // valid sexes
         assertTrue(Sex.isValidSex("M"));
         assertTrue(Sex.isValidSex("F"));
     }
