@@ -67,7 +67,7 @@ public class DeleteCommandTest {
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
-    
+
     @Test
     public void equals() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
