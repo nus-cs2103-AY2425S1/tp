@@ -76,4 +76,9 @@ public class Nric {
         // Compare the calculated checksum with the provided one
         return checksumLetter == correctChecksum;
     }
+
+    @Override
+    public String toString() {
+        return nric;
+    }
 }
