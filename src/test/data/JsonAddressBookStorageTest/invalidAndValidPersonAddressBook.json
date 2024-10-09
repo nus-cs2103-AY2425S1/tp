@@ -5,6 +5,11 @@
     "email": "hans@example.com",
     "address": "4th street"
   }, {
+    "name": "This is_also_a v@lid name",
+    "phone": "80923841",
+    "email": "name@email.com",
+    "address": "4th street"
+  }, {
     "name": "Person With Invalid Phone Field",
     "phone": "948asdf2424",
     "email": "hans@example.com",
