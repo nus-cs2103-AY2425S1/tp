@@ -45,6 +45,52 @@ public class AddCommandTest {
     }
 
     @Test
+    public void execute_duplicatePhone_giveWarning() throws CommandException {
+        Person validPerson = new PersonBuilder().build();
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+
+        Person duplicatePhonePerson = new PersonBuilder().withName("new").withEmail("new@gmail.com").build();
+        String resultMessage = new AddCommand(duplicatePhonePerson).execute(modelStub).getFeedbackToUser();
+        assertTrue(resultMessage.contains(
+            String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(duplicatePhonePerson))
+        ));
+        assertTrue(resultMessage.contains(AddCommand.MESSAGE_DUPLICATE_PHONE));
+        assertFalse(resultMessage.contains(AddCommand.MESSAGE_DUPLICATE_EMAIL));
+    }
+
+    @Test
+    public void execute_duplicateEmail_giveWarning() throws CommandException {
+        Person validPerson = new PersonBuilder().build();
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+
+        Person duplicateEmailPerson = new PersonBuilder().withName("new").withPhone("12345678").build();
+        String resultMessage = new AddCommand(duplicateEmailPerson).execute(modelStub).getFeedbackToUser();
+        assertTrue(resultMessage.contains(
+            String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(duplicateEmailPerson))
+        ));
+        assertFalse(resultMessage.contains(AddCommand.MESSAGE_DUPLICATE_PHONE));
+        assertTrue(resultMessage.contains(AddCommand.MESSAGE_DUPLICATE_EMAIL));
+    }
+
+    @Test
+    public void execute_duplicatePhoneAndEmail_giveWarning() throws CommandException {
+        Person validPerson = new PersonBuilder().build();
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+
+        Person duplicatePhonePerson = new PersonBuilder().withName("new").build();
+        String resultMessage = new AddCommand(duplicatePhonePerson).execute(modelStub).getFeedbackToUser();
+        //Assert success and warning messages exist
+        assertTrue(resultMessage.contains(
+            String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(duplicatePhonePerson))
+        ));
+        assertTrue(resultMessage.contains(AddCommand.MESSAGE_DUPLICATE_PHONE));
+        assertTrue(resultMessage.contains(AddCommand.MESSAGE_DUPLICATE_EMAIL));
+    }
+
+    @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Person validPerson = new PersonBuilder().build();
         AddCommand addCommand = new AddCommand(validPerson);
@@ -139,6 +185,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasPhone(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasEmail(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -175,6 +231,18 @@ public class AddCommandTest {
             requireNonNull(person);
             return this.person.isSamePerson(person);
         }
+
+        @Override
+        public boolean hasPhone(Person person) {
+            requireNonNull(person);
+            return this.person.isSamePhone(person);
+        }
+
+        @Override
+        public boolean hasEmail(Person person) {
+            requireNonNull(person);
+            return this.person.isSameEmail(person);
+        }
     }
 
     /**
@@ -188,6 +256,19 @@ public class AddCommandTest {
             requireNonNull(person);
             return personsAdded.stream().anyMatch(person::isSamePerson);
         }
+
+        @Override
+        public boolean hasPhone(Person person) {
+            requireNonNull(person);
+            return personsAdded.stream().anyMatch(person::isSamePhone);
+        }
+
+        @Override
+        public boolean hasEmail(Person person) {
+            requireNonNull(person);
+            return personsAdded.stream().anyMatch(person::isSameEmail);
+        }
+
 
         @Override
         public void addPerson(Person person) {
