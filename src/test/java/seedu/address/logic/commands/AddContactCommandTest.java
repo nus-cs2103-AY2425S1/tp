@@ -26,7 +26,7 @@ import seedu.address.model.job.Job;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
-public class AddCommandTest {
+public class AddContactCommandTest {
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
@@ -38,10 +38,10 @@ public class AddCommandTest {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
         Person validPerson = new PersonBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+        CommandResult commandResult = new AddContactCommand(validPerson).execute(modelStub);
 
         assertEquals(
-                String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+                String.format(AddContactCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
                 commandResult.getFeedbackToUser()
         );
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);

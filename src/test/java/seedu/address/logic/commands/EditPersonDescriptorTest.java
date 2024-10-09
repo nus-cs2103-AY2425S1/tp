@@ -53,7 +53,7 @@ public class EditPersonDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withSkills(VALID_TAG_HUSBAND).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 
@@ -63,9 +63,9 @@ public class EditPersonDescriptorTest {
         String expected = EditPersonDescriptor.class.getCanonicalName() + "{name="
                 + editPersonDescriptor.getName().orElse(null) + ", phone="
                 + editPersonDescriptor.getPhone().orElse(null) + ", email="
-                + editPersonDescriptor.getEmail().orElse(null) + ", address="
-                + editPersonDescriptor.getAddress().orElse(null) + ", tags="
-                + editPersonDescriptor.getTags().orElse(null) + "}";
+                + editPersonDescriptor.getEmail().orElse(null) + ", role="
+                + editPersonDescriptor.getRole().orElse(null) + ", skills="
+                + editPersonDescriptor.getSkills().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }
 }

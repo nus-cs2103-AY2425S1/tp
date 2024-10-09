@@ -24,16 +24,16 @@ import seedu.address.model.tag.Tag;
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
-    private static final String INVALID_ADDRESS = " ";
+    private static final String INVALID_ROLE = " ";
     private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_SKILL = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
-    private static final String VALID_ADDRESS = "123 Main Street #0505";
+    private static final String VALID_ROLE = "Software Engineer";
     private static final String VALID_EMAIL = "rachel@example.com";
-    private static final String VALID_TAG_1 = "friend";
-    private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_SKILL_1 = "Python";
+    private static final String VALID_SKILL_2 = "C";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -110,19 +110,19 @@ public class ParserUtilTest {
 
     @Test
     public void parseAddress_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseAddress(INVALID_ADDRESS));
+        assertThrows(ParseException.class, () -> ParserUtil.parseAddress(INVALID_ROLE));
     }
 
     @Test
     public void parseAddress_validValueWithoutWhitespace_returnsAddress() throws Exception {
-        Address expectedAddress = new Address(VALID_ADDRESS);
-        assertEquals(expectedAddress, ParserUtil.parseAddress(VALID_ADDRESS));
+        Address expectedAddress = new Address(VALID_ROLE);
+        assertEquals(expectedAddress, ParserUtil.parseAddress(VALID_ROLE));
     }
 
     @Test
     public void parseAddress_validValueWithWhitespace_returnsTrimmedAddress() throws Exception {
-        String addressWithWhitespace = WHITESPACE + VALID_ADDRESS + WHITESPACE;
-        Address expectedAddress = new Address(VALID_ADDRESS);
+        String addressWithWhitespace = WHITESPACE + VALID_ROLE + WHITESPACE;
+        Address expectedAddress = new Address(VALID_ROLE);
         assertEquals(expectedAddress, ParserUtil.parseAddress(addressWithWhitespace));
     }
 
@@ -156,30 +156,30 @@ public class ParserUtilTest {
 
     @Test
     public void parseTag_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseSkills(INVALID_TAG));
+        assertThrows(ParseException.class, () -> ParserUtil.parseSkills(INVALID_SKILL));
     }
 
     @Test
     public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
-        Tag expectedTag = new Tag(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseSkills(VALID_TAG_1));
+        Tag expectedTag = new Tag(VALID_SKILL_1);
+        assertEquals(expectedTag, ParserUtil.parseSkills(VALID_SKILL_1));
     }
 
     @Test
     public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
-        String tagWithWhitespace = WHITESPACE + VALID_TAG_1 + WHITESPACE;
-        Tag expectedTag = new Tag(VALID_TAG_1);
+        String tagWithWhitespace = WHITESPACE + VALID_SKILL_1 + WHITESPACE;
+        Tag expectedTag = new Tag(VALID_SKILL_1);
         assertEquals(expectedTag, ParserUtil.parseTag(tagWithWhitespace));
     }
 
     @Test
     public void parseTags_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseSkills(null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSkills((String) null));
     }
 
     @Test
     public void parseTags_collectionWithInvalidTags_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseSkills(Arrays.asList(VALID_TAG_1, INVALID_TAG)));
+        assertThrows(ParseException.class, () -> ParserUtil.parseSkills(Arrays.asList(VALID_SKILL_1, INVALID_SKILL)));
     }
 
     @Test
@@ -189,8 +189,8 @@ public class ParserUtilTest {
 
     @Test
     public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<Skill> actualTagSet = ParserUtil.parseSkills(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
-        Set<Skill> expectedTagSet = new HashSet<Skill>(Arrays.asList(new Skill(VALID_TAG_1), new Skill(VALID_TAG_2)));
+        Set<Skill> actualTagSet = ParserUtil.parseSkills(Arrays.asList(VALID_SKILL_1, VALID_SKILL_2));
+        Set<Skill> expectedTagSet = new HashSet<Skill>(Arrays.asList(new Skill(VALID_SKILL_1), new Skill(VALID_SKILL_1)));
 
         assertEquals(expectedTagSet, actualTagSet);
     }
