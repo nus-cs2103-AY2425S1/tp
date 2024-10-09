@@ -135,19 +135,19 @@ public class MainWindow extends UiPart<Stage> {
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
+    /**
+     * Updates the details panel to the selected person.
+     */
     private void onPersonSelected(MouseEvent event) {
-        Person selectedPerson = personListPanel.getPersonListView().getSelectionModel().getSelectedItem();
-        int personIndex = personListPanel.getPersonListView().getSelectionModel().getSelectedIndex();
-        if (selectedPerson != null) {
-            updateDetailsPanel(selectedPerson, personIndex);
+        Person person = personListPanel.getPersonListView().getSelectionModel().getSelectedItem();
+        int index = personListPanel.getPersonListView().getSelectionModel().getSelectedIndex();
+
+        if (person != null) {
+            personDetailsPanelPlaceholder.getChildren().clear();
+
+            PersonDetailsPanel personDetailsPanel = new PersonDetailsPanel(person, index + 1);
+            personDetailsPanelPlaceholder.getChildren().add(personDetailsPanel.getRoot());
         }
-    }
-
-    private void updateDetailsPanel(Person person, int index) {
-        personDetailsPanelPlaceholder.getChildren().clear();
-
-        PersonDetailsPanel personDetailsPanel = new PersonDetailsPanel(person, index + 1);
-        personDetailsPanelPlaceholder.getChildren().add(personDetailsPanel.getRoot());
     }
 
     /**
