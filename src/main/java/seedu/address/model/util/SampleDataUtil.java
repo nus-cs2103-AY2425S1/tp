@@ -19,7 +19,7 @@ import seedu.address.model.tag.Tag;
  */
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
-        return new Person[] {
+        return new Person[]{
                 new Person(new Name("Alex Yeoh"),
                         new Company("Tech Innovations Pte Ltd"), // Add company name
                         new Phone("87438807"),
@@ -75,5 +75,4 @@ public class SampleDataUtil {
                 .map(Tag::new)
                 .collect(Collectors.toSet());
     }
-
 }
