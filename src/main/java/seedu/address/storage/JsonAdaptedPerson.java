@@ -98,7 +98,8 @@ class JsonAdaptedPerson {
         final Email modelEmail = new Email(email);
 
         if (roomNumber == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, RoomNumber.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    RoomNumber.class.getSimpleName()));
         }
         if (!RoomNumber.isValidRoomNumber(roomNumber)) {
             throw new IllegalValueException(RoomNumber.MESSAGE_CONSTRAINTS);
