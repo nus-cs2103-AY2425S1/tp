@@ -99,4 +99,6 @@ public interface Model {
      * @throws NullPointerException if {@code group} is null.
      */
     void addGroup(Group group);
+
+    String groupsString();
 }

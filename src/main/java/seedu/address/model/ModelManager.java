@@ -145,6 +145,14 @@ public class ModelManager implements Model {
         groups.add(group);
     }
 
+    /**
+     * Adds a group to the Model
+     */
+    @Override
+    public String groupsString() {
+        return groups.toString();
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
