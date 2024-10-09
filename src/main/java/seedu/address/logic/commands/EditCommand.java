@@ -158,7 +158,6 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setTags(toCopy.tags);
         }
-        
         /**
          * Returns true if at least one field is edited.
          */
