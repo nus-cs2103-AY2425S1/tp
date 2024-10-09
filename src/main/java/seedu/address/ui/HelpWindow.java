@@ -4,7 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
@@ -16,7 +16,25 @@ import seedu.address.commons.core.LogsCenter;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String HELP_MESSAGE = "Welcome to the AcademyAssist Help Window!\n\n"
+            + "Here are some useful commands to get started:\n\n"
+            + "1. add: Adds a student's details\n"
+            + "   Format: add n/NAME ic/IC_NUMBER e/EMAIL p/PHONE_NUMBER a/ADDRESS c/CLASS y/ACADEMIC_YEAR\n\n"
+            + "2. view: Shows a list of all students\n"
+            + "   Format: view\n\n"
+            + "3. edit: Edits an existing student's details\n"
+            + "   Format: edit STUDENT_ID FIELD:NEW_VALUE\n\n"
+            + "4. find: Find students whose names contain any of the given keywords\n"
+            + "   Format: find KEYWORD [MORE_KEYWORDS]\n\n"
+            + "5. delete: Deletes the specified student\n"
+            + "   Format: del STUDENT_ID\n\n"
+            + "6. sort: arranges the list of students based on a specified field\n"
+            + "   Format: sort FIELD\n\n"
+            + "7. clear: Clears all entries from the address book\n"
+            + "   Format: clear\n\n"
+            + "8. exit: Exits the program\n"
+            + "   Format: exit\n\n"
+            + "For more detailed information, please refer to the user guide: " + USERGUIDE_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
@@ -25,7 +43,7 @@ public class HelpWindow extends UiPart<Stage> {
     private Button copyButton;
 
     @FXML
-    private Label helpMessage;
+    private TextArea helpMessageArea;
 
     /**
      * Creates a new HelpWindow.
@@ -34,7 +52,9 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-        helpMessage.setText(HELP_MESSAGE);
+        helpMessageArea.setText(HELP_MESSAGE);
+        helpMessageArea.setWrapText(true);
+        helpMessageArea.setEditable(false);
     }
 
     /**
