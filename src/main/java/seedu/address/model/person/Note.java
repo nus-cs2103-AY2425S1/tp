@@ -9,7 +9,13 @@ import static java.util.Objects.requireNonNull;
 public class Note {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Notes should not be more than 200 characters long and it should not be blank";
+            "Notes can take any value but should not be more than 200 characters long and it should not be blank";
+
+    /*
+     * The first character of the address must not be a whitespace,
+     * otherwise " " (a blank string) becomes a valid input.
+     */
+    public static final String VALIDATION_REGEX = "[^\\s].*";
 
     public final String value;
 
@@ -27,7 +33,7 @@ public class Note {
      * Returns true if a given string is less than 200 characters long
      */
     public static boolean isValidNote(String test) {
-        return (test.length() <= 200) && (!test.isEmpty());
+        return (test.length() <= 200) && (!test.isEmpty()) && test.matches(VALIDATION_REGEX);
     }
 
     @Override
