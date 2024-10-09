@@ -56,7 +56,6 @@ public class ParserUtil {
     }
 
     /**
-     * Todo: Actually, company name, person name, and job list name should we really create a new one?
      * Parses a {@code String name} into a {@code JobName}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -117,7 +116,7 @@ public class ParserUtil {
     }
 
     /**
-     *  Parses a {@code String company} into a {@code Company}.
+     *  Parses a {@code String company} into a {@code JobCompany}.
      *  Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code company} is invalid.
@@ -150,7 +149,6 @@ public class ParserUtil {
      *  Parses a {@code String requirements} into a {@code JobRequirements}.
      *  Leading and trailing whitespaces will be trimmed.
      *  Note that there is no validation for this.
-     *  todo: change requirements to tags for the matching feature
      */
     public static JobRequirements parseRequirements(String requirements) {
         requireNonNull(requirements);
