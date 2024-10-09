@@ -1,60 +1,66 @@
 package seedu.address.model.appointment;
 
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_DATE_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_DATE_NONEXISTANT;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_NAME;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_TIMEPERIOD_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_TIMEPERIOD_ORDER;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_DATE_DENTAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_NAME_DENTAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_TIMEPERIOD_DENTAL;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class AppointmentTest {
+import seedu.address.commons.exceptions.IllegalValueException;
 
-    private final String validApptName = "Some bone appointment";
-    private final String validApptDate = "2024-10-25";
-    private final String validApptTime = "1000-1235";
+class AppointmentTest {
 
     @Test
     public void constructorNullThrowsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Appointment(null, validApptDate, validApptTime));
-        assertThrows(NullPointerException.class, () -> new Appointment(validApptName, null, validApptTime));
-        assertThrows(NullPointerException.class, () -> new Appointment(validApptName, validApptDate, null));
+        assertThrows(NullPointerException.class, () -> new Appointment(null, VALID_APPOINTMENT_DATE_DENTAL,
+                                                                       VALID_APPOINTMENT_TIMEPERIOD_DENTAL));
+        assertThrows(NullPointerException.class, () -> new Appointment(VALID_APPOINTMENT_NAME_DENTAL, null,
+                                                                       VALID_APPOINTMENT_TIMEPERIOD_DENTAL));
+        assertThrows(NullPointerException.class, () -> new Appointment(VALID_APPOINTMENT_NAME_DENTAL,
+                                                                       VALID_APPOINTMENT_DATE_DENTAL, null));
     }
 
     @Test
     public void constructorInvalidApptNameThrowsIllegalArgumentException() {
-        String invalidApptName = "";
-        assertThrows(IllegalArgumentException.class, () -> new Appointment(invalidApptName,
-                                                                           validApptDate,
-                                                                           validApptTime));
+        assertThrows(IllegalArgumentException.class, () -> new Appointment(INVALID_APPOINTMENT_NAME,
+                                                                           VALID_APPOINTMENT_DATE_DENTAL,
+                                                                           VALID_APPOINTMENT_TIMEPERIOD_DENTAL));
     }
 
     @Test
     public void constructorInvalidApptDateThrowsIllegalArgumentException() {
-        String invalidApptDate = "";
-        assertThrows(IllegalArgumentException.class, () -> new Appointment(validApptName,
-                                                                           invalidApptDate,
-                                                                           validApptTime));
-        String invalidApptDate2 = "2024-23-11";
-        assertThrows(IllegalArgumentException.class, () -> new Appointment(validApptName,
-                                                                           invalidApptDate2,
-                                                                           validApptTime));
+        assertThrows(IllegalArgumentException.class, () -> new Appointment(VALID_APPOINTMENT_NAME_DENTAL,
+                                                                           INVALID_APPOINTMENT_DATE_FORMAT,
+                                                                           VALID_APPOINTMENT_TIMEPERIOD_DENTAL));
+        assertThrows(IllegalArgumentException.class, () -> new Appointment(VALID_APPOINTMENT_NAME_DENTAL,
+                                                                           INVALID_APPOINTMENT_DATE_NONEXISTANT,
+                                                                           VALID_APPOINTMENT_TIMEPERIOD_DENTAL));
     }
 
     @Test
     public void constructorInvalidApptTimePeriodThrowsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> new Appointment(validApptName,
-                                                                           validApptDate,
-                                                                           ""));
-        assertThrows(IllegalArgumentException.class, () -> new Appointment(validApptName,
-                                                                           validApptDate,
-                                                                           "5512-1345"));
-        assertThrows(IllegalArgumentException.class, () -> new Appointment(validApptName,
-                                                                           validApptDate,
+        assertThrows(IllegalArgumentException.class, () -> new Appointment(VALID_APPOINTMENT_NAME_DENTAL,
+                                                                           VALID_APPOINTMENT_DATE_DENTAL,
+                                                                           " "));
+        assertThrows(IllegalArgumentException.class, () -> new Appointment(VALID_APPOINTMENT_NAME_DENTAL,
+                                                                           VALID_APPOINTMENT_DATE_DENTAL,
                                                                            "5512"));
-        assertThrows(IllegalArgumentException.class, () -> new Appointment(validApptName,
-                                                                           validApptDate,
+        assertThrows(IllegalArgumentException.class, () -> new Appointment(VALID_APPOINTMENT_NAME_DENTAL,
+                                                                           VALID_APPOINTMENT_DATE_DENTAL,
                                                                            "asd1200-1223asd"));
-        assertThrows(IllegalArgumentException.class, () -> new Appointment(validApptName,
-                                                                           validApptDate,
-                                                                           "2300-1200"));
+        assertThrows(IllegalArgumentException.class, () -> new Appointment(VALID_APPOINTMENT_NAME_DENTAL,
+                                                                           VALID_APPOINTMENT_DATE_DENTAL,
+                                                                           INVALID_APPOINTMENT_TIMEPERIOD_FORMAT));
+        assertThrows(IllegalArgumentException.class, () -> new Appointment(VALID_APPOINTMENT_NAME_DENTAL,
+                                                                           VALID_APPOINTMENT_DATE_DENTAL,
+                                                                           INVALID_APPOINTMENT_TIMEPERIOD_ORDER));
     }
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
@@ -71,19 +77,17 @@ class AppointmentTest {
     }
 
     @Test
-    public void testCompareTo() {
-        Appointment a = new Appointment("Some bone appointment", "2024-10-25", "1000-1235");
-        Appointment sameDateBefore = new Appointment("Some bone appointment", "2024-10-25", "0900-1235");
-        Appointment sameDateTime = new Appointment("Some bone appointment", "2024-10-25", "1000-1235");
-        Appointment sameDateAfter = new Appointment("Some bone appointment", "2024-10-25", "1100-1235");
-
-        Appointment earlyDateBefore = new Appointment("Some bone appointment", "2024-10-20", "0900-1235");
-        Appointment earlyDateSame = new Appointment("Some bone appointment", "2024-10-20", "1000-1235");
-        Appointment earlyDateAfter = new Appointment("Some bone appointment", "2024-10-20", "1100-1235");
-
-        Appointment laterDateBefore = new Appointment("Some bone appointment", "2024-11-25", "0900-1235");
-        Appointment laterDateSame = new Appointment("Some bone appointment", "2024-11-25", "1000-1235");
-        Appointment laterDateAfter = new Appointment("Some bone appointment", "2024-11-25", "1100-1235");
+    public void testCompareTo() throws IllegalValueException {
+        Appointment a = new Appointment(VALID_APPOINTMENT_NAME_DENTAL, "2024-10-25", "1000-1235");
+        Appointment sameDateBefore = new Appointment(VALID_APPOINTMENT_NAME_DENTAL, "2024-10-25", "0900-1235");
+        Appointment sameDateTime = new Appointment(VALID_APPOINTMENT_NAME_DENTAL, "2024-10-25", "1000-1235");
+        Appointment sameDateAfter = new Appointment(VALID_APPOINTMENT_NAME_DENTAL, "2024-10-25", "1100-1235");
+        Appointment earlyDateBefore = new Appointment(VALID_APPOINTMENT_NAME_DENTAL, "2024-10-20", "0900-1235");
+        Appointment earlyDateSame = new Appointment(VALID_APPOINTMENT_NAME_DENTAL, "2024-10-20", "1000-1235");
+        Appointment earlyDateAfter = new Appointment(VALID_APPOINTMENT_NAME_DENTAL, "2024-10-20", "1100-1235");
+        Appointment laterDateBefore = new Appointment(VALID_APPOINTMENT_NAME_DENTAL, "2024-11-25", "0900-1235");
+        Appointment laterDateSame = new Appointment(VALID_APPOINTMENT_NAME_DENTAL, "2024-11-25", "1000-1235");
+        Appointment laterDateAfter = new Appointment(VALID_APPOINTMENT_NAME_DENTAL, "2024-11-25", "1100-1235");
 
         Assertions.assertTrue(0 < a.compareTo(sameDateBefore));
         Assertions.assertEquals(0, a.compareTo(sameDateTime));
@@ -97,9 +101,11 @@ class AppointmentTest {
     }
 
     @Test
-    public void testToString() {
-        Appointment a = new Appointment(validApptName, validApptDate, validApptTime);
-        String expected = validApptName + " [ " + validApptDate + " @ " + validApptTime + " ]";
+    public void testToString() throws IllegalValueException {
+        Appointment a = new Appointment(VALID_APPOINTMENT_NAME_DENTAL, VALID_APPOINTMENT_DATE_DENTAL,
+                                        VALID_APPOINTMENT_TIMEPERIOD_DENTAL);
+        String expected = VALID_APPOINTMENT_NAME_DENTAL + " [ " + VALID_APPOINTMENT_DATE_DENTAL + " @ "
+                          + VALID_APPOINTMENT_TIMEPERIOD_DENTAL + " ]";
         Assertions.assertEquals(expected, a.toString());
     }
 
@@ -108,19 +114,17 @@ class AppointmentTest {
         "EqualsWithItself",
         "SimplifiableAssertion"})
     @Test
-    public void testEquals() {
-        Appointment a = new Appointment("Some bone appointment", "2024-10-25", "1000-1235");
-        Appointment sameDateBefore = new Appointment("Some bone appointment", "2024-10-25", "0900-1235");
-        Appointment sameDateTime = new Appointment("Some bone appointment", "2024-10-25", "1000-1235");
-        Appointment sameDateAfter = new Appointment("Some bone appointment", "2024-10-25", "1100-1235");
-
-        Appointment earlyDateBefore = new Appointment("Some bone appointment", "2024-10-20", "0900-1235");
-        Appointment earlyDateSame = new Appointment("Some bone appointment", "2024-10-20", "1000-1235");
-        Appointment earlyDateAfter = new Appointment("Some bone appointment", "2024-10-20", "1100-1235");
-
-        Appointment laterDateBefore = new Appointment("Some bone appointment", "2024-11-25", "0900-1235");
-        Appointment laterDateSame = new Appointment("Some bone appointment", "2024-11-25", "1000-1235");
-        Appointment laterDateAfter = new Appointment("Some bone appointment", "2024-11-25", "1100-1235");
+    public void testEquals() throws IllegalValueException {
+        Appointment a = new Appointment(VALID_APPOINTMENT_NAME_DENTAL, "2024-10-25", "1000-1235");
+        Appointment sameDateBefore = new Appointment(VALID_APPOINTMENT_NAME_DENTAL, "2024-10-25", "0900-1235");
+        Appointment sameDateTime = new Appointment(VALID_APPOINTMENT_NAME_DENTAL, "2024-10-25", "1000-1235");
+        Appointment sameDateAfter = new Appointment(VALID_APPOINTMENT_NAME_DENTAL, "2024-10-25", "1100-1235");
+        Appointment earlyDateBefore = new Appointment(VALID_APPOINTMENT_NAME_DENTAL, "2024-10-20", "0900-1235");
+        Appointment earlyDateSame = new Appointment(VALID_APPOINTMENT_NAME_DENTAL, "2024-10-20", "1000-1235");
+        Appointment earlyDateAfter = new Appointment(VALID_APPOINTMENT_NAME_DENTAL, "2024-10-20", "1100-1235");
+        Appointment laterDateBefore = new Appointment(VALID_APPOINTMENT_NAME_DENTAL, "2024-11-25", "0900-1235");
+        Appointment laterDateSame = new Appointment(VALID_APPOINTMENT_NAME_DENTAL, "2024-11-25", "1000-1235");
+        Appointment laterDateAfter = new Appointment(VALID_APPOINTMENT_NAME_DENTAL, "2024-11-25", "1100-1235");
 
         Assertions.assertFalse(a.equals(null));
         Assertions.assertTrue(a.equals(a));
@@ -136,8 +140,8 @@ class AppointmentTest {
     }
 
     @Test
-    public void testIsClashing() {
-        Appointment a = new Appointment("Some bone appointment", "2024-10-25", "1000-1235");
+    public void testIsClashing() throws IllegalValueException {
+        Appointment a = new Appointment(VALID_APPOINTMENT_NAME_DENTAL, "2024-10-25", "1000-1235");
         Assertions.assertFalse(a.isClashing("2024-10-25", "0900-0935")); // "sameDateBefore"
         Assertions.assertTrue(a.isClashing("2024-10-25", "0900-1235")); // "sameDateBefore"
         Assertions.assertTrue(a.isClashing("2024-10-25", "0845-1300")); // "sameDateTimeEnclose"

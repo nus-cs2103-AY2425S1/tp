@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
@@ -11,6 +12,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMEPERIOD;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.time.LocalDate;
@@ -50,6 +52,19 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_PRIORITY_AMY = "HIGH";
     public static final String VALID_PRIORITY_BOB = "LOW";
+    public static final String VALID_APPOINTMENT_NAME_DENTAL = "Dental";
+    public static final String VALID_APPOINTMENT_DATE_DENTAL = "2024-12-25";
+    public static final String VALID_APPOINTMENT_TIMEPERIOD_DENTAL = "1000-1200";
+    public static final String VALID_APPOINTMENT_NAME_PHYSIO = "Physio";
+    public static final String VALID_APPOINTMENT_DATE_PHYSIO = "2024-01-01";
+    public static final String VALID_APPOINTMENT_TIMEPERIOD_PHYSIO = "1235-1500";
+
+    public static final String VALID_APPOINTMENT_NAME_AMY = VALID_APPOINTMENT_NAME_DENTAL;
+    public static final String VALID_APPOINTMENT_DATE_AMY = VALID_APPOINTMENT_DATE_DENTAL;
+    public static final String VALID_APPOINTMENT_TIMEPERIOD_AMY = VALID_APPOINTMENT_TIMEPERIOD_DENTAL;
+    public static final String VALID_APPOINTMENT_NAME_BOB = VALID_APPOINTMENT_NAME_PHYSIO;
+    public static final String VALID_APPOINTMENT_DATE_BOB = VALID_APPOINTMENT_DATE_PHYSIO;
+    public static final String VALID_APPOINTMENT_TIMEPERIOD_BOB = VALID_APPOINTMENT_TIMEPERIOD_PHYSIO;
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -69,7 +84,12 @@ public class CommandTestUtil {
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String PRIORITY_DESC_AMY = " " + PREFIX_PRIORITY + VALID_PRIORITY_AMY;
     public static final String PRIORITY_DESC_BOB = " " + PREFIX_PRIORITY + VALID_PRIORITY_BOB;
-
+    public static final String APPOINTMENT_DESC_AMY = " " + VALID_APPOINTMENT_NAME_DENTAL + " " + PREFIX_DATE
+                                                      + VALID_APPOINTMENT_DATE_DENTAL + " " + PREFIX_TIMEPERIOD
+                                                      + VALID_APPOINTMENT_TIMEPERIOD_DENTAL;
+    public static final String APPOINTMENT_DESC_BOB = " " + VALID_APPOINTMENT_NAME_PHYSIO + " " + PREFIX_DATE
+                                                      + VALID_APPOINTMENT_DATE_PHYSIO + " " + PREFIX_TIMEPERIOD
+                                                      + VALID_APPOINTMENT_TIMEPERIOD_PHYSIO;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_NRIC_DESC = " " + PREFIX_NRIC + "S1234567"; // missing last character
@@ -81,8 +101,39 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-    public static final String INVALID_PRIORITY_DESC = " " + PREFIX_PRIORITY + "invalidPriority";
     // Only "NONE", "LOW", "MEDIUM" or "HIGH" is allowed for Priority
+    public static final String INVALID_PRIORITY_DESC = " " + PREFIX_PRIORITY + "invalidPriority";
+
+
+    public static final String INVALID_APPOINTMENT_NAME = " ";
+    public static final String INVALID_APPOINTMENT_DATE_FORMAT = "2024/12/25";
+    public static final String INVALID_APPOINTMENT_DATE_NONEXISTANT = "2024-15-32";
+    public static final String INVALID_APPOINTMENT_TIMEPERIOD_FORMAT = "10:00-12:00";
+    public static final String INVALID_APPOINTMENT_TIMEPERIOD_ORDER = "1500-1200";
+    public static final String INVALID_APPOINTMENT_NAME_DESC = " " + INVALID_APPOINTMENT_NAME + " " + PREFIX_DATE
+                                                               + VALID_APPOINTMENT_DATE_PHYSIO + " "
+                                                               + PREFIX_TIMEPERIOD
+                                                               + VALID_APPOINTMENT_TIMEPERIOD_PHYSIO;
+    public static final String INVALID_APPOINTMENT_DATE_FORMAT_DESC = " " + VALID_APPOINTMENT_NAME_PHYSIO + " "
+                                                                      + PREFIX_DATE
+                                                                      + INVALID_APPOINTMENT_DATE_FORMAT + " "
+                                                                      + PREFIX_TIMEPERIOD
+                                                                      + VALID_APPOINTMENT_TIMEPERIOD_PHYSIO;
+    public static final String INVALID_APPOINTMENT_DATE_NONEXISTANT_DESC = " " + VALID_APPOINTMENT_NAME_PHYSIO + " "
+                                                                           + PREFIX_DATE
+                                                                           + INVALID_APPOINTMENT_DATE_NONEXISTANT
+                                                                           + " " + PREFIX_TIMEPERIOD
+                                                                           + VALID_APPOINTMENT_TIMEPERIOD_PHYSIO;
+    public static final String INVALID_APPOINTMENT_TIMEPERIOD_FORMAT_DESC = " " + VALID_APPOINTMENT_NAME_PHYSIO + " "
+                                                                            + PREFIX_DATE
+                                                                            + VALID_APPOINTMENT_DATE_PHYSIO + " "
+                                                                            + PREFIX_TIMEPERIOD
+                                                                            + INVALID_APPOINTMENT_TIMEPERIOD_FORMAT;
+    public static final String INVALID_APPOINTMENT_TIMEPERIOD_ORDER_DESC = " " + VALID_APPOINTMENT_NAME_PHYSIO + " "
+                                                                           + PREFIX_DATE
+                                                                           + VALID_APPOINTMENT_DATE_PHYSIO + " "
+                                                                           + PREFIX_TIMEPERIOD
+                                                                           + INVALID_APPOINTMENT_TIMEPERIOD_ORDER;
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

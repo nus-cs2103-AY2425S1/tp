@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+import seedu.address.commons.exceptions.IllegalValueException;
+
 /**
  * Represents an Appointment in the MediBase.
  * Guarantees: immutable; name is valid as declared in {@link #isValidAppointmentName(String)}; date is valid as
@@ -39,8 +41,10 @@ public class Appointment implements Comparable<Appointment> {
      * Constructs an {@code Appointment}.
      *
      * @param appointmentName A valid appointment name.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted appointment.
      */
-    public Appointment(String appointmentName, String appointmentDate, String appointmentTimePeriod) {
+    public Appointment(String appointmentName, String appointmentDate, String appointmentTimePeriod)
+            throws IllegalValueException {
         requireNonNull(appointmentName);
         checkArgument(isValidAppointmentName(appointmentName), MESSAGE_CONSTRAINTS);
         this.appointmentName = appointmentName;
@@ -68,8 +72,9 @@ public class Appointment implements Comparable<Appointment> {
      * @param date String of the date to check.
      * @param timePeriod String of the time Period to check.
      * @return true if there is a clash.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted appointment.
      */
-    public boolean isClashing(String date, String timePeriod) {
+    public boolean isClashing(String date, String timePeriod) throws IllegalValueException {
         requireNonNull(date);
         requireNonNull(timePeriod);
         checkIsTimePeriodValid(timePeriod);
@@ -106,8 +111,10 @@ public class Appointment implements Comparable<Appointment> {
 
     /**
      * Checks if a given string is a valid appointment time period.
+     *
+     * @throws IllegalValueException if there were any time period constrain violations.
      */
-    public static void checkIsTimePeriodValid(String test) {
+    public static void checkIsTimePeriodValid(String test) throws IllegalValueException {
         checkArgument(isValidAppointmentTimePeriodFormat(test),
                       MESSAGE_CONSTRAINTS_APPT_TIME_PERIOD_WRONG_FORMAT);
         checkArgument(isValidAppointmentTimePeriodOrder(test),
@@ -156,7 +163,7 @@ public class Appointment implements Comparable<Appointment> {
      *
      * @param other the other appointment to be compared.
      * @return <code>0</code> if they start at the same time, <code><0</code> if <code>other</code> starts later,
-     *         and <code>>0</code> if <code>other</code> starts earlier.
+     *     and <code>>0</code> if <code>other</code> starts earlier.
      */
     @Override
     public int compareTo(Appointment other) {

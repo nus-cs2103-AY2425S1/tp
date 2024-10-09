@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.appointment.Appointment;
@@ -112,7 +113,11 @@ public class SampleDataUtil {
         return Arrays.stream(strings)
                      .map(s -> {
                          String[] slice = s.split(":");
-                         return new Appointment(slice[0], slice[1], slice[2]);
+                         try {
+                             return new Appointment(slice[0], slice[1], slice[2]);
+                         } catch (IllegalValueException e) {
+                             return null;
+                         }
                      })
                      .collect(Collectors.toSet());
     }

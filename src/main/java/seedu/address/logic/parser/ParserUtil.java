@@ -8,8 +8,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.DateUtil;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.AddApptCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
@@ -191,7 +193,11 @@ public class ParserUtil {
         if (!DateUtil.isValidDate(trimmedAppointment[1])) {
             throw new ParseException(Appointment.MESSAGE_CONSTRAINTS_APPT_DATE_WRONG_FORMAT);
         }
-        return new Appointment(trimmedAppointment[0], trimmedAppointment[1], trimmedAppointment[2]);
+        try {
+            return new Appointment(trimmedAppointment[0], trimmedAppointment[1], trimmedAppointment[2]);
+        } catch (IllegalValueException e) {
+            throw new ParseException(AddApptCommand.MESSAGE_USAGE);
+        }
     }
 
     /**

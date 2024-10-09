@@ -12,6 +12,7 @@ import java.util.Set;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -113,14 +114,19 @@ public class AddApptCommand extends Command {
         Nric updatedNric = personToEdit.getNric();
         Set<Tag> updatedTags = personToEdit.getTags();
 
-        ArrayList<Appointment> oldAppointmentList = new ArrayList<>(personToEdit.getAppointments());
-        for (Appointment a : oldAppointmentList) {
-            if (a.isClashing(newApptDate, newApptTime)) {
-                throw new CommandException(String.format(MESSAGE_DUPLICATE_APPT_1S, a));
+        ArrayList<Appointment> oldAppointmentList = null;
+        try {
+            oldAppointmentList = new ArrayList<>(personToEdit.getAppointments());
+            for (Appointment a : oldAppointmentList) {
+                if (a.isClashing(newApptDate, newApptTime)) {
+                    throw new CommandException(String.format(MESSAGE_DUPLICATE_APPT_1S, a));
+                }
             }
-        }
 
-        oldAppointmentList.add(new Appointment(newApptName, newApptDate, newApptTime));
+            oldAppointmentList.add(new Appointment(newApptName, newApptDate, newApptTime));
+        } catch (IllegalValueException e) {
+            throw new CommandException(MESSAGE_USAGE, e);
+        }
         Set<Appointment> newAppointments = new HashSet<>(oldAppointmentList);
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedNric, updatedAddress, updatedDateOfBirth,
