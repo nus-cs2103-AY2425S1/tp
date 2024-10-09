@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 
 import java.util.*;
 
@@ -35,6 +36,9 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         try {
             List<Index> indexList = ParserUtil.parseIndex(argMultimap.getPreamble());
+            if (indexList.isEmpty()) {
+                throw new ParseException(MESSAGE_INVALID_INDEX);
+            }
             index = indexList.get(0);
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
