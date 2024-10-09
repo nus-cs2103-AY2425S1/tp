@@ -48,7 +48,7 @@ public class StringUtil {
      *       containsPartialWordIgnoreCase("ABc def", "cd") == false // no partial match with a word
      *       </pre>
      * @param sentence cannot be null
-     * @param word cannot be null, cannot be empty, must be a single word
+     * @param word cannot be null, cannot be empty
      */
     public static boolean containsPartialWordIgnoreCase(String sentence, String word) {
         requireNonNull(sentence);
