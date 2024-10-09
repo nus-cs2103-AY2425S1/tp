@@ -229,7 +229,8 @@ public class AddPatientCommandParserTest {
 
         // invalid date of birth
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + INVALID_DOB_DESC + GENDER_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, DateOfBirth.MESSAGE_CONSTRAINTS);
+                + INVALID_DOB_DESC + GENDER_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                DateOfBirth.MESSAGE_CONSTRAINTS);
 
         // invalid gender
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
