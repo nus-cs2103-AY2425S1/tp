@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -51,10 +52,20 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         return parseOtherAttributes(argMultiMap);
     }
 
-    private DeleteCommand parseOtherAttributes(ArgumentMultimap argMultimap) throws ParseException {
+    /**
+     * Parses the arguments based on name, email and phone
+     * @param argMultimap processed from parse
+     * @return DeleteCommand object with the contact index to be deleted
+     * @throws ParseException
+     */
+    public DeleteCommand parseOtherAttributes(ArgumentMultimap argMultimap) throws ParseException {
         Optional<String> optionalName = argMultimap.getValue(PREFIX_NAME);
         Optional<String> optionalPhone = argMultimap.getValue(PREFIX_PHONE);
         Optional<String> optionalEmail = argMultimap.getValue(PREFIX_EMAIL);
+        if (optionalPhone.isEmpty() && optionalEmail.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        }
         if (optionalName.isPresent()) {
             Name name = ParserUtil.parseName(optionalName.get());
             System.out.println("finding using name and check duplicates");
