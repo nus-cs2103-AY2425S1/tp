@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,6 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 /**
@@ -22,6 +25,8 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+
+    private final List<Group> groups = new ArrayList<>();
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -43,14 +48,14 @@ public class ModelManager implements Model {
     //=========== UserPrefs ==================================================================================
 
     @Override
-    public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
-        requireNonNull(userPrefs);
-        this.userPrefs.resetData(userPrefs);
+    public ReadOnlyUserPrefs getUserPrefs() {
+        return userPrefs;
     }
 
     @Override
-    public ReadOnlyUserPrefs getUserPrefs() {
-        return userPrefs;
+    public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
+        requireNonNull(userPrefs);
+        this.userPrefs.resetData(userPrefs);
     }
 
     @Override
@@ -78,13 +83,13 @@ public class ModelManager implements Model {
     //=========== AddressBook ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+    public ReadOnlyAddressBook getAddressBook() {
+        return addressBook;
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public void setAddressBook(ReadOnlyAddressBook addressBook) {
+        this.addressBook.resetData(addressBook);
     }
 
     @Override
@@ -126,6 +131,18 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    //=========== Group Logic =============================================================
+
+    /**
+     * Adds a group to the Model
+     *
+     * @param group Group to be added
+     */
+    @Override
+    public void addGroup(Group group) {
+        groups.add(group);
     }
 
     @Override
