@@ -23,8 +23,7 @@ public class DeleteCommand extends Command {
             + ": Deletes the person identified by the name used in the displayed person list.\n"
             + "Parameters: NAME (must be the name used in the displayed person list)\n"
             + "Example: " + COMMAND_WORD + " John Doe";
-
-    public static final String MESSAGE_INVALID_NAME = "Person not found";
+    
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
     private Name name;
@@ -47,7 +46,7 @@ public class DeleteCommand extends Command {
         }
 
         if (index == -1) {
-            throw new CommandException(MESSAGE_INVALID_NAME);
+            throw new CommandException(Messages.MESSAGE_INVALID_NAME_DISPLAYED);
         }
 
         Person personToDelete = lastShownList.get(index);

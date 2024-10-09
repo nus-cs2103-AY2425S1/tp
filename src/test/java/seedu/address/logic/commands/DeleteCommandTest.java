@@ -44,10 +44,10 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_invalidNameUnfilteredList_throwsCommandException() {
-        Name name = new Name("john");
+        Name name = new Name("John");
         DeleteCommand deleteCommand = new DeleteCommand(name);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_NAME_DISPLAYED);
     }
 
     @Test
@@ -69,14 +69,16 @@ public class DeleteCommandTest {
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(new Name("John"));
-        DeleteCommand deleteSecondCommand = new DeleteCommand(new Name("John"));
+        Person personToDeleteFirst = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToDeleteSecond = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        DeleteCommand deleteFirstCommand = new DeleteCommand(personToDeleteFirst.getName());
+        DeleteCommand deleteSecondCommand = new DeleteCommand(personToDeleteSecond.getName());
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(new Name("John"));
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(personToDeleteFirst.getName());
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
