@@ -36,6 +36,9 @@ public class JsonAdaptedContactDate {
      * @throws IllegalValueException if there were any data constraints violated in the adapted contact date.
      */
     public ContactDate toModelType() throws IllegalValueException {
+        if (date == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "date"));
+        }
         if (!ContactDate.isValidContactDate(date)) {
             throw new IllegalValueException(ContactDate.MESSAGE_CONSTRAINTS);
         }
