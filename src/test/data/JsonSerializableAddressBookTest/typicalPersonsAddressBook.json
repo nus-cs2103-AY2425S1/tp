@@ -2,42 +2,63 @@
   "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
   "persons" : [ {
     "name" : "Alice Pauline",
+    "age" : "30",
+    "gender" : "F",
+    "nric" : "S1234567Z",
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "tags" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
+    "age" : "53",
+    "gender" : "M",
+    "nric" : "S1111111Z",
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "tags" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
+    "age" : "38",
+    "gender" : "M",
+    "nric" : "S2222222Z",
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
     "tags" : [ ]
   }, {
     "name" : "Daniel Meier",
+    "age" : "12",
+    "gender" : "M",
+    "nric" : "S3333333Z",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
     "tags" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
+    "age" : "43",
+    "gender" : "F",
+    "nric" : "F4444444Z",
     "phone" : "9482224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "tags" : [ ]
   }, {
     "name" : "Fiona Kunz",
+    "age" : "88",
+    "gender" : "F",
+    "nric" : "G8888888X",
     "phone" : "9482427",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "tags" : [ ]
   }, {
     "name" : "George Best",
+    "age" : "23",
+    "gender" : "M",
+    "nric" : "F7777777D",
     "phone" : "9482442",
     "email" : "anna@example.com",
     "address" : "4th street",

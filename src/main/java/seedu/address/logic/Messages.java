@@ -37,6 +37,12 @@ public class Messages {
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName())
+                .append("; Age: ")
+                .append(person.getAge())
+                .append("; Gender: ")
+                .append(person.getGender())
+                .append("; Nric: ")
+                .append(person.getNric())
                 .append("; Phone: ")
                 .append(person.getPhone())
                 .append("; Email: ")

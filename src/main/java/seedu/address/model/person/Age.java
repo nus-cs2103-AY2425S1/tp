@@ -50,12 +50,12 @@ public class Age {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Name)) {
+        if (!(other instanceof Age)) {
             return false;
         }
 
-        Name otherName = (Name) other;
-        return value.equals(otherName.fullName);
+        Age otherName = (Age) other;
+        return value.equals(otherName.value);
     }
 
     @Override
