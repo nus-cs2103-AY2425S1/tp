@@ -18,12 +18,12 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * The Main Window. Provides the basic application layout containing
- * a menu bar and space where other JavaFX elements can be placed.
+ * The Inspect Window. Provides information about the contact being inspected
+ * and takes commands to manage deliveries under this contact.
  */
-public class MainWindow extends UiPart<Stage> {
+public class InspectWindow extends UiPart<Stage> {
 
-    private static final String FXML = "MainWindow.fxml";
+    private static final String FXML = "InspectWindow.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -35,7 +35,7 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
-    @FXML
+    @javafx.fxml.FXML
     private StackPane commandBoxPlaceholder;
 
     @FXML
@@ -53,7 +53,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
-    public MainWindow(Stage primaryStage, Logic logic) {
+    public InspectWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
 
         // Set dependencies
@@ -111,7 +111,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        // personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -163,14 +163,13 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    private void handleInspect(CommandResult commandResult) {
-        logger.info("Changing UI...");
+    private void handleList(CommandResult commandResult) {
+        logger.info("Changing UI back to main window...");
 
-        InspectWindow inspectWindow;
-        inspectWindow = new InspectWindow(primaryStage, logic);
-        inspectWindow.show();
-        inspectWindow.fillInnerParts();
-        inspectWindow.getResultDisplay().setFeedbackToUser(commandResult.getFeedbackToUser());
+        MainWindow mainWindow = new MainWindow(primaryStage, logic);
+        mainWindow.show();
+        mainWindow.fillInnerParts();
+        mainWindow.getResultDisplay().setFeedbackToUser(commandResult.getFeedbackToUser());
     }
 
     public PersonListPanel getPersonListPanel() {
@@ -194,18 +193,16 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
-            }
-
-            if (commandResult.isExit()) {
+            } else if (commandResult.isExit()) {
                 handleExit();
-            }
-
-            if (commandResult.isInspect()) {
-                handleInspect(commandResult);
+            } else if (commandResult.isList()) {
+                handleList(commandResult);
+            } else {
+                throw new CommandException("Not yet implemented");
             }
 
             return commandResult;
-        } catch (CommandException | ParseException e) {
+        } catch (CommandException e/*| ParseException e*/) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
