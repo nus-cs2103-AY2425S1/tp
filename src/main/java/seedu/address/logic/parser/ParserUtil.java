@@ -133,7 +133,7 @@ public class ParserUtil {
         requireNonNull(name);
         String trimmedEventName = name.trim();
         if (!EventName.isValidName(trimmedEventName)) {
-            throw new ParseException(Location.MESSAGE_CONSTRAINTS);
+            throw new ParseException(EventName.MESSAGE_CONSTRAINTS);
         }
         return new EventName(trimmedEventName);
     }
@@ -142,7 +142,7 @@ public class ParserUtil {
         requireNonNull(location);
         String trimmedLocation = location.trim();
         if (!Location.isValidLocation(trimmedLocation)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Location.MESSAGE_CONSTRAINTS);
         }
         return new Location(trimmedLocation);
     }
@@ -151,7 +151,7 @@ public class ParserUtil {
         requireNonNull(date);
         String trimmedDate = date.trim();
         if (!Date.isValidDate(trimmedDate)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
         }
         return new Date(trimmedDate);
     }
@@ -160,7 +160,7 @@ public class ParserUtil {
         requireNonNull(time);
         String trimmedTime = time.trim();
         if (!Time.isvalidTime(trimmedTime)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Time.MESSAGE_CONSTRAINTS);
         }
         return new Time(trimmedTime);
     }
@@ -169,7 +169,7 @@ public class ParserUtil {
         requireNonNull(time);
         String trimmedDescription = time.trim();
         if (!Description.isValidDescription(trimmedDescription)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Description.MESSAGE_CONSTRAINTS);
         }
         return new Description(trimmedDescription);
     }
