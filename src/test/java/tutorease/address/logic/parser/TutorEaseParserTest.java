@@ -44,8 +44,6 @@ public class TutorEaseParserTest {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
     }
 
-    
-
     @Test
     public void parseCommand_edit() throws Exception {
         Person person = new PersonBuilder().build();

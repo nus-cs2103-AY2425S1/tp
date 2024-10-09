@@ -56,7 +56,6 @@ public class LogicManagerTest {
         String invalidCommand = "uicfhmowqewca";
         assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND);
     }
-    
 
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
