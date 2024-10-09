@@ -18,7 +18,6 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.contactdate.ContactDateList;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -45,7 +44,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane mainListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -53,8 +52,6 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane statusbarPlaceholder;
 
-    @FXML
-    private StackPane callHistoryPanelPlaceholder;
 
     private CallHistoryPanel callHistoryPanel;
 
@@ -119,7 +116,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        mainListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -131,8 +128,6 @@ public class MainWindow extends UiPart<Stage> {
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
         callHistoryPanel = new CallHistoryPanel();
-        callHistoryPanelPlaceholder.getChildren().add(callHistoryPanel.getRoot());
-        callHistoryPanelPlaceholder.setVisible(false);
     }
 
     /**
@@ -201,10 +196,9 @@ public class MainWindow extends UiPart<Stage> {
             String personName = commandResult.getPersonName();
 
             if (commandResult.getFeedbackToUser().contains(String.format(MESSAGE_SHOW_HISTORY_SUCCESS, personName))) {
-                showCallHistoryPanel(logic.getCallHistory());
+                updateCallHistory();
             } else {
-                personListPanelPlaceholder.setVisible(true);
-                callHistoryPanelPlaceholder.setVisible(false);
+                updatePersonListPanel();
             }
 
             return commandResult;
@@ -215,10 +209,20 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    private void showCallHistoryPanel(ContactDateList history) {
-        personListPanelPlaceholder.setVisible(false);
-        callHistoryPanelPlaceholder.setVisible(true);
+    private void updateCallHistory() {
+        if (callHistoryPanel.getRoot().getParent() != null) {
+            mainListPanelPlaceholder.getChildren().remove(callHistoryPanel.getRoot());
+        }
+        callHistoryPanel.initializeCallHistory(logic.getCallHistory());
+        mainListPanelPlaceholder.getChildren().remove(personListPanel.getRoot());
+        mainListPanelPlaceholder.getChildren().add(callHistoryPanel.getRoot());
+    }
 
-        callHistoryPanel.initializeCallHistory(history);
+    private void updatePersonListPanel() {
+        if (callHistoryPanel.getRoot().getParent() != null) {
+            mainListPanelPlaceholder.getChildren().remove(callHistoryPanel.getRoot());
+        }
+        mainListPanelPlaceholder.getChildren().remove(personListPanel.getRoot());
+        mainListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
     }
 }

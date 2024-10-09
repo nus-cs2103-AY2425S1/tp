@@ -46,7 +46,6 @@ public class CallHistoryPanel extends UiPart<VBox> {
      * Initializes the call history panel with the given {@code ContactDateList}.
      */
     public void initializeCallHistory(ContactDateList history) {
-        System.out.println("Initializing call history...");
         items.clear();
         items.addAll(FXCollections.observableArrayList(history));
     }
