@@ -33,7 +33,7 @@ public class Note {
      * Returns true if a given string is less than 200 characters long
      */
     public static boolean isValidNote(String test) {
-        return (test.length() <= 200) && (!test.isEmpty()) && test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override
