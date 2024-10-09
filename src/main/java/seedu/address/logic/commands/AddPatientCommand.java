@@ -72,7 +72,7 @@ public class AddPatientCommand extends Command {
         }
 
         AddPatientCommand otherAddPatientCommand = (AddPatientCommand) other;
-        return this.toAdd.equals(otherAddPatientCommand.toAdd);
+        return this.toAdd.isSamePatient(otherAddPatientCommand.toAdd);
     }
 
     @Override
