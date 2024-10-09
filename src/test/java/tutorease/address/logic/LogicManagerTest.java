@@ -1,7 +1,6 @@
 package tutorease.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static tutorease.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static tutorease.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static tutorease.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static tutorease.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -18,24 +17,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-<<<<<<< HEAD:src/test/java/seedu/address/logic/LogicManagerTest.java
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
-import seedu.address.storage.JsonAddressBookStorage;
-import seedu.address.storage.JsonUserPrefsStorage;
-import seedu.address.storage.StorageManager;
-import seedu.address.testutil.PersonBuilder;
-=======
+
 import tutorease.address.logic.commands.AddCommand;
 import tutorease.address.logic.commands.CommandResult;
-import tutorease.address.logic.commands.ListCommand;
 import tutorease.address.logic.commands.exceptions.CommandException;
 import tutorease.address.logic.parser.exceptions.ParseException;
 import tutorease.address.model.Model;
@@ -47,7 +31,6 @@ import tutorease.address.storage.JsonTutorEaseStorage;
 import tutorease.address.storage.JsonUserPrefsStorage;
 import tutorease.address.storage.StorageManager;
 import tutorease.address.testutil.PersonBuilder;
->>>>>>> d2853dfb5fc21fd78be9689eb5964a1ed3ad37fb:src/test/java/tutorease/address/logic/LogicManagerTest.java
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");

@@ -1,10 +1,10 @@
-package seedu.address.logic.parser;
+package tutorease.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static tutorease.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.DeleteContactCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
+import tutorease.address.commons.core.index.Index;
+import tutorease.address.logic.commands.DeleteContactCommand;
+import tutorease.address.logic.parser.exceptions.ParseException;
 
 
 /**

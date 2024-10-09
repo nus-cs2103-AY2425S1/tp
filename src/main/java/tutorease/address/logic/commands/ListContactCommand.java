@@ -3,12 +3,8 @@ package tutorease.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static tutorease.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-<<<<<<<< HEAD:src/main/java/tutorease/address/logic/commands/ListContactCommand.java
-import seedu.address.model.Model;
-========
 import tutorease.address.model.Model;
 
->>>>>>>> d2853dfb5fc21fd78be9689eb5964a1ed3ad37fb:src/main/java/tutorease/address/logic/commands/ListCommand.java
 /**
  * Lists all contacts in the address book.
  */

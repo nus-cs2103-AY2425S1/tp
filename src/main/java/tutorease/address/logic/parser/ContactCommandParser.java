@@ -1,12 +1,12 @@
-package seedu.address.logic.parser;
+package tutorease.address.logic.parser;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteContactCommand;
-import seedu.address.logic.commands.ListContactCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
+import tutorease.address.logic.commands.Command;
+import tutorease.address.logic.commands.DeleteContactCommand;
+import tutorease.address.logic.commands.ListContactCommand;
+import tutorease.address.logic.parser.exceptions.ParseException;
 
 
 /**

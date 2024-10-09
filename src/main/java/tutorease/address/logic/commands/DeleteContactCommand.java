@@ -1,24 +1,15 @@
 package tutorease.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
-import static seedu.address.logic.Messages.format;
+import static tutorease.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static tutorease.address.logic.Messages.format;
 
 import java.util.List;
 
-<<<<<<<< HEAD:src/main/java/tutorease/address/logic/commands/DeleteContactCommand.java
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.person.Person;
-========
 import tutorease.address.commons.core.index.Index;
-import tutorease.address.commons.util.ToStringBuilder;
-import tutorease.address.logic.Messages;
 import tutorease.address.logic.commands.exceptions.CommandException;
 import tutorease.address.model.Model;
 import tutorease.address.model.person.Person;
->>>>>>>> d2853dfb5fc21fd78be9689eb5964a1ed3ad37fb:src/main/java/tutorease/address/logic/commands/DeleteCommand.java
 
 
 /**

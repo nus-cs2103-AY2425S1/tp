@@ -13,38 +13,19 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-<<<<<<< HEAD:src/test/java/seedu/address/logic/parser/AddressBookParserTest.java
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.DeleteContactCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
-=======
 import tutorease.address.logic.commands.AddCommand;
 import tutorease.address.logic.commands.ClearCommand;
-import tutorease.address.logic.commands.DeleteCommand;
 import tutorease.address.logic.commands.EditCommand;
 import tutorease.address.logic.commands.EditCommand.EditPersonDescriptor;
 import tutorease.address.logic.commands.ExitCommand;
 import tutorease.address.logic.commands.FindCommand;
 import tutorease.address.logic.commands.HelpCommand;
-import tutorease.address.logic.commands.ListCommand;
 import tutorease.address.logic.parser.exceptions.ParseException;
 import tutorease.address.model.person.NameContainsKeywordsPredicate;
 import tutorease.address.model.person.Person;
 import tutorease.address.testutil.EditPersonDescriptorBuilder;
 import tutorease.address.testutil.PersonBuilder;
 import tutorease.address.testutil.PersonUtil;
->>>>>>> d2853dfb5fc21fd78be9689eb5964a1ed3ad37fb:src/test/java/tutorease/address/logic/parser/TutorEaseParserTest.java
 
 public class TutorEaseParserTest {
 
@@ -63,16 +44,7 @@ public class TutorEaseParserTest {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
     }
 
-
-
-
-    @Test
-    public void parseCommand_deleteContact() throws Exception {
-        DeleteContactCommand command = (DeleteContactCommand) parser.parseCommand(
-                DeleteContactCommand.COMMAND_WORD + " " + DeleteContactCommand.SUB_COMMAND_WORD
-                        + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteContactCommand(INDEX_FIRST_PERSON), command);
-    }
+    
 
     @Test
     public void parseCommand_edit() throws Exception {

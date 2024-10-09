@@ -7,29 +7,15 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-<<<<<<< HEAD:src/main/java/seedu/address/logic/parser/AddressBookParser.java
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-=======
 import tutorease.address.commons.core.LogsCenter;
 import tutorease.address.logic.commands.AddCommand;
 import tutorease.address.logic.commands.ClearCommand;
 import tutorease.address.logic.commands.Command;
-import tutorease.address.logic.commands.DeleteCommand;
 import tutorease.address.logic.commands.EditCommand;
 import tutorease.address.logic.commands.ExitCommand;
 import tutorease.address.logic.commands.FindCommand;
 import tutorease.address.logic.commands.HelpCommand;
-import tutorease.address.logic.commands.ListCommand;
 import tutorease.address.logic.parser.exceptions.ParseException;
->>>>>>> d2853dfb5fc21fd78be9689eb5964a1ed3ad37fb:src/main/java/tutorease/address/logic/parser/TutorEaseParser.java
 
 /**
  * Parses user input.
