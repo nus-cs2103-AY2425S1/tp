@@ -18,16 +18,19 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        return keywords.stream().anyMatch(keyword -> {
-            System.out.println("Keyword: " + keyword);
-            return person.getTags().stream().anyMatch(tag -> {
-                String cleanTag = tag.toString().replaceAll("[\\[\\]]", "");
-                System.out.println("Comparing Tad: " + cleanTag + " with Keyword: " + keyword);
-                return StringUtil.containsWordIgnoreCase(cleanTag, keyword);
-            });
-        });
-//        return keywords.stream()
-//                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword));
+        String filterBy = keywords.get(0);
+
+        return switch (filterBy) {
+        case ("name") -> keywords.stream()
+                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword));
+        case ("tag") -> keywords.stream()
+                    .anyMatch(keyword -> person.getTags().stream()
+                           .anyMatch(tag -> {
+                               String cleanTag = tag.toString().replaceAll("[\\[\\]]", "");
+                               return StringUtil.containsWordIgnoreCase(cleanTag, keyword);
+                           }));
+        default -> false;
+        };
     }
 
     @Override
