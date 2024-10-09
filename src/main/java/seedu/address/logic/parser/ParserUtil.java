@@ -2,6 +2,10 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,6 +13,9 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.order.Count;
+import seedu.address.model.order.Date;
+import seedu.address.model.order.Item;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -120,5 +127,68 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String item} into an {@code Item}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code item} is invalid.
+     */
+    public static Item parseItem(String item) throws ParseException {
+        requireNonNull(item);
+        String trimmedItem = item.trim();
+        if (!Item.isValidItem(trimmedItem)) {
+            throw new ParseException(Item.MESSAGE_CONSTRAINTS);
+        }
+        return new Item(trimmedItem);
+    }
+
+    /**
+     * Parses a {@code String count} into an {@code Count}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code count} is invalid.
+     */
+    public static Count parseCount(String count) throws ParseException {
+        requireNonNull(count);
+        String trimmedCount = count.trim();
+        if (!Count.isValidCount(trimmedCount)) {
+            throw new ParseException(Count.MESSAGE_CONSTRAINTS);
+        }
+        return new Count(trimmedCount);
+    }
+
+    /**
+     * Parses a {@code String date} into an {@code Date}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+    public static Date parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!Date.isValidDate(trimmedDate)) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        }
+        return new Date(trimmedDate);
+    }
+
+    /**
+     * Parses {@code String date} into a {@code LocalDate}.
+     * @throws ParseException if the given {@code date} is invalid.
+     * @see LocalDate
+     */
+    public static LocalDate parseLocalDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter
+                    .ofPattern(Date.DATE_FORMATTER)
+                    .withResolverStyle(ResolverStyle.STRICT);
+            return LocalDate.parse(trimmedDate, formatter);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        }
     }
 }
