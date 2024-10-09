@@ -1,8 +1,9 @@
 package seedu.address.logic.commands;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.Messages;
+import seedu.address.logic.Mode;
 import seedu.address.model.Model;
 import seedu.address.model.job.Job;
 
@@ -53,7 +54,8 @@ public class AddJobCommand extends Command {
         }
 
         model.addJob(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)),
+                false, false, Mode.JOB);
     }
 
     @Override
