@@ -104,6 +104,9 @@ class JsonAdaptedPerson {
         if (rate == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Rate.class.getSimpleName()));
         }
+        if (!Rate.isValidRate(rate)) {
+            throw new IllegalValueException(Rate.MESSAGE_CONSTRAINTS);
+        }
         final Rate modelRate = new Rate(rate);
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelSchedule, modelRate);

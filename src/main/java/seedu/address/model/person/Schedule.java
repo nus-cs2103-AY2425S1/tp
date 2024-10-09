@@ -104,11 +104,9 @@ public class Schedule {
 
         return start.isBefore(end);
     }
-
-    @Override
+    
     public String toString() {
         return dayValue + " " + startTimeValue + " - " + endTimeValue;
-
     }
 
     @Override

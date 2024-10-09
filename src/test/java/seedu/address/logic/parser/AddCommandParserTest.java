@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_RATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_SCHEDULE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
@@ -16,17 +17,21 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.logic.commands.CommandTestUtil.RATE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.RATE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.SCHEDULE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.SCHEDULE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_RATE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHEDULE_BOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -42,6 +47,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Rate;
 import seedu.address.model.person.Schedule;
 import seedu.address.testutil.PersonBuilder;
 
@@ -54,7 +60,7 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + SCHEDULE_DESC_BOB, new AddCommand(expectedPerson));
+                + ADDRESS_DESC_BOB + RATE_DESC_BOB + SCHEDULE_DESC_BOB, new AddCommand(expectedPerson));
 
     }
 
@@ -62,7 +68,7 @@ public class AddCommandParserTest {
     public void parse_repeatedValue_failure() {
         /*public void parse_repeatedNonTagValue_failure() {*/
         String validExpectedPersonString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + SCHEDULE_DESC_BOB;
+                + ADDRESS_DESC_BOB + RATE_DESC_BOB + SCHEDULE_DESC_BOB;
 
         // multiple names
         assertParseFailure(parser, NAME_DESC_AMY + validExpectedPersonString,
@@ -83,13 +89,17 @@ public class AddCommandParserTest {
         // multiple schedules
         assertParseFailure(parser, SCHEDULE_DESC_AMY + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_SCHEDULE));
+        
+        // multiple rates
+        assertParseFailure(parser, RATE_DESC_AMY + validExpectedPersonString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_RATE));
 
         // multiple fields repeated
         assertParseFailure(parser,
                 validExpectedPersonString + PHONE_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY + ADDRESS_DESC_AMY
-                        + SCHEDULE_DESC_AMY + validExpectedPersonString,
+                        + SCHEDULE_DESC_AMY + RATE_DESC_AMY + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_EMAIL, PREFIX_PHONE,
-                        PREFIX_SCHEDULE));
+                        PREFIX_SCHEDULE, PREFIX_RATE));
 
         // invalid value followed by valid value
 
@@ -112,7 +122,10 @@ public class AddCommandParserTest {
         // invalid schedule
         assertParseFailure(parser, INVALID_SCHEDULE_DESC + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_SCHEDULE));
-
+        
+        // invalid rate
+        assertParseFailure(parser, INVALID_RATE_DESC + validExpectedPersonString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_RATE));
 
         // valid value followed by invalid value
 
@@ -135,6 +148,10 @@ public class AddCommandParserTest {
         // invalid schedule
         assertParseFailure(parser, validExpectedPersonString + INVALID_SCHEDULE_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_SCHEDULE));
+        
+        // invalid rate
+        assertParseFailure(parser, validExpectedPersonString + INVALID_RATE_DESC,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_RATE));
     }
 
     // seems like this is for tags
@@ -142,7 +159,7 @@ public class AddCommandParserTest {
     public void parse_optionalFieldsMissing_success() {
         Person expectedPerson = new PersonBuilder(AMY).build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                        + SCHEDULE_DESC_AMY, new AddCommand(expectedPerson));
+                        + SCHEDULE_DESC_AMY + RATE_DESC_AMY, new AddCommand(expectedPerson));
     }
 
     @Test
@@ -151,59 +168,73 @@ public class AddCommandParserTest {
 
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + SCHEDULE_DESC_BOB, expectedMessage);
+                        + SCHEDULE_DESC_BOB + RATE_DESC_BOB, expectedMessage);
 
         // missing phone prefix
         assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + SCHEDULE_DESC_BOB, expectedMessage);
+                        + SCHEDULE_DESC_BOB + RATE_DESC_BOB, expectedMessage);
 
         // missing email prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB
-                        + SCHEDULE_DESC_BOB, expectedMessage);
+                        + SCHEDULE_DESC_BOB + RATE_DESC_BOB, expectedMessage);
 
         // missing address prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB
-                        + SCHEDULE_DESC_BOB, expectedMessage);
+                        + SCHEDULE_DESC_BOB + RATE_DESC_BOB, expectedMessage);
 
         // missing schedule prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + VALID_SCHEDULE_BOB, expectedMessage);
+                        + VALID_SCHEDULE_BOB + RATE_DESC_BOB, expectedMessage);
+        
+        // missing rate prefix
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + SCHEDULE_DESC_BOB + VALID_RATE_BOB, expectedMessage);
 
 
         // all prefixes missing
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB
-                        + VALID_SCHEDULE_BOB, expectedMessage);
+                        + VALID_SCHEDULE_BOB + VALID_RATE_BOB, expectedMessage);
     }
 
     @Test
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB
-                        + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + SCHEDULE_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
+                        + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + SCHEDULE_DESC_BOB
+                        + RATE_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC
-                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + SCHEDULE_DESC_BOB, Phone.MESSAGE_CONSTRAINTS);
+                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + SCHEDULE_DESC_BOB
+                + RATE_DESC_BOB, Phone.MESSAGE_CONSTRAINTS);
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB
-                + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB + SCHEDULE_DESC_BOB, Email.MESSAGE_CONSTRAINTS);
+                + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB + SCHEDULE_DESC_BOB
+                + RATE_DESC_BOB, Email.MESSAGE_CONSTRAINTS);
 
         // invalid address
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB
-                + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC + SCHEDULE_DESC_BOB, Address.MESSAGE_CONSTRAINTS);
+                + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC + SCHEDULE_DESC_BOB
+                + RATE_DESC_BOB, Address.MESSAGE_CONSTRAINTS);
 
         // invalid schedule
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB
-                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + INVALID_SCHEDULE_DESC, Schedule.MESSAGE_CONSTRAINTS);
+                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + INVALID_SCHEDULE_DESC
+                + RATE_DESC_BOB, Schedule.MESSAGE_CONSTRAINTS);
+        
+        // invalid rate
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB
+                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + SCHEDULE_DESC_BOB
+                + INVALID_RATE_DESC, Rate.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB
-                        + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC + SCHEDULE_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
+                        + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC + SCHEDULE_DESC_BOB + RATE_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB
-                        + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + SCHEDULE_DESC_BOB,
+                        + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + SCHEDULE_DESC_BOB + RATE_DESC_BOB,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }

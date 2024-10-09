@@ -4,12 +4,14 @@
     "phone": "94351253",
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
-    "schedule": "Sunday-1800-1900"
+    "schedule": "Sunday-1800-1900",
+    "rate": "250.50"
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
     "address": "4th street",
-    "schedule": "Saturday-1800-1900"
+    "schedule": "Saturday-1800-1900",
+    "rate": "250.50"
   } ]
 }

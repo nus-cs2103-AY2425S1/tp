@@ -26,7 +26,7 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_PHONE = BENSON.getPhone().toString();
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
     private static final String VALID_ADDRESS = BENSON.getAddress().toString();
-    private static final String VALID_SCHEDULE = BENSON.getSchedule().toString();
+    private static final String VALID_SCHEDULE = BENSON.getSchedule().value;
     private static final String VALID_RATE = BENSON.getRate().toString();
 
     @Test
