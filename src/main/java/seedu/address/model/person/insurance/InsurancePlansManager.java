@@ -1,7 +1,6 @@
 package seedu.address.model.person.insurance;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 
