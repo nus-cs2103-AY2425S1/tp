@@ -89,7 +89,8 @@ public class Assignment {
                && MIN_SCORE == otherAssignment.MIN_SCORE
                && maxScore == otherAssignment.maxScore
                && score == otherAssignment.score
-               && hasSubmitted == otherAssignment.hasSubmitted;
+               && hasSubmitted == otherAssignment.hasSubmitted
+               && student.equals(otherAssignment.student);
     }
 
     @Override
@@ -102,6 +103,7 @@ public class Assignment {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("assignmentName", assignmentName)
+                .add("studentName", this.student == null ? "Not Assigned" : student.getName())
                 .add("MIN_SCORE", MIN_SCORE)
                 .add("maxScore", maxScore)
                 .add("score", score)
