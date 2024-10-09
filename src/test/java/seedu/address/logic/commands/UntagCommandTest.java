@@ -6,7 +6,6 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -26,7 +25,7 @@ public class UntagCommandTest {
     @Test
     public void execute_validTagsUnfilteredList_success() {
         Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        List<Tag> tagsToRemove = Arrays.asList(new Tag("friends"));
+        HashSet<Tag> tagsToRemove = new HashSet<>(Arrays.asList(new Tag("friends")));
 
         UntagCommand untagCommand = new UntagCommand(INDEX_FIRST_PERSON, tagsToRemove);
 
@@ -58,14 +57,14 @@ public class UntagCommandTest {
                 new HashSet<>(Arrays.asList(new Tag("friends"), new Tag("owesMoney")))
         );
         model.setPerson(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), personWithTags);
-        List<Tag> tagsToRemove = Arrays.asList(new Tag("friends"), new Tag("owesMoney"));
+        HashSet<Tag> tagsToRemove = new HashSet<>(Arrays.asList(new Tag("friends"), new Tag("owesMoney")));
         UntagCommand untagCommand = new UntagCommand(INDEX_FIRST_PERSON, tagsToRemove);
         String expectedMessage = String.format(UntagCommand.MESSAGE_REMOVE_TAG_SUCCESS,
-                "friends, owesMoney", personWithTags.getName().toString());
+                "owesMoney, friends", personWithTags.getName().toString());
 
         // Create the expected model with the updated tags (i.e., an empty set of tags)
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        Set<Tag> updatedTags = new HashSet<>(personWithTags.getTags());
+        HashSet<Tag> updatedTags = new HashSet<>(personWithTags.getTags());
         updatedTags.removeAll(tagsToRemove);
         Person editedPerson = new Person(
                 personWithTags.getName(),
@@ -81,7 +80,7 @@ public class UntagCommandTest {
 
     @Test
     public void execute_nonExistentTag_failure() {
-        List<Tag> tagsToRemove = Arrays.asList(new Tag("nonExistentTag"));
+        HashSet<Tag> tagsToRemove = new HashSet<>(Arrays.asList(new Tag("nonExistentTag")));
         UntagCommand untagCommand = new UntagCommand(INDEX_FIRST_PERSON, tagsToRemove);
         String expectedMessage = UntagCommand.MESSAGE_TAG_NOT_FOUND;
         CommandTestUtil.assertCommandFailure(untagCommand, model, expectedMessage);
@@ -91,7 +90,7 @@ public class UntagCommandTest {
     @Test
     public void execute_noTagsSpecified_failure() {
         // No tags specified to remove
-        List<Tag> emptyTagsToRemove = Arrays.asList();
+        HashSet<Tag> emptyTagsToRemove = new HashSet<>(Arrays.asList());
         UntagCommand untagCommand = new UntagCommand(INDEX_FIRST_PERSON, emptyTagsToRemove);
         String expectedMessage = UntagCommand.MESSAGE_TAG_NOT_FOUND;
         CommandTestUtil.assertCommandFailure(untagCommand, model, expectedMessage);
@@ -101,7 +100,7 @@ public class UntagCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        List<Tag> tagsToRemove = Arrays.asList(new Tag("friends"));
+        HashSet<Tag> tagsToRemove = new HashSet<>(Arrays.asList(new Tag("friends")));
 
         UntagCommand untagCommand = new UntagCommand(outOfBoundIndex, tagsToRemove);
 
@@ -122,7 +121,7 @@ public class UntagCommandTest {
         );
 
         model.setPerson(model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased()), personWithoutTags);
-        List<Tag> tagsToRemove = Arrays.asList(new Tag("friends"));
+        HashSet<Tag> tagsToRemove = new HashSet<>(Arrays.asList(new Tag("friends")));
         UntagCommand untagCommand = new UntagCommand(INDEX_SECOND_PERSON, tagsToRemove);
         String expectedMessage = UntagCommand.MESSAGE_TAG_NOT_FOUND;
 
