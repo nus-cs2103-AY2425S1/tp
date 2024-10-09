@@ -274,71 +274,193 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
+* is a social worker tasked with helping low-income families
 * has a need to manage a significant number of contacts
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
-
+**Value proposition**: streamlines the process of social workers contacting and assisting families
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​       | I can …​                                                     | So that I can…​                                                                |
+|----------|---------------|--------------------------------------------------------------|--------------------------------------------------------------------------------|
+| `* * *`  | new user      | view the how to guide                                        | familiarise myself with the functionalities of the app.                        |
+| `* * *`  | social worker | add information of different families                        | keep track of families requiring assistance in one place.                      |
+| `* * *`  | social worker | view the information of different families I have added      | retrieve their information more quickly.                                       |
+| `* * *`  | social worker | delete the information of a family                           | remove the data of a family that I no longer need to keep track of.            |
+| `* * *`  | social worker | edit a family's information                                  | keep their information up-to-date for future use.                              |
+| `* *`    | social worker | tag families                                                 | manage and organize families according to their needs.                         |
+| `* *`    | social worker | filter through the list of families                          | navigate the contact list more efficiently.                                    |
+| `* *`    | social worker | sort families                                                | view families in a more suitable order.                                        |
+| `* *`    | social worker | toggle between list view and individual family view          | focus on a specific family's information when I need to.                       |
+| `* *`    | social worker | create custom command aliases for frequently used commands   | execute commands faster and reduce my typing effort.                           |
+| `* *`    | social worker | archive families that no longer need assistance              | keep my contact list focused on active cases.                                  |
+| `* *`    | social worker | see the overall statistics of families based on location     | allocate my manpower better to areas with more help needed.                    |
+| `*`      | social worker | synchronize the app with my personal calendar                | view all my appointments and reminders in one place.                           |
+| `*`      | social worker | attach documents or images to family profiles                | make all relevant information accessible within each family’s contact details. |
+| `*`      | social worker | generate and export reports on family progress or case notes | share updates with my team or supervisors efficiently.                         |
+| `*`      | social worker | share contacts                                               | allow multiple parties to assist the families at once.                         |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `SocialBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add new family**
 
-**MSS**
+**MSS:**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User enters the command to add a family with the specified details
+2. SocialBook adds the family and displays the newly added family
 
     Use case ends.
 
-**Extensions**
+**Extensions:**
 
-* 2a. The list is empty.
+* 2a. SocialBook detects missing or invalid input.
 
-  Use case ends.
+    * 2a1. SocialBook displays an error message and prompts the user to try again
 
-* 3a. The given index is invalid.
+    * 2a2. User corrects the input and enters the command again
+    
+        Steps 2a1-2a2 are repeated until the user enters the correct input
 
-    * 3a1. AddressBook shows an error message.
+        Use case ends.
 
-      Use case resumes at step 2.
+* 2b. SocialBook detects a duplicate family entry.
 
-*{More to be added}*
+    * 2b1. SocialBook displays an error message showing the duplicated family
+  
+        Use case ends.
+
+
+**Use case: View information of different families**
+
+**MSS:**
+
+1. User enters the command to view all families
+2. SocialBook displays all families whose info has been added
+
+    Use case ends.
+
+**Extensions:** 
+
+* 2a. No families have been added to SocialBook yet.
+
+    * 2a1. SocialBook displays a message to inform the user that no family has been added by them yet
+        
+        Use case ends.
+
+
+**Use case: Delete information of different families**
+
+**MSS:**
+
+1. User indicates family whose member they want to delete
+2. SocialBook displays all family members in that family
+3. User selects and deletes the member
+4. SocialBook removes the member’s details from the display
+
+    Use case ends.
+	
+**Extensions:**
+
+* 1a. SocialBook detects no such family exist in the list.
+
+    * 1a1. SocialBook informs user that no such family exist in the list
+	    
+        Use case ends.
+
+* 3a. User selects the primary contact of the family to be deleted.
+	
+    * 3a1. SocialBook informs user they cannot delete primary contact and to swap it to someone else if they wish to do so
+
+        Use case ends.
+
+
+**Use case: Display command manual** 
+
+**MSS:**
+
+1. User keys in command to open command manual
+2. SocialBook displays command manual
+3. User keys in command to close command manual
+4. SocialBook displays previously shown screen
+	
+    Use case ends.
+
+**Extensions:**
+
+* 1a. User chooses more detailed manual.
+
+    * 1a1. SocialBook displays detailed command manual
+
+    * 1a2. User keys in command to close command manual
+
+    * 1a3. SocialBook displays previously shown screen
+
+    Use case ends.
+
+	
+**Use case: Edit existing information of a family**
+
+**MSS:**
+
+1. User chooses which information fields to update
+2. User only enters the fields he wishes to update
+3. SocialBook only updates the fields which user had updated and displays all information about the family
+
+    Use case ends.
+
+**Extensions:**
+
+* 2a. SocialBook suggests a list of fields as user is typing input.
+
+    * 2a1. User enters one field
+    
+    * 2a2. SocialBook shows possible fields to be updated
+
+    * 2a3. User types finishes the field he wishes to update
+
+    * 2a4. SocialBook stops showing possible fields
+
+    * 2a5. User enters updated value
+        
+        If User chooses to update other fields, repeat step 2a1-2a4.
+        Otherwise, use case resumes from step 3.
+
+  * 3a. SocialBook detects an error in the entered data.
+
+      * 3a1. SocialBook should not update any fields
+  
+      * 3a2. SocialBook displays errors encountered with respect to the field
+    
+          Use case ends.
+
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4.  The system should be usable by a novice and does not require prior training.
+5.  Data that is to be deleted from the system is removed completely and not stored elsewhere.
+6.  The project is expected to adhere to the breadth-first iterative development.
+7.  Each command should take at most 10 seconds to executed.
 
 ### Glossary
 
+* **API**: Application programming interfaces, which defines the standards and protocols that allow different software components to communicate with one another.
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Custom command aliases**: Alternative command names that work the same if called as the actual command name.
+* **Breadth-first iterative development**: Evolves all major components and functionality areas in parallel, producing a working product at the end of each iteration
 
 --------------------------------------------------------------------------------------------------------------------
 
