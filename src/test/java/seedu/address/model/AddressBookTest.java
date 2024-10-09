@@ -50,7 +50,7 @@ public class AddressBookTest {
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPersons);
+        AddressBookStub newData = new AddressBookStub(newPersons, FXCollections.observableArrayList());
 
         assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
     }
