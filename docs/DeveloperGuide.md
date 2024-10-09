@@ -338,7 +338,7 @@ unless specified otherwise)
 
 * 1a. The student name is invalid.
     * 1a1. TAchy shows an error message.
-  
+
       Use case ends.
 
 * 1b. The student name already exists.
@@ -478,7 +478,7 @@ unless specified otherwise)
     * 1a1. TAchy shows an error message.
 
       Use case ends.
-  
+
 * 1b. The student is not found.
     * 1b1. TAchy shows an error message.
 
@@ -504,7 +504,7 @@ unless specified otherwise)
 **MSS**
 
 1. TA requests to list all assignments.
-2. TAchy displays the list of assignments. 
+2. TAchy displays the list of assignments.
 3. TA requests to view submission status for an assignment by index.
 4. TAchy displays the list of submissions for the selected assignment.
 
@@ -516,12 +516,12 @@ unless specified otherwise)
     * 1a1. TAchy displays a "no assignments found" message.
 
       Use case ends.
-  
+
 * 3a. The assignment index is invalid.
     * 3a1. TAchy shows an error message.
 
       Use case ends.
-  
+
 * 4a. No submissions are found for the assignment.
     * 4a1. TAchy displays a "no submissions found" message.
 
@@ -591,7 +591,7 @@ unless specified otherwise)
     * 1a1. TAchy displays a "no students" message.
 
       Use case ends.
-    * 
+    *
 * 3a. The student index is invalid.
     * 3a1. TAchy shows an error message.
 
@@ -624,7 +624,7 @@ unless specified otherwise)
 
       Use case ends.
 
-   
+
 ---
 
 **Use case: Link scanned PDF to a student**
@@ -750,12 +750,12 @@ unless specified otherwise)
     * 1a1. TAchy displays a "no classes found" message.
 
       Use case ends.
-  
+
 * 3a. The class index is invalid.
     * 3a1. TAchy shows an error message.
 
       Use case ends.
-  
+
 * 5a. The student index is invalid.
     * 5a1. TAchy shows an error message.
 
@@ -796,7 +796,7 @@ unless specified otherwise)
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 - Business/domain rules: Each student must be uniquely identifiable by their student ID, Assignments must have deadlines that  cannot be set on a date that has passed, Each class should not exceed 50 students, Assignments must be submitted by students up to the deadline set by the TA
-- Constraints: The system must be backward compatible with data produced by earlier versions of the system, The total project cost should be $0, The project is offered as a free service, TAs are only allowed to store up to 5 GB of data 
+- Constraints: The system must be backward compatible with data produced by earlier versions of the system, The total project cost should be $0, The project is offered as a free service, TAs are only allowed to store up to 5 GB of data
 - Technical requirements: The system should work on both 32-bit and 64-bit environment, The system should be compatible with Windows, macOS and Linux operating systems.
 - Performance requirements: The system should respond to user inputs within five seconds, The system should be able to handle a large number of students, classes, and assignments without degradation in performance, Data retrieval should not take longer than 2 seconds.
 - Quality requirements: The system should be usable by a novice who has never used AB3 before, The system should have clear user documentation to guide users through its features, Intuitive error messages will be displayed to the user so that they know what is the correct method of using the system
