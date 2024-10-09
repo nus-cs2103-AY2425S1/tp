@@ -46,9 +46,39 @@ public class DeleteCommandTest {
     }
 
     @Test
+    public void execute_validMultipleIndexUnfilteredList_success() {
+        Person personToDelete1 = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToDelete2 = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_SECOND_PERSON_LIST);
+        List<Person> personToDeleteList = new ArrayList<>();
+        personToDeleteList.add(personToDelete1);
+        personToDeleteList.add(personToDelete2);
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                Messages.listFormat(personToDeleteList));
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deletePerson(personToDelete1);
+        expectedModel.deletePerson(personToDelete2);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         List<Index> outOfBoundIndexList = new ArrayList<>();
+        outOfBoundIndexList.add(outOfBoundIndex);
+        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndexList);
+
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_invalidMultipleIndexUnfilteredList_throwsCommandException() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        List<Index> outOfBoundIndexList = new ArrayList<>();
+        outOfBoundIndexList.add(INDEX_FIRST_PERSON);
         outOfBoundIndexList.add(outOfBoundIndex);
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndexList);
 
@@ -62,7 +92,7 @@ public class DeleteCommandTest {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON_LIST);
         List<Person> personToDeleteList = new ArrayList<>();
-        personToDeleteList.add(personToDelete); 
+        personToDeleteList.add(personToDelete);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.listFormat(personToDeleteList));
