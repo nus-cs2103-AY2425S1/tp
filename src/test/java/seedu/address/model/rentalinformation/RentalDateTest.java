@@ -71,13 +71,24 @@ public class RentalDateTest {
     }
 
     @Test
+    public void hashcode() {
+        RentalDate rentalDate = new RentalDate("01/01/2024");
+
+        // same rental date
+        assertEquals(rentalDate.hashCode(), new RentalDate("01/01/2024").hashCode());
+
+        // different rental date
+        assertNotEquals(rentalDate.hashCode(), new RentalDate("02/01/2024").hashCode());
+    }
+
+    @Test
     public void isSameToString() {
         RentalDate rentalDate = new RentalDate("01/01/2024");
 
-        // Same rental date
+        // same rental date
         assertEquals(rentalDate.toString(), new RentalDate("01/01/2024").toString());
 
-        // Different rental date
+        // different rental date
         assertNotEquals(rentalDate.toString(), new RentalDate("02/01/2024").toString());
         assertNotEquals(rentalDate.toString(), new RentalDate("01/01/2023").toString());
     }

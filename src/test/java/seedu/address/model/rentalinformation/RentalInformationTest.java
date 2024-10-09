@@ -34,15 +34,29 @@ public class RentalInformationTest {
     }
 
     @Test
+    public void hashcode() {
+        RentalInformation rentalInformation = new RentalInformation("Ave 1 Bishan", "01/01/2024",
+                "31/12/2024", "15", "3500", "7000", "David");
+
+        // same rental information
+        assertEquals(rentalInformation.hashCode(), new RentalInformation("Ave 1 Bishan", "01/01/2024",
+                "31/12/2024", "15", "3500", "7000", "David").hashCode());
+
+        // different rental information
+        assertNotEquals(rentalInformation.hashCode(), new RentalInformation("Ave 2 Bishan", "01/06/2024",
+                "31/12/2024", "30", "2500", "7500", "Steven").hashCode());
+    }
+
+    @Test
     public void isSameToString() {
         RentalInformation rentalInformation = new RentalInformation("Ave 1 Bishan", "01/01/2024",
                 "31/12/2024", "15", "3500", "7000", "David");
 
-        // Same rental information
+        // same rental information
         assertEquals(rentalInformation.toString(), new RentalInformation("Ave 1 Bishan", "01/01/2024",
                 "31/12/2024", "15", "3500", "7000", "David").toString());
 
-        // Different rental information
+        // different rental information
         assertNotEquals(rentalInformation.toString(), new RentalInformation("Ave 2 Bishan", "01/06/2024",
                 "31/12/2024", "30", "2500", "7500", "Steven").toString());
     }

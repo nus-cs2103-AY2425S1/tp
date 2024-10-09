@@ -65,13 +65,24 @@ public class DepositTest {
     }
 
     @Test
+    public void hashcode() {
+        Deposit deposit = new Deposit("100");
+
+        // same deposit
+        assertEquals(deposit.hashCode(), new Deposit("100").hashCode());
+
+        // different deposit
+        assertNotEquals(deposit.hashCode(), new Deposit("200").hashCode());
+    }
+
+    @Test
     public void isSameToString() {
         Deposit deposit = new Deposit("100");
 
-        // Same deposit
+        // same deposit
         assertEquals(deposit.toString(), new Deposit("100").toString());
 
-        // Different deposit
+        // different deposit
         assertNotEquals(deposit.toString(), new Deposit("200").toString());
         assertNotEquals(deposit.toString(), new Deposit("100.35").toString());
     }

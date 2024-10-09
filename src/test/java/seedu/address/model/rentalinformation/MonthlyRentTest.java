@@ -65,13 +65,24 @@ public class MonthlyRentTest {
     }
 
     @Test
+    public void hashcode() {
+        MonthlyRent monthlyRent = new MonthlyRent("100");
+
+        // same monthly rent
+        assertEquals(monthlyRent.hashCode(), new MonthlyRent("100").hashCode());
+
+        // different monthly rent
+        assertNotEquals(monthlyRent.hashCode(), new MonthlyRent("200").hashCode());
+    }
+
+    @Test
     public void isSameToString() {
         MonthlyRent monthlyRent = new MonthlyRent("100");
 
-        // Same monthly rent
+        // same monthly rent
         assertEquals(monthlyRent.toString(), new MonthlyRent("100").toString());
 
-        // Different monthly rent
+        // different monthly rent
         assertNotEquals(monthlyRent.toString(), new MonthlyRent("200").toString());
         assertNotEquals(monthlyRent.toString(), new MonthlyRent("100.35").toString());
     }

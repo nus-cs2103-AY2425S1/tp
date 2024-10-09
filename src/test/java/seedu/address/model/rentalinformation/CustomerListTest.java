@@ -61,13 +61,24 @@ public class CustomerListTest {
     }
 
     @Test
+    public void hashcode() {
+        CustomerList customerList = new CustomerList("David;Steven");
+
+        // same customer list
+        assertEquals(customerList.hashCode(), new CustomerList("David;Steven").hashCode());
+
+        // different customer list
+        assertNotEquals(customerList.hashCode(), new CustomerList("Steven;David").hashCode());
+    }
+
+    @Test
     public void isSameToString() {
         CustomerList customerList = new CustomerList("David;Steven");
 
-        // Same customer list
+        // same customer list
         assertEquals(customerList.toString(), new CustomerList("David;Steven").toString());
 
-        // Different customer list
+        // different customer list
         assertNotEquals(customerList.toString(), new CustomerList("David").toString());
         assertNotEquals(customerList.toString(), new CustomerList("Steven;David").toString());
     }

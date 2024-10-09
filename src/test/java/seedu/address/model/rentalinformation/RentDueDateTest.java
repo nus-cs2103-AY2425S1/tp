@@ -62,13 +62,24 @@ public class RentDueDateTest {
     }
 
     @Test
+    public void hashcode() {
+        RentDueDate rentDueDate = new RentDueDate("15");
+
+        // same rent due date
+        assertEquals(rentDueDate.hashCode(), new RentDueDate("15").hashCode());
+
+        // different rent due date
+        assertNotEquals(rentDueDate.hashCode(), new RentDueDate("20").hashCode());
+    }
+
+    @Test
     public void isSameToString() {
         RentDueDate rentDueDate = new RentDueDate("15");
 
-        // Same rent due date
+        // same rent due date
         assertEquals(rentDueDate.toString(), new RentDueDate("15").toString());
 
-        // Different rent due date
+        // different rent due date
         assertNotEquals(rentDueDate.toString(), new RentDueDate("10").toString());
         assertNotEquals(rentDueDate.toString(), new RentDueDate("30").toString());
     }
