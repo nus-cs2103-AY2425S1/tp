@@ -1,10 +1,12 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCORE;
 
+import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -41,32 +43,24 @@ public class AddGradeCommand extends Command {
                     + "Ex09 "
                     + PREFIX_SCORE
                     + "9 ";
-    private final AddGradeCommandFormat addGradeCommandFormat;
-    private Person person;
+
+    private final Name personName;
+    private final Float score;
+    private final String assignmentName;
 
     /**
-     * @param addGradeCommandFormat assignment and grades to add to the person.
+     * @param personName     Name of the person.
+     * @param score          Score of the assignment.
+     * @param assignmentName Name of assignment.
      */
-    public AddGradeCommand(AddGradeCommandFormat addGradeCommandFormat) {
-        this.addGradeCommandFormat = addGradeCommandFormat;
+    public AddGradeCommand(String personName, Float score, String assignmentName) {
+        requireAllNonNull(personName, score, assignmentName);
+        this.personName = new Name(personName);
+        this.score = score;
+        this.assignmentName = assignmentName;
     }
 
-    @Override
-    public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
-        // to add error handling
-
-        person =
-                model.getAddressBook().getPersonList().stream()
-                        .filter(person -> person.getName().equals(addGradeCommandFormat.getName()))
-                        .toList()
-                        .get(0);
-        model.setPerson(person, createGradeToAddToPerson());
-        System.out.println(model.getAddressBook().getPersonList().toString());
-        return new CommandResult(""); // placeholder string to be added
-    }
-
-    private Person createGradeToAddToPerson() {
+    private static Person createGradeToAddToPerson(Person person, String assignmentName, float score) {
         assert person != null;
         Name name = person.getName();
         Phone phone = person.getPhone();
@@ -74,41 +68,38 @@ public class AddGradeCommand extends Command {
         Address address = person.getAddress();
         Set<Tag> tags = person.getTags();
         Assignment assignment =
-                new Assignment(addGradeCommandFormat.assignment, addGradeCommandFormat.score);
+                new Assignment(assignmentName, score);
 
         return new Person(name, phone, email, address, tags, assignment);
     }
 
-    /**
-     * Wrapper for the details of the assignment to be added and person to be added to.
-     */
-    public static class AddGradeCommandFormat {
-        private Name name;
-        private String assignment;
-        private float score;
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
+        // to add error handling
 
-        public float getScore() {
-            return score;
-        }
+        Person person =
+                model.getAddressBook().getPersonList().stream()
+                        .filter(p -> p.getName().equals(personName))
+                        .toList()
+                        .get(0);
+        model.setPerson(person, createGradeToAddToPerson(person, assignmentName, score));
+        return new CommandResult(""); // placeholder string to be added
+    }
 
-        public void setScore(float score) {
-            this.score = score;
-        }
+    @Override
+    public String toString() {
+        return personName + " " + assignmentName + " " + score;
+    }
 
-        public String getAssignment() {
-            return assignment;
-        }
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof AddGradeCommand otherCommand) {
+            return otherCommand.personName.equals(personName)
+                    && Objects.equals(otherCommand.assignmentName, assignmentName)
+                    && Objects.equals(otherCommand.score, score);
 
-        public void setAssignment(String assignment) {
-            this.assignment = assignment;
         }
-
-        public Name getName() {
-            return name;
-        }
-
-        public void setName(Name name) {
-            this.name = name;
-        }
+        return false;
     }
 }

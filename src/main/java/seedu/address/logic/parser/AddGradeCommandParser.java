@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCORE;
 
 import seedu.address.logic.commands.AddGradeCommand;
-import seedu.address.logic.commands.AddGradeCommand.AddGradeCommandFormat;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -19,13 +18,9 @@ public class AddGradeCommandParser implements Parser<AddGradeCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ASSIGNMENT, PREFIX_SCORE);
-        AddGradeCommandFormat addGradeCommandFormat = new AddGradeCommandFormat();
-        addGradeCommandFormat.setName(
-                ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
-        addGradeCommandFormat.setScore(
-                ParserUtil.parseScore(argMultimap.getValue(PREFIX_SCORE).get()));
-        addGradeCommandFormat.setAssignment(
-                ParserUtil.parseAssignmentName(argMultimap.getValue(PREFIX_ASSIGNMENT).get()));
-        return new AddGradeCommand(addGradeCommandFormat);
+        String name = argMultimap.getValue(PREFIX_NAME).get();
+        Float score = ParserUtil.parseScore(argMultimap.getValue(PREFIX_SCORE).get());
+        String assignmentName = ParserUtil.parseAssignmentName(argMultimap.getValue(PREFIX_ASSIGNMENT).get());
+        return new AddGradeCommand(name, score, assignmentName);
     }
 }

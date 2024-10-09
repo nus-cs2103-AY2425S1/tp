@@ -132,9 +132,9 @@ public class ParserUtil {
     }
 
     /**
-     * Parses String score into a float.
+     * Parses String into float.
      */
-    public static float parseScore(String score) throws ParseException {
+    public static Float parseScore(String score) throws ParseException {
         requireNonNull(score);
 
         return Float.parseFloat(score.trim());
