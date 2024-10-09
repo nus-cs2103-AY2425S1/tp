@@ -30,7 +30,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 r/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe tg/98765432 r/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -58,7 +58,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/TELEGRAM`, `p/TELEGRAM n/NAME` is also acceptable.
+  e.g. if the command specifies `n/NAME tg/TELEGRAM`, `tg/TELEGRAM n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -79,7 +79,7 @@ Format: `help`
 
 Adds a member to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER r/ROOM [t/TAG]…​`
+Format: `add n/NAME tg/TELEGRAM r/ROOM [t/TAG]…​`
 
 <box type="tip" seamless>
 
@@ -87,8 +87,8 @@ Format: `add n/NAME p/PHONE_NUMBER r/ROOM [t/TAG]…​`
 </box>
 
 Examples:
-* `add n/John Doe p/98765432 r/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend r/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe tg/98765432 r/John street, block 123, #01-01`
+* `add n/Betsy Crowe t/friend r/Newgate Prison tg/1234567 t/criminal`
 
 ### Listing all members : `list`
 
@@ -100,7 +100,7 @@ Format: `list`
 
 Edits an existing member in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [r/ROOM] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [tg/TELEGRAM] [r/ROOM] [t/TAG]…​`
 
 * Edits the member at the specified `INDEX`. The index refers to the index number shown in the displayed member list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -196,10 +196,10 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER r/ROOM [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 r/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add**    | `add n/NAME tg/TELEGRAM r/ROOM [t/TAG]…​` <br> e.g., `add n/James Ho tg/22224444 r/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [r/ROOM] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee p/99998888`
+**Edit**   | `edit INDEX [n/NAME] [tg/TELEGRAM] [r/ROOM] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee tg/99998888`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
 **Help**   | `help`

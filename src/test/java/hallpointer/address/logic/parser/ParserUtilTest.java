@@ -21,12 +21,12 @@ import hallpointer.address.model.tag.Tag;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
-    private static final String INVALID_TELEGRAM = "+651234";
+    private static final String INVALID_TELEGRAM = "+hisrocks";
     private static final String INVALID_ROOM = " ";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
-    private static final String VALID_TELEGRAM = "123456";
+    private static final String VALID_TELEGRAM = "elephant";
     private static final String VALID_ROOM = "8/7/23";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";

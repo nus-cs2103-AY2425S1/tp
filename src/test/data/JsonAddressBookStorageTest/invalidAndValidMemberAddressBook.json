@@ -1,11 +1,11 @@
 {
   "members": [ {
     "name": "Valid Member",
-    "telegram": "9482424",
+    "telegram": "aPotato",
     "room": "4/3/8"
   }, {
     "name": "Member With Invalid Telegram Field",
-    "telegram": "948asdf2424",
+    "telegram": "aBird!",
     "room": "4/3/8"
   } ]
 }

@@ -18,24 +18,24 @@ import hallpointer.address.model.tag.Tag;
 public class SampleDataUtil {
     public static Member[] getSampleMembers() {
         return new Member[] {
-            new Member(new Name("Alex Yeoh"), new Telegram("87438807"),
-                new Room("2/3/1"),
-                getTagSet("friends")),
-            new Member(new Name("Bernice Yu"), new Telegram("99272758"),
-                new Room("8/10/100"),
-                getTagSet("colleagues", "friends")),
-            new Member(new Name("Charlotte Oliveiro"), new Telegram("93210283"),
-                new Room("9/5/59"),
-                getTagSet("neighbours")),
-            new Member(new Name("David Li"), new Telegram("91031282"),
-                new Room("3/2/10"),
-                getTagSet("family")),
-            new Member(new Name("Irfan Ibrahim"), new Telegram("92492021"),
-                new Room("20/10/294"),
-                getTagSet("classmates")),
-            new Member(new Name("Roy Balakrishnan"), new Telegram("92624417"),
-                new Room("4/5/37"),
-                getTagSet("colleagues"))
+            new Member(new Name("Alex Yeoh"), new Telegram("alex_yeoh98"),
+                new Room("12/04/201"),
+                getTagSet("subcommLeader")),
+            new Member(new Name("Bernice Yu"), new Telegram("BobLim23"),
+                new Room("5/03/102"),
+                getTagSet("competitionLeader", "achiever")),
+            new Member(new Name("Charlotte Oliveiro"), new Telegram("oliveiro"),
+                new Room("3/02/301"),
+                getTagSet("team1")),
+            new Member(new Name("David Li"), new Telegram("davidLiOnly"),
+                new Room("14/06/301"),
+                getTagSet("team3")),
+            new Member(new Name("Irfan Ibrahim"), new Telegram("ibrahim_irfan"),
+                new Room("3/05/323"),
+                getTagSet("team2")),
+            new Member(new Name("Roy Balakrishnan"), new Telegram("roy_da_bomb"),
+                new Room("8/04/258"),
+                getTagSet("team2"))
         };
     }
 

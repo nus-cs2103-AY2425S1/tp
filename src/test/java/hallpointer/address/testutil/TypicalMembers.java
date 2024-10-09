@@ -23,27 +23,27 @@ public class TypicalMembers {
 
     public static final Member ALICE = new MemberBuilder().withName("Alice Pauline")
             .withRoom("6/3/20")
-            .withTelegram("94351253")
+            .withTelegram("PauLice")
             .withTags("friends").build();
     public static final Member BENSON = new MemberBuilder().withName("Benson Meier")
             .withRoom("6/10/95")
-            .withTelegram("98765432")
+            .withTelegram("benson_meier")
             .withTags("owesMoney", "friends").build();
-    public static final Member CARL = new MemberBuilder().withName("Carl Kurz").withTelegram("95352563")
+    public static final Member CARL = new MemberBuilder().withName("Carl Kurz").withTelegram("kurZ0123")
             .withRoom("7/8/10").build();
-    public static final Member DANIEL = new MemberBuilder().withName("Daniel Meier").withTelegram("87652533")
+    public static final Member DANIEL = new MemberBuilder().withName("Daniel Meier").withTelegram("whisperWhiz23")
             .withRoom("1/3/3").withTags("friends").build();
-    public static final Member ELLE = new MemberBuilder().withName("Elle Meyer").withTelegram("9482224")
+    public static final Member ELLE = new MemberBuilder().withName("Elle Meyer").withTelegram("meyer_for_lif3")
             .withRoom("4/5/55").build();
-    public static final Member FIONA = new MemberBuilder().withName("Fiona Kunz").withTelegram("9482427")
+    public static final Member FIONA = new MemberBuilder().withName("Fiona Kunz").withTelegram("FIONAKUNZ")
             .withRoom("8/10/300").build();
-    public static final Member GEORGE = new MemberBuilder().withName("George Best").withTelegram("9482442")
+    public static final Member GEORGE = new MemberBuilder().withName("George Best").withTelegram("B357650463")
             .withRoom("90/2/8").build();
 
     // Manually added
-    public static final Member HOON = new MemberBuilder().withName("Hoon Meier").withTelegram("8482424")
+    public static final Member HOON = new MemberBuilder().withName("Hoon Meier").withTelegram("meier__5002")
             .withRoom("7/7/45").build();
-    public static final Member IDA = new MemberBuilder().withName("Ida Mueller").withTelegram("8482131")
+    public static final Member IDA = new MemberBuilder().withName("Ida Mueller").withTelegram("idaMueller")
             .withRoom("6/4/38").build();
 
     // Manually added - Member's details found in {@code CommandTestUtil}

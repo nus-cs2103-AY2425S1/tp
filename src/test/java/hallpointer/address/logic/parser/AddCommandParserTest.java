@@ -76,10 +76,11 @@ public class AddCommandParserTest {
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ROOM));
 
         // multiple fields repeated
+        // note that this will fail if the Message part does not have the prefixes sorted in lexicographical order
         assertParseFailure(parser,
                 validExpectedMemberString + TELEGRAM_DESC_AMY + NAME_DESC_AMY + ROOM_DESC_AMY
                         + validExpectedMemberString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_ROOM, PREFIX_TELEGRAM));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_TELEGRAM, PREFIX_ROOM));
 
         // invalid value followed by valid value
 
