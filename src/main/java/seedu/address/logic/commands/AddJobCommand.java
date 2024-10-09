@@ -17,7 +17,7 @@ public class AddJobCommand extends Command {
 
     public static final String COMMAND_WORD = "add_job";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a job listing to the job board. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a job listing to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "JOBNAME "
             + PREFIX_COMPANY + "COMPANY "
@@ -32,7 +32,7 @@ public class AddJobCommand extends Command {
             + PREFIX_DESCRIPTION + "At Starbucks, we are looking for someone who brings a lot to the table";
 
     public static final String MESSAGE_SUCCESS = "New job added: %1$s";
-    public static final String MESSAGE_DUPLICATE_JOB = "This job already exists in the job board";
+    public static final String MESSAGE_DUPLICATE_JOB = "This job already exists in the address book";
 
     private final Job toAdd;
 
