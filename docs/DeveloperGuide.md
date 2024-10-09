@@ -322,8 +322,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Use cases
 
 (For all use cases below, the **System** is `DorManagerPro`, and the 
-**Actor** is the `user` who refers to university dormitory managers 
-unless specified otherwise.)
+**Actor** is the `user` who refers to university dormitory managers unless specified otherwise.)
 
 **Use Case: UC01 - Add a profile**
 
@@ -342,7 +341,6 @@ unless specified otherwise.)
     * 1a2. User enters command again.
   
     Steps 1a1-1a2 are repeated until the command is correct.
-
     Use case resumes from step 2.
 
 * 1c. DorManagerPro detects that the specified profile already exists.
@@ -351,7 +349,6 @@ unless specified otherwise.)
     * 1c2. User specifies another profile to add.
   
     Steps 1c1-1c2 are repeated until a valid profile is indicated.
-
     Use case resumes from step 2.
 
 * 1d. DorManagerPro detects invalid parameters specified by user.
