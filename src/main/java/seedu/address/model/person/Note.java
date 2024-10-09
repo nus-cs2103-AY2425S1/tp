@@ -5,6 +5,9 @@ import static java.util.Objects.requireNonNull;
 public class Note {
     public final String value;
 
+    public static final String MESSAGE_CONSTRAINTS =
+            "Notes should not be more than 200 characters long and it should not be blank";
+
     /**
      * Constructs a {@code Note}.
      *
@@ -13,6 +16,13 @@ public class Note {
     public Note(String note) {
         requireNonNull(note);
         value = note;
+    }
+
+    /**
+     * Returns true if a given string is less than 200 characters long
+     */
+    public static boolean isValidNote(String test) {
+        return (test.length() <= 200) && (!test.isEmpty());
     }
 
     @Override

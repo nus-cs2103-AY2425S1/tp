@@ -12,7 +12,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.NoteCommand;
 import seedu.address.model.person.Note;
 
-public class RemarkCommandParserTest {
+public class NoteCommandParserTest {
     private NoteCommandParser parser = new NoteCommandParser();
     private final String nonEmptyRemark = "Some remark.";
 
