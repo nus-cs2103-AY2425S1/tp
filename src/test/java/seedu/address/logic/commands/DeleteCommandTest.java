@@ -47,7 +47,8 @@ public class DeleteCommandTest {
     public void execute_invalidStudentIdUnfilteredList_throwsCommandException() {
         StudentId invalidStudentId = new StudentId("12345679");
         DeleteCommand deleteCommand = new DeleteCommand(invalidStudentId);
-        assertCommandFailure(deleteCommand, model, String.format(DeleteCommand.MESSAGE_PERSON_NOT_FOUND, invalidStudentId));
+        assertCommandFailure(
+                deleteCommand, model, String.format(DeleteCommand.MESSAGE_PERSON_NOT_FOUND, invalidStudentId));
     }
 
     @Test
