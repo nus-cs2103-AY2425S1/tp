@@ -23,12 +23,10 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             Phone phone = ParserUtil.parsePhone(args);
                 return new DeleteCommand(phone);
         } catch (ParseException pe) {
-
             try {
                 Index index = ParserUtil.parseIndex(args);
                 return new DeleteCommand(index);
             } catch (ParseException pe1) {
-
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe1);
             }

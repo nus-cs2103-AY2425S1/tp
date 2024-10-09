@@ -20,7 +20,8 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list or by phone number.\n"
+            + ": Deletes the person identified by the index number used in the displayed person list " +
+            "or by phone number.\n"
             + "Parameters: INDEX (must be a positive integer) or PHONE_NUMBER\n"
             + "Example: " + COMMAND_WORD + " 1 or " + COMMAND_WORD + " 98765432";
 
@@ -74,6 +75,13 @@ public class DeleteCommand extends Command {
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 
+    /**
+     * Finds a person in the list by their phone number.
+     *
+     * @param lastShownList The list of persons currently shown.
+     * @param phoneNumber The phone number of the person to delete.
+     * @return The person to delete, or null if no matching person is found.
+     */
     private Person findPersonToDeleteByPhoneNumber(List<Person> lastShownList, Phone phoneNumber) {
         for (Person person : lastShownList) {
             Phone phoneNumberOfPerson = person.getPhone();
