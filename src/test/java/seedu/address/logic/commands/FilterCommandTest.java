@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FilterCommand}.
@@ -78,7 +78,7 @@ public class FilterCommandTest {
     public void toStringMethod() {
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList("keyword"));
         FilterCommand FilterCommand = new FilterCommand(predicate);
-        String expected = FilterCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
+        String expected = FilterCommand.class.getCanonicalName() + "{predicates=" + predicate + "}";
         assertEquals(expected, FilterCommand.toString());
     }
 
