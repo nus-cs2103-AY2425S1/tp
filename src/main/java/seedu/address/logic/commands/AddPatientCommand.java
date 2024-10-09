@@ -38,26 +38,26 @@ public class AddPatientCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New patient added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This patient already exists in the address book";
 
-    private final Patient toAdd;
+    private final Patient patientToAdd;
 
     /**
      * Creates an AddCommand to add the specified {@code Patient}
      */
     public AddPatientCommand(Patient patient) {
         requireNonNull(patient);
-        this.toAdd = patient;
+        patientToAdd = patient;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
+        if (model.hasPerson(patientToAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        model.addPerson(patientToAdd);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(patientToAdd)));
     }
 
     @Override
@@ -72,13 +72,13 @@ public class AddPatientCommand extends Command {
         }
 
         AddPatientCommand otherAddPatientCommand = (AddPatientCommand) other;
-        return this.toAdd.isSamePatient(otherAddPatientCommand.toAdd);
+        return patientToAdd.isSamePatient(otherAddPatientCommand.patientToAdd);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("patientToAdd", toAdd)
+                .add("patientToAdd", patientToAdd)
                 .toString();
     }
 }
