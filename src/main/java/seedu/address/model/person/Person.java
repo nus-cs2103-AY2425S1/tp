@@ -12,8 +12,8 @@ import seedu.address.model.assignment.Assignment;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Person in the address book. Guarantees: details are present and not null, field
- * values are validated, immutable.
+ * Represents a Person in the address book.
+ * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
 
@@ -21,22 +21,28 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final Github github;
 
     // Data fields
     private final Address address;
+
+    private final Telegram telegram;
     private final Set<Tag> tags = new HashSet<>();
     private Assignment assignment;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Telegram telegram,
+                  Set<Tag> tags, Github github) {
+        requireAllNonNull(name, phone, email, address, telegram, tags, github);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.telegram = telegram;
         this.tags.addAll(tags);
+        this.github = github;
     }
 
     /**
@@ -75,6 +81,10 @@ public class Person {
         return address;
     }
 
+    public Telegram getTelegram() {
+        return telegram;
+    }
+
     public Assignment getAssignment() {
         return assignment;
     }
@@ -84,16 +94,19 @@ public class Person {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException} if
-     * modification is attempted.
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }
 
+    public Github getGithub() {
+        return github;
+    }
     /**
-     * Returns true if both persons have the same name. This defines a weaker notion of equality
-     * between two persons.
+     * Returns true if both persons have the same name.
+     * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
         if (otherPerson == this) {
@@ -122,7 +135,9 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && telegram.equals(otherPerson.telegram)
+                && tags.equals(otherPerson.tags)
+                && github.equals(otherPerson.github);
     }
 
     @Override
@@ -138,8 +153,11 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("telegram", telegram)
                 .add("tags", tags)
+                .add("github", github)
                 .add("assignment", assignment)
                 .toString();
     }
+
 }
