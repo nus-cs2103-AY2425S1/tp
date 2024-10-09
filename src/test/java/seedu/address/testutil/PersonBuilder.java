@@ -3,16 +3,16 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.client.Client;
+import seedu.address.model.client.Email;
+import seedu.address.model.client.Name;
+import seedu.address.model.client.Phone;
 import seedu.address.model.rentalinformation.Address;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
- * A utility class to help with building Person objects.
+ * A utility class to help with building Client objects.
  */
 public class PersonBuilder {
 
@@ -24,7 +24,7 @@ public class PersonBuilder {
     private Name name;
     private Phone phone;
     private Email email;
-    private Address address;
+//    private Address address;
     private Set<Tag> tags;
 
     /**
@@ -34,23 +34,23 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        address = new Address(DEFAULT_ADDRESS);
+//        address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code personToCopy}.
+     * Initializes the PersonBuilder with the data of {@code clientToCopy}.
      */
-    public PersonBuilder(Person personToCopy) {
-        name = personToCopy.getName();
-        phone = personToCopy.getPhone();
-        email = personToCopy.getEmail();
-        address = personToCopy.getAddress();
-        tags = new HashSet<>(personToCopy.getTags());
+    public PersonBuilder(Client clientToCopy) {
+        name = clientToCopy.getName();
+        phone = clientToCopy.getPhone();
+        email = clientToCopy.getEmail();
+//        address = clientToCopy.getAddress();
+        tags = new HashSet<>(clientToCopy.getTags());
     }
 
     /**
-     * Sets the {@code Name} of the {@code Person} that we are building.
+     * Sets the {@code Name} of the {@code Client} that we are building.
      */
     public PersonBuilder withName(String name) {
         this.name = new Name(name);
@@ -58,23 +58,23 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Client} that we are building.
      */
     public PersonBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
 
-    /**
-     * Sets the {@code Address} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withAddress(String address) {
-        this.address = new Address(address);
-        return this;
-    }
+//    /**
+//     * Sets the {@code Address} of the {@code Client} that we are building.
+//     */
+//    public PersonBuilder withAddress(String address) {
+//        this.address = new Address(address);
+//        return this;
+//    }
 
     /**
-     * Sets the {@code Phone} of the {@code Person} that we are building.
+     * Sets the {@code Phone} of the {@code Client} that we are building.
      */
     public PersonBuilder withPhone(String phone) {
         this.phone = new Phone(phone);
@@ -82,15 +82,17 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code Person} that we are building.
+     * Sets the {@code Email} of the {@code Client} that we are building.
      */
     public PersonBuilder withEmail(String email) {
         this.email = new Email(email);
         return this;
     }
 
-    public Person build() {
-        return new Person(name, phone, email, address, tags);
+    public Client build() {
+//        return new Client(name, phone, email, address, tags);
+        return new Client(name, phone, email, tags);
+
     }
 
 }
