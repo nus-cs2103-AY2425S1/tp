@@ -34,13 +34,17 @@ public class ReminderCommandParser implements Parser<ReminderCommand> {
         String reminderTime = argMultimap.getValue(PREFIX_REMINDER).orElse("");
 
         // Check for missing name, date, or reminder
-        if (name.isEmpty() || appointmentDate.isEmpty()) {
+        if (name.isEmpty()) {
+            throw new ParseException(MESSAGE_INVALID_DATE_FORMAT);
+        }
+        if (appointmentDate.isEmpty()) {
             throw new ParseException(MESSAGE_INVALID_DATE_FORMAT);
         }
         if (reminderTime.isEmpty()) {
             throw new ParseException(MESSAGE_INVALID_REMINDER_FORMAT);
         }
 
+        // Validate the date format
         try {
             LocalDateTime.parse(appointmentDate, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
         } catch (DateTimeParseException e) {
