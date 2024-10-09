@@ -7,10 +7,15 @@ import java.util.stream.Collectors;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Client;
+import seedu.address.model.person.Contact;
+import seedu.address.model.person.Date;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Service;
+import seedu.address.model.person.Vendor;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -40,10 +45,24 @@ public class SampleDataUtil {
         };
     }
 
+    public static Contact[] getSampleContacts() {
+        return new Contact[] {
+            new Client(new Name("A"), new Phone("12345678"), new Email("a@a.com"), new Address("A"),
+                new Date("01 Jan 2000"),
+                getTagSet("test")),
+            new Vendor(new Name("B"), new Phone("12345678"), new Email("b@b.com"), new Address("B"),
+                new Service("Catering"),
+                getTagSet("test")),
+        };
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
+        }
+        for (Contact sampleContact : getSampleContacts()) {
+            sampleAb.addContact(sampleContact);
         }
         return sampleAb;
     }
