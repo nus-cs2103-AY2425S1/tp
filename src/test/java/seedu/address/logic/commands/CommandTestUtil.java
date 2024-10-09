@@ -28,7 +28,8 @@ public class CommandTestUtil {
     public static final String VALID_GROUP_NAME = "Study Group";
     public static final String OTHER_VALID_GROUP_NAME = "Meow";
     public static final List<String> VALID_STUDENTS = new ArrayList<>(List.of(new String[]{"Bob", "John", "Harry"}));
-    public static final List<String> OTHER_VALID_STUDENTS = new ArrayList<>(List.of(new String[]{"Bob", "John", "Dick"}));
+    public static final List<String> OTHER_VALID_STUDENTS = new ArrayList<>(
+            List.of(new String[]{"Bob", "John", "Dick"}));
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "11111111";

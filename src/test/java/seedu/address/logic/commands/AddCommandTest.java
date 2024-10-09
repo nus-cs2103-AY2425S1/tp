@@ -166,7 +166,7 @@ public class AddCommandTest {
 
         @Override
         public void addGroup(Group group) {
-            throw new AssertionError("This method should not be called.");d .
+            throw new AssertionError("This method should not be called.");
         }
     }
 
