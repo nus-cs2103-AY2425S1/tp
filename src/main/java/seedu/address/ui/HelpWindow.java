@@ -15,7 +15,8 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
+    public static final String USERGUIDE_URL = "https://ay2425s1-cs2103t-w11-3.github.io/tp/UserGuide.html#quick-start";
+    public static final String PRODUCT_WEBSITE = "https://ay2425s1-cs2103t-w11-3.github.io/tp/";
     public static final String HELP_MESSAGE = "Welcome to the AcademyAssist Help Window!\n\n"
             + "Here are some useful commands to get started:\n\n"
             + "1. add: Adds a student's details\n"
@@ -34,13 +35,16 @@ public class HelpWindow extends UiPart<Stage> {
             + "   Format: clear\n\n"
             + "8. exit: Exits the program\n"
             + "   Format: exit\n\n"
-            + "For more detailed information, please refer to the user guide: " + USERGUIDE_URL;
+            + "For more detailed information, please refer to the links below\n";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
 
     @FXML
-    private Button copyButton;
+    private Button copyUserGuideButton;
+
+    @FXML
+    private Button copyProductWebsiteButton;
 
     @FXML
     private TextArea helpMessageArea;
@@ -113,10 +117,22 @@ public class HelpWindow extends UiPart<Stage> {
      * Copies the URL to the user guide to the clipboard.
      */
     @FXML
-    private void copyUrl() {
+    private void copyUserGuideUrl() {
+        copyToClipboard(USERGUIDE_URL);
+    }
+
+    /**
+     * Copies the URL to the README to the clipboard.
+     */
+    @FXML
+    private void copyProductWebsite() {
+        copyToClipboard(PRODUCT_WEBSITE);
+    }
+
+    private void copyToClipboard(String content) {
         final Clipboard clipboard = Clipboard.getSystemClipboard();
         final ClipboardContent url = new ClipboardContent();
-        url.putString(USERGUIDE_URL);
+        url.putString(content);
         clipboard.setContent(url);
     }
 }
