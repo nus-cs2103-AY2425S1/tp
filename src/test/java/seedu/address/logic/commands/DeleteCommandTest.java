@@ -9,6 +9,8 @@ import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPhone.INVALID_PHONE_NUM_2;
+import static seedu.address.testutil.TypicalPhone.PHONE_NUM_1;
 
 import org.junit.jupiter.api.Test;
 
@@ -79,6 +81,13 @@ public class DeleteCommandTest {
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
+    @Test
+    public void execute_invalidPhoneNum_UnfilteredList_throwsCommandException() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        DeleteCommand deleteCommand = new DeleteCommand(INVALID_PHONE_NUM_2);
+
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PHONE_NUMBER);
+    }
     @Test
     public void equals() {
         DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON);
