@@ -61,6 +61,9 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+    public Person setTags(Set<Tag> newTags) {
+        return new Person(this.name, this.phone, this.email, this.address, newTags);
+    }
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
