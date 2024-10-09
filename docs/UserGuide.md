@@ -162,7 +162,7 @@ Deletes the insurance plan (by id) from the client (also by id)
 
 Format: `deleteInsurance <client_id> id/ <insurance_id>`
 
-* If the <client_id> is invalid or the user does not have the insurance plan <insurance_id>, 
+* If the <client_id> is invalid or the client does not have the insurance plan of id <insurance_id>, 
 the user will be informed with an error message.
 
 Examples:
