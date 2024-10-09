@@ -25,7 +25,8 @@ public class RejectCommand extends Command {
             + PREFIX_NAME + "Jane Smith "
             + PREFIX_JOB + "Data Analyst";
 
-    public static final String MESSAGE_REJECT_PERSON_SUCCESS = "Rejected Candidate: %1$s";
+    public static final String MESSAGE_REJECT_PERSON_SUCCESS =
+            "Candidate %1$s has been successfully marked as rejected.";
     public static final String MESSAGE_ALREADY_REJECTED = "Error: Candidate %1$s is already marked as rejected.";
     public static final String MESSAGE_PERSON_NOT_FOUND = "This candidate does not exist in the address book.";
 
@@ -55,7 +56,8 @@ public class RejectCommand extends Command {
             throw new CommandException(String.format(MESSAGE_ALREADY_REJECTED, name));
         }
         personToReject.markAsRejected();
-        return new CommandResult(String.format(MESSAGE_REJECT_PERSON_SUCCESS, personToReject));
+        return new CommandResult(String.format(MESSAGE_REJECT_PERSON_SUCCESS,
+                personToReject.getName()));
     }
 
     @Override
