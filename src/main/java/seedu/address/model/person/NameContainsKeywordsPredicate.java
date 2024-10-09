@@ -1,7 +1,6 @@
 package seedu.address.model.person;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
@@ -12,7 +11,7 @@ import seedu.address.commons.util.ToStringBuilder;
 public class NameContainsKeywordsPredicate extends ContainsKeywordsPredicate {
 
     public NameContainsKeywordsPredicate(List<String> keywords) {
-         super(keywords);
+        super(keywords);
     }
 
     @Override
