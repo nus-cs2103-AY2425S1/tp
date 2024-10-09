@@ -2,15 +2,17 @@ package seedu.address.model.sort;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
-import static seedu.address.model.tag.Tag.isValidTagName;
 
+/**
+ * Represents a parameter for Sort command
+ */
 public class SortParam {
 
     public static final String MESSAGE_CONSTRAINTS = "Sort parameters can only be 'name' or 'class'";
 
     private SortField field;
 
-    private enum SortField{
+    private enum SortField {
         NAME,
         CLASS
     };

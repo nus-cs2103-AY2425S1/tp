@@ -123,6 +123,9 @@ public class ParserUtil {
         return tagSet;
     }
 
+    /**
+     * Prases {@code String sortParam} into a {@code SortParam}.
+     */
     public static SortParam parseSortCommandParam(String sortParam) throws ParseException {
         requireNonNull(sortParam);
         String trimmedSortParam = sortParam.trim();

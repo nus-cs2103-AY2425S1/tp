@@ -10,7 +10,7 @@ import seedu.address.model.sort.SortParam;
 /**
  * Sorts contacts based on name or class.
  */
-public class SortCommand extends Command{
+public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
 
