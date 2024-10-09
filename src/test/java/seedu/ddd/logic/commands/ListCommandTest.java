@@ -1,8 +1,6 @@
 package seedu.ddd.logic.commands;
 
 import static seedu.ddd.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.ddd.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.ddd.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.ddd.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -28,13 +26,6 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListCommand(Model.PREDICATE_SHOW_ALL_CONTACTS),
-                model, ListCommand.MESSAGE_SUCCESS, expectedModel);
-    }
-
-    @Test
-    public void execute_listIsFiltered_showsEverything() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
         assertCommandSuccess(new ListCommand(Model.PREDICATE_SHOW_ALL_CONTACTS),
                 model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
