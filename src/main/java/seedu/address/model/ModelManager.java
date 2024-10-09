@@ -3,7 +3,9 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -13,6 +15,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.client.Client;
 import seedu.address.model.person.Person;
+import seedu.address.storage.JsonClientBookStorage;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -28,14 +31,16 @@ public class ModelManager implements Model {
     // note that filteredClients may be removed if we decide not to keep the filtering feature
     private final FilteredList<Client> filteredClients;
 
+    private Path clientBookFilePath = Paths.get("data" , "clientbook.json");
+
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, ReadOnlyClientBook clientBook) {
         requireAllNonNull(addressBook, userPrefs, clientBook);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs  +
-                " and client book " + clientBook);
+        logger.fine("Initializing with address book: "
+                + addressBook + " and user prefs " + userPrefs + " and client book " + clientBook);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
@@ -168,6 +173,12 @@ public class ModelManager implements Model {
     @Override
     public void deleteClient(Client target) {
         clientBook.removeClient(target);
+        try {
+            JsonClientBookStorage jsonClientBookStorage = new JsonClientBookStorage(clientBookFilePath);
+            jsonClientBookStorage.saveClientBook(clientBook);
+        } catch (IOException e) {
+            System.out.println("Error while saving ClientBook: " + e.getMessage());
+        }
     }
 
     @Override
@@ -216,4 +227,5 @@ public class ModelManager implements Model {
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
+
 }

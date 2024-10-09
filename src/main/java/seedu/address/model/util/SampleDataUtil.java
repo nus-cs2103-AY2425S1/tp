@@ -64,18 +64,18 @@ public class SampleDataUtil {
 
     public static Client[] getSampleProperties() {
         return new Client[] {
-                new Buyer(new seedu.address.model.client.Name("Alex Yeoh"),
-                        new seedu.address.model.client.Phone("87438807"),
-                        new seedu.address.model.client.Email("alexyeoh@example.com")),
-                new Seller(new seedu.address.model.client.Name("Bernice Yu"),
-                        new seedu.address.model.client.Phone("99272758"),
-                        new seedu.address.model.client.Email("berniceyu@example.com")),
-                new Buyer(new seedu.address.model.client.Name("Charlotte Oliveiro"),
-                        new seedu.address.model.client.Phone("93210283"),
-                        new seedu.address.model.client.Email("charlotte@example.com")),
-                new Seller(new seedu.address.model.client.Name("David Li"),
-                        new seedu.address.model.client.Phone("91031282"),
-                        new seedu.address.model.client.Email("lidavid@example.com"))
+            new Buyer(new seedu.address.model.client.Name("Alex Yeoh"),
+                    new seedu.address.model.client.Phone("87438807"),
+                    new seedu.address.model.client.Email("alexyeoh@example.com")),
+            new Seller(new seedu.address.model.client.Name("Bernice Yu"),
+                    new seedu.address.model.client.Phone("99272758"),
+                    new seedu.address.model.client.Email("berniceyu@example.com")),
+            new Buyer(new seedu.address.model.client.Name("Charlotte Oliveiro"),
+                    new seedu.address.model.client.Phone("93210283"),
+                    new seedu.address.model.client.Email("charlotte@example.com")),
+            new Seller(new seedu.address.model.client.Name("David Li"),
+                    new seedu.address.model.client.Phone("91031282"),
+                    new seedu.address.model.client.Email("lidavid@example.com"))
         };
     }
     public static ReadOnlyClientBook getSampleClientBook() {

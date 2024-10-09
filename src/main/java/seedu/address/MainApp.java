@@ -16,14 +16,18 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
+import seedu.address.model.ClientBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyClientBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
+import seedu.address.storage.ClientBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonClientBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
@@ -58,7 +62,8 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        ClientBookStorage clientBookStorage = new JsonClientBookStorage(userPrefs.getClientBookFilePath());
+        storage = new StorageManager(addressBookStorage, userPrefsStorage, clientBookStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -76,7 +81,9 @@ public class MainApp extends Application {
         logger.info("Using data file : " + storage.getAddressBookFilePath());
 
         Optional<ReadOnlyAddressBook> addressBookOptional;
+        Optional<ReadOnlyClientBook> clientBookOptional;
         ReadOnlyAddressBook initialData;
+        ReadOnlyClientBook initialClientData;
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
@@ -90,7 +97,21 @@ public class MainApp extends Application {
             initialData = new AddressBook();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        try {
+            clientBookOptional = storage.readClientBook();
+            if (!clientBookOptional.isPresent()) {
+                logger.info("Creating a new client data file " + storage.getClientBookFilePath()
+                        + " populated with a sample ClientBook.");
+            }
+            initialClientData = clientBookOptional.orElseGet(SampleDataUtil::getSampleClientBook);
+            System.out.println(initialClientData);
+        } catch (DataLoadingException e) {
+            logger.warning("Data file at " + storage.getClientBookFilePath() + " could not be loaded."
+                    + " Will be starting with an empty ClientBook.");
+            initialClientData = new ClientBook();
+        }
+
+        return new ModelManager(initialData, userPrefs, initialClientData);
     }
 
     private void initLogging(Config config) {

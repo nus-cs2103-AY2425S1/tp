@@ -15,9 +15,9 @@ import seedu.address.model.ClientBook;
 import seedu.address.model.client.Client;
 
 /**
- * A utility class containing a list of {@code Buyer} objects to be used in tests.
+ * A utility class containing a list of {@code Client} objects to be used in tests.
  */
-public class TypicalBuyer {
+public class TypicalClient {
     public static final Client ALICE = new ClientBuilder().withName("Alice Pauline")
             .withEmail("alice@example.com")
             .withPhone("94351253")
@@ -49,7 +49,7 @@ public class TypicalBuyer {
             .withEmail(VALID_EMAIL_BOB)
             .build();
 
-    private TypicalBuyer() {} // prevents instantiation
+    private TypicalClient() {} // prevents instantiation
 
     /**
      * Returns an {@code ClientBook} with all the typical buyer.
