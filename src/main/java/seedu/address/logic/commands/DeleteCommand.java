@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -51,7 +52,10 @@ public class DeleteCommand extends Command {
             personToDeleteList.add(personToDelete);
             model.deletePerson(personToDelete);
         }
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.listFormat(personToDeleteList)));
+        // Create a copy of the personToDeleteList and reverse it
+        List<Person> reversedPersonToDeleteList = new ArrayList<>(personToDeleteList);
+        Collections.reverse(reversedPersonToDeleteList);
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.listFormat(reversedPersonToDeleteList)));
     }
 
     /**
