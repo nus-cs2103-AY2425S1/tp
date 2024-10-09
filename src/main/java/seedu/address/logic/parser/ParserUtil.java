@@ -181,20 +181,20 @@ public class ParserUtil {
      */
     public static Appointment parseAppointment(String appointment) throws ParseException {
         requireNonNull(appointment);
-        String[] trimmedAppointment = appointment.trim().split(":");
-        if (trimmedAppointment.length < 3) {
+        String[] trimmedAppointments = appointment.trim().split(":");
+        if (trimmedAppointments.length < 3) {
             throw new ParseException(Appointment.MESSAGE_CONSTRAINTS);
         }
 
-        if (!Appointment.isValidAppointmentName(trimmedAppointment[0])) {
+        if (!Appointment.isValidAppointmentName(trimmedAppointments[0])) {
             throw new ParseException(Appointment.MESSAGE_CONSTRAINTS);
         }
 
-        if (!DateUtil.isValidDate(trimmedAppointment[1])) {
+        if (!DateUtil.isValidDate(trimmedAppointments[1])) {
             throw new ParseException(Appointment.MESSAGE_CONSTRAINTS_APPT_DATE_WRONG_FORMAT);
         }
         try {
-            return new Appointment(trimmedAppointment[0], trimmedAppointment[1], trimmedAppointment[2]);
+            return new Appointment(trimmedAppointments[0], trimmedAppointments[1], trimmedAppointments[2]);
         } catch (IllegalValueException e) {
             throw new ParseException(AddApptCommand.MESSAGE_USAGE);
         }

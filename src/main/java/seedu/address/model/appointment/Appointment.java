@@ -68,6 +68,33 @@ public class Appointment implements Comparable<Appointment> {
 
     /**
      * Checks if the given date and time period String clashes with this appointment.
+     * <pre>
+     *      Clashes:                No clash
+     *            s    e               s    e        |
+     *  Appt 1:   |----|               |----|        |
+     *  Appt 2: |------|            |--|             |
+     *         os  oe              os  oe            |
+     *                                               |
+     *            s    e              s    e         |
+     *  Appt 1:   |----|              |----|         |
+     *  Appt 2:   |------|                 |--|      |
+     *            os     oe                os  oe    |
+     *                                               |
+     *            s    e                             |
+     *  Appt 1:   |----|                             |
+     *  Appt 2: |---------|                          |
+     *         os        oe                          |
+     *                                               |
+     *          s         e                          |
+     *  Appt 1: |---------|                          |
+     *  Appt 2:   |----|                             |
+     *           os   oe                             |
+     *                                               |
+     *          s         e                          |
+     *  Appt 1: |---------|                          |
+     *  Appt 2: |---------|                          |
+     *         os        oe                          |
+     * </pre>
      *
      * @param date String of the date to check.
      * @param timePeriod String of the time Period to check.
@@ -89,17 +116,12 @@ public class Appointment implements Comparable<Appointment> {
             return true;
         }
 
-        boolean isTimePeriodStartingDuringAppt = startTime.isAfter(appointmentStartTime)
-                                                 && startTime.isBefore(appointmentEndTime);
-        boolean isTimePeriodEndingDuringAppt = endTime.isAfter(appointmentStartTime)
-                                               && endTime.isBefore(appointmentEndTime);
-        boolean isApptWithinTimePeriod = startTime.isBefore(appointmentStartTime)
-                                         && endTime.isAfter(appointmentEndTime);
-        boolean isOverlapping = startTime.equals(appointmentStartTime) || endTime.equals(appointmentEndTime);
-        return isTimePeriodEndingDuringAppt
-               || isApptWithinTimePeriod
-               || isTimePeriodStartingDuringAppt
-               || isOverlapping;
+        boolean isApptEndingDuringTimePeriod = appointmentEndTime.isBefore(startTime)
+                                               && !(appointmentStartTime.isBefore(endTime));
+        boolean isApptStartingDuringTimePeriod = appointmentEndTime.isAfter(startTime)
+                                                 && !(appointmentStartTime.isAfter(endTime));
+
+        return isApptEndingDuringTimePeriod || isApptStartingDuringTimePeriod;
     }
 
     /**
