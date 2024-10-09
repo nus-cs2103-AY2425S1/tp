@@ -16,34 +16,30 @@ import seedu.address.model.client.Client;
 /**
  * Adds a client to the address book.
  */
-public class AddCommand extends Command {
+public class ClientAddCommand extends Command {
 
-    public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_WORD = "cadd";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a client to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
-//            + PREFIX_ADDRESS + "ADDRESS "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
-//            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New client added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This client already exists in the address book";
-
     private final Client toAdd;
-
     /**
-     * Creates an AddCommand to add the specified {@code Client}
+     * Creates an ClientAddCommand to add the specified {@code Client}
      */
-    public AddCommand(Client client) {
+    public ClientAddCommand(Client client) {
         requireNonNull(client);
         toAdd = client;
     }
@@ -67,12 +63,12 @@ public class AddCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddCommand)) {
+        if (!(other instanceof ClientAddCommand)) {
             return false;
         }
 
-        AddCommand otherAddCommand = (AddCommand) other;
-        return toAdd.equals(otherAddCommand.toAdd);
+        ClientAddCommand otherClientAddCommand = (ClientAddCommand) other;
+        return toAdd.equals(otherClientAddCommand.toAdd);
     }
 
     @Override
