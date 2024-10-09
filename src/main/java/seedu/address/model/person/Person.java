@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -22,7 +23,7 @@ public class Person {
     private final Email email;
 
     // Data fields
-    private final Address address;
+    private final Optional<Address> address;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -33,7 +34,19 @@ public class Person {
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
+        this.address = Optional.of(address);
+        this.tags.addAll(tags);
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Person(Name name, Phone phone, Email email, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = Optional.empty();
         this.tags.addAll(tags);
     }
 
@@ -50,7 +63,7 @@ public class Person {
     }
 
     public Address getAddress() {
-        return address;
+        return address.orElse(null);
     }
 
     /**
@@ -105,13 +118,14 @@ public class Person {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
+        ToStringBuilder builder = new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
-                .add("email", email)
-                .add("address", address)
-                .add("tags", tags)
-                .toString();
+                .add("email", email);
+        address.ifPresent(addr -> builder.add("address", addr));
+        builder.add("tags", tags);
+
+        return builder.toString();
     }
 
 }
