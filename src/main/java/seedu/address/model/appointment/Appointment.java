@@ -105,7 +105,7 @@ public class Appointment implements Comparable<Appointment> {
     }
 
     /**
-     *  checks if a given string is a valid appointment time period.
+     * Checks if a given string is a valid appointment time period.
      */
     public static void checkIsTimePeriodValid(String test) {
         checkArgument(isValidAppointmentTimePeriodFormat(test),
