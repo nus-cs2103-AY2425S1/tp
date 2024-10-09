@@ -7,8 +7,8 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
-import seedu.address.model.project.Project;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.project.Project;
 import seedu.address.model.project.UniqueProjectList;
 
 /**
@@ -120,7 +120,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Replaces the given project {@code target} in the list with {@code editedProject}.
      * {@code target} must exist in the address book.
-     * The project identity of {@code editedProject} must not be the same as another existing project in the address book.
+     * The project identity of {@code editedProject} must not be the same as another existing project in the
+     * address book.
      */
     public void setProject(Project target, Project editedProject) {
         requireNonNull(editedProject);

@@ -1,15 +1,10 @@
 package seedu.address.model.project;
 
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.project.Name;
-import seedu.address.model.project.Id;
-
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
-
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.Objects;
+
+import seedu.address.commons.util.ToStringBuilder;
 
 /**
  * Represents a Project in the address book.
