@@ -41,12 +41,8 @@ public class Messages {
                 .append(person.getPhone())
                 .append("; Email: ")
                 .append(person.getEmail())
-                .append("; Address: ")
-                .append(person.getAddress())
                 .append("; Relationship: ")
-                .append(person.getRelationship())
-                .append("; Tags: ");
-        person.getTags().forEach(builder::append);
+                .append(person.getRelationship());
         return builder.toString();
     }
 
