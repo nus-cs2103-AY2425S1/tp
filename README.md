@@ -1,6 +1,6 @@
 # Nom Nom Notifier
 
-[![CI Status](https://github.com/AY2425S1-CS2103T-T13-2/tp/workflows/Java%20CI/badge.svg?branch=master&v=1)](https://github.com/AY2425S1-CS2103T-T13-2/tp/actions)
+[![CI Status](https://github.com/AY2425S1-CS2103T-T13-2/tp/workflows/gradle.yml/badge.svg?branch=master)](https://github.com/AY2425S1-CS2103T-T13-2/tp/actions)
 
 ![Ui](docs/images/Ui.png)
 ## Introduction
