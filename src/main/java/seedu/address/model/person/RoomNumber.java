@@ -9,9 +9,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class RoomNumber {
 
-    public static final String MESSAGE_CONSTRAINTS = "A string no longer than length 7 in the form of “xx-xxxx” " +
-            "x are integers from “0” to “9”. E.g. “05-5053”. The first 2 integers are floor numbers and the other 4 " +
-            "integers are the room number on the floor. No spaces are allowed in between each character.";
+    public static final String MESSAGE_CONSTRAINTS = "A string no longer than length 7 in the form of “xx-xxxx” "
+            + "x are integers from “0” to “9”. E.g. “05-5053”. The first 2 integers are floor numbers and the other 4 "
+            + "integers are the room number on the floor. No spaces are allowed in between each character.";
 
 
     /*
