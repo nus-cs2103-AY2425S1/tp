@@ -1,10 +1,10 @@
 package seedu.address.model.person;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents a Person's Contract End Date in the address book.
@@ -13,8 +13,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class ContractEndDate {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Contract End Date should only contain numeric characters and dashes in the format 'YYYY-MM-DD', and it" +
-                    " should not be blank";
+            "Contract End Date should only contain numeric characters and dashes in the format 'YYYY-MM-DD', and it"
+                    + " should not be blank";
 
     /*
      * The first character of the address must not be a whitespace,

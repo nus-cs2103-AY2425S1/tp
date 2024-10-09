@@ -19,7 +19,7 @@ public class Department {
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public final String department;
-    public String value;
+    public final String value;
 
     /**
      * Constructs a {@code Department}.
