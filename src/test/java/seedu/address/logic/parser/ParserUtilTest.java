@@ -18,6 +18,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.RegisterNumber;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -25,12 +26,14 @@ public class ParserUtilTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
+    private static final String INVALID_REGISTER_NUMBER = "41";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
+    private static final String VALID_REGISTER_NUMBER = "1";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
@@ -146,6 +149,29 @@ public class ParserUtilTest {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+    }
+
+    @Test
+    public void parseRegisterNumber_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseRegisterNumber((String) null));
+    }
+
+    @Test
+    public void parseRegisterNumber_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseRegisterNumber(INVALID_REGISTER_NUMBER));
+    }
+
+    @Test
+    public void parseRegisterNumber_validValueWithoutWhitespace_returnsRegisterNumber() throws Exception {
+        RegisterNumber expectedRegisterNumber = new RegisterNumber(VALID_REGISTER_NUMBER);
+        assertEquals(expectedRegisterNumber, ParserUtil.parseRegisterNumber(VALID_REGISTER_NUMBER));
+    }
+
+    @Test
+    public void parseRegisterNumber_validValueWithWhitespace_returnsTrimmedRegisterNumber() throws Exception {
+        String registerNumberWithWhitespace = WHITESPACE + VALID_REGISTER_NUMBER + WHITESPACE;
+        RegisterNumber expectedRegisterNumber = new RegisterNumber(VALID_REGISTER_NUMBER);
+        assertEquals(expectedRegisterNumber, ParserUtil.parseRegisterNumber(registerNumberWithWhitespace));
     }
 
     @Test
