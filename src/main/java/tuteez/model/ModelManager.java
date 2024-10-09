@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import tuteez.commons.core.GuiSettings;
 import tuteez.commons.core.LogsCenter;
+import tuteez.model.person.Name;
 import tuteez.model.person.Person;
 
 /**
@@ -109,6 +110,15 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public Person findPersonByName(Name targetName) {
+        requireNonNull(targetName);
+        return addressBook.getPersonList().stream()
+                .filter(person -> person.getName().fullName.equalsIgnoreCase(targetName.fullName))
+                .findFirst()
+                .orElse(null);
     }
 
     //=========== Filtered Person List Accessors =============================================================
