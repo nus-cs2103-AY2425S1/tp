@@ -1,18 +1,18 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
-
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents the price the average user expects to spend on a single meal at at vendor.
- * Guarantees: immutable; is valid as declared in {@link #isValidPrice(double)}
+ * Represents the price the average user expects to spend on a single meal at at
+ * vendor. Guarantees: immutable; is valid as declared in
+ * {@link #isValidPrice(double)}
  */
 public class Price implements Comparable<Price> {
 
+    public static final String MESSAGE_INVALID_PRICE = "Price should"
+            + "only be a nonegative number, with two or less decimal points (can also have no decimals)";
     public final double value;
-    public static final String MESSAGE_INVALID_PRICE =
-            "Price should only be a nonegative number, with two or less decimal points (can also have no decimals)";
 
     /**
      * Constructs a {@code Price}.
@@ -62,4 +62,3 @@ public class Price implements Comparable<Price> {
         return Double.compare(value, other.value);
     }
 }
-
