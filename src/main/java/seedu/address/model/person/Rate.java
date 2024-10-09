@@ -24,7 +24,7 @@ public class Rate extends Fee {
 
     @Override
     public String toString() {
-        return super.toString() + "/h";
+        return super.toString();
     }
 
     @Override
