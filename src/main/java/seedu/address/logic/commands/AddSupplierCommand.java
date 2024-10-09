@@ -11,16 +11,16 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.supplier.Supplier;
 
 /**
- * Adds a person to the address book.
+ * Adds a supplier to the address book.
  */
-public class AddCommand extends Command {
+public class AddSupplierCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a supplier to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -35,17 +35,17 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New supplier added: %1$s";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This supplier already exists in the address book";
 
-    private final Person toAdd;
+    final Supplier toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddSupplierCommand to add the specified {@code Supplier}
      */
-    public AddCommand(Person person) {
-        requireNonNull(person);
-        toAdd = person;
+    public AddSupplierCommand(Supplier supplier) {
+        requireNonNull(supplier);
+        toAdd = supplier;
     }
 
     @Override
@@ -67,12 +67,12 @@ public class AddCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddCommand)) {
+        if (!(other instanceof AddSupplierCommand)) {
             return false;
         }
 
-        AddCommand otherAddCommand = (AddCommand) other;
-        return toAdd.equals(otherAddCommand.toAdd);
+        AddSupplierCommand otherAddSupplierCommand = (AddSupplierCommand) other;
+        return toAdd.equals(otherAddSupplierCommand.toAdd);
     }
 
     @Override
