@@ -106,6 +106,11 @@ public class MarkCommandTest {
         // different types -> returns false
         assertFalse(markFirstCommand.equals(1));
 
+        // different date -> returns false
+        ContactDate validDate2 = new ContactDateBuilder().withNotes("different note").build();
+        MarkCommand markFirstCommandDifferentDate = new MarkCommand(INDEX_FIRST_PERSON, validDate2);
+        assertFalse(markFirstCommand.equals(markFirstCommandDifferentDate));
+
         // null -> returns false
         assertFalse(markFirstCommand.equals(null));
 
@@ -125,6 +130,11 @@ public class MarkCommandTest {
         // same values -> returns true
         MarkCommand markFirstNricCopy = new MarkCommand(new Nric(VALID_NRIC_AMY), validDate);
         assertTrue(markFirstNric.equals(markFirstNricCopy));
+
+        // different date -> returns false
+        ContactDate validDate2 = new ContactDateBuilder().withNotes("different note").build();
+        MarkCommand markFirstNricDifferentDate = new MarkCommand(new Nric(VALID_NRIC_AMY), validDate2);
+        assertFalse(markFirstNric.equals(markFirstNricDifferentDate));
 
         // different types -> returns false
         assertFalse(markFirstNric.equals(1));
