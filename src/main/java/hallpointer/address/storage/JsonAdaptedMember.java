@@ -13,7 +13,7 @@ import hallpointer.address.commons.exceptions.IllegalValueException;
 import hallpointer.address.model.member.Member;
 import hallpointer.address.model.member.Name;
 import hallpointer.address.model.member.Room;
-import hallpointer.address.model.member.TelegramHandle;
+import hallpointer.address.model.member.Telegram;
 import hallpointer.address.model.tag.Tag;
 
 /**
@@ -24,7 +24,7 @@ class JsonAdaptedMember {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Member's %s field is missing!";
 
     private final String name;
-    private final String telegramHandle;
+    private final String telegram;
     private final String room;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
@@ -32,11 +32,11 @@ class JsonAdaptedMember {
      * Constructs a {@code JsonAdaptedMember} with the given member details.
      */
     @JsonCreator
-    public JsonAdaptedMember(@JsonProperty("name") String name, @JsonProperty("telegramHandle") String telegramHandle,
+    public JsonAdaptedMember(@JsonProperty("name") String name, @JsonProperty("telegram") String telegram,
                              @JsonProperty("room") String room,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
-        this.telegramHandle = telegramHandle;
+        this.telegram = telegram;
         this.room = room;
         if (tags != null) {
             this.tags.addAll(tags);
@@ -48,7 +48,7 @@ class JsonAdaptedMember {
      */
     public JsonAdaptedMember(Member source) {
         name = source.getName().fullName;
-        telegramHandle = source.getTelegramHandle().value;
+        telegram = source.getTelegram().value;
         room = source.getRoom().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -74,14 +74,14 @@ class JsonAdaptedMember {
         }
         final Name modelName = new Name(name);
 
-        if (telegramHandle == null) {
+        if (telegram == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    TelegramHandle.class.getSimpleName()));
+                    Telegram.class.getSimpleName()));
         }
-        if (!TelegramHandle.isValidTelegramHandle(telegramHandle)) {
-            throw new IllegalValueException(TelegramHandle.MESSAGE_CONSTRAINTS);
+        if (!Telegram.isValidTelegram(telegram)) {
+            throw new IllegalValueException(Telegram.MESSAGE_CONSTRAINTS);
         }
-        final TelegramHandle modelTelegramHandle = new TelegramHandle(telegramHandle);
+        final Telegram modelTelegram = new Telegram(telegram);
 
         if (room == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Room.class.getSimpleName()));
@@ -92,7 +92,7 @@ class JsonAdaptedMember {
         final Room modelRoom = new Room(room);
 
         final Set<Tag> modelTags = new HashSet<>(memberTags);
-        return new Member(modelName, modelTelegramHandle, modelRoom, modelTags);
+        return new Member(modelName, modelTelegram, modelRoom, modelTags);
     }
 
 }

@@ -18,7 +18,7 @@ public class Member {
 
     // Identity fields
     private final Name name;
-    private final TelegramHandle telegramHandle;
+    private final Telegram telegram;
 
     // Data fields
     private final Room room;
@@ -27,10 +27,10 @@ public class Member {
     /**
      * Every field must be present and not null.
      */
-    public Member(Name name, TelegramHandle telegramHandle, Room room, Set<Tag> tags) {
-        requireAllNonNull(name, telegramHandle, room, tags);
+    public Member(Name name, Telegram telegram, Room room, Set<Tag> tags) {
+        requireAllNonNull(name, telegram, room, tags);
         this.name = name;
-        this.telegramHandle = telegramHandle;
+        this.telegram = telegram;
         this.room = room;
         this.tags.addAll(tags);
     }
@@ -39,8 +39,8 @@ public class Member {
         return name;
     }
 
-    public TelegramHandle getTelegramHandle() {
-        return telegramHandle;
+    public Telegram getTelegram() {
+        return telegram;
     }
 
     public Room getRoom() {
@@ -85,7 +85,7 @@ public class Member {
 
         Member otherMember = (Member) other;
         return name.equals(otherMember.name)
-                && telegramHandle.equals(otherMember.telegramHandle)
+                && telegram.equals(otherMember.telegram)
                 && room.equals(otherMember.room)
                 && tags.equals(otherMember.tags);
     }
@@ -93,14 +93,14 @@ public class Member {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, telegramHandle, room, tags);
+        return Objects.hash(name, telegram, room, tags);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
-                .add("telegramHandle", telegramHandle)
+                .add("telegram", telegram)
                 .add("room", room)
                 .add("tags", tags)
                 .toString();

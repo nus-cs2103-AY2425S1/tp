@@ -4,7 +4,7 @@ import static hallpointer.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static hallpointer.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static hallpointer.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_HANDLE_BOB;
+import static hallpointer.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
 import static hallpointer.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static hallpointer.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static hallpointer.address.logic.commands.CommandTestUtil.showMemberAtIndex;
@@ -55,11 +55,11 @@ public class EditCommandTest {
         Member lastMember = model.getFilteredMemberList().get(indexLastMember.getZeroBased());
 
         MemberBuilder memberInList = new MemberBuilder(lastMember);
-        Member editedMember = memberInList.withName(VALID_NAME_BOB).withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB)
+        Member editedMember = memberInList.withName(VALID_NAME_BOB).withTelegram(VALID_TELEGRAM_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
 
         EditMemberDescriptor descriptor = new EditMemberDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withTelegram(VALID_TELEGRAM_BOB).withTags(VALID_TAG_HUSBAND).build();
         EditCommand editCommand = new EditCommand(indexLastMember, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MEMBER_SUCCESS, Messages.format(editedMember));

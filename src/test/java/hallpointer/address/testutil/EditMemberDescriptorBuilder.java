@@ -8,7 +8,7 @@ import hallpointer.address.logic.commands.EditCommand.EditMemberDescriptor;
 import hallpointer.address.model.member.Member;
 import hallpointer.address.model.member.Name;
 import hallpointer.address.model.member.Room;
-import hallpointer.address.model.member.TelegramHandle;
+import hallpointer.address.model.member.Telegram;
 import hallpointer.address.model.tag.Tag;
 
 /**
@@ -32,7 +32,7 @@ public class EditMemberDescriptorBuilder {
     public EditMemberDescriptorBuilder(Member member) {
         descriptor = new EditMemberDescriptor();
         descriptor.setName(member.getName());
-        descriptor.setTelegramHandle(member.getTelegramHandle());
+        descriptor.setTelegram(member.getTelegram());
         descriptor.setRoom(member.getRoom());
         descriptor.setTags(member.getTags());
     }
@@ -46,10 +46,10 @@ public class EditMemberDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code TelegramHandle} of the {@code EditMemberDescriptor} that we are building.
+     * Sets the {@code Telegram} of the {@code EditMemberDescriptor} that we are building.
      */
-    public EditMemberDescriptorBuilder withTelegramHandle(String telegramHandle) {
-        descriptor.setTelegramHandle(new TelegramHandle(telegramHandle));
+    public EditMemberDescriptorBuilder withTelegram(String telegram) {
+        descriptor.setTelegram(new Telegram(telegram));
         return this;
     }
 

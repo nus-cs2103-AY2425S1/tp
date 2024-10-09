@@ -33,7 +33,7 @@ public class MemberCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label telegramHandle;
+    private Label telegram;
     @FXML
     private Label room;
     @FXML
@@ -47,7 +47,7 @@ public class MemberCard extends UiPart<Region> {
         this.member = member;
         id.setText(displayedIndex + ". ");
         name.setText(member.getName().fullName);
-        telegramHandle.setText(member.getTelegramHandle().value);
+        telegram.setText(member.getTelegram().value);
         room.setText(member.getRoom().value);
         member.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
