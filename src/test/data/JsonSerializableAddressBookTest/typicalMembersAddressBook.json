@@ -2,37 +2,37 @@
   "_comment": "AddressBook save file which contains the same Member values as in TypicalMembers#getTypicalAddressBook()",
   "members" : [ {
     "name" : "Alice Pauline",
-    "telegram" : "94351253",
+    "telegram" : "PauLice",
     "room" : "6/3/20",
     "tags" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
-    "telegram" : "98765432",
+    "telegram" : "benson_meier",
     "room" : "6/10/95",
     "tags" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
-    "telegram" : "95352563",
+    "telegram" : "kurZ0123",
     "room" : "7/8/10",
     "tags" : [ ]
   }, {
     "name" : "Daniel Meier",
-    "telegram" : "87652533",
+    "telegram" : "whisperWhiz23",
     "room" : "1/3/3",
     "tags" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
-    "telegram" : "9482224",
+    "telegram" : "meyer_for_lif3",
     "room" : "4/5/55",
     "tags" : [ ]
   }, {
     "name" : "Fiona Kunz",
-    "telegram" : "9482427",
+    "telegram" : "FIONAKUNZ",
     "room" : "8/10/300",
     "tags" : [ ]
   }, {
     "name" : "George Best",
-    "telegram" : "9482442",
+    "telegram" : "B357650463",
     "room" : "90/2/8",
     "tags" : [ ]
   } ]
