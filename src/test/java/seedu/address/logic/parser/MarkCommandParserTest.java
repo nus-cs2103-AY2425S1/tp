@@ -43,4 +43,9 @@ public class MarkCommandParserTest {
         assertParseSuccess(parser, VALID_NRIC_AMY + NOTES_DESC, new MarkCommand(new Nric(VALID_NRIC_AMY), validDate));
     }
 
+    @Test
+    public void parse_emptyNotes_returnsMarkCommand() {
+        ContactDate validDate = new ContactDateBuilder().withNotes("").build();
+        assertParseSuccess(parser, "1", new MarkCommand(INDEX_FIRST_PERSON, validDate));
+    }
 }
