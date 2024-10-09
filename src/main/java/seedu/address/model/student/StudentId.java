@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class StudentId {
 
     public static final String MESSAGE_CONSTRAINTS = "Student ID should be a positive integer without leading zeros.";
-    public static final String VALIDATION_REGEX = "\\d+"; // One or more digits
+    public static final String VALIDATION_REGEX = "0|[1-9]\\d+"; // One or more digits
 
     public final String value;
 
@@ -29,7 +29,7 @@ public class StudentId {
      * Returns true if a given string is a valid student ID.
      */
     public static boolean isValidStudentId(String test) {
-        return test.matches(VALIDATION_REGEX) && !test.matches("0*"); // Checks for non-zero positive integers
+        return test.matches(VALIDATION_REGEX); // Checks for non-zero positive integers
     }
 
     @Override

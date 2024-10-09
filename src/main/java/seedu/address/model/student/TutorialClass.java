@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class TutorialClass {
 
     public static final String MESSAGE_CONSTRAINTS = "Tutorial class should be numeric and typically represents a class code.";
-    public static final String VALIDATION_REGEX = "\\d+"; // Numeric, can be extended to specific format
+    public static final String VALIDATION_REGEX = "0|[1-9]\\d+"; // Numeric, can be extended to specific format
 
     public final String value;
 

@@ -53,7 +53,7 @@ public class EditCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com"
-            + PREFIX_STUDENTID + "1002 "
+            + PREFIX_STUDENTID + "1002"
             + PREFIX_TUTORIALCLASS + "1002";;
 
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
@@ -210,14 +210,14 @@ public class EditCommand extends Command {
         }
 
         public void setStudentId(StudentId studentId) {
-            this.studentId = studentId;
+            this.studentId = (studentId != null) ? studentId : this.studentId;
         }
         public Optional<StudentId> getStudentId() {
             return Optional.ofNullable(studentId);
         }
 
         public void setTutorialClass(TutorialClass tutorialClass) {
-            this.tutorialClass = tutorialClass;
+            this.tutorialClass = (tutorialClass != null) ? tutorialClass : this.tutorialClass;
         }
         public Optional<TutorialClass> getTutorialClass() {
             return Optional.ofNullable(tutorialClass);
