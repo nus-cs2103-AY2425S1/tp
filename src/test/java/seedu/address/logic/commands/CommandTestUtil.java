@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REGISTER_NUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -37,6 +38,8 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_REGISTER_NUMBER_AMY = "1";
     public static final String VALID_REGISTER_NUMBER_BOB = "2";
+    public static final String VALID_SEX_AMY = "F";
+    public static final String VALID_SEX_BOB = "M";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
@@ -50,6 +53,8 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String REGISTER_NUMBER_DESC_AMY = " " + PREFIX_REGISTER_NUMBER + VALID_REGISTER_NUMBER_AMY;
     public static final String REGISTER_NUMBER_DESC_BOB = " " + PREFIX_REGISTER_NUMBER + VALID_REGISTER_NUMBER_BOB;
+    public static final String SEX_DESC_AMY = " " + PREFIX_SEX + VALID_SEX_AMY;
+    public static final String SEX_DESC_BOB = " " + PREFIX_SEX + VALID_SEX_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
@@ -59,6 +64,7 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_REGISTER_NUMBER_DESC = " " + PREFIX_REGISTER_NUMBER + "41";
     // Only numbers between 1 and 40 allowed
+    public static final String INVALID_SEX_DESC = " " + PREFIX_SEX + "H"; // Only 'M' and 'F' are allowed
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
@@ -70,10 +76,12 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withRegisterNumber(VALID_REGISTER_NUMBER_AMY).withTags(VALID_TAG_FRIEND).build();
+                .withRegisterNumber(VALID_REGISTER_NUMBER_AMY).withSex(VALID_SEX_AMY).withTags(VALID_TAG_FRIEND)
+                .build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withRegisterNumber(VALID_REGISTER_NUMBER_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withRegisterNumber(VALID_REGISTER_NUMBER_BOB).withSex(VALID_SEX_BOB)
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 
     /**

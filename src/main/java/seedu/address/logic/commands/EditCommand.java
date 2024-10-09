@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REGISTER_NUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -28,6 +29,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.RegisterNumber;
+import seedu.address.model.person.Sex;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -38,7 +40,7 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index value used in the displayed person list. "
+            + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
@@ -46,6 +48,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_REGISTER_NUMBER + "REGISTER NUMBER] "
+            + "[" + PREFIX_SEX + "SEX] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -104,9 +107,11 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         RegisterNumber updatedRegisterNumber = editPersonDescriptor.getRegisterNumber().orElse(personToEdit
                 .getRegisterNumber());
+        Sex updatedSex = editPersonDescriptor.getSex().orElse(personToEdit.getSex());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRegisterNumber, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRegisterNumber, updatedSex,
+                updatedTags);
     }
 
     @Override
@@ -143,6 +148,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private RegisterNumber registerNumber;
+        private Sex sex;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -157,6 +163,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setRegisterNumber(toCopy.registerNumber);
+            setSex(toCopy.sex);
             setTags(toCopy.tags);
         }
 
@@ -164,7 +171,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, registerNumber, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, registerNumber, sex, tags);
         }
 
         public void setName(Name name) {
@@ -207,6 +214,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(registerNumber);
         }
 
+        public void setSex(Sex sex) {
+            this.sex = sex;
+        }
+
+        public Optional<Sex> getSex() {
+            return Optional.ofNullable(sex);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -241,6 +256,7 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(registerNumber, otherEditPersonDescriptor.registerNumber)
+                    && Objects.equals(sex, otherEditPersonDescriptor.sex)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -252,6 +268,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("register number", registerNumber)
+                    .add("sex", sex)
                     .add("tags", tags)
                     .toString();
         }
