@@ -11,6 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.assignment.Assignment;
+import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.student.Student;
 
 /**
@@ -22,6 +24,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Student> filteredStudents;
+    private final AssignmentList assignmentList = new AssignmentList();
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -109,6 +112,18 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedStudent);
 
         addressBook.setStudent(target, editedStudent);
+    }
+
+    @Override
+    public boolean hasAssignment(Assignment assignment) {
+        requireNonNull(assignment);
+
+        return assignmentList.hasAssignment(assignment);
+    }
+
+    @Override
+    public void addAssignment(Assignment assignment) {
+        assignmentList.addAssignment(assignment);
     }
 
     //=========== Filtered Student List Accessors =============================================================
