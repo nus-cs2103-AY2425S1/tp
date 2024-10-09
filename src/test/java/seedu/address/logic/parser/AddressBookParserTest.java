@@ -108,7 +108,7 @@ public class AddressBookParserTest {
     public void parseCommand_listAppointments() throws Exception {
         assertTrue(parser.parseCommand(ListAppointmentsCommand.COMMAND_WORD) instanceof ListAppointmentsCommand);
     }
-  
+
     @Test
     public void parseCommand_reminder() throws Exception {
         String appointmentDateTime = "2024-10-04 1000";

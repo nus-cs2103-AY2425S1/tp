@@ -360,7 +360,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Client contact detail**: A contact detail that includes name, phone number, email address,
   address, appointment details, treatment history, payment details, etc.
 * **Appointment**: A scheduled meeting between a physiotherapist and a client for treatment. It includes date and time.
-* **Condition**: The client's specific physical or functional impairment, injury, or disorder that affects movement, strength, flexibility, or overall physical function.  
+* **Condition**: The client's specific physical or functional impairment, injury, or disorder that affects movement, strength, flexibility, or overall physical function.
 
 --------------------------------------------------------------------------------------------------------------------
 
