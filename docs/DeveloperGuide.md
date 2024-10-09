@@ -614,7 +614,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **System: StudentManagerPro**
 
-**Use case: UC9 Group Students Into Their Classes**
+**Use case: UC09 Group Students Into Their Classes**
 
 **Actor: User**
 
@@ -650,7 +650,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **System: StudentManagerPro**
 
-**Use case: UC11 Remove Student from the System**
+**Use case: UC10 Remove Student from the System**
 
 **Actor: User**
 
