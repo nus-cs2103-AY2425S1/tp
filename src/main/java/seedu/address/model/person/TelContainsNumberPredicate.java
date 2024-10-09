@@ -4,6 +4,9 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
 
+/**
+ * Predicate to test whether Person's phone number contain certain numbers
+ */
 public class TelContainsNumberPredicate implements Predicate<Person> {
     private final String searchTel;
 

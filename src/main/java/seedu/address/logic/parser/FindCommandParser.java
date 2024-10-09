@@ -7,7 +7,6 @@ import java.util.Arrays;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Phone;
 import seedu.address.model.person.TelContainsNumberPredicate;
 
 /**
@@ -31,9 +30,9 @@ public class FindCommandParser implements Parser<FindCommand> {
         // split by num/ to allow quick search with name
         boolean hasSearchTelArg = trimmedArgs.contains("num/");
         if (hasSearchTelArg) {
-            String searchTel = trimmedArgs.replace("num/","");
-                return new FindCommand(null,
-                        new TelContainsNumberPredicate(searchTel));
+            String searchTel = trimmedArgs.replace("num/", "");
+            return new FindCommand(null,
+                    new TelContainsNumberPredicate(searchTel));
         } else {
             // only has name arg
             String[] nameKeywords = trimmedArgs.split("\\s+");

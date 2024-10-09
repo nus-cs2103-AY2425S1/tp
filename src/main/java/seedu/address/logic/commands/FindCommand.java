@@ -6,12 +6,11 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Phone;
 import seedu.address.model.person.TelContainsNumberPredicate;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Keyword matching is case-insensitive.
  */
 public class FindCommand extends Command {
 
@@ -27,6 +26,11 @@ public class FindCommand extends Command {
     private final NameContainsKeywordsPredicate namePredicate;
     private final TelContainsNumberPredicate numberPredicate;
 
+    /**
+     * Initialise the two predicates
+     * @param namePredicate
+     * @param numberPredicate
+     */
     public FindCommand(NameContainsKeywordsPredicate namePredicate, TelContainsNumberPredicate numberPredicate) {
         this.namePredicate = namePredicate;
         this.numberPredicate = numberPredicate;
