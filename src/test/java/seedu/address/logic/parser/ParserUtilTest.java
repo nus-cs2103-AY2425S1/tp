@@ -7,7 +7,12 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON_LIST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SECOND_PERSON_LIST;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -58,13 +63,13 @@ public class ParserUtilTest {
         // 2 Input with only one whitespace
         List<Index> indexList = new ArrayList<>();
         indexList = ParserUtil.parseIndex("1 2");
-        assertTrue(INDEX_FIRST_SECOND_PERSON_LIST.containsAll(indexList) &&
-                indexList.containsAll(INDEX_FIRST_SECOND_PERSON_LIST));
+        assertTrue(INDEX_FIRST_SECOND_PERSON_LIST.containsAll(indexList)
+                && indexList.containsAll(INDEX_FIRST_SECOND_PERSON_LIST));
 
         //2 Input with leading and trailing whitespace
         indexList = ParserUtil.parseIndex("   1    2     ");
-        assertTrue(INDEX_FIRST_SECOND_PERSON_LIST.containsAll(indexList) &&
-                indexList.containsAll(INDEX_FIRST_SECOND_PERSON_LIST));
+        assertTrue(INDEX_FIRST_SECOND_PERSON_LIST.containsAll(indexList)
+                && indexList.containsAll(INDEX_FIRST_SECOND_PERSON_LIST));
     }
 
     @Test
