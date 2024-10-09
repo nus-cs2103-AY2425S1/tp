@@ -3,10 +3,13 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.DateUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -178,6 +181,17 @@ public class ParserUtil {
     public static Appointment parseAppointment(String appointment) throws ParseException {
         requireNonNull(appointment);
         String[] trimmedAppointment = appointment.trim().split(":");
+        if (trimmedAppointment.length < 3) {
+            throw new ParseException(Appointment.MESSAGE_CONSTRAINTS);
+        }
+
+        if (!Appointment.isValidAppointmentName(trimmedAppointment[0])) {
+            throw new ParseException(Appointment.MESSAGE_CONSTRAINTS);
+        }
+
+        if (!DateUtil.isValidDate(trimmedAppointment[1])) {
+            throw new ParseException(Appointment.MESSAGE_CONSTRAINTS_APPT_DATE_WRONG_FORMAT);
+        }
         return new Appointment(trimmedAppointment[0], trimmedAppointment[1], trimmedAppointment[2]);
     }
 
@@ -198,6 +212,10 @@ public class ParserUtil {
      */
     public static Set<Appointment> parseAppointments(Collection<String> appointments) throws ParseException {
         requireNonNull(appointments);
+        if (appointments.isEmpty()) {
+            return Collections.emptySet();
+        }
+
         final Set<Appointment> appointmentSet = new HashSet<>();
         for (String appointmentName : appointments) {
             appointmentSet.add(parseAppointment(appointmentName));
