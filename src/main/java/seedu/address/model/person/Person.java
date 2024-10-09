@@ -75,6 +75,14 @@ public class Person {
         return address;
     }
 
+    public Assignment getAssignment() {
+        return assignment;
+    }
+
+    public void setAssignment(Assignment assignment) {
+        this.assignment = assignment;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException} if
      * modification is attempted.
