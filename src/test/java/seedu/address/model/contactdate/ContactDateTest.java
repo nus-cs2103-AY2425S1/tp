@@ -3,6 +3,7 @@ package seedu.address.model.contactdate;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTES;
 
 import org.junit.jupiter.api.Test;
 
@@ -10,13 +11,13 @@ import org.junit.jupiter.api.Test;
 public class ContactDateTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new ContactDate(null));
+        assertThrows(NullPointerException.class, () -> new ContactDate(null, VALID_NOTES));
     }
 
     @Test
     public void constructor_invalidContactDate_throwsIllegalArgumentException() {
         String invalidContactDate = "";
-        assertThrows(IllegalArgumentException.class, () -> new ContactDate(invalidContactDate));
+        assertThrows(IllegalArgumentException.class, () -> new ContactDate(invalidContactDate, VALID_NOTES));
     }
 
     @Test
@@ -35,10 +36,10 @@ public class ContactDateTest {
 
     @Test
     public void equals() {
-        ContactDate contactDate = new ContactDate("2020-01-01");
+        ContactDate contactDate = new ContactDate("2020-01-01", VALID_NOTES);
 
         // same values -> returns true
-        ContactDate contactDateCopy = new ContactDate("2020-01-01");
+        ContactDate contactDateCopy = new ContactDate("2020-01-01", VALID_NOTES);
         assertTrue(contactDate.equals(contactDateCopy));
 
         // same object -> returns true
@@ -51,7 +52,7 @@ public class ContactDateTest {
         assertFalse(contactDate.equals(5.0f));
 
         // different contact date -> returns false
-        ContactDate differentContactDate = new ContactDate("2020-01-02");
+        ContactDate differentContactDate = new ContactDate("2020-01-02", VALID_NOTES);
         assertFalse(contactDate.equals(differentContactDate));
     }
 

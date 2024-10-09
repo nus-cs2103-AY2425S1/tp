@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.NOTES_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_AMY;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -9,7 +11,9 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.MarkCommand;
+import seedu.address.model.contactdate.ContactDate;
 import seedu.address.model.person.Nric;
+import seedu.address.testutil.ContactDateBuilder;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -24,7 +28,8 @@ public class MarkCommandParserTest {
 
     @Test
     public void parse_validIndex_returnsMarkCommand() {
-        assertParseSuccess(parser, "1", new MarkCommand(INDEX_FIRST_PERSON));
+        ContactDate validDate = new ContactDateBuilder().withNotes(VALID_NOTES).build();
+        assertParseSuccess(parser, "1" + NOTES_DESC, new MarkCommand(INDEX_FIRST_PERSON, validDate));
     }
 
     @Test
@@ -34,7 +39,8 @@ public class MarkCommandParserTest {
 
     @Test
     public void parse_validNric_returnsMarkCommand() {
-        assertParseSuccess(parser, VALID_NRIC_AMY, new MarkCommand(new Nric(VALID_NRIC_AMY)));
+        ContactDate validDate = new ContactDateBuilder().withNotes(VALID_NOTES).build();
+        assertParseSuccess(parser, VALID_NRIC_AMY + NOTES_DESC, new MarkCommand(new Nric(VALID_NRIC_AMY), validDate));
     }
 
 }

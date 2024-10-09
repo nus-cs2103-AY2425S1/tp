@@ -15,6 +15,8 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.contactdate.ContactDate;
+import seedu.address.testutil.ContactDateBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
@@ -99,7 +101,8 @@ public class PersonTest {
     @Test
     public void markAsContacted() {
         Person person = new PersonBuilder().build();
-        person.markAsContacted();
+        ContactDate contactDate = new ContactDateBuilder().build();
+        person.markAsContacted(contactDate);
         // 1 contact date added on initialisation and another added by markAsContacted
         assertEquals(2, person.getContactDates().size());
     }

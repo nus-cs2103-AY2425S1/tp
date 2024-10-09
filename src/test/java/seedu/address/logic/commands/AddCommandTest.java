@@ -22,6 +22,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.contactdate.ContactDate;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
@@ -160,7 +161,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void markAsContacted(Person target) {
+        public void markAsContacted(Person target, ContactDate notes) {
             throw new AssertionError("This method should not be called.");
         }
 

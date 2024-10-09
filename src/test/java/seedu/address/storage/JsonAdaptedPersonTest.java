@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTES;
 import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.BENSON;
@@ -138,7 +139,7 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_invalidContactDates_throwsIllegalValueException() {
         List<JsonAdaptedContactDate> invalidContactDates = new ArrayList<>(VALID_CONTACT_DATES);
-        invalidContactDates.add(new JsonAdaptedContactDate(INVALID_CONTACT_DATE));
+        invalidContactDates.add(new JsonAdaptedContactDate(INVALID_CONTACT_DATE, VALID_NOTES));
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NRIC, VALID_NAME, VALID_PHONE, VALID_EMAIL,
                 VALID_ADDRESS,
                 VALID_TAGS, invalidContactDates);
