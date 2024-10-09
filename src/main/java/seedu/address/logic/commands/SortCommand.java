@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_PARAM;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.sort.SortParam;
@@ -20,6 +21,8 @@ public class SortCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_SORT_PARAM + "name";
 
+    public static final String MESSAGE_SUCCESS = "Sorted by: %1$s";
+
     private SortParam sortParam;
 
     /**
@@ -35,6 +38,6 @@ public class SortCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         //sort the contact book
         model.sortAddressBook();
-        return new CommandResult("hi");
+        return new CommandResult(String.format(MESSAGE_SUCCESS, sortParam.toString()));
     }
 }

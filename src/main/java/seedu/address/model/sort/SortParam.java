@@ -40,4 +40,13 @@ public class SortParam {
     public static boolean isValidSortParam(String test) {
         return (test.equals("name") || test.equals("class"));
     }
+
+    @Override
+    public String toString() {
+        if (this.field == SortField.CLASS) {
+            return "class";
+        } else {
+            return "name";
+        }
+    }
 }
