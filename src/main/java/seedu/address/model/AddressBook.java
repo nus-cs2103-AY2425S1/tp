@@ -8,14 +8,17 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.pet.Pet;
+import seedu.address.model.pet.UniquePetList;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Duplicates are not allowed (by .isSameOwner and .isSamePet comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final UniquePetList pets;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -26,6 +29,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        pets = new UniquePetList();
     }
 
     public AddressBook() {}
@@ -49,12 +53,21 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the pet list with {@code pets}.
+     * {@code pets} must not contain duplicate pets.
+     */
+    public void setPets(List<Pet> pets) {
+        this.pets.setPets(pets);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setPets(newData.getPetList());
     }
 
     //// person-level operations
@@ -94,18 +107,61 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    //// pet-level operations
+
+    /**
+     * Returns true if a pet with the same identity as {@code pet} exits in the address book.
+     */
+    public boolean hasPet(Pet pet) {
+        requireNonNull(pet);
+        return pets.contains(pet);
+    }
+
+    /**
+     * Adds a pet to the address book.
+     * The pet must not already exist in the address book.
+     */
+    public void addPet(Pet p) {
+        pets.add(p);
+    }
+
+    /**
+     * Replaces the given pet {@code target} in the list with {@code editedPet}.
+     * {@code target} must exist in the address book.
+     * The pet identity of {@code editedPet} must not be the same as another existing pet in the address book.
+     */
+    public void setPet(Pet target, Pet editedPet) {
+        requireNonNull(editedPet);
+
+        pets.setPet(target, editedPet);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removePet(Pet key) {
+        pets.remove(key);
+    }
+
     //// util methods
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("persons", persons)
+                .add("pets", pets)
                 .toString();
     }
 
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Pet> getPetList() {
+        return pets.asUnmodifiableObservableList();
     }
 
     @Override
@@ -120,7 +176,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons);
+        return persons.equals(otherAddressBook.persons) && pets.equals(otherAddressBook.pets);
     }
 
     @Override
