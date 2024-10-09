@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.address.model.contactdate.ContactDateList;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.CallFrequency;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
@@ -23,6 +24,7 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_CALL_FREQUENCY = "7";
 
     private Nric nric;
     private Name name;
@@ -30,7 +32,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Set<Tag> tags;
-    private ContactDateList contactDates;
+    private CallFrequency callFrequency;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -42,6 +44,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        callFrequency = new CallFrequency(DEFAULT_CALL_FREQUENCY);
     }
 
     /**
@@ -54,6 +57,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+        callFrequency = personToCopy.getCallFrequency();
     }
 
     /**
@@ -104,8 +108,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code CallFrequency} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withCallFrequency(String callFrequency) {
+        this.callFrequency = new CallFrequency(callFrequency);
+        return this;
+    }
+
     public Person build() {
-        return new Person(nric, name, phone, email, address, tags);
+        return new Person(nric, name, phone, email, address, tags, callFrequency);
     }
 
 }

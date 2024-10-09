@@ -6,13 +6,15 @@
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
     "tags": [ "friends" ],
-    "contactDates" : [ "2024-09-28" ]
+    "contactDates" : [ "2024-09-28" ],
+    "callFrequency" : "7"
   }, {
     "nric": "S0431600B",
     "name": "Bobby",
     "phone": "94351253",
     "email": "pauline@example.com",
     "address": "4th street",
-    "contactDates" : [ "2024-09-28" ]
+    "contactDates" : [ "2024-09-28" ],
+    "callFrequency" : "7"
   } ]
 }
