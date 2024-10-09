@@ -1,7 +1,5 @@
 package seedu.address.testutil;
 
-import java.util.Random;
-
 import seedu.address.model.client.Buyer;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
