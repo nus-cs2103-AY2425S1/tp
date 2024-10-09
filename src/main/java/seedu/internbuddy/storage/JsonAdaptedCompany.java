@@ -11,11 +11,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.internbuddy.commons.exceptions.IllegalValueException;
 import seedu.internbuddy.model.company.Address;
+import seedu.internbuddy.model.company.Company;
 import seedu.internbuddy.model.company.Email;
 import seedu.internbuddy.model.company.Name;
-import seedu.internbuddy.model.company.Company;
 import seedu.internbuddy.model.company.Phone;
-import seedu.internbuddy.model.company.Status;
 import seedu.internbuddy.model.tag.Tag;
 
 /**
@@ -30,7 +29,6 @@ class JsonAdaptedCompany {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
-//    private final String status;
 
     /**
      * Constructs a {@code JsonAdaptedcompany} with the given company details.
@@ -46,7 +44,6 @@ class JsonAdaptedCompany {
         if (tags != null) {
             this.tags.addAll(tags);
         }
-//        this.status = status;
     }
 
     /**
@@ -60,7 +57,6 @@ class JsonAdaptedCompany {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-//        status = source.getStatus().value;
     }
 
     /**
@@ -108,7 +104,6 @@ class JsonAdaptedCompany {
 
         final Set<Tag> modelTags = new HashSet<>(companyTags);
 
-//        final Status modelStatus = new Status(status);
         return new Company(modelName, modelPhone, modelEmail, modelAddress, modelTags);
     }
 

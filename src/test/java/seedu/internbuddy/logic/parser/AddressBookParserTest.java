@@ -23,11 +23,11 @@ import seedu.internbuddy.logic.commands.FindCommand;
 import seedu.internbuddy.logic.commands.HelpCommand;
 import seedu.internbuddy.logic.commands.ListCommand;
 import seedu.internbuddy.logic.parser.exceptions.ParseException;
-import seedu.internbuddy.model.company.NameContainsKeywordsPredicate;
 import seedu.internbuddy.model.company.Company;
-import seedu.internbuddy.testutil.EditCompanyDescriptorBuilder;
+import seedu.internbuddy.model.company.NameContainsKeywordsPredicate;
 import seedu.internbuddy.testutil.CompanyBuilder;
 import seedu.internbuddy.testutil.CompanyUtil;
+import seedu.internbuddy.testutil.EditCompanyDescriptorBuilder;
 
 public class AddressBookParserTest {
 

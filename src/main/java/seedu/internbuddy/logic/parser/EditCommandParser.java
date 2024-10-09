@@ -2,7 +2,11 @@ package seedu.internbuddy.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.internbuddy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.internbuddy.logic.parser.CliSyntax.*;
+import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -59,10 +63,6 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (!editCompanyDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
-
-//        if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
-//            editCompanyDescriptor.setStatus(ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get()));
-//        }
 
         return new EditCommand(index, editCompanyDescriptor);
     }

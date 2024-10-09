@@ -4,9 +4,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.internbuddy.model.company.Address;
+import seedu.internbuddy.model.company.Company;
 import seedu.internbuddy.model.company.Email;
 import seedu.internbuddy.model.company.Name;
-import seedu.internbuddy.model.company.Company;
 import seedu.internbuddy.model.company.Phone;
 import seedu.internbuddy.model.tag.Tag;
 import seedu.internbuddy.model.util.SampleDataUtil;

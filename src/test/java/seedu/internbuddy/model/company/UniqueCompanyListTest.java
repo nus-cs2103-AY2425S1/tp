@@ -15,8 +15,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.internbuddy.model.company.exceptions.DuplicateCompanyException;
 import seedu.internbuddy.model.company.exceptions.CompanyNotFoundException;
+import seedu.internbuddy.model.company.exceptions.DuplicateCompanyException;
 import seedu.internbuddy.testutil.CompanyBuilder;
 
 public class UniqueCompanyListTest {
@@ -29,18 +29,18 @@ public class UniqueCompanyListTest {
     }
 
     @Test
-    public void contains_CompanyNotInList_returnsFalse() {
+    public void contains_companyNotInList_returnsFalse() {
         assertFalse(uniqueCompanyList.contains(ALICE));
     }
 
     @Test
-    public void contains_CompanyInList_returnsTrue() {
+    public void contains_companyInList_returnsTrue() {
         uniqueCompanyList.add(ALICE);
         assertTrue(uniqueCompanyList.contains(ALICE));
     }
 
     @Test
-    public void contains_CompanyWithSameIdentityFieldsInList_returnsTrue() {
+    public void contains_companyWithSameIdentityFieldsInList_returnsTrue() {
         uniqueCompanyList.add(ALICE);
         Company editedAlice = new CompanyBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
@@ -115,7 +115,7 @@ public class UniqueCompanyListTest {
     }
 
     @Test
-    public void remove_CompanyDoesNotExist_throwsCompanyNotFoundException() {
+    public void remove_companyDoesNotExist_throwsCompanyNotFoundException() {
         assertThrows(CompanyNotFoundException.class, () -> uniqueCompanyList.remove(ALICE));
     }
 
@@ -128,12 +128,12 @@ public class UniqueCompanyListTest {
     }
 
     @Test
-    public void setcompanies_nullUniqueCompanyList_throwsNullPointerException() {
+    public void setCompanies_nullUniqueCompanyList_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueCompanyList.setCompanies((UniqueCompanyList) null));
     }
 
     @Test
-    public void setcompanies_uniqueCompanyList_replacesOwnListWithProvidedUniqueCompanyList() {
+    public void setCompanies_uniqueCompanyList_replacesOwnListWithProvidedUniqueCompanyList() {
         uniqueCompanyList.add(ALICE);
         UniqueCompanyList expectedUniqueCompanyList = new UniqueCompanyList();
         expectedUniqueCompanyList.add(BOB);
@@ -142,24 +142,24 @@ public class UniqueCompanyListTest {
     }
 
     @Test
-    public void setcompanies_nullList_throwsNullPointerException() {
+    public void setCompanies_nullList_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueCompanyList.setCompanies((List<Company>) null));
     }
 
     @Test
-    public void setcompanies_list_replacesOwnListWithProvidedList() {
+    public void setCompanies_list_replacesOwnListWithProvidedList() {
         uniqueCompanyList.add(ALICE);
-        List<Company> CompanyList = Collections.singletonList(BOB);
-        uniqueCompanyList.setCompanies(CompanyList);
+        List<Company> companyList = Collections.singletonList(BOB);
+        uniqueCompanyList.setCompanies(companyList);
         UniqueCompanyList expectedUniqueCompanyList = new UniqueCompanyList();
         expectedUniqueCompanyList.add(BOB);
         assertEquals(expectedUniqueCompanyList, uniqueCompanyList);
     }
 
     @Test
-    public void setcompanies_listWithDuplicatecompanies_throwsDuplicateCompanyException() {
-        List<Company> listWithDuplicatecompanies = Arrays.asList(ALICE, ALICE);
-        assertThrows(DuplicateCompanyException.class, () -> uniqueCompanyList.setCompanies(listWithDuplicatecompanies));
+    public void setCompanies_listWithDuplicateCompanies_throwsDuplicateCompanyException() {
+        List<Company> listWithDuplicateCompanies = Arrays.asList(ALICE, ALICE);
+        assertThrows(DuplicateCompanyException.class, () -> uniqueCompanyList.setCompanies(listWithDuplicateCompanies));
     }
 
     @Test

@@ -2,8 +2,8 @@ package seedu.internbuddy.logic.commands;
 
 import static seedu.internbuddy.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.showcompanyAtIndex;
-import static seedu.internbuddy.testutil.TypicalIndexes.INDEX_FIRST_COMPANY;
 import static seedu.internbuddy.testutil.TypicalCompanies.getTypicalAddressBook;
+import static seedu.internbuddy.testutil.TypicalIndexes.INDEX_FIRST_COMPANY;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

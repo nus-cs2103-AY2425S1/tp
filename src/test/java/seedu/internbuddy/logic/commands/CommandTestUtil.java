@@ -17,8 +17,8 @@ import seedu.internbuddy.commons.core.index.Index;
 import seedu.internbuddy.logic.commands.exceptions.CommandException;
 import seedu.internbuddy.model.AddressBook;
 import seedu.internbuddy.model.Model;
-import seedu.internbuddy.model.company.NameContainsKeywordsPredicate;
 import seedu.internbuddy.model.company.Company;
+import seedu.internbuddy.model.company.NameContainsKeywordsPredicate;
 import seedu.internbuddy.testutil.EditCompanyDescriptorBuilder;
 
 /**

@@ -23,9 +23,9 @@ import seedu.internbuddy.logic.Messages;
 import seedu.internbuddy.logic.commands.exceptions.CommandException;
 import seedu.internbuddy.model.Model;
 import seedu.internbuddy.model.company.Address;
+import seedu.internbuddy.model.company.Company;
 import seedu.internbuddy.model.company.Email;
 import seedu.internbuddy.model.company.Name;
-import seedu.internbuddy.model.company.Company;
 import seedu.internbuddy.model.company.Phone;
 import seedu.internbuddy.model.company.Status;
 import seedu.internbuddy.model.tag.Tag;
@@ -103,7 +103,6 @@ public class EditCommand extends Command {
         Email updatedEmail = editCompanyDescriptor.getEmail().orElse(companyToEdit.getEmail());
         Address updatedAddress = editCompanyDescriptor.getAddress().orElse(companyToEdit.getAddress());
         Set<Tag> updatedTags = editCompanyDescriptor.getTags().orElse(companyToEdit.getTags());
-//        Status updatedStatus = editCompanyDescriptor.getStatus().orElse(companyToEdit.getStatus());
 
         return new Company(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
     }
@@ -156,7 +155,6 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
-//            setStatus(toCopy.status);
         }
 
         /**
@@ -214,14 +212,6 @@ public class EditCommand extends Command {
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
-
-//        public void setStatus(Status status) {
-//            this.status = status;
-//        }
-
-//        public Optional<Status> getStatus() {
-//            return Optional.ofNullable(status);
-//        }
 
         @Override
         public boolean equals(Object other) {
