@@ -5,4 +5,5 @@ package seedu.address.testutil;
  */
 public class TutUtil {
     public static final String TUT_NAME = "CS2103T";
+    public static final Integer TUT_01 = 1;
 }

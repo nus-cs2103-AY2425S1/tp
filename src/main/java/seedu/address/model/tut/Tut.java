@@ -22,15 +22,18 @@ public class Tut {
 
     // TODO: Insert TutDate
     private final String tutName;
+    private final Integer id;
     /**
      * Constructs a {@code Tut}.
      *
      * @param tutName A valid tutorial name.
      */
-    public Tut(String tutName) {
+    public Tut(String tutName, int id) {
+        requireNonNull(id);
         requireNonNull(tutName);
         checkArgument(isValidName(tutName), MESSAGE_CONSTRAINTS);
         this.tutName = tutName;
+        this.id = id;
     }
     void add(Student student) {
         if (student != null && !students.contains(student)) {
@@ -50,5 +53,22 @@ public class Tut {
                     .filter(student -> student.getName().equals(name))
                     .findFirst()
                     .orElse(null); // Returns null if no student is found
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Tut)) {
+            return false;
+        }
+
+        Tut otherTutorial = (Tut) other;
+        return id.equals(otherTutorial.id)
+                && tutName.equals(otherTutorial.tutName)
+                && students.equals(otherTutorial.students);
     }
 }
