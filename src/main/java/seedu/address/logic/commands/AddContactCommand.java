@@ -4,11 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -17,8 +16,7 @@ import seedu.address.model.person.Person;
  * Adds a person to the address book.
  */
 public class AddContactCommand extends Command {
-
-    public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_WORD = "add_contact";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a contact to the address book. "
             + "Parameters: "
@@ -33,7 +31,7 @@ public class AddContactCommand extends Command {
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ROLE + "copywriter";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
+    public static final String MESSAGE_SUCCESS = "Candidate added: %1$s - %2$s - %3$s - Applying for: %4$s";
     public static final String MESSAGE_DUPLICATE_CONTACT = "A candidate with this phone number "
             + "or email already exists.";
 
@@ -56,7 +54,14 @@ public class AddContactCommand extends Command {
         }
 
         model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+
+        String successMessage = String.format(MESSAGE_SUCCESS,
+                toAdd.getName().fullName,
+                toAdd.getPhone().value,
+                toAdd.getEmail().value,
+                toAdd.getRole().value
+        );
+        return new CommandResult(successMessage);
     }
 
     @Override
