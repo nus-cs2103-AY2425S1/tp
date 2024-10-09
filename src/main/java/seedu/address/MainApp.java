@@ -57,7 +57,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
+        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(
+                userPrefs.getAddressBookFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
@@ -68,9 +69,11 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
-     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
-     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
+     * Returns a {@code ModelManager} with the data from {@code storage}'s address
+     * book and {@code userPrefs}. <br>
+     * The data from the sample address book will be used instead if
+     * {@code storage}'s address book is not found, or an empty address book will be
+     * used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getAddressBookFilePath());
@@ -80,8 +83,8 @@ public class MainApp extends Application {
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
-                logger.info("Creating a new data file " + storage.getAddressBookFilePath()
-                        + " populated with a sample AddressBook.");
+                logger.info("There is no data file. Creating a new data file "
+                        + storage.getAddressBookFilePath() + " populated with a sample AddressBook.");
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataLoadingException e) {
@@ -118,7 +121,7 @@ public class MainApp extends Application {
         try {
             Optional<Config> configOptional = ConfigUtil.readConfig(configFilePathUsed);
             if (!configOptional.isPresent()) {
-                logger.info("Creating new config file " + configFilePathUsed);
+                logger.info("There is no config file. Creating new config file " + configFilePathUsed);
             }
             initializedConfig = configOptional.orElse(new Config());
         } catch (DataLoadingException e) {
@@ -127,7 +130,8 @@ public class MainApp extends Application {
             initializedConfig = new Config();
         }
 
-        //Update config file in case it was missing to begin with or there are new/unused fields
+        // Update config file in case it was missing to begin with or there are
+        // new/unused fields
         try {
             ConfigUtil.saveConfig(initializedConfig, configFilePathUsed);
         } catch (IOException e) {
@@ -137,9 +141,9 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code UserPrefs} using the file at {@code storage}'s user prefs file path,
-     * or a new {@code UserPrefs} with default configuration if errors occur when
-     * reading from the file.
+     * Returns a {@code UserPrefs} using the file at {@code storage}'s user prefs
+     * file path, or a new {@code UserPrefs} with default configuration if errors
+     * occur when reading from the file.
      */
     protected UserPrefs initPrefs(UserPrefsStorage storage) {
         Path prefsFilePath = storage.getUserPrefsFilePath();
@@ -149,7 +153,7 @@ public class MainApp extends Application {
         try {
             Optional<UserPrefs> prefsOptional = storage.readUserPrefs();
             if (!prefsOptional.isPresent()) {
-                logger.info("Creating new preference file " + prefsFilePath);
+                logger.info("There is no preference file. Creating new preference file " + prefsFilePath);
             }
             initializedPrefs = prefsOptional.orElse(new UserPrefs());
         } catch (DataLoadingException e) {
@@ -158,7 +162,8 @@ public class MainApp extends Application {
             initializedPrefs = new UserPrefs();
         }
 
-        //Update prefs file in case it was missing to begin with or there are new/unused fields
+        // Update prefs file in case it was missing to begin with or there are
+        // new/unused fields
         try {
             storage.saveUserPrefs(initializedPrefs);
         } catch (IOException e) {
