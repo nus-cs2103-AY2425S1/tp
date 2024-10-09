@@ -2,8 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,27 +30,24 @@ public class TagCommandParser implements Parser<TagCommand> {
     public TagCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
-        // Trim and split input to separate index from tags
-        String trimmedArgs = args.trim();
-        String[] splitArgs = trimmedArgs.split("\\s+", 2);
-
-        if (splitArgs.length < 2) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
-        }
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG);
 
         Index index;
+
         try {
-            index = ParserUtil.parseIndex(splitArgs[0]);
+            // Parse the index from the preamble
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE), ive);
         }
 
-        String[] tagValues = splitArgs[1].split("\\s+");
-        if (tagValues.length == 0) {
+        List<String> tagValues = argMultimap.getAllValues(PREFIX_TAG);
+        if (tagValues.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
         }
 
-        List<Tag> tags = Arrays.stream(tagValues)
+        // Convert tag values to Tag objects
+        List<Tag> tags = tagValues.stream()
                 .map(TagName::new) // Convert each string to a TagName object
                 .map(Tag::new)
                 .collect(Collectors.toList());
