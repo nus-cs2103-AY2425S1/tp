@@ -58,7 +58,7 @@ Hi, I like writing and formatting stuff (real).
 <img src="images/friedcabbagesalad.png" width="200px">
 
 [[github](http://github.com/FriedCabbageSalad)]
-[[portfolio](team/johndoe.md)]  
+[[portfolio](team/johndoe.md)]
 
 I am Kieran, a Year 2 Computer Science student at the National University of Singapore!
 My hobbies are Gaming and I've recently been experimenting with Home-Labs.
