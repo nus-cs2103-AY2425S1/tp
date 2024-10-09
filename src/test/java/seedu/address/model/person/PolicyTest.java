@@ -10,36 +10,36 @@ public class PolicyTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-                () -> new Policy(null, "2023-01-01", "2024-01-01"));
-        assertThrows(NullPointerException.class,
-                () -> new Policy("Policy Name", null, "2024-01-01"));
-        assertThrows(NullPointerException.class,
-                () -> new Policy("Policy Name", "2023-01-01", null));
+        assertThrows(NullPointerException.class, () ->
+                new Policy(null, "2023-01-01", "2024-01-01"));
+        assertThrows(NullPointerException.class, () ->
+                new Policy("Policy Name", null, "2024-01-01"));
+        assertThrows(NullPointerException.class, () ->
+                new Policy("Policy Name", "2023-01-01", null));
     }
 
     @Test
     public void constructor_invalidPolicy_throwsIllegalArgumentException() {
         String invalidPolicyName = "";
-        assertThrows(IllegalArgumentException.class,
-                () -> new Policy(invalidPolicyName, "2023-01-01", "2024-01-01"));
-        assertThrows(IllegalArgumentException.class,
-                () -> new Policy("Policy Name", "invalid-date", "2024-01-01"));
-        assertThrows(IllegalArgumentException.class,
-                () -> new Policy("Policy Name", "2023-01-01", "invalid-date"));
-        assertThrows(IllegalArgumentException.class,
-                () -> new Policy("Policy Name", "2024-01-01", "2023-01-01"));
+        assertThrows(IllegalArgumentException.class, () ->
+                new Policy(invalidPolicyName, "2023-01-01", "2024-01-01"));
+        assertThrows(IllegalArgumentException.class, () ->
+                new Policy("Policy Name", "invalid-date", "2024-01-01"));
+        assertThrows(IllegalArgumentException.class, () ->
+                new Policy("Policy Name", "2023-01-01", "invalid-date"));
+        assertThrows(IllegalArgumentException.class, () ->
+                new Policy("Policy Name", "2024-01-01", "2023-01-01"));
     }
 
     @Test
     public void isValidPolicy() {
         // null policy details
-        assertThrows(NullPointerException.class,
-                () -> Policy.isValidPolicy(null, "2023-01-01", "2024-01-01"));
-        assertThrows(NullPointerException.class,
-                () -> Policy.isValidPolicy("Policy Name", null, "2024-01-01"));
-        assertThrows(NullPointerException.class,
-                () -> Policy.isValidPolicy("Policy Name", "2023-01-01", null));
+        assertThrows(NullPointerException.class, () ->
+                Policy.isValidPolicy(null, "2023-01-01", "2024-01-01"));
+        assertThrows(NullPointerException.class, () ->
+                Policy.isValidPolicy("Policy Name", null, "2024-01-01"));
+        assertThrows(NullPointerException.class, () ->
+                Policy.isValidPolicy("Policy Name", "2023-01-01", null));
 
         // invalid policies
         assertFalse(Policy.isValidPolicy("",
