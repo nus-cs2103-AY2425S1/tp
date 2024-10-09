@@ -6,8 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditVendorDescriptor;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.vendor.Address;
-import seedu.address.model.vendor.Email;
+import seedu.address.model.vendor.Description;
 import seedu.address.model.vendor.Name;
 import seedu.address.model.vendor.Phone;
 import seedu.address.model.vendor.Vendor;
@@ -35,8 +34,7 @@ public class EditVendorDescriptorBuilder {
         descriptor = new EditVendorDescriptor();
         descriptor.setName(vendor.getName());
         descriptor.setPhone(vendor.getPhone());
-        descriptor.setEmail(vendor.getEmail());
-        descriptor.setAddress(vendor.getAddress());
+        descriptor.setDescription(vendor.getDescription());
         descriptor.setTags(vendor.getTags());
     }
 
@@ -59,20 +57,11 @@ public class EditVendorDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code EditVendorDescriptor} that we are
+     * Sets the {@code Description} of the {@code EditVendorDescriptor} that we are
      * building.
      */
-    public EditVendorDescriptorBuilder withEmail(String email) {
-        descriptor.setEmail(new Email(email));
-        return this;
-    }
-
-    /**
-     * Sets the {@code Address} of the {@code EditVendorDescriptor} that we are
-     * building.
-     */
-    public EditVendorDescriptorBuilder withAddress(String address) {
-        descriptor.setAddress(new Address(address));
+    public EditVendorDescriptorBuilder withDescription(String description) {
+        descriptor.setDescription(new Description(description));
         return this;
     }
 

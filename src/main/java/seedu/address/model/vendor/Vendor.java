@@ -11,7 +11,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Vendor in the address book.
+ * Represents a Vendor in the description book.
  * Guarantees: details are present and not null, field values are validated,
  * immutable.
  */
@@ -20,34 +20,32 @@ public class Vendor {
     // Identity fields
     private final Name name;
     private final Phone phone;
-    private final Email email;
 
     // Data fields
-    private final Address address;
+    private final Description description;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Vendor(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Vendor(Name name, Phone phone, Description description, Set<Tag> tags) {
+        requireAllNonNull(name, phone, description, tags);
         this.name = name;
         this.phone = phone;
-        this.email = email;
-        this.address = address;
+        this.description = description;
         this.tags.addAll(tags);
     }
 
     /**
-     * Alternate constructor for basic Vendor with name, phone
+     * Every field must be present and not null.
+     * Overloaded constructor for Vendor without Description.
      */
-    public Vendor(Name name, Phone phone) {
-        requireAllNonNull(name, phone);
+    public Vendor(Name name, Phone phone, Set<Tag> tags) {
+        requireAllNonNull(name, phone, tags);
         this.name = name;
         this.phone = phone;
-        // TODO: decide if email and address should be included in Vendor
-        this.email = new Email("dummyemail@phony.com");
-        this.address = new Address("Dummy Address");
+        this.description = new Description("-");
+        this.tags.addAll(tags);
     }
 
     public Name getName() {
@@ -58,12 +56,8 @@ public class Vendor {
         return phone;
     }
 
-    public Email getEmail() {
-        return email;
-    }
-
-    public Address getAddress() {
-        return address;
+    public Description getDescription() {
+        return description;
     }
 
     /**
@@ -106,15 +100,14 @@ public class Vendor {
         Vendor otherVendor = (Vendor) other;
         return name.equals(otherVendor.name)
                 && phone.equals(otherVendor.phone)
-                && email.equals(otherVendor.email)
-                && address.equals(otherVendor.address)
+                && description.equals(otherVendor.description)
                 && tags.equals(otherVendor.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, description, tags);
     }
 
     @Override
@@ -122,10 +115,8 @@ public class Vendor {
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
-                .add("email", email)
-                .add("address", address)
+                .add("description", description)
                 .add("tags", tags)
                 .toString();
     }
-
 }

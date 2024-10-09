@@ -3,8 +3,7 @@ package seedu.address.model.vendor;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -33,8 +32,8 @@ public class VendorTest {
         assertFalse(ALICE.isSameVendor(null));
 
         // same name, all other attributes different -> returns true
-        Vendor editedAlice = new VendorBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+        Vendor editedAlice = new VendorBuilder(ALICE).withPhone(VALID_PHONE_BOB)
+                .withDescription(VALID_DESCRIPTION_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameVendor(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -77,12 +76,8 @@ public class VendorTest {
         editedAlice = new VendorBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different email -> returns false
-        editedAlice = new VendorBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
-
-        // different address -> returns false
-        editedAlice = new VendorBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
+        // different description -> returns false
+        editedAlice = new VendorBuilder(ALICE).withDescription(VALID_DESCRIPTION_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
@@ -93,7 +88,8 @@ public class VendorTest {
     @Test
     public void toStringMethod() {
         String expected = Vendor.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + "}";
+                + ", description=" + ALICE.getDescription() + ", tags=" + ALICE.getTags() + "}";
+
         assertEquals(expected, ALICE.toString());
     }
 }

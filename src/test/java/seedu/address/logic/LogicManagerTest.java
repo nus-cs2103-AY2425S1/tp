@@ -3,8 +3,7 @@ package seedu.address.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_VENDOR_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -45,8 +44,8 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(
+                temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
@@ -91,7 +90,9 @@ public class LogicManagerTest {
      * Executes the command and confirms that
      * - no exceptions are thrown <br>
      * - the feedback message is equal to {@code expectedMessage} <br>
-     * - the internal model manager state is the same as that in {@code expectedModel} <br>
+     * - the internal model manager state is the same as that in
+     * {@code expectedModel} <br>
+     *
      * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
@@ -102,7 +103,9 @@ public class LogicManagerTest {
     }
 
     /**
-     * Executes the command, confirms that a ParseException is thrown and that the result message is correct.
+     * Executes the command, confirms that a ParseException is thrown and that the
+     * result message is correct.
+     *
      * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertParseException(String inputCommand, String expectedMessage) {
@@ -110,7 +113,9 @@ public class LogicManagerTest {
     }
 
     /**
-     * Executes the command, confirms that a CommandException is thrown and that the result message is correct.
+     * Executes the command, confirms that a CommandException is thrown and that the
+     * result message is correct.
+     *
      * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertCommandException(String inputCommand, String expectedMessage) {
@@ -118,7 +123,9 @@ public class LogicManagerTest {
     }
 
     /**
-     * Executes the command, confirms that the exception is thrown and that the result message is correct.
+     * Executes the command, confirms that the exception is thrown and that the
+     * result message is correct.
+     *
      * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
@@ -131,7 +138,9 @@ public class LogicManagerTest {
      * Executes the command and confirms that
      * - the {@code expectedException} is thrown <br>
      * - the resulting error message is equal to {@code expectedMessage} <br>
-     * - the internal model manager state is the same as that in {@code expectedModel} <br>
+     * - the internal model manager state is the same as that in
+     * {@code expectedModel} <br>
+     *
      * @see #assertCommandSuccess(String, String, Model)
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
@@ -141,15 +150,18 @@ public class LogicManagerTest {
     }
 
     /**
-     * Tests the Logic component's handling of an {@code IOException} thrown by the Storage component.
+     * Tests the Logic component's handling of an {@code IOException} thrown by the
+     * Storage component.
      *
-     * @param e the exception to be thrown by the Storage component
-     * @param expectedMessage the message expected inside exception thrown by the Logic component
+     * @param e               the exception to be thrown by the Storage component
+     * @param expectedMessage the message expected inside exception thrown by the
+     *                        Logic component
      */
     private void assertCommandFailureForExceptionFromStorage(IOException e, String expectedMessage) {
         Path prefPath = temporaryFolder.resolve("ExceptionUserPrefs.json");
 
-        // Inject LogicManager with an AddressBookStorage that throws the IOException e when saving
+        // Inject LogicManager with an AddressBookStorage that throws the IOException e
+        // when saving
         JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(prefPath) {
             @Override
             public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath)
@@ -158,15 +170,15 @@ public class LogicManagerTest {
             }
         };
 
-        JsonUserPrefsStorage userPrefsStorage =
-                new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
+        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(
+                temporaryFolder.resolve("ExceptionUserPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
         logic = new LogicManager(model, storage);
 
         // Triggers the saveAddressBook method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
+                + DESCRIPTION_DESC_AMY;
         Vendor expectedVendor = new VendorBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addVendor(expectedVendor);

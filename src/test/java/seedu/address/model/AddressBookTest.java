@@ -3,7 +3,7 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalVendors.ALICE;
@@ -46,7 +46,7 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicateVendors_throwsDuplicateVendorException() {
         // Two vendors with the same identity fields
-        Vendor editedAlice = new VendorBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Vendor editedAlice = new VendorBuilder(ALICE).withDescription(VALID_DESCRIPTION_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Vendor> newVendors = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newVendors);
@@ -73,7 +73,7 @@ public class AddressBookTest {
     @Test
     public void hasVendor_vendorWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addVendor(ALICE);
-        Vendor editedAlice = new VendorBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Vendor editedAlice = new VendorBuilder(ALICE).withDescription(VALID_DESCRIPTION_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(addressBook.hasVendor(editedAlice));
     }
@@ -90,7 +90,8 @@ public class AddressBookTest {
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose vendors list can violate interface constraints.
+     * A stub ReadOnlyAddressBook whose vendors list can violate interface
+     * constraints.
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Vendor> vendors = FXCollections.observableArrayList();

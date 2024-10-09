@@ -17,11 +17,13 @@ public class VendorCard extends UiPart<Region> {
     private static final String FXML = "VendorListCard.fxml";
 
     /**
-     * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
+     * Note: Certain keywords such as "location" and "resources" are reserved
+     * keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
      * or an exception will be thrown by JavaFX during runtime.
      *
-     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
+     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The
+     *      issue on AddressBook level 4</a>
      */
 
     public final Vendor vendor;
@@ -35,14 +37,13 @@ public class VendorCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
-    private Label address;
-    @FXML
-    private Label email;
+    private Label description;
     @FXML
     private FlowPane tags;
 
     /**
-     * Creates a {@code VendorCode} with the given {@code Vendor} and index to display.
+     * Creates a {@code VendorCode} with the given {@code Vendor} and index to
+     * display.
      */
     public VendorCard(Vendor vendor, int displayedIndex) {
         super(FXML);
@@ -50,8 +51,7 @@ public class VendorCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(vendor.getName().fullName);
         phone.setText(vendor.getPhone().value);
-        address.setText(vendor.getAddress().value);
-        email.setText(vendor.getEmail().value);
+        description.setText(vendor.getDescription().value);
         vendor.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

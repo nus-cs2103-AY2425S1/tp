@@ -5,8 +5,7 @@ import java.util.Set;
 
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.model.vendor.Address;
-import seedu.address.model.vendor.Email;
+import seedu.address.model.vendor.Description;
 import seedu.address.model.vendor.Name;
 import seedu.address.model.vendor.Phone;
 import seedu.address.model.vendor.Vendor;
@@ -19,12 +18,11 @@ public class VendorBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_DESCRIPTION = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
     private Phone phone;
-    private Email email;
-    private Address address;
+    private Description description;
     private Set<Tag> tags;
 
     /**
@@ -33,8 +31,7 @@ public class VendorBuilder {
     public VendorBuilder() {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
-        email = new Email(DEFAULT_EMAIL);
-        address = new Address(DEFAULT_ADDRESS);
+        description = new Description(DEFAULT_DESCRIPTION);
         tags = new HashSet<>();
     }
 
@@ -44,8 +41,7 @@ public class VendorBuilder {
     public VendorBuilder(Vendor vendorToCopy) {
         name = vendorToCopy.getName();
         phone = vendorToCopy.getPhone();
-        email = vendorToCopy.getEmail();
-        address = vendorToCopy.getAddress();
+        description = vendorToCopy.getDescription();
         tags = new HashSet<>(vendorToCopy.getTags());
     }
 
@@ -67,10 +63,10 @@ public class VendorBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code Vendor} that we are building.
+     * Sets the {@code Description} of the {@code Vendor} that we are building.
      */
-    public VendorBuilder withAddress(String address) {
-        this.address = new Address(address);
+    public VendorBuilder withDescription(String description) {
+        this.description = new Description(description);
         return this;
     }
 
@@ -82,16 +78,8 @@ public class VendorBuilder {
         return this;
     }
 
-    /**
-     * Sets the {@code Email} of the {@code Vendor} that we are building.
-     */
-    public VendorBuilder withEmail(String email) {
-        this.email = new Email(email);
-        return this;
-    }
-
     public Vendor build() {
-        return new Vendor(name, phone, email, address, tags);
+        return new Vendor(name, phone, description, tags);
     }
 
 }
