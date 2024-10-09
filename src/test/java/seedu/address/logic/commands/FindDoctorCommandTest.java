@@ -48,7 +48,7 @@ public class FindDoctorCommandTest {
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 
-        @Test
+    @Test
     public void execute() {
         NameContainsKeywordsPredicate firstPredicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("first"));
