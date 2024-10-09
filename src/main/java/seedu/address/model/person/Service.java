@@ -11,7 +11,7 @@ public class Service {
     public static final String MESSAGE_CONSTRAINTS =
             "Services should only contain alphanumeric characters and spaces, and it should not be blank";
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
-    public final String service;
+    public final String value;
     /**
      * Constructs a {@code Service}.
      *
@@ -20,7 +20,7 @@ public class Service {
     public Service(String service) {
         requireNonNull(service);
         checkArgument(isValidService(service), MESSAGE_CONSTRAINTS);
-        this.service = service;
+        value = service;
     }
 
     /**
@@ -30,10 +30,9 @@ public class Service {
         return test.matches(VALIDATION_REGEX);
     }
 
-
     @Override
     public String toString() {
-        return service;
+        return value;
     }
 
     @Override
@@ -48,11 +47,11 @@ public class Service {
         }
 
         Service otherService = (Service) other;
-        return service.equals(otherService.service);
+        return value.equals(otherService.value);
     }
 
     @Override
     public int hashCode() {
-        return service.hashCode();
+        return value.hashCode();
     }
 }
