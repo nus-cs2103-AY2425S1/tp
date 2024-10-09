@@ -12,7 +12,7 @@ import seedu.address.model.tag.Tag;
 public class Tutorial {
     public static final String MESSAGE_CONSTRAINTS =
             "Tutorial number should be non-negative integer.";
-    public static final String VALIDATION_REGEX = "\\d[0-99]";
+    public static final String VALIDATION_REGEX = "[0-99]";
 
     public final String tutorial;
 

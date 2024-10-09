@@ -19,14 +19,17 @@ public class MarkCommandParser implements Parser<MarkCommand> {
                 PREFIX_TUTORIAL);
 
         Index index;
+        Tutorial tutorial;
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            tutorial = new Tutorial(argMultimap.getValue(PREFIX_TUTORIAL).orElse(""));
         } catch (ParseException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     MarkCommand.MESSAGE_USAGE), ive);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(e.getMessage());
         }
 
-        Tutorial tutorial = new Tutorial(argMultimap.getValue(PREFIX_TUTORIAL).orElse(""));
 
         return new MarkCommand(index, tutorial);
     }

@@ -26,6 +26,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Tutorial;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -138,6 +139,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private Set<Tutorial> tutorials;
 
         public EditPersonDescriptor() {}
 
@@ -151,6 +153,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setTutorials(toCopy.tutorials);
         }
 
         /**
@@ -209,6 +212,23 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        /**
+         * Sets {@code tutorials} to this object's {@code tutorials}.
+         * A defensive copy of {@code tutorials} is used internally.
+         */
+        public void setTutorials(Set<Tutorial> tutorials) {
+            this.tutorials = (tutorials != null) ? new HashSet<>(tutorials) : null;
+        }
+
+        /**
+         * Returns an unmodifiable tutorial set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code tutorials} is null.
+         */
+        public Optional<Set<Tutorial>> getTutorials() {
+            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tutorials)) : Optional.empty();
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -236,6 +256,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("tags", tags)
+                    .add("tutorials", tutorials)
                     .toString();
         }
     }
