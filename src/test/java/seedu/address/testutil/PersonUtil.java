@@ -11,7 +11,7 @@ import java.util.Set;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Tier;
 
 /**
  * A utility class for Person.
@@ -50,11 +50,11 @@ public class PersonUtil {
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         if (descriptor.getTags().isPresent()) {
-            Set<Tag> tags = descriptor.getTags().get();
-            if (tags.isEmpty()) {
+            Set<Tier> tiers = descriptor.getTags().get();
+            if (tiers.isEmpty()) {
                 sb.append(PREFIX_TAG);
             } else {
-                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
+                tiers.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
             }
         }
         return sb.toString();

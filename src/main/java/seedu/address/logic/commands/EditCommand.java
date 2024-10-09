@@ -27,7 +27,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Tier;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -100,9 +100,9 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<Tier> updatedTiers = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Remark updatedRemark = personToEdit.getRemark(); // edit command does not allow editing remarks
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedRemark);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTiers, updatedRemark);
     }
 
     @Override
@@ -138,7 +138,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
-        private Set<Tag> tags;
+        private Set<Tier> tiers;
 
         public EditPersonDescriptor() {}
 
@@ -151,14 +151,14 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setTags(toCopy.tags);
+            setTags(toCopy.tiers);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tiers);
         }
 
         public void setName(Name name) {
@@ -197,8 +197,8 @@ public class EditCommand extends Command {
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
          */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setTags(Set<Tier> tiers) {
+            this.tiers = (tiers != null) ? new HashSet<>(tiers) : null;
         }
 
         /**
@@ -206,8 +206,8 @@ public class EditCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public Optional<Set<Tier>> getTags() {
+            return (tiers != null) ? Optional.of(Collections.unmodifiableSet(tiers)) : Optional.empty();
         }
 
         @Override
@@ -226,7 +226,7 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tiers, otherEditPersonDescriptor.tiers);
         }
 
         @Override
@@ -236,7 +236,7 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
-                    .add("tags", tags)
+                    .add("tags", tiers)
                     .toString();
         }
     }

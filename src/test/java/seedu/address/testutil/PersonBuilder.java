@@ -9,7 +9,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Tier;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -28,7 +28,7 @@ public class PersonBuilder {
     private Phone phone;
     private Email email;
     private Address address;
-    private Set<Tag> tags;
+    private Set<Tier> tiers;
 
     private Remark remark;
 
@@ -40,7 +40,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        tags = new HashSet<>();
+        tiers = new HashSet<>();
         remark = new Remark(DEFAULT_REMARK);
     }
 
@@ -52,7 +52,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
-        tags = new HashSet<>(personToCopy.getTags());
+        tiers = new HashSet<>(personToCopy.getTags());
         remark = personToCopy.getRemark();
     }
 
@@ -68,7 +68,7 @@ public class PersonBuilder {
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
     public PersonBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
+        this.tiers = SampleDataUtil.getTagSet(tags);
         return this;
     }
 
@@ -105,7 +105,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, tags, remark);
+        return new Person(name, phone, email, address, tiers, remark);
     }
 
 }
