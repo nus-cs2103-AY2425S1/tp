@@ -35,6 +35,9 @@ public class Doctor extends Person{
             // TODO, separate functionality by Patient or Doctor
             return "";
         }
+
+        public void get(LocalDateTime dateTime) {
+        }
     }
 
     private History history;
@@ -59,7 +62,7 @@ public class Doctor extends Person{
      * Adds an entry to the doctor's schedule.
      *
      * @param dateTime Date and time of the appointment or event.
-     * @param TODO
+     * TODO
      */
     public void addAppointment(LocalDateTime dateTime, Pair<Id, String> description) {
         requireNonNull(dateTime);
@@ -77,20 +80,19 @@ public class Doctor extends Person{
     /**
      * Retrieves the full schedule of the doctor.
      *
-     * @return A TODO representing the TreeMap containing the doctor's schedule, 
+     * @return A TODO representing the TreeMap containing the doctor's schedule,
      * with the LocalDateTime as the key and History as the value.
      */
     public String getAllAppointments(Id id) {
         return history.getAll(id);
     }
-  
     /**
      * Retrieves a specific schedule entry based on the date and time. TODO
      *
      * @param dateTime The date and time of the desired schedule entry.
-     * @return The History object associated with the specified date and time, or null if not found.
+     * @return Pair<Id, String> The History object associated with the specified date and time, or null if not found.
      */
-    public History getScheduleEntry(LocalDateTime dateTime) {
-        return history.get(dateTime);
+    public void getScheduleEntry(LocalDateTime dateTime) {
+        // return history.get(dateTime);
     }
 }
