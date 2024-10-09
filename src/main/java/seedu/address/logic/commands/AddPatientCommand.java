@@ -45,7 +45,7 @@ public class AddPatientCommand extends Command {
      */
     public AddPatientCommand(Patient patient) {
         requireNonNull(patient);
-        toAdd = patient;
+        this.toAdd = patient;
     }
 
     @Override
@@ -67,12 +67,12 @@ public class AddPatientCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddCommand)) {
+        if (!(other instanceof AddPatientCommand)) {
             return false;
         }
 
         AddPatientCommand otherAddPatientCommand = (AddPatientCommand) other;
-        return toAdd.equals(otherAddPatientCommand.toAdd);
+        return this.toAdd.equals(otherAddPatientCommand.toAdd);
     }
 
     @Override
