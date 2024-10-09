@@ -10,6 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.CallFrequency;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
@@ -109,6 +110,21 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String callFrequency} into an {@code CallFrequency}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code callFrequency} is invalid.
+     */
+    public static CallFrequency parseCallFrequency(String callFrequency) throws ParseException {
+        requireNonNull(callFrequency);
+        String trimmedCallFrequency = callFrequency.trim();
+        if (!CallFrequency.isValidCallFrequency(trimmedCallFrequency)) {
+            throw new ParseException(CallFrequency.MESSAGE_CONSTRAINTS);
+        }
+        return new CallFrequency(trimmedCallFrequency);
     }
 
     /**

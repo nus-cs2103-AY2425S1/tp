@@ -44,7 +44,9 @@ public class Messages {
                 .append(person.getEmail())
                 .append("; Address: ")
                 .append(person.getAddress())
-                .append("; Tags: ");
+                .append("; Tags: ")
+                .append(person.getCallFrequency())
+                .append("; Call Frequency: ");
         person.getTags().forEach(builder::append);
         return builder.toString();
     }
