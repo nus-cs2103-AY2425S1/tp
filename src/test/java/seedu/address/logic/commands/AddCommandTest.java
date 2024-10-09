@@ -95,7 +95,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasProduct(Product product){
+        public boolean hasProduct(Product product) {
             return true;
         }
 
