@@ -1,24 +1,14 @@
 package seedu.address.model.person;
 
 import seedu.address.model.tag.Tag;
-import seedu.address.model.person.Id;
-import seedu.address.model.person.Pair;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Set;
 import java.util.TreeMap;
 
 import static java.util.Objects.requireNonNull;
 
-/**
- * Represents a Patient in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
- */
-public class Patient extends Person {
-    private History history;
-    private Id id;
-
+public class Doctor extends Person{
     /**
      * Placeholder Appointment class while waiting for
      * Appointment implementation PR.
@@ -47,6 +37,8 @@ public class Patient extends Person {
         }
     }
 
+    private History history;
+    private Id id;
     /**
      * Every field must be present and not null.
      *
@@ -57,10 +49,10 @@ public class Patient extends Person {
      * @param remark
      * @param tags
      */
-    public Patient(Name name, Phone phone, Email email, Address address, Remark remark, Set<Tag> tags) {
+    public Doctor(Name name, Phone phone, Email email, Address address, Remark remark, Set<Tag> tags) {
         super(name, phone, email, address, remark, tags);
         id = new Id(this.getClass());
-        history = new History(id);
+        history = new Doctor.History(id);
     }
 
     // Method to add an appointment
