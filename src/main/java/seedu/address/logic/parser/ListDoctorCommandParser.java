@@ -1,10 +1,13 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import seedu.address.logic.commands.ListDoctorCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+
 /**
- * Parses input arguments and creates a new ListDoctorCommand object
+ * Parses input arguments and creates a new ListDoctorCommand object.
  */
 public class ListDoctorCommandParser implements Parser<ListDoctorCommand> {
 
@@ -17,6 +20,10 @@ public class ListDoctorCommandParser implements Parser<ListDoctorCommand> {
      */
     @Override
     public ListDoctorCommand parse(String args) throws ParseException {
+        // If the user provides any arguments, throw a ParseException
+        if (!args.trim().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListDoctorCommand.MESSAGE_USAGE));
+        }
         return new ListDoctorCommand();
     }
 }
