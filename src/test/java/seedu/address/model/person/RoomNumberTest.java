@@ -15,7 +15,7 @@ public class RoomNumberTest {
 
     @Test
     public void constructor_invalidRoomNumber_throwsIllegalArgumentException() {
-        String invalidRoomNumber = "#0101";
+        String invalidRoomNumber = "#01-0123";
         assertThrows(IllegalArgumentException.class, () -> new RoomNumber(invalidRoomNumber));
     }
 
@@ -25,17 +25,16 @@ public class RoomNumberTest {
         assertThrows(NullPointerException.class, () -> Address.isValidAddress(null));
 
         // invalid addresses
-        assertFalse(RoomNumber.isValidRoomNumber("0101")); // no # or -
-        assertFalse(RoomNumber.isValidRoomNumber("#0101")); // no -
-        assertFalse(RoomNumber.isValidRoomNumber("01-01")); // no #
-        assertFalse(RoomNumber.isValidRoomNumber("#1-01")); // incorrect digits for floor
-        assertFalse(RoomNumber.isValidRoomNumber("#001-01")); // incorrect digits for floor
-        assertFalse(RoomNumber.isValidRoomNumber("#01-1")); // incorrect digits for room
-        assertFalse(RoomNumber.isValidRoomNumber("#01-001")); // incorrect digits for room
+        assertFalse(RoomNumber.isValidRoomNumber("#01-0123")); // additional special character #
+        assertFalse(RoomNumber.isValidRoomNumber("010123")); // no -
+        assertFalse(RoomNumber.isValidRoomNumber("010-123")); // wrong placement of -
+        assertFalse(RoomNumber.isValidRoomNumber("#1-0123")); // incorrect digits for floor
+        assertFalse(RoomNumber.isValidRoomNumber("#001-0123")); // incorrect digits for floor
+        assertFalse(RoomNumber.isValidRoomNumber("#01-012")); // incorrect digits for room
+        assertFalse(RoomNumber.isValidRoomNumber("#01-01234")); // incorrect digits for room
 
         // valid addresses
-        assertTrue(Address.isValidAddress("#01-01"));
-        assertTrue(Address.isValidAddress("#10-10")); // one character
+        assertTrue(Address.isValidAddress("05-5053"));
     }
 
     @Test
