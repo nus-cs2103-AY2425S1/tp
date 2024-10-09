@@ -37,8 +37,8 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
-    public static final String MESSAGE_DUPLICATE_PHONE = "\nWarning! There is a person with the same phone number\n";
-    public static final String MESSAGE_DUPLICATE_EMAIL = "\nWarning! There is a person with the same email\n";
+    public static final String MESSAGE_DUPLICATE_PHONE = "\nWarning! There is a person with the same phone number";
+    public static final String MESSAGE_DUPLICATE_EMAIL = "\nWarning! There is a person with the same email";
 
     private final Person toAdd;
 
