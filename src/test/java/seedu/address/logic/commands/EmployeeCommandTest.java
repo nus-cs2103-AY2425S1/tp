@@ -47,10 +47,11 @@ public class EmployeeCommandTest {
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Person validPerson = new PersonBuilder().build();
-        EmployeeCommand addCommand = new EmployeeCommand(validPerson);
+        EmployeeCommand employeeCommand = new EmployeeCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        assertThrows(CommandException.class, EmployeeCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, EmployeeCommand.MESSAGE_DUPLICATE_PERSON, () ->
+                employeeCommand.execute(modelStub));
     }
 
     @Test
@@ -79,9 +80,9 @@ public class EmployeeCommandTest {
 
     @Test
     public void toStringMethod() {
-        EmployeeCommand addCommand = new EmployeeCommand(ALICE);
+        EmployeeCommand employeeCommand = new EmployeeCommand(ALICE);
         String expected = EmployeeCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
-        assertEquals(expected, addCommand.toString());
+        assertEquals(expected, employeeCommand.toString());
     }
 
     /**
