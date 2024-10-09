@@ -3,8 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -43,7 +42,9 @@ public class DeleteCommand extends Command {
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
 
-        // Show confirmation dialog
+        /*
+        this part of code should only exist in javafx file so remove it so far
+        Show confirmation dialog
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Delete Confirmation");
         alert.setHeaderText("Are you sure you want to delete this person?");
@@ -53,6 +54,7 @@ public class DeleteCommand extends Command {
         if (result != ButtonType.OK) {
             return new CommandResult("Deletion cancelled.");
         }
+         */
 
         model.deletePerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));

@@ -3,59 +3,92 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.*;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 
-import java.util.*;
+
+
 
 /**
- * Adds a person to the address book.
+ * Represents a command to view details of a person.
  */
 public class ViewCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Useing either of the parameter blow \n "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Use either of the parameters below\n "
             + "Parameters: "
             + PREFIX_NAME + "NAME \n"
             + "c/ " + "CONTACT_NUMBER \n"
             + "r/ " + "ROOM_NUMBER";
 
+    private final ViewPersonDescriptor viewPersonDescriptor;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates a ViewCommand with the specified {@code ViewPersonDescriptor}.
      */
-
-
-    public ViewCommand(Person person) {
-        requireNonNull(person);
-
+    public ViewCommand(ViewPersonDescriptor viewPersonDescriptor) {
+        requireNonNull(viewPersonDescriptor);
+        this.viewPersonDescriptor = new ViewPersonDescriptor(viewPersonDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-        /*
-        searching implementation not implemented yet
-         */
+        // Searching implementation not implemented yet
         return new CommandResult("view command executed");
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
 
+        if (!(other instanceof ViewCommand)) {
+            return false;
+        }
+
+        ViewCommand otherViewCommand = (ViewCommand) other;
+        return viewPersonDescriptor.equals(otherViewCommand.viewPersonDescriptor);
+    }
+
+    @Override
+    public String toString() {
+        return "testing view command";
+    }
+
+    public ViewPersonDescriptor getViewPersonDescriptor() {
+        return viewPersonDescriptor;
+    }
+
+    /**
+     * Stores the details to view a person.
+     */
     public static class ViewPersonDescriptor {
         private Name name;
         private Phone phone;
-        // room number currently missing
 
         public ViewPersonDescriptor() {}
 
+        /**
+         * Copy constructor.
+         * @param toCopy Descriptor to copy from.
+         */
+        public ViewPersonDescriptor(ViewCommand.ViewPersonDescriptor toCopy) {
+            setName(toCopy.name);
+            setPhone(toCopy.phone);
+        }
 
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone);
@@ -83,8 +116,7 @@ public class ViewCommand extends Command {
                 return true;
             }
 
-            // instanceof handles nulls
-            if (!(other instanceof EditCommand.EditPersonDescriptor)) {
+            if (!(other instanceof ViewCommand.ViewPersonDescriptor)) {
                 return false;
             }
 
@@ -102,3 +134,5 @@ public class ViewCommand extends Command {
         }
     }
 }
+
+// Ensure this comment or any character is followed by a newline at the end of the file.
