@@ -10,15 +10,15 @@ public class NoteTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Name(null));
+        assertThrows(NullPointerException.class, () -> new Note(null));
     }
 
     @Test
     public void equals() {
-        Note note = new Note("Valid Name");
+        Note note = new Note("Valid Note");
 
         // same values -> returns true
-        assertTrue(note.equals(new Note("Valid Name")));
+        assertTrue(note.equals(new Note("Valid Note")));
 
         // same object -> returns true
         assertTrue(note.equals(note));
@@ -30,6 +30,6 @@ public class NoteTest {
         assertFalse(note.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(note.equals(new Note("Other Valid Name")));
+        assertFalse(note.equals(new Note("Other Valid Note")));
     }
 }
