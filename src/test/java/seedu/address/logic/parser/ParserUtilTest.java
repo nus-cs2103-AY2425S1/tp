@@ -6,6 +6,9 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -14,6 +17,9 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.order.Count;
+import seedu.address.model.order.Date;
+import seedu.address.model.order.Item;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -26,6 +32,9 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_ITEM = "World M@p";
+    private static final String INVALID_COUNT = "0";
+    private static final String INVALID_DATE = "12-12-12";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -33,6 +42,9 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_ITEM = "World Map";
+    private static final String VALID_COUNT = "2";
+    private static final String VALID_DATE = "12-12-2025";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -192,5 +204,101 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseItem_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseItem((String) null));
+    }
+
+    @Test
+    public void parseItem_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseItem(INVALID_ITEM));
+    }
+
+    @Test
+    public void parseItem_validValueWithoutWhitespace_returnsItem() throws Exception {
+        Item expectedItem = new Item(VALID_ITEM);
+        assertEquals(expectedItem, ParserUtil.parseItem(VALID_ITEM));
+    }
+
+    @Test
+    public void parseItem_validValueWithWhitespace_returnsTrimmedItem() throws Exception {
+        String itemWithWhitespace = WHITESPACE + VALID_ITEM + WHITESPACE;
+        Item expectedItem = new Item(VALID_ITEM);
+        assertEquals(expectedItem, ParserUtil.parseItem(itemWithWhitespace));
+    }
+
+    @Test
+    public void parseCount_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseCount((String) null));
+    }
+
+    @Test
+    public void parseCount_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseCount(INVALID_COUNT));
+    }
+
+    @Test
+    public void parseCount_validValueWithoutWhitespace_returnsCount() throws Exception {
+        Count expectedCount = new Count(VALID_COUNT);
+        assertEquals(expectedCount, ParserUtil.parseCount(VALID_COUNT));
+    }
+
+    @Test
+    public void parseCount_validValueWithWhitespace_returnsTrimmedCount() throws Exception {
+        String countWithWhitespace = WHITESPACE + VALID_COUNT + WHITESPACE;
+        Count expectedCount = new Count(VALID_COUNT);
+        assertEquals(expectedCount, ParserUtil.parseCount(countWithWhitespace));
+    }
+
+    @Test
+    public void parseDate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDate((String) null));
+    }
+
+    @Test
+    public void parseDate_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDate(INVALID_DATE));
+    }
+
+    @Test
+    public void parseDate_validValueWithoutWhitespace_returnsDate() throws Exception {
+        Date expectedDate = new Date(VALID_DATE);
+        assertEquals(expectedDate, ParserUtil.parseDate(VALID_DATE));
+    }
+
+    @Test
+    public void parseDate_validValueWithWhitespace_returnsTrimmedDate() throws Exception {
+        String dateWithWhitespace = WHITESPACE + VALID_DATE + WHITESPACE;
+        Date expectedDate = new Date(VALID_DATE);
+        assertEquals(expectedDate, ParserUtil.parseDate(dateWithWhitespace));
+    }
+
+    @Test
+    public void parseLocalDate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseLocalDate((String) null));
+    }
+
+    @Test
+    public void parseLocalDate_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseLocalDate(INVALID_DATE));
+    }
+
+    @Test
+    public void parseLocalDate_validValueWithoutWhitespace_returnsDate() throws Exception {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(Date.DATE_FORMATTER)
+                .withResolverStyle(ResolverStyle.STRICT);
+        LocalDate expectedDate = LocalDate.parse(VALID_DATE, formatter);
+        assertEquals(expectedDate, ParserUtil.parseLocalDate(VALID_DATE));
+    }
+
+    @Test
+    public void parseLocalDate_validValueWithWhitespace_returnsTrimmedDate() throws Exception {
+        String dateWithWhitespace = WHITESPACE + VALID_DATE + WHITESPACE;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(Date.DATE_FORMATTER)
+                .withResolverStyle(ResolverStyle.STRICT);
+        LocalDate expectedDate = LocalDate.parse(VALID_DATE, formatter);
+        assertEquals(expectedDate, ParserUtil.parseLocalDate(dateWithWhitespace));
     }
 }

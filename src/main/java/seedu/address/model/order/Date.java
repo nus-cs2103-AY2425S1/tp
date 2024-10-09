@@ -3,6 +3,8 @@ package seedu.address.model.order;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.time.LocalDate;
+
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -11,7 +13,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
 public class Date {
-    public static final String DATE_FORMATTER = "dd-MM-yyyy";
+    public static final String DATE_FORMATTER = "dd-MM-uuuu";
     public static final String MESSAGE_CONSTRAINTS = "Dates should be of the format dd-mm-yyyy "
             + "and adhere to the following constraints:\n"
             + "1. The day \"dd\" should be a 2-digit number representing a valid day the specified calender month\n"
@@ -20,7 +22,7 @@ public class Date {
             + "4. The day, month and year are separated by a hyphen '-'.";
     private static final String REGEX_DAY = "(0[1-9]|[12][0-9]|3[01])";
     private static final String REGEX_MONTH = "(0[1-9]|1[0-2])";
-    private static final String REGEX_YEAR = "(20[0-9]{2})";
+    private static final String REGEX_YEAR = "(20[0-9]{2}|2100)";
     public static final String REGEX_DATE = "^" + REGEX_DAY + "-" + REGEX_MONTH + "-" + REGEX_YEAR + "$";
     public final String value;
 
@@ -43,7 +45,7 @@ public class Date {
             return false;
         } else {
             try {
-                ParserUtil.parseLocalDate(test);
+                LocalDate localDate = ParserUtil.parseLocalDate(test);
             } catch (ParseException e) {
                 return false;
             }
