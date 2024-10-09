@@ -21,7 +21,7 @@ public class SexTest {
 
     @Test
     public void isValidSex() {
-        // null address
+        // null sex
         assertThrows(NullPointerException.class, () -> Sex.isValidSex(null));
 
         // invalid addresses
