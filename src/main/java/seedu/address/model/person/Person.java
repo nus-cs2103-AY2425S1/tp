@@ -36,7 +36,8 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.projectStatus = (projectStatus != null) ? projectStatus : new ProjectStatus("in progress"); // Default value
+        this.projectStatus = (projectStatus != null)
+                ? projectStatus : new ProjectStatus("in progress"); // Default value
     }
 
     public Name getName() {

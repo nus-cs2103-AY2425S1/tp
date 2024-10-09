@@ -1,16 +1,11 @@
 package seedu.address.model.person;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PROJECT_STATUS_COMPLETE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PROJECT_STATUS_IN_PROGRESS;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import org.junit.jupiter.api.Test;
-
-import seedu.address.testutil.PersonBuilder;
 
 /**
  * Test class for the ProjectStatus field in Person class.
@@ -18,53 +13,73 @@ import seedu.address.testutil.PersonBuilder;
 public class ProjectStatusTest {
 
     @Test
-    public void projectStatus_modifyProjectStatus_success() {
-        // default project status
-        Person person = new PersonBuilder(ALICE).build();
-        assertEquals("in progress", person.getProjectStatus().toString());
-
-        // change project status to "completed"
-        Person editedPerson = new PersonBuilder(ALICE).withProjectStatus(VALID_PROJECT_STATUS_COMPLETE).build();
-        assertEquals(VALID_PROJECT_STATUS_COMPLETE, editedPerson.getProjectStatus().toString());
-    }
-
-    @Test
-    public void projectStatus_isSamePerson_differentStatus_returnsTrue() {
-        // same name, different project status -> returns true
-        Person editedAlice = new PersonBuilder(ALICE).withProjectStatus(VALID_PROJECT_STATUS_IN_PROGRESS).build();
-        assertTrue(ALICE.isSamePerson(editedAlice));
-    }
-
-    @Test
-    public void projectStatus_equals() {
-        // same values including project status -> returns true
-        Person aliceWithStatus = new PersonBuilder(ALICE).withProjectStatus(VALID_PROJECT_STATUS_COMPLETE).build();
-        Person copyOfAlice = new PersonBuilder(aliceWithStatus).build();
-        assertTrue(aliceWithStatus.equals(copyOfAlice));
-
-        // different project status -> returns false
-        Person aliceWithDifferentStatus = new PersonBuilder(ALICE).withProjectStatus(VALID_PROJECT_STATUS_IN_PROGRESS).build();
-        assertFalse(aliceWithStatus.equals(aliceWithDifferentStatus));
-    }
-
-    @Test
-    public void projectStatus_toStringMethod() {
-        Person personWithStatus = new PersonBuilder(ALICE).withProjectStatus(VALID_PROJECT_STATUS_COMPLETE).build();
-        String expected = Person.class.getCanonicalName() + "{name=" + personWithStatus.getName() + ", phone="
-                + personWithStatus.getPhone() + ", email=" + personWithStatus.getEmail() + ", address="
-                + personWithStatus.getAddress() + ", tags=" + personWithStatus.getTags() + ", projectStatus="
-                + personWithStatus.getProjectStatus() + "}";
-        assertEquals(expected, personWithStatus.toString());
-    }
-
-    @Test
-    public void projectStatus_nullValue_throwsNullPointerException() {
+    public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new ProjectStatus(null));
     }
 
     @Test
-    public void projectStatus_invalidValue_throwsIllegalArgumentException() {
-        String invalidStatus = "";
+    public void constructor_invalidProjectStatus_throwsIllegalArgumentException() {
+        String invalidStatus = "not a valid status";
         assertThrows(IllegalArgumentException.class, () -> new ProjectStatus(invalidStatus));
+    }
+
+    @Test
+    public void isValidProjectStatus() {
+        // null status
+        assertThrows(NullPointerException.class, () -> ProjectStatus.isValidProjectStatus(null));
+
+        // invalid project status
+        assertFalse(ProjectStatus.isValidProjectStatus("")); // empty string
+        assertFalse(ProjectStatus.isValidProjectStatus(" ")); // spaces only
+        assertFalse(ProjectStatus.isValidProjectStatus("ongoing")); // not 'in progress' or 'completed'
+        assertFalse(ProjectStatus.isValidProjectStatus("completeded")); // typo
+
+        // valid project status
+        assertTrue(ProjectStatus.isValidProjectStatus("in progress")); // correct lower case
+        assertTrue(ProjectStatus.isValidProjectStatus("IN PROGRESS")); // case insensitive
+        assertTrue(ProjectStatus.isValidProjectStatus("Completed")); // case insensitive
+        assertTrue(ProjectStatus.isValidProjectStatus("completed")); // correct lower case
+    }
+
+    @Test
+    public void toString_validStatus_returnsCorrectString() {
+        ProjectStatus inProgressStatus = new ProjectStatus("in progress");
+        assertTrue(inProgressStatus.toString().equals("in progress"));
+
+        ProjectStatus completedStatus = new ProjectStatus("completed");
+        assertTrue(completedStatus.toString().equals("completed"));
+    }
+
+    @Test
+    public void equals() {
+        ProjectStatus inProgress = new ProjectStatus("in progress");
+        ProjectStatus completed = new ProjectStatus("completed");
+
+        // same values -> returns true
+        assertTrue(inProgress.equals(new ProjectStatus("in progress")));
+        assertTrue(completed.equals(new ProjectStatus("completed")));
+
+        // same object -> returns true
+        assertTrue(inProgress.equals(inProgress));
+
+        // null -> returns false
+        assertFalse(inProgress.equals(null));
+
+        // different types -> returns false
+        assertFalse(inProgress.equals(5.0f));
+
+        // different values -> returns false
+        assertFalse(inProgress.equals(completed));
+    }
+
+    @Test
+    public void hashCode_sameStatus_sameHashCode() {
+        ProjectStatus inProgress1 = new ProjectStatus("in progress");
+        ProjectStatus inProgress2 = new ProjectStatus("IN PROGRESS");
+        assertTrue(inProgress1.hashCode() == inProgress2.hashCode());
+
+        ProjectStatus completed1 = new ProjectStatus("completed");
+        ProjectStatus completed2 = new ProjectStatus("COMPLETED");
+        assertTrue(completed1.hashCode() == completed2.hashCode());
     }
 }

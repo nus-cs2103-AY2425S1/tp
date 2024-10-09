@@ -15,8 +15,8 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.person.ProjectStatus;
+import seedu.address.model.tag.Tag;
 
 
 /**
@@ -111,7 +111,8 @@ class JsonAdaptedPerson {
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         if (projectStatus == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ProjectStatus.class.getSimpleName()));
+            throw new IllegalValueException(String.format(
+                    MISSING_FIELD_MESSAGE_FORMAT, ProjectStatus.class.getSimpleName()));
         }
         if (!ProjectStatus.isValidProjectStatus(projectStatus)) {
             throw new IllegalValueException(ProjectStatus.MESSAGE_CONSTRAINTS);
