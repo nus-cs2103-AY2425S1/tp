@@ -16,6 +16,10 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.*;
+import seedu.address.model.tag.Tag;
+
+import static seedu.address.model.util.SampleDataUtil.getTagSet;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -43,6 +47,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private StackPane personDetailsPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -112,6 +119,15 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        //BlankDetailsPanel blankDetailsPanel = new BlankDetailsPanel();
+        //personDetailsPanelPlaceholder.getChildren().add(blankDetailsPanel.getRoot());
+
+        Person person = new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
+                new Address("Blk 30 Geylang Street 29, #06-40"),
+                getTagSet("friends"));
+        PersonDetailsPanel personDetailsPanel = new PersonDetailsPanel(person, 1);
+        personDetailsPanelPlaceholder.getChildren().add(personDetailsPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
