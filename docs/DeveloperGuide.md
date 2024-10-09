@@ -339,54 +339,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-#### **Use Case 1: Delete a person**
+#### **Use Case 1: Add a person or event**
 
 **Main Success Scenario (MSS)**
 
-1. User requests to list persons.
-2. Eventory shows a list of persons.
-3. User requests to delete a specific person in the list.
-4. Eventory deletes the person.
+1. User requests to add a person or event.
+2. Eventory adds the person or event.
+
+    *Use case ends.*
 
 **Extensions**
 
-- **2a.** The list is empty.  
-  *Use case ends.*
-
-- **3a.** The given index is invalid.  
-    - **3a1.** Eventory shows an error message.  
-      *Use case resumes at step 2.*
-
-  *Use case ends.*
-
----
-
-#### **Use Case 2: Add a person**
-
-**Main Success Scenario (MSS)**
-
-1. User requests to add a person.
-2. Eventory adds the person.
-
-**Extensions**
-
-- **2a.** The given format is invalid.  
+- **2a.** The given format is invalid.
     - **2a1.** Eventory shows an error message.  
       *Use case resumes at step 1.*
-
+  
   *Use case ends.*
 
 ---
 
-#### **Use Case 3: Editing a person**
+#### **Use Case 2: Delete a person or event**
 
 **Main Success Scenario (MSS)**
 
-1. User requests to list persons.
-2. Eventory shows a list of persons.
-3. User requests to edit a person.
-4. Eventory edits the person.  
-   *Use case ends.*
+1. User requests to list persons and events.
+2. Eventory shows a list of persons and events.
+3. User requests to delete a specific person or event in the list.
+4. Eventory deletes the person or event.
+
+    *Use case ends.*
 
 **Extensions**
 
@@ -401,61 +382,107 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-#### **Use Case 4: Finding a person**
+#### **Use Case 3: Edit a person or event**
 
 **Main Success Scenario (MSS)**
 
-1. User requests to find a person.
-2. Eventory returns a list of relevant people.  
+1. User requests to list persons and events.
+2. Eventory shows a list of persons and events.
+3. User requests to edit a person or event.
+4. Eventory edits the person or event.
+
    *Use case ends.*
 
-- **2a.** The list is empty.  
+**Extensions**
+
+- **2a.** The list is empty.
+
+  *Use case ends.*
+
+- **3a.** The given index is invalid.  
+    - **3a1.** Eventory shows an error message.  
+      *Use case resumes at step 2.*
+
+  *Use case ends.*
+
+---
+
+#### **Use Case 4: Find a person or event by name**
+
+**Main Success Scenario (MSS)**
+
+1. User requests to find a person or event by name.
+2. Eventory returns a list of relevant people and events.
+
+   *Use case ends.*
+
+- **2a.** The list is empty.
+
   *Use case ends.*
   
 ---
 
-#### **Use Case 5: Clearing the Eventory**
+#### **Use Case 5: Find a person or event by tag**
 
 **Main Success Scenario (MSS)**
 
-1. User requests to clear Eventory contacts.
-2. Eventory removes all contacts in memory. 
+1. User requests to find a person or event by tag.
+2. Eventory returns a list of relevant people and events.
+
    *Use case ends.*
+
+- **2a.** The list is empty.
+
+  *Use case ends.*
 
 ---
 
-#### **Use Case 6: Listing contacts**
+#### **Use Case 6: Clear Eventory**
 
 **Main Success Scenario (MSS)**
 
-1. User requests for list of contacts in Eventory.
-2. Eventory shows all contacts.
+1. User requests to clear Eventory contacts and events.
+2. Eventory removes all contacts and events in memory.
+
+    *Use case ends.*
+    
+---
+
+#### **Use Case 7: List contacts and events**
+
+**Main Success Scenario (MSS)**
+
+1. User requests for list of contacts and events in Eventory.
+2. Eventory shows all contacts and events.
+   
+    *Use case ends.*
 
 **Extensions**
 
-- **2a.** The list is empty.  
-  *Use case ends.*
+- **2a.** The list is empty.
 
-*Use case ends.*
+    *Use case ends.*
 
 ---
 
-#### **Use Case 7: Requesting for help**
+#### **Use Case 8: Request for help**
 
 **Main Success Scenario (MSS)**
 
 1. User requests help in Eventory.
 2. Eventory displays all commands.
+
    *Use case ends.*
 
 ---
 
-#### **Use Case 8: Exiting programme**
+#### **Use Case 9: Exit programme**
 
 **Main Success Scenario (MSS)**
 
 1. User exits the programme.
-2. Eventory closes.  
+2. Eventory closes.
+
    *Use case ends.*
 
 ---
