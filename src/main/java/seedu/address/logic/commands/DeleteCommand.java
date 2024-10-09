@@ -20,8 +20,8 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list " +
-            "or by phone number.\n"
+            + ": Deletes the person identified by the index number used in the displayed person list "
+            + "or by phone number.\n"
             + "Parameters: INDEX (must be a positive integer) or PHONE_NUMBER\n"
             + "Example: " + COMMAND_WORD + " 1 or " + COMMAND_WORD + " 98765432";
 
@@ -30,13 +30,18 @@ public class DeleteCommand extends Command {
     private final Index targetIndex;
     private final Phone phoneNumber;
 
+    /**
+     * Initializes command to delete a person identified using it's displayed index
+     * Number from the address book.
+     */
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
         this.phoneNumber = null;
     }
 
     /**
-     * Initializes command to delete a person identified using it's displayed phone Number from the address book.
+     * Initializes command to delete a person identified using it's displayed phone Number
+     * from the address book.
      */
     public DeleteCommand(Phone phoneNumber) {
         this.phoneNumber = phoneNumber;
@@ -58,11 +63,9 @@ public class DeleteCommand extends Command {
 
             personToDelete = lastShownList.get(targetIndex.getZeroBased());
 
-        }
-
         // deleting by phone Number,
         // check for validity of arguments are done in DeleteCommandParser
-        else {
+        } else {
             personToDelete = findPersonToDeleteByPhoneNumber(lastShownList, phoneNumber);
 
             // no person with given phone number

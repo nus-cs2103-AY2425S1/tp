@@ -21,7 +21,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         try {
             // check if arg is a phone number and initializes Delete Command with args
             Phone phone = ParserUtil.parsePhone(args);
-                return new DeleteCommand(phone);
+            return new DeleteCommand(phone);
         } catch (ParseException pe) {
             try {
                 Index index = ParserUtil.parseIndex(args);
