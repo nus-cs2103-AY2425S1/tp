@@ -27,15 +27,16 @@ public class PriorityCommandParser implements Parser<PriorityCommand> {
      */
     public PriorityCommand parse(String args) throws ParseException {
         requireNonNull(args);
+        String trimmedArgs = args.trim();
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_NRIC, PREFIX_PRIORITY);
-
-        if (argMultimap.getValue(PREFIX_NRIC).isEmpty()) {
+        System.out.println(trimmedArgs);
+        if (!argMultimap.getValue(PREFIX_NRIC).isPresent()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     PriorityCommand.MESSAGE_USAGE));
         }
 
-        if (argMultimap.getValue(PREFIX_PRIORITY).isEmpty()) {
+        if (!argMultimap.getValue(PREFIX_PRIORITY).isPresent()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     PriorityCommand.MESSAGE_USAGE));
         }
