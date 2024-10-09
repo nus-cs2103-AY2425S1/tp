@@ -40,7 +40,7 @@ public class SearchCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FindCommand)) {
+        if (!(other instanceof SearchCommand)) {
             return false;
         }
 
