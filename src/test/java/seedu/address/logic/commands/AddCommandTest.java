@@ -23,6 +23,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.product.Product;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -92,6 +93,14 @@ public class AddCommandTest {
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean hasProduct(Product product) {
+            return true;
+        }
+
+        @Override
+        public void addProduct(Product product){}
 
         @Override
         public ReadOnlyUserPrefs getUserPrefs() {

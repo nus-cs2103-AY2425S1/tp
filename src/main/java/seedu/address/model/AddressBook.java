@@ -9,6 +9,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
+
 /**
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
@@ -67,6 +68,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.contains(person);
     }
 
+
     /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
@@ -74,6 +76,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void addPerson(Person p) {
         persons.add(p);
     }
+
 
     /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
