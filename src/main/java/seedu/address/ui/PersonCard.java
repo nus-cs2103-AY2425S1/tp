@@ -37,6 +37,12 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label department;
+    @FXML
+    private Label role;
+    @FXML
+    private Label contractEndDate;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -47,8 +53,11 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
+        phone.setText("Phone: " + person.getPhone().value);
+        address.setText("Address: " + person.getAddress().value);
+        email.setText("Email: " + person.getEmail().value);
+        department.setText("Department: " + person.getDepartment().value);
+        role.setText("Role: " + person.getRole().value);
+        contractEndDate.setText("Contract End Date: " + person.getContractEndDate().value);
     }
 }

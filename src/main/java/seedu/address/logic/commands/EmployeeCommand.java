@@ -31,7 +31,7 @@ public class EmployeeCommand extends Command {
             + PREFIX_DEPARTMENT + "DEPARTMENT "
             + PREFIX_ROLE + "ROLE "
             + PREFIX_CONTRACT_END_DATE + "CONTRACT END DATE "
-            + "Example: " + COMMAND_WORD + " "
+            + "\nExample: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
