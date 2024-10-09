@@ -12,6 +12,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -48,12 +50,12 @@ public class CommandTestUtil {
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
-    public static final String NRIC_DESC_AMY = " " + PREFIX_NAME + VALID_NRIC_AMY;
-    public static final String NRIC_DESC_BOB = " " + PREFIX_NAME + VALID_NRIC_BOB;
-    public static final String DOB_DESC_AMY = " " + PREFIX_NAME + VALID_DOB_AMY;
-    public static final String DOB_DESC_BOB = " " + PREFIX_NAME + VALID_DOB_BOB;
-    public static final String GENDER_DESC_AMY = " " + PREFIX_NAME + VALID_GENDER_AMY;
-    public static final String GENDER_DESC_BOB = " " + PREFIX_NAME + VALID_GENDER_BOB;
+    public static final String NRIC_DESC_AMY = " " + PREFIX_NRIC + VALID_NRIC_AMY;
+    public static final String NRIC_DESC_BOB = " " + PREFIX_NRIC + VALID_NRIC_BOB;
+    public static final String DOB_DESC_AMY = " " + PREFIX_DOB + VALID_DOB_AMY;
+    public static final String DOB_DESC_BOB = " " + PREFIX_DOB + VALID_DOB_BOB;
+    public static final String GENDER_DESC_AMY = " " + PREFIX_GENDER + VALID_GENDER_AMY;
+    public static final String GENDER_DESC_BOB = " " + PREFIX_GENDER + VALID_GENDER_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
@@ -65,7 +67,9 @@ public class CommandTestUtil {
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_NRIC_DESC = " " + PREFIX_NRIC + "S1234567"; // missing last character
-    public static final String INVALID_DOB_DESC = " " + PREFIX_DOB + "2000/02/02"; // '/' not allowed in DOB
+    public static final String INVALID_DOB_FORMAT_DESC = " " + PREFIX_DOB + "2000/02/02"; // '/' not allowed in DOB
+    public static final String INVALID_DOB_VALUE_DESC = " " + PREFIX_DOB + LocalDate.now().plusDays(2)
+            .format(DateTimeFormatter.ofPattern("yyyy-MM-dd")); // DOB in future
     public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "X"; // 'X' not allowed for gender
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
