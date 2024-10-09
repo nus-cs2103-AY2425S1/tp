@@ -3,7 +3,6 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.contactdate.ContactDateList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.CallFrequency;
 import seedu.address.model.person.Email;
