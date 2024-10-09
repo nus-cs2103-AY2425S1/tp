@@ -7,6 +7,7 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.TelContainsNumberPredicate;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -18,21 +19,31 @@ public class FindCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+            + "Parameters: KEYWORD [MORE_KEYWORDS] [num/ PHONE] \n"
+            + "Example: " + COMMAND_WORD + " alice bob /num 12345678";
 
-    private final NameContainsKeywordsPredicate predicate;
-    private final Phone searchNumber;
+    private final NameContainsKeywordsPredicate namePredicate;
+    private final TelContainsNumberPredicate numberPredicate;
 
-    public FindCommand(NameContainsKeywordsPredicate predicate, Phone searchNumber) {
-        this.predicate = predicate;
-        this.searchNumber = searchNumber;
+    public FindCommand(NameContainsKeywordsPredicate namePredicate, TelContainsNumberPredicate numberPredicate) {
+        this.namePredicate = namePredicate;
+        this.numberPredicate = numberPredicate;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
+        // if name predicate is not null
+        if (namePredicate != null) {
+            model.updateFilteredPersonList(namePredicate);
+            // if number was entered search for it too
+            if (numberPredicate != null) {
+                model.updateFilteredPersonList(numberPredicate);
+            }
+        } else {
+            // name predicate null -> number predicate must exist
+            model.updateFilteredPersonList(numberPredicate);
+        }
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
@@ -49,13 +60,13 @@ public class FindCommand extends Command {
         }
 
         FindCommand otherFindCommand = (FindCommand) other;
-        return predicate.equals(otherFindCommand.predicate);
+        return namePredicate.equals(otherFindCommand.namePredicate);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("predicate", predicate)
+                .add("predicate", namePredicate)
                 .toString();
     }
 }

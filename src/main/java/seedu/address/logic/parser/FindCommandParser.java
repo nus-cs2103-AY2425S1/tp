@@ -8,6 +8,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.TelContainsNumberPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -28,14 +29,29 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         // instead of tokenizing with prefix for both name and number
         // split by num/ to allow quick search with name
-        String[] searchArgs = trimmedArgs.split(" num/");
-        String[] nameKeywords = searchArgs[0].split("\\s+");
-        if (searchArgs.length == 2) {
-            Phone searchNumber = ParserUtil.parsePhone(searchArgs[1]);
-            return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)), searchNumber);
+        boolean hasSearchTelArg = trimmedArgs.contains("num/");
+        if (hasSearchTelArg) {
+            String[] searchArgs = trimmedArgs.split("num/");
+            String[] nameKeywords = searchArgs[0].split("\\s+");
+            // has both Name and searchTel args
+            if (searchArgs.length == 2) {
+                // not using parsePhone, allowing more flexibility of search
+                // i.e. full phone number need not be entered
+                String searchTel = searchArgs[1];
+                return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)),
+                        new TelContainsNumberPredicate(searchTel));
+            } else {
+                // has only searchTel argument
+                String searchTel = searchArgs[0];
+                return new FindCommand(null,
+                        new TelContainsNumberPredicate(searchTel));
+            }
+        } else {
+            // only has name arg
+            String[] nameKeywords = trimmedArgs.split("\\s+");
+            return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)), null);
         }
 
-        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)), null);
     }
 
 }
