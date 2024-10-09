@@ -40,6 +40,12 @@ public class UntagCommand extends Command {
         this.tagsToRemove = tagsToRemove;
     }
 
+    /**
+     * Executes the untagging command on the given model.
+     * @param model the model on which the command is executed
+     * @return the result of the untagging command
+     * @throws CommandException if the index is invalid or other issues arise
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();

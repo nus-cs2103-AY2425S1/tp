@@ -4,15 +4,18 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.UntagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
-import java.util.Set;
-import java.util.stream.Collectors;
-
+/**
+ * Parses input arguments and creates a new UntagCommand object.
+ */
 public class UntagCommandParser implements Parser<UntagCommand> {
 
     /**
