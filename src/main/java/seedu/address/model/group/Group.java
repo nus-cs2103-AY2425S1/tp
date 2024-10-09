@@ -30,6 +30,11 @@ public class Group {
         this.students.addAll(students);
     }
 
+    public Group(GroupName groupName) {
+        requireAllNonNull(groupName);
+        this.groupName = groupName;
+    }
+
     public GroupName getGroupName() {
         return this.groupName;
     }

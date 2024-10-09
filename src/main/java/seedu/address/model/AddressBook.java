@@ -6,6 +6,8 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.UniqueGroupList;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.UniqueStudentList;
 
@@ -16,6 +18,7 @@ import seedu.address.model.student.UniqueStudentList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueStudentList students;
+    private final UniqueGroupList groups;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -26,6 +29,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         students = new UniqueStudentList();
+        groups = new UniqueGroupList();
     }
 
     public AddressBook() {
@@ -55,7 +59,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
-        setStudents(newData.getPersonList());
+        setStudents(newData.getStudentList());
     }
 
     //// student-level operations
@@ -96,6 +100,34 @@ public class AddressBook implements ReadOnlyAddressBook {
         students.remove(key);
     }
 
+    /**
+     * Returns true if a group with the same identity as {@code group} exists in the address book.
+     */
+    public boolean hasGroup(Group group) {
+        requireNonNull(group);
+        return groups.contains(group);
+    }
+
+    /**
+     * Adds a group to the address book.
+     * The group must not already exist in the address book.
+     */
+    public void addGroup(Group p) {
+        groups.add(p);
+    }
+
+    /**
+     * Replaces the given student {@code target} in the list with {@code editedStudent}.
+     * {@code target} must exist in the address book.
+     * The student identity of {@code editedStudent} must not be the same as another existing student in the address
+     * book.
+     */
+    public void setGroup(Group target, Group editedGroup) {
+        requireNonNull(editedGroup);
+
+        groups.setGroup(target, editedGroup);
+    }
+
     //// util methods
 
     @Override
@@ -106,8 +138,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<Student> getPersonList() {
+    public ObservableList<Student> getStudentList() {
         return students.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Group> getGroupList() {
+        return groups.asUnmodifiableObservableList();
     }
 
     @Override
