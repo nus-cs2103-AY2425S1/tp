@@ -14,32 +14,28 @@ public class MarkCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks attendance for the contact "
             + "by the index number used in the last person listing and for the tutorial number inputted. "
             + "Parameters: INDEX (must be a positive integer) "
-            + "t/TUTORIAL "
-            + "p/PRESENT (0 for absent, 1 for present)\n"
+            + "t/TUTORIAL\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "t/1 p/1";
+            + "t/1";
 
     public static final String MESSAGE_NOT_IMPLEMENTED_YET = "Mark command has not be implemented";
 
-    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Tutorial: %2$s, Present: %3$d";
+    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Tutorial: %2$d";
 
     private final Index index;
     private final int tutorial;
-    private final int present; // Absent by default
 
     /**
      * @param index of the person in the display list
      * @param tutorial number to mark attendance for
-     * @param present to mark absent or present for contact
      */
-    public MarkCommand(Index index, int tutorial, int present) {
+    public MarkCommand(Index index, int tutorial) {
         this.index = index;
         this.tutorial = tutorial;
-        this.present = present;
     }
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        throw new CommandException(String.format(MESSAGE_ARGUMENTS, index.getOneBased(), tutorial, present));
+        throw new CommandException(String.format(MESSAGE_ARGUMENTS, index.getOneBased(), tutorial));
     }
 
     @Override
@@ -57,6 +53,6 @@ public class MarkCommand extends Command {
         // state check
         MarkCommand e = (MarkCommand) other;
         return index.equals(e.index)
-                && remark.equals(e.remark);
+                && tutorial == e.tutorial;
     }
 }
