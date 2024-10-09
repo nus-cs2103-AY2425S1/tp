@@ -11,7 +11,7 @@ public class InsurancePlanFactory {
     public static final String INVALID_PLAN_ID_MESSAGE = "This Insurance Plan ID is invalid!";
 
     /**
-     * Creates InsurancePlan Object based on the given insurance id,
+     * Creates InsurancePlan Object based on the given insurance id.
      * @param insurancePlanId an integer representing the insurance plan that the user wants to create.
      * @return InsurancePlan Object that the user wants to create.
      * @throws ParseException if the insuranceId is not a valid input (Insurance plan does not exist).
@@ -26,6 +26,12 @@ public class InsurancePlanFactory {
         }
     }
 
+    /**
+     * Creates InsurancePlan Object based on the given insurance plan name.
+     * @param insurancePlanName a string representing the insurance plan that the user wants to create.
+     * @return InsurancePlan Object that the user wants to create.
+     * @throws ParseException if the insuranceId is not a valid input (Insurance plan does not exist).
+     */
     public static InsurancePlan createInsurancePlan(String insurancePlanName) throws ParseException {
         if (insurancePlanName.equals("Basic Insurance Plan")) {
             return new BasicPlan();

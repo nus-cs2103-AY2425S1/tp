@@ -15,7 +15,6 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.insurance.InsurancePlan;
 import seedu.address.model.person.insurance.InsurancePlansManager;
 import seedu.address.model.tag.Tag;
 
@@ -108,7 +107,8 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         if (insurancePlans == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, InsurancePlansManager.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    InsurancePlansManager.class.getSimpleName()));
         }
         final InsurancePlansManager modelInsurancePlansManager = new InsurancePlansManager();
 
