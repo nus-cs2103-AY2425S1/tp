@@ -1,11 +1,15 @@
 package seedu.address.model.util;
 
+import java.time.DayOfWeek;
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.calendar.EdulogCalendar;
+import seedu.address.model.calendar.Lesson;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -57,4 +61,25 @@ public class SampleDataUtil {
                 .collect(Collectors.toSet());
     }
 
+    private static Lesson[] getSampleLessons() {
+        return new Lesson[] {
+                new Lesson("Sec 4 Chemistry Class A", DayOfWeek.MONDAY,
+                        LocalTime.of(20, 0), LocalTime.of(22, 0)),
+                new Lesson("Late night math catchup for P6 students", DayOfWeek.FRIDAY,
+                        LocalTime.of(23, 15), LocalTime.of(0, 45)),
+                new Lesson("(Relief slot) Sec 4 Chemistry Class B", DayOfWeek.MONDAY,
+                        LocalTime.of(19,0), LocalTime.of(21, 0))
+        };
+    }
+
+    /**
+     * Returns an EdulogCalendar to populate Edulog with sample lesson data.
+     */
+    public static EdulogCalendar getSampleEdulogCalendar() {
+        EdulogCalendar sampleCalendar = new EdulogCalendar();
+        for (Lesson l: getSampleLessons()) {
+            sampleCalendar.addLesson(l);
+        }
+        return sampleCalendar;
+    }
 }

@@ -21,6 +21,13 @@ public class EdulogCalendar {
     }
 
     /**
+     * Checks if a provided lesson is equal (based on description) to any other lesson in the calendar.
+     */
+    public boolean hasLesson(Lesson lesson) {
+        return lessons.stream().anyMatch(l -> l.isSameLesson(lesson));
+    }
+
+    /**
      * Remove the 1st index in lessons that returns true on Object.equals(lesson, lessons.get(i))
      */
     public void removeLesson(Lesson lesson) {
