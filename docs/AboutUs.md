@@ -29,6 +29,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
+### Marc Lim
+
+<img src="images/marchjlim.png" width="200px">
+
+[[github](http://github.com/marchjlim)]
+[[portfolio](team/marchjlim.md)]
+
+* Role: Developer
+* Responsibilities: Dev Ops + Threading
+
 ### Shashank Gorantla
 
 <img src="images/shadhankkk.png" width="200px">
