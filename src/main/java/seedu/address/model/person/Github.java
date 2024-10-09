@@ -11,7 +11,7 @@ public class Github {
     public static final String MESSAGE_CONSTRAINTS =
             "Github usernames should only contain - and alphanumeric characters";
     public static final String VALIDATION_REGEX = "^[a-zA-Z0-9-]+$";
-    public String username;
+    public final String username;
 
     /**
      * Constructs an {@code Github}.
