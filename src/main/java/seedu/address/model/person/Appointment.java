@@ -1,0 +1,78 @@
+package seedu.address.model.person;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+/**
+ * Represents a Person's appointment in the address book.
+ */
+public class Appointment {
+
+    public static final String MESSAGE_CONSTRAINTS = "Appointments should be in the format 'yyyy-MM-dd HH:mm', "
+            + "and must be a valid date and time";
+    /*
+     * The appointment date and time should in the format 'yyyy-MM-dd HH:mm'.
+     * Example: 2023-01-31 13:00
+     */
+    public static final String VALIDATION_REGEX = "\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}";
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+    public final LocalDateTime value;
+
+    /**
+     * Constructs an {@code Appointment}.
+     *
+     * @param appointmentDateStr A valid date and time string.
+     */
+    public Appointment(String appointmentDateStr) {
+        requireNonNull(appointmentDateStr);
+        checkArgument(isValidAppointment(appointmentDateStr), MESSAGE_CONSTRAINTS);
+        value = parseDateTime(appointmentDateStr);
+    }
+
+    /**
+     * Parses the given date and time string into a {@code LocalDateTime}.
+     *
+     * @param dateTimeStr The date and time string to parse.
+     * @return A {@code LocalDateTime} object representing the date and time.
+     */
+    private static LocalDateTime parseDateTime(String dateTimeStr) {
+        return LocalDateTime.parse(dateTimeStr, FORMATTER);
+    }
+
+    /**
+     * Returns true if a given string is a valid appointment date and time.
+     */
+    public static boolean isValidAppointment(String test) {
+        requireNonNull(test);
+        if (!test.matches(VALIDATION_REGEX)) {
+            return false;
+        }
+        try {
+            LocalDateTime.parse(test, FORMATTER);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return value.format(FORMATTER);
+    }
+
+    @Override
+    public int hashCode() {
+        return value.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this || (other instanceof Appointment && value.equals(((Appointment) other).value));
+    }
+
+}
