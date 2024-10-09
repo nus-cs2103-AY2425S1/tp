@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -27,13 +28,20 @@ public class Person {
 
     private final Telegram telegram;
     private final Set<Tag> tags = new HashSet<>();
+    private Assignment assignment;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Telegram telegram,
-                  Set<Tag> tags, Github github) {
-        requireAllNonNull(name, phone, email, address, telegram, tags, github);
+    public Person(
+            Name name,
+            Phone phone,
+            Email email,
+            Address address,
+            Telegram telegram,
+            Set<Tag> tags,
+            Github github) {
+
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -41,6 +49,30 @@ public class Person {
         this.telegram = telegram;
         this.tags.addAll(tags);
         this.github = github;
+    }
+
+    /**
+     * Contains an additional assignment field.
+     * Every field must be present and not null.
+     */
+    public Person(
+            Name name,
+            Phone phone,
+            Email email,
+            Github github,
+            Address address,
+            Set<Tag> tags,
+            Telegram telegram,
+            Assignment assignment) {
+        requireAllNonNull(name, phone, email, address, telegram, tags, github, assignment);
+        this.github = github;
+        this.telegram = telegram;
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.assignment = assignment;
     }
 
     public Name getName() {
@@ -63,6 +95,14 @@ public class Person {
         return telegram;
     }
 
+    public Assignment getAssignment() {
+        return assignment;
+    }
+
+    public void setAssignment(Assignment assignment) {
+        this.assignment = assignment;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -74,6 +114,7 @@ public class Person {
     public Github getGithub() {
         return github;
     }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
@@ -83,13 +124,12 @@ public class Person {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        return otherPerson != null && otherPerson.getName().equals(getName());
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both persons have the same identity and data fields. This defines a stronger
+     * notion of equality between two persons.
      */
     @Override
     public boolean equals(Object other) {
@@ -98,24 +138,24 @@ public class Person {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Person otherPerson)) {
             return false;
         }
 
-        Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && telegram.equals(otherPerson.telegram)
-                && tags.equals(otherPerson.tags)
-                && github.equals(otherPerson.github);
+        return
+                name.equals(otherPerson.name)
+                        && phone.equals(otherPerson.phone)
+                        && email.equals(otherPerson.email)
+                        && address.equals(otherPerson.address)
+                        && telegram.equals(otherPerson.telegram)
+                        && tags.equals(otherPerson.tags)
+                        && github.equals(otherPerson.github);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, telegram, tags, github);
+        return Objects.hash(name, phone, email, address, tags);
     }
 
     @Override
@@ -128,6 +168,7 @@ public class Person {
                 .add("telegram", telegram)
                 .add("tags", tags)
                 .add("github", github)
+                .add("assignment", assignment)
                 .toString();
     }
 
