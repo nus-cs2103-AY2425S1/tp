@@ -11,28 +11,28 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.student.Student;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of students.
  */
-public class PersonListPanel extends UiPart<Region> {
-    private static final String FXML = "PersonListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+public class StudentListPanel extends UiPart<Region> {
+    private static final String FXML = "StudentListPanel.fxml";
+    private final Logger logger = LogsCenter.getLogger(StudentListPanel.class);
 
     @FXML
-    private ListView<Student> personListView;
+    private ListView<Student> studentListView;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code StudentListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Student> studentList) {
+    public StudentListPanel(ObservableList<Student> studentList) {
         super(FXML);
-        personListView.setItems(studentList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
+        studentListView.setItems(studentList);
+        studentListView.setCellFactory(listView -> new StudentListViewCell());
     }
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Student} using a {@code StudentCard}.
      */
-    class PersonListViewCell extends ListCell<Student> {
+    class StudentListViewCell extends ListCell<Student> {
         @Override
         protected void updateItem(Student student, boolean empty) {
             super.updateItem(student, empty);

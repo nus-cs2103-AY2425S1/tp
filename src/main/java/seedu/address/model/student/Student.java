@@ -21,6 +21,7 @@ public class Student {
     private final Phone phone;
     private final Email email;
 
+    // Data fields
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -55,10 +56,10 @@ public class Student {
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both students have the same name.
+     * This defines a weaker notion of equality between two students.
      */
-    public boolean isSamePerson(Student otherStudent) {
+    public boolean isSameStudent(Student otherStudent) {
         if (otherStudent == this) {
             return true;
         }
@@ -68,8 +69,8 @@ public class Student {
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both students have the same identity and data fields.
+     * This defines a stronger notion of equality between two students.
      */
     @Override
     public boolean equals(Object other) {

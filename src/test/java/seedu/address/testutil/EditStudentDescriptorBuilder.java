@@ -15,22 +15,22 @@ import seedu.address.model.tag.Tag;
 /**
  * A utility class to help with building EditStudentDescriptor objects.
  */
-public class EditPersonDescriptorBuilder {
+public class EditStudentDescriptorBuilder {
 
     private EditCommand.EditStudentDescriptor descriptor;
 
-    public EditPersonDescriptorBuilder() {
+    public EditStudentDescriptorBuilder() {
         descriptor = new EditCommand.EditStudentDescriptor();
     }
 
-    public EditPersonDescriptorBuilder(EditCommand.EditStudentDescriptor descriptor) {
+    public EditStudentDescriptorBuilder(EditCommand.EditStudentDescriptor descriptor) {
         this.descriptor = new EditCommand.EditStudentDescriptor(descriptor);
     }
 
     /**
      * Returns an {@code EditStudentDescriptor} with fields containing {@code student}'s details
      */
-    public EditPersonDescriptorBuilder(Student student) {
+    public EditStudentDescriptorBuilder(Student student) {
         descriptor = new EditStudentDescriptor();
         descriptor.setName(student.getName());
         descriptor.setPhone(student.getPhone());
@@ -41,7 +41,7 @@ public class EditPersonDescriptorBuilder {
     /**
      * Sets the {@code Name} of the {@code EditStudentDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withName(String name) {
+    public EditStudentDescriptorBuilder withName(String name) {
         descriptor.setName(new Name(name));
         return this;
     }
@@ -49,7 +49,7 @@ public class EditPersonDescriptorBuilder {
     /**
      * Sets the {@code Phone} of the {@code EditStudentDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withPhone(String phone) {
+    public EditStudentDescriptorBuilder withPhone(String phone) {
         descriptor.setPhone(new Phone(phone));
         return this;
     }
@@ -57,7 +57,7 @@ public class EditPersonDescriptorBuilder {
     /**
      * Sets the {@code Email} of the {@code EditStudentDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withEmail(String email) {
+    public EditStudentDescriptorBuilder withEmail(String email) {
         descriptor.setEmail(new Email(email));
         return this;
     }
@@ -66,7 +66,7 @@ public class EditPersonDescriptorBuilder {
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditStudentDescriptor}
      * that we are building.
      */
-    public EditPersonDescriptorBuilder withTags(String... tags) {
+    public EditStudentDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
         return this;

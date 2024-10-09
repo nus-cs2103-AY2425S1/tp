@@ -15,19 +15,19 @@ import seedu.address.model.tag.Tag;
 /**
  * A utility class for Student.
  */
-public class PersonUtil {
+public class StudentUtil {
 
     /**
      * Returns an add command string for adding the {@code student}.
      */
     public static String getAddCommand(Student student) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(student);
+        return AddCommand.COMMAND_WORD + " " + getStudentDetails(student);
     }
 
     /**
      * Returns the part of command string for the given {@code student}'s details.
      */
-    public static String getPersonDetails(Student student) {
+    public static String getStudentDetails(Student student) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + student.getName().fullName + " ");
         sb.append(PREFIX_PHONE + student.getPhone().value + " ");
@@ -41,7 +41,7 @@ public class PersonUtil {
     /**
      * Returns the part of command string for the given {@code EditStudentDescriptor}'s details.
      */
-    public static String getEditPersonDescriptorDetails(EditCommand.EditStudentDescriptor descriptor) {
+    public static String getEditStudentDescriptorDetails(EditCommand.EditStudentDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));

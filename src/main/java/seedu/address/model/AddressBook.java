@@ -14,11 +14,11 @@ import seedu.address.model.student.UniqueStudentList;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Duplicates are not allowed (by .isSameStudent comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private final UniqueStudentList persons;
+    private final UniqueStudentList students;
     private final UniqueAssignmentList assignments;
 
     /*
@@ -29,14 +29,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        persons = new UniqueStudentList();
+        students = new UniqueStudentList();
         assignments = new UniqueAssignmentList();
     }
 
     public AddressBook() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an AddressBook using the Students in the {@code toBeCopied}
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
@@ -49,8 +49,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Replaces the contents of the student list with {@code students}.
      * {@code students} must not contain duplicate students.
      */
-    public void setPersons(List<Student> students) {
-        this.persons.setPersons(students);
+    public void setStudents(List<Student> students) {
+        this.students.setStudents(students);
     }
 
     /**
@@ -67,7 +67,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-        setPersons(newData.getPersonList());
+        setStudents(newData.getStudentList());
     }
 
     //// student-level operations
@@ -75,17 +75,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns true if a student with the same identity as {@code student} exists in the address book.
      */
-    public boolean hasPerson(Student student) {
+    public boolean hasStudent(Student student) {
         requireNonNull(student);
-        return persons.contains(student);
+        return students.contains(student);
     }
 
     /**
      * Adds a student to the address book.
      * The student must not already exist in the address book.
      */
-    public void addPerson(Student p) {
-        persons.add(p);
+    public void addStudent(Student p) {
+        students.add(p);
     }
 
     /**
@@ -94,18 +94,18 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The student identity of {@code editedStudent} must not be the same as another existing student in the address
      * book.
      */
-    public void setPerson(Student target, Student editedStudent) {
+    public void setStudent(Student target, Student editedStudent) {
         requireNonNull(editedStudent);
 
-        persons.setPerson(target, editedStudent);
+        students.setStudent(target, editedStudent);
     }
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removePerson(Student key) {
-        persons.remove(key);
+    public void removeStudent(Student key) {
+        students.remove(key);
     }
 
     //// assignment-level operations
@@ -151,14 +151,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("persons", persons)
+                .add("students", students)
                 .add("assignments", assignments)
                 .toString();
     }
 
     @Override
-    public ObservableList<Student> getPersonList() {
-        return persons.asUnmodifiableObservableList();
+    public ObservableList<Student> getStudentList() {
+        return students.asUnmodifiableObservableList();
     }
 
     @Override
@@ -178,11 +178,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons) && assignments.equals(otherAddressBook.assignments);
+        return students.equals(otherAddressBook.students) && assignments.equals(otherAddressBook.assignments);
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return students.hashCode();
     }
 }
