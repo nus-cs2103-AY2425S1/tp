@@ -75,7 +75,7 @@ public class AddressBookParser {
 
         case ListDoctorCommand.COMMAND_WORD:
             return new ListCommand();
-            
+
         case ListPatientCommand.COMMAND_WORD:
             return new ListCommand();
 
