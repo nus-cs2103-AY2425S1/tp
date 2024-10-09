@@ -9,7 +9,7 @@ import hallpointer.address.model.ReadOnlyAddressBook;
 import hallpointer.address.model.member.Member;
 import hallpointer.address.model.member.Name;
 import hallpointer.address.model.member.Room;
-import hallpointer.address.model.member.TelegramHandle;
+import hallpointer.address.model.member.Telegram;
 import hallpointer.address.model.tag.Tag;
 
 /**
@@ -18,22 +18,22 @@ import hallpointer.address.model.tag.Tag;
 public class SampleDataUtil {
     public static Member[] getSampleMembers() {
         return new Member[] {
-            new Member(new Name("Alex Yeoh"), new TelegramHandle("87438807"),
+            new Member(new Name("Alex Yeoh"), new Telegram("87438807"),
                 new Room("2/3/1"),
                 getTagSet("friends")),
-            new Member(new Name("Bernice Yu"), new TelegramHandle("99272758"),
+            new Member(new Name("Bernice Yu"), new Telegram("99272758"),
                 new Room("8/10/100"),
                 getTagSet("colleagues", "friends")),
-            new Member(new Name("Charlotte Oliveiro"), new TelegramHandle("93210283"),
+            new Member(new Name("Charlotte Oliveiro"), new Telegram("93210283"),
                 new Room("9/5/59"),
                 getTagSet("neighbours")),
-            new Member(new Name("David Li"), new TelegramHandle("91031282"),
+            new Member(new Name("David Li"), new Telegram("91031282"),
                 new Room("3/2/10"),
                 getTagSet("family")),
-            new Member(new Name("Irfan Ibrahim"), new TelegramHandle("92492021"),
+            new Member(new Name("Irfan Ibrahim"), new Telegram("92492021"),
                 new Room("20/10/294"),
                 getTagSet("classmates")),
-            new Member(new Name("Roy Balakrishnan"), new TelegramHandle("92624417"),
+            new Member(new Name("Roy Balakrishnan"), new Telegram("92624417"),
                 new Room("4/5/37"),
                 getTagSet("colleagues"))
         };

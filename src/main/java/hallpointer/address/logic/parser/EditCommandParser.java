@@ -4,7 +4,7 @@ import static hallpointer.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_ROOM;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static hallpointer.address.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
+import static hallpointer.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
@@ -31,7 +31,7 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TELEGRAM_HANDLE, PREFIX_ROOM, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TELEGRAM, PREFIX_ROOM, PREFIX_TAG);
 
         Index index;
 
@@ -41,16 +41,16 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_TELEGRAM_HANDLE, PREFIX_ROOM);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_TELEGRAM, PREFIX_ROOM);
 
         EditMemberDescriptor editMemberDescriptor = new EditMemberDescriptor();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editMemberDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
-        if (argMultimap.getValue(PREFIX_TELEGRAM_HANDLE).isPresent()) {
-            editMemberDescriptor.setTelegramHandle(
-                    ParserUtil.parseTelegramHandle(argMultimap.getValue(PREFIX_TELEGRAM_HANDLE).get()));
+        if (argMultimap.getValue(PREFIX_TELEGRAM).isPresent()) {
+            editMemberDescriptor.setTelegram(
+                    ParserUtil.parseTelegram(argMultimap.getValue(PREFIX_TELEGRAM).get()));
         }
         if (argMultimap.getValue(PREFIX_ROOM).isPresent()) {
             editMemberDescriptor.setRoom(ParserUtil.parseRoom(argMultimap.getValue(PREFIX_ROOM).get()));

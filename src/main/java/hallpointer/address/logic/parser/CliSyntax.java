@@ -7,7 +7,7 @@ public class CliSyntax {
 
     /* Prefix definitions */
     public static final Prefix PREFIX_NAME = new Prefix("n/");
-    public static final Prefix PREFIX_TELEGRAM_HANDLE = new Prefix("p/");
+    public static final Prefix PREFIX_TELEGRAM = new Prefix("p/");
     public static final Prefix PREFIX_ROOM = new Prefix("r/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
 

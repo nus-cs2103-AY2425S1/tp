@@ -3,7 +3,7 @@ package hallpointer.address.testutil;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_ROOM;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static hallpointer.address.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
+import static hallpointer.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
 import java.util.Set;
 
@@ -30,7 +30,7 @@ public class MemberUtil {
     public static String getMemberDetails(Member member) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + member.getName().fullName + " ");
-        sb.append(PREFIX_TELEGRAM_HANDLE + member.getTelegramHandle().value + " ");
+        sb.append(PREFIX_TELEGRAM + member.getTelegram().value + " ");
         sb.append(PREFIX_ROOM + member.getRoom().value + " ");
         member.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
@@ -44,8 +44,8 @@ public class MemberUtil {
     public static String getEditMemberDescriptorDetails(EditMemberDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
-        descriptor.getTelegramHandle().ifPresent(
-                telegramHandle -> sb.append(PREFIX_TELEGRAM_HANDLE).append(telegramHandle.value).append(" "));
+        descriptor.getTelegram().ifPresent(
+                telegram -> sb.append(PREFIX_TELEGRAM).append(telegram.value).append(" "));
         descriptor.getRoom().ifPresent(room -> sb.append(PREFIX_ROOM).append(room.value).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();

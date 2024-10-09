@@ -4,23 +4,23 @@ import static hallpointer.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static hallpointer.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static hallpointer.address.logic.commands.CommandTestUtil.INVALID_ROOM_DESC;
 import static hallpointer.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static hallpointer.address.logic.commands.CommandTestUtil.INVALID_TELEGRAM_HANDLE_DESC;
+import static hallpointer.address.logic.commands.CommandTestUtil.INVALID_TELEGRAM_DESC;
 import static hallpointer.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static hallpointer.address.logic.commands.CommandTestUtil.ROOM_DESC_AMY;
 import static hallpointer.address.logic.commands.CommandTestUtil.ROOM_DESC_BOB;
 import static hallpointer.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static hallpointer.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static hallpointer.address.logic.commands.CommandTestUtil.TELEGRAM_HANDLE_DESC_AMY;
-import static hallpointer.address.logic.commands.CommandTestUtil.TELEGRAM_HANDLE_DESC_BOB;
+import static hallpointer.address.logic.commands.CommandTestUtil.TELEGRAM_DESC_AMY;
+import static hallpointer.address.logic.commands.CommandTestUtil.TELEGRAM_DESC_BOB;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_ROOM_AMY;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static hallpointer.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_HANDLE_AMY;
-import static hallpointer.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_HANDLE_BOB;
+import static hallpointer.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_AMY;
+import static hallpointer.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_ROOM;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static hallpointer.address.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
+import static hallpointer.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static hallpointer.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static hallpointer.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static hallpointer.address.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
@@ -35,7 +35,7 @@ import hallpointer.address.logic.commands.EditCommand;
 import hallpointer.address.logic.commands.EditCommand.EditMemberDescriptor;
 import hallpointer.address.model.member.Name;
 import hallpointer.address.model.member.Room;
-import hallpointer.address.model.member.TelegramHandle;
+import hallpointer.address.model.member.Telegram;
 import hallpointer.address.model.tag.Tag;
 import hallpointer.address.testutil.EditMemberDescriptorBuilder;
 
@@ -78,14 +78,14 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
-        assertParseFailure(parser, "1" + INVALID_TELEGRAM_HANDLE_DESC,
-                TelegramHandle.MESSAGE_CONSTRAINTS); // invalid telegram handle
+        assertParseFailure(parser, "1" + INVALID_TELEGRAM_DESC,
+                Telegram.MESSAGE_CONSTRAINTS); // invalid telegram
         assertParseFailure(parser, "1" + INVALID_ROOM_DESC, Room.MESSAGE_CONSTRAINTS); // invalid room
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
 
-        // invalid telegram handle followed by valid room
-        assertParseFailure(parser, "1" + INVALID_TELEGRAM_HANDLE_DESC + ROOM_DESC_AMY,
-                TelegramHandle.MESSAGE_CONSTRAINTS);
+        // invalid telegram followed by valid room
+        assertParseFailure(parser, "1" + INVALID_TELEGRAM_DESC + ROOM_DESC_AMY,
+                Telegram.MESSAGE_CONSTRAINTS);
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Member} being edited,
         // parsing it together with a valid tag results in error
@@ -94,18 +94,18 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_ROOM_DESC + VALID_TELEGRAM_HANDLE_AMY,
+        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_ROOM_DESC + VALID_TELEGRAM_AMY,
                 Name.MESSAGE_CONSTRAINTS);
     }
 
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_MEMBER;
-        String userInput = targetIndex.getOneBased() + TELEGRAM_HANDLE_DESC_BOB + TAG_DESC_HUSBAND
+        String userInput = targetIndex.getOneBased() + TELEGRAM_DESC_BOB + TAG_DESC_HUSBAND
                 + ROOM_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
 
         EditMemberDescriptor descriptor = new EditMemberDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB).withRoom(VALID_ROOM_AMY)
+                .withTelegram(VALID_TELEGRAM_BOB).withRoom(VALID_ROOM_AMY)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -115,10 +115,10 @@ public class EditCommandParserTest {
     @Test
     public void parse_someFieldsSpecified_success() {
         Index targetIndex = INDEX_FIRST_MEMBER;
-        String userInput = targetIndex.getOneBased() + TELEGRAM_HANDLE_DESC_BOB + ROOM_DESC_AMY;
+        String userInput = targetIndex.getOneBased() + TELEGRAM_DESC_BOB + ROOM_DESC_AMY;
 
         EditMemberDescriptor descriptor = new EditMemberDescriptorBuilder()
-                .withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB).withRoom(VALID_ROOM_AMY).build();
+                .withTelegram(VALID_TELEGRAM_BOB).withRoom(VALID_ROOM_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -133,9 +133,9 @@ public class EditCommandParserTest {
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // telegram handle
-        userInput = targetIndex.getOneBased() + TELEGRAM_HANDLE_DESC_AMY;
-        descriptor = new EditMemberDescriptorBuilder().withTelegramHandle(VALID_TELEGRAM_HANDLE_AMY).build();
+        // telegram
+        userInput = targetIndex.getOneBased() + TELEGRAM_DESC_AMY;
+        descriptor = new EditMemberDescriptorBuilder().withTelegram(VALID_TELEGRAM_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -159,29 +159,29 @@ public class EditCommandParserTest {
 
         // valid followed by invalid
         Index targetIndex = INDEX_FIRST_MEMBER;
-        String userInput = targetIndex.getOneBased() + INVALID_TELEGRAM_HANDLE_DESC + TELEGRAM_HANDLE_DESC_BOB;
+        String userInput = targetIndex.getOneBased() + INVALID_TELEGRAM_DESC + TELEGRAM_DESC_BOB;
 
-        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TELEGRAM_HANDLE));
+        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TELEGRAM));
 
         // invalid followed by valid
-        userInput = targetIndex.getOneBased() + TELEGRAM_HANDLE_DESC_BOB + INVALID_TELEGRAM_HANDLE_DESC;
+        userInput = targetIndex.getOneBased() + TELEGRAM_DESC_BOB + INVALID_TELEGRAM_DESC;
 
-        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TELEGRAM_HANDLE));
+        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TELEGRAM));
 
         // mulltiple valid fields repeated
-        userInput = targetIndex.getOneBased() + TELEGRAM_HANDLE_DESC_AMY + ROOM_DESC_AMY
-                + TAG_DESC_FRIEND + TELEGRAM_HANDLE_DESC_AMY + ROOM_DESC_AMY + TAG_DESC_FRIEND
-                + TELEGRAM_HANDLE_DESC_BOB + ROOM_DESC_BOB + TAG_DESC_HUSBAND;
+        userInput = targetIndex.getOneBased() + TELEGRAM_DESC_AMY + ROOM_DESC_AMY
+                + TAG_DESC_FRIEND + TELEGRAM_DESC_AMY + ROOM_DESC_AMY + TAG_DESC_FRIEND
+                + TELEGRAM_DESC_BOB + ROOM_DESC_BOB + TAG_DESC_HUSBAND;
 
         assertParseFailure(parser, userInput,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TELEGRAM_HANDLE, PREFIX_ROOM));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TELEGRAM, PREFIX_ROOM));
 
         // multiple invalid values
-        userInput = targetIndex.getOneBased() + INVALID_TELEGRAM_HANDLE_DESC + INVALID_ROOM_DESC
-                + INVALID_TELEGRAM_HANDLE_DESC + INVALID_ROOM_DESC;
+        userInput = targetIndex.getOneBased() + INVALID_TELEGRAM_DESC + INVALID_ROOM_DESC
+                + INVALID_TELEGRAM_DESC + INVALID_ROOM_DESC;
 
         assertParseFailure(parser, userInput,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TELEGRAM_HANDLE, PREFIX_ROOM));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TELEGRAM, PREFIX_ROOM));
     }
 
     @Test

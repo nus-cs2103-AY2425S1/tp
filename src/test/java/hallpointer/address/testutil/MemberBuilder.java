@@ -6,7 +6,7 @@ import java.util.Set;
 import hallpointer.address.model.member.Member;
 import hallpointer.address.model.member.Name;
 import hallpointer.address.model.member.Room;
-import hallpointer.address.model.member.TelegramHandle;
+import hallpointer.address.model.member.Telegram;
 import hallpointer.address.model.tag.Tag;
 import hallpointer.address.model.util.SampleDataUtil;
 
@@ -16,11 +16,11 @@ import hallpointer.address.model.util.SampleDataUtil;
 public class MemberBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
-    public static final String DEFAULT_TELEGRAM_HANDLE = "85355255";
+    public static final String DEFAULT_TELEGRAM = "85355255";
     public static final String DEFAULT_ROOM = "5/12/207";
 
     private Name name;
-    private TelegramHandle telegramHandle;
+    private Telegram telegram;
     private Room room;
     private Set<Tag> tags;
 
@@ -29,7 +29,7 @@ public class MemberBuilder {
      */
     public MemberBuilder() {
         name = new Name(DEFAULT_NAME);
-        telegramHandle = new TelegramHandle(DEFAULT_TELEGRAM_HANDLE);
+        telegram = new Telegram(DEFAULT_TELEGRAM);
         room = new Room(DEFAULT_ROOM);
         tags = new HashSet<>();
     }
@@ -39,7 +39,7 @@ public class MemberBuilder {
      */
     public MemberBuilder(Member memberToCopy) {
         name = memberToCopy.getName();
-        telegramHandle = memberToCopy.getTelegramHandle();
+        telegram = memberToCopy.getTelegram();
         room = memberToCopy.getRoom();
         tags = new HashSet<>(memberToCopy.getTags());
     }
@@ -69,16 +69,16 @@ public class MemberBuilder {
     }
 
     /**
-     * Sets the {@code TelegramHandle} of the {@code Member} that we are building.
+     * Sets the {@code Telegram} of the {@code Member} that we are building.
      */
-    public MemberBuilder withTelegramHandle(String telegramHandle) {
-        this.telegramHandle = new TelegramHandle(telegramHandle);
+    public MemberBuilder withTelegram(String telegram) {
+        this.telegram = new Telegram(telegram);
         return this;
     }
 
 
     public Member build() {
-        return new Member(name, telegramHandle, room, tags);
+        return new Member(name, telegram, room, tags);
     }
 
 }

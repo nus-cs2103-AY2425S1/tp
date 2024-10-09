@@ -15,6 +15,6 @@ UniqueMemberList -right-> Member
 Member -up-> "*" Tag
 
 Member *--> Name
-Member *--> TelegramHandle
+Member *--> Telegram
 Member *--> Room
 @enduml

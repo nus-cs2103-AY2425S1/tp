@@ -3,7 +3,7 @@ package hallpointer.address.logic.commands;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_ROOM;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static hallpointer.address.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
+import static hallpointer.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static java.util.Objects.requireNonNull;
 
 import hallpointer.address.commons.util.ToStringBuilder;
@@ -22,12 +22,12 @@ public class AddCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a member to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
-            + PREFIX_TELEGRAM_HANDLE + "TELEGRAM_HANDLE "
+            + PREFIX_TELEGRAM + "TELEGRAM "
             + PREFIX_ROOM + "ADDRESS "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
-            + PREFIX_TELEGRAM_HANDLE + "98765432 "
+            + PREFIX_TELEGRAM + "98765432 "
             + PREFIX_ROOM + "311, Clementi Ave 2, #02-25 "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";

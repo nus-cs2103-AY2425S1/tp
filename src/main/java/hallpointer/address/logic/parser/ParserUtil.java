@@ -11,7 +11,7 @@ import hallpointer.address.commons.util.StringUtil;
 import hallpointer.address.logic.parser.exceptions.ParseException;
 import hallpointer.address.model.member.Name;
 import hallpointer.address.model.member.Room;
-import hallpointer.address.model.member.TelegramHandle;
+import hallpointer.address.model.member.Telegram;
 import hallpointer.address.model.tag.Tag;
 
 /**
@@ -50,18 +50,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String telegramHandle} into a {@code TelegramHandle}.
+     * Parses a {@code String telegram} into a {@code Telegram}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code telegramHandle} is invalid.
+     * @throws ParseException if the given {@code telegram} is invalid.
      */
-    public static TelegramHandle parseTelegramHandle(String telegramHandle) throws ParseException {
-        requireNonNull(telegramHandle);
-        String trimmedTelegramHandle = telegramHandle.trim();
-        if (!TelegramHandle.isValidTelegramHandle(trimmedTelegramHandle)) {
-            throw new ParseException(TelegramHandle.MESSAGE_CONSTRAINTS);
+    public static Telegram parseTelegram(String telegram) throws ParseException {
+        requireNonNull(telegram);
+        String trimmedTelegram = telegram.trim();
+        if (!Telegram.isValidTelegram(trimmedTelegram)) {
+            throw new ParseException(Telegram.MESSAGE_CONSTRAINTS);
         }
-        return new TelegramHandle(trimmedTelegramHandle);
+        return new Telegram(trimmedTelegram);
     }
 
     /**

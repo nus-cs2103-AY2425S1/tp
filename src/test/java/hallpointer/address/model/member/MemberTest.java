@@ -3,7 +3,7 @@ package hallpointer.address.model.member;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_ROOM_BOB;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static hallpointer.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_HANDLE_BOB;
+import static hallpointer.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
 import static hallpointer.address.testutil.Assert.assertThrows;
 import static hallpointer.address.testutil.TypicalMembers.ALICE;
 import static hallpointer.address.testutil.TypicalMembers.BOB;
@@ -32,7 +32,7 @@ public class MemberTest {
         assertFalse(ALICE.isSameMember(null));
 
         // same name, all other attributes different -> returns true
-        Member editedAlice = new MemberBuilder(ALICE).withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB)
+        Member editedAlice = new MemberBuilder(ALICE).withTelegram(VALID_TELEGRAM_BOB)
                 .withRoom(VALID_ROOM_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameMember(editedAlice));
 
@@ -72,8 +72,8 @@ public class MemberTest {
         Member editedAlice = new MemberBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different telegram handle -> returns false
-        editedAlice = new MemberBuilder(ALICE).withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB).build();
+        // different telegram -> returns false
+        editedAlice = new MemberBuilder(ALICE).withTelegram(VALID_TELEGRAM_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different address -> returns false
@@ -88,7 +88,7 @@ public class MemberTest {
     @Test
     public void toStringMethod() {
         String expected = Member.class.getCanonicalName() + "{name=" + ALICE.getName()
-                + ", telegramHandle=" + ALICE.getTelegramHandle() + ", room=" + ALICE.getRoom()
+                + ", telegram=" + ALICE.getTelegram() + ", room=" + ALICE.getRoom()
                 + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }
