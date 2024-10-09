@@ -94,6 +94,9 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code RegisterNumber} of the {@code Person} that we are building.
+     */
     public PersonBuilder withRegisterNumber(String registerNumber) {
         this.registerNumber = new RegisterNumber(registerNumber);
         return this;
