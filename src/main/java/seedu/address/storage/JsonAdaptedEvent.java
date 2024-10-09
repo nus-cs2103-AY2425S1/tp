@@ -52,7 +52,9 @@ class JsonAdaptedEvent {
      */
     public Event toModelType() throws IllegalValueException {
         if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, EventName.class.getSimpleName()));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, EventName.class.getSimpleName())
+            );
         }
         final EventName eventName = new EventName(name);
 
