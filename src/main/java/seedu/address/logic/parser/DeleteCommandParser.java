@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_NAME_DISPLAYED;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
@@ -22,8 +21,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             Name name = ParserUtil.parseName(args);
             return new DeleteCommand(name);
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_NAME_DISPLAYED, DeleteCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(MESSAGE_INVALID_NAME_DISPLAYED, pe);
         }
     }
 
