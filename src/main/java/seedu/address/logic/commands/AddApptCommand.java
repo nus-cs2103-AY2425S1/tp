@@ -41,7 +41,7 @@ public class AddApptCommand extends Command {
             + PREFIX_DATE + "Date of appointment "
             + PREFIX_TIMEPERIOD + "Time period (in HHMM-HHMM)";
 
-    public static final String MESSAGE_SUCCESS_2S = "Appointment for %s scheduled: %s";
+    public static final String MESSAGE_SUCCESS_4S = "Appointment for %s scheduled: %s [ %s @ %s ]";
     public static final String MESSAGE_DUPLICATE_APPT_1S = "Appointment already exists for this date and time: %s.";
 
     private static final Logger logger = LogsCenter.getLogger(AddApptCommand.class);
@@ -81,12 +81,10 @@ public class AddApptCommand extends Command {
                                    .orElseThrow(() -> new CommandException(Messages.MESSAGE_PERSON_NRIC_NOT_FOUND));
         Person editedPerson = createEditedPerson(personToEdit, newApptName, newApptDate, newApptTime);
         model.setPerson(personToEdit, editedPerson);
-        logger.info("AddAppt command has been exceuted successfully on a person with NRIC: " + predicate);
+        logger.info("AddAppt command has been exceuted successfully on a person with NRIC: " + editedPerson.getNric());
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_SUCCESS_2S, predicate, String.format("%s [ %s @ %s ]",
-                                                                                            newApptName,
-                                                                                            newApptDate,
-                                                                                            newApptTime)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS_4S, editedPerson.getNric(), newApptName, newApptDate,
+                                               newApptTime));
     }
 
 
