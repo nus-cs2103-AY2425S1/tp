@@ -5,7 +5,14 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.UpdateCommand.UpdatePersonDescriptor;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.EmergencyContact;
+import seedu.address.model.person.Level;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Note;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Subject;
 
 /**
  * A utility class to help with building UpdatePersonDescriptor objects.
@@ -32,8 +39,8 @@ public class UpdatePersonDescriptorBuilder {
         descriptor.setEmergencyContact(person.getEmergencyContact());
         descriptor.setAddress(person.getAddress());
         descriptor.setNote(person.getNote());
-        descriptor.setSubjects(person.getSubjects());
         descriptor.setLevel(person.getLevel());
+        descriptor.setSubjects(person.getSubjects());
     }
 
     /**
@@ -86,6 +93,9 @@ public class UpdatePersonDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Level} of the {@code UpdatePersonDescriptor} that we are building.
+     */
     public UpdatePersonDescriptorBuilder withLevel(String level) {
         descriptor.setLevel(new Level(level));
         return this;

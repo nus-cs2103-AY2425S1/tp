@@ -124,7 +124,7 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
-    public void toModelType_invalidLEVEL_throwsIllegalArgumentException() {
+    public void toModelType_invalidLevel_throwsIllegalArgumentException() {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMERGENCY_CONTACT,
                         VALID_ADDRESS, "", VALID_SUBJECTS, INVALID_LEVEL);

@@ -37,6 +37,10 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMERGENCY_CONTACT,
                         PREFIX_ADDRESS, PREFIX_NOTE, PREFIX_SUBJECT, PREFIX_LEVEL);
 
+        if (argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateCommand.MESSAGE_USAGE));
+        }
+
         Name name;
 
         try {
@@ -65,11 +69,10 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
         if (argMultimap.getValue(PREFIX_NOTE).isPresent()) {
             updatePersonDescriptor.setNote(ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get()));
         }
-        parseSubjectsForUpdate(argMultimap.getAllValues(PREFIX_SUBJECT)).ifPresent(updatePersonDescriptor::setSubjects);
-
         if (argMultimap.getValue(PREFIX_LEVEL).isPresent()) {
             updatePersonDescriptor.setLevel(ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get()));
         }
+        parseSubjectsForUpdate(argMultimap.getAllValues(PREFIX_SUBJECT)).ifPresent(updatePersonDescriptor::setSubjects);
 
         if (!updatePersonDescriptor.isAnyFieldUpdated()) {
             throw new ParseException(UpdateCommand.MESSAGE_NOT_UPDATED);

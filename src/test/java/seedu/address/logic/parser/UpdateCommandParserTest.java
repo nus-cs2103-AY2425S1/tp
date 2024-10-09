@@ -30,7 +30,6 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.UpdateCommand;
 import seedu.address.logic.commands.UpdateCommand.UpdatePersonDescriptor;
@@ -53,7 +52,7 @@ public class UpdateCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         // no name specified
-        assertParseFailure(parser, VALID_PHONE_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, PHONE_DESC_AMY, MESSAGE_INVALID_FORMAT);
 
         // no field specified
         assertParseFailure(parser, VALID_NAME_AMY, UpdateCommand.MESSAGE_NOT_UPDATED);
