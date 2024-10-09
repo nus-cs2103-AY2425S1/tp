@@ -161,7 +161,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setGroup(Group target, Group updatedGroup ) {
+        public void setGroup(Group target, Group updatedGroup) {
             throw new AssertionError("This method should not be called.");
         }
 

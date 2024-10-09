@@ -86,8 +86,8 @@ public class StudentTest {
     public void toStringMethod() {
         String expected =
             Student.class.getCanonicalName() + "{name=" + ALICE.getName() + ", email=" + ALICE.getEmail()
-                + ", tags=" + ALICE.getTags() + ", group=" +
-                    (ALICE.getGroup().isPresent()
+                + ", tags=" + ALICE.getTags() + ", group="
+                    + (ALICE.getGroup().isPresent()
                     ? ALICE.getGroup().get().toString()
                     : "This student does not belong to any group yet!") + "}";
         assertEquals(expected, ALICE.toString());
