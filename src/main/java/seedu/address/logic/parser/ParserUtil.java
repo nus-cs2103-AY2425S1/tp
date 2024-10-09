@@ -2,6 +2,9 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,10 +12,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -121,4 +121,26 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    public static LocalDate parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        try {
+            System.out.println(trimmedDate);
+            return LocalDate.parse(trimmedDate, DateTimeFormatter.ISO_LOCAL_DATE);
+        } catch (DateTimeParseException e) {
+            throw new ParseException("Invalid date format. Please use YYYY-MM-DD.");
+        }
+    }
+
+    public static Attendance parseAttendance(String status) throws ParseException {
+        requireNonNull(status);
+        String trimmedStatus = status.trim();
+        if (!Attendance.isValidAttendance(trimmedStatus)) {
+            throw new ParseException("Invalid attendance status. It must be either 'present' or 'absent'.");
+        }
+        return new Attendance(trimmedStatus);
+    }
+
+
 }
