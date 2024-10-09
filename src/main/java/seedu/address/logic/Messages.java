@@ -19,6 +19,8 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
 
+    public static final String MESSAGE_INVALID_STUDENT_ID = "No student is found with Student ID: %1$s";
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
