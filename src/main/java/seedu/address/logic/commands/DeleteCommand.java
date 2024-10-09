@@ -1,3 +1,5 @@
+// In `src/main/java/seedu/address/logic/commands/DeleteCommand.java`
+
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
@@ -23,7 +25,7 @@ public class DeleteCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person:\n%1$s";
 
     private final Index targetIndex;
 
@@ -42,7 +44,8 @@ public class DeleteCommand extends Command {
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
+                Messages.formatForDeletion(personToDelete)));
     }
 
     @Override
