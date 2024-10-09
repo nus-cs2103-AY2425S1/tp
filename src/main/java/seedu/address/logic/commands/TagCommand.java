@@ -8,7 +8,6 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -23,7 +22,7 @@ public class TagCommand extends Command {
     public static final String COMMAND_WORD = "tag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Tags the person identified by the index number used in the displayed person list. \n"
+            + ": Tags the person identified by the index number used in the displayed person list with a predefined alphanumerical tag. \n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -51,10 +50,6 @@ public class TagCommand extends Command {
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-        if (tag.tagName.length() > 50) {
-            throw new CommandException(Messages.MESSAGE_INPUT_LENGTH_EXCEEDED);
         }
 
         Person personToTag = lastShownList.get(targetIndex.getZeroBased());
