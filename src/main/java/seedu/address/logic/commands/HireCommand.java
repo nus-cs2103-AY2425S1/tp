@@ -55,6 +55,14 @@ public class HireCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, name));
     }
 
+    public Name getName() {
+        return name;
+    }
+
+    public Job getJob() {
+        return job;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

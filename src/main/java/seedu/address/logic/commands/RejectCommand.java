@@ -60,6 +60,14 @@ public class RejectCommand extends Command {
                 personToReject.getName()));
     }
 
+    public Name getName() {
+        return name;
+    }
+
+    public Job getJob() {
+        return job;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
