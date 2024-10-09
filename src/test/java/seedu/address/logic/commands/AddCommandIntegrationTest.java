@@ -62,7 +62,8 @@ public class AddCommandIntegrationTest {
         expectedModel.addPerson(validPerson);
 
         assertCommandSuccess(new AddClientCommand(validPerson), model,
-                String.format(AddClientCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+                String.format(AddClientCommand.MESSAGE_SUCCESS, Messages.format(validPerson)
+                        + AddClientCommand.MESSAGE_SUCCESS_WITH_CAR + Messages.formatCar(validPerson)),
                 expectedModel);
     }
 
