@@ -74,10 +74,10 @@ public class AddressBookParser {
             return new ListCommand();
 
         case ListDoctorCommand.COMMAND_WORD:
-            return new ListCommand();
+            return new ListDoctorCommand();
 
         case ListPatientCommand.COMMAND_WORD:
-            return new ListCommand();
+            return new ListPatientCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

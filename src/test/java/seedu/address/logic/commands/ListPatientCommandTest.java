@@ -8,6 +8,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -40,5 +41,17 @@ public class ListPatientCommandTest {
     @Test
     public void execute() {
         assertCommandFailure(new ListPatientCommand(), model, MESSAGE_NOT_IMPLEMENTED_YET);
+    }
+
+    /**
+     * Tests if {@code ListPatientCommand} toString method returns the expected string.
+     */
+    @Test
+    public void toString_validCommand_returnsExpectedString() {
+        ListPatientCommand command = new ListPatientCommand();
+        String expectedString = new ToStringBuilder(command)
+                .add("commandWord", ListPatientCommand.COMMAND_WORD)
+                .toString();
+        assertEquals(expectedString, command.toString()); // Check if the string matches
     }
 }
