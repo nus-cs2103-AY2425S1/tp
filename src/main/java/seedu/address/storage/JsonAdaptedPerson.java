@@ -10,6 +10,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Schedule;
+import seedu.address.model.person.Rate;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -23,6 +24,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final String schedule;
+    private final String rate;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -30,12 +32,13 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-                             @JsonProperty("schedule") String schedule) {
+                             @JsonProperty("schedule") String schedule, @JsonProperty("rate") String rate) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.schedule = schedule;
+        this.rate = rate;
     }
 
     /**
@@ -47,6 +50,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         schedule = source.getSchedule().value;
+        rate = source.getRate().toString();
     }
 
     /**
@@ -97,7 +101,12 @@ class JsonAdaptedPerson {
         }
         final Schedule modelSchedule = new Schedule(schedule);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelSchedule);
+        if (rate == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Rate.class.getSimpleName()));
+        }
+        final Rate modelRate = new Rate(rate);
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelSchedule, modelRate);
     }
 
 }

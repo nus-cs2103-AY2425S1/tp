@@ -6,6 +6,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Schedule;
+import seedu.address.model.person.Rate;
 
 /**
  * A utility class to help with building Person objects.
@@ -17,12 +18,14 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_SCHEDULE = "Sunday-1800-1900";
+    public static final String DEFAULT_FEE = "300";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Schedule schedule;
+    private Rate rate;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -33,6 +36,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         schedule = new Schedule(DEFAULT_SCHEDULE);
+        rate = new Rate(DEFAULT_FEE);
     }
 
     /**
@@ -44,6 +48,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         schedule = personToCopy.getSchedule();
+        rate = personToCopy.getRate();
     }
 
     /**
@@ -87,8 +92,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Rate} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withRate(String rate) {
+        this.rate = new Rate(rate);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, schedule);
+        return new Person(name, phone, email, address, schedule, rate);
     }
 
 }

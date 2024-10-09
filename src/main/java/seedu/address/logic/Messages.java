@@ -44,7 +44,9 @@ public class Messages {
                 .append("; Address: ")
                 .append(person.getAddress())
                 .append("; Schedule: ")
-                .append(person.getSchedule());
+                .append(person.getSchedule())
+                .append("; Rate: ")
+                .append(person.getRate());
 
         return builder.toString();
     }
