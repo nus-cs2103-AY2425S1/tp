@@ -22,6 +22,7 @@ import tuteez.model.AddressBook;
 import tuteez.model.Model;
 import tuteez.model.ReadOnlyAddressBook;
 import tuteez.model.ReadOnlyUserPrefs;
+import tuteez.model.person.Name;
 import tuteez.model.person.Person;
 import tuteez.testutil.PersonBuilder;
 
@@ -155,6 +156,11 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Person findPersonByName(Name name) {
             throw new AssertionError("This method should not be called.");
         }
     }

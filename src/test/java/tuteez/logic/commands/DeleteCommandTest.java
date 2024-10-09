@@ -17,6 +17,7 @@ import tuteez.logic.Messages;
 import tuteez.model.Model;
 import tuteez.model.ModelManager;
 import tuteez.model.UserPrefs;
+import tuteez.model.person.Name;
 import tuteez.model.person.Person;
 
 /**
@@ -104,9 +105,16 @@ public class DeleteCommandTest {
     @Test
     public void toStringMethod() {
         Index targetIndex = Index.fromOneBased(1);
-        DeleteCommand deleteCommand = new DeleteCommand(targetIndex);
-        String expected = DeleteCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
-        assertEquals(expected, deleteCommand.toString());
+        DeleteCommand deleteCommandWithIndex = new DeleteCommand(targetIndex);
+        String expectedWithIndex = DeleteCommand.class.getCanonicalName()
+                    + "{targetIndex=" + targetIndex + ", targetName=null}";
+        assertEquals(expectedWithIndex, deleteCommandWithIndex.toString());
+
+        Name targetName = new Name("Mary Jane");
+        DeleteCommand deleteCommandWithName = new DeleteCommand(targetName);
+        String expectedWithName = DeleteCommand.class.getCanonicalName()
+                    + "{targetIndex=null, targetName=" + targetName + "}";
+        assertEquals(expectedWithName, deleteCommandWithName.toString());
     }
 
     /**
