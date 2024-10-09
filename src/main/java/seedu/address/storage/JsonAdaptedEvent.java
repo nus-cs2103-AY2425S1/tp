@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.Name;
+import seedu.address.model.event.EventName;
 import seedu.address.model.event.Time;
 import seedu.address.model.event.Venue;
 import seedu.address.model.person.Person;
@@ -39,10 +39,10 @@ class JsonAdaptedEvent {
      * Converts a given {@code Event} into this class for Jackson use.
      */
     public JsonAdaptedEvent(Event source) {
-        name = source.getName().getName();
+        name = source.getName().getEventName();
         time = source.getTime().getTime();
         venue = source.getVenue().getVenue();
-        mainContact = new JsonAdaptedPerson(source.getPerson());
+        mainContact = new JsonAdaptedPerson(source.getMainContact());
     }
 
     /**
@@ -52,9 +52,9 @@ class JsonAdaptedEvent {
      */
     public Event toModelType() throws IllegalValueException {
         if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, EventName.class.getSimpleName()));
         }
-        final Name eventName = new Name(name);
+        final EventName eventName = new EventName(name);
 
         if (time == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Time.class.getSimpleName()));
