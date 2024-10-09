@@ -31,21 +31,9 @@ public class FindCommandParser implements Parser<FindCommand> {
         // split by num/ to allow quick search with name
         boolean hasSearchTelArg = trimmedArgs.contains("num/");
         if (hasSearchTelArg) {
-            String[] searchArgs = trimmedArgs.split("num/");
-            String[] nameKeywords = searchArgs[0].split("\\s+");
-            // has both Name and searchTel args
-            if (searchArgs.length == 2) {
-                // not using parsePhone, allowing more flexibility of search
-                // i.e. full phone number need not be entered
-                String searchTel = searchArgs[1];
-                return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)),
-                        new TelContainsNumberPredicate(searchTel));
-            } else {
-                // has only searchTel argument
-                String searchTel = searchArgs[0];
+            String searchTel = trimmedArgs.replace("num/","");
                 return new FindCommand(null,
                         new TelContainsNumberPredicate(searchTel));
-            }
         } else {
             // only has name arg
             String[] nameKeywords = trimmedArgs.split("\\s+");

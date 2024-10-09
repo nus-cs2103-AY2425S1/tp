@@ -36,12 +36,7 @@ public class FindCommand extends Command {
         // if name predicate is not null
         if (namePredicate != null) {
             model.updateFilteredPersonList(namePredicate);
-            // if number was entered search for it too
-            if (numberPredicate != null) {
-                model.updateFilteredPersonList(numberPredicate);
-            }
         } else {
-            // name predicate null -> number predicate must exist
             model.updateFilteredPersonList(numberPredicate);
         }
         return new CommandResult(
