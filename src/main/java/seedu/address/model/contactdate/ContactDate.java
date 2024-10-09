@@ -15,16 +15,19 @@ public class ContactDate {
             "Dates should be in the format of YYYY-MM-DD";
     public static final String VALIDATION_REGEX = "\\d{4}-\\d{2}-\\d{2}";
     public final LocalDate value;
+    private final String notes;
 
     /**
      * Constructs a {@code ContactDate}.
      *
      * @param date A valid date.
      */
-    public ContactDate(String date) {
+    public ContactDate(String date, String notes) {
         requireNonNull(date);
+        requireNonNull(notes);
         checkArgument(isValidContactDate(date), MESSAGE_CONSTRAINTS);
         value = LocalDate.parse(date);
+        this.notes = notes;
     }
 
     /**
@@ -45,13 +48,17 @@ public class ContactDate {
     /**
      * Returns the current date.
      */
-    public static ContactDate getCurrentDate() {
-        return new ContactDate(LocalDate.now().toString());
+    public static ContactDate createCurrentDate(String notes) {
+        return new ContactDate(LocalDate.now().toString(), notes);
     }
 
     @Override
     public String toString() {
         return value.toString();
+    }
+
+    public String getNotes() {
+        return notes;
     }
 
     @Override
@@ -66,7 +73,7 @@ public class ContactDate {
         }
 
         ContactDate otherDate = (ContactDate) other;
-        return value.equals(otherDate.value);
+        return value.equals(otherDate.value) && notes.equals(otherDate.notes);
     }
 
     @Override

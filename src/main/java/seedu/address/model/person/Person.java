@@ -48,7 +48,7 @@ public class Person {
      * For creating a new person. Every field but contact date must be present and not null.
      */
     public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        this(nric, name, phone, email, address, tags, new ContactDateList(ContactDate.getCurrentDate()));
+        this(nric, name, phone, email, address, tags, new ContactDateList(ContactDate.createCurrentDate("")));
     }
 
     public Nric getNric() {
@@ -90,8 +90,8 @@ public class Person {
     /**
      * Mark the person as contacted today.
      */
-    public void markAsContacted() {
-        contactDates.markAsContacted();
+    public void markAsContacted(ContactDate contactDate) {
+        contactDates.markAsContacted(contactDate);
     }
 
     /**
