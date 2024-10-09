@@ -89,7 +89,6 @@ public class AddCommandParserTest {
         // multiple schedules
         assertParseFailure(parser, SCHEDULE_DESC_AMY + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_SCHEDULE));
-        
         // multiple rates
         assertParseFailure(parser, RATE_DESC_AMY + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_RATE));
@@ -122,7 +121,6 @@ public class AddCommandParserTest {
         // invalid schedule
         assertParseFailure(parser, INVALID_SCHEDULE_DESC + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_SCHEDULE));
-        
         // invalid rate
         assertParseFailure(parser, INVALID_RATE_DESC + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_RATE));
@@ -148,7 +146,6 @@ public class AddCommandParserTest {
         // invalid schedule
         assertParseFailure(parser, validExpectedPersonString + INVALID_SCHEDULE_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_SCHEDULE));
-        
         // invalid rate
         assertParseFailure(parser, validExpectedPersonString + INVALID_RATE_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_RATE));
@@ -185,7 +182,6 @@ public class AddCommandParserTest {
         // missing schedule prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + VALID_SCHEDULE_BOB + RATE_DESC_BOB, expectedMessage);
-        
         // missing rate prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + SCHEDULE_DESC_BOB + VALID_RATE_BOB, expectedMessage);
@@ -222,7 +218,6 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + INVALID_SCHEDULE_DESC
                 + RATE_DESC_BOB, Schedule.MESSAGE_CONSTRAINTS);
-        
         // invalid rate
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + SCHEDULE_DESC_BOB
@@ -230,7 +225,8 @@ public class AddCommandParserTest {
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB
-                        + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC + SCHEDULE_DESC_BOB + RATE_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
+                + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC + SCHEDULE_DESC_BOB + RATE_DESC_BOB,
+                Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB
