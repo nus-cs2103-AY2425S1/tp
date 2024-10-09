@@ -9,11 +9,11 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.product.ProductName;
 import seedu.address.model.supplier.Address;
 import seedu.address.model.supplier.Email;
 import seedu.address.model.supplier.Name;
 import seedu.address.model.supplier.Phone;
-import seedu.address.model.product.ProductName;
 import seedu.address.model.tag.Tag;
 
 /**

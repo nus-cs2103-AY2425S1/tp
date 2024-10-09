@@ -4,8 +4,8 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.supplier.Supplier;
 import seedu.address.model.product.Product;
+import seedu.address.model.supplier.Supplier;
 
 /**
  * The API of the Model component.
@@ -74,9 +74,6 @@ public interface Model {
     void addPerson(Supplier supplier);
 
     /**
-<<<<<<< HEAD
-     * Replaces the given supplier {@code target} with {@code editedSupplier}.
-=======
      * Adds the given product.
      * {@code product} must not already exist in InvenTrack.
      */
@@ -85,7 +82,6 @@ public interface Model {
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
->>>>>>> upstream/master
      * {@code target} must exist in the address book.
      * The supplier identity of {@code editedSupplier} must not be
      * the same as another existing supplier in the address book.

@@ -11,8 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.supplier.Supplier;
 import seedu.address.model.product.Product;
+import seedu.address.model.supplier.Supplier;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -95,6 +95,7 @@ public class ModelManager implements Model {
         addressBook.removePerson(target);
     }
 
+    @Override
     public boolean hasProduct(Product product) {
         System.out.println("has Product in model manager.");
         return true;
