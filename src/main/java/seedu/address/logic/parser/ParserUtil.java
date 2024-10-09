@@ -13,7 +13,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tier;
+import seedu.address.model.tier.Tier;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.

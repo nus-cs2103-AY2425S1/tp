@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.tag.Tier;
+import seedu.address.model.tier.Tier;
 
 /**
  * Jackson-friendly version of {@link Tier}.

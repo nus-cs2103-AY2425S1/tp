@@ -1,16 +1,12 @@
 package seedu.address.testutil;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
-import seedu.address.model.tag.Tier;
-import seedu.address.model.util.SampleDataUtil;
+import seedu.address.model.tier.Tier;
 
 /**
  * A utility class to help with building Person objects.
@@ -21,6 +17,7 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_TIER = "NA";
 
     public static final String DEFAULT_REMARK = "";
 
@@ -28,7 +25,7 @@ public class PersonBuilder {
     private Phone phone;
     private Email email;
     private Address address;
-    private Set<Tier> tiers;
+    private Tier tier;
 
     private Remark remark;
 
@@ -40,7 +37,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        tiers = new HashSet<>();
+        tier = new Tier(DEFAULT_TIER);
         remark = new Remark(DEFAULT_REMARK);
     }
 
@@ -52,7 +49,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
-        tiers = new HashSet<>(personToCopy.getTags());
+        tier = personToCopy.getTier();
         remark = personToCopy.getRemark();
     }
 
@@ -67,8 +64,8 @@ public class PersonBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTiers(String ... tags) {
-        this.tiers = SampleDataUtil.getTagSet(tags);
+    public PersonBuilder withTiers(String tag) {
+        this.tier = new Tier(tag);
         return this;
     }
 
@@ -105,7 +102,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, tiers, remark);
+        return new Person(name, phone, email, address, tier, remark);
     }
 
 }

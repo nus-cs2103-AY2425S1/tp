@@ -69,7 +69,7 @@ public class CommandTestUtil {
                 .withTiers(VALID_TIER_GOLD).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTiers(VALID_TIER_REJECT, VALID_TIER_GOLD).build();
+                .withTiers(VALID_TIER_REJECT).build();
     }
 
     /**

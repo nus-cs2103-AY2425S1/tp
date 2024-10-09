@@ -4,7 +4,7 @@
     "phone": "94351253",
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
-    "tagged": [ "BRONZE" ],
+    "tagged": "BRONZE",
     "remark" : "She is stingy"
   }, {
     "name": "Alice Pauline",

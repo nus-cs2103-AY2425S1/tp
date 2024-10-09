@@ -1,10 +1,10 @@
-package seedu.address.model.tag;
+package seedu.address.model.tier;
 
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-public class TagTest {
+public class TierTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
