@@ -10,7 +10,7 @@ public class Event {
     private Name name;
     private Time time;
     private Venue venue;
-    private Person person;
+    private Person mainContact;
 
     /**
      * Every field must be present and not null.
@@ -19,7 +19,7 @@ public class Event {
         this.name = name;
         this.time = time;
         this.venue = venue;
-        this.person = person;
+        this.mainContact = person;
     }
 
     public Name getName() {
@@ -34,13 +34,13 @@ public class Event {
         return venue;
     }
 
-    public Person getPerson() {
-        return person;
+    public Person getMainContact() {
+        return mainContact;
     }
 
     @Override
     public String toString() {
-        return name + " " + time + " " + venue + " " + person;
+        return name + " " + time + " " + venue + " " + mainContact;
     }
 
     @Override
