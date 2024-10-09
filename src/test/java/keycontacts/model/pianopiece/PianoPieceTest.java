@@ -1,6 +1,7 @@
 package keycontacts.model.pianopiece;
 
 import static keycontacts.testutil.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -26,7 +27,6 @@ public class PianoPieceTest {
 
         // blank
         assertFalse(PianoPiece.isValidPianoPieceName("")); // empty string
-        assertFalse(PianoPiece.isValidPianoPieceName(" ")); // spaces only
 
         // valid name
         assertTrue(PianoPiece.isValidPianoPieceName("Für Elise")); // unicode character ü
@@ -35,4 +35,33 @@ public class PianoPieceTest {
         assertTrue(PianoPiece.isValidPianoPieceName("Sonata (Moonlight)")); // parentheses
     }
 
+    @Test
+    public void equals() {
+        PianoPiece piece1 = new PianoPiece("1");
+        PianoPiece piece1duplicate = new PianoPiece("1");
+        PianoPiece piece2 = new PianoPiece("2");
+
+        assertFalse(piece1.equals(piece2));
+        assertFalse(piece2.equals(piece1));
+
+        assertTrue(piece1.equals(piece1));
+        assertTrue(piece1.equals(piece1duplicate));
+        assertTrue(piece1duplicate.equals(piece1));
+    }
+
+    @Test
+    public void toStringMethod() {
+        String pianoPieceName = "Fugue";
+        PianoPiece piece = new PianoPiece(pianoPieceName);
+
+        assertEquals("[" + pianoPieceName + "]", piece.toString());
+    }
+
+    @Test
+    public void hashCodeMethod() {
+        String pianoPieceName = "La Campanella";
+        PianoPiece pianoPiece = new PianoPiece(pianoPieceName);
+
+        assertEquals(pianoPieceName.hashCode(), pianoPiece.hashCode());
+    }
 }

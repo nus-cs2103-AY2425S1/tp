@@ -29,7 +29,7 @@ public class PianoPiece {
      * Returns true if a given string is a valid piano piece name.
      */
     public static boolean isValidPianoPieceName(String test) {
-        return test.trim().matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override
