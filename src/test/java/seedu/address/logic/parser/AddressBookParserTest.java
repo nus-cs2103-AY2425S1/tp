@@ -22,6 +22,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ReminderCommand;
 import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -97,6 +98,20 @@ public class AddressBookParserTest {
 
         ScheduleCommand actualCommand = (ScheduleCommand) parser.parseCommand(
                 ScheduleCommand.COMMAND_WORD + " Jane" + " d/" + dateTime);
+
+        // Assert that the expected command equals the actual command
+        assertEquals(expectedCommand, actualCommand);
+    }
+
+    @Test
+    public void parseCommand_reminder() throws Exception {
+        String appointmentDateTime = "2024-10-04 1000";
+        String reminderTime = "1 day";
+        ReminderCommand expectedCommand = new ReminderCommand("Jane", appointmentDateTime, reminderTime);
+
+        ReminderCommand actualCommand = (ReminderCommand) parser.parseCommand(
+                ReminderCommand.COMMAND_WORD + " Jane" + " d/" + appointmentDateTime
+                + " r/" + reminderTime);
 
         // Assert that the expected command equals the actual command
         assertEquals(expectedCommand, actualCommand);
