@@ -21,6 +21,9 @@ public class Messages {
     public static final String MESSAGE_INVALID_DATE_FORMAT = "Invalid date format! "
             + "Please use the format: yyyy-MM-dd HHmm";
 
+    public static final String MESSAGE_INVALID_REMINDER_FORMAT = "Invalid reminder time!"
+            + "Please enter either: n day/hour(s)";
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
