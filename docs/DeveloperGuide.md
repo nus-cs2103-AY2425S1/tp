@@ -403,9 +403,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * Steps 3a1-3a2 are repeated until the right update vendor command format is recognised
     * Use case resumes at step 4.
 * 3b. Multiple saved vendors with the same name
-    * 3a1. User first <u>searches for vendors name (UC1).</u>
-    * 3a2. GAB returns search result
-    * 3a3. User identifies the index of the right vendor to be updated
+    * 3b1. User first <u>searches for vendors name (UC1).</u>
+    * 3b2. GAB returns search result
+    * 3b3. User identifies the index of the right vendor to be updated
     * Steps 3b1-3b3 are repeated until user identifies the right vendor
     * Use case resumes at step 4.
 
