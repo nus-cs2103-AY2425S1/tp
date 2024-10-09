@@ -5,7 +5,6 @@ import static seedu.address.storage.JsonAdaptedStudent.MISSING_FIELD_MESSAGE_FOR
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalStudents.BENSON;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,8 +15,6 @@ import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
-import seedu.address.model.student.StudentId;
-import seedu.address.model.student.TutorialClass;
 
 public class JsonAdaptedStudentTest {
     private static final String INVALID_NAME = "R@chel";
@@ -47,9 +44,9 @@ public class JsonAdaptedStudentTest {
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
         // Assuming that the Name class does not allow names with special characters
-        final String INVALID_NAME = "Rachel@123"; // This should be invalid if special characters are not allowed
+        final String invalidName = "Rachel@123"; // This should be invalid if special characters are not allowed
         JsonAdaptedStudent student = new JsonAdaptedStudent(
-                INVALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                invalidName, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                 VALID_STUDENT_ID, VALID_TUTORIAL_CLASS, VALID_TAGS);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);

@@ -113,7 +113,8 @@ class JsonAdaptedStudent {
         final Address modelAddress = new Address(address);
 
         if (studentId == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, StudentId.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    StudentId.class.getSimpleName()));
         }
         if (!StudentId.isValidStudentId(studentId)) {
             throw new IllegalValueException(StudentId.MESSAGE_CONSTRAINTS);
@@ -121,16 +122,17 @@ class JsonAdaptedStudent {
         final StudentId modelStudentId = new StudentId(studentId);
 
         if (tutorialClass == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, TutorialClass.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    TutorialClass.class.getSimpleName()));
         }
         if (!TutorialClass.isValidTutorialClass(tutorialClass)) {
             throw new IllegalValueException(TutorialClass.MESSAGE_CONSTRAINTS);
         }
         final TutorialClass modelTutorialClass = new TutorialClass(tutorialClass);
 
-
         final Set<Tag> modelTags = new HashSet<>(studentTags);
-        return new Student(modelName, modelPhone, modelEmail, modelAddress, modelStudentId, modelTutorialClass, modelTags);
+        return new Student(modelName, modelPhone, modelEmail, modelAddress,
+                modelStudentId, modelTutorialClass, modelTags);
     }
 
 }

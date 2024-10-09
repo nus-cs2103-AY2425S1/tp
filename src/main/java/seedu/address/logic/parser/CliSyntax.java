@@ -1,7 +1,5 @@
 package seedu.address.logic.parser;
 
-import seedu.address.model.student.TutorialClass;
-
 /**
  * Contains Command Line Interface (CLI) syntax definitions common to multiple commands
  */

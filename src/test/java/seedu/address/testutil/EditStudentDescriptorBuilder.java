@@ -6,7 +6,13 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
-import seedu.address.model.student.*;
+import seedu.address.model.student.Address;
+import seedu.address.model.student.Email;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Phone;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentId;
+import seedu.address.model.student.TutorialClass;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -70,11 +76,17 @@ public class EditStudentDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code StudentId} of the {@code EditStudentDescriptor} that we are building.
+     */
     public EditStudentDescriptorBuilder withStudentId(String studentId) {
         descriptor.setStudentId(new StudentId(studentId));
         return this;
     }
 
+    /**
+     * Sets the {@code TutorialClass} of the {@code EditStudentDescriptor} that we are building.
+     */
     public EditStudentDescriptorBuilder withTutorialClass(String tutorialClass) {
         descriptor.setTutorialClass(new TutorialClass(tutorialClass));
         return this;
