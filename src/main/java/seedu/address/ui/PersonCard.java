@@ -42,6 +42,8 @@ public class PersonCard extends UiPart<Region> {
     private Label note;
     @FXML
     private FlowPane subjects;
+    @FXML
+    private Label schoolLevel;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -58,5 +60,12 @@ public class PersonCard extends UiPart<Region> {
         person.getSubjects().stream()
                 .sorted(Comparator.comparing(subject -> subject.subjectName))
                 .forEach(subject -> subjects.getChildren().add(new Label(subject.subjectName)));
+
+        if (person.getSchoolLevel() != null) {
+            schoolLevel.setText(person.getSchoolLevel().levelName);
+        }
+
+
+
     }
 }

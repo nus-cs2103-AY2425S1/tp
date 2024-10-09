@@ -11,6 +11,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.EmergencyContact;
+import seedu.address.model.person.Level;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Phone;
@@ -133,5 +134,15 @@ public class ParserUtil {
             subjectSet.add(parseSubject(subjectName));
         }
         return subjectSet;
+    }
+
+    public static Level parseSchoolLevel(String schoolLevel) throws ParseException {
+        String trimmedSchoolLevel = schoolLevel.trim();
+
+        if (!Level.isValidLevelName(trimmedSchoolLevel)) {
+            throw new ParseException(Level.MESSAGE_CONSTRAINTS);
+        }
+
+        return new Level(schoolLevel);
     }
 }
