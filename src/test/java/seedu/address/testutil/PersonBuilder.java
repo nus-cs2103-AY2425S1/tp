@@ -26,6 +26,9 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private Name parentName;
+    private Phone parentPhone;
+    private Email parentEmail;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -35,6 +38,9 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        parentName = new Name("parent1");
+        parentEmail = new Email("parent@email.com");
+        parentPhone = new Phone("5555555555");
         tags = new HashSet<>();
     }
 
@@ -46,6 +52,9 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        parentName = personToCopy.getParentName();
+        parentEmail = personToCopy.getParentEmail();
+        parentPhone = personToCopy.getParentPhone();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
