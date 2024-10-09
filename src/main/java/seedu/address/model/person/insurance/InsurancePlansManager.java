@@ -1,6 +1,7 @@
 package seedu.address.model.person.insurance;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -10,8 +11,10 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class InsurancePlansManager {
 
-    public static final String DUPLICATE_PLAN_DETECTED_MESSAGE = "This plan has already been added to this client.";
-    public static final String PLAN_NOT_DETECTED_MESSAGE = "This client does not own this plan.";
+    public static final String DUPLICATE_PLAN_DETECTED_MESSAGE = "This plan with id: %1$s, "
+            + "has already been added to this client: %2$s";
+    public static final String PLAN_NOT_DETECTED_MESSAGE = "This plan with id: %1$s, "
+            + "has not been added to this client: %2$s";
 
     private final ArrayList<InsurancePlan> insurancePlans;
 
@@ -91,7 +94,7 @@ public class InsurancePlansManager {
             plans.append(plan.toString()).append(", ");
         }
 
-        if (!insurancePlans.isEmpty()) {
+        if (insurancePlans.isEmpty()) {
             plans.append("None");
         } else {
             plans.setLength(plans.length() - 2); // Remove trailing ", "
