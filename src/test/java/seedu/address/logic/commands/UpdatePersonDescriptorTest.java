@@ -36,7 +36,8 @@ public class UpdatePersonDescriptorTest {
         assertFalse(DESC_AMY.equals(DESC_BOB));
 
         // different name -> returns false
-        UpdatePersonDescriptor updatedAmy = new UpdatePersonDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
+        UpdatePersonDescriptor updatedAmy =
+                new UpdatePersonDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
         assertFalse(DESC_AMY.equals(updatedAmy));
 
         // different phone -> returns false
