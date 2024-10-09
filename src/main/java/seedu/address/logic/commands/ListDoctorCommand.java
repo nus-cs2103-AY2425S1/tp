@@ -37,6 +37,29 @@ public class ListDoctorCommand extends Command {
     }
 
     /**
+     * Checks if this {@code ListDoctorCommand} is equal to another object.
+     * Two {@code ListDoctorCommand} instances are considered equal if they are
+     * the same instance or if they are both instances of {@code ListDoctorCommand}.
+     *
+     * @param other The other object to compare to.
+     * @return true if both are the same instance or are both instances of {@code ListDoctorCommand}, false otherwise.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true; // short circuit if same object
+        }
+
+        // instanceof handles nulls and checks if 'other' is of the same class
+        if (!(other instanceof ListDoctorCommand)) {
+            return false;
+        }
+
+        // No fields to compare, so return true if it is an instance of ListDoctorCommand
+        return true;
+    }
+
+    /**
      * Returns the string representation of the command.
      */
     @Override
