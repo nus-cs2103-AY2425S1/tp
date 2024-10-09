@@ -3,7 +3,6 @@ package seedu.address.model.rentalinformation;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Address;
 
 /**
  * Represents a Rental Information in the address book.
