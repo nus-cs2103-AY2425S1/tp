@@ -14,7 +14,7 @@ import seedu.address.model.assignment.Assignment;
  * Adds an Assignment to the app.
  */
 public class AddAssignmentCommand extends Command {
-    public static final String COMMAND_WORD = "add assignment";
+    public static final String COMMAND_WORD = "add_assignment";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an Assignment to the app. "
             + "Parameters: "
