@@ -1,22 +1,23 @@
 package tutorease.address.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import tutorease.address.logic.commands.Command;
-import tutorease.address.logic.commands.DeleteContactCommand;
-import tutorease.address.logic.commands.ListContactCommand;
-import tutorease.address.logic.parser.exceptions.ParseException;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutorease.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
+import org.junit.jupiter.api.Test;
+
+import tutorease.address.logic.commands.Command;
+import tutorease.address.logic.commands.DeleteContactCommand;
+import tutorease.address.logic.commands.ListContactCommand;
+import tutorease.address.logic.parser.exceptions.ParseException;
 
 public class ContactCommandParserTest {
 
     private final ContactCommandParser parser = new ContactCommandParser();
 
     @Test
-    public void parse_validDeleteCommand_allFieldsPresent_success() throws Exception {
+    public void parse_validDeleteCommand_success() throws Exception {
         // Test for valid delete command parsing
         String validDeleteCommand = "delete 1";
         Command result = parser.parse(validDeleteCommand);

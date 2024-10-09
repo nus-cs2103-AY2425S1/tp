@@ -1,14 +1,16 @@
 package tutorease.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static tutorease.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static tutorease.address.logic.commands.DeleteContactCommand.MESSAGE_USAGE;
+
 import org.junit.jupiter.api.Test;
+
 import tutorease.address.commons.core.index.Index;
 import tutorease.address.logic.commands.DeleteContactCommand;
 import tutorease.address.logic.parser.exceptions.ParseException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static tutorease.address.logic.commands.DeleteContactCommand.MESSAGE_USAGE;
-import static tutorease.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 public class DeleteContactCommandParserTest {
 
@@ -36,7 +38,7 @@ public class DeleteContactCommandParserTest {
     }
 
     @Test
-    public void parse_extraWhitespace_validArgs_returnsDeleteContactCommand() throws Exception {
+    public void parse_extraWhitespace_returnsDeleteContactCommand() throws Exception {
         // Test for valid argument with extra spaces
         DeleteContactCommand command = parser.parse("   1   ");
         assertEquals(new DeleteContactCommand(Index.fromOneBased(1)), command);
