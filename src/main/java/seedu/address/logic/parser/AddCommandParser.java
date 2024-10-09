@@ -44,8 +44,12 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        // Currently placeholders
+        Name parentName = new Name("Test parent");
+        Phone parentPhone = new Phone("91234567");
+        Email parentEmail = new Email("testparent@example.com");
 
-        Person person = new Person(name, phone, email, address, tagList);
+        Person person = new Person(name, phone, email, address, parentName, parentPhone, parentEmail, tagList);
 
         return new AddCommand(person);
     }

@@ -20,6 +20,9 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_PARENT_NAME = "Test parent";
+    public static final String DEFAULT_PARENT_PHONE = "91234567";
+    public static final String DEFAULT_PARENT_EMAIL = "testparent@example.com";
 
     private Name name;
     private Phone phone;
@@ -38,9 +41,9 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        parentName = new Name("parent1");
-        parentEmail = new Email("parent@email.com");
-        parentPhone = new Phone("5555555555");
+        parentName = new Name(DEFAULT_PARENT_NAME);
+        parentPhone = new Phone(DEFAULT_PARENT_PHONE);
+        parentEmail = new Email(DEFAULT_PARENT_EMAIL);
         tags = new HashSet<>();
     }
 
@@ -98,8 +101,32 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Parent's name} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withParentName(String parentName) {
+        this.parentName = new Name(parentName);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Parent's phone} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withParentPhone(String parentPhone) {
+        this.parentPhone = new Phone(parentPhone);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Parent's email} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withParentEmail(String parentEmail) {
+        this.parentEmail = new Email(parentEmail);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, phone, email, address, parentName, parentPhone, parentEmail, tags);
     }
 
 }

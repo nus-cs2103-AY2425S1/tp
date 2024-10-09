@@ -23,6 +23,7 @@ import seedu.address.model.tag.Tag;
 class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String MISSING_PARENT_FIELD_MESSAGE_FORMAT = "Person's parent %s field is missing!";
 
     private final String name;
     private final String phone;
@@ -115,8 +116,36 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        if (parentName == null) {
+            throw new IllegalValueException(String.format(MISSING_PARENT_FIELD_MESSAGE_FORMAT,
+                    Name.class.getSimpleName()));
+        }
+        if (!Name.isValidName(parentName)) {
+            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        }
+        final Name modelParentName = new Name(parentName);
+
+        if (parentPhone == null) {
+            throw new IllegalValueException(String.format(MISSING_PARENT_FIELD_MESSAGE_FORMAT,
+                    Phone.class.getSimpleName()));
+        }
+        if (!Phone.isValidPhone(parentPhone)) {
+            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+        }
+        final Phone modelParentPhone = new Phone(parentPhone);
+
+        if (parentEmail == null) {
+            throw new IllegalValueException(String.format(MISSING_PARENT_FIELD_MESSAGE_FORMAT,
+                    Email.class.getSimpleName()));
+        }
+        if (!Email.isValidEmail(parentEmail)) {
+            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+        }
+        final Email modelParentEmail = new Email(parentEmail);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelParentName, modelParentPhone,
+                modelParentEmail, modelTags);
     }
 
 }
