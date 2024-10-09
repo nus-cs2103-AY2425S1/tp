@@ -1,12 +1,12 @@
 package seedu.address.model.person;
 
-import seedu.address.model.tag.Tag;
+import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.TreeMap;
 
-import static java.util.Objects.requireNonNull;
+import seedu.address.model.tag.Tag;
 
 public class Doctor extends Person{
     /**
@@ -15,7 +15,7 @@ public class Doctor extends Person{
      */
     public class History {
         private TreeMap<LocalDateTime, Pair<Id, String>> db;
-        private Id id;
+        private final Id id;
 
         public History(Id id) {
             this.id = id;
@@ -55,11 +55,16 @@ public class Doctor extends Person{
         history = new Doctor.History(id);
     }
 
-    // Method to add an appointment
-    public void addAppointment(LocalDateTime time, Pair<Id, String> description) {
-        requireNonNull(time);
+      /**
+     * Adds an entry to the doctor's schedule.
+     *
+     * @param dateTime Date and time of the appointment or event.
+     * @param TODO
+     */
+    public void addAppointment(LocalDateTime dateTime, Pair<Id, String> description) {
+        requireNonNull(dateTime);
         requireNonNull(description);
-        history.add(time, description);
+        history.add(dateTime, description);
     }
 
     // Method to update appointment
@@ -69,8 +74,23 @@ public class Doctor extends Person{
         history.update(time, description);
     }
 
-    // Method to get all appointments
+    /**
+     * Retrieves the full schedule of the doctor.
+     *
+     * @return A TODO representing the TreeMap containing the doctor's schedule, 
+     * with the LocalDateTime as the key and History as the value.
+     */
     public String getAllAppointments(Id id) {
         return history.getAll(id);
+    }
+  
+    /**
+     * Retrieves a specific schedule entry based on the date and time. TODO
+     *
+     * @param dateTime The date and time of the desired schedule entry.
+     * @return The History object associated with the specified date and time, or null if not found.
+     */
+    public History getScheduleEntry(LocalDateTime dateTime) {
+        return history.get(dateTime);
     }
 }
