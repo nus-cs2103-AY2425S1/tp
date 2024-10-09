@@ -29,6 +29,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.contactdate.ContactDate;
+import seedu.address.model.contactdate.ContactDateList;
 import seedu.address.model.person.Person;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
@@ -87,6 +89,14 @@ public class LogicManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void getCallHistory_modifyList_throwsUnsupportedOperationException() {
+        ContactDateList callHistory = new ContactDateList();
+        callHistory.add(new ContactDate("2021-01-01", ""));
+        model.updateDisplayedList(callHistory);
+        assertEquals(callHistory, logic.getCallHistory());
     }
 
     /**

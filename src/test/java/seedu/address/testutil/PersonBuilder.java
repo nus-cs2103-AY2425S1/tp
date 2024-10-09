@@ -32,6 +32,7 @@ public class PersonBuilder {
     private Address address;
     private Set<Tag> tags;
     private CallFrequency callFrequency;
+
     /**
      * Creates a {@code PersonBuilder} with the default details.
      */

@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.logic.commands.HistoryCommand.MESSAGE_SHOW_HISTORY_SUCCESS;
+
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -42,13 +44,16 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane mainListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+
+    private CallHistoryPanel callHistoryPanel;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -111,7 +116,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        mainListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -121,6 +126,8 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        callHistoryPanel = new CallHistoryPanel();
     }
 
     /**
@@ -186,11 +193,36 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            String personName = commandResult.getPersonName();
+
+            if (commandResult.getFeedbackToUser().contains(String.format(MESSAGE_SHOW_HISTORY_SUCCESS, personName))) {
+                updateCallHistory();
+            } else {
+                updatePersonListPanel();
+            }
+
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    private void updateCallHistory() {
+        if (callHistoryPanel.getRoot().getParent() != null) {
+            mainListPanelPlaceholder.getChildren().remove(callHistoryPanel.getRoot());
+        }
+        callHistoryPanel.initializeCallHistory(logic.getCallHistory());
+        mainListPanelPlaceholder.getChildren().remove(personListPanel.getRoot());
+        mainListPanelPlaceholder.getChildren().add(callHistoryPanel.getRoot());
+    }
+
+    private void updatePersonListPanel() {
+        if (callHistoryPanel.getRoot().getParent() != null) {
+            mainListPanelPlaceholder.getChildren().remove(callHistoryPanel.getRoot());
+        }
+        mainListPanelPlaceholder.getChildren().remove(personListPanel.getRoot());
+        mainListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
     }
 }

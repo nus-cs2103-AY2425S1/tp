@@ -100,6 +100,7 @@ public class EditCommandParserTest {
 
         EditCommand expectedCommand = new EditCommand(targetNric, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
+
     }
 
     @Test

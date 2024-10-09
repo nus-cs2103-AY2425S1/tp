@@ -22,7 +22,7 @@ public class ContactDate {
     /**
      * Constructs a {@code ContactDate}.
      *
-     * @param date A valid date.
+     * @param date A valid date and time.
      */
     public ContactDate(String date, String notes) {
         requireNonNull(date);
@@ -95,4 +95,5 @@ public class ContactDate {
     public int hashCode() {
         return value.hashCode();
     }
+
 }

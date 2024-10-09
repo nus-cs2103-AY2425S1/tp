@@ -23,6 +23,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.contactdate.ContactDate;
+import seedu.address.model.contactdate.ContactDateList;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
@@ -167,6 +168,21 @@ public class AddCommandTest {
 
         @Override
         public Person getPersonByNric(Nric nric) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateDisplayedList(ContactDateList callHistory) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ContactDateList getDisplayedCallHistory() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ContactDateList getCallHistory(Person target) {
             throw new AssertionError("This method should not be called.");
         }
     }

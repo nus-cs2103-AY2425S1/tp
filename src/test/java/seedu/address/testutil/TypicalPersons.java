@@ -34,12 +34,14 @@ public class TypicalPersons {
             .withPhone("94351253")
             .withTags("friends")
             .withCallFrequency("7").build();
+
     public static final Person BENSON = new PersonBuilder().withNric("S0233700B")
             .withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withTags("owesMoney", "friends")
             .withCallFrequency("7").build();
+
     public static final Person CARL = new PersonBuilder().withNric("S6192793Z")
             .withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street")
