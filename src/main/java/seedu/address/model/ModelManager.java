@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.contactdate.ContactDate;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
@@ -113,9 +114,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void markAsContacted(Person target) {
+    public void markAsContacted(Person target, ContactDate contactDate) {
         requireNonNull(target);
-        target.markAsContacted();
+        target.markAsContacted(contactDate);
     }
 
     @Override

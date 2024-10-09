@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.contactdate.ContactDate;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
@@ -81,7 +82,7 @@ public interface Model {
      * Marks the given person as contacted.
      * The person must exist in the address book.
      */
-    void markAsContacted(Person target);
+    void markAsContacted(Person target, ContactDate contactDate);
 
     Person getPersonByNric(Nric nric);
 

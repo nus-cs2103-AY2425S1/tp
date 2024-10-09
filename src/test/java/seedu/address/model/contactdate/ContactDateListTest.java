@@ -3,8 +3,11 @@ package seedu.address.model.contactdate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTES;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.address.testutil.ContactDateBuilder;
 
 public class ContactDateListTest {
     @Test
@@ -19,12 +22,12 @@ public class ContactDateListTest {
         }
 
         // test 1
-        ContactDate contactDate = new ContactDate("2021-10-10");
+        ContactDate contactDate = new ContactDateBuilder().build();
         contactDateList.add(contactDate);
         assertEquals(contactDate, contactDateList.getLastContacted());
 
         // test 2
-        ContactDate newContactDate = new ContactDate("2021-10-11");
+        ContactDate newContactDate = new ContactDateBuilder().build();
         contactDateList.add(newContactDate);
         assertEquals(newContactDate, contactDateList.getLastContacted());
     }
@@ -32,8 +35,8 @@ public class ContactDateListTest {
     @Test
     public void markAsContacted() {
         ContactDateList contactDateList = new ContactDateList();
-        ContactDate contactDate = ContactDate.getCurrentDate();
-        contactDateList.markAsContacted();
+        ContactDate contactDate = new ContactDateBuilder().withNotes(VALID_NOTES).build();
+        contactDateList.markAsContacted(VALID_NOTES);
         assertEquals(1, contactDateList.size());
         assertEquals(contactDate, contactDateList.getLastContacted());
     }
@@ -41,7 +44,7 @@ public class ContactDateListTest {
     @Test
     public void markAsContacted_contactDateProvided() {
         ContactDateList contactDateList = new ContactDateList();
-        ContactDate contactDate = new ContactDate("2024-10-01");
+        ContactDate contactDate = new ContactDateBuilder().build();
         contactDateList.markAsContacted(contactDate);
         assertEquals(1, contactDateList.size());
         assertEquals(contactDate, contactDateList.getLastContacted());

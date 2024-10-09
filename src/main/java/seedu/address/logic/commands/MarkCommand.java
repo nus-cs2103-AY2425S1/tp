@@ -10,6 +10,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.contactdate.ContactDate;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
@@ -27,15 +28,17 @@ public class MarkCommand extends Command {
 
     private final Index targetIndex;
     private final Nric targetNric;
+    private final ContactDate contactDate;
 
     /**
      * Creates a MarkCommand to mark person at the specified {@code Index} as called.
      *
      * @param targetIndex The {@code Index} of the person to be marked.
      */
-    public MarkCommand(Index targetIndex) {
+    public MarkCommand(Index targetIndex, ContactDate contactDate) {
         this.targetIndex = targetIndex;
         this.targetNric = null;
+        this.contactDate = contactDate;
     }
 
     /**
@@ -43,9 +46,10 @@ public class MarkCommand extends Command {
      *
      * @param targetNric The {@code Nric} of the person to be marked.
      */
-    public MarkCommand(Nric targetNric) {
+    public MarkCommand(Nric targetNric, ContactDate contactDate) {
         this.targetNric = targetNric;
         this.targetIndex = null;
+        this.contactDate = contactDate;
     }
 
     @Override
@@ -65,7 +69,7 @@ public class MarkCommand extends Command {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NRIC);
             }
         }
-        model.markAsContacted(personToMark);
+        model.markAsContacted(personToMark, contactDate);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_MARK_PERSON_SUCCESS, Messages.format(personToMark)));
     }
@@ -82,8 +86,9 @@ public class MarkCommand extends Command {
         }
 
         MarkCommand otherMarkCommand = (MarkCommand) other;
-        return (targetIndex != null && targetIndex.equals(otherMarkCommand.targetIndex))
-                || (targetNric != null && targetNric.equals(otherMarkCommand.targetNric));
+        return ((targetIndex != null && targetIndex.equals(otherMarkCommand.targetIndex))
+                || (targetNric != null && targetNric.equals(otherMarkCommand.targetNric)))
+                && contactDate.equals(otherMarkCommand.contactDate);
     }
 
     @Override
