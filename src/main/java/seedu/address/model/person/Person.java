@@ -20,17 +20,19 @@ public class Person {
     // Data fields
     private final Address address;
     private final Schedule schedule;
+    private final Subject subject;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Schedule schedule) {
+    public Person(Name name, Phone phone, Email email, Address address, Schedule schedule, Subject subject) {
         requireAllNonNull(name, phone, email, address);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.schedule = schedule;
+        this.subject = subject;
     }
 
     public Name getName() {
@@ -51,6 +53,10 @@ public class Person {
 
     public Schedule getSchedule() {
         return schedule;
+    }
+
+    public Subject getSubject() {
+        return subject;
     }
 
     /**
@@ -86,13 +92,14 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && schedule.equals(otherPerson.schedule);
+                && schedule.equals(otherPerson.schedule)
+                && subject.equals(otherPerson.subject);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, schedule);
+        return Objects.hash(name, phone, email, address, schedule, subject);
     }
 
     @Override
@@ -103,6 +110,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("schedule", schedule)
+                .add("subject", subject)
                 .toString();
     }
 

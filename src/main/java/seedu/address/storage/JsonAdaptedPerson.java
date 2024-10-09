@@ -10,6 +10,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Schedule;
+import seedu.address.model.person.Subject;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -23,6 +24,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final String schedule;
+    private final String subject;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -30,12 +32,13 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-                             @JsonProperty("schedule") String schedule) {
+                             @JsonProperty("schedule") String schedule, @JsonProperty("subject") String subject) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.schedule = schedule;
+        this.subject = subject;
     }
 
     /**
@@ -47,6 +50,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         schedule = source.getSchedule().value;
+        subject = source.getSubject().toString();
     }
 
     /**
@@ -97,7 +101,16 @@ class JsonAdaptedPerson {
         }
         final Schedule modelSchedule = new Schedule(schedule);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelSchedule);
+        if (subject == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Subject.class.getSimpleName()));
+        }
+        if (!Subject.isValidSubject(subject)) {
+            throw new IllegalValueException(Subject.MESSAGE_CONSTRAINTS);
+        }
+        final Subject modelSubject = new Subject(subject);
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelSchedule, modelSubject);
     }
 
 }

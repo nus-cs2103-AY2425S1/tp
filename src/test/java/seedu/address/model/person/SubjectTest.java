@@ -37,7 +37,7 @@ class SubjectTest {
         assertTrue(Subject.isValidSubject("economics"));
         assertTrue(Subject.isValidSubject("Biology"));
         assertTrue(Subject.isValidSubject("eNglish"));
-        assertTrue(Subject.isValidSubject("math"));
+        assertTrue(Subject.isValidSubject("mathematics"));
     }
 
     @Test

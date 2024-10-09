@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -32,6 +33,7 @@ public class PersonUtil {
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
         sb.append(PREFIX_SCHEDULE + person.getSchedule().value + " ");
+        sb.append(PREFIX_SUBJECT + person.getSubject().toString() + " ");
         return sb.toString();
     }
 
@@ -45,6 +47,7 @@ public class PersonUtil {
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         descriptor.getSchedule().ifPresent(schedule -> sb.append(PREFIX_SCHEDULE).append(schedule.value).append(" "));
+        descriptor.getSubject().ifPresent(subject -> sb.append(PREFIX_SUBJECT).append(subject.toString()).append(" "));
         return sb.toString();
     }
 }
