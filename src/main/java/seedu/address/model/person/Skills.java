@@ -45,7 +45,7 @@ public class Skills {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Phone)) {
+        if (!(other instanceof Skills)) {
             return false;
         }
 
