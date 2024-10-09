@@ -28,10 +28,10 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_MULTIPLE_PERSONS_FOUND = "Multiple persons found with the keyword. "
             + "Please refine your input.";
 
-    private final NameContainsKeywordsPredicate targetName;
+    private final String nameToDelete;
 
-    public DeleteCommand(NameContainsKeywordsPredicate targetName) {
-        this.targetName = targetName;
+    public DeleteCommand(String nameToDelete) {
+        this.nameToDelete = nameToDelete;
     }
 
     @Override
@@ -39,17 +39,30 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
 
         List<Person> fullPersonList = model.getAddressBook().getPersonList();
-        List<Person> matchingPerson = fullPersonList.stream()
-                .filter(targetName)
+        List<Person> exactMatches = fullPersonList.stream()
+                .filter(person -> person.getName().fullName.equalsIgnoreCase(nameToDelete))
                 .toList();
-        if (matchingPerson.isEmpty()) {
-            throw new CommandException(String.format(MESSAGE_PERSON_NOT_FOUND));
+
+        if (!exactMatches.isEmpty()) {
+            if (exactMatches.size() > 1) {
+                throw new CommandException(String.format(MESSAGE_MULTIPLE_PERSONS_FOUND, nameToDelete));
+            }
+            Person personToDelete = exactMatches.get(0);
+            model.deletePerson(personToDelete);
+            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
         }
 
-        if (matchingPerson.size() > 1) {
-            throw new CommandException(String.format(MESSAGE_MULTIPLE_PERSONS_FOUND));
+        List<Person> partialMatches = fullPersonList.stream()
+                .filter(person -> person.getName().fullName.toLowerCase().contains(nameToDelete.toLowerCase()))
+                .toList();
+
+        if (partialMatches.isEmpty()) {
+            throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
         }
-        Person personToDelete = matchingPerson.get(0);
+        if (partialMatches.size() > 1) {
+            throw new CommandException(String.format(MESSAGE_MULTIPLE_PERSONS_FOUND, nameToDelete));
+        }
+        Person personToDelete = partialMatches.get(0);
         model.deletePerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
@@ -66,13 +79,13 @@ public class DeleteCommand extends Command {
         }
 
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return targetName.equals(otherDeleteCommand.targetName);
+        return nameToDelete.equals(otherDeleteCommand.nameToDelete);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("targetName", targetName)
+                .add("nameToDelete", nameToDelete)
                 .toString();
     }
 }
