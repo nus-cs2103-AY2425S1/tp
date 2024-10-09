@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Tutorial;
 
 /**
  * Marks attendance of an existing person in the address book.
@@ -20,16 +21,16 @@ public class MarkCommand extends Command {
 
     public static final String MESSAGE_NOT_IMPLEMENTED_YET = "Mark command has not be implemented";
 
-    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Tutorial: %2$d";
+    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Tutorial: %2$s";
 
     private final Index index;
-    private final int tutorial;
+    private final Tutorial tutorial;
 
     /**
      * @param index of the person in the display list
      * @param tutorial number to mark attendance for
      */
-    public MarkCommand(Index index, int tutorial) {
+    public MarkCommand(Index index, Tutorial tutorial) {
         this.index = index;
         this.tutorial = tutorial;
     }
@@ -53,6 +54,6 @@ public class MarkCommand extends Command {
         // state check
         MarkCommand e = (MarkCommand) other;
         return index.equals(e.index)
-                && tutorial == e.tutorial;
+                && tutorial.equals(e.tutorial);
     }
 }
