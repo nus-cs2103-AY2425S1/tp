@@ -78,6 +78,14 @@ class JsonAdaptedClient {
         }
         final Email modelEmail = new Email(email);
 
+        if (type == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ClientTypes.class.getSimpleName()));
+        }
+        if (!ClientTypes.isValidClientType(type)) {
+            throw new IllegalValueException(ClientTypes.CLIENT_TYPE_CONSTRAINTS);
+        }
+
         return Objects.equals(type, ClientTypes.BUYER.toString()) ? new Buyer(modelName, modelPhone, modelEmail)
                 : new Seller(modelName, modelPhone, modelEmail);
     }

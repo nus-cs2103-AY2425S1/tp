@@ -65,7 +65,11 @@ public class ClientBuilder {
         return this;
     }
 
-    public Client build() {
-        return new Random().nextInt(2) == 0 ? new Buyer(name, phone, email) : new Seller(name, phone, email);
+    public Client buildBuyer() {
+        return new Buyer(name, phone, email);
+    }
+
+    public Client buildSeller() {
+        return new Seller(name, phone, email);
     }
 }

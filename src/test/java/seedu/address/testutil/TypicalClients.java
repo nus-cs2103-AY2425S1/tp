@@ -17,39 +17,39 @@ import seedu.address.model.client.Client;
 /**
  * A utility class containing a list of {@code Client} objects to be used in tests.
  */
-public class TypicalClient {
+public class TypicalClients {
     public static final Client ALICE = new ClientBuilder().withName("Alice Pauline")
             .withEmail("alice@example.com")
             .withPhone("94351253")
-            .build();
+            .buildBuyer();
     public static final Client BENSON = new ClientBuilder().withName("Benson Meier")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .build();
+            .buildSeller();
     public static final Client CARL = new ClientBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").build();
+            .withEmail("heinz@example.com").buildBuyer();
     public static final Client DANIEL = new ClientBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").build();
+            .withEmail("cornelia@example.com").buildSeller();
     public static final Client ELLE = new ClientBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withEmail("werner@example.com").build();
+            .withEmail("werner@example.com").buildBuyer();
     public static final Client FIONA = new ClientBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withEmail("lydia@example.com").build();
+            .withEmail("lydia@example.com").buildSeller();
     public static final Client GEORGE = new ClientBuilder().withName("George Best").withPhone("9482442")
-            .withEmail("anna@example.com").build();
+            .withEmail("anna@example.com").buildBuyer();
 
     // Manually added
     public static final Client HOON = new ClientBuilder().withName("Hoon Meier").withPhone("8482424")
-            .withEmail("stefan@example.com").build();
+            .withEmail("stefan@example.com").buildBuyer();
     public static final Client IDA = new ClientBuilder().withName("Ida Mueller").withPhone("8482131")
-            .withEmail("hans@example.com").build();
+            .withEmail("hans@example.com").buildSeller();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Client AMY = new ClientBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withEmail(VALID_EMAIL_AMY).build();
+            .withEmail(VALID_EMAIL_AMY).buildBuyer();
     public static final Client BOB = new ClientBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB)
-            .build();
+            .buildSeller();
 
-    private TypicalClient() {} // prevents instantiation
+    private TypicalClients() {} // prevents instantiation
 
     /**
      * Returns an {@code ClientBook} with all the typical buyer.

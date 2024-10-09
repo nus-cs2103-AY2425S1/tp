@@ -16,7 +16,7 @@ public enum ClientTypes {
      * Represents a seller client.
      */
     SELLER("seller");
-
+    public static final String CLIENT_TYPE_CONSTRAINTS = "Client types should only be `BUYER` or `SELLER`";
     private final String type;
 
     /**
@@ -35,5 +35,16 @@ public enum ClientTypes {
      */
     public String getType() {
         return type;
+    }
+
+    /**
+     * Returns if a given string is a valid type.
+     */
+    public static boolean isValidClientType(String test) {
+        if (test == null) {
+            return false;
+        }
+
+        return test.equals(ClientTypes.BUYER.toString()) || test.equals(ClientTypes.SELLER.toString());
     }
 }
