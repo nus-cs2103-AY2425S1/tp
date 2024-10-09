@@ -3,8 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -26,7 +25,7 @@ public class Person {
     private final Address address;
     private final Course course;
     private final Tag tag;
-    private final HashMap<Module, Grade> moduleGrades = new HashMap<>();
+    private final ArrayList<Module> moduleGrades = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
@@ -72,9 +71,9 @@ public class Person {
      *
      * @param newModuleGrades A map of Module and Grade pairs to set.
      */
-    public void setModuleGrades(HashMap<Module, Grade> newModuleGrades) {
+    public void setModuleGrades(ArrayList<Module> newModuleGrades) {
         moduleGrades.clear();
-        moduleGrades.putAll(newModuleGrades);
+        moduleGrades.addAll(newModuleGrades);
     }
 
     /**
@@ -86,15 +85,16 @@ public class Person {
     public void addModuleGrade(Module module, Grade grade) {
         requireNonNull(module, "Module cannot be null");
         requireNonNull(grade, "Grade cannot be null");
-        moduleGrades.put(module, grade);
+        module.setGrade(grade);
+        moduleGrades.add(module);
     }
 
     /**
      * Returns an immutable course grades map, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public HashMap<Module, Grade> getModuleGrades() {
-        return (HashMap<Module, Grade>) Collections.unmodifiableMap(moduleGrades);
+    public ArrayList<Module> getModuleGrades() {
+        return moduleGrades;
     }
 
     /**
