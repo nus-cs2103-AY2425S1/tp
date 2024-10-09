@@ -25,7 +25,8 @@ public class FindPhoneNumberCommandParserTest {
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         FindPhoneNumberCommand expectedFindPhoneNumber =
-                new FindPhoneNumberCommand(new PhoneNumberContainsKeywordPredicate(Arrays.asList("12345678", "987654321")));
+                new FindPhoneNumberCommand(new PhoneNumberContainsKeywordPredicate(
+                        Arrays.asList("12345678", "987654321")));
         assertParseSuccess(parser, "12345678 987654321", expectedFindPhoneNumber);
 
         // multiple whitespaces between keywords
