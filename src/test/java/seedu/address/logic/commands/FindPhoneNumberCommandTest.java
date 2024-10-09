@@ -76,7 +76,8 @@ public class FindPhoneNumberCommandTest {
 
     @Test
     public void toStringMethod() {
-        PhoneNumberContainsKeywordPredicate predicate = new PhoneNumberContainsKeywordPredicate(Arrays.asList("keyword"));
+        PhoneNumberContainsKeywordPredicate predicate =
+                new PhoneNumberContainsKeywordPredicate(Arrays.asList("keyword"));
         FindPhoneNumberCommand findPhoneNumberCommand = new FindPhoneNumberCommand(predicate);
         String expected = FindPhoneNumberCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, findPhoneNumberCommand.toString());
