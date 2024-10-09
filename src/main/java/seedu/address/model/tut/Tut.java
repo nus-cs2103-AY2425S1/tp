@@ -71,4 +71,8 @@ public class Tut {
                 && tutName.equals(otherTutorial.tutName)
                 && students.equals(otherTutorial.students);
     }
+    @Override
+    public String toString() {
+        return tutName + ": Tutorial" + id;
+    }
 }
