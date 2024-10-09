@@ -6,6 +6,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.assignment.exceptions.AssignmentAlreadyAssignedStudentException;
+import seedu.address.model.person.Person;
 
 /**
  * Represents an Assignment in the address book.
@@ -24,6 +26,7 @@ public class Assignment {
     private final int maxScore;
     private int score = 0;
     private boolean hasSubmitted = false;
+    private Person student;
 
     /**
      * Every field must be present and not null.
@@ -33,6 +36,17 @@ public class Assignment {
         this.assignmentName = name;
         checkArgument(isValidScore(maxScore), MESSAGE_CONSTRAINTS);
         this.maxScore = maxScore;
+    }
+
+    /**
+     * Assigns assignment to student.
+     */
+    public void assignStudent(Person student) {
+        requireNonNull(student);
+        if (this.student == null) {
+            this.student = student;
+        }
+        throw new AssignmentAlreadyAssignedStudentException();
     }
 
     /**
