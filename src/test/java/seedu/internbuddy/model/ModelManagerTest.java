@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.internbuddy.commons.core.GuiSettings;
 import seedu.internbuddy.model.company.NameContainsKeywordsPredicate;
-import seedu.internbuddy.testutil.AddressBookCompanyBuilder;
+import seedu.internbuddy.testutil.AddressBookBuilder;
 
 /**
  * Test class for ModelManagerCompany
@@ -108,7 +108,7 @@ public class ModelManagerTest {
      */
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookCompanyBuilder()
+        AddressBook addressBook = new AddressBookBuilder()
             .withCompany(GOOGLE).withCompany(MICROSOFT).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
