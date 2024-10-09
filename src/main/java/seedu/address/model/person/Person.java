@@ -78,20 +78,14 @@ public class Person {
      * Returns true if both persons have the same email
      */
     public boolean isSamePhone(Person otherPerson) {
-        if (isSamePerson(otherPerson)) {
-            return true;
-        }
-        return otherPerson.getPhone().equals(getPhone());
+        return otherPerson != null && otherPerson.getPhone().equals(getPhone());
     }
 
     /**
      * Returns true if both persons have the same email
      */
     public boolean isSameEmail(Person otherPerson) {
-        if (isSamePerson(otherPerson)) {
-            return true;
-        }
-        return otherPerson.getEmail().equals(getEmail());
+        return otherPerson != null && otherPerson.getEmail().equals(getEmail());
     }
 
     /**
