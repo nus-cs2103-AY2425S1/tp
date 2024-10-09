@@ -3,6 +3,10 @@ package seedu.address.model.product;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a Product's name in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
+ */
 public class ProductName {
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters and spaces, and it should not be blank";

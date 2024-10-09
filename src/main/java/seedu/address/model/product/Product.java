@@ -1,9 +1,15 @@
 package seedu.address.model.product;
 
-import seedu.address.commons.util.ToStringBuilder;
-import java.util.Objects;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Objects;
+
+import seedu.address.commons.util.ToStringBuilder;
+
+/**
+ * Represents a Product in the address book.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 public class Product {
     private final seedu.address.model.product.ProductName name;
 

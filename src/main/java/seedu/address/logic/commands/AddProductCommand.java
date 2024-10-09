@@ -1,13 +1,16 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.product.Product;
 
-import static java.util.Objects.requireNonNull;
-
+/**
+ * Adds a product to the address book.
+ */
 public class AddProductCommand extends Command {
 
     public static final String COMMAND_WORD = "ADD_PRODUCT";
@@ -20,7 +23,7 @@ public class AddProductCommand extends Command {
     private final Product toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Person}.
      */
     public AddProductCommand(Product product) {
         requireNonNull(product);
