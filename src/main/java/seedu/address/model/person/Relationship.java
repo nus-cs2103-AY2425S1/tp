@@ -22,7 +22,7 @@ public class Relationship {
     /**
      * Constructs an {@code Relationship}.
      *
-     * @param relationship A valid address.
+     * @param relationship A valid relationship.
      */
     public Relationship(String relationship) {
         requireNonNull(relationship);
