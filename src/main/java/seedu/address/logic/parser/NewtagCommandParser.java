@@ -21,7 +21,8 @@ public class NewtagCommandParser implements Parser<NewtagCommand> {
     public NewtagCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
 
-        // Check if the input is empty, exceeds the maximum length, or contains non-alphanumeric characters other than spaces.
+        // Check if the input is empty, exceeds the maximum length,
+        // or contains non-alphanumeric characters other than spaces.
         boolean isEmpty = trimmedArgs.isEmpty();
         boolean isTooLong = trimmedArgs.length() > MAX_LENGTH;
         boolean isAlphanumeric = trimmedArgs.matches(VALIDATION_REGEX);

@@ -3,6 +3,9 @@ package seedu.address.model.tag;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Constructs a set of {@code Tag}s that are predefined by the user.
+ */
 public class TagList {
     private final Set<Tag> tags;
 
