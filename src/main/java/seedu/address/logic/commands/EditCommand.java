@@ -21,7 +21,12 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Id;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Ward;
+import seedu.address.model.person.Diagnosis;
+import seedu.address.model.person.Medication;
 import seedu.address.model.tag.Tag;
 
 /**
