@@ -22,22 +22,22 @@ public class SampleDataUtilCompany {
         return new Company[] {
             new Company(new Name("Google"), new Phone("6502530000"), new Email("contact@google.com"),
                 new Address("1600 Amphitheatre Parkway, Mountain View, CA 94043"),
-                getTagSet("tech", "search"), new Status("INTERESTED")),
+                getTagSet("tech", "search")),
             new Company(new Name("Microsoft"), new Phone("4258828080"), new Email("contact@microsoft.com"),
                 new Address("One Microsoft Way, Redmond, WA 98052"),
-                getTagSet("tech", "software"), new Status("INTERESTED")),
+                getTagSet("tech", "software")),
             new Company(new Name("Apple"), new Phone("4089961010"), new Email("contact@apple.com"),
                 new Address("One Apple Park Way, Cupertino, CA 95014"),
-                getTagSet("tech", "hardware"), new Status("INTERESTED")),
+                getTagSet("tech", "hardware")),
             new Company(new Name("Amazon"), new Phone("2062661000"), new Email("contact@amazon.com"),
                 new Address("410 Terry Ave N, Seattle, WA 98109"),
-                getTagSet("ecommerce", "cloud"), new Status("INTERESTED")),
+                getTagSet("ecommerce", "cloud")),
             new Company(new Name("Facebook"), new Phone("6505434800"), new Email("contact@fb.com"),
                 new Address("1 Hacker Way, Menlo Park, CA 94025"),
-                getTagSet("social", "tech"), new Status("INTERESTED")),
+                getTagSet("social", "tech")),
             new Company(new Name("Netflix"), new Phone("4085403700"), new Email("contact@netflix.com"),
                 new Address("100 Winchester Circle, Los Gatos, CA 95032"),
-                getTagSet("entertainment", "streaming"), new Status("INTERESTED"))
+                getTagSet("entertainment", "streaming"))
         };
     }
 

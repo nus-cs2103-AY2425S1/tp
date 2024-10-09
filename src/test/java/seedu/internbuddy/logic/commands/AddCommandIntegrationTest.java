@@ -2,7 +2,7 @@ package seedu.internbuddy.logic.commands;
 
 import static seedu.internbuddy.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.internbuddy.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.internbuddy.testutil.TypicalCompanies.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,8 +11,8 @@ import seedu.internbuddy.logic.Messages;
 import seedu.internbuddy.model.Model;
 import seedu.internbuddy.model.ModelManager;
 import seedu.internbuddy.model.UserPrefs;
-import seedu.internbuddy.model.person.Person;
-import seedu.internbuddy.testutil.PersonBuilder;
+import seedu.internbuddy.model.company.Company;
+import seedu.internbuddy.testutil.CompanyBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.
@@ -27,22 +27,22 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_newPerson_success() {
-        Person validPerson = new PersonBuilder().build();
+    public void execute_newcompany_success() {
+        Company validcompany = new CompanyBuilder().build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addPerson(validPerson);
+        expectedModel.addCompany(validcompany);
 
-        assertCommandSuccess(new AddCommand(validPerson), model,
-                String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+        assertCommandSuccess(new AddCommand(validcompany), model,
+                String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validcompany)),
                 expectedModel);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Person personInList = model.getAddressBook().getPersonList().get(0);
-        assertCommandFailure(new AddCommand(personInList), model,
-                AddCommand.MESSAGE_DUPLICATE_PERSON);
+    public void execute_duplicatecompany_throwsCommandException() {
+        Company companyInList = model.getAddressBook().getCompanyList().get(0);
+        assertCommandFailure(new AddCommand(companyInList), model,
+                AddCommand.MESSAGE_DUPLICATE_COMPANY);
     }
 
 }
