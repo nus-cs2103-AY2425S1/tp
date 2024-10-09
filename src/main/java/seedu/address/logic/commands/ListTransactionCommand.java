@@ -42,4 +42,16 @@ public class ListTransactionCommand extends Command {
         model.updateFilteredPersonList(new IsSelectedPredicate(model, index));
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(selected)));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof ListTransactionCommand)) {
+            return false;
+        }
+        ListTransactionCommand otherCommand = (ListTransactionCommand) other;
+        return this.index.equals(otherCommand.index);
+    }
 }
