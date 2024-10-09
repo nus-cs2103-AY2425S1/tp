@@ -12,6 +12,7 @@ public class Age {
     public static final String MESSAGE_CONSTRAINTS =
             "Pet age should only contain numbers, and it should be 1 or 2 digits long";
     public static final String VALIDATION_REGEX = "\\d{1,2}";
+
     public final String value;
 
     /**

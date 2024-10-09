@@ -1,4 +1,7 @@
 package seedu.address.model.pet.exceptions;
 
-public class PetNotFoundException {
+/**
+ * Signals that the operation is unable to find the specified person.
+ */
+public class PetNotFoundException extends RuntimeException {
 }

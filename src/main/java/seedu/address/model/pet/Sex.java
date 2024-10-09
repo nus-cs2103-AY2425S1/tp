@@ -10,31 +10,32 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Sex {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Pet age should only contain numbers, and it should be 1 or 2 digits long";
-    public static final String VALIDATION_REGEX = "\\d{1,2}";
-    public final String value;
+            "Pet sex should be either 'M' or 'F' (case insensitive for Male and Female)";
+    public static final String VALIDATION_REGEX = "^[mMfF]$";
+
+    public final String sex;
 
     /**
-     * Constructs a {@code Age}.
+     * Constructs a {@code Sex}.
      *
-     * @param age A valid age.
+     * @param sex A valid sex.
      */
-    public Age(String age) {
-        requireNonNull(age);
-        checkArgument(isValidAge(age), MESSAGE_CONSTRAINTS);
-        value = age;
+    public Sex(String sex) {
+        requireNonNull(sex);
+        checkArgument(isValidSex(sex), MESSAGE_CONSTRAINTS);
+        this.sex = sex;
     }
 
     /**
-     * Returns true if a given string is a valid age.
+     * Returns true if a given string is a valid sex.
      */
-    public static boolean isValidAge(String test) {
+    public static boolean isValidSex(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
     @Override
     public String toString() {
-        return value;
+        return sex;
     }
 
     @Override
@@ -44,17 +45,17 @@ public class Sex {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Age)) {
+        if (!(other instanceof Sex)) {
             return false;
         }
 
-        Age otherAge = (Age) other;
-        return value.equals(otherAge.value);
+        Sex otherSex = (Sex) other;
+        return sex.equals(otherSex.sex);
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return sex.hashCode();
     }
 
 }
