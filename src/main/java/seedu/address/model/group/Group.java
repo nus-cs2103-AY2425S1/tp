@@ -30,6 +30,9 @@ public class Group {
         this.students.addAll(students);
     }
 
+    /**
+     * Every field must be present and not null.
+     */
     public Group(GroupName groupName) {
         requireAllNonNull(groupName);
         this.groupName = groupName;
@@ -43,6 +46,11 @@ public class Group {
         return Collections.unmodifiableSet(students);
     }
 
+    /**
+     * Adds a given student into the {@code group} object.
+     * There can be a maximum of 5 students in each group.
+     * @param student  The {@code student} object to be added.
+     */
     public void add(Student student) {
         if (students.size() < MAXIMUM_STUDENTS_IN_GROUP) {
             students.add(student);

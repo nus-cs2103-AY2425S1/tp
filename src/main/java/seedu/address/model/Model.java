@@ -102,10 +102,6 @@ public interface Model {
     void setGroup(Group target, Group editedGroup);
 
     /**
-     * Deletes the given student.
-     * The student must exist in the address book.
-     */
-    /**
      * Returns an unmodifiable view of the filtered student list
      */
     ObservableList<Student> getFilteredPersonList();

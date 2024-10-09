@@ -52,8 +52,7 @@ public class Messages {
      */
     public static String format(Group group) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(group.getGroupName())
-                .append("; Group Name: ")
+        builder.append(group.getGroupName());
         return builder.toString();
     }
 

@@ -14,6 +14,6 @@ public interface ReadOnlyAddressBook {
      * This list will not contain any duplicate persons.
      */
     ObservableList<Student> getStudentList();
-    public ObservableList<Group> getGroupList();
+    ObservableList<Group> getGroupList();
 
 }
