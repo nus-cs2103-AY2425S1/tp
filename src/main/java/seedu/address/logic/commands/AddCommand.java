@@ -32,13 +32,13 @@ public class AddCommand extends Command {
             + PREFIX_COURSE + "COURSE "
             + PREFIX_TAG + "TAG\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_STUDENTID + "12345678"
+            + PREFIX_STUDENTID + "12345678 "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_COURSE + "Computer Science"
-            + PREFIX_TAG + "Student";
+            + PREFIX_COURSE + "Computer Science "
+            + PREFIX_TAG + "Student ";
 
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
