@@ -55,6 +55,7 @@ public class ContactDateListTest {
         ContactDateList contactDateList = new ContactDateList();
         ContactDateList contactDateListCopy = new ContactDateList();
         ContactDateList contactDateListCopy2 = new ContactDateList(new ContactDate("2021-10-10", ""));
+        ContactDateList contactDateListCopy3 = new ContactDateList(new ContactDate("2021-10-11", ""));
 
         // same object -> returns true
         assertTrue(contactDateList.equals(contactDateList));
@@ -63,7 +64,7 @@ public class ContactDateListTest {
         assertTrue(contactDateList.equals(contactDateListCopy));
 
         // different object, same types, different values -> returns false
-        assertFalse(contactDateList.equals(contactDateListCopy2));
+        assertFalse(contactDateListCopy2.equals(contactDateListCopy3));
 
         // null -> returns false
         assertFalse(contactDateList.equals(null));

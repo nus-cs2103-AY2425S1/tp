@@ -96,7 +96,7 @@ public class LogicManagerTest {
         ContactDateList callHistory = new ContactDateList();
         callHistory.add(new ContactDate("2021-01-01", ""));
         model.updateDisplayedList(callHistory);
-        assertEquals(callHistory, model.getDisplayedCallHistory());
+        assertEquals(callHistory, logic.getCallHistory());
     }
 
     /**

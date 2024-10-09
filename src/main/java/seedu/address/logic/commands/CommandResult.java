@@ -80,9 +80,6 @@ public class CommandResult {
     }
 
     public String getPersonName() {
-        if (feedbackToUser == null) {
-            return "";
-        }
         String[] parts = feedbackToUser.split(": ");
         return parts.length > 1 ? parts[1].strip() : "";
     }
