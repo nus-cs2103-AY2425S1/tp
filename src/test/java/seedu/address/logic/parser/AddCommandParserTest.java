@@ -176,7 +176,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB
                         + SEX_DESC_BOB, expectedMessage);
 
-        // missing address prefix
+        // missing sex prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + VALID_SEX_BOB, expectedMessage);
 
