@@ -1,6 +1,6 @@
 package seedu.internbuddy.testutil;
 
-import seedu.internbuddy.model.AddressBookCompany;
+import seedu.internbuddy.model.AddressBook;
 import seedu.internbuddy.model.company.Company;
 
 /**
@@ -10,13 +10,13 @@ import seedu.internbuddy.model.company.Company;
  */
 public class AddressBookCompanyBuilder {
 
-    private AddressBookCompany addressBookCompany;
+    private AddressBook addressBookCompany;
 
     public AddressBookCompanyBuilder() {
-        addressBookCompany = new AddressBookCompany();
+        addressBookCompany = new AddressBook();
     }
 
-    public AddressBookCompanyBuilder(AddressBookCompany addressBookCompany) {
+    public AddressBookCompanyBuilder(AddressBook addressBookCompany) {
         this.addressBookCompany = addressBookCompany;
     }
 
@@ -28,7 +28,7 @@ public class AddressBookCompanyBuilder {
         return this;
     }
 
-    public AddressBookCompany build() {
+    public AddressBook build() {
         return addressBookCompany;
     }
 }

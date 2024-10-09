@@ -3,10 +3,10 @@ package seedu.internbuddy.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.internbuddy.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.internbuddy.model.Model.PREDICATE_SHOW_ALL_COMPANIES;
 import static seedu.internbuddy.testutil.Assert.assertThrows;
-import static seedu.internbuddy.testutil.TypicalPersons.ALICE;
-import static seedu.internbuddy.testutil.TypicalPersons.BENSON;
+import static seedu.internbuddy.testutil.TypicalCompanies.GOOGLE;
+import static seedu.internbuddy.testutil.TypicalCompanies.MICROSOFT;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -15,13 +15,19 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.internbuddy.commons.core.GuiSettings;
-import seedu.internbuddy.model.person.NameContainsKeywordsPredicate;
-import seedu.internbuddy.testutil.AddressBookBuilder;
+import seedu.internbuddy.model.company.NameContainsKeywordsPredicate;
+import seedu.internbuddy.testutil.AddressBookCompanyBuilder;
 
+/**
+ * Test class for ModelManagerCompany
+ */
 public class ModelManagerTest {
 
     private ModelManager modelManager = new ModelManager();
 
+    /**
+     * Test for constructor
+     */
     @Test
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
@@ -73,29 +79,37 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.hasPerson(null));
+    public void hasCompany_nullCompany_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasCompany(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasPerson(ALICE));
+    public void hasCompany_companyNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasCompany(GOOGLE));
+    }
+
+    /**
+     * Test for deleteCompany
+     */
+    @Test
+    public void hasCompany_companyInAddressBook_returnsTrue() {
+        modelManager.addCompany(GOOGLE);
+        assertTrue(modelManager.hasCompany(GOOGLE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        modelManager.addPerson(ALICE);
-        assertTrue(modelManager.hasPerson(ALICE));
+    public void getFilteredCompanyList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager
+            .getFilteredCompanyList().remove(0));
     }
 
-    @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
-    }
-
+    /**
+     * Test for equals method
+     */
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        AddressBook addressBook = new AddressBookCompanyBuilder()
+            .withCompany(GOOGLE).withCompany(MICROSOFT).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -117,12 +131,12 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        String[] keywords = GOOGLE.getName().fullName.split("\\s+");
+        modelManager.updateFilteredCompanyList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManager.updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();

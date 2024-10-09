@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.internbuddy.model.AddressBookCompany;
+import seedu.internbuddy.model.AddressBook;
 import seedu.internbuddy.model.company.Company;
 
 /**
@@ -55,8 +55,8 @@ public class TypicalCompanies {
     /**
      * Returns an {@code AddressBook} with all the typical companies.
      */
-    public static AddressBookCompany getTypicalAddressBook() {
-        AddressBookCompany ab = new AddressBookCompany();
+    public static AddressBook getTypicalAddressBook() {
+        AddressBook ab = new AddressBook();
         for (Company company : getTypicalCompanies()) {
             ab.addCompany(company);
         }

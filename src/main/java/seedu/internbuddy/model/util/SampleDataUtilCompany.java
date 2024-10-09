@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.internbuddy.model.AddressBookCompany;
-import seedu.internbuddy.model.ReadOnlyAddressBookCompany;
+import seedu.internbuddy.model.AddressBook;
+import seedu.internbuddy.model.ReadOnlyAddressBook;
 import seedu.internbuddy.model.company.Address;
 import seedu.internbuddy.model.company.Company;
 import seedu.internbuddy.model.company.Email;
@@ -41,8 +41,8 @@ public class SampleDataUtilCompany {
         };
     }
 
-    public static ReadOnlyAddressBookCompany getSampleAddressBook() {
-        AddressBookCompany sampleAb = new AddressBookCompany();
+    public static ReadOnlyAddressBook getSampleAddressBook() {
+        AddressBook sampleAb = new AddressBook();
         for (Company sampleCompany : getSampleCompanies()) {
             sampleAb.addCompany(sampleCompany);
         }
