@@ -13,8 +13,13 @@ import seedu.address.testutil.PersonBuilder;
 public class PolicyTest {
     @Test
     public void constructor_negativeAmounts_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> new ConcretePolicy(-1, 0)); // negative premiumAmount
-        assertThrows(IllegalArgumentException.class, () -> new ConcretePolicy(0, -1)); // negative coverageAmount;
+        // Constructor using premiumAMount and coverageAmount only
+        assertThrows(IllegalArgumentException.class, () -> new ConcretePolicy(-1, 0));
+        assertThrows(IllegalArgumentException.class, () -> new ConcretePolicy(0, -1));
+
+        // Constructor using premiumAmount, coverageAmount, and insuree
+        assertThrows(IllegalArgumentException.class, () -> new ConcretePolicy(-1, 0, new PersonBuilder().build()));
+        assertThrows(IllegalArgumentException.class, () -> new ConcretePolicy(0, -1, new PersonBuilder().build()));
     }
 
     @Test

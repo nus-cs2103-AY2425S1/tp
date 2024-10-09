@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_POLICY_TYPE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.POLICY_TYPE_DESC_HEALTH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_POLICY_TYPE_HEALTH;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -44,6 +45,11 @@ public class AddPolicyCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPolicyCommand.MESSAGE_USAGE);
+
+        // invalid index
+        assertParseFailure(parser, "foo" + VALID_POLICY_TYPE_HEALTH, expectedMessage);
+
         // invalid policy type
         assertParseFailure(parser, INDEX_FIRST_PERSON.getOneBased() + INVALID_POLICY_TYPE_DESC,
                 Policy.MESSAGE_CONSTRAINTS);

@@ -13,6 +13,7 @@ import seedu.address.model.policy.PolicyMap;
 public class AddPolicyCommand extends Command {
     public static final String COMMAND_WORD = "add-policy";
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Policy added:\n%2$s";
+    public static final String MESSAGE_DUPLICATES = "Duplicate policies found.";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Add the specified policy to the person identified "
             + "by the index number used in the last person listing. \n"

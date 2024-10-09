@@ -241,12 +241,18 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTags_collectionWithValidPolicies_returnsPolicySet() throws Exception {
+    public void parsePolicies_collectionWithValidPolicies_returnsPolicySet() throws Exception {
         PolicyMap actual = ParserUtil.parsePolicies(Arrays.asList(VALID_POLICY_TYPE_LIFE, VALID_POLICY_TYPE_HEALTH));
         PolicyMap expected = new PolicyMap();
         expected.add(new LifePolicy());
         expected.add(new HealthPolicy());
 
         assertEquals(expected, actual);
+    }
+
+    @Test
+    public void parsePolicies_collectionWithDuplicatePolicies_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePolicies(
+                Arrays.asList(VALID_POLICY_TYPE_LIFE, VALID_POLICY_TYPE_LIFE)));
     }
 }

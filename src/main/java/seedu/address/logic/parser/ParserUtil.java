@@ -8,6 +8,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.AddPolicyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -162,7 +163,7 @@ public class ParserUtil {
         final PolicyMap policyMap = new PolicyMap();
         for (String policy : policies) {
             if (!policyMap.add(parsePolicy(policy))) {
-                throw new ParseException(Policy.MESSAGE_DUPLICATES);
+                throw new ParseException(AddPolicyCommand.MESSAGE_DUPLICATES);
             }
         }
         return policyMap;
