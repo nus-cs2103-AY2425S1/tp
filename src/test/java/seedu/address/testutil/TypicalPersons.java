@@ -23,29 +23,29 @@ public class TypicalPersons {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withPhone("94351253")
-            .withClass("4/9")
+            .withClass("4A")
             .withTags("friends").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withPhone("98765432")
-            .withClass("19S13")
+            .withClass("6B")
             .withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz")
-            .withClass("H4")
+            .withClass("4A")
             .withPhone("95352563")
             .build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier")
-            .withClass("2B")
+            .withClass("7H")
             .withPhone("87652533").withTags("friends").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer")
-            .withClass("4S")
+            .withClass("3U")
             .withPhone("9482224")
             .build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz")
-            .withClass("13A")
+            .withClass("3B")
             .withPhone("9482427")
             .build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
-            .withClass("22A09")
+            .withClass("5H")
             .build();
 
     // Manually added

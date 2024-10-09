@@ -218,7 +218,7 @@ public class EditCommand extends Command {
         public String toString() {
             return new ToStringBuilder(this)
                     .add("name", name)
-                    .add("student class", studentClass)
+                    .add("studentClass", studentClass)
                     .add("phone", phone)
                     .add("tags", tags)
                     .toString();
