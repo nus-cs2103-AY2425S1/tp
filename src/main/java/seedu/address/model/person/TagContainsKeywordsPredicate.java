@@ -30,7 +30,7 @@ public class TagContainsKeywordsPredicate implements Predicate<Person> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof NameContainsKeywordsPredicate)) {
+        if (!(other instanceof TagContainsKeywordsPredicate)) {
             return false;
         }
 
