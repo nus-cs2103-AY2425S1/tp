@@ -38,8 +38,8 @@ public class ListAppointmentsCommand extends Command {
                 .filter(person -> person.hasUpcomingAppointment(now))
                 .collect(Collectors.toList());
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, upcomingAppointments.size()) + "\n" +
-                formatAppointments(upcomingAppointments));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, upcomingAppointments.size())
+                + "\n" + formatAppointments(upcomingAppointments));
     }
 
     /**

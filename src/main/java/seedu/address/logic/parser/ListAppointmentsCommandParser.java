@@ -1,9 +1,10 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import seedu.address.logic.commands.ListAppointmentsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 /**
  * Parses input arguments and creates a new ListAppointmentsCommand object.
