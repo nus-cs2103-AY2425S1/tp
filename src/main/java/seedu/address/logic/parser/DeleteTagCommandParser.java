@@ -26,7 +26,7 @@ public class DeleteTagCommandParser implements Parser<DeleteTagCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_TAG)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateTagCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTagCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TAG);

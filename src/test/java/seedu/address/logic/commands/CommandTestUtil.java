@@ -19,6 +19,8 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagName;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -63,6 +65,8 @@ public class CommandTestUtil {
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
+
+    public static final Tag TEST_TAG_FLORIST = new Tag(new TagName(VALID_TAG_FLORIST));
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
