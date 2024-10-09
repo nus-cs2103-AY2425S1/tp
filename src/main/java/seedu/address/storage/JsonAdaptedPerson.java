@@ -108,10 +108,7 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        if (!Nickname.isValidNickname(nickname)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
-        }
-        final Nickname modelNickname = new Nickname(nickname);
+        final Nickname modelNickname = new Nickname(nickname); // Nickname can be anything
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelNickname);
     }

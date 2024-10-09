@@ -5,13 +5,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Nickname in the address book.
- * Guarantees: immutable; name is valid as declared in {@link #isValidNickname(String)}
+ * Guarantees: immutable}
  */
 public class Nickname {
 
-    public static final String MESSAGE_CONSTRAINTS = "Nicknames should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
-
+    public static final String MESSAGE_CONSTRAINTS = "Nicknames should not be empty";
     public final String value;
 
     /**
@@ -21,15 +19,14 @@ public class Nickname {
      */
     public Nickname(String nickname) {
         requireNonNull(nickname);
-        //checkArgument(isValidNickname(nickname), MESSAGE_CONSTRAINTS);
-        this.value = nickname;
+        this.value = nickname.trim(); // in ParserUtil.java also have trim()
     }
 
     /**
-     * Returns true if a given string is a valid tag name.
+     * Returns true if a given nickname is empty.
      */
-    public static boolean isValidNickname(String test) {
-        return test.matches(VALIDATION_REGEX);
+    public boolean isEmpty() {
+        return value.isEmpty();
     }
 
     @Override

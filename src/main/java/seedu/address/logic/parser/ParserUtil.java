@@ -132,9 +132,6 @@ public class ParserUtil {
     public static Nickname parseNickname(String nickname) throws ParseException {
         requireNonNull(nickname);
         String trimmedNickname = nickname.trim();
-        if (!Nickname.isValidNickname(trimmedNickname)) {
-            throw new ParseException(Nickname.MESSAGE_CONSTRAINTS);
-        }
         return new Nickname(trimmedNickname);
     }
 }
