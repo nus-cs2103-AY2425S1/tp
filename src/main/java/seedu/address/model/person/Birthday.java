@@ -7,6 +7,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a Person's birthday in the address book.
+ */
 public class Birthday {
 
     public static final String MESSAGE_CONSTRAINTS = "Birthdays should be in the format 'yyyy-MM-dd', "

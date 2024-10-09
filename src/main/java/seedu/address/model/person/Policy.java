@@ -7,10 +7,12 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents an insurance policy in the address book.
+ */
 public class Policy {
-
-    public static final String MESSAGE_CONSTRAINTS = "Policy details should be in the format 'policyName startDate endDate', "
-            + "where dates are in 'yyyy-MM-dd' format.";
+    public static final String MESSAGE_CONSTRAINTS = "Policy details should be in the format 'policyName startDate "
+            + "endDate', where dates are in 'yyyy-MM-dd' format.";
 
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
@@ -18,6 +20,13 @@ public class Policy {
     private final LocalDate startDate;
     private final LocalDate endDate;
 
+    /**
+     * Constructs a {@code Policy}.
+     *
+     * @param policyName Name of the policy.
+     * @param startDateStr Start date of the policy.
+     * @param endDateStr End date of the policy.
+     */
     public Policy(String policyName, String startDateStr, String endDateStr) {
         checkArgument(isValidPolicy(policyName, startDateStr, endDateStr), MESSAGE_CONSTRAINTS);
 
@@ -36,6 +45,9 @@ public class Policy {
         return LocalDate.parse(dateStr, DATE_FORMATTER);
     }
 
+    /**
+     * Returns true if the given policy details are valid.
+     */
     public static boolean isValidPolicy(String policyName, String startDateStr, String endDateStr) {
         requireNonNull(policyName);
         requireNonNull(startDateStr);

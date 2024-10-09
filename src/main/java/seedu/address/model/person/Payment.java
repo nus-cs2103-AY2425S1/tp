@@ -1,13 +1,16 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
-
+/**
+ * Represents a Person's insurance payment in the address book.
+ */
 public class Payment {
     public static final String MESSAGE_CONSTRAINTS = "Insurance payments should be in the format 'yyyy-MM-dd amount', "
             + "where amount is a positive number with up to two decimal places.";

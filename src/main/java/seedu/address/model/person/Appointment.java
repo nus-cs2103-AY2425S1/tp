@@ -7,10 +7,13 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a Person's appointment in the address book.
+ */
 public class Appointment {
 
-    public static final String MESSAGE_CONSTRAINTS = "Appointments should be in the format 'yyyy-MM-dd HH:mm', " +
-            "and must be a valid date and time";
+    public static final String MESSAGE_CONSTRAINTS = "Appointments should be in the format 'yyyy-MM-dd HH:mm', "
+            + "and must be a valid date and time";
     /*
      * The appointment date and time should in the format 'yyyy-MM-dd HH:mm'.
      * Example: 2023-01-31 13:00
@@ -20,6 +23,11 @@ public class Appointment {
 
     public final LocalDateTime value;
 
+    /**
+     * Constructs an {@code Appointment}.
+     *
+     * @param appointmentDateStr A valid date and time string.
+     */
     public Appointment(String appointmentDateStr) {
         requireNonNull(appointmentDateStr);
         checkArgument(isValidAppointment(appointmentDateStr), MESSAGE_CONSTRAINTS);
