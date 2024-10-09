@@ -312,17 +312,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5. Use case ends.
 
 **Extensions:**
-3a. GAB detects an error in entered user input.  
-   3a1. GAB responds with a command error message and requests correct data.  
-   3a2. User enters new data.  
-   Steps 3a1-3a2 are repeated until the data entered is correct.  
-   Use case resumes at step 4.
+* 3a. GAB detects an error in entered user input.
+  * 3a1. GAB responds with a command error message and requests correct data.
+  * 3a2. User enters new data.
+  * Steps 3a1-3a2 are repeated until the data entered is correct.
+  * Use case resumes at step 4.
 
-3b. No matches found.  
-   3b1. GAB responds that there are no matching vendors.  
-   3b2. User enters new data.  
-   Steps 3b1-3b2 are repeated until the data entered can be found.  
-   Use case resumes at step 5.
+* 4a. No matches found.
+  * 4a1. GAB responds that there are no matching vendors.
+  * 4a2. User enters new data.
+  * Steps 4a1-4a2 are repeated until the data entered can be found.
+  * Use case resumes at step 5.
 
 ---
 
@@ -360,10 +360,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5. Use case ends.
 
 **Extensions:**
-* 3a. No vendor found.  
-   * 3a1. GAB responds that there are no vendors within the price range.  
-   * 3a2. User enters new data.  
-   * Steps 3a1-3a2 are repeated until a vendor can be found.  
+* 4a. No vendor found.  
+   * 4a1. GAB responds that there are no vendors within the price range.  
+   * 4a2. User enters new data.  
+   * Steps 4a1-4a2 are repeated until a vendor can be found.  
    * Use case resumes at step 5.
 
 **Use Case:** UC4 - Create new vendor  
@@ -371,7 +371,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS:**
 1. User opens the application.
 2. GAB opens up to the home page.
-3. User enters /add vendorsName location contactNumber
+3. User enters the add command
 4. GAB displays the added vendor
 5. Use case ends.
 
@@ -382,7 +382,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * Steps 3a1-3a2 are repeated until the right add vendor command format is recognised
     * Use case resumes at step 4.
 * 3b. Adding tags
-    * 3b1. User enters /add vendorsName location contactNumber /tag tag
+    * 3b1. User enters the add command along with the tag
     * 3b2. GAB returns added vendor
     * Steps 3b1-3b2 are repeated until the right add vendor command format is recognised
     * Use case resumes at step 4.
@@ -392,7 +392,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS:**
 1. User opens the application.
 2. GAB opens up to the home page.
-3. User enters /update listIndex vendorsName location contactNumber
+3. User enters the update command
 4. GAB displays the updated vendor
 5. Use case ends.
 
@@ -403,9 +403,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * Steps 3a1-3a2 are repeated until the right update vendor command format is recognised
     * Use case resumes at step 4.
 * 3b. Multiple saved vendors with the same name
-    * 3a1. User first <u>searches for vendors name (UC1).</u>
-    * 3a2. GAB returns search result
-    * 3a3. User identifies the index of the right vendor to be updated
+    * 3b1. User first <u>searches for vendors name (UC1).</u>
+    * 3b2. GAB returns search result
+    * 3b3. User identifies the index of the right vendor to be updated
     * Steps 3b1-3b3 are repeated until user identifies the right vendor
     * Use case resumes at step 4.
 
@@ -414,7 +414,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS:**
 1. User opens the application.
 2. GAB opens up to the home page.
-3. User enters /update listIndex vendorsName /tag tag
+3. User adds tag after <u>initiating the update command (UC5)</u>
 4. GAB displays the updated vendor
 5. Use case ends.
 
@@ -425,9 +425,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * Steps 3a1-3a2 are repeated until the right update vendor command format is recognised
     * Use case resumes at step 4.
 * 3b. Multiple saved vendors with the same name
-    * 3a1. User first <u>searches for vendors name (UC1).</u>
-    * 3a2. GAB returns search result
-    * 3a3. User identifies the index of the right vendor to be updated
+    * 3b1. User first <u>searches for vendors name (UC1).</u>
+    * 3b2. GAB returns search result
+    * 3b3. User identifies the index of the right vendor to be updated
     * Steps 3b1-3b3 are repeated until user identifies the right vendor
     * Use case resumes at step 4.
 
