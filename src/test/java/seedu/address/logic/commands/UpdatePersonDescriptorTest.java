@@ -36,33 +36,33 @@ public class UpdatePersonDescriptorTest {
         assertFalse(DESC_AMY.equals(DESC_BOB));
 
         // different name -> returns false
-        UpdatePersonDescriptor editedAmy = new UpdatePersonDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
+        UpdatePersonDescriptor updatedAmy = new UpdatePersonDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
+        assertFalse(DESC_AMY.equals(updatedAmy));
 
         // different phone -> returns false
-        editedAmy = new UpdatePersonDescriptorBuilder(DESC_AMY).withPhone(VALID_PHONE_BOB).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
+        updatedAmy = new UpdatePersonDescriptorBuilder(DESC_AMY).withPhone(VALID_PHONE_BOB).build();
+        assertFalse(DESC_AMY.equals(updatedAmy));
 
         // different address -> returns false
-        editedAmy = new UpdatePersonDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
+        updatedAmy = new UpdatePersonDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
+        assertFalse(DESC_AMY.equals(updatedAmy));
 
         // different subjects -> returns false
-        editedAmy = new UpdatePersonDescriptorBuilder(DESC_AMY).withSubjects(VALID_SUBJECT_MATH).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
+        updatedAmy = new UpdatePersonDescriptorBuilder(DESC_AMY).withSubjects(VALID_SUBJECT_MATH).build();
+        assertFalse(DESC_AMY.equals(updatedAmy));
     }
 
     @Test
     public void toStringMethod() {
-        UpdatePersonDescriptor editPersonDescriptor = new UpdatePersonDescriptor();
+        UpdatePersonDescriptor updatePersonDescriptor = new UpdatePersonDescriptor();
         String expected = UpdatePersonDescriptor.class.getCanonicalName() + "{name="
-                + editPersonDescriptor.getName().orElse(null) + ", phone="
-                + editPersonDescriptor.getPhone().orElse(null) + ", emergencyContact="
-                + editPersonDescriptor.getEmergencyContact().orElse(null) + ", address="
-                + editPersonDescriptor.getAddress().orElse(null) + ", note="
-                + editPersonDescriptor.getNote().orElse(null) + ", level="
-                + editPersonDescriptor.getLevel().orElse(null) + ", subjects="
-                + editPersonDescriptor.getSubjects().orElse(null) + "}";
-        assertEquals(expected, editPersonDescriptor.toString());
+                + updatePersonDescriptor.getName().orElse(null) + ", phone="
+                + updatePersonDescriptor.getPhone().orElse(null) + ", emergencyContact="
+                + updatePersonDescriptor.getEmergencyContact().orElse(null) + ", address="
+                + updatePersonDescriptor.getAddress().orElse(null) + ", note="
+                + updatePersonDescriptor.getNote().orElse(null) + ", level="
+                + updatePersonDescriptor.getLevel().orElse(null) + ", subjects="
+                + updatePersonDescriptor.getSubjects().orElse(null) + "}";
+        assertEquals(expected, updatePersonDescriptor.toString());
     }
 }

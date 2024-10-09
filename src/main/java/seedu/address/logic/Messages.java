@@ -51,7 +51,7 @@ public class Messages {
                 .append(person.getLevel())
                 .append("; Subjects: ");
         person.getSubjects().forEach(builder::append);
-        return builder.toString();
+        return builder.append(";").toString();
     }
 
 }

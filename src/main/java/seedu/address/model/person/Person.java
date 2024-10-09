@@ -109,8 +109,8 @@ public class Person {
                 && emergencyContact.equals(otherPerson.emergencyContact)
                 && address.equals(otherPerson.address)
                 && note.equals(otherPerson.note)
-                && subjects.equals(otherPerson.subjects)
-                && level.equals(otherPerson.level);
+                && level.equals(otherPerson.level)
+                && subjects.equals(otherPerson.subjects);
     }
 
     @Override

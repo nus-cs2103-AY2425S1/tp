@@ -91,7 +91,7 @@ public class UpdateCommandParserTest {
         assertParseFailure(parser, VALID_NAME_AMY + INVALID_PHONE_DESC
                 + VALID_ADDRESS_AMY, Phone.MESSAGE_CONSTRAINTS);
 
-        // while parsing {@code PREFIX_SUBJECT} alone will reset the Subjects of the {@code Person} being edited,
+        // while parsing {@code PREFIX_SUBJECT} alone will reset the Subjects of the {@code Person} being updated,
         // parsing it together with a valid Subject results in error
         assertParseFailure(parser, VALID_NAME_AMY + SUBJECT_DESC_ENGLISH
                 + SUBJECT_DESC_MATH + SUBJECT_EMPTY, Subject.MESSAGE_CONSTRAINTS);

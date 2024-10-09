@@ -96,22 +96,22 @@ Shows a list of all persons in the address book.
 
 Format: `list`
 
-### Editing a person : `edit`
+### Updating a person : `update`
 
-Edits an existing person in the address book.
+Updates an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMERGENCY_CONTACT] [a/ADDRESS] [s/SUBJECT]…​`
+Format: `update NAME [n/NAME] [p/PHONE] [e/EMERGENCY_CONTACT] [a/ADDRESS] [l/level] [s/SUBJECT]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Updates the person with the specified `NAME`. The name refers to the full name shown in the displayed person list.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing subjects, the existing subjects of the person will be removed i.e adding of subjects is not cumulative.
+* When updating subjects, the existing subjects of the person will be removed i.e adding of subjects is not cumulative.
 * You can remove all the person’s subjects by typing `s/` without
     specifying any subjects after it.
 
 Examples:
-*  `edit 1 p/91234567 e/99999999` Edits the phone number and emergency contact of the 1st person to be `91234567` and `99999999` respectively.
-*  `edit 2 n/Betsy Crower s/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing subjects.
+*  `update Alex Yeoh p/91234567 e/99999999` Updates the phone number and emergency contact of `Alex Yeoh` to be `91234567` and `99999999` respectively.
+*  `update Alex Yeoh n/Betsy Crower s/` Updates the name of `Alex Yeoh` to be `Betsy Crower` and clears all existing subjects.
 
 ### Locating persons by name: `find`
 
@@ -199,7 +199,7 @@ Action     | Format, Examples
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMERGENCY_CONTACT a/ADDRESS [s/SUBJECT]…​` <br> e.g., `add n/James Ho p/22224444 e/99999999 a/123, Clementi Rd, 1234665 s/MATH s/CHEMISTRY`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMERGENCY_CONTACT] [a/ADDRESS] [s/SUBJECT]…​`<br> e.g.,`edit 2 n/James Lee e/99999999`
+**Update**   | `update NAME [n/NAME] [p/PHONE_NUMBER] [e/EMERGENCY_CONTACT] [a/ADDRESS] [l/level] [s/SUBJECT]…​`<br> e.g.,`update Alex Yeoh n/James Lee e/99999999`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
 **Help**   | `help`
