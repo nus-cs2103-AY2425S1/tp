@@ -45,11 +45,14 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_invalidStudentIdUnfilteredList_throwsCommandException() {
-        StudentId invalidStudentId = new StudentId("invalid123");
+//        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+//        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+//
+//        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
+        StudentId invalidStudentId = new StudentId("12345679");
         DeleteCommand deleteCommand = new DeleteCommand(invalidStudentId);
-
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_STUDENT_ID);
+        assertCommandFailure(deleteCommand, model, String.format(Messages.MESSAGE_INVALID_STUDENT_ID, invalidStudentId));
     }
 
     @Test
@@ -81,14 +84,10 @@ public class DeleteCommandTest {
 //        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 //
 //        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-//
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
-
-        StudentId invalidStudentId = new StudentId("invalid123");
-
+        StudentId invalidStudentId = new StudentId("00000000");
         DeleteCommand deleteCommand = new DeleteCommand(invalidStudentId);
-
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_STUDENT_ID);
+        assertCommandFailure(deleteCommand, model, String.format(Messages.MESSAGE_INVALID_STUDENT_ID, invalidStudentId));
 
     }
 

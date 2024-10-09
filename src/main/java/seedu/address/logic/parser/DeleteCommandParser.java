@@ -25,12 +25,6 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             }
 
             String studentIdString = trimmedArg.substring(3).trim();
-
-            if (!StudentId.isValidStudentId(trimmedArg)) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
-            }
-
             StudentId studentId = new StudentId(studentIdString);
             return new DeleteCommand(studentId);
 
