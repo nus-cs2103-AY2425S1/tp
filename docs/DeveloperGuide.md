@@ -57,7 +57,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -300,36 +300,36 @@ By enhancing collaboration and automating communication, Eventory reduces stress
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​ | I want to …​ | So that I can…​ |
-| ----- | ----- | ----- | ----- |
-| `* * *` | new user | see a list of commands | quickly use it as reference |
-| `* * *` | Meticulous planner | add, edit, and delete contacts | maintain only a list of essential contacts |
-| `* * *` | Efficiency-focused user | search by name | save time in looking for specific contacts |
-| `* * *` | Frequent user | save and load all my data | Use the application across multiple sessions |
-| `* *` | Easily overwhelmed planner | see priorities of work to be done | better manage my time |
-| `* *` | Team member | share contacts with others | I can work with others more effectively |
-| `* *` | Frequent user | import and export contacts | migrate between working platforms |
-| `* *` | Detail-oriented planner | add custom notes to each contact | keep track of specific details |
-| `*` | Tech-savvy user | use keyboard shortcuts | Achieve my goals more efficiently |
-| `*` | Impatient person | easily use commands | I can do my work quickly and without frustration |
-| `*` | user with many clients | share my schedule | Share my availability with clients |
-| `*` | Bilingual user | Translate notes | I can work in different languages with different clients |
-| `*` | Event planner | see who is in charge of a venue | quickly contact them for bookings |
-| `*` | Planning supervisor | Set permissions for team members | so that we can collaborate at any level |
-| `*` | Planner of multiple events | Separate contacts based on event | contact relevant people more quickly |
-| `*` | event planner | I want to see contact's occupations | I know who may be relevant to my event |
-| `*` | Safety-conscious event organiser | Store emergency contact details for team members | quickly reach them in case of an emergency |
-| `*` | Large event organiser | Send bulk messages to multiple contacts at once | save time when sending updates or reminders |
-| `*` | Organiser | Schedule messages in advance | Send reminders to vendors |
-| `*` | Busy planner | Receive delivery confirmations and read receipts | be sure my contacts have received important information |
-| `*` | Detailed planner | Assign tasks to individual contacts | know who is responsible for each task |
-| `*` | Event Organiser | Track the history of events a contact has been involved in | have a reference of their past contributions |
-| `*` | Organiser with many contacts | Sort contact by their latest interaction or by tags | quickly access the most relevant contacts |
-| `* *` | Frequent event organiser | view available venues for hosting my event | save time searching for suitable venues |
-| `*` | Event planner | view contacts on a map | plan location based events |
-| `*` | Large scale event planner | Create relationship mappings between contacts | understand and leverage connections within my network |
-| `*` | Planner who does not check the application often | Customise alerts and notifications | differentiate between notifications easily |
-| `*` | Long time event organiser | Archive inactive contacts without deleting them | maintain a record of past interactions while keeping my active list clean. |
+| Priority | As a …​                                          | I want to …​                                               | So that I can…​                                                            |
+|----------|--------------------------------------------------|------------------------------------------------------------|----------------------------------------------------------------------------|
+| `* * *`  | new user                                         | see a list of commands                                     | quickly use it as reference                                                |
+| `* * *`  | Meticulous planner                               | add, edit, and delete contacts                             | maintain only a list of essential contacts                                 |
+| `* * *`  | Efficiency-focused user                          | search by name                                             | save time in looking for specific contacts                                 |
+| `* * *`  | Frequent user                                    | save and load all my data                                  | Use the application across multiple sessions                               |
+| `* *`    | Easily overwhelmed planner                       | see priorities of work to be done                          | better manage my time                                                      |
+| `* *`    | Team member                                      | share contacts with others                                 | I can work with others more effectively                                    |
+| `* *`    | Frequent user                                    | import and export contacts                                 | migrate between working platforms                                          |
+| `* *`    | Detail-oriented planner                          | add custom notes to each contact                           | keep track of specific details                                             |
+| `*`      | Tech-savvy user                                  | use keyboard shortcuts                                     | Achieve my goals more efficiently                                          |
+| `*`      | Impatient person                                 | easily use commands                                        | I can do my work quickly and without frustration                           |
+| `*`      | user with many clients                           | share my schedule                                          | Share my availability with clients                                         |
+| `*`      | Bilingual user                                   | Translate notes                                            | I can work in different languages with different clients                   |
+| `*`      | Event planner                                    | see who is in charge of a venue                            | quickly contact them for bookings                                          |
+| `*`      | Planning supervisor                              | Set permissions for team members                           | so that we can collaborate at any level                                    |
+| `*`      | Planner of multiple events                       | Separate contacts based on event                           | contact relevant people more quickly                                       |
+| `*`      | event planner                                    | I want to see contact's occupations                        | I know who may be relevant to my event                                     |
+| `*`      | Safety-conscious event organiser                 | Store emergency contact details for team members           | quickly reach them in case of an emergency                                 |
+| `*`      | Large event organiser                            | Send bulk messages to multiple contacts at once            | save time when sending updates or reminders                                |
+| `*`      | Organiser                                        | Schedule messages in advance                               | Send reminders to vendors                                                  |
+| `*`      | Busy planner                                     | Receive delivery confirmations and read receipts           | be sure my contacts have received important information                    |
+| `*`      | Detailed planner                                 | Assign tasks to individual contacts                        | know who is responsible for each task                                      |
+| `*`      | Event Organiser                                  | Track the history of events a contact has been involved in | have a reference of their past contributions                               |
+| `*`      | Organiser with many contacts                     | Sort contact by their latest interaction or by tags        | quickly access the most relevant contacts                                  |
+| `* *`    | Frequent event organiser                         | view available venues for hosting my event                 | save time searching for suitable venues                                    |
+| `*`      | Event planner                                    | view contacts on a map                                     | plan location based events                                                 |
+| `*`      | Large scale event planner                        | Create relationship mappings between contacts              | understand and leverage connections within my network                      |
+| `*`      | Planner who does not check the application often | Customise alerts and notifications                         | differentiate between notifications easily                                 |
+| `*`      | Long time event organiser                        | Archive inactive contacts without deleting them            | maintain a record of past interactions while keeping my active list clean. |
 
 *{More to be added}*
 
@@ -371,7 +371,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- **2a.** The list is empty.  
+- **2a.** The list is empty.
   *Use case ends.*
 
 - **3a.** The given index is invalid.
@@ -445,7 +445,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. Eventory removes all contacts and events in memory.
 
     *Use case ends.*
-    
+
 ---
 
 #### **Use Case 7: List contacts and events**
@@ -454,7 +454,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests for list of contacts and events in Eventory.
 2. Eventory shows all contacts and events.
-   
+
     *Use case ends.*
 
 **Extensions**
@@ -493,33 +493,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - 1a. `Essential` The number of contacts in a single event should not exceed 1000, ensuring efficient management of contacts for each event.
 
 **2. Technical Requirements**
-- 2a. `Essential` Must be compatible with Java 17 or higher, ensuring that the application runs on modern environments.  
-- 2b. `Typical` The system should work on both 32-bit and 64-bit environments, making it accessible to a broader range of users.  
+- 2a. `Essential` Must be compatible with Java 17 or higher, ensuring that the application runs on modern environments. 
+- 2b. `Typical` The system should work on both 32-bit and 64-bit environments, making it accessible to a broader range of users.
 - 2c. `Novel` The system must support running offline and sync data when the internet is available, allowing event planners to manage contacts without internet access.
 
 **3. Performance Requirements**
-- 3a. `Essential` The system should respond to user input within 2 seconds under normal load conditions, providing a fast and efficient user experience for frequent tasks.  
-- 3b. `Typical` Event-based contact searches should return results within 3 seconds for up to 1000 contacts, facilitating quick access to relevant information.  
+- 3a. `Essential` The system should respond to user input within 2 seconds under normal load conditions, providing a fast and efficient user experience for frequent tasks.
+- 3b. `Typical` Event-based contact searches should return results within 3 seconds for up to 1000 contacts, facilitating quick access to relevant information.
 - 3c. `Typical` Bulk messages up to 500 contacts should be queued for delivery within 5 seconds, enabling event organizers to send updates quickly.
 
 **4. Quality Requirements**
-- 4a. `Essential` The system should be usable by event planners with no prior experience in using CLI applications, ensuring accessibility for all users.  
-- 4b. `Typical` All command-line options should have detailed help documentation accessible from within the application, providing guidance for users.  
+- 4a. `Essential` The system should be usable by event planners with no prior experience in using CLI applications, ensuring accessibility for all users.
+- 4b. `Typical` All command-line options should have detailed help documentation accessible from within the application, providing guidance for users.
 - 4c. `Novel` The interface must support fast-typing users, minimizing mouse interactions to enhance productivity.
 
 **5. Project Scope**
-- 5a. `Typical` The product is not required to handle the printing of physical contact lists, focusing instead on digital management.  
+- 5a. `Typical` The product is not required to handle the printing of physical contact lists, focusing instead on digital management.
 - 5b. `Novel` Integration with third-party calendar apps (e.g. Google Calendar) is planned for future versions but is out of scope for this release, allowing for future enhancements.
 
 **6. Others**
-- 6a. `Essential` The system should avoid any discriminatory language or culturally sensitive imagery in user messages or templates, ensuring a respectful environment for all users.  
+- 6a. `Essential` The system should avoid any discriminatory language or culturally sensitive imagery in user messages or templates, ensuring a respectful environment for all users.
 - 6b. `Novel` The contact mapping feature should not use any personal data without user consent, ensuring compliance with privacy regulations like GDPR.
 
 *{More to be added}*
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Mainstream OS**: Windows, Linux, Unix, macOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **MSS:** Also known as Main Success Story. It is the scenario that a user should abide by when using the programme
 * **API:** Also known as Application Programming Interface. It is the set of rules that allow different software to communicate with each other.
