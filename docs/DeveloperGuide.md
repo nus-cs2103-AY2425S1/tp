@@ -351,7 +351,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case restarts at step 1.
 
 * 1f. User decides not to add the company.
- 
+
   Use case ends.
 
 **<a id="uc02"></a>Use case: UC02 - List all saved companies**
@@ -360,7 +360,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to list companies.
 2.  InternBuddy shows a list of companies.
- 
+
     Use case ends.
 
 **Extensions**
@@ -405,7 +405,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests to [list saved companies (UC03)](#uc02) or [find a company (UC04)](#uc03)
 2.  User requests to delete a specific company in the list.
 3.  InternBuddy deletes the company.
- 
+
     Use case ends.
 
 **Extensions**
@@ -451,7 +451,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. InternBuddy shows an error message.
 
   Use case resumes at step 2.
- 
+
 **Use case: UC06 - Edit company application status**
 
 1.  User requests to [list saved companies (UC03)](#uc02) or [find a company (UC04)](#uc03)
