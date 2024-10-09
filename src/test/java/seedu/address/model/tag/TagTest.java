@@ -27,29 +27,29 @@ public class TagTest {
     }
 
     @Test
-    public void canBeDeleted() {
-        Tag florist = FLORIST;
-        assertTrue(FLORIST.canBeDeleted());
-    }
-
-    @Test
     public void noPersonsTaggedCheck() {
-        Tag florist = FLORIST;
-        assertEquals(0, FLORIST.getNumberOfPersonsTagged());
+        Tag florist = new Tag(new TagName("Florist"));
+        assertEquals(0, florist.getNumberOfPersonsTagged());
     }
 
     @Test
     public void incrementTaggedCount() {
-        Tag florist = FLORIST;
+        Tag florist = new Tag(new TagName("Florist"));
         florist.increaseTaggedCount();
         assertEquals(1, florist.getNumberOfPersonsTagged());
     }
 
     @Test
     public void decrementTaggedCount() {
-        Tag florist = FLORIST;
+        Tag florist = new Tag(new TagName("Florist"));;
         florist.increaseTaggedCount();
         florist.decreaseTaggedCount();
         assertEquals(0, florist.getNumberOfPersonsTagged());
+    }
+
+    @Test
+    public void canBeDeleted() {
+        Tag florist = new Tag(new TagName("Florist"));
+        assertTrue(florist.canBeDeleted());
     }
 }
