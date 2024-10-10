@@ -1,20 +1,16 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.MarkAttendanceCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.*;
-import seedu.address.model.tag.Tag;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRESENT;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.Date;
-import java.util.Set;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import seedu.address.logic.commands.MarkAttendanceCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Name;
+import seedu.address.model.student.Attendance;
+
 
 /**
  * Parses input arguments and creates a new MarkAttendanceCommand object

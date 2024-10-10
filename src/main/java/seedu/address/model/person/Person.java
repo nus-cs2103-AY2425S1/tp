@@ -1,13 +1,11 @@
 package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static java.util.Objects.requireNonNull;
-
 
 import java.time.LocalDate;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -67,7 +65,13 @@ public class Person {
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }
-
+    /**
+     * Marks the attendance for a specific date.
+     *
+     * @param date The date on which attendance is being recorded.
+     * @param status The attendance status, either 'present' or 'absent'.
+     * @throws IllegalArgumentException if the provided status is invalid.
+     */
     public void markAttendance(LocalDate date, String status) {
         Attendance attendance = new Attendance(status);
         attendanceRecords.put(date, attendance);
@@ -110,7 +114,7 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
-                &&attendanceRecords.equals(otherPerson.attendanceRecords);
+                && attendanceRecords.equals(otherPerson.attendanceRecords);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.student;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
@@ -14,7 +14,6 @@ public class Attendance {
     public static final String VALIDATION_REGEX = "^(present|absent)$";
 
     public final String value;
-
     /**
      * Constructs an {@code Attendance} object.
      *

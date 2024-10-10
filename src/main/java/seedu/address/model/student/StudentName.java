@@ -3,11 +3,13 @@ package seedu.address.model.student;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import seedu.address.model.person.Name;
 /**
- * Represents a Person's name in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
+ * Represents a Student's name in the system.
+ * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}.
  */
-public class Name {
+public class StudentName {
+
 
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters and spaces, and it should not be blank";
@@ -25,7 +27,7 @@ public class Name {
      *
      * @param name A valid name.
      */
-    public Name(String name) {
+    public StudentName(String name) {
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
         fullName = name;
@@ -63,5 +65,4 @@ public class Name {
     public int hashCode() {
         return fullName.hashCode();
     }
-
 }

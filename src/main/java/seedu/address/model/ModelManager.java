@@ -4,19 +4,20 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.function.Predicate;
-import java.util.logging.Logger;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Predicate;
+import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Attendance;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -154,6 +155,11 @@ public class ModelManager implements Model {
             }
         }
         return null; // Return null if no matching person is found
+    }
+
+    @Override
+    public Student getStudentByName(Name name) {
+        return (Student) getPersonByName(name);
     }
 
     @Override
