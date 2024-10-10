@@ -350,3 +350,26 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+#priority {
+    -fx-background-radius: 2em;
+    -fx-border-radius: 2em;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 14;
+    -fx-padding: 0 10;
+}
+
+.priority-high {
+    -fx-background-color: #E53935;
+    -fx-border-color: #ef9a9a;
+}
+
+.priority-medium {
+    -fx-background-color: #FB8C00;
+    -fx-border-color: #FFCC80;
+}
+
+.priority-low {
+    -fx-background-color: #43A047;
+    -fx-border-color: #A5D6A7;
+}
