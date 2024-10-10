@@ -25,11 +25,13 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final ProjectStatus projectStatus;
+    private final PaymentStatus paymentStatus;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, ProjectStatus projectStatus) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, ProjectStatus projectStatus,
+                  PaymentStatus paymentStatus) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -38,6 +40,9 @@ public class Person {
         this.tags.addAll(tags);
         this.projectStatus = (projectStatus != null)
                 ? projectStatus : new ProjectStatus("in progress"); // Default value
+        this.paymentStatus = (paymentStatus != null)
+                ? paymentStatus : new PaymentStatus("unpaid");
+
     }
 
     public Name getName() {
@@ -66,6 +71,10 @@ public class Person {
 
     public ProjectStatus getProjectStatus() {
         return projectStatus;
+    }
+
+    public PaymentStatus getPaymentStatus() {
+        return paymentStatus;
     }
 
     /**
@@ -102,13 +111,14 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
-                && projectStatus.equals(otherPerson.projectStatus);
+                && projectStatus.equals(otherPerson.projectStatus)
+                && paymentStatus.equals(otherPerson.paymentStatus);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, projectStatus);
+        return Objects.hash(name, phone, email, address, tags, projectStatus, paymentStatus);
     }
 
     @Override
@@ -120,7 +130,7 @@ public class Person {
                 .add("address", address)
                 .add("tags", tags)
                 .add("projectStatus", projectStatus)
+                .add("paymentStatus", paymentStatus)
                 .toString();
     }
-
 }
