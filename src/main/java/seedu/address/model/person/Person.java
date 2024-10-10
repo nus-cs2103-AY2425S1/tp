@@ -18,27 +18,36 @@ public class Person {
 
     // Identity fields
     private final Name name;
+    private final StudentId studentId;
     private final Phone phone;
     private final Email email;
 
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<Tutorial> tutorials = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, StudentId studentId, Phone phone, Email email, Address address, Set<Tag> tags,
+                  Set<Tutorial> tutorials) {
+        requireAllNonNull(name, studentId, phone, email, address, tags);
         this.name = name;
+        this.studentId = studentId;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.tutorials.addAll(tutorials);
     }
 
     public Name getName() {
         return name;
+    }
+
+    public StudentId getStudentId() {
+        return studentId;
     }
 
     public Phone getPhone() {
@@ -59,6 +68,14 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns an immutable tutorial set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Tutorial> getTutorials() {
+        return Collections.unmodifiableSet(tutorials);
     }
 
     /**
@@ -92,25 +109,29 @@ public class Person {
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
+                && studentId.equals(otherPerson.studentId)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && tutorials.equals(otherPerson.tutorials);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, studentId, phone, email, address, tags, tutorials);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
+                .add("studentID", studentId)
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("tutorials", tutorials) // Text Representation, should update to GUI in the future
                 .toString();
     }
 
