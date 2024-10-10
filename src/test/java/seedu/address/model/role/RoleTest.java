@@ -2,11 +2,13 @@ package seedu.address.model.role;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.ArrayList;
-import org.junit.jupiter.api.Test;
-
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import java.util.ArrayList;
+
+import org.junit.jupiter.api.Test;
+
+
 
 import seedu.address.model.person.Person;
 
@@ -60,27 +62,27 @@ public class RoleTest {
     }
 
     @Test
-    public void addPerson_ValidPerson_success() {
+    public void addPerson_personIsTagged() {
         Role role = new Attendee();
         role.addPerson(ALICE);
         assert role.isTagged(ALICE);
     }
 
     @Test
-    public void isTagged_ValidPerson_success() {
+    public void isTagged_personInRole() {
         Role role = new Attendee();
         role.addPerson(ALICE);
         assert role.isTagged(ALICE);
     }
 
     @Test
-    public void isTagged_ValidPerson_failure() {
+    public void isTagged_validPerson_failure() {
         Role role = new Attendee();
         assert !role.isTagged(ALICE);
     }
 
     @Test
-    public void removePerson_ValidPerson_success() {
+    public void removePerson_existingPerson() {
         Role role = new Attendee();
         role.addPerson(ALICE);
         role.removePerson(ALICE);
@@ -88,7 +90,7 @@ public class RoleTest {
     }
 
     @Test
-    public void removePerson_ValidPerson_notInRole() {
+    public void removePerson_personNotInRole() {
         Role role = new Attendee();
         assertThrows(IllegalArgumentException.class, () -> role.removePerson(ALICE));
     }
