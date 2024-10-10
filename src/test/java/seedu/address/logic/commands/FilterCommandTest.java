@@ -126,6 +126,11 @@ public class FilterCommandTest {
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void sortFilteredPersonList(String order) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
 
