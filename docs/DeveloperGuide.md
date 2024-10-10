@@ -280,16 +280,15 @@ contacts and suppliers for easier management.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                              | I want to …​                                                                 | So that I can…​                                                                               |
+| -------- |--------------------------------------|------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
+| `* * *`  | business owner                       | add suppliers and clients                                                    | a. view them later<br/>b. view information related to the contact                             |
+| `* * *`  | business owner                       | list contacts of whom I added                                                | see the full list of suppliers I am in contact with                                           |
+| `* * *`  | business owner                       | see the contacts which I added even after I exit and restart the application | access supplier information without needing to re-enter information each time I open the app. |
+| `* * *`  | business owner                       | delete a contact                                                             | remove contacts that are no longer relevant to me                                             |
+| `* *`    | business owner                       | add extra relevant information to the contact                                | know who the contact is                                                                       |
+| `*`      | business owner who has many contacts | search for contacts by name and category of goods and services               | locate the relevant supplier easily                                                           |
 
-*{More to be added}*
 
 ### Use cases
 
