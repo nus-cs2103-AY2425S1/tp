@@ -1,59 +1,63 @@
 ---
-layout: page
-title: About Us
+  layout: default.md
+  title: "About Us"
 ---
 
-We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
+# About Us
+
+We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
 You can reach us at the email `seer[at]comp.nus.edu.sg`
 
-## Project team
+## VendorVault
 
-### John Doe
+### Vince
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/vinc3leong.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[github](https://github.com/vinc3leong)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+* Role: Documentation
+* Responsibilities: Responsible for the quality of various project documents.
 
-### Jane Doe
 
-<img src="images/johndoe.png" width="200px">
+### Krishnan Linkes Varun
 
-[[github](http://github.com/johndoe)]
+<img src="images/linkesv.png" width="200px">
+
+[[github](http://github.com/linkesV)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Code quality
+* Responsibilities: Looks after code quality, ensures adherence to coding standards, etc.
 
-### Johnny Doe
+### Pravein
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/prave1n.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/prave1n)] [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Deliverables and deadlines
+* Responsibilities: Ensure project deliverables are done on time and in the right format.
 
-### Jean Doe
+### Jian Yi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ngjianyi.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/ngjianyi)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Testing
+* Responsibilities: Ensures the testing of the project is done properly and on time
 
-### James Doe
+### Chen Jianzhi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/cjianzhi.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/cjianzhi)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Integration
+* Responsibilities: Responsible for code versioning and integrating different parts of the software.
