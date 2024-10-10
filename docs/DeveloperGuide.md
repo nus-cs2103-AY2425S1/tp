@@ -297,11 +297,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
+
+---
+
 #### **Use Case UC01: Add Student**
 **Actor**: Administrator
 
 **Main Success Scenario (MSS)**:
-1. Administrator types the command to add a new student with the required details in a single line. 
+1. Administrator types the command to add a new student with the required details in a single line.
 2. EduTuTu validates the input details.
 3. EduTuTu adds the new student to the system and logs the action.
 
@@ -309,15 +312,16 @@ Use case ends.
 
 **Extensions**:
 
-- **Invalid or Missing Data**:
-    - EduTuTu logs an error message specifying the invalid fields.
-    - **Use case resumes from step 1.**
+- **2a. Invalid or Missing Data**:
+    - 2a1. EduTuTu logs an error message specifying the invalid fields.
+    - Use case resumes from step 1.
 
-- **Duplicate Student Detected**:
-    - EduTuTu logs an error message.
-    - **Use case resumes from step 1.**
+- **2b. Duplicate Student Detected**:
+    - 2b1. EduTuTu logs an error message.
+    - Use case resumes from step 1.
 
 ---
+
 
 #### **Use Case UC02: Delete Student**
 **Actor**: Administrator
@@ -331,8 +335,8 @@ Use case ends.
 
 **Extensions**:
 
-- **Invalid Index Entered**:
-    - EduTuTu logs an error message.
+- **2a. Invalid Index Entered**:
+    - 2a1. EduTuTu logs an error message.
     - **Use case resumes from step 1.**
 
 ---
@@ -360,8 +364,8 @@ Use case ends.
 
 **Extensions**:
 
-- **Invalid Search Criteria**:
-    - EduTuTu logs an error message specifying the invalid input.
+- **2a. Invalid Search Criteria**:
+    - 2a1.EduTuTu logs an error message specifying the invalid input.
     - **Use case resumes from step 1.**
 
 ---
@@ -380,12 +384,12 @@ Use case ends.
 
 **Extensions**:
 
-- **Invalid Index Entered**:
-    - EduTuTu logs an error message.
+- **3a. Invalid Index Entered**:
+    - 3a1. EduTuTu logs an error message.
     - **Use case resumes from step 1.**
 
-- **Invalid Date Format or Month**:
-    - EduTuTu logs an error message.
+- **3b.  Invalid Date Format or Month**:
+    - 3b1. EduTuTu logs an error message.
     - **Use case resumes from step 1.**
 
 ---
