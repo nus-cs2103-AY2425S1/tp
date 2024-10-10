@@ -43,7 +43,7 @@ public class NricMatchesPredicateTest {
     }
 
     @Test
-    public void test_nricMatches_caseInsensitive_returnsTrue() {
+    public void test_caseInsensitive_returnsTrue() {
         NricMatchesPredicate predicate = new NricMatchesPredicate("s1234567a");
         Person person = new PersonBuilder().withNric("S1234567A").build();
 
