@@ -17,7 +17,7 @@ public class StudentNumber {
             + "3. Lastly, it ends with another letter, which could be A or any other uppercase letter.";
 
     private static final String START_PART_REGEX = "^A0";
-    private static final String DIGIT_PART_REGEX = "\\d{7}";
+    private static final String DIGIT_PART_REGEX = "\\d{6}";
     private static final String END_PART_REGEX = "[A-Z]$";
     public static final String VALIDATION_REGEX = START_PART_REGEX + DIGIT_PART_REGEX + END_PART_REGEX;
 

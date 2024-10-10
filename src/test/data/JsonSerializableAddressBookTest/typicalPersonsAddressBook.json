@@ -4,37 +4,37 @@
     "name" : "Alice Pauline",
     "email" : "alice@example.com",
     "tags" : [ "friends" ],
-    "student number" : "A01111111J"
+    "student number" : "A0111111J"
   }, {
     "name" : "Benson Meier",
     "email" : "johnd@example.com",
     "tags" : [ "owesMoney", "friends" ],
-    "student number" : "A02222222H"
+    "student number" : "A0222222H"
   }, {
     "name" : "Carl Kurz",
     "email" : "heinz@example.com",
     "tags" : [ ],
-    "student number" : "A03333333M"
+    "student number" : "A0333333M"
   }, {
     "name" : "Daniel Meier",
     "email" : "cornelia@example.com",
     "tags" : [ "friends" ],
-    "student number" : "A04444444N"
+    "student number" : "A0444444N"
   }, {
     "name" : "Elle Meyer",
     "email" : "werner@example.com",
     "tags" : [ ],
-    "student number" : "A05555555H"
+    "student number" : "A0555555H"
   }, {
     "name" : "Fiona Kunz",
     "email" : "lydia@example.com",
     "tags" : [ ],
-    "student number" : "A06666666J"
+    "student number" : "A0666666J"
   }, {
     "name" : "George Best",
     "email" : "anna@example.com",
     "tags" : [ ],
-    "student number" : "A08888888M"
+    "student number" : "A0888888M"
   }, {
     "tags" : [ ]
   } ],
