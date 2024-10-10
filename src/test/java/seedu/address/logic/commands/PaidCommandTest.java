@@ -126,4 +126,5 @@ public class PaidCommandTest {
         model.updateFilteredPersonList(p -> false);
         assertTrue(model.getFilteredPersonList().isEmpty());
     }
+    
 }
