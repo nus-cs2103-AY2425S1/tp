@@ -14,20 +14,22 @@ import tutorease.address.model.Model;
 import tutorease.address.model.person.Person;
 
 /**
- * Adds a person to the address book.
+ * Adds a contact to the TutorEase.
  */
-public class AddCommand extends Command {
 
-    public static final String COMMAND_WORD = "add";
+public class AddContactCommand extends Command {
+    public static final String COMMAND_WORD = "contact";
+    public static final String SUB_COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + SUB_COMMAND_WORD
+            + ": Adds a person to TutorEase. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "Example: " + COMMAND_WORD + " " + SUB_COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
@@ -35,15 +37,14 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
-
+    public static final String MESSAGE_SUCCESS = "New contact added: %1$s";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This contact already exists in TutorEase";
     private final Person toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddContactCommand to add the specified {@code Person}
      */
-    public AddCommand(Person person) {
+    public AddContactCommand(Person person) {
         requireNonNull(person);
         toAdd = person;
     }
@@ -67,12 +68,12 @@ public class AddCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddCommand)) {
+        if (!(other instanceof AddContactCommand)) {
             return false;
         }
 
-        AddCommand otherAddCommand = (AddCommand) other;
-        return toAdd.equals(otherAddCommand.toAdd);
+        AddContactCommand otherAddContactCommand = (AddContactCommand) other;
+        return toAdd.equals(otherAddContactCommand.toAdd);
     }
 
     @Override

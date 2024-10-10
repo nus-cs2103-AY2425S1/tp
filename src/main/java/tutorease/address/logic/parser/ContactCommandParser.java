@@ -5,19 +5,18 @@ import static tutorease.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import tutorease.address.logic.commands.AddContactCommand;
 import tutorease.address.logic.commands.Command;
 import tutorease.address.logic.commands.DeleteContactCommand;
 import tutorease.address.logic.commands.ListContactCommand;
 import tutorease.address.logic.parser.exceptions.ParseException;
-
-
 
 /**
  * Parses input arguments and creates the appropriate ContactCommand objects.
  */
 public class ContactCommandParser implements Parser<Command> {
     public static final String COMMAND_WORD = "contact";
-    private static final Pattern CONTACT_COMMAND_FORMAT = Pattern.compile("(?<subCommand>\\S+)\\s*(?<subArguments>.*)");
+    private static final Pattern CONTACT_COMMAND_FORMAT = Pattern.compile("(?<subCommand>\\S+)(?<subArguments>.*)");
 
     @Override
     public Command parse(String args) throws ParseException {
@@ -31,6 +30,8 @@ public class ContactCommandParser implements Parser<Command> {
         final String subArguments = matcher.group("subArguments");
 
         switch (subCommand) {
+        case AddContactCommand.SUB_COMMAND_WORD:
+            return new AddContactCommandParser().parse(subArguments);
         case DeleteContactCommand.SUB_COMMAND_WORD:
             return new DeleteContactCommandParser().parse(subArguments);
         case ListContactCommand.SUB_COMMAND_WORD:
@@ -41,4 +42,3 @@ public class ContactCommandParser implements Parser<Command> {
         }
     }
 }
-
