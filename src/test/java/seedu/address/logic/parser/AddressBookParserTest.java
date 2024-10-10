@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_TYPE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -17,6 +18,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddPolicyCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeletePolicyCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
@@ -101,6 +103,17 @@ public class AddressBookParserTest {
         PolicyMap policies = new PolicyMap();
         policies.add(new LifePolicy());
         assertEquals(new AddPolicyCommand(INDEX_FIRST_PERSON, policies), command);
+    }
+    @Test
+    public void parseCommand_deletePolicy() throws Exception {
+        // This is hardcoded for now.
+        // Will change in future commits.
+        DeletePolicyCommand command = (DeletePolicyCommand) parser.parseCommand(
+                DeletePolicyCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+                        + " " + PREFIX_POLICY_TYPE + "life");
+        PolicyMap policies = new PolicyMap();
+        policies.add(new LifePolicy());
+        assertEquals(new DeletePolicyCommand(INDEX_FIRST_PERSON, policies), command);
     }
 
     @Test
