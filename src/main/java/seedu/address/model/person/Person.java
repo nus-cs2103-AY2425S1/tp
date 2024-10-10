@@ -8,6 +8,10 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.Date;
+import seedu.address.model.appointment.From;
+import seedu.address.model.appointment.To;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -25,19 +29,21 @@ public class Person {
 //    private final Address address;
 //    private final Remark remark;
     private final Property property;
+    private final Appointment appointment;
 //    private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Property property) {
-        requireAllNonNull(name, phone, property);
+    public Person(Name name, Phone phone, Appointment appointment, Property property) {
+        requireAllNonNull(name, phone, appointment, property);
         this.name = name;
         this.phone = phone;
 //        this.email = email;
 //        this.address = address;
 //        this.remark = remark;
         this.property = property;
+        this.appointment = appointment;
 //        this.tags.addAll(tags);
     }
 
@@ -45,6 +51,7 @@ public class Person {
         this.name = name;
         this.phone = null;
         this.property = new Property("");
+        this.appointment = new Appointment(new Date(""), new From(""), new To(""));
     }
 
     public Name getName() {
@@ -69,6 +76,10 @@ public class Person {
 
     public Property getProperty() {
         return property;
+    }
+
+    public Appointment getAppointment() {
+        return appointment;
     }
 
 //    /**
@@ -119,7 +130,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, property);
+        return Objects.hash(name, phone, appointment, property);
     }
 
     @Override
@@ -131,8 +142,8 @@ public class Person {
 //                .add("address", address)
 //                .add("remark", remark)
 //                .add("tags", tags)
+                .add("appointment", appointment)
                 .add("property", property)
                 .toString();
     }
-
 }

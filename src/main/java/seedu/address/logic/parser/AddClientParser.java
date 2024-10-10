@@ -12,7 +12,17 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddClientProfile;
 //import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.Date;
+import seedu.address.model.appointment.From;
+import seedu.address.model.appointment.To;
 import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -27,9 +37,9 @@ public class AddClientParser implements Parser<AddClientProfile> {
      */
     public AddClientProfile parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_PROPERTY);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_PROPERTY)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddClientProfile.MESSAGE_USAGE));
         }
@@ -41,9 +51,10 @@ public class AddClientParser implements Parser<AddClientProfile> {
 //        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
 //        Remark remark = new Remark(""); // add command does not allow adding remarks straight away
         Property property = new Property(""); // add command does not allow adding properties straight away
+        Appointment appointment = new Appointment(new Date(""), new From(""), new To("")); //add command does not allow adding appointment straight away
 //        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, property);
+        Person person = new Person(name, phone, appointment, property);
 
         return new AddClientProfile(person);
     }

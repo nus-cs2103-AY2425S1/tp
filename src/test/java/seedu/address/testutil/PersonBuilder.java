@@ -3,6 +3,10 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.Date;
+import seedu.address.model.appointment.From;
+import seedu.address.model.appointment.To;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -22,12 +26,16 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_REMARK = "She likes aardvarks.";
+    public static final String DEFAULT_DATE = "01/01/2024";
+    public static final String DEFAULT_FROM = "0800";
+    public static final String DEFAULT_TO = "0900";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Remark remark;
+    private Appointment appointment;
     private Set<Tag> tags;
 
     /**
@@ -39,6 +47,8 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         remark = new Remark(DEFAULT_REMARK);
+        appointment = new Appointment(new Date(DEFAULT_DATE), new From(DEFAULT_FROM),
+                                        new To(DEFAULT_TO));
         tags = new HashSet<>();
     }
 
@@ -51,6 +61,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         remark = personToCopy.getRemark();
+        appointment = personToCopy.getAppointment();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -102,8 +113,13 @@ public class PersonBuilder {
         return this;
     }
 
+    public PersonBuilder withAppointment(String date, String from, String to) {
+        this.appointment = new Appointment(new Date(date), new From(from), new To(to));
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, remark, tags);
+        return new Person(name, phone, email, address, remark, appointment, tags);
     }
 
 }

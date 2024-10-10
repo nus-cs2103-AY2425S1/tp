@@ -307,9 +307,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The client name already exists 
+* 2a. The client name already exists
     * 2a1. `EZSTATES` shows an error message
-  
+
         Use Case resumes at step 1.
 
 **Use case: Delete a person**
@@ -326,8 +326,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. List is empty 
-    
+* 2a. List is empty
+
     Use case ends
 
 
@@ -365,12 +365,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. Client name not specified
     * 2a1. `EZSTATES` shows an error message
-        
+
         Use case resumes at step 1
 
 * 3a. Client already has an appointment
     * 3a1. `EZSTATES` shows an error message
-    
+
         Use case resumes at step 1
 
 **Use case: Delete Appointment**
@@ -399,7 +399,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 4a1. `EZSTATES` shows an error message
 
       Use case resumes at step 1
-  
+
 *{More to be added}*
 
 ### Non-Functional Requirements

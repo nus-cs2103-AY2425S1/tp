@@ -52,8 +52,7 @@ public class RemarkCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), remark, personToEdit.getProperty(),personToEdit.getTags());
+        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getAppointment(), personToEdit.getProperty());
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(generateSuccessMessage(editedPerson));

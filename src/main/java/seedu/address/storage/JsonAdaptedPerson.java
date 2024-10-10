@@ -11,6 +11,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.*;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.Date;
+import seedu.address.model.appointment.From;
+import seedu.address.model.appointment.To;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -26,6 +36,9 @@ class JsonAdaptedPerson {
 //    private final String address;
 //    private final String remark;
     private final String property;
+    private final String date;
+    private final String from;
+    private final String to;
 //    private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -34,16 +47,22 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-                @JsonProperty("remark") String remark, @JsonProperty("property") String property, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                @JsonProperty("remark") String remark, @JsonProperty("date") String date,
+                    @JsonProperty("from") String from, @JsonProperty("to") String to,
+                        @JsonProperty("property") String property,
+                        @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
-//        this.email = email;
-//        this.address = address;
-//        this.remark = remark;
+        //this.email = email;
+        //this.address = address;
+        //this.remark = remark;
+        this.date = date;
+        this.from = from;
+        this.to = to;
         this.property = property;
-//        if (tags != null) {
-//            this.tags.addAll(tags);
-//        }
+        //if (tags != null) {
+        //    this.tags.addAll(tags);
+        //}
     }
 
     /**
@@ -56,6 +75,9 @@ class JsonAdaptedPerson {
 //        address = source.getAddress().value;
 //        remark = source.getRemark().value;
         property = source.getProperty().getProperty();
+        date = source.getAppointment().getDate().value;
+        from = source.getAppointment().getFrom().value;
+        to = source.getAppointment().getTo().value;
 //        tags.addAll(source.getTags().stream()
 //                .map(JsonAdaptedTag::new)
 //                .collect(Collectors.toList()));
@@ -109,13 +131,27 @@ class JsonAdaptedPerson {
 //        }
 //        final Remark modelRemark = new Remark(remark);
 
+        if (date == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
+        }
+
+        if (from == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, From.class.getSimpleName()));
+        }
+
+        if (to == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, To.class.getSimpleName()));
+        }
+
+        final Appointment modelAppointment = new Appointment(new Date(date), new From(from), new To(to));
+
         if (property == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Property.class.getSimpleName()));
         }
         final Property modelProperty = new Property(property);
 
 //        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelProperty);
+        return new Person(modelName, modelPhone, modelAppointment, modelProperty);
     }
 
 }
