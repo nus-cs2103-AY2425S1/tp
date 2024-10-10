@@ -12,8 +12,7 @@ public class Address {
     public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
 
     /*
-     * As the address is now optional, the validation regex accepts a blank address
-     * string.
+     * Address is optional, so validation regex accepts blank address strings
      */
     public static final String VALIDATION_REGEX = ".*";
 

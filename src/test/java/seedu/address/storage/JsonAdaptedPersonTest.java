@@ -91,7 +91,7 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
-    public void toModelType_blankAddress_returnsPerson() throws Exception {
+    public void toModelType_blankAddress_returnsPerson() throws IllegalValueException {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(CLIVE_NAME, CLIVE_PHONE, CLIVE_EMAIL, BLANK_ADDRESS, CLIVE_TAGS);
         assertEquals(CLIVE, person.toModelType());
