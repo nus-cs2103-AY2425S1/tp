@@ -1,7 +1,6 @@
 package seedu.address.model.course;
 
 import static java.util.Objects.requireNonNull;
-
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
@@ -19,14 +18,14 @@ public class Course {
     public final String courseCode;
 
     /**
-     * Constructs a {@code Course}.
+     * Constructs a {@code Course} and converts the given courseCode into uppercase.
      *
-     * @param courseCode A valid course code.
+     * @param courseCode A valid course code, case-insensitive.
      */
     public Course(String courseCode) {
         requireNonNull(courseCode);
         checkArgument(isValidCourse(courseCode), MESSAGE_CONSTRAINTS);
-        this.courseCode = courseCode;
+        this.courseCode = courseCode.toUpperCase();
     }
 
     /**
