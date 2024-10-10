@@ -8,7 +8,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Note {
     public static final String MESSAGE_CONSTRAINTS = "Additional note can take any values";
-    public static final String VALIDATION_REGEX = "[^\\s]*";
+    public static final String VALIDATION_REGEX = "[^\\s].*";
 
     public final String value;
 

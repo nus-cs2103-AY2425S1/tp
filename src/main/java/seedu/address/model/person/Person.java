@@ -24,11 +24,11 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private Allergies allergies;
+    private Allergy allergy;
     private BloodType bloodType;
     private HealthCondition healthCondition;
-    private HealthRecords pastHealthRecords;
-    private Note additionalNotes;
+    private HealthRecord pastHealthRecord;
+    private Note additionalNote;
     private Name nokName;
     private Phone nokPhone;
     /**
@@ -47,18 +47,18 @@ public class Person {
      * Only Name, NRIC, Sex, BirthDate, HealthServices field need to be present.
      * The other fields can be null
      */
-    public Person(Name name, Phone phone, Email email, Address address, Allergies allergies, BloodType bloodType,
-        HealthCondition healthCondition, HealthRecords healthRecords, Note notes, Name nokName, Phone nokPhone) {
+    public Person(Name name, Phone phone, Email email, Address address, Allergy allergy, BloodType bloodType,
+        HealthCondition healthCondition, HealthRecord healthRecord, Note note, Name nokName, Phone nokPhone) {
         requireAllNonNull(name, phone, email);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.allergies = allergies;
+        this.allergy = allergy;
         this.bloodType = bloodType;
         this.healthCondition = healthCondition;
-        this.pastHealthRecords = healthRecords;
-        this.additionalNotes = notes;
+        this.pastHealthRecord = healthRecord;
+        this.additionalNote = note;
         this.nokName = nokName;
         this.nokPhone = nokPhone;
     }
@@ -87,8 +87,8 @@ public class Person {
         return nokPhone;
     }
 
-    public Allergies getAllergies() {
-        return allergies;
+    public Allergy getAllergies() {
+        return allergy;
     }
 
     public BloodType getBloodType() {
@@ -99,12 +99,12 @@ public class Person {
         return healthCondition;
     }
 
-    public Note getAdditionalNotes() {
-        return additionalNotes;
+    public Note getAdditionalNote() {
+        return additionalNote;
     }
 
-    public HealthRecords getPastHealthRecords() {
-        return pastHealthRecords;
+    public HealthRecord getPastHealthRecord() {
+        return pastHealthRecord;
     }
 
     /**

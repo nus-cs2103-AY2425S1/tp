@@ -4,12 +4,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 
 /**
- * Represents a Patient's allergies in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidAllergies(String)}
+ * Represents a Patient's allergy in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidAllergy (String)}
  */
-public class Allergies {
-    public static final String MESSAGE_CONSTRAINTS = "Allergies can take any values";
-    public static final String VALIDATION_REGEX = "[^\\s]*";
+public class Allergy {
+    public static final String MESSAGE_CONSTRAINTS = "Allergy can take any values";
+    public static final String VALIDATION_REGEX = "[^\\s].*";
 
     public final String value;
 
@@ -18,15 +18,15 @@ public class Allergies {
      *
      * @param allergies A valid allergies.
      */
-    public Allergies(String allergies) {
-        checkArgument(isValidAllergies(allergies), MESSAGE_CONSTRAINTS);
+    public Allergy(String allergies) {
+        checkArgument(isValidAllergy(allergies), MESSAGE_CONSTRAINTS);
         value = allergies;
     }
 
     /**
      * Returns true if a given string is a valid allergies.
      */
-    public static boolean isValidAllergies(String test) {
+    public static boolean isValidAllergy(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
@@ -42,12 +42,12 @@ public class Allergies {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Allergies)) {
+        if (!(other instanceof Allergy)) {
             return false;
         }
 
-        Allergies otherAllergies = (Allergies) other;
-        return value.equals(otherAllergies.value);
+        Allergy otherAllergy = (Allergy) other;
+        return value.equals(otherAllergy.value);
     }
 
     @Override
