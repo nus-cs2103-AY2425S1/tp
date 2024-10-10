@@ -22,7 +22,7 @@ public class TelegramUsernameTest {
     }
 
     @Test
-    public void isValidName() {
+    public void isValidUsername_correctlyVerifiesUsernames() {
         // null name
         assertThrows(NullPointerException.class, () -> new TelegramUsername(null));
 
@@ -44,7 +44,7 @@ public class TelegramUsernameTest {
     }
 
     @Test
-    public void equals() {
+    public void equals_correctlyChecksUsernameEquality() {
         TelegramUsername username = new TelegramUsername("Valid_Name");
 
         // same values -> returns true
@@ -64,5 +64,20 @@ public class TelegramUsernameTest {
 
         // different values -> returns false
         assertNotEquals(username, new TelegramUsername("Other_Valid_Name"));
+    }
+
+    @Test
+    public void toString_correctlyConvertsToString() {
+        TelegramUsername username = new TelegramUsername("Valid_Name");
+        assertEquals("Valid_Name", username.toString());
+    }
+
+    @Test
+    public void hashCode_correctlyConvertsForSameUsername() {
+        TelegramUsername username1 = new TelegramUsername("Valid_Name");
+        TelegramUsername username2 = new TelegramUsername("Valid_Name");
+        TelegramUsername username3 = new TelegramUsername("Diff_Name");
+        assertTrue(username1.hashCode() == username2.hashCode());
+        assertFalse(username2.hashCode() == username3.hashCode());
     }
 }

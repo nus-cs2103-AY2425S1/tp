@@ -61,6 +61,7 @@ public class TelegramUsername {
 
     @Override
     public int hashCode() {
-        return telegramUsername.hashCode();
+        return telegramUsername.hashCode(); // Might be future concern since Telegram Usernames are case insensitive
+        // not sure how hashCodes are computed based on strings, and what the use of these hashcodes are
     }
 }
