@@ -139,7 +139,6 @@ public class EditCommandParserTest {
                 .withProjectStatus(VALID_PROJECT_STATUS_IN_PROGRESS)
                 .withPaymentStatus(VALID_PAYMENT_STATUS_UNPAID)
                 .withClientStatus(VALID_CLIENT_STATUS_ACTIVE).build();
-      
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
