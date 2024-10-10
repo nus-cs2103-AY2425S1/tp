@@ -72,11 +72,14 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+    public void parseCommand_filter() throws Exception {
+        String keyword = "foo";
+        System.out.println(FilterCommand.COMMAND_WORD + " "
+                + CliSyntax.PREFIX_NAME.getPrefix() + " " + keyword);
         FilterCommand command = (FilterCommand) parser.parseCommand(
-                FilterCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FilterCommand(new NameContainsKeywordsPredicate(keywords)), command);
+                FilterCommand.COMMAND_WORD + " "
+                        + CliSyntax.PREFIX_NAME.getPrefix() + " " + keyword);
+        assertEquals(new FilterCommand(new NameContainsKeywordsPredicate(keyword)), command);
     }
 
     @Test

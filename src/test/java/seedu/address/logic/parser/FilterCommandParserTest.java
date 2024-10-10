@@ -22,13 +22,11 @@ public class FilterCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsFilterCommand() {
-        // no leading and trailing whitespaces
         FilterCommand expectedFilterCommand =
-                new FilterCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
-        assertParseSuccess(parser, "Alice Bob", expectedFilterCommand);
+                new FilterCommand(new NameContainsKeywordsPredicate("Alice"));
+        assertParseSuccess(parser, " n/ Alice", expectedFilterCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFilterCommand);
+        assertParseSuccess(parser, " n/ \n  Alice \t", expectedFilterCommand);
     }
-
 }
