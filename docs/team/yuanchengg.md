@@ -1,6 +1,6 @@
 ---
 layout: page
-title: John Doe's Project Portfolio Page
+title: Yuan Cheng's Project Portfolio Page
 ---
 
 ### Project: AddressBook Level 3
