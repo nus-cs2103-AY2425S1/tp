@@ -5,15 +5,13 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.*;
 
 import java.util.Arrays;
-import java.util.List;
 
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.predicates.AddressContainsKeywordsPredicate;
-import seedu.address.model.person.predicates.EmailContainsKeywordsPredicate;
-import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
-import seedu.address.model.person.predicates.PhoneContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.AddressContainsSubstringPredicate;
+import seedu.address.model.person.predicates.EmailContainsSubstringPredicate;
+import seedu.address.model.person.predicates.NameContainsSubstringPredicate;
+import seedu.address.model.person.predicates.PhoneContainsSubstringPredicate;
 
 /**
  * Parses input arguments and creates a new FilterCommand object
@@ -41,19 +39,19 @@ public class FilterCommandParser implements Parser<FilterCommand> {
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             String keyword = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()).fullName;
-            return new FilterCommand(new NameContainsKeywordsPredicate(keyword));
+            return new FilterCommand(new NameContainsSubstringPredicate(keyword));
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
             String keyword = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()).value;
-            return new FilterCommand(new PhoneContainsKeywordsPredicate(keyword));
+            return new FilterCommand(new PhoneContainsSubstringPredicate(keyword));
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
             String keyword = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()).value;
-            return new FilterCommand(new EmailContainsKeywordsPredicate(keyword));
+            return new FilterCommand(new EmailContainsSubstringPredicate(keyword));
         }
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             String keyword = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()).value;
-            return new FilterCommand(new AddressContainsKeywordsPredicate(keyword));
+            return new FilterCommand(new AddressContainsSubstringPredicate(keyword));
         }
         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
     }
