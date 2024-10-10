@@ -25,16 +25,30 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
+    // New fields
+    private final University university;
+    private final Major major;
+    private final Interest interest;
+    private final Experience experience;
+
     /**
      * Every field must be present and not null.
+     * New fields for university, major, interest, and experience are added.
+     * Interest and experience are initialized to empty strings.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, University university,
+                  Major major) {
+        requireAllNonNull(name, phone, email, address, tags, university, major);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.university = university;
+        this.major = major;
+        // Assign placeholder values for interest and experience
+        this.interest = new Interest(" "); // Initialize interest with an empty string
+        this.experience = new Experience(" "); // Initialize experience with an empty string
     }
 
     public Name getName() {
@@ -51,6 +65,22 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public University getUniversity() {
+        return university;
+    }
+
+    public Major getMajor() {
+        return major;
+    }
+
+    public Interest getInterest() {
+        return interest;
+    }
+
+    public Experience getExperience() {
+        return experience;
     }
 
     /**
@@ -94,13 +124,17 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && university.equals(otherPerson.university)
+                && major.equals(otherPerson.major)
+                && interest.equals(otherPerson.interest)
+                && experience.equals(otherPerson.experience);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, university, major, interest, experience);
     }
 
     @Override
@@ -111,6 +145,10 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("university", university)
+                .add("major", major)
+                .add("interest", interest)
+                .add("experience", experience)
                 .toString();
     }
 
