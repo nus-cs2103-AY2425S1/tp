@@ -28,14 +28,14 @@ public class Attendance {
     /**
      * Adds a new lesson marked as attended.
      */
-    public void addAttended() {
+    public void addAttendedLesson() {
         attendanceList.add(true);
     }
 
     /**
      * Adds a new lesson marked as absent.
      */
-    public void addAbsent() {
+    public void AddAbsentLesson() {
         attendanceList.add(false);
     }
 

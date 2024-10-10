@@ -3,7 +3,6 @@ package tahub.contacts.model.course;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
@@ -12,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 @DisplayName("Attendance")
 public class AttendanceTest {
-    public static final List<Boolean> EMPTY_ATTENDANCE_LIST = new ArrayList<>();
+    public static final List<Boolean> EMPTY_ATTENDANCE_LIST = List.of();
     public static final List<Boolean> SINGULAR_ATTENDED_ATTENDANCE_LIST = List.of(true);
     public static final List<Boolean> SINGULAR_ABSENT_ATTENDANCE_LIST = List.of(false);
     public static final List<Boolean> EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5 = List.of(false, true, true, false, true);
@@ -63,10 +62,10 @@ public class AttendanceTest {
     @DisplayName("Returns correct values after absent sessions added")
     public void addAbsences_correctValues() {
         Attendance a = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5);
-        a.addAbsent();
-        a.addAbsent();
-        a.addAbsent();
-        a.addAbsent();
+        a.AddAbsentLesson();
+        a.AddAbsentLesson();
+        a.AddAbsentLesson();
+        a.AddAbsentLesson();
         assertEquals(a.getAttendanceAttendedCount(), 3);
         assertEquals(a.getAttendanceTotalCount(), 9);
     }
@@ -75,9 +74,9 @@ public class AttendanceTest {
     @DisplayName("Returns correct values after attended sessions added")
     public void addAttendances_correctValues() {
         Attendance a = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5);
-        a.addAttended();
-        a.addAttended();
-        a.addAttended();
+        a.addAttendedLesson();
+        a.addAttendedLesson();
+        a.addAttendedLesson();
         assertEquals(a.getAttendanceAttendedCount(), 6);
         assertEquals(a.getAttendanceTotalCount(), 8);
     }
@@ -86,14 +85,14 @@ public class AttendanceTest {
     @DisplayName("Returns correct values after a series of sessions added")
     public void addSessions_correctValues() {
         Attendance a = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5);
-        a.addAttended();
-        a.addAbsent();
-        a.addAbsent();
-        a.addAttended();
-        a.addAttended();
-        a.addAbsent();
-        a.addAttended();
-        a.addAttended();
+        a.addAttendedLesson();
+        a.AddAbsentLesson();
+        a.AddAbsentLesson();
+        a.addAttendedLesson();
+        a.addAttendedLesson();
+        a.AddAbsentLesson();
+        a.addAttendedLesson();
+        a.addAttendedLesson();
         assertEquals(a.getAttendanceAttendedCount(), 8);
         assertEquals(a.getAttendanceTotalCount(), 13);
     }
