@@ -1,5 +1,9 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.Messages.MESSAGE_ADD_TAG_SUCCESS;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_TAG_NOT_FOUND;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -17,9 +21,6 @@ import seedu.address.model.tag.Tag;
 public class TagCommand extends Command {
 
     public static final String COMMAND_WORD = "tag";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid.";
-    public static final String MESSAGE_TAG_NOT_FOUND = "One or more specified tags do not exist in the model.";
-    public static final String MESSAGE_ADD_TAG_SUCCESS = "Added tag(s) %1$s to %2$s.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds one or multiple tags to the person identified "
@@ -30,7 +31,7 @@ public class TagCommand extends Command {
             + "t/florist t/photographer.";
 
     private final Index index;
-    private final List<Tag> tagsToAdd;
+    private final HashSet<Tag> tagsToAdd;
 
 
     /**
@@ -39,7 +40,7 @@ public class TagCommand extends Command {
      * @param index The index of the person in the person list.
      * @param tagsToAdd The list of tags to be added.
      */
-    public TagCommand(Index index, List<Tag> tagsToAdd) {
+    public TagCommand(Index index, HashSet<Tag> tagsToAdd) {
         this.index = index;
         this.tagsToAdd = tagsToAdd;
     }
