@@ -38,4 +38,9 @@ public class FindByUniversityCommand extends Command {
                 || (other instanceof FindByUniversityCommand // instanceof handles nulls
                 && predicate.equals(((FindByUniversityCommand) other).predicate));
     }
+    @Override
+    public String toString() {
+        return FindByUniversityCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
+    }
+
 }

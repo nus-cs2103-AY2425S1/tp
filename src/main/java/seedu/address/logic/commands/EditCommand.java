@@ -107,8 +107,8 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         // Add the new fields
-        University updatedUniversity = new University(" "); // placeholder
-        Major updatedMajor = new Major(" "); // placeholder
+        University updatedUniversity = editPersonDescriptor.getUniversity().orElse(personToEdit.getUniversity());
+        Major updatedMajor = editPersonDescriptor.getMajor().orElse(personToEdit.getMajor());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
                 updatedUniversity, updatedMajor);
