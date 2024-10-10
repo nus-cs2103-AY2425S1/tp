@@ -17,7 +17,7 @@ public class Priority {
     // Error message for invalid priority values.
     public static final String MESSAGE_CONSTRAINTS = "Priority should only be 'NONE', 'LOW', 'MEDIUM', or 'HIGH'.";
 
-    private final String priority;
+    public final String priority;
 
     /**
      * Constructs a {@code Priority} object with the specified priority string.

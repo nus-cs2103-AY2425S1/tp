@@ -40,14 +40,14 @@ public class PriorityTest {
     public void getPriority() {
         // validate if priority is obtained correctly
         Priority lowPriority = new Priority("LOW");
-        assertTrue(lowPriority.getPriority().equals("LOW"));
+        assertTrue(lowPriority.priority.equals("LOW"));
 
         Priority mediumPriority = new Priority("MEDIUM");
-        assertTrue(mediumPriority.getPriority().equals("MEDIUM"));
+        assertTrue(mediumPriority.priority.equals("MEDIUM"));
 
         Priority highPriority = new Priority("HIGH");
-        assertTrue(highPriority.getPriority().equals("HIGH"));
-        assertFalse(highPriority.getPriority().equals("LOW"));
+        assertTrue(highPriority.priority.equals("HIGH"));
+        assertFalse(highPriority.priority.equals("LOW"));
     }
 
     @Test
