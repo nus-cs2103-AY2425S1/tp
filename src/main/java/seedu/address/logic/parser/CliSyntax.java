@@ -13,6 +13,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_FINANCIAL_INFO = new Prefix("fi/");
     public static final Prefix PREFIX_SOCIAL_MEDIA_HANDLE = new Prefix("s/");
-
-
+    public static final Prefix PREFIX_EXPORT_FORMAT = new Prefix("format/");
 }

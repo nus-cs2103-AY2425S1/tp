@@ -1,4 +1,5 @@
 package seedu.address.logic.commands;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 public class ExportCommand extends Command {
@@ -13,7 +14,7 @@ public class ExportCommand extends Command {
             "Export command not implemented yet";
 
     @Override
-    public CommandResult execute(Model model) {
-        return new CommandResult("Hello from remark");
+    public CommandResult execute(Model model) throws CommandException {
+        throw new CommandException(MESSAGE_NOT_IMPLEMENTED_YET);
     }
 }
