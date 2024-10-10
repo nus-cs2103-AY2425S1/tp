@@ -194,13 +194,13 @@ public class EditCommand extends Command {
             this.address = address;
         }
 
-        public void setExperience(Experience experience) { this.experience = experience; }
-
-        public Optional<Experience> getExperience() { return Optional.ofNullable(experience); }
-
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
         }
+
+        public void setExperience(Experience experience) { this.experience = experience; }
+
+        public Optional<Experience> getExperience() { return Optional.ofNullable(experience); }
 
         /**
          * Sets {@code tags} to this object's {@code tags}.
