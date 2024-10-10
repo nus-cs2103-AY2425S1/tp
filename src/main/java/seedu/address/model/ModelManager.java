@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.company.Company;
 import seedu.address.model.job.Job;
 import seedu.address.model.person.Person;
 
@@ -24,6 +25,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Job> filteredJobs;
+    private final FilteredList<Company> filteredCompanies;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -37,6 +39,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredJobs = new FilteredList<>(this.addressBook.getJobList());
+        filteredCompanies = new FilteredList<>(this.addressBook.getCompanyList());
     }
 
     public ModelManager() {
@@ -96,6 +99,18 @@ public class ModelManager implements Model {
         return addressBook.hasPerson(person);
     }
 
+    /**
+     * Returns true if the same company is in the address book.
+     *
+     * @param company Company to be checked.
+     * @return true if in address book.
+     */
+    @Override
+    public boolean hasCompany(Company company) {
+        requireNonNull(company);
+        return addressBook.hasCompany(company);
+    }
+
     @Override
     public boolean hasJob(Job job) {
         requireNonNull(job);
@@ -107,6 +122,15 @@ public class ModelManager implements Model {
         addressBook.removePerson(target);
     }
 
+    /**
+     * Deletes a company same as the target from the address book.
+     *
+     * @param target Company to be deleted.
+     */
+    @Override
+    public void deleteCompany(Company target) {
+        addressBook.removeCompany(target);
+    }
     @Override
     // Todo: In a second PR when I add the deleteJob feature
     public void deleteJob(Job target) {}
@@ -117,6 +141,16 @@ public class ModelManager implements Model {
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
+    /**
+     * Adds a company to the address book.
+     *
+     * @param company Company to be added.
+     */
+    @Override
+    public void addCompany(Company company) {
+        addressBook.addCompany(company);
+        updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);
+    }
     @Override
     public void addJob(Job job) {
         addressBook.addJob(job);
@@ -128,6 +162,19 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    /**
+     * Replaces the target company with an edited version of itself.
+     *
+     * @param target Company to be replaced.
+     * @param editedCompany Company to replace the other.
+     */
+    @Override
+    public void setCompany(Company target, Company editedCompany) {
+        requireAllNonNull(target, editedCompany);
+
+        addressBook.setCompany(target, editedCompany);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -146,6 +193,16 @@ public class ModelManager implements Model {
         return filteredJobs;
     }
 
+    /**
+     * Returns the list of filtered companies.
+     *
+     * @return List of filtered companies.
+     */
+    @Override
+    public ObservableList<Company> getFilteredCompanyList() {
+        return filteredCompanies;
+    }
+
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
@@ -156,6 +213,17 @@ public class ModelManager implements Model {
     public void updateFilteredJobList(Predicate<Job> predicate) {
         requireNonNull(predicate);
         filteredJobs.setPredicate(predicate);
+    }
+
+    /**
+     * Updates the filtered company list with the given predicate.
+     *
+     * @param predicate Predicate for the filter.
+     */
+    @Override
+    public void updateFilteredCompanyList(Predicate<Company> predicate) {
+        requireNonNull(predicate);
+        filteredCompanies.setPredicate(predicate);
     }
 
     @Override
@@ -170,9 +238,11 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook) && userPrefs.equals(otherModelManager.userPrefs)
-               && filteredPersons.equals(otherModelManager.filteredPersons)
-               && filteredJobs.equals(otherModelManager.filteredJobs);
+        return addressBook.equals(otherModelManager.addressBook)
+                && userPrefs.equals(otherModelManager.userPrefs)
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && filteredJobs.equals(otherModelManager.filteredJobs)
+                && filteredCompanies.equals(otherModelManager.filteredCompanies);
     }
 
 }
