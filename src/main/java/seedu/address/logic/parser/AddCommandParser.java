@@ -60,7 +60,6 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Priority priority = new Priority("NONE");
-      
         logger.info("Successfully parsed all fields for AddCommand");
         Person person = new Person(name, phone, email, nric, address, dob, gender, tagList, priority);
         logger.info("Successfully created new Person object");
