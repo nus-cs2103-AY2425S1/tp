@@ -87,7 +87,7 @@ public class EditPersonDescriptorBuilder {
         return this;
     }
 
-    /*
+    /**
      * Sets the {@code Rate} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withRate(String rate) {

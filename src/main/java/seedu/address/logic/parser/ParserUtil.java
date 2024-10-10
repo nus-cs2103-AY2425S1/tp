@@ -123,7 +123,7 @@ public class ParserUtil {
         return new Subject(trimmedSubject);
     }
 
-    /*
+    /**
      * Parses a {@code String rate} into an {@code Rate}
      * Leading and trailing whitespaces will be trimmed.
      *

@@ -105,7 +105,7 @@ public class PersonBuilder {
         return this;
     }
 
-    /*
+    /**
      * Sets the {@code Rate} of the {@code Person} that we are building.
      */
     public PersonBuilder withRate(String rate) {
