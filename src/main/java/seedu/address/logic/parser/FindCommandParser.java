@@ -28,8 +28,8 @@ public class FindCommandParser implements Parser<FindCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<typeWord>\\S+)(?<keywords>.*)");
-        Matcher matcher = BASIC_COMMAND_FORMAT.matcher(trimmedArgs);
+        Pattern argFormat = Pattern.compile("(?<typeWord>\\S+)(?<keywords>.*)");
+        Matcher matcher = argFormat.matcher(trimmedArgs);
         String typeWord = matcher.group("typeWord");
         String keywords = matcher.group("keywords");
 
