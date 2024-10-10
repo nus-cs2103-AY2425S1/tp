@@ -1,6 +1,5 @@
 package seedu.address.testutil;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -116,6 +115,9 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Builds a Person object with the given fields.
+     */
     public Person build() {
         Role[] roleArray = roles.toArray(new Role[0]);
         return new Person(name, phone, email, address, tags, roleArray);
