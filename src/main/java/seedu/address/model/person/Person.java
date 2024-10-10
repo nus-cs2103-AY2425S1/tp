@@ -75,19 +75,34 @@ public class Person {
     }
 
     /**
-     * Returns true if both person have the same email address.
-     * This is to check for duplicates in emails in the contact list.
+     * Checks for duplicates in emails in the contact list.
+     * @param otherPerson The Person object to compare against.
+     * @return True if both persons have the same email address.
      */
     public boolean hasSameEmail(Person otherPerson) {
         return otherPerson != null && otherPerson.getEmail().equals(this.getEmail());
     }
 
     /**
-     * Returns true if two contacts are considered as duplicates.
-     * This is to avoid adding duplicate contact in the contact list.
+     * Checks for duplicates in phone numbers in the contact list.
+     * @param otherPerson The Person object to compare against.
+     * @return True if both persons have the same phone number.
+     */
+    public boolean hasSamePhoneNumber(Person otherPerson) {
+        return otherPerson != null && otherPerson.getPhone().equals(this.getPhone());
+    }
+
+    /**
+     * Checks for duplicated contact information between Person instances.
+     * This is to avoid adding duplicate contacts in the contact list.
+     * Checked fields: name, phone, email.
+     * @param otherPerson The Person object to compare against.
+     * @return True if two contacts are considered as duplicates.
      */
     public boolean hasDuplicateInfo(Person otherPerson) {
-        return this.isSamePerson(otherPerson) || this.hasSameEmail(otherPerson);
+        return this.isSamePerson(otherPerson)
+                || this.hasSameEmail(otherPerson)
+                || this.hasSamePhoneNumber(otherPerson);
     }
 
     /**
