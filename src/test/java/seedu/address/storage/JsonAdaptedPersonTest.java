@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.BENSON;
@@ -15,6 +16,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 
 public class JsonAdaptedPersonTest {
@@ -104,6 +106,23 @@ public class JsonAdaptedPersonTest {
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, invalidTags);
+        assertThrows(IllegalValueException.class, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_validPersonWithoutTags_returnsPerson() throws Exception {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                new ArrayList<>());
+        Person modelPerson = person.toModelType();
+
+        // Person should still be created successfully, but with no tags
+        assertTrue(modelPerson.getTags().isEmpty());
+        assertEquals(VALID_NAME, modelPerson.getName().fullName);
+    }
+
+    @Test
+    public void toModelType_allNullFields_throwsIllegalValueException() {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(null, null, null, null, null);
         assertThrows(IllegalValueException.class, person::toModelType);
     }
 

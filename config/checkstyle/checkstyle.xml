@@ -418,6 +418,9 @@
       <property name="tokens" value="METHOD_DEF, ANNOTATION_FIELD_DEF"/>
     </module>
 
+    <!-- (Not part of cs2103) Checks that there is a newline before tags e.g. @see, @params  -->
+    <module name="RequireEmptyLineBeforeBlockTagGroup"/>
+
     <module name="InvalidJavadocPosition"/>
 
     <!-- Checks that every public method (excluding getters, setters and constructors) has a header comment. -->
