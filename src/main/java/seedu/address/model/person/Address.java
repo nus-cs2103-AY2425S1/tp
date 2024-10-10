@@ -3,6 +3,8 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.regex.Pattern;
+
 /**
  * Represents a Person's address in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
@@ -16,6 +18,7 @@ public class Address {
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final String POSTAL_CODE_REGEX = "#\\d{2,3}-\\d{2,4}";
 
     public final String value;
 
@@ -34,7 +37,10 @@ public class Address {
      * Returns true if a given string is a valid email.
      */
     public static boolean isValidAddress(String test) {
-        return test.matches(VALIDATION_REGEX);
+        boolean isValid = Pattern.compile(POSTAL_CODE_REGEX).matcher(test).find();
+
+        return test.matches(VALIDATION_REGEX) && isValid;
+
     }
 
     @Override
