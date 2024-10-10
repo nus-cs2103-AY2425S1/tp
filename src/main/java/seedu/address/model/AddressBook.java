@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
@@ -40,6 +41,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
         resetData(toBeCopied);
+        initialiseTags();
     }
 
     //// list overwrite operations
@@ -144,6 +146,20 @@ public class AddressBook implements ReadOnlyAddressBook {
         tags.remove(key);
     }
 
+    /**
+     * Creates any tags that is attached to a person but not initialised.
+     * This function is only to be used when loading from Storage.
+     */
+    public void initialiseTags() {
+        for (Person person : persons) {
+            Set<Tag> tagForPerson = person.getTags();
+            for (Tag tag : tagForPerson) {
+                if (!this.hasTag(tag)) {
+                    this.addTag(tag);
+                }
+            }
+        }
+    }
     //// util methods
 
     @Override
