@@ -27,7 +27,7 @@
 ### Getting Started
 
 - If you are a user interested in using **HallPointer**, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.md#quick-start) for instructions on how to set up and begin using the application.
-  
+
 - If you are interested in contributing to or developing **HallPointer**, the [**Developer Guide**](DeveloperGuide.md) provides detailed technical information and instructions to help you get started.
 
 ---

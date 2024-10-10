@@ -468,7 +468,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Description**: This use case allows a CCA leader to view a list of all members in the system.
 
-**Preconditions**:  
+**Preconditions**:
 None.
 
 **Main Success Scenario (MSS)**:
@@ -571,7 +571,6 @@ None.
 
 25. **Command:**\
     A typed instruction input by the user in the CLI to perform an action in Hall Pointer, such as adding members, editing details, or tracking points (e.g., `add`, `list`, `delete`).
-    
 
 ## **Appendix: Instructions for manual testing**
 
