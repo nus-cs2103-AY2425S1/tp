@@ -11,6 +11,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.role.Role;
 import seedu.address.model.role.RoleHandler;
 import seedu.address.model.role.exceptions.InvalidRoleException;
+import seedu.address.model.person.TelegramUsername;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -23,11 +24,13 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_TELEGRAM_USERNAME = "amybee";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
+    private TelegramUsername telegramUsername;
     private Set<Tag> tags;
     private Set<Role> roles;
 
@@ -39,6 +42,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        telegramUsername = new TelegramUsername(DEFAULT_TELEGRAM_USERNAME);
         tags = new HashSet<>();
         roles = new HashSet<>();
     }
@@ -51,6 +55,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        telegramUsername = personToCopy.getTelegramUsername();
         tags = new HashSet<>(personToCopy.getTags());
         roles = new HashSet<>(personToCopy.getRoles());
     }
@@ -115,12 +120,26 @@ public class PersonBuilder {
         return this;
     }
 
+
+    /**
+     * Sets the {@code TelegramUsername} of the {@code Person} being built.
+     *
+     * @param telegramUsername The Telegram username to be assigned to the {@code Person}.
+     * @return The current {@code PersonBuilder} instance with the updated Telegram username.
+     */
+    public PersonBuilder withTelegramUsername(String telegramUsername) {
+        this.telegramUsername = new TelegramUsername(telegramUsername);
+        return this;
+    }
+
+
     /**
      * Builds a Person object with the given fields.
      */
     public Person build() {
         Role[] roleArray = roles.toArray(new Role[0]);
-        return new Person(name, phone, email, address, tags, roleArray);
+
+        return new Person(name, phone, email, address, tags, telegramUsername, roleArray);
     }
 
 }

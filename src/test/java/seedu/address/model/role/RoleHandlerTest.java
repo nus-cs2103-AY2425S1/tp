@@ -1,7 +1,9 @@
 package seedu.address.model.role;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
@@ -125,5 +127,36 @@ public class RoleHandlerTest {
 
     }
 
+    @Test
+    public void isValidRoleName_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> RoleHandler.isValidRoleName(null));
+    }
+
+    @Test
+    public void isValidRoleName_invalidValue_returnsFalse() {
+        assertFalse(RoleHandler.isValidRoleName("InvalidRole"));
+        assertFalse(RoleHandler.isValidRoleName("Random"));
+        assertFalse(RoleHandler.isValidRoleName(""));
+    }
+
+    @Test
+    public void isValidRoleName_validValue_returnsTrue() {
+        assertTrue(RoleHandler.isValidRoleName(Attendee.ROLE_WORD));
+        assertTrue(RoleHandler.isValidRoleName(Sponsor.ROLE_WORD));
+        assertTrue(RoleHandler.isValidRoleName(Vendor.ROLE_WORD));
+        assertTrue(RoleHandler.isValidRoleName(Volunteer.ROLE_WORD));
+    }
+
+    @Test
+    public void isValidRoleName_validValueWithWhitespace_returnsFalse() {
+        assertTrue(RoleHandler.isValidRoleName(" " + Attendee.ROLE_WORD + " "));
+        assertTrue(RoleHandler.isValidRoleName(" " + Sponsor.ROLE_WORD + " "));
+    }
+
+    @Test
+    public void isValidRoleName_caseInsensitive_returnsFalse() {
+        assertTrue(RoleHandler.isValidRoleName(Attendee.ROLE_WORD.toLowerCase()));
+        assertTrue(RoleHandler.isValidRoleName(Sponsor.ROLE_WORD.toUpperCase()));
+    }
 
 }

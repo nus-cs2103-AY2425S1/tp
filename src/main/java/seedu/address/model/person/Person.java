@@ -27,21 +27,25 @@ public class Person implements Comparable<Person> {
     private final Set<Tag> tags = new HashSet<>();
 
     private final Set<Role> roles = new HashSet<>();
+    private final TelegramUsername telegramUsername;
 
     /**
-     * Every field must be present and not null.
+     * Every field must be present and not null
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Role... roles) {
+
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+                  TelegramUsername telegramUsername, Role... roles) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-
+        this.telegramUsername = telegramUsername;
         for (Role role : roles) {
             this.roles.add(role);
         }
+
     }
 
     public Name getName() {
@@ -59,6 +63,9 @@ public class Person implements Comparable<Person> {
     public Address getAddress() {
         return address;
     }
+    public TelegramUsername getTelegramUsername() {
+        return telegramUsername;
+    }
 
 
 
@@ -71,7 +78,7 @@ public class Person implements Comparable<Person> {
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Returns true if both persons have the same phone number or email.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
@@ -80,7 +87,8 @@ public class Person implements Comparable<Person> {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && (otherPerson.getPhone().equals(getPhone())
+                || otherPerson.getEmail().equals(getEmail()));
     }
 
     /**
@@ -113,7 +121,8 @@ public class Person implements Comparable<Person> {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
-                && roles.equals(otherPerson.roles);
+                && roles.equals(otherPerson.roles)
+                && telegramUsername.equals(otherPerson.telegramUsername);
     }
 
     @Override
@@ -141,7 +150,6 @@ public class Person implements Comparable<Person> {
                 .add("roles", roles)
                 .toString();
     }
-
 
     @Override
     public int compareTo(Person other) {

@@ -10,6 +10,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.TelegramUsername;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -36,6 +37,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
+        descriptor.setTelegramUsername(person.getTelegramUsername());
         descriptor.setTags(person.getTags());
     }
 
@@ -78,6 +80,17 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
+        return this;
+    }
+
+    /**
+     * Sets the {@code TelegramUsername} of the {@code EditPersonDescriptor} that is being built.
+     *
+     * @param telegramUsername The Telegram username to set for the person.
+     * @return The current {@code EditPersonDescriptorBuilder} instance with the updated Telegram username.
+     */
+    public EditPersonDescriptorBuilder withTelegramUsername(String telegramUsername) {
+        descriptor.setTelegramUsername(new TelegramUsername(telegramUsername));
         return this;
     }
 
