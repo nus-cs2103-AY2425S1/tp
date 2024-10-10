@@ -1,7 +1,6 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -60,14 +59,20 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        String deleteCommand = "delete n/Non Existent";
+        assertCommandException(deleteCommand, "No contact with the name 'Non Existent' found.");
     }
 
     @Test
     public void execute_validCommand_success() throws Exception {
         String listCommand = ListCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
+        int numberOfPersons = model.getAddressBook().getPersonList().size();
+        String numberOfContacts = ", there are currently " + numberOfPersons + " contacts in your address book";
+        if (numberOfPersons == 0) {
+            assertCommandSuccess(listCommand, ListCommand.MESSAGE_EMPTY, model);
+        } else {
+            assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS + numberOfContacts, model);
+        }
     }
 
     @Test
