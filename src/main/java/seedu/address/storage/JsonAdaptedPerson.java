@@ -14,6 +14,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.ClientStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.PaymentStatus;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.ProjectStatus;
@@ -33,6 +34,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String projectStatus;
+    private final String paymentStatus;
     private final String clientStatus;
 
     /**
@@ -42,6 +44,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("projectStatus") String projectStatus,
+                             @JsonProperty("paymentStatus") String paymentStatus,
                              @JsonProperty("clientStatus") String clientStatus,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
@@ -49,6 +52,7 @@ class JsonAdaptedPerson {
         this.email = email;
         this.address = address;
         this.projectStatus = projectStatus;
+        this.paymentStatus = paymentStatus;
         this.clientStatus = clientStatus;
         if (tags != null) {
             this.tags.addAll(tags);
@@ -64,6 +68,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         projectStatus = source.getProjectStatus().toString();
+        paymentStatus = source.getPaymentStatus().toString();
         clientStatus = source.getClientStatus().toString();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -124,6 +129,14 @@ class JsonAdaptedPerson {
         }
         final ProjectStatus modelProjectStatus = new ProjectStatus(projectStatus);
 
+        if (paymentStatus == null) {
+            throw new IllegalValueException(String.format(
+                    MISSING_FIELD_MESSAGE_FORMAT, PaymentStatus.class.getSimpleName()));
+        }
+        if (!PaymentStatus.isValidPaymentStatus(paymentStatus)) {
+            throw new IllegalValueException(PaymentStatus.MESSAGE_CONSTRAINTS);
+        }
+        final PaymentStatus modelPaymentStatus = new PaymentStatus(paymentStatus);
         if (clientStatus == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                 ClientStatus.class.getSimpleName()));
@@ -134,6 +147,6 @@ class JsonAdaptedPerson {
         final ClientStatus modelClientStatus = new ClientStatus(clientStatus);
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags,
-                modelProjectStatus, modelClientStatus);
+                modelProjectStatus, modelPaymentStatus, modelClientStatus);
     }
 }

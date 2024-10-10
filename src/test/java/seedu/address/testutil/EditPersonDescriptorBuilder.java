@@ -9,6 +9,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.ClientStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.PaymentStatus;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.ProjectStatus;
@@ -40,6 +41,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setAddress(person.getAddress());
         descriptor.setTags(person.getTags());
         descriptor.setProjectStatus(person.getProjectStatus());
+        descriptor.setPaymentStatus(person.getPaymentStatus());
         descriptor.setClientStatus(person.getClientStatus());
     }
 
@@ -93,6 +95,13 @@ public class EditPersonDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code PaymentStatus} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withPaymentStatus(String paymentStatus) {
+        descriptor.setPaymentStatus(new PaymentStatus(paymentStatus));
+        return this;
+    }
     /**
      * Sets the {@code ClientStatus} of the {@code EditPersonDescriptor} that we are building.
      */

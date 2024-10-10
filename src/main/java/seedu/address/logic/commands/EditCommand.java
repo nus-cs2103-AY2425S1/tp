@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENT_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -27,6 +28,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.ClientStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.PaymentStatus;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.ProjectStatus;
@@ -50,11 +52,13 @@ public class EditCommand extends Command {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]..."
             + "[" + PREFIX_PROJECT_STATUS + "PROJECT_STATUS]\n"
+            + "[" + PREFIX_PAYMENT_STATUS + "PAYMENT_STATUS]\n"
             + "[" + PREFIX_CLIENT_STATUS + "CLIENT_STATUS]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com "
             + PREFIX_PROJECT_STATUS + "complete"
+            + PREFIX_PAYMENT_STATUS + "paid"
             + PREFIX_CLIENT_STATUS + "active";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
@@ -111,11 +115,13 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         ProjectStatus updatedProjectStatus = editPersonDescriptor.getProjectStatus()
                 .orElse(personToEdit.getProjectStatus());
+        PaymentStatus updatedPaymentStatus = editPersonDescriptor.getPaymentStatus()
+                .orElse(personToEdit.getPaymentStatus());
         ClientStatus updatedClientStatus = editPersonDescriptor.getClientStatus()
                 .orElse(personToEdit.getClientStatus());
 
-        return new Person(updatedName, updatedPhone, updatedEmail,
-                updatedAddress, updatedTags, updatedProjectStatus, updatedClientStatus);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedProjectStatus,
+                updatedPaymentStatus, updatedClientStatus);
     }
 
     @Override
@@ -153,6 +159,7 @@ public class EditCommand extends Command {
         private Address address;
         private Set<Tag> tags;
         private ProjectStatus projectStatus;
+        private PaymentStatus paymentStatus;
         private ClientStatus clientStatus;
 
         public EditPersonDescriptor() {}
@@ -168,6 +175,7 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setTags(toCopy.tags);
             setProjectStatus(toCopy.projectStatus);
+            setPaymentStatus(toCopy.paymentStatus);
             setClientStatus(toCopy.clientStatus);
         }
 
@@ -175,7 +183,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, projectStatus, clientStatus);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, projectStatus,
+                    paymentStatus, clientStatus);
         }
 
         public void setName(Name name) {
@@ -243,6 +252,14 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        public void setPaymentStatus(PaymentStatus paymentStatus) {
+            this.paymentStatus = paymentStatus;
+        }
+
+        public Optional<PaymentStatus> getPaymentStatus() {
+            return Optional.ofNullable(paymentStatus);
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -261,8 +278,8 @@ public class EditCommand extends Command {
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
                     && Objects.equals(projectStatus, otherEditPersonDescriptor.projectStatus)
+                    && Objects.equals(paymentStatus, otherEditPersonDescriptor.paymentStatus)
                     && Objects.equals(clientStatus, otherEditPersonDescriptor.clientStatus);
-
         }
 
         @Override
@@ -274,8 +291,10 @@ public class EditCommand extends Command {
                     .add("address", address)
                     .add("tags", tags)
                     .add("projectStatus", projectStatus)
+                    .add("paymentStatus", paymentStatus)
                     .add("clientStatus", clientStatus)
                     .toString();
         }
+
     }
 }

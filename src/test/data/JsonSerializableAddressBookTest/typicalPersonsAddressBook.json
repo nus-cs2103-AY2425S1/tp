@@ -7,6 +7,7 @@
     "address" : "123, Jurong West Ave 6, #08-111",
     "tags" : [ "friends" ],
     "projectStatus": "in progress",
+    "paymentStatus": "unpaid",
     "clientStatus": "active"
   }, {
     "name" : "Benson Meier",
@@ -15,6 +16,7 @@
     "address" : "311, Clementi Ave 2, #02-25",
     "tags" : [ "owesMoney", "friends" ],
     "projectStatus": "in progress",
+    "paymentStatus": "unpaid",
     "clientStatus": "active"
   }, {
     "name" : "Carl Kurz",
@@ -23,6 +25,7 @@
     "address" : "wall street",
     "tags" : [ ],
     "projectStatus": "in progress",
+    "paymentStatus": "unpaid",
     "clientStatus": "active"
   }, {
     "name" : "Daniel Meier",
@@ -31,6 +34,7 @@
     "address" : "10th street",
     "tags" : [ "friends" ],
     "projectStatus": "in progress",
+    "paymentStatus": "unpaid",
     "clientStatus": "active"
   }, {
     "name" : "Elle Meyer",
@@ -39,6 +43,7 @@
     "address" : "michegan ave",
     "tags" : [ ],
     "projectStatus": "in progress",
+    "paymentStatus": "unpaid",
     "clientStatus": "active"
   }, {
     "name" : "Fiona Kunz",
@@ -47,6 +52,7 @@
     "address" : "little tokyo",
     "tags" : [ ],
     "projectStatus": "in progress",
+    "paymentStatus": "unpaid",
     "clientStatus": "active"
   }, {
     "name" : "George Best",
@@ -55,6 +61,7 @@
     "address" : "4th street",
     "tags" : [ ],
     "projectStatus": "in progress",
+    "paymentStatus": "unpaid",
     "clientStatus": "active"
   } ]
 }

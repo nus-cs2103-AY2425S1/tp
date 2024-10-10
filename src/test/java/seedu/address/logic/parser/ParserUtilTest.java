@@ -18,6 +18,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.ClientStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.PaymentStatus;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.ProjectStatus;
 import seedu.address.model.tag.Tag;
@@ -29,6 +30,7 @@ public class ParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_PROJECT_STATUS = "unknown";
+    private static final String INVALID_PAYMENT_STATUS = "unknown";
     private static final String INVALID_CLIENT_STATUS = "referral";
 
     private static final String VALID_NAME = "Rachel Walker";
@@ -39,6 +41,8 @@ public class ParserUtilTest {
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_PROJECT_STATUS = "in progress";
     private static final String VALID_PROJECT_STATUS_2 = "completed";
+    private static final String VALID_PAYMENT_STATUS = "unpaid";
+    private static final String VALID_PAYMENT_STATUS_2 = "paid";
     private static final String VALID_CLIENT_STATUS = "active";
     private static final String VALID_CLIENT_STATUS_2 = "unresponsive";
     private static final String VALID_CLIENT_STATUS_3 = "potential";
@@ -227,6 +231,28 @@ public class ParserUtilTest {
         assertEquals(expectedStatus, ParserUtil.parseProjectStatus(statusWithWhitespace));
     }
 
+    @Test
+    public void parsePaymentStatus_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parsePaymentStatus((String) null));
+    }
+
+    @Test
+    public void parsePaymentStatus_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePaymentStatus(INVALID_PAYMENT_STATUS));
+    }
+
+    @Test
+    public void parsePaymentStatus_validValueWithoutWhitespace_returnsProjectStatus() throws Exception {
+        PaymentStatus expectedStatus = new PaymentStatus(VALID_PAYMENT_STATUS);
+        assertEquals(expectedStatus, ParserUtil.parsePaymentStatus(VALID_PAYMENT_STATUS));
+    }
+
+    @Test
+    public void parsePaymentStatus_validValueWithWhitespace_returnsTrimmedProjectStatus() throws Exception {
+        String statusWithWhitespace = WHITESPACE + VALID_PAYMENT_STATUS + WHITESPACE;
+        PaymentStatus expectedStatus = new PaymentStatus(VALID_PAYMENT_STATUS);
+        assertEquals(expectedStatus, ParserUtil.parsePaymentStatus(statusWithWhitespace));
+    }
     @Test
     public void parseClientStatus_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseClientStatus((String) null));

@@ -4,6 +4,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENT_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -40,6 +41,7 @@ public class PersonUtil {
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
         sb.append(PREFIX_PROJECT_STATUS + person.getProjectStatus().toString() + " ");
+        sb.append(PREFIX_PAYMENT_STATUS + person.getPaymentStatus().toString() + " ");
         sb.append(PREFIX_CLIENT_STATUS + person.getClientStatus().toString() + " ");
         return sb.toString();
     }
@@ -55,6 +57,8 @@ public class PersonUtil {
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         descriptor.getProjectStatus().ifPresent(projectStatus ->
                 sb.append(PREFIX_PROJECT_STATUS).append(projectStatus).append(" "));
+        descriptor.getPaymentStatus().ifPresent(paymentStatus ->
+                sb.append(PREFIX_PAYMENT_STATUS).append(paymentStatus).append(" "));
         descriptor.getClientStatus().ifPresent(clientStatus ->
                 sb.append(PREFIX_CLIENT_STATUS).append(clientStatus).append(" "));
         if (descriptor.getTags().isPresent()) {

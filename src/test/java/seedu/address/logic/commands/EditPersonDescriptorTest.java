@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CLIENT_STATUS_POTENTIAL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PAYMENT_STATUS_PAID;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PROJECT_STATUS_COMPLETE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -60,7 +61,9 @@ public class EditPersonDescriptorTest {
 
         // different project status -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withProjectStatus(VALID_PROJECT_STATUS_COMPLETE).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different payment status -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withPaymentStatus(VALID_PAYMENT_STATUS_PAID).build();
 
         // different client status -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withClientStatus(VALID_CLIENT_STATUS_POTENTIAL).build();
@@ -76,6 +79,7 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getEmail().orElse(null) + ", address="
                 + editPersonDescriptor.getAddress().orElse(null) + ", tags="
                 + editPersonDescriptor.getTags().orElse(null) + ", projectStatus="
+                + editPersonDescriptor.getProjectStatus().orElse(null) + ", paymentStatus="
                 + editPersonDescriptor.getProjectStatus().orElse(null) + ", clientStatus="
                 + editPersonDescriptor.getClientStatus().orElse(null) + "}";
 
