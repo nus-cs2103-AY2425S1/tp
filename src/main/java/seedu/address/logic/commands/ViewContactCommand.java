@@ -9,7 +9,7 @@ import seedu.address.model.person.NameMatchesKeywordsPredicate;
 
 /**
  * Views the specific information of a person in address book whose name is the argument keywords.
- * Keyword matching is case-insensitive.
+ * Keyword matching is case-sensitive.
  */
 public class ViewContactCommand extends ViewCommand {
 
