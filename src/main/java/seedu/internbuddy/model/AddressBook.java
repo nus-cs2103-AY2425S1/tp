@@ -11,7 +11,7 @@ import seedu.internbuddy.model.company.UniqueCompanyList;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSameCompany comparison)
+ * Duplicates are not allowed (by .isSamecompany comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
@@ -31,7 +31,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public AddressBook() {}
 
     /**
-     * Creates an AddressBook using the Companies in the {@code toBeCopied}
+     * Creates an AddressBook using the companies in the {@code toBeCopied}
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();

@@ -139,10 +139,10 @@ public class ModelManager implements Model {
             return false;
         }
 
-        ModelManager otherModelManagerCompany = (ModelManager) other;
-        return addressBook.equals(otherModelManagerCompany.addressBook)
-                && userPrefs.equals(otherModelManagerCompany.userPrefs)
-                && filteredCompanies.equals(otherModelManagerCompany.filteredCompanies);
+        ModelManager otherModelManager = (ModelManager) other;
+        return addressBook.equals(otherModelManager.addressBook)
+                && userPrefs.equals(otherModelManager.userPrefs)
+                && filteredCompanies.equals(otherModelManager.filteredCompanies);
     }
 
 }

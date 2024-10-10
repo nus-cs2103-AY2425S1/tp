@@ -6,7 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.internbuddy.logic.commands.CommandTestUtilCompany.VALID_ADDRESS_MICROSOFT;
 import static seedu.internbuddy.logic.commands.CommandTestUtilCompany.VALID_TAG_SOFTWARE;
 import static seedu.internbuddy.testutil.Assert.assertThrows;
+<<<<<<< HEAD
 import static seedu.internbuddy.testutil.TypicalCompanies.GOOGLE;
+=======
+import static seedu.internbuddy.testutil.TypicalCompanies.ALICE;
+>>>>>>> 398707caf839baca66fada2b3d5612969e0eb79e
 import static seedu.internbuddy.testutil.TypicalCompanies.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -54,6 +58,7 @@ public class AddressBookTest {
      * Test for resetData method
      */
     @Test
+<<<<<<< HEAD
     public void resetData_withDuplicateCompanies_throwsDuplicateCompanyException() {
         // Two companies with the same identity fields
         Company editedGoogle = new CompanyBuilder(GOOGLE).withAddress(VALID_ADDRESS_MICROSOFT)
@@ -101,6 +106,45 @@ public class AddressBookTest {
     public void getCompanyList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getCompanyList()
             .remove(0));
+=======
+    public void resetData_withDuplicatecompanies_throwsDuplicateCompanyException() {
+        // Two companies with the same identity fields
+        Company editedAlice = new CompanyBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+                .build();
+        List<Company> newCompanies = Arrays.asList(ALICE, editedAlice);
+        AddressBookStub newData = new AddressBookStub(newCompanies);
+
+        assertThrows(DuplicateCompanyException.class, () -> addressBook.resetData(newData));
+    }
+
+    @Test
+    public void hasCompany_nullCompany_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasCompany(null));
+    }
+
+    @Test
+    public void hasCompany_companyNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasCompany(ALICE));
+    }
+
+    @Test
+    public void hasCompany_companyInAddressBook_returnsTrue() {
+        addressBook.addCompany(ALICE);
+        assertTrue(addressBook.hasCompany(ALICE));
+    }
+
+    @Test
+    public void hasCompany_companyWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.addCompany(ALICE);
+        Company editedAlice = new CompanyBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+                .build();
+        assertTrue(addressBook.hasCompany(editedAlice));
+    }
+
+    @Test
+    public void getCompanyList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getCompanyList().remove(0));
+>>>>>>> 398707caf839baca66fada2b3d5612969e0eb79e
     }
 
     /**
@@ -108,8 +152,12 @@ public class AddressBookTest {
      */
     @Test
     public void toStringMethod() {
+<<<<<<< HEAD
         String expected = AddressBook.class.getCanonicalName() + "{companies="
             + addressBook.getCompanyList() + "}";
+=======
+        String expected = AddressBook.class.getCanonicalName() + "{companies=" + addressBook.getCompanyList() + "}";
+>>>>>>> 398707caf839baca66fada2b3d5612969e0eb79e
         assertEquals(expected, addressBook.toString());
     }
 

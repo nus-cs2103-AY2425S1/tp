@@ -15,7 +15,7 @@ import seedu.internbuddy.logic.parser.AddressBookParser;
 import seedu.internbuddy.logic.parser.exceptions.ParseException;
 import seedu.internbuddy.model.Model;
 import seedu.internbuddy.model.ReadOnlyAddressBook;
-import seedu.internbuddy.model.person.Person;
+import seedu.internbuddy.model.company.Company;
 import seedu.internbuddy.storage.Storage;
 
 /**
@@ -67,8 +67,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+    public ObservableList<Company> getFilteredCompanyList() {
+        return model.getFilteredCompanyList();
     }
 
     @Override

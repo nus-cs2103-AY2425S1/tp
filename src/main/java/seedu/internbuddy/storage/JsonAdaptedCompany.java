@@ -64,9 +64,15 @@ public class JsonAdaptedCompany {
     }
 
     /**
+<<<<<<< HEAD
      * Converts this Jackson-friendly adapted company object into the model's {@link Company} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+=======
+     * Converts this Jackson-friendly adapted company object into the model's {@code company} object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated in the adapted company.
+>>>>>>> 398707caf839baca66fada2b3d5612969e0eb79e
      */
     public Company toModelType() throws IllegalValueException {
         final List<Tag> companyTags = new ArrayList<>();
@@ -112,6 +118,7 @@ public class JsonAdaptedCompany {
         final Status modelStatus = new Status(status);
 
         final Set<Tag> modelTags = new HashSet<>(companyTags);
+
         return new Company(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelStatus);
     }
 

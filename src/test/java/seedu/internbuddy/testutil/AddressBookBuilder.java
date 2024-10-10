@@ -2,7 +2,6 @@ package seedu.internbuddy.testutil;
 
 import seedu.internbuddy.model.AddressBook;
 import seedu.internbuddy.model.company.Company;
-import seedu.internbuddy.model.person.Person;
 
 /**
  * A utility class to help with building Addressbook objects.
@@ -22,7 +21,7 @@ public class AddressBookBuilder {
     }
 
     /**
-     * Adds a new {@code Company} to the {@code AddressBookCompany} that we are building.
+     * Adds a new {@code company} to the {@code AddressBook} that we are building.
      */
     public AddressBookBuilder withCompany(Company company) {
         addressBook.addCompany(company);
