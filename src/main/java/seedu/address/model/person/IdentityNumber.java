@@ -99,20 +99,16 @@ public class IdentityNumber {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Name)) {
+        if (!(other instanceof IdentityNumber)) {
             return false;
         }
 
         IdentityNumber otherIdentificationNumber = (IdentityNumber) other;
-        return identificationNumber.equals(otherIdentificationNumber.identificationNumber);
+        return this.identificationNumber.equals(otherIdentificationNumber.identificationNumber);
     }
 
     @Override
     public int hashCode() {
         return identificationNumber.hashCode();
-    }
-
-    public static void main(String[] args) {
-        IdentityNumber test = new IdentityNumber("S6116686F");
     }
 }
