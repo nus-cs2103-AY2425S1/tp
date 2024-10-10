@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -105,6 +106,7 @@ public class PersonBuilder {
             try {
                 Role nextRole = RoleHandler.getRole(role);
                 newRoles.add(nextRole);
+                this.roles = newRoles;
             } catch (InvalidRoleException e) {
                 //TODO: Handle this exception
                 continue;
@@ -115,7 +117,8 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        Role[] roleArray = roles.toArray(new Role[0]);
+        return new Person(name, phone, email, address, tags, roleArray);
     }
 
 }

@@ -14,6 +14,8 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.role.RoleHandler;
+import seedu.address.model.role.exceptions.InvalidRoleException;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
@@ -110,5 +112,16 @@ public class PersonTest {
         Person aliceCopy = new PersonBuilder(ALICE).build();
         Person bobCopy = new PersonBuilder(BOB).build();
         assertTrue(BOB.compareTo(ALICE) > 0);
+    }
+
+    @Test
+    public void getRoles_oneRole() {
+        Person person = new PersonBuilder().withRoles("attendee").build();
+        try {
+            assertTrue(person.getRoles().contains(RoleHandler.getRole("attendee")));
+
+        } catch (InvalidRoleException e) {
+            e.printStackTrace();
+        }
     }
 }
