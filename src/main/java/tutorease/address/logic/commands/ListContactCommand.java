@@ -6,14 +6,14 @@ import static tutorease.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import tutorease.address.model.Model;
 
 /**
- * Lists all persons in the address book to the user.
+ * Lists all contacts in the address book.
  */
-public class ListCommand extends Command {
+public class ListContactCommand extends Command {
 
-    public static final String COMMAND_WORD = "list";
-
-    public static final String MESSAGE_SUCCESS = "Listed all persons";
-
+    public static final String SUB_COMMAND_WORD = "list";
+    public static final String COMMAND_WORD = "contact";
+    public static final String MESSAGE_SUCCESS = "Listed all contacts";
+    public static final String MESSAGE_NO_CONTACTS_FOUND = "No contacts found.";
 
     @Override
     public CommandResult execute(Model model) {
@@ -22,3 +22,4 @@ public class ListCommand extends Command {
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
+
