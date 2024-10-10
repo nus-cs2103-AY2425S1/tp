@@ -37,7 +37,6 @@ public class Tag {
         if (other == this) {
             return true;
         }
-
         // instanceof handles nulls
         if (!(other instanceof Tag)) {
             return false;
