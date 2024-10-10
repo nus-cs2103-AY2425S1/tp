@@ -55,7 +55,7 @@ public class FilterCommand extends Command {
                 .orElse(PREDICATE_SHOW_ALL_PERSONS);
         model.updateFilteredPersonList(filterPredicate);
         return new CommandResult(this.tag
-                .map(tagItem -> String.format(MESSAGE_SUCCESS, tagItem.tagName))
+                .map(tagItem -> String.format(MESSAGE_SUCCESS, tagItem.getTagName()))
                 .orElse(MESSAGE_FAILURE));
     }
 
