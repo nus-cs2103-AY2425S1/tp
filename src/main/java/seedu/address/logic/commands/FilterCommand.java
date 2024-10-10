@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Optional;
@@ -19,23 +20,23 @@ public class FilterCommand extends Command {
     public static final String COMMAND_WORD = "filter";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Filters contacts for a given tag. "
-            + "The given tag must be an exact match with the intended tag to find. "
+            + ": Filters contacts for a given tag.\n"
+            + "The given tag must be an exact match with the intended tag to find.\n"
             + "If there is no contact with the given tag, "
             + "an empty list of contacts will be displayed.\n"
             + "Parameters: TAG\n"
-            + "Example: " + COMMAND_WORD + " supplier";
+            + "Example: " + COMMAND_WORD + " t/supplier";
 
     public static final String MESSAGE_SUCCESS = "Filtered for tag: %s";
-    public static final String MESSAGE_FAILURE = "Unable to filter. "
-            + "Please ensure that provided tag is strictly alphanumeric, without any spaces.\n"
-            + "Listing all contacts instead.";
+    public static final String MESSAGE_FAILURE =
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE)
+            + "\nListing all contacts instead.";
 
     private Optional<Tag> tag;
 
     /**
      * Creates a FilterCommand, filtering for the given {@code tag}
-     * @param tag
+     * @param tag Tag to be filtered for in the list of contacts.
      */
     public FilterCommand(String tag) {
         requireAllNonNull(tag);
