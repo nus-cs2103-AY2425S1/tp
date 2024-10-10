@@ -3,6 +3,7 @@ package tuteez.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static tuteez.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static tuteez.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tuteez.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tuteez.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -19,6 +20,7 @@ import tuteez.model.ModelManager;
 import tuteez.model.UserPrefs;
 import tuteez.model.person.Name;
 import tuteez.model.person.Person;
+import tuteez.testutil.PersonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -78,6 +80,31 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_validName_success() {
+        Person personAdded = new PersonBuilder().withName(VALID_NAME_AMY).build();
+        model.addPerson(personAdded);
+        Name targetName = personAdded.getName();
+        Person personToDelete = model.findPersonByName(targetName);
+        DeleteCommand deleteCommand = new DeleteCommand(targetName);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                Messages.format(personToDelete));
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deletePerson(personToDelete);
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_invalidName_throwsCommandException() {
+        Person personAdded = new PersonBuilder().withName(VALID_NAME_AMY).build();
+        model.addPerson(personAdded);
+        Name invalidName = new Name("Amyy Beee");
+        DeleteCommand deleteCommand = new DeleteCommand(invalidName);
+        String expectedMessage = String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME,
+                invalidName);
+        assertCommandFailure(deleteCommand, model, expectedMessage);
     }
 
     @Test

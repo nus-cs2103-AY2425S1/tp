@@ -115,10 +115,7 @@ public class ModelManager implements Model {
     @Override
     public Person findPersonByName(Name targetName) {
         requireNonNull(targetName);
-        return addressBook.getPersonList().stream()
-                .filter(person -> person.getName().fullName.equalsIgnoreCase(targetName.fullName))
-                .findFirst()
-                .orElse(null);
+        return addressBook.findPersonByName(targetName);
     }
 
     //=========== Filtered Person List Accessors =============================================================

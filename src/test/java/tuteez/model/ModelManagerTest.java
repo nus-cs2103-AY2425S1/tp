@@ -89,6 +89,12 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void findPersonByName_nameNotInAddressBook_returnsNull() {
+        modelManager.addPerson(ALICE);
+        assertEquals(null, modelManager.findPersonByName(BENSON.getName()));
+    }
+
+    @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
     }
