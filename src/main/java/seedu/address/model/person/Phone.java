@@ -11,7 +11,7 @@ public class Phone {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Invalid phone number format. Enter a valid 8 digit phone number.";
+            "Invalid phone number format. Enter a valid phone number that is more than 3 digits.";
     public static final String VALIDATION_REGEX = "\\d{3,}";
     public final String value;
 
@@ -23,7 +23,7 @@ public class Phone {
     public Phone(String phone) {
 
         requireNonNull(phone);
-        String trimmedPhone = phone.replace(" ", "");
+        String trimmedPhone = phone.replaceAll(" ", "");
         checkArgument(isValidPhone(trimmedPhone), MESSAGE_CONSTRAINTS);
         value = trimmedPhone;
 
