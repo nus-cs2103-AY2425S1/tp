@@ -1,7 +1,5 @@
 package careconnect.model;
 
-import static careconnect.testutil.Assert.assertThrows;
-
 import org.junit.jupiter.api.Test;
 
 import careconnect.testutil.Assert;

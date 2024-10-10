@@ -1,8 +1,6 @@
 package careconnect.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -31,23 +29,28 @@ public class EditPersonDescriptorTest {
         Assertions.assertFalse(CommandTestUtil.DESC_AMY.equals(CommandTestUtil.DESC_BOB));
 
         // different name -> returns false
-        EditPersonDescriptor editedAmy = new EditPersonDescriptorBuilder(CommandTestUtil.DESC_AMY).withName(CommandTestUtil.VALID_NAME_BOB).build();
+        EditPersonDescriptor editedAmy = new EditPersonDescriptorBuilder(CommandTestUtil.DESC_AMY)
+                .withName(CommandTestUtil.VALID_NAME_BOB).build();
         Assertions.assertFalse(CommandTestUtil.DESC_AMY.equals(editedAmy));
 
         // different phone -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(CommandTestUtil.DESC_AMY).withPhone(CommandTestUtil.VALID_PHONE_BOB).build();
+        editedAmy = new EditPersonDescriptorBuilder(CommandTestUtil.DESC_AMY)
+                .withPhone(CommandTestUtil.VALID_PHONE_BOB).build();
         Assertions.assertFalse(CommandTestUtil.DESC_AMY.equals(editedAmy));
 
         // different email -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(CommandTestUtil.DESC_AMY).withEmail(CommandTestUtil.VALID_EMAIL_BOB).build();
+        editedAmy = new EditPersonDescriptorBuilder(CommandTestUtil.DESC_AMY)
+                .withEmail(CommandTestUtil.VALID_EMAIL_BOB).build();
         Assertions.assertFalse(CommandTestUtil.DESC_AMY.equals(editedAmy));
 
         // different address -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(CommandTestUtil.DESC_AMY).withAddress(CommandTestUtil.VALID_ADDRESS_BOB).build();
+        editedAmy = new EditPersonDescriptorBuilder(CommandTestUtil.DESC_AMY)
+                .withAddress(CommandTestUtil.VALID_ADDRESS_BOB).build();
         Assertions.assertFalse(CommandTestUtil.DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(CommandTestUtil.DESC_AMY).withTags(CommandTestUtil.VALID_TAG_HUSBAND).build();
+        editedAmy = new EditPersonDescriptorBuilder(CommandTestUtil.DESC_AMY)
+                .withTags(CommandTestUtil.VALID_TAG_HUSBAND).build();
         Assertions.assertFalse(CommandTestUtil.DESC_AMY.equals(editedAmy));
     }
 

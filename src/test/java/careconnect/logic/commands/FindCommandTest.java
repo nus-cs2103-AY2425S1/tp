@@ -1,14 +1,14 @@
 package careconnect.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static careconnect.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static careconnect.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static careconnect.testutil.TypicalPersons.CARL;
 import static careconnect.testutil.TypicalPersons.ELLE;
 import static careconnect.testutil.TypicalPersons.FIONA;
 import static careconnect.testutil.TypicalPersons.getTypicalAddressBook;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collections;

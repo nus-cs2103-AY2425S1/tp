@@ -1,13 +1,13 @@
 package careconnect.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static careconnect.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static careconnect.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static careconnect.logic.parser.CliSyntax.PREFIX_NAME;
 import static careconnect.logic.parser.CliSyntax.PREFIX_PHONE;
 import static careconnect.logic.parser.CliSyntax.PREFIX_TAG;
 import static careconnect.testutil.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;

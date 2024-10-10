@@ -9,11 +9,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import careconnect.testutil.TypicalPersons;
 import careconnect.commons.core.GuiSettings;
 import careconnect.model.AddressBook;
 import careconnect.model.ReadOnlyAddressBook;
 import careconnect.model.UserPrefs;
+import careconnect.testutil.TypicalPersons;
 
 public class StorageManagerTest {
 

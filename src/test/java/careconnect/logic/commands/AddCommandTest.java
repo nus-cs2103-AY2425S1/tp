@@ -1,11 +1,10 @@
 package careconnect.logic.commands;
-
+import static careconnect.testutil.Assert.assertThrows;
+import static careconnect.testutil.TypicalPersons.ALICE;
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static careconnect.testutil.Assert.assertThrows;
-import static careconnect.testutil.TypicalPersons.ALICE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -14,7 +13,6 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
-import javafx.collections.ObservableList;
 import careconnect.commons.core.GuiSettings;
 import careconnect.logic.Messages;
 import careconnect.logic.commands.exceptions.CommandException;
@@ -24,6 +22,7 @@ import careconnect.model.ReadOnlyAddressBook;
 import careconnect.model.ReadOnlyUserPrefs;
 import careconnect.model.person.Person;
 import careconnect.testutil.PersonBuilder;
+import javafx.collections.ObservableList;
 
 public class AddCommandTest {
 

@@ -1,10 +1,10 @@
 package careconnect.logic.parser;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static careconnect.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static careconnect.testutil.Assert.assertThrows;
 import static careconnect.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collections;

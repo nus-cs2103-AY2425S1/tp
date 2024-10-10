@@ -1,18 +1,17 @@
 package careconnect.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static careconnect.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.junit.jupiter.api.Test;
 
-import careconnect.testutil.Assert;
-import careconnect.testutil.TypicalPersons;
 import careconnect.commons.exceptions.IllegalValueException;
 import careconnect.commons.util.JsonUtil;
 import careconnect.model.AddressBook;
+import careconnect.testutil.Assert;
+import careconnect.testutil.TypicalPersons;
 
 public class JsonSerializableAddressBookTest {
 

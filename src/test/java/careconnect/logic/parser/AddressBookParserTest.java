@@ -1,11 +1,11 @@
 package careconnect.logic.parser;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static careconnect.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static careconnect.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static careconnect.testutil.Assert.assertThrows;
 import static careconnect.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.List;

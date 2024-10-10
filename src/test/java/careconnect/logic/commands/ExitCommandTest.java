@@ -1,6 +1,5 @@
 package careconnect.logic.commands;
 
-import static careconnect.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static careconnect.logic.commands.ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT;
 
 import org.junit.jupiter.api.Test;

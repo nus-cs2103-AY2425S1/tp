@@ -2,7 +2,6 @@ package careconnect.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static careconnect.testutil.Assert.assertThrows;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -11,11 +10,11 @@ import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import careconnect.testutil.Assert;
-import careconnect.testutil.TypicalPersons;
 import careconnect.commons.exceptions.DataLoadingException;
 import careconnect.model.AddressBook;
 import careconnect.model.ReadOnlyAddressBook;
+import careconnect.testutil.Assert;
+import careconnect.testutil.TypicalPersons;
 
 public class JsonAddressBookStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonAddressBookStorageTest");

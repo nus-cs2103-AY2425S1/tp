@@ -1,9 +1,8 @@
 package careconnect.logic;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static careconnect.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static careconnect.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static careconnect.testutil.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -13,12 +12,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import careconnect.logic.commands.CommandTestUtil;
-import careconnect.testutil.Assert;
-import careconnect.testutil.PersonBuilder;
-import careconnect.testutil.TypicalPersons;
 import careconnect.logic.commands.AddCommand;
 import careconnect.logic.commands.CommandResult;
+import careconnect.logic.commands.CommandTestUtil;
 import careconnect.logic.commands.ListCommand;
 import careconnect.logic.commands.exceptions.CommandException;
 import careconnect.logic.parser.exceptions.ParseException;
@@ -30,6 +26,9 @@ import careconnect.model.person.Person;
 import careconnect.storage.JsonAddressBookStorage;
 import careconnect.storage.JsonUserPrefsStorage;
 import careconnect.storage.StorageManager;
+import careconnect.testutil.Assert;
+import careconnect.testutil.PersonBuilder;
+import careconnect.testutil.TypicalPersons;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");

@@ -2,7 +2,6 @@ package careconnect.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static careconnect.testutil.Assert.assertThrows;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -12,10 +11,10 @@ import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import careconnect.testutil.Assert;
 import careconnect.commons.core.GuiSettings;
 import careconnect.commons.exceptions.DataLoadingException;
 import careconnect.model.UserPrefs;
+import careconnect.testutil.Assert;
 
 public class JsonUserPrefsStorageTest {
 

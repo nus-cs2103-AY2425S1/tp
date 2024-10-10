@@ -1,8 +1,6 @@
 package careconnect.storage;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static careconnect.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
-import static careconnect.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,13 +9,13 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import careconnect.testutil.Assert;
-import careconnect.testutil.TypicalPersons;
 import careconnect.commons.exceptions.IllegalValueException;
 import careconnect.model.person.Address;
 import careconnect.model.person.Email;
 import careconnect.model.person.Name;
 import careconnect.model.person.Phone;
+import careconnect.testutil.Assert;
+import careconnect.testutil.TypicalPersons;
 
 public class JsonAdaptedPersonTest {
     private static final String INVALID_NAME = "R@chel";

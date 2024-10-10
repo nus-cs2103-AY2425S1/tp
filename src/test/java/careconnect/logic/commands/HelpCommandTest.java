@@ -1,6 +1,5 @@
 package careconnect.logic.commands;
 
-import static careconnect.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static careconnect.logic.commands.HelpCommand.SHOWING_HELP_MESSAGE;
 
 import org.junit.jupiter.api.Test;
