@@ -90,7 +90,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
         }
         final Email modelEmail = new Email(email);
-        
+
         final TelegramHandle modelTelegramHandle = new TelegramHandle("");
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
