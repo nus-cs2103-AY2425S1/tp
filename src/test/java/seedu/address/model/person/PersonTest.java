@@ -12,9 +12,15 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.PersonBuilder;
+
+
+
 
 public class PersonTest {
 
@@ -91,9 +97,31 @@ public class PersonTest {
     }
 
     @Test
+    public void hasUpcomingAppointment() {
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+
+        // Person with future appointment
+        Person personWithFutureAppointment = new PersonBuilder()
+                .withSchedule(now.plusDays(1).format(formatter)).build();
+        assertTrue(personWithFutureAppointment.hasUpcomingAppointment(now));
+
+        // Person with past appointment
+        Person personWithPastAppointment = new PersonBuilder()
+                .withSchedule(now.minusDays(1).format(formatter)).build();
+        assertFalse(personWithPastAppointment.hasUpcomingAppointment(now));
+
+        // Person with no appointment
+        Person personWithNoAppointment = new PersonBuilder()
+                .withSchedule("").build();
+        assertFalse(personWithNoAppointment.hasUpcomingAppointment(now));
+    }
+
+    @Test
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + "}";
+                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", schedule="
+                + ALICE.getSchedule() + ", reminder=" + ALICE.getReminder() + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

@@ -2,6 +2,8 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -23,17 +25,22 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final Schedule schedule;
+    private final Reminder reminder;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Schedule schedule,
+                  Reminder reminder, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, schedule, reminder, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.schedule = schedule;
+        this.reminder = reminder;
         this.tags.addAll(tags);
     }
 
@@ -51,6 +58,12 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+    public Schedule getSchedule() {
+        return schedule;
+    }
+    public Reminder getReminder() {
+        return reminder;
     }
 
     /**
@@ -72,6 +85,21 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    /**
+     * Returns true if the person has an upcoming appointment after the given datetime.
+     *
+     * @param now The current datetime to compare against.
+     * @return true if the person has an upcoming appointment, false otherwise.
+     */
+    public boolean hasUpcomingAppointment(LocalDateTime now) {
+        if (schedule == null || schedule.dateTime.isEmpty()) {
+            return false;
+        }
+        LocalDateTime appointmentDateTime = LocalDateTime.parse(schedule.dateTime,
+                DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+        return appointmentDateTime.isAfter(now);
     }
 
     /**
@@ -110,6 +138,8 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("schedule", schedule)
+                .add("reminder", reminder)
                 .add("tags", tags)
                 .toString();
     }
