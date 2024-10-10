@@ -82,9 +82,9 @@ public class FindCommandTest {
         assertEquals(expected, findCommand.toString());
     }
 
-    /**
-     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
-     */
+    // /**
+    //  * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
+    //  */
     // private NameContainsKeywordsPredicate preparePredicate(String userInput) {
     //     return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     // }
