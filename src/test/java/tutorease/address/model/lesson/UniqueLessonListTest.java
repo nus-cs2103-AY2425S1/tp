@@ -63,9 +63,9 @@ public class UniqueLessonListTest {
     }
     @Test
     public void isValidIndex() {
-        assertTrue(uniqueLessonList.isValidIndex(1));
-        assertFalse(uniqueLessonList.isValidIndex(0));
+        assertTrue(uniqueLessonList.isValidIndex(0));
         assertFalse(uniqueLessonList.isValidIndex(-1));
+        assertFalse(uniqueLessonList.isValidIndex(-2));
     }
     @Test
     public void lessonsAreUnique() {
