@@ -13,6 +13,10 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.TelegramUsername;
+import seedu.address.model.role.Role;
+import seedu.address.model.role.RoleHandler;
+import seedu.address.model.role.exceptions.InvalidRoleException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -81,6 +85,26 @@ public class ParserUtil {
     }
 
     /**
+     * Parses the given {@code String telegramUsername} and returns a {@code TelegramUsername} object.
+     * Leading and trailing spaces will be trimmed.
+     *
+     * @param telegramUsername The username string to be parsed. Can be {@code null}.
+     * @return A {@code TelegramUsername} object with the trimmed username.
+     * @throws ParseException if the provided {@code telegramUsername} is invalid according to the
+     *         {@code TelegramUsername#isValidUsername(String)} method.
+     */
+    public static TelegramUsername parseTele(String telegramUsername) throws ParseException {
+        if (telegramUsername == null) {
+            return new TelegramUsername(telegramUsername);
+        }
+        String trimmedTelegramUsername = telegramUsername.trim();
+        if (!TelegramUsername.isValidUsername(trimmedTelegramUsername)) {
+            throw new ParseException(TelegramUsername.MESSAGE_CONSTRAINTS);
+        }
+        return new TelegramUsername(trimmedTelegramUsername);
+    }
+
+    /**
      * Parses a {@code String email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -120,5 +144,23 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String role} into a {@code Role}.
+     */
+    public static Role parseRole(String role) throws ParseException {
+        requireNonNull(role);
+        RoleHandler rh = new RoleHandler();
+        String trimmedRole = role.trim();
+        if (!RoleHandler.isValidRoleName(trimmedRole)) {
+            throw new ParseException(RoleHandler.MESSAGE_CONSTRAINTS);
+        }
+
+        try {
+            return rh.getRole(role);
+        } catch (InvalidRoleException e) {
+            throw new ParseException(RoleHandler.MESSAGE_CONSTRAINTS);
+        }
     }
 }

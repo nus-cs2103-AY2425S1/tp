@@ -261,43 +261,84 @@ _{Explain here how the data archiving feature will be implemented}_
 ### Product scope
 
 **Target user profile**:
-
-* has a need to manage a significant number of contacts
+Student event planners at NUS who:
+* need to manage contacts like attendees, vendors, sponsors and volunteers for their events.
+* need a centralized platform to organize, track and access contact information and details of event
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: For student planners who need a seamless way to manage contacts, our address book provides a centralized platform to organize, track, and access the contact information and details of attendees, vendors, sponsors and volunteers, thus enabling effortless coordination of logistics and ensures smooth communication for every event
+
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                                                                                | I want to …​                                                             | So that I can…​                                                                                                          |
+|----------|--------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
+| `* * *`  | Student Event Planner who handles contact information of many people                                   | Add contact details of event attendees, vendors, sponsors and volunteers | Store their contact details and have a platform to view the contact information of the relevant parties all in one place |
+| `* * *`  | Student event planner who can type fast and prefer typing over other means of input                    | Perform the functions of the app solely by typing                        | Speed up the process of accessing and managing information                                                               |
+| `* * *`  | Student Event Planner                                                                                  | delete a person                                                          | Keep my contacts up-to-date                                                                                              |
+| `* * *`  | Student Event Planner                                                                                  | View the list of all contacts and number of contacts                     | quickly get an overview of contact information of all attendees, vendors, sponsors and volunteer saved so far            |
+| `* *`    | Student event planner who has to contact vendors, sponsors, attendees and volunteers via various means | Save their name, phone number, email address, telegram handle, address   | Save their name, phone number, email address, telegram handle, address                                                   |
+| `* *`    | Student event planner                                                                                  | Update contact details of attendees, vendors, sponsors and volunteers    | keep their most current information or rectify a mistake                                                                 |
+| `* *`    | Student event planner who needs to contact different stakeholders of an event                          | View list of contacts by categories                                      | Zoom in on contacts of a particular category that interest me                                                            |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `PlanPal` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**UC01: Add a contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User specifies the command that they want to add a new user
+2.  User specifies the information of the user they want to add
+3.  PlanPal shows a success message
+4.  PlanPal shows the new User Object that has been created
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Tagging a contact with a role
+  * 1a1. User specifies what role the contact belongs to
+    Use case resumes from 3.
+
+    Use case ends.
+  
+
+* 1b. Adding Telegram Contact
+  * 1b1. User specifies the Telegram username that the contact belongs to
+  
+  * Use case resumes from 3.
+
+**UC02: Listing Contacts**
+
+**MSS**
+1. User specifies a command to request to list persons
+2. PlanPal shows the list of all contacts
+   Use case ends.
+
+**Extensions:**
+* 2a PlanPal detects error in process to list user
+  * 2a1 PlanPal shows an error message that the command was called wrongly.
+    
+    Use case ends.
+
+
+**UC03: Delete a contact**
+
+**MSS**
+
+1.  User requests to list persons(UC02)
+2.  User requests to delete a specific person in the list
+3.  AddressBook deletes the person
 
     Use case ends.
 
@@ -307,19 +348,47 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 3a.  PlanPal detects that the command given is invalid
 
     * 3a1. AddressBook shows an error message.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**UC04 List Contacts by Role**
+
+**MSS**
+1. User requests to list contacts by role.
+2. PlanPal shows the contacts grouped by their assigned role (attendee, vendor, volunteer, sponsor).
+
+**Extensions**
+* 1a. PlanPal detects that the command given is invalid
+    * 1a1. AddressBook shows an error message.
+    
+        Use case resumes at step 1.
+
+
+* 2a. No contacts are found for the requested role.
+    * 2a1. PlanPal shows a message: "No contacts found for the specified role."
+    
+        Use case ends.
+
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Operation of PlanPal must be done through CLI
+2. PlanPal should not have multiple users on a shared computer
+3. PlanPal should only support a single user
+4. PlanPal data should be stored locally
+5. PlanPal should not rely on external database
+6. PlanPal should work on Windows, Linux and OS-X systems
+7. PlanPal should not depend on a remote server
+8. Third party frameworks/libraries/services used must be
+9. Free, open source and have permissive licence terms
+10. Do not require installation by user
+11. Do not violate other constraints
+12. PlanPal should work well for standard screen resolutions 1920x1080 and higher and for screen scales 150%
+13. PlanPal should be packaged into a single JAR file
+14. JAR file should not be above 100MB
 
 *{More to be added}*
 
@@ -327,6 +396,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **PlanPal**: A software system designed to manage contact information specifically for student event planners, supporting functions like adding, updating, and deleting contacts, with data stored locally.
+* **CLI (Command Line Interface)**: A text-based user interface where the user interacts with the system by typing commands.
+* **Contact**: An individual or entity whose information is stored in PlanPal, typically including name, phone number, email, address, role, and optionally a Telegram handle.
+* **Role**: A category assigned to a contact to indicate their relationship to an event, such as "attendee," "vendor," "volunteer," or "sponsor".
+* **Tag**: A label that is applied to a contact to categorize them (e.g., as an attendee, vendor, volunteer, or sponsor) for easy organization and filtering.
+* **Telegram Handle**: A unique username used on the Telegram messaging platform, which can be optionally stored as part of a contact's information in PlanPal.
+* **User Object**: The data structure in PlanPal that holds the information of a contact, including details like name, phone number, email, address, role, and Telegram handle.
+* **Single User**: PlanPal is designed to support only one user per system. It is not intended for multiple users on the same computer.
+* **Local Storage**: PlanPal stores all contact data on the user's local machine, without relying on external databases or cloud storage.
+* **Standard** Screen Resolution: PlanPal is optimized for display on screens with a resolution of 1920x1080 or higher, and it supports screen scaling up to 150% for better visibility on high-resolution displays.
+* **JAR File**: A Java Archive file that contains all the compiled code, libraries, and resources required for PlanPal to run.
+* **Index**: A numerical identifier used to specify a contact in a list for actions like deletion or updating. The index corresponds to the contact's position in the displayed list.
 
 --------------------------------------------------------------------------------------------------------------------
 
