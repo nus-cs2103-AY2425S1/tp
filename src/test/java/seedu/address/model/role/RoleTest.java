@@ -1,14 +1,12 @@
 package seedu.address.model.role;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
-
-
 
 import seedu.address.model.person.Person;
 
