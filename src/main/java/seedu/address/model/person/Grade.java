@@ -44,11 +44,11 @@ public class Grade {
      * Returns true if the given grade value is valid.
      * The grade must be a numeric value between 0 and 100.
      *
-     * @param grade The grade value to check.
+     * @param score The grade value to check.
      * @return true if the grade is between 0 and 100, false otherwise.
      */
-    public static boolean isValidGrade(double grade) {
-        return grade >= 0 && grade <= 100;
+    public static boolean isValidGrade(float score) {
+        return Float.compare(score, 0.0f) >= 0 && Float.compare(score, 100.0f) <= 0;
     }
 
     /**
@@ -72,7 +72,7 @@ public class Grade {
      * @return true if the weightage is between 0 (exclusive) and 1 (inclusive), false otherwise.
      */
     public static boolean isValidWeightage(float weightage) {
-        return weightage > 0 && weightage <= 100;
+        return Float.compare(weightage, 0.0f) > 0 && Float.compare(weightage, 100.0f) <= 0;
     }
 
     @Override
