@@ -49,4 +49,22 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Formats the {@code person} for deletion.
+     */
+    public static String formatForDeletion(Person person) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("Name: ").append(person.getName())
+                .append("\nPhone: ").append(person.getPhone())
+                .append("\nEmail: ").append(person.getEmail())
+                .append("\nAddress: ").append(person.getAddress());
+        return builder.toString();
+    }
+
+    /**
+     * Returns the deletion message of {@code person}.
+     */
+    public static String getDeletionMessage(Person person) {
+        return "Deleted Person:\n" + formatForDeletion(person);
+    }
 }
