@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.company.Company;
 import seedu.address.model.job.Job;
 import seedu.address.model.person.Person;
 
@@ -21,18 +22,22 @@ import seedu.address.model.person.Person;
 class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_COMPANY = "Company list contains duplicate companies";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedJob> jobs = new ArrayList<>();
-
+    private final List<JsonAdaptedCompany> companies = new ArrayList<>();
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given persons.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
-            @JsonProperty("jobs") List<JsonAdaptedJob> jobs) {
+    public JsonSerializableAddressBook(
+            @JsonProperty("persons") List<JsonAdaptedPerson> persons,
+            @JsonProperty("jobs") List<JsonAdaptedJob> jobs,
+            @JsonProperty("companies") List<JsonAdaptedCompany> companies) {
         this.persons.addAll(persons);
         this.jobs.addAll(jobs);
+        this.companies.addAll(companies);
     }
 
     /**
@@ -50,6 +55,11 @@ class JsonSerializableAddressBook {
                 .getJobList()
                 .stream()
                 .map(JsonAdaptedJob::new)
+                .collect(Collectors.toList()));
+        companies.addAll(source
+                .getCompanyList()
+                .stream()
+                .map(JsonAdaptedCompany::new)
                 .collect(Collectors.toList()));
     }
 
@@ -73,6 +83,15 @@ class JsonSerializableAddressBook {
             // TODO: Duplicate job invalidation
             addressBook.addJob(job);
         }
+
+        for (JsonAdaptedCompany jsonAdaptedCompany : companies) {
+            Company company = jsonAdaptedCompany.toModelType();
+            if (addressBook.hasCompany(company)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_COMPANY);
+            }
+            addressBook.addCompany(company);
+        }
+
         return addressBook;
     }
 
