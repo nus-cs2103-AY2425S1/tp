@@ -67,7 +67,7 @@ public class Nric {
 
         // Adjust the sum based on the type of NRIC (S/F or T/G)
         if (firstChar == 'T' || firstChar == 'G') {
-            sum += 4;  // T/G NRICs have an additional offset of 4
+            sum += 4; // T/G NRICs have an additional offset of 4
         }
 
         // Calculate the remainder
