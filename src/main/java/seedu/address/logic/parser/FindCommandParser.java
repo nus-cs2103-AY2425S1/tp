@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindNameCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.student.NameContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindNameCommand object

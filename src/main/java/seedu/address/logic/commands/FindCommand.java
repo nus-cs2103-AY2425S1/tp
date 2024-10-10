@@ -7,7 +7,7 @@ import java.util.function.Predicate;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 
 /**
  * Finds and lists all persons in address book whose attribute satisfies the given predicate.
@@ -22,9 +22,9 @@ public abstract class FindCommand extends Command {
             + "Parameters: PREFIX/KEYWORD [PREFIX/MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " n/alice n/bob";
 
-    protected final Predicate<Person> predicate;
+    protected final Predicate<Student> predicate;
 
-    public FindCommand(Predicate<Person> predicate) {
+    public FindCommand(Predicate<Student> predicate) {
         this.predicate = predicate;
     }
 
