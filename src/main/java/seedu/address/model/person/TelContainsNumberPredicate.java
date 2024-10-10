@@ -37,6 +37,7 @@ public class TelContainsNumberPredicate implements Predicate<Person> {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("search telephone number", searchTel).toString();
+        return new ToStringBuilder(this).add("search telephone number",
+                searchTel).toString();
     }
 }
