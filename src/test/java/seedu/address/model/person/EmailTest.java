@@ -20,6 +20,12 @@ public class EmailTest {
     }
 
     @Test
+    public void constructor_invalidLengthEmail_throwsIllegalArgumentException() {
+        String invalidEmail = "this.email.is.definitely.too.long.for.our.requirements@example.com";
+        assertThrows(IllegalArgumentException.class, () -> new Email(invalidEmail));
+    }
+
+    @Test
     public void isValidEmail() {
         // null email
         assertThrows(NullPointerException.class, () -> Email.isValidEmail(null));
@@ -67,18 +73,14 @@ public class EmailTest {
     }
 
     @Test
-    public void constructor_invalidLengthEmail_throwsIllegalArgumentException() {
-        // invalid parts
-        assertFalse(Email.isValidLengthEmail("a_long_email_address_that_exceeds_fifty_characters@example.com"));
-        // long email
-        assertFalse(Email.isValidLengthEmail(" a_long_email_address_that_exceeds_fifty_characters@example.com"));
-        // long email
+    public void isValidLengthEmail() {
+        // valid length
+        assertTrue(Email.isValidLengthEmail("rachel@example.com")); // within limit
+        assertTrue(Email.isValidLengthEmail("this.email@long.com")); // just below limit
 
-        // valid email
-        assertTrue(Email.isValidLengthEmail("PeterJack_1190@example.com")); // valid length email
-        assertTrue(Email.isValidLengthEmail("grapesoda@example.com")); // valid length email
-        assertTrue(Email.isValidLengthEmail("sun@example.com")); // valid length email
-
+        // invalid length
+        assertFalse(Email.isValidLengthEmail("this.email.is.definitely.too.long.for.our.requirements@example.com"));
+        assertFalse(Email.isValidLengthEmail("rachel@examplecom ")); // space included
     }
 
     @Test
