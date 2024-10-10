@@ -10,13 +10,12 @@ public class GradeLevel {
     public final String value;
 
     public static final String MESSAGE_CONSTRAINTS =
-    "Grade level should only contain alphanumeric characters and spaces, school level (e.g. Primary, Secondary) and grade level should be separated with a space."
+    "Grade level should only contain alphanumeric characters and spaces, exam board (e.g. ABRSM, Trinity) and grade level should be separated with a space."
         + "Grade level should not exceed 50 characters, and grade should be an integer between 1 and 12";
 
     public GradeLevel(String schoolLevel, int grade) {
         this.schoolLevel = schoolLevel;
         this.grade = grade;
-
         this.value = schoolLevel + " " + grade;
     }
 

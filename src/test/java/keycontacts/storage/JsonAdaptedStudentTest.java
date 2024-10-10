@@ -16,6 +16,7 @@ import keycontacts.model.student.Address;
 import keycontacts.model.student.Email;
 import keycontacts.model.student.Name;
 import keycontacts.model.student.Phone;
+import keycontacts.storage.JsonAdaptedStudent;
 
 public class JsonAdaptedStudentTest {
     private static final String INVALID_NAME = "R@chel";
