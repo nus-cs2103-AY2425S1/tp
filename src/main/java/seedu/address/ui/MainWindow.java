@@ -29,6 +29,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private Stage primaryStage;
     private Logic logic;
+    private PersonDetailsWindow personDetailsWindow;
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
@@ -176,6 +177,8 @@ public class MainWindow extends UiPart<Stage> {
         importWindow.hide();
         helpWindow.hide();
         primaryStage.hide();
+        personDetailsWindow.hide();
+
     }
 
     public PersonListPanel getPersonListPanel() {
