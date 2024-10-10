@@ -20,6 +20,7 @@
     <Scene>
       <stylesheets>
         <URL value="@DarkTheme.css" />
+        <URL value="@PersonListCard.css" />
         <URL value="@Extensions.css" />
       </stylesheets>
 

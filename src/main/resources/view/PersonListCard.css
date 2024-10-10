@@ -1,0 +1,59 @@
+#cardPane {
+    -fx-background-color: #2C3531; /* Dark Green */
+    -fx-border-color: #116466; /* Teal border */
+    -fx-border-radius: 5px;
+    -fx-padding: 10;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(gaussian, #000000, 10, 0, 2, 2);
+}
+
+/* Label for big text (ID and Name) */
+.cell_big_label {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 16pt;
+    -fx-text-fill: #D9B08C; /* Beige text */
+}
+
+/* Label for smaller text (Phone, Address, Email) */
+.cell_small_label {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 12pt;
+    -fx-text-fill: #D9B08C; /* Beige */
+}
+
+/* Styling for the FlowPane that contains tags */
+#tags {
+    -fx-hgap: 5;
+    -fx-vgap: 5;
+    -fx-padding: 5;
+}
+
+
+/* HBox for aligning ID and Name */
+HBox {
+    -fx-padding: 0;
+    -fx-spacing: 5;
+    -fx-alignment: center-left;
+}
+
+/* VBox inside the GridPane for overall content alignment */
+VBox {
+    -fx-spacing: 8;
+    -fx-padding: 10;
+    -fx-alignment: center-left;
+    -fx-background-color: transparent;
+}
+
+/* Ensure Label inside HBox maintains preferred width */
+HBox > .label {
+
+    -fx-max-width: 1000px; /* Allow maximum expansion */
+}
+
+/* GridPane overall settings */
+GridPane {
+    -fx-padding: 10;
+    -fx-hgap: 10;
+    -fx-vgap: 10;
+    -fx-background-color: transparent;
+}

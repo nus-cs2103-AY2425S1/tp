@@ -24,7 +24,7 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-
+    private final Remark remark;
     /**
      * Every field must be present and not null.
      */
@@ -34,11 +34,28 @@ public class Person {
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.remark = Remark.EMPTY_REMARK;
+        this.tags.addAll(tags);
+    }
+    /**
+     * Every field must be present and not null. with non-empty remark
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Remark remark, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.remark = remark;
         this.tags.addAll(tags);
     }
 
     public Name getName() {
         return name;
+    }
+
+    public String getFullName() {
+        return this.getName().getFullName();
     }
 
     public Phone getPhone() {
@@ -59,6 +76,10 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public Remark getRemark() {
+        return this.remark;
     }
 
     /**
@@ -94,13 +115,14 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && remark.equals(otherPerson.remark);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, remark);
     }
 
     @Override
@@ -111,6 +133,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("remark", remark)
                 .toString();
     }
 
