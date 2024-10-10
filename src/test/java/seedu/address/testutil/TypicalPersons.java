@@ -47,21 +47,21 @@ public class TypicalPersons {
             .withEmail("werner@example.com").withAddress("michegan ave")
             .withIncome(20)
             .withRemark(EMPTY_REMARK).build();
-    public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
+    public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("94824271")
             .withEmail("lydia@example.com").withAddress("little tokyo")
             .withIncome(45)
             .withRemark("Rich japanese person").build();
-    public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
+    public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("94823442")
             .withEmail("anna@example.com").withAddress("4th street")
             .withIncome(50)
             .withRemark(EMPTY_REMARK).build();
 
     // Manually added
-    public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
+    public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("84824234")
             .withEmail("stefan@example.com").withAddress("little india")
             .withIncome(40)
             .withRemark(EMPTY_REMARK).build();
-    public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
+    public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("84822131")
             .withEmail("hans@example.com").withAddress("chicago ave")
             .withIncome(50)
             .withRemark(EMPTY_REMARK).build();
