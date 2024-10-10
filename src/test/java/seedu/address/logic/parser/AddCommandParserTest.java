@@ -4,9 +4,11 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_DOMINIC;
+import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_ERIC;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_DOMINIC;
+import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_ERIC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
@@ -16,9 +18,11 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_DOMINIC;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_ERIC;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_DOMINIC;
+import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_ERIC;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
@@ -38,6 +42,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.DOMINIC;
+import static seedu.address.testutil.TypicalPersons.ERIC;
 
 import org.junit.jupiter.api.Test;
 
@@ -153,6 +158,14 @@ public class AddCommandParserTest {
         // no phone number tag
         assertParseSuccess(parser, NAME_DESC_DOMINIC + EMAIL_DESC_DOMINIC + ADDRESS_DESC_DOMINIC,
                 new AddCommand(expectedPersonBlankPhone));
+        // blank email address
+        Person expectedPersonBlankEmail = new PersonBuilder(ERIC).withTags().build();
+        assertParseSuccess(parser, NAME_DESC_ERIC + PHONE_DESC_ERIC + EMAIL_DESC_ERIC
+                + ADDRESS_DESC_ERIC, new AddCommand(expectedPersonBlankEmail));
+
+        // no email address tag
+        assertParseSuccess(parser, NAME_DESC_ERIC + PHONE_DESC_ERIC + ADDRESS_DESC_ERIC,
+                new AddCommand(expectedPersonBlankEmail));
     }
 
     @Test
@@ -161,10 +174,6 @@ public class AddCommandParserTest {
 
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
-                expectedMessage);
-
-        // missing email prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB,
                 expectedMessage);
 
         // missing address prefix
