@@ -119,7 +119,7 @@ class JsonAdaptedStudent {
         }
 
         final GradeLevel modelGradeLevel = new GradeLevel(gradeLevel);
-      
+
         final RegularLesson modelRegularLesson;
         if (regularLesson != null) {
             modelRegularLesson = regularLesson.toModelType();
@@ -127,7 +127,8 @@ class JsonAdaptedStudent {
             modelRegularLesson = null;
         }
 
-        return new Student(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelGradeLevel, modelRegularLesson);
+        return new Student(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelGradeLevel,
+            modelRegularLesson);
     }
 
 }

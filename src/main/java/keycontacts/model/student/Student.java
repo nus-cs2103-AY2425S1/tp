@@ -89,6 +89,7 @@ public class Student {
 
     public GradeLevel getGradeLevel() {
         return gradeLevel;
+    }
 
     public Optional<RegularLesson> getRegularLesson() {
         return Optional.ofNullable(regularLesson);
@@ -118,16 +119,17 @@ public class Student {
         Email updatedEmail = editStudentDescriptor.getEmail().orElse(email);
         Address updatedAddress = editStudentDescriptor.getAddress().orElse(address);
         Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(tags);
-        GradeLevel gradeLevel = editStudentDescriptor.getGradeLevel().orElse(gradeLevel);
+        GradeLevel gradeLevel = editStudentDescriptor.getGradeLevel().orElse(this.gradeLevel);
 
-        return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, gradeLevel, regularLesson);
+        return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, gradeLevel,
+            regularLesson);
     }
 
     /**
      * Creates and returns a new {@code Student} with the updated {@code regularLesson}.
      */
     public Student withRegularLesson(RegularLesson regularLesson) {
-        return new Student(name, phone, email, address, tags, regularLesson);
+        return new Student(name, phone, email, address, tags, gradeLevel, regularLesson);
     }
 
     /**
@@ -164,7 +166,7 @@ public class Student {
                 && email.equals(otherStudent.email)
                 && address.equals(otherStudent.address)
                 && tags.equals(otherStudent.tags)
-                && gradeLevel.equals(otherStudent.gradeLevel);
+                && gradeLevel.equals(otherStudent.gradeLevel)
                 && getRegularLesson().equals(otherStudent.getRegularLesson());
     }
 
