@@ -1,59 +1,63 @@
 ---
-layout: page
-title: About Us
+  layout: default.md
+  title: "About Us"
 ---
 
-We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
+# About Us
+
+We are a team working on our CS2103T Team Project, based in the
+[School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
 You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Boon Hsuan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/flyingdonkeys.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[homepage](https://tuition-production.up.railway.app/)]
+[[github](https://github.com/FlyingDonkeys)]
+[[portfolio](team/boonhsuan.md)]
 
 * Role: Project Advisor
+* Responsibilities: Code stuff
 
-### Jane Doe
+### Zee
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/zeepheru.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/zeepheru)]
+[[portfolio](team/zee.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Team Lead, Developer
+* Responsibilities: Art
 
-### Johnny Doe
+### Chong Yi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/accountexeregister.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/accountexeregister)] [[portfolio](team/chongyi.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Coding
 
-### James Doe
+### Maximus Tan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/miloaisdino.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/miloaisdino)]
+[[portfolio](team/maximus.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Coding
+
+### Divya Lath
+
+<img src="images/devivy.png" width="200px">
+
+[[github](http://github.com/devivy)]
+[[portfolio](team/divya.md)]
+
+* Role: Developer
+* Responsibilities: backend, UI
