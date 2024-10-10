@@ -21,14 +21,14 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_HOURS = "0";
+    public static final String DEFAULT_HOURS = "10";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
-    private Set<Tag> tags;
     private Hours hours;
+    private Set<Tag> tags;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -38,6 +38,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        hours = new Hours(DEFAULT_HOURS);
         tags = new HashSet<>();
     }
 
@@ -49,6 +50,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        hours = personToCopy.getHours();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -89,6 +91,14 @@ public class PersonBuilder {
      */
     public PersonBuilder withEmail(String email) {
         this.email = new Email(email);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Hours} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withHours(String hours) {
+        this.hours = new Hours(hours);
         return this;
     }
 
