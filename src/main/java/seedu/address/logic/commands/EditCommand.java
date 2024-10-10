@@ -58,7 +58,7 @@ public class EditCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com "
             + PREFIX_PROJECT_STATUS + "complete"
-            + PREFIX_PAYMENT_STATUS + "paid";
+            + PREFIX_PAYMENT_STATUS + "paid"
             + PREFIX_CLIENT_STATUS + "active";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
@@ -277,7 +277,7 @@ public class EditCommand extends Command {
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
                     && Objects.equals(projectStatus, otherEditPersonDescriptor.projectStatus)
-                    && Objects.equals(paymentStatus, otherEditPersonDescriptor.paymentStatus);
+                    && Objects.equals(paymentStatus, otherEditPersonDescriptor.paymentStatus)
                     && Objects.equals(clientStatus, otherEditPersonDescriptor.clientStatus);
         }
 
