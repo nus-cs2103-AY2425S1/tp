@@ -17,7 +17,7 @@ import seedu.address.model.person.Person;
  */
 public class MarkAttendanceCommand extends Command {
 
-    public static final String COMMAND_WORD = "attendance";
+    public static final String COMMAND_WORD = "markattend";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the attendance of the student identified "
