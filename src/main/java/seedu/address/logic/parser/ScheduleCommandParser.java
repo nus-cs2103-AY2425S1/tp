@@ -43,14 +43,14 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_LOCATION, PREFIX_START_TIME, PREFIX_END_TIME);
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hhmm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
         String startTimeString = argMultimap.getValue(PREFIX_START_TIME).get();
         LocalDateTime startTime;
         try {
             startTime = LocalDateTime.parse(startTimeString, formatter);
         } catch (DateTimeParseException e) {
-            throw new ParseException("Invalid start time format. Please use the correct format: 'yyyy-MM-dd hhmm'");
+            throw new ParseException("Invalid start time format. Please use the correct format: 'dd-MM-yyyy HH:mm'");
         }
 
         String endTimeString = argMultimap.getValue(PREFIX_END_TIME).get();
@@ -58,7 +58,7 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
         try {
             endTime = LocalDateTime.parse(endTimeString, formatter);
         } catch (DateTimeParseException e) {
-            throw new ParseException("Invalid end time format. Please use the correct format: 'yyyy-MM-dd hhmm'");
+            throw new ParseException("Invalid end time format. Please use the correct format: 'dd-MM-yyyy HH:mm'");
         }
 
         Meeting meeting = ParserUtil.parseMeeting(startTime, endTime,
