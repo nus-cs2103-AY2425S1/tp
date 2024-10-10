@@ -135,6 +135,7 @@ public class Person {
                 .add("job", job)
                 .add("income", income)
                 .add("tags", tags)
+                .add("remark", remark)
                 .toString();
     }
 
