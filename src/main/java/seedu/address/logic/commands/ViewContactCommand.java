@@ -45,8 +45,8 @@ public class ViewContactCommand extends ViewCommand {
             return false;
         }
 
-        ViewContactCommand otherFindCommand = (ViewContactCommand) other;
-        return predicate.equals(otherFindCommand.predicate);
+        ViewContactCommand otherViewContactCommand = (ViewContactCommand) other;
+        return predicate.equals(otherViewContactCommand.predicate);
     }
 
     @Override

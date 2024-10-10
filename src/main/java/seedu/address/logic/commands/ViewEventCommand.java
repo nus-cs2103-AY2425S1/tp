@@ -42,12 +42,12 @@ public class ViewEventCommand extends ViewCommand {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ViewContactCommand)) {
+        if (!(other instanceof ViewEventCommand)) {
             return false;
         }
 
-        ViewEventCommand otherFindCommand = (ViewEventCommand) other;
-        return predicate.equals(otherFindCommand.predicate);
+        ViewEventCommand otherViewEventCommand = (ViewEventCommand) other;
+        return predicate.equals(otherViewEventCommand.predicate);
     }
 
     @Override
