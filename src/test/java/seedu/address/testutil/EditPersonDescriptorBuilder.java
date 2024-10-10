@@ -3,6 +3,8 @@ package seedu.address.testutil;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Income;
+import seedu.address.model.person.Job;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -32,6 +34,8 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
+        descriptor.setJob(person.getJob());
+        descriptor.setIncome(person.getIncome());
         descriptor.setTier(person.getTier());
     }
 
@@ -66,7 +70,21 @@ public class EditPersonDescriptorBuilder {
         descriptor.setAddress(new Address(address));
         return this;
     }
+    /**
+     * Sets the {@code Job} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withJob(String job) {
+        descriptor.setJob(new Job(job));
+        return this;
+    }
 
+    /**
+     * Sets the {@code Income} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withIncome(int income) {
+        descriptor.setIncome(new Income(income));
+        return this;
+    }
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
      * that we are building.

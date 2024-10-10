@@ -7,6 +7,8 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INCOME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_JOB_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIER_REJECT;
@@ -52,6 +54,14 @@ public class EditPersonDescriptorTest {
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
+        // different job -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAddress(VALID_JOB_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different income level -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withIncome(Integer.parseInt(VALID_INCOME_BOB)).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
         // different tags -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTiers(VALID_TIER_REJECT).build();
         assertFalse(DESC_AMY.equals(editedAmy));
@@ -64,7 +74,9 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getName().orElse(null) + ", phone="
                 + editPersonDescriptor.getPhone().orElse(null) + ", email="
                 + editPersonDescriptor.getEmail().orElse(null) + ", address="
-                + editPersonDescriptor.getAddress().orElse(null) + ", tier="
+                + editPersonDescriptor.getAddress().orElse(null) + ", job="
+                + editPersonDescriptor.getJob().orElse(null) + ", income="
+                + editPersonDescriptor.getIncome().orElse(null) + ", tier="
                 + editPersonDescriptor.getTiers().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }

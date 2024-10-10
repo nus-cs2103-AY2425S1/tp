@@ -2,6 +2,8 @@ package seedu.address.testutil;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Income;
+import seedu.address.model.person.Job;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -11,22 +13,27 @@ import seedu.address.model.tier.Tier;
 /**
  * A utility class to help with building Person objects.
  */
+/**
+ * A utility class to help with building Person objects.
+ */
 public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_JOB = "Engineer";
+    public static final int DEFAULT_INCOME = 0;
     public static final String DEFAULT_TIER = "NA";
-
     public static final String DEFAULT_REMARK = "";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
+    private Job job;
+    private Income income;
     private Tier tier;
-
     private Remark remark;
 
     /**
@@ -37,6 +44,8 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        job = new Job(DEFAULT_JOB);
+        income = new Income(DEFAULT_INCOME);
         tier = new Tier(DEFAULT_TIER);
         remark = new Remark(DEFAULT_REMARK);
     }
@@ -49,6 +58,8 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        job = personToCopy.getJob();
+        income = personToCopy.getIncome();
         tier = personToCopy.getTier();
         remark = personToCopy.getRemark();
     }
@@ -78,6 +89,24 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Job} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withJob(String job) {
+        this.job = new Job(job);
+        return this;
+    }
+
+
+    /**
+     * Sets the {@code Income} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withIncome(int income) {
+        this.income = new Income(income);
+        return this;
+    }
+
+
+    /**
      * Sets the {@code Phone} of the {@code Person} that we are building.
      */
     public PersonBuilder withPhone(String phone) {
@@ -102,7 +131,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, tier, remark);
+        return new Person(name, phone, email, address, job, income, tier, remark);
     }
 
 }

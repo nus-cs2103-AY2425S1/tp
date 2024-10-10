@@ -11,6 +11,8 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Income;
+import seedu.address.model.person.Job;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tier.Tier;
@@ -81,6 +83,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String job} into a {@code Job}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code job} is invalid.
+     */
+    public static Job parseJob(String job) throws ParseException {
+        requireNonNull(job);
+        String trimmedJob = job.trim();
+        if (!Job.isValidJob(trimmedJob)) {
+            throw new ParseException(Job.MESSAGE_CONSTRAINTS);
+        }
+        return new Job(trimmedJob);
+    }
+
+    /**
      * Parses a {@code String email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -93,6 +110,21 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String email} into an {@code Income}.
+     * Leading and trailing whitespaces will be trimmed.
+     * The string is parsed into a primitive int.
+     * @throws ParseException if the given {@code email} is invalid.
+     */
+    public static Income parseIncome(String potentialIncome) throws ParseException {
+        requireNonNull(potentialIncome);
+        String trimmedIncome = potentialIncome.trim();
+        if (!(Income.isValidIncome(trimmedIncome))) {
+            throw new ParseException(Income.MESSAGE_CONSTRAINTS);
+        }
+        return new Income(Integer.parseInt(trimmedIncome));
     }
 
     /**
