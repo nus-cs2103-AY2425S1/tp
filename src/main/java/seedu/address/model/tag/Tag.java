@@ -11,8 +11,7 @@ public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
-
-    public String tagName;
+    private String tagName;
 
     /**
      * Constructs a {@code Tag}.
@@ -30,6 +29,10 @@ public class Tag {
      */
     public static boolean isValidTagName(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    public String getTagName() {
+        return tagName;
     }
 
     @Override
