@@ -48,7 +48,7 @@ public class AddressBookParserTest {
     public void parseCommand_createEvent() throws Exception {
         Event partyEvent = new Event(new Name("Party"), new Date("2024-10-10"));
         CreateEventCommand command = (CreateEventCommand) parser
-                .parseCommand("create_event n/Party d/2024-10-10");
+                .parseCommand("create_event n/Party on/2024-10-10");
         assertEquals(new CreateEventCommand(partyEvent), command);
     }
 
