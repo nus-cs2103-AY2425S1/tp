@@ -27,6 +27,9 @@ public class ParserUtilTest {
     private static final String INVALID_LONG_PHONE = "12345678901234567890";
     private static final String INVALID_JOBCODE = " ";
     private static final String INVALID_EMAIL = "example.com";
+    private static final String INVALID_LONG_EMAIL =
+            "this.email.is.definitely.too.long.for.our.requirements@"
+                    + "example.com";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
@@ -158,6 +161,11 @@ public class ParserUtilTest {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+    }
+
+    @Test
+    public void parseEmail_invalidLength_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseEmail(INVALID_LONG_EMAIL));
     }
 
     @Test
