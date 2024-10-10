@@ -45,7 +45,6 @@ public class PersonTest {
         // different nric, all other attributes same -> returns false
         editedAlice = new PersonBuilder(ALICE).withNric(VALID_NRIC_BOB).build();
         assertFalse(ALICE.isSamePerson(editedAlice));
-        
     }
 
     @Test
