@@ -22,7 +22,7 @@ public class AddGradeCommandParserTest {
         String userInput = NAME_DESC_AMY + ASSIGNMENT_DESC_ONE + SCORE_DESC;
         AddGradeCommand expectedCommand = new AddGradeCommand(
                 VALID_NAME_AMY,
-                Float.parseFloat(VALID_SCORE),
+                VALID_SCORE,
                 VALID_ASSIGNMENT_ONE);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

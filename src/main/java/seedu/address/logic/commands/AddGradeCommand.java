@@ -74,7 +74,7 @@ public class AddGradeCommand extends Command {
         Assignment assignment =
                 new Assignment(assignmentName, score);
 
-        return new Person(name, phone, email, github, address, tags, telegram, assignment);
+        return new Person(name, phone, email, address, telegram, tags, github, assignment);
     }
 
     @Override
