@@ -364,7 +364,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to find a student by name.
 2. TAHub displays a list of students whose names contain the input string as a prefix.
 3. Use case ends.
-  
+
 **Extensions:**
 
 * 2a. The list is empty.
@@ -403,7 +403,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. TAHub verifies the given index.
 3. TAHub deletes the student at the index in the list.
 4. Use case ends.
-    
+
 **Extensions:**
 
 * 2a. The given index is invalid.
