@@ -6,4 +6,5 @@ package seedu.address.model;
 public interface ReadOnlyHireMe {
 
     //ObservableList<InternshipApplication> getInternshipList();
+
 }
