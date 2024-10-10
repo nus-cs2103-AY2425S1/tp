@@ -1,6 +1,6 @@
 package seedu.address.model.order;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.HashMap;
 
@@ -16,7 +16,7 @@ class OrderTest {
     }
 
     @Test
-    void hashCode_Order_orderCanBeHashed() {
+    void hashCode_order_orderCanBeHashed() {
         HashMap<Order, Integer> m = new HashMap<>();
 
         m.put(Order.of("Cake"), 2);
