@@ -1,4 +1,4 @@
-package seedu.address.model.event;
+package seedu.address.model.volunteer;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
@@ -19,7 +19,7 @@ public class Time {
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "\\d{2}:\\d{2}";
+    public static final String VALIDATION_REGEX = "\\d{2}:\\d{2}]";
 
     public final LocalTime eventTime;
 
@@ -66,5 +66,7 @@ public class Time {
     public int hashCode() {
         return eventTime.hashCode();
     }
+
+
 
 }

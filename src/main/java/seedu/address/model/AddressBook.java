@@ -10,6 +10,8 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.UniqueEventList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.volunteer.Volunteer;
+import seedu.address.model.volunteer.UniqueVolunteerList;
 
 /**
  * Wraps all data at the address-book level
@@ -18,7 +20,11 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+
+    private final UniqueVolunteerList volunteers;
+
     private final UniqueEventList events;
+
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -29,7 +35,11 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+
+        volunteers = new UniqueVolunteerList();
+
         events = new UniqueEventList();
+
     }
 
     public AddressBook() {}
@@ -50,6 +60,10 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setPersons(List<Person> persons) {
         this.persons.setPersons(persons);
+    }
+
+    public void setVolunteers(List<Volunteer> volunteers) {
+        this.volunteers.setVolunteers(volunteers);
     }
 
     /**
@@ -107,6 +121,43 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+
+    //// volunteer-level operations
+
+    /**
+     * Returns true if a volunteer with the same identity as {@code volunteer} exists in the volunteer book.
+     */
+    public boolean hasVolunteer(Volunteer volunteer) {
+        requireNonNull(volunteer);
+        return volunteers.contains(volunteer);
+    }
+
+    /**
+     * Adds a volunteer to the volunteer book.
+     * The volunteer must not already exist in the volunteer book.
+     */
+    public void addVolunteer(Volunteer v) {
+        volunteers.add(v);
+    }
+
+    /**
+     * Replaces the given volunteer {@code target} in the list with {@code editedVolunteer}.
+     * {@code target} must exist in the volunteer book.
+     * The volunteer identity of {@code editedVolunteer} must not be the same as another existing volunteer in the volunteer book.
+     */
+    public void setVolunteer(Volunteer target, Volunteer editedVolunteer) {
+        requireNonNull(editedVolunteer);
+
+        volunteers.setVolunteer(target, editedVolunteer);
+    }
+
+    /**
+     * Removes {@code key} from this {@code VolunteerBook}.
+     * {@code key} must exist in the volunteer book.
+     */
+    public void removeVolunteer(Volunteer key) {
+        volunteers.remove(key);
+    }
     //// event level operations
 
     /**
@@ -144,6 +195,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeEvent(Event key) {
         events.remove(key);
+
     }
 
     //// util methods
