@@ -27,6 +27,15 @@ public class HelpWindow extends UiPart<Stage> {
     @FXML
     private Label helpMessage;
 
+    // Additional help messages
+    private static final String ADD_PERSON_HELP = "Add a person: Use the command 'add' followed by the details.";
+    private static final String LIST_PERSONS_HELP = "List all persons: Use the command 'list' to view all contacts.";
+    private static final String EDIT_PERSON_HELP = "Edit a person: Use the command 'edit' followed by the person's ID.";
+    private static final String FIND_PERSON_HELP = "Find persons by keywords: Use the command 'find' followed by the name.";
+    private static final String DELETE_PERSON_HELP = "Delete a person: Use the command 'delete' followed by the index.";
+    private static final String CLEAR_ENTRIES_HELP = "Clear all entries: Use the command 'clear' to remove all contacts.";
+    private static final String EXIT_HELP = "Exit the program: Use the command 'exit' to close the application.";
+
     /**
      * Creates a new HelpWindow.
      *
@@ -34,7 +43,7 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-        helpMessage.setText(HELP_MESSAGE);
+        initializeHelpMessage(); // Initialize the help messages
     }
 
     /**
@@ -45,22 +54,24 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
+     * Initializes the help message to display in the help window.
+     */
+    private void initializeHelpMessage() {
+        StringBuilder helpContent = new StringBuilder();
+        helpContent.append(HELP_MESSAGE).append("\n\n");
+        helpContent.append(ADD_PERSON_HELP).append("\n");
+        helpContent.append(LIST_PERSONS_HELP).append("\n");
+        helpContent.append(EDIT_PERSON_HELP).append("\n");
+        helpContent.append(FIND_PERSON_HELP).append("\n");
+        helpContent.append(DELETE_PERSON_HELP).append("\n");
+        helpContent.append(CLEAR_ENTRIES_HELP).append("\n");
+        helpContent.append(EXIT_HELP).append("\n");
+
+        helpMessage.setText(helpContent.toString());
+    }
+
+    /**
      * Shows the help window.
-     * @throws IllegalStateException
-     *     <ul>
-     *         <li>
-     *             if this method is called on a thread other than the JavaFX Application Thread.
-     *         </li>
-     *         <li>
-     *             if this method is called during animation or layout processing.
-     *         </li>
-     *         <li>
-     *             if this method is called on the primary stage.
-     *         </li>
-     *         <li>
-     *             if {@code dialogStage} is already showing.
-     *         </li>
-     *     </ul>
      */
     public void show() {
         logger.fine("Showing help page about the application.");
