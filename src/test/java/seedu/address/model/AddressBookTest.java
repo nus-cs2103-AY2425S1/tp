@@ -21,6 +21,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.product.Product;
 import seedu.address.model.product.exceptions.DuplicateProductException;
+import seedu.address.model.product.exceptions.ProductNotFoundException;
 import seedu.address.model.supplier.Supplier;
 import seedu.address.model.supplier.exceptions.DuplicateSupplierException;
 import seedu.address.testutil.ProductBuilder;
@@ -129,6 +130,77 @@ public class AddressBookTest {
         String expected = AddressBook.class.getCanonicalName() + "{suppliers=" + addressBook.getSupplierList()
             + ", products=" + addressBook.getProductList() + "}";
         assertEquals(expected, addressBook.toString());
+    }
+
+    @Test
+    public void setProduct_nullTargetProduct_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.setProduct(null, APPLE));
+    }
+
+    @Test
+    public void setProduct_nullEditedProduct_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.setProduct(APPLE, null));
+    }
+
+    @Test
+    public void setProduct_editedProductIsSameProduct_success() {
+        addressBook.addProduct(APPLE);
+        addressBook.setProduct(APPLE, APPLE);
+        assertEquals(1, addressBook.getProductList().size());
+        assertTrue(addressBook.hasProduct(APPLE));
+    }
+
+    @Test
+    public void setProduct_editedProductHasSameIdentity_success() {
+        addressBook.addProduct(APPLE);
+        Product editedApple = new ProductBuilder(APPLE).withName("Apple").build();
+        addressBook.setProduct(APPLE, editedApple);
+        assertEquals(1, addressBook.getProductList().size());
+        assertTrue(addressBook.hasProduct(editedApple));
+    }
+
+    @Test
+    public void setProduct_editedProductHasDifferentIdentity_success() {
+        addressBook.addProduct(APPLE);
+        Product editedApple = new ProductBuilder().withName("Banana").build();
+        addressBook.setProduct(APPLE, editedApple);
+        assertEquals(1, addressBook.getProductList().size());
+        assertTrue(addressBook.hasProduct(editedApple));
+    }
+
+    @Test
+    public void setProduct_editedProductHasNonUniqueIdentity_throwsDuplicateProductException() {
+        addressBook.addProduct(APPLE);
+        addressBook.addProduct(new ProductBuilder().withName("Banana").build());
+        Product editedApple = new ProductBuilder().withName("Banana").build();
+        assertThrows(DuplicateProductException.class, () -> addressBook.setProduct(APPLE, editedApple));
+    }
+
+    @Test
+    public void removeProduct_nullProduct_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.removeProduct(null));
+    }
+
+    @Test
+    public void removeProduct_productNotInAddressBook_throwsProductNotFoundException() {
+        assertThrows(ProductNotFoundException.class, () -> addressBook.removeProduct(APPLE));
+    }
+
+    @Test
+    public void removeProduct_productInAddressBook_success() {
+        addressBook.addProduct(APPLE);
+        addressBook.removeProduct(APPLE);
+        assertFalse(addressBook.hasProduct(APPLE));
+        assertEquals(0, addressBook.getProductList().size());
+    }
+
+    @Test
+    public void removeProduct_productWithSameIdentityFieldsInAddressBook_success() {
+        addressBook.addProduct(APPLE);
+        Product editedApple = new ProductBuilder(APPLE).withName("Apple").build();
+        addressBook.removeProduct(editedApple);
+        assertFalse(addressBook.hasProduct(APPLE));
+        assertEquals(0, addressBook.getProductList().size());
     }
 
     private static class AddressBookStub implements ReadOnlyAddressBook {
