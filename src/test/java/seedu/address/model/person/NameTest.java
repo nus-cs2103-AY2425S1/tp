@@ -57,4 +57,25 @@ public class NameTest {
         // different values -> returns false
         assertFalse(name.equals(new Name("Other Valid Name")));
     }
+
+    @Test
+    public void compareTo_lowerLexicographicalOrder() {
+        Name name1 = new Name("Alice");
+        Name name2 = new Name("Bob");
+        assertTrue(name1.compareTo(name2) < 0);
+    }
+
+    @Test
+    public void compareTo_higherLexicographicalOrder() {
+        Name name1 = new Name("Alice");
+        Name name2 = new Name("Bob");
+        assertTrue(name2.compareTo(name1) > 0);
+    }
+
+    @Test
+    public void compareTo_higherLexicographicalOrderSameLength() {
+        Name name1 = new Name("Alice");
+        Name name2 = new Name("Alicf");
+        assertTrue(name2.compareTo(name1) > 0);
+    }
 }
