@@ -252,7 +252,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * [Testing guide](Testing.md)
 * [Logging guide](Logging.md)
 * [Configuration guide](Configuration.md)
-* [DevOps guide](DevOps.md)
+* [DevOps guide](DevOps.md) 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -261,72 +261,258 @@ _{Explain here how the data archiving feature will be implemented}_
 ### Product scope
 
 **Target user profile**:
-
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
+School teachers looking to manage the details of both students and other teachers
+* needs to keep track of many students at a time
 * can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* prefers to type in a command line interface
+* uses a small set of commands
+* makes frequent typos but hates to backtrack with backspace
+* likes to have an autocomplete suggestion
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: EduConnect will provide a faster and more convenient way to manage details of students and teachers than other apps.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority​ | As a …​                   | I want to …​                                                                                                  | So that I can…​                                                       |
+|-----------|---------------------------|---------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
+| `* * *`   | new user                  | see usage instructions                                                                                        | refer to instructions when I forget how to use the App                |
+| `* * *`   | teacher                   | add a new student and their details                                                                           |                                                                       |
+| `* * *`   | teacher                   | remove/delete a student from the app                                                                          | remove entries that I no longer need                                  |
+| `* * *`   | teacher                   | add a new teacher and their details                                                                           | find information on other teachers if need be                         |
+| `* * *`   | teacher                   | remove/delete a teacher from the app                                                                          | remove entries that I no longer need                                  |
+| `* * *`   | teacher                   | edit or update information of a student                                                                       | keep the data stored accurate and up to date                          |
+| `* *`     | teacher                   | clear all student/class data from the previous semester/year                                                  | reset the app for the new semester/year                               |
+| `* *`     | teacher                   | search for students by some partial information                                                               | quickly find a list of students without recalling specific details    |
+| `* *`     | teacher                   | tag and filter students based on specific attributes                                                          | access relevant groups without manually searching every time          |
+| `*`       | teacher new to EduConnect | see a sample version of how the app will look with sample data                                                | better visualise the workflow or how the app will work or look        |
+| `*`       | teacher who makes typos   | have flexibility in typos for the commands                                                                    | continue writing commands without needing to rewrite or backspace     |
+| `*`       | teacher familiar with CLI | use shortcuts or linux-like commands                                                                          | enter commands faster and more familiar to me                         |
+| `*`       | teacher                   | export student list and contact information to various formats                                                | share and archive data easily for administrative purposes             |
+| `*`       | teacher                   | switch between different classes using keybinds                                                               | navigate between different groups of students efficiently             |
+| `*`       | teacher                   | have an undo/redo command for recent actions                                                                  | quickly correct mistakes or revert changes                            |
+| `*`       | teacher                   | create custom command aliases for frequently used commands                                                    | streamline my workflow and reduce the number of keystrokes needed     |
+| `*`       | teacher                   | have built-in calendar integration that links student info with important dates (e.g. parent meetings, exams) | easily access all relevant student data when preparing for key events |
+| `*`       | teacher                   | quickly generate printable class rosters with selected details (e.g. names, contact info, emergency contacts) | have a physical copy for field trips or offline use                   |
+| `*`       | teacher                   | have a dark mode or customizable themes for the interface                                                     | reduce eye strain while managing student data at night                |
+| `*`       | teacher                   | use natural language input for commands (e.g. "add student John Doe to class 5a")                             | enter commands more intuitively without memorising specific syntax    |
+| `*`       | teacher                   | group students based on customizable criteria (e.g. performance level, participation)                         | easily view and manage students with similar needs                    |
+| `*`       | teacher                   | get the contact details of a frequently searched contact                                                      | quickly use it to contact a student                                   |
+| `*`       | teacher                   | systematically add the contact details of twins who share similar details                                     | have a smaller chance of having errors                                |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the System is EduConnect and the Actor is a Teacher (User), unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Add a student**
+
+**Preconditions**
+* User has the student’s details, i.e. name, gender, contact, classes, subject and email
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
-
+1. Teacher enters the add student command
+2. EduConnect verifies the command inputs
+3. EduConnect adds the student’s contact details to the address book
+4. EduConnect displays a success message
+    
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. Parameter(s) missing in command format
+  * 2a1. EduConnect displays an error message, e.g. “Email parameter is missing! Ensure that you give values for /name /gender /contact /classes /subject /email”
+  
+    Use case ends.
 
-  Use case ends.
+* 2b. Invalid/Unsupported parameter tag used
+  * 2b1. EduConnect displays an error message, e.g. “Invalid detail to add! Please use the following options: name, gender, contact, classes, subject, email”
 
-* 3a. The given index is invalid.
+    Use case ends.
 
-    * 3a1. AddressBook shows an error message.
+* 2c. Invalid argument for a parameter given
+  * 2c1. EduConnect displays an error message, e.g. “Name given is invalid! Please give a name that fits: First name and last name (with optional middle names)”
 
-      Use case resumes at step 2.
+    Use case ends.
 
-*{More to be added}*
+* 2d. Existing contact or email given
+  * 2d1. EduConnect displays an error message, e.g. “The email boydanderson@gmail.com is already in use”
+    
+    Use case ends.
+
+**Use case: UC02 - Add a teacher**
+
+**Preconditions**
+* User has the teacher’s details, i.e. name, gender, contact, classes, subject and email.
+
+**MSS**
+1. Teacher enters the add teacher command
+2. EduConnect verifies the command inputs
+3. EduConnect adds the teacher’s contact details to the address book
+4. EduConnect displays a success message
+   
+    Use case ends.
+
+**Extensions**
+* 2a. Parameter(s) missing in command format
+  * 2a1. EduConnect displays an error message, e.g. “Email parameter is missing! Ensure that you give values for /name /gender /contact /classes /subject /email”
+    
+    Use case ends.
+
+* 2b. Invalid/Unsupported parameter tag used
+  * 2b1. EduConnect displays an error message, e.g. “Invalid detail to add! Please use the following options: name, gender, contact, classes, subject, email”
+    
+    Use case ends.
+
+* 2c. Invalid argument for a parameter given 
+  * 2c1. EduConnect displays an error message, e.g. “Name given is invalid! Please give a name that fits: First name and last name (with optional middle names)”
+    
+    Use case ends.
+
+* 2d. Existing contact or email given
+  * 2d1. EduConnect displays an error message, e.g. “The email boydanderson@gmail.com is already in use”
+    
+    Use case ends.
+
+**Use case: UC-03 Delete a contact**
+
+**Preconditions**
+* The address book contains at least one contact 
+* User knows the index of the contact to be deleted
+
+**MSS**
+1. Teacher enters the delete contact command
+2. EduConnect verifies the index validity
+3. EduConnect deletes the contact from the address book
+4. EduConnect displays a success message
+   
+    Use case ends.
+
+**Extensions**
+* 2a. Invalid index provided
+  * 2a1. EduConnect displays an error message, e.g. “Invalid index provided, enter an integer between [0, 10)”
+    
+    Use case ends.
+
+**Use case: UC-04 List contacts**
+
+**Preconditions**
+* User may optionally specify filter criteria using tags
+
+**MSS**
+1. Teacher enters the list command
+2. EduConnect displays a list of all contacts in the address book 
+
+    Use case ends.
+
+**Extensions**
+* 1a. Teacher specifies some filter criteria using valid tags
+  * 1a1. EduConnect displays a list of all contacts that fit that criteria in the address book
+    
+    Use case ends.
+  
+* 1b. Teacher uses invalid tags to filter
+  * 1b1. EduConnect displays an error message, e.g. “Invalid detail to find with! Please use one of the following options: name, gender, contact, classes, subject, email”
+    
+    Use case ends.
+
+**Use case: UC-05 Edit a contact**
+
+**Preconditions**
+* The address book contains at least one contact
+* User knows the index of the contact to be edited
+
+**MSS**
+1. Teacher enters the edit command
+2. EduConnect verifies the command inputs
+3. EduConnect edits the specified contact in the address book
+4. EduConnect displays a success message 
+
+    Use case ends.
+
+**Extensions**
+* 2a. Invalid index provided
+  * 2a1. EduConnect displays an error message, e.g. “Invalid index provided, enter an integer between [0, 10)”
+
+    Use case ends.
+
+* 2b. Invalid/Unsupported parameter tag used
+  * 2b1. EduConnect displays an error message, e.g. “Invalid detail to edit! Please use the following options: name, gender, contact, classes, subject, email”
+  
+    Use case ends.
+  
+* 2c. Invalid new argument for a parameter given
+  * 2c1. EduConnect displays an error message, e.g. “New name given is invalid! Please give a name that fits: First name and last name (with optional middle names)”
+    
+    Use case ends.
+
+* 2d. Duplicate contact or email provided
+  * 2d1. EduConnect displays an error message, e.g. “The email boydanderson@gmail.com is already in use”
+  
+    Use case ends.
+
+**Use case: UC-06 Clear**
+
+**Preconditions**
+* User may optionally specify the occupation (teacher or student) and tags to filter which contacts are cleared
+
+**MSS**
+1. Teacher enters the clear command
+2. EduConnect clears all contacts in the address book
+3. EduConnect displays a success message
+
+    Use case ends.
+
+**Extensions**
+* 1a. Teacher specifies an occupation to clear
+  * 1a1. EduConnect clears all contacts of that occupation in the address book
+  
+    Use case ends.
+
+* 1b. Teacher specifies an invalid occupation
+  * 1b1. EduConnect displays an error message, e.g. “Invalid occupation to clear, please specify either teacher or student”
+  
+    Use case ends.
+
+* 1c. Teacher specifies a tag to clear 
+  * 1c1. EduConnect clears all contacts with that tag value in the address book
+
+    Use case ends.
+
+* 1d. Teacher specifies an invalid tag
+  * 1d1. EduConnect displays an error message, e.g. “Invalid detail to clear with! Please use one of the following options: name, gender, contact, classes, subject, email”
+
+    Use case ends.
+
+* 1e. Teacher specifies an occupation or tag with no matching contacts
+  * 1e1. EduConnect displays a warning, e.g. “No contacts matching the specified filter, no changes made to address book”
+
+    Use case ends.
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4.  The system should handle errors gracefully, providing clear error messages for invalid inputs or operations.
+5.  The system should be platform-independent and capable of running on any operating system that supports Java, ensuring that users across different platforms can use the program.
+6.  The code should be well-documented, enabling developers to maintain and upgrade the system efficiently.
+7.  The system should be modular, allowing for easy extension in the future (e.g., adding new fields for contacts or new types of commands).
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Subject**: The subject the student / teacher is taking
+* **Class**: The class the student / teacher is taking
+* **Command Line Interface (CLI)**: Text-based user interface that allows the user to input
+* **Next-of-Kin**: The contact of the closest relative of the current contact
+* **Database**: An organized collection of structured information or data, typically stored electronically.
+* **GUI (Graphical User Interface)**: A visual user interface that allows users to interact with an application through graphical elements like buttons, icons, and menus, instead of typing commands.
+* **Encryption**: The process of converting plain text data into a coded format to prevent unauthorized access.
+* **Version Control**: A system that records changes to a file or set of files over time, allowing developers to track and manage revisions.
 
 --------------------------------------------------------------------------------------------------------------------
 
