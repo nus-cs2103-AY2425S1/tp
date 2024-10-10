@@ -16,7 +16,14 @@ import seedu.address.model.student.Student;
  */
 public class Tut {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tutorial names should be alphanumeric";
+    // Constraints messages for name and ID
+    public static final String MESSAGE_NAME_CONSTRAINTS = "Tutorial names should only contain alphanumeric"
+            + " characters and spaces, "
+            + "and it should not be blank.";
+    public static final String MESSAGE_ID_CONSTRAINTS = "Tutorial ID should be a non-negative integer.";
+
+    // Example validation regex for tutorial name (customize as needed)
+    public static final String NAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
     private final List<Student> students = new ArrayList<>();
 
@@ -31,10 +38,16 @@ public class Tut {
     public Tut(String tutName, int id) {
         requireNonNull(id);
         requireNonNull(tutName);
-        checkArgument(isValidName(tutName), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidName(tutName), MESSAGE_NAME_CONSTRAINTS);
+        checkArgument(isValidId(id), MESSAGE_ID_CONSTRAINTS);
         this.tutName = tutName;
         this.id = id;
     }
+
+    private Boolean isValidId(int id) {
+        return id >= 0;
+    }
+
     /**
      * * Adds student to the tutorial
      **/
@@ -79,6 +92,6 @@ public class Tut {
     }
     @Override
     public String toString() {
-        return tutName + ": Tutorial" + id;
+        return tutName + ": Tutorial " + id;
     }
 }

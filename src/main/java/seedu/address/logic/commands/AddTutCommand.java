@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUT_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUT_NAME;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -15,6 +17,13 @@ public class AddTutCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New tutorial added: %1$s";
     public static final String MESSAGE_DUPLICATE_TUTORIAL = "This tutorial already exists in the address book";
 
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a tutorial to the address book. "
+            + "Parameters: "
+            + PREFIX_TUT_NAME + "TUTORIAL_NAME "
+            + PREFIX_TUT_ID + "TUTORIAL_ID\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_TUT_NAME + "CS1010 Tutorial "
+            + PREFIX_TUT_ID + "101";
     private final Tut toAdd;
 
     /**

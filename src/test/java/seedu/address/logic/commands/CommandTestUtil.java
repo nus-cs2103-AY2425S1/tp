@@ -15,6 +15,7 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
@@ -53,6 +54,18 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+
+    // New constants for testing tutorials
+    public static final String VALID_TUT_NAME = "CS2103T";
+    public static final String VALID_TUT_ID = "1";
+
+    public static final String TUT_NAME_DESC = " " + CliSyntax.PREFIX_TUT_NAME + VALID_TUT_NAME;
+    public static final String TUT_ID_DESC = " " + CliSyntax.PREFIX_ID + VALID_TUT_ID;
+
+    public static final String INVALID_TUT_NAME_DESC = " " + CliSyntax.PREFIX_TUT_NAME + "T@ut"; // '@' not allowed in names
+    public static final String INVALID_TUT_ID_DESC = " "
+                        + CliSyntax.PREFIX_ID + "abc"; // non-numeric characters not allowed for ID
+
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

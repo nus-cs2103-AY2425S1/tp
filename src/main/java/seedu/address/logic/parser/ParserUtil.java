@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -14,6 +15,8 @@ import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tut.Tut;
+
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -49,6 +52,22 @@ public class ParserUtil {
         }
         return new Name(trimmedName);
     }
+
+    /**
+     * Parses a {@code String name} into a {@code Name}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static Name parseTutName(String tutName) throws ParseException {
+        requireNonNull(tutName);
+        String trimmedName = tutName.trim();
+        if (!Name.isValidName(trimmedName)) {
+            throw new ParseException(Tut.MESSAGE_NAME_CONSTRAINTS);
+        }
+        return new Name(trimmedName);
+    }
+
 
     /**
      * Parses a {@code String phone} into a {@code Phone}.
@@ -120,5 +139,31 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a tutorial id and converts it into an integer
+     * @param id
+     * @return an integer id of String id
+     */
+    public static int parseTutIndex(String id) throws ParseException {
+        requireNonNull(id);
+        String trimmedId = id.trim();
+        // Checks if tut_id contains all numbers
+        checkArgument(checkUsingIsDigitMethod(trimmedId), Tut.MESSAGE_ID_CONSTRAINTS);
+        Integer tutId = Integer.parseInt(trimmedId);
+
+        //TODO: Create Tut.isValidId, throws ParseException
+        return tutId;
+    }
+
+    static boolean checkUsingIsDigitMethod(String input) {
+        for (char c : input.toCharArray()) {
+            if (Character.isDigit(c)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
