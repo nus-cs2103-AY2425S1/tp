@@ -13,7 +13,7 @@ public class SearchPublicAddressCommand extends Command {
     public static final String COMMAND_WORD = "searchPublicAddress";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Searches for a public address and returns the user, network and tag"
+        + ": Searches for a public address and returns the user, network and tag"
             + "throughout all the public addresses of all networks in the address book.\n"
             + "Parameters: PUBLIC_ADDRESS (must be a string) "
             + PREFIX_PUBLIC_ADDRESS + "[PUBLIC_ADDRESS]\n"
