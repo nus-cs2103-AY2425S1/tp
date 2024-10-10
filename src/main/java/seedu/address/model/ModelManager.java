@@ -20,6 +20,7 @@ import seedu.address.model.person.Person;
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+    private static Context context = Context.CONTACT;
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
@@ -44,6 +45,10 @@ public class ModelManager implements Model {
 
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
+    }
+
+    public static Context getContext() {
+        return context;
     }
 
     //=========== UserPrefs ==================================================================================
@@ -120,6 +125,7 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+        context = Context.CONTACT;
     }
 
     /**
@@ -130,15 +136,19 @@ public class ModelManager implements Model {
     @Override
     public void deleteCompany(Company target) {
         addressBook.removeCompany(target);
+        context = Context.COMPANY;
     }
+
     @Override
     // Todo: In a second PR when I add the deleteJob feature
-    public void deleteJob(Job target) {}
+    public void deleteJob(Job target) {
+    }
 
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        context = Context.CONTACT;
     }
 
     /**
@@ -150,11 +160,14 @@ public class ModelManager implements Model {
     public void addCompany(Company company) {
         addressBook.addCompany(company);
         updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);
+        context = Context.COMPANY;
     }
+
     @Override
     public void addJob(Job job) {
         addressBook.addJob(job);
         updateFilteredJobList(PREDICATE_SHOW_ALL_JOBS);
+        context = Context.JOB;
     }
 
     @Override
@@ -162,12 +175,13 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+        context = Context.CONTACT;
     }
 
     /**
      * Replaces the target company with an edited version of itself.
      *
-     * @param target Company to be replaced.
+     * @param target        Company to be replaced.
      * @param editedCompany Company to replace the other.
      */
     @Override
@@ -175,6 +189,7 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedCompany);
 
         addressBook.setCompany(target, editedCompany);
+        context = Context.COMPANY;
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -207,12 +222,14 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+        context = Context.CONTACT;
     }
 
     @Override
     public void updateFilteredJobList(Predicate<Job> predicate) {
         requireNonNull(predicate);
         filteredJobs.setPredicate(predicate);
+        context = Context.JOB;
     }
 
     /**
@@ -224,6 +241,7 @@ public class ModelManager implements Model {
     public void updateFilteredCompanyList(Predicate<Company> predicate) {
         requireNonNull(predicate);
         filteredCompanies.setPredicate(predicate);
+        context = Context.COMPANY;
     }
 
     @Override
@@ -238,11 +256,10 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
-                && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons)
-                && filteredJobs.equals(otherModelManager.filteredJobs)
-                && filteredCompanies.equals(otherModelManager.filteredCompanies);
+        return addressBook.equals(otherModelManager.addressBook) && userPrefs.equals(otherModelManager.userPrefs)
+               && filteredPersons.equals(otherModelManager.filteredPersons)
+               && filteredJobs.equals(otherModelManager.filteredJobs)
+               && filteredCompanies.equals(otherModelManager.filteredCompanies);
     }
 
 }

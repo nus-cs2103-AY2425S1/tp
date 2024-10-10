@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_COMPANIES;
 
-import seedu.address.logic.Mode;
 import seedu.address.model.Model;
 
 /**
@@ -17,6 +16,6 @@ public class ListCompanyCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);
-        return new CommandResult(MESSAGE_SUCCESS, false, false, Mode.COMPANY);
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 }

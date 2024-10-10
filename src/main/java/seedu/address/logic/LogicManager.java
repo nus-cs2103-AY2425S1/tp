@@ -26,14 +26,13 @@ import seedu.address.storage.Storage;
 public class LogicManager implements Logic {
 
     public static final String FILE_OPS_ERROR_FORMAT = "Could not save data due to the following error: %s";
-    public static final String FILE_OPS_PERMISSION_ERROR_FORMAT = "Could not save data to file %s due to insufficient"
-                                                                  + " permissions to write to the file or the folder.";
+    public static final String FILE_OPS_PERMISSION_ERROR_FORMAT =
+            "Could not save data to file %s due to insufficient" + " permissions to write to the file or the folder.";
 
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
     private final Model model;
     private final Storage storage;
     private final AddressBookParser addressBookParser;
-    private Mode mode = Mode.CONTACT;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -51,7 +50,6 @@ public class LogicManager implements Logic {
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
-        this.mode = commandResult.getMode();
 
         try {
             storage.saveAddressBook(model.getAddressBook());
