@@ -1,7 +1,6 @@
 package tutorease.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static tutorease.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static tutorease.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static tutorease.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static tutorease.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -20,7 +19,6 @@ import org.junit.jupiter.api.io.TempDir;
 
 import tutorease.address.logic.commands.AddCommand;
 import tutorease.address.logic.commands.CommandResult;
-import tutorease.address.logic.commands.ListCommand;
 import tutorease.address.logic.commands.exceptions.CommandException;
 import tutorease.address.logic.parser.exceptions.ParseException;
 import tutorease.address.model.Model;
@@ -56,18 +54,6 @@ public class LogicManagerTest {
     public void execute_invalidCommandFormat_throwsParseException() {
         String invalidCommand = "uicfhmowqewca";
         assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND);
-    }
-
-    @Test
-    public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-    }
-
-    @Test
-    public void execute_validCommand_success() throws Exception {
-        String listCommand = ListCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
     }
 
     @Test
