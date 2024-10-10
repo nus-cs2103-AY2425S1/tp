@@ -7,4 +7,4 @@
 
 Given below are my contributions to the project.
 
-Nothing so far!
+- Added the "event" command for adding events
