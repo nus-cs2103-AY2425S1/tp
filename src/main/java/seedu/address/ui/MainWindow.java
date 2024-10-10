@@ -16,7 +16,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -32,7 +32,7 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private StudentListPanel studentListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -43,10 +43,10 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane studentListPanelPlaceholder;
 
     @FXML
-    private StackPane personDetailsPanelPlaceholder;
+    private StackPane studentDetailsPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -114,11 +114,11 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        studentListPanel = new StudentListPanel(logic.getFilteredStudentList());
+        studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
 
         BlankDetailsPanel blankDetailsPanel = new BlankDetailsPanel();
-        personDetailsPanelPlaceholder.getChildren().add(blankDetailsPanel.getRoot());
+        studentDetailsPanelPlaceholder.getChildren().add(blankDetailsPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -131,13 +131,13 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Updates the details panel to the selected person.
+     * Updates the details panel to the selected student.
      */
-    private void updateDetailsPanel(Person person, int index) {
-        personDetailsPanelPlaceholder.getChildren().clear();
+    private void updateDetailsPanel(Student student, int index) {
+        studentDetailsPanelPlaceholder.getChildren().clear();
 
-        PersonDetailsPanel personDetailsPanel = new PersonDetailsPanel(person, index + 1);
-        personDetailsPanelPlaceholder.getChildren().add(personDetailsPanel.getRoot());
+        StudentDetailsPanel studentDetailsPanel = new StudentDetailsPanel(student, index + 1);
+        studentDetailsPanelPlaceholder.getChildren().add(studentDetailsPanel.getRoot());
     }
 
     /**
@@ -180,8 +180,8 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public StudentListPanel getStudentListPanel() {
+        return studentListPanel;
     }
 
     /**
@@ -195,8 +195,8 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            if (commandResult.isPerson()) {
-                updateDetailsPanel(commandResult.getPerson(), commandResult.getPersonIndex());
+            if (commandResult.getStudent()) {
+                updateDetailsPanel(commandResult.getCurStudent(), commandResult.getStudentIndex());
             }
 
             if (commandResult.isShowHelp()) {

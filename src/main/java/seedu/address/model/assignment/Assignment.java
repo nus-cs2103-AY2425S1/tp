@@ -7,7 +7,7 @@ import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.assignment.exceptions.AssignmentAlreadyAssignedStudentException;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 
 /**
  * Represents an Assignment in the address book.
@@ -26,7 +26,7 @@ public class Assignment {
     private final int maxScore;
     private int score = 0;
     private boolean hasSubmitted = false;
-    private Person student;
+    private Student student;
 
     /**
      * Every field must be present and not null.
@@ -41,7 +41,7 @@ public class Assignment {
     /**
      * Assigns assignment to student.
      */
-    public void assignStudent(Person student) {
+    public void assignStudent(Student student) {
         requireNonNull(student);
         if (this.student == null) {
             this.student = student;
