@@ -52,7 +52,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                 throw new ParseException(Level.MESSAGE_CONSTRAINTS);
             }
             return new FindCommand(new LevelContainsKeywordsPredicate(Arrays.asList(levelKeywords)));
-        } else if (isBySubject) {
+        } else {
             String toFind = argMultimap.getValue(PREFIX_SUBJECT).get();
             String[] subjectKeywords = toFind.split("\\s+");
             if (Arrays.stream(subjectKeywords).anyMatch(subject -> !Subject.isValidSubjectName(subject))) {
@@ -60,8 +60,5 @@ public class FindCommandParser implements Parser<FindCommand> {
             }
             return new FindCommand(new SubjectContainsKeywordsPredicate(Arrays.asList(subjectKeywords)));
         }
-        throw new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-
     }
 }
