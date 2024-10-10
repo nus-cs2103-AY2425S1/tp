@@ -288,7 +288,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                   | I want to …​                                                               | So that I can…​                                                                                        |    
+| Priority | As a …​                                   | I want to …​                                                               | So that I can…​                                                                                        |
 |----------|-------------------------------------------|----------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
 | `* * *`  | social worker                             | delete a contact                                                           | remove the contact when I no longer serve them so that the contact list do not get too long            |
 | `* * *`  | social worker/new user                    | add contact with phone number                                              | remember the person i serve                                                                            |
@@ -398,7 +398,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. SocialBook shows an error message.
 
       Use case resumes at step 2.
-  
+
 *{More to be added}*
 
 ### Non-Functional Requirements
