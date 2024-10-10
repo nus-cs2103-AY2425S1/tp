@@ -60,8 +60,8 @@ public class CommandTestUtil {
     public static final String PERSON_ENTITY_STRING = "person ";
     public static final String PERSON_APPOINTMENT_STRING = "appt ";
 
-    public static final EditCommand.EditPersonDescriptor DESC_AMY;
-    public static final EditCommand.EditPersonDescriptor DESC_BOB;
+    public static final EditPersonCommand.EditPersonDescriptor DESC_AMY;
+    public static final EditPersonCommand.EditPersonDescriptor DESC_BOB;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
