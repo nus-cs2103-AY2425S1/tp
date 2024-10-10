@@ -1,8 +1,8 @@
 package seedu.address.model.person;
 
-import seedu.address.model.tag.Tag;
-
 import java.util.Set;
+
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents an Apartment in the address book. A subclass of Property class
