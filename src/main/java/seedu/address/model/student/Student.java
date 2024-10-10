@@ -25,7 +25,6 @@ public class Student {
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
     private final Optional<String> group;
-    private final StudentNumber studentNumber;
 
     /**
      * Every field must be present and not null.
@@ -37,7 +36,6 @@ public class Student {
         this.tags.addAll(tags);
         this.studentNumber = studentNumber;
         this.group = Optional.empty();
-        this.studentNumber = studentNumber;
     }
 
     /**
@@ -48,7 +46,6 @@ public class Student {
         this.name = name;
         this.email = email;
         this.tags.addAll(tags);
-        this.studentNumber = studentNumber;
         this.group = group;
         this.studentNumber = studentNumber;
     }
@@ -67,10 +64,6 @@ public class Student {
 
     public Optional<String> getGroup() {
         return group;
-    }
-
-    public StudentNumber getStudentNumber() {
-        return studentNumber;
     }
 
 

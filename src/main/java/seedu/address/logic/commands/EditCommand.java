@@ -178,10 +178,6 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setStudentNumber(StudentNumber studentNumber) {
-            this.studentNumber = studentNumber;
-        }
-
         public Optional<StudentNumber> getStudentNumber() {
             return Optional.ofNullable(studentNumber);
         }
@@ -201,10 +197,6 @@ public class EditCommand extends Command {
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
-        }
-
-        public Optional<StudentNumber> getStudentNumber() {
-            return Optional.ofNullable(studentNumber);
         }
 
         @Override
