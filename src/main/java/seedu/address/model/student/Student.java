@@ -37,14 +37,6 @@ public class Student extends Person {
         this.studentNumber = studentNumber;
     }
 
-    // public Name getName() {
-    //     return name;
-    // }
-    //
-    // public ContactNumber getContactNumber() {
-    //     return contactNumber;
-    // }
-
     public TutorialGroup getTutorialGroup() {
         return tutorialGroup;
     }
