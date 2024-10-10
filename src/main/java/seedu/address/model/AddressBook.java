@@ -119,6 +119,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    /**
+     * Sorts persons in the address book by their names alphabetically.
+     */
+    public void sortPersons(String order) {
+        persons.sortPersons(order);
+    }
+
     //// util methods
 
     @Override

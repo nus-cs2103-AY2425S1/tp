@@ -90,4 +90,8 @@ public interface Model {
     void makeNotRestorable();
     Person getLastDeletedPerson();
 
+    /**
+     * Sorts the filter of the filtered person list in alphabetical order
+     */
+    void sortFilteredPersonList(String order);
 }
