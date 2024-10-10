@@ -53,11 +53,10 @@ public class Person {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
+     * Returns a tag set.
      */
     public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+        return tags;
     }
 
     /**

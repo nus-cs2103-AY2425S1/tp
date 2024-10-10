@@ -28,6 +28,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.TagAddCommand;
+import seedu.address.logic.commands.TagDeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -107,6 +108,18 @@ public class AddressBookParserTest {
         Set<Tag> stubTagList = new HashSet<>();
         stubTagList.add(stubTag);
         assertEquals(new TagAddCommand(stubName, stubTagList), command);
+    }
+
+    @Test
+    public void parseCommand_tagDelete() throws Exception {
+        final String tag = "Jane and Tom 230412";
+        TagDeleteCommand command = (TagDeleteCommand) parser.parseCommand(TagDeleteCommand.COMMAND_WORD + " n/"
+                + VALID_NAME_AMY + " " + PREFIX_TAG + tag);
+        Tag stubTag = new Tag(VALID_TAG_AMY);
+        Name stubName = new Name(VALID_NAME_AMY);
+        Set<Tag> stubTagList = new HashSet<>();
+        stubTagList.add(stubTag);
+        assertEquals(new TagDeleteCommand(stubName, stubTagList), command);
     }
 
     @Test
