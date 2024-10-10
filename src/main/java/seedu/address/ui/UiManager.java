@@ -65,8 +65,8 @@ public class UiManager implements Ui {
     private static void showAlertDialogAndWait(Stage owner, AlertType type, String title, String headerText,
                                                String contentText) {
         final Alert alert = new Alert(type);
-        // Changed this to light theme
-        alert.getDialogPane().getStylesheets().add("view/LightTheme.css");
+        // Able to add the style sheet over here
+        alert.getDialogPane().getStylesheets().add("view/DarkTheme.css");
         alert.initOwner(owner);
         alert.setTitle(title);
         alert.setHeaderText(headerText);
