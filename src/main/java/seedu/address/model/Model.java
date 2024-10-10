@@ -89,6 +89,11 @@ public interface Model {
     /** Adds the given {@code event} to the list of events. */
     void addEvent(Event event);
 
+    /**
+     * Returns true if an event with the same identity as {@code event} exists in the event book.
+     */
+    boolean hasEvent(Event event);
+
     /** Deletes the given {@code event} from the list of events. */
     void deleteEvent(Event event);
 
