@@ -9,41 +9,41 @@ import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.Set;
 
 import seedu.ddd.logic.commands.AddCommand;
-import seedu.ddd.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.ddd.model.person.Person;
+import seedu.ddd.logic.commands.EditCommand.EditContactDescriptor;
+import seedu.ddd.model.person.Client;
 import seedu.ddd.model.tag.Tag;
 
 /**
  * A utility class for Person.
  */
-public class PersonUtil {
+public class ClientUtil {
 
     /**
      * Returns an add command string for adding the {@code person}.
      */
-    public static String getAddCommand(Person person) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(person);
+    public static String getAddCommand(Client client) {
+        return AddCommand.COMMAND_WORD + " " + getPersonDetails(client);
     }
 
     /**
      * Returns the part of command string for the given {@code person}'s details.
      */
-    public static String getPersonDetails(Person person) {
+    public static String getPersonDetails(Client client) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + person.getName().fullName + " ");
-        sb.append(PREFIX_PHONE + person.getPhone().value + " ");
-        sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
-        sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
-        person.getTags().stream().forEach(
+        sb.append(PREFIX_NAME + client.getName().fullName + " ");
+        sb.append(PREFIX_PHONE + client.getPhone().value + " ");
+        sb.append(PREFIX_EMAIL + client.getEmail().value + " ");
+        sb.append(PREFIX_ADDRESS + client.getAddress().value + " ");
+        client.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
         return sb.toString();
     }
 
     /**
-     * Returns the part of command string for the given {@code EditPersonDescriptor}'s details.
+     * Returns the part of command string for the given {@code EditContactDescriptor}'s details.
      */
-    public static String getEditPersonDescriptorDetails(EditPersonDescriptor descriptor) {
+    public static String getEditPersonDescriptorDetails(EditContactDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));

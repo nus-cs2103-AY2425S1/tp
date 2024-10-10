@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.ddd.commons.exceptions.IllegalValueException;
 import seedu.ddd.model.AddressBook;
 import seedu.ddd.model.ReadOnlyAddressBook;
-import seedu.ddd.model.person.Person;
+import seedu.ddd.model.person.Contact;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -23,42 +23,25 @@ class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_CLIENT = "Clients list contains duplicate client(s).";
     public static final String MESSAGE_DUPLICATE_VENDOR = "Vendors list contains duplicate vendor(s).";
-    private final List<JsonAdaptedPerson> persons = new ArrayList<>();
-    /*
-    private final List<JsonAdaptedClient> clients = new ArrayList<>();
-    private final List<JsonAdaptedVendor> vendors = new ArrayList<>();
-     */
+    private final List<JsonAdaptedContact> contacts = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given persons.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
-        this.persons.addAll(persons);
+    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedContact> contacts) {
+        this.contacts.addAll(contacts);
     }
-    /*
-    @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("clients") List<JsonAdaptedClient> clients) {
-        this.clients.addAll(clients);
-    }
-    @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("vendors") List<JsonAdaptedVendor> vendors) {
-        this.vendors.addAll(vendors);
-    }
-     */
+
     /**
      * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
      *
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
-        persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        contacts.addAll(source.getContactList().stream().map(JsonAdaptedContact::new).collect(Collectors.toList()));
     }
-    /*
-    public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
-        clients.addAll(source.getClientList().stream().map(JsonAdaptedClient::new).collect(Collectors.toList()));
-        vendors.addAll(source.getVendorList().stream().map(JsonAdaptedVendor::new).collect(Collectors.toList()));
-     */
+
     /**
      * Converts this address book into the model's {@code AddressBook} object.
      *
@@ -66,33 +49,13 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
-        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Person person = jsonAdaptedPerson.toModelType();
-            if (addressBook.hasPerson(person)) {
+        for (JsonAdaptedContact jsonAdaptedContact : contacts) {
+            Contact contact = jsonAdaptedContact.toModelType();
+            if (addressBook.hasContact(contact)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            addressBook.addPerson(person);
+            addressBook.addContact(contact);
         }
         return addressBook;
     }
-    /*
-    public AddressBook toModelType() throws IllegalValueException {
-        AddressBook addressBook = new AddressBook();
-        for (JsonAdaptedClient jsonAdaptedClient : clients) {
-            Client client = jsonAdaptedClient.toModelType();
-            if (addressBook.hasClient(client)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_CLIENT);
-            }
-            addressBook.addClient(client);
-        }
-        for (JsonAdaptedVendor jsonAdaptedVendor : vendors) {
-            Vendor vendor = jsonAdaptedVendor.toModelType();
-            if (addressBook.hasVendor(vendor)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_VENDOR);
-            }
-            addressBook.addVendor(vendor);
-        }
-        return addressBook;
-    }
-     */
 }

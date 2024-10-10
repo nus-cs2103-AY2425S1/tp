@@ -16,7 +16,6 @@ import seedu.ddd.logic.parser.exceptions.ParseException;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.ReadOnlyAddressBook;
 import seedu.ddd.model.person.Contact;
-import seedu.ddd.model.person.Person;
 import seedu.ddd.storage.Storage;
 
 /**
@@ -65,11 +64,6 @@ public class LogicManager implements Logic {
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return model.getAddressBook();
-    }
-
-    @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return model.getFilteredPersonList();
     }
 
     @Override

@@ -11,7 +11,7 @@ import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.logic.Messages;
 import seedu.ddd.logic.commands.exceptions.CommandException;
 import seedu.ddd.model.Model;
-import seedu.ddd.model.person.Person;
+import seedu.ddd.model.person.Contact;
 
 /**
  * Adds a person to the address book.
@@ -36,27 +36,28 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_CONTACT = "This contact already exists in the address book";
 
-    private final Person toAdd;
+    private final Contact toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Contact}
      */
-    public AddCommand(Person person) {
-        requireNonNull(person);
-        toAdd = person;
+    public AddCommand(Contact contact) {
+        requireNonNull(contact);
+        toAdd = contact;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (model.hasContact(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_CONTACT);
         }
 
-        model.addPerson(toAdd);
+        model.addContact(toAdd);
+        System.out.println(toAdd.toString());
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
