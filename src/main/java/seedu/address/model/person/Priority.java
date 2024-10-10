@@ -20,6 +20,13 @@ public class Priority {
     public final String priority;
 
     /**
+     * Default constructor that sets the priority to "NONE".
+     */
+    public Priority() {
+        this.priority = "NONE";
+    }
+
+    /**
      * Constructs a {@code Priority} object with the specified priority string.
      *
      * @param priority The priority value for the person.
