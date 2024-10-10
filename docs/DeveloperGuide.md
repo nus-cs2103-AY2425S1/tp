@@ -299,12 +299,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | prepared teacher                                    | add student's contact number                    | call up the student when I need to contact him/her         |
 | `* * *`  | prepared teacher                                    | add student's emergency contact name            | identify the person I am calling if there are emergencies  |
 | `* * *`  | prepared teacher                                    | add student's emergency contact number          | notify the person in case of emergencies                   |
-| `* * *`  | neat teacher                                        | group students into their classes               | manage and access information by class                     |
+| `* * *`  | prepared teacher                                    | add student's class                             | identify which student is in which class                   |
 | `* * *`  | diligent teacher                                    | remove a student from the app                   | ensure my records are accurate when they drop out          |
 | `* *`    | caring teacher                                      | add student's photo                             | know what my students look like                            |
 | `* *`    | lazy teacher                                        | mass add student information                    | save the trouble of adding them one by one                 |
 | `* *`    | lazy teacher                                        | mass delete all dummy data                      | save the trouble of removing them one by one               |
 | `* *`    | diligent teacher                                    | assign roles to students                        | manage students with the specific roles                    |
+| `* *`    | neat teacher                                        | group students by their class                   | manage and access information by class                     |
 | `* *`    | teacher wanting to split students for group project | separate students into project groups           | manage their project work within the app                   |
 | `* *`    | prepared teacher                                    | update a student's information                  | have the most current details when there is a change       |
 | `* *`    | diligent teacher                                    | assign progress tags to individual students     | categorise their performance in class                      |
@@ -614,18 +615,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **System: StudentManagerPro**
 
-**Use case: UC09 Group Students Into Their Classes**
+**Use case: UC09 Add Student's Class**
 
 **Actor: User**
 
 **Preconditions:**
 * User is logged in.
 * Student profile has been created through the <u>addition of the student name(UC01).</u>
-* Student profile has been updated with <u>additional details from UC02 to UC08.</u>
 
 **Guarantees:**
-* If successful, the student's class is added to the student profile.
-* If an invalid data is entered, a corresponding error message is displayed.
+* If successful, the student's class is added to the student profile and saved in the system.
+* If an invalid class is given as input, a corresponding error message is displayed.
 
 **MSS**
 
@@ -639,7 +639,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. User enters invalid characters.
-    * 2a1. System displays an error message to ask for a valid class command format, with no
+    * 2a1. System displays an error message to ask for a valid class command format, with no 
       special characters.
       Use case ends.
 
@@ -674,7 +674,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. User enters invalid characters.
-    * 2a1. System displays an error message to ask for a valid name command format, with no
+    * 2a1. System displays an error message to ask for a valid name command format, with no 
       special characters.
       Use case ends.
 

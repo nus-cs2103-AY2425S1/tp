@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddEmergencyContactNameCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -104,6 +105,22 @@ public class AddressBookParserTest {
                 EmergencyPhoneCommand.COMMAND_WORD + " "
                 + "n/" + name + " "
                 + "ep/" + phone);
+      
+       assertEquals(expected, command);
+    }
+  
+    public void parseCommand_addEmergencyContactName() throws Exception {
+
+        final String studentName = "John Doe";
+        final String eCName = "Jane Doe";
+
+        AddEmergencyContactNameCommand expected = new AddEmergencyContactNameCommand(
+                new Name(studentName), new Name(eCName));
+
+        AddEmergencyContactNameCommand command = (AddEmergencyContactNameCommand) parser.parseCommand(
+                AddEmergencyContactNameCommand.COMMAND_WORD + " "
+                        + "n/" + studentName + " "
+                        + "en/" + eCName);
 
         assertEquals(expected, command);
     }
