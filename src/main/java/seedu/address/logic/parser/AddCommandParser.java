@@ -29,6 +29,7 @@ import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.MedCon;
+import seedu.address.model.person.Priority;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -64,10 +65,12 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Set<Appointment> appointmentList = Collections.emptySet();
         MedCon medCon = ParserUtil.parseMedCon(argMultimap.getValue(PREFIX_MEDCON).get());
-
+        Priority priority = new Priority();
+      
         logger.info("Successfully parsed all fields for AddCommand");
-        Person person = new Person(name, phone, email, nric, address, dob, gender, tagList, appointmentList, medCon);
+        Person person = new Person(name, phone, email, nric, address, dob, gender, tagList, priority, appointmentList, medCon);
         logger.info("Successfully created new Person object");
+
         return new AddCommand(person);
     }
 
