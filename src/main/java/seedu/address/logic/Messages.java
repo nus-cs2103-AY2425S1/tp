@@ -59,7 +59,7 @@ public class Messages {
                 .append(event.getTime())
                 .append("; Venue: ")
                 .append(event.getVenue())
-                .append("; Point of Contact: ")
+                .append("; Celebrity: ")
                 .append(event.getCelebrity());
         return builder.toString();
     }
