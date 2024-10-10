@@ -32,7 +32,7 @@ public class PersonDetailsWindow extends UiPart<Stage> {
      * @param root Stage to use as the root of the PersonDetailsWindow.
      */
     public PersonDetailsWindow(Stage root) {
-        super(FXML,root);
+        super(FXML, root);
     }
 
     /**
