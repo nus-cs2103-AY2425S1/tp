@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-CareConnect (CC) is a **desktop app for social workers to manage their case contacts.** It is **optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, CC can get your contact management tasks done faster than traditional GUI apps.
+CareConnect is a **CLI-first** **case management application** that enables social workers to efficiently manage client details, appointments, and priorities. Repeated chores including data entry and search will be streamlined via simple CLI inputs, easing the mental load of the social workers, allowing them to focus more on delivering high-quality care and support for the clients.
 
 * Table of Contents
 {:toc}
@@ -28,7 +28,7 @@ CareConnect (CC) is a **desktop app for social workers to manage their case cont
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Beneficiary Management System.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Case Management System.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -73,14 +73,14 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a beneficiary: `add`
+### Adding a client: `add`
 
-Adds a beneficiary to the beneficiary management system.
+Adds a client to the case management system.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A beneficiary can have any number of tags (including 0)
+A client can have any number of tags (including 0)
 </div>
 
 Examples:
@@ -89,26 +89,26 @@ Examples:
 
 ### Listing all beneficiaries : `list`
 
-Shows a list of all beneficiaries in the beneficiary management system.
+Shows a list of all beneficiaries in the case management system.
 
 Format: `list`
 
-### Editing a beneficiary : `edit`
+### Editing a client : `edit`
 
-Edits an existing beneficiary in the beneficiary management system.
+Edits an existing client in the case management system.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the beneficiary at the specified `INDEX`. The index refers to the index number shown in the displayed beneficiary list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the beneficiary will be removed i.e adding of tags is not cumulative.
-* You can remove all the beneficiary’s tags by typing `t/` without
+* When editing tags, the existing tags of the client will be removed i.e adding of tags is not cumulative.
+* You can remove all the client’s tags by typing `t/` without
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st beneficiary to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd beneficiary to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd client to be `Betsy Crower` and clears all existing tags.
 
 ### Locating beneficiaries by name: `find`
 
@@ -128,23 +128,23 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a beneficiary : `delete`
+### Deleting a client : `delete`
 
-Deletes the specified beneficiary from the beneficiary management system.
+Deletes the specified client from the case management system.
 
 Format: `delete INDEX`
 
-* Deletes the beneficiary at the specified `INDEX`.
-* The index refers to the index number shown in the displayed beneficiary list.
+* Deletes the client at the specified `INDEX`.
+* The index refers to the index number shown in the displayed client list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd beneficiary in the beneficiary management system.
-* `find Betsy` followed by `delete 1` deletes the 1st beneficiary in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd client in the case management system.
+* `find Betsy` followed by `delete 1` deletes the 1st client in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the beneficiary management system.
+Clears all entries from the case management system.
 
 Format: `clear`
 
