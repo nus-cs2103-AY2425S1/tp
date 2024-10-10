@@ -2,9 +2,11 @@
   "persons": [ {
     "name": "Alice Pauline",
     "email": "alice@example.com",
-    "tags": [ "friends" ]
+    "tags": [ "friends" ],
+    "student number" : "A01111111J"
   }, {
     "name": "Alice Pauline",
-    "email": "pauline@example.com"
+    "email": "pauline@example.com",
+    "student number" : "A01111111J"
   } ]
 }

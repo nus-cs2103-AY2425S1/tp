@@ -7,6 +7,7 @@ import java.util.Set;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentNumber;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -17,10 +18,12 @@ public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
+    public static final String DEFAULT_STUDENT_NUMBER = "A01234567X";
 
     private Name name;
     private Email email;
     private Set<Tag> tags;
+    private StudentNumber studentNumber;
     private Optional<String> group;
 
     /**
@@ -30,6 +33,7 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         email = new Email(DEFAULT_EMAIL);
         tags = new HashSet<>();
+        studentNumber = new StudentNumber(DEFAULT_STUDENT_NUMBER);
         group = Optional.empty();
     }
 
@@ -40,6 +44,7 @@ public class PersonBuilder {
         name = studentToCopy.getName();
         email = studentToCopy.getEmail();
         tags = new HashSet<>(studentToCopy.getTags());
+        studentNumber = studentToCopy.getStudentNumber();
         group = studentToCopy.getGroup();
     }
 
@@ -75,8 +80,22 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code StudentNumber} of the {@code Student} that we are building.
+     */
+    public PersonBuilder withStudentNumber(String studentNumber) {
+        this.studentNumber = new StudentNumber(studentNumber);
+        return this;
+    }
+
+    /**
+     * Builds a {@code Student}.
+     *
+     * @returns A Student.
+     */
     public Student build() {
-        return group.isPresent() ? new Student(name, email, tags, group) : new Student(name, email, tags);
+        return group.isPresent()
+                ? new Student(name, email, tags, studentNumber, group) : new Student(name, email, tags, studentNumber);
     }
 
 }

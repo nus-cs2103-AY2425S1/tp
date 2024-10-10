@@ -37,10 +37,10 @@ public class Messages {
     public static String format(Student student) {
         final StringBuilder builder = new StringBuilder();
         builder.append(student.getName())
-                .append("; Phone: ")
                 .append("; Email: ")
                 .append(student.getEmail())
-                .append("; Address: ")
+                .append("; Student Number: ")
+                .append(student.getStudentNumber())
                 .append("; Tags: ");
         student.getTags().forEach(builder::append);
         return builder.toString();

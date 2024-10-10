@@ -2,7 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -14,20 +15,22 @@ import seedu.address.model.student.Student;
 /**
  * Adds a student to the address book.
  */
-public class AddCommand extends Command {
+public class AddStudentCommand extends Command {
 
-    public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_WORD = "add_student";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to the address book. "
             + "Parameters: "
-            + PREFIX_NAME + "NAME "
+            + PREFIX_STUDENT_NAME + "NAME "
             + PREFIX_EMAIL + "EMAIL "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TAG]... "
+            + PREFIX_STUDENT_NUMBER + "STUDENT_NUMBER\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
+            + PREFIX_STUDENT_NAME + "John Doe "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_TAG + "owesMoney "
+            + PREFIX_STUDENT_NUMBER + "A02345678J";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in the address book";
@@ -35,9 +38,9 @@ public class AddCommand extends Command {
     private final Student toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Student}
+     * Creates an AddStudentCommand to add the specified {@code Student}
      */
-    public AddCommand(Student student) {
+    public AddStudentCommand(Student student) {
         requireNonNull(student);
         toAdd = student;
     }
@@ -61,11 +64,11 @@ public class AddCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddCommand)) {
+        if (!(other instanceof AddStudentCommand)) {
             return false;
         }
 
-        AddCommand otherAddCommand = (AddCommand) other;
+        AddStudentCommand otherAddCommand = (AddStudentCommand) other;
         return toAdd.equals(otherAddCommand.toAdd);
     }
 

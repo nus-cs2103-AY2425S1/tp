@@ -8,6 +8,7 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentNumber;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -33,6 +34,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setName(student.getName());
         descriptor.setEmail(student.getEmail());
         descriptor.setTags(student.getTags());
+        descriptor.setStudentNumber(student.getStudentNumber());
     }
 
     /**
@@ -58,6 +60,15 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
+        return this;
+    }
+
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withStudentNumber(String studentNumber) {
+        descriptor.setStudentNumber(new StudentNumber(studentNumber));
         return this;
     }
 
