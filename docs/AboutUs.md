@@ -5,55 +5,64 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `e1121292@u.nus.edu`
 
 ## Project team
 
-### John Doe
 
-<img src="images/johndoe.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+### Presley Chew
+
+![](images/presleychew.png)
+
+[[github](https://github.com/PresleyChew)]
+[[portfolio](team/presleychew.md)]
 
 * Role: Project Advisor
+* Responsibilities: Ensure task is on track
 
-### Jane Doe
+* About me: I am a year 2 Computer Science student who does a 2nd major in Psychology. I am also interested in AI. When I am not coding, you can usually catch me at the Louis Vuitton store in Ion ;)
 
-<img src="images/johndoe.png" width="200px">
+### Yap Yong Zhuo
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+![](images/yong-zhuo.png)
+
+[[github](http://github.com/yong-zhuo)]
+[[portfolio](team/yong-zhuo.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: UI/UX design and Commands
+* About Me: I am a Year 2 Computer Science student minoring in Psychology.
 
-### Johnny Doe
+### Sivakumar Karthikraj
 
-<img src="images/johndoe.png" width="200px">
+![](images/techraj.png)
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/TechRaj)]
+[[portfolio](team/techraj.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Backend
+* About me: I am a Year 2 Computer Science student who has in interest in SWE and AI/ML. When I am not coding, you can usually catch me cycling across Singapore or listen to some Rap.
 
-### James Doe
+### Ho Wei Nian
 
-<img src="images/johndoe.png" width="200px">
+![](images/hweinian.png)
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/hweinian)]
+[[portfolio](team/hweinian.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Backend
+* About me: I am a Year 2 Computer Science student who has in interest in SWE.
+
+###  Yukna
+
+![](images/yadobler.png)
+
+[[github](http://github.com/yadobler)]
+[[portfolio](team/yadobler.md)]
+
+* Role: Developer
+* Responsibilities: Anything and Everything
+
