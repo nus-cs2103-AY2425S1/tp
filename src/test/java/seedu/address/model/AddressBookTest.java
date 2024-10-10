@@ -130,6 +130,50 @@ public class AddressBookTest {
             + ", products=" + addressBook.getProductList() + "}";
         assertEquals(expected, addressBook.toString());
     }
+    
+    @Test
+    public void setProduct_nullTargetProduct_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.setProduct(null, APPLE));
+    }
+
+    @Test
+    public void setProduct_nullEditedProduct_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.setProduct(APPLE, null));
+    }
+
+    @Test
+    public void setProduct_editedProductIsSameProduct_success() {
+        addressBook.addProduct(APPLE);
+        addressBook.setProduct(APPLE, APPLE);
+        assertEquals(1, addressBook.getProductList().size());
+        assertTrue(addressBook.hasProduct(APPLE));
+    }
+
+    @Test
+    public void setProduct_editedProductHasSameIdentity_success() {
+        addressBook.addProduct(APPLE);
+        Product editedApple = new ProductBuilder(APPLE).withName("Apple").build();
+        addressBook.setProduct(APPLE, editedApple);
+        assertEquals(1, addressBook.getProductList().size());
+        assertTrue(addressBook.hasProduct(editedApple));
+    }
+
+    @Test
+    public void setProduct_editedProductHasDifferentIdentity_success() {
+        addressBook.addProduct(APPLE);
+        Product editedApple = new ProductBuilder().withName("Banana").build();
+        addressBook.setProduct(APPLE, editedApple);
+        assertEquals(1, addressBook.getProductList().size());
+        assertTrue(addressBook.hasProduct(editedApple));
+    }
+
+    @Test
+    public void setProduct_editedProductHasNonUniqueIdentity_throwsDuplicateProductException() {
+        addressBook.addProduct(APPLE);
+        addressBook.addProduct(new ProductBuilder().withName("Banana").build());
+        Product editedApple = new ProductBuilder().withName("Banana").build();
+        assertThrows(DuplicateProductException.class, () -> addressBook.setProduct(APPLE, editedApple));
+    }
 
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Supplier> suppliers = FXCollections.observableArrayList();
