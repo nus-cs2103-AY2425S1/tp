@@ -32,11 +32,10 @@ public class ScheduleCommand extends Command {
             + PREFIX_END_TIME + "END_TIME "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_LOCATION + "The Terrace "
-            + PREFIX_START_TIME + "9:00 am, 9 October 2024 "
-            + PREFIX_END_TIME + "10:00 am, 9 October 2024 ";
+            + PREFIX_START_TIME + "2024-10-09 0900 "
+            + PREFIX_END_TIME + "2024-10-09 1000 ";
 
     public static final String MESSAGE_SUCCESS = "New meeting added: %1$s";
-    //public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
     private final Meeting toAdd;
     private final Index index;
@@ -50,7 +49,7 @@ public class ScheduleCommand extends Command {
         requireNonNull(meeting);
 
         this.index = index;
-        toAdd = meeting;
+        this.toAdd = meeting;
     }
 
     @Override
