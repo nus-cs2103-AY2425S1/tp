@@ -30,6 +30,13 @@ public class PriorityCommand extends Command {
         this.priorityLevel = priorityLevel;
     }
 
+    /**
+     * Executes the priority level update on the specified person in the address book.
+     *
+     * @param model the model in which the person will be updated.
+     * @return a command result that includes a success message.
+     * @throws CommandException if the index provided is out of bounds or the priority level is invalid.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         try {
@@ -53,6 +60,12 @@ public class PriorityCommand extends Command {
         }
     }
 
+    /**
+     * Compares this object with another for equality, based on index and priority level.
+     *
+     * @param other the object to compare this command against.
+     * @return true if both objects have the same data fields.
+     */
     @Override
     public boolean equals(Object other) {
         if (this == other) {
