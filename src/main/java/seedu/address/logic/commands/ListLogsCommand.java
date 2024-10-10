@@ -22,15 +22,12 @@ public class ListLogsCommand extends Command {
     public ListLogsCommand(String NRIC) {
         this.NRIC = NRIC;
     }
-    
     public static final String MESSAGE_SUCCESS = "Listed all logs";
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         //model.updateFilteredPersonList(NRIC);
         //throw new CommandException("ListLogsCommand not implemented yet");
-
         return new CommandResult("The NRIC you inputted is: " + NRIC);
     }
 
