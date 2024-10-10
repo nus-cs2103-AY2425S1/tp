@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
@@ -46,6 +47,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         this();
         resetData(toBeCopied);
         initialiseTags();
+        initialiseWeddings();
     }
 
     //// list overwrite operations
@@ -210,6 +212,22 @@ public class AddressBook implements ReadOnlyAddressBook {
             }
         }
     }
+
+    /**
+     * Creates any weddings attached to a person but not initialised.
+     * This function is only to be used when loading from Storage.
+     */
+    public void initialiseWeddings() {
+        for (Person person : persons) {
+            Set<Wedding> weddingForPerson = person.getWeddings();
+            for (Wedding wedding : weddingForPerson) {
+                if (!this.hasWedding(wedding)) {
+                    this.addWedding(wedding);
+                }
+            }
+        }
+    }
+
     //// util methods
 
     @Override
