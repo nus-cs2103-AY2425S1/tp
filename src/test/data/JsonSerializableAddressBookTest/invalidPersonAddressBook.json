@@ -3,6 +3,8 @@
     "name": "Hans Muster",
     "phone": "9482424",
     "email": "invalid@email!3e",
-    "address": "4th street"
+    "gender": "male",
+    "address": "4th street",
+    "module" : "CS2103T"
   } ]
 }
