@@ -16,24 +16,29 @@ import seedu.address.commons.core.LogsCenter;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
-    public static final String HELP_MESSAGE = "List of commands: \n\n\n" +
-            "<<Viewing help>>\n" +
-            "Format: help\n\n\n" +
-            "<<Adding a person>>\n" +
-            "Format: add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]\n\n\n" +
-            "<<Listing all persons>>\n" +
-            "Format: list\n\n\n" +
-            "<<Editing a person>>\n" +
-            "Format: edit NRIC [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]\n\n\n" +
-            "<<Locating persons by name>>\n" +
-            "Format: find KEYWORD [MORE_KEYWORDS]\n\n\n" +
-            "<<Deleting a person>>\n" +
-            "Format: delete NRIC\n\n\n" +
-            "<<Clearing all entries>>\n" +
-            "Format: clear\n\n\n" +
-            "<<Exiting the program>>\n" +
-            "Format: exit\n\n\n" +
-            "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String HELP_MESSAGE = "List of commands: \n\n\n"
+            + "<<Viewing help>>\n"
+            + "Format: help\n\n\n"
+            + "<<Adding a person>>\n"
+            + "Format: add n/NAME p/PHONE_NUMBER e/EMAIL r/REMARK a/ADDRESS [t/TAG]\n\n\n"
+            + "<<Adding a remark>>\n"
+            + "Format: remark NRIC r/REMARK\n\n\n"
+            + "<<Listing all persons>>\n"
+            + "Format: list\n\n\n"
+            + "<<Adding an appointment>>\n"
+            + "Format: appointment NRIC a/APPOINTMENT\n\n\n"
+            + "<<Editing a person>>\n"
+            + "Format: edit NRIC [n/NAME] [p/PHONE] [e/EMAIL] [r/REMARK] [a/ADDRESS] [t/TAG]\n\n\n"
+            + "<<Locating persons by name>>\n"
+            + "Format: find KEYWORD [MORE_KEYWORDS]\n\n\n"
+            + "<<Deleting a person>>\n"
+            + "Format: delete NRIC\n\n\n"
+            + "<<Clearing all entries>>\n"
+            + "Format: clear\n\n\n"
+            + "<<Exiting the program>>\n"
+            + "Format: exit\n\n\n"
+            + "Refer to the user guide: "
+            + USERGUIDE_URL;
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
 
