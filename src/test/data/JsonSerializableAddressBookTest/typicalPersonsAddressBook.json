@@ -6,7 +6,7 @@
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "status" : "Applied",
-    "note": "",
+    "note": "Super Confident",
     "tags" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
@@ -14,7 +14,7 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "status" : "Applied",
-    "note": "",
+    "note": "Dislike micro-managing",
     "tags" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",

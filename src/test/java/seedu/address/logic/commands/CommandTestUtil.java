@@ -38,8 +38,8 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_STATUS_AMY = "Applied";
     public static final String VALID_STATUS_BOB = "Interviewed";
-    public static final String VALID_NOTE_AMY = "Super confident";
-    public static final String VALID_NOTE_BOB = "Amazing energy and charisma";
+    public static final String VALID_NOTE_AMY = "Optimistic";
+    public static final String VALID_NOTE_BOB = "Charismatic";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
