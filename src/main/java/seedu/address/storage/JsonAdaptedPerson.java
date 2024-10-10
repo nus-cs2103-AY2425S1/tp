@@ -36,7 +36,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name,
                              @JsonProperty("email") String email,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
-                             @JsonProperty("studentNumber") String studentNumber) {
+                             @JsonProperty("studentnumber") String studentNumber) {
         this.name = name;
         this.email = email;
         if (tags != null) {
@@ -85,14 +85,13 @@ class JsonAdaptedPerson {
         final Email modelEmail = new Email(email);
 
         if (studentNumber == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, StudentNumber.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    StudentNumber.class.getSimpleName()));
         }
         if (!StudentNumber.isValidStudentNumber(studentNumber)) {
-            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(StudentNumber.MESSAGE_CONSTRAINTS);
         }
         final StudentNumber modelStudentNumber = new StudentNumber(studentNumber);
-
-
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Student(modelName, modelEmail, modelTags, modelStudentNumber);
     }

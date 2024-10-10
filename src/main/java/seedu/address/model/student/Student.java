@@ -20,6 +20,7 @@ public class Student {
     // Identity fields
     private final Name name;
     private final Email email;
+    private final StudentNumber studentNumber;
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
@@ -34,6 +35,7 @@ public class Student {
         this.name = name;
         this.email = email;
         this.tags.addAll(tags);
+        this.studentNumber = studentNumber;
         this.group = Optional.empty();
         this.studentNumber = studentNumber;
     }
@@ -46,6 +48,7 @@ public class Student {
         this.name = name;
         this.email = email;
         this.tags.addAll(tags);
+        this.studentNumber = studentNumber;
         this.group = group;
         this.studentNumber = studentNumber;
     }
@@ -56,6 +59,10 @@ public class Student {
 
     public Email getEmail() {
         return email;
+    }
+
+    public StudentNumber getStudentNumber() {
+        return studentNumber;
     }
 
     public Optional<String> getGroup() {
@@ -87,6 +94,7 @@ public class Student {
         return otherStudent != null
             && otherStudent.getStudentNumber().equals(getStudentNumber())
             && otherStudent.getName().equals(getName());
+
     }
 
     /**
@@ -124,6 +132,7 @@ public class Student {
             .add("email", email)
             .add("student number", studentNumber)
             .add("tags", tags)
+            .add("student number", studentNumber)
             .add("group", group.orElse(""))
             .toString();
     }

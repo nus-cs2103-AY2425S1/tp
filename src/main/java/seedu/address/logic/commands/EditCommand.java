@@ -1,7 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -70,6 +72,8 @@ public class EditCommand extends Command {
 
         Student studentToEdit = lastShownList.get(index.getZeroBased());
         Student editedStudent = createEditedPerson(studentToEdit, editPersonDescriptor);
+        System.out.println("studentToEdit: " + studentToEdit);
+        System.out.println("editedStudent: " + editedStudent);
 
         if (!studentToEdit.isSamePerson(editedStudent) && model.hasPerson(editedStudent)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
@@ -92,7 +96,10 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(studentToEdit.getTags());
         StudentNumber updatedStudentNumber = editPersonDescriptor.getStudentNumber()
                 .orElse(studentToEdit.getStudentNumber());
-
+      
+        System.out.println(updatedName);
+        System.out.println(updatedEmail);
+        System.out.println(updatedStudentNumber);
         return new Student(updatedName, updatedEmail, updatedTags, updatedStudentNumber);
     }
 
@@ -141,7 +148,7 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setEmail(toCopy.email);
             setTags(toCopy.tags);
-            setStudentNumber(studentNumber);
+            setStudentNumber(toCopy.studentNumber);
         }
 
         /**
@@ -159,7 +166,6 @@ public class EditCommand extends Command {
             return Optional.ofNullable(name);
         }
 
-
         public void setEmail(Email email) {
             this.email = email;
         }
@@ -170,6 +176,14 @@ public class EditCommand extends Command {
 
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
+        }
+
+        public void setStudentNumber(StudentNumber studentNumber) {
+            this.studentNumber = studentNumber;
+        }
+
+        public Optional<StudentNumber> getStudentNumber() {
+            return Optional.ofNullable(studentNumber);
         }
 
         /**
@@ -207,7 +221,8 @@ public class EditCommand extends Command {
             EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
             return Objects.equals(name, otherEditPersonDescriptor.name)
                 && Objects.equals(email, otherEditPersonDescriptor.email)
-                && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                && Objects.equals(studentNumber, otherEditPersonDescriptor.studentNumber);
         }
 
         @Override
@@ -216,6 +231,7 @@ public class EditCommand extends Command {
                 .add("name", name)
                 .add("email", email)
                 .add("tags", tags)
+                .add("student number", studentNumber)
                 .toString();
         }
     }
