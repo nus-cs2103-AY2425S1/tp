@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_OUTOFBOUND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -33,7 +34,7 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                Messages.format(personToDelete));
+                Messages.formatShort(personToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
@@ -57,13 +58,24 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                Messages.format(personToDelete));
+                Messages.formatShort(personToDelete));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
         showNoPerson(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_outOfBoundFilteredList_throwsCommandException() {
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+
+        Index outOfBoundIndex = INDEX_OUTOFBOUND_PERSON;
+
+        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
