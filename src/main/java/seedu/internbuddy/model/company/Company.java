@@ -39,6 +39,16 @@ public class Company {
         this.status = status;
     }
 
+    public Company(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.status = new Status("INTERESTED");
+    }
+
     public Name getName() {
         return name;
     }

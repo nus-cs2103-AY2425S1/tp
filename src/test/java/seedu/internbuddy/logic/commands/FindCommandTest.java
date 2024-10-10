@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.internbuddy.logic.Messages.MESSAGE_COMPANIES_LISTED_OVERVIEW;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.internbuddy.testutil.TypicalCompanies.CARL;
-import static seedu.internbuddy.testutil.TypicalCompanies.ELLE;
-import static seedu.internbuddy.testutil.TypicalCompanies.FIONA;
+import static seedu.internbuddy.testutil.TypicalCompanies.FACEBOOK;
+import static seedu.internbuddy.testutil.TypicalCompanies.NETFLIX;
+import static seedu.internbuddy.testutil.TypicalCompanies.TESLA;
 import static seedu.internbuddy.testutil.TypicalCompanies.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -67,11 +67,11 @@ public class FindCommandTest {
     @Test
     public void execute_multipleKeywords_multiplecompaniesFound() {
         String expectedMessage = String.format(MESSAGE_COMPANIES_LISTED_OVERVIEW, 3);
-        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+        NameContainsKeywordsPredicate predicate = preparePredicate("Facebook Tesla Netflix");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredCompanyList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredCompanyList());
+        assertEquals(Arrays.asList(FACEBOOK, TESLA, NETFLIX), model.getFilteredCompanyList());
     }
 
     @Test

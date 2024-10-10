@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.internbuddy.logic.commands.CommandTestUtil.showcompanyAtIndex;
+import static seedu.internbuddy.logic.commands.CommandTestUtil.showCompanyAtIndex;
 import static seedu.internbuddy.testutil.TypicalCompanies.getTypicalAddressBook;
 import static seedu.internbuddy.testutil.TypicalIndexes.INDEX_FIRST_COMPANY;
 import static seedu.internbuddy.testutil.TypicalIndexes.INDEX_SECOND_COMPANY;
@@ -51,7 +51,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showcompanyAtIndex(model, INDEX_FIRST_COMPANY);
+        showCompanyAtIndex(model, INDEX_FIRST_COMPANY);
 
         Company companyToDelete = model.getFilteredCompanyList().get(INDEX_FIRST_COMPANY.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_COMPANY);
@@ -68,7 +68,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showcompanyAtIndex(model, INDEX_FIRST_COMPANY);
+        showCompanyAtIndex(model, INDEX_FIRST_COMPANY);
 
         Index outOfBoundIndex = INDEX_SECOND_COMPANY;
         // ensures that outOfBoundIndex is still in bounds of address book list

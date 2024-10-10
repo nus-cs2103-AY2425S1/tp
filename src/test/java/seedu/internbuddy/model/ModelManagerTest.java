@@ -5,13 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.internbuddy.model.Model.PREDICATE_SHOW_ALL_COMPANIES;
 import static seedu.internbuddy.testutil.Assert.assertThrows;
-<<<<<<< HEAD
 import static seedu.internbuddy.testutil.TypicalCompanies.GOOGLE;
 import static seedu.internbuddy.testutil.TypicalCompanies.MICROSOFT;
-=======
-import static seedu.internbuddy.testutil.TypicalCompanies.ALICE;
-import static seedu.internbuddy.testutil.TypicalCompanies.BENSON;
->>>>>>> 398707caf839baca66fada2b3d5612969e0eb79e
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -90,7 +85,6 @@ public class ModelManagerTest {
 
     @Test
     public void hasCompany_companyNotInAddressBook_returnsFalse() {
-<<<<<<< HEAD
         assertFalse(modelManager.hasCompany(GOOGLE));
     }
 
@@ -107,20 +101,6 @@ public class ModelManagerTest {
     public void getFilteredCompanyList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager
             .getFilteredCompanyList().remove(0));
-=======
-        assertFalse(modelManager.hasCompany(ALICE));
-    }
-
-    @Test
-    public void hasCompany_companyInAddressBook_returnsTrue() {
-        modelManager.addCompany(ALICE);
-        assertTrue(modelManager.hasCompany(ALICE));
-    }
-
-    @Test
-    public void getFilteredCompanyList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredCompanyList().remove(0));
->>>>>>> 398707caf839baca66fada2b3d5612969e0eb79e
     }
 
     /**
@@ -128,12 +108,8 @@ public class ModelManagerTest {
      */
     @Test
     public void equals() {
-<<<<<<< HEAD
         AddressBook addressBook = new AddressBookBuilder()
             .withCompany(GOOGLE).withCompany(MICROSOFT).build();
-=======
-        AddressBook addressBook = new AddressBookBuilder().withCompany(ALICE).withCompany(BENSON).build();
->>>>>>> 398707caf839baca66fada2b3d5612969e0eb79e
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -155,11 +131,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
         // different filteredList -> returns false
-<<<<<<< HEAD
         String[] keywords = GOOGLE.getName().fullName.split("\\s+");
-=======
-        String[] keywords = ALICE.getName().fullName.split("\\s+");
->>>>>>> 398707caf839baca66fada2b3d5612969e0eb79e
         modelManager.updateFilteredCompanyList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 

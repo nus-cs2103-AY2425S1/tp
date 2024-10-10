@@ -10,6 +10,7 @@ import seedu.internbuddy.model.company.Company;
 import seedu.internbuddy.model.company.Email;
 import seedu.internbuddy.model.company.Name;
 import seedu.internbuddy.model.company.Phone;
+import seedu.internbuddy.model.company.Status;
 import seedu.internbuddy.model.tag.Tag;
 
 /**
@@ -78,6 +79,11 @@ public class EditCompanyDescriptorBuilder {
     public EditCompanyDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
+        return this;
+    }
+
+    public EditCompanyDescriptorBuilder withStatus(String status) {
+        descriptor.setStatus(new Status(status));
         return this;
     }
 

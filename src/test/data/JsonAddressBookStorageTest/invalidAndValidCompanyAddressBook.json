@@ -1,13 +1,17 @@
 {
   "companies": [ {
-    "name": "Valid company",
-    "phone": "9482424",
-    "email": "hans@example.com",
-    "address": "4th street"
+    "name": "Apple",
+    "phone": "4089961010",
+    "email": "contact@apple.com",
+    "address": "1 Apple Park Way, Cupertino, CA",
+    "status": "INTERESTED",
+    "tags": []
   }, {
-    "name": "Company With Invalid Phone Field",
-    "phone": "948asdf2424",
-    "email": "hans@example.com",
-    "address": "4th street"
+    "name": "Amazon",
+    "phone": "20626asdf61000",
+    "email": "contact@amazon.com",
+    "address": "410 Terry Ave N, Seattle, WA",
+    "status": "INTERESTED",
+    "tags": ["ecommerce", "cloud"]
   } ]
 }

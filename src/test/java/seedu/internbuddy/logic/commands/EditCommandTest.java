@@ -3,14 +3,14 @@ package seedu.internbuddy.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.internbuddy.logic.commands.CommandTestUtil.DESC_AMY;
-import static seedu.internbuddy.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.internbuddy.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.internbuddy.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.internbuddy.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.internbuddy.logic.commands.CommandTestUtil.DESC_GOOGLE;
+import static seedu.internbuddy.logic.commands.CommandTestUtil.DESC_MICROSOFT;
+import static seedu.internbuddy.logic.commands.CommandTestUtil.VALID_NAME_MICROSOFT;
+import static seedu.internbuddy.logic.commands.CommandTestUtil.VALID_PHONE_MICROSOFT;
+import static seedu.internbuddy.logic.commands.CommandTestUtil.VALID_TAG_TECH;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.internbuddy.logic.commands.CommandTestUtil.showcompanyAtIndex;
+import static seedu.internbuddy.logic.commands.CommandTestUtil.showCompanyAtIndex;
 import static seedu.internbuddy.testutil.TypicalCompanies.getTypicalAddressBook;
 import static seedu.internbuddy.testutil.TypicalIndexes.INDEX_FIRST_COMPANY;
 import static seedu.internbuddy.testutil.TypicalIndexes.INDEX_SECOND_COMPANY;
@@ -52,22 +52,22 @@ public class EditCommandTest {
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
-        Index indexLastcompany = Index.fromOneBased(model.getFilteredCompanyList().size());
-        Company lastcompany = model.getFilteredCompanyList().get(indexLastcompany.getZeroBased());
+        Index indexLastCompany = Index.fromOneBased(model.getFilteredCompanyList().size());
+        Company lastCompany = model.getFilteredCompanyList().get(indexLastCompany.getZeroBased());
 
-        CompanyBuilder companyInList = new CompanyBuilder(lastcompany);
-        Company editedcompany = companyInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+        CompanyBuilder companyInList = new CompanyBuilder(lastCompany);
+        Company editedcompany = companyInList.withName(VALID_NAME_MICROSOFT).withPhone(VALID_PHONE_MICROSOFT)
+                .withTags(VALID_TAG_TECH).build();
 
-        EditCompanyDescriptor descriptor = new EditCompanyDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
-        EditCommand editCommand = new EditCommand(indexLastcompany, descriptor);
+        EditCompanyDescriptor descriptor = new EditCompanyDescriptorBuilder().withName(VALID_NAME_MICROSOFT)
+                .withPhone(VALID_PHONE_MICROSOFT).withTags(VALID_TAG_TECH).build();
+        EditCommand editCommand = new EditCommand(indexLastCompany, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_COMPANY_SUCCESS,
                 Messages.format(editedcompany));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setCompany(lastcompany, editedcompany);
+        expectedModel.setCompany(lastCompany, editedcompany);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -87,12 +87,12 @@ public class EditCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        showcompanyAtIndex(model, INDEX_FIRST_COMPANY);
+        showCompanyAtIndex(model, INDEX_FIRST_COMPANY);
 
         Company companyInFilteredList = model.getFilteredCompanyList().get(INDEX_FIRST_COMPANY.getZeroBased());
-        Company editedcompany = new CompanyBuilder(companyInFilteredList).withName(VALID_NAME_BOB).build();
+        Company editedcompany = new CompanyBuilder(companyInFilteredList).withName(VALID_NAME_MICROSOFT).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_COMPANY,
-                new EditCompanyDescriptorBuilder().withName(VALID_NAME_BOB).build());
+                new EditCompanyDescriptorBuilder().withName(VALID_NAME_MICROSOFT).build());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_COMPANY_SUCCESS,
                 Messages.format(editedcompany));
@@ -104,7 +104,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_duplicatecompanyUnfilteredList_failure() {
+    public void execute_duplicateCompanyUnfilteredList_failure() {
         Company firstcompany = model.getFilteredCompanyList().get(INDEX_FIRST_COMPANY.getZeroBased());
         EditCompanyDescriptor descriptor = new EditCompanyDescriptorBuilder(firstcompany).build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_COMPANY, descriptor);
@@ -113,8 +113,8 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_duplicatecompanyFilteredList_failure() {
-        showcompanyAtIndex(model, INDEX_FIRST_COMPANY);
+    public void execute_duplicateCompanyFilteredList_failure() {
+        showCompanyAtIndex(model, INDEX_FIRST_COMPANY);
 
         // edit company in filtered list into a duplicate in address book
         Company companyInList = model.getAddressBook().getCompanyList().get(INDEX_SECOND_COMPANY.getZeroBased());
@@ -125,9 +125,9 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_invalidcompanyIndexUnfilteredList_failure() {
+    public void execute_invalidCompanyIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredCompanyList().size() + 1);
-        EditCompanyDescriptor descriptor = new EditCompanyDescriptorBuilder().withName(VALID_NAME_BOB).build();
+        EditCompanyDescriptor descriptor = new EditCompanyDescriptorBuilder().withName(VALID_NAME_MICROSOFT).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX);
@@ -138,24 +138,24 @@ public class EditCommandTest {
      * but smaller than size of address book
      */
     @Test
-    public void execute_invalidcompanyIndexFilteredList_failure() {
-        showcompanyAtIndex(model, INDEX_FIRST_COMPANY);
+    public void execute_invalidCompanyIndexFilteredList_failure() {
+        showCompanyAtIndex(model, INDEX_FIRST_COMPANY);
         Index outOfBoundIndex = INDEX_SECOND_COMPANY;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getCompanyList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
-                new EditCompanyDescriptorBuilder().withName(VALID_NAME_BOB).build());
+                new EditCompanyDescriptorBuilder().withName(VALID_NAME_MICROSOFT).build());
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_COMPANY, DESC_AMY);
+        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_COMPANY, DESC_GOOGLE);
 
         // same values -> returns true
-        EditCompanyDescriptor copyDescriptor = new EditCompanyDescriptor(DESC_AMY);
+        EditCompanyDescriptor copyDescriptor = new EditCompanyDescriptor(DESC_GOOGLE);
         EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_COMPANY, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
@@ -169,10 +169,10 @@ public class EditCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_COMPANY, DESC_AMY)));
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_COMPANY, DESC_GOOGLE)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_COMPANY, DESC_BOB)));
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_COMPANY, DESC_MICROSOFT)));
     }
 
     @Test
