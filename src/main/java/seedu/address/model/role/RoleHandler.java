@@ -11,12 +11,9 @@ import seedu.address.model.role.exceptions.InvalidRoleException;
 public class RoleHandler {
     public static final String MESSAGE_CONSTRAINTS = "Roles should be alphanumeric";
 
-    /**
-     * Enum for the different types of roles
-     */
-    public enum RoleType {
-        SPONSOR, VOLUNTEER, ATTENDEE, VENDOR
-    }
+
+
+
     private static final Attendee ATTENDEE = new Attendee();
     private static final Sponsor SPONSOR = new Sponsor();
     private static final Vendor VENDOR = new Vendor();
@@ -65,4 +62,5 @@ public class RoleHandler {
         }
         return role.isTagged(person);
     }
+
 }
