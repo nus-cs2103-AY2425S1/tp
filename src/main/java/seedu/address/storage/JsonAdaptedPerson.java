@@ -54,7 +54,6 @@ class JsonAdaptedPerson {
         this.projectStatus = projectStatus;
         this.paymentStatus = paymentStatus;
         this.clientStatus = clientStatus;
-      
         if (tags != null) {
             this.tags.addAll(tags);
         }
