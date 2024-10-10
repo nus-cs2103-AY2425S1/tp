@@ -18,7 +18,7 @@ public class Name {
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public final String fullName;
+    public String fullName;
 
     /**
      * Constructs a {@code Name}.
@@ -26,6 +26,12 @@ public class Name {
      * @param name A valid name.
      */
     public Name(String name) {
+        requireNonNull(name);
+        checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
+        fullName = name;
+    }
+
+    public void changeName(String name) {
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
         fullName = name;

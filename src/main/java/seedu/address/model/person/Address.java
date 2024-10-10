@@ -17,7 +17,7 @@ public class Address {
      */
     public static final String VALIDATION_REGEX = "[^\\s].*";
 
-    public final String value;
+    public String value;
 
     /**
      * Constructs an {@code Address}.
@@ -25,6 +25,12 @@ public class Address {
      * @param address A valid address.
      */
     public Address(String address) {
+        requireNonNull(address);
+        checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
+        value = address;
+    }
+
+    public void changeAddress(String address) {
         requireNonNull(address);
         checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
         value = address;

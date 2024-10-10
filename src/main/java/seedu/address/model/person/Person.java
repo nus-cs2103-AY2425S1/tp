@@ -119,6 +119,22 @@ public class Person {
         return Objects.hash(name, phone, email, address, tags);
     }
 
+    public void changeName(String newName) {
+        name.changeName(newName);
+    }
+
+    public void changePhoneNumber(String newNumber) {
+        phone.changePhoneNumber(newNumber);
+    }
+
+    public void changeEmail(String newEmail) {
+        email.changeEmail(newEmail);
+    }
+
+    public void changeAddress(String newAddress) {
+        address.changeAddress(newAddress);
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
