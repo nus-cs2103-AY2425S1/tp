@@ -25,6 +25,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListExpiringPoliciesCommand;
 import seedu.address.logic.commands.UpdatePolicyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -125,6 +126,19 @@ public class AddressBookParserTest {
         PolicyMap policies = new PolicyMap();
         policies.add(new LifePolicy());
         assertEquals(new DeletePolicyCommand(INDEX_FIRST_PERSON, policies), command);
+    }
+
+    @Test
+    public void parseCommand_listExpiringPolicies() throws Exception {
+        // This will be changed in future iterations when args are introduced to the command
+        // Test valid usage of the command without arguments
+        assertTrue(parser.parseCommand(ListExpiringPoliciesCommand.COMMAND_WORD)
+                instanceof ListExpiringPoliciesCommand);
+
+        // Test invalid usage where extra arguments are provided
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListExpiringPoliciesCommand.MESSAGE_USAGE), () ->
+                        parser.parseCommand(ListExpiringPoliciesCommand.COMMAND_WORD + " extraArgument"));
     }
 
     @Test
