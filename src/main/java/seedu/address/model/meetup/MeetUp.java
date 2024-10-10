@@ -57,7 +57,7 @@ public class MeetUp { //TODO
     @Override
     public String toString() {
         //TODO
-        return "";
+        return "Meetup Object";
     }
 
 }
