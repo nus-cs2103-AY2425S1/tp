@@ -26,7 +26,7 @@ public class AssignCommand extends Command {
             + PREFIX_EMPLOYEE_ID + "456";
 
     public static final String MESSAGE_SUCCESS = "Project %1$s assigned to person %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This assignment already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_ASSIGNMENT = "This assignment already exists in the address book";
 
     private final Assignment toAssign;
 
@@ -43,7 +43,7 @@ public class AssignCommand extends Command {
         requireNonNull(model);
 
         if (model.hasAssignment(toAssign)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_ASSIGNMENT);
         }
 
         model.addAssignment(toAssign);
