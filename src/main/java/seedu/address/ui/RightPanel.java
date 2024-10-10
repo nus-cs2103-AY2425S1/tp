@@ -53,6 +53,8 @@ public class RightPanel extends UiPart<VBox> {
         detailPanelPlaceholder.getChildren().add(detailPanel.getRoot());
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+//        personListPanel.setSelectionListener(this.detailPanel);
     }
 
 

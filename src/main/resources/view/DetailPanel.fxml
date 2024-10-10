@@ -7,5 +7,12 @@
            xmlns:fx="http://javafx.com/fxml"
            fx:id="detailPanel"
            styleClass="pane-with-border">
-    <TextArea editable="false" styleClass="result-display">This is detailPanel</TextArea>
+    <Label fx:id="name" />
+    <Label fx:id="id" />
+    <Label fx:id="phone" />
+    <Label fx:id="address" />
+    <Label fx:id="email" />
+    <Label fx:id="role" />
+    <Label fx:id="major" />
+    <FlowPane fx:id="tags" />
 </StackPane>
