@@ -11,7 +11,6 @@ import seedu.address.model.person.Nric;
 import seedu.address.model.person.Priority;
 
 
-
 /**
  * Parses user input for the {@link PriorityCommand} and creates a new instance of it.
  */
@@ -30,7 +29,7 @@ public class PriorityCommandParser implements Parser<PriorityCommand> {
         String trimmedArgs = args.trim();
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_NRIC, PREFIX_PRIORITY);
-        System.out.println(trimmedArgs);
+
         if (!argMultimap.getValue(PREFIX_NRIC).isPresent()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     PriorityCommand.MESSAGE_USAGE));

@@ -13,6 +13,8 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.MedCon;
+import seedu.address.model.person.Priority;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -28,7 +30,8 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_MEDCON = "Diabetes";
+    public static final String DEFAULT_MEDCON = "";
+    public static final String DEFAULT_PRIORITY = "NONE";
 
     private Name name;
     private Nric nric;
@@ -38,6 +41,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private Priority priority;
     private Set<Appointment> appointments;
     private MedCon medCon;
 
@@ -53,6 +57,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        priority = new Priority(DEFAULT_PRIORITY);
         appointments = new HashSet<>();
         medCon = new MedCon(DEFAULT_MEDCON);
     }
@@ -69,6 +74,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+        priority = personToCopy.getPriority();
         appointments = new HashSet<>(personToCopy.getAppointments());
         medCon = personToCopy.getMedCon();
     }
@@ -153,6 +159,14 @@ public class PersonBuilder {
         this.medCon = new MedCon(medCon);
         return this;
     }
+  
+    /**
+     * Sets the {@code Priority} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withPriority(String priority) {
+        this.priority = new Priority(priority);
+        return this;
+    }
 
     /**
      * Builds and returns a {@code Person} object with the current attributes set in this builder.
@@ -160,8 +174,7 @@ public class PersonBuilder {
      * @return A {@code Person} object with the current state of this builder.
      */
     public Person build() {
-        return new Person(name, phone, email, nric, address, dob, gender, tags, appointments,
-                medCon);
+        return new Person(name, phone, email, nric, address, dob, gender, tags, priority, appointments, medCon);
     }
 
 }
