@@ -350,3 +350,14 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+#personType {
+    -fx-text-fill: white;
+    -fx-background-color: #f5182f;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+    -fx-vgap: 3;
+}
+
