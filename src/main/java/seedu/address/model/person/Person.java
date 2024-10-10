@@ -25,18 +25,21 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final GradeList gradeList;
+    private final AttendanceList attendanceList;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, GradeList gradeList) {
-        requireAllNonNull(name, phone, email, address, tags, gradeList);
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, GradeList gradeList,
+            AttendanceList attendanceList) {
+        requireAllNonNull(name, phone, email, address, tags, gradeList, attendanceList);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
         this.gradeList = gradeList;
+        this.attendanceList = attendanceList;
     }
 
     public Name getName() {
@@ -57,6 +60,10 @@ public class Person {
 
     public GradeList getGradeList() {
         return gradeList;
+    }
+
+    public AttendanceList getAttendanceList() {
+        return attendanceList;
     }
 
 
@@ -102,13 +109,14 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
-                && gradeList.equals(otherPerson.gradeList);
+                && gradeList.equals(otherPerson.gradeList)
+                && attendanceList.equals(otherPerson.attendanceList);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, gradeList);
+        return Objects.hash(name, phone, email, address, tags, gradeList, attendanceList);
     }
 
     @Override
@@ -120,6 +128,7 @@ public class Person {
                 .add("address", address)
                 .add("tags", tags)
                 .add("gradeList", gradeList)
+                .add("attendanceList", attendanceList)
                 .toString();
     }
 
