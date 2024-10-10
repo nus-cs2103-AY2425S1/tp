@@ -7,9 +7,7 @@ import static keycontacts.logic.parser.CliSyntax.PREFIX_START_TIME;
 
 import java.time.LocalDate;
 
-import keycontacts.logic.commands.AddCommand;
 import keycontacts.logic.commands.CancelLessonCommand;
-import keycontacts.logic.commands.DeleteCommand;
 import keycontacts.logic.parser.exceptions.ParseException;
 import keycontacts.model.lesson.Time;
 
@@ -30,8 +28,9 @@ public class CancelLessonCommandParser implements Parser<CancelLessonCommand> {
                     ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_START_TIME);
 
             if (!argMultimap.arePrefixesPresent(PREFIX_DATE, PREFIX_START_TIME)
-                    || !argMultimap.getPreamble().isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                    || argMultimap.isPreamblePresent()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        CancelLessonCommand.MESSAGE_USAGE));
             }
             argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DATE, PREFIX_START_TIME);
 
@@ -40,7 +39,7 @@ public class CancelLessonCommandParser implements Parser<CancelLessonCommand> {
             return new CancelLessonCommand(date, startTime);
         } catch (ParseException e) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), e);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, CancelLessonCommand.MESSAGE_USAGE), e);
         }
     }
 
