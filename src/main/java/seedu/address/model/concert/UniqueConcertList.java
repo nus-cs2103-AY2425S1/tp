@@ -22,7 +22,7 @@ import seedu.address.model.concert.exceptions.DuplicateConcertException;
  *
  * Supports a minimal set of list operations.
  *
- * @see Concert#isSameconcert(Concert)
+ * @see Concert#isSameConcert(Concert)
  */
 public class UniqueConcertList implements Iterable<Concert> {
 
@@ -50,23 +50,23 @@ public class UniqueConcertList implements Iterable<Concert> {
     }
 
     /**
-     * Replaces the concert {@code target} in the list with {@code editedconcert}. {@code target}
-     * must exist in the list. The concert identity of {@code editedconcert} must not be the same as
+     * Replaces the concert {@code target} in the list with {@code editedConcert}. {@code target}
+     * must exist in the list. The concert identity of {@code editedConcert} must not be the same as
      * another existing concert in the list.
      */
-    public void setConcert(Concert target, Concert editedconcert) {
-        requireAllNonNull(target, editedconcert);
+    public void setConcert(Concert target, Concert editedConcert) {
+        requireAllNonNull(target, editedConcert);
 
         int index = internalList.indexOf(target);
         if (index == -1) {
             throw new ConcertNotFoundException();
         }
 
-        if (!target.isSameConcert(editedconcert) && contains(editedconcert)) {
+        if (!target.isSameConcert(editedConcert) && contains(editedConcert)) {
             throw new DuplicateConcertException();
         }
 
-        internalList.set(index, editedconcert);
+        internalList.set(index, editedConcert);
     }
 
     /**
@@ -120,8 +120,8 @@ public class UniqueConcertList implements Iterable<Concert> {
             return false;
         }
 
-        UniqueConcertList otherUniqueconcertList = (UniqueConcertList) other;
-        return internalList.equals(otherUniqueconcertList.internalList);
+        UniqueConcertList otherUniqueConcertList = (UniqueConcertList) other;
+        return internalList.equals(otherUniqueConcertList.internalList);
     }
 
     @Override
