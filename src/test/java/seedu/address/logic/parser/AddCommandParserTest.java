@@ -145,6 +145,7 @@ public class AddCommandParserTest {
         Person expectedPersonBlankEmail = new PersonBuilder(ERIC).withTags().build();
         assertParseSuccess(parser, NAME_DESC_ERIC + PHONE_DESC_ERIC + EMAIL_DESC_ERIC
                 + ADDRESS_DESC_ERIC, new AddCommand(expectedPersonBlankEmail));
+
         // no email address tag
         assertParseSuccess(parser, NAME_DESC_ERIC + PHONE_DESC_ERIC + ADDRESS_DESC_ERIC,
                 new AddCommand(expectedPersonBlankEmail));
