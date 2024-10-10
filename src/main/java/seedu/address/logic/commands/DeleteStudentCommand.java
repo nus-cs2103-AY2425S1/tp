@@ -4,6 +4,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.student.StudentNumber;
 
+/**
+ * Deletes a student.
+ */
 public class DeleteStudentCommand extends Command {
     public static final String COMMAND_WORD = "deletestu";
 
