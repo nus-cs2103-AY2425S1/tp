@@ -4,11 +4,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
+import seedu.address.model.person.EmergencyContact;
+import seedu.address.model.person.Level;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Subject;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -18,14 +20,18 @@ public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_EMAIL = "amy@gmail.com";
+    public static final String DEFAULT_EMERGENCY_CONTACT = "93838383";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_NOTE = "";
+    public static final String DEFAULT_LEVEL = "P3";
 
     private Name name;
     private Phone phone;
-    private Email email;
+    private EmergencyContact emergencyContact;
     private Address address;
-    private Set<Tag> tags;
+    private Note note;
+    private Set<Subject> subjects;
+    private Level level;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -33,9 +39,11 @@ public class PersonBuilder {
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
-        email = new Email(DEFAULT_EMAIL);
+        emergencyContact = new EmergencyContact(DEFAULT_EMERGENCY_CONTACT);
         address = new Address(DEFAULT_ADDRESS);
-        tags = new HashSet<>();
+        note = new Note(DEFAULT_NOTE);
+        subjects = new HashSet<>();
+        level = new Level(DEFAULT_LEVEL);
     }
 
     /**
@@ -44,9 +52,11 @@ public class PersonBuilder {
     public PersonBuilder(Person personToCopy) {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
-        email = personToCopy.getEmail();
+        emergencyContact = personToCopy.getEmergencyContact();
         address = personToCopy.getAddress();
-        tags = new HashSet<>(personToCopy.getTags());
+        note = personToCopy.getNote();
+        subjects = new HashSet<>(personToCopy.getSubjects());
+        level = personToCopy.getLevel();
     }
 
     /**
@@ -58,10 +68,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code subjects} into a {@code Set<Subject>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
+    public PersonBuilder withSubjects(String ... subjects) {
+        this.subjects = SampleDataUtil.getSubjectSet(subjects);
         return this;
     }
 
@@ -74,6 +84,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Note} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withNote(String note) {
+        this.note = new Note(note);
+        return this;
+    }
+
+    /**
      * Sets the {@code Phone} of the {@code Person} that we are building.
      */
     public PersonBuilder withPhone(String phone) {
@@ -82,15 +100,23 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code Person} that we are building.
+     * Sets the {@code EmergencyContact} of the {@code Person} that we are building.
      */
-    public PersonBuilder withEmail(String email) {
-        this.email = new Email(email);
+    public PersonBuilder withEmergencyContact(String phone) {
+        this.emergencyContact = new EmergencyContact(phone);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Level} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withLevel(String level) {
+        this.level = !level.isEmpty() ? new Level(level) : new Level("NONE");
         return this;
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, phone, emergencyContact, address, note, subjects, level);
     }
 
 }

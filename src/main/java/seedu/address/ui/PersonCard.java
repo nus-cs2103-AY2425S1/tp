@@ -10,7 +10,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * A UI component that displays information of a {@code Person}.
  */
 public class PersonCard extends UiPart<Region> {
 
@@ -35,11 +35,15 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
+    private Label emergencyContact;
+    @FXML
     private Label address;
     @FXML
-    private Label email;
+    private Label note;
     @FXML
-    private FlowPane tags;
+    private FlowPane subjects;
+    @FXML
+    private Label level;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -49,11 +53,13 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        phone.setText("Phone number: " + person.getPhone().value);
+        emergencyContact.setText("Emergency Contact: " + person.getEmergencyContact().value);
+        address.setText("Address: " + person.getAddress().value);
+        note.setText(person.getNote().value);
+        person.getSubjects().stream()
+                .sorted(Comparator.comparing(subject -> subject.subjectName))
+                .forEach(subject -> subjects.getChildren()
+                        .add(new Label(person.getLevel().levelName + " " + subject.subjectName)));
     }
 }

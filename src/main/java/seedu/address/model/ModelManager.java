@@ -98,6 +98,8 @@ public class ModelManager implements Model {
         addressBook.removePerson(target);
     }
 
+
+
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
@@ -105,10 +107,10 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void setPerson(Person target, Person updatedPerson) {
+        requireAllNonNull(target, updatedPerson);
 
-        addressBook.setPerson(target, editedPerson);
+        addressBook.setPerson(target, updatedPerson);
     }
 
     //=========== Filtered Person List Accessors =============================================================
