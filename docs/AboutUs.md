@@ -9,51 +9,41 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Yeo Bing Teck, George
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/george-yeo.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[github](https://github.com/george-yeo)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Project Advisor
+* Responsibilities: Features
 
-### Jane Doe
+### Atharva Tyagi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ty4g1.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/ty4g1)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Soo Yi Tao
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/sooyitao.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/sooyitao)] [[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Manas Bam
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/lolipop-intelligence.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/LOLIPOP-INTELLIGENCE)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
+* Responsibilities: PM and Features

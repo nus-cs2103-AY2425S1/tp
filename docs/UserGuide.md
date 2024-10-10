@@ -29,7 +29,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete John Doe` : Deletes the John Doe contact.
 
    * `clear` : Deletes all contacts.
 
@@ -83,8 +83,8 @@ A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe, Alexander p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+* `add n/Betsy d/o Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/+651234567 t/criminal`
 
 ### Listing all persons : `list`
 
@@ -118,12 +118,12 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Partial words will be matched e.g. `Han` will match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
+* `find John` returns `john`, `John Doe`, and `Johnny`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
@@ -131,15 +131,18 @@ Examples:
 
 Deletes the specified person from the address book.
 
-Format: `delete INDEX`
+Format: `delete KEYWORD`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the person with the specified `KEYWORD`.
+* Only the name is matched.
+* Delete is case-insensitive. e.g `hans` will delete `Hans`
+* If more than one person matches the KEYWORD, 
+  an error message will be displayed indicating that multiple matches were found.
+* Partial words will be deleted e.g. `Han` will delete `Hans` if no other matches
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `delete Alice`: Deletes the person named Alice from the address book.
+* `delete Al`: Deletes the person named Alice if it’s the only person matching the partial name "Al".
 
 ### Clearing all entries : `clear`
 
