@@ -16,7 +16,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.task.Task;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.TaskBuilder;
 
 public class ModelManagerTest {
 
@@ -91,6 +93,42 @@ public class ModelManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void hasTask_taskNotInAddressBook_returnsFalse() {
+        Task task = new TaskBuilder().withDescription("Buy medication").build();
+        assertFalse(modelManager.hasTask(task));
+    }
+
+    @Test
+    public void hasTask_taskInAddressBook_returnsTrue() {
+        Task task = new TaskBuilder().withDescription("Buy medication").build();
+        modelManager.addTask(task);
+        assertTrue(modelManager.hasTask(task));
+    }
+
+    @Test
+    public void getFilteredTaskList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredTaskList().remove(0));
+    }
+
+    @Test
+    public void deleteAssociatedTasks_personWithTasks_tasksDeleted() {
+        Task task1 = new TaskBuilder().withDescription("Task 1").withPatient(ALICE).build();
+        Task task2 = new TaskBuilder().withDescription("Task 2").withPatient(ALICE).build();
+
+        // Add the tasks to the model
+        modelManager.addTask(task1);
+        modelManager.addTask(task2);
+
+        assertTrue(modelManager.hasTask(task1));
+        assertTrue(modelManager.hasTask(task2));
+
+        modelManager.deleteAssociatedTasks(ALICE);
+
+        assertFalse(modelManager.hasTask(task1));
+        assertFalse(modelManager.hasTask(task2));
     }
 
     @Test

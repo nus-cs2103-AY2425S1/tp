@@ -10,6 +10,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.PriorityLevel;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -37,6 +38,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
         descriptor.setTags(person.getTags());
+        descriptor.setPriorityLevel(person.getPriorityLevel());
     }
 
     /**
@@ -78,6 +80,18 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
+        return this;
+    }
+
+    /**
+     * Sets the {@code PriorityLevel} of the {@code EditPersonDescriptor} that we are building.
+     *
+     * @param priorityLevel the priority level to set for the person, must be a valid integer representing
+     *                      the priority (typically 1, 2, or 3).
+     * @return the current instance of {@code EditPersonDescriptorBuilder} with the updated priority level.
+     */
+    public EditPersonDescriptorBuilder withPriorityLevel(int priorityLevel) {
+        descriptor.setPriorityLevel(new PriorityLevel(priorityLevel));
         return this;
     }
 

@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -13,21 +15,27 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EmergencyContactCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.PriorityCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+
 
 public class AddressBookParserTest {
 
@@ -89,6 +97,16 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_emergencyContact() throws Exception {
+        final EmergencyContact emergencyContact = new EmergencyContact("Lily", "12345678");
+        EmergencyContactCommand command = (EmergencyContactCommand) parser.parseCommand(
+                EmergencyContactCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_NAME + emergencyContact.getName() + " "
+                        + PREFIX_PHONE + emergencyContact.getNumber());
+        assertEquals(new EmergencyContactCommand(INDEX_FIRST_PERSON, emergencyContact), command);
+    }
+
+    @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
             -> parser.parseCommand(""));
@@ -98,4 +116,25 @@ public class AddressBookParserTest {
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
     }
+
+    @Test
+    public void parseCommand_addTask() throws Exception {
+        String taskDescription = "Buy medication";
+        Index index1 = INDEX_FIRST_PERSON;
+
+        AddTaskCommand expectedCommand = new AddTaskCommand(index1, taskDescription);
+
+        String userInput = AddTaskCommand.COMMAND_WORD + " 1" + " d/" + taskDescription;
+
+        AddTaskCommand command = (AddTaskCommand) parser.parseCommand(userInput);
+        assertEquals(expectedCommand, command);
+    }
+
+    @Test
+    public void parseCommand_priorityMissingLevel_throwsParseException() {
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                PriorityCommand.MESSAGE_USAGE), () -> parser.parseCommand(
+                                PriorityCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()));
+    }
+
 }
