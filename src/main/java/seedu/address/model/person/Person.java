@@ -73,7 +73,9 @@ public class Person implements Comparable<Person> {
         return address;
     }
 
-    public PostalCode getPostalCode() { return postalCode; }
+    public PostalCode getPostalCode() {
+        return postalCode;
+    }
 
     public HashMap<Order, Integer> getOrderFrequency() {
         return this.orderFrequency;
