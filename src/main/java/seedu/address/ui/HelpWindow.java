@@ -1,5 +1,8 @@
 package seedu.address.ui;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -16,9 +19,9 @@ import seedu.address.commons.core.LogsCenter;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
-    public static final String EXTRA_HELP_MESSAGE = "For more information, refer to the user guide: " + USERGUIDE_URL;
+    public static final String EXTRA_HELP_MESSAGE = "\nFor more information, refer to the user guide: " + USERGUIDE_URL;
 
-    private static final String HELP_PATH = "docs/help/";
+    private static final String HELP_PATH = "docs/help/help.txt";
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
 
@@ -35,14 +38,25 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-        helpMessage.setText(loadData() + "\n" + EXTRA_HELP_MESSAGE);
+        helpMessage.setText(loadHelpMessage());
     }
 
     /**
      * Reads the help message from a file.
      */
-    private String loadData() {
-        return "test message";
+    private String loadHelpMessage() {
+        String helpMessage = "";
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(HELP_PATH));
+            String line;
+            while ((line = br.readLine()) != null) {
+                helpMessage += line + "\n";
+            }
+        } catch (IOException e) {
+            System.out.println("Error! Could not retrieve help message from file.");
+            return "Failed to load help message." + EXTRA_HELP_MESSAGE;
+        }
+        return helpMessage + EXTRA_HELP_MESSAGE;
     }
 
     /**
