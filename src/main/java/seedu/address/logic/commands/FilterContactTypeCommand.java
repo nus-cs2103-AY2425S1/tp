@@ -7,6 +7,10 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.ContactTypePredicate;
 
+/**
+ * Command to filter contacts in the address book based on their contact type.
+ * Supported contact types are "Work" and "Personal".
+ */
 public class FilterContactTypeCommand extends Command {
     public static final String COMMAND_WORD = "filter";
 
