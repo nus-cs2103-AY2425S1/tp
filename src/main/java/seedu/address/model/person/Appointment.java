@@ -1,15 +1,12 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * Represents a Person's appointment in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidAppointment(String)}
  */
 public class Appointment {
 
@@ -26,20 +23,7 @@ public class Appointment {
      */
     public Appointment(String dateTimeString) {
         requireNonNull(dateTimeString);
-        checkArgument(isValidAppointment(dateTimeString), MESSAGE_CONSTRAINTS);
         this.value = LocalDateTime.parse(dateTimeString, FORMATTER);
-    }
-
-    /**
-     * Returns true if a given string is a valid appointment date.
-     */
-    public static boolean isValidAppointment(String test) {
-        try {
-            LocalDateTime.parse(test, FORMATTER);
-            return true;
-        } catch (DateTimeParseException e) {
-            return false;
-        }
     }
 
     @Override
@@ -58,7 +42,7 @@ public class Appointment {
         }
 
         Appointment otherAppointment = (Appointment) other;
-        return value.equals(otherAppointment.value);
+        return (value.toString()).equals(otherAppointment.value.toString());
     }
 
     @Override
