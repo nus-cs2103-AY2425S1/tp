@@ -26,7 +26,7 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_PROJECT_STATUS = "invalidStatus";
-    private static final String INVALID_CLIENT_STATUS = "referral"; 
+    private static final String INVALID_CLIENT_STATUS = "referral";
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();

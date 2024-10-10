@@ -29,10 +29,10 @@ public class ClientStatusTest {
         assertFalse(ClientStatus.isValidClientStatus(" ")); // spaces only
         assertFalse(ClientStatus.isValidClientStatus("referral")); // should be 'potential'
         assertFalse(ClientStatus.isValidClientStatus("olf")); // typo for old
-        assertFalse(ClientStatus.isValidClientStatus("ACTIVE")); // Incorrect upper case 
-        assertFalse(ClientStatus.isValidClientStatus("OLD")); // Incorrect upper case 
-        assertFalse(ClientStatus.isValidClientStatus("POTENTIAL")); // Incorrect upper case 
-        assertFalse(ClientStatus.isValidClientStatus("UNRESPONSIVE")); // Incorrect upper case 
+        assertFalse(ClientStatus.isValidClientStatus("ACTIVE")); // Incorrect upper case
+        assertFalse(ClientStatus.isValidClientStatus("OLD")); // Incorrect upper case
+        assertFalse(ClientStatus.isValidClientStatus("POTENTIAL")); // Incorrect upper case
+        assertFalse(ClientStatus.isValidClientStatus("UNRESPONSIVE")); // Incorrect upper case
 
         // valid client status
         assertTrue(ClientStatus.isValidClientStatus("active")); // correct lower case

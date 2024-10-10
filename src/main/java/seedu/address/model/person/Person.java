@@ -40,7 +40,7 @@ public class Person {
         this.tags.addAll(tags);
         this.projectStatus = (projectStatus != null)
                 ? projectStatus : new ProjectStatus("in progress"); // Default value
-        this.clientStatus = (clientStatus != null) 
+        this.clientStatus = (clientStatus != null)
                 ? clientStatus : new ClientStatus("active"); //default
     }
 

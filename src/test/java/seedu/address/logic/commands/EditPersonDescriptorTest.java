@@ -80,6 +80,6 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getClientStatus().orElse(null) + "}";
 
         assertEquals(expected, editPersonDescriptor.toString());
-        
+
     }
 }

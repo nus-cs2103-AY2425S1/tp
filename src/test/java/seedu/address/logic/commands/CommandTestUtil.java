@@ -68,8 +68,8 @@ public class CommandTestUtil {
             + PREFIX_CLIENT_STATUS + VALID_CLIENT_STATUS_POTENTIAL;
     public static final String CLIENT_STATUS_OLD = " "
             + PREFIX_CLIENT_STATUS + VALID_CLIENT_STATUS_OLD;
-    
-    
+
+
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -78,7 +78,7 @@ public class CommandTestUtil {
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_PROJECT_STATUS_DESC = " "
             + PREFIX_PROJECT_STATUS + "unknown"; // invalid project status
-    public static final String INVALID_CLIENT_STATUS_DESC = " " 
+    public static final String INVALID_CLIENT_STATUS_DESC = " "
             + PREFIX_CLIENT_STATUS + "referral";  // invalid client status
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";

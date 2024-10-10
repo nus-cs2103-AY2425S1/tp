@@ -248,15 +248,15 @@ public class ParserUtilTest {
         String statusWithWhitespace = WHITESPACE + VALID_CLIENT_STATUS_2 + WHITESPACE;
         ClientStatus expectedStatus = new ClientStatus(VALID_CLIENT_STATUS_2);
         assertEquals(expectedStatus, ParserUtil.parseClientStatus(statusWithWhitespace));
-        
+
         String activeStatusWithWhitespace = WHITESPACE + VALID_CLIENT_STATUS + WHITESPACE;
         ClientStatus expectedActiveStatus = new ClientStatus(VALID_CLIENT_STATUS);
         assertEquals(expectedActiveStatus, ParserUtil.parseClientStatus(activeStatusWithWhitespace));
-        
+
         String potentialStatusWithWhitespace = WHITESPACE + VALID_CLIENT_STATUS_3 + WHITESPACE;
         ClientStatus expectedPotentialStatus = new ClientStatus(VALID_CLIENT_STATUS_3);
         assertEquals(expectedPotentialStatus, ParserUtil.parseClientStatus(potentialStatusWithWhitespace));
-        
+
         String oldStatusWithWhitespace = WHITESPACE + VALID_CLIENT_STATUS_4 + WHITESPACE;
         ClientStatus expectedOldStatus = new ClientStatus(VALID_CLIENT_STATUS_4);
         assertEquals(expectedOldStatus, ParserUtil.parseClientStatus(oldStatusWithWhitespace));

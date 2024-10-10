@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 public class ClientStatus {
-    
+
     public static final String MESSAGE_CONSTRAINTS =
             "Client status must be either “active”, “unresponsive”, “potential”, or “old”(case sensitive).";
 

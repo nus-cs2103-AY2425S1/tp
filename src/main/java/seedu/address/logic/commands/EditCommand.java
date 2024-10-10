@@ -114,7 +114,7 @@ public class EditCommand extends Command {
         ClientStatus updatedClientStatus = editPersonDescriptor.getClientStatus()
                 .orElse(personToEdit.getClientStatus());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, 
+        return new Person(updatedName, updatedPhone, updatedEmail,
                 updatedAddress, updatedTags, updatedProjectStatus, updatedClientStatus);
     }
 
@@ -262,7 +262,7 @@ public class EditCommand extends Command {
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
                     && Objects.equals(projectStatus, otherEditPersonDescriptor.projectStatus)
                     && Objects.equals(clientStatus, otherEditPersonDescriptor.clientStatus);
-                    
+
         }
 
         @Override
