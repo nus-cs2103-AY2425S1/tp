@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.CLIVE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,6 @@ import seedu.address.model.person.Phone;
 public class JsonAdaptedPersonTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
-    private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
 
@@ -29,6 +29,13 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
     private static final String VALID_ADDRESS = BENSON.getAddress().toString();
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
+            .map(JsonAdaptedTag::new)
+            .collect(Collectors.toList());
+    private static final String BLANK_ADDRESS = "";
+    private static final String CLIVE_NAME = CLIVE.getName().toString();
+    private static final String CLIVE_PHONE = CLIVE.getPhone().toString();
+    private static final String CLIVE_EMAIL = CLIVE.getEmail().toString();
+    private static final List<JsonAdaptedTag> CLIVE_TAGS = CLIVE.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
 
@@ -84,11 +91,10 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
-    public void toModelType_invalidAddress_throwsIllegalValueException() {
+    public void toModelType_blankAddress_returnsPerson() throws IllegalValueException {
         JsonAdaptedPerson person =
-                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, INVALID_ADDRESS, VALID_TAGS);
-        String expectedMessage = Address.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+                new JsonAdaptedPerson(CLIVE_NAME, CLIVE_PHONE, CLIVE_EMAIL, BLANK_ADDRESS, CLIVE_TAGS);
+        assertEquals(CLIVE, person.toModelType());
     }
 
     @Test
