@@ -25,6 +25,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Remark;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -68,6 +69,44 @@ public class EditCommandTest {
         expectedModel.setPerson(lastPerson, editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    private void execute_specifiedRemarkField_shouldModifyRemark(String remarkString) {
+        Remark remark = new Remark(remarkString);
+
+        Person personToBeEdited = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+
+        Person personToBeExpected = new Person(
+                personToBeEdited.getName(),
+                personToBeEdited.getPhone(),
+                personToBeEdited.getEmail(),
+                personToBeEdited.getAddress(),
+                remark,
+                personToBeEdited.getTags());
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withRemark(remark.value)
+                .build();
+
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(personToBeEdited, personToBeExpected);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                Messages.format(personToBeExpected));
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_specifiedRemarkField_shouldModifyRemark() {
+        execute_specifiedRemarkField_shouldModifyRemark("This is a remark!");
+    }
+
+    @Test
+    public void execute_specifiedEmptyRemarkField_shouldModifyRemark() {
+        execute_specifiedRemarkField_shouldModifyRemark("");
     }
 
     @Test
