@@ -273,43 +273,68 @@ _{Explain here how the data archiving feature will be implemented}_
 ### Product scope
 
 **Target user profile**:
+* General Practitioners (GPs) at small clinics
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
-
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Time spent looking through paper medical documents should be spent in other life-saving activities. Our product resolves this issue by creating fast access to patient contact details as well as their relevant appointment/treatment details, allowing GPs to contact and monitor their patients easily.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​              | I want to …​                                       | So that I can…​                                                      |
+|----------|----------------------|----------------------------------------------------|----------------------------------------------------------------------|
+| `* * *`  | doctor               | add appointments                                   | find them in the future for reference                                |
+| `* * *`  | doctor               | schedule a new patient appointment                 | ensure that the patient is properly booked for consultation          |
+| `* * *`  | doctor               | remove an appointment that is no longer needed     | free up time slots for other patients and avoid scheduling conflicts |
+| `* * *`  | doctor               | view all upcoming appointments for better planning | organize my day effectively and ensure no appointments are missed    |
+| `* * *`  | administrative staff | manage patient contact information                 | easily communicate with patients                                     |
+| `* * *`  | administrative staff | update patient details                             | maintain accurate records                                            |
+| `* * *`  | administrative staff | get details on a specific patient's appointments   | keep track of the patient                                            |
+| `* * *`  | administrative staff | store all patients information                     | retrieve them in the future                                          |
+| `* * *`  | nurse                | track appointments                                 | get ready to serve patients                                          |
+| `* *`    | doctor               | access appointment history                         | understand patient visit patterns                                    |
+| `* *`    | doctor               | categorize patients by conditions or treatments    | easily track patient groups                                          |
+| `* *`    | doctor               | find free slots in the appointments                | find gaps for appointments or holidays                               |
+| `* *`    | administrative staff | get details on appointments for the day            | keep track of the day's appointments                                 |
+| `* *`    | doctor               | shift appointments to a different time             | change appointments based on holidays, etc.                          |
+| `* *`    | administrative staff | schedule follow-up appointments                    | keep track of patients' appointments                                 |
+| `* *`    | doctor               | add mood status to appointment details             | keep track of patient health each time we meet                       |
+| `* *`    | doctor               | sort patients by closest future appointment date   | see which patient to see next                                        |
+| `* *`    | doctor               | find duplicate errors within the system            | not have erroneous appointments                                      |
+| `* *`    | doctor               | organize appointments                              | arrange my schedule accordingly                                      |
+| `* *`    | doctor               | set holidays/free days                             | disallow appointments during certain dates                           |
+| `* * `   | doctor               | categorise patients based on certain factors       | easily track patients with certain statuses                          |
+| `* * `   | doctor               | add list of allergies for a certain patient        | not prescribe them stuff that will kill them                         |
+| `*`      | doctor               | view patient's medical history                     | make informed treatment decisions                                    |
+| `*`      | doctor               | access test results for patients                   | review and discuss results with patients                             |
+| `*`      | doctor               | set reminders for specific patient actions         | ensure follow-up on important tasks                                  |
+| `*`      | doctor               | retrieve medical certificates of patients          | gather patient information quickly                                   |
+| `*`      | doctor               | record the medications given to patients           | keep track of personal medication records of patients                |
+| `*`      | administrative staff | search for patient files by name or ID             | quickly retrieve specific records                                    |
+| `*`      | administrative staff | check prescription assigned by the doctor          | print out prescription for patient                                   |
+| `*`      | doctor               | search up medicine to prescribe                    | give prescription to patient                                         |
+| `*`      | doctor               | add notes to patient files                         | reference them during future visits                                  |
+| `*`      | doctor               | change the time frame for receiving reminders      | receive reminders more frequently or less frequently                 |
+| `*`      | doctor               | add guardian/parental contacts to patient          | contact patient indirectly                                           |
+| `*`      | doctor               | update patient status                              | keep track of patient's condition                                    |
+| `*`      | doctor               | copy treatments                                    | duplicate medication plans for similar patients                      |
+| `*`      | doctor               | receive reminders on upcoming appointments         | prepare for them                                                     |
+| `*`      | doctor               | retrieve specific treatment information            | treat them appropriately                                             |
+| `*`      | doctor               | generate an automated document for a patient       | give it to them as reference                                         |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `DocTrack` application and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Update a patient**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list patients.
+2.  DocTrack shows a list of patients.
+3.  User requests to update a specific patient in the list with new details
+4.  DocTrack updates the patient.
 
     Use case ends.
 
@@ -321,24 +346,221 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. DocTrack shows an error message.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+* 3b. The new patient details are invalid.
+
+    * 3b1. DocTrack shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Delete a patient**
+
+**MSS**
+
+1.  User requests to list patients.
+2.  DocTrack shows a list of patients.
+3.  User requests to delete a specific patient in the list.
+4.  DocTrack deletes the patient.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. DocTrack shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Find appointments for a specific patient**
+
+**MSS**
+
+1.  User requests to list patients.
+2.  DocTrack shows a list of patients.
+3.  User requests to list appoinments for a specific patient in the list.
+4.  DocTrack shows a list of appointments for that patient.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. DocTrack shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Add an appointment**
+
+**MSS**
+
+1.  User requests to list patients.
+2.  DocTrack shows a list of patients.
+3.  User requests to add an appoinment for a specific patient in the list.
+4.  DocTrack adds appointment.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. DocTrack shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The appointment details are invalid (i.e. wrongly formatted or overlap with existing appointment)
+
+    * 3b1. DocTrack shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Duplicate an appointment**
+
+**MSS**
+
+1.  User requests to list appointments.
+2.  DocTrack shows a list of appointments.
+3.  User requests to duplicate a specific appointment in the list on a new date.
+4.  DocTrack duplicates appointment.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. DocTrack shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The appointment details are invalid (i.e. wrongly formatted or overlap with existing appointment)
+
+    * 3b1. DocTrack shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Update an appointment**
+
+**MSS**
+
+1.  User requests to list appointments.
+2.  DocTrack shows a list of appointments.
+3.  User requests to update a specific appointment in the list with new details
+4.  DocTrack updates the appointment.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. DocTrack shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The new details are invalid (i.e. wrongly formatted).
+
+    * 3b1. DocTrack shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Delete an appointment**
+
+**MSS**
+
+1.  User requests to list appointments.
+2.  DocTrack shows a list of appointments.
+3.  User requests to delete a specific appointment in the list.
+4.  DocTrack deletes the appointment.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. DocTrack shows an error message.
+
+      Use case resumes at step 2.
+
+
+**Use case: Find patient for a specific appointment**
+
+**MSS**
+
+1.  User requests to list appointments.
+2.  DocTrack shows a list of appointments.
+3.  User requests to find patient for a specific appointment in the list.
+4.  DocTrack shows patient details.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. DocTrack shows an error message.
+
+      Use case resumes at step 2.
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2.  Should work on any _reasonable system_ with good performance: common operation such as retrieving patient data must complete within 1 second, and complex operations must complete within 3 seconds.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4.  Should not require installation
+5.  Must not operate with dependency on any remote server
+6.  No usage of DBMS
+7.  Main product file must not exceed 100MB
+8.  Documentation must not exceed 15MB
+9.  Product should be designed for typing-preferred consumers, offering a CLI experience
+10. Product should be designed for a single user.
+11. Product must function correctly on _standard resolutions_ and support scaling of 100%, 125%, 150%.
+12. Data must be persistent, with all changes saved immediately to local storage
+13. Data files must be in a format that can be edited manually by advanced users
+14. Data file must remain usable and intact even with invalid input from the application
+15. Errors must trigger clear, user-friendly messages
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Reasonable system**: A system with an OS matching the criteria above, with parts with a release date maximum 10 years from the current date
+* **Standard resolutions**: 1920x1080 and 1080x720
 
 --------------------------------------------------------------------------------------------------------------------
 

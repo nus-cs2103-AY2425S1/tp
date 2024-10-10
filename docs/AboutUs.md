@@ -7,55 +7,58 @@
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at our individual emails below!
 
 ## Project team
 
-### John Doe
+### Vangmay Sachan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/vangmay.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/vangmay)] 
+[[portfolio](team/vangmay.md)]
 
-* Role: Project Advisor
+* Roles: Developer, Quality Assurance
+* Responsibilities: Logic
 
-### Jane Doe
+### Muhammad ZAIDAN bin Sani
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/zaidansani.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/zaidansani)]
+[[email](mailto:zaidan@u.nus.edu)]
+[[portfolio](team/zaidansani.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Roles: Team Lead, Developer, Integration
+* Responsibilities: Model
 
-### Johnny Doe
+### Jae Choi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/choiwab.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/choiwab)] 
+[[portfolio](team/choiwab.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Roles: Developer, Code quality
+* Responsibilities: Storage
 
-### Jean Doe
+### Rachel Tai
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/rxchell.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/rxchell)]
+[[portfolio](team/rxchell.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Roles: Developer, Documentation
+* Responsibilities: Commons
 
-### James Doe
+### Jo An
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jayjay19630.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/jayjay19630)]
+[[email](mailto:jo.an@u.nus.edu)]
+[[portfolio](team/jayjay19630.md)]
 
-* Role: Developer
+* Roles: Developer, Deliverables and Deadlines, Scheduling and Tracking
 * Responsibilities: UI

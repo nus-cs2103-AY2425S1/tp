@@ -5,65 +5,66 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes an entity identified using it's displayed index from the address book.
  */
-public class DeleteCommand extends Command {
+public abstract class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
+            + ": Deletes the entity identified by the index number used in the displayed list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Example: " + COMMAND_WORD + " " + "person" + " " + "1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    protected final Index targetIndex;
 
-    private final Index targetIndex;
-
+    /**
+     * @param targetIndex Index of entity to be deleted.
+     */
     public DeleteCommand(Index targetIndex) {
+        requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<?> lastShownList = getFilteredList(model);
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(getInvalidIndexMessage());
         }
 
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+        Object entityToDelete = lastShownList.get(targetIndex.getZeroBased());
+        deleteEntity(model, entityToDelete);
+        return new CommandResult(String.format(getSuccessMessage(), formatEntity(entityToDelete)));
     }
 
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
+    /**
+     * Gets the filtered list of entities in the model.
+     */
+    protected abstract List<?> getFilteredList(Model model);
 
-        // instanceof handles nulls
-        if (!(other instanceof DeleteCommand)) {
-            return false;
-        }
+    /**
+     * Deletes the entity from the model.
+     */
+    protected abstract void deleteEntity(Model model, Object entity) throws CommandException;
 
-        DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return targetIndex.equals(otherDeleteCommand.targetIndex);
-    }
+    /**
+     * Returns the success message to display upon deleting entity.
+     */
+    protected abstract String getSuccessMessage();
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("targetIndex", targetIndex)
-                .toString();
-    }
+    /**
+     * Returns the invalid index message when the index is out of bounds.
+     */
+    protected abstract String getInvalidIndexMessage();
+
+    /**
+     * Formats the entity for displaying in the success message.
+     */
+    protected abstract String formatEntity(Object entity);
 }
