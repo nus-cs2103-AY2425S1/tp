@@ -26,16 +26,17 @@ public class Person {
     private final Address address;
     private final Set<Role> roles = new HashSet<>();
     private final Nickname nickname;
+    private final StudentStatus studentStatus;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Telegram telegram, Email email, Address address, Set<Role> roles, Nickname nickname) {
-        requireAllNonNull(name, telegram, email, address, roles, nickname);
+    public Person(Name name, Telegram telegram, Email email, StudentStatus studentStatus, Set<Role> roles, Nickname nickname) {
+        requireAllNonNull(name, telegram, email, studentStatus, roles, nickname);
         this.name = name;
         this.telegram = telegram;
         this.email = email;
-        this.address = address;
+        this.studentStatus = studentStatus;
         this.roles.addAll(roles);
         this.nickname = nickname;
     }
@@ -52,8 +53,8 @@ public class Person {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
+    public StudentStatus getStudentStatus() {
+        return studentStatus;
     }
 
     /**
@@ -100,7 +101,7 @@ public class Person {
         return name.equals(otherPerson.name)
                 && telegram.equals(otherPerson.telegram)
                 && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
+                && studentStatus.equals(otherPerson.studentStatus)
                 && roles.equals(otherPerson.roles)
                 && nickname.equals(otherPerson.nickname);
     }
@@ -108,7 +109,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, telegram, email, address, roles, nickname);
+        return Objects.hash(name, telegram, email, studentStatus, roles, nickname);
     }
 
     @Override
@@ -117,9 +118,10 @@ public class Person {
                 .add("name", name)
                 .add("telegram", telegram)
                 .add("email", email)
-                .add("address", address)
+                .add("studentStatus", studentStatus)
                 .add("tags", roles)
                 .add("nickname", nickname)
                 .toString();
     }
+
 }

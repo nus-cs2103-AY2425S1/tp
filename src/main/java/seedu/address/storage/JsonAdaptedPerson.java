@@ -10,12 +10,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Nickname;
+import seedu.address.model.person.StudentStatus;
 import seedu.address.model.tag.Role;
 
 /**
@@ -28,7 +28,7 @@ class JsonAdaptedPerson {
     private final String name;
     private final String telegram;
     private final String email;
-    private final String address;
+    private final String studentStatus;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String nickname;
 
@@ -37,12 +37,12 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("telegram") String telegram,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
+            @JsonProperty("email") String email, @JsonProperty("studentStatus") String studentStatus,
             @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("nickname") String nickname) {
         this.name = name;
         this.telegram = telegram;
         this.email = email;
-        this.address = address;
+        this.studentStatus = studentStatus;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -56,7 +56,7 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         telegram = source.getTelegram().value;
         email = source.getEmail().value;
-        address = source.getAddress().value;
+        studentStatus = source.getStudentStatus().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -99,16 +99,17 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+        if (studentStatus == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, StudentStatus.class.getSimpleName()));
         }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+        if (!StudentStatus.isValidStudentStatus(studentStatus)) {
+            throw new IllegalValueException(StudentStatus.MESSAGE_CONSTRAINTS);
         }
-        final Address modelAddress = new Address(address);
+        final StudentStatus modelstudentStatus = new StudentStatus(studentStatus);
         final Set<Role> modelRoles = new HashSet<>(personRoles);
         final Nickname modelNickname = new Nickname(nickname); // Nickname can be anything
-        return new Person(modelName, modelTelegram, modelEmail, modelAddress, modelRoles, modelNickname);
+        return new Person(modelName, modelTelegram, modelEmail, modelstudentStatus, modelRoles, modelNickname);
     }
 
 }

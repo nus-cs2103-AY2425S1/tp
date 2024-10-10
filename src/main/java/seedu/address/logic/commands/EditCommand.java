@@ -1,11 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_STATUS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -21,12 +21,12 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Nickname;
+import seedu.address.model.person.StudentStatus;
 import seedu.address.model.tag.Role;
 
 /**
@@ -43,7 +43,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_TELEGRAM + "TELEGRAM] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_STUDENT_STATUS + "STUDENT_STATUS] "
             + "[" + PREFIX_ROLE + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TELEGRAM + "91234567 "
@@ -99,10 +99,10 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Telegram updatedTelegram = editPersonDescriptor.getTelegram().orElse(personToEdit.getTelegram());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        StudentStatus updatedStudentStatus = editPersonDescriptor.getStudentStatus().orElse(personToEdit.getStudentStatus());
         Set<Role> updatedRoles = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Nickname updatedNickname = editPersonDescriptor.getNickname().orElse(personToEdit.getNickname());
-        return new Person(updatedName, updatedTelegram, updatedEmail, updatedAddress, updatedRoles, updatedNickname);
+        return new Person(updatedName, updatedTelegram, updatedEmail, updatedStudentStatus, updatedNickname);
     }
 
     @Override
@@ -137,7 +137,7 @@ public class EditCommand extends Command {
         private Name name;
         private Telegram telegram;
         private Email email;
-        private Address address;
+        private StudentStatus studentStatus;
         private Set<Role> roles;
         private Nickname nickname;
 
@@ -151,7 +151,7 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setTelegram(toCopy.telegram);
             setEmail(toCopy.email);
-            setAddress(toCopy.address);
+            setStudentStatus(toCopy.studentStatus);
             setTags(toCopy.roles);
             setNickname(toCopy.nickname);
         }
@@ -160,7 +160,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, telegram, email, address, roles);
+            return CollectionUtil.isAnyNonNull(name, telegram, email, studentStatus, roles);
         }
 
         public void setName(Name name) {
@@ -187,12 +187,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setAddress(Address address) {
-            this.address = address;
+        public void setStudentStatus(StudentStatus studentStatus) {
+            this.studentStatus = studentStatus;
         }
 
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
+        public Optional<StudentStatus> getStudentStatus() {
+            return Optional.ofNullable(studentStatus);
         }
 
         /**
@@ -235,7 +235,7 @@ public class EditCommand extends Command {
             return Objects.equals(name, otherEditPersonDescriptor.name)
                     && Objects.equals(telegram, otherEditPersonDescriptor.telegram)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
-                    && Objects.equals(address, otherEditPersonDescriptor.address)
+                    && Objects.equals(studentStatus, otherEditPersonDescriptor.studentStatus)
                     && Objects.equals(roles, otherEditPersonDescriptor.roles)
                     && Objects.equals(nickname, otherEditPersonDescriptor.nickname);
         }
@@ -246,7 +246,7 @@ public class EditCommand extends Command {
                     .add("name", name)
                     .add("telegram", telegram)
                     .add("email", email)
-                    .add("address", address)
+                    .add("studentStatus", studentStatus)
                     .add("tags", roles)
                     .add("nickname", nickname)
                     .toString();

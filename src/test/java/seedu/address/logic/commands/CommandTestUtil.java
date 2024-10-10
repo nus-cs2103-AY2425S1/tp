@@ -2,11 +2,11 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_STATUS;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -32,10 +32,10 @@ public class CommandTestUtil {
     public static final String VALID_TELEGRAM_BOB = "22222222";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
-    public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
-    public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_PRESIDENT = "President";
     public static final String VALID_TAG_ADMIN = "Admin";
+    public static final String VALID_STUDENT_STATUS_AMY = "undergraduate 1";
+    public static final String VALID_STUDENT_STATUS_BOB = "masters";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -43,15 +43,15 @@ public class CommandTestUtil {
     public static final String TELEGRAM_DESC_BOB = " " + PREFIX_TELEGRAM + VALID_TELEGRAM_BOB;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
-    public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
-    public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
+    public static final String STUDENT_STATUS_DESC_AMY = " " + PREFIX_STUDENT_STATUS + VALID_STUDENT_STATUS_AMY;
+    public static final String STUDENT_STATUS_DESC_BOB = " " + PREFIX_STUDENT_STATUS + VALID_STUDENT_STATUS_BOB;
     public static final String TAG_DESC_ADMIN = " " + PREFIX_ROLE + VALID_TAG_ADMIN;
     public static final String TAG_DESC_PRESIDENT = " " + PREFIX_ROLE + VALID_TAG_PRESIDENT;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_TELEGRAM_DESC = " " + PREFIX_TELEGRAM + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
-    public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
+    public static final String INVALID_STUDENT_STATUS_DESC = " " + PREFIX_STUDENT_STATUS; // empty string not allowed
     public static final String INVALID_TAG_DESC = " " + PREFIX_ROLE + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
@@ -62,10 +62,10 @@ public class CommandTestUtil {
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withTelegram(VALID_TELEGRAM_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
+                .withTelegram(VALID_TELEGRAM_AMY).withEmail(VALID_EMAIL_AMY).withStudentStatus(VALID_STUDENT_STATUS_AMY)
                 .withTags(VALID_TAG_ADMIN).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withTelegram(VALID_TELEGRAM_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
+                .withTelegram(VALID_TELEGRAM_BOB).withEmail(VALID_EMAIL_BOB).withStudentStatus(VALID_STUDENT_STATUS_BOB)
                 .withTags(VALID_TAG_PRESIDENT, VALID_TAG_ADMIN).build();
     }
 
