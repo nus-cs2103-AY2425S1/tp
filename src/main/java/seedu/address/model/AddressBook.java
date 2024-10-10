@@ -3,6 +3,9 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Predicate;
+import java.util.stream.StreamSupport;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
@@ -126,5 +129,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public int hashCode() {
         return persons.hashCode();
+    }
+
+    /**
+     * Find person given a predicate
+     */
+    public Optional<Person> findPerson(Predicate<Person> predicate) {
+        return StreamSupport
+                .stream(persons.spliterator(), false)
+                .filter(predicate).findAny();
     }
 }
