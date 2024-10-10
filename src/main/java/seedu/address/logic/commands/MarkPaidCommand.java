@@ -14,7 +14,7 @@ import seedu.address.model.person.Person;
 /**
  * Marks the payment for a person as true
  */
-public class MarkpaidCommand extends Command {
+public class MarkPaidCommand extends Command {
     public static final String COMMAND_WORD = "markpaid";
 
 
@@ -29,7 +29,7 @@ public class MarkpaidCommand extends Command {
      * Marks whether an existing person has paid their fees for the month
      * @param targetIndex
      */
-    public MarkpaidCommand(Index targetIndex) {
+    public MarkPaidCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -58,11 +58,11 @@ public class MarkpaidCommand extends Command {
         }
 
         //instanceof handles nulls
-        if (!(other instanceof MarkpaidCommand)) {
+        if (!(other instanceof MarkPaidCommand)) {
             return false;
         }
 
-        MarkpaidCommand e = (MarkpaidCommand) other;
+        MarkPaidCommand e = (MarkPaidCommand) other;
         return targetIndex.equals(e.targetIndex);
     }
 
