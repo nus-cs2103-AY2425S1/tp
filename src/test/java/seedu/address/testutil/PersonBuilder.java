@@ -17,10 +17,12 @@ import seedu.address.model.util.SampleDataUtil;
 public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
+    // default address is blank string as address is optional
+    public static final String DEFAULT_ADDRESS = "";
     // default phone number is blank string as phone number is optional
     public static final String DEFAULT_PHONE = "";
+    // default email is blank string as email is optional
     public static final String DEFAULT_EMAIL = "";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
     private Phone phone;
