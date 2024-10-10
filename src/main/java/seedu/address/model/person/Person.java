@@ -36,7 +36,8 @@ public class Person {
      * New fields for university, major, interest, and experience are added.
      * Interest and experience are initialized to empty strings.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, University university, Major major) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, University university,
+                  Major major) {
         requireAllNonNull(name, phone, email, address, tags, university, major);
         this.name = name;
         this.phone = phone;

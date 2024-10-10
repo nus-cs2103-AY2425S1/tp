@@ -11,12 +11,12 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Experience;
+import seedu.address.model.person.Interest;
+import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.University;
-import seedu.address.model.person.Major;
-import seedu.address.model.person.Interest;
-import seedu.address.model.person.Experience;
 import seedu.address.model.tag.Tag;
 
 /**

@@ -23,11 +23,11 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.University;
-import seedu.address.model.person.Major;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -106,7 +106,8 @@ public class EditCommand extends Command {
         University updatedUniversity = new University(" "); // placeholder
         Major updatedMajor = new Major(" "); // placeholder
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedUniversity, updatedMajor);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
+                updatedUniversity, updatedMajor);
     }
 
     @Override
