@@ -26,7 +26,6 @@ import seedu.ddd.model.person.Client;
 import seedu.ddd.model.person.Contact;
 import seedu.ddd.model.person.Email;
 import seedu.ddd.model.person.Name;
-import seedu.ddd.model.person.Person;
 import seedu.ddd.model.person.Phone;
 import seedu.ddd.model.person.Vendor;
 import seedu.ddd.model.tag.Tag;
@@ -51,23 +50,23 @@ public class EditCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_CONTACT_SUCCESS = "Edited Contact: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_CONTACT = "This contact already exists in the address book.";
 
     private final Index index;
-    private final EditContactDescriptor editPersonDescriptor;
+    private final EditContactDescriptor editContactDescriptor;
 
     /**
      * @param index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param editContactDescriptor details to edit the person with
      */
-    public EditCommand(Index index, EditContactDescriptor editPersonDescriptor) {
+    public EditCommand(Index index, EditContactDescriptor editContactDescriptor) {
         requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
+        requireNonNull(editContactDescriptor);
 
         this.index = index;
-        this.editPersonDescriptor = new EditContactDescriptor(editPersonDescriptor);
+        this.editContactDescriptor = new EditContactDescriptor(editContactDescriptor);
     }
 
     @Override
@@ -80,15 +79,15 @@ public class EditCommand extends Command {
         }
 
         Contact contactToEdit = lastShownList.get(index.getZeroBased());
-        Contact editedContact = createEditedContact(contactToEdit, editPersonDescriptor);
+        Contact editedContact = createEditedContact(contactToEdit, editContactDescriptor);
 
         if (!contactToEdit.isSameContact(contactToEdit) && model.hasContact(editedContact)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_CONTACT);
         }
 
         model.setContact(contactToEdit, editedContact);
         model.updateFilteredContactList(Model.PREDICATE_SHOW_ALL_CONTACTS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedContact)));
+        return new CommandResult(String.format(MESSAGE_EDIT_CONTACT_SUCCESS, Messages.format(editedContact)));
     }
 
     /**
@@ -123,14 +122,14 @@ public class EditCommand extends Command {
 
         EditCommand otherEditCommand = (EditCommand) other;
         return index.equals(otherEditCommand.index)
-                && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
+                && editContactDescriptor.equals(otherEditCommand.editContactDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("index", index)
-                .add("editPersonDescriptor", editPersonDescriptor)
+                .add("editPersonDescriptor", editContactDescriptor)
                 .toString();
     }
 
@@ -145,7 +144,7 @@ public class EditCommand extends Command {
         private Address address;
         private Set<Tag> tags;
 
-        // TODO: add more fields
+        // TODO: add more fields / add support for Client and Vendor
 
         public EditContactDescriptor() {}
 

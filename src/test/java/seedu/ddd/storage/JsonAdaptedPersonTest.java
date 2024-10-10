@@ -3,7 +3,7 @@ package seedu.ddd.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.ddd.storage.JsonAdaptedContact.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.ddd.testutil.Assert.assertThrows;
-import static seedu.ddd.testutil.TypicalPersons.BENSON;
+import static seedu.ddd.testutil.TypicalContacts.BENSON;
 
 import java.util.ArrayList;
 import java.util.List;

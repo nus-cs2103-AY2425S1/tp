@@ -3,37 +3,37 @@ package seedu.ddd.testutil;
 import java.util.Set;
 
 import seedu.ddd.logic.commands.AddCommand;
-import seedu.ddd.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.ddd.logic.commands.EditCommand.EditContactDescriptor;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
-import seedu.ddd.model.person.Person;
+import seedu.ddd.model.person.Client;
 import seedu.ddd.model.tag.Tag;
 
 /**
  * A utility class for Person.
  */
-public class PersonUtil {
+public class ClientUtil {
 
     /**
      * Returns an add command string for adding the {@code person}.
      */
-    public static String getAddCommand(Person person) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(person);
+    public static String getAddCommand(Client client) {
+        return AddCommand.COMMAND_WORD + " " + getPersonDetails(client);
     }
 
     /**
      * Returns the part of command string for the given {@code person}'s details.
      */
-    public static String getPersonDetails(Person person) {
+    public static String getPersonDetails(Client client) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + person.getName().fullName + " ");
-        sb.append(PREFIX_PHONE + person.getPhone().value + " ");
-        sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
-        sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
-        person.getTags().stream().forEach(
+        sb.append(PREFIX_NAME + client.getName().fullName + " ");
+        sb.append(PREFIX_PHONE + client.getPhone().value + " ");
+        sb.append(PREFIX_EMAIL + client.getEmail().value + " ");
+        sb.append(PREFIX_ADDRESS + client.getAddress().value + " ");
+        client.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
         return sb.toString();

@@ -2,18 +2,16 @@ package seedu.ddd.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.ddd.commons.util.ToStringBuilder;
+import seedu.ddd.logic.Messages;
+import seedu.ddd.logic.commands.exceptions.CommandException;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
-
-import seedu.ddd.commons.util.ToStringBuilder;
-import seedu.ddd.logic.Messages;
-import seedu.ddd.logic.commands.exceptions.CommandException;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.person.Contact;
-import seedu.ddd.model.person.Person;
 
 /**
  * Adds a person to the address book.
@@ -38,7 +36,7 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_CONTACT = "This contact already exists in the address book";
 
     private final Contact toAdd;
 
@@ -55,10 +53,11 @@ public class AddCommand extends Command {
         requireNonNull(model);
 
         if (model.hasContact(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_CONTACT);
         }
 
         model.addContact(toAdd);
+        System.out.println(toAdd.toString());
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
