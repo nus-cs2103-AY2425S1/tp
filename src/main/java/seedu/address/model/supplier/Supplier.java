@@ -2,12 +2,10 @@ package seedu.address.model.supplier;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.product.Product;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -24,6 +22,7 @@ public class Supplier {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<Product> assignedProducts = new HashSet<>();
 
     /**
      * Every field must be present and not null.
@@ -35,6 +34,10 @@ public class Supplier {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+    }
+
+    public boolean addProduct(Product product) {
+        return this.assignedProducts.add(product);
     }
 
     public Name getName() {
