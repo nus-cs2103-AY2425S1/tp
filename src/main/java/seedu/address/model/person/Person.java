@@ -23,20 +23,24 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final Name parentName = new Name("parent1");
-    private final Phone parentPhone = new Phone("5555555555");
-    private final Email parentEmail = new Email("parent@email.com");
+    private final Name parentName;
+    private final Phone parentPhone;
+    private final Email parentEmail;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Name parentName, Phone parentPhone,
+                  Email parentEmail, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.parentName = parentName;
+        this.parentPhone = parentPhone;
+        this.parentEmail = parentEmail;
         this.tags.addAll(tags);
     }
 
@@ -55,12 +59,15 @@ public class Person {
     public Address getAddress() {
         return address;
     }
+
     public Name getParentName() {
         return parentName;
     }
+
     public Phone getParentPhone() {
         return parentPhone;
     }
+
     public Email getParentEmail() {
         return parentEmail;
     }
@@ -107,13 +114,16 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
+                && parentName.equals(otherPerson.parentName)
+                && parentPhone.equals(otherPerson.parentPhone)
+                && parentEmail.equals(otherPerson.parentEmail)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, parentName, parentEmail, parentPhone, tags);
     }
 
     @Override
@@ -123,6 +133,9 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("parent name", parentName)
+                .add("parent phone", parentPhone)
+                .add("parent email", parentEmail)
                 .add("tags", tags)
                 .toString();
     }

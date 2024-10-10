@@ -34,12 +34,12 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
-    public static final String VALID_PARENTNAME_AMY = "parent1";
-    public static final String VALID_PARENTNAME_BOB = "parent1";
-    public static final String VALID_PARENTPHONE_AMY = "5555555555";
-    public static final String VALID_PARENTPHONE_BOB = "5555555555";
-    public static final String VALID_PARENTEMAIL_AMY = "parent@email.com";
-    public static final String VALID_PARENTEMAIL_BOB = "parent@email.com";
+    public static final String VALID_PARENT_NAME_AMY = "Test parent";
+    public static final String VALID_PARENT_NAME_BOB = "Test parent";
+    public static final String VALID_PARENT_PHONE_AMY = "91234567";
+    public static final String VALID_PARENT_PHONE_BOB = "91234567";
+    public static final String VALID_PARENT_EMAIL_AMY = "testparent@example.com";
+    public static final String VALID_PARENT_EMAIL_BOB = "testparent@example.com";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
