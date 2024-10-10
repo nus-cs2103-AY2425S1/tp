@@ -88,24 +88,32 @@ class JsonAdaptedPerson {
         }
         final Phone modelPhone = new Phone(phone);
 
+        final Optional<Email> modelEmail;
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
         }
-        if (!Email.isValidEmail(email)) {
+        if (email.isEmpty()) {
+            modelEmail = Optional.empty();
+        } else if (!Email.isValidEmail(email)) {
             throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+        } else {
+            modelEmail = Optional.of(new Email(email));
         }
-        final Email modelEmail = new Email(email);
 
+        Optional<Address> modelAddress;
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
-        if (!Address.isValidAddress(address)) {
+        if (address.isEmpty()) {
+            modelAddress = Optional.empty();
+        } else if (!Address.isValidAddress(address)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+        } else {
+            modelAddress = Optional.of(new Address(address));
         }
-        final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, Optional.of(modelEmail), Optional.of(modelAddress), modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
     }
 
 }

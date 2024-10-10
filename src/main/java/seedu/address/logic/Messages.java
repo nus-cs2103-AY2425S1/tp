@@ -38,14 +38,30 @@ public class Messages {
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName())
                 .append("; Phone: ")
-                .append(person.getPhone())
-                .append("; Email: ")
-                .append(person.getEmail())
-                .append("; Address: ")
-                .append(person.getAddress())
-                .append("; Tags: ");
-        person.getTags().forEach(builder::append);
+                .append(person.getPhone());
+        addEmail(builder, person);
+        addAddress(builder, person);
+        addTags(builder, person);
         return builder.toString();
+    }
+
+    private static void addEmail(StringBuilder sb, Person person) {
+        if (!person.hasEmail()) {
+            return;
+        }
+        sb.append("; Email: ").append(person.getEmail().get());
+    }
+
+    private static void addAddress(StringBuilder sb, Person person) {
+        if (!person.hasAddress()) {
+            return;
+        }
+        sb.append("; Address: ").append(person.getAddress().get());
+    }
+
+    private static void addTags(StringBuilder sb, Person person) {
+        sb.append("; Tags: ");
+        person.getTags().forEach(sb::append);
     }
 
 }

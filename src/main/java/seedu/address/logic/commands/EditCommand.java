@@ -97,12 +97,10 @@ public class EditCommand extends Command {
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Optional<Email> updatedEmail = editPersonDescriptor.getEmail().isPresent()
-                ? editPersonDescriptor.getEmail()
-                : personToEdit.getEmail();
-        Optional<Address> updatedAddress = editPersonDescriptor.getAddress().isPresent()
-                ? editPersonDescriptor.getAddress()
-                : personToEdit.getAddress();
+        Optional<Email> updatedEmail = Optional.of(editPersonDescriptor.getEmail()
+                .orElse(personToEdit.getEmail().get()));
+        Optional<Address> updatedAddress = Optional.of(editPersonDescriptor.getAddress()
+                .orElse(personToEdit.getAddress().get()));
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
@@ -152,8 +150,8 @@ public class EditCommand extends Command {
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
-            setEmail(toCopy.email.get());
-            setAddress(toCopy.address.get());
+            setEmail(toCopy.email);
+            setAddress(toCopy.address);
             setTags(toCopy.tags);
         }
 
@@ -180,16 +178,16 @@ public class EditCommand extends Command {
             return Optional.ofNullable(phone);
         }
 
-        public void setEmail(Email email) {
-            this.email = Optional.of(email);
+        public void setEmail(Optional<Email> email) {
+            this.email = email;
         }
 
         public Optional<Email> getEmail() {
             return email;
         }
 
-        public void setAddress(Address address) {
-            this.address = Optional.of(address);
+        public void setAddress(Optional<Address> address) {
+            this.address = address;
         }
 
         public Optional<Address> getAddress() {
