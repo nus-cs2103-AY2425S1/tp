@@ -155,7 +155,6 @@ public class ParserUtil {
         }
         return new PaymentStatus(trimmedPaymentStatus);
     }
-  
     /**
      * Parses a {@code String clientStatus} into a {@code clientStatus}.
      * Leading and trailing whitespaces will be trimmed.
