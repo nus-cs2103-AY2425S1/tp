@@ -4,11 +4,17 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
 import seedu.address.model.event.Event;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_VENUE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_CELEBRITY;
+
+/**
+ * Adds an event to the address book.
+ */
 public class AddEventCommand extends AddCommand {
 
     public static final String COMMAND_FIELD = "event";
@@ -29,6 +35,9 @@ public class AddEventCommand extends AddCommand {
     public static final String MESSAGE_DUPLICATE_EVENT = "This event  already exists in the address book";
     private final Event toAdd;
 
+    /**
+     * Creates an AddEventCommand to add the specified {@code Event}
+     */
     public AddEventCommand(Event event) {
         requireNonNull(event);
         this.toAdd = event;
