@@ -159,7 +159,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void sortFilteredPersonList(String order){
+        public void sortFilteredPersonList(String order) {
             throw new AssertionError("This method should not be called.");
         }
     }
