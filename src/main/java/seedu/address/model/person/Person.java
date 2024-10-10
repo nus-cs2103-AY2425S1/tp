@@ -127,6 +127,7 @@ public class Person {
                 .add("address", address)
                 .add("income", income)
                 .add("tags", tags)
+                .add("remark", remark)
                 .toString();
     }
 
