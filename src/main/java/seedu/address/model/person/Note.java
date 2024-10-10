@@ -1,4 +1,5 @@
 package seedu.address.model.person;
+
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -18,10 +19,12 @@ public class Note {
         requireNonNull(note);
         value = note;
     }
+
     @Override
     public String toString() {
         return value;
     }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
