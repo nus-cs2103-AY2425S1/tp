@@ -8,10 +8,18 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class IdentityNumber {
 
+    public static final int IDENTITY_NUMBER_LENGTH = 9;
+    public static final String IDENTITY_NUMBER_PREFIX_REGEX = "^[STFG].*";
+    public static final String IDENTITY_NUMBER_PREFIX_OFFSET_REGEX = "^[GT].*";
+    public static final String IDENTITY_NUMBER_FIN_PREFIX_REGEX = "^[FG].*";
+    public static final String IDENTITY_NUMBER_NRIC_PREFIX_REGEX = "^[ST].*";
+    public static final int IDENTITY_NUMBER_REMAINDER_CONSTANT = 11;
+    public static final int[] IDENTITY_NUMBER_WEIGHT = {2, 7, 6, 5, 4, 3, 2};
+    public static final char[] IDENTITY_NUMBER_NRIC_SUFFIX = {'J', 'Z', 'I', 'H', 'G', 'F', 'E', 'D', 'C', 'B', 'A'};
+    public static final char[] IDENTITY_NUMBER_FIN_SUFFIX = {'X' , 'W', 'U', 'T', 'R', 'Q', 'P', 'N', 'M', 'L', 'K'};
+
     public static final String MESSAGE_CONSTRAINTS =
             "Message Constraints not yet Implemented";
-
-    public static final String VALIDATION_REGEX = "Validation Regex Not Yet Implemented";
 
     public final String identificationNumber;
 
@@ -27,33 +35,56 @@ public class IdentityNumber {
     }
 
     /**
-     * TODO
+     * TODO: Stronger Validations for IdentityNumber (Check if 2nd to 7th characters are numbers, etc)
      * Returns true if a given string is a valid identification number.
      */
     public static boolean isValidIdentityNumber(String test) {
+        if (test.length() != IDENTITY_NUMBER_LENGTH) {
+            return false;
+        }
         boolean isCheckSumValid = isValidCheckSumIdentityNumber(test);
         boolean isStructureValid = isValidStructureIdentityNumber(test);
         return isCheckSumValid && isStructureValid;
     }
 
     /**
-     * TODO
      * Returns true if the checksum of the NRIC/FIN is valid.
      * Note that this validates if the NRIC/FIN is valid, but does not guarantee that
-     * it belongs to a valid person.
+     * it belongs to a valid person. Also, given that the actual algorithm for computing the checksum
+     * of the NRIC/FIN is not officially published, this method is more of a guideline for obvious outliers.
      */
     public static boolean isValidCheckSumIdentityNumber(String test) {
+        String identityNumber = test.substring(1, 8);
+        int checkSum = 0;
+        for (int i = 0; i < 7; i++) {
+            int currNumber = identityNumber.charAt(i) - '0';
+            checkSum += currNumber * IDENTITY_NUMBER_WEIGHT[i];
+        }
+
+        if (test.matches(IDENTITY_NUMBER_PREFIX_OFFSET_REGEX)) {
+            checkSum += 4;
+        }
+
+        int remainder = checkSum % IDENTITY_NUMBER_REMAINDER_CONSTANT;
+
+        if (test.matches(IDENTITY_NUMBER_NRIC_PREFIX_REGEX)) {
+            return IDENTITY_NUMBER_NRIC_SUFFIX[remainder] == test.charAt(8);
+        }
+
+        if (test.matches(IDENTITY_NUMBER_FIN_PREFIX_REGEX)) {
+            return IDENTITY_NUMBER_FIN_SUFFIX[remainder] == test.charAt(8);
+        }
+
         return false;
     }
 
     /**
-     * TODO
      * Returns true if the structure of the NRIC/FIN is valid.
      * Note that this validates if the NRIC/FIN is valid, but does not guarantee that
      * it belongs to a valid person.
      */
     public static boolean isValidStructureIdentityNumber(String test) {
-        return false;
+        return test.matches(IDENTITY_NUMBER_PREFIX_REGEX);
     }
 
     @Override
@@ -79,5 +110,9 @@ public class IdentityNumber {
     @Override
     public int hashCode() {
         return identificationNumber.hashCode();
+    }
+
+    public static void main(String[] args) {
+        IdentityNumber test = new IdentityNumber("S6116686F");
     }
 }
