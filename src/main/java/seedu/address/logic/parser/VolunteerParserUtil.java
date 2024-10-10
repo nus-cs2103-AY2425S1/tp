@@ -1,13 +1,13 @@
 package seedu.address.logic.parser;
 
-import static java.util.Objects.requireNonNull;
-
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.volunteer.Date;
+import seedu.address.model.volunteer.Email;
 import seedu.address.model.volunteer.Name;
 import seedu.address.model.volunteer.Phone;
-import seedu.address.model.volunteer.Email;
-import seedu.address.model.volunteer.Date;
 import seedu.address.model.volunteer.Time;
+
+import static java.util.Objects.requireNonNull;
 
 /**
  * Contains utility methods used for parsing strings in volunteer-related classes.
