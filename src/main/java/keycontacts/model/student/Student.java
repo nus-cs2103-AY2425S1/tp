@@ -5,14 +5,17 @@ import static keycontacts.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import keycontacts.commons.util.ToStringBuilder;
+import keycontacts.logic.commands.EditCommand.EditStudentDescriptor;
+import keycontacts.model.lesson.RegularLesson;
 import keycontacts.model.tag.Tag;
 
 /**
- * Represents a Student in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Represents a Student in the student directory.
+ * Guarantees: details are present, field values are validated, immutable
  */
 public class Student {
 
@@ -26,7 +29,11 @@ public class Student {
     private final Set<Tag> tags = new HashSet<>();
     private final GradeLevel gradeLevel;
 
+    // Associations
+    private final RegularLesson regularLesson;
+
     /**
+     * Constructor for a new student. Uses default associations.
      * Every field must be present and not null.
      */
     public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags, GradeLevel gradeLevel) {
@@ -37,6 +44,23 @@ public class Student {
         this.address = address;
         this.tags.addAll(tags);
         this.gradeLevel = gradeLevel;
+        this.regularLesson = null;
+    }
+
+    /**
+     * Constructor for a new student with non-default student associations. Identity and data fields must be
+     * present and not null.
+     */
+    public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+                    GradeLevel gradeLevel, RegularLesson regularLesson) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.gradeLevel = gradeLevel;
+        this.regularLesson = regularLesson;
     }
 
     public Name getName() {
@@ -65,6 +89,45 @@ public class Student {
 
     public GradeLevel getGradeLevel() {
         return gradeLevel;
+
+    public Optional<RegularLesson> getRegularLesson() {
+        return Optional.ofNullable(regularLesson);
+    }
+
+    /**
+     * Returns string representation of the {@code regularLesson}
+     */
+    public String getRegularLessonString() {
+        return Optional.ofNullable(regularLesson).map(RegularLesson::toString).orElse(null);
+    }
+
+    /**
+     * Returns user-friendly display string of the {@code regularLesson}.
+     */
+    public String getRegularLessonDisplay() {
+        return Optional.ofNullable(regularLesson).map(RegularLesson::toDisplay)
+                .orElse("No regular lesson scheduled");
+    }
+
+    /**
+     * Creates and returns a new {@code Student} with the details edited with {@code editStudentDescriptor}.
+     */
+    public Student withEditStudentDescriptor(EditStudentDescriptor editStudentDescriptor) {
+        Name updatedName = editStudentDescriptor.getName().orElse(name);
+        Phone updatedPhone = editStudentDescriptor.getPhone().orElse(phone);
+        Email updatedEmail = editStudentDescriptor.getEmail().orElse(email);
+        Address updatedAddress = editStudentDescriptor.getAddress().orElse(address);
+        Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(tags);
+        GradeLevel gradeLevel = editStudentDescriptor.getGradeLevel().orElse(gradeLevel);
+
+        return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, gradeLevel, regularLesson);
+    }
+
+    /**
+     * Creates and returns a new {@code Student} with the updated {@code regularLesson}.
+     */
+    public Student withRegularLesson(RegularLesson regularLesson) {
+        return new Student(name, phone, email, address, tags, regularLesson);
     }
 
     /**
@@ -81,7 +144,7 @@ public class Student {
     }
 
     /**
-     * Returns true if both students have the same identity and data fields.
+     * Returns true if both students have the same identity, data fields and associations.
      * This defines a stronger notion of equality between two students.
      */
     @Override
@@ -102,12 +165,13 @@ public class Student {
                 && address.equals(otherStudent.address)
                 && tags.equals(otherStudent.tags)
                 && gradeLevel.equals(otherStudent.gradeLevel);
+                && getRegularLesson().equals(otherStudent.getRegularLesson());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, gradeLevel);
+        return Objects.hash(name, phone, email, address, tags, gradeLevel, regularLesson);
     }
 
     @Override
@@ -119,6 +183,7 @@ public class Student {
                 .add("address", address)
                 .add("tags", tags)
                 .add("gradeLevel", gradeLevel)
+                .add("regularLesson", regularLesson)
                 .toString();
     }
 

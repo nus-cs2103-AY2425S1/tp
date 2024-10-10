@@ -99,7 +99,7 @@ public class StudentTest {
     public void toStringMethod() {
         String expected = Student.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags()
-                + ", gradeLevel=" + ALICE.getGradeLevel() + "}";
+                + ", gradeLevel=" + ALICE.getGradeLevel() + ", regularLesson=" + ALICE.getRegularLessonString() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import keycontacts.commons.exceptions.IllegalValueException;
+import keycontacts.model.lesson.RegularLesson;
 import keycontacts.model.student.Address;
 import keycontacts.model.student.Email;
 import keycontacts.model.student.GradeLevel;
@@ -31,6 +32,7 @@ class JsonAdaptedStudent {
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String gradeLevel;
+    private final JsonAdaptedRegularLesson regularLesson;
 
     /**
      * Constructs a {@code JsonAdaptedStudent} with the given student details.
@@ -38,7 +40,8 @@ class JsonAdaptedStudent {
     @JsonCreator
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("gradeLevel") String gradeLevel) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("gradeLevel") String gradeLevel,
+            @JsonProperty("regularLesson") JsonAdaptedRegularLesson regularLesson) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -47,6 +50,7 @@ class JsonAdaptedStudent {
             this.tags.addAll(tags);
         }
         this.gradeLevel = gradeLevel;
+        this.regularLesson = regularLesson;
     }
 
     /**
@@ -61,6 +65,7 @@ class JsonAdaptedStudent {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         gradeLevel = source.getGradeLevel().value;
+        regularLesson = source.getRegularLesson().map(JsonAdaptedRegularLesson::new).orElse(null);
     }
 
     /**
@@ -114,7 +119,15 @@ class JsonAdaptedStudent {
         }
 
         final GradeLevel modelGradeLevel = new GradeLevel(gradeLevel);
-        return new Student(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelGradeLevel);
+      
+        final RegularLesson modelRegularLesson;
+        if (regularLesson != null) {
+            modelRegularLesson = regularLesson.toModelType();
+        } else {
+            modelRegularLesson = null;
+        }
+
+        return new Student(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelGradeLevel, modelRegularLesson);
     }
 
 }
