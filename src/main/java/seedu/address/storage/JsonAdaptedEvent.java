@@ -2,9 +2,13 @@ package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.event.Event;
 
+/**
+ * Jackson-friendly version of {@link Event}.
+ */
 public class JsonAdaptedEvent {
 
     private final String eventName;
@@ -35,7 +39,7 @@ public class JsonAdaptedEvent {
      * @throws IllegalValueException if there were any data constraints violated in the adapted event.
      */
     public Event toModelType() throws IllegalValueException {
-        if(!Event.isValidEvent(eventName)) {
+        if (!Event.isValidEvent(eventName)) {
             throw new IllegalValueException(Event.MESSAGE_CONSTRAINTS);
         }
         return new Event(eventName);

@@ -65,6 +65,12 @@ public class ParserUtil {
         return new Phone(trimmedPhone);
     }
 
+    /**
+     * Parses a {@code String event} into a {@code Event}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Event} is invalid.
+     */
     public static Event parseEvent(String event) throws ParseException {
         requireNonNull(event);
         String trimmedEvent = event.trim();
@@ -115,6 +121,10 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses {@code Collection<String> events} into a {@code Set<Event>}.
+     */
 
     public static Set<Event> parseEvents(Collection<String> events) throws ParseException {
         requireNonNull(events);
