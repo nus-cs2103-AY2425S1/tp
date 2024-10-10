@@ -25,8 +25,9 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
     /**
-     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
-     * trimmed.
+     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing
+     * whitespaces will be trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -38,8 +39,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String name} into a {@code Name}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String name} into a {@code Name}. Leading and trailing whitespaces will be
+     * trimmed.
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
@@ -137,6 +138,23 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses String assignment without trailing spaces.
+     */
+    public static String parseAssignmentName(String assignment) throws ParseException {
+        requireNonNull(assignment);
+        return assignment.trim();
+    }
+
+    /**
+     * Parses String into float.
+     */
+    public static Float parseScore(String score) throws ParseException {
+        requireNonNull(score);
+
+        return Float.parseFloat(score.trim());
     }
 
     /**

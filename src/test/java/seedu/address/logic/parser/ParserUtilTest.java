@@ -49,7 +49,7 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+                -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
     @Test
@@ -197,6 +197,20 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseAssignment_removeTrailingSpaces() throws Exception {
+        String testString = "Ex01   ";
+        String expectedString = testString.trim();
+        assertEquals(ParserUtil.parseAssignmentName(testString), expectedString);
+    }
+
+    @Test
+    public void parseScore_parsesCorrectScore() throws Exception {
+        String testString = "10.00";
+        Float expected = 10f;
+        assertEquals(ParserUtil.parseScore(testString), expected);
     }
 
     @Test

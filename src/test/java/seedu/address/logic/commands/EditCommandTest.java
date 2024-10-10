@@ -1,12 +1,14 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ASSIGNMENT_ONE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SCORE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -24,6 +26,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -33,7 +36,7 @@ import seedu.address.testutil.PersonBuilder;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -147,28 +150,40 @@ public class EditCommandTest {
     }
 
     @Test
+    public void assignment_null_handled() {
+        Assignment testAssignment = new Assignment(VALID_ASSIGNMENT_ONE, VALID_SCORE);
+        assertEquals(
+                new EditPersonDescriptorBuilder()
+                        .withName(VALID_NAME_BOB)
+                        .build().getAssignment()
+                        .orElse(testAssignment),
+                testAssignment);
+
+    }
+
+    @Test
     public void equals() {
         final EditCommand standardCommand = new EditCommand(INDEX_FIRST_PERSON, DESC_AMY);
 
         // same values -> returns true
         EditPersonDescriptor copyDescriptor = new EditPersonDescriptor(DESC_AMY);
         EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_PERSON, copyDescriptor);
-        assertTrue(standardCommand.equals(commandWithSameValues));
+        assertEquals(standardCommand, commandWithSameValues);
 
         // same object -> returns true
-        assertTrue(standardCommand.equals(standardCommand));
+        assertEquals(standardCommand, standardCommand);
 
         // null -> returns false
-        assertFalse(standardCommand.equals(null));
+        assertNotEquals(null, standardCommand);
 
         // different types -> returns false
-        assertFalse(standardCommand.equals(new ClearCommand()));
+        assertNotEquals(standardCommand, new ClearCommand());
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_PERSON, DESC_AMY)));
+        assertNotEquals(standardCommand, new EditCommand(INDEX_SECOND_PERSON, DESC_AMY));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_PERSON, DESC_BOB)));
+        assertNotEquals(standardCommand, new EditCommand(INDEX_FIRST_PERSON, DESC_BOB));
     }
 
     @Test
