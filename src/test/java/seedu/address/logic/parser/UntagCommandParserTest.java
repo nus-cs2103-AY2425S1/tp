@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.UntagCommand;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagName;
 
 public class UntagCommandParserTest {
 
@@ -22,8 +23,8 @@ public class UntagCommandParserTest {
         Index targetIndex = Index.fromOneBased(1);
 
         // Expected tags
-        Tag tag1 = new Tag("friends");
-        Tag tag2 = new Tag("owesMoney");
+        Tag tag1 = new Tag(new TagName("friends"));
+        Tag tag2 = new Tag(new TagName("owesMoney"));
 
         UntagCommand expectedCommand = new UntagCommand(targetIndex, new HashSet<>(Arrays.asList(tag1, tag2)));
 

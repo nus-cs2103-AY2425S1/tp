@@ -13,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.UntagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagName;
 
 /**
  * Parses input arguments and creates a new UntagCommand object.
@@ -48,6 +49,7 @@ public class UntagCommandParser implements Parser<UntagCommand> {
 
         // Convert tag values to Tag objects
         List<Tag> tags = tagValues.stream()
+                .map(TagName::new)
                 .map(Tag::new)
                 .collect(Collectors.toList());
 

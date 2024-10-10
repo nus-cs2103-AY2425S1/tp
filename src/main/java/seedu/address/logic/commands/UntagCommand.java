@@ -1,5 +1,8 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_TAG_NOT_FOUND_IN_CONTACT;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -17,8 +20,6 @@ import seedu.address.model.tag.Tag;
 public class UntagCommand extends Command {
 
     public static final String COMMAND_WORD = "untag";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid.";
-    public static final String MESSAGE_TAG_NOT_FOUND = "Some tags were not found in the person's tag list.";
     public static final String MESSAGE_REMOVE_TAG_SUCCESS = "Removed tag(s) %1$s from %2$s.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -71,15 +72,15 @@ public class UntagCommand extends Command {
         Set<Tag> updatedTags = new HashSet<>(personToEdit.getTags());
 
         if (personToEdit.getTags().isEmpty()) {
-            throw new CommandException(MESSAGE_TAG_NOT_FOUND);
+            throw new CommandException(MESSAGE_TAG_NOT_FOUND_IN_CONTACT);
         }
 
         if (tagsToRemove.isEmpty()) {
-            throw new CommandException(MESSAGE_TAG_NOT_FOUND);
+            throw new CommandException(MESSAGE_TAG_NOT_FOUND_IN_CONTACT);
         }
 
         if (!updatedTags.containsAll(tagsToRemove)) {
-            throw new CommandException(MESSAGE_TAG_NOT_FOUND);
+            throw new CommandException(MESSAGE_TAG_NOT_FOUND_IN_CONTACT);
         }
         updatedTags.removeAll(tagsToRemove);
 
