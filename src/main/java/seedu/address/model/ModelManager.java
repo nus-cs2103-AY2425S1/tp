@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,6 +12,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.Job;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -46,6 +49,16 @@ public class ModelManager implements Model {
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
         requireNonNull(userPrefs);
         this.userPrefs.resetData(userPrefs);
+    }
+
+    @Override
+    public Person findPersonByNameAndJob(Name name, Job job) {
+        for (Person person : addressBook.getPersonList()) {
+            if (person.getName().equals(name) && person.getJob().equals(job)) {
+                return person;
+            }
+        }
+        return null;
     }
 
     @Override
@@ -126,6 +139,19 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+    @Override
+    public void markAsHired(Person person) {
+        // Implementation to mark the person as hired
+        // For example, setting a hired flag or updating the person's status
+        person.markAsHired();
+    }
+
+    @Override
+    public boolean isJobPresent(Job job) {
+        Objects.requireNonNull(job);
+        return addressBook.getPersonList().stream()
+                .anyMatch(person -> person.getJob().equals(job));
     }
 
     @Override

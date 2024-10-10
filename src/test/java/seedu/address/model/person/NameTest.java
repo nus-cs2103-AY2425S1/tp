@@ -39,6 +39,29 @@ public class NameTest {
     }
 
     @Test
+    public void isSameName() {
+        Name name = new Name("Alex Yeoh");
+
+        // same values -> returns true
+        assertTrue(name.isSameName(new Name("Alex Yeoh")));
+
+        // same object -> returns true
+        assertTrue(name.isSameName(name));
+
+        // same values case insensitive -> returns true
+        assertTrue(name.isSameName(new Name("ALEX YEOH")));
+
+        // same values case insensitive -> returns true
+        assertTrue(name.isSameName(new Name("alex yeoh")));
+
+        // null -> returns false
+        assertFalse(name.isSameName(null));
+
+        // different values -> returns false
+        assertFalse(name.isSameName(new Name("Ben Yeoh")));
+    }
+
+    @Test
     public void equals() {
         Name name = new Name("Valid Name");
 

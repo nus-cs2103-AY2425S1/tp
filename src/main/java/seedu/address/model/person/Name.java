@@ -10,8 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
-
+            "Error: Invalid name. Please enter a valid first and last name.";
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
@@ -38,6 +37,18 @@ public class Name {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns true if both names ignoring case are the same.
+     * This defines a case-insensitive notion of equality between two names.
+     */
+    public boolean isSameName(Name otherName) {
+        if (otherName == this) {
+            return true;
+        }
+
+        return otherName != null
+                && this.fullName.equalsIgnoreCase(otherName.fullName);
+    }
 
     @Override
     public String toString() {

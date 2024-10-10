@@ -21,8 +21,13 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.HireCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.RejectCommand;
+import seedu.address.logic.commands.ViewStatusCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Job;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -97,5 +102,59 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+    }
+
+    @Test
+    public void parseCommand_hire() throws Exception {
+        String userInput = "hire n/Amy Bee j/Software Engineer";
+        HireCommand command = (HireCommand) parser.parseCommand(userInput);
+
+        // Check that the parsed command is an instance of HireCommand
+        assertTrue(command instanceof HireCommand);
+
+        // Verify the parsed command details
+        Name expectedName = new Name("Amy Bee");
+        Job job = new Job("Software Engineer");
+        HireCommand expectedCommand = new HireCommand(expectedName, job);
+
+        // Assert the values of the parsed command match the expected command
+        assertEquals(expectedCommand.getName(), command.getName());
+        assertEquals(expectedCommand.getJob(), command.getJob());
+    }
+
+    @Test
+    public void parseCommand_reject() throws Exception {
+        String userInput = "reject n/John Doe j/Software Engineer";
+        RejectCommand command = (RejectCommand) parser.parseCommand(userInput);
+
+        // Check that the parsed command is an instance of RejectCommand
+        assertTrue(command instanceof RejectCommand);
+
+        // Verify the parsed command details
+        Name expectedName = new Name("John Doe");
+        Job job = new Job("Software Engineer");
+        RejectCommand expectedCommand = new RejectCommand(expectedName, job);
+
+        // Assert the values of the parsed command match the expected command
+        assertEquals(expectedCommand.getName(), command.getName());
+        assertEquals(expectedCommand.getJob(), command.getJob());
+    }
+
+    @Test
+    public void parseCommand_viewStatus() throws Exception {
+        String userInput = "view n/John Doe j/Software Engineer";
+        ViewStatusCommand command = (ViewStatusCommand) parser.parseCommand(userInput);
+
+        // Check that the parsed command is an instance of ViewStatusCommand
+        assertTrue(command instanceof ViewStatusCommand);
+
+        // Verify the parsed command details
+        Name expectedName = new Name("John Doe");
+        Job job = new Job("Software Engineer");
+        ViewStatusCommand expectedCommand = new ViewStatusCommand(expectedName, job);
+
+        // Assert the values of the parsed command match the expected command
+        assertEquals(expectedCommand.name, command.name);
+        assertEquals(expectedCommand.job, command.job);
     }
 }

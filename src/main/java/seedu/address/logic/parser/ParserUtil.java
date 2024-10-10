@@ -11,6 +11,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Job;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -21,6 +22,8 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_NAME = "Error: Invalid name. Please enter a valid first and last name.";
+    public static final String MESSAGE_INVALID_JOB = "Error: Invalid job title.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -45,10 +48,26 @@ public class ParserUtil {
         requireNonNull(name);
         String trimmedName = name.trim();
         if (!Name.isValidName(trimmedName)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+            throw new ParseException(MESSAGE_INVALID_NAME);
         }
         return new Name(trimmedName);
     }
+
+    /**
+     * Parses a {@code String job} into a {@code Job}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code job} is invalid.
+     */
+    public static Job parseJob(String job) throws ParseException {
+        requireNonNull(job);
+        String trimmedJob = job.trim();
+        if (!Job.isValidJob(trimmedJob)) {
+            throw new ParseException(MESSAGE_INVALID_JOB);
+        }
+        return new Job(trimmedJob);
+    }
+
 
     /**
      * Parses a {@code String phone} into a {@code Phone}.
