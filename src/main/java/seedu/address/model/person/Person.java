@@ -92,7 +92,7 @@ public class Person {
      * This is to avoid adding duplicate contact in the contact list.
      */
     public boolean hasDuplicateInfo(Person otherPerson) {
-        return this.isSamePerson(otherPerson); //|| this.hasSameEmail(otherPerson);
+        return this.isSamePerson(otherPerson) || this.hasSameEmail(otherPerson);
     }
 
     /**
