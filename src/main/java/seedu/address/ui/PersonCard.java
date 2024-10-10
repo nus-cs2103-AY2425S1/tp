@@ -39,6 +39,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label assignment;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -55,5 +57,10 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        if (person.getAssignment() != null) {
+            assignment.setText(person.getAssignment().toString());
+        } else {
+            assignment.setText("No assignment available"); // Optional: for better user feedback
+        }
     }
 }
