@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 import keycontacts.logic.commands.EditCommand.EditStudentDescriptor;
 import keycontacts.model.student.Address;
 import keycontacts.model.student.Email;
+import keycontacts.model.student.GradeLevel;
 import keycontacts.model.student.Name;
 import keycontacts.model.student.Phone;
 import keycontacts.model.student.Student;
@@ -37,6 +38,7 @@ public class EditStudentDescriptorBuilder {
         descriptor.setEmail(student.getEmail());
         descriptor.setAddress(student.getAddress());
         descriptor.setTags(student.getTags());
+        descriptor.setGradeLevel(student.getGradeLevel());
     }
 
     /**
@@ -78,6 +80,15 @@ public class EditStudentDescriptorBuilder {
     public EditStudentDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
+        return this;
+    }
+
+    /**
+     * Sets the {@code GradeLevel} of the {@code EditStudentDescriptor} that we are building.
+     * @return
+     */
+    public EditStudentDescriptorBuilder withGradeLevel(String gradeLevel) {
+        descriptor.setGradeLevel(new GradeLevel(gradeLevel));
         return this;
     }
 

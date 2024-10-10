@@ -21,7 +21,7 @@ public class StudentBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_GRADELEVEL = "Primary ";
+    public static final String DEFAULT_GRADELEVEL = "ABRSM 3";
 
     private Name name;
     private Phone phone;
@@ -51,6 +51,7 @@ public class StudentBuilder {
         email = studentToCopy.getEmail();
         address = studentToCopy.getAddress();
         tags = new HashSet<>(studentToCopy.getTags());
+        gradeLevel = studentToCopy.getGradeLevel();
     }
 
     /**

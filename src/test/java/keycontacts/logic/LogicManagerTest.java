@@ -4,6 +4,7 @@ import static keycontacts.logic.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX
 import static keycontacts.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static keycontacts.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static keycontacts.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
+import static keycontacts.logic.commands.CommandTestUtil.GRADELEVEL_DESC_AMY;
 import static keycontacts.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static keycontacts.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static keycontacts.testutil.Assert.assertThrows;
@@ -166,7 +167,7 @@ public class LogicManagerTest {
 
         // Triggers the saveStudentDirectory method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
+                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + GRADELEVEL_DESC_AMY;
         Student expectedStudent = new StudentBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addStudent(expectedStudent);

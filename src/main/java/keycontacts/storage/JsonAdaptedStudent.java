@@ -109,7 +109,8 @@ class JsonAdaptedStudent {
         final Set<Tag> modelTags = new HashSet<>(studentTags);
 
         if (gradeLevel == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Grade Level"));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                GradeLevel.class.getSimpleName()));
         }
 
         final GradeLevel modelGradeLevel = new GradeLevel(gradeLevel);
