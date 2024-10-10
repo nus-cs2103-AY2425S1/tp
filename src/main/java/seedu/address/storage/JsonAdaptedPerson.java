@@ -11,15 +11,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.course.Course;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.student.Address;
+import seedu.address.model.student.Email;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Phone;
+import seedu.address.model.student.Student;
 import seedu.address.model.tag.Tag;
 
 /**
- * Jackson-friendly version of {@link Person}.
+ * Jackson-friendly version of {@link Student}.
  */
 class JsonAdaptedPerson {
 
@@ -55,7 +55,7 @@ class JsonAdaptedPerson {
     /**
      * Converts a given {@code Person} into this class for Jackson use.
      */
-    public JsonAdaptedPerson(Person source) {
+    public JsonAdaptedPerson(Student source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
@@ -73,7 +73,7 @@ class JsonAdaptedPerson {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
-    public Person toModelType() throws IllegalValueException {
+    public Student toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
         final List<Course> personCourses = new ArrayList<>();
 
@@ -120,7 +120,7 @@ class JsonAdaptedPerson {
 
         final Set<Course> modelCourses = new HashSet<>(personCourses);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelCourses);
+        return new Student(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelCourses);
     }
 
 }
