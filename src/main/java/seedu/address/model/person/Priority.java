@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's priority in the address book.
- * The priority can only be one of these values: "LOW", "MEDIUM", or "HIGH".
+ * The priority can only be one of these values: "NONE", "LOW", "MEDIUM", or "HIGH".
  *
  * Guarantees: The priority is immutable and always valid.
  */
