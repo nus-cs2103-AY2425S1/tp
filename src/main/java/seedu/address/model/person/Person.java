@@ -23,18 +23,21 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final Status status;
     private final Note note;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Note note, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Status status,
+                  Note note, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, status, note, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.status = status; // From feature/add-application-status
         this.note = note; // New feature (Week 8)
         this.tags.addAll(tags);
     }
@@ -53,6 +56,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Status getStatus() {
+        return status;
     }
 
     public Note getNote() {
@@ -100,13 +107,15 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
+                && status.equals(otherPerson.status)
+                && note.equals(otherPerson.note)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, status, note, tags);
     }
 
     @Override
@@ -116,6 +125,7 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("status", status)
                 .add("note", note)
                 .add("tags", tags)
                 .toString();
