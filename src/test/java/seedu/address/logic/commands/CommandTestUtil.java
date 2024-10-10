@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -39,6 +40,8 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_PROJECT_STATUS_IN_PROGRESS = "in progress";
     public static final String VALID_PROJECT_STATUS_COMPLETE = "completed";
+    public static final String VALID_PAYMENT_STATUS_UNPAID = "unpaid";
+    public static final String VALID_PAYMENT_STATUS_PAID = "paid";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -55,6 +58,11 @@ public class CommandTestUtil {
     public static final String PROJECT_STATUS_DESC_COMPLETE = " "
             + PREFIX_PROJECT_STATUS + VALID_PROJECT_STATUS_COMPLETE;
 
+    public static final String PAYMENT_STATUS_DESC_UNPAID = " "
+            + PREFIX_PAYMENT_STATUS + VALID_PAYMENT_STATUS_UNPAID;
+    public static final String PAYMENT_STATUS_DESC_PAID = " "
+            + PREFIX_PAYMENT_STATUS + VALID_PAYMENT_STATUS_PAID;
+
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
@@ -62,6 +70,8 @@ public class CommandTestUtil {
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_PROJECT_STATUS_DESC = " "
             + PREFIX_PROJECT_STATUS + "unknown"; // invalid project status
+    public static final String INVALID_PAYMENT_STATUS_DESC = " "
+            + PREFIX_PAYMENT_STATUS + "unknown"; // invalid project status
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -72,11 +82,13 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_FRIEND).withProjectStatus(VALID_PROJECT_STATUS_IN_PROGRESS).build();
+                .withTags(VALID_TAG_FRIEND).withProjectStatus(VALID_PROJECT_STATUS_IN_PROGRESS)
+                .withPaymentStatus(VALID_PAYMENT_STATUS_UNPAID).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
-                .withProjectStatus(VALID_PROJECT_STATUS_IN_PROGRESS).build();
+                .withProjectStatus(VALID_PROJECT_STATUS_IN_PROGRESS)
+                .withPaymentStatus(VALID_PAYMENT_STATUS_UNPAID).build();
     }
 
     /**

@@ -6,6 +6,7 @@ import java.util.Set;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.PaymentStatus;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.ProjectStatus;
@@ -22,6 +23,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_PROJECT_STATUS = "in progress";
+    public static final String DEFAULT_PAYMENT_STATUS = "unpaid";
 
     private Name name;
     private Phone phone;
@@ -29,6 +31,7 @@ public class PersonBuilder {
     private Address address;
     private Set<Tag> tags;
     private ProjectStatus projectStatus;
+    private PaymentStatus paymentStatus;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -40,6 +43,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         projectStatus = new ProjectStatus(DEFAULT_PROJECT_STATUS);
+        paymentStatus = new PaymentStatus(DEFAULT_PAYMENT_STATUS);
     }
 
     /**
@@ -52,6 +56,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
         projectStatus = personToCopy.getProjectStatus();
+        paymentStatus = personToCopy.getPaymentStatus();
     }
 
     /**
@@ -102,8 +107,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code PaymentStatus} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withPaymentStatus(String paymentStatus) {
+        this.paymentStatus = new PaymentStatus(paymentStatus);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, tags, projectStatus);
+        return new Person(name, phone, email, address, tags, projectStatus, paymentStatus);
     }
 
 }
