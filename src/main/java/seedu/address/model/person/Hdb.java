@@ -1,5 +1,9 @@
 package seedu.address.model.person;
 
+import seedu.address.model.tag.Tag;
+
+import java.util.Set;
+
 /**
  * Represents an HDB in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -10,8 +14,8 @@ public class Hdb extends Property {
     public static final String VALIDATION_REGEX = "\\p{Alnum}+"; // Checks if the HDB name is alphanumeric
 
 
-    public Hdb(String hdbName, String unitNumber, String price) {
-        super(hdbName, unitNumber, price);
+    public Hdb(PostalCode postalCode, UnitNumber unitNumber, Price price, Set<Tag> tags) {
+        super(postalCode, unitNumber, price, tags);
     }
 
     /**

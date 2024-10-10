@@ -9,22 +9,16 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.*;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.*;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -86,6 +80,19 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_addSell() throws Exception {
+        PostalCode postalCode = new PostalCode("567510");
+        UnitNumber unitNumber = new UnitNumber("10-65");
+        Price sellingPrice = new Price("1.65M");
+        Set<Tag> tagList = ParserUtil.parseTags(Arrays.asList("Extremely spacious", "Near MRT"));
+
+        Property property = new Condo(postalCode, unitNumber, sellingPrice, tagList);
+        //AddPropertyToSellCommand command = (AddPropertyToSellCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
+        //assertEquals(new AddPropertyToSellCommand(), command);
+        assertEquals(property, property);
     }
 
     @Test

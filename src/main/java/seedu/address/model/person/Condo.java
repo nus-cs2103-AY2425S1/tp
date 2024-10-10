@@ -1,5 +1,9 @@
 package seedu.address.model.person;
 
+import seedu.address.model.tag.Tag;
+
+import java.util.Set;
+
 /**
  * Represents a Condo in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -9,8 +13,8 @@ public class Condo extends Property {
     public static final String MESSAGE_CONSTRAINTS = "Condo names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+"; // Checks if the Condo name is alphanumeric
 
-    public Condo(String condoName, String unitNumber, String price) {
-        super(condoName, unitNumber, price);
+    public Condo(PostalCode postalCode, UnitNumber unitNumber, Price price, Set<Tag> tags) {
+        super(postalCode, unitNumber, price, tags);
     }
 
     /**

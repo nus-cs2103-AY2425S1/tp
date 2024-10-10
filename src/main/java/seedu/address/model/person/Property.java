@@ -1,5 +1,9 @@
 package seedu.address.model.person;
 
+import seedu.address.model.tag.Tag;
+
+import java.util.Set;
+
 /**
  * Represents a Property in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -9,19 +13,21 @@ public abstract class Property {
     public static final String MESSAGE_CONSTRAINTS = "Property names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+"; // Checks if the property name is alphanumeric
 
-    private final String postalCode;
-    private final String unitNumber;
-    private final String price;
+    private final PostalCode postalCode;
+    private final UnitNumber unitNumber;
+    private final Price price;
+    private final Set<Tag> tags;
 
     /**
      * Constructs a {@code Property}.
      *
-     * @param propertyName A valid property name.
+     * @param postalCode A valid property name.
      */
-    public Property(String propertyName, String unitNumber, String price) {
-        this.postalCode = propertyName;
+    public Property(PostalCode postalCode, UnitNumber unitNumber, Price price, Set<Tag> tags) {
+        this.postalCode = postalCode;
         this.unitNumber = unitNumber;
         this.price = price;
+        this.tags = tags;
     }
 
     /**
@@ -53,6 +59,6 @@ public abstract class Property {
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + postalCode + ']' + " Unit Number: " + unitNumber;
+        return "[" + postalCode + "]" + " Unit Number: " + unitNumber;
     }
 }

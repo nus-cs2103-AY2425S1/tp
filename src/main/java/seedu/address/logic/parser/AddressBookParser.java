@@ -79,7 +79,7 @@ public class AddressBookParser {
             return new HelpCommand();
 
         case AddPropertyToSellCommand.COMMAND_WORD:
-            return new AddPropertyToSellCommand();
+            return new AddPropertyToSellParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

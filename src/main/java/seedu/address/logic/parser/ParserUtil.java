@@ -9,10 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -120,5 +117,65 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String housingType} into a {@code HousingType}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code housingType} is invalid.
+     */
+    public static HousingType parseHousingType(String housingType) throws ParseException {
+        requireNonNull(housingType);
+        String trimmedHousingType = housingType.trim();
+        if (!HousingType.isValidHousingType(trimmedHousingType)) {
+            throw new ParseException("Housing type is not a non-zero unsigned integer.");
+        }
+        return HousingType.getHousingType(trimmedHousingType);
+    }
+
+    /**
+     * Parses a {@code String sellingPrice} into a {@code SellingPrice}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code sellingPrice} is invalid.
+     */
+    public static Price parseSellingPrice(String sellingPrice) throws ParseException {
+        requireNonNull(sellingPrice);
+        String trimmedSellingPrice = sellingPrice.trim();
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedSellingPrice)) {
+            throw new ParseException("Selling price is not a non-zero unsigned integer.");
+        }
+        return new Price(trimmedSellingPrice);
+    }
+
+    /**
+     * Parses a {@code String postalCode} into a {@code PostalCode}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code postalCode} is invalid.
+     */
+    public static PostalCode parsePostalCode(String postalCode) throws ParseException {
+        requireNonNull(postalCode);
+        String trimmedPostalCode = postalCode.trim();
+        if (!PostalCode.isValidPostalCode(trimmedPostalCode)) {
+            throw new ParseException("Postal code is not a non-zero unsigned integer.");
+        }
+        return new PostalCode(trimmedPostalCode);
+    }
+
+    /**
+     * Parses a {@code String unitNumber} into a {@code UnitNumber}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code unitNumber} is invalid.
+     */
+    public static UnitNumber parseUnitNumber(String unitNumber) throws ParseException {
+        requireNonNull(unitNumber);
+        String trimmedUnitNumber = unitNumber.trim();
+        if (!UnitNumber.isValidUnitNumber(trimmedUnitNumber)) {
+            throw new ParseException("Unit number is not a non-zero unsigned integer.");
+        }
+        return new UnitNumber(trimmedUnitNumber);
     }
 }

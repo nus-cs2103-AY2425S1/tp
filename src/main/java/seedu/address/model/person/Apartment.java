@@ -1,5 +1,9 @@
 package seedu.address.model.person;
 
+import seedu.address.model.tag.Tag;
+
+import java.util.Set;
+
 /**
  * Represents an Apartment in the address book. A subclass of Property class
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -12,12 +16,12 @@ public class Apartment extends Property {
     /**
      * Constructs a {@code Apartment}.
      *
-     * @param apartmentName A valid apartment name.
+     * @param postalCode A valid apartment postalCode.
      * @param unitNumber A valid unit number.
      * @param price A valid price.
      */
-    public Apartment(String apartmentName, String unitNumber, String price) {
-        super(apartmentName, unitNumber, price);
+    public Apartment(PostalCode postalCode, UnitNumber unitNumber, Price price, Set<Tag> tags) {
+        super(postalCode, unitNumber, price, tags);
     }
 
     /**

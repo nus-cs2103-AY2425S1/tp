@@ -17,7 +17,7 @@ import seedu.address.model.person.Property;
 public class AddPropertyToSellCommand extends Command {
     public static final String COMMAND_WORD = "addSell";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a property to the list of properties to sell"
-            + "for the specific contact."
+            + "for this specific person. "
             + "Parameters: INDEX (Must be a positive integer)"
             + PREFIX_HOUSING_TYPE + "[HOUSING_TYPE]"
             + PREFIX_SELLING_PRICE + "[SELLING_PRICE]"
@@ -32,6 +32,7 @@ public class AddPropertyToSellCommand extends Command {
             + PREFIX_TAG + "Extremely spacious "
             + PREFIX_TAG + "Near MRT";
 
+    public static final String MESSAGE_NOT_IMPLEMENTED = "This command (addSell) is not implemented yet";
     public static final String MESSAGE_SUCCESS = "New property added: %1$s";
     public static final String MESSAGE_DUPLICATE_PROPERTY = "This property already exists "
             + "in the list of properties to sell";
@@ -44,10 +45,6 @@ public class AddPropertyToSellCommand extends Command {
     public AddPropertyToSellCommand(Property property) {
         requireNonNull(property);
         this.propertyToSellToBeAdded = property;
-    }
-
-    public AddPropertyToSellCommand() {
-        this.propertyToSellToBeAdded = null;
     }
 
     @Override
