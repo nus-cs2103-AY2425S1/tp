@@ -30,8 +30,8 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
             + "[" + PREFIX_PARENT_NAME + "PARENT NAME] "
-            + "[" + PREFIX_PARENT_PHONE + "PARENT PHONE ]"
-            + "[" + PREFIX_PARENT_EMAIL + "PARENT EMAIL ]"
+            + "[" + PREFIX_PARENT_PHONE + "PARENT PHONE] "
+            + "[" + PREFIX_PARENT_EMAIL + "PARENT EMAIL] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
@@ -44,6 +44,7 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
+    public static final String MISSING_PARENT_FIELDS = "To add a parent, you need to provide all three parent fields!";
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 

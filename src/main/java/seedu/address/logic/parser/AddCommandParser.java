@@ -42,6 +42,13 @@ public class AddCommandParser implements Parser<AddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
+        if (!arePrefixesPresent(argMultimap, PREFIX_PARENT_NAME, PREFIX_PARENT_PHONE, PREFIX_PARENT_EMAIL)
+                && (arePrefixesPresent(argMultimap, PREFIX_PARENT_NAME)
+                        || arePrefixesPresent(argMultimap, PREFIX_PARENT_PHONE)
+                        || arePrefixesPresent(argMultimap, PREFIX_PARENT_EMAIL))) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MISSING_PARENT_FIELDS));
+        }
+
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
