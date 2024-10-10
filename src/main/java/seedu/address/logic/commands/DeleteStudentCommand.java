@@ -17,7 +17,8 @@ public class DeleteStudentCommand extends Command{
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the student identified by the student number used.\n"
-            + "Parameters: STUDENT_NUMBER (must be a string starting with 'A', followed by 7 numeric figures, and ended with a capital letter')\n"
+            + "Parameters: STUDENT_NUMBER (must be a string starting with 'A', followed by 7 numeric figures, " +
+                "and ended with a capital letter')\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_STUDENT_NUMBER + " " + "A0123456B";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Student: %1$s";
@@ -62,7 +63,7 @@ public class DeleteStudentCommand extends Command{
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteCommand)) {
+        if (!(other instanceof DeleteStudentCommand)) {
             return false;
         }
 
