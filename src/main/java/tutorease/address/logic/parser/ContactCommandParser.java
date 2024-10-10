@@ -5,7 +5,10 @@ import static tutorease.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import tutorease.address.logic.commands.*;
+import tutorease.address.logic.commands.AddContactCommand;
+import tutorease.address.logic.commands.Command;
+import tutorease.address.logic.commands.DeleteContactCommand;
+import tutorease.address.logic.commands.ListContactCommand;
 import tutorease.address.logic.parser.exceptions.ParseException;
 
 /**

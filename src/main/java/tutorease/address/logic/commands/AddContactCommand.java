@@ -1,24 +1,27 @@
 package tutorease.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static tutorease.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static tutorease.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static tutorease.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static tutorease.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static tutorease.address.logic.parser.CliSyntax.PREFIX_TAG;
+
 import tutorease.address.commons.util.ToStringBuilder;
 import tutorease.address.logic.Messages;
 import tutorease.address.logic.commands.exceptions.CommandException;
 import tutorease.address.model.Model;
 import tutorease.address.model.person.Person;
 
-import static java.util.Objects.requireNonNull;
-import static tutorease.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static tutorease.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static tutorease.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static tutorease.address.logic.parser.CliSyntax.PREFIX_PHONE;
-
-import static tutorease.address.logic.parser.CliSyntax.PREFIX_TAG;
+/**
+ * Adds a contact to the TutorEase.
+ */
 
 public class AddContactCommand extends Command {
     public static final String COMMAND_WORD = "contact";
     public static final String SUB_COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE =  COMMAND_WORD + " " + SUB_COMMAND_WORD
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + SUB_COMMAND_WORD
             + ": Adds a person to TutorEase. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
@@ -36,14 +39,17 @@ public class AddContactCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New contact added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This contact already exists in TutorEase";
-
     private final Person toAdd;
 
+    /**
+     * Creates an AddContactCommand to add the specified {@code Person}
+     */
     public AddContactCommand(Person person) {
         requireNonNull(person);
         toAdd = person;
     }
 
+    @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 

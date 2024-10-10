@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import tutorease.address.logic.commands.AddCommand;
+import tutorease.address.logic.commands.AddContactCommand;
 import tutorease.address.logic.commands.ClearCommand;
 import tutorease.address.logic.commands.EditCommand;
 import tutorease.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -34,8 +34,8 @@ public class TutorEaseParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Person person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddCommand(person), command);
+        AddContactCommand command = (AddContactCommand) parser.parseCommand(PersonUtil.getAddContactCommand(person));
+        assertEquals(new AddContactCommand(person), command);
     }
 
     @Test

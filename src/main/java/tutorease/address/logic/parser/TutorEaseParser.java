@@ -7,13 +7,7 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-<<<<<<< HEAD:src/main/java/seedu/address/logic/parser/AddressBookParser.java
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.*;
-import seedu.address.logic.parser.exceptions.ParseException;
-=======
 import tutorease.address.commons.core.LogsCenter;
-import tutorease.address.logic.commands.AddCommand;
 import tutorease.address.logic.commands.ClearCommand;
 import tutorease.address.logic.commands.Command;
 import tutorease.address.logic.commands.EditCommand;
@@ -21,7 +15,6 @@ import tutorease.address.logic.commands.ExitCommand;
 import tutorease.address.logic.commands.FindCommand;
 import tutorease.address.logic.commands.HelpCommand;
 import tutorease.address.logic.parser.exceptions.ParseException;
->>>>>>> master:src/main/java/tutorease/address/logic/parser/TutorEaseParser.java
 
 /**
  * Parses user input.
@@ -70,9 +63,6 @@ public class TutorEaseParser {
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
-
-        case ContactCommandParser.COMMAND_WORD:
-            return new ContactCommandParser().parse(arguments);
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
