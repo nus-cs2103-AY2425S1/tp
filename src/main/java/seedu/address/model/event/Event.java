@@ -1,10 +1,10 @@
 package seedu.address.model.event;
 
-import seedu.address.commons.util.ToStringBuilder;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import seedu.address.commons.util.ToStringBuilder;
 
 /**
  * Represents an Event in the address book.

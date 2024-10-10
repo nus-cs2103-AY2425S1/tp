@@ -1,5 +1,7 @@
 package seedu.address.commons.core;
 
+import static java.util.Objects.requireNonNull;
+
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.logging.ConsoleHandler;
@@ -7,8 +9,6 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Configures and manages loggers and handlers, including their logging level
