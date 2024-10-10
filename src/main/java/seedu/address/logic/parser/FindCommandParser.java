@@ -3,6 +3,8 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -20,14 +22,21 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     public FindCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
+
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        String[] nameKeywords = trimmedArgs.split("\\s+");
+        Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<typeWord>\\S+)(?<keywords>.*)");
+        Matcher matcher = BASIC_COMMAND_FORMAT.matcher(trimmedArgs);
+        String typeWord = matcher.group("typeWord");
+        String keywords = matcher.group("keywords");
 
-        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        String[] keywordsSplit = keywords.split("\\s+");
+
+
+        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(keywordsSplit)));
     }
 
 }
