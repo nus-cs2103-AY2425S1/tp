@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -28,13 +29,14 @@ public class Person {
     private final Gender gender;
     private final Priority priority;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<Appointment> appointments = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Nric nric, Address address, DateOfBirth dateOfBirth,
-                  Gender gender, Set<Tag> tags, Priority priority) {
-        requireAllNonNull(name, phone, email, nric, address, dateOfBirth, gender, tags, priority);
+                  Gender gender, Set<Tag> tags, Priority priority, Set<Appointment> appointments) {
+        requireAllNonNull(name, phone, email, nric, address, dateOfBirth, gender, tags, priority, appointments);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -44,8 +46,8 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
         this.priority = priority;
+        this.appointments.addAll(appointments);
     }
-
 
     public Priority getPriority() {
         return priority;
@@ -87,6 +89,14 @@ public class Person {
     }
 
     /**
+     * Returns an immutable appointment set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Appointment> getAppointments() {
+        return Collections.unmodifiableSet(appointments);
+    }
+
+    /**
      * Returns true if both persons have the same Nric.
      * This defines a weaker notion of equality between two persons.
      */
@@ -123,13 +133,14 @@ public class Person {
                 && gender.equals(otherPerson.gender)
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
-                && priority.equals(otherPerson.priority);
+                && priority.equals(otherPerson.priority)
+                && appointments.equals(otherPerson.appointments);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, nric, dateOfBirth, gender, address, tags, priority);
+        return Objects.hash(name, phone, email, nric, dateOfBirth, gender, address, tags, priority, appointments);
     }
 
     @Override
@@ -144,6 +155,7 @@ public class Person {
                 .add("address", address)
                 .add("tags", tags)
                 .add("priority", priority)
+                .add("appointments", appointments)
                 .toString();
     }
 
