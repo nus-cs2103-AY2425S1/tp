@@ -65,9 +65,9 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        parentName = source.getParentName().fullName;
-        parentPhone = source.getParentPhone().value;
-        parentEmail = source.getParentEmail().value;
+        parentName = source.getParentName() == null ? null : source.getParentName().fullName;
+        parentPhone = source.getParentPhone() == null ? null : source.getParentPhone().value;
+        parentEmail = source.getParentEmail() == null ? null : source.getParentEmail().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -116,32 +116,29 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        if (parentName == null) {
-            throw new IllegalValueException(String.format(MISSING_PARENT_FIELD_MESSAGE_FORMAT,
-                    Name.class.getSimpleName()));
+        Name modelParentName = null;
+        if (parentName != null) {
+            if (!Name.isValidName(parentName)) {
+                throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+            }
+            modelParentName = new Name(parentName);
         }
-        if (!Name.isValidName(parentName)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
-        }
-        final Name modelParentName = new Name(parentName);
 
-        if (parentPhone == null) {
-            throw new IllegalValueException(String.format(MISSING_PARENT_FIELD_MESSAGE_FORMAT,
-                    Phone.class.getSimpleName()));
+        Phone modelParentPhone = null;
+        if (parentPhone != null) {
+            if (!Phone.isValidPhone(parentPhone)) {
+                throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+            }
+            modelParentPhone = new Phone(parentPhone);
         }
-        if (!Phone.isValidPhone(parentPhone)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
-        }
-        final Phone modelParentPhone = new Phone(parentPhone);
 
-        if (parentEmail == null) {
-            throw new IllegalValueException(String.format(MISSING_PARENT_FIELD_MESSAGE_FORMAT,
-                    Email.class.getSimpleName()));
+        Email modelParentEmail = null;
+        if (parentEmail != null) {
+            if (!Email.isValidEmail(parentEmail)) {
+                throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+            }
+            modelParentEmail = new Email(parentEmail);
         }
-        if (!Email.isValidEmail(parentEmail)) {
-            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
-        }
-        final Email modelParentEmail = new Email(parentEmail);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelParentName, modelParentPhone,

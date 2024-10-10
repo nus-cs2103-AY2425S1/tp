@@ -60,21 +60,21 @@ public class AddCommandParser implements Parser<AddCommand> {
         if (arePrefixesPresent(argMultimap, PREFIX_PARENT_NAME)) {
             parentName = ParserUtil.parseName(argMultimap.getValue(PREFIX_PARENT_NAME).get());
         } else {
-            parentName = ParserUtil.parseName("Unknown");
+            parentName = null;
         }
 
         Phone parentPhone;
         if (arePrefixesPresent(argMultimap, PREFIX_PARENT_PHONE)) {
             parentPhone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PARENT_PHONE).get());
         } else {
-            parentPhone = ParserUtil.parsePhone("55555555");
+            parentPhone = null;
         }
 
         Email parentEmail;
         if (arePrefixesPresent(argMultimap, PREFIX_PARENT_PHONE)) {
             parentEmail = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_PARENT_EMAIL).get());
         } else {
-            parentEmail = ParserUtil.parseEmail("parent@example.com");
+            parentEmail = null;
         }
 
         Person person = new Person(name, phone, email, address, parentName, parentPhone, parentEmail, tagList);
