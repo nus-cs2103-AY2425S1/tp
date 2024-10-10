@@ -1,9 +1,11 @@
 package seedu.address.model.role;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.model.role.exceptions.InvalidRoleException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RoleHandlerTest {
     @Test

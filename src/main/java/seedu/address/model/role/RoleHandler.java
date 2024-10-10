@@ -44,8 +44,7 @@ public class RoleHandler {
         case Volunteer.ROLE_WORD:
             return VOLUNTEER;
         default:
-
-           throw new InvalidRoleException();
+            throw new InvalidRoleException();
         }
     }
 
