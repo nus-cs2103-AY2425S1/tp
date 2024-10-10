@@ -58,7 +58,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        appointment = (source.getAppointment() != null) 
+        appointment = (source.getAppointment() != null)
             ? source.getAppointment().toString() // Use Appointment's toString() which returns the formatted date
             : null;
         tags.addAll(source.getTags().stream()
