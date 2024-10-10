@@ -9,51 +9,27 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 public class Appointment {
 
-    private final Person client;
-    private final Start start;
-    private final End end;
+    private final Date date;
+    private final From from;
+    private final To to;
 
-    public Appointment(Person client, Start start, End end) {
-        requireAllNonNull(client, start, end);
-        this.client = client;
-        this.start = start;
-        this.end = end;
+    public Appointment(Date date, From from, To to) {
+        requireAllNonNull(date, from, to);
+        this.date = date;
+        this.from = from;
+        this.to = to;
     }
 
-    public End getEnd() {
-        return end;
+    public Date getDate() {
+        return date;
     }
 
-    public Start getStart() {
-        return start;
+    public From getFrom() {
+        return from;
     }
 
-    public Person getClient() {
-        return client;
-    }
-
-    public boolean isSameAppointment(Appointment otherAppointment) {
-        if (otherAppointment == this) {
-            return true;
-        }
-
-        return otherAppointment != null
-                && otherAppointment.equals(this);
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("client", client)
-                .add("start", start)
-                .add("end", end)
-                .toString();
-    }
-
-    @Override
-    public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(client, start, end);
+    public To getTo() {
+        return to;
     }
 
     @Override
@@ -67,9 +43,22 @@ public class Appointment {
             return false;
         }
 
-        Appointment otherAppointment = (Appointment) other;
-        return otherAppointment.getClient().equals(this.getClient())
-                && otherAppointment.getStart().equals(this.getStart())
-                && otherAppointment.getEnd().equals(this.getEnd());
+        Appointment a = (Appointment) other;
+        return date.equals(a.date)
+                && from.equals(a.from)
+                 && to.equals(a.to);
+    }
+
+    public boolean isEmpty() {
+        return date.value.isEmpty() && from.value.isEmpty() && to.value.isEmpty();
+    }
+    @Override
+    public String toString() {
+        return String.format("Date: %s, From: %s, To: %s", date.value, from.value, to.value);
+    }
+
+    @Override
+    public int hashCode() {
+        return from.hashCode();
     }
 }
