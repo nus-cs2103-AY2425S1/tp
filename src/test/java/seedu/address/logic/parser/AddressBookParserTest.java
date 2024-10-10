@@ -82,7 +82,7 @@ public class AddressBookParserTest {
     public void parseCommand_findByName() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindByNameCommand command = (FindByNameCommand) parser.parseCommand(
-                FindByNameCommand.COMMAND_WORD + " /n "
+                FindByNameCommand.COMMAND_WORD + " "
                         + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindByNameCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
@@ -91,7 +91,7 @@ public class AddressBookParserTest {
     public void parseCommand_findByContact() throws Exception {
         List<String> keywords = Arrays.asList("995", "91234567", "132");
         FindByContactCommand command = (FindByContactCommand) parser.parseCommand(
-                FindByContactCommand.COMMAND_WORD + " /c "
+                FindByContactCommand.COMMAND_WORD + " "
                         + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindByContactCommand(new ContactContainsKeywordsPredicate(keywords)), command);
     }
