@@ -13,8 +13,16 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.*;
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EmergencyPhoneCommand;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -84,7 +92,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_addEmergencyContactNumber() throws Exception {
+    public void parseCommand_emergencyPhone() throws Exception {
 
         final String name = "John Doe";
         final String phone = "91234567";
@@ -95,7 +103,7 @@ public class AddressBookParserTest {
         EmergencyPhoneCommand command = (EmergencyPhoneCommand) parser.parseCommand(
                 EmergencyPhoneCommand.COMMAND_WORD + " "
                 + "n/" + name + " "
-                + "en/" + phone);
+                + "ep/" + phone);
 
         assertEquals(expected, command);
     }
