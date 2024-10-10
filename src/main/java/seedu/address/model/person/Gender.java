@@ -9,6 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Gender {
 
+    public static final String MALE_SYMBOL = " ♂";
+    public static final String FEMALE_SYMBOL = " ♀";
     public static final String MESSAGE_CONSTRAINTS =
             "Gender should be either 'male' or 'female', and it should not be empty.";
 
@@ -27,7 +29,8 @@ public class Gender {
     public Gender(String gender) {
         requireNonNull(gender);
         checkArgument(isValidGender(gender), MESSAGE_CONSTRAINTS);
-        this.gender = gender;
+
+        this.gender = gender.equals("male") ? gender + MALE_SYMBOL : gender + FEMALE_SYMBOL;
     }
 
     /**
