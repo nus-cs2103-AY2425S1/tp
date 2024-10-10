@@ -7,9 +7,17 @@
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
+
+### Estelle
+
+<img src="images/estellelim.png" width="200px">
+
+[[github](https://github.com/estellelim)]
+[[portfolio](team/estellelim.md)]
+
+* Role: Developer
+* Responsibilities: UI
 
 ### Lincoln Yao
 
@@ -20,26 +28,33 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: Data
-<<<<<<< HEAD
-=======
+
+### Evan Siah
+
+<img src="images/jollybomber.png" width="200px">
+
+[[github](https://github.com/jollybomber)]
+[[portfolio](team/evan.md)]
+
+* Role: Developer
+* Responsibilities: DevOps
 
 ### Ivan Jerrick Koh
 
 <img src="images/kohkakohla.png" width="200px">
 
 [[github](http://github.com/kohkakohla)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/kohkakohla.md)]
 
 * Role: Developer
-* Responsibilities: Integration
+* Responsibilities: DevOps
 
-### James Doe
+### Mingyang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/mingyang143.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/mingyang143)]
+[[portfolio](team/mingyang.md)]
 
 * Role: Developer
-* Responsibilities: UI
->>>>>>> c67e80a4a4187592fbab8364a21aaef8b3b15b6a
+* Responsibilities: UI, testing
