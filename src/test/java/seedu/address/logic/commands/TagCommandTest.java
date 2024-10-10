@@ -61,7 +61,7 @@ public class TagCommandTest {
                 new seedu.address.model.person.Email("test@example.com"),
                 new seedu.address.model.person.Address("123, Test Street"),
                 new HashSet<>(Arrays.asList(new Tag(new TagName("family")))),
-                new HashSet<>(Arrays.asList(new Wedding(new WeddingName("Wedding 4"))))
+                new HashSet<>()
         );
         model.addTag(new Tag(new TagName("family")));
         model.setPerson(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), personWithTags);

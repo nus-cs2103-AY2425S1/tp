@@ -11,7 +11,8 @@
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
-    "tags" : [ "owesMoney", "friends" ]
+    "tags" : [ "owesMoney", "friends" ],
+    "weddings": ["Wedding 2", "Carla's Wedding"]
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
@@ -43,5 +44,6 @@
     "address" : "4th street",
     "tags" : [ ]
   } ],
-  "tags": ["florist"]
+  "tags": ["florist"],
+  "weddings": ["Wedding 2", "Carla's Wedding"]
 }

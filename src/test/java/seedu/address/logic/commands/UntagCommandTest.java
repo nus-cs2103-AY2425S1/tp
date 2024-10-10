@@ -60,8 +60,7 @@ public class UntagCommandTest {
                 new seedu.address.model.person.Email("test@example.com"),
                 new seedu.address.model.person.Address("123, Test Street"),
                 new HashSet<>(Arrays.asList(new Tag(new TagName("friends")), new Tag(new TagName("owesMoney")))),
-                new HashSet<>(Arrays.asList(new Wedding(new WeddingName("Jiazhen's Wedding")),
-                        new Wedding(new WeddingName("Wedding 29th August"))))
+                new HashSet<>()
         );
         model.setPerson(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), personWithTags);
         HashSet<Tag> tagsToRemove = new HashSet<>(Arrays.asList(new Tag(new TagName("friends")),
