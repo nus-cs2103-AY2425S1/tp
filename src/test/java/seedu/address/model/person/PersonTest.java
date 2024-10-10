@@ -92,7 +92,7 @@ public class PersonTest {
         // different register number -> returns false
         editedAlice = new PersonBuilder(ALICE).withRegisterNumber(VALID_REGISTER_NUMBER_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
-		
+
         // different sex -> returns false
         editedAlice = new PersonBuilder(ALICE).withSex(VALID_SEX_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
