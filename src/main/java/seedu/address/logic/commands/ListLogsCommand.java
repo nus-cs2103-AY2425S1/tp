@@ -27,7 +27,7 @@ public class ListLogsCommand extends Command {
         try {
             this.identityNumber = new IdentityNumber(id);
         } catch (IllegalArgumentException e) {
-            //handle exception later
+            //TODO: handle exception later
             throw new IllegalArgumentException("Invalid NRIC");
         }
     }
@@ -35,6 +35,8 @@ public class ListLogsCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         throw new CommandException("ListLogsCommand not implemented yet");
+
+        //TODO: Handle behaviour later
         //requireNonNull(model);
         //model.updateFilteredPersonList(nric);
         //return new CommandResult("The NRIC you inputted is: " + nric);
