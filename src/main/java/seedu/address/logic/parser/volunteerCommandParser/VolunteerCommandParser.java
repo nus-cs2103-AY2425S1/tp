@@ -3,7 +3,6 @@ package seedu.address.logic.parser.volunteerCommandParser;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.eventCommands.EventAddCommand;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.eventCommandParser.EventAddCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
