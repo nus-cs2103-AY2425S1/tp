@@ -1,14 +1,13 @@
 package seedu.address.model.calendar;
 
-import static seedu.address.commons.util.AppUtil.checkArgument;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
+import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
@@ -90,6 +89,13 @@ public class Lesson {
      */
     public int getDuration() {
         return (int) startTime.until(endTime, ChronoUnit.MINUTES);
+    }
+
+    /**
+     * Returns true if lesson has the given description
+     */
+    public boolean isDescription(String description) {
+        return this.description.equals(description);
     }
 
     /**
