@@ -25,9 +25,9 @@ public class FindPhoneNumberCommandParser implements Parser<FindPhoneNumberComma
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindPhoneNumberCommand.MESSAGE_USAGE));
         }
 
-        String[] nameKeywords = trimmedArgs.split("\\s+");
+        String[] phoneNumberKeywords = trimmedArgs.split("\\s+");
 
-        return new FindPhoneNumberCommand(new PhoneNumberContainsKeywordPredicate(Arrays.asList(nameKeywords)));
+        return new FindPhoneNumberCommand(new PhoneNumberContainsKeywordPredicate(Arrays.asList(phoneNumberKeywords)));
     }
 
 }
