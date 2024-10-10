@@ -43,10 +43,12 @@ public class PersonContainsKeywordsPredicateTest {
                 new PersonContainsKeywordsPredicate("Alice", null, null, null, null, null, null);
         assertTrue(predicate.test(new PersonBuilder().withName("Alice").build()));
 
-        predicate = new PersonContainsKeywordsPredicate(null, null, null, null, "cs", null, null);
+        predicate = new PersonContainsKeywordsPredicate(null, null,
+                null, null, "cs", null, null);
         assertTrue(predicate.test(new PersonBuilder().withMajor("cs").build()));
 
-        predicate = new PersonContainsKeywordsPredicate(null, null, null, "brUdder", null, null, null);
+        predicate = new PersonContainsKeywordsPredicate(null, null,
+                null, "brUdder", null, null, null);
         assertTrue(predicate.test(new PersonBuilder().withRole("brUdder").build()));
     }
 
