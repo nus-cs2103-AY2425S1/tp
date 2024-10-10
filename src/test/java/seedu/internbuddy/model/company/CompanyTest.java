@@ -7,6 +7,7 @@ import static seedu.internbuddy.logic.commands.CommandTestUtil.VALID_ADDRESS_MIC
 import static seedu.internbuddy.logic.commands.CommandTestUtil.VALID_EMAIL_MICROSOFT;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.VALID_NAME_MICROSOFT;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.VALID_PHONE_MICROSOFT;
+import static seedu.internbuddy.logic.commands.CommandTestUtil.VALID_STATUS_MICROSOFT;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.VALID_TAG_SOFTWARE;
 import static seedu.internbuddy.testutil.Assert.assertThrows;
 import static seedu.internbuddy.testutil.TypicalCompanies.GOOGLE;
@@ -55,8 +56,8 @@ public class CompanyTest {
     @Test
     public void equals() {
         // same values -> returns true
-        Company aliceCopy = new CompanyBuilder(GOOGLE).build();
-        assertTrue(GOOGLE.equals(aliceCopy));
+        Company googleCopy = new CompanyBuilder(GOOGLE).build();
+        assertTrue(GOOGLE.equals(googleCopy));
 
         // same object -> returns true
         assertTrue(GOOGLE.equals(GOOGLE));
@@ -71,24 +72,28 @@ public class CompanyTest {
         assertFalse(GOOGLE.equals(MICROSOFT));
 
         // different name -> returns false
-        Company editedAlice = new CompanyBuilder(GOOGLE).withName(VALID_NAME_MICROSOFT).build();
-        assertFalse(GOOGLE.equals(editedAlice));
+        Company editedGoogle = new CompanyBuilder(GOOGLE).withName(VALID_NAME_MICROSOFT).build();
+        assertFalse(GOOGLE.equals(editedGoogle));
 
         // different phone -> returns false
-        editedAlice = new CompanyBuilder(GOOGLE).withPhone(VALID_PHONE_MICROSOFT).build();
-        assertFalse(GOOGLE.equals(editedAlice));
+        editedGoogle = new CompanyBuilder(GOOGLE).withPhone(VALID_PHONE_MICROSOFT).build();
+        assertFalse(GOOGLE.equals(editedGoogle));
 
         // different email -> returns false
-        editedAlice = new CompanyBuilder(GOOGLE).withEmail(VALID_EMAIL_MICROSOFT).build();
-        assertFalse(GOOGLE.equals(editedAlice));
+        editedGoogle = new CompanyBuilder(GOOGLE).withEmail(VALID_EMAIL_MICROSOFT).build();
+        assertFalse(GOOGLE.equals(editedGoogle));
 
         // different address -> returns false
-        editedAlice = new CompanyBuilder(GOOGLE).withAddress(VALID_ADDRESS_MICROSOFT).build();
-        assertFalse(GOOGLE.equals(editedAlice));
+        editedGoogle = new CompanyBuilder(GOOGLE).withAddress(VALID_ADDRESS_MICROSOFT).build();
+        assertFalse(GOOGLE.equals(editedGoogle));
 
         // different tags -> returns false
-        editedAlice = new CompanyBuilder(GOOGLE).withTags(VALID_TAG_SOFTWARE).build();
-        assertFalse(GOOGLE.equals(editedAlice));
+        editedGoogle = new CompanyBuilder(GOOGLE).withTags(VALID_TAG_SOFTWARE).build();
+        assertFalse(GOOGLE.equals(editedGoogle));
+
+        // different status -> returns false
+        editedGoogle = new CompanyBuilder(GOOGLE).withTags(VALID_STATUS_MICROSOFT).build();
+        assertFalse(GOOGLE.equals(editedGoogle));
     }
 
     @Test

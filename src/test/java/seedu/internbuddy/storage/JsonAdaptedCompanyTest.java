@@ -23,7 +23,7 @@ public class JsonAdaptedCompanyTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
-    private static final String INVALID_STRING = "im interested";
+    private static final String INVALID_STATUS = "im interested";
 
     private static final String VALID_NAME = AMAZON.getName().toString();
     private static final String VALID_PHONE = AMAZON.getPhone().toString();
@@ -113,4 +113,12 @@ public class JsonAdaptedCompanyTest {
         assertThrows(IllegalValueException.class, company::toModelType);
     }
 
+    @Test
+    public void toModelType_invalidStatus_throwsIllegalValueException() {
+        JsonAdaptedCompany company =
+                new JsonAdaptedCompany(VALID_NAME, VALID_PHONE, VALID_EMAIL, INVALID_ADDRESS, VALID_TAGS,
+                        INVALID_STATUS);
+        String expectedMessage = Address.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, company::toModelType);
+    }
 }
