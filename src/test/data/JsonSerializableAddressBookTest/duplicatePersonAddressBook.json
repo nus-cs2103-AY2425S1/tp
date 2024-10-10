@@ -4,11 +4,16 @@
     "phone": "94351253",
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
-    "tags": [ "friends" ]
+    "department": "IT",
+    "role": "SWE",
+    "contractEndDate": "2024-10-09"
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
-    "address": "4th street"
+    "address": "4th street",
+    "department": "IT",
+    "role": "SWE",
+    "contractEndDate": "2024-10-09"
   } ]
 }
