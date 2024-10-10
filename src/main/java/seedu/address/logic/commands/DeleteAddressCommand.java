@@ -13,14 +13,16 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Deletes the person's public address identified by the index number used in the displayed person list and their crypto network.
+ * Deletes the person's public address identified by the index number
+ * used in the displayed person list and their crypto network.
  */
 public class DeleteAddressCommand extends Command {
     public static final Prefix PREFIX_NETWORK = new Prefix("c/"); //#TODO: Placeholder
     public static final String COMMAND_WORD = "dela"; // short for delete address
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person's public address identified by the index number used in the displayed person list and their crypto network.\n"
+            + ": Deletes the person's public address identified by the index number "
+            + "used in the displayed person list and their crypto network.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + PREFIX_NETWORK + "Network"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_NETWORK + "BTC";
