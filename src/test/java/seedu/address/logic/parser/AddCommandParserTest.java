@@ -25,6 +25,7 @@ import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -47,6 +48,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Gender;
 import seedu.address.model.person.Module;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -202,10 +204,13 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + GENDER_DESC_BOB + ADDRESS_DESC_BOB + VALID_MODULE_BOB,
                 expectedMessage);
-
+        // missing gender prefix
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_GENDER_BOB
+                        + ADDRESS_DESC_BOB,
+                expectedMessage);
         // all prefixes missing
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB
-                        + GENDER_DESC_BOB + VALID_ADDRESS_BOB + VALID_MODULE_BOB,
+                        + VALID_GENDER_BOB + VALID_ADDRESS_BOB + VALID_MODULE_BOB,
                 expectedMessage);
     }
 
@@ -240,12 +245,13 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + GENDER_DESC_BOB + ADDRESS_DESC_BOB
                 + MODULE_DESC_BOB + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
-
+        // invalid gender
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_GENDER_DESC
+                + ADDRESS_DESC_BOB + VALID_TAG_HUSBAND + VALID_TAG_FRIEND, Gender.MESSAGE_CONSTRAINTS);
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + GENDER_DESC_BOB + INVALID_ADDRESS_DESC
                         + MODULE_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
-
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB
                         + EMAIL_DESC_BOB + GENDER_DESC_BOB
