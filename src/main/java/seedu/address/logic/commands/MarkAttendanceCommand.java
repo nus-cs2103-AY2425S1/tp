@@ -4,9 +4,9 @@ import java.time.LocalDate;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Attendance;
 
 /**
  * Marks the attendance of a student for a specific date.
@@ -21,11 +21,12 @@ public class MarkAttendanceCommand extends Command {
             + COMMAND_WORD
             + " John Doe 2023-10-09 present";
 
+    public static final String MESSAGE_SUCCESS = "Attendance marked: %1$s is %2$s on %3$s";
+
     private final Name name;
     private final LocalDate date;
     private final Attendance attendance;
 
-    public static final String MESSAGE_SUCCESS = "Attendance marked: %1$s is %2$s on %3$s";
 
 
     /**

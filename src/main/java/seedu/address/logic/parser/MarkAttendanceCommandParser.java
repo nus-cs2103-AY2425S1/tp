@@ -8,8 +8,8 @@ import java.time.LocalDate;
 
 import seedu.address.logic.commands.MarkAttendanceCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Attendance;
+import seedu.address.model.person.Name;
 
 
 /**
