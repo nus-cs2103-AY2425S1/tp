@@ -24,16 +24,19 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final WorkExp workExp;
+
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, WorkExp workExp, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.workExp = workExp;
         this.tags.addAll(tags);
     }
 
@@ -60,6 +63,8 @@ public class Person {
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }
+
+    public WorkExp getWorkExp() { return workExp; }
 
     /**
      * Returns true if both persons have the same name.
@@ -94,13 +99,14 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
+                && workExp.equals(otherPerson.workExp)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, workExp, tags);
     }
 
     @Override
@@ -110,6 +116,7 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("workExp", workExp)
                 .add("tags", tags)
                 .toString();
     }
