@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
@@ -15,10 +14,12 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose tags contain any of "
+            + "the specified tags and keywords (case-insensitive)\n"
+            + "Parameters: /TAG KEYWORD [/MORE_TAGS MORE_KEYWORDS]...\n"
+            + "Example: " + COMMAND_WORD + " /class 7A alice bob charlie";
+
+    public static final String MESSAGE_SUCCESS = "Found the required people!";
 
     private final NameContainsKeywordsPredicate predicate;
 
@@ -30,8 +31,7 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
-        return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 
     @Override
