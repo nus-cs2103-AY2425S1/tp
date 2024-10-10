@@ -18,6 +18,8 @@ import seedu.address.model.tag.exceptions.TagNotFoundException;
 
 public class UniqueTagListTest {
     private final UniqueTagList uniqueTagList = new UniqueTagList();
+    private final Tag friendTag = new Tag(new TagName("friend"));
+    private final Tag colleagueTag = new Tag(new TagName("colleague"));
 
     @Test
     public void contains_nullTag_throwsNullPointerException() {
@@ -33,6 +35,13 @@ public class UniqueTagListTest {
     public void contains_tagInList_returnsTrue() {
         uniqueTagList.add(FLORIST);
         assertTrue(uniqueTagList.contains(FLORIST));
+    }
+
+    @Test
+    public void contains_tagWithSameIdentityFieldsInList_returnsTrue() {
+        uniqueTagList.add(friendTag);
+        Tag sameTag = new Tag(new TagName("friend"));
+        assertTrue(uniqueTagList.contains(sameTag));
     }
 
     @Test
@@ -129,6 +138,53 @@ public class UniqueTagListTest {
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () ->
                 uniqueTagList.asUnmodifiableObservableList().remove(0));
+    }
+
+    @Test
+    public void equals_sameValues_returnsTrue() {
+        UniqueTagList anotherList = new UniqueTagList();
+        anotherList.add(friendTag);
+        uniqueTagList.add(friendTag);
+        assertTrue(uniqueTagList.equals(anotherList));
+    }
+
+    @Test
+    public void equals_differentValues_returnsFalse() {
+        UniqueTagList anotherList = new UniqueTagList();
+        anotherList.add(colleagueTag);
+        uniqueTagList.add(friendTag);
+        assertFalse(uniqueTagList.equals(anotherList));
+    }
+
+    @Test
+    public void equals_sameObject_returnsTrue() {
+        assertTrue(uniqueTagList.equals(uniqueTagList));
+    }
+
+    @Test
+    public void equals_null_returnsFalse() {
+        assertFalse(uniqueTagList.equals(null));
+    }
+
+    @Test
+    public void equals_differentType_returnsFalse() {
+        assertFalse(uniqueTagList.equals(5));
+    }
+
+    @Test
+    public void hashCode_sameValues_returnsSameHashCode() {
+        UniqueTagList anotherList = new UniqueTagList();
+        anotherList.add(friendTag);
+        uniqueTagList.add(friendTag);
+        assertEquals(uniqueTagList.hashCode(), anotherList.hashCode());
+    }
+
+    @Test
+    public void hashCode_differentValues_returnsDifferentHashCode() {
+        UniqueTagList anotherList = new UniqueTagList();
+        anotherList.add(colleagueTag);
+        uniqueTagList.add(friendTag);
+        assertFalse(uniqueTagList.hashCode() == anotherList.hashCode());
     }
 
     @Test

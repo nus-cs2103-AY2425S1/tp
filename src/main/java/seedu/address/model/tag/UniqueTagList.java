@@ -13,7 +13,7 @@ import seedu.address.model.tag.exceptions.TagNotFoundException;
 
 /**
  * A list of tags that enforces uniqueness and does not allow nulls.
- * A person is considered unique by comparing using {@code Tag#isSameTag(Tag)}. As such, adding and updating of
+ * A tag is considered unique by comparing using {@code Tag#isSameTag(Tag)}. As such, adding and updating of
  * tags uses Tag#isSameTag(Tag) for equality to ensure that the person being added or updated is
  * unique in terms of identity in the UniqueTagList. However, the removal of a tag uses Tag#equals(Object) to
  * ensure that the person with exactly the same fields will be removed.

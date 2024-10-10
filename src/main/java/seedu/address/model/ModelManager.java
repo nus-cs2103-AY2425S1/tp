@@ -187,5 +187,4 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons)
                 && filteredTags.equals(otherModelManager.filteredTags);
     }
-
 }

@@ -45,9 +45,13 @@ public class Tag {
                 && otherTag.getTagName().equals(getTagName());
     }
 
-    public TagName getTagName() { return tagName; }
+    public TagName getTagName() {
+        return tagName;
+    }
 
-    public int getNumberOfPersonsTagged() { return taggedCount; }
+    public int getNumberOfPersonsTagged() {
+        return taggedCount;
+    }
 
     public void increaseTaggedCount() {
         taggedCount++;
