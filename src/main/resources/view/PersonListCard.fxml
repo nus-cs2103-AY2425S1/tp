@@ -27,7 +27,7 @@
         </Label>
         <HBox spacing="10" alignment="CENTER_LEFT">
           <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
-          <Label fx:id="telegramUsername" styleClass="cell_small_label" text="\$telegramUsername" />
+          <Label fx:id="telegramUsername" styleClass="cell_small_label" />
         </HBox>
       </HBox>
       <FlowPane fx:id="tags" />

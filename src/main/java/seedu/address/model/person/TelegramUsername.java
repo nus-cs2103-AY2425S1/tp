@@ -3,6 +3,8 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Optional;
+
 /**
  * Represents a Person's Telegram Username in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidUsername(String)}
@@ -18,6 +20,7 @@ public class TelegramUsername {
      */
     public static final String VALIDATION_REGEX = "^[a-zA-Z][a-zA-Z0-9_]{4,31}$";
 
+    // the only situation where the telegram username is null is when user did not input telegram tag
     public final String telegramUsername;
 
     /**
@@ -26,8 +29,9 @@ public class TelegramUsername {
      * @param username A valid telegram username.
      */
     public TelegramUsername(String username) {
-        requireNonNull(username);
-        checkArgument(isValidUsername(username), MESSAGE_CONSTRAINTS);
+        if (username != null) {
+            checkArgument(isValidUsername(username), MESSAGE_CONSTRAINTS);
+        }
         telegramUsername = username;
     }
 
@@ -37,7 +41,6 @@ public class TelegramUsername {
     public static boolean isValidUsername(String test) {
         return test.matches(VALIDATION_REGEX);
     }
-
 
     @Override
     public String toString() {
@@ -56,11 +59,17 @@ public class TelegramUsername {
         }
 
         seedu.address.model.person.TelegramUsername otherUsername = (seedu.address.model.person.TelegramUsername) other;
+        if (telegramUsername == null) {
+            return otherUsername.telegramUsername == null;
+        }
         return telegramUsername.equalsIgnoreCase(otherUsername.telegramUsername);
     }
 
     @Override
     public int hashCode() {
+        if (telegramUsername == null) {
+            return 0;
+        }
         return telegramUsername.hashCode(); // Might be future concern since Telegram Usernames are case insensitive
         // not sure how hashCodes are computed based on strings, and what the use of these hashcodes are
     }

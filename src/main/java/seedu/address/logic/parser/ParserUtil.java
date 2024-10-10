@@ -82,6 +82,9 @@ public class ParserUtil {
     }
 
     public static TelegramUsername parseTele(String telegramUsername) throws ParseException {
+        if (telegramUsername == null) {
+            return new TelegramUsername(telegramUsername);
+        }
         String trimmedTelegramUsername = telegramUsername.trim();
         if (!TelegramUsername.isValidUsername(trimmedTelegramUsername)) {
             throw new ParseException(TelegramUsername.MESSAGE_CONSTRAINTS);

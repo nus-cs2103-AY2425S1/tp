@@ -35,6 +35,8 @@ public class Messages {
      * Formats the {@code person} for display to the user.
      */
     public static String format(Person person) {
+        String telegramUsername = person.getTelegramUsername()
+                .toString() == null ? "": person.getTelegramUsername().toString();
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName())
                 .append("; Phone: ")
@@ -44,7 +46,7 @@ public class Messages {
                 .append("; Address: ")
                 .append(person.getAddress())
                 .append("; Telegram username: ")
-                .append(person.getTelegramUsername())
+                .append(telegramUsername)
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
         return builder.toString();
