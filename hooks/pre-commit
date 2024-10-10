@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# Run Java tests before committing
+./gradlew test
+./gradlew clean build test
+
+# Abort commit if tests fail
+if [ $? -ne 0 ]; then
+    echo "Java tests failed. Commit aborted."
+    exit 1
+fi
