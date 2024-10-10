@@ -16,13 +16,24 @@ public class StatusBarFooter extends UiPart<Region> {
 
     @FXML
     private Label saveLocationStatus;
+    @FXML
+    private Label contactCountLabel;
 
     /**
      * Creates a {@code StatusBarFooter} with the given {@code Path}.
      */
-    public StatusBarFooter(Path saveLocation) {
+    public StatusBarFooter(Path saveLocation, int contactCount) {
         super(FXML);
-        saveLocationStatus.setText(Paths.get(".").resolve(saveLocation).toString());
+        //saveLocationStatus.setText(Paths.get(".").resolve(saveLocation).toString());
+        setContactCount(contactCount);
+    }
+
+    /**
+     * Writes the number of contacts in the contact list
+     * @param count
+     */
+    private void setContactCount(int count) {
+        contactCountLabel.setText("Total contacts: " + count);
     }
 
 }
