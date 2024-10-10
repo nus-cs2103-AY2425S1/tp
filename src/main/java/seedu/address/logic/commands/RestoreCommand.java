@@ -8,7 +8,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- *  Restores last person deleted, if any.
+ * Restores last person deleted, if any.
  */
 public class RestoreCommand extends Command {
 
