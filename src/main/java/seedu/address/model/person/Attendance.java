@@ -26,6 +26,14 @@ public class Attendance {
         this.hasAttended = hasAttended;
     }
 
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public boolean hasAttended() {
+        return hasAttended;
+    }
+
     @Override
     public String toString() {
         return this.date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")) + " "
