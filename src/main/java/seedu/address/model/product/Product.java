@@ -4,7 +4,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
-import com.fasterxml.jackson.databind.JsonSerializer;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.supplier.Supplier;
 
@@ -27,11 +26,17 @@ public class Product {
         this.name = name;
     }
 
+    /**
+     * Removes assigned supplier and assignment status.
+     */
     public void unsetSupplier() {
         this.supplier = null;
         this.isAssigned = false;
     }
 
+    /**
+     * Sets a supplier and updates assignment status.
+     */
     public void setSupplier(Supplier supplier) {
         this.supplier = supplier;
         this.isAssigned = true;
