@@ -6,51 +6,51 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-public class AddressTest {
+public class TelegramTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Address(null));
+        assertThrows(NullPointerException.class, () -> new Telegram(null));
     }
 
     @Test
-    public void constructor_invalidAddress_throwsIllegalArgumentException() {
-        String invalidAddress = "";
-        assertThrows(IllegalArgumentException.class, () -> new Address(invalidAddress));
+    public void constructor_invalidTelegram_throwsIllegalArgumentException() {
+        String invalidTelegram = "";
+        assertThrows(IllegalArgumentException.class, () -> new Telegram(invalidTelegram));
     }
 
     @Test
-    public void isValidAddress() {
+    public void isValidTelegram() {
         // null address
-        assertThrows(NullPointerException.class, () -> Address.isValidAddress(null));
+        assertThrows(NullPointerException.class, () -> Telegram.isValidTelegram(null));
 
         // invalid addresses
-        assertFalse(Address.isValidAddress("")); // empty string
-        assertFalse(Address.isValidAddress(" ")); // spaces only
+        assertFalse(Telegram.isValidTelegram("")); // empty string
+        assertFalse(Telegram.isValidTelegram(" ")); // spaces only
+        assertFalse(Telegram.isValidTelegram("two words")); // space in between words
 
         // valid addresses
-        assertTrue(Address.isValidAddress("Blk 456, Den Road, #01-355"));
-        assertTrue(Address.isValidAddress("-")); // one character
-        assertTrue(Address.isValidAddress("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
+        assertTrue(Telegram.isValidTelegram("bruceWayne"));
+        assertTrue(Telegram.isValidTelegram("a2b34C5"));
     }
 
     @Test
     public void equals() {
-        Address address = new Address("Valid Address");
+        Telegram telegram = new Telegram("Valid Telegram");
 
         // same values -> returns true
-        assertTrue(address.equals(new Address("Valid Address")));
+        assertTrue(telegram.equals(new Telegram("Valid Telegram")));
 
         // same object -> returns true
-        assertTrue(address.equals(address));
+        assertTrue(telegram.equals(telegram));
 
         // null -> returns false
-        assertFalse(address.equals(null));
+        assertFalse(telegram.equals(null));
 
         // different types -> returns false
-        assertFalse(address.equals(5.0f));
+        assertFalse(telegram.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(address.equals(new Address("Other Valid Address")));
+        assertFalse(telegram.equals(new Telegram("Other Valid Telegram")));
     }
 }

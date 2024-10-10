@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's telegram username in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidTelegrram(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidTelegram(String)}
  */
 public class Telegram {
 
@@ -23,9 +23,9 @@ public class Telegram {
      *
      * @param address A valid address.
      */
-    public Address(String address) {
+    public Telegram(String address) {
         requireNonNull(address);
-        checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidTelegram(address), MESSAGE_CONSTRAINTS);
         value = address;
     }
 
@@ -48,12 +48,12 @@ public class Telegram {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Address)) {
+        if (!(other instanceof Telegram)) {
             return false;
         }
 
-        Address otherAddress = (Address) other;
-        return value.equals(otherAddress.value);
+        Telegram otherTelegram = (Telegram) other;
+        return value.equals(otherTelegram.value);
     }
 
     @Override
