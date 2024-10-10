@@ -13,6 +13,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.TelegramUsername;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -78,6 +79,14 @@ public class ParserUtil {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
         return new Address(trimmedAddress);
+    }
+
+    public static TelegramUsername parseTele(String telegramUsername) throws ParseException {
+        String trimmedTelegramUsername = telegramUsername.trim();
+        if (!TelegramUsername.isValidUsername(trimmedTelegramUsername)) {
+            throw new ParseException(TelegramUsername.MESSAGE_CONSTRAINTS);
+        }
+        return new TelegramUsername(trimmedTelegramUsername);
     }
 
     /**
