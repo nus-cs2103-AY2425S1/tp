@@ -78,7 +78,6 @@ public class Person {
     public PaymentStatus getPaymentStatus() {
         return paymentStatus;
     }
-  
     public ClientStatus getClientStatus() {
         return clientStatus;
     }
