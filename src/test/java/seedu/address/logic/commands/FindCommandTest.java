@@ -72,7 +72,7 @@ public class FindCommandTest {
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
-        String expectedMessage = String.format(MESSAGE_FIND_PERSON_SUCCESS, predicate.displayString());
+        String expectedMessage = String.format(MESSAGE_FIND_PERSON_SUCCESS, predicate.getDisplayString());
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -82,7 +82,7 @@ public class FindCommandTest {
     @Test
     public void execute_partialMatchKeyword_correctPersonFound() {
         NameContainsKeywordsPredicate predicate = preparePredicate("ell");
-        String expectedMessage = String.format(MESSAGE_FIND_PERSON_SUCCESS, predicate.displayString());
+        String expectedMessage = String.format(MESSAGE_FIND_PERSON_SUCCESS, predicate.getDisplayString());
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -92,7 +92,7 @@ public class FindCommandTest {
     @Test
     public void execute_partialMatchKeyword_multiplePersonsFound() {
         NameContainsKeywordsPredicate predicate = preparePredicate("e");
-        String expectedMessage = String.format(MESSAGE_FIND_PERSON_SUCCESS, predicate.displayString());
+        String expectedMessage = String.format(MESSAGE_FIND_PERSON_SUCCESS, predicate.getDisplayString());
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
