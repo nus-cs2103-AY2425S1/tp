@@ -24,7 +24,7 @@ public class ModelManager implements Model {
     private final FilteredList<Company> filteredCompanies;
 
     /**
-     * Initializes a ModelManagerCompany with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given addressBook and userPrefs.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);

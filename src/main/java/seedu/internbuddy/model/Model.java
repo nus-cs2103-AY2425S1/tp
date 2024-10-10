@@ -8,7 +8,7 @@ import seedu.internbuddy.commons.core.GuiSettings;
 import seedu.internbuddy.model.company.Company;
 
 /**
- * The API of the ModelCompany component.
+ * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */

@@ -32,7 +32,7 @@ public class JsonAdaptedCompany {
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
-     * Constructs a {@link JsonAdaptedCompany} with the given person details.
+     * Constructs a {@link JsonAdaptedCompany} with the given company details.
      */
     @JsonCreator
     public JsonAdaptedCompany(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
