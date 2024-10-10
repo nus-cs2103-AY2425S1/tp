@@ -13,7 +13,6 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.TagAddCommand;
 import seedu.address.logic.commands.TagDeleteCommand;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Tag;
@@ -21,6 +20,7 @@ import seedu.address.model.person.Tag;
 public class TagDeleteCommandParserTest {
     private TagDeleteCommandParser parser = new TagDeleteCommandParser();
 
+    @Test
     public void parse_nameSpecified_success() {
         // have tag
         String targetName = VALID_NAME_AMY;

@@ -27,7 +27,6 @@ public class TagDeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " n/ Li Sirui "
             + "t/ Jane and Tom 230412";
 
-    public static final String MESSAGE_ARGUMENTS = "Name: %1$s, Tag: %2$s";
     public static final String MESSAGE_DELETE_TAG_SUCCESS = "Removed tag from Person: %1$s";
 
     private final Name name;
