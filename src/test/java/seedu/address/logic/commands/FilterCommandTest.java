@@ -101,15 +101,17 @@ public class FilterCommandTest {
         public boolean checkRestorable() {
             throw new AssertionError("This method should not be called.");
         }
+        
         @Override
         public void makeNotRestorable() {
             throw new AssertionError("This method should not be called.");
         }
+
         @Override
         public Person getLastDeletedPerson() {
             throw new AssertionError("This method should not be called.");
         }
-        
+
         @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
