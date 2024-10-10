@@ -44,6 +44,15 @@ public class Company {
         return this.phone;
     }
 
+    public boolean isSameCompany(Company otherCompany) {
+        if (otherCompany == this) {
+            return true;
+        }
+
+        return otherCompany != null
+                && otherCompany.name.equals(this.name);
+    }
+
     /**
      * Checks for equality.
      * For 2 companies, checks only their names for equality.
@@ -63,7 +72,10 @@ public class Company {
         }
 
         Company otherCompany = (Company) other;
-        return this.name.equals(otherCompany.name);
+        return this.name.equals(otherCompany.name)
+                && this.address.equals(otherCompany.address)
+                && this.billingDate.equals(otherCompany.billingDate)
+                && this.phone.equals(otherCompany.phone);
     }
 
     @Override
