@@ -13,6 +13,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_UNIVERSITY = new Prefix("u/");
     public static final Prefix PREFIX_MAJOR = new Prefix("m/");
+    public static final Prefix PREFIX_INTEREST = new Prefix("i/");
+    public static final Prefix PREFIX_EXPERIENCE = new Prefix("e/");
 
 
 }
