@@ -35,7 +35,7 @@ public class Attendance {
     /**
      * Adds a new lesson marked as absent.
      */
-    public void AddAbsentLesson() {
+    public void addAbsentLesson() {
         attendanceList.add(false);
     }
 

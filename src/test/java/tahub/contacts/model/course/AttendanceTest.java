@@ -62,10 +62,10 @@ public class AttendanceTest {
     @DisplayName("Returns correct values after absent sessions added")
     public void addAbsences_correctValues() {
         Attendance a = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5);
-        a.AddAbsentLesson();
-        a.AddAbsentLesson();
-        a.AddAbsentLesson();
-        a.AddAbsentLesson();
+        a.addAbsentLesson();
+        a.addAbsentLesson();
+        a.addAbsentLesson();
+        a.addAbsentLesson();
         assertEquals(a.getAttendanceAttendedCount(), 3);
         assertEquals(a.getAttendanceTotalCount(), 9);
     }
@@ -86,11 +86,11 @@ public class AttendanceTest {
     public void addSessions_correctValues() {
         Attendance a = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5);
         a.addAttendedLesson();
-        a.AddAbsentLesson();
-        a.AddAbsentLesson();
+        a.addAbsentLesson();
+        a.addAbsentLesson();
         a.addAttendedLesson();
         a.addAttendedLesson();
-        a.AddAbsentLesson();
+        a.addAbsentLesson();
         a.addAttendedLesson();
         a.addAttendedLesson();
         assertEquals(a.getAttendanceAttendedCount(), 8);
