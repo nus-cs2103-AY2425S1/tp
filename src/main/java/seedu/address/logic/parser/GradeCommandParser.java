@@ -7,12 +7,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
 
 import java.util.stream.Stream;
 
-
 import seedu.address.logic.commands.GradeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Grade;
 import seedu.address.model.person.Module;
 import seedu.address.model.person.StudentId;
-import seedu.address.model.person.Grade;
 
 /**
  * Parses input arguments and creates a new AddCommand object
