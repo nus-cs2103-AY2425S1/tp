@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
