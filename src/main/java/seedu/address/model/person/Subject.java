@@ -9,11 +9,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Subject {
 
-    public static final String MESSAGE_CONSTRAINTS = "Subjects should only be:"
-            + "economics / literature / music,"
-            + "biology / chemistry /science,"
-            + "english / chinese / malay / tamil,"
-            + "math / history / geography"
+    public static final String MESSAGE_CONSTRAINTS = "Subjects should only be: "
+            + "economics / literature / music / "
+            + "biology / chemistry /science / "
+            + "english / chinese / malay / tamil / "
+            + "math / history / geography / physics "
             + "and it should not be blank";
 
 
