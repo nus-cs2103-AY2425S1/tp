@@ -1,10 +1,9 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.RsvpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 
 /**
  * Parses input arguments and creates a new RsvpCommand object
@@ -13,9 +12,6 @@ public class RsvpCommandParser implements Parser<RsvpCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the RsvpCommand
-     * @param args
-     * @return
-     * @throws ParseException
      */
     public RsvpCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
