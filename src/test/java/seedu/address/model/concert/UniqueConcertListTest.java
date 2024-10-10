@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalConcerts.COACHELLA;
+import static seedu.address.testutil.TypicalConcerts.GLASTONBURY;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -11,20 +13,11 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.commons.Address;
-import seedu.address.model.commons.Name;
 import seedu.address.model.concert.exceptions.ConcertNotFoundException;
 import seedu.address.model.concert.exceptions.DuplicateConcertException;
 import seedu.address.testutil.ConcertBuilder;
 
 public class UniqueConcertListTest {
-    // TODO: extract to typical concerts
-    private final Concert c1 = new Concert(new Name("Concert C1"), new Address("C1"),
-            new ConcertDate("2002-10-10 1000"));
-
-    private final Concert c2 = new Concert(new Name("Concert C2"), new Address("C2"),
-            new ConcertDate("2024-10-10 2359"));
-
     private final UniqueConcertList uniqueConcertList = new UniqueConcertList();
 
     @Test
@@ -34,19 +27,19 @@ public class UniqueConcertListTest {
 
     @Test
     public void contains_concertNotInList_returnsFalse() {
-        assertFalse(uniqueConcertList.contains(c1));
+        assertFalse(uniqueConcertList.contains(COACHELLA));
     }
 
     @Test
     public void contains_concertInList_returnsTrue() {
-        uniqueConcertList.add(c1);
-        assertTrue(uniqueConcertList.contains(c1));
+        uniqueConcertList.add(COACHELLA);
+        assertTrue(uniqueConcertList.contains(COACHELLA));
     }
 
     @Test
     public void contains_concertWithSameIdentityFieldsInList_returnsTrue() {
-        uniqueConcertList.add(c1);
-        Concert editedC1 = new ConcertBuilder(c1).build();
+        uniqueConcertList.add(COACHELLA);
+        Concert editedC1 = new ConcertBuilder(COACHELLA).build();
         assertTrue(uniqueConcertList.contains(editedC1));
     }
 
@@ -57,39 +50,39 @@ public class UniqueConcertListTest {
 
     @Test
     public void add_duplicateConcert_throwsDuplicateConcertException() {
-        uniqueConcertList.add(c1);
-        assertThrows(DuplicateConcertException.class, () -> uniqueConcertList.add(c1));
+        uniqueConcertList.add(COACHELLA);
+        assertThrows(DuplicateConcertException.class, () -> uniqueConcertList.add(COACHELLA));
     }
 
     @Test
     public void setConcert_nullTargetConcert_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueConcertList.setConcert(null, c1));
+        assertThrows(NullPointerException.class, () -> uniqueConcertList.setConcert(null, COACHELLA));
     }
 
     @Test
     public void setConcert_nullEditedConcert_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueConcertList.setConcert(c1, null));
+        assertThrows(NullPointerException.class, () -> uniqueConcertList.setConcert(COACHELLA, null));
     }
 
     @Test
     public void setConcert_targetConcertNotInList_throwsConcertNotFoundException() {
-        assertThrows(ConcertNotFoundException.class, () -> uniqueConcertList.setConcert(c1, c1));
+        assertThrows(ConcertNotFoundException.class, () -> uniqueConcertList.setConcert(COACHELLA, COACHELLA));
     }
 
     @Test
     public void setConcert_editedConcertIsSameConcert_success() {
-        uniqueConcertList.add(c1);
-        uniqueConcertList.setConcert(c1, c1);
+        uniqueConcertList.add(COACHELLA);
+        uniqueConcertList.setConcert(COACHELLA, COACHELLA);
         UniqueConcertList expectedUniqueConcertList = new UniqueConcertList();
-        expectedUniqueConcertList.add(c1);
+        expectedUniqueConcertList.add(COACHELLA);
         assertEquals(expectedUniqueConcertList, uniqueConcertList);
     }
 
     @Test
     public void setConcert_editedConcertHasSameIdentity_success() {
-        uniqueConcertList.add(c1);
-        Concert editedC1 = new ConcertBuilder(c1).build();
-        uniqueConcertList.setConcert(c1, editedC1);
+        uniqueConcertList.add(COACHELLA);
+        Concert editedC1 = new ConcertBuilder(COACHELLA).build();
+        uniqueConcertList.setConcert(COACHELLA, editedC1);
         UniqueConcertList expectedUniqueConcertList = new UniqueConcertList();
         expectedUniqueConcertList.add(editedC1);
         assertEquals(expectedUniqueConcertList, uniqueConcertList);
@@ -97,10 +90,10 @@ public class UniqueConcertListTest {
 
     @Test
     public void setConcert_editedConcertHasDifferentIdentity_success() {
-        uniqueConcertList.add(c1);
-        uniqueConcertList.setConcert(c1, c2);
+        uniqueConcertList.add(COACHELLA);
+        uniqueConcertList.setConcert(COACHELLA, GLASTONBURY);
         UniqueConcertList expectedUniqueConcertList = new UniqueConcertList();
-        expectedUniqueConcertList.add(c2);
+        expectedUniqueConcertList.add(GLASTONBURY);
         assertEquals(expectedUniqueConcertList, uniqueConcertList);
     }
 
@@ -111,13 +104,13 @@ public class UniqueConcertListTest {
 
     @Test
     public void remove_concertDoesNotExist_throwsConcertNotFoundException() {
-        assertThrows(ConcertNotFoundException.class, () -> uniqueConcertList.remove(c1));
+        assertThrows(ConcertNotFoundException.class, () -> uniqueConcertList.remove(COACHELLA));
     }
 
     @Test
     public void remove_existingConcert_removesConcert() {
-        uniqueConcertList.add(c1);
-        uniqueConcertList.remove(c1);
+        uniqueConcertList.add(COACHELLA);
+        uniqueConcertList.remove(COACHELLA);
         UniqueConcertList expectedUniqueConcertList = new UniqueConcertList();
         assertEquals(expectedUniqueConcertList, uniqueConcertList);
     }
@@ -129,9 +122,9 @@ public class UniqueConcertListTest {
 
     @Test
     public void setConcerts_uniqueConcertList_replacesOwnListWithProvidedUniqueConcertList() {
-        uniqueConcertList.add(c1);
+        uniqueConcertList.add(COACHELLA);
         UniqueConcertList expectedUniqueConcertList = new UniqueConcertList();
-        expectedUniqueConcertList.add(c2);
+        expectedUniqueConcertList.add(GLASTONBURY);
         uniqueConcertList.setConcerts(expectedUniqueConcertList);
         assertEquals(expectedUniqueConcertList, uniqueConcertList);
     }
@@ -143,17 +136,17 @@ public class UniqueConcertListTest {
 
     @Test
     public void setConcerts_list_replacesOwnListWithProvidedList() {
-        uniqueConcertList.add(c1);
-        List<Concert> personList = Collections.singletonList(c2);
+        uniqueConcertList.add(COACHELLA);
+        List<Concert> personList = Collections.singletonList(GLASTONBURY);
         uniqueConcertList.setConcerts(personList);
         UniqueConcertList expectedUniqueConcertList = new UniqueConcertList();
-        expectedUniqueConcertList.add(c2);
+        expectedUniqueConcertList.add(GLASTONBURY);
         assertEquals(expectedUniqueConcertList, uniqueConcertList);
     }
 
     @Test
     public void setConcerts_listWithDuplicateConcerts_throwsDuplicateConcertException() {
-        List<Concert> listWithDuplicateConcerts = Arrays.asList(c1, c1);
+        List<Concert> listWithDuplicateConcerts = Arrays.asList(COACHELLA, COACHELLA);
         assertThrows(DuplicateConcertException.class, () -> uniqueConcertList.setConcerts(listWithDuplicateConcerts));
     }
 
