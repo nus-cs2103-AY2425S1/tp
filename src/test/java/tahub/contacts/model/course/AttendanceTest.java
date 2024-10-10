@@ -133,9 +133,17 @@ public class AttendanceTest {
         class FalseEquals {
             @Test
             @DisplayName("different attendance list")
-            public void sameAttendanceList() {
+            public void differentAttendanceList() {
                 Attendance a1 = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5);
                 Attendance a2 = new Attendance(SINGULAR_ATTENDED_ATTENDANCE_LIST);
+                assertNotEquals(a1, a2);
+            }
+
+            @Test
+            @DisplayName("different type")
+            public void differentType() {
+                Attendance a1 = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5);
+                String a2 = "different-type";
                 assertNotEquals(a1, a2);
             }
         }
@@ -158,5 +166,14 @@ public class AttendanceTest {
             Attendance a = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5);
             assertEquals(a.toString(), "[3/5]");
         }
+    }
+
+    // Hashcode
+    @Test
+    public void hashCode_sameAttendanceList_sameHashCode() {
+        Attendance a1 = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5);
+        Attendance a2 = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5);
+
+        assertEquals(a1.hashCode(), a2.hashCode());
     }
 }
