@@ -15,9 +15,8 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all employee/potential hires(e/ph) whose "
-            + " names contain any of the specified keywords (case-insensitive) and displays them as a list with "
-            + "index numbers.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
+            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: e/ph KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " e" + " alice bob charlie";
 
