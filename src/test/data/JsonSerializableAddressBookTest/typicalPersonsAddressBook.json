@@ -6,6 +6,7 @@
     "email" : "alice@example.com",
     "gender": "female",
     "address" : "123, Jurong West Ave 6, #08-111",
+    "module" : "MA1522",
     "tags" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
@@ -13,6 +14,7 @@
     "email" : "johnd@example.com",
     "gender": "male",
     "address" : "311, Clementi Ave 2, #02-25",
+    "module" : "MA1522",
     "tags" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
@@ -20,6 +22,7 @@
     "email" : "heinz@example.com",
     "gender": "male",
     "address" : "wall street",
+    "module" : "EL1101",
     "tags" : [ ]
   }, {
     "name" : "Daniel Meier",
@@ -27,6 +30,7 @@
     "email" : "cornelia@example.com",
     "gender": "male",
     "address" : "10th street",
+    "module" : "CS1101",
     "tags" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
@@ -34,6 +38,7 @@
     "email" : "werner@example.com",
     "gender": "female",
     "address" : "michegan ave",
+    "module" : "MA1522",
     "tags" : [ ]
   }, {
     "name" : "Fiona Kunz",
@@ -41,6 +46,7 @@
     "email" : "lydia@example.com",
     "gender": "female",
     "address" : "little tokyo",
+    "module" : "MA1522",
     "tags" : [ ]
   }, {
     "name" : "George Best",
@@ -48,6 +54,7 @@
     "email" : "anna@example.com",
     "gender": "male",
     "address" : "4th street",
+    "module" : "EL1101",
     "tags" : [ ]
   } ]
 }
