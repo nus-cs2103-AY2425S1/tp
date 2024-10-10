@@ -122,6 +122,14 @@ public class Person implements Comparable<Person> {
         return Objects.hash(name, phone, email, address, tags, roles);
     }
 
+    /**
+     * Returns true if the person has the specified role.
+     */
+    public boolean hasRole(Role role) {
+        return roles.contains(role);
+    }
+
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)

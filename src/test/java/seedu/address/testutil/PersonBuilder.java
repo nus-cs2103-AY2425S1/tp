@@ -8,6 +8,9 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.role.Role;
+import seedu.address.model.role.RoleHandler;
+import seedu.address.model.role.exceptions.InvalidRoleException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -26,6 +29,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private Set<Role> roles;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -36,6 +40,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        roles = new HashSet<>();
     }
 
     /**
@@ -47,6 +52,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+        roles = new HashSet<>(personToCopy.getRoles());
     }
 
     /**
@@ -86,6 +92,25 @@ public class PersonBuilder {
      */
     public PersonBuilder withEmail(String email) {
         this.email = new Email(email);
+        return this;
+    }
+
+    //TODO: Add withRoles method ?
+    /**
+     * Adds roles based on a String array of role name Strings
+     */
+    public PersonBuilder withRoles(String ... roles) {
+        Set<Role> newRoles = new HashSet<>();
+        for (String role : roles) {
+            try {
+                Role nextRole = RoleHandler.getRole(role);
+                newRoles.add(nextRole);
+            } catch (InvalidRoleException e) {
+                //TODO: Handle this exception
+                continue;
+            }
+        }
+
         return this;
     }
 
