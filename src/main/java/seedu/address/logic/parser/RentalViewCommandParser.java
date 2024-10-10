@@ -9,7 +9,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments and creates a new RentalViewCommand object
  */
-public class RentalViewCommandParser {
+public class RentalViewCommandParser implements Parser<RentalViewCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the RentalViewCommand
