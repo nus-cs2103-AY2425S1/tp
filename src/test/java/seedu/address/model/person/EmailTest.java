@@ -18,7 +18,7 @@ public class EmailTest {
         // null email
         assertThrows(NullPointerException.class, () -> Email.isValidEmail(null));
 
-        // blank email is now valid, as email is optional for contacts
+        // blank email is valid, as email is optional for contacts
         assertTrue(Email.isValidEmail("")); // empty string
         assertTrue(Email.isValidEmail(" ")); // spaces only
 
