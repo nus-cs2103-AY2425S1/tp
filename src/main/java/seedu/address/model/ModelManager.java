@@ -11,6 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.assignment.Assignment;
+import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.student.Student;
 
 /**
@@ -22,22 +24,25 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Student> filteredStudents;
+    private final AssignmentList assignmentList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, AssignmentList assignmentList) {
+        requireAllNonNull(addressBook, userPrefs, assignmentList);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + addressBook + ", user prefs " + userPrefs
+            + "and assignment list: " + assignmentList);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredStudents = new FilteredList<>(this.addressBook.getStudentList());
+        this.assignmentList = assignmentList;
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new UserPrefs(), new AssignmentList());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -111,6 +116,25 @@ public class ModelManager implements Model {
         addressBook.setStudent(target, editedStudent);
     }
 
+    //=========== Assignment ================================================================================
+
+    @Override
+    public AssignmentList getAssignmentList() {
+        return assignmentList;
+    }
+
+    @Override
+    public boolean hasAssignment(Assignment assignment) {
+        requireNonNull(assignment);
+
+        return assignmentList.hasAssignment(assignment);
+    }
+
+    @Override
+    public void addAssignment(Assignment assignment) {
+        assignmentList.addAssignment(assignment);
+    }
+
     //=========== Filtered Student List Accessors =============================================================
 
     /**
@@ -142,7 +166,8 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredStudents.equals(otherModelManager.filteredStudents);
+                && filteredStudents.equals(otherModelManager.filteredStudents)
+                && assignmentList.equals(otherModelManager.assignmentList);
     }
 
 }

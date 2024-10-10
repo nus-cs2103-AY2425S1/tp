@@ -3,6 +3,9 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -17,6 +20,8 @@ import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.PresentDates;
+import seedu.address.model.student.StudentId;
+import seedu.address.model.student.TutorialClass;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tut.TutDate;
 
@@ -26,6 +31,7 @@ import seedu.address.model.tut.TutDate;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    private static final String DATE_TIME_FORMAT = "yyyy-MM-dd HHmm";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -116,6 +122,36 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String studentId} into a {@code StudentId}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code studentId} is invalid.
+     */
+    public static StudentId parseStudentId(String studentId) throws ParseException {
+        requireNonNull(studentId);
+        String trimmedStudentId = studentId.trim();
+        if (!StudentId.isValidStudentId(trimmedStudentId)) {
+            throw new ParseException(StudentId.MESSAGE_CONSTRAINTS);
+        }
+        return new StudentId(trimmedStudentId);
+    }
+
+    /**
+     * Parses a {@code String tutorialClass} into a {@code TutorialClass}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code tutorialClass} is invalid.
+     */
+    public static TutorialClass parseTutorialClass(String tutorialClass) throws ParseException {
+        requireNonNull(tutorialClass);
+        String trimmedTutorialClass = tutorialClass.trim();
+        if (!TutorialClass.isValidTutorialClass(trimmedTutorialClass)) {
+            throw new ParseException(TutorialClass.MESSAGE_CONSTRAINTS);
+        }
+        return new TutorialClass(trimmedTutorialClass);
+    }
+
+    /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
@@ -163,4 +199,22 @@ public class ParserUtil {
         return new PresentDates(dates);
     }
 
+    /**
+     * Parses a due date string into local date time object.
+     *
+     * @param dueDateString String representing due date.
+     *
+     * @return LocalDateTime object with given due date.
+     *
+     * @throws ParseException if the given string is invalid.
+     */
+    public static LocalDateTime parseDueDate(String dueDateString) throws ParseException {
+        requireNonNull(dueDateString);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
+        try {
+            return LocalDateTime.parse(dueDateString, formatter);
+        } catch (DateTimeParseException e) {
+            throw new ParseException("Failed to parse date time: " + e.getMessage());
+        }
+    }
 }

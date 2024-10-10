@@ -5,7 +5,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALCLASS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.Collections;
@@ -27,6 +29,8 @@ import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.PresentDates;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentId;
+import seedu.address.model.student.TutorialClass;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -44,10 +48,14 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]... \n"
+            + "[" + PREFIX_STUDENTID + "STUDENT_ID] "
+            + "[" + PREFIX_TUTORIALCLASS + "TUTORIAL_CLASS] "
+            + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_EMAIL + "johndoe@example.com"
+            + PREFIX_STUDENTID + "1002"
+            + PREFIX_TUTORIALCLASS + "1002";;
 
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -100,10 +108,15 @@ public class EditCommand extends Command {
         Phone updatedPhone = editStudentDescriptor.getPhone().orElse(studentToEdit.getPhone());
         Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
         Address updatedAddress = editStudentDescriptor.getAddress().orElse(studentToEdit.getAddress());
+        StudentId updatedStudentId = editStudentDescriptor.getStudentId().orElse(studentToEdit.getStudentId());
+        TutorialClass updatedTutorialClass = editStudentDescriptor.getTutorialClass()
+                .orElse(studentToEdit.getTutorialClass());
+
         Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
         PresentDates updatedDates = editStudentDescriptor.getPresentDates().orElse(studentToEdit.getPresentDates());
 
-        return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedDates);
+        return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress,
+                updatedStudentId, updatedTutorialClass, updatedTags, updatedDates);
     }
 
     @Override
@@ -139,6 +152,8 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
+        private StudentId studentId;
+        private TutorialClass tutorialClass;
         private Set<Tag> tags;
         private PresentDates presentDates;
 
@@ -153,6 +168,8 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setStudentId(toCopy.studentId);
+            setTutorialClass(toCopy.tutorialClass);
             setTags(toCopy.tags);
             setPresentDates(toCopy.presentDates);
         }
@@ -161,7 +178,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, studentId, tutorialClass, tags);
         }
 
         public void setName(Name name) {
@@ -204,6 +221,20 @@ public class EditCommand extends Command {
             return Optional.ofNullable(presentDates);
         }
 
+        public void setStudentId(StudentId studentId) {
+            this.studentId = (studentId != null) ? studentId : this.studentId;
+        }
+        public Optional<StudentId> getStudentId() {
+            return Optional.ofNullable(studentId);
+        }
+
+        public void setTutorialClass(TutorialClass tutorialClass) {
+            this.tutorialClass = (tutorialClass != null) ? tutorialClass : this.tutorialClass;
+        }
+        public Optional<TutorialClass> getTutorialClass() {
+            return Optional.ofNullable(tutorialClass);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -238,7 +269,9 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditStudentDescriptor.email)
                     && Objects.equals(address, otherEditStudentDescriptor.address)
                     && Objects.equals(tags, otherEditStudentDescriptor.tags)
-                    && Objects.equals(presentDates, otherEditStudentDescriptor.presentDates);
+                    && Objects.equals(presentDates, otherEditStudentDescriptor.presentDates)
+                    && Objects.equals(studentId, otherEditStudentDescriptor.studentId)
+                    && Objects.equals(tutorialClass, otherEditStudentDescriptor.tutorialClass);
         }
 
         @Override
@@ -248,6 +281,8 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
+                    .add("studentId", studentId)
+                    .add("tutorialClass", tutorialClass)
                     .add("tags", tags)
                     .add("attendance", presentDates)
                     .toString();

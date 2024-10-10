@@ -11,6 +11,8 @@ import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentId;
+import seedu.address.model.student.TutorialClass;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -37,6 +39,8 @@ public class EditStudentDescriptorBuilder {
         descriptor.setPhone(student.getPhone());
         descriptor.setEmail(student.getEmail());
         descriptor.setAddress(student.getAddress());
+        descriptor.setStudentId(student.getStudentId());
+        descriptor.setTutorialClass(student.getTutorialClass());
         descriptor.setTags(student.getTags());
     }
 
@@ -74,6 +78,23 @@ public class EditStudentDescriptorBuilder {
 
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and sets it to the {@code EditStudentDescriptor}
+     * Sets the {@code StudentId} of the {@code EditStudentDescriptor} that we are building.
+     */
+    public EditStudentDescriptorBuilder withStudentId(String studentId) {
+        descriptor.setStudentId(new StudentId(studentId));
+        return this;
+    }
+
+    /**
+     * Sets the {@code TutorialClass} of the {@code EditStudentDescriptor} that we are building.
+     */
+    public EditStudentDescriptorBuilder withTutorialClass(String tutorialClass) {
+        descriptor.setTutorialClass(new TutorialClass(tutorialClass));
+        return this;
+    }
+
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditStudentDescriptor}
      * that we are building.
      */
     public EditStudentDescriptorBuilder withTags(String... tags) {
