@@ -51,7 +51,7 @@ public class DoctorName {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Name)) {
+        if (!(other instanceof DoctorName)) {
             return false;
         }
 
