@@ -174,6 +174,21 @@ public class AddCommandTest {
         public boolean hasLessons(Lesson lesson) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void deleteLesson(int index) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Lesson getLesson(int index) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int getLessonScheduleSize() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
