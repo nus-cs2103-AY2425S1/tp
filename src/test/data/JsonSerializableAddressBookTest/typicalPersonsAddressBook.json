@@ -20,7 +20,7 @@
     "email" : "heinz@example.com",
     "address" : "wall street",
     "tags" : [ ],
-    "telegramUsername" : "carl"
+    "telegramUsername" : "carlkurz"
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
@@ -34,7 +34,7 @@
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "tags" : [ ],
-    "telegramUsername" : "elle"
+    "telegramUsername" : "ellemeyer"
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
