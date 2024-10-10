@@ -184,9 +184,9 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 <details>
   <summary>&nbsp&nbsp<h3>Locating persons by name: <code>find</code></h3></summary>
   
-  >Finds persons whose names contain any of the given keywords.
+  >Finds the employee/potential hire(e/ph) whose names contain any of the given keywords.
   >
-  >Format: `find KEYWORD [MORE_KEYWORDS]`
+  >Format: `find e/ph KEYWORD [MORE_KEYWORDS]`
   >
   >* The search is case-insensitive. e.g `hans` will match `Hans`
   >* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -196,8 +196,8 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
   >  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
   >
   >Examples:
-  >* `find John` returns `john` and `John Doe`
-  >* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+  >* `find e John` returns employees `john` and `John Doe`
+  >* `find ph alex david` returns potential hires `Alex Yeoh`, `David Li`<br>
   >  ![result for 'find alex david'](images/findAlexDavidResult.png)
 </details>
 
