@@ -2,10 +2,13 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,9 +19,11 @@ import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
+import seedu.address.model.student.PresentDates;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.TutorialClass;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tut.TutDate;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -156,6 +161,42 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a date string in the format "dd/MM/yyyy" and converts it to a {@link TutDate} object.
+     * If the input string does not match the expected format, a {@link ParseException} is thrown.
+     *
+     * @param date The date string in the format "dd/MM/yyyy".
+     * @return A {@link TutDate} object representing the parsed date.
+     * @throws ParseException If the date string is not in the correct format or cannot be parsed.
+     */
+    public static TutDate parseDate(String date) throws ParseException {
+        try {
+            Date d = new SimpleDateFormat("dd/MM/yyyy").parse(date);
+            return new TutDate(d);
+        } catch (java.text.ParseException e) {
+            throw new ParseException(TutDate.MESSAGE_CONSTRAINTS);
+        }
+    }
+
+    /**
+     * Parses a collection of date strings and converts them into a {@link PresentDates} object.
+     * Each string must be in the format "dd/MM/yyyy", and all dates will be parsed and added
+     * to the resulting {@link PresentDates} collection.
+     *
+     * @param presentDates A collection of date strings in the format "dd/MM/yyyy".
+     * @return A {@link PresentDates} object containing the parsed dates.
+     * @throws ParseException If any of the date strings cannot be parsed.
+     * @throws NullPointerException If the provided collection is null.
+     */
+    public static PresentDates parseDates(Collection<String> presentDates) throws ParseException {
+        requireNonNull(presentDates);
+        final ArrayList<TutDate> dates = new ArrayList<>();
+        for (String date : presentDates) {
+            dates.add(parseDate(date));
+        }
+        return new PresentDates(dates);
     }
 
     /**

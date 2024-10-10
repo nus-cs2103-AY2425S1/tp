@@ -2,6 +2,7 @@ package seedu.address.model.student;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -27,17 +28,20 @@ public class Student {
     private final TutorialClass tutorialClass;
     private final Set<Tag> tags = new HashSet<>();
 
+    private final PresentDates presentDates;
+
     /**
      * Every field must be present and not null.
      */
     public Student(Name name, Phone phone, Email email, Address address,
-                   StudentId studentId, TutorialClass tutorialClass, Set<Tag> tags) {
+                   StudentId studentId, TutorialClass tutorialClass, Set<Tag> tags, PresentDates presentDates) {
         requireAllNonNull(name, phone, email, address, studentId, tutorialClass, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.presentDates = presentDates != null ? presentDates : new PresentDates(new ArrayList<>());
         this.studentId = studentId;
         this.tutorialClass = tutorialClass;
     }
@@ -56,6 +60,10 @@ public class Student {
 
     public Address getAddress() {
         return address;
+    }
+
+    public PresentDates getPresentDates() {
+        return presentDates;
     }
 
     public StudentId getStudentId() {

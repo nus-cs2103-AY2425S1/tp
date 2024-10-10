@@ -27,6 +27,7 @@ import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
+import seedu.address.model.student.PresentDates;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.TutorialClass;
@@ -112,9 +113,10 @@ public class EditCommand extends Command {
                 .orElse(studentToEdit.getTutorialClass());
 
         Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
+        PresentDates updatedDates = editStudentDescriptor.getPresentDates().orElse(studentToEdit.getPresentDates());
 
         return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                updatedStudentId, updatedTutorialClass, updatedTags);
+                updatedStudentId, updatedTutorialClass, updatedTags, updatedDates);
     }
 
     @Override
@@ -153,6 +155,7 @@ public class EditCommand extends Command {
         private StudentId studentId;
         private TutorialClass tutorialClass;
         private Set<Tag> tags;
+        private PresentDates presentDates;
 
         public EditStudentDescriptor() {}
 
@@ -168,6 +171,7 @@ public class EditCommand extends Command {
             setStudentId(toCopy.studentId);
             setTutorialClass(toCopy.tutorialClass);
             setTags(toCopy.tags);
+            setPresentDates(toCopy.presentDates);
         }
 
         /**
@@ -209,6 +213,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
+        public void setPresentDates(PresentDates presentDates) {
+            this.presentDates = presentDates;
+        }
+
+        public Optional<PresentDates> getPresentDates() {
+            return Optional.ofNullable(presentDates);
+        }
+
         public void setStudentId(StudentId studentId) {
             this.studentId = (studentId != null) ? studentId : this.studentId;
         }
@@ -222,7 +234,6 @@ public class EditCommand extends Command {
         public Optional<TutorialClass> getTutorialClass() {
             return Optional.ofNullable(tutorialClass);
         }
-
 
         /**
          * Sets {@code tags} to this object's {@code tags}.
@@ -257,9 +268,10 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditStudentDescriptor.phone)
                     && Objects.equals(email, otherEditStudentDescriptor.email)
                     && Objects.equals(address, otherEditStudentDescriptor.address)
+                    && Objects.equals(tags, otherEditStudentDescriptor.tags)
+                    && Objects.equals(presentDates, otherEditStudentDescriptor.presentDates)
                     && Objects.equals(studentId, otherEditStudentDescriptor.studentId)
-                    && Objects.equals(tutorialClass, otherEditStudentDescriptor.tutorialClass)
-                    && Objects.equals(tags, otherEditStudentDescriptor.tags);
+                    && Objects.equals(tutorialClass, otherEditStudentDescriptor.tutorialClass);
         }
 
         @Override
@@ -272,6 +284,7 @@ public class EditCommand extends Command {
                     .add("studentId", studentId)
                     .add("tutorialClass", tutorialClass)
                     .add("tags", tags)
+                    .add("attendance", presentDates)
                     .toString();
         }
     }

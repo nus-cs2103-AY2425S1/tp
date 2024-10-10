@@ -31,7 +31,7 @@ public class EditStudentDescriptorBuilder {
     }
 
     /**
-     * Returns an {@code EditStudentDescriptor} with fields containing {@code student}'s details
+     * Returns an {@code EditStudentDescriptor} with fields containing {@code student}'s details.
      */
     public EditStudentDescriptorBuilder(Student student) {
         descriptor = new EditCommand.EditStudentDescriptor();
@@ -77,6 +77,7 @@ public class EditStudentDescriptorBuilder {
     }
 
     /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and sets it to the {@code EditStudentDescriptor}
      * Sets the {@code StudentId} of the {@code EditStudentDescriptor} that we are building.
      */
     public EditStudentDescriptorBuilder withStudentId(String studentId) {

@@ -68,7 +68,8 @@ public class EditStudentDescriptorTest {
                 + editStudentDescriptor.getEmail().orElse(null) + ", studentId="
                 + editStudentDescriptor.getEmail().orElse(null) + ", tutorialClass="
                 + editStudentDescriptor.getAddress().orElse(null) + ", tags="
-                + editStudentDescriptor.getTags().orElse(null) + "}";
+                + editStudentDescriptor.getTags().orElse(null) + ", attendance="
+                + editStudentDescriptor.getPresentDates().orElse(null) + "}";
         assertEquals(expected, editStudentDescriptor.toString());
     }
 }

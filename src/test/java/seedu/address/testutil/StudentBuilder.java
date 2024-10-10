@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -7,6 +8,7 @@ import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
+import seedu.address.model.student.PresentDates;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.TutorialClass;
@@ -22,6 +24,7 @@ public class StudentBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final PresentDates DEFAULT_PRESENT_DATES = new PresentDates(new ArrayList<>());
     public static final String DEFAULT_STUDENT_ID = "1001";
     public static final String DEFAULT_TUTORIAL_CLASS = "1001";
 
@@ -30,6 +33,7 @@ public class StudentBuilder {
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private PresentDates presentDates;
     private StudentId studentId;
     private TutorialClass tutorialClass;
 
@@ -42,6 +46,7 @@ public class StudentBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        presentDates = DEFAULT_PRESENT_DATES;
         studentId = new StudentId(DEFAULT_STUDENT_ID);
         tutorialClass = new TutorialClass(DEFAULT_TUTORIAL_CLASS);
     }
@@ -55,6 +60,7 @@ public class StudentBuilder {
         email = studentToCopy.getEmail();
         address = studentToCopy.getAddress();
         tags = new HashSet<>(studentToCopy.getTags());
+        presentDates = studentToCopy.getPresentDates();
         studentId = studentToCopy.getStudentId();
         tutorialClass = studentToCopy.getTutorialClass();
     }
@@ -68,7 +74,7 @@ public class StudentBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Student} that we are building.
+     * Parses the {@code tags} into a {@code Set<Tag>} and sets it to the {@code Student} that we are building.
      */
     public StudentBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
@@ -100,6 +106,18 @@ public class StudentBuilder {
     }
 
     /**
+     * Sets the {@code PresentDates} of the {@code Student} that we are building.
+     */
+    public StudentBuilder withPresentDates(PresentDates presentDates) {
+        this.presentDates = presentDates;
+        return this;
+    }
+
+    public Student build() {
+        return new Student(name, phone, email, address, studentId, tutorialClass, tags, presentDates);
+    }
+
+    /**
      * Sets the {@code StudentId} of the {@code Student} that we are building.
      */
     public StudentBuilder withStudentId(String studentId) {
@@ -113,9 +131,5 @@ public class StudentBuilder {
     public StudentBuilder withTutorialClass(String tutorialClass) {
         this.tutorialClass = new TutorialClass(tutorialClass);
         return this;
-    }
-
-    public Student build() {
-        return new Student(name, phone, email, address, studentId, tutorialClass, tags);
     }
 }

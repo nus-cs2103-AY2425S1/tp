@@ -18,8 +18,8 @@ import seedu.address.model.assignment.AssignmentList;
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private AddressBookStorage addressBookStorage;
-    private UserPrefsStorage userPrefsStorage;
+    private final AddressBookStorage addressBookStorage;
+    private final UserPrefsStorage userPrefsStorage;
     private AssignmentStorage assignmentStorage;
 
     /**
