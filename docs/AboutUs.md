@@ -46,7 +46,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/Nihirraa)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
+* Role: tester
 * Responsibilities: Dev Ops + Threading
 
 ### Nayana Mahesh
