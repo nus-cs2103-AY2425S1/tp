@@ -73,7 +73,7 @@ public class AddCommandParserTest {
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + REGISTER_NUMBER_DESC_BOB + SEX_DESC_BOB + STUDENT_CLASS_DESC_BOB
-			    + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+                + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
 
 
         // multiple tags - all accepted
@@ -223,7 +223,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + REGISTER_NUMBER_DESC_BOB + VALID_SEX_BOB + STUDENT_CLASS_DESC_BOB, expectedMessage);
 
-		// missing class prefix
+        // missing class prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + REGISTER_NUMBER_DESC_BOB + SEX_DESC_BOB + VALID_STUDENT_CLASS_BOB, expectedMessage);
 
@@ -264,7 +264,7 @@ public class AddCommandParserTest {
                 + REGISTER_NUMBER_DESC_BOB + INVALID_SEX_DESC + STUDENT_CLASS_DESC_BOB + TAG_DESC_HUSBAND
 		+ TAG_DESC_FRIEND, Sex.MESSAGE_CONSTRAINTS);
 
-		// invalid class
+        // invalid class
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + REGISTER_NUMBER_DESC_BOB + SEX_DESC_BOB + INVALID_STUDENT_CLASS_DESC + TAG_DESC_HUSBAND
 		+ TAG_DESC_FRIEND, StudentClass.MESSAGE_CONSTRAINTS);
