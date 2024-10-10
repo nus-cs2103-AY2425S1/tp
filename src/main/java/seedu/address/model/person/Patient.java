@@ -1,10 +1,12 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
+
 import java.util.Set;
 import java.util.TreeMap;
-import seedu.address.model.tag.Tag;
 import java.time.LocalDateTime;
+
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Patient in the address book.

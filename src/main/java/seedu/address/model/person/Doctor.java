@@ -110,8 +110,7 @@ public class Doctor extends Person {
     /**
      * Retrieves the full schedule of the doctor.
      *
-     * @return A representing the TreeMap containing the doctor's schedule,
-     * with the LocalDateTime as the key and History as the value. TODO.
+     * @return A representing the TreeMap containing the doctor's schedule, TODO.
      */
     public String getAllAppointments(Id id) {
         return history.getAll(id);
