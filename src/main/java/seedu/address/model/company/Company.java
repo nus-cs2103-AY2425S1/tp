@@ -44,6 +44,12 @@ public class Company {
         return this.phone;
     }
 
+    /**
+     * Checks only company names for equality,
+     * used for detecting duplicates.
+     * @param otherCompany Company to be compared with.
+     * @return true is companies have the same name.
+     */
     public boolean isSameCompany(Company otherCompany) {
         if (otherCompany == this) {
             return true;
@@ -55,7 +61,7 @@ public class Company {
 
     /**
      * Checks for equality.
-     * For 2 companies, checks only their names for equality.
+     * For 2 companies, checks every field for equality.
      *
      * @param other The object being equated to.
      * @return true if equal, false otherwise.
