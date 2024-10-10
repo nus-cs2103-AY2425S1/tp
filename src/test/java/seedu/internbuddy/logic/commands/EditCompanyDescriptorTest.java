@@ -37,7 +37,8 @@ public class EditCompanyDescriptorTest {
         assertFalse(DESC_GOOGLE.equals(DESC_MICROSOFT));
 
         // different name -> returns false
-        EditCompanyDescriptor editedAmy = new EditCompanyDescriptorBuilder(DESC_GOOGLE).withName(VALID_NAME_MICROSOFT).build();
+        EditCompanyDescriptor editedAmy = new EditCompanyDescriptorBuilder(DESC_GOOGLE).withName(VALID_NAME_MICROSOFT)
+                .build();
         assertFalse(DESC_GOOGLE.equals(editedAmy));
 
         // different phone -> returns false

@@ -42,8 +42,8 @@ public class UniqueCompanyListTest {
     @Test
     public void contains_companyWithSameIdentityFieldsInList_returnsTrue() {
         uniqueCompanyList.add(GOOGLE);
-        Company editedAlice = new CompanyBuilder(GOOGLE).withAddress(VALID_ADDRESS_MICROSOFT).withTags(VALID_TAG_SOFTWARE)
-                .build();
+        Company editedAlice = new CompanyBuilder(GOOGLE).withAddress(VALID_ADDRESS_MICROSOFT)
+                .withTags(VALID_TAG_SOFTWARE).build();
         assertTrue(uniqueCompanyList.contains(editedAlice));
     }
 
@@ -65,7 +65,8 @@ public class UniqueCompanyListTest {
 
     @Test
     public void setCompany_nullEditedCompany_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueCompanyList.setCompany(GOOGLE, null));
+        assertThrows(
+                NullPointerException.class, () -> uniqueCompanyList.setCompany(GOOGLE, null));
     }
 
     @Test
@@ -85,8 +86,8 @@ public class UniqueCompanyListTest {
     @Test
     public void setCompany_editedCompanyHasSameIdentity_success() {
         uniqueCompanyList.add(GOOGLE);
-        Company editedAlice = new CompanyBuilder(GOOGLE).withAddress(VALID_ADDRESS_MICROSOFT).withTags(VALID_TAG_SOFTWARE)
-                .build();
+        Company editedAlice = new CompanyBuilder(GOOGLE).withAddress(VALID_ADDRESS_MICROSOFT)
+                .withTags(VALID_TAG_SOFTWARE).build();
         uniqueCompanyList.setCompany(GOOGLE, editedAlice);
         UniqueCompanyList expectedUniqueCompanyList = new UniqueCompanyList();
         expectedUniqueCompanyList.add(editedAlice);

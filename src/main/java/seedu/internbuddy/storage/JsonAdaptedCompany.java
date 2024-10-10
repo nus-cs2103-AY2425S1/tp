@@ -10,12 +10,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.internbuddy.commons.exceptions.IllegalValueException;
-import seedu.internbuddy.model.company.Company;
-import seedu.internbuddy.model.company.Status;
 import seedu.internbuddy.model.company.Address;
+import seedu.internbuddy.model.company.Company;
 import seedu.internbuddy.model.company.Email;
 import seedu.internbuddy.model.company.Name;
 import seedu.internbuddy.model.company.Phone;
+import seedu.internbuddy.model.company.Status;
 import seedu.internbuddy.model.tag.Tag;
 
 /**
@@ -64,15 +64,9 @@ public class JsonAdaptedCompany {
     }
 
     /**
-<<<<<<< HEAD
      * Converts this Jackson-friendly adapted company object into the model's {@link Company} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
-=======
-     * Converts this Jackson-friendly adapted company object into the model's {@code company} object.
-     *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted company.
->>>>>>> 398707caf839baca66fada2b3d5612969e0eb79e
      */
     public Company toModelType() throws IllegalValueException {
         final List<Tag> companyTags = new ArrayList<>();

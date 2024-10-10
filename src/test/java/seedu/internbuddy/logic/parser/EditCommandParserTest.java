@@ -13,15 +13,15 @@ import static seedu.internbuddy.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.NAME_DESC_GOOGLE;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.PHONE_DESC_GOOGLE;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.PHONE_DESC_MICROSOFT;
-import static seedu.internbuddy.logic.commands.CommandTestUtil.TAG_DESC_TECH;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.TAG_DESC_SOFTWARE;
+import static seedu.internbuddy.logic.commands.CommandTestUtil.TAG_DESC_TECH;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.VALID_ADDRESS_GOOGLE;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.VALID_EMAIL_GOOGLE;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.VALID_NAME_GOOGLE;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.VALID_PHONE_GOOGLE;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.VALID_PHONE_MICROSOFT;
-import static seedu.internbuddy.logic.commands.CommandTestUtil.VALID_TAG_TECH;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.VALID_TAG_SOFTWARE;
+import static seedu.internbuddy.logic.commands.CommandTestUtil.VALID_TAG_TECH;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -99,7 +99,8 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_TECH + TAG_DESC_SOFTWARE, Tag.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_ADDRESS_GOOGLE + VALID_PHONE_GOOGLE,
+        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_ADDRESS_GOOGLE
+                        + VALID_PHONE_GOOGLE,
                 Name.MESSAGE_CONSTRAINTS);
     }
 

@@ -82,6 +82,9 @@ public class EditCompanyDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Status} of the {@code EditCompanyDescriptor} that we are building.
+     */
     public EditCompanyDescriptorBuilder withStatus(String status) {
         descriptor.setStatus(new Status(status));
         return this;

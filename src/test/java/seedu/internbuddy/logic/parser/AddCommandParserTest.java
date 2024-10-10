@@ -18,14 +18,14 @@ import static seedu.internbuddy.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPT
 import static seedu.internbuddy.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.STATUS_DESC_GOOGLE;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.STATUS_DESC_MICROSOFT;
-import static seedu.internbuddy.logic.commands.CommandTestUtil.TAG_DESC_TECH;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.TAG_DESC_SOFTWARE;
+import static seedu.internbuddy.logic.commands.CommandTestUtil.TAG_DESC_TECH;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.VALID_ADDRESS_MICROSOFT;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.VALID_EMAIL_MICROSOFT;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.VALID_NAME_MICROSOFT;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.VALID_PHONE_MICROSOFT;
-import static seedu.internbuddy.logic.commands.CommandTestUtil.VALID_TAG_TECH;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.VALID_TAG_SOFTWARE;
+import static seedu.internbuddy.logic.commands.CommandTestUtil.VALID_TAG_TECH;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_NAME;
@@ -56,8 +56,9 @@ public class AddCommandParserTest {
         Company expectedcompany = new CompanyBuilder(MICROSOFT).withTags(VALID_TAG_TECH).build();
 
         // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_MICROSOFT + PHONE_DESC_MICROSOFT + EMAIL_DESC_MICROSOFT
-                + ADDRESS_DESC_MICROSOFT + TAG_DESC_TECH + STATUS_DESC_MICROSOFT, new AddCommand(expectedcompany));
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_MICROSOFT + PHONE_DESC_MICROSOFT
+                        + EMAIL_DESC_MICROSOFT + ADDRESS_DESC_MICROSOFT + TAG_DESC_TECH + STATUS_DESC_MICROSOFT,
+                new AddCommand(expectedcompany));
 
 
         // multiple tags - all accepted
@@ -92,9 +93,10 @@ public class AddCommandParserTest {
 
         // multiple fields repeated
         assertParseFailure(parser,
-                validExpectedcompaniestring + PHONE_DESC_GOOGLE + EMAIL_DESC_GOOGLE + NAME_DESC_GOOGLE + ADDRESS_DESC_GOOGLE
-                        + validExpectedcompaniestring,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_EMAIL, PREFIX_PHONE, PREFIX_STATUS));
+                validExpectedcompaniestring + PHONE_DESC_GOOGLE + EMAIL_DESC_GOOGLE + NAME_DESC_GOOGLE
+                        + ADDRESS_DESC_GOOGLE + validExpectedcompaniestring,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_EMAIL, PREFIX_PHONE,
+                        PREFIX_STATUS));
 
         // invalid value followed by valid value
 
@@ -147,55 +149,67 @@ public class AddCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
         // missing name prefix
-        assertParseFailure(parser, VALID_NAME_MICROSOFT + PHONE_DESC_MICROSOFT + EMAIL_DESC_MICROSOFT + ADDRESS_DESC_MICROSOFT,
+        assertParseFailure(parser, VALID_NAME_MICROSOFT + PHONE_DESC_MICROSOFT + EMAIL_DESC_MICROSOFT
+                        + ADDRESS_DESC_MICROSOFT,
                 expectedMessage);
 
         // missing phone prefix
-        assertParseFailure(parser, NAME_DESC_MICROSOFT + VALID_PHONE_MICROSOFT + EMAIL_DESC_MICROSOFT + ADDRESS_DESC_MICROSOFT,
+        assertParseFailure(parser, NAME_DESC_MICROSOFT + VALID_PHONE_MICROSOFT + EMAIL_DESC_MICROSOFT
+                        + ADDRESS_DESC_MICROSOFT,
                 expectedMessage);
 
         // missing email prefix
-        assertParseFailure(parser, NAME_DESC_MICROSOFT + PHONE_DESC_MICROSOFT + VALID_EMAIL_MICROSOFT + ADDRESS_DESC_MICROSOFT,
+        assertParseFailure(parser, NAME_DESC_MICROSOFT + PHONE_DESC_MICROSOFT + VALID_EMAIL_MICROSOFT
+                        + ADDRESS_DESC_MICROSOFT,
                 expectedMessage);
 
         // missing address prefix
-        assertParseFailure(parser, NAME_DESC_MICROSOFT + PHONE_DESC_MICROSOFT + EMAIL_DESC_MICROSOFT + VALID_ADDRESS_MICROSOFT,
+        assertParseFailure(parser, NAME_DESC_MICROSOFT + PHONE_DESC_MICROSOFT + EMAIL_DESC_MICROSOFT
+                        + VALID_ADDRESS_MICROSOFT,
                 expectedMessage);
 
         // all prefixes missing
-        assertParseFailure(parser, VALID_NAME_MICROSOFT + VALID_PHONE_MICROSOFT + VALID_EMAIL_MICROSOFT + VALID_ADDRESS_MICROSOFT,
+        assertParseFailure(parser, VALID_NAME_MICROSOFT + VALID_PHONE_MICROSOFT + VALID_EMAIL_MICROSOFT
+                        + VALID_ADDRESS_MICROSOFT,
                 expectedMessage);
     }
 
     @Test
     public void parse_invalidValue_failure() {
         // invalid name
-        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_MICROSOFT + EMAIL_DESC_MICROSOFT + ADDRESS_DESC_MICROSOFT
-                + TAG_DESC_SOFTWARE + TAG_DESC_TECH + STATUS_DESC_MICROSOFT, Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_MICROSOFT + EMAIL_DESC_MICROSOFT
+                        + ADDRESS_DESC_MICROSOFT + TAG_DESC_SOFTWARE + TAG_DESC_TECH + STATUS_DESC_MICROSOFT,
+                Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
-        assertParseFailure(parser, NAME_DESC_MICROSOFT + INVALID_PHONE_DESC + EMAIL_DESC_MICROSOFT + ADDRESS_DESC_MICROSOFT
-                + TAG_DESC_SOFTWARE + TAG_DESC_TECH + STATUS_DESC_MICROSOFT, Phone.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, NAME_DESC_MICROSOFT + INVALID_PHONE_DESC + EMAIL_DESC_MICROSOFT
+                        + ADDRESS_DESC_MICROSOFT + TAG_DESC_SOFTWARE + TAG_DESC_TECH + STATUS_DESC_MICROSOFT,
+                Phone.MESSAGE_CONSTRAINTS);
 
         // invalid email
-        assertParseFailure(parser, NAME_DESC_MICROSOFT + PHONE_DESC_MICROSOFT + INVALID_EMAIL_DESC + ADDRESS_DESC_MICROSOFT
-                + TAG_DESC_SOFTWARE + TAG_DESC_TECH + STATUS_DESC_MICROSOFT, Email.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, NAME_DESC_MICROSOFT + PHONE_DESC_MICROSOFT + INVALID_EMAIL_DESC
+                        + ADDRESS_DESC_MICROSOFT + TAG_DESC_SOFTWARE + TAG_DESC_TECH + STATUS_DESC_MICROSOFT,
+                Email.MESSAGE_CONSTRAINTS);
 
         // invalid address
-        assertParseFailure(parser, NAME_DESC_MICROSOFT + PHONE_DESC_MICROSOFT + EMAIL_DESC_MICROSOFT + INVALID_ADDRESS_DESC
-                + TAG_DESC_SOFTWARE + TAG_DESC_TECH + STATUS_DESC_MICROSOFT, Address.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, NAME_DESC_MICROSOFT + PHONE_DESC_MICROSOFT + EMAIL_DESC_MICROSOFT
+                        + INVALID_ADDRESS_DESC + TAG_DESC_SOFTWARE + TAG_DESC_TECH + STATUS_DESC_MICROSOFT,
+                Address.MESSAGE_CONSTRAINTS);
 
         // invalid tag
-        assertParseFailure(parser, NAME_DESC_MICROSOFT + PHONE_DESC_MICROSOFT + EMAIL_DESC_MICROSOFT + ADDRESS_DESC_MICROSOFT
-                + INVALID_TAG_DESC + VALID_TAG_TECH + STATUS_DESC_MICROSOFT, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, NAME_DESC_MICROSOFT + PHONE_DESC_MICROSOFT + EMAIL_DESC_MICROSOFT
+                        + ADDRESS_DESC_MICROSOFT + INVALID_TAG_DESC + VALID_TAG_TECH + STATUS_DESC_MICROSOFT,
+                Tag.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
-        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_MICROSOFT + EMAIL_DESC_MICROSOFT + INVALID_ADDRESS_DESC + STATUS_DESC_MICROSOFT,
+        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_MICROSOFT + EMAIL_DESC_MICROSOFT
+                        + INVALID_ADDRESS_DESC + STATUS_DESC_MICROSOFT,
                 Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
-        assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_MICROSOFT + PHONE_DESC_MICROSOFT + EMAIL_DESC_MICROSOFT
-                + ADDRESS_DESC_MICROSOFT + TAG_DESC_SOFTWARE + TAG_DESC_TECH + STATUS_DESC_MICROSOFT,
+        assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_MICROSOFT + PHONE_DESC_MICROSOFT
+                        + EMAIL_DESC_MICROSOFT + ADDRESS_DESC_MICROSOFT + TAG_DESC_SOFTWARE + TAG_DESC_TECH
+                        + STATUS_DESC_MICROSOFT,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }
