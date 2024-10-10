@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
@@ -30,7 +31,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_DELETE_INDEX);
 
-        if (!argMultimap.arePrefixesPresent(PREFIX_DELETE_INDEX)
+        if (!DeleteCommandParser.arePrefixesPresent(argMultimap, PREFIX_DELETE_INDEX)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
@@ -59,6 +60,14 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         }
         Collection<String> indicesSet = indices.size() == 1 && indices.contains("") ? Collections.emptySet() : indices;
         return Optional.of(ParserUtil.parseIndices(indicesSet));
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argMultimap.getValue(prefix).isPresent());
     }
 
 }

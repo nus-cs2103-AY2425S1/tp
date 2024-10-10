@@ -22,13 +22,7 @@ public class ArgumentMultimap {
     /** Prefixes mapped to their respective arguments**/
     private final Map<Prefix, List<String>> argMultimap = new HashMap<>();
 
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    public boolean arePrefixesPresent(Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> this.getValue(prefix).isPresent());
-    }
+
 
     /**
      * Associates the specified argument value with {@code prefix} key in this map.
