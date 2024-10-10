@@ -94,6 +94,20 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    /**
+     * Sorts the persons in the address book in ascending order based on their names.
+     */
+    public void sortPersonsAsc() {
+        persons.setAsc(); // Call the setAsc method from UniquePersonList
+    }
+
+    /**
+     * Sorts the persons in the address book in descending order based on their names.
+     */
+    public void sortPersonsDesc() {
+        persons.setDesc(); // Call the setDesc method from UniquePersonList
+    }
+
     //// util methods
 
     @Override
