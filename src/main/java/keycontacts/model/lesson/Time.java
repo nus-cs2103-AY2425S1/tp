@@ -40,6 +40,9 @@ public class Time {
         return test.matches(VALIDATION_REGEX);
     }
 
+    public LocalTime getTime() {
+        return time;
+    }
 
     @Override
     public String toString() {

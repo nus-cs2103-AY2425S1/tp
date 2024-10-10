@@ -1,5 +1,6 @@
 package keycontacts.model.lesson;
 
+import static keycontacts.commons.util.AppUtil.checkArgument;
 import static keycontacts.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
@@ -8,10 +9,12 @@ import keycontacts.commons.util.ToStringBuilder;
 
 /**
  * Abstract class representing a Student's lesson in the student directory.
- * Guarantees: immutable, has a start time and end time are valid as declared in
- * {@link keycontacts.model.lesson.Time#isValidTime(String)}.
+ * Guarantees: immutable, start time and end time are valid as declared in
+ * {@link #isValidTimePair(Time, Time)}.
  */
 public abstract class Lesson {
+
+    public static final String MESSAGE_CONSTRAINTS = "Start time should be before end time";
 
     private final Time startTime;
     private final Time endTime;
@@ -21,8 +24,13 @@ public abstract class Lesson {
      */
     public Lesson(Time startTime, Time endTime) {
         requireAllNonNull(startTime, endTime);
+        checkArgument(isValidTimePair(startTime, endTime), MESSAGE_CONSTRAINTS);
         this.startTime = startTime;
         this.endTime = endTime;
+    }
+
+    public static boolean isValidTimePair(Time startTime, Time endTime) {
+        return startTime.getTime().isBefore(endTime.getTime());
     }
 
     public Time getStartTime() {

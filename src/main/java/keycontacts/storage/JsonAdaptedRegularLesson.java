@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import keycontacts.commons.exceptions.IllegalValueException;
 import keycontacts.model.lesson.Day;
+import keycontacts.model.lesson.Lesson;
 import keycontacts.model.lesson.RegularLesson;
 import keycontacts.model.lesson.Time;
 
@@ -63,6 +64,9 @@ class JsonAdaptedRegularLesson {
         }
         final Time modelStartTime = new Time(startTime);
         final Time modelEndTime = new Time(endTime);
+        if (!Lesson.isValidTimePair(modelStartTime, modelEndTime)) {
+            throw new IllegalValueException(Lesson.MESSAGE_CONSTRAINTS);
+        }
 
         return new RegularLesson(modelLessonDay, modelStartTime, modelEndTime);
     }

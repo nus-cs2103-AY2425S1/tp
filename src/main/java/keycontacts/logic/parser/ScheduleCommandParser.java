@@ -9,6 +9,7 @@ import keycontacts.commons.core.index.Index;
 import keycontacts.logic.commands.ScheduleCommand;
 import keycontacts.logic.parser.exceptions.ParseException;
 import keycontacts.model.lesson.Day;
+import keycontacts.model.lesson.Lesson;
 import keycontacts.model.lesson.RegularLesson;
 import keycontacts.model.lesson.Time;
 
@@ -41,6 +42,9 @@ public class ScheduleCommandParser {
         Time startTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_START_TIME).get());
         Time endTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_END_TIME).get());
 
+        if (!Lesson.isValidTimePair(startTime, endTime)) {
+            throw new ParseException(Lesson.MESSAGE_CONSTRAINTS);
+        }
         RegularLesson regularLesson = new RegularLesson(lessonDay, startTime, endTime);
 
         return new ScheduleCommand(index, regularLesson);
