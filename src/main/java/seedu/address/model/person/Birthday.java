@@ -17,7 +17,10 @@ public class Birthday {
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
+    public final String value;
+
     private final LocalDate date;
+
 
     /**
      * Constructs a {@code Birthday}.
@@ -28,6 +31,7 @@ public class Birthday {
         requireNonNull(dateStr);
         checkArgument(isValidBirthday(dateStr), MESSAGE_CONSTRAINTS);
         date = parseDate(dateStr);
+        this.value = date.format(FORMATTER);
     }
 
     /**

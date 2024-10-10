@@ -21,7 +21,9 @@ public class Appointment {
     public static final String VALIDATION_REGEX = "\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}";
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-    public final LocalDateTime value;
+    public final LocalDateTime date;
+
+    public final String value;
 
     /**
      * Constructs an {@code Appointment}.
@@ -31,7 +33,8 @@ public class Appointment {
     public Appointment(String appointmentDateStr) {
         requireNonNull(appointmentDateStr);
         checkArgument(isValidAppointment(appointmentDateStr), MESSAGE_CONSTRAINTS);
-        value = parseDateTime(appointmentDateStr);
+        date = parseDateTime(appointmentDateStr);
+        value = date.format(FORMATTER);
     }
 
     /**
@@ -62,17 +65,17 @@ public class Appointment {
 
     @Override
     public String toString() {
-        return value.format(FORMATTER);
+        return date.format(FORMATTER);
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return date.hashCode();
     }
 
     @Override
     public boolean equals(Object other) {
-        return other == this || (other instanceof Appointment && value.equals(((Appointment) other).value));
+        return other == this || (other instanceof Appointment && date.equals(((Appointment) other).date));
     }
 
 }
