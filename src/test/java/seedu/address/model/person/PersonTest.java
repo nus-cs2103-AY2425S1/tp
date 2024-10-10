@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -49,6 +50,31 @@ public class PersonTest {
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
         assertFalse(BOB.isSamePerson(editedBob));
+    }
+
+    @Test
+    public void hasSameEmail() {
+        assertTrue(ALICE.hasSameEmail(ALICE));
+
+        Person editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
+        assertFalse(ALICE.hasSameEmail(editedAlice));
+
+        Person editedBob = new PersonBuilder(BOB).withEmail(VALID_EMAIL_AMY).build();
+        Person aliceWithNewEmail = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_AMY).build();
+        assertTrue(aliceWithNewEmail.hasSameEmail(editedBob));
+
+        assertFalse(ALICE.hasSameEmail(null));
+    }
+
+    @Test
+    public void hasDuplicateInfo() {
+        assertTrue(ALICE.hasDuplicateInfo(ALICE));
+        assertFalse(ALICE.hasDuplicateInfo(null));
+
+        Person editedBob = new PersonBuilder(BOB).withEmail(VALID_EMAIL_AMY).build();
+        Person aliceWithNewEmail = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_AMY).build();
+        assertTrue(editedBob.hasDuplicateInfo(aliceWithNewEmail));
+        assertFalse(editedBob.hasDuplicateInfo(ALICE));
     }
 
     @Test
