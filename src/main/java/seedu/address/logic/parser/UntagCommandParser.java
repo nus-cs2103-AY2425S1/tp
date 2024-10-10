@@ -2,9 +2,10 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
@@ -29,33 +30,27 @@ public class UntagCommandParser implements Parser<UntagCommand> {
     public UntagCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
-        // Trim and split input to separate index from tags
-        String trimmedArgs = args.trim();
-        String[] splitArgs = trimmedArgs.split("\\s+", 2);
-
-        if (splitArgs.length < 2) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UntagCommand.MESSAGE_USAGE));
-        }
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG);
 
         Index index;
+
         try {
-            // Parse the index from the first part of the split arguments
-            index = ParserUtil.parseIndex(splitArgs[0]);
+            // Parse the index from the preamble
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UntagCommand.MESSAGE_USAGE), ive);
         }
 
-        // Split the second part (tags) by whitespace
-        String[] tagValues = splitArgs[1].split("\\s+");
-        if (tagValues.length == 0) {
+        List<String> tagValues = argMultimap.getAllValues(PREFIX_TAG);
+        if (tagValues.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UntagCommand.MESSAGE_USAGE));
         }
 
         // Convert tag values to Tag objects
-        HashSet<Tag> tags = new HashSet<>(Arrays.stream(tagValues)
+        List<Tag> tags = tagValues.stream()
                 .map(Tag::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
 
-        return new UntagCommand(index, tags);
+        return new UntagCommand(index, new HashSet<>(tags));
     }
 }
