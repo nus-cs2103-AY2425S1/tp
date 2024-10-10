@@ -40,7 +40,7 @@ public class ArgumentTokenizerTest {
         // Verify the last value is returned
         assertEquals(expectedValues[expectedValues.length - 1], argMultimap.getValue(prefix).get());
 
-        // Verify the value of values returned is as expected
+        // Verify the number of values returned is as expected
         assertEquals(expectedValues.length, argMultimap.getAllValues(prefix).size());
 
         // Verify all values returned are as expected and in order
