@@ -64,6 +64,12 @@ public interface Model {
     void deletePerson(Person target);
 
     /**
+     * Marks the person has paid fees
+     * @param target
+     */
+    void markFeesPaid(Person target);
+
+    /**
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */
