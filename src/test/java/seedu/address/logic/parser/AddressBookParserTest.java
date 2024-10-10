@@ -14,17 +14,21 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddEmergencyContactNameCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EmergencyPhoneCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -86,6 +90,40 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_emergencyPhone() throws Exception {
+
+        final String name = "John Doe";
+        final String phone = "91234567";
+
+        EmergencyPhoneCommand expected = new EmergencyPhoneCommand(
+                new Name(name), new Phone(phone));
+
+        EmergencyPhoneCommand command = (EmergencyPhoneCommand) parser.parseCommand(
+                EmergencyPhoneCommand.COMMAND_WORD + " "
+                + "n/" + name + " "
+                + "ep/" + phone);
+
+        assertEquals(expected, command);
+    }
+
+    @Test
+    public void parseCommand_addEmergencyContactName() throws Exception {
+
+        final String studentName = "John Doe";
+        final String eCName = "Jane Doe";
+
+        AddEmergencyContactNameCommand expected = new AddEmergencyContactNameCommand(
+                new Name(studentName), new Name(eCName));
+
+        AddEmergencyContactNameCommand command = (AddEmergencyContactNameCommand) parser.parseCommand(
+                AddEmergencyContactNameCommand.COMMAND_WORD + " "
+                        + "n/" + studentName + " "
+                        + "en/" + eCName);
+
+        assertEquals(expected, command);
     }
 
     @Test

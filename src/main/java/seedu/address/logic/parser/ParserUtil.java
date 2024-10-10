@@ -13,6 +13,9 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.RegisterNumber;
+import seedu.address.model.person.Sex;
+import seedu.address.model.person.StudentClass;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -93,6 +96,51 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String registerNumber} into an {@code RegisterNumber}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code registerNumber} is invalid.
+     */
+    public static RegisterNumber parseRegisterNumber(String registerNumber) throws ParseException {
+        requireNonNull(registerNumber);
+        String trimmedRegisterNumber = registerNumber.trim();
+        if (!RegisterNumber.isValidRegisterNumber(trimmedRegisterNumber)) {
+            throw new ParseException(RegisterNumber.MESSAGE_CONSTRAINTS);
+        }
+        return new RegisterNumber(trimmedRegisterNumber);
+    }
+
+    /**
+     * Parses a {@code String sex} into an {@code Sex}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code sex} is invalid.
+     */
+    public static Sex parseSex(String sex) throws ParseException {
+        requireNonNull(sex);
+        String trimmedSex = sex.trim();
+        if (!Sex.isValidSex(trimmedSex)) {
+            throw new ParseException(Sex.MESSAGE_CONSTRAINTS);
+        }
+        return new Sex(trimmedSex);
+    }
+
+    /**
+     * Parses a {@code String studentClass} into an {@code Class}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code studentClass} is invalid.
+     */
+    public static StudentClass parseStudentClass(String studentClass) throws ParseException {
+        requireNonNull(studentClass);
+        String trimmedStudentClass = studentClass.trim();
+        if (!StudentClass.isValidStudentClass(trimmedStudentClass)) {
+            throw new ParseException(StudentClass.MESSAGE_CONSTRAINTS);
+        }
+        return new StudentClass(trimmedStudentClass);
     }
 
     /**
