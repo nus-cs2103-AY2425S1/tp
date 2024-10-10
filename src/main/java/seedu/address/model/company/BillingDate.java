@@ -60,4 +60,9 @@ public class BillingDate {
     public int hashCode() {
         return this.date.hashCode();
     }
+
+    @Override
+    public String toString() {
+        return this.date;
+    }
 }

@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.company.Company;
 import seedu.address.model.job.Job;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
@@ -87,8 +88,10 @@ public class AddressBookTest {
     @Test
     public void toStringMethod() {
         String expected =
-                AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + ", " + "jobs="
-                + addressBook.getJobList() + "}";
+                AddressBook.class.getCanonicalName()
+                        + "{persons=" + addressBook.getPersonList() + ", "
+                        + "jobs=" + addressBook.getJobList() + ", "
+                        + "companies=" + addressBook.getCompanyList() + "}";
         assertEquals(expected, addressBook.toString());
     }
 
@@ -98,6 +101,7 @@ public class AddressBookTest {
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
         private final ObservableList<Job> jobs = FXCollections.observableArrayList();
+        private final ObservableList<Company> companies = FXCollections.observableArrayList();
 
         AddressBookStub(Collection<Person> persons) {
             this.persons.setAll(persons);
@@ -111,6 +115,11 @@ public class AddressBookTest {
         @Override
         public ObservableList<Job> getJobList() {
             return jobs;
+        }
+
+        @Override
+        public ObservableList<Company> getCompanyList() {
+            return companies;
         }
     }
 
