@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -25,8 +26,10 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final Remark remark;
+    private final DateOfCreation dateOfCreation;
+    private final History history;
     /**
-     * Every field must be present and not null.
+     * Every field must be present and not null. Used for new person creation
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
@@ -36,18 +39,24 @@ public class Person {
         this.address = address;
         this.remark = Remark.EMPTY_REMARK;
         this.tags.addAll(tags);
+        this.dateOfCreation = new DateOfCreation(LocalDate.now());
+        this.history = new History(dateOfCreation.getDateOfCreation());
     }
+
     /**
-     * Every field must be present and not null. with non-empty remark
+     * Every field must be present and not null. with non-empty remark and existing history
      */
-    public Person(Name name, Phone phone, Email email, Address address, Remark remark, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address,
+                  Remark remark, Set<Tag> tags, DateOfCreation dateOfCreation, History history) {
+        requireAllNonNull(name, phone, email, address, tags, remark, dateOfCreation, history);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.remark = remark;
         this.tags.addAll(tags);
+        this.dateOfCreation = dateOfCreation;
+        this.history = history;
     }
 
     public Name getName() {
@@ -77,6 +86,12 @@ public class Person {
     public Remark getRemark() {
         return this.remark;
     }
+    public DateOfCreation getDateOfCreation() {
+        return this.dateOfCreation;
+    }
+    public History getHistory() {
+        return this.history;
+    }
 
     /**
      * Returns true if both persons have the same name.
@@ -89,6 +104,7 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+        //TODO modify logic to check duplicates, distinguish persons by phone number.
     }
 
     /**
@@ -102,17 +118,16 @@ public class Person {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Person otherPerson)) {
             return false;
         }
-
-        Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
-                && remark.equals(otherPerson.remark);
+                && remark.equals(otherPerson.remark)
+                && dateOfCreation.equals(otherPerson.dateOfCreation);
     }
 
     @Override
@@ -130,6 +145,8 @@ public class Person {
                 .add("address", address)
                 .add("tags", tags)
                 .add("remark", remark)
+                .add("dateOfCreation", dateOfCreation)
+                .add("history", history)
                 .toString();
     }
 

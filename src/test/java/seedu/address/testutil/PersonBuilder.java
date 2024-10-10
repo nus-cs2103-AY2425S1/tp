@@ -1,10 +1,13 @@
 package seedu.address.testutil;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.DateOfCreation;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.History;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -22,12 +25,15 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_REMARK = "";
+    public static final DateOfCreation DEFAULT_DATE_OF_CREATION = new DateOfCreation(LocalDate.MIN);
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Set<Tag> tags;
     private Remark remark;
+    private DateOfCreation dateOfCreation;
+    private History history;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -39,6 +45,8 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         remark = Remark.EMPTY_REMARK;
+        dateOfCreation = DEFAULT_DATE_OF_CREATION;
+        history = new History(dateOfCreation.getDateOfCreation());
     }
 
     /**
@@ -51,6 +59,8 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
         remark = personToCopy.getRemark();
+        dateOfCreation = personToCopy.getDateOfCreation();
+        history = personToCopy.getHistory();
     }
 
     /**
@@ -99,9 +109,28 @@ public class PersonBuilder {
         this.remark = new Remark(remark);
         return this;
     }
+    /**
+     * Sets the {@code DateOfCreation} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withDateOfCreation(String dateOfCreation) {
+        this.dateOfCreation = new DateOfCreation(LocalDate.parse(dateOfCreation));
+        this.history = new History(LocalDate.parse(dateOfCreation));
+        return this;
+    }
+
+    /**
+     * Adds an activity on a specific date to the {@code History} of the {@code Person}.
+     */
+    public PersonBuilder withHistory(LocalDate date, String activity) {
+        if (this.history == null) {
+            this.history = new History(dateOfCreation.getDateOfCreation());
+        }
+        this.history.addActivity(date, activity);
+        return this;
+    }
 
     public Person build() {
-        return new Person(name, phone, email, address, remark, tags);
+        return new Person(name, phone, email, address, remark, tags, dateOfCreation, history);
     }
 
 }

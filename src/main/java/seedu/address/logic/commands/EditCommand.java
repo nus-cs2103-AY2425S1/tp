@@ -22,7 +22,9 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.DateOfCreation;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.History;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -102,8 +104,11 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Remark updatedRemark = personToEdit.getRemark();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRemark, updatedTags);
+        DateOfCreation updatedDateOfCreation = editPersonDescriptor.getDateofCreation()
+                .orElse(personToEdit.getDateOfCreation());
+        History updatedHistory = editPersonDescriptor.getHistory().orElse(personToEdit.getHistory());
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
+                updatedRemark, updatedTags, updatedDateOfCreation, updatedHistory);
     }
 
     @Override
@@ -141,7 +146,8 @@ public class EditCommand extends Command {
         private Address address;
         private Set<Tag> tags;
         private Remark remark;
-
+        private DateOfCreation dateOfCreation;
+        private History history;
         public EditPersonDescriptor() {}
 
         /**
@@ -155,6 +161,8 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setRemark(toCopy.remark);
             setTags(toCopy.tags);
+            setDateOfCreation(toCopy.dateOfCreation);
+            setHistory(toCopy.history);
         }
 
         /**
@@ -209,6 +217,18 @@ public class EditCommand extends Command {
         public void setRemark(Remark remark) {
             this.remark = remark;
         }
+        public Optional<DateOfCreation> getDateofCreation() {
+            return Optional.ofNullable(dateOfCreation);
+        }
+        public void setDateOfCreation(DateOfCreation dateOfCreation) {
+            this.dateOfCreation = dateOfCreation;
+        }
+        public Optional<History> getHistory() {
+            return Optional.ofNullable(history);
+        }
+        public void setHistory(History history) {
+            this.history = history;
+        }
 
         /**
          * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
@@ -235,7 +255,8 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(dateOfCreation, otherEditPersonDescriptor.dateOfCreation);
         }
 
         @Override
@@ -247,6 +268,8 @@ public class EditCommand extends Command {
                     .add("address", address)
                     .add("remark", remark)
                     .add("tags", tags)
+                    .add("dateOfCreation", dateOfCreation)
+                    .add("history", history)
                     .toString();
         }
     }

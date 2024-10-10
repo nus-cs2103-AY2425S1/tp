@@ -13,6 +13,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -29,42 +30,57 @@ public class TypicalPersons {
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253")
             .withTags("friends")
-            .withRemark("").build();
+            .withRemark("")
+            .withDateOfCreation("2024-01-12")
+            .withHistory(LocalDate.of(2024, 10, 10), "Attended seminar")
+            .withHistory(LocalDate.of(2024, 10, 11), "Met with client")
+            .build();
 
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withTags("owesMoney", "friends")
-            .withRemark("").build();
+            .withRemark("")
+            .withDateOfCreation("2022-09-19")
+            .withHistory(LocalDate.of(2024, 9, 25), "Completed project A")
+            .withHistory(LocalDate.of(2024, 10, 1), "Attended team meeting")
+            .build();
 
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street")
-            .withRemark("").build();
+            .withRemark("")
+            .withDateOfCreation("2021-09-10").build();
 
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends")
-            .withRemark("").build();
+            .withRemark("")
+            .withDateOfCreation("2012-02-19").build();
 
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withAddress("michegan ave")
-            .withRemark("").build();
+            .withRemark("")
+            .withDateOfCreation("2024-02-20").build();
 
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withEmail("lydia@example.com").withAddress("little tokyo")
-            .withRemark("").build();
+            .withRemark("")
+            .withDateOfCreation("2018-01-29").build();
 
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street")
-            .withRemark("").build();
+            .withRemark("")
+            .withDateOfCreation("2019-12-11").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
             .withEmail("stefan@example.com").withAddress("little india")
-            .withRemark("").build();
+            .withRemark("")
+            .withDateOfCreation("2021-03-31").build();
 
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").withAddress("chicago ave")
-            .withRemark("").build();
+            .withRemark("")
+            .withDateOfCreation("2012-02-19").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
