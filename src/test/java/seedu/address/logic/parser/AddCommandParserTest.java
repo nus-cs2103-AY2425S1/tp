@@ -24,8 +24,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+//import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+//import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -36,7 +36,7 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddClientProfile;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -46,7 +46,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandParserTest {
-    private AddCommandParser parser = new AddCommandParser();
+    private AddClientParser parser = new AddClientParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
@@ -54,7 +54,7 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddClientProfile(expectedPerson));
 
 
         // multiple tags - all accepted
@@ -62,7 +62,7 @@ public class AddCommandParserTest {
                 .build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                new AddCommand(expectedPersonMultipleTags));
+                new AddClientProfile(expectedPersonMultipleTags));
     }
 
     @Test
@@ -79,18 +79,18 @@ public class AddCommandParserTest {
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // multiple emails
-        assertParseFailure(parser, EMAIL_DESC_AMY + validExpectedPersonString,
+/*        assertParseFailure(parser, EMAIL_DESC_AMY + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
 
         // multiple addresses
         assertParseFailure(parser, ADDRESS_DESC_AMY + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
-
+*/
         // multiple fields repeated
         assertParseFailure(parser,
                 validExpectedPersonString + PHONE_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY + ADDRESS_DESC_AMY
                         + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_EMAIL, PREFIX_PHONE));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_PHONE));
 
         // invalid value followed by valid value
 
@@ -99,16 +99,16 @@ public class AddCommandParserTest {
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // invalid email
-        assertParseFailure(parser, INVALID_EMAIL_DESC + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
+//        assertParseFailure(parser, INVALID_EMAIL_DESC + validExpectedPersonString,
+//                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
 
         // invalid phone
         assertParseFailure(parser, INVALID_PHONE_DESC + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // invalid address
-        assertParseFailure(parser, INVALID_ADDRESS_DESC + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
+ //       assertParseFailure(parser, INVALID_ADDRESS_DESC + validExpectedPersonString,
+ //               Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
 
         // valid value followed by invalid value
 
@@ -117,16 +117,16 @@ public class AddCommandParserTest {
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // invalid email
-        assertParseFailure(parser, validExpectedPersonString + INVALID_EMAIL_DESC,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
+ //       assertParseFailure(parser, validExpectedPersonString + INVALID_EMAIL_DESC,
+ //               Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
 
         // invalid phone
         assertParseFailure(parser, validExpectedPersonString + INVALID_PHONE_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // invalid address
-        assertParseFailure(parser, validExpectedPersonString + INVALID_ADDRESS_DESC,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
+//        assertParseFailure(parser, validExpectedPersonString + INVALID_ADDRESS_DESC,
+//                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
     }
 
     @Test
@@ -134,12 +134,12 @@ public class AddCommandParserTest {
         // zero tags
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
-                new AddCommand(expectedPerson));
+                new AddClientProfile(expectedPerson));
     }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddClientProfile.MESSAGE_USAGE);
 
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
@@ -191,6 +191,6 @@ public class AddCommandParserTest {
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddClientProfile.MESSAGE_USAGE));
     }
 }

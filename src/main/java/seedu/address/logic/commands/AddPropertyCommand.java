@@ -47,8 +47,7 @@ public class AddPropertyCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getRemark(), property, personToEdit.getTags());
+        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), property);
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(generateSuccessMessage(editedPerson));
