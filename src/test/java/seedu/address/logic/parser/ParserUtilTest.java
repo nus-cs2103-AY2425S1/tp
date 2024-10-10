@@ -72,7 +72,7 @@ public class ParserUtilTest {
     @Test
     public void parseEmployeeId_validValueWithoutWhitespace_returnsName() throws Exception {
         EmployeeId expectedEmployeeId = new EmployeeId(VALID_EMPLOYEE_ID);
-        assertEquals(expectedEmployeeId, ParserUtil.parseName(VALID_EMPLOYEE_ID));
+        assertEquals(expectedEmployeeId, ParserUtil.parseEmployeeId(VALID_EMPLOYEE_ID));
     }
 
     @Test
