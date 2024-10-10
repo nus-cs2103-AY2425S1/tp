@@ -29,9 +29,8 @@
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" style="-fx-padding: 0 6 0 0;"/>
         <Label fx:id="role" styleClass="cell_big_label, role-label" text="\$role"/>
       </HBox>
-      <HBox alignment="CENTER_LEFT">
-        <Label fx:id="major" styleClass="cell_small_label" text="\$major" style="-fx-background-color: rgb(0,102,102); -fx-min-width: 30; -fx-alignment: center; "
-               />
+      <HBox alignment="CENTER_LEFT" style="-fx-padding: 3 0 3 0">
+        <Label fx:id="major" styleClass="cell_small_label, major-label" text="\$major"/>
         <FlowPane fx:id="tags" />
       </HBox>
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
