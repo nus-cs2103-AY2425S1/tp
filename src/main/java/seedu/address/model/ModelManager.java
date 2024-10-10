@@ -172,6 +172,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasEvent(Event event) {
+        requireNonNull(event);
+        return eventBook.hasEvent(event);
+    }
+
+    @Override
     public void deleteEvent(Event event) {
         eventBook.removeEvent(event);
     }
