@@ -95,4 +95,15 @@ public class Meeting {
         return location.hashCode();
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public LocalDateTime getEndTime() {
+        return endTime;
+    }
 }
