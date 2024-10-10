@@ -135,4 +135,17 @@ public class ParserUtil {
         }
         return new Wedding(new WeddingName(trimmedWedding));
     }
+
+
+    /**
+     * Parses {@code Collection<String> weddings} into a {@code Set<Wedding>}.
+     */
+    public static Set<Wedding> parseWeddings(Collection<String> weddings) throws ParseException {
+        requireNonNull(weddings);
+        final Set<Wedding> weddingSet = new HashSet<>();
+        for (String weddingName : weddings) {
+            weddingSet.add(parseWedding(weddingName));
+        }
+        return weddingSet;
+    }
 }

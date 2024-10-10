@@ -103,6 +103,6 @@ public class Wedding {
 
     @Override
     public String toString() {
-        return '[' + weddingName.toString() + '}';
+        return '[' + weddingName.toString() + ']';
     }
 }

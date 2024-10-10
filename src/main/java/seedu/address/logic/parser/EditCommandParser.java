@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -18,6 +19,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.wedding.Wedding;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -32,7 +34,8 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                        PREFIX_TAG, PREFIX_WEDDING);
 
         Index index;
 
@@ -60,6 +63,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
+        parseWeddingsForEdit(argMultimap.getAllValues(PREFIX_WEDDING)).ifPresent(editPersonDescriptor::setWeddings);
+
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
@@ -82,4 +87,19 @@ public class EditCommandParser implements Parser<EditCommand> {
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
 
+    /**
+     * Parses {@code Collection<String> weddings} into a {@code Set<Wedding>} if {@code weddings} is non-empty.
+     * If {@code weddings} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Wedding>} containing zero tags.
+     */
+    private Optional<Set<Wedding>> parseWeddingsForEdit(Collection<String> weddings) throws ParseException {
+        assert weddings != null;
+
+        if (weddings.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> weddingSet = weddings.size() == 1 && weddings.contains("")
+                ? Collections.emptySet() : weddings;
+        return Optional.of(ParserUtil.parseWeddings(weddingSet));
+    }
 }
