@@ -130,14 +130,12 @@ public class ParserUtil {
      */
     public static String parseNric(String nric) throws ParseException {
         requireNonNull(nric);
-        String trimmedNric = nric.trim();
+        String trimmedNric = nric.trim().toUpperCase();
 
         // To implement the checker later.
-        /*
         if (!StringUtil.isValidNric(trimmedNric)) {
             throw new ParseException("NRIC is invalid");
         }
-         */
         return trimmedNric;
     }
 }

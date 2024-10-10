@@ -29,8 +29,8 @@ public class ListLogsCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         //model.updateFilteredPersonList(nric);
-        //throw new CommandException("ListLogsCommand not implemented yet");
-        return new CommandResult("The NRIC you inputted is: " + nric);
+        throw new CommandException("ListLogsCommand not implemented yet");
+        //return new CommandResult("The NRIC you inputted is: " + nric);
     }
 
     @Override
