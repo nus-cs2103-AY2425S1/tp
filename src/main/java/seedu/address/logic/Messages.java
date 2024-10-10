@@ -38,8 +38,7 @@ public class Messages {
         builder.append(vendor.getName())
                 .append("; Phone: ")
                 .append(vendor.getPhone())
-                .append("; Email: ")
-                .append("; Address: ")
+                .append("; Description: ")
                 .append(vendor.getDescription())
                 .append("; Tags: ");
         vendor.getTags().forEach(builder::append);
