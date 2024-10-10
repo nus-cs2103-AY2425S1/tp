@@ -129,6 +129,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void sortFilteredPersonList(String order) {
+        addressBook.sortPersons(order);
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
