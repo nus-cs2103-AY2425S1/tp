@@ -23,6 +23,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListCompanyCommand;
+import seedu.address.logic.commands.ListContactCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -58,8 +59,9 @@ public class AddressBookParserTest {
     public void parseCommand_edit() throws Exception {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+        EditCommand command = (EditCommand) parser.parseCommand(
+                EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " "
+                + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
@@ -84,15 +86,15 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    public void parseCommand_listContacts() throws Exception {
+        String listContactCommand = ListCompanyCommand.COMMAND_WORD + " " + ListContactCommand.COMMAND_ENTITY;
+        assertTrue(parser.parseCommand(listContactCommand) instanceof ListCommand);
     }
 
     @Test
     public void parseCommand_listCompanies() throws Exception {
-        assertTrue(parser.parseCommand(ListCompanyCommand.COMMAND_WORD) instanceof ListCompanyCommand);
-        assertTrue(parser.parseCommand(ListCompanyCommand.COMMAND_WORD + " 3") instanceof ListCompanyCommand);
+        String listCompanyCommand = ListCompanyCommand.COMMAND_WORD + " " + ListCompanyCommand.COMMAND_ENTITY;
+        assertTrue(parser.parseCommand(listCompanyCommand) instanceof ListCompanyCommand);
     }
 
     @Test

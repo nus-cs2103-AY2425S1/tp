@@ -8,10 +8,9 @@ import seedu.address.model.Model;
 /**
  * Lists all jobs in the address book to the user.
  */
-public class ListJobCommand extends Command {
+public class ListJobCommand extends ListCommand {
 
-    // TODO: Temporary solution, could consider "list job"
-    public static final String COMMAND_WORD = "list_job";
+    public static final String COMMAND_ENTITY = "job";
 
     public static final String MESSAGE_SUCCESS = "Listed all jobs";
 
