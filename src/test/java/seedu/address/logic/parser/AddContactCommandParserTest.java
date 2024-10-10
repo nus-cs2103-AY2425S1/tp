@@ -45,8 +45,8 @@ import seedu.address.model.person.Role;
 import seedu.address.model.skill.Skill;
 import seedu.address.testutil.PersonBuilder;
 
-public class AddCommandParserTest {
-    private AddCommandParser parser = new AddCommandParser();
+public class AddContactCommandParserTest {
+    private AddContactCommandParser parser = new AddContactCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {

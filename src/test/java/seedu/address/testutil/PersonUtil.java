@@ -30,7 +30,7 @@ public class PersonUtil {
      * Returns an add contact command string for adding the {@code person}
      */
     public static String getAddContactCommand(Person person) {
-        return AddContactCommand.COMMAND_WORD + " " + getPersonDetails(person);
+        return AddContactCommand.COMMAND_WORD + " " + AddContactCommand.COMMAND_ENTITY + " " + getPersonDetails(person);
     }
 
     /**

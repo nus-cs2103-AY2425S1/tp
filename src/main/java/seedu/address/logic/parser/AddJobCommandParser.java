@@ -19,9 +19,17 @@ import seedu.address.model.job.JobRequirements;
 import seedu.address.model.job.JobSalary;
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new AddJobCommand object
  */
 public class AddJobCommandParser implements Parser<AddJobCommand> {
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddJobCommand
@@ -49,14 +57,6 @@ public class AddJobCommandParser implements Parser<AddJobCommand> {
         Job job = new Job(name, company, salary, requirements, description);
 
         return new AddJobCommand(job);
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
 }
