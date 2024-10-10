@@ -5,6 +5,7 @@
     "email": "invalid@email!3e",
     "address": "4th street",
     "register number": "1",
-    "sex": "F"
+    "sex": "F",
+	"class": "1A"
   } ]
 }

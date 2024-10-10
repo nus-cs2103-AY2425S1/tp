@@ -13,6 +13,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.RegisterNumber;
 import seedu.address.model.person.Sex;
+import seedu.address.model.person.StudentClass;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,22 +24,22 @@ public class SampleDataUtil {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"), new RegisterNumber("1"), new Sex("M"),
-                getTagSet("friends")),
+                new StudentClass("1A"), getTagSet("friends")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), new RegisterNumber("2"), new Sex("F"),
-                getTagSet("colleagues", "friends")),
+                new StudentClass("2A"), getTagSet("colleagues", "friends")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), new RegisterNumber("3"), new Sex("F"),
-                getTagSet("neighbours")),
+                new StudentClass("1A"), getTagSet("neighbours")),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), new RegisterNumber("4"), new Sex("M"),
-                getTagSet("family")),
+                new StudentClass("4C"), getTagSet("family")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                 new Address("Blk 47 Tampines Street 20, #17-35"), new RegisterNumber("5"), new Sex("M"),
-                getTagSet("classmates")),
+                new StudentClass("2B"), getTagSet("classmates")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"), new RegisterNumber("6"), new Sex("M"),
-                getTagSet("colleagues"))
+                new StudentClass("2B"), getTagSet("colleagues"))
         };
     }
 

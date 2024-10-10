@@ -10,6 +10,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.RegisterNumber;
 import seedu.address.model.person.Sex;
+import seedu.address.model.person.StudentClass;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -24,6 +25,7 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_REGISTER_NUMBER = "1";
     public static final String DEFAULT_SEX = "F";
+    public static final String DEFAULT_STUDENT_CLASS = "1A";
 
     private Name name;
     private Phone phone;
@@ -31,6 +33,7 @@ public class PersonBuilder {
     private Address address;
     private RegisterNumber registerNumber;
     private Sex sex;
+    private StudentClass studentClass;
     private Set<Tag> tags;
 
     /**
@@ -43,6 +46,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         registerNumber = new RegisterNumber(DEFAULT_REGISTER_NUMBER);
         sex = new Sex(DEFAULT_SEX);
+        studentClass = new StudentClass(DEFAULT_STUDENT_CLASS);
         tags = new HashSet<>();
     }
 
@@ -56,6 +60,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         registerNumber = personToCopy.getRegisterNumber();
         sex = personToCopy.getSex();
+        studentClass = personToCopy.getStudentClass();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -115,8 +120,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code StudentClass} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withStudentClass(String studentClass) {
+        this.studentClass = new StudentClass(studentClass);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, registerNumber, sex, tags);
+        return new Person(name, phone, email, address, registerNumber, sex, studentClass, tags);
     }
 
 }

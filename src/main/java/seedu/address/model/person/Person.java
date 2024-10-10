@@ -22,6 +22,7 @@ public class Person {
     private final Email email;
     private final RegisterNumber registerNumber;
     private final Sex sex;
+    private final StudentClass studentClass;
 
     // Data fields
     private final Address address;
@@ -31,14 +32,15 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, RegisterNumber registerNumber, Sex sex,
-                  Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, registerNumber, sex, tags);
+        	StudentClass studentClass, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, registerNumber, sex, studentClass, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.registerNumber = registerNumber;
         this.sex = sex;
+        this.studentClass = studentClass;
         this.tags.addAll(tags);
     }
 
@@ -64,6 +66,10 @@ public class Person {
 
     public Sex getSex() {
         return sex;
+    }
+
+    public StudentClass getStudentClass() {
+        return studentClass;
     }
 
     /**
@@ -109,13 +115,14 @@ public class Person {
                 && address.equals(otherPerson.address)
                 && registerNumber.equals(otherPerson.registerNumber)
                 && sex.equals(otherPerson.sex)
+                && studentClass.equals(otherPerson.studentClass)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, registerNumber, sex, tags);
+        return Objects.hash(name, phone, email, address, registerNumber, sex, studentClass, tags);
     }
 
     @Override
@@ -127,6 +134,7 @@ public class Person {
                 .add("address", address)
                 .add("register number", registerNumber)
                 .add("sex", sex)
+                .add("class", studentClass)
                 .add("tags", tags)
                 .toString();
     }

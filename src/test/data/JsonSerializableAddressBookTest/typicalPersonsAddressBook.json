@@ -7,6 +7,7 @@
     "address" : "123, Jurong West Ave 6, #08-111",
     "register number" : "3",
     "sex": "F",
+    "class": "1A",
     "tags" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
@@ -15,6 +16,7 @@
     "address" : "311, Clementi Ave 2, #02-25",
     "register number" : "4",
     "sex": "M",
+    "class": "2B",
     "tags" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
@@ -23,6 +25,7 @@
     "address" : "wall street",
     "register number" : "5",
     "sex": "M",
+    "class": "3C",
     "tags" : [ ]
   }, {
     "name" : "Daniel Meier",
@@ -31,6 +34,7 @@
     "address" : "10th street",
     "register number" : "6",
     "sex": "M",
+    "class": "4D",
     "tags" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
@@ -39,6 +43,7 @@
     "address" : "michegan ave",
     "register number" : "7",
     "sex": "F",
+    "class": "3E",
     "tags" : [ ]
   }, {
     "name" : "Fiona Kunz",
@@ -47,6 +52,7 @@
     "address" : "little tokyo",
     "register number" : "8",
     "sex": "F",
+    "class": "2A",
     "tags" : [ ]
   }, {
     "name" : "George Best",
@@ -55,6 +61,7 @@
     "address" : "4th street",
     "register number" : "9",
     "sex": "M",
+    "class": "1A",
     "tags" : [ ]
   } ]
 }
