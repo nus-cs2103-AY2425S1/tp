@@ -1,10 +1,6 @@
 package seedu.ddd.logic.parser;
 
-import org.junit.jupiter.api.Test;
-
-import seedu.ddd.logic.Messages;
 import static seedu.ddd.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import seedu.ddd.logic.commands.AddCommand;
 import static seedu.ddd.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.ddd.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -34,6 +30,13 @@ import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.ddd.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.ddd.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.ddd.testutil.TypicalContacts.AMY;
+import static seedu.ddd.testutil.TypicalContacts.BOB;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.ddd.logic.Messages;
+import seedu.ddd.logic.commands.AddCommand;
 import seedu.ddd.model.person.Address;
 import seedu.ddd.model.person.Contact;
 import seedu.ddd.model.person.Email;
@@ -41,8 +44,6 @@ import seedu.ddd.model.person.Name;
 import seedu.ddd.model.person.Phone;
 import seedu.ddd.model.tag.Tag;
 import seedu.ddd.testutil.ClientBuilder;
-import static seedu.ddd.testutil.TypicalContacts.AMY;
-import static seedu.ddd.testutil.TypicalContacts.BOB;
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();

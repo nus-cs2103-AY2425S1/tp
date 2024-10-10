@@ -3,35 +3,24 @@ package seedu.ddd.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.ddd.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.ddd.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.ddd.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.ddd.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.ddd.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.ddd.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.ddd.testutil.Assert.assertThrows;
-import static seedu.ddd.testutil.TypicalContacts.AMY;
 
-import java.io.IOException;
-import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import seedu.ddd.logic.commands.AddCommand;
 import seedu.ddd.logic.commands.CommandResult;
 import seedu.ddd.logic.commands.ListCommand;
 import seedu.ddd.logic.commands.exceptions.CommandException;
 import seedu.ddd.logic.parser.exceptions.ParseException;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.ModelManager;
-import seedu.ddd.model.ReadOnlyAddressBook;
 import seedu.ddd.model.UserPrefs;
-import seedu.ddd.model.person.Contact;
 import seedu.ddd.storage.JsonAddressBookStorage;
 import seedu.ddd.storage.JsonUserPrefsStorage;
 import seedu.ddd.storage.StorageManager;
-import seedu.ddd.testutil.ClientBuilder;
 
 public class LogicManagerTest {
     // private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");

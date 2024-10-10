@@ -10,7 +10,6 @@ import seedu.ddd.logic.Messages;
 import seedu.ddd.logic.commands.exceptions.CommandException;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.person.Contact;
-import seedu.ddd.model.person.Person;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.

@@ -2,7 +2,6 @@ package seedu.ddd.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import static seedu.ddd.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.ddd.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.ddd.testutil.Assert.assertThrows;
@@ -27,9 +26,9 @@ import seedu.ddd.logic.parser.exceptions.ParseException;
 import seedu.ddd.model.person.Client;
 import seedu.ddd.model.person.Contact;
 import seedu.ddd.model.person.NameContainsKeywordsPredicate;
-import seedu.ddd.testutil.EditClientDescriptorBuilder;
 import seedu.ddd.testutil.ClientBuilder;
 import seedu.ddd.testutil.ClientUtil;
+import seedu.ddd.testutil.EditClientDescriptorBuilder;
 
 public class AddressBookParserTest {
 

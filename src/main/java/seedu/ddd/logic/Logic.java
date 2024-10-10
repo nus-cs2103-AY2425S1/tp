@@ -10,7 +10,6 @@ import seedu.ddd.logic.parser.exceptions.ParseException;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.ReadOnlyAddressBook;
 import seedu.ddd.model.person.Contact;
-import seedu.ddd.model.person.Person;
 
 /**
  * API of the Logic component

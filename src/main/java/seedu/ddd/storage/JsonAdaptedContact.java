@@ -12,11 +12,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.ddd.commons.exceptions.IllegalValueException;
 import seedu.ddd.model.person.Address;
 import seedu.ddd.model.person.Client;
+import seedu.ddd.model.person.Contact;
+import seedu.ddd.model.person.Date;
 import seedu.ddd.model.person.Email;
 import seedu.ddd.model.person.Name;
 import seedu.ddd.model.person.Person;
-import seedu.ddd.model.person.Contact;
-import seedu.ddd.model.person.Date;
 import seedu.ddd.model.person.Phone;
 import seedu.ddd.model.tag.Tag;
 
@@ -108,7 +108,8 @@ class JsonAdaptedContact {
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         // TODO: update this to work with Client and Vendor
-        Client contact = new Client(modelName, modelPhone, modelEmail, modelAddress, new Date("01 Jan 2000"), modelTags);
+        Client contact = new Client(modelName, modelPhone, modelEmail, modelAddress,
+                new Date("01 Jan 2000"), modelTags);
         return contact;
     }
 

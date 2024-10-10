@@ -1,6 +1,5 @@
 package seedu.ddd.model.person;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
@@ -16,7 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.ddd.testutil.ClientBuilder;
 
-public class ContactTest{
+public class ContactTest {
 
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
@@ -92,8 +91,9 @@ public class ContactTest{
 
     @Test
     public void toStringMethod() {
-        // String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-        //         + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + "}";
+        // String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName()
+        // + ", phone=" + ALICE.getPhone() + ", email=" + ALICE.getEmail()
+        // + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + "}";
         // assertEquals(expected, ALICE.toString());
     }
 }

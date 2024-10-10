@@ -4,10 +4,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.ddd.model.person.Address;
+import seedu.ddd.model.person.Client;
 import seedu.ddd.model.person.Date;
 import seedu.ddd.model.person.Email;
 import seedu.ddd.model.person.Name;
-import seedu.ddd.model.person.Client;
 import seedu.ddd.model.person.Phone;
 import seedu.ddd.model.tag.Tag;
 import seedu.ddd.model.util.SampleDataUtil;

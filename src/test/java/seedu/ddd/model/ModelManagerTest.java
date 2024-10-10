@@ -78,12 +78,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasContact_ContactNotInAddressBook_returnsFalse() {
+    public void hasContact_contactNotInAddressBook_returnsFalse() {
         assertFalse(modelManager.hasContact(ALICE));
     }
 
     @Test
-    public void hasContact_ContactInAddressBook_returnsTrue() {
+    public void hasContact_contactInAddressBook_returnsTrue() {
         modelManager.addContact(ALICE);
         assertTrue(modelManager.hasContact(ALICE));
     }

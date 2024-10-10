@@ -38,6 +38,9 @@ public class Messages {
         return MESSAGE_DUPLICATE_FIELDS + String.join(" ", duplicateFields);
     }
 
+    /**
+     * TODO: add docs
+     */
     public static String format(Contact contact) {
         return contact instanceof Client
             ? format((Client) contact)

@@ -12,7 +12,6 @@ import seedu.ddd.commons.core.GuiSettings;
 import seedu.ddd.commons.core.LogsCenter;
 import seedu.ddd.commons.util.CollectionUtil;
 import seedu.ddd.model.person.Contact;
-import seedu.ddd.model.person.Person;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -101,8 +100,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addContact(Contact Contact) {
-        addressBook.addContact(Contact);
+    public void addContact(Contact contact) {
+        addressBook.addContact(contact);
         updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
     }
 

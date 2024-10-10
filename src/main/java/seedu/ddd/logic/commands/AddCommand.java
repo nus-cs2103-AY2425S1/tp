@@ -1,15 +1,15 @@
 package seedu.ddd.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-
-import seedu.ddd.commons.util.ToStringBuilder;
-import seedu.ddd.logic.Messages;
-import seedu.ddd.logic.commands.exceptions.CommandException;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
+
+import seedu.ddd.commons.util.ToStringBuilder;
+import seedu.ddd.logic.Messages;
+import seedu.ddd.logic.commands.exceptions.CommandException;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.person.Contact;
 

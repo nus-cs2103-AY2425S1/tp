@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ddd.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.ddd.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.ddd.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.ddd.testutil.TypicalContacts.getTypicalAddressBook;
 import static seedu.ddd.testutil.TypicalIndexes.INDEX_FIRST_CONTACT;
 import static seedu.ddd.testutil.TypicalIndexes.INDEX_SECOND_CONTACT;
-import static seedu.ddd.testutil.TypicalContacts.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -29,14 +29,14 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Contact ContactToDelete = model.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased());
+        Contact contactToDelete = model.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_CONTACT);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                Messages.format(ContactToDelete));
+                Messages.format(contactToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deleteContact(ContactToDelete);
+        expectedModel.deleteContact(contactToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }

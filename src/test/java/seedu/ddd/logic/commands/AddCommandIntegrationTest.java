@@ -1,17 +1,18 @@
 package seedu.ddd.logic.commands;
 
+import static seedu.ddd.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.ddd.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.ddd.testutil.TypicalContacts.getTypicalAddressBook;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.ddd.logic.Messages;
-import static seedu.ddd.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.ddd.logic.commands.CommandTestUtil.assertCommandSuccess;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.ModelManager;
 import seedu.ddd.model.UserPrefs;
 import seedu.ddd.model.person.Contact;
 import seedu.ddd.testutil.ClientBuilder;
-import static seedu.ddd.testutil.TypicalContacts.getTypicalAddressBook;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.

@@ -3,25 +3,20 @@ package seedu.ddd.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.ddd.testutil.Assert.assertThrows;
 import static seedu.ddd.testutil.TypicalContacts.ALICE;
 import static seedu.ddd.testutil.TypicalContacts.getTypicalAddressBook;
 
-import javafx.collections.ObservableList;
+import java.util.Collection;
+import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.ddd.model.person.Contact;
-import seedu.ddd.model.person.exceptions.DuplicateContactException;
 import seedu.ddd.testutil.ClientBuilder;
 
 public class AddressBookTest {

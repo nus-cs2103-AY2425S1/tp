@@ -1,9 +1,5 @@
 package seedu.ddd.logic.parser;
 
-import org.junit.jupiter.api.Test;
-
-import seedu.ddd.commons.core.index.Index;
-import seedu.ddd.logic.Messages;
 import static seedu.ddd.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.ddd.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
@@ -26,23 +22,28 @@ import static seedu.ddd.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import seedu.ddd.logic.commands.EditCommand;
-import seedu.ddd.logic.commands.EditCommand.EditContactDescriptor;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.ddd.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.ddd.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.ddd.testutil.TypicalIndexes.INDEX_FIRST_CONTACT;
+import static seedu.ddd.testutil.TypicalIndexes.INDEX_SECOND_CONTACT;
+import static seedu.ddd.testutil.TypicalIndexes.INDEX_THIRD_CONTACT;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.ddd.commons.core.index.Index;
+import seedu.ddd.logic.Messages;
+import seedu.ddd.logic.commands.EditCommand;
+import seedu.ddd.logic.commands.EditCommand.EditContactDescriptor;
 import seedu.ddd.model.person.Address;
 import seedu.ddd.model.person.Email;
 import seedu.ddd.model.person.Name;
 import seedu.ddd.model.person.Phone;
 import seedu.ddd.model.tag.Tag;
 import seedu.ddd.testutil.EditClientDescriptorBuilder;
-import static seedu.ddd.testutil.TypicalIndexes.INDEX_FIRST_CONTACT;
-import static seedu.ddd.testutil.TypicalIndexes.INDEX_SECOND_CONTACT;
-import static seedu.ddd.testutil.TypicalIndexes.INDEX_THIRD_CONTACT;
 
 public class EditCommandParserTest {
 
