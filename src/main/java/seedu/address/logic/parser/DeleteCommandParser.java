@@ -52,6 +52,12 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         }
     }
 
+    /**
+     * Parses the given {@code String} of arguments and returns an optional set of Index objects.
+     * @param indices A collection of Strings representing indices
+     * @return An optional set which contains Index objects
+     * @throws ParseException if the user input does not conform the expected format
+     */
     private Optional<Set<Index>> parseIndicesForDelete(Collection<String> indices) throws ParseException {
         assert indices != null;
 
