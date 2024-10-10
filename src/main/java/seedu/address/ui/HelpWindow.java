@@ -14,7 +14,7 @@ import seedu.address.commons.core.LogsCenter;
  * Controller for a help page
  */
 public class HelpWindow extends UiPart<Stage> {
-  
+
     public static final String USERGUIDE_URL = "https://ay2425s1-cs2103t-w13-2.github.io/tp/UserGuide.html#quick-start";
     public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
 

@@ -18,7 +18,7 @@ CareConnect is a **CLI-first** **case management application** that enables soci
 
 1. Copy the file to the folder you want to use as the _home folder_ for your CareConnect application.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar careconnect.jar` 
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar careconnect.jar`
    command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -156,13 +156,13 @@ Format: `exit`
 
 ### Saving the data
 
-CareConnect data are saved in the hard disk automatically after any command that changes the data. There is no need to 
-save 
+CareConnect data are saved in the hard disk automatically after any command that changes the data. There is no need to
+save
 manually.
 
 ### Editing the data file
 
-CareConnect data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are 
+CareConnect data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are
 welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
