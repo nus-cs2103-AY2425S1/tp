@@ -89,7 +89,7 @@ public class AddCommandParserTest {
     public void parse_repeatedNonTagValue_failure() {
         String validExpectedPersonString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + REGISTER_NUMBER_DESC_BOB + SEX_DESC_BOB + STUDENT_CLASS_DESC_BOB
-				+ TAG_DESC_FRIEND;
+                + TAG_DESC_FRIEND;
 
         // multiple names
         assertParseFailure(parser, NAME_DESC_AMY + validExpectedPersonString,
@@ -122,9 +122,9 @@ public class AddCommandParserTest {
         // multiple fields repeated
         assertParseFailure(parser,
                 validExpectedPersonString + PHONE_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY + ADDRESS_DESC_AMY
-                        + REGISTER_NUMBER_DESC_AMY + SEX_DESC_AMY + STUDENT_CLASS_DESC_AMY + validExpectedPersonString,
+		+ REGISTER_NUMBER_DESC_AMY + SEX_DESC_AMY + STUDENT_CLASS_DESC_AMY + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_EMAIL, PREFIX_PHONE,
-                        PREFIX_REGISTER_NUMBER, PREFIX_SEX, PREFIX_STUDENT_CLASS));
+                PREFIX_REGISTER_NUMBER, PREFIX_SEX, PREFIX_STUDENT_CLASS));
 
         // invalid value followed by valid value
 
