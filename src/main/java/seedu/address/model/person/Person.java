@@ -117,7 +117,7 @@ public class Person {
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
                 && projectStatus.equals(otherPerson.projectStatus)
-                && paymentStatus.equals(otherPerson.paymentStatus);
+                && paymentStatus.equals(otherPerson.paymentStatus)
                 && clientStatus.equals(otherPerson.clientStatus);
     }
 
