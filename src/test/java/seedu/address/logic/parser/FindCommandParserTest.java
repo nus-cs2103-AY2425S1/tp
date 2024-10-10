@@ -22,13 +22,13 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsFindCommand() {
-        // no leading and trailing whitespaces
+        // no trailing whitespaces
         FindCommand expectedFindCommand =
-                new FindCommand(new FieldContainsKeywordsPredicate(Arrays.asList("C6", "D7"), "ward"));
-        assertParseSuccess(parser, "w/ C6 D7", expectedFindCommand);
+                new FindCommand(new FieldContainsKeywordsPredicate(Arrays.asList("Amy", "Ben"), "name"));
+        assertParseSuccess(parser, " n/ Amy Ben", expectedFindCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, "    w/  \n C6 \n \t D7  \t", expectedFindCommand);
+        assertParseSuccess(parser, "    n/  \n Amy \n \t Ben  \t", expectedFindCommand);
     }
 
 }

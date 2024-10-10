@@ -6,7 +6,6 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.FieldContainsKeywordsPredicate;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -19,11 +18,15 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all patients whose field contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: FIELD/ KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " w/ C8 D7";
+            + "Example: " + COMMAND_WORD + " n/ C8 D7";
 
     private final FieldContainsKeywordsPredicate predicate;
 
+    /**
+     * @param predicate The predicate to filter the list by
+     */
     public FindCommand(FieldContainsKeywordsPredicate predicate) {
+        requireNonNull(predicate);
         this.predicate = predicate;
     }
 

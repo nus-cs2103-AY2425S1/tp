@@ -1,9 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_WARD;
-
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.Arrays;
 
@@ -22,26 +20,17 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        }
 
-        String[] keywords = trimmedArgs.split("\\s+");
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_WARD);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME);
 
         FieldContainsKeywordsPredicate predicate = null;
+        String[] keywords;
         int prefixCount = 0;
 
-        if (argMultimap.getValue(PREFIX_ID).isPresent()) {
-            predicate = new FieldContainsKeywordsPredicate(Arrays.asList(keywords), "id");
-            prefixCount++;
-        }
-
-        if (argMultimap.getValue(PREFIX_WARD).isPresent()) {
-            predicate = new FieldContainsKeywordsPredicate(Arrays.asList(keywords), "ward");
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            keywords = argMultimap.getValue(PREFIX_NAME).get().split("\\s+");
+            predicate = new FieldContainsKeywordsPredicate(Arrays.asList(keywords), "name");
             prefixCount++;
         }
 
@@ -49,7 +38,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ID, PREFIX_WARD);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME);
 
         return new FindCommand(predicate);
     }

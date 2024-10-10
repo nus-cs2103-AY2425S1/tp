@@ -1,13 +1,7 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.CARL;
-import static seedu.address.testutil.TypicalPersons.ELLE;
-import static seedu.address.testutil.TypicalPersons.FIONA;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -30,9 +24,9 @@ public class FindCommandTest {
     @Test
     public void equals() {
         FieldContainsKeywordsPredicate firstPredicate =
-                new FieldContainsKeywordsPredicate(Collections.singletonList("P1"), "id");
+                new FieldContainsKeywordsPredicate(Collections.singletonList("Amy"), "name");
         FieldContainsKeywordsPredicate secondPredicate =
-                new FieldContainsKeywordsPredicate(Collections.singletonList("P2"), "id");
+                new FieldContainsKeywordsPredicate(Collections.singletonList("Ben"), "name");
 
         FindCommand findFirstCommand = new FindCommand(firstPredicate);
         FindCommand findSecondCommand = new FindCommand(secondPredicate);

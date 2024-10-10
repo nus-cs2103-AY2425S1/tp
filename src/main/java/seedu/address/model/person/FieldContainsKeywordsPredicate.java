@@ -1,16 +1,22 @@
 package seedu.address.model.person;
 
-import seedu.address.commons.util.StringUtil;
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.parser.exceptions.ParseException;
-
 import java.util.List;
 import java.util.function.Predicate;
 
+import seedu.address.commons.util.StringUtil;
+import seedu.address.commons.util.ToStringBuilder;
+
+/**
+ * Tests that a {@code Person}'s {@code Field}'s content matches any of the keywords given.
+ */
 public class FieldContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
     private final String field;
 
+    /**
+     * @param keywords A list of keywords to search by
+     * @param field The field to be searched
+     */
     public FieldContainsKeywordsPredicate(List<String> keywords, String field) {
         this.keywords = keywords;
         this.field = field;
@@ -19,13 +25,9 @@ public class FieldContainsKeywordsPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         switch (this.field) {
-        case "id":
+        case "name":
             return keywords.stream()
-                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getId().toString(), keyword));
-
-        case "ward":
-            return keywords.stream()
-                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getWard().toString(), keyword));
+                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().toString(), keyword));
 
         default:
             return false;
