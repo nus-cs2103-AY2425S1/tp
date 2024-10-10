@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import java.lang.StringBuilder;
-
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -39,7 +37,8 @@ public class HelpWindow extends UiPart<Stage> {
 
     private static final String HELP_COMMAND = "help\n";
 
-    private static final String[] COMMANDS = {ADD_COMMAND, CLEAR_COMMAND, DELETE_COMMAND, EDIT_COMMAND, FIND_COMMAND, LIST_COMMAND, HELP_COMMAND};
+    private static final String[] COMMANDS = {ADD_COMMAND, CLEAR_COMMAND, DELETE_COMMAND, EDIT_COMMAND,
+        FIND_COMMAND, LIST_COMMAND, HELP_COMMAND};
 
     @FXML
     private Button copyButton;
