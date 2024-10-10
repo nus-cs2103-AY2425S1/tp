@@ -9,7 +9,7 @@ import seedu.address.model.person.Person;
  * Represents a group of persons.
  */
 public class Group {
-    private final String groupName;
+    private final GroupName groupName;
     private final List<Person> members;
 
     /**
@@ -20,7 +20,7 @@ public class Group {
      * @throws NullPointerException if {@code groupName} or {@code members} is null.
      */
     public Group(String groupName, List<Person> members) {
-        this.groupName = groupName;
+        this.groupName = new GroupName(groupName);
         this.members = members;
     }
 
@@ -29,7 +29,7 @@ public class Group {
      *
      * @return The group name.
      */
-    public String getGroupName() {
+    public GroupName getGroupName() {
         return groupName;
     }
 

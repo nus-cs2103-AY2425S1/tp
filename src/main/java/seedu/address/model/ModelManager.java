@@ -15,6 +15,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -29,6 +30,7 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
 
     private final List<Group> groups = new ArrayList<>();
+
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -114,7 +116,6 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
     }
 
@@ -177,5 +178,19 @@ public class ModelManager implements Model {
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
+    @Override
+    public List<Group> updateFilteredGroupList(GroupContainsKeywordsPredicate groupPredicate) {
+        requireNonNull(groupPredicate);
+
+        // Filter and collect the matching groups based on the predicate
+        List<Group> matchingGroups = groups.stream()
+                .filter(group -> groupPredicate.getKeywords().stream()
+                        .anyMatch(keyword -> group.getGroupName().groupName.equalsIgnoreCase(keyword)))
+                .toList();
+
+        // Return the list of matching groups
+        return matchingGroups;
+    }
+
 
 }
