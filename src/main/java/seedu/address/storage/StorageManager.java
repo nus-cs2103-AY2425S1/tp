@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyClientBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 
@@ -19,13 +20,16 @@ public class StorageManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private AddressBookStorage addressBookStorage;
     private UserPrefsStorage userPrefsStorage;
+    private ClientBookStorage clientBookStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage,
+                          ClientBookStorage clientBookStorage) {
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
+        this.clientBookStorage = clientBookStorage;
     }
 
     // ================ UserPrefs methods ==============================
@@ -73,6 +77,36 @@ public class StorageManager implements Storage {
     public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
         addressBookStorage.saveAddressBook(addressBook, filePath);
+    }
+
+
+    // ================ ClientBook methods ==============================
+
+    @Override
+    public Path getClientBookFilePath() {
+        return addressBookStorage.getAddressBookFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlyClientBook> readClientBook() throws DataLoadingException {
+        return readClientBook(clientBookStorage.getClientBookFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlyClientBook> readClientBook(Path filePath) throws DataLoadingException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return clientBookStorage.readClientBook(filePath);
+    }
+
+    @Override
+    public void saveClientBook(ReadOnlyClientBook clientBook) throws IOException {
+        saveClientBook(clientBook, clientBookStorage.getClientBookFilePath());
+    }
+
+    @Override
+    public void saveClientBook(ReadOnlyClientBook clientBook, Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        clientBookStorage.saveClientBook(clientBook, filePath);
     }
 
 }
