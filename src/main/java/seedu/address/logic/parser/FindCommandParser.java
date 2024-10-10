@@ -6,6 +6,8 @@ import java.util.Arrays;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.group.GroupContainsKeywordsPredicate;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
@@ -24,10 +26,22 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
+        if (trimmedArgs.startsWith("/group")) {
+            // Handle the /group command
+            String[] trimmed = trimmedArgs.split("\\s+", 2); // Split into "/group" and the rest of the string
+            if (trimmed.length < 2 || trimmed[1].trim().isEmpty()) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            }
 
-        String[] nameKeywords = trimmedArgs.split("\\s+");
+            String[] groupNameKeywords = trimmed[1].trim().split("\\s+");
+            return new FindCommand(new GroupContainsKeywordsPredicate(Arrays.asList(groupNameKeywords)));
+        } else {
 
-        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+            String[] nameKeywords = trimmedArgs.split("\\s+");
+
+            return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        }
     }
 
 }

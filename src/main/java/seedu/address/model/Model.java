@@ -1,11 +1,13 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 
 /**
@@ -101,4 +103,6 @@ public interface Model {
     void addGroup(Group group);
 
     String groupsString();
+
+    List<Group> updateFilteredGroupList(GroupContainsKeywordsPredicate groupName);
 }
