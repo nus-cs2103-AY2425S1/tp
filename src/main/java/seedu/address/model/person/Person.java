@@ -17,11 +17,11 @@ import seedu.address.model.tag.Tag;
 public class Person {
 
     // Identity fields
-    private final Id id;
+//    private final Id id;
     private final Name name;
-    private final Ward ward;
-    private final Diagnosis diagnosis;
-    private final Medication medication;
+//    private final Ward ward;
+//    private final Diagnosis diagnosis;
+//    private final Medication medication;
 //    private final Phone phone;
 //    private final Email email;
 //
@@ -32,32 +32,32 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Id id, Name name, Ward ward, Diagnosis diagnosis, Medication medication){
-        this.id = id;
+    public Person(Name name){
+//        this.id = id;
         this.name = name;
-        this.ward = ward;
-        this.diagnosis = diagnosis;
-        this.medication = medication;
+//        this.ward = ward;
+//        this.diagnosis = diagnosis;
+//        this.medication = medication;
     }
-    public Id getId() {
-        return id;
-    }
+//    public Id getId() {
+//        return id;
+//    }
 
     public Name getName() {
         return name;
     }
 
-    public Ward getWard() {
-        return ward;
-    }
-
-    public Diagnosis getDiagnosis() {
-        return diagnosis;
-    }
-
-    public Medication getMedication() {
-        return medication;
-    }
+//    public Ward getWard() {
+//        return ward;
+//    }
+//
+//    public Diagnosis getDiagnosis() {
+//        return diagnosis;
+//    }
+//
+//    public Medication getMedication() {
+//        return medication;
+//    }
 
 //    public Phone getPhone() {
 //        return phone;
@@ -107,29 +107,37 @@ public class Person {
             return false;
         }
 
+//        Person otherPerson = (Person) other;
+//        return id.equals(otherPerson.id)
+//                && name.equals(otherPerson.name)
+//                && ward.equals(otherPerson.ward)
+//                && diagnosis.equals(otherPerson.diagnosis)
+//                && medication.equals(otherPerson.medication);
         Person otherPerson = (Person) other;
-        return id.equals(otherPerson.id)
-                && name.equals(otherPerson.name)
-                && ward.equals(otherPerson.ward)
-                && diagnosis.equals(otherPerson.diagnosis)
-                && medication.equals(otherPerson.medication);
+        return name.equals(otherPerson.name);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(id ,name, ward, diagnosis, medication);
+        return Objects.hash(name);
     }
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("id", id)
-                .add("name", name)
-                .add("ward", ward)
-                .add("diagnosis", diagnosis)
-                .add("medication", medication)
-                .toString();
-    }
+//    @Override
+//    public String toString() {
+//        return new ToStringBuilder(this)
+//                .add("id", id)
+//                .add("name", name)
+//                .add("ward", ward)
+//                .add("diagnosis", diagnosis)
+//                .add("medication", medication)
+//                .toString();
+//    }
+@Override
+public String toString() {
+    return new ToStringBuilder(this)
+            .add("name", name)
+            .toString();
+}
 
 }

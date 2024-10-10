@@ -33,9 +33,9 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_NAME, PREFIX_WARD, PREFIX_DIAGNOSIS, PREFIX_MEDICATION);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME);
 //              ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
-        if (!arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_NAME, PREFIX_WARD, PREFIX_DIAGNOSIS, PREFIX_MEDICATION)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
@@ -45,18 +45,18 @@ public class AddCommandParser implements Parser<AddCommand> {
 //            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 //        }
 
-    argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ID, PREFIX_NAME, PREFIX_WARD, PREFIX_DIAGNOSIS, PREFIX_MEDICATION);
-        Id id = ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get());
+    argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME);
+//        Id id = ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get());
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Ward ward = ParserUtil.parseWard(argMultimap.getValue(PREFIX_WARD).get());
-        Diagnosis diagnosis = ParserUtil.parseDiagnosis(argMultimap.getValue(PREFIX_DIAGNOSIS).get());
-        Medication medication = ParserUtil.parseMedication(argMultimap.getValue(PREFIX_MEDICATION).get());
+//        Ward ward = ParserUtil.parseWard(argMultimap.getValue(PREFIX_WARD).get());
+//        Diagnosis diagnosis = ParserUtil.parseDiagnosis(argMultimap.getValue(PREFIX_DIAGNOSIS).get());
+//        Medication medication = ParserUtil.parseMedication(argMultimap.getValue(PREFIX_MEDICATION).get());
 //        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
 //        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
 //        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+//        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(id, name, ward, diagnosis, medication);
+        Person person = new Person(name);
 
         return new AddCommand(person);
     }

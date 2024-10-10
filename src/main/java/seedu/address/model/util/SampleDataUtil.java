@@ -38,12 +38,12 @@ public class SampleDataUtil {
 //            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
 //                new Address("Blk 45 Aljunied Street 85, #11-31"),
 //                getTagSet("colleagues"))
-                new Person(new Id("P12345"), new Name("Alex Yeoh"), new Ward("A3"), new Diagnosis("Healthy"), new Medication("None")),
-                new Person(new Id("P12123"), new Name("Bernice Yu"), new Ward("A1"), new Diagnosis("Slight Cold"), new Medication("Paracetamol")),
-                new Person(new Id("P12126"), new Name("Charlotte Oliveiro"), new Ward("A2"), new Diagnosis("Healthy"), new Medication("None")),
-                new Person(new Id("P12329"), new Name("David Li"), new Ward("B3"), new Diagnosis("Diabetes"), new Medication("Metformin")),
-                new Person(new Id("P19172"), new Name("Irfan Ibrahim"), new Ward("B2"), new Diagnosis("Flu"), new Medication("Oseltamivir")),
-                new Person(new Id("P12393"), new Name("Roy Balakrishnan"), new Ward("B1"), new Diagnosis("Coronavirus"), new Medication("None"))
+                new Person(new Name("Alex Yeoh")),
+                new Person(new Name("Bernice Yu")),
+                new Person(new Name("Charlotte Oliveiro")),
+                new Person(new Name("David Li")),
+                new Person(new Name("Irfan Ibrahim")),
+                new Person(new Name("Roy Balakrishnan"))
 
         };
     }

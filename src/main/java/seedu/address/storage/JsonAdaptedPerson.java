@@ -25,12 +25,12 @@ class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
-    private final String id;
+//    private final String id;
 
     private final String name;
-    private final String ward;
-    private final String diagnosis;
-    private final String medication;
+//    private final String ward;
+//    private final String diagnosis;
+//    private final String medication;
 //    private final String phone;
 //    private final String email;
 //    private final String address;
@@ -56,11 +56,11 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("id") String id, @JsonProperty("name") String name,@JsonProperty("ward") String ward,@JsonProperty("diagnosis") String diagnosis,@JsonProperty("medication") String medication) {
-        this.id = id;
+//        this.id = id;
         this.name = name;
-        this.ward = ward;
-        this.diagnosis = diagnosis;
-        this.medication = medication;
+//        this.ward = ward;
+//        this.diagnosis = diagnosis;
+//        this.medication = medication;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -70,11 +70,11 @@ class JsonAdaptedPerson {
      * Converts a given {@code Person} into this class for Jackson use.
      */
     public JsonAdaptedPerson(Person source) {
-        id = source.getId().value;
+//        id = source.getId().value;
         name = source.getName().fullName;
-        ward = source.getWard().value;
-        diagnosis = source.getDiagnosis().value;
-        medication = source.getMedication().value;
+//        ward = source.getWard().value;
+//        diagnosis = source.getDiagnosis().value;
+//        medication = source.getMedication().value;
 //        phone = source.getPhone().value;
 //        email = source.getEmail().value;
 //        address = source.getAddress().value;
@@ -127,14 +127,14 @@ class JsonAdaptedPerson {
 //        final Address modelAddress = new Address(address);
 
         // this part not implemented yet
-        final Id modelId = new Id(id);
-        final Ward modelWard = new Ward(ward);
-        final Diagnosis modelDiagnosis = new Diagnosis(diagnosis);
-        final Medication modelMedication = new Medication(medication);
+//        final Id modelId = new Id(id);
+//        final Ward modelWard = new Ward(ward);
+//        final Diagnosis modelDiagnosis = new Diagnosis(diagnosis);
+//        final Medication modelMedication = new Medication(medication);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
+//        final Set<Tag> modelTags = new HashSet<>(personTags);
 //        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
-        return new Person(modelId, modelName, modelWard, modelDiagnosis, modelMedication);
+        return new Person(modelName);
     }
 
 }

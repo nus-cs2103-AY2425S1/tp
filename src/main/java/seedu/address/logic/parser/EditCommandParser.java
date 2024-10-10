@@ -33,7 +33,7 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_NAME, PREFIX_WARD, PREFIX_DIAGNOSIS, PREFIX_MEDICATION);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME);
 
         Index index;
 
@@ -43,25 +43,25 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ID, PREFIX_NAME, PREFIX_WARD, PREFIX_DIAGNOSIS, PREFIX_MEDICATION);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME);
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
-        if (argMultimap.getValue(PREFIX_ID).isPresent()) {
-            editPersonDescriptor.setId(ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get()));
-        }
+//        if (argMultimap.getValue(PREFIX_ID).isPresent()) {
+//            editPersonDescriptor.setId(ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get()));
+//        }
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
-        if (argMultimap.getValue(PREFIX_WARD).isPresent()) {
-            editPersonDescriptor.setWard(ParserUtil.parseWard(argMultimap.getValue(PREFIX_WARD).get()));
-        }
-        if (argMultimap.getValue(PREFIX_DIAGNOSIS).isPresent()) {
-            editPersonDescriptor.setDiagnosis(ParserUtil.parseDiagnosis(argMultimap.getValue(PREFIX_DIAGNOSIS).get()));
-        }
-        if (argMultimap.getValue(PREFIX_MEDICATION).isPresent()) {
-            editPersonDescriptor.setMedication(ParserUtil.parseMedication(argMultimap.getValue(PREFIX_MEDICATION).get()));
-        }
+//        if (argMultimap.getValue(PREFIX_WARD).isPresent()) {
+//            editPersonDescriptor.setWard(ParserUtil.parseWard(argMultimap.getValue(PREFIX_WARD).get()));
+//        }
+//        if (argMultimap.getValue(PREFIX_DIAGNOSIS).isPresent()) {
+//            editPersonDescriptor.setDiagnosis(ParserUtil.parseDiagnosis(argMultimap.getValue(PREFIX_DIAGNOSIS).get()));
+//        }
+//        if (argMultimap.getValue(PREFIX_MEDICATION).isPresent()) {
+//            editPersonDescriptor.setMedication(ParserUtil.parseMedication(argMultimap.getValue(PREFIX_MEDICATION).get()));
+//        }
 //        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
 //            editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
 //        }
@@ -71,7 +71,7 @@ public class EditCommandParser implements Parser<EditCommand> {
 //        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
 //            editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
 //        }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
+//        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
