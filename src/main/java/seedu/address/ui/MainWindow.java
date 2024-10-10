@@ -118,7 +118,8 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath(), logic.getFilteredPersonList().size());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath(),
+                logic.getFilteredPersonList().size());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
@@ -209,6 +210,13 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Execute wrapper to share with other classes
+     * @param command
+     * @return
+     * @throws CommandException
+     * @throws ParseException
+     */
     public CommandResult execute(String command) throws CommandException, ParseException {
         try {
             return executeCommand(command);

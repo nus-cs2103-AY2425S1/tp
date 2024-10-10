@@ -1,5 +1,12 @@
 package seedu.address.ui;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -9,13 +16,6 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Controller for a import page
@@ -32,24 +32,11 @@ public class ImportWindow extends UiPart<Stage> {
 
     @FXML
     private TextField fileDirectory;
-//
-//    /**
-//     * Creates a new importWindow.
-//     *
-//     * @param root Stage to use as the root of the ImportWindow.
-//     */
-//    public ImportWindow(Stage root) {
-//        super(FXML, root);
-//        importMessage.setText(IMPORT_MESSAGE);
-//    }
-//
-//    /**
-//     * Creates a new ImportWindow.
-//     */
-//    public ImportWindow() {
-//        this(new Stage());
-//    }
 
+    /**
+     * Constructs importWindow
+     * @param mainWindow
+     */
     public ImportWindow(MainWindow mainWindow) {
         super(FXML, new Stage());
         importMessage.setText(IMPORT_MESSAGE);
@@ -105,7 +92,7 @@ public class ImportWindow extends UiPart<Stage> {
      * Gets file to import
      */
     @FXML
-    private void importCSV() {
+    private void importCsv() {
         String filePath = fileDirectory.getText();
         if (isValidCsvPath(filePath)) {
             try (Scanner scanner = new Scanner(new File(filePath))) {
@@ -124,13 +111,19 @@ public class ImportWindow extends UiPart<Stage> {
                 e.printStackTrace();
             }
         } else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "The path is invalid, try the format:\n C:/path/to/file.csv", ButtonType.OK);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION,
+                    "The path is invalid, try the format:\n C:/path/to/file.csv", ButtonType.OK);
             alert.setHeaderText(null); // Optional: remove header text
             alert.setTitle("Invalid Import");
             alert.showAndWait();
         }
     }
 
+    /**
+     * Checks CSV path
+     * @param filePath
+     * @return
+     */
     public static boolean isValidCsvPath(String filePath) {
         String regex = "^[a-zA-Z]:([/\\\\\\\\][^<>:\\\"/\\\\\\\\|?*]+)*[/\\\\\\\\]?[^<>:\\\"/\\\\\\\\|?*]+\\.csv$";
         Pattern pattern = Pattern.compile(regex);
