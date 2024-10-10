@@ -37,7 +37,7 @@ public class AddClientParser implements Parser<AddClientProfile> {
      */
     public AddClientProfile parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE;
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE)
                 || !argMultimap.getPreamble().isEmpty()) {
