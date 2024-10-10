@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import tuteez.commons.util.ToStringBuilder;
+import tuteez.model.person.Name;
 import tuteez.model.person.Person;
 import tuteez.model.person.UniquePersonList;
 
@@ -92,6 +93,18 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+
+    /**
+     * Finds and returns the {@code person} from this {@code AddressBook} with the specified {@code Name}.
+     * {@code Name} must exist in the address book.
+     */
+    public Person findPersonByName(Name targetName) {
+        requireNonNull(targetName);
+        return getPersonList().stream()
+                .filter(person -> person.getName().fullName.equalsIgnoreCase(targetName.fullName))
+                .findFirst()
+                .orElse(null);
     }
 
     //// util methods

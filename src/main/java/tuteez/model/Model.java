@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import tuteez.commons.core.GuiSettings;
+import tuteez.model.person.Name;
 import tuteez.model.person.Person;
 
 /**
@@ -84,4 +85,9 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Returns the {@code person} in the address book with the given name.
+     */
+    Person findPersonByName(Name name);
 }

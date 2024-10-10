@@ -3,6 +3,7 @@ package tuteez.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static tuteez.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static tuteez.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tuteez.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tuteez.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -17,7 +18,9 @@ import tuteez.logic.Messages;
 import tuteez.model.Model;
 import tuteez.model.ModelManager;
 import tuteez.model.UserPrefs;
+import tuteez.model.person.Name;
 import tuteez.model.person.Person;
+import tuteez.testutil.PersonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -80,6 +83,31 @@ public class DeleteCommandTest {
     }
 
     @Test
+    public void execute_validName_success() {
+        Person personAdded = new PersonBuilder().withName(VALID_NAME_AMY).build();
+        model.addPerson(personAdded);
+        Name targetName = personAdded.getName();
+        Person personToDelete = model.findPersonByName(targetName);
+        DeleteCommand deleteCommand = new DeleteCommand(targetName);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                Messages.format(personToDelete));
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deletePerson(personToDelete);
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_invalidName_throwsCommandException() {
+        Person personAdded = new PersonBuilder().withName(VALID_NAME_AMY).build();
+        model.addPerson(personAdded);
+        Name invalidName = new Name("Amyy Beee");
+        DeleteCommand deleteCommand = new DeleteCommand(invalidName);
+        String expectedMessage = String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME,
+                invalidName);
+        assertCommandFailure(deleteCommand, model, expectedMessage);
+    }
+
+    @Test
     public void equals() {
         DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON);
         DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON);
@@ -104,9 +132,16 @@ public class DeleteCommandTest {
     @Test
     public void toStringMethod() {
         Index targetIndex = Index.fromOneBased(1);
-        DeleteCommand deleteCommand = new DeleteCommand(targetIndex);
-        String expected = DeleteCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
-        assertEquals(expected, deleteCommand.toString());
+        DeleteCommand deleteCommandWithIndex = new DeleteCommand(targetIndex);
+        String expectedWithIndex = DeleteCommand.class.getCanonicalName()
+                    + "{targetIndex=" + targetIndex + ", targetName=null}";
+        assertEquals(expectedWithIndex, deleteCommandWithIndex.toString());
+
+        Name targetName = new Name("Mary Jane");
+        DeleteCommand deleteCommandWithName = new DeleteCommand(targetName);
+        String expectedWithName = DeleteCommand.class.getCanonicalName()
+                    + "{targetIndex=null, targetName=" + targetName + "}";
+        assertEquals(expectedWithName, deleteCommandWithName.toString());
     }
 
     /**
