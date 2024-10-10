@@ -1,9 +1,12 @@
 package seedu.address.ui;
 
+import javafx.beans.Observable;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import seedu.address.logic.Logic;
+import seedu.address.model.person.Person;
 
 /**
  * An UI component that displays the details and list of {@code Person}.
@@ -12,10 +15,10 @@ public class ContactList extends UiPart<Region> {
 
     private static final String FXML = "ContactList.fxml";
 
-    private Logic logic;
-
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+
+    private ObservableList<Person> personList;
 
     // FXML componenets
     @FXML
@@ -26,10 +29,10 @@ public class ContactList extends UiPart<Region> {
      *
      * @param logic the component responsible for handling backend requests.
      */
-    public ContactList(Logic logic) {
+    public ContactList(ObservableList<Person> personList) {
         super(FXML);
 
-        this.logic = logic;
+        this.personList = personList;
 
         this.initaliseComponents();
     }
@@ -39,7 +42,7 @@ public class ContactList extends UiPart<Region> {
      */
     private void initaliseComponents() {
 
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanel = new PersonListPanel(personList);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
     }
 

@@ -111,7 +111,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        contactList = new ContactList(logic);
+        contactList = new ContactList(logic.getFilteredPersonList());
         contactListPlaceholder.getChildren().add(contactList.getRoot());
 
         resultDisplay = new ResultDisplay();
