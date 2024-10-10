@@ -157,7 +157,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeVolunteer(Volunteer key) {
         volunteers.remove(key);
-
+    }
     //// event level operations
 
     /**
