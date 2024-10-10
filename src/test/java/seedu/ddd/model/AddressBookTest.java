@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.ddd.model.person.Contact;
+import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.testutil.ClientBuilder;
 
 public class AddressBookTest {

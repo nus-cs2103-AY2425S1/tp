@@ -15,8 +15,10 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.ddd.model.person.exceptions.ContactNotFoundException;
-import seedu.ddd.model.person.exceptions.DuplicateContactException;
+import seedu.ddd.model.contact.common.Contact;
+import seedu.ddd.model.contact.common.UniqueContactList;
+import seedu.ddd.model.contact.exceptions.ContactNotFoundException;
+import seedu.ddd.model.contact.exceptions.DuplicateContactException;
 import seedu.ddd.testutil.ClientBuilder;
 
 public class UniqueContactListTest {

@@ -17,7 +17,7 @@ import seedu.ddd.logic.Messages;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.ModelManager;
 import seedu.ddd.model.UserPrefs;
-import seedu.ddd.model.person.Contact;
+import seedu.ddd.model.contact.common.Contact;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for

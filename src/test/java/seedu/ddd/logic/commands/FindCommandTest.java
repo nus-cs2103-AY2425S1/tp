@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.ModelManager;
 import seedu.ddd.model.UserPrefs;
-import seedu.ddd.model.person.NameContainsKeywordsPredicate;
+import seedu.ddd.model.contact.common.NameContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
