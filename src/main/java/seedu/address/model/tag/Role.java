@@ -6,10 +6,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.util.Arrays;
 
 /**
- * Represents a Tag in the address book.
- * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
+ * Represents a Role in the address book.
+ * Guarantees: immutable; name is valid as declared in {@link #isValidRoleName(String)}
  */
-public class Tag {
+public class Role {
 
     public static final String MESSAGE_CONSTRAINTS = "Tag must be one of the following: \n"
             + "1. President\n"
@@ -19,7 +19,7 @@ public class Tag {
             + "5. Events (internal)\n"
             + "6. Events (external)\n"
             + "7. External Relations";
-    public static final String[] AVAILABLE_TAGS = {
+    public static final String[] AVAILABLE_ROLES = {
         "President",
         "Vice President",
         "Admin",
@@ -28,25 +28,25 @@ public class Tag {
         "Events (external)",
         "External Relations"};
 
-    public final String tagName;
+    public final String roleName;
 
     /**
-     * Constructs a {@code Tag}.
+     * Constructs a {@code Role}.
      *
-     * @param tagName A valid tag name.
+     * @param roleName A valid role name.
      */
-    public Tag(String tagName) {
-        requireNonNull(tagName);
-        checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
-        this.tagName = tagName;
+    public Role(String roleName) {
+        requireNonNull(roleName);
+        checkArgument(isValidRoleName(roleName), MESSAGE_CONSTRAINTS);
+        this.roleName = roleName;
     }
 
     /**
-     * Returns true if a given string is a valid tag name.
+     * Returns true if a given string is a valid role name.
      */
-    public static boolean isValidTagName(String test) {
+    public static boolean isValidRoleName(String test) {
         requireNonNull(test);
-        return Arrays.asList(AVAILABLE_TAGS).contains(test);
+        return Arrays.asList(AVAILABLE_ROLES).contains(test);
     }
 
     @Override
@@ -56,24 +56,24 @@ public class Tag {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Tag)) {
+        if (!(other instanceof Role)) {
             return false;
         }
 
-        Tag otherTag = (Tag) other;
-        return tagName.equals(otherTag.tagName);
+        Role otherRole = (Role) other;
+        return roleName.equals(otherRole.roleName);
     }
 
     @Override
     public int hashCode() {
-        return tagName.hashCode();
+        return roleName.hashCode();
     }
 
     /**
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + tagName + ']';
+        return '[' + roleName + ']';
     }
 
 }

@@ -14,7 +14,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Role;
 
 public class SampleDataUtilTest {
     private Person[] samplePersons = new Person[] {
@@ -40,11 +40,11 @@ public class SampleDataUtilTest {
 
     @Test
     public void getTagSet_success() {
-        Tag[] tags = {new Tag("Admin"), new Tag("Vice President")};
+        Role[] roles = {new Role("Admin"), new Role("Vice President")};
 
-        assertTrue(List.of(tags).containsAll(getTagSet("Admin", "Vice President")));
-        assertTrue(List.of(tags).containsAll(getTagSet("Vice President", "Admin")));
-        assertTrue(List.of(tags).containsAll(getTagSet("Vice President", "Admin", "Admin")));
+        assertTrue(List.of(roles).containsAll(getTagSet("Admin", "Vice President")));
+        assertTrue(List.of(roles).containsAll(getTagSet("Vice President", "Admin")));
+        assertTrue(List.of(roles).containsAll(getTagSet("Vice President", "Admin", "Admin")));
     }
 
     @Test
