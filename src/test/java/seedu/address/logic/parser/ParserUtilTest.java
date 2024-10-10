@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.ClientStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -28,6 +29,7 @@ public class ParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_PROJECT_STATUS = "unknown";
+    private static final String INVALID_CLIENT_STATUS = "referral";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -37,6 +39,10 @@ public class ParserUtilTest {
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_PROJECT_STATUS = "in progress";
     private static final String VALID_PROJECT_STATUS_2 = "completed";
+    private static final String VALID_CLIENT_STATUS = "active";
+    private static final String VALID_CLIENT_STATUS_2 = "unresponsive";
+    private static final String VALID_CLIENT_STATUS_3 = "potential";
+    private static final String VALID_CLIENT_STATUS_4 = "old";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -216,9 +222,44 @@ public class ParserUtilTest {
 
     @Test
     public void parseProjectStatus_validValueWithWhitespace_returnsTrimmedProjectStatus() throws Exception {
-        String statusWithWhitespace = WHITESPACE + VALID_PROJECT_STATUS_2 + WHITESPACE;
-        ProjectStatus expectedStatus = new ProjectStatus(VALID_PROJECT_STATUS_2);
+        String statusWithWhitespace = WHITESPACE + VALID_PROJECT_STATUS + WHITESPACE;
+        ProjectStatus expectedStatus = new ProjectStatus(VALID_PROJECT_STATUS);
         assertEquals(expectedStatus, ParserUtil.parseProjectStatus(statusWithWhitespace));
+    }
+
+    @Test
+    public void parseClientStatus_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseClientStatus((String) null));
+    }
+
+    @Test
+    public void parseClientStatus_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseClientStatus(INVALID_CLIENT_STATUS));
+    }
+
+    @Test
+    public void parseClientStatus_validValueWithoutWhitespace_returnsClientStatus() throws Exception {
+        ClientStatus expectedStatus = new ClientStatus(VALID_CLIENT_STATUS);
+        assertEquals(expectedStatus, ParserUtil.parseClientStatus(VALID_CLIENT_STATUS));
+    }
+
+    @Test
+    public void parseClientStatus_validValueWithWhitespace_returnsTrimmedClientStatus() throws Exception {
+        String statusWithWhitespace = WHITESPACE + VALID_CLIENT_STATUS_2 + WHITESPACE;
+        ClientStatus expectedStatus = new ClientStatus(VALID_CLIENT_STATUS_2);
+        assertEquals(expectedStatus, ParserUtil.parseClientStatus(statusWithWhitespace));
+
+        String activeStatusWithWhitespace = WHITESPACE + VALID_CLIENT_STATUS + WHITESPACE;
+        ClientStatus expectedActiveStatus = new ClientStatus(VALID_CLIENT_STATUS);
+        assertEquals(expectedActiveStatus, ParserUtil.parseClientStatus(activeStatusWithWhitespace));
+
+        String potentialStatusWithWhitespace = WHITESPACE + VALID_CLIENT_STATUS_3 + WHITESPACE;
+        ClientStatus expectedPotentialStatus = new ClientStatus(VALID_CLIENT_STATUS_3);
+        assertEquals(expectedPotentialStatus, ParserUtil.parseClientStatus(potentialStatusWithWhitespace));
+
+        String oldStatusWithWhitespace = WHITESPACE + VALID_CLIENT_STATUS_4 + WHITESPACE;
+        ClientStatus expectedOldStatus = new ClientStatus(VALID_CLIENT_STATUS_4);
+        assertEquals(expectedOldStatus, ParserUtil.parseClientStatus(oldStatusWithWhitespace));
     }
 
 }
