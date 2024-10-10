@@ -26,7 +26,7 @@ public class GradeList {
      */
     public void addGrade(Grade grade) {
         requireNonNull(grade, "Grade cannot be null");
-        removeGrade(grade.testName); // Remove any existing grade for the test (to allow updating)
+        removeGrade(grade.getTestName()); // Remove any existing grade for the test (to allow updating)
         grades.add(grade);
     }
 
@@ -40,7 +40,7 @@ public class GradeList {
     public Grade getGrade(String testName) {
         requireNonNull(testName);
         for (Grade grade : grades) {
-            if (grade.testName.equalsIgnoreCase(testName)) {
+            if (grade.getTestName().equalsIgnoreCase(testName)) {
                 return grade;
             }
         }
@@ -54,7 +54,7 @@ public class GradeList {
      */
     private void removeGrade(String testName) {
         requireNonNull(testName);
-        grades.removeIf(grade -> grade.testName.equalsIgnoreCase(testName));
+        grades.removeIf(grade -> grade.getTestName().equalsIgnoreCase(testName));
     }
 
     /**
