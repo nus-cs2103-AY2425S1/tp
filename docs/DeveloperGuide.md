@@ -281,7 +281,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: Manage contacts of all stakeholders of a wedding with ease and convenience 
+**Value proposition**: Manage contacts of all stakeholders of a wedding with ease and convenience
 
 
 ### User stories
@@ -416,7 +416,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to list contacts
 2. KnottyPlanner shows a list of contacts
-3. User requests to search for contacts using a specific criteria 
+3. User requests to search for contacts using a specific criteria
 4. KnottyPlanner shows a list of contacts that match the criteria
 
     Use case ends.
@@ -463,7 +463,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3b. The new contact details given are invalid.
 
   * 3b1. KnottyPlanner shows an error message.
-  
+
     Use case resumes at step 2.
 
 
@@ -480,9 +480,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Contact**: An individual or organization associated with wedding planning, such as a client or vendor.
 * **Vendor:**: A service provider for weddings, e.g., caterers, florists, or photographers.
-* **Event Tag:** A label assigned to a contact to associate them with a specific wedding event, can be assigned to 
+* **Event Tag:** A label assigned to a contact to associate them with a specific wedding event, can be assigned to
 multiple contacts involved in the same wedding event.
-* **Priority:** The relative importance of a user story or task, often categorized as must-have, should-have, 
+* **Priority:** The relative importance of a user story or task, often categorized as must-have, should-have,
 or could-have.
 * **Success/Failure Messages:** Feedback provided to the user indicating the outcome of a command
 (e.g., contact successfully added or an error message).
