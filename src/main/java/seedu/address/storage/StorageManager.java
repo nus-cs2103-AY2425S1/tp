@@ -10,6 +10,7 @@ import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.assignment.AssignmentList;
 
 /**
  * Manages storage of AddressBook data in local storage.
@@ -19,13 +20,17 @@ public class StorageManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private AddressBookStorage addressBookStorage;
     private UserPrefsStorage userPrefsStorage;
+    private AssignmentStorage assignmentStorage;
 
     /**
-     * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
+     * Creates a {@code StorageManager} with the given {@code AddressBookStorage}, {@code UserPrefStorage}
+     * and {@code AssignmentStorage}.
      */
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage,
+                          AssignmentStorage assignmentStorage) {
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
+        this.assignmentStorage = assignmentStorage;
     }
 
     // ================ UserPrefs methods ==============================
@@ -75,4 +80,31 @@ public class StorageManager implements Storage {
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
 
+    // ================ Assignments methods ==============================
+    @Override
+    public Path getAssignmentFilePath() {
+        return assignmentStorage.getAssignmentFilePath();
+    }
+
+    @Override
+    public Optional<AssignmentList> readAssignments() throws DataLoadingException {
+        return readAssignments(assignmentStorage.getAssignmentFilePath());
+    }
+
+    @Override
+    public Optional<AssignmentList> readAssignments(Path filePath) throws DataLoadingException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return assignmentStorage.readAssignments(filePath);
+    }
+
+    @Override
+    public void saveAssignments(AssignmentList assignmentList) throws IOException {
+        saveAssignments(assignmentList, assignmentStorage.getAssignmentFilePath());
+    }
+
+    @Override
+    public void saveAssignments(AssignmentList assignmentList, Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        assignmentStorage.saveAssignments(assignmentList, filePath);
+    }
 }
