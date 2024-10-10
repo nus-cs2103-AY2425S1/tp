@@ -2,8 +2,6 @@
 
 ![Ui](docs/images/Ui.png)
 
-###### This is **a sample project for Software Engineering (SE) students**.<br>
-
 ---
 
 ## SupplyCentral
@@ -12,7 +10,6 @@
 It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). 
 If you can type fast, `SupplyCentral` can get your supplier and goods management tasks done faster than traditional GUI apps.
 
-### Example Usage
 - Maintain a of list of suppliers and their contact information
 - Keep track of the goods that you have ordered from each supplier
 
@@ -24,5 +21,4 @@ If you can type fast, `SupplyCentral` can get your supplier and goods management
 For the detailed documentation of this project, see the **[SupplyCentral Product Website](https://ay2425s1-cs2103-f10-1.github.io/tp/)**.
 
 ### Acknowledgements
-* This project is a **part of the se-education.org** initiative. If you would like to contribute code to this project, see [se-education.org](https://se-education.org/#contributing-to-se-edu) for more info.
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
