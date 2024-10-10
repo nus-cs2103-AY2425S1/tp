@@ -7,12 +7,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.AppUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -138,5 +136,29 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses {@code String birthday} into a {@code Birthday}.
+     */
+    public static Birthday parseBirthday(String birthday) throws ParseException {
+        requireNonNull(birthday);
+        String trimmedBirthday = birthday.trim();
+        if (!Birthday.isValidBirthday(trimmedBirthday)) {
+            throw new ParseException(Birthday.MESSAGE_CONSTRAINTS);
+        }
+        return new Birthday(birthday);
+    }
+
+    /**
+     * Parses {@code String appointment} into a {@code Appointment}.
+     */
+    public static Appointment parseAppointment(String appointment) throws ParseException {
+        requireNonNull(appointment);
+        String trimmedAppointment = appointment.trim();
+        if (!Appointment.isValidAppointment(trimmedAppointment)) {
+            throw new ParseException(Appointment.MESSAGE_CONSTRAINTS);
+        }
+        return new Appointment(appointment);
     }
 }
