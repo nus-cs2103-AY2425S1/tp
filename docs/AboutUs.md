@@ -9,51 +9,42 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Nicholas Tang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/nicholast1.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/nicholast1)]
+[[portfolio](team/nicholas.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Role: Documentation
 
-### Jane Doe
+### William Nayar
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/wnayar.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/wnayar)]
+[[portfolio](team/wnayar.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Project Developer
+* Responsibilities: Backend
 
-### Johnny Doe
+### Gabrielle Gianna Tan-Winings
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/gabriellegtw.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/gabriellegtw)] [[portfolio](team/gabriellegtw.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Agarwal Ishan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ishan-agarwal-05.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/ishan-agarwal-05)]
+[[portfolio](team/ishan-agarwal-05.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Testing
+
