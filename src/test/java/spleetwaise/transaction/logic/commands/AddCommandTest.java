@@ -2,17 +2,17 @@ package spleetwaise.transaction.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
 import spleetwaise.address.logic.commands.CommandResult;
-import spleetwaise.address.logic.commands.exceptions.CommandException;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.testutil.Assert;
 import spleetwaise.address.testutil.TypicalPersons;
+import spleetwaise.transaction.logic.commands.exceptions.CommandException;
 import spleetwaise.transaction.model.ModelManager;
 import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Date;
@@ -21,12 +21,11 @@ import spleetwaise.transaction.model.transaction.Transaction;
 
 public class AddCommandTest {
 
-    private static Person testPerson = TypicalPersons.ALICE;
-    private static Amount testAmount = new Amount("+1.23");
-    private static Description testDescription = new Description("description");
-    private static Date testDate = new Date("01012024");
-
-    private static Transaction testTxn = new Transaction(testPerson, testAmount, testDescription, testDate);
+    private static final Person testPerson = TypicalPersons.ALICE;
+    private static final Amount testAmount = new Amount("+1.23");
+    private static final Description testDescription = new Description("description");
+    private static final Date testDate = new Date("01012024");
+    private static final Transaction testTxn = new Transaction(testPerson, testAmount, testDescription, testDate);
 
     @Test
     public void constructor_null_exceptionThrown() {
@@ -62,8 +61,8 @@ public class AddCommandTest {
         AddCommand cmd1 = new AddCommand(testTxn);
         AddCommand cmd2 = new AddCommand(testTxn);
 
-        assertTrue(cmd1.equals(cmd1));
-        assertTrue(cmd1.equals(cmd2));
+        assertEquals(cmd1, cmd1);
+        assertEquals(cmd1, cmd2);
     }
 
     @Test
@@ -72,14 +71,14 @@ public class AddCommandTest {
         Transaction testTxn2 = new Transaction(TypicalPersons.BOB, testAmount, testDescription, testDate);
         AddCommand cmd2 = new AddCommand(testTxn2);
 
-        assertFalse(cmd1.equals(cmd2));
+        assertNotEquals(cmd1, cmd2);
     }
 
     @Test
     public void equals_null_returnsFalse() {
         AddCommand cmd1 = new AddCommand(testTxn);
 
-        assertFalse(cmd1.equals(null));
+        assertNotEquals(null, cmd1);
     }
 
 }
