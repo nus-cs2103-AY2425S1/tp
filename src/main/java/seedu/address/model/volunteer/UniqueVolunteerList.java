@@ -1,16 +1,15 @@
 package seedu.address.model.volunteer;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import seedu.address.model.volunteer.exceptions.DuplicateVolunteerException;
+import seedu.address.model.volunteer.exceptions.VolunteerNotFoundException;
 
 import java.util.Iterator;
 import java.util.List;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import seedu.address.model.volunteer.Volunteer;
-import seedu.address.model.volunteer.exceptions.DuplicateVolunteerException;
-import seedu.address.model.volunteer.exceptions.VolunteerNotFoundException;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * A list of volunteer that enforces uniqueness between its elements and does not allow nulls.
