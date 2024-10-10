@@ -10,9 +10,6 @@ import static seedu.address.logic.commands.CommandTestUtil.PARENT_EMAIL_DESC_AMY
 import static seedu.address.logic.commands.CommandTestUtil.PARENT_NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PARENT_PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PARENT_EMAIL_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PARENT_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PARENT_PHONE_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.AMY;
 
