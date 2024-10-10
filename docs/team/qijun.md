@@ -3,7 +3,7 @@
     title: "Ang Qi Jun's Project Portfolio Page"
 ---
 
-## Ang Qi Jun 
+## Ang Qi Jun
 
 Welcome to my portfolio.
 

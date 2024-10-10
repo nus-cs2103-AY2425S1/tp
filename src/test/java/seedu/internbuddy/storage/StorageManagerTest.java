@@ -2,7 +2,7 @@ package seedu.internbuddy.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.internbuddy.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.internbuddy.testutil.TypicalCompanies.getTypicalAddressBook;
 
 import java.nio.file.Path;
 
