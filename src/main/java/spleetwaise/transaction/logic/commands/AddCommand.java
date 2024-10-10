@@ -8,7 +8,7 @@ import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 
 import spleetwaise.address.commons.util.ToStringBuilder;
 import spleetwaise.address.logic.commands.CommandResult;
-import spleetwaise.address.logic.commands.exceptions.CommandException;
+import spleetwaise.transaction.logic.commands.exceptions.CommandException;
 import spleetwaise.transaction.model.Model;
 import spleetwaise.transaction.model.transaction.Transaction;
 
@@ -32,17 +32,11 @@ public class AddCommand extends Command {
     /**
      * The message usage string that explains how to use this command.
      */
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add a new transaction.\n"
-            + "Parameters: "
-            + PREFIX_PHONE + "CONTACT "
-            + PREFIX_AMOUNT + "AMOUNT "
-            + PREFIX_DESCRIPTION + "DESCRIPTION "
-            + "[" + PREFIX_DATE + "DATE ]\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_PHONE + "88888888 "
-            + PREFIX_AMOUNT + "10.00 "
-            + PREFIX_DESCRIPTION + "Paid John for lunch"
-            + PREFIX_DATE + "23012024 ";
+    public static final String MESSAGE_USAGE =
+        COMMAND_WORD + ": Add a new transaction.\n" + "Parameters: " + PREFIX_PHONE + "CONTACT " + PREFIX_AMOUNT
+            + "AMOUNT " + PREFIX_DESCRIPTION + "DESCRIPTION " + "[" + PREFIX_DATE + "DATE ]\n" + "Example: "
+            + COMMAND_WORD + " " + PREFIX_PHONE + "88888888 " + PREFIX_AMOUNT + "10.00 " + PREFIX_DESCRIPTION
+            + "Paid John for lunch" + PREFIX_DATE + "23012024 ";
 
 
     private final Transaction transactionToAdd;
@@ -81,19 +75,16 @@ public class AddCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof AddCommand)) {
+        if (!(other instanceof AddCommand otherAddCommand)) {
             return false;
         }
 
-        AddCommand otherAddCommand = (AddCommand) other;
         return transactionToAdd.equals(otherAddCommand.transactionToAdd);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("txnToAdd", transactionToAdd)
-                .toString();
+        return new ToStringBuilder(this).add("txnToAdd", transactionToAdd).toString();
     }
 
 }
