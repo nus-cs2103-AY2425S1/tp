@@ -9,7 +9,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.event.Event;
 
 /**
  * Cancels an event identified using it's displayed index from the address book.
@@ -34,18 +34,15 @@ public class CancelCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        //TODO: CHANGE THIS LATER FOR EVENT
-        // MODEL NEEDS TO HAVE GETFILTEREDEVENTLIST()
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Event> lastShownList = model.getFilteredEventList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
 
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        //TODO: MODEL NEEDS TO HAVE DELETE PERSON
-        model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+        Event eventToDelete = lastShownList.get(targetIndex.getZeroBased());
+        model.deleteEvent(eventToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.formatEvent(eventToDelete)));
     }
 
     @Override
