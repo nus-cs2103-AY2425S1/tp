@@ -47,6 +47,12 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_add_alt() throws Exception {
+        assertTrue(parser.parseCommand(ClearCommand.ALT_COMMAND_WORD) instanceof ClearCommand);
+        assertTrue(parser.parseCommand(ClearCommand.ALT_COMMAND_WORD + " 3") instanceof ClearCommand);
+    }
+
+    @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
