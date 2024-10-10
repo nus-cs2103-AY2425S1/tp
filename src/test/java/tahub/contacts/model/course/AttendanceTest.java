@@ -142,7 +142,7 @@ public class AttendanceTest {
             }
         }
     }
-    
+
     // toString tests
     @Nested
     @DisplayName("toString")
