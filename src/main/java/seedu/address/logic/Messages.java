@@ -57,7 +57,7 @@ public class Messages {
                 .append("; Venue: ")
                 .append(event.getVenue())
                 .append("; Point of Contact: ")
-                .append(event.getMainContact());
+                .append(event.getCelebrity());
         return builder.toString();
     }
 

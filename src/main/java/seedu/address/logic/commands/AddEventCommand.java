@@ -18,12 +18,12 @@ public class AddEventCommand extends AddCommand {
             + PREFIX_EVENT_NAME + "NAME "
             + PREFIX_EVENT_TIME + "TIME "
             + PREFIX_EVENT_VENUE + "VENUE "
-            + PREFIX_EVENT_CONTACT + "CONTACT "
+            + PREFIX_EVENT_CELEBRITY + "CELEBRITY "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_EVENT_NAME + "Oscars"
             + PREFIX_EVENT_TIME + "Sep 22 2024 1800 to 2200 "
             + PREFIX_EVENT_VENUE + "Hollywood "
-            + PREFIX_EVENT_CONTACT + "Sydney Sweeney ";
+            + PREFIX_EVENT_CELEBRITY + "Sydney Sweeney ";
 
     public static final String MESSAGE_SUCCESS = "New Event added: %1$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event  already exists in the address book";

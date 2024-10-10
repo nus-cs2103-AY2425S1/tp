@@ -36,7 +36,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String userInput) throws ParseException {
         ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(userInput,
             PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
-                PREFIX_EVENT_NAME, PREFIX_EVENT_TIME, PREFIX_EVENT_VENUE, PREFIX_EVENT_CONTACT);
+                PREFIX_EVENT_NAME, PREFIX_EVENT_TIME, PREFIX_EVENT_VENUE, PREFIX_EVENT_CELEBRITY);
 
         if (isEventCommand(argumentMultimap)) {
             return parseEventCommand(argumentMultimap);
@@ -80,16 +80,16 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @throws ParseException
      */
     public AddEventCommand parseEventCommand(ArgumentMultimap argMultimap) throws ParseException {
-        if (!arePrefixesPresent(argMultimap, PREFIX_EVENT_NAME, PREFIX_EVENT_TIME, PREFIX_EVENT_VENUE, PREFIX_EVENT_CONTACT)
+        if (!arePrefixesPresent(argMultimap, PREFIX_EVENT_NAME, PREFIX_EVENT_TIME, PREFIX_EVENT_VENUE, PREFIX_EVENT_CELEBRITY)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddContactCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_EVENT_NAME, PREFIX_EVENT_TIME, PREFIX_EVENT_VENUE, PREFIX_EVENT_CONTACT);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_EVENT_NAME, PREFIX_EVENT_TIME, PREFIX_EVENT_VENUE, PREFIX_EVENT_CELEBRITY);
         EventName name = ParserUtil.parseEventName(argMultimap.getValue(PREFIX_EVENT_NAME).get());
         Time time = ParserUtil.parseTime(argMultimap.getValue(PREFIX_EVENT_TIME).get());
         Venue venue = ParserUtil.parseVenue((argMultimap.getValue(PREFIX_EVENT_VENUE)).get());
-        Person celebrity = parsePerson(argMultimap.getValue(PREFIX_EVENT_CONTACT).get());
+        Person celebrity = parseCelebrity(argMultimap.getValue(PREFIX_EVENT_CELEBRITY).get());
 
         return new AddEventCommand(new Event(name, time, venue, celebrity));
     }
@@ -100,7 +100,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @return Person object
      * @throws ParseException
      */
-    public Person parsePerson(String details) throws ParseException {
+    public Person parseCelebrity(String details) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(details,
                 PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
 
@@ -136,7 +136,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @return boolean
      */
     private static boolean isEventCommand(ArgumentMultimap argMultimap) {
-        return arePrefixesPresent(argMultimap, PREFIX_EVENT_NAME, PREFIX_EVENT_TIME, PREFIX_EVENT_VENUE, PREFIX_EVENT_CONTACT);
+        return arePrefixesPresent(argMultimap, PREFIX_EVENT_NAME, PREFIX_EVENT_TIME, PREFIX_EVENT_VENUE, PREFIX_EVENT_CELEBRITY);
     }
 
     /**
