@@ -18,6 +18,8 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagName;
+import seedu.address.model.wedding.Wedding;
+import seedu.address.model.wedding.WeddingName;
 
 public class UntagCommandTest {
 
@@ -42,7 +44,8 @@ public class UntagCommandTest {
                 personToEdit.getPhone(),
                 personToEdit.getEmail(),
                 personToEdit.getAddress(),
-                updatedTags);
+                updatedTags,
+                personToEdit.getWeddings());
         expectedModel.setPerson(personToEdit, editedPerson);
 
         CommandTestUtil.assertCommandSuccess(untagCommand, model, expectedMessage, expectedModel);
@@ -56,7 +59,9 @@ public class UntagCommandTest {
                 new seedu.address.model.person.Phone("99999999"),
                 new seedu.address.model.person.Email("test@example.com"),
                 new seedu.address.model.person.Address("123, Test Street"),
-                new HashSet<>(Arrays.asList(new Tag(new TagName("friends")), new Tag(new TagName("owesMoney"))))
+                new HashSet<>(Arrays.asList(new Tag(new TagName("friends")), new Tag(new TagName("owesMoney")))),
+                new HashSet<>(Arrays.asList(new Wedding(new WeddingName("Jiazhen's Wedding")),
+                        new Wedding(new WeddingName("Wedding 29th August"))))
         );
         model.setPerson(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), personWithTags);
         HashSet<Tag> tagsToRemove = new HashSet<>(Arrays.asList(new Tag(new TagName("friends")),
@@ -74,7 +79,8 @@ public class UntagCommandTest {
                 personWithTags.getPhone(),
                 personWithTags.getEmail(),
                 personWithTags.getAddress(),
-                updatedTags);
+                updatedTags,
+                personWithTags.getWeddings());
         expectedModel.setPerson(personWithTags, editedPerson);
 
         CommandTestUtil.assertCommandSuccess(untagCommand, model, expectedMessage, expectedModel);
@@ -120,7 +126,9 @@ public class UntagCommandTest {
                 new seedu.address.model.person.Phone("99999999"),
                 new seedu.address.model.person.Email("test@example.com"),
                 new seedu.address.model.person.Address("123, Test Street"),
-                new HashSet<>() // No tags
+                new HashSet<>(), // No tags
+                new HashSet<>(Arrays.asList(new Wedding(new WeddingName("Jiazhen's Wedding")),
+                        new Wedding(new WeddingName("Wedding 29th August"))))
         );
 
         model.setPerson(model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased()), personWithoutTags);
