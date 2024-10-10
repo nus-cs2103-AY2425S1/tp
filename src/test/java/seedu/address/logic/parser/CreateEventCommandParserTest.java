@@ -9,10 +9,12 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.CreateEventCommand;
 import seedu.address.model.event.Date;
-import seedu.address.model.event.Name;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.Name;
+
 
 public class CreateEventCommandParserTest {
 
@@ -60,8 +62,8 @@ public class CreateEventCommandParserTest {
                 + "10 October 2024", Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
-        assertParseFailure(parser, PREAMBLE_NON_EMPTY + PREFIX_NAME + "Zoo Excursion" + " " +
-                        PREFIX_DATE + "10 October 2024",
+        assertParseFailure(parser,
+                PREAMBLE_NON_EMPTY + PREFIX_NAME + "Zoo Excursion" + " " + PREFIX_DATE + "10 October 2024",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateEventCommand.MESSAGE_USAGE));
     }
 }

@@ -4,13 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalVendors.ALICE;
 import static seedu.address.testutil.TypicalVendors.getTypicalAddressBook;
 
-import java.util.Arrays;
-
 import org.junit.jupiter.api.Test;
-import seedu.address.logic.Messages;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -18,8 +15,6 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.event.Date;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.Name;
-import seedu.address.model.vendor.Vendor;
-import seedu.address.testutil.VendorBuilder;
 
 public class CreateEventCommandTest {
     private Event excursionEvent = new Event(new Name("Zoo Excursion"), new Date("2024-10-10"));
