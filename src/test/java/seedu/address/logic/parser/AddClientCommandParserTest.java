@@ -36,7 +36,7 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.ClientAddCommand;
+import seedu.address.logic.commands.AddClientCommand;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
@@ -44,7 +44,7 @@ import seedu.address.model.client.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
-public class ClientAddCommandParserTest {
+public class AddClientCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
     @Test
@@ -53,19 +53,19 @@ public class ClientAddCommandParserTest {
 
         // whitespace only preamble
 //        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-//                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new ClientAddCommand(expectedClient));
+//                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddClientCommand(expectedClient));
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + TAG_DESC_FRIEND, new ClientAddCommand(expectedClient));
+                + TAG_DESC_FRIEND, new AddClientCommand(expectedClient));
 
         // multiple tags - all accepted
         Client expectedClientMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
 //        assertParseSuccess(parser,
 //                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-//                new ClientAddCommand(expectedClientMultipleTags));
+//                new AddClientCommand(expectedClientMultipleTags));
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                new ClientAddCommand(expectedClientMultipleTags));
+                new AddClientCommand(expectedClientMultipleTags));
     }
 
     @Test
@@ -143,14 +143,14 @@ public class ClientAddCommandParserTest {
         // zero tags
         Client expectedClient = new PersonBuilder(AMY).withTags().build();
 //        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
-//                new ClientAddCommand(expectedClient));
+//                new AddClientCommand(expectedClient));
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY,
-                new ClientAddCommand(expectedClient));
+                new AddClientCommand(expectedClient));
     }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClientAddCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddClientCommand.MESSAGE_USAGE);
 
         // missing name prefix
 //        assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
@@ -218,9 +218,9 @@ public class ClientAddCommandParserTest {
         // non-empty preamble
 //        assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
 //                + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-//                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClientAddCommand.MESSAGE_USAGE));
+//                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddClientCommand.MESSAGE_USAGE));
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClientAddCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddClientCommand.MESSAGE_USAGE));
     }
 }

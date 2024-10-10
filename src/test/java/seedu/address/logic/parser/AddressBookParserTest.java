@@ -14,8 +14,8 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.*;
-import seedu.address.logic.commands.ClientAddCommand;
-import seedu.address.logic.commands.ClientEditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.AddClientCommand;
+import seedu.address.logic.commands.EditClientCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.NameContainsKeywordsPredicate;
@@ -30,8 +30,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Client client = new PersonBuilder().build();
-        ClientAddCommand command = (ClientAddCommand) parser.parseCommand(PersonUtil.getAddCommand(client));
-        assertEquals(new ClientAddCommand(client), command);
+        AddClientCommand command = (AddClientCommand) parser.parseCommand(PersonUtil.getAddCommand(client));
+        assertEquals(new AddClientCommand(client), command);
     }
 
     @Test
@@ -51,9 +51,9 @@ public class AddressBookParserTest {
     public void parseCommand_edit() throws Exception {
         Client client = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(client).build();
-        ClientEditCommand command = (ClientEditCommand) parser.parseCommand(ClientEditCommand.COMMAND_WORD + " "
+        EditClientCommand command = (EditClientCommand) parser.parseCommand(EditClientCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new ClientEditCommand(INDEX_FIRST_PERSON, descriptor), command);
+        assertEquals(new EditClientCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
     @Test

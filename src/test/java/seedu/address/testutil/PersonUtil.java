@@ -8,8 +8,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 
-import seedu.address.logic.commands.ClientAddCommand;
-import seedu.address.logic.commands.ClientEditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.AddClientCommand;
+import seedu.address.logic.commands.EditClientCommand.EditPersonDescriptor;
 import seedu.address.model.client.Client;
 import seedu.address.model.tag.Tag;
 
@@ -22,7 +22,7 @@ public class PersonUtil {
      * Returns an add command string for adding the {@code client}.
      */
     public static String getAddCommand(Client client) {
-        return ClientAddCommand.COMMAND_WORD + " " + getPersonDetails(client);
+        return AddClientCommand.COMMAND_WORD + " " + getPersonDetails(client);
     }
 
     /**

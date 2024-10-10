@@ -16,7 +16,7 @@ import seedu.address.model.client.Client;
 /**
  * Adds a client to the address book.
  */
-public class ClientAddCommand extends Command {
+public class AddClientCommand extends Command {
 
     public static final String COMMAND_WORD = "cadd";
 
@@ -37,9 +37,9 @@ public class ClientAddCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This client already exists in the address book";
     private final Client toAdd;
     /**
-     * Creates an ClientAddCommand to add the specified {@code Client}
+     * Creates an AddClientCommand to add the specified {@code Client}
      */
-    public ClientAddCommand(Client client) {
+    public AddClientCommand(Client client) {
         requireNonNull(client);
         toAdd = client;
     }
@@ -63,12 +63,12 @@ public class ClientAddCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ClientAddCommand)) {
+        if (!(other instanceof AddClientCommand)) {
             return false;
         }
 
-        ClientAddCommand otherClientAddCommand = (ClientAddCommand) other;
-        return toAdd.equals(otherClientAddCommand.toAdd);
+        AddClientCommand otherAddClientCommand = (AddClientCommand) other;
+        return toAdd.equals(otherAddClientCommand.toAdd);
     }
 
     @Override
