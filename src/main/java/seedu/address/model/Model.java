@@ -85,6 +85,11 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+    void savePersonToDelete(Person person);
+    boolean checkRestorable();
+    void makeNotRestorable();
+    Person getLastDeletedPerson();
+
     /**
      * Sorts the filter of the filtered person list in alphabetical order
      */
