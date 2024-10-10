@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.nio.ByteBuffer;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashMap;
@@ -135,4 +136,12 @@ public class Person {
                 .toString();
     }
 
+    public ByteBuffer getAttendanceRecords() {
+        ByteBuffer buffer = ByteBuffer.allocate(attendanceRecords.size() * 5);
+        for (Map.Entry<LocalDate, Attendance> entry : attendanceRecords.entrySet()) {
+            buffer.putLong(entry.getKey().toEpochDay());
+            buffer.put(entry.getValue().toString().getBytes());
+        }
+        return buffer;
+    }
 }

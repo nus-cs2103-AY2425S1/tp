@@ -6,7 +6,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.student.Attendance;
+import seedu.address.model.person.Attendance;
 
 /**
  * Marks the attendance of a student for a specific date.
@@ -24,6 +24,9 @@ public class MarkAttendanceCommand extends Command {
     private final Name name;
     private final LocalDate date;
     private final Attendance attendance;
+
+    public static final String MESSAGE_SUCCESS = "Attendance marked: %1$s is %2$s on %3$s";
+
 
     /**
      * Creates a MarkAttendanceCommand to mark the attendance of the specified student.
@@ -49,6 +52,6 @@ public class MarkAttendanceCommand extends Command {
 
         // Mark attendance
         student.markAttendance(date, attendance.value);
-        return new CommandResult("Marked " + name + "'s attendance as " + attendance + " on " + date);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, name, attendance.value, date));
     }
 }
