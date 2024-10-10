@@ -12,11 +12,11 @@ import java.util.stream.Stream;
 
 import seedu.internbuddy.logic.commands.AddCommand;
 import seedu.internbuddy.logic.parser.exceptions.ParseException;
-import seedu.internbuddy.model.person.Address;
-import seedu.internbuddy.model.person.Email;
-import seedu.internbuddy.model.person.Name;
-import seedu.internbuddy.model.person.Person;
-import seedu.internbuddy.model.person.Phone;
+import seedu.internbuddy.model.company.Address;
+import seedu.internbuddy.model.company.Company;
+import seedu.internbuddy.model.company.Email;
+import seedu.internbuddy.model.company.Name;
+import seedu.internbuddy.model.company.Phone;
 import seedu.internbuddy.model.tag.Tag;
 
 /**
@@ -45,9 +45,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, tagList);
+        Company company = new Company(name, phone, email, address, tagList);
 
-        return new AddCommand(person);
+        return new AddCommand(company);
     }
 
     /**
