@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.concurrent.TimeoutException;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.api.FxToolkit;
 
@@ -18,23 +17,19 @@ public class ContactListTest {
 
     private ObservableList<Person> personList;
 
-    @BeforeEach
-    void setUpStage() throws TimeoutException {
-        // Set a dummy stage such that our JavaFx controller can operate
+    @Test
+    void testComponentNotNull() throws TimeoutException {
         FxToolkit.registerPrimaryStage();
         this.personList = FXCollections.observableArrayList(TypicalPersons.getTypicalPersons());
-    }
-
-    @Test
-    void testComponentNotNull() {
 
         assertDoesNotThrow(() -> new ContactList(personList),
             "We should not be getting an exception");
     }
 
     @Test
-    void testWithEmptyPersonList() {
-
+    void testWithEmptyPersonList() throws TimeoutException {
+        FxToolkit.registerPrimaryStage();
+        this.personList = FXCollections.observableArrayList(TypicalPersons.getTypicalPersons());
         personList.clear();
 
         assertDoesNotThrow(() -> new ContactList(personList),
@@ -42,8 +37,9 @@ public class ContactListTest {
     }
 
     @Test
-    void testGetPersonListPanel() {
-
+    void testGetPersonListPanel() throws TimeoutException {
+        FxToolkit.registerPrimaryStage();
+        this.personList = FXCollections.observableArrayList(TypicalPersons.getTypicalPersons());
         ContactList contactList = new ContactList(personList);
 
         assertNotNull(contactList.getPersonListPanel(),
