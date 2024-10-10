@@ -16,7 +16,6 @@ public interface HireMeStorage {
      */
     Path getHireMeFilePath();
 
-
     /**
      * Returns HireMe data as a {@link ReadOnlyHireMe}.
      * Returns {@code Optional.empty()} if storage file is not found.
