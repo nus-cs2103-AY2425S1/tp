@@ -10,6 +10,11 @@ import java.util.function.Predicate;
 public class StudentIdMatchesPredicate implements Predicate<Person> {
     private final String studentId;
 
+    /**
+     * Constructs a {@code StudentIdMatchesPredicate} with the given student ID.
+     *
+     * @param studentId The student ID to match.
+     */
     public StudentIdMatchesPredicate(String studentId) {
         // Clean and standardize the input student ID
         this.studentId = studentId.trim().replaceAll(" ", "").toUpperCase();

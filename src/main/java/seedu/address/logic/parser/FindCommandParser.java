@@ -30,16 +30,16 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     @Override
     public FindCommand parse(String args) throws ParseException {
-//        String trimmedArgs = args.trim();
-//        if (trimmedArgs.isEmpty()) {
-//            throw new ParseException(
-//                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-//        }
-//
-//        String[] nameKeywords = trimmedArgs.split("\\s+");
-//
-//        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
-//    }
+        //        String trimmedArgs = args.trim();
+        //        if (trimmedArgs.isEmpty()) {
+        //            throw new ParseException(
+        //                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        //        }
+        //
+        //        String[] nameKeywords = trimmedArgs.split("\\s+");
+        //
+        //        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        //    }
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_STUDENT_ID);
 
@@ -90,7 +90,8 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @param prefixes         The prefixes to verify.
      * @throws ParseException If any prefix is duplicated.
      */
-    private void verifyNoDuplicatePrefixes(ArgumentMultimap argumentMultimap, Prefix... prefixes) throws ParseException {
+    private void verifyNoDuplicatePrefixes(ArgumentMultimap argumentMultimap, Prefix... prefixes) throws
+            ParseException {
         for (Prefix prefix : prefixes) {
             if (argumentMultimap.getAllValues(prefix).size() > 1) {
                 throw new ParseException(String.format(Messages.MESSAGE_DUPLICATE_PREFIX, prefix.getPrefix()));
