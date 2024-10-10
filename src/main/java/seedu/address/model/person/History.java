@@ -3,6 +3,8 @@ package seedu.address.model.person;
 import java.time.LocalDateTime;
 import java.util.TreeMap;
 
+import seedu.address.commons.exceptions.AppNotFoundException;
+
 /**
  * Represents a medical history entry associated with a doctor.
  * This class will store details of the appointments or medical interactions.
@@ -43,9 +45,14 @@ public class History {
      * @param doctorId the doctor that the appointment is scheduled under
      *
      * @return all remarks of that appointment which could include the patient's condition and treatment.
+     * @throws AppNotFoundException if the appointment with the given details cannot be found.
      */
-    public String getOneAppointmentDetail(LocalDateTime date, int doctorId) {
-        return appointmentHistory.get(date).get(doctorId);
+    public String getOneAppointmentDetail(LocalDateTime date, int doctorId) throws AppNotFoundException {
+        TreeMap<Integer, String> appointmentDetails = appointmentHistory.get(date);
+        if (appointmentDetails == null || !appointmentDetails.containsKey(doctorId)) {
+            throw new AppNotFoundException("No such appointment is found.");
+        }
+        return appointmentDetails.get(doctorId);
     }
 
     /**
@@ -54,6 +61,8 @@ public class History {
      * @return all the past appointments of a patient
      */
     public TreeMap<LocalDateTime, TreeMap<Integer, String>> getAllAppointment() {
-        return appointmentHistory;
+        return new TreeMap<>(appointmentHistory);
     }
+
+
 }
