@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeoutException;
 
@@ -39,10 +41,8 @@ public class ContactListTest {
     void testComponentNotNull() throws TimeoutException, InterruptedException {
 
         this.personList = FXCollections.observableArrayList(TypicalPersons.getTypicalPersons());
-        ContactList x = new ContactList(this.personList);
 
-        // assertDoesNotThrow(() -> ersonList),
-        //     "We should not be getting an exception");
+        assertDoesNotThrow(() -> new ContactList(this.personList));
     }
 
     @AfterAll
