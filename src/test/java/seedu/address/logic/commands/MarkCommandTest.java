@@ -74,6 +74,7 @@ public class MarkCommandTest {
         newTutorials.add(tutorialToBeAdded);
         Person expectedEditedPerson = new Person(
                 personToEdit.getName(),
+                personToEdit.getStudentId(),
                 personToEdit.getPhone(),
                 personToEdit.getEmail(),
                 personToEdit.getAddress(),

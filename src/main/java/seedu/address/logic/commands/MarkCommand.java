@@ -55,6 +55,7 @@ public class MarkCommand extends Command {
         newTutorials.add(tutorial);
         Person editedPerson = new Person(
                 personToEdit.getName(),
+                personToEdit.getStudentId(),
                 personToEdit.getPhone(),
                 personToEdit.getEmail(),
                 personToEdit.getAddress(),
