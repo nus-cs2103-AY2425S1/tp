@@ -371,7 +371,7 @@ Use case ends.
     * 3a1. System display an error message.
 
       Use case ends.
-  
+
 * 4a. User does not confirm deletion
 
     * 4a1. System display a message indicating that the deletion was canceled.

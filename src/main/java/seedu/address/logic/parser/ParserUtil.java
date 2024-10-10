@@ -127,11 +127,11 @@ public class ParserUtil {
         String trimmedNric = nric.trim();
 
         // To implement the checker later.
-        /*
+
         if (!StringUtil.isValidNric(trimmedNric)) {
             throw new ParseException("NRIC is invalid");
         }
-        */
+
         return trimmedNric;
     }
 }
