@@ -109,7 +109,8 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Note updatedNote = editPersonDescriptor.getNote().orElse(personToEdit.getNote());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedStatus, updatedNote, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
+                updatedStatus, updatedNote, updatedTags);
     }
 
     @Override
@@ -208,11 +209,17 @@ public class EditCommand extends Command {
             this.status = status;
         }
 
-        public Optional<Status> getStatus() { return Optional.ofNullable(status); }
+        public Optional<Status> getStatus() {
+            return Optional.ofNullable(status);
+        }
 
-        public void setNote(Note note) { this.note = note;}
+        public void setNote(Note note) {
+            this.note = note;
+        }
 
-        public Optional<Note> getNote() { return Optional.ofNullable(note); }
+        public Optional<Note> getNote() {
+            return Optional.ofNullable(note);
+        }
 
         /**
          * Sets {@code tags} to this object's {@code tags}.
