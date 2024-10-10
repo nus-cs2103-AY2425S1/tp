@@ -29,13 +29,14 @@ public class Person {
     private final Gender gender;
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Appointment> appointments = new HashSet<>();
+    private final MedCon medCon;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Nric nric, Address address, DateOfBirth dateOfBirth,
-                  Gender gender, Set<Tag> tags, Set<Appointment> appointments) {
-        requireAllNonNull(name, phone, email, nric, address, dateOfBirth, gender, tags, appointments);
+                  Gender gender, Set<Tag> tags, Set<Appointment> appointments, MedCon medCon) {
+        requireAllNonNull(name, phone, email, nric, address, dateOfBirth, gender, tags, appointments, medCon);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -45,6 +46,7 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
         this.appointments.addAll(appointments);
+        this.medCon = medCon;
     }
 
 
@@ -93,6 +95,10 @@ public class Person {
         return Collections.unmodifiableSet(appointments);
     }
 
+    public MedCon getMedCon() {
+        return medCon;
+    }
+
     /**
      * Returns true if both persons have the same Nric.
      * This defines a weaker notion of equality between two persons.
@@ -130,13 +136,14 @@ public class Person {
                 && gender.equals(otherPerson.gender)
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
-                && appointments.equals(otherPerson.appointments);
+                && appointments.equals(otherPerson.appointments)
+                && medCon.equals(otherPerson.medCon);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, nric, dateOfBirth, gender, address, tags, appointments);
+        return Objects.hash(name, phone, email, nric, dateOfBirth, gender, address, tags, appointments, medCon);
     }
 
     @Override
@@ -151,6 +158,7 @@ public class Person {
                 .add("address", address)
                 .add("tags", tags)
                 .add("appointments", appointments)
+                .add("medical conditions", medCon)
                 .toString();
     }
 

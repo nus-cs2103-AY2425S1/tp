@@ -34,6 +34,7 @@ import seedu.address.model.person.Nric;
 import seedu.address.model.person.NricMatchesPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.MedCon;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -115,9 +116,11 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Set<Appointment> updatedAppointments = editPersonDescriptor.getAppointments()
                                                                    .orElse(personToEdit.getAppointments());
+        MedCon updatedMedCon = personToEdit.getMedCon();
+
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedNric, updatedAddress, updatedDateOfBirth,
-                updatedGender, updatedTags, updatedAppointments);
+                updatedGender, updatedTags, updatedAppointments, updatedMedCon);
     }
 
     @Override

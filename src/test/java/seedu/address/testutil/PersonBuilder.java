@@ -12,6 +12,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.MedCon;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -27,6 +28,7 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_MEDCON = "";
 
     private Name name;
     private Nric nric;
@@ -37,6 +39,7 @@ public class PersonBuilder {
     private Address address;
     private Set<Tag> tags;
     private Set<Appointment> appointments;
+    private MedCon medCon;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -51,6 +54,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         appointments = new HashSet<>();
+        medCon = new MedCon(DEFAULT_MEDCON);
     }
 
     /**
@@ -141,8 +145,14 @@ public class PersonBuilder {
         return this;
     }
 
+    public PersonBuilder withMedCon(String medCon) {
+        this.medCon = new MedCon(medCon);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, nric, address, dob, gender, tags, appointments);
+        return new Person(name, phone, email, nric, address, dob, gender, tags, appointments,
+                medCon);
     }
 
 }
