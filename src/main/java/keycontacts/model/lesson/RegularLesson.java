@@ -14,8 +14,6 @@ import keycontacts.commons.util.ToStringBuilder;
  */
 public class RegularLesson extends Lesson {
 
-    public static final RegularLesson DEFAULT_REGULAR_LESSON = null;
-
     private final Day lessonDay;
 
     /**

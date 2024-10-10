@@ -26,7 +26,7 @@ public class ScheduleCommand extends Command {
             + ": Schedules the regular lesson for the student identified by the index number"
             + " used in the displayed student list. This will overwrite the student's existing regular lesson,"
             + " if it exists. The scheduled lesson cannot clash with any existing lessons for other students.\n"
-            + " Parameters: INDEX (must be a positive integer) "
+            + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_DAY + "DAY "
             + PREFIX_START_TIME + "START_TIME "
             + PREFIX_END_TIME + "END_TIME\n"

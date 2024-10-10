@@ -32,7 +32,7 @@ public class Student {
     private final RegularLesson regularLesson;
 
     /**
-     * Constructor for a new student. Uses default student associations.
+     * Constructor for a new student. Uses default associations.
      * Every field must be present and not null.
      */
     public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
@@ -42,7 +42,7 @@ public class Student {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.regularLesson = RegularLesson.DEFAULT_REGULAR_LESSON;
+        this.regularLesson = null;
     }
 
     /**
