@@ -89,11 +89,11 @@ public class AddressBookParserTest {
         final String name = "John Doe";
         final String phone = "91234567";
 
-        AddEmergencyContactNumberCommand expected = new AddEmergencyContactNumberCommand(
+        EmergencyPhoneCommand expected = new EmergencyPhoneCommand(
                 new Name(name), new Phone(phone));
 
-        AddEmergencyContactNumberCommand command = (AddEmergencyContactNumberCommand) parser.parseCommand(
-                AddEmergencyContactNumberCommand.COMMAND_WORD + " "
+        EmergencyPhoneCommand command = (EmergencyPhoneCommand) parser.parseCommand(
+                EmergencyPhoneCommand.COMMAND_WORD + " "
                 + "n/" + name + " "
                 + "en/" + phone);
 

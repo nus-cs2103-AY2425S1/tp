@@ -10,7 +10,7 @@ import seedu.address.model.person.Phone;
 /**
  * Changes the emergency contact number of an existing student in the address book
  */
-public class AddEmergencyContactNumberCommand extends Command {
+public class EmergencyPhoneCommand extends Command {
 
     public static final String COMMAND_WORD = "addEmergencyContactNumber";
 
@@ -29,7 +29,7 @@ public class AddEmergencyContactNumberCommand extends Command {
      * @param name name of the person in the filtered person list to edit the emergency contact phone
      * @param phone emergency contact phone of the person to be updated to
      */
-    public AddEmergencyContactNumberCommand(Name name, Phone phone) {
+    public EmergencyPhoneCommand(Name name, Phone phone) {
         requireAllNonNull(name, phone);
 
         this.name = name;
@@ -48,11 +48,11 @@ public class AddEmergencyContactNumberCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof AddEmergencyContactNumberCommand)) {
+        if (!(other instanceof EmergencyPhoneCommand)) {
             return false;
         }
 
-        AddEmergencyContactNumberCommand e = (AddEmergencyContactNumberCommand) other;
+        EmergencyPhoneCommand e = (EmergencyPhoneCommand) other;
         return name.equals(e.name)
                 && phone.equals(e.phone);
     }

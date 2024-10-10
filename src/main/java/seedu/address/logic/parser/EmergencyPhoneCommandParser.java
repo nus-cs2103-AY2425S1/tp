@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ECNUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.commands.AddEmergencyContactNumberCommand;
+import seedu.address.logic.commands.EmergencyPhoneCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -14,18 +14,18 @@ import seedu.address.model.person.Phone;
 /**
  * Parses input arguments and creates a new {@code AddEmergencyContactNumberCommand} object
  */
-public class AddEmergencyContactNumberCommandParser {
+public class EmergencyPhoneCommandParser {
     /**
      * Parses the given {@code String} of arguments in the context of the {@code AddEmergencyContactNumberCommand}
      * and returns a {@code AddEmergencyContactCommand} object for execution.
      * @throws ParseException if the user input does not conform the expected format.
      */
-    public AddEmergencyContactNumberCommand parse(String args) throws ParseException {
+    public EmergencyPhoneCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultiMap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ECNUMBER);
         if (!argMultiMap.getValue(PREFIX_NAME).isPresent() || !argMultiMap.getValue(PREFIX_ECNUMBER).isPresent()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddEmergencyContactNumberCommand.MESSAGE_USAGE));
+                    EmergencyPhoneCommand.MESSAGE_USAGE));
         }
 
         Name name;
@@ -36,9 +36,9 @@ public class AddEmergencyContactNumberCommandParser {
             phone = ParserUtil.parsePhone(argMultiMap.getValue(PREFIX_ECNUMBER).get());
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddEmergencyContactNumberCommand.MESSAGE_USAGE), ive);
+                    EmergencyPhoneCommand.MESSAGE_USAGE), ive);
         }
 
-        return new AddEmergencyContactNumberCommand(name, phone);
+        return new EmergencyPhoneCommand(name, phone);
     }
 }
