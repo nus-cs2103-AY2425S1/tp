@@ -6,5 +6,6 @@
   }, {
     "name": "Alice Pauline",
     "email": "pauline@example.com"
-  } ]
+  } ],
+  "groups" : [ ]
 }

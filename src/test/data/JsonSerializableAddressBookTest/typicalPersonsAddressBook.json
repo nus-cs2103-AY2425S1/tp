@@ -28,5 +28,6 @@
     "name" : "George Best",
     "email" : "anna@example.com",
     "tags" : [ ]
-  } ]
+  } ],
+  "groups" : [ ]
 }

@@ -58,7 +58,8 @@ class JsonAdaptedGroup {
         }
 
         if (groupName == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, GroupName.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    GroupName.class.getSimpleName()));
         }
         if (!GroupName.isValidName(groupName)) {
             throw new IllegalValueException(GroupName.MESSAGE_CONSTRAINTS);
