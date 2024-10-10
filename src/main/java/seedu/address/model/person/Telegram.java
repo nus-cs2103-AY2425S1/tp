@@ -9,31 +9,31 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Telegram {
 
-    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Telegram usernames can take any values, and it should not have spaces";
 
     /*
      * The username cannot have any spaces
      */
-    public static final String VALIDATION_REGEX = "[\\s]";
+    public static final String VALIDATION_REGEX = "/\s/";
 
     public final String value;
 
     /**
-     * Constructs an {@code Address}.
+     * Constructs an {@code Telegram}.
      *
-     * @param address A valid address.
+     * @param telegram A valid telegram username.
      */
-    public Telegram(String address) {
-        requireNonNull(address);
-        checkArgument(isValidTelegram(address), MESSAGE_CONSTRAINTS);
-        value = address;
+    public Telegram(String telegram) {
+        requireNonNull(telegram);
+        checkArgument(isValidTelegram(telegram), MESSAGE_CONSTRAINTS);
+        value = telegram;
     }
 
     /**
-     * Returns true if a given string is a valid email.
+     * Returns true if a given string is a valid telegram username.
      */
     public static boolean isValidTelegram(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return !test.matches(VALIDATION_REGEX);
     }
 
     @Override
