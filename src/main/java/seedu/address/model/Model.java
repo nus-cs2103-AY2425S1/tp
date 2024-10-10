@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Person;
 import seedu.address.model.project.Project;
 
@@ -100,6 +101,23 @@ public interface Model {
      * The person identity of {@code project} must not be the same as another existing project in the address book.
      */
     void setProject(Project target, Project editedProject);
+
+    /**
+     * Returns true if an assignment with the same identity as {@code assignment} exists in the address book.
+     */
+    boolean hasAssignment(Assignment assignment);
+
+    /**
+     * Deletes the given assignment.
+     * The assignment must exist in the address book.
+     */
+    void deleteAssignment(Assignment target);
+
+    /**
+     * Adds the given assignment.
+     * {@code assignment} must not already exist in the address book.
+     */
+    void addAssignment(Assignment assignment);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

@@ -22,6 +22,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Person;
 import seedu.address.model.project.Project;
 import seedu.address.testutil.PersonBuilder;
@@ -166,6 +167,21 @@ public class AddCommandTest {
 
         @Override
         public void setProject(Project target, Project editedproject) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addAssignment(Assignment assignment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasAssignment(Assignment assignment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteAssignment(Assignment target) {
             throw new AssertionError("This method should not be called.");
         }
 
