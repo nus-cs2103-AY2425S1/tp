@@ -26,8 +26,8 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Role;
 import seedu.address.model.tag.Nickname;
+import seedu.address.model.tag.Role;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -100,7 +100,6 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        
         Set<Role> updatedRoles = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Nickname updatedNickname = editPersonDescriptor.getNickname().orElse(personToEdit.getNickname());
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRoles, updatedNickname);
@@ -237,7 +236,7 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(roles, otherEditPersonDescriptor.roles);
+                    && Objects.equals(roles, otherEditPersonDescriptor.roles)
                     && Objects.equals(nickname, otherEditPersonDescriptor.nickname);
         }
 

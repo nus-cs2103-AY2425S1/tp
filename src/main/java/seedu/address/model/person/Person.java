@@ -8,8 +8,8 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Role;
 import seedu.address.model.tag.Nickname;
+import seedu.address.model.tag.Role;
 
 /**
  * Represents a Person in the address book.
@@ -101,7 +101,7 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && roles.equals(otherPerson.roles);
+                && roles.equals(otherPerson.roles)
                 && nickname.equals(otherPerson.nickname);
     }
 
