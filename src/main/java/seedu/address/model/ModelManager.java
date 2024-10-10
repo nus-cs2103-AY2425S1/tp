@@ -134,7 +134,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteTag(Tag target) { addressBook.removeTag(target); }
+    public void deleteTag(Tag target) {
+        addressBook.removeTag(target);
+    }
 
     //=========== Filtered Person List Accessors =============================================================
 

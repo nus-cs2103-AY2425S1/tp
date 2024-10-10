@@ -159,7 +159,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<Tag> getTagList() { return tags.asUnmodifiableObservableList(); }
+    public ObservableList<Tag> getTagList() {
+        return tags.asUnmodifiableObservableList();
+    }
 
     @Override
     public boolean equals(Object other) {
