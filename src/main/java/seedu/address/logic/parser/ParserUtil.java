@@ -3,13 +3,17 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.DateUtil;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.AddApptCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
@@ -170,6 +174,34 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a serialised {@code String appointment} into a {@code Appointment}.
+     *
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code appointment} is invalid.
+     */
+    public static Appointment parseSerialisedAppointment(String appointment) throws ParseException {
+        requireNonNull(appointment);
+        String[] trimmedAppointments = appointment.trim().split(":");
+        if (trimmedAppointments.length < 3) {
+            throw new ParseException(Appointment.MESSAGE_CONSTRAINTS);
+        }
+
+        if (!Appointment.isValidAppointmentName(trimmedAppointments[0])) {
+            throw new ParseException(Appointment.MESSAGE_CONSTRAINTS);
+        }
+
+        if (!DateUtil.isValidDate(trimmedAppointments[1])) {
+            throw new ParseException(Appointment.MESSAGE_CONSTRAINTS_APPT_DATE_WRONG_FORMAT);
+        }
+        try {
+            return new Appointment(trimmedAppointments[0], trimmedAppointments[1], trimmedAppointments[2]);
+        } catch (IllegalValueException e) {
+            throw new ParseException(AddApptCommand.MESSAGE_USAGE);
+        }
+    }
+
+    /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
@@ -197,5 +229,21 @@ public class ParserUtil {
             throw new ParseException(Priority.MESSAGE_CONSTRAINTS);
         }
         return new Priority(trimmedPriority);
+    }
+
+    /**
+     * Parses {@code Collection<String> appointments} into a {@code Set<Appointment>}.
+     */
+    public static Set<Appointment> parseAppointments(Collection<String> appointments) throws ParseException {
+        requireNonNull(appointments);
+        if (appointments.isEmpty()) {
+            return Collections.emptySet();
+        }
+
+        final Set<Appointment> appointmentSet = new HashSet<>();
+        for (String appointmentName : appointments) {
+            appointmentSet.add(parseSerialisedAppointment(appointmentName));
+        }
+        return appointmentSet;
     }
 }
