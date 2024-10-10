@@ -26,6 +26,13 @@ public class PersonUtil {
     }
 
     /**
+     * Returns an alt add command string for adding the {@code person}.
+     */
+    public static String getAddCommandAlt(Person person) {
+        return AddCommand.ALT_COMMAND_WORD + " " + getPersonDetails(person);
+    }
+
+    /**
      * Returns the part of command string for the given {@code person}'s details.
      */
     public static String getPersonDetails(Person person) {
