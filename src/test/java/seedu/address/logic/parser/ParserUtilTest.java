@@ -18,21 +18,21 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Telegram;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Role;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
-    private static final String INVALID_PHONE = "+651234";
+    private static final String INVALID_TELEGRAM = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
-    private static final String VALID_PHONE = "123456";
+    private static final String VALID_TELEGRAM = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
-    private static final String VALID_TAG_1 = "friend";
-    private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_TAG_1 = "Admin";
+    private static final String VALID_TAG_2 = "President";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -86,20 +86,20 @@ public class ParserUtilTest {
 
     @Test
     public void parseTelegram_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTelegram(INVALID_PHONE));
+        assertThrows(ParseException.class, () -> ParserUtil.parseTelegram(INVALID_TELEGRAM));
     }
 
     @Test
     public void parseTelegram_validValueWithoutWhitespace_returnsTelegram() throws Exception {
-        Telegram expectedTelegram = new Telegram(VALID_PHONE);
-        assertEquals(expectedTelegram, ParserUtil.parseTelegram(VALID_PHONE));
+        Telegram expectedTelegram = new Telegram(VALID_TELEGRAM);
+        assertEquals(expectedTelegram, ParserUtil.parseTelegram(VALID_TELEGRAM));
     }
 
     @Test
     public void parseTelegram_validValueWithWhitespace_returnsTrimmedTelegram() throws Exception {
-        String phoneWithWhitespace = WHITESPACE + VALID_PHONE + WHITESPACE;
-        Telegram expectedTelegram = new Telegram(VALID_PHONE);
-        assertEquals(expectedTelegram, ParserUtil.parseTelegram(phoneWithWhitespace));
+        String telegramWithWhitespace = WHITESPACE + VALID_TELEGRAM + WHITESPACE;
+        Telegram expectedTelegram = new Telegram(VALID_TELEGRAM);
+        assertEquals(expectedTelegram, ParserUtil.parseTelegram(telegramWithWhitespace));
     }
 
     @Test
@@ -160,15 +160,15 @@ public class ParserUtilTest {
 
     @Test
     public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
-        Tag expectedTag = new Tag(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseTag(VALID_TAG_1));
+        Role expectedRole = new Role(VALID_TAG_1);
+        assertEquals(expectedRole, ParserUtil.parseTag(VALID_TAG_1));
     }
 
     @Test
     public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
         String tagWithWhitespace = WHITESPACE + VALID_TAG_1 + WHITESPACE;
-        Tag expectedTag = new Tag(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseTag(tagWithWhitespace));
+        Role expectedRole = new Role(VALID_TAG_1);
+        assertEquals(expectedRole, ParserUtil.parseTag(tagWithWhitespace));
     }
 
     @Test
@@ -188,9 +188,9 @@ public class ParserUtilTest {
 
     @Test
     public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
-        Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
+        Set<Role> actualRoleSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
+        Set<Role> expectedRoleSet = new HashSet<Role>(Arrays.asList(new Role(VALID_TAG_1), new Role(VALID_TAG_2)));
 
-        assertEquals(expectedTagSet, actualTagSet);
+        assertEquals(expectedRoleSet, actualRoleSet);
     }
 }

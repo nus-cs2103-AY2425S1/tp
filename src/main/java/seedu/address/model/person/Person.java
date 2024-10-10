@@ -8,7 +8,8 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Nickname;
+import seedu.address.model.tag.Role;
 
 /**
  * Represents a Person in the address book.
@@ -23,18 +24,20 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Set<Role> roles = new HashSet<>();
+    private final Nickname nickname;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Telegram telegram, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, telegram, email, address, tags);
+    public Person(Name name, Telegram telegram, Email email, Address address, Set<Role> roles, Nickname nickname) {
+        requireAllNonNull(name, telegram, email, address, roles, nickname);
         this.name = name;
         this.telegram = telegram;
         this.email = email;
         this.address = address;
-        this.tags.addAll(tags);
+        this.roles.addAll(roles);
+        this.nickname = nickname;
     }
 
     public Name getName() {
@@ -57,8 +60,12 @@ public class Person {
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Set<Role> getTags() {
+        return Collections.unmodifiableSet(roles);
+    }
+
+    public Nickname getNickname() {
+        return nickname;
     }
 
     /**
@@ -94,13 +101,14 @@ public class Person {
                 && telegram.equals(otherPerson.telegram)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && roles.equals(otherPerson.roles)
+                && nickname.equals(otherPerson.nickname);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, telegram, email, address, tags);
+        return Objects.hash(name, telegram, email, address, roles, nickname);
     }
 
     @Override
@@ -110,8 +118,8 @@ public class Person {
                 .add("telegram", telegram)
                 .add("email", email)
                 .add("address", address)
-                .add("tags", tags)
+                .add("tags", roles)
+                .add("nickname", nickname)
                 .toString();
     }
-
 }

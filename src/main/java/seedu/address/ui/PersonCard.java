@@ -40,6 +40,8 @@ public class PersonCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private FlowPane nickname;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -53,7 +55,12 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .sorted(Comparator.comparing(tag -> tag.roleName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.roleName)));
+
+        String nicknameObtained = person.getNickname().value;
+        if (!nicknameObtained.isEmpty()) {
+            nickname.getChildren().add(new Label(nicknameObtained));
+        }
     }
 }

@@ -4,6 +4,8 @@
   pageNav: 3
 ---
 
+*Last edited by: somethingfishyfishy 10/06/24 12:55 AM*
+
 # AB-3 Developer Guide
 
 <!-- * Table of Contents -->
@@ -274,13 +276,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-Administrative Directors of CCAs in NUS who have to manage the database of the members. 
+Administrative Directors of CCAs in NUS who wish to manage a database of the CCA members more effectively. 
 The database size is around 50 students. These directors are tech savvy who can type fast.
 
 
 **Value proposition**: Enables users to efficiently and easily manage large CCA membership database 
-(including creation, edit, and deletion of data entries).
+(including creation, edition, and deletion of data entries).
 
+--------------------------------------------------------------------------------------------------------------------
 
 ### User stories
 
@@ -302,42 +305,99 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user                        | view the PDPA stance the members have in terms of sending of info the 3rd parties                                                                                                        | know whether I am allowed to send member’s personal details to 3rd parties                                                       |
 
 
-### Use cases
+--------------------------------------------------------------------------------------------------------------------
+
+### use cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+
+**Use case: Add a person**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to add person
+2.  AddressBook adds the person
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. Given contact has invalid or duplicate fields.
+    * 1a1. AddressBook shows an error message.
 
-  Use case ends.
+      Use case ends.
+      
+* 1b. Given contact has duplicate 'name' field.
+    * 1a1. AddressBook shows an error message and prompts user to re-enter with nickname.
 
-* 3a. The given index is invalid.
+      Use case ends.
+      
+**Use case: Delete a person**
 
-    * 3a1. AddressBook shows an error message.
+**MSS**
 
+1.  User requests to delete person
+2.  AddressBook deletes the person
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given person is not in the AddressBook
+    * 1a1. AddressBook shows an error message.
+  
+      Use case ends.
+
+* 1b. Multiple matching persons in the AddressBook
+    * 1b1. AddressBook shows list of all matching persons.
+    * 1b2. User enters index of person to delete
+  
       Use case resumes at step 2.
 
+
+**Use case: Search for person**
+
+**MSS**
+
+1.  User requests to search for person
+2.  AddressBook shows list of all matching persons
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User did not provide the search input
+    * 1a1. AddressBook shows an error message.
+
+      Use case ends.
+
+**Use case: View all contacts**
+
+**MSS**
+
+1.  User requests to view all contacts
+2.  AddressBook shows list of all contacts
+
+    Use case ends.
+
+    
 *{More to be added}*
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Data changes should be automatically saved to avoid loss of data.
+5.  Should validate data entries to ensure consistency and correctness (eg. check that email format is correct etc.)
+6.  Should be able to accommodate increasing member data over time.
+7.  Should be able to retrieve and display member data within 2 seconds.
+8.  User Interface should be intuitive even for new users.
 
-*{More to be added}*
+--------------------------------------------------------------------------------------------------------------------
 
 ### Glossary
 
