@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -25,6 +26,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PhoneContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -70,10 +72,25 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        // Test with name keywords only
+        List<String> nameKeywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+                FindCommand.COMMAND_WORD + " " + nameKeywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(nameKeywords)), command);
+
+        // Test with phone number keywords only
+        List<String> phoneKeywords = Arrays.asList("12345678", "98765432");
+        FindCommand phoneCommand = (FindCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " " + phoneKeywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindCommand(new PhoneContainsKeywordsPredicate(phoneKeywords)), phoneCommand);
+
+        // Test with mixed name and phone keywords
+        List<String> mixedKeywords = Arrays.asList("foo", "12345678", "baz");
+        FindCommand mixedCommand = (FindCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " " + mixedKeywords.stream().collect(Collectors.joining(" ")));
+        Predicate<Person> mixedPredicate = new NameContainsKeywordsPredicate(Arrays.asList("foo", "baz"))
+                .and(new PhoneContainsKeywordsPredicate(Arrays.asList("12345678")));
+        assertEquals(new FindCommand(mixedPredicate), mixedCommand);
     }
 
     @Test
