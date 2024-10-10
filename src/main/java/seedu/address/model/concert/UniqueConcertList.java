@@ -54,7 +54,7 @@ public class UniqueConcertList implements Iterable<Concert> {
      * must exist in the list. The concert identity of {@code editedconcert} must not be the same as
      * another existing concert in the list.
      */
-    public void setconcert(Concert target, Concert editedconcert) {
+    public void setConcert(Concert target, Concert editedconcert) {
         requireAllNonNull(target, editedconcert);
 
         int index = internalList.indexOf(target);
