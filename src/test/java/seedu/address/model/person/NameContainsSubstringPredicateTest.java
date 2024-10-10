@@ -90,7 +90,8 @@ public class NameContainsSubstringPredicateTest {
         String substring = "testing substring";
         NameContainsSubstringPredicate predicate = new NameContainsSubstringPredicate(substring);
 
-        String expected = NameContainsSubstringPredicate.class.getCanonicalName() + "{substring=" + substring + "}";
+        String expected = NameContainsSubstringPredicate.class.getCanonicalName()
+                + "{substring=" + substring.toUpperCase() + "}";
         assertEquals(expected, predicate.toString());
     }
 }

@@ -11,7 +11,7 @@ public abstract class ContainsSubstringPredicate implements Predicate<Person> {
     protected final String substring;
 
     public ContainsSubstringPredicate(String substring) {
-        this.substring = substring;
+        this.substring = substring.toUpperCase();
     }
 
     @Override

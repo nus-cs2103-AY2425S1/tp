@@ -31,11 +31,11 @@ public class StringUtil {
         String preppedSubstring = substring.trim();
         checkArgument(!preppedSubstring.isEmpty(), "Substring parameter cannot be empty");
 
-        // Convert both sentence and substring to lower case to ignore case
-        String lowerCaseSentence = sentence.toLowerCase();
-        String lowerCaseSubstring = preppedSubstring.toLowerCase();
+        // Convert both sentence and substring to upper case to ignore case
+        String upperCaseSentence = sentence.toUpperCase();
+        String upperCaseSubstring = preppedSubstring.toUpperCase();
 
-        return lowerCaseSentence.contains(lowerCaseSubstring);
+        return upperCaseSentence.contains(upperCaseSubstring);
     }
 
     /**
