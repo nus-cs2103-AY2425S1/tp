@@ -8,16 +8,16 @@ import seedu.address.commons.util.ToStringBuilder;
 /**
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
  */
-public class NameContainsKeywordsPredicate extends ContainsKeywordsPredicate {
+public class ContactContainsKeywordsPredicate extends ContainsKeywordsPredicate {
 
-    public NameContainsKeywordsPredicate(List<String> keywords) {
+    public ContactContainsKeywordsPredicate(List<String> keywords) {
         super(keywords);
     }
 
     @Override
     public boolean test(Person person) {
         return this.getKeywords().stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getPhone().value, keyword));
     }
 
     @Override
@@ -27,11 +27,11 @@ public class NameContainsKeywordsPredicate extends ContainsKeywordsPredicate {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof NameContainsKeywordsPredicate)) {
+        if (!(other instanceof ContactContainsKeywordsPredicate)) {
             return false;
         }
 
-        NameContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (NameContainsKeywordsPredicate) other;
+        ContactContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (ContactContainsKeywordsPredicate) other;
         return this.getKeywords().equals(otherNameContainsKeywordsPredicate.getKeywords());
     }
 

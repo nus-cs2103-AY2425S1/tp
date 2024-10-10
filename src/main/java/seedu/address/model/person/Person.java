@@ -75,6 +75,37 @@ public class Person {
     }
 
     /**
+     * Checks for duplicates in emails in the contact list.
+     * @param otherPerson The Person object to compare against.
+     * @return True if both persons have the same email address.
+     */
+    public boolean hasSameEmail(Person otherPerson) {
+        return otherPerson != null && otherPerson.getEmail().equals(this.getEmail());
+    }
+
+    /**
+     * Checks for duplicates in phone numbers in the contact list.
+     * @param otherPerson The Person object to compare against.
+     * @return True if both persons have the same phone number.
+     */
+    public boolean hasSamePhoneNumber(Person otherPerson) {
+        return otherPerson != null && otherPerson.getPhone().equals(this.getPhone());
+    }
+
+    /**
+     * Checks for duplicated contact information between Person instances.
+     * This is to avoid adding duplicate contacts in the contact list.
+     * Checked fields: name, phone, email.
+     * @param otherPerson The Person object to compare against.
+     * @return True if two contacts are considered as duplicates.
+     */
+    public boolean hasDuplicateInfo(Person otherPerson) {
+        return this.isSamePerson(otherPerson)
+                || this.hasSameEmail(otherPerson)
+                || this.hasSamePhoneNumber(otherPerson);
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
@@ -101,6 +132,38 @@ public class Person {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, phone, email, address, tags);
+    }
+
+    /**
+     * changes name.
+     * @param newNameValue
+     */
+    public void changeName(String newNameValue) {
+
+    }
+
+    /**
+     * changes number.
+     * @param newNumber
+     */
+    public void changePhoneNumber(String newNumber) {
+
+    }
+
+    /**
+     * changes email.
+     * @param newEmail
+     */
+    public void changeEmail(String newEmail) {
+
+    }
+
+    /**
+     * changes address
+     * @param newAddress
+     */
+    public void changeAddress(String newAddress) {
+
     }
 
     @Override
