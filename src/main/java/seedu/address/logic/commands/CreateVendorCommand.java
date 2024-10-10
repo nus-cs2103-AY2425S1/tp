@@ -15,22 +15,15 @@ import seedu.address.model.vendor.Vendor;
 /**
  * Adds a vendor to the address book.
  */
-public class AddCommand extends Command {
+public class CreateVendorCommand extends Command {
 
-    public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_WORD = "create_vendor";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a vendor to the address book. "
-            + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_DESCRIPTION + "ADDRESS "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
-            + PREFIX_PHONE + "98765432 "
-            + PREFIX_DESCRIPTION + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a vendor to the address book. " + "Parameters: "
+            + PREFIX_NAME + "NAME " + PREFIX_PHONE + "PHONE " + PREFIX_DESCRIPTION + "DESCRIPTION " + "[" + PREFIX_TAG
+            + "TAG]...\n" + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Adam's Bakery " + PREFIX_PHONE
+            + "98765432 " + PREFIX_DESCRIPTION + "Pastries and cakes, bake in a day " + PREFIX_TAG + "pastry "
+            + PREFIX_TAG + "fast";
 
     public static final String MESSAGE_SUCCESS = "New vendor added: %1$s";
     public static final String MESSAGE_DUPLICATE_VENDOR = "This vendor already exists in the address book";
@@ -40,7 +33,7 @@ public class AddCommand extends Command {
     /**
      * Creates an AddCommand to add the specified {@code Vendor}
      */
-    public AddCommand(Vendor vendor) {
+    public CreateVendorCommand(Vendor vendor) {
         requireNonNull(vendor);
         toAdd = vendor;
     }
@@ -64,18 +57,16 @@ public class AddCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddCommand)) {
+        if (!(other instanceof CreateVendorCommand)) {
             return false;
         }
 
-        AddCommand otherAddCommand = (AddCommand) other;
+        CreateVendorCommand otherAddCommand = (CreateVendorCommand) other;
         return toAdd.equals(otherAddCommand.toAdd);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("toAdd", toAdd)
-                .toString();
+        return new ToStringBuilder(this).add("toAdd", toAdd).toString();
     }
 }
