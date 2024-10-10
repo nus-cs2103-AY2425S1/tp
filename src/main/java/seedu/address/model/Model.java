@@ -62,6 +62,12 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Todo: Do we want to refer to the different lists as address book or split it (Contacts, Job board etc)
+     * Returns true if a job with the same identity as {@code job} exists in the address book.
+     */
+    boolean hasJob(Job job);
+
+    /**
      * Returns true if the same company is in the address book.
      *
      * @param company Company to be checked.
@@ -76,6 +82,13 @@ public interface Model {
     void deletePerson(Person target);
 
     /**
+     * Todo: Implement in subsequent PRs
+     * Deletes the given job.
+     * The job must exist in the address book.
+     */
+    void deleteJob(Job target);
+
+    /**
      * Deletes a company same as the target from the address book.
      *
      * @param target Company to be deleted.
@@ -87,6 +100,12 @@ public interface Model {
      * {@code person} must not already exist in the address book.
      */
     void addPerson(Person person);
+
+    /**
+     * Adds the given job.
+     * {@code job} must not already exist in the address book.
+     */
+    void addJob(Job job);
 
     /**
      * Adds a company to the address book.

@@ -87,6 +87,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if a job that has the same name and company as {@code job} exists in the address book.
+     */
+    public boolean hasJob(Job job) {
+        requireNonNull(job);
+        return jobs.contains(job);
+    }
+
+    /**
      * Returns true if a company with the same name as <code>company</code> exists in the address book.
      *
      * @param company Company to be checked.

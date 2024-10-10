@@ -9,6 +9,11 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.job.JobCompany;
+import seedu.address.model.job.JobDescription;
+import seedu.address.model.job.JobName;
+import seedu.address.model.job.JobRequirements;
+import seedu.address.model.job.JobSalary;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -48,6 +53,21 @@ public class ParserUtil {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String name} into a {@code JobName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static JobName parseJobName(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!JobName.isValidName(trimmedName)) {
+            throw new ParseException(JobName.MESSAGE_CONSTRAINTS);
+        }
+        return new JobName(trimmedName);
     }
 
     /**
@@ -93,6 +113,56 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     *  Parses a {@code String company} into a {@code JobCompany}.
+     *  Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code company} is invalid.
+     */
+    public static JobCompany parseCompany(String company) throws ParseException {
+        requireNonNull(company);
+        String trimmedCompany = company.trim();
+        if (!JobCompany.isValidCompany(trimmedCompany)) {
+            throw new ParseException(JobCompany.MESSAGE_CONSTRAINTS);
+        }
+        return new JobCompany(trimmedCompany);
+    }
+
+    /**
+     *  Parses a {@code String salary} into a {@code JobSalary}.
+     *  Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code salary} is invalid.
+     */
+    public static JobSalary parseSalary(String salary) throws ParseException {
+        requireNonNull(salary);
+        String trimmedSalary = salary.trim();
+        if (!JobSalary.isValidSalary(trimmedSalary)) {
+            throw new ParseException(JobSalary.MESSAGE_CONSTRAINTS);
+        }
+        return new JobSalary(trimmedSalary);
+    }
+
+    /**
+     *  Parses a {@code String requirements} into a {@code JobRequirements}.
+     *  Leading and trailing whitespaces will be trimmed.
+     */
+    public static JobRequirements parseRequirements(String requirements) {
+        requireNonNull(requirements);
+        String trimmedRequirements = requirements.trim();
+        return new JobRequirements(trimmedRequirements);
+    }
+
+    /**
+     *  Parses a {@code String description} into a {@code JobDescription}.
+     *  Leading and trailing whitespaces will be trimmed.
+     */
+    public static JobDescription parseDescription(String description) {
+        requireNonNull(description);
+        String trimmedDescription = description.trim();
+        return new JobDescription(trimmedDescription);
     }
 
     /**
