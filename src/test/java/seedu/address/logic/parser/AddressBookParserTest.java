@@ -106,7 +106,7 @@ public class AddressBookParserTest {
                 + "n/" + name + " "
                 + "ep/" + phone);
 
-       assertEquals(expected, command);
+        assertEquals(expected, command);
     }
 
     @Test
