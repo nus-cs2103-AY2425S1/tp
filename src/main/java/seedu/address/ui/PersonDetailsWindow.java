@@ -1,9 +1,12 @@
 package seedu.address.ui;
 
+import java.util.logging.Logger;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Region;
 import javafx.stage.Stage;
+import seedu.address.commons.core.LogsCenter;
+
 /**
  * Controller for the person details window.
  */
@@ -11,6 +14,7 @@ public class PersonDetailsWindow extends UiPart<Stage> {
 
     private static final String FXML = "PersonDetailsWindow.fxml";
 
+    private final Logger logger = LogsCenter.getLogger(getClass());
     @FXML
     private Label nameLabel;
 
@@ -48,11 +52,12 @@ public class PersonDetailsWindow extends UiPart<Stage> {
      * @throws IllegalStateException if this method is called on a thread other than the JavaFX Application Thread,
      *                               or if this method is called during animation or layout processing.
      */
-    public void show(String name, String email,String address, String phone) {
+    public void show(String name, String email, String address, String phone) {
+        logger.fine("Showing detailed page about this person.");
         nameLabel.setText("Name: " + name);
         emailLabel.setText("Email: " + email);
         phoneLabel.setText("Phone: " + phone);
-        addressLabel.setText("Address: "+address);
+        addressLabel.setText("Address: " + address);
         getRoot().show();
         getRoot().centerOnScreen();
     }
