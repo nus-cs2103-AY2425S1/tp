@@ -30,6 +30,16 @@ public class Client extends Contact {
         this.date = date;
     }
 
+    /**
+     * Returns the client's date.
+     *
+     * @return the date associated with the client.
+     */
+    public Date getDate() {
+        return date;
+    }
+
+
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
