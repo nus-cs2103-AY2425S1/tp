@@ -4,13 +4,14 @@ import static java.util.Objects.requireNonNull;
 
 /**
  * Represents a Student's payment status in the address book.
+ * Guarantees: immutable;
  */
 public class Payment {
 
     public final Boolean hasPaid;
 
     /**
-     * Constructs an {@code Address}.
+     * Constructs an {@code Payment}.
      *
      * @param hasPaid Boolean for payment status
      */
@@ -20,7 +21,7 @@ public class Payment {
     }
 
     /**
-     * Constructs an {@code Address}.
+     * Constructs an {@code Payment}.
      * Set to false as default
      */
     public Payment() {
