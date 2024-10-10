@@ -5,7 +5,7 @@ title: Ming Jun's Project Portfolio Page
 
 ### Project: CareConnect
 
-CareConnect is a desktop careConnect book application used by caseworkers to track their clients. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+CareConnect is a desktop careconnect book application used by caseworkers to track their clients. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
 Given below are my contributions to the project.
 
