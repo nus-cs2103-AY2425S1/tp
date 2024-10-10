@@ -10,8 +10,10 @@ import static seedu.address.commons.util.DateUtil.isValidDate;
  * Guarantees: immutable; is valid as declared in {@link #isValidDateOfBirth(String)}
  */
 public class DateOfBirth {
-    public static final String MESSAGE_CONSTRAINTS_FUTURE_DATE = "Date of birth should not be after today's date";
-    public static final String MESSAGE_CONSTRAINTS_WRONG_FORMAT = "Date of birth should be in the format of yyyy-MM-dd";
+    public static final String MESSAGE_CONSTRAINTS_FUTURE_DATE = "Date of birth should be a valid date and "
+            + "not after today's date";
+    public static final String MESSAGE_CONSTRAINTS_WRONG_FORMAT = "Date of birth should be a valid date "
+            + "in the format of yyyy-MM-dd";
     public final String value;
 
     /**
