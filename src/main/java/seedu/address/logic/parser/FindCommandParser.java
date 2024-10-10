@@ -42,18 +42,24 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ROLE, PREFIX_MAJOR);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE,
+                PREFIX_EMAIL, PREFIX_ROLE, PREFIX_MAJOR, PREFIX_ADDRESS);
 
-        String name = argMultimap.getValue(PREFIX_NAME).isPresent() ? argMultimap.getValue(PREFIX_NAME).get() : null;
-        String phone = argMultimap.getValue(PREFIX_PHONE).isPresent() ? argMultimap.getValue(PREFIX_PHONE).get() : null;
-        String email = argMultimap.getValue(PREFIX_EMAIL).isPresent() ? argMultimap.getValue(PREFIX_EMAIL).get() : null;
-        String role = argMultimap.getValue(PREFIX_ROLE).isPresent() ? argMultimap.getValue(PREFIX_ROLE).get() : null;
-        String major = argMultimap.getValue(PREFIX_MAJOR).isPresent() ? argMultimap.getValue(PREFIX_MAJOR).get() : null;
-        String address = argMultimap.getValue(PREFIX_ADDRESS).isPresent()
-                ? argMultimap.getValue(PREFIX_ADDRESS).get() : null;
+        String name = argMultimap.getValue(PREFIX_NAME).orElse(null);
+        String phone = argMultimap.getValue(PREFIX_PHONE).orElse(null);
+        String email = argMultimap.getValue(PREFIX_EMAIL).orElse(null);
+        String role = argMultimap.getValue(PREFIX_ROLE).orElse(null);
+        String major = argMultimap.getValue(PREFIX_MAJOR).orElse(null);
+        String address = argMultimap.getValue(PREFIX_ADDRESS).orElse(null);
         List<String> tags = argMultimap.getAllValues(PREFIX_TAG);
         if (tags.isEmpty()) {
             tags = null;
+        }
+
+        // If all parameters were empty
+        if (name == null && phone == null && email == null && role == null
+                && major == null && address == null && (tags == null || tags.isEmpty())) {
+            throw new ParseException(FindCommand.MESSAGE_INCOMPLETE);
         }
 
         // If any given parameter was empty
@@ -61,12 +67,6 @@ public class FindCommandParser implements Parser<FindCommand> {
                 || (email != null && email.isEmpty()) || (role != null && role.isEmpty())
                 || (major != null && major.isEmpty()) || (address != null && address.isEmpty())
                 || (tags != null && tags.isEmpty())) {
-            throw new ParseException(FindCommand.MESSAGE_INCOMPLETE);
-        }
-
-        // If all parameters were empty
-        if (name == null && phone == null && email == null && role == null
-                && major == null && address == null && (tags == null || tags.isEmpty())) {
             throw new ParseException(FindCommand.MESSAGE_INCOMPLETE);
         }
 
