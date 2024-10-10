@@ -188,6 +188,11 @@ public class AddCommandTest {
         public void deleteTag(Tag toDelete) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void updateFilteredPersonListByTag(Predicate<Tag> tag) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

@@ -158,6 +158,11 @@ public class CreateTagCommandTest {
         }
 
         @Override
+        public void updateFilteredPersonListByTag(Predicate<Tag> tagPredicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasTag(Tag toAdd) {
             throw new AssertionError("This method should not be called.");
         }

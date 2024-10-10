@@ -84,10 +84,16 @@ public interface Model {
     ObservableList<Person> getFilteredPersonList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered person list to filter by the given {@code personPredicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredPersonList(Predicate<Person> personPredicate);
+
+    /**
+     * Updates the filter of the filtered person list to filter by the given {@code tagPredicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredPersonListByTag(Predicate<Tag> tagPredicate);
 
     /**
      * Returns true if a tag with the same name as (@code tag} exists in the addres book.

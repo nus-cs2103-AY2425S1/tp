@@ -154,6 +154,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void updateFilteredPersonListByTag(Predicate<Tag> predicate) {
+        requireNonNull(predicate);
+        filteredPersons.setPredicate(person -> person.getTags().stream().anyMatch(predicate));
+    }
+
+    @Override
     public ObservableList<Tag> getFilteredTagList() {
         return filteredTags;
     }
