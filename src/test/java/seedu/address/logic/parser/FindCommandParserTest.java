@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AbstractFindCommand;
 import seedu.address.logic.commands.FindByContactCommand;
 import seedu.address.logic.commands.FindByNameCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.model.person.ContactContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
