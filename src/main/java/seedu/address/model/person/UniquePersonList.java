@@ -8,8 +8,10 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.car.Car;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
@@ -34,6 +36,17 @@ public class UniquePersonList implements Iterable<Person> {
     public boolean contains(Person toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSamePerson);
+    }
+
+    /**
+     * Returns true if the list contains a person with the same car as the given argument.
+     */
+    public boolean containsCar(Car toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(person -> {
+            Car car = person.getCar();
+            return car != null && car.hasMatchingVrnOrVin(toCheck);
+        });
     }
 
     /**

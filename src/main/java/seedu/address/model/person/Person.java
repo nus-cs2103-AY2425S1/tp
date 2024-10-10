@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.car.Car;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,7 +24,9 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Car car;
+
+    private final Set<Tag> tags = new HashSet<>(); // TAGS wont be used for now, but just kept for compatibility
 
     /**
      * Every field must be present and not null.
@@ -35,6 +38,28 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.car = null;
+        System.out.println("Person without car created");
+    }
+
+    /**
+     * Constructor for Person with Car
+     * @param name
+     * @param phone
+     * @param email
+     * @param address
+     * @param tags
+     * @param car
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Car car) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.car = car;
+        this.tags.addAll(tags);
+        System.out.println("Person with car created" + car);
     }
 
     public Name getName() {
@@ -51,6 +76,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Car getCar() {
+        return car;
     }
 
     /**
@@ -90,27 +119,48 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
+
+        if (car == null && otherPerson.car == null) {
+            return name.equals(otherPerson.name)
+                    && phone.equals(otherPerson.phone)
+                    && email.equals(otherPerson.email)
+                    && address.equals(otherPerson.address)
+                    && tags.equals(otherPerson.tags);
+        } else if (car == null || otherPerson.car == null) {
+            return false;
+        }
+
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && car.equals(otherPerson.car);
     }
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, car);
     }
 
     @Override
     public String toString() {
+        if (car == null) {
+            return new ToStringBuilder(this)
+                    .add("name", name)
+                    .add("phone", phone)
+                    .add("email", email)
+                    .add("address", address)
+                    .add("tags", tags)
+                    .toString();
+        }
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("car", car)
                 .toString();
     }
 

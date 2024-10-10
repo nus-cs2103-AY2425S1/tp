@@ -49,6 +49,15 @@ public class PersonTest {
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
         assertFalse(BOB.isSamePerson(editedBob));
+
+        // same person, but 1 has car and the other does not -> returns true
+        editedAlice = new PersonBuilder(ALICE).withCar("SH 8942 L", "11111111111111111", "Toyota", "Corolla").build();
+        assertTrue(ALICE.isSamePerson(editedAlice));
+
+        // same person, but have different cars -> returns true
+        Person editedAliceDifferentCar = new PersonBuilder(ALICE).withCar("SH 8942 L", "22222222222222222",
+                                                                            "Honda", "Civic").build();
+        assertTrue(editedAlice.isSamePerson(editedAliceDifferentCar));
     }
 
     @Test
@@ -88,6 +97,21 @@ public class PersonTest {
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
+
+        // different car -> returns false
+        editedAlice = new PersonBuilder(ALICE).withCar("SH 8942 L",
+                                                        "11111111111111111",
+                                                       "Toyota",
+                                                      "Corolla").build();
+        Person editedAliceDifferentCar = new PersonBuilder(ALICE).withCar("SH 8942 L",
+                                                                        "22222222222222222",
+                                                                        "Honda",
+                                                                        "Civic").build();
+        assertFalse(editedAliceDifferentCar.equals(editedAlice));
+
+        // same person, but 1 has car and the other does not -> returns false
+        editedAlice = new PersonBuilder(ALICE).withCar("SH 8942 L", "11111111111111111", "Toyota", "Corolla").build();
+        assertFalse(ALICE.equals(editedAlice));
     }
 
     @Test
@@ -95,5 +119,16 @@ public class PersonTest {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
+
+        // Test with car
+        Person aliceWithCar = new PersonBuilder(ALICE).withCar("SH 8942 L", "11111111111111111",
+                                                                "Toyota", "Corolla").build();
+        expected = Person.class.getCanonicalName() + "{name=" + aliceWithCar.getName() + ", phone="
+                                                    + aliceWithCar.getPhone()
+                                                    + ", email=" + aliceWithCar.getEmail()
+                                                    + ", address=" + aliceWithCar.getAddress()
+                                                    + ", tags=" + aliceWithCar.getTags()
+                                                    + ", car=" + aliceWithCar.getCar() + "}";
+        assertEquals(expected, aliceWithCar.toString());
     }
 }

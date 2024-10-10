@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.car.Car;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -65,6 +66,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return persons.contains(person);
+    }
+
+    /**
+     * Returns true if a car with the same identity as {@code car} exists in the address book.
+     * @param car the car to check
+     */
+    public boolean hasCar(Car car) {
+        if (car == null) {
+            return false;
+        }
+        return persons.containsCar(car);
     }
 
     /**

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.stage.Stage?>
+
+<fx:root resizable="false" title="Client Details" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+  <scene>
+    <Scene>
+      <VBox alignment="CENTER" fx:id="clientDetailsContainer">
+        <children>
+          <Label text="Client Details" />
+          <Label fx:id="clientNameLabel" text="Name: " />
+          <Label fx:id="clientPhoneLabel" text="Phone: " />
+          <Label fx:id="clientEmailLabel" text="Email: " />
+          <Label fx:id="clientAddressLabel" text="Address: " />
+          <Label fx:id="clientCarDetailsLabel" text="Car Details: " />
+          <Button fx:id="closeButton" mnemonicParsing="false" onAction="#handleClose" text="Close">
+            <VBox.margin>
+              <Insets top="10.0" />
+            </VBox.margin>
+          </Button>
+        </children>
+        <padding>
+          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+        </padding>
+      </VBox>
+    </Scene>
+  </scene>
+</fx:root>
