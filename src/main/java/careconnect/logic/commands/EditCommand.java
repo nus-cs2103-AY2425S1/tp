@@ -1,7 +1,7 @@
 package careconnect.logic.commands;
 
-import static java.util.Objects.requireNonNull;
 import static careconnect.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static java.util.Objects.requireNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -10,12 +10,12 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
-import careconnect.logic.commands.exceptions.CommandException;
-import careconnect.logic.parser.CliSyntax;
 import careconnect.commons.core.index.Index;
 import careconnect.commons.util.CollectionUtil;
 import careconnect.commons.util.ToStringBuilder;
 import careconnect.logic.Messages;
+import careconnect.logic.commands.exceptions.CommandException;
+import careconnect.logic.parser.CliSyntax;
 import careconnect.model.Model;
 import careconnect.model.person.Address;
 import careconnect.model.person.Email;

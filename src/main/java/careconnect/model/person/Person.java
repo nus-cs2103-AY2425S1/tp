@@ -1,7 +1,5 @@
 package careconnect.model.person;
 
-import static careconnect.commons.util.CollectionUtil.requireAllNonNull;
-
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;

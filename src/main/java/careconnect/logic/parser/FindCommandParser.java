@@ -4,8 +4,8 @@ import java.util.Arrays;
 
 import careconnect.logic.Messages;
 import careconnect.logic.commands.FindCommand;
-import careconnect.model.person.NameContainsKeywordsPredicate;
 import careconnect.logic.parser.exceptions.ParseException;
+import careconnect.model.person.NameContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object

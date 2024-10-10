@@ -2,14 +2,15 @@ package careconnect.logic;
 
 import java.nio.file.Path;
 
+import careconnect.commons.core.GuiSettings;
 import careconnect.logic.commands.CommandResult;
 import careconnect.logic.commands.exceptions.CommandException;
-import careconnect.model.Model;
-import javafx.collections.ObservableList;
-import careconnect.commons.core.GuiSettings;
 import careconnect.logic.parser.exceptions.ParseException;
+import careconnect.model.Model;
 import careconnect.model.ReadOnlyAddressBook;
 import careconnect.model.person.Person;
+import javafx.collections.ObservableList;
+
 
 /**
  * API of the Logic component

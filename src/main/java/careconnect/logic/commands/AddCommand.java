@@ -3,8 +3,8 @@ package careconnect.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import careconnect.commons.util.ToStringBuilder;
-import careconnect.logic.commands.exceptions.CommandException;
 import careconnect.logic.Messages;
+import careconnect.logic.commands.exceptions.CommandException;
 import careconnect.logic.parser.CliSyntax;
 import careconnect.model.Model;
 import careconnect.model.person.Person;

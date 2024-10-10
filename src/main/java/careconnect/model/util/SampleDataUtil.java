@@ -4,12 +4,12 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import careconnect.model.person.Address;
-import careconnect.model.person.Name;
-import careconnect.model.person.Person;
 import careconnect.model.AddressBook;
 import careconnect.model.ReadOnlyAddressBook;
+import careconnect.model.person.Address;
 import careconnect.model.person.Email;
+import careconnect.model.person.Name;
+import careconnect.model.person.Person;
 import careconnect.model.person.Phone;
 import careconnect.model.tag.Tag;
 

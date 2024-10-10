@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 
-import careconnect.commons.exceptions.DataLoadingException;
 import careconnect.commons.core.Config;
+import careconnect.commons.exceptions.DataLoadingException;
 
 /**
  * A class for accessing the Config File.

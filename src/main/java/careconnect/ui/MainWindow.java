@@ -7,6 +7,7 @@ import careconnect.commons.core.LogsCenter;
 import careconnect.logic.Logic;
 import careconnect.logic.commands.CommandResult;
 import careconnect.logic.commands.exceptions.CommandException;
+import careconnect.logic.parser.exceptions.ParseException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -15,7 +16,6 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import careconnect.logic.parser.exceptions.ParseException;
 
 /**
  * The Main Window. Provides the basic application layout containing

@@ -1,7 +1,7 @@
 package careconnect.logic.commands;
 
-import static java.util.Objects.requireNonNull;
 import static careconnect.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static java.util.Objects.requireNonNull;
 
 import careconnect.model.Model;
 

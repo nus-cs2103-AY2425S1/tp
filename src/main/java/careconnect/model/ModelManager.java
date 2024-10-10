@@ -1,7 +1,6 @@
 package careconnect.model;
 
 import static java.util.Objects.requireNonNull;
-import static careconnect.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.function.Predicate;

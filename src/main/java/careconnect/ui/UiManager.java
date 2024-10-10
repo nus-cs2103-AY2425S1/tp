@@ -2,6 +2,7 @@ package careconnect.ui;
 
 import java.util.logging.Logger;
 
+import careconnect.MainApp;
 import careconnect.commons.core.LogsCenter;
 import careconnect.commons.util.StringUtil;
 import careconnect.logic.Logic;
@@ -10,7 +11,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import careconnect.MainApp;
 
 /**
  * The manager of the UI component.

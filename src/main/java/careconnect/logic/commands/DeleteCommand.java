@@ -4,10 +4,10 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
-import careconnect.logic.commands.exceptions.CommandException;
 import careconnect.commons.core.index.Index;
 import careconnect.commons.util.ToStringBuilder;
 import careconnect.logic.Messages;
+import careconnect.logic.commands.exceptions.CommandException;
 import careconnect.model.Model;
 import careconnect.model.person.Person;
 

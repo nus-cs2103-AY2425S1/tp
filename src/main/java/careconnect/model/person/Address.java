@@ -1,7 +1,6 @@
 package careconnect.model.person;
 
 import static java.util.Objects.requireNonNull;
-import static careconnect.commons.util.AppUtil.checkArgument;
 
 import careconnect.commons.util.AppUtil;
 
