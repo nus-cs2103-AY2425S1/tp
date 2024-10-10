@@ -7,6 +7,12 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
  * Keyword matching is case-insensitive.
  */
 public class FindByNameCommand extends AbstractFindCommand {
+    public static final String COMMAND_WORD = "find /n";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names "
+            + "contain any of the specified keywords (case-insensitive) and displays them as a list with indices.\n"
+            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
+            + "Example: " + COMMAND_WORD + " alice bob charlie";
     public FindByNameCommand(NameContainsKeywordsPredicate predicate) {
         super(predicate);
     }
