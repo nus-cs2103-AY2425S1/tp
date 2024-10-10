@@ -8,7 +8,7 @@ public class Attendance {
 
     public static final String MESSAGE_CONSTRAINTS = "Attendance must be either present (true) or absent (false).";
 
-    private final boolean isPresent;
+    public final boolean isPresent;
 
     /**
      * Constructs an {@code Attendance}.
@@ -17,13 +17,6 @@ public class Attendance {
      */
     public Attendance(boolean isPresent) {
         this.isPresent = isPresent;
-    }
-
-    /**
-     * Returns true if the person is present and false otherwise.
-     */
-    public boolean getAttendance() {
-        return isPresent;
     }
 
     @Override
