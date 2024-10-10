@@ -59,7 +59,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         PaymentStatus paymentStatus = ParserUtil.parsePaymentStatus(
                 argMultimap.getValue(PREFIX_PAYMENT_STATUS).orElse("unpaid"));
-      
+
         ClientStatus clientStatus = ParserUtil.parseClientStatus(
                 argMultimap.getValue(PREFIX_CLIENT_STATUS).orElse("active"));
 
