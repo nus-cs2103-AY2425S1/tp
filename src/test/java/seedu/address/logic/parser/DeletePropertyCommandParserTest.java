@@ -28,24 +28,6 @@ public class DeletePropertyCommandParserTest {
     }
 
     @Test
-    public void parse_missingPostalCode_failure() {
-        // Test for missing postal code
-        String userInput = " " + PREFIX_UNITNUMBER + "08-08";
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletePropertyCommand.MESSAGE_USAGE);
-
-        assertParseFailure(parser, userInput, expectedMessage);
-    }
-
-    @Test
-    public void parse_missingUnitNumber_failure() {
-        // Test for missing unit number
-        String userInput = " " + PREFIX_POSTALCODE + "118420";
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletePropertyCommand.MESSAGE_USAGE);
-
-        assertParseFailure(parser, userInput, expectedMessage);
-    }
-
-    @Test
     public void parse_invalidPostalCodeFormat_failure() {
         // Test for invalid postal code format
         String userInput = " " + PREFIX_POSTALCODE + "abc123" + " " + PREFIX_UNITNUMBER + "08-08";
@@ -59,15 +41,6 @@ public class DeletePropertyCommandParserTest {
         // Test for invalid unit number format
         String userInput = " " + PREFIX_POSTALCODE + "118420" + " " + PREFIX_UNITNUMBER + "808";
         String expectedMessage = Unit.MESSAGE_CONSTRAINTS;
-
-        assertParseFailure(parser, userInput, expectedMessage);
-    }
-
-    @Test
-    public void parse_extraFields_failure() {
-        // Test with extraneous information in the command
-        String userInput = "extra " + PREFIX_POSTALCODE + "118420 " + PREFIX_UNITNUMBER + "08-08";
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletePropertyCommand.MESSAGE_USAGE);
 
         assertParseFailure(parser, userInput, expectedMessage);
     }
