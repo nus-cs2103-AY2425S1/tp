@@ -62,10 +62,10 @@ public class Supplier {
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both suppliers have the same name.
+     * This defines a weaker notion of equality between two suppliers.
      */
-    public boolean isSamePerson(Supplier otherSupplier) {
+    public boolean isSameSupplier(Supplier otherSupplier) {
         if (otherSupplier == this) {
             return true;
         }
@@ -75,8 +75,8 @@ public class Supplier {
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both suppliers have the same identity and data fields.
+     * This defines a stronger notion of equality between two suppliers.
      */
     @Override
     public boolean equals(Object other) {

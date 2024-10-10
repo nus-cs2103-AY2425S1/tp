@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalSuppliers.ALICE;
+import static seedu.address.testutil.TypicalSuppliers.BOB;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -15,161 +15,162 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.supplier.exceptions.DuplicatePersonException;
-import seedu.address.model.supplier.exceptions.PersonNotFoundException;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.supplier.exceptions.DuplicateSupplierException;
+import seedu.address.model.supplier.exceptions.SupplierNotFoundException;
+import seedu.address.testutil.SupplierBuilder;
 
 public class UniqueSupplierListTest {
 
-    private final UniquePersonList uniquePersonList = new UniquePersonList();
+    private final UniqueSupplierList uniqueSupplierList = new UniqueSupplierList();
 
     @Test
-    public void contains_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniquePersonList.contains(null));
+    public void contains_nullSupplier_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueSupplierList.contains(null));
     }
 
     @Test
-    public void contains_personNotInList_returnsFalse() {
-        assertFalse(uniquePersonList.contains(ALICE));
+    public void contains_supplierNotInList_returnsFalse() {
+        assertFalse(uniqueSupplierList.contains(ALICE));
     }
 
     @Test
-    public void contains_personInList_returnsTrue() {
-        uniquePersonList.add(ALICE);
-        assertTrue(uniquePersonList.contains(ALICE));
+    public void contains_supplierInList_returnsTrue() {
+        uniqueSupplierList.add(ALICE);
+        assertTrue(uniqueSupplierList.contains(ALICE));
     }
 
     @Test
-    public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
-        uniquePersonList.add(ALICE);
-        Supplier editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+    public void contains_supplierWithSameIdentityFieldsInList_returnsTrue() {
+        uniqueSupplierList.add(ALICE);
+        Supplier editedAlice = new SupplierBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(uniquePersonList.contains(editedAlice));
+        assertTrue(uniqueSupplierList.contains(editedAlice));
     }
 
     @Test
-    public void add_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniquePersonList.add(null));
+    public void add_nullSupplier_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueSupplierList.add(null));
     }
 
     @Test
-    public void add_duplicatePerson_throwsDuplicatePersonException() {
-        uniquePersonList.add(ALICE);
-        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.add(ALICE));
+    public void add_duplicateSupplier_throwsDuplicateSupplierException() {
+        uniqueSupplierList.add(ALICE);
+        assertThrows(DuplicateSupplierException.class, () -> uniqueSupplierList.add(ALICE));
     }
 
     @Test
-    public void setPerson_nullTargetPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniquePersonList.setPerson(null, ALICE));
+    public void setSupplier_nullTargetSupplier_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueSupplierList.setSupplier(null, ALICE));
     }
 
     @Test
-    public void setPerson_nullEditedPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniquePersonList.setPerson(ALICE, null));
+    public void setSupplier_nullEditedSupplier_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueSupplierList.setSupplier(ALICE, null));
     }
 
     @Test
-    public void setPerson_targetPersonNotInList_throwsPersonNotFoundException() {
-        assertThrows(PersonNotFoundException.class, () -> uniquePersonList.setPerson(ALICE, ALICE));
+    public void setSupplier_targetSupplierNotInList_throwsSupplierNotFoundException() {
+        assertThrows(SupplierNotFoundException.class, () -> uniqueSupplierList.setSupplier(ALICE, ALICE));
     }
 
     @Test
-    public void setPerson_editedPersonIsSamePerson_success() {
-        uniquePersonList.add(ALICE);
-        uniquePersonList.setPerson(ALICE, ALICE);
-        UniquePersonList expectedUniquePersonList = new UniquePersonList();
-        expectedUniquePersonList.add(ALICE);
-        assertEquals(expectedUniquePersonList, uniquePersonList);
+    public void setSupplier_editedSupplierIsSameSupplier_success() {
+        uniqueSupplierList.add(ALICE);
+        uniqueSupplierList.setSupplier(ALICE, ALICE);
+        UniqueSupplierList expectedUniqueSupplierList = new UniqueSupplierList();
+        expectedUniqueSupplierList.add(ALICE);
+        assertEquals(expectedUniqueSupplierList, uniqueSupplierList);
     }
 
     @Test
-    public void setPerson_editedPersonHasSameIdentity_success() {
-        uniquePersonList.add(ALICE);
-        Supplier editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+    public void setSupplier_editedSupplierHasSameIdentity_success() {
+        uniqueSupplierList.add(ALICE);
+        Supplier editedAlice = new SupplierBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        uniquePersonList.setPerson(ALICE, editedAlice);
-        UniquePersonList expectedUniquePersonList = new UniquePersonList();
-        expectedUniquePersonList.add(editedAlice);
-        assertEquals(expectedUniquePersonList, uniquePersonList);
+        uniqueSupplierList.setSupplier(ALICE, editedAlice);
+        UniqueSupplierList expectedUniqueSupplierList = new UniqueSupplierList();
+        expectedUniqueSupplierList.add(editedAlice);
+        assertEquals(expectedUniqueSupplierList, uniqueSupplierList);
     }
 
     @Test
-    public void setPerson_editedPersonHasDifferentIdentity_success() {
-        uniquePersonList.add(ALICE);
-        uniquePersonList.setPerson(ALICE, BOB);
-        UniquePersonList expectedUniquePersonList = new UniquePersonList();
-        expectedUniquePersonList.add(BOB);
-        assertEquals(expectedUniquePersonList, uniquePersonList);
+    public void setSupplier_editedSupplierHasDifferentIdentity_success() {
+        uniqueSupplierList.add(ALICE);
+        uniqueSupplierList.setSupplier(ALICE, BOB);
+        UniqueSupplierList expectedUniqueSupplierList = new UniqueSupplierList();
+        expectedUniqueSupplierList.add(BOB);
+        assertEquals(expectedUniqueSupplierList, uniqueSupplierList);
     }
 
     @Test
-    public void setPerson_editedPersonHasNonUniqueIdentity_throwsDuplicatePersonException() {
-        uniquePersonList.add(ALICE);
-        uniquePersonList.add(BOB);
-        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPerson(ALICE, BOB));
+    public void setSupplier_editedSupplierHasNonUniqueIdentity_throwsDuplicateSupplierException() {
+        uniqueSupplierList.add(ALICE);
+        uniqueSupplierList.add(BOB);
+        assertThrows(DuplicateSupplierException.class, () -> uniqueSupplierList.setSupplier(ALICE, BOB));
     }
 
     @Test
-    public void remove_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniquePersonList.remove(null));
+    public void remove_nullSupplier_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueSupplierList.remove(null));
     }
 
     @Test
-    public void remove_personDoesNotExist_throwsPersonNotFoundException() {
-        assertThrows(PersonNotFoundException.class, () -> uniquePersonList.remove(ALICE));
+    public void remove_supplierDoesNotExist_throwsSupplierNotFoundException() {
+        assertThrows(SupplierNotFoundException.class, () -> uniqueSupplierList.remove(ALICE));
     }
 
     @Test
-    public void remove_existingPerson_removesPerson() {
-        uniquePersonList.add(ALICE);
-        uniquePersonList.remove(ALICE);
-        UniquePersonList expectedUniquePersonList = new UniquePersonList();
-        assertEquals(expectedUniquePersonList, uniquePersonList);
+    public void remove_existingSupplier_removesSupplier() {
+        uniqueSupplierList.add(ALICE);
+        uniqueSupplierList.remove(ALICE);
+        UniqueSupplierList expectedUniqueSupplierList = new UniqueSupplierList();
+        assertEquals(expectedUniqueSupplierList, uniqueSupplierList);
     }
 
     @Test
-    public void setPersons_nullUniquePersonList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniquePersonList.setPersons((UniquePersonList) null));
+    public void setSuppliers_nullUniqueSupplierList_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueSupplierList.setSuppliers((UniqueSupplierList) null));
     }
 
     @Test
-    public void setPersons_uniquePersonList_replacesOwnListWithProvidedUniquePersonList() {
-        uniquePersonList.add(ALICE);
-        UniquePersonList expectedUniquePersonList = new UniquePersonList();
-        expectedUniquePersonList.add(BOB);
-        uniquePersonList.setPersons(expectedUniquePersonList);
-        assertEquals(expectedUniquePersonList, uniquePersonList);
+    public void setSuppliers_uniqueSupplierList_replacesOwnListWithProvidedUniqueSupplierList() {
+        uniqueSupplierList.add(ALICE);
+        UniqueSupplierList expectedUniqueSupplierList = new UniqueSupplierList();
+        expectedUniqueSupplierList.add(BOB);
+        uniqueSupplierList.setSuppliers(expectedUniqueSupplierList);
+        assertEquals(expectedUniqueSupplierList, uniqueSupplierList);
     }
 
     @Test
-    public void setPersons_nullList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniquePersonList.setPersons((List<Supplier>) null));
+    public void setSuppliers_nullList_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueSupplierList.setSuppliers((List<Supplier>) null));
     }
 
     @Test
-    public void setPersons_list_replacesOwnListWithProvidedList() {
-        uniquePersonList.add(ALICE);
+    public void setSuppliers_list_replacesOwnListWithProvidedList() {
+        uniqueSupplierList.add(ALICE);
         List<Supplier> supplierList = Collections.singletonList(BOB);
-        uniquePersonList.setPersons(supplierList);
-        UniquePersonList expectedUniquePersonList = new UniquePersonList();
-        expectedUniquePersonList.add(BOB);
-        assertEquals(expectedUniquePersonList, uniquePersonList);
+        uniqueSupplierList.setSuppliers(supplierList);
+        UniqueSupplierList expectedUniqueSupplierList = new UniqueSupplierList();
+        expectedUniqueSupplierList.add(BOB);
+        assertEquals(expectedUniqueSupplierList, uniqueSupplierList);
     }
 
     @Test
-    public void setPersons_listWithDuplicatePersons_throwsDuplicatePersonException() {
+    public void setSuppliers_listWithDuplicateSuppliers_throwsDuplicateSupplierException() {
         List<Supplier> listWithDuplicateSuppliers = Arrays.asList(ALICE, ALICE);
-        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPersons(listWithDuplicateSuppliers));
+        assertThrows(DuplicateSupplierException.class, () -> uniqueSupplierList
+            .setSuppliers(listWithDuplicateSuppliers));
     }
 
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
-            -> uniquePersonList.asUnmodifiableObservableList().remove(0));
+            -> uniqueSupplierList.asUnmodifiableObservableList().remove(0));
     }
 
     @Test
     public void toStringMethod() {
-        assertEquals(uniquePersonList.asUnmodifiableObservableList().toString(), uniquePersonList.toString());
+        assertEquals(uniqueSupplierList.asUnmodifiableObservableList().toString(), uniqueSupplierList.toString());
     }
 }

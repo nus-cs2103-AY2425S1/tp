@@ -12,7 +12,7 @@ import seedu.address.model.supplier.Supplier;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Supplier> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Supplier> PREDICATE_SHOW_ALL_SUPPLIERS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -55,7 +55,7 @@ public interface Model {
     /**
      * Returns true if a supplier with the same identity as {@code supplier} exists in the address book.
      */
-    boolean hasPerson(Supplier supplier);
+    boolean hasSupplier(Supplier supplier);
     /**
      * Returns true if a product with the same identity as {@code product} exists in InvenTrack.
      */
@@ -65,13 +65,13 @@ public interface Model {
      * Deletes the given supplier.
      * The supplier must exist in the address book.
      */
-    void deletePerson(Supplier target);
+    void deleteSupplier(Supplier target);
 
     /**
      * Adds the given supplier.
      * {@code supplier} must not already exist in the address book.
      */
-    void addPerson(Supplier supplier);
+    void addSupplier(Supplier supplier);
 
     /**
      * Adds the given product.
@@ -81,19 +81,19 @@ public interface Model {
 
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
+     * Replaces the given supplier {@code target} with {@code editedSupplier}.
      * {@code target} must exist in the address book.
      * The supplier identity of {@code editedSupplier} must not be
      * the same as another existing supplier in the address book.
      */
-    void setPerson(Supplier target, Supplier editedSupplier);
+    void setSupplier(Supplier target, Supplier editedSupplier);
 
     /** Returns an unmodifiable view of the filtered supplier list */
-    ObservableList<Supplier> getFilteredPersonList();
+    ObservableList<Supplier> getFilteredSupplierList();
 
     /**
      * Updates the filter of the filtered supplier list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Supplier> predicate);
+    void updateFilteredSupplierList(Predicate<Supplier> predicate);
 }

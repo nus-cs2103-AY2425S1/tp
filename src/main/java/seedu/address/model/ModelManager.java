@@ -34,7 +34,7 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredSuppliers = new FilteredList<>(this.addressBook.getPersonList());
+        filteredSuppliers = new FilteredList<>(this.addressBook.getSupplierList());
     }
 
     public ModelManager() {
@@ -85,14 +85,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Supplier supplier) {
+    public boolean hasSupplier(Supplier supplier) {
         requireNonNull(supplier);
-        return addressBook.hasPerson(supplier);
+        return addressBook.hasSupplier(supplier);
     }
 
     @Override
-    public void deletePerson(Supplier target) {
-        addressBook.removePerson(target);
+    public void deleteSupplier(Supplier target) {
+        addressBook.removeSupplier(target);
     }
 
     @Override
@@ -102,15 +102,15 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addPerson(Supplier supplier) {
-        addressBook.addPerson(supplier);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void addSupplier(Supplier supplier) {
+        addressBook.addSupplier(supplier);
+        updateFilteredSupplierList(PREDICATE_SHOW_ALL_SUPPLIERS);
     }
 
     @Override
-    public void setPerson(Supplier target, Supplier editedSupplier) {
+    public void setSupplier(Supplier target, Supplier editedSupplier) {
         requireAllNonNull(target, editedSupplier);
-        addressBook.setPerson(target, editedSupplier);
+        addressBook.setSupplier(target, editedSupplier);
     }
 
     @Override
@@ -126,12 +126,12 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Supplier> getFilteredPersonList() {
+    public ObservableList<Supplier> getFilteredSupplierList() {
         return filteredSuppliers;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Supplier> predicate) {
+    public void updateFilteredSupplierList(Predicate<Supplier> predicate) {
         requireNonNull(predicate);
         filteredSuppliers.setPredicate(predicate);
     }
