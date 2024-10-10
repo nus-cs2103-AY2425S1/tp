@@ -117,7 +117,7 @@ public class PersonBuilder {
      */
     public PersonBuilder withPaymentStatus(String paymentStatus) {
         this.paymentStatus = new PaymentStatus(paymentStatus);
-      return this;
+        return this;
     }
     /**
      * Sets the {@code ClientStatus} of the {@code Person} that we are building.
