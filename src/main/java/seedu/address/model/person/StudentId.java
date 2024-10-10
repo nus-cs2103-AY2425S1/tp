@@ -3,6 +3,10 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a student's ID in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidStudentId(String)}
+ */
 public class StudentId {
 
     public static final String MESSAGE_CONSTRAINTS =
@@ -13,7 +17,7 @@ public class StudentId {
      */
     public static final String VALIDATION_REGEX = "^E\\d{7}$";
 
-    public final String studentId;
+    public final String value;
 
     /**
      * Constructs a {@code studentId}
@@ -22,7 +26,7 @@ public class StudentId {
     public StudentId(String studentId) {
         requireNonNull(studentId);
         checkArgument(isValidStudentId(studentId), MESSAGE_CONSTRAINTS);
-        this.studentId = studentId;
+        this.value = studentId;
     }
 
     public static boolean isValidStudentId(String test) {
@@ -31,19 +35,19 @@ public class StudentId {
 
     @Override
     public String toString() {
-        return this.studentId;
+        return value;
     }
 
     @Override
     public boolean equals(Object o) {
         if (o instanceof StudentId s) {
-            return this.studentId.equals(s.studentId);
+            return this.value.equals(s.value);
         }
         return false;
     }
 
     @Override
     public int hashCode() {
-        return this.studentId.hashCode();
+        return value.hashCode();
     }
 }
