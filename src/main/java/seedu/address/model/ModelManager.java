@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -145,4 +147,13 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
 
+    @Override
+    public Optional<Person> findPerson(Predicate<Person> predicate) {
+        return addressBook.findPerson(predicate);
+    }
+
+    @Override
+    public List<Person> getPersonList() {
+        return addressBook.getPersonList().stream().toList();
+    }
 }
