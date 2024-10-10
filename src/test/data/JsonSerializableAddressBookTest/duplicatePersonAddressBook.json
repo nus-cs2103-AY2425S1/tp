@@ -3,12 +3,15 @@
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "alice@example.com",
-    "studentStatus": "undergraduate 1",
-    "tags": [ "friends" ]
+    "studentStatus": "123, Jurong West Ave 6, #08-111",
+    "tags": [ "Admin" ],
+    "nickname": ""
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
-    "studentStatus": "undergraduate 2"
+    "studentStatus": "4th street",
+    "tags": [ "Admin" ],
+    "nickname": ""
   } ]
 }

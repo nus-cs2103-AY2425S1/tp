@@ -13,9 +13,10 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.Telegram;
+import seedu.address.model.tag.Nickname;
 import seedu.address.model.person.StudentStatus;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Role;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -25,25 +26,27 @@ class JsonAdaptedPerson {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
     private final String name;
-    private final String phone;
+    private final String telegram;
     private final String email;
     private final String studentStatus;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String nickname;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
+    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("telegram") String telegram,
             @JsonProperty("email") String email, @JsonProperty("studentStatus") String studentStatus,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("nickname") String nickname) {
         this.name = name;
-        this.phone = phone;
+        this.telegram = telegram;
         this.email = email;
         this.studentStatus = studentStatus;
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.nickname = nickname;
     }
 
     /**
@@ -51,12 +54,13 @@ class JsonAdaptedPerson {
      */
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
-        phone = source.getPhone().value;
+        telegram = source.getTelegram().value;
         email = source.getEmail().value;
         studentStatus = source.getStudentStatus().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        nickname = source.getNickname().value;
     }
 
     /**
@@ -65,9 +69,9 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+        final List<Role> personRoles = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
+            personRoles.add(tag.toModelType());
         }
 
         if (name == null) {
@@ -78,13 +82,14 @@ class JsonAdaptedPerson {
         }
         final Name modelName = new Name(name);
 
-        if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
+        if (telegram == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Telegram.class.getSimpleName()));
         }
-        if (!Phone.isValidPhone(phone)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+        if (!Telegram.isValidTelegram(telegram)) {
+            throw new IllegalValueException(Telegram.MESSAGE_CONSTRAINTS);
         }
-        final Phone modelPhone = new Phone(phone);
+        final Telegram modelTelegram = new Telegram(telegram);
 
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
@@ -102,9 +107,9 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(StudentStatus.MESSAGE_CONSTRAINTS);
         }
         final StudentStatus modelstudentStatus = new StudentStatus(studentStatus);
-
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelstudentStatus, modelTags);
+        final Set<Role> modelRoles = new HashSet<>(personRoles);
+        final Nickname modelNickname = new Nickname(nickname); // Nickname can be anything
+        return new Person(modelName, modelTelegram, modelEmail, modelstudentStatus, modelRoles, modelNickname);
     }
 
 }

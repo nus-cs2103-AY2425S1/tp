@@ -8,7 +8,8 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Nickname;
+import seedu.address.model.tag.Role;
 
 /**
  * Represents a Person in the address book.
@@ -18,31 +19,34 @@ public class Person {
 
     // Identity fields
     private final Name name;
-    private final Phone phone;
+    private final Telegram telegram;
     private final Email email;
 
     // Data fields
+    private final Address address;
+    private final Set<Role> roles = new HashSet<>();
+    private final Nickname nickname;
     private final StudentStatus studentStatus;
-    private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, StudentStatus studentStatus, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, studentStatus, tags);
+    public Person(Name name, Telegram telegram, Email email, StudentStatus studentStatus, Set<Role> roles, Nickname nickname) {
+        requireAllNonNull(name, telegram, email, studentStatus, roles, nickname);
         this.name = name;
-        this.phone = phone;
+        this.telegram = telegram;
         this.email = email;
         this.studentStatus = studentStatus;
-        this.tags.addAll(tags);
+        this.roles.addAll(roles);
+        this.nickname = nickname;
     }
 
     public Name getName() {
         return name;
     }
 
-    public Phone getPhone() {
-        return phone;
+    public Telegram getTelegram() {
+        return telegram;
     }
 
     public Email getEmail() {
@@ -57,8 +61,12 @@ public class Person {
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Set<Role> getTags() {
+        return Collections.unmodifiableSet(roles);
+    }
+
+    public Nickname getNickname() {
+        return nickname;
     }
 
     /**
@@ -91,26 +99,28 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
+                && telegram.equals(otherPerson.telegram)
                 && email.equals(otherPerson.email)
                 && studentStatus.equals(otherPerson.studentStatus)
-                && tags.equals(otherPerson.tags);
+                && roles.equals(otherPerson.roles)
+                && nickname.equals(otherPerson.nickname);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, studentStatus, tags);
+        return Objects.hash(name, telegram, email, studentStatus, roles, nickname);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
-                .add("phone", phone)
+                .add("telegram", telegram)
                 .add("email", email)
                 .add("studentStatus", studentStatus)
-                .add("tags", tags)
+                .add("tags", roles)
+                .add("nickname", nickname)
                 .toString();
     }
 
