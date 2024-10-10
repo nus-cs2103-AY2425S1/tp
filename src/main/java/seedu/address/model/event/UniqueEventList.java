@@ -64,7 +64,7 @@ public class UniqueEventList implements Iterable<Event> {
      * The event must exist in the list.
      */
     public void remove(Event toRemove) {
-        internalList.add(toRemove);
+        internalList.remove(toRemove);
     }
 
     public void setEvents(UniqueEventList replacement) {

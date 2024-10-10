@@ -9,9 +9,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.*;
 import seedu.address.model.event.Event;
 
-public class AddEventCommand extends Command {
+public class AddEventCommand extends AddCommand {
 
-    public static final String COMMAND_WORD = "event";
+    public static final String COMMAND_FIELD = "event";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to the address book. "
             + "Parameters: "
@@ -26,7 +26,7 @@ public class AddEventCommand extends Command {
             + PREFIX_EVENT_CONTACT + "Sydney Sweeney ";
 
     public static final String MESSAGE_SUCCESS = "New Event added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This event  already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_EVENT = "This event  already exists in the address book";
     private final Event toAdd;
 
     public AddEventCommand(Event event) {
@@ -39,7 +39,7 @@ public class AddEventCommand extends Command {
         requireNonNull(model);
 
         if (model.hasEvent(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_EVENT);
         }
 
         model.addEvent(toAdd);
