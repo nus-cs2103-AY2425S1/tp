@@ -55,7 +55,7 @@ public class DoctorName {
             return false;
         }
 
-        Name otherName = (Name) other;
+        DoctorName otherName = (DoctorName) other;
         return fullName.equals(otherName.fullName);
     }
 
