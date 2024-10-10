@@ -17,6 +17,11 @@ public class FilterContactTypeCommand extends Command {
 
     private final ContactTypePredicate predicate;
 
+    /**
+     * Constructs a FilterContactTypeCommand with the given predicate.
+     *
+     * @param predicate The predicate used to filter the contacts based on contact type.
+     */
     public FilterContactTypeCommand(ContactTypePredicate predicate) {
         this.predicate = predicate;
     }
@@ -49,5 +54,4 @@ public class FilterContactTypeCommand extends Command {
                 .add("predicate", predicate)
                 .toString();
     }
-
 }

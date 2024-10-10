@@ -11,10 +11,22 @@ import seedu.address.commons.util.ToStringBuilder;
 public class ContactTypePredicate implements Predicate<Person> {
     private final ContactType contactType;
 
+    /**
+     * Constructs a ContactTypePredicate with the specified contact type.
+     *
+     * @param contactType The contact type to match against when filtering persons.
+     */
     public ContactTypePredicate(ContactType contactType) {
         this.contactType = contactType;
     }
 
+    /**
+     * Evaluates this predicate on the given person.
+     *
+     * @param person The person to evaluate.
+     * @return true if the person's contact type matches the specified contact type;
+     *         false otherwise.
+     */
     @Override
     public boolean test(Person person) {
         // getContactType() to be implemented on next iteration
