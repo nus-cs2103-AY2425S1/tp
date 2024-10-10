@@ -111,10 +111,6 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
-    @Override
-    public void markFeesPaid(Person target) {
-        addressBook.markPaid(target);
-    }
 
     //=========== Filtered Person List Accessors =============================================================
 

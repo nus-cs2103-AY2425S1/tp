@@ -94,9 +94,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
-    public void markPaid(Person key) {
-        persons.markPaid(key);
-    }
 
     //// util methods
 

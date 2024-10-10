@@ -35,9 +35,13 @@ public class MarkpaidCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(targetIndex.getZeroBased());
-        model.markFeesPaid(personToEdit);
-        return new CommandResult(String.format(MESSAGE_MARKED_PAID_SUCCESS, Messages.format(personToEdit)));
+        Person personToMarkPayment = lastShownList.get(targetIndex.getZeroBased());
+        Person markedPerson = new Person(personToMarkPayment.getName(), personToMarkPayment.getPhone(),
+                personToMarkPayment.getEmail(), personToMarkPayment.getAddress(), personToMarkPayment.getTags());
+
+        model.setPerson(personToMarkPayment, markedPerson);
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult(String.format(MESSAGE_MARKED_PAID_SUCCESS, Messages.format(personToMarkPayment)));
     }
 
     @Override
