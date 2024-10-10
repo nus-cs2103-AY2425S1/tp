@@ -6,40 +6,30 @@ import seedu.address.commons.util.ToStringBuilder;
 
 /**
  * Represents an Event in EventTory.
- * Guarantees: Name, location, and start time are not null. End time is optional.
+ * Guarantees: Name and date are not null.
  */
 public class Event {
     private final Name name;
-    private final TimeRange timeRange;
-    private final Location location;
-    private final Description description;
+    private final Date date;
 
     /**
      * Constructor for an Event.
+     *
+     * @param name The name of the event.
+     * @param date The date of the event.
      */
-    public Event(Name name, TimeRange timeRange, Location location, Description description) {
-        requireAllNonNull(name, timeRange, location, description);
+    public Event(Name name, Date date) {
+        requireAllNonNull(name, date);
         this.name = name;
-        this.timeRange = timeRange;
-        this.location = location;
-        this.description = description;
+        this.date = date;
     }
 
-    // Basic Getters
     public Name getName() {
         return name;
     }
 
-    public TimeRange getTimeRange() {
-        return timeRange;
-    }
-
-    public Location getLocation() {
-        return location;
-    }
-
-    public Description getDescription() {
-        return description;
+    public Date getDate() {
+        return date;
     }
 
     @Override
@@ -53,24 +43,19 @@ public class Event {
         }
 
         Event otherEvent = (Event) other;
-        return name.equals(otherEvent.name)
-                && timeRange.equals(otherEvent.timeRange)
-                && location.equals(otherEvent.location)
-                && description.equals(otherEvent.description);
+        return name.equals(otherEvent.name) && date.equals(otherEvent.date);
     }
 
     @Override
     public int hashCode() {
-        return name.hashCode() + timeRange.hashCode() + location.hashCode() + description.hashCode();
+        return name.hashCode() + date.hashCode();
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
-                .add("timeRange", timeRange)
-                .add("location", location)
-                .add("description", description)
+                .add("date", date)
                 .toString();
     }
 }

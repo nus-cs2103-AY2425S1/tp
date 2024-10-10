@@ -5,9 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.time.LocalDateTime;
-import java.util.Optional;
-
 import org.junit.jupiter.api.Test;
 
 public class EventTest {
@@ -15,43 +12,31 @@ public class EventTest {
     @Test
     public void constructor_nullValues_throwsNullPointerException() {
         Name name = new Name("Meeting");
-        TimeRange timeRange = new TimeRange(LocalDateTime.now());
-        Location location = new Location("Conference Room");
-        Description description = Description.ofNullable("Discuss project");
+        Date date = new Date("2024-10-10");
 
         // Check if each field being null throws NullPointerException
-        assertThrows(NullPointerException.class, () -> new Event(null, timeRange, location, description));
-        assertThrows(NullPointerException.class, () -> new Event(name, null, location, description));
-        assertThrows(NullPointerException.class, () -> new Event(name, timeRange, null, description));
-        assertThrows(NullPointerException.class, () -> new Event(name, timeRange, location, null));
+        assertThrows(NullPointerException.class, () -> new Event(null, date));
+        assertThrows(NullPointerException.class, () -> new Event(name, null));
     }
 
     @Test
     public void eventConstructor_validValues_createsEvent() {
         Name name = new Name("Conference");
-        TimeRange timeRange = new TimeRange(
-                LocalDateTime.of(2024, 10, 10, 14, 0),
-                Optional.of(LocalDateTime.of(2024, 10, 10, 16, 0)));
-        Location location = new Location("Main Hall");
-        Description description = Description.ofNullable("Annual tech conference");
+        Date date = new Date("2024-10-10");
 
-        Event event = new Event(name, timeRange, location, description);
+        Event event = new Event(name, date);
 
         // Validate that the Event object is created with the correct values
         assertEquals(name, event.getName());
-        assertEquals(timeRange, event.getTimeRange());
-        assertEquals(location, event.getLocation());
-        assertEquals(description, event.getDescription());
+        assertEquals(date, event.getDate());
     }
 
     @Test
     public void equals_sameObject_returnsTrue() {
         Name name = new Name("Workshop");
-        TimeRange timeRange = new TimeRange(LocalDateTime.now());
-        Location location = new Location("Room 101");
-        Description description = Description.ofNullable("Technical workshop");
+        Date date = new Date("2024-10-10");
 
-        Event event = new Event(name, timeRange, location, description);
+        Event event = new Event(name, date);
 
         // Validate that an object equals itself
         assertTrue(event.equals(event));
@@ -60,12 +45,10 @@ public class EventTest {
     @Test
     public void equals_differentObjectsSameValues_returnsTrue() {
         Name name = new Name("Workshop");
-        TimeRange timeRange = new TimeRange(LocalDateTime.now());
-        Location location = new Location("Room 101");
-        Description description = Description.ofNullable("Technical workshop");
+        Date date = new Date("2024-10-10");
 
-        Event event1 = new Event(name, timeRange, location, description);
-        Event event2 = new Event(name, timeRange, location, description);
+        Event event1 = new Event(name, date);
+        Event event2 = new Event(name, date);
 
         // Validate that two different Event objects with the same values are equal
         assertTrue(event1.equals(event2));
@@ -74,17 +57,13 @@ public class EventTest {
     @Test
     public void equals_differentValues_returnsFalse() {
         Name name1 = new Name("Workshop");
-        TimeRange timeRange1 = new TimeRange(LocalDateTime.now());
-        Location location1 = new Location("Room 101");
-        Description description1 = Description.ofNullable("Technical workshop");
+        Date date1 = new Date("2024-10-10");
 
         Name name2 = new Name("Seminar");
-        TimeRange timeRange2 = new TimeRange(LocalDateTime.now().plusDays(1)); // different time
-        Location location2 = new Location("Room 202"); // different location
-        Description description2 = Description.ofNullable("Educational seminar"); // different description
+        Date date2 = new Date("2024-11-11"); // different date
 
-        Event event1 = new Event(name1, timeRange1, location1, description1);
-        Event event2 = new Event(name2, timeRange2, location2, description2);
+        Event event1 = new Event(name1, date1);
+        Event event2 = new Event(name2, date2);
 
         // Validate that two Event objects with different values are not equal
         assertFalse(event1.equals(event2));
@@ -93,12 +72,10 @@ public class EventTest {
     @Test
     public void hashCode_consistencyWithEquals() {
         Name name = new Name("Workshop");
-        TimeRange timeRange = new TimeRange(LocalDateTime.now());
-        Location location = new Location("Room 101");
-        Description description = Description.ofNullable("Technical workshop");
+        Date date = new Date("2024-10-10");
 
-        Event event1 = new Event(name, timeRange, location, description);
-        Event event2 = new Event(name, timeRange, location, description);
+        Event event1 = new Event(name, date);
+        Event event2 = new Event(name, date);
 
         // Check that if two objects are equal, their hashCodes are also equal
         assertTrue(event1.equals(event2));
@@ -108,16 +85,11 @@ public class EventTest {
     @Test
     public void toString_checkFormat() {
         Name name = new Name("Conference");
-        TimeRange timeRange = new TimeRange(
-                LocalDateTime.of(2024, 10, 10, 14, 0),
-                Optional.of(LocalDateTime.of(2024, 10, 10, 16, 0)));
-        Location location = new Location("Main Hall");
-        Description description = Description.ofNullable("Annual tech conference");
+        Date date = new Date("2024-10-10");
 
-        Event event = new Event(name, timeRange, location, description);
+        Event event = new Event(name, date);
 
-        String expected = Event.class.getCanonicalName() + "{name=Conference, timeRange=Start: 2024-10-10T14:00, "
-                + "End: 2024-10-10T16:00, location=Main Hall, description=Annual tech conference}";
+        String expected = Event.class.getCanonicalName() + "{name=Conference, date=2024-10-10}";
         assertEquals(expected, event.toString());
     }
 }
