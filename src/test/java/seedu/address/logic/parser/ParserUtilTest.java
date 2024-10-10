@@ -40,7 +40,7 @@ public class ParserUtilTest {
     private static final String VALID_PROJECT_STATUS = "in progress";
     private static final String VALID_PROJECT_STATUS_2 = "completed";
     private static final String VALID_CLIENT_STATUS = "active";
-    private static final String VALID_CLIENT_STATUS_2 = "unresponse";
+    private static final String VALID_CLIENT_STATUS_2 = "unresponsive";
     private static final String VALID_CLIENT_STATUS_3 = "potential";
     private static final String VALID_CLIENT_STATUS_4 = "old";
 
@@ -222,8 +222,8 @@ public class ParserUtilTest {
 
     @Test
     public void parseProjectStatus_validValueWithWhitespace_returnsTrimmedProjectStatus() throws Exception {
-        String statusWithWhitespace = WHITESPACE + VALID_PROJECT_STATUS_2 + WHITESPACE;
-        ProjectStatus expectedStatus = new ProjectStatus(VALID_PROJECT_STATUS_2);
+        String statusWithWhitespace = WHITESPACE + VALID_PROJECT_STATUS + WHITESPACE;
+        ProjectStatus expectedStatus = new ProjectStatus(VALID_PROJECT_STATUS);
         assertEquals(expectedStatus, ParserUtil.parseProjectStatus(statusWithWhitespace));
     }
 
@@ -240,7 +240,7 @@ public class ParserUtilTest {
     @Test
     public void parseClientStatus_validValueWithoutWhitespace_returnsClientStatus() throws Exception {
         ClientStatus expectedStatus = new ClientStatus(VALID_CLIENT_STATUS);
-        assertEquals(expectedStatus, ParserUtil.parseProjectStatus(VALID_CLIENT_STATUS));
+        assertEquals(expectedStatus, ParserUtil.parseClientStatus(VALID_CLIENT_STATUS));
     }
 
     @Test
@@ -248,6 +248,18 @@ public class ParserUtilTest {
         String statusWithWhitespace = WHITESPACE + VALID_CLIENT_STATUS_2 + WHITESPACE;
         ClientStatus expectedStatus = new ClientStatus(VALID_CLIENT_STATUS_2);
         assertEquals(expectedStatus, ParserUtil.parseClientStatus(statusWithWhitespace));
+        
+        String activeStatusWithWhitespace = WHITESPACE + VALID_CLIENT_STATUS + WHITESPACE;
+        ClientStatus expectedActiveStatus = new ClientStatus(VALID_CLIENT_STATUS);
+        assertEquals(expectedActiveStatus, ParserUtil.parseClientStatus(activeStatusWithWhitespace));
+        
+        String potentialStatusWithWhitespace = WHITESPACE + VALID_CLIENT_STATUS_3 + WHITESPACE;
+        ClientStatus expectedPotentialStatus = new ClientStatus(VALID_CLIENT_STATUS_3);
+        assertEquals(expectedPotentialStatus, ParserUtil.parseClientStatus(potentialStatusWithWhitespace));
+        
+        String oldStatusWithWhitespace = WHITESPACE + VALID_CLIENT_STATUS_4 + WHITESPACE;
+        ClientStatus expectedOldStatus = new ClientStatus(VALID_CLIENT_STATUS_4);
+        assertEquals(expectedOldStatus, ParserUtil.parseClientStatus(oldStatusWithWhitespace));
     }
 
 }

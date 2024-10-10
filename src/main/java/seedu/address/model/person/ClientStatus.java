@@ -10,6 +10,11 @@ public class ClientStatus {
 
     private final String value;
 
+    private static final String ACTIVE = "active";
+    private static final String UNRESPONSIVE = "unresponsive";
+    private static final String POTENTIAL = "potential";
+    private static final String OLD = "old";
+
     /**
      * Constructs a {@code ClientStatus}.
      *
@@ -18,20 +23,39 @@ public class ClientStatus {
     public ClientStatus(String status) {
         requireNonNull(status);
         checkArgument(isValidClientStatus(status), MESSAGE_CONSTRAINTS);
-        value = status;
+        value = parseStatus(status);
     }
 
     /**
      * Returns true if the given string is a valid client status.
      */
     public static boolean isValidClientStatus(String test) {
-        return test.equals("active") || test.equals("unresponsive")
-                || test.equals("potential") || test.equals("old");
+        return test.equals(ACTIVE) || test.equals(UNRESPONSIVE)
+                || test.equals(POTENTIAL) || test.equals(OLD);
+    }
+
+    /**
+     * Parses the status into the relevant client status string
+     * @param status The client status string
+     * @return The client's client status as string
+     */
+    private static String parseStatus(String status) {
+        switch (status) {
+            case ACTIVE:
+                return ACTIVE;
+            case UNRESPONSIVE:
+                return UNRESPONSIVE;
+            case OLD:
+                return OLD;
+            case POTENTIAL:
+                return POTENTIAL;
+        }
+        return status;
     }
 
     @Override
     public String toString() {
-        return value.toUpperCase();
+        return value;
     }
 
     @Override

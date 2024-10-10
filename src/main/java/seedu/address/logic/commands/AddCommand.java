@@ -29,7 +29,7 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
             + "[" + PREFIX_TAG + "TAG]..."
-            + "[" + PREFIX_PROJECT_STATUS + "PROJECT_STATUS]\n"
+            + "[" + PREFIX_PROJECT_STATUS + "PROJECT_STATUS]"
             + "[" + PREFIX_CLIENT_STATUS + "CLIENT_STATUS]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
@@ -39,7 +39,7 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney"
             + PREFIX_PROJECT_STATUS + "In progress"
-            + PREFIX_CLIENT_STATUS + "Active";
+            + PREFIX_CLIENT_STATUS + "active";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";

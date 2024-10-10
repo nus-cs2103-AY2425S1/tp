@@ -47,6 +47,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.ClientStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -99,7 +100,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
         assertParseFailure(parser, "1" + INVALID_PROJECT_STATUS_DESC,
                 ProjectStatus.MESSAGE_CONSTRAINTS); // invalid project status
-        assertParseFailure(parser, "1", INVALID_CLIENT_STATUS_DESC);
+        assertParseFailure(parser, "1" + INVALID_CLIENT_STATUS_DESC, ClientStatus.MESSAGE_CONSTRAINTS);
 
 
         // invalid phone followed by valid email
