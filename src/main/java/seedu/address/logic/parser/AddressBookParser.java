@@ -13,12 +13,14 @@ import seedu.address.logic.commands.AddPolicyCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeletePolicyCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListExpiringPoliciesCommand;
+import seedu.address.logic.commands.UpdatePolicyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -84,6 +86,12 @@ public class AddressBookParser {
 
         case ListExpiringPoliciesCommand.COMMAND_WORD:
             return new ListExpiringPoliciesCommandParser().parse(arguments);
+
+        case UpdatePolicyCommand.COMMAND_WORD:
+            return new UpdatePolicyCommandParser().parse(arguments);
+
+        case DeletePolicyCommand.COMMAND_WORD:
+            return new DeletePolicyCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
