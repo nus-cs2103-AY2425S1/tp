@@ -15,6 +15,8 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagName;
+import seedu.address.model.wedding.Wedding;
+import seedu.address.model.wedding.WeddingName;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -118,5 +120,19 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses {@code String} wedding into {@code Wedding} object.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if the given {@code String} wedding is an invalid wedding name.
+     */
+    public static Wedding parseWedding(String wedding) throws ParseException {
+        requireNonNull(wedding);
+        String trimmedWedding = wedding.trim();
+        if (!Wedding.isValidWeddingName(trimmedWedding)) {
+            throw new ParseException(WeddingName.MESSAGE_CONSTRAINTS);
+        }
+        return new Wedding(new WeddingName(trimmedWedding));
     }
 }

@@ -13,10 +13,10 @@ import seedu.address.model.tag.exceptions.TagNotFoundException;
 
 /**
  * A list of tags that enforces uniqueness and does not allow nulls.
- * A person is considered unique by comparing using {@code Tag#isSameTag(Tag)}. As such, adding and updating of
- * tags uses Tag#isSameTag(Tag) for equality to ensure that the person being added or updated is
+ * A tag is considered unique by comparing using {@code Tag#isSameTag(Tag)}. As such, adding and updating of
+ * tags uses Tag#isSameTag(Tag) for equality to ensure that the tag being added or updated is
  * unique in terms of identity in the UniqueTagList. However, the removal of a tag uses Tag#equals(Object) to
- * ensure that the person with exactly the same fields will be removed.
+ * ensure that the tag with exactly the same fields will be removed.
  * Supports a minimal set of list operations.
  *
  * @see Tag#isSameTag(Tag)
@@ -28,7 +28,7 @@ public class UniqueTagList implements Iterable<Tag> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent tag as the given argument.
      */
     public boolean contains(Tag toCheck) {
         requireNonNull(toCheck);
@@ -50,21 +50,21 @@ public class UniqueTagList implements Iterable<Tag> {
     /**
      * Replaces the tag {@code target} in the list with {@code editedTag}.
      * {@code target} must exist in the list.
-     * The person identity of {@code editedTag} must not be the same as another existing tag in the list.
+     * The tag identity of {@code editedTag} must not be the same as another existing tag in the list.
      */
-    public void setTag(Tag target, Tag editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void setTag(Tag target, Tag editedTag) {
+        requireAllNonNull(target, editedTag);
 
         int index = internalList.indexOf(target);
         if (index == -1) {
             throw new TagNotFoundException();
         }
 
-        if (!target.isSameTag(editedPerson) && contains(editedPerson)) {
+        if (!target.isSameTag(editedTag) && contains(editedTag)) {
             throw new DuplicateTagException();
         }
 
-        internalList.set(index, editedPerson);
+        internalList.set(index, editedTag);
     }
 
     public void setTag(UniqueTagList replacement) {
@@ -84,8 +84,8 @@ public class UniqueTagList implements Iterable<Tag> {
     }
 
     /**
-     * Replaces the contents of this list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of this list with {@code tags}.
+     * {@code tags} must not contain duplicate tags.
      */
     public void setTags(List<Tag> tags) {
         requireAllNonNull(tags);

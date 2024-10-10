@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.wedding.Wedding;
 
 /**
  * Container for user visible messages.
@@ -56,6 +57,10 @@ public class Messages {
         final StringBuilder builder = new StringBuilder();
         builder.append(tag.getTagName());
         return builder.toString();
+    }
+
+    public static String format(Wedding wedding) {
+        return wedding.getWeddingName().toString();
     }
 
 }

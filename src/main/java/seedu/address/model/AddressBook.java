@@ -10,6 +10,8 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.wedding.UniqueWeddingList;
+import seedu.address.model.wedding.Wedding;
 
 /**
  * Wraps all data at the address-book level
@@ -19,6 +21,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
     private final UniqueTagList tags;
+    private final UniqueWeddingList weddings;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -30,6 +33,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         persons = new UniquePersonList();
         tags = new UniqueTagList();
+        weddings = new UniqueWeddingList();
     }
 
     public AddressBook() {}
@@ -108,17 +112,45 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// tag-level operations
 
     /**
-     * Adds a tag to the address book.
-     * The tag must not already exist in the address book.
+     * Adds a tag to the Wedlinker.
+     * The tag must not already exist in the Wedlinker.
+     * @param tag A {@code Tag} object to be added.
      */
-    public void addTag(Tag tag) { tags.add(tag); }
+    public void addTag(Tag tag) {
+        tags.add(tag);
+    }
 
     /**
-     * Returns true if a tag with the same name as {@code tag} exists in the address book.
+     * Returns true if a tag with the same name as {@code tag} exists in the Wedlinker.
      */
     public boolean hasTag(Tag tag) {
         requireNonNull(tag);
         return tags.contains(tag);
+    }
+
+    /**
+     * Adds a wedding to the Wedlinker
+     * The wedding must not already exist in the Wedlinker
+     * @param wedding A {@code Wedding} object to be added.
+     */
+    public void addWedding(Wedding wedding) {
+        weddings.add(wedding);
+    }
+
+    /**
+     * Returns true if a wedding with the same name as the {@code wedding} exists in the Wedlinker.
+     */
+    public boolean hasWedding(Wedding wedding) {
+        requireNonNull(wedding);
+        return weddings.contains(wedding);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeWedding(Wedding key) {
+        weddings.remove(key);
     }
 
     /**
@@ -136,7 +168,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removeTag(Tag key) { tags.remove(key); }
+    public void removeTag(Tag key) {
+        tags.remove(key);
+    }
 
     //// util methods
 
@@ -153,7 +187,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<Tag> getTagList() { return tags.asUnmodifiableObservableList(); }
+    public ObservableList<Tag> getTagList() {
+        return tags.asUnmodifiableObservableList();
+    }
+
+    public ObservableList<Wedding> getWeddingList() {
+        return weddings.asUnmodifiableObservableList();
+    }
 
     @Override
     public boolean equals(Object other) {

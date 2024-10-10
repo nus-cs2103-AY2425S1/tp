@@ -8,7 +8,7 @@ import static java.util.Objects.requireNonNull;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS = "Tag names should be alphanumeric";
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     private final TagName tagName;
@@ -16,8 +16,7 @@ public class Tag {
 
     /**
      * Constructs a {@code Tag}.
-     *
-     * @param tagName A valid tag name.
+     * @param tagName A valid {@code TagName}.
      */
     public Tag(TagName tagName) {
         requireNonNull(tagName);
@@ -34,7 +33,7 @@ public class Tag {
 
     /**
      * Returns true if another tag has the same TagName as this tag.
-     * @param otherTag A tag to compare with.
+     * @param otherTag A {@code tag} to compare with.
      */
     public boolean isSameTag(Tag otherTag) {
         if (otherTag == this) {
@@ -88,6 +87,7 @@ public class Tag {
     /**
      * Format state as text for viewing.
      */
+    @Override
     public String toString() {
         return '[' + tagName.toString() + ']';
     }

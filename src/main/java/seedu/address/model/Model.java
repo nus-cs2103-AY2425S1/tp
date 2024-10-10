@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.wedding.Wedding;
 
 /**
  * The API of the Model component.
@@ -15,6 +16,7 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
     Predicate<Tag> PREDICATE_SHOW_ALL_TAGS = unused -> true;
+    Predicate<Wedding> PREDICATE_SHOW_ALL_WEDDINGS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -96,7 +98,7 @@ public interface Model {
     void updateFilteredPersonListByTag(Predicate<Tag> tagPredicate);
 
     /**
-     * Returns true if a tag with the same name as (@code tag} exists in the addres book.
+     * Returns true if a tag with the same name as {@code toAdd} exists in the Wedlinker.
      */
     boolean hasTag(Tag toAdd);
 
@@ -117,7 +119,35 @@ public interface Model {
 
     /**
      * Deletes the given tag.
-     * The tag must exist in the AddressBook.
+     * The tag must exist in the Wedlinker.
      */
     void deleteTag(Tag toDelete);
+
+    /**
+     * Returns true if a tag with the same name as {@code toAdd} exists in the Wedlinker.
+     * @param toAdd A {@code Wedding} object, will be checked to see if the model already has this.
+     * @return A boolean, true if the Wedlinker already contains the {@code Wedding}, false if it does not.
+     */
+    boolean hasWedding(Wedding toAdd);
+
+    /**
+     * Adds the given {@code Wedding} to the Wedlinker.
+     * @param toAdd A {@code Wedding} to add to the Wedlinker.
+     */
+    void addWedding(Wedding toAdd);
+
+    /**
+     * Deletes the given wedding.
+     * The wedding must exist in the Wedlinker.
+     */
+    void deleteWedding(Wedding toDelete);
+
+    /** Returns an unmodifiable view of the filtered wedding list */
+    ObservableList<Wedding> getFilteredWeddingList();
+
+    /**
+     * Updates the filter of the filtered wedding list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredWeddingList(Predicate<Wedding> predicate);
 }
