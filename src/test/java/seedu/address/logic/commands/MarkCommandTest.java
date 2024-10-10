@@ -32,8 +32,8 @@ public class MarkCommandTest {
 
     @Test
     public void constructor_invalidIndex_throwsParseException() {
-        assertThrows(ParseException.class,
-                () -> new MarkCommand(ParserUtil.parseIndex("-1"),
+        assertThrows(ParseException.class, () ->
+                new MarkCommand(ParserUtil.parseIndex("-1"),
                         new Tutorial("2")).execute(model));
     }
 

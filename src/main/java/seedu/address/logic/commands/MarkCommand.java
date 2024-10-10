@@ -25,8 +25,6 @@ public class MarkCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + "tut/1";
 
-    public static final String MESSAGE_NOT_IMPLEMENTED_YET = "Mark command has not be implemented";
-
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Tutorial: %2$s";
 
     public static final String MESSAGE_ADD_MARK_SUCCESS = "Marked tutorial for Person: %1$s";
