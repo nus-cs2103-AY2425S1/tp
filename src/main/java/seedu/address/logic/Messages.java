@@ -44,6 +44,8 @@ public class Messages {
                 .append(person.getEmail())
                 .append("; Address: ")
                 .append(person.getAddress())
+                .append("; Job: ")
+                .append(person.getJob())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
         return builder.toString();
@@ -57,7 +59,8 @@ public class Messages {
         builder.append("Name: ").append(person.getName())
                 .append("\nPhone: ").append(person.getPhone())
                 .append("\nEmail: ").append(person.getEmail())
-                .append("\nAddress: ").append(person.getAddress());
+                .append("\nAddress: ").append(person.getAddress())
+                .append("\nJob: ").append(person.getJob());
         return builder.toString();
     }
 
