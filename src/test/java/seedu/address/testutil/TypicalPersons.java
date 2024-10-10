@@ -43,7 +43,7 @@ public class TypicalPersons {
             .withIncome(30)
             .withTags("friends")
             .withRemark(EMPTY_REMARK).build();
-    public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
+    public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("94822240")
             .withEmail("werner@example.com").withAddress("michegan ave")
             .withIncome(20)
             .withRemark(EMPTY_REMARK).build();
