@@ -8,8 +8,8 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.tag.Role;
 import seedu.address.model.tag.Nickname;
-import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
@@ -24,19 +24,19 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Set<Role> roles = new HashSet<>();
     private final Nickname nickname;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Nickname nickname) {
-        requireAllNonNull(name, phone, email, address, tags, nickname);
+    public Person(Name name, Phone phone, Email email, Address address, Set<Role> roles, Nickname nickname) {
+        requireAllNonNull(name, phone, email, address, roles, nickname);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.tags.addAll(tags);
+        this.roles.addAll(roles);
         this.nickname = nickname;
     }
 
@@ -60,8 +60,8 @@ public class Person {
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Set<Role> getTags() {
+        return Collections.unmodifiableSet(roles);
     }
 
     public Nickname getNickname() {
@@ -101,14 +101,14 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags)
+                && roles.equals(otherPerson.roles);
                 && nickname.equals(otherPerson.nickname);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, nickname);
+        return Objects.hash(name, phone, email, address, roles, nickname);
     }
 
     @Override
@@ -118,7 +118,7 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("tags", tags)
+                .add("tags", roles)
                 .add("nickname", nickname)
                 .toString();
     }
