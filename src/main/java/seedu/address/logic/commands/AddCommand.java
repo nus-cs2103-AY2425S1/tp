@@ -19,7 +19,7 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an internship to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an internship application to the address book. "
             + "Parameters: "
             + PREFIX_COMPANY + "COMPANY "
             + PREFIX_ROLE + "ROLE "
@@ -31,8 +31,8 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "abc_company@example.com "
             + PREFIX_DATE + "16/09/24";
 
-    public static final String MESSAGE_SUCCESS = "New internship added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This internship already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New internship application added: %1$s";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This internship application already exists in the address book";
 
     private final Person toAdd;
 
