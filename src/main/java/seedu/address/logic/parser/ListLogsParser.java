@@ -1,13 +1,14 @@
 package seedu.address.logic.parser;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.DeleteCommand;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import seedu.address.logic.commands.ListLogsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
-public class ListLogsParser implements Parser<ListLogsCommand>{
+/**
+ * Parses input arguments and creates a new ListLogsCommand object
+ */
+public class ListLogsParser implements Parser<ListLogsCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteCommand
      * and returns a DeleteCommand object for execution.
@@ -15,8 +16,8 @@ public class ListLogsParser implements Parser<ListLogsCommand>{
      */
     public ListLogsCommand parse(String args) throws ParseException {
         try {
-            String NRIC = ParserUtil.parseNRIC(args);
-            return new ListLogsCommand(NRIC);
+            String nric = ParserUtil.parseNric(args);
+            return new ListLogsCommand(nric);
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListLogsCommand.MESSAGE_USAGE), pe);

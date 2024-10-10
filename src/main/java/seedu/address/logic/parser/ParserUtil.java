@@ -122,7 +122,13 @@ public class ParserUtil {
         return tagSet;
     }
 
-    public static String parseNRIC(String nric) throws ParseException {
+    /**
+     * Parses a {@code String nric} into a {@code NRIC}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code nric} is invalid.
+     */
+    public static String parseNric(String nric) throws ParseException {
         requireNonNull(nric);
         String trimmedNric = nric.trim();
 
