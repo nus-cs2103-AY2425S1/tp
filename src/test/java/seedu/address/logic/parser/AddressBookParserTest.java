@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddContactCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -22,6 +22,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -36,8 +37,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Person person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddCommand(person), command);
+        AddContactCommand command = (AddContactCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
+        assertEquals(new AddContactCommand(person), command);
     }
 
     @Test
@@ -83,9 +84,10 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    public void parseCommand_listPerson() throws Exception {
+        String listPersonCommand = ListCommand.COMMAND_WORD + " " + ListPersonCommand.COMMAND_FIELD;
+        assertTrue(parser.parseCommand(listPersonCommand) instanceof ListCommand);
+        assertTrue(parser.parseCommand(listPersonCommand + " 3") instanceof ListCommand);
     }
 
     @Test
