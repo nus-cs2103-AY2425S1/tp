@@ -76,6 +76,17 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    /**
+     * Marks the given person {@code target} as a VIP if newVipStatus is true,
+     * otherwise revokes their status as VIP.
+     * {@code target} must exist in the address book.
+     *
+     * @param target
+     * @param newVipStatus
+     * @return
+     */
+    boolean markVip(Person target, boolean newVipStatus);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 

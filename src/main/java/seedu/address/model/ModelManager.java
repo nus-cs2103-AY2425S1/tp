@@ -111,6 +111,15 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public boolean markVip(Person target, boolean newVipStatus) {
+        if (newVipStatus == target.isVip()) {
+            return false;
+        }
+        target.setVipStatus(newVipStatus);
+        return true;
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
