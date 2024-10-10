@@ -28,7 +28,7 @@ class JsonAdaptedEvent {
     @JsonCreator
     public JsonAdaptedEvent(@JsonProperty("name") String name, @JsonProperty("time") String time,
                              @JsonProperty("venue") String venue,
-                            @JsonProperty("contact") JsonAdaptedPerson celebrity) {
+                            @JsonProperty("celebrity") JsonAdaptedPerson celebrity) {
         this.name = name;
         this.time = time;
         this.venue = venue;
