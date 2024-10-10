@@ -10,8 +10,10 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AbstractFindCommand;
 import seedu.address.logic.commands.FindByContactCommand;
+import seedu.address.logic.commands.FindByEmailCommand;
 import seedu.address.logic.commands.FindByNameCommand;
 import seedu.address.model.person.ContactContainsKeywordsPredicate;
+import seedu.address.model.person.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
@@ -47,6 +49,19 @@ public class FindCommandParserTest {
 
         // multiple whitespaces between keywords
         assertParseSuccess(parser, "/c \n 91234567 \n \t 995  \t", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_validArgs_returnsFindByEmailCommand() {
+        FindByEmailCommand expectedFindCommand =
+                new FindByEmailCommand(new EmailContainsKeywordsPredicate(
+                        Arrays.asList("ryan@gmail.com", "tasha@gmail.com")));
+
+        // no leading and trailing whitespaces
+        assertParseSuccess(parser, "/e ryan@gmail.com tasha@gmail.com", expectedFindCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, "/e \n ryan@gmail.com \n \t tasha@gmail.com  \t", expectedFindCommand);
     }
 
 }

@@ -8,9 +8,11 @@ import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AbstractFindCommand;
 import seedu.address.logic.commands.FindByContactCommand;
+import seedu.address.logic.commands.FindByEmailCommand;
 import seedu.address.logic.commands.FindByNameCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ContactContainsKeywordsPredicate;
+import seedu.address.model.person.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
@@ -49,6 +51,9 @@ public class FindCommandParser implements Parser<AbstractFindCommand> {
         case "/c":
             return new FindByContactCommand(
                     new ContactContainsKeywordsPredicate(Arrays.asList(searchTermArray)));
+        case "/e":
+            return new FindByEmailCommand(
+                    new EmailContainsKeywordsPredicate(Arrays.asList(searchTermArray)));
         default:
             return null; // temporary value, this should not occur due to regex
         }
