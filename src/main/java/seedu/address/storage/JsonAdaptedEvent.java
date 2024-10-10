@@ -20,7 +20,7 @@ class JsonAdaptedEvent {
     private final String name;
     private final String time;
     private final String venue;
-    private final JsonAdaptedPerson mainContact;
+    private final JsonAdaptedPerson celebrity;
 
     /**
      * Constructs a {@code JsonAdaptedEvent} with the given event details.
@@ -28,11 +28,11 @@ class JsonAdaptedEvent {
     @JsonCreator
     public JsonAdaptedEvent(@JsonProperty("name") String name, @JsonProperty("time") String time,
                              @JsonProperty("venue") String venue,
-                            @JsonProperty("contact") JsonAdaptedPerson mainContact) {
+                            @JsonProperty("celebrity") JsonAdaptedPerson celebrity) {
         this.name = name;
         this.time = time;
         this.venue = venue;
-        this.mainContact = mainContact;
+        this.celebrity = celebrity;
     }
 
     /**
@@ -42,7 +42,7 @@ class JsonAdaptedEvent {
         name = source.getName().getEventName();
         time = source.getTime().getTime();
         venue = source.getVenue().getVenue();
-        mainContact = new JsonAdaptedPerson(source.getMainContact());
+        celebrity = new JsonAdaptedPerson(source.getCelebrity());
     }
 
     /**
@@ -68,12 +68,12 @@ class JsonAdaptedEvent {
         }
         final Venue eventVenue = new Venue(venue);
 
-        if (mainContact == null) {
+        if (celebrity == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Person.class.getSimpleName()));
         }
-        final Person eventMainContact = mainContact.toModelType();
+        final Person eventCelebrity = celebrity.toModelType();
 
-        return new Event(eventName, eventTime, eventVenue, eventMainContact);
+        return new Event(eventName, eventTime, eventVenue, eventCelebrity);
     }
 
 }
