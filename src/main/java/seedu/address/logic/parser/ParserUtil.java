@@ -81,6 +81,15 @@ public class ParserUtil {
         return new Address(trimmedAddress);
     }
 
+    /**
+     * Parses the given {@code String telegramUsername} and returns a {@code TelegramUsername} object.
+     * Leading and trailing spaces will be trimmed.
+     *
+     * @param telegramUsername The username string to be parsed. Can be {@code null}.
+     * @return A {@code TelegramUsername} object with the trimmed username.
+     * @throws ParseException if the provided {@code telegramUsername} is invalid according to the
+     *         {@code TelegramUsername#isValidUsername(String)} method.
+     */
     public static TelegramUsername parseTele(String telegramUsername) throws ParseException {
         if (telegramUsername == null) {
             return new TelegramUsername(telegramUsername);

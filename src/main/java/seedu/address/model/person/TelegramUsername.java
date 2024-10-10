@@ -1,9 +1,6 @@
 package seedu.address.model.person;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
-
-import java.util.Optional;
 
 /**
  * Represents a Person's Telegram Username in the address book.

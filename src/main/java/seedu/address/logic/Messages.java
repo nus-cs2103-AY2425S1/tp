@@ -36,7 +36,7 @@ public class Messages {
      */
     public static String format(Person person) {
         String telegramUsername = person.getTelegramUsername()
-                .toString() == null ? "": person.getTelegramUsername().toString();
+                .toString() == null ? "" : person.getTelegramUsername().toString();
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName())
                 .append("; Phone: ")
