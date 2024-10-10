@@ -4,6 +4,7 @@
     "phone": "94351253",
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
+    "job": "Student",
     "income": "234",
     "tagged": [ "friends" ],
     "remark" : "She is stingy"
@@ -12,6 +13,7 @@
     "phone": "94351253",
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
+    "job": "Quantitative Trader III",
     "income": "123",
     "remark" : "She is stingy"
   } ]

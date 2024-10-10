@@ -13,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Income;
+import seedu.address.model.person.Job;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -30,6 +31,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final String job;
     private final String incomeString;
     private final String remark;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
@@ -40,13 +42,13 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
-                             @JsonProperty("income") String incomeString,
-                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
-                             @JsonProperty("remark") String remark) {
+                             @JsonProperty("job") String job, @JsonProperty("income") String incomeString,
+                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged, @JsonProperty("remark") String remark) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.job = job;
         this.incomeString = incomeString;
         this.remark = remark;
         if (tagged != null) {
@@ -62,7 +64,8 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        incomeString = ((Integer) source.getIncome().value).toString();
+        job = source.getJob().value;
+        incomeString = Integer.toString(source.getIncome().value);
         remark = source.getRemark().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -112,6 +115,14 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        if (job == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Job.class.getSimpleName()));
+        }
+        if (!Job.isValidJob(job)) {
+            throw new IllegalValueException(Job.MESSAGE_CONSTRAINTS);
+        }
+        final Job modelJob = new Job(job);
+
         if (!Income.isValidIncome(incomeString)) {
             throw new IllegalValueException(Income.MESSAGE_CONSTRAINTS);
         }
@@ -123,7 +134,7 @@ class JsonAdaptedPerson {
         final Remark modelRemark = new Remark(remark);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelIncome, modelTags, modelRemark);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelJob, modelIncome, modelTags, modelRemark);
     }
 
 }
