@@ -116,19 +116,19 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
-
+<img src="images/UpdatedModelClassDiagram.png" width="450" />
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* stores the address book data i.e., all `Person` objects (which include both `Patient` and `Caregiver` objects). These are contained in a `UniquePersonList` object.
+* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list, which is exposed to outsiders as an unmodifiable `ObservableList<Person>`. The UI can be bound to this list so that it automatically updates when the data changes.
+* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` object.
+* manages relationships between `Patient` and `Caregiver`. Each `Patient` can have one or more `Caregivers` linked to them through a `List<Caregiver>` in the `Patient` object. Caregivers are linked by a `patientID`.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+The `Model` does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The updated model introduces a `Caregiver` class linked to a `Patient` object through a unique `patientID`. The system maintains this relationship and ensures that caregivers can only be associated with valid patients.<br>
+
 
 </div>
 
@@ -272,31 +272,31 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a...                                      | I want to...                              | So that I can...                                                        |
-| -------- | -------------------------------------------- | ----------------------------------------- | ----------------------------------------------------------------------- |
-| `* * *`  | new user                                     | use sample data to walk through features  | explore the app without inputting my own data                           |
-| `* * *`  | new user                                     | remove sample data                        | start using the app for my own data                                     |
-| `* * *`  | new user                                     | set up a doctor profile                   | customize the system based on my professional needs                     |
-| `* * *`  | new user                                     | add patient details via CLI               | efficiently manage a heavy patient load                                 |
-| `* * *`  | new user                                     | use the help command                      | refer to available commands and usage instructions                      |
-| `* * *`  | regular user                                 | store patient data                        | view patient details across multiple sessions without re-entering       |
-| `* * *`  | regular user                                 | distinguish between duplicate patients    | avoid confusion when patients have the same name                        |
-| `* * *`  | regular user                                 | edit patient data                         | update patient information such as contact details                      |
-| `* * *`  | regular user                                 | delete patient data                       | remove patients who no longer need to be tracked                        |
-| `* * *`  | regular user                                 | schedule follow-up appointments           | quickly update and track patient follow-ups                             |
-| `* * *`  | novice user                                  | filter appointments by date               | plan my day effectively by viewing scheduled appointments               |
-| `* * *`  | novice user                                  | filter by condition                       | prioritize patients based on their medical conditions                   |
-| `* * *`  | novice user                                  | filter by patients                        | find patients with higher health risks to follow up with them           |
-| `* *`  | novice user                                  | send email reminders to patients          | remind patients about upcoming appointments                             |
-| `* *`  | experienced user                             | batch update patient contact records      | streamline updates after events like mass screenings                    |
-| `*`  | experienced user                             | batch delete patient contact records      | declutter the system by removing multiple patients at once              |
-| `*`  | experienced user                             | retrieve patient medication history       | quickly find past medications in emergency situations                   |
-| `*`  | experienced user                             | retrieve caregiver information            | inform caregivers to enhance patient care                               |
-| `*`  | experienced user                             | use aliases for commands                  | speed up command usage in the CLI app                                   |
-| `*`  | experienced user                             | remove inactive patients from default view| declutter the app and focus on active patients                          |
-| `*`  | experienced user                             | use fuzzy search to retrieve patient details | find patient information even with partial or incomplete data         |
-| `*`  | experienced user                             | export patient data to a CSV file         | backup data and use it in other applications                            |
-| `*`  | experienced user                             | import patient data from a CSV file       | restore backups or transfer data from other systems                     |
+| Priority | As a...          | I want to...                                 | So that I can...                                                  |
+| -------- | ---------------- | -------------------------------------------- | ----------------------------------------------------------------- |
+| `* * *`  | new user         | use sample data to walk through features     | explore the app without inputting my own data                     |
+| `* * *`  | new user         | remove sample data                           | start using the app for my own data                               |
+| `* * *`  | new user         | set up a doctor profile                      | customize the system based on my professional needs               |
+| `* * *`  | new user         | add patient details via CLI                  | efficiently manage a heavy patient load                           |
+| `* * *`  | new user         | use the help command                         | refer to available commands and usage instructions                |
+| `* * *`  | regular user     | store patient data                           | view patient details across multiple sessions without re-entering |
+| `* * *`  | regular user     | distinguish between duplicate patients       | avoid confusion when patients have the same name                  |
+| `* * *`  | regular user     | edit patient data                            | update patient information such as contact details                |
+| `* * *`  | regular user     | delete patient data                          | remove patients who no longer need to be tracked                  |
+| `* * *`  | regular user     | schedule follow-up appointments              | quickly update and track patient follow-ups                       |
+| `* * *`  | novice user      | filter appointments by date                  | plan my day effectively by viewing scheduled appointments         |
+| `* * *`  | novice user      | filter by condition                          | prioritize patients based on their medical conditions             |
+| `* * *`  | novice user      | filter by patients                           | find patients with higher health risks to follow up with them     |
+| `* *`    | novice user      | send email reminders to patients             | remind patients about upcoming appointments                       |
+| `* *`    | experienced user | batch update patient contact records         | streamline updates after events like mass screenings              |
+| `*`      | experienced user | batch delete patient contact records         | declutter the system by removing multiple patients at once        |
+| `*`      | experienced user | retrieve patient medication history          | quickly find past medications in emergency situations             |
+| `*`      | experienced user | retrieve caregiver information               | inform caregivers to enhance patient care                         |
+| `*`      | experienced user | use aliases for commands                     | speed up command usage in the CLI app                             |
+| `*`      | experienced user | remove inactive patients from default view   | declutter the app and focus on active patients                    |
+| `*`      | experienced user | use fuzzy search to retrieve patient details | find patient information even with partial or incomplete data     |
+| `*`      | experienced user | export patient data to a CSV file            | backup data and use it in other applications                      |
+| `*`      | experienced user | import patient data from a CSV file          | restore backups or transfer data from other systems               |
 
 *User stories for the MVP:* Stories 4, 6 and 9 are for the MVP
 *User stories for the final version:* Stories 1 - 13 are for the final version.
