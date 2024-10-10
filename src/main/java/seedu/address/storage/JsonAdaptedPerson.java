@@ -16,6 +16,8 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.person.University;
+import seedu.address.model.person.Major;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -29,6 +31,9 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String university;
+    private final String major;
+
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -36,11 +41,14 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags,  @JsonProperty("university") String university,
+                             @JsonProperty("major") String major) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.university = university;
+        this.major = major;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -54,6 +62,8 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        university = source.getUniversity().value;
+        major = source.getMajor().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -103,7 +113,19 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+
+        // Validation for new fields
+        if (university == null || university.trim().isEmpty()) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "University"));
+        }
+        final University modelUniversity = new University(university);
+
+        if (major == null || major.trim().isEmpty()) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Major"));
+        }
+        final Major modelMajor = new Major(major);
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelUniversity, modelMajor);
     }
 
 }
