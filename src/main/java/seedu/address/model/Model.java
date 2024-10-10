@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.student.Student;
+import seedu.address.model.tut.Tut;
 
 /**
  * The API of the Model component.
@@ -85,4 +86,6 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredStudentList(Predicate<Student> predicate);
+    boolean hasTutorial(Tut tutorial);
+    void addTutorial(Tut toAdd);
 }

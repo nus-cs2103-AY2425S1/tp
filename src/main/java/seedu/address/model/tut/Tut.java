@@ -35,10 +35,16 @@ public class Tut {
         this.tutName = tutName;
         this.id = id;
     }
-    void add(Student student) {
+    /**
+     * * Adds student to the tutorial
+     **/
+    public void add(Student student) {
         if (student != null && !students.contains(student)) {
             students.add(student);
         }
+    }
+    public List<Student> getStudents() {
+        return this.students;
     }
 
     public static boolean isValidName(String test) {
