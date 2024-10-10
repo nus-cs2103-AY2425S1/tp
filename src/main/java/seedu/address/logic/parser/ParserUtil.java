@@ -91,7 +91,7 @@ public class ParserUtil {
      */
     public static Nric parseNric(String nric) throws ParseException {
         requireNonNull(nric);
-        String trimmedNric = nric.trim();
+        String trimmedNric = nric.trim().toUpperCase();
         if (!Nric.isValidNric(trimmedNric)) {
             throw new ParseException(Nric.MESSAGE_CONSTRAINTS);
         }
