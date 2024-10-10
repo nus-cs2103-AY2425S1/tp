@@ -1,10 +1,10 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
+import seedu.address.commons.util.ToStringBuilder;
 
 import java.util.Objects;
 
-import seedu.address.commons.util.ToStringBuilder;
+import static java.util.Objects.requireNonNull;
 
 /**
  * Represents the result of a command execution.
@@ -13,10 +13,14 @@ public class CommandResult {
 
     private final String feedbackToUser;
 
-    /** Help information should be shown to the user. */
+    /**
+     * Help information should be shown to the user.
+     */
     private final boolean showHelp;
 
-    /** The application should exit. */
+    /**
+     * The application should exit.
+     */
     private final boolean exit;
 
     /**
