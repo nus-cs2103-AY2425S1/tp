@@ -62,6 +62,19 @@ public class PersonTest {
         Person editedBob = new PersonBuilder(BOB).withEmail(VALID_EMAIL_AMY).build();
         Person aliceWithNewEmail = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_AMY).build();
         assertTrue(aliceWithNewEmail.hasSameEmail(editedBob));
+
+        assertFalse(ALICE.hasSameEmail(null));
+    }
+
+    @Test
+    public void hasDuplicateInfo() {
+        assertTrue(ALICE.hasDuplicateInfo(ALICE));
+        assertFalse(ALICE.hasDuplicateInfo(null));
+
+        Person editedBob = new PersonBuilder(BOB).withEmail(VALID_EMAIL_AMY).build();
+        Person aliceWithNewEmail = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_AMY).build();
+        assertTrue(editedBob.hasDuplicateInfo(aliceWithNewEmail));
+        assertFalse(editedBob.hasDuplicateInfo(ALICE));
     }
 
     @Test
