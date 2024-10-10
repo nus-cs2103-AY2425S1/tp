@@ -40,9 +40,10 @@ public class NricContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_NricContainsKeywords_returnsTrue() {
+    public void test_nricContainsKeywords_returnsTrue() {
         // One keyword
-        NricContainsKeywordsPredicate predicate = new NricContainsKeywordsPredicate(Collections.singletonList("S1234567Z"));
+        NricContainsKeywordsPredicate predicate = new NricContainsKeywordsPredicate(
+                Collections.singletonList("S1234567Z"));
         assertTrue(predicate.test(new PersonBuilder().withNric("S1234567Z").build()));
 
         // Multiple keywords
@@ -55,7 +56,7 @@ public class NricContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_NricDoesNotContainKeywords_returnsFalse() {
+    public void test_nricDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         NricContainsKeywordsPredicate predicate = new NricContainsKeywordsPredicate(Collections.emptyList());
         assertFalse(predicate.test(new PersonBuilder().withNric("S1234567Z").build()));
