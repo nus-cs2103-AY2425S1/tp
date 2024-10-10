@@ -34,7 +34,7 @@ public class AppointmentCommand extends Command {
 
     /**
      * Constructor to create an AppointmentCommand.
-     * 
+     *
      * @param targetIndex Index of the person to set the appointment for.
      * @param appointmentString String of the appointment in the format a/DD-MM-YYYY HH:MM.
      */
@@ -57,7 +57,6 @@ public class AppointmentCommand extends Command {
                 personToEdit.getAddress(), personToEdit.getTags(), new Appointment(this.appointmentString));
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        
         return new CommandResult("Set appointment for " + personToEdit.getName()+ " on " + this.appointmentString);
     }
 
