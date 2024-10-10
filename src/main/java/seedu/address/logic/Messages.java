@@ -19,6 +19,9 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
 
+    // List Command Error Message
+    public static final String LIST_MESSAGE_INVALID_COMMAND = "Please ensure your command is valid!";
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
