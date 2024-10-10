@@ -10,7 +10,6 @@
 It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). 
 If you can type fast, `SupplyCentral` can get your supplier and goods management tasks done faster than traditional GUI apps.
 
-### Example Usage
 - Maintain a of list of suppliers and their contact information
 - Keep track of the goods that you have ordered from each supplier
 
