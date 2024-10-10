@@ -3,8 +3,11 @@ package seedu.address.model.role;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -93,6 +96,69 @@ public class RoleTest {
         assertThrows(IllegalArgumentException.class, () -> role.removePerson(ALICE));
     }
 
+    @Test
+    public void toString_attendee() {
+        Role role = new Attendee();
+        assertEquals(role.toString(), "[attendee]");
+    }
+
+
+    @Test
+    public void peopleString_noPeople() {
+        Role role = new Attendee();
+        assertEquals(role.getPeopleString(), "[]");
+    }
+
+    @Test
+    public void peopleString_onePerson() {
+        Role role = new Attendee();
+        role.addPerson(ALICE);
+        assertEquals(role.getPeopleString(), "[" + ALICE.toString() + "]");
+    }
+
+    @Test
+    public void peopleString_twoPerson() {
+        Role role = new Vendor();
+        role.addPerson(ALICE);
+        role.addPerson(BOB);
+        assertEquals(role.getPeopleString(), "[" + ALICE.toString() + ", " + BOB.toString() + "]");
+    }
+
+    @Test
+    public void peopleString_outputList() {
+        Role role = new Vendor();
+        role.addPerson(ALICE);
+        role.addPerson(BOB);
+        ArrayList<Person> people = new ArrayList<>();
+        people.add(ALICE);
+        people.add(BOB);
+        assertEquals(role.getPeopleString(), people.toString());
+    }
+    @Test
+    public void getPeople_noPeople() {
+        Role role = new Attendee();
+        assertEquals(role.getPeople().size(), 0);
+    }
+
+    @Test
+    public void getPeople_onePerson() {
+        Role role = new Attendee();
+        role.addPerson(ALICE);
+        Set<Person> people = new HashSet<Person>();
+        people.add(ALICE);
+        assertEquals(role.getPeople(), people);
+    }
+
+    @Test
+    public void getPeople_twoPerson() {
+        Role role = new Vendor();
+        role.addPerson(ALICE);
+        role.addPerson(BOB);
+        Set<Person> people = new HashSet<Person>();
+        people.add(ALICE);
+        people.add(BOB);
+        assertEquals(role.getPeople(), people);
+    }
 
 
 }
