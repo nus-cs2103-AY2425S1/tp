@@ -9,6 +9,7 @@ public class InsurancePlanFactory {
 
     /** Error message when a insuranceId passed in is invalid. */
     public static final String INVALID_PLAN_ID_MESSAGE = "This Insurance Plan ID is invalid!";
+    public static final String INVALID_PLAN_NAME_MESSAGE = "This Insurance Plan Name is invalid!";
 
     /**
      * Creates InsurancePlan Object based on the given insurance id.
@@ -38,7 +39,7 @@ public class InsurancePlanFactory {
         } else if (insurancePlanName.equals("Travel Insurance Plan")) {
             return new TravelPlan();
         } else {
-            throw new ParseException(INVALID_PLAN_ID_MESSAGE);
+            throw new ParseException(INVALID_PLAN_NAME_MESSAGE);
         }
     }
 

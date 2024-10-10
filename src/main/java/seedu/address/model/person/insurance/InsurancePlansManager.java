@@ -1,5 +1,7 @@
 package seedu.address.model.person.insurance;
 
+import static seedu.address.model.person.insurance.InsurancePlanFactory.createInsurancePlan;
+
 import java.util.ArrayList;
 
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -24,6 +26,16 @@ public class InsurancePlansManager {
         this.insurancePlans = new ArrayList<>();
     }
 
+    public InsurancePlansManager(String insurancePlansString) throws ParseException{
+        this();
+        if (!insurancePlansString.equals("No added plans")) {
+            String[] planNames = insurancePlansString.split(", ");
+            for (String planName : planNames) {
+                InsurancePlan planToBeAdded = createInsurancePlan(planName);
+                addPlan(planToBeAdded);
+            }
+        }
+    }
 
     /**
      * Returns a list of insurance plans currently owned by the client.

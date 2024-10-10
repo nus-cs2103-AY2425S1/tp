@@ -99,12 +99,14 @@ public class PersonBuilder {
     /**
      * Sets the {@code InsurancePlansManager} of the {@code Person} that we are building.
      */
-    public PersonBuilder withInsurancePlansManager(String... insurancePlans) {
+    public PersonBuilder withInsurancePlansManager(String insurancePlansString) {
         try {
-            for (String insurancePlanName : insurancePlans) {
-                InsurancePlan planToBeAdded = InsurancePlanFactory.createInsurancePlan(insurancePlanName);
-                this.insurancePlansManager.addPlan(planToBeAdded);
-            }
+        this.insurancePlansManager = new InsurancePlansManager(insurancePlansString);
+//        try {
+//            for (InsurancePlan plan : insurancePlansManager.getInsurancePlans()) {
+//                InsurancePlan planToBeAdded = InsurancePlanFactory.createInsurancePlan(plan.getInsurancePlanId());
+//                this.insurancePlansManager.addPlan(planToBeAdded);
+//            }
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }

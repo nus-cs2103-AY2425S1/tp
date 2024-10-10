@@ -38,12 +38,12 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("insurancePlans") String insurancePlans, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("insurancePlans") String insurancePlansString, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.insurancePlans = insurancePlans;
+        this.insurancePlans = insurancePlansString;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -110,7 +110,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     InsurancePlansManager.class.getSimpleName()));
         }
-        final InsurancePlansManager modelInsurancePlansManager = new InsurancePlansManager();
+        final InsurancePlansManager modelInsurancePlansManager = new InsurancePlansManager(insurancePlans);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelInsurancePlansManager, modelTags);

@@ -17,6 +17,7 @@ import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.insurance.InsurancePlansManager;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
@@ -31,7 +32,7 @@ public class TypicalPersons {
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withInsurancePlansManager("Basic Insurance Plan", "Travel Insurance Plan")
+            .withInsurancePlansManager("Basic Insurance Plan, Travel Insurance Plan")
             .withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com")

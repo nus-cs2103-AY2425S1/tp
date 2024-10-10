@@ -4,13 +4,13 @@
     "phone": "94351253",
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
-    "insurancePlans" : "",
+    "insurancePlans" : "No added plans",
     "tags": [ "friends" ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
-    "insurancePlans" : "",
+    "insurancePlans" : "No added plans",
     "address": "4th street"
   } ]
 }
