@@ -25,7 +25,7 @@ public class Date {
     // Regex "\\d{4}-\\d{2}-\\d{2}]" used to identify if a String matched the requried LocalDate format is reused
     // from the author's reply on Stack Overflow
     // source: https://stackoverflow.com/questions/2149680/regex-date-format-validation-on-java
-    public static final String VALIDATION_REGEX = "\\d{4}-\\d{2}-\\d{2}]";
+    public static final String VALIDATION_REGEX = "\\d{4}-\\d{2}-\\d{2}";
     //@@ author
 
     public final LocalDate date;
