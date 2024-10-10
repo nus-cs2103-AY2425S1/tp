@@ -3,30 +3,53 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_GEORGE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
+import seedu.address.model.AddressBook;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Tag;
+import seedu.address.testutil.PersonBuilder;
 
 public class TagAddCommandTest {
 
-    // private Model model = new ModelManager(getTypicalAddressBook(), new
-    // UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Set<Tag> stubTagList = new HashSet<>();
 
+    @Test
+    public void execute_addRemarkUnfilteredList_success() {
+        List<Person> matchingPersons = model.getFilteredPersonList().stream()
+                .filter(person -> person.getName().fullName.equalsIgnoreCase(VALID_NAME_GEORGE))
+                .toList();
 
-    // @Test
-    // public void execute() {
-    //     assertCommandFailure(new RemarkCommand(), model, MESSAGE_NOT_IMPLEMENTED_YET);
-    //     final String remark = "Some remark";
-    //     assertCommandFailure(new RemarkCommand(INDEX_FIRST_PERSON, remark), model,
-    //             String.format(MESSAGE_ARGUMENTS, INDEX_FIRST_PERSON.getOneBased(), remark));
-    // }
+        Person firstPerson = matchingPersons.get(0);
+        Person editedPerson = new PersonBuilder(firstPerson).withTags(VALID_TAG_FRIEND).build();
+
+        stubTagList.add(new Tag(VALID_TAG_FRIEND));
+        TagAddCommand tagAddCommand = new TagAddCommand(editedPerson.getName(), stubTagList);
+
+        String expectedMessage = String.format(TagAddCommand.MESSAGE_ADD_TAG_SUCCESS, Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(firstPerson, editedPerson);
+
+        assertCommandSuccess(tagAddCommand, model, expectedMessage, expectedModel);
+    }
 
     @Test
     public void equals() {
