@@ -146,7 +146,6 @@ class JsonAdaptedPerson {
         }
         final ClientStatus modelClientStatus = new ClientStatus(clientStatus);
 
-      
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags,
                 modelProjectStatus, modelPaymentStatus, modelClientStatus);
     }
