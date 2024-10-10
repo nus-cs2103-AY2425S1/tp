@@ -5,12 +5,14 @@ import static java.util.Objects.requireNonNull;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.PatternSyntaxException;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.GradeLevel;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -120,5 +122,32 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String gradeLevel} into a {@code GradeLevel}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code gradeLevel} is invalid.
+     */
+    public static GradeLevel parseGradeLevel(String gradeLevel) throws ParseException {
+        requireNonNull(gradeLevel);
+        String trimmedGradeLevel = gradeLevel.trim();
+        if (!GradeLevel.isValidGradeLevel(trimmedGradeLevel)) {
+            throw new ParseException(GradeLevel.MESSAGE_CONSTRAINTS);
+        }
+        String schoolLevel;
+        int grade;
+        try {
+            schoolLevel = trimmedGradeLevel.split(" ")[0];
+            grade = Integer.parseInt(trimmedGradeLevel.split(" ")[1]);
+        }
+        catch (NumberFormatException e) {
+            throw new ParseException(GradeLevel.MESSAGE_CONSTRAINTS);
+        }
+        catch (PatternSyntaxException e) {
+            throw new ParseException(GradeLevel.MESSAGE_CONSTRAINTS);
+        }
+        return new GradeLevel(schoolLevel, grade);
     }
 }
