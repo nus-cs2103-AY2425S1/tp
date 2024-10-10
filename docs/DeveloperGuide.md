@@ -263,41 +263,417 @@ _{Explain here how the data archiving feature will be implemented}_
 **Target user profile**:
 
 * has a need to manage a significant number of contacts
+* has a need to manage appointments for these contacts
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* values tools that allow for rapid data entry and retrieval
+* requires robust search capabilities to quickly find patient or doctor information
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: manage contacts and appointments faster than a typical GUI driven app
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
 
-*{More to be added}*
+
+| Priority | As a …​                                  | I want to …​                                                                                     | So that I can…​                                                                                                                 |
+|----------|------------------------------------------|--------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------|
+| `* * *`  | receptionist                             | add new patient records                                                                          | maintain an up-to-date list of patients                                                                                         |
+| `* * *`  | receptionist                             | delete outdated patient records                                                                  | keep the patient database clean and relevant                                                                                    |
+| `* * *`  | receptionist                             | search for a patient's record by their name                                                      | quickly retrieve their information                                                                                              |
+| `* * *`  | receptionist                             | mark appointments done or undone                                                                 | keep track of the appointments                                                                                                  |
+| `* * *`  | receptionist                             | add appointments for both patients and doctors                                                   | keep track of their respective appointments                                                                                     |
+| `* * *`  | receptionist                             | delete appointments for both patients and doctors                                                | keep track of their respective appointments                                                                                     |
+| `* * *`  | user                                     | add doctor records                                                                               | manage a list of all doctors working in the clinic                                                                              |
+| `* * *`  | user                                     | delete doctor records                                                                            | manage a list of all doctors working in the clinic                                                                              |
+| `* *`    | receptionist                             | update existing patient details                                                                  | keep up with the latest information                                                                                             |
+| `* *`    | receptionist                             | view a summary of all patient records                                                            | prepare for upcoming consultations                                                                                              |
+| `* *`    | receptionist                             | view upcoming appointments for each doctor                                                       | manage the clinic's daily schedule effectively                                                                                  |
+| `* *`    | receptionist                             | tag certain patients according to their needs                                                    | search for patients based on their care requirements                                                                            |
+| `* *`    | receptionist                             | tag certain patients according to their priorities                                               | contact them when necessary                                                                                                     |
+| `* *`    | receptionist                             | view which patients need to be called on the current date                                        | so that I easily find out who to I need to contact them                                                                         |
+| `* *`    | receptionist                             | add reminders for certain days                                                                   | keep track of all reminders/tasks for the given date                                                                            |
+| `* *`    | receptionist                             | update reminders I made                                                                          | keep up with the latest information                                                                                             |
+| `* *`    | receptionist                             | delete reminders I made                                                                          | remove entries that have the wrong details.                                                                                     |
+| `* *`    | receptionist                             | search for patients based on the tag given to them                                               | easily find and identify patients                                                                                               |
+| `*`      | receptionist                             | fetch the history of missed appointments                                                         | contact the patient and inform the doctor                                                                                       |
+| `* *`    | receptionist                             | search for patient based on their name/contact number                                            | easily find their contact details and records                                                                                   |
+| `* *`    | receptionist                             | generate a list of all upcoming appointments for the current date (or a specified one)           | to assist in daily scheduling (which patient consult which doctor) and preparation                                              |
+| `* *`    | receptionist                             | filter patient records by the type of doctor/specialist they are meeting/have already consulted  | manage referrals and specialist appointments effectively                                                                        | 
+| `*`      | receptionist                             | set recurring appointments for patients                                                          | streamline the process for those who require regular consultations (instead of them having to repeatedly schedule appointments) |
+| `* *`    | receptionist                             | add/link a patient appointment to a specific doctor after checking the doctor's availability     |                                                                                                                                 |
+| `* *`    | receptionist                             | change/update a patient's linked doctor if there is a sudden change in the doctor's availability |                                                                                                                                 |
+| `* *`    | user                                     | view records in a calendar view                                                                  | get an organised overview of all appointments                                                                                   |
+| `*`      | user                                     | sort and view records based on their dates                                                       |                                                                                                                                 |
+| `* *`    | user                                     | update the status of doctors (available, on leave, etc)                                          |                                                                                                                                 |
+| `* *`    | user                                     | track the availability of doctors and when they are free based on patient records                | to help create appointments to patients                                                                                         |
+| `* * *`  | user                                     | list all the doctors stored in the address book.                                                 | see all doctors’ contact details in the address book                                                                            |
+| `* * *`  | user                                     | find a specific doctor in the address book                                                       | check if a certain doctor's details are stored in the address book                                                              |
+| `* *`    | healthcare provider                      | add notes to patient records                                                                     |                                                                                                                                 |
+| `*`      | healthcare provider                      | view a patient's past appointments in this clinic                                                | better understand their medical history and prepare their doctor for consultations                                              |
 
 ### Use cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Add a patient**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to add a patient
+2.  AddressBook adds the patient
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given patient is a duplicate already in the AddressBook.
+
+    * 1a1. AddressBook shows an error message.
+
+      Use case ends.
+
+* 1b. The given name uses the wrong format.
+
+    * 1b1. AddressBook shows an error message.
+
+      Use case ends.
+
+* 1c. The given phone number uses the wrong format.
+
+    * 1c1. AddressBook shows an error message.
+
+      Use case ends.
+
+* 1d. The given email uses the wrong format.
+
+    * 1d1. AddressBook shows an error message.
+
+      Use case ends.
+
+* 1e. The given address uses the wrong format.
+
+    * 1e1. AddressBook shows an error message.
+
+      Use case ends.
+
+* 1f. The given date of birth uses the wrong format.
+
+    * 1f1. AddressBook shows an error message.
+
+      Use case ends.
+
+* 1g. The given gender uses the wrong format.
+
+    * 1g1. AddressBook shows an error message.
+
+      Use case ends.
+
+**Use case: UC02 - Add a doctor**
+
+**MSS**
+
+1.  User requests to add a doctor
+2.  AddressBook adds the doctor
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given doctor is a duplicate already in the AddressBook.
+
+    * 1a1. AddressBook shows an error message.
+
+      Use case ends.
+
+* 1b. The given name uses the wrong format.
+
+    * 1b1. AddressBook shows an error message.
+
+      Use case ends.
+
+* 1c. The given phone number uses the wrong format.
+
+    * 1c1. AddressBook shows an error message.
+
+      Use case ends.
+
+* 1d. The given email uses the wrong format.
+
+    * 1d1. AddressBook shows an error message.
+
+      Use case ends.
+
+* 1e. The given address uses the wrong format.
+
+    * 1e1. AddressBook shows an error message.
+
+      Use case ends.
+
+* 1f. The given speciality uses the wrong format.
+
+    * 1f1. AddressBook shows an error message.
+
+      Use case ends.
+
+<a name="list-patient-anchor-point"></a>
+**Use case: UC03 - List all patients**
+
+**MSS**
+
+1.  User requests to list patients
+2.  AddressBook shows a list of all patients previously added
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+    * 2a1. AddressBook shows a message to indicate list is empty. 
+     
+      Use case ends.
+
+<a name="list-doctor-anchor-point"></a>
+**Use case: UC04 - List all doctors**
+
+**MSS**
+
+1.  User requests to list doctors
+2.  AddressBook shows a list of all doctors previously added
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+    * 2a1. AddressBook shows a message to indicate list is empty.
+
+      Use case ends.
+
+<a name="find-patient-anchor-point"></a>
+**Use case: UC05 - Find a patient**
+
+**MSS**
+
+1.  User requests to find a specific patient
+2.  AddressBook shows a list of all patients with matching names
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given name uses the wrong format.
+
+    * 1a1. AddressBook shows an error message.
+
+      Use case ends.
+
+* 2a. There are no patients with matching names.
+
+    * 2a1. AddressBook shows a message to indicate no matches found.
+
+      Use case ends.
+
+<a name="find-doctor-anchor-point"></a>
+**Use case: UC06 - Find a doctor**
+
+**MSS**
+
+1.  User requests to find a specific doctor
+2.  AddressBook shows a list of all doctors with matching names
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given name uses the wrong format.
+
+    * 1a1. AddressBook shows an error message.
+
+      Use case ends.
+
+* 2a. There are no doctors with matching names.
+
+    * 2a1. AddressBook shows a message to indicate no matches found.
+
+      Use case ends.
+
+**Use case: UC07 - Delete a patient**
+
+**MSS**
+
+1.  User requests to either [list patients (UC03)](#list-patient-anchor-point) or [find a patient (UC05)](#find-patient-anchor-point)
+2.  AddressBook shows a list of patients
+3.  User requests to delete a specific patient in the list
+4.  AddressBook deletes the patient
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC08 - Delete a doctor**
+
+**MSS**
+
+1.  User requests to either [list doctors (UC04)](#list-doctor-anchor-point) or [find a doctor (UC06)](#find-doctor-anchor-point)
+2.  AddressBook shows a list of doctors
+3.  User requests to delete a specific doctor in the list
+4.  AddressBook deletes the doctor
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC09 - Add an appointment**
+
+**MSS**
+
+1.  User requests to add an appointment
+2.  AddressBook adds the appointment
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given appointment is a duplicate already in the AddressBook.
+
+    * 1a1. AddressBook shows an error message.
+
+      Use case ends.
+
+* 1b. The given patient name uses the wrong format.
+
+    * 1b1. AddressBook shows an error message.
+
+      Use case ends.
+
+* 1c. The given doctor name uses the wrong format.
+
+    * 1c1. AddressBook shows an error message.
+
+      Use case ends.
+
+* 1d. The given date uses the wrong format.
+
+    * 1d1. AddressBook shows an error message.
+
+      Use case ends.
+
+* 1e. The given time uses the wrong format.
+
+    * 1e1. AddressBook shows an error message.
+
+      Use case ends.
+
+<a name="list-appt-anchor-point"></a>
+**Use case: UC10 - List all appointments scheduled at a certain date and time**
+
+**MSS**
+
+1.  User requests to list appointments scheduled at a certain date and time
+2.  AddressBook shows a list of all appointments with matching date and time
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given date uses the wrong format.
+
+    * 1a1. AddressBook shows an error message.
+
+      Use case ends.
+
+* 1b. The given time uses the wrong format.
+
+    * 1b1. AddressBook shows an error message.
+
+      Use case ends.
+
+* 2a. There are no appointments with matching date and time.
+
+    * 2a1. AddressBook shows a message to indicate no matches found.
+
+      Use case ends.
+
+**Use case: UC11 - Delete an appointment**
+
+**MSS**
+
+1.  User requests to [list appointments (UC10)](#list-appt-anchor-point)
+2.  AddressBook shows a list of appointments
+3.  User requests to delete a specific appointment in the list
+4.  AddressBook deletes the appointment
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC12 - Mark an appointment as done**
+
+**MSS**
+
+1.  User requests to [list appointments (UC10)](#list-appt-anchor-point)
+2.  AddressBook shows a list of appointments
+3.  User requests to mark a specific appointment in the list
+4.  AddressBook marks the appointment as done
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC13 - Mark an appointment as undone**
+
+**MSS**
+
+1.  User requests to [list appointments (UC10)](#list-appt-anchor-point)
+2.  AddressBook shows a list of appointments
+3.  User requests to unmark a specific appointment in the list
+4.  AddressBook marks the appointment as undone
 
     Use case ends.
 
@@ -319,14 +695,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3. The system should be designed to allow the addition of new features, such as supporting other user types (e.g., nurses, staff) or integrating external systems, with minimal changes to the core codebase.
+4. The system must securely store patient and doctor information to comply with healthcare data privacy standards, such as HIPAA.
+5. The system should log all user actions, such as adding, deleting, or modifying records. Logs should be stored for a minimum of 6 months and be accessible to authorized administrators for auditing purposes.
+6. The system should provide a response time of less than 2 seconds for any user interaction under normal load (i.e., up to 1000 patients and 500 doctors).
 
-*{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Healthcare Data Privacy Regulations**: Laws and standards that govern the storage and access to patient and doctor data. Examples include HIPAA.
+* **HIPAA**: The Health Insurance Portability and Accountability Act, a regulation in the U.S. that mandates secure handling of personal health information.
+* **Audit**: A record of all changes made in the system, including who made the changes and when.
 
 --------------------------------------------------------------------------------------------------------------------
 
