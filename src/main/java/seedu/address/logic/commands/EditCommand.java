@@ -97,8 +97,12 @@ public class EditCommand extends Command {
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        Optional<Email> updatedEmail = editPersonDescriptor.getEmail().isPresent()
+                ? editPersonDescriptor.getEmail()
+                : personToEdit.getEmail();
+        Optional<Address> updatedAddress = editPersonDescriptor.getAddress().isPresent()
+                ? editPersonDescriptor.getAddress()
+                : personToEdit.getAddress();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
@@ -135,8 +139,8 @@ public class EditCommand extends Command {
     public static class EditPersonDescriptor {
         private Name name;
         private Phone phone;
-        private Email email;
-        private Address address;
+        private Optional<Email> email;
+        private Optional<Address> address;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -148,8 +152,8 @@ public class EditCommand extends Command {
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
-            setEmail(toCopy.email);
-            setAddress(toCopy.address);
+            setEmail(toCopy.email.get());
+            setAddress(toCopy.address.get());
             setTags(toCopy.tags);
         }
 
@@ -177,19 +181,19 @@ public class EditCommand extends Command {
         }
 
         public void setEmail(Email email) {
-            this.email = email;
+            this.email = Optional.of(email);
         }
 
         public Optional<Email> getEmail() {
-            return Optional.ofNullable(email);
+            return email;
         }
 
         public void setAddress(Address address) {
-            this.address = address;
+            this.address = Optional.of(address);
         }
 
         public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
+            return address;
         }
 
         /**
