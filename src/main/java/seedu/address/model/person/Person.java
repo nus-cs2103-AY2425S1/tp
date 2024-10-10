@@ -43,6 +43,8 @@ public class Person {
         return name;
     }
 
+    public String getCategory() { return this.category; }
+
     public Phone getPhone() {
         return phone;
     }
@@ -62,8 +64,6 @@ public class Person {
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }
-
-    public String getCategory() { return this.category; }
 
     /**
      * Returns true if both persons have the same name.
