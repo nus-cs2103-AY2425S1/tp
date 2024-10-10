@@ -4,11 +4,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_AMY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -22,10 +27,12 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.TagCommand;
+import seedu.address.logic.commands.TagAddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -91,8 +98,15 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_tag() throws Exception {
-        assertTrue(parser.parseCommand(TagCommand.COMMAND_WORD) instanceof TagCommand);
+    public void parseCommand_tagAdd() throws Exception {
+        final String tag = "Jane and Tom 230412";
+        TagAddCommand command = (TagAddCommand) parser.parseCommand(TagAddCommand.COMMAND_WORD + " n/"
+                + VALID_NAME_AMY + " " + PREFIX_TAG + tag);
+        Tag stubTag = new Tag(VALID_TAG_AMY);
+        Name stubName = new Name(VALID_NAME_AMY);
+        Set<Tag> stubTagList = new HashSet<>();
+        stubTagList.add(stubTag);
+        assertEquals(new TagAddCommand(stubName, stubTagList), command);
     }
 
     @Test
