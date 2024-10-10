@@ -87,4 +87,14 @@ public class FindCommandTest {
     private NameContainsKeywordsPredicate preparePredicate(String userInput) {
         return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
+
+    @Test
+    public void execute_noMatchingTag_noPersonFound() {
+        String expectedMessage = String.format(FindCommand.MESSAGE_SUCCESS, 0);
+        NameContainsKeywordsPredicate predicate = preparePredicate("/class 9Z");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+    }
 }
