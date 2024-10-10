@@ -47,8 +47,8 @@ public class Person {
         this.university = university;
         this.major = major;
         // Assign placeholder values for interest and experience
-        this.interest = new Interest(" "); // Initialize interest with an empty string
-        this.experience = new Experience(" "); // Initialize experience with an empty string
+        this.interest = new Interest("placeholder");
+        this.experience = new Experience("placeholder");
     }
 
     public Name getName() {
