@@ -11,7 +11,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.ddd.commons.core.GuiSettings;
 import seedu.ddd.commons.core.LogsCenter;
 import seedu.ddd.commons.util.CollectionUtil;
-import seedu.ddd.model.person.Contact;
+import seedu.ddd.model.contact.common.Contact;
 
 /**
  * Represents the in-memory model of the address book data.

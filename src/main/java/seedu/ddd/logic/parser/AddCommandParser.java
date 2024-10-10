@@ -12,13 +12,13 @@ import java.util.stream.Stream;
 
 import seedu.ddd.logic.commands.AddCommand;
 import seedu.ddd.logic.parser.exceptions.ParseException;
-import seedu.ddd.model.person.Address;
-import seedu.ddd.model.person.Client;
-import seedu.ddd.model.person.Contact;
-import seedu.ddd.model.person.Date;
-import seedu.ddd.model.person.Email;
-import seedu.ddd.model.person.Name;
-import seedu.ddd.model.person.Phone;
+import seedu.ddd.model.contact.client.Client;
+import seedu.ddd.model.contact.client.Date;
+import seedu.ddd.model.contact.common.Address;
+import seedu.ddd.model.contact.common.Contact;
+import seedu.ddd.model.contact.common.Email;
+import seedu.ddd.model.contact.common.Name;
+import seedu.ddd.model.contact.common.Phone;
 import seedu.ddd.model.tag.Tag;
 
 /**

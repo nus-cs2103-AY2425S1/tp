@@ -10,8 +10,8 @@ import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_SERVICE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.ddd.model.person.ContactType.CLIENT;
-import static seedu.ddd.model.person.ContactType.VENDOR;
+import static seedu.ddd.model.contact.common.ContactType.CLIENT;
+import static seedu.ddd.model.contact.common.ContactType.VENDOR;
 
 import java.util.Objects;
 import java.util.Set;
@@ -19,16 +19,16 @@ import java.util.stream.Stream;
 
 import seedu.ddd.logic.commands.AddContactCommand;
 import seedu.ddd.logic.parser.exceptions.ParseException;
-import seedu.ddd.model.person.Address;
-import seedu.ddd.model.person.Client;
-import seedu.ddd.model.person.Contact;
-import seedu.ddd.model.person.ContactType;
-import seedu.ddd.model.person.Date;
-import seedu.ddd.model.person.Email;
-import seedu.ddd.model.person.Name;
-import seedu.ddd.model.person.Phone;
-import seedu.ddd.model.person.Service;
-import seedu.ddd.model.person.Vendor;
+import seedu.ddd.model.contact.client.Client;
+import seedu.ddd.model.contact.client.Date;
+import seedu.ddd.model.contact.common.Address;
+import seedu.ddd.model.contact.common.Contact;
+import seedu.ddd.model.contact.common.ContactType;
+import seedu.ddd.model.contact.common.Email;
+import seedu.ddd.model.contact.common.Name;
+import seedu.ddd.model.contact.common.Phone;
+import seedu.ddd.model.contact.vendor.Service;
+import seedu.ddd.model.contact.vendor.Vendor;
 import seedu.ddd.model.tag.Tag;
 
 /**

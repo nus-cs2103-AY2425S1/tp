@@ -8,9 +8,9 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.ddd.commons.core.LogsCenter;
-import seedu.ddd.model.person.Client;
-import seedu.ddd.model.person.Contact;
-import seedu.ddd.model.person.Vendor;
+import seedu.ddd.model.contact.client.Client;
+import seedu.ddd.model.contact.common.Contact;
+import seedu.ddd.model.contact.vendor.Vendor;
 
 /**
  * Panel containing the list of contacts.
