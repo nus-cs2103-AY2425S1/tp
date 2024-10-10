@@ -1,0 +1,10 @@
+{
+  "persons": [ ],
+  "groups" : [ {
+    "students" : [ ],
+    "groupName" : "Team4"
+  }, {
+    "students" : [ ],
+    "groupName" : "Team4"
+  } ]
+}

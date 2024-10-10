@@ -1,0 +1,25 @@
+{
+  "persons" : [ ],
+  "groups" : [ {
+    "students" : [ ],
+    "groupName" : "Team5"
+  }, {
+    "students" : [ ],
+    "groupName" : "Team4"
+  }, {
+    "students" : [ ],
+    "groupName" : "Team3"
+  }, {
+    "students" : [ ],
+    "groupName" : "Team2"
+  }, {
+    "students" : [ ],
+    "groupName" : "Group1"
+  }, {
+    "students" : [ ],
+    "groupName" : "Team1"
+  }, {
+    "students" : [ ],
+    "groupName" : "Group10"
+  } ]
+}
