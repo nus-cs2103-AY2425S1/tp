@@ -262,34 +262,149 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* Administrative staff in small clinics
+* has a need an organized system for managing patient data
+* has a need to manage a significant number of patient data entries
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
+
+Small, private clinics do not have access to advanced administration systems to manage patients as they are expensive and meant for bigger hospitals.
+ClinicBuddy enhances the patient management process for small clinics, creating a platform to track patient information such as contact information, address and other basic personal data.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                    | I want to …​                       | So that I can…​                                                                                                   |
+|----------|----------------------------|------------------------------------|-------------------------------------------------------------------------------------------------------------------|
+| `* * *`  | user                       | add a new patient                  | I can create new patient records                                                                                  |
+| `* * *`  | user                       | edit a record after submitting it  | I can make modifications to erroneous records which may have been submitted after keying a command in too quickly |
+| `* * *`  | user                       | delete a patient's record          | remove entries that I no longer need                                                                              |
+| `* * *`  | user                       | search for a patient by name or ID | I can quickly access their information when needed                                                                |
+| `* * *`  | user                       | backup data 	                      | Patients data can be restored should the records be corrupted                                                     |
+| `* * `   | user who may make mistakes | undo commands                      | I can reverse recently executed commands if the command should not have been executed                             |
 
-*{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `ClinicBuddy` and the **Actor** is the `user`, unless specified otherwise)
 
+**Use case: Add a new patient**
+
+**MSS**
+
+1. User chooses to add a patient record.
+2. ClinicBuddy adds a record.
+
+Use case ends.
+
+Extensions:
+- 1a. Patient information contains fields with incorrect format.
+  - 1a1. ClinicBuddy provides an error message informing the user of the error. 
+  - Use case ends.
+
+**Use case: Delete a person**
+
+**MSS**
+
+1. User inputs the NRIC of the patient whose record they want to delete to request for ClinicBuddy to delete that record.
+2. ClinicBuddy deletes the record.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. The NRIC is not of the correct format
+  - 1a1. ClinicBuddy shows an error message. 
+  - Use case ends.
+* 2a. The NRIC is not in the records.
+  - 2a1. ClinicBuddy provides an error message informing the user of the error. 
+  - Use case ends.
+ 
+**Use case: Edit a patient record**
+
+**MSS**
+
+1. User inputs the NRIC of the patient and the parameters to update.
+2. ClinicBuddy update the record.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. The NRIC is not of the correct format
+    - 1a1. ClinicBuddy shows an error message.
+    - Use case ends.
+* 1b. The NRIC is not in the records.
+    - 1b1. ClinicBuddy provides an error message informing the user of the error.
+    - Use case ends.
+* 1c. The parameter format is invalid.
+    - 1c1. ClinicBuddy provides an error message informing the user of the error.
+    - Use case ends.
+
+**Use case: Search a record**
+
+**MSS**
+
+1. User inputs the NRIC or the name of the patient to search for.
+2. ClinicBuddy search and return the record.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. The NRIC is not of the correct format
+    - 1a1. ClinicBuddy shows an error message.
+    - Use case ends.
+* 1b. No matching patient records are found.
+    - 1b1. ClinicBuddy displays a message indicating no matches were found.
+    - Use case ends.
+
+**Use case: Backup data**
+
+**MSS**
+
+1. User inputs the command with the destination path to store the file.
+2. ClinicBuddy creates a backup file in the destination path.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. The destination path is invalid
+    - 1a1. ClinicBuddy displays an error message to inform the user.
+    - Use case ends.
+* 1b. Backup failure due to system issues
+    - 1b1. ClinicBuddy displays an error message to inform the user.
+    - Use case ends.
+* 2a. Backup file with the same name already exists
+    - 2a1. ClinicBuddy prompts the user to confirm if they want to overwrite the existing file.
+        If Yes: The backup file is overwritten.
+        If No: The user is prompted to provide a new destination path or filename.
+    - Use case ends.
+
+**Use case: Undo a command**
+
+**MSS**
+
+1. User requests to undo the last command.
+2. ClinicBuddy reverts the system state to before the last command.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. There are no commands to undo.
+    - 1a1. ClinicBuddy informs the user that there is no action to undo.
+    - Use case ends.
+
+
+Example
 **Use case: Delete a person**
 
 **MSS**
@@ -315,18 +430,51 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
-### Non-Functional Requirements
+### **Non-Functional Requirements**
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. **Compatibility**: 
+    - Should work on any _mainstream OS_ (e.g., **Windows, macOS, Linux**) as long as it has **Java 17** or above installed.
 
-*{More to be added}*
+2. **Performance**:
+    - Should be able to hold up to **1,000 patient records** within 2 seconds for typical usage.
+    - The system must support up to **10,000 patient records** without performance degradation under heavy load.
+
+3. **User Efficiency**:
+    - A user with typing speed above **40 words per minute** for regular English text (i.e., not code, not system admin commands) should be able to accomplish most tasks faster using commands than the mouse.
+
+4. **Scalability**: 
+    - The system should be able to scale to handle **up to 10,000 patient records** without performance degradation.
+
+5. **Security**:
+    - **Sensitive patient information** (e.g., medical records, contact details) must be accessible only by **authorized personnel** (e.g., clinic staff, administrators).
+
+6. **Data Processing**:
+    - The system must process and display patient information (e.g., patient records) within **2 seconds** of a user request under normal operating conditions (up to **1,000 records**).
+
+7. **Usability**:
+    - New users, such as clinic staff, should be able to learn basic operations (e.g., create, update, search, delete records) within **6 hours of hands-on training**.
+    - The system must be accessible to users with basic computer skills, ensuring that text and interface elements are **clear and easy to understand**.
+
+8. **Error Handling**:
+    - The system must provide **clear error messages** in case of invalid input and revert to a stable state in the event of system errors.
+
+9. **Data Recovery**:
+    - In the event of a system crash, patient data should not be lost. 
+    - The system must recover data from the **last automatic backup**, with no more than **5% data loss** in the worst-case scenario.
+
+10. **Maintainability and Extensibility**:
+    - The system should be designed in a way that future updates (e.g., adding new features or fixing bugs) can be made **easily** and **without extensive rewrites** to existing code.
+    - The codebase should follow **industry-standard practices** such as **modular design**, **consistent naming conventions**, and **proper documentation** to facilitate maintenance and future feature additions.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **API (Application Programming Interface)**: A set of rules and protocols for building and interacting with software applications, specifying how components communicate
+* **Parser**: A component that interprets user commands and translates them into Command objects for execution
+* **AddressBook**: A digital record that stores contact information for individuals including names, addresses, phone numbers, and other relevant details
+* **Command**: A directive issued by a user to a software application to perform a specific action or operation
+* **CommandResult**: An object that encapsulates the result of executing a command, including success status and any output messages
 
 --------------------------------------------------------------------------------------------------------------------
 

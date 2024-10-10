@@ -1,11 +1,13 @@
 package seedu.address.model;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.storage.Storage;
 
 /**
  * The API of the Model component.
@@ -84,4 +86,17 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Backs up the data to the specified file path.
+     *
+     * @param filePath The file path where the backup data will be saved. Must not be null.
+     * @throws IOException if an error occurs during saving the data.
+     */
+    void backupData(String filePath) throws IOException;
+
+    /**
+     * Returns the Storage object associated with the model.
+     */
+    Storage getStorage();
 }

@@ -9,51 +9,53 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Alez
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/al-ez.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/Al-ez)]
+[[portfolio](team/al-ez.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: [Backend, Testing]
 
-### Jane Doe
+### Chiang Kai Jing Colin Adam
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/colinac.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/colinac)]
+[[portfolio](team/colinac.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Developer
 
-### Johnny Doe
+### Sun Weiyang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/artillerysun.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/ArtillerySun)]
+[[portfolio](team/artillerysun.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
 
-<img src="images/johndoe.png" width="200px">
+### Tea Li Hao
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+<img src="images/jellypenguinnn.png" width="200px">
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/jellypenguinnn)]
+[[portfolio](team/jellypenguinnn.md)]
 
 * Role: Developer
 * Responsibilities: UI
+
+### Jaynon
+
+<img src="images/jaynon.png" width="200px">
+
+[[github](http://github.com/Jaynon)]
+[[portfolio](team/jaynon.md)]
+
+* Role: Developer
+* Responsibilities: Data
+
