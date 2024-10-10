@@ -290,6 +290,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
+<s>
 **Use case: Delete a person**
 
 **MSS**
@@ -314,19 +315,199 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
 
 *{More to be added}*
+</s>
+
+#### UC1: Delete a contact
+
+- Precondition: -
+- Postcondition: Specified contact is deleted
+
+##### MSS
+
+1. User submits contact information to be deleted.
+2. System checks if contact information is properly formatted.
+3. System checks if contact exists.
+4. System deletes the specified contact.
+
+##### Extensions
+
+- 2a. Contact information is not properly formatted.
+
+    - 2ai. System displays an error message.
+
+      Use case ends.
+
+- 3a. Contact does not exist.
+
+    - 3ai. System displays an error message.
+
+  Use case ends.
+
+#### UC2: Add a contact
+
+- Precondition: -
+- Postcondition: Contact is added to system.
+
+##### MSS
+
+1. User submits contact information.
+2. System checks contact information is properly formatted.
+3. System checks if it doesn't exist already.
+4. System adds contact information.
+
+##### Extensions
+
+- 2a. The contact information is not properly formatted.
+
+  - 2a1. System shows an error message
+  
+  Use case ends.
+
+- 3a. The contact information already exists (i.e. duplicated contact names)
+
+    - 3ai. System shows an error message
+
+    Use case ends.
+
+#### UC3: Add notes to contact
+
+- Precondition: -
+- Postcondition: Notes added to specified contact.
+
+##### MSS
+
+1. User submits contact and new note information.
+2. System checks information is properly formatted.
+3. System checks if contact exists.
+4. System adds new note to contact.
+
+##### Extensions
+
+- 2a. Information is not properly formatted.
+
+    - 2a1. System shows an error message.
+
+    Use case ends.
+
+- 3a. Contact does not exist.
+
+    - 3a1. System shows an error message.
+
+    Use case ends.
+
+#### UC4: View contacts
+
+- Precondition: -
+- Postcondition: Contacts stored (if any) are displayed to the user.
+- Actors: User
+
+#### MSS
+
+1. User chooses to view contacts.
+2. System displays details of the contact.
+
+   Use case ends.
+
+#### Extensions
+
+- 2a. There are no recorded contacts
+  - 2a1. System displays an error message.
+
+    Use case ends.
+
+#### UC5: Add goods to a contact
+
+- Precondition: At least one contact exists.
+- Postcondition: Goods are added to the contact.
+- Actors: User
+
+#### MSS
+
+1. User chooses to add goods to a contact.
+2. User inputs the goods to add to the contact.
+3. System adds goods to the contact.
+
+   Use case ends.
+
+#### UC6: Delete goods from contact
+
+- Precondition: The contact has goods tagged to it.
+- Postcondition: The specified goods is removed from the contact.
+- Actors: User
+
+#### MSS
+
+1. User chooses a contact
+2. User chooses to delete goods from the contact.
+3. System asks for confirmation of deletion.
+4. User confirms.
+5. The specified goods is deleted from the contact.
+
+   Use case ends.
+
+#### UC7: Edit contact
+
+- Precondition: At least one contact exists.
+- Postcondition: Selected contact is edited to the user's specifications.
+- Actors: User
+
+#### MSS
+
+1. User chooses a contact.
+2. User chooses to edit the contact.
+3. System prompts user for their edits.
+4. User submits contact information.
+5. System checks if the contact information is properly formatted.
+6. System checks if the contact already exists in the system.
+7. System updates contact information.
+
+#### Extensions
+
+- 5a. The contact information is not properly formatted.
+  - 2a1. System displays an error message.
+
+    Use case ends.
+
+- 6a. The contact information already exists in the system (i.e. duplicated contact names)
+  - 6a1. System displays an error message.
+
+    Use case ends.
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+2.  Should be able to store up to 1000 contacts persistently.
+3.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+4.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+5.  Should be able to store up to 10000 goods persistently.
+6.  Updating persistent storage should not result in unnecessary data modifications.
+7.  Startup time for the application should be less than 3 seconds on all _mainstream OS_.
+8.  The system should perform commands within 3 seconds on all _mainstream_OS.
+9.  The system should be not crash unexpectedly on all _mainstream OS_ during the performing of commands.
+10. The _help system_ must be easily accessible for users.
+11. All error messages should be readable (in layman's terms) and provide corrective actions whenever possible.
+12. Naming and functions of commands should be similar to it's meaning in natural english language, and should not be too abstract.
+13. The application must be able to export data in _commonly used formats_.
+14. The application must not require any internet connection to function.
+15. The codebase should be well documented with comments or JavaDoc to explain key modules and functions.
+16. The project is not required to handle any messaging functions between users and contacts.
+17. The project is expected to adhere to a schedule that delivers a feature set or feature modification every week.
+18. Key functions in the project should be tested with JUnit, with a minimal coverage of 75%.
+19. Price of goods should not be negative.
+20. Quantity of goods should not be negative.
+21. Arrival date of goods should not be earlier than the current date.
+22. The project should be maintained with proper version control on a GitHub remote repository.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Commonly Used Formats**: Text Files, CSV Files
+* **Help System**: The built-in documentation or command that provides guidance on using the application, including descriptions of commands and examples.
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Goods**: A commodity that is sold to the user.
+* **Supplier**: Someone who is selling goods to the user. For this application, they are the contacts.
+* **Procurement Date**: The date in which the order for the goods have been made.
+* **Tag**: A note for the contact written by the user.
 
 --------------------------------------------------------------------------------------------------------------------
 
