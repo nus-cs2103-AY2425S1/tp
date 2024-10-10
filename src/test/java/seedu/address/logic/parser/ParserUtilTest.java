@@ -253,7 +253,6 @@ public class ParserUtilTest {
         PaymentStatus expectedStatus = new PaymentStatus(VALID_PAYMENT_STATUS);
         assertEquals(expectedStatus, ParserUtil.parsePaymentStatus(statusWithWhitespace));
     }
-  
     @Test
     public void parseClientStatus_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseClientStatus((String) null));
