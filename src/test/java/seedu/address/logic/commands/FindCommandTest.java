@@ -29,11 +29,6 @@ public class FindCommandTest {
 
     @Test
     public void equals() {
-        //        NameContainsKeywordsPredicate firstPredicate =
-        //                new NameContainsKeywordsPredicate(Collections.singletonList("first"));
-        //        NameContainsKeywordsPredicate secondPredicate =
-        //                new NameContainsKeywordsPredicate(Collections.singletonList("second"));
-
         PersonContainsKeywordsPredicate firstPredicate =
                 new PersonContainsKeywordsPredicate("first", null, null, null, null, null, null);
         PersonContainsKeywordsPredicate secondPredicate =
@@ -64,7 +59,6 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         PersonContainsKeywordsPredicate predicate =
                 new PersonContainsKeywordsPredicate("someone", null, null, null, null, null, null);
-        // NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -97,7 +91,6 @@ public class FindCommandTest {
     public void toStringMethod() {
         PersonContainsKeywordsPredicate predicate =
                 new PersonContainsKeywordsPredicate("test", null, null, null, null, null, null);
-        // NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList("keyword"));
         FindCommand findCommand = new FindCommand(predicate);
         String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, findCommand.toString());
