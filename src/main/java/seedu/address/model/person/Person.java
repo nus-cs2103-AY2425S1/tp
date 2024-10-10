@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.role.Role;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -25,16 +26,22 @@ public class Person implements Comparable<Person> {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
+    private final Set<Role> roles = new HashSet<>();
+
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Role... roles) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+
+        for (Role role : roles) {
+            this.roles.add(role);
+        }
     }
 
     public Name getName() {
@@ -52,6 +59,8 @@ public class Person implements Comparable<Person> {
     public Address getAddress() {
         return address;
     }
+
+
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -75,6 +84,15 @@ public class Person implements Comparable<Person> {
     }
 
     /**
+     * Returns an immutable role set.
+     */
+    public Set<Role> getRoles() {
+        return Collections.unmodifiableSet(roles);
+    }
+
+
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
@@ -94,13 +112,14 @@ public class Person implements Comparable<Person> {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && roles.equals(otherPerson.roles);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, roles);
     }
 
     @Override
@@ -111,6 +130,7 @@ public class Person implements Comparable<Person> {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("roles", roles)
                 .toString();
     }
 
