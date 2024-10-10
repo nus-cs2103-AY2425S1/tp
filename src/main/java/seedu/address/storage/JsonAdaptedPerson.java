@@ -114,6 +114,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Subject.MESSAGE_CONSTRAINTS);
         }
         final Subject modelSubject = new Subject(subject);
+
         if (rate == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Rate.class.getSimpleName()));
         }

@@ -7,7 +7,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_RATE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHEDULE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_BOB;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
@@ -88,6 +90,14 @@ public class PersonTest {
 
         // different schedule -> returns false
         editedAlice = new PersonBuilder(ALICE).withSchedule(VALID_SCHEDULE_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different subject -> returns false
+        editedAlice = new PersonBuilder(ALICE).withSubject(VALID_SUBJECT_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different rate -> returns false
+        editedAlice = new PersonBuilder(ALICE).withRate(VALID_RATE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
     }

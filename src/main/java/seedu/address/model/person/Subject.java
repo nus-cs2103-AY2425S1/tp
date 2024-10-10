@@ -13,7 +13,8 @@ public class Subject {
             + "economics / literature / music / "
             + "biology / chemistry /science / "
             + "english / chinese / malay / tamil / "
-            + "math / history / geography / physics "
+            + "math / history / geography / physics / "
+            + "GP "
             + "and it should not be blank";
 
 
@@ -63,6 +64,10 @@ public class Subject {
         return value.hashCode();
     }
 
+    /**
+     * Returns string value of enumerated subject.
+     * @return String value of subject.
+     */
     @Override
     public String toString() {
         return value.toString();
