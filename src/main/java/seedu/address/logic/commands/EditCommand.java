@@ -72,6 +72,8 @@ public class EditCommand extends Command {
 
         Student studentToEdit = lastShownList.get(index.getZeroBased());
         Student editedStudent = createEditedPerson(studentToEdit, editPersonDescriptor);
+        System.out.println("studentToEdit: " + studentToEdit);
+        System.out.println("editedStudent: " + editedStudent);
 
         if (!studentToEdit.isSamePerson(editedStudent) && model.hasPerson(editedStudent)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
@@ -95,6 +97,9 @@ public class EditCommand extends Command {
         StudentNumber updatedStudentNumber = editPersonDescriptor.getStudentNumber()
                 .orElse(studentToEdit.getStudentNumber());
 
+        System.out.println(updatedName);
+        System.out.println(updatedEmail);
+        System.out.println(updatedStudentNumber);
         return new Student(updatedName, updatedEmail, updatedTags, updatedStudentNumber);
     }
 
@@ -209,7 +214,8 @@ public class EditCommand extends Command {
             EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
             return Objects.equals(name, otherEditPersonDescriptor.name)
                 && Objects.equals(email, otherEditPersonDescriptor.email)
-                && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                && Objects.equals(studentNumber, otherEditPersonDescriptor.studentNumber);
         }
 
         @Override
@@ -218,6 +224,7 @@ public class EditCommand extends Command {
                 .add("name", name)
                 .add("email", email)
                 .add("tags", tags)
+                .add("student number", studentNumber)
                 .toString();
         }
     }

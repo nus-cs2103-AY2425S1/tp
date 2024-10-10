@@ -70,14 +70,15 @@ public class AddStudentCommandParserTest {
             Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
 
         // multiple student numbers
-        assertParseFailure(parser, EMAIL_DESC_AMY + validExpectedPersonString,
+        assertParseFailure(parser, STUDENT_NUMBER_DESC_AMY + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_STUDENT_NUMBER));
 
 
         // multiple fields repeated
         assertParseFailure(parser,
-            validExpectedPersonString + EMAIL_DESC_AMY + NAME_DESC_AMY + validExpectedPersonString,
-            Messages.getErrorMessageForDuplicatePrefixes(PREFIX_STUDENT_NAME, PREFIX_EMAIL));
+            validExpectedPersonString + EMAIL_DESC_AMY + NAME_DESC_AMY
+                    + STUDENT_NUMBER_DESC_AMY + validExpectedPersonString,
+            Messages.getErrorMessageForDuplicatePrefixes(PREFIX_STUDENT_NAME, PREFIX_EMAIL, PREFIX_STUDENT_NUMBER));
 
         // invalid value followed by valid value
 

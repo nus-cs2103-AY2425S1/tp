@@ -36,7 +36,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Student editedStudent = new PersonBuilder().build();
+        Student editedStudent = new PersonBuilder().build(); //Amy Bee, amy@gmail.com, A01234567X
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedStudent).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
 
@@ -99,9 +99,10 @@ public class EditCommandTest {
 
     @Test
     public void execute_duplicatePersonUnfilteredList_failure() {
-        Student firstStudent = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Student firstStudent = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()); //0
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstStudent).build();
-        EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor);
+        System.out.println(descriptor);
+        EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor); //1
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
     }

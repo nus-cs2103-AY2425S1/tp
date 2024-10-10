@@ -23,13 +23,13 @@ public class AddStudentCommand extends Command {
             + "Parameters: "
             + PREFIX_STUDENT_NAME + "NAME "
             + PREFIX_EMAIL + "EMAIL "
-            + "[" + PREFIX_TAG + "TAG]..."
+            + "[" + PREFIX_TAG + "TAG]... "
             + PREFIX_STUDENT_NUMBER + "STUDENT_NUMBER\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_STUDENT_NAME + "John Doe "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney"
+            + PREFIX_TAG + "owesMoney "
             + PREFIX_STUDENT_NUMBER + "A02345678J";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";

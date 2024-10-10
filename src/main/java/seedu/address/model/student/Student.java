@@ -42,7 +42,7 @@ public class Student {
      * Every field must be present and not null.
      */
     public Student(Name name, Email email, Set<Tag> tags, StudentNumber studentNumber, Optional<String> group) {
-        requireAllNonNull(name, email, tags, group);
+        requireAllNonNull(name, email, tags, studentNumber, group);
         this.name = name;
         this.email = email;
         this.tags.addAll(tags);

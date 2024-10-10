@@ -53,12 +53,12 @@ public class StudentNumber {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Email)) {
+        if (!(other instanceof StudentNumber)) {
             return false;
         }
 
-        Email otherEmail = (Email) other;
-        return value.equals(otherEmail.value);
+        StudentNumber otherStudentNumber = (StudentNumber) other;
+        return value.equals(otherStudentNumber.value);
     }
 
     @Override
