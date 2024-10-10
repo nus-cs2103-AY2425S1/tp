@@ -48,7 +48,11 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
                 && (role == null || StringUtil.containsWordIgnoreCase(person.getRole().toString(), role))
                 && (major == null || StringUtil.containsWordIgnoreCase(person.getMajor().toString(), major))
                 && (address == null || StringUtil.containsWordIgnoreCase(person.getAddress().value, address))
-                && (tags == null || tags.isEmpty() || tags.stream().allMatch(tag -> person.getTags().stream().anyMatch(personTag -> StringUtil.containsWordIgnoreCase(personTag.tagName, tag))));
+                && (tags == null
+                || tags.isEmpty()
+                || tags.stream().allMatch(tag -> person
+                .getTags().stream()
+                .anyMatch(personTag -> StringUtil.containsWordIgnoreCase(personTag.tagName, tag))));
     }
 
     @Override
