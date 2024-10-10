@@ -288,43 +288,48 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​    | I want to …​                                          | So that I can…​                                                            |
-|----------|------------|-------------------------------------------------------|----------------------------------------------------------------------------|
-| `* * *`  | new user   | see usage instructions                                | refer to instructions when I forget how to use the App                     |
-| `* * *`  | supervisor | view the contact details of volunteers                | reach out to them for administrative matters                               |
-| `* * *`  | supervisor | add a new volunteer and their details                 | arrange their site visits                                                  |
-| `* * *`  | supervisor | add a new location                                    | arrange site visits                                                        |
-| `* * *`  | supervisor | update a volunteer's contact information              | keep the details accurate                                                  |
-| `* * *`  | supervisor | delete details of an inactive volunteer               | keep the database up-to-date                                               |
-| `* * *`  | supervisor | view the address of volunteers                        | arrange site visits to locations that are convenient for them              |
-| `* * *`  | supervisor | update a volunteer's address                          | keep the database up-to-date                                               |
-| `* * *`  | supervisor | update a volunteer's total volunteer hours            | keep track of the number of hours they have put into volunteering          |
-| `* * *`  | supervisor | update a volunteer's visitation records               | keep track of their site visits                                            |
-| `* * *`  | supervisor | view a volunteer's total volunteer hours              | track their productivity and contributions over time                       |
-| `* * *`  | supervisor | interact with the application's GUI easily            | enjoy the application and use it intuitively                               |
-| `* * *`  | supervisor | find a volunteer by name                              | locate details of volunteers without going through the entire list         |
-| `* *`    | supervisor | view the availability of volunteers                   | schedule site visits that matches their availability                       |
-| `* *`    | supervisor | add the available timeslots of volunteers             | allow site visits to be arranged                                           |
-| `* *`    | supervisor | update the available timeslots of volunteers          | ensure volunteers can conduct site visits as scheduled                     |
-| `* *`    | supervisor | view a volunteer's total hours in graphs or charts    | easily analyze volunteer engagement and allocate resources efficiently     |
-| `* *`    | supervisor | view volunteer visit frequency by location in a graph | identify the most and least visited sites and adjust resources accordingly |
-| `*`      | supervisor | sort volunteers in different orders                   | locate a volunteer easily                                                  |
-| `*`      | supervisor | filter the volunteers by certain categories           | locate a volunteer easily                                                  |
-| `*`      | supervisor | download a report of a volunteer's hours              | use it for book-keeping or share with the volunteer upon request           |
-| `*`      | supervisor | hide private contact details                          | minimize chance of someone else seeing them by accident                    |
+| Priority | As a …​    | I want to …​                                                   | So that I can…​                                                            |
+|----------|------------|----------------------------------------------------------------|----------------------------------------------------------------------------|
+| `* * *`  | new user   | see usage instructions                                         | refer to instructions when I forget how to use the App                     |
+| `* * *`  | supervisor | view the contact details of volunteers                         | reach out to them for administrative matters                               |
+| `* * *`  | supervisor | view the contact details of clients                            | reach out to them for administrative matters                               |
+| `* * *`  | supervisor | add a new volunteer and their details                          | keep track of the volunteers and their personal information                |
+| `* * *`  | supervisor | add a new client and their details                             | keep track of the clients and their personal information                   |
+| `* * *`  | supervisor | update a volunteer's contact information                       | keep the details accurate                                                  |
+| `* * *`  | supervisor | update a client's contact information                          | keep the details accurate                                                  |
+| `* * *`  | supervisor | delete details of an inactive volunteer                        | keep the database up-to-date                                               |
+| `* * *`  | supervisor | delete details of a former client                              | keep the database up-to-date                                               |
+| `* * *`  | supervisor | view the address of a volunteer                                | arrange site visits to locations that are convenient for them              |
+| `* * *`  | supervisor | view the address of a client                                   | arrange site visits by volunteers located near them                        |
+| `* * *`  | supervisor | update a volunteer's address                                   | keep the details accurate                                                  |
+| `* * *`  | supervisor | update a client's address                                      | keep the details accurate                                                  |
+| `* * *`  | supervisor | update a volunteer's total volunteer hours                     | keep track of the number of hours they have put into volunteering          |
+| `* * *`  | supervisor | update a volunteer's visitation records                        | keep track of their site visits                                            |
+| `* * *`  | supervisor | view a volunteer's total volunteer hours                       | track their productivity and contributions over time                       |
+| `* * *`  | supervisor | interact with the application's GUI easily                     | enjoy the application and use it intuitively                               |
+| `* * *`  | supervisor | find a volunteer by name                                       | locate details of volunteers without going through the entire list         |
+| `* *`    | supervisor | view the availability of volunteers                            | schedule site visits that matches their availability                       |
+| `* *`    | supervisor | add the available timeslots of volunteers                      | allow site visits to be arranged                                           |
+| `* *`    | supervisor | update the available timeslots of volunteers                   | ensure volunteers can conduct site visits as scheduled                     |
+| `* *`    | supervisor | view a volunteer's total hours in graphs or charts             | easily analyze volunteer engagement and allocate resources efficiently     |
+| `* *`    | supervisor | view volunteer visit frequency by location in graphs or charts | identify the most and least visited sites and adjust resources accordingly |
+| `*`      | supervisor | sort volunteers in different orders                            | locate a volunteer easily                                                  |
+| `*`      | supervisor | filter the volunteers by certain categories                    | locate a volunteer easily                                                  |
+| `*`      | supervisor | download a report of a volunteer's hours                       | use it for book-keeping or share with the volunteer upon request           |
+| `*`      | supervisor | read large amount of data at once by importing an excel file   | quickly populate the system without manually entering each data point      |
+| `*`      | supervisor | have an autocomplete feature when typing commands              | save time and reduce errors while entering commands or data                |
+| `*`      | supervisor | utilize keyboard shortcuts                                     | navigate to a different page quickly and conveniently                      |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `VolunTier` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC1 - View list of persons**
 
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+2.  VolunTier shows a list of persons
 
     Use case ends.
 
@@ -334,70 +339,77 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is invalid.
-
-    * 3a1. AddressBook shows an error message.
-
-      Use case resumes at step 2.
-
-**Use case: Add a new volunteer**
+**Use case: UC2 - Delete a person**
 
 **MSS**
 
-1.  User requests to add a new volunteer
-2.  AddressBook prompts the user to input the volunteer's details (e.g., name, contact details, address)
-3.  User provides the relevant details
-4.  AddressBook saves the new volunteer in the system
-5.  AddressBook confirms that the volunteer has been successfully added
+1.  User <u>views list of persons (UC1)</u>
+2.  User requests to delete a specific person in the list
+3.  VolunTier prompts the user for confirmation
+4.  VolunTier deletes the person
 
     Use case ends.
 
 **Extensions**
 
-* 2a. User inputs a name that already exists.
+* 3a. The given index is invalid.
+
+    * 3a1. VolunTier shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC3 - Add a new person**
+
+**MSS**
+
+1.  User requests to add a new person
+2.  VolunTier prompts the user to input the person's details (e.g., name, contact details, address)
+3.  User provides the relevant details
+4.  VolunTier saves the new person in the system
+5.  VolunTier confirms that the person has been successfully added
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. User inputs a name and address that already exists.
     
-    * 2a1. AddressBook notifies the user that the volunteer already exists.
-  
-    * 2a2. User is prompted to input a different name, update the existing record or confirm that it is a different person.
+    * 3a1. VolunTier notifies the user that the person already exists.
 
   Use case resumes at step 2.
 
-* 3a. User inputs invalid or incomplete details.
+* 3b. User inputs invalid or incomplete details.
 
-    * 3a1. AddressBook shows an error message indicating the missing or invalid fields.
+    * 3b1. VolunTier shows an error message indicating the missing or invalid fields.
 
       Use case resumes at step 2.
 
-**Use case: Update a volunteer's contact information**
+**Use case: UC4 - Update a person's details**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to update the contact details of a specific person on the list
-4.  AddressBook displays the volunteer's current contact information
-5.  User provides the updated contact information
-6.  AddressBook updates the volunteer's contact details in the database
+1.  User <u>views list of persons (UC1)</u>
+2.  User requests to update the details (e.g., contact details, address) of a specific person on the list
+3.  VolunTier displays the person's current details
+4.  User provides the updated details
+5.  VolunTier updates the person's details in the database
+6.  VolunTier confirms that the details has been successfully updated
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The given index is invalid.
 
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. AddressBook shows an error message.
+    * 2a1. VolunTier shows an error message.
 
       Use case resumes at step 2.
   
-* 5a. The updated information is invalid.
+* 4a. User inputs invalid or incomplete details.
    
-    * 5a1. AddressBook shows an error message specifying the mistake.
+    * 4a1. VolunTier shows an error message specifying the mistake.
 
-      Use case resumes at step 5.
+      Use case resumes at step 4.
 
 
 ### Non-Functional Requirements
@@ -413,7 +425,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Person**: A volunteer or a client
 
 --------------------------------------------------------------------------------------------------------------------
 
