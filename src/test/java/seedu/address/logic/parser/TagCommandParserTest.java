@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import java.util.Arrays;
+import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,9 +26,9 @@ public class TagCommandParserTest {
         Tag tag1 = new Tag(new TagName("colleague"));
         Tag tag2 = new Tag(new TagName("gym"));
 
-        TagCommand expectedCommand = new TagCommand(targetIndex, Arrays.asList(tag1, tag2));
+        TagCommand expectedCommand = new TagCommand(targetIndex, new HashSet<>(Arrays.asList(tag1, tag2)));
 
-        String userInput = "1 colleague gym";
+        String userInput = "1 t/colleague t/gym";
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -35,7 +36,7 @@ public class TagCommandParserTest {
     @Test
     public void parse_invalidArgs_throwsParseException() {
         // Invalid index (non-numeric)
-        assertParseFailure(parser, "a colleague", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseFailure(parser, "a t/colleague", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 TagCommand.MESSAGE_USAGE));
 
         // Missing tags (no tags specified)
@@ -43,7 +44,7 @@ public class TagCommandParserTest {
                 TagCommand.MESSAGE_USAGE));
 
         // Index missing
-        assertParseFailure(parser, "colleague gym", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseFailure(parser, "t/colleague t/gym", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 TagCommand.MESSAGE_USAGE));
     }
 }

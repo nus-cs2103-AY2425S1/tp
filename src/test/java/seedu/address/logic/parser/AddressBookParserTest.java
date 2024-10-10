@@ -8,6 +8,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -93,8 +94,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_tag() throws Exception {
-        List<Tag> tagsToAdd = Arrays.asList(new Tag(new TagName("colleague")), new Tag(new TagName("gym")));
-        String userInput = TagCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " colleague gym";
+        HashSet<Tag> tagsToAdd = new HashSet<>(Arrays.asList(new Tag(new TagName("colleague")),
+                new Tag(new TagName("gym"))));
+        String userInput = TagCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " t/gym t/colleague";
         TagCommand expectedCommand = new TagCommand(INDEX_FIRST_PERSON, tagsToAdd);
 
         TagCommand command = (TagCommand) parser.parseCommand(userInput);

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,10 +48,10 @@ public class TagCommandParser implements Parser<TagCommand> {
         }
 
         // Convert tag values to Tag objects
-        List<Tag> tags = tagValues.stream()
+        HashSet<Tag> tags = new HashSet<>(tagValues.stream()
                 .map(TagName::new) // Convert each string to a TagName object
                 .map(Tag::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
 
         return new TagCommand(index, tags);
     }
