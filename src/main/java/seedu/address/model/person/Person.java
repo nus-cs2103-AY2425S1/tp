@@ -16,7 +16,6 @@ import seedu.address.model.tag.Tag;
  */
 public class Person {
     public static final Tag DEFAULT_TAG_PENDING = new Tag("pending");
-    // tags for marking status of candidate
     public static final Tag TAG_HIRED = new Tag("hired");
     public static final Tag TAG_REJECTED = new Tag("rejected");
 
@@ -30,6 +29,9 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
+    // Status fields
+    private String status;
+
     /**
      * Every field must be present and not null.
      */
@@ -41,7 +43,9 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.tags.add(DEFAULT_TAG_PENDING);
+        if (!isHired() && !isRejected()) {
+            this.tags.add(DEFAULT_TAG_PENDING);
+        }
     }
 
     public Name getName() {
@@ -71,6 +75,15 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+
+    public void addTag(Tag tag) {
+        tags.add(tag);
+    }
+
+    public void removeTag(Tag tag) {
+        tags.remove(tag);
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
@@ -84,6 +97,46 @@ public class Person {
                 && otherPerson.getName().equals(getName());
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    /**
+     * Marks the person as hired.
+     * Sets the status to "hired", removes the "rejected" and "pending" tags if present,
+     * and adds the "hired" tag.
+     */
+    public void markAsHired() {
+        this.status = "hired";
+        removeTag(TAG_REJECTED);
+        removeTag(DEFAULT_TAG_PENDING);
+        addTag(TAG_HIRED);
+    }
+
+
+    public boolean isHired() {
+        return tags.contains(TAG_HIRED);
+    }
+
+    /**
+     * Marks the person as rejected.
+     * Sets the status to "rejected", removes the "pending" and "hired" tags if present,
+     * and adds the "rejected" tag.
+     */
+    public void markAsRejected() {
+        this.status = "rejected";
+        removeTag(DEFAULT_TAG_PENDING);
+        removeTag(TAG_HIRED);
+        addTag(TAG_REJECTED);
+    }
+
+    public boolean isRejected() {
+        return tags.contains(TAG_REJECTED);
+    }
     /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
@@ -95,11 +148,10 @@ public class Person {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Person otherPerson)) {
             return false;
         }
 
-        Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
                 && job.equals(otherPerson.job)
                 && phone.equals(otherPerson.phone)
