@@ -36,8 +36,7 @@ public class UnassignWeddingCommandParser implements Parser<UnassignWeddingComma
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_WEDDING);
         Index index;
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_WEDDING)
-                || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_WEDDING)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     UnassignWeddingCommand.MESSAGE_USAGE));
         }

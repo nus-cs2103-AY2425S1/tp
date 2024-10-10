@@ -35,8 +35,7 @@ public class AssignWeddingCommandParser implements Parser<AssignWeddingCommand> 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_WEDDING);
         Index index;
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_WEDDING)
-            || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_WEDDING)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignWeddingCommand.MESSAGE_USAGE));
         }
 

@@ -1,15 +1,14 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.wedding.Wedding;
-
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Deletes a wedding identified using its wedding name in the Wedlinker.
@@ -41,14 +40,16 @@ public class DeleteWeddingCommand extends Command {
             if (wedding.getWeddingName().equals(targetWedding.getWeddingName())) {
                 if (wedding.canBeDeleted()) {
                     model.deleteWedding(wedding);
-                    return new CommandResult(String.format(MESSAGE_DELETE_WEDDING_SUCCESS, Messages.format(targetWedding)));
+                    return new CommandResult(String.format(MESSAGE_DELETE_WEDDING_SUCCESS,
+                            Messages.format(targetWedding)));
                 } else {
                     throw new CommandException(
                             String.format(MESSAGE_DELETE_WEDDING_FAILURE_STILL_USED, Messages.format(targetWedding)));
                 }
             }
         }
-        throw new CommandException(String.format(MESSAGE_DELETE_WEDDING_FAILURE_NOT_FOUND, Messages.format(targetWedding)));
+        throw new CommandException(String.format(MESSAGE_DELETE_WEDDING_FAILURE_NOT_FOUND,
+                Messages.format(targetWedding)));
     }
 
     @Override
