@@ -83,11 +83,22 @@ public class Person {
     }
 
     /**
+     * Returns true if two contacts share the same phone number.
+     * Checks for duplicates in phone numbers in the contact list.
+     */
+    public boolean hasSamePhoneNumber(Person otherPerson) {
+        return otherPerson != null && otherPerson.getPhone().equals(this.getPhone());
+    }
+
+    /**
      * Returns true if two contacts are considered as duplicates.
      * This is to avoid adding duplicate contact in the contact list.
+     *
      */
     public boolean hasDuplicateInfo(Person otherPerson) {
-        return this.isSamePerson(otherPerson) || this.hasSameEmail(otherPerson);
+        return this.isSamePerson(otherPerson)
+                || this.hasSameEmail(otherPerson)
+                || this.hasSamePhoneNumber(otherPerson);
     }
 
     /**
