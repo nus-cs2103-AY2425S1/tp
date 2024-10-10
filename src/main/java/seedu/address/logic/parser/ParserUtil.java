@@ -10,10 +10,14 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.ClientStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.PaymentStatus;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.ProjectStatus;
 import seedu.address.model.tag.Tag;
+
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -120,5 +124,49 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String projectStatus} into a {@code ProjectStatus}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code projectStatus} is invalid.
+     */
+    public static ProjectStatus parseProjectStatus(String projectStatus) throws ParseException {
+        requireNonNull(projectStatus);
+        String trimmedProjectStatus = projectStatus.trim();
+        if (!ProjectStatus.isValidProjectStatus(trimmedProjectStatus)) {
+            throw new ParseException(ProjectStatus.MESSAGE_CONSTRAINTS);
+        }
+        return new ProjectStatus(trimmedProjectStatus);
+    }
+
+    /**
+     * Parses a {@code String paymentStatus} into a {@code PaymentStatus}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code paymentStatus} is invalid.
+     */
+    public static PaymentStatus parsePaymentStatus(String paymentStatus) throws ParseException {
+        requireNonNull(paymentStatus);
+        String trimmedPaymentStatus = paymentStatus.trim();
+        if (!PaymentStatus.isValidPaymentStatus(trimmedPaymentStatus)) {
+            throw new ParseException(PaymentStatus.MESSAGE_CONSTRAINTS);
+        }
+        return new PaymentStatus(trimmedPaymentStatus);
+    }
+    /**
+     * Parses a {@code String clientStatus} into a {@code clientStatus}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code clientStatus} is invalid.
+     */
+    public static ClientStatus parseClientStatus(String clientStatus) throws ParseException {
+        requireNonNull(clientStatus);
+        String trimmedClientStatus = clientStatus.trim();
+        if (!ClientStatus.isValidClientStatus(trimmedClientStatus)) {
+            throw new ParseException(ClientStatus.MESSAGE_CONSTRAINTS);
+        }
+        return new ClientStatus(trimmedClientStatus);
     }
 }

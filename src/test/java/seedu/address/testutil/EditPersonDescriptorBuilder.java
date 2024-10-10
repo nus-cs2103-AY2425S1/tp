@@ -6,10 +6,13 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.ClientStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.PaymentStatus;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.ProjectStatus;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -37,6 +40,9 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
         descriptor.setTags(person.getTags());
+        descriptor.setProjectStatus(person.getProjectStatus());
+        descriptor.setPaymentStatus(person.getPaymentStatus());
+        descriptor.setClientStatus(person.getClientStatus());
     }
 
     /**
@@ -78,6 +84,29 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
+        return this;
+    }
+
+    /**
+     * Sets the {@code ProjectStatus} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withProjectStatus(String projectStatus) {
+        descriptor.setProjectStatus(new ProjectStatus(projectStatus));
+        return this;
+    }
+
+    /**
+     * Sets the {@code PaymentStatus} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withPaymentStatus(String paymentStatus) {
+        descriptor.setPaymentStatus(new PaymentStatus(paymentStatus));
+        return this;
+    }
+    /**
+     * Sets the {@code ClientStatus} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withClientStatus(String clientStatus) {
+        descriptor.setClientStatus(new ClientStatus(clientStatus));
         return this;
     }
 

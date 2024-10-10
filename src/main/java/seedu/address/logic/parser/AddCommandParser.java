@@ -2,9 +2,12 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENT_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
@@ -13,11 +16,16 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.ClientStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.PaymentStatus;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.ProjectStatus;
 import seedu.address.model.tag.Tag;
+
+
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -31,7 +39,8 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                        PREFIX_ADDRESS, PREFIX_TAG, PREFIX_PROJECT_STATUS, PREFIX_PAYMENT_STATUS, PREFIX_CLIENT_STATUS);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -45,7 +54,16 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, tagList);
+        ProjectStatus projectStatus = ParserUtil.parseProjectStatus(
+                argMultimap.getValue(PREFIX_PROJECT_STATUS).orElse("in progress"));
+
+        PaymentStatus paymentStatus = ParserUtil.parsePaymentStatus(
+                argMultimap.getValue(PREFIX_PAYMENT_STATUS).orElse("unpaid"));
+
+        ClientStatus clientStatus = ParserUtil.parseClientStatus(
+                argMultimap.getValue(PREFIX_CLIENT_STATUS).orElse("active"));
+
+        Person person = new Person(name, phone, email, address, tagList, projectStatus, paymentStatus, clientStatus);
 
         return new AddCommand(person);
     }

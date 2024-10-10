@@ -262,42 +262,74 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Needs to manage a variety of sections, such as client names, email, payment status and more
+* Desire to track all client statuses in one place
+* Wants to avoid tracking clients using multiple applications
+* Wants to easily change statuses of a client upon completion of project
+* Can type fast
+* Prefers typing to mouse interactions
+* Familiar with the workings of CLI and commands
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Our address book seamlessly combines client contacts,
+payment tracking and more in one efficient package, tailored specifically for freelance software developers.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​            | I want to …​                                                     | So that I can…​                                          |
+|----------|--------------------|------------------------------------------------------------------|----------------------------------------------------------|
+| `* * *`  | software developer | add clients                                                      | update my address book.                                  |
+| `* * *`  | software developer | remove clients                                                   | ensure my address book is not cluttered                  |
+| `* * *`  | software developer | view my clients and their details                                | keep track of my clients and what tasks to do            |
+| `* * *`  | software developer | update my clients' details                                       | ensure my address book details are updated               |
+| `* * *`  | software developer | view a client's payment status, project status and client status | keep track of the work I have to do and who has not paid |
+| `* *`    | software developer | filter my clients' based on sections                             | more easily find my clients                              |
+| `* *`    | software developer | sort clients by category                                         | more easily find my clients                              |
+| `* *`    | software developer | set deadlines                                                    | ensure projects are completed before deadlines           |
+| `*`      | software developer | keep notes for each client                                       | take note of important details from meetings             |
+| `*`      | software developer | undo previous commands                                           | easily undo errors                                       |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Clientele+` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a client**
+
+**MSS**
+
+1.  User provides client details to add
+2.  Clientele+ adds the client
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The client's name is not provided
+
+   * 1a1. Clientele+ shows an error message
+   * 1a2. User reenters new command
+   Steps 1a1-1a2 are repeated until the command entered is correct
+
+  Use case resumes at step 1.
+
+* 1b. Input fields are incorrectly formatted
+
+    * 1b1. Clientele+ shows an error message.
+    * 1b2. User reenters command
+    Steps 1b1-1b2 are repeated until the command entered is correct
+
+   Use case resumes at step 1.
+
+**Use case: Delete a client**
 
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  Clientele+ shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  Clientele+ deletes the person
 
     Use case ends.
 
@@ -309,24 +341,65 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. Clientele+ shows an error message.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+
+
+**Use case: Modify a client's details**
+
+**MSS**
+
+1.  User requests to list persons
+2.  Clientele+ shows a list of persons
+3.  User selects the client they wish to modify and provides the updated details
+4.  Clientele+ updates that client's details
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. Clientele+ shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The given details are invalid
+
+    * 3b1. Clientele+ shows an error message.
+
+    Use case resumes at step 2
+
+
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4.  A user should be able to accomplish all tasks just through typing commands (so no clickable buttons for instance).
+5.  Command usage and help messages should be clear enough to a user with at least some CLI experience.
+6.  The window must look good on a screen that has a resolution of 980x720 or higher (i.e. lines must not bleed out of the window edge).
+7.  A more technical user must be able to interpret the contents of the stored JSON file.
+8.  A user must be updated on the status of their command within (at most) 2 seconds.
 
 ### Glossary
 
+* **API**: A set of functions that enable communication between software components
+* **fxml**: File format used to format/structure a JavaFX application's UI.
+* **JavaFX**: A third-party software for Java, used to run our builds and tests
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Parser**: The software component responsible for interpreting user input into commands
+* **PlantUML**: A third-party tool that facilitates the creation of various software diagrams
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Versioned AddressBook**: An extension to the AddressBook class that allows undoing/redoing actions.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
