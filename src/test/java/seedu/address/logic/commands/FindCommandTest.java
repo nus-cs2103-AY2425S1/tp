@@ -15,6 +15,8 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.function.Predicate;
+import java.util.List;
+
 
 import org.junit.jupiter.api.Test;
 
@@ -120,13 +122,26 @@ public class FindCommandTest {
      */
     private Predicate<Person> preparePredicate(String userInput) {
         String[] keywords = userInput.split("\\s+");
-        // Check if all keywords are numeric
-        if (Arrays.stream(keywords).allMatch(this::isNumeric)) {
-            return new PhoneContainsKeywordsPredicate(Arrays.asList(keywords));
-        } else {
-            return new NameContainsKeywordsPredicate(Arrays.asList(keywords));
-        }
+
+        List<String> nameKeywords = Arrays.stream(keywords)
+                .filter(keyword -> !isNumeric(keyword))
+                .toList();
+
+        List<String> phoneKeywords = Arrays.stream(keywords)
+                .filter(this::isNumeric)
+                .toList();
+
+        Predicate<Person> namePredicate = nameKeywords.isEmpty()
+                ? person -> true
+                : new NameContainsKeywordsPredicate(nameKeywords);
+
+        Predicate<Person> phonePredicate = phoneKeywords.isEmpty()
+                ? person -> true
+                : new PhoneContainsKeywordsPredicate(phoneKeywords);
+
+        return namePredicate.and(phonePredicate);
     }
+
 
     /**
      * Utility method to check if a string is numeric (i.e., contains only digits).
@@ -136,9 +151,4 @@ public class FindCommandTest {
     private boolean isNumeric(String str) {
         return str.matches("\\d+");
     }
-
-
-
-
-
 }
