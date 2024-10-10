@@ -3,10 +3,10 @@ package keycontacts.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static keycontacts.logic.parser.CliSyntax.PREFIX_GRADELEVEL;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_NAME;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_PHONE;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_TAG;
-import static keycontacts.logic.parser.CliSyntax.PREFIX_GRADELEVEL;
 import static keycontacts.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.Collections;
@@ -24,11 +24,11 @@ import keycontacts.logic.commands.exceptions.CommandException;
 import keycontacts.model.Model;
 import keycontacts.model.student.Address;
 import keycontacts.model.student.Email;
+import keycontacts.model.student.GradeLevel;
 import keycontacts.model.student.Name;
 import keycontacts.model.student.Phone;
 import keycontacts.model.student.Student;
 import keycontacts.model.tag.Tag;
-import keycontacts.model.student.GradeLevel;
 
 /**
  * Edits the details of an existing student in the student directory.

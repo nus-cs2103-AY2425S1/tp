@@ -93,6 +93,11 @@ public class StudentBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code GradeLevel} of the {@code Student} that we are building.
+     * @param gradeLevel
+     * @return
+     */
     public StudentBuilder withGradeLevel(String gradeLevel) {
         this.gradeLevel = new GradeLevel(gradeLevel);
         return this;

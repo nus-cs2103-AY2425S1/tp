@@ -3,10 +3,10 @@ package keycontacts.logic.parser;
 import static keycontacts.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static keycontacts.logic.parser.CliSyntax.PREFIX_GRADELEVEL;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_NAME;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_PHONE;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_TAG;
-import static keycontacts.logic.parser.CliSyntax.PREFIX_GRADELEVEL;
 
 import java.util.Set;
 import java.util.stream.Stream;
@@ -33,7 +33,8 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_GRADELEVEL);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
+                    PREFIX_GRADELEVEL);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_GRADELEVEL)
                 || !argMultimap.getPreamble().isEmpty()) {

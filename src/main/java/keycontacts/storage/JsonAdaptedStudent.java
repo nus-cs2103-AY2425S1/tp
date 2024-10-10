@@ -12,10 +12,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import keycontacts.commons.exceptions.IllegalValueException;
 import keycontacts.model.student.Address;
 import keycontacts.model.student.Email;
+import keycontacts.model.student.GradeLevel;
 import keycontacts.model.student.Name;
 import keycontacts.model.student.Phone;
 import keycontacts.model.student.Student;
-import keycontacts.model.student.GradeLevel;
 import keycontacts.model.tag.Tag;
 
 /**

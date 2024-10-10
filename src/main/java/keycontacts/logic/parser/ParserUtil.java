@@ -141,11 +141,9 @@ public class ParserUtil {
         try {
             schoolLevel = trimmedGradeLevel.split(" ")[0];
             grade = Integer.parseInt(trimmedGradeLevel.split(" ")[1]);
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             throw new ParseException(GradeLevel.MESSAGE_CONSTRAINTS);
-        }
-        catch (PatternSyntaxException e) {
+        } catch (PatternSyntaxException e) {
             throw new ParseException(GradeLevel.MESSAGE_CONSTRAINTS);
         }
         return new GradeLevel(schoolLevel, grade);

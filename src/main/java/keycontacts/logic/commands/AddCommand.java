@@ -3,10 +3,10 @@ package keycontacts.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static keycontacts.logic.parser.CliSyntax.PREFIX_GRADELEVEL;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_NAME;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_PHONE;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_TAG;
-import static keycontacts.logic.parser.CliSyntax.PREFIX_GRADELEVEL;
 
 import keycontacts.commons.util.ToStringBuilder;
 import keycontacts.logic.Messages;
