@@ -51,7 +51,8 @@ public class AddContactCommandTest {
         AddContactCommand addContactCommand = new AddContactCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        assertThrows(CommandException.class, AddContactCommand.MESSAGE_DUPLICATE_PERSON, () -> addContactCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddContactCommand.MESSAGE_DUPLICATE_PERSON, () -> addContactCommand
+                                                                                                .execute(modelStub));
     }
 
     @Test
