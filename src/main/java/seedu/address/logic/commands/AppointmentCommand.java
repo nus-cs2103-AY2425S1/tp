@@ -1,17 +1,16 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Appointment;
+import seedu.address.model.person.Person;
 
 /**
  * Sets or updates an appointment for the person identified by the displayed index from the address book.
@@ -26,7 +25,7 @@ public class AppointmentCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 a/25-12-2024 14:30";
 
     public static final String MESSAGE_SET_APPOINTMENT_SUCCESS = "Set Appointment for Person: %1$s";
-    public static final String MESSAGE_INVALID_APPOINTMENT_FORMAT = "Invalid appointment format. Please use DD-MM-YYYY HH:MM.";
+    public static final String MESSAGE_INVALID_APPOINTMENT_FORMAT = "Please use DD-MM-YYYY HH:MM.";
     public static final String MESSAGE_NO_APPOINTMENT_PROVIDED = "Please provide a valid appointment date.";
 
     private final Index index;
@@ -57,7 +56,7 @@ public class AppointmentCommand extends Command {
                 personToEdit.getAddress(), personToEdit.getTags(), new Appointment(this.appointmentString));
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult("Set appointment for " + personToEdit.getName()+ " on " + this.appointmentString);
+        return new CommandResult("Set appointment for " + personToEdit.getName() + " on " + this.appointmentString);
     }
 
     @Override

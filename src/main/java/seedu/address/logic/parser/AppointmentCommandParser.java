@@ -1,11 +1,10 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AppointmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
-import javafx.scene.transform.Scale;
 
 /**
  * Parses input arguments and creates a new AppointmentCommand object.
@@ -43,7 +42,9 @@ public class AppointmentCommandParser implements Parser<AppointmentCommand> {
         String monthPart = dayString.substring(3, 5);
         String yearPart = dayString.substring(6, 10);
 
-        int day, month, year;
+        int day;
+        int month;
+        int year;
         try {
             day = Integer.parseInt(dayPart);
             month = Integer.parseInt(monthPart);
@@ -64,7 +65,8 @@ public class AppointmentCommandParser implements Parser<AppointmentCommand> {
         if (!timeString.substring(2, 3).equals(":")) {
             throw new ParseException("Invalid time format. Please use HH:MM.");
         }
-        int hour, minute;
+        int hour;
+        int minute;
         try {
             hour = Integer.parseInt(hourPart);
             minute = Integer.parseInt(minutePart);
@@ -81,7 +83,8 @@ public class AppointmentCommandParser implements Parser<AppointmentCommand> {
         try {
             int indexValue = Integer.parseInt(indexString);
             if (indexValue <= 0) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppointmentCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        AppointmentCommand.MESSAGE_USAGE));
             }
             index = Index.fromZeroBased(indexValue - 1); // Adjust to zero-based index
         } catch (NumberFormatException e) {
