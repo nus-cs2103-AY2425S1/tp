@@ -26,17 +26,17 @@ public class CourseTest {
     }
 
     @Test
-    public void constructor_isValidCourseCode_1_success() {
+    public void constructor_isValidCourseCode1_success() {
         assertDoesNotThrow(() -> new Course("MA1100"));
     }
 
     @Test
-    public void constructor_isValidCourseCode_2_success() {
+    public void constructor_isValidCourseCode2_success() {
         assertDoesNotThrow(() -> new Course("CS1231S"));
     }
 
     @Test
-    public void constructor_isValidCourseCode_3_success() {
+    public void constructor_isValidCourseCode3_success() {
         assertDoesNotThrow(() -> new Course("GEA1000N"));
     }
 
