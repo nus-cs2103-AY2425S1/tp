@@ -8,6 +8,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.confirmations.ConfirmDelete;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
@@ -24,12 +25,18 @@ public class DeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
-
     private final Index targetIndex;
+    private boolean isConfirmed = false;
 
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
+
+    // setter method for testing purposes
+    public void setConfirmed(boolean isConfirmed) {
+        this.isConfirmed = isConfirmed;
+    }
+
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -41,6 +48,14 @@ public class DeleteCommand extends Command {
         }
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+
+        // display confirmation dialog - not sure if this is the best place to put it
+        if (!isConfirmed) {
+            ConfirmDelete.showConfirmationDialog(personToDelete);
+        }
+        if (!isConfirmed) {
+            throw new CommandException("You have cancelled the deletion!");
+        }
         model.deletePerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
