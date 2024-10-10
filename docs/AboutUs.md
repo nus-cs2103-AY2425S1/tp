@@ -51,7 +51,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Charlene Teoh
 
-<img src="images/charlene.png" width="200px">
+<img src="images/charlenetcy.png" width="200px">
 
 [[github](http://github.com/charlenetcy)]
 [[portfolio](team/charlene.md)]
