@@ -10,9 +10,11 @@ import seedu.ddd.commons.core.index.Index;
 import seedu.ddd.commons.util.StringUtil;
 import seedu.ddd.logic.parser.exceptions.ParseException;
 import seedu.ddd.model.person.Address;
+import seedu.ddd.model.person.Date;
 import seedu.ddd.model.person.Email;
 import seedu.ddd.model.person.Name;
 import seedu.ddd.model.person.Phone;
+import seedu.ddd.model.person.Service;
 import seedu.ddd.model.tag.Tag;
 
 /**
@@ -93,6 +95,36 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String service} into a {@code Service}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code service} is invalid.
+     */
+    public static Service parseService(String service) throws ParseException {
+        requireNonNull(service);
+        String trimmedService = service.trim();
+        if (!Service.isValidService(trimmedService)) {
+            throw new ParseException(Service.MESSAGE_CONSTRAINTS);
+        }
+        return new Service(service);
+    }
+
+    /**
+     * Parses a {@code String date} into a {@code Date}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+    public static Date parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!Date.isValidDate(trimmedDate)) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        }
+        return new Date(trimmedDate);
     }
 
     /**
