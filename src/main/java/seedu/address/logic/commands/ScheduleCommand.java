@@ -1,9 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import java.util.List;
+
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -13,7 +15,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Meeting;
 import seedu.address.model.person.Person;
 
-import java.util.List;
+
 
 /**
  * Schedules a meeting with another person from the address book.
@@ -22,10 +24,8 @@ public class ScheduleCommand extends Command {
 
     public static final String COMMAND_WORD = "schedule";
 
-    public static final String MESSAGE_USAGE_1 = "here is the error";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Schedules a meeting with another " +
-            "person from the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Schedules a meeting with another "
+            + "person from the address book. "
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_LOCATION + "LOCATION "
             + PREFIX_START_TIME + "START_TIME "
@@ -62,7 +62,7 @@ public class ScheduleCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToScheduleMeetingWith = lastShownList.get(index.getZeroBased());requireNonNull(model);
+        Person personToScheduleMeetingWith = lastShownList.get(index.getZeroBased());
 
         model.addMeeting(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
@@ -81,7 +81,7 @@ public class ScheduleCommand extends Command {
 //
 //        AddCommand otherAddCommand = (AddCommand) other;
 //        return toAdd.equals(otherAddCommand.toAdd);
-//    }
+    //}
 
     @Override
     public String toString() {

@@ -1,22 +1,19 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Meeting;
-import seedu.address.model.person.Meetings;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -41,7 +38,7 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
         }
 
         if (!arePrefixesPresent(argMultimap, PREFIX_LOCATION, PREFIX_START_TIME, PREFIX_END_TIME)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE_1));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_LOCATION, PREFIX_START_TIME, PREFIX_END_TIME);
