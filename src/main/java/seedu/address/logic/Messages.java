@@ -21,7 +21,13 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
-
+    public static final String MESSAGE_INVALID_EMAIL = "Invalid email address. Please enter a valid email";
+    public static final String MESSAGE_INVALID_NAME = "Invalid name. Please enter a valid name "
+            + "using alphabetical characters and common punctuation.";
+    public static final String MESSAGE_INVALID_PHONE = "Invalid phone number. Please enter a number "
+            + "between 8 and 15 digits.";
+    public static final String MESSAGE_INVALID_ROLE = "Invalid role. Please enter a valid job "
+        + "title for the candidate.";
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
@@ -44,10 +50,10 @@ public class Messages {
                 .append(person.getPhone())
                 .append("; Email: ")
                 .append(person.getEmail())
-                .append("; Address: ")
-                .append(person.getAddress())
-                .append("; Tags: ");
-        person.getTags().forEach(builder::append);
+                .append("; Role: ")
+                .append(person.getRole())
+                .append("; Skills: ");
+        person.getSkills().forEach(builder::append);
         return builder.toString();
     }
 
