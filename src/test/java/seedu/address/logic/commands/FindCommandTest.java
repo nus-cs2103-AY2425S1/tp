@@ -82,7 +82,7 @@ public class FindCommandTest {
     @Test
     public void execute_phoneNumberSearch_onePersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
-        Predicate<Person> predicate = preparePredicate("85355255");  // ALICE's phone number
+        Predicate<Person> predicate = preparePredicate("85355255"); // ALICE's phone number
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -91,7 +91,7 @@ public class FindCommandTest {
     @Test
     public void execute_phoneNumberSearch_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
-        Predicate<Person> predicate = preparePredicate("85355255 98765432");  // ALICE and BOB's phone numbers
+        Predicate<Person> predicate = preparePredicate("85355255 98765432"); // ALICE and BOB's phone numbers
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -100,7 +100,7 @@ public class FindCommandTest {
     @Test
     public void execute_nameAndPhoneSearch_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
-        Predicate<Person> predicate = preparePredicate("Alice 98765432");  // ALICE by name, BOB by phone number
+        Predicate<Person> predicate = preparePredicate("Alice 98765432"); // ALICE by name, BOB by phone number
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
