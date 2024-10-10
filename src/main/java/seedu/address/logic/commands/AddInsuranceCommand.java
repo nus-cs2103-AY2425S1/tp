@@ -1,7 +1,9 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INSURANCE_ID;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 
@@ -47,6 +49,7 @@ public class AddInsuranceCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
@@ -63,6 +66,11 @@ public class AddInsuranceCommand extends Command {
             personToEditInsurancePlansManager.checkIfPlanNotOwned(planToBeAdded);
 
             personToEditInsurancePlansManager.addPlan(planToBeAdded);
+
+            Person personWithAddedInsurancePlan = lastShownList.get(index.getZeroBased());
+
+            model.setPerson(personToEdit, personWithAddedInsurancePlan);
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
             return new CommandResult(String.format(MESSAGE_ADD_INSURANCE_PLAN_SUCCESS,
                     personToEditInsurancePlansManager, Messages.format(personToEdit)));

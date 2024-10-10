@@ -9,8 +9,6 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.insurance.InsurancePlan;
-import seedu.address.model.person.insurance.InsurancePlanFactory;
 import seedu.address.model.person.insurance.InsurancePlansManager;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -99,12 +97,9 @@ public class PersonBuilder {
     /**
      * Sets the {@code InsurancePlansManager} of the {@code Person} that we are building.
      */
-    public PersonBuilder withInsurancePlansManager(String... insurancePlans) {
+    public PersonBuilder withInsurancePlansManager(String insurancePlansString) {
         try {
-            for (String insurancePlanName : insurancePlans) {
-                InsurancePlan planToBeAdded = InsurancePlanFactory.createInsurancePlan(insurancePlanName);
-                this.insurancePlansManager.addPlan(planToBeAdded);
-            }
+            this.insurancePlansManager = new InsurancePlansManager(insurancePlansString);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
