@@ -9,6 +9,7 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Role;
+import seedu.address.model.tag.Nickname;
 
 /**
  * Represents a Person in the address book.
@@ -24,17 +25,19 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Role> roles = new HashSet<>();
+    private final Nickname nickname;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Role> roles) {
-        requireAllNonNull(name, phone, email, address, roles);
+    public Person(Name name, Phone phone, Email email, Address address, Set<Role> roles, Nickname nickname) {
+        requireAllNonNull(name, phone, email, address, roles, nickname);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.roles.addAll(roles);
+        this.nickname = nickname;
     }
 
     public Name getName() {
@@ -59,6 +62,10 @@ public class Person {
      */
     public Set<Role> getTags() {
         return Collections.unmodifiableSet(roles);
+    }
+
+    public Nickname getNickname() {
+        return nickname;
     }
 
     /**
@@ -95,12 +102,13 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && roles.equals(otherPerson.roles);
+                && nickname.equals(otherPerson.nickname);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, roles);
+        return Objects.hash(name, phone, email, address, roles, nickname);
     }
 
     @Override
@@ -111,7 +119,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", roles)
+                .add("nickname", nickname)
                 .toString();
     }
-
 }

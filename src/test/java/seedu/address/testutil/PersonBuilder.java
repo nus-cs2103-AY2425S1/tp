@@ -10,6 +10,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Role;
+import seedu.address.model.tag.Nickname;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -22,13 +23,15 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String[] DEFAULT_TAGS = {"Admin"};
+    public static final String DEFAULT_NICKNAME = "";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Set<Role> roles;
-
+    private Nickname nickname;
+  
     /**
      * Creates a {@code PersonBuilder} with the default details.
      */
@@ -38,6 +41,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         roles = new HashSet<>(Arrays.stream(DEFAULT_TAGS).map(Role::new).toList());
+        nickname = new Nickname(DEFAULT_NICKNAME);
     }
 
     /**
@@ -49,6 +53,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         roles = new HashSet<>(personToCopy.getTags());
+        nickname = personToCopy.getNickname();
     }
 
     /**
@@ -91,8 +96,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Nickname} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withNickname(String nickname) {
+        this.nickname = new Nickname(nickname);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, roles);
+        return new Person(name, phone, email, address, roles, nickname);
     }
 
 }

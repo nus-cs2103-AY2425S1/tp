@@ -14,6 +14,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Role;
+import seedu.address.model.tag.Nickname;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -120,5 +121,17 @@ public class ParserUtil {
             roleSet.add(parseTag(tagName));
         }
         return roleSet;
+    }
+
+    /**
+     * Parses a {@code String nickname} into a {@code Nickname}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Nickname} is invalid.
+     */
+    public static Nickname parseNickname(String nickname) throws ParseException {
+        requireNonNull(nickname);
+        String trimmedNickname = nickname.trim();
+        return new Nickname(trimmedNickname);
     }
 }

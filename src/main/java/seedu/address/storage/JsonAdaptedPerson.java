@@ -16,6 +16,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Role;
+import seedu.address.model.tag.Nickname;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -29,6 +30,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String nickname;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -36,7 +38,7 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("nickname") String nickname) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -44,6 +46,7 @@ class JsonAdaptedPerson {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.nickname = nickname;
     }
 
     /**
@@ -57,6 +60,7 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        nickname = source.getNickname().value;
     }
 
     /**
@@ -103,7 +107,9 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Role> modelRoles = new HashSet<>(personRoles);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRoles);
+        final Nickname modelNickname = new Nickname(nickname); // Nickname can be anything
+      
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRoles, modelNickname);
     }
 
 }

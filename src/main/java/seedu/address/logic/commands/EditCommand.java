@@ -27,6 +27,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Role;
+import seedu.address.model.tag.Nickname;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -99,9 +100,10 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        
         Set<Role> updatedRoles = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRoles);
+        Nickname updatedNickname = editPersonDescriptor.getNickname().orElse(personToEdit.getNickname());
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRoles, updatedNickname);
     }
 
     @Override
@@ -138,6 +140,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Role> roles;
+        private Nickname nickname;
 
         public EditPersonDescriptor() {}
 
@@ -151,6 +154,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.roles);
+            setNickname(toCopy.nickname);
         }
 
         /**
@@ -209,6 +213,14 @@ public class EditCommand extends Command {
             return (roles != null) ? Optional.of(Collections.unmodifiableSet(roles)) : Optional.empty();
         }
 
+        public void setNickname(Nickname nickname) {
+            this.nickname = nickname;
+        }
+
+        public Optional<Nickname> getNickname() {
+            return Optional.ofNullable(nickname);
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -226,6 +238,7 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(roles, otherEditPersonDescriptor.roles);
+                    && Objects.equals(nickname, otherEditPersonDescriptor.nickname);
         }
 
         @Override
@@ -236,6 +249,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("tags", roles)
+                    .add("nickname", nickname)
                     .toString();
         }
     }

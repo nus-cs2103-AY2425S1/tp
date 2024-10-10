@@ -5,5 +5,6 @@
     "email": "hans@example.com",
     "address": "4th street",
     "tags": [ "Vice President" ]
+    "nickname": ""
   } ]
 }
