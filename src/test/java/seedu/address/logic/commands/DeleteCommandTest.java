@@ -115,12 +115,22 @@ public class DeleteCommandTest {
         assertCommandFailure(deleteCommand, model, String.format(DeleteCommand.MESSAGE_PERSON_NOT_FOUND, invalidName));
     }
 
-    // Equality tests for both index-based and name-based commands
+    @Test
+    public void equals_sameName_returnsTrue() {
+        // Create two DeleteCommands with the same name
+        DeleteCommand deleteCommand1 = new DeleteCommand("John Doe");
+        DeleteCommand deleteCommand2 = new DeleteCommand("John Doe");
+
+        // Both commands should be equal since the targetName is the same
+        assertTrue(deleteCommand1.equals(deleteCommand2));
+    }
+
     @Test
     public void equals() {
         DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON);
         DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON);
-        DeleteCommand deleteNameCommand = new DeleteCommand("John Doe");
+        DeleteCommand deleteNameCommand1 = new DeleteCommand("John Doe");
+        DeleteCommand deleteNameCommand2 = new DeleteCommand("Jane Doe");
 
         // Same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
@@ -139,12 +149,16 @@ public class DeleteCommandTest {
         assertFalse(deleteFirstCommand.equals(null));
 
         // Different name -> returns false
-        assertFalse(deleteFirstCommand.equals(deleteNameCommand));
+        assertFalse(deleteNameCommand1.equals(deleteNameCommand2));
 
         // Same name -> returns true
         DeleteCommand deleteNameCommandCopy = new DeleteCommand("John Doe");
-        assertTrue(deleteNameCommand.equals(deleteNameCommandCopy));
+        assertTrue(deleteNameCommand1.equals(deleteNameCommandCopy));
+
+        // New test to cover the targetName branch: Same name comparison
+        assertTrue(deleteNameCommand1.equals(new DeleteCommand("John Doe"))); // Target branch coverage
     }
+
 
     @Test
     public void toString_indexBasedDeletion() {
