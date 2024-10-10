@@ -36,7 +36,7 @@ public class InsurancePlansManager {
      */
     public InsurancePlansManager(String insurancePlansString) throws ParseException{
         this();
-        assert insurancePlansString.trim().isEmpty() :
+        assert !insurancePlansString.trim().isEmpty() :
                 "Saved insurance plans string must not be an empty string. "
                         + "If no insurance plans have been added, it will be \"No added plans\" ";
 
