@@ -22,7 +22,7 @@ public class Module {
     private Grade grade;
 
     /**
-     * Constructs an {@code Module}.
+     * Constructs a {@code Module}.
      *
      * @param module A valid Module.
      */
