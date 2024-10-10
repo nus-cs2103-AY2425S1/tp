@@ -27,7 +27,7 @@ public class ViewCommand extends Command {
         requireNonNull(name);
         this.name = name;
     }
-    
+
     @Override
     public CommandResult execute(Model model) {
         return new CommandResult("Viewing " + name);
