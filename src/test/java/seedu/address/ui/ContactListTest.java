@@ -1,17 +1,12 @@
 package seedu.address.ui;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
@@ -40,8 +35,7 @@ public class ContactListTest {
 
     @Test
     void testComponentNotNull() throws TimeoutException, InterruptedException {
-    
-        
+
         this.personList = FXCollections.observableArrayList(TypicalPersons.getTypicalPersons());
         ContactList x = new ContactList(this.personList);
 
