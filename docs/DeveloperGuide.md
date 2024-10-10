@@ -285,7 +285,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### User stories
 
-**Priorities:** 
+**Priorities:**
 - High (must have) - `* * *`
 - Medium (nice to have) - `* *`
 - Low (unlikely to have) - `*`
