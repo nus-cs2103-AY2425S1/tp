@@ -73,7 +73,7 @@ public class AddInsuranceCommand extends Command {
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
             return new CommandResult(String.format(MESSAGE_ADD_INSURANCE_PLAN_SUCCESS,
-                    personToEditInsurancePlansManager, Messages.format(personToEdit)));
+                    planToBeAdded, Messages.format(personWithAddedInsurancePlan)));
         } catch (ParseException e) {
             throw new CommandException(
                     String.format(e.getMessage(), insuranceID, Messages.format(personToEdit)));
