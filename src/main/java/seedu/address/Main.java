@@ -1,9 +1,9 @@
 package seedu.address;
 
+import java.util.logging.Logger;
+
 import javafx.application.Application;
 import seedu.address.commons.core.LogsCenter;
-
-import java.util.logging.Logger;
 
 /**
  * The main entry point to the application.
