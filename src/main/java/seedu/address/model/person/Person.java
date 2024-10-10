@@ -27,6 +27,7 @@ public class Person {
     private final Address address;
     private final DateOfBirth dateOfBirth;
     private final Gender gender;
+    private final Priority priority;
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Appointment> appointments = new HashSet<>();
 
@@ -34,8 +35,8 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Nric nric, Address address, DateOfBirth dateOfBirth,
-                  Gender gender, Set<Tag> tags, Set<Appointment> appointments) {
-        requireAllNonNull(name, phone, email, nric, address, dateOfBirth, gender, tags, appointments);
+                  Gender gender, Set<Tag> tags, Priority priority, Set<Appointment> appointments) {
+        requireAllNonNull(name, phone, email, nric, address, dateOfBirth, gender, tags, priority, appointments);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -44,11 +45,13 @@ public class Person {
         this.dateOfBirth = dateOfBirth;
         this.address = address;
         this.tags.addAll(tags);
+        this.priority = priority;
         this.appointments.addAll(appointments);
     }
 
-
-
+    public Priority getPriority() {
+        return priority;
+    }
     public Name getName() {
         return name;
     }
@@ -130,13 +133,14 @@ public class Person {
                 && gender.equals(otherPerson.gender)
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
+                && priority.equals(otherPerson.priority)
                 && appointments.equals(otherPerson.appointments);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, nric, dateOfBirth, gender, address, tags, appointments);
+        return Objects.hash(name, phone, email, nric, dateOfBirth, gender, address, tags, priority, appointments);
     }
 
     @Override
@@ -150,6 +154,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("priority", priority)
                 .add("appointments", appointments)
                 .toString();
     }
