@@ -40,7 +40,6 @@ public class PersonCard extends UiPart<Region> {
     private Label email;
     @FXML
     private Label assignment;
-
     @FXML
     private FlowPane tags;
 
@@ -55,13 +54,47 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        person.getTags().stream().sorted(Comparator.comparing(tag -> tag.tagName)).forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         if (person.getAssignment() != null) {
             assignment.setText(person.getAssignment().toString());
         } else {
             assignment.setText("No assignment available"); // Optional: for better user feedback
         }
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public HBox getCardPane() {
+        return cardPane;
+    }
+
+    public Label getName() {
+        return name;
+    }
+
+    public Label getId() {
+        return id;
+    }
+
+    public Label getPhone() {
+        return phone;
+    }
+
+    public Label getAddress() {
+        return address;
+    }
+
+    public Label getEmail() {
+        return email;
+    }
+
+    public Label getAssignment() {
+        return assignment;
+    }
+
+    public FlowPane getTags() {
+        return tags;
     }
 }
