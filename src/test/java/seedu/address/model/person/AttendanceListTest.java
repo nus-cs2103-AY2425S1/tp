@@ -38,6 +38,15 @@ public class AttendanceListTest {
         sameAttendanceList.addAttendance(new Attendance(false, LocalDateTime.of(2024, 1, 8, 12, 0)));
         assertTrue(attendanceList.equals(sameAttendanceList));
 
+        // same object -> returns true
+        assertTrue(attendanceList.equals(attendanceList));
+
+        // null -> returns false
+        assertFalse(attendanceList.equals(null));
+
+        // different types -> returns false
+        assertFalse(attendanceList.equals(5.0f));
+
         // at least one different value -> returns false
         AttendanceList differentAttendanceList = new AttendanceList();
         differentAttendanceList.addAttendance(new Attendance(false, LocalDateTime.of(2024, 1, 1, 12, 0)));
