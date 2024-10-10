@@ -18,7 +18,7 @@ public class Person {
 
     // Identity fields
     private final Name name;
-    private final Phone phone;
+    private final Telegram telegram;
     private final Email email;
 
     // Data fields
@@ -28,10 +28,10 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Telegram telegram, Email email, Address address, Set<Tag> tags) {
+        requireAllNonNull(name, telegram, email, address, tags);
         this.name = name;
-        this.phone = phone;
+        this.telegram = telegram;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
@@ -41,8 +41,8 @@ public class Person {
         return name;
     }
 
-    public Phone getPhone() {
-        return phone;
+    public Telegram getTelegram() {
+        return telegram;
     }
 
     public Email getEmail() {
@@ -91,7 +91,7 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
+                && telegram.equals(otherPerson.telegram)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags);
@@ -100,14 +100,14 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, telegram, email, address, tags);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
-                .add("phone", phone)
+                .add("telegram", telegram)
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
