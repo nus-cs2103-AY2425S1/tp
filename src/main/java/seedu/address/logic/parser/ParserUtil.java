@@ -8,11 +8,18 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.AddPolicyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.policy.EducationPolicy;
+import seedu.address.model.policy.HealthPolicy;
+import seedu.address.model.policy.LifePolicy;
+import seedu.address.model.policy.Policy;
+import seedu.address.model.policy.PolicyMap;
+import seedu.address.model.policy.PolicyType;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -120,5 +127,45 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String policy} into a {@code Policy}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Policy} is not a valid policy type.
+     */
+    public static Policy parsePolicy(String policy) throws ParseException {
+        requireNonNull(policy);
+
+        final String lowerCaseTrimmedPolicy = policy.trim().toLowerCase();
+        String life = PolicyType.LIFE.toString().toLowerCase();
+        String health = PolicyType.HEALTH.toString().toLowerCase();
+        String education = PolicyType.EDUCATION.toString().toLowerCase();
+
+        // Cannot use switch cases here because life, health and education are dynamic variables.
+        if (lowerCaseTrimmedPolicy.equals(life)) {
+            return new LifePolicy();
+        } else if (lowerCaseTrimmedPolicy.equals(health)) {
+            return new HealthPolicy();
+        } else if (lowerCaseTrimmedPolicy.equals(education)) {
+            return new EducationPolicy();
+        } else {
+            throw new ParseException(Policy.MESSAGE_CONSTRAINTS);
+        }
+    }
+
+    /**
+     * Parses {@code Collection<String> policies} into a {@code PolicyMap}.
+     */
+    public static PolicyMap parsePolicies(Collection<String> policies) throws ParseException {
+        requireNonNull(policies);
+        final PolicyMap policyMap = new PolicyMap();
+        for (String policy : policies) {
+            if (!policyMap.add(parsePolicy(policy))) {
+                throw new ParseException(AddPolicyCommand.MESSAGE_DUPLICATES);
+            }
+        }
+        return policyMap;
     }
 }

@@ -18,6 +18,9 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.policy.HealthPolicy;
+import seedu.address.model.policy.LifePolicy;
+import seedu.address.model.policy.PolicyMap;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -26,6 +29,7 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_POLICY_TYPE = "live";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -33,6 +37,8 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_POLICY_TYPE_LIFE = "life";
+    private static final String VALID_POLICY_TYPE_HEALTH = "health";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -192,5 +198,61 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parsePolicy_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parsePolicy(null));
+    }
+
+    @Test
+    public void parsePolicy_validPolicyWithoutWhitespace_returnsPolicy() throws Exception {
+        LifePolicy expected = new LifePolicy();
+        assertEquals(expected, ParserUtil.parsePolicy(VALID_POLICY_TYPE_LIFE));
+    }
+
+    @Test
+    public void parsePolicy_validValueWithWhitespace_returnsPolicy() throws Exception {
+        String policyWithWhitespace = WHITESPACE + VALID_POLICY_TYPE_LIFE + WHITESPACE;
+        LifePolicy expected = new LifePolicy();
+        assertEquals(expected, ParserUtil.parsePolicy(policyWithWhitespace));
+    }
+
+    @Test
+    public void parsePolicy_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePolicy(INVALID_POLICY_TYPE));
+    }
+
+    @Test
+    public void parsePolicies_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parsePolicies(null));
+    }
+
+    @Test
+    public void parsePolicies_collectionWithInvalidPolicies_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePolicies(
+                Arrays.asList(VALID_POLICY_TYPE_LIFE, INVALID_POLICY_TYPE)));
+    }
+
+    @Test
+    public void parsePolicies_emptyCollection_returnsEmptySet() throws Exception {
+        PolicyMap expected = new PolicyMap();
+        assertEquals(expected, ParserUtil.parsePolicies(Collections.emptyList()));
+    }
+
+    @Test
+    public void parsePolicies_collectionWithValidPolicies_returnsPolicySet() throws Exception {
+        PolicyMap actual = ParserUtil.parsePolicies(Arrays.asList(VALID_POLICY_TYPE_LIFE, VALID_POLICY_TYPE_HEALTH));
+        PolicyMap expected = new PolicyMap();
+        expected.add(new LifePolicy());
+        expected.add(new HealthPolicy());
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void parsePolicies_collectionWithDuplicatePolicies_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePolicies(
+                Arrays.asList(VALID_POLICY_TYPE_LIFE, VALID_POLICY_TYPE_LIFE)));
     }
 }
