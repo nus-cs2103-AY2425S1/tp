@@ -355,7 +355,7 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
 **MSS**
 1. User enters delete contact command with the contact's detail (full name or phone number).
 2. Cher shows list of contacts with name that matches user input.
-3. User re-enters the phone number of contact to delete.
+3. User re-enters delete command with phone number of the contact to delete.
 4. Cher prompts for delete confirmation.
 5. User confirms deletion.
 6. Cher deletes the contact from memory.
