@@ -131,6 +131,14 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Viewing a contact : `view`
+
+View the contact of a specified person from the address book.
+
+Format: `view NAME`
+
+* This command is case-insensitive. e.g `alex` will match `alex`
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
@@ -201,5 +209,6 @@ Action     | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**View** | `view NAME`<br> e.g., `view Alex`
 **List**   | `list`
 **Help**   | `help`
