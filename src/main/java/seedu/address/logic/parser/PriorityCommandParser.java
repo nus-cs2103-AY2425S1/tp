@@ -11,7 +11,6 @@ import seedu.address.model.person.Nric;
 import seedu.address.model.person.Priority;
 
 
-
 /**
  * Parses user input for the {@link PriorityCommand} and creates a new instance of it.
  */
@@ -44,7 +43,7 @@ public class PriorityCommandParser implements Parser<PriorityCommand> {
         String nricStr = argMultimap.getValue(PREFIX_NRIC).orElse("");
         Nric nric = ParserUtil.parseNric(nricStr);
         String priorityStr = argMultimap.getValue(PREFIX_PRIORITY).orElse("");
-        Priority priority = ParserUtil.parsePriority(priorityStr);
+        Priority priority = ParserUtil.parsePriority(priorityStr.toUpperCase());
 
         return new PriorityCommand(nric, priority);
     }
