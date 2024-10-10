@@ -18,7 +18,7 @@ public class Phone {
     /**
      * Constructs a {@code Phone}.
      *
-     * @param phone A valid phone value.
+     * @param phone A valid phone number.
      */
     public Phone(String phone) {
         requireNonNull(phone);
