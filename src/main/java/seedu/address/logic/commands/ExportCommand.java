@@ -34,19 +34,4 @@ public class ExportCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         throw new CommandException(String.format(MESSAGE_ARGUMENTS, format));
     }
-
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof ExportCommand)) {
-            return false;
-        }
-
-        ExportCommand e = (ExportCommand) other;
-        return format.equals(e.format);
-    }
 }
