@@ -53,8 +53,8 @@ public class Meeting {
     /**
      * Returns true if a given string is a valid location.
      */
-    public static boolean isValidLocation(String test) {
-        return test.matches(VALIDATION_REGEX);
+    public static boolean isValidLocation(String location) {
+        return location.matches(VALIDATION_REGEX);
     }
 
     /**

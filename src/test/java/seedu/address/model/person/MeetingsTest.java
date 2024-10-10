@@ -23,7 +23,7 @@ public class MeetingsTest {
         assertFalse(new Meetings().isClash(defaultMeeting)); // empty Meeting
 
         Meetings meetings = new Meetings();
-        meetings.add(defaultMeeting);
+        meetings.addMeeting(defaultMeeting);
 
         // clash with existing meetings
         assertTrue(meetings.isClash(defaultMeeting));
@@ -32,23 +32,23 @@ public class MeetingsTest {
     @Test
     public void add_clashMeeting_throwsTimeClashException() {
         Meetings meetings = new Meetings();
-        meetings.add(defaultMeeting);
-        assertThrows(TimeClashException.class, () -> meetings.add(defaultMeeting));
+        meetings.addMeeting(defaultMeeting);
+        assertThrows(TimeClashException.class, () -> meetings.addMeeting(defaultMeeting));
     }
 
     @Test
     public void add_nullMeeting_throwsNullPointerException() {
         Meetings meetings = new Meetings();
-        assertThrows(NullPointerException.class, () -> meetings.add(null));
+        assertThrows(NullPointerException.class, () -> meetings.addMeeting(null));
     }
 
     @Test
     public void equals() {
         Meetings meetings = new Meetings();
-        meetings.add(defaultMeeting);
+        meetings.addMeeting(defaultMeeting);
 
         Meetings sameMeetings = new Meetings();
-        sameMeetings.add(defaultMeeting);
+        sameMeetings.addMeeting(defaultMeeting);
 
         // same values -> returns true
         assertTrue(meetings.equals(sameMeetings));
@@ -67,7 +67,7 @@ public class MeetingsTest {
         String otherLocation = "Other Valid Location";
         Meeting otherMeeting = new Meeting(otherStartTime, otherEndTime, otherLocation);
         Meetings differentMeetings = new Meetings();
-        differentMeetings.add(otherMeeting);
+        differentMeetings.addMeeting(otherMeeting);
 
         // different values -> returns false
         assertFalse(meetings.equals(differentMeetings));
