@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INSURANCE_ID;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 
@@ -65,8 +66,13 @@ public class DeleteInsuranceCommand extends Command {
 
             personToEditInsurancePlansManager.deletePlan(planToBeDeleted);
 
+            Person personWithDeletedInsurancePlan = lastShownList.get(index.getZeroBased());
+
+            model.setPerson(personToEdit, personWithDeletedInsurancePlan);
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
             return new CommandResult(String.format(MESSAGE_DELETE_INSURANCE_PLAN_SUCCESS,
-                    personToEditInsurancePlansManager, Messages.format(personToEdit)));
+                    planToBeDeleted, Messages.format(personWithDeletedInsurancePlan)));
         } catch (ParseException e) {
             throw new CommandException(
                     String.format(e.getMessage(), insuranceID, Messages.format(personToEdit)));
