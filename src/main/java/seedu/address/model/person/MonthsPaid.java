@@ -42,11 +42,11 @@ public class MonthsPaid {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof MonthsPaid otherMarkPaid)) {
+        if (!(other instanceof MonthsPaid otherMonthsPaid)) {
             return false;
         }
 
-        return Objects.equals(value, otherMarkPaid.value);
+        return Objects.equals(value, otherMonthsPaid.value);
     }
 
     @Override
