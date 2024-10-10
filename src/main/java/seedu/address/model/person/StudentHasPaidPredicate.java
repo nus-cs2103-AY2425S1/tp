@@ -1,16 +1,15 @@
 package seedu.address.model.person;
 
-import seedu.address.commons.util.ToStringBuilder;
-
 import java.util.function.Predicate;
 
+import seedu.address.commons.util.ToStringBuilder;
 /**
  * Tests a {@code Person}'s hasPaid status
  */
 public class StudentHasPaidPredicate implements Predicate<Person> {
-    private final boolean hasPaid;
     public static final String MESSAGE_NOT_IMPLEMENTED_YET =
             "StudentHasPaidPredicate not implemented yet";
+    private final boolean hasPaid;
 
     public StudentHasPaidPredicate(boolean hasPaid) {
         this.hasPaid = hasPaid;
