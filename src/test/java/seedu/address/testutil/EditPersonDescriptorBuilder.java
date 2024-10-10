@@ -83,6 +83,12 @@ public class EditPersonDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code TelegramUsername} of the {@code EditPersonDescriptor} that is being built.
+     *
+     * @param telegramUsername The Telegram username to set for the person.
+     * @return The current {@code EditPersonDescriptorBuilder} instance with the updated Telegram username.
+     */
     public EditPersonDescriptorBuilder withTelegramUsername(String telegramUsername) {
         descriptor.setTelegramUsername(new TelegramUsername(telegramUsername));
         return this;
