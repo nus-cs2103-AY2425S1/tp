@@ -247,7 +247,7 @@ public class AddCommandParserTest {
                 + MODULE_DESC_BOB + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
         // invalid gender
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_GENDER_DESC
-                + ADDRESS_DESC_BOB + VALID_TAG_HUSBAND + VALID_TAG_FRIEND, Gender.MESSAGE_CONSTRAINTS);
+                + ADDRESS_DESC_BOB + MODULE_DESC_BOB + VALID_TAG_FRIEND, Gender.MESSAGE_CONSTRAINTS);
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + GENDER_DESC_BOB + INVALID_ADDRESS_DESC
