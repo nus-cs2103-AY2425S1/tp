@@ -65,4 +65,16 @@ public class RoleHandler {
         return role.isTagged(person);
     }
 
+    public static boolean isValidRoleName(String test) {
+        switch (test) {
+        case Attendee.ROLE_WORD:
+        case Sponsor.ROLE_WORD:
+        case Vendor.ROLE_WORD:
+        case Volunteer.ROLE_WORD:
+            return true;
+        default:
+            return false;
+        }
+    }
+
 }
