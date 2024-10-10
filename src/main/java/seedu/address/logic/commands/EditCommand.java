@@ -170,8 +170,14 @@ public class EditCommand extends Command {
         public Optional<Name> getName() {
             return Optional.ofNullable(name);
         }
-        public void setCategory(String category) { this.category = category; }
-        public String getCategory() { return category; }
+
+        public void setCategory(String category) {
+            this.category = category;
+        }
+
+        public String getCategory() {
+            return category;
+        }
 
         public void setPhone(Phone phone) {
             this.phone = phone;
