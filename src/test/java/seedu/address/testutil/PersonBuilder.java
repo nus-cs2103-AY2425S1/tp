@@ -119,7 +119,6 @@ public class PersonBuilder {
         this.paymentStatus = new PaymentStatus(paymentStatus);
       return this;
     }
-  
     /**
      * Sets the {@code ClientStatus} of the {@code Person} that we are building.
      */
