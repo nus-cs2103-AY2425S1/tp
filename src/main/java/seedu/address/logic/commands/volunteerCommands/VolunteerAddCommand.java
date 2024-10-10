@@ -14,6 +14,7 @@ import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_START_TIME;
+import static seedu.address.logic.parser.AddressBookParser.VOLUNTEER_COMMAND_INDICATOR;
 
 
 public class VolunteerAddCommand extends Command {
@@ -32,8 +33,7 @@ public class VolunteerAddCommand extends Command {
             + VOLUNTEER_PREFIX_AVAILABLE_DATE + "AVAILABLE_DATE "
             + VOLUNTEER_PREFIX_START_TIME + "START_TIME "
             + VOLUNTEER_PREFIX_END_TIME + "END_TIME "
-            + "Example: " + COMMAND_WORD + " "
-            + "type/volunteer "
+            + "Example: " + VOLUNTEER_COMMAND_INDICATOR + " " + COMMAND_WORD + " "
             + VOLUNTEER_PREFIX_NAME + "John Doe "
             + VOLUNTEER_PREFIX_PHONE + "98765432 "
             + VOLUNTEER_PREFIX_EMAIL + "johndoe@example.com "
@@ -41,6 +41,7 @@ public class VolunteerAddCommand extends Command {
             + VOLUNTEER_PREFIX_START_TIME + "11:00 "
             + VOLUNTEER_PREFIX_END_TIME + "12:00 ";
 
+    // Example: /v new n/John Doe p/98765432 em/johndoe@example.com d/2024-10-15 s/09:00 ee/17:00
 
     public VolunteerAddCommand(Volunteer volunteer) {
         requireNonNull(volunteer);
