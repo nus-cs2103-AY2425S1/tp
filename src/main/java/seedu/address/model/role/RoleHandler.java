@@ -9,7 +9,11 @@ import seedu.address.model.role.exceptions.InvalidRoleException;
  * Handles the checking of roles and adding to roles
  */
 public class RoleHandler {
-    public static final String MESSAGE_CONSTRAINTS = "Roles should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS = "Roles should be one of the following:"
+            + "\n" + Attendee.ROLE_WORD
+            + "\n" + Sponsor.ROLE_WORD
+            + "\n" + Vendor.ROLE_WORD
+            + "\n" + Volunteer.ROLE_WORD;
 
 
 
