@@ -65,6 +65,11 @@ public class RoleHandler {
         return role.isTagged(person);
     }
 
+    /**
+     * Checks if test is a valid role
+     * @param test String representation of a role
+     * @return True if test is a valid role
+     */
     public static boolean isValidRoleName(String test) {
         Objects.requireNonNull(test);
         test = test.trim().toLowerCase();
