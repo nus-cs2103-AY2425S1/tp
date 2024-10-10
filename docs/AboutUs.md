@@ -9,51 +9,51 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Beh Wen Jie
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/wenjebs.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[github](https://github.com/wenjebs)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Project Advisor
+* Responsibilities: Mewing
 
-### Jane Doe
+### Yim Jian Bing
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yimjianbing.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/yimjianbing)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Team Lead
+* Role: Frontend designer
 * Responsibilities: UI
 
-### Johnny Doe
+### Martin NGGGGGG
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/martout2002.png" width="200px">
 
 [[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Annie Song Si Hyun
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/hyxnnii.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/hyxnnii)]
+[[portfolio](team/hyxnnii.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Shaun Lee
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/hoodini231.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/hoodini231)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Back-end Developer
+* Responsibilities: Database
