@@ -35,7 +35,30 @@ public class JobTest {
         assertTrue(Job.isValidJob("12345")); // numbers only
         assertTrue(Job.isValidJob("swe 2")); // alphanumeric characters
         assertTrue(Job.isValidJob("DevOps Engineer")); // with capital letters
-        assertTrue(Job.isValidJob("Senior Principal DevOps Automation Specialist L3")); // long names
+        assertTrue(Job.isValidJob("Senior Principal DevOps Automation Specialist L3")); // long jobs
+    }
+
+    @Test
+    public void isSameJob() {
+        Job job = new Job("Software Engineer");
+
+        // same values -> returns true
+        assertTrue(job.isSameJob(new Job("Software Engineer")));
+
+        // same object -> returns true
+        assertTrue(job.isSameJob(job));
+
+        // same values case insensitive -> returns true
+        assertTrue(job.isSameJob(new Job("SOFTWARE ENGINEER")));
+
+        // same values case insensitive -> returns true
+        assertTrue(job.isSameJob(new Job("software engineer")));
+
+        // null -> returns false
+        assertFalse(job.isSameJob(null));
+
+        // different values -> returns false
+        assertFalse(job.isSameJob(new Job("Software Scientist")));
     }
 
     @Test

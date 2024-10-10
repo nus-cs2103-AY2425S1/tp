@@ -161,7 +161,7 @@ public class Person {
     }
 
     public boolean hasJobAndStatus(Name name, Job job) {
-        return this.getName().equals(name) && this.getJob().equals(job);
+        return this.getName().isSameName(name) && this.getJob().isSameJob(job);
     }
 
     @Override

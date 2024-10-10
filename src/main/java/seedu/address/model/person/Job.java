@@ -38,6 +38,19 @@ public class Job {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns true if both jobs ignoring case are the same.
+     * This defines a case-insensitive notion of equality between two jobs.
+     */
+    public boolean isSameJob(Job otherJob) {
+        if (otherJob == this) {
+            return true;
+        }
+
+        return otherJob != null
+                && this.jobName.equalsIgnoreCase(otherJob.jobName);
+    }
+
 
     @Override
     public String toString() {
