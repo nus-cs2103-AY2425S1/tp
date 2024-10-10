@@ -27,15 +27,18 @@ public class Person {
 
     private final Remark remark;
 
+    private final Income income;
+
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Remark remark) {
+    public Person(Name name, Phone phone, Email email, Address address, Income income, Set<Tag> tags, Remark remark) {
         requireAllNonNull(name, phone, email, address, tags, remark);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.income = income;
         this.tags.addAll(tags);
         this.remark = remark;
     }
@@ -54,6 +57,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Income getIncome() {
+        return income;
     }
 
     /**
@@ -78,7 +85,9 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getName().equals(getName())
+                && otherPerson.getPhone().equals(getPhone())
+                && otherPerson.getEmail().equals(getEmail());
     }
 
     /**
@@ -100,8 +109,7 @@ public class Person {
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && address.equals(otherPerson.address);
     }
 
     @Override
@@ -117,6 +125,7 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("income", income)
                 .add("tags", tags)
                 .toString();
     }
