@@ -64,9 +64,9 @@ public class FilterCommandTest {
     @Test
     public void toStringMethod() {
         NameContainsSubstringPredicate predicate = new NameContainsSubstringPredicate("substring");
-        FilterCommand FilterCommand = new FilterCommand(predicate);
+        FilterCommand filterCommand = new FilterCommand(predicate);
         String expected = FilterCommand.class.getCanonicalName() + "{predicates=" + predicate + "}";
-        assertEquals(expected, FilterCommand.toString());
+        assertEquals(expected, filterCommand.toString());
     }
 
     /**

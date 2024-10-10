@@ -55,8 +55,8 @@ public class NameContainsSubstringPredicateTest {
     @Test
     public void test_emptySubstring_throwsException() {
         NameContainsSubstringPredicate predicate = new NameContainsSubstringPredicate("");
-        Assertions.assertThrows(IllegalArgumentException.class,
-                () -> predicate.test(new PersonBuilder().withName("Alice").build()));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> predicate.test(
+                new PersonBuilder().withName("Alice").build()));
     }
 
     @Test
