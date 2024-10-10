@@ -110,7 +110,7 @@ public class AddCommandParserTest {
         // multiple register numbers
         assertParseFailure(parser, REGISTER_NUMBER_DESC_AMY + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_REGISTER_NUMBER));
-		
+
         // multiple sexes
         assertParseFailure(parser, SEX_DESC_AMY + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_SEX));
@@ -222,7 +222,7 @@ public class AddCommandParserTest {
         // missing sex prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + REGISTER_NUMBER_DESC_BOB + VALID_SEX_BOB + STUDENT_CLASS_DESC_BOB, expectedMessage);
-		
+
 		// missing class prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + REGISTER_NUMBER_DESC_BOB + SEX_DESC_BOB + VALID_STUDENT_CLASS_BOB, expectedMessage);
@@ -243,36 +243,36 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + REGISTER_NUMBER_DESC_BOB + SEX_DESC_BOB + STUDENT_CLASS_DESC_BOB + TAG_DESC_HUSBAND
 			    + TAG_DESC_FRIEND, Phone.MESSAGE_CONSTRAINTS);
-                
+
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB
                 + REGISTER_NUMBER_DESC_BOB + SEX_DESC_BOB + STUDENT_CLASS_DESC_BOB + TAG_DESC_HUSBAND
-			    + TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);      
+		+ TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
 
         // invalid address
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
                 + REGISTER_NUMBER_DESC_BOB + SEX_DESC_BOB + STUDENT_CLASS_DESC_BOB + TAG_DESC_HUSBAND
-			    + TAG_DESC_FRIEND, Address.MESSAGE_CONSTRAINTS);       
+		+ TAG_DESC_FRIEND, Address.MESSAGE_CONSTRAINTS);
 
         // invalid register number
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + INVALID_REGISTER_NUMBER_DESC + SEX_DESC_BOB + STUDENT_CLASS_DESC_BOB + TAG_DESC_HUSBAND
-			    + TAG_DESC_FRIEND, RegisterNumber.MESSAGE_CONSTRAINTS);
+		+ TAG_DESC_FRIEND, RegisterNumber.MESSAGE_CONSTRAINTS);
 
         // invalid sex
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + REGISTER_NUMBER_DESC_BOB + INVALID_SEX_DESC + STUDENT_CLASS_DESC_BOB + TAG_DESC_HUSBAND
-			    + TAG_DESC_FRIEND, Sex.MESSAGE_CONSTRAINTS);
-		
+		+ TAG_DESC_FRIEND, Sex.MESSAGE_CONSTRAINTS);
+
 		// invalid class
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + REGISTER_NUMBER_DESC_BOB + SEX_DESC_BOB + INVALID_STUDENT_CLASS_DESC + TAG_DESC_HUSBAND
-			    + TAG_DESC_FRIEND, StudentClass.MESSAGE_CONSTRAINTS);
+		+ TAG_DESC_FRIEND, StudentClass.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + REGISTER_NUMBER_DESC_BOB + SEX_DESC_BOB + STUDENT_CLASS_DESC_BOB + INVALID_TAG_DESC
-			    + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
+		+ VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
@@ -281,7 +281,7 @@ public class AddCommandParserTest {
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + REGISTER_NUMBER_DESC_BOB + SEX_DESC_BOB + STUDENT_CLASS_DESC_BOB
-			    + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+		+ TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }
