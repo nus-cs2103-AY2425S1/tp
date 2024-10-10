@@ -39,6 +39,67 @@ public class RentalInformation {
         this.customerList = new CustomerList(customerList);
     }
 
+    /**
+     * Constructs a {@code RentalInformation}.
+     *
+     * @param address A valid {@code Address}.
+     * @param rentalStartDate A valid {@code RentalStartDate}.
+     * @param rentalEndDate A valid {@code RentalEndDate}.
+     * @param rentDueDate A valid {@code RentDueDate}.
+     * @param monthlyRent A valid {@code MonthlyRent}.
+     * @param deposit A valid {@code Deposit}.
+     * @param customerList A valid {@code CustomerList}.
+     */
+    public RentalInformation(Address address, RentalDate rentalStartDate, RentalDate rentalEndDate,
+                             RentDueDate rentDueDate, MonthlyRent monthlyRent, Deposit deposit,
+                             CustomerList customerList) {
+        this.address = address;
+        this.rentalStartDate = rentalStartDate;
+        this.rentalEndDate = rentalEndDate;
+        this.rentDueDate = rentDueDate;
+        this.monthlyRent = monthlyRent;
+        this.deposit = deposit;
+        this.customerList = customerList;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public RentalDate getRentalStartDate() {
+        return rentalStartDate;
+    }
+
+    public RentalDate getRentalEndDate() {
+        return rentalEndDate;
+    }
+
+    public RentDueDate getRentDueDate() {
+        return rentDueDate;
+    }
+
+    public MonthlyRent getMonthlyRent() {
+        return monthlyRent;
+    }
+
+    public Deposit getDeposit() {
+        return deposit;
+    }
+
+    public CustomerList getCustomerList() {
+        return customerList;
+    }
+
+    public String getString() {
+        return "Address: " + address + "\n"
+                + "Rental start date: " + rentalStartDate + "\n"
+                + "Rental end date: " + rentalEndDate + "\n"
+                + "Rental due date: " + rentDueDate + "\n"
+                + "Monthly rent: " + monthlyRent + "\n"
+                + "Deposit: " + deposit + "\n"
+                + "Customer list: " + customerList + "\n";
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

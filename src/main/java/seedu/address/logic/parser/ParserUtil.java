@@ -13,6 +13,11 @@ import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.rentalinformation.Address;
+import seedu.address.model.rentalinformation.CustomerList;
+import seedu.address.model.rentalinformation.Deposit;
+import seedu.address.model.rentalinformation.MonthlyRent;
+import seedu.address.model.rentalinformation.RentDueDate;
+import seedu.address.model.rentalinformation.RentalDate;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -65,20 +70,95 @@ public class ParserUtil {
         return new Phone(trimmedPhone);
     }
 
-//    /**
-//     * Parses a {@code String address} into an {@code Address}.
-//     * Leading and trailing whitespaces will be trimmed.
-//     *
-//     * @throws ParseException if the given {@code address} is invalid.
-//     */
-//    public static Address parseAddress(String address) throws ParseException {
-//        requireNonNull(address);
-//        String trimmedAddress = address.trim();
-//        if (!Address.isValidAddress(trimmedAddress)) {
-//            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
-//        }
-//        return new Address(trimmedAddress);
-//    }
+    /**
+     * Parses a {@code String address} into an {@code Address}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code address} is invalid.
+     */
+    public static Address parseAddress(String address) throws ParseException {
+        requireNonNull(address);
+        String trimmedAddress = address.trim();
+        if (!Address.isValidAddress(trimmedAddress)) {
+            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+        }
+        return new Address(trimmedAddress);
+    }
+
+    /**
+     * Parses a {@code String address} into an {@code Address}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code address} is invalid.
+     */
+    public static RentalDate parseRentalDate(String rentalDate) throws ParseException {
+        requireNonNull(rentalDate);
+        String trimmedRentalDate = rentalDate.trim();
+        if (!RentalDate.isValidRentalDate(trimmedRentalDate)) {
+            throw new ParseException(RentalDate.MESSAGE_CONSTRAINTS);
+        }
+        return new RentalDate(trimmedRentalDate);
+    }
+
+    /**
+     * Parses a {@code String address} into an {@code Address}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code address} is invalid.
+     */
+    public static RentDueDate parseRentDueDate(String rentDueDate) throws ParseException {
+        requireNonNull(rentDueDate);
+        String trimmedRentDueDate = rentDueDate.trim();
+        if (!RentDueDate.isValidDueDate(trimmedRentDueDate)) {
+            throw new ParseException(RentDueDate.MESSAGE_CONSTRAINTS);
+        }
+        return new RentDueDate(trimmedRentDueDate);
+    }
+
+    /**
+     * Parses a {@code String address} into an {@code Address}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code address} is invalid.
+     */
+    public static MonthlyRent parseMonthlyRent(String monthlyRent) throws ParseException {
+        requireNonNull(monthlyRent);
+        String trimmedMonthlyRent = monthlyRent.trim();
+        if (!MonthlyRent.isValidMonthlyRent(trimmedMonthlyRent)) {
+            throw new ParseException(MonthlyRent.MESSAGE_CONSTRAINTS);
+        }
+        return new MonthlyRent(trimmedMonthlyRent);
+    }
+
+    /**
+     * Parses a {@code String address} into an {@code Address}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code address} is invalid.
+     */
+    public static Deposit parseDeposit(String deposit) throws ParseException {
+        requireNonNull(deposit);
+        String trimmedDeposit = deposit.trim();
+        if (!Deposit.isValidDeposit(trimmedDeposit)) {
+            throw new ParseException(Deposit.MESSAGE_CONSTRAINTS);
+        }
+        return new Deposit(trimmedDeposit);
+    }
+
+    /**
+     * Parses a {@code String address} into an {@code Address}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code address} is invalid.
+     */
+    public static CustomerList parseCustomerList(String customerList) throws ParseException {
+        requireNonNull(customerList);
+        String trimmedCustomerList = customerList.trim();
+        if (!CustomerList.isValidCustomerList(trimmedCustomerList)) {
+            throw new ParseException(CustomerList.MESSAGE_CONSTRAINTS);
+        }
+        return new CustomerList(trimmedCustomerList);
+    }
 
     /**
      * Parses a {@code String email} into an {@code Email}.

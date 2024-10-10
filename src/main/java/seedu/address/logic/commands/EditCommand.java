@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-//import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -20,13 +19,13 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
-import seedu.address.model.rentalinformation.Address;
+import seedu.address.model.rentalinformation.RentalInformation;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.Model;
 
 /**
  * Edits the details of an existing client in the address book.
@@ -42,7 +41,6 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-//            + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -98,12 +96,11 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(clientToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(clientToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(clientToEdit.getEmail());
-//        Address updatedAddress = editPersonDescriptor.getAddress().orElse(clientToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(clientToEdit.getTags());
+        Set<RentalInformation> updatedRentalInformationList = editPersonDescriptor.getRentalInformationList()
+                .orElse(clientToEdit.getRentalInformation());
 
-//        return new Client(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
-        return new Client(updatedName, updatedPhone, updatedEmail, updatedTags);
-
+        return new Client(updatedName, updatedPhone, updatedEmail, updatedTags, updatedRentalInformationList);
     }
 
     @Override
@@ -138,8 +135,8 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
-//        private Address address;
         private Set<Tag> tags;
+        private Set<RentalInformation> rentalInformationList;
 
         public EditPersonDescriptor() {}
 
@@ -151,20 +148,15 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
-//            setAddress(toCopy.address);
             setTags(toCopy.tags);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
-//        public boolean isAnyFieldEdited() {
-//            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
-//        }
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, tags);
         }
-
 
         public void setName(Name name) {
             this.name = name;
@@ -190,14 +182,6 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-//        public void setAddress(Address address) {
-//            this.address = address;
-//        }
-
-//        public Optional<Address> getAddress() {
-//            return Optional.ofNullable(address);
-//        }
-
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -215,6 +199,21 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        public void setRentalInformationList(Set<RentalInformation> rentalInformationList) {
+            this.rentalInformationList = (rentalInformationList != null) ? new HashSet<>(rentalInformationList) : null;
+        }
+
+        /**
+         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code tags} is null.
+         */
+        public Optional<Set<RentalInformation>> getRentalInformationList() {
+            return (rentalInformationList != null)
+                    ? Optional.of(Collections.unmodifiableSet(rentalInformationList))
+                    : Optional.empty();
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -230,8 +229,8 @@ public class EditCommand extends Command {
             return Objects.equals(name, otherEditPersonDescriptor.name)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
-//                    && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(rentalInformationList, otherEditPersonDescriptor.rentalInformationList);
         }
 
         @Override
@@ -240,8 +239,8 @@ public class EditCommand extends Command {
                     .add("name", name)
                     .add("phone", phone)
                     .add("email", email)
-//                    .add("address", address)
                     .add("tags", tags)
+                    .add("rental information", rentalInformationList)
                     .toString();
         }
     }
