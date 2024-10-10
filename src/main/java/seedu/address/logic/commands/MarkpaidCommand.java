@@ -1,5 +1,9 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -7,9 +11,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
-import java.util.List;
-
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 public class MarkpaidCommand extends Command {
     public static final String COMMAND_WORD = "markpaid";
@@ -22,13 +23,17 @@ public class MarkpaidCommand extends Command {
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d";
     private final Index targetIndex;
 
+    /**
+     * Marks whether an existing person has paid their fees for the month
+     * @param targetIndex
+     */
     public MarkpaidCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        requireAllNonNull(model);
+        requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
