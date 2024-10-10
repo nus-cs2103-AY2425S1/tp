@@ -29,12 +29,12 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
+import seedu.address.model.person.MedCon;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.NricMatchesPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.MedCon;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -161,6 +161,7 @@ public class EditCommand extends Command {
         private Nric nric;
         private Set<Tag> tags;
         private Set<Appointment> appointments;
+        private MedCon medCon;
 
         public EditPersonDescriptor() {}
 
@@ -178,6 +179,7 @@ public class EditCommand extends Command {
             setNric(toCopy.nric);
             setTags(toCopy.tags);
             setAppointments(toCopy.appointments);
+            setMedCon(toCopy.medCon);
         }
 
         /**
@@ -185,7 +187,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, address, dateOfBirth, nric, gender, tags,
-                                               appointments);
+                                               appointments, medCon);
         }
 
         public void setName(Name name) {
@@ -242,6 +244,13 @@ public class EditCommand extends Command {
 
         public void setNric(Nric nric) {
             this.nric = nric;
+        }
+        public Optional<MedCon> getMedCon() {
+            return Optional.ofNullable(medCon);
+        }
+
+        public void setMedCon(MedCon medCon) {
+            this.medCon = medCon;
         }
 
         /**

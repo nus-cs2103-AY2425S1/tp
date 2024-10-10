@@ -2,13 +2,13 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDCON;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 
 import seedu.address.logic.commands.AddMedConCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Nric;
 import seedu.address.model.person.MedCon;
+import seedu.address.model.person.Nric;
 
 /**
  * Parses user input for the {@link AddMedConCommand} and creates a new instance of it.

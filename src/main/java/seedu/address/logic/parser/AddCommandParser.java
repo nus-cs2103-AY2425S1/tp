@@ -5,11 +5,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDCON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDCON;
 
 import java.util.Collections;
 import java.util.Set;
@@ -24,11 +24,11 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
+import seedu.address.model.person.MedCon;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.MedCon;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -47,7 +47,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                         PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_MEDCON);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_NRIC, PREFIX_DOB, PREFIX_GENDER,
-                PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_MEDCON)
+                PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
@@ -63,7 +63,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Set<Appointment> appointmentList = Collections.emptySet();
-        MedCon medCon = ParserUtil.parseMedCon(argMultimap.getValue(PREFIX_MEDCON).get());
+        MedCon medCon = argMultimap.getValue(PREFIX_MEDCON).isPresent()
+                ? ParserUtil.parseMedCon(argMultimap.getValue(PREFIX_MEDCON).get())
+                : new MedCon("");
 
         logger.info("Successfully parsed all fields for AddCommand");
         Person person = new Person(name, phone, email, nric, address, dob, gender, tagList, appointmentList, medCon);

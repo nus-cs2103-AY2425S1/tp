@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DOB_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEDCON_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -38,7 +39,7 @@ public class PersonTest {
         // same nric, all other attributes different -> returns true
         Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withName(VALID_NAME_BOB).withDateOfBirth(VALID_DOB_BOB).withGender(VALID_GENDER_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).withMedCon(VALID_MEDCON_BOB).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // different nric, all other attributes same -> returns false
@@ -96,6 +97,10 @@ public class PersonTest {
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
+
+        // different medical condition -> returns false
+        editedAlice = new PersonBuilder(ALICE).withMedCon(VALID_MEDCON_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
     }
 
     @Test
@@ -103,7 +108,8 @@ public class PersonTest {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", nric=" + ALICE.getNric()
                 + ", gender=" + ALICE.getGender() + ", dateOfBirth=" + ALICE.getDateOfBirth() + ", phone="
                 + ALICE.getPhone() + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress()
-                + ", tags=" + ALICE.getTags() + ", appointments=" + ALICE.getAppointments() + "}";
+                + ", tags=" + ALICE.getTags() + ", appointments=" + ALICE.getAppointments() + ", medical condition="
+                + ALICE.getMedCon() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

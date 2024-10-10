@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDCON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -58,6 +59,8 @@ public class CommandTestUtil {
     public static final String VALID_APPOINTMENT_NAME_PHYSIO = "Physio";
     public static final String VALID_APPOINTMENT_DATE_PHYSIO = "2024-01-01";
     public static final String VALID_APPOINTMENT_TIMEPERIOD_PHYSIO = "1235-1500";
+    public static final String VALID_MEDCON_AMY = "Diabetes";
+    public static final String VALID_MEDCON_BOB = "Rabbies";
 
     public static final String VALID_APPOINTMENT_NAME_AMY = VALID_APPOINTMENT_NAME_DENTAL;
     public static final String VALID_APPOINTMENT_DATE_AMY = VALID_APPOINTMENT_DATE_DENTAL;
@@ -84,6 +87,8 @@ public class CommandTestUtil {
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String PRIORITY_DESC_AMY = " " + PREFIX_PRIORITY + VALID_PRIORITY_AMY;
     public static final String PRIORITY_DESC_BOB = " " + PREFIX_PRIORITY + VALID_PRIORITY_BOB;
+    public static final String MEDCON_DESC_AMY = " " + PREFIX_MEDCON + VALID_MEDCON_AMY;
+    public static final String MEDCON_DESC_BOB = " " + PREFIX_MEDCON + VALID_MEDCON_BOB;
     public static final String APPOINTMENT_DESC_AMY = " " + VALID_APPOINTMENT_NAME_DENTAL + " " + PREFIX_DATE
                                                       + VALID_APPOINTMENT_DATE_DENTAL + " " + PREFIX_TIMEPERIOD
                                                       + VALID_APPOINTMENT_TIMEPERIOD_DENTAL;
@@ -145,11 +150,11 @@ public class CommandTestUtil {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withGender(VALID_GENDER_AMY).withNric(VALID_NRIC_AMY).withDateOfBirth(VALID_DOB_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_FRIEND).withMedCon(VALID_MEDCON_AMY).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withNric(VALID_NRIC_BOB).withDateOfBirth(VALID_DOB_BOB).withGender(VALID_GENDER_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withMedCon(VALID_MEDCON_BOB).build();
     }
 
     /**
