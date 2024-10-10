@@ -9,10 +9,11 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
+import seedu.address.model.person.Age;
+import seedu.address.model.person.Detail;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -51,36 +52,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String phone} into a {@code Phone}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code phone} is invalid.
-     */
-    public static Phone parsePhone(String phone) throws ParseException {
-        requireNonNull(phone);
-        String trimmedPhone = phone.trim();
-        if (!Phone.isValidPhone(trimmedPhone)) {
-            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
-        }
-        return new Phone(trimmedPhone);
-    }
-
-    /**
-     * Parses a {@code String address} into an {@code Address}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code address} is invalid.
-     */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
-        }
-        return new Address(trimmedAddress);
-    }
-
-    /**
      * Parses a {@code String email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -93,6 +64,46 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String gender} into a {@code Gender}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code gender} is invalid.
+     */
+    public static Gender parseGender(String gender) throws ParseException {
+        requireNonNull(gender);
+        String trimmedGender = gender.trim();
+        if (!Gender.isValidGender(trimmedGender)) {
+            throw new ParseException(Gender.MESSAGE_CONSTRAINTS);
+        }
+        return new Gender(trimmedGender);
+    }
+
+    /**
+     * Parses a {@code String age} into an {@code Age}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code age} is invalid.
+     */
+    public static Age parseAge(String age) throws ParseException {
+        requireNonNull(age);
+        String trimmedAge = age.trim();
+        if (!Age.isValidAge(trimmedAge)) {
+            throw new ParseException(Age.MESSAGE_CONSTRAINTS);
+        }
+        return new Age(trimmedAge);
+    }
+
+    /**
+     * Parses a {@code String detail} into a {@code Detail}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static Detail parseDetail(String detail) {
+        requireNonNull(detail);
+        String trimmedDetail = detail.trim();
+        return new Detail(trimmedDetail);
     }
 
     /**

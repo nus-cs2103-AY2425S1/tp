@@ -18,22 +18,24 @@ public class Person {
 
     // Identity fields
     private final Name name;
-    private final Phone phone;
     private final Email email;
 
     // Data fields
-    private final Address address;
+    private final Gender gender;
+    private final Age age;
+    private final Detail detail;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Email email, Gender gender, Age age, Set<Tag> tags, Detail detail) {
+        requireAllNonNull(name, email, tags);
         this.name = name;
-        this.phone = phone;
         this.email = email;
-        this.address = address;
+        this.gender = gender;
+        this.age = age;
+        this.detail = detail;
         this.tags.addAll(tags);
     }
 
@@ -41,17 +43,18 @@ public class Person {
         return name;
     }
 
-    public Phone getPhone() {
-        return phone;
-    }
-
     public Email getEmail() {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
-    }
+    public Gender getGender() {
+        return gender; }
+
+    public Age getAge() {
+        return age; }
+
+    public Detail getDetail() {
+        return detail; }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -62,8 +65,9 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both persons have the same email.
+     * This weaker notion of equality between two persons allows researchers to
+     * differentiate participants by email.
      */
     public boolean isSamePerson(Person otherPerson) {
         if (otherPerson == this) {
@@ -71,7 +75,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getEmail().equals(getEmail());
     }
 
     /**
@@ -91,25 +95,27 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
+                && gender.equals(otherPerson.gender)
+                && age.equals(otherPerson.age)
+                && detail.equals(otherPerson.detail)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, email, gender, age, detail, tags);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
-                .add("phone", phone)
                 .add("email", email)
-                .add("address", address)
+                .add("gender", gender)
+                .add("age", age)
+                .add("detail", detail)
                 .add("tags", tags)
                 .toString();
     }
