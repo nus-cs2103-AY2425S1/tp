@@ -14,7 +14,7 @@ import seedu.address.model.client.Client;
 /**
  * Views the rental information for a client identified using its displayed index from the address book.
  */
-public class RentalViewCommand extends Command {
+public class ViewRentalCommand extends Command {
     public static final String COMMAND_WORD = "rview";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -25,7 +25,7 @@ public class RentalViewCommand extends Command {
 
     private final Index targetIndex;
 
-    public RentalViewCommand(Index targetIndex) {
+    public ViewRentalCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -52,12 +52,12 @@ public class RentalViewCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof RentalViewCommand)) {
+        if (!(other instanceof ViewRentalCommand)) {
             return false;
         }
 
-        RentalViewCommand otherRentalViewCommand = (RentalViewCommand) other;
-        return targetIndex.equals(otherRentalViewCommand.targetIndex);
+        ViewRentalCommand otherViewRentalCommand = (ViewRentalCommand) other;
+        return targetIndex.equals(otherViewRentalCommand.targetIndex);
     }
 
     @Override
