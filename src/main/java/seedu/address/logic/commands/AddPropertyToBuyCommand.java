@@ -1,6 +1,6 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
+// import static java.util.Objects.requireNonNull;
 // import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSING_TYPE;
 // import static seedu.address.logic.parser.CliSyntax.PREFIX_POSTAL_CODE;
 // import static seedu.address.logic.parser.CliSyntax.PREFIX_SELLING_PRICE;
