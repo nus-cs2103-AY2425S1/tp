@@ -2,14 +2,22 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 
+/**
+ * Represents a Person's Sex in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidSex(String)}
+ */
 public class Sex {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Sex should either be M or F";
 
-
     public final String value;
 
+    /**
+     * Constructs an {@code Sex}.
+     *
+     * @param sex A valid sex.
+     */
     public Sex(String sex) {
         requireNonNull(sex);
         value = sex;

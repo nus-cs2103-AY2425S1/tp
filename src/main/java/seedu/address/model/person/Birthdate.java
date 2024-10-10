@@ -2,6 +2,10 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 
+/**
+ * Represents a Person's BirthDate in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidBirthdate(String)}
+ */
 public class Birthdate {
 
     public static final String MESSAGE_CONSTRAINTS =
@@ -9,6 +13,11 @@ public class Birthdate {
 
     public final String value;
 
+    /**
+     * Constructs an {@code BirthDate}.
+     *
+     * @param birthdate A valid birthdate.
+     */
     public Birthdate(String birthdate) {
         requireNonNull(birthdate);
         value = birthdate;
