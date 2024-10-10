@@ -12,7 +12,7 @@ public class Tag {
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
-    public final String tagName;
+    public String tagName;
 
     /**
      * Constructs a {@code Tag}.
@@ -59,4 +59,12 @@ public class Tag {
         return '[' + tagName + ']';
     }
 
+    /**
+     * Updates tag name.
+     *
+     * @param newName new tag name
+     */
+    public void updateTagName(String newName) {
+        tagName = newName;
+    }
 }
