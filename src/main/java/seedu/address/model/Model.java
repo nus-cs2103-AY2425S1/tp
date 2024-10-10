@@ -80,8 +80,8 @@ public interface Model {
     ObservableList<Person> getFilteredPersonList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
+     * Updates the filter of the filtered person list to filter by the given {@code predicates}.
+     * @throws NullPointerException if {@code predicates} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 }
