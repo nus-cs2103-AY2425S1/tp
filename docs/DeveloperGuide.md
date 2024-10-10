@@ -275,8 +275,7 @@ particular, this representative works with B2B sales.
 - prefers typing to mouse interactions
 - is reasonably comfortable using CLI apps
 
-**Value proposition**: Efficiently manage and organise a large number of contacts
-faster than a typical mouse/GUI driven app
+**Value proposition**: This product aims to streamline and simplify sales management for Food and Beverage outlets. By providing an organized, easy-to-use platform for managing business contacts, it helps sales representatives save time and improve efficiency.
 
 ### User stories
 
@@ -284,9 +283,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …           | I want to …                                                                 | So that I can …                                                        |
 | -------- | ---------------- | --------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `* * *`  | user             | add new contacts                                                            | save the contact information of people                                 |
+| `* * *`  | user             | add a new contact                                                           | save the contact information of people                                 |
 | `* * *`  | user             | delete a contact                                                            | free up space in my app                                                |
-| `* * *`  | user             | view all contact                                                            | retrieve contact information                                           |
+| `* * *`  | user             | view all contact                                                            | see the full list of contacts                                          |
+| `* * *`  | user             | view a contact                                                              | retrieve contact information of a person                               |
 | `* * *`  | user             | save all contact                                                            | retain all information for when i reopen the app                       |
 | `* * *`  | sales rep        | have a low query time                                                       | avoid wasting much time querying my desired contact                    |
 | `* *`    | user             | find a person by name                                                       | locate details of persons without having to go through the entire list |
@@ -310,7 +310,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | sales rep        | add a tag to multiple clients                                               | tag the clients more easily                                            |
 | `*`      | user             | sort contacts by name                                                       | locate a person easily                                                 |
 | `*`      | experienced user | use keyboard shortcuts                                                      | navigate the app faster                                                |
-| `*`      | sales rep        | contact my client quickly from the app                                      | avoid typing numbers repeatedly on my phone                            |
+| `*`      | sales rep        | contact my client quickly from the app                                      | avoid typing numbers repeatedly on my _device_                         |
 
 ### Use cases
 
@@ -320,138 +320,73 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  Actor requests to add a new person by entering a command.
-2.  System displays a success message along with the details of the newly added person.
+1.  Actor requests to add a new person.
+2.  System shows details of the newly added person.
 
     Use case ends.
 
-**Extensions**
-
-- 1a. There is an error in the Actor's command.
-
-  - 1a1 System shows an error message.
-
-    Use case resumes at step 1.
-
-**Use case: UC2 - List all people saved in the System**
+**Use case: UC2 - List all people**
 
 **MSS**
 
-1.  Actor requests to list all people saved in the System by entering a command.
+1.  Actor requests to list all people saved in the System.
 2.  System shows a list of persons.
 
     Use case ends.
 
 **Extensions**
 
-- 1a. If there are no contacts stored in the System.
+- 2a. No contacts stored in the System.
 
-  - 1a1 System informs Actor that they have no contacts stored.
+  - 2a1 System informs Actor that they have no contacts stored.
 
     Use case ends.
-
-- 1b. The System detects an error in the entered command.
-
-  - 1b1 System requests for a valid command.
-
-    Use case resumes at step 1.
 
 **Use case: UC3 - Delete a person**
 
 **MSS**
 
-1.  Actor requests to <u>list all people saved in the System (UC2)</u>.
+1.  Actor performs <u>list all people (UC2)</u>.
 2.  Actor requests to delete a specific person in the list.
-3.  System deletes the person.
-4.  System <u>save contacts to save file (UC5)</u>.
+3.  System shows details of deleted person.
 
     Use case ends.
 
 **Extensions**
 
-- 2a. The given index is invalid.
+- 2a. The specified person is invalid.
 
   - 2a1. System shows an error message.
 
-    Use case resumes at step 2.
+    Use case ends.
 
-**Use case: UC4 - Load contact from save file**
-
-**Actor: `BizBook`**
-
-**Guarantees:** Contact list is initialized with available data.
+**Use case: UC4 - View person contact**
 
 **MSS**
 
-1.  Actor searches OS directory for save file.
-2.  OS returns save file object.
-3.  For each line of save file.
-
-    - 3.1 Actor reads a line from the file.
-    - 3.2 Actor parses the line into a contact object.
-    - 3.3 Actor adds the contact object to the contact list.
-    - 3.4 Repeat steps 3.1 - 3.3 until all lines are processed.
-
-4.  Actor finishes loading contacts into the contact list.
+1.  Actor performs <u>list all people (UC2)</u>.
+2.  Actor request to see specific person.
+3.  System shows person's contact details.
 
     Use case ends.
 
 **Extensions**
 
-- 1a. Save file does not exist.
+- 2a. The specified person is invalid.
 
-  - 1a1. Actor shows a warning message.
-  - 1a2. Actor creates a new save file.
-  - 1a3. Actor loads an empty contact list.
+  - 2a1. System shows an error message.
 
     Use case ends.
-
-- 3.1a. Line does not fit proper contact format.
-
-  - 3.1a1. Actor ignores line.
-  - 3.1a2. Actor` shows a warning message.
-
-    Use case resumes at step 3.1.
-
-**Use case: UC5 - Save contact to save file**
-
-**Actor: `BizBook`**
-
-**Guarantees:** Updated contact list is saved to save file.
-
-**MSS**
-
-1.  Actor searches OS directory for save file.
-2.  OS returns save file object.
-3.  For each contact object.
-
-    - 3.1 Actor parses line into saveable format.
-    - 3.2 Actor writes line to save file.
-    - 3.3 Repeat steps 3.1 - 3.2 until all contacts are processed.
-
-4.  Actor finishes saving contacts into save file.
-
-    Use case ends.
-
-**Extensions**
-
-- 1a. Save file does not exist.
-
-  - 1a1. Actor shows a warning message.
-  - 1a2. Actor creates a new save file.
-
-    Use case resumes at step 2.
 
 ### Non-Functional Requirements
 
 1.  The system should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  The system should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
-3.  The system should maintain data integrity, where system should ensure that data is accurate and consistent, preventing duplicate entries.
-4.  The system should be developed in a modular way for easier updates and bug fixes.
-5.  The system should ensure data consistency accross all instances.
-6.  The system should continue functioning in the event of a missing or corrupted save file.
-7.  The system should encrypt sensitive data to follow data protection laws.
-8.  The interface should be intuitive and easy to use.
+3.  The system should be developed in a modular way for easier updates and bug fixes.
+4.  The system should ensure data consistency accross all instances.
+5.  The system should continue functioning in the event of a missing or corrupted save file.
+6.  The system should encrypt sensitive data to follow data protection laws.
+7.  The interface should be intuitive and easy to use.
 
 _{More to be added}_
 
@@ -459,6 +394,7 @@ _{More to be added}_
 
 - **Mainstream OS**: Windows, Linux, Unix, MacOS
 - **Private contact detail**: A contact detail that is not meant to be shared with others
+- **device**: system with dialing and calling capabilities
 
 ---
 
