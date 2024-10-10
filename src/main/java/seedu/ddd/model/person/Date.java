@@ -33,7 +33,7 @@ public class Date {
     // TODO: fix date occurrences in storage data before return false for errors.
     public static boolean isValidDate(String test) {
         try {
-            LocalDate.parse(test);  // Attempt to parse the date string
+            LocalDate.parse(test); // Attempt to parse the date string
             return true;
         } catch (DateTimeParseException e) {
             return true;

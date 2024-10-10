@@ -90,7 +90,8 @@ public class AddContactCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New contact added: %1$s";
     public static final String MESSAGE_DUPLICATE_CONTACT = "This contact already exists in the address book";
 
-    public static final String INVALID_CONTACT_TYPE = "This contact is not a vendor or client, and is of an invalid type";
+    public static final String INVALID_CONTACT_TYPE =
+            "This contact is not a vendor or client, and is of an invalid type";
 
     private final Contact toAdd;
 
