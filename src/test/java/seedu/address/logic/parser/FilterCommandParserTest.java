@@ -24,7 +24,7 @@ public class FilterCommandParserTest {
                 new FilterCommand(new NameContainsSubstringPredicate("Alice"));
         assertParseSuccess(parser, " n/ Alice", expectedFilterCommand);
 
-        // multiple whitespaces between keywords
+        // multiple whitespaces between flag and substring
         assertParseSuccess(parser, " n/ \n  Alice \t", expectedFilterCommand);
     }
 }

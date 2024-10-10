@@ -69,13 +69,13 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_filter() throws Exception {
-        String keyword = "foo";
+        String substring = "foo";
         System.out.println(FilterCommand.COMMAND_WORD + " "
-                + CliSyntax.PREFIX_NAME.getPrefix() + " " + keyword);
+                + CliSyntax.PREFIX_NAME.getPrefix() + " " + substring);
         FilterCommand command = (FilterCommand) parser.parseCommand(
                 FilterCommand.COMMAND_WORD + " "
-                        + CliSyntax.PREFIX_NAME.getPrefix() + " " + keyword);
-        assertEquals(new FilterCommand(new NameContainsSubstringPredicate(keyword)), command);
+                        + CliSyntax.PREFIX_NAME.getPrefix() + " " + substring);
+        assertEquals(new FilterCommand(new NameContainsSubstringPredicate(substring)), command);
     }
 
     @Test

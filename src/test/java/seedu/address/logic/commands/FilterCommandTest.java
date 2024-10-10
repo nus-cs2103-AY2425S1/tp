@@ -51,18 +51,8 @@ public class FilterCommandTest {
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 
-//    @Test
-//    public void execute_zeroKeywords_noPersonFound() {
-//        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-//        NameContainsSubstringPredicate predicate = preparePredicate(" ");
-//        FilterCommand command = new FilterCommand(predicate);
-//        expectedModel.updateFilteredPersonList(predicate);
-//        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-//        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
-//    }
-
     @Test
-    public void execute_singleKeyword_singlePersonFound() {
+    public void execute_substring_singlePersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
         NameContainsSubstringPredicate predicate = preparePredicate("Kurz");
         FilterCommand command = new FilterCommand(predicate);
@@ -73,7 +63,7 @@ public class FilterCommandTest {
 
     @Test
     public void toStringMethod() {
-        NameContainsSubstringPredicate predicate = new NameContainsSubstringPredicate("keyword");
+        NameContainsSubstringPredicate predicate = new NameContainsSubstringPredicate("substring");
         FilterCommand FilterCommand = new FilterCommand(predicate);
         String expected = FilterCommand.class.getCanonicalName() + "{predicates=" + predicate + "}";
         assertEquals(expected, FilterCommand.toString());

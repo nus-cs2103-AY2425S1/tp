@@ -14,17 +14,17 @@ public class NameContainsSubstringPredicateTest {
 
     @Test
     public void equals() {
-        String firstPredicateKeyword = "first";
-        String secondPredicateKeyword = "first second";
+        String firstPredicateSubstring = "first";
+        String secondPredicateSubstring = "first second";
 
-        NameContainsSubstringPredicate firstPredicate = new NameContainsSubstringPredicate(firstPredicateKeyword);
-        NameContainsSubstringPredicate secondPredicate = new NameContainsSubstringPredicate(secondPredicateKeyword);
+        NameContainsSubstringPredicate firstPredicate = new NameContainsSubstringPredicate(firstPredicateSubstring);
+        NameContainsSubstringPredicate secondPredicate = new NameContainsSubstringPredicate(secondPredicateSubstring);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        NameContainsSubstringPredicate firstPredicateCopy = new NameContainsSubstringPredicate(firstPredicateKeyword);
+        NameContainsSubstringPredicate firstPredicateCopy = new NameContainsSubstringPredicate(firstPredicateSubstring);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -47,7 +47,7 @@ public class NameContainsSubstringPredicateTest {
         predicate = new NameContainsSubstringPredicate("Alice Bob");
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
-        // Mixed-case keyword
+        // Mixed-case substring
         predicate = new NameContainsSubstringPredicate("aLIce bOB");
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
     }
@@ -87,10 +87,10 @@ public class NameContainsSubstringPredicateTest {
 
     @Test
     public void toStringMethod() {
-        String keyword = "keyword1";
-        NameContainsSubstringPredicate predicate = new NameContainsSubstringPredicate(keyword);
+        String substring = "testing substring";
+        NameContainsSubstringPredicate predicate = new NameContainsSubstringPredicate(substring);
 
-        String expected = NameContainsSubstringPredicate.class.getCanonicalName() + "{substring=" + keyword + "}";
+        String expected = NameContainsSubstringPredicate.class.getCanonicalName() + "{substring=" + substring + "}";
         assertEquals(expected, predicate.toString());
     }
 }
