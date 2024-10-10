@@ -116,7 +116,7 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Priority updatedPriority = personToEdit.getPriority();
         Set<Appointment> updatedAppointments = editPersonDescriptor.getAppointments()
-           .orElse(personToEdit.getAppointments());
+            .orElse(personToEdit.getAppointments());
         return new Person(updatedName, updatedPhone, updatedEmail, updatedNric, updatedAddress, updatedDateOfBirth,
                 updatedGender, updatedTags, updatedPriority, updatedAppointments);
     }
