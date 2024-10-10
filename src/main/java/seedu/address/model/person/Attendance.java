@@ -19,9 +19,8 @@ public class Attendance {
      *
      * @param hasAttended A Boolean indicating if the person has attended.
      * @param date        The date and time of the attendance.
-     * @throws NullPointerException if {@code date} is null.
      */
-    public Attendance(boolean hasAttended, LocalDateTime date) throws NullPointerException {
+    public Attendance(boolean hasAttended, LocalDateTime date) {
         requireNonNull(date);
         this.date = date;
         this.hasAttended = hasAttended;
