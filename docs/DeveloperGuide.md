@@ -269,7 +269,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: 
+**Value proposition**:
 * allow clinic assistants to perform many clinic-related tasks in one place
 * contain specific fields unique to healthcare screening clinics which clinic assistants can gain easy access to, such as patient screening dates, patient screening packages, payment dues, insurance providers, insurance processing status
 * provide fast access to patient information through smart search and filter capabilities
@@ -323,13 +323,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 2a2. ClinicConnect requests for the information again
 
     Steps 2a1-2a2 are repeated until the information entered is valid.
-  
+
     Use case resumes from step 2.
 
 * 3a. The given patient's NRIC already exists in the system.
 
     * 3a1. ClinicConnect shows an error message
-  
+
         Use case ends.
 
 **Use case: Book appointment for patient**
@@ -346,7 +346,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The given information is invalid.
 
-    * 2a1. ClinicConnect shows an error message 
+    * 2a1. ClinicConnect shows an error message
 
         Use case ends.
 
