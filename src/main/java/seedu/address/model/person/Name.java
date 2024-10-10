@@ -51,6 +51,11 @@ public class Name {
         return test.matches(LENGTH_VALIDATION_REGEX);
     }
 
+    /**
+     * Returns true if a given string is valid.
+     */
+    public static boolean isValidName(String test) { return isValidLength(test) && hasValidChars(test);}
+
 
     @Override
     public String toString() {
