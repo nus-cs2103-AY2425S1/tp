@@ -148,6 +148,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Group> getFilteredGroupList() {
+        return filteredGroups;
+    }
+
+    @Override
     public void updateFilteredPersonList(Predicate<Student> predicate) {
         requireNonNull(predicate);
         filteredStudents.setPredicate(predicate);
@@ -167,7 +172,8 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredStudents.equals(otherModelManager.filteredStudents);
+                && filteredStudents.equals(otherModelManager.filteredStudents)
+                && filteredGroups.equals(otherModelManager.filteredGroups);
     }
 
 }
