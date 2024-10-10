@@ -46,6 +46,8 @@
           </padding>
         </StackPane>
 
+        <StackPane fx:id="navBarPlaceholder" />
+
         <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
           <padding>
             <Insets top="10" right="10" bottom="10" left="10" />
