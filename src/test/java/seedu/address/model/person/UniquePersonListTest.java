@@ -15,8 +15,10 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.company.Person;
+import seedu.address.model.company.UniquePersonList;
+import seedu.address.model.company.exceptions.DuplicatePersonException;
+import seedu.address.model.company.exceptions.PersonNotFoundException;
 import seedu.address.testutil.PersonBuilder;
 
 public class UniquePersonListTest {
@@ -164,8 +166,8 @@ public class UniquePersonListTest {
 
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, ()
-            -> uniquePersonList.asUnmodifiableObservableList().remove(0));
+        assertThrows(UnsupportedOperationException.class,
+                () -> uniquePersonList.asUnmodifiableObservableList().remove(0));
     }
 
     @Test

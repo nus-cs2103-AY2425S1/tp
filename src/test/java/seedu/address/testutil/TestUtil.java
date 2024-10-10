@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.company.Person;
 
 /**
  * A utility class for test cases.
@@ -20,7 +20,8 @@ public class TestUtil {
     private static final Path SANDBOX_FOLDER = Paths.get("src", "test", "data", "sandbox");
 
     /**
-     * Appends {@code fileName} to the sandbox folder path and returns the resulting path.
+     * Appends {@code fileName} to the sandbox folder path and returns the resulting
+     * path.
      * Creates the sandbox folder if it doesn't exist.
      */
     public static Path getFilePathInSandboxFolder(String fileName) {
