@@ -1,6 +1,7 @@
 package seedu.address.model.order;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.util.HashMap;
@@ -14,6 +15,11 @@ class OrderTest {
         Order order = Order.of("Cake");
         assertEquals(order, Order.of("Cake"));
         assertEquals(Order.of("Coffee"), Order.of("Coffee"));
+
+        assertNotEquals(order, new Object());
+
+        assertNotEquals(Order.of("Cake"), Order.of("Pizza"));
+        assertNotEquals("Cake", Order.of("Cake"));
     }
 
     @Test
@@ -26,8 +32,6 @@ class OrderTest {
         m.put(Order.of("Cake"), 10);
         assertEquals(m.get(Order.of("Cake")), 10);
 
-        assertNotEquals(Order.of("Cake"), Order.of("Pizza"));
-        assertNotEquals("Cake", Order.of("Cake"));
     }
 
     @Test
