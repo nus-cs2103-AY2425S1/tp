@@ -1,25 +1,15 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_WARD;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DIAGNOSIS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICATION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Id;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Ward;
-import seedu.address.model.person.Diagnosis;
-import seedu.address.model.person.Medication;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Person;
+
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -34,27 +24,35 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME);
-//              ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+        /*
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+
+        */
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-//        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
-//                || !argMultimap.getPreamble().isEmpty()) {
-//            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-//        }
+        /*
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
+                || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        }
 
-    argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME);
-//        Id id = ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get());
+         */
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-//        Ward ward = ParserUtil.parseWard(argMultimap.getValue(PREFIX_WARD).get());
-//        Diagnosis diagnosis = ParserUtil.parseDiagnosis(argMultimap.getValue(PREFIX_DIAGNOSIS).get());
-//        Medication medication = ParserUtil.parseMedication(argMultimap.getValue(PREFIX_MEDICATION).get());
-//        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-//        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-//        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-//        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        /*
+        Id id = ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get());
+        Ward ward = ParserUtil.parseWard(argMultimap.getValue(PREFIX_WARD).get());
+        Diagnosis diagnosis = ParserUtil.parseDiagnosis(argMultimap.getValue(PREFIX_DIAGNOSIS).get());
+        Medication medication = ParserUtil.parseMedication(argMultimap.getValue(PREFIX_MEDICATION).get());
+        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
+        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+         */
 
         Person person = new Person(name);
 

@@ -8,9 +8,16 @@ import static java.util.Objects.requireNonNull;
  */
 public class Medication {
     public final String value;
+
+    /**
+     *  Construct medication
+     * @param medication
+     */
     public Medication(String medication) {
         requireNonNull(medication);
-//        checkArgument(isValidMedication(medication), MESSAGE_CONSTRAINTS);
+        /*
+        checkArgument(isValidMedication(medication), MESSAGE_CONSTRAINTS);
+         */
         this.value = medication;
     }
     public static boolean isValidMedication(String test) {

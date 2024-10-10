@@ -8,9 +8,16 @@ import static java.util.Objects.requireNonNull;
  */
 public class Ward {
     public final String value;
+
+    /**
+     *  Construct ward
+     * @param ward
+     */
     public Ward(String ward) {
         requireNonNull(ward);
-//        checkArgument(isValidWard(ward), MESSAGE_CONSTRAINTS);
+        /*
+        checkArgument(isValidWard(ward), MESSAGE_CONSTRAINTS);
+         */
         this.value = ward;
     }
 

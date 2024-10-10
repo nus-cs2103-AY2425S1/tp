@@ -1,7 +1,6 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's Id in the address book.
@@ -9,9 +8,17 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Id {
     public final String value;
+
+    /**
+     *  Construct id
+     * @param id
+     */
     public Id(String id) {
         requireNonNull(id);
-//        checkArgument(isValidId(id), MESSAGE_CONSTRAINTS);
+        /*
+        checkArgument(isValidId(id), MESSAGE_CONSTRAINTS);
+
+         */
         this.value = id;
     }
     public static boolean isValidId(String test) {

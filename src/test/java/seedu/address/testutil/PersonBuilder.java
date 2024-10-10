@@ -1,17 +1,17 @@
 package seedu.address.testutil;
 
-import java.util.HashSet;
+//import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.person.Id;
-import seedu.address.model.person.Ward;
-import seedu.address.model.person.Diagnosis;
-import seedu.address.model.person.Medication;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Diagnosis;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Id;
+import seedu.address.model.person.Medication;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Ward;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -40,15 +40,18 @@ public class PersonBuilder {
      * Creates a {@code PersonBuilder} with the default details.
      */
     public PersonBuilder() {
-//        id = new Id("temp");
-//        ward = new Ward("temp");
-//        diagnosis = new Diagnosis("temp");
-//        medication = new Medication("temp");
         name = new Name(DEFAULT_NAME);
-//        phone = new Phone(DEFAULT_PHONE);
-//        email = new Email(DEFAULT_EMAIL);
-//        address = new Address(DEFAULT_ADDRESS);
-//        tags = new HashSet<>();
+        /*
+        id = new Id("temp");
+        ward = new Ward("temp");
+        diagnosis = new Diagnosis("temp");
+        medication = new Medication("temp");
+        phone = new Phone(DEFAULT_PHONE);
+        email = new Email(DEFAULT_EMAIL);
+        address = new Address(DEFAULT_ADDRESS);
+        tags = new HashSet<>();
+
+         */
     }
 
     /**
@@ -56,10 +59,13 @@ public class PersonBuilder {
      */
     public PersonBuilder(Person personToCopy) {
         name = personToCopy.getName();
-//        phone = personToCopy.getPhone();
-//        email = personToCopy.getEmail();
-//        address = personToCopy.getAddress();
-//        tags = new HashSet<>(personToCopy.getTags());
+        /*
+        phone = personToCopy.getPhone();
+        email = personToCopy.getEmail();
+        address = personToCopy.getAddress();
+        tags = new HashSet<>(personToCopy.getTags());
+
+         */
     }
 
     /**

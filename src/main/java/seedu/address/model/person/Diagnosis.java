@@ -1,7 +1,5 @@
 package seedu.address.model.person;
 
-import jdk.jshell.Diag;
-
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -10,9 +8,17 @@ import static java.util.Objects.requireNonNull;
  */
 public class Diagnosis {
     public final String value;
+
+    /**
+     * a
+     * @param diagnosis
+     */
     public Diagnosis(String diagnosis) {
         requireNonNull(diagnosis);
-//        checkArgument(isValidDiagnosis(diagnosis), MESSAGE_CONSTRAINTS);
+        /*
+        checkArgument(isValidDiagnosis(diagnosis), MESSAGE_CONSTRAINTS);
+
+         */
         this.value = diagnosis;
     }
 
