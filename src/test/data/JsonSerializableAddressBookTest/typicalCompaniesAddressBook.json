@@ -1,0 +1,39 @@
+{
+  "_comment": "AddressBook save file which contains the same company values as in TypicalCompanies#getTypicalAddressBook()",
+  "companies": [ {
+    "name": "Apple",
+    "phone": "4089961010",
+    "email": "contact@apple.com",
+    "address": "1 Apple Park Way, Cupertino, CA",
+    "status": "INTERESTED",
+    "tags": []
+  }, {
+    "name": "Amazon",
+    "phone": "2062661000",
+    "email": "contact@amazon.com",
+    "address": "410 Terry Ave N, Seattle, WA",
+    "status": "INTERESTED",
+    "tags": ["ecommerce", "cloud"]
+  }, {
+    "name": "Facebook",
+    "phone": "6505434800",
+    "email": "contact@facebook.com",
+    "address": "1 Hacker Way, Menlo Park, CA",
+    "status": "INTERESTED",
+    "tags": []
+  }, {
+    "name": "Tesla",
+    "phone": "6506815000",
+    "email": "contact@tesla.com",
+    "address": "3500 Deer Creek Road, Palo Alto, CA",
+    "status": "INTERESTED",
+    "tags": []
+  }, {
+    "name": "Netflix",
+    "phone": "4085403700",
+    "email": "contact@netflix.com",
+    "address": "100 Winchester Circle, Los Gatos, CA",
+    "status": "INTERESTED",
+    "tags": []
+  } ]
+}
