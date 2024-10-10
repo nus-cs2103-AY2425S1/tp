@@ -34,11 +34,10 @@ public class InsurancePlansManager {
      * @throws ParseException if the string cannot be parsed into valid insurance plans.
      * @throws AssertionError if the insurancePlansString is an empty string or contains only whitespace.
      */
-    public InsurancePlansManager(String insurancePlansString) throws ParseException{
+    public InsurancePlansManager(String insurancePlansString) throws ParseException {
         this();
-        assert !insurancePlansString.trim().isEmpty() :
-                "Saved insurance plans string must not be an empty string. "
-                        + "If no insurance plans have been added, it will be \"No added plans\" ";
+        assert !insurancePlansString.trim().isEmpty() : "Saved insurance plans string must not be an empty string. "
+                + "If no insurance plans have been added, it will be \"No added plans\" ";
 
         if (!insurancePlansString.equals("No added plans")) {
             String[] planNames = insurancePlansString.split(", ");
