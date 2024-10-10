@@ -26,6 +26,7 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Meetings meetings = new Meetings();
 
     /**
      * Every field must be present and not null.
@@ -73,6 +74,10 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+    public Meetings getMeetings() {
+        return meetings;
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
@@ -108,13 +113,14 @@ public class Person {
                 && role.equals(otherPerson.role)
                 && major.equals(otherPerson.major)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && meetings.equals(otherPerson.meetings);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, role, major, address, tags);
+        return Objects.hash(name, phone, email, role, major, address, tags, meetings);
     }
 
     @Override
@@ -127,6 +133,7 @@ public class Person {
                 .add("major", major)
                 .add("address", address)
                 .add("tags", tags)
+                .add("meetings", meetings)
                 .toString();
     }
 
