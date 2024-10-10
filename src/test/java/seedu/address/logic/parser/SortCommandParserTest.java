@@ -1,10 +1,12 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.SortCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 public class SortCommandParserTest {
 
@@ -26,5 +28,11 @@ public class SortCommandParserTest {
 
         // Verify that the parsed command has the correct order
         assertEquals(new SortCommand("desc"), command);
+    }
+
+    @Test
+    public void parse_invalidInput_failure() {
+        // Test parsing an invalid input like "invalidOrder"
+        assertThrows(ParseException.class, () -> parser.parse("invalidOrder"));
     }
 }

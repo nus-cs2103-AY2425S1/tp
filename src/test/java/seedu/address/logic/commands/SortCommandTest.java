@@ -55,4 +55,13 @@ public class SortCommandTest {
 
         // Add more assertions as necessary to compare the sorted order in model and expectedModel
     }
+
+    @Test
+    public void execute_invalidOrder_failure() throws CommandException {
+        SortCommand sortCommand = new SortCommand("invalidOrder");
+        CommandResult commandResult = sortCommand.execute(model);
+
+        // Check if the result message is correct
+        assertEquals(SortCommand.MESSAGE_INVALID_ORDER, commandResult.getFeedbackToUser());
+    }
 }
