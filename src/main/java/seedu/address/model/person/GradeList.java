@@ -38,6 +38,7 @@ public class GradeList {
      * @return The {@code Grade} object for the test, or null if no grade is found.
      */
     public Grade getGrade(String testName) {
+        requireNonNull(testName);
         for (Grade grade : grades) {
             if (grade.testName.equalsIgnoreCase(testName)) {
                 return grade;
@@ -52,6 +53,7 @@ public class GradeList {
      * @param testName The name of the test for which the grade should be removed.
      */
     private void removeGrade(String testName) {
+        requireNonNull(testName);
         grades.removeIf(grade -> grade.testName.equalsIgnoreCase(testName));
     }
 
@@ -62,6 +64,7 @@ public class GradeList {
      * @return True if the grade exists for the test, false otherwise.
      */
     public boolean hasGrade(String testName) {
+        requireNonNull(testName);
         return getGrade(testName) != null;
     }
 

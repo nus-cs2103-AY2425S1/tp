@@ -82,6 +82,7 @@ public class Grade {
 
     @Override
     public boolean equals(Object other) {
+        requireNonNull(other);
         if (other == this) {
             return true;
         }
