@@ -23,6 +23,8 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final Job job;
+
     private final Set<Tag> tags = new HashSet<>();
 
     private final Remark remark;
@@ -32,12 +34,14 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Income income, Set<Tag> tags, Remark remark) {
+    public Person(Name name, Phone phone, Email email, Address address, Job job, Income income,
+                  Set<Tag> tags, Remark remark) {
         requireAllNonNull(name, phone, email, address, tags, remark);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.job = job;
         this.income = income;
         this.tags.addAll(tags);
         this.remark = remark;
@@ -58,7 +62,9 @@ public class Person {
     public Address getAddress() {
         return address;
     }
-
+    public Job getJob() {
+        return job;
+    }
     public Income getIncome() {
         return income;
     }
@@ -109,13 +115,14 @@ public class Person {
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address);
+                && address.equals(otherPerson.address)
+                && job.equals(otherPerson.job);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, job, tags);
     }
 
     @Override
@@ -125,8 +132,10 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("job", job)
                 .add("income", income)
                 .add("tags", tags)
+                .add("remark", remark)
                 .toString();
     }
 
