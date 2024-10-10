@@ -18,7 +18,7 @@ public class PhoneTest {
         // null phone number
         assertThrows(NullPointerException.class, () -> Phone.isValidPhone(null));
 
-        // phone numbers now option, so can be empty strings
+        // blank string for phone number is valid, as phone number is optional
         assertTrue(Phone.isValidPhone("")); // empty string
         assertTrue(Phone.isValidPhone(" ")); // spaces only
 

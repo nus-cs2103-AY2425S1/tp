@@ -107,7 +107,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, INVALID_EMAIL_DESC + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
 
-        // invalid phone - wrong characters
+        // invalid phone - invalid characters that are non-digits
         assertParseFailure(parser, INVALID_PHONE_DESC + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
@@ -149,6 +149,7 @@ public class AddCommandParserTest {
         Person expectedPersonBlankPhone = new PersonBuilder(DOMINIC).withTags().build();
         assertParseSuccess(parser, NAME_DESC_DOMINIC + PHONE_DESC_DOMINIC + EMAIL_DESC_DOMINIC
                         + ADDRESS_DESC_DOMINIC, new AddCommand(expectedPersonBlankPhone));
+
         // no phone number tag
         assertParseSuccess(parser, NAME_DESC_DOMINIC + EMAIL_DESC_DOMINIC + ADDRESS_DESC_DOMINIC,
                 new AddCommand(expectedPersonBlankPhone));
