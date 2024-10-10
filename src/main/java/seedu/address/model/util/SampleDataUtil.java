@@ -50,7 +50,7 @@ public class SampleDataUtil {
     }
 
     /**
-     * Returns a tag set containing the list of strings given.
+     * Returns a tag set containing the list of tags given.
      */
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)

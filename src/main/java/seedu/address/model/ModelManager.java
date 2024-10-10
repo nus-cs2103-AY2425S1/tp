@@ -133,6 +133,9 @@ public class ModelManager implements Model {
         addressBook.setTag(target, editedTag);
     }
 
+    @Override
+    public void deleteTag(Tag target) { addressBook.removeTag(target); }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -148,6 +151,17 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredPersonListByTag(Predicate<Tag> predicate) {
+        requireNonNull(predicate);
+        filteredPersons.setPredicate(person -> person.getTags().stream().anyMatch(predicate));
+    }
+
+    @Override
+    public ObservableList<Tag> getFilteredTagList() {
+        return filteredTags;
     }
 
     @Override
@@ -170,6 +184,7 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && filteredTags.equals(otherModelManager.filteredTags);
     }
 }

@@ -103,14 +103,18 @@ public class ModelManagerTest {
 
     @Test
     public void hasTag_tagNotInAddressBook_returnsFalse() {
-        Tag newTag = new Tag(new TagName("newTag"));
-        assertFalse(modelManager.hasTag(newTag));
+        assertFalse(modelManager.hasTag(FLORIST));
     }
 
     @Test
     public void hasTag_tagInAddressBook_returnsTrue() {
         modelManager.addTag(FLORIST);
         assertTrue(modelManager.hasTag(FLORIST));
+    }
+
+    @Test
+    public void getFilteredTagList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredTagList().remove(0));
     }
 
     @Test

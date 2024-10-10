@@ -12,6 +12,7 @@ public class Tag {
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     private final TagName tagName;
+    private int taggedCount;
 
     /**
      * Constructs a {@code Tag}.
@@ -21,6 +22,7 @@ public class Tag {
     public Tag(TagName tagName) {
         requireNonNull(tagName);
         this.tagName = tagName;
+        this.taggedCount = 0;
     }
 
     /**
@@ -45,6 +47,26 @@ public class Tag {
 
     public TagName getTagName() {
         return tagName;
+    }
+
+    public int getNumberOfPersonsTagged() {
+        return taggedCount;
+    }
+
+    public void increaseTaggedCount() {
+        taggedCount++;
+    }
+
+    public void decreaseTaggedCount() {
+        taggedCount--;
+    }
+
+    /**
+     * Returns true if the tag can be deleted.
+     * The tag can be deleted if TaggedCount is 0.
+     */
+    public boolean canBeDeleted() {
+        return taggedCount == 0;
     }
 
     @Override
