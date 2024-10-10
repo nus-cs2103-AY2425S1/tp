@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -40,6 +38,8 @@ public class PersonCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label course;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -52,8 +52,19 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        person.getTags().stream()
+
+        FlowPane singleTagFlowPane = new FlowPane();
+        Label tagLabel = new Label(person.getTag().toString());
+        singleTagFlowPane.getChildren().add(tagLabel);
+        tags.getChildren().add(singleTagFlowPane);
+
+        String modulesAsString = person.getModuleGrades().stream()
+                .map(m -> m.toString() + "\n")
+                .reduce("", (x, y) -> x + y);
+
+        course.setText(modulesAsString.isEmpty() ? "No enrolled modules" : modulesAsString);
+        /*person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));*/
     }
 }
