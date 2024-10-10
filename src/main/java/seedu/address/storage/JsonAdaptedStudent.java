@@ -15,6 +15,8 @@ import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentId;
+import seedu.address.model.student.TutorialClass;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -28,6 +30,8 @@ class JsonAdaptedStudent {
     private final String phone;
     private final String email;
     private final String address;
+    private final String studentId;
+    private final String tutorialClass;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -36,11 +40,15 @@ class JsonAdaptedStudent {
     @JsonCreator
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                               @JsonProperty("email") String email, @JsonProperty("address") String address,
+                              @JsonProperty("studentId") String studentId,
+                              @JsonProperty("tutorialClass") String tutorialClass,
                               @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.studentId = studentId;
+        this.tutorialClass = tutorialClass;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -54,6 +62,8 @@ class JsonAdaptedStudent {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        studentId = source.getStudentId().value;
+        tutorialClass = source.getTutorialClass().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -102,8 +112,27 @@ class JsonAdaptedStudent {
         }
         final Address modelAddress = new Address(address);
 
+        if (studentId == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    StudentId.class.getSimpleName()));
+        }
+        if (!StudentId.isValidStudentId(studentId)) {
+            throw new IllegalValueException(StudentId.MESSAGE_CONSTRAINTS);
+        }
+        final StudentId modelStudentId = new StudentId(studentId);
+
+        if (tutorialClass == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    TutorialClass.class.getSimpleName()));
+        }
+        if (!TutorialClass.isValidTutorialClass(tutorialClass)) {
+            throw new IllegalValueException(TutorialClass.MESSAGE_CONSTRAINTS);
+        }
+        final TutorialClass modelTutorialClass = new TutorialClass(tutorialClass);
+
         final Set<Tag> modelTags = new HashSet<>(studentTags);
-        return new Student(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Student(modelName, modelPhone, modelEmail, modelAddress,
+                modelStudentId, modelTutorialClass, modelTags);
     }
 
 }
