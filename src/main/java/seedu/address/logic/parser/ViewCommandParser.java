@@ -11,6 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.commands.ViewContactCommand;
+import seedu.address.logic.commands.ViewEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -40,7 +41,9 @@ public class ViewCommandParser implements Parser<ViewCommand> {
             return new ViewContactCommandParser().parse(keywords);
         }
 
-        // TODO: Add ViewEventCommand
+        if (commandField.equals(ViewEventCommand.COMMAND_FIELD)) {
+            return new ViewEventCommandParser().parse(keywords);
+        }
 
         logger.finer("This user input caused a ParseException: view " + args);
         throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
