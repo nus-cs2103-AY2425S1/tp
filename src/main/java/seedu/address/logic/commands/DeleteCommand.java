@@ -13,7 +13,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.
@@ -38,7 +38,7 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Student> lastShownList = model.getFilteredPersonList();
 
         boolean throwException = false;
         ArrayList<Index> outOfBounds = new ArrayList<>();
@@ -57,7 +57,7 @@ public class DeleteCommand extends Command {
             throw new CommandException(String.format(Messages.MESSAGE_INVALID_INDEX_SHOWN, formattedOutOfBoundIndices));
         }
 
-        List<Person> deletedPeople = targetIndices.stream()
+        List<Student> deletedPeople = targetIndices.stream()
                 .map(targetIndex -> lastShownList.get(targetIndex.getZeroBased()))
                 .toList();
 

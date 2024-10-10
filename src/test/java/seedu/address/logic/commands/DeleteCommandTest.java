@@ -22,7 +22,7 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -34,7 +34,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Student personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Set<Index> firstIndexSet = new HashSet<>();
         firstIndexSet.add(INDEX_FIRST_PERSON);
         DeleteCommand deleteCommand = new DeleteCommand(firstIndexSet);
@@ -50,7 +50,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_multipleValidIndexUnfilteredList_success() {
-        ArrayList<Person> personToDelete = new ArrayList<>();
+        ArrayList<Student> personToDelete = new ArrayList<>();
         personToDelete.add(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()));
         personToDelete.add(model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased()));
         Set<Index> indexSet = new HashSet<>();
@@ -115,7 +115,7 @@ public class DeleteCommandTest {
     public void execute_validIndexFilteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Student personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Set<Index> firstIndexSet = new HashSet<>();
         firstIndexSet.add(INDEX_FIRST_PERSON);
         DeleteCommand deleteCommand = new DeleteCommand(firstIndexSet);
