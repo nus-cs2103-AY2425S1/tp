@@ -23,10 +23,14 @@ public class JsonAddressBookStorage implements AddressBookStorage {
 
     private Path filePath;
 
+    /**
+     * Constructs a {@code JsonAddressBookStorage} with the given file path.
+     */
     public JsonAddressBookStorage(Path filePath) {
         this.filePath = filePath;
     }
 
+    @Override
     public Path getAddressBookFilePath() {
         return filePath;
     }
@@ -45,8 +49,8 @@ public class JsonAddressBookStorage implements AddressBookStorage {
     public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataLoadingException {
         requireNonNull(filePath);
 
-        Optional<JsonSerializableAddressBook> jsonAddressBook = JsonUtil.readJsonFile(
-                filePath, JsonSerializableAddressBook.class);
+        Optional<JsonSerializableAddressBook> jsonAddressBook = JsonUtil.readJsonFile(filePath,
+                JsonSerializableAddressBook.class);
         if (!jsonAddressBook.isPresent()) {
             return Optional.empty();
         }
