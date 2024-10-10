@@ -3,6 +3,11 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.VBox?>
 
+<?import java.net.URL?>
+
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+  <stylesheets>
+    <URL value="@PersonListPanel.css" />
+  </stylesheets>
   <ListView fx:id="personListView" VBox.vgrow="ALWAYS" />
 </VBox>

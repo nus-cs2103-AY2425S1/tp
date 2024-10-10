@@ -1,0 +1,47 @@
+.commandBoxPlaceholder {
+    -fx-background-color: #f0f4f8; /* Light gray background */
+    -fx-padding: 10; /* Padding inside the command box */
+    -fx-border-color: #d3d3d3; /* Border color */
+    -fx-border-width: 1; /* Border thickness */
+    -fx-border-radius: 5; /* Rounded corners */
+    -fx-background-radius: 5; /* Rounded corners for background */
+    -fx-font-size: 14px; /* Font size */
+    -fx-text-fill: black; /* Text color */
+}
+
+/* If you have an input field inside the command box, style it as well */
+.commandBoxPlaceholder .text-field {
+    -fx-background-color: #ffffff; /* White background for text field */
+    -fx-text-fill: black; /* Black text color */
+    -fx-padding: 5; /* Padding inside the text field */
+    -fx-border-color: #c0c0c0; /* Light gray border */
+    -fx-border-radius: 5; /* Rounded corners */
+}
+
+.commandBoxPlaceholder .text-field:focused {
+    -fx-border-color: #00509E; /* Change border color on focus */
+}
+
+#commandTextField {
+    -fx-background-color: #98a4b5; /* Light gray background */
+    -fx-padding: 10; /* Padding inside the command box */
+    -fx-border-color: #d3d3d3; /* Border color */
+    -fx-border-width: 1; /* Border thickness */
+    -fx-border-radius: 5; /* Rounded corners */
+    -fx-background-radius: 5; /* Rounded corners for background */
+    -fx-font-size: 14px; /* Font size */
+    -fx-text-fill: white; /* Text color */
+}
+
+/* If you have an input field inside the command box, style it as well */
+#commandTextField .text-field {
+    -fx-background-color: #ffffff; /* White background for text field */
+    -fx-text-fill: white; /* Black text color */
+    -fx-padding: 5; /* Padding inside the text field */
+    -fx-border-color: #c0c0c0; /* Light gray border */
+    -fx-border-radius: 5; /* Rounded corners */
+}
+
+#commandTextField .text-field:focused {
+    -fx-border-color: #00509E; /* Change border color on focus */
+}
