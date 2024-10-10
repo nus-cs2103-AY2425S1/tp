@@ -75,8 +75,8 @@ public class Person {
     }
 
     /**
-     * Returns true if both person have the same email address
-     * This is to check for duplicates in emails in the contact list
+     * Returns true if both person have the same email address.
+     * This is to check for duplicates in emails in the contact list.
      */
     public boolean hasSameEmail(Person otherPerson) {
         if (otherPerson == this) {
@@ -85,6 +85,14 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getEmail().equals(this.getEmail());
+    }
+
+    /**
+     * Returns true if two contacts are considered as duplicates.
+     * This is to avoid adding duplicate contact in the contact list.
+     */
+    public boolean hasDuplicateInfo(Person otherPerson) {
+        return this.isSamePerson(otherPerson) || this.hasSameEmail(otherPerson);
     }
 
     /**
