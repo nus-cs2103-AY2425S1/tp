@@ -74,16 +74,25 @@ public class EditPersonDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Sets the parent {@code Name} of the {@code EditPersonDescriptor} that we are building.
+     */
     public EditPersonDescriptorBuilder withParentName(String parentName) {
         descriptor.setParentName(new Name(parentName));
         return this;
     }
 
+    /**
+     * Sets the parent {@code Phone} of the {@code EditPersonDescriptor} that we are building.
+     */
     public EditPersonDescriptorBuilder withParentPhone(String parentPhone) {
         descriptor.setParentPhone(new Phone(parentPhone));
         return this;
     }
 
+    /**
+     * Sets the parent {@code Email} of the {@code EditPersonDescriptor} that we are building.
+     */
     public EditPersonDescriptorBuilder withParentEmail(String parentEmail) {
         descriptor.setParentEmail(new Email(parentEmail));
         return this;
