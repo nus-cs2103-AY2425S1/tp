@@ -69,12 +69,12 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setProjectStatus(ParserUtil
                     .parseProjectStatus(argMultimap.getValue(PREFIX_PROJECT_STATUS).get()));
         }
-      
+
         if (argMultimap.getValue(PREFIX_PAYMENT_STATUS).isPresent()) {
             editPersonDescriptor.setPaymentStatus(ParserUtil
                     .parsePaymentStatus(argMultimap.getValue(PREFIX_PAYMENT_STATUS).get()));
         }
-      
+
         if (argMultimap.getValue(PREFIX_CLIENT_STATUS).isPresent()) {
             editPersonDescriptor.setClientStatus(ParserUtil
                     .parseClientStatus(argMultimap.getValue(PREFIX_CLIENT_STATUS).get()));
