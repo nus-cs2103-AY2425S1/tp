@@ -9,7 +9,7 @@ import seedu.address.model.event.EventNameMatchesKeywordsPredicate;
 
 /**
  * Views the specific information of an event in address book whose name is the argument keywords.
- * Keyword matching is case insensitive.
+ * Keyword matching is case-insensitive.
  */
 public class ViewEventCommand extends ViewCommand {
     public static final String COMMAND_FIELD = "event";
