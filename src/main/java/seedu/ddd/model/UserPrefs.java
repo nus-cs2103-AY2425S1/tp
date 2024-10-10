@@ -16,6 +16,8 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
 
+    private Path dddFilePath = Paths.get("data" , "ddd.json");
+
     /**
      * Creates a {@code UserPrefs} with default values.
      */
@@ -35,6 +37,9 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public void resetData(ReadOnlyUserPrefs newUserPrefs) {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
+        setDDDFilePath(newUserPrefs.getDDDFilePath());
+
+        // TODO: delete after refactoring
         setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
     }
 
@@ -51,9 +56,18 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         return addressBookFilePath;
     }
 
+    public Path getDDDFilePath() {
+        return addressBookFilePath;
+    }
+
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         this.addressBookFilePath = addressBookFilePath;
+    }
+
+    public void setDDDFilePath(Path dddFilePath) {
+        requireNonNull(dddFilePath);
+        this.dddFilePath = dddFilePath;
     }
 
     @Override
@@ -68,20 +82,32 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         }
 
         UserPrefs otherUserPrefs = (UserPrefs) other;
-        return guiSettings.equals(otherUserPrefs.guiSettings)
-                && addressBookFilePath.equals(otherUserPrefs.addressBookFilePath);
+
+        boolean isEqual = guiSettings.equals(otherUserPrefs.guiSettings)
+                          && dddFilePath.equals(otherUserPrefs.dddFilePath);
+
+        // TODO: delete after refactoring
+        isEqual = isEqual
+                  && addressBookFilePath.equals(otherUserPrefs.addressBookFilePath);
+
+        return isEqual;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, addressBookFilePath);
+        // TODO: remove addressBookFilePath from hashing method call after refactoring
+        return Objects.hash(guiSettings, dddFilePath, addressBookFilePath);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings);
+        sb.append("\nLocal data file location : " + dddFilePath);
+
+        // TODO: delete after refactoring
         sb.append("\nLocal data file location : " + addressBookFilePath);
+
         return sb.toString();
     }
 
