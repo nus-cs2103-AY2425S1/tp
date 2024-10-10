@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ECNAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ECNAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.AddEmergencyContactNameCommand.MESSAGE_ARGUMENTS;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -23,7 +23,7 @@ public class AddEmergencyContactNameCommandTest {
 
     @Test
     public void execute() {
-        final Name studentName = ALICE.getName();  // using TypicalPersons for example
+        final Name studentName = ALICE.getName();
         final String eCName = "John Doe";
         assertCommandFailure(new AddEmergencyContactNameCommand(studentName, new Name(eCName)),
                 model, String.format(MESSAGE_ARGUMENTS, studentName, eCName));

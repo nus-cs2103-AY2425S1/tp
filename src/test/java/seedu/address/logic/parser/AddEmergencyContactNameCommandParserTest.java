@@ -30,7 +30,8 @@ public class AddEmergencyContactNameCommandParserTest {
 
     @Test
     public void parse_missingParams_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEmergencyContactNameCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddEmergencyContactNameCommand.MESSAGE_USAGE);
 
         // no name
         String userInput = " " + PREFIX_ECNAME + validEmergencyContactName;
