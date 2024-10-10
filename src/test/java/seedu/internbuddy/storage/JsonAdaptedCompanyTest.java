@@ -16,6 +16,7 @@ import seedu.internbuddy.model.company.Address;
 import seedu.internbuddy.model.company.Email;
 import seedu.internbuddy.model.company.Name;
 import seedu.internbuddy.model.company.Phone;
+import seedu.internbuddy.model.company.Status;
 
 public class JsonAdaptedCompanyTest {
     private static final String INVALID_NAME = "R@chel";
@@ -89,6 +90,14 @@ public class JsonAdaptedCompanyTest {
     }
 
     @Test
+    public void toModelType_nullAddress_throwsIllegalValueException() {
+        JsonAdaptedCompany company = new JsonAdaptedCompany(VALID_NAME, VALID_PHONE, VALID_EMAIL, null,
+                VALID_TAGS, VALID_STATUS);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, company::toModelType);
+    }
+
+    @Test
     public void toModelType_invalidAddress_throwsIllegalValueException() {
         JsonAdaptedCompany company =
                 new JsonAdaptedCompany(VALID_NAME, VALID_PHONE, VALID_EMAIL, INVALID_ADDRESS, VALID_TAGS, VALID_STATUS);
@@ -97,10 +106,10 @@ public class JsonAdaptedCompanyTest {
     }
 
     @Test
-    public void toModelType_nullAddress_throwsIllegalValueException() {
-        JsonAdaptedCompany company = new JsonAdaptedCompany(VALID_NAME, VALID_PHONE, VALID_EMAIL, null,
-                VALID_TAGS, VALID_STATUS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
+    public void toModelType_nullStatus_throwsIllegalValueException() {
+        JsonAdaptedCompany company = new JsonAdaptedCompany(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                VALID_TAGS, null);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Status.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, company::toModelType);
     }
 
