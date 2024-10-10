@@ -71,7 +71,19 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_export() throws Exception {
-        assertTrue(parser.parseCommand(ExportCommand.COMMAND_WORD) instanceof ExportCommand);
+        // TODO: softcode "format/csv"
+        assertTrue(parser.parseCommand(ExportCommand.COMMAND_WORD + " format/csv") instanceof ExportCommand);
+    }
+
+    @Test
+    public void parseCommand_exportWithValidFormat() throws Exception {
+        ExportCommand command = (ExportCommand) parser.parseCommand(ExportCommand.COMMAND_WORD + " format/csv");
+        assertEquals(new ExportCommand("csv"), command);
+    }
+
+    @Test
+    public void parseCommand_exportWithInvalidFormat() {
+        assertThrows(ParseException.class, () -> parser.parseCommand(ExportCommand.COMMAND_WORD + " foobar"));
     }
 
     @Test

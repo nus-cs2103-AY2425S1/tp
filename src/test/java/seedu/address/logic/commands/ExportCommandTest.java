@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.ExportCommand.MESSAGE_ARGUMENTS;
 import static seedu.address.logic.commands.ExportCommand.MESSAGE_NOT_IMPLEMENTED_YET;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -14,6 +16,13 @@ public class ExportCommandTest {
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     @Test
     public void execute() {
-        assertCommandFailure(new ExportCommand(), model, MESSAGE_NOT_IMPLEMENTED_YET);
+        final String format = "csv";
+
+        assertCommandFailure(new ExportCommand(format), model, String.format(MESSAGE_ARGUMENTS, format));
+    }
+
+    @Test
+    public void equals() {
+        // TODO: Implement test for ExportCommand.equals(otherCommand)
     }
 }
