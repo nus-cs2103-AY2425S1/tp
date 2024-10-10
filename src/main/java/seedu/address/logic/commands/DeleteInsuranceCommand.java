@@ -3,9 +3,17 @@ package seedu.address.logic.commands;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INSURANCE_ID;
 
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.insurance.InsurancePlan;
+import seedu.address.model.person.insurance.InsurancePlanFactory;
+import seedu.address.model.person.insurance.InsurancePlansManager;
 
 /**
  * Removes an InsurancePlan from an existing person in the address book.
@@ -21,6 +29,8 @@ public class DeleteInsuranceCommand extends Command {
             + PREFIX_INSURANCE_ID + " 0";
 
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d, InsuranceID: %2$s";
+    public static final String MESSAGE_DELETE_INSURANCE_PLAN_SUCCESS =
+            "Deleted Insurance Plan: %1$s, from Client: %2$s";
 
     private final Index index;
     private final int insuranceID;
@@ -38,8 +48,29 @@ public class DeleteInsuranceCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        throw new CommandException(
-                String.format(MESSAGE_ARGUMENTS, index.getOneBased(), insuranceID));
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        Person personToEdit = lastShownList.get(index.getZeroBased());
+
+        try {
+            InsurancePlansManager personToEditInsurancePlansManager = personToEdit.getInsurancePlansManager();
+
+            InsurancePlan planToBeDeleted = InsurancePlanFactory.createInsurancePlan(insuranceID);
+
+            personToEditInsurancePlansManager.checkIfPlanOwned(planToBeDeleted);
+
+            personToEditInsurancePlansManager.deletePlan(planToBeDeleted);
+
+            return new CommandResult(String.format(MESSAGE_DELETE_INSURANCE_PLAN_SUCCESS,
+                    personToEditInsurancePlansManager, Messages.format(personToEdit)));
+        } catch (ParseException e) {
+            throw new CommandException(
+                    String.format(e.getMessage(), insuranceID, Messages.format(personToEdit)));
+        }
     }
 
     @Override
