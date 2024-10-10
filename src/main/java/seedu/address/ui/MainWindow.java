@@ -16,6 +16,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -43,6 +44,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane studentListPanelPlaceholder;
+
+    @FXML
+    private StackPane personDetailsPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -113,6 +117,9 @@ public class MainWindow extends UiPart<Stage> {
         studentListPanel = new StudentListPanel(logic.getFilteredStudentList());
         studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
 
+        BlankDetailsPanel blankDetailsPanel = new BlankDetailsPanel();
+        personDetailsPanelPlaceholder.getChildren().add(blankDetailsPanel.getRoot());
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -121,6 +128,16 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    /**
+     * Updates the details panel to the selected person.
+     */
+    private void updateDetailsPanel(Person person, int index) {
+        personDetailsPanelPlaceholder.getChildren().clear();
+
+        PersonDetailsPanel personDetailsPanel = new PersonDetailsPanel(person, index + 1);
+        personDetailsPanelPlaceholder.getChildren().add(personDetailsPanel.getRoot());
     }
 
     /**
@@ -177,6 +194,10 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            if (commandResult.isPerson()) {
+                updateDetailsPanel(commandResult.getPerson(), commandResult.getPersonIndex());
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
