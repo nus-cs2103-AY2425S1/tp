@@ -110,7 +110,7 @@ public class Person {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
-                .add("careConnect", address)
+                .add("address", address)
                 .add("tags", tags)
                 .toString();
     }
