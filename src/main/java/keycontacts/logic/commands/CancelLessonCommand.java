@@ -21,7 +21,7 @@ public class CancelLessonCommand extends Command {
             + "Parameters: "
             + PREFIX_DATE + "DATE "
             + PREFIX_START_TIME + "START_TIME\n"
-            + "Example: " + COMMAND_WORD + PREFIX_DATE + "06-07-2022" + PREFIX_START_TIME + "12:00";
+            + "Example: " + COMMAND_WORD + PREFIX_DATE + "06-07-2022 " + PREFIX_START_TIME + "12:00";
 
     private final Time startTime;
     private final LocalDate date;
