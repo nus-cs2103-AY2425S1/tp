@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DOB_BOB;
@@ -111,5 +112,74 @@ public class PersonTest {
                 + ALICE.getPhone() + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress()
                 + ", tags=" + ALICE.getTags() + ", priority=" + ALICE.getPriority() + "}";
         assertEquals(expected, ALICE.toString());
+    }
+
+    @Test
+    public void hashCode_sameObject_sameHashCode() {
+        // Arrange
+        Person person = new PersonBuilder().withName("John Doe")
+                .withPhone("12345678")
+                .withEmail("johndoe@example.com")
+                .withNric("S1234567A")
+                .withDateOfBirth("2001-01-01")
+                .withGender("M")
+                .withAddress("123 Main St")
+                .withPriority("LOW")
+                .build();
+
+        assertEquals(person.hashCode(), person.hashCode(), "Hashcode should be consistent");
+    }
+    @Test
+    public void hashCode_equalObjects_sameHashCode() {
+        // Arrange
+        Person person1 = new PersonBuilder().withName("John Doe")
+                .withPhone("12345678")
+                .withEmail("johndoe@example.com")
+                .withNric("S1234567A")
+                .withDateOfBirth("2001-01-01")
+                .withGender("M")
+                .withAddress("123 Main St")
+                .withPriority("LOW")
+                .build();
+
+        Person person2 = new PersonBuilder().withName("John Doe")
+                .withPhone("12345678")
+                .withEmail("johndoe@example.com")
+                .withNric("S1234567A")
+                .withDateOfBirth("2001-01-01")
+                .withGender("M")
+                .withAddress("123 Main St")
+                .withPriority("LOW")
+                .build();
+
+        // Act & Assert
+        assertEquals(person1.hashCode(), person2.hashCode(), "Hashcodes of equal objects should be the same");
+    }
+
+    @Test
+    public void hashCode_differentObjects_differentHashCodes() {
+        // Arrange
+        Person person1 = new PersonBuilder().withName("John Doe")
+                .withPhone("12345678")
+                .withEmail("johndoe@example.com")
+                .withNric("S1234567A")
+                .withDateOfBirth("2001-01-01")
+                .withGender("M")
+                .withAddress("123 Main St")
+                .withPriority("LOW")
+                .build();
+
+        Person person2 = new PersonBuilder().withName("Jane Doe")
+                .withPhone("87654321")
+                .withEmail("janedoe@example.com")
+                .withNric("S7654321B")
+                .withDateOfBirth("2001-01-02")
+                .withGender("F")
+                .withAddress("456 Another St")
+                .withPriority("HIGH")
+                .build();
+
+        // Act & Assert
+        assertNotEquals(person1.hashCode(), person2.hashCode(), "Hashcodes of different objects should be different");
     }
 }
