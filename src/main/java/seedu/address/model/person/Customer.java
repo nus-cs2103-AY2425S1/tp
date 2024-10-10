@@ -1,8 +1,12 @@
 package seedu.address.model.person;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.order.CustomerOrder;
+import seedu.address.model.order.OrderList;
+import seedu.address.model.order.SupplyOrder;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -13,6 +17,7 @@ public class Customer extends Person {
 
     private final String orderHistory;
     private final String favoriteItems;
+    private final OrderList<CustomerOrder> customerOrders;
 
     /**
      * Every field must be present and not null.
@@ -23,6 +28,19 @@ public class Customer extends Person {
         super(name, phone, email, address, preference, remark, tags);
         this.orderHistory = orderHistory;
         this.favoriteItems = favoriteItems;
+        this.customerOrders = new OrderList<>();
+    }
+
+    public void addCustomerOrder(CustomerOrder order) {
+        customerOrders.addOrder(order);
+    }
+
+    public List<CustomerOrder> collateOrders() {
+        return customerOrders.getAllOrders();
+    }
+
+    public int getCustomerOrderCount() {
+        return customerOrders.getOrderCount();
     }
 
     public String getOrderHistory() {
