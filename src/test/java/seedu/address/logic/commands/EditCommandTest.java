@@ -81,6 +81,7 @@ public class EditCommandTest {
                 personToBeEdited.getPhone(),
                 personToBeEdited.getEmail(),
                 personToBeEdited.getAddress(),
+                personToBeEdited.getPriority(),
                 remark,
                 personToBeEdited.getTags());
 
