@@ -34,8 +34,9 @@ public class PaidCommandTest {
                 Messages.format(personToMarkPaid));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        Person editedPerson = new Person(personToMarkPaid.getName(), personToMarkPaid.getPhone(), personToMarkPaid.getEmail(),
-                personToMarkPaid.getAddress(), personToMarkPaid.getTags(), true);
+        Person editedPerson = new Person(personToMarkPaid.getName(), personToMarkPaid.getPhone(),
+                personToMarkPaid.getEmail(), personToMarkPaid.getAddress(),
+                personToMarkPaid.getTags(), true);
 
         expectedModel.setPerson(personToMarkPaid, editedPerson);
 
@@ -66,8 +67,9 @@ public class PaidCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
-        Person editedPerson = new Person(personToMarkPaid.getName(), personToMarkPaid.getPhone(), personToMarkPaid.getEmail(),
-                personToMarkPaid.getAddress(), personToMarkPaid.getTags(), true);
+        Person editedPerson = new Person(personToMarkPaid.getName(), personToMarkPaid.getPhone(),
+                personToMarkPaid.getEmail(), personToMarkPaid.getAddress(),
+                personToMarkPaid.getTags(), true);
         expectedModel.setPerson(personToMarkPaid, editedPerson);
 
         assertCommandSuccess(paidCommand, model, expectedMessage, expectedModel);
@@ -126,5 +128,4 @@ public class PaidCommandTest {
         model.updateFilteredPersonList(p -> false);
         assertTrue(model.getFilteredPersonList().isEmpty());
     }
-    
 }

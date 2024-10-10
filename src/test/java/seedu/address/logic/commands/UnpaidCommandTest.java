@@ -28,18 +28,19 @@ public class UnpaidCommandTest {
         Person personToMarkUnpaid = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditCommand.EditPersonDescriptor descriptor = new EditCommand.EditPersonDescriptor();
         descriptor.setHasPaid(false);
-        UnpaidCommand UnpaidCommand = new UnpaidCommand(INDEX_FIRST_PERSON, descriptor);
+        UnpaidCommand unpaidCommand = new UnpaidCommand(INDEX_FIRST_PERSON, descriptor);
 
         String expectedMessage = String.format(UnpaidCommand.MESSAGE_UNPAID_PERSON_SUCCESS,
                 Messages.format(personToMarkUnpaid));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        Person editedPerson = new Person(personToMarkUnpaid.getName(), personToMarkUnpaid.getPhone(), personToMarkUnpaid.getEmail(),
-                personToMarkUnpaid.getAddress(), personToMarkUnpaid.getTags(), false);
+        Person editedPerson = new Person(personToMarkUnpaid.getName(), personToMarkUnpaid.getPhone(),
+                personToMarkUnpaid.getEmail(), personToMarkUnpaid.getAddress(),
+                personToMarkUnpaid.getTags(), false);
 
         expectedModel.setPerson(personToMarkUnpaid, editedPerson);
 
-        assertCommandSuccess(UnpaidCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(unpaidCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -47,9 +48,9 @@ public class UnpaidCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         EditCommand.EditPersonDescriptor descriptor = new EditCommand.EditPersonDescriptor();
         descriptor.setHasPaid(false);
-        UnpaidCommand UnpaidCommand = new UnpaidCommand(outOfBoundIndex, descriptor);
+        UnpaidCommand unpaidCommand = new UnpaidCommand(outOfBoundIndex, descriptor);
 
-        assertCommandFailure(UnpaidCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(unpaidCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
@@ -59,18 +60,19 @@ public class UnpaidCommandTest {
         Person personToMarkUnpaid = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditCommand.EditPersonDescriptor descriptor = new EditCommand.EditPersonDescriptor();
         descriptor.setHasPaid(false);
-        UnpaidCommand UnpaidCommand = new UnpaidCommand(INDEX_FIRST_PERSON, descriptor);
+        UnpaidCommand unpaidCommand = new UnpaidCommand(INDEX_FIRST_PERSON, descriptor);
 
         String expectedMessage = String.format(UnpaidCommand.MESSAGE_UNPAID_PERSON_SUCCESS,
                 Messages.format(personToMarkUnpaid));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
-        Person editedPerson = new Person(personToMarkUnpaid.getName(), personToMarkUnpaid.getPhone(), personToMarkUnpaid.getEmail(),
-                personToMarkUnpaid.getAddress(), personToMarkUnpaid.getTags(), false);
+        Person editedPerson = new Person(personToMarkUnpaid.getName(), personToMarkUnpaid.getPhone(),
+                personToMarkUnpaid.getEmail(), personToMarkUnpaid.getAddress(),
+                personToMarkUnpaid.getTags(), false);
         expectedModel.setPerson(personToMarkUnpaid, editedPerson);
 
-        assertCommandSuccess(UnpaidCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(unpaidCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -82,9 +84,9 @@ public class UnpaidCommandTest {
 
         EditCommand.EditPersonDescriptor descriptor = new EditCommand.EditPersonDescriptor();
         descriptor.setHasPaid(false);
-        UnpaidCommand UnpaidCommand = new UnpaidCommand(outOfBoundIndex, descriptor);
+        UnpaidCommand unpaidCommand = new UnpaidCommand(outOfBoundIndex, descriptor);
 
-        assertCommandFailure(UnpaidCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(unpaidCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
