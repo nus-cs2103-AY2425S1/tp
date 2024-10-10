@@ -65,6 +65,9 @@ public class ParserUtil {
         if (!Phone.isValidPhone(trimmedPhone)) {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
+        if (!Phone.isValidLengthPhone(trimmedPhone)) {
+            throw new ParseException(Phone.MESSAGE_LENGTH_CONSTRAINTS);
+        }
         return new Phone(trimmedPhone);
     }
 

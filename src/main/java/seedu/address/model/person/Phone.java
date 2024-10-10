@@ -14,9 +14,9 @@ public class Phone {
             "Invalid phone number: only numeric characters and optional leading '+' are allowed.";
 
     public static final String MESSAGE_LENGTH_CONSTRAINTS =
-            "Phone number must be between 7 and 15 digits inclusive.";
+            "Phone number must be between 3 and 15 digits inclusive.";
 
-    public static final String VALIDATION_REGEX = "(\\+)?\\d{7,15}";
+    public static final String VALIDATION_REGEX = "(\\+)?\\d+";
     public final String value;
 
     /**
@@ -44,7 +44,7 @@ public class Phone {
     public static boolean isValidLengthPhone(String test) {
         // Ensure length is between 7 and 15 digits (excluding leading '+')
         String digitsOnly = test.replaceAll("\\+", ""); // Remove '+' for length check
-        return digitsOnly.length() >= 7 && digitsOnly.length() <= 15;
+        return digitsOnly.length() >= 3 && digitsOnly.length() <= 15;
     }
 
     @Override
