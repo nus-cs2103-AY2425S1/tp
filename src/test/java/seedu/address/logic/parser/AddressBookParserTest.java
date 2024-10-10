@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddDoctorCommand;
+import seedu.address.logic.commands.AddPatientCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -25,10 +26,12 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.doctor.Doctor;
+import seedu.address.model.patient.Patient;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.DoctorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.PatientBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 
@@ -48,6 +51,13 @@ public class AddressBookParserTest {
         Doctor patient = new DoctorBuilder().build();
         AddDoctorCommand command = new AddDoctorCommand(patient);
         assertEquals(new AddDoctorCommand(patient), command);
+    }
+
+    @Test
+    public void parseCommand_addPatient() throws Exception {
+        Patient patient = new PatientBuilder().build();
+        AddPatientCommand command = new AddPatientCommand(patient);
+        assertEquals(new AddPatientCommand(patient), command);
     }
 
     @Test
