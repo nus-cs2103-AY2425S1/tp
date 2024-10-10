@@ -1,5 +1,6 @@
 package tuteez.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tuteez.testutil.Assert.assertThrows;
@@ -17,6 +18,24 @@ public class NameTest {
     public void constructor_invalidName_throwsIllegalArgumentException() {
         String invalidName = "";
         assertThrows(IllegalArgumentException.class, () -> new Name(invalidName));
+    }
+
+    @Test
+    public void constructor_whitespaceHandling() {
+        assertEquals("John Smith", new Name("  John Smith  ").toString());
+        assertEquals("John Smith", new Name("John Smith  ").toString());
+        assertEquals("John Smith", new Name("  John Smith").toString());
+
+        // multiple spaces between words
+        assertEquals("John Smith", new Name("John    Smith").toString());
+        assertEquals("John Smith Jones", new Name("John  Smith   Jones").toString());
+    }
+
+    @Test
+    public void constructor_titlecaseHandling() {
+        assertEquals("John Smith", new Name("john smith").toString());
+        assertEquals("John Smith", new Name("JOHN SMITH").toString());
+        assertEquals("John Smith", new Name("joHN SMiTh").toString());
     }
 
     @Test
