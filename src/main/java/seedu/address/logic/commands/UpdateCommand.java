@@ -1,5 +1,23 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
+
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -15,23 +33,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -64,7 +65,7 @@ public class UpdateCommand extends Command {
     private final UpdatePersonDescriptor editPersonDescriptor;
 
     /**
-     * @param nric of the person in the filtered person list to edit
+     * @param nric                 of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
     public UpdateCommand(Nric nric, UpdatePersonDescriptor editPersonDescriptor) {
@@ -73,26 +74,6 @@ public class UpdateCommand extends Command {
 
         this.nric = nric;
         this.editPersonDescriptor = new UpdatePersonDescriptor(editPersonDescriptor);
-    }
-
-    @Override
-    public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
-
-        Person personToEdit = lastShownList.stream()
-                .filter(person -> person.getNric().equals(nric))
-                .findFirst()
-                .orElseThrow(() -> new CommandException(MESSAGE_NOT_EDITED));
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
-
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
-
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
     /**
@@ -116,17 +97,36 @@ public class UpdateCommand extends Command {
     }
 
     @Override
+    public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        Person personToEdit = lastShownList.stream()
+                .filter(person -> person.getNric().equals(nric))
+                .findFirst()
+                .orElseThrow(() -> new CommandException(MESSAGE_NOT_EDITED));
+        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+
+        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        model.setPerson(personToEdit, editedPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
         }
 
         // instanceof handles nulls
-        if (!(other instanceof UpdateCommand)) {
+        if (!(other instanceof UpdateCommand otherEditCommand)) {
             return false;
         }
 
-        UpdateCommand otherEditCommand = (UpdateCommand) other;
         return nric.equals(otherEditCommand.nric)
                 && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
     }
@@ -153,7 +153,8 @@ public class UpdateCommand extends Command {
         private Address address;
         private Set<Tag> tags;
 
-        public UpdatePersonDescriptor() {}
+        public UpdatePersonDescriptor() {
+        }
 
         /**
          * Copy constructor.
@@ -178,68 +179,60 @@ public class UpdateCommand extends Command {
                     phone, email, address, tags);
         }
 
-        public void setName(Name name) {
-            this.name = name;
-        }
-
         public Optional<Name> getName() {
             return Optional.ofNullable(name);
         }
 
-        public void setAge(Age age) {
-            this.age = age;
+        public void setName(Name name) {
+            this.name = name;
         }
 
         public Optional<Age> getAge() {
             return Optional.ofNullable(age);
         }
 
-        public void setGender(Gender gender) {
-            this.gender = gender;
+        public void setAge(Age age) {
+            this.age = age;
         }
 
         public Optional<Gender> getGender() {
             return Optional.ofNullable(gender);
         }
 
-        public void setNric(Nric nric) {
-            this.nric = nric;
+        public void setGender(Gender gender) {
+            this.gender = gender;
         }
 
         public Optional<Nric> getNric() {
             return Optional.ofNullable(nric);
         }
 
-        public void setPhone(Phone phone) {
-            this.phone = phone;
+        public void setNric(Nric nric) {
+            this.nric = nric;
         }
 
         public Optional<Phone> getPhone() {
             return Optional.ofNullable(phone);
         }
 
-        public void setEmail(Email email) {
-            this.email = email;
+        public void setPhone(Phone phone) {
+            this.phone = phone;
         }
 
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
         }
 
-        public void setAddress(Address address) {
-            this.address = address;
+        public void setEmail(Email email) {
+            this.email = email;
         }
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
         }
 
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setAddress(Address address) {
+            this.address = address;
         }
 
         /**
@@ -251,6 +244,14 @@ public class UpdateCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        /**
+         * Sets {@code tags} to this object's {@code tags}.
+         * A defensive copy of {@code tags} is used internally.
+         */
+        public void setTags(Set<Tag> tags) {
+            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -258,11 +259,10 @@ public class UpdateCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof UpdatePersonDescriptor)) {
+            if (!(other instanceof UpdatePersonDescriptor otherEditPersonDescriptor)) {
                 return false;
             }
 
-            UpdatePersonDescriptor otherEditPersonDescriptor = (UpdatePersonDescriptor) other;
             return Objects.equals(name, otherEditPersonDescriptor.name)
                     && Objects.equals(age, otherEditPersonDescriptor.age)
                     && Objects.equals(gender, otherEditPersonDescriptor.gender)
