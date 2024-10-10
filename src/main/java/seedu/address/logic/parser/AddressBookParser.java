@@ -26,8 +26,8 @@ public class AddressBookParser {
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
-    private static final String EVENT_COMMAND_INDICATOR = "/e";
-    private static final String VOLUNTEER_COMMAND_INDICATOR = "/v";
+    public static final String EVENT_COMMAND_INDICATOR = "/e";
+    public static final String VOLUNTEER_COMMAND_INDICATOR = "/v";
 
     /**
      * Parses user input into command for execution.
