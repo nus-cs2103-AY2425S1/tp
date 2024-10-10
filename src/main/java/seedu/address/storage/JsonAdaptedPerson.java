@@ -108,7 +108,7 @@ class JsonAdaptedPerson {
 
         //placeholder
         final Appointment appointment = new Appointment("2022-12-12 12:00");
-        final Birthday birthday = new Birthday("2022-12-12");
+        final Birthday birthday = new Birthday("1990-10-10");
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, appointment, birthday);
     }
 
