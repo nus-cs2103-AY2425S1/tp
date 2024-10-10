@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.project.Project;
 
 /**
  * The API of the Model component.
@@ -76,12 +77,45 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    /**
+     * Returns true if a project with the same identity as {@code project} exists in the address book.
+     */
+    boolean hasProject(Project project);
+
+    /**
+     * Deletes the given project.
+     * The project must exist in the address book.
+     */
+    void deleteProject(Project target);
+
+    /**
+     * Adds the given project.
+     * {@code project} must not already exist in the address book.
+     */
+    void addProject(Project project);
+
+    /**
+     * Replaces the given project {@code target} with {@code project}.
+     * {@code project} must exist in the address book.
+     * The person identity of {@code project} must not be the same as another existing project in the address book.
+     */
+    void setProject(Project target, Project editedProject);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered project list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /** Returns an unmodifiable view of the filtered person list */
+    ObservableList<Project> getFilteredProjectList();
+
+    /**
+     * Updates the filter of the filtered project list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredProjectList(Predicate<Project> predicate);
 }
