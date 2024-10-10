@@ -26,17 +26,17 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
 
     // New fields
-    private final String university;
-    private final String major;
-    private final String interest;
-    private final String experience;
+    private final University university;
+    private final Major major;
+    private final Interest interest;
+    private final Experience experience;
 
     /**
      * Every field must be present and not null.
      * New fields for university, major, interest, and experience are added.
      * Interest and experience are initialized to empty strings.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, String university, String major) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, University university, Major major) {
         requireAllNonNull(name, phone, email, address, tags, university, major);
         this.name = name;
         this.phone = phone;
@@ -45,8 +45,9 @@ public class Person {
         this.tags.addAll(tags);
         this.university = university;
         this.major = major;
-        this.interest = "";  // Initialize interest with an empty string
-        this.experience = "";  // Initialize experience with an empty string
+        // Assign placeholder values for interest and experience
+        this.interest = new Interest(" "); // Initialize interest with an empty string
+        this.experience = new Experience(" "); // Initialize experience with an empty string
     }
 
     public Name getName() {
@@ -65,19 +66,19 @@ public class Person {
         return address;
     }
 
-    public String getUniversity() {
+    public University getUniversity() {
         return university;
     }
 
-    public String getMajor() {
+    public Major getMajor() {
         return major;
     }
 
-    public String getInterest() {
+    public Interest getInterest() {
         return interest;
     }
 
-    public String getExperience() {
+    public Experience getExperience() {
         return experience;
     }
 

@@ -58,11 +58,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         // Parsing new fields
         University university = ParserUtil.parseUniversity(argMultimap.getValue(PREFIX_UNIVERSITY).get());
         Major major = ParserUtil.parseMajor(argMultimap.getValue(PREFIX_MAJOR).get());
-        Interest interest = ParserUtil.parseInterest(argMultimap.getValue(PREFIX_INTEREST).orElse(""));  // optional
-        Experience experience = ParserUtil.parseExperience(argMultimap.getValue(PREFIX_EXPERIENCE).orElse(""));  // optional
-
-        Person person = new Person(name, phone, email, address, university, major, interest, experience, tagList);
-
+        Person person = new Person(name, phone, email, address, tagList, university, major);
         return new AddCommand(person);
     }
 
