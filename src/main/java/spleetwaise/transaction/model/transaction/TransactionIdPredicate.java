@@ -16,20 +16,5 @@ public class TransactionIdPredicate implements Predicate<Transaction> {
     public boolean test(Transaction transaction) {
         return transaction.getId().equals(transactionId);
     }
-
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof TransactionIdPredicate)) {
-            return false;
-        }
-
-        TransactionIdPredicate otherTransactionIdPredicate = (TransactionIdPredicate) other;
-        return transactionId.equals(otherTransactionIdPredicate.transactionId);
-    }
 }
 
