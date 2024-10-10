@@ -69,7 +69,7 @@ public class ModelManagerTest {
     public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
         Path path = Paths.get("address/book/file/path");
         modelManager.setHireMeFilePath(path);
-        assertEquals(path, modelManager.getAddressBookFilePath());
+        assertEquals(path, modelManager.getHireMeFilePath());
     }
 
     @Test
