@@ -163,8 +163,22 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    private void handleInspect(CommandResult commandResult) {
+        logger.info("Changing UI...");
+
+        InspectWindow inspectWindow;
+        inspectWindow = new InspectWindow(primaryStage, logic);
+        inspectWindow.show();
+        inspectWindow.fillInnerParts();
+        inspectWindow.getResultDisplay().setFeedbackToUser(commandResult.getFeedbackToUser());
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
+    }
+
+    public ResultDisplay getResultDisplay() {
+        return resultDisplay;
     }
 
     /**
@@ -184,6 +198,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isInspect()) {
+                handleInspect(commandResult);
             }
 
             return commandResult;

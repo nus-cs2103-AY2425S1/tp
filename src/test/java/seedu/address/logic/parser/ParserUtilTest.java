@@ -4,15 +4,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON_LIST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SECOND_PERSON_LIST;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -28,8 +32,8 @@ public class ParserUtilTest {
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
-    private static final String VALID_PHONE = "123456";
-    private static final String VALID_ADDRESS = "123 Main Street #0505";
+    private static final String VALID_PHONE = "12345678";
+    private static final String VALID_ADDRESS = "123 Main Street #0505, S120300";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
@@ -39,6 +43,7 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseIndex("10 a"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndex("1 a"));
     }
 
     @Test
@@ -50,10 +55,21 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_validInput_success() throws Exception {
         // No whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("1"));
+        assertEquals(INDEX_FIRST_PERSON_LIST, ParserUtil.parseIndex("1"));
 
         // Leading and trailing whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+        assertEquals(INDEX_FIRST_PERSON_LIST, ParserUtil.parseIndex("  1  "));
+
+        // 2 Input with only one whitespace
+        List<Index> indexList = new ArrayList<>();
+        indexList = ParserUtil.parseIndex("1 2");
+        assertTrue(INDEX_FIRST_SECOND_PERSON_LIST.containsAll(indexList)
+                && indexList.containsAll(INDEX_FIRST_SECOND_PERSON_LIST));
+
+        //2 Input with leading and trailing whitespace
+        indexList = ParserUtil.parseIndex("   1    2     ");
+        assertTrue(INDEX_FIRST_SECOND_PERSON_LIST.containsAll(indexList)
+                && indexList.containsAll(INDEX_FIRST_SECOND_PERSON_LIST));
     }
 
     @Test

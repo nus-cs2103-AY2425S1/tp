@@ -9,15 +9,19 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Address {
 
-    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Addresses has to take in [address line], s[postal code]."
+                                                         + "address line has to be at least 5 characters,"
+                                                         + "postal code has to be 6 numbers";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final String VALIDATION_REGEX = "^.{5,},\\s*[sS]\\s?\\d{6}$";
 
     public final String value;
+    private final String addressLine;
+    private final String postalCode;
 
     /**
      * Constructs an {@code Address}.
@@ -27,7 +31,12 @@ public class Address {
     public Address(String address) {
         requireNonNull(address);
         checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
-        value = address;
+
+        //KIV: maybe shift this to ParserUtil
+        String[] splitAddress = address.split(",\\s*[sS]\\s*");
+        addressLine = splitAddress[0];
+        postalCode = splitAddress[1];
+        value = addressLine + ", S" + postalCode;
     }
 
     /**
