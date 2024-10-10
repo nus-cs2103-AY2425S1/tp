@@ -23,6 +23,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.EmergencyContact;
+import seedu.address.model.person.Level;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
@@ -102,9 +103,9 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Note updatedNote = editPersonDescriptor.getNote().orElse(personToEdit.getNote());
         Set<Subject> updatedSubjects = editPersonDescriptor.getSubjects().orElse(personToEdit.getSubjects());
-
+        Level schoolLevel = editPersonDescriptor.getSchoolLevel().orElse(personToEdit.getSchoolLevel());
         return new Person(updatedName, updatedPhone, updatedEmergencyContact,
-                updatedAddress, updatedNote, updatedSubjects);
+                updatedAddress, updatedNote, updatedSubjects, schoolLevel);
     }
 
     @Override
@@ -142,7 +143,7 @@ public class EditCommand extends Command {
         private Address address;
         private Note note;
         private Set<Subject> subjects;
-
+        private Level schoolLevel;
         public EditPersonDescriptor() {}
 
         /**
@@ -156,6 +157,7 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setNote(toCopy.note);
             setSubjects(toCopy.subjects);
+            setLevel(toCopy.schoolLevel);
         }
 
         /**
@@ -220,6 +222,14 @@ public class EditCommand extends Command {
          */
         public Optional<Set<Subject>> getSubjects() {
             return (subjects != null) ? Optional.of(Collections.unmodifiableSet(subjects)) : Optional.empty();
+        }
+
+        public void setLevel(Level schoolLevel) {
+            this.schoolLevel = schoolLevel;
+        }
+
+        public Optional<Level> getSchoolLevel() {
+            return Optional.ofNullable(schoolLevel);
         }
 
         @Override

@@ -3,7 +3,6 @@ package seedu.address.model.person;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -23,20 +22,22 @@ public class Person {
     // Data fields
     private final Address address;
     private final Note note;
-    private final Set<Subject> subjects = new HashSet<>();
+    private final Set<Subject> subjects;
+    private final Level schoolLevel;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, EmergencyContact emergencyContact,
-                  Address address, Note note, Set<Subject> subjects) {
-        requireAllNonNull(name, phone, address, subjects);
+                  Address address, Note note, Set<Subject> subjects, Level schoolLevel) {
+        requireAllNonNull(name, phone, address);
         this.name = name;
         this.phone = phone;
         this.emergencyContact = emergencyContact;
         this.address = address;
         this.note = note;
-        this.subjects.addAll(subjects);
+        this.subjects = subjects;
+        this.schoolLevel = schoolLevel;
     }
 
     public Name getName() {
@@ -63,6 +64,9 @@ public class Person {
      */
     public Set<Subject> getSubjects() {
         return Collections.unmodifiableSet(subjects);
+    }
+    public Level getSchoolLevel() {
+        return schoolLevel;
     }
 
     /**

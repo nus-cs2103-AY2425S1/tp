@@ -11,6 +11,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.EmergencyContact;
+import seedu.address.model.person.Level;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Phone;
@@ -133,5 +134,25 @@ public class ParserUtil {
             subjectSet.add(parseSubject(subjectName));
         }
         return subjectSet;
+    }
+
+    /**
+     * Parses a {@code String schoolLevel} into a {@code Level} object after validation.
+     * Trims any leading and trailing whitespace from the input string, then checks if
+     * the string represents a valid school level name.
+     *
+     * @param schoolLevel The string to be parsed as a school level.
+     * @return A {@code Level} object representing the parsed school level.
+     * @throws ParseException If the specified school level is invalid and does not
+     *         conform to the expected format as defined in {@code Level.isValidLevelName}.
+     */
+    public static Level parseSchoolLevel(String schoolLevel) throws ParseException {
+        String trimmedSchoolLevel = schoolLevel.trim();
+
+        if (!Level.isValidLevelName(trimmedSchoolLevel)) {
+            throw new ParseException(Level.MESSAGE_CONSTRAINTS);
+        }
+
+        return new Level(schoolLevel);
     }
 }
