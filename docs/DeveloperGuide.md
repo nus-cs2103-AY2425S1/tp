@@ -274,9 +274,9 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**: Tutors managing students
 
-**Value proposition**: 
+**Value proposition**:
 * Easier management of administrative tasks
-* Easier for users who are more proficient with _CLI - interface_ 
+* Easier for users who are more proficient with _CLI - interface_
 * Separate work and personal tasks / messages
 
 
@@ -360,12 +360,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 4. Teletutors App updates the attendance record and confirms the action.
 
-    Use Case Ends.
+   Use Case Ends.
 
 **Extensions**
 * 3a. Student is not found in the session list
   * 3a1. Teletutors App displays an default placeholder message: `No students found.`
-  
+
     Use case resumes from Step 2
 
 
@@ -410,7 +410,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Gracefully recover**: Provides an appropriate solution without crashing the application.
 * **Data retention policy**: Guidelines regarding what data should be kept, how long data should be kept and more.
 * **CLI - interface**: Any application that mainly takes in input via text, not necessarily through a command console.
-* **Privacy**: Personal details that are not meant to be shared with others. 
+* **Privacy**: Personal details that are not meant to be shared with others.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -438,7 +438,7 @@ testers are expected to do more *exploratory* testing.
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+      Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
 
