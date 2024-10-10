@@ -136,6 +136,12 @@
     -fx-text-fill: #010504;
 }
 
+.role-label {
+    -fx-background-color: rgb(184,127,93);
+    -fx-padding: 0 4 0 4;
+    -fx-border-radius: 5;
+    -fx-background-radius: 10;
+}
 .stack-pane {
      -fx-background-color: derive(#1d1d1d, 20%);
 }
