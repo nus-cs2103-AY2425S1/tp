@@ -18,17 +18,17 @@ import tutorease.address.model.UserPrefs;
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private TutorEaseStorage tutorEaseStorage;
-    private UserPrefsStorage userPrefsStorage;
+    private final TutorEaseStorage tutorEaseStorage;
+    private final UserPrefsStorage userPrefsStorage;
 
-    private LessonScheduleStorage lessonScheduleStorage;
+    private final LessonScheduleStorage lessonScheduleStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code TutorEaseStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(TutorEaseStorage TutorEaseStorage, UserPrefsStorage userPrefsStorage,
+    public StorageManager(TutorEaseStorage tutorEaseStorage, UserPrefsStorage userPrefsStorage,
                           LessonScheduleStorage lessonScheduleStorage) {
-        this.tutorEaseStorage = TutorEaseStorage;
+        this.tutorEaseStorage = tutorEaseStorage;
         this.userPrefsStorage = userPrefsStorage;
         this.lessonScheduleStorage = lessonScheduleStorage;
     }

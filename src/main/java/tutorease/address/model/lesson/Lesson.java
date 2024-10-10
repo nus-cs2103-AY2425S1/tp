@@ -38,7 +38,9 @@ public class Lesson {
      * @return true if the lessons overlap, false otherwise.
      */
     public boolean isOverlapping(Lesson other) {
-        return this.startDateTime.isBefore(other.endDateTime) && other.startDateTime.isBefore(this.endDateTime);
+        return this.startDateTime.isBefore(other.endDateTime) && this.startDateTime.isAfter(other.startDateTime)
+                || this.endDateTime.isAfter(other.startDateTime) && this.endDateTime.isBefore(other.endDateTime)
+                || this.startDateTime.equals(other.startDateTime) || this.endDateTime.equals(other.endDateTime);
     }
 
     /**

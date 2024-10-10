@@ -16,7 +16,6 @@ public class LessonSchedule {
     {
         lessons = new UniqueLessonList();
     }
-
     public LessonSchedule() {
     }
 

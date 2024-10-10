@@ -2,25 +2,16 @@ package tutorease.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-<<<<<<< HEAD:src/test/java/seedu/address/logic/commands/CommandTestUtil.java
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION_INDEX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.testutil.Assert.assertThrows;
-=======
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static tutorease.address.logic.parser.CliSyntax.PREFIX_DURATION;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static tutorease.address.logic.parser.CliSyntax.PREFIX_LOCATION_INDEX;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static tutorease.address.logic.parser.CliSyntax.PREFIX_START_DATE;
+import static tutorease.address.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static tutorease.address.testutil.Assert.assertThrows;
->>>>>>> af192333a51390b60dd892f90b692c87686738a6:src/test/java/tutorease/address/logic/commands/CommandTestUtil.java
 
 import java.util.ArrayList;
 import java.util.Arrays;

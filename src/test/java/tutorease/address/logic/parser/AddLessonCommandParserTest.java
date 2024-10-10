@@ -1,37 +1,37 @@
-package seedu.address.logic.parser;
+package tutorease.address.logic.parser;
 
-import static seedu.address.logic.commands.CommandTestUtil.DURATION_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_DURATION_CHAR;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_DURATION_TWENTY_FIVE;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_DURATION_ZERO;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_LOCATION_INDEX_CHAR;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_LOCATION_INDEX_ZERO;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_START_DATE_DAY;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_START_DATE_HOUR;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_START_DATE_MINUTE;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_START_DATE_MONTH;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_START_DATE_YEAR;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_STUDENT_ID_CHAR;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_STUDENT_ID_ZERO;
-import static seedu.address.logic.commands.CommandTestUtil.LOCATION_INDEX_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static seedu.address.logic.commands.CommandTestUtil.START_DATE_TIME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.STUDENT_ID_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static tutorease.address.logic.commands.CommandTestUtil.DURATION_DESC;
+import static tutorease.address.logic.commands.CommandTestUtil.INVALID_DURATION_CHAR;
+import static tutorease.address.logic.commands.CommandTestUtil.INVALID_DURATION_TWENTY_FIVE;
+import static tutorease.address.logic.commands.CommandTestUtil.INVALID_DURATION_ZERO;
+import static tutorease.address.logic.commands.CommandTestUtil.INVALID_LOCATION_INDEX_CHAR;
+import static tutorease.address.logic.commands.CommandTestUtil.INVALID_LOCATION_INDEX_ZERO;
+import static tutorease.address.logic.commands.CommandTestUtil.INVALID_START_DATE_DAY;
+import static tutorease.address.logic.commands.CommandTestUtil.INVALID_START_DATE_HOUR;
+import static tutorease.address.logic.commands.CommandTestUtil.INVALID_START_DATE_MINUTE;
+import static tutorease.address.logic.commands.CommandTestUtil.INVALID_START_DATE_MONTH;
+import static tutorease.address.logic.commands.CommandTestUtil.INVALID_START_DATE_YEAR;
+import static tutorease.address.logic.commands.CommandTestUtil.INVALID_STUDENT_ID_CHAR;
+import static tutorease.address.logic.commands.CommandTestUtil.INVALID_STUDENT_ID_ZERO;
+import static tutorease.address.logic.commands.CommandTestUtil.LOCATION_INDEX_DESC;
+import static tutorease.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static tutorease.address.logic.commands.CommandTestUtil.START_DATE_TIME_DESC;
+import static tutorease.address.logic.commands.CommandTestUtil.STUDENT_ID_DESC;
+import static tutorease.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID;
+import static tutorease.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static tutorease.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.Messages;
-import seedu.address.logic.commands.AddLessonCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.lesson.EndDateTime;
-import seedu.address.model.lesson.Lesson;
-import seedu.address.model.lesson.LocationIndex;
-import seedu.address.model.lesson.StartDateTime;
-import seedu.address.model.lesson.StudentId;
-import seedu.address.testutil.LessonBuilder;
+import tutorease.address.logic.Messages;
+import tutorease.address.logic.commands.AddLessonCommand;
+import tutorease.address.logic.parser.exceptions.ParseException;
+import tutorease.address.model.lesson.EndDateTime;
+import tutorease.address.model.lesson.Lesson;
+import tutorease.address.model.lesson.LocationIndex;
+import tutorease.address.model.lesson.StartDateTime;
+import tutorease.address.model.lesson.StudentId;
+import tutorease.address.testutil.LessonBuilder;
 
 public class AddLessonCommandParserTest {
     private AddLessonCommandParser parser = new AddLessonCommandParser();

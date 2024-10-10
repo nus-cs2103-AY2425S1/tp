@@ -3,20 +3,6 @@ package tutorease.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-<<<<<<< HEAD:src/test/java/seedu/address/logic/commands/EditCommandTest.java
-import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalLessons.getTypicalLessons;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-=======
 import static tutorease.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static tutorease.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static tutorease.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
@@ -27,8 +13,8 @@ import static tutorease.address.logic.commands.CommandTestUtil.assertCommandSucc
 import static tutorease.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static tutorease.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static tutorease.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static tutorease.address.testutil.TypicalLessons.getTypicalLessons;
 import static tutorease.address.testutil.TypicalPersons.getTypicalTutorEase;
->>>>>>> af192333a51390b60dd892f90b692c87686738a6:src/test/java/tutorease/address/logic/commands/EditCommandTest.java
 
 import org.junit.jupiter.api.Test;
 
@@ -48,11 +34,7 @@ import tutorease.address.testutil.PersonBuilder;
  */
 public class EditCommandTest {
 
-<<<<<<< HEAD:src/test/java/seedu/address/logic/commands/EditCommandTest.java
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalLessons());
-=======
-    private Model model = new ModelManager(getTypicalTutorEase(), new UserPrefs());
->>>>>>> af192333a51390b60dd892f90b692c87686738a6:src/test/java/tutorease/address/logic/commands/EditCommandTest.java
+    private Model model = new ModelManager(getTypicalTutorEase(), new UserPrefs(), getTypicalLessons());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -62,12 +44,9 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
-<<<<<<< HEAD:src/test/java/seedu/address/logic/commands/EditCommandTest.java
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+        Model expectedModel = new ModelManager(new TutorEase(model.getTutorEase()), new UserPrefs(),
                 getTypicalLessons());
-=======
-        Model expectedModel = new ModelManager(new TutorEase(model.getTutorEase()), new UserPrefs());
->>>>>>> af192333a51390b60dd892f90b692c87686738a6:src/test/java/tutorease/address/logic/commands/EditCommandTest.java
+
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -88,12 +67,9 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
-<<<<<<< HEAD:src/test/java/seedu/address/logic/commands/EditCommandTest.java
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+        Model expectedModel = new ModelManager(new TutorEase(model.getTutorEase()), new UserPrefs(),
                 getTypicalLessons());
-=======
-        Model expectedModel = new ModelManager(new TutorEase(model.getTutorEase()), new UserPrefs());
->>>>>>> af192333a51390b60dd892f90b692c87686738a6:src/test/java/tutorease/address/logic/commands/EditCommandTest.java
+
         expectedModel.setPerson(lastPerson, editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -106,12 +82,8 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
-<<<<<<< HEAD:src/test/java/seedu/address/logic/commands/EditCommandTest.java
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+        Model expectedModel = new ModelManager(new TutorEase(model.getTutorEase()), new UserPrefs(),
                 getTypicalLessons());
-=======
-        Model expectedModel = new ModelManager(new TutorEase(model.getTutorEase()), new UserPrefs());
->>>>>>> af192333a51390b60dd892f90b692c87686738a6:src/test/java/tutorease/address/logic/commands/EditCommandTest.java
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -127,12 +99,9 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
-<<<<<<< HEAD:src/test/java/seedu/address/logic/commands/EditCommandTest.java
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+        Model expectedModel = new ModelManager(new TutorEase(model.getTutorEase()), new UserPrefs(),
                 getTypicalLessons());
-=======
-        Model expectedModel = new ModelManager(new TutorEase(model.getTutorEase()), new UserPrefs());
->>>>>>> af192333a51390b60dd892f90b692c87686738a6:src/test/java/tutorease/address/logic/commands/EditCommandTest.java
+
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);

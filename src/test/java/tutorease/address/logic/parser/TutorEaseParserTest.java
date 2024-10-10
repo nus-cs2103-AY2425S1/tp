@@ -2,21 +2,14 @@ package tutorease.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-<<<<<<< HEAD:src/test/java/seedu/address/logic/parser/AddressBookParserTest.java
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.CommandTestUtil.DURATION_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.LOCATION_INDEX_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.START_DATE_TIME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.STUDENT_ID_DESC;
-import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-=======
 import static tutorease.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tutorease.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static tutorease.address.logic.commands.CommandTestUtil.DURATION_DESC;
+import static tutorease.address.logic.commands.CommandTestUtil.LOCATION_INDEX_DESC;
+import static tutorease.address.logic.commands.CommandTestUtil.START_DATE_TIME_DESC;
+import static tutorease.address.logic.commands.CommandTestUtil.STUDENT_ID_DESC;
 import static tutorease.address.testutil.Assert.assertThrows;
 import static tutorease.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
->>>>>>> af192333a51390b60dd892f90b692c87686738a6:src/test/java/tutorease/address/logic/parser/TutorEaseParserTest.java
 
 import java.util.Arrays;
 import java.util.List;
@@ -24,36 +17,15 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-<<<<<<< HEAD:src/test/java/seedu/address/logic/parser/AddressBookParserTest.java
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.AddLessonCommand;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.LessonCommand;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
-
-public class AddressBookParserTest {
-
-    private final AddressBookParser parser = new AddressBookParser();
-=======
 import tutorease.address.logic.commands.AddCommand;
+import tutorease.address.logic.commands.AddLessonCommand;
 import tutorease.address.logic.commands.ClearCommand;
 import tutorease.address.logic.commands.EditCommand;
 import tutorease.address.logic.commands.EditCommand.EditPersonDescriptor;
 import tutorease.address.logic.commands.ExitCommand;
 import tutorease.address.logic.commands.FindCommand;
 import tutorease.address.logic.commands.HelpCommand;
+import tutorease.address.logic.commands.LessonCommand;
 import tutorease.address.logic.parser.exceptions.ParseException;
 import tutorease.address.model.person.NameContainsKeywordsPredicate;
 import tutorease.address.model.person.Person;
@@ -64,7 +36,6 @@ import tutorease.address.testutil.PersonUtil;
 public class TutorEaseParserTest {
 
     private final TutorEaseParser parser = new TutorEaseParser();
->>>>>>> af192333a51390b60dd892f90b692c87686738a6:src/test/java/tutorease/address/logic/parser/TutorEaseParserTest.java
 
     @Test
     public void parseCommand_add() throws Exception {
@@ -119,7 +90,6 @@ public class TutorEaseParserTest {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
     }
 
-<<<<<<< HEAD:src/test/java/seedu/address/logic/parser/AddressBookParserTest.java
     @Test
     public void parseCommand_lesson_add() throws Exception {
         assertTrue(parser.parseCommand(LessonCommand.COMMAND_WORD
@@ -130,8 +100,4 @@ public class TutorEaseParserTest {
                 + " " + START_DATE_TIME_DESC
                 + " " + DURATION_DESC) instanceof AddLessonCommand);
     }
-=======
-
-
->>>>>>> af192333a51390b60dd892f90b692c87686738a6:src/test/java/tutorease/address/logic/parser/TutorEaseParserTest.java
 }

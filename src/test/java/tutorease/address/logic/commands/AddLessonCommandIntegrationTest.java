@@ -26,8 +26,8 @@ public class AddLessonCommandIntegrationTest {
     private Person validPerson = TypicalPersons.ALICE;
     private StudentId studentId = new StudentId("1");
     private LocationIndex locationIndex = new LocationIndex("1");
-    private StartDateTime startDateTime = StartDateTime.createStartDateTime("10-11-2024 02:18");
-    private EndDateTime endDateTime = EndDateTime.createEndDateTime("10-11-2024 03:18");
+    private String startDateTime = "10-11-2024 02:18";
+    private String endDateTime = "10-11-2024 03:18";
 
     public AddLessonCommandIntegrationTest() throws ParseException {
     }
@@ -35,22 +35,33 @@ public class AddLessonCommandIntegrationTest {
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalTutorEase(), new UserPrefs(), getTypicalLessons());
+        validPerson = model.getTutorEase().getPersonList().get(0);
     }
 
     @Test
     public void execute_newLesson_success() throws ParseException {
         Model expectedModel = new ModelManager(model.getTutorEase(), new UserPrefs(), model.getLessonSchedule());
-        Lesson validLesson = new LessonBuilder().withName(validPerson).build();
+        Lesson validLesson = new LessonBuilder().withName(validPerson)
+                .withStartDateTime(startDateTime)
+                .withEndDateTime(endDateTime)
+                .build();
         expectedModel.addLesson(validLesson);
 
-        assertCommandSuccess(new AddLessonCommand(studentId, startDateTime, locationIndex, endDateTime), model,
+        assertCommandSuccess(new AddLessonCommand(studentId, validLesson.getStartDateTime(),
+                        locationIndex, validLesson.getEndDateTime()), model,
                 String.format(AddLessonCommand.MESSAGE_SUCCESS, validLesson),
                 expectedModel);
     }
     @Test
     public void execute_duplicateLesson_throwsCommandException() throws ParseException {
-        model.addLesson(new LessonBuilder().withName(validPerson).build());
-        assertCommandFailure(new AddLessonCommand(studentId, startDateTime, locationIndex, endDateTime), model,
+        StartDateTime sdt = StartDateTime.createStartDateTime(startDateTime);
+        EndDateTime edt = EndDateTime.createEndDateTime(startDateTime);
+        Lesson overlap = new LessonBuilder().withName(validPerson)
+                .withStartDateTime(startDateTime)
+                .withEndDateTime(endDateTime)
+                .build();
+        model.addLesson(overlap);
+        assertCommandFailure(new AddLessonCommand(studentId, sdt, locationIndex, edt), model,
                 AddLessonCommand.MESSAGE_OVERLAP_LESSON);
     }
 }
