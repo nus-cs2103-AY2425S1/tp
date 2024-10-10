@@ -34,7 +34,6 @@ public class EmployeeId {
      */
     public static boolean isValidEmployeeId(String test) {
         try {
-            // UUID.fromString(test);
             Integer.valueOf(test);
             return true;
         } catch (NumberFormatException e) {
