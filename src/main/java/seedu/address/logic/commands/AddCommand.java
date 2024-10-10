@@ -8,14 +8,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-
-import java.util.List;
 
 /**
  * Adds a person to the address book.
@@ -54,6 +54,9 @@ public class AddCommand extends Command {
         interest = null;
         toAdd = person;
     }
+    /**
+     * Creates an AddCommand to add the specified {@code interest}
+     */
     public AddCommand(Index index, String interest) {
         requireNonNull(index);
         this.index = index;
