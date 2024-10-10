@@ -9,6 +9,7 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.exceptions.DuplicatePhoneException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
@@ -37,13 +38,24 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns true if the list contains a person with the same phone number as the one in the given argument.
+     */
+    public boolean containsPhone(Person toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isSameNumber);
+    }
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
+     * Another person with the same number must not already exist in the list.
      */
     public void add(Person toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
             throw new DuplicatePersonException();
+        } else if (containsPhone(toAdd)) {
+            throw new DuplicatePhoneException();
         }
         internalList.add(toAdd);
     }
