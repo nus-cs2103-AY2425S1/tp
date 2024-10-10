@@ -42,9 +42,9 @@ public class Person {
     public Person(Name name) {
         this.name = name;
         this.phone = null;
-        this.email = null;
-        this.address = null;
-        this.remark = null;
+//        this.email = null;
+//        this.address = null;
+//        this.remark = null;
     }
 
     public Name getName() {
