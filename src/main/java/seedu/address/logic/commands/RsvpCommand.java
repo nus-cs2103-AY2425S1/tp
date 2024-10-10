@@ -14,6 +14,11 @@ public class RsvpCommand extends Command {
     private final boolean rsvp;
 
 
+    /**
+     * Creates a RsvpCommand to toggle rsvp status
+     * @param index
+     * @param rsvp
+     */
     public RsvpCommand(Index index, boolean rsvp) {
         this.index = index;
         this.rsvp = rsvp;
