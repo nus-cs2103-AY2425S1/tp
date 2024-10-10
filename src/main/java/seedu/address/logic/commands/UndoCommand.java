@@ -1,8 +1,10 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.model.Model;
 
-import static java.util.Objects.requireNonNull;
+
 
 /**
  * Represents an Undo command that reverses the last modification made to the address book.
