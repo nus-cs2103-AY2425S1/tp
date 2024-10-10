@@ -7,10 +7,10 @@ import seedu.address.model.person.Person;
  * Guarantees: details are present and not null, field values are validated.
  */
 public class Event {
-    private EventName name;
-    private Time time;
-    private Venue venue;
-    private Person mainContact;
+    private final EventName name;
+    private final Time time;
+    private final Venue venue;
+    private final Person mainContact;
 
     /**
      * Every field must be present and not null.
