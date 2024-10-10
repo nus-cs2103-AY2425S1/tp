@@ -98,13 +98,13 @@ public class ParserUtil {
      * Leading and trailing whitespaces will be trimmed.
      * @throws ParseException if the given {@code studentNumber} is invalid.
      */
-    public static StudentNumber parseStudentNumber(String studnetNumber) throws ParseException {
-        requireNonNull(studnetNumber);
-        String trimmedNumber = studnetNumber.trim();
+    public static StudentNumber parseStudentNumber(String studentNumber) throws ParseException {
+        requireNonNull(studentNumber);
+        String trimmedNumber = studentNumber.trim();
         if (!StudentNumber.isValidStudentNumber(trimmedNumber)) {
             throw new ParseException(StudentNumber.MESSAGE_CONSTRAINTS);
         }
-        return new StudentNumber(studnetNumber);
+        return new StudentNumber(studentNumber);
     }
 
      /** 
