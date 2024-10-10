@@ -1,8 +1,9 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Represents a list of grades for a student in the address book.
@@ -24,7 +25,7 @@ public class GradeList {
      * @param grade The grade to be recorded.
      */
     public void addGrade(Grade grade) {
-        Objects.requireNonNull(grade, "Grade cannot be null");
+        requireNonNull(grade, "Grade cannot be null");
         removeGrade(grade.testName); // Remove any existing grade for the test (to allow updating)
         grades.add(grade);
     }
@@ -64,12 +65,6 @@ public class GradeList {
         return getGrade(testName) != null;
     }
 
-    /**
-     * Returns a string representation of the GradeList, listing all grades.
-     * Each grade is formatted as "TestName: GradeValue", with each entry on a new line.
-     *
-     * @return A string containing the list of grades.
-     */
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
@@ -79,13 +74,6 @@ public class GradeList {
         return result.toString().trim();
     }
 
-    /**
-     * Compares this GradeList object to another GradeList object for equality.
-     * Two GradeList objects are considered equal if they contain the same grades.
-     *
-     * @param other The object to compare with.
-     * @return True if the other object is a GradeList with the same grades, false otherwise.
-     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -100,12 +88,6 @@ public class GradeList {
         return grades.equals(otherGradeList.grades);
     }
 
-    /**
-     * Returns the hash code for this GradeList object.
-     * The hash code is based on the list of grades.
-     *
-     * @return The hash code for this GradeList.
-     */
     @Override
     public int hashCode() {
         return grades.hashCode();

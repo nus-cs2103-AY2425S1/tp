@@ -11,27 +11,33 @@ public class Grade {
     public static final String MESSAGE_GRADE_CONSTRAINTS =
             "Grades should be numeric values between 0 and 100 (in percentage), including decimals.";
     public static final String MESSAGE_TEST_NAME_CONSTRAINTS =
-            "Test names should be at least 3 characters long and " +
-                    "contain only alphanumeric characters, spaces, hyphens (-), or underscores (_).";
+            "Test names should be at least 3 characters long and "
+                    + "contain only alphanumeric characters, spaces, hyphens (-), or underscores (_).";
+    public static final String MESSAGE_WEIGHTAGE_CONSTRAINTS =
+            "Weightage should be a numeric value between 0 (exclusive) and 100 (inclusive).";
+
 
     // Validation regex for test name (allows alphabetic characters and spaces)
     public static final String TEST_NAME_VALIDATION_REGEX = "^[A-Za-z ]+$";
 
     public final String testName;
-    public final double gradeValue;
+    public final float score;
+    public final float weightage;
 
     /**
      * Constructs a {@code Grade}.
      *
      * @param testName A valid test name.
-     * @param gradeValue A valid grade value.
+     * @param score A valid grade value.
      */
-    public Grade(String testName, double gradeValue) {
+    public Grade(String testName, float score, float weightage) {
         requireNonNull(testName);
         checkArgument(isValidTestName(testName), MESSAGE_TEST_NAME_CONSTRAINTS);
-        checkArgument(isValidGrade(gradeValue), MESSAGE_GRADE_CONSTRAINTS);
+        checkArgument(isValidGrade(score), MESSAGE_GRADE_CONSTRAINTS);
+        checkArgument(isValidWeightage(weightage), MESSAGE_WEIGHTAGE_CONSTRAINTS);
         this.testName = testName;
-        this.gradeValue = gradeValue;
+        this.score = score;
+        this.weightage = weightage;
     }
 
     /**
@@ -59,22 +65,21 @@ public class Grade {
     }
 
     /**
-     * Returns a string representation of the grade, including the test name and grade value.
+     * Returns true if the given weightage is valid.
+     * The weightage must be greater than 0 and less than or equal to 1.
      *
-     * @return A string in the format "TestName: GradeValue".
+     * @param weightage The weightage value to check.
+     * @return true if the weightage is between 0 (exclusive) and 1 (inclusive), false otherwise.
      */
-    @Override
-    public String toString() {
-        return testName + ": " + gradeValue + '%';
+    public static boolean isValidWeightage(float weightage) {
+        return weightage > 0 && weightage <= 100;
     }
 
-    /**
-     * Compares this grade object to another grade object for equality.
-     * Two grade objects are considered equal if both their test names and grade values are the same.
-     *
-     * @param other The object to compare with.
-     * @return true if the other object is a Grade with the same test name and grade value, false otherwise.
-     */
+    @Override
+    public String toString() {
+        return testName + ": " + score + '%';
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -86,19 +91,13 @@ public class Grade {
         }
 
         Grade otherGrade = (Grade) other;
-        return Double.compare(gradeValue, otherGrade.gradeValue) == 0
+        return Double.compare(score, otherGrade.score) == 0
+                && Double.compare(weightage, otherGrade.weightage) == 0
                 && testName.equalsIgnoreCase(otherGrade.testName);
     }
 
-    /**
-     * Returns the hash code for this Grade object.
-     * The hash code is based on the grade value and the lowercased test name.
-     *
-     * @return The hash code for this Grade.
-     */
     @Override
     public int hashCode() {
-        return Double.hashCode(gradeValue) + testName.toLowerCase().hashCode();
+        return Double.hashCode(score) * Double.hashCode(weightage) * testName.toLowerCase().hashCode();
     }
-
 }
