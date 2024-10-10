@@ -29,7 +29,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
-    private Label Id;
+    private Label id;
     @FXML
     private Label ward;
     @FXML
