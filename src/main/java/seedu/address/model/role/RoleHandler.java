@@ -52,13 +52,12 @@ public class RoleHandler {
      * @return True if person has the role, false otherwise
      * @throws InvalidRoleException If roleString is invalid
      */
-    public static boolean isRole(Person person, String roleString) throws InvalidRoleException {
+    public boolean isRole(Person person, String roleString) throws InvalidRoleException {
         Objects.requireNonNull(person);
         Objects.requireNonNull(roleString);
 
-        Role role = getRole(roleString);
+        Role role = RoleHandler.getRole(roleString);
         //if role is invalid getRole should already throw an exception
         return role.isTagged(person);
     }
-
 }

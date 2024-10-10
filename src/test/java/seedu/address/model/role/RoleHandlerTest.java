@@ -83,7 +83,7 @@ public class RoleHandlerTest {
         RoleHandler roleHandler = new RoleHandler();
         try {
             Role role = RoleHandler.getRole("attendee");
-            assert (!roleHandler.isRole(BOB, "attendee"));
+            assert (!new RoleHandler().isRole(BOB, "attendee"));
 
         } catch (InvalidRoleException e) {
             assert (false);
@@ -96,7 +96,7 @@ public class RoleHandlerTest {
         try {
             Role role = RoleHandler.getRole("attendee");
             role.addPerson(ALICE);
-            assert (roleHandler.isRole(ALICE, "attendee"));
+            assert (new RoleHandler().isRole(ALICE, "attendee"));
 
         } catch (InvalidRoleException e) {
             assert (false);
@@ -109,7 +109,7 @@ public class RoleHandlerTest {
         try {
             Role role = RoleHandler.getRole("attendee");
             role.addPerson(ALICE);
-            assert (!roleHandler.isRole(ALICE, "sponsor"));
+            assert (!new RoleHandler().isRole(ALICE, "sponsor"));
 
         } catch (InvalidRoleException e) {
             assert (false);
@@ -120,7 +120,7 @@ public class RoleHandlerTest {
     public void isRole_invalidRole_failure() {
         RoleHandler roleHandler = new RoleHandler();
 
-        assertThrows(InvalidRoleException.class, () -> roleHandler.isRole(ALICE, "invalid"));
+        assertThrows(InvalidRoleException.class, () -> new RoleHandler().isRole(ALICE, "invalid"));
 
 
     }
