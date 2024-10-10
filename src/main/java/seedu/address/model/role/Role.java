@@ -72,7 +72,7 @@ public abstract class Role {
     }
 
     /**
-     * Gets the people tagged under role as a string
+     * Gets the people tagged under role as a string. Should be displayed as [ person1, person2, ... ]
      * @return String representation of all people tagged under a role
      */
     public String getPeopleString() {
