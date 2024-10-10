@@ -29,7 +29,7 @@ public class RoleHandler {
      * @param role String representation of role.
      * @return Corresponding role object.
      */
-    public static Role getRole(String role) throws InvalidRoleException {
+    public Role getRole(String role) throws InvalidRoleException {
         role = role.trim().toLowerCase();
         switch (role) {
         case Attendee.ROLE_WORD:
@@ -56,7 +56,7 @@ public class RoleHandler {
         Objects.requireNonNull(person);
         Objects.requireNonNull(roleString);
 
-        Role role = RoleHandler.getRole(roleString);
+        Role role = getRole(roleString);
         //if role is invalid getRole should already throw an exception
         return role.isTagged(person);
     }

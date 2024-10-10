@@ -103,7 +103,7 @@ public class PersonBuilder {
         Set<Role> newRoles = new HashSet<>();
         for (String role : roles) {
             try {
-                Role nextRole = RoleHandler.getRole(role);
+                Role nextRole = new RoleHandler().getRole(role);
                 newRoles.add(nextRole);
                 this.roles = newRoles;
             } catch (InvalidRoleException e) {

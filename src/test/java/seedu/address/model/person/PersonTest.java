@@ -118,7 +118,30 @@ public class PersonTest {
     public void getRoles_oneRole() {
         Person person = new PersonBuilder().withRoles("attendee").build();
         try {
-            assertTrue(person.getRoles().contains(RoleHandler.getRole("attendee")));
+            assertTrue(person.getRoles().contains(new RoleHandler().getRole("attendee")));
+
+        } catch (InvalidRoleException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void hasRole_oneRole() {
+        Person person = new PersonBuilder().withRoles("attendee").build();
+        try {
+            assertTrue(person.hasRole(new RoleHandler().getRole("attendee")));
+
+        } catch (InvalidRoleException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void hasRole_twoRole() {
+        Person person = new PersonBuilder().withRoles("attendee", "speaker").build();
+        try {
+            assertTrue(person.hasRole(new RoleHandler().getRole("attendee")));
+            assertTrue(person.hasRole(new RoleHandler().getRole("speaker")));
 
         } catch (InvalidRoleException e) {
             e.printStackTrace();
