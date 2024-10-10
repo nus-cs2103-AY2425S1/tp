@@ -25,6 +25,7 @@ public class Student {
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
     private final Optional<String> group;
+    private final StudentNumber studentNumber;
 
     /**
      * Every field must be present and not null.
@@ -36,6 +37,7 @@ public class Student {
         this.tags.addAll(tags);
         this.studentNumber = studentNumber;
         this.group = Optional.empty();
+        this.studentNumber = studentNumber;
     }
 
     /**
@@ -48,6 +50,7 @@ public class Student {
         this.tags.addAll(tags);
         this.studentNumber = studentNumber;
         this.group = group;
+        this.studentNumber = studentNumber;
     }
 
     public Name getName() {
@@ -64,6 +67,10 @@ public class Student {
 
     public Optional<String> getGroup() {
         return group;
+    }
+
+    public StudentNumber getStudentNumber() {
+        return studentNumber;
     }
 
 
@@ -85,7 +92,9 @@ public class Student {
         }
 
         return otherStudent != null
-            && otherStudent.getStudentNumber().equals(getStudentNumber());
+            && otherStudent.getStudentNumber().equals(getStudentNumber())
+            && otherStudent.getName().equals(getName());
+
     }
 
     /**
@@ -121,6 +130,7 @@ public class Student {
         return new ToStringBuilder(this)
             .add("name", name)
             .add("email", email)
+            .add("student number", studentNumber)
             .add("tags", tags)
             .add("student number", studentNumber)
             .add("group", group.orElse(""))

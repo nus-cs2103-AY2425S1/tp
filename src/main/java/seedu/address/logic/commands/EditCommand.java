@@ -96,7 +96,7 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(studentToEdit.getTags());
         StudentNumber updatedStudentNumber = editPersonDescriptor.getStudentNumber()
                 .orElse(studentToEdit.getStudentNumber());
-
+      
         System.out.println(updatedName);
         System.out.println(updatedEmail);
         System.out.println(updatedStudentNumber);
@@ -149,7 +149,6 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setTags(toCopy.tags);
             setStudentNumber(toCopy.studentNumber);
-
         }
 
         /**
@@ -169,6 +168,10 @@ public class EditCommand extends Command {
 
         public void setEmail(Email email) {
             this.email = email;
+        }
+
+        public void setStudentNumber(StudentNumber studentNumber) {
+            this.studentNumber = studentNumber;
         }
 
         public Optional<Email> getEmail() {
@@ -198,6 +201,10 @@ public class EditCommand extends Command {
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
+        public Optional<StudentNumber> getStudentNumber() {
+            return Optional.ofNullable(studentNumber);
         }
 
         @Override
