@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.Person;
+import seedu.address.model.client.Client;
 
 /**
  * Panel containing the list of rental information.
@@ -14,27 +14,27 @@ public class RentalInformationListPanel extends UiPart<Region> {
     private static final String FXML = "RentalInformationListPanel.fxml";
 
     @FXML
-    private ListView<Person> rentalInformationListView;
+    private ListView<Client> rentalInformationListView;
 
     /**
      * Creates a {@code RentalInformationListPanel} with the given {@code ObservableList}.
      */
-    public RentalInformationListPanel(ObservableList<Person> personList) {
+    public RentalInformationListPanel(ObservableList<Client> clientList) {
         super(FXML);
-        rentalInformationListView.setItems(personList);
+        rentalInformationListView.setItems(clientList);
         rentalInformationListView.setCellFactory(listView -> new RentalInformationListViewCell());
     }
 
-    class RentalInformationListViewCell extends ListCell<Person> {
+    class RentalInformationListViewCell extends ListCell<Client> {
         @Override
-        protected void updateItem(Person person, boolean empty) {
-            super.updateItem(person, empty);
+        protected void updateItem(Client client, boolean empty) {
+            super.updateItem(client, empty);
 
-            if (empty || person == null) {
+            if (empty || client == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new RentalInformationCard(person, getIndex() + 1).getRoot());
+                setGraphic(new RentalInformationCard(client, getIndex() + 1).getRoot());
             }
         }
     }
