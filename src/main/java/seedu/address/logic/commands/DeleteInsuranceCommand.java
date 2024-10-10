@@ -16,12 +16,12 @@ import seedu.address.model.person.insurance.InsurancePlanFactory;
 import seedu.address.model.person.insurance.InsurancePlansManager;
 
 /**
- * Adds an InsurancePlan to an existing person in the address book.
+ * Removes an InsurancePlan from an existing person in the address book.
  */
-public class AddInsuranceCommand extends Command {
-    public static final String COMMAND_WORD = "addInsurance";
+public class DeleteInsuranceCommand extends Command {
+    public static final String COMMAND_WORD = "deleteInsurance";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Adds an insurance plan to the client identified "
+            + ": Deletes an insurance plan from a client identified "
             + "by their client id. \n"
             + "Parameters: INDEX (must be a positive integer) "
             + ", INSURANCE_PLAN_ID (must be a valid ID) \n"
@@ -29,16 +29,17 @@ public class AddInsuranceCommand extends Command {
             + PREFIX_INSURANCE_ID + " 0";
 
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d, InsuranceID: %2$s";
-    public static final String MESSAGE_ADD_INSURANCE_PLAN_SUCCESS = "Added Insurance Plan: %1$s, to Client: %2$s";
+    public static final String MESSAGE_DELETE_INSURANCE_PLAN_SUCCESS =
+            "Deleted Insurance Plan: %1$s, from Client: %2$s";
 
     private final Index index;
     private final int insuranceID;
 
     /**
-     * @param index       of the person in the filtered person list to edit the remark
+     * @param index of the person in the filtered person list remove the insurance plan from
      * @param insuranceID of the person to be updated to
      */
-    public AddInsuranceCommand(Index index, int insuranceID) {
+    public DeleteInsuranceCommand(Index index, int insuranceID) {
         requireAllNonNull(index, insuranceID);
 
         this.index = index;
@@ -58,13 +59,13 @@ public class AddInsuranceCommand extends Command {
         try {
             InsurancePlansManager personToEditInsurancePlansManager = personToEdit.getInsurancePlansManager();
 
-            InsurancePlan planToBeAdded = InsurancePlanFactory.createInsurancePlan(insuranceID);
+            InsurancePlan planToBeDeleted = InsurancePlanFactory.createInsurancePlan(insuranceID);
 
-            personToEditInsurancePlansManager.checkIfPlanNotOwned(planToBeAdded);
+            personToEditInsurancePlansManager.checkIfPlanOwned(planToBeDeleted);
 
-            personToEditInsurancePlansManager.addPlan(planToBeAdded);
+            personToEditInsurancePlansManager.deletePlan(planToBeDeleted);
 
-            return new CommandResult(String.format(MESSAGE_ADD_INSURANCE_PLAN_SUCCESS,
+            return new CommandResult(String.format(MESSAGE_DELETE_INSURANCE_PLAN_SUCCESS,
                     personToEditInsurancePlansManager, Messages.format(personToEdit)));
         } catch (ParseException e) {
             throw new CommandException(
@@ -79,7 +80,7 @@ public class AddInsuranceCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddInsuranceCommand e)) {
+        if (!(other instanceof DeleteInsuranceCommand e)) {
             return false;
         }
 

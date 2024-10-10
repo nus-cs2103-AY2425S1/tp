@@ -7,14 +7,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.insurance.InsurancePlan;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -125,11 +123,8 @@ public class ParserUtil {
         int trimmedInsurancePlanId;
         try {
             trimmedInsurancePlanId = Integer.parseInt(insurancePlanId.trim());
-            InsurancePlan.checkValidPlan(trimmedInsurancePlanId);
         } catch (NumberFormatException e) {
             throw new ParseException(MESSAGE_UNPARSABLE_INSURANCE_ID);
-        } catch (IllegalValueException e) {
-            throw new ParseException(e.getMessage());
         }
         return trimmedInsurancePlanId;
     }
