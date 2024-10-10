@@ -14,7 +14,7 @@ import keycontacts.commons.core.LogsCenter;
 import keycontacts.model.student.Student;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the student directory data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);

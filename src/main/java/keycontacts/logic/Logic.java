@@ -35,7 +35,7 @@ public interface Logic {
     ObservableList<Student> getFilteredStudentList();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' student directory file path.
      */
     Path getStudentDirectoryFilePath();
 
