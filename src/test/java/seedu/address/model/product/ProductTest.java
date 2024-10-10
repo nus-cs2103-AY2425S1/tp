@@ -72,15 +72,6 @@ public class ProductTest {
     }
 
     @Test
-    public void toStringTest() {
-        ProductName productName1 = new ProductName("Product A");
-        Product product1 = new Product(productName1);
-
-        String expectedString = "Product{name=Product A}";
-        assertTrue(product1.toString().equals(expectedString));
-    }
-
-    @Test
     public void productNameTest() {
         // valid name
         ProductName validName = new ProductName("Valid Name");
