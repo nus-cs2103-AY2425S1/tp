@@ -28,12 +28,26 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+        int numberOfPersons = model.getAddressBook().getPersonList().size();
+        String numberOfContacts = ", there are currently " + numberOfPersons + " contacts in your address book";
+        if (numberOfPersons == 0) {
+            assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_EMPTY, expectedModel);
+        } else {
+            assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS
+                    + numberOfContacts, expectedModel);
+        }
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+        int numberOfPersons = model.getAddressBook().getPersonList().size();
+        String numberOfContacts = ", there are currently " + numberOfPersons + " contacts in your address book";
+        if (numberOfPersons == 0) {
+            assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_EMPTY, expectedModel);
+        } else {
+            assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS
+                    + numberOfContacts, expectedModel);
+        }
     }
 }
