@@ -85,7 +85,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that has all of the methods failing.
      */
     private class ModelStub implements Model {
         @Override
@@ -157,8 +157,17 @@ public class AddCommandTest {
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
-    }
 
+        @Override
+        public void sortPersonsDesc() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortPersonsAsc() {
+            throw new AssertionError("This method should not be called.");
+        }
+    }
     /**
      * A Model stub that contains a single person.
      */
