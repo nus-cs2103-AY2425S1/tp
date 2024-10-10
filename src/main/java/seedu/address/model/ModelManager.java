@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Person;
 import seedu.address.model.project.Project;
 
@@ -138,6 +139,21 @@ public class ModelManager implements Model {
         addressBook.setProject(target, editedProject);
     }
 
+    @Override
+    public boolean hasAssignment(Assignment assignment) {
+        requireNonNull(assignment);
+        return addressBook.hasAssignment(assignment);
+    }
+
+    @Override
+    public void deleteAssignment(Assignment target) {
+        addressBook.removeAssignment(target);
+    }
+
+    @Override
+    public void addAssignment(Assignment assignment) {
+        addressBook.addAssignment(assignment);
+    }
     //=========== Filtered Person List Accessors =============================================================
 
     /**
