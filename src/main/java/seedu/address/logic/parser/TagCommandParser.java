@@ -6,8 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.TagCommand;
+import seedu.address.logic.commands.UpdateCommand.UpdatePersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 
@@ -35,7 +35,7 @@ public class TagCommandParser {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
         }
 
-        EditCommand.EditPersonDescriptor editPersonTags = new EditCommand.EditPersonDescriptor();
+        UpdatePersonDescriptor editPersonTags = new UpdatePersonDescriptor();
 
         if (argMultiMap.getValue(PREFIX_SUBJECT).isPresent()) {
             editPersonTags.setSubjects(

@@ -26,46 +26,38 @@ public class TypicalPersons {
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111")
             .withPhone("94351253").withEmergencyContact("94351253").withNote("Needs Jesus rn")
-            .withSubjects("PHYSICS").withSchoolLevel("P1").build();
-    public static final Person BENSON = new PersonBuilder()
-            .withName("Benson Meier").withNote("Needs Jesus rn")
+            .withSubjects("PHYSICS").withLevel("S3").build();
+    public static final Person BENSON = new PersonBuilder().withName("Benson Meier").withNote("Needs Jesus rn")
             .withAddress("311, Clementi Ave 2, #02-25").withEmergencyContact("94351253")
             .withPhone("98765432")
-            .withSubjects("CHEMISTRY", "MATH").withSchoolLevel("P2").build();
-    public static final Person CARL = new PersonBuilder()
-            .withName("Carl Kurz").withPhone("95352563")
-            .withNote("Needs Jesus rn").withAddress("wall street")
-            .withEmergencyContact("94351253").withSchoolLevel("P3").build();
+            .withSubjects("CHEMISTRY", "MATH").withLevel("P2").build();
+    public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
+            .withNote("Needs Jesus rn").withAddress("wall street").withEmergencyContact("94351253").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmergencyContact("94351253").withAddress("10th street")
-            .withSubjects("MATH").withNote("Needs Jesus rn").withSchoolLevel("P3").build();
+            .withSubjects("MATH").withNote("Needs Jesus rn").withLevel("JC1").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withNote("Needs Jesus rn").withEmergencyContact("94351253")
-            .withAddress("michegan ave").withSchoolLevel("P3").build();
+            .withNote("Needs Jesus rn").withEmergencyContact("94351253").withAddress("michegan ave").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withNote("Needs Jesus rn").withEmergencyContact("94351253").withAddress("little tokyo")
-            .withSchoolLevel("P3").build();
+            .withNote("Needs Jesus rn").withEmergencyContact("94351253").withAddress("little tokyo").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
-            .withNote("y am i in cs").withEmergencyContact("94351253").withAddress("4th street")
-            .withSchoolLevel("P3").build();
+            .withNote("y am i in cs").withEmergencyContact("94351253")
+            .withAddress("4th street").withLevel("S5").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
-            .withEmergencyContact("94351253").withAddress("little india")
-            .withSchoolLevel("P3").build();
+            .withEmergencyContact("94351253").withAddress("little india").build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
-            .withEmergencyContact("94351253").withAddress("chicago ave")
-            .withSchoolLevel("P3").build();
+            .withEmergencyContact("94351253").withAddress("chicago ave").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY)
             .withPhone(VALID_PHONE_AMY).withEmergencyContact(VALID_EMERGENCY_CONTACT_AMY)
-            .withAddress(VALID_ADDRESS_AMY).withSubjects(VALID_SUBJECT_MATH)
-            .withSchoolLevel("JC2").build();
+            .withAddress(VALID_ADDRESS_AMY).withSubjects(VALID_SUBJECT_MATH).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB)
             .withPhone(VALID_PHONE_BOB).withEmergencyContact(VALID_EMERGENCY_CONTACT_BOB)
             .withAddress(VALID_ADDRESS_BOB).withSubjects(VALID_SUBJECT_MATH, VALID_SUBJECT_ENGLISH)
-            .withSchoolLevel("JC1").build();
+            .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

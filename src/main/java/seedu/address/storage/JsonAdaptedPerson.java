@@ -19,7 +19,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
 
-
 /**
  * Jackson-friendly version of {@link Person}.
  */
@@ -32,8 +31,8 @@ class JsonAdaptedPerson {
     private final String emergencyContact;
     private final String address;
     private final String note;
+    private final String level;
     private final List<JsonAdaptedSubject> subjects = new ArrayList<>();
-    private final String schoolLevel;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -42,16 +41,17 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("emergencyContact") String emergencyContact,
             @JsonProperty("address") String address, @JsonProperty("note") String note,
-            @JsonProperty("subjects") List<JsonAdaptedSubject> subjects, @JsonProperty("level") String schoolLevel) {
+            @JsonProperty("subjects") List<JsonAdaptedSubject> subjects,
+            @JsonProperty("level") String level) {
         this.name = name;
         this.phone = phone;
         this.emergencyContact = emergencyContact;
         this.address = address;
         this.note = note;
+        this.level = level;
         if (subjects != null) {
             this.subjects.addAll(subjects);
         }
-        this.schoolLevel = schoolLevel;
     }
 
     /**
@@ -63,16 +63,11 @@ class JsonAdaptedPerson {
         emergencyContact = source.getEmergencyContact().value;
         address = source.getAddress().value;
         note = source.getNote().value;
+        level = source.getLevel().levelName;
         subjects.addAll(source.getSubjects().stream()
                 .map(JsonAdaptedSubject::new)
                 .collect(Collectors.toList()));
-        if (source.getSchoolLevel() != null) {
-            schoolLevel = source.getSchoolLevel().levelName;
-        } else {
-            schoolLevel = "";
-        }
     }
-
 
     /**
      * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
@@ -125,18 +120,20 @@ class JsonAdaptedPerson {
 
         final Set<Subject> modelSubjects = new HashSet<>(personSubjects);
 
-        if (schoolLevel == null) {
+        if (level == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Level.class.getSimpleName()));
         }
-        if (!Level.isValidLevelName(schoolLevel)) {
+        if (!Level.isValidLevelName(level)) {
             throw new IllegalValueException(Level.MESSAGE_CONSTRAINTS);
         }
 
-        final Level modelLevel = new Level(schoolLevel);
+        final Level modelLevel = new Level(level);
 
         return new Person(modelName, modelPhone, modelEmergencyContact,
                 modelAddress, modelNote, modelSubjects, modelLevel);
+
+
     }
 
 }

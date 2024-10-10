@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -22,22 +23,24 @@ public class Person {
     // Data fields
     private final Address address;
     private final Note note;
-    private final Set<Subject> subjects;
-    private final Level schoolLevel;
+    private final Set<Subject> subjects = new HashSet<>();
+    private final Level level;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, EmergencyContact emergencyContact,
-                  Address address, Note note, Set<Subject> subjects, Level schoolLevel) {
-        requireAllNonNull(name, phone, address);
+                  Address address, Note note, Set<Subject> subjects, Level level) {
+        requireAllNonNull(name, phone, address, subjects);
         this.name = name;
         this.phone = phone;
         this.emergencyContact = emergencyContact;
         this.address = address;
-        this.note = note;
-        this.subjects = subjects;
-        this.schoolLevel = schoolLevel;
+        this.note = (note != null) ? note : new Note("");
+        if (!subjects.isEmpty()) {
+            this.subjects.addAll(subjects);
+        }
+        this.level = level;
     }
 
     public Name getName() {
@@ -55,9 +58,11 @@ public class Person {
     public Address getAddress() {
         return address;
     }
+
     public Note getNote() {
         return note;
     }
+
     /**
      * Returns an immutable subject set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -65,8 +70,9 @@ public class Person {
     public Set<Subject> getSubjects() {
         return Collections.unmodifiableSet(subjects);
     }
-    public Level getSchoolLevel() {
-        return schoolLevel;
+
+    public Level getLevel() {
+        return level;
     }
 
     /**
@@ -103,13 +109,14 @@ public class Person {
                 && emergencyContact.equals(otherPerson.emergencyContact)
                 && address.equals(otherPerson.address)
                 && note.equals(otherPerson.note)
+                && level.equals(otherPerson.level)
                 && subjects.equals(otherPerson.subjects);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, emergencyContact, address, note, subjects);
+        return Objects.hash(name, phone, emergencyContact, address, note, subjects, level);
     }
 
     @Override
@@ -121,6 +128,7 @@ public class Person {
                 .add("address", address)
                 .add("note", note)
                 .add("subjects", subjects)
+                .add("level", level)
                 .toString();
     }
 

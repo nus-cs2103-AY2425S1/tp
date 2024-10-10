@@ -23,8 +23,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMERGENCY_CONTACT = "93838383";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_NOTE = "";
-
-    public static final String DEFAULT_LEVEL = "JC1";
+    public static final String DEFAULT_LEVEL = "P3";
 
     private Name name;
     private Phone phone;
@@ -32,8 +31,7 @@ public class PersonBuilder {
     private Address address;
     private Note note;
     private Set<Subject> subjects;
-
-    private Level schoolLevel;
+    private Level level;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -45,8 +43,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         note = new Note(DEFAULT_NOTE);
         subjects = new HashSet<>();
-        schoolLevel = new Level(DEFAULT_LEVEL);
-
+        level = new Level(DEFAULT_LEVEL);
     }
 
     /**
@@ -59,7 +56,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         note = personToCopy.getNote();
         subjects = new HashSet<>(personToCopy.getSubjects());
-        schoolLevel = personToCopy.getSchoolLevel();
+        level = personToCopy.getLevel();
     }
 
     /**
@@ -113,13 +110,13 @@ public class PersonBuilder {
     /**
      * Sets the {@code Level} of the {@code Person} that we are building.
      */
-    public PersonBuilder withSchoolLevel(String schoolLevel) {
-        this.schoolLevel = new Level(schoolLevel);
+    public PersonBuilder withLevel(String level) {
+        this.level = !level.isEmpty() ? new Level(level) : new Level("NONE");
         return this;
     }
 
     public Person build() {
-        return new Person(name, phone, emergencyContact, address, note, subjects, schoolLevel);
+        return new Person(name, phone, emergencyContact, address, note, subjects, level);
     }
 
 }

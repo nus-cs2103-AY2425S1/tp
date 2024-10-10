@@ -125,6 +125,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String level} into a {@code Level}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code level} is invalid.
+     */
+    public static Level parseLevel(String level) throws ParseException {
+        requireNonNull(level);
+        String trimmedLevel = level.trim();
+        if (!Level.isValidLevelName(trimmedLevel)) {
+            throw new ParseException(Level.MESSAGE_CONSTRAINTS);
+        }
+        return new Level(trimmedLevel);
+    }
+
+    /**
      * Parses {@code Collection<String> subjects} into a {@code Set<Subject>}.
      */
     public static Set<Subject> parseSubjects(Collection<String> subjects) throws ParseException {

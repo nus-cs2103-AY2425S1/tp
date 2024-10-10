@@ -22,7 +22,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
 
-
 /**
  * Parses input arguments and creates a new AddCommand object
  */
@@ -53,10 +52,14 @@ public class AddCommandParser implements Parser<AddCommand> {
         Note note = new Note("");
         Set<Subject> subjectList = ParserUtil.parseSubjects(argMultimap.getAllValues(PREFIX_SUBJECT));
 
-        String levelValue = argMultimap.getValue(PREFIX_LEVEL).orElse(null);
-        Level schoolLevel = (levelValue != null) ? ParserUtil.parseSchoolLevel(levelValue) : null;
+        Level level = null;
+        if (argMultimap.getValue(PREFIX_LEVEL).isPresent()) {
+            level = ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get());
+        } else {
+            level = new Level("NONE");
+        }
 
-        Person person = new Person(name, phone, emergencyContact, address, note, subjectList, schoolLevel);
+        Person person = new Person(name, phone, emergencyContact, address, note, subjectList, level);
 
         return new AddCommand(person);
     }

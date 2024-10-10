@@ -43,13 +43,13 @@ public class TagCommand extends Command {
 
 
     private final Name nameToTag;
-    private final EditCommand.EditPersonDescriptor tagsToAdd;
+    private final UpdateCommand.UpdatePersonDescriptor tagsToAdd;
 
     /**
      * @param nameToTag name of the person in the address book to tag
      * @param tagsToAdd details to tag the person with
      */
-    public TagCommand(Name nameToTag, EditCommand.EditPersonDescriptor tagsToAdd) {
+    public TagCommand(Name nameToTag, UpdateCommand.UpdatePersonDescriptor tagsToAdd) {
         this.nameToTag = nameToTag;
         this.tagsToAdd = tagsToAdd;
     }
@@ -81,7 +81,7 @@ public class TagCommand extends Command {
 
     }
 
-    private static Person createPersonWithTags(Person personToTag, EditCommand.EditPersonDescriptor tagsToAdd) {
+    private static Person createPersonWithTags(Person personToTag, UpdateCommand.UpdatePersonDescriptor tagsToAdd) {
         assert personToTag != null;
 
         Name updatedName = tagsToAdd.getName().orElse(personToTag.getName());
@@ -91,7 +91,7 @@ public class TagCommand extends Command {
         Address updatedAddress = tagsToAdd.getAddress().orElse(personToTag.getAddress());
         Note updatedNote = tagsToAdd.getNote().orElse(personToTag.getNote());
         Set<Subject> updatedSubjects = tagsToAdd.getSubjects().orElse(personToTag.getSubjects());
-        Level schoolLevel = tagsToAdd.getSchoolLevel().orElse(personToTag.getSchoolLevel());
+        Level schoolLevel = tagsToAdd.getLevel().orElse(personToTag.getLevel());
         return new Person(updatedName, updatedPhone, updatedEmergencyContact,
                 updatedAddress, updatedNote, updatedSubjects, schoolLevel);
     }
