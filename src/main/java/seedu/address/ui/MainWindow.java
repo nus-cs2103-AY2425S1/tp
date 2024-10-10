@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
+import seedu.address.logic.Mode;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -32,6 +33,8 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private JobListPanel jobListPanel;
+    private CompanyListPanel companyListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -78,6 +81,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -100,7 +104,9 @@ public class MainWindow extends UiPart<Stage> {
          */
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
-                menuItem.getOnAction().handle(new ActionEvent());
+                menuItem
+                        .getOnAction()
+                        .handle(new ActionEvent());
                 event.consume();
             }
         });
@@ -111,16 +117,37 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        jobListPanel = new JobListPanel(logic.getFilteredJobList());
+        jobListPanel
+                .getRoot()
+                .setVisible(false);
+
+        companyListPanel = new CompanyListPanel(logic.getFilteredCompanyList());
+        companyListPanel
+                .getRoot()
+                .setVisible(false);
+
+        personListPanelPlaceholder
+                .getChildren()
+                .addAll(personListPanel.getRoot(),
+                        jobListPanel.getRoot(),
+                        companyListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
-        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+        resultDisplayPlaceholder
+                .getChildren()
+                .add(resultDisplay.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
-        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+        statusbarPlaceholder
+                .getChildren()
+                .add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
-        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+        commandBoxPlaceholder
+                .getChildren()
+                .add(commandBox.getRoot());
     }
 
     /**
@@ -130,8 +157,12 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.setHeight(guiSettings.getWindowHeight());
         primaryStage.setWidth(guiSettings.getWindowWidth());
         if (guiSettings.getWindowCoordinates() != null) {
-            primaryStage.setX(guiSettings.getWindowCoordinates().getX());
-            primaryStage.setY(guiSettings.getWindowCoordinates().getY());
+            primaryStage.setX(guiSettings
+                    .getWindowCoordinates()
+                    .getX());
+            primaryStage.setY(guiSettings
+                    .getWindowCoordinates()
+                    .getY());
         }
     }
 
@@ -167,6 +198,38 @@ public class MainWindow extends UiPart<Stage> {
         return personListPanel;
     }
 
+    // TODO: Not sure if this is the best approach, for further discussion
+    private void updateListPanel(Mode mode) {
+        personListPanel
+                .getRoot()
+                .setVisible(false);
+        jobListPanel
+                .getRoot()
+                .setVisible(false);
+        companyListPanel
+                .getRoot()
+                .setVisible(false);
+        switch (mode) {
+        case JOB:
+            jobListPanel
+                    .getRoot()
+                    .setVisible(true);
+            break;
+        case COMPANY:
+            companyListPanel
+                    .getRoot()
+                    .setVisible(true);
+            break;
+        case CONTACT:
+            personListPanel
+                    .getRoot()
+                    .setVisible(true);
+            break;
+        default:
+            assert(false); // this should never happen
+        }
+    }
+
     /**
      * Executes the command and returns the result.
      *
@@ -176,6 +239,8 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
+            // TODO: Doesn't look like the best approach, for further discussion
+            updateListPanel(commandResult.getMode());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowHelp()) {

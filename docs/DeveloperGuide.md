@@ -262,42 +262,49 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* solo, freelance third party recruiters
+* manages a significant number of candidate contacts
+* has to quickly locate contacts that fit a job listing
 * prefer desktop apps over other types
-* can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: manage contacts faster than a typical mouse/GUI driven app with functionality for quick matching of candidates to jobs
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​ | I want to …​                         | So that I can…​                                      |
+|----------|---------|--------------------------------------|------------------------------------------------------|
+| `* * *`  | user    | list all contacts                    |                                                      |
+| `* * *`  | user    | create a contact                     |                                                      |
+| `* * *`  | user    | remove a contact                     | remove contact information that I no longer need     |
+| `* * *`  | user    | list all job listings                |
+| `* * *`  | user    | create a job listing                 |  
+| `* * *`  | user    | remove a job listing                 | remove job listing information that I no longer need |
+| `* * *`  | user    | filter contacts based on job listing | focus on contacting talents that fits the job        |
+| `* * *`  | user    | list all companies                   |                                                      |
+| `* * *`  | user    | create a company                     | group and organize contacts and job listings         |
+| `* * *`  | user    | delete a company                     | remove company information that I no longer need     |
+| `* * *`  | user    | view company details                 | view relevant information of a company together      |
 
-*{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `AddressBook` 
+and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Delete contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list contacts
+2.  AddressBook shows a list of contacts
+3.  User requests to delete a specific contact in the list
+4.  AddressBook deletes the contacts
+5.  AddressBook returns an updated list of contacts along with success message.
 
     Use case ends.
 
@@ -313,7 +320,79 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: Screen a job listing**
+
+**MSS**
+
+1.  User requests to list job listings
+2.  AddressBook shows a list of job listings
+3.  User requests to screen all contact based on the requirements of a job listing
+4.  AddressBook return a list of contacts that fits the job requirements
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+* 4a. The list is empty.
+
+  Use case ends.
+
+**Use case: Add contact** 
+
+**MSS**
+
+1. User requests to add contact.
+2. AddressBook returns an updated list of contacts with a success message.
+   Use case ends.
+
+**Extensions** 
+
+* 1a. The given parameters are invalid. 
+
+    * 1a1. AddressBook shows an error message.
+  
+      Use case ends. 
+
+**Use case: Add a company **
+
+**MSS**
+
+1. User requests to add a company.
+2. AddressBook returns an updated list of companies with a success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The given parameters are invalid.
+    * 1a1. AddressBook shows an error message.
+
+      Use case ends.
+
+**Use case: List companies **
+
+**MSS**
+
+1. User requests to list companies.
+2. AddressBook shows the list of companies.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. List of companies is empty.
+
+    Use case ends.
 
 ### Non-Functional Requirements
 
@@ -326,7 +405,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
 
