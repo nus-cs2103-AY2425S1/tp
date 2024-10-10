@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Appointment;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -20,12 +22,16 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_BIRTHDAY = "1990-10-10";
+    public static final String DEFAULT_APPOINTMENT = "2024-12-12 12:00";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private Birthday birthday;
+    private Appointment appointment;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -35,6 +41,8 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        birthday = new Birthday(DEFAULT_BIRTHDAY);
+        appointment = new Appointment(DEFAULT_APPOINTMENT);
         tags = new HashSet<>();
     }
 
@@ -42,11 +50,13 @@ public class PersonBuilder {
      * Initializes the PersonBuilder with the data of {@code personToCopy}.
      */
     public PersonBuilder(Person personToCopy) {
-        name = personToCopy.getName();
-        phone = personToCopy.getPhone();
-        email = personToCopy.getEmail();
-        address = personToCopy.getAddress();
-        tags = new HashSet<>(personToCopy.getTags());
+        this.name = personToCopy.getName();
+        this.phone = personToCopy.getPhone();
+        this.email = personToCopy.getEmail();
+        this.address = personToCopy.getAddress();
+        this.birthday = personToCopy.getBirthday();
+        this.appointment = personToCopy.getAppointment();
+        this.tags = new HashSet<>(personToCopy.getTags());
     }
 
     /**
@@ -89,8 +99,25 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Appointment} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withAppointment(String appointment) {
+        this.appointment = new Appointment(appointment);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Birthday} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withBirthday(String birthday) {
+        this.birthday = new Birthday(birthday);
+        return this;
+    }
+
+
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, phone, email, address, tags, appointment, birthday);
     }
 
 }

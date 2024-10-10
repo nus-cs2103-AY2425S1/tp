@@ -10,6 +10,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Appointment;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -46,6 +48,24 @@ public class ParserUtil {
         String trimmedName = name.trim();
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        return new Name(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String name} into a {@code Name} with a custom error message.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param name The name to be parsed.
+     * @param customErrorMessage The custom error message to be used if the name is invalid.
+     * @return A {@code Name} object if the given {@code name} is valid.
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static Name parseName(String name, String customErrorMessage) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!Name.isValidName(trimmedName)) {
+            throw new ParseException(customErrorMessage);
         }
         return new Name(trimmedName);
     }
@@ -120,5 +140,31 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses {@code String birthday} into a {@code Birthday}.
+     */
+    public static Birthday parseBirthday(String birthday) throws ParseException {
+        requireNonNull(birthday);
+        String trimmedBirthday = birthday.trim();
+        System.out.println(trimmedBirthday);
+        if (!Birthday.isValidBirthday(trimmedBirthday)) {
+            throw new ParseException(Birthday.MESSAGE_CONSTRAINTS);
+        }
+        return new Birthday(birthday);
+    }
+
+    /**
+     * Parses {@code String appointment} into a {@code Appointment}.
+     */
+    public static Appointment parseAppointment(String appointment) throws ParseException {
+        requireNonNull(appointment);
+        String trimmedAppointment = appointment.trim();
+        System.out.println(trimmedAppointment);
+        if (!Appointment.isValidAppointment(trimmedAppointment)) {
+            throw new ParseException(Appointment.MESSAGE_CONSTRAINTS);
+        }
+        return new Appointment(appointment);
     }
 }
