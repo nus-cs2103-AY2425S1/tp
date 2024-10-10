@@ -43,7 +43,9 @@ public class Messages {
                 .append("; Email: ")
                 .append(person.getEmail())
                 .append("; Address: ")
-                .append(person.getAddress());
+                .append(person.getAddress())
+                .append("; Priority: ")
+                .append(person.getPriority());
 
         String value = person.getRemark().value;
         if (!value.isEmpty()) {
