@@ -39,13 +39,13 @@ public class PersonTest {
         // same nric, all other attributes different -> returns true
         Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withName(VALID_NAME_BOB).withDateOfBirth(VALID_DOB_BOB).withGender(VALID_GENDER_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).withPriority(VALID_PRIORITY_BOB).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // different nric, all other attributes same -> returns false
         editedAlice = new PersonBuilder(ALICE).withNric(VALID_NRIC_BOB).build();
         assertFalse(ALICE.isSamePerson(editedAlice));
-
+        
     }
 
     @Test
@@ -101,6 +101,8 @@ public class PersonTest {
         // different priority -> returns false
         editedAlice = new PersonBuilder(ALICE).withPriority(VALID_PRIORITY_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
+
+
     }
 
     @Test
