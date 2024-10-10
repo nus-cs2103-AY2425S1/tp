@@ -26,8 +26,9 @@ public class CreateEventCommandParserTest {
         Event expectedEvent = excursionEvent;
 
         // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + PREFIX_NAME + "Zoo Excursion" + " " + PREFIX_DATE
-                + "2024-10-10", new CreateEventCommand(expectedEvent));
+        assertParseSuccess(parser,
+                PREAMBLE_WHITESPACE + " " + PREFIX_NAME + "Zoo Excursion" + " " + PREFIX_DATE + "2024-10-10",
+                new CreateEventCommand(expectedEvent));
     }
 
     @Test
