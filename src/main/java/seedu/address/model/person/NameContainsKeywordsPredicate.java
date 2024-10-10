@@ -18,23 +18,33 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
+
+        String fullNameLowerCase = person.getName().fullName.toLowerCase();
+
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword));
+                .map(String::toLowerCase)
+                .anyMatch(keyword -> fullNameLowerCase.contains(keyword));
+//        return keywords.stream()
+//                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword));
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
 
-        // instanceof handles nulls
-        if (!(other instanceof NameContainsKeywordsPredicate)) {
-            return false;
-        }
-
-        NameContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (NameContainsKeywordsPredicate) other;
-        return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
+        return other == this
+                || (other instanceof NameContainsKeywordsPredicate
+                && keywords.equals(((NameContainsKeywordsPredicate) other).keywords));
+//        if (other == this) {
+//            return true;
+//        }
+//
+//        // instanceof handles nulls
+//        if (!(other instanceof NameContainsKeywordsPredicate)) {
+//            return false;
+//        }
+//
+//        NameContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (NameContainsKeywordsPredicate) other;
+//        return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
     }
 
     @Override

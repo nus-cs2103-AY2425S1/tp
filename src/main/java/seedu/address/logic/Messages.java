@@ -22,6 +22,14 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_DUPLICATE_PREFIX = "Duplicate prefix '%1$s' found. Please provide each parameter"
+            + " only once.";
+    public static final String MESSAGE_NAME_CANNOT_BE_EMPTY = "Name cannot be empty.";
+    public static final String MESSAGE_INVALID_CHARACTER_IN_NAME = "Invalid character '/' in name.";
+    public static final String MESSAGE_INVALID_STUDENT_ID_FORMAT = "Invalid Student ID format. It should be 9"
+            + " characters with letters at the start and end, and digits in between (e.g., 'A1234567E').";
+    public static final String MESSAGE_NO_STUDENTS_FOUND = "No students found matching the criteria.";
+
 
     /**
      * Returns an error message indicating the duplicate prefixes.
