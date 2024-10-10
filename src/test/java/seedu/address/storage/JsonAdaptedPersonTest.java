@@ -117,7 +117,7 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_invalidRegisterNumber_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                INVALID_REGISTER_NUMBER, VALID_SEX, VALID_TAGS);
+                INVALID_REGISTER_NUMBER, VALID_SEX, VALID_STUDENT_CLASS, VALID_TAGS);
         String expectedMessage = RegisterNumber.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
