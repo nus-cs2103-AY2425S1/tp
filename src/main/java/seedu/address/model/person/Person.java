@@ -24,6 +24,7 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final EmergencyContact emergencyContact;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -36,6 +37,7 @@ public class Person {
         this.email = email;
         this.roomNumber = roomNumber;
         this.address = address;
+        this.emergencyContact = new EmergencyContact(new Name("Aiken"), new Phone("12345678"));
         this.tags.addAll(tags);
     }
 
@@ -55,6 +57,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public EmergencyContact getEmergencyContact() {
+        return emergencyContact;
     }
 
     /**
@@ -79,6 +85,19 @@ public class Person {
     }
 
     /**
+     * Returns true if both persons have the same number.
+     * This checks if the address book already contains someone with the same number.
+     */
+    public boolean isSameNumber(Person otherPerson) {
+        if (otherPerson == this) {
+            return true;
+        }
+
+        return otherPerson != null
+                && otherPerson.getPhone().equals(getPhone());
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
@@ -99,13 +118,14 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && roomNumber.equals(otherPerson.roomNumber)
                 && address.equals(otherPerson.address)
+                && emergencyContact.equals(otherPerson.emergencyContact)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, roomNumber, address, tags);
+        return Objects.hash(name, phone, email, roomNumber, address, emergencyContact, tags);
     }
 
     @Override
@@ -116,6 +136,7 @@ public class Person {
                 .add("email", email)
                 .add("room number", roomNumber)
                 .add("address", address)
+                .add("emergencyContact", emergencyContact)
                 .add("tags", tags)
                 .toString();
     }
