@@ -112,7 +112,7 @@ public class StringUtilTest {
 
         // Query word is substring of sentence word
         assertTrue(StringUtil.containsWordIgnoreCase("aaa bbb ccc", "bb"));
-        // Sentence word is substring of sentence word
+        // Sentence word is substring of query word
         assertFalse(StringUtil.containsWordIgnoreCase("aaa bbb ccc", "bbbb"));
 
         // Matches word in the sentence, different upper/lower case letters
