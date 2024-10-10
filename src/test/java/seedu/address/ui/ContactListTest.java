@@ -3,10 +3,12 @@ package seedu.address.ui;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeoutException;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
@@ -41,6 +43,12 @@ public class ContactListTest {
 
         // assertDoesNotThrow(() -> ersonList),
         //     "We should not be getting an exception");
+    }
+
+    @AfterAll
+    static void tearDownOnce() {
+        // Shut down the JavaFX application
+        Platform.exit();
     }
 
 }
