@@ -3,10 +3,8 @@ package seedu.address.ui;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 
@@ -15,26 +13,109 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String DELETECOMMAND =
+            """
+             1. delete <e/ph> <index>
+
+             Deletes the entry in the employee or potential hire list
+             at index.
+
+             Example: delete e 1
+
+             """;
+    public static final String EMPLOYEECOMMAND =
+            """
+             2. employee n/<name> p/<phone number> a/<address> e/<email>
+             d/<department> r/<role> ced/<contract end date>
+
+             Adds an entry in the employee list with the corresponding information.
+
+             Example: employee n/John Doe p/81234567 a/21 Lower Kent Ridge Rd
+             e/johndoe@gmail.com d/Department of informatics r/Head of Informatics
+             ced/01-01-2021
+
+             """;
+
+    public static final String EXITCOMMAND =
+            """
+             3. exit
+
+             Terminates the program.
+
+             Example: exit
+
+             """;
+
+    public static final String FINDCOMMAND =
+            """
+             4. find <e/ph> <keyword>
+
+             Displays a list of entries that contains the keyword in the
+             corresponding employee or potential hire list.
+
+             Example: find e John
+
+             """;
+    public static final String HELPCOMMAND =
+             """
+             5. help
+
+             Displays a window containing all the list of commands, its purpose
+             and how to use them.
+
+             Example: help
+
+             """;
+
+    public static final String LISTCOMMAND =
+            """
+             6. list <e/ph>
+
+             Displays a list of entries with their information in the
+             corresponding employee or potential hire list.
+
+             Example: list e
+
+             """;
+
+    public static final String POTENTIALCOMMAND =
+            """
+             7. potential n/<name> p/<phone number> a/<address> e/<email>
+             d/<department> r/<role>
+
+             Adds an entry in the potential hire list with the corresponding information.
+
+             Example: potential n/John Doe p/81234567 a/21 Lower Kent Ridge Rd
+             e/johndoe@gmail.com d/Department of informatics r/Head of Informatics
+
+             """;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
 
     @FXML
-    private Button copyButton;
-
-    @FXML
-    private Label helpMessage;
+    private TextFlow helpMessage;
 
     /**
-     * Creates a new HelpWindow.
+     * Creates a new HelpWindow. HelpWindow will display a list of commands
      *
      * @param root Stage to use as the root of the HelpWindow.
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-        helpMessage.setText(HELP_MESSAGE);
+        StringBuilder helpMessageBuilder = new StringBuilder("List of Commands: \n\n");
+        helpMessageBuilder.append(DELETECOMMAND);
+        helpMessageBuilder.append(EMPLOYEECOMMAND);
+        helpMessageBuilder.append(EXITCOMMAND);
+        helpMessageBuilder.append(FINDCOMMAND);
+        helpMessageBuilder.append(HELPCOMMAND);
+        helpMessageBuilder.append(LISTCOMMAND);
+        helpMessageBuilder.append(POTENTIALCOMMAND);
+        String message = helpMessageBuilder.toString();
+        for (String line : message.split("\n")) {
+            Text textLine = new Text(line + "\n");
+            helpMessage.getChildren().add(textLine);
+        }
     }
 
     /**
@@ -89,14 +170,4 @@ public class HelpWindow extends UiPart<Stage> {
         getRoot().requestFocus();
     }
 
-    /**
-     * Copies the URL to the user guide to the clipboard.
-     */
-    @FXML
-    private void copyUrl() {
-        final Clipboard clipboard = Clipboard.getSystemClipboard();
-        final ClipboardContent url = new ClipboardContent();
-        url.putString(USERGUIDE_URL);
-        clipboard.setContent(url);
-    }
 }
