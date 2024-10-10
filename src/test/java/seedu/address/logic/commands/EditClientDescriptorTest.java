@@ -63,9 +63,8 @@ public class EditClientDescriptorTest {
         String expected = EditPersonDescriptor.class.getCanonicalName() + "{name="
                 + editPersonDescriptor.getName().orElse(null) + ", phone="
                 + editPersonDescriptor.getPhone().orElse(null) + ", email="
-                + editPersonDescriptor.getEmail().orElse(null)
-//                + editPersonDescriptor.getAddress().orElse(null) + ", tags="
-                + ", tags="
+                + editPersonDescriptor.getEmail().orElse(null) + ", tags="
+                + editPersonDescriptor.getTags().orElse(null) + ", rental information="
                 + editPersonDescriptor.getTags().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }

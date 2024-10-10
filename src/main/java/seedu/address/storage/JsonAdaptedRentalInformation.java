@@ -12,10 +12,9 @@ import seedu.address.model.rentalinformation.MonthlyRent;
 import seedu.address.model.rentalinformation.RentDueDate;
 import seedu.address.model.rentalinformation.RentalDate;
 import seedu.address.model.rentalinformation.RentalInformation;
-import seedu.address.model.tag.Tag;
 
 /**
- * Jackson-friendly version of {@link Tag}.
+ * Jackson-friendly version of {@link RentalInformation}.
  */
 class JsonAdaptedRentalInformation {
 
@@ -29,7 +28,8 @@ class JsonAdaptedRentalInformation {
     private final String customerList;
 
     /**
-     * Constructs a {@code JsonAdaptedTag} with the given {@code tagName}.
+     * Constructs a {@code JsonAdaptedRentalInformation} with the given {@code address}, {@code rentalStartDate},
+     * {@code rentalEndDate}, {@code rentDueDate}, {@code monthlyRent}, {@code deposit}, {@code customerList}.
      */
     @JsonCreator
     public JsonAdaptedRentalInformation(@JsonProperty("address") String address,
@@ -49,7 +49,7 @@ class JsonAdaptedRentalInformation {
     }
 
     /**
-     * Converts a given {@code Tag} into this class for Jackson use.
+     * Converts a given {@code RentalInformation} into this class for Jackson use.
      */
     public JsonAdaptedRentalInformation(RentalInformation source) {
         this.address = source.getAddress().value;
@@ -64,9 +64,10 @@ class JsonAdaptedRentalInformation {
     }
 
     /**
-     * Converts this Jackson-friendly adapted tag object into the model's {@code Tag} object.
+     * Converts this Jackson-friendly adapted RentalInformation object into the model's {@code RentalInformation}
+     * object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted RentalInformation.
      */
     public RentalInformation toModelType() throws IllegalValueException {
         final Address modelAddress = modelAddressFunction();
@@ -95,7 +96,8 @@ class JsonAdaptedRentalInformation {
 
     private RentalDate modelRentalStartDateFunction() throws IllegalValueException {
         if (rentalStartDate == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, RentalDate.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    RentalDate.class.getSimpleName()));
         }
 
         if (!RentalDate.isValidRentalDate(rentalStartDate)) {
@@ -107,7 +109,8 @@ class JsonAdaptedRentalInformation {
 
     private RentalDate modelRentalEndDateFunction() throws IllegalValueException {
         if (rentalEndDate == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, RentalDate.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    RentalDate.class.getSimpleName()));
         }
 
         if (!RentalDate.isValidRentalDate(rentalEndDate)) {
@@ -119,7 +122,8 @@ class JsonAdaptedRentalInformation {
 
     private RentDueDate modelRentDueDateFunction() throws IllegalValueException {
         if (rentDueDate == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, RentDueDate.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    RentDueDate.class.getSimpleName()));
         }
 
         if (!RentDueDate.isValidDueDate(rentDueDate)) {
@@ -131,7 +135,8 @@ class JsonAdaptedRentalInformation {
 
     private MonthlyRent modelMonthlyRentFunction() throws IllegalValueException {
         if (monthlyRent == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, MonthlyRent.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    MonthlyRent.class.getSimpleName()));
         }
 
         if (!MonthlyRent.isValidMonthlyRent(monthlyRent)) {
@@ -143,7 +148,8 @@ class JsonAdaptedRentalInformation {
 
     private Deposit modelDepositFunction() throws IllegalValueException {
         if (deposit == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Deposit.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Deposit.class.getSimpleName()));
         }
 
         if (!Deposit.isValidDeposit(deposit)) {
@@ -155,7 +161,8 @@ class JsonAdaptedRentalInformation {
 
     private CustomerList modelCustomerListFunction() throws IllegalValueException {
         if (customerList == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, CustomerList.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    CustomerList.class.getSimpleName()));
         }
 
         if (!CustomerList.isValidCustomerList(customerList)) {

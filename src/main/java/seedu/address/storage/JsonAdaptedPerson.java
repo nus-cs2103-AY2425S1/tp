@@ -8,12 +8,12 @@ import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
-import seedu.address.model.rentalinformation.Address;
 import seedu.address.model.rentalinformation.RentalInformation;
 import seedu.address.model.tag.Tag;
 
@@ -105,5 +105,4 @@ class JsonAdaptedPerson {
 
         return new Client(modelName, modelPhone, modelEmail, modelTags, modelRentalInformation);
     }
-
 }

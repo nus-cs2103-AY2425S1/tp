@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-//import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -20,14 +19,13 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
-import seedu.address.model.rentalinformation.Address;
 import seedu.address.model.rentalinformation.RentalInformation;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.Model;
 
 /**
  * Edits the details of an existing client in the address book.
@@ -137,7 +135,6 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
-//        private Address address;
         private Set<Tag> tags;
         private Set<RentalInformation> rentalInformationList;
 
@@ -157,9 +154,6 @@ public class EditCommand extends Command {
         /**
          * Returns true if at least one field is edited.
          */
-//        public boolean isAnyFieldEdited() {
-//            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
-//        }
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, tags);
         }
@@ -215,7 +209,9 @@ public class EditCommand extends Command {
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
         public Optional<Set<RentalInformation>> getRentalInformationList() {
-            return (rentalInformationList != null) ? Optional.of(Collections.unmodifiableSet(rentalInformationList)) : Optional.empty();
+            return (rentalInformationList != null)
+                    ? Optional.of(Collections.unmodifiableSet(rentalInformationList))
+                    : Optional.empty();
         }
 
         @Override

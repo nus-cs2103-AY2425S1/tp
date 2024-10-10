@@ -8,7 +8,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.client.Client;
-import seedu.address.model.rentalinformation.RentalInformation;
 
 /**
  * An UI component that displays information of a {@code Client}.
