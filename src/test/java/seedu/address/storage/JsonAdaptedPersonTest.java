@@ -116,5 +116,5 @@ public class JsonAdaptedPersonTest {
                         VALID_ADDRESS, VALID_HOURS, invalidTags);
         assertThrows(IllegalValueException.class, person::toModelType);
     }
-     // TODO write test case for missing hours
+    // TODO write test case for missing hours
 }
