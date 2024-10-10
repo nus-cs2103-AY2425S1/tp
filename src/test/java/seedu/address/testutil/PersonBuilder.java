@@ -1,9 +1,12 @@
 package seedu.address.testutil;
 
+import static java.util.Objects.checkIndex;
+
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.ClientStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -22,6 +25,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_PROJECT_STATUS = "in progress";
+    public static final String DEFAULT_CLIENT_STATUS = "active";
 
     private Name name;
     private Phone phone;
@@ -29,6 +33,7 @@ public class PersonBuilder {
     private Address address;
     private Set<Tag> tags;
     private ProjectStatus projectStatus;
+    private ClientStatus clientStatus;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -40,6 +45,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         projectStatus = new ProjectStatus(DEFAULT_PROJECT_STATUS);
+        clientStatus = new ClientStatus(DEFAULT_CLIENT_STATUS);
     }
 
     /**
@@ -52,6 +58,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
         projectStatus = personToCopy.getProjectStatus();
+        clientStatus = personToCopy.getClientStatus();
     }
 
     /**
@@ -102,8 +109,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code ClientStatus} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withClientStatus(String clientStatus) {
+        this.clientStatus = new ClientStatus(clientStatus);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, tags, projectStatus);
+        return new Person(name, phone, email, address, tags, projectStatus, clientStatus);
     }
 
 }
