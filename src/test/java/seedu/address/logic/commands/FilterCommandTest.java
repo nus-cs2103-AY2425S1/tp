@@ -93,6 +93,24 @@ public class FilterCommandTest {
         }
 
         @Override
+        public void savePersonToDelete(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean checkRestorable() {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void makeNotRestorable() {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public Person getLastDeletedPerson() {
+            throw new AssertionError("This method should not be called.");
+        }
+        
+        @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
