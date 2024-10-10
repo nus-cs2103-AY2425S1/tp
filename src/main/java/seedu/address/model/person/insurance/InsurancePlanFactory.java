@@ -13,6 +13,7 @@ public class InsurancePlanFactory {
 
     /**
      * Creates InsurancePlan Object based on the given insurance id.
+     *
      * @param insurancePlanId an integer representing the insurance plan that the user wants to create.
      * @return InsurancePlan Object that the user wants to create.
      * @throws ParseException if the insuranceId is not a valid input (Insurance plan does not exist).
@@ -29,6 +30,7 @@ public class InsurancePlanFactory {
 
     /**
      * Creates InsurancePlan Object based on the given insurance plan name.
+     *
      * @param insurancePlanName a string representing the insurance plan that the user wants to create.
      * @return InsurancePlan Object that the user wants to create.
      * @throws ParseException if the insuranceId is not a valid input (Insurance plan does not exist).

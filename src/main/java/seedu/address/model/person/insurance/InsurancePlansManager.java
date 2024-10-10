@@ -26,8 +26,20 @@ public class InsurancePlansManager {
         this.insurancePlans = new ArrayList<>();
     }
 
+    /**
+     * Constructs an {@code InsurancePlansManager} by initializing it with a string representing saved insurance plans.
+     *
+     * @param insurancePlansString the string representing saved insurance plans. If no insurance plans have been
+     *                             added, it should be "No added plans".
+     * @throws ParseException if the string cannot be parsed into valid insurance plans.
+     * @throws AssertionError if the insurancePlansString is an empty string or contains only whitespace.
+     */
     public InsurancePlansManager(String insurancePlansString) throws ParseException{
         this();
+        assert insurancePlansString.trim().isEmpty() :
+                "Saved insurance plans string must not be an empty string. "
+                        + "If no insurance plans have been added, it will be \"No added plans\" ";
+
         if (!insurancePlansString.equals("No added plans")) {
             String[] planNames = insurancePlansString.split(", ");
             for (String planName : planNames) {
@@ -100,7 +112,7 @@ public class InsurancePlansManager {
      */
     @Override
     public String toString() {
-        StringBuilder plans = new StringBuilder("");
+        StringBuilder plans = new StringBuilder();
         for (InsurancePlan plan : insurancePlans) {
             plans.append(plan.toString()).append(", ");
         }

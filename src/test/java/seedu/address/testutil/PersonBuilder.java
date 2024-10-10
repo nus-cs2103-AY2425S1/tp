@@ -9,8 +9,6 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.insurance.InsurancePlan;
-import seedu.address.model.person.insurance.InsurancePlanFactory;
 import seedu.address.model.person.insurance.InsurancePlansManager;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -101,12 +99,7 @@ public class PersonBuilder {
      */
     public PersonBuilder withInsurancePlansManager(String insurancePlansString) {
         try {
-        this.insurancePlansManager = new InsurancePlansManager(insurancePlansString);
-//        try {
-//            for (InsurancePlan plan : insurancePlansManager.getInsurancePlans()) {
-//                InsurancePlan planToBeAdded = InsurancePlanFactory.createInsurancePlan(plan.getInsurancePlanId());
-//                this.insurancePlansManager.addPlan(planToBeAdded);
-//            }
+            this.insurancePlansManager = new InsurancePlansManager(insurancePlansString);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
