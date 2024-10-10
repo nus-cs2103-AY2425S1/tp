@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -21,5 +22,16 @@ public class TutorialTest {
     public void isValidTutorialName() {
         // null tag name
         assertThrows(NullPointerException.class, () -> Tutorial.isValidTutorial(null));
+    }
+
+    @Test
+    public void equals() {
+        // is itself
+        assertTrue(this.equals(this));
+
+        // different instance, same tutorial
+        Tutorial firstTutorial = new Tutorial("1");
+        Tutorial duplicateTutorial = new Tutorial("1");
+        assertTrue(firstTutorial.equals(duplicateTutorial));
     }
 }

@@ -86,4 +86,13 @@ public class MarkCommandTest {
         String expectedMessage = String.format(MarkCommand.MESSAGE_ADD_MARK_SUCCESS, Messages.format(editedPerson));
         assertCommandSuccess(markCommand, model, expectedMessage, expectedModel);
     }
+
+    @Test
+    public void equals_duplicateTutorial_success() {
+        Tutorial firstTutorial = new Tutorial("1");
+        Tutorial duplicateTutorial = new Tutorial("1");
+
+        assertTrue(new MarkCommand(INDEX_FIRST_PERSON, firstTutorial)
+                .equals(new MarkCommand(INDEX_FIRST_PERSON, duplicateTutorial)));
+    }
 }
