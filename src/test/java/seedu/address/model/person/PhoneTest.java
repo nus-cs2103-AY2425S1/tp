@@ -21,7 +21,7 @@ public class PhoneTest {
 
     @Test
     public void isValidPhone() {
-        // null phone value
+        // null phone number
         assertThrows(NullPointerException.class, () -> Phone.isValidPhone(null));
 
         // invalid phone numbers
