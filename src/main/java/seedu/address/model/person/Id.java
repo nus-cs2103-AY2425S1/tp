@@ -11,7 +11,11 @@ public class Id {
     private int id;
     private Class<? extends Person> role;
 
-    // Constructor that takes in a class type (Doctor or Patient)
+    /**
+     * Creates an Id that is associated with a specific class.
+     *
+     * @param personClass Either Doctor or Patient class.
+     */
     public Id(Class<? extends Person> personClass) {
         requireNonNull(personClass);
         this.role = personClass;
@@ -26,12 +30,10 @@ public class Id {
         }
     }
 
-    // Getter for the ID
     public int getId() {
         return id;
     }
 
-    // Getter for the role (class type)
     public Class<? extends Person> getRole() {
         return role;
     }
