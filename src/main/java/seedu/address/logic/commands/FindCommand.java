@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.List;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
@@ -9,7 +11,6 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
-import java.util.List;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -28,13 +29,30 @@ public class FindCommand extends Command {
 
 
     private final NameContainsKeywordsPredicate predicate;
-//
+
     private final GroupContainsKeywordsPredicate groupPredicate;
 
+
+    /**
+     * Constructs a {@code FindCommand} for searching persons by name.
+     * The command will filter the address book to find all persons whose names contain any of the
+     * keywords specified in the given {@code NameContainsKeywordsPredicate}.
+     *
+     * @param predicate The {@code NameContainsKeywordsPredicate} that defines the search criteria based on name.
+     */
     public FindCommand(NameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
         this.groupPredicate = null;
     }
+
+    /**
+     * Constructs a {@code FindCommand} for searching persons by group.
+     * The command will filter the address book to find all persons who belong to groups
+     * whose names contain any of the keywords specified in the given {@code GroupContainsKeywordsPredicate}.
+     *
+     * @param groupPredicate The {@code GroupContainsKeywordsPredicate}
+     *      that defines the search criteria based on group membership.
+     */
 
     public FindCommand(GroupContainsKeywordsPredicate groupPredicate) {
         this.predicate = null;

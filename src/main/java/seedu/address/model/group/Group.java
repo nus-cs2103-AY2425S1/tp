@@ -42,15 +42,6 @@ public class Group {
         return members;
     }
 
-    public boolean isSameGroup(Group otherGroup) {
-        if (otherGroup == this) {
-            return true;
-        }
-
-        return otherGroup != null
-                && otherGroup.getGroupName().equals(getGroupName());
-    }
-
     /**
      * Returns a string representation of the group, including the group name and members.
      *
