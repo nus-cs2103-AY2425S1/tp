@@ -69,8 +69,10 @@ public abstract class Person {
             return true;
         }
 
+        // Case insensitive comparison
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getName().fullName
+                        .equalsIgnoreCase(getName().fullName);
     }
 
     /**
@@ -118,4 +120,6 @@ public abstract class Person {
 
     @Override
     public abstract String toString();
+
+    public abstract String reflectType();
 }

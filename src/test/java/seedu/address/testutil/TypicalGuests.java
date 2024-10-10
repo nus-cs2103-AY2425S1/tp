@@ -54,29 +54,11 @@ public class TypicalGuests {
             .withEmail("ella.thompson@example.com")
             .withRsvp("PENDING")
             .withAddress("michegan ave").build();
-    public static final Guest FAITH = new GuestBuilder().withName("Faith Garcia")
-            .withPhone("9482427")
-            .withEmail("faith.garcia@example.com")
-            .withRsvp("DECLINED")
-            .withAddress("little tokyo").build();
     public static final Guest GAVIN = new GuestBuilder().withName("Gavin Kim")
             .withPhone("9482442")
             .withEmail("gavin.kim@example.com")
             .withRsvp("ACCEPTED")
             .withAddress("4th street").build();
-
-
-    // Manually added
-    public static final Guest HOON = new GuestBuilder().withName("Hoon Meier")
-            .withPhone("8482424")
-            .withEmail("stefan@example.com")
-            .withAddress("little india")
-            .withRsvp("ACCEPTED").build();
-    public static final Guest IDA = new GuestBuilder().withName("Ida Mueller")
-            .withPhone("8482131")
-            .withEmail("hans@example.com")
-            .withAddress("chicago ave")
-            .withRsvp("PENDING").build();
 
     // Manually added - Guest's details found in {@code CommandTestUtil}
     public static final Guest AMY = new GuestBuilder().withName(VALID_NAME_AMY)

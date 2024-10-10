@@ -4,37 +4,28 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Company;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Guest;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Rsvp;
-import seedu.address.model.person.Vendor;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Person objects.
  */
-public class PersonBuilder {
-
+public class PersonBuilder<T extends PersonBuilder<T>> {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_COMPANY = "The Wedding People";
-    public static final String DEFAULT_RSVP = "PENDING";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Set<Tag> tags;
-    private Company company;
-    private Rsvp rsvp;
-    private boolean isVendor;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -45,9 +36,6 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
-        company = new Company(DEFAULT_COMPANY);
-        rsvp = new Rsvp(DEFAULT_RSVP);
-        isVendor = false;
     }
 
     /**
@@ -59,62 +47,74 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+    }
 
-        if (personToCopy instanceof Vendor) {
-            isVendor = true;
-            company = ((Vendor) personToCopy).getCompany();
-        } else {
-            isVendor = false;
-            rsvp = ((Guest) personToCopy).getRsvp();
-        }
+    public Name getName() {
+        return name;
+    }
+
+    public Phone getPhone() {
+        return phone;
+    }
+
+    public Email getEmail() {
+        return email;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public Set<Tag> getTags() {
+        return tags;
+    }
+
+    @SuppressWarnings("unchecked")
+    // T can only be GuestBuilder or VendorBuilder
+    // Both are subtypes of PersonBuilder
+    // Hence, this narrowing type conversion is safe!
+    protected T self() {
+        return (T) this;
     }
 
     /**
      * Sets the {@code Name} of the {@code Person} that we are building.
      */
-    public PersonBuilder withName(String name) {
+    public T withName(String name) {
         this.name = new Name(name);
-        return this;
+        return self();
     }
 
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
+    public T withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
-        return this;
+        return self();
     }
 
     /**
      * Sets the {@code Address} of the {@code Person} that we are building.
      */
-    public PersonBuilder withAddress(String address) {
+    public T withAddress(String address) {
         this.address = new Address(address);
-        return this;
+        return self();
     }
 
     /**
      * Sets the {@code Phone} of the {@code Person} that we are building.
      */
-    public PersonBuilder withPhone(String phone) {
+    public T withPhone(String phone) {
         this.phone = new Phone(phone);
-        return this;
+        return self();
     }
 
     /**
      * Sets the {@code Email} of the {@code Person} that we are building.
      */
-    public PersonBuilder withEmail(String email) {
+    public T withEmail(String email) {
         this.email = new Email(email);
-        return this;
-    }
-
-    /**
-     * Sets the {@code Company} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withCompany(String company) {
-        this.company = new Company(company);
-        return this;
+        return self();
     }
 
     /**
@@ -123,10 +123,7 @@ public class PersonBuilder {
      * @return A {@code Person} object, which will either be a {@code Guest} or a {@code Vendor}.
      */
     public Person build() {
-        if (!isVendor) {
-            return new Guest(name, phone, email, address, tags, rsvp);
-        }
-        return new Vendor(name, phone, email, address, tags, company);
+        // TODO: FIX THIS STUPID WORKAROUND (By removing dependencies on PersonBuilder)
+        return new Guest(name, phone, email, address, tags);
     }
-
 }

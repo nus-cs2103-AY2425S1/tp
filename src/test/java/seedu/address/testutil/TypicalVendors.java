@@ -54,29 +54,11 @@ public class TypicalVendors {
             .withEmail("ella.thompson@example.com")
             .withCompany("companyName")
             .withAddress("michegan ave").build();
-    public static final Vendor FAITH = new VendorBuilder().withName("Faith Garcia")
-            .withPhone("9482427")
-            .withEmail("faith.garcia@example.com")
-            .withCompany("companyName")
-            .withAddress("little tokyo").build();
     public static final Vendor GAVIN = new VendorBuilder().withName("Gavin Kim")
             .withPhone("9482442")
             .withEmail("gavin.kim@example.com")
             .withCompany("companyName")
             .withAddress("4th street").build();
-
-
-    // Manually added
-    public static final Vendor HOON = new VendorBuilder().withName("Hoon Meier")
-            .withPhone("8482424")
-            .withEmail("stefan@example.com")
-            .withAddress("little india")
-            .withCompany("companyName").build();
-    public static final Vendor IDA = new VendorBuilder().withName("Ida Mueller")
-            .withPhone("8482131")
-            .withEmail("hans@example.com")
-            .withAddress("chicago ave")
-            .withCompany("companyName").build();
 
     // Manually added - Guest's details found in {@code CommandTestUtil}
     public static final Vendor AMY = new VendorBuilder().withName(VALID_NAME_AMY)
