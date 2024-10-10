@@ -1,8 +1,9 @@
 package seedu.address.model.person;
 
-import seedu.address.model.tag.Tag;
-import java.util.Set;
 import java.util.Objects;
+import java.util.Set;
+
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Student in the address book.
@@ -10,8 +11,8 @@ import java.util.Objects;
  */
 public class Student extends Person {
 
-    private final Subject subject;  // Subject the student is associated with
-    private final Set<String> classes;  // Classes the student attends
+    private final Subject subject; // Subject the student is associated with
+    private final Set<String> classes; // Classes the student attends
 
     /**
      * Every field must be present and not null.
@@ -24,7 +25,8 @@ public class Student extends Person {
      * @param subject  Subject the student is taking
      * @param classes  Set of class names the student is attending
      */
-    public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Subject subject, Set<String> classes) {
+    public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+                   Subject subject, Set<String> classes) {
         super(name, phone, email, address, tags);
         Objects.requireNonNull(subject, "Subject must not be null");
         Objects.requireNonNull(classes, "Classes must not be null");
