@@ -119,20 +119,36 @@ public class Person {
         return Objects.hash(name, phone, email, address, tags);
     }
 
-    public void changeName(String newName) {
-        name.changeName(newName);
+    /**
+     * changes name.
+     * @param newNameValue
+     */
+    public void changeName(String newNameValue) {
+
     }
 
+    /**
+     * changes number.
+     * @param newNumber
+     */
     public void changePhoneNumber(String newNumber) {
-        phone.changePhoneNumber(newNumber);
+
     }
 
+    /**
+     * changes email.
+     * @param newEmail
+     */
     public void changeEmail(String newEmail) {
-        email.changeEmail(newEmail);
+
     }
 
+    /**
+     * changes address
+     * @param newAddress
+     */
     public void changeAddress(String newAddress) {
-        address.changeAddress(newAddress);
+
     }
 
     @Override
