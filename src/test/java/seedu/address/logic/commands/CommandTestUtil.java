@@ -44,6 +44,9 @@ public class CommandTestUtil {
     public static final String LEVEL_DESC_K2 = " " + PREFIX_LEVEL + VALID_LEVEL_K2;
     public static final String LEVEL_DESC_P3 = " " + PREFIX_LEVEL + VALID_LEVEL_P3;
     public static final String LEVEL_DESC_S4 = " " + PREFIX_LEVEL + VALID_LEVEL_S4;
+    public static final String VALID_NOTE_AMY = "Likes asking questions.";
+    public static final String VALID_NOTE_BOB = "Always sleeping";
+
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;

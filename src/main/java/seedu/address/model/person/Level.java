@@ -18,6 +18,7 @@ public class Level {
         S1, S2, S3, S4, S5,
         JC1, JC2,
 
+
     }
 
     public static final String MESSAGE_CONSTRAINTS = "Level names should be in list: "

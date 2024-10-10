@@ -111,7 +111,7 @@ public class PersonBuilder {
      * Sets the {@code Level} of the {@code Person} that we are building.
      */
     public PersonBuilder withLevel(String level) {
-        this.level = !level.equals("") ? new Level(level) : new Level("NONE");
+        this.level = !level.isEmpty() ? new Level(level) : new Level("NONE");
         return this;
     }
 

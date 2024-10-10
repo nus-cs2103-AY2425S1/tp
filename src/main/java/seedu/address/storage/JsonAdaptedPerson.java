@@ -113,14 +113,27 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        if (note == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Note.class.getSimpleName()));
+        }
         final Note modelNote = new Note(note);
 
         final Set<Subject> modelSubjects = new HashSet<>(personSubjects);
+
+        if (level == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Level.class.getSimpleName()));
+        }
+        if (!Level.isValidLevelName(level)) {
+            throw new IllegalValueException(Level.MESSAGE_CONSTRAINTS);
+        }
 
         final Level modelLevel = new Level(level);
 
         return new Person(modelName, modelPhone, modelEmergencyContact,
                 modelAddress, modelNote, modelSubjects, modelLevel);
+
+
     }
 
 }
