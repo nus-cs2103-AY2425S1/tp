@@ -20,6 +20,7 @@ public class Person {
     // Data fields
     private final Relationship relationship;
 
+
     /**
      * Every field must be present and not null.
      */

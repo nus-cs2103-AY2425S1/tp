@@ -1,12 +1,22 @@
 package seedu.address.model.util;
 
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import seedu.address.model.AddressBook;
+import seedu.address.model.EventBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyEventBook;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Relationship;
+import seedu.address.model.tag.Tag;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -36,4 +46,33 @@ public class SampleDataUtil {
         }
         return sampleAb;
     }
+
+    public static Event[] getSampleEvents() {
+
+        Set<Person> sampleAttendees = new HashSet<>(Arrays.asList(getSamplePersons()));
+        return new Event[] {
+            new Event("Emily's Birthday Party", LocalDate.of(2024, 10, 1), sampleAttendees),
+            new Event("Family Reunion", LocalDate.of(2024, 10, 5), sampleAttendees),
+            new Event("Grandpa's Wedding Day", LocalDate.of(2024, 10, 10), sampleAttendees)
+        };
+    }
+
+    public static ReadOnlyEventBook getSampleEventBook() {
+        EventBook sampleEb = new EventBook();
+        for (Event sampleEvent : getSampleEvents()) {
+            sampleEb.addEvent(sampleEvent);
+        }
+        return sampleEb;
+    }
+
+
+    /**
+     * Returns a tag set containing the list of strings given.
+     */
+    public static Set<Tag> getTagSet(String... strings) {
+        return Arrays.stream(strings)
+                .map(Tag::new)
+                .collect(Collectors.toSet());
+    }
+
 }
