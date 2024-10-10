@@ -59,7 +59,7 @@ public class DeleteCommand extends Command {
             return true;
         }
 
-        // instanceof handles nulls
+        // instanceof handles null
         if (!(other instanceof DeleteCommand)) {
             return false;
         }
