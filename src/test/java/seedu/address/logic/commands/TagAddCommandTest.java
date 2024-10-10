@@ -32,7 +32,7 @@ public class TagAddCommandTest {
     private Set<Tag> stubTagList = new HashSet<>();
 
     @Test
-    public void execute_addRemarkUnfilteredList_success() {
+    public void execute_addTagUnfilteredList_success() {
         List<Person> matchingPersons = model.getFilteredPersonList().stream()
                 .filter(person -> person.getName().fullName.equalsIgnoreCase(VALID_NAME_GEORGE))
                 .toList();
