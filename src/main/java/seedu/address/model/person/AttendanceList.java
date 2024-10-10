@@ -39,6 +39,22 @@ public class AttendanceList {
     }
 
     @Override
+    public boolean equals(Object other) {
+        if (other instanceof AttendanceList al) {
+            if (al.attendanceList.size() != this.attendanceList.size()) {
+                return false;
+            }
+            for (int i = 0; i < this.attendanceList.size(); i++) {
+                if (!al.attendanceList.get(i).equals(this.attendanceList.get(i))) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (Attendance attendance : attendanceList) {
