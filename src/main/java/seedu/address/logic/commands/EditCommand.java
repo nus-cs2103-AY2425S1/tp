@@ -227,7 +227,7 @@ public class EditCommand extends Command {
          * Returns {@code Optional#empty()} if {@code courses} is null.
          */
         public Optional<Set<Course>> getCourses() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(courses)) : Optional.empty();
+            return (courses != null) ? Optional.of(Collections.unmodifiableSet(courses)) : Optional.empty();
         }
 
         @Override
