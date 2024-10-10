@@ -94,6 +94,12 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code TelegramUsername} of the {@code Person} being built.
+     *
+     * @param telegramUsername The Telegram username to be assigned to the {@code Person}.
+     * @return The current {@code PersonBuilder} instance with the updated Telegram username.
+     */
     public PersonBuilder withTelegramUsername(String telegramUsername) {
         this.telegramUsername = new TelegramUsername(telegramUsername);
         return this;
