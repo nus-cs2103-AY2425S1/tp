@@ -12,12 +12,7 @@ public class AttendanceList {
     private List<Attendance> attendanceList;
 
     /**
-     * Represents an Attendance record for a person.
-     * Each Attendance object stores whether the person has attended and the date of attendance.
-     *
-     * @param hasAttended A Boolean indicating if the person has attended.
-     * @param date The date and time of the attendance.
-     * @throws NullPointerException if {@code hasAttended} or {@code date} is null.
+     * Initializes an empty attendance list.
      */
     public AttendanceList() {
         this.attendanceList = new ArrayList<Attendance>();
@@ -36,12 +31,11 @@ public class AttendanceList {
     /**
      * Removes the specified attendance from the attendance list.
      *
-     * @param attendance The attendance to be removed. Must not be null.
-     * @throws NullPointerException if the specified attendance is null.
+     * @param index The index of the attendance record to be removed.
      */
-    public void removeAttendance(Attendance attendance) throws NullPointerException {
-        requireNonNull(attendance);
-        attendanceList.remove(attendance);
+    public void removeAttendance(int index) {
+        // TODO: handle error for invalid index
+        attendanceList.remove(index);
     }
 
     @Override
