@@ -51,14 +51,14 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ClearCommand.ALT_COMMAND_WORD) instanceof ClearCommand);
         assertTrue(parser.parseCommand(ClearCommand.ALT_COMMAND_WORD + " 3") instanceof ClearCommand);
     }
-    
+
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
     }
-
+    
     @Test
     public void parseCommand_edit() throws Exception {
         Person person = new PersonBuilder().build();
