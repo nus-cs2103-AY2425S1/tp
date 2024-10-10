@@ -260,15 +260,20 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Target user profile**: A Business owner managing a small sized company who frequently
+procures goods from suppliers
+
+**Persona**: Ms. Balakrishnan is a business owner of a small convenience store (mama shop) located in tampines
 
 * has a need to manage a significant number of contacts
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
+* needs to associate goods with contacts
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: manage contacts faster than a typical mouse/GUI driven app, able to associate goods to 
+contacts and suppliers for easier management.
 
 
 ### User stories
