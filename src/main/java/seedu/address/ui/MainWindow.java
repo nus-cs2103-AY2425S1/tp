@@ -29,11 +29,13 @@ public class MainWindow extends UiPart<Stage> {
 
     private Stage primaryStage;
     private Logic logic;
+    private PersonDetailsWindow personDetailsWindow;
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ImportWindow importWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -66,6 +68,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        importWindow = new ImportWindow(this);
     }
 
     public Stage getPrimaryStage() {
@@ -116,7 +119,8 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath(),
+                logic.getFilteredPersonList().size());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
@@ -147,6 +151,18 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the help window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleImport() {
+        if (!importWindow.isShowing()) {
+            importWindow.show();
+        } else {
+            importWindow.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -159,8 +175,11 @@ public class MainWindow extends UiPart<Stage> {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
+        importWindow.hide();
         helpWindow.hide();
         primaryStage.hide();
+        personDetailsWindow.hide();
+
     }
 
     public PersonListPanel getPersonListPanel() {
@@ -189,6 +208,23 @@ public class MainWindow extends UiPart<Stage> {
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
+            resultDisplay.setFeedbackToUser(e.getMessage());
+            throw e;
+        }
+    }
+
+    /**
+     * Execute wrapper to share with other classes
+     * @param command
+     * @return CommandResult
+     * @throws CommandException
+     * @throws ParseException
+     */
+    public CommandResult execute(String command) throws CommandException, ParseException {
+        try {
+            return executeCommand(command);
+        } catch (CommandException | ParseException e) {
+            logger.info("An error occurred while executing command: " + command);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
