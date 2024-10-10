@@ -9,8 +9,8 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Role;
 import seedu.address.model.tag.Nickname;
+import seedu.address.model.tag.Role;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -31,7 +31,7 @@ public class PersonBuilder {
     private Address address;
     private Set<Role> roles;
     private Nickname nickname;
-  
+
     /**
      * Creates a {@code PersonBuilder} with the default details.
      */
