@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INSURANCE_ID;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -14,8 +15,10 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddInsuranceCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteInsuranceCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
@@ -89,9 +92,33 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_addInsuranceCommand() throws Exception {
+        String userInput = AddInsuranceCommand.COMMAND_WORD
+                + " "
+                + INDEX_FIRST_PERSON.getOneBased()
+                + " "
+                + PREFIX_INSURANCE_ID
+                + " 0 ";
+        AddInsuranceCommand command = (AddInsuranceCommand) parser.parseCommand(userInput);
+        assertEquals(new AddInsuranceCommand(INDEX_FIRST_PERSON, 0), command);
+    }
+
+    @Test
+    public void parseCommand_deleteInsuranceCommand() throws Exception {
+        String userInput = DeleteInsuranceCommand.COMMAND_WORD
+                + " "
+                + INDEX_FIRST_PERSON.getOneBased()
+                + " "
+                + PREFIX_INSURANCE_ID
+                + " 0 ";
+        DeleteInsuranceCommand command = (DeleteInsuranceCommand) parser.parseCommand(userInput);
+        assertEquals(new DeleteInsuranceCommand(INDEX_FIRST_PERSON, 0), command);
+    }
+
+    @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(""));
+                -> parser.parseCommand(""));
     }
 
     @Test

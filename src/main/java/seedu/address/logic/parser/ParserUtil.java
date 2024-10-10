@@ -21,10 +21,12 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_UNPARSABLE_INSURANCE_ID = "Insurance ID must be a positive integer.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -108,6 +110,23 @@ public class ParserUtil {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
         return new Tag(trimmedTag);
+    }
+
+    /**
+     * Parses a {@code String insurancePlanId} into a {@code Integer}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code insurancePlanId} is invalid.
+     */
+    public static int parseInsurancePlan(String insurancePlanId) throws ParseException {
+        requireNonNull(insurancePlanId);
+        int trimmedInsurancePlanId;
+        try {
+            trimmedInsurancePlanId = Integer.parseInt(insurancePlanId.trim());
+        } catch (NumberFormatException e) {
+            throw new ParseException(MESSAGE_UNPARSABLE_INSURANCE_ID);
+        }
+        return trimmedInsurancePlanId;
     }
 
     /**
