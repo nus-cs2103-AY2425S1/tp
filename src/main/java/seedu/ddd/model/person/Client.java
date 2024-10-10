@@ -29,6 +29,7 @@ public class Client extends Contact {
         requireAllNonNull(date);
         this.date = date;
     }
+
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own

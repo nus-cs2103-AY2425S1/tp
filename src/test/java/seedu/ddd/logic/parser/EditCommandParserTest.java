@@ -1,5 +1,9 @@
 package seedu.ddd.logic.parser;
 
+import org.junit.jupiter.api.Test;
+
+import seedu.ddd.commons.core.index.Index;
+import seedu.ddd.logic.Messages;
 import static seedu.ddd.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.ddd.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
@@ -22,28 +26,23 @@ import static seedu.ddd.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import seedu.ddd.logic.commands.EditCommand;
+import seedu.ddd.logic.commands.EditCommand.EditPersonDescriptor;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.ddd.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.ddd.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.ddd.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.ddd.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.ddd.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
-
-import org.junit.jupiter.api.Test;
-
-import seedu.ddd.commons.core.index.Index;
-import seedu.ddd.logic.Messages;
-import seedu.ddd.logic.commands.EditCommand;
-import seedu.ddd.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.ddd.model.person.Address;
 import seedu.ddd.model.person.Email;
 import seedu.ddd.model.person.Name;
 import seedu.ddd.model.person.Phone;
 import seedu.ddd.model.tag.Tag;
 import seedu.ddd.testutil.EditPersonDescriptorBuilder;
+import static seedu.ddd.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.ddd.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.ddd.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 
 public class EditCommandParserTest {
 
@@ -109,7 +108,7 @@ public class EditCommandParserTest {
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HUSBAND
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
+        EditContactDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
@@ -122,7 +121,7 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + EMAIL_DESC_AMY;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB)
+        EditContactDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -134,7 +133,7 @@ public class EditCommandParserTest {
         // name
         Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).build();
+        EditContactDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -200,7 +199,7 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = targetIndex.getOneBased() + TAG_EMPTY;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withTags().build();
+        EditContactDescriptor descriptor = new EditPersonDescriptorBuilder().withTags().build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

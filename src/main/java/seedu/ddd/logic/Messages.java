@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.ddd.logic.parser.Prefix;
 import seedu.ddd.model.person.Client;
-import seedu.ddd.model.person.Person;
+import seedu.ddd.model.person.Contact;
 import seedu.ddd.model.person.Vendor;
 
 /**
@@ -38,22 +38,12 @@ public class Messages {
         return MESSAGE_DUPLICATE_FIELDS + String.join(" ", duplicateFields);
     }
 
-    /**
-     * Formats the {@code person} for display to the user.
-     */
-    public static String format(Person person) {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(person.getName())
-                .append("; Phone: ")
-                .append(person.getPhone())
-                .append("; Email: ")
-                .append(person.getEmail())
-                .append("; Address: ")
-                .append(person.getAddress())
-                .append("; Tags: ");
-        person.getTags().forEach(builder::append);
-        return builder.toString();
+    public static String format(Contact contact) {
+        return contact instanceof Client
+            ? format((Client) contact)
+            : format((Vendor) contact);
     }
+
     /**
      * Formats the {@code client} for display to the user.
      */

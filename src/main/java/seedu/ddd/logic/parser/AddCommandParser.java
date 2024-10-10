@@ -13,6 +13,9 @@ import java.util.stream.Stream;
 import seedu.ddd.logic.commands.AddCommand;
 import seedu.ddd.logic.parser.exceptions.ParseException;
 import seedu.ddd.model.person.Address;
+import seedu.ddd.model.person.Client;
+import seedu.ddd.model.person.Contact;
+import seedu.ddd.model.person.Date;
 import seedu.ddd.model.person.Email;
 import seedu.ddd.model.person.Name;
 import seedu.ddd.model.person.Person;
@@ -45,9 +48,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, tagList);
-
-        return new AddCommand(person);
+        // TODO: update this to work with Client and Vendor
+        Contact contact = new Client(name, phone, email, address, new Date("01 Jan 2000"), tagList);
+        return new AddCommand(contact);
     }
 
     /**

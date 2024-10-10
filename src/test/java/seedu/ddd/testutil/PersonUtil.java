@@ -1,15 +1,14 @@
 package seedu.ddd.testutil;
 
+import java.util.Set;
+
+import seedu.ddd.logic.commands.AddCommand;
+import seedu.ddd.logic.commands.EditCommand.EditPersonDescriptor;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
-
-import java.util.Set;
-
-import seedu.ddd.logic.commands.AddCommand;
-import seedu.ddd.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.ddd.model.person.Person;
 import seedu.ddd.model.tag.Tag;
 
@@ -41,9 +40,9 @@ public class PersonUtil {
     }
 
     /**
-     * Returns the part of command string for the given {@code EditPersonDescriptor}'s details.
+     * Returns the part of command string for the given {@code EditContactDescriptor}'s details.
      */
-    public static String getEditPersonDescriptorDetails(EditPersonDescriptor descriptor) {
+    public static String getEditPersonDescriptorDetails(EditContactDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
