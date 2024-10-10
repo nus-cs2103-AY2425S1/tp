@@ -24,7 +24,7 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
-//import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -100,12 +100,14 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
     }
-    // TODO: Update test to reflect new ListCommand @apollo-tan
-    //    @Test
-    //    public void parseCommand_list() throws Exception {
-    //        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-    //        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
-    //    }
+    //TODO: Update test to reflect new ListCommand @apollo-tan
+    @Test
+    public void parseCommand_list() throws Exception {
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " k/buyers") instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " k/sellers") instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " k/properties") instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " k/clients") instanceof ListCommand);
+    }
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
