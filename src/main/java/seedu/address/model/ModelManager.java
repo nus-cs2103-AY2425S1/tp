@@ -147,4 +147,6 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
 
+    //=========== Filtered Schedule List Accessors =============================================================
+
 }
