@@ -43,7 +43,7 @@ public class PriorityCommandParser implements Parser<PriorityCommand> {
         String nricStr = argMultimap.getValue(PREFIX_NRIC).orElse("");
         Nric nric = ParserUtil.parseNric(nricStr);
         String priorityStr = argMultimap.getValue(PREFIX_PRIORITY).orElse("");
-        Priority priority = ParserUtil.parsePriority(priorityStr.toUpperCase());
+        Priority priority = ParserUtil.parsePriority(priorityStr);
 
         return new PriorityCommand(nric, priority);
     }
