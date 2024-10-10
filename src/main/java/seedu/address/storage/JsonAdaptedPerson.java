@@ -31,12 +31,11 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
-    private final String assignmentName;
-    private final Float assignmentScore;
     private final String telegram;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
-
     private final String github;
+    private final String assignmentName;
+    private final Float assignmentScore;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -144,7 +143,9 @@ class JsonAdaptedPerson {
         if (assignmentName != null && assignmentScore != null) {
             modelAssignment = new Assignment(assignmentName, assignmentScore); // Create Assignment object
         }
-        return new Person(modelName, modelPhone, modelEmail,modelGithub, modelAddress, modelTags, modelTelegram, modelAssignment);
+        return new Person(
+                modelName, modelPhone, modelEmail,
+                modelAddress, modelTelegram, modelTags, modelGithub, modelAssignment);
     }
 
 }

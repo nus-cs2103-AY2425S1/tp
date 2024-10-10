@@ -7,11 +7,11 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_SCORE;
 import org.junit.jupiter.api.Test;
 
 public class AssignmentTest {
-    private final Assignment assignment = new Assignment(VALID_ASSIGNMENT_ONE, Float.parseFloat(VALID_SCORE));
+    private final Assignment assignment = new Assignment(VALID_ASSIGNMENT_ONE, VALID_SCORE);
 
     @Test
     public void toStringMethod() {
-        String expected = "Assignment:" + VALID_ASSIGNMENT_ONE + " " + Float.parseFloat(VALID_SCORE);
+        String expected = "Assignment:" + VALID_ASSIGNMENT_ONE + " " + VALID_SCORE;
         assertEquals(expected, assignment.toString());
     }
 }

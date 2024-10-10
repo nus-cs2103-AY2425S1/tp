@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Github;
@@ -22,8 +23,10 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEEFAULT_TELEGRAM = "@viswa";
+    public static final String DEFAULT_TELEGRAM = "@viswa";
     public static final String DEFAULT_GITHUB = "Amy";
+    public static final String DEFAULT_ASSIGNMENT_NAME = "Ex01";
+    public static final Float DEFAULT_ASSIGNMENT_SCORE = 0f;
 
     private Name name;
     private Phone phone;
@@ -32,6 +35,7 @@ public class PersonBuilder {
     private Telegram telegram;
     private Set<Tag> tags;
     private Github github;
+    private Assignment assignment;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -41,9 +45,10 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        telegram = new Telegram(DEEFAULT_TELEGRAM);
+        telegram = new Telegram(DEFAULT_TELEGRAM);
         tags = new HashSet<>();
         github = new Github(DEFAULT_GITHUB);
+        assignment = new Assignment(DEFAULT_ASSIGNMENT_NAME, DEFAULT_ASSIGNMENT_SCORE);
     }
 
     /**
@@ -57,6 +62,7 @@ public class PersonBuilder {
         telegram = personToCopy.getTelegram();
         tags = new HashSet<>(personToCopy.getTags());
         github = personToCopy.getGithub();
+        assignment = personToCopy.getAssignment();
     }
 
     /**
@@ -70,7 +76,7 @@ public class PersonBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
+    public PersonBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
@@ -115,8 +121,20 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Assignment} of the {@code Person} that we are building.
+     */
+    public PersonBuilder witAssignment(String assignment, Float score) {
+        this.assignment = new Assignment(assignment, score);
+        return this;
+    }
+
     public Person build() {
         return new Person(name, phone, email, address, telegram, tags, github);
+    }
+
+    public Person buildWithAssignment() {
+        return new Person(name, phone, email, address, telegram, tags, github, assignment);
     }
 
 }

@@ -59,12 +59,12 @@ public class Person {
             Name name,
             Phone phone,
             Email email,
-            Github github,
             Address address,
-            Set<Tag> tags,
             Telegram telegram,
+            Set<Tag> tags,
+            Github github,
             Assignment assignment) {
-        requireAllNonNull(name, phone, email, address, telegram, tags, github, assignment);
+        requireAllNonNull(name, phone, email, address, telegram, tags, github);
         this.github = github;
         this.telegram = telegram;
         this.name = name;

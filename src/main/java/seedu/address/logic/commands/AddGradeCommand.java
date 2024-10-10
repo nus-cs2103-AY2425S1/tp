@@ -21,9 +21,6 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
 
-import java.util.Optional;
-import java.util.Set;
-
 /**
  * Add assignment grades to an existing person in the address book.
  */
@@ -77,7 +74,7 @@ public class AddGradeCommand extends Command {
         Assignment assignment =
                 new Assignment(assignmentName, score);
 
-        return new Person(name, phone, email, github, address, tags, telegram, assignment);
+        return new Person(name, phone, email, address, telegram, tags, github, assignment);
     }
 
     @Override
