@@ -9,24 +9,23 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ViewCommand;
-import seedu.address.logic.commands.ViewContactCommand;
-import seedu.address.logic.commands.ViewEventCommand;
+import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates corresponding view command
+ * Parses input arguments and creates corresponding list command
  */
-public class ViewCommandParser implements Parser<ViewCommand> {
+public class ListCommandParser implements Parser<ListCommand> {
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandField>\\S+)(?<keywords>.*)");
     private static final Logger logger = LogsCenter.getLogger(ViewCommandParser.class);
 
     /**
-     * Parses the given {@code String} of arguments in the context of the ViewCommand
-     * and returns a corresponding ViewCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the ListCommand
+     * and returns a ListCommand object for execution depending on the Command Field.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public ViewCommand parse(String args) throws ParseException {
+    public ListCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(trimmedArgs);
 
@@ -37,13 +36,11 @@ public class ViewCommandParser implements Parser<ViewCommand> {
         final String commandField = matcher.group("commandField");
         final String keywords = matcher.group("keywords");
 
-        if (commandField.equals(ViewContactCommand.COMMAND_FIELD)) {
-            return new ViewContactCommandParser().parse(keywords);
+        if (commandField.equals(ListPersonCommand.COMMAND_FIELD)) {
+            return new ListPersonCommand();
         }
 
-        if (commandField.equals(ViewEventCommand.COMMAND_FIELD)) {
-            return new ViewEventCommandParser().parse(keywords);
-        }
+        // TODO: Add ListEventCommand
 
         logger.finer("This user input caused a ParseException: view " + args);
         throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

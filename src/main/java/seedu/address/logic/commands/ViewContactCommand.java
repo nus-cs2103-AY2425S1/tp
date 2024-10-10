@@ -9,16 +9,16 @@ import seedu.address.model.person.NameMatchesKeywordsPredicate;
 
 /**
  * Views the specific information of a person in address book whose name is the argument keywords.
- * Keyword matching is case sensitive.
+ * Keyword matching is case-sensitive.
  */
 public class ViewContactCommand extends ViewCommand {
 
     public static final String COMMAND_FIELD = "contact";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views the person whose names is "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views the person whose name is "
             + "the specified keywords (case-sensitive) and displays him/her.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " David Li";
+            + "Example: " + COMMAND_WORD + " " + COMMAND_FIELD + " David Li";
 
     private final NameMatchesKeywordsPredicate predicate;
 
@@ -45,8 +45,8 @@ public class ViewContactCommand extends ViewCommand {
             return false;
         }
 
-        ViewContactCommand otherFindCommand = (ViewContactCommand) other;
-        return predicate.equals(otherFindCommand.predicate);
+        ViewContactCommand otherViewContactCommand = (ViewContactCommand) other;
+        return predicate.equals(otherViewContactCommand.predicate);
     }
 
     @Override
