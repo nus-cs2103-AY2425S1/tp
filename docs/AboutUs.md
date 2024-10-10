@@ -1,6 +1,6 @@
 ---
-  layout: default.md
-  title: "About Us"
+layout: default.md
+title: "About Us"
 ---
 
 # About Us
@@ -53,7 +53,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Responsibilities: Ensure project deliverables are done on time and in the right format.
 
 ### Zhang Yuxiang
-        
+
 <img src="images/therarefox.png" width="200px">
 
 [[github](http://github.com/TheRareFox)]

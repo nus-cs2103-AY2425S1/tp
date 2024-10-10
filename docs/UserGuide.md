@@ -37,7 +37,7 @@ DLTbook is a **desktop app for managing contacts and DLT public addresses, optim
    * `clear` : Deletes all contacts.
 
    * `exit` : Exits the app.
-   
+
    * `addPublicAddress c/ETH n/Travis w/wallet1 pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2` : Adds a public address to a contact
 
    * `retrievePublicAddress c/BTC n/Travis w/wallet1` : Retrieves the public address of a contact
@@ -52,7 +52,7 @@ DLTbook is a **desktop app for managing contacts and DLT public addresses, optim
 
 ## Features
 
-<box type="info" seamless>
+<box type="info" seamless></box>
 
 **Notes about the command format:**<br>
 
@@ -89,7 +89,7 @@ Adds a person to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
-<box type="tip" seamless>
+<box type="tip" seamless></box>
 
 **Tip:** A person can have any number of tags (including 0)
 </box>
@@ -233,7 +233,7 @@ DLTbook data are saved in the hard disk automatically after any command that cha
 
 DLTbook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<box type="warning" seamless>
+<box type="warning" seamless></box>
 
 **Caution:**
 If your changes to the data file makes its format invalid, DLTbook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
