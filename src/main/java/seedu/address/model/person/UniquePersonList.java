@@ -79,6 +79,11 @@ public class UniquePersonList implements Iterable<Person> {
         }
     }
 
+    public void markPaid(Person toMark) {
+        requireNonNull(toMark);
+        //toMark.isPaid = true;
+    }
+
     public void setPersons(UniquePersonList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
