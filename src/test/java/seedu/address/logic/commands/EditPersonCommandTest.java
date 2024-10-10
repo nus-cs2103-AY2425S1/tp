@@ -179,10 +179,10 @@ public class EditPersonCommandTest {
     public void toStringMethod() {
         Index index = Index.fromOneBased(1);
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
-        EditCommand editCommand = new EditPersonCommand(index, editPersonDescriptor);
-        String expected = EditCommand.class.getCanonicalName() + "{index=" + index + ", editPersonDescriptor="
+        EditPersonCommand editPersonCommand = new EditPersonCommand(index, editPersonDescriptor);
+        String expected = EditPersonCommand.class.getCanonicalName() + "{index=" + index + ", editPersonDescriptor="
                 + editPersonDescriptor + "}";
-        assertEquals(expected, editCommand.toString());
+        assertEquals(expected, editPersonCommand.toString());
     }
 
 }

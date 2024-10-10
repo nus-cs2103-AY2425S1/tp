@@ -100,6 +100,13 @@ public class EditPersonCommand extends EditCommand {
         assert entity instanceof Person;
         return Messages.formatPerson((Person) entity);
     }
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("index", targetIndex)
+                .add("editPersonDescriptor", editEntityDescriptor)
+                .toString();
+    }
 
     /**
      * Stores the details to edit the person with. Each non-empty field value will replace the
@@ -212,5 +219,4 @@ public class EditPersonCommand extends EditCommand {
                     .toString();
         }
     }
-
 }
