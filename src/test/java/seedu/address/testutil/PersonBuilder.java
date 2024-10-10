@@ -40,15 +40,15 @@ public class PersonBuilder {
      * Creates a {@code PersonBuilder} with the default details.
      */
     public PersonBuilder() {
-        id = new Id("temp");
-        ward = new Ward("temp");
-        diagnosis = new Diagnosis("temp");
-        medication = new Medication("temp");
+//        id = new Id("temp");
+//        ward = new Ward("temp");
+//        diagnosis = new Diagnosis("temp");
+//        medication = new Medication("temp");
         name = new Name(DEFAULT_NAME);
-        phone = new Phone(DEFAULT_PHONE);
-        email = new Email(DEFAULT_EMAIL);
-        address = new Address(DEFAULT_ADDRESS);
-        tags = new HashSet<>();
+//        phone = new Phone(DEFAULT_PHONE);
+//        email = new Email(DEFAULT_EMAIL);
+//        address = new Address(DEFAULT_ADDRESS);
+//        tags = new HashSet<>();
     }
 
     /**
@@ -59,7 +59,7 @@ public class PersonBuilder {
 //        phone = personToCopy.getPhone();
 //        email = personToCopy.getEmail();
 //        address = personToCopy.getAddress();
-        tags = new HashSet<>(personToCopy.getTags());
+//        tags = new HashSet<>(personToCopy.getTags());
     }
 
     /**
@@ -103,7 +103,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(id, name, ward, diagnosis, medication);
+        return new Person(name);
     }
 
 }
