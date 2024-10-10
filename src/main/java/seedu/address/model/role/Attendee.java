@@ -8,6 +8,6 @@ public class Attendee extends Role {
 
     public static final String ROLE_WORD = "attendee";
     public Attendee() {
-        super("attendee");
+        super(Attendee.ROLE_WORD);
     }
 }

@@ -7,6 +7,6 @@ public class Volunteer extends Role {
 
     public static final String ROLE_WORD = "volunteer";
     public Volunteer() {
-        super("volunteer");
+        super(Volunteer.ROLE_WORD);
     }
 }

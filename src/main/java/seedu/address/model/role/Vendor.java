@@ -8,7 +8,7 @@ public class Vendor extends Role {
     public static final String ROLE_WORD = "vendor";
 
     public Vendor() {
-        super("vendor");
+        super(Vendor.ROLE_WORD);
     }
 
 
