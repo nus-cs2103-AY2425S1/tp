@@ -11,9 +11,9 @@ import seedu.address.model.Model;
  * Deletes an assignment.
  */
 public class DeleteAssignmentCommand extends Command {
-    public static final String COMMAND_WORD = "adda";
+    public static final String COMMAND_WORD = "deletea";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes an assignment to a student. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes an assignment for a student. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_ASSIGNMENT + "ASSIGNMENT "
