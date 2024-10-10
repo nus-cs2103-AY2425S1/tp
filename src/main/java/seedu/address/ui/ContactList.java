@@ -1,11 +1,9 @@
 package seedu.address.ui;
 
-import javafx.beans.Observable;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
-import seedu.address.logic.Logic;
 import seedu.address.model.person.Person;
 
 /**
