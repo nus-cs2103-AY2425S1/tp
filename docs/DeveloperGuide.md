@@ -328,7 +328,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. The CCA Leader must know the details of the new member.
 
 **Main Success Scenario (MSS)**:
-1. CCA Leader inputs the `add_member` command with required details (name, room number, and telegram handle).
+1. CCA Leader inputs the `add_member` command with required details (name, room number, and telegram).
     - Example: `add_member /name John Doe /room 4/3/301 /tele johndoe123`
 2. Hall Pointer validates the entered details for the new member.
 3. Hall Pointer adds the member to the system and displays a success message.
@@ -432,7 +432,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor**: CCA Leader
 
-**Description**: This use case allows a CCA leader to update the details of an existing member, such as room number, telegram handle, or tags.
+**Description**: This use case allows a CCA leader to update the details of an existing member, such as room number, telegram, or tags.
 
 **Preconditions**:
 1. The member to be updated must exist in the system.
@@ -507,7 +507,7 @@ None.
     A visual interface that allows users to interact with the application using graphical components like buttons and menus, in addition to CLI commands.
 
 4.  **Member:**\
-    A participant or member of a CCA (Co-Curricular Activity) in NUS Halls, whose details are tracked in the Hall Pointer system (e.g., name, phone number, points, and attendance).
+    A participant or member of a CCA (Co-Curricular Activity) in NUS Halls, whose details are tracked in the Hall Pointer system (e.g., name, telegram, points, and attendance).
 
 5.  **Points Allocation:**\
     The process of awarding hall points to members based on their participation in activities. CCA leaders can customize the criteria for point allocation.

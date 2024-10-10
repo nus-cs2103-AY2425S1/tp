@@ -75,6 +75,16 @@ public class FindCommandTest {
     }
 
     @Test
+    public void execute_multipleKeywordsOutOfOrder_multipleMembersFound() {
+        String expectedMessage = String.format(MESSAGE_MEMBERS_LISTED_OVERVIEW, 3);
+        NameContainsKeywordsPredicate predicate = preparePredicate("Elle Kurz Kunz");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredMemberList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredMemberList());
+    }
+
+    @Test
     public void toStringMethod() {
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList("keyword"));
         FindCommand findCommand = new FindCommand(predicate);

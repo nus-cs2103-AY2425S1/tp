@@ -1,15 +1,13 @@
 package hallpointer.address.testutil;
 
-import static hallpointer.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
-import static hallpointer.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static hallpointer.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static hallpointer.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static hallpointer.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static hallpointer.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static hallpointer.address.logic.commands.CommandTestUtil.VALID_ROOM_AMY;
+import static hallpointer.address.logic.commands.CommandTestUtil.VALID_ROOM_BOB;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static hallpointer.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_AMY;
+import static hallpointer.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,35 +22,37 @@ import hallpointer.address.model.member.Member;
 public class TypicalMembers {
 
     public static final Member ALICE = new MemberBuilder().withName("Alice Pauline")
-            .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-            .withPhone("94351253")
+            .withRoom("6/3/20")
+            .withTelegram("PauLice")
             .withTags("friends").build();
     public static final Member BENSON = new MemberBuilder().withName("Benson Meier")
-            .withAddress("311, Clementi Ave 2, #02-25")
-            .withEmail("johnd@example.com").withPhone("98765432")
+            .withRoom("6/10/95")
+            .withTelegram("benson_meier")
             .withTags("owesMoney", "friends").build();
-    public static final Member CARL = new MemberBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").withAddress("wall street").build();
-    public static final Member DANIEL = new MemberBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends").build();
-    public static final Member ELLE = new MemberBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withEmail("werner@example.com").withAddress("michegan ave").build();
-    public static final Member FIONA = new MemberBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withEmail("lydia@example.com").withAddress("little tokyo").build();
-    public static final Member GEORGE = new MemberBuilder().withName("George Best").withPhone("9482442")
-            .withEmail("anna@example.com").withAddress("4th street").build();
+    public static final Member CARL = new MemberBuilder().withName("Carl Kurz").withTelegram("kurZ0123")
+            .withRoom("7/8/10").build();
+    public static final Member DANIEL = new MemberBuilder().withName("Daniel Meier").withTelegram("whisperWhiz23")
+            .withRoom("1/3/3").withTags("friends").build();
+    public static final Member ELLE = new MemberBuilder().withName("Elle Meyer").withTelegram("meyer_for_lif3")
+            .withRoom("4/5/55").build();
+    public static final Member FIONA = new MemberBuilder().withName("Fiona Kunz").withTelegram("FIONAKUNZ")
+            .withRoom("8/10/300").build();
+    public static final Member GEORGE = new MemberBuilder().withName("George Best").withTelegram("B357650463")
+            .withRoom("90/2/8").build();
 
     // Manually added
-    public static final Member HOON = new MemberBuilder().withName("Hoon Meier").withPhone("8482424")
-            .withEmail("stefan@example.com").withAddress("little india").build();
-    public static final Member IDA = new MemberBuilder().withName("Ida Mueller").withPhone("8482131")
-            .withEmail("hans@example.com").withAddress("chicago ave").build();
+    public static final Member HOON = new MemberBuilder().withName("Hoon Meier").withTelegram("meier__5002")
+            .withRoom("7/7/45").build();
+    public static final Member IDA = new MemberBuilder().withName("Ida Mueller").withTelegram("idaMueller")
+            .withRoom("6/4/38").build();
 
     // Manually added - Member's details found in {@code CommandTestUtil}
-    public static final Member AMY = new MemberBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
-    public static final Member BOB = new MemberBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-            .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+    public static final Member AMY = new MemberBuilder().withName(VALID_NAME_AMY)
+            .withTelegram(VALID_TELEGRAM_AMY)
+            .withRoom(VALID_ROOM_AMY).withTags(VALID_TAG_FRIEND).build();
+    public static final Member BOB = new MemberBuilder().withName(VALID_NAME_BOB)
+            .withTelegram(VALID_TELEGRAM_BOB)
+            .withRoom(VALID_ROOM_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

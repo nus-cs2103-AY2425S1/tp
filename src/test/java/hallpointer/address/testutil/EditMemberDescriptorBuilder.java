@@ -5,11 +5,10 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import hallpointer.address.logic.commands.EditCommand.EditMemberDescriptor;
-import hallpointer.address.model.member.Address;
-import hallpointer.address.model.member.Email;
 import hallpointer.address.model.member.Member;
 import hallpointer.address.model.member.Name;
-import hallpointer.address.model.member.Phone;
+import hallpointer.address.model.member.Room;
+import hallpointer.address.model.member.Telegram;
 import hallpointer.address.model.tag.Tag;
 
 /**
@@ -33,9 +32,8 @@ public class EditMemberDescriptorBuilder {
     public EditMemberDescriptorBuilder(Member member) {
         descriptor = new EditMemberDescriptor();
         descriptor.setName(member.getName());
-        descriptor.setPhone(member.getPhone());
-        descriptor.setEmail(member.getEmail());
-        descriptor.setAddress(member.getAddress());
+        descriptor.setTelegram(member.getTelegram());
+        descriptor.setRoom(member.getRoom());
         descriptor.setTags(member.getTags());
     }
 
@@ -48,26 +46,18 @@ public class EditMemberDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code EditMemberDescriptor} that we are building.
+     * Sets the {@code Telegram} of the {@code EditMemberDescriptor} that we are building.
      */
-    public EditMemberDescriptorBuilder withPhone(String phone) {
-        descriptor.setPhone(new Phone(phone));
+    public EditMemberDescriptorBuilder withTelegram(String telegram) {
+        descriptor.setTelegram(new Telegram(telegram));
         return this;
     }
 
     /**
-     * Sets the {@code Email} of the {@code EditMemberDescriptor} that we are building.
+     * Sets the {@code Room} of the {@code EditMemberDescriptor} that we are building.
      */
-    public EditMemberDescriptorBuilder withEmail(String email) {
-        descriptor.setEmail(new Email(email));
-        return this;
-    }
-
-    /**
-     * Sets the {@code Address} of the {@code EditMemberDescriptor} that we are building.
-     */
-    public EditMemberDescriptorBuilder withAddress(String address) {
-        descriptor.setAddress(new Address(address));
+    public EditMemberDescriptorBuilder withRoom(String room) {
+        descriptor.setRoom(new Room(room));
         return this;
     }
 

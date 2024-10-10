@@ -1,10 +1,9 @@
 package hallpointer.address.logic.commands;
 
-import static hallpointer.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static hallpointer.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static hallpointer.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static hallpointer.address.logic.parser.CliSyntax.PREFIX_ROOM;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static hallpointer.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static hallpointer.address.model.Model.PREDICATE_SHOW_ALL_MEMBERS;
 import static java.util.Objects.requireNonNull;
 
@@ -21,11 +20,10 @@ import hallpointer.address.commons.util.ToStringBuilder;
 import hallpointer.address.logic.Messages;
 import hallpointer.address.logic.commands.exceptions.CommandException;
 import hallpointer.address.model.Model;
-import hallpointer.address.model.member.Address;
-import hallpointer.address.model.member.Email;
 import hallpointer.address.model.member.Member;
 import hallpointer.address.model.member.Name;
-import hallpointer.address.model.member.Phone;
+import hallpointer.address.model.member.Room;
+import hallpointer.address.model.member.Telegram;
 import hallpointer.address.model.tag.Tag;
 
 /**
@@ -40,13 +38,11 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_TELEGRAM + "TELEGRAM] "
+            + "[" + PREFIX_ROOM + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_TELEGRAM + "91234567 ";
 
     public static final String MESSAGE_EDIT_MEMBER_SUCCESS = "Edited Member: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -96,12 +92,12 @@ public class EditCommand extends Command {
         assert memberToEdit != null;
 
         Name updatedName = editMemberDescriptor.getName().orElse(memberToEdit.getName());
-        Phone updatedPhone = editMemberDescriptor.getPhone().orElse(memberToEdit.getPhone());
-        Email updatedEmail = editMemberDescriptor.getEmail().orElse(memberToEdit.getEmail());
-        Address updatedAddress = editMemberDescriptor.getAddress().orElse(memberToEdit.getAddress());
+        Telegram updatedTelegram = editMemberDescriptor.getTelegram()
+                .orElse(memberToEdit.getTelegram());
+        Room updatedRoom = editMemberDescriptor.getRoom().orElse(memberToEdit.getRoom());
         Set<Tag> updatedTags = editMemberDescriptor.getTags().orElse(memberToEdit.getTags());
 
-        return new Member(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Member(updatedName, updatedTelegram, updatedRoom, updatedTags);
     }
 
     @Override
@@ -134,9 +130,8 @@ public class EditCommand extends Command {
      */
     public static class EditMemberDescriptor {
         private Name name;
-        private Phone phone;
-        private Email email;
-        private Address address;
+        private Telegram telegram;
+        private Room room;
         private Set<Tag> tags;
 
         public EditMemberDescriptor() {}
@@ -147,9 +142,8 @@ public class EditCommand extends Command {
          */
         public EditMemberDescriptor(EditMemberDescriptor toCopy) {
             setName(toCopy.name);
-            setPhone(toCopy.phone);
-            setEmail(toCopy.email);
-            setAddress(toCopy.address);
+            setTelegram(toCopy.telegram);
+            setRoom(toCopy.room);
             setTags(toCopy.tags);
         }
 
@@ -157,7 +151,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, telegram, room, tags);
         }
 
         public void setName(Name name) {
@@ -168,28 +162,20 @@ public class EditCommand extends Command {
             return Optional.ofNullable(name);
         }
 
-        public void setPhone(Phone phone) {
-            this.phone = phone;
+        public void setTelegram(Telegram telegram) {
+            this.telegram = telegram;
         }
 
-        public Optional<Phone> getPhone() {
-            return Optional.ofNullable(phone);
+        public Optional<Telegram> getTelegram() {
+            return Optional.ofNullable(telegram);
         }
 
-        public void setEmail(Email email) {
-            this.email = email;
+        public void setRoom(Room room) {
+            this.room = room;
         }
 
-        public Optional<Email> getEmail() {
-            return Optional.ofNullable(email);
-        }
-
-        public void setAddress(Address address) {
-            this.address = address;
-        }
-
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
+        public Optional<Room> getRoom() {
+            return Optional.ofNullable(room);
         }
 
         /**
@@ -222,9 +208,8 @@ public class EditCommand extends Command {
 
             EditMemberDescriptor otherEditMemberDescriptor = (EditMemberDescriptor) other;
             return Objects.equals(name, otherEditMemberDescriptor.name)
-                    && Objects.equals(phone, otherEditMemberDescriptor.phone)
-                    && Objects.equals(email, otherEditMemberDescriptor.email)
-                    && Objects.equals(address, otherEditMemberDescriptor.address)
+                    && Objects.equals(telegram, otherEditMemberDescriptor.telegram)
+                    && Objects.equals(room, otherEditMemberDescriptor.room)
                     && Objects.equals(tags, otherEditMemberDescriptor.tags);
         }
 
@@ -232,9 +217,8 @@ public class EditCommand extends Command {
         public String toString() {
             return new ToStringBuilder(this)
                     .add("name", name)
-                    .add("phone", phone)
-                    .add("email", email)
-                    .add("address", address)
+                    .add("telegram", telegram)
+                    .add("room", room)
                     .add("tags", tags)
                     .toString();
         }
