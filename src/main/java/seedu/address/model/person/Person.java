@@ -28,7 +28,7 @@ public class Person implements Comparable<Person> {
     private final TelegramUsername telegramUsername;
 
     /**
-     * Every field must be present and not null.
+     * Every field must be present and not null
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
                   TelegramUsername telegramUsername) {

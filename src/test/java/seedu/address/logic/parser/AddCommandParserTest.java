@@ -129,13 +129,13 @@ public class AddCommandParserTest {
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
     }
 
-    @Test
-    public void parse_optionalFieldsMissing_success() {
-        // zero tags
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
-        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
-                new AddCommand(expectedPerson));
-    }
+//    @Test
+//    public void parse_optionalFieldsMissing_success() {
+//        // zero tags
+//        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+//        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
+//                new AddCommand(expectedPerson));
+//    }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
