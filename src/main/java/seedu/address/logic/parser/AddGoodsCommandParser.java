@@ -27,6 +27,7 @@ public class AddGoodsCommandParser implements Parser<AddGoodsCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the AddGoodsCommand
      * and returns an AddGoodsCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddGoodsCommand parse(String args) throws ParseException {

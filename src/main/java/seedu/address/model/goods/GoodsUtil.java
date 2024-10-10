@@ -10,6 +10,7 @@ import seedu.address.model.person.Name;
 public class GoodsUtil {
     /**
      * Return a list of goods belonging to a specific supplier.
+     *
      * @param supplier A valid supplier name.
      * @param goodsList A list of goods.
      */
@@ -19,6 +20,7 @@ public class GoodsUtil {
 
     /**
      * Return the total quantity of goods belonging to a specific supplier.
+     *
      * @param supplier A valid supplier name.
      * @param goodsList A list of goods.
      */
@@ -31,6 +33,7 @@ public class GoodsUtil {
 
     /**
      * Return the sum of price totals from a list of goods.
+     *
      * @param goodsList A list of goods.
      */
     public static double sumTotals(List<Goods> goodsList) {

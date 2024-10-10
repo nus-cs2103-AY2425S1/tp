@@ -55,6 +55,7 @@ public class Goods {
 
     /**
      * Returns True if the goods name is valid.
+     *
      * @param test String for goods name
      */
     public static boolean isValidGoodsName(String test) {
@@ -70,6 +71,7 @@ public class Goods {
 
     /**
      * Returns True if the goods is from the given supplier.
+     *
      * @param supplier Name of the supplier to be checked against.
      */
     public boolean isFromSupplier(Name supplier) {
