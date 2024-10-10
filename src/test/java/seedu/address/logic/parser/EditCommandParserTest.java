@@ -100,9 +100,9 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
         assertParseFailure(parser, "1" + INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS); // invalid address
         assertParseFailure(parser, "1" + INVALID_REGISTER_NUMBER_DESC,
-	    		RegisterNumber.MESSAGE_CONSTRAINTS); //invalid register number
+                RegisterNumber.MESSAGE_CONSTRAINTS); //invalid register number
         assertParseFailure(parser, "1" + INVALID_SEX_DESC, Sex.MESSAGE_CONSTRAINTS); // invalid sex
-		assertParseFailure(parser, "1" + INVALID_STUDENT_CLASS_DESC,
+        assertParseFailure(parser, "1" + INVALID_STUDENT_CLASS_DESC,
                 StudentClass.MESSAGE_CONSTRAINTS); // invalid class
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
 
