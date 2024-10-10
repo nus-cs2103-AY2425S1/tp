@@ -5,55 +5,49 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `AcademyAssist@gmail.com`
 
 ## Project team
 
-### John Doe
 
-<img src="images/johndoe.png" width="200px">
+### Ethan Wang
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+<img src="images/ethanwangkangen.png" width="200px">
+
+[[github](https://github.com/ethanwangkangen)]
+[[portfolio](team/ethanwang.md)]
+
+### Hing Yen Xing (Joanne)
+
+<img src="images/joannehing.png" width="200px">
+
+[[github](https://github.com/joannehing)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+* Role: Developer 
 
-### Jane Doe
+### Khoo Yu Yien (Annabelle)
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/annabellekk.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](https://github.com/annabellekk)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Team Lead
+* Role: Developer
 * Responsibilities: UI
 
-### Johnny Doe
+### Adrian Tan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/adriantan101.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/adriantan101)] [[portfolio](team/adriantan.md)]
+
+### Chong Wei Jin
+
+<img src="images/cweijin.png" width="200px">
+
+[[github](https://github.com/cweijin)] [[portfolio](team/johndoe.md)]
+
 
 * Role: Developer
 * Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
