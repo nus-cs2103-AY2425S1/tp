@@ -45,6 +45,19 @@ public class Event {
         return Collections.unmodifiableSet(attendees);
     }
 
+    /**
+     * Returns true if both events have the same name and date.
+     */
+    public boolean isSameEvent(Event otherEvent) {
+        if (otherEvent == this) {
+            return true;
+        }
+
+        return otherEvent != null
+                && otherEvent.getEventName().equals(getEventName())
+                && otherEvent.getDate().equals(getDate());
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
