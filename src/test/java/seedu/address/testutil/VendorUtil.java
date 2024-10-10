@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.CreateVendorCommand;
 import seedu.address.logic.commands.EditCommand.EditVendorDescriptor;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.vendor.Vendor;
@@ -21,7 +21,7 @@ public class VendorUtil {
      * Returns an add command string for adding the {@code vendor}.
      */
     public static String getAddCommand(Vendor vendor) {
-        return AddCommand.COMMAND_WORD + " " + getVendorDetails(vendor);
+        return CreateVendorCommand.COMMAND_WORD + " " + getVendorDetails(vendor);
     }
 
     /**
@@ -32,8 +32,7 @@ public class VendorUtil {
         sb.append(PREFIX_NAME + vendor.getName().fullName + " ");
         sb.append(PREFIX_PHONE + vendor.getPhone().value + " ");
         sb.append(PREFIX_DESCRIPTION + vendor.getDescription().value + " ");
-        vendor.getTags().stream().forEach(
-                s -> sb.append(PREFIX_TAG + s.tagName + " "));
+        vendor.getTags().stream().forEach(s -> sb.append(PREFIX_TAG + s.tagName + " "));
         return sb.toString();
     }
 

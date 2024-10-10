@@ -29,7 +29,7 @@ public class AddCommandTest {
 
     @Test
     public void constructor_nullVendor_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+        assertThrows(NullPointerException.class, () -> new CreateVendorCommand(null));
     }
 
     @Test
@@ -37,9 +37,9 @@ public class AddCommandTest {
         ModelStubAcceptingVendorAdded modelStub = new ModelStubAcceptingVendorAdded();
         Vendor validVendor = new VendorBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validVendor).execute(modelStub);
+        CommandResult commandResult = new CreateVendorCommand(validVendor).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validVendor)),
+        assertEquals(String.format(CreateVendorCommand.MESSAGE_SUCCESS, Messages.format(validVendor)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validVendor), modelStub.vendorsAdded);
     }
@@ -47,24 +47,25 @@ public class AddCommandTest {
     @Test
     public void execute_duplicateVendor_throwsCommandException() {
         Vendor validVendor = new VendorBuilder().build();
-        AddCommand addCommand = new AddCommand(validVendor);
+        CreateVendorCommand addCommand = new CreateVendorCommand(validVendor);
         ModelStub modelStub = new ModelStubWithVendor(validVendor);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_VENDOR, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, CreateVendorCommand.MESSAGE_DUPLICATE_VENDOR,
+                () -> addCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
         Vendor alice = new VendorBuilder().withName("Alice").build();
         Vendor bob = new VendorBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        CreateVendorCommand addAliceCommand = new CreateVendorCommand(alice);
+        CreateVendorCommand addBobCommand = new CreateVendorCommand(bob);
 
         // same object -> returns true
         assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
+        CreateVendorCommand addAliceCommandCopy = new CreateVendorCommand(alice);
         assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false
@@ -79,8 +80,8 @@ public class AddCommandTest {
 
     @Test
     public void toStringMethod() {
-        AddCommand addCommand = new AddCommand(ALICE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
+        CreateVendorCommand addCommand = new CreateVendorCommand(ALICE);
+        String expected = CreateVendorCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
         assertEquals(expected, addCommand.toString());
     }
 
