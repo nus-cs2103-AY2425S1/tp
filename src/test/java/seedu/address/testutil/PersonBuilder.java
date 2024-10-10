@@ -62,6 +62,11 @@ public class PersonBuilder {
         return this;
     }
 
+    public PersonBuilder withCategory(String category) {
+        this.category = category;
+        return this;
+    }
+
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
@@ -91,11 +96,6 @@ public class PersonBuilder {
      */
     public PersonBuilder withEmail(String email) {
         this.email = new Email(email);
-        return this;
-    }
-
-    public PersonBuilder withCategory(String category) {
-        this.category = category;
         return this;
     }
 
