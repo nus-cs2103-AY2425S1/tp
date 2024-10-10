@@ -2,12 +2,12 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.function.Predicate;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-
-import java.util.function.Predicate;
 
 /**
  * Finds and lists all persons in address book whose name contains the substring.
@@ -22,8 +22,8 @@ public class FilterCommand extends Command {
             + "Parameters: <FLAG> <SUBSTRING>\n"
             + "Example: " + COMMAND_WORD + " n/ Alice";
 
-    public static final String MULTIPLE_FILTERS_NOT_IMPLEMENTED = "Using multiple filters is not supported yet. " +
-            "Please use only one filter.";
+    public static final String MULTIPLE_FILTERS_NOT_IMPLEMENTED = "Using multiple filters is not supported yet. "
+            + "Please use only one filter.";
 
     private final Predicate<Person> predicate;
 

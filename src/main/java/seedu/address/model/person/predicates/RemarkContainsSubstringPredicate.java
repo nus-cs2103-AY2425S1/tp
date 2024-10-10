@@ -28,7 +28,8 @@ public class RemarkContainsSubstringPredicate extends ContainsSubstringPredicate
             return false;
         }
 
-        RemarkContainsSubstringPredicate otherRemarkContainsSubstringPredicate = (RemarkContainsSubstringPredicate) other;
+        RemarkContainsSubstringPredicate otherRemarkContainsSubstringPredicate =
+                (RemarkContainsSubstringPredicate) other;
         return substring.equals(otherRemarkContainsSubstringPredicate.substring);
     }
 
