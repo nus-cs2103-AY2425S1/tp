@@ -10,13 +10,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Experience {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Experience should only contain alphanumeric characters and spaces, and it should not be blank.";
+            "Experience can take any values, and it should not be blank";
 
     /*
      * The first character of the experience must not be a whitespace,
      * and it should only contain alphanumeric characters and spaces.
      */
-    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9 ]+$";
+    public static final String VALIDATION_REGEX = "^[^\\s].*";
 
     public final String value;
 
