@@ -10,4 +10,19 @@ public class FindByNameCommand extends AbstractFindCommand {
     public FindByNameCommand(NameContainsKeywordsPredicate predicate) {
         super(predicate);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof FindByNameCommand)) {
+            return false;
+        }
+
+        FindByNameCommand otherFindCommand = (FindByNameCommand) other;
+        return this.getPredicate().equals(otherFindCommand.getPredicate());
+    }
 }
