@@ -18,6 +18,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddPolicyCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeletePolicyCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
@@ -115,6 +116,17 @@ public class AddressBookParserTest {
         policies.add(new LifePolicy());
         assertEquals(new UpdatePolicyCommand(INDEX_FIRST_PERSON, policies), command);
     }
+    public void parseCommand_deletePolicy() throws Exception {
+        // This is hardcoded for now.
+        // Will change in future commits.
+        DeletePolicyCommand command = (DeletePolicyCommand) parser.parseCommand(
+                DeletePolicyCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+                        + " " + PREFIX_POLICY_TYPE + "life");
+        PolicyMap policies = new PolicyMap();
+        policies.add(new LifePolicy());
+        assertEquals(new DeletePolicyCommand(INDEX_FIRST_PERSON, policies), command);
+    }
+
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
