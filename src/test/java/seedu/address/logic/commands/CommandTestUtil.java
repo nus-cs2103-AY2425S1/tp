@@ -62,12 +62,10 @@ public class CommandTestUtil {
             + PREFIX_PROJECT_STATUS + VALID_PROJECT_STATUS_IN_PROGRESS;
     public static final String PROJECT_STATUS_DESC_COMPLETE = " "
             + PREFIX_PROJECT_STATUS + VALID_PROJECT_STATUS_COMPLETE;
-
     public static final String PAYMENT_STATUS_DESC_UNPAID = " "
             + PREFIX_PAYMENT_STATUS + VALID_PAYMENT_STATUS_UNPAID;
     public static final String PAYMENT_STATUS_DESC_PAID = " "
             + PREFIX_PAYMENT_STATUS + VALID_PAYMENT_STATUS_PAID;
-
     public static final String CLIENT_STATUS_ACTIVE = " "
             + PREFIX_CLIENT_STATUS + VALID_CLIENT_STATUS_ACTIVE;
     public static final String CLIENT_STATUS_UNRESPONSIVE = " "
