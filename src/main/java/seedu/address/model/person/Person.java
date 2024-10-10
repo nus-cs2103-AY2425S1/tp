@@ -30,7 +30,7 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Status status, 
+    public Person(Name name, Phone phone, Email email, Address address, Status status,
                   Note note, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, status, note, tags);
         this.name = name;
@@ -61,7 +61,7 @@ public class Person {
     public Status getStatus() {
         return status;
     }
-  
+
     public Note getNote() {
         return note;
     }

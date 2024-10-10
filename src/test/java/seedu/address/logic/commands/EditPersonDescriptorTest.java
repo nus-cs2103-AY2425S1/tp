@@ -57,7 +57,7 @@ public class EditPersonDescriptorTest {
         // different status -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withStatus(VALID_STATUS_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
-      
+
         // different note -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withNote(VALID_NOTE_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
