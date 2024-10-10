@@ -68,6 +68,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
         setPersons(newData.getPersonList());
+        setAssignments(newData.getAssignmentList());
     }
 
     //// person-level operations
@@ -160,7 +161,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.asUnmodifiableObservableList();
     }
     @Override
-    public ObservableList<Assignment> getAssignmentList() { return assignments.asUnmodifiableObservableList(); }
+    public ObservableList<Assignment> getAssignmentList() {
+        return assignments.asUnmodifiableObservableList();
+    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {
