@@ -19,6 +19,14 @@ public class AppParameters {
 
     private Path configPath;
 
+    public Path getConfigPath() {
+        return configPath;
+    }
+
+    public void setConfigPath(Path configPath) {
+        this.configPath = configPath;
+    }
+
     /**
      * Parses the application command-line parameters.
      */
@@ -34,14 +42,6 @@ public class AppParameters {
         appParameters.setConfigPath(configPathParameter != null ? Paths.get(configPathParameter) : null);
 
         return appParameters;
-    }
-
-    public Path getConfigPath() {
-        return configPath;
-    }
-
-    public void setConfigPath(Path configPath) {
-        this.configPath = configPath;
     }
 
     @Override
