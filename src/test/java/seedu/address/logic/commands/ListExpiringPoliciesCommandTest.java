@@ -19,7 +19,8 @@ public class ListExpiringPoliciesCommandTest {
     public void execute_listExpiringPolicies_throwsCommandException() {
         /* this test matches the current stage of development when the logic has yet to be implemented and a
          placeholder exception is used*/
-        CommandException thrown = assertThrows(CommandException.class, () -> listExpiringPoliciesCommand.execute(model));
+        CommandException thrown = assertThrows(CommandException.class, () ->
+                listExpiringPoliciesCommand.execute(model));
         assertEquals("listExpiringPolicies command has not been implemented yet", thrown.getMessage());
     }
 

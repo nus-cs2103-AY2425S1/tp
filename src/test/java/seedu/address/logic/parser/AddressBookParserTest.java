@@ -108,7 +108,8 @@ public class AddressBookParserTest {
     public void parseCommand_listExpiringPolicies() throws Exception {
         // This will be changed in future iterations when args are introduced to the command
         // Test valid usage of the command without arguments
-        assertTrue(parser.parseCommand(ListExpiringPoliciesCommand.COMMAND_WORD) instanceof ListExpiringPoliciesCommand);
+        assertTrue(parser.parseCommand(ListExpiringPoliciesCommand.COMMAND_WORD)
+                instanceof ListExpiringPoliciesCommand);
 
         // Test invalid usage where extra arguments are provided
         assertThrows(ParseException.class,
