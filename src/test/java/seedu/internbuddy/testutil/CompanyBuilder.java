@@ -100,7 +100,7 @@ public class CompanyBuilder {
     }
 
     public Company build() {
-        return new Company(name, phone, email, address, tags);
+        return new Company(name, phone, email, address, tags, status);
     }
 
 }
