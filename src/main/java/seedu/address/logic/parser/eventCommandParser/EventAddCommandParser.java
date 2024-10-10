@@ -42,11 +42,12 @@ public class EventAddCommandParser {
         Date date = ParserUtil.parseDate(argMultimap.getValue(EVENT_PREFIX_DATE).get());
         Time start_time = ParserUtil.parseTime(argMultimap.getValue(EVENT_PREFIX_START_TIME).get());
         Time end_time = ParserUtil.parseTime(argMultimap.getValue(EVENT_PREFIX_END_TIME).get());
-        Description description = ParserUtil.parseDescription(argMultimap.getValue(EVENT_PREFIX_DESCRIPTION).get());
+
 
 
         Event event;
         if (arePrefixesPresent(argMultimap, EVENT_PREFIX_DESCRIPTION)) {
+            Description description = ParserUtil.parseDescription(argMultimap.getValue(EVENT_PREFIX_DESCRIPTION).get());
             event = new Event(eventName, location, date, start_time, end_time, description);
         } else {
             event = new Event(eventName, location, date, start_time, end_time);
