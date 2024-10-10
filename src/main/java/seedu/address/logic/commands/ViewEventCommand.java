@@ -5,33 +5,34 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameMatchesKeywordsPredicate;
+import seedu.address.model.event.EventNameMatchesKeywordsPredicate;
 
 /**
- * Views the specific information of a person in address book whose name is the argument keywords.
+ * Views the specific information of an event in address book whose name is the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class ViewContactCommand extends ViewCommand {
+public class ViewEventCommand extends ViewCommand {
+    public static final String COMMAND_FIELD = "event";
 
-    public static final String COMMAND_FIELD = "contact";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views the person whose name is "
-            + "the specified keywords (case-sensitive) and displays him/her.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views the event whose name is "
+            + "the specified keywords (case-sensitive) and displays it.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " " + COMMAND_FIELD + " David Li";
+            + "Example: " + COMMAND_WORD + " " + COMMAND_FIELD + " Awards show";
 
-    private final NameMatchesKeywordsPredicate predicate;
+    private final EventNameMatchesKeywordsPredicate predicate;
 
-    public ViewContactCommand(NameMatchesKeywordsPredicate predicate) {
+    public ViewEventCommand(EventNameMatchesKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
+
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
+        model.updateFilteredEventList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredEventList().size()));
+
     }
 
     @Override
@@ -45,7 +46,7 @@ public class ViewContactCommand extends ViewCommand {
             return false;
         }
 
-        ViewContactCommand otherFindCommand = (ViewContactCommand) other;
+        ViewEventCommand otherFindCommand = (ViewEventCommand) other;
         return predicate.equals(otherFindCommand.predicate);
     }
 
