@@ -10,16 +10,16 @@ import seedu.address.model.person.Person;
 import java.util.function.Predicate;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
- * Keyword matching is case-insensitive.
+ * Finds and lists all persons in address book whose name contains the substring.
+ * Substring matching is case-insensitive.
  */
 public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose field contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose field contains the "
+            + "the specified substring (case-insensitive) and displays them as a list with index numbers.\n"
+            + "Parameters: <FLAG> <SUBSTRING>\n"
             + "Example: " + COMMAND_WORD + " n/ Alice";
 
     public static final String MULTIPLE_FILTERS_NOT_IMPLEMENTED = "Using multiple filters is not supported yet. " +

@@ -38,20 +38,20 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            String keyword = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()).fullName;
-            return new FilterCommand(new NameContainsSubstringPredicate(keyword));
+            String substring = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()).fullName;
+            return new FilterCommand(new NameContainsSubstringPredicate(substring));
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            String keyword = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()).value;
-            return new FilterCommand(new PhoneContainsSubstringPredicate(keyword));
+            String substring = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()).value;
+            return new FilterCommand(new PhoneContainsSubstringPredicate(substring));
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            String keyword = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()).value;
-            return new FilterCommand(new EmailContainsSubstringPredicate(keyword));
+            String substring = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()).value;
+            return new FilterCommand(new EmailContainsSubstringPredicate(substring));
         }
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            String keyword = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()).value;
-            return new FilterCommand(new AddressContainsSubstringPredicate(keyword));
+            String substring = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()).value;
+            return new FilterCommand(new AddressContainsSubstringPredicate(substring));
         }
         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
     }
