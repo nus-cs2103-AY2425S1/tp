@@ -103,6 +103,11 @@ public class TutorEaseTest {
         public ObservableList<Person> getPersonList() {
             return persons;
         }
+
+        @Override
+        public Person getPerson(String name) {
+            return null;
+        }
     }
 
 }

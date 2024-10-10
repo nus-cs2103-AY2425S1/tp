@@ -14,6 +14,7 @@ import tutorease.address.logic.commands.EditCommand;
 import tutorease.address.logic.commands.ExitCommand;
 import tutorease.address.logic.commands.FindCommand;
 import tutorease.address.logic.commands.HelpCommand;
+import tutorease.address.logic.commands.LessonCommand;
 import tutorease.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -66,6 +67,9 @@ public class TutorEaseParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case LessonCommand.COMMAND_WORD:
+            return new LessonCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

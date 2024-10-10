@@ -1,6 +1,7 @@
 package tutorease.address.logic.commands;
 
 import static tutorease.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static tutorease.address.testutil.TypicalLessons.getTypicalLessons;
 import static tutorease.address.testutil.TypicalPersons.getTypicalTutorEase;
 
 import org.junit.jupiter.api.Test;
@@ -22,8 +23,8 @@ public class ClearCommandTest {
 
     @Test
     public void execute_nonEmptyTutorEase_success() {
-        Model model = new ModelManager(getTypicalTutorEase(), new UserPrefs());
-        Model expectedModel = new ModelManager(getTypicalTutorEase(), new UserPrefs());
+        Model model = new ModelManager(getTypicalTutorEase(), new UserPrefs(), getTypicalLessons());
+        Model expectedModel = new ModelManager(getTypicalTutorEase(), new UserPrefs(), getTypicalLessons());
         expectedModel.setTutorEase(new TutorEase());
 
         assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);

@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import tutorease.address.commons.core.GuiSettings;
 import tutorease.address.commons.core.LogsCenter;
+import tutorease.address.model.lesson.Lesson;
 import tutorease.address.model.person.Person;
 
 /**
@@ -21,23 +22,26 @@ public class ModelManager implements Model {
 
     private final TutorEase tutorEase;
     private final UserPrefs userPrefs;
+    private final LessonSchedule lessonSchedule;
     private final FilteredList<Person> filteredPersons;
 
     /**
      * Initializes a ModelManager with the given tutorEase and userPrefs.
      */
-    public ModelManager(ReadOnlyTutorEase tutorEase, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(tutorEase, userPrefs);
+    public ModelManager(ReadOnlyTutorEase tutorEase, ReadOnlyUserPrefs userPrefs, LessonSchedule lessonSchedule) {
+        requireAllNonNull(tutorEase, userPrefs, lessonSchedule);
 
-        logger.fine("Initializing with address book: " + tutorEase + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + tutorEase + " and user prefs " + userPrefs
+                + " and lesson schedule " + lessonSchedule);
 
         this.tutorEase = new TutorEase(tutorEase);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.lessonSchedule = new LessonSchedule(lessonSchedule);
         filteredPersons = new FilteredList<>(this.tutorEase.getPersonList());
     }
 
     public ModelManager() {
-        this(new TutorEase(), new UserPrefs());
+        this(new TutorEase(), new UserPrefs(), new LessonSchedule());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -145,4 +149,21 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
 
+    //=========== LessonSchedule ================================================================================
+
+    @Override
+    public LessonSchedule getLessonSchedule() {
+        return lessonSchedule;
+    }
+
+    @Override
+    public void addLesson(Lesson lesson) {
+        lessonSchedule.addLesson(lesson);
+    }
+
+    @Override
+    public boolean hasLessons(Lesson lesson) {
+        requireNonNull(lesson);
+        return lessonSchedule.hasLesson(lesson);
+    }
 }

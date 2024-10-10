@@ -4,6 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutorease.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tutorease.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static tutorease.address.logic.commands.CommandTestUtil.DURATION_DESC;
+import static tutorease.address.logic.commands.CommandTestUtil.LOCATION_INDEX_DESC;
+import static tutorease.address.logic.commands.CommandTestUtil.START_DATE_TIME_DESC;
+import static tutorease.address.logic.commands.CommandTestUtil.STUDENT_ID_DESC;
 import static tutorease.address.testutil.Assert.assertThrows;
 import static tutorease.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -14,12 +18,14 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import tutorease.address.logic.commands.AddContactCommand;
+import tutorease.address.logic.commands.AddLessonCommand;
 import tutorease.address.logic.commands.ClearCommand;
 import tutorease.address.logic.commands.EditCommand;
 import tutorease.address.logic.commands.EditCommand.EditPersonDescriptor;
 import tutorease.address.logic.commands.ExitCommand;
 import tutorease.address.logic.commands.FindCommand;
 import tutorease.address.logic.commands.HelpCommand;
+import tutorease.address.logic.commands.LessonCommand;
 import tutorease.address.logic.parser.exceptions.ParseException;
 import tutorease.address.model.person.NameContainsKeywordsPredicate;
 import tutorease.address.model.person.Person;
@@ -76,7 +82,7 @@ public class TutorEaseParserTest {
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(""));
+                -> parser.parseCommand(""));
     }
 
     @Test
@@ -84,6 +90,14 @@ public class TutorEaseParserTest {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
     }
 
-
-
+    @Test
+    public void parseCommand_lesson_add() throws Exception {
+        assertTrue(parser.parseCommand(LessonCommand.COMMAND_WORD
+                + " "
+                + AddLessonCommand.COMMAND_WORD
+                + " " + STUDENT_ID_DESC
+                + " " + LOCATION_INDEX_DESC
+                + " " + START_DATE_TIME_DESC
+                + " " + DURATION_DESC) instanceof AddLessonCommand);
+    }
 }

@@ -16,9 +16,11 @@ import javafx.collections.ObservableList;
 import tutorease.address.commons.core.GuiSettings;
 import tutorease.address.commons.core.index.Index;
 import tutorease.address.logic.commands.exceptions.CommandException;
+import tutorease.address.model.LessonSchedule;
 import tutorease.address.model.Model;
 import tutorease.address.model.ReadOnlyTutorEase;
 import tutorease.address.model.ReadOnlyUserPrefs;
+import tutorease.address.model.lesson.Lesson;
 import tutorease.address.model.person.Person;
 import tutorease.address.testutil.PersonBuilder;
 
@@ -133,6 +135,21 @@ class DeleteContactCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public LessonSchedule getLessonSchedule() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addLesson(Lesson lesson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasLessons(Lesson lesson) {
             throw new AssertionError("This method should not be called.");
         }
     }
