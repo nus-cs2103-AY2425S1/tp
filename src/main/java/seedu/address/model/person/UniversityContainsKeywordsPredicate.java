@@ -16,7 +16,7 @@ public class UniversityContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        return StringUtil.containsWordIgnoreCase(person.getUniversity().value, keyword);
+        return person.getUniversity().value.toLowerCase().contains(keyword.toLowerCase());
     }
 
     @Override
