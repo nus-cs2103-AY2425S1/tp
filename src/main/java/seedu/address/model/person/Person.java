@@ -3,11 +3,15 @@ package seedu.address.model.person;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.addresses.Network;
+import seedu.address.model.addresses.PublicAddress;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,6 +27,7 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private Map<Network, Set<PublicAddress>> publicAddresses = new HashMap<>();
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -51,6 +56,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Set<PublicAddress> getPublicAddressesByNetwork(Network network) {
+        return publicAddresses.getOrDefault(network, new HashSet<>());
     }
 
     /**
