@@ -64,6 +64,7 @@ public class CommandResult {
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit;
     }
+    
 
     @Override
     public int hashCode() {
