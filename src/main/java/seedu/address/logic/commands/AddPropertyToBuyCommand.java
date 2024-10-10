@@ -17,14 +17,6 @@ import seedu.address.model.Model;
 public class AddPropertyToBuyCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
-
-        /*if (model.hasProperty(property)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PROPERTY);
-        }
-
-        model.addProperty(property);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, property));*/
         return new CommandResult("Hello from AddPropertyToBuyCommand");
     }
 }
