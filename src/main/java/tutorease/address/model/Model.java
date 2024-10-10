@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import tutorease.address.commons.core.GuiSettings;
+import tutorease.address.model.lesson.Lesson;
 import tutorease.address.model.person.Person;
 
 /**
@@ -84,4 +85,19 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Returns the lesson schedule.
+     */
+    LessonSchedule getLessonSchedule();
+
+    /**
+     * Adds the given lesson.
+     */
+    void addLesson(Lesson lesson);
+
+    /**
+     * Returns true if a lesson with the same identity as {@code lesson} overlaps in the lesson schedule.
+     */
+    boolean hasLessons(Lesson lesson);
 }

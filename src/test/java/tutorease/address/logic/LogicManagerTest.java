@@ -7,6 +7,7 @@ import static tutorease.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static tutorease.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static tutorease.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static tutorease.address.testutil.Assert.assertThrows;
+import static tutorease.address.testutil.TypicalLessons.getTypicalLessons;
 import static tutorease.address.testutil.TypicalPersons.AMY;
 
 import java.io.IOException;
@@ -26,6 +27,7 @@ import tutorease.address.model.ModelManager;
 import tutorease.address.model.ReadOnlyTutorEase;
 import tutorease.address.model.UserPrefs;
 import tutorease.address.model.person.Person;
+import tutorease.address.storage.JsonLessonScheduleStorage;
 import tutorease.address.storage.JsonTutorEaseStorage;
 import tutorease.address.storage.JsonUserPrefsStorage;
 import tutorease.address.storage.StorageManager;
@@ -46,7 +48,10 @@ public class LogicManagerTest {
         JsonTutorEaseStorage tutorEaseStorage =
                 new JsonTutorEaseStorage(temporaryFolder.resolve("tutorease.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(tutorEaseStorage, userPrefsStorage);
+        JsonLessonScheduleStorage lessonStorage = new JsonLessonScheduleStorage(
+                temporaryFolder.resolve("lessonschedule.json"));
+
+        StorageManager storage = new StorageManager(tutorEaseStorage, userPrefsStorage, lessonStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -109,7 +114,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getTutorEase(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getTutorEase(), new UserPrefs(), getTypicalLessons());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -146,7 +151,9 @@ public class LogicManagerTest {
 
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(tutorEaseStorage, userPrefsStorage);
+        JsonLessonScheduleStorage lessonStorage = new JsonLessonScheduleStorage(
+                temporaryFolder.resolve("lessonschedule.json"));
+        StorageManager storage = new StorageManager(tutorEaseStorage, userPrefsStorage, lessonStorage);
 
         logic = new LogicManager(model, storage);
 

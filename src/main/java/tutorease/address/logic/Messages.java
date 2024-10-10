@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import tutorease.address.logic.parser.Prefix;
+import tutorease.address.model.lesson.Lesson;
 import tutorease.address.model.person.Person;
 
 /**
@@ -17,7 +18,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
-                "Multiple values specified for the following single-valued field(s): ";
+            "Multiple values specified for the following single-valued field(s): ";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -45,6 +46,18 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code lesson} for display to the user.
+     *
+     * @param lesson The lesson to be formatted.
+     * @return The formatted lesson.
+     */
+    public static String formatLesson(Lesson lesson) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(lesson);
         return builder.toString();
     }
 

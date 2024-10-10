@@ -9,6 +9,10 @@ import java.util.Set;
 import tutorease.address.commons.core.index.Index;
 import tutorease.address.commons.util.StringUtil;
 import tutorease.address.logic.parser.exceptions.ParseException;
+import tutorease.address.model.lesson.EndDateTime;
+import tutorease.address.model.lesson.LocationIndex;
+import tutorease.address.model.lesson.StartDateTime;
+import tutorease.address.model.lesson.StudentId;
 import tutorease.address.model.person.Address;
 import tutorease.address.model.person.Email;
 import tutorease.address.model.person.Name;
@@ -25,6 +29,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -120,5 +125,68 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String studentId} into a {@code StudentId}.
+     *
+     * @param studentId The student ID to be parsed.
+     * @return The parsed student ID.
+     * @throws ParseException If the student ID is invalid.
+     */
+    public static StudentId parseStudentId(String studentId) throws ParseException {
+        requireNonNull(studentId);
+        if (!StudentId.isValidStudentId(studentId)) {
+            throw new ParseException(StudentId.MESSAGE_CONSTRAINTS);
+        }
+        return new StudentId(studentId);
+    }
+
+    /**
+     * Parses a {@code String locationIndex} into a {@code LocationIndex}.
+     *
+     * @param locationIndex The location index to be parsed.
+     * @return The parsed location index.
+     * @throws ParseException If the location index is invalid.
+     */
+    public static LocationIndex parseLocationIndex(String locationIndex) throws ParseException {
+        requireNonNull(locationIndex);
+        if (!LocationIndex.isValidLocationIndex(locationIndex)) {
+            throw new ParseException(LocationIndex.MESSAGE_CONSTRAINTS);
+        }
+        return new LocationIndex(locationIndex);
+    }
+
+    /**
+     * Parses a {@code String startDateTime} into a {@code StartDateTime}.
+     *
+     * @param startDateTime The start date time to be parsed.
+     * @return The parsed start date time.
+     * @throws ParseException If the start date time is invalid.
+     */
+    public static StartDateTime parseStartDateTime(String startDateTime) throws ParseException {
+        requireNonNull(startDateTime);
+        String trimmedStartDateTime = startDateTime.trim();
+        if (!StartDateTime.isValidStartDateTime(trimmedStartDateTime)) {
+            throw new ParseException(StartDateTime.START_DATE_MESSAGE_CONSTRAINTS);
+        }
+        return StartDateTime.createStartDateTime(trimmedStartDateTime);
+    }
+
+    /**
+     * Parses a {@code StartDateTime} and a {@code String hoursToAdd} into an {@code EndDateTime}.
+     *
+     * @param startDateTime The start date time.
+     * @param hoursToAdd    The number of hours to add to the start date time.
+     * @return The parsed end date time.
+     * @throws ParseException If the hours to add is invalid.
+     */
+    public static EndDateTime parseEndDateTime(StartDateTime startDateTime, String hoursToAdd) throws ParseException {
+        requireNonNull(startDateTime);
+        requireNonNull(hoursToAdd);
+        if (!EndDateTime.isValidHoursToAdd(hoursToAdd)) {
+            throw new ParseException(EndDateTime.HOURS_MESSAGE_CONSTRAINTS);
+        }
+        return EndDateTime.createEndDateTime(startDateTime, hoursToAdd);
     }
 }

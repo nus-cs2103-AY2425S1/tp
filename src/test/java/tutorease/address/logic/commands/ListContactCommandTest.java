@@ -3,6 +3,7 @@ package tutorease.address.logic.commands;
 import static tutorease.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorease.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static tutorease.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static tutorease.address.testutil.TypicalLessons.getTypicalLessons;
 import static tutorease.address.testutil.TypicalPersons.getTypicalTutorEase;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -22,8 +23,8 @@ public class ListContactCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalTutorEase(), new UserPrefs());
-        expectedModel = new ModelManager(model.getTutorEase(), new UserPrefs());
+        model = new ModelManager(getTypicalTutorEase(), new UserPrefs(), getTypicalLessons());
+        expectedModel = new ModelManager(model.getTutorEase(), new UserPrefs(), getTypicalLessons());
     }
 
     @Test

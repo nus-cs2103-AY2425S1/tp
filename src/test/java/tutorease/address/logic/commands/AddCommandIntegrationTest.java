@@ -2,6 +2,7 @@ package tutorease.address.logic.commands;
 
 import static tutorease.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorease.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static tutorease.address.testutil.TypicalLessons.getTypicalLessons;
 import static tutorease.address.testutil.TypicalPersons.getTypicalTutorEase;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -23,14 +24,14 @@ public class AddCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalTutorEase(), new UserPrefs());
+        model = new ModelManager(getTypicalTutorEase(), new UserPrefs(), getTypicalLessons());
     }
 
     @Test
     public void execute_newPerson_success() {
         Person validPerson = new PersonBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getTutorEase(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getTutorEase(), new UserPrefs(), model.getLessonSchedule());
         expectedModel.addPerson(validPerson);
 
         assertCommandSuccess(new AddCommand(validPerson), model,
