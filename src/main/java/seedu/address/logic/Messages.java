@@ -54,7 +54,7 @@ public class Messages {
     }
 
     /**
-     * Formats the {@code person} for display to the user.
+     * Formats the {@code meeting} for display to the user.
      */
     public static String format(Meeting meeting) {
         final StringBuilder builder = new StringBuilder();
