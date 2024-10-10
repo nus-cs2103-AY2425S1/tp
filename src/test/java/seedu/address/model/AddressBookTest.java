@@ -130,7 +130,7 @@ public class AddressBookTest {
             + ", products=" + addressBook.getProductList() + "}";
         assertEquals(expected, addressBook.toString());
     }
-    
+
     @Test
     public void setProduct_nullTargetProduct_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> addressBook.setProduct(null, APPLE));
