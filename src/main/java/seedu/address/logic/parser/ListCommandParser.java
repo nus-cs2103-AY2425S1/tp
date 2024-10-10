@@ -33,21 +33,21 @@ public class ListCommandParser implements Parser<ListCommand> {
         // Switch case to handle different key values
         ListCommand.Key key;
         switch (keyArg.toLowerCase()) {
-            case "buyers":
-                key = ListCommand.Key.BUYERS;
-                break;
-            case "sellers":
-                key = ListCommand.Key.SELLERS;
-                break;
-            case "clients":
-                key = ListCommand.Key.CLIENTS;
-                break;
-            case "properties":
-                key = ListCommand.Key.PROPERTIES;
-                break;
-            default:
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
+        case "buyers":
+            key = ListCommand.Key.BUYERS;
+            break;
+        case "sellers":
+            key = ListCommand.Key.SELLERS;
+            break;
+        case "clients":
+            key = ListCommand.Key.CLIENTS;
+            break;
+        case "properties":
+            key = ListCommand.Key.PROPERTIES;
+            break;
+        default:
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
         }
 
         // Return the appropriate ListCommand with the parsed key

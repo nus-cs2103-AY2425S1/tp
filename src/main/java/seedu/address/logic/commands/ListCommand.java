@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.address.model.Model;
 
@@ -9,7 +8,19 @@ import seedu.address.model.Model;
  * Lists all persons in the address book to the user.
  */
 public class ListCommand extends Command {
-
+    /**
+     * Represents the various types of entities that can be listed in the address book.
+     * This enum is used to specify the kind of records a property agent wishes to list,
+     * allowing for easy differentiation between different categories.
+     *
+     * <p>Possible values include:</p>
+     * <ul>
+     *     <li>{@link #BUYERS} - Represents buyers in the database.</li>
+     *     <li>{@link #SELLERS} - Represents sellers in the database.</li>
+     *     <li>{@link #CLIENTS} - Represents clients in the database, which includes both buyers and sellers.</li>
+     *     <li>{@link #PROPERTIES} - Represents properties in the database.</li>
+     * </ul>
+     */
     public static enum Key {
         BUYERS,
         SELLERS,
@@ -19,7 +30,8 @@ public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all existing properties, sellers, buyers, or clients in the database.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all existing properties, sellers, buyers, "
+            + "or clients in the database.\n"
             + "Command format: " + COMMAND_WORD + " k/KEY\n"
             + "Example commands:\n"
             + "1. List all the buyers: " + COMMAND_WORD + " k/buyers\n"
@@ -52,24 +64,24 @@ public class ListCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         switch (key) {
-            case BUYERS:
-                // Logic to list buyers
-                System.out.println("Listing all buyers");
-                break;
-            case SELLERS:
-                // Logic to list sellers
-                System.out.println("Listing all sellers");
-                break;
-            case CLIENTS:
-                // Logic to list clients
-                System.out.println("Listing all clients");
-                break;
-            case PROPERTIES:
-                // Logic to list properties
-                System.out.println("Listing all properties");
-                break;
-            default:
-                throw new AssertionError("Unexpected key: " + key);
+        case BUYERS:
+            // Logic to list buyers
+            System.out.println("Listing all buyers");
+            break;
+        case SELLERS:
+            // Logic to list sellers
+            System.out.println("Listing all sellers");
+            break;
+        case CLIENTS:
+            // Logic to list clients
+            System.out.println("Listing all clients");
+            break;
+        case PROPERTIES:
+            // Logic to list properties
+            System.out.println("Listing all properties");
+            break;
+        default:
+            throw new AssertionError("Unexpected key: " + key);
         }
         return new CommandResult(String.format(ListCommand.MESSAGE_SUCCESS, this.key.toString().toLowerCase()));
     }
