@@ -22,6 +22,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.group.Group;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.PersonBuilder;
 
@@ -89,6 +90,17 @@ public class AddStudentCommandTest {
      * A default model stub that have all of the methods failing.
      */
     private class ModelStub implements Model {
+
+        @Override
+        public boolean hasGroup(Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addGroup(Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
@@ -146,6 +158,11 @@ public class AddStudentCommandTest {
 
         @Override
         public void setPerson(Student target, Student editedStudent) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setGroup(Group target, Group updatedGroup) {
             throw new AssertionError("This method should not be called.");
         }
 
