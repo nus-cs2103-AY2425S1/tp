@@ -1,5 +1,7 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import seedu.address.logic.commands.PriorityCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -16,7 +18,7 @@ public class PriorityCommandParser implements Parser<PriorityCommand> {
             int level = Integer.parseInt(splitArgs[3]);
             return new PriorityCommand(id, level);
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-            throw new ParseException("Invalid command format! \n" + PriorityCommand.MESSAGE_USAGE);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PriorityCommand.MESSAGE_USAGE));
         }
     }
 }
