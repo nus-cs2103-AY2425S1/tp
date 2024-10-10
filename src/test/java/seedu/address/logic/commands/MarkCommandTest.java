@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -85,6 +86,19 @@ public class MarkCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         String expectedMessage = String.format(MarkCommand.MESSAGE_ADD_MARK_SUCCESS, Messages.format(editedPerson));
         assertCommandSuccess(markCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void equals_null_failure() {
+        Tutorial tutorial = new Tutorial("1");
+
+        assertFalse(tutorial.equals(null));
+    }
+    @Test
+    public void equals_itself_success() {
+        Tutorial tutorial = new Tutorial("1");
+
+        assertTrue(tutorial.equals(tutorial));
     }
 
     @Test

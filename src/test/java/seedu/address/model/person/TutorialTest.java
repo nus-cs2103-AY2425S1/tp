@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -28,6 +29,9 @@ public class TutorialTest {
     public void equals() {
         // is itself
         assertTrue(this.equals(this));
+
+        // is null
+        assertFalse(this.equals(null));
 
         // different instance, same tutorial
         Tutorial firstTutorial = new Tutorial("1");
