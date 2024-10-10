@@ -1,7 +1,5 @@
 package seedu.address.testutil;
 
-import static java.util.Objects.checkIndex;
-
 import java.util.HashSet;
 import java.util.Set;
 

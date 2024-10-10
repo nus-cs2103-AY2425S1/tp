@@ -3,17 +3,21 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a Person's client status in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
+ */
 public class ClientStatus {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Client status must be either “active”, “unresponsive”, “potential”, or “old”(case sensitive).";
 
-    private final String value;
-
     private static final String ACTIVE = "active";
-    private static final String UNRESPONSIVE = "unresponsive";
-    private static final String POTENTIAL = "potential";
     private static final String OLD = "old";
+    private static final String POTENTIAL = "potential";
+    private static final String UNRESPONSIVE = "unresponsive";
+
+    private final String value;
 
     /**
      * Constructs a {@code ClientStatus}.
@@ -41,16 +45,17 @@ public class ClientStatus {
      */
     private static String parseStatus(String status) {
         switch (status) {
-            case ACTIVE:
-                return ACTIVE;
-            case UNRESPONSIVE:
-                return UNRESPONSIVE;
-            case OLD:
-                return OLD;
-            case POTENTIAL:
-                return POTENTIAL;
+        case ACTIVE:
+            return ACTIVE;
+        case UNRESPONSIVE:
+            return UNRESPONSIVE;
+        case OLD:
+            return OLD;
+        case POTENTIAL:
+            return POTENTIAL;
+        default:
+            return status;
         }
-        return status;
     }
 
     @Override

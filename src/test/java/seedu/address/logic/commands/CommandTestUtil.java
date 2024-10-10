@@ -79,7 +79,7 @@ public class CommandTestUtil {
     public static final String INVALID_PROJECT_STATUS_DESC = " "
             + PREFIX_PROJECT_STATUS + "unknown"; // invalid project status
     public static final String INVALID_CLIENT_STATUS_DESC = " "
-            + PREFIX_CLIENT_STATUS + "referral";  // invalid client status
+            + PREFIX_CLIENT_STATUS + "referral"; // invalid client status
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

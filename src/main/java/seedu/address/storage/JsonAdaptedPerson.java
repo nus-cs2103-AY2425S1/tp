@@ -125,7 +125,8 @@ class JsonAdaptedPerson {
         final ProjectStatus modelProjectStatus = new ProjectStatus(projectStatus);
 
         if (clientStatus == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ClientStatus.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                ClientStatus.class.getSimpleName()));
         }
         if (!ClientStatus.isValidClientStatus(clientStatus)) {
             throw new IllegalValueException(ClientStatus.MESSAGE_CONSTRAINTS);
