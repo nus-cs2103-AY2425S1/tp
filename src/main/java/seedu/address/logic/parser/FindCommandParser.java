@@ -5,14 +5,13 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.function.Predicate;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.PhoneContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
-
-import java.util.function.Predicate;
+import seedu.address.model.person.PhoneContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object.
@@ -39,7 +38,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                 .collect(Collectors.toList());
 
         List<String> nameKeywords = Arrays.stream(keywords)
-                .filter(keyword -> !isNumeric(keyword))  // Only keep non-numeric keywords ie names
+                .filter(keyword -> !isNumeric(keyword)) // Only keep non-numeric keywords ie names
                 .collect(Collectors.toList());
 
         Predicate<Person> namePredicate = nameKeywords.isEmpty()
@@ -61,6 +60,6 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @return True if the string is numeric, false otherwise.
      */
     private boolean isNumeric(String str) {
-        return str.matches("\\d+");  // Matches any string that contains only digits
+        return str.matches("\\d+"); // Matches any string that contains only digits
     }
 }
