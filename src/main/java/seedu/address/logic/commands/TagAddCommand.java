@@ -22,10 +22,10 @@ public class TagAddCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds a tag to the person identified "
             + "by their name. "
-            + "Parameters: TAG "
-            + "n/ NAME t/ [TAG]\n"
-            + "Example: n/ Li Sirui " + COMMAND_WORD
-            + "Jane and Tom 23-04-12";
+            + "Parameters: "
+            + "n/NAME t/[TAG]\n"
+            + "Example: " + COMMAND_WORD + " n/ Li Sirui "
+            + "Jane and Tom 230412";
 
     public static final String MESSAGE_ARGUMENTS = "Name: %1$s, Tag: %2$s";
     public static final String MESSAGE_ADD_TAG_SUCCESS = "Added tag to Person: %1$s";
