@@ -27,15 +27,35 @@ public class PhoneTest {
         // invalid phone numbers
         assertFalse(Phone.isValidPhone("")); // empty string
         assertFalse(Phone.isValidPhone(" ")); // spaces only
-        assertFalse(Phone.isValidPhone("91")); // less than 3 numbers
         assertFalse(Phone.isValidPhone("phone")); // non-numeric
         assertFalse(Phone.isValidPhone("9011p041")); // alphabets within digits
         assertFalse(Phone.isValidPhone("9312 1534")); // spaces within digits
 
         // valid phone numbers
-        assertTrue(Phone.isValidPhone("911")); // exactly 3 numbers
+        assertTrue(Phone.isValidPhone("+911234567")); // valid phone number with leading +
         assertTrue(Phone.isValidPhone("93121534"));
+        assertTrue(Phone.isValidPhone("+123456789012345")); // valid long phone number with leading +
         assertTrue(Phone.isValidPhone("124293842033123")); // long phone numbers
+    }
+
+    @Test
+    public void isValidLengthPhone() {
+        // null phone number
+        assertThrows(NullPointerException.class, () -> Phone.isValidLengthPhone(null));
+
+        // invalid length
+        assertFalse(Phone.isValidLengthPhone("1")); // Less than 7 digits
+        assertFalse(Phone.isValidLengthPhone("+1234567890123456")); // More than 15 digits
+        assertFalse(Phone.isValidLengthPhone("1234567890123456")); // More than 15 digits
+        assertFalse(Phone.isValidLengthPhone("91")); // less than 3 numbers
+
+        // valid length
+        assertTrue(Phone.isValidLengthPhone("911")); // exactly 3 numbers
+        assertTrue(Phone.isValidLengthPhone("+123")); // exactly 3 digits
+        assertTrue(Phone.isValidLengthPhone("+1234567")); // exactly 7 digits with leading +
+        assertTrue(Phone.isValidLengthPhone("1234567")); // exactly 7 digits
+        assertTrue(Phone.isValidLengthPhone("+123456789012345")); // exactly 15 digits with leading +
+        assertTrue(Phone.isValidLengthPhone("123456789012345")); // exactly 15 digits
     }
 
     @Test
