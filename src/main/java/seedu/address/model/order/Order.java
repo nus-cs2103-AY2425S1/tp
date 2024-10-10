@@ -33,6 +33,19 @@ public class Order {
         return order;
     }
 
+    /**
+     * Remove a order based on its name
+     * @param name Name of order
+     * @return True if removed successfully
+     */
+    public static boolean removeOrder(String name) {
+        if (nameToOrder.get(name) != null) {
+            nameToOrder.remove(name);
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public int hashCode() {
         return this.name.hashCode();

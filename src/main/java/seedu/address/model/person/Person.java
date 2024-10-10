@@ -3,23 +3,27 @@ package seedu.address.model.person;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.order.Order;
 import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Person implements Comparable<Person> {
 
     // Identity fields
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final HashMap<Order, Integer> orderFrequency;
 
     // Data fields
     private final Address address;
@@ -35,6 +39,20 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.orderFrequency = new HashMap<>();
+    }
+
+    /**
+     * Every field with orderFrequency must be present and not null
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, HashMap<Order, Integer> orders) {
+        requireAllNonNull(name, phone, email, address, tags, orders);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.orderFrequency = orders;
     }
 
     public Name getName() {
@@ -51,6 +69,34 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public HashMap<Order, Integer> getOrderFrequency() {
+        return this.orderFrequency;
+    }
+
+    /**
+     * Increase the frequency of an order by 1 for the customer
+     * @param order The order to increase its frequency
+     */
+    public void putOrder(Order order) {
+        this.orderFrequency.merge(order, 1, Integer::sum);
+    }
+
+    /**
+     * Remove order frequency record for order
+     * @param order The order to remove
+     */
+    public void removeOrder(Order order) {
+        this.orderFrequency.remove(order);
+    }
+
+    private int getTotalOrderFrequencyCount() {
+        int sum = 0;
+        for (Map.Entry<Order, Integer> entry: this.orderFrequency.entrySet()) {
+            sum += entry.getValue();
+        }
+        return sum;
     }
 
     /**
@@ -75,6 +121,21 @@ public class Person {
     }
 
     /**
+     * Person with the largest order frequency count are at the front
+     * @param rhs the object to be compared.
+     * @return -1 if rhs has lower order frequency count
+     */
+    @Override
+    public int compareTo(Person rhs) {
+        if (this.getTotalOrderFrequencyCount() < rhs.getTotalOrderFrequencyCount()) {
+            return 1;
+        } else if (this.getTotalOrderFrequencyCount() > rhs.getTotalOrderFrequencyCount()) {
+            return -1;
+        }
+        return 0;
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
@@ -94,13 +155,14 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && orderFrequency.equals(otherPerson.orderFrequency);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, orderFrequency);
     }
 
     @Override
