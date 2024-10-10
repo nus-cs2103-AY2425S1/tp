@@ -474,7 +474,7 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. Deleting a person while found persons are being shown
+2. Deleting a person while found persons are being shown
 
     1. Prerequisites: Find people with names matching a particular keyword using the `find` command. 
 
