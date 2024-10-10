@@ -7,14 +7,14 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 
 /**
- * A UI component that expands the information of a selected {@code Person}.
+ * A UI component that expands the information of a selected {@code Student}.
  */
-public class PersonDetailsPanel extends UiPart<Region> {
+public class StudentDetailsPanel extends UiPart<Region> {
 
-    private static final String FXML = "PersonDetailsPanel.fxml";
+    private static final String FXML = "StudentDetailsPanel.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -24,7 +24,7 @@ public class PersonDetailsPanel extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Person person;
+    public final Student student;
 
     @FXML
     private HBox cardPane;
@@ -42,17 +42,16 @@ public class PersonDetailsPanel extends UiPart<Region> {
     private FlowPane detailsTags;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code StudentCode} with the given {@code Student} and index to display.
      */
-    public PersonDetailsPanel(Person person, int displayedIndex) {
+    public StudentDetailsPanel(Student student, int displayedIndex) {
         super(FXML);
-        this.person = person;
+        this.student = student;
         id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-        person.getTags().stream()
+        name.setText(student.getName().fullName);
+        phone.setText(student.getPhone().value);
+        email.setText(student.getEmail().value);
+        student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> detailsTags.getChildren().add(new Label(tag.tagName)));
     }

@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 
 /**
  * Represents the result of a command execution.
@@ -20,19 +20,19 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
-    private final Person person;
+    private final Student student;
 
-    private final int personIndex;
+    private final int studentIndex;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, Person person, int index) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, Student student, int index) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        this.person = person;
-        this.personIndex = index;
+        this.student = student;
+        this.studentIndex = index;
     }
 
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
@@ -59,14 +59,16 @@ public class CommandResult {
         return exit;
     }
 
-    public boolean isPerson() { return person != null; }
-
-    public Person getPerson() {
-        return person;
+    public boolean getStudent() {
+        return student != null;
     }
 
-    public int getPersonIndex() {
-        return personIndex;
+    public Student getCurStudent() {
+        return student;
+    }
+
+    public int getStudentIndex() {
+        return studentIndex;
     }
 
     @Override

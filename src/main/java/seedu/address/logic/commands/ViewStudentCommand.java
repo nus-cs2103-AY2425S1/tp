@@ -9,26 +9,26 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 
 /**
- * Expands the details of a person identified using it's displayed index from the address book.
+ * Expands the details of a student identified using it's displayed index from the address book.
  */
 public class ViewStudentCommand extends Command {
 
     public static final String COMMAND_WORD = "view_student";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Displays details of the person identified by the index number used in the displayed person list.\n"
+            + ": Displays details of the student identified by the index number used in the displayed student list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_VIEW_PERSON_SUCCESS = "Displayed Person: %1$s";
+    public static final String MESSAGE_VIEW_STUDENT_SUCCESS = "Displayed Student: %1$s";
 
     private final Index targetIndex;
 
     /**
-     * @param index index of the person to display the details of
+     * @param index index of the student to display the details of
      */
     public ViewStudentCommand(Index index) {
         requireAllNonNull(index);
@@ -39,16 +39,16 @@ public class ViewStudentCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Student> lastShownList = model.getFilteredStudentList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
-        Person personToDisplay = lastShownList.get(targetIndex.getZeroBased());
+        Student studentToDisplay = lastShownList.get(targetIndex.getZeroBased());
 
-        return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, targetIndex.getZeroBased() + 1),
-                false, false, personToDisplay, targetIndex.getZeroBased());
+        return new CommandResult(String.format(MESSAGE_VIEW_STUDENT_SUCCESS, targetIndex.getZeroBased() + 1),
+                false, false, studentToDisplay, targetIndex.getZeroBased());
     }
 
     @Override
