@@ -11,6 +11,9 @@ public class Role {
     public static final String MESSAGE_CONSTRAINTS = "Roles can only take in values part of this list, "
             + "stage manager, sound technician, organiser, artist, promoter";
 
+    /**
+     * All the possible valid roles that can be assigned
+     */
     public static enum Roles {
         STAGE_MANAGER,
         SOUND_TECHNICIAN,
@@ -21,12 +24,20 @@ public class Role {
 
     public final String value;
 
+    /**
+     * Constructs a {@code Role}.
+     *
+     * @param role A valid role.
+     */
     public Role(String role) {
         requireNonNull(role);
         checkArgument(isValidRole(role), MESSAGE_CONSTRAINTS);
         value = role;
     }
 
+    /**
+     * Returns true if a given string is a valid role.
+     */
     public static boolean isValidRole(String test) {
         test = test.replace(" ", "_");
         for (Roles role : Roles.values()) {
