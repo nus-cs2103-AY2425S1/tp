@@ -262,71 +262,161 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+Our primary target users are Recruiters and HR professionals who are responsible for managing job candidates and employee information.
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: simplify and enhance the recruitment process for HR professionals and recruiters.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​          | I want to …​                                                      | So that I can…​                                                             |
+| ------ | ---------------- | ----------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `* * *` | recruiter         | add new candidate profiles                                        | keep track of all candidates applying for positions                         |
+| `* * *` | recruiter         | edit candidate profiles                                           | update candidate information as new details become available                |
+| `* * *` | recruiter         | delete candidate profiles                                         | remove candidates who are no longer considered for positions                |
+| `* * *` | HR professional   | view a list of all candidates                                     | easily access any candidate’s details on demand                             |
+| `* * *` | recruiter         | search for candidates by specific criteria (e.g., skills)         | quickly find suitable candidates for various roles                          |
+| `* * *` | HR professional   | schedule and manage interviews                                    | organise the recruitment process efficiently                                |
+| `* * *` | recruiter         | set reminders for interviews                                      | ensure no interview is missed                                               |
+| `* *`  | recruiter         | track the status of a candidate through different recruitment stages | maintain an organised overview of the recruitment pipeline                  |
+| `* *`  | HR professional   | import candidate data from external sources                       | streamline the process of adding new candidates                             |
+| `* *`  | recruiter         | export data on candidates                                         | prepare reports or share data with colleagues                               |
+| `* *`  | recruiter         | record notes during or after interviews                           | have detailed records and observations to refer back to                     |
+| `* *`  | recruiter         | see a dashboard of recruitment activities                         | get a quick overview of all current recruitment efforts                     |
+| `* *`  | HR professional   | manage and view employment details for hired candidates           | keep track of all employment-related information in one place               |
+| `*`    | recruiter         | receive notifications about upcoming tasks                       | stay on top of all recruitment-related tasks without having to constantly check the app |
+| `*`    | HR professional   | customise the fields in candidate profiles                        | tailor the application to fit the specific needs and focus areas of my organisation |
+| `*`    | recruiter         | archive candidate profiles                                        | keep our current database up-to-date without losing past data               |
+| `*`    | recruiter         | view analytics on recruitment efforts (e.g., time to hire)        | assess the effectiveness of current recruitment strategies                  |
+| `*`    | HR professional   | undo/redo changes in the application                              | correct mistakes without needing to manually revert changes                 |
+| `*`    | recruiter         | create and manage job postings                                    | advertise new job openings directly from the application                    |
+| `*`    | recruiter         | receive automated suggestions for potential candidates            | speed up the process of candidate selection                                 |
+| `*`    | recruiter         | categorise candidates into different job pools                    | organize candidates based on their skill sets and roles                     |
+| `*`    | HR professional   | bulk upload candidate profiles via a CSV or Excel file            | quickly import a large number of candidate profiles                         |
+| `*`    | recruiter         | assign tags/labels to candidates                                  | quickly identify candidates based on specific characteristics               |
+| `*`    | HR professional   | generate candidate summary reports for hiring managers            | provide concise and relevant candidate data to stakeholders                 |
+| `*`    | recruiter         | log communication history with candidates                         | track all interactions with candidates throughout the recruitment process   |
+| `*`    | recruiter         | set priorities for candidates in the pipeline                     | focus on high-priority candidates first                                     |
+| `*`    | recruiter         | track the reason for rejecting a candidate                        | maintain clear records of why candidates were not selected                  |
+| `*`    | recruiter         | add links to candidates’ online profiles (e.g., LinkedIn, GitHub) | have quick access to additional candidate information                       |
+| `*`    | HR professional   | integrate the app with job portals or LinkedIn                    | streamline candidate sourcing from multiple platforms                       |
+| `*`    | recruiter         | send automated follow-up emails to candidates                     | save time by automating routine communication tasks                         |
 
-*{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+#### Use Case 1: Add a New Candidate Profile
+**Actor**: Recruiter
 
-**Use case: Delete a person**
+**Preconditions**: The system is running, and the recruiter is logged into the application.
 
-**MSS**
+**Main Success Scenario**:
+1. Recruiter selects the "Add Candidate" option.
+2. System prompts recruiter to input candidate details (name, phone, email, address, role).
+3. Recruiter enters candidate details.
+4. System confirms that the details are valid and adds the candidate profile.
+5. System displays a success message: "Candidate profile added successfully."
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+**Extensions**:
+- 3a. Recruiter inputs invalid phone number or email.
+    - System shows an error message: "Invalid phone number or email. Please enter valid information."
+- 4a. A duplicate candidate profile is detected.
+    - System shows an error message: "Duplicate candidate detected. Profile not added."
 
-    Use case ends.
 
-**Extensions**
+#### Use Case 2: Schedule an Interview
+**Actor**: Recruiter
 
-* 2a. The list is empty.
+**Preconditions**: Recruiter is logged in, and a candidate profile exists.
 
-  Use case ends.
+**Main Success Scenario**:
+1. Recruiter selects the "Schedule Interview" option for a specific candidate.
+2. System prompts recruiter to input the date and time for the interview.
+3. Recruiter inputs valid date and time.
+4. System saves the interview schedule for the candidate.
+5. System displays a success message: "Interview scheduled for [Candidate Name] on [Date and Time]."
 
-* 3a. The given index is invalid.
+**Extensions**:
+- a. Recruiter inputs invalid date or time.
+    - System shows an error message: "Invalid date or time format. Please follow the format YYYY-MM-DD and HH:MM."
+- b. The selected time slot is already booked for another interview.
+    - System shows an error message: "Time slot is already booked. Please select a different time."
 
-    * 3a1. AddressBook shows an error message.
+#### Use Case 3: Search for Candidates by Criteria
+**Actor**: HR Professional
 
-      Use case resumes at step 2.
+**Preconditions**: Candidate profiles exist in the system.
 
-*{More to be added}*
+**Main Success Scenario**:
+1. HR professional selects the "Search" option.
+2. System prompts HR professional to input search criteria (e.g., candidate name, role, or skill).
+3. HR professional enters search criteria (e.g., role: Software Engineer).
+4. System retrieves and displays a list of candidates matching the criteria.
+5. HR professional selects a candidate from the list to view detailed information.
+
+**Extensions**:
+- 3a. No candidates match the search criteria.
+    - System displays a message: "No candidates found for the given criteria."
+
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. **Performance**:
+- The system should be able to handle up to 100 simultaneous users without a significant decrease in performance.
+- System response time for any operation should not exceed 1 second.
 
-*{More to be added}*
+2. **Scalability**:
+- The system should support the management of up to 10,000 candidate profiles without performance degradation.
+- The system should be able to integrate with external recruitment systems (e.g., LinkedIn, job portals) to import candidate data.
+
+3. **Usability**:
+- The system should be intuitive for users with basic computer skills.
+- The user interface should provide clear navigation, with minimal need for user training.
+
+4. **Reliability**:
+- The system should have a 99.9% uptime, ensuring availability for recruiters and HR professionals during business hours.
+- Data should be backed up every 24 hours to prevent data loss.
+
+5. **Security**:
+- The system must comply with GDPR regulations and ensure that candidate data is securely stored and handled.
+- All user data (including candidate information) should be encrypted both at rest and in transit.
+
+6. **Portability**:
+- The system should be compatible with Windows, macOS, and Linux operating systems.
+- The system should be able to run on machines with at least 4GB of RAM and 2GHz processors.
+
+7. **Accessibility**:
+- The system should comply with WCAG 2.1 standards for web accessibility, ensuring that users with disabilities can use the system effectively.
+
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+1. **Recruiter**:
+- A professional responsible for managing job applicants and their application process.
+
+2. **HR Professional**:
+- A Human Resources professional responsible for managing employee information and candidate data during the recruitment process.
+
+3. **Candidate Profile**:
+- A record containing all relevant details about a job applicant, including contact information, skills, experience, and interview notes.
+
+4. **MVP (Minimum Viable Product)**:
+- The minimum version of a product that meets the basic requirements to be usable by the target audience.
+
+5. **Interview Schedule**:
+- The process of setting a date and time for a job applicant to be interviewed by the recruiter or hiring manager.
+
+6. **NFR (Non-functional Requirements)**:
+- Requirements that specify the quality and performance characteristics of the system (e.g., performance, security, usability).
+
+7. **CRUD**:
+- Refers to the basic operations of Create, Read, Update, and Delete, typically applied to data management within an application.
+
+8. **GDPR (General Data Protection Regulation)**:
+- A European regulation on data protection and privacy for individuals within the EU, applicable to the handling of personal data.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
