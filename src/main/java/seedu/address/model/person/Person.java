@@ -25,16 +25,20 @@ public class Person implements Comparable<Person> {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
+    private final TelegramUsername telegramUsername;
+
     /**
-     * Every field must be present and not null.
+     * Every field must be present and not null
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+                  TelegramUsername telegramUsername) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.telegramUsername = telegramUsername;
     }
 
     public Name getName() {
@@ -51,6 +55,9 @@ public class Person implements Comparable<Person> {
 
     public Address getAddress() {
         return address;
+    }
+    public TelegramUsername getTelegramUsername() {
+        return telegramUsername;
     }
 
     /**
@@ -95,7 +102,8 @@ public class Person implements Comparable<Person> {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && telegramUsername.equals(otherPerson.telegramUsername);
     }
 
     @Override
@@ -114,7 +122,6 @@ public class Person implements Comparable<Person> {
                 .add("tags", tags)
                 .toString();
     }
-
 
     @Override
     public int compareTo(Person other) {
