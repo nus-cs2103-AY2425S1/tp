@@ -79,12 +79,7 @@ public class Person {
      * This is to check for duplicates in emails in the contact list.
      */
     public boolean hasSameEmail(Person otherPerson) {
-        if (otherPerson == this) {
-            return true;
-        }
-
-        return otherPerson != null
-                && otherPerson.getEmail().equals(this.getEmail());
+        return otherPerson != null && otherPerson.getEmail().equals(this.getEmail());
     }
 
     /**
