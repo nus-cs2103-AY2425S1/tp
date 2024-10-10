@@ -27,26 +27,27 @@ public class TypicalPersons {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-            .withPhone("94351253").withSchedule("Sunday-1800-1900").withRate("250.50").build();
+            .withPhone("94351253").withSchedule("Sunday-1800-1900").withSubject("Economics")
+            .withRate("250.50").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432").withSchedule("Monday-1800-1900")
-            .withRate("100.80").build();
+            .withSubject("Mathematics").withRate("100.80").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street")
-            .withSchedule("Tuesday-1800-1900").withRate("300").build();
+            .withSchedule("Tuesday-1800-1900").withSubject("Mathematics").withRate("300").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street")
-            .withSchedule("Wednesday-1800-1900").withRate("450.5").build();
+            .withSchedule("Wednesday-1800-1900").withSubject("Mathematics").withRate("450.5").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withAddress("michegan ave")
-            .withSchedule("Thursday-1800-1900").withRate("350").build();
+            .withSchedule("Thursday-1800-1900").withSubject("Mathematics").withRate("350").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withEmail("lydia@example.com").withAddress("little tokyo")
-            .withSchedule("Friday-1800-1900").withRate("260.25").build();
+            .withSchedule("Friday-1800-1900").withSubject("Mathematics").withRate("260.25").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street").withSchedule("Saturday-1800-1900")
-            .withRate("120").build();
+            .withSubject("Mathematics").withRate("120").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")

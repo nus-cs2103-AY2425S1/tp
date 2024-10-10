@@ -8,6 +8,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Rate;
 import seedu.address.model.person.Schedule;
+import seedu.address.model.person.Subject;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -34,6 +35,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
         descriptor.setSchedule(person.getSchedule());
+        descriptor.setSubject(person.getSubject());
         descriptor.setRate(person.getRate());
     }
 
@@ -74,6 +76,14 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withSchedule(String schedule) {
         descriptor.setSchedule(new Schedule(schedule));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Subject} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withSubject(String subject) {
+        descriptor.setSubject(new Subject(subject));
         return this;
     }
 

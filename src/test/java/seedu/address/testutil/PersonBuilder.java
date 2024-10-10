@@ -7,6 +7,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Rate;
 import seedu.address.model.person.Schedule;
+import seedu.address.model.person.Subject;
 
 /**
  * A utility class to help with building Person objects.
@@ -18,6 +19,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_SCHEDULE = "Sunday-1800-1900";
+    public static final String DEFAULT_SUBJECT = "Mathematics";
     public static final String DEFAULT_FEE = "300";
 
     private Name name;
@@ -25,6 +27,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Schedule schedule;
+    private Subject subject;
     private Rate rate;
 
     /**
@@ -36,6 +39,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         schedule = new Schedule(DEFAULT_SCHEDULE);
+        subject = new Subject(DEFAULT_SUBJECT);
         rate = new Rate(DEFAULT_FEE);
     }
 
@@ -48,6 +52,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         schedule = personToCopy.getSchedule();
+        subject = personToCopy.getSubject();
         rate = personToCopy.getRate();
     }
 
@@ -93,6 +98,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Subject} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withSubject(String subject) {
+        this.subject = new Subject(subject);
+        return this;
+    }
+
+    /**
      * Sets the {@code Rate} of the {@code Person} that we are building.
      */
     public PersonBuilder withRate(String rate) {
@@ -101,7 +114,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, schedule, rate);
+        return new Person(name, phone, email, address, schedule, subject, rate);
     }
 
 }
