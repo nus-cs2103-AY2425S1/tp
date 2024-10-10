@@ -16,14 +16,17 @@ public class TagContainsKeywordPredicateTest {
         String firstPredicateKeyword = "first";
         String secondPredicateKeyword = "second";
 
-        TagContainsKeywordsPredicate firstPredicate = new TagContainsKeywordsPredicate(Arrays.asList(firstPredicateKeyword));
-        TagContainsKeywordsPredicate secondPredicate = new TagContainsKeywordsPredicate(Arrays.asList(secondPredicateKeyword));
+        TagContainsKeywordsPredicate firstPredicate = new TagContainsKeywordsPredicate(
+                Arrays.asList(firstPredicateKeyword));
+        TagContainsKeywordsPredicate secondPredicate = new TagContainsKeywordsPredicate(
+                Arrays.asList(secondPredicateKeyword));
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        TagContainsKeywordsPredicate firstPredicateCopy = new TagContainsKeywordsPredicate(Arrays.asList(firstPredicateKeyword));
+        TagContainsKeywordsPredicate firstPredicateCopy = new TagContainsKeywordsPredicate(
+                Arrays.asList(firstPredicateKeyword));
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
