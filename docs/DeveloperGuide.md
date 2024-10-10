@@ -272,7 +272,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**: 
+**Target user profile**:
 
 * university student who
   * meets people from many different places (e.g. different classes, CCAs, student accomodation, etc.)
@@ -325,7 +325,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The entered data is invalid
   * 2a1. UniLink shows an error message
   * 2a2. User enters new data
-  
+
     Steps 2a1-2a2 are repeated until the data entered is correct.
 
     Use case resumes from step 3.
@@ -367,7 +367,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests to list persons
 2.  UniLink shows a list of persons
 3.  User requests to edit a specific person in the list
-4.  User enters the new details to be updated 
+4.  User enters the new details to be updated
 5.  UniLink updates the contact
 6.  UniLink displays the updated contact list
 
