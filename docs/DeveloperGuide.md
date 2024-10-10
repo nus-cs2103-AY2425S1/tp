@@ -274,8 +274,8 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
-
+Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`  
+  
 | Priority | As a …​ | I want to …​                                                          | So that I can…​                                                                       |
 |----------|---------|-----------------------------------------------------------------------|---------------------------------------------------------------------------------------|
 | `* * *`  | Doctor  | create a new patient profile                                          | I can record their details and track their progress                                   |
@@ -297,7 +297,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * `   | Doctor  | record billing information for each session                           | I can manage payments and invoicing                                                   |
 | `* * `   | Doctor  | access a summary of all my patients                                   | I can get an overview of their conditions and treatments                              |
 | `* * `   | Doctor  | view all the sessions a patient has missed                            | I can follow up with them and arrange for make-up session                             |
-| `* `     | Doctor  | collaborate with other doctors by sharing patient information         | we can coordinate care                                                                |  
+| `* `     | Doctor  | collaborate with other doctors by sharing patient information         | we can coordinate care                                                                |
   
 ### Use cases
 
