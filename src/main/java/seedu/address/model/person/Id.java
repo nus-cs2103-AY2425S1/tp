@@ -40,9 +40,6 @@ public class Id {
 
     @Override
     public String toString() {
-        return "Id{" +
-                "id=" + id +
-                ", role=" + role.getSimpleName() +
-                '}';
+        return "Id{" + "id=" + id + ", role=" + role.getSimpleName() + '}';
     }
 }

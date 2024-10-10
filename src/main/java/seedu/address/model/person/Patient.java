@@ -1,15 +1,10 @@
 package seedu.address.model.person;
 
-import seedu.address.model.tag.Tag;
-import seedu.address.model.person.Id;
-import seedu.address.model.person.Pair;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
+import static java.util.Objects.requireNonNull;
 import java.util.Set;
 import java.util.TreeMap;
-
-import static java.util.Objects.requireNonNull;
+import seedu.address.model.tag.Tag;
+import java.time.LocalDateTime;
 
 /**
  * Represents a Patient in the address book.

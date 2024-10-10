@@ -11,7 +11,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Encapsulates the code required to represent a target user of the application.
  */
-public class Doctor extends Person{
+public class Doctor extends Person {
     /**
      * Placeholder Appointment class while waiting for
      * Appointment implementation PR.
@@ -84,11 +84,10 @@ public class Doctor extends Person{
         history = new Doctor.History(id);
     }
 
-      /**
+    /**
      * Adds an entry to the doctor's schedule.
      *
-     * @param dateTime Date and time of the appointment or event.
-     * TODO
+     * @param dateTime Date and time of the appointment or event. TODO.
      */
     public void addAppointment(LocalDateTime dateTime, Pair<Id, String> description) {
         requireNonNull(dateTime);
@@ -111,8 +110,8 @@ public class Doctor extends Person{
     /**
      * Retrieves the full schedule of the doctor.
      *
-     * @return A TODO representing the TreeMap containing the doctor's schedule,
-     * with the LocalDateTime as the key and History as the value.
+     * @return A representing the TreeMap containing the doctor's schedule,
+     * with the LocalDateTime as the key and History as the value. TODO.
      */
     public String getAllAppointments(Id id) {
         return history.getAll(id);
@@ -121,7 +120,6 @@ public class Doctor extends Person{
      * Retrieves a specific schedule entry based on the date and time. TODO.
      *
      * @param dateTime The date and time of the desired schedule entry.
-     * @return Pair<Id, String> The History object associated with the specified date and time, or null if not found.
      */
     public void getScheduleEntry(LocalDateTime dateTime) {
         // return history.get(dateTime);

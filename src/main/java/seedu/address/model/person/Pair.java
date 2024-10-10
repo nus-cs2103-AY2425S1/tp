@@ -12,6 +12,11 @@ public class Pair<K, V> {
     private K id;
     private V remarks;
 
+    /**
+     * Creates a new Pair instance to group two different elements together.
+     * @param id
+     * @param remarks
+     */
     public Pair(K id, V remarks) {
         this.id = id;
         this.remarks = remarks;
