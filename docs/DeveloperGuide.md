@@ -262,71 +262,109 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Home-based bakery business owners
+* Need to manage customer relationships and supplier orders efficiently
+* Prefer simplified digital solutions
+* Want to reduce administrative effort
+* Focus on their craft of baking
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
-
+**Value proposition**: Simplified digital address book solution for home-based bakery businesses to manage customer relationships and supplier orders more efficiently.
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​           | I want to …​                                                              | So that I can…​                                                        |
+| -------- | ----------------- | ------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `* * *`  | bakery owner      | add new customer information                                              | store their contact details and preferences                            |
+| `* * *`  | bakery owner      | update or edit a customer profile                                         | keep track of changing preferences, addresses, or order histories      |
+| `* * *`  | bakery owner      | view the full order history of a customer                                 | offer personalized service                                             |
+| `* * *`  | bakery owner      | track customer orders and deliveries                                      | manage current and upcoming orders efficiently                         |
+| `* * *`  | bakery owner      | add new supplier contact information                                      | easily place orders and track supplier relationships                   |
+| `* * *`  | bakery owner      | track orders placed with suppliers                                        | manage stock and inventory better                                      |
+| `* * *`  | bakery owner      | search for a customer or supplier                                         | quickly access their details and history                               |
+| `* * *`  | bakery owner      | set reminders for recurring customer orders                               | don't miss important events like birthdays or holidays                 |
+| `* *`    | bakery owner      | receive notifications for upcoming deliveries or orders                   | prepare for timely service                                             |
+| `* *`    | bakery owner      | mark an order as complete once it's delivered or picked up                | keep my records up to date                                             |
+| `* *`    | bakery owner      | store supplier pricing and discounts                                      | track price fluctuations and budget effectively                        |
+| `* *`    | bakery owner      | categorize suppliers by product type                                      | find the right contact quickly when I need specific supplies           |
+| `*`      | bakery owner      | generate automatic reports on my sales and orders                         | better understand my business performance                              |
+| `*`      | bakery owner      | integrate the app with an inventory system                                | monitor ingredient levels more effectively                             |
+| `*`      | bakery owner      | send automated promotional emails to customers                            | engage them with special offers or seasonal products                   |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `BakeryManagementSystem` and the **Actor** is the `bakery owner`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Adding a Customer**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. Bakery owner logs into the system
+2. Bakery owner navigates to the "Customers" section
+3. Bakery owner clicks the "Add New Customer" button
+4. System prompts the owner to enter customer details
+5. Bakery owner fills in the details and clicks "Save"
+6. System saves the new customer profile and displays it in the list of customers
 
-    Use case ends.
+Use case ends.
 
-**Extensions**
+**Use case: Tracking a Supplier Order**
 
-* 2a. The list is empty.
+**MSS**
 
-  Use case ends.
+1. Bakery owner logs into the system
+2. Bakery owner navigates to the "Suppliers" section
+3. Bakery owner clicks on the supplier's name to view their profile
+4. Bakery owner adds a new order by clicking "Add Order"
+5. System prompts the owner to input order details
+6. Bakery owner fills in the order details and clicks "Save"
+7. System logs the order and displays it under the supplier's order history
 
-* 3a. The given index is invalid.
-
-    * 3a1. AddressBook shows an error message.
-
-      Use case resumes at step 2.
+Use case ends.
 
 *{More to be added}*
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Performance:
+    * The system should respond to all user interactions within 1 to 2 seconds.
+    * Entering and processing new orders should take no longer than 2 seconds per transaction.
+    * Queries to find customer details, full order history, and all existing orders and deliveries should be executed within 3 seconds.
+    * Upon startup, the system should load fully within 5 seconds.
+
+2. Usability:
+    * The GUI should be intuitive and user-friendly for bakery owners with varying levels of digital literacy.
+    * Every user interaction should follow a consistent interface layout, design, color, and font pattern.
+    * Clear messages should guide users if they enter invalid data or encounter errors.
+
+3. Scalability:
+    * The application should efficiently manage a database that expands from 100 to 10,000 records without significant performance degradation.
+    * The system should be designed with modularity in mind, allowing for easy addition of new features or integrations.
+
+4. Availability & Reliability:
+    * The system should be available all the time without unplanned downtime.
+    * Automatic data backups should be implemented to prevent data loss.
+    * There should be a recovery process to restore customer, supplier, and order delivery information.
+
+5. User Support & Help:
+    * Built-in help documentation or guided tutorials should be available for common actions.
 
 *{More to be added}*
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Customer Profile**: A detailed record of an individual customer's information, including contact details, preferences, past orders, and notes.
+* **Order History**: The chronological log of all orders made by a customer, detailing the items purchased, order dates, quantities, and delivery statuses.
+* **Order Tracking**: The process of monitoring all customer orders and deliveries from creation to completion.
+* **Supplier Profile**: A record of all contact details, products supplied, and other relevant information about a business or individual who provides ingredients or supplies to the bakery.
+* **Inventory Management**: The process of keeping track of stock levels, products, and supplies needed for baking.
+* **Search Functionality**: A tool within the software that allows quick finding of specific customers or suppliers.
+* **Reminder System**: A feature that enables setting notifications for important dates, such as recurring customer orders for birthdays or holidays.
+* **Preferences**: Specific customer details that influence their purchasing behavior, stored in the customer profile.
+* **Contact Information**: Essential details needed to reach a customer or supplier, stored in their respective profiles.
+* **Supplier Order Tracking**: The ability to record and monitor orders placed with suppliers.
+
 
 --------------------------------------------------------------------------------------------------------------------
 

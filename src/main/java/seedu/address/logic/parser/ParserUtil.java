@@ -10,6 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.DietaryPreference;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -78,6 +79,21 @@ public class ParserUtil {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
         return new Address(trimmedAddress);
+    }
+
+    /**
+     * Parses a {@code String dietaryPreference} into a {@code DietaryPreference}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code dietaryPreference} is invalid.
+     */
+    public static DietaryPreference parsePreference(String dietaryPreference) throws ParseException {
+        requireNonNull(dietaryPreference);
+        String trimmedPreference = dietaryPreference.trim();
+        if (!DietaryPreference.isValidDietaryPreference(trimmedPreference)) {
+            throw new ParseException(DietaryPreference.MESSAGE_CONSTRAINTS);
+        }
+        return new DietaryPreference(trimmedPreference);
     }
 
     /**

@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -20,20 +19,26 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    // Add the new dietary preference field
+    private final DietaryPreference preference;
 
     // Data fields
     private final Address address;
+    private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address,
+                  DietaryPreference preference, Remark remark, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, preference, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.preference = preference;
+        this.remark = remark;
         this.tags.addAll(tags);
     }
 
@@ -51,6 +56,14 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public DietaryPreference getPreference() {
+        return preference;
+    }
+
+    public Remark getRemark() {
+        return remark;
     }
 
     /**
@@ -71,7 +84,9 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getName().equals(getName())
+                && (otherPerson.getPhone().equals(getPhone()) || otherPerson.getEmail().equals(getEmail()))
+                && otherPerson.getPreference().equals(getPreference());
     }
 
     /**
@@ -84,34 +99,41 @@ public class Person {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof Person)) {
             return false;
         }
 
         Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+        return otherPerson.getName().equals(getName())
+                && otherPerson.getPhone().equals(getPhone())
+                && otherPerson.getEmail().equals(getEmail())
+                && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getPreference().equals(getPreference())
+                && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, preference, tags);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("name", name)
-                .add("phone", phone)
-                .add("email", email)
-                .add("address", address)
-                .add("tags", tags)
-                .toString();
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getName())
+                .append(" Phone: ")
+                .append(getPhone())
+                .append(" Email: ")
+                .append(getEmail())
+                .append(" Address: ")
+                .append(getAddress())
+                .append(" Preference: ")
+                .append(getPreference())
+                .append(" Remark: ")
+                .append(getRemark())
+                .append(" Tags: ");
+        getTags().forEach(builder::append);
+        return builder.toString();
     }
-
 }
