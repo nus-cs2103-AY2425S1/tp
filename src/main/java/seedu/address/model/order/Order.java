@@ -34,7 +34,7 @@ public class Order {
     }
 
     /**
-     * Remove a order based on its name
+     * Remove an order based on its name
      * @param name Name of order
      * @return True if removed successfully
      */
