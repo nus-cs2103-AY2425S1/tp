@@ -208,16 +208,11 @@ public class EditCommand extends Command {
             this.status = status;
         }
 
-        public Optional<Status> getStatus() {
-            return Optional.ofNullable(status);
-          
-        public void setNote(Note note) {
-            this.note = note;
-        }
+        public Optional<Status> getStatus() { return Optional.ofNullable(status); }
 
-        public Optional<Note> getNote() {
-            return Optional.ofNullable(note);
-        }
+        public void setNote(Note note) { this.note = note;}
+
+        public Optional<Note> getNote() { return Optional.ofNullable(note); }
 
         /**
          * Sets {@code tags} to this object's {@code tags}.
