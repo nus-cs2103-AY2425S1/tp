@@ -89,7 +89,6 @@ public interface Model {
 
     /**
      * Returns a person that satisfies the predicate.
-     * @return
      */
     Optional<Person> findPerson(Predicate<Person> predicate);
 
