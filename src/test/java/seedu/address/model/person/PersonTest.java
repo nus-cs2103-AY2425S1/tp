@@ -96,4 +96,18 @@ public class PersonTest {
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }
+
+    @Test
+    public void compareTo_lowerLexicographicalOrder() {
+        Person aliceCopy = new PersonBuilder(ALICE).build();
+        Person bobCopy = new PersonBuilder(BOB).build();
+        assertTrue(ALICE.compareTo(BOB) < 0);
+    }
+
+    @Test
+    public void compareTo_higherLexicographicalOrder() {
+        Person aliceCopy = new PersonBuilder(ALICE).build();
+        Person bobCopy = new PersonBuilder(BOB).build();
+        assertTrue(BOB.compareTo(ALICE) > 0);
+    }
 }
