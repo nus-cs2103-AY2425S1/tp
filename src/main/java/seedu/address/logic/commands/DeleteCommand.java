@@ -24,16 +24,36 @@ public class DeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_OWNER_SUCCESS = "Deleted Owner: %1$s";
 
     private final Index targetIndex;
+    private final String type;
 
-    public DeleteCommand(Index targetIndex) {
+    public DeleteCommand(Index targetIndex, String type) {
         this.targetIndex = targetIndex;
+        this.type = type;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        /*
+         code for deleting an owner:
+        List<Owner> lastShownList = model.getFilteredPersonList(); // must add new method to get owner
+
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_OWNER_DISPLAYED_INDEX);
+        }
+
+        Owner ownerToDelete = lastShownList.get(targetIndex.getZeroBased());
+        model.deleteOwner(ownerToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_OWNER_SUCCESS, Messages.format(personToDelete)));
+         */
+
+        /*
+        code for deleting a pet
+         */
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {

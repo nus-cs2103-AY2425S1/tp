@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.commons.core.Pair;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -27,12 +28,18 @@ public class ParserUtil {
      * trimmed.
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
-    public static Index parseIndex(String oneBasedIndex) throws ParseException {
-        String trimmedIndex = oneBasedIndex.trim();
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+    public static Pair parseIndex(String oneBasedIndexAndType) throws ParseException {
+        String trimmedIndex = oneBasedIndexAndType.trim();
+        if (!StringUtil.isNonZeroUnsignedInteger(Character.toString(trimmedIndex.charAt(1)))) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
-        return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+        Pair res = new Pair(Index.fromOneBased(Integer.parseInt(Character.toString(trimmedIndex.charAt(1)))),
+                Character.toString(trimmedIndex.charAt(0)));
+        if (!(res.second.equals("p") || res.second.equals("o"))) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        return res;
+        //return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
 
     /**
