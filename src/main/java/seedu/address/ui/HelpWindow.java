@@ -22,11 +22,11 @@ public class HelpWindow extends UiPart<Stage> {
     private static final String ADD_PERSON_HELP = "Add a person: Use the command 'add' followed by the details.";
     private static final String LIST_PERSONS_HELP = "List all persons: Use the command 'list' to view all contacts.";
     private static final String EDIT_PERSON_HELP = "Edit a person: Use the command 'edit' followed by the person's ID.";
-    private static final String FIND_PERSON_HELP = "Find persons by keywords: " +
-            "Use the command 'find' followed by the name.";
+    private static final String FIND_PERSON_HELP = "Find persons by keywords: "
+            + "Use the command 'find' followed by the name.";
     private static final String DELETE_PERSON_HELP = "Delete a person: Use the command 'delete' followed by the index.";
-    private static final String CLEAR_ENTRIES_HELP = "Clear all entries: " +
-            "Use the command 'clear' to remove all contacts.";
+    private static final String CLEAR_ENTRIES_HELP = "Clear all entries: "
+            + "Use the command 'clear' to remove all contacts.";
     private static final String EXIT_HELP = "Exit the program: Use the command 'exit' to close the application.";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
