@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REGISTER_NUMBER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SEX_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_CLASS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -54,6 +55,10 @@ public class EditPersonDescriptorTest {
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
+        // different register number -> return false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withRegisterNumber(VALID_REGISTER_NUMBER_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
         // different sex -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withSex(VALID_SEX_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
@@ -74,7 +79,8 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getName().orElse(null) + ", phone="
                 + editPersonDescriptor.getPhone().orElse(null) + ", email="
                 + editPersonDescriptor.getEmail().orElse(null) + ", address="
-                + editPersonDescriptor.getAddress().orElse(null) + ", sex="
+                + editPersonDescriptor.getAddress().orElse(null) + ", register number="
+                + editPersonDescriptor.getRegisterNumber().orElse(null) + ", sex="
                 + editPersonDescriptor.getSex().orElse(null) + ", class="
                 + editPersonDescriptor.getStudentClass().orElse(null) + ", tags="
                 + editPersonDescriptor.getTags().orElse(null) + "}";

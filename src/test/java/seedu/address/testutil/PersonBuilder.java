@@ -8,6 +8,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.RegisterNumber;
 import seedu.address.model.person.Sex;
 import seedu.address.model.person.StudentClass;
 import seedu.address.model.tag.Tag;
@@ -22,6 +23,7 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_REGISTER_NUMBER = "1";
     public static final String DEFAULT_SEX = "F";
     public static final String DEFAULT_STUDENT_CLASS = "1A";
 
@@ -29,6 +31,7 @@ public class PersonBuilder {
     private Phone phone;
     private Email email;
     private Address address;
+    private RegisterNumber registerNumber;
     private Sex sex;
     private StudentClass studentClass;
     private Set<Tag> tags;
@@ -41,6 +44,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        registerNumber = new RegisterNumber(DEFAULT_REGISTER_NUMBER);
         sex = new Sex(DEFAULT_SEX);
         studentClass = new StudentClass(DEFAULT_STUDENT_CLASS);
         tags = new HashSet<>();
@@ -54,6 +58,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        registerNumber = personToCopy.getRegisterNumber();
         sex = personToCopy.getSex();
         studentClass = personToCopy.getStudentClass();
         tags = new HashSet<>(personToCopy.getTags());
@@ -100,6 +105,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code RegisterNumber} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withRegisterNumber(String registerNumber) {
+        this.registerNumber = new RegisterNumber(registerNumber);
+        return this;
+    }
+
+    /**
      * Sets the {@code Sex} of the {@code Person} that we are building.
      */
     public PersonBuilder withSex(String sex) {
@@ -116,7 +129,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, sex, studentClass, tags);
+        return new Person(name, phone, email, address, registerNumber, sex, studentClass, tags);
     }
 
 }

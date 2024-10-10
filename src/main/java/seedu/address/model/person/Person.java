@@ -20,6 +20,7 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final RegisterNumber registerNumber;
     private final Sex sex;
     private final StudentClass studentClass;
 
@@ -30,13 +31,14 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Sex sex, StudentClass studentClass,
-                  Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, sex, studentClass, tags);
+    public Person(Name name, Phone phone, Email email, Address address, RegisterNumber registerNumber, Sex sex,
+            StudentClass studentClass, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, registerNumber, sex, studentClass, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.registerNumber = registerNumber;
         this.sex = sex;
         this.studentClass = studentClass;
         this.tags.addAll(tags);
@@ -56,6 +58,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public RegisterNumber getRegisterNumber() {
+        return registerNumber;
     }
 
     public Sex getSex() {
@@ -107,6 +113,7 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
+                && registerNumber.equals(otherPerson.registerNumber)
                 && sex.equals(otherPerson.sex)
                 && studentClass.equals(otherPerson.studentClass)
                 && tags.equals(otherPerson.tags);
@@ -115,7 +122,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, sex, studentClass, tags);
+        return Objects.hash(name, phone, email, address, registerNumber, sex, studentClass, tags);
     }
 
     @Override
@@ -125,6 +132,7 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("register number", registerNumber)
                 .add("sex", sex)
                 .add("class", studentClass)
                 .add("tags", tags)

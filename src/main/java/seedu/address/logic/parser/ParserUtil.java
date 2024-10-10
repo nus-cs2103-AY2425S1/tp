@@ -13,6 +13,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.RegisterNumber;
 import seedu.address.model.person.Sex;
 import seedu.address.model.person.StudentClass;
 import seedu.address.model.tag.Tag;
@@ -95,6 +96,21 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String registerNumber} into an {@code RegisterNumber}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code registerNumber} is invalid.
+     */
+    public static RegisterNumber parseRegisterNumber(String registerNumber) throws ParseException {
+        requireNonNull(registerNumber);
+        String trimmedRegisterNumber = registerNumber.trim();
+        if (!RegisterNumber.isValidRegisterNumber(trimmedRegisterNumber)) {
+            throw new ParseException(RegisterNumber.MESSAGE_CONSTRAINTS);
+        }
+        return new RegisterNumber(trimmedRegisterNumber);
     }
 
     /**
