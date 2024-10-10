@@ -84,4 +84,10 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    ObservableList<Person> getSortedPersonList();
+
+    // TO BE IMPLEMENTED
+    // Updates the order in which the filtered contact list is sorted.
+    // void updateSortingOrder(String criterion); - Can use switch statements for criteria to sort by
 }
