@@ -24,12 +24,12 @@ public class ViewCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) \n"
             + "Example: " + COMMAND_WORD + " 1 ";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Displaying patient information: \n%1$s";
+    public static final String MESSAGE_VIEW_PERSON_SUCCESS = "Displaying patient information: \n%1$s";
 
     private final Index index;
 
     /**
-     * @param index of the person in the filtered person list to edit
+     * @param index of the person in the filtered person list to view
      */
     public ViewCommand(Index index) {
         requireNonNull(index);
@@ -48,7 +48,7 @@ public class ViewCommand extends Command {
 
         Person personToView = lastShownList.get(index.getZeroBased());
 
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(personToView)));
+        return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, Messages.format(personToView)));
     }
 
     @Override
