@@ -38,10 +38,10 @@ import seedu.ddd.commons.core.index.Index;
 import seedu.ddd.logic.Messages;
 import seedu.ddd.logic.commands.EditCommand;
 import seedu.ddd.logic.commands.EditCommand.EditContactDescriptor;
-import seedu.ddd.model.person.Address;
-import seedu.ddd.model.person.Email;
-import seedu.ddd.model.person.Name;
-import seedu.ddd.model.person.Phone;
+import seedu.ddd.model.contact.common.Address;
+import seedu.ddd.model.contact.common.Email;
+import seedu.ddd.model.contact.common.Name;
+import seedu.ddd.model.contact.common.Phone;
 import seedu.ddd.model.tag.Tag;
 import seedu.ddd.testutil.EditClientDescriptorBuilder;
 

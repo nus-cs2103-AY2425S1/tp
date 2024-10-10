@@ -1,4 +1,4 @@
-package seedu.ddd.model.person;
+package seedu.ddd.model.contact.client;
 
 import static seedu.ddd.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -6,6 +6,11 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.ddd.commons.util.ToStringBuilder;
+import seedu.ddd.model.contact.common.Address;
+import seedu.ddd.model.contact.common.Contact;
+import seedu.ddd.model.contact.common.Email;
+import seedu.ddd.model.contact.common.Name;
+import seedu.ddd.model.contact.common.Phone;
 import seedu.ddd.model.tag.Tag;
 
 /**

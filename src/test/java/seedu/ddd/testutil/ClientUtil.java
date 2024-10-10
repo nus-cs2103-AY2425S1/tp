@@ -11,7 +11,7 @@ import java.util.Set;
 
 import seedu.ddd.logic.commands.AddContactCommand;
 import seedu.ddd.logic.commands.EditCommand.EditContactDescriptor;
-import seedu.ddd.model.person.Client;
+import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.tag.Tag;
 
 /**

@@ -5,9 +5,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.ddd.logic.parser.Prefix;
-import seedu.ddd.model.person.Client;
-import seedu.ddd.model.person.Contact;
-import seedu.ddd.model.person.Vendor;
+import seedu.ddd.model.contact.client.Client;
+import seedu.ddd.model.contact.common.Contact;
+import seedu.ddd.model.contact.vendor.Vendor;
 
 /**
  * Container for user visible messages.

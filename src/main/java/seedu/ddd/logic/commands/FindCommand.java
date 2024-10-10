@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.logic.Messages;
 import seedu.ddd.model.Model;
-import seedu.ddd.model.person.NameContainsKeywordsPredicate;
+import seedu.ddd.model.contact.common.NameContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.

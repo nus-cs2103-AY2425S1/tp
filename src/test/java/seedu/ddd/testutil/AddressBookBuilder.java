@@ -1,7 +1,7 @@
 package seedu.ddd.testutil;
 
 import seedu.ddd.model.AddressBook;
-import seedu.ddd.model.person.Contact;
+import seedu.ddd.model.contact.common.Contact;
 
 /**
  * A utility class to help with building Addressbook objects.

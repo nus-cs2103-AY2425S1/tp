@@ -20,13 +20,13 @@ import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.logic.Messages;
 import seedu.ddd.logic.commands.exceptions.CommandException;
 import seedu.ddd.model.Model;
-import seedu.ddd.model.person.Address;
-import seedu.ddd.model.person.Client;
-import seedu.ddd.model.person.Contact;
-import seedu.ddd.model.person.Email;
-import seedu.ddd.model.person.Name;
-import seedu.ddd.model.person.Phone;
-import seedu.ddd.model.person.Vendor;
+import seedu.ddd.model.contact.client.Client;
+import seedu.ddd.model.contact.common.Address;
+import seedu.ddd.model.contact.common.Contact;
+import seedu.ddd.model.contact.common.Email;
+import seedu.ddd.model.contact.common.Name;
+import seedu.ddd.model.contact.common.Phone;
+import seedu.ddd.model.contact.vendor.Vendor;
 import seedu.ddd.model.tag.Tag;
 
 /**
