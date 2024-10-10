@@ -1,9 +1,9 @@
 package seedu.address.model.person;
 
-import seedu.address.commons.exceptions.AppNotFoundException;
-
 import java.time.LocalDateTime;
 import java.util.TreeMap;
+
+import seedu.address.commons.exceptions.AppNotFoundException;
 
 /**
  * Represents a medical history entry associated with a doctor.
