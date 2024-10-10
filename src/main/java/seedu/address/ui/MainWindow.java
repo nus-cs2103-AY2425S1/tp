@@ -213,7 +213,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Execute wrapper to share with other classes
      * @param command
-     * @return
+     * @return CommandResult
      * @throws CommandException
      * @throws ParseException
      */
