@@ -1,15 +1,14 @@
 package tahub.contacts.model.course;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static tahub.contacts.testutil.Assert.assertThrows;
-
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 
 @DisplayName("Attendance")
 public class AttendanceTest {
@@ -102,10 +101,10 @@ public class AttendanceTest {
     // equals tests
     @Nested
     @DisplayName("Equals")
-    class equals {
+    class Equals {
         @Nested
         @DisplayName("returns true for")
-        class trueEquals {
+        class TrueEquals {
             @Test
             @DisplayName("same Attendance object")
             public void sameAttendanceObject() {
@@ -132,7 +131,7 @@ public class AttendanceTest {
 
         @Nested
         @DisplayName("returns false for")
-        class falseEquals {
+        class FalseEquals {
             @Test
             @DisplayName("different attendance list")
             public void sameAttendanceList() {
@@ -146,7 +145,7 @@ public class AttendanceTest {
     // toString tests
     @Nested
     @DisplayName("toString")
-    class toString {
+    class ToString {
         @Test
         @DisplayName("shows correct string for empty attendance")
         public void emptyAttendance_correctString() {
