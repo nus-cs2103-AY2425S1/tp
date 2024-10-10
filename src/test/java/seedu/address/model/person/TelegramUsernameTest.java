@@ -9,12 +9,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 import org.junit.jupiter.api.Test;
 
 public class TelegramUsernameTest {
-
-    @Test
-    public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new TelegramUsername(null));
-    }
-
     @Test
     public void constructor_invalidName_throwsIllegalArgumentException() {
         String invalidName = "";
@@ -23,9 +17,6 @@ public class TelegramUsernameTest {
 
     @Test
     public void isValidUsername_correctlyVerifiesUsernames() {
-        // null name
-        assertThrows(NullPointerException.class, () -> new TelegramUsername(null));
-
         // invalid name
         assertFalse(TelegramUsername.isValidUsername("")); // empty string
         assertFalse(TelegramUsername.isValidUsername("1234")); // < 5 characters

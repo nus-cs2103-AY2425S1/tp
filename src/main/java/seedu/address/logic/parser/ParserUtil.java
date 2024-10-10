@@ -16,6 +16,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.role.Role;
 import seedu.address.model.role.RoleHandler;
 import seedu.address.model.role.exceptions.InvalidRoleException;
+import seedu.address.model.person.TelegramUsername;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -81,6 +82,26 @@ public class ParserUtil {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
         return new Address(trimmedAddress);
+    }
+
+    /**
+     * Parses the given {@code String telegramUsername} and returns a {@code TelegramUsername} object.
+     * Leading and trailing spaces will be trimmed.
+     *
+     * @param telegramUsername The username string to be parsed. Can be {@code null}.
+     * @return A {@code TelegramUsername} object with the trimmed username.
+     * @throws ParseException if the provided {@code telegramUsername} is invalid according to the
+     *         {@code TelegramUsername#isValidUsername(String)} method.
+     */
+    public static TelegramUsername parseTele(String telegramUsername) throws ParseException {
+        if (telegramUsername == null) {
+            return new TelegramUsername(telegramUsername);
+        }
+        String trimmedTelegramUsername = telegramUsername.trim();
+        if (!TelegramUsername.isValidUsername(trimmedTelegramUsername)) {
+            throw new ParseException(TelegramUsername.MESSAGE_CONSTRAINTS);
+        }
+        return new TelegramUsername(trimmedTelegramUsername);
     }
 
     /**
