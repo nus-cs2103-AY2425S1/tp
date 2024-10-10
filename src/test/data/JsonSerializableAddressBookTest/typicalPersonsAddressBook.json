@@ -35,5 +35,8 @@
     "email" : "anna@example.com",
     "tags" : [ ],
     "student number" : "A08888888M"
-  } ]
+  }, {
+    "tags" : [ ]
+  } ],
+  "groups" : [ ]
 }
