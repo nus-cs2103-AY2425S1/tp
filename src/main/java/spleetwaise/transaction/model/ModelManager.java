@@ -28,7 +28,7 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing Transaction Model...");
 
-        this.transactionBook = new TransactionBook(transactionBook);;
+        this.transactionBook = new TransactionBook(transactionBook);
         filteredTransactions = new FilteredList<>(this.transactionBook.getTransactionList());
     }
 
@@ -49,14 +49,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setTransactionBook(ReadOnlyTransactionBook replacementBook) {
-        requireNonNull(replacementBook);
-        transactionBook.setTransactions(replacementBook);
+    public ReadOnlyTransactionBook getTransactionBook() {
+        return transactionBook;
     }
 
     @Override
-    public ReadOnlyTransactionBook getTransactionBook() {
-        return transactionBook;
+    public void setTransactionBook(ReadOnlyTransactionBook replacementBook) {
+        requireNonNull(replacementBook);
+        transactionBook.setTransactions(replacementBook);
     }
 
     @Override
