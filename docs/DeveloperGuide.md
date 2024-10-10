@@ -307,9 +307,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use Case 1: Add a New Patient**
 
-**System**: CareLink  
-**Use Case**: UC01 - Add New Patient  
-**Actor**: Geriatrician (Fred)  
+**System**: CareLink
+**Use Case**: UC01 - Add New Patient
+**Actor**: Geriatrician (Fred)
 
 **Preconditions**
 - Fred is logged into CareLink.
@@ -337,9 +337,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use Case 2: View Patient Details**
 
-**System**: CareLink  
-**Use Case**: UC02 - View Patient Details  
-**Actor**: Geriatrician (Fred)  
+**System**: CareLink
+**Use Case**: UC02 - View Patient Details
+**Actor**: Geriatrician (Fred)
 
 **Preconditions**
 - Fred is logged into CareLink.
@@ -362,8 +362,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use Case 3: Adding a Caregiver and Linking to an Existing Patient**
 
-**System**: CareLink  
-**Use Case**: UC03 - Adding a Caregiver and Linking to an Existing Patient  
+**System**: CareLink
+**Use Case**: UC03 - Adding a Caregiver and Linking to an Existing Patient
 **Actor**: Geriatrician (Fred)
 
 ### Preconditions
@@ -392,8 +392,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use Case 4: Update Patient Details**
 
-**System**: CareLink  
-**Use Case**: UC04 - Update Patient Details  
+**System**: CareLink
+**Use Case**: UC04 - Update Patient Details
 **Actor**: Geriatrician (Fred)
 
 ### Preconditions
@@ -421,8 +421,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use Case 5: Delete Patient Details**
 
-**System**: CareLink  
-**Use Case**: UC05 - Delete Patient Details  
+**System**: CareLink
+**Use Case**: UC05 - Delete Patient Details
 **Actor**: Geriatrician (Fred)
 
 ### Preconditions
@@ -446,8 +446,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use Case 6: Export All Patient Data to CSV**
 
-**System**: CareLink  
-**Use Case**: UC06 - Export All Patient Data to CSV  
+**System**: CareLink
+**Use Case**: UC06 - Export All Patient Data to CSV
 **Actor**: Geriatrician (Fred)
 
 ### Preconditions
@@ -472,8 +472,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use Case 7: Import Patient Data using CSV**
 
-**System**: CareLink  
-**Use Case**: UC07 - Import Patient Data using CSV  
+**System**: CareLink
+**Use Case**: UC07 - Import Patient Data using CSV
 **Actor**: Geriatrician (Fred)
 
 ### Preconditions
@@ -499,8 +499,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use Case 8: Filter Data by Date**
 
-**System**: CareLink  
-**Use Case**: UC08 - Filter Data by Date  
+**System**: CareLink
+**Use Case**: UC08 - Filter Data by Date
 **Actor**: Geriatrician (Fred)
 
 ### Preconditions
@@ -529,8 +529,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use Case 9: Filter Data by Medical Condition**
 
-**System**: CareLink  
-**Use Case**: UC09 - Filter Data by Medical Condition  
+**System**: CareLink
+**Use Case**: UC09 - Filter Data by Medical Condition
 **Actor**: Geriatrician (Fred)
 
 ### Preconditions
@@ -558,8 +558,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use Case 10: Filter Data by Patients**
 
-**System**: CareLink  
-**Use Case**: UC10 - Filter Data by Patients  
+**System**: CareLink
+**Use Case**: UC10 - Filter Data by Patients
 **Actor**: Geriatrician (Fred)
 
 ### Preconditions
@@ -587,8 +587,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use Case 11: Schedule Follow-up Appointments**
 
-**System**: CareLink  
-**Use Case**: UC11 - Schedule Follow-up Appointments  
+**System**: CareLink
+**Use Case**: UC11 - Schedule Follow-up Appointments
 **Actor**: Geriatrician (Fred)
 
 ### Preconditions
@@ -613,8 +613,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use Case 12: Set Up Doctor Profile**
 
-**System**: CareLink  
-**Use Case**: UC12 - Set Up Doctor Profile  
+**System**: CareLink
+**Use Case**: UC12 - Set Up Doctor Profile
 **Actor**: Geriatrician (Fred)
 
 ### Preconditions
@@ -638,8 +638,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use Case 13: Filter Patients by Risk Level
 
-**System**: CareLink\
-**Use Case**: UC13 - Filter Patients by Risk Level\
+**System**: CareLink
+**Use Case**: UC13 - Filter Patients by Risk Level
 **Actor**: Geriatrician (Fred)
 
 ### Preconditions
@@ -668,28 +668,28 @@ Use case ends.
 
 ### Non-Functional Requirements
 
-1. **Typing-Preferred**  
-   - **Category:** User Efficiency  
+1. **Typing-Preferred**
+   - **Category:** User Efficiency
    - **Requirement:** The product should be optimized for users who can type fast and prefer typing over other forms of input, with a command-line interface (CLI) that allows quick and efficient task completion.
    - **User Benefit:** This allows users who prefer typing to accomplish tasks faster without relying on slower point-and-click methods.
 
-2. **Platform-Independent**  
-   - **Category:** Environment Requirements  
+2. **Platform-Independent**
+   - **Category:** Environment Requirements
    - **Requirement:** The software must work seamlessly on Windows, Linux, and OS-X platforms.
    - **User Benefit:** Users can run the application on any operating system they prefer, ensuring flexibility and convenience without worrying about compatibility issues.
 
 3. **No-DBMS**  
-   - **Category:** Technical Requirements  
+   - **Category:** Technical Requirements
    - **Requirement:** The system should not rely on a database management system (DBMS) for data storage.
    - **User Benefit:** Users don't need to set up complex database systems, making the software easier to install and maintain, with simple file-based data storage.
 
 4. **Human-Editable File**  
-   - **Category:** Data Requirements  
+   - **Category:** Data Requirements
    - **Requirement:** The system's data should be stored locally in a human-readable and editable text file format.
    - **User Benefit:** Users can directly view and modify their data without needing specialized tools, providing more control and flexibility for advanced users.
 
 5. **Single-User**  
-   - **Category:** User Constraints  
+   - **Category:** User Constraints
    - **Requirement:** The product is designed for use by a single user, and data should not be shared between multiple users.
    - **User Benefit:** Users can have confidence that their data is secure and private, without interference from other users, ensuring data integrity and ease of use.
 
