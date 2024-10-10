@@ -3,7 +3,9 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_GENDER_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_MODULE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
@@ -15,6 +17,7 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
@@ -37,6 +40,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Gender;
 import seedu.address.model.person.Module;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -84,7 +88,9 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
         assertParseFailure(parser, "1" + INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS); // invalid address
+        assertParseFailure(parser, "1" + INVALID_GENDER_DESC, Gender.MESSAGE_CONSTRAINTS); // invalid gender
         assertParseFailure(parser, "1" + INVALID_MODULE_DESC, Module.MESSAGE_CONSTRAINTS); // invalid module
+
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
 
         // invalid phone followed by valid module
@@ -108,10 +114,13 @@ public class EditCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HUSBAND
-                + ADDRESS_DESC_AMY + NAME_DESC_AMY + MODULE_DESC_AMY + TAG_DESC_FRIEND;
+                + GENDER_DESC_AMY + ADDRESS_DESC_AMY
+                + NAME_DESC_AMY + MODULE_DESC_AMY + TAG_DESC_FRIEND;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_BOB).withAddress(VALID_ADDRESS_AMY)
+                .withPhone(VALID_PHONE_BOB)
+                .withGender(VALID_GENDER_AMY)
+                .withAddress(VALID_ADDRESS_AMY)
                 .withModule(VALID_MODULE_AMY).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -142,6 +151,12 @@ public class EditCommandParserTest {
         // phone
         userInput = targetIndex.getOneBased() + PHONE_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // gender
+        userInput = targetIndex.getOneBased() + GENDER_DESC_AMY;
+        descriptor = new EditPersonDescriptorBuilder().withGender(VALID_GENDER_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
