@@ -43,6 +43,8 @@ public class Messages {
                 .append(person.getEmail())
                 .append("; Address: ")
                 .append(person.getAddress())
+                .append("; Job: ")
+                .append(person.getJob())
                 .append("; Income: ")
                 .append(person.getIncome())
                 .append("; Tags: ");
