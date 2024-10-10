@@ -25,18 +25,23 @@ public class Person {
     private final Address address;
     private final Skills skills;
 
+    private final Status status;
+    private final Note note;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Skills skills, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, skills, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Skills skills, Status status,
+                  Note note, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, skills, status, note, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.skills = skills;
+        this.skills = skills; // From feature/add-skills
+        this.status = status; // From feature/add-application-status
+        this.note = note; // New feature (Week 8)
         this.tags.addAll(tags);
     }
 
@@ -58,6 +63,14 @@ public class Person {
 
     public Skills getSkills() {
         return skills;
+    }
+    
+    public Status getStatus() {
+        return status;
+    }
+
+    public Note getNote() {
+        return note;
     }
 
     /**
@@ -102,13 +115,15 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && skills.equals(otherPerson.skills)
+                && status.equals(otherPerson.status)
+                && note.equals(otherPerson.note)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, skills, tags);
+        return Objects.hash(name, phone, email, address, skills, status, note, tags);
     }
 
     @Override
@@ -119,6 +134,8 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("skills", skills)
+                .add("status", status)
+                .add("note", note)
                 .add("tags", tags)
                 .toString();
     }

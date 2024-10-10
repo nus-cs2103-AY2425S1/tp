@@ -5,12 +5,16 @@
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
     "skills" : "DevOps, python",
+    "status": "Hired",
+    "note": "",
     "tags": [ "friends" ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
     "address": "4th street",
-    "skills" : "DevOps, python"
+    "skills" : "DevOps, python",
+    "status" : "Hired",
+    "note": ""
   } ]
 }
