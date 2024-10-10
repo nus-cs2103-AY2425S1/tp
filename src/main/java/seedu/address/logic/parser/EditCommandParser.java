@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENT_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_STATUS;
@@ -35,7 +36,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_TAG, PREFIX_PROJECT_STATUS, PREFIX_PAYMENT_STATUS);
+                        PREFIX_TAG, PREFIX_PROJECT_STATUS, PREFIX_PAYMENT_STATUS, PREFIX_CLIENT_STATUS);
 
         Index index;
 
@@ -46,7 +47,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_ADDRESS, PREFIX_PROJECT_STATUS, PREFIX_PAYMENT_STATUS);
+                PREFIX_ADDRESS, PREFIX_PROJECT_STATUS, PREFIX_PAYMENT_STATUS, PREFIX_CLIENT_STATUS);
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
@@ -68,10 +69,15 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setProjectStatus(ParserUtil
                     .parseProjectStatus(argMultimap.getValue(PREFIX_PROJECT_STATUS).get()));
         }
-
+      
         if (argMultimap.getValue(PREFIX_PAYMENT_STATUS).isPresent()) {
             editPersonDescriptor.setPaymentStatus(ParserUtil
                     .parsePaymentStatus(argMultimap.getValue(PREFIX_PAYMENT_STATUS).get()));
+        }
+      
+        if (argMultimap.getValue(PREFIX_CLIENT_STATUS).isPresent()) {
+            editPersonDescriptor.setClientStatus(ParserUtil
+                    .parseClientStatus(argMultimap.getValue(PREFIX_CLIENT_STATUS).get()));
         }
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {

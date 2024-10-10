@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.ClientStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.PaymentStatus;
@@ -34,6 +35,7 @@ class JsonAdaptedPerson {
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String projectStatus;
     private final String paymentStatus;
+    private final String clientStatus;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -43,6 +45,7 @@ class JsonAdaptedPerson {
             @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("projectStatus") String projectStatus,
                              @JsonProperty("paymentStatus") String paymentStatus,
+                             @JsonProperty("clientStatus") String clientStatus,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
@@ -50,6 +53,8 @@ class JsonAdaptedPerson {
         this.address = address;
         this.projectStatus = projectStatus;
         this.paymentStatus = paymentStatus;
+        this.clientStatus = clientStatus;
+      
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -65,6 +70,7 @@ class JsonAdaptedPerson {
         address = source.getAddress().value;
         projectStatus = source.getProjectStatus().toString();
         paymentStatus = source.getPaymentStatus().toString();
+        clientStatus = source.getClientStatus().toString();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -132,8 +138,18 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(PaymentStatus.MESSAGE_CONSTRAINTS);
         }
         final PaymentStatus modelPaymentStatus = new PaymentStatus(paymentStatus);
+      
+        if (clientStatus == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                ClientStatus.class.getSimpleName()));
+        }
+        if (!ClientStatus.isValidClientStatus(clientStatus)) {
+            throw new IllegalValueException(ClientStatus.MESSAGE_CONSTRAINTS);
+        }
+        final ClientStatus modelClientStatus = new ClientStatus(clientStatus);
 
-        return new Person( modelName, modelPhone, modelEmail, modelAddress, modelTags, modelProjectStatus,
-                modelPaymentStatus);
+      
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags,
+                modelProjectStatus, modelPaymentStatus, modelClientStatus);
     }
 }

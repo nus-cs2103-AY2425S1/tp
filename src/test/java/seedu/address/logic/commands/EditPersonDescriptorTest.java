@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CLIENT_STATUS_POTENTIAL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PAYMENT_STATUS_PAID;
@@ -60,10 +61,13 @@ public class EditPersonDescriptorTest {
 
         // different project status -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withProjectStatus(VALID_PROJECT_STATUS_COMPLETE).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
 
         // different payment status -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withPaymentStatus(VALID_PAYMENT_STATUS_PAID).build();
+
+        // different client status -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withClientStatus(VALID_CLIENT_STATUS_POTENTIAL).build();
+      
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 
@@ -77,7 +81,10 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getAddress().orElse(null) + ", tags="
                 + editPersonDescriptor.getTags().orElse(null) + ", projectStatus="
                 + editPersonDescriptor.getProjectStatus().orElse(null) + ", paymentStatus="
-                + editPersonDescriptor.getPaymentStatus().orElse(null) + "}";
+                + editPersonDescriptor.getProjectStatus().orElse(null) + ", clientStatus="
+                + editPersonDescriptor.getClientStatus().orElse(null) + "}";
+
         assertEquals(expected, editPersonDescriptor.toString());
+
     }
 }

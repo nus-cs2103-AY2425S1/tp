@@ -26,12 +26,13 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
     private final ProjectStatus projectStatus;
     private final PaymentStatus paymentStatus;
+    private final ClientStatus clientStatus;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, ProjectStatus projectStatus,
-                  PaymentStatus paymentStatus) {
+                  PaymentStatus paymentStatus, ClientStatus clientStatus) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -42,7 +43,8 @@ public class Person {
                 ? projectStatus : new ProjectStatus("in progress"); // Default value
         this.paymentStatus = (paymentStatus != null)
                 ? paymentStatus : new PaymentStatus("unpaid");
-
+        this.clientStatus = (clientStatus != null)
+                ? clientStatus : new ClientStatus("active"); //default
     }
 
     public Name getName() {
@@ -75,6 +77,10 @@ public class Person {
 
     public PaymentStatus getPaymentStatus() {
         return paymentStatus;
+    }
+  
+    public ClientStatus getClientStatus() {
+        return clientStatus;
     }
 
     /**
@@ -113,12 +119,13 @@ public class Person {
                 && tags.equals(otherPerson.tags)
                 && projectStatus.equals(otherPerson.projectStatus)
                 && paymentStatus.equals(otherPerson.paymentStatus);
+                && clientStatus.equals(otherPerson.clientStatus);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, projectStatus, paymentStatus);
+        return Objects.hash(name, phone, email, address, tags, projectStatus, paymentStatus, clientStatus);
     }
 
     @Override
@@ -131,6 +138,7 @@ public class Person {
                 .add("tags", tags)
                 .add("projectStatus", projectStatus)
                 .add("paymentStatus", paymentStatus)
+                .add("clientStatus", clientStatus)
                 .toString();
     }
 }

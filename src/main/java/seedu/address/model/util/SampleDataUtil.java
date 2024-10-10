@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.ClientStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.PaymentStatus;
@@ -38,7 +39,7 @@ public class SampleDataUtil {
                 getTagSet("classmates"), new ProjectStatus("in progress"), new PaymentStatus("unpaid")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet("colleagues"), new ProjectStatus("complete"), new PaymentStatus("paid"))
+                getTagSet("colleagues"), new ProjectStatus("complete"), new PaymentStatus("paid"), new ClientStatus("active"))
         };
     }
 

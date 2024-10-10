@@ -7,7 +7,8 @@
     "address" : "123, Jurong West Ave 6, #08-111",
     "tags" : [ "friends" ],
     "projectStatus": "in progress",
-    "paymentStatus": "unpaid"
+    "paymentStatus": "unpaid",
+    "clientStatus": "active"
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
@@ -15,7 +16,8 @@
     "address" : "311, Clementi Ave 2, #02-25",
     "tags" : [ "owesMoney", "friends" ],
     "projectStatus": "in progress",
-    "paymentStatus": "unpaid"
+    "paymentStatus": "unpaid",
+    "clientStatus": "active"
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
@@ -23,7 +25,8 @@
     "address" : "wall street",
     "tags" : [ ],
     "projectStatus": "in progress",
-    "paymentStatus": "unpaid"
+    "paymentStatus": "unpaid",
+    "clientStatus": "active"
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
@@ -31,7 +34,8 @@
     "address" : "10th street",
     "tags" : [ "friends" ],
     "projectStatus": "in progress",
-    "paymentStatus": "unpaid"
+    "paymentStatus": "unpaid",
+    "clientStatus": "active"
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
@@ -39,7 +43,8 @@
     "address" : "michegan ave",
     "tags" : [ ],
     "projectStatus": "in progress",
-    "paymentStatus": "unpaid"
+    "paymentStatus": "unpaid",
+    "clientStatus": "active"
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
@@ -47,7 +52,8 @@
     "address" : "little tokyo",
     "tags" : [ ],
     "projectStatus": "in progress",
-    "paymentStatus": "unpaid"
+    "paymentStatus": "unpaid",
+    "clientStatus": "active"
   }, {
     "name" : "George Best",
     "phone" : "9482442",
@@ -55,6 +61,7 @@
     "address" : "4th street",
     "tags" : [ ],
     "projectStatus": "in progress",
-    "paymentStatus": "unpaid"
+    "paymentStatus": "unpaid",
+    "clientStatus": "active"
   } ]
 }

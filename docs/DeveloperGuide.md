@@ -264,13 +264,13 @@ _{Explain here how the data archiving feature will be implemented}_
 
 * Needs to manage a variety of sections, such as client names, email, payment status and more
 * Desire to track all client statuses in one place
-* Wants to avoid tracking clients using multiple applications 
+* Wants to avoid tracking clients using multiple applications
 * Wants to easily change statuses of a client upon completion of project
 * Can type fast
 * Prefers typing to mouse interactions
 * Familiar with the workings of CLI and commands
 
-**Value proposition**: Our address book seamlessly combines client contacts, 
+**Value proposition**: Our address book seamlessly combines client contacts,
 payment tracking and more in one efficient package, tailored specifically for freelance software developers.
 
 
@@ -299,7 +299,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User provides client details to add 
+1.  User provides client details to add
 2.  Clientele+ adds the client
 
     Use case ends.
@@ -309,7 +309,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. The client's name is not provided
 
    * 1a1. Clientele+ shows an error message
-   * 1a2. User reenters new command 
+   * 1a2. User reenters new command
    Steps 1a1-1a2 are repeated until the command entered is correct
 
   Use case resumes at step 1.
@@ -317,7 +317,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1b. Input fields are incorrectly formatted
 
     * 1b1. Clientele+ shows an error message.
-    * 1b2. User reenters command 
+    * 1b2. User reenters command
     Steps 1b1-1b2 are repeated until the command entered is correct
 
    Use case resumes at step 1.
@@ -393,7 +393,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **API**: A set of functions that enable communication between software components
 * **fxml**: File format used to format/structure a JavaFX application's UI.
-* **JavaFX**: A third-party software for Java, used to run our builds and tests 
+* **JavaFX**: A third-party software for Java, used to run our builds and tests
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Parser**: The software component responsible for interpreting user input into commands
 * **PlantUML**: A third-party tool that facilitates the creation of various software diagrams

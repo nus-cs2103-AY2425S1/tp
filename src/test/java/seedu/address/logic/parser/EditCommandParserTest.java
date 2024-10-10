@@ -3,9 +3,11 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.CLIENT_STATUS_ACTIVE;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_CLIENT_STATUS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PAYMENT_STATUS_DESC;
@@ -22,6 +24,7 @@ import static seedu.address.logic.commands.CommandTestUtil.PROJECT_STATUS_DESC_I
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CLIENT_STATUS_ACTIVE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PAYMENT_STATUS_PAID;
@@ -49,6 +52,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.ClientStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.PaymentStatus;
@@ -103,7 +107,9 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_PROJECT_STATUS_DESC,
                 ProjectStatus.MESSAGE_CONSTRAINTS); // invalid project status
         assertParseFailure(parser, "2" + INVALID_PAYMENT_STATUS_DESC,
-                PaymentStatus.MESSAGE_CONSTRAINTS); // invalid project status
+                PaymentStatus.MESSAGE_CONSTRAINTS); // invalid payment status
+        assertParseFailure(parser, "1" + INVALID_CLIENT_STATUS_DESC,
+                ClientStatus.MESSAGE_CONSTRAINTS);
 
 
         // invalid phone followed by valid email
@@ -125,13 +131,15 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HUSBAND
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND + PROJECT_STATUS_DESC_IN_PROGRESS
-                + PAYMENT_STATUS_DESC_UNPAID;
+                + PAYMENT_STATUS_DESC_UNPAID + CLIENT_STATUS_ACTIVE;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
                 .withProjectStatus(VALID_PROJECT_STATUS_IN_PROGRESS)
-                .withPaymentStatus(VALID_PAYMENT_STATUS_UNPAID).build();
+                .withPaymentStatus(VALID_PAYMENT_STATUS_UNPAID)
+                .withClientStatus(VALID_CLIENT_STATUS_ACTIVE).build();
+      
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -191,6 +199,10 @@ public class EditCommandParserTest {
         // payment status
         userInput = targetIndex.getOneBased() + PAYMENT_STATUS_DESC_PAID;
         descriptor = new EditPersonDescriptorBuilder().withPaymentStatus(VALID_PAYMENT_STATUS_PAID).build();
+        // client status
+        userInput = targetIndex.getOneBased() + CLIENT_STATUS_ACTIVE;
+        descriptor = new EditPersonDescriptorBuilder().withClientStatus(VALID_CLIENT_STATUS_ACTIVE).build();
+
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

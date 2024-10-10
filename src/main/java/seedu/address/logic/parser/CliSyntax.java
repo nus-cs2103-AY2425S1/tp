@@ -13,5 +13,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_PROJECT_STATUS = new Prefix("ps/");
     public static final Prefix PREFIX_PAYMENT_STATUS = new Prefix("py/");
+    public static final Prefix PREFIX_CLIENT_STATUS = new Prefix("cs/");
 
 }

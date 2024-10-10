@@ -6,7 +6,8 @@
     "address": "123, Jurong West Ave 6, #08-111",
     "tags": [ "friends" ],
     "projectStatus": "in progress",
-    "paymentStatus": "unpaid"
+    "paymentStatus": "unpaid",
+    "clientStatus": "active"
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
@@ -14,6 +15,7 @@
     "address": "4th street",
     "tags": [ "friends" ],
     "projectStatus": "in progress",
-    "paymentStatus": "unpaid"
+    "paymentStatus": "unpaid",
+    "clientStatus": "active"
   } ]
 }

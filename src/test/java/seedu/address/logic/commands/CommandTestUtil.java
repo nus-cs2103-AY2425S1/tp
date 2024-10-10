@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENT_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_STATUS;
@@ -42,6 +43,10 @@ public class CommandTestUtil {
     public static final String VALID_PROJECT_STATUS_COMPLETE = "completed";
     public static final String VALID_PAYMENT_STATUS_UNPAID = "unpaid";
     public static final String VALID_PAYMENT_STATUS_PAID = "paid";
+    public static final String VALID_CLIENT_STATUS_ACTIVE = "active";
+    public static final String VALID_CLIENT_STATUS_UNRESPONSIVE = "unresponsive";
+    public static final String VALID_CLIENT_STATUS_POTENTIAL = "potential";
+    public static final String VALID_CLIENT_STATUS_OLD = "old";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -63,6 +68,16 @@ public class CommandTestUtil {
     public static final String PAYMENT_STATUS_DESC_PAID = " "
             + PREFIX_PAYMENT_STATUS + VALID_PAYMENT_STATUS_PAID;
 
+    public static final String CLIENT_STATUS_ACTIVE = " "
+            + PREFIX_CLIENT_STATUS + VALID_CLIENT_STATUS_ACTIVE;
+    public static final String CLIENT_STATUS_UNRESPONSIVE = " "
+            + PREFIX_CLIENT_STATUS + VALID_CLIENT_STATUS_UNRESPONSIVE;
+    public static final String CLIENT_STATUS_POTENTIAL = " "
+            + PREFIX_CLIENT_STATUS + VALID_CLIENT_STATUS_POTENTIAL;
+    public static final String CLIENT_STATUS_OLD = " "
+            + PREFIX_CLIENT_STATUS + VALID_CLIENT_STATUS_OLD;
+
+
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
@@ -71,7 +86,9 @@ public class CommandTestUtil {
     public static final String INVALID_PROJECT_STATUS_DESC = " "
             + PREFIX_PROJECT_STATUS + "unknown"; // invalid project status
     public static final String INVALID_PAYMENT_STATUS_DESC = " "
-            + PREFIX_PAYMENT_STATUS + "unknown"; // invalid project status
+            + PREFIX_PAYMENT_STATUS + "unknown"; // invalid payment status
+    public static final String INVALID_CLIENT_STATUS_DESC = " "
+            + PREFIX_CLIENT_STATUS + "referral"; // invalid client status
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -84,11 +101,13 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withTags(VALID_TAG_FRIEND).withProjectStatus(VALID_PROJECT_STATUS_IN_PROGRESS)
                 .withPaymentStatus(VALID_PAYMENT_STATUS_UNPAID).build();
+                .withClientStatus(VALID_CLIENT_STATUS_ACTIVE).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
                 .withProjectStatus(VALID_PROJECT_STATUS_IN_PROGRESS)
                 .withPaymentStatus(VALID_PAYMENT_STATUS_UNPAID).build();
+                .withClientStatus(VALID_CLIENT_STATUS_ACTIVE).build();
     }
 
     /**
