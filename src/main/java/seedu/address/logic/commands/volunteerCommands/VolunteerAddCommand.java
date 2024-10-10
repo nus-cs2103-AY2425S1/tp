@@ -17,7 +17,7 @@ import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_START_TIME;
 
 
 public class VolunteerAddCommand extends Command {
-    public static final String COMMAND_WORD = "addv";
+    public static final String COMMAND_WORD = "new";
     private static final String MESSAGE_DUPLICATE_VOLUNTEER = "This volunteer already exists!";
     private static final String MESSAGE_SUCCESS = "Volunteer added successfully!";
 
