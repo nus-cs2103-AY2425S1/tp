@@ -7,6 +7,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.FLORIST;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -91,6 +92,27 @@ public class ModelManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void hasTag_nullTag_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasTag(null));
+    }
+
+    @Test
+    public void hasTag_tagNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasTag(FLORIST));
+    }
+
+    @Test
+    public void hasTag_tagInAddressBook_returnsTrue() {
+        modelManager.addTag(FLORIST);
+        assertTrue(modelManager.hasTag(FLORIST));
+    }
+
+    @Test
+    public void getFilteredTagList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredTagList().remove(0));
     }
 
     @Test

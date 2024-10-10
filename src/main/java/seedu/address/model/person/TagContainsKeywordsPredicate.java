@@ -20,7 +20,7 @@ public class TagContainsKeywordsPredicate implements Predicate<Tag> {
     @Override
     public boolean test(Tag tag) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(tag.tagName, keyword));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(tag.getTagName().toString(), keyword));
     }
 
     @Override

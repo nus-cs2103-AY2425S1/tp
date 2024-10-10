@@ -20,9 +20,11 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_CLIVE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_DOMINIC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_ERIC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FLORIST;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_NEIGHBOR;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PHOTOGRAPHER;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,6 +32,8 @@ import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagName;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
@@ -76,6 +80,12 @@ public class TypicalPersons {
             .withEmail(VALID_EMAIL_ERIC).withAddress(VALID_ADDRESS_ERIC).withTags(VALID_TAG_NEIGHBOR)
             .build();
 
+    // Manually added Tags
+    public static final Tag FLORIST = new Tag(new TagName(VALID_TAG_FLORIST));
+    public static final Tag PHOTOGRAPHER = new Tag(new TagName(VALID_TAG_PHOTOGRAPHER));
+
+    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
+
     private TypicalPersons() {} // prevents instantiation
 
     /**
@@ -86,6 +96,8 @@ public class TypicalPersons {
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
         }
+        ab.addTag(FLORIST);
+        ab.addTag(PHOTOGRAPHER);
         return ab;
     }
 
