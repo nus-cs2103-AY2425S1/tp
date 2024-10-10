@@ -13,8 +13,8 @@ public class TelegramUsername {
                     + "and it should not be blank";
 
     /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * The first character of the address must be an alphabet.
+     * "_____" or "12345" are invalid usernames.
      */
     public static final String VALIDATION_REGEX = "^[a-zA-Z][a-zA-Z0-9_]{4,31}$";
 
@@ -32,7 +32,7 @@ public class TelegramUsername {
     }
 
     /**
-     * Returns true if a given string is a valid name.
+     * Returns true if a given string is a valid telegram username.
      */
     public static boolean isValidUsername(String test) {
         return test.matches(VALIDATION_REGEX);
