@@ -17,7 +17,7 @@ public class ListExpiringPoliciesCommand extends Command {
             + ": Lists all policies nearing expiry within the next 30 days.\n"
             + "Example: " + COMMAND_WORD;
 
-    private static final String MESSAGE_NOT_IMPLEMENTED_YET = "ListExpiringPolicies command has not "
+    private static final String MESSAGE_NOT_IMPLEMENTED_YET = "listExpiringPolicies command has not "
             + "been implemented yet";
 
     private static final String MESSAGE_SUCCESS = "The following policies are near expiry:";
