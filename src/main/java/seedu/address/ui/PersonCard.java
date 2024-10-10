@@ -29,13 +29,13 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
-    private Label id;
+    private Label Id;
     @FXML
-    private Label phone;
+    private Label ward;
     @FXML
-    private Label address;
+    private Label diagnosis;
     @FXML
-    private Label email;
+    private Label medication;
     @FXML
     private FlowPane tags;
 
