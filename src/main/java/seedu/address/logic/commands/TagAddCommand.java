@@ -28,8 +28,8 @@ public class TagAddCommand extends Command {
             + "Jane and Tom 230412";
 
     public static final String MESSAGE_ARGUMENTS = "Name: %1$s, Tag: %2$s";
-    public static final String MESSAGE_ADD_TAG_SUCCESS = "Added tag to Person: %1$s";
-    public static final String MESSAGE_DELETE_TAG_SUCCESS = "Removed tag from Person: %1$s";
+    public static final String MESSAGE_ADD_TAG_SUCCESS = "Added tag '%1$s' to contact: %2$s";
+    public static final String MESSAGE_DELETE_TAG_SUCCESS = "Removed tag '%1$s' from contact: %1$s";
 
     private final Name name;
     private final Set<Tag> tags;
@@ -85,6 +85,6 @@ public class TagAddCommand extends Command {
      */
     private String generateSuccessMessage(Person personToEdit) {
         String message = !tags.isEmpty() ? MESSAGE_ADD_TAG_SUCCESS : MESSAGE_DELETE_TAG_SUCCESS;
-        return String.format(message, Messages.format(personToEdit));
+        return String.format(message, Messages.formatForTags(personToEdit), personToEdit.getName());
     }
 }
