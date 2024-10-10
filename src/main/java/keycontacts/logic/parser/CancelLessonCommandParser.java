@@ -8,7 +8,7 @@ import static keycontacts.logic.parser.CliSyntax.PREFIX_START_TIME;
 import java.time.LocalDate;
 
 import keycontacts.logic.commands.CancelLessonCommand;
-import keycontacts.logic.parser.exceptions.ParseException;
+    import keycontacts.logic.parser.exceptions.ParseException;
 import keycontacts.model.lesson.Time;
 
 

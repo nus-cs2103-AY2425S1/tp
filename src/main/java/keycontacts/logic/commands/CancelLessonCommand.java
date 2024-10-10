@@ -17,10 +17,10 @@ public class CancelLessonCommand extends Command {
 
     public static final String COMMAND_WORD = "cancel";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Cancels the lesson identified by the date and startTime.\n"
-            + "Parameters:"
-            + "[" + PREFIX_DATE + "DATE ]"
-            + "[" + PREFIX_START_TIME + "START_TIME]\n"
+            + ": Cancels the lesson identified by the date and start time.\n"
+            + "Parameters: "
+            + PREFIX_DATE + "DATE "
+            + PREFIX_START_TIME + "START_TIME\n"
             + "Example: " + COMMAND_WORD + PREFIX_DATE + "06-07-2022" + PREFIX_START_TIME + "12:00";
 
     private final Time startTime;
