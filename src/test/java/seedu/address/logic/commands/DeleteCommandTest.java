@@ -27,6 +27,7 @@ public class DeleteCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
+    // Test for valid index-based deletion in an unfiltered list
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
@@ -41,14 +42,32 @@ public class DeleteCommandTest {
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
+    // Test for valid name-based deletion in an unfiltered list
     @Test
-    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+    public void execute_validNameUnfilteredList_success() {
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        String nameToDelete = personToDelete.getName().fullName;
+        DeleteCommand deleteCommand = new DeleteCommand(nameToDelete);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                Messages.format(personToDelete));
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deletePerson(personToDelete);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
+    // Test for invalid name-based deletion in an unfiltered list
+    @Test
+    public void execute_invalidNameUnfilteredList_throwsCommandException() {
+        String invalidName = "Non Existent Person";
+        DeleteCommand deleteCommand = new DeleteCommand(invalidName);
+
+        assertCommandFailure(deleteCommand, model, String.format(DeleteCommand.MESSAGE_PERSON_NOT_FOUND, invalidName));
+    }
+
+    // Test for valid index-based deletion in a filtered list
     @Test
     public void execute_validIndexFilteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
@@ -66,39 +85,65 @@ public class DeleteCommandTest {
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
+    // Test for valid name-based deletion in a filtered list
     @Test
-    public void execute_invalidIndexFilteredList_throwsCommandException() {
+    public void execute_validNameFilteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        String nameToDelete = personToDelete.getName().fullName;
+        DeleteCommand deleteCommand = new DeleteCommand(nameToDelete);
 
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                Messages.format(personToDelete));
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deletePerson(personToDelete);
+        showNoPerson(expectedModel);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
+    // Test for invalid name-based deletion in a filtered list
+    @Test
+    public void execute_invalidNameFilteredList_throwsCommandException() {
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+
+        String invalidName = "Non Existent Person";
+        DeleteCommand deleteCommand = new DeleteCommand(invalidName);
+
+        assertCommandFailure(deleteCommand, model, String.format(DeleteCommand.MESSAGE_PERSON_NOT_FOUND, invalidName));
+    }
+
+    // Equality tests for both index-based and name-based commands
     @Test
     public void equals() {
         DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON);
         DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON);
+        DeleteCommand deleteNameCommand = new DeleteCommand("John Doe");
 
-        // same object -> returns true
+        // Same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
-        // same values -> returns true
+        // Same values -> returns true
         DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_PERSON);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
-        // different types -> returns false
+        // Different index -> returns false
+        assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
+
+        // Different types -> returns false
         assertFalse(deleteFirstCommand.equals(1));
 
-        // null -> returns false
+        // Null -> returns false
         assertFalse(deleteFirstCommand.equals(null));
 
-        // different person -> returns false
-        assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
+        // Different name -> returns false
+        assertFalse(deleteFirstCommand.equals(deleteNameCommand));
+
+        // Same name -> returns true
+        DeleteCommand deleteNameCommandCopy = new DeleteCommand("John Doe");
+        assertTrue(deleteNameCommand.equals(deleteNameCommandCopy));
     }
 
     @Test
@@ -122,7 +167,6 @@ public class DeleteCommandTest {
      */
     private void showNoPerson(Model model) {
         model.updateFilteredPersonList(p -> false);
-
         assertTrue(model.getFilteredPersonList().isEmpty());
     }
 }
