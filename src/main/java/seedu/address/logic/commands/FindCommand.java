@@ -4,16 +4,10 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.company.CompanyMatchesPredicate;
+import seedu.address.model.company.NameCompanyMatchesPredicate;
 
 import java.util.List;
 
-/**
- * Finds and lists all companies in address book that match the specified criteria:
- * - Company name (case-sensitive)
- * - Tag name (case-insensitive, from a predefined list)
- * - Contact number (exact match)
- */
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";

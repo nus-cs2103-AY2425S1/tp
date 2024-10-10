@@ -1,7 +1,7 @@
 {
   "baseUrl": "",
-  "titlePrefix": "SomeName",
-  "titleSuffix": "AddressBook Level-3",
+  "titlePrefix": "TechConnect",
+  "titleSuffix": "TechConnect v1.1",
   "faviconPath": "images/SeEduLogo.png",
   "style": {
     "codeTheme": "light"

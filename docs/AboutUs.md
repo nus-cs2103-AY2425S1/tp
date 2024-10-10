@@ -1,6 +1,6 @@
 ---
-  layout: default.md
-  title: "About Us"
+layout: default.md
+title: "About Us"
 ---
 
 # About Us
@@ -11,51 +11,55 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Ryan Lim
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/rynlwhh.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/rynlwhh)]
 
-* Role: Project Advisor
+- Role: Developer
+- Responsibilities: Data
 
-### Jane Doe
+### Vince Goh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/vinceg4.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+I like to read books and my favourite genre is mystery. I also like to run and play badminton in my free time.
 
-* Role: Team Lead
-* Responsibilities: UI
+[[github](https://github.com/vinceg4)]
 
-### Johnny Doe
+- Role: Developer
+- Reponsibilties: Code Quality
 
-<img src="images/johndoe.png" width="200px">
+### Mattis Ong
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+<img src="images/mattisongjj.png" width="200px">
 
-* Role: Developer
-* Responsibilities: Data
+I like to touch grass
 
-### Jean Doe
+[[github](https://github.com/mattisongjj)]
 
-<img src="images/johndoe.png" width="200px">
+- Role: Team Lead
+- Responsibilities: Integration
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+### Ling Zi Yan
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+<img src="images/lingziyann.png" width="200px">
 
-### James Doe
+Hello my name is ziyan and I love cs2103T and cs2101
 
-<img src="images/johndoe.png" width="200px">
+[[github](http://github.com/LingZiyann)] [[portfolio](team/johndoe.md)]
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+- Role: Developer
+- Responsibilities: Testing + Deliverables
 
-* Role: Developer
-* Responsibilities: UI
+### Teo Choon Keong
+
+<img src="images/tckeong.png" width="200px">
+
+Hello my name is Choon Keong and I like singing.
+
+[[github](https://github.com/tckeong)] [[portfolio](team/johndoe.md)]
+
+- Role: Developer
+- Responsibilities: Logic
