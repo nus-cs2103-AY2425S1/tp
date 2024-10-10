@@ -15,6 +15,9 @@ import seedu.address.model.person.UniquePersonList;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
+    private Person lastDeletedPerson;
+    private boolean canRestore;
+
     private final UniquePersonList persons;
 
     /*
@@ -74,6 +77,24 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void addPerson(Person p) {
         persons.add(p);
     }
+
+    public void savePersonToDelete(Person person) {
+        lastDeletedPerson = person;
+        canRestore = true;
+    }
+
+    public boolean checkRestorable() {
+        return canRestore;
+    }
+
+    public void makeNotRestorable() {
+        this.canRestore = false;
+    }
+
+    public Person getLastDeletedPerson() {
+        return lastDeletedPerson;
+    }
+
 
     /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
