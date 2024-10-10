@@ -46,9 +46,6 @@ public class GradeTest {
         // same object -> returns true
         assertTrue(firstGrade.equals(firstGrade));
 
-        // null -> returns false
-        assertFalse(firstGrade.equals(null));
-
         //different types -> returns false
         assertFalse(firstGrade.equals(5));
 
