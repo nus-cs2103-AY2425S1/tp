@@ -3,9 +3,13 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -37,6 +41,13 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
+    public static final String VALID_STUDENT_ID = "1";
+    public static final String VALID_LOCATION_INDEX = "1";
+    public static final String VALID_START_DATE = "01-01-2024 12:00";
+    public static final String VALID_END_DATE = "01-01-2024 13:00";
+
+    public static final String VALID_DURATION = "1";
+
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
@@ -47,13 +58,33 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
-
+    public static final String STUDENT_ID_DESC = " " + PREFIX_STUDENT_ID + VALID_STUDENT_ID;
+    public static final String LOCATION_INDEX_DESC = " " + PREFIX_LOCATION_INDEX + VALID_LOCATION_INDEX;
+    public static final String START_DATE_TIME_DESC = " " + PREFIX_START_DATE + VALID_START_DATE;
+    public static final String DURATION_DESC = " " + PREFIX_DURATION + VALID_DURATION;
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
+    public static final String INVALID_STUDENT_ID_CHAR = " " + PREFIX_STUDENT_ID + "a";
+    public static final String INVALID_STUDENT_ID_ZERO = " " + PREFIX_STUDENT_ID + "0";
+    public static final String INVALID_LOCATION_INDEX_CHAR = " " + PREFIX_LOCATION_INDEX + "a";
+    public static final String INVALID_LOCATION_INDEX_ZERO = " " + PREFIX_LOCATION_INDEX + "0";
+    public static final String INVALID_DAY = "00-03-2000 12:00";
+    public static final String INVALID_START_DATE_DAY = " " + PREFIX_START_DATE + INVALID_DAY;
+    public static final String INVALID_MONTH = "03-00-2000 12:00";
+    public static final String INVALID_START_DATE_MONTH = " " + PREFIX_START_DATE + INVALID_MONTH;
+    public static final String INVALID_YEAR = "03-03-0000 12:00";
+    public static final String INVALID_START_DATE_YEAR = " " + PREFIX_START_DATE + INVALID_YEAR;
+    public static final String INVALID_HOUR = "03-03-2000 25:00";
+    public static final String INVALID_START_DATE_HOUR = " " + PREFIX_START_DATE + INVALID_HOUR;
+    public static final String INVALID_MINUTE = "03-03-2000 12:60";
+    public static final String INVALID_START_DATE_MINUTE = " " + PREFIX_START_DATE + INVALID_MINUTE;
+    public static final String INVALID_DURATION_CHAR = " " + PREFIX_DURATION + "a";
+    public static final String INVALID_DURATION_ZERO = " " + PREFIX_DURATION + "0";
+    public static final String INVALID_DURATION_TWENTY_FIVE = " " + PREFIX_DURATION + "25";
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 

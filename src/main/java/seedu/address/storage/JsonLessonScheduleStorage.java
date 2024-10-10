@@ -2,11 +2,11 @@ package seedu.address.storage;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
-import java.util.logging.Logger;
-import seedu.address.commons.core.LogsCenter;
+
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
@@ -14,6 +14,9 @@ import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.LessonSchedule;
 import seedu.address.model.ReadOnlyAddressBook;
 
+/**
+ * A class to access LessonSchedule data stored as a json file on the hard disk.
+ */
 public class JsonLessonScheduleStorage implements LessonScheduleStorage {
     private Path filePath;
 
@@ -31,7 +34,8 @@ public class JsonLessonScheduleStorage implements LessonScheduleStorage {
     }
 
     @Override
-    public Optional<LessonSchedule> readLessonSchedule(Path filePath, ReadOnlyAddressBook addressBook) throws DataLoadingException {
+    public Optional<LessonSchedule> readLessonSchedule(Path filePath, ReadOnlyAddressBook addressBook) throws
+            DataLoadingException {
         requireAllNonNull(filePath);
 
         Optional<JsonSerializableLessonSchedule> jsonLessonSchedule = JsonUtil.readJsonFile(

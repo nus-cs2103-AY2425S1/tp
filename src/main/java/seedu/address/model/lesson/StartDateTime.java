@@ -5,9 +5,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.DateTimeUtil.INVALID_DATETIME_FORMAT;
 import static seedu.address.commons.util.DateTimeUtil.isValidDateTime;
 import static seedu.address.commons.util.DateTimeUtil.parseDateTime;
+
 import java.time.LocalDateTime;
+
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Represents the start date and time of a lesson.
+ */
 public class StartDateTime extends DateTime {
     public static final String START_DATE_MESSAGE_CONSTRAINTS = String.format(INVALID_DATETIME_FORMAT, "Start");
 

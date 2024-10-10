@@ -11,7 +11,19 @@ import seedu.address.model.lesson.exceptions.LessonIndexOutOfRange;
 import seedu.address.model.lesson.exceptions.OverlappingLessonException;
 
 // adapted from UniquePersonList
-public class UniqueLessonList implements Iterable<Lesson>{
+
+/**
+ * A list of lessons that enforces uniqueness between its elements and does not allow nulls.
+ * A lesson is considered unique by comparing using {@code Lesson#isOverlapping(Lesson)}. As such, adding and updating
+ * of lessons uses Lesson#isOverlapping(Lesson) for equality so as to ensure that the lesson being added or updated is
+ * unique in terms of overlapping with other lessons in the UniqueLessonList.
+ * <p>
+ * Supports a minimal set of list operations.
+ *
+ * @see Lesson#isOverlapping(Lesson)
+ */
+public class UniqueLessonList implements Iterable<Lesson> {
+    // adapted from UniquePersonList
     private final ObservableList<Lesson> internalList = FXCollections.observableArrayList();
     private final ObservableList<Lesson> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
@@ -41,16 +53,11 @@ public class UniqueLessonList implements Iterable<Lesson>{
      * The lesson must exist in the list.
      */
     public void remove(int index) {
-        if (!validIndex(index)) {
+        if (!isValidIndex(index)) {
             throw new LessonIndexOutOfRange();
         } else {
             internalList.remove(index - 1);
         }
-    }
-
-    public void setPersons(UniqueLessonList replacement) {
-        requireNonNull(replacement);
-        internalList.setAll(replacement.internalList);
     }
 
     /**
@@ -68,9 +75,9 @@ public class UniqueLessonList implements Iterable<Lesson>{
     /**
      * Checks if the index is valid.
      */
-    public boolean validIndex(int index) {
+    public boolean isValidIndex(int index) {
         // index is 1-based
-        return index >= 1 && index < internalList.size();
+        return index >= 1 && index - 1 < internalList.size();
     }
 
     /**

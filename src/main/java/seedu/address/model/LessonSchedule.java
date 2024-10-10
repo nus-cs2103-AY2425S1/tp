@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.util.List;
+
 import javafx.collections.ObservableList;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.UniqueLessonList;

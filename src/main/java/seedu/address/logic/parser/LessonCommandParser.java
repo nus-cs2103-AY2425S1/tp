@@ -4,9 +4,9 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.logging.Logger;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddLessonCommand;
 import seedu.address.logic.commands.Command;
@@ -14,6 +14,9 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.LessonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses user input into command for execution.
+ */
 public class LessonCommandParser implements Parser<Command> {
     public static final String COMMAND_WORD = "lesson";
     private static final Pattern CONTACT_COMMAND_FORMAT = Pattern.compile("(?<subCommand>\\S+)(?<subArguments>.*)");
@@ -30,10 +33,10 @@ public class LessonCommandParser implements Parser<Command> {
 
         switch (subCommand) {
         case AddLessonCommand.COMMAND_WORD:
-            return new AddLessonParser().parse(subArguments);
+            return new AddLessonCommandParser().parse(subArguments);
         default:
-            logger.finer("This user input caused a ParseException: " +
-                    LessonCommand.COMMAND_WORD + " " + args);
+            logger.finer("This user input caused a ParseException: "
+                    + LessonCommand.COMMAND_WORD + " " + args);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }

@@ -2,15 +2,18 @@ package seedu.address.model.lesson;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
-import static seedu.address.commons.util.DateTimeUtil.INVALID_DATETIME_FORMAT;
-import static seedu.address.commons.util.DateTimeUtil.isValidDateTime;
 import static seedu.address.commons.util.DateTimeUtil.parseDateTime;
 import static seedu.address.model.lesson.StartDateTime.START_DATE_MESSAGE_CONSTRAINTS;
 import static seedu.address.model.lesson.StartDateTime.isValidStartDateTime;
+
 import java.time.LocalDateTime;
+
 import seedu.address.commons.util.NumbersUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Represents the end date and time of a lesson.
+ */
 public class EndDateTime extends DateTime {
     public static final String HOURS_MESSAGE_CONSTRAINTS = "Hours to add must be between 0 and 24.";
 
@@ -49,10 +52,16 @@ public class EndDateTime extends DateTime {
         return new EndDateTime(parseDateTime(dateTime));
     }
 
+    /**
+     * Returns true if a given string is a valid number of hours to add, 0 < hours <= 24.
+     *
+     * @param hoursToAdd The number of hours to add.
+     * @return True if the number of hours to add is valid, false otherwise.
+     */
     public static boolean isValidHoursToAdd(String hoursToAdd) {
         try {
             double parsedHoursToAdd = NumbersUtil.parseDouble(hoursToAdd, HOURS_MESSAGE_CONSTRAINTS);
-            return parsedHoursToAdd >= 0 && parsedHoursToAdd <= 24;
+            return parsedHoursToAdd > 0 && parsedHoursToAdd <= 24;
         } catch (ParseException e) {
             return false;
         }

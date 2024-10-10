@@ -1,15 +1,16 @@
 package seedu.address.storage;
 
 import static java.util.Objects.requireNonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.LessonSchedule;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.lesson.Lesson;
@@ -17,7 +18,6 @@ import seedu.address.model.lesson.Lesson;
 /**
  * An Immutable LessonSchedule that is serializable to JSON format.
  */
-
 @JsonRootName(value = "lessonschedule")
 public class JsonSerializableLessonSchedule {
     public static final String MESSAGE_DUPLICATE_LESSON = "Lessons list contains duplicate lesson(s).";

@@ -2,11 +2,15 @@ package seedu.address.model.lesson;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import seedu.address.commons.util.NumbersUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Represents a Location Index in the lesson schedule.
+ */
 public class LocationIndex {
-    public static final String MESSAGE_CONSTRAINTS= "Location index must be a non-negative integer.";
+    public static final String MESSAGE_CONSTRAINTS = "Location index must be a non-negative integer.";
     private final int value;
 
     /**
@@ -23,6 +27,7 @@ public class LocationIndex {
 
     /**
      * Returns true if a given string is a valid location index.
+     *
      * @param value The location index to be checked.
      * @return True if the location index is valid, false otherwise.
      */
@@ -42,5 +47,20 @@ public class LocationIndex {
     @Override
     public String toString() {
         return Integer.toString(value);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof LocationIndex)) {
+            return false;
+        }
+
+        LocationIndex otherLocationIndex = (LocationIndex) other;
+        return value == otherLocationIndex.value;
     }
 }

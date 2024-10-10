@@ -109,7 +109,8 @@ public class StorageManager implements Storage {
      * @throws DataLoadingException if there was any problem reading from the file.
      */
     @Override
-    public Optional<LessonSchedule> readLessonSchedule(Path filePath, ReadOnlyAddressBook addressBook) throws DataLoadingException {
+    public Optional<LessonSchedule> readLessonSchedule(Path filePath, ReadOnlyAddressBook addressBook) throws
+            DataLoadingException {
         logger.fine("Attempting to read data from file: " + filePath);
         return lessonScheduleStorage.readLessonSchedule(filePath, addressBook);
     }

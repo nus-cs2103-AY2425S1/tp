@@ -4,17 +4,20 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.DateTimeUtil.dateTimeToString;
 import static seedu.address.commons.util.DateTimeUtil.isValidDateTime;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Locale;
 
+/**
+ * Represents a DateTime in the address book.
+ */
 public class DateTime {
-    private final LocalDateTime dateTime;
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)
             .withLocale(Locale.getDefault());
     private static final String MESSAGE_CONSTRAINTS = "DateTime must be in the format of " + formatter;
-
+    private final LocalDateTime dateTime;
     /**
      * Constructs a {@code DateTime}.
      *
@@ -56,5 +59,20 @@ public class DateTime {
     @Override
     public String toString() {
         return dateTime.format(formatter);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof DateTime)) {
+            return false;
+        }
+
+        DateTime otherDateTime = (DateTime) other;
+        return dateTime.equals(otherDateTime.dateTime);
     }
 }

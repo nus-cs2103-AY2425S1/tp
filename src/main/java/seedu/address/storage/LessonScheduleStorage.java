@@ -3,10 +3,14 @@ package seedu.address.storage;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
+
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.LessonSchedule;
 import seedu.address.model.ReadOnlyAddressBook;
 
+/**
+ * Represents a storage for {@link LessonSchedule}.
+ */
 public interface LessonScheduleStorage {
     /**
      * Returns the file path of the data file.
@@ -24,7 +28,8 @@ public interface LessonScheduleStorage {
     /**
      * @see #getLessonScheduleFilePath()
      */
-    Optional<LessonSchedule> readLessonSchedule(Path filePath, ReadOnlyAddressBook addressBook) throws DataLoadingException;
+    Optional<LessonSchedule> readLessonSchedule(Path filePath, ReadOnlyAddressBook addressBook) throws
+            DataLoadingException;
 
     /**
      * Saves the given {@link LessonSchedule} to the storage.

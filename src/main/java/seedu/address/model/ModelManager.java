@@ -31,8 +31,8 @@ public class ModelManager implements Model {
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, LessonSchedule lessonSchedule) {
         requireAllNonNull(addressBook, userPrefs, lessonSchedule);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs +
-                " and lesson schedule " + lessonSchedule);
+        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs
+                + " and lesson schedule " + lessonSchedule);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);

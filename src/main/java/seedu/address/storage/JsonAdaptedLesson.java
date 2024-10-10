@@ -2,11 +2,12 @@ package seedu.address.storage;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.DateTimeUtil.dateTimeToString;
+import static seedu.address.model.lesson.StudentId.INVALID_MESSAGE_CONSTRAINTS;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import javafx.collections.ObservableList;
+
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.lesson.EndDateTime;
 import seedu.address.model.lesson.Lesson;
@@ -14,6 +15,9 @@ import seedu.address.model.lesson.LocationIndex;
 import seedu.address.model.lesson.StartDateTime;
 import seedu.address.model.person.Person;
 
+/**
+ * Jackson-friendly version of {@link Lesson}.
+ */
 public class JsonAdaptedLesson {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Lesson's %s field is missing!";
     private final String student;
@@ -25,8 +29,10 @@ public class JsonAdaptedLesson {
      * Constructs a {@code JsonAdaptedLesson} with the given lesson details.
      */
     @JsonCreator
-    public JsonAdaptedLesson(@JsonProperty("student") String student, @JsonProperty("locationIndex") String locationIndex,
-            @JsonProperty("startDateTime") String startDateTime, @JsonProperty("endDateTime") String endDateTime) {
+    public JsonAdaptedLesson(@JsonProperty("student") String student,
+                             @JsonProperty("locationIndex") String locationIndex,
+                             @JsonProperty("startDateTime") String startDateTime,
+                             @JsonProperty("endDateTime") String endDateTime) {
         this.student = student;
         this.locationIndex = locationIndex;
         this.startDateTime = startDateTime;
@@ -50,18 +56,26 @@ public class JsonAdaptedLesson {
      */
     public Lesson toModelType(ReadOnlyAddressBook addressBook) throws IllegalValueException {
         requireNonNull(addressBook);
-        if (student == null || addressBook.getPerson(student) == null) {
+        if (student == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Person.class.getSimpleName()));
+        }
+        if (addressBook.getPerson(student) == null) {
+            throw new IllegalValueException(INVALID_MESSAGE_CONSTRAINTS);
         }
         final Person studentPerson = addressBook.getPerson(student);
 
         if (locationIndex == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, LocationIndex.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    LocationIndex.class.getSimpleName()));
+        }
+        if (!LocationIndex.isValidLocationIndex(locationIndex)) {
+            throw new IllegalValueException(LocationIndex.MESSAGE_CONSTRAINTS);
         }
         final LocationIndex locationIndex = new LocationIndex(this.locationIndex);
 
         if (startDateTime == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, StartDateTime.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    StartDateTime.class.getSimpleName()));
         }
         final StartDateTime startDateTime = StartDateTime.createStartDateTime(this.startDateTime);
 
@@ -70,7 +84,7 @@ public class JsonAdaptedLesson {
         }
         final EndDateTime endDateTime = EndDateTime.createEndDateTime(this.endDateTime);
 
-        if(startDateTime.isAfter(endDateTime)) {
+        if (startDateTime.isAfter(endDateTime)) {
             throw new IllegalValueException("StartDateTime cannot be after EndDateTime");
         }
         return new Lesson(studentPerson, locationIndex, startDateTime, endDateTime);
