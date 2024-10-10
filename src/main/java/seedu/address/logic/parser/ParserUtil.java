@@ -13,6 +13,9 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.role.Role;
+import seedu.address.model.role.RoleHandler;
+import seedu.address.model.role.exceptions.InvalidRoleException;
 import seedu.address.model.person.TelegramUsername;
 import seedu.address.model.tag.Tag;
 
@@ -141,5 +144,23 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String role} into a {@code Role}.
+     */
+    public static Role parseRole(String role) throws ParseException {
+        requireNonNull(role);
+        RoleHandler rh = new RoleHandler();
+        String trimmedRole = role.trim();
+        if (!RoleHandler.isValidRoleName(trimmedRole)) {
+            throw new ParseException(RoleHandler.MESSAGE_CONSTRAINTS);
+        }
+
+        try {
+            return rh.getRole(role);
+        } catch (InvalidRoleException e) {
+            throw new ParseException(RoleHandler.MESSAGE_CONSTRAINTS);
+        }
     }
 }
