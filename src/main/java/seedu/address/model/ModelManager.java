@@ -225,5 +225,4 @@ public class ModelManager implements Model {
                 && filteredTags.equals(otherModelManager.filteredTags)
                 && filteredWeddings.equals(otherModelManager.filteredWeddings);
     }
-
 }

@@ -17,6 +17,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagName;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -113,6 +115,24 @@ public class ModelManagerTest {
     @Test
     public void getFilteredTagList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredTagList().remove(0));
+    }
+
+    @Test
+    public void addTag_validTag_addsTagSuccessfully() {
+        Tag newTag = new Tag(new TagName("colleague"));
+        modelManager.addTag(newTag);
+        assertTrue(modelManager.hasTag(newTag));
+    }
+
+    @Test
+    public void setTag_nullTag_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setTag(null, FLORIST));
+        assertThrows(NullPointerException.class, () -> modelManager.setTag(FLORIST, null));
+    }
+
+    @Test
+    public void updateFilteredTagList_nullPredicate_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.updateFilteredTagList(null));
     }
 
     @Test
