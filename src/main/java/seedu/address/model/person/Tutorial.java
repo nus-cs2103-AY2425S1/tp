@@ -3,8 +3,6 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import seedu.address.model.tag.Tag;
-
 /**
  * Represents the tutorial class a Person has attended.
  * Guarantees: immutable; tutorial is valid as declared in {@link #isValidTutorial(String)}

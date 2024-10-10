@@ -9,6 +9,9 @@ import seedu.address.logic.commands.MarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Tutorial;
 
+/**
+ * Parses input arguments and creates a new MarkCommand object
+ */
 public class MarkCommandParser implements Parser<MarkCommand> {
 
     @Override
