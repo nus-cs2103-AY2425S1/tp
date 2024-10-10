@@ -13,7 +13,7 @@ public class AddBuyCommandParser implements Parser<Command> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public Command parse(String args) throws ParseException {
-        return null;
+        throw new ParseException("not implemented yet");
     }
 
     /**
