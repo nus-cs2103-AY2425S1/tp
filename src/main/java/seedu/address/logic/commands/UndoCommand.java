@@ -1,8 +1,14 @@
 package seedu.address.logic.commands;
 
 import seedu.address.model.Model;
+
 import static java.util.Objects.requireNonNull;
 
+/**
+ * Represents an Undo command that reverses the last modification made to the address book.
+ * This command can be used to restore the previous state of the address book after an edit,
+ * addition, or deletion.
+ */
 public class UndoCommand extends Command {
 
     public static final String COMMAND_WORD = "undo";
