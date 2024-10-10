@@ -11,8 +11,12 @@ public class Phone {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should only contain numbers, and it should be at least 3 digits long";
-    public static final String VALIDATION_REGEX = "\\d{3,}";
+            "Invalid phone number: only numeric characters and optional leading '+' are allowed.";
+
+    public static final String MESSAGE_LENGTH_CONSTRAINTS =
+            "Phone number must be between 3 and 15 digits inclusive.";
+
+    public static final String VALIDATION_REGEX = "(\\+)?\\d+";
     public final String value;
 
     /**
@@ -23,6 +27,7 @@ public class Phone {
     public Phone(String phone) {
         requireNonNull(phone);
         checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidLengthPhone(phone), MESSAGE_LENGTH_CONSTRAINTS);
         value = phone;
     }
 
@@ -31,6 +36,15 @@ public class Phone {
      */
     public static boolean isValidPhone(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if a given string has a valid length for phone numbers.
+     */
+    public static boolean isValidLengthPhone(String test) {
+        // Ensure length is between 7 and 15 digits (excluding leading '+')
+        String digitsOnly = test.replaceAll("\\+", ""); // Remove '+' for length check
+        return digitsOnly.length() >= 3 && digitsOnly.length() <= 15;
     }
 
     @Override

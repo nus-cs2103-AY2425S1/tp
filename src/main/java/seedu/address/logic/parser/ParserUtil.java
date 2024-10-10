@@ -47,6 +47,9 @@ public class ParserUtil {
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
+        if (!Name.isValidLengthName(trimmedName)) {
+            throw new ParseException(Name.MESSAGE_LENGTH_CONSTRAINTS);
+        }
         return new Name(trimmedName);
     }
 
@@ -61,6 +64,9 @@ public class ParserUtil {
         String trimmedPhone = phone.trim();
         if (!Phone.isValidPhone(trimmedPhone)) {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
+        }
+        if (!Phone.isValidLengthPhone(trimmedPhone)) {
+            throw new ParseException(Phone.MESSAGE_LENGTH_CONSTRAINTS);
         }
         return new Phone(trimmedPhone);
     }
@@ -90,6 +96,9 @@ public class ParserUtil {
         requireNonNull(email);
         String trimmedEmail = email.trim();
         if (!Email.isValidEmail(trimmedEmail)) {
+            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+        }
+        if (!Email.isValidLengthEmail(trimmedEmail)) {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);

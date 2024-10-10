@@ -22,9 +22,14 @@ import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
-    private static final String INVALID_PHONE = "+651234";
+    private static final String INVALID_LONG_NAME = "This name is definitely way too long for our requirements";
+    private static final String INVALID_PHONE = "+651234.";
+    private static final String INVALID_LONG_PHONE = "12345678901234567890";
     private static final String INVALID_JOBCODE = " ";
     private static final String INVALID_EMAIL = "example.com";
+    private static final String INVALID_LONG_EMAIL =
+            "this.email.is.definitely.too.long.for.our.requirements@"
+                    + "example.com";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
@@ -80,6 +85,11 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseName_invalidLength_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseName(INVALID_LONG_NAME));
+    }
+
+    @Test
     public void parsePhone_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parsePhone((String) null));
     }
@@ -100,6 +110,11 @@ public class ParserUtilTest {
         String phoneWithWhitespace = WHITESPACE + VALID_PHONE + WHITESPACE;
         Phone expectedPhone = new Phone(VALID_PHONE);
         assertEquals(expectedPhone, ParserUtil.parsePhone(phoneWithWhitespace));
+    }
+
+    @Test
+    public void parsePhone_invalidLength_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePhone(INVALID_LONG_PHONE));
     }
 
     @Test
@@ -146,6 +161,11 @@ public class ParserUtilTest {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+    }
+
+    @Test
+    public void parseEmail_invalidLength_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseEmail(INVALID_LONG_EMAIL));
     }
 
     @Test
