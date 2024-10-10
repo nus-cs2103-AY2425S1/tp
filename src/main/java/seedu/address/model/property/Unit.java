@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a property unit in the address book.
- * Guarantees: immutable; unit is valid as declared in {@link #isValidUnit(String)}.
+ * Represents a property unit in the address book
+ * Guarantees: immutable; unit is valid as declared in {@link #isValidUnit(String)}
  */
 public class Unit {
     public static final String MESSAGE_CONSTRAINTS =
@@ -15,9 +15,9 @@ public class Unit {
     public final String value;
 
     /**
-     * Constructs a {@code Unit}.
+     * Constructs a {@code Unit}
      *
-     * @param unit A valid unit number.
+     * @param unit A valid unit number
      */
     public Unit(String unit) {
         requireNonNull(unit);
@@ -26,7 +26,7 @@ public class Unit {
     }
 
     /**
-     * Returns true if a given string is a valid unit number.
+     * Returns true if a given string is a valid unit number
      */
     public static boolean isValidUnit(String test) {
         return test.matches(VALIDATION_REGEX);
