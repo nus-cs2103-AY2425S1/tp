@@ -12,7 +12,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
-import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 
 /**
@@ -26,7 +25,7 @@ class JsonAdaptedGroup {
     private final List<JsonAdaptedPerson> students = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given student details.
+     * Constructs a {@code JsonAdaptedGroup} with the given student details.
      */
     @JsonCreator
     public JsonAdaptedGroup(@JsonProperty("groupname") String groupName,
@@ -38,7 +37,7 @@ class JsonAdaptedGroup {
     }
 
     /**
-     * Converts a given {@code Student} into this class for Jackson use.
+     * Converts a given {@code Group} into this class for Jackson use.
      */
     public JsonAdaptedGroup(Group source) {
         groupName = source.getGroupName().fullName;
@@ -62,7 +61,7 @@ class JsonAdaptedGroup {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, GroupName.class.getSimpleName()));
         }
         if (!GroupName.isValidName(groupName)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(GroupName.MESSAGE_CONSTRAINTS);
         }
         final GroupName modelGroupName = new GroupName(groupName);
 
