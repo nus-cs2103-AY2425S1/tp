@@ -89,24 +89,21 @@ public class MarkCommandTest {
     }
 
     @Test
-    public void equals_null_failure() {
+    public void equals() {
         Tutorial tutorial = new Tutorial("1");
+        MarkCommand markCommand = new MarkCommand(INDEX_FIRST_PERSON, tutorial);
 
-        assertFalse(tutorial.equals(null));
-    }
-    @Test
-    public void equals_itself_success() {
-        Tutorial tutorial = new Tutorial("1");
+        // is itself
+        assertTrue(markCommand.equals(markCommand));
 
-        assertTrue(tutorial.equals(tutorial));
-    }
+        // is null
+        assertFalse(markCommand.equals(null));
 
-    @Test
-    public void equals_duplicateTutorial_success() {
-        Tutorial firstTutorial = new Tutorial("1");
+        // duplicate MarkCommand
         Tutorial duplicateTutorial = new Tutorial("1");
+        MarkCommand duplicateMarkCommand = new MarkCommand(INDEX_FIRST_PERSON, duplicateTutorial);
 
-        assertTrue(new MarkCommand(INDEX_FIRST_PERSON, firstTutorial)
-                .equals(new MarkCommand(INDEX_FIRST_PERSON, duplicateTutorial)));
+        assertTrue(markCommand
+                .equals(duplicateMarkCommand));
     }
 }

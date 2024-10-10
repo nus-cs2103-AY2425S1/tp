@@ -28,14 +28,18 @@ public class TutorialTest {
     @Test
     public void equals() {
         // is itself
-        assertTrue(this.equals(this));
+        Tutorial tutorial = new Tutorial("1");
+
+        assertTrue(tutorial.equals(tutorial));
 
         // is null
-        assertFalse(this.equals(null));
+        assertFalse(tutorial.equals(null));
+
+        // is some other attribute
+        assertFalse(tutorial.equals(new Name("Name name")));
 
         // different instance, same tutorial
-        Tutorial firstTutorial = new Tutorial("1");
         Tutorial duplicateTutorial = new Tutorial("1");
-        assertTrue(firstTutorial.equals(duplicateTutorial));
+        assertTrue(tutorial.equals(duplicateTutorial));
     }
 }
