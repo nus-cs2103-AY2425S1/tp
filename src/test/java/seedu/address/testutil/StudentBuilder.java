@@ -8,6 +8,8 @@ import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentId;
+import seedu.address.model.student.TutorialClass;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -20,12 +22,16 @@ public class StudentBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_STUDENT_ID = "1001";
+    public static final String DEFAULT_TUTORIAL_CLASS = "1001";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private StudentId studentId;
+    private TutorialClass tutorialClass;
 
     /**
      * Creates a {@code StudentBuilder} with the default details.
@@ -36,6 +42,8 @@ public class StudentBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        studentId = new StudentId(DEFAULT_STUDENT_ID);
+        tutorialClass = new TutorialClass(DEFAULT_TUTORIAL_CLASS);
     }
 
     /**
@@ -47,6 +55,8 @@ public class StudentBuilder {
         email = studentToCopy.getEmail();
         address = studentToCopy.getAddress();
         tags = new HashSet<>(studentToCopy.getTags());
+        studentId = studentToCopy.getStudentId();
+        tutorialClass = studentToCopy.getTutorialClass();
     }
 
     /**
@@ -89,8 +99,23 @@ public class StudentBuilder {
         return this;
     }
 
-    public Student build() {
-        return new Student(name, phone, email, address, tags);
+    /**
+     * Sets the {@code StudentId} of the {@code Student} that we are building.
+     */
+    public StudentBuilder withStudentId(String studentId) {
+        this.studentId = new StudentId(studentId);
+        return this;
     }
 
+    /**
+     * Sets the {@code TutorialClass} of the {@code Student} that we are building.
+     */
+    public StudentBuilder withTutorialClass(String tutorialClass) {
+        this.tutorialClass = new TutorialClass(tutorialClass);
+        return this;
+    }
+
+    public Student build() {
+        return new Student(name, phone, email, address, studentId, tutorialClass, tags);
+    }
 }

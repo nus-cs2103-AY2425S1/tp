@@ -16,6 +16,8 @@ import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
+import seedu.address.model.student.StudentId;
+import seedu.address.model.student.TutorialClass;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -112,6 +114,36 @@ public class ParserUtil {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
         return new Tag(trimmedTag);
+    }
+
+    /**
+     * Parses a {@code String studentId} into a {@code StudentId}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code studentId} is invalid.
+     */
+    public static StudentId parseStudentId(String studentId) throws ParseException {
+        requireNonNull(studentId);
+        String trimmedStudentId = studentId.trim();
+        if (!StudentId.isValidStudentId(trimmedStudentId)) {
+            throw new ParseException(StudentId.MESSAGE_CONSTRAINTS);
+        }
+        return new StudentId(trimmedStudentId);
+    }
+
+    /**
+     * Parses a {@code String tutorialClass} into a {@code TutorialClass}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code tutorialClass} is invalid.
+     */
+    public static TutorialClass parseTutorialClass(String tutorialClass) throws ParseException {
+        requireNonNull(tutorialClass);
+        String trimmedTutorialClass = tutorialClass.trim();
+        if (!TutorialClass.isValidTutorialClass(trimmedTutorialClass)) {
+            throw new ParseException(TutorialClass.MESSAGE_CONSTRAINTS);
+        }
+        return new TutorialClass(trimmedTutorialClass);
     }
 
     /**
