@@ -36,6 +36,9 @@ public class Company {
     public static boolean isValidCompany(String test) {
         return test.matches(VALIDATION_REGEX);
     }
+    public String getCompanyName() {
+        return value;
+    }
 
     @Override
     public String toString() {
