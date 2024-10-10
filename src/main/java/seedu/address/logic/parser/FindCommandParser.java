@@ -7,9 +7,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AbstractFindCommand;
+import seedu.address.logic.commands.FindByContactCommand;
 import seedu.address.logic.commands.FindByNameCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.ContactContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
@@ -32,7 +33,7 @@ public class FindCommandParser implements Parser<AbstractFindCommand> {
         // will throw exception if no args/command format not correct
         if (trimmedArgs.isEmpty() || !m.matches()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AbstractFindCommand.MESSAGE_USAGE));
         }
 
         // extract tag and search argument
@@ -40,11 +41,14 @@ public class FindCommandParser implements Parser<AbstractFindCommand> {
         String searchTerms = m.group("arguments");
         String[] searchTermArray = searchTerms.split("\\s+");
 
-        // return approppriate FindCommand class depending on tag
+        // return appropriate FindCommand class depending on tag
         switch (tag) {
         case "/n":
             return new FindByNameCommand(
                     new NameContainsKeywordsPredicate(Arrays.asList(searchTermArray)));
+        case "/c":
+            return new FindByContactCommand(
+                    new ContactContainsKeywordsPredicate(Arrays.asList(searchTermArray)));
         default:
             return null; // temporary value, this should not occur due to regex
         }

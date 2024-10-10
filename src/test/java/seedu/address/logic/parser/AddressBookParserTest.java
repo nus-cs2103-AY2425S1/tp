@@ -19,10 +19,12 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindByContactCommand;
 import seedu.address.logic.commands.FindByNameCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.ContactContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -80,9 +82,18 @@ public class AddressBookParserTest {
     public void parseCommand_findByName() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindByNameCommand command = (FindByNameCommand) parser.parseCommand(
-                FindByNameCommand.COMMAND_WORD + " /n "
+                FindByNameCommand.COMMAND_WORD + " "
                         + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindByNameCommand(new NameContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_findByContact() throws Exception {
+        List<String> keywords = Arrays.asList("995", "91234567", "132");
+        FindByContactCommand command = (FindByContactCommand) parser.parseCommand(
+                FindByContactCommand.COMMAND_WORD + " "
+                        + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindByContactCommand(new ContactContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
