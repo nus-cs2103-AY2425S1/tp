@@ -15,9 +15,6 @@ public class PriorityCommand extends Command {
             + "the index number used in the displayed person list.\n"
             + "Parameters: id INDEX (must be a positive integer) /level LEVEL (must be 1, 2, or 3)\n"
             + "Example: " + COMMAND_WORD + " /id 1 /level 2";
-    public static final String MESSAGE_ADD_PRIORITY_SUCCESS = "Priority successfully added.";
-    public static final String MESSAGE_INVALID_PRIORITY_LEVEL = "Invalid priority.";
-
     private final int index;
     private final int priorityLevel;
 
