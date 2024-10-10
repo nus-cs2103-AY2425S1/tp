@@ -67,7 +67,6 @@ public class EditPersonDescriptorTest {
 
         // different client status -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withClientStatus(VALID_CLIENT_STATUS_POTENTIAL).build();
-      
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 
