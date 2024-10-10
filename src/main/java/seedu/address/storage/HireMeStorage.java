@@ -20,5 +20,4 @@ public interface HireMeStorage {
     void saveHireMe(ReadOnlyHireMe hireMe) throws IOException;
 
     void saveHireMe(ReadOnlyHireMe hireMe, Path filePath) throws IOException;
-
 }
