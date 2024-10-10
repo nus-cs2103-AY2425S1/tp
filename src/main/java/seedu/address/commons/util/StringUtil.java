@@ -65,13 +65,4 @@ public class StringUtil {
             return false;
         }
     }
-
-    /**
-     * Returns true if {@code nric} is a valid NRIC.
-     * @param nric
-     * @return
-     */
-    public static boolean isValidNric(String nric) {
-        return nric.matches("^[STFGM]\\d{7}[A-Z]$");
-    }
 }
