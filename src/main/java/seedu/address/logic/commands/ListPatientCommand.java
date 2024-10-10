@@ -17,13 +17,6 @@ public class ListPatientCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all patients in the address book.\n";
 
     /**
-     * Constructs a new ListPatientCommand.
-     * This command will list all patients in the address book.
-     */
-    public ListPatientCommand() {
-    }
-
-    /**
      * Executes the command and returns the result message.
      * As this command is not yet implemented, it throws a {@code CommandException}.
      *
