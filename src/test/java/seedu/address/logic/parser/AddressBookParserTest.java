@@ -105,10 +105,11 @@ public class AddressBookParserTest {
                 EmergencyPhoneCommand.COMMAND_WORD + " "
                 + "n/" + name + " "
                 + "ep/" + phone);
-      
+
        assertEquals(expected, command);
     }
-  
+
+    @Test
     public void parseCommand_addEmergencyContactName() throws Exception {
 
         final String studentName = "John Doe";
