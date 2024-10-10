@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalSuppliers.ALICE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -24,41 +24,41 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.product.Product;
 import seedu.address.model.supplier.Supplier;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.SupplierBuilder;
 
 public class AddSupplierCommandTest {
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullSupplier_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddSupplierCommand(null));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Supplier validSupplier = new PersonBuilder().build();
+    public void execute_supplierAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingSupplierAdded modelStub = new ModelStubAcceptingSupplierAdded();
+        Supplier validSupplier = new SupplierBuilder().build();
 
         CommandResult commandResult = new AddSupplierCommand(validSupplier).execute(modelStub);
 
         assertEquals(String.format(AddSupplierCommand.MESSAGE_SUCCESS, Messages.format(validSupplier)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validSupplier), modelStub.personsAdded);
+        assertEquals(Arrays.asList(validSupplier), modelStub.suppliersAdded);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Supplier validSupplier = new PersonBuilder().build();
+    public void execute_duplicateSupplier_throwsCommandException() {
+        Supplier validSupplier = new SupplierBuilder().build();
         AddSupplierCommand addSupplierCommand = new AddSupplierCommand(validSupplier);
-        ModelStub modelStub = new ModelStubWithPerson(validSupplier);
+        ModelStub modelStub = new ModelStubWithSupplier(validSupplier);
 
-        assertThrows(CommandException.class, AddSupplierCommand.MESSAGE_DUPLICATE_PERSON, () ->
+        assertThrows(CommandException.class, AddSupplierCommand.MESSAGE_DUPLICATE_SUPPLIER, () ->
                 addSupplierCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Supplier alice = new PersonBuilder().withName("Alice").build();
-        Supplier bob = new PersonBuilder().withName("Bob").build();
+        Supplier alice = new SupplierBuilder().withName("Alice").build();
+        Supplier bob = new SupplierBuilder().withName("Bob").build();
         AddSupplierCommand addAliceCommand = new AddSupplierCommand(alice);
         AddSupplierCommand addBobCommand = new AddSupplierCommand(bob);
 
@@ -129,7 +129,7 @@ public class AddSupplierCommandTest {
         }
 
         @Override
-        public void addPerson(Supplier supplier) {
+        public void addSupplier(Supplier supplier) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -144,27 +144,27 @@ public class AddSupplierCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Supplier supplier) {
+        public boolean hasSupplier(Supplier supplier) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deletePerson(Supplier target) {
+        public void deleteSupplier(Supplier target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setPerson(Supplier target, Supplier editedSupplier) {
+        public void setSupplier(Supplier target, Supplier editedSupplier) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Supplier> getFilteredPersonList() {
+        public ObservableList<Supplier> getFilteredSupplierList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Supplier> predicate) {
+        public void updateFilteredSupplierList(Predicate<Supplier> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -172,37 +172,37 @@ public class AddSupplierCommandTest {
     /**
      * A Model stub that contains a single supplier.
      */
-    private class ModelStubWithPerson extends ModelStub {
+    private class ModelStubWithSupplier extends ModelStub {
         private final Supplier supplier;
 
-        ModelStubWithPerson(Supplier supplier) {
+        ModelStubWithSupplier(Supplier supplier) {
             requireNonNull(supplier);
             this.supplier = supplier;
         }
 
         @Override
-        public boolean hasPerson(Supplier supplier) {
+        public boolean hasSupplier(Supplier supplier) {
             requireNonNull(supplier);
-            return this.supplier.isSamePerson(supplier);
+            return this.supplier.isSameSupplier(supplier);
         }
     }
 
     /**
      * A Model stub that always accept the supplier being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Supplier> personsAdded = new ArrayList<>();
+    private class ModelStubAcceptingSupplierAdded extends ModelStub {
+        final ArrayList<Supplier> suppliersAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Supplier supplier) {
+        public boolean hasSupplier(Supplier supplier) {
             requireNonNull(supplier);
-            return personsAdded.stream().anyMatch(supplier::isSamePerson);
+            return suppliersAdded.stream().anyMatch(supplier::isSameSupplier);
         }
 
         @Override
-        public void addPerson(Supplier supplier) {
+        public void addSupplier(Supplier supplier) {
             requireNonNull(supplier);
-            personsAdded.add(supplier);
+            suppliersAdded.add(supplier);
         }
 
         @Override

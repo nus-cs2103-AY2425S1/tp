@@ -27,21 +27,21 @@ public class Product {
 
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both suppliers have the same name.
+     * This defines a weaker notion of equality between two suppliers.
      */
-    public boolean isSameProduct(Product otherPerson) {
-        if (otherPerson == this) {
+    public boolean isSameProduct(Product otherSupplier) {
+        if (otherSupplier == this) {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        return otherSupplier != null
+                && otherSupplier.getName().equals(getName());
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both suppliers have the same identity and data fields.
+     * This defines a stronger notion of equality between two suppliers.
      */
     @Override
     public boolean equals(Object other) {

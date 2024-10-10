@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SUPPLIER;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,7 +17,7 @@ import seedu.address.logic.commands.AddSupplierCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditCommand.EditSupplierDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -25,9 +25,9 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.supplier.NameContainsKeywordsPredicate;
 import seedu.address.model.supplier.Supplier;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.EditSupplierDescriptorBuilder;
+import seedu.address.testutil.SupplierBuilder;
+import seedu.address.testutil.SupplierUtil;
 
 public class AddressBookParserTest {
 
@@ -35,8 +35,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Supplier supplier = new PersonBuilder().build();
-        AddSupplierCommand command = (AddSupplierCommand) parser.parseCommand(PersonUtil.getAddCommand(supplier));
+        Supplier supplier = new SupplierBuilder().build();
+        AddSupplierCommand command = (AddSupplierCommand) parser.parseCommand(SupplierUtil.getAddCommand(supplier));
         assertEquals(new AddSupplierCommand(supplier), command);
     }
 
@@ -49,17 +49,17 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_SUPPLIER.getOneBased());
+        assertEquals(new DeleteCommand(INDEX_FIRST_SUPPLIER), command);
     }
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Supplier supplier = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(supplier).build();
+        Supplier supplier = new SupplierBuilder().build();
+        EditSupplierDescriptor descriptor = new EditSupplierDescriptorBuilder(supplier).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+                + INDEX_FIRST_SUPPLIER.getOneBased() + " " + SupplierUtil.getEditSupplierDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(INDEX_FIRST_SUPPLIER, descriptor), command);
     }
 
     @Test

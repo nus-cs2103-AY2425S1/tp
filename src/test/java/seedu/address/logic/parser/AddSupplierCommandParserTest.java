@@ -30,8 +30,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalSuppliers.AMY;
+import static seedu.address.testutil.TypicalSuppliers.BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -43,14 +43,14 @@ import seedu.address.model.supplier.Name;
 import seedu.address.model.supplier.Phone;
 import seedu.address.model.supplier.Supplier;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.SupplierBuilder;
 
 public class AddSupplierCommandParserTest {
     private AddSupplierCommandParser parser = new AddSupplierCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Supplier expectedSupplier = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+        Supplier expectedSupplier = new SupplierBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
@@ -58,7 +58,7 @@ public class AddSupplierCommandParserTest {
 
 
         // multiple tags - all accepted
-        Supplier expectedSupplierMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+        Supplier expectedSupplierMultipleTags = new SupplierBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
@@ -67,72 +67,72 @@ public class AddSupplierCommandParserTest {
 
     @Test
     public void parse_repeatedNonTagValue_failure() {
-        String validExpectedPersonString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+        String validExpectedSupplierString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND;
 
         // multiple names
-        assertParseFailure(parser, NAME_DESC_AMY + validExpectedPersonString,
+        assertParseFailure(parser, NAME_DESC_AMY + validExpectedSupplierString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // multiple phones
-        assertParseFailure(parser, PHONE_DESC_AMY + validExpectedPersonString,
+        assertParseFailure(parser, PHONE_DESC_AMY + validExpectedSupplierString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // multiple emails
-        assertParseFailure(parser, EMAIL_DESC_AMY + validExpectedPersonString,
+        assertParseFailure(parser, EMAIL_DESC_AMY + validExpectedSupplierString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
 
         // multiple addresses
-        assertParseFailure(parser, ADDRESS_DESC_AMY + validExpectedPersonString,
+        assertParseFailure(parser, ADDRESS_DESC_AMY + validExpectedSupplierString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
 
         // multiple fields repeated
         assertParseFailure(parser,
-                validExpectedPersonString + PHONE_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY + ADDRESS_DESC_AMY
-                        + validExpectedPersonString,
+                validExpectedSupplierString + PHONE_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY + ADDRESS_DESC_AMY
+                        + validExpectedSupplierString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_EMAIL, PREFIX_PHONE));
 
         // invalid value followed by valid value
 
         // invalid name
-        assertParseFailure(parser, INVALID_NAME_DESC + validExpectedPersonString,
+        assertParseFailure(parser, INVALID_NAME_DESC + validExpectedSupplierString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // invalid email
-        assertParseFailure(parser, INVALID_EMAIL_DESC + validExpectedPersonString,
+        assertParseFailure(parser, INVALID_EMAIL_DESC + validExpectedSupplierString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
 
         // invalid phone
-        assertParseFailure(parser, INVALID_PHONE_DESC + validExpectedPersonString,
+        assertParseFailure(parser, INVALID_PHONE_DESC + validExpectedSupplierString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // invalid address
-        assertParseFailure(parser, INVALID_ADDRESS_DESC + validExpectedPersonString,
+        assertParseFailure(parser, INVALID_ADDRESS_DESC + validExpectedSupplierString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
 
         // valid value followed by invalid value
 
         // invalid name
-        assertParseFailure(parser, validExpectedPersonString + INVALID_NAME_DESC,
+        assertParseFailure(parser, validExpectedSupplierString + INVALID_NAME_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // invalid email
-        assertParseFailure(parser, validExpectedPersonString + INVALID_EMAIL_DESC,
+        assertParseFailure(parser, validExpectedSupplierString + INVALID_EMAIL_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
 
         // invalid phone
-        assertParseFailure(parser, validExpectedPersonString + INVALID_PHONE_DESC,
+        assertParseFailure(parser, validExpectedSupplierString + INVALID_PHONE_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // invalid address
-        assertParseFailure(parser, validExpectedPersonString + INVALID_ADDRESS_DESC,
+        assertParseFailure(parser, validExpectedSupplierString + INVALID_ADDRESS_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
     }
 
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Supplier expectedSupplier = new PersonBuilder(AMY).withTags().build();
+        Supplier expectedSupplier = new SupplierBuilder(AMY).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
                 new AddSupplierCommand(expectedSupplier));
     }
