@@ -98,7 +98,7 @@ public class StringUtilTest {
      *   - query word matches part of a sentence word
      *   - sentence word matches part of the query word
      *
-     * The test method below tries to verify all above with a reasonably low value of test cases.
+     * The test method below tries to verify all above with a reasonably low number of test cases.
      */
 
     @Test
