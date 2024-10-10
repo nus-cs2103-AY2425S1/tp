@@ -16,7 +16,7 @@ public class NameMatchesKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        return keywords.equals(person.getName().toString());
+        return keywords.equalsIgnoreCase(person.getName().toString());
     }
 
     @Override
