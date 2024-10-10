@@ -36,7 +36,6 @@ import static tutorease.address.testutil.TypicalPersons.BOB;
 import org.junit.jupiter.api.Test;
 
 import tutorease.address.logic.Messages;
-import tutorease.address.logic.commands.AddCommand;
 import tutorease.address.logic.commands.AddContactCommand;
 import tutorease.address.model.person.Address;
 import tutorease.address.model.person.Email;
@@ -55,7 +54,7 @@ public class AddContactCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddContactCommand(expectedPerson));
 
 
         // multiple tags - all accepted
@@ -63,7 +62,7 @@ public class AddContactCommandParserTest {
                 .build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                new AddCommand(expectedPersonMultipleTags));
+                new AddContactCommand(expectedPersonMultipleTags));
     }
 
     @Test
@@ -135,7 +134,7 @@ public class AddContactCommandParserTest {
         // zero tags
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
-                new AddCommand(expectedPerson));
+                new AddContactCommand(expectedPerson));
     }
 
     @Test
@@ -192,6 +191,6 @@ public class AddContactCommandParserTest {
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddContactCommand.MESSAGE_USAGE));
     }
 }
