@@ -122,20 +122,10 @@ public class ParserUtil {
         return tagSet;
     }
 
-    /**
-     * Parses a {@code String nric} into a {@code NRIC}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code nric} is invalid.
-     */
-    public static String parseNric(String nric) throws ParseException {
-        requireNonNull(nric);
-        String trimmedNric = nric.trim().toUpperCase();
 
-        // To implement the checker later.
-        if (!StringUtil.isValidNric(trimmedNric)) {
-            throw new ParseException("NRIC is invalid");
-        }
-        return trimmedNric;
+    public static String parseId(String id) throws ParseException {
+        requireNonNull(id);
+        String formattedId = id.trim().toUpperCase();
+        return formattedId;
     }
 }

@@ -16,8 +16,8 @@ public class ListLogsParser implements Parser<ListLogsCommand> {
      */
     public ListLogsCommand parse(String args) throws ParseException {
         try {
-            String nric = ParserUtil.parseNric(args);
-            return new ListLogsCommand(nric);
+            String id = ParserUtil.parseId(args);
+            return new ListLogsCommand(id);
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListLogsCommand.MESSAGE_USAGE), pe);

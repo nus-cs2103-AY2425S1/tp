@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.person.IdentityNumber;
 import seedu.address.model.Model;
 
 /**
@@ -19,17 +20,22 @@ public class ListLogsCommand extends Command {
             + ": Lists all logs of a person identified by the NRIC.\n"
             + "Parameters: NRIC\n"
             + "Example: " + COMMAND_WORD + " S1234567A";
-    private final String nric;
+    private final IdentityNumber identityNumber;
 
-    public ListLogsCommand(String nric) {
-        this.nric = nric;
+    public ListLogsCommand(String id) {
+        try {
+            this.identityNumber = new IdentityNumber(id);
+        } catch (IllegalArgumentException e) {
+            //handle exception later
+            throw new IllegalArgumentException("Invalid NRIC");
+        }
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
-        //model.updateFilteredPersonList(nric);
         throw new CommandException("ListLogsCommand not implemented yet");
+        //requireNonNull(model);
+        //model.updateFilteredPersonList(nric);
         //return new CommandResult("The NRIC you inputted is: " + nric);
     }
 
@@ -43,6 +49,6 @@ public class ListLogsCommand extends Command {
             return false;
         }
         ListLogsCommand e = (ListLogsCommand) other;
-        return nric.equals(e.nric);
+        return identityNumber.equals(e.identityNumber);
     }
 }
