@@ -201,7 +201,7 @@ public class JsonAdaptedPersonTest {
         invalidAppointments.add(new JsonAdaptedAppointment(INVALID_APPOINTMENTS));
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_ADDRESS,
-                    VALID_DATE_OF_BIRTH, VALID_GENDER, VALID_TAGS, VALID_PRIORITY, invalidAppointments);  
+                    VALID_DATE_OF_BIRTH, VALID_GENDER, VALID_TAGS, VALID_PRIORITY, invalidAppointments);
     }
     @Test
     public void toModelType_invalidPriority_throwsIllegalValueException() {
