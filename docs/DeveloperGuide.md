@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# TAHub Contacts Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -12,6 +12,8 @@
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
+
+* This project is built on the AddressBook-Level3 (AB3) project created by the [SE-EDU initiative](https://se-education.org).
 
 _{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
 
@@ -29,13 +31,14 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <puml src="diagrams/ArchitectureDiagram.puml" width="280" />
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+The _**Architecture Diagram**_ given above explains the high-level design of the App.
 
 Given below is a quick overview of main components and how they interact with each other.
 
 **Main components of the architecture**
 
 **`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -50,13 +53,13 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
 Each of the four main components (also shown in the diagram above),
 
-* defines its *API* in an `interface` with the same name as the Component.
+* defines its _API_ in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
@@ -112,14 +115,15 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
+
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
+
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
-
 
 The `Model` component,
 
@@ -136,7 +140,6 @@ The `Model` component,
 
 </box>
 
-
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
@@ -144,13 +147,14 @@ The `Model` component,
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
+
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.address.commons` package.
+Classes used by multiple components are in the `tahub.contacts.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -194,7 +198,6 @@ Step 4. The user now decides that adding the person was a mistake, and decides t
 
 <puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
 
-
 <box type="info" seamless>
 
 **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
@@ -236,7 +239,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <puml src="diagrams/CommitActivityDiagram.puml" width="250" />
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: How undo & redo executes:**
 
@@ -255,7 +258,6 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -270,72 +272,555 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ## **Appendix: Requirements**
 
-### Product scope
+### :fa-solid-compass: Product scope
 
-**Target user profile**:
+**Target user profile**: **Undergraduate Computer Science Student** who is a **Teaching Assistant (TA)**.
 
-* has a need to manage a significant number of contacts
+* busy due to high CS workload
+* has a need to manage a significant number of student contacts
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: manage student contacts faster than a typical mouse/GUI driven app
 
+### :fa-solid-book: User stories
 
-### User stories
+Priorities:
+ <span style="color:#4CB140;">High (must have) - ★★★</span> |
+ <span style="color:#F0AB00;">Medium (nice to have) - ★★</span> |
+ <span style="color:#C9190B;">Low (unlikely to have) - ★</span>
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+| Priority                                       | As a ... User    | I want to ...                                         | So that I can ...                                              |
+|------------------------------------------------|-------------------|-------------------------------------------------------|----------------------------------------------------------------|
+| <span style="color:#4CB140;">★★★</span>      | Beginner          | Add contacts                                          | Track contact details for students joining the class           |
+| <span style="color:#4CB140;">★★★</span>      | Beginner          | View contacts                                         | Get an overview of my students’ contact information            |
+| <span style="color:#4CB140;">★★★</span>      | Beginner          | Delete contacts                                       | Remove students no longer in the class                         |
+| <span style="color:#4CB140;">★★★</span>      | Beginner          | Edit contacts                                         | Update contact details when they change                        |
+| <span style="color:#4CB140;">★★★</span>      | Beginner          | Add essential data about students                     | Track students’ progress and access it when needed             |
+| <span style="color:#4CB140;">★★★</span>      | Beginner          | View essential data about students                    | Access key data for each student                               |
+| <span style="color:#4CB140;">★★★</span>      | Beginner          | Delete essential data about students                  | Remove data for students who have left the class               |
+| <span style="color:#4CB140;">★★★</span>      | Beginner          | Edit essential data about students                    | Update student information when changes occur                  |
+| <span style="color:#F0AB00;">★★</span>       | Beginner          | Search for students                                   | Quickly find student contact details                           |
+| <span style="color:#F0AB00;">★★</span>       | Intermediate      | Sort students by grades                               | Prioritize weaker students for follow-up                       |
+| <span style="color:#F0AB00;">★★</span>       | Expert            | Delete students in bulk                               | Remove multiple students quickly, e.g., after class ends       |
+| <span style="color:#C9190B;">★</span>        | Intermediate      | Add filters to searches                               | Narrow down search results to find specific students           |
+| <span style="color:#F0AB00;">★★</span>       | Intermediate      | Get warnings before making major changes              | Avoid accidental changes to important student data             |
+| <span style="color:#F0AB00;">★★</span>       | Beginner          | Explore app with sample student data                  | Test features without needing real data                        |
+| <span style="color:#F0AB00;">★★</span>       | Beginner          | Access help for available commands                    | Learn how to use the app's functionality effectively           |
+| <span style="color:#C9190B;">★</span>        | Intermediate      | Bulk import student data                              | Add multiple students at once                                  |
+| <span style="color:#F0AB00;">★★</span>       | Beginner          | Export contact list to a CSV                          | Back up student contact information                            |
+| <span style="color:#F0AB00;">★★</span>       | Intermediate      | Merge duplicate student entries                       | Reduce clutter in the contact list                             |
+| <span style="color:#C9190B;">★</span>        | Beginner          | Filter students by attendance status                  | Track and follow up with absent students                       |
+| <span style="color:#F0AB00;">★★</span>       | Intermediate      | Sort students alphabetically                          | Quickly locate students in the contact list                    |
+| <span style="color:#C9190B;">★</span>        | Intermediate      | Add comments to student profiles                      | Record observations or important information about students    |
+| <span style="color:#C9190B;">★</span>        | Beginner          | Assign preferred communication methods to parents     | Ensure efficient communication through preferred channels      |
+| <span style="color:#C9190B;">★</span>        | Intermediate      | Flag students with missing contact details            | Ensure all required student information is complete            |
+| <span style="color:#C9190B;">★</span>        | Beginner          | Set communication preferences for individual students | Communicate via their preferred method (Telegram, phone, etc.) |
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+### :fa-solid-user: Use cases
 
-*{More to be added}*
+(For all use cases below, the **System** is the `TAHub Contacts` and the **Actor** is the `user`, unless specified otherwise)
 
-### Use cases
+<panel header="#### Use case: Add a contact" expanded>
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+**Main Success Scenario (MSS):**
 
-**Use case: Delete a person**
+1. User requests to add a contact with a name, email, and optionally a phone number, address, and tags.
+2. System validates the input fields:
+    * a. Checks if the name is valid (alphabets and spaces only).
+    * b. Checks if the email format is valid and unique.
+    * c. (Optional) Checks if the phone number is valid (8 digits) and unique.
+    * d. (Optional) Validates address and tags.
+3. System adds the contact if all validations pass.
+4. System displays a success message, "New contact added: [Contact details]."
 
-**MSS**
+   Use case ends.
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+**Extensions:**
 
-    Use case ends.
+* 2a. The name is in an invalid format.
+  * 2a1. System shows an error message, "Invalid name format."
+      Use case resumes at step 1.
 
-**Extensions**
+* 2b. The email is invalid or already exists.
+  * 2b1. System shows an error message, "Invalid email format." or "Contact already exists."
+      Use case resumes at step 1.
+
+* 2c. The phone number is invalid or already exists.
+  * 2c1. System shows an error message, "Invalid phone number format." or "Phone number already exists."
+      Use case resumes at step 1.</panel>
+
+<panel header="#### Use case: View contacts" expanded>
+
+**Main Success Scenario (MSS):**
+
+1. User requests to view all contacts.
+2. System retrieves and displays the list of all contacts with their details (name, phone number, email, address, tags).
+3. User views the list to get an overview of student contact information.
+
+   Use case ends.</panel>
+
+<panel header="#### Use Case: Get Warnings Before Making Major Changes" expanded>
+
+**Main Success Scenario (MSS):**
+
+1. Tutor initiates a major change (e.g., deleting a student record or modifying multiple student details at once).
+2. System detects the action as a major change.
+3. System prompts the tutor with a warning message describing the potential consequences (e.g., "Warning: You are about to delete [Student's name]. This action cannot be undone. Do you wish to proceed?").
+4. Tutor reviews the warning and confirms whether to proceed or cancel.
+5. If confirmed, the system proceeds with the requested changes and displays a success message.
+
+   Use case ends.
+
+**Extensions:**
 
 * 2a. The list is empty.
+  * 2a1. System shows a message, "No contacts available."
+      Use case ends.</panel>
 
-  Use case ends.
+<panel header="#### Use case: Delete a contact" expanded>
 
-* 3a. The given index is invalid.
+**Main Success Scenario (MSS):**
 
-    * 3a1. AddressBook shows an error message.
+1. User requests to delete a contact by providing the index of the contact in the list.
+2. System validates the provided index.
+3. System deletes the contact if the index is valid.
+4. System displays a success message, "Deleted contact: [Contact details]."
 
+   Use case ends.
+
+**Extensions:**
+
+* 2a. The index is out of bounds.
+  * 2a1. System shows an error message, "Invalid index."
+      Use case resumes at step 1.</panel>
+
+<panel header="#### Use case: Edit a contact" expanded>
+
+**Main Success Scenario (MSS):**
+
+1. User requests to edit the contact by providing the index of the contact and the fields to update (name, phone, email, address, tags).
+2. System validates the provided index and input fields:
+    * a. Checks if the contact at the given index exists.
+    * b. Validates the new name, email, phone, address, and tags as per the same rules as in the add contact case.
+3. System updates the contact with the new details if all validations pass.
+4. System displays a success message, "Contact updated: [Updated contact details]."
+
+   Use case ends.
+
+**Extensions:**
+
+* 2a. The index is out of bounds.
+  * 2a1. System shows an error message, "Invalid index."
+      Use case resumes at step 1.
+
+* 2b. The new name is invalid.
+  * 2b1. System shows an error message, "Invalid name format."
+      Use case resumes at step 1.
+
+* 2c. The new email is invalid or already exists.
+  * 2c1. System shows an error message, "Invalid email format." or "Contact already exists."
+      Use case resumes at step 1.
+
+* 2d. The new phone number is invalid or already exists.
+  * 2d1. System shows an error message, "Invalid phone number format." or "Phone number already exists."
+      Use case resumes at step 1.</panel>
+
+<panel header="#### Use case: Add essential data about students" expanded>
+
+**Main Success Scenario (MSS):**
+
+1. User requests to add essential data (such as progress or status) for a specific student.
+2. System prompts the user to provide the student’s essential data, such as progress, performance, or notes.
+3. System validates the input and associates the data with the correct student.
+4. System confirms the addition of the data with a success message.
+
+   Use case ends.
+
+**Extensions:**
+
+* 2a. The provided data is invalid.
+  * 2a1. System shows an error message, "Invalid data format."
+      Use case resumes at step 1.
+
+* 3a. The student does not exist in the system.
+  * 3a1. System shows an error message, "Student not found."
+      Use case ends.</panel>
+
+<panel header="#### Use case: View essential data about students" expanded>
+
+**Main Success Scenario (MSS):**
+
+1. User requests to view essential data for a specific student.
+2. System retrieves and displays the student's essential data, such as progress, performance, or notes.
+3. User views the essential data to track the student's progress.
+
+   Use case ends.
+
+**Extensions:**
+
+* 2a. The student does not exist in the system.
+  * 2a1. System shows an error message, "Student not found."
+      Use case ends.
+
+* 2b. No essential data has been recorded for the student.
+  * 2b1. System shows a message, "No essential data available for this student."
+      Use case ends.</panel>
+
+<panel header="#### Use case: Delete essential data about students" expanded>
+
+**Main Success Scenario (MSS):**
+
+1. User requests to delete essential data for a specific student.
+2. System prompts the user for confirmation to delete the essential data for the student.
+3. User confirms the deletion.
+4. System deletes the student’s essential data and shows a success message, "Essential data for [Student] has been deleted."
+
+   Use case ends.
+
+**Extensions:**
+
+* 2a. The student does not exist in the system.
+  * 2a1. System shows an error message, "Student not found."
+      Use case ends.
+
+* 3a. User cancels the deletion.
+  * 3a1. System aborts the deletion process.
+      Use case ends.
+
+* 4a. No essential data exists for the student.
+  * 4a1. System shows a message, "No essential data to delete for this student."
+      Use case ends.</panel>
+
+<panel header="#### Use case: Edit essential data about students" expanded>
+
+**Main Success Scenario (MSS):**
+
+1. User requests to edit essential data for a specific student.
+2. System prompts the user to provide new or updated essential data for the student.
+3. System validates the input and updates the student’s essential data.
+4. System shows a success message, "Essential data for [Student] has been updated."
+
+   Use case ends.
+
+**Extensions:**
+
+* 2a. The student does not exist in the system.
+  * 2a1. System shows an error message, "Student not found."
+      Use case ends.
+
+* 2b. The provided data is invalid.
+  * 2b1. System shows an error message, "Invalid data format."
+      Use case resumes at step 1.
+
+* 4a. No changes were made to the data.
+  * 4a1. System shows a message, "No changes detected."
+      Use case ends.</panel>
+
+<panel header="#### Use case: Search students" expanded>
+
+**Main Success Scenario (MSS):**
+
+1. User requests to find students by providing keywords.
+2. System searches for contacts whose names contain the given keywords (case-insensitive).
+3. System displays the matching contacts if found.
+
+   Use case ends.
+
+**Extensions:**
+
+* 2a. No contacts match the keywords.
+  * 2a1. System shows a message, "No contacts found."
+      Use case ends.</panel>
+
+<panel header="#### Use case: Sort students by grades" expanded>
+
+**Main Success Scenario (MSS):**
+
+1. User requests to sort students by their grades.
+2. System retrieves all students and their corresponding grades.
+3. System sorts the students by grades in ascending order (prioritizing weaker students).
+4. System displays the sorted list of students with their grades for follow-up.
+
+   Use case ends.
+
+**Extensions:**
+
+* 3a. No students have grades recorded.
+  * 3a1. System shows a message, "No grade data available for sorting."
+      Use case ends.</panel>
+
+<panel header="#### Use case: Delete students in bulk" expanded>
+
+**Main Success Scenario (MSS):**
+
+1. User requests to delete multiple students from the system.
+2. System prompts the user to confirm the deletion of the selected students.
+3. User confirms the bulk deletion.
+4. System deletes the selected students and displays a success message for the deletion.
+
+   Use case ends.
+
+**Extensions:**
+
+* 1a. User does not select any students for deletion.
+  * 1a1. System shows a message, "No students selected for deletion."
+      Use case ends.
+
+* 2a. User cancels the deletion.
+  * 2a1. System aborts the bulk deletion process.
+      Use case ends.
+
+* 4a. One or more of the selected students do not exist in the system.
+  * 4a1. System skips deleting non-existent students and completes deletion for valid students.
+  * 4a2. System shows a message, "Some students could not be deleted as they do not exist."</panel>
+
+<panel header="#### Use case: Add filters to searches" expanded>
+
+**Main Success Scenario (MSS):**
+
+1. User requests to search for students with additional filters (e.g., by grade, tag, or other criteria).
+2. System prompts the user to specify the filters (e.g., grade range, specific tag, etc.).
+3. User specifies the filters and submits the search request.
+4. System retrieves students that match the specified filters and displays the filtered list.
+
+   Use case ends.
+
+**Extensions:**
+
+* 2a. The provided filter is invalid.
+  * 2a1. System shows an error message, "Invalid filter. Please provide valid criteria."
       Use case resumes at step 2.
 
-*{More to be added}*
+* 4a. No students match the specified filters.
+  * 4a1. System shows a message, "No students found matching the filters."
+      Use case ends.
 
-### Non-Functional Requirements
+* **4a. Tutor cancels the operation.**
+  * System aborts the change and returns to the previous state.
+  * System displays a message: "Operation cancelled."
+  * **Use case ends.**</panel>
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+<panel header="#### Use Case: Explore App with Sample Student Data" expanded>
 
-*{More to be added}*
+**Main Success Scenario (MSS):**
 
-### Glossary
+1. Tutor selects an option to load the app with sample student data.
+2. System loads pre-populated sample student data into the app.
+3. Tutor interacts with the sample data, testing features such as adding, editing, and deleting students, without affecting any real data.
+4. System processes tutor actions using the sample data.
+5. Tutor completes the exploration of the app and returns to normal mode.
+6. System displays a message confirming that all changes made in the sample mode are not saved.
+
+   **Use case ends.**</panel>
+
+<panel header="#### Use Case: Access Help for Available Commands" expanded>
+
+**Main Success Scenario (MSS):**
+
+1. Tutor requests help (e.g., by typing a help command or selecting a help option from the menu).
+2. System displays a list of available commands and their descriptions.
+3. Tutor reviews the commands and selects one for further clarification.
+4. System provides detailed usage instructions and examples for the selected command.
+5. Tutor follows the instructions to learn how to use the specific functionality.
+
+   **Use case ends.**
+
+**Extensions:**
+
+* **3a. Tutor requests help for an unsupported command.**
+  * System shows an error message: "Command not recognized. Please review the available commands."
+  * **Use case resumes at step 3.**</panel>
+
+<panel header="#### Use Case: Bulk Import Student Data" expanded>
+
+**Main Success Scenario (MSS):**
+
+1. Tutor selects the bulk import option in the system.
+2. System prompts the tutor to upload a file containing student data in the required format (e.g., CSV).
+3. Tutor uploads the file.
+4. System validates the file format and student data based on predefined rules (e.g., required fields such as name, email, and valid formats).
+5. If validation passes, system imports the students into the app.
+6. System displays a success message: "Successfully imported [number] students."
+7. Tutor reviews the imported student data.
+
+   **Use case ends.**
+
+**Extensions:**
+
+* **4a. File format is invalid.**
+  * System displays an error message: "Invalid file format. Please use the correct format (e.g., CSV)."
+  * **Use case resumes at step 2.**
+
+* **4b. Some student data is invalid.**
+  * System displays an error message: "Error importing [X] students due to invalid data (e.g., missing fields, invalid email format). Please correct the data and try again."
+  * System provides the option to retry the import after corrections.
+  * **Use case resumes at step 2.**</panel>
+
+<panel header="#### Use Case: Export Contact List to a CSV" expanded>
+
+**Main Success Scenario (MSS):**
+
+1. Tutor selects the option to export the contact list.
+2. System prompts the tutor to specify the file name and location for the CSV file.
+3. Tutor confirms the file name and location.
+4. System generates the CSV file with the contact list, including details such as name, phone number, email, and address.
+5. System displays a success message: "Contact list successfully exported to [file location]."
+
+   **Use case ends.**
+
+**Extensions:**
+
+* **2a. Export fails due to file system error (e.g., permission denied).**
+  * System displays an error message: "Export failed. Please check your file permissions and try again."
+  * **Use case resumes at step 2.**</panel>
+
+<panel header="#### Use Case: Merge Duplicate Student Entries" expanded>
+
+**Main Success Scenario (MSS):**
+
+1. Tutor selects the option to merge duplicate student entries.
+2. System scans the contact list for potential duplicates (based on name, email, or phone number).
+3. System presents the tutor with a list of duplicate entries and prompts for confirmation of the merge.
+4. Tutor confirms which entries to merge.
+5. System merges the selected entries and updates the contact list accordingly.
+6. System displays a success message: "Duplicates successfully merged."
+
+   **Use case ends.**
+
+**Extensions:**
+
+* **3a. No duplicates found.**
+  * System displays a message: "No duplicates found in the contact list."
+  * **Use case ends.**
+
+* **4a. Tutor cancels the merge.**
+  * System aborts the merge operation and returns to the previous screen.
+  * **Use case ends.**</panel>
+
+<panel header="#### Use Case: Filter Students by Attendance Status" expanded>
+
+**Main Success Scenario (MSS):**
+
+1. Tutor selects the option to filter students by attendance status.
+2. System prompts the tutor to choose a specific attendance status (e.g., present, absent, late).
+3. Tutor selects the desired attendance status.
+4. System filters and displays the list of students matching the selected attendance status.
+5. Tutor reviews the filtered list to track or follow up with the absent students.
+
+   **Use case ends.**
+
+**Extensions:**
+
+* **4a. No students match the selected attendance status.**
+  * System displays a message: "No students match the selected attendance status."
+  * **Use case ends.**</panel>
+
+<panel header="#### Use Case: Sort Students Alphabetically" expanded>
+
+**Main Success Scenario (MSS):**
+
+1. Tutor selects the option to sort students alphabetically.
+2. System prompts the tutor to choose a sorting criterion (e.g., by first name, by last name).
+3. Tutor selects the desired criterion.
+4. System sorts the students based on the selected criterion.
+5. Tutor reviews the sorted contact list for quick reference or location.
+
+   **Use case ends.**
+
+**Extensions:**
+
+* **4a. Contact list is empty.**
+  * System displays a message: "No students available to sort."
+  * **Use case ends.**</panel>
+
+<panel header="#### Use Case: Add Comments to Student Profiles" expanded>
+
+**Main Success Scenario (MSS):**
+
+1. Tutor selects a student profile.
+2. Tutor chooses the option to add a comment to the student's profile.
+3. System prompts the tutor to enter the comment.
+4. Tutor enters the desired observation or important information about the student as a comment.
+5. System saves the comment and associates it with the student's profile.
+6. System displays a success message: "Comment added to [Student's name] profile."
+
+   **Use case ends.**
+
+**Extensions:**
+
+* **4a. Comment is empty or invalid.**
+  * System displays an error message: "Invalid comment. Please enter a valid comment."
+  * **Use case resumes at step 3.**</panel>
+
+<panel header="#### Use Case: Assign Preferred Communication Methods to Parents" expanded>
+
+**Main Success Scenario (MSS):**
+
+1. Tutor selects a student profile.
+2. Tutor chooses the option to assign a preferred communication method for the student's parents.
+3. System displays available communication methods (e.g., phone, email, messaging apps).
+4. Tutor selects one or more preferred methods.
+5. System saves the selected preferences for the student's parents.
+6. System displays a success message: "Preferred communication method(s) saved for [Student's name] parents."
+
+   **Use case ends.**
+
+**Extensions:**
+
+* **4a. No communication method selected.**
+  * System displays an error message: "Please select at least one communication method."
+  * **Use case resumes at step 3.**</panel>
+
+<panel header="#### Use Case: Flag Students with Missing Contact Details" expanded>
+
+**Main Success Scenario (MSS):**
+
+1. Tutor selects the option to check for missing contact details.
+2. System scans the contact list for students with incomplete or missing contact information (e.g., missing phone number or email).
+3. System displays a list of students with incomplete contact details.
+4. Tutor chooses to review the flagged students and updates the missing information as needed.
+
+   **Use case ends.**
+
+**Extensions:**
+
+* **3a. No students with missing contact details.**
+  * System displays a message: "All student contact details are complete."
+  * **Use case ends.**</panel>
+
+<panel header="#### Use Case: Set Communication Preferences for Individual Students" expanded>
+
+**Main Success Scenario (MSS):**
+
+1. Tutor selects a student profile.
+2. Tutor chooses the option to set a preferred communication method for the student.
+3. System displays available communication methods (e.g., Telegram, phone, email).
+4. Tutor selects the student's preferred method.
+5. System saves the selected preference.
+6. System displays a success message: "Preferred communication method saved for [Student's name]."
+
+   **Use case ends.**
+
+**Extensions:**
+
+* **4a. No communication method selected.**
+  * System displays an error message: "Please select a communication method."
+  * **Use case resumes at step 3.**</panel>
+
+<br>
+
+### :fa-solid-clipboard-list: Non-Functional Requirements
+
+1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+
+_{More to be added}_
+
+### :fa-solid-circle-question: Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
@@ -349,7 +834,7 @@ Given below are instructions to test the app manually.
 <box type="info" seamless>
 
 **Note:** These instructions only provide a starting point for testers to work on;
-testers are expected to do more *exploratory* testing.
+testers are expected to do more _exploratory_ testing.
 
 </box>
 

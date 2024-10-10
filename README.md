@@ -1,6 +1,6 @@
 # TAHub Contacts
 
-![Logo](docs/images/tahc-logo_400px.png) ![Logo](docs/images/tahc-icon_197px.png)
+![Logo](docs/images/brand/tahc-logo_small.png) ![Logo](docs/images/brand/tahc-icon_small.png)
 
 [![CI Status](https://github.com/AY2425S1-CS2103T-F14B-2/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-F14B-2/tp/actions)
 [![GitHub Release](https://img.shields.io/github/v/release/AY2425S1-CS2103T-F14B-2/tp)](https://github.com/AY2425S1-CS2103T-F14B-2/tp/releases)
