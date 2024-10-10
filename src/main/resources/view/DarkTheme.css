@@ -107,6 +107,11 @@
     -fx-background-color: #515658;
 }
 
+.list-cell:filled:first {
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
 .list-cell:filled:selected {
     -fx-background-color: #424d5f;
 }
@@ -133,17 +138,17 @@
 }
 
 .stack-pane {
-     -fx-background-color: derive(#1d1d1d, 20%);
+     -fx-background-color: #27272a;
 }
 
 .pane-with-border {
-     -fx-background-color: derive(#1d1d1d, 20%);
-     -fx-border-color: derive(#1d1d1d, 10%);
+     -fx-background-color: #27272a;
+     -fx-border-color: #27272a;
      -fx-border-top-width: 1px;
 }
 
 .status-bar {
-    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-background-color: #1e293b;
 }
 
 .result-display {
@@ -193,7 +198,7 @@
 }
 
 .menu-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #1e293b;
 }
 
 .menu-bar .label {
@@ -286,7 +291,7 @@
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: #1e293b;
     -fx-background-insets: 3;
 }
 
@@ -320,7 +325,7 @@
 #commandTextField {
     -fx-background-color: transparent #383838 transparent #383838;
     -fx-background-insets: 0;
-    -fx-border-color: #383838 #383838 #ffffff #383838;
+    -fx-border-color: transparent transparent #4b5563 transparent;
     -fx-border-insets: 0;
     -fx-border-width: 1;
     -fx-font-family: "Segoe UI Light";
@@ -349,4 +354,17 @@
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
+}
+
+#modules .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-family: "Noto Sans";
+    -fx-background-color: #ea580c;
+    -fx-padding: 5;
+    -fx-border-insets: 3;
+    -fx-background-insets: 3;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-font-size: 16;
 }
