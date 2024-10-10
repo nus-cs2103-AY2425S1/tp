@@ -11,6 +11,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Income;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -93,6 +94,21 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String email} into an {@code Income}.
+     * Leading and trailing whitespaces will be trimmed.
+     * The string is parsed into a primitive int.
+     * @throws ParseException if the given {@code email} is invalid.
+     */
+    public static Income parseIncome(String potentialIncome) throws ParseException {
+        requireNonNull(potentialIncome);
+        String trimmedIncome = potentialIncome.trim();
+        if (!(Income.isValidIncome(trimmedIncome))) {
+            throw new ParseException(Income.MESSAGE_CONSTRAINTS);
+        }
+        return new Income(Integer.parseInt(trimmedIncome));
     }
 
     /**

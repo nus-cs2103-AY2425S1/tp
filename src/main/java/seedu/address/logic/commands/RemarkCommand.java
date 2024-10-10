@@ -55,8 +55,7 @@ public class RemarkCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getTags(), remark);
-
+                personToEdit.getAddress(), personToEdit.getIncome(), personToEdit.getTags(), remark);
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
@@ -79,7 +78,6 @@ public class RemarkCommand extends Command {
         } else if (!(otherObj instanceof RemarkCommand)) {
             return false;
         }
-
         RemarkCommand typecastedOtherObj = (RemarkCommand) otherObj;
         return index.equals(typecastedOtherObj.index) && remark.equals(typecastedOtherObj.remark);
     }
