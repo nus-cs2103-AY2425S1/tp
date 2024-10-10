@@ -272,10 +272,10 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
-                    .add("tags", tags)
                     .add("parent name", parentName)
                     .add("parent phone", parentPhone)
                     .add("parent email", parentEmail)
+                    .add("tags", tags)
                     .toString();
         }
     }
