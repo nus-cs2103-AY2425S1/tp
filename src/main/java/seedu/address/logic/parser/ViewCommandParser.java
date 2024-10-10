@@ -30,7 +30,7 @@ public class ViewCommandParser implements Parser<ViewCommand> {
                 );
             }
         }
-        
+
         return new ViewCommand(new PersonFulfilsPredicate(keyword));
     }
 }
