@@ -96,6 +96,8 @@ Shows a list of all persons in the address book.
 
 Format: `list`
 
+* You will be informed when the list is empty: `The list is currently empty.` or when it is not empty: `Listed all persons`.
+
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.

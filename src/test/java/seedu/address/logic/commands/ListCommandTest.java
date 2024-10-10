@@ -8,6 +8,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -35,5 +36,14 @@ public class ListCommandTest {
     public void execute_listIsFiltered_showsEverything() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+    @Test
+    public void execute_listIsEmpty_showsEmptyMessage() {
+        // Set up an empty model for testing
+        Model emptyModel = new ModelManager(new AddressBook(), new UserPrefs());
+        Model expectedEmptyModel = new ModelManager(new AddressBook(), new UserPrefs());
+
+        // Check that the command shows the empty list message
+        assertCommandSuccess(new ListCommand(), emptyModel, ListCommand.MESSAGE_EMPTY_LIST, expectedEmptyModel);
     }
 }
