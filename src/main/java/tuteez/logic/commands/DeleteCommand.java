@@ -52,20 +52,29 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         Person personToDelete;
         if (targetIndex != null) {
-            List<Person> lastShownList = model.getFilteredPersonList();
-            if (targetIndex.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-            }
-            personToDelete = lastShownList.get(targetIndex.getZeroBased());
+            personToDelete = getPersonToDeleteByIndex(model, targetIndex);
         } else {
-            personToDelete = model.findPersonByName(targetName);
-            if (personToDelete == null) {
-                throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME, targetName));
-            }
+            personToDelete = getPersonToDeleteByName(model, targetName);
         }
 
         model.deletePerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+    }
+
+    private Person getPersonToDeleteByIndex(Model model, Index index) throws CommandException {
+        List<Person> lastShownList = model.getFilteredPersonList();
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+        return lastShownList.get(index.getZeroBased());
+    }
+
+    private Person getPersonToDeleteByName(Model model, Name name) throws CommandException {
+        Person personToDelete = model.findPersonByName(name);
+        if (personToDelete == null) {
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME, name));
+        }
+        return personToDelete;
     }
 
     @Override
