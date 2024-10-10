@@ -1,13 +1,16 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
-import static java.util.Objects.requireNonNull;
-
-public class RestoreCommand extends Command{
+/**
+ *  Restores last person deleted, if any.
+ */
+public class RestoreCommand extends Command {
 
     public static final String COMMAND_WORD = "restore";
 
@@ -23,15 +26,13 @@ public class RestoreCommand extends Command{
         if (!model.checkRestorable()) {
             throw new CommandException(MESSAGE_NOTHING_TO_RESTORE);
         }
-
-        if (model.hasPerson(model.getLastDeletedPerson())) {
+        Person lastDeletedPerson = model.getLastDeletedPerson();
+        if (model.hasPerson(lastDeletedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
-
-        model.addPerson(model.getLastDeletedPerson());
+        model.addPerson(lastDeletedPerson);
         model.makeNotRestorable();
-        return new CommandResult(String.format(MESSAGE_RESTORE_PERSON_SUCCESS, Messages.format(model.getLastDeletedPerson())));
-
+        return new CommandResult(String.format(MESSAGE_RESTORE_PERSON_SUCCESS, Messages.format(lastDeletedPerson)));
     }
 
 }

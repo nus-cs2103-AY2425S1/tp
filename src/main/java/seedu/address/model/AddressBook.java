@@ -78,6 +78,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.add(p);
     }
 
+    /**
+     * Stores a person that has been deleted in the lastDeletedPerson variable.
+     * Sets the canRestore variable to true.
+     */
     public void savePersonToDelete(Person person) {
         lastDeletedPerson = person;
         canRestore = true;
