@@ -32,7 +32,7 @@ public class RoleHandler {
      * @param role String representation of role.
      * @return Corresponding role object.
      */
-    public Role getRole(String role) {
+    public Role getRole(String role) throws InvalidRoleException {
         role = role.trim().toLowerCase();
         switch (role) {
         case Attendee.ROLE_WORD:
@@ -45,7 +45,7 @@ public class RoleHandler {
             return VOLUNTEER;
         default:
 
-            return null;
+           throw new InvalidRoleException();
         }
     }
 
