@@ -35,7 +35,7 @@ public class SampleDataUtil {
                        new DateOfBirth("1990-01-01"),
                        new Gender("M"),
                        getTagSet("friends"),
-                       new Priority(DEFAULT_PRIORITY)
+                       new Priority(DEFAULT_PRIORITY),
                        getAppointmentSet("Dental:2024-12-25:1235-1300")
             ),
             new Person(new Name("Bernice Yu"),
@@ -46,7 +46,7 @@ public class SampleDataUtil {
                        new DateOfBirth("1990-01-01"),
                        new Gender("M"),
                        getTagSet("colleagues", "friends"),
-                       new Priority(DEFAULT_PRIORITY)
+                       new Priority(DEFAULT_PRIORITY),
                        getAppointmentSet("Orthopedic:2024-12-01:1200-1300", "Physio:2024-12-01:1500-1600")
             ),
             new Person(new Name("Charlotte Oliveiro"),
@@ -57,7 +57,7 @@ public class SampleDataUtil {
                        new DateOfBirth("1990-01-01"),
                        new Gender("M"),
                        getTagSet("neighbours"),
-                       new Priority(DEFAULT_PRIORITY)
+                       new Priority(DEFAULT_PRIORITY),
                        Collections.emptySet()
             ),
             new Person(new Name("David Li"),
@@ -68,7 +68,7 @@ public class SampleDataUtil {
                        new DateOfBirth("1990-01-01"),
                        new Gender("M"),
                        getTagSet("family"),
-                       new Priority(DEFAULT_PRIORITY)
+                       new Priority(DEFAULT_PRIORITY),
                        getAppointmentSet("OT:2025-01-12:1000-1300",
                                          "PT:2025-02-02:1200-1300",
                                          "Consult:2025-02-20:1400-1430")
@@ -81,7 +81,7 @@ public class SampleDataUtil {
                        new DateOfBirth("1990-01-01"),
                        new Gender("M"),
                        getTagSet("classmates"),
-                       new Priority(DEFAULT_PRIORITY)
+                       new Priority(DEFAULT_PRIORITY),
                        getAppointmentSet("Dental:2024-10-25:1235-1300")
             ),
             new Person(new Name("Roy Balakrishnan"),
@@ -92,7 +92,7 @@ public class SampleDataUtil {
                        new DateOfBirth("1990-01-01"),
                        new Gender("M"),
                        getTagSet("colleagues"),
-                       new Priority(DEFAULT_PRIORITY)
+                       new Priority(DEFAULT_PRIORITY),
                        Collections.emptySet()
             )
         };
