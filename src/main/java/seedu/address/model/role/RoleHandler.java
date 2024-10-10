@@ -57,9 +57,8 @@ public class RoleHandler {
         Objects.requireNonNull(roleString);
 
         Role role = getRole(roleString);
-        if (role == null) {
-            throw new InvalidRoleException();
-        }
+        //if role is invalid getRole should already throw an exception
+        assert role != null;
         return role.isTagged(person);
     }
 
