@@ -29,6 +29,23 @@ public class Teacher extends Person {
         this.gender = gender;
     }
 
+    public Gender getGender() {
+        return this.gender;
+    }
+
+    /**
+     * Returns true if both teachers have the same name.
+     * This defines a weaker notion of equality between two teachers.
+     */
+    public boolean isSameTeacher(Teacher otherTeacher) {
+        if (otherTeacher == this) {
+            return true;
+        }
+
+        return otherTeacher != null
+            && otherTeacher.getName().equals(getName());
+    }
+
     /**
      * Returns true if both Teachers have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
@@ -46,6 +63,7 @@ public class Teacher extends Person {
 
         Teacher otherTeacher = (Teacher) other;
         return getName().equals(otherTeacher.getName())
+            && getGender().equals(otherTeacher.getGender())
             && getPhone().equals(otherTeacher.getPhone())
             && getEmail().equals(otherTeacher.getEmail())
             && getAddress().equals(otherTeacher.getAddress())
