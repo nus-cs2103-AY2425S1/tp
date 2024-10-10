@@ -69,6 +69,12 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_exit_alt() throws Exception {
+        assertTrue(parser.parseCommand(ExitCommand.ALT_COMMAND_WORD) instanceof ExitCommand);
+        assertTrue(parser.parseCommand(ExitCommand.ALT_COMMAND_WORD + " 3") instanceof ExitCommand);
+    }
+
+    @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
