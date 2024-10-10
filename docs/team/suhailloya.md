@@ -5,7 +5,7 @@ title: Suhail's Project Portfolio Page
 
 ### Project: CareConnect
 
-CareConnect - Level 3 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+CareConnect - Level 3 is a desktop careConnect book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
 Given below are my contributions to the project.
 
