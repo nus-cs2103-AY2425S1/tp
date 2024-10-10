@@ -8,7 +8,8 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Nickname;
+import seedu.address.model.tag.Role;
 
 /**
  * Represents a Person in the address book.
@@ -18,47 +19,54 @@ public class Person {
 
     // Identity fields
     private final Name name;
-    private final Phone phone;
+    private final Telegram telegram;
     private final Email email;
 
     // Data fields
     private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Set<Role> roles = new HashSet<>();
+    private final Nickname nickname;
+    private final StudentStatus studentStatus;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Telegram telegram, Email email, StudentStatus studentStatus, Set<Role> roles, Nickname nickname) {
+        requireAllNonNull(name, telegram, email, studentStatus, roles, nickname);
         this.name = name;
-        this.phone = phone;
+        this.telegram = telegram;
         this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
+        this.studentStatus = studentStatus;
+        this.roles.addAll(roles);
+        this.nickname = nickname;
     }
 
     public Name getName() {
         return name;
     }
 
-    public Phone getPhone() {
-        return phone;
+    public Telegram getTelegram() {
+        return telegram;
     }
 
     public Email getEmail() {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
+    public StudentStatus getStudentStatus() {
+        return studentStatus;
     }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Set<Role> getTags() {
+        return Collections.unmodifiableSet(roles);
+    }
+
+    public Nickname getNickname() {
+        return nickname;
     }
 
     /**
@@ -91,26 +99,28 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
+                && telegram.equals(otherPerson.telegram)
                 && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && studentStatus.equals(otherPerson.studentStatus)
+                && roles.equals(otherPerson.roles)
+                && nickname.equals(otherPerson.nickname);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, telegram, email, studentStatus, roles, nickname);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
-                .add("phone", phone)
+                .add("telegram", telegram)
                 .add("email", email)
-                .add("address", address)
-                .add("tags", tags)
+                .add("studentStatus", studentStatus)
+                .add("tags", roles)
+                .add("nickname", nickname)
                 .toString();
     }
 
