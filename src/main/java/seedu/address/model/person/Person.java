@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.group.Group;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,6 +24,8 @@ public class Person {
     // Data fields
     private final StudentClass studentClass;
     private final Set<Tag> tags = new HashSet<>();
+
+    private final Set<Group> groups = new HashSet<>();
 
     /**
      * Every field must be present and not null.
@@ -107,6 +110,20 @@ public class Person {
                 .add("phone", phone)
                 .add("tags", tags)
                 .toString();
+    }
+
+    // Other attributes and methods
+
+    public Set<Group> getGroups() {
+        return groups;
+    }
+
+    public void addGroup(Group group) {
+        groups.add(group);
+    }
+
+    public void removeGroup(Group group) {
+        groups.remove(group);
     }
 
 }
