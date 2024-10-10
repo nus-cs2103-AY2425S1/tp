@@ -90,30 +90,34 @@
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #5a5959;
 }
 
 .list-cell {
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
+    -fx-background-color: #5a5959;
+
 }
 
-.list-cell:filled:even {
-    -fx-background-color: #3c3e3f;
-}
+/*.list-cell:filled:even {*/
+/*    -fx-background-color: #3c3e3f;*/
+/*}*/
 
-.list-cell:filled:odd {
-    -fx-background-color: #515658;
+.list-cell:filled {
+
+    -fx-border-color: #bcbcbc;
+    -fx-border-width: 0 0 1px 0;
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #424d5f;
+    -fx-background-color: #757373;
 }
 
 .list-cell:filled:selected #cardPane {
-    -fx-border-color: #3e7b91;
-    -fx-border-width: 1;
+    -fx-border-color: #636262;
+    -fx-border-width: 0;
 }
 
 .list-cell .label {
@@ -137,9 +141,9 @@
 }
 
 .pane-with-border {
-     -fx-background-color: derive(#1d1d1d, 20%);
-     -fx-border-color: derive(#1d1d1d, 10%);
-     -fx-border-top-width: 1px;
+    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-border-color: derive(#1d1d1d, 10%);
+    -fx-border-top-width: 1px;
 }
 
 .status-bar {
@@ -154,7 +158,7 @@
 }
 
 .result-display .label {
-    -fx-text-fill: black !important;
+    -fx-text-fill: white !important;
 }
 
 .status-bar .label {
@@ -318,22 +322,30 @@
 }
 
 #commandTextField {
-    -fx-background-color: transparent #383838 transparent #383838;
+    -fx-background-color: white;
     -fx-background-insets: 0;
     -fx-border-color: #383838 #383838 #ffffff #383838;
     -fx-border-insets: 0;
     -fx-border-width: 1;
+    -fx-border-radius: 1;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
+
+.detail-panel-placeholder .content {
+    -fx-background-color:  #504f4f;
+    -fx-background-radius: 0;
+    -fx-border-radius: 2;
+}
+
 
 #filterField, #personListPanel, #personWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 
 #resultDisplay .content {
-    -fx-background-color: transparent, #383838, transparent, #383838;
+    -fx-background-color: transparent, #504f4f, transparent, #504f4f;
     -fx-background-radius: 0;
 }
 
