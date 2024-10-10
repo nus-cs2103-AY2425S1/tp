@@ -119,6 +119,38 @@ public class Person {
         return Objects.hash(name, phone, email, address, tags);
     }
 
+    /**
+     * changes name.
+     * @param newNameValue
+     */
+    public void changeName(String newNameValue) {
+
+    }
+
+    /**
+     * changes number.
+     * @param newNumber
+     */
+    public void changePhoneNumber(String newNumber) {
+
+    }
+
+    /**
+     * changes email.
+     * @param newEmail
+     */
+    public void changeEmail(String newEmail) {
+
+    }
+
+    /**
+     * changes address
+     * @param newAddress
+     */
+    public void changeAddress(String newAddress) {
+
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
