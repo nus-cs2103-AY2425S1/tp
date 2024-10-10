@@ -16,7 +16,6 @@ import seedu.ddd.model.person.Contact;
 import seedu.ddd.model.person.Date;
 import seedu.ddd.model.person.Email;
 import seedu.ddd.model.person.Name;
-import seedu.ddd.model.person.Person;
 import seedu.ddd.model.person.Phone;
 import seedu.ddd.model.tag.Tag;
 
