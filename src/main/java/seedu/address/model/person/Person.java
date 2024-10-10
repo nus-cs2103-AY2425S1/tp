@@ -20,31 +20,31 @@ public class Person {
     private final Name name;
     private final Phone phone;
 //    private final Email email;
-
-    // Data fields
+//
+//    // Data fields
 //    private final Address address;
 //    private final Remark remark;
+    private final Property property;
 //    private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone) {
-        requireAllNonNull(name, phone);
+    public Person(Name name, Phone phone, Property property) {
+        requireAllNonNull(name, phone, property);
         this.name = name;
         this.phone = phone;
 //        this.email = email;
 //        this.address = address;
 //        this.remark = remark;
+        this.property = property;
 //        this.tags.addAll(tags);
     }
-    
+
     public Person(Name name) {
         this.name = name;
         this.phone = null;
-//        this.email = null;
-//        this.address = null;
-//        this.remark = null;
+        this.property = new Property("");
     }
 
     public Name getName() {
@@ -54,26 +54,30 @@ public class Person {
     public Phone getPhone() {
         return phone;
     }
-/*
-    public Email getEmail() {
-        return email;
+
+//    public Email getEmail() {
+//        return email;
+//    }
+//
+//    public Address getAddress() {
+//        return address;
+//    }
+//
+//    public Remark getRemark() {
+//        return remark;
+//    }
+
+    public Property getProperty() {
+        return property;
     }
 
-    public Address getAddress() {
-        return address;
-    }
-
-    public Remark getRemark() {
-        return remark;
-    }
-
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
+//    /**
+//     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+//     * if modification is attempted.
+//     */
 //    public Set<Tag> getTags() {
- //       return Collections.unmodifiableSet(tags);
- //   }
+//        return Collections.unmodifiableSet(tags);
+//    }
 
     /**
      * Returns true if both persons have the same name.
@@ -105,7 +109,8 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone);
+                && phone.equals(otherPerson.phone)
+                && property.equals(otherPerson.property);
 //                && email.equals(otherPerson.email)
 //                && address.equals(otherPerson.address)
 //                && tags.equals(otherPerson.tags);
@@ -114,7 +119,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone);
+        return Objects.hash(name, phone, property);
     }
 
     @Override
@@ -126,6 +131,7 @@ public class Person {
 //                .add("address", address)
 //                .add("remark", remark)
 //                .add("tags", tags)
+                .add("property", property)
                 .toString();
     }
 
