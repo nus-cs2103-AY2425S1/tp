@@ -40,18 +40,15 @@ public class AttendanceList {
 
     @Override
     public boolean equals(Object other) {
-        if (other instanceof AttendanceList al) {
-            if (al.attendanceList.size() != this.attendanceList.size()) {
-                return false;
-            }
-            for (int i = 0; i < this.attendanceList.size(); i++) {
-                if (!al.attendanceList.get(i).equals(this.attendanceList.get(i))) {
-                    return false;
-                }
-            }
+        if (other == this) {
             return true;
         }
-        return false;
+
+        if (!(other instanceof AttendanceList otherAttendanceList)) {
+            return false;
+        }
+
+        return this.attendanceList.equals(otherAttendanceList.attendanceList);
     }
 
     @Override

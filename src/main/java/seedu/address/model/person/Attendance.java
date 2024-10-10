@@ -42,10 +42,15 @@ public class Attendance {
 
     @Override
     public boolean equals(Object other) {
-        if (other instanceof Attendance a) {
-            return a.date.equals(date) && a.hasAttended == this.hasAttended;
+        if (other == this) {
+            return true;
         }
-        return false;
+
+        if (!(other instanceof Attendance otherAttendance)) {
+            return false;
+        }
+
+        return this.hasAttended == otherAttendance.hasAttended && this.date.equals(otherAttendance.date);
     }
 
     @Override
