@@ -12,7 +12,6 @@ import seedu.address.model.person.Name;
  * Represents goods.
  * Garauntees: Immutable; name is valid as declared in {@link #isValidGoodsName(String)};
  *     procurementDate is valid as declared in {@link #isValidProcurementDate(Date)};
- *     arrivalDate is valid as declared in {@link #isValidArrivalDate(Date)}
  */
 public class Goods {
 
@@ -44,7 +43,6 @@ public class Goods {
             Date procurementDate, Date arrivalDate, boolean isDelivered, Name supplierName) {
         requireAllNonNull(goodsName, quantity, category, procurementDate, arrivalDate, isDelivered, supplierName);
         checkArgument(isValidProcurementDate(procurementDate));
-        checkArgument(isValidArrivalDate(arrivalDate));
         this.goodsName = goodsName;
         this.quantity = quantity;
         this.price = price;
@@ -56,17 +54,18 @@ public class Goods {
     }
 
     /**
+     * Returns True if the goods name is valid.
+     * @param test String for goods name
+     */
+    public static boolean isValidGoodsName(String test) {
+        return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
      * Returns True if the procurement date is valid.
      */
     public static boolean isValidProcurementDate(Date date) {
         return date.getDateTime().isBefore(LocalDateTime.now());
-    }
-
-    /**
-     * Returns True if the arrival date is valid.
-     */
-    public static boolean isValidArrivalDate(Date date) {
-        return date.getDateTime().isAfter(LocalDateTime.now());
     }
 
     /**
@@ -102,6 +101,6 @@ public class Goods {
     @Override
     public String toString() {
         String deliveryStatus = this.isDelivered ? "Delivered" : "Pending";
-        return String.format("%s (%s): %d", this.goodsName, deliveryStatus, this.quantity);
+        return String.format("[Quantity %d] %s (%s)", this.quantity, this.goodsName, deliveryStatus);
     }
 }

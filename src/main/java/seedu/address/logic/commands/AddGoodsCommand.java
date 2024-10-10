@@ -35,8 +35,8 @@ public class AddGoodsCommand extends Command {
             + PREFIX_PRICE + "5 "
             + PREFIX_CATEGORY + "CONSUMABLES "
             + PREFIX_PROCUREMENT_DATE + "2024-08-08 11:00 "
-            + PREFIX_ARRIVAL_DATE + "2024-09-09 11:00 "
-            + PREFIX_NAME + "Bread Seller \n";
+            + PREFIX_ARRIVAL_DATE + "2024-11-11 11:00 "
+            + PREFIX_NAME + "Alex Yeoh \n";
 
     public static final String MESSAGE_SUCCESS = "New goods added: %1$s";
 
@@ -54,7 +54,8 @@ public class AddGoodsCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        // TODO: ADD GOODS TO STORAGE
+        // TODO: ADD GOODS TO STORAGE (CHECK DUPLICATES)
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.toString()));
     }
 

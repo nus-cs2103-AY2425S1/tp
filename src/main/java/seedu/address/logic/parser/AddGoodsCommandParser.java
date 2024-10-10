@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROCUREMENT_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 
+import java.time.LocalDateTime;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddGoodsCommand;
@@ -40,6 +41,7 @@ public class AddGoodsCommandParser implements Parser<AddGoodsCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_GOODS_NAME, PREFIX_QUANTITY, PREFIX_PRICE,
                 PREFIX_CATEGORY, PREFIX_PROCUREMENT_DATE, PREFIX_ARRIVAL_DATE, PREFIX_NAME);
+        // TODO: ADD NEW ERROR FOR INVALID SUPPLIER NAMES
         Name supplierName = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         // TODO: ENSURE CHECKS FOR SAFETY
         GoodsName goodsName = ParserUtil.parseGoodsName(argMultimap.getValue(PREFIX_GOODS_NAME).get());
@@ -48,8 +50,10 @@ public class AddGoodsCommandParser implements Parser<AddGoodsCommand> {
         GoodsCategories category = ParserUtil.parseGoodsCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
         Date procurementDate = ParserUtil.parseDateTimeValues(argMultimap.getValue(PREFIX_PROCUREMENT_DATE).get());
         Date arrivalDate = ParserUtil.parseDateTimeValues(argMultimap.getValue(PREFIX_ARRIVAL_DATE).get());
+        Boolean isDelivered = arrivalDate.getDateTime().isBefore(LocalDateTime.now());
 
-        Goods goods = new Goods(goodsName, quantity, price, category, procurementDate, arrivalDate, true, supplierName);
+        Goods goods = new Goods(goodsName, quantity, price, category, procurementDate, arrivalDate,
+                isDelivered, supplierName);
 
         return new AddGoodsCommand(goods);
     }
