@@ -290,7 +290,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                       | I want to …​                                 | So that …​                                                           |
 |----------|-------------------------------|----------------------------------------------|----------------------------------------------------------------------|
-| `* * *`  | CS Undergraduate              | View the list of application                 | I can view all my past applications                                  |
+| `* * *`  | CS Undergraduate              | List all the internship applications         | I can view all my past applications                                  |
 | `* * *`  | An efficient CS Undergraduate | Type the commands                            | I do not have to lift my fingers off the keyboard                    |
 | `* * *`  | CS Undergraduate              | Add an internship application                | I can add on to the records of all the internships I have applied to |
 | `* * *`  | CS Undergraduate              | Delete an internship application             | I can remove irrelevant applications                                 |
@@ -388,11 +388,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use Case: View all internship entries**
+**Use Case: List all internship entries**
 
 **MSS**
 
-1. The user requests to view all internship entries.
+1. The user requests to list all internship entries.
 2. HireMe shows all internship entries.
 
    Use case ends.
