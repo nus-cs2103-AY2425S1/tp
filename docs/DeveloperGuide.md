@@ -229,13 +229,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 
@@ -254,6 +254,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * [Configuration guide](Configuration.md)
 * [DevOps guide](DevOps.md)
 
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Requirements**
@@ -262,42 +263,82 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* international or exchange student joining NUS
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: helps international students manage important contacts faster than a typical mouse/GUI driven app
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                    | I want to …​                                      | So that I can…​                                                     |
+|----------| ----------------------------------------- | ------------------------------------------------- | ------------------------------------------------------------------- |
+| `* * *`  | new user                                   | see usage instructions                            | refer to instructions when I forget how to use the App              |
+| `* * *`  | user                                       | add new contacts                                  |                                                                     |
+| `* * *`  | user                                       | view all contacts                                 | see all my contacts saved in one screen                             |
+| `* * *`  | user                                       | delete a contact                                  | remove entries that I no longer need                                |
+| `* *`    | potential user                             | see the app populated with sample data            | easily try and see how the app will look like when it is in use     |
+| `* *`    | new user ready to use the app              | remove all current data                           | remove all sample data I used when exploring the app                |
+| `* *`    | familiar user of the app                   | save the contacts under a favourites tab          | easily access the contacts that I frequently use                    |
+| `* *`    | familiar user of the app                   | tag certain contacts                              | remember where I know the contacts from                             |
+| `* *`    | new user who is from a different country   | change the language of the app                    | better use the app in my first language                             |
+| `* *`    | new user who is an exchange student        | learn how to use the app quickly                  | use the app frequently during my 6 months in NUS                    |
+| `* *`    | new user who is unfamiliar with English    | use shortcut commands instead of the full name of the commands | make minimal spelling mistakes when I am entering the commands     |
+| `* *`    | familiar user of the app                   | filter contacts by tag                            | easier find my contacts who belong to the same group                |
+| `* *`    | familiar user of the app                   | search contacts by name                           | easily find the contact person instead of scrolling                 |
+| `* *`    | first-time user                            | see some sample contacts (local emergency etc)    | I do not need to manually search for those contacts that are useful in urgent situations |
+| `* *`    | student with frequent changes in schedule  | mark contacts as "high priority" or "low priority" | focus on the most relevant people when my schedule is tight         |
+| `* *`    | international student unfamiliar with the local area | access a pre-populated list of essential services (e.g., embassy, health services, police) | quickly contact these services in case of an emergency          |
+| `* *`    | user                                       | edit my contacts                                  | amend mistakes/update new info on my contacts                       |
+| `*`      | new user who is unfamiliar with English    | have suggestions on commands to enter             | enter the right commands if I am unsure on how to spell certain words |
+| `*`      | familiar user of the app                   | choose country codes for different countries      | easier categorise and save different numbers from my diverse base of contacts |
+| `*`      | familiar user of the app                   | mass add a large list of contacts                 | avoid from entering repetitive commands                             |
+| `*`      | impatient user                             | experience reasonable response time while up to 1000 concurrent users are using it | use the app even when the traffic is at the maximum expected level |
+| `*`      | busy user                                  | quickly import contacts from other platforms (e.g., phone, social media, email) | avoid manually inputting every new contact into UniNet             |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `UniNet` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case 1: Add a contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to add a new contact
+2. User enters the required information (name and phone number) and optional information (email and tag)
+3. UniNet adds the contact and displays a success message
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given arguments are invalid.
+
+  * 2a1. UniNet shows an error message for the specific invalid field.
+    Use case resumes at step 2.
+
+
+* 3a. Contact with the same phone number already exists.
+
+  * 3a1. UniNet shows an error message about duplicate contact. 
+  
+    Use case resumes at step 2.
+
+**Use case 2: Delete a contact**
+
+**MSS**
+
+1.  User requests to list contacts
+2.  UniNet shows a list of contacts
+3.  User requests to delete a specific contact in the list
+4.  UniNet deletes the contact
 
     Use case ends.
 
@@ -309,26 +350,81 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. UniNet shows an error message.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case 3: Edit a contact**
+
+**MSS**
+
+1. User requests to list contacts
+2. UniNet shows a list of contacts
+3. User requests to delete a specific contact in the list (Use case 2) 
+4. UniNet deletes the contact
+5. User requests to add a new contact (Use case 1)
+6. User enters the required information for the updated contact (name and phone number) and optional information (email and tag)
+7. UniNet adds the contact and displays a success message
+
+    Use case ends.
+
+
+
+---
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. **Platform Compatibility**:
+    - The application should work on any mainstream OS as long as it has Java 17 or above installed.
+2. **Performance Requirements**:
+    - The application should be able to hold up to 1000 tasks without noticeable sluggishness for typical usage scenarios.
+    - A user should be able to execute most commands (e.g., adding, deleting, or updating tasks) in under 1 second.
+3. **Usability Requirements**:
+    - The user interface should be intuitive and allow users to easily understand how to input commands without prior extensive training.
+    - Error messages should be user-friendly and provide enough information to guide the user towards resolving the issue.
+4. **Scalability Requirements**:
+    - The system should support additional features or commands without major changes to the existing architecture.
+    - The task list should scale efficiently to handle future use cases, such as storing significantly larger amounts of data.
+5. **Reliability and Availability**:
+    - The application should be reliable, ensuring data consistency even after unexpected shutdowns.
+    - Data should be auto-saved periodically to minimize the risk of data loss during crashes.
+6. **Security Requirements**:
+    - The application should store user data securely, ensuring that unauthorized access is prevented.
+    - User data should not be stored in plaintext, and sensitive data should be encrypted where applicable.
+7. **Portability Requirements**:
+    - The application should be executable without a complex installation process, ideally by running a standalone JAR file.
+8. **Maintainability Requirements**:
+    - The codebase should follow good software engineering principles, making it easy for new developers to add features or fix bugs.
+    - The system should have high cohesion and low coupling between components to facilitate easier updates and maintenance.
+9. **Extensibility Requirements**:
+    - The architecture should allow for the addition of new task types (e.g., recurring tasks) with minimal changes.
+    - The system should allow for integration with third-party tools (e.g., cloud-based storage) to extend its functionality.
+10. **Backup and Recovery**:
+    - The application should have a data backup mechanism, allowing users to recover from data corruption or loss.
 
-*{More to be added}*
+---
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Mainstream OS**: Refers to commonly used operating systems, including Windows, macOS, and Linux distributions.
+* **Task**: A unit of work or activity managed by the Vinegar Task Manager, which can be a Todo, Deadline, or Event.
+* **Todo**: A basic task without any specific time constraints.
+* **Deadline**: A task that needs to be completed by a specific date or time.
+* **Event**: A task that occurs within a specific time frame, with a defined start and end time.
+* **Command**: A user input string that triggers a specific action within the Vinegar application.
+* **User Interface (UI)**: The part of the application that users interact with, which includes graphical components like command boxes and task lists.
+* **CLI (Command Line Interface)**: A text-based user interface through which users interact with the application by typing commands.
+* **Scalability**: The capacity of the system to handle increasing amounts of data or user load without performance degradation.
+* **JavaFX**: A software platform used for creating and delivering desktop applications with graphical user interfaces in Java.
+* **Data Persistence**: The characteristic of data that outlives the execution of the process that created it, usually achieved through saving data to a file or database.
+* **Parser**: A component that interprets user input (commands) and converts them into actions for the application.
+* **Error Handling**: The process of identifying, diagnosing, and responding to errors or exceptions that occur during program execution.
+* **Encryption**: The process of converting information or data into a code, especially to prevent unauthorized access.
+* **Data Backup**: The process of copying and archiving data to prevent loss in case of system failure or data corruption.
+* **Extensibility**: The ability of the software to be extended with new features or components with minimal impact on existing functionality.
+* **Reliability**: The measure of the system’s ability to operate without failure and produce consistent results under specified conditions.
 
---------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
 

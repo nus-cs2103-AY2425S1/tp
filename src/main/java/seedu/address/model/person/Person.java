@@ -18,6 +18,7 @@ public class Person {
 
     // Identity fields
     private final Name name;
+    private final String category;
     private final Phone phone;
     private final Email email;
 
@@ -28,9 +29,10 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, String category, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
+        this.category = category;
         this.phone = phone;
         this.email = email;
         this.address = address;
@@ -40,6 +42,8 @@ public class Person {
     public Name getName() {
         return name;
     }
+
+    public String getCategory() { return this.category; }
 
     public Phone getPhone() {
         return phone;
@@ -107,6 +111,7 @@ public class Person {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
+                .add("category", category)
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
