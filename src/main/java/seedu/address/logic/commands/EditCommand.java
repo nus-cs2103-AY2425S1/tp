@@ -140,6 +140,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
+        private InsurancePlansManager insurancePlans;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {
@@ -154,6 +155,7 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+//            setInsurancePlans(toCopy.insurancePlans);
             setTags(toCopy.tags);
         }
 
@@ -195,6 +197,10 @@ public class EditCommand extends Command {
         public void setAddress(Address address) {
             this.address = address;
         }
+
+//        public void setInsurancePlans(InsurancePlansManager insurancePlans) {
+//            this.insurancePlans = insurancePlans;
+//        }
 
         /**
          * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
@@ -239,6 +245,7 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
+//                    .add("insurancePlans", insurancePlans)
                     .add("tags", tags)
                     .toString();
         }

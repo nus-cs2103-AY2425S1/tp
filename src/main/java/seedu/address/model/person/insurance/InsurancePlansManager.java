@@ -94,7 +94,7 @@ public class InsurancePlansManager {
         }
 
         if (insurancePlans.isEmpty()) {
-            plans.append("None");
+            plans.append("No added plans");
         } else {
             plans.setLength(plans.length() - 2); // Remove trailing ", "
         }
