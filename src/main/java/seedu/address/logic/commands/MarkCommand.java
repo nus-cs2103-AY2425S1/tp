@@ -15,9 +15,9 @@ public class MarkCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks attendance for the contact "
             + "by the index number used in the last person listing and for the tutorial number inputted. "
             + "Parameters: INDEX (must be a positive integer) "
-            + "t/TUTORIAL\n"
+            + "tut/TUTORIAL\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "t/1";
+            + "tut/1";
 
     public static final String MESSAGE_NOT_IMPLEMENTED_YET = "Mark command has not be implemented";
 
