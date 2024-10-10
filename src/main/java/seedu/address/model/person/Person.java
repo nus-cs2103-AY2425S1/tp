@@ -34,7 +34,8 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Job job, Income income, Set<Tag> tags, Remark remark) {
+    public Person(Name name, Phone phone, Email email, Address address, Job job, Income income,
+                  Set<Tag> tags, Remark remark) {
         requireAllNonNull(name, phone, email, address, tags, remark);
         this.name = name;
         this.phone = phone;
@@ -115,8 +116,7 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && job.equals(otherPerson.job)
-                && income.equals(otherPerson.income);
+                && job.equals(otherPerson.job);
     }
 
     @Override
