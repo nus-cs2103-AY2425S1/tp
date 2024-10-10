@@ -9,8 +9,8 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.policy.Policy;
-import seedu.address.model.policy.PolicyType;
 import seedu.address.model.policy.PolicyMap;
+import seedu.address.model.policy.PolicyType;
 import seedu.address.model.tag.Tag;
 
 /**
