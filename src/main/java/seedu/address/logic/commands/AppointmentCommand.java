@@ -70,12 +70,10 @@ public class AppointmentCommand extends Command {
         if (other == this) {
             return true;
         }
-
         // instanceof handles nulls
         if (!(other instanceof AppointmentCommand)) {
             return false;
         }
-
         AppointmentCommand a = (AppointmentCommand) other;
         return index.equals(a.index) && appointment.equals(a.appointment);
     }
