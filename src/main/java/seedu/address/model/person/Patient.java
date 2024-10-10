@@ -2,9 +2,9 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.TreeMap;
-import java.time.LocalDateTime;
 
 import seedu.address.model.tag.Tag;
 
