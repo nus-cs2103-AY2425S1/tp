@@ -19,7 +19,7 @@ public class Transaction {
      * Represents a Transaction in the transaction book.
      *
      * @param person The person involved in this transaction.
-     * @param amount The amount involved in this transcation.
+     * @param amount The amount involved in this transaction.
      * @param description The description of the transaction.
      * @param date The date the transaction has taken place.
      */
