@@ -17,13 +17,13 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 public class ExportCommandTest {
 
     private static final Path projectRootPath = Paths.get(System.getProperty("user.dir"));
-    
+
     private final Path EXPORT_FILE_PATH =
         projectRootPath.resolve("src").resolve("test").resolve("data").resolve("JsonExportTest")
                                                                         .resolve("exported_data.csv");
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    
+
 
 
     @Test
@@ -45,7 +45,7 @@ public class ExportCommandTest {
             Path exportedFilePath = Paths.get(EXPORT_FILE_PATH.toString());
             assertTrue(Files.exists(exportedFilePath));
 
-            
+
             Files.deleteIfExists(exportedFilePath);
         } catch (IOException e) {
             // Handle any IO exception
