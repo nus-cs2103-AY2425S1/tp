@@ -14,5 +14,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_SEX = new Prefix("s/");
     public static final Prefix PREFIX_STUDENT_CLASS = new Prefix("c/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
+    public static final Prefix PREFIX_ECNUMBER = new Prefix("ep/");
     public static final Prefix PREFIX_ECNAME = new Prefix("en/");
+
 }
