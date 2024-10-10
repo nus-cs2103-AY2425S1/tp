@@ -35,7 +35,7 @@ public class FindCommand extends Command {
         model.updateFilteredPersonList(predicate);
 
         if (!model.getFilteredPersonList().isEmpty()) {
-            return new CommandResult(String.format(MESSAGE_FIND_PERSON_SUCCESS, predicate.displayString()));
+            return new CommandResult(String.format(MESSAGE_FIND_PERSON_SUCCESS, predicate.getDisplayString()));
         } else {
             return new CommandResult(MESSAGE_FIND_PERSON_UNSUCCESSFUL);
         }

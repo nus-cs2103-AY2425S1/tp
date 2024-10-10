@@ -42,7 +42,7 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
         return new ToStringBuilder(this).add("keywords", keywords).toString();
     }
 
-    public String displayString() {
+    public String getDisplayString() {
         return String.join(", ", keywords);
     }
 }
