@@ -38,4 +38,13 @@ public class AttendanceTest {
         assertFalse(attendance.equals(new Attendance(false, datetime)));
         assertFalse(attendance.equals(new Attendance(true, otherDatetime)));
     }
+
+    public void toStringMethod() {
+        LocalDateTime datetime = LocalDateTime.of(2024, 1, 1, 12, 0);
+        Attendance attendance = new Attendance(true, datetime);
+        assertTrue(attendance.toString().equals("01/01/2024 12:00 Attended"));
+
+        attendance = new Attendance(false, datetime);
+        assertTrue(attendance.toString().equals("01/01/2024 12:00 Absent"));
+    }
 }
