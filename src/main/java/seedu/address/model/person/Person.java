@@ -55,6 +55,10 @@ public class Person {
         return address;
     }
 
+    public GradeList getGradeList() {
+        return gradeList;
+    }
+
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
