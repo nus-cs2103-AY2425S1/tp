@@ -108,6 +108,22 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Id} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withId(String id) {
+        this.id = new Id(id);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Ward} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withWard(String ward) {
+        this.ward = new Ward(ward);
+        return this;
+    }
+
     public Person build() {
         return new Person(name);
     }
