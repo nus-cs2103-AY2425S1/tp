@@ -56,7 +56,7 @@ public class Person {
     }
 
     public Person setTags(Set<Tag> newTags) {
-        return new Person(this.name, this.phone, this.email, this.address, newTags);
+        return new Person(this.name, this.studentClass, this.phone, newTags);
     }
     /**
      * Returns true if both persons have the same name.
