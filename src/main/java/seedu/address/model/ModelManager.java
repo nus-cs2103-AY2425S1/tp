@@ -95,6 +95,7 @@ public class ModelManager implements Model {
 
     @Override
     public void deletePerson(Person target) {
+        requireNonNull(target);
         addressBook.removePerson(target);
     }
 
