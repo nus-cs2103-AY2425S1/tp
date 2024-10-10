@@ -15,7 +15,7 @@ public class Date {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Dates should be in the format dd MMM yyyy (e.g. 24 Sep 2024)";
-    
+
     // Desired date format
     public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy");
 

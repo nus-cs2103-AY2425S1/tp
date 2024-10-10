@@ -19,6 +19,7 @@ public class Session {
     // Identity fields
     private final SessionName sessionName;
     private final int points;
+    private final Date date;
 
     // Data fields
     private final Set<Member> members = new HashSet<>();
@@ -26,9 +27,10 @@ public class Session {
     /**
      * Every field must be present and not null.
      */
-    public Session(SessionName sessionName, int points, Set<Member> members) {
-        requireAllNonNull(sessionName, points, members);
+    public Session(SessionName sessionName, Date date, int points, Set<Member> members) {
+        requireAllNonNull(sessionName, date, points, members);
         this.sessionName = sessionName;
+        this.date = date;
         this.points = points;
         this.members.addAll(members);
     }
@@ -55,7 +57,7 @@ public class Session {
      * @param newMembers New set of members.
      */
     public Session updateMembers(Set<Member> newMembers) {
-        return new Session(this.sessionName, this.points, newMembers);
+        return new Session(this.sessionName, this.date, this.points, newMembers);
     }
 
     /**
