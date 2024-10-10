@@ -66,7 +66,13 @@ public class LogicManagerTest {
     @Test
     public void execute_validCommand_success() throws Exception {
         String listCommand = ListCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
+        int numberOfPersons = model.getAddressBook().getPersonList().size();
+        String numberOfContacts = ", there are currently " + numberOfPersons + " contacts in your address book";
+        if (numberOfPersons == 0) {
+            assertCommandSuccess(listCommand, ListCommand.MESSAGE_EMPTY, model);
+        } else {
+            assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS + numberOfContacts, model);
+        }
     }
 
     @Test
