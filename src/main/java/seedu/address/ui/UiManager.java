@@ -47,6 +47,9 @@ public class UiManager implements Ui {
         alert.getDialogPane().setId(ALERT_DIALOG_PANE_FIELD_ID);
         alert.showAndWait();
     }
+    void showAlertDialogAndWait(Alert.AlertType type, String title, String headerText, String contentText) {
+        showAlertDialogAndWait(mainWindow.getPrimaryStage(), type, title, headerText, contentText);
+    }
 
     @Override
     public void start(Stage primaryStage) {
@@ -68,10 +71,6 @@ public class UiManager implements Ui {
 
     private Image getImage(String imagePath) {
         return new Image(MainApp.class.getResourceAsStream(imagePath));
-    }
-
-    void showAlertDialogAndWait(Alert.AlertType type, String title, String headerText, String contentText) {
-        showAlertDialogAndWait(mainWindow.getPrimaryStage(), type, title, headerText, contentText);
     }
 
     /**
