@@ -94,7 +94,13 @@ public abstract class Role {
      * @param person the person to be removed
      */
     public void removePerson(Person person) {
+        if (!this.personList.contains(person)) {
+            throw new IllegalArgumentException("Person not found in role");
+        }
         this.personList.remove(person);
+        //TODO: maybe exception if not found? unsure currently
+        // originally tagged
+
     }
     /**
      * Returns the people tagged under the role
@@ -104,7 +110,7 @@ public abstract class Role {
         return this.personList;
     }
 
-    public boolean isRole(Person person) {
+    public boolean isTagged(Person person) {
         return this.personList.contains(person);
     }
 }

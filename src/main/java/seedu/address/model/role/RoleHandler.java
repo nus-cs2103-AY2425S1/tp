@@ -63,6 +63,6 @@ public class RoleHandler {
         if (role == null) {
             throw new InvalidRoleException();
         }
-        return role.isRole(person);
+        return role.isTagged(person);
     }
 }
