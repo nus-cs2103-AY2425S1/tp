@@ -6,19 +6,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.CARL;
-import static seedu.address.testutil.TypicalPersons.ELLE;
-import static seedu.address.testutil.TypicalPersons.FIONA;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
-import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.NameContainsSubstringPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FilterCommand}.
@@ -29,10 +26,10 @@ public class FilterCommandTest {
 
     @Test
     public void equals() {
-        NameContainsKeywordsPredicate firstPredicate =
-                new NameContainsKeywordsPredicate("first");
-        NameContainsKeywordsPredicate secondPredicate =
-                new NameContainsKeywordsPredicate("second");
+        NameContainsSubstringPredicate firstPredicate =
+                new NameContainsSubstringPredicate("first");
+        NameContainsSubstringPredicate secondPredicate =
+                new NameContainsSubstringPredicate("second");
 
         FilterCommand findFirstCommand = new FilterCommand(firstPredicate);
         FilterCommand findSecondCommand = new FilterCommand(secondPredicate);
@@ -57,7 +54,7 @@ public class FilterCommandTest {
 //    @Test
 //    public void execute_zeroKeywords_noPersonFound() {
 //        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-//        NameContainsKeywordsPredicate predicate = preparePredicate(" ");
+//        NameContainsSubstringPredicate predicate = preparePredicate(" ");
 //        FilterCommand command = new FilterCommand(predicate);
 //        expectedModel.updateFilteredPersonList(predicate);
 //        assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -67,7 +64,7 @@ public class FilterCommandTest {
     @Test
     public void execute_singleKeyword_singlePersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
-        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz");
+        NameContainsSubstringPredicate predicate = preparePredicate("Kurz");
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -76,16 +73,16 @@ public class FilterCommandTest {
 
     @Test
     public void toStringMethod() {
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate("keyword");
+        NameContainsSubstringPredicate predicate = new NameContainsSubstringPredicate("keyword");
         FilterCommand FilterCommand = new FilterCommand(predicate);
         String expected = FilterCommand.class.getCanonicalName() + "{predicates=" + predicate + "}";
         assertEquals(expected, FilterCommand.toString());
     }
 
     /**
-     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
+     * Parses {@code userInput} into a {@code NameContainsSubstringPredicate}.
      */
-    private NameContainsKeywordsPredicate preparePredicate(String userInput) {
-        return new NameContainsKeywordsPredicate(userInput);
+    private NameContainsSubstringPredicate preparePredicate(String userInput) {
+        return new NameContainsSubstringPredicate(userInput);
     }
 }

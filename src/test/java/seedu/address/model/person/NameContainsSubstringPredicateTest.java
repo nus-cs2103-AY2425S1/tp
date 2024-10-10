@@ -4,31 +4,27 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.NameContainsSubstringPredicate;
 import seedu.address.testutil.PersonBuilder;
 
-public class NameContainsKeywordsPredicateTest {
+public class NameContainsSubstringPredicateTest {
 
     @Test
     public void equals() {
         String firstPredicateKeyword = "first";
         String secondPredicateKeyword = "first second";
 
-        NameContainsKeywordsPredicate firstPredicate = new NameContainsKeywordsPredicate(firstPredicateKeyword);
-        NameContainsKeywordsPredicate secondPredicate = new NameContainsKeywordsPredicate(secondPredicateKeyword);
+        NameContainsSubstringPredicate firstPredicate = new NameContainsSubstringPredicate(firstPredicateKeyword);
+        NameContainsSubstringPredicate secondPredicate = new NameContainsSubstringPredicate(secondPredicateKeyword);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        NameContainsKeywordsPredicate firstPredicateCopy = new NameContainsKeywordsPredicate(firstPredicateKeyword);
+        NameContainsSubstringPredicate firstPredicateCopy = new NameContainsSubstringPredicate(firstPredicateKeyword);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -44,21 +40,21 @@ public class NameContainsKeywordsPredicateTest {
     @Test
     public void test_nameContainsSubstring_returnsTrue() {
         // Partial name match
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate("Alice");
+        NameContainsSubstringPredicate predicate = new NameContainsSubstringPredicate("Alice");
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
         // Full name match
-        predicate = new NameContainsKeywordsPredicate("Alice Bob");
+        predicate = new NameContainsSubstringPredicate("Alice Bob");
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
         // Mixed-case keyword
-        predicate = new NameContainsKeywordsPredicate("aLIce bOB");
+        predicate = new NameContainsSubstringPredicate("aLIce bOB");
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
     }
 
     @Test
     public void test_emptySubstring_throwsException() {
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate("");
+        NameContainsSubstringPredicate predicate = new NameContainsSubstringPredicate("");
         Assertions.assertThrows(IllegalArgumentException.class,
                 () -> predicate.test(new PersonBuilder().withName("Alice").build()));
     }
@@ -66,25 +62,25 @@ public class NameContainsKeywordsPredicateTest {
     @Test
     public void test_nameDoesNotContainSubstring_returnsFalse() {
         // Non-matching substring
-        NameContainsKeywordsPredicate  predicate = new NameContainsKeywordsPredicate("Carol");
+        NameContainsSubstringPredicate predicate = new NameContainsSubstringPredicate("Carol");
         assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
         // Substring has a single matching word but substring does not match name
-        predicate = new NameContainsKeywordsPredicate("Bob Carol");
+        predicate = new NameContainsSubstringPredicate("Bob Carol");
         assertFalse(predicate.test(new PersonBuilder().withName("Alice Carol").build()));
 
         // Substring matches phone but does not match name
-        predicate = new NameContainsKeywordsPredicate("91234567");
+        predicate = new NameContainsSubstringPredicate("91234567");
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("91234567")
                 .withEmail("alice@email.com").withAddress("Main Street").build()));
 
         // Substring matches email but does not match name
-        predicate = new NameContainsKeywordsPredicate("alice@email.com");
+        predicate = new NameContainsSubstringPredicate("alice@email.com");
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("91234567")
                 .withEmail("alice@email.com").withAddress("Main Street").build()));
 
         // Substring matches address but does not match name
-        predicate = new NameContainsKeywordsPredicate("Main Street");
+        predicate = new NameContainsSubstringPredicate("Main Street");
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("91234567")
                 .withEmail("alice@email.com").withAddress("Main Street").build()));
     }
@@ -92,9 +88,9 @@ public class NameContainsKeywordsPredicateTest {
     @Test
     public void toStringMethod() {
         String keyword = "keyword1";
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(keyword);
+        NameContainsSubstringPredicate predicate = new NameContainsSubstringPredicate(keyword);
 
-        String expected = NameContainsKeywordsPredicate.class.getCanonicalName() + "{keyword=" + keyword + "}";
+        String expected = NameContainsSubstringPredicate.class.getCanonicalName() + "{substring=" + keyword + "}";
         assertEquals(expected, predicate.toString());
     }
 }

@@ -10,12 +10,11 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.NameContainsSubstringPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -118,7 +117,7 @@ public class ModelManagerTest {
 
         // different filteredList -> returns false
         String keyword = ALICE.getName().fullName;
-        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(keyword));
+        modelManager.updateFilteredPersonList(new NameContainsSubstringPredicate(keyword));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
