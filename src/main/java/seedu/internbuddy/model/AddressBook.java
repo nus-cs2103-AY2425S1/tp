@@ -71,15 +71,15 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Adds a company to the address book.
      * The company must not already exist in the address book.
      */
-    public void addCompany(Company p) {
-        companies.add(p);
+    public void addCompany(Company c) {
+        companies.add(c);
     }
 
     /**
      * Replaces the given company {@code target} in the list with {@code editedCompany}.
      * {@code target} must exist in the address book.
-     * The company identity of {@code editedCompany} must not be the same as another
-     * existing company in the address book.
+     * The company identity of {@code editedCompany}
+     * must not be the same as another existing company in the address book.
      */
     public void setCompany(Company target, Company editedCompany) {
         requireNonNull(editedCompany);

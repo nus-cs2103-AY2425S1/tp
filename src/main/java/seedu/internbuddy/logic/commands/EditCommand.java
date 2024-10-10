@@ -103,8 +103,9 @@ public class EditCommand extends Command {
         Email updatedEmail = editCompanyDescriptor.getEmail().orElse(companyToEdit.getEmail());
         Address updatedAddress = editCompanyDescriptor.getAddress().orElse(companyToEdit.getAddress());
         Set<Tag> updatedTags = editCompanyDescriptor.getTags().orElse(companyToEdit.getTags());
+        Status updatedStatus = editCompanyDescriptor.getStatus().orElse(companyToEdit.getStatus());
 
-        return new Company(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Company(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedStatus);
     }
 
     @Override
@@ -202,6 +203,14 @@ public class EditCommand extends Command {
          */
         public void setTags(Set<Tag> tags) {
             this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        }
+
+        public void setStatus(Status status) {
+            this.status = status;
+        }
+
+        public Optional<Status> getStatus() {
+            return Optional.ofNullable(status);
         }
 
         /**

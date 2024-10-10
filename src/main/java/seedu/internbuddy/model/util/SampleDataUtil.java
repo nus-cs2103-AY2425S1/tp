@@ -11,6 +11,7 @@ import seedu.internbuddy.model.company.Company;
 import seedu.internbuddy.model.company.Email;
 import seedu.internbuddy.model.company.Name;
 import seedu.internbuddy.model.company.Phone;
+import seedu.internbuddy.model.company.Status;
 import seedu.internbuddy.model.tag.Tag;
 
 /**
@@ -19,24 +20,24 @@ import seedu.internbuddy.model.tag.Tag;
 public class SampleDataUtil {
     public static Company[] getSampleCompanies() {
         return new Company[] {
-            new Company(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new Address("Blk 30 Geylang Street 29, #06-40"),
-                getTagSet("friends")),
-            new Company(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                getTagSet("colleagues", "friends")),
-            new Company(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                getTagSet("neighbours")),
-            new Company(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getTagSet("family")),
-            new Company(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new Address("Blk 47 Tampines Street 20, #17-35"),
-                getTagSet("classmates")),
-            new Company(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet("colleagues"))
+            new Company(new Name("Google"), new Phone("6502530000"), new Email("contact@google.com"),
+                new Address("1600 Amphitheatre Parkway, Mountain View, CA 94043"),
+                getTagSet("tech", "search"), new Status("INTERESTED")),
+            new Company(new Name("Microsoft"), new Phone("4258828080"), new Email("contact@microsoft.com"),
+                new Address("One Microsoft Way, Redmond, WA 98052"),
+                getTagSet("tech", "software"), new Status("INTERESTED")),
+            new Company(new Name("Apple"), new Phone("4089961010"), new Email("contact@apple.com"),
+                new Address("One Apple Park Way, Cupertino, CA 95014"),
+                getTagSet("tech", "hardware"), new Status("INTERESTED")),
+            new Company(new Name("Amazon"), new Phone("2062661000"), new Email("contact@amazon.com"),
+                new Address("410 Terry Ave N, Seattle, WA 98109"),
+                getTagSet("ecommerce", "cloud"), new Status("INTERESTED")),
+            new Company(new Name("Facebook"), new Phone("6505434800"), new Email("contact@fb.com"),
+                new Address("1 Hacker Way, Menlo Park, CA 94025"),
+                getTagSet("social", "tech"), new Status("INTERESTED")),
+            new Company(new Name("Netflix"), new Phone("4085403700"), new Email("contact@netflix.com"),
+                new Address("100 Winchester Circle, Los Gatos, CA 95032"),
+                getTagSet("entertainment", "streaming"), new Status("INTERESTED"))
         };
     }
 

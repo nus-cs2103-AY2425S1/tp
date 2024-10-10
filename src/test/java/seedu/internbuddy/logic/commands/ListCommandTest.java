@@ -1,7 +1,7 @@
 package seedu.internbuddy.logic.commands;
 
 import static seedu.internbuddy.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.internbuddy.logic.commands.CommandTestUtil.showcompanyAtIndex;
+import static seedu.internbuddy.logic.commands.CommandTestUtil.showCompanyAtIndex;
 import static seedu.internbuddy.testutil.TypicalCompanies.getTypicalAddressBook;
 import static seedu.internbuddy.testutil.TypicalIndexes.INDEX_FIRST_COMPANY;
 
@@ -33,7 +33,7 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        showcompanyAtIndex(model, INDEX_FIRST_COMPANY);
+        showCompanyAtIndex(model, INDEX_FIRST_COMPANY);
         assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }

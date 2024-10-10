@@ -6,7 +6,7 @@ import seedu.internbuddy.model.company.Company;
 /**
  * A utility class to help with building Addressbook objects.
  * Example usage: <br>
- *     {@code AddressBook ab = new AddressBookBuilder().withcompany("John", "Doe").build();}
+ *     {@code AddressBook ab = new AddressBookBuilder().withCompany("TechCorp").build();}
  */
 public class AddressBookBuilder {
 
