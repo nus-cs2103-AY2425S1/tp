@@ -15,12 +15,4 @@ public class AddBuyCommandParser implements Parser<Command> {
     public Command parse(String args) throws ParseException {
         throw new ParseException("not implemented yet");
     }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return false;
-    }
 }
