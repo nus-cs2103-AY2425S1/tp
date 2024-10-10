@@ -5,6 +5,9 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
+/**
+ * Adds an order under a specified person.
+ */
 public class AddOrderCommand extends Command {
 
     @Override
