@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddContactCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Person;
 import seedu.address.model.skill.Skill;
@@ -23,6 +24,13 @@ public class PersonUtil {
      */
     public static String getAddCommand(Person person) {
         return AddCommand.COMMAND_WORD + " " + getPersonDetails(person);
+    }
+
+    /**
+     * Returns an add contact command string for adding the {@code person}
+     */
+    public static String getAddContactCommand(Person person) {
+        return AddContactCommand.COMMAND_WORD + " " + getPersonDetails(person);
     }
 
     /**

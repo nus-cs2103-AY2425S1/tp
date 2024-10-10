@@ -16,7 +16,6 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -41,7 +40,10 @@ public class AddContactCommandTest {
         CommandResult commandResult = new AddContactCommand(validPerson).execute(modelStub);
 
         assertEquals(
-                String.format(AddContactCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+                String.format(AddContactCommand.MESSAGE_SUCCESS, validPerson.getName(),
+                        validPerson.getPhone(),
+                        validPerson.getEmail(),
+                        validPerson.getRole()),
                 commandResult.getFeedbackToUser()
         );
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
@@ -62,14 +64,14 @@ public class AddContactCommandTest {
                                           .build();
         Person bob = new PersonBuilder().withName("Bob")
                                         .build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        AddContactCommand addAliceCommand = new AddContactCommand(alice);
+        AddContactCommand addBobCommand = new AddContactCommand(bob);
 
         // same object -> returns true
         assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
+        AddContactCommand addAliceCommandCopy = new AddContactCommand(alice);
         assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false
@@ -84,8 +86,8 @@ public class AddContactCommandTest {
 
     @Test
     public void toStringMethod() {
-        AddCommand addCommand = new AddCommand(ALICE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
+        AddContactCommand addCommand = new AddContactCommand(ALICE);
+        String expected = AddContactCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
         assertEquals(expected, addCommand.toString());
     }
 
