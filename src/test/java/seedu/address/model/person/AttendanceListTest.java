@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -23,6 +24,25 @@ public class AttendanceListTest {
     @Test
     public void removeAttendance_indexOutOfBounds_throwsAttendanceNotFoundException() {
         // TODO: Removing an index greater than the list size or less than 0 should throw AttendanceNotFoundException
+    }
+
+    @Test
+    public void equals() {
+        AttendanceList attendanceList = new AttendanceList();
+        attendanceList.addAttendance(new Attendance(true, LocalDateTime.of(2024, 1, 1, 12, 0)));
+        attendanceList.addAttendance(new Attendance(false, LocalDateTime.of(2024, 1, 8, 12, 0)));
+
+        // same values -> returns true
+        AttendanceList sameAttendanceList = new AttendanceList();
+        sameAttendanceList.addAttendance(new Attendance(true, LocalDateTime.of(2024, 1, 1, 12, 0)));
+        sameAttendanceList.addAttendance(new Attendance(false, LocalDateTime.of(2024, 1, 8, 12, 0)));
+        assertTrue(attendanceList.equals(sameAttendanceList));
+
+        // at least one different value -> returns false
+        AttendanceList differentAttendanceList = new AttendanceList();
+        differentAttendanceList.addAttendance(new Attendance(false, LocalDateTime.of(2024, 1, 1, 12, 0)));
+        differentAttendanceList.addAttendance(new Attendance(false, LocalDateTime.of(2024, 1, 8, 12, 0)));
+        assertFalse(attendanceList.equals(differentAttendanceList));
     }
 
     @Test
