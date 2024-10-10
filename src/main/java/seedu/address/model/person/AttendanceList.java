@@ -39,15 +39,23 @@ public class AttendanceList {
      * @param attendance The attendance to be removed. Must not be null.
      * @throws NullPointerException if the specified attendance is null.
      */
-    public void removeAttendance(Attendance attendance) {
+    public void removeAttendance(Attendance attendance) throws NullPointerException {
         requireNonNull(attendance);
         attendanceList.remove(attendance);
     }
 
     @Override
     public String toString() {
-        // TODO: Implement toString() method
-        return null;
+        StringBuilder sb = new StringBuilder();
+        for (Attendance attendance : attendanceList) {
+            sb.append(attendance.toString());
+            sb.append("\n");
+        }
+        return sb.toString();
     }
 
+    @Override
+    public int hashCode() {
+        return this.toString().hashCode();
+    }
 }

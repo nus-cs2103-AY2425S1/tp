@@ -3,41 +3,47 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a Student's Attendance.
  */
 public class Attendance {
     private final LocalDateTime date;
-    private final Boolean hasAttended;
+    private final boolean hasAttended;
 
     /**
      * Represents an Attendance record for a person.
-     * Each Attendance object stores whether the person has attended and the date of attendance.
+     * Each Attendance object stores whether the person has attended and the date of
+     * attendance.
      *
      * @param hasAttended A Boolean indicating if the person has attended.
-     * @param date The date and time of the attendance.
-     * @throws NullPointerException if {@code hasAttended} or {@code date} is null.
+     * @param date        The date and time of the attendance.
+     * @throws NullPointerException if {@code date} is null.
      */
-    public Attendance(Boolean hasAttended, LocalDateTime date) {
+    public Attendance(boolean hasAttended, LocalDateTime date) throws NullPointerException {
         requireNonNull(date);
-        requireNonNull(hasAttended);
         this.date = date;
         this.hasAttended = hasAttended;
     }
 
     @Override
     public String toString() {
-        // TODO: Implement toString() method
-        return null;
+        return this.date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")) + " "
+                + (hasAttended ? "Attended" : "Absent");
     }
 
     @Override
     public boolean equals(Object other) {
         if (other instanceof Attendance a) {
-            return a.date.equals(date) && a.hasAttended.equals(hasAttended);
+            return a.date.equals(date) && a.hasAttended == this.hasAttended;
         }
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return this.toString().hashCode();
     }
 
 }
