@@ -3,12 +3,12 @@ package seedu.address.model.delivery;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
-import seedu.address.model.delivery.DeliveryTime;
 
 /**
- * Represents a Delivery in the system.
+ * Represents a Delivery in the application.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Delivery {

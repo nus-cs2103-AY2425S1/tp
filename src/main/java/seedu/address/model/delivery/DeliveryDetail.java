@@ -1,5 +1,10 @@
 package seedu.address.model.delivery;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+/**
+ * Represents a details in regard to a delivery in the system.
+ */
 public class DeliveryDetail {
     private final String title;
     private final String description;
@@ -8,7 +13,11 @@ public class DeliveryDetail {
 
     private final double cost;
 
+    /**
+     * Every field must be present and not null.
+     */
     public DeliveryDetail(String name, String description, Double quantity, Double cost) {
+        requireAllNonNull(name, description, quantity, cost);
         this.title = name;
         this.description = description;
         this.quantity = quantity;
