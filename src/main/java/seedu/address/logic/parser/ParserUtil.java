@@ -122,7 +122,12 @@ public class ParserUtil {
         return tagSet;
     }
 
-
+    /**
+     * Parses a {@code String id} into a formatted {@code String}.
+     * @param id in the form of a string
+     * @return Formatted string
+     * @throws ParseException
+     */
     public static String parseId(String id) throws ParseException {
         requireNonNull(id);
         String formattedId = id.trim().toUpperCase();

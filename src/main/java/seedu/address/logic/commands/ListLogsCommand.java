@@ -1,10 +1,8 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.person.IdentityNumber;
 import seedu.address.model.Model;
+import seedu.address.model.person.IdentityNumber;
 
 /**
  * Lists all persons in the address book to the user.
@@ -22,6 +20,9 @@ public class ListLogsCommand extends Command {
             + "Example: " + COMMAND_WORD + " S1234567A";
     private final IdentityNumber identityNumber;
 
+    /**
+     * Creates a ListLogsCommand to list the logs of the specified person
+     */
     public ListLogsCommand(String id) {
         try {
             this.identityNumber = new IdentityNumber(id);
