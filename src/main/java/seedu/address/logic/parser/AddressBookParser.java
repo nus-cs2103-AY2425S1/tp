@@ -78,7 +78,7 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
-        case PaidCommand.COMMAND_WORD;
+            case PaidCommand.COMMAND_WORD:
             return new PaidCommand();
 
         default:
