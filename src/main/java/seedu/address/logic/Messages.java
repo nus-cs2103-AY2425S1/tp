@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Tag;
 
 /**
  * Container for user visible messages.
@@ -69,5 +70,12 @@ public class Messages {
      */
     public static String getDeletionMessage(Person person) {
         return "Deleted Person:\n" + formatForDeletion(person);
+    }
+
+    /**
+     * Formats the {@code person} to display their tags.
+     */
+    public static String formatForTags(Person person) {
+        return person.getTags().stream().map(Tag::getTagName).collect(Collectors.joining(", "));
     }
 }
