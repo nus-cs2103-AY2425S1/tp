@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
@@ -27,6 +29,7 @@ public class StorageManager implements Storage {
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
+
 
     // ================ UserPrefs methods ==============================
 
@@ -73,6 +76,22 @@ public class StorageManager implements Storage {
     public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
         addressBookStorage.saveAddressBook(addressBook, filePath);
+    }
+
+    /**
+     * Saves the given CSV content to a file.
+     *
+     * @param csvContent CSV content to be saved.
+     */
+    public static void saveCsvToFile(String csvContent) {
+        File file = new File("data/exported.csv");
+
+        try (FileWriter fileWriter = new FileWriter(file)) {
+            fileWriter.write(csvContent);
+            System.out.println("CSV file saved to: data/exported.csv");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
