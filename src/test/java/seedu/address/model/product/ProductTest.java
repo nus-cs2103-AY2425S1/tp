@@ -2,8 +2,12 @@ package seedu.address.model.product;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.address.model.product.exceptions.DuplicateProductException;
+import seedu.address.model.product.exceptions.ProductNotFoundException;
 
 public class ProductTest {
 
@@ -64,7 +68,46 @@ public class ProductTest {
         assertTrue(product1.hashCode() == product3.hashCode());
 
         // different values -> returns different hashcode
-
         assertFalse(product1.hashCode() == product2.hashCode());
+    }
+
+    @Test
+    public void toStringTest() {
+        ProductName productName1 = new ProductName("Product A");
+        Product product1 = new Product(productName1);
+
+        String expectedString = "Product{name=Product A}";
+        assertTrue(product1.toString().equals(expectedString));
+    }
+
+    @Test
+    public void productNameTest() {
+        // valid name
+        ProductName validName = new ProductName("Valid Name");
+        assertTrue(validName.toString().equals("Valid Name"));
+
+        // invalid name
+        assertThrows(NullPointerException.class, () -> new ProductName(null));
+        assertThrows(IllegalArgumentException.class, () -> new ProductName(""));
+    }
+
+    @Test
+    public void uniqueProductListTest() {
+        UniqueProductList uniqueProductList = new UniqueProductList();
+        ProductName productName1 = new ProductName("Product A");
+        Product product1 = new Product(productName1);
+        // add product
+        uniqueProductList.add(product1);
+        assertTrue(uniqueProductList.contains(product1));
+
+        // add duplicate product -> throws exception
+        assertThrows(DuplicateProductException.class, () -> uniqueProductList.add(product1));
+
+        // remove product
+        uniqueProductList.remove(product1);
+        assertFalse(uniqueProductList.contains(product1));
+
+        // remove non-existent product -> throws exception
+        assertThrows(ProductNotFoundException.class, () -> uniqueProductList.remove(product1));
     }
 }
