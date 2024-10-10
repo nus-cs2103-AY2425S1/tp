@@ -131,6 +131,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.hashCode();
     }
 
+    /**
+     * Find person given a predicate
+     */
     public Optional<Person> findPerson(Predicate<Person> predicate) {
         return StreamSupport
                 .stream(persons.spliterator(), false)
