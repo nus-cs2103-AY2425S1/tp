@@ -12,6 +12,9 @@ import keycontacts.model.lesson.Day;
 import keycontacts.model.lesson.RegularLesson;
 import keycontacts.model.lesson.Time;
 
+/**
+ * Parses input arguments and creates a new ScheduleCommand object
+ */
 public class ScheduleCommandParser {
     /**
      * Parses the given {@code String} of arguments in the context of the ScheduleCommand
@@ -22,11 +25,6 @@ public class ScheduleCommandParser {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_DAY, PREFIX_START_TIME, PREFIX_END_TIME);
 
-        if (argMultimap.arePrefixesPresent(PREFIX_DAY, PREFIX_START_TIME, PREFIX_END_TIME)
-                || !argMultimap.isPreamblePresent()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE));
-        }
-
         Index index;
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
@@ -34,7 +32,11 @@ public class ScheduleCommandParser {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor( PREFIX_DAY, PREFIX_START_TIME, PREFIX_END_TIME);
+        if (!argMultimap.arePrefixesPresent(PREFIX_DAY, PREFIX_START_TIME, PREFIX_END_TIME)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE));
+        }
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DAY, PREFIX_START_TIME, PREFIX_END_TIME);
         Day lessonDay = ParserUtil.parseDay(argMultimap.getValue(PREFIX_DAY).get());
         Time startTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_START_TIME).get());
         Time endTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_END_TIME).get());

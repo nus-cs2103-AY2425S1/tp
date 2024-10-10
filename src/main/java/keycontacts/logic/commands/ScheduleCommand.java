@@ -26,8 +26,8 @@ public class ScheduleCommand extends Command {
             + ": Schedules the regular lesson for the student identified by the index number"
             + " used in the displayed student list. This will overwrite the student's existing regular lesson,"
             + " if it exists. The scheduled lesson cannot clash with any existing lessons for other students.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_DAY + "DAY"
+            + " Parameters: INDEX (must be a positive integer) "
+            + PREFIX_DAY + "DAY "
             + PREFIX_START_TIME + "START_TIME "
             + PREFIX_END_TIME + "END_TIME\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -35,12 +35,16 @@ public class ScheduleCommand extends Command {
             + PREFIX_START_TIME + "16:00"
             + PREFIX_END_TIME + "18:00";
 
-    public static final String MESSAGE_SCHEDULE_LESSON_SUCCESS = "Scheduled lesson at $$$ for: %1$s";
+    public static final String MESSAGE_SCHEDULE_LESSON_SUCCESS = "Scheduled lesson for student: %1$s";
+    public static final String MESSAGE_LESSON_UNCHANGED = "Lesson for the student is already at that time!";
     public static final String MESSAGE_LESSON_CLASH = "There is a clashing lesson at that time!";
 
     private final Index targetIndex;
     private final RegularLesson regularLesson;
 
+    /**
+     * Creates a ScheduleCommand to schedule the given {@code regularLesson}
+     */
     public ScheduleCommand(Index targetIndex, RegularLesson regularLesson) {
         this.targetIndex = targetIndex;
         this.regularLesson = regularLesson;
@@ -56,6 +60,12 @@ public class ScheduleCommand extends Command {
         }
 
         Student studentToUpdate = lastShownList.get(targetIndex.getZeroBased());
+        Student updatedStudent = studentToUpdate.withRegularLesson(regularLesson);
+        if (studentToUpdate.equals(updatedStudent)) {
+            throw new CommandException(MESSAGE_LESSON_UNCHANGED);
+        }
+        model.setStudent(studentToUpdate, updatedStudent);
+
         return new CommandResult(String.format(MESSAGE_SCHEDULE_LESSON_SUCCESS, Messages.format(studentToUpdate)));
     }
 
@@ -70,7 +80,8 @@ public class ScheduleCommand extends Command {
             return false;
         }
 
-        return targetIndex.equals(otherScheduleCommand.targetIndex);
+        return targetIndex.equals(otherScheduleCommand.targetIndex)
+                && regularLesson.equals(otherScheduleCommand.regularLesson);
     }
 
     @Override

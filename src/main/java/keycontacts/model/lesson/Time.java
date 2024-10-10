@@ -13,12 +13,12 @@ import java.time.format.DateTimeFormatter;
 public class Time {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Lesson time should be in 24 hour format (e.g. 1600)";
+            "Lesson time should be in 24 hour format (e.g. 16:00)";
 
     /*
      * 24-hour time format.
      */
-    public static final String VALIDATION_REGEX = "^(?:[01]\\d|2[0-3])[0-5]\\d$";
+    public static final String VALIDATION_REGEX = "^(?:[01]\\d|2[0-3]):[0-5]\\d$";
 
     private final LocalTime time;
 
@@ -30,7 +30,7 @@ public class Time {
     public Time(String time) {
         requireNonNull(time);
         checkArgument(isValidTime(time), MESSAGE_CONSTRAINTS);
-        this.time = LocalTime.parse(time, DateTimeFormatter.ofPattern("HHmm"));
+        this.time = LocalTime.parse(time, DateTimeFormatter.ofPattern("HH:mm"));
     }
 
     /**

@@ -39,6 +39,21 @@ public abstract class Lesson {
     }
 
     @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Lesson)) {
+            return false;
+        }
+
+        Lesson otherLesson = (Lesson) other;
+        return startTime.equals(otherLesson.startTime) && endTime.equals(otherLesson.endTime);
+    }
+
+    @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("startTime", startTime)
@@ -46,4 +61,10 @@ public abstract class Lesson {
                 .toString();
     }
 
+    /**
+     * Returns a user-friendly display message of the lesson.
+     */
+    public String toDisplay() {
+        return startTime.toString() + " - " + endTime.toString();
+    }
 }

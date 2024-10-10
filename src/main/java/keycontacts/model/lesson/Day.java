@@ -13,8 +13,8 @@ import java.util.Map;
 public class Day {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Days should be one of the days of the week (e.g. Monday, Tuesday etc.), or its common three letter" +
-                    " abbreviation (e.g. Mon, Tue etc.)";
+            "Days should be one of the days of the week (e.g. Monday, Tuesday etc.), or its common three letter"
+                    + " abbreviation (e.g. Mon, Tue etc.)";
 
     /*
      * Either day of the week, or three letter abbreviation, case-insensitive.
@@ -52,7 +52,7 @@ public class Day {
     private DayOfWeek convertToDayOfWeek(String day) {
         String lowerCaseDay = day.toLowerCase();
         String fullDay = ABBREVIATION_TO_DAY_MAP.getOrDefault(lowerCaseDay, lowerCaseDay.toLowerCase());
-        return DayOfWeek.valueOf(fullDay);
+        return DayOfWeek.valueOf(fullDay.toUpperCase());
     }
 
     /**
