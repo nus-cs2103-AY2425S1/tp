@@ -48,13 +48,6 @@
                 <padding>
                     <Insets left="8"/>
                 </padding>
-                <Label text="Address:    " styleClass="details_field_headers" />
-                <Label fx:id="address" styleClass="details_small_label" text="\$address" />
-            </HBox>
-            <HBox spacing="5" alignment="CENTER_LEFT">
-                <padding>
-                    <Insets left="8"/>
-                </padding>
                 <Label text="Email:          " styleClass="details_field_headers" />
                 <Label fx:id="email" styleClass="details_small_label" text="\$email" />
             </HBox>

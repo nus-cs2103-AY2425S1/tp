@@ -59,11 +59,11 @@ public class CommandResult {
         return exit;
     }
 
-    public boolean getStudent() {
+    public boolean isStudent() {
         return student != null;
     }
 
-    public Student getCurStudent() {
+    public Student getStudent() {
         return student;
     }
 
