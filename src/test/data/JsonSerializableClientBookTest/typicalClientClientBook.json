@@ -1,32 +1,40 @@
 {
-  "_comment": "ClientBook save file which contains the same Person values as in TypicalClient#getTypicalClientBook()",
-  "persons" : [ {
+  "_comment": "ClientBook save file which contains the same Client values as in TypicalClients#getTypicalClientBook()",
+  "clients" : [ {
     "name" : "Alice Pauline",
     "phone" : "94351253",
-    "email" : "alice@example.com"
+    "email" : "alice@example.com",
+    "type": "BUYER"
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
-    "email" : "johnd@example.com"
+    "email" : "johnd@example.com",
+    "type": "SELLER"
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
-    "email" : "heinz@example.com"
+    "email" : "heinz@example.com",
+    "type": "BUYER"
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
-    "email" : "cornelia@example.com"
+    "email" : "cornelia@example.com",
+    "type": "SELLER"
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
-    "email" : "werner@example.com"
+    "email" : "werner@example.com",
+    "type": "BUYER"
+
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
-    "email" : "lydia@example.com"
+    "email" : "lydia@example.com",
+    "type": "SELLER"
   }, {
     "name" : "George Best",
     "phone" : "9482442",
-    "email" : "anna@example.com"
+    "email" : "anna@example.com",
+    "type": "BUYER"
   } ]
 }
