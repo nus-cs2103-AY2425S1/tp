@@ -373,7 +373,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 3a. User inputs a name and address that already exists.
-    
+
     * 3a1. VolunTier notifies the user that the person already exists.
 
   Use case resumes at step 2.
@@ -404,9 +404,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. VolunTier shows an error message.
 
       Use case resumes at step 2.
-  
+
 * 4a. User inputs invalid or incomplete details.
-   
+
     * 4a1. VolunTier shows an error message specifying the mistake.
 
       Use case resumes at step 4.
