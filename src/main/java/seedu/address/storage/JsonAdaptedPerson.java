@@ -55,7 +55,7 @@ class JsonAdaptedPerson {
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("id") String id, @JsonProperty("name") String name,@JsonProperty("ward") String ward,@JsonProperty("diagnosis") String diagnosis,@JsonProperty("medication") String medication) {
+    public JsonAdaptedPerson(@JsonProperty("name") String name) {
 //        this.id = id;
         this.name = name;
 //        this.ward = ward;
