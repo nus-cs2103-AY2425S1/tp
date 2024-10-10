@@ -146,6 +146,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setWedding(Wedding target, Wedding editedWedding) {
+        requireAllNonNull(target, editedWedding);
+        addressBook.setWedding(target, editedWedding);
+    }
+
+    @Override
     public boolean hasWedding(Wedding wedding) {
         requireNonNull(wedding);
         return addressBook.hasWedding(wedding);
@@ -216,7 +222,8 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons)
-                && filteredTags.equals(otherModelManager.filteredTags);
+                && filteredTags.equals(otherModelManager.filteredTags)
+                && filteredWeddings.equals(otherModelManager.filteredWeddings);
     }
 
 }

@@ -49,6 +49,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// list overwrite operations
 
     /**
+     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     */
+    public void resetData(ReadOnlyAddressBook newData) {
+        requireNonNull(newData);
+
+        setPersons(newData.getPersonList());
+        setTags(newData.getTagList());
+        setWeddings(newData.getWeddingList());
+    }
+
+    /**
      * Replaces the contents of the person list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
      */
@@ -57,20 +68,20 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
-     */
-    public void resetData(ReadOnlyAddressBook newData) {
-        requireNonNull(newData);
-
-        setPersons(newData.getPersonList());
-        setTags(newData.getTagList());
-    }
-
-    /**
      * Replaces the contents of the tag list with {@code tags}.
      * {@code tags} must not contain duplicate tags.
      */
-    public void setTags(List<Tag> tags) { this.tags.setTags(tags); }
+    public void setTags(List<Tag> tags) {
+        this.tags.setTags(tags);
+    }
+
+    /**
+     * Replaces the contents of the wedding list with {@code weddings}.
+     * {@code weddings} must not contain duplicate tags.
+     */
+    public void setWeddings(List<Wedding> weddings) {
+        this.weddings.setWeddings(weddings);
+    }
 
     //// person-level operations
 
@@ -138,6 +149,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the given wedding {@code target} in the list with {@code editedWedding}.
+     * {@code target} must exist in the address book.
+     * The wedding identity of {@code editedWedding} must not be the same as another existing wedding in the address book.
+     */
+    public void setWedding(Wedding target, Wedding editedWedding) {
+        requireNonNull(editedWedding);
+
+        weddings.setWedding(target, editedWedding);
+    }
+
+    /**
      * Returns true if a wedding with the same name as the {@code wedding} exists in the Wedlinker.
      */
     public boolean hasWedding(Wedding wedding) {
@@ -156,7 +178,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Replaces the given tag {@code target} in the list with {@code editedTag}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedTag} must not be the same as another existing tag in the address book.
+     * The tag identity of {@code editedTag} must not be the same as another existing tag in the address book.
      */
     public void setTag(Tag target, Tag editedTag) {
         requireNonNull(editedTag);
@@ -191,6 +213,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         return tags.asUnmodifiableObservableList();
     }
 
+    @Override
     public ObservableList<Wedding> getWeddingList() {
         return weddings.asUnmodifiableObservableList();
     }

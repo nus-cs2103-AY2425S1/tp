@@ -136,6 +136,8 @@ public interface Model {
      */
     void addWedding(Wedding toAdd);
 
+    void setWedding(Wedding target, Wedding editedWedding);
+
     /**
      * Deletes the given wedding.
      * The wedding must exist in the Wedlinker.
