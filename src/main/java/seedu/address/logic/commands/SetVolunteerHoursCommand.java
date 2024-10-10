@@ -1,12 +1,15 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOURS;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.Model;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_HOURS;
-
+/**
+ * Sets the hours of an existing volunteer in the address book
+ */
 public class SetVolunteerHoursCommand extends Command {
     public static final String COMMAND_WORD = "sethours";
 
@@ -23,6 +26,11 @@ public class SetVolunteerHoursCommand extends Command {
     public static final String MESSAGE_NOT_IMPLEMENTED = "The execute function has not been implemented.";
     private final Index index;
     private final Integer newHours;
+
+    /**
+     * @param index of the volunteer in the filtered person list to change hours for
+     * @param newHours the new hours to input for the person
+     */
     public SetVolunteerHoursCommand(Index index, int newHours) {
         requireNonNull(index);
 
