@@ -82,7 +82,7 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getAddress().orElse(null) + ", register number="
                 + editPersonDescriptor.getRegisterNumber().orElse(null) + ", sex="
                 + editPersonDescriptor.getSex().orElse(null) + ", class="
-				+ editPersonDescriptor.getStudentClass().orElse(null) + ", tags="
+                + editPersonDescriptor.getStudentClass().orElse(null) + ", tags="
                 + editPersonDescriptor.getTags().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }
