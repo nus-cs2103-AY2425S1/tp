@@ -67,6 +67,21 @@ public class EmailTest {
     }
 
     @Test
+    public void constructor_invalidLengthEmail_throwsIllegalArgumentException() {
+        // invalid parts
+        assertFalse(Email.isValidLengthEmail("a_long_email_address_that_exceeds_fifty_characters@example.com"));
+        // long email
+        assertFalse(Email.isValidLengthEmail(" a_long_email_address_that_exceeds_fifty_characters@example.com"));
+        // long email
+
+        // valid email
+        assertTrue(Email.isValidLengthEmail("PeterJack_1190@example.com")); // valid length email
+        assertTrue(Email.isValidLengthEmail("grapesoda@example.com")); // valid length email
+        assertTrue(Email.isValidLengthEmail("sun@example.com")); // valid length email
+
+    }
+
+    @Test
     public void equals() {
         Email email = new Email("valid@email");
 

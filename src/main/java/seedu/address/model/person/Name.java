@@ -35,6 +35,7 @@ public class Name {
 
         String trimmedName = name.trim().replaceAll("\\s+", " ");
         checkArgument(isValidName(trimmedName), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidLengthName(trimmedName), MESSAGE_LENGTH_CONSTRAINTS);
 
         fullName = trimmedName.toUpperCase();
     }
