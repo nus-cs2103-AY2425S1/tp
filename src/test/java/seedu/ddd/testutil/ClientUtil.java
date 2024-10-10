@@ -1,6 +1,7 @@
 package seedu.ddd.testutil;
 
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -8,7 +9,7 @@ import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 
-import seedu.ddd.logic.commands.AddCommand;
+import seedu.ddd.logic.commands.AddContactCommand;
 import seedu.ddd.logic.commands.EditCommand.EditContactDescriptor;
 import seedu.ddd.model.person.Client;
 import seedu.ddd.model.tag.Tag;
@@ -19,14 +20,15 @@ import seedu.ddd.model.tag.Tag;
 public class ClientUtil {
 
     /**
-     * Returns an add command string for adding the {@code person}.
+     * Returns an add command string for adding the {@code contact}.
      */
-    public static String getAddCommand(Client client) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(client);
+    public static String getAddContactCommand(Client client) {
+        System.out.println(AddContactCommand.COMMAND_WORD + " client " + getPersonDetails(client));
+        return AddContactCommand.COMMAND_WORD + " client " + getPersonDetails(client);
     }
 
     /**
-     * Returns the part of command string for the given {@code person}'s details.
+     * Returns the part of command string for the given {@code contact}'s details.
      */
     public static String getPersonDetails(Client client) {
         StringBuilder sb = new StringBuilder();
@@ -34,6 +36,7 @@ public class ClientUtil {
         sb.append(PREFIX_PHONE + client.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + client.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + client.getAddress().value + " ");
+        sb.append(PREFIX_DATE + client.getDate().date + " ");
         client.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
