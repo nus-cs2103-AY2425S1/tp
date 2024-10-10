@@ -9,8 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class ContactType {
 
-    public static final String MESSAGE_CONSTRAINTS = "ContactType must either be \"Work\" or \"Personal\", " +
-            "or it can be blank";
+    public static final String MESSAGE_CONSTRAINTS = "ContactType must either be \"Work\" or \"Personal\", "
+            + "or it can be blank";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -19,6 +19,12 @@ public class ContactType {
     public static final String VALIDATION_REGEX = "[^\\s].*";
 
     public final ContactTypeEnum value;
+
+    /**
+     * Constructs an {@code ContactType}.
+     *
+     * @param contactType A valid contact type.
+     */
     public ContactType(String contactType) {
         requireNonNull(contactType);
         checkArgument(isValidContactType(contactType), MESSAGE_CONSTRAINTS);
