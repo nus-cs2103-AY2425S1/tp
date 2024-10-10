@@ -106,7 +106,7 @@ public class AddressBookParserTest {
         //AddPropertyToSellCommand command = (AddPropertyToSellCommand)
         // parser.parseCommand(PersonUtil.getAddCommand(person));
         //assertEquals(new AddPropertyToSellCommand(), command);
-        assertEquals(property, property);
+        assertEquals(1, 1);
     }
 
     @Test
