@@ -11,6 +11,7 @@ import seedu.ddd.model.person.Person;
 import seedu.ddd.model.person.UniqueContactList;
 import seedu.ddd.model.person.UniquePersonList;
 
+
 /**
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
@@ -18,17 +19,6 @@ import seedu.ddd.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
-
-    /*
-     * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
-     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
-     *
-     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
-     *   among constructors.
-     */
-    {
-        persons = new UniquePersonList();
-    }
 
     private final UniqueContactList contacts;
 
@@ -41,6 +31,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         contacts = new UniqueContactList();
+
+        // TODO: delete after refactoring
+        persons = new UniquePersonList();
     }
 
     public AddressBook() {}
@@ -72,16 +65,17 @@ public class AddressBook implements ReadOnlyAddressBook {
 
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code DDD} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-
-        setPersons(newData.getPersonList());
         setContacts(newData.getContactList());
+
+        // TODO: delete after refactoring
+        setPersons(newData.getPersonList());
     }
 
-    //// person-level operations
+    //// contact-level operations
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
@@ -89,6 +83,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return persons.contains(person);
+    }
+
+    /**
+     * Returns true if a contact with the same identity as {@code contact} exists in DDD.
+     */
+    public boolean hasContact(Contact contact) {
+        requireNonNull(contact);
+        return contacts.contains(contact);
     }
 
     /**
@@ -111,11 +113,30 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the given contact {@code target} in the list with {@code editedContact}.
+     * {@code target} must exist in DDD.
+     * The contact identity of {@code editedContact} must not be the same as another existing contact in the address book.
+     */
+    public void setContact(Contact target, Contact editedContact) {
+        requireNonNull(editedContact);
+
+        contacts.setContact(target, editedContact);
+    }
+
+    /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeContact(Contact key) {
+        contacts.remove(key);
     }
 
     /**
@@ -130,6 +151,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                // TODO: remove "persons" after refactoring
                 .add("persons", persons)
                 .add("contacts", contacts)
                 .toString();
@@ -156,12 +178,23 @@ public class AddressBook implements ReadOnlyAddressBook {
             return false;
         }
 
-        AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons);
+        AddressBook otherDDD = (AddressBook) other;
+
+        boolean isEqual = contacts.equals(otherDDD.contacts);
+
+        // TODO: delete after refactoring
+        isEqual = isEqual && persons.equals(otherDDD.persons);
+
+        return isEqual;
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        int uniqueHash = contacts.hashCode();
+
+        // TODO: delete after refactoring
+        uniqueHash = uniqueHash + 31 * persons.hashCode();
+
+        return uniqueHash;
     }
 }

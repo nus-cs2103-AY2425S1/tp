@@ -21,6 +21,7 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
+    private final AddressBook ddd;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Contact> filteredContacts;
@@ -36,9 +37,32 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredContacts = new FilteredList<>(this.addressBook.getContactList());
+
+        this.ddd = null;
+        filteredContacts = null;
     }
 
+    /**
+     * Initializes a ModelManager with the given DDD and userPrefs.
+     */
+    // TODO: delete forDDD parameter after deleting the original constructor
+    public ModelManager(ReadOnlyAddressBook ddd, ReadOnlyUserPrefs userPrefs, boolean forDDD) {
+        CollectionUtil.requireAllNonNull(ddd, userPrefs);
+
+        logger.fine("Initializing with DDD: " + ddd + " and user prefs " + userPrefs);
+
+        this.ddd = new AddressBook(ddd);
+        this.userPrefs = new UserPrefs(userPrefs);
+        filteredContacts = new FilteredList<>(this.ddd.getContactList());
+
+        // TODO: delete both lines when refactoring
+        this.addressBook = null;
+        this.filteredPersons = null;
+    }
+
+    /**
+     * Initializes an empty ModelManager with the given DDD and userPrefs.
+     */
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
     }
@@ -73,11 +97,21 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Path getDDDFilePath() {
+        return userPrefs.getDDDFilePath();
+    }
+
+    @Override
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
+    @Override
+    public void setDDDFilePath(Path dddFilePath) {
+        requireNonNull(dddFilePath);
+        userPrefs.setAddressBookFilePath(dddFilePath);
+    }
     //=========== AddressBook ================================================================================
 
     @Override
@@ -86,8 +120,18 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setDDD(ReadOnlyAddressBook ddd) {
+        this.ddd.resetData(ddd);
+    }
+
+    @Override
     public ReadOnlyAddressBook getAddressBook() {
         return addressBook;
+    }
+
+    @Override
+    public ReadOnlyAddressBook getDDD() {
+        return ddd;
     }
 
     @Override
@@ -97,8 +141,19 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasContact(Contact contact) {
+        requireNonNull(contact);
+        return ddd.hasContact(contact);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+    }
+
+    @Override
+    public void deleteContact(Contact target) {
+        ddd.removeContact(target);
     }
 
     @Override
@@ -108,10 +163,23 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addContact(Contact contact) {
+        addressBook.addContact(contact);
+        updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         CollectionUtil.requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public void setContact(Contact target, Contact editedContact) {
+        CollectionUtil.requireAllNonNull(target, editedContact);
+
+        ddd.setContact(target, editedContact);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -154,9 +222,17 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
-                && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+
+        boolean isEqual = ddd.equals(otherModelManager.ddd)
+                          && userPrefs.equals(otherModelManager.userPrefs)
+                          && filteredContacts.equals(otherModelManager.filteredContacts);
+
+        // TODO: delete after refactoring
+        isEqual = isEqual
+                  && addressBook.equals(otherModelManager.addressBook)
+                  && filteredPersons.equals(otherModelManager.filteredPersons);
+
+        return isEqual;
     }
 
 }

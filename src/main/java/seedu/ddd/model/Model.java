@@ -44,22 +44,45 @@ public interface Model {
     Path getAddressBookFilePath();
 
     /**
+     * Returns the user prefs' DDD file path.
+     */
+    Path getDDDFilePath();
+
+    /**
      * Sets the user prefs' address book file path.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
+
+    /**
+     * Sets the user prefs' DDD file path.
+     */
+    void setDDDFilePath(Path dddFilePath);
 
     /**
      * Replaces address book data with the data in {@code addressBook}.
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
+    /**
+     * Replaces DDD data with the data in {@code ddd}.
+     */
+    void setDDD(ReadOnlyAddressBook ddd);
+
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
+
+    /** Returns the AddressBook */
+    ReadOnlyAddressBook getDDD();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
     boolean hasPerson(Person person);
+
+    /**
+     * Returns true if a contact with the same identity as {@code contact} exists in DDD.
+     */
+    boolean hasContact(Contact contact);
 
     /**
      * Deletes the given person.
@@ -68,10 +91,23 @@ public interface Model {
     void deletePerson(Person target);
 
     /**
+     * Deletes the given contact.
+     * The contact must exist in the address book.
+     */
+    void deleteContact(Contact target);
+
+    /**
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */
     void addPerson(Person person);
+
+    /**
+     * Adds the given contact.
+     * {@code contact} must not already exist in DDD.
+     */
+    void addContact(Contact person);
+
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
@@ -79,6 +115,13 @@ public interface Model {
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
     void setPerson(Person target, Person editedPerson);
+
+    /**
+     * Replaces the given contact {@code target} with {@code editedPerson}.
+     * {@code target} must exist in the address book.
+     * The contact identity of {@code editedContact} must not be the same as another existing contact in the address book.
+     */
+    void setContact(Contact target, Contact editedContact);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
