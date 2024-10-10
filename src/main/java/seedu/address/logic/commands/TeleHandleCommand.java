@@ -1,5 +1,10 @@
 package seedu.address.logic.commands;
 
+import java.util.List;
+
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -7,12 +12,10 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.TelegramHandle;
 
-import java.util.List;
-
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-
-public class TeleHandleCommand extends Command{
+/**
+ * Adds the telegram handle of a person
+ */
+public class TeleHandleCommand extends Command {
 
     public static final String COMMAND_WORD = "tele";
 
@@ -67,7 +70,9 @@ public class TeleHandleCommand extends Command{
     }
 
     private String generateSuccessMessage(Person personToEdit) {
-        String message = !telegramHandle.value.isEmpty() ? MESSAGE_ADD_TELEHANDLE_SUCCESS : MESSAGE_DELETE_TELEHANDLE_SUCCESS;
+        String message = !telegramHandle.value.isEmpty()
+                ? MESSAGE_ADD_TELEHANDLE_SUCCESS
+                : MESSAGE_DELETE_TELEHANDLE_SUCCESS;
         return String.format(message, Messages.format(personToEdit));
     }
 
@@ -84,6 +89,5 @@ public class TeleHandleCommand extends Command{
 
         TeleHandleCommand e = (TeleHandleCommand) other;
         return index.equals(e.index) && telegramHandle.equals(e.telegramHandle);
-
     }
- }
+}

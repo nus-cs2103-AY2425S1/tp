@@ -1,7 +1,6 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's telegram handle in the address book.
@@ -10,6 +9,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class TelegramHandle {
     public final String value;
 
+    /**
+     * Constructs a telegram handle
+     * @param telegramHandle A valid telegram handle (non-null)
+     */
     public TelegramHandle(String telegramHandle) {
         requireNonNull(telegramHandle);
         value = telegramHandle;
