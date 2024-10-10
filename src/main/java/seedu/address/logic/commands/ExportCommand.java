@@ -2,12 +2,13 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.io.FileWriter;
-import java.nio.file.Files;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -18,7 +19,9 @@ import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 
-
+/**
+ * Command that exports current list of persons to a csv file
+ */
 public class ExportCommand extends Command {
     public static final String FILE_OPS_ERROR_FORMAT = "Could not save data due to the following error: %s";
 
@@ -58,16 +61,11 @@ public class ExportCommand extends Command {
     }
 
     /**
-     * Public constructor to set path manually of exported file
-     * @param model
-     * @param importPath
-     * @param exportPath
-     * @return
-     * @throws CommandException
+     * Command that exports current list of persons to a csv file
      */
     public CommandResult execute(Model model, Path importPath, Path exportPath) throws CommandException {
         requireNonNull(model);
-        saveJsonFile(model,importPath, exportPath);
+        saveJsonFile(model, importPath, exportPath);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
@@ -89,15 +87,14 @@ public class ExportCommand extends Command {
 
     /**
      * Translate the Jsonfile into a csv file
-     * @param JsonFilePath
+     * @param jsonFilePath
      */
-    private void translateJsonToCsv(Path JsonFilePath, Path exportPath) {
+    private void translateJsonToCsv(Path jsonFilePath, Path exportPath) {
         try {
             // Read the JSON file
-            String jsonContent = Files.readString(JsonFilePath);
+            String jsonContent = Files.readString(jsonFilePath);
             JSONObject jsonObject = new JSONObject(jsonContent);
             JSONArray jsonArray = jsonObject.getJSONArray("persons");
-
 
             FileWriter csvWriter = new FileWriter(exportPath.toFile());
 
@@ -111,7 +108,8 @@ public class ExportCommand extends Command {
                 String studentClass = person.getString("studentClass");
                 String phone = person.getString("phone");
                 String tags = getPersonTags(person.getJSONArray("tags"));
-                csvWriter.append(name).append(",").append(studentClass).append(",").append(phone).append(", ").append(tags).append("\n");
+                csvWriter.append(name).append(",").append(studentClass)
+                            .append(",").append(phone).append(", ").append(tags).append("\n");
             }
 
             // Close the CSV writer

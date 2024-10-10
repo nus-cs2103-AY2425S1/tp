@@ -61,8 +61,8 @@ public class AddressBookParser {
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
-        
-        case ExportCommand.COMMAND_WORD:
+
+        case ExportCommand.COMMAND_WORD:./run-checks.sh
             return new ExportCommand();
 
         case DeleteCommand.COMMAND_WORD:
