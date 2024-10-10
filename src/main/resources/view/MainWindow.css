@@ -1,0 +1,57 @@
+.root {
+    -fx-background-color: #e7ebf0; /* Light background color similar to the screenshot */
+    -fx-padding: 20px; /* Adds padding around the edges */
+}
+
+.vbox {
+    -fx-background-color: #e7ebf0;
+}
+
+.header-label {
+    -fx-font-size: 50px;          /* Header font size */
+    -fx-font-weight: bold;        /* Header font weight */
+    -fx-text-fill: Black;         /* Header text color */
+    -fx-padding: 10;              /* Padding around the header */
+    -fx-alignment: center;        /* Center the text */
+}
+
+.menu-bar .menu .menu-item {
+    -fx-text-fill: black; /* Black text for menu items doestn actly affect color*/
+}
+
+.menu-bar {
+    -fx-background-color: #e7ebf0; /* Dark blue background */
+    -fx-border-color: transparent; /* Remove any borders */
+}
+
+.menu-bar .menu {
+    -fx-text-fill: black; /* black text doesnt actly affect color */
+}
+
+.menu-bar .menu:hover {
+    -fx-background-color: #00509E; /* Lighter blue when hovered */
+    -fx-text-fill: white;
+}
+
+.menu-item {
+    -fx-text-fill: black; /* White text for menu items doesnt actly affect color*/
+    -fx-background-color: transparent; /* Transparent background for menu items */
+}
+
+.menu-item:hover {
+    -fx-background-color: #00509E; /* Lighter blue background on hover */
+    -fx-text-fill: white;
+}
+
+.background {
+    -fx-background-color: derive(#004aad, 20%);
+    background-color: #004aad; /* Used in the default.html file */
+}
+
+#resultDisplayPlaceholder {
+    -fx-background-color: #efeee7;
+}
+
+#personList {
+    -fx-background-color: #e7ebf0;
+}

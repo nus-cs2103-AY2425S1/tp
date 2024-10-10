@@ -11,6 +11,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Hours;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -63,6 +64,21 @@ public class ParserUtil {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
         return new Phone(trimmedPhone);
+    }
+
+    /**
+     * Parses a {@code String hours} into a {@code Hours}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code hours} is invalid.
+     */
+    public static Hours parseHours(String hours) throws ParseException {
+        requireNonNull(hours);
+        String trimmedHours = hours.trim();
+        if (!Hours.isValidHours(trimmedHours)) {
+            throw new ParseException(Hours.MESSAGE_CONSTRAINTS);
+        }
+        return new Hours(trimmedHours);
     }
 
     /**
