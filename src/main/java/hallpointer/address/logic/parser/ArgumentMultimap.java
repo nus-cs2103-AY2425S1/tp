@@ -67,6 +67,7 @@ public class ArgumentMultimap {
      * once among the arguments.
      */
     public void verifyNoDuplicatePrefixesFor(Prefix... prefixes) throws ParseException {
+        // Stream.of(prefixes).distinct() sorts prefixes by lexicographical order
         Prefix[] duplicatedPrefixes = Stream.of(prefixes).distinct()
                 .filter(prefix -> argMultimap.containsKey(prefix) && argMultimap.get(prefix).size() > 1)
                 .toArray(Prefix[]::new);

@@ -10,11 +10,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import hallpointer.address.commons.exceptions.IllegalValueException;
-import hallpointer.address.model.member.Address;
-import hallpointer.address.model.member.Email;
 import hallpointer.address.model.member.Member;
 import hallpointer.address.model.member.Name;
-import hallpointer.address.model.member.Phone;
+import hallpointer.address.model.member.Room;
+import hallpointer.address.model.member.Telegram;
 import hallpointer.address.model.tag.Tag;
 
 /**
@@ -25,22 +24,20 @@ class JsonAdaptedMember {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Member's %s field is missing!";
 
     private final String name;
-    private final String phone;
-    private final String email;
-    private final String address;
+    private final String telegram;
+    private final String room;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedMember} with the given member details.
      */
     @JsonCreator
-    public JsonAdaptedMember(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                             @JsonProperty("email") String email, @JsonProperty("address") String address,
+    public JsonAdaptedMember(@JsonProperty("name") String name, @JsonProperty("telegram") String telegram,
+                             @JsonProperty("room") String room,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
+        this.telegram = telegram;
+        this.room = room;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -51,9 +48,8 @@ class JsonAdaptedMember {
      */
     public JsonAdaptedMember(Member source) {
         name = source.getName().fullName;
-        phone = source.getPhone().value;
-        email = source.getEmail().value;
-        address = source.getAddress().value;
+        telegram = source.getTelegram().value;
+        room = source.getRoom().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -78,32 +74,25 @@ class JsonAdaptedMember {
         }
         final Name modelName = new Name(name);
 
-        if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
+        if (telegram == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Telegram.class.getSimpleName()));
         }
-        if (!Phone.isValidPhone(phone)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+        if (!Telegram.isValidTelegram(telegram)) {
+            throw new IllegalValueException(Telegram.MESSAGE_CONSTRAINTS);
         }
-        final Phone modelPhone = new Phone(phone);
+        final Telegram modelTelegram = new Telegram(telegram);
 
-        if (email == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
+        if (room == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Room.class.getSimpleName()));
         }
-        if (!Email.isValidEmail(email)) {
-            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+        if (!Room.isValidRoom(room)) {
+            throw new IllegalValueException(Room.MESSAGE_CONSTRAINTS);
         }
-        final Email modelEmail = new Email(email);
-
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
-        }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
-        }
-        final Address modelAddress = new Address(address);
+        final Room modelRoom = new Room(room);
 
         final Set<Tag> modelTags = new HashSet<>(memberTags);
-        return new Member(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Member(modelName, modelTelegram, modelRoom, modelTags);
     }
 
 }

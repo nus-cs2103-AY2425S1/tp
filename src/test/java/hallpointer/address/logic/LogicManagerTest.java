@@ -2,10 +2,9 @@ package hallpointer.address.logic;
 
 import static hallpointer.address.logic.Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX;
 import static hallpointer.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static hallpointer.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static hallpointer.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static hallpointer.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static hallpointer.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static hallpointer.address.logic.commands.CommandTestUtil.ROOM_DESC_AMY;
+import static hallpointer.address.logic.commands.CommandTestUtil.TELEGRAM_DESC_AMY;
 import static hallpointer.address.testutil.Assert.assertThrows;
 import static hallpointer.address.testutil.TypicalMembers.AMY;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -165,8 +164,8 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Triggers the saveAddressBook method by executing an add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
+        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + TELEGRAM_DESC_AMY
+                + ROOM_DESC_AMY;
         Member expectedMember = new MemberBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addMember(expectedMember);

@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 
 public class ArgumentTokenizerTest {
@@ -134,6 +136,14 @@ public class ArgumentTokenizerTest {
         assertArgumentAbsent(argMultimap, pSlash);
         assertArgumentPresent(argMultimap, dashT, "not joined^Qjoined");
         assertArgumentAbsent(argMultimap, hatQ);
+    }
+
+    @Test
+    public void tokenize_multipleWhitespaceTrimmed() {
+        String argsString = " -t   Meow \t Woof \t";
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(argsString, dashT);
+        assertEquals(Optional.of("Meow Woof"), argMultimap.getValue(dashT));
+
     }
 
     @Test

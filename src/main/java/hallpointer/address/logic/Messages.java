@@ -37,12 +37,10 @@ public class Messages {
     public static String format(Member member) {
         final StringBuilder builder = new StringBuilder();
         builder.append(member.getName())
-                .append("; Phone: ")
-                .append(member.getPhone())
-                .append("; Email: ")
-                .append(member.getEmail())
-                .append("; Address: ")
-                .append(member.getAddress())
+                .append("; Telegram: ")
+                .append(member.getTelegram())
+                .append("; Room: ")
+                .append(member.getRoom())
                 .append("; Tags: ");
         member.getTags().forEach(builder::append);
         return builder.toString();
