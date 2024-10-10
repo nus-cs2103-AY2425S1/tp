@@ -11,11 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
 import seedu.address.model.student.Student;
-import seedu.address.model.student.StudentNumber;
-import seedu.address.model.student.TutorialGroup;
 import seedu.address.testutil.StudentBuilder;
 
 public class AddStudentCommandParserTest {
@@ -35,13 +31,13 @@ public class AddStudentCommandParserTest {
 
     @Test
     public void parse_missingRequiredField_throwsParseException() {
-        assertThrows(ParseException.class, () -> parser.parse(" " + PREFIX_NAME + "John Doe " + PREFIX_PHONE + "12345678 "
-                + PREFIX_TUTORIAL_GROUP + "T01"));
+        assertThrows(ParseException.class, () -> parser.parse(" " + PREFIX_NAME + "John Doe "
+                + PREFIX_PHONE + "12345678 " + PREFIX_TUTORIAL_GROUP + "T01"));
     }
 
     @Test
     public void parse_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> parser.parse(" " + PREFIX_NAME + "John Doe " + PREFIX_PHONE + "invalidPhone "
-                + PREFIX_TUTORIAL_GROUP + "T01 " + PREFIX_STUDENT_NUMBER + "A1234567X"));
+        assertThrows(ParseException.class, () -> parser.parse(" " + PREFIX_NAME + "John Doe " + PREFIX_PHONE
+                + "invalidPhone " + PREFIX_TUTORIAL_GROUP + "T01 " + PREFIX_STUDENT_NUMBER + "A1234567X"));
     }
 }
