@@ -14,6 +14,7 @@ public class EmailContainsKeywordsPredicate extends ContainsKeywordsPredicate {
         super(keywords);
     }
 
+    // checks if the person contains the keyword
     @Override
     public boolean test(Person person) {
         return super.getKeywords().stream()
@@ -27,11 +28,10 @@ public class EmailContainsKeywordsPredicate extends ContainsKeywordsPredicate {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EmailContainsKeywordsPredicate)) {
+        if (!(other instanceof EmailContainsKeywordsPredicate otherNameContainsKeywordsPredicate)) {
             return false;
         }
 
-        EmailContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (EmailContainsKeywordsPredicate) other;
         return this.getKeywords().equals(otherNameContainsKeywordsPredicate.getKeywords());
     }
 

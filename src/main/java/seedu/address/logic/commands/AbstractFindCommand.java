@@ -20,7 +20,7 @@ public abstract class AbstractFindCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
-    private final ContainsKeywordsPredicate predicate;
+    protected final ContainsKeywordsPredicate predicate;
 
     public AbstractFindCommand(ContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
