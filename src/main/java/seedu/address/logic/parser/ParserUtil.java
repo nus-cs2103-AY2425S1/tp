@@ -50,6 +50,12 @@ public class ParserUtil {
         return new Name(trimmedName);
     }
 
+    public static String parseCategory(String category) throws ParseException {
+        requireNonNull(category);
+        String trimmedCategory = category.trim();
+        return trimmedCategory;
+    }
+
     /**
      * Parses a {@code String phone} into a {@code Phone}.
      * Leading and trailing whitespaces will be trimmed.
