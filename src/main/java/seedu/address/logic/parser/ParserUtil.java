@@ -11,8 +11,10 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.EmployeeId;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.skill.Skill;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -33,6 +35,21 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses a {@code String name} into a {@code Name}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static EmployeeId parseEmployeeId(String employeeId) throws ParseException {
+        requireNonNull(employeeId);
+        String trimmedId = employeeId.trim();
+        if (!EmployeeId.isValidEmployeeId(trimmedId)) {
+            throw new ParseException(EmployeeId.MESSAGE_CONSTRAINTS);
+        }
+        return new EmployeeId(trimmedId);
     }
 
     /**
@@ -120,5 +137,32 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String skill} into a {@code Skill}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code skill} is invalid.
+     */
+    public static Skill parseSkill(String skill) throws ParseException {
+        requireNonNull(skill);
+        String trimmedSkill = skill.trim();
+        if (!Skill.isValidSkill(trimmedSkill)) {
+            throw new ParseException(Skill.MESSAGE_CONSTRAINTS);
+        }
+        return new Skill(trimmedSkill);
+    }
+
+    /**
+     * Parses {@code Collection<String> skill} into a {@code Set<Skill>}.
+     */
+    public static Set<Skill> parseSkills(Collection<String> skills) throws ParseException {
+        requireNonNull(skills);
+        final Set<Skill> skillSet = new HashSet<>();
+        for (String skill : skills) {
+            skillSet.add(parseSkill(skill));
+        }
+        return skillSet;
     }
 }
