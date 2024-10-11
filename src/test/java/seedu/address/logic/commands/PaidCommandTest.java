@@ -26,8 +26,8 @@ public class PaidCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Person personToMarkPaid = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        EditCommand.EditPersonDescriptor descriptor = new EditCommand.EditPersonDescriptor();
-        descriptor.setHasPaid(true);
+        PaidCommand.PaidPersonDescriptor descriptor = new PaidCommand.PaidPersonDescriptor();
+        descriptor.setHasPaid();
         PaidCommand paidCommand = new PaidCommand(INDEX_FIRST_PERSON, descriptor);
 
         String expectedMessage = String.format(PaidCommand.MESSAGE_PAID_PERSON_SUCCESS,
@@ -46,8 +46,8 @@ public class PaidCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        EditCommand.EditPersonDescriptor descriptor = new EditCommand.EditPersonDescriptor();
-        descriptor.setHasPaid(true);
+        PaidCommand.PaidPersonDescriptor descriptor = new PaidCommand.PaidPersonDescriptor();
+        descriptor.setHasPaid();
         PaidCommand paidCommand = new PaidCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(paidCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -58,8 +58,8 @@ public class PaidCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Person personToMarkPaid = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        EditCommand.EditPersonDescriptor descriptor = new EditCommand.EditPersonDescriptor();
-        descriptor.setHasPaid(true);
+        PaidCommand.PaidPersonDescriptor descriptor = new PaidCommand.PaidPersonDescriptor();
+        descriptor.setHasPaid();
         PaidCommand paidCommand = new PaidCommand(INDEX_FIRST_PERSON, descriptor);
 
         String expectedMessage = String.format(PaidCommand.MESSAGE_PAID_PERSON_SUCCESS,
@@ -67,10 +67,10 @@ public class PaidCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
-        Person editedPerson = new Person(personToMarkPaid.getName(), personToMarkPaid.getPhone(),
+        Person paidPerson = new Person(personToMarkPaid.getName(), personToMarkPaid.getPhone(),
                 personToMarkPaid.getEmail(), personToMarkPaid.getAddress(),
                 personToMarkPaid.getTags(), true);
-        expectedModel.setPerson(personToMarkPaid, editedPerson);
+        expectedModel.setPerson(personToMarkPaid, paidPerson);
 
         assertCommandSuccess(paidCommand, model, expectedMessage, expectedModel);
     }
@@ -82,8 +82,8 @@ public class PaidCommandTest {
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
-        EditCommand.EditPersonDescriptor descriptor = new EditCommand.EditPersonDescriptor();
-        descriptor.setHasPaid(true);
+        PaidCommand.PaidPersonDescriptor descriptor = new PaidCommand.PaidPersonDescriptor();
+        descriptor.setHasPaid();
         PaidCommand paidCommand = new PaidCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(paidCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -92,8 +92,8 @@ public class PaidCommandTest {
     @Test
     public void equals() {
 
-        EditCommand.EditPersonDescriptor descriptor = new EditCommand.EditPersonDescriptor();
-        descriptor.setHasPaid(true);
+        PaidCommand.PaidPersonDescriptor descriptor = new PaidCommand.PaidPersonDescriptor();
+        descriptor.setHasPaid();
         PaidCommand paidFirstCommand = new PaidCommand(INDEX_FIRST_PERSON, descriptor);
         PaidCommand paidSecondCommand = new PaidCommand(INDEX_SECOND_PERSON, descriptor);
 
@@ -117,12 +117,13 @@ public class PaidCommandTest {
     @Test
     public void toStringMethod() {
         Index targetIndex = Index.fromOneBased(1);
-        EditCommand.EditPersonDescriptor descriptor = new EditCommand.EditPersonDescriptor();
-        descriptor.setHasPaid(true);
+        PaidCommand.PaidPersonDescriptor descriptor = new PaidCommand.PaidPersonDescriptor();
+        descriptor.setHasPaid();
         PaidCommand paidCommand = new PaidCommand(targetIndex, descriptor);
         String expected = PaidCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
         assertEquals(expected, paidCommand.toString());
     }
+
 
     private void showNoPerson(Model model) {
         model.updateFilteredPersonList(p -> false);
