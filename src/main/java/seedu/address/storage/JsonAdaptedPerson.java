@@ -58,7 +58,7 @@ class JsonAdaptedPerson {
         address = source.getAddress().value;
         department = source.getDepartment().value;
         role = source.getRole().value;
-        contractEndDate = source.getContractEndDate().value;
+        contractEndDate = source.getContractEndDate().getValue();
         isEmployee = source.isEmployee();
 
     }

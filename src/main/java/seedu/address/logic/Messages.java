@@ -48,8 +48,8 @@ public class Messages {
                 .append("; Role: ")
                 .append(person.getRole());
         if (person.isEmployee()) {
-                builder.append("; Contract End Date: ")
-                        .append(person.getContractEndDate());
+            builder.append("; Contract End Date: ")
+                    .append(person.getContractEndDate());
         }
         return builder.toString();
     }

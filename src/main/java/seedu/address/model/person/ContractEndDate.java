@@ -12,13 +12,10 @@ import java.time.format.DateTimeParseException;
  */
 public abstract class ContractEndDate {
 
-    public String value;
-
-    private static final ContractEndDate EMPTY_CONTRACT_END_DATE = new EmptyContractEndDate();
-
     public static final String MESSAGE_CONSTRAINTS =
             "Contract End Date should only contain numeric characters and dashes in the format 'YYYY-MM-DD', and it"
                     + " should not be blank";
+    private static final ContractEndDate EMPTY_CONTRACT_END_DATE = new EmptyContractEndDate();
 
     public static ContractEndDate empty() {
         return EMPTY_CONTRACT_END_DATE;
@@ -47,14 +44,15 @@ public abstract class ContractEndDate {
         return LocalDate.parse(date);
     }
 
-    static class EmptyContractEndDate extends ContractEndDate {
+    /**
+     * Gets the original value of contract end date;
+     */
+    public String getValue() {
+        return "";
+    }
 
-        /**
-         * Constructs an empty {@code ContractEndDate}.
-         */
-        public EmptyContractEndDate() {
-            value = "";
-        }
+
+    static class EmptyContractEndDate extends ContractEndDate {
 
         @Override
         public boolean equals(Object t) {
@@ -68,8 +66,8 @@ public abstract class ContractEndDate {
     }
 
     static class FilledContractEndDate extends ContractEndDate {
-
         public final LocalDate contractEndDate;
+        private final String value;
 
         /**
          * Constructs a {@code ContractEndDate}.
@@ -81,6 +79,11 @@ public abstract class ContractEndDate {
             checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
             this.contractEndDate = convertStringToDate(date);
             this.value = date;
+        }
+
+        @Override
+        public String getValue() {
+            return value;
         }
 
         @Override

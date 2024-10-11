@@ -58,6 +58,6 @@ public class PersonCard extends UiPart<Region> {
         email.setText("Email: " + person.getEmail().value);
         department.setText("Department: " + person.getDepartment().value);
         role.setText("Role: " + person.getRole().value);
-        contractEndDate.setText("Contract End Date: " + person.getContractEndDate().value);
+        contractEndDate.setText("Contract End Date: " + person.getContractEndDate().getValue());
     }
 }
