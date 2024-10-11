@@ -27,40 +27,44 @@ import hallpointer.address.model.member.Telegram;
 import hallpointer.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing member in the address book.
+ * Updates the details of an existing member in the CCA system.
  */
-public class EditMemberCommand extends Command {
+public class UpdateMemberCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD = "update_member";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the member identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates the details of the member identified "
             + "by the index number used in the displayed member list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_TELEGRAM + "TELEGRAM] "
-            + "[" + PREFIX_ROOM + "ADDRESS] "
+            + "[" + PREFIX_TELEGRAM + "TELEGRAM_HANDLE] "
+            + "[" + PREFIX_ROOM + "ROOM_NUMBER] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_TELEGRAM + "91234567 ";
+            + PREFIX_NAME + "John Doe "
+            + PREFIX_ROOM + "9/10/203 "
+            + PREFIX_TELEGRAM + "johnDoe123 "
+            + PREFIX_TAG + "friend";
 
-    public static final String MESSAGE_EDIT_MEMBER_SUCCESS = "Edited Member: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_MEMBER = "This member already exists in the address book.";
+    public static final String MESSAGE_UPDATE_MEMBER_SUCCESS = "Member %1$s's details updated successfully.";
+    public static final String MESSAGE_NOT_UPDATED = "At least one field to update must be provided.";
+    public static final String MESSAGE_DUPLICATE_MEMBER = "A member with the same name already exists.";
+    public static final String MESSAGE_INVALID_INDEX = "Error: Invalid index specified.";
 
     private final Index index;
-    private final EditMemberDescriptor editMemberDescriptor;
+    private final UpdateMemberDescriptor updateMemberDescriptor;
 
     /**
-     * @param index of the member in the filtered member list to edit
-     * @param editMemberDescriptor details to edit the member with
+     * @param index of the member in the filtered member list to update
+     * @param updateMemberDescriptor details to update the member with
      */
-    public EditMemberCommand(Index index, EditMemberDescriptor editMemberDescriptor) {
+    public UpdateMemberCommand(Index index, UpdateMemberDescriptor updateMemberDescriptor) {
         requireNonNull(index);
-        requireNonNull(editMemberDescriptor);
+        requireNonNull(updateMemberDescriptor);
 
         this.index = index;
-        this.editMemberDescriptor = new EditMemberDescriptor(editMemberDescriptor);
+        this.updateMemberDescriptor = new UpdateMemberDescriptor(updateMemberDescriptor);
     }
 
     @Override
@@ -69,33 +73,32 @@ public class EditMemberCommand extends Command {
         List<Member> lastShownList = model.getFilteredMemberList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_INDEX);
         }
 
-        Member memberToEdit = lastShownList.get(index.getZeroBased());
-        Member editedMember = createEditedMember(memberToEdit, editMemberDescriptor);
+        Member memberToUpdate = lastShownList.get(index.getZeroBased());
+        Member updatedMember = createUpdatedMember(memberToUpdate, updateMemberDescriptor);
 
-        if (!memberToEdit.isSameMember(editedMember) && model.hasMember(editedMember)) {
+        if (!memberToUpdate.isSameMember(updatedMember) && model.hasMember(updatedMember)) {
             throw new CommandException(MESSAGE_DUPLICATE_MEMBER);
         }
 
-        model.setMember(memberToEdit, editedMember);
+        model.setMember(memberToUpdate, updatedMember);
         model.updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
-        return new CommandResult(String.format(MESSAGE_EDIT_MEMBER_SUCCESS, Messages.format(editedMember)));
+        return new CommandResult(String.format(MESSAGE_UPDATE_MEMBER_SUCCESS, Messages.format(updatedMember)));
     }
 
     /**
-     * Creates and returns a {@code Member} with the details of {@code memberToEdit}
-     * edited with {@code editMemberDescriptor}.
+     * Creates and returns a {@code Member} with the details of {@code memberToUpdate}
+     * edited with {@code updateMemberDescriptor}.
      */
-    private static Member createEditedMember(Member memberToEdit, EditMemberDescriptor editMemberDescriptor) {
-        assert memberToEdit != null;
+    private static Member createUpdatedMember(Member memberToUpdate, UpdateMemberDescriptor updateMemberDescriptor) {
+        assert memberToUpdate != null;
 
-        Name updatedName = editMemberDescriptor.getName().orElse(memberToEdit.getName());
-        Telegram updatedTelegram = editMemberDescriptor.getTelegram()
-                .orElse(memberToEdit.getTelegram());
-        Room updatedRoom = editMemberDescriptor.getRoom().orElse(memberToEdit.getRoom());
-        Set<Tag> updatedTags = editMemberDescriptor.getTags().orElse(memberToEdit.getTags());
+        Name updatedName = updateMemberDescriptor.getName().orElse(memberToUpdate.getName());
+        Telegram updatedTelegram = updateMemberDescriptor.getTelegram().orElse(memberToUpdate.getTelegram());
+        Room updatedRoom = updateMemberDescriptor.getRoom().orElse(memberToUpdate.getRoom());
+        Set<Tag> updatedTags = updateMemberDescriptor.getTags().orElse(memberToUpdate.getTags());
 
         return new Member(updatedName, updatedTelegram, updatedRoom, updatedTags);
     }
@@ -107,40 +110,40 @@ public class EditMemberCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditMemberCommand)) {
+        if (!(other instanceof UpdateMemberCommand)) {
             return false;
         }
 
-        EditMemberCommand otherEditMemberCommand = (EditMemberCommand) other;
-        return index.equals(otherEditMemberCommand.index)
-                && editMemberDescriptor.equals(otherEditMemberCommand.editMemberDescriptor);
+        UpdateMemberCommand otherUpdateMemberCommand = (UpdateMemberCommand) other;
+        return index.equals(otherUpdateMemberCommand.index)
+                && updateMemberDescriptor.equals(otherUpdateMemberCommand.updateMemberDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("index", index)
-                .add("editMemberDescriptor", editMemberDescriptor)
+                .add("updateMemberDescriptor", updateMemberDescriptor)
                 .toString();
     }
 
     /**
-     * Stores the details to edit the member with. Each non-empty field value will replace the
+     * Stores the details to update the member with. Each non-empty field value will replace the
      * corresponding field value of the member.
      */
-    public static class EditMemberDescriptor {
+    public static class UpdateMemberDescriptor {
         private Name name;
         private Telegram telegram;
         private Room room;
         private Set<Tag> tags;
 
-        public EditMemberDescriptor() {}
+        public UpdateMemberDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditMemberDescriptor(EditMemberDescriptor toCopy) {
+        public UpdateMemberDescriptor(UpdateMemberDescriptor toCopy) {
             setName(toCopy.name);
             setTelegram(toCopy.telegram);
             setRoom(toCopy.room);
@@ -148,9 +151,9 @@ public class EditMemberCommand extends Command {
         }
 
         /**
-         * Returns true if at least one field is edited.
+         * Returns true if at least one field is updated.
          */
-        public boolean isAnyFieldEdited() {
+        public boolean isAnyFieldUpdated() {
             return CollectionUtil.isAnyNonNull(name, telegram, room, tags);
         }
 
@@ -202,15 +205,15 @@ public class EditMemberCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditMemberDescriptor)) {
+            if (!(other instanceof UpdateMemberDescriptor)) {
                 return false;
             }
 
-            EditMemberDescriptor otherEditMemberDescriptor = (EditMemberDescriptor) other;
-            return Objects.equals(name, otherEditMemberDescriptor.name)
-                    && Objects.equals(telegram, otherEditMemberDescriptor.telegram)
-                    && Objects.equals(room, otherEditMemberDescriptor.room)
-                    && Objects.equals(tags, otherEditMemberDescriptor.tags);
+            UpdateMemberDescriptor otherUpdateMemberDescriptor = (UpdateMemberDescriptor) other;
+            return Objects.equals(name, otherUpdateMemberDescriptor.name)
+                    && Objects.equals(telegram, otherUpdateMemberDescriptor.telegram)
+                    && Objects.equals(room, otherUpdateMemberDescriptor.room)
+                    && Objects.equals(tags, otherUpdateMemberDescriptor.tags);
         }
 
         @Override

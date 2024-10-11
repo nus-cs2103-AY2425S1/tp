@@ -13,22 +13,22 @@ import java.util.Optional;
 import java.util.Set;
 
 import hallpointer.address.commons.core.index.Index;
-import hallpointer.address.logic.commands.EditMemberCommand;
-import hallpointer.address.logic.commands.EditMemberCommand.EditMemberDescriptor;
+import hallpointer.address.logic.commands.UpdateMemberCommand;
+import hallpointer.address.logic.commands.UpdateMemberCommand.UpdateMemberDescriptor;
 import hallpointer.address.logic.parser.exceptions.ParseException;
 import hallpointer.address.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new EditMemberCommand object
+ * Parses input arguments and creates a new UpdateMemberCommand object
  */
-public class EditMemberCommandParser implements Parser<EditMemberCommand> {
+public class UpdateMemberCommandParser implements Parser<UpdateMemberCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditMemberCommand
-     * and returns an EditMemberCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the UpdateMemberCommand
+     * and returns an UpdateMemberCommand object for execution.
      * @throws ParseException if the user input does not conform to the expected format
      */
-    public EditMemberCommand parse(String args) throws ParseException {
+    public UpdateMemberCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TELEGRAM, PREFIX_ROOM, PREFIX_TAG);
@@ -39,30 +39,30 @@ public class EditMemberCommandParser implements Parser<EditMemberCommand> {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    EditMemberCommand.MESSAGE_USAGE), pe);
+                    UpdateMemberCommand.MESSAGE_USAGE), pe);
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_TELEGRAM, PREFIX_ROOM);
 
-        EditMemberDescriptor editMemberDescriptor = new EditMemberDescriptor();
+        UpdateMemberDescriptor updateMemberDescriptor = new UpdateMemberDescriptor();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editMemberDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+            updateMemberDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_TELEGRAM).isPresent()) {
-            editMemberDescriptor.setTelegram(
+            updateMemberDescriptor.setTelegram(
                     ParserUtil.parseTelegram(argMultimap.getValue(PREFIX_TELEGRAM).get()));
         }
         if (argMultimap.getValue(PREFIX_ROOM).isPresent()) {
-            editMemberDescriptor.setRoom(ParserUtil.parseRoom(argMultimap.getValue(PREFIX_ROOM).get()));
+            updateMemberDescriptor.setRoom(ParserUtil.parseRoom(argMultimap.getValue(PREFIX_ROOM).get()));
         }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editMemberDescriptor::setTags);
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(updateMemberDescriptor::setTags);
 
-        if (!editMemberDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditMemberCommand.MESSAGE_NOT_EDITED);
+        if (!updateMemberDescriptor.isAnyFieldUpdated()) {
+            throw new ParseException(UpdateMemberCommand.MESSAGE_NOT_UPDATED);
         }
 
-        return new EditMemberCommand(index, editMemberDescriptor);
+        return new UpdateMemberCommand(index, updateMemberDescriptor);
     }
 
     /**
@@ -81,3 +81,4 @@ public class EditMemberCommandParser implements Parser<EditMemberCommand> {
     }
 
 }
+

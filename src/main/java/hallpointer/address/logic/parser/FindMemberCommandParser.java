@@ -9,7 +9,7 @@ import hallpointer.address.logic.parser.exceptions.ParseException;
 import hallpointer.address.model.member.NameContainsKeywordsPredicate;
 
 /**
- * Parses input arguments and creates a new FindMemberCommand object
+ * Parses input arguments and creates a new FindMemberCommand object.
  */
 public class FindMemberCommandParser implements Parser<FindMemberCommand> {
 
@@ -29,5 +29,4 @@ public class FindMemberCommandParser implements Parser<FindMemberCommand> {
 
         return new FindMemberCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
     }
-
 }

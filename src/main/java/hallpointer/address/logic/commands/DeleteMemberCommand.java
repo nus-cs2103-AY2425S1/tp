@@ -6,7 +6,6 @@ import java.util.List;
 
 import hallpointer.address.commons.core.index.Index;
 import hallpointer.address.commons.util.ToStringBuilder;
-import hallpointer.address.logic.Messages;
 import hallpointer.address.logic.commands.exceptions.CommandException;
 import hallpointer.address.model.Model;
 import hallpointer.address.model.member.Member;
@@ -23,7 +22,8 @@ public class DeleteMemberCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_MEMBER_SUCCESS = "Member %1$s with room %2$s and Telegram Handle %3$s deleted successfully.";
+    public static final String MESSAGE_DELETE_MEMBER_SUCCESS = "Member %1$s with room %2$s and Telegram Handle %3$s "
+            + "deleted successfully.";
     public static final String MESSAGE_INVALID_INDEX = "Error: Invalid index specified.";
 
     private final Index targetIndex;
@@ -47,10 +47,12 @@ public class DeleteMemberCommand extends Command {
         model.deleteMember(memberToDelete);
 
         // Success message with name, room, and telegram details
-        return new CommandResult(String.format(MESSAGE_DELETE_MEMBER_SUCCESS, 
-                                               memberToDelete.getName().fullName, 
-                                               memberToDelete.getRoom().value, 
-                                               memberToDelete.getTelegram().value));
+        return new CommandResult(
+            String.format(MESSAGE_DELETE_MEMBER_SUCCESS,
+                memberToDelete.getName().fullName,
+                memberToDelete.getRoom().value,
+                memberToDelete.getTelegram().value)
+        );
     }
 
     @Override
@@ -75,3 +77,4 @@ public class DeleteMemberCommand extends Command {
                 .toString();
     }
 }
+
