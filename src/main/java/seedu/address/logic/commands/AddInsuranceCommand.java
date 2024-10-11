@@ -59,16 +59,13 @@ public class AddInsuranceCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
         try {
-            InsurancePlansManager personToEditInsurancePlansManager = personToEdit.getInsurancePlansManager();
-
             InsurancePlan planToBeAdded = InsurancePlanFactory.createInsurancePlan(insuranceID);
 
+            InsurancePlansManager personToEditInsurancePlansManager = personToEdit.getInsurancePlansManager();
             personToEditInsurancePlansManager.checkIfPlanNotOwned(planToBeAdded);
-
             personToEditInsurancePlansManager.addPlan(planToBeAdded);
 
             Person personWithAddedInsurancePlan = lastShownList.get(index.getZeroBased());
-
             model.setPerson(personToEdit, personWithAddedInsurancePlan);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 

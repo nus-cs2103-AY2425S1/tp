@@ -95,6 +95,9 @@ public class InsurancePlansManager {
      * @throws ParseException if the plan is owned by the client.
      */
     public void checkIfPlanNotOwned(InsurancePlan plan) throws ParseException {
+        if (insurancePlans.isEmpty()) {
+            return;
+        }
         for (InsurancePlan p : insurancePlans) {
             if (p.equals(plan)) {
                 throw new ParseException(DUPLICATE_PLAN_DETECTED_MESSAGE);

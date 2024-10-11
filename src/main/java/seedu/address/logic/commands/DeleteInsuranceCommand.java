@@ -58,12 +58,10 @@ public class DeleteInsuranceCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
         try {
-            InsurancePlansManager personToEditInsurancePlansManager = personToEdit.getInsurancePlansManager();
-
             InsurancePlan planToBeDeleted = InsurancePlanFactory.createInsurancePlan(insuranceID);
 
+            InsurancePlansManager personToEditInsurancePlansManager = personToEdit.getInsurancePlansManager();
             personToEditInsurancePlansManager.checkIfPlanOwned(planToBeDeleted);
-
             personToEditInsurancePlansManager.deletePlan(planToBeDeleted);
 
             Person personWithDeletedInsurancePlan = lastShownList.get(index.getZeroBased());
