@@ -53,6 +53,7 @@ public class EditCommandParserTest {
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
 
     private EditCommandParser parser = new EditCommandParser();
+    //need to add Role values to test cases here and check for bugs with related role field
 
     @Test
     public void parse_missingParts_failure() {
