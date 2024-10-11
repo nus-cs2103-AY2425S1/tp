@@ -11,6 +11,9 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.TelegramUsername;
+import seedu.address.model.role.Role;
+import seedu.address.model.role.RoleHandler;
+import seedu.address.model.role.exceptions.InvalidRoleException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -91,6 +94,20 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withTelegramUsername(String telegramUsername) {
         descriptor.setTelegramUsername(new TelegramUsername(telegramUsername));
+        return this;
+    }
+
+    public EditPersonDescriptorBuilder withRoles(String... roles) {
+        Set<Role> roleSet = Stream.of(roles).map(str -> {
+            try {
+                return RoleHandler.getRole(str);
+            } catch (InvalidRoleException e) {
+                //TODO Change This
+                return null;
+            }
+
+        }).collect(Collectors.toSet());
+        descriptor.setRoles(roleSet);
         return this;
     }
 

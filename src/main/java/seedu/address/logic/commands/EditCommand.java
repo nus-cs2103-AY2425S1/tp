@@ -1,12 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -28,6 +23,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.TelegramUsername;
+import seedu.address.model.role.Role;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -47,6 +43,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TELEGRAM + "TELEGRAM] "
             + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_ROLE + "ROLE]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -105,8 +102,10 @@ public class EditCommand extends Command {
         TelegramUsername telegramUsername = editPersonDescriptor.getTelegramUsername()
                 .orElse(personToEdit.getTelegramUsername());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Role[] updatedRoles = (editPersonDescriptor.getRoles().orElse(personToEdit.getRoles())).toArray(new Role[0]);
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, telegramUsername);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, telegramUsername,
+                updatedRoles);
     }
 
     @Override
@@ -144,6 +143,7 @@ public class EditCommand extends Command {
         private Address address;
         private TelegramUsername telegramUsername;
         private Set<Tag> tags;
+        private Set<Role> roles;
 
         public EditPersonDescriptor() {}
 
@@ -158,13 +158,14 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setTelegramUsername(toCopy.telegramUsername);
             setTags(toCopy.tags);
+            setRoles(toCopy.roles);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, telegramUsername);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, telegramUsername, roles);
         }
 
         public void setName(Name name) {
@@ -222,6 +223,22 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        /**
+         * Sets {@code roles} to this object's {@code roles}.
+         * A defensive copy of {@code roles} is used internally.
+         */
+        public void setRoles(Set<Role> roles) {
+            this.roles = (roles != null) ? new HashSet<>(roles) : null;
+        }
+
+        /**
+         * Returns an unmodifiable role set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code roles} is null.
+         */
+        public Optional<Set<Role>> getRoles() {
+            return (roles != null) ? Optional.of(Collections.unmodifiableSet(roles)) : Optional.empty();
+        }
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -239,7 +256,8 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(telegramUsername, otherEditPersonDescriptor.telegramUsername)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(roles, otherEditPersonDescriptor.roles);
         }
 
         @Override
@@ -251,6 +269,7 @@ public class EditCommand extends Command {
                     .add("address", address)
                     .add("telegram", telegramUsername)
                     .add("tags", tags)
+                    .add("roles", roles)
                     .toString();
         }
     }

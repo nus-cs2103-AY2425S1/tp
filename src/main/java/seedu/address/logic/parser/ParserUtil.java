@@ -146,6 +146,15 @@ public class ParserUtil {
         return tagSet;
     }
 
+    public static Set<Role> parseRoles(Collection<String> roles) throws ParseException {
+        requireNonNull(roles);
+        final Set<Role> roleSet = new HashSet<>();
+        for (String roleName : roles) {
+            roleSet.add(parseRole(roleName));
+        }
+        return roleSet;
+    }
+
     /**
      * Parses a {@code String role} into a {@code Role}.
      */
