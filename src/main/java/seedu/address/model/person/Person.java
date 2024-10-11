@@ -22,13 +22,14 @@ public class Person {
     private final Department department;
     private final Role role;
     private final ContractEndDate contractEndDate;
+    private final boolean isEmployee;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Department department, Role role,
-                  ContractEndDate contractEndDate) {
-        requireAllNonNull(name, phone, email, address);
+                  ContractEndDate contractEndDate, boolean isEmployee) {
+        requireAllNonNull(name, phone, email, address, department, role, contractEndDate);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -36,6 +37,7 @@ public class Person {
         this.department = department;
         this.role = role;
         this.contractEndDate = contractEndDate;
+        this.isEmployee = isEmployee;
     }
 
     public Name getName() {
@@ -64,6 +66,20 @@ public class Person {
 
     public ContractEndDate getContractEndDate() {
         return contractEndDate;
+    }
+
+    /**
+     * Returns true if the person is an employee.
+     */
+    public boolean isEmployee() {
+        return isEmployee;
+    }
+
+    /**
+     * Returns true if the person is a potential hire.
+     */
+    public boolean isPotentialHire() {
+        return !isEmployee();
     }
 
     /**
@@ -101,7 +117,8 @@ public class Person {
                 && address.equals(otherPerson.address)
                 && department.equals(otherPerson.department)
                 && role.equals(otherPerson.role)
-                && contractEndDate.equals(otherPerson.contractEndDate);
+                && contractEndDate.equals(otherPerson.contractEndDate)
+                && isEmployee == otherPerson.isEmployee();
     }
 
     @Override
@@ -112,15 +129,17 @@ public class Person {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
+        ToStringBuilder builder = new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
                 .add("department", department)
-                .add("role", role)
-                .add("contractEndDate", contractEndDate)
-                .toString();
+                .add("role", role);
+        if (isEmployee()) {
+            return builder.add("contractEndDate", contractEndDate).toString();
+        }
+        return builder.toString();
     }
 
 }

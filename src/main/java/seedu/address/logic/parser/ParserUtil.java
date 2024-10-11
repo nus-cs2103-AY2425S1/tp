@@ -135,6 +135,6 @@ public class ParserUtil {
         if (!ContractEndDate.isValidDate(trimmedContractEndDate)) {
             throw new ParseException(Department.MESSAGE_CONSTRAINTS);
         }
-        return new ContractEndDate(trimmedContractEndDate);
+        return ContractEndDate.of(trimmedContractEndDate);
     }
 }

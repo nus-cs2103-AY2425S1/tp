@@ -40,7 +40,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         department = new Department(DEFAULT_DEPARTMENT);
         role = new Role(DEFAULT_ROLE);
-        contractEndDate = new ContractEndDate(DEFAULT_CONTRACT_START_DATE);
+        contractEndDate = ContractEndDate.of(DEFAULT_CONTRACT_START_DATE);
     }
 
     /**
@@ -108,12 +108,12 @@ public class PersonBuilder {
      * Sets the {@code ContractEndDate} of the {@code Person} that we are building.
      */
     public PersonBuilder withContractEndDate(String date) {
-        this.contractEndDate = new ContractEndDate(date);
+        this.contractEndDate = ContractEndDate.of(date);
         return this;
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, department, role, contractEndDate);
+        return new Person(name, phone, email, address, department, role, contractEndDate, true);
     }
 
 }

@@ -35,7 +35,7 @@ public class PersonUtil {
         sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
         sb.append(PREFIX_DEPARTMENT + person.getDepartment().value + " ");
         sb.append(PREFIX_ROLE + person.getRole().value + " ");
-        sb.append(PREFIX_CONTRACT_END_DATE + person.getContractEndDate().value + " ");
+        sb.append(PREFIX_CONTRACT_END_DATE + person.getContractEndDate().getValue() + " ");
         return sb.toString();
     }
 
