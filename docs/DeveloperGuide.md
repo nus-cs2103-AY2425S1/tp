@@ -311,11 +311,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case resumes from 3.
 
     Use case ends.
-  
+
 
 * 1b. Adding Telegram Contact
   * 1b1. User specifies the Telegram username that the contact belongs to
-  
+
   * Use case resumes from 3.
 
 **UC02: Listing Contacts**
@@ -328,7 +328,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions:**
 * 2a PlanPal detects error in process to list user
   * 2a1 PlanPal shows an error message that the command was called wrongly.
-    
+
     Use case ends.
 
 
@@ -363,13 +363,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 * 1a. PlanPal detects that the command given is invalid
     * 1a1. AddressBook shows an error message.
-    
+
         Use case resumes at step 1.
 
 
 * 2a. No contacts are found for the requested role.
     * 2a1. PlanPal shows a message: "No contacts found for the specified role."
-    
+
         Use case ends.
 
 
