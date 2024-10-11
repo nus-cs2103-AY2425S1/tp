@@ -17,7 +17,7 @@ public class MarkVipCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks or unmarks the person identified by the index "
             + "number used in the displayed person list as a VIP.\n"
-            + "Parameters: INDEX (must be a positive integer) IS_VIP (must be \"true\" or \"false\")\n"
+            + "Parameters: INDEX (must be a positive integer) v/IS_VIP (must be \"true\" or \"false\")\n"
             + "Example: " + COMMAND_WORD + " 1 true";
 
     public static final String MESSAGE_VIP_PERSON_SUCCESS = "Person marked as a VIP: %1$s";
@@ -46,6 +46,8 @@ public class MarkVipCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+
+        System.out.println("Marking VIP: " + targetIndex + " " + newState);
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
