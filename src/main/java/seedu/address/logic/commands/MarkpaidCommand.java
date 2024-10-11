@@ -21,20 +21,19 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
- * Marks an existings person in the address book as paid for a specific month.
+ * Marks an existing person in the address book as paid for a specified month.
  */
 public class MarkpaidCommand extends Command {
 
     public static final String COMMAND_WORD = "markpaid";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks paid for the person identified "
-            + "by the index number used in the displayed person list"
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) MONTHPAID (must be in yyyy-mm format)\n"
-            + "Example: " + COMMAND_WORD + " 1 2024-01";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks the months paid for the person identified "
+            + "by the index number used in the displayed person list. "
+            + "Existing months paid of that person will be overwritten by input to this command.\n"
+            + "Parameters: INDEX (must be a positive integer) MONTHSPAID... (yyyy-mm format)\n"
+            + "Example: " + COMMAND_WORD + " 1 2024-01 2024-02";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Marked Person: %1$s";
-
     private final Index index;
     private final String monthPaid;
 
