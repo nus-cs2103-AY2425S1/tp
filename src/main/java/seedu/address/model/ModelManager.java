@@ -14,9 +14,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.PersonAttendance;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonAttendance;
 import seedu.address.model.student.Student;
 
 /**
@@ -174,16 +174,6 @@ public class ModelManager implements Model {
         filteredStudents.setPredicate(predicate);
     }
 
-    @Override
-    public void markAttendance(Person person, LocalDate date, PersonAttendance attendance) {
-        if (!hasPerson(person)) {
-            throw new IllegalArgumentException("Person not found in the address book.");
-        }
-
-        attendanceMap.computeIfAbsent(person, k -> new HashMap<>());
-
-        attendanceMap.get(person).put(date, attendance);
-    }
 
     @Override
     public Person getPersonByName(Name name) {

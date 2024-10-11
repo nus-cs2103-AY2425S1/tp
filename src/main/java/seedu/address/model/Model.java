@@ -1,11 +1,9 @@
 package seedu.address.model;
 import java.nio.file.Path;
-import java.time.LocalDate;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.PersonAttendance;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.student.Student;
@@ -93,7 +91,7 @@ public interface Model {
 
     //=========== Student ================================================================================
 
-    void markAttendance(Person person, LocalDate date, PersonAttendance attendance);
+
 
     Student getStudentByName(Name name);
 
@@ -119,7 +117,8 @@ public interface Model {
     /**
      * Replaces the given student {@code target} with {@code editedStudent}.
      * {@code target} must exist in the address book.
-     * The student identity of {@code editedStudent} must not be the same as another existing student in the address book.
+     * The student identity of {@code editedStudent} must not be the same as another
+     * existing student in the address book.
      */
 
     void setStudent(Student target, Student editedStudent);
