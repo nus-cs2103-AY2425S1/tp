@@ -40,7 +40,7 @@ public class JobCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(job.getName().value);
         company.setText(job.getCompany().value);
-        salary.setText(String.valueOf(job.getSalary().value));
+        salary.setText(job.getSalary().toString());
         requirements.setText(job.getRequirements().value);
         description.setText(job.getDescription().value);
     }
