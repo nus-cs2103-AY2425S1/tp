@@ -62,7 +62,7 @@ public class UniqueGroupList implements Iterable<Group> {
             throw new PersonNotFoundException();
         }
 
-        if (!target.isSameGroup(editedStudent) && contains(editedStudent)) {
+        if (target.isSameGroup(editedStudent) && contains(editedStudent)) {
             throw new DuplicatePersonException();
         }
 
