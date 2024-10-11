@@ -15,6 +15,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.lang.reflect.Method;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -28,7 +30,7 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 
-import java.lang.reflect.Method;
+
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -191,7 +193,8 @@ public class EditCommandTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
 
         // Use reflection to access the private static method
-        Method method = EditCommand.class.getDeclaredMethod("createEditedPerson", Person.class, EditPersonDescriptor.class);
+        Method method = EditCommand.class.getDeclaredMethod("createEditedPerson",
+                Person.class, EditPersonDescriptor.class);
         method.setAccessible(true);
 
         // Invoke the method and get the result
