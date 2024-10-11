@@ -131,6 +131,7 @@ public class ModelManager implements Model {
     public void deleteCompany(Company target) {
         addressBook.removeCompany(target);
     }
+
     @Override
     // Todo: In a second PR when I add the deleteJob feature
     public void deleteJob(Job target) {}
