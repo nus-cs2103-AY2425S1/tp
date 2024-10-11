@@ -73,15 +73,11 @@ public class RoleHandler {
     public static boolean isValidRoleName(String test) {
         Objects.requireNonNull(test);
         test = test.trim().toLowerCase();
-        switch (test) {
-        case Attendee.ROLE_WORD:
-        case Sponsor.ROLE_WORD:
-        case Vendor.ROLE_WORD:
-        case Volunteer.ROLE_WORD:
-            return true;
-        default:
-            return false;
-        }
+        return switch (test) {
+        case Attendee.ROLE_WORD, Sponsor.ROLE_WORD,
+                Vendor.ROLE_WORD, Volunteer.ROLE_WORD -> true;
+        default -> false;
+        };
     }
 
 }
