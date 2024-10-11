@@ -2,16 +2,12 @@ package keycontacts.model.student;
 
 import static keycontacts.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 import keycontacts.commons.util.ToStringBuilder;
 import keycontacts.logic.commands.EditCommand.EditStudentDescriptor;
 import keycontacts.model.lesson.RegularLesson;
-import keycontacts.model.tag.Tag;
 
 /**
  * Represents a Student in the student directory.
@@ -19,14 +15,10 @@ import keycontacts.model.tag.Tag;
  */
 public class Student {
 
-    // Identity fields
+    // Data fields
     private final Name name;
     private final Phone phone;
-    private final Email email;
-
-    // Data fields
     private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
 
     // Associations
     private final RegularLesson regularLesson;
@@ -35,13 +27,11 @@ public class Student {
      * Constructor for a new student. Uses default associations.
      * Every field must be present and not null.
      */
-    public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Student(Name name, Phone phone, Address address) {
+        requireAllNonNull(name, phone, address);
         this.name = name;
         this.phone = phone;
-        this.email = email;
         this.address = address;
-        this.tags.addAll(tags);
         this.regularLesson = null;
     }
 
@@ -49,14 +39,11 @@ public class Student {
      * Constructor for a new student with non-default student associations. Identity and data fields must be
      * present and not null.
      */
-    public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                    RegularLesson regularLesson) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Student(Name name, Phone phone, Address address, RegularLesson regularLesson) {
+        requireAllNonNull(name, phone, address);
         this.name = name;
         this.phone = phone;
-        this.email = email;
         this.address = address;
-        this.tags.addAll(tags);
         this.regularLesson = regularLesson;
     }
 
@@ -68,20 +55,8 @@ public class Student {
         return phone;
     }
 
-    public Email getEmail() {
-        return email;
-    }
-
     public Address getAddress() {
         return address;
-    }
-
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
     }
 
     public Optional<RegularLesson> getRegularLesson() {
@@ -109,18 +84,16 @@ public class Student {
     public Student withEditStudentDescriptor(EditStudentDescriptor editStudentDescriptor) {
         Name updatedName = editStudentDescriptor.getName().orElse(name);
         Phone updatedPhone = editStudentDescriptor.getPhone().orElse(phone);
-        Email updatedEmail = editStudentDescriptor.getEmail().orElse(email);
         Address updatedAddress = editStudentDescriptor.getAddress().orElse(address);
-        Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(tags);
 
-        return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, regularLesson);
+        return new Student(updatedName, updatedPhone, updatedAddress, regularLesson);
     }
 
     /**
      * Creates and returns a new {@code Student} with the updated {@code regularLesson}.
      */
     public Student withRegularLesson(RegularLesson regularLesson) {
-        return new Student(name, phone, email, address, tags, regularLesson);
+        return new Student(name, phone, address, regularLesson);
     }
 
     /**
@@ -154,16 +127,14 @@ public class Student {
         Student otherStudent = (Student) other;
         return name.equals(otherStudent.name)
                 && phone.equals(otherStudent.phone)
-                && email.equals(otherStudent.email)
                 && address.equals(otherStudent.address)
-                && tags.equals(otherStudent.tags)
                 && getRegularLesson().equals(otherStudent.getRegularLesson());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, regularLesson);
+        return Objects.hash(name, phone, address, regularLesson);
     }
 
     @Override
@@ -171,9 +142,7 @@ public class Student {
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
-                .add("email", email)
                 .add("address", address)
-                .add("tags", tags)
                 .add("regularLesson", regularLesson)
                 .toString();
     }

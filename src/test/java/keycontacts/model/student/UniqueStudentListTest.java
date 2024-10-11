@@ -1,7 +1,6 @@
 package keycontacts.model.student;
 
 import static keycontacts.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static keycontacts.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static keycontacts.testutil.Assert.assertThrows;
 import static keycontacts.testutil.TypicalStudents.ALICE;
 import static keycontacts.testutil.TypicalStudents.BOB;
@@ -42,8 +41,7 @@ public class UniqueStudentListTest {
     @Test
     public void contains_studentWithSameIdentityFieldsInList_returnsTrue() {
         uniqueStudentList.add(ALICE);
-        Student editedAlice = new StudentBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
+        Student editedAlice = new StudentBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         assertTrue(uniqueStudentList.contains(editedAlice));
     }
 
@@ -85,8 +83,7 @@ public class UniqueStudentListTest {
     @Test
     public void setStudent_editedStudentHasSameIdentity_success() {
         uniqueStudentList.add(ALICE);
-        Student editedAlice = new StudentBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
+        Student editedAlice = new StudentBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         uniqueStudentList.setStudent(ALICE, editedAlice);
         UniqueStudentList expectedUniqueStudentList = new UniqueStudentList();
         expectedUniqueStudentList.add(editedAlice);
