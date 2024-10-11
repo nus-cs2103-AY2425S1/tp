@@ -99,6 +99,10 @@ public class PaidCommand extends Command {
                 .toString();
     }
 
+    /**
+     * Stores the details for person to mark as paid. Same as the nested class in EditCommand but this
+     * only changes the hasPaid variable
+     */
     public static class PaidPersonDescriptor {
         private Boolean hasPaid;
 
