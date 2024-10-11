@@ -17,9 +17,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_TUTORIAL_GROUP = new Prefix("tg/");
     public static final Prefix PREFIX_STUDENT_NUMBER = new Prefix("sn/");
-
-    // New prefix definitions for attendance commands
-    public static final Prefix PREFIX_TUTORIAL_GROUP = new Prefix("tg/");
     public static final Prefix PREFIX_DATE = new Prefix("d/");
     public static final Prefix PREFIX_PRESENT = new Prefix("pr/");
 
