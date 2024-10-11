@@ -41,6 +41,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label telegramUsername;
     @FXML
+    private Label roles;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -58,6 +60,9 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        person.getRoles().stream()
+                .sorted(Comparator.comparing(role -> role.getRoleName()))
+                .forEach(role -> roles.setText(role.getRoleName()));
     }
 
     private void setTextForTelegramUsername(Person person) {

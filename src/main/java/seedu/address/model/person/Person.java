@@ -121,8 +121,9 @@ public class Person implements Comparable<Person> {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
-                && roles.equals(otherPerson.roles)
-                && telegramUsername.equals(otherPerson.telegramUsername);
+
+                && telegramUsername.equals(otherPerson.telegramUsername)
+                && roles.equals(otherPerson.roles);
     }
 
     @Override
