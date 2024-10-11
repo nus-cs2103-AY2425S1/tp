@@ -2,11 +2,15 @@ package seedu.address.model.student;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -22,6 +26,9 @@ public class Student extends Person {
     private static final Email DUMMY_EMAIL = new Email("dummy@example.com");
     private static final Address DUMMY_ADDRESS = new Address("dummy address");
     private static final Set<Tag> DUMMY_TAG = new HashSet<>();
+
+    private final Map<LocalDate, Attendance> attendanceRecords = new HashMap<>();
+
 
     // Identity fields
     private final TutorialGroup tutorialGroup;
@@ -75,7 +82,8 @@ public class Student extends Person {
         return otherStudent.getName().equals(getName())
                 && otherStudent.getPhone().equals(getPhone())
                 && otherStudent.tutorialGroup.equals(tutorialGroup)
-                && otherStudent.studentNumber.equals(studentNumber);
+                && otherStudent.studentNumber.equals(studentNumber)
+                && otherStudent.attendanceRecords.equals(attendanceRecords);
     }
 
     @Override
@@ -86,5 +94,20 @@ public class Student extends Person {
                 .add("tutorialGroup", tutorialGroup)
                 .add("studentNumber", studentNumber)
                 .toString();
+    }
+    /**
+     * Marks the attendance for a specific date.
+     *
+     * @param date The date on which attendance is being recorded.
+     * @param status The attendance status, either 'present' or 'absent'.
+     * @throws IllegalArgumentException if the provided status is invalid.
+     */
+    public void markAttendance(LocalDate date, String status) {
+        Attendance attendance = new Attendance(status);
+        attendanceRecords.put(date, attendance);
+    }
+
+    public Attendance getAttendance(LocalDate date) {
+        return attendanceRecords.get(date);
     }
 }
