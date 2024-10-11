@@ -41,17 +41,17 @@
           </padding>
         </StackPane>
 
-        <HBox id="contactList" fx:id="contactListPane" styleClass="pane-with-border" minWidth="340" prefWidth="340" prefHeight="600">
+        <HBox fx:id="contactListPane" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS" >
             <!-- Contact list -->
-            <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
+            <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340">
                 <padding>
-                <Insets top="10" right="10" bottom="10" left="10" />
+                  <Insets top="10" right="10" bottom="10" left="10" />
                 </padding>
-                <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                <StackPane fx:id="personListPanelPlaceholder" />
             </VBox>
             <!-- Contact details panel -->
             <VBox id="personDetails" minWidth="340" prefWidth="340">
-                <Label text = "Contact Details Here"/>
+                <Label text = "Contact Details Here" />
             </VBox>
         </HBox>
         <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
