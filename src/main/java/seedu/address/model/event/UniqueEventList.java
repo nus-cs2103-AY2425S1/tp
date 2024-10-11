@@ -8,6 +8,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.event.exceptions.DuplicateEventException;
+import seedu.address.model.event.exceptions.EventNotFoundException;
 
 /**
  * A list of events that enforces uniqueness between its elements and does not allow nulls.
@@ -28,7 +30,8 @@ public class UniqueEventList implements Iterable<Event> {
      * Returns true if the list contains an equivalent event as the given argument.
      */
     public boolean contains(Event toCheck) {
-        return false; //Implement in future
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isSameEvent);
     }
 
     /**
@@ -36,6 +39,10 @@ public class UniqueEventList implements Iterable<Event> {
      * The event must not already exist in the list.
      */
     public void add(Event toAdd) {
+        requireNonNull(toAdd);
+        if (contains(toAdd)) {
+            throw new DuplicateEventException();
+        }
         internalList.add(toAdd);
     }
 
@@ -49,11 +56,11 @@ public class UniqueEventList implements Iterable<Event> {
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            // throw new EventNotFoundException(); //To implement
+            throw new EventNotFoundException();
         }
 
         if (!target.isSameEvent(editedEvent) && contains(editedEvent)) {
-            // throw new DuplicateEventException();
+            throw new DuplicateEventException();
         }
 
         internalList.set(index, editedEvent);
@@ -64,7 +71,10 @@ public class UniqueEventList implements Iterable<Event> {
      * The event must exist in the list.
      */
     public void remove(Event toRemove) {
-        internalList.remove(toRemove);
+        requireNonNull(toRemove);
+        if (!internalList.remove(toRemove)) {
+            throw new EventNotFoundException();
+        }
     }
 
     public void setEvents(UniqueEventList replacement) {
@@ -79,7 +89,7 @@ public class UniqueEventList implements Iterable<Event> {
     public void setEvents(List<Event> events) {
         requireAllNonNull(events);
         if (!eventsAreUnique(events)) {
-            // throw new DuplicateEventException();
+            throw new DuplicateEventException();
         }
 
         internalList.setAll(events);
@@ -99,13 +109,21 @@ public class UniqueEventList implements Iterable<Event> {
 
     @Override
     public boolean equals(Object other) {
-        //To implement in future
-        return true;
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof UniqueEventList)) {
+            return false;
+        }
+
+        UniqueEventList otherList = (UniqueEventList) other;
+        return internalList.equals(otherList.internalList);
     }
 
     @Override
     public int hashCode() {
-        return 0; //Implement in future
+        return internalList.hashCode();
     }
 
     @Override
@@ -117,7 +135,14 @@ public class UniqueEventList implements Iterable<Event> {
      * Returns true if {@code events} contains only unique persons.
      */
     private boolean eventsAreUnique(List<Event> events) {
-        return true; //Implement in future
+        for (int i = 0; i < events.size() - 1; i++) {
+            for (int j = i + 1; j < events.size(); j++) {
+                if (events.get(i).isSameEvent(events.get(j))) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
 }
