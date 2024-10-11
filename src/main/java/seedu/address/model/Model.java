@@ -62,6 +62,9 @@ public interface Model {
 
     /**
      * Returns true if a person with similar identity as {@code person} exists in the address book.
+     *
+     * @param person Person to check
+     * @return True if a similar person exists, false otherwise
      */
     boolean hasSimilarPerson(Person person);
 
