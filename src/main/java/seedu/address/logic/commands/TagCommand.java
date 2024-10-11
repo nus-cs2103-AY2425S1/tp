@@ -10,6 +10,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -24,7 +25,7 @@ public class TagCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_TAG + "TAG... \n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TAG + "friends"
+            + PREFIX_TAG + "friends" + " "
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_TAG_PERSON_SUCCESS = "Tagged person: %1$s with tags: %2$s";
@@ -63,8 +64,13 @@ public class TagCommand extends Command {
 
     private String tagSetToString(Set<Tag> tagList) {
         StringBuilder stringBuilder = new StringBuilder();
-        for (Tag t:tagList) {
+        Iterator<Tag> it = tagList.iterator();
+        for (int i = 0; i < tagList.size(); i++) {
+            Tag t = it.next();
             stringBuilder.append(t);
+            if (i != tagList.size() - 1) {
+                stringBuilder.append(", ");
+            }
         }
         return stringBuilder.toString();
     }
