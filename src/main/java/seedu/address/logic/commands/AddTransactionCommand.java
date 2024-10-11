@@ -7,9 +7,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Transaction;
 import seedu.address.model.person.Person;
-
+import seedu.address.model.person.Transaction;
 import java.util.List;
 
 /**
@@ -67,7 +66,7 @@ public class AddTransactionCommand extends Command {
         }
 
         Person selected = lastShownList.get(index.getZeroBased());
-        Transaction toAdd = new Transaction(description,amount,otherParty,date);
+        Transaction toAdd = new Transaction(description, amount, otherParty, date);
         selected.getTransactions().add(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(selected)));
     }
