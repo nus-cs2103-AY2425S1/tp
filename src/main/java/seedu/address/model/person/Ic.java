@@ -17,12 +17,12 @@ public class Ic {
     /**
      * Constructs a {@code Class}.
      *
-     * @param IcNumber A valid class.
+     * @param ic A valid class.
      */
-    public Ic(String IcNumber) {
-        requireNonNull(IcNumber);
-        checkArgument(isValidIc(IcNumber), MESSAGE_CONSTRAINTS);
-        this.value = IcNumber;
+    public Ic(String ic) {
+        requireNonNull(ic);
+        checkArgument(isValidIc(ic), MESSAGE_CONSTRAINTS);
+        this.value = ic;
     }
 
     /**

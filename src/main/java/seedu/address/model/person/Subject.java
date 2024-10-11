@@ -1,14 +1,15 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's class in the address book.
  */
-public class Class {
+public class Subject {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Classes should only contain alphanumeric characters and spaces";
+            "Subjects should only contain alphanumeric characters and spaces";
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public final String value;
@@ -16,18 +17,18 @@ public class Class {
     /**
      * Constructs a {@code Class}.
      *
-     * @param className A valid class.
+     * @param subject A valid class.
      */
-    public Class(String className) {
-        requireNonNull(className);
-        // todo: checkArgument(isValidClassName(className), MESSAGE_CONSTRAINTS);
-        this.value = className;
+    public Subject(String subject) {
+        requireNonNull(subject);
+        checkArgument(isValidSubject(subject), MESSAGE_CONSTRAINTS);
+        this.value = subject;
     }
 
     /**
      * Returns true if a given string is a valid class name.
      */
-    public static boolean isValidClass(String test) {
+    public static boolean isValidSubject(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
@@ -43,12 +44,12 @@ public class Class {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Class)) {
+        if (!(other instanceof Subject)) {
             return false;
         }
 
-        Class otherClass = (Class) other;
-        return value.equals(otherClass.value);
+        Subject otherSubject = (Subject) other;
+        return value.equals(otherSubject.value);
     }
 
     @Override
