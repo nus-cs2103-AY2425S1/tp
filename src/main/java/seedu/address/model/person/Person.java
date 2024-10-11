@@ -45,6 +45,16 @@ public class Person {
         this.transactions.addAll(transactions);
     }
 
+    public Person(Name name, Company company, Phone phone, Email email, Address address, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.company = company;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+    }
+
     public Name getName() {
         return name;
     }
