@@ -3,9 +3,9 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_STATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -24,9 +24,9 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.StudentStatus;
 import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Nickname;
-import seedu.address.model.person.StudentStatus;
 import seedu.address.model.tag.Role;
 
 /**
@@ -44,7 +44,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_TELEGRAM + "TELEGRAM] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_STUDENT_STATUS + "STUDENT_STATUS] "
-            + "[" + PREFIX_ROLE + "TAG]...\n"
+            + "[" + PREFIX_ROLE + "ROLE]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TELEGRAM + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -99,10 +99,12 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Telegram updatedTelegram = editPersonDescriptor.getTelegram().orElse(personToEdit.getTelegram());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        StudentStatus updatedStudentStatus = editPersonDescriptor.getStudentStatus().orElse(personToEdit.getStudentStatus());
-        Set<Role> updatedRoles = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        StudentStatus updatedStudentStatus =
+                editPersonDescriptor.getStudentStatus().orElse(personToEdit.getStudentStatus());
+        Set<Role> updatedRoles = editPersonDescriptor.getRoles().orElse(personToEdit.getRoles());
         Nickname updatedNickname = editPersonDescriptor.getNickname().orElse(personToEdit.getNickname());
-        return new Person(updatedName, updatedTelegram, updatedEmail, updatedStudentStatus, updatedNickname);
+        return new Person(updatedName, updatedTelegram, updatedEmail, updatedStudentStatus, updatedRoles,
+                updatedNickname);
     }
 
     @Override
@@ -145,14 +147,14 @@ public class EditCommand extends Command {
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * A defensive copy of {@code roles} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
             setTelegram(toCopy.telegram);
             setEmail(toCopy.email);
             setStudentStatus(toCopy.studentStatus);
-            setTags(toCopy.roles);
+            setRoles(toCopy.roles);
             setNickname(toCopy.nickname);
         }
 
@@ -196,19 +198,19 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
+         * Sets {@code roles} to this object's {@code roles}.
+         * A defensive copy of {@code roles} is used internally.
          */
-        public void setTags(Set<Role> roles) {
+        public void setRoles(Set<Role> roles) {
             this.roles = (roles != null) ? new HashSet<>(roles) : null;
         }
 
         /**
          * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Returns {@code Optional#empty()} if {@code roles} is null.
          */
-        public Optional<Set<Role>> getTags() {
+        public Optional<Set<Role>> getRoles() {
             return (roles != null) ? Optional.of(Collections.unmodifiableSet(roles)) : Optional.empty();
         }
 
@@ -247,7 +249,7 @@ public class EditCommand extends Command {
                     .add("telegram", telegram)
                     .add("email", email)
                     .add("studentStatus", studentStatus)
-                    .add("tags", roles)
+                    .add("roles", roles)
                     .add("nickname", nickname)
                     .toString();
         }

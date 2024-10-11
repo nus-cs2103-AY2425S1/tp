@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PRESIDENT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_PRESIDENT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_STATUS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -21,7 +21,7 @@ public class PersonTest {
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Person person = new PersonBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> person.getTags().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> person.getRoles().remove(0));
     }
 
     @Test
@@ -34,7 +34,7 @@ public class PersonTest {
 
         // same name, all other attributes different -> returns true
         Person editedAlice = new PersonBuilder(ALICE).withTelegram(VALID_TELEGRAM_BOB).withEmail(VALID_EMAIL_BOB)
-                .withStudentStatus(VALID_STUDENT_STATUS_BOB).withTags(VALID_TAG_PRESIDENT).build();
+                .withStudentStatus(VALID_STUDENT_STATUS_BOB).withRoles(VALID_ROLE_PRESIDENT).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -86,15 +86,15 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
-        editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_PRESIDENT).build();
+        editedAlice = new PersonBuilder(ALICE).withRoles(VALID_ROLE_PRESIDENT).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 
     @Test
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", telegram="
-                + ALICE.getTelegram() + ", email=" + ALICE.getEmail() + ",studentStatus=" + ALICE.getStudentStatus()
-                + ", tags=" + ALICE.getTags() + ", nickname=" + ALICE.getNickname() + "}";
+                + ALICE.getTelegram() + ", email=" + ALICE.getEmail() + ", studentStatus=" + ALICE.getStudentStatus()
+                + ", roles=" + ALICE.getRoles() + ", nickname=" + ALICE.getNickname() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

@@ -41,10 +41,10 @@ public class Messages {
                 .append(person.getTelegram())
                 .append("; Email: ")
                 .append(person.getEmail())
-                .append("; Address: ")
+                .append("; StudentStatus: ")
                 .append(person.getStudentStatus())
-                .append("; Tags: ");
-        person.getTags().forEach(builder::append);
+                .append("; Nickname: ");
+        person.getRoles().forEach(builder::append);
         return builder.toString();
     }
 

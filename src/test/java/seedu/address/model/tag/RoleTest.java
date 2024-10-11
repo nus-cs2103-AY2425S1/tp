@@ -14,9 +14,9 @@ public class RoleTest {
     }
 
     @Test
-    public void constructor_invalidTagName_throwsIllegalArgumentException() {
-        String invalidTagName = "friends";
-        assertThrows(IllegalArgumentException.class, () -> new Role(invalidTagName));
+    public void constructor_invalidRoleName_throwsIllegalArgumentException() {
+        String invalidRoleName = "friends";
+        assertThrows(IllegalArgumentException.class, () -> new Role(invalidRoleName));
     }
 
     @Test

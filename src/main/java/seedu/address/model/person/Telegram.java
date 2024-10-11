@@ -11,8 +11,8 @@ public class Telegram {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Telegram handles should not contain @, and it should be at least 3 characters long";
-    public static final String VALIDATION_REGEX = "^[A-Za-z0-9_]{2,29}$";
+            "Telegram handles should not contain @, and it should have a length of 3 to 29 characters inclusive";
+    public static final String VALIDATION_REGEX = "^[A-Za-z0-9_]{3,29}$";
     public final String value;
 
     /**

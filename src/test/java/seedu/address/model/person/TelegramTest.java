@@ -21,40 +21,41 @@ public class TelegramTest {
 
     @Test
     public void isValidTelegram() {
-        // null phone number
+        // null telegram
         assertThrows(NullPointerException.class, () -> Telegram.isValidTelegram(null));
 
-        // invalid phone numbers
+        // invalid telegrams
         assertFalse(Telegram.isValidTelegram("")); // empty string
         assertFalse(Telegram.isValidTelegram(" ")); // spaces only
         assertFalse(Telegram.isValidTelegram("91")); // less than 3 numbers
-        assertFalse(Telegram.isValidTelegram("phone")); // non-numeric
-        assertFalse(Telegram.isValidTelegram("9011p041")); // alphabets within digits
         assertFalse(Telegram.isValidTelegram("9312 1534")); // spaces within digits
+        assertFalse(Telegram.isValidTelegram("@93121534")); // contains @
 
-        // valid phone numbers
+        // valid telegrams
         assertTrue(Telegram.isValidTelegram("911")); // exactly 3 numbers
         assertTrue(Telegram.isValidTelegram("93121534"));
         assertTrue(Telegram.isValidTelegram("124293842033123")); // long phone numbers
+        assertTrue(Telegram.isValidTelegram("phone")); // non-numeric
+        assertTrue(Telegram.isValidTelegram("9011p041")); // alphabets within digits
     }
 
     @Test
     public void equals() {
-        Telegram phone = new Telegram("999");
+        Telegram telegram = new Telegram("999");
 
         // same values -> returns true
-        assertTrue(phone.equals(new Telegram("999")));
+        assertTrue(telegram.equals(new Telegram("999")));
 
         // same object -> returns true
-        assertTrue(phone.equals(phone));
+        assertTrue(telegram.equals(telegram));
 
         // null -> returns false
-        assertFalse(phone.equals(null));
+        assertFalse(telegram.equals(null));
 
         // different types -> returns false
-        assertFalse(phone.equals(5.0f));
+        assertFalse(telegram.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(phone.equals(new Telegram("995")));
+        assertFalse(telegram.equals(new Telegram("995")));
     }
 }

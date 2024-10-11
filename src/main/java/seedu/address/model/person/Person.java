@@ -23,15 +23,15 @@ public class Person {
     private final Email email;
 
     // Data fields
-    private final Address address;
+    private final StudentStatus studentStatus;
     private final Set<Role> roles = new HashSet<>();
     private final Nickname nickname;
-    private final StudentStatus studentStatus;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Telegram telegram, Email email, StudentStatus studentStatus, Set<Role> roles, Nickname nickname) {
+    public Person(Name name, Telegram telegram, Email email, StudentStatus studentStatus,
+                  Set<Role> roles, Nickname nickname) {
         requireAllNonNull(name, telegram, email, studentStatus, roles, nickname);
         this.name = name;
         this.telegram = telegram;
@@ -61,7 +61,7 @@ public class Person {
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Role> getTags() {
+    public Set<Role> getRoles() {
         return Collections.unmodifiableSet(roles);
     }
 
@@ -119,7 +119,7 @@ public class Person {
                 .add("telegram", telegram)
                 .add("email", email)
                 .add("studentStatus", studentStatus)
-                .add("tags", roles)
+                .add("roles", roles)
                 .add("nickname", nickname)
                 .toString();
     }
