@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import com.sun.jdi.PrimitiveValue;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
@@ -36,7 +35,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name,
                              @JsonProperty("email") String email,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
-                             @JsonProperty("studentnumber") String studentNumber) {
+                             @JsonProperty("student number") String studentNumber) {
         this.name = name;
         this.email = email;
         if (tags != null) {

@@ -96,7 +96,6 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(studentToEdit.getTags());
         StudentNumber updatedStudentNumber = editPersonDescriptor.getStudentNumber()
                 .orElse(studentToEdit.getStudentNumber());
-      
         System.out.println(updatedName);
         System.out.println(updatedEmail);
         System.out.println(updatedStudentNumber);

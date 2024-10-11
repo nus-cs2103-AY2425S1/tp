@@ -12,7 +12,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
-import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
 import seedu.address.model.tag.Tag;
 
@@ -107,12 +106,12 @@ public class ParserUtil {
         return new StudentNumber(studentNumber);
     }
 
-     /** 
-     * Parses a {@code String name} into a {@code GroupName}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code name} is invalid.
-     */
+    /**
+    * Parses a {@code String name} into a {@code GroupName}.
+    * Leading and trailing whitespaces will be trimmed.
+    *
+    * @throws ParseException if the given {@code name} is invalid.
+    */
     public static GroupName parseGroupName(String groupName) throws ParseException {
         requireNonNull(groupName);
         String trimmedName = groupName.trim();

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -42,14 +43,14 @@ public class StudentTest {
         editedAlice = new PersonBuilder(ALICE).withStudentNumber(VALID_STUDENT_NUMBER_BOB).build();
         assertFalse(ALICE.isSamePerson(editedAlice));
 
-        // name differs in case, all other attributes same -> returns true
-        Student editedBob = new PersonBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertTrue(BOB.isSamePerson(editedBob));
+        // name differs in case, all other attributes same -> returns false
+        Student editedBob = new PersonBuilder(BOB).withName(VALID_NAME_AMY.toLowerCase()).build();
+        assertFalse(BOB.isSamePerson(editedBob));
 
-        // student number has trailing spaces, all other attributes same -> returns false
+        // student name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        assertTrue(BOB.isSamePerson(editedBob));
+        assertFalse(BOB.isSamePerson(editedBob));
     }
 
     @Test

@@ -15,11 +15,14 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
 
+    private static final Group DUMMY_GROUP = new Group(new GroupName("Dummy Group"));
     private ModelManager modelManager = new ModelManager();
 
     @Test
@@ -78,14 +81,30 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasGroup_nullGroup_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasGroup(null));
+    }
+
+    @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
         assertFalse(modelManager.hasPerson(ALICE));
+    }
+
+    @Test
+    public void hasGroup_groupNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasGroup(DUMMY_GROUP));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
         modelManager.addPerson(ALICE);
         assertTrue(modelManager.hasPerson(ALICE));
+    }
+
+    @Test
+    public void hasGroup_groupInAddressBook_returnsTrue() {
+        modelManager.addGroup(DUMMY_GROUP);
+        assertTrue(modelManager.hasGroup(DUMMY_GROUP));
     }
 
     @Test
