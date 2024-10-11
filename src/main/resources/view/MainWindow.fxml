@@ -43,14 +43,14 @@
 
         <HBox fx:id="contactListPane" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
             <!-- Contact list -->
-              <VBox fx:id="personList" styleClass="stack-pane" minWidth="340" prefWidth="340">
+              <VBox fx:id="personList" styleClass="stack-pane" minWidth="400" prefWidth="400">
                 <padding>
                   <Insets top="10" right="10" bottom="10" left="10" />
                 </padding>
                 <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
               </VBox>
             <!-- Contact details panel -->
-            <VBox id="personDetails" minWidth="340" prefWidth="340">
+            <VBox id="personDetails" HBox.hgrow = "ALWAYS">
                 <Label text = "Contact Details Here" />
             </VBox>
         </HBox>
