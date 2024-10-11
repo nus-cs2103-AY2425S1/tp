@@ -2,6 +2,8 @@ package keycontacts.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -152,5 +154,17 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses {@code String date} into a {@code LocalDate}.
+     */
+    public static LocalDate parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        try {
+            return LocalDate.parse(date); //TODO: need to refactor LocalDate into new Date wrapper class
+        } catch (DateTimeParseException e) {
+            throw new ParseException(e.getMessage());
+        }
     }
 }
