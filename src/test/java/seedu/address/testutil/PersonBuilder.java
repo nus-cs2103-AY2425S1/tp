@@ -8,7 +8,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.clientType.Tag;
+import seedu.address.model.clienttype.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
 /**

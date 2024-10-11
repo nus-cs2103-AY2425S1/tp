@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.clientType.ClientType;
+import seedu.address.model.clienttype.ClientType;
 
 /**
  * Jackson-friendly version of {@link ClientType}.

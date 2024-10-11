@@ -1,4 +1,4 @@
-package seedu.address.model.clientType;
+package seedu.address.model.clienttype;
 
 import static seedu.address.testutil.Assert.assertThrows;
 

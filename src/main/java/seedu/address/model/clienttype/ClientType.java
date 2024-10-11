@@ -1,4 +1,4 @@
-package seedu.address.model.clientType;
+package seedu.address.model.clienttype;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
