@@ -45,8 +45,8 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_missingNric_throwsCommandException() {
-        String missingNric = "T1234567B";
-        NricMatchesPredicate predicate = new NricMatchesPredicate(new Nric(missingNric));
+        Nric missingNric = new Nric("T1234567B");
+        NricMatchesPredicate predicate = new NricMatchesPredicate(missingNric);
         DeleteCommand deleteCommand = new DeleteCommand(predicate);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_PERSON_NRIC_NOT_FOUND);
