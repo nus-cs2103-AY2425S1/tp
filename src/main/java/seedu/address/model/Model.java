@@ -88,4 +88,11 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredVendorList(Predicate<Vendor> predicate);
+
+    /**
+     * Assigns the vendor corresponding to the id to the event specified by its id.
+     * @throws VendorAlreadyAssignedException if {@code Tag} already exists.
+     */
+    void assignVendorToEvent(Vendor vendor, Event event);
 }
+
