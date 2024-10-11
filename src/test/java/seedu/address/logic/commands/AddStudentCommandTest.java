@@ -169,13 +169,45 @@ public class AddStudentCommandTest {
         public Student getStudentByName(Name name) {
             return null;
         }
+
+        @Override
+        public boolean hasStudent(Student student) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addStudent(Student student) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteStudent(Student target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Student> getFilteredStudentList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredStudentList(Predicate<Student> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setStudent(Student target, Student editedStudent) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+
     }
 
     /**
      * A Model stub that contains a single student.
      */
     private class ModelStubWithStudent extends ModelStub {
-        private final Person student;
+        private final Student student;
 
         ModelStubWithStudent(Student student) {
             requireNonNull(student);
@@ -183,9 +215,9 @@ public class AddStudentCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Person student) {
+        public boolean hasStudent(Student student) {
             requireNonNull(student);
-            return ((Student) this.student).isSameStudent((Student) student);
+            return (this.student).isSameStudent((Student) student);
         }
     }
 
@@ -196,14 +228,14 @@ public class AddStudentCommandTest {
         final ArrayList<Person> studentsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            Student student = (Student) person;
+        public boolean hasStudent(Student student) {
+            requireNonNull(student);
+           // Student student = (Student) person;
             return studentsAdded.stream().map(p -> (Student) p).anyMatch(student::isSameStudent);
         }
 
         @Override
-        public void addPerson(Person student) {
+        public void addStudent(Student student) {
             requireNonNull(student);
             studentsAdded.add(student);
         }
