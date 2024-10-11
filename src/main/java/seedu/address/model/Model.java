@@ -14,6 +14,12 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
+    /** {@code Predicate} that shows all employees */
+    Predicate<Person> PREDICATE_SHOW_ALL_EMPLOYEES = person -> person.isEmployee();
+
+    /** {@code Predicate} that shows all potential hires */
+    Predicate<Person> PREDICATE_SHOW_ALL_POTENTIAL_HIRES = person -> person.isPotentialHire();
+
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */

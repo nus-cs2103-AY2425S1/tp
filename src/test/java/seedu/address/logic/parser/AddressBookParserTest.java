@@ -22,6 +22,8 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListEmployeeCommand;
+import seedu.address.logic.commands.ListPotentialCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -84,8 +86,21 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_list() throws Exception {
+        //list command
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+
+        //list employee command
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " e") instanceof ListEmployeeCommand);
+
+        //list potential hire command
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " ph") instanceof ListPotentialCommand);
+
+        //wrong parameter (is not e or ph)
+        assertThrows(ParseException.class, () -> parser.parseCommand(ListCommand.COMMAND_WORD + " 3"));
+
+        //additional text behind parameter
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " e 3") instanceof ListEmployeeCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " ph 3") instanceof ListPotentialCommand);
     }
 
     @Test
