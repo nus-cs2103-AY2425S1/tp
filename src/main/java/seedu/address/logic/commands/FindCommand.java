@@ -22,19 +22,8 @@ public class FindCommand extends Command {
             + "At least one parameter must be provided.\n"
             + "Example: " + COMMAND_WORD + " /n John Doe /id A1234567E";
 
-    //    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
-    //            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-    //            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-    //            + "Example: " + COMMAND_WORD + " alice bob charlie";
-
-    //    private final NameContainsKeywordsPredicate predicate;
-
     private final Predicate<Person> predicate;
 
-
-    //    public FindCommand(NameContainsKeywordsPredicate predicate) {
-    //        this.predicate = predicate;
-    //    }
     public FindCommand(Predicate<Person> predicate) {
         this.predicate = predicate;
     }
@@ -53,20 +42,22 @@ public class FindCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        //        if (other == this) {
-        //            return true;
-        //        }
-        //
-        //        // instanceof handles nulls
-        //        if (!(other instanceof FindCommand)) {
-        //            return false;
-        //        }
-        //
-        //        FindCommand otherFindCommand = (FindCommand) other;
-        //        return predicate.equals(otherFindCommand.predicate);
-        return other == this // Short circuit if same object
-                || (other instanceof FindCommand // instanceof handles nulls
-                && predicate.equals(((FindCommand) other).predicate)); // State check
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof FindCommand)) {
+            return false;
+        }
+
+        FindCommand otherFindCommand = (FindCommand) other;
+        return predicate.equals(otherFindCommand.predicate);
+    }
+
+    @Override
+    public int hashCode() {
+        return predicate.hashCode();
     }
 
     @Override

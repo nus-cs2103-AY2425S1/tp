@@ -1,7 +1,5 @@
 package seedu.address.model.person;
 
-//public class StudentIdMatchesPredicate {
-//}
 import java.util.function.Predicate;
 
 /**
@@ -28,8 +26,17 @@ public class StudentIdMatchesPredicate implements Predicate<Person> {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // Short circuit if same object
-                || (other instanceof StudentIdMatchesPredicate // instanceof handles nulls
-                && studentId.equals(((StudentIdMatchesPredicate) other).studentId)); // State check
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof StudentIdMatchesPredicate)) {
+            return false;
+        }
+
+        StudentIdMatchesPredicate otherPredicate = (StudentIdMatchesPredicate) other;
+        return studentId.equals(otherPredicate.studentId);
     }
+
 }
