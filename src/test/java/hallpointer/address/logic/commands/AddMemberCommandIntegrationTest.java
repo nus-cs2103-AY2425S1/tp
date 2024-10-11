@@ -15,9 +15,9 @@ import hallpointer.address.model.member.Member;
 import hallpointer.address.testutil.MemberBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code AddCommand}.
+ * Contains integration tests (interaction with the Model) for {@code AddMemberCommand}.
  */
-public class AddCommandIntegrationTest {
+public class AddMemberCommandIntegrationTest {
 
     private Model model;
 
@@ -33,16 +33,16 @@ public class AddCommandIntegrationTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addMember(validMember);
 
-        assertCommandSuccess(new AddCommand(validMember), model,
-                String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validMember)),
+        assertCommandSuccess(new AddMemberCommand(validMember), model,
+                String.format(AddMemberCommand.MESSAGE_SUCCESS, Messages.format(validMember)),
                 expectedModel);
     }
 
     @Test
     public void execute_duplicateMember_throwsCommandException() {
         Member memberInList = model.getAddressBook().getMemberList().get(0);
-        assertCommandFailure(new AddCommand(memberInList), model,
-                AddCommand.MESSAGE_DUPLICATE_MEMBER);
+        assertCommandFailure(new AddMemberCommand(memberInList), model,
+                AddMemberCommand.MESSAGE_DUPLICATE_MEMBER);
     }
 
 }

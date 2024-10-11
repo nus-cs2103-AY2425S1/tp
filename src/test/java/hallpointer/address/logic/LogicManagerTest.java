@@ -17,9 +17,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import hallpointer.address.logic.commands.AddCommand;
+import hallpointer.address.logic.commands.AddMemberCommand;
 import hallpointer.address.logic.commands.CommandResult;
-import hallpointer.address.logic.commands.ListCommand;
+import hallpointer.address.logic.commands.ListMemberCommand;
 import hallpointer.address.logic.commands.exceptions.CommandException;
 import hallpointer.address.logic.parser.exceptions.ParseException;
 import hallpointer.address.model.Model;
@@ -65,8 +65,8 @@ public class LogicManagerTest {
 
     @Test
     public void execute_validCommand_success() throws Exception {
-        String listCommand = ListCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
+        String listCommand = ListMemberCommand.COMMAND_WORD;
+        assertCommandSuccess(listCommand, ListMemberCommand.MESSAGE_SUCCESS, model);
     }
 
     @Test
@@ -164,7 +164,7 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Triggers the saveAddressBook method by executing an add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + TELEGRAM_DESC_AMY
+        String addCommand = AddMemberCommand.COMMAND_WORD + NAME_DESC_AMY + TELEGRAM_DESC_AMY
                 + ROOM_DESC_AMY;
         Member expectedMember = new MemberBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();

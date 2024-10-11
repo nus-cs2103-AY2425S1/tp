@@ -8,15 +8,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import hallpointer.address.commons.core.LogsCenter;
-import hallpointer.address.logic.commands.AddCommand;
+import hallpointer.address.logic.commands.AddMemberCommand;
 import hallpointer.address.logic.commands.ClearCommand;
 import hallpointer.address.logic.commands.Command;
-import hallpointer.address.logic.commands.DeleteCommand;
-import hallpointer.address.logic.commands.EditCommand;
+import hallpointer.address.logic.commands.DeleteMemberCommand;
+import hallpointer.address.logic.commands.EditMemberCommand;
 import hallpointer.address.logic.commands.ExitCommand;
-import hallpointer.address.logic.commands.FindCommand;
+import hallpointer.address.logic.commands.FindMemberCommand;
 import hallpointer.address.logic.commands.HelpCommand;
-import hallpointer.address.logic.commands.ListCommand;
+import hallpointer.address.logic.commands.ListMemberCommand;
 import hallpointer.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -53,23 +53,23 @@ public class AddressBookParser {
 
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+        case AddMemberCommand.COMMAND_WORD:
+            return new AddMemberCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+        case EditMemberCommand.COMMAND_WORD:
+            return new EditMemberCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+        case DeleteMemberCommand.COMMAND_WORD:
+            return new DeleteMemberCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
+        case FindMemberCommand.COMMAND_WORD:
+            return new FindMemberCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+        case ListMemberCommand.COMMAND_WORD:
+            return new ListMemberCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
