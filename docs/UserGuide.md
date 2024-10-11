@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# <h1 style="color: #964B00;">MATER User Guide</h1>
+# <div style="color: #964B00;">MATER User Guide</div>
 
 MATER is a **desktop app for managing clients and their cars, optimized for use via a Graphical User Interface (GUI).** It is designed for workshops that need to keep track of their clients and their cars. If you can type fast, MATER can get your client management tasks done faster than traditional GUI apps.
 
@@ -13,7 +13,7 @@ MATER is a **desktop app for managing clients and their cars, optimized for use 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## <h2 style="color: #28B463;">Quick start</h2>
+## <div style="color: #28B463;">Quick start</div>
 
 1. Ensure you have Java 17 or above installed on your Computer.
 
@@ -43,7 +43,7 @@ MATER is a **desktop app for managing clients and their cars, optimized for use 
 
 --------------------------------------------------------------------------------------------------------------------
 
-### <h3 style="color: #AF7AC5;">Glossary</h3>
+### <div style="color: #AF7AC5;">Glossary</div>
 
 - **Client:** A person who uses the services of the workshop. In MATER, a client is someone whose personal details are stored and managed.
 - **VRN (Vehicle Registration Number):** The unique identifier assigned to a vehicle upon registration. In Singapore, it typically follows the format `XXX 1234 C`, where:
@@ -71,7 +71,7 @@ MATER is a **desktop app for managing clients and their cars, optimized for use 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## <h2 style="color: #037c6e;">Features</h2>
+## <div style="color: #000000;">Features</div>
 
 <box type="info" seamless>
 
@@ -92,7 +92,7 @@ MATER is a **desktop app for managing clients and their cars, optimized for use 
 
 </box>
 
-### <h3 style="color: #90E4C1;">Viewing Help: help</h3>
+### <div style="color: #1877F2;">Viewing Help: help</div>
 
 Shows a message explaining how to access the help page.
 
@@ -106,7 +106,7 @@ Shows a message explaining how to access the help page.
 
 ---
 
-### <h3 style="color: #90E4C1;">Adding a Client: add-client</h3>
+### <div style="color: #1877F2;">Adding a Client: add-client</div>
 
 Adds a client to MATER.
 
@@ -155,7 +155,7 @@ add-client n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [vrn/CAR_VRN] [vin/CAR_VIN] [
 
 ---
 
-### <h3 style="color: #90E4C1;">Listing All Clients: list</h3>
+### <div style="color: #1877F2;">Listing All Clients: list</div>
 
 Shows a list of all clients in MATER.
 
@@ -167,7 +167,7 @@ Shows a list of all clients in MATER.
 
 ---
 
-### <h3 style="color: #90E4C1;">Editing a Client: edit-client</h3>
+### <div style="color: #1877F2;">Editing a Client: edit-client</div>
 
 Edits an existing client in MATER.
 
@@ -208,7 +208,7 @@ edit-client INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [vrn/CAR_VRN] [vin/CA
 
 ---
 
-### <h3 style="color: #90E4C1;">Locating Clients by Name: find</h3>
+### <div style="color: #1877F2;">Locating Clients by Name: find</div>
 
 Finds clients whose names/ car VRN contain any of the given keywords.
 
@@ -244,7 +244,7 @@ find KEYWORD [MORE_KEYWORDS]
 
 ---
 
-### <h3 style="color: #90E4C1;">Deleting a Client: delete-client</h3>
+### <div style="color: #1877F2;">Deleting a Client: delete-client</div>
 
 Deletes the specified client from MATER.
 
@@ -274,7 +274,7 @@ delete-client INDEX
 
 ---
 
-### <h3 style="color: #90E4C1;">Clearing All Entries: clear</h3>
+### <div style="color: #1877F2;">Clearing All Entries: clear</div>
 
 Clears all entries from MATER.
 
@@ -296,7 +296,7 @@ clear
 
 ---
 
-### <h3 style="color: #90E4C1;">Exiting the Program: exit</h3>
+### <div style="color: #1877F2;">Exiting the Program: exit</div>
 
 Closes the MATER application.
 
@@ -312,13 +312,13 @@ exit
 
 ---
 
-### <h3 style="color: #E67E22;">Saving the Data</h3>
+### <div style="color: #E67E22;">Saving the Data</div>
 
 MATER data are saved automatically in the hard disk after any command that changes the data. There is no need to save manually.
 
 ---
 
-### <h3 style="color: #E67E22;">Editing the Data File</h3>
+### <div style="color: #E67E22;">Editing the Data File</div>
 
 MATER data are saved automatically as a JSON file at `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing this data file.
 
@@ -333,7 +333,7 @@ MATER data are saved automatically as a JSON file at `[JAR file location]/data/a
 
 --------------------------------------------------------------------------------------------------------------------
 
-## <h2 style="color: #8E44AD;">FAQ</h2>
+## <div style="color: #8E44AD;">FAQ</div>
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous MATER home folder.
@@ -346,14 +346,14 @@ MATER data are saved automatically as a JSON file at `[JAR file location]/data/a
 
 --------------------------------------------------------------------------------------------------------------------
 
-## <h2 style="color: #C0392B;">Known issues</h2>
+## <div style="color: #C0392B;">Known issues</div>
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## <h2 style="color: #2980B9;">Command Summary</h2>
+## <div style="color: #2980B9;">Command Summary</div>
 
 Action             | Format & Examples
 -------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------
