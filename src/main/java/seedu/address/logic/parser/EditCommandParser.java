@@ -19,6 +19,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.role.Role;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -96,14 +97,14 @@ public class EditCommandParser implements Parser<EditCommand> {
      * If {@code roles} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Role>} containing zero tags.
      */
-    private Optional<Set<Tag>> parseRolesForEdit(Collection<String> roles) throws ParseException {
+    private Optional<Set<Role>> parseRolesForEdit(Collection<String> roles) throws ParseException {
         assert roles != null;
 
         if (roles.isEmpty()) {
             return Optional.empty();
         }
         Collection<String> roleSet = roles.size() == 1 && roles.contains("") ? Collections.emptySet() : roles;
-        return Optional.of(ParserUtil.parseTags(roleSet));
+        return Optional.of(ParserUtil.parseRoles(roleSet));
     }
 
 }
