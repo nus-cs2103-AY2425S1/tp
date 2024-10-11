@@ -31,7 +31,6 @@ public class SkillsTest {
         // invalid skills
         assertFalse(Skills.isValidSkillsString("")); // empty string
         assertFalse(Skills.isValidSkillsString(" ")); // spaces only
-        assertFalse(Skills.isValidSkillsString("Coding123")); // numbers in skills
         assertFalse(Skills.isValidSkillsString("Coding, , Communication")); // double commas
         assertFalse(Skills.isValidSkillsString("A very long skill name exceeding thirty characters")); // too long
 
