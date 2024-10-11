@@ -15,6 +15,7 @@ import seedu.address.model.person.Ic;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
+import seedu.address.model.sort.SortParam;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -152,5 +153,18 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Prases {@code String sortParam} into a {@code SortParam}.
+     */
+    public static SortParam parseSortCommandParam(String sortParam) throws ParseException {
+        requireNonNull(sortParam);
+        String trimmedSortParam = sortParam.trim();
+        if (!SortParam.isValidSortParam(trimmedSortParam)) {
+            throw new ParseException(SortParam.MESSAGE_CONSTRAINTS);
+        }
+
+        return new SortParam(trimmedSortParam);
     }
 }
