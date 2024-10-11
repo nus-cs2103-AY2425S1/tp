@@ -653,7 +653,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **CLI (Command Line Interface)**: A text-based interface where users interact with the system by typing in commands. This is the primary interface for the App.
 * **Client**: A customer whose personal details and associated car information are stored in the system. This refers to anyone bringing a vehicle in for servicing.
 * **Car**: A vehicle brought in by a client for servicing. Each car is associated with a client.
-* **Issue**: A problem or task that needs to be addressed for a specific car with its status and details. Each car can have multiple issues associated with it.
+* **Issue**: A problem or task that needs to be addressed for a specific car with its status and details. Each client can have multiple issues associated with them.
 
 
 
