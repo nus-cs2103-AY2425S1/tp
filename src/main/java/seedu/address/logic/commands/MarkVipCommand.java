@@ -3,12 +3,18 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Tag;
 
 public class MarkVipCommand extends Command {
 
@@ -52,12 +58,17 @@ public class MarkVipCommand extends Command {
         }
 
         Person personToMark = lastShownList.get(targetIndex.getZeroBased());
-        boolean isSuccessful = model.markVip(personToMark, newState);
-        String message = MESSAGE_OBSOLETE;
-        if (isSuccessful) {
-            message = MESSAGE_SUCCESS;
+        if (personToMark.isVip() == newState) {
+            return new CommandResult(String.format(MESSAGE_OBSOLETE, Messages.format(personToMark)));
         }
-        return new CommandResult(String.format(message, Messages.format(personToMark)));
+        Name name = personToMark.getName();
+        Address address = personToMark.getAddress();
+        Email email = personToMark.getEmail();
+        Phone phone = personToMark.getPhone();
+        Set<Tag> tags = personToMark.getTags();
+        Person updatedPerson = new Person(name, phone, email, address, tags, newState);
+        model.setPerson(personToMark, updatedPerson);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personToMark)));
     }
 
     @Override

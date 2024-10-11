@@ -24,19 +24,22 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private boolean isVip;
+    private final boolean isVip;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+        this(name, phone, email, address, tags, false);
+    }
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, boolean isVip) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.isVip = false;
+        this.isVip = isVip;
     }
 
     public Name getName() {
@@ -65,11 +68,6 @@ public class Person {
 
     public boolean isVip() {
         return isVip;
-    }
-
-    public void setVipStatus(boolean isVip) {
-        assert isVip != this.isVip;
-        this.isVip = isVip;
     }
 
     /**

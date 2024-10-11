@@ -32,7 +32,6 @@ public class MarkVipCommandParser {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkVipCommand.MESSAGE_USAGE), pe);
         }
-        boolean newState;
         switch (splitArgs[1]) {
         case "true":
             return new MarkVipCommand(index, true);
