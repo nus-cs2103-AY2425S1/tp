@@ -2,6 +2,7 @@ package spleetwaise.transaction.model.transaction;
 
 import spleetwaise.address.commons.util.CollectionUtil;
 import spleetwaise.address.model.person.Person;
+import spleetwaise.commons.IdUtil;
 
 /**
  * Represents a Transaction in the transaction book.
@@ -25,7 +26,7 @@ public class Transaction {
      */
     public Transaction(Person person, Amount amount, Description description, Date date) {
         CollectionUtil.requireAllNonNull(person, amount, description, date);
-        this.id = TransactionIdUtil.getUuid();
+        this.id = IdUtil.getId();
         this.person = person;
         this.amount = amount;
         this.description = description;
