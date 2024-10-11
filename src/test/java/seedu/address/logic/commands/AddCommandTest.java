@@ -22,6 +22,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.owner.Owner;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -124,6 +125,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addOwner(Owner owner) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
@@ -139,7 +145,17 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasOwner(Owner owner) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Person target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteOwner(Owner target) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -149,12 +165,27 @@ public class AddCommandTest {
         }
 
         @Override
+        public void setOwner(Owner target, Owner editedOwner) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
+        public ObservableList<Owner> getFilteredOwnerList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredOwnerList(Predicate<Owner> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }
