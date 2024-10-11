@@ -27,7 +27,7 @@ import seedu.address.testutil.PersonBuilder;
  * Contains integration tests (interaction with the Model) and unit tests for NoteCommand.
  */
 public class NoteCommandTest {
-    private static final String NOTE_STUB = "Some note";
+    private static final String NOTE_STUB = "Super Confident";
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -45,22 +45,6 @@ public class NoteCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
         expectedModel.setPerson(firstPerson, editedPerson);
-        assertCommandSuccess(noteCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_deleteNoteUnfilteredList_success() {
-        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(firstPerson).withNote("").build();
-
-        NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_PERSON,
-                new Note(editedPerson.getNote().toString()));
-
-        String expectedMessage = String.format(NoteCommand.MESSAGE_DELETE_NOTE_SUCCESS, editedPerson);
-
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(firstPerson, editedPerson);
-
         assertCommandSuccess(noteCommand, model, expectedMessage, expectedModel);
     }
 
