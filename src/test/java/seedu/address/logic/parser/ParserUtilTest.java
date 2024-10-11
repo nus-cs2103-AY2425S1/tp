@@ -36,7 +36,8 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
-    private static final String VALID_ROLE = "vendor";
+    private static final String VALID_ROLE_1 = "vendor";
+    private static final String VALID_ROLE_2 = "sponsor";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -211,15 +212,39 @@ public class ParserUtilTest {
     @Test
     public void parseRole_validValueWithoutWhitespace_returnsEmail() throws Exception {
         RoleHandler roleHandler = new RoleHandler();
-        Role expectedRole = roleHandler.getRole(VALID_ROLE);
-        assertEquals(expectedRole, ParserUtil.parseRole(VALID_ROLE));
+        Role expectedRole = roleHandler.getRole(VALID_ROLE_1);
+        assertEquals(expectedRole, ParserUtil.parseRole(VALID_ROLE_1));
     }
 
     @Test
     public void parseRole_validValueWithWhitespace_returnsTrimmedEmail() throws Exception {
-        String roleWithWhitespace = WHITESPACE + VALID_ROLE + WHITESPACE;
+        String roleWithWhitespace = WHITESPACE + VALID_ROLE_1 + WHITESPACE;
         RoleHandler roleHandler = new RoleHandler();
         Role expectedRole = roleHandler.getRole(roleWithWhitespace);
         assertEquals(expectedRole, ParserUtil.parseRole(roleWithWhitespace));
+    }
+
+    @Test
+    public void parseRoles_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseRoles(null));
+    }
+
+    @Test
+    public void parseRoles_collectionWithInvalidTags_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseRoles(Arrays.asList(VALID_ROLE_1, INVALID_ROLE)));
+    }
+
+    @Test
+    public void parseRoles_emptyCollection_returnsEmptySet() throws Exception {
+        assertTrue(ParserUtil.parseTags(Collections.emptyList()).isEmpty());
+    }
+
+    @Test
+    public void parseRoles_collectionWithValidTags_returnsTagSet() throws Exception {
+        Set<Role> actualRoleSet = ParserUtil.parseRoles(Arrays.asList(VALID_ROLE_1, VALID_ROLE_2));
+        RoleHandler roleHandler = new RoleHandler();
+        Set<Role> expectedRoleSet = new HashSet<Role>(Arrays.asList(roleHandler.getRole(VALID_ROLE_1), roleHandler.getRole(VALID_ROLE_2)));
+
+        assertEquals(expectedRoleSet, actualRoleSet);
     }
 }
