@@ -9,7 +9,6 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
-import seedu.address.model.person.MedCon;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
@@ -44,7 +43,6 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
         descriptor.setTags(person.getTags());
-        descriptor.setMedCon(person.getMedCon());
     }
 
     /**
@@ -100,14 +98,6 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withGender(String gender) {
         descriptor.setGender(new Gender(gender));
-        return this;
-    }
-
-    /**
-     * Sets the {@code MedCon} of the {@code EditPersonDescriptor} that we are building.
-     */
-    public EditPersonDescriptorBuilder withMedCon(String medCon) {
-        descriptor.setMedCon(new MedCon(medCon));
         return this;
     }
 

@@ -141,8 +141,7 @@ public class Person {
                 && tags.equals(otherPerson.tags)
                 && appointments.equals(otherPerson.appointments)
                 && medCon.equals(otherPerson.medCon)
-                && priority.equals(otherPerson.priority)
-                && appointments.equals(otherPerson.appointments);
+                && priority.equals(otherPerson.priority);
     }
 
     @Override

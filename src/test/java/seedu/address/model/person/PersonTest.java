@@ -116,7 +116,7 @@ public class PersonTest {
                 + ", gender=" + ALICE.getGender() + ", dateOfBirth=" + ALICE.getDateOfBirth() + ", phone="
                 + ALICE.getPhone() + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress()
                 + ", tags=" + ALICE.getTags() + ", priority=" + ALICE.getPriority() + ", appointments="
-                + ALICE.getAppointments() + ", medical condition=" + ALICE.getMedCon() + "}";
+                + ALICE.getAppointments() + ", medical conditions=" + ALICE.getMedCon() + "}";
 
         assertEquals(expected, ALICE.toString());
     }

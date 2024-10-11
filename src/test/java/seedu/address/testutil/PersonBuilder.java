@@ -13,7 +13,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.MedCon;
 import seedu.address.model.person.Priority;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -159,7 +158,7 @@ public class PersonBuilder {
         this.medCon = new MedCon(medCon);
         return this;
     }
-  
+
     /**
      * Sets the {@code Priority} of the {@code Person} that we are building.
      */
