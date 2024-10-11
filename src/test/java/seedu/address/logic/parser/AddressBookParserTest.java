@@ -8,10 +8,8 @@ import static seedu.address.logic.commands.CommandTestUtil.PERSON_ENTITY_STRING;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
-
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
