@@ -1,7 +1,17 @@
 package seedu.address.logic.commands;
 
-import javafx.collections.ObservableList;
+import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.testutil.Assert.assertThrows;
+
+import java.nio.file.Path;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.function.Predicate;
+
 import org.junit.jupiter.api.Test;
+
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -10,19 +20,9 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.PersonAttendance;
 import seedu.address.model.student.Attendance;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.StudentBuilder;
-
-import java.nio.file.Path;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.function.Predicate;
-
-import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.testutil.Assert.assertThrows;
 
 public class MarkAttendanceCommandTest {
 
@@ -58,7 +58,7 @@ public class MarkAttendanceCommandTest {
         Student validStudent = new StudentBuilder().withName("John Doe").build();
         modelStub.addStudent(validStudent);
 
-        assertThrows(IllegalArgumentException.class, () ->  new Attendance("unknown"));
+        assertThrows(IllegalArgumentException.class, () -> new Attendance("unknown"));
     }
 
 

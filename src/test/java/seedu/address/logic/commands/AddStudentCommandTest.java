@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
@@ -22,7 +21,6 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.person.PersonAttendance;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.student.Student;
@@ -226,7 +224,6 @@ public class AddStudentCommandTest {
         @Override
         public boolean hasStudent(Student student) {
             requireNonNull(student);
-           // Student student = (Student) person;
             return studentsAdded.stream().map(p -> (Student) p).anyMatch(student::isSameStudent);
         }
 
