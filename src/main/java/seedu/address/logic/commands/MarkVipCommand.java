@@ -16,6 +16,9 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Marks a person as a VIP or revokes that title.
+ */
 public class MarkVipCommand extends Command {
 
     public static final String COMMAND_WORD = "vip";
@@ -30,21 +33,26 @@ public class MarkVipCommand extends Command {
     public static final String MESSAGE_UNVIP_PERSON_SUCCESS = "VIP status removed from person: %1$s";
     public static final String MESSAGE_VIP_PERSON_OBSOLETE = "Person already a VIP: %1$s";
     public static final String MESSAGE_UNVIP_PERSON_OBSOLETE = "Person not a VIP: %1$s";
-    private final String MESSAGE_SUCCESS;
-    private final String MESSAGE_OBSOLETE;
+    private final String messageSuccess;
+    private final String messageObsolete;
 
     private final Index targetIndex;
-    public final boolean newState;
+    private final boolean newState;
 
+    /**
+     * Creates a MarkVipCommand to mark the specified {@code Person} as a VIP
+     * @param targetIndex the index of the Person in the list
+     * @param newState whether the Person should be labelled as a VIP when the operation is complete
+     */
     public MarkVipCommand(Index targetIndex, boolean newState) {
         this.targetIndex = targetIndex;
         this.newState = newState;
         if (newState) {
-            MESSAGE_SUCCESS = MESSAGE_VIP_PERSON_SUCCESS;
-            MESSAGE_OBSOLETE = MESSAGE_VIP_PERSON_OBSOLETE;
+            messageSuccess = MESSAGE_VIP_PERSON_SUCCESS;
+            messageObsolete = MESSAGE_VIP_PERSON_OBSOLETE;
         } else {
-            MESSAGE_SUCCESS = MESSAGE_UNVIP_PERSON_SUCCESS;
-            MESSAGE_OBSOLETE = MESSAGE_UNVIP_PERSON_OBSOLETE;
+            messageSuccess = MESSAGE_UNVIP_PERSON_SUCCESS;
+            messageObsolete = MESSAGE_UNVIP_PERSON_OBSOLETE;
         }
     }
 
@@ -59,7 +67,7 @@ public class MarkVipCommand extends Command {
 
         Person personToMark = lastShownList.get(targetIndex.getZeroBased());
         if (personToMark.isVip() == newState) {
-            return new CommandResult(String.format(MESSAGE_OBSOLETE, Messages.format(personToMark)));
+            return new CommandResult(String.format(messageObsolete, Messages.format(personToMark)));
         }
         Name name = personToMark.getName();
         Address address = personToMark.getAddress();
@@ -68,7 +76,7 @@ public class MarkVipCommand extends Command {
         Set<Tag> tags = personToMark.getTags();
         Person updatedPerson = new Person(name, phone, email, address, tags, newState);
         model.setPerson(personToMark, updatedPerson);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personToMark)));
+        return new CommandResult(String.format(messageSuccess, Messages.format(personToMark)));
     }
 
     @Override
