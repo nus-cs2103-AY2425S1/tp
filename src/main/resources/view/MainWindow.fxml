@@ -34,25 +34,27 @@
           </Menu>
         </MenuBar>
 
-        <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
-                   minHeight="100" prefHeight="100" maxHeight="100">
+        <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane" minHeight="100" prefHeight="100" maxHeight="100">
           <padding>
             <Insets top="5" right="10" bottom="5" left="10" />
           </padding>
         </StackPane>
 
-        <HBox fx:id="contactListPane" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
-            <!-- Contact list -->
-              <VBox fx:id="personList" styleClass="stack-pane" minWidth="400" prefWidth="400">
-                <padding>
-                  <Insets top="10" right="10" bottom="10" left="10" />
-                </padding>
-                <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
-              </VBox>
-            <!-- Contact details panel -->
-            <VBox id="personDetails" HBox.hgrow = "ALWAYS">
-                <Label text = "Contact Details Here" />
-            </VBox>
+        <HBox fx:id="contactListPane" styleClass="pane" VBox.vgrow="ALWAYS" spacing="10">
+          <padding>
+            <Insets top="5" right="10" bottom="5" left="10" />
+          </padding>
+          <!-- Contact list -->
+          <VBox fx:id="personList" styleClass="pane-with-border" minWidth="400" prefWidth="400">
+            <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+          </VBox>
+          <!-- Contact details panel -->
+          <VBox fx:id="personDetails" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
+            <padding>
+              <Insets top="10" right="10" bottom="10" left="10" />
+            </padding>
+            <Label text = "Contact Details Here" />
+          </VBox>
         </HBox>
 
         <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
