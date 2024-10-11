@@ -16,6 +16,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Skills;
 import seedu.address.model.person.Status;
 import seedu.address.model.tag.Tag;
 
@@ -30,6 +31,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final String skills;
     private final String status;
     private final String note;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
@@ -40,12 +42,14 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
+            @JsonProperty("skills") String skills,
             @JsonProperty("status") String status, @JsonProperty("note") String note,
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.skills = skills;
         this.status = status;
         this.note = note;
         if (tags != null) {
@@ -61,6 +65,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        skills = source.getSkills().value;
         status = source.getStatus().value;
         note = source.getNote().value;
         tags.addAll(source.getTags().stream()
@@ -123,8 +128,17 @@ class JsonAdaptedPerson {
         }
         final Note modelNote = new Note(note);
 
+        if (skills == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Skills.class.getSimpleName()));
+        }
+        if (!Skills.isValidSkillsString(skills)) {
+            throw new IllegalValueException(Skills.MESSAGE_CONSTRAINTS);
+        }
+        final Skills modelSkills = new Skills(skills);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelStatus, modelNote, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelSkills, modelStatus, modelNote,
+                modelTags);
     }
 
 }
