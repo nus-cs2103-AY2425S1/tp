@@ -2,6 +2,9 @@ package seedu.address.model.person;
 
 import java.util.Objects;
 
+/**
+ * Represents a log in the address book.
+ */
 public class Log {
     private final String entry;
 
