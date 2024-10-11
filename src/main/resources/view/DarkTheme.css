@@ -340,6 +340,11 @@
     -fx-text-fill: black;
 }
 
+#commandTextField:focused {
+    -fx-background-color: fef3c2;
+    -fx-border-color: #383838;
+}
+
 #filterField, #personListPanel, #personWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
