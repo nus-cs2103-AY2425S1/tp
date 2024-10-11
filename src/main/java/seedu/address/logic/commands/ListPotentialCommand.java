@@ -12,7 +12,7 @@ public class ListPotentialCommand extends ListCommand {
 
     public static final String ARGUMENT_WORD = "ph";
 
-    public static final String MESSAGE_SUCCESS = "Listed all potential employees";
+    public static final String MESSAGE_SUCCESS = "Listed all potential hires";
 
 
     @Override
