@@ -24,7 +24,7 @@ class JsonSerializableAddressBook {
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
 
     public static final String MESSAGE_SIMILAR_PERSON = """
-            %s\s
+            %s
             has the same name, phone number or email as someone else in the list.
             Double check to ensure that this is not a duplicate.""";
 

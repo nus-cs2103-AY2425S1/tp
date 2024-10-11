@@ -122,7 +122,7 @@ public class Person {
 
     /**
      * Returns true if both persons are the same as defined in {@code isSamePerson(Person otherPerson)}
-     * or if any of their other fields are the same.
+     * or if their name, phone number or email are the same.
      * This defines the weakest notion of equality between two persons.
      *
      * @param otherPerson The other person to compare with.
