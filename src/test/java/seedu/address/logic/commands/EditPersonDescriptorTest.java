@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPERIENCE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -59,6 +60,10 @@ public class EditPersonDescriptorTest {
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withSkills(VALID_SKILLS_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
+        // different experience -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withExperience(VALID_EXPERIENCE_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
         // different status -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withStatus(VALID_STATUS_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
@@ -80,7 +85,8 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getPhone().orElse(null) + ", email="
                 + editPersonDescriptor.getEmail().orElse(null) + ", address="
                 + editPersonDescriptor.getAddress().orElse(null) + ", skills="
-                + editPersonDescriptor.getSkills().orElse(null) + ", status="
+                + editPersonDescriptor.getSkills().orElse(null) + ", experience="
+                + editPersonDescriptor.getExperience().orElse(null) + ", status="
                 + editPersonDescriptor.getStatus().orElse(null) + ", note="
                 + editPersonDescriptor.getNote().orElse(null) + ", tags="
                 + editPersonDescriptor.getTags().orElse(null) + "}";

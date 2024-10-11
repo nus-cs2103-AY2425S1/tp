@@ -61,7 +61,8 @@ public class NoteCommand extends Command {
                 personToEdit.getEmail(),
                 personToEdit.getAddress(),
                 personToEdit.getSkills(),
-                personToEdit.getStatus(), // Add this line to get the status
+                personToEdit.getExperience(),
+                personToEdit.getStatus(),
                 personToEdit.getNote(),
                 personToEdit.getTags()
         );

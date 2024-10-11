@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Experience;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
@@ -32,6 +33,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final String skills;
+    private final String experience;
     private final String status;
     private final String note;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
@@ -41,15 +43,17 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("skills") String skills,
-            @JsonProperty("status") String status, @JsonProperty("note") String note,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                             @JsonProperty("email") String email, @JsonProperty("address") String address,
+                             @JsonProperty("skills") String skills,
+                             @JsonProperty("experience") String experience,
+                             @JsonProperty("status") String status, @JsonProperty("note") String note,
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.skills = skills;
+        this.experience = experience;
         this.status = status;
         this.note = note;
         if (tags != null) {
@@ -66,6 +70,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         skills = source.getSkills().value;
+        experience = source.getExperience().value;
         status = source.getStatus().value;
         note = source.getNote().value;
         tags.addAll(source.getTags().stream()
@@ -115,6 +120,24 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
         final Address modelAddress = new Address(address);
+
+        if (skills == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Skills.class.getSimpleName()));
+        }
+        if (!Skills.isValidSkillsString(skills)) {
+            throw new IllegalValueException(Skills.MESSAGE_CONSTRAINTS);
+        }
+        final Skills modelSkills = new Skills(skills);
+
+        if (experience == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Experience.class.getSimpleName()));
+        }
+        if (!Experience.isValidExperience(experience)) {
+            throw new IllegalValueException(Experience.MESSAGE_CONSTRAINTS);
+        }
+        final Experience modelExperience = new Experience(experience);
+
         if (status == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Status.class.getSimpleName()));
         }
@@ -128,17 +151,8 @@ class JsonAdaptedPerson {
         }
         final Note modelNote = new Note(note);
 
-        if (skills == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Skills.class.getSimpleName()));
-        }
-        if (!Skills.isValidSkillsString(skills)) {
-            throw new IllegalValueException(Skills.MESSAGE_CONSTRAINTS);
-        }
-        final Skills modelSkills = new Skills(skills);
-
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelSkills, modelStatus, modelNote,
-                modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelSkills, modelExperience,
+                modelStatus, modelNote, modelTags);
     }
-
 }

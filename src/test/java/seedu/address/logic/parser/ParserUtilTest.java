@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Experience;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Status;
@@ -26,6 +27,7 @@ public class ParserUtilTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
+    private static final String INVALID_EXPERIENCE = " ";
     private static final String INVALID_STATUS = "Recruited";
     private static final String INVALID_TAG = "#friend";
 
@@ -33,6 +35,7 @@ public class ParserUtilTest {
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
+    private static final String VALID_EXPERIENCE = "CTO at Google from 2001-2020";
     private static final String VALID_STATUS = "Interview Scheduled";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
@@ -152,6 +155,29 @@ public class ParserUtilTest {
     }
 
     @Test
+
+    public void parseExperience_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseExperience((String) null));
+    }
+
+    @Test
+    public void parseExperience_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseExperience(INVALID_EXPERIENCE));
+    }
+
+    @Test
+    public void parseExperience_validValueWithoutWhitespace_returnsExperience() throws Exception {
+        Experience expectedExperience = new Experience(VALID_EXPERIENCE);
+        assertEquals(expectedExperience, ParserUtil.parseExperience(VALID_EXPERIENCE));
+    }
+
+    @Test
+    public void parseStatus_validValueWithWhitespace_returnsTrimmedExperience() throws Exception {
+        String experienceWithWhitespace = WHITESPACE + VALID_EXPERIENCE + WHITESPACE;
+        Experience expectedExperience = new Experience(VALID_EXPERIENCE);
+        assertEquals(expectedExperience, ParserUtil.parseExperience(experienceWithWhitespace));
+    }
+
     public void parseStatus_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseStatus((String) null));
     }

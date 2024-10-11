@@ -11,6 +11,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Experience;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Phone;
@@ -99,6 +100,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String experience} into a {@code Experience}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code experience} is invalid.
+     */
+    public static Experience parseExperience(String experience) throws ParseException {
+        requireNonNull(experience);
+        String trimmedExperience = experience.trim();
+        if (!Experience.isValidExperience(trimmedExperience)) {
+            throw new ParseException(Experience.MESSAGE_CONSTRAINTS);
+        }
+        return new Experience(trimmedExperience);
+    }
+
+    /**
      * Parses a {@code String status} into an {@code Status}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -114,10 +130,10 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String note} into a {@code Note}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code note} is invalid.
      */
     public static Note parseNote(String note) throws ParseException {
         requireNonNull(note);

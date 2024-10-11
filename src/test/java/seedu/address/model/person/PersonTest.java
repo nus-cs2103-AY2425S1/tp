@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPERIENCE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -37,7 +38,8 @@ public class PersonTest {
 
         // same name, all other attributes different -> returns true
         Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withSkills(VALID_SKILLS_BOB).withStatus(VALID_STATUS_BOB)
+                .withAddress(VALID_ADDRESS_BOB).withSkills(VALID_SKILLS_BOB)
+                .withExperience(VALID_EXPERIENCE_BOB).withStatus(VALID_STATUS_BOB)
                 .withNote(VALID_NOTE_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
@@ -90,12 +92,16 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
+        // different experience -> returns false
+        editedAlice = new PersonBuilder(ALICE).withExperience(VALID_EXPERIENCE_BOB).build();
+
         // different status -> returns false
         editedAlice = new PersonBuilder(ALICE).withStatus(VALID_STATUS_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different note -> returns false
         editedAlice = new PersonBuilder(ALICE).withNote(VALID_NOTE_BOB).build();
+
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
@@ -108,6 +114,7 @@ public class PersonTest {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress()
                 + ", skills=" + ALICE.getSkills()
+                + ", experience=" + ALICE.getExperience()
                 + ", status=" + ALICE.getStatus()
                 + ", note=" + ALICE.getNote() + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
