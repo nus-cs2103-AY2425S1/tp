@@ -9,6 +9,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.stage.Stage?>
 
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.Region?>
 <fx:root resizable="false" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/help_icon.png" />
@@ -17,20 +20,29 @@
     <Scene>
       <stylesheets>
         <URL value="@HelpWindow.css" />
+        <URL value="@DarkTheme.css" />
       </stylesheets>
 
       <HBox alignment="CENTER" fx:id="helpMessageContainer">
         <children>
-          <Label fx:id="helpMessage" text="Label">
-            <HBox.margin>
-              <Insets right="5.0" />
-            </HBox.margin>
-          </Label>
-          <Button fx:id="copyButton" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL">
-            <HBox.margin>
-              <Insets left="5.0" />
-            </HBox.margin>
-          </Button>
+          <ScrollPane fitToWidth="true" prefWidth="700" prefHeight="600">
+            <VBox>
+              <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label fx:id="helpMessage" text="Label">
+                  <HBox.margin>
+                    <Insets right="5.0" />
+                  </HBox.margin>
+                </Label>
+                <Region HBox.hgrow="ALWAYS" />
+                <Button fx:id="copyButton" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL">
+                  <HBox.margin>
+                    <Insets right="5.0" />
+                  </HBox.margin>
+                </Button>
+              </HBox>
+              <Label fx:id="helpUsage" text="displays usage for individual commands" wrapText="true" />
+            </VBox>
+          </ScrollPane>
         </children>
         <opaqueInsets>
           <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
