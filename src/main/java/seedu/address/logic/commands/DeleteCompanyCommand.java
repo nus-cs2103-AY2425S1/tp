@@ -1,15 +1,11 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.Messages;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.company.Company;
-import seedu.address.model.person.Person;
+
 
 
 /**
@@ -17,7 +13,7 @@ import seedu.address.model.person.Person;
  */
 public class DeleteCompanyCommand extends DeleteCommand<Company> {
 
-    public static final String COMMAND_WORD = "company";
+    public static final String ENTITY_WORD = "company";
     public static final String MESSAGE_DELETE_COMPANY_SUCCESS = "Company %1$s - %2$s - %3$s - %4$s"
             + "has been successfully deleted.";
 
