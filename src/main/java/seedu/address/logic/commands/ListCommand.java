@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.SortOption;
 import seedu.address.model.Model;
 
 /**
@@ -12,24 +14,25 @@ public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
-    public static final String MESSAGE_SUCCESS = "Listed all persons";
-    public static final String MESSAGE_SORT_NOT_IMPLEMENTED = "Sorting not yet implemented.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all persons in the address book.\n"
             + "Optional parameters: [s/SORT_OPTION]\n"
             + "Example: " + COMMAND_WORD + " s/alphabet";
 
-    private final String sortOption;
+    public static final String MESSAGE_SUCCESS = "Listed all persons";
+    public static final String MESSAGE_SORT_NOT_IMPLEMENTED = "Sorting not yet implemented.";
+
+    private final SortOption sortOption;
 
     public ListCommand() {
         this.sortOption = null;
     }
 
-    public ListCommand(String sortOption) {
+    public ListCommand(SortOption sortOption) {
         this.sortOption = sortOption;
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 

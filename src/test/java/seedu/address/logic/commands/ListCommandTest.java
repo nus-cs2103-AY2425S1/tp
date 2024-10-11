@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.parser.SortOption;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -41,8 +42,11 @@ public class ListCommandTest {
 
     @Test
     public void execute_withSortOption_showsNotImplementedMessage() {
-        // Create a ListCommand with a sort option (e.g., "alphabet")
-        ListCommand listCommandWithSort = new ListCommand("alphabet");
+        // Create a SortOption instance with "alphabet"
+        SortOption sortOption = new SortOption("alphabet");
+
+        // Create a ListCommand with the SortOption
+        ListCommand listCommandWithSort = new ListCommand(sortOption);
 
         // The expected outcome should be the "Sorting not yet implemented" message
         assertCommandSuccess(listCommandWithSort, model, ListCommand.MESSAGE_SORT_NOT_IMPLEMENTED, expectedModel);
@@ -56,12 +60,15 @@ public class ListCommandTest {
         assertEquals(listCommand1, listCommand2);
 
         // ListCommand with the same sortOption should be equal
-        ListCommand listCommandWithSort1 = new ListCommand("alphabet");
-        ListCommand listCommandWithSort2 = new ListCommand("alphabet");
+        SortOption sortOption1 = new SortOption("alphabet");
+        SortOption sortOption2 = new SortOption("alphabet");
+        ListCommand listCommandWithSort1 = new ListCommand(sortOption1);
+        ListCommand listCommandWithSort2 = new ListCommand(sortOption2);
         assertEquals(listCommandWithSort1, listCommandWithSort2);
 
         // ListCommand with different sortOptions should not be equal
-        ListCommand listCommandWithSort3 = new ListCommand("name");
+        SortOption sortOption3 = new SortOption("name"); // Assuming "name" is not a valid option but for test purposes
+        ListCommand listCommandWithSort3 = new ListCommand(sortOption3);
         assertNotEquals(listCommandWithSort1, listCommandWithSort3);
 
         // ListCommand with and without sortOption should not be equal

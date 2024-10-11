@@ -34,10 +34,12 @@ public class ListCommandParser implements Parser<ListCommand> {
 
         String sortOptionValue = sortOption.get().trim();
 
-        // For now, we accept any non-empty sort option
         if (sortOptionValue.isEmpty()) {
             throw new ParseException("Sort option cannot be empty.");
         }
-        return new ListCommand(sortOptionValue);
+
+        // Ensure sort option is supported
+        SortOption validSortOption = ParserUtil.parseSortOption(sortOptionValue);
+        return new ListCommand(validSortOption);
     }
 }
