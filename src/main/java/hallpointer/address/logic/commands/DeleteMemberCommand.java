@@ -14,7 +14,7 @@ import hallpointer.address.model.member.Member;
 /**
  * Deletes a member identified using its displayed index from the address book.
  */
-public class DeleteCommand extends Command {
+public class DeleteMemberCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
@@ -27,7 +27,7 @@ public class DeleteCommand extends Command {
 
     private final Index targetIndex;
 
-    public DeleteCommand(Index targetIndex) {
+    public DeleteMemberCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -52,12 +52,12 @@ public class DeleteCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteCommand)) {
+        if (!(other instanceof DeleteMemberCommand)) {
             return false;
         }
 
-        DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return targetIndex.equals(otherDeleteCommand.targetIndex);
+        DeleteMemberCommand otherDeleteMemberCommand = (DeleteMemberCommand) other;
+        return targetIndex.equals(otherDeleteMemberCommand.targetIndex);
     }
 
     @Override

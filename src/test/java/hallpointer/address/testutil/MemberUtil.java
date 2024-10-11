@@ -7,8 +7,8 @@ import static hallpointer.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
 import java.util.Set;
 
-import hallpointer.address.logic.commands.AddCommand;
-import hallpointer.address.logic.commands.EditCommand.EditMemberDescriptor;
+import hallpointer.address.logic.commands.AddMemberCommand;
+import hallpointer.address.logic.commands.EditMemberCommand.EditMemberDescriptor;
 import hallpointer.address.model.member.Member;
 import hallpointer.address.model.tag.Tag;
 
@@ -21,7 +21,7 @@ public class MemberUtil {
      * Returns an add command string for adding the {@code member}.
      */
     public static String getAddCommand(Member member) {
-        return AddCommand.COMMAND_WORD + " " + getMemberDetails(member);
+        return AddMemberCommand.COMMAND_WORD + " " + getMemberDetails(member);
     }
 
     /**

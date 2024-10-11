@@ -15,7 +15,7 @@ import hallpointer.address.model.member.Member;
 /**
  * Adds a member to the address book.
  */
-public class AddCommand extends Command {
+public class AddMemberCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
@@ -38,9 +38,9 @@ public class AddCommand extends Command {
     private final Member toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Member}
+     * Creates an AddMemberCommand to add the specified {@code Member}
      */
-    public AddCommand(Member member) {
+    public AddMemberCommand(Member member) {
         requireNonNull(member);
         toAdd = member;
     }
@@ -64,12 +64,12 @@ public class AddCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddCommand)) {
+        if (!(other instanceof AddMemberCommand)) {
             return false;
         }
 
-        AddCommand otherAddCommand = (AddCommand) other;
-        return toAdd.equals(otherAddCommand.toAdd);
+        AddMemberCommand otherAddMemberCommand = (AddMemberCommand) other;
+        return toAdd.equals(otherAddMemberCommand.toAdd);
     }
 
     @Override
