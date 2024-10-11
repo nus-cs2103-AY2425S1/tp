@@ -4,13 +4,12 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Predicate;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.CompositePredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.StudentIdMatchesPredicate;
 
 /**
@@ -30,16 +29,6 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     @Override
     public FindCommand parse(String args) throws ParseException {
-        //        String trimmedArgs = args.trim();
-        //        if (trimmedArgs.isEmpty()) {
-        //            throw new ParseException(
-        //                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        //        }
-        //
-        //        String[] nameKeywords = trimmedArgs.split("\\s+");
-        //
-        //        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
-        //    }
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_STUDENT_ID);
 
@@ -51,7 +40,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         // Check for duplicate prefixes
         verifyNoDuplicatePrefixes(argMultimap, PREFIX_NAME, PREFIX_STUDENT_ID);
 
-        Predicate<Person> combinedPredicate = person -> true;
+        CompositePredicate combinedPredicate = new CompositePredicate();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             String nameInput = argMultimap.getValue(PREFIX_NAME).get();
@@ -59,13 +48,13 @@ public class FindCommandParser implements Parser<FindCommand> {
 
             // Use the nameInput as a single keyword for partial matching
             List<String> nameKeywords = Arrays.asList(nameInput.trim());
-            combinedPredicate = combinedPredicate.and(new NameContainsKeywordsPredicate(nameKeywords));
+            combinedPredicate.addPredicate(new NameContainsKeywordsPredicate(nameKeywords));
         }
 
         if (argMultimap.getValue(PREFIX_STUDENT_ID).isPresent()) {
             String studentIdInput = argMultimap.getValue(PREFIX_STUDENT_ID).get();
             validateStudentId(studentIdInput);
-            combinedPredicate = combinedPredicate.and(new StudentIdMatchesPredicate(studentIdInput));
+            combinedPredicate.addPredicate(new StudentIdMatchesPredicate(studentIdInput));
         }
 
         return new FindCommand(combinedPredicate);

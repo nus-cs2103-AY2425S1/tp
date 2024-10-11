@@ -12,6 +12,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -20,6 +21,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.StudentIdMatchesPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -31,10 +34,13 @@ public class FindCommandTest {
 
     @Test
     public void equals() {
-        NameContainsKeywordsPredicate firstPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("first"));
-        NameContainsKeywordsPredicate secondPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("second"));
+        //        NameContainsKeywordsPredicate firstPredicate =
+        //                new NameContainsKeywordsPredicate(Collections.singletonList("first"));
+        //        NameContainsKeywordsPredicate secondPredicate =
+        //                new NameContainsKeywordsPredicate(Collections.singletonList("second"));
+        // Single predicate (Name)
+        Predicate<Person> firstPredicate = new NameContainsKeywordsPredicate(Collections.singletonList("first"));
+        Predicate<Person> secondPredicate = new NameContainsKeywordsPredicate(Collections.singletonList("second"));
 
         FindCommand findFirstCommand = new FindCommand(firstPredicate);
         FindCommand findSecondCommand = new FindCommand(secondPredicate);
@@ -52,14 +58,28 @@ public class FindCommandTest {
         // null -> returns false
         assertFalse(findFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different predicate -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
+
+        // Combined predicate (Name and Student ID)
+        Predicate<Person> combinedPredicateFirst = new NameContainsKeywordsPredicate(
+                Collections.singletonList("first"))
+                .and(new StudentIdMatchesPredicate("A1234567E"));
+        Predicate<Person> combinedPredicateSecond = new NameContainsKeywordsPredicate(
+                Collections.singletonList("first"))
+                .and(new StudentIdMatchesPredicate("A7654321E"));
+
+        FindCommand findCombinedFirstCommand = new FindCommand(combinedPredicateFirst);
+        FindCommand findCombinedSecondCommand = new FindCommand(combinedPredicateSecond);
+
+        // different combined predicates -> returns false
+        assertFalse(findCombinedFirstCommand.equals(findCombinedSecondCommand));
     }
 
     @Test
     public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        NameContainsKeywordsPredicate predicate = preparePredicate(" ");
+        Predicate<Person> predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -69,7 +89,7 @@ public class FindCommandTest {
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+        Predicate<Person> predicate = preparePredicate("Kurz Elle Kunz");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -87,7 +107,7 @@ public class FindCommandTest {
     /**
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
      */
-    private NameContainsKeywordsPredicate preparePredicate(String userInput) {
+    private Predicate<Person> preparePredicate(String userInput) {
         return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 }
