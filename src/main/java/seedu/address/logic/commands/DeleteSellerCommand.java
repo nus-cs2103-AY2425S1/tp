@@ -4,12 +4,12 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
-import java.util.List;
-
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.client.Client;
+import seedu.address.model.client.Seller;
+
 /**
  * Represents a command to delete a seller in the seller management system.
  */
@@ -21,7 +21,7 @@ public class DeleteSellerCommand extends Command {
             + ": Deletes the seller identified by the phone number used in the displayed person list.\n"
             + "Parameters: phone number (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_PHONE + "81621234";
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Seller: %1$s";
     private final String phoneNumber;
 
     /**
@@ -43,19 +43,12 @@ public class DeleteSellerCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
         // Search for the person with the specified phone number
-        Person personToDelete = null;
-        for (Person person : lastShownList) {
-            if (person.getPhone().toString().equals(phoneNumber)) {
-                personToDelete = person;
-                break;
-            }
-        }
-        if (personToDelete == null) {
-            throw new CommandException(String.format("Person not found. ", phoneNumber));
-        }
-        model.deletePerson(personToDelete);
+        Client personToDelete = model.getFilteredClientList().stream()
+                .filter(person -> person instanceof Seller)
+                .filter(person -> person.getPhone().toString().equals(phoneNumber))
+                .findFirst().orElseThrow(() -> new CommandException(String.format("Seller not found. ", phoneNumber)));
+        model.deleteClient(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
     /**
