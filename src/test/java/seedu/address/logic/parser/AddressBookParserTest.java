@@ -14,12 +14,12 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.generalcommands.ClearCommand;
-import seedu.address.logic.commands.personcommands.DeletePersonCommand;
-import seedu.address.logic.commands.personcommands.EditPersonCommand;
-import seedu.address.logic.commands.personcommands.EditPersonCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.generalcommands.ExitCommand;
 import seedu.address.logic.commands.generalcommands.HelpCommand;
 import seedu.address.logic.commands.personcommands.AddPersonCommand;
+import seedu.address.logic.commands.personcommands.DeletePersonCommand;
+import seedu.address.logic.commands.personcommands.EditPersonCommand;
+import seedu.address.logic.commands.personcommands.EditPersonCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.personcommands.FindPersonCommand;
 import seedu.address.logic.commands.personcommands.ListPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
