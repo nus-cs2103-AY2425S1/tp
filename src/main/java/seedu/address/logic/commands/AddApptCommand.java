@@ -36,11 +36,17 @@ public class AddApptCommand extends Command {
 
     public static final String COMMAND_WORD = "addAppt";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an appointment to a patient"
-            + "Parameters: "
-            + PREFIX_NRIC + "NRIC "
-            + PREFIX_DATE + "Date of appointment "
-            + PREFIX_TIMEPERIOD + "Time period (in HHMM-HHMM)";
+    public static final String MESSAGE_USAGE =
+            COMMAND_WORD + ": Adds an appointment to a patient\n"
+            + "Parameters: Appointment Name, "
+            + PREFIX_NRIC + "NRIC (must be a valid NRIC in the system), "
+            + PREFIX_DATE + "DATE (of appointment), "
+            + PREFIX_TIMEPERIOD + "TIME_PERIOD (in HHMM-HHMM, chronological order).\n"
+            + "Example: "
+            + COMMAND_WORD + "Dental "
+            + PREFIX_DATE + "2024-10-24 "
+            + PREFIX_TIMEPERIOD + "1235-1400 "
+            + PREFIX_NRIC + "S1234567Z";
 
     public static final String MESSAGE_SUCCESS_4S = "Appointment for %s scheduled: %s [ %s @ %s ]";
     public static final String MESSAGE_DUPLICATE_APPT_1S = "Appointment already exists for this date and time: %s.";

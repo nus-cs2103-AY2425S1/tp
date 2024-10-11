@@ -14,6 +14,8 @@ import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -28,7 +30,8 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
 /**
- * Contains the integration tests (interaction with the Model) and unit tests for AddApptCommand.
+ * Contains the integname.equals(otherPerson.name)ration tests (interaction with the Model) and unit tests for
+ * AddApptCommand.
  */
 
 public class AddApptCommandTest {
@@ -36,26 +39,38 @@ public class AddApptCommandTest {
     @Test
     public void execute_allFieldsSpecified_success() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Nric nric = (model).getFilteredPersonList().get(0).getNric();
-        AddApptCommand addApptCommand = new AddApptCommand(new NricMatchesPredicate(nric), VALID_APPOINTMENT_NAME_AMY,
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+        Person targetPerson = model.getFilteredPersonList().get(0);
+        Nric nric = targetPerson.getNric();
+
+        AddApptCommand addApptCommand = new AddApptCommand(new NricMatchesPredicate(nric),
+                                                           VALID_APPOINTMENT_NAME_AMY,
                                                            VALID_APPOINTMENT_DATE_AMY,
                                                            VALID_APPOINTMENT_TIMEPERIOD_AMY);
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        ArrayList<String> currentSerializedAppointmentLists =
+                new ArrayList<>(targetPerson.getAppointments()
+                                            .stream()
+                                            .map(x -> x.getAppointmentName() + ":"
+                                                      + x.getAppointmentDate() + ":"
+                                                      + x.getAppointmentTimePeriod())
+                                            .toList());
         String expectedAppt = VALID_APPOINTMENT_NAME_AMY + ":"
                               + VALID_APPOINTMENT_DATE_AMY + ":"
                               + VALID_APPOINTMENT_TIMEPERIOD_AMY;
-        Person newApptPerson = new PersonBuilder()
-                .withNric(expectedModel.getFilteredPersonList().get(0).getNric().value)
-                .withName(expectedModel.getFilteredPersonList().get(0).getName().fullName)
-                .withAddress(expectedModel.getFilteredPersonList().get(0).getAddress().value)
-                .withEmail(expectedModel.getFilteredPersonList().get(0).getEmail().value)
-                .withGender(expectedModel.getFilteredPersonList().get(0).getGender().value)
-                .withPhone(expectedModel.getFilteredPersonList().get(0).getPhone().value)
-                .withDateOfBirth(expectedModel.getFilteredPersonList().get(0).getDateOfBirth().value)
-                .withTags(expectedModel.getFilteredPersonList().get(0).getTags().stream().map(x -> x.tagName)
-                                       .toArray(String[]::new))
-                .withAppointments(expectedAppt)
-                .build();
+        currentSerializedAppointmentLists.add(expectedAppt);
+        Person newApptPerson = new PersonBuilder().withNric(targetPerson.getNric().value)
+                                                  .withName(targetPerson.getName().fullName)
+                                                  .withAddress(targetPerson.getAddress().value)
+                                                  .withEmail(targetPerson.getEmail().value)
+                                                  .withGender(targetPerson.getGender().value)
+                                                  .withPhone(targetPerson.getPhone().value)
+                                                  .withDateOfBirth(targetPerson.getDateOfBirth().value)
+                                                  .withTags(targetPerson.getTags().stream().map(x -> x.tagName)
+                                                                        .toArray(String[]::new))
+                                                  .withAppointments(currentSerializedAppointmentLists
+                                                                            .toArray(String[]::new))
+                                                  .build();
         String expectedMessage = String.format(AddApptCommand.MESSAGE_SUCCESS_4S, nric.value,
                                                VALID_APPOINTMENT_NAME_AMY, VALID_APPOINTMENT_DATE_AMY,
                                                VALID_APPOINTMENT_TIMEPERIOD_AMY);

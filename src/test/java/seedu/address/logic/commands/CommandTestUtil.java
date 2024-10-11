@@ -65,6 +65,10 @@ public class CommandTestUtil {
     public static final String VALID_APPOINTMENT_NAME_BOB = VALID_APPOINTMENT_NAME_PHYSIO;
     public static final String VALID_APPOINTMENT_DATE_BOB = VALID_APPOINTMENT_DATE_PHYSIO;
     public static final String VALID_APPOINTMENT_TIMEPERIOD_BOB = VALID_APPOINTMENT_TIMEPERIOD_PHYSIO;
+    public static final String VALID_DEL_APPT_AMY_DESC = " " + PREFIX_DATE + VALID_APPOINTMENT_DATE_AMY
+                                                          + " " + PREFIX_TIMEPERIOD + VALID_APPOINTMENT_TIMEPERIOD_AMY;
+    public static final String VALID_DEL_APPT_BOB_DESC = " " + PREFIX_DATE + VALID_APPOINTMENT_DATE_BOB
+                                                          + " " + PREFIX_TIMEPERIOD + VALID_APPOINTMENT_TIMEPERIOD_BOB;
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -134,6 +138,22 @@ public class CommandTestUtil {
                                                                            + VALID_APPOINTMENT_DATE_PHYSIO + " "
                                                                            + PREFIX_TIMEPERIOD
                                                                            + INVALID_APPOINTMENT_TIMEPERIOD_ORDER;
+    public static final String INVALID_DEL_APPT_DATE_FORMAT_DESC = " " + PREFIX_DATE
+                                                                   + INVALID_APPOINTMENT_DATE_FORMAT + " "
+                                                                   + PREFIX_TIMEPERIOD
+                                                                   + VALID_APPOINTMENT_TIMEPERIOD_PHYSIO;
+    public static final String INVALID_DEL_APPT_DATE_NONEXISTANT_DESC = " " + PREFIX_DATE
+                                                                        + INVALID_APPOINTMENT_DATE_NONEXISTANT
+                                                                        + " " + PREFIX_TIMEPERIOD
+                                                                        + VALID_APPOINTMENT_TIMEPERIOD_PHYSIO;
+    public static final String INVALID_DEL_APPT_TIMEPERIOD_FORMAT_DESC = " " + PREFIX_DATE
+                                                                         + VALID_APPOINTMENT_DATE_PHYSIO + " "
+                                                                         + PREFIX_TIMEPERIOD
+                                                                         + INVALID_APPOINTMENT_TIMEPERIOD_FORMAT;
+    public static final String INVALID_DEL_APPT_TIMEPERIOD_ORDER_DESC = " " + PREFIX_DATE
+                                                                        + VALID_APPOINTMENT_DATE_PHYSIO + " "
+                                                                        + PREFIX_TIMEPERIOD
+                                                                        + INVALID_APPOINTMENT_TIMEPERIOD_ORDER;
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
