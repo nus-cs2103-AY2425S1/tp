@@ -31,7 +31,7 @@ import static hallpointer.address.testutil.TypicalMembers.BOB;
 import org.junit.jupiter.api.Test;
 
 import hallpointer.address.logic.Messages;
-import hallpointer.address.logic.commands.AddCommand;
+import hallpointer.address.logic.commands.AddMemberCommand;
 import hallpointer.address.model.member.Member;
 import hallpointer.address.model.member.Name;
 import hallpointer.address.model.member.Room;
@@ -39,8 +39,8 @@ import hallpointer.address.model.member.Telegram;
 import hallpointer.address.model.tag.Tag;
 import hallpointer.address.testutil.MemberBuilder;
 
-public class AddCommandParserTest {
-    private AddCommandParser parser = new AddCommandParser();
+public class AddMemberCommandParserTest {
+    private AddMemberCommandParser parser = new AddMemberCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
@@ -48,7 +48,7 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + TELEGRAM_DESC_BOB + ROOM_DESC_BOB
-                + TAG_DESC_FRIEND, new AddCommand(expectedMember));
+                + TAG_DESC_FRIEND, new AddMemberCommand(expectedMember));
 
 
         // multiple tags - all accepted
@@ -56,7 +56,7 @@ public class AddCommandParserTest {
                 .build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + TELEGRAM_DESC_BOB + ROOM_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                new AddCommand(expectedMemberMultipleTags));
+                new AddMemberCommand(expectedMemberMultipleTags));
     }
 
     @Test
@@ -116,12 +116,12 @@ public class AddCommandParserTest {
         // zero tags
         Member expectedMember = new MemberBuilder(AMY).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + TELEGRAM_DESC_AMY + ROOM_DESC_AMY,
-                new AddCommand(expectedMember));
+                new AddMemberCommand(expectedMember));
     }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMemberCommand.MESSAGE_USAGE);
 
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + TELEGRAM_DESC_BOB + ROOM_DESC_BOB,
@@ -165,6 +165,6 @@ public class AddCommandParserTest {
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + TELEGRAM_DESC_BOB
                 + ROOM_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMemberCommand.MESSAGE_USAGE));
     }
 }

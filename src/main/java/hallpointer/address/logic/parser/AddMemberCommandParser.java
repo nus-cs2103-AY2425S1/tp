@@ -9,7 +9,7 @@ import static hallpointer.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import hallpointer.address.logic.commands.AddCommand;
+import hallpointer.address.logic.commands.AddMemberCommand;
 import hallpointer.address.logic.parser.exceptions.ParseException;
 import hallpointer.address.model.member.Member;
 import hallpointer.address.model.member.Name;
@@ -18,22 +18,22 @@ import hallpointer.address.model.member.Telegram;
 import hallpointer.address.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new AddMemberCommand object
  */
-public class AddCommandParser implements Parser<AddCommand> {
+public class AddMemberCommandParser implements Parser<AddMemberCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AddMemberCommand
+     * and returns an AddMemberCommand object for execution.
      * @throws ParseException if the user input does not conform to the expected format
      */
-    public AddCommand parse(String args) throws ParseException {
+    public AddMemberCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TELEGRAM, PREFIX_ROOM, PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_TELEGRAM, PREFIX_ROOM)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMemberCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_TELEGRAM, PREFIX_ROOM);
@@ -45,7 +45,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         Member member = new Member(name, telegram, room, tagList);
 
-        return new AddCommand(member);
+        return new AddMemberCommand(member);
     }
 
     /**

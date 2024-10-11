@@ -4,7 +4,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import hallpointer.address.logic.commands.EditCommand.EditMemberDescriptor;
+import hallpointer.address.logic.commands.EditMemberCommand.EditMemberDescriptor;
 import hallpointer.address.model.member.Member;
 import hallpointer.address.model.member.Name;
 import hallpointer.address.model.member.Room;

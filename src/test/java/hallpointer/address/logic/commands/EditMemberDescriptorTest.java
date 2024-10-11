@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import hallpointer.address.logic.commands.EditCommand.EditMemberDescriptor;
+import hallpointer.address.logic.commands.EditMemberCommand.EditMemberDescriptor;
 import hallpointer.address.testutil.EditMemberDescriptorBuilder;
 
 public class EditMemberDescriptorTest {
