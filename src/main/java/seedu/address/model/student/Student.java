@@ -93,7 +93,6 @@ public class Student extends Person {
                 .add("contactNumber", getPhone())
                 .add("tutorialGroup", tutorialGroup)
                 .add("studentNumber", studentNumber)
-                .add("attendanceRecords", attendanceRecords)
                 .toString();
     }
     /**
