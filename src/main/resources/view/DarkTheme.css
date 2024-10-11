@@ -132,6 +132,11 @@
     -fx-text-fill: #010504;
 }
 
+.remark {
+    -fx-text-fill: #cbd5e1 !important;
+    -fx-font-style: italic;
+}
+
 .stack-pane {
      -fx-background-color: derive(#1d1d1d, 20%);
 }
