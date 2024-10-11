@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 import keycontacts.commons.core.LogsCenter;
 import keycontacts.logic.commands.AddCommand;
 import keycontacts.logic.commands.AssignPiecesCommand;
+import keycontacts.logic.commands.CancelLessonCommand;
 import keycontacts.logic.commands.ClearCommand;
 import keycontacts.logic.commands.Command;
 import keycontacts.logic.commands.DeleteCommand;
@@ -64,6 +65,7 @@ public class KeyContactsParser {
         case HelpCommand.COMMAND_WORD -> new HelpCommand();
         case ScheduleCommand.COMMAND_WORD -> new ScheduleCommandParser().parse(arguments);
         case AssignPiecesCommand.COMMAND_WORD -> new AssignPiecesCommandParser().parse(arguments);
+        case CancelLessonCommand.COMMAND_WORD -> new CancelLessonCommandParser().parse(arguments);
         default -> {
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
