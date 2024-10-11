@@ -17,7 +17,7 @@ public class SortOption {
             // Add other sorting options here
     );
 
-    public static final String MESSAGE_CONSTRAINTS = "Invalid sort option: %s\nValid options are: "
+    public static final String MESSAGE_CONSTRAINTS = "Invalid sort option.\nValid options are: "
             + String.join(", ", VALID_SORT_OPTIONS);
 
     private final String value;
