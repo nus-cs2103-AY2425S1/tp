@@ -28,8 +28,8 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -90,7 +90,8 @@ public class AddressBookParserTest {
         System.out.println("Expected number of persons listed: " + expectedModel.getFilteredPersonList().size());
 
         // Now check the command's success message and ensure it matches the expected result
-        assertCommandSuccess(command, model, String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, expectedModel.getFilteredPersonList().size()), expectedModel);
+        assertCommandSuccess(command, model, String.format(MESSAGE_PERSONS_LISTED_OVERVIEW,
+                expectedModel.getFilteredPersonList().size()), expectedModel);
     }
     @Test
     public void parseCommand_help() throws Exception {
