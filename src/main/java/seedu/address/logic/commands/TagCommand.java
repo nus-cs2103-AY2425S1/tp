@@ -12,6 +12,7 @@ import seedu.address.model.tag.Tag;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -73,5 +74,20 @@ public class TagCommand extends Command {
             }
         }
         return stringBuilder.toString();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof TagCommand)) {
+            return false;
+        }
+
+        TagCommand otherTagCommand = (TagCommand) other;
+        return Objects.equals(this.targetIndex, otherTagCommand.targetIndex)
+                && Objects.equals(this.addedTags, otherTagCommand.addedTags);
     }
 }
