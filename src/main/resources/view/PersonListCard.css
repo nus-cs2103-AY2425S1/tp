@@ -20,6 +20,22 @@
     -fx-font-size: 12pt;
     -fx-text-fill: #D9B08C; /* Beige */
 }
+#name {
+    -fx-text-fill: #D9B08C;
+}
+
+#address {
+    -fx-text-fill: #D9B08C;
+}
+
+#phone {
+    -fx-text-fill: #D9B08C;
+}
+
+#email {
+    -fx-text-fill: #D9B08C;
+}
+
 
 /* Styling for the FlowPane that contains tags */
 #tags {
@@ -57,3 +73,5 @@ GridPane {
     -fx-vgap: 10;
     -fx-background-color: transparent;
 }
+
+
