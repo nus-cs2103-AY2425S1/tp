@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
+
 import seedu.address.commons.util.ToStringBuilder;
 
 /**

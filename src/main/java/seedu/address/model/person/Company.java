@@ -18,7 +18,7 @@ public class Company {
      * @param email A valid email.
      * @param name  A valid name.
      * @throws NullPointerException if the {@code email} or {@code name} is null.
-     * @throws IllegalArgumentException if the {@code email} or {@code name} do not satisfy their respective constraints.
+     * @throws IllegalArgumentException if the {@code email} or {@code name} do not satisfy their constraints.
      */
     public Company(Email email, Name name) {
         requireNonNull(email);

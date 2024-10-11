@@ -1,6 +1,5 @@
 package seedu.address.model.person;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
@@ -47,7 +46,8 @@ public class UniqueInternshipList implements Iterable<Internship> {
     /**
      * Replaces the internship {@code target} in the list with {@code editedInternship}.
      * {@code target} must exist in the list.
-     * The internship identity of {@code editedInternship} must not be the same as another existing internship in the list.
+     * The internship identity of {@code editedInternship} must not be the same
+     * as another existing internship in the list.
      * @throws InternshipNotFoundException if {@code target} is not found in the list.
      * @throws DuplicateInternshipException if the internship identity conflicts with another in the list.
      */

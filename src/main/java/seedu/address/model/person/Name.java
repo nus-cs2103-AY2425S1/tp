@@ -11,10 +11,12 @@ public class Name implements Validatable {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Name should only contain alphanumeric characters, single spaces between words, "
-                    + "and certain symbols like '&', '-', '\'', and '.', and it should not start or end with special characters or spaces.";
+                    + "and certain symbols like '&', '-', '\'', and '.', "
+                            + "and it should not start or end with special characters or spaces.";
 
     /*
-     * Company names should start with an alphanumeric character, and can contain the characters &, ', -, . and single spaces between words.
+     * Company names should start with an alphanumeric character,
+     * and can contain the characters &, ', -, . and single spaces between words.
      * No leading/trailing spaces or special characters, and no multiple consecutive spaces are allowed.
      */
     public static final String VALIDATION_REGEX = "^[\\p{Alnum}][\\p{Alnum}&'.-]*(?: [\\p{Alnum}&'.-]+)*$";
