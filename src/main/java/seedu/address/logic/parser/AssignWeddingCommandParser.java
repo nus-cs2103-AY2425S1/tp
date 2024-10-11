@@ -52,6 +52,11 @@ public class AssignWeddingCommandParser implements Parser<AssignWeddingCommand> 
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignWeddingCommand.MESSAGE_USAGE));
         }
 
+        // Checks that all weddings have valid names
+        if (weddingValues.stream().anyMatch(wedding -> !Wedding.isValidWeddingName(wedding))) {
+            throw new ParseException(WeddingName.MESSAGE_CONSTRAINTS);
+        }
+
         // Convert wedding values to Wedding objects
         HashSet<Wedding> weddings = new HashSet<>(weddingValues.stream()
                 .map(WeddingName::new) // Convert each string to a TagName object

@@ -11,6 +11,7 @@ import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.commands.AssignWeddingCommand;
 import seedu.address.logic.commands.UnassignWeddingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.wedding.Wedding;
@@ -53,6 +54,11 @@ public class UnassignWeddingCommandParser implements Parser<UnassignWeddingComma
         if (weddingValues.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     UnassignWeddingCommand.MESSAGE_USAGE));
+        }
+
+        // Checks that all weddings have valid names
+        if (weddingValues.stream().anyMatch(wedding -> !Wedding.isValidWeddingName(wedding))) {
+            throw new ParseException(WeddingName.MESSAGE_CONSTRAINTS);
         }
 
         // Convert wedding values to Wedding objects

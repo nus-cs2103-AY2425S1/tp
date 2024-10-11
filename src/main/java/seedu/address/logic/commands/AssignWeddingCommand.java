@@ -88,4 +88,18 @@ public class AssignWeddingCommand extends Command {
 
         return new CommandResult(generateSuccessMessage(editedPerson));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof AssignWeddingCommand)) {
+            return false;
+        }
+
+        AssignWeddingCommand otherCommand = (AssignWeddingCommand) other;
+        return index.equals(otherCommand.index) && weddingsToAdd.equals(((AssignWeddingCommand) other).weddingsToAdd);
+    }
 }
