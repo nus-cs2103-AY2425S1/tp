@@ -30,15 +30,16 @@ public class AddInsuranceCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_INSURANCE_ID + " 0";
 
-    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, InsuranceID: %2$s";
     public static final String MESSAGE_ADD_INSURANCE_PLAN_SUCCESS = "Added Insurance Plan: %1$s, to Client: %2$s";
 
     private final Index index;
     private final int insuranceID;
 
     /**
-     * @param index       of the person in the filtered person list to edit the remark
-     * @param insuranceID of the person to be updated to
+     * Constructs an AddInsuranceCommand Object with an Index Object and an integer for insuranceId.
+     *
+     * @param index       of the person in the filtered person list to add the insurance plan to.
+     * @param insuranceID of insurance plan to be added to the person.
      */
     public AddInsuranceCommand(Index index, int insuranceID) {
         requireAllNonNull(index, insuranceID);
