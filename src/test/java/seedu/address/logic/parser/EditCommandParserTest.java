@@ -5,26 +5,26 @@ import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TELEGRAM_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ROLE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_STUDENT_STATUS_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TELEGRAM_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.TELEGRAM_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.TELEGRAM_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_ADMIN;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_PRESIDENT;
+import static seedu.address.logic.commands.CommandTestUtil.ROLE_DESC_ADMIN;
+import static seedu.address.logic.commands.CommandTestUtil.ROLE_DESC_PRESIDENT;
 import static seedu.address.logic.commands.CommandTestUtil.STUDENT_STATUS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.STUDENT_STATUS_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.TELEGRAM_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.TELEGRAM_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_ADMIN;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PRESIDENT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_ADMIN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_PRESIDENT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_STATUS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -47,7 +47,7 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 public class EditCommandParserTest {
 
-    private static final String TAG_EMPTY = " " + PREFIX_ROLE;
+    private static final String ROLE_EMPTY = " " + PREFIX_ROLE;
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
@@ -86,17 +86,20 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
         assertParseFailure(parser, "1" + INVALID_TELEGRAM_DESC, Telegram.MESSAGE_CONSTRAINTS); // invalid phone
         assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
-        assertParseFailure(parser, "1" + INVALID_STUDENT_STATUS_DESC, StudentStatus.MESSAGE_CONSTRAINTS); // invalid student status
-        assertParseFailure(parser, "1" + INVALID_TAG_DESC, Role.MESSAGE_CONSTRAINTS); // invalid tag
+
+        // invalid student status
+        assertParseFailure(parser, "1" + INVALID_STUDENT_STATUS_DESC, StudentStatus.MESSAGE_CONSTRAINTS);
+
+        assertParseFailure(parser, "1" + INVALID_ROLE_DESC, Role.MESSAGE_CONSTRAINTS); // invalid role
 
         // invalid phone followed by valid email
         assertParseFailure(parser, "1" + INVALID_TELEGRAM_DESC + EMAIL_DESC_AMY, Telegram.MESSAGE_CONSTRAINTS);
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Person} being edited,
         // parsing it together with a valid tag results in error
-        assertParseFailure(parser, "1" + TAG_DESC_ADMIN + TAG_DESC_PRESIDENT + TAG_EMPTY, Role.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_DESC_ADMIN + TAG_EMPTY + TAG_DESC_PRESIDENT, Role.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_ADMIN + TAG_DESC_PRESIDENT, Role.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + ROLE_DESC_ADMIN + ROLE_DESC_PRESIDENT + ROLE_EMPTY, Role.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + ROLE_DESC_ADMIN + ROLE_EMPTY + ROLE_DESC_PRESIDENT, Role.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + ROLE_EMPTY + ROLE_DESC_ADMIN + ROLE_DESC_PRESIDENT, Role.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_STUDENT_STATUS_AMY
@@ -106,12 +109,12 @@ public class EditCommandParserTest {
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
-        String userInput = targetIndex.getOneBased() + TELEGRAM_DESC_BOB + TAG_DESC_PRESIDENT
-                + EMAIL_DESC_AMY + STUDENT_STATUS_DESC_AMY + NAME_DESC_AMY + TAG_DESC_ADMIN;
+        String userInput = targetIndex.getOneBased() + TELEGRAM_DESC_BOB + ROLE_DESC_PRESIDENT
+                + EMAIL_DESC_AMY + STUDENT_STATUS_DESC_AMY + NAME_DESC_AMY + ROLE_DESC_ADMIN;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withTelegram(VALID_TELEGRAM_BOB).withEmail(VALID_EMAIL_AMY).withStudentStatus(VALID_STUDENT_STATUS_AMY)
-                .withTags(VALID_TAG_PRESIDENT, VALID_TAG_ADMIN).build();
+                .withRoles(VALID_ROLE_PRESIDENT, VALID_ROLE_ADMIN).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -157,8 +160,8 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // tags
-        userInput = targetIndex.getOneBased() + TAG_DESC_ADMIN;
-        descriptor = new EditPersonDescriptorBuilder().withTags(VALID_TAG_ADMIN).build();
+        userInput = targetIndex.getOneBased() + ROLE_DESC_ADMIN;
+        descriptor = new EditPersonDescriptorBuilder().withRoles(VALID_ROLE_ADMIN).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -166,7 +169,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_multipleRepeatedFields_failure() {
         // More extensive testing of duplicate parameter detections is done in
-        // AddCommandParserTest#parse_repeatedNonTagValue_failure()
+        // AddCommandParserTest#parse_repeatedNonRoleValue_failure()
 
         // valid followed by invalid
         Index targetIndex = INDEX_FIRST_PERSON;
@@ -181,8 +184,8 @@ public class EditCommandParserTest {
 
         // mulltiple valid fields repeated
         userInput = targetIndex.getOneBased() + TELEGRAM_DESC_AMY + STUDENT_STATUS_DESC_AMY + EMAIL_DESC_AMY
-                + TAG_DESC_ADMIN + TELEGRAM_DESC_AMY + STUDENT_STATUS_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_ADMIN
-                + TELEGRAM_DESC_BOB + STUDENT_STATUS_DESC_BOB + EMAIL_DESC_BOB + TAG_DESC_PRESIDENT;
+                + ROLE_DESC_ADMIN + TELEGRAM_DESC_AMY + STUDENT_STATUS_DESC_AMY + EMAIL_DESC_AMY + ROLE_DESC_ADMIN
+                + TELEGRAM_DESC_BOB + STUDENT_STATUS_DESC_BOB + EMAIL_DESC_BOB + ROLE_DESC_PRESIDENT;
 
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TELEGRAM, PREFIX_EMAIL, PREFIX_STUDENT_STATUS));
@@ -196,8 +199,8 @@ public class EditCommandParserTest {
     }
 
     @Test
-    public void parse_resetTags_failure() {
-        String userInput = INDEX_THIRD_PERSON.getOneBased() + TAG_EMPTY;
+    public void parse_resetRoles_failure() {
+        String userInput = INDEX_THIRD_PERSON.getOneBased() + ROLE_EMPTY;
 
         assertParseFailure(parser, userInput, Role.MESSAGE_CONSTRAINTS);
     }

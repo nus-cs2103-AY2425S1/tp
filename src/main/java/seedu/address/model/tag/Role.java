@@ -11,7 +11,7 @@ import java.util.Arrays;
  */
 public class Role {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tag must be one of the following: \n"
+    public static final String MESSAGE_CONSTRAINTS = "Role must be one of the following: \n"
             + "1. President\n"
             + "2. Vice President\n"
             + "3. Admin\n"

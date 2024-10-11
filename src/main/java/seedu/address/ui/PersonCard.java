@@ -39,7 +39,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private FlowPane tags;
+    private FlowPane roles;
     @FXML
     private FlowPane nickname;
 
@@ -54,9 +54,9 @@ public class PersonCard extends UiPart<Region> {
         telegram.setText(person.getTelegram().value);
         studentStatus.setText(person.getStudentStatus().value);
         email.setText(person.getEmail().value);
-        person.getTags().stream()
+        person.getRoles().stream()
                 .sorted(Comparator.comparing(tag -> tag.roleName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.roleName)));
+                .forEach(tag -> roles.getChildren().add(new Label(tag.roleName)));
 
         String nicknameObtained = person.getNickname().value;
         if (!nicknameObtained.isEmpty()) {

@@ -13,9 +13,9 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.StudentStatus;
 import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Nickname;
-import seedu.address.model.person.StudentStatus;
 import seedu.address.model.tag.Role;
 
 /**
@@ -29,7 +29,7 @@ class JsonAdaptedPerson {
     private final String telegram;
     private final String email;
     private final String studentStatus;
-    private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedRole> roles = new ArrayList<>();
     private final String nickname;
 
     /**
@@ -37,14 +37,15 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("telegram") String telegram,
-            @JsonProperty("email") String email, @JsonProperty("studentStatus") String studentStatus,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("nickname") String nickname) {
+                             @JsonProperty("email") String email, @JsonProperty("studentStatus") String studentStatus,
+                             @JsonProperty("roles") List<JsonAdaptedRole> roles,
+                             @JsonProperty("nickname") String nickname) {
         this.name = name;
         this.telegram = telegram;
         this.email = email;
         this.studentStatus = studentStatus;
-        if (tags != null) {
-            this.tags.addAll(tags);
+        if (roles != null) {
+            this.roles.addAll(roles);
         }
         this.nickname = nickname;
     }
@@ -57,8 +58,8 @@ class JsonAdaptedPerson {
         telegram = source.getTelegram().value;
         email = source.getEmail().value;
         studentStatus = source.getStudentStatus().value;
-        tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
+        roles.addAll(source.getRoles().stream()
+                .map(JsonAdaptedRole::new)
                 .collect(Collectors.toList()));
         nickname = source.getNickname().value;
     }
@@ -70,8 +71,8 @@ class JsonAdaptedPerson {
      */
     public Person toModelType() throws IllegalValueException {
         final List<Role> personRoles = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            personRoles.add(tag.toModelType());
+        for (JsonAdaptedRole role : roles) {
+            personRoles.add(role.toModelType());
         }
 
         if (name == null) {

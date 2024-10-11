@@ -4,12 +4,12 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_ADMIN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_PRESIDENT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_STATUS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_STATUS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_ADMIN;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PRESIDENT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,35 +26,35 @@ public class TypicalPersons {
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withStudentStatus("undergraduate 1").withEmail("alice@example.com")
             .withTelegram("94351253")
-            .withTags("Admin").build();
+            .withRoles("Admin").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withStudentStatus("undergraduate 2")
             .withEmail("johnd@example.com").withTelegram("98765432")
-            .withTags("President", "Marketing").build();
+            .withRoles("President", "Marketing").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withTelegram("95352563")
             .withEmail("heinz@example.com")
             .withStudentStatus("undergraduate 3")
-            .withTags("External Relations")
+            .withRoles("External Relations")
             .build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withTelegram("87652533")
             .withEmail("cornelia@example.com")
             .withStudentStatus("undergraduate 4")
-            .withTags("Events (external)")
+            .withRoles("Events (external)")
             .build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withTelegram("9482224")
             .withEmail("werner@example.com")
             .withStudentStatus("undergraduate 5")
-            .withTags("Events (internal)")
+            .withRoles("Events (internal)")
             .build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withTelegram("9482427")
             .withEmail("lydia@example.com")
             .withStudentStatus("masters")
-            .withTags("Events (external)")
+            .withRoles("Events (external)")
             .build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withTelegram("9482442")
             .withEmail("anna@example.com")
             .withStudentStatus("phd")
-            .withTags("Vice President")
+            .withRoles("Vice President")
             .build();
 
     // Manually added
@@ -65,9 +65,10 @@ public class TypicalPersons {
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withTelegram(VALID_TELEGRAM_AMY)
-            .withEmail(VALID_EMAIL_AMY).withStudentStatus(VALID_STUDENT_STATUS_AMY).withTags(VALID_TAG_ADMIN).build();
+            .withEmail(VALID_EMAIL_AMY).withStudentStatus(VALID_STUDENT_STATUS_AMY).withRoles(VALID_ROLE_ADMIN).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withTelegram(VALID_TELEGRAM_BOB)
-            .withEmail(VALID_EMAIL_BOB).withStudentStatus(VALID_STUDENT_STATUS_BOB).withTags(VALID_TAG_PRESIDENT, VALID_TAG_ADMIN)
+            .withEmail(VALID_EMAIL_BOB).withStudentStatus(VALID_STUDENT_STATUS_BOB)
+            .withRoles(VALID_ROLE_PRESIDENT, VALID_ROLE_ADMIN)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

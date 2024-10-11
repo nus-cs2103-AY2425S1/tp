@@ -11,9 +11,9 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.StudentStatus;
 import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Nickname;
-import seedu.address.model.person.StudentStatus;
 import seedu.address.model.tag.Role;
 
 /**
@@ -97,28 +97,28 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String role} into a {@code Role}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code role} is invalid.
      */
-    public static Role parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Role.isValidRoleName(trimmedTag)) {
+    public static Role parseRole(String role) throws ParseException {
+        requireNonNull(role);
+        String trimmedRole = role.trim();
+        if (!Role.isValidRoleName(trimmedRole)) {
             throw new ParseException(Role.MESSAGE_CONSTRAINTS);
         }
-        return new Role(trimmedTag);
+        return new Role(trimmedRole);
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses {@code Collection<String> roles} into a {@code Set<Role>}.
      */
-    public static Set<Role> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
+    public static Set<Role> parseRoles(Collection<String> roles) throws ParseException {
+        requireNonNull(roles);
         final Set<Role> roleSet = new HashSet<>();
-        for (String tagName : tags) {
-            roleSet.add(parseTag(tagName));
+        for (String roleName : roles) {
+            roleSet.add(parseRole(roleName));
         }
         return roleSet;
     }

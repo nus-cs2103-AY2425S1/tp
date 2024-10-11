@@ -7,10 +7,10 @@ import java.util.Set;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.StudentStatus;
 import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Nickname;
 import seedu.address.model.tag.Role;
-import seedu.address.model.person.StudentStatus;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -19,16 +19,16 @@ import seedu.address.model.util.SampleDataUtil;
 public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
-    public static final String DEFAULT_PHONE = "85355255";
+    public static final String DEFAULT_TELEGRAM = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_STUDENT_STATUS = "undergraduate 1";
-    public static final String[] DEFAULT_TAGS = {"Admin"};
+    public static final String[] DEFAULT_ROLES = {"Admin"};
     public static final String DEFAULT_NICKNAME = "";
 
     private Name name;
-    private Telegram phone;
+    private Telegram telegram;
     private Email email;
-    private studentStatus studentStatus;
+    private StudentStatus studentStatus;
     private Set<Role> roles;
     private Nickname nickname;
 
@@ -37,10 +37,10 @@ public class PersonBuilder {
      */
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
-        phone = new Telegram(DEFAULT_PHONE);
+        telegram = new Telegram(DEFAULT_TELEGRAM);
         email = new Email(DEFAULT_EMAIL);
         studentStatus = new StudentStatus(DEFAULT_STUDENT_STATUS);
-        roles = new HashSet<>(Arrays.stream(DEFAULT_TAGS).map(Role::new).toList());
+        roles = new HashSet<>(Arrays.stream(DEFAULT_ROLES).map(Role::new).toList());
         nickname = new Nickname(DEFAULT_NICKNAME);
     }
 
@@ -49,10 +49,10 @@ public class PersonBuilder {
      */
     public PersonBuilder(Person personToCopy) {
         name = personToCopy.getName();
-        phone = personToCopy.getTelegram();
+        telegram = personToCopy.getTelegram();
         email = personToCopy.getEmail();
         studentStatus = personToCopy.getStudentStatus();
-        roles = new HashSet<>(personToCopy.getTags());
+        roles = new HashSet<>(personToCopy.getRoles());
         nickname = personToCopy.getNickname();
     }
 
@@ -65,10 +65,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code roles} into a {@code Set<Role>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
-        this.roles = SampleDataUtil.getTagSet(tags);
+    public PersonBuilder withRoles(String ... tags) {
+        this.roles = SampleDataUtil.getRoleSet(tags);
         return this;
     }
 
@@ -83,8 +83,8 @@ public class PersonBuilder {
     /**
      * Sets the {@code Telegram} of the {@code Person} that we are building.
      */
-    public PersonBuilder withTelegram(String phone) {
-        this.phone = new Telegram(phone);
+    public PersonBuilder withTelegram(String telegram) {
+        this.telegram = new Telegram(telegram);
         return this;
     }
 
@@ -105,7 +105,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, studentStatus, tags);
+        return new Person(name, telegram, email, studentStatus, roles, nickname);
     }
 
 }

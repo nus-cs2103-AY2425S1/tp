@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_PRESIDENT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PRESIDENT;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -56,10 +56,10 @@ public class EditCommandTest {
 
         PersonBuilder personInList = new PersonBuilder(lastPerson);
         Person editedPerson = personInList.withName(VALID_NAME_BOB).withTelegram(VALID_TELEGRAM_BOB)
-                .withTags(VALID_TAG_PRESIDENT).build();
+                .withRoles(VALID_ROLE_PRESIDENT).build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withTelegram(VALID_TELEGRAM_BOB).withTags(VALID_TAG_PRESIDENT).build();
+                .withTelegram(VALID_TELEGRAM_BOB).withRoles(VALID_ROLE_PRESIDENT).build();
         EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
