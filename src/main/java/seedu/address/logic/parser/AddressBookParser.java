@@ -8,6 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.AddClaimCommand;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddInsuranceCommand;
 import seedu.address.logic.commands.ClearCommand;
@@ -84,6 +85,9 @@ public class AddressBookParser {
 
         case DeleteInsuranceCommand.COMMAND_WORD:
             return new DeleteInsuranceCommandParser().parse(arguments);
+
+        case AddClaimCommand.COMMAND_WORD:
+            return new AddClaimCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

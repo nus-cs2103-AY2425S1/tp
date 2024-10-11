@@ -130,6 +130,37 @@ public class ParserUtil {
     }
 
     /**
+     * Parses {@code String claimId} into a valid claimId.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given claimId is invalid based on preset conventions.
+     */
+    public static String parseClaimId(String claimId) throws ParseException {
+        requireNonNull(claimId);
+        return claimId.trim();
+    }
+
+    /**
+     * Parses {@code String claimId} into a valid claimId.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the claim amount is not a valid positive integer
+     */
+    public static int parseClaimAmount(String claimAmount) throws ParseException {
+        requireNonNull(claimAmount);
+        int claimAmountInt;
+        try {
+            claimAmountInt = Integer.parseInt(claimAmount.trim());
+            if (claimAmountInt < 0) {
+                throw new ParseException("Unplayable, Claim Amount cannot be negative");
+            }
+        } catch (NumberFormatException e) {
+            throw new ParseException("Unplayable, claim Amount must be a positive integer");
+        }
+        return claimAmountInt;
+    }
+
+    /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {

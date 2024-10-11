@@ -31,7 +31,7 @@ public class AddClaimCommand extends Command {
             + PREFIX_CLAIM_AMOUNT + " 10000";
 
     public static final String MESSAGE_SUCCESS =
-            "New claim added to Client: %1$s, under Insurance plan %2$s, with claimId: %3$s, claimAmount: %4$d";
+            "New claim added to Client: %1$s, under Insurance plan %2$s, with claimId: %3$s, claimAmount: %4$s";
 
     public final Index index;
     private final int insuranceId;
@@ -65,6 +65,6 @@ public class AddClaimCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
         throw new CommandException(String.format(MESSAGE_SUCCESS, Messages.format(personToEdit),
-                this.insuranceId, this.claimID, this.claimAmount));
+                this.insuranceId, this.claimID, Messages.formatClaimAmount(this.claimAmount)));
     }
 }
