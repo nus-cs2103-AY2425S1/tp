@@ -5,6 +5,7 @@ import static seedu.address.model.person.insurance.InsurancePlanFactory.createIn
 import java.util.ArrayList;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.insurance.claim.Claim;
 
 /**
  * The {@code InsurancePlansManager} class represents a list manager of InsurancePlans that a client has purchased.
@@ -101,6 +102,20 @@ public class InsurancePlansManager {
         for (InsurancePlan p : insurancePlans) {
             if (p.equals(plan)) {
                 throw new ParseException(DUPLICATE_PLAN_DETECTED_MESSAGE);
+            }
+        }
+    }
+
+    /**
+     * Adds a claim to the insurance plan of the client.
+     * 
+     * @param insurancePlan The insurance plan the claim is to be added to.
+     * @param claim The claim that is to be added to the insurance plan.
+     */
+    public void addClaimToInsurancePlan(InsurancePlan insurancePlan, Claim claim) {
+        for (InsurancePlan p : insurancePlans) {
+            if (p.equals(insurancePlan)) {
+                p.claims.add(claim);
             }
         }
     }
