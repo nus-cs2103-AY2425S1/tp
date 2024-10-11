@@ -1,12 +1,13 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
+import static java.util.Objects.requireNonNull;
 
+/**
+ * View all information of specified contact
+ */
 public class ViewCommand extends Command {
     public static final String COMMAND_WORD = "view";
 
