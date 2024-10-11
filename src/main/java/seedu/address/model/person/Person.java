@@ -2,8 +2,10 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -25,6 +27,8 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+
+    private final List<Transaction> transactions = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
@@ -67,6 +71,10 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+    public List<Transaction> getTransactions() {
+        return transactions;
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
@@ -107,7 +115,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, company, phone, email, address, tags);
+        return Objects.hash(name, company, phone, email, address, tags, transactions);
     }
 
     @Override
@@ -119,6 +127,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("transactions", transactions)
                 .toString();
     }
 
