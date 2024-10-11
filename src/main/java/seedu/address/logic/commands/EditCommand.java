@@ -43,7 +43,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TAG]..."
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -141,7 +141,8 @@ public class EditCommand extends Command {
         private Set<Tag> tags;
         private Boolean hasPaid;
 
-        public EditPersonDescriptor() {}
+        public EditPersonDescriptor() {
+        }
 
         /**
          * Copy constructor.
@@ -153,14 +154,14 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
-            hasPaid = toCopy.hasPaid;
+            this.hasPaid = toCopy.hasPaid;
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, hasPaid);
         }
 
         public void setName(Name name) {
@@ -212,10 +213,11 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
-        /* needed for EditPersonDescriptorTest.java
-           Setter not necessary as EditCommand not used to edit paid variable
-         */
-        public Optional<Boolean> getHasPaid() {
+        public void setHasPaid(Boolean hasPaid) { // needed for EditPersonDescriptorTest.java
+            this.hasPaid = hasPaid;
+        }
+
+        public Optional<Boolean> getHasPaid() { // needed for EditPersonDescriptorTest.java
             return Optional.ofNullable(hasPaid);
         }
 

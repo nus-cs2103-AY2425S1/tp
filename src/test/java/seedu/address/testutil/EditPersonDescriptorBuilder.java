@@ -37,6 +37,8 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
         descriptor.setTags(person.getTags());
+        descriptor.setHasPaid(person.getHasPaid());
+        // check here
     }
 
     /**
@@ -78,6 +80,14 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
+        return this;
+    }
+
+    /**
+     * Sets the {@code HasPaid} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withHasPaid(Boolean hasPaid) {
+        descriptor.setHasPaid(hasPaid);
         return this;
     }
 
