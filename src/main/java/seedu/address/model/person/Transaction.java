@@ -9,7 +9,7 @@ public class Transaction {
 
     private final String description;
     private final int amount;
-    private final Person otherParty;
+    private final String otherParty;
     private final String date;
 
     public String getDescription() {
@@ -19,14 +19,14 @@ public class Transaction {
         return amount;
     }
 
-    public Person getOtherParty() {
+    public String getOtherParty() {
         return otherParty;
     }
     public String getDate() {
         return date;
     }
 
-    public Transaction(String description, int amount, Person otherParty, String date) {
+    public Transaction(String description, int amount, String otherParty, String date) {
         requireAllNonNull(description,amount,otherParty,date);
         this.description = description;
         this.amount = amount;
