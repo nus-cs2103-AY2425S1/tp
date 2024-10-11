@@ -7,6 +7,8 @@ import java.util.List;
 import hallpointer.address.commons.util.ToStringBuilder;
 import hallpointer.address.model.member.Member;
 import hallpointer.address.model.member.UniqueMemberList;
+import hallpointer.address.model.session.Session;
+import hallpointer.address.model.session.UniqueSessionList;
 import javafx.collections.ObservableList;
 
 /**
@@ -16,6 +18,8 @@ import javafx.collections.ObservableList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueMemberList members;
+    private final UniqueSessionList sessions;
+
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -26,6 +30,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         members = new UniqueMemberList();
+        sessions = new UniqueSessionList();
     }
 
     public AddressBook() {}
@@ -48,6 +53,15 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.members.setMembers(members);
     }
 
+
+    public void setSessions(List<Session> sessions) {
+        this.sessions.setSessions(sessions);
+    }
+
+    public ObservableList<Session> getSessionList() {
+        return sessions.asUnmodifiableObservableList();
+    }
+
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
@@ -55,6 +69,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setMembers(newData.getMemberList());
+        setSessions(newData.getSessionList());
     }
 
     //// member-level operations
@@ -126,5 +141,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public int hashCode() {
         return members.hashCode();
+    }
+
+    public void addSession(Session session) {
+        sessions.add(session);
     }
 }

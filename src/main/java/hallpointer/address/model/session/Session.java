@@ -106,4 +106,8 @@ public class Session {
                 .add("members", members)
                 .toString();
     }
+
+    public Object getDate() {
+        return this.date;
+    }
 }
