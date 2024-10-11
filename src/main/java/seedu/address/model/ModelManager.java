@@ -4,6 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,7 +14,10 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.Attendance;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,6 +28,8 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final Map<Person, Map<LocalDate, Attendance>> attendanceMap = new HashMap<>();
+
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -129,6 +137,32 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void markAttendance(Person person, LocalDate date, Attendance attendance) {
+        if (!hasPerson(person)) {
+            throw new IllegalArgumentException("Person not found in the address book.");
+        }
+
+        attendanceMap.computeIfAbsent(person, k -> new HashMap<>());
+
+        attendanceMap.get(person).put(date, attendance);
+    }
+
+    @Override
+    public Person getPersonByName(Name name) {
+        for (Person person : getAddressBook().getPersonList()) {
+            if (person.getName().equals(name)) {
+                return person;
+            }
+        }
+        return null; // Return null if no matching person is found
+    }
+
+    @Override
+    public Student getStudentByName(Name name) {
+        return (Student) getPersonByName(name);
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -144,5 +178,7 @@ public class ModelManager implements Model {
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
+
+
 
 }

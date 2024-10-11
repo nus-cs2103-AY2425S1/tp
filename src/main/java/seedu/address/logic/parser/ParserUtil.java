@@ -2,6 +2,9 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,6 +13,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -121,4 +125,42 @@ public class ParserUtil {
         }
         return tagSet;
     }
+    /**
+     * Parses a {@code String date} into a {@code LocalDate} object.
+     * The date is expected to be in the format 'YYYY-MM-DD'.
+     *
+     * @param date The date string to be parsed.
+     * @return A {@code LocalDate} object representing the parsed date.
+     * @throws ParseException If the input string does not follow the 'YYYY-MM-DD' format or is null.
+     */
+    public static LocalDate parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        try {
+            System.out.println(trimmedDate);
+            return LocalDate.parse(trimmedDate, DateTimeFormatter.ISO_LOCAL_DATE);
+        } catch (DateTimeParseException e) {
+            throw new ParseException("Invalid date format. Please use YYYY-MM-DD.");
+        }
+    }
+
+    /**
+     * Parses a {@code String status} into an {@code Attendance} object.
+     * The status is expected to be either 'present' or 'absent'.
+     *
+     * @param status The attendance status string to be parsed.
+     * @return An {@code Attendance} object representing the parsed attendance status.
+     * @throws ParseException If the input string is not 'present' or 'absent', or is null.
+     */
+
+    public static Attendance parseAttendance(String status) throws ParseException {
+        requireNonNull(status);
+        String trimmedStatus = status.trim();
+        if (!Attendance.isValidAttendance(trimmedStatus)) {
+            throw new ParseException("Invalid attendance status. It must be either 'present' or 'absent'.");
+        }
+        return new Attendance(trimmedStatus);
+    }
+
+
 }

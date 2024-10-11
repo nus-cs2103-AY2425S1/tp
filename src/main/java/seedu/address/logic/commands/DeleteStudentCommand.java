@@ -5,7 +5,7 @@ import seedu.address.model.Model;
 import seedu.address.model.student.StudentNumber;
 
 /**
- * Deletes a student.
+ * Deletes a student from the system.
  */
 public class DeleteStudentCommand extends Command {
     public static final String COMMAND_WORD = "deletestu";
