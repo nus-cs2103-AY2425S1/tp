@@ -47,6 +47,21 @@ public class ModelManager implements Model {
     //=========== UserPrefs ==================================================================================
 
     @Override
+    public void setStateStudents() {
+        this.userPrefs.setStateStudents();;
+    }
+
+    @Override
+    public void setStateGroups() {
+        this.userPrefs.setStateGroups();
+    }
+
+    @Override
+    public State getState() {
+        return this.userPrefs.getState();
+    }
+
+    @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
         requireNonNull(userPrefs);
         this.userPrefs.resetData(userPrefs);
@@ -100,6 +115,7 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Student target) {
         addressBook.removeStudent(target);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
@@ -111,8 +127,8 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
-
         addressBook.setStudent(target, editedStudent);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
@@ -124,14 +140,14 @@ public class ModelManager implements Model {
     @Override
     public void addGroup(Group group) {
         addressBook.addGroup(group);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
 
     @Override
     public void setGroup(Group target, Group editedGroup) {
         requireAllNonNull(target, editedGroup);
-
         addressBook.setGroup(target, editedGroup);
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
 
 
@@ -156,6 +172,12 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Student> predicate) {
         requireNonNull(predicate);
         filteredStudents.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredGroupList(Predicate<Group> predicate) {
+        requireNonNull(predicate);
+        filteredGroups.setPredicate(predicate);
     }
 
     @Override
