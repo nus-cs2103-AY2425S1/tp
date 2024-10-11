@@ -52,12 +52,21 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
+        if (person.isEmployee()) {
+            name.setText("(Employee) " + person.getName().fullName);
+        } else {
+            name.setText("(Potential Hire) " + person.getName().fullName);
+        }
+        // name.setText(person.getName().fullName);
         phone.setText("Phone: " + person.getPhone().value);
         address.setText("Address: " + person.getAddress().value);
         email.setText("Email: " + person.getEmail().value);
         department.setText("Department: " + person.getDepartment().value);
         role.setText("Role: " + person.getRole().value);
         contractEndDate.setText("Contract End Date: " + person.getContractEndDate().getValue());
+        if (person.isPotentialHire()) {
+            contractEndDate.managedProperty().set(false);
+            contractEndDate.visibleProperty().set(false);
+        }
     }
 }
