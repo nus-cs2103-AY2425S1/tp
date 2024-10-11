@@ -28,6 +28,11 @@ public class ConcertTest {
                 .withAddress(VALID_ADDRESS_GLASTONBURY).withDate(VALID_DATE_GLASTONBURY).build();
         assertFalse(COACHELLA.isSameConcert(editedCoachella));
 
+        // all but one attribute different -> returns false
+        editedCoachella =
+                new ConcertBuilder(COACHELLA).withAddress(VALID_ADDRESS_GLASTONBURY).build();
+        assertFalse(COACHELLA.isSameConcert(editedCoachella));
+
         // name differs in case, all other attributes same -> returns false
         editedCoachella = new ConcertBuilder().withName(VALID_NAME_COACHELLA.toLowerCase()).build();
         assertFalse(COACHELLA.isSameConcert(editedCoachella));
