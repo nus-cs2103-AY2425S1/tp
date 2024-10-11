@@ -1,9 +1,6 @@
 package seedu.address.model.person;
 
-import seedu.address.commons.util.ToStringBuilder;
-
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 public class Transaction {
 
@@ -26,8 +23,11 @@ public class Transaction {
         return date;
     }
 
+    /**
+     * Every field must be present and not null.
+     */
     public Transaction(String description, int amount, String otherParty, String date) {
-        requireAllNonNull(description,amount,otherParty,date);
+        requireAllNonNull(description, amount, otherParty, date);
         this.description = description;
         this.amount = amount;
         this.otherParty = otherParty;
@@ -54,6 +54,6 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return String.format("%s | Amount: %d | Other Party: %s | Date: %s");
+        return String.format("%s | Amount: %d | Other Party: %s | Date: %s", description, amount, otherParty, date);
     }
 }
