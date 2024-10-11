@@ -29,25 +29,27 @@ public class Member {
      */
     public Member(Name name, Telegram telegram, Room room, Set<Tag> tags) {
         requireAllNonNull(name, telegram, room, tags);
-    
+
         // Validate each field using regex
         if (!name.fullName.matches("^[a-zA-Z][a-zA-Z ]{0,99}$")) {
             throw new IllegalArgumentException("Error: Invalid name format.");
         }
-        if (!room.value.matches("^r/[0-9]+/[0-9]+/[0-9]+$")) {
-            throw new IllegalArgumentException("Error: Room number must be in the format r/<block>/<floor>/<room_number>.");
+        if (!room.value.matches("^[0-9]+/[0-9]+/[0-9]+$")) {
+            throw new IllegalArgumentException(
+                "Error: Room number must be in the format <block>/<floor>/<room_number>.");
         }
         if (!telegram.value.matches("^[a-zA-Z](?:[a-zA-Z0-9]|_(?=.*[a-zA-Z0-9]$)){4,31}$")) {
-            throw new IllegalArgumentException("Error: Telegram handle must only contain alphanumeric characters or underscores and be between 5 to 32 characters long.");
+            throw new IllegalArgumentException(
+                "Error: Telegram handle must only contain alphanumeric characters or underscores "
+                + "and be between 5 to 32 characters long.");
         }
-    
+
         // Set values after validation
         this.name = name;
         this.telegram = telegram;
         this.room = room;
         this.tags.addAll(tags);
     }
-    
 
     public Name getName() {
         return name;
@@ -77,7 +79,7 @@ public class Member {
         if (otherMember == this) {
             return true;
         }
-    
+
         // Check for duplicate based only on name
         return otherMember != null
                 && otherMember.getName().equals(getName());
@@ -120,5 +122,4 @@ public class Member {
                 .add("tags", tags)
                 .toString();
     }
-
 }

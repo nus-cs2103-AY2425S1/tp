@@ -7,7 +7,6 @@ import static hallpointer.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static java.util.Objects.requireNonNull;
 
 import hallpointer.address.commons.util.ToStringBuilder;
-import hallpointer.address.logic.Messages;
 import hallpointer.address.logic.commands.exceptions.CommandException;
 import hallpointer.address.model.Model;
 import hallpointer.address.model.member.Member;
@@ -20,18 +19,19 @@ public class AddMemberCommand extends Command {
     public static final String COMMAND_WORD = "add_member";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a member to the CCA. "
-            + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_TELEGRAM + "TELEGRAM_HANDLE "
-            + PREFIX_ROOM + "ROOM_NUMBER "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
-            + PREFIX_ROOM + "4/3/301 "
-            + PREFIX_TELEGRAM + "johndoe123 "
-            + PREFIX_TAG + "logistics";
+        + "Parameters: "
+        + PREFIX_NAME + "NAME "
+        + PREFIX_TELEGRAM + "TELEGRAM_HANDLE "
+        + PREFIX_ROOM + "ROOM_NUMBER "
+        + "[" + PREFIX_TAG + "TAG]...\n"
+        + "Example: " + COMMAND_WORD + " "
+        + PREFIX_NAME + "John Doe "
+        + PREFIX_ROOM + "4/3/301 "
+        + PREFIX_TELEGRAM + "johndoe123 "
+        + PREFIX_TAG + "logistics";
 
-    public static final String MESSAGE_SUCCESS = "Member %1$s with room %2$s and Telegram handle %3$s added successfully.";
+    public static final String MESSAGE_SUCCESS = "Member %1$s with room %2$s and Telegram handle %3$s "
+        + "added successfully.";
     public static final String MESSAGE_DUPLICATE_MEMBER = "This member already exists in the CCA system.";
 
     private final Member toAdd;
@@ -55,7 +55,14 @@ public class AddMemberCommand extends Command {
 
         // Add member to the model
         model.addMember(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getName().value, toAdd.getRoom().value, toAdd.getTelegram().value));
+        return new CommandResult(
+            String.format(
+                MESSAGE_SUCCESS,
+                toAdd.getName().fullName,
+                toAdd.getRoom().value,
+                toAdd.getTelegram().value
+            )
+        );
     }
 
     @Override

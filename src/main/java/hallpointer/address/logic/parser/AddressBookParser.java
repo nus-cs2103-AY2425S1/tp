@@ -12,11 +12,11 @@ import hallpointer.address.logic.commands.AddMemberCommand;
 import hallpointer.address.logic.commands.ClearCommand;
 import hallpointer.address.logic.commands.Command;
 import hallpointer.address.logic.commands.DeleteMemberCommand;
-import hallpointer.address.logic.commands.EditMemberCommand;
 import hallpointer.address.logic.commands.ExitCommand;
 import hallpointer.address.logic.commands.FindMemberCommand;
 import hallpointer.address.logic.commands.HelpCommand;
-import hallpointer.address.logic.commands.ListMemberCommand;
+import hallpointer.address.logic.commands.ListMembersCommand;
+import hallpointer.address.logic.commands.UpdateMemberCommand;
 import hallpointer.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -56,8 +56,8 @@ public class AddressBookParser {
         case AddMemberCommand.COMMAND_WORD:
             return new AddMemberCommandParser().parse(arguments);
 
-        case EditMemberCommand.COMMAND_WORD:
-            return new EditMemberCommandParser().parse(arguments);
+        case UpdateMemberCommand.COMMAND_WORD:
+            return new UpdateMemberCommandParser().parse(arguments);
 
         case DeleteMemberCommand.COMMAND_WORD:
             return new DeleteMemberCommandParser().parse(arguments);
@@ -68,8 +68,8 @@ public class AddressBookParser {
         case FindMemberCommand.COMMAND_WORD:
             return new FindMemberCommandParser().parse(arguments);
 
-        case ListMemberCommand.COMMAND_WORD:
-            return new ListMemberCommand();
+        case ListMembersCommand.COMMAND_WORD:
+            return new ListMembersCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
