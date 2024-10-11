@@ -1,6 +1,7 @@
 package keycontacts.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static keycontacts.commons.util.CollectionUtil.requireAllNonNull;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_PIECE_NAME;
 
 import java.util.List;
@@ -13,8 +14,6 @@ import keycontacts.logic.commands.exceptions.CommandException;
 import keycontacts.model.Model;
 import keycontacts.model.pianopiece.PianoPiece;
 import keycontacts.model.student.Student;
-
-
 
 /**
  * Adds a student to the student directory.
@@ -43,8 +42,7 @@ public class AssignPiecesCommand extends Command {
      * @param pianoPieces the name of the piece to be added
      */
     public AssignPiecesCommand(Index index, Set<PianoPiece> pianoPieces) {
-        requireNonNull(index);
-        requireNonNull(pianoPieces);
+        requireAllNonNull(index, pianoPieces);
 
         this.index = index;
         this.pianoPieces = pianoPieces;

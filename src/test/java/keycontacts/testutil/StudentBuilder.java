@@ -1,7 +1,6 @@
 package keycontacts.testutil;
 
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 import keycontacts.model.pianopiece.PianoPiece;
@@ -39,7 +38,7 @@ public class StudentBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
-        pianoPieces = new LinkedHashSet<>();
+        pianoPieces = new HashSet<>();
     }
 
     /**

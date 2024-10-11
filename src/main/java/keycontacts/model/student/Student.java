@@ -4,7 +4,6 @@ import static keycontacts.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -29,7 +28,9 @@ public class Student {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private final Set<PianoPiece> pianoPieces = new LinkedHashSet<>();
+
+    // A LinkedHashSet is used for piano pieces to maintain order of insertion
+    private final Set<PianoPiece> pianoPieces = new HashSet<>();
 
     // Associations
     private final RegularLesson regularLesson;

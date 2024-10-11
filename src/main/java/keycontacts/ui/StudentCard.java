@@ -63,9 +63,8 @@ public class StudentCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         pianoPieces.setText(student.getPianoPieces().stream()
+                .sorted(Comparator.comparing(pianoPiece -> pianoPiece.pianoPieceName))
                 .map(PianoPiece::toDisplay)
                 .collect(Collectors.joining(", ")));
-
-
     }
 }
