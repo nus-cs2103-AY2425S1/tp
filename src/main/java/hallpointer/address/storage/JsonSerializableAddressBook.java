@@ -12,6 +12,8 @@ import hallpointer.address.commons.exceptions.IllegalValueException;
 import hallpointer.address.model.AddressBook;
 import hallpointer.address.model.ReadOnlyAddressBook;
 import hallpointer.address.model.member.Member;
+import hallpointer.address.model.session.Session;
+
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -22,13 +24,15 @@ class JsonSerializableAddressBook {
     public static final String MESSAGE_DUPLICATE_MEMBER = "Members list contains duplicate member(s).";
 
     private final List<JsonAdaptedMember> members = new ArrayList<>();
+    private final List<JsonAdaptedSession> sessions = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given members.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("members") List<JsonAdaptedMember> members) {
+    public JsonSerializableAddressBook(@JsonProperty("members") List<JsonAdaptedMember> members, @JsonProperty("sessions") List<JsonAdaptedSession> sessions) {
         this.members.addAll(members);
+        this.sessions.addAll(sessions);
     }
 
     /**
@@ -38,6 +42,7 @@ class JsonSerializableAddressBook {
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         members.addAll(source.getMemberList().stream().map(JsonAdaptedMember::new).collect(Collectors.toList()));
+        sessions.addAll(source.getSessionList().stream().map(JsonAdaptedSession::new).collect(Collectors.toList()));
     }
 
     /**
@@ -49,10 +54,11 @@ class JsonSerializableAddressBook {
         AddressBook addressBook = new AddressBook();
         for (JsonAdaptedMember jsonAdaptedMember : members) {
             Member member = jsonAdaptedMember.toModelType();
-            if (addressBook.hasMembers(member)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_MEMBER);
-            }
             addressBook.addMember(member);
+        }
+        for (JsonAdaptedSession jsonAdaptedSession : sessions) {
+            Session session = jsonAdaptedSession.toModelType();
+            addressBook.addSession(session);
         }
         return addressBook;
     }
