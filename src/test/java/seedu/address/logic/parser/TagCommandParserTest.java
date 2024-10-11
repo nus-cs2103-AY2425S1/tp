@@ -46,12 +46,13 @@ public class TagCommandParserTest {
         // Index missing
         assertParseFailure(parser, "t/colleague t/gym", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 TagCommand.MESSAGE_USAGE));
-//
-//        // Invalid tag (contains non-alphanumeric or space characters)
-//        assertParseFailure(parser, "1 t/work_colleague t/gym", TagName.MESSAGE_CONSTRAINTS);
-//
-//        // Invalid tag (blank)
-//        assertParseFailure(parser, "1 t/", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-//                TagCommand.MESSAGE_USAGE));
+
+        // Invalid tag (contains non-alphanumeric or space characters)
+        // assertParseFailure(parser, "1 t/work_colleague t/gym", TagName.MESSAGE_CONSTRAINTS);
+
+        // Invalid tag (blank)
+        // assertParseFailure(parser, "1 t/", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        // TagCommand.MESSAGE_USAGE));
+
     }
 }

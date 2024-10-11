@@ -1,19 +1,18 @@
 package seedu.address.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.AssignWeddingCommand;
-import seedu.address.logic.commands.UnassignWeddingCommand;
-import seedu.address.logic.commands.UntagCommand;
-import seedu.address.model.wedding.Wedding;
-import seedu.address.model.wedding.WeddingName;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import java.util.Arrays;
 import java.util.HashSet;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.UnassignWeddingCommand;
+import seedu.address.model.wedding.Wedding;
+import seedu.address.model.wedding.WeddingName;
 
 public class UnassignWeddingCommandParserTest {
 
