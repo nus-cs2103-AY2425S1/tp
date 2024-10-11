@@ -243,7 +243,8 @@ public class ParserUtilTest {
     public void parseRoles_collectionWithValidTags_returnsTagSet() throws Exception {
         Set<Role> actualRoleSet = ParserUtil.parseRoles(Arrays.asList(VALID_ROLE_1, VALID_ROLE_2));
         RoleHandler roleHandler = new RoleHandler();
-        Set<Role> expectedRoleSet = new HashSet<Role>(Arrays.asList(roleHandler.getRole(VALID_ROLE_1), roleHandler.getRole(VALID_ROLE_2)));
+        Set<Role> expectedRoleSet = new HashSet<Role>(Arrays.asList(roleHandler.getRole(VALID_ROLE_1),
+                roleHandler.getRole(VALID_ROLE_2)));
 
         assertEquals(expectedRoleSet, actualRoleSet);
     }
