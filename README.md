@@ -11,4 +11,5 @@
   * It comes with **well-maintained user and developer documentation**.
 * It is named `PlanPerfect` because it is primarily designed for wedding planners to organize important contacts and event-related information.
 * For the detailed documentation of this project, see the **[PlanPerfect Product Website](https://ay2425s1-cs2103t-t12-2.github.io/tp)**.
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 

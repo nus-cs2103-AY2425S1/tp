@@ -241,13 +241,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 
@@ -274,179 +274,245 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+Wedding planners who:
+* have a need to manage a significant number of contacts (e.g. clients, caterers, photographers)
+* prefer desktop apps over other types for better organization
+* can type fast and efficiently
+* prefer typing to mouse interactions for quicker navigation
+* are comfortable using CLI apps for managing tasks such as adding, deleting, tagging, and finding contacts
+* require flexible contact management, including categorization by tags
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
-
+**Value proposition**: Wedding planners frequently manage a large number of contacts, including vendors, clients, and service providers, which can become overwhelming. PlanPerfect simplifies this process by allowing users to categorize contacts using tags, making it easy to organize and retrieve important information such as clients, caterers, photographers, and others. With its fast and efficient Command Line Interface (CLI), PlanPerfect enables users to manage their contacts significantly faster than traditional mouse/GUI-driven apps, providing greater flexibility and speed for busy wedding planners.
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​          | I want to …​                                                             | So that I can…​                                                                              |
+|----------|------------------|--------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
+| `* * *`  | User             | Add new contacts                                                         | Expand my wedding planner network                                                            |
+| `* * *`  | User             | Delete contacts                                                          | Get rid of unneeded contacts                                                                 |
+| `* * *`  | User             | Tag contacts                                                             | Organise my contacts                                                                         |
+| `* * *`  | User             | Untag contacts                                                           | Organise my contacts                                                                         |
+| `* * *`  | User             | View a list of all contacts                                              | Retrieve the contact information                                                             |
+| `* *`    | User             | Edit contacts                                                            | Update my contacts' information upon changes                                                 |
+| `* *`    | User             | Filter contacts by tag                                                   | Find specific profiles of interest quickly                                                   |
+| `* *`    | User             | Archive contacts                                                         | Prevent clutter in my contacts without a full deletion                                       |
+| `* *`    | First-time user  | See help messages                                                        | To teach me how to use the app                                                               |
+| `* *`    | User             | See a confirmation message before I clear/delete                         | Avoid accidentally deleting all my data                                                      |
+| `*`      | User             | View which wedding service providers a client is paired with              | Easily find contacts associated with a wedding                                               |
+| `*`      | User             | Add notes for a specific contact                                         | Add my own details                                                                           |
+| `*`      | User             | Sort contacts alphabetically                                             | Organize and access contacts easily                                                          |
+| `*`      | Forgetful user   | Set reminders to talk to contacts                                        | Remember to communicate with contacts                                                        |
+| `*`      | User             | Import contacts from an existing CSV/text file                           | Add new contacts quickly                                                                     |
+| `*`      | Busy user        | Schedule calls with contacts                                             | Remember when to call people                                                                 |
+| `*`      | Organised user   | Create folders                                                           | Organise my contacts into categories                                                         |
+| `*`      | Efficient user   | Make mass operations                                                     | Add/delete/archive numerous contacts in one go                                               |
+| `*`      | User             | Create wedding events with associated contacts                           | Park relevant contacts for that wedding in one place                                          |
+| `*`      | User             | Create todo lists for each wedding                                       | Manage tasks efficiently                                                                     |
+| `*`      | User             | Send my contacts to other users                                          | Allow my colleagues to contact the same people                                               |
+| `*`      | User             | Add descriptions to contacts                                             | See more clarifying details about the contact                                                |
+| `*`      | User             | Search contacts by name or tag                                            | Quickly access a contact                                                                     |
+| `*`      | Curious user     | See statistics                                                           | See how many contacts are added                                                              |
+| `*`      | User             | Export all my data as a spreadsheet/CSV                                  | Transfer it to other softwares if needed                                                     |
+| `*`      | Clumsy user      | Undo the latest action                                                   | So that wrong actions can be undone                                                          |
+| `*`      | User             | Copy the email of the contacts to clipboard                              | Email contacts conveniently                                                                  |
 
-*{More to be added}*
+
+
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `PlanPerfect App` and the **Actor** is the `Wedding Planner`, unless specified otherwise)
 
-**Use case: UC01 - List all persons**
+<br/><br/>
 
-**MSS**
-
-1. User requests to list all persons
-2. AddressBook shows a list of all persons
-
-    Use case ends.
-
-
-**Use case: UC02 - Delete a person**
+**Use case: UC01 - List all contacts**
 
 **MSS**
 
-1.  User <u>views the list of all persons (UC01)</u>
-2. User requests to delete a specific person in the list
-3. AddressBook deletes the person
-4. AddressBook shows a success message
+1. Wedding planner requests to list all persons
+2. PlanPerfect shows a list of all contacts (clients, vendors, venues, etc.).
 
-    Use case ends.
+   Use case ends.
+
+<br/><br/>
+
+**Use case: UC02 - Delete a contact**
+
+**MSS**
+
+1. Wedding planner <u>views the list of all contacts (UC01)</u>.
+2. Wedding planner requests to delete a specific contact in the list.
+3. PlanPerfect deletes the contact.
+4. PlanPerfect shows a success message.
+
+   Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The contact list is empty.
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 3a. The given contact index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. PlanPerfect shows an error message.
 
       Use case resumes at step 2.
 
+<br/><br/>
 
-**Use case: UC03 - Add a person**
+**Use case: UC03 - Add a contact**
 
 **MSS**
 
-1. User requests to add a person
-2. AddressBook adds the new specified person
-3. AddressBook shows a success message to the user
+1. Wedding planner requests to add a contact (e.g., a new client, vendor, or wedding service provider).
+2. PlanPerfect adds the new specified contact.
+3. PlanPerfect shows a success message to the wedding planner.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 1a. The input format is invalid
+* 1a. The input format for adding the contact is invalid.
 
-    * 1a1. AddressBook shows an error message
+    * 1a1. PlanPerfect shows an error message.
 
-        Use case ends.
+      Use case ends.
 
+<br/><br/>
 
 **Use case: UC04 - Tag a person**
 
 **MSS**
 
-1. User <u>views a list of all persons (UC01)</u>
-2. User requests to attach a tag to a specific person
-3. AddressBook adds a tag to the person
-4. AddressBook shows a success message to the User
+1. Wedding planner <u>views the list of all contacts (UC01)</u>.
+2. Wedding planner requests to attach a tag (e.g., vendor type, client status) to a specific contact.
+3. PlanPerfect adds a tag to the contact.
+4. PlanPerfect shows a success message to the wedding planner.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 3a. Person does not exist
+* 3a. Contact does not exist in PlanPerfect
 
-    * 3a1. The AddressBook shows an error message
-        
-        Use case ends.
+    * 3a1. PlanPerfect shows an error message
 
+      Use case ends.
+
+<br/><br/>
 
 **Use case: UC05 - Untag a person**
 
 **MSS**
 
-1. User <u>views a list of all persons (UC01)</u>
-2. User requests to remove a tag from a specific person
-3. AddressBook removes the tag from the specified person
-4. AddressBook shows a success message
+1. Wedding planner <u>views the list of all contacts (UC01)</u>.
+2. Wedding planner requests to remove a tag from a specific contact.
+3. PlanPerfect removes the tag from the specified contact.
+4. PlanPerfect shows a success message.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 3a. Person does not exist in AddressBook
+* 3a. Contact does not exist in PlanPerfect
 
-    * 3a1. AddressBook shows an error message
-    
-        Use case ends.
+    * 3a1. PlanPerfect shows an error message
 
-**Use case: UC06 - List persons by tag**
+      Use case ends.
+
+<br/><br/>
+
+**Use case: UC06 - List contacts by tag**
 
 **MSS**
 
-1. User requests to view a list of persons who have specific tag(s)
-2. AddressBook shows a list of persons who have the specified tag(s)
+1. Wedding planner requests to view a list of contacts that have specific tag(s) (e.g., photographers, caterers, clients in progress).
+2. PlanPerfect shows a list of contacts who have the specified tag(s).
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 1a. The list is empty
+* 1a. The list of contacts with the specified tag is empty.
 
-    Use case ends.
+  Use case ends.
+
+<br/><br/>
 
 **Use case: UC07 - Find person by name**
 
 **MSS**
 
-1. User requests to retrieve a person's details by name
-2. AddressBook shows the specified person's details
+1. Wedding planner requests to retrieve a contact's details by name (e.g., a client or vendor).
+2. PlanPerfect shows the specified contact's details.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 1a. Person does not exist in AddressBook
+* 1a. Contact does not exist in PlanPerfect.
 
-    * 1a1. AddressBook shows a message that person could not be found
+    * 1a1. PlanPerfect shows a message that the contact could not be found.
 
-        Use case ends.
+      Use case ends.
+
+<br/><br/>
 
 **Use case: UC08 - Getting help**
 
 **MSS**
 
-1. User inputs the help command
-2. AddressBook shows a list of valid commands with examples
+1. Wedding planner asks for help.
+2. PlanPerfect shows a list of valid commands with examples.
 
-    Use case ends.
+   Use case ends.
+
+<br/><br/>
+
+**Use case: UC09 - Sort contacts alphabetically**
+
+**MSS**
+
+1. Wedding planner requests to sort contacts alphabetically.
+2. PlanPerfect sorts and displays the contacts in alphabetical order.
+
+   Use case ends.
+
+<br/><br/>
+
+**Use case: UC10 - View contacts associated with a client**
+
+**MSS**
+
+1. Wedding planner requests to view contacts associated with a specific client.
+2. PlanPerfect shows the list of all contacts (e.g., vendors, clients) linked to that client's wedding.
+
+   Use case ends.
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any **mainstream OS** (e.g., Windows, macOS, Linux) as long as it has **Java 17** or above installed.
+2. Should be able to hold and manage up to **1000 contacts** (e.g., clients, vendors, venues) without noticeable sluggishness in performance during typical usage.
+3. A wedding planner with **above average typing speed** should be able to accomplish most tasks faster using **command-line inputs** rather than relying on graphical user interfaces or the mouse.
+4. The system should be designed for **single-user** operation, where one wedding planner uses the application on their local machine.
+5. The software should work **offline** and require no internet connection after the **initial download** of the application's jar file.
+6. The software should be **portable**, not requiring an installer, and should run as a standalone executable jar file.
+7. The software should follow the **Object-Oriented Programming (OOP)** paradigm, ensuring code modularity, maintainability, and extensibility.
+8. The **Command-Line Interface (CLI)** should remain responsive for standard usage and offer a user-friendly experience while allowing quick navigation and execution of commands.
+9. The **Graphical User Interface (GUI)** (if used) should work seamlessly for screens with standard resolutions of **1920x1080** and higher, and support scaling at **100%** and **125%**, ensuring that users on both laptops and desktop displays have an optimal experience.
+10. The system should be designed to run efficiently on **low-resource systems**, ensuring smooth performance even on devices with lower computational power or limited memory.
 
-*{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Contact Details**: Info about a person: name, email, address, phone number etc.
+* **Target audience**: Wedding planners
+* **CLI**: Command Line Interface
+* **GUI**: Graphic User Interface
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -465,15 +531,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
@@ -482,16 +548,16 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete 0`<br>
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 
@@ -499,6 +565,6 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
