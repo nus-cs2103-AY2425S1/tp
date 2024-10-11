@@ -33,20 +33,20 @@ public class MarkpaidCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) MONTHSPAID... (yyyy-mm format)\n"
             + "Example: " + COMMAND_WORD + " 1 2024-01 2024-02";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Marked Person: %1$s";
+    public static final String MESSAGE_MARK_PERSON_SUCCESS = "Marked Person: %1$s";
     private final Index index;
-    private final String monthPaid;
+    private final MonthsPaid monthsPaid;
 
     /**
      * @param index of the person in the filtered person list to edit
      * @param monthPaid the month to mark the person as paid
      */
-    public MarkpaidCommand(Index index, String monthPaid) {
+    public MarkpaidCommand(Index index, MonthsPaid monthsPaid) {
         requireNonNull(index);
-        requireNonNull(monthPaid);
+        requireNonNull(monthsPaid);
 
         this.index = index;
-        this.monthPaid = monthPaid;
+        this.monthsPaid = monthsPaid;
     }
 
     @Override
@@ -59,19 +59,19 @@ public class MarkpaidCommand extends Command {
         }
 
         Person personToMark = lastShownList.get(index.getZeroBased());
-        Person markedPerson = createMarkedPerson(personToMark, monthPaid);
+        Person markedPerson = createMarkedPerson(personToMark, monthsPaid);
 
         model.setPerson(personToMark, markedPerson);
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(markedPerson)));
+        return new CommandResult(String.format(MESSAGE_MARK_PERSON_SUCCESS, Messages.format(markedPerson)));
     }
 
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * marked with {@code monthPaid}.
      */
-    private static Person createMarkedPerson(Person personToMark, String monthPaid) {
+    private static Person createMarkedPerson(Person personToMark, MonthsPaid monthsPaid) {
         assert personToMark != null;
 
         Name name = personToMark.getName();
@@ -80,7 +80,7 @@ public class MarkpaidCommand extends Command {
         Address address = personToMark.getAddress();
         Fees fees = personToMark.getFees();
         ClassId classId = personToMark.getClassId();
-        MonthsPaid markedMonthsPaid = new MonthsPaid(personToMark.getMonthsPaid() + " " + monthPaid);
+        MonthsPaid markedMonthsPaid = personToMark.getMonthsPaid().concatenate(monthsPaid);
         Set<Tag> tags = personToMark.getTags();
 
         return new Person(name, phone, email, address, fees, classId,
