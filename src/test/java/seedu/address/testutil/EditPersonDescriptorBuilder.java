@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.DesiredRole;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Experience;
 import seedu.address.model.person.Name;
@@ -32,18 +33,19 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Returns an {@code EditPersonDescriptor} with fields containing {@code person}'s details
+     * Returns an {@code EditPersonDescriptor} with fields containing {@code person}'s details.
      */
     public EditPersonDescriptorBuilder(Person person) {
         descriptor = new EditPersonDescriptor();
         descriptor.setName(person.getName());
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
-        descriptor.setExperience(person.getExperience());
         descriptor.setAddress(person.getAddress());
         descriptor.setSkills(person.getSkills());
+        descriptor.setExperience(person.getExperience());
         descriptor.setStatus(person.getStatus());
         descriptor.setNote(person.getNote());
+        descriptor.setDesiredRole(person.getDesiredRole());
         descriptor.setTags(person.getTags());
     }
 
@@ -80,10 +82,10 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code DesiredRole} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withExperience(String experience) {
-        descriptor.setExperience(new Experience(experience));
+    public EditPersonDescriptorBuilder withDesiredRole(String desiredRole) {
+        descriptor.setDesiredRole(new DesiredRole(desiredRole));
         return this;
     }
 
@@ -91,7 +93,15 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code Skills} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withSkills(String skills) {
-        descriptor.setSkills(new Skills(skills)); // Creates a new Skills object from the string
+        descriptor.setSkills(new Skills(skills));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Experience} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withExperience(String experience) {
+        descriptor.setExperience(new Experience(experience));
         return this;
     }
 
@@ -112,7 +122,7 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * Parses the {@code tags} into a {@code Set<Tag>} and sets it to the {@code EditPersonDescriptor}
      * that we are building.
      */
     public EditPersonDescriptorBuilder withTags(String... tags) {

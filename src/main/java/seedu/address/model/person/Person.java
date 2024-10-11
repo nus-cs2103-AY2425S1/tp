@@ -20,9 +20,10 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
-    private final Address address;
 
     // Data fields
+    private final Address address;
+    private final DesiredRole desiredRole;
     private final Skills skills;
     private final Experience experience;
     private final Status status;
@@ -33,13 +34,14 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address,
-                  Skills skills, Experience experience, Status status, Note note,
-                  Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, skills, experience, status, note, tags);
+                  DesiredRole desiredRole, Skills skills, Experience experience,
+                  Status status, Note note, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, desiredRole, skills, experience, status, note, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.desiredRole = desiredRole;
         this.skills = skills;
         this.experience = experience;
         this.status = status;
@@ -61,6 +63,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public DesiredRole getDesiredRole() {
+        return desiredRole;
     }
 
     public Skills getSkills() {
@@ -96,7 +102,8 @@ public class Person {
             return true;
         }
 
-        return otherPerson != null && otherPerson.getName().equals(getName());
+        return otherPerson != null
+            && otherPerson.getName().equals(getName());
     }
 
     /**
@@ -109,40 +116,41 @@ public class Person {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof Person)) {
             return false;
         }
 
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && skills.equals(otherPerson.skills)
-                && experience.equals(otherPerson.experience)
-                && status.equals(otherPerson.status)
-                && note.equals(otherPerson.note)
-                && tags.equals(otherPerson.tags);
+            && phone.equals(otherPerson.phone)
+            && email.equals(otherPerson.email)
+            && address.equals(otherPerson.address)
+            && desiredRole.equals(otherPerson.desiredRole)
+            && skills.equals(otherPerson.skills)
+            && experience.equals(otherPerson.experience)
+            && status.equals(otherPerson.status)
+            && note.equals(otherPerson.note)
+            && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, phone, email, address, skills, experience, status, note, tags);
+        return Objects.hash(name, phone, email, address, desiredRole, skills, experience, status, note, tags);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("name", name)
-                .add("phone", phone)
-                .add("email", email)
-                .add("address", address)
-                .add("skills", skills)
-                .add("experience", experience)
-                .add("status", status)
-                .add("note", note)
-                .add("tags", tags)
-                .toString();
+            .add("name", name)
+            .add("phone", phone)
+            .add("email", email)
+            .add("address", address)
+            .add("desiredRole", desiredRole)
+            .add("skills", skills)
+            .add("experience", experience)
+            .add("status", status)
+            .add("note", note)
+            .add("tags", tags)
+            .toString();
     }
 }
