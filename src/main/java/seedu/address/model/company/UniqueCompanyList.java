@@ -13,7 +13,7 @@ import seedu.address.model.company.exceptions.DuplicateCompanyException;
 
 /**
  * A list of companies that enforces uniqueness between its elements and does not allow nulls.
- * A company is considered unique as deemed by the <Code>Company.equals(Company)</Code>.
+ * A company is considered unique as deemed by the <Code>Company.isSameCompany(Company)</Code>.
  * Additions and deletions use this logic to determine what can be added and removed.
  */
 public class UniqueCompanyList implements Iterable<Company> {
@@ -29,7 +29,7 @@ public class UniqueCompanyList implements Iterable<Company> {
      */
     public boolean contains(Company toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::equals);
+        return internalList.stream().anyMatch(toCheck::isSameCompany);
     }
 
     /**
@@ -60,7 +60,7 @@ public class UniqueCompanyList implements Iterable<Company> {
             throw new CompanyNotFoundException();
         }
 
-        if (!target.equals(editedCompany) && contains(editedCompany)) {
+        if (!target.isSameCompany(editedCompany) && contains(editedCompany)) {
             throw new DuplicateCompanyException();
         }
 
@@ -149,7 +149,7 @@ public class UniqueCompanyList implements Iterable<Company> {
     private boolean companiesAreUnique(List<Company> companies) {
         for (int i = 0; i < companies.size() - 1; i++) {
             for (int j = i + 1; j < companies.size(); j++) {
-                if (companies.get(i).equals(companies.get(j))) {
+                if (companies.get(i).isSameCompany(companies.get(j))) {
                     return false;
                 }
             }

@@ -9,19 +9,15 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.company.Company;
+import seedu.address.model.person.Person;
 
 
 /**
  * Deletes a company identified using it's displayed index from the address book.
  */
-public class DeleteCompanyCommand extends DeleteContactCommand {
+public class DeleteCompanyCommand extends DeleteCommand<Company> {
 
-    public static final String COMMAND_WORD = "delete";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the company identified by the index number used in the displayed company list.\n"
-            + "Parameters: company INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " company 1";
+    public static final String COMMAND_WORD = "company";
     public static final String MESSAGE_DELETE_COMPANY_SUCCESS = "Company %1$s - %2$s - %3$s - %4$s"
             + "has been successfully deleted.";
 
@@ -30,22 +26,23 @@ public class DeleteCompanyCommand extends DeleteContactCommand {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
-        List<Company> lastShownList = model.getFilteredCompanyList();
+    protected List<Company> getEntityList(Model model) {
+        return model.getFilteredCompanyList();
+    }
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
+    @Override
+    protected void deleteEntity(Model model, Company companyToDelete) {
+        model.deleteCompany(companyToDelete);
+    }
 
-        Company companyToDelete = lastShownList.get(super.targetIndex.getZeroBased());
+    @Override
+    protected String getSuccessMessage(Company companyToDelete) {
         String name = companyToDelete.getName().toString();
         String address = companyToDelete.getAddress().toString();
         String billingDate = companyToDelete.getBillingDate().toString();
         String phone = companyToDelete.getPhone().toString();
 
-        model.deleteCompany(companyToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_CONTACT_SUCCESS, name,
-                address, billingDate, phone));
+        return String.format(MESSAGE_DELETE_COMPANY_SUCCESS, name,
+                address, billingDate, phone);
     }
 }

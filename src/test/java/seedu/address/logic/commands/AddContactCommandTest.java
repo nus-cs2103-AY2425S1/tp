@@ -16,7 +16,6 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -27,7 +26,7 @@ import seedu.address.model.job.Job;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
-public class AddCommandTest {
+public class AddContactCommandTest {
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
@@ -39,10 +38,13 @@ public class AddCommandTest {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
         Person validPerson = new PersonBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+        CommandResult commandResult = new AddContactCommand(validPerson).execute(modelStub);
 
         assertEquals(
-                String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+                String.format(AddContactCommand.MESSAGE_SUCCESS, validPerson.getName(),
+                        validPerson.getPhone(),
+                        validPerson.getEmail(),
+                        validPerson.getRole()),
                 commandResult.getFeedbackToUser()
         );
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
@@ -63,14 +65,14 @@ public class AddCommandTest {
                                           .build();
         Person bob = new PersonBuilder().withName("Bob")
                                         .build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        AddContactCommand addAliceCommand = new AddContactCommand(alice);
+        AddContactCommand addBobCommand = new AddContactCommand(bob);
 
         // same object -> returns true
         assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
+        AddContactCommand addAliceCommandCopy = new AddContactCommand(alice);
         assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false
@@ -85,8 +87,8 @@ public class AddCommandTest {
 
     @Test
     public void toStringMethod() {
-        AddCommand addCommand = new AddCommand(ALICE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
+        AddContactCommand addCommand = new AddContactCommand(ALICE);
+        String expected = AddContactCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
         assertEquals(expected, addCommand.toString());
     }
 
@@ -145,6 +147,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasJob(Job job) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -155,12 +162,22 @@ public class AddCommandTest {
         }
 
         @Override
+        public void deleteJob(Job target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void addCompany(Company company) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addJob(Job job) {
             throw new AssertionError("This method should not be called.");
         }
 

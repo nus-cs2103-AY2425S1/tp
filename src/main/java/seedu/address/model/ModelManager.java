@@ -112,6 +112,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasJob(Job job) {
+        requireNonNull(job);
+        return addressBook.hasJob(job);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
@@ -125,6 +131,10 @@ public class ModelManager implements Model {
     public void deleteCompany(Company target) {
         addressBook.removeCompany(target);
     }
+
+    @Override
+    // Todo: In a second PR when I add the deleteJob feature
+    public void deleteJob(Job target) {}
 
     @Override
     public void addPerson(Person person) {
@@ -142,6 +152,12 @@ public class ModelManager implements Model {
         addressBook.addCompany(company);
         updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);
     }
+    @Override
+    public void addJob(Job job) {
+        addressBook.addJob(job);
+        updateFilteredJobList(PREDICATE_SHOW_ALL_JOBS);
+    }
+
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
