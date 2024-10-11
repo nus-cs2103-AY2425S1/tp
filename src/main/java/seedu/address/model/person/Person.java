@@ -61,6 +61,35 @@ public class Person {
     }
 
     /**
+     * Generates the string representation of the instance's specified field of type 'c'
+     * @param c class that corresponds with a field of the instance
+     * @return string representation of that field
+     */
+    public String getString(Class c) {
+        if (c.equals(Name.class)) {
+            return this.getName().toString();
+        } else if (c.equals(Phone.class)) {
+            return this.getPhone().toString();
+        } else if (c.equals(Email.class)) {
+            return this.getEmail().toString();
+        } else if (c.equals(Telegram.class)) {
+            return this.getTelegram().toString();
+        } else if (c.equals(Tag.class)) {
+            StringBuilder t = new StringBuilder("| ");
+            Set<Tag> tags = this.getTags();
+            for (Tag tag : tags) {
+                t.append(tag + " |");
+            }
+            return t.toString();
+            // code for this method is currently not very elegant...
+        } else if (c.equals(Set.class)) {
+            return getString(Tag.class);
+        } else {
+            return "";
+        }
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
