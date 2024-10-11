@@ -19,6 +19,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Priority;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -36,6 +37,7 @@ class JsonAdaptedPerson {
     private final String gender;
     private final String nric;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String priority;
     private final List<JsonAdaptedAppointment> appointments = new ArrayList<>();
 
     /**
@@ -48,11 +50,13 @@ class JsonAdaptedPerson {
             @JsonProperty("gender") String gender,
             @JsonProperty("nric") String nric,
             @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("priority") String priority,
             @JsonProperty("appointments") List<JsonAdaptedAppointment> appointments) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.priority = priority;
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
         this.nric = nric;
@@ -75,6 +79,7 @@ class JsonAdaptedPerson {
         dateOfBirth = source.getDateOfBirth().value;
         gender = source.getGender().value;
         nric = source.getNric().value;
+        priority = source.getPriority().priority;
         tags.addAll(source.getTags()
                           .stream()
                           .map(JsonAdaptedTag::new)
@@ -163,11 +168,15 @@ class JsonAdaptedPerson {
         final Nric modelNric = new Nric(nric);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-
+        if (priority == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Priority.class.getSimpleName()));
+        }
+        final Priority modelPriority = new Priority(priority);
         final Set<Appointment> modelAppointments = new HashSet<>(personAppointments);
-
         return new Person(modelName, modelPhone, modelEmail, modelNric, modelAddress, modelDateOfBirth,
-                modelGender, modelTags, modelAppointments);
+                modelGender, modelTags, modelPriority, modelAppointments);
+
     }
 
 }

@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's priority in the address book.
- * The priority can only be one of these values: "LOW", "MEDIUM", or "HIGH".
+ * The priority can only be one of these values: "NONE", "LOW", "MEDIUM", or "HIGH".
  *
  * Guarantees: The priority is immutable and always valid.
  */
@@ -17,7 +17,14 @@ public class Priority {
     // Error message for invalid priority values.
     public static final String MESSAGE_CONSTRAINTS = "Priority should only be 'NONE', 'LOW', 'MEDIUM', or 'HIGH'.";
 
-    private final String priority;
+    public final String priority;
+
+    /**
+     * Default constructor that sets the priority to "NONE".
+     */
+    public Priority() {
+        this.priority = "NONE";
+    }
 
     /**
      * Constructs a {@code Priority} object with the specified priority string.

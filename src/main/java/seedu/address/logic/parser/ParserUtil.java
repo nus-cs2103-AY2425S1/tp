@@ -224,7 +224,7 @@ public class ParserUtil {
      */
     public static Priority parsePriority(String priorityStr) throws ParseException {
         requireNonNull(priorityStr);
-        String trimmedPriority = priorityStr.trim();
+        String trimmedPriority = priorityStr.trim().toUpperCase();
         if (!Priority.isValidPriority(trimmedPriority)) {
             throw new ParseException(Priority.MESSAGE_CONSTRAINTS);
         }

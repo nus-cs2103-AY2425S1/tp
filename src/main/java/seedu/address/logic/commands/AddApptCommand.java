@@ -27,6 +27,7 @@ import seedu.address.model.person.Nric;
 import seedu.address.model.person.NricMatchesPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Priority;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -119,7 +120,7 @@ public class AddApptCommand extends Command {
         Gender updatedGender = personToEdit.getGender();
         Nric updatedNric = personToEdit.getNric();
         Set<Tag> updatedTags = personToEdit.getTags();
-
+        Priority updatedPriority = personToEdit.getPriority();
         ArrayList<Appointment> oldAppointmentList = null;
         try {
             oldAppointmentList = new ArrayList<>(personToEdit.getAppointments());
@@ -136,7 +137,7 @@ public class AddApptCommand extends Command {
         Set<Appointment> newAppointments = new HashSet<>(oldAppointmentList);
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedNric, updatedAddress, updatedDateOfBirth,
-                          updatedGender, updatedTags, newAppointments);
+                          updatedGender, updatedTags, updatedPriority, newAppointments);
     }
 
     @Override
