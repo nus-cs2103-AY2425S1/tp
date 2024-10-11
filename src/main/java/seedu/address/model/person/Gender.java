@@ -29,8 +29,7 @@ public class Gender {
     public Gender(String gender) {
         requireNonNull(gender);
         checkArgument(isValidGender(gender), MESSAGE_CONSTRAINTS);
-
-        this.gender = gender.equals("male") ? gender + MALE_SYMBOL : gender + FEMALE_SYMBOL;
+        this.gender = gender;
     }
 
     /**
@@ -38,6 +37,13 @@ public class Gender {
      */
     public static boolean isValidGender(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns gender of person concatenated with its corresponding symbol.
+     */
+    public String getGenderWithSymbol() {
+        return gender.equals("male") ? gender + MALE_SYMBOL : gender + FEMALE_SYMBOL;
     }
 
 
