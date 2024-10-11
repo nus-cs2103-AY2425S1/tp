@@ -1,17 +1,18 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
-import static java.util.Objects.requireNonNull;
+
 
 /**
  * Detailed View of a patient's session log identified using it's displayed index from the patient's session log list.
  */
-public class DetailedViewCommand extends Command{
+public class DetailedViewCommand extends Command {
 
     public static final String COMMAND_WORD = "detailed view";
 
