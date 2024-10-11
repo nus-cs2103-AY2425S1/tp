@@ -2,33 +2,34 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Telegram;
-import seedu.address.model.tag.Tag;
-
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
+
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.person.Person;
 
 /**
  * View all information of specified contact
  */
 public class ViewCommand extends Command {
-    private final String tele;
 
     public static final String COMMAND_WORD = "view";
 
     public static final String MESSAGE_SUCCESS = "Contact Info:\n";
 
-    public static final String MESSAGE_NO_SUCH_TELEGRAM = "There is no one in your address book with the telegram handle: @";
+    public static final String MESSAGE_NO_SUCH_TELEGRAM =
+            "There is no one in your address book with the telegram handle: @";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds one contact whose telegram handle "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Finds one contact whose telegram handle "
             + "matches the specified telegram handle (case-insensitive) and displays a new page which "
             + "contains all the contact's information.\n"
             + "Parameters: TELEGRAM_HANDLE \n"
             + "Example: " + COMMAND_WORD + " t/TELEGRAM_HANDLE";
+
+    private final String tele;
 
     public ViewCommand(String tele) {
         this.tele = tele.toLowerCase();
