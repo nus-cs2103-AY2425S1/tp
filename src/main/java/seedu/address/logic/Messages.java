@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.meetup.MeetUp;
 import seedu.address.model.person.Person;
 
 /**
@@ -48,4 +49,18 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Formats the {@code meetup} for display to the user.
+     */
+    public static String format(MeetUp meetup) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(meetup.getName())
+                .append("; Info: ")
+                .append(meetup.getInfo())
+                .append("; From: ")
+                .append(meetup.getStart())
+                .append("; To: ")
+                .append(meetup.getEnd());
+        return builder.toString();
+    }
 }

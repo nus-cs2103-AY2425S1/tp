@@ -1,5 +1,7 @@
 package seedu.address.model.meetup;
 
+import seedu.address.commons.util.ToStringBuilder;
+
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Date;
@@ -12,16 +14,18 @@ import java.util.Objects;
 public class MeetUp { //TODO
 
     // Identity fields
-    private final String desc;
+    private final String name;
+    private final String info;
     private final Date from;
     private final Date to;
 
     /**
      * Every field must be present and not null.
      */
-    public MeetUp(String desc, Date from, Date to) {
-        requireAllNonNull(desc, from, to);
-        this.desc = desc;
+    public MeetUp(String name, String info, Date from, Date to) {
+        requireAllNonNull(name, info, from, to);
+        this.name = name;
+        this.info = info;
         this.from = from;
         this.to = to;
     }
@@ -43,7 +47,8 @@ public class MeetUp { //TODO
         }
 
         MeetUp otherMeetUp = (MeetUp) other;
-        return desc.equals(otherMeetUp.desc)
+        return name.equals(otherMeetUp.name)
+                && info.equals(otherMeetUp.info)
                 && from.equals(otherMeetUp.from)
                 && to.equals(otherMeetUp.to);
     }
@@ -51,13 +56,33 @@ public class MeetUp { //TODO
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(desc, from, to);
+        return Objects.hash(name, info, from, to);
     }
 
     @Override
     public String toString() {
         //TODO
-        return "Meetup Object";
+        return new ToStringBuilder(this)
+                .add("name", name)
+                .add("info", info)
+                .add("from", from)
+                .add("to", to)
+                .toString();
     }
 
+    public String getName() {
+        return this.name;
+    }
+
+    public String getInfo() {
+        return this.info;
+    }
+
+    public Date getStart() {
+        return this.from;
+    }
+
+    public Date getEnd() {
+        return this.to;
+    }
 }
