@@ -90,6 +90,12 @@ public class PersonTest {
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
+
+        editedAlice = new PersonBuilder(ALICE).withRoles("vendor").build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        editedAlice = new PersonBuilder(ALICE).withTelegramUsername("al1ice").build();
+        assertFalse(ALICE.equals(editedAlice));
     }
 
     @Test
@@ -147,4 +153,15 @@ public class PersonTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void equals_sameRole() {
+        Person person = new PersonBuilder().withRoles("attendee").build();
+
+        Person personCopy = new PersonBuilder().withRoles("attendee").build();
+        assertTrue(person.equals(personCopy));
+
+    }
+
+
 }

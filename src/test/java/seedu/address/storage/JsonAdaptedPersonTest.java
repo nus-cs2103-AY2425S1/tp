@@ -24,6 +24,7 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_TELE = "c";
+    private static final String INVALID_ROLE = "invalidRole";
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
@@ -46,6 +47,8 @@ public class JsonAdaptedPersonTest {
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
+
+
 
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {

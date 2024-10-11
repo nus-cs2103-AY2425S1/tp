@@ -28,6 +28,8 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 
+import java.lang.reflect.Method;
+
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
@@ -180,6 +182,23 @@ public class EditCommandTest {
         String expected = EditCommand.class.getCanonicalName() + "{index=" + index + ", editPersonDescriptor="
                 + editPersonDescriptor + "}";
         assertEquals(expected, editCommand.toString());
+    }
+
+    @Test
+    public void createEditedPerson_reflection_success() throws Exception {
+        // Create a person and an EditPersonDescriptor
+        Person person = new PersonBuilder().build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+
+        // Use reflection to access the private static method
+        Method method = EditCommand.class.getDeclaredMethod("createEditedPerson", Person.class, EditPersonDescriptor.class);
+        method.setAccessible(true);
+
+        // Invoke the method and get the result
+        Person editedPerson = (Person) method.invoke(null, person, descriptor);
+
+        // Assert the expected result
+        assertEquals(person, editedPerson);
     }
 
 }

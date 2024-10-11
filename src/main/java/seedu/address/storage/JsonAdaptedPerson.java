@@ -126,7 +126,11 @@ class JsonAdaptedPerson {
 
         if (this.roles.size() != 0) {
             for (int i = 0; i < this.roles.size(); i++) {
-                roles[i] = this.roles.get(i).toModelType();
+                try {
+                    roles[i] = this.roles.get(i).toModelType();
+                } catch (seedu.address.model.role.exceptions.InvalidRoleException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelTelegramUsername, roles);

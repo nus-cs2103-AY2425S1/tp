@@ -222,4 +222,14 @@ public class ParserUtilTest {
         Role expectedRole = RoleHandler.getRole(roleWithWhitespace);
         assertEquals(expectedRole, ParserUtil.parseRole(roleWithWhitespace));
     }
+
+    @Test
+    public void parseRoles_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseRoles(null));
+    }
+
+    @Test
+    public void parseRoles_collectionWithInvalidRoles_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseRoles(Arrays.asList(VALID_ROLE, INVALID_ROLE)));
+    }
 }

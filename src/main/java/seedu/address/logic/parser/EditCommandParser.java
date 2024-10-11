@@ -93,8 +93,7 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     private Optional<Set<Role>> parseRolesForEdit(Collection<String> roles) throws ParseException {
-        assert roles != null;
-
+        requireNonNull(roles);
         if (roles.isEmpty()) {
             return Optional.empty();
         }
