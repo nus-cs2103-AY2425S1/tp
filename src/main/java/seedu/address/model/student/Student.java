@@ -86,7 +86,7 @@ public class Student {
 
         return otherStudent != null
             && otherStudent.getStudentNumber().equals(getStudentNumber())
-            && otherStudent.getName().equals(getName());
+            && otherStudent.getName().toString().toLowerCase().equals(getName().toString().toLowerCase());
 
     }
 
@@ -123,7 +123,6 @@ public class Student {
         return new ToStringBuilder(this)
             .add("name", name)
             .add("email", email)
-            .add("student number", studentNumber)
             .add("tags", tags)
             .add("student number", studentNumber)
             .add("group", group.orElse(""))

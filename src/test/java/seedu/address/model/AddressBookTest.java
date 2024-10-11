@@ -18,12 +18,14 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
 
+    private static final Group DUMMY_GROUP = new Group(new GroupName("Dummy Group"));
     private final AddressBook addressBook = new AddressBook();
 
     @Test
@@ -61,14 +63,30 @@ public class AddressBookTest {
     }
 
     @Test
+    public void hasGroup_nullGroup_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasGroup(null));
+    }
+
+    @Test
     public void hasPerson_studentNotInAddressBook_returnsFalse() {
         assertFalse(addressBook.hasStudent(ALICE));
+    }
+
+    @Test
+    public void hasGroup_groupNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasGroup(DUMMY_GROUP));
     }
 
     @Test
     public void hasPerson_studentInAddressBook_returnsTrue() {
         addressBook.addStudent(ALICE);
         assertTrue(addressBook.hasStudent(ALICE));
+    }
+
+    @Test
+    public void hasGroup_groupInAddressBook_returnsTrue() {
+        addressBook.addGroup(DUMMY_GROUP);
+        assertTrue(addressBook.hasGroup(DUMMY_GROUP));
     }
 
     @Test
