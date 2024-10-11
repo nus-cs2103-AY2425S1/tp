@@ -7,7 +7,7 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 /**
  * Finds the person from the list of patients
  */
-public class FindPersonCommand extends FindCommand{
+public class FindPersonCommand extends FindCommand {
     public static final String MESSAGE_SUCCESS = "Person has been found";
 
     public FindPersonCommand(NameContainsKeywordsPredicate predicate) {
