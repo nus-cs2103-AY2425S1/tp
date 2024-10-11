@@ -4,33 +4,33 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.clientType.Tag;
+import seedu.address.model.clientType.ClientType;
 
 /**
- * Jackson-friendly version of {@link Tag}.
+ * Jackson-friendly version of {@link ClientType}.
  */
 class JsonAdaptedTag {
 
-    private final String tagName;
+    private final String clientTypeName;
 
     /**
-     * Constructs a {@code JsonAdaptedTag} with the given {@code tagName}.
+     * Constructs a {@code JsonAdaptedTag} with the given {@code clientTypeName}.
      */
     @JsonCreator
-    public JsonAdaptedTag(String tagName) {
-        this.tagName = tagName;
+    public JsonAdaptedTag(String clientTypeName) {
+        this.clientTypeName = clientTypeName;
     }
 
     /**
      * Converts a given {@code Tag} into this class for Jackson use.
      */
-    public JsonAdaptedTag(Tag source) {
-        tagName = source.tagName;
+    public JsonAdaptedTag(ClientType source) {
+        clientTypeName = source.clientTypeName;
     }
 
     @JsonValue
-    public String getTagName() {
-        return tagName;
+    public String getClientTypeName() {
+        return clientTypeName;
     }
 
     /**
@@ -38,11 +38,11 @@ class JsonAdaptedTag {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
-    public Tag toModelType() throws IllegalValueException {
-        if (!Tag.isValidTagName(tagName)) {
-            throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
+    public ClientType toModelType() throws IllegalValueException {
+        if (!ClientType.isValidClientTypeName(clientTypeName)) {
+            throw new IllegalValueException(ClientType.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(tagName);
+        return new ClientType(clientTypeName);
     }
 
 }
