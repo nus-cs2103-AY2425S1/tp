@@ -2,7 +2,16 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESIREDROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPERIENCE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILLS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -118,10 +127,9 @@ public class EditCommandParser implements Parser<EditCommand> {
      * If {@code tags} contain only one element which is an empty string,
      * it will be parsed into a {@code Set<Tag>} containing zero tags.
      */
-    private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags)
-        throws ParseException {
-        assert tags != null;
+    private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
 
+        assert tags != null;
         if (tags.isEmpty()) {
             return Optional.empty();
         }
@@ -131,5 +139,6 @@ public class EditCommandParser implements Parser<EditCommand> {
                 : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
+
 
 }
