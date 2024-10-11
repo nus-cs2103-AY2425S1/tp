@@ -1,9 +1,9 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * View all information of specified contact
