@@ -1,7 +1,20 @@
 package seedu.address.logic.commands;
+import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.CollectionUtil;
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.meetup.MeetUp;
+import seedu.address.model.person.*;
+import seedu.address.model.tag.Tag;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 /**
  * Edits the details of an existing meetup in the address book.
@@ -11,17 +24,99 @@ public class EditMeetupCommand extends Command {
     public static final String COMMAND_WORD = "edit_meetup";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the meetup identified "
-            + "by the index number used in the displayed person list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + "by the name used in the address book. "
+            + "Existing meetup will be overwritten by the input meetup.\n"
+            + "Parameters: NAME (must exist in address book)\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NAME + "John Doe "
+            + PREFIX_MEETUP_INFO + "Meetup with John Doe at Subway on Sunday 3pm.";
 
+    public static final String MESSAGE_EDIT_MEETUP_SUCCESS = "Edited Meetup: %1$s";
+    public static final String MESSAGE_MEETUP_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_PERSON_NOT_FOUND = "This person cannot be found in the address book.";
+
+    private final Person person;
+    private final EditMeetUpDescriptor editMeetUpDescriptor;
+
+    /**
+     * @param index of the person in the filtered person list to edit
+     * @param editPersonDescriptor details to edit the person with
+     */
+    public EditMeetUpCommand(Person person, EditMeetUpCommand.EditMeetUpDescriptor editMeetUpDescriptor) {
+        requireNonNull(person);
+        requireNonNull(editMeetUpDescriptor);
+
+        this.index = index;
+        this.editPersonDescriptor = new EditCommand.EditPersonDescriptor(editPersonDescriptor);
+    }
+
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+
+        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        model.setPerson(personToEdit, editedPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+    }
+
+
+
+    /**
+     * Stores the details to edit the meetup with. Each non-empty field value will replace the
+     * corresponding field value of the meetup.
+     */
+    public static class EditMeetUpDescriptor {
+        private Person person;
+        private MeetUp meetup;
+
+        public EditMeetUpDescriptor() {
+        }
+
+        /**
+         * Copy constructor.
+         * A defensive copy of {@code tags} is used internally.
+         */
+        public EditMeetUpDescriptor(EditMeetupCommand.EditMeetUpDescriptor toCopy) {
+            setPerson(toCopy.person);
+
+        }
+
+        /**
+         * Returns true if at least one field is edited.
+         */
+        public boolean isAnyFieldEdited() {
+            return CollectionUtil.isAnyNonNull(meetup);
+        }
+
+        public void setPerson(Person person) {
+            this.person = person;
+        }
+
+        public Optional<Person> getPerson() {
+            return Optional.ofNullable(person);
+        }
+
+        public void setMeetUp(MeetUp meetup) {
+            this.meetup = meetup;
+        }
+
+        public Optional<MeetUp> getMeetUp() {
+            return Optional.ofNullable(meetup);
+        }
+
+
+    }
 }
 
