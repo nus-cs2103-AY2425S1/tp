@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test;
 
 import hallpointer.address.commons.core.index.Index;
 import hallpointer.address.logic.Messages;
-import hallpointer.address.logic.commands.EditCommand.EditMemberDescriptor;
+import hallpointer.address.logic.commands.EditMemberCommand.EditMemberDescriptor;
 import hallpointer.address.model.AddressBook;
 import hallpointer.address.model.Model;
 import hallpointer.address.model.ModelManager;
@@ -29,9 +29,9 @@ import hallpointer.address.testutil.EditMemberDescriptorBuilder;
 import hallpointer.address.testutil.MemberBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for EditMemberCommand.
  */
-public class EditCommandTest {
+public class EditMemberCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -39,14 +39,15 @@ public class EditCommandTest {
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Member editedMember = new MemberBuilder().build();
         EditMemberDescriptor descriptor = new EditMemberDescriptorBuilder(editedMember).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_MEMBER, descriptor);
+        EditMemberCommand editMemberCommand = new EditMemberCommand(INDEX_FIRST_MEMBER, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MEMBER_SUCCESS, Messages.format(editedMember));
+        String expectedMessage = String.format(
+                EditMemberCommand.MESSAGE_EDIT_MEMBER_SUCCESS, Messages.format(editedMember));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setMember(model.getFilteredMemberList().get(0), editedMember);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editMemberCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -60,26 +61,28 @@ public class EditCommandTest {
 
         EditMemberDescriptor descriptor = new EditMemberDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withTelegram(VALID_TELEGRAM_BOB).withTags(VALID_TAG_HUSBAND).build();
-        EditCommand editCommand = new EditCommand(indexLastMember, descriptor);
+        EditMemberCommand editMemberCommand = new EditMemberCommand(indexLastMember, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MEMBER_SUCCESS, Messages.format(editedMember));
+        String expectedMessage = String.format(
+                EditMemberCommand.MESSAGE_EDIT_MEMBER_SUCCESS, Messages.format(editedMember));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setMember(lastMember, editedMember);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editMemberCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_MEMBER, new EditMemberDescriptor());
+        EditMemberCommand editMemberCommand = new EditMemberCommand(INDEX_FIRST_MEMBER, new EditMemberDescriptor());
         Member editedMember = model.getFilteredMemberList().get(INDEX_FIRST_MEMBER.getZeroBased());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MEMBER_SUCCESS, Messages.format(editedMember));
+        String expectedMessage = String.format(
+                EditMemberCommand.MESSAGE_EDIT_MEMBER_SUCCESS, Messages.format(editedMember));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editMemberCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -88,24 +91,25 @@ public class EditCommandTest {
 
         Member memberInFilteredList = model.getFilteredMemberList().get(INDEX_FIRST_MEMBER.getZeroBased());
         Member editedMember = new MemberBuilder(memberInFilteredList).withName(VALID_NAME_BOB).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_MEMBER,
+        EditMemberCommand editMemberCommand = new EditMemberCommand(INDEX_FIRST_MEMBER,
                 new EditMemberDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MEMBER_SUCCESS, Messages.format(editedMember));
+        String expectedMessage = String.format(
+                EditMemberCommand.MESSAGE_EDIT_MEMBER_SUCCESS, Messages.format(editedMember));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setMember(model.getFilteredMemberList().get(0), editedMember);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editMemberCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_duplicateMemberUnfilteredList_failure() {
         Member firstMember = model.getFilteredMemberList().get(INDEX_FIRST_MEMBER.getZeroBased());
         EditMemberDescriptor descriptor = new EditMemberDescriptorBuilder(firstMember).build();
-        EditCommand editCommand = new EditCommand(INDEX_SECOND_MEMBER, descriptor);
+        EditMemberCommand editMemberCommand = new EditMemberCommand(INDEX_SECOND_MEMBER, descriptor);
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_MEMBER);
+        assertCommandFailure(editMemberCommand, model, EditMemberCommand.MESSAGE_DUPLICATE_MEMBER);
     }
 
     @Test
@@ -114,19 +118,19 @@ public class EditCommandTest {
 
         // edit member in filtered list into a duplicate in address book
         Member memberInList = model.getAddressBook().getMemberList().get(INDEX_SECOND_MEMBER.getZeroBased());
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_MEMBER,
+        EditMemberCommand editMemberCommand = new EditMemberCommand(INDEX_FIRST_MEMBER,
                 new EditMemberDescriptorBuilder(memberInList).build());
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_MEMBER);
+        assertCommandFailure(editMemberCommand, model, EditMemberCommand.MESSAGE_DUPLICATE_MEMBER);
     }
 
     @Test
     public void execute_invalidMemberIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredMemberList().size() + 1);
         EditMemberDescriptor descriptor = new EditMemberDescriptorBuilder().withName(VALID_NAME_BOB).build();
-        EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
+        EditMemberCommand editMemberCommand = new EditMemberCommand(outOfBoundIndex, descriptor);
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX);
+        assertCommandFailure(editMemberCommand, model, Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX);
     }
 
     /**
@@ -140,19 +144,19 @@ public class EditCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getMemberList().size());
 
-        EditCommand editCommand = new EditCommand(outOfBoundIndex,
+        EditMemberCommand editMemberCommand = new EditMemberCommand(outOfBoundIndex,
                 new EditMemberDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX);
+        assertCommandFailure(editMemberCommand, model, Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_MEMBER, DESC_AMY);
+        final EditMemberCommand standardCommand = new EditMemberCommand(INDEX_FIRST_MEMBER, DESC_AMY);
 
         // same values -> returns true
         EditMemberDescriptor copyDescriptor = new EditMemberDescriptor(DESC_AMY);
-        EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_MEMBER, copyDescriptor);
+        EditMemberCommand commandWithSameValues = new EditMemberCommand(INDEX_FIRST_MEMBER, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -165,20 +169,20 @@ public class EditCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_MEMBER, DESC_AMY)));
+        assertFalse(standardCommand.equals(new EditMemberCommand(INDEX_SECOND_MEMBER, DESC_AMY)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_MEMBER, DESC_BOB)));
+        assertFalse(standardCommand.equals(new EditMemberCommand(INDEX_FIRST_MEMBER, DESC_BOB)));
     }
 
     @Test
     public void toStringMethod() {
         Index index = Index.fromOneBased(1);
         EditMemberDescriptor editMemberDescriptor = new EditMemberDescriptor();
-        EditCommand editCommand = new EditCommand(index, editMemberDescriptor);
-        String expected = EditCommand.class.getCanonicalName() + "{index=" + index + ", editMemberDescriptor="
+        EditMemberCommand editMemberCommand = new EditMemberCommand(index, editMemberDescriptor);
+        String expected = EditMemberCommand.class.getCanonicalName() + "{index=" + index + ", editMemberDescriptor="
                 + editMemberDescriptor + "}";
-        assertEquals(expected, editCommand.toString());
+        assertEquals(expected, editMemberCommand.toString());
     }
 
 }
