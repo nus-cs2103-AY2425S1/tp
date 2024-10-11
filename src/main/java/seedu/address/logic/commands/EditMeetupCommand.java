@@ -39,15 +39,14 @@ public class EditMeetupCommand extends Command {
     private final EditMeetUpDescriptor editMeetUpDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param editMeetUpDescriptor details to edit the person with
      */
-    public EditMeetUpCommand(Person person, EditMeetUpCommand.EditMeetUpDescriptor editMeetUpDescriptor) {
+    public EditMeetupCommand(Person person, EditMeetupCommand.EditMeetUpDescriptor editMeetUpDescriptor) {
         requireNonNull(person);
         requireNonNull(editMeetUpDescriptor);
 
-        this.index = index;
-        this.editPersonDescriptor = new EditCommand.EditPersonDescriptor(editPersonDescriptor);
+        this.person = person;
+        this.editMeetUpDescriptor = new EditMeetupCommand.EditMeetUpDescriptor(editMeetUpDescriptor);
     }
 
     @Override
