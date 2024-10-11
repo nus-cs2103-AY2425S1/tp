@@ -15,7 +15,7 @@ public class TelegramTest {
 
     @Test
     public void constructor_invalidTelegram_throwsIllegalArgumentException() {
-        String invalidTelegram = "";
+        String invalidTelegram = "test test";
         assertThrows(IllegalArgumentException.class, () -> new Telegram(invalidTelegram));
     }
 
@@ -24,22 +24,22 @@ public class TelegramTest {
         // null address
         assertThrows(NullPointerException.class, () -> Telegram.isValidTelegram(null));
 
-        // invalid addresses
+        // invalid telegrams
         assertFalse(Telegram.isValidTelegram("")); // empty string
         assertFalse(Telegram.isValidTelegram(" ")); // spaces only
         assertFalse(Telegram.isValidTelegram("two words")); // space in between words
 
-        // valid addresses
+        // valid telegrams
         assertTrue(Telegram.isValidTelegram("bruceWayne"));
         assertTrue(Telegram.isValidTelegram("a2b34C5"));
     }
 
     @Test
     public void equals() {
-        Telegram telegram = new Telegram("Valid Telegram");
+        Telegram telegram = new Telegram("ValidTelegram");
 
         // same values -> returns true
-        assertTrue(telegram.equals(new Telegram("Valid Telegram")));
+        assertTrue(telegram.equals(new Telegram("ValidTelegram")));
 
         // same object -> returns true
         assertTrue(telegram.equals(telegram));
@@ -51,6 +51,6 @@ public class TelegramTest {
         assertFalse(telegram.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(telegram.equals(new Telegram("Other Valid Telegram")));
+        assertFalse(telegram.equals(new Telegram("OtherValidTelegram")));
     }
 }

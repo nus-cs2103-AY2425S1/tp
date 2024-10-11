@@ -9,12 +9,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Telegram {
 
-    public static final String MESSAGE_CONSTRAINTS = "Telegram usernames can take any values, and it should not have spaces";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Telegram usernames can take any values, and it should not have spaces";
 
     /*
      * The username cannot have any spaces
      */
-    public static final String VALIDATION_REGEX = "/\s/";
+    // TODO: Java whitespace matching is a mess, currently validation regex does not really work
+    public static final String VALIDATION_REGEX = "^$|\\s";
 
     public final String value;
 
