@@ -27,6 +27,7 @@ import seedu.address.model.person.Nric;
 import seedu.address.model.person.NricMatchesPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Priority;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -96,6 +97,7 @@ public class DeleteApptCommand extends Command {
         DateOfBirth updatedDateOfBirth = personToEdit.getDateOfBirth();
         Gender updatedGender = personToEdit.getGender();
         Nric updatedNric = personToEdit.getNric();
+        Priority updatedPriority = personToEdit.getPriority();
         Set<Tag> updatedTags = personToEdit.getTags();
 
         // get list, make mutable, delete, and make immutable
@@ -105,7 +107,7 @@ public class DeleteApptCommand extends Command {
         Set<Appointment> newAppointments = new HashSet<>(newAppointmentsMutable);
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedNric, updatedAddress, updatedDateOfBirth,
-                          updatedGender, updatedTags, newAppointments);
+                          updatedGender, updatedTags, updatedPriority, newAppointments);
     }
 
     @Override
