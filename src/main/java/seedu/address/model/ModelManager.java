@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.event.Event;
 import seedu.address.model.vendor.Vendor;
 
 /**
@@ -109,6 +110,22 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedVendor);
 
         addressBook.setVendor(target, editedVendor);
+    }
+
+    @Override
+    public boolean hasEvent(Event event) {
+        requireNonNull(event);
+        return addressBook.hasEvent(event);
+    }
+
+    @Override
+    public void deleteEvent(Event target) {
+        addressBook.removeEvent(target);
+    }
+
+    @Override
+    public void addEvent(Event event) {
+        addressBook.addEvent(event);
     }
 
     //=========== Filtered Vendor List Accessors =============================================================
