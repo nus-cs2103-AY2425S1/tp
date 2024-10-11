@@ -15,6 +15,12 @@ class InsurancePlanTest {
     }
 
     @Test
+    void testEquals_sameObject_success() {
+        InsurancePlan testPlan = new TravelPlanStub();
+        testPlan.equals(testPlan);
+    }
+
+    @Test
     void testEquals_fail_object() {
         InsurancePlan testPlan = new TravelPlanStub();
         assertNotEquals(testPlan, new Object());
@@ -25,5 +31,11 @@ class InsurancePlanTest {
         InsurancePlan testPlan = new TravelPlanStub();
         InsurancePlan testPlan2 = new BasicPlanStub();
         assertNotEquals(testPlan, testPlan2);
+    }
+
+    @Test
+    void checkToString() {
+        InsurancePlan testPlan = new BasicPlanStub();
+        assertEquals("Basic Insurance Plan", testPlan.toString());
     }
 }

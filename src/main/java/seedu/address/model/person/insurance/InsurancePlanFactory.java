@@ -7,7 +7,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class InsurancePlanFactory {
 
-    /** Error message when a insuranceId passed in is invalid. */
+    /**
+     * Error message when a insuranceId or name passed in is invalid.
+     */
     public static final String INVALID_PLAN_ID_MESSAGE = "This Insurance Plan ID is invalid!";
     public static final String INVALID_PLAN_NAME_MESSAGE = "This Insurance Plan Name is invalid!";
 
@@ -44,5 +46,4 @@ public class InsurancePlanFactory {
             throw new ParseException(INVALID_PLAN_NAME_MESSAGE);
         }
     }
-
 }
