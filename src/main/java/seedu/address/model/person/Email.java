@@ -68,7 +68,8 @@ public class Email {
         }
 
         Email otherEmail = (Email) other;
-        return value.equals(otherEmail.value);
+        // Ignore case as emails are case-insensitive
+        return value.equalsIgnoreCase(otherEmail.value);
     }
 
     @Override

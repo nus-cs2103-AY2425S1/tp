@@ -124,6 +124,48 @@ public class EditCommandTest {
     }
 
     @Test
+    public void execute_similarPersonUnfilteredList_successWithWarning() {
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(firstPerson.getName().fullName)
+                .build();
+        EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor);
+
+        Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Person editedPerson = new PersonBuilder(secondPerson).withName(firstPerson.getName().fullName).build();
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS_WITH_WARNING,
+                Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(secondPerson, editedPerson);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_similarPersonFilteredList_successWithWarning() {
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+
+        // edit person in filtered list into a duplicate in address book
+        Person personInList = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(personInList.getName().fullName)
+                .build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person editedPerson = new PersonBuilder(firstPerson).withName(personInList.getName().fullName).build();
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS_WITH_WARNING,
+                Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(firstPerson, editedPerson);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();

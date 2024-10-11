@@ -119,6 +119,29 @@ public class Person {
                 && otherPerson.getNric().equals(getNric());
     }
 
+
+    /**
+     * Returns true if both persons are the same as defined in {@code isSamePerson(Person otherPerson)}
+     * or if any of their other fields are the same.
+     * This defines the weakest notion of equality between two persons.
+     *
+     * @param otherPerson The other person to compare with.
+     * @return True if the persons are similar, false otherwise.
+     */
+    public boolean isSimilarPerson(Person otherPerson) {
+        if (isSamePerson(otherPerson)) {
+            return true;
+        }
+
+        if (otherPerson == null) {
+            return false;
+        }
+
+        return otherPerson.getName().equals(getName())
+               || otherPerson.getPhone().equals(getPhone())
+               || otherPerson.getEmail().equals(getEmail());
+    }
+
     /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.

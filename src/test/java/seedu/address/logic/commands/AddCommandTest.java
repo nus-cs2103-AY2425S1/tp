@@ -57,6 +57,19 @@ public class AddCommandTest {
     }
 
     @Test
+    public void execute_personAcceptedByModelWithWarning_addSuccessful() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        new AddCommand(ALICE).execute(modelStub);
+
+        Person alice2 = new PersonBuilder().withName(ALICE.getName().fullName).build();
+        CommandResult commandResult = new AddCommand(alice2).execute(modelStub);
+
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS_WITH_WARNING, Messages.format(alice2)),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(ALICE, alice2), modelStub.personsAdded);
+    }
+
+    @Test
     public void equals() {
         Person alice = new PersonBuilder().withName("Alice").build();
         Person bob = new PersonBuilder().withName("Bob").build();
@@ -142,6 +155,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasSimilarPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasSimilarPerson(Person person, Person exclude) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -218,6 +241,12 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasSimilarPerson(Person person) {
+            requireNonNull(person);
+            return personsAdded.stream().anyMatch(person::isSimilarPerson);
+        }
+
+        @Override
         public void addPerson(Person person) {
             requireNonNull(person);
             personsAdded.add(person);
@@ -228,5 +257,4 @@ public class AddCommandTest {
             return new AddressBook();
         }
     }
-
 }
