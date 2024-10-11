@@ -57,15 +57,7 @@ public class PianoPieceTest {
         String pianoPieceName = "Fugue";
         PianoPiece piece = new PianoPiece(pianoPieceName);
 
-        assertEquals("[" + pianoPieceName + "]", piece.toString());
-    }
-
-    @Test
-    public void toDisplay() {
-        String pianoPieceName = "Fugue";
-        PianoPiece piece = new PianoPiece(pianoPieceName);
-
-        assertEquals(pianoPieceName, piece.toDisplay());
+        assertEquals(pianoPieceName, piece.toString());
     }
 
     @Test

@@ -61,13 +61,6 @@ public class PianoPiece {
      */
     @Override
     public String toString() {
-        return '[' + pianoPieceName + ']';
-    }
-
-    /**
-     * Returns a user-friendly display message of the piano piece.
-     */
-    public String toDisplay() {
         return pianoPieceName;
     }
 

@@ -8,7 +8,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import keycontacts.model.pianopiece.PianoPiece;
 import keycontacts.model.student.Student;
 
 /**
@@ -64,7 +63,7 @@ public class StudentCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         pianoPieces.setText(student.getPianoPieces().stream()
                 .sorted(Comparator.comparing(pianoPiece -> pianoPiece.pianoPieceName))
-                .map(PianoPiece::toDisplay)
+                .map(pianoPiece -> pianoPiece.pianoPieceName)
                 .collect(Collectors.joining(", ")));
     }
 }
