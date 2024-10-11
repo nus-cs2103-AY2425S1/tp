@@ -34,6 +34,7 @@ public class RoleHandler {
      * @return Corresponding role object.
      */
     public Role getRole(String role) throws InvalidRoleException {
+        Objects.requireNonNull(role);
         role = role.trim().toLowerCase();
         switch (role) {
         case Attendee.ROLE_WORD:

@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -11,6 +13,9 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.TelegramUsername;
+import seedu.address.model.role.Role;
+import seedu.address.model.role.RoleHandler;
+import seedu.address.model.role.exceptions.InvalidRoleException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -39,6 +44,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setAddress(person.getAddress());
         descriptor.setTelegramUsername(person.getTelegramUsername());
         descriptor.setTags(person.getTags());
+        descriptor.setRoles(person.getRoles());
     }
 
     /**
@@ -91,6 +97,27 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withTelegramUsername(String telegramUsername) {
         descriptor.setTelegramUsername(new TelegramUsername(telegramUsername));
+        return this;
+    }
+
+    /**
+     * Parses the {@code roles} into a {@code Set<Role>} and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withRoles(String... roles) {
+        RoleHandler rh = new RoleHandler();
+        Set<Role> roleSet = Stream.of(roles)
+                .map(role -> {
+                    try {
+                        return Optional.of(rh.getRole(role));
+                    } catch (InvalidRoleException e) {
+                        return Optional.<Role>empty();
+                    }
+                })
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .collect(Collectors.toSet());
+        descriptor.setRoles(roleSet);
         return this;
     }
 
