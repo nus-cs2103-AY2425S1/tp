@@ -11,6 +11,7 @@ import keycontacts.commons.util.StringUtil;
 import keycontacts.logic.parser.exceptions.ParseException;
 import keycontacts.model.lesson.Day;
 import keycontacts.model.lesson.Time;
+import keycontacts.model.pianopiece.PianoPiece;
 import keycontacts.model.student.Address;
 import keycontacts.model.student.Email;
 import keycontacts.model.student.Name;
@@ -152,5 +153,32 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String pianoPiece} into a {@code PianoPiece}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code pianoPiece} is invalid.
+     */
+    public static PianoPiece parsePianoPiece(String pianoPiece) throws ParseException {
+        requireNonNull(pianoPiece);
+        String trimmedPianoPiece = pianoPiece.trim();
+        if (!PianoPiece.isValidPianoPieceName(trimmedPianoPiece)) {
+            throw new ParseException(PianoPiece.MESSAGE_CONSTRAINTS);
+        }
+        return new PianoPiece(trimmedPianoPiece);
+    }
+
+    /**
+     * Parses {@code Collection<String> pianoPieces} into a {@code Set<PianoPiece>}.
+     */
+    public static Set<PianoPiece> parsePianoPieces(Collection<String> pianoPieces) throws ParseException {
+        requireNonNull(pianoPieces);
+        final Set<PianoPiece> pianoPieceSet = new HashSet<>();
+        for (String pianoPieceName : pianoPieces) {
+            pianoPieceSet.add(parsePianoPiece(pianoPieceName));
+        }
+        return pianoPieceSet;
     }
 }

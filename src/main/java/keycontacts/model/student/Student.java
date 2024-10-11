@@ -4,6 +4,7 @@ import static keycontacts.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -11,6 +12,7 @@ import java.util.Set;
 import keycontacts.commons.util.ToStringBuilder;
 import keycontacts.logic.commands.EditCommand.EditStudentDescriptor;
 import keycontacts.model.lesson.RegularLesson;
+import keycontacts.model.pianopiece.PianoPiece;
 import keycontacts.model.tag.Tag;
 
 /**
@@ -27,6 +29,7 @@ public class Student {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<PianoPiece> pianoPieces = new LinkedHashSet<>();
 
     // Associations
     private final RegularLesson regularLesson;
@@ -41,22 +44,27 @@ public class Student {
         this.phone = phone;
         this.email = email;
         this.address = address;
+
         this.tags.addAll(tags);
+
         this.regularLesson = null;
     }
 
     /**
      * Constructor for a new student with non-default student associations. Identity and data fields must be
-     * present and not null.
+     * present and not null. This is mainly used in {@code AddCommand}
      */
-    public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+    public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Set<PianoPiece> pianoPieces,
                     RegularLesson regularLesson) {
-        requireAllNonNull(name, phone, email, address, tags);
+        requireAllNonNull(name, phone, email, address, tags, pianoPieces);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+
         this.tags.addAll(tags);
+        this.pianoPieces.addAll(pianoPieces);
+
         this.regularLesson = regularLesson;
     }
 
@@ -82,6 +90,14 @@ public class Student {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns an immutable piano piece set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<PianoPiece> getPianoPieces() {
+        return Collections.unmodifiableSet(pianoPieces);
     }
 
     public Optional<RegularLesson> getRegularLesson() {
@@ -112,15 +128,25 @@ public class Student {
         Email updatedEmail = editStudentDescriptor.getEmail().orElse(email);
         Address updatedAddress = editStudentDescriptor.getAddress().orElse(address);
         Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(tags);
-
-        return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, regularLesson);
+        return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
+                pianoPieces, regularLesson);
     }
 
     /**
      * Creates and returns a new {@code Student} with the updated {@code regularLesson}.
      */
     public Student withRegularLesson(RegularLesson regularLesson) {
-        return new Student(name, phone, email, address, tags, regularLesson);
+        return new Student(name, phone, email, address, tags, pianoPieces, regularLesson);
+    }
+
+    /**
+     * Creates and returns a new {@code Student} with the {@code addedPianoPieces} added.
+     */
+    public Student withAddedPianoPieces(Set<PianoPiece> addedPianoPieces) {
+        Set<PianoPiece> updatedPianoPieces = new HashSet<>(pianoPieces);
+        updatedPianoPieces.addAll(addedPianoPieces);
+
+        return new Student(name, phone, email, address, tags, updatedPianoPieces, regularLesson);
     }
 
     /**
@@ -157,6 +183,7 @@ public class Student {
                 && email.equals(otherStudent.email)
                 && address.equals(otherStudent.address)
                 && tags.equals(otherStudent.tags)
+                && pianoPieces.equals(otherStudent.pianoPieces)
                 && getRegularLesson().equals(otherStudent.getRegularLesson());
     }
 

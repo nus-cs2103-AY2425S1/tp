@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import keycontacts.model.ReadOnlyStudentDirectory;
 import keycontacts.model.StudentDirectory;
+import keycontacts.model.pianopiece.PianoPiece;
 import keycontacts.model.student.Address;
 import keycontacts.model.student.Email;
 import keycontacts.model.student.Name;
@@ -54,6 +55,15 @@ public class SampleDataUtil {
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
                 .map(Tag::new)
+                .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns a piano piece set containing the list of strings given.
+     */
+    public static Set<PianoPiece> getPianoPieceSet(String... strings) {
+        return Arrays.stream(strings)
+                .map(PianoPiece::new)
                 .collect(Collectors.toSet());
     }
 

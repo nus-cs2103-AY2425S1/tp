@@ -1,8 +1,10 @@
 package keycontacts.testutil;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
+import keycontacts.model.pianopiece.PianoPiece;
 import keycontacts.model.student.Address;
 import keycontacts.model.student.Email;
 import keycontacts.model.student.Name;
@@ -26,6 +28,7 @@ public class StudentBuilder {
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private Set<PianoPiece> pianoPieces;
 
     /**
      * Creates a {@code StudentBuilder} with the default details.
@@ -36,6 +39,7 @@ public class StudentBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        pianoPieces = new LinkedHashSet<>();
     }
 
     /**
@@ -47,6 +51,7 @@ public class StudentBuilder {
         email = studentToCopy.getEmail();
         address = studentToCopy.getAddress();
         tags = new HashSet<>(studentToCopy.getTags());
+        pianoPieces = new HashSet<>(studentToCopy.getPianoPieces());
     }
 
     /**
@@ -62,6 +67,15 @@ public class StudentBuilder {
      */
     public StudentBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
+     * Parses the {@code pianoPieces} into a {@code Set<PianoPiece>}
+     * and set it to the {@code Student} that we are building.
+     */
+    public StudentBuilder withPianoPieces(String ... pianoPieces) {
+        this.pianoPieces = SampleDataUtil.getPianoPieceSet(pianoPieces);
         return this;
     }
 
@@ -89,8 +103,9 @@ public class StudentBuilder {
         return this;
     }
 
+    // TODO implement StudentBuilder for regularLesson
     public Student build() {
-        return new Student(name, phone, email, address, tags);
+        return new Student(name, phone, email, address, tags, pianoPieces, null);
     }
 
 }

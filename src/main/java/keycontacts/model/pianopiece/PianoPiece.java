@@ -10,7 +10,11 @@ import static keycontacts.commons.util.AppUtil.checkArgument;
 public class PianoPiece {
 
     public static final String MESSAGE_CONSTRAINTS = "Piano piece name should not be empty";
-    public static final String VALIDATION_REGEX = ".+";
+    /*
+     * The first character of the piano piece must not be a whitespace,
+     * otherwise " " (a blank string) becomes a valid input.
+     */
+    public static final String VALIDATION_REGEX = "[^\\s].*";
 
     public final String pianoPieceName;
 
@@ -55,8 +59,16 @@ public class PianoPiece {
     /**
      * Format state as text for viewing.
      */
+    @Override
     public String toString() {
         return '[' + pianoPieceName + ']';
+    }
+
+    /**
+     * Returns a user-friendly display message of the piano piece.
+     */
+    public String toDisplay() {
+        return pianoPieceName;
     }
 
 }

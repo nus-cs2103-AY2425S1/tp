@@ -26,7 +26,7 @@ public class PianoPieceTest {
         assertThrows(NullPointerException.class, () -> PianoPiece.isValidPianoPieceName(null));
 
         // blank
-        assertFalse(PianoPiece.isValidPianoPieceName("")); // empty string
+        assertFalse(PianoPiece.isValidPianoPieceName(" ")); // whitespace
 
         // valid name
         assertTrue(PianoPiece.isValidPianoPieceName("Für Elise")); // unicode character ü

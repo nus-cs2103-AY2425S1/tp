@@ -1,5 +1,6 @@
 package keycontacts.logic;
 
+import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -48,4 +49,12 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Formats a {@code Collection<T>} for display to the user.
+     */
+    public static <T> String format(Collection<T> t) {
+        final StringBuilder builder = new StringBuilder();
+        t.forEach(builder::append);
+        return builder.toString();
+    }
 }
