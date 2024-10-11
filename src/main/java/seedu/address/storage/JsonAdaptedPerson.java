@@ -137,6 +137,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(PaymentStatus.MESSAGE_CONSTRAINTS);
         }
         final PaymentStatus modelPaymentStatus = new PaymentStatus(paymentStatus);
+
         if (clientStatus == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                 ClientStatus.class.getSimpleName()));
