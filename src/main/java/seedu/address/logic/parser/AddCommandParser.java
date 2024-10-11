@@ -11,7 +11,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments and creates a new AddCommand object
  */
-public class AddCommandParser implements Parser<AddCommand> {
+public class AddCommandParser implements Parser<AddCommand<?>> {
 
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
@@ -26,7 +26,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      * and returns an AddCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AddCommand parse(String args) throws ParseException {
+    public AddCommand<?> parse(String args) throws ParseException {
 
         String entity = args.trim().split(" ")[0];
         String addArgs = args.replace(" " + entity, "");
