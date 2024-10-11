@@ -3,8 +3,8 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.UnpaidCommand;
+import seedu.address.logic.commands.UnpaidCommand.UnpaidPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 
@@ -21,9 +21,9 @@ public class UnpaidCommandParser implements Parser<UnpaidCommand> {
     public UnpaidCommand parse(String args) throws ParseException {
         try {
             Index index = ParserUtil.parseIndex(args);
-            EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
-            editPersonDescriptor.setHasPaid(false); // Change this to false for Unpaid
-            return new UnpaidCommand(index, editPersonDescriptor);
+            UnpaidPersonDescriptor unpaidPersonDescriptor = new UnpaidPersonDescriptor();
+            unpaidPersonDescriptor.setHasNotPaid(); // Change this to false for Unpaid
+            return new UnpaidCommand(index, unpaidPersonDescriptor);
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnpaidCommand.MESSAGE_USAGE), pe);

@@ -3,8 +3,8 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.PaidCommand;
+import seedu.address.logic.commands.PaidCommand.PaidPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 
@@ -21,9 +21,9 @@ public class PaidCommandParser implements Parser<PaidCommand> {
     public PaidCommand parse(String args) throws ParseException {
         try {
             Index index = ParserUtil.parseIndex(args);
-            EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
-            editPersonDescriptor.setHasPaid(true);
-            return new PaidCommand(index, editPersonDescriptor);
+            PaidPersonDescriptor paidPersonDescriptor = new PaidPersonDescriptor();
+            paidPersonDescriptor.setHasPaid();
+            return new PaidCommand(index, paidPersonDescriptor);
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, PaidCommand.MESSAGE_USAGE), pe);
