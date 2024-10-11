@@ -34,15 +34,17 @@ public class NoteCommandTest {
     @Test
     public void execute_addNoteUnfilteredList_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+
         Person editedPerson = new PersonBuilder(firstPerson).withNote(NOTE_STUB).build();
 
         NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_PERSON, new Note(editedPerson.getNote().value));
 
         String expectedMessage = String.format(NoteCommand.MESSAGE_ADD_NOTE_SUCCESS, editedPerson);
+        //System.out.println(expectedMessage); OK
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(firstPerson, editedPerson);
 
+        expectedModel.setPerson(firstPerson, editedPerson);
         assertCommandSuccess(noteCommand, model, expectedMessage, expectedModel);
     }
 
@@ -67,8 +69,7 @@ public class NoteCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))
-                .withNote(NOTE_STUB).build();
+        Person editedPerson = new PersonBuilder(firstPerson).withNote(NOTE_STUB).build();
 
         NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_PERSON, new Note(editedPerson.getNote().value));
 

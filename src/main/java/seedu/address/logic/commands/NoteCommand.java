@@ -60,8 +60,9 @@ public class NoteCommand extends Command {
                 personToEdit.getPhone(),
                 personToEdit.getEmail(),
                 personToEdit.getAddress(),
+                personToEdit.getSkills(),
                 personToEdit.getStatus(), // Add this line to get the status
-                note,
+                personToEdit.getNote(),
                 personToEdit.getTags()
         );
 

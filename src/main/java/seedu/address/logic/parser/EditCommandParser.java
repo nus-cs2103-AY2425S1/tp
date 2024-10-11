@@ -67,6 +67,7 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         if (argMultimap.getValue(PREFIX_SKILLS).isPresent()) {
             editPersonDescriptor.setSkills(ParserUtil.parseSkills(argMultimap.getValue(PREFIX_SKILLS).get()));
+        }
         if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
             editPersonDescriptor.setStatus(ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get()));
         }

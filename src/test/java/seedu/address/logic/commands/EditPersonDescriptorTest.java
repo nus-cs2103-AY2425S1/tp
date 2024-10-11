@@ -80,7 +80,7 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getPhone().orElse(null) + ", email="
                 + editPersonDescriptor.getEmail().orElse(null) + ", address="
                 + editPersonDescriptor.getAddress().orElse(null) + ", skills="
-                + editPersonDescriptor.getAddress().orElse(null) + ", status="
+                + editPersonDescriptor.getSkills().orElse(null) + ", status="
                 + editPersonDescriptor.getStatus().orElse(null) + ", note="
                 + editPersonDescriptor.getNote().orElse(null) + ", tags="
                 + editPersonDescriptor.getTags().orElse(null) + "}";
