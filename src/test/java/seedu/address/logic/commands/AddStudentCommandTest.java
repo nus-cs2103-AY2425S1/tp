@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
@@ -21,6 +22,8 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.person.Attendance;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.StudentBuilder;
@@ -150,6 +153,21 @@ public class AddStudentCommandTest {
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void markAttendance(Person person, LocalDate date, Attendance attendance) {
+
+        }
+
+        @Override
+        public Person getPersonByName(Name name) {
+            return null;
+        }
+
+        @Override
+        public Student getStudentByName(Name name) {
+            return null;
         }
     }
 
