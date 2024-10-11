@@ -21,7 +21,6 @@ public abstract class Role {
 
     private final HashSet<Person> personList = new HashSet<>();
 
-
     private final String roleName;
 
     /**
@@ -33,6 +32,13 @@ public abstract class Role {
         requireNonNull(roleName);
         checkArgument(isValidRoleName(roleName), MESSAGE_CONSTRAINTS);
         this.roleName = roleName;
+    }
+
+    /**
+     * Returns roleName
+     */
+    public String getRoleName() {
+        return this.roleName;
     }
 
 
