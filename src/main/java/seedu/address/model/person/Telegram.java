@@ -35,7 +35,9 @@ public class Telegram {
      * Returns true if a given string is a valid telegram username.
      */
     public static boolean isValidTelegram(String test) {
-        return !test.matches(VALIDATION_REGEX);
+        // CHANGE TO REGEX
+        return !test.contains(" ") && !test.isEmpty();
+        // return !test.matches(VALIDATION_REGEX);
     }
 
     @Override

@@ -26,15 +26,15 @@ public class TypicalPersons {
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withTelegram("alicePauline").withEmail("alice@example.com")
             .withPhone("94351253")
-            .withTags("friends").build();
+            .build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withTelegram("bensonMeier")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withTags("owesMoney", "friends").build();
+            .build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withTelegram("carlKurz").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").withTelegram("danMeier").withTags("friends").build();
+            .withEmail("cornelia@example.com").withTelegram("danMeier").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withTelegram("elleMeyer").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
