@@ -262,71 +262,201 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* CCA leaders in NUS
+* has a need to manage a significant number of contacts related to CCA day-to-day operations and upkeep
+* needs to additionally track details like roles, names, emails, etc.
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: The program aims to assist CCA leaders in NUS in managing and collating relevant CCA personnel’s contact details. 
+This is done via a clean user interface with a focus on the CLI, with fast access to the contact information of relevant CCA personnel, 
+providing users a one-stop solution to help manage CCA manpower related considerations.
+
 
 
 ### User stories
-
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …        | I want to …                                                                 | So that I can…                                                       |
+|----------|---------------|-----------------------------------------------------------------------------|----------------------------------------------------------------------|
+| `* * *`  | user          | add multiple contacts with one command                                      | add in multiple contacts at one time                                 |
+| `* * *`  | user          | search for a contact by querying the saved name                             | get the information of the contact when needed                       |
+| `* * *`  | user          | easily view the available commands on the app                               | quickly find the usage for a command I had forgotten                 |
+| `* * *`  | user          | quickly duplicate a contact's information                                   | add similar contacts without re-entering details                     |
+| `* * *`  | user          | add new contacts with the fewest possible keystrokes                        | add new contacts quickly                                             |
+| `* * *`  | user          | add individual contacts                                                     | save the information of the contact and retrieve it when I want it   |
+| `* * *`  | user          | edit the contact information of any entry                                   | update any outdated information, and keep the list current           |
+| `* * *`  | user          | delete an entry if needed                                                   | remove any individuals who are no longer relevant to my organisation |
+| `* *`    | user          | sort the contacts by alphabetical order of their names                      | quickly scan through and find the relevant contact                   |
+| `* *`    | user          | tag contacts to a group/tag name                                            | group individuals into relevant sections for better clarity          |
+| `* *`    | user          | search for multiple contacts by querying its tag                            | get the information of all the contacts related to the relevant tag  |
+| `* *`    | user          | save my current profile                                                     | persist my profile locally through different sessions                |
+| `* *`    | user          | export my profile                                                           | use my profile on other machines/by other people                     |
+| `* *`    | user          | import another profile onto my local program                                | access the contact details from another user/another machine         |
+| `* *`    | user          | undo a recent delete                                                        | recover from a mistake                                               |
+| `* *`    | user          | add notes to any contact                                                    | remember important details about them                                |
+| `* *`    | user          | import my contacts from an external file                                    | quickly add contacts obtained from Google Forms or others            |
+| `* *`    | user          | export my contacts to an external file                                      | send the contacts to another user or filter externally               |
+| `*`      | user          | start a temporary session that does not persist between sessions            | experiment with and play around with the environment                 |
+| `*`      | user          | sort the contacts by popularity (how often I query the contact)             | quickly access frequently queried contacts                           |
+| `*`      | user          | switch profiles to another profile, containing a separate list of contacts  | separate contacts of individuals in different organisations          |
+| `*`      | seasoned user | leverage compound and nested queries/commands                               | get the exact results that I require, in fewer commands              |
+| `*`      | user          | customise commands to manage the contacts                                   | add, remove, modify, search contacts with greater efficiency         |
+| `*`      | user          | secure my account with authentication                                       | only authorised users can access the information                     |
+| `*`      | user          | back up my contacts regularly                                               | not lose important contact information                               |
+| `*`      | user          | log activity history with each contact                                      | keep track of my latest interactions and follow-ups                  |
+| `*`      | user          | perform advanced searches using multiple criteria (e.g. role, last contact) | find specific contacts more efficiently                              |
+| `*`      | user          | customise the appearance of my address book (e.g. colour schemes, themes…)  | match my preferences                                                 |
+| `*`      | user          | mark certain contacts as favourites                                         | easily find and access frequently used contacts                      |
+| `*`      | user          | colour-code my contacts based on categories                                 | visually distinguish between different types of contacts             |
+| `*`      | user          | set up quick actions (e.g. call, message…)                                  | reach out with a single click                                        |
+| `*`      | user          | set privacy levels for each contact's information                           | protect sensitive details                                            |
+| `*`      | user          | see a profile picture for each contact                                      | recall the person from the picture                                   |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
-
-**Use case: Delete a person**
-
+(For all use cases below, the **System** is  `CCAConnect` and the **Actor** is the `user`, unless specified otherwise)
+<br>
+**Use case: UC01 - View John Doe’s Contact Information**
+**Actor: User**
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User enters appropriate ‘view’ command to search for ‘John Doe’s contact information.
+2. System opens up new page with John Doe’s contact information.
 
-    Use case ends.
+Use Case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. CCAConnect detects an error in the entered command information.
+  * 1a1. CCAConnect returns an error message.
+  * Steps 1a1 repeats till the user enters a valid and existing telegram handle for the command.
+  * Use case resumes from step 2.
 
-  Use case ends.
+<br>
+**Use case: UC02 - Delete a contact**
+**Actor: User**
+**MSS**
 
-* 3a. The given index is invalid.
+1. User requests to list all contacts.
+2. CCAConnect shows a list of contacts.
+3. User requests to delete a specific contact at the list index.
+4. CCAConnect deletes the contact.
 
-    * 3a1. AddressBook shows an error message.
+Use case ends.
 
-      Use case resumes at step 2.
+**Extensions**
 
+* 2a. The list is empty. 
+  * Use case ends.
+
+* 3a. User inputs an invalid index.
+  * 3a1. CCAConnect shows an error message.
+  * Use case resumes at step 2.
+
+<br>
+**Use case: UC03 - Add a contact**
+**Actor: User**
+**MSS**
+
+1. User requests to add a contact.
+2. User provides the details of the contact, including fields like name, phone number, etc.
+3. System adds the contact to the list of contacts and displays the contact as a new entry in the list of contacts viewable by the user.
+
+Use case ends.
+
+**Extensions**
+* 3a. System detects that user did not enter all the required fields.
+    * 3a1. System shows user an error message.
+    * Use case ends.
+
+* 3b. System detects that user entered an invalid field.
+    * 3b1. System shows user an appropriate error message.
+    * Use case ends.
+
+<br>
+**Use case: UC04 - Search for a contact**
+**Actor: User**
+**MSS**
+
+1. User searches the list of contacts with a query relating to a contact’s name.
+2. System displays the subset of contacts with the same name as the query 
+
+Use case ends.
+
+**Extensions**
+* 1a. User requests for a search, with no query.
+    * 1a1. System displays an error to the user.
+    * Use case ends.
+
+* 2a. System fails to find any contacts related to the query.
+    * 2a1. System displays an empty list to the user.
+    * Use case ends.
+   
+<br>
+**Use case: UC05 - List all contacts**
+**Actor: User**
+**MSS**
+
+User enters ‘list’ command to view information of all contacts.
+System opens up a new page with all contact information currently stored in data storage of CCAConnect.
+
+Use Case ends.
+
+**Extensions**
+
+* 1a. CCAConnect detects an error in the entered command information.
+  * 1a1. CCAConnect returns an error message.
+  * Steps 1a1 is repeated till the user enters a valid list command.
+  * Use case resumes from step 2.
+
+<br>
+**Use case: UC06 - View all commands**
+**Actor: User**
+**MSS**
+
+1. User requests to see all the available commands.
+2. CCAConnect displays all valid commands.
+
+Use case ends.
+
+<br>
 *{More to be added}*
+<br>
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. The system should work on any mainstream OS as long as it has Java `17` or above installed. This primarily applies for windows, macos and linux
+2. The system should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Should not be bloated in application size
+5. All functionality should be well documented, with example usages
+6. The system must ensure that all contact information is stored accurately, and able to be retrieved without any loss of information or data corruption
+7. The system should be able to respond to user inputs within 2 seconds, under normal load conditions
+8. The program must include automated tests for all of its functionalities to ensure code reliability
+9. All code changes must be tracked with a Revision Control Software
+10. All code changes must be subject to peer review and approval by two separate team members (not including the owner of the change)
+11. All releases must have proper documentation
+
 
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Contact**: A contact comprises of a name, a phone number, an email, a telegram username and a role
+* **CLI**: Command Line Interface. This represents the interface where the user uses commands to communicate with the system
+* **GUI**: Graphical User Interface. This represents the graphical interface that the user can interact with
+* **User**: The individual using the app
+* **System**: The CCAConnect application
+* **Flag**: A specifier to indicate the start of an argument after a command. E.g. `n/` represents a name flag
+* **Regex**: A regular expression, which is a sequence of characters that specifies a match pattern
+
+*{More to be added}*
 
 --------------------------------------------------------------------------------------------------------------------
 

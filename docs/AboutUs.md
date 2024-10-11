@@ -50,9 +50,10 @@ You can reach us at the email `cs2103t_f11_2[at]comp.nus.edu.sg`
 
 ### Yi Hao
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yyihaoc.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/yyihaoc)]
+[[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: UI, Code Quality, Integration
+* Responsibilities: Code Quality, Integration
