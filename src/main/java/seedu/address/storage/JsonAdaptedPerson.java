@@ -107,10 +107,11 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         if (experience == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Experience.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Experience.class.getSimpleName()));
         }
         if (!Experience.isValidExperience(experience)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Experience.MESSAGE_CONSTRAINTS);
         }
         final Experience modelExperience = new Experience(experience);
 
