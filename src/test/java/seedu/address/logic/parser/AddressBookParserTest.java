@@ -86,10 +86,19 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_list() throws Exception {
+        //list command
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
+    
+        //list employee command
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " e") instanceof ListEmployeeCommand);
+    
+        //list potential hire command
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " ph") instanceof ListPotentialCommand);
+    
+        //wrong parameter (is not e or ph)
         assertThrows(ParseException.class, () -> parser.parseCommand(ListCommand.COMMAND_WORD + " 3"));
+    
+        //additional text behind parameter
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " e 3") instanceof ListEmployeeCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " ph 3") instanceof ListPotentialCommand);
     }
