@@ -63,7 +63,7 @@ public class TagCommand extends Command {
         return new CommandResult(String.format(MESSAGE_TAG_PERSON_SUCCESS, personToTag.getName(), addedTagsString));
     }
 
-    private String tagSetToString(Set<Tag> tagList) {
+    public static String tagSetToString(Set<Tag> tagList) {
         StringBuilder stringBuilder = new StringBuilder();
         Iterator<Tag> it = tagList.iterator();
         for (int i = 0; i < tagList.size(); i++) {
