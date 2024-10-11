@@ -33,8 +33,8 @@ public class ViewCommandTest {
 
     @Test
     public void execute_zeroKeywords_showsEverything() {
-        String expectedMessage = ViewCommand.MESSAGE_SUCCESS;
-        PersonFulfilsPredicate predicate = preparePredicate(" ");
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 7);
+        PersonFulfilsPredicate predicate = preparePredicate("");
         ViewCommand command = new ViewCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -43,7 +43,7 @@ public class ViewCommandTest {
     @Test
     public void execute_invalidKeyword_noPersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        PersonFulfilsPredicate predicate = preparePredicate(" ");
+        PersonFulfilsPredicate predicate = preparePredicate("hello");
         ViewCommand command = new ViewCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
