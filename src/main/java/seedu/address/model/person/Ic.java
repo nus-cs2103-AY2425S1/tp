@@ -26,7 +26,7 @@ public class Ic {
     }
 
     /**
-     * Returns true if a given string is a valid phone number.
+     * Returns true if a given string is a valid IC number.
      */
     public static boolean isValidIc(String test) {
         return test.matches(VALIDATION_REGEX);

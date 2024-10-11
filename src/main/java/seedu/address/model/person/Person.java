@@ -24,6 +24,7 @@ public class Person {
     // Data fields
     private final Address address;
     private final Ic ic;
+    //    private final Class className;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
