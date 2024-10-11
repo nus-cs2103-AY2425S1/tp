@@ -3,12 +3,14 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
-import java.util.Set;
 
 public class TagCommandParserTest {
     @Test

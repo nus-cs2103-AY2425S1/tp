@@ -3,17 +3,17 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
-
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
 
 /**
  * Adds tags to an existing person in the address book
@@ -35,6 +35,10 @@ public class TagCommand extends Command {
     private final Set<Tag> addedTags;
 
 
+    /**
+     * @param index The Index of the person to tag
+     * @param tagList The Set of Tags to add to the person
+     */
     public TagCommand(Index index, Set<Tag> tagList) {
         this.targetIndex = index;
         this.addedTags = tagList;
@@ -63,6 +67,11 @@ public class TagCommand extends Command {
         return new CommandResult(String.format(MESSAGE_TAG_PERSON_SUCCESS, personToTag.getName(), addedTagsString));
     }
 
+    /**
+     * Utility method to convert Set of Tags to strings delimited by commas
+     * @param tagList The Set of Tags to convert
+     * @return String of tags delimited by commas
+     */
     public static String tagSetToString(Set<Tag> tagList) {
         StringBuilder stringBuilder = new StringBuilder();
         Iterator<Tag> it = tagList.iterator();
