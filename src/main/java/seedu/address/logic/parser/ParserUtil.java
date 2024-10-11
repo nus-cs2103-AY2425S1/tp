@@ -10,8 +10,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.EmailOld;
+import seedu.address.model.person.NameOld;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -41,13 +41,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
-    public static Name parseName(String name) throws ParseException {
+    public static NameOld parseName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
-        if (!Name.isValidName(trimmedName)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        if (!NameOld.isValidName(trimmedName)) {
+            throw new ParseException(NameOld.MESSAGE_CONSTRAINTS);
         }
-        return new Name(trimmedName);
+        return new NameOld(trimmedName);
     }
 
     /**
@@ -86,13 +86,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code email} is invalid.
      */
-    public static Email parseEmail(String email) throws ParseException {
+    public static EmailOld parseEmail(String email) throws ParseException {
         requireNonNull(email);
         String trimmedEmail = email.trim();
-        if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+        if (!EmailOld.isValidEmail(trimmedEmail)) {
+            throw new ParseException(EmailOld.MESSAGE_CONSTRAINTS);
         }
-        return new Email(trimmedEmail);
+        return new EmailOld(trimmedEmail);
     }
 
     /**
