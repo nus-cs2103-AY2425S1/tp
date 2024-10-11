@@ -19,11 +19,11 @@ You can reach us at the email `E1120956@u.nus.edu`
 * Role: Team Lead
 * Responsibilities: Git Expert
 
-### Kimberly 
+### Kimberly
 
 <img src="images/kimberlytmq.png" width="200px">
 
-[[github](http://github.com/kimberlytmq)] 
+[[github](http://github.com/kimberlytmq)]
 
 * Role: Deadlines and Deliverables, Scheduling and Tracking
 * Responsibilities: Ensure that everyone is aware of the tasks and their respective deadlines
@@ -44,7 +44,7 @@ You can reach us at the email `E1120956@u.nus.edu`
 [[github](http://github.com/SlothyCat)]
 
 * Role: Documentation Expert
-* Responsibilities: Ensures Documentation is consistent and up to standards 
+* Responsibilities: Ensures Documentation is consistent and up to standards
 
 ### Zien Xu
 
