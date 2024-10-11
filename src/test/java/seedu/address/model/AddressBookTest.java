@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.event.Event;
 import seedu.address.model.vendor.Vendor;
 import seedu.address.model.vendor.exceptions.DuplicateVendorException;
 import seedu.address.testutil.VendorBuilder;
@@ -95,6 +96,7 @@ public class AddressBookTest {
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Vendor> vendors = FXCollections.observableArrayList();
+        private final ObservableList<Event> events = FXCollections.observableArrayList();
 
         AddressBookStub(Collection<Vendor> vendors) {
             this.vendors.setAll(vendors);
@@ -104,6 +106,9 @@ public class AddressBookTest {
         public ObservableList<Vendor> getVendorList() {
             return vendors;
         }
+
+        @Override
+        public ObservableList<Event> getEventList() { return events; }
     }
 
 }
