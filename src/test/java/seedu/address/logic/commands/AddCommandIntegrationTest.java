@@ -15,7 +15,8 @@ import seedu.address.model.vendor.Vendor;
 import seedu.address.testutil.VendorBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code AddCommand}.
+ * Contains integration tests (interaction with the Model) for
+ * {@code AddCommand}.
  */
 public class AddCommandIntegrationTest {
 
@@ -33,16 +34,15 @@ public class AddCommandIntegrationTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addVendor(validVendor);
 
-        assertCommandSuccess(new AddCommand(validVendor), model,
-                String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validVendor)),
-                expectedModel);
+        assertCommandSuccess(new CreateVendorCommand(validVendor), model,
+                String.format(CreateVendorCommand.MESSAGE_SUCCESS, Messages.format(validVendor)), expectedModel);
     }
 
     @Test
     public void execute_duplicateVendor_throwsCommandException() {
         Vendor vendorInList = model.getAddressBook().getVendorList().get(0);
-        assertCommandFailure(new AddCommand(vendorInList), model,
-                AddCommand.MESSAGE_DUPLICATE_VENDOR);
+        assertCommandFailure(new CreateVendorCommand(vendorInList), model,
+                CreateVendorCommand.MESSAGE_DUPLICATE_VENDOR);
     }
 
 }
