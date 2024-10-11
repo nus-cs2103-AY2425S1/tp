@@ -17,7 +17,7 @@ public class RoleHandlerTest {
     public void getRole_validRole_success() {
         RoleHandler roleHandler = new RoleHandler();
         try {
-            assert (new RoleHandler().getRole("attendee") instanceof Attendee);
+            assert (RoleHandler.getRole("attendee") instanceof Attendee);
 
         } catch (InvalidRoleException e) {
             assert (false);
@@ -28,7 +28,7 @@ public class RoleHandlerTest {
     public void getRole_vendor() {
 
         try {
-            assert (new RoleHandler().getRole("vendor") instanceof Vendor);
+            assert (RoleHandler.getRole("vendor") instanceof Vendor);
 
         } catch (InvalidRoleException e) {
             assert (false);
@@ -39,7 +39,7 @@ public class RoleHandlerTest {
     public void getRole_sponsor() {
         RoleHandler roleHandler = new RoleHandler();
         try {
-            assert (new RoleHandler().getRole("sponsor") instanceof Sponsor);
+            assert (RoleHandler.getRole("sponsor") instanceof Sponsor);
 
         } catch (InvalidRoleException e) {
             assert (false);
@@ -50,7 +50,7 @@ public class RoleHandlerTest {
     public void getRole_volunteer() {
         RoleHandler roleHandler = new RoleHandler();
         try {
-            assert (new RoleHandler().getRole("volunteer") instanceof Volunteer);
+            assert (RoleHandler.getRole("volunteer") instanceof Volunteer);
 
         } catch (InvalidRoleException e) {
             assert (false);
@@ -58,9 +58,8 @@ public class RoleHandlerTest {
     }
     @Test
     public void getRole_invalidRole_success() {
-        RoleHandler roleHandler = new RoleHandler();
         try {
-            assert (new RoleHandler().getRole("invalid") instanceof Vendor);
+            assert (RoleHandler.getRole("invalid") instanceof Vendor);
 
         } catch (InvalidRoleException e) {
             assert (true);
@@ -71,8 +70,8 @@ public class RoleHandlerTest {
     public void isRole_validRole_success() {
         RoleHandler roleHandler = new RoleHandler();
         try {
-            Role role1 = new RoleHandler().getRole("attendee");
-            Role role2 = new RoleHandler().getRole("attendee");
+            Role role1 = RoleHandler.getRole("attendee");
+            Role role2 = RoleHandler.getRole("attendee");
             assertEquals(role1, role2);
 
         } catch (InvalidRoleException e) {
@@ -84,7 +83,7 @@ public class RoleHandlerTest {
     public void isRole_hasRole_notInRole() {
         RoleHandler roleHandler = new RoleHandler();
         try {
-            Role role = new RoleHandler().getRole("attendee");
+            Role role = RoleHandler.getRole("attendee");
             assert (!new RoleHandler().isRole(BOB, "attendee"));
 
         } catch (InvalidRoleException e) {
@@ -96,7 +95,7 @@ public class RoleHandlerTest {
     public void isRole_hasRole_inRole() {
         RoleHandler roleHandler = new RoleHandler();
         try {
-            Role role = new RoleHandler().getRole("attendee");
+            Role role = RoleHandler.getRole("attendee");
             role.addPerson(ALICE);
             assert (new RoleHandler().isRole(ALICE, "attendee"));
 
@@ -109,7 +108,7 @@ public class RoleHandlerTest {
     public void isRole_hasDifferentRole_notInRole() {
         RoleHandler roleHandler = new RoleHandler();
         try {
-            Role role = new RoleHandler().getRole("attendee");
+            Role role = RoleHandler.getRole("attendee");
             role.addPerson(ALICE);
             assert (!new RoleHandler().isRole(ALICE, "sponsor"));
 

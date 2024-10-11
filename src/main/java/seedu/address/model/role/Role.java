@@ -110,7 +110,20 @@ public abstract class Role {
         return this.personList;
     }
 
+    /**
+     * Checks if a person is tagged under the role
+     * @param person the person to check
+     * @return true if person is tagged under the role
+     */
     public boolean isTagged(Person person) {
         return this.personList.contains(person);
+    }
+
+    /**
+     * Returns the role name
+     * @return Role name
+     */
+    public String getRoleName() {
+        return roleName;
     }
 }

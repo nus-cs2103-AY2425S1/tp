@@ -158,7 +158,7 @@ public class ParserUtil {
         }
 
         try {
-            return rh.getRole(role);
+            return RoleHandler.getRole(role);
         } catch (InvalidRoleException e) {
             throw new ParseException(RoleHandler.MESSAGE_CONSTRAINTS);
         }
