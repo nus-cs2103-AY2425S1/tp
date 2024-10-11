@@ -21,7 +21,8 @@ public class ListCommandParser implements Parser<ListCommand> {
         if (args == null || args.isEmpty()) {
             return new ListCommand();
         }
-        args = args.split(" ", 3)[1];
+        args = args.trim();
+        args = args.split(" ", 2)[0];
         if (args.equals(ListEmployeeCommand.ARGUMENT_WORD)) {
             return new ListEmployeeCommand();
         } else if (args.equals(ListPotentialCommand.ARGUMENT_WORD)) {
