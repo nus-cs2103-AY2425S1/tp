@@ -1,5 +1,9 @@
 package seedu.address.model.person.insurance;
 
+import java.util.ArrayList;
+
+import seedu.address.model.person.insurance.claim.Claim;
+
 /**
  * The {@code InsurancePlan} abstract class represents a general blueprint for an insurance plan.
  * It defines common behaviors that can be shared across all types of insurance plans.
@@ -11,6 +15,12 @@ public abstract class InsurancePlan {
      * Unique identifier for the insurance plan, to be determined in each class separately.
      */
     protected int insurancePlanId = -1;
+
+    protected ArrayList<Claim> claims;
+
+    InsurancePlan() {
+        claims = new ArrayList<>();
+    }
 
     /**
      * Retrieves the insurance plan's unique identifier.

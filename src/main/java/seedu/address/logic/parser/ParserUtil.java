@@ -13,6 +13,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.insurance.claim.Claim;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -137,7 +138,9 @@ public class ParserUtil {
      */
     public static String parseClaimId(String claimId) throws ParseException {
         requireNonNull(claimId);
-        return claimId.trim();
+        String trimmedClaimId = claimId.trim();
+        Claim.checkValidClaimId(trimmedClaimId);
+        return trimmedClaimId;
     }
 
     /**
@@ -151,12 +154,10 @@ public class ParserUtil {
         int claimAmountInt;
         try {
             claimAmountInt = Integer.parseInt(claimAmount.trim());
-            if (claimAmountInt < 0) {
-                throw new ParseException("Unplayable, Claim Amount cannot be negative");
-            }
         } catch (NumberFormatException e) {
-            throw new ParseException("Unplayable, claim Amount must be a positive integer");
+            throw new ParseException(Claim.INVALID_CLAIM_AMOUNT);
         }
+        Claim.checkValidClaimAmount(claimAmountInt);
         return claimAmountInt;
     }
 

@@ -41,10 +41,11 @@ public class AddClaimCommandParser implements Parser<AddClaimCommand> {
 
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
             insuranceId = ParserUtil.parseInsurancePlan(argMultimap.getValue(PREFIX_INSURANCE_ID).get());
+
             claimId = ParserUtil.parseClaimId(argMultimap.getValue(PREFIX_CLAIM_ID).get());
             claimAmount = ParserUtil.parseClaimAmount(argMultimap.getValue(PREFIX_CLAIM_AMOUNT).get());
         } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddClaimCommand.MESSAGE_USAGE),
+            throw new ParseException(String.format(ive.getMessage(), AddClaimCommand.MESSAGE_USAGE),
                     ive);
         }
 
