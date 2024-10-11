@@ -8,7 +8,6 @@ import java.util.Objects;
 import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -72,7 +71,7 @@ public class PaidCommand extends Command {
     private static Person createPaidPerson(Person personToPay, PaidPersonDescriptor paidPersonDescriptor) {
         assert personToPay != null;
 
-        Boolean updatedHasPaid = paidPersonDescriptor.getHasPaid().orElse(personToPay.getHasPaid());
+        Boolean updatedHasPaid = true;
 
         return new Person(personToPay.getName(), personToPay.getPhone(), personToPay.getEmail(),
                 personToPay.getAddress(), personToPay.getTags(), updatedHasPaid);
@@ -109,12 +108,12 @@ public class PaidCommand extends Command {
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public PaidPersonDescriptor(PaidCommand.PaidPersonDescriptor toCopy) {
-            setHasPaid(toCopy.hasPaid);
+        public PaidPersonDescriptor(PaidPersonDescriptor toCopy) {
+            toCopy.setHasPaid();
         }
 
-        public void setHasPaid(Boolean hasPaid) {
-            this.hasPaid = hasPaid;
+        public void setHasPaid() {
+            this.hasPaid = true;
         }
 
         public Optional<Boolean> getHasPaid() {
