@@ -2,8 +2,12 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.nio.ByteBuffer;
+import java.time.LocalDate;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -24,6 +28,8 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+
+    private final Map<LocalDate, Attendance> attendanceRecords = new HashMap<>();
 
     /**
      * Every field must be present and not null.
@@ -60,7 +66,21 @@ public class Person {
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }
+    /**
+     * Marks the attendance for a specific date.
+     *
+     * @param date The date on which attendance is being recorded.
+     * @param status The attendance status, either 'present' or 'absent'.
+     * @throws IllegalArgumentException if the provided status is invalid.
+     */
+    public void markAttendance(LocalDate date, String status) {
+        Attendance attendance = new Attendance(status);
+        attendanceRecords.put(date, attendance);
+    }
 
+    public Attendance getAttendance(LocalDate date) {
+        return attendanceRecords.get(date);
+    }
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
@@ -94,13 +114,14 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && attendanceRecords.equals(otherPerson.attendanceRecords);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, attendanceRecords);
     }
 
     @Override
@@ -114,4 +135,12 @@ public class Person {
                 .toString();
     }
 
+    public ByteBuffer getAttendanceRecords() {
+        ByteBuffer buffer = ByteBuffer.allocate(attendanceRecords.size() * 5);
+        for (Map.Entry<LocalDate, Attendance> entry : attendanceRecords.entrySet()) {
+            buffer.putLong(entry.getKey().toEpochDay());
+            buffer.put(entry.getValue().toString().getBytes());
+        }
+        return buffer;
+    }
 }
