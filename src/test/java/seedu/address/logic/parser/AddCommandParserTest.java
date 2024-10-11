@@ -55,7 +55,6 @@ import seedu.address.model.tier.Tier;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandParserTest {
-    
     private AddCommandParser parser = new AddCommandParser();
 
     @Test
@@ -64,7 +63,7 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + JOB_DESC_BOB + INCOME_DESC_BOB + TAG_DESC_GOLD,, new AddCommand(expectedPerson));
+                + ADDRESS_DESC_BOB + JOB_DESC_BOB + INCOME_DESC_BOB + TAG_DESC_GOLD, new AddCommand(expectedPerson));
 
         // multiple tags - all accepted
         Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTiers(VALID_TIER_GOLD)
@@ -140,7 +139,6 @@ public class AddCommandParserTest {
         assertParseFailure(parser, validExpectedPersonString + INVALID_ADDRESS_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
     }
-    
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
@@ -195,15 +193,15 @@ public class AddCommandParserTest {
 
         // invalid income
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + INVALID_INCOME_DESC + JOB_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Income.MESSAGE_CONSTRAINTS);
+                + INVALID_INCOME_DESC + JOB_DESC_BOB + TAG_DESC_GOLD, Income.MESSAGE_CONSTRAINTS);
 
         // invalid job
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + INCOME_DESC_BOB + INVALID_JOB_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Job.MESSAGE_CONSTRAINTS);
+                + INCOME_DESC_BOB + INVALID_JOB_DESC + TAG_DESC_GOLD, Job.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + INCOME_DESC_BOB + JOB_DESC_BOB + INVALID_TAG_DESC + VALID_TIER_GOLD, Tag.MESSAGE_CONSTRAINTS);
+                + INCOME_DESC_BOB + JOB_DESC_BOB + INVALID_TAG_DESC + VALID_TIER_GOLD, Tier.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC

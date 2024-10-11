@@ -23,10 +23,10 @@ public class Person {
 
     private final Job job;
 
-    private final Income income
-      
+    private final Income income;
+
     private final Tier tier;
-  
+
     private final Remark remark;
 
     /**

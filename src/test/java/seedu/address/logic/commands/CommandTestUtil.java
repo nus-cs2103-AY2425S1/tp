@@ -26,9 +26,6 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
 /**
  * Contains helper methods for testing commands.
  */
-/**
- * Contains helper methods for testing commands.
- */
 public class CommandTestUtil {
 
     public static final String VALID_NAME_AMY = "Amy Bee";
@@ -90,7 +87,6 @@ public class CommandTestUtil {
                 .withJob(VALID_JOB_BOB).withIncome(Integer.parseInt(VALID_INCOME_BOB))
                 .withTiers(VALID_TIER_REJECT).build();
     }
-    
     /**
      * Executes the given {@code command}, confirms that <br>
      * - the returned {@link CommandResult} matches {@code expectedCommandResult} <br>

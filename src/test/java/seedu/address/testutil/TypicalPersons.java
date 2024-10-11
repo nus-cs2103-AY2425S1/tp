@@ -27,7 +27,7 @@ public class TypicalPersons {
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253").withJob("Engineer")
             .withIncome(3)
-            ..withTiers("GOLD").withRemark("She is stingy").build();
+            .withTiers("GOLD").withRemark("She is stingy").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withIncome(40).withJob("Doctor")
@@ -66,7 +66,7 @@ public class TypicalPersons {
             .withRemark(EMPTY_REMARK).build();
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).
+            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
             .withJob("Teacher")
             .withIncome(999999999)
             .withTiers(VALID_TIER_REJECT)

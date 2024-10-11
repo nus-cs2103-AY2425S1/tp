@@ -114,7 +114,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Income.MESSAGE_CONSTRAINTS);
         }
         final Income modelIncome = new Income(Integer.parseInt(incomeString));
-      
+
         if (tagged == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Tier.class.getSimpleName()));
         }

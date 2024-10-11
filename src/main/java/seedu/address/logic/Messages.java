@@ -49,7 +49,6 @@ public class Messages {
                 .append(person.getIncome())
                 .append("; Tier: ")
                 .append(person.getTier());
-                .forEach(builder::append);
         return builder.toString();
     }
 
