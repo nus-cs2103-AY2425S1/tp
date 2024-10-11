@@ -128,6 +128,24 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    //=========== Sorting Methods ===========================================================================
+
+    /**
+     * Sorts the persons in the address book in ascending order based on their names.
+     */
+    public void sortPersonsAsc() {
+        addressBook.sortPersonsAsc(); // Call the sortPersonsAsc method from AddressBook
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS); // Refresh the filtered list after sorting
+    }
+
+    /**
+     * Sorts the persons in the address book in descending order based on their names.
+     */
+    public void sortPersonsDesc() {
+        addressBook.sortPersonsDesc(); // Call the sortPersonsDesc method from AddressBook
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS); // Refresh the filtered list after sorting
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

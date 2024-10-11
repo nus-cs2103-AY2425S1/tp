@@ -63,6 +63,10 @@ public class Person {
         return name;
     }
 
+    public String getFullName() {
+        return this.getName().getFullName();
+    }
+
     public Phone getPhone() {
         return phone;
     }
