@@ -3,6 +3,7 @@ package seedu.address.model.event;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.vendor.Vendor;
 
 /**
  * Represents an Event in EventTory.
@@ -30,6 +31,19 @@ public class Event {
 
     public Date getDate() {
         return date;
+    }
+
+    /**
+     * Returns true if both events have the same name.
+     * This defines a weaker notion of equality between two events.
+     */
+    public boolean isSameEvent(Event otherEvent) {
+        if (otherEvent == this) {
+            return true;
+        }
+
+        return otherEvent != null
+                && otherEvent.getName().equals(getName());
     }
 
     @Override
