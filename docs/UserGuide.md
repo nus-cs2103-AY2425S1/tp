@@ -21,7 +21,7 @@ MATER is a **desktop app for managing clients and their cars, optimized for use 
 
 3. Copy the file to the folder you want to use as the _home folder_ for your MATER.
 
-4. Open a command terminal, cd into the folder you put the jar file in, and use the `java -jar mater.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar mater.jar` command to run the application.<br>
    A GUI similar to the one below should appear in a few seconds. Note how the app contains some sample data.<br><br>
    ![Ui](images/Ui.png)
 
