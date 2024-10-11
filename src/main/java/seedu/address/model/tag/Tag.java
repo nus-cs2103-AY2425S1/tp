@@ -27,7 +27,6 @@ public class Tag {
         dietaryRestrictionsMappings.put("sa", "Soy Allergy");
         dietaryRestrictionsMappings.put("p", "Pescatarian");
 
-        // Initialize the ALL_MAPPINGS constant
         StringBuilder mappingsBuilder = new StringBuilder("Current Dietary Restriction Tags:\n");
         for (Map.Entry<String, String> entry : dietaryRestrictionsMappings.entrySet()) {
             mappingsBuilder.append(entry.getKey()).append(" -> ").append(entry.getValue()).append("\n");
@@ -95,6 +94,14 @@ public class Tag {
      */
     public static HashMap<String, String> getDietaryRestrictionsMappings() {
         return dietaryRestrictionsMappings;
+    }
+
+    /**
+     * @param key is the shortcut users would want to use for dietary restriction
+     * @param value is the actual value to be displayed
+     */
+    public static void addDietaryRestrictionMapping(String key, String value) {
+        dietaryRestrictionsMappings.put(key, value);
     }
 
 }
