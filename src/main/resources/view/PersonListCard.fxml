@@ -28,7 +28,7 @@
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
       <HBox>
-        <Label id="phoneNumberTitle" styleClass = "cell_small_label" text = "Phone no: " />
+        <Label id="phoneNumberTitle" styleClass="cell_small_label" text="Phone no: " />
         <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       </HBox>
       <FlowPane fx:id="tags" />
