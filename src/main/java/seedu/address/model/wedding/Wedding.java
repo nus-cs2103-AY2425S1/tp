@@ -8,7 +8,7 @@ import static java.util.Objects.requireNonNull;
  */
 public class Wedding {
     public static final String MESSAGE_CONSTRAINTS =
-            "Wedding names should only contain alphanumeric characters, spaces or apostrophes,"
+            "Wedding names should only contain alphanumeric characters, spaces or apostrophes, "
                     + "and they should not be blank.";
 
     /**

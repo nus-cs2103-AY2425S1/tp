@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class WeddingName {
     public static final String MESSAGE_CONSTRAINTS =
-            "Wedding names should only contain alphanumeric characters, spaces or apostrophes,"
+            "Wedding names should only contain alphanumeric characters, spaces or apostrophes, "
                     + "and they should not be blank.";
 
     /**
