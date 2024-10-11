@@ -18,7 +18,7 @@ public class FilterMeetUpCommand extends Command {
             + "Parameters: KEYWORD yyyy-mm-dd\n"
             + "Example: " + COMMAND_WORD + "2022-12-12";
 
-    
+
     // public static List<MeetUp> getMeetUpList(Schedule schedule) {
     //     for (int i = 0; )
     // }
