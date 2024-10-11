@@ -92,6 +92,7 @@ public class CommandTestUtil {
                                                       + VALID_APPOINTMENT_TIMEPERIOD_PHYSIO;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
+    public static final String INVALID_NRIC = "S1234567&"; // non-alphanumeric characters not allowed in NRIC
     public static final String INVALID_NRIC_DESC = " " + PREFIX_NRIC + "S1234567"; // missing last character
     public static final String INVALID_DOB_FORMAT_DESC = " " + PREFIX_DOB + "2000/02/02"; // '/' not allowed in DOB
     public static final String INVALID_DOB_VALUE_DESC = " " + PREFIX_DOB + LocalDate.now().plusDays(2)
