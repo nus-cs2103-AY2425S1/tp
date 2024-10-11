@@ -320,7 +320,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Use cases
 
 (For all use cases below, the **System** is  `CCAConnect` and the **Actor** is the `user`, unless specified otherwise)
-<br></br>
+<br>
 **Use case: UC01 - View John Doe’s Contact Information**
 **Actor: User**
 **MSS**
@@ -337,7 +337,7 @@ Use Case ends.
   * Steps 1a1 repeats till the user enters a valid and existing telegram handle for the command.
   * Use case resumes from step 2.
 
-<br></br>
+<br>
 **Use case: UC02 - Delete a contact**
 **Actor: User**
 **MSS**
@@ -358,7 +358,7 @@ Use case ends.
   * 3a1. CCAConnect shows an error message.
   * Use case resumes at step 2.
 
-<br></br>
+<br>
 **Use case: UC03 - Add a contact**
 **Actor: User**
 **MSS**
@@ -378,7 +378,7 @@ Use case ends.
     * 3b1. System shows user an appropriate error message.
     * Use case ends.
 
-<br></br>
+<br>
 **Use case: UC04 - Search for a contact**
 **Actor: User**
 **MSS**
@@ -397,7 +397,7 @@ Use case ends.
     * 2a1. System displays an empty list to the user.
     * Use case ends.
    
-<br></br>
+<br>
 **Use case: UC05 - List all contacts**
 **Actor: User**
 **MSS**
@@ -414,7 +414,7 @@ Use Case ends.
   * Steps 1a1 is repeated till the user enters a valid list command.
   * Use case resumes from step 2.
 
-<br></br>
+<br>
 **Use case: UC06 - View all commands**
 **Actor: User**
 **MSS**
@@ -424,10 +424,10 @@ Use Case ends.
 
 Use case ends.
 
-<br></br>   
+<br>
 *{More to be added}*
-<br></br>
-    
+<br>
+
 ### Non-Functional Requirements
 
 1. The system should work on any mainstream OS as long as it has Java `17` or above installed. This primarily applies for windows, macos and linux
