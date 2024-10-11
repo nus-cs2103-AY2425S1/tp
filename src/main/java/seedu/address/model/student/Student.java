@@ -10,7 +10,7 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Attendance;
+import seedu.address.model.person.PersonAttendance;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -27,7 +27,7 @@ public class Student extends Person {
     private static final Address DUMMY_ADDRESS = new Address("dummy address");
     private static final Set<Tag> DUMMY_TAG = new HashSet<>();
 
-    private final Map<LocalDate, Attendance> attendanceRecords = new HashMap<>();
+    private final Map<LocalDate, PersonAttendance> attendanceRecords = new HashMap<>();
 
 
     // Identity fields
@@ -103,11 +103,11 @@ public class Student extends Person {
      * @throws IllegalArgumentException if the provided status is invalid.
      */
     public void markAttendance(LocalDate date, String status) {
-        Attendance attendance = new Attendance(status);
+        PersonAttendance attendance = new PersonAttendance(status);
         attendanceRecords.put(date, attendance);
     }
 
-    public Attendance getAttendance(LocalDate date) {
+    public PersonAttendance getAttendance(LocalDate date) {
         return attendanceRecords.get(date);
     }
 }

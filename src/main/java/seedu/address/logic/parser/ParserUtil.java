@@ -13,10 +13,11 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Attendance;
+import seedu.address.model.person.PersonAttendance;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.student.Attendance;
 import seedu.address.model.student.StudentNumber;
 import seedu.address.model.student.TutorialGroup;
 import seedu.address.model.tag.Tag;
@@ -183,7 +184,7 @@ public class ParserUtil {
     public static Attendance parseAttendance(String status) throws ParseException {
         requireNonNull(status);
         String trimmedStatus = status.trim();
-        if (!Attendance.isValidAttendance(trimmedStatus)) {
+        if (!PersonAttendance.isValidAttendance(trimmedStatus)) {
             throw new ParseException("Invalid attendance status. It must be either 'present' or 'absent'.");
         }
         return new Attendance(trimmedStatus);

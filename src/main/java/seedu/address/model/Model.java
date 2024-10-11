@@ -5,7 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.Attendance;
+import seedu.address.model.person.PersonAttendance;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.student.Student;
@@ -16,6 +16,7 @@ import seedu.address.model.student.Student;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Student> PREDICATE_SHOW_ALL_STUDENTS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -90,9 +91,51 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-    void markAttendance(Person person, LocalDate date, Attendance attendance);
+    //=========== Student ================================================================================
+
+    void markAttendance(Person person, LocalDate date, PersonAttendance attendance);
 
     Student getStudentByName(Name name);
+
+    /**
+     * Returns true if a student with the same identity as {@code student} exists in the address book.
+     */
+    boolean hasStudent(Student student);
+
+    /**
+     * Deletes the given student.
+     * The student must exist in the address book.
+     */
+
+    void deleteStudent(Student target);
+
+    /**
+     * Adds the given student.
+     * {@code student} must not already exist in the address book.
+     */
+
+    void addStudent(Student student);
+
+    /**
+     * Replaces the given student {@code target} with {@code editedStudent}.
+     * {@code target} must exist in the address book.
+     * The student identity of {@code editedStudent} must not be the same as another existing student in the address book.
+     */
+
+    void setStudent(Student target, Student editedStudent);
+
+    /** Returns an unmodifiable view of the filtered student list */
+
+    ObservableList<Student> getFilteredStudentList();
+
+    /**
+     * Updates the filter of the filtered student list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+
+    void updateFilteredStudentList(Predicate<Student> predicate);
+
+
 
 
 }

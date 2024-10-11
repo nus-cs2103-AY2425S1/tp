@@ -22,7 +22,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.person.Attendance;
+import seedu.address.model.person.PersonAttendance;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.student.Student;
@@ -156,7 +156,7 @@ public class AddStudentCommandTest {
         }
 
         @Override
-        public void markAttendance(Person person, LocalDate date, Attendance attendance) {
+        public void markAttendance(Person person, LocalDate date, PersonAttendance attendance) {
 
         }
 

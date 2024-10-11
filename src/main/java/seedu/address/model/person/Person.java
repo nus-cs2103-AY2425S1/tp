@@ -29,7 +29,7 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
-    private final Map<LocalDate, Attendance> attendanceRecords = new HashMap<>();
+    private final Map<LocalDate, PersonAttendance> attendanceRecords = new HashMap<>();
 
     /**
      * Every field must be present and not null.
@@ -74,11 +74,11 @@ public class Person {
      * @throws IllegalArgumentException if the provided status is invalid.
      */
     public void markAttendance(LocalDate date, String status) {
-        Attendance attendance = new Attendance(status);
+        PersonAttendance attendance = new PersonAttendance(status);
         attendanceRecords.put(date, attendance);
     }
 
-    public Attendance getAttendance(LocalDate date) {
+    public PersonAttendance getAttendance(LocalDate date) {
         return attendanceRecords.get(date);
     }
     /**
@@ -137,7 +137,7 @@ public class Person {
 
     public ByteBuffer getAttendanceRecords() {
         ByteBuffer buffer = ByteBuffer.allocate(attendanceRecords.size() * 5);
-        for (Map.Entry<LocalDate, Attendance> entry : attendanceRecords.entrySet()) {
+        for (Map.Entry<LocalDate, PersonAttendance> entry : attendanceRecords.entrySet()) {
             buffer.putLong(entry.getKey().toEpochDay());
             buffer.put(entry.getValue().toString().getBytes());
         }

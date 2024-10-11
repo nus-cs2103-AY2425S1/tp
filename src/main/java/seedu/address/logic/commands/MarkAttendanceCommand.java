@@ -4,15 +4,19 @@ import java.time.LocalDate;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Attendance;
+import seedu.address.model.person.PersonAttendance;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.student.Attendance;
+import seedu.address.model.student.StudentName;
+import seedu.address.model.student.Student;
+
 
 /**
  * Marks the attendance of a student for a specific date.
  */
 public class MarkAttendanceCommand extends Command {
-    public static final String COMMAND_WORD = "markAttendance";
+    public static final String COMMAND_WORD = "mark";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the attendance of a student for a specific date.\n"
@@ -45,7 +49,7 @@ public class MarkAttendanceCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         // Find the student by name
-        Person student = model.getPersonByName(name);
+        Student student = model.getStudentByName(name);
 
         if (student == null) {
             throw new CommandException("Student not found: " + name);
