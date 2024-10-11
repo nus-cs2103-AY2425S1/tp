@@ -62,8 +62,7 @@ public class PersonCard extends UiPart<Region> {
         if (remarkValue != null && !remarkValue.trim().isEmpty()) {
             remark.setText(remarkValue);
             remark.setManaged(true);
-        }
-        else {
+        } else {
             remark.setManaged(false);
         }
     }
