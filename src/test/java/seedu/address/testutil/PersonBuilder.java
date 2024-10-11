@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.game.Game;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -26,6 +27,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private Set<Game> games;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -36,6 +38,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        games = new HashSet<>();
     }
 
     /**
@@ -47,6 +50,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+        games = new HashSet<>(personToCopy.getGames());
     }
 
     /**
@@ -65,6 +69,13 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code games} into a {@code Set<Game>} and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withGames(String ... games) {
+        this.games = SampleDataUtil.getGameSet(games);
+        return this;
+    }
     /**
      * Sets the {@code Address} of the {@code Person} that we are building.
      */
@@ -90,7 +101,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, phone, email, address, tags, games);
     }
 
 }

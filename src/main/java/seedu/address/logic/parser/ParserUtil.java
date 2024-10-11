@@ -9,6 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.game.Game;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -120,5 +121,31 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String game} into a {@code Game}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code game} is invalid.
+     */
+    public static Game parseGame(String game) throws ParseException {
+        requireNonNull(game);
+        String trimmedGame = game.trim();
+        if (!Tag.isValidTagName(trimmedGame)) {
+            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+        }
+        return new Game(trimmedGame);
+    }
+    /**
+     * Parses {@code Collection<String> games} into a {@code Set<Game>}.
+     */
+    public static Set<Game> parseGames(Collection<String> games) throws ParseException {
+        requireNonNull(games);
+        final Set<Game> gameSet = new HashSet<>();
+        for (String gameName : games) {
+            gameSet.add(parseGame(gameName));
+        }
+        return gameSet;
     }
 }

@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Game in the address book.
- * Guarantees: immutable; name is valid as declared in {@link #isValidgameName(String)}
+ * Guarantees: immutable; name is valid as declared in {@link #isValidGameName(String)}
  */
 public class Game {
 
@@ -27,14 +27,14 @@ public class Game {
      */
     public Game(String gameName) {
         requireNonNull(gameName);
-        checkArgument(isValidgameName(gameName), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidGameName(gameName), MESSAGE_CONSTRAINTS);
         this.gameName = gameName;
     }
 
     /**
      * Returns true if a given string is a valid Game name.
      */
-    public static boolean isValidgameName(String test) {
+    public static boolean isValidGameName(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
