@@ -1,14 +1,13 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 
-import seedu.address.logic.commands.AddStudentCommand;
+import java.util.stream.Stream;
+
 import seedu.address.logic.commands.DeleteStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.StudentNumber;
-
-import java.util.stream.Stream;
 
 /**
  * Parses input arguments and creates a new DeleteStudentCommand object
