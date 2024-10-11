@@ -62,6 +62,7 @@ public interface Model {
 
     /**
      * Returns true if a person with similar identity as {@code person} exists in the address book.
+     * The conditions for similarity are defined in {@code Person::isSimilarPerson}.
      *
      * @param person Person to check
      * @return True if a similar person exists, false otherwise
@@ -71,6 +72,7 @@ public interface Model {
     /**
      * Returns true if a person with similar identity as {@code person} exists in the address book,
      * possibly excluding one person from the check.
+     * The conditions for similarity are defined in {@code Person::isSimilarPerson}.
      *
      * @param person Person to check
      * @param exclude Person to exclude from the check (can be null)

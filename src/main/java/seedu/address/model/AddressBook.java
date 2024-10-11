@@ -69,6 +69,10 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Returns true if a person with a similar identity as {@code person} exists in the address book.
+     * The conditions for similarity are defined in {@code Person::isSimilarPerson}.
+     *
+     * @param person Person to check
+     * @return True if a similar person exists, false otherwise
      */
     public boolean hasSimilarPerson(Person person) {
         return hasSimilarPerson(person, null);
@@ -77,6 +81,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns true if a person with a similar identity as {@code person} exists in the address book,
      * excluding one person.
+     * The conditions for similarity are defined in {@code Person::isSimilarPerson}.
      *
      * @param person Person to check
      * @param exclude Person to exclude from the check (can be null)
