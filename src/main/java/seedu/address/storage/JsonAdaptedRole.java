@@ -44,9 +44,6 @@ public class JsonAdaptedRole {
      * @throws IllegalValueException if there were any data constraints violated in the adapted role.
      */
     public Role toModelType() throws InvalidRoleException {
-        if (!Role.isValidRoleName(roleName)) {
-            throw new InvalidRoleException();
-        }
         try {
             return RoleHandler.getRole(roleName);
         } catch (Exception e) {
