@@ -5,41 +5,42 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ClientHub;
+import seedu.address.model.ReadOnlyClientHub;
 
 /**
- * Represents a storage for {@link seedu.address.model.AddressBook}.
+ * Represents a storage for {@link ClientHub}.
  */
-public interface AddressBookStorage {
+public interface ClientHubStorage {
 
     /**
      * Returns the file path of the data file.
      */
-    Path getAddressBookFilePath();
+    Path getClientHubFilePath();
 
     /**
-     * Returns AddressBook data as a {@link ReadOnlyAddressBook}.
+     * Returns ClientHub data as a {@link ReadOnlyClientHub}.
      * Returns {@code Optional.empty()} if storage file is not found.
      *
      * @throws DataLoadingException if loading the data from storage failed.
      */
-    Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException;
+    Optional<ReadOnlyClientHub> readClientHub() throws DataLoadingException;
 
     /**
-     * @see #getAddressBookFilePath()
+     * @see #getClientHubFilePath()
      */
-    Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataLoadingException;
+    Optional<ReadOnlyClientHub> readClientHub(Path filePath) throws DataLoadingException;
 
     /**
-     * Saves the given {@link ReadOnlyAddressBook} to the storage.
-     * @param addressBook cannot be null.
+     * Saves the given {@link ReadOnlyClientHub} to the storage.
+     * @param clientHub cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
+    void saveClientHub(ReadOnlyClientHub clientHub) throws IOException;
 
     /**
-     * @see #saveAddressBook(ReadOnlyAddressBook)
+     * @see #saveClientHub(ReadOnlyClientHub) (ReadOnlyClientHub)
      */
-    void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException;
+    void saveClientHub(ReadOnlyClientHub clientHub, Path filePath) throws IOException;
 
 }

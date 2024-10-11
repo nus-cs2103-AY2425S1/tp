@@ -15,44 +15,44 @@ import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.ReadOnlyClientHub;
 
 /**
- * A class to access AddressBook data stored as a json file on the hard disk.
+ * A class to access ClientHub data stored as a json file on the hard disk.
  */
-public class JsonAddressBookStorage implements ClientHubStorage {
+public class JsonClientHubStorage implements ClientHubStorage {
 
-    private static final Logger logger = LogsCenter.getLogger(JsonAddressBookStorage.class);
+    private static final Logger logger = LogsCenter.getLogger(JsonClientHubStorage.class);
 
     private Path filePath;
 
-    public JsonAddressBookStorage(Path filePath) {
+    public JsonClientHubStorage(Path filePath) {
         this.filePath = filePath;
     }
 
-    public Path getAddressBookFilePath() {
+    public Path getClientHubFilePath() {
         return filePath;
     }
 
     @Override
-    public Optional<ReadOnlyClientHub> readAddressBook() throws DataLoadingException {
-        return readAddressBook(filePath);
+    public Optional<ReadOnlyClientHub> readClientHub() throws DataLoadingException {
+        return readClientHub(filePath);
     }
 
     /**
-     * Similar to {@link #readAddressBook()}.
+     * Similar to {@link #readClientHub()}.
      *
      * @param filePath location of the data. Cannot be null.
      * @throws DataLoadingException if loading the data from storage failed.
      */
-    public Optional<ReadOnlyClientHub> readAddressBook(Path filePath) throws DataLoadingException {
+    public Optional<ReadOnlyClientHub> readClientHub(Path filePath) throws DataLoadingException {
         requireNonNull(filePath);
 
-        Optional<JsonSerializableAddressBook> jsonAddressBook = JsonUtil.readJsonFile(
-                filePath, JsonSerializableAddressBook.class);
-        if (!jsonAddressBook.isPresent()) {
+        Optional<JsonSerializableClientHub> jsonClientHub = JsonUtil.readJsonFile(
+                filePath, JsonSerializableClientHub.class);
+        if (!jsonClientHub.isPresent()) {
             return Optional.empty();
         }
 
         try {
-            return Optional.of(jsonAddressBook.get().toModelType());
+            return Optional.of(jsonClientHub.get().toModelType());
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataLoadingException(ive);
@@ -60,21 +60,21 @@ public class JsonAddressBookStorage implements ClientHubStorage {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyClientHub addressBook) throws IOException {
-        saveAddressBook(addressBook, filePath);
+    public void saveClientHub(ReadOnlyClientHub clientHub) throws IOException {
+        saveClientHub(clientHub, filePath);
     }
 
     /**
-     * Similar to {@link #saveAddressBook(ReadOnlyClientHub)}.
+     * Similar to {@link #saveClientHub(ReadOnlyClientHub)}.
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveAddressBook(ReadOnlyClientHub addressBook, Path filePath) throws IOException {
-        requireNonNull(addressBook);
+    public void saveClientHub(ReadOnlyClientHub clientHub, Path filePath) throws IOException {
+        requireNonNull(clientHub);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableClientHub(clientHub), filePath);
     }
 
 }
