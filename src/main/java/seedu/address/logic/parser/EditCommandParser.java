@@ -35,6 +35,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
 
         Index index;
+        //need to add PREFIX_ROLE condition in code block below
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
