@@ -46,9 +46,11 @@ public class Messages {
                 .append("; Department: ")
                 .append(person.getDepartment())
                 .append("; Role: ")
-                .append(person.getRole())
-                .append("; Contract End Date: ")
-                .append(person.getContractEndDate());
+                .append(person.getRole());
+        if (person.isEmployee()) {
+                builder.append("; Contract End Date: ")
+                        .append(person.getContractEndDate());
+        }
         return builder.toString();
     }
 

@@ -6,6 +6,7 @@
     "address": "4th street",
     "department": "IT",
     "role": "SWE",
-    "contractEndDate": "2024-10-09"
+    "contractEndDate": "2024-10-09",
+    "isEmployee": true
   } ]
 }

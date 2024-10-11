@@ -10,30 +10,22 @@ import java.time.format.DateTimeParseException;
  * Represents a Person's Contract End Date in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
-public class ContractEndDate {
+public abstract class ContractEndDate {
+
+    public String value;
+
+    private static final ContractEndDate EMPTY_CONTRACT_END_DATE = new EmptyContractEndDate();
 
     public static final String MESSAGE_CONSTRAINTS =
             "Contract End Date should only contain numeric characters and dashes in the format 'YYYY-MM-DD', and it"
                     + " should not be blank";
 
-    /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
+    public static ContractEndDate empty() {
+        return EMPTY_CONTRACT_END_DATE;
+    }
 
-    public final LocalDate contractEndDate;
-    public final String value;
-
-    /**
-     * Constructs a {@code ContractEndDate}.
-     *
-     * @param date A valid date.
-     */
-    public ContractEndDate(String date) {
-        requireNonNull(date);
-        checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
-        this.contractEndDate = convertStringToDate(date);
-        this.value = date;
+    public static ContractEndDate of(String date) {
+        return new FilledContractEndDate(date);
     }
 
     /**
@@ -55,29 +47,65 @@ public class ContractEndDate {
         return LocalDate.parse(date);
     }
 
-    @Override
-    public String toString() {
-        return contractEndDate.toString();
-    }
+    static class EmptyContractEndDate extends ContractEndDate {
 
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
+        /**
+         * Constructs an empty {@code ContractEndDate}.
+         */
+        public EmptyContractEndDate() {
+            value = "";
         }
 
-        // instanceof handles nulls
-        if (!(other instanceof ContractEndDate)) {
-            return false;
+        @Override
+        public boolean equals(Object t) {
+            return this == t;
         }
 
-        ContractEndDate otherContractEndDate = (ContractEndDate) other;
-        return contractEndDate.equals(otherContractEndDate.contractEndDate);
+        @Override
+        public String toString() {
+            return "";
+        }
     }
 
-    @Override
-    public int hashCode() {
-        return contractEndDate.hashCode();
-    }
+    static class FilledContractEndDate extends ContractEndDate {
 
+        public final LocalDate contractEndDate;
+
+        /**
+         * Constructs a {@code ContractEndDate}.
+         *
+         * @param date A valid date.
+         */
+        public FilledContractEndDate(String date) {
+            requireNonNull(date);
+            checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
+            this.contractEndDate = convertStringToDate(date);
+            this.value = date;
+        }
+
+        @Override
+        public String toString() {
+            return contractEndDate.toString();
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (other == this) {
+                return true;
+            }
+
+            // instanceof handles nulls
+            if (!(other instanceof FilledContractEndDate)) {
+                return false;
+            }
+
+            FilledContractEndDate otherContractEndDate = (FilledContractEndDate) other;
+            return contractEndDate.equals(otherContractEndDate.contractEndDate);
+        }
+
+        @Override
+        public int hashCode() {
+            return contractEndDate.hashCode();
+        }
+    }
 }

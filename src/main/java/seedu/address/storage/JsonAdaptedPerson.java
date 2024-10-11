@@ -27,6 +27,7 @@ class JsonAdaptedPerson {
     private final String department;
     private final String role;
     private final String contractEndDate;
+    private final boolean isEmployee;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -35,7 +36,8 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("department") String department, @JsonProperty("role") String role,
-                             @JsonProperty("contractEndDate") String contractEndDate) {
+                             @JsonProperty("contractEndDate") String contractEndDate,
+                             @JsonProperty("isEmployee") boolean isEmployee) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -43,6 +45,7 @@ class JsonAdaptedPerson {
         this.department = department;
         this.role = role;
         this.contractEndDate = contractEndDate;
+        this.isEmployee = isEmployee;
     }
 
     /**
@@ -56,6 +59,8 @@ class JsonAdaptedPerson {
         department = source.getDepartment().value;
         role = source.getRole().value;
         contractEndDate = source.getContractEndDate().value;
+        isEmployee = source.isEmployee();
+
     }
 
     /**
@@ -114,17 +119,20 @@ class JsonAdaptedPerson {
         }
         final Role modelRole = new Role(role);
 
-        if (contractEndDate == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    ContractEndDate.class.getSimpleName()));
+        ContractEndDate modelContractEndDate = ContractEndDate.empty();
+        if (isEmployee) {
+            if (contractEndDate == null) {
+                throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                        ContractEndDate.class.getSimpleName()));
+            }
+            if (!ContractEndDate.isValidDate(contractEndDate)) {
+                throw new IllegalValueException(ContractEndDate.MESSAGE_CONSTRAINTS);
+            }
+            modelContractEndDate = ContractEndDate.of(contractEndDate);
         }
-        if (!ContractEndDate.isValidDate(contractEndDate)) {
-            throw new IllegalValueException(ContractEndDate.MESSAGE_CONSTRAINTS);
-        }
-        final ContractEndDate modelContractEndDate = new ContractEndDate(contractEndDate);
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelDepartment, modelRole,
-                modelContractEndDate);
+                modelContractEndDate, isEmployee);
     }
 
 }

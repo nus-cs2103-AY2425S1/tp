@@ -7,7 +7,8 @@
     "address" : "123, Jurong West Ave 6, #08-111",
     "department": "IT",
     "role": "SWE",
-    "contractEndDate": "2024-10-09"
+    "contractEndDate": "2024-10-09",
+    "isEmployee": true
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
@@ -15,7 +16,8 @@
     "address" : "311, Clementi Ave 2, #02-25",
     "department": "IT",
     "role": "SWE",
-    "contractEndDate": "2024-10-09"
+    "contractEndDate": "2024-10-09",
+    "isEmployee": true
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
@@ -23,7 +25,8 @@
     "address" : "wall street",
     "department": "IT",
     "role": "SWE",
-    "contractEndDate": "2024-10-09"
+    "contractEndDate": "2024-10-09",
+    "isEmployee": true
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
@@ -31,7 +34,8 @@
     "address" : "10th street",
     "department": "IT",
     "role": "SWE",
-    "contractEndDate": "2024-10-09"
+    "contractEndDate": "2024-10-09",
+    "isEmployee": true
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
@@ -39,7 +43,8 @@
     "address" : "michegan ave",
     "department": "IT",
     "role": "SWE",
-    "contractEndDate": "2024-10-09"
+    "contractEndDate": "2024-10-09",
+    "isEmployee": true
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
@@ -47,7 +52,8 @@
     "address" : "little tokyo",
     "department": "IT",
     "role": "SWE",
-    "contractEndDate": "2024-10-09"
+    "contractEndDate": "2024-10-09",
+    "isEmployee": true
   }, {
     "name" : "George Best",
     "phone" : "9482442",
@@ -55,6 +61,7 @@
     "address" : "4th street",
     "department": "IT",
     "role": "SWE",
-    "contractEndDate": "2024-10-09"
+    "contractEndDate": "2024-10-09",
+    "isEmployee": true
   } ]
 }
