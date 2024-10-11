@@ -41,17 +41,35 @@ public class FindCommandParser implements Parser<FindCommand> {
                 .filter(keyword -> !isNumeric(keyword)) // Only keep non-numeric keywords ie names
                 .collect(Collectors.toList());
 
-        Predicate<Person> namePredicate = nameKeywords.isEmpty()
-                ? person -> false // no name keywords, hence ignore search
-                : new NameContainsKeywordsPredicate(nameKeywords);
+//        Predicate<Person> namePredicate = nameKeywords.isEmpty()
+//                ? person -> false // no name keywords, hence ignore search
+//                : new NameContainsKeywordsPredicate(nameKeywords);
+//
+//        Predicate<Person> phonePredicate = phoneKeywords.isEmpty()
+//                ? person -> false // no phone keywords, hence ignore search
+//                : new PhoneContainsKeywordsPredicate(phoneKeywords);
+        NameContainsKeywordsPredicate namePredicate = new NameContainsKeywordsPredicate(nameKeywords);
+        PhoneContainsKeywordsPredicate phonePredicate = new PhoneContainsKeywordsPredicate(phoneKeywords);
 
-        Predicate<Person> phonePredicate = phoneKeywords.isEmpty()
-                ? person -> false // no phone keywords, hence ignore search
-                : new PhoneContainsKeywordsPredicate(phoneKeywords);
+        if (!nameKeywords.isEmpty() && !phoneKeywords.isEmpty()) {
+            return new FindCommand(namePredicate.and(phonePredicate)); // Explicit combination
+        } else if (!nameKeywords.isEmpty()) {
+            return new FindCommand(namePredicate);  // Only names
+        } else {
+            return new FindCommand(phonePredicate);  // Only phones
+        }
+//
+//        Predicate<Person> combinedPredicate = namePredicate.or(phonePredicate);
+//
+//        return new FindCommand(combinedPredicate);
 
-        Predicate<Person> combinedPredicate = namePredicate.or(phonePredicate);
-
-        return new FindCommand(combinedPredicate);
+//        // Check if all keywords are numeric (for phone search)
+//        if (Arrays.stream(keywords).allMatch(this::isNumeric)) {
+//            return new FindCommand(new PhoneContainsKeywordsPredicate(Arrays.asList(keywords)));
+//        } else {
+//            // Otherwise, treat it as a name search
+//            return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+//            }
     }
 
     /**

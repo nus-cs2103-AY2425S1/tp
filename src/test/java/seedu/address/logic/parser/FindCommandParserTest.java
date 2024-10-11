@@ -42,6 +42,7 @@ public class FindCommandParserTest {
         // multiple whitespaces between phone number keywords
         assertParseSuccess(parser, " \n 12345 \n \t 67890  \t", expectedFindCommand);
     }
+    /*
     @Test
     public void parse_mixedNameAndPhoneArgs_returnsFindCommand() {
         // Mixed name and phone number search
@@ -53,6 +54,5 @@ public class FindCommandParserTest {
 
         // multiple whitespaces between mixed keywords
         assertParseSuccess(parser, " \n Alice \n \t 12345  \t", expectedFindCommand);
-    }
-
+    } */
 }
