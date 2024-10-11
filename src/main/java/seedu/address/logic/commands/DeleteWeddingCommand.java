@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
 
 import java.util.List;
 
@@ -19,7 +20,8 @@ public class DeleteWeddingCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the wedding identified by the wedding name.\n"
             + "Parameters: WEDDING_NAME (must exist in the Wedlinker)\n"
-            + "Example: " + COMMAND_WORD + " Timothy's Wedding";
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_WEDDING + " Timothy's Wedding";
 
     public static final String MESSAGE_DELETE_WEDDING_SUCCESS = "Deleted Wedding: %1$s";
     public static final String MESSAGE_DELETE_WEDDING_FAILURE_STILL_USED = "The Wedding: %1$s is still used";

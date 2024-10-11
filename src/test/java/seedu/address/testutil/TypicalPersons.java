@@ -25,7 +25,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_NEIGHBOR;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PHOTOGRAPHER;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_WEDDING_NAME;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_WEDDING_AMY;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -86,7 +86,7 @@ public class TypicalPersons {
     // Manually added Tags
     public static final Tag FLORIST = new Tag(new TagName(VALID_TAG_FLORIST));
     public static final Tag PHOTOGRAPHER = new Tag(new TagName(VALID_TAG_PHOTOGRAPHER));
-    public static final Wedding WEDDING_ONE = new Wedding(new WeddingName(VALID_WEDDING_NAME));
+    public static final Wedding WEDDING_ONE = new Wedding(new WeddingName(VALID_WEDDING_AMY));
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

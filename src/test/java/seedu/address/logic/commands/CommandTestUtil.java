@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -53,7 +54,7 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FLORIST = "florist";
     public static final String VALID_TAG_NEIGHBOR = "neighbor";
     public static final String VALID_TAG_PHOTOGRAPHER = "photographer";
-    public static final String VALID_WEDDING_NAME = "Wedding 1";
+    public static final String VALID_WEDDING_AMY = "Amy's Wedding";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -79,6 +80,7 @@ public class CommandTestUtil {
     public static final String TAG_DESC_NEIGHBOR = " " + PREFIX_TAG + VALID_TAG_NEIGHBOR;
     public static final String TAG_DESC_FLORIST = " " + PREFIX_TAG + VALID_TAG_FLORIST;
     public static final String TAG_DESC_PHOTOGRAPHER = " " + PREFIX_TAG + VALID_TAG_FLORIST;
+    public static final String WEDDING_DESC_AMY = " " + PREFIX_WEDDING + VALID_WEDDING_AMY;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -86,6 +88,7 @@ public class CommandTestUtil {
     public static final String INVALID_PHONE_DESC_TOO_SHORT = " " + PREFIX_PHONE + "91";
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_WEDDING_DESC = " " + PREFIX_WEDDING + "Amy's_Wedding"; //'_' not allowed
     public static final String BLANK_ADDRESS_DESC = " " + PREFIX_ADDRESS + VALID_ADDRESS_BLANK;
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
