@@ -53,6 +53,14 @@ public class AssignPiecesCommandTest {
                 commandResult.getFeedbackToUser());
     }
     @Test
+    public void execute_indexOutOfBounds_failure() {
+        Index outOfBoundsIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
+        AssignPiecesCommand command = new AssignPiecesCommand(outOfBoundsIndex, VALID_PIANO_PIECES);
+
+        assertThrows(CommandException.class,
+                Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX, () -> command.execute(model));
+    }
+    @Test
     public void execute_duplicatePianoPiece_throwsCommandException() throws Exception {
         AssignPiecesCommand setupCommand = new AssignPiecesCommand(VALID_INDEX, VALID_PIANO_PIECES);
         setupCommand.execute(model);

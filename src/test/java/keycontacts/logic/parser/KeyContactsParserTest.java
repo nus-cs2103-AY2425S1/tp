@@ -2,6 +2,7 @@ package keycontacts.logic.parser;
 
 import static keycontacts.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static keycontacts.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static keycontacts.logic.parser.CliSyntax.PREFIX_PIECE_NAME;
 import static keycontacts.testutil.Assert.assertThrows;
 import static keycontacts.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -13,7 +14,9 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import keycontacts.commons.core.index.Index;
 import keycontacts.logic.commands.AddCommand;
+import keycontacts.logic.commands.AssignPiecesCommand;
 import keycontacts.logic.commands.ClearCommand;
 import keycontacts.logic.commands.DeleteCommand;
 import keycontacts.logic.commands.EditCommand;
@@ -25,6 +28,7 @@ import keycontacts.logic.commands.ListCommand;
 import keycontacts.logic.parser.exceptions.ParseException;
 import keycontacts.model.student.NameContainsKeywordsPredicate;
 import keycontacts.model.student.Student;
+import keycontacts.model.util.SampleDataUtil;
 import keycontacts.testutil.EditStudentDescriptorBuilder;
 import keycontacts.testutil.StudentBuilder;
 import keycontacts.testutil.StudentUtil;
@@ -86,6 +90,22 @@ public class KeyContactsParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_assign() throws Exception {
+        String[] pianoPieces = new String[] {"Moonlight Sonata", "Clair de Lune", "Nocturne Op. 9 No. 2"};
+        String pianoPieceArguments = Arrays.stream(pianoPieces)
+                .map(piece -> PREFIX_PIECE_NAME + piece)
+                .collect(Collectors.joining(" "));
+        Index index = Index.fromOneBased(3);
+        AssignPiecesCommand command = (AssignPiecesCommand) parser.parseCommand(
+                AssignPiecesCommand.COMMAND_WORD + " " + index.getOneBased() + " " + pianoPieceArguments);
+
+        AssignPiecesCommand expectedCommand = new AssignPiecesCommand(
+                index,
+                SampleDataUtil.getPianoPieceSet(pianoPieces));
+        assertEquals(expectedCommand, command);
     }
 
     @Test
