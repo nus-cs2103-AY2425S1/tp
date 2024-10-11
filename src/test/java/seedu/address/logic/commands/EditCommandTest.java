@@ -34,26 +34,7 @@ import seedu.address.testutil.PersonBuilder;
 public class EditCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-//    @Test
-//    public void execute_allFieldsSpecifiedUnfilteredList2_success() {
-//        Person editedPerson = new PersonBuilder().build();
-//        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
-//        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
-//
-//        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
-//
-//        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-//        Person p = model.getFilteredPersonList().get(0);
-//        System.out.println(p);
-//        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
-//
-//        // Log the state of both models for comparison
-//        String expected = expectedModel.getFilteredPersonList().toString();
-//        String actual = model.getFilteredPersonList().toString();
-//
-//
-//        assertEquals(expected, actual);
-//    }
+
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {

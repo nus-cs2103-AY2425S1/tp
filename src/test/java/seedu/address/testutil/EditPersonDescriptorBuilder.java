@@ -98,6 +98,10 @@ public class EditPersonDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code roles} into a {@code Set<Role>} and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
     public EditPersonDescriptorBuilder withRoles(String... roles) {
         Set<Role> roleSet = Stream.of(roles).map(str -> {
             try {

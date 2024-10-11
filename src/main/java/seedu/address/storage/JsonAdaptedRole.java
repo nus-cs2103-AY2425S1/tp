@@ -7,6 +7,9 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.role.Role;
 import seedu.address.model.role.RoleHandler;
 
+/**
+ * Jackson-friendly version of {@link Role}.
+ */
 public class JsonAdaptedRole {
     private final String roleName;
 
@@ -27,6 +30,7 @@ public class JsonAdaptedRole {
     public JsonAdaptedRole(Role source) {
         roleName = source.getRoleName();
     }
+
 
     @JsonValue
     public String getRoleName() {
