@@ -3,7 +3,9 @@ package seedu.address.model.person.insurance;
 import static seedu.address.model.person.insurance.InsurancePlanFactory.createInsurancePlan;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.insurance.claim.Claim;
 
@@ -17,14 +19,18 @@ public class InsurancePlansManager {
             + "has already been added to this client: %2$s";
     public static final String PLAN_NOT_DETECTED_MESSAGE = "This plan with id: %1$s, "
             + "has not been added to this client: %2$s";
+    public static final String DUPLICATE_CLAIM_ID_MESSAGE = "This claim with id: %1$s "
+            + "has already been added to this client: %2$s";
 
     private final ArrayList<InsurancePlan> insurancePlans;
+    private final HashSet<String> claimIds;
 
     /**
      * Constructs an empty InsurancePlans list.
      */
     public InsurancePlansManager() {
         this.insurancePlans = new ArrayList<>();
+        this.claimIds = new HashSet<>();
     }
 
     /**
@@ -108,14 +114,19 @@ public class InsurancePlansManager {
 
     /**
      * Adds a claim to the insurance plan of the client.
-     * 
+     *
      * @param insurancePlan The insurance plan the claim is to be added to.
-     * @param claim The claim that is to be added to the insurance plan.
+     * @param claim         The claim that is to be added to the insurance plan.
+     * @throws CommandException if the claimId already exists.
      */
-    public void addClaimToInsurancePlan(InsurancePlan insurancePlan, Claim claim) {
+    public void addClaimToInsurancePlan(InsurancePlan insurancePlan, Claim claim) throws CommandException {
+        if (this.claimIds.contains(claim.getClaimId())) {
+            throw new CommandException(DUPLICATE_CLAIM_ID_MESSAGE);
+        }
         for (InsurancePlan p : insurancePlans) {
             if (p.equals(insurancePlan)) {
                 p.claims.add(claim);
+                this.claimIds.add(claim.getClaimId());
             }
         }
     }
