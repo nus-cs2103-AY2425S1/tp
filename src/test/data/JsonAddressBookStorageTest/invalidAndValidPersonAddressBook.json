@@ -8,7 +8,8 @@
       "skills": "DevOps, Python",
       "experience": "CTO at Google from 2001-2020",
       "status": "Screening",
-      "note": ""
+      "note": "",
+      "desiredRole": "Software Engineer"
     },
     {
       "name": "Person With Invalid Phone Field",
@@ -18,7 +19,8 @@
       "skills": "DevOps, Python",
       "experience": "CEO at Apple from 2003-2020",
       "status": "Joined",
-      "note": ""
+      "note": "",
+      "desiredRole": "Software Engineer"
     }
   ]
 }

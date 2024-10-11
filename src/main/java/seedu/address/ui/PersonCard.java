@@ -21,7 +21,8 @@ public class PersonCard extends UiPart<Region> {
      * As a consequence, UI elements' variable names cannot be set to such keywords
      * or an exception will be thrown by JavaFX during runtime.
      *
-     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
+     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">
+     * The issue on AddressBook level 4</a>
      */
 
     public final Person person;
@@ -29,23 +30,25 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
-    private Label name;
-    @FXML
     private Label id;
+    @FXML
+    private Label name;
     @FXML
     private Label phone;
     @FXML
-    private Label address;
-    @FXML
     private Label email;
     @FXML
-    private Label skills; // Updated to include skills
+    private Label address;
+    @FXML
+    private Label desiredRole; // Added desiredRole label
+    @FXML
+    private Label skills;
     @FXML
     private Label experience;
     @FXML
-    private Label status; // Updated to include status
+    private Label status;
     @FXML
-    private Label note; // Updated to include note
+    private Label note;
     @FXML
     private FlowPane tags;
 
@@ -59,14 +62,15 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        address.setText(person.getAddress().value);
+        desiredRole.setText(person.getDesiredRole().value); // Display desired role
         skills.setText(person.getSkills().value); // Display skills
         experience.setText(person.getExperience().value);
         status.setText(person.getStatus().value); // Display status
         note.setText(person.getNote().value); // Display note
         person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+            .sorted(Comparator.comparing(tag -> tag.tagName))
+            .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }

@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.DesiredRole;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Experience;
 import seedu.address.model.person.Name;
@@ -28,6 +29,7 @@ public class PersonBuilder {
     public static final String DEFAULT_SKILLS = "Java, Python";
     public static final String DEFAULT_STATUS = "Applied";
     public static final String DEFAULT_NOTE = "Knowledgeable and funny";
+    public static final String DEFAULT_DESIREDROLE = "Software Engineer";
 
     private Name name;
     private Phone phone;
@@ -37,6 +39,7 @@ public class PersonBuilder {
     private Skills skills;
     private Status status;
     private Note note;
+    private DesiredRole desiredRole;
     private Set<Tag> tags;
 
     /**
@@ -51,6 +54,7 @@ public class PersonBuilder {
         skills = new Skills(DEFAULT_SKILLS);
         status = new Status(DEFAULT_STATUS);
         note = new Note(DEFAULT_NOTE);
+        desiredRole = new DesiredRole(DEFAULT_DESIREDROLE);
         tags = new HashSet<>();
     }
 
@@ -66,6 +70,7 @@ public class PersonBuilder {
         skills = personToCopy.getSkills();
         status = personToCopy.getStatus();
         note = personToCopy.getNote();
+        desiredRole = personToCopy.getDesiredRole();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -74,22 +79,6 @@ public class PersonBuilder {
      */
     public PersonBuilder withName(String name) {
         this.name = new Name(name);
-        return this;
-    }
-
-    /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
-     */
-    public PersonBuilder withTags(String... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
-        return this;
-    }
-
-    /**
-     * Sets the {@code Address} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withAddress(String address) {
-        this.address = new Address(address);
         return this;
     }
 
@@ -106,6 +95,14 @@ public class PersonBuilder {
      */
     public PersonBuilder withEmail(String email) {
         this.email = new Email(email);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Address} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withAddress(String address) {
+        this.address = new Address(address);
         return this;
     }
 
@@ -141,8 +138,23 @@ public class PersonBuilder {
         return this;
     }
 
-    public Person build() {
-        return new Person(name, phone, email, address, skills, experience, status, note, tags);
+    /**
+     * Sets the {@code DesiredRole} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withDesiredRole(String desiredRole) {
+        this.desiredRole = new DesiredRole(desiredRole);
+        return this;
     }
 
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withTags(String... tags) {
+        this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    public Person build() {
+        return new Person(name, phone, email, address,desiredRole, skills, experience, status, note, tags);
+    }
 }

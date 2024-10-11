@@ -60,6 +60,7 @@ public class NoteCommand extends Command {
                 personToEdit.getPhone(),
                 personToEdit.getEmail(),
                 personToEdit.getAddress(),
+                personToEdit.getDesiredRole(),
                 personToEdit.getSkills(),
                 personToEdit.getExperience(),
                 personToEdit.getStatus(),

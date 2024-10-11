@@ -1,22 +1,27 @@
 {
-  "persons": [ {
-    "name": "Alice Pauline",
-    "phone": "94351253",
-    "email": "alice@example.com",
-    "address": "123, Jurong West Ave 6, #08-111",
-    "skills" : "DevOps, python",
-    "experience": "CTO at Google from 2001-2020",
-    "status": "Hired",
-    "note": "",
-    "tags": [ "friends" ]
-  }, {
-    "name": "Alice Pauline",
-    "phone": "94351253",
-    "email": "pauline@example.com",
-    "address": "4th street",
-    "skills" : "DevOps, python",
-    "experience": "CTO at Google from 2001-2020",
-    "status" : "Hired",
-    "note": ""
-  } ]
+  "persons": [
+    {
+      "name": "Alice Pauline",
+      "phone": "94351253",
+      "email": "alice@example.com",
+      "address": "123, Jurong West Ave 6, #08-111",
+      "skills": "DevOps, Python",
+      "experience": "CTO at Google from 2001-2020",
+      "status": "Hired",
+      "note": "",
+      "tags": ["friends"],
+      "desiredRole": "Software Engineer"
+    },
+    {
+      "name": "Alice Pauline",
+      "phone": "94351253",
+      "email": "pauline@example.com",
+      "address": "4th street",
+      "skills": "DevOps, Python",
+      "experience": "CTO at Google from 2001-2020",
+      "status": "Hired",
+      "note": "",
+      "desiredRole": "Software Engineer"
+    }
+  ]
 }
