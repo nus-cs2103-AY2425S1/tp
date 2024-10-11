@@ -9,7 +9,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPERIENCE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SKILLS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import org.junit.jupiter.api.Test;
@@ -53,10 +56,21 @@ public class EditPersonDescriptorTest {
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
+        //different skills -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withSkills(VALID_SKILLS_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
         // different experience -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withExperience(VALID_EXPERIENCE_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
+        // different status -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withStatus(VALID_STATUS_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different note -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withNote(VALID_NOTE_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
@@ -70,8 +84,11 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getName().orElse(null) + ", phone="
                 + editPersonDescriptor.getPhone().orElse(null) + ", email="
                 + editPersonDescriptor.getEmail().orElse(null) + ", address="
-                + editPersonDescriptor.getExperience().orElse(null) + ", experience="
-                + editPersonDescriptor.getAddress().orElse(null) + ", tags="
+                + editPersonDescriptor.getAddress().orElse(null) + ", skills="
+                + editPersonDescriptor.getSkills().orElse(null) + ", experience="
+                + editPersonDescriptor.getExperience().orElse(null) + ", status="
+                + editPersonDescriptor.getStatus().orElse(null) + ", note="
+                + editPersonDescriptor.getNote().orElse(null) + ", tags="
                 + editPersonDescriptor.getTags().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }

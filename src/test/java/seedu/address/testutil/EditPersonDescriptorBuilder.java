@@ -9,8 +9,11 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Experience;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Skills;
+import seedu.address.model.person.Status;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -38,6 +41,9 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEmail(person.getEmail());
         descriptor.setExperience(person.getExperience());
         descriptor.setAddress(person.getAddress());
+        descriptor.setSkills(person.getSkills());
+        descriptor.setStatus(person.getStatus());
+        descriptor.setNote(person.getNote());
         descriptor.setTags(person.getTags());
     }
 
@@ -80,6 +86,31 @@ public class EditPersonDescriptorBuilder {
         descriptor.setExperience(new Experience(experience));
         return this;
     }
+
+    /**
+     * Sets the {@code Skills} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withSkills(String skills) {
+        descriptor.setSkills(new Skills(skills)); // Creates a new Skills object from the string
+        return this;
+    }
+
+    /**
+     * Sets the {@code Status} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withStatus(String status) {
+        descriptor.setStatus(new Status(status));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Note} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withNote(String note) {
+        descriptor.setNote(new Note(note));
+        return this;
+    }
+
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
      * that we are building.

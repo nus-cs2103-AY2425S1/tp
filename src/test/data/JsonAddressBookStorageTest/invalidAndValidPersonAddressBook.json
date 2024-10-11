@@ -1,15 +1,24 @@
 {
-  "persons": [ {
-    "name": "Valid Person",
-    "phone": "9482424",
-    "email": "hans@example.com",
-    "address": "4th street",
-    "experience": "CTO at Google from 2001-2020"
-  }, {
-    "name": "Person With Invalid Phone Field",
-    "phone": "948asdf2424",
-    "email": "hans@example.com",
-    "address": "4th street",
-    "experience": "CEO at Apple from 2003-2020"
-  } ]
+  "persons": [
+    {
+      "name": "Valid Person",
+      "phone": "9482424",
+      "email": "hans@example.com",
+      "address": "4th street",
+      "skills": "DevOps, Python",
+      "experience": "CTO at Google from 2001-2020",
+      "status": "Screening",
+      "note": ""
+    },
+    {
+      "name": "Person With Invalid Phone Field",
+      "phone": "948asdf2424",
+      "email": "hans@example.com",
+      "address": "4th street",
+      "skills": "DevOps, Python",
+      "experience": "CEO at Apple from 2003-2020",
+      "status": "Joined",
+      "note": ""
+    }
+  ]
 }

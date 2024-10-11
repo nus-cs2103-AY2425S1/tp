@@ -5,7 +5,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPERIENCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILLS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -26,8 +29,11 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Experience;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Skills;
+import seedu.address.model.person.Status;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -45,11 +51,20 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_SKILLS + "SKILLS] "
             + "[" + PREFIX_EXPERIENCE + "EXPERIENCE] "
+            + "[" + PREFIX_STATUS + "STATUS] "
+            + "[" + PREFIX_NOTE + "NOTE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_EMAIL + "johndoe@example.com "
+            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
+            + PREFIX_SKILLS + "Java, Python "
+            + PREFIX_EXPERIENCE + "Software Engineer at ABC Corp 2015-2020 "
+            + PREFIX_STATUS + "Interviewed "
+            + PREFIX_NOTE + "Confident "
+            + PREFIX_TAG + "friends";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -102,10 +117,14 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        Skills updatedSkills = editPersonDescriptor.getSkills().orElse(personToEdit.getSkills());
         Experience updatedExperience = editPersonDescriptor.getExperience().orElse(personToEdit.getExperience());
+        Status updatedStatus = editPersonDescriptor.getStatus().orElse(personToEdit.getStatus());
+        Note updatedNote = editPersonDescriptor.getNote().orElse(personToEdit.getNote());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedExperience, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedSkills,
+                updatedExperience, updatedStatus, updatedNote, updatedTags);
     }
 
     @Override
@@ -141,7 +160,10 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
+        private Skills skills;
         private Experience experience;
+        private Status status;
+        private Note note;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -155,7 +177,10 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setSkills(toCopy.skills);
             setExperience(toCopy.experience);
+            setStatus(toCopy.status);
+            setNote(toCopy.note);
             setTags(toCopy.tags);
         }
 
@@ -163,7 +188,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, experience, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, skills, experience, status, note, tags);
         }
 
         public void setName(Name name) {
@@ -198,12 +223,36 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
+        public void setSkills(Skills skills) {
+            this.skills = skills;
+        }
+
+        public Optional<Skills> getSkills() {
+            return Optional.ofNullable(skills);
+        }
+
         public void setExperience(Experience experience) {
             this.experience = experience;
         }
 
         public Optional<Experience> getExperience() {
             return Optional.ofNullable(experience);
+        }
+
+        public void setStatus(Status status) {
+            this.status = status;
+        }
+
+        public Optional<Status> getStatus() {
+            return Optional.ofNullable(status);
+        }
+
+        public void setNote(Note note) {
+            this.note = note;
+        }
+
+        public Optional<Note> getNote() {
+            return Optional.ofNullable(note);
         }
 
         /**
@@ -239,7 +288,10 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
+                    && Objects.equals(skills, otherEditPersonDescriptor.skills)
                     && Objects.equals(experience, otherEditPersonDescriptor.experience)
+                    && Objects.equals(status, otherEditPersonDescriptor.status)
+                    && Objects.equals(note, otherEditPersonDescriptor.note)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -250,7 +302,10 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
+                    .add("skills", skills)
                     .add("experience", experience)
+                    .add("status", status)
+                    .add("note", note)
                     .add("tags", tags)
                     .toString();
         }
