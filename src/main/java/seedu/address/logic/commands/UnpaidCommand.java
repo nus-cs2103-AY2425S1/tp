@@ -4,20 +4,16 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
-import java.util.Set;
+import java.util.Objects;
+import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+
 
 
 
@@ -35,21 +31,20 @@ public class UnpaidCommand extends Command {
 
     public static final String MESSAGE_UNPAID_PERSON_SUCCESS = "Marked Person: %1$s";
 
-
     private final Index index;
 
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final UnpaidPersonDescriptor unpaidPersonDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to mark as unpaid
-     * @param editPersonDescriptor person that has been marked as unpaid (Utilising the function from EditCommand)
+     * @param index of the person in the filtered person list to mark as paid
+     * @param unpaidPersonDescriptor person that has been marked as paid
      */
-    public UnpaidCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public UnpaidCommand(Index index, UnpaidPersonDescriptor unpaidPersonDescriptor) {
         requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
+        requireNonNull(unpaidPersonDescriptor);
 
         this.index = index;
-        this.editPersonDescriptor = new EditCommand.EditPersonDescriptor(editPersonDescriptor);
+        this.unpaidPersonDescriptor = new UnpaidCommand.UnpaidPersonDescriptor(unpaidPersonDescriptor);
     }
 
     @Override
@@ -61,45 +56,37 @@ public class UnpaidCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Person originalPerson = lastShownList.get(index.getZeroBased());
+        Person unpaidPerson = createUnpaidPerson(originalPerson, unpaidPersonDescriptor);
 
-        model.setPerson(personToEdit, editedPerson);
+        model.setPerson(originalPerson, unpaidPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_UNPAID_PERSON_SUCCESS, Messages.format(editedPerson)));
+        return new CommandResult(String.format(MESSAGE_UNPAID_PERSON_SUCCESS, Messages.format(unpaidPerson)));
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Person} with the details of {@code personToPay}
+     * edited with {@code paidPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+    private static Person createUnpaidPerson(Person personToPay, UnpaidPersonDescriptor unpaidPersonDescriptor) {
+        assert personToPay != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        Boolean updatedHasPaid = editPersonDescriptor.getHasPaid().orElse(personToEdit.getHasPaid());
+        Boolean updatedHasNotPaid = false;
 
-        return new Person(updatedName, updatedPhone, updatedEmail,
-                updatedAddress, updatedTags, updatedHasPaid);
+        return new Person(personToPay.getName(), personToPay.getPhone(), personToPay.getEmail(),
+                personToPay.getAddress(), personToPay.getTags(), updatedHasNotPaid);
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
+        if (this == other) {
             return true;
         }
-
-        // instanceof handles nulls
         if (!(other instanceof UnpaidCommand)) {
             return false;
         }
-
-        UnpaidCommand otherUnpaidCommand = (UnpaidCommand) other;
-        return index.equals(otherUnpaidCommand.index);
+        UnpaidCommand otherCommand = (UnpaidCommand) other;
+        return index.equals(otherCommand.index);
     }
 
     @Override
@@ -107,5 +94,50 @@ public class UnpaidCommand extends Command {
         return new ToStringBuilder(this)
                 .add("targetIndex", index)
                 .toString();
+    }
+
+    public static class UnpaidPersonDescriptor {
+        private Boolean hasPaid;
+
+        public UnpaidPersonDescriptor() {}
+
+        /**
+         * Copy constructor.
+         * A defensive copy of {@code tags} is used internally.
+         */
+        public UnpaidPersonDescriptor(UnpaidPersonDescriptor toCopy) {
+            toCopy.setHasNotPaid();
+        }
+
+        public void setHasNotPaid() {
+            this.hasPaid = false;
+        }
+
+        public Optional<Boolean> getHasPaid() {
+            return Optional.ofNullable(hasPaid);
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (other == this) {
+                return true;
+            }
+
+            // instanceof handles nulls
+            if (!(other instanceof PaidCommand.PaidPersonDescriptor)) {
+                return false;
+            }
+
+            UnpaidCommand.UnpaidPersonDescriptor otherUnpaidPersonDescriptor =
+                    (UnpaidCommand.UnpaidPersonDescriptor) other;
+            return Objects.equals(hasPaid, otherUnpaidPersonDescriptor.hasPaid);
+        }
+
+        @Override
+        public String toString() {
+            return new ToStringBuilder(this)
+                    .add("hasNotPaid", hasPaid)
+                    .toString();
+        }
     }
 }
