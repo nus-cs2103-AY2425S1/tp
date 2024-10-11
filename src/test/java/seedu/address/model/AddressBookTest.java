@@ -108,7 +108,9 @@ public class AddressBookTest {
         }
 
         @Override
-        public ObservableList<Event> getEventList() { return events; }
+        public ObservableList<Event> getEventList() {
+            return events;
+        }
     }
 
 }

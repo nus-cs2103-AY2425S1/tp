@@ -151,7 +151,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<Event> getEventList() { return events.asUnmodifiableObservableList(); }
+    public ObservableList<Event> getEventList() {
+        return events.asUnmodifiableObservableList();
+    }
 
     @Override
     public boolean equals(Object other) {
