@@ -201,9 +201,9 @@ edit-client INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [vrn/CAR_VRN] [vin/CA
 
 **Examples:**
 
-- `edit-client 1 p/91234567 e/johndoe@example.com`  
+- `edit-client 1 p/91234567 e/johndoe@example.com`
   Edits the phone number and email address of the 1st client to `91234567` and `johndoe@example.com` respectively.
-- `edit-client 2 n/Betsy Crower i/`  
+- `edit-client 2 n/Betsy Crower i/`
   Edits the name of the 2nd client to `Betsy Crower` and clears all existing issues.
 
 ---
@@ -233,11 +233,11 @@ find KEYWORD [MORE_KEYWORDS]
 
 **Examples:**
 
-- `find John`  
+- `find John`
   Returns clients with names like `John` and `John Doe`.
-- `find alex david`  
+- `find alex david`
   Returns `Alex Yeoh`, `David Li`.
-- `find SJH 9514 P`  
+- `find SJH 9514 P`
   Returns client with car VRN `SJH 9514 P`.
 
 ![Result for 'find alex david'](images/findAlexDavidResult.png)
@@ -265,11 +265,11 @@ delete-client INDEX
 
 **Examples:**
 
-- `list`  
-  `delete-client 2`  
+- `list`
+  `delete-client 2`
   Deletes the 2nd client in the MATER.
-- `find Betsy`  
-  `delete-client 1`  
+- `find Betsy`
+  `delete-client 1`
   Deletes the 1st client in the results of the `find` command.
 
 ---
