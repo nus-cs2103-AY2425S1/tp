@@ -55,7 +55,8 @@ public class NameAndClassIdContainsKeywordsPredicate implements Predicate<Person
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("Name", nameKeywords)
-                .add("ClassId", classIdKeywords).toString();
+        return new ToStringBuilder(this)
+                .add("Name keywords", nameKeywords).add("ClassId keywords", classIdKeywords).toString();
+
     }
 }
