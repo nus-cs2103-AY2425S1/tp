@@ -54,12 +54,13 @@ public class UpdateMemberDescriptorTest {
 
     @Test
     public void toStringMethod() {
-        UpdateMemberDescriptor UpdateMemberDescriptor = new UpdateMemberDescriptor();
+        UpdateMemberDescriptor updateMemberDescriptor = new UpdateMemberDescriptor();
         String expected = UpdateMemberDescriptor.class.getCanonicalName() + "{name="
-                + UpdateMemberDescriptor.getName().orElse(null) + ", telegram="
-                + UpdateMemberDescriptor.getTelegram().orElse(null) + ", room="
-                + UpdateMemberDescriptor.getRoom().orElse(null) + ", tags="
-                + UpdateMemberDescriptor.getTags().orElse(null) + "}";
-        assertEquals(expected, UpdateMemberDescriptor.toString());
+            + updateMemberDescriptor.getName().orElse(null)
+            + ", telegram=" + updateMemberDescriptor.getTelegram().orElse(null)
+            + ", room=" + updateMemberDescriptor.getRoom().orElse(null)
+            + ", tags=" + updateMemberDescriptor.getTags().orElse(null)
+            + "}";
+        assertEquals(expected, updateMemberDescriptor.toString());
     }
 }

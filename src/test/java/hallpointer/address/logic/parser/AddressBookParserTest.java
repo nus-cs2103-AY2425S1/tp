@@ -16,18 +16,18 @@ import org.junit.jupiter.api.Test;
 import hallpointer.address.logic.commands.AddMemberCommand;
 import hallpointer.address.logic.commands.ClearCommand;
 import hallpointer.address.logic.commands.DeleteMemberCommand;
-import hallpointer.address.logic.commands.UpdateMemberCommand;
-import hallpointer.address.logic.commands.UpdateMemberCommand.UpdateMemberDescriptor;
 import hallpointer.address.logic.commands.ExitCommand;
 import hallpointer.address.logic.commands.FindMemberCommand;
 import hallpointer.address.logic.commands.HelpCommand;
 import hallpointer.address.logic.commands.ListMembersCommand;
+import hallpointer.address.logic.commands.UpdateMemberCommand;
+import hallpointer.address.logic.commands.UpdateMemberCommand.UpdateMemberDescriptor;
 import hallpointer.address.logic.parser.exceptions.ParseException;
 import hallpointer.address.model.member.Member;
 import hallpointer.address.model.member.NameContainsKeywordsPredicate;
-import hallpointer.address.testutil.UpdateMemberDescriptorBuilder;
 import hallpointer.address.testutil.MemberBuilder;
 import hallpointer.address.testutil.MemberUtil;
+import hallpointer.address.testutil.UpdateMemberDescriptorBuilder;
 
 public class AddressBookParserTest {
 
@@ -91,7 +91,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(""));
+                -> parser.parseCommand(""));
     }
 
     @Test

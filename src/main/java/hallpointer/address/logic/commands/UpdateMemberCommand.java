@@ -123,10 +123,9 @@ public class UpdateMemberCommand extends Command {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("index", index)
-                .add("updateMemberDescriptor", updateMemberDescriptor)
+                .add("UpdateMemberDescriptor", new UpdateMemberDescriptor())
                 .toString();
     }
-
     /**
      * Stores the details to update the member with. Each non-empty field value will replace the
      * corresponding field value of the member.
