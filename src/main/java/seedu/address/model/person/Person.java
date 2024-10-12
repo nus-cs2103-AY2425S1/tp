@@ -123,7 +123,7 @@ public class Person implements Comparable<Person> {
     /**
      * Person with the largest order frequency count are at the front
      * @param rhs the object to be compared.
-     * @return -1 if rhs has lower order frequency count
+     * @return -1 if rhs has lower order frequency count, 0 if rhs has same order frequency count, 1 otherwise
      */
     @Override
     public int compareTo(Person rhs) {
@@ -173,6 +173,7 @@ public class Person implements Comparable<Person> {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("orders", orderFrequency)
                 .toString();
     }
 

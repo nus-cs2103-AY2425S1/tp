@@ -113,7 +113,6 @@ public class PersonTest {
 
         p.removeOrder(cake);
         assertEquals(orderFrequency, p.getOrderFrequency());
-
     }
 
     @Test
@@ -153,7 +152,45 @@ public class PersonTest {
 
         Collections.sort(list);
         assertEquals(expected, list);
+    }
 
+    @Test
+    public void compareToTest2() {
+        ArrayList<Person> list = new ArrayList<>();
+        ArrayList<Person> expected = new ArrayList<>();
+        Order cake = Order.of("Cake");
+        Order pizza = Order.of("Pizza");
+
+        Person p1 = new PersonBuilder().build();
+        Person p2 = new PersonBuilder().build();
+        Person p3 = new PersonBuilder().build();
+
+        p1.putOrder(cake);
+        p2.putOrder(pizza);
+        p3.putOrder(cake);
+        p3.putOrder(pizza);
+        list.add(p1);
+        list.add(p2);
+        list.add(p3);
+        Collections.sort(list);
+        assertEquals(p3, list.get(0));
+    }
+
+    @Test
+    public void hashCodeTest() {
+        // This hashCode test is not complete, this only test orderFrequency
+
+        Order cake = Order.of("Cake");
+        Order pizza = Order.of("Pizza");
+        Person p1 = new PersonBuilder().build();
+        Person p2 = new PersonBuilder().build();
+        Person p3 = new PersonBuilder().build();
+        p1.putOrder(cake);
+        p2.putOrder(pizza);
+        p3.putOrder(cake);
+
+        assertNotEquals(p1.hashCode(), p2.hashCode());
+        assertEquals(p1.hashCode(), p3.hashCode());
     }
 
     @Test
@@ -198,7 +235,8 @@ public class PersonTest {
     @Test
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + "}";
+                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags()
+                + ", orders=" + ALICE.getOrderFrequency() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }
