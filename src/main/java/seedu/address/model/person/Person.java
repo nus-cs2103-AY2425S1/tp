@@ -67,7 +67,8 @@ public class Person {
         return email;
     }
 
-    public RoomNumber getRoomNumber() { return roomNumber; }
+    public RoomNumber getRoomNumber() {
+        return roomNumber; }
 
     public Address getAddress() {
         return address;
@@ -130,7 +131,7 @@ public class Person {
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
-                && roomNumber.equals(otherPerson.roomNumber)
+                && (roomNumber == null ? otherPerson.roomNumber == null : roomNumber.equals(otherPerson.roomNumber))
                 && address.equals(otherPerson.address)
                 && emergencyContact.equals(otherPerson.emergencyContact)
                 && tags.equals(otherPerson.tags);

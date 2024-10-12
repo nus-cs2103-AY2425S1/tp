@@ -189,9 +189,11 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setRoomNumber(RoomNumber roomNumber) { this.roomNumber = roomNumber; }
+        public void setRoomNumber(RoomNumber roomNumber) {
+            this.roomNumber = roomNumber; }
 
-        public Optional<RoomNumber> getRoomNumber() { return Optional.ofNullable(roomNumber); }
+        public Optional<RoomNumber> getRoomNumber() {
+            return Optional.ofNullable(roomNumber); }
 
         public void setAddress(Address address) {
             this.address = address;
