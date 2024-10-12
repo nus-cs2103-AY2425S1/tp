@@ -17,8 +17,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Paid;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Rate;
 import seedu.address.model.person.Schedule;
@@ -53,11 +53,14 @@ public class AddCommandParser implements Parser<AddCommand> {
         Schedule schedule = ParserUtil.parseSchedule(argMultimap.getValue(PREFIX_SCHEDULE).get());
         Subject subject = ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
         Rate rate = ParserUtil.parseRate(argMultimap.getValue(PREFIX_RATE).get());
-        Paid paid = new Paid();
+        Paid paid = null;
         
         if (argMultimap.getValue(PREFIX_PAID).isPresent()) {
             paid = ParserUtil.parsePaid(argMultimap.getValue(PREFIX_PAID).get());
+        } else {
+            paid = new Paid();
         }
+        
         Person person = new Person(name, phone, email, address, schedule, subject, rate, paid);
 
         return new AddCommand(person);

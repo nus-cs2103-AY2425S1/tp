@@ -32,7 +32,7 @@ public class AddCommand extends Command {
             + PREFIX_SCHEDULE + "SCHEDULE "
             + PREFIX_SUBJECT + "SUBJECT "
             + PREFIX_RATE + "FEE "
-            + "[" + PREFIX_PAID + "PAID]"
+            + "[" + PREFIX_PAID + "PAID] "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
