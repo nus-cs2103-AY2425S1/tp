@@ -1,11 +1,13 @@
 {
-  "persons": [ {
+  "clients": [ {
     "name": "Valid Person",
     "phone": "9482424",
     "email": "hans@example.com",
+    "type": "BUYER"
   }, {
     "name": "Person With Invalid Phone Field",
     "phone": "948asdf2424",
     "email": "hans@example.com",
+    "type": "BUYER"
   } ]
 }

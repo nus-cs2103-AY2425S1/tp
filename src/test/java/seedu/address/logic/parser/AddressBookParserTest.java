@@ -4,8 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalClients.ALICE;
+import static seedu.address.testutil.TypicalClients.DANIEL;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
@@ -14,7 +18,9 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.AddBuyerCommand;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddSellerCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteBuyerCommand;
 import seedu.address.logic.commands.DeleteCommand;
@@ -26,8 +32,11 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.client.Buyer;
+import seedu.address.model.client.Seller;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.ClientBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -72,12 +81,37 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_addBuyer() throws Exception {
+        Buyer alice = new ClientBuilder(ALICE).withEmail(ALICE.getEmail().toString())
+                .withPhone(ALICE.getPhone().toString()).buildBuyer();
+        AddBuyerCommand command = (AddBuyerCommand) parser.parseCommand(
+                AddBuyerCommand.COMMAND_WORD + " " + PREFIX_NAME + ALICE.getName() + " "
+                + PREFIX_PHONE + ALICE.getPhone() + " " + PREFIX_EMAIL + ALICE.getEmail()
+        );
+
+        assertEquals(new AddBuyerCommand(alice), command);
+    }
+
+    @Test
+    public void parseCommand_addSeller() throws Exception {
+        Seller daniel = new ClientBuilder(DANIEL).withEmail(DANIEL.getEmail().toString())
+                .withPhone(DANIEL.getPhone().toString()).buildSeller();
+        AddSellerCommand command = (AddSellerCommand) parser.parseCommand(
+                AddSellerCommand.COMMAND_WORD + " " + PREFIX_NAME + DANIEL.getName() + " "
+                        + PREFIX_PHONE + DANIEL.getPhone() + " " + PREFIX_EMAIL + DANIEL.getEmail()
+        );
+
+        assertEquals(new AddSellerCommand(daniel), command);
+    }
+
+    @Test
     public void parseCommand_deleteBuyer() throws Exception {
         final String phoneNumber = "12345678";
         DeleteBuyerCommand command = (DeleteBuyerCommand) parser.parseCommand(
                 DeleteBuyerCommand.COMMAND_WORD + " " + PREFIX_PHONE + phoneNumber);
         assertEquals(new DeleteBuyerCommand(phoneNumber), command);
     }
+
     @Test
     public void parseCommand_deleteSeller() throws Exception {
         final String phoneNumber = "12345678";
@@ -100,16 +134,19 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
     }
 
+    //TODO: Update test to reflect new ListCommand @apollo-tan
     @Test
     public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " k/buyers") instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " k/sellers") instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " k/properties") instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " k/clients") instanceof ListCommand);
     }
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(""));
+                -> parser.parseCommand(""));
     }
 
     @Test
