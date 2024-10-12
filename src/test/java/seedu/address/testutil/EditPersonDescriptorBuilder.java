@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.model.game.Game;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -37,6 +38,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
         descriptor.setTags(person.getTags());
+        descriptor.setGames(person.getGames());
     }
 
     /**
@@ -81,6 +83,15 @@ public class EditPersonDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code games} into a {@code Set<Game>} and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withGames(String... games) {
+        Set<Game> gameSet = Stream.of(games).map(Game::new).collect(Collectors.toSet());
+        descriptor.setGames(gameSet);
+        return this;
+    }
     public EditPersonDescriptor build() {
         return descriptor;
     }
