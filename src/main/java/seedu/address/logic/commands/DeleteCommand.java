@@ -7,8 +7,6 @@ import java.util.List;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.FindCommandParser;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
@@ -25,7 +23,7 @@ public class DeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " alice";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
-    public static final String MESSAGE_PERSON_NOT_FOUND = "Exact match not found. Partial match listed.";
+    public static final String MESSAGE_PERSON_NOT_FOUND = "No person found with the specified keyword.";
     public static final String MESSAGE_MULTIPLE_PERSONS_FOUND = "Multiple persons found with the keyword. "
             + "Please refine your input.";
 
@@ -36,7 +34,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException, ParseException {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
         List<Person> fullPersonList = model.getAddressBook().getPersonList();
@@ -46,16 +44,26 @@ public class DeleteCommand extends Command {
 
         if (!exactMatches.isEmpty()) {
             if (exactMatches.size() > 1) {
-                throw new CommandException(String.format(MESSAGE_MULTIPLE_PERSONS_FOUND));
+                throw new CommandException(String.format(MESSAGE_MULTIPLE_PERSONS_FOUND, nameToDelete));
             }
             Person personToDelete = exactMatches.get(0);
             model.deletePerson(personToDelete);
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
-        } else {
-            FindCommandParser findCommandParser = new FindCommandParser();
-            findCommandParser.parse(nameToDelete).execute(model);
-            return new CommandResult(MESSAGE_PERSON_NOT_FOUND);
         }
+
+        List<Person> partialMatches = fullPersonList.stream()
+                .filter(person -> person.getName().fullName.toLowerCase().contains(nameToDelete.toLowerCase()))
+                .toList();
+
+        if (partialMatches.isEmpty()) {
+            throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
+        }
+        if (partialMatches.size() > 1) {
+            throw new CommandException(String.format(MESSAGE_MULTIPLE_PERSONS_FOUND, nameToDelete));
+        }
+        Person personToDelete = partialMatches.get(0);
+        model.deletePerson(personToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 
     @Override
