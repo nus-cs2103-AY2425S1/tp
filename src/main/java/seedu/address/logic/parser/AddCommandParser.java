@@ -16,12 +16,10 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.course.Course;
-import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
-import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -49,12 +47,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         // Parse courses; if none are provided, use an empty set
         Set<Course> courseList = parseCourses(argMultimap.getAllValues(PREFIX_COURSE)).orElse(new HashSet<>());
 
-        // Empty address (assuming it can't be null)
-        Address address = new Address("hi");  // Empty address value
-
-        // Empty set of tags
-        Set<Tag> tags = new HashSet<>();
-        Student student = new Student(name, phone, email, address, tags, courseList);
+        Student student = new Student(name, phone, email, courseList);
 
         return new AddCommand(student);
     }
