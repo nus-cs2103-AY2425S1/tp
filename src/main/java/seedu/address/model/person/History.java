@@ -70,6 +70,33 @@ public class History {
         this.history.get(date).add(message);
     }
 
+    /**
+     * Creates a new {@code History} object by adding an activity message for a specified date
+     * in an immutable manner, returning a new {@code History} object.
+     * If there is no entry for the specified date, it initializes the entry before adding the activity.
+     *
+     * @param originalHistory The original {@code History} object to be copied.
+     * @param date The {@code LocalDate} when the activity occurred.
+     * @param message The activity message to be added for the specified date.
+     * @return A new {@code History} object with the added activity.
+     */
+    public static History addActivity(History originalHistory, LocalDate date, String message) {
+        // Check if the date is valid based on the date of creation.
+        if (!originalHistory.dateOfCreation.isAfter(date)) {
+            throw new IllegalArgumentException(date
+                    + " is before the date of creation of this log " + originalHistory.dateOfCreation + "!");
+        }
+
+        // Create a copy of the history map to ensure immutability of the original
+        TreeMap<LocalDate, ArrayList<String>> newHistoryMap = new TreeMap<>(originalHistory.history);
+
+        // If there is no entry for the given date, initialize the entry before adding the activity
+        newHistoryMap.putIfAbsent(date, new ArrayList<>());
+        newHistoryMap.get(date).add(message);
+
+        // Return a new History object with the updated map
+        return new History(newHistoryMap, originalHistory.dateOfCreation.getDateOfCreation());
+    }
 
     /**
      * Retrieves the list of activities that occurred on the specified date.

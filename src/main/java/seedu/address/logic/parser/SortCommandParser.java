@@ -30,7 +30,7 @@ public class SortCommandParser implements Parser<SortCommand> {
             throw new ParseException(SortCommand.MESSAGE_INVALID_ORDER);
         }
 
-        // Create and return a SortCommand object with the valid order
+        // Create and return a SortCommand object with the  valid order
         return new SortCommand(order);
     }
 }
