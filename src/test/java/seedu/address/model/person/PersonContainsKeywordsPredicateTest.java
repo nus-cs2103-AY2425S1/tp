@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.PersonBuilder;
 
-public class NameContainsKeywordsPredicateTest {
+public class PersonContainsKeywordsPredicateTest {
 
     @Test
     public void equals() {
@@ -74,6 +74,42 @@ public class NameContainsKeywordsPredicateTest {
         // Keywords match phone, email and address, but does not match name
         predicate = new PersonContainsKeywordsPredicate(Arrays.asList("12345", "alice@email.com", "Main", "Street"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
+                .withEmail("alice@email.com").withAddress("Main Street").build()));
+    }
+
+    @Test
+    public void test_companyContainsKeywords_returnsTrue() {
+        // One keyword
+        PersonContainsKeywordsPredicate predicate =
+                new PersonContainsKeywordsPredicate(Collections.singletonList("Apple"));
+        assertTrue(predicate.test(new PersonBuilder().withCompany("Apple Co.").build()));
+
+        // Multiple keywords
+        predicate = new PersonContainsKeywordsPredicate(Arrays.asList("Apple", "Orange"));
+        assertTrue(predicate.test(new PersonBuilder().withCompany("Apple Orange Inc.").build()));
+
+        // Only one matching keyword
+        predicate = new PersonContainsKeywordsPredicate(Arrays.asList("Apple", "Happle"));
+        assertTrue(predicate.test(new PersonBuilder().withCompany("Happle Co.").build()));
+
+        // Mixed-case keywords
+        predicate = new PersonContainsKeywordsPredicate(Arrays.asList("aPpLe", "oRaNge"));
+        assertTrue(predicate.test(new PersonBuilder().withCompany("Apple Orange Inc.").build()));
+    }
+
+    @Test
+    public void test_companyDoesNotContainKeywords_returnsFalse() {
+        // Zero keywords
+        PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(Collections.emptyList());
+        assertFalse(predicate.test(new PersonBuilder().withCompany("Apple Inc.").build()));
+
+        // Non-matching keyword
+        predicate = new PersonContainsKeywordsPredicate(Arrays.asList("ABC"));
+        assertFalse(predicate.test(new PersonBuilder().withCompany("Apple Orange").build()));
+
+        // Keywords match phone, email and address, but does not match company
+        predicate = new PersonContainsKeywordsPredicate(Arrays.asList("12345", "alice@email.com", "Main", "Street"));
+        assertFalse(predicate.test(new PersonBuilder().withCompany("Apple Inc.").withPhone("12345")
                 .withEmail("alice@email.com").withAddress("Main Street").build()));
     }
 
