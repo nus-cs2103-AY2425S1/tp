@@ -17,15 +17,15 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 
-public class ViewCommandTest {
+public class ViewClientCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Person personToView = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        ViewCommand viewCommand = new ViewCommand(INDEX_FIRST_PERSON);
-        String expectedMessage = String.format(ViewCommand.MESSAGE_SUCCESS,
+        ViewClientCommand viewClientCommand = new ViewClientCommand(INDEX_FIRST_PERSON);
+        String expectedMessage = String.format(ViewClientCommand.MESSAGE_SUCCESS,
                 personToView.getName(),
                 personToView.getPhone(), personToView.getEmail(),
                 personToView.getAddress());
@@ -33,14 +33,14 @@ public class ViewCommandTest {
         CommandResult expectedCommandResult = new CommandResult(
             expectedMessage, false, false, true, personToView
         );
-        assertCommandSuccess(viewCommand, model, expectedCommandResult, expectedModel);
+        assertCommandSuccess(viewClientCommand, model, expectedCommandResult, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        ViewCommand viewCommand = new ViewCommand(outOfBoundIndex);
-        assertCommandFailure(viewCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        ViewClientCommand viewClientCommand = new ViewClientCommand(outOfBoundIndex);
+        assertCommandFailure(viewClientCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
@@ -48,7 +48,7 @@ public class ViewCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
-        ViewCommand viewCommand = new ViewCommand(outOfBoundIndex);
-        assertCommandFailure(viewCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        ViewClientCommand viewClientCommand = new ViewClientCommand(outOfBoundIndex);
+        assertCommandFailure(viewClientCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 }

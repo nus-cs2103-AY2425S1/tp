@@ -52,7 +52,7 @@ public class AddClientCommand extends Command {
     private final Person toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddClientCommand to add the specified {@code Person}
      */
     public AddClientCommand(Person person) {
         requireNonNull(person);
@@ -93,8 +93,8 @@ public class AddClientCommand extends Command {
             return false;
         }
 
-        AddClientCommand otherAddCommand = (AddClientCommand) other;
-        return toAdd.equals(otherAddCommand.toAdd);
+        AddClientCommand otherAddClientCommand = (AddClientCommand) other;
+        return toAdd.equals(otherAddClientCommand.toAdd);
     }
 
     @Override
