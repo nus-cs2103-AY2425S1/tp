@@ -16,6 +16,7 @@ import seedu.sellsavvy.logic.commands.CommandResult;
 import seedu.sellsavvy.logic.commands.exceptions.CommandException;
 import seedu.sellsavvy.model.Model;
 import seedu.sellsavvy.model.order.Order;
+import seedu.sellsavvy.model.order.OrderList;
 import seedu.sellsavvy.model.person.Person;
 
 /**
@@ -36,6 +37,9 @@ public class AddOrderCommand extends Command {
             + PREFIX_COUNT + "2";
 
     public static final String MESSAGE_SUCCESS = "New Order added for %1$s: %2$s";
+    public static final String MESSAGE_DUPLICATE_WARNING = "Note: "
+            + "This customer already has an order for this item"
+            + ", verify if this is a mistake\n";
 
     private final Index index;
     private final Order toAdd;
@@ -59,9 +63,11 @@ public class AddOrderCommand extends Command {
         }
 
         Person personToAddUnder = lastShownList.get(index.getZeroBased());
-        personToAddUnder.getOrderList().add(toAdd);
+        OrderList orderList = personToAddUnder.getOrderList();
+        String feedbackToUser = orderList.contains(toAdd) ? MESSAGE_DUPLICATE_WARNING : "";
+        orderList.add(toAdd);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS,
+        return new CommandResult(feedbackToUser + String.format(MESSAGE_SUCCESS,
                 personToAddUnder.getName(), Messages.format(toAdd)));
     }
 
