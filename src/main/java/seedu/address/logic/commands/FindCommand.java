@@ -5,6 +5,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.ClassIdContainsKeywordsPredicate;
+import seedu.address.model.person.NameAndClassIdContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 
@@ -26,23 +27,37 @@ public class FindCommand extends Command {
 
     private final ClassIdContainsKeywordsPredicate predicateClassId;
 
+    private final NameAndClassIdContainsKeywordsPredicate predicateNameAndClassId;
+
 
     /**
-     * Stores the predicate to be used to filter the list of persons
+     * Stores the predicate to be used to filter the list of persons by name
      * @param predicate the predicate to be used to filter the list of persons
      */
     public FindCommand(NameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
         this.predicateClassId = null;
+        this.predicateNameAndClassId = null;
     }
 
     /**
-     * Stores the predicate to be used to filter the list of persons
+     * Stores the predicate to be used to filter the list of persons by class ID
      * @param predicate the predicate to be used to filter the list of persons
      */
     public FindCommand(ClassIdContainsKeywordsPredicate predicate) {
         this.predicateClassId = predicate;
         this.predicate = null;
+        this.predicateNameAndClassId = null;
+    }
+
+    /**
+     * Stores the predicate to be used to filter the list of persons by name and class ID
+     * @param predicate the predicate to be used to filter the list of persons
+     */
+    public FindCommand(NameAndClassIdContainsKeywordsPredicate predicate) {
+        this.predicateNameAndClassId = predicate;
+        this.predicate = null;
+        this.predicateClassId = null;
     }
 
 
@@ -55,6 +70,8 @@ public class FindCommand extends Command {
             model.updateFilteredPersonList(predicate);
         } else if (predicateClassId != null) {
             model.updateFilteredPersonList(predicateClassId);
+        } else {
+            model.updateFilteredPersonList(predicateNameAndClassId);
         }
 
         return new CommandResult(
@@ -73,8 +90,15 @@ public class FindCommand extends Command {
         }
 
         FindCommand otherFindCommand = (FindCommand) other;
-        return (predicate != null ? predicate.equals(otherFindCommand.predicate)
-                : predicateClassId.equals(otherFindCommand.predicateClassId));
+
+        if (predicate != null) {
+            return predicate.equals(otherFindCommand.predicate);
+        } else if (predicateClassId != null) {
+            return predicateClassId.equals(otherFindCommand.predicateClassId);
+        } else {
+            return predicateNameAndClassId.equals(otherFindCommand.predicateNameAndClassId);
+        }
+
     }
 
     @Override

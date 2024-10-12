@@ -7,6 +7,7 @@ import java.util.Arrays;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ClassIdContainsKeywordsPredicate;
+import seedu.address.model.person.NameAndClassIdContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
@@ -26,6 +27,13 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+
+        if (trimmedArgs.contains("n/") && trimmedArgs.contains("c/")) {
+            String[] nameKeywords = parseName(trimmedArgs);
+            String[] classIdKeywords = parseClassId(trimmedArgs);
+            return new FindCommand(new NameAndClassIdContainsKeywordsPredicate(Arrays.asList(nameKeywords),
+                    Arrays.asList(classIdKeywords)));
         }
 
         if (trimmedArgs.contains("n/")) {

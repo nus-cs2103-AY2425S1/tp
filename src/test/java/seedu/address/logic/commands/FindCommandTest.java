@@ -19,6 +19,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.ClassIdContainsKeywordsPredicate;
+import seedu.address.model.person.NameAndClassIdContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
@@ -38,17 +39,24 @@ public class FindCommandTest {
                 Collections.singletonList("third"));
         ClassIdContainsKeywordsPredicate fourthPredicate = new ClassIdContainsKeywordsPredicate(
                 Collections.singletonList("fourth"));
+        NameAndClassIdContainsKeywordsPredicate fifthPredicate = new NameAndClassIdContainsKeywordsPredicate(
+                Collections.singletonList("fifth"), Collections.singletonList("fifth"));
+        NameAndClassIdContainsKeywordsPredicate sixthPredicate = new NameAndClassIdContainsKeywordsPredicate(
+                Collections.singletonList("sixth"), Collections.singletonList("sixth"));
 
 
         FindCommand findFirstCommand = new FindCommand(firstPredicate);
         FindCommand findSecondCommand = new FindCommand(secondPredicate);
         FindCommand findThirdCommand = new FindCommand(thirdPredicate);
         FindCommand findFourthCommand = new FindCommand(fourthPredicate);
+        FindCommand findFifthCommand = new FindCommand(fifthPredicate);
+        FindCommand findSixthCommand = new FindCommand(sixthPredicate);
 
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
         assertTrue(findThirdCommand.equals(findThirdCommand));
+        assertTrue(findFifthCommand.equals(findFifthCommand));
 
         // same values -> returns true
         FindCommand findFirstCommandCopy = new FindCommand(firstPredicate);
@@ -57,23 +65,46 @@ public class FindCommandTest {
         FindCommand findThirdCommandCopy = new FindCommand(thirdPredicate);
         assertTrue(findThirdCommand.equals(findThirdCommandCopy));
 
+        FindCommand findFifthCommandCopy = new FindCommand(fifthPredicate);
+        assertTrue(findFifthCommand.equals(findFifthCommandCopy));
+
 
         // different types -> returns false
         assertFalse(findFirstCommand.equals(1));
+        assertFalse(findThirdCommand.equals(1));
+        assertFalse(findFifthCommand.equals(1));
+
         assertFalse(findThirdCommand.equals(findFirstCommand));
         assertFalse(findThirdCommand.equals(findFourthCommand));
+        assertFalse(findFifthCommand.equals(findFirstCommand));
+        assertFalse(findFifthCommand.equals(findThirdCommand));
+        assertFalse(findFifthCommand.equals(findSixthCommand));
 
         // null -> returns false
         assertFalse(findFirstCommand.equals(null));
+        assertFalse(findThirdCommand.equals(null));
+        assertFalse(findFifthCommand.equals(null));
 
         // different person -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
+        assertFalse(findThirdCommand.equals(findFourthCommand));
     }
 
     @Test
     public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void executeNoPersonsFoundClassId() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        ClassIdContainsKeywordsPredicate predicate =
+                new ClassIdContainsKeywordsPredicate(Collections.singletonList(" "));
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -89,6 +120,8 @@ public class FindCommandTest {
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
     }
+
+
 
     @Test
     public void toStringMethod() {
