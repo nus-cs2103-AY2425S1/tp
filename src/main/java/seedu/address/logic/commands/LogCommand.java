@@ -53,7 +53,7 @@ public class LogCommand extends Command {
      * @param message of the activity
      */
     public LogCommand(Index index, String message) {
-        requireAllNonNull(index, date, message);
+        requireAllNonNull(index, message);
         this.index = index;
         this.date = LocalDate.now();
         this.message = message;

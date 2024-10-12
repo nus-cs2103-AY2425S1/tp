@@ -32,8 +32,16 @@ public class Activity {
      * @param date The {@code LocalDate} when the activity occurred.
      * @param message The message describing the activity.
      * @return A new {@code Activity} object.
+     * @throws IllegalArgumentException if the date or message is null.
      */
     public static Activity of(LocalDate date, String message) {
+        // Ensure the date and message are not null
+        if (date == null) {
+            throw new IllegalArgumentException("Date cannot be null.");
+        }
+        if (message == null || message.trim().isEmpty()) {
+            throw new IllegalArgumentException("Message cannot be null or empty.");
+        }
         return new Activity(date, message);
     }
 

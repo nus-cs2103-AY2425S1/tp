@@ -67,6 +67,9 @@ public class History {
         if (!this.history.containsKey(date)) {
             this.history.put(date, new ArrayList<>());
         }
+        if (message == null || message.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
         this.history.get(date).add(message);
     }
 
@@ -154,19 +157,8 @@ public class History {
     }
     @Override
     public boolean equals(Object other) {
-        if (this == other) {
-            return true; // Same object reference
-        }
-
-        if (!(other instanceof History)) {
-            return false; // Not the same class type
-        }
-
-        History otherHistory = (History) other;
-
-        // Compare dateOfCreation and history map for equality
-        return this.dateOfCreation.equals(otherHistory.dateOfCreation)
-                && this.history.equals(otherHistory.history);
+        // Check if this is the same object reference as the other
+        return this == other;
     }
     @Override
     public String toString() {
