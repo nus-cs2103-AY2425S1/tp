@@ -95,7 +95,7 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code orders} of the {@code Person} that we are building.
+     * Sets the {@code orderFrequency} of the {@code Person} that we are building.
      */
     public PersonBuilder withOrderFrequency(HashMap<Order, Integer> orders) {
         this.orderFrequency = orders;
