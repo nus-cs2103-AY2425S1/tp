@@ -26,7 +26,7 @@ public class OrderCommandTestUtil {
      * - the {@code actualModel} matches {@code expectedModel}
      */
     public static void assertCommandSuccess(Command command, Model actualModel, CommandResult expectedCommandResult,
-                                            Model expectedModel) {}
+            Model expectedModel) {}
 
     //TODO:
     /**
