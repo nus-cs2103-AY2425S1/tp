@@ -1,5 +1,6 @@
 package seedu.address.storage;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.io.IOException;
@@ -9,6 +10,7 @@ import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.PropertyBook;
 import seedu.address.model.ReadOnlyPropertyBook;
 
@@ -31,6 +33,16 @@ public class JsonPropertyBookStorageTest {
         return prefsFileInTestDataFolder != null
                 ? TEST_DATA_FOLDER.resolve(prefsFileInTestDataFolder)
                 : null;
+    }
+
+    @Test
+    public void read_missingFile_emptyResult() throws Exception {
+        assertFalse(readPropertyBook("NonExistentFile.json").isPresent());
+    }
+
+    @Test
+    public void read_notJsonFormat_exceptionThrown() {
+        assertThrows(DataLoadingException.class, () -> readPropertyBook("notJsonFormatPropertyBook.json"));
     }
 
     /**
