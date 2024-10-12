@@ -87,6 +87,13 @@ public class PersonTest {
     }
 
     @Test
+    public void personBuilderWithOrderFrequencyTest() {
+        HashMap<Order, Integer> orders = new HashMap<>();
+        orders.put(Order.of("cake"), 10);
+        Person p = new PersonBuilder().withOrderFrequency(orders).build();
+    }
+
+    @Test
     public void removeOrderTest() {
         Order cake = Order.of("Cake");
         Order pizza = Order.of("Pizza");
@@ -117,18 +124,23 @@ public class PersonTest {
         Person p1 = new PersonBuilder().build();
         Person p2 = new PersonBuilder().build();
         Person p3 = new PersonBuilder().build();
+        Person p4 = new PersonBuilder().build();
 
         p1.putOrder(cake);
         p1.putOrder(cake);
         p1.putOrder(pizza);
 
-        p2.putOrder(cake);
-        p2.putOrder(cake);
-        p2.putOrder(pizza);
-        p2.putOrder(pizza);
+        for (int i = 0; i < 2; ++i) {
+            p2.putOrder(cake);
+            p2.putOrder(pizza);
+        }
 
         p3.putOrder(cake);
         p3.putOrder(pizza);
+
+        for (int i = 0; i < 5; ++i) {
+            p4.putOrder(cake);
+        }
 
         ArrayList<Person> list = new ArrayList<>();
         ArrayList<Person> expected = new ArrayList<>();

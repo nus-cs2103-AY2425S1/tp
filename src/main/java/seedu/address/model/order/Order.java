@@ -21,7 +21,8 @@ public class Order {
     }
 
     /**
-     * Factory method for Order to prevent creating multiple instances for a single order
+     * Factory method for Order to prevent creating multiple instances for a single order,
+     * when writing test case involving Order, you should call Order.removeAllOrder() first
      * @return A new order specified by a order name
      */
     public static Order of(String name) {
@@ -44,6 +45,17 @@ public class Order {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Remove all order stored
+     */
+    public static void removeAllOrder() {
+        nameToOrder.clear();
+    }
+
+    public static int getTotalOrderCount() {
+        return nameToOrder.size();
     }
 
     @Override

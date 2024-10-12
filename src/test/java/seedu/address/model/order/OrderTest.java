@@ -11,6 +11,7 @@ class OrderTest {
 
     @Test
     void testEquals() {
+        Order.removeAllOrder();
         Order order = Order.of("Cake");
         assertEquals(order, Order.of("Cake"));
         assertEquals(Order.of("Coffee"), Order.of("Coffee"));
@@ -22,7 +23,19 @@ class OrderTest {
     }
 
     @Test
+    void removeOrderTest() {
+        Order.removeAllOrder();
+        Order cake = Order.of("Cake");
+        Order pizza = Order.of("Pizza");
+        assertEquals(2, Order.getTotalOrderCount());
+        Order.removeOrder("Cake");
+        assertEquals(1, Order.getTotalOrderCount());
+
+    }
+
+    @Test
     void hashCode_order_orderCanBeHashed() {
+        Order.removeAllOrder();
         HashMap<Order, Integer> m = new HashMap<>();
 
         m.put(Order.of("Cake"), 2);
