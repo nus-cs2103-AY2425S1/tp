@@ -27,7 +27,7 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
 
-public class AddCommandTest {
+public class AddClientCommandTest {
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
@@ -49,11 +49,11 @@ public class AddCommandTest {
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Person validPerson = new PersonBuilder().build();
-        AddClientCommand addCommand = new AddClientCommand(validPerson);
+        AddClientCommand addClientCommand = new AddClientCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
         assertThrows(CommandException.class,
-            AddClientCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+            AddClientCommand.MESSAGE_DUPLICATE_PERSON, () -> addClientCommand.execute(modelStub));
     }
 
     @Test
@@ -82,9 +82,9 @@ public class AddCommandTest {
 
     @Test
     public void toStringMethod() {
-        AddClientCommand addCommand = new AddClientCommand(ALICE);
+        AddClientCommand addClientCommand = new AddClientCommand(ALICE);
         String expected = AddClientCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
-        assertEquals(expected, addCommand.toString());
+        assertEquals(expected, addClientCommand.toString());
     }
 
     /**

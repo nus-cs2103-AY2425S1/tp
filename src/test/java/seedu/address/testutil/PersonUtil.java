@@ -21,7 +21,7 @@ public class PersonUtil {
     /**
      * Returns an add command string for adding the {@code person}.
      */
-    public static String getAddCommand(Person person) {
+    public static String getAddClientCommand(Person person) {
         return AddClientCommand.COMMAND_WORD + " " + getPersonDetails(person);
     }
 
