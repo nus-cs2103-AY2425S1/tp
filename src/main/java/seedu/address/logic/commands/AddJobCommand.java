@@ -18,12 +18,19 @@ import seedu.address.model.job.Job;
 public class AddJobCommand extends AddCommand<Job> {
 
     public static final String COMMAND_ENTITY = "job";
-
-    public static final String MESSAGE_USAGE =
-            COMMAND_WORD + ": Adds a job listing to the address book. " + "Parameters: " + PREFIX_NAME + "JOBNAME "
-            + PREFIX_COMPANY + "COMPANY " + PREFIX_SALARY + "SALARY " + "[" + PREFIX_REQUIREMENTS + "REQUIREMENTS] "
-            + "[" + PREFIX_DESCRIPTION + "DESCRIPTION]\n" + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Waiter "
-            + PREFIX_COMPANY + "Starbucks " + PREFIX_SALARY + "2500 " + PREFIX_REQUIREMENTS + "Hands and feet "
+    public static final String FULL_COMMAND = COMMAND_WORD + " " + COMMAND_ENTITY;
+    public static final String MESSAGE_USAGE = FULL_COMMAND + ": Adds a job listing to the address book. "
+            + "Parameters: "
+            + PREFIX_NAME + "JOBNAME "
+            + PREFIX_COMPANY + "COMPANY "
+            + PREFIX_SALARY + "SALARY "
+            + "[" + PREFIX_REQUIREMENTS + "REQUIREMENTS] "
+            + "[" + PREFIX_DESCRIPTION + "DESCRIPTION]\n"
+            + "Example: " + FULL_COMMAND + " "
+            + PREFIX_NAME + "Waiter "
+            + PREFIX_COMPANY + "Starbucks "
+            + PREFIX_SALARY + "2500 "
+            + PREFIX_REQUIREMENTS + "Hands and feet "
             + PREFIX_DESCRIPTION + "At Starbucks, we are looking for someone who brings a lot to the table";
 
     public static final String MESSAGE_SUCCESS = "New job added: %1$s";

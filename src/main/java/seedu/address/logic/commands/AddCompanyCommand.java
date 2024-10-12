@@ -11,9 +11,8 @@ import seedu.address.model.company.Company;
 public class AddCompanyCommand extends AddCommand<Company> {
 
     public static final String COMMAND_ENTITY = "company";
-
-    public static final String MESSAGE_USAGE =
-            COMMAND_WORD + ": Adds a company to the address book. ";
+    public static final String FULL_COMMAND = COMMAND_WORD + " " + COMMAND_ENTITY;
+    public static final String MESSAGE_USAGE = FULL_COMMAND + ": Adds a company to the address book. ";
     public static final String MESSAGE_SUCCESS = "New company added: %1$s";
     public static final String MESSAGE_DUPLICATE_COMPANY = "This company already exists in the address book";
 

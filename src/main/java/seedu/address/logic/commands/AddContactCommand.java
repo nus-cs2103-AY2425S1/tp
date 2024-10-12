@@ -16,15 +16,15 @@ import seedu.address.model.person.Person;
  */
 public class AddContactCommand extends AddCommand<Person> {
     public static final String COMMAND_ENTITY = "contact";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a contact to the address book. "
+    public static final String FULL_COMMAND = COMMAND_WORD + " " + COMMAND_ENTITY;
+    public static final String MESSAGE_USAGE = FULL_COMMAND + ": Adds a contact to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ROLE + "ROLE "
             + "[" + PREFIX_SKILL + "SKILLS]... (Optional)\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "Example: " + FULL_COMMAND + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
