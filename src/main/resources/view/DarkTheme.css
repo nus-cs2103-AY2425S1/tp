@@ -341,7 +341,7 @@
 }
 
 #commandTextField:focused {
-    -fx-background-color: fef3c2;
+    -fx-background-color: #fef3c2;
     -fx-border-color: #383838;
 }
 
