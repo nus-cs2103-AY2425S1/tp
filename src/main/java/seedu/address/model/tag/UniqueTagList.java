@@ -3,9 +3,10 @@ package seedu.address.model.tag;
 import java.util.ArrayList;
 import java.util.List;
 
+import seedu.address.commons.util.ToStringBuilder;
+
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.commons.util.ToStringBuilder;
 
 /**
  * A list that contains unique tags.
