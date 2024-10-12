@@ -21,15 +21,22 @@ public class ResultDisplay extends UiPart<Region> {
 
     public ResultDisplay() {
         super(FXML);
+        // calls #setStyleToDefault() whenever there is a change to the text of the result display.
         resultDisplay.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
     }
 
+    /**
+     * Displays the feedback to user and change style to reflect successful result.
+     */
     public void setSuccessFeedbackToUser(String feedbackToUser) {
         requireNonNull(feedbackToUser);
         resultDisplay.setText(feedbackToUser);
         setStyleToIndicateResultSuccess();
     }
 
+    /**
+     * Displays the feedback to user and change style to reflect failed result.
+     */
     public void setErrorFeedbackToUser(String feedbackToUser) {
         requireNonNull(feedbackToUser);
         resultDisplay.setText(feedbackToUser);
