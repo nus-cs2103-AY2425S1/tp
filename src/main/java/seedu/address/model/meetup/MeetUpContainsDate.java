@@ -18,6 +18,8 @@ public class MeetUpContainsDate implements Predicate<MeetUp> {
 
     @Override
     public boolean test(MeetUp meetUp) {
-        return !meetUp.getFrom().before(this.date) && !meetUp.getTo().after(this.date);
+        return false;
+        // TODO
+        //return !meetUp.getFrom().before(this.date) && !meetUp.getTo().after(this.date);
     }
 }
