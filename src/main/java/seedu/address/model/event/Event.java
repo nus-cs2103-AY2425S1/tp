@@ -89,4 +89,17 @@ public class Event {
     public List<Person> getEventParticipants() {
         return eventParticipants.getParticipants();
     }
+
+    /**
+     * Returns true if both event have same name.
+     * This defines a weaker notion of equality between two events.
+     */
+    public boolean isSameEvent(Event otherEvent) {
+        if (otherEvent == this) {
+            return true;
+        }
+
+        return otherEvent != null
+                && otherEvent.getEventName().equals(getEventName());
+    }
 }

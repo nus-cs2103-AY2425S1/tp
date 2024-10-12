@@ -1,6 +1,7 @@
 package seedu.address.model.event;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
 
@@ -9,7 +10,8 @@ import java.time.LocalDate;
  * Guarantees: immutable; is valid as declared in {@link #isValidDuration(LocalDate, LocalDate)}
  */
 public class EventDuration {
-
+    public static final String MESSAGE_CONSTRAINTS =
+            "Dates should be in {YYYY-MM-DD} format, and end date cannot be earlier than start date.";
     public final LocalDate eventFrom;
     public final LocalDate eventTo;
 
@@ -22,6 +24,7 @@ public class EventDuration {
     public EventDuration(LocalDate eventFrom, LocalDate eventTo) {
         requireNonNull(eventFrom);
         requireNonNull(eventTo);
+        checkArgument(isValidDuration(eventFrom, eventTo), MESSAGE_CONSTRAINTS);
         this.eventFrom = eventFrom;
         this.eventTo = eventTo;
     }
