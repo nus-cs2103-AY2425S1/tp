@@ -17,15 +17,15 @@ import hallpointer.address.logic.commands.AddMemberCommand;
 import hallpointer.address.logic.commands.ClearCommand;
 import hallpointer.address.logic.commands.DeleteMemberCommand;
 import hallpointer.address.logic.commands.UpdateMemberCommand;
-import hallpointer.address.logic.commands.UpdateMemberCommand.updateMemberDescriptor;
+import hallpointer.address.logic.commands.UpdateMemberCommand.UpdateMemberDescriptor;
 import hallpointer.address.logic.commands.ExitCommand;
 import hallpointer.address.logic.commands.FindMemberCommand;
 import hallpointer.address.logic.commands.HelpCommand;
-import hallpointer.address.logic.commands.ListMemberCommand;
+import hallpointer.address.logic.commands.ListMembersCommand;
 import hallpointer.address.logic.parser.exceptions.ParseException;
 import hallpointer.address.model.member.Member;
 import hallpointer.address.model.member.NameContainsKeywordsPredicate;
-import hallpointer.address.testutil.EditMemberDescriptorBuilder;
+import hallpointer.address.testutil.UpdateMemberDescriptorBuilder;
 import hallpointer.address.testutil.MemberBuilder;
 import hallpointer.address.testutil.MemberUtil;
 
@@ -56,10 +56,10 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_edit() throws Exception {
         Member member = new MemberBuilder().build();
-        EditMemberDescriptor descriptor = new EditMemberDescriptorBuilder(member).build();
-        EditMemberCommand command = (EditMemberCommand) parser.parseCommand(EditMemberCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_MEMBER.getOneBased() + " " + MemberUtil.getEditMemberDescriptorDetails(descriptor));
-        assertEquals(new EditMemberCommand(INDEX_FIRST_MEMBER, descriptor), command);
+        UpdateMemberDescriptor descriptor = new UpdateMemberDescriptorBuilder(member).build();
+        UpdateMemberCommand command = (UpdateMemberCommand) parser.parseCommand(UpdateMemberCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_MEMBER.getOneBased() + " " + MemberUtil.getUpdateMemberDescriptorDetails(descriptor));
+        assertEquals(new UpdateMemberCommand(INDEX_FIRST_MEMBER, descriptor), command);
     }
 
     @Test
@@ -84,8 +84,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListMemberCommand.COMMAND_WORD) instanceof ListMemberCommand);
-        assertTrue(parser.parseCommand(ListMemberCommand.COMMAND_WORD + " 3") instanceof ListMemberCommand);
+        assertTrue(parser.parseCommand(ListMembersCommand.COMMAND_WORD) instanceof ListMembersCommand);
+        assertTrue(parser.parseCommand(ListMembersCommand.COMMAND_WORD + " 3") instanceof ListMembersCommand);
     }
 
     @Test

@@ -14,7 +14,6 @@ public class ListMembersCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all members";
     public static final String MESSAGE_NO_MEMBERS = "Error: No members found.";
-    public static final String MESSAGE_NOT_EDITED = "No fields to edit.";
 
 
     @Override

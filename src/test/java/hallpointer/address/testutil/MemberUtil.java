@@ -8,7 +8,7 @@ import static hallpointer.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import java.util.Set;
 
 import hallpointer.address.logic.commands.AddMemberCommand;
-import hallpointer.address.logic.commands.EditMemberCommand.EditMemberDescriptor;
+import hallpointer.address.logic.commands.UpdateMemberCommand.UpdateMemberDescriptor;
 import hallpointer.address.model.member.Member;
 import hallpointer.address.model.tag.Tag;
 
@@ -39,9 +39,9 @@ public class MemberUtil {
     }
 
     /**
-     * Returns the part of command string for the given {@code EditMemberDescriptor}'s details.
+     * Returns the part of command string for the given {@code UpdateMemberDescriptor}'s details.
      */
-    public static String getEditMemberDescriptorDetails(EditMemberDescriptor descriptor) {
+    public static String getUpdateMemberDescriptorDetails(UpdateMemberDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getTelegram().ifPresent(
