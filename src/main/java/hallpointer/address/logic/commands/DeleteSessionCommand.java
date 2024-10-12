@@ -69,4 +69,5 @@ public class DeleteSessionCommand extends Command {
                 .add("targetIndex", targetIndex)
                 .toString();
     }
+
 }
