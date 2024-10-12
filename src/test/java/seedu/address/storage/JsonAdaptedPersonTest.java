@@ -188,6 +188,7 @@ public class JsonAdaptedPersonTest {
         String expectedMessage = Paid.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
+
     @Test
     public void toModelType_nullPaid_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(
