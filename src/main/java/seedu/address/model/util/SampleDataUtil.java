@@ -20,22 +20,22 @@ import seedu.address.model.tag.Role;
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[] {
-            new Person(new Name("Alex Yeoh"), new TelegramHandle("alexyeoh123"), new Email("alexyeoh@example.com"),
+            new Person(new Name("Alex Yeoh"), new TelegramHandle("94351253"), new Email("alexyeoh@example.com"),
                        new StudentStatus("undergraduate 1"),
                     getRoleSet("President"), new Nickname("")),
-            new Person(new Name("Bernice Yu"), new TelegramHandle("berniceyu123"), new Email("berniceyu@example.com"),
+            new Person(new Name("Bernice Yu"), new TelegramHandle("94351243"), new Email("berniceyu@example.com"),
                        new StudentStatus("undergraduate 3"),
                     getRoleSet("President", "Admin"), new Nickname("<nn space>")),
-            new Person(new Name("Charlotte Oliveiro"), new TelegramHandle("charlotteoliverio123"), new Email("charlotte@example.com"),
-                       new StudentStatus("masters"),
+            new Person(new Name("Charlotte Oliveiro"), new TelegramHandle("charlotteoliverio123"),
+                    new Email("charlotte@example.com"), new StudentStatus("masters"),
                     getRoleSet("Marketing"), new Nickname("")),
-            new Person(new Name("David Li"), new TelegramHandle("davidli123"), new Email("lidavid@example.com"),
+            new Person(new Name("David Li"), new TelegramHandle("94331253"), new Email("lidavid@example.com"),
                        new StudentStatus("undergraduate 4"),
                     getRoleSet("Admin"), new Nickname("<nn space>")),
-            new Person(new Name("Irfan Ibrahim"), new TelegramHandle("irfanibrahim123"), new Email("irfan@example.com"),
+            new Person(new Name("Irfan Ibrahim"), new TelegramHandle("94361253"), new Email("irfan@example.com"),
                        new StudentStatus("phd"),
                     getRoleSet("Events (internal)"), new Nickname("")),
-            new Person(new Name("Roy Balakrishnan"), new TelegramHandle("roybalak123"), new Email("royb@example.com"),
+            new Person(new Name("Roy Balakrishnan"), new TelegramHandle("94352253"), new Email("royb@example.com"),
                        new StudentStatus("undergraduate 4"),
                     getRoleSet("External Relations"), new Nickname(""))
         };

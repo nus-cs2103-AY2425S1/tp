@@ -7,25 +7,25 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ROLE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_STUDENT_STATUS_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TELEGRAM_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TELEGRAM_HANDLE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ROLE_DESC_ADMIN;
 import static seedu.address.logic.commands.CommandTestUtil.ROLE_DESC_PRESIDENT;
 import static seedu.address.logic.commands.CommandTestUtil.STUDENT_STATUS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.STUDENT_STATUS_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.TELEGRAM_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.TELEGRAM_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.TELEGRAM_HANDLE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.TELEGRAM_HANDLE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_ADMIN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_PRESIDENT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_STATUS_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_HANDLE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_HANDLE_BOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_STATUS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -41,7 +41,7 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.StudentStatus;
-import seedu.address.model.person.Telegram;
+import seedu.address.model.person.TelegramHandle;
 import seedu.address.model.tag.Role;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
@@ -84,7 +84,8 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
-        assertParseFailure(parser, "1" + INVALID_TELEGRAM_DESC, Telegram.MESSAGE_CONSTRAINTS); // invalid phone
+        assertParseFailure(parser, "1"
+                + INVALID_TELEGRAM_HANDLE_DESC, TelegramHandle.MESSAGE_CONSTRAINTS); // invalid phone
         assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
 
         // invalid student status
@@ -93,7 +94,8 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_ROLE_DESC, Role.MESSAGE_CONSTRAINTS); // invalid role
 
         // invalid phone followed by valid email
-        assertParseFailure(parser, "1" + INVALID_TELEGRAM_DESC + EMAIL_DESC_AMY, Telegram.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + INVALID_TELEGRAM_HANDLE_DESC
+                + EMAIL_DESC_AMY, TelegramHandle.MESSAGE_CONSTRAINTS);
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Person} being edited,
         // parsing it together with a valid tag results in error
@@ -103,17 +105,18 @@ public class EditCommandParserTest {
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_STUDENT_STATUS_AMY
-                + VALID_TELEGRAM_AMY, Name.MESSAGE_CONSTRAINTS);
+                + VALID_TELEGRAM_HANDLE_AMY, Name.MESSAGE_CONSTRAINTS);
     }
 
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
-        String userInput = targetIndex.getOneBased() + TELEGRAM_DESC_BOB + ROLE_DESC_PRESIDENT
+        String userInput = targetIndex.getOneBased() + TELEGRAM_HANDLE_DESC_BOB + ROLE_DESC_PRESIDENT
                 + EMAIL_DESC_AMY + STUDENT_STATUS_DESC_AMY + NAME_DESC_AMY + ROLE_DESC_ADMIN;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withTelegram(VALID_TELEGRAM_BOB).withEmail(VALID_EMAIL_AMY).withStudentStatus(VALID_STUDENT_STATUS_AMY)
+                .withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB)
+                .withEmail(VALID_EMAIL_AMY).withStudentStatus(VALID_STUDENT_STATUS_AMY)
                 .withRoles(VALID_ROLE_PRESIDENT, VALID_ROLE_ADMIN).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -123,9 +126,10 @@ public class EditCommandParserTest {
     @Test
     public void parse_someFieldsSpecified_success() {
         Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + TELEGRAM_DESC_BOB + EMAIL_DESC_AMY;
+        String userInput = targetIndex.getOneBased() + TELEGRAM_HANDLE_DESC_BOB + EMAIL_DESC_AMY;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withTelegram(VALID_TELEGRAM_BOB)
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB)
                 .withEmail(VALID_EMAIL_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -141,9 +145,9 @@ public class EditCommandParserTest {
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // telegram
-        userInput = targetIndex.getOneBased() + TELEGRAM_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withTelegram(VALID_TELEGRAM_AMY).build();
+        // telegramHandle
+        userInput = targetIndex.getOneBased() + TELEGRAM_HANDLE_DESC_AMY;
+        descriptor = new EditPersonDescriptorBuilder().withTelegramHandle(VALID_TELEGRAM_HANDLE_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -173,29 +177,33 @@ public class EditCommandParserTest {
 
         // valid followed by invalid
         Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + INVALID_TELEGRAM_DESC + TELEGRAM_DESC_BOB;
+        String userInput = targetIndex.getOneBased() + INVALID_TELEGRAM_HANDLE_DESC + TELEGRAM_HANDLE_DESC_BOB;
 
-        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TELEGRAM));
+        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TELEGRAM_HANDLE));
 
         // invalid followed by valid
-        userInput = targetIndex.getOneBased() + TELEGRAM_DESC_BOB + INVALID_TELEGRAM_DESC;
+        userInput = targetIndex.getOneBased() + TELEGRAM_HANDLE_DESC_BOB + INVALID_TELEGRAM_HANDLE_DESC;
 
-        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TELEGRAM));
+        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TELEGRAM_HANDLE));
 
         // mulltiple valid fields repeated
-        userInput = targetIndex.getOneBased() + TELEGRAM_DESC_AMY + STUDENT_STATUS_DESC_AMY + EMAIL_DESC_AMY
-                + ROLE_DESC_ADMIN + TELEGRAM_DESC_AMY + STUDENT_STATUS_DESC_AMY + EMAIL_DESC_AMY + ROLE_DESC_ADMIN
-                + TELEGRAM_DESC_BOB + STUDENT_STATUS_DESC_BOB + EMAIL_DESC_BOB + ROLE_DESC_PRESIDENT;
+        userInput = targetIndex.getOneBased() + TELEGRAM_HANDLE_DESC_AMY + STUDENT_STATUS_DESC_AMY + EMAIL_DESC_AMY
+                + ROLE_DESC_ADMIN + TELEGRAM_HANDLE_DESC_AMY
+                + STUDENT_STATUS_DESC_AMY + EMAIL_DESC_AMY + ROLE_DESC_ADMIN
+                + TELEGRAM_HANDLE_DESC_BOB + STUDENT_STATUS_DESC_BOB + EMAIL_DESC_BOB + ROLE_DESC_PRESIDENT;
 
         assertParseFailure(parser, userInput,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TELEGRAM, PREFIX_EMAIL, PREFIX_STUDENT_STATUS));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TELEGRAM_HANDLE,
+                        PREFIX_EMAIL, PREFIX_STUDENT_STATUS));
 
         // multiple invalid values
-        userInput = targetIndex.getOneBased() + INVALID_TELEGRAM_DESC + INVALID_STUDENT_STATUS_DESC + INVALID_EMAIL_DESC
-                + INVALID_TELEGRAM_DESC + INVALID_STUDENT_STATUS_DESC + INVALID_EMAIL_DESC;
+        userInput = targetIndex.getOneBased() + INVALID_TELEGRAM_HANDLE_DESC
+                + INVALID_STUDENT_STATUS_DESC + INVALID_EMAIL_DESC
+                + INVALID_TELEGRAM_HANDLE_DESC + INVALID_STUDENT_STATUS_DESC + INVALID_EMAIL_DESC;
 
         assertParseFailure(parser, userInput,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TELEGRAM, PREFIX_EMAIL, PREFIX_STUDENT_STATUS));
+                Messages.getErrorMessageForDuplicatePrefixes(
+                        PREFIX_TELEGRAM_HANDLE, PREFIX_EMAIL, PREFIX_STUDENT_STATUS));
     }
 
     @Test

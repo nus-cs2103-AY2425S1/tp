@@ -2,49 +2,49 @@
   "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
   "persons" : [ {
     "name" : "Alice Pauline",
-    "telegram" : "94351253",
+    "telegramHandle" : "94351253",
     "email" : "alice@example.com",
     "studentStatus" : "undergraduate 1",
     "roles" : [ "Admin" ],
     "nickname": ""
   }, {
     "name" : "Benson Meier",
-    "telegram" : "98765432",
+    "telegramHandle" : "98765432",
     "email" : "johnd@example.com",
     "studentStatus" : "undergraduate 2",
     "roles" : [ "President", "Marketing" ],
     "nickname": ""
   }, {
     "name" : "Carl Kurz",
-    "telegram" : "95352563",
+    "telegramHandle" : "95352563",
     "email" : "heinz@example.com",
     "studentStatus" : "undergraduate 3",
     "roles" : [ "External Relations" ],
     "nickname": ""
   }, {
     "name" : "Daniel Meier",
-    "telegram" : "87652533",
+    "telegramHandle" : "87652533",
     "email" : "cornelia@example.com",
     "studentStatus" : "undergraduate 4",
     "roles" : [ "Events (external)" ],
     "nickname": ""
   }, {
     "name" : "Elle Meyer",
-    "telegram" : "9482224",
+    "telegramHandle" : "9482224",
     "email" : "werner@example.com",
     "studentStatus" : "undergraduate 5",
     "roles" : [ "Events (internal)" ],
     "nickname": ""
   }, {
     "name" : "Fiona Kunz",
-    "telegram" : "9482427",
+    "telegramHandle" : "9482427",
     "email" : "lydia@example.com",
     "studentStatus" : "masters",
     "roles" : [ "Events (external)" ],
     "nickname": ""
   }, {
     "name" : "George Best",
-    "telegram" : "9482442",
+    "telegramHandle" : "9482442",
     "email" : "anna@example.com",
     "studentStatus" : "phd",
     "roles" : [ "Vice President" ],

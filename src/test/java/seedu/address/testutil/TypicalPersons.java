@@ -8,8 +8,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_ADMIN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_PRESIDENT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_STATUS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_STATUS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_HANDLE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_HANDLE_BOB;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,48 +25,50 @@ public class TypicalPersons {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withStudentStatus("undergraduate 1").withEmail("alice@example.com")
-            .withTelegram("94351253")
+            .withTelegramHandle("94351253")
             .withRoles("Admin").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withStudentStatus("undergraduate 2")
-            .withEmail("johnd@example.com").withTelegram("98765432")
+            .withEmail("johnd@example.com").withTelegramHandle("98765432")
             .withRoles("President", "Marketing").build();
-    public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withTelegram("95352563")
+    public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withTelegramHandle("95352563")
             .withEmail("heinz@example.com")
             .withStudentStatus("undergraduate 3")
             .withRoles("External Relations")
             .build();
-    public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withTelegram("87652533")
+    public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withTelegramHandle("87652533")
             .withEmail("cornelia@example.com")
             .withStudentStatus("undergraduate 4")
             .withRoles("Events (external)")
             .build();
-    public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withTelegram("9482224")
+    public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withTelegramHandle("9482224")
             .withEmail("werner@example.com")
             .withStudentStatus("undergraduate 5")
             .withRoles("Events (internal)")
             .build();
-    public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withTelegram("9482427")
+    public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withTelegramHandle("9482427")
             .withEmail("lydia@example.com")
             .withStudentStatus("masters")
             .withRoles("Events (external)")
             .build();
-    public static final Person GEORGE = new PersonBuilder().withName("George Best").withTelegram("9482442")
+    public static final Person GEORGE = new PersonBuilder().withName("George Best").withTelegramHandle("9482442")
             .withEmail("anna@example.com")
             .withStudentStatus("phd")
             .withRoles("Vice President")
             .build();
 
     // Manually added
-    public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withTelegram("8482424")
+    public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withTelegramHandle("8482424")
             .withEmail("stefan@example.com").withStudentStatus("undergraduate 6").build();
-    public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withTelegram("8482131")
+    public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withTelegramHandle("8482131")
             .withEmail("hans@example.com").withStudentStatus("undergraduate 1").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
-    public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withTelegram(VALID_TELEGRAM_AMY)
+    public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY)
+            .withTelegramHandle(VALID_TELEGRAM_HANDLE_AMY)
             .withEmail(VALID_EMAIL_AMY).withStudentStatus(VALID_STUDENT_STATUS_AMY).withRoles(VALID_ROLE_ADMIN).build();
-    public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withTelegram(VALID_TELEGRAM_BOB)
+    public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB)
+            .withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB)
             .withEmail(VALID_EMAIL_BOB).withStudentStatus(VALID_STUDENT_STATUS_BOB)
             .withRoles(VALID_ROLE_PRESIDENT, VALID_ROLE_ADMIN)
             .build();

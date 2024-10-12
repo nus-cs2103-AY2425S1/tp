@@ -8,7 +8,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.StudentStatus;
-import seedu.address.model.person.Telegram;
+import seedu.address.model.person.TelegramHandle;
 import seedu.address.model.tag.Nickname;
 import seedu.address.model.tag.Role;
 import seedu.address.model.util.SampleDataUtil;
@@ -26,7 +26,7 @@ public class PersonBuilder {
     public static final String DEFAULT_NICKNAME = "";
 
     private Name name;
-    private Telegram telegram;
+    private TelegramHandle telegramHandle;
     private Email email;
     private StudentStatus studentStatus;
     private Set<Role> roles;
@@ -37,7 +37,7 @@ public class PersonBuilder {
      */
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
-        telegram = new Telegram(DEFAULT_TELEGRAM);
+        telegramHandle = new TelegramHandle(DEFAULT_TELEGRAM);
         email = new Email(DEFAULT_EMAIL);
         studentStatus = new StudentStatus(DEFAULT_STUDENT_STATUS);
         roles = new HashSet<>(Arrays.stream(DEFAULT_ROLES).map(Role::new).toList());
@@ -49,7 +49,7 @@ public class PersonBuilder {
      */
     public PersonBuilder(Person personToCopy) {
         name = personToCopy.getName();
-        telegram = personToCopy.getTelegram();
+        telegramHandle = personToCopy.getTelegramHandle();
         email = personToCopy.getEmail();
         studentStatus = personToCopy.getStudentStatus();
         roles = new HashSet<>(personToCopy.getRoles());
@@ -81,10 +81,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Telegram} of the {@code Person} that we are building.
+     * Sets the {@code TelegramHandle} of the {@code Person} that we are building.
      */
-    public PersonBuilder withTelegram(String telegram) {
-        this.telegram = new Telegram(telegram);
+    public PersonBuilder withTelegramHandle(String telegramHandle) {
+        this.telegramHandle = new TelegramHandle(telegramHandle);
         return this;
     }
 
@@ -105,7 +105,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, telegram, email, studentStatus, roles, nickname);
+        return new Person(name, telegramHandle, email, studentStatus, roles, nickname);
     }
 
 }

@@ -97,7 +97,8 @@ public class EditCommand extends Command {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        TelegramHandle updatedTelegramHandle = editPersonDescriptor.getTelegramHandle().orElse(personToEdit.getTelegramHandle());
+        TelegramHandle updatedTelegramHandle = editPersonDescriptor.getTelegramHandle()
+                .orElse(personToEdit.getTelegramHandle());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         StudentStatus updatedStudentStatus =
                 editPersonDescriptor.getStudentStatus().orElse(personToEdit.getStudentStatus());

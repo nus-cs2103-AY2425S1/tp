@@ -33,7 +33,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label telegram;
+    private Label telegramHandle;
     @FXML
     private Label studentStatus;
     @FXML
@@ -51,7 +51,7 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        telegram.setText(person.getTelegram().value);
+        telegramHandle.setText(person.getTelegramHandle().value);
         studentStatus.setText(person.getStudentStatus().value);
         email.setText(person.getEmail().value);
         person.getRoles().stream()

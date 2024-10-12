@@ -33,7 +33,8 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TELEGRAM_HANDLE, PREFIX_EMAIL, PREFIX_STUDENT_STATUS,
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TELEGRAM_HANDLE,
+                        PREFIX_EMAIL, PREFIX_STUDENT_STATUS,
                         PREFIX_ROLE, PREFIX_NICKNAME);
 
         if (!arePrefixesPresent(
@@ -45,7 +46,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(
                 PREFIX_NAME, PREFIX_TELEGRAM_HANDLE, PREFIX_EMAIL, PREFIX_STUDENT_STATUS, PREFIX_NICKNAME);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        TelegramHandle telegramHandle = ParserUtil.parseTelegramHandle(argMultimap.getValue(PREFIX_TELEGRAM_HANDLE).get());
+        TelegramHandle telegramHandle = ParserUtil.parseTelegramHandle(
+                argMultimap.getValue(PREFIX_TELEGRAM_HANDLE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         StudentStatus studentStatus = ParserUtil.parseStudentStatus(argMultimap.getValue(PREFIX_STUDENT_STATUS).get());
         Set<Role> roleList = ParserUtil.parseRoles(argMultimap.getAllValues(PREFIX_ROLE));
