@@ -133,6 +133,23 @@
     -fx-text-fill: #FFFFFF;
 }
 
+.client_details_container {
+    -fx-background-color: #383838;
+    -fx-padding: 10 10 10 10;
+}
+
+.client_details_header_label {
+    -fx-font-family: "Segoe UI Black";
+    -fx-font-size: 18px;
+    -fx-text-fill: #FFFFFF;
+}
+
+.client_details_field_label {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 18px;
+    -fx-text-fill: #FFFFFF;
+}
+
 /* The Enter Command Here Container Styling */
 .stack-pane {
     -fx-background-color: derive(#1d1d1d, 20%);
@@ -220,27 +237,26 @@
  */
 .button {
     -fx-padding: 5 22 5 22;
-    -fx-border-color: #e2e2e2;
+    -fx-border-color: #282828;
     -fx-border-width: 2;
     -fx-background-radius: 0;
-    -fx-background-color: #1d1d1d;
+    -fx-background-color: #484848;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-    -fx-font-size: 11pt;
-    -fx-text-fill: #d8d8d8;
+    -fx-font-size: 12pt;
+    -fx-text-fill: #FFFFFF;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
 }
 
 .button:hover {
-    -fx-background-color: #3a3a3a;
+    -fx-background-color: #585858;
 }
 
 .button:pressed, .button:default:hover:pressed {
-  -fx-background-color: white;
-  -fx-text-fill: #1d1d1d;
+  -fx-background-color: 484848;
 }
 
 .button:focused {
-    -fx-border-color: white, white;
+    -fx-border-color: 585858, 585858;
     -fx-border-width: 1, 1;
     -fx-border-style: solid, segments(1, 1);
     -fx-border-radius: 0, 0;
@@ -354,5 +370,5 @@
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
-    -fx-font-size: 11;
+    -fx-font-size: 18;
 }
