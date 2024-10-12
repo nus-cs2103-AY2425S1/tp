@@ -33,7 +33,7 @@ public class AddOrderCommand extends Command {
             + PREFIX_COUNT + "ITEM_COUNT\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_ITEM + "Lamp "
-            + PREFIX_DATE + "2024-12-20 "
+            + PREFIX_DATE + "20-12-2024 "
             + PREFIX_COUNT + "2";
 
     public static final String MESSAGE_SUCCESS = "New Order added for %1$s: %2$s";
