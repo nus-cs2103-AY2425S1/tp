@@ -42,8 +42,8 @@ public class UniqueClientListTest {
     @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniqueClientList.add(ALICE);
-        Client editedAlice = new ClientBuilder(ALICE).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
-                .buildSeller();
+        Client editedAlice = new ClientBuilder(ALICE).withEmail(VALID_EMAIL_AMY)
+                .buildBuyer();
         assertTrue(uniqueClientList.contains(editedAlice));
     }
 
