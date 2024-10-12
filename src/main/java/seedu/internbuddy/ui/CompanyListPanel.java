@@ -14,7 +14,7 @@ import seedu.internbuddy.model.company.Company;
  * Panel containing the list of companies.
  */
 public class CompanyListPanel extends UiPart<Region> {
-    private static final String FXML = "companyListPanel.fxml";
+    private static final String FXML = "CompanyListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(CompanyListPanel.class);
 
     @FXML
@@ -45,5 +45,4 @@ public class CompanyListPanel extends UiPart<Region> {
             }
         }
     }
-
 }
