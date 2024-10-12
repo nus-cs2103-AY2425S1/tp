@@ -13,7 +13,7 @@ import seedu.address.model.person.Person;
 /**
  * Views the details of an existing person in the address book.
  */
-public class ViewCommand extends Command {
+public class ViewClientCommand extends Command {
     public static final String COMMAND_WORD = "view-client";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Views the details of the client identified by the index number used in the displayed client list.\n"
@@ -26,11 +26,11 @@ public class ViewCommand extends Command {
     private final Index index;
 
     /**
-     * Constructs a {@code ViewCommand} to view details of the client at the specified index.
+     * Constructs a {@code ViewClientCommand} to view details of the client at the specified index.
      *
      * @param index of the person to view details
      */
-    public ViewCommand(Index index) {
+    public ViewClientCommand(Index index) {
         this.index = index;
     }
 
@@ -55,10 +55,10 @@ public class ViewCommand extends Command {
         if (other == this) {
             return true;
         }
-        if (!(other instanceof ViewCommand)) {
+        if (!(other instanceof ViewClientCommand)) {
             return false;
         }
-        ViewCommand otherCommand = (ViewCommand) other;
+        ViewClientCommand otherCommand = (ViewClientCommand) other;
         return index.equals(otherCommand.index);
     }
 

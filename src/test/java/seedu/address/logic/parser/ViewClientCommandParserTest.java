@@ -7,28 +7,28 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.ViewCommand;
+import seedu.address.logic.commands.ViewClientCommand;
 
 
-public class ViewCommandParserTest {
+public class ViewClientCommandParserTest {
 
-    private ViewCommandParser parser = new ViewCommandParser();
+    private ViewClientCommandParser parser = new ViewClientCommandParser();
 
     @Test
-    public void parse_validArgs_returnsViewCommand() {
-        ViewCommand expectedCommand = new ViewCommand(INDEX_FIRST_PERSON);
+    public void parse_validArgs_returnsViewClientCommand() {
+        ViewClientCommand expectedCommand = new ViewClientCommand(INDEX_FIRST_PERSON);
         assertParseSuccess(parser, "1", expectedCommand);
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a", String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                                                        ViewCommand.MESSAGE_USAGE));
+                                                        ViewClientCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_emptyArgs_throwsParseException() {
         assertParseFailure(parser, "", String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                                                        ViewCommand.MESSAGE_USAGE));
+                                                        ViewClientCommand.MESSAGE_USAGE));
     }
 }
