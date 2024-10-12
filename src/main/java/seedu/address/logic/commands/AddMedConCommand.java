@@ -30,8 +30,8 @@ public class AddMedConCommand extends Command {
 
     public static final String MESSAGE_ARGUMENTS = "NRIC: %1$d, MedCon: %2$s";
 
-    public static final String MESSAGE_ADD_MEDCON_SUCCESS = "Added medical conditon to Person: %1$d";
-    public static final String MESSAGE_DELETE_MEDCON_SUCCESS = "Removed medical conditon from Person: %1$d";
+    public static final String MESSAGE_ADD_MEDCON_SUCCESS = "Added medical conditon to Person: %1$s";
+    public static final String MESSAGE_DELETE_MEDCON_SUCCESS = "Removed medical conditon from Person: %1$s";
     public static final String PATIENT_DOES_NOT_EXIST = "Patient does not exist in contact list";
 
     private final Nric nric;

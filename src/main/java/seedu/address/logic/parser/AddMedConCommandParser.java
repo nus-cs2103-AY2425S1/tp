@@ -24,24 +24,20 @@ public class AddMedConCommandParser implements Parser<AddMedConCommand> {
      */
     public AddMedConCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        String trimmedArgs = args.trim();
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
-                PREFIX_NRIC, PREFIX_MEDCON);
-        System.out.println(trimmedArgs);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NRIC, PREFIX_MEDCON);
+
+        // Check if NRIC is provided
         if (!argMultimap.getValue(PREFIX_NRIC).isPresent()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddMedConCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMedConCommand.MESSAGE_USAGE));
         }
 
-        if (!argMultimap.getValue(PREFIX_MEDCON).isPresent()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddMedConCommand.MESSAGE_USAGE));
-        }
-
-        String nricStr = argMultimap.getValue(PREFIX_NRIC).orElse("");
+        // Parse NRIC
+        String nricStr = argMultimap.getValue(PREFIX_NRIC).get();
         Nric nric = ParserUtil.parseNric(nricStr);
+
+        // Parse MedCon if present, otherwise use empty value
         String medConStr = argMultimap.getValue(PREFIX_MEDCON).orElse("");
-        MedCon medCon = ParserUtil.parseMedCon(medConStr);
+        MedCon medCon = new MedCon(medConStr);
 
         return new AddMedConCommand(nric, medCon);
     }
