@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import hallpointer.address.commons.core.GuiSettings;
 import hallpointer.address.commons.core.LogsCenter;
 import hallpointer.address.model.member.Member;
+import hallpointer.address.model.session.Session;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
@@ -43,14 +44,14 @@ public class ModelManager implements Model {
     //=========== UserPrefs ==================================================================================
 
     @Override
-    public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
-        requireNonNull(userPrefs);
-        this.userPrefs.resetData(userPrefs);
+    public ReadOnlyUserPrefs getUserPrefs() {
+        return userPrefs;
     }
 
     @Override
-    public ReadOnlyUserPrefs getUserPrefs() {
-        return userPrefs;
+    public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
+        requireNonNull(userPrefs);
+        this.userPrefs.resetData(userPrefs);
     }
 
     @Override
@@ -78,13 +79,13 @@ public class ModelManager implements Model {
     //=========== AddressBook ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+    public ReadOnlyAddressBook getAddressBook() {
+        return addressBook;
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public void setAddressBook(ReadOnlyAddressBook addressBook) {
+        this.addressBook.resetData(addressBook);
     }
 
     @Override
@@ -107,7 +108,6 @@ public class ModelManager implements Model {
     @Override
     public void setMember(Member target, Member editedMember) {
         requireAllNonNull(target, editedMember);
-
         addressBook.setMember(target, editedMember);
     }
 
@@ -126,6 +126,59 @@ public class ModelManager implements Model {
     public void updateFilteredMemberList(Predicate<Member> predicate) {
         requireNonNull(predicate);
         filteredMembers.setPredicate(predicate);
+    }
+
+    //=========== Session ================================================================================
+    /**
+     * Returns true if a session with the same identity as {@code session} exists in the address book.
+     *
+     * @param session The session to check.
+     * @return True if the session exists, false otherwise.
+     */
+    public boolean hasSession(Session session) {
+        requireNonNull(session);
+        return addressBook.hasSession(session);
+    }
+
+    /**
+     * Adds the given session to the address book.
+     * {@code session} must not already exist in the address book.
+     *
+     * @param session The session to add.
+     */
+    public void addSession(Session session) {
+        requireNonNull(session);
+        addressBook.addSession(session);
+    }
+
+    /**
+     * Removes the given session {@code target} in the list.
+     * @param target session to be deleted
+     */
+    @Override
+    public void deleteSession(Session target) {
+        addressBook.deleteSession(target);
+    }
+
+    /**
+     * Replaces the given session {@code target} with {@code editedSession}.
+     * {@code target} must exist in the address book.
+     * The session identity of {@code editedSession} must not be the same as another existing session in the address book.
+     *
+     * @param target The session to replace.
+     * @param editedSession The new session.
+     */
+    @Override
+    public void setSession(Session target, Session editedSession) {
+        requireNonNull(target);
+        requireNonNull(editedSession);
+        addressBook.setSession(target, editedSession);
+    }
+
+
+    @Override
+    public ObservableList<Session> getSessionList() {
+        return addressBook.getSessionList();
     }
 
     @Override

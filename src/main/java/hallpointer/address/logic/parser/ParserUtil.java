@@ -12,6 +12,8 @@ import hallpointer.address.logic.parser.exceptions.ParseException;
 import hallpointer.address.model.member.Name;
 import hallpointer.address.model.member.Room;
 import hallpointer.address.model.member.Telegram;
+import hallpointer.address.model.session.Date;
+import hallpointer.address.model.session.SessionName;
 import hallpointer.address.model.tag.Tag;
 
 /**
@@ -104,5 +106,51 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String name} into a {@code SessionName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static SessionName parseSessionName(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!SessionName.isValidSessionName(trimmedName)) {
+            throw new ParseException(SessionName.MESSAGE_CONSTRAINTS);
+        }
+        return new SessionName(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String date} into a {@code Date}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+    public static Date parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!Date.isValidDate(trimmedDate)) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        }
+        return new Date(trimmedDate);
+    }
+
+    /**
+     * Parses a {@code String points} into an {@code int}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code points} is invalid.
+     */
+    public static int parsePoints(String points) throws ParseException {
+        requireNonNull(points);
+        String trimmedPoints = points.trim();
+        try {
+            return Integer.parseInt(trimmedPoints);
+        } catch (NumberFormatException e) {
+            throw new ParseException("Points should be a valid integer.");
+        }
     }
 }

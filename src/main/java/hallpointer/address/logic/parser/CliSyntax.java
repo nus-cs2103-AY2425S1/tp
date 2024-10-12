@@ -10,5 +10,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_TELEGRAM = new Prefix("tg/");
     public static final Prefix PREFIX_ROOM = new Prefix("r/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
+    public static final Prefix PREFIX_SESSION_NAME = new Prefix("s/");
+    public static final Prefix PREFIX_DATE = new Prefix("d/");
+    public static final Prefix PREFIX_POINTS = new Prefix("p/");
 
 }

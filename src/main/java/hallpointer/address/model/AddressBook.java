@@ -7,6 +7,8 @@ import java.util.List;
 import hallpointer.address.commons.util.ToStringBuilder;
 import hallpointer.address.model.member.Member;
 import hallpointer.address.model.member.UniqueMemberList;
+import hallpointer.address.model.session.Session;
+import hallpointer.address.model.session.UniqueSessionList;
 import javafx.collections.ObservableList;
 
 /**
@@ -16,6 +18,7 @@ import javafx.collections.ObservableList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueMemberList members;
+    private final UniqueSessionList sessions;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -26,6 +29,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         members = new UniqueMemberList();
+        sessions = new UniqueSessionList();
     }
 
     public AddressBook() {}
@@ -108,6 +112,64 @@ public class AddressBook implements ReadOnlyAddressBook {
         return members.asUnmodifiableObservableList();
     }
 
+    /**
+     * Returns true if a session with the same identity as {@code session} exists in the address book.
+     *
+     * @param session The session to check.
+     * @return True if the session exists, false otherwise.
+     */
+    //=========== Session ================================================================================
+    public boolean hasSession(Session session) {
+        requireNonNull(session);
+        return sessions.contains(session);
+    }
+
+    /**
+     * Adds the given session to the address book.
+     * {@code session} must not already exist in the address book.
+     *
+     * @param session The session to add.
+     */
+    public void addSession(Session session) {
+        requireNonNull(session);
+        sessions.add(session);
+    }
+
+    /**
+     * Deletes the given session from the address book.
+     * {@code session} must exist in the address book.
+     *
+     * @param session The session to delete.
+     */
+    public void deleteSession(Session session) {
+        requireNonNull(session);
+        sessions.remove(session);
+    }
+
+    /**
+     * Replaces the given session {@code target} with {@code editedSession}.
+     * {@code target} must exist in the address book.
+     * The session identity of {@code editedSession} must not be the same as another existing session in the address book.
+     *
+     * @param target The session to replace.
+     * @param editedSession The new session.
+     */
+    public void setSession(Session target, Session editedSession) {
+        requireNonNull(target);
+        requireNonNull(editedSession);
+        sessions.setSession(target, editedSession);
+    }
+
+    /**
+     * Returns an unmodifiable view of the sessions list.
+     *
+     * @return The unmodifiable list of sessions.
+     */
+    public ObservableList<Session> getSessionList() {
+        return sessions.asUnmodifiableObservableList();
+    }
+
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -127,4 +189,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     public int hashCode() {
         return members.hashCode();
     }
+
+
 }
