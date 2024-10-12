@@ -17,8 +17,10 @@ public class Messages {
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
-                "Multiple values specified for the following single-valued field(s): ";
-
+            "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_STUDENTS_FOUND_MATCHES = "%1$d student(s) found that matches the keywords.";
+    public static final String MESSAGE_INVALID_NAME_FORMAT = "The name entered is invalid. "
+            + "\nPlease make sure the name is between 1-100 characters and only contains alphabets and spaces.";
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
