@@ -19,7 +19,8 @@ import seedu.address.model.tag.Tag;
  * Tags people that share the same phone number
  */
 public class DuplicatePhoneTagger {
-    private static final Tag DUPLICATE_TAG = new Tag("DuplicatePhone");
+    public static final String DUPLICATE_PHONE_TAG_NAME = "DuplicatePhone";
+    private static final Tag DUPLICATE_TAG = new Tag(DUPLICATE_PHONE_TAG_NAME);
     private final HashMap<Phone, Integer> phoneFrequencies = new HashMap<>();
 
     /**

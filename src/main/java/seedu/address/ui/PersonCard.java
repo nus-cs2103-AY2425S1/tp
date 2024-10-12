@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.logic.handler.DuplicatePhoneTagger;
 import seedu.address.model.person.Person;
 
 /**
@@ -60,6 +61,13 @@ public class PersonCard extends UiPart<Region> {
         socialMediaHandle.setText(person.getSocialMediaHandle());
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .map(tag -> {
+                    Label label = new Label(tag.tagName);
+                    if (tag.tagName.equals(DuplicatePhoneTagger.DUPLICATE_PHONE_TAG_NAME)) {
+                        label.setId("duplicate");
+                    }
+                    return label;
+                })
+                .forEach(tag -> tags.getChildren().add(tag));
     }
 }
