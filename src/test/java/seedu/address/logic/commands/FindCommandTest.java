@@ -12,7 +12,6 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,8 +19,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.PhoneContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -60,7 +57,7 @@ public class FindCommandTest {
     @Test
     public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        Predicate<Person> predicate = preparePredicate(" ");
+        NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -70,7 +67,7 @@ public class FindCommandTest {
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        Predicate<Person> predicate = preparePredicate("Kurz Elle Kunz");
+        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -86,32 +83,9 @@ public class FindCommandTest {
     }
 
     /**
-     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate} or {@code PhoneContainsKeywordsPredicate}.
+     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
      */
-    private Predicate<Person> preparePredicate(String userInput) {
-        String trimmedInput = userInput.trim();
-
-        // If the input is empty or only whitespace, return a predicate that matches no persons
-        if (trimmedInput.isEmpty()) {
-            return person -> false; // This predicate matches no persons
-        }
-
-        String[] keywords = trimmedInput.split("\\s+");
-
-        // Check if all keywords are numeric (for phone search)
-        if (Arrays.stream(keywords).allMatch(this::isNumeric)) {
-            return new PhoneContainsKeywordsPredicate(Arrays.asList(keywords));
-        } else {
-            return new NameContainsKeywordsPredicate(Arrays.asList(keywords));
-        }
-    }
-
-    /**
-     * Utility method to check if a string is numeric (i.e., contains only digits).
-     * @param str The string to check.
-     * @return True if the string is numeric, false otherwise.
-     */
-    private boolean isNumeric(String str) {
-        return str.matches("\\d+");
+    private NameContainsKeywordsPredicate preparePredicate(String userInput) {
+        return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 }
