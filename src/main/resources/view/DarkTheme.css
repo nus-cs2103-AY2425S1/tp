@@ -100,19 +100,19 @@
 }
 
 .list-cell:filled:even {
-    -fx-background-color: #46342d;
+    -fx-background-color: #484848;
 }
 
 .list-cell:filled:odd {
-    -fx-background-color: #644e4a;
+    -fx-background-color: #585858;
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #51342c;
+    -fx-background-color: #2c3451;
 }
 
 .list-cell:filled:selected #cardPane {
-    -fx-border-color: #51342c;
+    -fx-border-color: #2c3451;
     -fx-border-width: 1;
 }
 
@@ -120,16 +120,17 @@
     -fx-text-fill: white;
 }
 
-.cell_big_label {
-    -fx-font-family: "Segoe UI Semibold";
-    -fx-font-size: 16px;
-    -fx-text-fill: #010504;
+.cell_index_label {
+    -fx-font-family: "Segoe UI Black";
+    -fx-font-size: 40px;
+    -fx-text-fill: #FFFFFF;
+    -fx-padding: 0 20 0 5;
 }
 
-.cell_small_label {
-    -fx-font-family: "Segoe UI";
-    -fx-font-size: 13px;
-    -fx-text-fill: #010504;
+.cell_field_label {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 18px;
+    -fx-text-fill: #FFFFFF;
 }
 
 /* The Enter Command Here Container Styling */

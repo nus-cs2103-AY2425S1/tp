@@ -17,7 +17,7 @@
     <Image url="@/images/mater.png" />
   </icons>
   <scene>
-    <Scene fill="lightblue">
+    <Scene fill="grey">
       <stylesheets>
         <URL value="@DarkTheme.css" />
         <URL value="@Extensions.css" />

@@ -29,25 +29,11 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
-    private Label name;
-    @FXML
     private Label id;
     @FXML
-    private Label phone;
-    @FXML
-    private Label address;
-    @FXML
-    private Label email;
-    @FXML
-    private FlowPane tags;
+    private Label name;
     @FXML
     private Label vrn;
-    @FXML
-    private Label vin;
-    @FXML
-    private Label carMake;
-    @FXML
-    private Label carModel;
 
 
     /**
@@ -56,21 +42,10 @@ public class PersonCard extends UiPart<Region> {
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
-        id.setText(displayedIndex + ". ");
+        id.setText(Integer.toString(displayedIndex));
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
         if (this.person.getCar() != null) {
             vrn.setText(person.getCar().getVrn().vrn);
-            vin.setText(person.getCar().getVin().vin);
-            carMake.setText(person.getCar().getCarMake().carMake);
-            carModel.setText(person.getCar().getCarModel().carModel);
         }
-
-
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }
