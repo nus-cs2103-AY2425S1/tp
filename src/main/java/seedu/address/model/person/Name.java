@@ -59,6 +59,9 @@ public class Name {
         return fullName.equals(otherName.fullName);
     }
 
+    /**
+     * Returns true if 2 names are equal (case-insensitive).
+     */
     public boolean equalsLowerCase(Object other) {
         if (other == this) {
             return true;
