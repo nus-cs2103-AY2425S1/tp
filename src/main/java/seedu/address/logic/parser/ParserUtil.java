@@ -138,11 +138,10 @@ public class ParserUtil {
         }
         return new Rate(trimmedRate);
     }
-    
     /**
      * Parses a {@code String paid} into a {@code Paid}
      * Leading and trailing whitespaces will be trimmed.
-     
+     *
      * @throws ParseException if the given {@code paid} is invalid.
      */
     public static Paid parsePaid(String paid) throws ParseException {

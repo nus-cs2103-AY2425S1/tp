@@ -27,7 +27,8 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Schedule schedule, Subject subject, Rate rate, Paid paid) {
+    public Person(Name name, Phone phone, Email email, Address address, Schedule schedule,
+            Subject subject, Rate rate, Paid paid) {
         requireAllNonNull(name, phone, email, address);
         this.name = name;
         this.phone = phone;
@@ -66,11 +67,9 @@ public class Person {
     public Rate getRate() {
         return rate;
     }
-    
     public Paid getPaid() {
         return paid;
     }
-    
     /**
      * Returns a new {@code Person} instance with the updated
      * @param paid

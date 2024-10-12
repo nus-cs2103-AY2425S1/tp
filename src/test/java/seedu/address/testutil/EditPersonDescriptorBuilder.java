@@ -96,7 +96,6 @@ public class EditPersonDescriptorBuilder {
         descriptor.setRate(new Rate(rate));
         return this;
     }
-    
     /**
      * Sets the {@code Paid} of the {@code EditPersonDescriptor} that we are building.
      */

@@ -54,13 +54,11 @@ public class AddCommandParser implements Parser<AddCommand> {
         Subject subject = ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
         Rate rate = ParserUtil.parseRate(argMultimap.getValue(PREFIX_RATE).get());
         Paid paid = null;
-        
         if (argMultimap.getValue(PREFIX_PAID).isPresent()) {
             paid = ParserUtil.parsePaid(argMultimap.getValue(PREFIX_PAID).get());
         } else {
             paid = new Paid();
         }
-        
         Person person = new Person(name, phone, email, address, schedule, subject, rate, paid);
 
         return new AddCommand(person);

@@ -117,7 +117,6 @@ public class PersonBuilder {
         this.rate = new Rate(rate);
         return this;
     }
-    
     /**
      * Sets the {@code Paid} of the {@code Person} that we are building.
      */

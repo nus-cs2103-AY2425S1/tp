@@ -16,7 +16,6 @@ public class Paid extends Fee {
     public Paid(String paid) {
         super(paid);
     }
-    
     /**
      * Constructs a {@code Paid}
      * with a default {@code value} of 0.0

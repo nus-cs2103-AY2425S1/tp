@@ -126,7 +126,6 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Rate.MESSAGE_CONSTRAINTS);
         }
         final Rate modelRate = new Rate(rate);
-        
         if (paid == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Paid.class.getSimpleName()));
         }
@@ -135,7 +134,8 @@ class JsonAdaptedPerson {
         }
         final Paid modelPaid = new Paid(paid);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelSchedule, modelSubject, modelRate, modelPaid);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelSchedule,
+                modelSubject, modelRate, modelPaid);
     }
 
 }
