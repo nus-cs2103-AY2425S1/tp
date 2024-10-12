@@ -154,5 +154,6 @@ public class ModelManager implements Model {
     public void updateFilteredMeetUpList(Predicate<MeetUp> predicate) {
         requireNonNull(predicate);
         filteredMeetUps.setPredicate(predicate);
+        // TODO
     }
 }
