@@ -4,6 +4,7 @@ import static seedu.address.model.person.insurance.InsurancePlanFactory.createIn
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Objects;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.insurance.claim.Claim;
@@ -127,6 +128,62 @@ public class InsurancePlansManager {
                 p.claims.add(claim);
                 this.claimIds.add(claim.getClaimId());
             }
+        }
+    }
+
+    /**
+     * Converts all claims into a string to be saved in JSON file.
+     */
+    public String convertClaimsToJson() {
+        StringBuilder claimsStringBuilder = new StringBuilder();
+        for (InsurancePlan p : this.insurancePlans) {
+            for (Claim c : p.claims) {
+                claimsStringBuilder.append(p.toString())
+                        .append("|")
+                        .append(c.getClaimId())
+                        .append("|")
+                        .append(c.getOpen())
+                        .append("|")
+                        .append(c.getClaimAmount())
+                        .append(",");
+            }
+        }
+
+        if (!claimsStringBuilder.isEmpty()) {
+            claimsStringBuilder.deleteCharAt(claimsStringBuilder.length() - 1);
+        } else {
+            claimsStringBuilder.append("No claims yet.");
+        }
+
+        return claimsStringBuilder.toString();
+    }
+
+    /**
+     * Adds all the claims string from JSON file into their respective insurance plans.
+     *
+     * @param claimsJson String obtained from JSON file of all the claims.
+     * @throws ParseException if there is an error parsing the data from the JSON file.
+     */
+    public void addAllClaimsFromJson(String claimsJson) throws ParseException {
+        String[] claimsString = claimsJson.split(",");
+
+        if (Objects.equals(claimsString[0], "No claims yet.")) {
+            return;
+        }
+
+        for (String claim : claimsString) {
+            String[] claimAttributes = claim.split("\\|");
+
+            InsurancePlan insurancePlan = createInsurancePlan(claimAttributes[0]);
+            checkIfPlanOwned(insurancePlan);
+
+            String claimId = claimAttributes[1];
+            boolean isOpen = Boolean.parseBoolean(claimAttributes[2]);
+            int claimAmount = Integer.parseInt(claimAttributes[3]);
+
+            Claim claimToBeAdded = new Claim(claimId, isOpen, claimAmount);
+
+            this.addClaimToInsurancePlan(insurancePlan, claimToBeAdded);
         }
     }
 

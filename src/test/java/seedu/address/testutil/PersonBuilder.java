@@ -106,6 +106,20 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Adds all the clients current claims using the {@code InsurancePlansManager}
+     * of the {@code Person} that we are building.
+     */
+    public PersonBuilder withClaims(String claimsString) {
+        assert this.insurancePlansManager != null;
+        try {
+            this.insurancePlansManager.addAllClaimsFromJson(claimsString);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        return this;
+    }
+
     public Person build() {
         return new Person(name, phone, email, address, insurancePlansManager, tags);
     }
