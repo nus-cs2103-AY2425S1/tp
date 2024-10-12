@@ -67,7 +67,7 @@ public class Person {
     public Rate getRate() {
         return rate;
     }
-    
+
     public OwedAmount getOwedAmount() {
         return owedAmount;
     }

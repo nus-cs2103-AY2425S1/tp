@@ -100,11 +100,11 @@ public class AddCommandParserTest {
         // multiple schedules
         assertParseFailure(parser, SCHEDULE_DESC_AMY + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_SCHEDULE));
-        
+
         // multiple rates
         assertParseFailure(parser, RATE_DESC_AMY + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_RATE));
-        
+
         // multiple owedAmounts
         assertParseFailure(parser, OWED_AMOUNT_DESC_AMY + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_OWED_AMOUNT));
@@ -116,7 +116,8 @@ public class AddCommandParserTest {
         // multiple fields repeated
         assertParseFailure(parser,
                 validExpectedPersonString + PHONE_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY + ADDRESS_DESC_AMY
-                        + SCHEDULE_DESC_AMY + SUBJECT_DESC_AMY + RATE_DESC_AMY + OWED_AMOUNT_DESC_AMY + validExpectedPersonString,
+                        + SCHEDULE_DESC_AMY + SUBJECT_DESC_AMY + RATE_DESC_AMY + OWED_AMOUNT_DESC_AMY
+                        + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_EMAIL, PREFIX_PHONE,
                         PREFIX_SCHEDULE, PREFIX_SUBJECT, PREFIX_RATE, PREFIX_OWED_AMOUNT));
 
@@ -149,7 +150,7 @@ public class AddCommandParserTest {
         // invalid rate
         assertParseFailure(parser, INVALID_RATE_DESC + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_RATE));
-        
+
         // invalid owedAmount
         assertParseFailure(parser, INVALID_OWED_AMOUNT_DESC + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_OWED_AMOUNT));
@@ -179,11 +180,11 @@ public class AddCommandParserTest {
         // invalid subject
         assertParseFailure(parser, validExpectedPersonString + INVALID_SUBJECT_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_SUBJECT));
-        
+
         // invalid rate
         assertParseFailure(parser, validExpectedPersonString + INVALID_RATE_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_RATE));
-        
+
         // invalid owedAmount
         assertParseFailure(parser, validExpectedPersonString + INVALID_OWED_AMOUNT_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_OWED_AMOUNT));
@@ -277,12 +278,12 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + SCHEDULE_DESC_BOB + SUBJECT_DESC_BOB
                 + INVALID_RATE_DESC + OWED_AMOUNT_DESC_BOB, Rate.MESSAGE_CONSTRAINTS);
-        
+
         // invalid owedAmount
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + SCHEDULE_DESC_BOB + SUBJECT_DESC_BOB
                 + RATE_DESC_BOB + INVALID_OWED_AMOUNT_DESC, OwedAmount.MESSAGE_CONSTRAINTS);
-        
+
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC + SCHEDULE_DESC_BOB + SUBJECT_DESC_BOB + RATE_DESC_BOB

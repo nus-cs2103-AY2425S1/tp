@@ -125,7 +125,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String rate} into an {@code Rate}
+     * Parses a {@code String rate} into a {@code Rate}
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code rate} is invalid.
@@ -138,7 +138,13 @@ public class ParserUtil {
         }
         return new Rate(trimmedRate);
     }
-    
+
+    /**
+     * Parses a {@code String owedAmount} into an {@code OwedAmount}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the {@code owedAmount} is invalid.
+     */
     public static OwedAmount parseOwedAmount(String owedAmount) throws ParseException {
         requireNonNull(owedAmount);
         String trimmedOwedAmount = owedAmount.trim();

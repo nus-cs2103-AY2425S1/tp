@@ -44,8 +44,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 
 import org.junit.jupiter.api.Test;
 
-import com.sun.java.accessibility.util.EventID;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand;
@@ -177,7 +175,7 @@ public class EditCommandParserTest {
         descriptor = new EditPersonDescriptorBuilder().withRate(VALID_RATE_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
-        
+
         // owedAmount
         userInput = targetIndex.getOneBased() + OWED_AMOUNT_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withOwedAmount(VALID_OWED_AMOUNT_AMY).build();
@@ -215,8 +213,9 @@ public class EditCommandParserTest {
 
         // multiple invalid values
         userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + INVALID_ADDRESS_DESC + INVALID_EMAIL_DESC
-                + INVALID_SCHEDULE_DESC + INVALID_RATE_DESC + INVALID_OWED_AMOUNT_DESC + INVALID_PHONE_DESC + INVALID_ADDRESS_DESC
-                + INVALID_EMAIL_DESC + INVALID_SCHEDULE_DESC + INVALID_RATE_DESC + INVALID_OWED_AMOUNT_DESC;
+                + INVALID_SCHEDULE_DESC + INVALID_RATE_DESC + INVALID_OWED_AMOUNT_DESC + INVALID_PHONE_DESC
+                + INVALID_ADDRESS_DESC + INVALID_EMAIL_DESC + INVALID_SCHEDULE_DESC + INVALID_RATE_DESC
+                + INVALID_OWED_AMOUNT_DESC;
 
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,

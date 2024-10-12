@@ -235,11 +235,11 @@ public class EditCommand extends Command {
         public Optional<Rate> getRate() {
             return Optional.ofNullable(rate);
         }
-        
+
         public void setOwedAmount(OwedAmount owedAmount) {
             this.owedAmount = owedAmount;
         }
-        
+
         public Optional<OwedAmount> getOwedAmount() {
             return Optional.ofNullable(owedAmount);
         }

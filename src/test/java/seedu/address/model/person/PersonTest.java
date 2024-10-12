@@ -100,10 +100,10 @@ public class PersonTest {
         // different rate -> returns false
         editedAlice = new PersonBuilder(ALICE).withRate(VALID_RATE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
-        
+
         // different schedule -> returns false
         editedAlice = new PersonBuilder(ALICE).withSchedule(VALID_SCHEDULE_BOB).build();
-        
+
         // different owedAmount -> returns false
         editedAlice = new PersonBuilder(ALICE).withOwedAmount(VALID_OWED_AMOUNT_BOB).build();
 
@@ -114,7 +114,7 @@ public class PersonTest {
         Person aliceCopy = new PersonBuilder(ALICE).build();
         assertEquals(ALICE.hashCode(), aliceCopy.hashCode());
     }
-    
+
     @Test
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()

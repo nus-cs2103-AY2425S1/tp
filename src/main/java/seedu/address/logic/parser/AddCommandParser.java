@@ -54,7 +54,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Subject subject = ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
         Rate rate = ParserUtil.parseRate(argMultimap.getValue(PREFIX_RATE).get());
         OwedAmount owedAmount = null;
-        
+
         if (argMultimap.getValue(PREFIX_OWED_AMOUNT).isPresent()) {
             owedAmount = ParserUtil.parseOwedAmount(argMultimap.getValue(PREFIX_OWED_AMOUNT).get());
         } else {

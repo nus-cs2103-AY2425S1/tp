@@ -16,7 +16,7 @@ public class OwedAmount extends Fee {
     public OwedAmount(String owedAmount) {
         super(owedAmount);
     }
-    
+
     /**
      * Constructs a {@code Amount}.
      */
