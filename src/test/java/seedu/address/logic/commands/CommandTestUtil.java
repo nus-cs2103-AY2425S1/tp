@@ -54,6 +54,22 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
+    // Valid event details
+    public static final String VALID_EVENT_NAME_MEETING = "Team Meeting";
+    public static final String VALID_EVENT_NAME_WORKSHOP = "Workshop";
+    public static final String VALID_EVENT_DESCRIPTION_MEETING = "Discuss project updates";
+    public static final String VALID_EVENT_DESCRIPTION_WORKSHOP = "Learn new skills";
+    public static final String VALID_EVENT_FROM_DATE_1 = "2024-10-01";
+    public static final String VALID_EVENT_FROM_DATE_2 = "2024-10-02";
+    public static final String VALID_EVENT_TO_DATE_1 = "2024-10-10";
+    public static final String VALID_EVENT_TO_DATE_2 = "2024-10-11";
+
+    // Invalid event details
+    public static final String INVALID_EVENT_NAME = "Team&Meeting"; // '&' not allowed in names
+    public static final String INVALID_EVENT_DESCRIPTION = ""; // empty string not allowed for descriptions
+    public static final String INVALID_EVENT_FROM_DATE = "2024-10-01";
+    public static final String INVALID_EVENT_TO_DATE = "2024-09-01"; // end date is before start date
+
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
