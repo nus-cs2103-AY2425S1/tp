@@ -49,6 +49,23 @@ public class PersonTest {
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
         assertTrue(BOB.isSamePerson(editedBob));
+
+        // same name, different phone and email -> returns false
+        editedAlice = new PersonBuilder(ALICE)
+                .withPhone(VALID_PHONE_BOB)
+                .withEmail(VALID_EMAIL_BOB)
+                .withJobCode(VALID_JOBCODE_BOB)
+                .withTags(VALID_TAG_HUSBAND)
+                .build();
+        assertFalse(ALICE.isSamePerson(editedAlice));
+
+        // same name, different phone -> returns true
+        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
+        assertTrue(ALICE.isSamePerson(editedAlice));
+
+        // same name, different email -> returns true
+        editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
+        assertTrue(ALICE.isSamePerson(editedAlice));
     }
 
     @Test
