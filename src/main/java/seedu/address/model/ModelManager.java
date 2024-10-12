@@ -15,8 +15,8 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.client.Client;
 import seedu.address.model.person.Person;
-import seedu.address.storage.JsonClientBookStorage;
 import seedu.address.model.property.Property;
+import seedu.address.storage.JsonClientBookStorage;
 
 /**
  * Represents the in-memory model of the address book data.

@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.DeleteBuyerCommand.MESSAGE_DELETE_PERSON_SUCCESS;
 import static seedu.address.testutil.TypicalClients.getTypicalClientBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalProperty.getTypicalPropertyBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +19,8 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.client.Buyer;
 import seedu.address.model.client.Client;
 public class DeleteBuyerCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalClientBook());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
+            getTypicalPropertyBook(), getTypicalClientBook());
     @Test
     public void execute_phoneNumberFound_assertCommandSuccess() {
         final String phoneNumber = "94351253";

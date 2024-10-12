@@ -163,7 +163,8 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs, new PropertyBook(), differentClientBook)));
+        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs, new PropertyBook(),
+                differentClientBook)));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
@@ -176,7 +177,8 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs, new PropertyBook(), clientBook)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs, new PropertyBook(),
+                clientBook)));
     }
 
     @Test

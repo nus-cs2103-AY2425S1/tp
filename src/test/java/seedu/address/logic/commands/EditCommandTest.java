@@ -36,7 +36,8 @@ import seedu.address.testutil.PersonBuilder;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalPropertyBook(), getTypicalClientBook());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalPropertyBook(),
+            getTypicalClientBook());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -47,7 +48,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
-                new PropertyBook(model.getPropertyBook()),  model.getClientBook());
+                new PropertyBook(model.getPropertyBook()), model.getClientBook());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
