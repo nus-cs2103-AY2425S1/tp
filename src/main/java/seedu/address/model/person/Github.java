@@ -25,7 +25,7 @@ public class Github {
     }
 
     /**
-     * Returns if a given string is a valid email.
+     * Returns if a given string is a valid username.
      */
     public static boolean isValidGithubUsername(String test) {
         return test.length() <= 39 && test.matches(VALIDATION_REGEX);
