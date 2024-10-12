@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.State;
 import seedu.address.model.group.Group;
 import seedu.address.model.student.Student;
 
@@ -16,6 +17,7 @@ public interface Model {
      * {@code Predicate} that always evaluate to true
      */
     Predicate<Student> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Group> PREDICATE_SHOW_ALL_GROUPS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -117,4 +119,12 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Student> predicate);
+
+    void updateFilteredGroupList(Predicate<Group> predicate);
+
+    void setStateStudents();
+
+    void setStateGroups();
+
+    State getState();
 }

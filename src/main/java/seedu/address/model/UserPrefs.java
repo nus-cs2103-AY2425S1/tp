@@ -7,12 +7,16 @@ import java.nio.file.Paths;
 import java.util.Objects;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.State;
 
 /**
  * Represents User's preferences.
  */
 public class UserPrefs implements ReadOnlyUserPrefs {
 
+    private static final State DEFAULT_STATE = new State("Students");
+    private static final State GROUP_STATE = new State("Groups");
+    private State guiState = GROUP_STATE;
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
 
@@ -20,7 +24,6 @@ public class UserPrefs implements ReadOnlyUserPrefs {
      * Creates a {@code UserPrefs} with default values.
      */
     public UserPrefs() {}
-
     /**
      * Creates a {@code UserPrefs} with the prefs in {@code userPrefs}.
      */
@@ -30,12 +33,31 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     }
 
     /**
+     * Sets the state of the system to "Students".
+     */
+    public void setStateStudents() {
+        this.guiState = DEFAULT_STATE;
+    }
+
+    /**
+     * Sets the state of the system to "Groups".
+     */
+    public void setStateGroups() {
+        this.guiState = GROUP_STATE;
+    }
+
+    public State getState() {
+        return this.guiState;
+    }
+
+    /**
      * Resets the existing data of this {@code UserPrefs} with {@code newUserPrefs}.
      */
     public void resetData(ReadOnlyUserPrefs newUserPrefs) {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
         setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
+        this.guiState = newUserPrefs.getState();
     }
 
     public GuiSettings getGuiSettings() {
