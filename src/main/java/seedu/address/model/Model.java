@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.delivery.Delivery;
 import seedu.address.model.person.Person;
 
 /**
@@ -84,4 +85,21 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Returns true if a delivery with the same identity as {@code delivery} exists in the address book.
+     */
+    boolean hasDelivery(Delivery delivery);
+
+    /**
+     * Deletes the given delivery.
+     * The delivery must exist in the address book.
+     */
+    void deleteDelivery(Delivery target);
+
+    /**
+     * Adds the given delivery.
+     * {@code delivery} must not already exist in the address book.
+     */
+    void addDelivery(Delivery delivery);
 }

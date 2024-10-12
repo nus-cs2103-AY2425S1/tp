@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
+import seedu.address.model.product.Product;
 
 /**
  * Represents a Delivery in the application.
@@ -13,53 +14,64 @@ import seedu.address.model.person.Person;
  */
 public class Delivery {
 
-    private final DeliveryDetail deliveryDetail;
-    // CHANGE TO SUPPLIER LATER ON
-    private final Person sender;
-
-    // Data fields
-    private final DeliveryStatus status;
-    private final DeliveryTime deliveryTime;
+    private final Product product;
+    private final Person sender; // CHANGE TO SUPPLIER LATER ON
+    private final Status status;
+    private final Time deliveryTime;
+    private final Cost cost;
+    private final Quantity quantity;
 
     /**
      * Every field must be present and not null.
      */
-    public Delivery(DeliveryDetail deliveryDetail, Person sender, DeliveryStatus status, DeliveryTime deliveryTime) {
-        requireAllNonNull(deliveryDetail, sender, status, deliveryTime);
-        this.deliveryDetail = deliveryDetail;
+    public Delivery(Product product, Person sender, Status status, Time deliveryTime, Cost cost, Quantity quantity) {
+        requireAllNonNull(product, sender, status, deliveryTime, cost, quantity);
+        this.product = product;
         this.sender = sender;
         this.status = status;
         this.deliveryTime = deliveryTime;
+        this.cost = cost;
+        this.quantity = quantity;
     }
 
-    public DeliveryDetail getDeliveryDetails() {
-        return deliveryDetail;
+    public Product getDeliveryProduct() {
+        return this.product;
     }
 
-    public Person getSender() {
+    public Person getDeliverySender() {
         return this.sender;
     }
 
-    public DeliveryStatus getStatus() {
+    public Status getDeliveryStatus() {
         return this.status;
     }
 
-    public DeliveryTime getDeliveryDate() {
+    public Time getDeliveryDate() {
         return this.deliveryTime;
     }
 
+    public Cost getDeliveryCost() {
+        return this.cost;
+    }
+
+    public Quantity getDeliveryQuantity() {
+        return this.quantity;
+    }
+
+
     /**
-     * Returns true if both deliveries have the same package details, sender, and receiver.
+     * Returns true if both deliveries have the same package details, sender.
      */
     public boolean isSameDelivery(Delivery otherDelivery) {
         if (otherDelivery == this) {
             return true;
         }
 
+        // what are the conditions on same deliveries (weaker equality)
         return otherDelivery != null
                 && otherDelivery.getDeliveryDate().equals(getDeliveryDate())
-                && otherDelivery.getDeliveryDetails().equals(getDeliveryDetails())
-                && otherDelivery.getSender().equals(getSender());
+                && otherDelivery.getDeliveryProduct().equals(getDeliveryProduct())
+                && otherDelivery.getDeliverySender().equals(getDeliverySender());
     }
 
     /**
@@ -77,24 +89,28 @@ public class Delivery {
         }
 
         Delivery otherDelivery = (Delivery) other;
-        return deliveryDetail.equals(otherDelivery.deliveryDetail)
+        return product.equals(otherDelivery.product)
                 && sender.equals(otherDelivery.sender)
                 && status.equals(otherDelivery.status)
-                && deliveryTime.equals(otherDelivery.deliveryTime);
+                && deliveryTime.equals(otherDelivery.deliveryTime)
+                && cost.equals(otherDelivery.cost)
+                && quantity.equals(otherDelivery.quantity);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(deliveryDetail, sender, status, deliveryTime);
+        return Objects.hash(product, sender, status, deliveryTime, cost, quantity);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("packageDetails", deliveryDetail)
+                .add("product", product)
                 .add("sender", sender)
                 .add("status", status)
                 .add("deliveryDate", deliveryTime)
+                .add("cost", cost)
+                .add("quantity", quantity)
                 .toString();
     }
 }
