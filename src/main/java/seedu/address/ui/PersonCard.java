@@ -42,6 +42,8 @@ public class PersonCard extends UiPart<Region> {
     private Label assignment;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label github;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -61,6 +63,11 @@ public class PersonCard extends UiPart<Region> {
             assignment.setText(person.getAssignment().toString());
         } else {
             assignment.setText("No assignment available"); // Optional: for better user feedback
+        }
+        if (person.getGithub() != null) {
+            github.setText(person.getGithub().toString());
+        } else {
+            github.setText("GitHub username unspecified");
         }
     }
 }
