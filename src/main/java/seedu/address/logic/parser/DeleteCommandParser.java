@@ -38,16 +38,15 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                 arr[i] = String.valueOf(temp[i]);
             }
 
-            Index[] indexArray = new Index[size];
-            for (int i = 0; i < size; i++) {
-                indexArray[i] = ParserUtil.parseIndex(arr[i]);
-            }
-            return new DeleteCommand(indexArray);
+
+            Index index = ParserUtil.parseIndex(args);
+            return new DeleteCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
         }
     }
+    
 
 
 }
