@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.State;
 import seedu.address.model.group.Group;
 import seedu.address.model.student.Student;
 
