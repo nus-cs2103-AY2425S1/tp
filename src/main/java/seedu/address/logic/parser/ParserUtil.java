@@ -153,4 +153,8 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    public static boolean isValidIndex(String preamble) {
+        return StringUtil.isNonZeroUnsignedInteger(preamble);
+    }
 }
