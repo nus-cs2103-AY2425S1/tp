@@ -16,6 +16,12 @@ import seedu.address.model.tag.Tag;
  */
 public class Person {
 
+    // Static counter to track the number of persons
+    private static int personIDCounter = 0;
+
+    // Unique person ID
+    private final int personId;
+
     // Identity fields
     private final Name name;
     private final Phone phone;
@@ -35,6 +41,13 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+
+        // Increment the static counter and assign a unique ID to the person
+        this.personId = ++personIDCounter;
+    }
+
+    public int getPersonId() {
+        return personId;
     }
 
     public Name getName() {
