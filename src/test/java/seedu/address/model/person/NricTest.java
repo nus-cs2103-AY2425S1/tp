@@ -31,6 +31,7 @@ public class NricTest {
         assertFalse(Nric.isValidNric("Z1234567A")); // invalid first letter
         assertFalse(Nric.isValidNric("S12345672")); // invalid last letter
         assertFalse(Nric.isValidNric("S12345678A")); // invalid length
+        assertFalse(Nric.isValidNric("S1234567A example")); // extra characters
 
         // valid nric
         assertTrue(Nric.isValidNric("S1234567A")); // valid nric all uppercase
