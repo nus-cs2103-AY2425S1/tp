@@ -19,7 +19,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 import hallpointer.address.logic.commands.AddMemberCommand;
 import hallpointer.address.logic.commands.CommandResult;
-import hallpointer.address.logic.commands.ListMemberCommand;
+import hallpointer.address.logic.commands.ListMembersCommand;
 import hallpointer.address.logic.commands.exceptions.CommandException;
 import hallpointer.address.logic.parser.exceptions.ParseException;
 import hallpointer.address.model.Model;
@@ -59,14 +59,16 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete 9";
+        String deleteCommand = "delete_member 9";
         assertCommandException(deleteCommand, MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_validCommand_success() throws Exception {
-        String listCommand = ListMemberCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, ListMemberCommand.MESSAGE_SUCCESS, model);
+        String listCommand = ListMembersCommand.COMMAND_WORD;
+        CommandResult result = logic.execute(listCommand);
+        System.out.println(result.getFeedbackToUser());
+        assertCommandSuccess(listCommand, ListMembersCommand.MESSAGE_SUCCESS, model);
     }
 
     @Test
@@ -94,7 +96,7 @@ public class LogicManagerTest {
      * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
-            Model expectedModel) throws CommandException, ParseException {
+        Model expectedModel) throws CommandException, ParseException {
         CommandResult result = logic.execute(inputCommand);
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertEquals(expectedModel, model);
