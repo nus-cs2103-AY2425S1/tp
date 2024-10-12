@@ -43,6 +43,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
+        setPersons(toBeCopied.getPersonList());
+        setProjects(toBeCopied.getProjectList());
         resetData(toBeCopied);
     }
 
@@ -54,6 +56,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setPersons(List<Person> persons) {
         this.persons.setPersons(persons);
+    }
+
+    /**
+     * Replaces the contents of the person list with {@code projects}.
+     * {@code projects} must not contain duplicate projects.
+     */
+    public void setProjects(List<Project> projects) {
+        this.projects.setProjects(projects);
     }
 
     /**
@@ -171,6 +181,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("persons", persons)
+                .add("projects", projects)
                 .toString();
     }
 

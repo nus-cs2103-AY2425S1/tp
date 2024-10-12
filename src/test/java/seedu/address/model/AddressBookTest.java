@@ -74,6 +74,18 @@ public class AddressBookTest {
     }
 
     @Test
+    public void hasProject_projectNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasProject(ALPHA));
+    }
+
+    @Test
+    public void hasProject_projectInAddressBook_returnsTrue() {
+        addressBook.addProject(ALPHA);
+        addressBook.getProjectList();
+        assertTrue(addressBook.hasProject(ALPHA));
+    }
+
+    @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
@@ -88,7 +100,9 @@ public class AddressBookTest {
 
     @Test
     public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
+        String expected = AddressBook.class.getCanonicalName()
+                + "{persons=" + addressBook.getPersonList()
+                + ", projects=" + addressBook.getProjectList() + "}";
         assertEquals(expected, addressBook.toString());
     }
 

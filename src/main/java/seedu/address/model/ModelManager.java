@@ -130,7 +130,7 @@ public class ModelManager implements Model {
     @Override
     public void addProject(Project project) {
         addressBook.addProject(project);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredProjectList(PREDICATE_SHOW_ALL_PROJECTS);
     }
 
     @Override
@@ -175,7 +175,7 @@ public class ModelManager implements Model {
     //=========== Filtered Project List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Project} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
