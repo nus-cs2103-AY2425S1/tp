@@ -6,7 +6,6 @@ import static hallpointer.address.logic.parser.CliSyntax.PREFIX_SESSION_NAME;
 import static java.util.Objects.requireNonNull;
 
 import hallpointer.address.commons.util.ToStringBuilder;
-import hallpointer.address.logic.Messages;
 import hallpointer.address.logic.commands.exceptions.CommandException;
 import hallpointer.address.model.Model;
 import hallpointer.address.model.session.Session;
@@ -68,4 +67,5 @@ public class AddSessionCommand extends Command {
                 .add("toAdd", toAdd)
                 .toString();
     }
+
 }
