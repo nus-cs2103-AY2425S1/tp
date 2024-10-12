@@ -11,6 +11,8 @@ import javafx.scene.layout.Region;
  */
 public class ResultDisplay extends UiPart<Region> {
 
+    public static final String ERROR_STYLE_CLASS = "error_result";
+    public static final String SUCCESS_STYLE_CLASS = "success_result";
     private static final String FXML = "ResultDisplay.fxml";
 
     @FXML
@@ -21,6 +23,16 @@ public class ResultDisplay extends UiPart<Region> {
     }
 
     public void setFeedbackToUser(String feedbackToUser) {
+        requireNonNull(feedbackToUser);
+        resultDisplay.setText(feedbackToUser);
+    }
+
+    public void setSuccessFeedbackToUser(String feedbackToUser) {
+        requireNonNull(feedbackToUser);
+        resultDisplay.setText(feedbackToUser);
+    }
+
+    public void setErrorFeedbackToUser(String feedbackToUser) {
         requireNonNull(feedbackToUser);
         resultDisplay.setText(feedbackToUser);
     }
