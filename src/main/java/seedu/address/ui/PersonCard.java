@@ -51,6 +51,8 @@ public class PersonCard extends UiPart<Region> {
     private Label priority;
     @FXML
     private FlowPane appointments;
+    @FXML
+    private Label medCon;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -66,6 +68,7 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        medCon.setText(person.getMedCon().value);
         priority.setText(person.getPriority().priority);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
