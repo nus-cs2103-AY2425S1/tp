@@ -19,7 +19,7 @@ import seedu.address.model.person.Priority;
  */
 public class PriorityCommand extends Command {
 
-    public static final String COMMAND_WORD = "updatePriority";
+    public static final String COMMAND_WORD = "assignPriority";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns/updates "
             + "a priority of a patient in the address book.\n"
