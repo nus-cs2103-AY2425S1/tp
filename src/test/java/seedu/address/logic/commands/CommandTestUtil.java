@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDCON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -58,6 +59,8 @@ public class CommandTestUtil {
     public static final String VALID_APPOINTMENT_NAME_PHYSIO = "Physio";
     public static final String VALID_APPOINTMENT_DATE_PHYSIO = "2024-01-01";
     public static final String VALID_APPOINTMENT_TIMEPERIOD_PHYSIO = "1235-1500";
+    public static final String VALID_MEDCON_AMY = "Diabetes";
+    public static final String VALID_MEDCON_BOB = "Rabbies";
 
     public static final String VALID_APPOINTMENT_NAME_AMY = VALID_APPOINTMENT_NAME_DENTAL;
     public static final String VALID_APPOINTMENT_DATE_AMY = VALID_APPOINTMENT_DATE_DENTAL;
@@ -88,6 +91,8 @@ public class CommandTestUtil {
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String PRIORITY_DESC_AMY = " " + PREFIX_PRIORITY + VALID_PRIORITY_AMY;
     public static final String PRIORITY_DESC_BOB = " " + PREFIX_PRIORITY + VALID_PRIORITY_BOB;
+    public static final String MEDCON_DESC_AMY = " " + PREFIX_MEDCON + VALID_MEDCON_AMY;
+    public static final String MEDCON_DESC_BOB = " " + PREFIX_MEDCON + VALID_MEDCON_BOB;
     public static final String APPOINTMENT_DESC_AMY = " " + VALID_APPOINTMENT_NAME_DENTAL + " " + PREFIX_DATE
                                                       + VALID_APPOINTMENT_DATE_DENTAL + " " + PREFIX_TIMEPERIOD
                                                       + VALID_APPOINTMENT_TIMEPERIOD_DENTAL;
@@ -96,6 +101,7 @@ public class CommandTestUtil {
                                                       + VALID_APPOINTMENT_TIMEPERIOD_PHYSIO;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
+    public static final String INVALID_NRIC = "S1234567&"; // non-alphanumeric characters not allowed in NRIC
     public static final String INVALID_NRIC_DESC = " " + PREFIX_NRIC + "S1234567"; // missing last character
     public static final String INVALID_DOB_FORMAT_DESC = " " + PREFIX_DOB + "2000/02/02"; // '/' not allowed in DOB
     public static final String INVALID_DOB_VALUE_DESC = " " + PREFIX_DOB + LocalDate.now().plusDays(2)

@@ -18,6 +18,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
+import seedu.address.model.person.MedCon;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Phone;
@@ -245,5 +246,20 @@ public class ParserUtil {
             appointmentSet.add(parseSerialisedAppointment(appointmentName));
         }
         return appointmentSet;
+    }
+
+    /**
+     * Parses a string representing a medical condition and returns a {@link MedCon} object.
+     *
+     * @param medConStr the string representing the medical condition to be parsed.
+     * @return A {@link MedCon} object corresponding to the provided medical condition string.
+     * @throws ParseException if the provided string does not conform to the expected
+     *         format or is invalid as per the priority constraints defined in the
+     *         {@link Priority} class.
+     */
+    public static MedCon parseMedCon(String medConStr) throws ParseException {
+        requireNonNull(medConStr);
+        String trimmedMedCon = medConStr.trim();
+        return new MedCon(trimmedMedCon);
     }
 }

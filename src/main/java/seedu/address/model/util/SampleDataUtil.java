@@ -13,6 +13,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
+import seedu.address.model.person.MedCon;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
@@ -24,6 +25,9 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
+
+    public static final MedCon EMPTY_MEDCON = new MedCon("");
+
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"),
@@ -35,7 +39,7 @@ public class SampleDataUtil {
                        new Gender("M"),
                        getTagSet("friends"),
                        new Priority(),
-                       getAppointmentSet("Dental:2024-12-25:1235-1300")
+                       getAppointmentSet("Dental:2024-12-25:1235-1300"), EMPTY_MEDCON
             ),
             new Person(new Name("Bernice Yu"),
                        new Phone("99272758"),
@@ -46,7 +50,8 @@ public class SampleDataUtil {
                        new Gender("M"),
                        getTagSet("colleagues", "friends"),
                        new Priority(),
-                       getAppointmentSet("Orthopedic:2024-12-01:1200-1300", "Physio:2024-12-01:1500-1600")
+                       getAppointmentSet("Orthopedic:2024-12-01:1200-1300", "Physio:2024-12-01:1500-1600"),
+                       EMPTY_MEDCON
             ),
             new Person(new Name("Charlotte Oliveiro"),
                        new Phone("93210283"),
@@ -57,7 +62,7 @@ public class SampleDataUtil {
                        new Gender("M"),
                        getTagSet("neighbours"),
                        new Priority(),
-                       Collections.emptySet()
+                       Collections.emptySet(), EMPTY_MEDCON
             ),
             new Person(new Name("David Li"),
                        new Phone("91031282"),
@@ -70,7 +75,7 @@ public class SampleDataUtil {
                        new Priority(),
                        getAppointmentSet("OT:2025-01-12:1000-1300",
                                          "PT:2025-02-02:1200-1300",
-                                         "Consult:2025-02-20:1400-1430")
+                                         "Consult:2025-02-20:1400-1430"), EMPTY_MEDCON
             ),
             new Person(new Name("Irfan Ibrahim"),
                        new Phone("92492021"),
@@ -81,7 +86,7 @@ public class SampleDataUtil {
                        new Gender("M"),
                        getTagSet("classmates"),
                        new Priority(),
-                       getAppointmentSet("Dental:2024-10-25:1235-1300")
+                       getAppointmentSet("Dental:2024-10-25:1235-1300"), EMPTY_MEDCON
             ),
             new Person(new Name("Roy Balakrishnan"),
                        new Phone("92624417"),
@@ -92,7 +97,7 @@ public class SampleDataUtil {
                        new Gender("M"),
                        getTagSet("colleagues"),
                        new Priority(),
-                       Collections.emptySet()
+                       Collections.emptySet(), EMPTY_MEDCON
             )
         };
     }
