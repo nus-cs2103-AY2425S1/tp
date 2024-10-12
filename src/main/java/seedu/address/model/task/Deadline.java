@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
 
 /**
@@ -17,7 +18,9 @@ public class Deadline implements Comparable<Deadline> {
     // 41177442/uuuu-versus-yyyy-in-datetimeformatter-formatting-pattern-codes-in-java
     private static final String DATETIME_FORMAT = "uuuu-MM-dd HH:mm";
     private static final String DATETIME_OUTPUT_FORMAT = "d MMM uuuu HH:mm";
-    private static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern(DATETIME_FORMAT);
+    private static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter
+        .ofPattern(DATETIME_FORMAT)
+        .withResolverStyle(ResolverStyle.STRICT);
 
 
     public final LocalDateTime time;
