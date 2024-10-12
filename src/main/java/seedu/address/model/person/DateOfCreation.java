@@ -55,4 +55,21 @@ public class DateOfCreation {
     public String toString() {
         return dateOfCreation.toString();
     }
+    @Override
+    public boolean equals(Object other) {
+        // Check if the other object is the same instance
+        if (this == other) {
+            return true;
+        }
+
+        // Check if the other object is an instance of DateOfCreation
+        if (!(other instanceof DateOfCreation)) {
+            return false;
+        }
+
+        // Compare the dateOfCreation value
+        DateOfCreation otherDateOfCreation = (DateOfCreation) other;
+        return this.dateOfCreation.equals(otherDateOfCreation.dateOfCreation);
+    }
+
 }
