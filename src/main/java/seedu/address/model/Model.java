@@ -61,6 +61,26 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns true if a person with similar identity as {@code person} exists in the address book.
+     * The conditions for similarity are defined in {@code Person::isSimilarPerson}.
+     *
+     * @param person Person to check
+     * @return True if a similar person exists, false otherwise
+     */
+    boolean hasSimilarPerson(Person person);
+
+    /**
+     * Returns true if a person with similar identity as {@code person} exists in the address book,
+     * possibly excluding one person from the check.
+     * The conditions for similarity are defined in {@code Person::isSimilarPerson}.
+     *
+     * @param person Person to check
+     * @param exclude Person to exclude from the check (can be null)
+     * @return True if a similar person exists, false otherwise
+     */
+    boolean hasSimilarPerson(Person person, Person exclude);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */

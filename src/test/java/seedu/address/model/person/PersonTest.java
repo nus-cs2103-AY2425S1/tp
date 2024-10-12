@@ -58,6 +58,47 @@ public class PersonTest {
     }
 
     @Test
+    public void isSimilarPerson() {
+        // same object -> returns true
+        assertTrue(ALICE.isSimilarPerson(ALICE));
+
+        // null -> returns false
+        assertFalse(ALICE.isSimilarPerson(null));
+
+        // same nric, all other attributes different -> returns true
+        Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+                .withCallFrequency(VALID_CALL_FREQUENCY_BOB).build();
+        assertTrue(ALICE.isSimilarPerson(editedAlice));
+
+        // same name -> returns true
+        editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        assertTrue(BOB.isSimilarPerson(editedAlice));
+
+        // same name lowercase -> returns true
+        editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB.toLowerCase()).build();
+        assertTrue(BOB.isSimilarPerson(editedAlice));
+
+        // same phone -> returns true
+        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
+        assertTrue(BOB.isSimilarPerson(editedAlice));
+
+        // same email -> returns true
+        editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
+        assertTrue(BOB.isSimilarPerson(editedAlice));
+
+        // same email lowercase -> returns true
+        editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB.toLowerCase()).build();
+        assertTrue(BOB.isSimilarPerson(editedAlice));
+
+        // different nric, name, phone, email, all other attributes same -> returns false
+        editedAlice = new PersonBuilder(ALICE).withNric(VALID_NRIC_BOB).withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
+        assertFalse(ALICE.isSimilarPerson(editedAlice));
+    }
+
+    @Test
     public void equals() {
         // same values -> returns true
         Person aliceCopy = new PersonBuilder(ALICE).build();

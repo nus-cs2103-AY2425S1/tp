@@ -3,10 +3,13 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -16,7 +19,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.PersonBuilder;
 
 public class ModelManagerTest {
 
@@ -86,6 +91,55 @@ public class ModelManagerTest {
     public void hasPerson_personInAddressBook_returnsTrue() {
         modelManager.addPerson(ALICE);
         assertTrue(modelManager.hasPerson(ALICE));
+    }
+    @Test
+    public void hasSimilarPerson_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasSimilarPerson(null));
+    }
+
+    @Test
+    public void hasSimilarPerson_personNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasSimilarPerson(ALICE));
+    }
+
+    @Test
+    public void hasSimilarPerson_personInAddressBook_returnsTrue() {
+        modelManager.addPerson(ALICE);
+        assertTrue(modelManager.hasSimilarPerson(ALICE));
+    }
+
+    @Test
+    public void hasSimilarPerson_personInAddressBookWithExclude_returnsFalse() {
+        modelManager.addPerson(ALICE);
+        assertFalse(modelManager.hasSimilarPerson(ALICE, ALICE));
+    }
+
+    @Test
+    public void hasSimilarPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        modelManager.addPerson(ALICE);
+        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+                .build();
+        assertTrue(modelManager.hasSimilarPerson(editedAlice));
+    }
+    @Test
+    public void hasSimilarPerson_newPersonWithSameName_returnsTrue() {
+        modelManager.addPerson(ALICE);
+        Person editedBob = new PersonBuilder(BOB).withName(ALICE.getName().fullName).build();
+        assertTrue(modelManager.hasSimilarPerson(editedBob));
+    }
+
+    @Test
+    public void hasSimilarPerson_newPersonWithSamePhoneNumber_returnsTrue() {
+        modelManager.addPerson(ALICE);
+        Person editedBob = new PersonBuilder(BOB).withPhone(ALICE.getPhone().value).build();
+        assertTrue(modelManager.hasSimilarPerson(editedBob));
+    }
+
+    @Test
+    public void hasSimilarPerson_newPersonWithSameEmail_returnsTrue() {
+        modelManager.addPerson(ALICE);
+        Person editedBob = new PersonBuilder(BOB).withEmail(ALICE.getEmail().value).build();
+        assertTrue(modelManager.hasSimilarPerson(editedBob));
     }
 
     @Test
