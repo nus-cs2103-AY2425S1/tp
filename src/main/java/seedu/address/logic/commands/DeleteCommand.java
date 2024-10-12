@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -20,41 +21,75 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person whose name contains the specified keyword (case-insensitive).\n"
-            + "Parameters: KEYWORD\n"
-            + "Example: " + COMMAND_WORD + " alice";
+            + ": Deletes the person specified by their name or index.\n"
+            + "Parameters: [INDEX | NAME]\n"
+            + "Example 1: " + COMMAND_WORD + " 1\n" // Example for index-based deletion
+            + "Example 2: " + COMMAND_WORD + " alice"; // Example for name-based deletion
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
-    public static final String MESSAGE_PERSON_NOT_FOUND = "Exact match not found. Partial match listed.";
-    public static final String MESSAGE_MULTIPLE_PERSONS_FOUND = "Multiple persons found with the keyword. "
-            + "Please refine your input.";
+    public static final String MESSAGE_EXACT_PERSON_NOT_FOUND = "No exact match found for the specified name.\n"
+            + "Consider using exact name or providing an index.";
+    public static final String MESSAGE_MULTIPLE_PERSONS_FOUND = "Multiple persons found matching the criteria.\n"
+            + "Consider providing an index.";
+    public static final String MESSAGE_PARTIAL_PERSON_NOT_FOUND = "No exact or partial match found for the name.";
 
     private final String nameToDelete;
+    private final Index targetIndex;
 
+    /**
+     * Constructor for name-based deletion
+     * @param nameToDelete
+     */
     public DeleteCommand(String nameToDelete) {
         this.nameToDelete = nameToDelete;
+        this.targetIndex = null; // No index provided
     }
+    /**
+     * Constructor for index-based deletion
+     * @param targetIndex
+     */
+    public DeleteCommand(Index targetIndex) {
+        this.nameToDelete = null; // No name provided
+        this.targetIndex = targetIndex;
+    }
+
 
     @Override
     public CommandResult execute(Model model) throws CommandException, ParseException {
         requireNonNull(model);
+        if (targetIndex != null) {
+            List<Person> lastShownList = model.getFilteredPersonList();
 
+            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
+
+            Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+            model.deletePerson(personToDelete);
+            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+        }
         List<Person> fullPersonList = model.getAddressBook().getPersonList();
-        List<Person> exactMatches = fullPersonList.stream()
+        List<Person> exactMatch = fullPersonList.stream()
                 .filter(person -> person.getName().fullName.equalsIgnoreCase(nameToDelete))
                 .toList();
+        List<Person> partialMatches = fullPersonList.stream()
+                .filter(person -> person.getName().fullName.toLowerCase().contains(nameToDelete.toLowerCase()))
+                .toList();
 
-        if (!exactMatches.isEmpty()) {
-            if (exactMatches.size() > 1) {
-                throw new CommandException(String.format(MESSAGE_MULTIPLE_PERSONS_FOUND));
-            }
-            Person personToDelete = exactMatches.get(0);
+        if (exactMatch.size() == 1) {
+            Person personToDelete = exactMatch.get(0);
             model.deletePerson(personToDelete);
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
         } else {
+            if (partialMatches.isEmpty()) {
+                throw new CommandException(MESSAGE_PARTIAL_PERSON_NOT_FOUND);
+            }
             FindCommandParser findCommandParser = new FindCommandParser();
             findCommandParser.parse(nameToDelete).execute(model);
-            return new CommandResult(MESSAGE_PERSON_NOT_FOUND);
+            if (exactMatch.size() > 1) {
+                return new CommandResult(MESSAGE_MULTIPLE_PERSONS_FOUND);
+            }
+            return new CommandResult(MESSAGE_EXACT_PERSON_NOT_FOUND);
         }
     }
 
