@@ -60,4 +60,11 @@ public class MeetUp { //TODO
         return "";
     }
 
+    public Date getFrom() {
+        return this.from;
+    }
+
+    public Date getTo() {
+        return this.to;
+    }
 }
