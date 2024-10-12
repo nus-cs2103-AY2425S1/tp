@@ -19,7 +19,7 @@ import seedu.internbuddy.model.company.Company;
 @JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_COMPANY = "companies list contains duplicate company(s).";
+    public static final String MESSAGE_DUPLICATE_COMPANY = "Companies list contains duplicate company(s).";
 
     private final List<JsonAdaptedCompany> companies = new ArrayList<>();
 

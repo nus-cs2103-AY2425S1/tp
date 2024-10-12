@@ -3,9 +3,9 @@ package seedu.internbuddy.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.internbuddy.testutil.Assert.assertThrows;
-import static seedu.internbuddy.testutil.TypicalCompanies.ALICE;
-import static seedu.internbuddy.testutil.TypicalCompanies.HOON;
-import static seedu.internbuddy.testutil.TypicalCompanies.IDA;
+import static seedu.internbuddy.testutil.TypicalCompanies.APPLE;
+import static seedu.internbuddy.testutil.TypicalCompanies.SPOTIFY;
+import static seedu.internbuddy.testutil.TypicalCompanies.TWITTER;
 import static seedu.internbuddy.testutil.TypicalCompanies.getTypicalAddressBook;
 
 import java.io.IOException;
@@ -72,14 +72,14 @@ public class JsonAddressBookStorageTest {
         assertEquals(original, new AddressBook(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addCompany(HOON);
-        original.removeCompany(ALICE);
+        original.addCompany(SPOTIFY);
+        original.removeCompany(APPLE);
         jsonAddressBookStorage.saveAddressBook(original, filePath);
         readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
         assertEquals(original, new AddressBook(readBack));
 
         // Save and read without specifying file path
-        original.addCompany(IDA);
+        original.addCompany(TWITTER);
         jsonAddressBookStorage.saveAddressBook(original); // file path not specified
         readBack = jsonAddressBookStorage.readAddressBook().get(); // file path not specified
         assertEquals(original, new AddressBook(readBack));

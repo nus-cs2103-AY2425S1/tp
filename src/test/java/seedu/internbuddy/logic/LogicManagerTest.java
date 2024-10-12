@@ -3,12 +3,13 @@ package seedu.internbuddy.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.internbuddy.logic.Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX;
 import static seedu.internbuddy.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.internbuddy.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.internbuddy.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.internbuddy.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.internbuddy.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.internbuddy.logic.commands.CommandTestUtil.ADDRESS_DESC_GOOGLE;
+import static seedu.internbuddy.logic.commands.CommandTestUtil.EMAIL_DESC_GOOGLE;
+import static seedu.internbuddy.logic.commands.CommandTestUtil.NAME_DESC_GOOGLE;
+import static seedu.internbuddy.logic.commands.CommandTestUtil.PHONE_DESC_GOOGLE;
+import static seedu.internbuddy.logic.commands.CommandTestUtil.STATUS_DESC_GOOGLE;
 import static seedu.internbuddy.testutil.Assert.assertThrows;
-import static seedu.internbuddy.testutil.TypicalCompanies.AMY;
+import static seedu.internbuddy.testutil.TypicalCompanies.GOOGLE;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -165,9 +166,9 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Triggers the saveAddressBook method by executing an add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
-        Company expectedcompany = new CompanyBuilder(AMY).withTags().build();
+        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_GOOGLE + PHONE_DESC_GOOGLE
+                + EMAIL_DESC_GOOGLE + ADDRESS_DESC_GOOGLE + STATUS_DESC_GOOGLE;
+        Company expectedcompany = new CompanyBuilder(GOOGLE).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addCompany(expectedcompany);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);

@@ -1,14 +1,16 @@
 {
   "companies": [ {
-    "name": "Alice Pauline",
-    "phone": "94351253",
-    "email": "alice@example.com",
-    "address": "123, Jurong West Ave 6, #08-111",
-    "tags": [ "friends" ]
+    "name": "Amazon",
+    "phone": "2062661000",
+    "email": "contact@amazon.com",
+    "address": "410 Terry Ave N, Seattle, WA",
+    "status": "INTERESTED",
+    "tags": ["ecommerce", "cloud"]
   }, {
-    "name": "Alice Pauline",
-    "phone": "94351253",
-    "email": "pauline@example.com",
-    "address": "4th street"
+    "name": "Amazon",
+    "phone": "2062661000",
+    "email": "contact@amazon.com",
+    "address": "410 Terry Ave N, Seattle, WA",
+    "status": "INTERESTED"
   } ]
 }
