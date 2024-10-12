@@ -62,15 +62,12 @@ public class PersonCard extends UiPart<Region> {
         socialMediaHandle.setText(person.getSocialMediaHandle());
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .map(this::tagToLabel)
-                .forEach(tag -> tags.getChildren().add(tag));
-    }
-
-    private Label tagToLabel(Tag tag) {
-        Label label = new Label(tag.tagName);
-        if (tag.tagName.equals(DuplicatePhoneTagger.DUPLICATE_PHONE_TAG_NAME)) {
-            label.setId("duplicate");
-        }
-        return label;
+                .forEach(tag -> {
+                    Label label = new Label(tag.tagName);
+                    if (tag.tagName.equals(DuplicatePhoneTagger.DUPLICATE_PHONE_TAG_NAME)) {
+                        label.setId("duplicate");
+                    }
+                    tags.getChildren().add(label);
+                });
     }
 }
