@@ -19,6 +19,9 @@ public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
+    /**
+     * Enum to specify the type of item to delete.
+     */
     public enum ItemTypeToDelete {
         VENDOR,
     }
@@ -32,9 +35,13 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_VENDOR_SUCCESS = "Deleted Vendor: %1$s";
 
+    // The index of item to be deleted
     private final Index targetIndex;
     private final ItemTypeToDelete itemType;
 
+    /**
+     * Creates a DeleteCommand to delete the specified item.
+     */
     public DeleteCommand(ItemTypeToDelete itemType, Index targetIndex) {
         this.targetIndex = targetIndex;
         this.itemType = itemType;
@@ -75,8 +82,8 @@ public class DeleteCommand extends Command {
         }
 
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return targetIndex.equals(otherDeleteCommand.targetIndex) &&
-                itemType.equals(otherDeleteCommand.itemType);
+        return targetIndex.equals(otherDeleteCommand.targetIndex)
+                && itemType.equals(otherDeleteCommand.itemType);
     }
 
     @Override
