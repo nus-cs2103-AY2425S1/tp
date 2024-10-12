@@ -14,6 +14,7 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Delivery> PREDICATE_SHOW_ALL_DELIVERIES = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -92,14 +93,25 @@ public interface Model {
     boolean hasDelivery(Delivery delivery);
 
     /**
-     * Deletes the given delivery.
-     * The delivery must exist in the address book.
-     */
-    void deleteDelivery(Delivery target);
-
-    /**
      * Adds the given delivery.
      * {@code delivery} must not already exist in the address book.
      */
     void addDelivery(Delivery delivery);
+
+    /**
+     * Deletes the given delivery.
+     * The delivery must exist in the address book.
+     */
+    void deleteDelivery(Delivery delivery);
+
+    /**
+     * Returns an unmodifiable view of the filtered delivery list
+     */
+    ObservableList<Delivery> getFilteredDeliveryList();
+
+    /**
+     * Updates the filter of the filtered delivery list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredDeliveryList(Predicate<Delivery> predicate);
 }

@@ -44,7 +44,7 @@ public class AddressBookParser {
         }
 
         final String commandWord = matcher.group("commandWord");
-        final String arguments = matcher.group("arguments");
+        final String arguments = matcher.group("arguments").trim();
 
         // Note to developers: Change the log level in config.json to enable lower level (i.e., FINE, FINER and lower)
         // log messages such as the one below.
@@ -60,7 +60,11 @@ public class AddressBookParser {
             return new EditCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+            if (arguments.trim().startsWith("-d")) {
+                return new DeleteDeliveryCommandParser().parse(arguments.trim());
+            } else {
+                return new DeleteCommandParser().parse(arguments.trim());
+            }
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
@@ -82,5 +86,4 @@ public class AddressBookParser {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }
