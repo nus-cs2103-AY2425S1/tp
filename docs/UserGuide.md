@@ -13,16 +13,12 @@
     color: #000000;
   }
 
-  .highlight-feature:hover {
-    background-color: #a9a9a9;
-    color: #000000;
-  }
-
   .icon {
     margin-right: 7px;
   }
 
 </style>
+
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
@@ -66,10 +62,10 @@ MATER is a **desktop app for managing clients and their cars, optimized for use 
 
 --------------------------------------------------------------------------------------------------------------------
 
-<h2 style="color: #AF7AC5;"> <i class="fas fa-list-alt icon"></i> Glossary</h2>
+<h2 style="color: #AF7AC5;" id="glossary"> <i class="fas fa-list-alt icon"></i> Glossary</h2>
 
 - **Client:** A person who uses the services of the workshop. In MATER, a client is someone whose personal details are stored and managed.
-- **VRN (Vehicle Registration Number):** The unique identifier assigned to a vehicle upon registration. In Singapore, it typically follows the format `XXX 1234 C`, where:
+- **VRN (Vehicle Registration Number):** The unique identifier assigned to a vehicle upon registration. In Singapore, it typically follows the format `XXX1234C`, where:
   - `X` represents an alphabet letter.
   - `1234` represents a four-digit number.
   - `C` represents a checksum letter as defined by the [Land Transport Authority (LTA)](https://en.wikipedia.org/wiki/Vehicle_registration_plates_of_Singapore).
@@ -115,7 +111,7 @@ MATER is a **desktop app for managing clients and their cars, optimized for use 
 
 </box>
 
-<h3 style="color: #1877F2;">Viewing Help: <span class="highlight-feature ">help</span></h3>
+<h3 style="color: #1877F2;">Viewing Help: <span class="highlight-feature">help</span></h3>
 
 Shows a message explaining how to access the help page.
 
@@ -154,11 +150,7 @@ add-client n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [vrn/CAR_VRN] [vin/CAR_VIN] [
 **Requirements:**
 
 - If adding a client with a car, all car fields (i.e., `vrn`, `vin`, `make`, and `model`) must be provided, but if the client does not have a car, these fields should be omitted completely.
-- **VRN** must follow the format `XXX 1234 C`, where:
-  - `X` is an alphabet.
-  - `1234` is a number.
-  - `C` is the checksum as defined by [LTA](https://en.wikipedia.org/wiki/Vehicle_registration_plates_of_Singapore).
-  - Ensure spaces are included as shown.
+- **VRN** must follow the format listed [earlier](#glossary)
 - **VIN** must be a 17-character alphanumeric string.
 - **VRN** and **VIN** must be unique for each car.
 
@@ -174,7 +166,7 @@ add-client n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [vrn/CAR_VRN] [vin/CAR_VIN] [
 **Examples:**
 
 - `add-client n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-- `add-client n/Betsy Crowe e/betsycrowe@example.com p/92345678 a/Newgate Prison vrn/SJH 9514 P vin/1G6ABC129P5123456 make/Toyota model/Corolla`
+- `add-client n/Betsy Crowe e/betsycrowe@example.com p/92345678 a/Newgate Prison vrn/SJH9514P vin/1G6ABC129P5123456 make/Toyota model/Corolla`
 
 ---
 
@@ -260,8 +252,8 @@ find KEYWORD [MORE_KEYWORDS]
   Returns clients with names like `John` and `John Doe`.
 - `find alex david`
   Returns `Alex Yeoh`, `David Li`.
-- `find SJH 9514 P`
-  Returns client with car VRN `SJH 9514 P`.
+- `find SJH9514P`
+  Returns client with car VRN `SJH9514P`.
 
 <!-- TODO CHANGE IMAGE -->
 ![Result for 'find alex david'](images/findAlexDavidResult.png)
@@ -409,7 +401,9 @@ MATER data are saved automatically as a JSON file at `[JAR file location]/data/a
 
 Action             | Format & Examples
 -------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add Client**     | `add-client n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [vrn/CAR_VRN] [vin/CAR_VIN] [make/CAR_MAKE] [model/CAR_MODEL] [i/ISSUE]...`<br>e.g., `add-client n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`<br>e.g., `add-client n/Betsy Crowe p/92345678 e/betsycrowe@example.com a/Newgate Prison vrn/SJH 9514 P vin/1G6ABC129P5123456 make/Toyota model/Corolla i/engine i/wheels`
+**Add Client**     | `add-client n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [vrn/CAR_VRN] [vin/CAR_VIN] [make/CAR_MAKE] [model/CAR_MODEL] [i/ISSUE]...`<br>
+e.g., `add-client n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`<br>
+e.g., `add-client n/Betsy Crowe p/92345678 e/betsycrowe@example.com a/Newgate Prison vrn/SJH9514P vin/1G6ABC129P5123456 make/Toyota model/Corolla i/engine i/wheels`
 **List Clients**   | `list`
 **Edit Client**    | `edit-client INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [vrn/CAR_VRN] [vin/CAR_VIN] [make/CAR_MAKE] [model/CAR_MODEL] [i/ISSUE]...`<br>e.g., `edit-client 1 p/91234567 e/johndoe@example.com`<br>e.g., `edit-client 2 n/Betsy Crower i/`
 **Find Clients**   | `find KEYWORD [MORE_KEYWORDS]`<br>e.g., `find John`<br>e.g., `find SJH 9514 P`

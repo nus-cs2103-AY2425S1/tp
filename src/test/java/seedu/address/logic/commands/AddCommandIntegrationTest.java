@@ -56,7 +56,7 @@ public class AddCommandIntegrationTest {
     @Test
     public void execute_personWithCar_success() {
         Person validPerson = new PersonBuilder()
-                .withCar("SH 8942 L", "11111111111111111", "Toyota", "Corolla").build();
+                .withCar("SH8942L", "11111111111111111", "Toyota", "Corolla").build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addPerson(validPerson);
@@ -71,7 +71,7 @@ public class AddCommandIntegrationTest {
     public void execute_personWithCarDuplicate_throwsCommandException() {
         // One Person in the list has a car with the same VIN
         Person personWithCar = new PersonBuilder()
-                .withCar("SH 8942 L", VALID_CAR_VIN_A, "Toyota", "Corolla").build();
+                .withCar("SH8942L", VALID_CAR_VIN_A, "Toyota", "Corolla").build();
         assertCommandFailure(new AddClientCommand(personWithCar), modelWithCar,
                 "This car already exists in the address book");
 

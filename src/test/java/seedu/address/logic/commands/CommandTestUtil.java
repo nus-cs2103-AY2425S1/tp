@@ -32,8 +32,8 @@ public class CommandTestUtil {
 
     public static final String VALID_CAR_VIN_A = "11111111111111111";
     public static final String VALID_CAR_VIN_B = "22222222222222222";
-    public static final String VALID_CAR_VRN_A = "SJH 9514 P";
-    public static final String VALID_CAR_VRN_B = "SH 8942 L";
+    public static final String VALID_CAR_VRN_A = "SJH9514P";
+    public static final String VALID_CAR_VRN_B = "SH8942L";
     public static final String VALID_CAR_MAKE_A = "Toyota";
     public static final String VALID_CAR_MAKE_B = "Honda";
     public static final String VALID_CAR_MODEL_A = "Corolla";

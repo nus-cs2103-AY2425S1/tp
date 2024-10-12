@@ -51,11 +51,11 @@ public class PersonTest {
         assertFalse(BOB.isSamePerson(editedBob));
 
         // same person, but 1 has car and the other does not -> returns true
-        editedAlice = new PersonBuilder(ALICE).withCar("SH 8942 L", "11111111111111111", "Toyota", "Corolla").build();
+        editedAlice = new PersonBuilder(ALICE).withCar("SH8942L", "11111111111111111", "Toyota", "Corolla").build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // same person, but have different cars -> returns true
-        Person editedAliceDifferentCar = new PersonBuilder(ALICE).withCar("SH 8942 L", "22222222222222222",
+        Person editedAliceDifferentCar = new PersonBuilder(ALICE).withCar("SH8942L", "22222222222222222",
                                                                             "Honda", "Civic").build();
         assertTrue(editedAlice.isSamePerson(editedAliceDifferentCar));
     }
@@ -99,18 +99,18 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different car -> returns false
-        editedAlice = new PersonBuilder(ALICE).withCar("SH 8942 L",
+        editedAlice = new PersonBuilder(ALICE).withCar("SH8942L",
                                                         "11111111111111111",
                                                        "Toyota",
                                                       "Corolla").build();
-        Person editedAliceDifferentCar = new PersonBuilder(ALICE).withCar("SH 8942 L",
+        Person editedAliceDifferentCar = new PersonBuilder(ALICE).withCar("SH8942L",
                                                                         "22222222222222222",
                                                                         "Honda",
                                                                         "Civic").build();
         assertFalse(editedAliceDifferentCar.equals(editedAlice));
 
         // same person, but 1 has car and the other does not -> returns false
-        editedAlice = new PersonBuilder(ALICE).withCar("SH 8942 L", "11111111111111111", "Toyota", "Corolla").build();
+        editedAlice = new PersonBuilder(ALICE).withCar("SH8942L", "11111111111111111", "Toyota", "Corolla").build();
         assertFalse(ALICE.equals(editedAlice));
     }
 
@@ -121,7 +121,7 @@ public class PersonTest {
         assertEquals(expected, ALICE.toString());
 
         // Test with car
-        Person aliceWithCar = new PersonBuilder(ALICE).withCar("SH 8942 L", "11111111111111111",
+        Person aliceWithCar = new PersonBuilder(ALICE).withCar("SH8942L", "11111111111111111",
                                                                 "Toyota", "Corolla").build();
         expected = Person.class.getCanonicalName() + "{name=" + aliceWithCar.getName() + ", phone="
                                                     + aliceWithCar.getPhone()
