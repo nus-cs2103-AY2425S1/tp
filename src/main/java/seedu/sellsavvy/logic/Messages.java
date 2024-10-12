@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.sellsavvy.logic.parser.Prefix;
+import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.person.Person;
 
 /**
@@ -48,4 +49,16 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Formats the {@code order} for display to the user.
+     */
+    public static String format(Order order) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(order.getItem())
+                .append("; Delivery by: ")
+                .append(order.getDate())
+                .append("; Quantity: ")
+                .append(order.getCount());
+        return builder.toString();
+    }
 }
