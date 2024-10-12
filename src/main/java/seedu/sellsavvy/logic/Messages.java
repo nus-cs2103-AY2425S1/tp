@@ -54,8 +54,8 @@ public class Messages {
      */
     public static String format(Order order) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(order.getItem())
-                .append("; Delivery by: ")
+        builder.append(order.getItem() + "\n")
+                .append("Delivery by: ")
                 .append(order.getDate())
                 .append("; Quantity: ")
                 .append(order.getCount());

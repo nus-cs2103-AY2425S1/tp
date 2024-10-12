@@ -41,8 +41,7 @@ public class AddOrderCommandParser implements Parser<AddOrderCommand> {
                     AddOrderCommand.MESSAGE_USAGE), pe);
         }
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_ITEM, PREFIX_DATE, PREFIX_COUNT)
-                || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_ITEM, PREFIX_DATE, PREFIX_COUNT)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddOrderCommand.MESSAGE_USAGE));
         }
 
