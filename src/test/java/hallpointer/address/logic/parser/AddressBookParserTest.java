@@ -17,7 +17,7 @@ import hallpointer.address.logic.commands.AddMemberCommand;
 import hallpointer.address.logic.commands.ClearCommand;
 import hallpointer.address.logic.commands.DeleteMemberCommand;
 import hallpointer.address.logic.commands.UpdateMemberCommand;
-import hallpointer.address.logic.commands.UpdateMemberCommand.EditMemberDescriptor;
+import hallpointer.address.logic.commands.UpdateMemberCommand.updateMemberDescriptor;
 import hallpointer.address.logic.commands.ExitCommand;
 import hallpointer.address.logic.commands.FindMemberCommand;
 import hallpointer.address.logic.commands.HelpCommand;
