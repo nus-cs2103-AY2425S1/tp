@@ -10,6 +10,7 @@ import seedu.address.model.client.Buyer;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.ClientTypes;
 import seedu.address.model.person.Person;
+import seedu.address.model.property.Property;
 
 /**
  * Container for user visible messages.
@@ -66,6 +67,18 @@ public class Messages {
                 .append(client.getPhone())
                 .append("; Email: ")
                 .append(client.getEmail());
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code property} for display to the user.
+     */
+    public static String format(Property property) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("PostalCode: ")
+                .append(property.getPostalCode())
+                .append("; Unit: ")
+                .append(property.getUnit());
         return builder.toString();
     }
 }

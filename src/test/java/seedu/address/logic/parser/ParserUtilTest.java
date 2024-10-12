@@ -18,6 +18,8 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.property.PostalCode;
+import seedu.address.model.property.Unit;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -26,6 +28,8 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_POSTALCODE = "123 45";
+    private static final String INVALID_UNIT = "11";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -33,6 +37,8 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_POSTALCODE = "123456";
+    private static final String VALID_UNIT = "11-11";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -266,5 +272,53 @@ public class ParserUtilTest {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         seedu.address.model.client.Email expectedEmail = new seedu.address.model.client.Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseClientEmail(emailWithWhitespace));
+    }
+
+    // Tests for property PostalCode
+    @Test
+    public void parsePropertyPostalCode_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parsePostalCode((String) null));
+    }
+
+    @Test
+    public void parsePropertyPostalCode_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePostalCode(INVALID_POSTALCODE));
+    }
+
+    @Test
+    public void parsePropertyPostalCode_validValueWithoutWhitespace_returnsClientEmail() throws Exception {
+        PostalCode expectedPostalCode = new PostalCode(VALID_POSTALCODE);
+        assertEquals(expectedPostalCode, ParserUtil.parsePostalCode(VALID_POSTALCODE));
+    }
+
+    @Test
+    public void parsePropertyPostalCode_validValueWithWhitespace_returnsTrimmedClientEmail() throws Exception {
+        String postalCodeWithWhitespace = WHITESPACE + VALID_POSTALCODE + WHITESPACE;
+        PostalCode expectedPostalCode = new PostalCode(VALID_POSTALCODE);
+        assertEquals(expectedPostalCode, ParserUtil.parsePostalCode(postalCodeWithWhitespace));
+    }
+
+    // Tests for property Unit
+    @Test
+    public void parsePropertyUnit_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseUnit((String) null));
+    }
+
+    @Test
+    public void parsePropertyUnit_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseUnit(INVALID_UNIT));
+    }
+
+    @Test
+    public void parsePropertyUnit_validValueWithoutWhitespace_returnsClientEmail() throws Exception {
+        Unit expectedUnit = new Unit(VALID_UNIT);
+        assertEquals(expectedUnit, ParserUtil.parseUnit(VALID_UNIT));
+    }
+
+    @Test
+    public void parsePropertyUnit_validValueWithWhitespace_returnsTrimmedClientEmail() throws Exception {
+        String unitWithWhitespace = WHITESPACE + VALID_UNIT + WHITESPACE;
+        Unit expectedUnit = new Unit(VALID_UNIT);
+        assertEquals(expectedUnit, ParserUtil.parseUnit(unitWithWhitespace));
     }
 }
