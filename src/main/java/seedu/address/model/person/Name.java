@@ -10,16 +10,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Name should only contain alphanumeric characters, single spaces between words, "
-                    + "and certain symbols like '&', '-', '\'', and '.', "
-                    + "and it should not start or end with special characters or spaces.";
+            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
 
     /*
-     * Company names should start with an alphanumeric character,
-     * and can contain the characters &, ', -, . and single spaces between words.
-     * No leading/trailing spaces or special characters, and no multiple consecutive spaces are allowed.
+     * The first character of the name must not be a whitespace,
+     * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "^[\\p{Alnum}][\\p{Alnum}&'.-]*(?: [\\p{Alnum}&'.-]+)*$";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     private final String value;
 
