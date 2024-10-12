@@ -15,8 +15,8 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.client.Buyer;
 import seedu.address.model.client.Client;
+
 public class DeleteBuyerCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalClientBook());
     @Test
@@ -24,7 +24,7 @@ public class DeleteBuyerCommandTest {
         final String phoneNumber = "94351253";
         DeleteBuyerCommand deleteBuyerCommand = new DeleteBuyerCommand(phoneNumber);
         Client personToDelete = model.getFilteredClientList().stream()
-                .filter(person -> person instanceof Buyer)
+                .filter(Client::isBuyer)
                 .filter(person -> person.getPhone().toString().equals(phoneNumber))
                 .findFirst().orElseThrow(() -> new AssertionError("Phone number not found in the model"));
         String expectedMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete));

@@ -16,7 +16,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.client.Client;
-import seedu.address.model.client.Seller;
 
 
 public class DeleteSellerCommandTest {
@@ -24,10 +23,10 @@ public class DeleteSellerCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalClientBook());
     @Test
     public void execute() {
-        final String phoneNumber = "87652533";
+        final String phoneNumber = "98765432";
         DeleteSellerCommand deleteSellerCommand = new DeleteSellerCommand(phoneNumber);
         Client personToDelete = model.getFilteredClientList().stream()
-                .filter(person -> person instanceof Seller)
+                .filter(Client::isSeller)
                 .filter(person -> person.getPhone().toString().equals(phoneNumber))
                 .findFirst().orElseThrow(() -> new AssertionError("Phone number not found in the model"));
         String expectedMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete));

@@ -45,7 +45,7 @@ public class DeleteBuyerCommand extends Command {
         requireNonNull(model);
         // Search for the person with the specified phone number
         Client personToDelete = model.getFilteredClientList().stream()
-                .filter(person -> person instanceof Buyer)
+                .filter(Client::isBuyer)
                 .filter(person -> person.getPhone().toString().equals(phoneNumber))
                 .findFirst().orElseThrow(() -> new CommandException(String.format("Buyer not found. ", phoneNumber)));
         model.deleteClient(personToDelete);
