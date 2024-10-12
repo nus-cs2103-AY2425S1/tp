@@ -140,6 +140,12 @@ public class ModelManager implements Model {
         filteredMembers.setPredicate(predicate);
     }
 
+    /**
+     * Updates the filtered session list based on the given predicate.
+     *
+     * @param predicate The predicate to filter the sessions.
+     * @throws NullPointerException If the predicate is null.
+     */
     public void updateFilteredSessionList(Predicate<Session> predicate) {
         requireNonNull(predicate);
         filteredSessions.setPredicate(predicate); // Assuming you have a FilteredList<Session>

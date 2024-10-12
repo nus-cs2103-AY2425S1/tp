@@ -22,6 +22,7 @@ import hallpointer.address.model.Model;
 import hallpointer.address.model.ReadOnlyAddressBook;
 import hallpointer.address.model.ReadOnlyUserPrefs;
 import hallpointer.address.model.member.Member;
+import hallpointer.address.model.session.Session;
 import hallpointer.address.testutil.MemberBuilder;
 import javafx.collections.ObservableList;
 
@@ -147,6 +148,15 @@ public class AddMemberCommandTest {
         @Override
         public void setMember(Member target, Member editedMember) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        /**
+         * @param session
+         */
+        @Override
+        public void addSession(Session session) {
+            throw new AssertionError("This method should not be called");
+
         }
 
         @Override
