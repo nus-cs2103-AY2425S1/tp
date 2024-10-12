@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.person.Github;
 import seedu.address.model.person.Person;
 
 /**
@@ -42,6 +43,8 @@ public class PersonCard extends UiPart<Region> {
     private Label assignment;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label github;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -62,5 +65,10 @@ public class PersonCard extends UiPart<Region> {
         } else {
             assignment.setText("No assignment available"); // Optional: for better user feedback
         }
+        if (person.getGithub() != null) {
+            github.setText(person.getGithub().toString());
+        } else {
+            github.setText("GitHub username unspecified");
+        };
     }
 }
