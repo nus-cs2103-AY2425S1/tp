@@ -24,9 +24,9 @@ public class NotesCommand extends Command {
             + "by the index number used in the last person listing. "
             + "New note will be appended to the notes currently stored.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "r/ [NOTES]\n"
+            + "n/ [NOTES]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "r/ High profile client.";
+            + "n/ High profile client.";
 
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Notes: %2$s";
 
@@ -34,18 +34,18 @@ public class NotesCommand extends Command {
     public static final String MESSAGE_DELETE_NOTES_SUCCESS = "Removed notes from Person: %1$s";
 
     private final Index index;
-    private final Notes notes;
+    private final String note;
 
 
     /**
      * @param index of the person in the filtered person list to edit the notes
-     * @param notes of the person to be updated to
+     * @param note of the person to be updated to
      */
-    public NotesCommand(Index index, Notes notes) {
-        requireAllNonNull(index, notes);
+    public NotesCommand(Index index, String note) {
+        requireAllNonNull(index, note);
 
         this.index = index;
-        this.notes = notes;
+        this.note = note;
     }
 
     @Override
@@ -57,9 +57,14 @@ public class NotesCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
+
+        // Update notes with new note
+        Notes notesToEdit = personToEdit.getNotes();
+        notesToEdit.add(note);
+
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getTags(), notes);
+                personToEdit.getAddress(), personToEdit.getTags(), notesToEdit);
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -73,7 +78,7 @@ public class NotesCommand extends Command {
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        String message = !notes.isEmpty() ? MESSAGE_ADD_NOTES_SUCCESS : MESSAGE_DELETE_NOTES_SUCCESS;
+        String message = !note.isEmpty() ? MESSAGE_ADD_NOTES_SUCCESS : MESSAGE_DELETE_NOTES_SUCCESS;
         return String.format(message, Messages.format(personToEdit));
     }
 

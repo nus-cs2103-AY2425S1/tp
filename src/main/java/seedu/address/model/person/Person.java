@@ -64,6 +64,10 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+    public Notes getNotes() {
+        return notes;
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.

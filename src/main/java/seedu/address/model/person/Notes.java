@@ -1,19 +1,29 @@
 package seedu.address.model.person;
 
+import java.util.List;
+
 /**
  * Represents a Person's notes in BizBook.
  */
 public class Notes {
 
-    public final String[] notes;
+    private List<String> notes;
 
     /**
      * Constructs {@code Notes}.
      *
      * @param notes A valid list of notes.
      */
-    public Notes(String[] notes) {
+    public Notes(List<String> notes) {
         this.notes = notes;
+    }
+
+    public List<String> getNotes() { return this.notes; }
+
+    public void setNotes(List<String> notes) { this.notes = notes; }
+
+    public void add(String note) {
+        notes.add(note);
     }
 
     /**
@@ -36,7 +46,7 @@ public class Notes {
      * Returns true if the notes array is empty, false otherwise.
      */
     public boolean isEmpty() {
-        return notes == null || notes.length == 0;
+        return notes == null || notes.isEmpty();
     }
 
 
