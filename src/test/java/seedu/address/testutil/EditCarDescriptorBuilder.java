@@ -1,6 +1,6 @@
 package seedu.address.testutil;
 
-import seedu.address.logic.commands.EditCommand.EditCarDescriptor;
+import seedu.address.logic.commands.EditClientCommand.EditCarDescriptor;
 import seedu.address.model.car.Car;
 import seedu.address.model.car.CarMake;
 import seedu.address.model.car.CarModel;

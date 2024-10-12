@@ -39,7 +39,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Edits the details of an existing person in the address book.
  */
-public class EditCommand extends Command {
+public class EditClientCommand extends Command {
 
     public static final String COMMAND_WORD = "edit-client";
 
@@ -73,7 +73,7 @@ public class EditCommand extends Command {
      * @param index of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
-    public EditCommand(
+    public EditClientCommand(
         Index index, EditPersonDescriptor editPersonDescriptor,
         EditCarDescriptor editCarDescriptor, Boolean isPersonEdited,
         Boolean isCarEdited
@@ -155,13 +155,13 @@ public class EditCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
+        if (!(other instanceof EditClientCommand)) {
             return false;
         }
 
-        EditCommand otherEditCommand = (EditCommand) other;
-        return index.equals(otherEditCommand.index)
-                && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
+        EditClientCommand otherEditClientCommand = (EditClientCommand) other;
+        return index.equals(otherEditClientCommand.index)
+                && editPersonDescriptor.equals(otherEditClientCommand.editPersonDescriptor);
     }
 
     @Override
