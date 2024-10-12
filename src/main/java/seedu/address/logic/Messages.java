@@ -75,10 +75,10 @@ public class Messages {
      */
     public static String format(Property property) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(property.getPostalCode())
-                .append("; PostalCode: ")
-                .append(property.getUnit())
-                .append("; Unit: ");
+        builder.append("PostalCode: ")
+                .append(property.getPostalCode())
+                .append("; Unit: ")
+                .append(property.getUnit());
         return builder.toString();
     }
 }

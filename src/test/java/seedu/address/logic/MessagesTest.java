@@ -11,6 +11,9 @@ import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.Seller;
+import seedu.address.model.property.PostalCode;
+import seedu.address.model.property.Property;
+import seedu.address.model.property.Unit;
 
 class MessagesTest {
 
@@ -62,6 +65,19 @@ class MessagesTest {
 
         // Assert
         String expected = "SELLER; Bob Bee; Phone: 87654321; Email: bob@example.com";
+        assertEquals(expected, result);
+    }
+
+    @Test
+    void formatProperty_success() {
+        // Arrange
+        Property property = new Property(new PostalCode("123456"), new Unit("12-75"));
+
+        // Act
+        String result = Messages.format(property);
+
+        // Assert
+        String expected = "PostalCode: 123456; Unit: 12-75";
         assertEquals(expected, result);
     }
 }

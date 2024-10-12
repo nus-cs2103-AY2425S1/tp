@@ -10,6 +10,10 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.property.Property;
 
+/**
+ * Adds a {@code Property} to the address book.
+ * Extends {@link AddPropertyCommand} and uses its functionality to add a specific type of property: {@code Property}.
+ */
 public class AddPropertyCommand extends Command {
     public static final String COMMAND_WORD = "addproperty";
 
@@ -31,6 +35,14 @@ public class AddPropertyCommand extends Command {
         toAdd = property;
     }
 
+    /**
+     * Executes the AddPropertyCommand.
+     * Adds the property to the model if the property does not already exist in the address book.
+     *
+     * @param model The model which contains the address book data.
+     * @return A {@link CommandResult} with a success message if the property was added.
+     * @throws CommandException if the seller already exists in the address book.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);

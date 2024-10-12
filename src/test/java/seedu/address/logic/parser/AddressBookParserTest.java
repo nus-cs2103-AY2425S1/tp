@@ -7,10 +7,13 @@ import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POSTALCODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_UNITNUMBER;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalClients.ALICE;
 import static seedu.address.testutil.TypicalClients.DANIEL;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalProperty.ADMIRALTY;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,6 +23,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddBuyerCommand;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddPropertyCommand;
 import seedu.address.logic.commands.AddSellerCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteBuyerCommand;
@@ -37,10 +41,12 @@ import seedu.address.model.client.Phone;
 import seedu.address.model.client.Seller;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.property.Property;
 import seedu.address.testutil.ClientBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.PropertyBuilder;
 
 public class AddressBookParserTest {
 
@@ -119,6 +125,17 @@ public class AddressBookParserTest {
         DeleteSellerCommand command = (DeleteSellerCommand) parser.parseCommand(
                 DeleteSellerCommand.COMMAND_WORD + " " + PREFIX_PHONE + phoneNumber);
         assertEquals(new DeleteSellerCommand(new Phone(phoneNumber)), command);
+    }
+
+    @Test
+    public void parseCommand_addProperty() throws Exception {
+        Property property = new PropertyBuilder(ADMIRALTY).build();
+        AddPropertyCommand command = (AddPropertyCommand) parser.parseCommand(
+                AddPropertyCommand.COMMAND_WORD + " " + PREFIX_POSTALCODE + ADMIRALTY.getPostalCode() + " "
+                        + PREFIX_UNITNUMBER + ADMIRALTY.getUnit()
+        );
+
+        assertEquals(new AddPropertyCommand(property), command);
     }
 
     @Test

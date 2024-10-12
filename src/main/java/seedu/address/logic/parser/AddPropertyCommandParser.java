@@ -12,6 +12,11 @@ import seedu.address.model.property.PostalCode;
 import seedu.address.model.property.Property;
 import seedu.address.model.property.Unit;
 
+/**
+ * Parses input arguments and creates a new {@link AddPropertyCommand} object.
+ * The parser processes the input string to extract the necessary parameters
+ * (postalCode, Unit) for creating a {@link Property}.
+ */
 public class AddPropertyCommandParser implements Parser<AddPropertyCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
