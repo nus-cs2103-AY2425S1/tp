@@ -59,7 +59,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete 9";
+        String deleteCommand = "delete v/9";
         assertCommandException(deleteCommand, MESSAGE_INVALID_VENDOR_DISPLAYED_INDEX);
     }
 
@@ -91,6 +91,7 @@ public class LogicManagerTest {
      * - the feedback message is equal to {@code expectedMessage} <br>
      * - the internal model manager state is the same as that in
      * {@code expectedModel} <br>
+     * 
      * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage, Model expectedModel)
@@ -103,6 +104,7 @@ public class LogicManagerTest {
     /**
      * Executes the command, confirms that a ParseException is thrown and that the
      * result message is correct.
+     * 
      * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertParseException(String inputCommand, String expectedMessage) {
@@ -112,6 +114,7 @@ public class LogicManagerTest {
     /**
      * Executes the command, confirms that a CommandException is thrown and that the
      * result message is correct.
+     * 
      * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertCommandException(String inputCommand, String expectedMessage) {
@@ -121,6 +124,7 @@ public class LogicManagerTest {
     /**
      * Executes the command, confirms that the exception is thrown and that the
      * result message is correct.
+     * 
      * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
@@ -135,6 +139,7 @@ public class LogicManagerTest {
      * - the resulting error message is equal to {@code expectedMessage} <br>
      * - the internal model manager state is the same as that in
      * {@code expectedModel} <br>
+     * 
      * @see #assertCommandSuccess(String, String, Model)
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
@@ -146,6 +151,7 @@ public class LogicManagerTest {
     /**
      * Tests the Logic component's handling of an {@code IOException} thrown by the
      * Storage component.
+     * 
      * @param e               the exception to be thrown by the Storage component
      * @param expectedMessage the message expected inside exception thrown by the
      *                        Logic component

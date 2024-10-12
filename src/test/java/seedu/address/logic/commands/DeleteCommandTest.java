@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.DeleteCommand.ItemTypeToDelete;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -30,7 +31,7 @@ public class DeleteCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Vendor vendorToDelete = model.getFilteredVendorList().get(INDEX_FIRST_VENDOR.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_VENDOR);
+        DeleteCommand deleteCommand = new DeleteCommand(ItemTypeToDelete.VENDOR, INDEX_FIRST_VENDOR);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_VENDOR_SUCCESS,
                 Messages.format(vendorToDelete));
@@ -44,7 +45,7 @@ public class DeleteCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredVendorList().size() + 1);
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+        DeleteCommand deleteCommand = new DeleteCommand(ItemTypeToDelete.VENDOR, outOfBoundIndex);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_VENDOR_DISPLAYED_INDEX);
     }
@@ -54,7 +55,7 @@ public class DeleteCommandTest {
         showVendorAtIndex(model, INDEX_FIRST_VENDOR);
 
         Vendor vendorToDelete = model.getFilteredVendorList().get(INDEX_FIRST_VENDOR.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_VENDOR);
+        DeleteCommand deleteCommand = new DeleteCommand(ItemTypeToDelete.VENDOR, INDEX_FIRST_VENDOR);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_VENDOR_SUCCESS,
                 Messages.format(vendorToDelete));
@@ -74,21 +75,21 @@ public class DeleteCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getVendorList().size());
 
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+        DeleteCommand deleteCommand = new DeleteCommand(ItemTypeToDelete.VENDOR, outOfBoundIndex);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_VENDOR_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_VENDOR);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_VENDOR);
+        DeleteCommand deleteFirstCommand = new DeleteCommand(ItemTypeToDelete.VENDOR, INDEX_FIRST_VENDOR);
+        DeleteCommand deleteSecondCommand = new DeleteCommand(ItemTypeToDelete.VENDOR, INDEX_SECOND_VENDOR);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_VENDOR);
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(ItemTypeToDelete.VENDOR, INDEX_FIRST_VENDOR);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
@@ -104,7 +105,7 @@ public class DeleteCommandTest {
     @Test
     public void toStringMethod() {
         Index targetIndex = Index.fromOneBased(1);
-        DeleteCommand deleteCommand = new DeleteCommand(targetIndex);
+        DeleteCommand deleteCommand = new DeleteCommand(ItemTypeToDelete.VENDOR, targetIndex);
         String expected = DeleteCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
         assertEquals(expected, deleteCommand.toString());
     }

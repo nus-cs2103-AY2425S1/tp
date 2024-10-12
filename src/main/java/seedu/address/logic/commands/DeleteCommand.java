@@ -11,7 +11,6 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.vendor.Vendor;
-import seedu.address.model.event.Event;
 
 /**
  * Deletes a vendor identified using it's displayed index from the address book.
@@ -26,10 +25,10 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by the index number used in the displayed vendor list.\n"
-            + "Parameters:"
+            + "Parameters: "
             + PREFIX_VENDOR
             + "INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_VENDOR + " 1";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_VENDOR + "1";
 
     public static final String MESSAGE_DELETE_VENDOR_SUCCESS = "Deleted Vendor: %1$s";
 
@@ -76,7 +75,8 @@ public class DeleteCommand extends Command {
         }
 
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return targetIndex.equals(otherDeleteCommand.targetIndex);
+        return targetIndex.equals(otherDeleteCommand.targetIndex) &&
+                itemType.equals(otherDeleteCommand.itemType);
     }
 
     @Override
