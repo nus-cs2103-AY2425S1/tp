@@ -1,11 +1,11 @@
 package seedu.address.model.meetup;
 
-import seedu.address.commons.util.ToStringBuilder;
-
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Objects;
+
+import seedu.address.commons.util.ToStringBuilder;
 
 /**
  * Represents a Meetup in the address book.
@@ -16,13 +16,13 @@ public class MeetUp { //TODO
     // Identity fields
     private final String name;
     private final String info;
-    private final Date from;
-    private final Date to;
+    private final LocalDateTime from;
+    private final LocalDateTime to;
 
     /**
      * Every field must be present and not null.
      */
-    public MeetUp(String name, String info, Date from, Date to) {
+    public MeetUp(String name, String info, LocalDateTime from, LocalDateTime to) {
         requireAllNonNull(name, info, from, to);
         this.name = name;
         this.info = info;
@@ -32,7 +32,7 @@ public class MeetUp { //TODO
 
 
     /**
-     * Returns true if both persons have the same identity and data fields.
+     * Returns true if both meetups have the same identity and data fields.
      * This defines a stronger notion of equality between two meetUps.
      */
     @Override
@@ -78,11 +78,11 @@ public class MeetUp { //TODO
         return this.info;
     }
 
-    public Date getStart() {
+    public LocalDateTime getFrom() {
         return this.from;
     }
 
-    public Date getEnd() {
+    public LocalDateTime getTo() {
         return this.to;
     }
 }

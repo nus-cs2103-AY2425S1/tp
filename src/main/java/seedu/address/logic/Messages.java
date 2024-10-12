@@ -58,9 +58,9 @@ public class Messages {
                 .append("; Info: ")
                 .append(meetup.getInfo())
                 .append("; From: ")
-                .append(meetup.getStart())
+                .append(meetup.getFrom())
                 .append("; To: ")
-                .append(meetup.getEnd());
+                .append(meetup.getTo());
         return builder.toString();
     }
 }
