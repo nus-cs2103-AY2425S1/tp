@@ -16,7 +16,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.property.exceptions.DuplicatePropertyException;
 import seedu.address.model.property.exceptions.PropertyNotFoundException;
 import seedu.address.testutil.PropertyBuilder;
@@ -73,7 +72,6 @@ public class UniquePropertiesListTest {
         uniquePropertyList.setProperty(ADMIRALTY, ADMIRALTY);
         UniquePropertiesList expectedUniquePropertiesList = new UniquePropertiesList();
         expectedUniquePropertiesList.add(ADMIRALTY);
-        System.out.println(uniquePropertyList.equals(expectedUniquePropertiesList));
         assertEquals(expectedUniquePropertiesList, uniquePropertyList);
     }
 
@@ -157,7 +155,7 @@ public class UniquePropertiesListTest {
     @Test
     public void setProperty_listWithDuplicateProperty_throwsDuplicatePropertyException() {
         List<Property> listWithDuplicateProperties = Arrays.asList(ADMIRALTY, ADMIRALTY);
-        assertThrows(DuplicatePersonException.class, () -> uniquePropertyList
+        assertThrows(DuplicatePropertyException.class, () -> uniquePropertyList
                 .setProperties(listWithDuplicateProperties));
     }
 
@@ -165,7 +163,7 @@ public class UniquePropertiesListTest {
     @Test
     public void add_duplicateProperty_throwsDuplicatePropertyException() {
         uniquePropertyList.add(ADMIRALTY);
-        assertThrows(DuplicatePersonException.class, () -> uniquePropertyList.add(ADMIRALTY));
+        assertThrows(DuplicatePropertyException.class, () -> uniquePropertyList.add(ADMIRALTY));
     }
 
 

@@ -8,7 +8,6 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.property.exceptions.DuplicatePropertyException;
 import seedu.address.model.property.exceptions.PropertyNotFoundException;
 
@@ -40,10 +39,10 @@ public class UniquePropertiesList implements Iterable<Property> {
      * Adds a property to the list.
      * The property must not already exist in the list.
      */
-    public void add(Property toAdd) {
+    public void add(Property toAdd) throws DuplicatePropertyException {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicatePersonException();
+            throw new DuplicatePropertyException();
         }
         internalList.add(toAdd);
     }
@@ -53,7 +52,8 @@ public class UniquePropertiesList implements Iterable<Property> {
      * {@code target} must exist in the list.
      * The property identity of {@code editedProperty} must not be the same as another existing property in the list.
      */
-    public void setProperty(Property target, Property editedProperty) {
+    public void setProperty(Property target, Property editedProperty)
+            throws DuplicatePropertyException, PropertyNotFoundException {
         requireAllNonNull(target, editedProperty);
 
         int index = internalList.indexOf(target);
@@ -77,10 +77,10 @@ public class UniquePropertiesList implements Iterable<Property> {
      * Replaces the contents of this list with {@code properties}.
      * {@code properties} must not contain duplicate properties.
      */
-    public void setProperties(List<Property> properties) {
+    public void setProperties(List<Property> properties) throws DuplicatePropertyException {
         requireAllNonNull(properties);
         if (!propertiesAreUnique(properties)) {
-            throw new DuplicatePersonException();
+            throw new DuplicatePropertyException();
         }
         internalList.setAll(properties);
     }
@@ -113,7 +113,6 @@ public class UniquePropertiesList implements Iterable<Property> {
             return false;
         }
 
-        System.out.println("here");
         UniquePropertiesList otherUniquePropertyList = (UniquePropertiesList) other;
         return internalList.equals(otherUniquePropertyList.internalList);
     }
