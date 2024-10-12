@@ -182,6 +182,7 @@ public class PersonTest {
 
         Order cake = Order.of("Cake");
         Order pizza = Order.of("Pizza");
+
         Person p1 = new PersonBuilder().build();
         Person p2 = new PersonBuilder().build();
         Person p3 = new PersonBuilder().build();
