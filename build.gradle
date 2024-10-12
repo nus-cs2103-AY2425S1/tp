@@ -21,23 +21,8 @@ checkstyle {
 }
 
 test {
-    useJUnitPlatform {
-        // Exclude GUI tests on Linux
-        if (System.getProperty("os.name").toLowerCase().contains("linux")) {
-            excludeTags 'gui'
-        }
-    }
-
+    useJUnitPlatform()
     finalizedBy jacocoTestReport
-
-    // Add the necessary JVM arguments to open and export JavaFX modules for TestFX
-    jvmArgs = [
-            '--add-exports=javafx.graphics/com.sun.javafx.application=ALL-UNNAMED',
-            '--add-opens=javafx.graphics/com.sun.javafx.application=ALL-UNNAMED',
-            '--add-exports=javafx.base/com.sun.javafx.event=ALL-UNNAMED',
-            '--add-exports=javafx.controls/com.sun.javafx.scene.control=ALL-UNNAMED',
-            '--add-opens=javafx.controls/javafx.scene.control=ALL-UNNAMED'
-    ]
 }
 
 task coverage(type: JacocoReport) {
@@ -75,12 +60,8 @@ dependencies {
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.7.0'
     implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.7.4'
 
-    // TestFX Core for JavaFX application testing
-    testImplementation 'org.testfx:testfx-core:4.0.16-alpha'
-    // TestFX JUnit5 integration
-    testImplementation 'org.testfx:testfx-junit5:4.0.16-alpha'
-
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: jUnitVersion
+
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: jUnitVersion
 
     testImplementation group: 'org.mockito', name: 'mockito-core', version: '5.4.0'
