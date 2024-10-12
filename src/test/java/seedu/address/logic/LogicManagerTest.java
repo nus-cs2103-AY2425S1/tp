@@ -29,6 +29,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.client.Buyer;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonClientBookStorage;
+import seedu.address.storage.JsonPropertyBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
 import seedu.address.testutil.ClientBuilder;
@@ -49,8 +50,12 @@ public class LogicManagerTest {
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonClientBookStorage clientBookStorage =
                 new JsonClientBookStorage(temporaryFolder.resolve("clientbook.json"));
-        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, clientBookStorage);
+        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder
+                .resolve("userPrefs.json"));
+        JsonPropertyBookStorage propertyBookStorage =
+                new JsonPropertyBookStorage(temporaryFolder.resolve("propertyBook.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, propertyBookStorage,
+                clientBookStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -178,7 +183,10 @@ public class LogicManagerTest {
 
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, clientBookStorage);
+        JsonPropertyBookStorage propertyBookStorage =
+                new JsonPropertyBookStorage(temporaryFolder.resolve("propertyBook.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, propertyBookStorage,
+                clientBookStorage);
 
         logic = new LogicManager(model, storage);
 

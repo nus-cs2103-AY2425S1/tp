@@ -9,6 +9,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyClientBook;
+import seedu.address.model.ReadOnlyPropertyBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 
@@ -16,19 +17,20 @@ import seedu.address.model.UserPrefs;
  * Manages storage of AddressBook data in local storage.
  */
 public class StorageManager implements Storage {
-
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private AddressBookStorage addressBookStorage;
     private UserPrefsStorage userPrefsStorage;
+    private PropertyBookStorage propertyBookStorage;
     private ClientBookStorage clientBookStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
     public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage,
-                          ClientBookStorage clientBookStorage) {
+                          PropertyBookStorage propertyBookStorage, ClientBookStorage clientBookStorage) {
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
+        this.propertyBookStorage = propertyBookStorage;
         this.clientBookStorage = clientBookStorage;
     }
 
@@ -79,6 +81,30 @@ public class StorageManager implements Storage {
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
 
+    // ================ PropertyBook methods ==============================
+
+    @Override
+    public Path getPropertyBookFilePath() {
+        return propertyBookStorage.getPropertyBookFilePath();
+    }
+    @Override
+    public Optional<ReadOnlyPropertyBook> readPropertyBook() throws DataLoadingException {
+        return readPropertyBook(propertyBookStorage.getPropertyBookFilePath());
+    }
+    @Override
+    public Optional<ReadOnlyPropertyBook> readPropertyBook(Path filePath) throws DataLoadingException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return propertyBookStorage.readPropertyBook(filePath);
+    }
+    @Override
+    public void savePropertyBook(ReadOnlyPropertyBook propertyBook) throws IOException {
+        savePropertyBook(propertyBook, propertyBookStorage.getPropertyBookFilePath());
+    }
+    @Override
+    public void savePropertyBook(ReadOnlyPropertyBook propertyBook, Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        propertyBookStorage.savePropertyBook(propertyBook, filePath);
+    }
 
     // ================ ClientBook methods ==============================
 
