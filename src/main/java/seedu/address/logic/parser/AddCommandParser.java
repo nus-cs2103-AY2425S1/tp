@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
@@ -8,6 +9,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -32,11 +37,11 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+            PREFIX_ADDRESS, PREFIX_TAG, PREFIX_COURSE);
 
-        if (!AddCommandParser.arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
-                || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
+            || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
@@ -46,11 +51,40 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        Set<Course> courseList = ParserUtil.parseCourses(argMultimap.getAllValues(PREFIX_COURSE));
 
-        Student person = new Student(name, phone, email, address, tagList, courseList);
+        // Parse courses using the updated method
+        Set<Course> courseList = parseCourses(argMultimap.getAllValues(PREFIX_COURSE))
+            .orElseThrow(() -> new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE)));
 
-        return new AddCommand(person);
+        Student student = new Student(name, phone, email, address, tagList, courseList);
+
+        return new AddCommand(student);
+    }
+
+    /**
+     * Parses {@code Collection<String> courses} into a {@code Set<Course>} if {@code courses} is non-empty.
+     * This method supports both CSV input and multiple `c/` prefixes.
+     */
+    private Optional<Set<Course>> parseCourses(Collection<String> courses) throws ParseException {
+        assert courses != null;
+
+        if (courses.isEmpty()) {
+            return Optional.empty();
+        }
+
+        Set<String> parsedCourses = new HashSet<>();
+
+        // For each course string (this could be a CSV or a single course)
+        for (String courseString : courses) {
+            // Split by commas to support CSV input within a single `c/` prefix
+            String[] splitCourses = courseString.split(",");
+            // Add each course after trimming whitespace
+            for (String course : splitCourses) {
+                parsedCourses.add(course.trim());
+            }
+        }
+
+        return Optional.of(ParserUtil.parseCourses(parsedCourses));
     }
 
     /**
