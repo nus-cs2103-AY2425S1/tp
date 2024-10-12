@@ -58,7 +58,14 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        roomNumber.setText("#" + person.getRoomNumber().value);
+
+        // check if room number label is null
+        if (person.getRoomNumber() != null) {
+            roomNumber.setText("#" + person.getRoomNumber().value);
+        } else {
+            roomNumber.setText("# Room not yet assigned");
+        }
+
         emergencyContactName.setText(person.getEmergencyContact().getName().fullName);
         emergencyContactPhone.setText(person.getEmergencyContact().getPhone().value);
         person.getTags().stream()
