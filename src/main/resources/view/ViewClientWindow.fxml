@@ -7,29 +7,39 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root resizable="false" title="Client Details" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root resizable="false" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" title="MATER - View Client">
+  <icons>
+    <Image url="@/images/mater.png" />
+  </icons>
   <scene>
-    <Scene>
-      <VBox alignment="CENTER" fx:id="clientDetailsContainer">
-        <children>
-          <Label text="Client Details" />
-          <Label fx:id="clientNameLabel" text="Name: " />
-          <Label fx:id="clientPhoneLabel" text="Phone: " />
-          <Label fx:id="clientEmailLabel" text="Email: " />
-          <Label fx:id="clientAddressLabel" text="Address: " />
-          <Label fx:id="clientCarDetailsLabel" text="Car Details: " />
-          <Button fx:id="closeButton" mnemonicParsing="false" onAction="#handleClose" text="Close">
-            <VBox.margin>
-              <Insets top="10.0" />
-            </VBox.margin>
-          </Button>
-        </children>
-        <padding>
-          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-        </padding>
+    <Scene fill="grey">
+      <stylesheets>
+        <URL value="@DarkTheme.css" />
+        <URL value="@Extensions.css" />
+      </stylesheets>
+
+      <VBox fx:id="clientDetailsContainer" styleClass="client_details_container">
+        <!--Client Details-->
+        <Label text="Client Details" styleClass="client_details_header_label"/>
+        <Label fx:id="clientNameLabel" text="Client's Name Not Found" styleClass="client_details_field_label"/>
+        <Label fx:id="clientPhoneLabel" text="Client's Phone Number Not Found" styleClass="client_details_field_label"/>
+        <Label fx:id="clientEmailLabel" text="Client's Email Address Not Found" styleClass="client_details_field_label"/>
+        <Label fx:id="clientAddressLabel" text="Client's Home Address Not Found" styleClass="client_details_field_label"/>
+        <!--Car Details-->
+        <Label text="Car Details" styleClass="client_details_header_label"/>
+        <Label fx:id="clientCarDetailsLabel" text="Client's Car Details Not Found" styleClass="client_details_field_label"/>
+        <!--Client Issues-->
+        <Label text="Car Issues" styleClass="client_details_header_label"/>
+        <FlowPane fx:id="tags"/>
+        <Button fx:id="closeButton" mnemonicParsing="false" onAction="#handleClose" text="Close">
+          <VBox.margin>
+            <Insets top="10.0" />
+          </VBox.margin>
+        </Button>
       </VBox>
     </Scene>
   </scene>
