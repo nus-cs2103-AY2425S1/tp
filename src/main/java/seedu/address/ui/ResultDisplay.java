@@ -27,13 +27,13 @@ public class ResultDisplay extends UiPart<Region> {
     public void setSuccessFeedbackToUser(String feedbackToUser) {
         requireNonNull(feedbackToUser);
         resultDisplay.setText(feedbackToUser);
-        setStyleToIndicateCommandSuccess();
+        setStyleToIndicateResultSuccess();
     }
 
     public void setErrorFeedbackToUser(String feedbackToUser) {
         requireNonNull(feedbackToUser);
         resultDisplay.setText(feedbackToUser);
-        setStyleToIndicateCommandFailure();
+        setStyleToIndicateResultFailure();
     }
 
     /**
@@ -47,7 +47,7 @@ public class ResultDisplay extends UiPart<Region> {
     /**
      * Sets the result text area style to indicate a failed result.
      */
-    private void setStyleToIndicateCommandFailure() {
+    private void setStyleToIndicateResultFailure() {
         ObservableList<String> styleClass = resultDisplay.getStyleClass();
 
         if (styleClass.contains(ERROR_STYLE_CLASS)) {
@@ -60,7 +60,7 @@ public class ResultDisplay extends UiPart<Region> {
     /**
      * Sets the result text area style to indicate a successful result.
      */
-    private void setStyleToIndicateCommandSuccess() {
+    private void setStyleToIndicateResultSuccess() {
         ObservableList<String> styleClass = resultDisplay.getStyleClass();
 
         if (styleClass.contains(SUCCESS_STYLE_CLASS)) {
