@@ -70,8 +70,12 @@ public class Person {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        if (otherPerson == null) {
+            return false;
+        }
+
+        return name.equals(otherPerson.name)
+                && (phone.equals(otherPerson.phone) || email.equals(otherPerson.email));
     }
 
     /**
@@ -89,10 +93,8 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return (name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone))
-                || (name.equals(otherPerson.name)
-                && email.equals(otherPerson.email));
+        return name.equals(otherPerson.name)
+                && (phone.equals(otherPerson.phone) || email.equals(otherPerson.email));
     }
 
     @Override
