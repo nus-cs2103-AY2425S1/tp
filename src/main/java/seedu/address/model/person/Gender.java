@@ -10,19 +10,20 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Gender {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Gender should only be 'F' (Female) or 'M' (Male)";
-    public static final String VALIDATION_REGEX = "^[FM]$";
+            "Gender should only be 'F' / 'f' (Female) or 'M' / 'm' (Male)";
+    public static final String VALIDATION_REGEX = "^[FfMm]$";
     public final String value;
 
     /**
      * Constructs a {@code Gender}.
      *
-     * @param gender A valid gender ('F' or 'M').
+     * @param gender A valid gender ('F', 'f', 'M' or 'm').
+     *               'f' is stored as 'F'; 'm' is stored as 'M'.
      */
     public Gender(String gender) {
         requireNonNull(gender);
         checkArgument(isValidGender(gender), MESSAGE_CONSTRAINTS);
-        this.value = gender;
+        this.value = gender.toUpperCase();
     }
 
     public static boolean isValidGender(String test) {
