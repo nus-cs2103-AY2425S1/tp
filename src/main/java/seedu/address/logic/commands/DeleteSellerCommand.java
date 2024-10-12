@@ -8,7 +8,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
-import seedu.address.model.client.Seller;
+import seedu.address.model.client.Phone;
 
 /**
  * Represents a command to delete a seller in the seller management system.
@@ -22,14 +22,14 @@ public class DeleteSellerCommand extends Command {
             + "Parameters: phone number (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_PHONE + "81621234";
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Seller: %1$s";
-    private final String phoneNumber;
+    private final Phone phoneNumber;
 
     /**
      * Constructs a {@code DeleteSellerCommand} with the specified phone number.
      *
      * @param phoneNumber The phone number of the buyer to delete.
      */
-    public DeleteSellerCommand(String phoneNumber) {
+    public DeleteSellerCommand(Phone phoneNumber) {
         requireAllNonNull(phoneNumber);
         this.phoneNumber = phoneNumber;
     }
@@ -45,8 +45,8 @@ public class DeleteSellerCommand extends Command {
         requireNonNull(model);
         // Search for the person with the specified phone number
         Client personToDelete = model.getFilteredClientList().stream()
-                .filter(person -> person instanceof Seller)
-                .filter(person -> person.getPhone().toString().equals(phoneNumber))
+                .filter(Client::isSeller)
+                .filter(person -> person.getPhone().equals(phoneNumber))
                 .findFirst().orElseThrow(() -> new CommandException(String.format("Seller not found. ", phoneNumber)));
         model.deleteClient(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));

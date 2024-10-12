@@ -70,4 +70,13 @@ public class Buyer extends Client {
                 .add("email", email)
                 .toString();
     }
+
+    @Override
+    public boolean isBuyer() {
+        return true;
+    }
+    @Override
+    public boolean isSeller() {
+        return false;
+    }
 }
