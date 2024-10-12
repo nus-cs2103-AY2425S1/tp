@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.meetup.MeetUp;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Schedule;
 
@@ -147,4 +148,14 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
 
+    //=========== Filtered Schedule List Accessors =============================================================
+    @Override
+    public void editMeetUp(Person person, MeetUp editedMeetUp) {
+        return;
+    }
+
+    @Override
+    public void deleteMeetUp(Person person) {
+        return;
+    }
 }

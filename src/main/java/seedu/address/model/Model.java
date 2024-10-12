@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.meetup.MeetUp;
 import seedu.address.model.person.Person;
 
 /**
@@ -84,4 +85,15 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Updates the given schedule's meetup in the schedule list.
+     * The schedule must exist in the schedule list.
+     */
+    void editMeetUp(Person target, MeetUp editedMeetUp);
+
+    /**
+     * Deletes the given schedule in the schedule list
+     */
+    void deleteMeetUp(Person target);
 }
