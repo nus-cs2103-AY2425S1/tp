@@ -5,7 +5,12 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.ClientBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyClientBook;
+import seedu.address.model.client.Buyer;
+import seedu.address.model.client.Client;
+import seedu.address.model.client.Seller;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -57,4 +62,27 @@ public class SampleDataUtil {
                 .collect(Collectors.toSet());
     }
 
+    public static Client[] getSampleProperties() {
+        return new Client[] {
+            new Buyer(new seedu.address.model.client.Name("Alex Yeoh"),
+                    new seedu.address.model.client.Phone("87438807"),
+                    new seedu.address.model.client.Email("alexyeoh@example.com")),
+            new Seller(new seedu.address.model.client.Name("Bernice Yu"),
+                    new seedu.address.model.client.Phone("99272758"),
+                    new seedu.address.model.client.Email("berniceyu@example.com")),
+            new Buyer(new seedu.address.model.client.Name("Charlotte Oliveiro"),
+                    new seedu.address.model.client.Phone("93210283"),
+                    new seedu.address.model.client.Email("charlotte@example.com")),
+            new Seller(new seedu.address.model.client.Name("David Li"),
+                    new seedu.address.model.client.Phone("91031282"),
+                    new seedu.address.model.client.Email("lidavid@example.com"))
+        };
+    }
+    public static ReadOnlyClientBook getSampleClientBook() {
+        ClientBook sampleAb = new ClientBook();
+        for (Client sampleClient : getSampleProperties()) {
+            sampleAb.addClient(sampleClient);
+        }
+        return sampleAb;
+    }
 }

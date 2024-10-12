@@ -7,13 +7,14 @@ import java.util.Optional;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyPropertyBook;
+import seedu.address.model.ReadOnlyClientBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 
 /**
  * API of the Storage component
  */
-public interface Storage extends AddressBookStorage, UserPrefsStorage, PropertyBookStorage {
+public interface Storage extends AddressBookStorage, UserPrefsStorage, PropertyBookStorage, ClientBookStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataLoadingException;
@@ -29,6 +30,12 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage, PropertyB
 
     @Override
     void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
+
+    @Override
+    Optional<ReadOnlyClientBook> readClientBook() throws DataLoadingException;
+
+    @Override
+    void saveClientBook(ReadOnlyClientBook clientBook) throws IOException;
 
     @Override
     void savePropertyBook(ReadOnlyPropertyBook propertyBook) throws IOException;

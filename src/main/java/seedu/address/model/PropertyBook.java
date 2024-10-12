@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.property.Property;
 import seedu.address.model.property.UniquePropertiesList;
 
@@ -14,6 +15,14 @@ import seedu.address.model.property.UniquePropertiesList;
  */
 public class PropertyBook implements ReadOnlyPropertyBook {
     private final UniquePropertiesList properties;
+
+    /*
+     * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
+     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
+     *
+     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
+     *   among constructors.
+     */
 
     {
         properties = new UniquePropertiesList();
@@ -38,13 +47,11 @@ public class PropertyBook implements ReadOnlyPropertyBook {
     }
 
     /**
-     * Replaces the given property {@code target} in the list with {@code editedProperty}.
-     * {@code target} must exist in the address book.
-     * The property identity of {@code editedProperty} must not be the same as another existing property
-     * in the address book.
+     * Replaces the contents of the property list with {@code properties}.
+     * {@code persons} must not contain duplicate persons.
      */
-    public void setProperty(List<Property> persons) {
-        this.properties.setProperties(persons);
+    public void setProperty(List<Property> properties) {
+        this.properties.setProperties(properties);
     }
 
 
@@ -66,7 +73,34 @@ public class PropertyBook implements ReadOnlyPropertyBook {
     }
 
     @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("properties", properties)
+                .toString();
+    }
+
+    @Override
     public ObservableList<Property> getPropertyList() {
         return properties.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof PropertyBook)) {
+            return false;
+        }
+
+        PropertyBook otherPropertyBook = (PropertyBook) other;
+        return properties.equals(otherPropertyBook.properties);
+    }
+
+    @Override
+    public int hashCode() {
+        return properties.hashCode();
     }
 }

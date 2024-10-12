@@ -9,6 +9,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyPropertyBook;
+import seedu.address.model.ReadOnlyClientBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 
@@ -20,48 +21,60 @@ public class StorageManager implements Storage {
     private AddressBookStorage addressBookStorage;
     private UserPrefsStorage userPrefsStorage;
     private PropertyBookStorage propertyBookStorage;
+    private ClientBookStorage clientBookStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
     public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage,
-                          PropertyBookStorage propertyBookStorage) {
+                          PropertyBookStorage propertyBookStorage, ClientBookStorage clientBookStorage) {
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
         this.propertyBookStorage = propertyBookStorage;
+        this.clientBookStorage = clientBookStorage;
     }
 
     // ================ UserPrefs methods ==============================
+
     @Override
     public Path getUserPrefsFilePath() {
         return userPrefsStorage.getUserPrefsFilePath();
     }
+
     @Override
     public Optional<UserPrefs> readUserPrefs() throws DataLoadingException {
         return userPrefsStorage.readUserPrefs();
     }
+
     @Override
     public void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException {
         userPrefsStorage.saveUserPrefs(userPrefs);
     }
+
+
     // ================ AddressBook methods ==============================
+
     @Override
     public Path getAddressBookFilePath() {
         return addressBookStorage.getAddressBookFilePath();
     }
+
     @Override
     public Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException {
         return readAddressBook(addressBookStorage.getAddressBookFilePath());
     }
+
     @Override
     public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataLoadingException {
         logger.fine("Attempting to read data from file: " + filePath);
         return addressBookStorage.readAddressBook(filePath);
     }
+
     @Override
     public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
         saveAddressBook(addressBook, addressBookStorage.getAddressBookFilePath());
     }
+
     @Override
     public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
@@ -92,4 +105,34 @@ public class StorageManager implements Storage {
         logger.fine("Attempting to write to data file: " + filePath);
         propertyBookStorage.savePropertyBook(propertyBook, filePath);
     }
+
+    // ================ ClientBook methods ==============================
+
+    @Override
+    public Path getClientBookFilePath() {
+        return addressBookStorage.getAddressBookFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlyClientBook> readClientBook() throws DataLoadingException {
+        return readClientBook(clientBookStorage.getClientBookFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlyClientBook> readClientBook(Path filePath) throws DataLoadingException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return clientBookStorage.readClientBook(filePath);
+    }
+
+    @Override
+    public void saveClientBook(ReadOnlyClientBook clientBook) throws IOException {
+        saveClientBook(clientBook, clientBookStorage.getClientBookFilePath());
+    }
+
+    @Override
+    public void saveClientBook(ReadOnlyClientBook clientBook, Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        clientBookStorage.saveClientBook(clientBook, filePath);
+    }
+
 }

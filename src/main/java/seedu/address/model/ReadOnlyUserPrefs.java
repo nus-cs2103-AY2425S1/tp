@@ -14,4 +14,7 @@ public interface ReadOnlyUserPrefs {
     Path getAddressBookFilePath();
 
     Path getPropertyBookFilePath();
+
+    Path getClientBookFilePath();
+
 }
