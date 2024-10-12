@@ -21,7 +21,7 @@ import seedu.address.model.person.TelegramHandle;
 import seedu.address.model.tag.Role;
 
 public class ParserUtilTest {
-    private static final String INVALID_NAME = "R@chel";
+    // private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_TELEGRAM_HANDLE = "+651234";
     private static final String INVALID_STUDENT_STATUS = "undergraduate 7";
     private static final String INVALID_EMAIL = "example.com";
@@ -61,10 +61,13 @@ public class ParserUtilTest {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseName((String) null));
     }
 
+    // omitted as we are accepting any character as name, hence this INVALID_NAME no longer is invalid
+    /*
     @Test
     public void parseName_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseName(INVALID_NAME));
     }
+     */
 
     @Test
     public void parseName_validValueWithoutWhitespace_returnsName() throws Exception {
