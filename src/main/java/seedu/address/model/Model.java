@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.client.Client;
 import seedu.address.model.person.Person;
 import seedu.address.model.property.Property;
 
@@ -14,6 +15,7 @@ import seedu.address.model.property.Property;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Client> PREDICATE_SHOW_ALL_CLIENTS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -85,6 +87,57 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Returns the user prefs' client book file path.
+     */
+    Path getClientBookFilePath();
+
+    /**
+     * Sets the user prefs' client book file path.
+     */
+    void setClientBookFilePath(Path addressBookFilePath);
+
+    /**
+     * Replaces client book data with the data in {@code clientBook}.
+     */
+    void setClientBook(ReadOnlyClientBook clientBook);
+
+    /** Returns the ClientBook */
+    ReadOnlyClientBook getClientBook();
+
+    /**
+     * Returns true if a Client with the same identity as {@code Client} exists in the address book.
+     */
+    boolean hasClient(Client client);
+
+    /**
+     * Deletes the given client.
+     * The person must exist in the client book.
+     */
+    void deleteClient(Client target);
+
+    /**
+     * Adds the given client.
+     * {@code client} must not already exist in the client book.
+     */
+    void addClient(Client client);
+
+    /**
+     * Replaces the given client {@code target} with {@code editedClient}.
+     * {@code target} must exist in the client book.
+     * The client identity of {@code editedClient} must not be the same as another existing client in the address book.
+     */
+    void setClient(Client target, Client editedClient);
+
+    /** Returns an unmodifiable view of the filtered client list */
+    ObservableList<Client> getFilteredClientList();
+
+    /**
+     * Updates the filter of the filtered client list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredClientList(Predicate<Client> predicate);
 
     /**
      * Returns the user prefs' property book file path.
