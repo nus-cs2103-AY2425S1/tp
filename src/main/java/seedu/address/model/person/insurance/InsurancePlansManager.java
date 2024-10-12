@@ -5,7 +5,6 @@ import static seedu.address.model.person.insurance.InsurancePlanFactory.createIn
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.insurance.claim.Claim;
 
