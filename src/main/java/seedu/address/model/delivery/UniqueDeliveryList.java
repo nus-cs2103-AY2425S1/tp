@@ -17,7 +17,7 @@ import seedu.address.model.person.exceptions.DuplicatePersonException;
  * A list of deliveries that enforces uniqueness between its elements and does not allow nulls.
  * A delivery is considered unique by comparing using {@code Delivery#isSameDelivery(Delivery)}. As such,
  * adding and updating of deliveries uses Delivery#isSameDelivery(Delivery) for equality so as to ensure that the
- * person being added or updated is unique in terms of identity in the UniqueDeliveryList. However, the removal
+ * delivery being added or updated is unique in terms of identity in the UniqueDeliveryList. However, the removal
  * of a person uses Person#equals(Object) so as to ensure that the person with exactly the same fields will be removed.
  */
 
