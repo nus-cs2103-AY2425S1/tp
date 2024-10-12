@@ -36,6 +36,7 @@ public class ParserUtilTest {
 
     private static final String WHITESPACE = " \t\r\n";
 
+    // Test for parsing index
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseIndex("10 a"));
@@ -44,18 +45,16 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+                -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
     @Test
     public void parseIndex_validInput_success() throws Exception {
-        // No whitespaces
         assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("1"));
-
-        // Leading and trailing whitespaces
         assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
     }
 
+    // Tests for person Name
     @Test
     public void parseName_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseName((String) null));
@@ -79,6 +78,7 @@ public class ParserUtilTest {
         assertEquals(expectedName, ParserUtil.parseName(nameWithWhitespace));
     }
 
+    // Tests for person Phone
     @Test
     public void parsePhone_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parsePhone((String) null));
@@ -102,6 +102,7 @@ public class ParserUtilTest {
         assertEquals(expectedPhone, ParserUtil.parsePhone(phoneWithWhitespace));
     }
 
+    // Tests for person Address
     @Test
     public void parseAddress_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((String) null));
@@ -125,6 +126,7 @@ public class ParserUtilTest {
         assertEquals(expectedAddress, ParserUtil.parseAddress(addressWithWhitespace));
     }
 
+    // Tests for person Email
     @Test
     public void parseEmail_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail((String) null));
@@ -148,6 +150,7 @@ public class ParserUtilTest {
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
     }
 
+    // Tests for Tags
     @Test
     public void parseTag_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseTag(null));
@@ -190,7 +193,78 @@ public class ParserUtilTest {
     public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
         Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
-
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    // Tests for client Name
+    @Test
+    public void parseClientName_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseClientName(null));
+    }
+
+    @Test
+    public void parseClientName_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseClientName(INVALID_NAME));
+    }
+
+    @Test
+    public void parseClientName_validValueWithoutWhitespace_returnsClientName() throws Exception {
+        seedu.address.model.client.Name expectedName = new seedu.address.model.client.Name(VALID_NAME);
+        assertEquals(expectedName, ParserUtil.parseClientName(VALID_NAME));
+    }
+
+    @Test
+    public void parseClientName_validValueWithWhitespace_returnsTrimmedClientName() throws Exception {
+        String nameWithWhitespace = WHITESPACE + VALID_NAME + WHITESPACE;
+        seedu.address.model.client.Name expectedName = new seedu.address.model.client.Name(VALID_NAME);
+        assertEquals(expectedName, ParserUtil.parseClientName(nameWithWhitespace));
+    }
+
+    // Tests for client Phone
+    @Test
+    public void parseClientPhone_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseClientPhone(null));
+    }
+
+    @Test
+    public void parseClientPhone_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseClientPhone(INVALID_PHONE));
+    }
+
+    @Test
+    public void parseClientPhone_validValueWithoutWhitespace_returnsClientPhone() throws Exception {
+        seedu.address.model.client.Phone expectedPhone = new seedu.address.model.client.Phone(VALID_PHONE);
+        assertEquals(expectedPhone, ParserUtil.parseClientPhone(VALID_PHONE));
+    }
+
+    @Test
+    public void parseClientPhone_validValueWithWhitespace_returnsTrimmedClientPhone() throws Exception {
+        String phoneWithWhitespace = WHITESPACE + VALID_PHONE + WHITESPACE;
+        seedu.address.model.client.Phone expectedPhone = new seedu.address.model.client.Phone(VALID_PHONE);
+        assertEquals(expectedPhone, ParserUtil.parseClientPhone(phoneWithWhitespace));
+    }
+
+    // Tests for client Email
+    @Test
+    public void parseClientEmail_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseClientEmail((String) null));
+    }
+
+    @Test
+    public void parseClientEmail_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseClientEmail(INVALID_EMAIL));
+    }
+
+    @Test
+    public void parseClientEmail_validValueWithoutWhitespace_returnsClientEmail() throws Exception {
+        seedu.address.model.client.Email expectedEmail = new seedu.address.model.client.Email(VALID_EMAIL);
+        assertEquals(expectedEmail, ParserUtil.parseClientEmail(VALID_EMAIL));
+    }
+
+    @Test
+    public void parseClientEmail_validValueWithWhitespace_returnsTrimmedClientEmail() throws Exception {
+        String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
+        seedu.address.model.client.Email expectedEmail = new seedu.address.model.client.Email(VALID_EMAIL);
+        assertEquals(expectedEmail, ParserUtil.parseClientEmail(emailWithWhitespace));
     }
 }
