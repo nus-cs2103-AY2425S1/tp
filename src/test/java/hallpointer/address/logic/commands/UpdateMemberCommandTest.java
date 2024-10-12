@@ -25,8 +25,8 @@ import hallpointer.address.model.Model;
 import hallpointer.address.model.ModelManager;
 import hallpointer.address.model.UserPrefs;
 import hallpointer.address.model.member.Member;
-import hallpointer.address.testutil.UpdateMemberDescriptorBuilder;
 import hallpointer.address.testutil.MemberBuilder;
+import hallpointer.address.testutil.UpdateMemberDescriptorBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for UpdateMemberCommand.
@@ -39,7 +39,7 @@ public class UpdateMemberCommandTest {
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Member editedMember = new MemberBuilder().build();
         UpdateMemberDescriptor descriptor = new UpdateMemberDescriptorBuilder(editedMember).build();
-        UpdateMemberCommand UpdateMemberCommand = new UpdateMemberCommand(INDEX_FIRST_MEMBER, descriptor);
+        UpdateMemberCommand updateMemberCommand = new UpdateMemberCommand(INDEX_FIRST_MEMBER, descriptor);
 
         String expectedMessage = String.format(
                 UpdateMemberCommand.MESSAGE_UPDATE_MEMBER_SUCCESS, Messages.format(editedMember));
@@ -47,7 +47,7 @@ public class UpdateMemberCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setMember(model.getFilteredMemberList().get(0), editedMember);
 
-        assertCommandSuccess(UpdateMemberCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(updateMemberCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -56,12 +56,13 @@ public class UpdateMemberCommandTest {
         Member lastMember = model.getFilteredMemberList().get(indexLastMember.getZeroBased());
 
         MemberBuilder memberInList = new MemberBuilder(lastMember);
-        Member editedMember = memberInList.withName(VALID_NAME_BOB).withTelegram(VALID_TELEGRAM_BOB)
+        Member editedMember = memberInList.withName(VALID_NAME_BOB)
+                .withTelegram(VALID_TELEGRAM_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
 
         UpdateMemberDescriptor descriptor = new UpdateMemberDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withTelegram(VALID_TELEGRAM_BOB).withTags(VALID_TAG_HUSBAND).build();
-        UpdateMemberCommand UpdateMemberCommand = new UpdateMemberCommand(indexLastMember, descriptor);
+        UpdateMemberCommand updateMemberCommand = new UpdateMemberCommand(indexLastMember, descriptor);
 
         String expectedMessage = String.format(
                 UpdateMemberCommand.MESSAGE_UPDATE_MEMBER_SUCCESS, Messages.format(editedMember));
@@ -69,12 +70,13 @@ public class UpdateMemberCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setMember(lastMember, editedMember);
 
-        assertCommandSuccess(UpdateMemberCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(updateMemberCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        UpdateMemberCommand UpdateMemberCommand = new UpdateMemberCommand(INDEX_FIRST_MEMBER, new UpdateMemberDescriptor());
+        UpdateMemberDescriptor descriptor = new UpdateMemberDescriptor();
+        UpdateMemberCommand updateMemberCommand = new UpdateMemberCommand(INDEX_FIRST_MEMBER, descriptor);
         Member editedMember = model.getFilteredMemberList().get(INDEX_FIRST_MEMBER.getZeroBased());
 
         String expectedMessage = String.format(
@@ -82,7 +84,7 @@ public class UpdateMemberCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
-        assertCommandSuccess(UpdateMemberCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(updateMemberCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -91,7 +93,7 @@ public class UpdateMemberCommandTest {
 
         Member memberInFilteredList = model.getFilteredMemberList().get(INDEX_FIRST_MEMBER.getZeroBased());
         Member editedMember = new MemberBuilder(memberInFilteredList).withName(VALID_NAME_BOB).build();
-        UpdateMemberCommand UpdateMemberCommand = new UpdateMemberCommand(INDEX_FIRST_MEMBER,
+        UpdateMemberCommand updateMemberCommand = new UpdateMemberCommand(INDEX_FIRST_MEMBER,
                 new UpdateMemberDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         String expectedMessage = String.format(
@@ -100,16 +102,16 @@ public class UpdateMemberCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setMember(model.getFilteredMemberList().get(0), editedMember);
 
-        assertCommandSuccess(UpdateMemberCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(updateMemberCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_duplicateMemberUnfilteredList_failure() {
         Member firstMember = model.getFilteredMemberList().get(INDEX_FIRST_MEMBER.getZeroBased());
         UpdateMemberDescriptor descriptor = new UpdateMemberDescriptorBuilder(firstMember).build();
-        UpdateMemberCommand UpdateMemberCommand = new UpdateMemberCommand(INDEX_SECOND_MEMBER, descriptor);
+        UpdateMemberCommand updateMemberCommand = new UpdateMemberCommand(INDEX_SECOND_MEMBER, descriptor);
 
-        assertCommandFailure(UpdateMemberCommand, model, UpdateMemberCommand.MESSAGE_DUPLICATE_MEMBER);
+        assertCommandFailure(updateMemberCommand, model, UpdateMemberCommand.MESSAGE_DUPLICATE_MEMBER);
     }
 
     @Test
@@ -118,19 +120,19 @@ public class UpdateMemberCommandTest {
 
         // edit member in filtered list into a duplicate in address book
         Member memberInList = model.getAddressBook().getMemberList().get(INDEX_SECOND_MEMBER.getZeroBased());
-        UpdateMemberCommand UpdateMemberCommand = new UpdateMemberCommand(INDEX_FIRST_MEMBER,
+        UpdateMemberCommand updateMemberCommand = new UpdateMemberCommand(INDEX_FIRST_MEMBER,
                 new UpdateMemberDescriptorBuilder(memberInList).build());
 
-        assertCommandFailure(UpdateMemberCommand, model, UpdateMemberCommand.MESSAGE_DUPLICATE_MEMBER);
+        assertCommandFailure(updateMemberCommand, model, UpdateMemberCommand.MESSAGE_DUPLICATE_MEMBER);
     }
 
     @Test
     public void execute_invalidMemberIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredMemberList().size() + 1);
         UpdateMemberDescriptor descriptor = new UpdateMemberDescriptorBuilder().withName(VALID_NAME_BOB).build();
-        UpdateMemberCommand UpdateMemberCommand = new UpdateMemberCommand(outOfBoundIndex, descriptor);
+        UpdateMemberCommand updateMemberCommand = new UpdateMemberCommand(outOfBoundIndex, descriptor);
 
-        assertCommandFailure(UpdateMemberCommand, model, Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX);
+        assertCommandFailure(updateMemberCommand, model, Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX);
     }
 
     /**
@@ -144,10 +146,10 @@ public class UpdateMemberCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getMemberList().size());
 
-        UpdateMemberCommand UpdateMemberCommand = new UpdateMemberCommand(outOfBoundIndex,
+        UpdateMemberCommand updateMemberCommand = new UpdateMemberCommand(outOfBoundIndex,
                 new UpdateMemberDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        assertCommandFailure(UpdateMemberCommand, model, Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX);
+        assertCommandFailure(updateMemberCommand, model, Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX);
     }
 
     @Test
@@ -178,11 +180,11 @@ public class UpdateMemberCommandTest {
     @Test
     public void toStringMethod() {
         Index index = Index.fromOneBased(1);
-        UpdateMemberDescriptor UpdateMemberDescriptor = new UpdateMemberDescriptor();
-        UpdateMemberCommand UpdateMemberCommand = new UpdateMemberCommand(index, UpdateMemberDescriptor);
+        UpdateMemberDescriptor updateMemberDescriptor = new UpdateMemberDescriptor();
+        UpdateMemberCommand updateMemberCommand = new UpdateMemberCommand(index, updateMemberDescriptor);
         String expected = UpdateMemberCommand.class.getCanonicalName() + "{index=" + index + ", UpdateMemberDescriptor="
-                + UpdateMemberDescriptor + "}";
-        assertEquals(expected, UpdateMemberCommand.toString());
+                + updateMemberDescriptor + "}";
+        assertEquals(expected, updateMemberCommand.toString());
     }
 
 }
