@@ -28,13 +28,6 @@ public abstract class Fee {
         checkArgument(isValidFee(fee), MESSAGE_CONSTRAINTS);
         this.value = Double.parseDouble(fee);
     }
-    /**
-     * Constructs a {@code Fee}
-     * with a default {@code value} of 0.0
-     */
-    public Fee() {
-        this.value = 0.0;
-    }
 
     /**
      * Returns true if a given string is a valid fee.
