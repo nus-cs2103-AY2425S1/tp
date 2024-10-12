@@ -24,6 +24,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Parses user input.
  */
 public class AddressBookParser {
+    private static boolean isInspect = false;
 
     /**
      * Used for initial separation of command word and args.
@@ -87,4 +88,12 @@ public class AddressBookParser {
         }
     }
 
+    public static void setInspect(boolean inspect) {
+        isInspect = inspect;
+        logger.info(String.valueOf(isInspect));
+    }
+
+    public static boolean getInspect() {
+        return isInspect;
+    }
 }

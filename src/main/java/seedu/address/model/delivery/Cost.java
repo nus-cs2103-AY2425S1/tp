@@ -6,7 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Cost {
     public static final String MESSAGE_CONSTRAINTS =
             "Cost should only contain numbers, and it should start with $";
-    public static final String VALIDATION_REGEX = "^\\$\\d+$";
+    public static final String VALIDATION_REGEX = "^\\$\\d+$"; // This does not check for decimals (cents).
     public final String value;
 
     public Cost(String cost) {

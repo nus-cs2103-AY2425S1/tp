@@ -15,6 +15,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -170,6 +171,7 @@ public class InspectWindow extends UiPart<Stage> {
         mainWindow.show();
         mainWindow.fillInnerParts();
         mainWindow.getResultDisplay().setFeedbackToUser(commandResult.getFeedbackToUser());
+        AddressBookParser.setInspect(false);
     }
 
     public PersonListPanel getPersonListPanel() {
@@ -187,6 +189,11 @@ public class InspectWindow extends UiPart<Stage> {
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
+            /* commandResult stores 'isInspect' boolean for whether we are in inspect mode.
+            *  However, to get this commandResult in the first place, we need to parse the correct add command
+            *  (i.e. window vs inspect).
+            *  Thus, another boolean for 'isInspect' is tracked in AddressBookParser. These 2 booleans
+            *  will always have the same value. */
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
