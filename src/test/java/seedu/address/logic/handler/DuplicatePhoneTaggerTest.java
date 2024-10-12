@@ -71,7 +71,7 @@ public class DuplicatePhoneTaggerTest {
     @Test
     public void execute_isDuplicatePresent_withDuplicates() {
         Person testPerson = new PersonBuilder().withName("Aaron").withPhone(TEST_PHONE_TWO)
-                .withEmail("aiken@example.com").withAddress("Kent Ridge MRT").build();
+                .withEmail("aaron@example.com").withAddress("Kent Ridge MRT").build();
         testAB.withPerson(testPerson);
         testModel = new ModelManager(testAB.build(), new UserPrefs());
 
@@ -97,4 +97,39 @@ public class DuplicatePhoneTaggerTest {
             }
         }
     }
+    @Test
+    public void execute_tagPhoneDuplicates() {
+        Person testPerson = new PersonBuilder().withName("Aaron").withPhone(TEST_PHONE_TWO)
+                .withEmail("aaron@example.com").withAddress("Kent Ridge MRT").build();
+        testAB.withPerson(testPerson);
+        testModel = new ModelManager(testAB.build(), new UserPrefs());
+
+        duplicatePhoneTagger.tagPhoneDuplicates(testModel);
+        List<Person> persons = testModel.getFilteredPersonList();
+        assertTrue(persons
+                .stream()
+                .anyMatch(person -> person
+                        .getTags()
+                        .stream()
+                        .anyMatch(tag -> tag
+                                .tagName
+                                .equals(DuplicatePhoneTagger.DUPLICATE_PHONE_TAG_NAME))));
+    }
+
+    @Test
+    public void execute_tagPhoneDuplicates_withNoDuplicates() {
+        testModel = new ModelManager(testAB.build(), new UserPrefs());
+
+        duplicatePhoneTagger.tagPhoneDuplicates(testModel);
+        List<Person> persons = testModel.getFilteredPersonList();
+        assertFalse(persons
+                .stream()
+                .anyMatch(person -> person
+                        .getTags()
+                        .stream()
+                        .anyMatch(tag -> tag
+                                .tagName
+                                .equals(DuplicatePhoneTagger.DUPLICATE_PHONE_TAG_NAME))));
+    }
+
 }

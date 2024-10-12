@@ -350,3 +350,7 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+#tags .label#duplicate {
+    -fx-background-color: #a1ae00;
+}
