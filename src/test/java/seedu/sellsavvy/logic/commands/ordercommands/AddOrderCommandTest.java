@@ -1,11 +1,11 @@
 package seedu.sellsavvy.logic.commands.ordercommands;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.sellsavvy.model.Model;
 import seedu.sellsavvy.model.ModelManager;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AddOrderCommandTest {
 
