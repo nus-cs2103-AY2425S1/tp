@@ -7,6 +7,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.OwedAmount;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Rate;
@@ -27,6 +28,7 @@ class JsonAdaptedPerson {
     private final String schedule;
     private final String subject;
     private final String rate;
+    private final String owedAmount;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -35,7 +37,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("schedule") String schedule, @JsonProperty("subject") String subject,
-                             @JsonProperty("rate") String rate) {
+                             @JsonProperty("rate") String rate, @JsonProperty("owedAmount") String owedAmount) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -43,6 +45,7 @@ class JsonAdaptedPerson {
         this.schedule = schedule;
         this.subject = subject;
         this.rate = rate;
+        this.owedAmount = owedAmount;
     }
 
     /**
@@ -56,6 +59,7 @@ class JsonAdaptedPerson {
         schedule = source.getSchedule().value;
         subject = source.getSubject().toString();
         rate = source.getRate().toString();
+        owedAmount = source.getOwedAmount().toString();
     }
 
     /**
@@ -123,7 +127,17 @@ class JsonAdaptedPerson {
         }
         final Rate modelRate = new Rate(rate);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelSchedule, modelSubject, modelRate);
+        if (owedAmount == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    OwedAmount.class.getSimpleName()));
+        }
+        if (!OwedAmount.isValidOwedAmount(owedAmount)) {
+            throw new IllegalValueException(OwedAmount.MESSAGE_CONSTRAINTS);
+        }
+        final OwedAmount modelOwedAmount = new OwedAmount(owedAmount);
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelSchedule, modelSubject, modelRate,
+                modelOwedAmount);
     }
 
 }
