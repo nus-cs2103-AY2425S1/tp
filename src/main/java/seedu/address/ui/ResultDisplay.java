@@ -19,6 +19,9 @@ public class ResultDisplay extends UiPart<Region> {
     @FXML
     private TextArea resultDisplay;
 
+    /**
+     * Creates a {@code ResultDisplay}.
+     */
     public ResultDisplay() {
         super(FXML);
         // calls #setStyleToDefault() whenever there is a change to the text of the result display.
