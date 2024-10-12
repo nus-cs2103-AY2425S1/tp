@@ -131,7 +131,8 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        ContactRecordList contactRecords = editPersonDescriptor.getContactRecords().orElse(personToEdit.getContactRecords());
+        ContactRecordList contactRecords = editPersonDescriptor.getContactRecords()
+                .orElse(personToEdit.getContactRecords());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         CallFrequency updatedCallFrequency =
                 editPersonDescriptor.getCallFrequency().orElse(personToEdit.getCallFrequency());
