@@ -63,11 +63,11 @@ public class ClientBuilder {
         return this;
     }
 
-    public Client buildBuyer() {
+    public Buyer buildBuyer() {
         return new Buyer(name, phone, email);
     }
 
-    public Client buildSeller() {
+    public Seller buildSeller() {
         return new Seller(name, phone, email);
     }
 }
