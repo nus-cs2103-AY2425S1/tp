@@ -16,25 +16,26 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.Phone;
 
 public class DeleteBuyerCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalClientBook());
     @Test
     public void execute_phoneNumberFound_assertCommandSuccess() {
-        final String phoneNumber = "94351253";
+        final Phone phoneNumber = new Phone("94351253");
         DeleteBuyerCommand deleteBuyerCommand = new DeleteBuyerCommand(phoneNumber);
         Client personToDelete = model.getFilteredClientList().stream()
                 .filter(Client::isBuyer)
-                .filter(person -> person.getPhone().toString().equals(phoneNumber))
+                .filter(person -> person.getPhone().equals(phoneNumber))
                 .findFirst().orElseThrow(() -> new AssertionError("Phone number not found in the model"));
         String expectedMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete));
         assertCommandSuccess(deleteBuyerCommand, model, expectedMessage, model);
     }
     @Test
     public void equals() {
-        final DeleteBuyerCommand standardCommand = new DeleteBuyerCommand(VALID_PHONE_AMY);
+        final DeleteBuyerCommand standardCommand = new DeleteBuyerCommand(new Phone(VALID_PHONE_AMY));
         // same values -> returns true
-        DeleteBuyerCommand commandWithSameValues = new DeleteBuyerCommand(VALID_PHONE_AMY);
+        DeleteBuyerCommand commandWithSameValues = new DeleteBuyerCommand(new Phone(VALID_PHONE_AMY));
         assertTrue(standardCommand.equals(commandWithSameValues));
         // same object -> returns true
         assertTrue(standardCommand.equals(standardCommand));
@@ -43,6 +44,6 @@ public class DeleteBuyerCommandTest {
         // different types -> returns false
         assertFalse(standardCommand.equals(new ClearCommand()));
         // different buyer -> return false
-        assertFalse(standardCommand.equals(new DeleteBuyerCommand(VALID_PHONE_BOB)));
+        assertFalse(standardCommand.equals(new DeleteBuyerCommand(new Phone(VALID_PHONE_BOB))));
     }
 }
