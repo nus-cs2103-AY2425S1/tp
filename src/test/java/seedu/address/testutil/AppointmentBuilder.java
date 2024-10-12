@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import java.time.LocalDateTime;
+
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentType;
 import seedu.address.model.appointment.Medicine;
@@ -11,11 +13,14 @@ import seedu.address.model.appointment.Sickness;
 public class AppointmentBuilder {
 
     public static final String DEFAULT_APPOINTMENT_TYPE = "Health Checkup";
+    public static final LocalDateTime DEFAULT_APPOINTMENT_DATE_TIME =
+            LocalDateTime.of(2024, 10, 15, 10, 30);
     public static final int DEFAULT_PERSON_ID = 1;
     public static final String DEFAULT_MEDICINE = "Panadol";
     public static final String DEFAULT_SICKNESS = "Flu";
 
     private AppointmentType appointmentType;
+    private LocalDateTime appointmentDateTime;
     private int personId;
     private Medicine medicine;
     private Sickness sickness;
@@ -25,6 +30,7 @@ public class AppointmentBuilder {
      */
     public AppointmentBuilder() {
         appointmentType = new AppointmentType(DEFAULT_APPOINTMENT_TYPE);
+        appointmentDateTime = DEFAULT_APPOINTMENT_DATE_TIME;
         personId = DEFAULT_PERSON_ID;
         medicine = new Medicine(DEFAULT_MEDICINE);
         sickness = new Sickness(DEFAULT_SICKNESS);
@@ -35,6 +41,7 @@ public class AppointmentBuilder {
      */
     public AppointmentBuilder(Appointment appointmentToCopy) {
         appointmentType = appointmentToCopy.getAppointmentType();
+        appointmentDateTime = appointmentToCopy.getAppointmentDateTime();
         personId = appointmentToCopy.getPersonId();
         medicine = appointmentToCopy.getMedicine();
         sickness = appointmentToCopy.getSickness();
@@ -65,6 +72,14 @@ public class AppointmentBuilder {
     }
 
     /**
+     * Sets the {@code appointmentDateTime} of the {@code LocalDateTime} that we are building.
+     */
+    public AppointmentBuilder withDateTime(LocalDateTime dateTime) {
+        this.appointmentDateTime = dateTime;
+        return this;
+    }
+
+    /**
      * Sets the {@code Sickness} of the {@code Appointment} that we are building.
      */
     public AppointmentBuilder withSickness(String sickness) {
@@ -76,7 +91,7 @@ public class AppointmentBuilder {
      * Builds the {@code Appointment} object.
      */
     public Appointment build() {
-        return new Appointment(appointmentType, personId, sickness, medicine);
+        return new Appointment(appointmentType, appointmentDateTime, personId, sickness, medicine);
     }
 
 }

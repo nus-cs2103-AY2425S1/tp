@@ -2,6 +2,7 @@ package seedu.address.model.appointment;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -14,6 +15,7 @@ public class Appointment {
 
     // Identity fields
     private final AppointmentType appointmentType;
+    private final LocalDateTime appointmentDateTime;
     private final int personId;
 
     // Data fields
@@ -23,9 +25,16 @@ public class Appointment {
     /**
      * Every field must be present and not null.
      */
-    public Appointment(AppointmentType appointmentType, int personId, Sickness sickness, Medicine medicine) {
+    public Appointment(
+            AppointmentType appointmentType,
+            LocalDateTime appointmentDateTime,
+            int personId,
+            Sickness sickness,
+            Medicine medicine) {
+
         requireAllNonNull(appointmentType, personId, sickness, medicine);
         this.appointmentType = appointmentType;
+        this.appointmentDateTime = appointmentDateTime;
         this.personId = personId;
         this.sickness = sickness;
         this.medicine = medicine;
@@ -43,6 +52,10 @@ public class Appointment {
         return sickness;
     }
 
+    public LocalDateTime getAppointmentDateTime() {
+        return appointmentDateTime;
+    }
+
     public Medicine getMedicine() {
         return medicine;
     }
@@ -58,7 +71,8 @@ public class Appointment {
 
         return otherAppointment != null
                 && otherAppointment.getAppointmentType().equals(getAppointmentType())
-                && otherAppointment.getPersonId() == getPersonId();
+                && otherAppointment.getPersonId() == getPersonId()
+                && otherAppointment.getAppointmentDateTime() == getAppointmentDateTime();
     }
 
     /**
@@ -78,6 +92,7 @@ public class Appointment {
 
         Appointment otherAppointment = (Appointment) other;
         return appointmentType.equals(otherAppointment.appointmentType)
+                && appointmentDateTime == otherAppointment.appointmentDateTime
                 && personId == otherAppointment.personId
                 && medicine.equals(otherAppointment.medicine)
                 && sickness.equals(otherAppointment.sickness);
@@ -85,13 +100,14 @@ public class Appointment {
 
     @Override
     public int hashCode() {
-        return Objects.hash(appointmentType, personId, medicine, sickness);
+        return Objects.hash(appointmentType, appointmentDateTime, personId, medicine, sickness);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("appointmentType", appointmentType)
+                .add("appointmentDateTime", appointmentDateTime)
                 .add("personId", personId)
                 .add("medicine", medicine)
                 .add("sickness", sickness)
