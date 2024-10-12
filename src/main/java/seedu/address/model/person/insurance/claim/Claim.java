@@ -18,13 +18,14 @@ public class Claim {
 
     /**
      * Creates a new open Claim based on claim id and amount. This constructor is used when user creates a new claim.
+     * The isOpen attribute will take a default value of {@code true} using this constructor.
      *
      * @param claimId     claim id obtained through official channels.
      * @param claimAmount claim amount recorded in cents, can only be a positive integer.
      */
     public Claim(String claimId, int claimAmount) {
         this.claimId = claimId;
-        this.isOpen = false;
+        this.isOpen = true;
         this.claimAmount = claimAmount;
     }
 

@@ -188,6 +188,21 @@ public class InsurancePlansManager {
     }
 
     /**
+     * Returns the number of open claims for all the insurance plans owned by the client.
+     */
+    public int getNumberOfOpenClaims() {
+        int count = 0;
+        for (InsurancePlan p : this.insurancePlans) {
+            for (Claim c : p.claims) {
+                if (c.getOpen()) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    /**
      * Returns a string representation of the insurance plans.
      * The string will contain the names of all insurance plans in the list.
      * If no plans exist, it returns "Insurance Plans: None".

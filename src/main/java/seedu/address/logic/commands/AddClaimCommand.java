@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INSURANCE_ID;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 
@@ -77,6 +78,10 @@ public class AddClaimCommand extends Command {
 
             Claim claimToBeAdded = new Claim(claimID, claimAmount);
             personToEditInsurancePlansManager.addClaimToInsurancePlan(planToBeUsed, claimToBeAdded);
+
+            Person personWithAddedInsurancePlan = lastShownList.get(index.getZeroBased());
+            model.setPerson(personToEdit, personWithAddedInsurancePlan);
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
             return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personToEdit), planToBeUsed,
                     claimID, Messages.formatClaimAmount(claimAmount)));
