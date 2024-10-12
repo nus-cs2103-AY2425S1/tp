@@ -2,10 +2,14 @@ package seedu.address.model.tag;
 
 import java.util.ArrayList;
 import java.util.List;
-import seedu.address.commons.util.ToStringBuilder;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.commons.util.ToStringBuilder;
+
+/**
+ * A list that contains unique tags.
+ */
 public class UniqueTagList {
     private final List<Tag> internalList = new ArrayList<>();
 
@@ -20,8 +24,7 @@ public class UniqueTagList {
     }
 
     /**
-     * Adds a tag to the list.
-     * the tag does not exist in the list.
+     * Adds a tag to the list if the tag does not exist in the list.
      */
     public void add(Tag toAdd) {
         requireNonNull(toAdd);
