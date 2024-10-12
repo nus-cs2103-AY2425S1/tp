@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalDeliveries.APPLE;
 
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.DeliveryBuilder;
@@ -18,7 +17,7 @@ public class DeliveryTest {
         assertFalse(APPLE.isSameDelivery(null));
 
         // different name, all other attributes same -> returns false
-        Delivery editedApple= new DeliveryBuilder(APPLE).withProduct("Iphone12").build();
+        Delivery editedApple = new DeliveryBuilder(APPLE).withProduct("Iphone12").build();
         assertFalse(APPLE.isSameDelivery(editedApple));
 
 

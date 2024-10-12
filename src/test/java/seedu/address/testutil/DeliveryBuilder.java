@@ -18,12 +18,12 @@ public class DeliveryBuilder {
     public static final String DEFAULT_COST = "200000";
     public static final String DEFAULT_QUANTITY = "200 units";
 
-    private  Product product;
-    private  Person sender; // CHANGE TO SUPPLIER LATER ON
-    private  Status status;
-    private  Time deliveryTime;
-    private  Cost cost;
-    private  Quantity quantity;
+    private Product product;
+    private Person sender; // CHANGE TO SUPPLIER LATER ON
+    private Status status;
+    private Time deliveryTime;
+    private Cost cost;
+    private Quantity quantity;
 
     /**
      * Creates a {@code DeliveryBuilder} with the default details.
