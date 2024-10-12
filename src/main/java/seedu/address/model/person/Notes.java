@@ -35,7 +35,7 @@ public class Notes {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         for (String note : notes) {
-            stringBuilder.append("• ").append(note).append("\n");
+            stringBuilder.append(note).append("\n");
         }
 
         return stringBuilder.toString();

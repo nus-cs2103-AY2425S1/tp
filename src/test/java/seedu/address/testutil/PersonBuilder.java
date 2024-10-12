@@ -97,7 +97,7 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Remark} of the {@code Person} that we are building.
+     * Sets the {@code Notes} of the {@code Person} that we are building.
      */
     public PersonBuilder withNotes(List<String> notes) {
         this.notes = new Notes(notes);
