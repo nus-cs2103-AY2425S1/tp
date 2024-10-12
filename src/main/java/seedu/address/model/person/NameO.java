@@ -7,16 +7,19 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Company's name in the internship book.
  * Guarantees: immutable; the name is valid as declared in {@link #validate(String)}.
  */
-public class Name {
+public class NameO {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Name should only contain alphanumeric characters, single spaces between words, "
+                    + "and certain symbols like '&', '-', '\'', and '.', "
+                    + "and it should not start or end with special characters or spaces.";
 
     /*
-     * The first character of the name must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * Company names should start with an alphanumeric character,
+     * and can contain the characters &, ', -, . and single spaces between words.
+     * No leading/trailing spaces or special characters, and no multiple consecutive spaces are allowed.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "^[\\p{Alnum}][\\p{Alnum}&'.-]*(?: [\\p{Alnum}&'.-]+)*$";
 
     private final String value;
 
@@ -27,9 +30,9 @@ public class Name {
      * @throws NullPointerException if the {@code name} is null.
      * @throws IllegalArgumentException if the {@code name} does not satisfy the constraints.
      */
-    public Name(String name) {
+    public NameO(String name) {
         requireNonNull(name);
-        checkArgument(Name.validate(name), MESSAGE_CONSTRAINTS);
+        checkArgument(NameO.validate(name), MESSAGE_CONSTRAINTS);
         this.value = name;
     }
 
@@ -74,12 +77,12 @@ public class Name {
             return true;
         }
 
-        if (!(other instanceof Name)) {
+        if (!(other instanceof NameO)) {
             return false;
         }
 
-        Name otherName = (Name) other;
-        return value.equals(otherName.value);
+        NameO otherName = (NameO) other;
+        return value.equalsIgnoreCase(otherName.value);
     }
 
     /**
