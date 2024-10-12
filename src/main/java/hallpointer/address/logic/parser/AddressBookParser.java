@@ -9,10 +9,13 @@ import java.util.regex.Pattern;
 
 import hallpointer.address.commons.core.LogsCenter;
 import hallpointer.address.logic.commands.AddMemberCommand;
+import hallpointer.address.logic.commands.AddSessionCommand;
 import hallpointer.address.logic.commands.ClearCommand;
 import hallpointer.address.logic.commands.Command;
 import hallpointer.address.logic.commands.DeleteMemberCommand;
+import hallpointer.address.logic.commands.DeleteSessionCommand;
 import hallpointer.address.logic.commands.EditMemberCommand;
+import hallpointer.address.logic.commands.EditSessionCommand;
 import hallpointer.address.logic.commands.ExitCommand;
 import hallpointer.address.logic.commands.FindMemberCommand;
 import hallpointer.address.logic.commands.HelpCommand;
@@ -61,6 +64,15 @@ public class AddressBookParser {
 
         case DeleteMemberCommand.COMMAND_WORD:
             return new DeleteMemberCommandParser().parse(arguments);
+
+        case AddSessionCommand.COMMAND_WORD:
+            return new AddSessionCommandParser().parse(arguments);
+
+        case EditSessionCommand.COMMAND_WORD:
+            return new EditSessionCommandParser().parse(arguments);
+
+        case DeleteSessionCommand.COMMAND_WORD:
+            return new DeleteSessionCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
