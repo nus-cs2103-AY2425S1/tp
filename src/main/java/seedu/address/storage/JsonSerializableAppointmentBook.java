@@ -12,7 +12,6 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AppointmentBook;
 import seedu.address.model.ReadOnlyAppointmentBook;
 import seedu.address.model.appointment.Appointment;
-import seedu.address.model.person.Person;
 
 /**
  * An Immutable AppointmentBook that is serializable to JSON format.

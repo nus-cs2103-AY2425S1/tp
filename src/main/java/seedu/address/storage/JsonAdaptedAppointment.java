@@ -1,11 +1,8 @@
 package seedu.address.storage;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,15 +12,15 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentType;
 import seedu.address.model.appointment.Medicine;
 import seedu.address.model.appointment.Sickness;
-import seedu.address.model.person.*;
-import seedu.address.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link Appointment}.
  */
 public class JsonAdaptedAppointment {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Appointment's %s field is missing!";
-
+    public static final String INTEGER_CHECK_MESSAGE_FORMAT = "Person ID must be a positive integer.";
+    public static final String DATE_TIME_CONSTRAINTS =
+            "Appointment DateTime must be in the format yyyy-MM-dd'T'HH:mm:ss";
     private final String appointmentType;
     private final String appointmentDateTime;
     private final String personId;
@@ -56,6 +53,30 @@ public class JsonAdaptedAppointment {
     }
 
     /**
+     * Checks if a given string is a positive int value
+     */
+    public static boolean isPositiveInteger(String str) {
+        try {
+            int number = Integer.parseInt(str);
+            return number >= 0;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    /**
+     * Validates and parse the date-time
+     */
+    public static LocalDateTime parseDateTime(String dateTimeStr) throws IllegalValueException {
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+        try {
+            return LocalDateTime.parse(dateTimeStr, formatter);
+        } catch (DateTimeParseException e) {
+            throw new IllegalValueException(DATE_TIME_CONSTRAINTS);
+        }
+    }
+
+    /**
      * Converts this Jackson-friendly adapted Appointment object into the model's {@code Appointment} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
@@ -74,19 +95,16 @@ public class JsonAdaptedAppointment {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     LocalDateTime.class.getSimpleName()));
         }
-        if (!LocalDateTime.isValidPhone(appointmentDateTime)) {
-            throw new IllegalValueException(LocalDateTime.MESSAGE_CONSTRAINTS);
-        }
-        final LocalDateTime modelAppointmentDateTime = new LocalDateTime(appointmentDateTime);
+        final LocalDateTime modelAppointmentDateTime = parseDateTime(appointmentDateTime);
 
         if (personId == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    PersonId.class.getSimpleName()));
+                    Integer.class.getSimpleName()));
         }
-        if (!Email.isValidEmail(personId)) {
-            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+        if (!isPositiveInteger(personId)) {
+            throw new IllegalValueException(INTEGER_CHECK_MESSAGE_FORMAT);
         }
-        final int modelPersonId = personId;
+        final int modelPersonId = Integer.parseInt(personId);
 
         if (sickness == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -106,7 +124,7 @@ public class JsonAdaptedAppointment {
         }
         final Medicine modelMedicine = new Medicine(medicine);
 
-        return new Appointment(modelAppointmentType, modelAppointmentDateTime, modelEmail,
+        return new Appointment(modelAppointmentType, modelAppointmentDateTime, modelPersonId,
                 modelSickness, modelMedicine);
     }
 
