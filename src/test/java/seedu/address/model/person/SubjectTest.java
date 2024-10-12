@@ -32,12 +32,13 @@ class SubjectTest {
         assertFalse(Subject.isValidSubject("")); // empty string
         assertFalse(Subject.isValidSubject(" ")); // spaces only
         assertFalse(Subject.isValidSubject("invalid")); // invalid subject
+        assertFalse(Subject.isValidSubject("Physical education")); // subject not supported
 
         // valid subjects
         assertTrue(Subject.isValidSubject("economics"));
         assertTrue(Subject.isValidSubject("Biology"));
         assertTrue(Subject.isValidSubject("eNglish"));
-        assertTrue(Subject.isValidSubject("math"));
+        assertTrue(Subject.isValidSubject("mathematics"));
     }
 
     @Test
@@ -71,5 +72,15 @@ class SubjectTest {
         assertEquals(subject.hashCode(), otherSubject.hashCode());
 
         assertNotEquals(subject.hashCode(), differentSubject.hashCode());
+    }
+
+    @Test
+    public void toString_validSubject_returnsCorrectString() {
+        // Test case for a valid subject
+        Subject subject = new Subject("mathematics");
+        assertEquals("MATHEMATICS", subject.toString());
+
+        Subject subject2 = new Subject("biology");
+        assertEquals("BIOLOGY", subject2.toString());
     }
 }

@@ -4,6 +4,8 @@
     "phone": "9482424",
     "email": "invalid@email!3e",
     "address": "4th street",
-    "schedule": "Sunday-1800-1900"
+    "schedule": "Sunday-1800-1900",
+    "subject": "physical education",
+    "rate": "120"
   } ]
 }

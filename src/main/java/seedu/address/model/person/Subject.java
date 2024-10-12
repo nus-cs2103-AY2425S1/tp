@@ -9,11 +9,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Subject {
 
-    public static final String MESSAGE_CONSTRAINTS = "Subjects should only be:"
-            + "economics / literature / music,"
-            + "biology / chemistry /science,"
-            + "english / chinese / malay / tamil,"
-            + "math / history / geography"
+    public static final String MESSAGE_CONSTRAINTS = "Subjects should only be: "
+            + "economics / literature / music / "
+            + "biology / chemistry /science / "
+            + "english / chinese / malay / tamil / "
+            + "math / history / geography / physics / "
+            + "GP "
             + "and it should not be blank";
 
 
@@ -61,5 +62,14 @@ public class Subject {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    /**
+     * Returns string value of enumerated subject.
+     * @return String value of subject.
+     */
+    @Override
+    public String toString() {
+        return value.toString();
     }
 }
