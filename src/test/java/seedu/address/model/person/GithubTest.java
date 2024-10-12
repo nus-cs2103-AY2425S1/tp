@@ -1,10 +1,10 @@
 package seedu.address.model.person;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+
+import org.junit.jupiter.api.Test;
 
 public class GithubTest {
     @Test
@@ -35,7 +35,10 @@ public class GithubTest {
         assertFalse(Github.isValidGithubUsername("-John-Doe")); // Starts with hypen and hyphen in between
         assertFalse(Github.isValidGithubUsername("John--Doe")); //  consecutive hypens only
         assertFalse(Github.isValidGithubUsername("-")); // hypen only
-        assertFalse(Github.isValidGithubUsername("JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ-beepo")); // long username (>39 characters)
+        // long username (>39 characters)
+        assertFalse(Github.isValidGithubUsername("JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ-beepo"));
+        assertFalse(Github.isValidGithubUsername("@")); // special character only
+        assertFalse(Github.isValidGithubUsername("John Doe")); // whitespace between name
 
         // valid username
         assertTrue(Github.isValidGithubUsername("John-Doe"));
