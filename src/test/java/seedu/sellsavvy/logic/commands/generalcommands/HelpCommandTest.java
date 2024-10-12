@@ -1,11 +1,11 @@
-package seedu.sellsavvy.logic.commands;
+package seedu.sellsavvy.logic.commands.generalcommands;
 
-import static seedu.sellsavvy.logic.commands.PersonCommandTestUtil.assertCommandSuccess;
 import static seedu.sellsavvy.logic.commands.generalcommands.HelpCommand.SHOWING_HELP_MESSAGE;
+import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.assertCommandSuccess;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.sellsavvy.logic.commands.generalcommands.HelpCommand;
+import seedu.sellsavvy.logic.commands.CommandResult;
 import seedu.sellsavvy.model.Model;
 import seedu.sellsavvy.model.ModelManager;
 

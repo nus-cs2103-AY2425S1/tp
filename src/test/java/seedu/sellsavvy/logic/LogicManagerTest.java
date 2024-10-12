@@ -3,10 +3,10 @@ package seedu.sellsavvy.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.sellsavvy.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.sellsavvy.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.sellsavvy.logic.commands.PersonCommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.sellsavvy.logic.commands.PersonCommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.sellsavvy.logic.commands.PersonCommandTestUtil.NAME_DESC_AMY;
-import static seedu.sellsavvy.logic.commands.PersonCommandTestUtil.PHONE_DESC_AMY;
+import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.ADDRESS_DESC_AMY;
+import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.EMAIL_DESC_AMY;
+import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.NAME_DESC_AMY;
+import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.PHONE_DESC_AMY;
 import static seedu.sellsavvy.testutil.Assert.assertThrows;
 import static seedu.sellsavvy.testutil.TypicalPersons.AMY;
 

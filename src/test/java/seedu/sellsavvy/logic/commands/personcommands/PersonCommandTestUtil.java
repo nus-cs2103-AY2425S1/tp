@@ -1,4 +1,4 @@
-package seedu.sellsavvy.logic.commands;
+package seedu.sellsavvy.logic.commands.personcommands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -14,8 +14,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.sellsavvy.commons.core.index.Index;
+import seedu.sellsavvy.logic.commands.Command;
+import seedu.sellsavvy.logic.commands.CommandResult;
 import seedu.sellsavvy.logic.commands.exceptions.CommandException;
-import seedu.sellsavvy.logic.commands.personcommands.EditPersonCommand;
 import seedu.sellsavvy.model.AddressBook;
 import seedu.sellsavvy.model.Model;
 import seedu.sellsavvy.model.person.NameContainsKeywordsPredicate;
@@ -76,7 +77,7 @@ public class PersonCommandTestUtil {
      * - the {@code actualModel} matches {@code expectedModel}
      */
     public static void assertCommandSuccess(Command command, Model actualModel, CommandResult expectedCommandResult,
-            Model expectedModel) {
+                                            Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
             assertEquals(expectedCommandResult, result);

@@ -1,6 +1,8 @@
-package seedu.sellsavvy.logic.commands;
+package seedu.sellsavvy.logic.commands.ordercommands;
 
 import seedu.sellsavvy.commons.core.index.Index;
+import seedu.sellsavvy.logic.commands.Command;
+import seedu.sellsavvy.logic.commands.CommandResult;
 import seedu.sellsavvy.model.Model;
 
 /**
@@ -24,7 +26,7 @@ public class OrderCommandTestUtil {
      * - the {@code actualModel} matches {@code expectedModel}
      */
     public static void assertCommandSuccess(Command command, Model actualModel, CommandResult expectedCommandResult,
-            Model expectedModel) {}
+                                            Model expectedModel) {}
 
     //TODO:
     /**

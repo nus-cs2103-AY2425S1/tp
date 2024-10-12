@@ -1,15 +1,15 @@
 package seedu.sellsavvy.testutil;
 
-import static seedu.sellsavvy.logic.commands.PersonCommandTestUtil.VALID_ADDRESS_AMY;
-import static seedu.sellsavvy.logic.commands.PersonCommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.sellsavvy.logic.commands.PersonCommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.sellsavvy.logic.commands.PersonCommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.sellsavvy.logic.commands.PersonCommandTestUtil.VALID_NAME_AMY;
-import static seedu.sellsavvy.logic.commands.PersonCommandTestUtil.VALID_NAME_BOB;
-import static seedu.sellsavvy.logic.commands.PersonCommandTestUtil.VALID_PHONE_AMY;
-import static seedu.sellsavvy.logic.commands.PersonCommandTestUtil.VALID_PHONE_BOB;
-import static seedu.sellsavvy.logic.commands.PersonCommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.sellsavvy.logic.commands.PersonCommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_ADDRESS_AMY;
+import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_NAME_AMY;
+import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_NAME_BOB;
+import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_PHONE_AMY;
+import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_PHONE_BOB;
+import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_TAG_HUSBAND;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,11 +1,11 @@
 package seedu.sellsavvy.testutil;
 
-import static seedu.sellsavvy.logic.commands.OrderCommandTestUtil.VALID_COUNT_ATLAS;
-import static seedu.sellsavvy.logic.commands.OrderCommandTestUtil.VALID_COUNT_BOTTLE;
-import static seedu.sellsavvy.logic.commands.OrderCommandTestUtil.VALID_DATE_ATLAS;
-import static seedu.sellsavvy.logic.commands.OrderCommandTestUtil.VALID_DATE_BOTTLE;
-import static seedu.sellsavvy.logic.commands.OrderCommandTestUtil.VALID_ITEM_ATLAS;
-import static seedu.sellsavvy.logic.commands.OrderCommandTestUtil.VALID_ITEM_BOTTLE;
+import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_COUNT_ATLAS;
+import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_COUNT_BOTTLE;
+import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_DATE_ATLAS;
+import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_DATE_BOTTLE;
+import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_ITEM_ATLAS;
+import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_ITEM_BOTTLE;
 
 import java.util.ArrayList;
 import java.util.Arrays;

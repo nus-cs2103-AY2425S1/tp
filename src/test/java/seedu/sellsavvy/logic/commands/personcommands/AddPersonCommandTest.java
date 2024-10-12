@@ -1,4 +1,4 @@
-package seedu.sellsavvy.logic.commands;
+package seedu.sellsavvy.logic.commands.personcommands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,8 +17,8 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.sellsavvy.commons.core.GuiSettings;
 import seedu.sellsavvy.logic.Messages;
+import seedu.sellsavvy.logic.commands.CommandResult;
 import seedu.sellsavvy.logic.commands.exceptions.CommandException;
-import seedu.sellsavvy.logic.commands.personcommands.AddPersonCommand;
 import seedu.sellsavvy.model.AddressBook;
 import seedu.sellsavvy.model.Model;
 import seedu.sellsavvy.model.ReadOnlyAddressBook;

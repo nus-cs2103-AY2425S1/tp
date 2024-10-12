@@ -1,14 +1,13 @@
-package seedu.sellsavvy.logic.commands;
+package seedu.sellsavvy.logic.commands.personcommands;
 
-import static seedu.sellsavvy.logic.commands.PersonCommandTestUtil.assertCommandSuccess;
-import static seedu.sellsavvy.logic.commands.PersonCommandTestUtil.showPersonAtIndex;
+import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.assertCommandSuccess;
+import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.showPersonAtIndex;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.sellsavvy.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.sellsavvy.logic.commands.personcommands.ListPersonCommand;
 import seedu.sellsavvy.model.Model;
 import seedu.sellsavvy.model.ModelManager;
 import seedu.sellsavvy.model.UserPrefs;

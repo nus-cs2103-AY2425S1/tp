@@ -1,10 +1,10 @@
-package seedu.sellsavvy.logic.commands;
+package seedu.sellsavvy.logic.commands.personcommands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.sellsavvy.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
-import static seedu.sellsavvy.logic.commands.PersonCommandTestUtil.assertCommandSuccess;
+import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.assertCommandSuccess;
 import static seedu.sellsavvy.testutil.TypicalPersons.CARL;
 import static seedu.sellsavvy.testutil.TypicalPersons.ELLE;
 import static seedu.sellsavvy.testutil.TypicalPersons.FIONA;
@@ -15,7 +15,6 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.sellsavvy.logic.commands.personcommands.FindPersonCommand;
 import seedu.sellsavvy.model.Model;
 import seedu.sellsavvy.model.ModelManager;
 import seedu.sellsavvy.model.UserPrefs;
