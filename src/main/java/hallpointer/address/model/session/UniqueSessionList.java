@@ -13,11 +13,13 @@ import javafx.collections.ObservableList;
 
 /**
  * A list of sessions that enforces uniqueness between its elements and does not allow nulls.
- * A session is considered unique by comparing using {@code Session#isSameSession(Session)}. As such, adding and updating of
- * sessions uses Session#isSameSession(Session) for equality so as to ensure that the session being added or updated is
- * unique in terms of identity in the UniqueSessionList. However, the removal of a session uses Session#equals(Object) so
- * as to ensure that the session with exactly the same fields will be removed.
- *
+ * A session is considered unique by comparing using {@code Session#isSameSession(Session)}.
+ * As such, adding and updating of sessions uses Session#isSameSession(Session) for equality
+ * to ensure that the session being added or updated is
+ * unique in terms of identity in the UniqueSessionList.
+ * However, the removal of a session uses Session#equals(Object)
+ * to ensure that the session with exactly the same fields will be removed.
+ * <p>
  * Supports a minimal set of list operations.
  *
  * @see Session#isSameSession(Session)

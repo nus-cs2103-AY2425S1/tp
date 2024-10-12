@@ -6,12 +6,10 @@ import static hallpointer.address.logic.parser.CliSyntax.PREFIX_POINTS;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_SESSION_NAME;
 
 import java.util.HashSet;
-import java.util.Set;
 import java.util.stream.Stream;
 
 import hallpointer.address.logic.commands.AddSessionCommand;
 import hallpointer.address.logic.parser.exceptions.ParseException;
-import hallpointer.address.model.member.Member;
 import hallpointer.address.model.session.Date;
 import hallpointer.address.model.session.Session;
 import hallpointer.address.model.session.SessionName;

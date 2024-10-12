@@ -13,18 +13,20 @@ import javafx.collections.ObservableList;
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
-    Predicate<Member> PREDICATE_SHOW_ALL_MEMBERS = unused -> true;
-
     /**
-     * Replaces user prefs data with the data in {@code userPrefs}.
+     * {@code Predicate} that always evaluate to true
      */
-    void setUserPrefs(ReadOnlyUserPrefs userPrefs);
+    Predicate<Member> PREDICATE_SHOW_ALL_MEMBERS = unused -> true;
 
     /**
      * Returns the user prefs.
      */
     ReadOnlyUserPrefs getUserPrefs();
+
+    /**
+     * Replaces user prefs data with the data in {@code userPrefs}.
+     */
+    void setUserPrefs(ReadOnlyUserPrefs userPrefs);
 
     /**
      * Returns the user prefs' GUI settings.
@@ -47,12 +49,14 @@ public interface Model {
     void setAddressBookFilePath(Path addressBookFilePath);
 
     /**
+     * Returns the AddressBook
+     */
+    ReadOnlyAddressBook getAddressBook();
+
+    /**
      * Replaces address book data with the data in {@code addressBook}.
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
-
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
 
     /**
      * Returns true if a member with the same identity as {@code member} exists in the address book.
@@ -78,14 +82,18 @@ public interface Model {
      */
     void setMember(Member target, Member editedMember);
 
-    /** Returns an unmodifiable view of the filtered member list */
+    /**
+     * Returns an unmodifiable view of the filtered member list
+     */
     ObservableList<Member> getFilteredMemberList();
 
     /**
      * Updates the filter of the filtered member list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredMemberList(Predicate<Member> predicate);
+
     /**
      * Returns true if a session with the same identity as {@code session} exists in the address book.
      */
@@ -98,8 +106,9 @@ public interface Model {
     void addSession(Session session);
 
     void deleteSession(Session sessionToDelete);
+
     void setSession(Session target, Session editedSession);
 
 
-        List<Session> getSessionList();
+    List<Session> getSessionList();
 }

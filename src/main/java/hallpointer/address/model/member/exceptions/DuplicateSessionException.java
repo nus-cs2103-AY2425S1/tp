@@ -1,8 +1,8 @@
 package hallpointer.address.model.member.exceptions;
 
 /**
- * Signals that the operation will result in duplicate Sessions (Sessions are considered duplicates if they have the same
- * identity).
+ * Signals that the operation will result in duplicate Sessions
+ * (Sessions are considered duplicates if they have the same identity).
  */
 public class DuplicateSessionException extends RuntimeException {
     public DuplicateSessionException() {

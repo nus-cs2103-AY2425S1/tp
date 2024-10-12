@@ -163,7 +163,8 @@ public class ModelManager implements Model {
     /**
      * Replaces the given session {@code target} with {@code editedSession}.
      * {@code target} must exist in the address book.
-     * The session identity of {@code editedSession} must not be the same as another existing session in the address book.
+     * The session identity of {@code editedSession} must not be the same as
+     * another existing session in the address book.
      *
      * @param target The session to replace.
      * @param editedSession The new session.
