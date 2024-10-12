@@ -22,6 +22,7 @@ import hallpointer.address.model.session.Session;
 class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_MEMBER = "Members list contains duplicate member(s).";
+    private static final String MESSAGE_DUPLICATE_SESSION = "Session list contains duplicate session(s).";
 
     private final List<JsonAdaptedMember> members = new ArrayList<>();
     private final List<JsonAdaptedSession> sessions = new ArrayList<>();
@@ -30,9 +31,15 @@ class JsonSerializableAddressBook {
      * Constructs a {@code JsonSerializableAddressBook} with the given members.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("members") List<JsonAdaptedMember> members, @JsonProperty("sessions") List<JsonAdaptedSession> sessions) {
-        this.members.addAll(members);
-        this.sessions.addAll(sessions);
+    public JsonSerializableAddressBook(
+            @JsonProperty("members") List<JsonAdaptedMember> members,
+            @JsonProperty("sessions") List<JsonAdaptedSession> sessions) {
+        if (members != null) {
+            this.members.addAll(members);
+        }
+        if (sessions != null) {
+            this.sessions.addAll(sessions);
+        }
     }
 
     /**
@@ -54,10 +61,16 @@ class JsonSerializableAddressBook {
         AddressBook addressBook = new AddressBook();
         for (JsonAdaptedMember jsonAdaptedMember : members) {
             Member member = jsonAdaptedMember.toModelType();
+            if (addressBook.hasMembers(member)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_MEMBER);
+            }
             addressBook.addMember(member);
         }
         for (JsonAdaptedSession jsonAdaptedSession : sessions) {
             Session session = jsonAdaptedSession.toModelType();
+            if (addressBook.hasSessions(session)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_SESSION);
+            }
             addressBook.addSession(session);
         }
         return addressBook;
