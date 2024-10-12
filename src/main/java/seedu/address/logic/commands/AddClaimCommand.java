@@ -10,8 +10,13 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.insurance.InsurancePlan;
+import seedu.address.model.person.insurance.InsurancePlanFactory;
+import seedu.address.model.person.insurance.InsurancePlansManager;
+import seedu.address.model.person.insurance.claim.Claim;
 
 /**
  * Adds a claim to an existing person with existing Insurance Plan in the address book.
@@ -31,7 +36,7 @@ public class AddClaimCommand extends Command {
             + PREFIX_CLAIM_AMOUNT + " 10000";
 
     public static final String MESSAGE_SUCCESS =
-            "New claim added to Client: %1$s, under Insurance plan %2$s, with Claim ID: %3$s, Claim Amount: %4$d";
+            "New claim added to Client: %1$s, under Insurance plan %2$s, with Claim ID: %3$s, Claim Amount: %4$s";
 
     public final Index index;
     private final int insuranceId;
@@ -64,7 +69,19 @@ public class AddClaimCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
-        throw new CommandException(String.format(MESSAGE_SUCCESS, Messages.format(personToEdit),
-                this.insuranceId, this.claimID, this.claimAmount));
+        try {
+            InsurancePlan planToBeUsed = InsurancePlanFactory.createInsurancePlan(insuranceId);
+
+            InsurancePlansManager personToEditInsurancePlansManager = personToEdit.getInsurancePlansManager();
+            personToEditInsurancePlansManager.checkIfPlanOwned(planToBeUsed);
+
+            Claim claimToBeAdded = new Claim(claimID, claimAmount);
+            personToEditInsurancePlansManager.addClaimToInsurancePlan(planToBeUsed, claimToBeAdded);
+
+            return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personToEdit), planToBeUsed,
+                    claimID, Messages.formatClaimAmount(claimAmount)));
+        } catch (ParseException e) {
+            throw new CommandException(String.format(e.getMessage(), claimID, Messages.format(personToEdit)));
+        }
     }
 }

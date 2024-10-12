@@ -117,11 +117,11 @@ public class InsurancePlansManager {
      *
      * @param insurancePlan The insurance plan the claim is to be added to.
      * @param claim         The claim that is to be added to the insurance plan.
-     * @throws CommandException if the claimId already exists.
+     * @throws ParseException if the claimId already exists.
      */
-    public void addClaimToInsurancePlan(InsurancePlan insurancePlan, Claim claim) throws CommandException {
+    public void addClaimToInsurancePlan(InsurancePlan insurancePlan, Claim claim) throws ParseException {
         if (this.claimIds.contains(claim.getClaimId())) {
-            throw new CommandException(DUPLICATE_CLAIM_ID_MESSAGE);
+            throw new ParseException(DUPLICATE_CLAIM_ID_MESSAGE);
         }
         for (InsurancePlan p : insurancePlans) {
             if (p.equals(insurancePlan)) {

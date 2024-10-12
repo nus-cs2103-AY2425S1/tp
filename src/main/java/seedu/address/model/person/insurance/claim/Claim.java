@@ -13,41 +13,33 @@ public class Claim {
     public static final String INVALID_CLAIM_AMOUNT = "Claim Amount must be a positive integer";
 
     private final String claimId;
-    private final boolean claimStatus;
+    private final boolean isOpen;
     private final int claimAmount;
 
     /**
-     * Constructs a claim object based on the input parameters.
+     * Creates a new open Claim based on claim id and amount. This constructor is used when user creates a new claim.
      *
      * @param claimId     claim id obtained through official channels.
-     * @param claimStatus current status of the claim, only takes a boolean value.
      * @param claimAmount claim amount recorded in cents, can only be a positive integer.
      */
-    public Claim(String claimId, boolean claimStatus, int claimAmount) {
+    public Claim(String claimId, int claimAmount) {
         this.claimId = claimId;
-        this.claimStatus = claimStatus;
+        this.isOpen = false;
         this.claimAmount = claimAmount;
     }
 
     /**
-     * Returns the {@code claimId} of this claim object.
+     * Constructs a claim object based on the input parameters. This constructor is used, usually during loading of
+     * claims.
+     *
+     * @param claimId     claim id obtained through official channels.
+     * @param isOpen      current status of the claim, only takes a boolean value.
+     * @param claimAmount claim amount recorded in cents, can only be a positive integer.
      */
-    public String getClaimId() {
-        return this.claimId;
-    }
-
-    /**
-     * Returns the {@code claimStatus} of this claim object.
-     */
-    public boolean getClaimStatus() {
-        return this.claimStatus;
-    }
-
-    /**
-     * Returns the {@code claimAmount} of this claim object.
-     */
-    public int getClaimAmount() {
-        return this.claimAmount;
+    public Claim(String claimId, boolean isOpen, int claimAmount) {
+        this.claimId = claimId;
+        this.isOpen = isOpen;
+        this.claimAmount = claimAmount;
     }
 
     /**
@@ -76,5 +68,26 @@ public class Claim {
         if (claimAmount < 0) {
             throw new ParseException(Claim.NEGATIVE_CLAIM_AMOUNT);
         }
+    }
+
+    /**
+     * Returns the {@code claimId} of this claim object.
+     */
+    public String getClaimId() {
+        return this.claimId;
+    }
+
+    /**
+     * Returns the {@code claimStatus} of this claim object.
+     */
+    public boolean getOpen() {
+        return this.isOpen;
+    }
+
+    /**
+     * Returns the {@code claimAmount} of this claim object.
+     */
+    public int getClaimAmount() {
+        return this.claimAmount;
     }
 }
