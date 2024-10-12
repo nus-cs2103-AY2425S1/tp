@@ -22,6 +22,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.PropertyBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyClientBook;
+import seedu.address.model.ReadOnlyPropertyBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
@@ -85,8 +86,10 @@ public class MainApp extends Application {
         logger.info("Using data file : " + storage.getAddressBookFilePath());
 
         Optional<ReadOnlyAddressBook> addressBookOptional;
+        Optional<ReadOnlyPropertyBook> propertyBookOptional;
         Optional<ReadOnlyClientBook> clientBookOptional;
         ReadOnlyAddressBook initialData;
+        ReadOnlyPropertyBook initialPropertyData;
         ReadOnlyClientBook initialClientData;
         try {
             addressBookOptional = storage.readAddressBook();
@@ -99,6 +102,19 @@ public class MainApp extends Application {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");
             initialData = new AddressBook();
+        }
+
+        try {
+            propertyBookOptional = storage.readPropertyBook();
+            if (!propertyBookOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getAddressBookFilePath()
+                        + " populated with a sample AddressBook.");
+            }
+            initialPropertyData = propertyBookOptional.orElseGet(SampleDataUtil::getSamplePropertyBook);
+        } catch (DataLoadingException e) {
+            logger.warning("Data file at " + storage.getPropertyBookFilePath() + " could not be loaded."
+                    + " Will be starting with an empty PropertyBook.");
+            initialPropertyData = new PropertyBook();
         }
 
         try {
@@ -115,7 +131,7 @@ public class MainApp extends Application {
             initialClientData = new ClientBook();
         }
 
-        return new ModelManager(initialData, userPrefs, new PropertyBook(), initialClientData);
+        return new ModelManager(initialData, userPrefs, initialPropertyData, initialClientData);
     }
 
     private void initLogging(Config config) {
