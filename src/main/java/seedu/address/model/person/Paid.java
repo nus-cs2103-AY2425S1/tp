@@ -16,6 +16,14 @@ public class Paid extends Fee {
     public Paid(String paid) {
         super(paid);
     }
+    
+    /**
+     * Constructs a {@code Paid}
+     * with a default {@code valud} of 0.0
+     */
+    public Paid() {
+        super();
+    }
 
     public static boolean isValidPaid(String test) {
         return Fee.isValidFee(test);
