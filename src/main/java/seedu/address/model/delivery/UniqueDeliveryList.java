@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.delivery.exceptions.DeliveryNotFoundException;
 import seedu.address.model.delivery.exceptions.DuplicateDeliveryException;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
 
 
 /**
@@ -59,17 +60,31 @@ public class UniqueDeliveryList implements Iterable<Delivery> {
         }
     }
 
-    public void setDelivery(UniqueDeliveryList replacement) {
+    public void setDelivery(Delivery target, Delivery editedDelivery) {
+        requireAllNonNull(target, editedDelivery);
+
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new DeliveryNotFoundException();
+        }
+
+        if (!target.isSameDelivery(editedDelivery) && contains(editedDelivery)) {
+            throw new DuplicatePersonException();
+        }
+
+        internalList.set(index, editedDelivery);
+    }
+
+    public void setDeliveries(UniqueDeliveryList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
-
     /**
      * Replaces the contents of this list with {@code deliveries}.
      * {@code deliveries} must not contain duplicate deliveries.
      */
 
-    public void setDelivery(List<Delivery> deliveries) {
+    public void setDeliveries(List<Delivery> deliveries) {
         requireAllNonNull(deliveries);
         if (!deliveriesAreUnique(deliveries)) {
             throw new DuplicateDeliveryException();

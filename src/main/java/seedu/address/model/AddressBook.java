@@ -56,7 +56,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code deliveries} must not contain duplicate deliveries.
      */
     public void setDeliveries(List<Delivery> deliveries) {
-        this.deliveries.setDelivery(deliveries);
+        this.deliveries.setDeliveries(deliveries);
     }
 
     /**

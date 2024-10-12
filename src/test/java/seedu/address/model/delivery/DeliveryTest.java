@@ -16,7 +16,7 @@ public class DeliveryTest {
         // null -> returns false
         assertFalse(APPLE.isSameDelivery(null));
 
-        // different name, all other attributes same -> returns false
+        // different product name, all other attributes same -> returns false
         Delivery editedApple = new DeliveryBuilder(APPLE).withProduct("Iphone12").build();
         assertFalse(APPLE.isSameDelivery(editedApple));
 

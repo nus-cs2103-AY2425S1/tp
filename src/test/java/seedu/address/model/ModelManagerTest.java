@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalDeliveries.APPLE;
+import static seedu.address.testutil.TypicalDeliveries.BREAD;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
@@ -86,6 +88,22 @@ public class ModelManagerTest {
     public void hasPerson_personInAddressBook_returnsTrue() {
         modelManager.addPerson(ALICE);
         assertTrue(modelManager.hasPerson(ALICE));
+    }
+
+    @Test
+    public void hasDelivery_nullDelivery_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasDelivery(null));
+    }
+
+    @Test
+    public void hasDeliveryNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasDelivery(APPLE));
+    }
+
+    @Test
+    public void hasDelivery_deliveryInAddressBook_returnsTrue() {
+        modelManager.addDelivery(BREAD);
+        assertTrue(modelManager.hasDelivery(BREAD));
     }
 
     @Test
