@@ -88,24 +88,36 @@ public class ViewClientWindow extends UiPart<Stage> {
      * Fills the client details labels with the given client's details.
      */
     private void fillClientDetails(Person client) {
+        tags.getChildren().clear(); // tags is reused.
+
+        // Client Details.
         clientNameLabel.setText("        Name: " + client.getName());
         clientPhoneLabel.setText("        Phone: " + client.getPhone());
         clientEmailLabel.setText("        Email: " + client.getEmail());
         clientAddressLabel.setText("        Address: " + client.getAddress());
-        if (client.getCar() != null) {
-            Car car = client.getCar();
-            String carDetails = String.format("        VRN: %s\n"
-                            + "        VIN: %s\n"
-                            + "        Make: %s\n"
-                            + "        Model: %s",
-                    car.getVrn(), car.getVin(), car.getCarMake(), car.getCarModel());
-            clientCarDetailsLabel.setText(carDetails);
-        } else {
-            clientCarDetailsLabel.setText("No Car associated to Client");
+
+        // Car Details.
+        Car car = client.getCar();
+        if (car == null) {
+            clientCarDetailsLabel.setText("        No Car associated to Client");
+            tags.getChildren().add(new Label("Not Applicable"));
+            return;
+        }
+        String carDetails = String.format("        VRN: %s\n"
+                + "        VIN: %s\n"
+                + "        Make: %s\n"
+                + "        Model: %s",
+                car.getVrn(), car.getVin(), car.getCarMake(), car.getCarModel());
+        clientCarDetailsLabel.setText(carDetails);
+
+        // Car Issues
+        if (client.getTags().isEmpty()) {
+            tags.getChildren().add(new Label("No Issues"));
+            return;
         }
         client.getTags().stream()
-            .sorted(Comparator.comparing(tag -> tag.tagName))
-            .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
     /**
