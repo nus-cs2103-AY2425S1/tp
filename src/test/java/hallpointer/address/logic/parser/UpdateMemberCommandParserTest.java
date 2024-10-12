@@ -31,22 +31,22 @@ import org.junit.jupiter.api.Test;
 
 import hallpointer.address.commons.core.index.Index;
 import hallpointer.address.logic.Messages;
-import hallpointer.address.logic.commands.EditMemberCommand;
-import hallpointer.address.logic.commands.EditMemberCommand.EditMemberDescriptor;
+import hallpointer.address.logic.commands.UpdateMemberCommand;
+import hallpointer.address.logic.commands.UpdateMemberCommand.UpdateMemberDescriptor;
 import hallpointer.address.model.member.Name;
 import hallpointer.address.model.member.Room;
 import hallpointer.address.model.member.Telegram;
 import hallpointer.address.model.tag.Tag;
-import hallpointer.address.testutil.EditMemberDescriptorBuilder;
+import hallpointer.address.testutil.UpdateMemberDescriptorBuilder;
 
-public class EditMemberCommandParserTest {
+public class UpdateMemberCommandParserTest {
 
     private static final String TAG_EMPTY = " " + PREFIX_TAG;
 
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditMemberCommand.MESSAGE_USAGE);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateMemberCommand.MESSAGE_USAGE);
 
-    private EditMemberCommandParser parser = new EditMemberCommandParser();
+    private UpdateMemberCommandParser parser = new UpdateMemberCommandParser();
 
     @Test
     public void parse_missingParts_failure() {
@@ -54,7 +54,7 @@ public class EditMemberCommandParserTest {
         assertParseFailure(parser, VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
 
         // no field specified
-        assertParseFailure(parser, "1", EditMemberCommand.MESSAGE_NOT_EDITED);
+        assertParseFailure(parser, "1", UpdateMemberCommand.MESSAGE_NOT_UPDATED);
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
@@ -104,10 +104,10 @@ public class EditMemberCommandParserTest {
         String userInput = targetIndex.getOneBased() + TELEGRAM_DESC_BOB + TAG_DESC_HUSBAND
                 + ROOM_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
 
-        EditMemberDescriptor descriptor = new EditMemberDescriptorBuilder().withName(VALID_NAME_AMY)
+        UpdateMemberDescriptor descriptor = new UpdateMemberDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withTelegram(VALID_TELEGRAM_BOB).withRoom(VALID_ROOM_AMY)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
-        EditMemberCommand expectedCommand = new EditMemberCommand(targetIndex, descriptor);
+        UpdateMemberCommand expectedCommand = new UpdateMemberCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -117,9 +117,9 @@ public class EditMemberCommandParserTest {
         Index targetIndex = INDEX_FIRST_MEMBER;
         String userInput = targetIndex.getOneBased() + TELEGRAM_DESC_BOB + ROOM_DESC_AMY;
 
-        EditMemberDescriptor descriptor = new EditMemberDescriptorBuilder()
+        UpdateMemberDescriptor descriptor = new UpdateMemberDescriptorBuilder()
                 .withTelegram(VALID_TELEGRAM_BOB).withRoom(VALID_ROOM_AMY).build();
-        EditMemberCommand expectedCommand = new EditMemberCommand(targetIndex, descriptor);
+        UpdateMemberCommand expectedCommand = new UpdateMemberCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -129,26 +129,26 @@ public class EditMemberCommandParserTest {
         // name
         Index targetIndex = INDEX_THIRD_MEMBER;
         String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
-        EditMemberDescriptor descriptor = new EditMemberDescriptorBuilder().withName(VALID_NAME_AMY).build();
-        EditMemberCommand expectedCommand = new EditMemberCommand(targetIndex, descriptor);
+        UpdateMemberDescriptor descriptor = new UpdateMemberDescriptorBuilder().withName(VALID_NAME_AMY).build();
+        UpdateMemberCommand expectedCommand = new UpdateMemberCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // telegram
         userInput = targetIndex.getOneBased() + TELEGRAM_DESC_AMY;
-        descriptor = new EditMemberDescriptorBuilder().withTelegram(VALID_TELEGRAM_AMY).build();
-        expectedCommand = new EditMemberCommand(targetIndex, descriptor);
+        descriptor = new UpdateMemberDescriptorBuilder().withTelegram(VALID_TELEGRAM_AMY).build();
+        expectedCommand = new UpdateMemberCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // room
         userInput = targetIndex.getOneBased() + ROOM_DESC_AMY;
-        descriptor = new EditMemberDescriptorBuilder().withRoom(VALID_ROOM_AMY).build();
-        expectedCommand = new EditMemberCommand(targetIndex, descriptor);
+        descriptor = new UpdateMemberDescriptorBuilder().withRoom(VALID_ROOM_AMY).build();
+        expectedCommand = new UpdateMemberCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // tags
         userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND;
-        descriptor = new EditMemberDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
-        expectedCommand = new EditMemberCommand(targetIndex, descriptor);
+        descriptor = new UpdateMemberDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
+        expectedCommand = new UpdateMemberCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
@@ -189,8 +189,8 @@ public class EditMemberCommandParserTest {
         Index targetIndex = INDEX_THIRD_MEMBER;
         String userInput = targetIndex.getOneBased() + TAG_EMPTY;
 
-        EditMemberDescriptor descriptor = new EditMemberDescriptorBuilder().withTags().build();
-        EditMemberCommand expectedCommand = new EditMemberCommand(targetIndex, descriptor);
+        UpdateMemberDescriptor descriptor = new UpdateMemberDescriptorBuilder().withTags().build();
+        UpdateMemberCommand expectedCommand = new UpdateMemberCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
