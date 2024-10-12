@@ -40,6 +40,7 @@
         <Insets top="5" right="15" bottom="5" left="5" />
       </padding>
       <Hyperlink fx:id="telegram" styleClass="cell_small_label" />
+      <Label fx:id="github" styleClass="cell_small_label" text="\$Github" />
     </VBox>
   </GridPane>
 </HBox>

@@ -45,6 +45,8 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private Hyperlink telegram;
+    @FXML
+    private Label github;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -65,6 +67,7 @@ public class PersonCard extends UiPart<Region> {
         } else {
             assignment.setText("No assignment available"); // Optional: for better user feedback
         }
+      
         /*
         Adopted from ChatGPT.
          */
@@ -74,6 +77,12 @@ public class PersonCard extends UiPart<Region> {
             telegram.setOnAction(event -> openTelegramLink(person.getTelegram().value));
         } else {
             telegram.setDisable(true); // Disable hyperlink if no Telegram ID
+        }
+      
+        if (person.getGithub() != null) {
+            github.setText(person.getGithub().toString());
+        } else {
+            github.setText("GitHub username unspecified");
         }
 
     }
@@ -95,7 +104,7 @@ public class PersonCard extends UiPart<Region> {
             String url = "https://t.me/" + sb.toString();
             java.awt.Desktop.getDesktop().browse(new java.net.URI(url));
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace(); 
         }
     }
 }
