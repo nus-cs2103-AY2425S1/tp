@@ -113,7 +113,8 @@ public class EditClientCommandParserTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
-        EditClientCommand expectedCommand = new EditClientCommand(targetIndex, descriptor, new EditCarDescriptor(), true, false);
+        EditClientCommand expectedCommand = new EditClientCommand(
+                targetIndex, descriptor, new EditCarDescriptor(), true, false);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -125,7 +126,8 @@ public class EditClientCommandParserTest {
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_AMY).build();
-        EditClientCommand expectedCommand = new EditClientCommand(targetIndex, descriptor, new EditCarDescriptor(), true, false);
+        EditClientCommand expectedCommand = new EditClientCommand(
+                targetIndex, descriptor, new EditCarDescriptor(), true, false);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -136,7 +138,8 @@ public class EditClientCommandParserTest {
         Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).build();
-        EditClientCommand expectedCommand = new EditClientCommand(targetIndex, descriptor, new EditCarDescriptor(), true, false);
+        EditClientCommand expectedCommand = new EditClientCommand(
+                targetIndex, descriptor, new EditCarDescriptor(), true, false);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // phone
@@ -202,7 +205,8 @@ public class EditClientCommandParserTest {
         String userInput = targetIndex.getOneBased() + TAG_EMPTY;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withTags().build();
-        EditClientCommand expectedCommand = new EditClientCommand(targetIndex, descriptor, new EditCarDescriptor(), true, false);
+        EditClientCommand expectedCommand = new EditClientCommand(
+                targetIndex, descriptor, new EditCarDescriptor(), true, false);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }

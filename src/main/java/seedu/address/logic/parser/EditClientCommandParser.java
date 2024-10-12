@@ -38,18 +38,19 @@ public class EditClientCommandParser implements Parser<EditClientCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
-                    PREFIX_VRN, PREFIX_VIN, PREFIX_MAKE, PREFIX_MODEL);
+                        PREFIX_VRN, PREFIX_VIN, PREFIX_MAKE, PREFIX_MODEL);
 
         Index index;
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditClientCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditClientCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_VRN,
-            PREFIX_VIN, PREFIX_MAKE, PREFIX_MODEL);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                PREFIX_VRN, PREFIX_VIN, PREFIX_MAKE, PREFIX_MODEL);
 
         EditCarDescriptor editCarDescriptor = new EditCarDescriptor();
 

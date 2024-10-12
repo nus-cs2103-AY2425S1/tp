@@ -61,7 +61,8 @@ public class AddressBookParserTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
         EditClientCommand command = (EditClientCommand) parser.parseCommand(EditClientCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditClientCommand(INDEX_FIRST_PERSON, descriptor, new EditCarDescriptor(), true, false), command);
+        assertEquals(new EditClientCommand(
+                INDEX_FIRST_PERSON, descriptor, new EditCarDescriptor(), true, false), command);
     }
 
     @Test
