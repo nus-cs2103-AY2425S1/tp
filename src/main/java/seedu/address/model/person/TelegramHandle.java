@@ -7,9 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Person's telegram handle in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidTelegram(String)}
  */
-public class Telegram {
-
-
+public class TelegramHandle {
     public static final String MESSAGE_CONSTRAINTS =
             "Telegram handles should not contain @, and it should have a length of 3 to 29 characters inclusive";
     public static final String VALIDATION_REGEX = "^[A-Za-z0-9_]{3,29}$";
@@ -20,16 +18,16 @@ public class Telegram {
      *
      * @param telegram A valid telegram handle.
      */
-    public Telegram(String telegram) {
+    public TelegramHandle(String telegram) {
         requireNonNull(telegram);
-        checkArgument(isValidTelegram(telegram), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidTelegramHandle(telegram), MESSAGE_CONSTRAINTS);
         value = telegram;
     }
 
     /**
      * Returns true if a given string is a valid telegram handle.
      */
-    public static boolean isValidTelegram(String test) {
+    public static boolean isValidTelegramHandle(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
@@ -45,12 +43,10 @@ public class Telegram {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Telegram)) {
-            return false;
+        if (other instanceof TelegramHandle otherTelegram) {
+            return value.equals(otherTelegram.value);
         }
-
-        Telegram otherTelegram = (Telegram) other;
-        return value.equals(otherTelegram.value);
+        return false;
     }
 
     @Override

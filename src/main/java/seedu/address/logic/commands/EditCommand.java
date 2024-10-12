@@ -5,7 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_STATUS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -25,7 +25,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.StudentStatus;
-import seedu.address.model.person.Telegram;
+import seedu.address.model.person.TelegramHandle;
 import seedu.address.model.tag.Nickname;
 import seedu.address.model.tag.Role;
 
@@ -41,12 +41,12 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_TELEGRAM + "TELEGRAM] "
+            + "[" + PREFIX_TELEGRAM_HANDLE + "telegramHandle] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_STUDENT_STATUS + "STUDENT_STATUS] "
             + "[" + PREFIX_ROLE + "ROLE]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_TELEGRAM + "91234567 "
+            + PREFIX_TELEGRAM_HANDLE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
@@ -97,13 +97,13 @@ public class EditCommand extends Command {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Telegram updatedTelegram = editPersonDescriptor.getTelegram().orElse(personToEdit.getTelegram());
+        TelegramHandle updatedTelegramHandle = editPersonDescriptor.getTelegramHandle().orElse(personToEdit.getTelegramHandle());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         StudentStatus updatedStudentStatus =
                 editPersonDescriptor.getStudentStatus().orElse(personToEdit.getStudentStatus());
         Set<Role> updatedRoles = editPersonDescriptor.getRoles().orElse(personToEdit.getRoles());
         Nickname updatedNickname = editPersonDescriptor.getNickname().orElse(personToEdit.getNickname());
-        return new Person(updatedName, updatedTelegram, updatedEmail, updatedStudentStatus, updatedRoles,
+        return new Person(updatedName, updatedTelegramHandle, updatedEmail, updatedStudentStatus, updatedRoles,
                 updatedNickname);
     }
 
@@ -137,7 +137,7 @@ public class EditCommand extends Command {
      */
     public static class EditPersonDescriptor {
         private Name name;
-        private Telegram telegram;
+        private TelegramHandle telegramHandle;
         private Email email;
         private StudentStatus studentStatus;
         private Set<Role> roles;
@@ -151,7 +151,7 @@ public class EditCommand extends Command {
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
-            setTelegram(toCopy.telegram);
+            setTelegramHandle(toCopy.telegramHandle);
             setEmail(toCopy.email);
             setStudentStatus(toCopy.studentStatus);
             setRoles(toCopy.roles);
@@ -162,7 +162,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, telegram, email, studentStatus, roles);
+            return CollectionUtil.isAnyNonNull(name, telegramHandle, email, studentStatus, roles);
         }
 
         public void setName(Name name) {
@@ -173,12 +173,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(name);
         }
 
-        public void setTelegram(Telegram telegram) {
-            this.telegram = telegram;
+        public void setTelegramHandle(TelegramHandle telegramHandle) {
+            this.telegramHandle = telegramHandle;
         }
 
-        public Optional<Telegram> getTelegram() {
-            return Optional.ofNullable(telegram);
+        public Optional<TelegramHandle> getTelegramHandle() {
+            return Optional.ofNullable(telegramHandle);
         }
 
         public void setEmail(Email email) {
@@ -235,7 +235,7 @@ public class EditCommand extends Command {
 
             EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
             return Objects.equals(name, otherEditPersonDescriptor.name)
-                    && Objects.equals(telegram, otherEditPersonDescriptor.telegram)
+                    && Objects.equals(telegramHandle, otherEditPersonDescriptor.telegramHandle)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(studentStatus, otherEditPersonDescriptor.studentStatus)
                     && Objects.equals(roles, otherEditPersonDescriptor.roles)
@@ -246,7 +246,7 @@ public class EditCommand extends Command {
         public String toString() {
             return new ToStringBuilder(this)
                     .add("name", name)
-                    .add("telegram", telegram)
+                    .add("telegramHandle", telegramHandle)
                     .add("email", email)
                     .add("studentStatus", studentStatus)
                     .add("roles", roles)

@@ -38,7 +38,7 @@ public class Messages {
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName())
                 .append("; Telegram: ")
-                .append(person.getTelegram())
+                .append(person.getTelegramHandle())
                 .append("; Email: ")
                 .append(person.getEmail())
                 .append("; StudentStatus: ")
