@@ -19,7 +19,7 @@ public class Person {
 
     // Identity fields
     private final Name name;
-    private final Telegram telegram;
+    private final TelegramHandle telegramHandle;
     private final Email email;
 
     // Data fields
@@ -30,11 +30,11 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Telegram telegram, Email email, StudentStatus studentStatus,
+    public Person(Name name, TelegramHandle telegramHandle, Email email, StudentStatus studentStatus,
                   Set<Role> roles, Nickname nickname) {
-        requireAllNonNull(name, telegram, email, studentStatus, roles, nickname);
+        requireAllNonNull(name, telegramHandle, email, studentStatus, roles, nickname);
         this.name = name;
-        this.telegram = telegram;
+        this.telegramHandle = telegramHandle;
         this.email = email;
         this.studentStatus = studentStatus;
         this.roles.addAll(roles);
@@ -45,8 +45,8 @@ public class Person {
         return name;
     }
 
-    public Telegram getTelegram() {
-        return telegram;
+    public TelegramHandle getTelegramHandle() {
+        return telegramHandle;
     }
 
     public Email getEmail() {
@@ -99,7 +99,7 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
-                && telegram.equals(otherPerson.telegram)
+                && telegramHandle.equals(otherPerson.telegramHandle)
                 && email.equals(otherPerson.email)
                 && studentStatus.equals(otherPerson.studentStatus)
                 && roles.equals(otherPerson.roles)
@@ -109,14 +109,14 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, telegram, email, studentStatus, roles, nickname);
+        return Objects.hash(name, telegramHandle, email, studentStatus, roles, nickname);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
-                .add("telegram", telegram)
+                .add("telegram handle", telegramHandle)
                 .add("email", email)
                 .add("studentStatus", studentStatus)
                 .add("roles", roles)

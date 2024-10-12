@@ -14,7 +14,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.StudentStatus;
-import seedu.address.model.person.Telegram;
+import seedu.address.model.person.TelegramHandle;
 import seedu.address.model.tag.Nickname;
 import seedu.address.model.tag.Role;
 
@@ -26,7 +26,7 @@ class JsonAdaptedPerson {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
     private final String name;
-    private final String telegram;
+    private final String telegramHandle;
     private final String email;
     private final String studentStatus;
     private final List<JsonAdaptedRole> roles = new ArrayList<>();
@@ -36,12 +36,12 @@ class JsonAdaptedPerson {
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("telegram") String telegram,
+    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("telegramHandle") String telegramHandle,
                              @JsonProperty("email") String email, @JsonProperty("studentStatus") String studentStatus,
                              @JsonProperty("roles") List<JsonAdaptedRole> roles,
                              @JsonProperty("nickname") String nickname) {
         this.name = name;
-        this.telegram = telegram;
+        this.telegramHandle = telegramHandle;
         this.email = email;
         this.studentStatus = studentStatus;
         if (roles != null) {
@@ -55,7 +55,7 @@ class JsonAdaptedPerson {
      */
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
-        telegram = source.getTelegram().value;
+        telegramHandle = source.getTelegramHandle().value;
         email = source.getEmail().value;
         studentStatus = source.getStudentStatus().value;
         roles.addAll(source.getRoles().stream()
@@ -83,14 +83,14 @@ class JsonAdaptedPerson {
         }
         final Name modelName = new Name(name);
 
-        if (telegram == null) {
+        if (telegramHandle == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Telegram.class.getSimpleName()));
+                    TelegramHandle.class.getSimpleName()));
         }
-        if (!Telegram.isValidTelegram(telegram)) {
-            throw new IllegalValueException(Telegram.MESSAGE_CONSTRAINTS);
+        if (!TelegramHandle.isValidTelegramHandle(telegramHandle)) {
+            throw new IllegalValueException(TelegramHandle.MESSAGE_CONSTRAINTS);
         }
-        final Telegram modelTelegram = new Telegram(telegram);
+        final TelegramHandle modelTelegramHandle = new TelegramHandle(telegramHandle);
 
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
@@ -110,7 +110,7 @@ class JsonAdaptedPerson {
         final StudentStatus modelstudentStatus = new StudentStatus(studentStatus);
         final Set<Role> modelRoles = new HashSet<>(personRoles);
         final Nickname modelNickname = new Nickname(nickname); // Nickname can be anything
-        return new Person(modelName, modelTelegram, modelEmail, modelstudentStatus, modelRoles, modelNickname);
+        return new Person(modelName, modelTelegramHandle, modelEmail, modelstudentStatus, modelRoles, modelNickname);
     }
 
 }

@@ -7,7 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_PRESIDENT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_STATUS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_HANDLE_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -33,7 +33,8 @@ public class PersonTest {
         assertFalse(ALICE.isSamePerson(null));
 
         // same name, all other attributes different -> returns true
-        Person editedAlice = new PersonBuilder(ALICE).withTelegram(VALID_TELEGRAM_BOB).withEmail(VALID_EMAIL_BOB)
+        Person editedAlice = new PersonBuilder(ALICE).withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB)
+                .withEmail(VALID_EMAIL_BOB)
                 .withStudentStatus(VALID_STUDENT_STATUS_BOB).withRoles(VALID_ROLE_PRESIDENT).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
@@ -74,7 +75,7 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different telegram -> returns false
-        editedAlice = new PersonBuilder(ALICE).withTelegram(VALID_TELEGRAM_BOB).build();
+        editedAlice = new PersonBuilder(ALICE).withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different email -> returns false
@@ -93,7 +94,8 @@ public class PersonTest {
     @Test
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", telegram="
-                + ALICE.getTelegram() + ", email=" + ALICE.getEmail() + ", studentStatus=" + ALICE.getStudentStatus()
+                + ALICE.getTelegramHandle() + ", email=" + ALICE.getEmail()
+                + ", studentStatus=" + ALICE.getStudentStatus()
                 + ", roles=" + ALICE.getRoles() + ", nickname=" + ALICE.getNickname() + "}";
         assertEquals(expected, ALICE.toString());
     }
