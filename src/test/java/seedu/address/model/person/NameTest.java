@@ -57,4 +57,28 @@ public class NameTest {
         // different values -> returns false
         assertFalse(name.equals(new Name("Other Valid Name")));
     }
+
+    @Test
+    public void equalsLowerCase() {
+        Name name = new Name("Valid Name");
+
+        // same values -> returns true
+        assertTrue(name.equalsLowerCase(new Name("Valid Name")));
+
+        // same values (case-insensitive) -> returns true
+        assertTrue(name.equalsLowerCase(new Name("Valid Name".toLowerCase())));
+        assertTrue(name.equalsLowerCase(new Name("Valid Name".toUpperCase())));
+
+        // same object -> returns true
+        assertTrue(name.equalsLowerCase(name));
+
+        // null -> returns false
+        assertFalse(name.equalsLowerCase(null));
+
+        // different types -> returns false
+        assertFalse(name.equalsLowerCase(5.0f));
+
+        // different values -> returns false
+        assertFalse(name.equalsLowerCase(new Name("Other Valid Name")));
+    }
 }

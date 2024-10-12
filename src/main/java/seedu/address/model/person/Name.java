@@ -59,6 +59,20 @@ public class Name {
         return fullName.equals(otherName.fullName);
     }
 
+    public boolean equalsLowerCase(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Name)) {
+            return false;
+        }
+
+        Name otherName = (Name) other;
+        return fullName.equalsIgnoreCase(otherName.fullName);
+    }
+
     @Override
     public int hashCode() {
         return fullName.hashCode();
