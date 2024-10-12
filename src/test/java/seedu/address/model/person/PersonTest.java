@@ -93,7 +93,7 @@ public class PersonTest {
 
     @Test
     public void toStringMethod() {
-        String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", telegram="
+        String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", telegram handle="
                 + ALICE.getTelegramHandle() + ", email=" + ALICE.getEmail()
                 + ", studentStatus=" + ALICE.getStudentStatus()
                 + ", roles=" + ALICE.getRoles() + ", nickname=" + ALICE.getNickname() + "}";

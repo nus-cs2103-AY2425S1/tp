@@ -14,7 +14,7 @@ public class StudentStatus {
             + "masters\n"
             + "phd";
 
-    public static final String VALIDATION_REGEX = "^((undergraduate \\b\\d{1}\\b)|masters|phd)$";
+    public static final String VALIDATION_REGEX = "^((undergraduate \\b[1-6]\\b)|masters|phd)$";
 
     public final String value;
 
