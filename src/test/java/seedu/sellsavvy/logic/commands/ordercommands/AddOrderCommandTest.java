@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import seedu.sellsavvy.model.Model;
 import seedu.sellsavvy.model.ModelManager;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AddOrderCommandTest {
 

@@ -1,5 +1,6 @@
 package seedu.sellsavvy.logic.commands.ordercommands;
 
+import seedu.sellsavvy.commons.core.index.Index;
 import seedu.sellsavvy.commons.util.ToStringBuilder;
 import seedu.sellsavvy.logic.commands.Command;
 import seedu.sellsavvy.logic.commands.CommandResult;
@@ -9,6 +10,7 @@ import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.person.Person;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.sellsavvy.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.sellsavvy.logic.parser.CliSyntax.*;
 
 /**
@@ -32,18 +34,17 @@ public class AddOrderCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New Order added under xxx: xxx";
 
-    private final Person personToAddUnder;
+    private final Index index;
 
     private final Order toAdd;
 
     /**
      * Creates an AddOrderCommand to add the specific order under
      */
-    public AddOrderCommand(Person person, Order order) {
-        requireNonNull(person);
-        requireNonNull(order);
-        personToAddUnder = person;
-        toAdd = order;
+    public AddOrderCommand(Index index, Order order) {
+        requireAllNonNull(index, order);
+        this.index = index;
+        this.toAdd = order;
     }
 
     @Override
@@ -66,7 +67,7 @@ public class AddOrderCommand extends Command {
         }
 
         AddOrderCommand otherAddOrderCommand = (AddOrderCommand) other;
-        boolean samePerson = personToAddUnder.equals(otherAddOrderCommand.personToAddUnder);
+        boolean samePerson = index.equals(otherAddOrderCommand.index);
         boolean sameOrder = toAdd.equals(otherAddOrderCommand.toAdd);
         return samePerson && sameOrder;
     }
@@ -74,7 +75,7 @@ public class AddOrderCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("personToAddUnder", personToAddUnder)
+                .add("index", index)
                 .add("toAdd", toAdd)
                 .toString();
     }
