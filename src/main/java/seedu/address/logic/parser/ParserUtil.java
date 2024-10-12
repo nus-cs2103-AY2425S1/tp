@@ -9,10 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -93,6 +90,17 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String payment} into an {@code Payment}.
+     * Leading and trailing whitespaces will be trimmed
+     */
+    public static Payment parsePayment(String payment) {
+        requireNonNull(payment);
+        String trimmedPayment = payment.trim();
+        Boolean b = Boolean.parseBoolean(trimmedPayment);
+        return new Payment(b);
     }
 
     /**
