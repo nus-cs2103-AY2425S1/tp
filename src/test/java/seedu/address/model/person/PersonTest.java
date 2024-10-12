@@ -73,21 +73,21 @@ public class PersonTest {
         Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different phone -> returns false
+        // same name, different phone -> returns true
         editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        assertTrue(ALICE.equals(editedAlice));
 
-        // different email -> returns false
+        // same name, different email -> returns true
         editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        assertTrue(ALICE.equals(editedAlice));
 
-        // different address -> returns false
+        // same name, email and phone, but different job code -> returns true
         editedAlice = new PersonBuilder(ALICE).withJobCode(VALID_JOBCODE_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        assertTrue(ALICE.equals(editedAlice));
 
-        // different tags -> returns false
+        // same name, email and phone, different tags -> returns true -> returns true
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
-        assertFalse(ALICE.equals(editedAlice));
+        assertTrue(ALICE.equals(editedAlice));
     }
 
     @Test

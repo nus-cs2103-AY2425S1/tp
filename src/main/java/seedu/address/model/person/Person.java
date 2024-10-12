@@ -75,8 +75,7 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both persons have the same name and email, or the same name and phone number.
      */
     @Override
     public boolean equals(Object other) {
@@ -90,11 +89,10 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && jobCode.equals(otherPerson.jobCode)
-                && tags.equals(otherPerson.tags);
+        return (name.equals(otherPerson.name)
+                && phone.equals(otherPerson.phone))
+                || (name.equals(otherPerson.name)
+                && email.equals(otherPerson.email));
     }
 
     @Override
