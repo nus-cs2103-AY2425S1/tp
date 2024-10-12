@@ -17,6 +17,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.delivery.exceptions.DeliveryNotFoundException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
@@ -104,6 +105,33 @@ public class ModelManagerTest {
     public void hasDelivery_deliveryInAddressBook_returnsTrue() {
         modelManager.addDelivery(BREAD);
         assertTrue(modelManager.hasDelivery(BREAD));
+    }
+
+    @Test
+    public void deleteDelivery_nullDelivery_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.deleteDelivery(null));
+    }
+
+    @Test
+    public void deleteDelivery_deliveryNotInAddressBook_throwsDeliveryNotFoundException() {
+        assertThrows(DeliveryNotFoundException.class, () -> modelManager.deleteDelivery(APPLE));
+    }
+
+    @Test
+    public void deleteDelivery_existingDelivery_removesSuccessfully() {
+        modelManager.addDelivery(BREAD);
+        modelManager.deleteDelivery(BREAD);
+        assertFalse(modelManager.hasDelivery(BREAD));
+    }
+
+    @Test
+    public void getFilteredDeliveryList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredDeliveryList().remove(0));
+    }
+
+    @Test
+    public void updateFilteredDeliveryList_nullPredicate_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.updateFilteredDeliveryList(null));
     }
 
     @Test
