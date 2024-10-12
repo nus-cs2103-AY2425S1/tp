@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalAppointments.getTypicalAppointmentBook;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
@@ -94,14 +95,14 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void equals() {
+    public void equals_checkAddressBooks_returnsCorrectEquality() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, null, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, null, userPrefs);
+        modelManager = new ModelManager(addressBook, getTypicalAppointmentBook(), userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(addressBook, getTypicalAppointmentBook(), userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -114,12 +115,12 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, null, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, getTypicalAppointmentBook(), userPrefs)));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, null, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, getTypicalAppointmentBook(), userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -127,6 +128,6 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, null, differentUserPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, getTypicalAppointmentBook(), differentUserPrefs)));
     }
 }

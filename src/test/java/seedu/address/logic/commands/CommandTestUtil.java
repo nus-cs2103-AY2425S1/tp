@@ -3,9 +3,12 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SICKNESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -71,6 +74,20 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
+
+    public static final String VALID_APPOINTMENT_TYPE_AMY = "Health Checkup";
+    public static final String VALID_APPOINTMENT_TYPE_BOB = "Dental Checkup";
+    public static final String VALID_MEDICINE_AMY = "Panadol";
+    public static final String VALID_MEDICINE_BOB = "Ibuprofen";
+    public static final String VALID_SICKNESS_AMY = "Flu";
+    public static final String VALID_SICKNESS_BOB = "Toothache";
+
+    public static final String APPOINTMENT_TYPE_DESC_AMY = " " + PREFIX_APPOINTMENT_TYPE + VALID_APPOINTMENT_TYPE_AMY;
+    public static final String APPOINTMENT_TYPE_DESC_BOB = " " + PREFIX_APPOINTMENT_TYPE + VALID_APPOINTMENT_TYPE_BOB;
+    public static final String MEDICINE_DESC_AMY = " " + PREFIX_MEDICINE + VALID_MEDICINE_AMY;
+    public static final String MEDICINE_DESC_BOB = " " + PREFIX_MEDICINE + VALID_MEDICINE_BOB;
+    public static final String SICKNESS_DESC_AMY = " " + PREFIX_SICKNESS + VALID_SICKNESS_AMY;
+    public static final String SICKNESS_DESC_BOB = " " + PREFIX_SICKNESS + VALID_SICKNESS_BOB;
 
     /**
      * Executes the given {@code command}, confirms that <br>
