@@ -19,7 +19,6 @@ public class Person {
     // Identity fields
     private final Name name;
     private final Phone phone;
-    private final Email email;
     private final Gender gender;
 
     // Data fields
@@ -30,11 +29,10 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Gender gender, Address address, Module module, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, gender, address, module, tags);
+    public Person(Name name, Phone phone, Gender gender, Address address, Module module, Set<Tag> tags) {
+        requireAllNonNull(name, phone, gender, address, module, tags);
         this.name = name;
         this.phone = phone;
-        this.email = email;
         this.address = address;
         this.module = module;
         this.tags.addAll(tags);
@@ -47,10 +45,6 @@ public class Person {
 
     public Phone getPhone() {
         return phone;
-    }
-
-    public Email getEmail() {
-        return email;
     }
 
     public Gender getGender() {
@@ -104,7 +98,6 @@ public class Person {
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && module.equals(otherPerson.module)
                 && tags.equals(otherPerson.tags);
@@ -113,7 +106,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, module, tags);
+        return Objects.hash(name, phone, address, module, tags);
     }
 
     @Override
@@ -121,7 +114,6 @@ public class Person {
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
-                .add("email", email)
                 .add("gender", gender)
                 .add("address", address)
                 .add("module", module)
