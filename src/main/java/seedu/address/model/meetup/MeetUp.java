@@ -2,8 +2,10 @@ package seedu.address.model.meetup;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Objects;
+
+import seedu.address.commons.util.ToStringBuilder;
 
 /**
  * Represents a Meetup in the address book.
@@ -12,23 +14,25 @@ import java.util.Objects;
 public class MeetUp { //TODO
 
     // Identity fields
-    private final String desc;
-    private final Date from;
-    private final Date to;
+    private final String name;
+    private final String info;
+    private final LocalDateTime from;
+    private final LocalDateTime to;
 
     /**
      * Every field must be present and not null.
      */
-    public MeetUp(String desc, Date from, Date to) {
-        requireAllNonNull(desc, from, to);
-        this.desc = desc;
+    public MeetUp(String name, String info, LocalDateTime from, LocalDateTime to) {
+        requireAllNonNull(name, info, from, to);
+        this.name = name;
+        this.info = info;
         this.from = from;
         this.to = to;
     }
 
 
     /**
-     * Returns true if both persons have the same identity and data fields.
+     * Returns true if both meetups have the same identity and data fields.
      * This defines a stronger notion of equality between two meetUps.
      */
     @Override
@@ -43,7 +47,8 @@ public class MeetUp { //TODO
         }
 
         MeetUp otherMeetUp = (MeetUp) other;
-        return desc.equals(otherMeetUp.desc)
+        return name.equals(otherMeetUp.name)
+                && info.equals(otherMeetUp.info)
                 && from.equals(otherMeetUp.from)
                 && to.equals(otherMeetUp.to);
     }
@@ -51,13 +56,33 @@ public class MeetUp { //TODO
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(desc, from, to);
+        return Objects.hash(name, info, from, to);
     }
 
     @Override
     public String toString() {
         //TODO
-        return "Meetup Object";
+        return new ToStringBuilder(this)
+                .add("name", name)
+                .add("info", info)
+                .add("from", from)
+                .add("to", to)
+                .toString();
     }
 
+    public String getName() {
+        return this.name;
+    }
+
+    public String getInfo() {
+        return this.info;
+    }
+
+    public LocalDateTime getFrom() {
+        return this.from;
+    }
+
+    public LocalDateTime getTo() {
+        return this.to;
+    }
 }
