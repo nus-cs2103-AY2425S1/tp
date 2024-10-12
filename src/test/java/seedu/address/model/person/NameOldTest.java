@@ -10,40 +10,40 @@ public class NameOldTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new NameOld(null));
+        assertThrows(NullPointerException.class, () -> new Name(null));
     }
 
     @Test
     public void constructor_invalidName_throwsIllegalArgumentException() {
         String invalidName = "";
-        assertThrows(IllegalArgumentException.class, () -> new NameOld(invalidName));
+        assertThrows(IllegalArgumentException.class, () -> new Name(invalidName));
     }
 
     @Test
-    public void isValidName() {
+    public void validate() {
         // null name
-        assertThrows(NullPointerException.class, () -> NameOld.isValidName(null));
+        assertThrows(NullPointerException.class, () -> Name.validate(null));
 
         // invalid name
-        assertFalse(NameOld.isValidName("")); // empty string
-        assertFalse(NameOld.isValidName(" ")); // spaces only
-        assertFalse(NameOld.isValidName("^")); // only non-alphanumeric characters
-        assertFalse(NameOld.isValidName("peter*")); // contains non-alphanumeric characters
+        assertFalse(Name.validate("")); // empty string
+        assertFalse(Name.validate(" ")); // spaces only
+        assertFalse(Name.validate("^")); // only non-alphanumeric characters
+        assertFalse(Name.validate("peter*")); // contains non-alphanumeric characters
 
         // valid name
-        assertTrue(NameOld.isValidName("peter jack")); // alphabets only
-        assertTrue(NameOld.isValidName("12345")); // numbers only
-        assertTrue(NameOld.isValidName("peter the 2nd")); // alphanumeric characters
-        assertTrue(NameOld.isValidName("Capital Tan")); // with capital letters
-        assertTrue(NameOld.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
+        assertTrue(Name.validate("peter jack")); // alphabets only
+        assertTrue(Name.validate("12345")); // numbers only
+        assertTrue(Name.validate("peter the 2nd")); // alphanumeric characters
+        assertTrue(Name.validate("Capital Tan")); // with capital letters
+        assertTrue(Name.validate("David Roger Jackson Ray Jr 2nd")); // long names
     }
 
     @Test
     public void equals() {
-        NameOld name = new NameOld("Valid Name");
+        Name name = new Name("Valid Name");
 
         // same values -> returns true
-        assertTrue(name.equals(new NameOld("Valid Name")));
+        assertTrue(name.equals(new Name("Valid Name")));
 
         // same object -> returns true
         assertTrue(name.equals(name));
@@ -55,6 +55,6 @@ public class NameOldTest {
         assertFalse(name.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(name.equals(new NameOld("Other Valid Name")));
+        assertFalse(name.equals(new Name("Other Valid Name")));
     }
 }

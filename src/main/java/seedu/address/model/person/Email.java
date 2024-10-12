@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Company's email in the internship book.
  * Guarantees: immutable; the email is valid as declared in {@link #validate(String)}.
  */
-public class Email implements Validatable {
+public class Email {
 
     private static final String SPECIAL_CHARACTERS = "+_.-";
     public static final String MESSAGE_CONSTRAINTS = "Emails should be of the format local-part@domain "
@@ -42,7 +42,7 @@ public class Email implements Validatable {
      */
     public Email(String email) {
         requireNonNull(email);
-        checkArgument(validate(email), MESSAGE_CONSTRAINTS);
+        checkArgument(Email.validate(email), MESSAGE_CONSTRAINTS);
         this.value = email;
     }
 
@@ -106,13 +106,11 @@ public class Email implements Validatable {
 
     /**
      * Validates the given string as an email.
-     * Implements the {@code Validatable} interface's method.
      *
      * @param test the string to be validated.
      * @return true if the string is a valid email, false otherwise.
      */
-    @Override
-    public boolean validate(String test) {
+    public static boolean validate(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 }

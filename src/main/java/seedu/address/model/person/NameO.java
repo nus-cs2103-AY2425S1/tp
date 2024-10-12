@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Company's name in the internship book.
  * Guarantees: immutable; the name is valid as declared in {@link #validate(String)}.
  */
-public class Name {
+public class NameO {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Name should only contain alphanumeric characters, single spaces between words, "
@@ -30,9 +30,9 @@ public class Name {
      * @throws NullPointerException if the {@code name} is null.
      * @throws IllegalArgumentException if the {@code name} does not satisfy the constraints.
      */
-    public Name(String name) {
+    public NameO(String name) {
         requireNonNull(name);
-        checkArgument(Name.validate(name), MESSAGE_CONSTRAINTS);
+        checkArgument(NameO.validate(name), MESSAGE_CONSTRAINTS);
         this.value = name;
     }
 
@@ -77,11 +77,11 @@ public class Name {
             return true;
         }
 
-        if (!(other instanceof Name)) {
+        if (!(other instanceof NameO)) {
             return false;
         }
 
-        Name otherName = (Name) other;
+        NameO otherName = (NameO) other;
         return value.equalsIgnoreCase(otherName.value);
     }
 

@@ -5,9 +5,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents an Internship's role in the internship book.
- * Guarantees: immutable; is valid as declared in {@link #validate(String)}.
+ * Guarantees: immutable; the role is valid as declared in {@link #validate(String)}.
  */
-public class Role implements Validatable {
+public class Role {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Role should only contain alphanumeric characters, single spaces between words, "
@@ -30,7 +30,7 @@ public class Role implements Validatable {
      */
     public Role(String role) {
         requireNonNull(role);
-        checkArgument(validate(role), MESSAGE_CONSTRAINTS);
+        checkArgument(Role.validate(role), MESSAGE_CONSTRAINTS);
         this.value = role;
     }
 
@@ -41,6 +41,16 @@ public class Role implements Validatable {
      */
     public String getValue() {
         return this.value;
+    }
+
+    /**
+     * Static validation method to check if a given string is a valid role.
+     *
+     * @param test the string to be validated.
+     * @return true if the string is a valid role, false otherwise.
+     */
+    public static boolean validate(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     /**
@@ -81,17 +91,5 @@ public class Role implements Validatable {
     @Override
     public int hashCode() {
         return value.hashCode();
-    }
-
-    /**
-     * Validates the given string as a role.
-     * Implements the {@code Validatable} interface's method.
-     *
-     * @param test the string to be validated.
-     * @return true if the string is a valid role, false otherwise.
-     */
-    @Override
-    public boolean validate(String test) {
-        return test.matches(VALIDATION_REGEX);
     }
 }

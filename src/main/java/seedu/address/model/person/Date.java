@@ -11,7 +11,7 @@ import java.time.format.DateTimeParseException;
  * Represents a Date in the internship book.
  * Guarantees: immutable; is valid as declared in {@link #validate(String)}.
  */
-public class Date implements Validatable {
+public class Date {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Dates should be in the format 'yyyy-MM-dd' and must be valid.";
@@ -41,7 +41,7 @@ public class Date implements Validatable {
      */
     public Date(String dateString) {
         requireNonNull(dateString);
-        checkArgument(validate(dateString), MESSAGE_CONSTRAINTS);
+        checkArgument(Date.validate(dateString), MESSAGE_CONSTRAINTS);
         this.date = LocalDate.parse(dateString, FORMATTER);
     }
 
@@ -97,13 +97,11 @@ public class Date implements Validatable {
     /**
      * Validates the given string as a date.
      * The string must be in the format 'yyyy-MM-dd'.
-     * Implements the {@code Validatable} interface's method.
      *
      * @param test the string to be validated.
      * @return true if the string is a valid date, false otherwise.
      */
-    @Override
-    public boolean validate(String test) {
+    public static boolean validate(String test) {
         try {
             LocalDate.parse(test, FORMATTER);
             return true;

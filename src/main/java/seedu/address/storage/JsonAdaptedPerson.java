@@ -11,8 +11,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.EmailOld;
-import seedu.address.model.person.NameOld;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -50,9 +50,9 @@ class JsonAdaptedPerson {
      * Converts a given {@code Person} into this class for Jackson use.
      */
     public JsonAdaptedPerson(Person source) {
-        name = source.getName().fullName;
+        name = source.getName().getValue();
         phone = source.getPhone().value;
-        email = source.getEmail().value;
+        email = source.getEmail().getValue();
         address = source.getAddress().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -71,12 +71,12 @@ class JsonAdaptedPerson {
         }
 
         if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, NameOld.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
-        if (!NameOld.isValidName(name)) {
-            throw new IllegalValueException(NameOld.MESSAGE_CONSTRAINTS);
+        if (!Name.validate(name)) {
+            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
-        final NameOld modelName = new NameOld(name);
+        final Name modelName = new Name(name);
 
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
@@ -88,12 +88,12 @@ class JsonAdaptedPerson {
 
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    EmailOld.class.getSimpleName()));
+                    Email.class.getSimpleName()));
         }
-        if (!EmailOld.isValidEmail(email)) {
-            throw new IllegalValueException(EmailOld.MESSAGE_CONSTRAINTS);
+        if (!Email.validate(email)) {
+            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
         }
-        final EmailOld modelEmail = new EmailOld(email);
+        final Email modelEmail = new Email(email);
 
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));

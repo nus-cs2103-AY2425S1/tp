@@ -17,9 +17,9 @@ import seedu.address.model.tag.Tag;
 public class Person {
 
     // Identity fields
-    private final NameOld name;
+    private final Name name;
     private final Phone phone;
-    private final EmailOld email;
+    private final Email email;
 
     // Data fields
     private final Address address;
@@ -28,7 +28,7 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(NameOld name, Phone phone, EmailOld email, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -37,7 +37,7 @@ public class Person {
         this.tags.addAll(tags);
     }
 
-    public NameOld getName() {
+    public Name getName() {
         return name;
     }
 
@@ -45,7 +45,7 @@ public class Person {
         return phone;
     }
 
-    public EmailOld getEmail() {
+    public Email getEmail() {
         return email;
     }
 

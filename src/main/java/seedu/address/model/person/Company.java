@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Company {
 
     private final Email email;
-    private final Name name;
+    private final NameO name;
 
     /**
      * Constructs a {@code Company} with a valid email and name.
@@ -20,11 +20,11 @@ public class Company {
      * @throws NullPointerException if the {@code email} or {@code name} is null.
      * @throws IllegalArgumentException if the {@code email} or {@code name} do not satisfy their constraints.
      */
-    public Company(Email email, Name name) {
+    public Company(Email email, NameO name) {
         requireNonNull(email);
         requireNonNull(name);
         checkArgument(email.validate(email.getValue()), Email.MESSAGE_CONSTRAINTS);
-        checkArgument(name.validate(name.getValue()), Name.MESSAGE_CONSTRAINTS);
+        checkArgument(name.validate(name.getValue()), NameO.MESSAGE_CONSTRAINTS);
         this.email = email;
         this.name = name;
     }
@@ -43,7 +43,7 @@ public class Company {
      *
      * @return the name object.
      */
-    public Name getName() {
+    public NameO getName() {
         return name;
     }
 
