@@ -44,7 +44,8 @@ public class MarkPaidCommand extends Command {
 
         Person personToMarkPayment = lastShownList.get(targetIndex.getZeroBased());
         Person markedPerson = new Person(personToMarkPayment.getName(), personToMarkPayment.getPhone(),
-                personToMarkPayment.getEmail(), personToMarkPayment.getAddress(), personToMarkPayment.getTags());
+                personToMarkPayment.getEmail(), personToMarkPayment.getAddress(),
+                personToMarkPayment.getPayment(), personToMarkPayment.getTags());
 
         model.setPerson(personToMarkPayment, markedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
