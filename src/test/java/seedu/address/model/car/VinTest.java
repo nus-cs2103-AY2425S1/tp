@@ -44,8 +44,8 @@ public class VinTest {
         assertTrue(Vin.isValidVin("146576837BSDDHIHH")); // number to chars
 
         // invalid Vin (fails checksum)
-        assertFalse(Vrn.isValidVrn("ABCDE12345ABCDE1*")); // invalid characters
-        assertFalse(Vrn.isValidVrn("ABCDE12345 ABCDE1")); // invalid spacing
+        assertFalse(Vin.isValidVin("ABCDE12345ABCDE1*")); // invalid characters
+        assertFalse(Vin.isValidVin("ABCDE12345 ABCDE1")); // invalid spacing
 
     }
 
