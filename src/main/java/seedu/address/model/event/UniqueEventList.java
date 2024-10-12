@@ -29,7 +29,7 @@ public class UniqueEventList implements Iterable<Event> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent event as the given argument.
      */
     public boolean contains(Event toCheck) {
         requireNonNull(toCheck);
@@ -37,8 +37,8 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
-     * Adds a person to the list.
-     * The person must not already exist in the list.
+     * Adds an event to the list.
+     * The event must not already exist in the list.
      */
     public void add(Event toAdd) {
         requireNonNull(toAdd);
@@ -86,7 +86,7 @@ public class UniqueEventList implements Iterable<Event> {
 
     /**
      * Replaces the contents of this list with {@code events}.
-     * {@code persons} must not contain duplicate persons.
+     * {@code events} must not contain duplicate persons.
      */
     public void setEvents(List<Event> events) {
         requireAllNonNull(events);

@@ -6,7 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.time.LocalDate;
 
 /**
- * Represents an Event's start date in the address book.
+ * Represents an Event's start date and end date in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidDuration(LocalDate, LocalDate)}
  */
 public class EventDuration {
@@ -30,7 +30,7 @@ public class EventDuration {
     }
 
     /**
-     * Returns true if the end date is after the start date.
+     * Returns true if the end date is not before the start date.
      */
     public static boolean isValidDuration(LocalDate eventFrom, LocalDate eventTo) {
         return !(eventFrom.isAfter(eventTo));
