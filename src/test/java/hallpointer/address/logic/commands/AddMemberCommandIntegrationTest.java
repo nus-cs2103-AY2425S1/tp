@@ -7,7 +7,6 @@ import static hallpointer.address.testutil.TypicalMembers.getTypicalAddressBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import hallpointer.address.logic.Messages;
 import hallpointer.address.model.Model;
 import hallpointer.address.model.ModelManager;
 import hallpointer.address.model.UserPrefs;
@@ -34,7 +33,10 @@ public class AddMemberCommandIntegrationTest {
         expectedModel.addMember(validMember);
 
         assertCommandSuccess(new AddMemberCommand(validMember), model,
-                String.format(AddMemberCommand.MESSAGE_SUCCESS, Messages.format(validMember)),
+                String.format(AddMemberCommand.MESSAGE_SUCCESS,
+                        validMember.getName().fullName,
+                        validMember.getRoom().value,
+                        validMember.getTelegram().value),
                 expectedModel);
     }
 

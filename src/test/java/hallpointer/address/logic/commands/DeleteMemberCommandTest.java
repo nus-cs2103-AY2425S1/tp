@@ -33,7 +33,11 @@ public class DeleteMemberCommandTest {
         DeleteMemberCommand deleteMemberCommand = new DeleteMemberCommand(INDEX_FIRST_MEMBER);
 
         String expectedMessage = String.format(
-                DeleteMemberCommand.MESSAGE_DELETE_MEMBER_SUCCESS, Messages.format(memberToDelete));
+                DeleteMemberCommand.MESSAGE_DELETE_MEMBER_SUCCESS,
+                memberToDelete.getName().fullName,
+                memberToDelete.getRoom().value,
+                memberToDelete.getTelegram().value
+        );
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deleteMember(memberToDelete);
@@ -57,7 +61,11 @@ public class DeleteMemberCommandTest {
         DeleteMemberCommand deleteMemberCommand = new DeleteMemberCommand(INDEX_FIRST_MEMBER);
 
         String expectedMessage = String.format(
-                DeleteMemberCommand.MESSAGE_DELETE_MEMBER_SUCCESS, Messages.format(memberToDelete));
+                DeleteMemberCommand.MESSAGE_DELETE_MEMBER_SUCCESS,
+                memberToDelete.getName().fullName,
+                memberToDelete.getRoom().value,
+                memberToDelete.getTelegram().value
+        );
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deleteMember(memberToDelete);
