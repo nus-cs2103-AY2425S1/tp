@@ -15,7 +15,7 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.State;
+import seedu.address.commons.core.State;
 import seedu.address.model.group.Group;
 import seedu.address.model.student.Student;
 import seedu.address.storage.Storage;

@@ -16,7 +16,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.State;
+import seedu.address.commons.core.State;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -120,7 +120,6 @@ public class MainWindow extends UiPart<Stage> {
             informationListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
         } else {
             informationListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
-
         }
 
         resultDisplay = new ResultDisplay();
@@ -182,6 +181,20 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Changes the display of the system.
+     */
+    @FXML
+    private void changeSystemState(int changeState) {
+        if (changeState == 0) {
+            informationListPanelPlaceholder.getChildren().clear();
+            informationListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
+        } else {
+            informationListPanelPlaceholder.getChildren().clear();
+            informationListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
+        }
+    }
+
+    /**
      * Executes the command and returns the result.
      *
      * @see seedu.address.logic.Logic#execute(String)
@@ -198,6 +211,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.getChangeState() != -1) {
+                changeSystemState(commandResult.getChangeState());
             }
 
             return commandResult;
