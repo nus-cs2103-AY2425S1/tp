@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_HASPAID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -45,7 +44,6 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]..."
-            + "[" + PREFIX_HASPAID + "hasPaid]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -102,10 +100,9 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        Boolean updatedHasPaid = editPersonDescriptor.getHasPaid().orElse(personToEdit.getHasPaid());
+        Boolean updatedHasPaid = personToEdit.getHasPaid();
 
-        return new Person(updatedName, updatedPhone, updatedEmail,
-                updatedAddress, updatedTags, updatedHasPaid);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedHasPaid);
     }
 
     @Override
@@ -144,7 +141,8 @@ public class EditCommand extends Command {
         private Set<Tag> tags;
         private Boolean hasPaid;
 
-        public EditPersonDescriptor() {}
+        public EditPersonDescriptor() {
+        }
 
         /**
          * Copy constructor.
@@ -156,7 +154,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
-            setHasPaid(toCopy.hasPaid);
+            this.hasPaid = toCopy.hasPaid;
         }
 
         /**
@@ -215,11 +213,11 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
-        public void setHasPaid(Boolean hasPaid) {
+        public void setHasPaid(Boolean hasPaid) { // needed for EditPersonDescriptorTest.java
             this.hasPaid = hasPaid;
         }
 
-        public Optional<Boolean> getHasPaid() {
+        public Optional<Boolean> getHasPaid() { // needed for EditPersonDescriptorTest.java
             return Optional.ofNullable(hasPaid);
         }
 

@@ -112,6 +112,7 @@ class JsonAdaptedPerson {
         }
 
         Boolean modelHasPaid = hasPaid.equals("true");
+
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelHasPaid);
     }
 
