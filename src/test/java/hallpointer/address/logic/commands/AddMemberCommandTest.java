@@ -15,7 +15,6 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import hallpointer.address.commons.core.GuiSettings;
-import hallpointer.address.logic.Messages;
 import hallpointer.address.logic.commands.exceptions.CommandException;
 import hallpointer.address.model.AddressBook;
 import hallpointer.address.model.Model;
@@ -39,8 +38,15 @@ public class AddMemberCommandTest {
 
         CommandResult commandResult = new AddMemberCommand(validMember).execute(modelStub);
 
-        assertEquals(String.format(AddMemberCommand.MESSAGE_SUCCESS, Messages.format(validMember)),
-                commandResult.getFeedbackToUser());
+        assertEquals(
+                String.format(
+                        AddMemberCommand.MESSAGE_SUCCESS,
+                        validMember.getName().fullName,
+                        validMember.getRoom().value,
+                        validMember.getTelegram().value
+                ),
+                commandResult.getFeedbackToUser()
+        );
         assertEquals(Arrays.asList(validMember), modelStub.membersAdded);
     }
 
@@ -90,12 +96,12 @@ public class AddMemberCommandTest {
      */
     private class ModelStub implements Model {
         @Override
-        public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
+        public ReadOnlyUserPrefs getUserPrefs() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyUserPrefs getUserPrefs() {
+        public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -125,12 +131,12 @@ public class AddMemberCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public ReadOnlyAddressBook getAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
 
