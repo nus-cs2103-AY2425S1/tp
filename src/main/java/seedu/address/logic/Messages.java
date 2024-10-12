@@ -36,16 +36,25 @@ public class Messages {
      */
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(person.getName())
-                .append("; Phone: ")
-                .append(person.getPhone())
-                .append("; Email: ")
-                .append(person.getEmail())
-                .append("; Address: ")
-                .append(person.getAddress())
-                .append("; Tags: ");
-        person.getTags().forEach(builder::append);
-        return builder.toString();
+
+        appendIfNotEmpty(builder, person.getName().toString(), "");
+        appendIfNotEmpty(builder, person.getPhone().toString(), "; Phone: ");
+        appendIfNotEmpty(builder, person.getEmail().toString(), "; Email: ");
+        appendIfNotEmpty(builder, person.getAddress().toString(), "; Address: ");
+
+        if (!person.getTags().isEmpty()) {
+            builder.append("; Tags: ");
+            person.getTags().forEach(tag -> builder.append(tag).append(" "));
+            builder.setLength(builder.length() - 1); // Remove trailing space
+        }
+
+        return builder.toString().trim();
+    }
+
+    private static void appendIfNotEmpty(StringBuilder builder, String value, String prefix) {
+        if (value != null && !value.isEmpty()) {
+            builder.append(prefix).append(value);
+        }
     }
 
 }
