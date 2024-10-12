@@ -1,5 +1,13 @@
 package seedu.sellsavvy.logic.parser;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.sellsavvy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_COUNT;
+import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_ITEM;
+
+import java.util.stream.Stream;
+
 import seedu.sellsavvy.commons.core.index.Index;
 import seedu.sellsavvy.logic.commands.ordercommands.AddOrderCommand;
 import seedu.sellsavvy.logic.parser.exceptions.ParseException;
@@ -7,14 +15,6 @@ import seedu.sellsavvy.model.order.Count;
 import seedu.sellsavvy.model.order.Date;
 import seedu.sellsavvy.model.order.Item;
 import seedu.sellsavvy.model.order.Order;
-
-import java.util.stream.Stream;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.sellsavvy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_ITEM;
-import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_COUNT;
 
 /**
  * Parses input arguments and creates a new AddOrderCommand object.

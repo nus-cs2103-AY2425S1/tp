@@ -1,5 +1,13 @@
 package seedu.sellsavvy.logic.commands.ordercommands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.sellsavvy.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_COUNT;
+import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_ITEM;
+
+import java.util.List;
+
 import seedu.sellsavvy.commons.core.index.Index;
 import seedu.sellsavvy.commons.util.ToStringBuilder;
 import seedu.sellsavvy.logic.Messages;
@@ -9,14 +17,6 @@ import seedu.sellsavvy.logic.commands.exceptions.CommandException;
 import seedu.sellsavvy.model.Model;
 import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.person.Person;
-
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.sellsavvy.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_ITEM;
-import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_COUNT;
 
 /**
  * Adds an order under a specified person.
