@@ -13,9 +13,9 @@ import hallpointer.address.model.ModelManager;
 import hallpointer.address.model.UserPrefs;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for ListMemberCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for ListMembersCommand.
  */
-public class ListMemberCommandTest {
+public class ListMembersCommandTest {
 
     private Model model;
     private Model expectedModel;
@@ -28,12 +28,12 @@ public class ListMemberCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListMemberCommand(), model, ListMemberCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListMembersCommand(), model, ListMembersCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showMemberAtIndex(model, INDEX_FIRST_MEMBER);
-        assertCommandSuccess(new ListMemberCommand(), model, ListMemberCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListMembersCommand(), model, ListMembersCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }
