@@ -3,6 +3,7 @@ package seedu.address.model.order;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashMap;
 
@@ -32,6 +33,14 @@ class OrderTest {
         Order.removeOrder("Cake");
         assertEquals(1, Order.getTotalOrderCount());
         assertFalse(Order.removeOrder("test"));
+    }
+
+    @Test
+    void orderExistTest() {
+        Order.removeAllOrder();
+        Order cake = Order.of("Cake");
+        assertFalse(Order.orderExist("Pizza"));
+        assertTrue(Order.orderExist("Cake"));
     }
 
     @Test

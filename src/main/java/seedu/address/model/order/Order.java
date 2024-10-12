@@ -54,6 +54,15 @@ public class Order {
         nameToOrder.clear();
     }
 
+    /**
+     * Check if a order has already been created
+     * @param name Name of the order to check
+     * @return True if the order has already been created
+     */
+    public static boolean orderExist(String name) {
+        return nameToOrder.get(name) != null;
+    }
+
     public static int getTotalOrderCount() {
         return nameToOrder.size();
     }
