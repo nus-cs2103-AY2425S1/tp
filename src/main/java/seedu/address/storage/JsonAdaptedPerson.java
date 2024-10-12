@@ -10,8 +10,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.contactdate.ContactDate;
-import seedu.address.model.contactdate.ContactDateList;
+import seedu.address.model.contactrecord.ContactRecord;
+import seedu.address.model.contactrecord.ContactRecordList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.CallFrequency;
 import seedu.address.model.person.Email;
@@ -33,7 +33,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
-    private final List<JsonAdaptedContactDate> contactDates = new ArrayList<>();
+    private final List<JsonAdaptedContactRecord> contactRecords = new ArrayList<>();
     private final String callFrequency;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
@@ -45,7 +45,7 @@ class JsonAdaptedPerson {
                              @JsonProperty("phone") String phone, @JsonProperty("email") String email,
                              @JsonProperty("address") String address,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
-                             @JsonProperty("contactDates") List<JsonAdaptedContactDate> contactDates,
+                             @JsonProperty("contactRecords") List<JsonAdaptedContactRecord> contactRecords,
                              @JsonProperty("callFrequency") String callFrequency) {
         this.nric = nric;
         this.name = name;
@@ -53,8 +53,8 @@ class JsonAdaptedPerson {
         this.email = email;
         this.address = address;
         this.callFrequency = callFrequency;
-        if (contactDates != null) {
-            this.contactDates.addAll(contactDates);
+        if (contactRecords != null) {
+            this.contactRecords.addAll(contactRecords);
         }
         if (tags != null) {
             this.tags.addAll(tags);
@@ -71,8 +71,8 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         callFrequency = source.getCallFrequency().value;
-        contactDates.addAll(source.getContactDates().stream()
-                .map(JsonAdaptedContactDate::new)
+        contactRecords.addAll(source.getContactRecords().stream()
+                .map(JsonAdaptedContactRecord::new)
                 .collect(Collectors.toList()));
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -86,18 +86,18 @@ class JsonAdaptedPerson {
      */
     public Person toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
-        final ArrayList<ContactDate> personContactDates = new ArrayList<>();
+        final ArrayList<ContactRecord> personContactRecords = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
         }
 
-        if (contactDates.isEmpty()) {
+        if (contactRecords.isEmpty()) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    ContactDateList.class.getSimpleName()));
+                    ContactRecordList.class.getSimpleName()));
         }
 
-        for (JsonAdaptedContactDate contactDate : contactDates) {
-            personContactDates.add(contactDate.toModelType());
+        for (JsonAdaptedContactRecord contactRecord : contactRecords) {
+            personContactRecords.add(contactRecord.toModelType());
         }
         if (nric == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Nric.class.getSimpleName()));
@@ -149,9 +149,9 @@ class JsonAdaptedPerson {
         final CallFrequency modelCallFrequency = new CallFrequency(callFrequency);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        final ContactDateList modelContactDates = new ContactDateList(personContactDates);
+        final ContactRecordList modelContactRecords = new ContactRecordList(personContactRecords);
         return new Person(modelNric, modelName, modelPhone, modelEmail, modelAddress, modelTags,
-                modelContactDates, modelCallFrequency);
+                modelContactRecords, modelCallFrequency);
     }
 
 }

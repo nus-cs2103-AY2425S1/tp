@@ -19,7 +19,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.contactdate.ContactDateList;
+import seedu.address.model.contactrecord.ContactRecordList;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
@@ -103,7 +103,7 @@ public class HistoryCommandTest {
                 personToViewHistory.getName());
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        ContactDateList expectedCallHistory = expectedModel.getCallHistory(personToViewHistory);
+        ContactRecordList expectedCallHistory = expectedModel.getCallHistory(personToViewHistory);
         CommandResult result = historyCommand.execute(model);
 
         assertEquals(expectedMessage, result.getFeedbackToUser());
@@ -121,7 +121,7 @@ public class HistoryCommandTest {
                 personToViewHistory.getName());
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        ContactDateList expectedCallHistory = expectedModel.getCallHistory(personToViewHistory);
+        ContactRecordList expectedCallHistory = expectedModel.getCallHistory(personToViewHistory);
         CommandResult result = historyCommand.execute(model);
 
         assertEquals(expectedMessage, result.getFeedbackToUser());
@@ -178,7 +178,7 @@ public class HistoryCommandTest {
                 personToViewHistory.getName());
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        ContactDateList expectedCallHistory = expectedModel.getCallHistory(personToViewHistory);
+        ContactRecordList expectedCallHistory = expectedModel.getCallHistory(personToViewHistory);
         CommandResult result = historyCommand.execute(model);
 
         assertEquals(expectedMessage, result.getFeedbackToUser());
@@ -194,7 +194,7 @@ public class HistoryCommandTest {
                 personToViewHistory.getName());
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        ContactDateList expectedCallHistory = expectedModel.getCallHistory(personToViewHistory);
+        ContactRecordList expectedCallHistory = expectedModel.getCallHistory(personToViewHistory);
         CommandResult result = historyCommand.execute(model);
 
         assertEquals(expectedMessage, result.getFeedbackToUser());

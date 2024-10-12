@@ -8,8 +8,8 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.contactdate.ContactDate;
-import seedu.address.model.contactdate.ContactDateList;
+import seedu.address.model.contactrecord.ContactRecord;
+import seedu.address.model.contactrecord.ContactRecordList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -27,22 +27,22 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private final ContactDateList contactDates = new ContactDateList();
+    private final ContactRecordList contactRecords = new ContactRecordList();
     private final CallFrequency callFrequency;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-            ContactDateList contactDates, CallFrequency callFrequency) {
-        requireAllNonNull(nric, name, phone, email, address, tags, contactDates, callFrequency);
+                  ContactRecordList contactRecords, CallFrequency callFrequency) {
+        requireAllNonNull(nric, name, phone, email, address, tags, contactRecords, callFrequency);
         this.nric = nric;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.contactDates.addAll(contactDates);
+        this.contactRecords.addAll(contactRecords);
         this.callFrequency = callFrequency;
     }
 
@@ -51,7 +51,7 @@ public class Person {
      */
     public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
             CallFrequency callFrequency) {
-        this(nric, name, phone, email, address, tags, new ContactDateList(ContactDate.createCurrentDate("")),
+        this(nric, name, phone, email, address, tags, new ContactRecordList(ContactRecord.createCurrentRecord("")),
                 callFrequency);
     }
 
@@ -75,19 +75,19 @@ public class Person {
         return address;
     }
 
-    public ContactDateList getContactDates() {
-        return contactDates;
+    public ContactRecordList getContactRecords() {
+        return contactRecords;
     }
 
-    public ContactDate getLastContacted() {
-        return contactDates.getLastContacted();
+    public ContactRecord getLastContacted() {
+        return contactRecords.getLastContacted();
     }
 
     public CallFrequency getCallFrequency() {
         return callFrequency;
     }
 
-    public ContactDate getNextContactDate() {
+    public ContactRecord getNextContactRecord() {
         return getLastContacted().add(callFrequency);
     }
 
@@ -102,8 +102,8 @@ public class Person {
     /**
      * Mark the person as contacted today.
      */
-    public void markAsContacted(ContactDate contactDate) {
-        contactDates.markAsContacted(contactDate);
+    public void markAsContacted(ContactRecord contactRecord) {
+        contactRecords.markAsContacted(contactRecord);
     }
 
     /**

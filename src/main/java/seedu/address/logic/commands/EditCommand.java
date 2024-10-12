@@ -23,7 +23,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.contactdate.ContactDateList;
+import seedu.address.model.contactrecord.ContactRecordList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.CallFrequency;
 import seedu.address.model.person.Email;
@@ -131,14 +131,14 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        ContactDateList contactDates = editPersonDescriptor.getContactDates().orElse(personToEdit.getContactDates());
+        ContactRecordList contactRecords = editPersonDescriptor.getContactRecords().orElse(personToEdit.getContactRecords());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         CallFrequency updatedCallFrequency =
                 editPersonDescriptor.getCallFrequency().orElse(personToEdit.getCallFrequency());
 
 
         return new Person(updatedNric, updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-                contactDates, updatedCallFrequency);
+                contactRecords, updatedCallFrequency);
     }
 
     @Override
@@ -178,7 +178,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
-        private ContactDateList contactDates;
+        private ContactRecordList contactRecords;
         private Set<Tag> tags;
         private CallFrequency callFrequency;
 
@@ -195,7 +195,7 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setContactDates(toCopy.contactDates);
+            setContactRecords(toCopy.contactRecords);
             setTags(toCopy.tags);
             setCallFrequency(toCopy.callFrequency);
         }
@@ -247,12 +247,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
-        public Optional<ContactDateList> getContactDates() {
-            return Optional.ofNullable(contactDates);
+        public Optional<ContactRecordList> getContactRecords() {
+            return Optional.ofNullable(contactRecords);
         }
 
-        public void setContactDates(ContactDateList contactDates) {
-            this.contactDates = contactDates;
+        public void setContactRecords(ContactRecordList contactRecords) {
+            this.contactRecords = contactRecords;
         }
 
         public Optional<CallFrequency> getCallFrequency() {

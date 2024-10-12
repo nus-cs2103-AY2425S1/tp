@@ -16,8 +16,8 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.contactdate.ContactDate;
-import seedu.address.testutil.ContactDateBuilder;
+import seedu.address.model.contactrecord.ContactRecord;
+import seedu.address.testutil.ContactRecordBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
@@ -103,16 +103,16 @@ public class PersonTest {
     @Test
     public void markAsContacted() {
         Person person = new PersonBuilder().build();
-        ContactDate contactDate = new ContactDateBuilder().build();
-        person.markAsContacted(contactDate);
-        // 1 contact date added on initialisation and another added by markAsContacted
-        assertEquals(2, person.getContactDates().size());
+        ContactRecord contactRecord = new ContactRecordBuilder().build();
+        person.markAsContacted(contactRecord);
+        // 1 contact record added on initialisation and another added by markAsContacted
+        assertEquals(2, person.getContactRecords().size());
     }
 
     @Test
     public void getLastContacted() {
         Person person = new PersonBuilder().build();
-        assertEquals(person.getContactDates().getLastContacted(), person.getLastContacted());
+        assertEquals(person.getContactRecords().getLastContacted(), person.getLastContacted());
     }
 
     @Test

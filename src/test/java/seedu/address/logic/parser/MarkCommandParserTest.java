@@ -11,9 +11,9 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.MarkCommand;
-import seedu.address.model.contactdate.ContactDate;
+import seedu.address.model.contactrecord.ContactRecord;
 import seedu.address.model.person.Nric;
-import seedu.address.testutil.ContactDateBuilder;
+import seedu.address.testutil.ContactRecordBuilder;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -28,8 +28,9 @@ public class MarkCommandParserTest {
 
     @Test
     public void parse_validIndex_returnsMarkCommand() {
-        ContactDate validDate = new ContactDateBuilder().withNotes(VALID_NOTES).build();
-        assertParseSuccess(parser, "1" + NOTES_DESC, new MarkCommand(INDEX_FIRST_PERSON, validDate));
+        ContactRecord validRecord = new ContactRecordBuilder().withNotes(VALID_NOTES).build();
+        assertParseSuccess(parser, "1" + NOTES_DESC,
+                new MarkCommand(INDEX_FIRST_PERSON, validRecord));
     }
 
     @Test
@@ -39,13 +40,14 @@ public class MarkCommandParserTest {
 
     @Test
     public void parse_validNric_returnsMarkCommand() {
-        ContactDate validDate = new ContactDateBuilder().withNotes(VALID_NOTES).build();
-        assertParseSuccess(parser, VALID_NRIC_AMY + NOTES_DESC, new MarkCommand(new Nric(VALID_NRIC_AMY), validDate));
+        ContactRecord validRecord = new ContactRecordBuilder().withNotes(VALID_NOTES).build();
+        assertParseSuccess(parser, VALID_NRIC_AMY + NOTES_DESC,
+                new MarkCommand(new Nric(VALID_NRIC_AMY), validRecord));
     }
 
     @Test
     public void parse_emptyNotes_returnsMarkCommand() {
-        ContactDate validDate = new ContactDateBuilder().withNotes("").build();
-        assertParseSuccess(parser, "1", new MarkCommand(INDEX_FIRST_PERSON, validDate));
+        ContactRecord validRecord = new ContactRecordBuilder().withNotes("").build();
+        assertParseSuccess(parser, "1", new MarkCommand(INDEX_FIRST_PERSON, validRecord));
     }
 }
