@@ -62,7 +62,6 @@ public class MainApp extends Application {
         storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
-        new DuplicatePhoneTagger().tagPhoneDuplicates(model);
 
         logic = new LogicManager(model, storage);
 
