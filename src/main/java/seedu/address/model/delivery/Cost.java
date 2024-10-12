@@ -21,6 +21,6 @@ public class Cost {
 
     @Override
     public String toString() {
-        return value;
+        return "Cost: " + value;
     }
 }

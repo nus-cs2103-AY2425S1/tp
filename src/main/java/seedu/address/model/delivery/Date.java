@@ -26,4 +26,9 @@ public class Date {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "Date Ordered: " + value;
+    }
 }
