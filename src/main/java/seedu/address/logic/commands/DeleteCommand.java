@@ -18,86 +18,56 @@ public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
-
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
-
-    private final Index targetIndex;
-
-    public DeleteCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
-    }
-
-    @Override
-    public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
-
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof DeleteCommand)) {
-            return false;
-        }
-
-        DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return targetIndex.equals(otherDeleteCommand.targetIndex);
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("targetIndex", targetIndex)
-                .toString();
-    }
-    /*  Skeleton for deleting multiple index at once
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
                 + ": Deletes the people identified by the index numbers used in the displayed person list.\n"
                 + "Parameters: INDEXES (must be a positive integer)\n"
                 + "Example: " + COMMAND_WORD + " 1, 2";
 
-
-    private final Index[] targetIndexes;
     public static final String MESSAGE_DELETE_PEOPLE_SUCCESS = "Deleted People: %s";
+    private final Index[] targetIndexes;
 
-    public DeleteCommand(Index... targetIndexes) {
+
+    /**
+     * Takes in the array of indexes to be used for deletion.
+     *
+     * @param targetIndexes array of Index.
+     */
+    public DeleteCommand(Index[] targetIndexes) {
         this.targetIndexes = targetIndexes;
+
     }
 
+    /**
+     * Executes the Delete command with multiple >= 1 index.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return Message to user that deletions were successful.
+     * @throws CommandException If any of the index given falls out of range.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
         String s = "";
-        for (int i = 0; i < targetIndexes.size(); i++) {
+        Person[] personsToDelete = new Person[targetIndexes.length];
+        for (int i = targetIndexes.length - 1; i >= 0; i--) {
             if (targetIndexes[i].getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
-            Person personsToDelete= lastShownList.get(targetIndexes[i].getZeroBased());
-            model.deletePerson(personToDelete);
-            s += Messages.format(personToDelete);
+            personsToDelete[targetIndexes.length - i - 1] = lastShownList.get(targetIndexes[i].getZeroBased());
         }
+
+        for (int j = 0; j < personsToDelete.length; j++) {
+            model.deletePerson(personsToDelete[j]);
+            s += Messages.format(personsToDelete[j]);
+            s += "\n";
+        }
+
         return new CommandResult(String.format(MESSAGE_DELETE_PEOPLE_SUCCESS, s));
     }
 
-    CONTINUE FROM HERE
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -110,17 +80,17 @@ public class DeleteCommand extends Command {
         }
 
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return targetIndex.equals(otherDeleteCommand.targetIndex);
+        return targetIndexes.equals(otherDeleteCommand.targetIndexes);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("targetIndex", targetIndex)
+                .add("targetIndex", targetIndexes)
                 .toString();
     }
 
- */
+
 
 
 }
