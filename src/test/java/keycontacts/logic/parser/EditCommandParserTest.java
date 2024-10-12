@@ -85,7 +85,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_STUDENT;
-        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB +ADDRESS_DESC_AMY + NAME_DESC_AMY;
+        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + ADDRESS_DESC_AMY + NAME_DESC_AMY;
 
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withAddress(VALID_ADDRESS_AMY).build();

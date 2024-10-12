@@ -1,11 +1,8 @@
 package keycontacts.model.student;
 
 import static keycontacts.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static keycontacts.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static keycontacts.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static keycontacts.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static keycontacts.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static keycontacts.testutil.Assert.assertThrows;
 import static keycontacts.testutil.TypicalStudents.ALICE;
 import static keycontacts.testutil.TypicalStudents.BOB;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -18,11 +15,12 @@ import keycontacts.testutil.StudentBuilder;
 
 public class StudentTest {
 
-    @Test
-    public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Student student = new StudentBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> student.getTags().remove(0));
-    }
+    // TODO Refactor this to be testing on student.getPieces() instead
+    //    @Test
+    //    public void asObservableList_modifyList_throwsUnsupportedOperationException() {
+    //        Student student = new StudentBuilder().build();
+    //        assertThrows(UnsupportedOperationException.class, () -> student.getTags().remove(0));
+    //    }
 
     @Test
     public void isSameStudent() {
