@@ -50,10 +50,12 @@ public class LogicManagerTest {
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonClientBookStorage clientBookStorage =
                 new JsonClientBookStorage(temporaryFolder.resolve("clientbook.json"));
-        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
+        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder
+                .resolve("userPrefs.json"));
         JsonPropertyBookStorage propertyBookStorage =
                 new JsonPropertyBookStorage(temporaryFolder.resolve("propertyBook.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, propertyBookStorage, clientBookStorage);
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, propertyBookStorage,
+                clientBookStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -183,7 +185,8 @@ public class LogicManagerTest {
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
         JsonPropertyBookStorage propertyBookStorage =
                 new JsonPropertyBookStorage(temporaryFolder.resolve("propertyBook.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, propertyBookStorage, clientBookStorage);
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, propertyBookStorage,
+                clientBookStorage);
 
         logic = new LogicManager(model, storage);
 

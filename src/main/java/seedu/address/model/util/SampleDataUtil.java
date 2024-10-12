@@ -93,8 +93,8 @@ public class SampleDataUtil {
 
     public static Property[] getSampleProperty() {
         return new Property[] {
-                new Property(new PostalCode("123456"), new Unit("11-11")),
-                new Property(new PostalCode("123457"), new Unit("00-00")),
+            new Property(new PostalCode("123456"), new Unit("11-11")),
+            new Property(new PostalCode("123457"), new Unit("00-00")),
         };
     }
 
