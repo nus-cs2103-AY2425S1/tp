@@ -197,11 +197,11 @@ public class EditCommand extends Command {
         }
 
         public void setDetail(Detail detail) {
-            this.detail = detail;
+            this.detail = (detail != null) ? detail : null;
         }
 
         public Optional<Detail> getDetail() {
-            return Optional.ofNullable(detail);
+            return (detail != null) ? Optional.ofNullable(detail) : Optional.empty();
         }
 
         /**

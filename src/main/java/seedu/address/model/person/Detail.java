@@ -20,6 +20,10 @@ public class Detail {
         this.value = detail;
     }
 
+    public Detail() {
+        this.value = "";
+    }
+
     @Override
     public String toString() {
         return value;

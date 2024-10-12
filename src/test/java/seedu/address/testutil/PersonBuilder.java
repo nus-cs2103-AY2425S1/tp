@@ -19,11 +19,10 @@ public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_EMAIL = "amy@gmail.com";
+    public static final String DEFAULT_EMAIL = "amy@example.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_GENDER = "F";
     public static final String DEFAULT_AGE = "20";
-    public static final String DEFAULT_DETAIL = "detail";
 
     private Name name;
     private Email email;
@@ -41,7 +40,6 @@ public class PersonBuilder {
         gender = new Gender(DEFAULT_GENDER);
         age = new Age(DEFAULT_AGE);
         tags = new HashSet<>();
-        detail = new Detail(DEFAULT_DETAIL);
     }
 
     /**
@@ -100,7 +98,7 @@ public class PersonBuilder {
      * Sets the {@code Detail} of the {@code Person} that we are building.
      */
     public PersonBuilder withDetail(String detail) {
-        this.detail = new Detail(detail);
+        this.detail = detail != null ? new Detail(detail) : null;
         return this;
     }
 
