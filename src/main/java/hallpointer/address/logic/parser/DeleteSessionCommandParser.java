@@ -21,7 +21,8 @@ public class DeleteSessionCommandParser implements Parser<DeleteSessionCommand> 
             Index index = ParserUtil.parseIndex(args);
             return new DeleteSessionCommand(index);
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteSessionCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteSessionCommand.MESSAGE_USAGE), pe);
         }
     }
 

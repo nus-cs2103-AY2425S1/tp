@@ -10,6 +10,9 @@ import hallpointer.address.logic.commands.exceptions.CommandException;
 import hallpointer.address.model.Model;
 import hallpointer.address.model.session.Session;
 
+/**
+ * Adds a session to the address book.
+ */
 public class AddSessionCommand extends Command {
     public static final String COMMAND_WORD = "add_session";
 
@@ -44,7 +47,8 @@ public class AddSessionCommand extends Command {
         }
 
         model.addSession(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getSessionName(), toAdd.getDate(), toAdd.getPoints()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getSessionName(),
+                toAdd.getDate(), toAdd.getPoints()));
     }
 
     @Override
