@@ -4,13 +4,13 @@
 }
 
 .error-result {
-    -fx-background-color: red !important;
-    -fx-control-inner-background: red;
+    -fx-background-color: #f6c3c3 !important;
+    -fx-control-inner-background: #f6c3c3;
 }
 
 .success-result {
-    -fx-background-color: green !important;
-    -fx-control-inner-background: green;
+    -fx-background-color: #c8f6c3 !important;
+    -fx-control-inner-background: #c8f6c3;
 }
 
 .list-cell:empty {
