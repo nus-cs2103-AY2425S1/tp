@@ -84,6 +84,7 @@ public class DeleteCommandTest {
     public void equals() {
         DeleteCommand deleteFirstCommand = new DeleteCommand(ItemTypeToDelete.VENDOR, INDEX_FIRST_VENDOR);
         DeleteCommand deleteSecondCommand = new DeleteCommand(ItemTypeToDelete.VENDOR, INDEX_SECOND_VENDOR);
+        DeleteCommand deleteThirdCommand = new DeleteCommand(null, INDEX_FIRST_VENDOR);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
@@ -100,6 +101,9 @@ public class DeleteCommandTest {
 
         // different vendor -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
+
+        // different item deletion type -> returns false
+        assertFalse(deleteFirstCommand.equals(deleteThirdCommand));
     }
 
     @Test
