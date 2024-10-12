@@ -21,13 +21,14 @@ checkstyle {
 }
 
 test {
-    useJUnitPlatform()
-    finalizedBy jacocoTestReport
-
-    // Exclude GUI tests on Linux
-    if (System.getProperty("os.name").toLowerCase().contains("linux")) {
-        excludeTags 'gui'
+    useJUnitPlatform {
+        // Exclude GUI tests on Linux
+        if (System.getProperty("os.name").toLowerCase().contains("linux")) {
+            excludeTags 'gui'
+        }
     }
+
+    finalizedBy jacocoTestReport
 
     // Add the necessary JVM arguments to open and export JavaFX modules for TestFX
     jvmArgs = [
