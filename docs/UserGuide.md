@@ -4,7 +4,30 @@
   pageNav: 3
 ---
 
-<h1 style="color: #964B00;">MATER User Guide</h1>
+<style>
+  .highlight-feature {
+    padding: 5px 10px;
+    margin-left: 5px;
+    border-radius: 15px;
+    background-color: #d3d3d3;
+    color: #000000;
+  }
+
+  .highlight-feature:hover {
+    background-color: #a9a9a9;
+    color: #000000;
+  }
+
+  .icon {
+    margin-right: 7px;
+  }
+
+</style>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+<h1 style="color: #964B00;"> <i class="fas fa-book icon"></i> MATER User Guide </h1>
 
 MATER is a **desktop app for managing clients and their cars, optimized for use via a Graphical User Interface (GUI).** It is designed for workshops that need to keep track of their clients and their cars. If you can type fast, MATER can get your client management tasks done faster than traditional GUI apps.
 
@@ -13,7 +36,7 @@ MATER is a **desktop app for managing clients and their cars, optimized for use 
 
 --------------------------------------------------------------------------------------------------------------------
 
-<h2 style="color: #28B463;">Quick start</h2>
+<h2 style="color: #28B463;"> <i class="fas fa-rocket icon"></i> Quick start</h2>
 
 1. Ensure you have Java 17 or above installed on your Computer.
 
@@ -43,7 +66,7 @@ MATER is a **desktop app for managing clients and their cars, optimized for use 
 
 --------------------------------------------------------------------------------------------------------------------
 
-<h2 style="color: #AF7AC5;">Glossary</h2>
+<h2 style="color: #AF7AC5;"> <i class="fas fa-list-alt icon"></i> Glossary</h2>
 
 - **Client:** A person who uses the services of the workshop. In MATER, a client is someone whose personal details are stored and managed.
 - **VRN (Vehicle Registration Number):** The unique identifier assigned to a vehicle upon registration. In Singapore, it typically follows the format `XXX 1234 C`, where:
@@ -71,7 +94,7 @@ MATER is a **desktop app for managing clients and their cars, optimized for use 
 
 --------------------------------------------------------------------------------------------------------------------
 
-<h2 id="features" style="color: #000000;">Features</h2>
+<h2 id="features" style="color: #000000;"> <i class="fas fa-cogs icon"></i> Features</h2>
 
 <box type="info" seamless>
 
@@ -92,7 +115,7 @@ MATER is a **desktop app for managing clients and their cars, optimized for use 
 
 </box>
 
-<h3 style="color: #1877F2;">Viewing Help: help</h3>
+<h3 style="color: #1877F2;">Viewing Help: <span class="highlight-feature ">help</span></h3>
 
 Shows a message explaining how to access the help page.
 
@@ -106,7 +129,7 @@ Shows a message explaining how to access the help page.
 
 ---
 
-<h3 id="adding-a-client-add-client" style="color: #1877F2;">Adding a Client: add-client</h3>
+<h3 id="adding-a-client-add-client" style="color: #1877F2;">Adding a Client: <span class="highlight-feature">add-client</span></h3>
 
 Adds a client to MATER.
 
@@ -155,7 +178,7 @@ add-client n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [vrn/CAR_VRN] [vin/CAR_VIN] [
 
 ---
 
-<h3 style="color: #1877F2;">Listing All Clients: list</h3>
+<h3 style="color: #1877F2;">Listing All Clients: <span class="highlight-feature">list</span></h3>
 
 Shows a list of all clients in MATER.
 
@@ -167,7 +190,7 @@ Shows a list of all clients in MATER.
 
 ---
 
-<h3 style="color: #1877F2;">Editing a Client: edit-client</h3>
+<h3 style="color: #1877F2;">Editing a Client: <span class="highlight-feature">edit-client</span></h3>
 
 Edits an existing client in MATER.
 
@@ -208,7 +231,7 @@ edit-client INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [vrn/CAR_VRN] [vin/CA
 
 ---
 
-<h3 style="color: #1877F2;">Locating Clients by Name: find</h3>
+<h3 style="color: #1877F2;">Locating Clients by Name or Car VRN: <span class="highlight-feature">find</span></h3>
 
 Finds clients whose names/ car VRN contain any of the given keywords.
 
@@ -240,11 +263,40 @@ find KEYWORD [MORE_KEYWORDS]
 - `find SJH 9514 P`
   Returns client with car VRN `SJH 9514 P`.
 
+<!-- TODO CHANGE IMAGE -->
 ![Result for 'find alex david'](images/findAlexDavidResult.png)
 
 ---
 
-<h3 style="color: #1877F2;">Deleting a Client: delete-client</h3>
+<h3 style="color: #1877F2;">Getting Client's details: <span class="highlight-feature">view-client</span></h3>
+
+View Client's details in MATER.
+
+**Format:**
+
+```shell
+view-client INDEX
+```
+
+**Parameters:**
+
+- `INDEX`: The index of the client in the displayed client list (must be a positive integer).
+
+**Requirements:**
+
+- The `INDEX` must be a positive integer (1, 2, 3, ...).
+
+**Examples:**
+
+- `view-client 1`
+  Returns client details of the 1st client in the MATER.
+
+<!-- TODO CHANGE IMAGE -->
+
+
+---
+
+<h3 style="color: #1877F2;">Deleting a Client: <span class="highlight-feature">delete-client</span></h3>
 
 Deletes the specified client from MATER.
 
@@ -274,7 +326,7 @@ delete-client INDEX
 
 ---
 
-<h3 style="color: #1877F2;">Clearing All Entries: clear</h3>
+<h3 style="color: #1877F2;">Clearing All Entries: <span class="highlight-feature">clear</span></h3>
 
 Clears all entries from MATER.
 
@@ -296,7 +348,7 @@ clear
 
 ---
 
-<h3 style="color: #1877F2;">Exiting the Program: exit</h3>
+<h3 style="color: #1877F2;">Exiting the Program: <span class="highlight-feature">exit</span></h3>
 
 Closes the MATER application.
 
@@ -312,13 +364,13 @@ exit
 
 ---
 
-<h3 style="color: #E67E22;">Saving the Data</h3>
+<h3 style="color: #1877F2;">Saving the Data</h3>
 
 MATER data are saved automatically in the hard disk after any command that changes the data. There is no need to save manually.
 
 ---
 
-<h3 style="color: #E67E22;">Editing the Data File</h3>
+<h3 style="color: #1877F2;">Editing the Data File</h3>
 
 MATER data are saved automatically as a JSON file at `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing this data file.
 
@@ -333,7 +385,7 @@ MATER data are saved automatically as a JSON file at `[JAR file location]/data/a
 
 --------------------------------------------------------------------------------------------------------------------
 
-<h2 style="color: #8E44AD;">FAQ</h2>
+<h2 style="color: #8E44AD;"> <i class="fas fa-question-circle icon"></i>  FAQ</h2>
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous MATER home folder.
@@ -346,14 +398,14 @@ MATER data are saved automatically as a JSON file at `[JAR file location]/data/a
 
 --------------------------------------------------------------------------------------------------------------------
 
-<h2 style="color: #C0392B;">Known issues</h2>
+<h2 style="color: #C0392B;"> <i class="fas fa-exclamation-triangle icon"></i> Known issues</h2>
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
 
-<h2 style="color: #2980B9;">Command Summary</h2>
+<h2 style="color: #2980B9;"> <i class="fas fa-terminal icon"></i> Command Summary</h2>
 
 Action             | Format & Examples
 -------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------
