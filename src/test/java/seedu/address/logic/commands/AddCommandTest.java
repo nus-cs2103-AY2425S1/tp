@@ -167,6 +167,9 @@ public class AddCommandTest {
         @Override
         public void deleteMeetUp(Person person) {
             return;
+          
+        public void updateFilteredMeetUpList(Predicate<MeetUp> meetUp) {
+            // TODO
         }
     }
 

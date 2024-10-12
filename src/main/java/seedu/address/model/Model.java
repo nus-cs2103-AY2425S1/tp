@@ -96,4 +96,9 @@ public interface Model {
      * Deletes the given schedule in the schedule list
      */
     void deleteMeetUp(Person target);
+
+     * Updates the filter of the meetup list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredMeetUpList(Predicate<MeetUp> predicate);
 }
