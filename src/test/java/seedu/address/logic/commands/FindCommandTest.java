@@ -79,7 +79,7 @@ public class FindCommandTest {
     @Test
     public void execute_singleKeyword_carVrnFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
-        NameContainsKeywordsPredicate predicate = preparePredicate("SH 8942 L");
+        NameContainsKeywordsPredicate predicate = preparePredicate("SH8942L");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -89,7 +89,7 @@ public class FindCommandTest {
     @Test
     public void execute_multipleKeyword_carVrnFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
-        NameContainsKeywordsPredicate predicate = preparePredicate("SJH 9514 P SH 8942 L");
+        NameContainsKeywordsPredicate predicate = preparePredicate("SJH9514P SH8942L");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -99,11 +99,21 @@ public class FindCommandTest {
     @Test
     public void execute_multipleKeywords_carVrnandPersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
-        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz SH 8942 L");
+        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz SH8942L");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, BENSON_WITH_CAR), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_partialVrn_noPersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        NameContainsKeywordsPredicate predicate = preparePredicate("SHG");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
 
     @Test
