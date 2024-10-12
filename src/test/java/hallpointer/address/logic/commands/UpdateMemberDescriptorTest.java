@@ -12,15 +12,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import hallpointer.address.logic.commands.EditMemberCommand.EditMemberDescriptor;
-import hallpointer.address.testutil.EditMemberDescriptorBuilder;
+import hallpointer.address.logic.commands.UpdateMemberCommand.UpdateMemberDescriptor;
+import hallpointer.address.testutil.UpdateMemberDescriptorBuilder;
 
-public class EditMemberDescriptorTest {
+public class UpdateMemberDescriptorTest {
 
     @Test
     public void equals() {
         // same values -> returns true
-        EditMemberDescriptor descriptorWithSameValues = new EditMemberDescriptor(DESC_AMY);
+        UpdateMemberDescriptor descriptorWithSameValues = new UpdateMemberDescriptor(DESC_AMY);
         assertTrue(DESC_AMY.equals(descriptorWithSameValues));
 
         // same object -> returns true
@@ -36,30 +36,30 @@ public class EditMemberDescriptorTest {
         assertFalse(DESC_AMY.equals(DESC_BOB));
 
         // different name -> returns false
-        EditMemberDescriptor editedAmy = new EditMemberDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
+        UpdateMemberDescriptor editedAmy = new UpdateMemberDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different telegram -> returns false
-        editedAmy = new EditMemberDescriptorBuilder(DESC_AMY).withTelegram(VALID_TELEGRAM_BOB).build();
+        editedAmy = new UpdateMemberDescriptorBuilder(DESC_AMY).withTelegram(VALID_TELEGRAM_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different address -> returns false
-        editedAmy = new EditMemberDescriptorBuilder(DESC_AMY).withRoom(VALID_ROOM_BOB).build();
+        editedAmy = new UpdateMemberDescriptorBuilder(DESC_AMY).withRoom(VALID_ROOM_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false
-        editedAmy = new EditMemberDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
+        editedAmy = new UpdateMemberDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 
     @Test
     public void toStringMethod() {
-        EditMemberDescriptor editMemberDescriptor = new EditMemberDescriptor();
-        String expected = EditMemberDescriptor.class.getCanonicalName() + "{name="
-                + editMemberDescriptor.getName().orElse(null) + ", telegram="
-                + editMemberDescriptor.getTelegram().orElse(null) + ", room="
-                + editMemberDescriptor.getRoom().orElse(null) + ", tags="
-                + editMemberDescriptor.getTags().orElse(null) + "}";
-        assertEquals(expected, editMemberDescriptor.toString());
+        UpdateMemberDescriptor UpdateMemberDescriptor = new UpdateMemberDescriptor();
+        String expected = UpdateMemberDescriptor.class.getCanonicalName() + "{name="
+                + UpdateMemberDescriptor.getName().orElse(null) + ", telegram="
+                + UpdateMemberDescriptor.getTelegram().orElse(null) + ", room="
+                + UpdateMemberDescriptor.getRoom().orElse(null) + ", tags="
+                + UpdateMemberDescriptor.getTags().orElse(null) + "}";
+        assertEquals(expected, UpdateMemberDescriptor.toString());
     }
 }

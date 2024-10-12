@@ -18,7 +18,7 @@ import hallpointer.address.model.AddressBook;
 import hallpointer.address.model.Model;
 import hallpointer.address.model.member.Member;
 import hallpointer.address.model.member.NameContainsKeywordsPredicate;
-import hallpointer.address.testutil.EditMemberDescriptorBuilder;
+import hallpointer.address.testutil.UpdateMemberDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -52,14 +52,14 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final UpdateMemberCommand.EditMemberDescriptor DESC_AMY;
-    public static final UpdateMemberCommand.EditMemberDescriptor DESC_BOB;
+    public static final UpdateMemberCommand.UpdateMemberDescriptor DESC_AMY;
+    public static final UpdateMemberCommand.UpdateMemberDescriptor DESC_BOB;
 
     static {
-        DESC_AMY = new EditMemberDescriptorBuilder().withName(VALID_NAME_AMY)
+        DESC_AMY = new UpdateMemberDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withTelegram(VALID_TELEGRAM_AMY).withRoom(VALID_ROOM_AMY)
                 .withTags(VALID_TAG_FRIEND).build();
-        DESC_BOB = new EditMemberDescriptorBuilder().withName(VALID_NAME_BOB)
+        DESC_BOB = new UpdateMemberDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withTelegram(VALID_TELEGRAM_BOB).withRoom(VALID_ROOM_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
