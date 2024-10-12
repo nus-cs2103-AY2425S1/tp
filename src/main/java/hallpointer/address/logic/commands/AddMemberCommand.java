@@ -7,6 +7,7 @@ import static hallpointer.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static java.util.Objects.requireNonNull;
 
 import hallpointer.address.commons.util.ToStringBuilder;
+import hallpointer.address.logic.Messages;
 import hallpointer.address.logic.commands.exceptions.CommandException;
 import hallpointer.address.model.Model;
 import hallpointer.address.model.member.Member;
@@ -58,9 +59,7 @@ public class AddMemberCommand extends Command {
         return new CommandResult(
             String.format(
                 MESSAGE_SUCCESS,
-                toAdd.getName().fullName,
-                toAdd.getRoom().value,
-                toAdd.getTelegram().value
+                Messages.format(toAdd)
             )
         );
     }

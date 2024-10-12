@@ -19,11 +19,6 @@ public class ListMembersCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-
-        if (model.getFilteredMemberList().isEmpty()) {
-            return new CommandResult(MESSAGE_NO_MEMBERS);
-        }
-
         model.updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
