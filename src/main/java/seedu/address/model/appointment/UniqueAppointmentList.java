@@ -1,10 +1,10 @@
 package seedu.address.model.appointment;
 
-import java.util.Iterator;
-import java.util.List;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.Iterator;
+import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,10 +14,10 @@ import seedu.address.model.appointment.exceptions.DuplicateAppointmentException;
 
 /**
  * A list of appointments that enforces uniqueness between its elements and does not allow nulls.
- * An appointment is considered unique by comparing using {@code Appointment#isSameAppointment(Appointment)}. 
- * As such, adding and updating of appointments uses Appointment#isSameAppointment(Appointment) for equality so as 
- * to ensure that the appointment being added or updated isunique in terms of identity in the UniqueAppointmentList. 
- * However, the removal of an appointment uses Appointment#equals(Object) so as to ensure that the appointment with 
+ * An appointment is considered unique by comparing using {@code Appointment#isSameAppointment(Appointment)}.
+ * As such, adding and updating of appointments uses Appointment#isSameAppointment(Appointment) for equality so as
+ * to ensure that the appointment being added or updated isunique in terms of identity in the UniqueAppointmentList.
+ * However, the removal of an appointment uses Appointment#equals(Object) so as to ensure that the appointment with
  * exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
@@ -53,7 +53,8 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
     /**
      * Replaces the appointment {@code target} in the list with {@code editedAppointment}.
      * {@code target} must exist in the list.
-     * The appointmnet identity of {@code editedAppointment} must not be the same as another existing appointment in the list.
+     * The appointmnet identity of {@code editedAppointment} must not be the same as another
+     * existing appointment in the list.
      */
     public void setAppointment(Appointment target, Appointment editedAppointment) {
         requireAllNonNull(target, editedAppointment);

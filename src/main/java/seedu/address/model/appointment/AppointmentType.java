@@ -9,7 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class AppointmentType {
 
-    public static final String MESSAGE_CONSTRAINTS = "Appointment types can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Appointment types can take any values, and it should not be blank";
 
     /*
      * The first character of the appointment type must not be a whitespace,
