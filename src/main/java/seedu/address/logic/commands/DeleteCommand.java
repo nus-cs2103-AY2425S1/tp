@@ -42,7 +42,8 @@ public class DeleteCommand extends Command {
                     return new CommandException(Messages.MESSAGE_PERSON_NRIC_NOT_FOUND);
                 });
         model.deletePerson(personToDelete);
-        logger.info("Successfully deleted patient with the parsed NRIC");
+        logger.info("Successfully deleted patient with the parsed NRIC: " + personToDelete.getNric());
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 
