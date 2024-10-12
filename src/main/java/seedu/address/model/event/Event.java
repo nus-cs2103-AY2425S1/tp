@@ -3,10 +3,8 @@ package seedu.address.model.event;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Person;
 
 /**
  * Represents an Event in the address book.
@@ -17,7 +15,6 @@ public class Event {
     public final EventName eventName;
     public final EventDescription eventDescription;
     public final EventDuration eventDuration;
-    public final EventParticipants eventParticipants;
 
     /**
      * Constructs an {@code Event}.
@@ -33,7 +30,6 @@ public class Event {
         this.eventName = eventName;
         this.eventDescription = eventDescription;
         this.eventDuration = eventDuration;
-        this.eventParticipants = new EventParticipants();
     }
 
     @Override
@@ -84,10 +80,6 @@ public class Event {
 
     public LocalDate getEventEndDate() {
         return eventDuration.getEndDate();
-    }
-
-    public List<Person> getEventParticipants() {
-        return eventParticipants.getParticipants();
     }
 
     /**
