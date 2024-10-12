@@ -15,6 +15,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.client.Client;
 import seedu.address.model.person.Person;
+import seedu.address.model.property.Property;
 import seedu.address.storage.JsonClientBookStorage;
 
 /**
@@ -25,6 +26,7 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
+    private final PropertyBook propertyBook;
     private final ClientBook clientBook;
     private final FilteredList<Person> filteredPersons;
 
@@ -36,13 +38,15 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, ReadOnlyClientBook clientBook) {
-        requireAllNonNull(addressBook, userPrefs, clientBook);
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs,
+                        ReadOnlyPropertyBook propertyBook, ReadOnlyClientBook clientBook) {
+        requireAllNonNull(addressBook, userPrefs, propertyBook, clientBook);
 
-        logger.fine("Initializing with address book: "
-                + addressBook + " and user prefs " + userPrefs + " and client book " + clientBook);
+        logger.fine("Initializing with address book: " + addressBook + " and user prefs "
+                + userPrefs + " and property prefs " + propertyBook + " and client book " + clientBook);
 
         this.addressBook = new AddressBook(addressBook);
+        this.propertyBook = new PropertyBook(propertyBook);
         this.userPrefs = new UserPrefs(userPrefs);
         this.clientBook = new ClientBook(clientBook);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
@@ -50,7 +54,7 @@ public class ModelManager implements Model {
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs(), new ClientBook());
+        this(new AddressBook(), new UserPrefs(), new PropertyBook(), new ClientBook());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -100,43 +104,34 @@ public class ModelManager implements Model {
     }
 
     //=========== AddressBook ================================================================================
-
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
         this.addressBook.resetData(addressBook);
     }
-
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return addressBook;
     }
-
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return addressBook.hasPerson(person);
     }
-
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
-
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
-
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
     }
-
     //=========== Filtered Person List Accessors =============================================================
-
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
      * {@code versionedAddressBook}
@@ -228,4 +223,31 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
 
+    //=========== Property =============================================================
+    @Override
+    public Path getPropertyBookFilePath() {
+        return userPrefs.getPropertyBookFilePath();
+    }
+
+    @Override
+    public void setPropertyBookFilePath(Path propertyBookFilePath) {
+        requireNonNull(propertyBookFilePath);
+        userPrefs.setPropertyBookFilePath(propertyBookFilePath);
+    }
+
+    @Override
+    public void addProperty(Property property) {
+        propertyBook.addProperty(property);
+    }
+
+    @Override
+    public boolean hasProperty(Property property) {
+        requireNonNull(property);
+        return propertyBook.hasProperty(property);
+    }
+
+    @Override
+    public ReadOnlyPropertyBook getPropertyBook() {
+        return propertyBook;
+    }
 }

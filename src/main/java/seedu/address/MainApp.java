@@ -19,6 +19,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.ClientBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.PropertyBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyClientBook;
 import seedu.address.model.ReadOnlyUserPrefs;
@@ -111,7 +112,7 @@ public class MainApp extends Application {
             initialClientData = new ClientBook();
         }
 
-        return new ModelManager(initialData, userPrefs, initialClientData);
+        return new ModelManager(initialData, userPrefs, new PropertyBook(), initialClientData);
     }
 
     private void initLogging(Config config) {
