@@ -30,13 +30,14 @@ public class Person {
     private final Priority priority;
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Appointment> appointments = new HashSet<>();
+    private final MedCon medCon;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Nric nric, Address address, DateOfBirth dateOfBirth,
-                  Gender gender, Set<Tag> tags, Priority priority, Set<Appointment> appointments) {
-        requireAllNonNull(name, phone, email, nric, address, dateOfBirth, gender, tags, priority, appointments);
+                  Gender gender, Set<Tag> tags, Priority priority, Set<Appointment> appointments, MedCon medCon) {
+        requireAllNonNull(name, phone, email, nric, address, dateOfBirth, gender, tags, priority, appointments, medCon);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -47,6 +48,7 @@ public class Person {
         this.tags.addAll(tags);
         this.priority = priority;
         this.appointments.addAll(appointments);
+        this.medCon = medCon;
     }
 
     public Priority getPriority() {
@@ -96,6 +98,10 @@ public class Person {
         return Collections.unmodifiableSet(appointments);
     }
 
+    public MedCon getMedCon() {
+        return medCon;
+    }
+
     /**
      * Returns true if both persons have the same Nric.
      * This defines a weaker notion of equality between two persons.
@@ -133,14 +139,16 @@ public class Person {
                 && gender.equals(otherPerson.gender)
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
-                && priority.equals(otherPerson.priority)
-                && appointments.equals(otherPerson.appointments);
+                && appointments.equals(otherPerson.appointments)
+                && medCon.equals(otherPerson.medCon)
+                && priority.equals(otherPerson.priority);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, nric, dateOfBirth, gender, address, tags, priority, appointments);
+        return Objects.hash(name, phone, email, nric, dateOfBirth, gender, address, tags, priority, appointments,
+                medCon);
     }
 
     @Override
@@ -156,6 +164,7 @@ public class Person {
                 .add("tags", tags)
                 .add("priority", priority)
                 .add("appointments", appointments)
+                .add("medical conditions", medCon)
                 .toString();
     }
 
