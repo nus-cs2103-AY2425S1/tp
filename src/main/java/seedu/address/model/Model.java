@@ -16,6 +16,7 @@ public interface Model {
      * {@code Predicate} that always evaluate to true
      */
     Predicate<Student> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Group> PREDICATE_SHOW_ALL_GROUPS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -117,4 +118,12 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Student> predicate);
+
+    void updateFilteredGroupList(Predicate<Group> predicate);
+
+    void setStateStudents();
+
+    void setStateGroups();
+
+    State getState();
 }
