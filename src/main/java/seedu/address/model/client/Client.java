@@ -36,4 +36,6 @@ public abstract class Client {
     }
 
     public abstract boolean isSameClient(Client otherClient);
+    public abstract boolean isBuyer();
+    public abstract boolean isSeller();
 }

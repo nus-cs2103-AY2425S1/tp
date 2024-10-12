@@ -33,6 +33,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Buyer;
+import seedu.address.model.client.Phone;
 import seedu.address.model.client.Seller;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -109,7 +110,7 @@ public class AddressBookParserTest {
         final String phoneNumber = "12345678";
         DeleteBuyerCommand command = (DeleteBuyerCommand) parser.parseCommand(
                 DeleteBuyerCommand.COMMAND_WORD + " " + PREFIX_PHONE + phoneNumber);
-        assertEquals(new DeleteBuyerCommand(phoneNumber), command);
+        assertEquals(new DeleteBuyerCommand(new Phone(phoneNumber)), command);
     }
 
     @Test
@@ -117,7 +118,7 @@ public class AddressBookParserTest {
         final String phoneNumber = "12345678";
         DeleteSellerCommand command = (DeleteSellerCommand) parser.parseCommand(
                 DeleteSellerCommand.COMMAND_WORD + " " + PREFIX_PHONE + phoneNumber);
-        assertEquals(new DeleteSellerCommand(phoneNumber), command);
+        assertEquals(new DeleteSellerCommand(new Phone(phoneNumber)), command);
     }
 
     @Test
