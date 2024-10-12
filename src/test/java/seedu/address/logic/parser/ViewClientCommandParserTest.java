@@ -22,13 +22,13 @@ public class ViewClientCommandParserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a", String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                                                        ViewClientCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "a", String.format(
+                Messages.MESSAGE_INVALID_COMMAND_FORMAT, ViewClientCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_emptyArgs_throwsParseException() {
-        assertParseFailure(parser, "", String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                                                        ViewClientCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "", String.format(
+                Messages.MESSAGE_INVALID_COMMAND_FORMAT, ViewClientCommand.MESSAGE_USAGE));
     }
 }
