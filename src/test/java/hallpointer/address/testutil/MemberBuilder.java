@@ -17,7 +17,7 @@ public class MemberBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_TELEGRAM = "beeHappy";
-    public static final String DEFAULT_ROOM = "5/12/207";
+    public static final String DEFAULT_ROOM = "5/2/207";
 
     private Name name;
     private Telegram telegram;
