@@ -22,6 +22,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.PropertyBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyClientBook;
+import seedu.address.model.ReadOnlyPropertyBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
@@ -29,7 +30,9 @@ import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.ClientBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonClientBookStorage;
+import seedu.address.storage.JsonPropertyBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.PropertyBookStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
@@ -63,8 +66,9 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
+        PropertyBookStorage propertyBookStorage = new JsonPropertyBookStorage(userPrefs.getPropertyBookFilePath());
         ClientBookStorage clientBookStorage = new JsonClientBookStorage(userPrefs.getClientBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage, clientBookStorage);
+        storage = new StorageManager(addressBookStorage, userPrefsStorage, propertyBookStorage, clientBookStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -82,8 +86,10 @@ public class MainApp extends Application {
         logger.info("Using data file : " + storage.getAddressBookFilePath());
 
         Optional<ReadOnlyAddressBook> addressBookOptional;
+        Optional<ReadOnlyPropertyBook> propertyBookOptional;
         Optional<ReadOnlyClientBook> clientBookOptional;
         ReadOnlyAddressBook initialData;
+        ReadOnlyPropertyBook initialPropertyData;
         ReadOnlyClientBook initialClientData;
         try {
             addressBookOptional = storage.readAddressBook();
@@ -96,6 +102,19 @@ public class MainApp extends Application {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");
             initialData = new AddressBook();
+        }
+
+        try {
+            propertyBookOptional = storage.readPropertyBook();
+            if (!propertyBookOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getAddressBookFilePath()
+                        + " populated with a sample AddressBook.");
+            }
+            initialPropertyData = propertyBookOptional.orElseGet(SampleDataUtil::getSamplePropertyBook);
+        } catch (DataLoadingException e) {
+            logger.warning("Data file at " + storage.getPropertyBookFilePath() + " could not be loaded."
+                    + " Will be starting with an empty PropertyBook.");
+            initialPropertyData = new PropertyBook();
         }
 
         try {
@@ -112,7 +131,7 @@ public class MainApp extends Application {
             initialClientData = new ClientBook();
         }
 
-        return new ModelManager(initialData, userPrefs, new PropertyBook(), initialClientData);
+        return new ModelManager(initialData, userPrefs, initialPropertyData, initialClientData);
     }
 
     private void initLogging(Config config) {

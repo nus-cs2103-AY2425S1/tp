@@ -1,0 +1,9 @@
+{
+  "properties": [ {
+    "postalCode": "654321",
+    "unit": "02-22"
+  }, {
+    "postalCode": "321456",
+    "unit": "11-12"
+  } ]
+}
