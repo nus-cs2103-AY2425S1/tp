@@ -11,6 +11,9 @@ import java.util.function.Predicate;
 public class MeetUpContainsDate implements Predicate<MeetUp> {
     private final Date date;
 
+    /**
+     * Date must be present and not null.
+     */
     public MeetUpContainsDate(Date date) {
         requireNonNull(date);
         this.date = date;
