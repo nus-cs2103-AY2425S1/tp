@@ -23,15 +23,15 @@ public class AddClaimCommand extends Command {
             + "by their client id. \n"
             + "Parameters: INDEX (must be a positive integer), "
             + " INSURANCE_PLAN_ID (must be a valid ID), "
-            + " Claim_ID (must be a string), "
-            + " Claim amount (must be a valid integer, remove the decimal point) \n"
+            + " Claim_ID (must be a valid ID), "
+            + " Claim amount (must be a valid integer, convert from dollars and cents to just cents) \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_INSURANCE_ID + " 0 "
             + PREFIX_CLAIM_ID + " B1234 "
             + PREFIX_CLAIM_AMOUNT + " 10000";
 
     public static final String MESSAGE_SUCCESS =
-            "New claim added to Client: %1$s, under Insurance plan %2$s, with claimId: %3$s, claimAmount: %4$d";
+            "New claim added to Client: %1$s, under Insurance plan %2$s, with Claim ID: %3$s, Claim Amount: %4$d";
 
     public final Index index;
     private final int insuranceId;
