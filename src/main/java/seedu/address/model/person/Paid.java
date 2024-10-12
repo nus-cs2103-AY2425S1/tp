@@ -19,7 +19,7 @@ public class Paid extends Fee {
     
     /**
      * Constructs a {@code Paid}
-     * with a default {@code valud} of 0.0
+     * with a default {@code value} of 0.0
      */
     public Paid() {
         super();

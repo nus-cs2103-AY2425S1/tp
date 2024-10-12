@@ -7,6 +7,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Paid;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Rate;
@@ -27,6 +28,7 @@ class JsonAdaptedPerson {
     private final String schedule;
     private final String subject;
     private final String rate;
+    private final String paid;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -34,8 +36,8 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-                             @JsonProperty("schedule") String schedule, @JsonProperty("subject") String subject,
-                             @JsonProperty("rate") String rate) {
+                    @JsonProperty("schedule") String schedule, @JsonProperty("subject") String subject,
+                            @JsonProperty("rate") String rate, @JsonProperty("paid") String paid) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -43,6 +45,7 @@ class JsonAdaptedPerson {
         this.schedule = schedule;
         this.subject = subject;
         this.rate = rate;
+        this.paid = paid;
     }
 
     /**
@@ -56,6 +59,7 @@ class JsonAdaptedPerson {
         schedule = source.getSchedule().value;
         subject = source.getSubject().toString();
         rate = source.getRate().toString();
+        paid = source.getPaid().toString();
     }
 
     /**
@@ -122,8 +126,16 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Rate.MESSAGE_CONSTRAINTS);
         }
         final Rate modelRate = new Rate(rate);
+        
+        if (paid == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Paid.class.getSimpleName()));
+        }
+        if (!Paid.isValidPaid(paid)) {
+            throw new IllegalValueException(Paid.MESSAGE_CONSTRAINTS);
+        }
+        final Paid modelPaid = new Paid(paid);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelSchedule, modelSubject, modelRate);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelSchedule, modelSubject, modelRate, modelPaid);
     }
 
 }

@@ -22,11 +22,12 @@ public class Person {
     private final Schedule schedule;
     private final Subject subject;
     private final Rate rate;
+    private final Paid paid;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Schedule schedule, Subject subject, Rate rate) {
+    public Person(Name name, Phone phone, Email email, Address address, Schedule schedule, Subject subject, Rate rate, Paid paid) {
         requireAllNonNull(name, phone, email, address);
         this.name = name;
         this.phone = phone;
@@ -35,6 +36,7 @@ public class Person {
         this.schedule = schedule;
         this.subject = subject;
         this.rate = rate;
+        this.paid = paid;
     }
 
     public Name getName() {
@@ -63,6 +65,19 @@ public class Person {
 
     public Rate getRate() {
         return rate;
+    }
+    
+    public Paid getPaid() {
+        return paid;
+    }
+    
+    /**
+     * Returns a new {@code Person} instance with the updated
+     * @param paid
+     * @return
+     */
+    public Person withPaid(Paid paid) {
+        return new Person(name, phone, email, address, schedule, subject, rate, paid);
     }
 
     /**
@@ -100,13 +115,14 @@ public class Person {
                 && address.equals(otherPerson.address)
                 && schedule.equals(otherPerson.schedule)
                 && subject.equals(otherPerson.subject)
-                && rate.equals(otherPerson.rate);
+                && rate.equals(otherPerson.rate)
+                && paid.equals(otherPerson.paid);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, schedule, subject, rate);
+        return Objects.hash(name, phone, email, address, schedule, subject, rate, paid);
     }
 
     @Override
@@ -119,6 +135,7 @@ public class Person {
                 .add("schedule", schedule)
                 .add("subject", subject)
                 .add("rate", rate)
+                .add("paid", paid)
                 .toString();
     }
 

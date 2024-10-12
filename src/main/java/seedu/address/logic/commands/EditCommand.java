@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
@@ -24,6 +25,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Paid;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Rate;
 import seedu.address.model.person.Schedule;
@@ -45,14 +47,16 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_SCHEDULE + "SCHEDULE] "
-            + "[" + PREFIX_SUBJECT + "SUBJECT]] "
-            + "[" + PREFIX_RATE + "RATE] "
+            + "[" + PREFIX_SUBJECT + "SUBJECT] "
+            + "[" + PREFIX_RATE + "FEE] "
+            + "[" + PREFIX_PAID + "PAID] "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com"
-            + PREFIX_SCHEDULE + "Saturday-1000-1200"
-            + PREFIX_SUBJECT + "Mathematics"
-            + PREFIX_RATE + "300";
+            + PREFIX_EMAIL + "johndoe@example.com "
+            + PREFIX_SCHEDULE + "Saturday-1000-1200 "
+            + PREFIX_SUBJECT + "Mathematics "
+            + PREFIX_RATE + "300 "
+            + PREFIX_PAID + "600 ";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -103,14 +107,15 @@ public class EditCommand extends Command {
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail()); Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Schedule updatedSchedule = editPersonDescriptor.getSchedule().orElse(personToEdit.getSchedule());
         Subject updatedSubject = editPersonDescriptor.getSubject().orElse(personToEdit.getSubject());
         Rate updatedRate = editPersonDescriptor.getRate().orElse(personToEdit.getRate());
+        Paid updatedPaid = editPersonDescriptor.getPaid().orElse(personToEdit.getPaid());
 
         return new Person(
-                updatedName, updatedPhone, updatedEmail, updatedAddress, updatedSchedule, updatedSubject, updatedRate
+                updatedName, updatedPhone, updatedEmail, updatedAddress, updatedSchedule, updatedSubject, updatedRate,
+                updatedPaid
         );
     }
 
@@ -150,6 +155,7 @@ public class EditCommand extends Command {
         private Schedule schedule;
         private Subject subject;
         private Rate rate;
+        private Paid paid;
 
         public EditPersonDescriptor() {}
 
@@ -164,13 +170,14 @@ public class EditCommand extends Command {
             setSchedule(toCopy.schedule);
             setSubject(toCopy.subject);
             setRate(toCopy.rate);
+            setPaid(toCopy.paid);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, schedule, rate);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, schedule, rate, paid);
         }
 
         public void setName(Name name) {
@@ -227,6 +234,14 @@ public class EditCommand extends Command {
         public Optional<Rate> getRate() {
             return Optional.ofNullable(rate);
         }
+        
+        public void setPaid(Paid paid) {
+            this.paid = paid;
+        }
+        
+        public Optional<Paid> getPaid() {
+            return Optional.ofNullable(paid);
+        }
 
 
         @Override
@@ -247,7 +262,8 @@ public class EditCommand extends Command {
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(schedule, otherEditPersonDescriptor.schedule)
                     && Objects.equals(subject, otherEditPersonDescriptor.subject)
-                    && Objects.equals(rate, otherEditPersonDescriptor.rate);
+                    && Objects.equals(rate, otherEditPersonDescriptor.rate)
+                    && Objects.equals(paid, otherEditPersonDescriptor.paid);
         }
 
         @Override
@@ -260,6 +276,7 @@ public class EditCommand extends Command {
                     .add("schedule", schedule)
                     .add("subject", subject)
                     .add("rate", rate)
+                    .add("paid", paid)
                     .toString();
         }
 
