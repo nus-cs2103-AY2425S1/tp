@@ -62,7 +62,7 @@ public class SampleDataUtil {
                 .collect(Collectors.toSet());
     }
 
-    public static Client[] getSampleProperties() {
+    public static Client[] getSampleClients() {
         return new Client[] {
             new Buyer(new seedu.address.model.client.Name("Alex Yeoh"),
                     new seedu.address.model.client.Phone("87438807"),
@@ -80,7 +80,7 @@ public class SampleDataUtil {
     }
     public static ReadOnlyClientBook getSampleClientBook() {
         ClientBook sampleAb = new ClientBook();
-        for (Client sampleClient : getSampleProperties()) {
+        for (Client sampleClient : getSampleClients()) {
             sampleAb.addClient(sampleClient);
         }
         return sampleAb;
