@@ -107,9 +107,13 @@ public class FindCommand extends Command {
             return new ToStringBuilder(this)
                     .add("predicate", predicate)
                     .toString();
-        } else {
+        } else if (predicateClassId != null) {
             return new ToStringBuilder(this)
                     .add("predicate", predicateClassId)
+                    .toString();
+        } else {
+            return new ToStringBuilder(this)
+                    .add("predicate", predicateNameAndClassId)
                     .toString();
         }
 
