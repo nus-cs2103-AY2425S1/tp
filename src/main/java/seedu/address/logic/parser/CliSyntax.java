@@ -13,7 +13,11 @@ public class CliSyntax {
     public static final Prefix PREFIX_PERSON_TYPE = new Prefix("u/");
     public static final Prefix PREFIX_INFO = new Prefix("i/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
+<<<<<<< HEAD
     public static final Prefix PREFIX_FROM = new Prefix("from/");
     public static final Prefix PREFIX_TO = new Prefix("to/");
+=======
+    public static final Prefix PREFIX_MEETUP_INFO = new Prefix("i/");
+>>>>>>> tP-EditDeleteMeetUp
 
 }
