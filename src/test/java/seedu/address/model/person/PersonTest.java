@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_OWED_AMOUNT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_RATE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHEDULE_BOB;
@@ -99,6 +100,12 @@ public class PersonTest {
         // different rate -> returns false
         editedAlice = new PersonBuilder(ALICE).withRate(VALID_RATE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
+        
+        // different schedule -> returns false
+        editedAlice = new PersonBuilder(ALICE).withSchedule(VALID_SCHEDULE_BOB).build();
+        
+        // different owedAmount -> returns false
+        editedAlice = new PersonBuilder(ALICE).withOwedAmount(VALID_OWED_AMOUNT_BOB).build();
 
     }
 
@@ -107,12 +114,14 @@ public class PersonTest {
         Person aliceCopy = new PersonBuilder(ALICE).build();
         assertEquals(ALICE.hashCode(), aliceCopy.hashCode());
     }
+    
     @Test
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress()
                 + ", schedule=" + ALICE.getSchedule() + ", subject=" + ALICE.getSubject()
-                + ", rate=" + ALICE.getRate() + "}";
+                + ", rate=" + ALICE.getRate()
+                + ", owedAmount=" + ALICE.getOwedAmount() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }
