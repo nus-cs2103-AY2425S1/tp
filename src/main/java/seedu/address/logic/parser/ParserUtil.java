@@ -9,7 +9,9 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Rate;
 import seedu.address.model.person.Schedule;
+import seedu.address.model.person.Subject;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -106,4 +108,33 @@ public class ParserUtil {
         return new Schedule(trimmedSchedule);
     }
 
+    /**
+     * Parses a {@code String subject} into an {@code Subject}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code subject} is invalid.
+     */
+    public static Subject parseSubject(String subject) throws ParseException {
+        requireNonNull(subject);
+        String trimmedSubject = subject.trim();
+        if (!Subject.isValidSubject(trimmedSubject)) {
+            throw new ParseException(Subject.MESSAGE_CONSTRAINTS);
+        }
+        return new Subject(trimmedSubject);
+    }
+
+    /**
+     * Parses a {@code String rate} into an {@code Rate}
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code rate} is invalid.
+     */
+    public static Rate parseRate(String rate) throws ParseException {
+        requireNonNull(rate);
+        String trimmedRate = rate.trim();
+        if (!Rate.isValidRate(trimmedRate)) {
+            throw new ParseException(Rate.MESSAGE_CONSTRAINTS);
+        }
+        return new Rate(trimmedRate);
+    }
 }
