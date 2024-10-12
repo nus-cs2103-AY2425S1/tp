@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static seedu.address.testutil.TypicalClients.getTypicalClientBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalProperty.getTypicalPropertyBook;
 
 import java.nio.file.Path;
 
@@ -14,8 +15,10 @@ import org.junit.jupiter.api.io.TempDir;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ClientBook;
+import seedu.address.model.PropertyBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyClientBook;
+import seedu.address.model.ReadOnlyPropertyBook;
 import seedu.address.model.UserPrefs;
 
 public class StorageManagerTest {
@@ -93,5 +96,25 @@ public class StorageManagerTest {
     @Test
     public void getClientBookFilePath() {
         assertNotNull(storageManager.getClientBookFilePath());
+    }
+
+    // ====================== PropertyBook Tests ======================
+
+    @Test
+    public void propertyBookReadSave() throws Exception {
+        /*
+         * This is an integration test that verifies the StorageManager is properly wired to the
+         * {@link JsonClientBookStorage} class. More extensive testing of ClientBook saving/reading is done in
+         * {@link JsonClientBookStorageTest}.
+         */
+        PropertyBook original = getTypicalPropertyBook();
+        storageManager.savePropertyBook(original);
+        ReadOnlyPropertyBook retrieved = storageManager.readPropertyBook().get();
+        assertEquals(original, new PropertyBook(retrieved));
+    }
+
+    @Test
+    public void getPropertyBookFilePath() {
+        assertNotNull(storageManager.getPropertyBookFilePath());
     }
 }
