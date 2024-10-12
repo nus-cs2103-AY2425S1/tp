@@ -123,7 +123,7 @@ public class ParserUtil {
         requireNonNull(address);
         String trimmedTelegram = address.trim();
         if (!Telegram.isValidTelegram(trimmedTelegram)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Telegram.MESSAGE_CONSTRAINTS);
         }
         return new Telegram(trimmedTelegram);
     }
