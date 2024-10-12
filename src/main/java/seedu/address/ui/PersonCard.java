@@ -68,9 +68,7 @@ public class PersonCard extends UiPart<Region> {
             assignment.setText("No assignment available"); // Optional: for better user feedback
         }
 
-        /*
-        Adopted from ChatGPT.
-         */
+        //Adopted from ChatGPT.
         // Set the telegram hyperlink
         if (person.getTelegram() != null) {
             telegram.setText(person.getTelegram().value);
@@ -104,7 +102,7 @@ public class PersonCard extends UiPart<Region> {
             String url = "https://t.me/" + sb.toString();
             java.awt.Desktop.getDesktop().browse(new java.net.URI(url));
         } catch (Exception e) {
-            e.printStackTrace(); 
+            e.printStackTrace();
         }
     }
 }
