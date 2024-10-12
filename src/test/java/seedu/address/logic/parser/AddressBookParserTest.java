@@ -11,13 +11,11 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_NAM
 import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_TIMEPERIOD_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddApptCommand;
@@ -65,14 +63,13 @@ public class AddressBookParserTest {
         assertEquals(new DeleteCommand(new NricMatchesPredicate(nric)), command);
     }
 
-    @Disabled
     @Test
     public void parseCommand_edit() throws Exception {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(new NricMatchesPredicate(nric), descriptor), command);
+                + VALID_NRIC_AMY + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(new NricMatchesPredicate(new Nric(VALID_NRIC_AMY)), descriptor), command);
     }
 
     @Test

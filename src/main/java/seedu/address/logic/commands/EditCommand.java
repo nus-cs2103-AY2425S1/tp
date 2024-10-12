@@ -95,7 +95,7 @@ public class EditCommand extends Command {
         }
 
         model.setPerson(personToEdit, editedPerson);
-        logger.info("Edit command has been exceuted successfully on a person with NRIC: " + predicate);
+        logger.info("Edit command has been executed successfully on a person with NRIC: " + predicate);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
