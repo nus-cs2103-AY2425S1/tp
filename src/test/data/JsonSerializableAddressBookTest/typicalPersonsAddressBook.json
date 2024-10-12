@@ -42,5 +42,13 @@
     "email" : "anna@example.com",
     "address" : "4th street",
     "tags" : [ ]
-  } ]
+  } ],
+  "events": [
+    {
+      "eventName": "Meeting",
+      "eventDescription": "Team meeting",
+      "eventFrom": "2024-10-10",
+      "eventTo": "2024-10-11"
+    }
+  ]
 }
