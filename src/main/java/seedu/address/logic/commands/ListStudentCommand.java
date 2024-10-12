@@ -12,7 +12,7 @@ import seedu.address.model.Model;
  */
 public class ListStudentCommand extends Command {
 
-    public static final String COMMAND_WORD = "list_s";
+    public static final String COMMAND_WORD = "list_students";
     public static final int LIST_STUDENT_MARKER = 0;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all students. "
