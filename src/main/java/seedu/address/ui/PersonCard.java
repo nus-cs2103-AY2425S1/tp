@@ -67,7 +67,7 @@ public class PersonCard extends UiPart<Region> {
         } else {
             assignment.setText("No assignment available"); // Optional: for better user feedback
         }
-      
+
         /*
         Adopted from ChatGPT.
          */
@@ -78,7 +78,7 @@ public class PersonCard extends UiPart<Region> {
         } else {
             telegram.setDisable(true); // Disable hyperlink if no Telegram ID
         }
-      
+
         if (person.getGithub() != null) {
             github.setText(person.getGithub().toString());
         } else {
