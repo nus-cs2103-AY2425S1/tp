@@ -11,7 +11,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -98,7 +97,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         assert tags != null;
 
         if (tags.isEmpty()) {
-            return Optional.of(new HashSet<>()); // Return an empty set instead of Optional.empty()
+            return Optional.empty(); // Return Optional.empty() to set tags to null
         }
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
