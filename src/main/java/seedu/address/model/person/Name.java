@@ -79,7 +79,7 @@ public class Name {
         }
 
         Name otherName = (Name) other;
-        return value.equalsIgnoreCase(otherName.value);
+        return value.equals(otherName.value);
     }
 
     /**
