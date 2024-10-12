@@ -25,7 +25,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_REMARK = "";
-    public static final DateOfCreation DEFAULT_DATE_OF_CREATION = new DateOfCreation(LocalDate.MIN);
+    public static final DateOfCreation DEFAULT_DATE_OF_CREATION = new DateOfCreation(LocalDate.now());
     private Name name;
     private Phone phone;
     private Email email;

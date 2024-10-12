@@ -8,7 +8,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.TreeMap;
 
 import org.junit.jupiter.api.BeforeEach;

@@ -1,6 +1,10 @@
 package seedu.address.model.person;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
+
+import seedu.address.commons.exceptions.IllegalValueException;
+
 
 /**
  * Represents the date of creation for an entity.
@@ -43,7 +47,22 @@ public class DateOfCreation {
      * @return True if the given date is after the creation date, otherwise false.
      */
     public boolean isAfter(LocalDate other) {
-        return other.isAfter(this.dateOfCreation);
+        return !other.isBefore(this.dateOfCreation);
+    }
+    /**
+     * Creates a {@code DateOfCreation} object from a string representation of a date.
+     * The string should follow the format {@code YYYY-MM-DD}.
+     *
+     * @param date The string representation of the date.
+     * @return A {@code DateOfCreation} object with the parsed {@code LocalDate}.
+     * @throws IllegalValueException If the string does not conform to a valid date format.
+     */
+    public static DateOfCreation of(String date) throws IllegalValueException {
+        try {
+            return new DateOfCreation(LocalDate.parse(date));
+        } catch (DateTimeException e) {
+            throw new IllegalValueException("Invalid date format!");
+        }
     }
 
     /**

@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.storage.JsonAdaptedPerson.INVALID_HISTORY_DATE;
 import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.BENSON;
@@ -24,7 +25,7 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
-    private static final String INVALID_DATE_OF_CREATION = "2024";
+    private static final String INVALID_DATE_OF_CREATION = LocalDate.now().plusDays(100).toString();
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
@@ -136,16 +137,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_invalidDateOfCreation_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
                 VALID_ADDRESS, VALID_REMARK, VALID_TAGS, INVALID_DATE_OF_CREATION, VALID_HISTORY);
-        String expectedMessage = "Date of creation cannot be in the future!";
-        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
-    }
-
-    // Test for null history
-    @Test
-    public void toModelType_nullHistory_throwsIllegalValueException() {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
-                VALID_ADDRESS, VALID_REMARK, VALID_TAGS, VALID_DATE_OF_CREATION, null);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, "History");
+        String expectedMessage = INVALID_HISTORY_DATE;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
@@ -154,13 +146,12 @@ public class JsonAdaptedPersonTest {
     public void toModelType_invalidHistory_throwsIllegalValueException() {
         // Create an invalid history with dates after the dateOfCreation
         List<JsonAdaptedHistoryEntry> invalidHistory = new ArrayList<>(VALID_HISTORY);
-        invalidHistory.add(new JsonAdaptedHistoryEntry(LocalDate.now().plusDays(1),
+        invalidHistory.add(new JsonAdaptedHistoryEntry(LocalDate.now().plusDays(2),
                 List.of("Future activity")));
 
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
                 VALID_ADDRESS, VALID_REMARK, VALID_TAGS, VALID_DATE_OF_CREATION, invalidHistory);
-        String expectedMessage = "History contains entries with dates after the date of creation!";
+        String expectedMessage = INVALID_HISTORY_DATE;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
-
 }

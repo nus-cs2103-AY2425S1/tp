@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -27,7 +28,7 @@ import seedu.address.model.tag.Tag;
 class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
-
+    public static final String INVALID_HISTORY_DATE = "History contains entries with dates after the date of creation!";
     private final String name;
     private final String phone;
     private final String email;
@@ -128,12 +129,18 @@ class JsonAdaptedPerson {
         }
         final Remark modelRemark = new Remark(remark);
         if (dateOfCreation == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Date of creation"));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    DateOfCreation.class.getSimpleName()));
+        }
+        LocalDate creationDateForChronicleCheck = LocalDate.parse(dateOfCreation);
+        boolean hasEntryInTheFuture;
+        Stream<Boolean> isBeforeStream = historyEntries.stream()
+                .map(e -> e.toDate().isBefore(creationDateForChronicleCheck));
+        hasEntryInTheFuture = isBeforeStream.reduce(false, (a, b) -> a || b);
+        if (hasEntryInTheFuture) {
+            throw new IllegalValueException(INVALID_HISTORY_DATE);
         }
         final DateOfCreation modalDateOfCreation = new DateOfCreation(LocalDate.parse(dateOfCreation));
-        if (historyEntries == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, History.class.getSimpleName()));
-        }
         final History modelHistory = History.fromJsonEntries(modalDateOfCreation, historyEntries);
         return new Person(modelName, modelPhone, modelEmail, modelAddress,
                 modelRemark, modelTags, modalDateOfCreation, modelHistory);
