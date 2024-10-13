@@ -33,6 +33,7 @@ public class EmergencyContactCommand extends Command {
 
     public static final String MESSAGE_ADD_EMERGENCY_CONTACT_SUCCESS = "Added emergency contact to Person: %1$s";
     public static final String MESSAGE_DELETE_EMERGENCY_CONTACT_SUCCESS = "Removed emergency contact from Person: %1$s";
+    public static final String MESSAGE_EMERGENCY_CONTACT_EXISTS = "Person: %1$s Already has a saved emergency contact";
 
     private final Index index;
     private final EmergencyContact emergencyContact;
@@ -54,6 +55,10 @@ public class EmergencyContactCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         Person personToEdit = lastShownList.get(index.getZeroBased());
+        if (personToEdit.getEmergencyContact() != null && (!personToEdit.getEmergencyContact().contactName.isEmpty()
+                || !personToEdit.getEmergencyContact().contactNumber.isEmpty())) {
+            throw new CommandException(generateEmergencyContactExistsMessage(personToEdit));
+        }
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), emergencyContact, personToEdit.getTags(), personToEdit.getPriorityLevel());
         model.setPerson(personToEdit, editedPerson);
@@ -69,6 +74,10 @@ public class EmergencyContactCommand extends Command {
         String message = !emergencyContact.contactName.isEmpty()
                 ? MESSAGE_ADD_EMERGENCY_CONTACT_SUCCESS : MESSAGE_DELETE_EMERGENCY_CONTACT_SUCCESS;
         return String.format(message, personToEdit);
+    }
+
+    private String generateEmergencyContactExistsMessage(Person personToEdit) {
+        return String.format(MESSAGE_EMERGENCY_CONTACT_EXISTS, personToEdit);
     }
 
     @Override
