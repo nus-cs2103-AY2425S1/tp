@@ -3,6 +3,7 @@ package keycontacts.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import keycontacts.model.pianopiece.PianoPiece;
 import keycontacts.model.student.Address;
 import keycontacts.model.student.Email;
 import keycontacts.model.student.GradeLevel;
@@ -29,6 +30,7 @@ public class StudentBuilder {
     private Address address;
     private Set<Tag> tags;
     private GradeLevel gradeLevel;
+    private Set<PianoPiece> pianoPieces;
 
     /**
      * Creates a {@code StudentBuilder} with the default details.
@@ -40,6 +42,7 @@ public class StudentBuilder {
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         gradeLevel = new GradeLevel(DEFAULT_GRADE_LEVEL);
+        pianoPieces = new HashSet<>();
     }
 
     /**
@@ -52,6 +55,7 @@ public class StudentBuilder {
         address = studentToCopy.getAddress();
         tags = new HashSet<>(studentToCopy.getTags());
         gradeLevel = studentToCopy.getGradeLevel();
+        pianoPieces = new HashSet<>(studentToCopy.getPianoPieces());
     }
 
     /**
@@ -103,8 +107,17 @@ public class StudentBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code pianoPieces} into a {@code Set<PianoPiece>}
+     * and set it to the {@code Student} that we are building.
+     */
+    public StudentBuilder withPianoPieces(String ... pianoPieces) {
+        this.pianoPieces = SampleDataUtil.getPianoPieceSet(pianoPieces);
+        return this;
+    }
+
     public Student build() {
-        return new Student(name, phone, email, address, tags, gradeLevel);
+        return new Student(name, phone, email, address, tags, gradeLevel, pianoPieces, null);
     }
 
 }

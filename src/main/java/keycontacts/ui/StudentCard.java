@@ -1,6 +1,7 @@
 package keycontacts.ui;
 
 import java.util.Comparator;
+import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -43,6 +44,8 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private Label regularLesson;
     @FXML
+    private Label pianoPieces;
+    @FXML
     private FlowPane tags;
 
 
@@ -62,5 +65,9 @@ public class StudentCard extends UiPart<Region> {
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        pianoPieces.setText(student.getPianoPieces().stream()
+                .sorted(Comparator.comparing(pianoPiece -> pianoPiece.pianoPieceName))
+                .map(pianoPiece -> pianoPiece.pianoPieceName)
+                .collect(Collectors.joining(", ")));
     }
 }

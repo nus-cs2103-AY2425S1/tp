@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import keycontacts.commons.exceptions.IllegalValueException;
 import keycontacts.model.lesson.RegularLesson;
+import keycontacts.model.pianopiece.PianoPiece;
 import keycontacts.model.student.Address;
 import keycontacts.model.student.Email;
 import keycontacts.model.student.GradeLevel;
@@ -32,6 +33,8 @@ class JsonAdaptedStudent {
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String gradeLevel;
+    private final List<JsonAdaptedPianoPiece> pianoPieces = new ArrayList<>();
+
     private final JsonAdaptedRegularLesson regularLesson;
 
     /**
@@ -40,7 +43,9 @@ class JsonAdaptedStudent {
     @JsonCreator
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("gradeLevel") String gradeLevel,
+            @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("gradeLevel") String gradeLevel,
+            @JsonProperty("pianoPieces") List<JsonAdaptedPianoPiece> pianoPieces,
             @JsonProperty("regularLesson") JsonAdaptedRegularLesson regularLesson) {
         this.name = name;
         this.phone = phone;
@@ -50,6 +55,9 @@ class JsonAdaptedStudent {
             this.tags.addAll(tags);
         }
         this.gradeLevel = gradeLevel;
+        if (pianoPieces != null) {
+            this.pianoPieces.addAll(pianoPieces);
+        }
         this.regularLesson = regularLesson;
     }
 
@@ -65,6 +73,9 @@ class JsonAdaptedStudent {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         gradeLevel = source.getGradeLevel().value;
+        pianoPieces.addAll(source.getPianoPieces().stream()
+                .map(JsonAdaptedPianoPiece::new)
+                .collect(Collectors.toList()));
         regularLesson = source.getRegularLesson().map(JsonAdaptedRegularLesson::new).orElse(null);
     }
 
@@ -77,6 +88,11 @@ class JsonAdaptedStudent {
         final List<Tag> studentTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             studentTags.add(tag.toModelType());
+        }
+
+        final List<PianoPiece> studentPianoPieces = new ArrayList<>();
+        for (JsonAdaptedPianoPiece pianoPiece : pianoPieces) {
+            studentPianoPieces.add(pianoPiece.toModelType());
         }
 
         if (name == null) {
@@ -123,7 +139,10 @@ class JsonAdaptedStudent {
 
         final GradeLevel modelGradeLevel = new GradeLevel(gradeLevel);
 
+        final Set<PianoPiece> modelPianoPieces = new HashSet<>(studentPianoPieces);
+
         final RegularLesson modelRegularLesson;
+
         if (regularLesson != null) {
             modelRegularLesson = regularLesson.toModelType();
         } else {
@@ -131,7 +150,7 @@ class JsonAdaptedStudent {
         }
 
         return new Student(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelGradeLevel,
-            modelRegularLesson);
+                modelPianoPieces, modelRegularLesson);
     }
 
 }

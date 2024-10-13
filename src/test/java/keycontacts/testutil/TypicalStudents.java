@@ -25,22 +25,31 @@ import keycontacts.model.student.Student;
  */
 public class TypicalStudents {
 
-    public static final Student ALICE = new StudentBuilder().withName("Alice Pauline")
-            .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
+    /**
+     * When editing any entry below, take note to change typicalStudentsStudentDirectory.json
+     */
+    public static final Student ALICE = new StudentBuilder()
+            .withName("Alice Pauline")
+            .withAddress("123, Jurong West Ave 6, #08-111")
+            .withEmail("alice@example.com")
             .withPhone("94351253")
             .withTags("friends")
             .withGradeLevel("ABRSM 2")
+            .withPianoPieces("Etude")
             .build();
-    public static final Student BENSON = new StudentBuilder().withName("Benson Meier")
+    public static final Student BENSON = new StudentBuilder()
+            .withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
-            .withEmail("johnd@example.com").withPhone("98765432")
+            .withEmail("johnd@example.com")
+            .withPhone("98765432")
             .withTags("owesMoney", "friends")
             .withGradeLevel("RSL 3")
+            .withPianoPieces("Sonata I. X. 1905 \"From the Street\"", "Waltz No. 2")
             .build();
     public static final Student CARL = new StudentBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street")
             .withGradeLevel("ABRSM 1")
-            .build();
+            .withPianoPieces("Clair de Lune", "Le Sapin Op. 75 No. 5").build();
     public static final Student DANIEL = new StudentBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends")
             .withGradeLevel("ABRSM 3").build();

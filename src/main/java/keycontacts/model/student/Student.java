@@ -11,6 +11,7 @@ import java.util.Set;
 import keycontacts.commons.util.ToStringBuilder;
 import keycontacts.logic.commands.EditCommand.EditStudentDescriptor;
 import keycontacts.model.lesson.RegularLesson;
+import keycontacts.model.pianopiece.PianoPiece;
 import keycontacts.model.tag.Tag;
 
 /**
@@ -29,6 +30,9 @@ public class Student {
     private final Set<Tag> tags = new HashSet<>();
     private final GradeLevel gradeLevel;
 
+    // A LinkedHashSet is used for piano pieces to maintain order of insertion
+    private final Set<PianoPiece> pianoPieces = new HashSet<>();
+
     // Associations
     private final RegularLesson regularLesson;
 
@@ -42,6 +46,7 @@ public class Student {
         this.phone = phone;
         this.email = email;
         this.address = address;
+
         this.tags.addAll(tags);
         this.gradeLevel = gradeLevel;
         this.regularLesson = null;
@@ -51,15 +56,18 @@ public class Student {
      * Constructor for a new student with non-default student associations. Identity and data fields must be
      * present and not null.
      */
-    public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                    GradeLevel gradeLevel, RegularLesson regularLesson) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags, GradeLevel gradeLevel,
+                   Set<PianoPiece> pianoPieces, RegularLesson regularLesson) {
+        requireAllNonNull(name, phone, email, address, tags, gradeLevel, pianoPieces);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+
         this.tags.addAll(tags);
         this.gradeLevel = gradeLevel;
+
+        this.pianoPieces.addAll(pianoPieces);
         this.regularLesson = regularLesson;
     }
 
@@ -91,6 +99,14 @@ public class Student {
         return gradeLevel;
     }
 
+    /**
+     * Returns an immutable piano piece set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<PianoPiece> getPianoPieces() {
+        return Collections.unmodifiableSet(pianoPieces);
+    }
+
     public Optional<RegularLesson> getRegularLesson() {
         return Optional.ofNullable(regularLesson);
     }
@@ -119,17 +135,27 @@ public class Student {
         Email updatedEmail = editStudentDescriptor.getEmail().orElse(email);
         Address updatedAddress = editStudentDescriptor.getAddress().orElse(address);
         Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(tags);
-        GradeLevel gradeLevel = editStudentDescriptor.getGradeLevel().orElse(this.gradeLevel);
-
-        return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, gradeLevel,
-            regularLesson);
+        GradeLevel updatedGradeLevel = editStudentDescriptor.getGradeLevel().orElse(this.gradeLevel);
+        return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
+                updatedGradeLevel, pianoPieces, regularLesson);
     }
 
     /**
      * Creates and returns a new {@code Student} with the updated {@code regularLesson}.
      */
     public Student withRegularLesson(RegularLesson regularLesson) {
-        return new Student(name, phone, email, address, tags, gradeLevel, regularLesson);
+        return new Student(name, phone, email, address, tags, gradeLevel, pianoPieces, regularLesson);
+    }
+
+    /**
+     * Creates and returns a new {@code Student} with the {@code addedPianoPieces} added.
+     */
+    public Student withAddedPianoPieces(Set<PianoPiece> addedPianoPieces) {
+        Set<PianoPiece> updatedPianoPieces = new HashSet<>(pianoPieces);
+        updatedPianoPieces.addAll(addedPianoPieces);
+
+        return new Student(name, phone, email, address, tags, gradeLevel, updatedPianoPieces,
+                           regularLesson);
     }
 
     /**
@@ -167,13 +193,15 @@ public class Student {
                 && address.equals(otherStudent.address)
                 && tags.equals(otherStudent.tags)
                 && gradeLevel.equals(otherStudent.gradeLevel)
+                && pianoPieces.equals(otherStudent.pianoPieces)
                 && getRegularLesson().equals(otherStudent.getRegularLesson());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, gradeLevel, regularLesson);
+        return Objects.hash(name, phone, email, address, tags, gradeLevel, pianoPieces,
+                            regularLesson);
     }
 
     @Override
@@ -185,6 +213,7 @@ public class Student {
                 .add("address", address)
                 .add("tags", tags)
                 .add("gradeLevel", gradeLevel)
+                .add("pianoPieces", pianoPieces)
                 .add("regularLesson", regularLesson)
                 .toString();
     }
