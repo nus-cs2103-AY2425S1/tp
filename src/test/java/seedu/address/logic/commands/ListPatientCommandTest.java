@@ -2,9 +2,14 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.ListPatientCommand.MESSAGE_NOT_IMPLEMENTED_YET;
+import static seedu.address.logic.Messages.MESSAGE_PATIENTS_LISTED_OVERVIEW;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalPersons.JOHN;
+import static seedu.address.testutil.TypicalPersons.JANE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookWithPatients;
+
+import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
@@ -12,12 +17,19 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.PatientPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code ListPatientCommand}.
  */
 public class ListPatientCommandTest {
+    // Model with no patients inside (to be removed in the future)
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+    // Model with patients inside
+    private final Model modelPatients = new ModelManager(getTypicalAddressBookWithPatients(), new UserPrefs());
+    private final Model expectedModelPatients = new ModelManager(getTypicalAddressBookWithPatients(), new UserPrefs());
 
     /**
      * Tests whether the {@code ListPatientCommand} equals method works as expected.
@@ -34,13 +46,24 @@ public class ListPatientCommandTest {
         assertNotEquals(listPatientCommand, null); // Null check -> returns false
     }
 
-    /**
-     * Tests that {@code ListPatientCommand} execution fails with a {@code CommandException}
-     * and the message "list-patient command not implemented yet".
-     */
     @Test
-    public void execute() {
-        assertCommandFailure(new ListPatientCommand(), model, MESSAGE_NOT_IMPLEMENTED_YET);
+    public void execute_zeroPatientsFound() {
+        String expectedMessage = String.format(MESSAGE_PATIENTS_LISTED_OVERVIEW, 0);
+        PatientPredicate predicate = new PatientPredicate();
+        ListPatientCommand command = new ListPatientCommand();
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_multiplePatientsFound() {
+        String expectedMessage = String.format(MESSAGE_PATIENTS_LISTED_OVERVIEW, 2);
+        PatientPredicate predicate = new PatientPredicate();
+        ListPatientCommand command = new ListPatientCommand();
+        expectedModelPatients.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, modelPatients, expectedMessage, expectedModelPatients);
+        assertEquals(Arrays.asList(JOHN, JANE), modelPatients.getFilteredPersonList());
     }
 
     /**

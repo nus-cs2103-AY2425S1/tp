@@ -10,7 +10,7 @@ import seedu.address.model.patient.Patient;
 public class PatientPredicate implements Predicate<Person> {
 
     @Override
-    public boolean test (Person person) {
+    public boolean test(Person person) {
         return person instanceof Patient;
     }
 }
