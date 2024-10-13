@@ -55,12 +55,12 @@ public class MarkDeliveryCommand extends Command {
 
         model.setDelivery(deliveryToMark, markedDelivery);
         model.updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
-        return new CommandResult(String.format(MESSAGE_MARK_DELIVERY_SUCCESS, markedDelivery, status));
+        return new CommandResult(String.format(MESSAGE_MARK_DELIVERY_SUCCESS, deliveryToMark, status));
     }
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
+        return other == this
                 || (other instanceof MarkDeliveryCommand // instanceof handles nulls
                 && index.equals(((MarkDeliveryCommand) other).index)
                 && status.equals(((MarkDeliveryCommand) other).status));
