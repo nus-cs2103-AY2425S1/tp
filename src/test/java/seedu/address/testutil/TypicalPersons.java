@@ -33,8 +33,8 @@ public class TypicalPersons {
             .withNric("S1234567A").withDateOfBirth("2000-01-01").withGender("F")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253")
-            .withTags("friends")
-            .build();
+            .withAppointments("Physio:2024-12-01:1500-1600", "Orthopedic:2024-12-01:1200-1300")
+            .withTags("friends").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withNric("T0234547A").withDateOfBirth("2002-01-01").withGender("M")
             .withAddress("311, Clementi Ave 2, #02-25")
