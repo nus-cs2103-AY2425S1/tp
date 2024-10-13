@@ -10,15 +10,30 @@ public enum RoleType {
     /**
      * Represents a student studying under a course
      */
-    STUDENT,
+    STUDENT {
+        @Override
+        public String toString() {
+            return "Student";
+        }
+    },
 
     /**
      * Represents a tutor teaching/mentoring tutorials/labs of a course
      */
-    TUTOR,
+    TUTOR {
+        @Override
+        public String toString() {
+            return "Tutor";
+        }
+    },
 
     /**
      * Represents a professor who is in charge of teaching/managing a course
      */
-    PROFESSOR
+    PROFESSOR {
+        @Override
+        public String toString() {
+            return "Professor";
+        }
+    }
 }
