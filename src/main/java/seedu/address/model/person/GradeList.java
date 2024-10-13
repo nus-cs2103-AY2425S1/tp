@@ -55,7 +55,7 @@ public class GradeList {
      *
      * @param testName The name of the test for which the grade should be removed.
      */
-    private void removeGrade(String testName) {
+    public void removeGrade(String testName) {
         requireNonNull(testName);
         grades.removeIf(grade -> grade.getTestName().equalsIgnoreCase(testName));
     }

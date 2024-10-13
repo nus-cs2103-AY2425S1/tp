@@ -18,7 +18,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 /**
  * Adds a grade to a person identified by the index in the filtered person list.
  */
-public class GradeCommand extends Command {
+public class AddGradeCommand extends Command {
     public static final String COMMAND_WORD = "grade";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a grade to the person identified "
             + "by the index number used in the displayed person list. "
@@ -30,12 +30,12 @@ public class GradeCommand extends Command {
     private final Index index;
 
     /**
-     * Constructs a {@code GradeCommand} to add the specified {@code Grade} to the person at the given {@code Index}.
+     * Constructs a {@code AddGradeCommand} to add the specified {@code Grade} to the person at the given {@code Index}.
      *
      * @param index Index of the person in the filtered person list.
      * @param grade Grade to be added to the person.
      */
-    public GradeCommand(Index index, Grade grade) {
+    public AddGradeCommand(Index index, Grade grade) {
         requireNonNull(grade);
         this.index = index;
         toAdd = grade;
@@ -68,10 +68,10 @@ public class GradeCommand extends Command {
     }
 
     /**
-     * Checks if this GradeCommand is equal to another object.
+     * Checks if this AddGradeCommand is equal to another object.
      *
      * @param other The other object to compare with.
-     * @return true if both GradeCommand objects have the same index and grade to add.
+     * @return true if both AddGradeCommand objects have the same index and grade to add.
      */
     @Override
     public boolean equals(Object other) {
@@ -80,13 +80,13 @@ public class GradeCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof GradeCommand)) {
+        if (!(other instanceof AddGradeCommand)) {
             return false;
         }
 
-        GradeCommand otherGradeCommand = (GradeCommand) other;
-        return index.equals(otherGradeCommand.index)
-                && toAdd.equals(otherGradeCommand.toAdd);
+        AddGradeCommand otherAddGradeCommand = (AddGradeCommand) other;
+        return index.equals(otherAddGradeCommand.index)
+                && toAdd.equals(otherAddGradeCommand.toAdd);
     }
 
     @Override
