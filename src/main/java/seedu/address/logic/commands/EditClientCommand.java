@@ -29,12 +29,12 @@ import seedu.address.model.car.CarMake;
 import seedu.address.model.car.CarModel;
 import seedu.address.model.car.Vin;
 import seedu.address.model.car.Vrn;
+import seedu.address.model.issue.Issue;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -133,9 +133,9 @@ public class EditClientCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<Issue> updatedIssues = editPersonDescriptor.getIssues().orElse(personToEdit.getIssues());
         Car updatedCar = editedCar;
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedCar);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedIssues, updatedCar);
     }
 
     private static Car createEditedCar(Car carToEdit, EditCarDescriptor editCarDescriptor) {
@@ -181,21 +181,21 @@ public class EditClientCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
-        private Set<Tag> tags;
+        private Set<Issue> issues;
         private Car car;
 
         public EditPersonDescriptor() {}
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * A defensive copy of {@code issues} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setTags(toCopy.tags);
+            setIssues(toCopy.issues);
             setCar(toCopy.car);
         }
 
@@ -203,7 +203,7 @@ public class EditClientCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, car);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, issues, car);
         }
 
         public void setName(Name name) {
@@ -239,20 +239,20 @@ public class EditClientCommand extends Command {
         }
 
         /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
+         * Sets {@code issues} to this object's {@code issues}.
+         * A defensive copy of {@code issues} is used internally.
          */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setIssues(Set<Issue> issues) {
+            this.issues = (issues != null) ? new HashSet<>(issues) : null;
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * Returns an unmodifiable issue set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Returns {@code Optional#empty()} if {@code issues} is null.
          */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public Optional<Set<Issue>> getIssues() {
+            return (issues != null) ? Optional.of(Collections.unmodifiableSet(issues)) : Optional.empty();
         }
 
         public void setCar(Car car) {
@@ -279,7 +279,7 @@ public class EditClientCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(issues, otherEditPersonDescriptor.issues)
                     && Objects.equals(car, otherEditPersonDescriptor.car);
         }
 
@@ -290,7 +290,7 @@ public class EditClientCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
-                    .add("tags", tags)
+                    .add("issues", issues)
                     .add("car", car)
                     .toString();
         }
@@ -310,7 +310,7 @@ public class EditClientCommand extends Command {
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * A defensive copy of {@code issues} is used internally.
          */
         public EditCarDescriptor(EditCarDescriptor toCopy) {
             setVrn(toCopy.vrn);

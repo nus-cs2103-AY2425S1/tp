@@ -15,6 +15,7 @@ import seedu.address.model.person.Person;
  */
 public class PersonListPanel extends UiPart<Region> {
     private static final String FXML = "PersonListPanel.fxml";
+    @SuppressWarnings("unused")
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
 
     @FXML

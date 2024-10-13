@@ -3,11 +3,11 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ISSUE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MAKE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VIN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VRN;
 
@@ -17,12 +17,12 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddClientCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.car.Car;
+import seedu.address.model.issue.Issue;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new AddClientCommand object
@@ -37,7 +37,7 @@ public class AddClientCommandParser implements Parser<AddClientCommand> {
     public AddClientCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                    PREFIX_ADDRESS, PREFIX_VRN, PREFIX_VIN, PREFIX_MAKE, PREFIX_MODEL, PREFIX_TAG);
+                    PREFIX_ADDRESS, PREFIX_VRN, PREFIX_VIN, PREFIX_MAKE, PREFIX_MODEL, PREFIX_ISSUE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -61,7 +61,7 @@ public class AddClientCommandParser implements Parser<AddClientCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Set<Issue> issueList = ParserUtil.parseIssues(argMultimap.getAllValues(PREFIX_ISSUE));
         Person person;
 
         if (isCarPresent) {
@@ -73,9 +73,9 @@ public class AddClientCommandParser implements Parser<AddClientCommand> {
             String model = argMultimap.getValue(PREFIX_MODEL).orElse("");
 
             Car car = ParserUtil.parseCar(vrn, vin, make, model);
-            person = new Person(name, phone, email, address, tagList, car);
+            person = new Person(name, phone, email, address, issueList, car);
         } else {
-            person = new Person(name, phone, email, address, tagList);
+            person = new Person(name, phone, email, address, issueList);
         }
 
         return new AddClientCommand(person);
