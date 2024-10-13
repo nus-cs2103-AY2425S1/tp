@@ -11,5 +11,5 @@
          <Font size="29.0" />
       </font>
    </Label>
-  <ListView fx:id="personListView" VBox.vgrow="ALWAYS" />
+  <ListView fx:id="volunteerListView" VBox.vgrow="ALWAYS" />
 </VBox>

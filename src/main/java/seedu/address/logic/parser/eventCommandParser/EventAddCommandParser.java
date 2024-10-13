@@ -4,6 +4,7 @@ import seedu.address.logic.commands.eventCommands.EventAddCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.EventParserUtil;
+import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Date;
@@ -23,7 +24,7 @@ import static seedu.address.logic.parser.CliSyntax.EVENT_PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.EVENT_PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.EVENT_PREFIX_START_TIME;
 
-public class EventAddCommandParser {
+public class EventAddCommandParser implements Parser<EventAddCommand> {
 
     public EventAddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =

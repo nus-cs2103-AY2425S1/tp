@@ -15,6 +15,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.volunteer.Volunteer;
 
 import java.util.logging.Logger;
 
@@ -32,7 +33,7 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private VolunteerListPanel volunteerListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private EventListPanel eventListPanel;
@@ -45,7 +46,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private FlowPane personListPanelPlaceholder;
+    private FlowPane volunteerListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -58,6 +59,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
+
+        primaryStage.setTitle("VolunSync");
 
         // Set dependencies
         this.primaryStage = primaryStage;
@@ -113,13 +116,13 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        volunteerListPanel = new VolunteerListPanel(logic.getFilteredVolunteerList());
         eventListPanel = new EventListPanel(logic.getFilteredEventList());
 
         eventListPanel.getRoot().setPrefWidth(logic.getGuiSettings().getWindowWidth() * 0.45);
-        personListPanel.getRoot().setPrefWidth(logic.getGuiSettings().getWindowWidth() * 0.45);
+        volunteerListPanel.getRoot().setPrefWidth(logic.getGuiSettings().getWindowWidth() * 0.45);
 
-        personListPanelPlaceholder.getChildren().addAll(personListPanel.getRoot(), eventListPanel.getRoot());
+        volunteerListPanelPlaceholder.getChildren().addAll(volunteerListPanel.getRoot(), eventListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -171,8 +174,8 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public VolunteerListPanel getVolunteerListPanel() {
+        return volunteerListPanel;
     }
 
     /**
