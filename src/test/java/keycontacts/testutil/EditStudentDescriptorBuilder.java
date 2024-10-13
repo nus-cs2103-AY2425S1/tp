@@ -85,7 +85,6 @@ public class EditStudentDescriptorBuilder {
 
     /**
      * Sets the {@code GradeLevel} of the {@code EditStudentDescriptor} that we are building.
-     * @return
      */
     public EditStudentDescriptorBuilder withGradeLevel(String gradeLevel) {
         descriptor.setGradeLevel(new GradeLevel(gradeLevel));

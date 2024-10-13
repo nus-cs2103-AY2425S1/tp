@@ -1,7 +1,5 @@
 package keycontacts.model.student;
 
-import java.util.regex.PatternSyntaxException;
-
 /**
  * Represents a Student's grade level field in the student object.
  */
@@ -9,7 +7,7 @@ public class GradeLevel {
 
     public static final String MESSAGE_CONSTRAINTS = "Grade level should only contain alphanumeric characters "
             + "and spaces, exam board (e.g. ABRSM, Trinity) "
-            + "and grade level should be separated with a space. Grade level should not exceed 50 characters, "
+            + "and grade level should be separated with a space. Exam board should not exceed 50 characters, "
             + "and grade should be an integer between 1 and 12";
 
     public final String value;
@@ -19,8 +17,6 @@ public class GradeLevel {
 
     /**
      * Constructs a {@code GradeLevel}.
-     * @param schoolLevel
-     * @param grade
      */
     public GradeLevel(String schoolLevel, int grade) {
         this.schoolLevel = schoolLevel;
@@ -30,10 +26,8 @@ public class GradeLevel {
 
     /**
      * Constructs a {@code GradeLevel}.
-     * @param gradeLevel
-     * @throws PatternSyntaxException
      */
-    public GradeLevel(String gradeLevel) throws PatternSyntaxException {
+    public GradeLevel(String gradeLevel) {
         String[] gradeLevelParts = gradeLevel.split(" ");
         this.schoolLevel = gradeLevelParts[0];
         this.grade = Integer.parseInt(gradeLevelParts[1]);
@@ -79,41 +73,8 @@ public class GradeLevel {
 
     /**
      * Returns true if a given string is a valid grade level.
-     * @param trimmedGradeLevel
-     * @return
      */
     public static boolean isValidGradeLevel(String trimmedGradeLevel) {
-        String[] gradeLevelParts = trimmedGradeLevel.split(" ");
-        if (gradeLevelParts.length != 2) {
-            return false;
-        }
-
-        String schoolLevel = gradeLevelParts[0];
-        int grade;
-        try {
-            grade = Integer.parseInt(gradeLevelParts[1]);
-        } catch (NumberFormatException e) {
-            return false;
-        }
-
-        return isValidSchoolLevel(schoolLevel) && isValidGrade(grade);
-    }
-
-    /**
-     * Returns true if a given grade is valid. (1-12)
-     * @param grade
-     * @return
-     */
-    private static boolean isValidGrade(int grade) {
-        return grade >= 1 && grade <= 12;
-    }
-
-    /**
-     * Returns true if a given school level is valid. (less than 50 characters)
-     * @param schoolLevel
-     * @return
-     */
-    private static boolean isValidSchoolLevel(String schoolLevel) {
-        return schoolLevel.length() <= 50;
+        return trimmedGradeLevel.matches("^[a-zA-Z0-9 ]{1,50} [1-9]|1[0-2]$");
     }
 }

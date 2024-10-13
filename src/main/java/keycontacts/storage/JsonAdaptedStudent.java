@@ -117,6 +117,9 @@ class JsonAdaptedStudent {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                 GradeLevel.class.getSimpleName()));
         }
+        if (!GradeLevel.isValidGradeLevel(gradeLevel)) {
+            throw new IllegalValueException(GradeLevel.MESSAGE_CONSTRAINTS);
+        }
 
         final GradeLevel modelGradeLevel = new GradeLevel(gradeLevel);
 

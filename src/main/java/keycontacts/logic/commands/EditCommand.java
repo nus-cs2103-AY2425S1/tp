@@ -3,7 +3,7 @@ package keycontacts.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static keycontacts.logic.parser.CliSyntax.PREFIX_GRADELEVEL;
+import static keycontacts.logic.parser.CliSyntax.PREFIX_GRADE_LEVEL;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_NAME;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_PHONE;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_TAG;
@@ -46,7 +46,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]..."
-            + "[" + PREFIX_GRADELEVEL + "GRADELEVEL]\n"
+            + "[" + PREFIX_GRADE_LEVEL + "GRADE_LEVEL]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -89,23 +89,6 @@ public class EditCommand extends Command {
         model.setStudent(studentToEdit, editedStudent);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, Messages.format(editedStudent)));
-    }
-
-    /**
-     * Creates and returns a {@code Student} with the details of {@code studentToEdit}
-     * edited with {@code editStudentDescriptor}.
-     */
-    private static Student createEditedStudent(Student studentToEdit, EditStudentDescriptor editStudentDescriptor) {
-        assert studentToEdit != null;
-
-        Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());
-        Phone updatedPhone = editStudentDescriptor.getPhone().orElse(studentToEdit.getPhone());
-        Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
-        Address updatedAddress = editStudentDescriptor.getAddress().orElse(studentToEdit.getAddress());
-        Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
-        GradeLevel updatedGradeLevel = editStudentDescriptor.getGradeLevel().orElse(studentToEdit.getGradeLevel());
-
-        return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedGradeLevel);
     }
 
     @Override

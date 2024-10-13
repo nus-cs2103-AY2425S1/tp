@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.regex.PatternSyntaxException;
 
 import keycontacts.commons.core.index.Index;
 import keycontacts.commons.util.StringUtil;
@@ -175,9 +174,8 @@ public class ParserUtil {
             grade = Integer.parseInt(trimmedGradeLevel.split(" ")[1]);
         } catch (NumberFormatException e) {
             throw new ParseException(GradeLevel.MESSAGE_CONSTRAINTS);
-        } catch (PatternSyntaxException e) {
-            throw new ParseException(GradeLevel.MESSAGE_CONSTRAINTS);
         }
+
         return new GradeLevel(schoolLevel, grade);
     }
 }

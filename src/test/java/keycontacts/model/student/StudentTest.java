@@ -2,7 +2,7 @@ package keycontacts.model.student;
 
 import static keycontacts.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static keycontacts.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static keycontacts.logic.commands.CommandTestUtil.VALID_GRADELEVEL_BOB;
+import static keycontacts.logic.commands.CommandTestUtil.VALID_GRADE_LEVEL_BOB;
 import static keycontacts.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static keycontacts.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static keycontacts.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -91,7 +91,7 @@ public class StudentTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different grade level -> returns false
-        editedAlice = new StudentBuilder(ALICE).withGradeLevel(VALID_GRADELEVEL_BOB).build();
+        editedAlice = new StudentBuilder(ALICE).withGradeLevel(VALID_GRADE_LEVEL_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 
