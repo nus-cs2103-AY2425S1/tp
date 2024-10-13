@@ -12,7 +12,9 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.ClassId;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Fees;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -98,6 +100,36 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String fees} into a {@code Fees}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code fees} is invalid.
+     */
+    public static Fees parseFees(String fees) throws ParseException {
+        requireNonNull(fees);
+        String trimmedFees = fees.trim();
+        if (!Fees.isValidFees(trimmedFees)) {
+            throw new ParseException(Fees.MESSAGE_CONSTRAINTS);
+        }
+        return new Fees(trimmedFees);
+    }
+
+    /**
+     * Parses a {@code String classId} into a {@code ClassId}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code classId} is invalid.
+     */
+    public static ClassId parseClassId(String classId) throws ParseException {
+        requireNonNull(classId);
+        String trimmedClassId = classId.trim();
+        if (!ClassId.isValidClassId(trimmedClassId)) {
+            throw new ParseException(ClassId.MESSAGE_CONSTRAINTS);
+        }
+        return new ClassId(trimmedClassId);
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -123,6 +155,7 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
 
     /**
      * Parses a {@code String Names} into a {@code String[]}.
@@ -167,6 +200,11 @@ public class ParserUtil {
         }
 
         return classIds[1].trim().split("\\s+");
-
     }
+
+
+    public static boolean isValidIndex(String preamble) {
+        return StringUtil.isNonZeroUnsignedInteger(preamble);
+
+    
 }
