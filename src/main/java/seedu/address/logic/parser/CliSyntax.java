@@ -11,10 +11,15 @@ public class CliSyntax {
     public static final Prefix PREFIX_EMAIL = new Prefix("e/");
     public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
+
     public static final Prefix PREFIX_ID = new Prefix("id/");
 
     /* Prefix definitions for Tutorial-related commands */
     public static final Prefix PREFIX_TUT_NAME = new Prefix("tn/"); // Prefix for Tutorial Name
     public static final Prefix PREFIX_TUT_ID = new Prefix("id/"); // Prefix for Tutorial ID
 
+
+    public static final Prefix PREFIX_DUEDATE = new Prefix("d/");
+    public static final Prefix PREFIX_STUDENTID = new Prefix("s/");
+    public static final Prefix PREFIX_TUTORIALCLASS = new Prefix("c/");
 }

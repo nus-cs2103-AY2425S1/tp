@@ -21,6 +21,8 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.assignment.Assignment;
+import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.student.Student;
 import seedu.address.model.tut.Tut;
 
@@ -151,6 +153,21 @@ public class AddTutCommandTest {
 
         @Override
         public void addTutorial(Tut tutorial) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public AssignmentList getAssignmentList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasAssignment(Assignment assignment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addAssignment(Assignment assignment) {
             throw new AssertionError("This method should not be called.");
         }
 
