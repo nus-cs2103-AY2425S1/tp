@@ -60,7 +60,7 @@ public class PersonCard extends UiPart<Region> {
 
         // Set grades label with person's grades
         if (person.getGradeList() != null && !person.getGradeList().isEmpty()) {
-            grades.setText(formatGrades(person.getGradeList().toString()));  // Format and set grades
+            grades.setText(formatGrades(person.getGradeList().toString())); // Format and set grades
         } else {
             grades.setText("No grades available");
         }
@@ -70,6 +70,6 @@ public class PersonCard extends UiPart<Region> {
      * Formats the grade list to display properly in the UI.
      */
     private String formatGrades(String gradeList) {
-        return "Grades:\n" + gradeList;  // You can customize this formatting as needed
+        return "Grades:\n" + gradeList;
     }
 }

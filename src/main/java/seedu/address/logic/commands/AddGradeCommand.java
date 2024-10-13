@@ -1,5 +1,11 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.EditCommand.MESSAGE_EDIT_PERSON_SUCCESS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -9,11 +15,6 @@ import seedu.address.model.person.Grade;
 import seedu.address.model.person.GradeList;
 import seedu.address.model.person.Person;
 
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.commands.EditCommand.MESSAGE_EDIT_PERSON_SUCCESS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 /**
  * Adds a grade to a person identified by the index in the filtered person list.

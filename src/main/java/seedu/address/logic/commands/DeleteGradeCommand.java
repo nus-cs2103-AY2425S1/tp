@@ -1,13 +1,15 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.GradeList;
 import seedu.address.model.person.Person;
 
-import java.util.List;
-import static java.util.Objects.requireNonNull;
 
 /**
  * Deletes a grade for a person identified by the index in the filtered person list.
@@ -55,7 +57,7 @@ public class DeleteGradeCommand extends Command {
             throw new CommandException(String.format(MESSAGE_GRADE_NOT_FOUND, testName));
         }
 
-        gradeList.removeGrade(testName);  // Removes the grade
+        gradeList.removeGrade(testName);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(String.format(MESSAGE_DELETE_GRADE_SUCCESS, personToEdit.getName(), testName));

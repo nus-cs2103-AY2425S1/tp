@@ -9,7 +9,7 @@ import java.util.List;
  * Represents a list of grades for a student in the address book.
  */
 public class GradeList {
-    private final String NOT_ALL_WEIGHTAGE = "\nDo note not all weightage has been accounted for."
+    private static final String NOT_ALL_WEIGHTAGE = "\nDo note not all weightage has been accounted for."
             + "\nPercentage of tests done: ";
     private static final float FULL_WEIGHTAGE = 1.0f;
     private final List<Grade> grades;
@@ -90,7 +90,7 @@ public class GradeList {
         float totalScore = 0;
         float totalWeightage = 0;
 
-        for (Grade g:  grades) {
+        for (Grade g: grades) {
             float currentWeightage = g.getWeightage();
             totalWeightage += currentWeightage / 100;
             totalScore += g.getScore() * currentWeightage / 100;
@@ -111,7 +111,7 @@ public class GradeList {
      * @return true if there are no grades in the list, false otherwise.
      */
     public boolean isEmpty() {
-        return grades.isEmpty();  // Assuming 'grades' is the collection of Grade objects
+        return grades.isEmpty();
     }
 
     @Override

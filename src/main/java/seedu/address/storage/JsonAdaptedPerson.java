@@ -31,7 +31,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
-    private final List<JsonAdaptedGrade> grades = new ArrayList<>();  // Added to store grades
+    private final List<JsonAdaptedGrade> grades = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -113,7 +113,6 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        // TODO: Store gradeList properly
         final GradeList modelGradeList = new GradeList();
         for (JsonAdaptedGrade grade : grades) {
             modelGradeList.addGrade(grade.toModelType());
