@@ -19,6 +19,9 @@ public class GradeLevel {
      * Constructs a {@code GradeLevel}.
      */
     public GradeLevel(String schoolLevel, int grade) {
+        if (!isValidGradeLevel(schoolLevel + " " + grade)) {
+            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
+        }
         this.schoolLevel = schoolLevel;
         this.grade = grade;
         this.value = schoolLevel + " " + grade;
@@ -28,6 +31,9 @@ public class GradeLevel {
      * Constructs a {@code GradeLevel}.
      */
     public GradeLevel(String gradeLevel) {
+        if (!isValidGradeLevel(gradeLevel)) {
+            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
+        }
         String[] gradeLevelParts = gradeLevel.split(" ");
         this.schoolLevel = gradeLevelParts[0];
         this.grade = Integer.parseInt(gradeLevelParts[1]);
@@ -73,6 +79,7 @@ public class GradeLevel {
 
     /**
      * Returns true if a given string is a valid grade level.
+     * @return
      */
     public static boolean isValidGradeLevel(String trimmedGradeLevel) {
         return trimmedGradeLevel.matches("^[a-zA-Z0-9 ]{1,50} [1-9]|1[0-2]$");
