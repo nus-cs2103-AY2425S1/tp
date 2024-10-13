@@ -36,9 +36,6 @@ jobs:
           java-version: '17'
           java-package: jdk+fx
 
-      - name: Clear gradle cache
-        run: ./gradlew check
-
       - name: Build and check with Gradle
         run: ./gradlew check coverage
 
