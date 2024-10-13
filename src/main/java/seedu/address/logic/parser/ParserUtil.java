@@ -10,6 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.DateOfLastVisit;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -120,5 +121,20 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String dateOfLastVisit} into a {@code DateOfLastVisit}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code dateOfLastVisit} is invalid.
+     */
+    public static DateOfLastVisit parseDateOfLastVisit(String dateOfLastVisit) throws ParseException{
+        requireNonNull(dateOfLastVisit);
+        String trimmedDateOfLastVisit = dateOfLastVisit.trim();
+        if (!DateOfLastVisit.isValidDateOfLastVisit(trimmedDateOfLastVisit)) {
+            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+        }
+        return new DateOfLastVisit(trimmedDateOfLastVisit);
     }
 }
