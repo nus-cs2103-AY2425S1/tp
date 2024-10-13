@@ -95,8 +95,11 @@ public class Person {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getTelegramHandle().equals(getTelegramHandle())
+        if (otherPerson == null) {
+            return false;
+        }
+
+        return otherPerson.getTelegramHandle().equals(getTelegramHandle())
                 || otherPerson.getEmail().equals(getEmail())
                 || (otherPerson.getNickname().equals(getNickname()) && otherPerson.getName().equals(getName()));
     }

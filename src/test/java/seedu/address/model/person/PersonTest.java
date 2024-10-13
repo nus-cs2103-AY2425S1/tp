@@ -9,8 +9,12 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_PRESIDENT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_STATUS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_HANDLE_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.*;
-
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.BOBNICK;
+import static seedu.address.testutil.TypicalPersons.BOB_HASSAMEEMAIL_ALICE;
+import static seedu.address.testutil.TypicalPersons.BOB_HASSAMENICK_BOBNICK;
+import static seedu.address.testutil.TypicalPersons.BOB_HASSAMETELE_ALICE;
 
 import org.junit.jupiter.api.Test;
 
@@ -52,22 +56,22 @@ public class PersonTest {
         assertFalse(BOB.isSamePerson(editedBob));
     }
 
-    /**
-     * Summary of the below tests, testing Persons where all the traits are different but
-     * - same telegram handle
-     * - same email
-     * - same (nick + name)
-     */
+
     @Test
     public void hasSameFields() {
+        // Summary of the below tests, testing Persons where all the traits are different but
+        // - same telegram handle
+        // - same email
+        // - same (nick + name)
+
         // same object -> returns true
         assertTrue(ALICE.hasSameFields(ALICE));
 
         // null -> returns false
         assertFalse(ALICE.hasSameFields(null));
 
-        // different fields for (name + nickname), tele handle, email -> true
-        assertTrue(!ALICE.hasSameFields(BOB));
+        // different fields for (name + nickname), tele handle, email -> false
+        assertFalse(ALICE.hasSameFields(BOB));
 
         // Both of the following Bob's have exactly one conflicting field with Alice
         // same tele -> true ; same email -> true
@@ -79,7 +83,7 @@ public class PersonTest {
         assertFalse(BOB.hasSameFields(BOBNICK));
 
         // same (name + nick) -> true // the bob's below have different email and tele
-        assertTrue(BOBNICK.hasSameFields(BOB_HASSAMENICK_BOBNICK);
+        assertTrue(BOBNICK.hasSameFields(BOB_HASSAMENICK_BOBNICK));
     }
 
     @Test

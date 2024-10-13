@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_PRESIDENT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_HANDLE_BOB;
@@ -55,11 +56,15 @@ public class EditCommandTest {
         Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
 
         PersonBuilder personInList = new PersonBuilder(lastPerson);
-        Person editedPerson = personInList.withName(VALID_NAME_BOB).withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB)
+        Person editedPerson = personInList.withName(VALID_NAME_BOB)
+                .withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB + "a1")
+                .withEmail(VALID_EMAIL_BOB + "a1")
                 .withRoles(VALID_ROLE_PRESIDENT).build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB).withRoles(VALID_ROLE_PRESIDENT).build();
+                .withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB + "a1")
+                .withEmail(VALID_EMAIL_BOB + "a1")
+                .withRoles(VALID_ROLE_PRESIDENT).build();
         EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
@@ -87,9 +92,15 @@ public class EditCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(personInFilteredList).withName(VALID_NAME_BOB).build();
+        Person editedPerson = new PersonBuilder(personInFilteredList).withName(VALID_NAME_BOB)
+                .withTelegramHandle(personInFilteredList.getTelegramHandle() + "abc")
+                .withEmail(personInFilteredList.getEmail() + "abc")
+                .build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
-                new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
+                new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
+                        .withTelegramHandle(personInFilteredList.getTelegramHandle() + "abc")
+                        .withEmail(personInFilteredList.getEmail() + "abc")
+                        .build());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 

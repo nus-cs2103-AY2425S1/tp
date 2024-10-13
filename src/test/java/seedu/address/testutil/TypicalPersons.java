@@ -22,9 +22,9 @@ import seedu.address.model.person.Person;
  * A utility class containing a list of {@code Person} objects to be used in tests.
  */
 public class TypicalPersons {
-    private static final String ALICE_TELEGRAMHANDLE = "94351253";
-    private static final String ALICE_EMAIL = "alice@example.com";
-    private static final String BOB_NICKNAME = "booby";
+    public static final String ALICE_TELEGRAMHANDLE = "94351253";
+    public static final String ALICE_EMAIL = "alice@example.com";
+    public static final String BOB_NICKNAME = "booby";
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withStudentStatus("undergraduate 1").withEmail(ALICE_EMAIL)
