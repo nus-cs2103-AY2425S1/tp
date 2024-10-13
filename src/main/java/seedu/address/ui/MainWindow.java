@@ -34,7 +34,10 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private NavBar navBar;
 
+    @FXML
+    private StackPane navBarPlaceholder;
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -121,6 +124,32 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        NavBar navBar = new NavBar(this::handleNav);
+        navBarPlaceholder.getChildren().add(navBar.getRoot());
+
+        // Default view shows the contacts list
+        navBar.pressContactsButton();
+        displayContactsList();
+    }
+
+
+    private void handleNav(String page) {
+        if (page.equals("Contacts")) {
+            displayContactsList();
+        } else if (page.equals("Events")) {
+            displayEventsList();
+        }
+    }
+
+    private void displayContactsList() {
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanelPlaceholder.getChildren().setAll(personListPanel.getRoot());
+    }
+
+    private void displayEventsList() {
+        personListPanelPlaceholder.getChildren().clear(); // Clear the list when toggling to Events
+        // Add future code here to display event objects when they are created
     }
 
     /**
