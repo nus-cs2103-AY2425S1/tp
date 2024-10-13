@@ -55,8 +55,8 @@ public class EmergencyContactCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        if (personToEdit.getEmergencyContact() != null && (!personToEdit.getEmergencyContact().contactName.isEmpty()
-                || !personToEdit.getEmergencyContact().contactNumber.isEmpty())) {
+        if (personToEdit.getEmergencyContact() != null && !personToEdit.getEmergencyContact().contactName.isEmpty()
+                && !personToEdit.getEmergencyContact().contactNumber.isEmpty()) {
             throw new CommandException(generateEmergencyContactExistsMessage(personToEdit));
         }
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
