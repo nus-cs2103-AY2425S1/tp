@@ -19,7 +19,7 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
 
     /**
-     * Added Additional Help Messages
+     * Add Additional Help Messages
      */
     private static final String ADD_PERSON_HELP = "Add a person: Use the command 'add' followed by the details.";
     private static final String LIST_PERSONS_HELP = "List all persons: Use the command 'list' to view all contacts.";
