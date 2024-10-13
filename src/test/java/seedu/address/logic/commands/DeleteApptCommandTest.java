@@ -12,6 +12,8 @@ import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.function.Supplier;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
@@ -32,6 +34,9 @@ import seedu.address.testutil.PersonBuilder;
 
 public class DeleteApptCommandTest {
 
+    public static final Supplier<AssertionError> TESTCASE_WITHOUT_APPOINTMENT = () -> new AssertionError(
+            DeleteApptCommandParserTest.class + ": PLEASE USE ANOTHER TARGET");
+
     @Test
     public void execute_allFieldsSpecified_success() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -40,10 +45,7 @@ public class DeleteApptCommandTest {
         Appointment apptToDelete = targetPerson.getAppointments()
                                                .stream()
                                                .findFirst()
-                                               .orElseThrow(() -> new AssertionError(
-                                                       DeleteApptCommandParserTest.class
-                                                       + ": PLEASE USE ANOTHER TARGET")
-        );
+                                               .orElseThrow(TESTCASE_WITHOUT_APPOINTMENT);
         DeleteApptCommand delApptCommand = new DeleteApptCommand(
                 new NricMatchesPredicate(nric),
                 new AppointmentExistsPredicate(apptToDelete.getAppointmentDate(),
@@ -83,9 +85,7 @@ public class DeleteApptCommandTest {
         Appointment apptToDelete = targetPerson.getAppointments()
                                                .stream()
                                                .findFirst()
-                                               .orElseThrow(() -> new AssertionError(
-                                                       DeleteApptCommandParserTest.class
-                                                       + ": PLEASE USE ANOTHER TARGET")
+                                               .orElseThrow(TESTCASE_WITHOUT_APPOINTMENT
         );
         NricMatchesPredicate nricNotFound = new NricMatchesPredicate(nric);
         AppointmentExistsPredicate validAppt = new AppointmentExistsPredicate(apptToDelete.getAppointmentDate(),
@@ -103,9 +103,7 @@ public class DeleteApptCommandTest {
         Appointment apptToDelete = targetPerson.getAppointments()
                                                .stream()
                                                .findFirst()
-                                               .orElseThrow(() -> new AssertionError(
-                                                       DeleteApptCommandParserTest.class
-                                                       + ": PLEASE USE ANOTHER TARGET")
+                                               .orElseThrow(TESTCASE_WITHOUT_APPOINTMENT
         );
         DeleteApptCommand delApptCommandWrongDate = new DeleteApptCommand(
                 new NricMatchesPredicate(nric),
