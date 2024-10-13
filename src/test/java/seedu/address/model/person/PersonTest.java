@@ -37,8 +37,8 @@ public class PersonTest {
 
         // same name and phone, all other attributes different -> returns true
         Person editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB)
-                                                     .withAddress(VALID_ADDRESS_BOB).withSchedule(VALID_SCHEDULE_BOB)
-                                                     .withSubject(VALID_SUBJECT_BOB).withRate(VALID_RATE_BOB).build();
+                .withAddress(VALID_ADDRESS_BOB).withSchedule(VALID_SCHEDULE_BOB)
+                .withSubject(VALID_SUBJECT_BOB).withRate(VALID_RATE_BOB).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // same name, all other attributes different -> returns false
