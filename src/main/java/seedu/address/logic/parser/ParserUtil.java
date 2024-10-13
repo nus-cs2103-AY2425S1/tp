@@ -205,6 +205,5 @@ public class ParserUtil {
 
     public static boolean isValidIndex(String preamble) {
         return StringUtil.isNonZeroUnsignedInteger(preamble);
-
-    
+    }
 }
