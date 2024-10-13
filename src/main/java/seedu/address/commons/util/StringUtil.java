@@ -39,6 +39,38 @@ public class StringUtil {
     }
 
     /**
+     * Returns true if the {@code sentence} contains the {@code partialWord}.
+     *   Ignores case, but a full word match is NOT required.
+     *   <br>examples:<pre>
+     *       containsPartialWordIgnoreCase("ABc def", "abc") == true
+     *       containsPartialWordIgnoreCase("ABc def", "DEF") == true
+     *       containsPartialWordIgnoreCase("ABc def", "AB") == true // full word match not required
+     *       containsPartialWordIgnoreCase("ABc def", "fg") == false
+     *       </pre>
+     * @param sentence cannot be null
+     * @param partialWord cannot be null, cannot be empty, must be a single word
+     */
+    public static boolean containsPartialWordIgnoreCase(String sentence, String partialWord) {
+        requireNonNull(sentence);
+        requireNonNull(partialWord);
+
+        // prepare partial word (using lower case for case insensitive search)
+        String preppedPartialWord = partialWord.trim().toLowerCase();
+        checkArgument(!preppedPartialWord.isEmpty(), "Parital Word parameter cannot be empty");
+        checkArgument(preppedPartialWord.split("\\s+").length == 1,
+                "Partial Word parameter should be a single word");
+
+        // prepare sentence (using lower case for case insensitive search)
+        String preppedSentence = sentence.toLowerCase();
+
+        // There is no need to check each individual word in person name for contains preppedWord because
+        // 1) if a word in person name contains prepped word -> preppedSentence contains preppedWord
+        // 2) if preppedSentence contains prepped word -> a word in person name contains prepped word
+        // 2 is because preppedWord doesn't have any spaces
+        return preppedSentence.contains(preppedPartialWord);
+    }
+
+    /**
      * Returns a detailed message of the t, including the stack trace.
      */
     public static String getDetails(Throwable t) {
