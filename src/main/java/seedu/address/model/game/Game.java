@@ -19,9 +19,10 @@ public class Game {
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public final String gameName;
+    public final Username username;
 
     /**
-     * Constructs a {@code Game}.
+     * Constructs a {@code Game} without a username.
      *
      * @param gameName A valid Game name.
      */
@@ -29,6 +30,19 @@ public class Game {
         requireNonNull(gameName);
         checkArgument(isValidGameName(gameName), MESSAGE_CONSTRAINTS);
         this.gameName = gameName;
+        this.username = null;
+    }
+
+    /**
+     * Constructs a {@code Game} with a username.
+     *
+     * @param gameName A valid Game name.
+     */
+    public Game(String gameName, String username) {
+        requireNonNull(gameName);
+        checkArgument(isValidGameName(gameName), MESSAGE_CONSTRAINTS);
+        this.gameName = gameName;
+        this.username = new Username(username);
     }
 
     /**
@@ -62,7 +76,11 @@ public class Game {
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + gameName + ']';
+        if (username == null) {
+            return '[' + gameName + ']';
+        } else {
+            return '[' + gameName + "]: " + username.toString();
+        }
     }
 
 }
