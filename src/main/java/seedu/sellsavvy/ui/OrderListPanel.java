@@ -20,7 +20,7 @@ import seedu.sellsavvy.model.person.Person;
 public class OrderListPanel extends UiPart<Region> {
     private static final String FXML = "OrderListPanel.fxml";
     private static final String DEFAULT_TITLE = "Order";
-    private static final String TITLE_WITH_SELECTED_PERSON = "Order( %1$s )";
+    private static final String TITLE_WITH_SELECTED_PERSON = "Order (%1$s)";
 
     private final Logger logger = LogsCenter.getLogger(OrderListPanel.class);
 
