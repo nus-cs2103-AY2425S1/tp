@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +11,7 @@ import seedu.address.testutil.PersonBuilder;
 
 
 public class IncomeCommandTest {
-    Model model = new ModelManager();
+    private final Model model = new ModelManager();
     @Test
     public void emptyAddressBook_noPaidAmount_noOwedAmount() {
         CommandResult commandResult = new IncomeCommand().execute(model);
@@ -20,7 +19,7 @@ public class IncomeCommandTest {
     }
 
     @Test
-    public void addPerson_showUpdated_PaidAndOwed() {
+    public void addPerson_showUpdated_paidAndOwed() {
         Person validPerson = new PersonBuilder().build();
         model.addPerson(validPerson);
         CommandResult commandResult = new IncomeCommand().execute(model);
