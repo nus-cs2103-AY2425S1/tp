@@ -1,35 +1,74 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
+
+import java.util.List;
+import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
+import seedu.address.model.person.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.PriorityPredicate;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Filters and lists all persons in address book according to the given filter parameters.
+ * Keyword matching for names and addresses is case insensitive.
  */
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters persons in the address book according to the "
+            + "following parameters. A combination of them can be used. Note that to specify multiple addresses, the "
+            + "prefix \"" + PREFIX_ADDRESS + "\" should be used for each new address.\n"
+            + "Parameters: "
+            + PREFIX_NAME + "START OF NAME "
+            + PREFIX_ADDRESS + "PART OF ADDRESS "
+            + PREFIX_PRIORITY + "PRIORITY\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NAME + "Jo "
+            + PREFIX_ADDRESS + "Clementi ";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final List<String> names;
+    private final List<String> addresses;
+    private final List<String> priorities;
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
-        this.predicate = predicate;
+    /**
+     * Creates a FindCommand to filter the address book by the given lists of
+     * {@code names}, {@code addresses}, and {@code priorities}
+     *
+     */
+    public FindCommand(List<String> names, List<String> addresses, List<String> priorities) {
+        this.names = names;
+        this.addresses = addresses;
+        this.priorities = priorities;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
+
+        Predicate<Person> finalPredicate = person -> true; // default starting predicate
+
+        if (!this.names.isEmpty()) {
+            finalPredicate = finalPredicate.and(new NameContainsKeywordsPredicate(names));
+        }
+
+        if (!this.addresses.isEmpty()) {
+            finalPredicate = finalPredicate.and(new AddressContainsKeywordsPredicate(addresses));
+        }
+
+        if (!this.priorities.isEmpty()) {
+            finalPredicate = finalPredicate.and(new PriorityPredicate(priorities));
+        }
+
+        model.updateFilteredPersonList(finalPredicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
@@ -46,13 +85,17 @@ public class FindCommand extends Command {
         }
 
         FindCommand otherFindCommand = (FindCommand) other;
-        return predicate.equals(otherFindCommand.predicate);
+        return names.equals(otherFindCommand.names)
+                && addresses.equals(otherFindCommand.addresses)
+                && priorities.equals(otherFindCommand.priorities);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("predicate", predicate)
+                .add("names", names)
+                .add("addresses", addresses)
+                .add("priorities", priorities)
                 .toString();
     }
 }

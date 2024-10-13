@@ -6,19 +6,19 @@ import java.util.function.Predicate;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code Person}'s {@code Address} matches any of the keywords given.
  */
-public class NameContainsKeywordsPredicate implements Predicate<Person> {
+public class PriorityPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
-    public NameContainsKeywordsPredicate(List<String> keywords) {
+    public PriorityPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
     @Override
     public boolean test(Person person) {
-        return keywords.stream()
-                .anyMatch(keyword -> person.getName().fullName.toLowerCase().startsWith(keyword.toLowerCase()));
+        return keywords.stream().map(String::toUpperCase)
+                .anyMatch(keyword -> keyword.equals(person.getPriority().name()));
     }
 
     @Override
@@ -28,12 +28,12 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof NameContainsKeywordsPredicate)) {
+        if (!(other instanceof PriorityPredicate)) {
             return false;
         }
 
-        NameContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (NameContainsKeywordsPredicate) other;
-        return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
+        PriorityPredicate otherPriorityPredicate = (PriorityPredicate) other;
+        return keywords.equals(otherPriorityPredicate.keywords);
     }
 
     @Override
