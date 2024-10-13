@@ -94,6 +94,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public long checkClashes(Person person) {
+        requireNonNull(person);
+        return addressBook.countClashes(person);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }

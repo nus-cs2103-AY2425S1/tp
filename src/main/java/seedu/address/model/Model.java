@@ -57,6 +57,8 @@ public interface Model {
      */
     boolean hasPerson(Person person);
 
+    public long checkClashes(Person person);
+
     /**
      * Deletes the given person.
      * The person must exist in the address book.

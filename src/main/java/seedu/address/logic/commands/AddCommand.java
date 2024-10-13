@@ -45,6 +45,7 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_HAS_CLASHES = "\n You have %d other students on the same schedule";
 
     private final Person toAdd;
 
@@ -65,7 +66,15 @@ public class AddCommand extends Command {
         }
 
         model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        long clashes = model.checkClashes(toAdd);
+        if (clashes == 0) {
+            return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        } else {
+            return new CommandResult(
+                    String.format(MESSAGE_SUCCESS + MESSAGE_HAS_CLASHES, Messages.format(toAdd), clashes)
+            );
+        }
+
     }
 
     @Override

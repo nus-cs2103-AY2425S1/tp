@@ -36,6 +36,11 @@ public class UniquePersonList implements Iterable<Person> {
         return internalList.stream().anyMatch(toCheck::isSamePerson);
     }
 
+    public long countClash(Person toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().filter(toCheck::isClash).count();
+    }
+
     /**
      * Adds a person to the list.
      * The person must not already exist in the list.

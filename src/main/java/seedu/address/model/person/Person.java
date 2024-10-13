@@ -86,6 +86,14 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone());
     }
 
+    public boolean isClash(Person otherPerson) {
+        if (otherPerson == this) {
+            return true;
+        }
+
+        return otherPerson != null && otherPerson.getSchedule().equals(getSchedule());
+    }
+
     /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
