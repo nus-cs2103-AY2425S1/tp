@@ -1,10 +1,9 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
-import java.util.function.Predicate;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;

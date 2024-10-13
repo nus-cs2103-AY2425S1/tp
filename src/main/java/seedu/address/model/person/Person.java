@@ -5,10 +5,9 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.List;
-
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -121,6 +120,15 @@ public class Person {
                 .toString();
     }
 
+    /**
+     * Adds a new schedule entry to the list of schedules for the person.
+     * The schedule is stored as a formatted string containing the event name,
+     * date, and time.
+     *
+     * @param name The name or description of the schedule event.
+     * @param date The date of the event in LocalDate format.
+     * @param time The time of the event in LocalTime format.
+     */
     public void addSchedule(String name, LocalDate date, LocalTime time) {
         String schedule = name + " on " + date + " at " + time;
         schedules.add(schedule);
