@@ -115,9 +115,6 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                // && fees.equals(otherPerson.fees)
-                // && classId.equals(otherPerson.classId)
-                // && monthsPaid.equals(otherPerson.monthsPaid)
                 && tags.equals(otherPerson.tags);
     }
 
@@ -134,8 +131,6 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                //.add("fees", fees)
-                //.add("classId", classId)
                 .add("tags", tags)
                 .toString();
     }

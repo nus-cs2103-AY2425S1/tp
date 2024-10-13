@@ -41,11 +41,6 @@ public class EditPersonDescriptorBuilder {
         descriptor.setFees(person.getFees());
         descriptor.setClassId(person.getClassId());
         descriptor.setTags(person.getTags());
-        if (person.getTags().isEmpty()) {
-            descriptor.setTags(null); // Set tags to null if no tags are provided
-        } else {
-            descriptor.setTags(person.getTags());
-        }
     }
 
     /**
