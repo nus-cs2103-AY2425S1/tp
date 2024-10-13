@@ -18,9 +18,13 @@ public class Notes {
         this.notes = notes;
     }
 
-    public List<String> getNotes() { return this.notes; }
+    public List<String> getNotes() {
+        return this.notes;
+    }
 
-    public void setNotes(List<String> notes) { this.notes = notes; }
+    public void setNotes(List<String> notes) {
+        this.notes = notes;
+    }
 
     public void add(String note) {
         notes.add(note);
