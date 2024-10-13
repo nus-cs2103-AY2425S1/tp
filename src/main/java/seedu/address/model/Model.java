@@ -3,6 +3,7 @@ package seedu.address.model;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 
+import javafx.beans.value.ObservableObjectValue;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.vendor.Vendor;
@@ -88,4 +89,14 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredVendorList(Predicate<Vendor> predicate);
+
+    /**
+     * Returns the current selected vendor.
+     */
+    ObservableObjectValue<Vendor> getViewedVendor();
+
+    /**
+     * Sets the selected vendor.
+     */
+    void viewVendor(Vendor vendor);
 }

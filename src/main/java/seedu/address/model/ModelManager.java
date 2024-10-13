@@ -7,6 +7,9 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableObjectValue;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
@@ -22,6 +25,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Vendor> filteredVendors;
+    private final ObjectProperty<Vendor> selectedVendor;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,13 +38,15 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredVendors = new FilteredList<>(this.addressBook.getVendorList());
+        selectedVendor = new SimpleObjectProperty<>(null);
     }
 
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
     }
 
-    //=========== UserPrefs ==================================================================================
+    // =========== UserPrefs
+    // ==================================================================================
 
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
@@ -75,7 +81,8 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    // =========== AddressBook
+    // ================================================================================
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
@@ -111,11 +118,12 @@ public class ModelManager implements Model {
         addressBook.setVendor(target, editedVendor);
     }
 
-    //=========== Filtered Vendor List Accessors =============================================================
+    // =========== Filtered Vendor List Accessors
+    // =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Vendor} backed by the internal list of
-     * {@code versionedAddressBook}
+     * Returns an unmodifiable view of the list of {@code Vendor} backed by the
+     * internal list of {@code versionedAddressBook}
      */
     @Override
     public ObservableList<Vendor> getFilteredVendorList() {
@@ -140,9 +148,22 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
-                && userPrefs.equals(otherModelManager.userPrefs)
+        return addressBook.equals(otherModelManager.addressBook) && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredVendors.equals(otherModelManager.filteredVendors);
+    }
+
+    // =========== Viewed Vendor Accessors
+    // =============================================================
+
+    @Override
+    public ObservableObjectValue<Vendor> getViewedVendor() {
+        return selectedVendor;
+    }
+
+    @Override
+    public void viewVendor(Vendor vendor) {
+        requireNonNull(vendor);
+        selectedVendor.setValue(vendor);
     }
 
 }

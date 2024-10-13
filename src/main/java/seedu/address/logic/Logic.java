@@ -2,6 +2,7 @@ package seedu.address.logic;
 
 import java.nio.file.Path;
 
+import javafx.beans.value.ObservableObjectValue;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
@@ -32,6 +33,9 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of vendors */
     ObservableList<Vendor> getFilteredVendorList();
+
+    /** Returns a view of the current selected vendor */
+    ObservableObjectValue<Vendor> getViewedVendor();
 
     /**
      * Returns the user prefs' address book file path.

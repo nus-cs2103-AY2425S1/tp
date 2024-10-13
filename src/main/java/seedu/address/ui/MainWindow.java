@@ -113,7 +113,7 @@ public class MainWindow extends UiPart<Stage> {
         vendorListPanel = new VendorListPanel(logic.getFilteredVendorList());
         leftPanelPlaceholder.getChildren().add(vendorListPanel.getRoot());
 
-        vendorDetailsPanel = new VendorDetailsPanel(logic.getFilteredVendorList().get(0));
+        vendorDetailsPanel = new VendorDetailsPanel(logic.getViewedVendor());
         rightPanelPlaceholder.getChildren().add(vendorDetailsPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
