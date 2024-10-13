@@ -11,6 +11,8 @@ public class DateOfLastVisit {
 
     public static final String MESSAGE_CONSTRAINTS = "Date of last visit should be in dd-MM-yyyy format.";
 
+    // regex not written yet
+    // date must be in the format dd-MM-yyyy
     public static final String VALIDATION_REGEX = "";
 
     public final String value;
