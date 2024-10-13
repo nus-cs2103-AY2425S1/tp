@@ -32,7 +32,7 @@ public class EmergencyContactCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_addRemarkUnfilteredList_success() {
+    public void execute_addEmergencyContactUnfilteredList_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson).withEmergencyContact(EMERGENCY_CONTACT_NAME_STUB,
                 EMERGENCY_CONTACT_NUMBER_STUB).build();
@@ -46,7 +46,7 @@ public class EmergencyContactCommandTest {
         assertCommandSuccess(emergencyContactCommand, model, expectedMessage, expectedModel);
     }
     @Test
-    public void execute_deleteRemarkUnfilteredList_success() {
+    public void execute_deleteEmergencyContactUnfilteredList_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson).withEmergencyContact("",
                 "").build();
