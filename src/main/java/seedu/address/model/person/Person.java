@@ -58,6 +58,10 @@ public class Person {
         return address;
     }
 
+    public PolicyMap getPolicyMap() {
+        return policies;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.

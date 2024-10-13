@@ -16,15 +16,6 @@ public class ListExpiringPoliciesCommandTest {
     private final Model model = new ModelManager();
 
     @Test
-    public void execute_listExpiringPolicies_throwsCommandException() {
-        /* this test matches the current stage of development when the logic has yet to be implemented and a
-         placeholder exception is used*/
-        CommandException thrown = assertThrows(CommandException.class, () ->
-                listExpiringPoliciesCommand.execute(model));
-        assertEquals("listExpiringPolicies command has not been implemented yet", thrown.getMessage());
-    }
-
-    @Test
     public void equals() {
         // since ListExpiringPoliciesCommand has no state, all instances should be equal
         ListExpiringPoliciesCommand firstCommand = new ListExpiringPoliciesCommand();

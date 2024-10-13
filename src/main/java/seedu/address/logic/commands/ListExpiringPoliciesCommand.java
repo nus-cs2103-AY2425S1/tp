@@ -10,6 +10,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyExpiryDatePredicate;
+import seedu.address.model.policy.PolicyMap;
 
 /**
  * Lists all policies in the address book that are nearing expiry within the next 30 days.
@@ -39,34 +40,54 @@ public class ListExpiringPoliciesCommand extends Command {
         try {
             LocalDate currentDate = LocalDate.now();
 
+            // Create a predicate to filter policies expiring within the next 30 days
             PolicyExpiryDatePredicate predicate = new PolicyExpiryDatePredicate(currentDate);
-            model.updateFilteredPolicyList(predicate);
 
-            List<Policy> expiringPolicies = model.getFilteredPolicyList();
+            // Retrieve all persons from the model
+            List<Person> persons = model.getFilteredPersonList();
 
-            if (expiringPolicies.isEmpty()) {
+            // StringBuilder to hold the result message
+            StringBuilder resultMessage = new StringBuilder(MESSAGE_SUCCESS);
+
+            boolean hasExpiringPolicies = false;
+
+            // Iterate over all persons and their policies
+            for (Person person : persons) {
+                PolicyMap policyMap = person.getPolicyMap();
+
+                // Filter the policies based on expiry date predicate
+                for (Policy policy : policyMap.getAllPolicies()) {
+                    if (predicate.test(policy)) {
+                        // At least one expiring policy exists
+                        hasExpiringPolicies = true;
+
+                        // Append the policy details to the result message
+                        resultMessage.append(String.format(
+                                MESSAGE_POLICY_LISTED_DETAILS,
+                                person.getPhone().toString(),
+                                policy.getType().toString(),
+                                policy.getPremiumAmount(),
+                                policy.getCoverageAmount(),
+                                policy.getExpiryDate().toLocalDate()
+                        ));
+                    }
+                }
+            }
+
+            // If no expiring policies were found
+            if (!hasExpiringPolicies) {
                 return new CommandResult(MESSAGE_NO_EXPIRING_POLICY);
             }
 
-            // Construct the success message with policy details
-            StringBuilder resultMessage = new StringBuilder(MESSAGE_SUCCESS);
-            for (Policy policy : expiringPolicies) {
-                Person insuree = policy.getInsuree();
-                resultMessage.append(String.format(
-                        MESSAGE_POLICY_LISTED_DETAILS,
-                        insuree.getPhone().toString(),
-                        policy.getType().toString(),
-                        policy.getPremiumAmount(),
-                        policy.getCoverageAmount(),
-                        policy.getExpiryDate().toLocalDate())); // convert LocalDateTime to LocalDate for output
-            }
-
+            // Return the result message if expiring policies were found
             return new CommandResult(resultMessage.toString());
 
         } catch (Exception e) {
+            // Handle any unexpected errors and return a failure message
             return new CommandResult(MESSAGE_FAILURE);
         }
     }
+
 
 
 
