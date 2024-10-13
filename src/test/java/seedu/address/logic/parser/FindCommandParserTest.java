@@ -18,57 +18,56 @@ public class FindCommandParserTest {
     private FindCommandParser parser = new FindCommandParser();
 
     @Test
-    public void test_parseWithEmptyArg_returnsFailure() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+    public void test_parseWithEmptyArg_failure() {
+        assertParseFailure(parser, "     ", String.format(FindCommand.NO_SEARCH_FIELDS_PROVIDED));
     }
 
-
-
     @Test
-    public void test_parseWithValidArgsWithName_returnsSuccess() {
+    public void test_parseWithValidArgsWithName_success() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
                 new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
-        assertParseSuccess(parser, "n/Alice Bob", expectedFindCommand);
+        assertParseSuccess(parser, " n/Alice Bob", expectedFindCommand);
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, "n/ \n Alice \n \t Bob  \t", expectedFindCommand);
+        assertParseSuccess(parser, " n/ \n Alice \n \t Bob  \t", expectedFindCommand);
     }
 
 
     @Test
-    public void test_parseWithInvalidArgsWithName_returnsFailure() {
-        // missing keywords after n/
-        assertParseFailure(parser, "n/",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-
-        // missing both prefixes
-        assertParseFailure(parser, "Alice Bob",
+    public void test_parseWithInvalidArgsWithName_failure() {
+        // missing n/ prefix
+        assertParseFailure(parser, " Alice Bob",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
     @Test
-    public void test_parseWithValidArgsWithClassId_returnsSuccess() {
+    public void test_parseWithValidArgsWithClassId_success() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
                 new FindCommand(new ClassIdContainsKeywordsPredicate(Arrays.asList("1", "2")));
-        assertParseSuccess(parser, "c/1 2", expectedFindCommand);
+        assertParseSuccess(parser, " c/1 2", expectedFindCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, "c/ \n 1 \n \t 2  \t", expectedFindCommand);
+        assertParseSuccess(parser, " c/ \n 1 \n \t 2  \t", expectedFindCommand);
     }
 
     @Test
-    public void test_parseValidArgsWithNameAndClassId_returnsSuccess() {
+    public void test_parseValidArgsWithNameAndClassId_success() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
                 new FindCommand(new NameAndClassIdContainsKeywordsPredicate(Arrays.asList("Bob", "Alice"),
                         Arrays.asList("1", "2")));
-        assertParseSuccess(parser, "n/Bob Alice c/1 2", expectedFindCommand);
+        assertParseSuccess(parser, " n/Bob Alice c/1 2", expectedFindCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, "n/ Bob \n Alice c/ \n 1 \n \t 2  \t", expectedFindCommand);
+        assertParseSuccess(parser, " n/ Bob \n Alice c/ \n 1 \n \t 2  \t", expectedFindCommand);
     }
 
+    @Test
+    public void test_nonEmptyPreambleWithValidArgsWithClassId_failure() {
+        assertParseFailure(parser, "asdf n/Test",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
 
+    }
 
 }

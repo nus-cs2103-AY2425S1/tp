@@ -25,6 +25,8 @@ public class FindCommand extends Command {
             + "Example 2: " + COMMAND_WORD + " c/1 2\n"
             + "Example 3: " + COMMAND_WORD + " n/alice c/1\n";
 
+    public static final String NO_SEARCH_FIELDS_PROVIDED = "At least one field to search by must be provided.";
+
     private final NameContainsKeywordsPredicate predicate;
 
     private final ClassIdContainsKeywordsPredicate predicateClassId;
@@ -98,6 +100,7 @@ public class FindCommand extends Command {
         } else if (predicateClassId != null) {
             return predicateClassId.equals(otherFindCommand.predicateClassId);
         } else {
+            assert(predicateNameAndClassId != null);
             return predicateNameAndClassId.equals(otherFindCommand.predicateNameAndClassId);
         }
 

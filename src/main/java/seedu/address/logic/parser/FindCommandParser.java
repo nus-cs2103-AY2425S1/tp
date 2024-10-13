@@ -19,33 +19,33 @@ public class FindCommandParser implements Parser<FindCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
-     * and returns a FindCommand object for execution, n/ input finds for name, c/ input finds
-     * for classId
-     *
+     * and returns a FindCommand object for execution.
+     * Accepts n/ for name and c/ for classId.
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        // tokenize's args expects a preamble - we do not have a preamble!
+        // which is why tests fail if userInput does not start with a single whitespace
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_CLASSID);
+        if (!argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_CLASSID);
 
-        if (trimmedArgs.contains(PREFIX_NAME.toString()) && trimmedArgs.contains(PREFIX_CLASSID.toString())) {
-            String[] nameKeywords = ParserUtil.parseNameClassIdFind(trimmedArgs);
-            String[] classIdKeywords = ParserUtil.parseClassIdFind(trimmedArgs);
+        if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_CLASSID).isPresent()) {
+            String[] nameKeywords = argMultimap.getValue(PREFIX_NAME).get().split("\\s+");
+            String[] classIdKeywords = argMultimap.getValue(PREFIX_CLASSID).get().split("\\s+");
             return new FindCommand(new NameAndClassIdContainsKeywordsPredicate(Arrays.asList(nameKeywords),
                     Arrays.asList(classIdKeywords)));
-        }
-
-        if (trimmedArgs.contains(PREFIX_NAME.toString())) {
-            String[] nameKeywords = ParserUtil.parseNameFind(trimmedArgs);
+        } else if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_CLASSID).isEmpty()) {
+            String[] nameKeywords = argMultimap.getValue(PREFIX_NAME).get().split("\\s+");
             return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        } else if (argMultimap.getValue(PREFIX_NAME).isEmpty() && argMultimap.getValue(PREFIX_CLASSID).isPresent()) {
+            String[] classIdKeywords = argMultimap.getValue(PREFIX_CLASSID).get().split("\\s+");
+            return new FindCommand(new ClassIdContainsKeywordsPredicate(Arrays.asList(classIdKeywords)));
         }
 
-        String[] classIdKeywords = ParserUtil.parseClassIdFind(trimmedArgs);
-        return new FindCommand(new ClassIdContainsKeywordsPredicate(Arrays.asList(classIdKeywords)));
-
+        throw new ParseException(FindCommand.NO_SEARCH_FIELDS_PROVIDED);
     }
 
 }
