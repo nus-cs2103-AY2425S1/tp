@@ -3,14 +3,12 @@
     "name": "Alice Pauline",
     "phone": "94351253",
     "gender": "female",
-    "address": "123, Jurong West Ave 6, #08-111",
     "module": "CS2103T",
     "tags": [ "friends" ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "gender": "female",
-    "address": "4th street",
     "module": "CS2103T"
   } ]
 }
