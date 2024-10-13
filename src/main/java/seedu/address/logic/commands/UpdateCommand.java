@@ -29,6 +29,7 @@ import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
+import seedu.address.model.person.task.TaskList;
 
 /**
  * Updates the details of an existing person in the address book.
@@ -108,9 +109,9 @@ public class UpdateCommand extends Command {
         Note updatedNote = updatePersonDescriptor.getNote().orElse(personToUpdate.getNote());
         Set<Subject> updatedSubjects = updatePersonDescriptor.getSubjects().orElse(personToUpdate.getSubjects());
         Level updatedLevel = updatePersonDescriptor.getLevel().orElse(personToUpdate.getLevel());
-
+        TaskList updatedTaskList = updatePersonDescriptor.getTaskList().orElse(personToUpdate.getTaskList());
         return new Person(updatedName, updatedPhone, updatedEmergencyContact,
-                updatedAddress, updatedNote, updatedSubjects, updatedLevel);
+                updatedAddress, updatedNote, updatedSubjects, updatedLevel, updatedTaskList);
     }
 
     @Override
@@ -149,6 +150,7 @@ public class UpdateCommand extends Command {
         private Note note;
         private Set<Subject> subjects;
         private Level level;
+        private TaskList taskList;
 
         public UpdatePersonDescriptor() {}
 
@@ -164,13 +166,14 @@ public class UpdateCommand extends Command {
             setNote(toCopy.note);
             setSubjects(toCopy.subjects);
             setLevel(toCopy.level);
+            setTaskList(toCopy.taskList);
         }
 
         /**
          * Returns true if at least one field is updated.
          */
         public boolean isAnyFieldUpdated() {
-            return CollectionUtil.isAnyNonNull(name, phone, emergencyContact, address, note, subjects, level);
+            return CollectionUtil.isAnyNonNull(name, phone, emergencyContact, address, note, subjects, level, taskList);
         }
 
         public void setName(Name name) {
@@ -238,6 +241,14 @@ public class UpdateCommand extends Command {
             return (subjects != null) ? Optional.of(Collections.unmodifiableSet(subjects)) : Optional.empty();
         }
 
+        public void setTaskList(TaskList taskList) {
+            this.taskList = taskList;
+        }
+
+        public Optional<TaskList> getTaskList() {
+            return Optional.ofNullable(taskList);
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -256,7 +267,8 @@ public class UpdateCommand extends Command {
                     && Objects.equals(address, otherUpdatePersonDescriptor.address)
                     && Objects.equals(note, otherUpdatePersonDescriptor.note)
                     && Objects.equals(subjects, otherUpdatePersonDescriptor.subjects)
-                    && Objects.equals(level, otherUpdatePersonDescriptor.level);
+                    && Objects.equals(level, otherUpdatePersonDescriptor.level)
+                    && Objects.equals(taskList, otherUpdatePersonDescriptor.taskList);
         }
 
         @Override
@@ -269,6 +281,7 @@ public class UpdateCommand extends Command {
                     .add("note", note)
                     .add("level", level)
                     .add("subjects", subjects)
+                    .add("task list", taskList)
                     .toString();
         }
     }

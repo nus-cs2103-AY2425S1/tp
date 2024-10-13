@@ -20,6 +20,7 @@ import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
+import seedu.address.model.person.task.TaskList;
 
 /**
  * Tags an existing student in the address book with a subject, school level or both.
@@ -92,8 +93,9 @@ public class TagCommand extends Command {
         Note updatedNote = tagsToAdd.getNote().orElse(personToTag.getNote());
         Set<Subject> updatedSubjects = tagsToAdd.getSubjects().orElse(personToTag.getSubjects());
         Level schoolLevel = tagsToAdd.getLevel().orElse(personToTag.getLevel());
+        TaskList updatedTaskList = tagsToAdd.getTaskList().orElse(personToTag.getTaskList());
         return new Person(updatedName, updatedPhone, updatedEmergencyContact,
-                updatedAddress, updatedNote, updatedSubjects, schoolLevel);
+                updatedAddress, updatedNote, updatedSubjects, schoolLevel, updatedTaskList);
     }
 
 

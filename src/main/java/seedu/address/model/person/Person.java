@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.task.TaskList;
 
 /**
  * Represents a Person in the address book.
@@ -25,12 +26,13 @@ public class Person {
     private final Note note;
     private final Set<Subject> subjects = new HashSet<>();
     private final Level level;
+    private final TaskList taskList;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, EmergencyContact emergencyContact,
-                  Address address, Note note, Set<Subject> subjects, Level level) {
+                  Address address, Note note, Set<Subject> subjects, Level level, TaskList tasklist) {
         requireAllNonNull(name, phone, address, subjects);
         this.name = name;
         this.phone = phone;
@@ -41,6 +43,7 @@ public class Person {
             this.subjects.addAll(subjects);
         }
         this.level = level;
+        this.taskList = tasklist;
     }
 
     public Name getName() {
@@ -73,6 +76,10 @@ public class Person {
 
     public Level getLevel() {
         return level;
+    }
+
+    public TaskList getTaskList() {
+        return taskList;
     }
 
     /**
@@ -110,13 +117,14 @@ public class Person {
                 && address.equals(otherPerson.address)
                 && note.equals(otherPerson.note)
                 && level.equals(otherPerson.level)
-                && subjects.equals(otherPerson.subjects);
+                && subjects.equals(otherPerson.subjects)
+                && taskList.equals(otherPerson.taskList);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, emergencyContact, address, note, subjects, level);
+        return Objects.hash(name, phone, emergencyContact, address, note, subjects, level, taskList);
     }
 
     @Override
@@ -129,6 +137,7 @@ public class Person {
                 .add("note", note)
                 .add("subjects", subjects)
                 .add("level", level)
+                .add("task list", taskList)
                 .toString();
     }
 

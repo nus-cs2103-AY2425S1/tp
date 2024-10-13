@@ -16,6 +16,9 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
+import seedu.address.model.person.task.Task;
+import seedu.address.model.person.task.TaskDeadline;
+import seedu.address.model.person.task.TaskDescription;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -149,6 +152,45 @@ public class ParserUtil {
             subjectSet.add(parseSubject(subjectName));
         }
         return subjectSet;
+    }
+
+    /**
+     * Parses a {@code String desc} into an {@code TaskDescription}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code desc} is invalid.
+     */
+    public static TaskDescription parseTaskDescription(String desc) throws ParseException {
+        requireNonNull(desc);
+        String trimmedTDesc = desc.trim();
+        if (!TaskDescription.isValidTaskDescription(desc)) {
+            throw new ParseException(TaskDescription.MESSAGE_CONSTRAINTS);
+        }
+        return new TaskDescription(trimmedTDesc);
+    }
+
+    /**
+     * Parses a {@code String deadline} into an {@code TaskDeadline}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code deadline} is invalid.
+     */
+    public static TaskDeadline parseTaskDeadline(String deadline) throws ParseException {
+        requireNonNull(deadline);
+        String trimmedTDeadline = deadline.trim();
+        if (!TaskDeadline.isValidTaskDeadline(deadline)) {
+            throw new ParseException(TaskDeadline.MESSAGE_CONSTRAINTS);
+        }
+        return new TaskDeadline(trimmedTDeadline);
+    }
+
+    /**
+     * Parses a {@code String desc} and {@code String deadline} into a {@code Task}.
+     */
+    public static Task parseTask(String desc, String deadline) throws ParseException {
+        requireNonNull(desc);
+        requireNonNull(deadline);
+        return new Task(parseTaskDescription(desc), parseTaskDeadline(deadline));
     }
 
     /**
