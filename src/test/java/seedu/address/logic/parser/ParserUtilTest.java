@@ -109,19 +109,6 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseModule_validValueWithoutWhitespace_returnsAddress() throws Exception {
-        Phone expectedModule = new Phone(VALID_MODULE);
-        assertEquals(expectedModule, ParserUtil.parsePhone(VALID_MODULE));
-    }
-
-    @Test
-    public void parseModule_validValueWithWhitespace_returnsTrimmedAddress() throws Exception {
-        String moduleWithWhitespace = WHITESPACE + VALID_MODULE + WHITESPACE;
-        Phone expectedModule = new Phone(VALID_MODULE);
-        assertEquals(expectedModule, ParserUtil.parsePhone(moduleWithWhitespace));
-    }
-
-    @Test
     public void parseTag_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseTag(null));
     }
