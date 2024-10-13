@@ -4,10 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.Messages.MESSAGE_DOCTORS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.KENNEDY;
 import static seedu.address.testutil.TypicalPersons.KAREN;
+import static seedu.address.testutil.TypicalPersons.KENNEDY;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookWithDoctors;
+
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
