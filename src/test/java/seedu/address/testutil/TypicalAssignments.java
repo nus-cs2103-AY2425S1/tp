@@ -1,8 +1,6 @@
 package seedu.address.testutil;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentList;

@@ -20,6 +20,7 @@ public class DeleteAssignmentCommandPaserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteAssignmentCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteAssignmentCommand.MESSAGE_USAGE));
     }
 }
