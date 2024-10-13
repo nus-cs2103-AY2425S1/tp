@@ -145,6 +145,15 @@ public class ModelManager implements Model {
         return assignmentList.getStatus(assignment, addressBook.getStudentList());
     }
 
+    @Override
+    public void setAssignmentStatus(Assignment assignment, Student targetStudent, boolean newStatus)
+            throws AssignmentNotFoundException {
+        requireAllNonNull(targetStudent, newStatus);
+
+        assignmentList.setStatus(assignment, targetStudent, newStatus);
+    }
+
+
     //=========== Filtered Student List Accessors =============================================================
 
     /**

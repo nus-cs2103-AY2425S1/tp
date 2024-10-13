@@ -24,6 +24,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentList;
+import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.StudentBuilder;
 
@@ -177,6 +178,12 @@ public class AddCommandTest {
 
         @Override
         public String checkAssignment(Assignment assignment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setAssignmentStatus(Assignment assignment, Student student, boolean status)
+                throws AssignmentNotFoundException {
             throw new AssertionError("This method should not be called.");
         }
     }

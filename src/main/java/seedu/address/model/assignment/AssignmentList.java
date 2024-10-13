@@ -64,10 +64,7 @@ public class AssignmentList {
      */
     public String getStatus(Assignment assignment, ObservableList<Student> studentList)
             throws AssignmentNotFoundException {
-        Assignment targetAssignment = assignments.stream()
-                .filter(assignment::equals)
-                .findFirst()
-                .orElseThrow(AssignmentNotFoundException::new);
+        Assignment targetAssignment = getAssignment(assignment);
         StringBuilder completedList = new StringBuilder("Students who have completed: \n");
         StringBuilder uncompletedList = new StringBuilder("Students who have not completed: \n");
         for (Student student : studentList) {
@@ -78,6 +75,20 @@ public class AssignmentList {
             }
         }
         return completedList.append("\n").append(uncompletedList).toString();
+    }
+
+    public void setStatus(Assignment assignment, Student targetStudent, boolean newStatus)
+            throws AssignmentNotFoundException {
+        Assignment targetAssignment = getAssignment(assignment);
+        int studentId = Integer.parseInt(targetStudent.getStudentId().value);
+        targetAssignment.markStatus(studentId, newStatus);
+    }
+
+    private Assignment getAssignment(Assignment assignment) throws AssignmentNotFoundException {
+        return assignments.stream()
+                .filter(assignment::equals)
+                .findFirst()
+                .orElseThrow(AssignmentNotFoundException::new);
     }
 
     @Override

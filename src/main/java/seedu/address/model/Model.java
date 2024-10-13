@@ -109,4 +109,7 @@ public interface Model {
      * @return String representing the completion statuses.
      */
     String checkAssignment(Assignment assignment) throws AssignmentNotFoundException;
+
+    void setAssignmentStatus(Assignment assignment, Student targetStudent, boolean newStatus)
+            throws AssignmentNotFoundException;
 }

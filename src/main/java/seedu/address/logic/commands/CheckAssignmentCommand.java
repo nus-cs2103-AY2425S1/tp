@@ -16,7 +16,7 @@ public class CheckAssignmentCommand extends Command {
     public static final String SUCCESS_MESSAGE = "Below are the assignment completion statistics for: ";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Check statuses of the assignment. "
             + "Parameters: "
-            + PREFIX_NAME + "NAME "
+            + PREFIX_NAME + "NAME \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Assignment 1 ";
     public static final String MESSAGE_ASSIGNMENT_NOT_FOUND = "There is no matching assignment with the given name!";
