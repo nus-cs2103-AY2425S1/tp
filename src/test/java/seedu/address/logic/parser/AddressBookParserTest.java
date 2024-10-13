@@ -70,7 +70,7 @@ public class AddressBookParserTest {
     public void parseCommand_tag() throws Exception {
         Set<Tag> tagList = SampleDataUtil.getTagSet("foodCatering", "planner", "weddingCakeBaker");
         TagCommand command = (TagCommand) parser.parseCommand(TagCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + "t/foodCatering t/planner t/weddingCakeBaker");
+                + INDEX_FIRST_PERSON.getOneBased() + " " + "t/foodCatering planner weddingCakeBaker");
         assertEquals(new TagCommand(INDEX_FIRST_PERSON, tagList), command);
 
     }
