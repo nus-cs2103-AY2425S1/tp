@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.beans.value.ObservableObjectValue;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.event.Event;
 import seedu.address.model.vendor.Vendor;
 
 /**
@@ -60,22 +61,21 @@ public interface Model {
     boolean hasVendor(Vendor vendor);
 
     /**
-     * Deletes the given vendor.
-     * The vendor must exist in the address book.
+     * Deletes the given vendor. The vendor must exist in the address book.
      */
     void deleteVendor(Vendor target);
 
     /**
-     * Adds the given vendor.
-     * {@code vendor} must not already exist in the address book.
+     * Adds the given vendor. {@code vendor} must not already exist in the address
+     * book.
      */
     void addVendor(Vendor vendor);
 
     /**
      * Replaces the given vendor {@code target} with {@code editedVendor}.
-     * {@code target} must exist in the address book.
-     * The vendor identity of {@code editedVendor} must not be the same as another
-     * existing vendor in the address book.
+     * {@code target} must exist in the address book. The vendor identity of
+     * {@code editedVendor} must not be the same as another existing vendor in the
+     * address book.
      */
     void setVendor(Vendor target, Vendor editedVendor);
 
@@ -85,7 +85,6 @@ public interface Model {
     /**
      * Updates the filter of the filtered vendor list to filter by the given
      * {@code predicate}.
-     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredVendorList(Predicate<Vendor> predicate);
@@ -99,4 +98,24 @@ public interface Model {
      * Sets the selected vendor.
      */
     void viewVendor(Vendor vendor);
+
+    /*
+     * Returns true if an event with the same identity as {@code event} exists in
+     * the address book.
+     */
+    boolean hasEvent(Event event);
+
+    /**
+     * Deletes the given event. The event must exist in the address book.
+     */
+    void deleteEvent(Event target);
+
+    /**
+     * Adds the given event. {@code event} must not already exist in the address
+     * book.
+     */
+    void addEvent(Event event);
+
+    /** Returns an unmodifiable view of the filtered event list */
+    ObservableList<Event> getFilteredEventList();
 }
