@@ -206,13 +206,13 @@ public class ParserUtilTest {
 
     @Test
     public void parseNric_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseAddress(INVALID_NRIC));
+        assertThrows(ParseException.class, () -> ParserUtil.parseNric(INVALID_NRIC));
     }
 
     @Test
     public void parseNric_validValueWithoutWhitespace_returnsAddress() throws Exception {
         Nric expectedNric = new Nric(VALID_NRIC);
-        assertEquals(expectedNric, ParserUtil.parseAddress(VALID_NRIC));
+        assertEquals(expectedNric, ParserUtil.parseNric(VALID_NRIC));
     }
 
     @Test
