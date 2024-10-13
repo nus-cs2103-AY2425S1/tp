@@ -5,7 +5,6 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.event.Event;
-import seedu.address.model.person.Person;
 import seedu.address.model.volunteer.Volunteer;
 
 import java.nio.file.Path;
@@ -23,7 +22,7 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Volunteer> filteredVolunteers;
     private final FilteredList<Event> filteredEvents;
 
     /**
@@ -36,7 +35,7 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredVolunteers = new FilteredList<>(this.addressBook.getVolunteerList());
         filteredEvents = new FilteredList<>(this.addressBook.getEventList());
     }
 
@@ -92,9 +91,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public boolean hasVolunteer(Volunteer volunteer) {
+        requireNonNull(volunteer);
+        return addressBook.hasVolunteer(volunteer);
     }
 
     @Override
@@ -104,14 +103,19 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+    public void deleteVolunteer(Volunteer target) {
+        addressBook.removeVolunteer(target);
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void deleteEvent(Event target) {
+        addressBook.removeEvent(target);
+    }
+
+    @Override
+    public void addVolunteer(Volunteer volunteer) {
+        addressBook.addVolunteer(volunteer);
+        updateFilteredVolunteerList(PREDICATE_SHOW_ALL_VOLUNTEERS);
     }
 
     @Override
@@ -121,27 +125,27 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void setVolunteer(Volunteer target, Volunteer editedVolunteer) {
+        requireAllNonNull(target, editedVolunteer);
 
-        addressBook.setPerson(target, editedPerson);
+        addressBook.setVolunteer(target, editedVolunteer);
     }
 
     //=========== Filtered Person List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Volunteer} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Volunteer> getFilteredVolunteerList() {
+        return filteredVolunteers;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredVolunteerList(Predicate<Volunteer> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredVolunteers.setPredicate(predicate);
     }
 
     @Override
@@ -158,7 +162,8 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredVolunteers.equals(otherModelManager.filteredVolunteers)
+                && filteredEvents.equals(otherModelManager.filteredEvents);
     }
 
     //=========== Filtered Event List Accessors =============================================================
@@ -177,17 +182,4 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredEvents.setPredicate(predicate);
     }
-
-    @Override
-    public boolean hasVolunteer(Volunteer toAdd) {
-        requireNonNull(toAdd);
-        return addressBook.hasVolunteer(toAdd);
-    }
-
-    @Override
-    public void addVolunteer(Volunteer toAdd) {
-        addressBook.addVolunteer(toAdd);
-    }
-
-
 }

@@ -54,6 +54,8 @@ public class Date {
         return date.format(DateTimeFormatter.ofPattern("d MMM yyyy"));
     }
 
+    public String toParsableString() { return date.toString(); }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
