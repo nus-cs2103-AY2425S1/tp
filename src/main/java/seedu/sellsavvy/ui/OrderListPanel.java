@@ -48,17 +48,34 @@ public class OrderListPanel extends UiPart<Region> {
      */
     private void updateOrderList(Person person) {
         if (person == null) {
-            orderListView.setItems(FXCollections.observableArrayList());
-            orderListView.setManaged(false);
-            orderGuide.setManaged(true);
-            orderListTitle.setText(DEFAULT_TITLE);
+            clearOrderList();
             return;
         }
         orderListView.setItems(person.getOrderList().asUnmodifiableObservableList());
         orderListView.setCellFactory(listView -> new OrderListViewCell());
-        orderListView.setManaged(true);
-        orderGuide.setManaged(false);
+        toggleOrderListVisibility(true);
         orderListTitle.setText(String.format(TITLE_WITH_SELECTED_PERSON,person.getName().fullName));
+    }
+
+    /**
+     * Clears the order list and shows the guide on how to see customer's order.
+     */
+    private void clearOrderList() {
+        orderListView.setItems(FXCollections.observableArrayList());
+        toggleOrderListVisibility(false);
+        orderListTitle.setText(DEFAULT_TITLE);
+    }
+
+    /**
+     * Toggles visibility of the order list and guide on how to see customer's order.
+     *
+     * @param showOrderList true to show the order list, false to show the guide.
+     */
+    private void toggleOrderListVisibility(boolean showOrderList) {
+        orderListView.setManaged(showOrderList);
+        orderListView.setVisible(showOrderList);
+        orderGuide.setManaged(!showOrderList);
+        orderGuide.setVisible(!showOrderList);
     }
 
     /**
