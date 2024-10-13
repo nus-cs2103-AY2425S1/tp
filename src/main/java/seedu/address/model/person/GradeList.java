@@ -9,6 +9,9 @@ import java.util.List;
  * Represents a list of grades for a student in the address book.
  */
 public class GradeList {
+    private final String NOT_ALL_WEIGHTAGE = "\nDo note not all weightage has been accounted for."
+            + "\nPercentage of tests done: ";
+    private static final float FULL_WEIGHTAGE = 1.0f;
     private final List<Grade> grades;
 
     /**
@@ -66,6 +69,30 @@ public class GradeList {
     public boolean hasGrade(String testName) {
         requireNonNull(testName);
         return getGrade(testName) != null;
+    }
+
+    /**
+     * Calculates the overall grade summary based on the weightage and scores of all grades.
+     *
+     * @return A summary string containing the overall score and information on weightage completeness.
+     */
+    public String getOverallGrade() {
+        float totalScore = 0;
+        float totalWeightage = 0;
+
+        for (Grade g:  grades) {
+            float currentWeightage = g.getWeightage();
+            totalWeightage += currentWeightage;
+            totalScore += g.getScore() * currentWeightage;
+        }
+
+        String summary = "Overall score: " + totalScore;
+
+        if (totalWeightage < FULL_WEIGHTAGE) {
+            summary += NOT_ALL_WEIGHTAGE + (totalWeightage * 100) + "%";
+        }
+
+        return summary;
     }
 
     @Override

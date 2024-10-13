@@ -102,12 +102,12 @@ public class Grade {
      * @return the weightage of the test.
      */
     public float getWeightage() {
-        return weightage;
+        return weightage / 100;
     }
 
     @Override
     public String toString() {
-        return testName + ": " + score + '%';
+        return testName + ": " + score + "% (Weightage: " + weightage + "%)";
     }
 
     @Override
