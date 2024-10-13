@@ -173,6 +173,7 @@ public class EditCommand extends Command {
         public Optional<Name> getName() {
             return Optional.ofNullable(name);
         }
+
         public void setNric(Nric nric) {
             this.nric = nric;
         }
@@ -235,6 +236,7 @@ public class EditCommand extends Command {
 
             EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
             return Objects.equals(name, otherEditPersonDescriptor.name)
+                    && Objects.equals(nric, otherEditPersonDescriptor.nric)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
@@ -245,6 +247,7 @@ public class EditCommand extends Command {
         public String toString() {
             return new ToStringBuilder(this)
                     .add("name", name)
+                    .add("nric", nric)
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
