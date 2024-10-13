@@ -18,7 +18,9 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
     public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
 
-    // Additional help messages
+    /**
+     * Added Additional Help Messages
+     */
     private static final String ADD_PERSON_HELP = "Add a person: Use the command 'add' followed by the details.";
     private static final String LIST_PERSONS_HELP = "List all persons: Use the command 'list' to view all contacts.";
     private static final String EDIT_PERSON_HELP = "Edit a person: Use the command 'edit' followed by the person's ID.";
