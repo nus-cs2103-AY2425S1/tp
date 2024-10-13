@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Represents the time of a delivery in the application.
+ * Represents the date and time of a delivery in the application.
  */
 public class Time {
 

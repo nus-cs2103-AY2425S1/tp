@@ -9,10 +9,15 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.delivery.Cost;
+import seedu.address.model.delivery.Quantity;
+import seedu.address.model.delivery.SupplierIndex;
+import seedu.address.model.delivery.Time;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.product.Product;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -120,5 +125,76 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String dd-MM-yyyy HH:mm } into a {@code Time}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code dd-MM-yyyy HH:mm} is invalid.
+     */
+    public static Time parseDateTime(String dateTime) throws ParseException {
+        requireNonNull(dateTime);
+        if (!Time.isValidTime(dateTime)) {
+            throw new ParseException(Time.MESSAGE_CONSTRAINTS);
+        }
+        return new Time(dateTime);
+    }
+
+    /**
+     * Parses a {@code String supplierIndex } into a {@code int}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code supplierName} is invalid.
+     */
+    public static SupplierIndex parseSupplierIndex(String supplierIndex) throws ParseException {
+        requireNonNull(supplierIndex);
+        String trimmedSupplierIndex = supplierIndex.trim();
+        return new SupplierIndex(trimmedSupplierIndex);
+    }
+
+    /**
+     * Parses a {@code String productName } into a {@code Product}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code productName} is invalid.
+     */
+    public static Product parseProduct(String productName) throws ParseException {
+        requireNonNull(productName);
+        String trimmedProductName = productName.trim();
+        if (!Product.isValidProductName(trimmedProductName)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        return new Product(trimmedProductName);
+    }
+
+    /**
+     * Parses a {@code String quantity } into a {@code Quantity}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code quantity} is invalid.
+     */
+    public static Quantity parseQuantity(String quantity) throws ParseException {
+        requireNonNull(quantity);
+        String trimmedQuantity = quantity.trim();
+        if (!Quantity.isValidQuantity(trimmedQuantity)) {
+            throw new ParseException(Quantity.MESSAGE_CONSTRAINTS);
+        }
+        return new Quantity(trimmedQuantity);
+    }
+
+    /**
+     * Parses a {@code String cost } into a {@code Cost}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code cost} is invalid.
+     */
+    public static Cost parseCost(String cost) throws ParseException {
+        requireNonNull(cost);
+        String trimmedCost = cost.trim();
+        if (!Cost.isValidCost(trimmedCost)) {
+            throw new ParseException(Quantity.MESSAGE_CONSTRAINTS);
+        }
+        return new Cost(trimmedCost);
     }
 }
