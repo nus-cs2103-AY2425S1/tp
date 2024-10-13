@@ -86,7 +86,7 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-    /** Returns an unmodifiable view of selected Person */
+    /** Returns an unmodifiable view of selected person */
     ReadOnlyObjectProperty<Person> getSelectedPerson();
 
     /**
