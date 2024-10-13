@@ -107,7 +107,7 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         if (nric == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "NRIC"));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Nric"));
         }
         if (!Nric.isValidNric(nric)) {
             throw new IllegalValueException(Nric.MESSAGE_CONSTRAINTS);
