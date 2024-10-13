@@ -92,8 +92,10 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Property updatedProperty = personToEdit.getProperty(); // edit command does not allow editing properties
-        Appointment updatedAppointment = personToEdit.getAppointment(); // edit command does not allow editing appointments
+        // edit command does not allow editing properties
+        Property updatedProperty = personToEdit.getProperty();
+        // edit command does not allow editing appointments
+        Appointment updatedAppointment = personToEdit.getAppointment();
         //  Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags())
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAppointment, updatedProperty);
     }
