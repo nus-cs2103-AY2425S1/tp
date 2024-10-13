@@ -40,6 +40,8 @@
           </padding>
           <!-- Contact list -->
           <VBox fx:id="personList" styleClass="pane-with-border" minWidth="400" prefWidth="400">
+            <StackPane VBox.vgrow="NEVER" fx:id="searchBoxPlaceholder" styleClass="pane-with-border">
+            </StackPane>
             <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
           </VBox>
           <!-- Contact details panel -->
