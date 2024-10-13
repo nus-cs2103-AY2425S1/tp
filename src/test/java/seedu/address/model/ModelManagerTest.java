@@ -15,12 +15,16 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.event.Date;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.Name;
 import seedu.address.model.vendor.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
 
     private ModelManager modelManager = new ModelManager();
+    private final Event testEvent = new Event(new Name("Test Event"), new Date("2024-10-11"));
 
     @Test
     public void constructor() {
@@ -86,6 +90,22 @@ public class ModelManagerTest {
     public void hasVendor_vendorInAddressBook_returnsTrue() {
         modelManager.addVendor(ALICE);
         assertTrue(modelManager.hasVendor(ALICE));
+    }
+
+    @Test
+    public void hasEvent_nullEvent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasEvent(null));
+    }
+
+    @Test
+    public void hasEvent_eventNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasEvent(testEvent));
+    }
+
+    @Test
+    public void hasEvent_eventInAddressBook_returnsTrue() {
+        modelManager.addEvent(testEvent);
+        assertTrue(modelManager.hasEvent(testEvent));
     }
 
     @Test
