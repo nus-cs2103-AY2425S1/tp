@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.DeletePolicyCommand.MESSAGE_ARGUMENTS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -17,7 +16,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.policy.EducationPolicy;
 import seedu.address.model.policy.HealthPolicy;
 import seedu.address.model.policy.LifePolicy;
-import seedu.address.model.policy.PolicyMap;
+import seedu.address.model.policy.PolicyType;
 
 public class DeletePolicyCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -27,32 +26,28 @@ public class DeletePolicyCommandTest {
 
     @Test
     public void constructor_nullInputs_throwsNullPointerException() {
-        final PolicyMap policies = new PolicyMap();
-        assertThrows(NullPointerException.class, () -> new DeletePolicyCommand(null, policies));
+        final PolicyType policyType = PolicyType.LIFE;
+        assertThrows(NullPointerException.class, () -> new DeletePolicyCommand(null, policyType));
         assertThrows(NullPointerException.class, () -> new DeletePolicyCommand(INDEX_FIRST_PERSON, null));
     }
 
     @Test
     public void execute_throwsException() {
-        final PolicyMap policies = new PolicyMap();
-        policies.add(health);
+        final PolicyType policyType = PolicyType.LIFE;
 
-        assertCommandFailure(new DeletePolicyCommand(INDEX_FIRST_PERSON, policies), model,
-                String.format(MESSAGE_ARGUMENTS, INDEX_FIRST_PERSON.getOneBased(), policies));
+        assertCommandFailure(new DeletePolicyCommand(INDEX_FIRST_PERSON, policyType), model, "Policy not found.");
     }
 
     @Test
     public void equals() {
-        final PolicyMap lifePolicies = new PolicyMap();
-        lifePolicies.add(life);
-        final PolicyMap educationPolicies = new PolicyMap();
-        educationPolicies.add(education);
+        final PolicyType policyLife = PolicyType.LIFE;
+        final PolicyType policyEdu = PolicyType.EDUCATION;
 
-        final DeletePolicyCommand standardCommand = new DeletePolicyCommand(INDEX_FIRST_PERSON, lifePolicies);
-        final DeletePolicyCommand commandWithSameValues = new DeletePolicyCommand(INDEX_FIRST_PERSON, lifePolicies);
-        final DeletePolicyCommand differentIndexCommand = new DeletePolicyCommand(INDEX_SECOND_PERSON, lifePolicies);
+        final DeletePolicyCommand standardCommand = new DeletePolicyCommand(INDEX_FIRST_PERSON, policyLife);
+        final DeletePolicyCommand commandWithSameValues = new DeletePolicyCommand(INDEX_FIRST_PERSON, policyLife);
+        final DeletePolicyCommand differentIndexCommand = new DeletePolicyCommand(INDEX_SECOND_PERSON, policyLife);
         final DeletePolicyCommand differentPoliciesCommand = new DeletePolicyCommand(INDEX_FIRST_PERSON,
-                educationPolicies);
+                policyEdu);
 
         // same values -> returns true
         assertTrue(standardCommand.equals(commandWithSameValues));
