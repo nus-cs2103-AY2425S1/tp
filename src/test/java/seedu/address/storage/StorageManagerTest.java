@@ -24,7 +24,7 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonClientHubStorage clientHubStorage = new JsonClientHubStorage(getTempFilePath("ab"));
+        JsonClientHubStorage clientHubStorage = new JsonClientHubStorage(getTempFilePath("ch"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
         storageManager = new StorageManager(clientHubStorage, userPrefsStorage);
     }

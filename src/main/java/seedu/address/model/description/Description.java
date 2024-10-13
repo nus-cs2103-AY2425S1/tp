@@ -3,8 +3,13 @@ package seedu.address.model.description;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a Description in the system.
+ * Guarantees: immutable; is valid as declared in {@link #VALIDATION_REGEX}
+ */
 public class Description {
-    public static final String MESSAGE_CONSTRAINTS = "Descriptions can take any values but not more than 150 characters";
+    public static final String MESSAGE_CONSTRAINTS = "Descriptions can take any values but not more than 150 "
+            + "characters";
 
     public static final String VALIDATION_REGEX = "^.{1,150}$";
 
