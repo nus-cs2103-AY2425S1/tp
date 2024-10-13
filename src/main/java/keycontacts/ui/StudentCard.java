@@ -40,11 +40,14 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label gradeLevel;
+    @FXML
     private Label regularLesson;
     @FXML
     private Label pianoPieces;
     @FXML
     private FlowPane tags;
+
 
     /**
      * Creates a {@code StudentCode} with the given {@code Student} and index to display.
@@ -57,6 +60,7 @@ public class StudentCard extends UiPart<Region> {
         phone.setText(student.getPhone().value);
         address.setText(student.getAddress().value);
         email.setText(student.getEmail().value);
+        gradeLevel.setText(student.getGradeLevel().value);
         regularLesson.setText(student.getRegularLessonDisplay());
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

@@ -14,6 +14,7 @@ import keycontacts.model.lesson.RegularLesson;
 import keycontacts.model.pianopiece.PianoPiece;
 import keycontacts.model.student.Address;
 import keycontacts.model.student.Email;
+import keycontacts.model.student.GradeLevel;
 import keycontacts.model.student.Name;
 import keycontacts.model.student.Phone;
 import keycontacts.model.student.Student;
@@ -31,7 +32,9 @@ class JsonAdaptedStudent {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String gradeLevel;
     private final List<JsonAdaptedPianoPiece> pianoPieces = new ArrayList<>();
+
     private final JsonAdaptedRegularLesson regularLesson;
 
     /**
@@ -41,6 +44,7 @@ class JsonAdaptedStudent {
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("gradeLevel") String gradeLevel,
             @JsonProperty("pianoPieces") List<JsonAdaptedPianoPiece> pianoPieces,
             @JsonProperty("regularLesson") JsonAdaptedRegularLesson regularLesson) {
         this.name = name;
@@ -50,6 +54,7 @@ class JsonAdaptedStudent {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.gradeLevel = gradeLevel;
         if (pianoPieces != null) {
             this.pianoPieces.addAll(pianoPieces);
         }
@@ -67,6 +72,7 @@ class JsonAdaptedStudent {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        gradeLevel = source.getGradeLevel().value;
         pianoPieces.addAll(source.getPianoPieces().stream()
                 .map(JsonAdaptedPianoPiece::new)
                 .collect(Collectors.toList()));
@@ -123,6 +129,16 @@ class JsonAdaptedStudent {
 
         final Set<Tag> modelTags = new HashSet<>(studentTags);
 
+        if (gradeLevel == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                GradeLevel.class.getSimpleName()));
+        }
+        if (!GradeLevel.isValidGradeLevel(gradeLevel)) {
+            throw new IllegalValueException(GradeLevel.MESSAGE_CONSTRAINTS);
+        }
+
+        final GradeLevel modelGradeLevel = new GradeLevel(gradeLevel);
+      
         final Set<PianoPiece> modelPianoPieces = new HashSet<>(studentPianoPieces);
 
         final RegularLesson modelRegularLesson;
@@ -133,8 +149,8 @@ class JsonAdaptedStudent {
             modelRegularLesson = null;
         }
 
-        return new Student(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelPianoPieces,
-                modelRegularLesson);
+        return new Student(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelGradeLevel,
+                modelPianoPieces, modelRegularLesson);
     }
 
 }

@@ -9,7 +9,7 @@
 
 ![Ui](images/Ui.png)
 
-**KeyContacts is a desktop application for home piano tutors to manager their students' information.** 
+**KeyContacts is a desktop application for home piano tutors to manager their students' information.**
 While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
 * If you are interested in using KeyContacts, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).

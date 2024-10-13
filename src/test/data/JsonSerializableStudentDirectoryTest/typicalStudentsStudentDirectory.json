@@ -6,6 +6,7 @@
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "tags" : [ "friends" ],
+    "gradeLevel": "ABRSM 2",
     "pianoPieces": [ "Etude" ]
   }, {
     "name" : "Benson Meier",
@@ -13,6 +14,7 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "tags" : [ "owesMoney", "friends" ],
+    "gradeLevel": "RSL 3",
     "pianoPieces": [ "Sonata I. X. 1905 \"From the Street\"", "Waltz No. 2" ],
     "regularLesson": null
   }, {
@@ -21,6 +23,7 @@
     "email" : "heinz@example.com",
     "address" : "wall street",
     "tags" : [ ],
+    "gradeLevel": "ABRSM 1",
     "pianoPieces": [ "Clair de Lune", "Le Sapin Op. 75 No. 5" ],
     "regularLesson": null
   }, {
@@ -29,6 +32,7 @@
     "email" : "cornelia@example.com",
     "address" : "10th street",
     "tags" : [ "friends" ],
+    "gradeLevel": "ABRSM 3",
     "pianoPieces": [ ],
     "regularLesson": null
   }, {
@@ -37,6 +41,7 @@
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "tags" : [ ],
+    "gradeLevel": "IMEB 1",
     "pianoPieces": [ ],
     "regularLesson": null
   }, {
@@ -45,6 +50,7 @@
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "tags" : [ ],
+    "gradeLevel": "RCM 2",
     "pianoPieces": [ ],
     "regularLesson": null
   }, {
@@ -53,6 +59,7 @@
     "email" : "anna@example.com",
     "address" : "4th street",
     "tags" : [ ],
+    "gradeLevel": "LCM 3",
     "pianoPieces": [ ],
     "regularLesson": null
   } ]

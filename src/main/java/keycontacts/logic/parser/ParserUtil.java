@@ -16,6 +16,7 @@ import keycontacts.model.lesson.Time;
 import keycontacts.model.pianopiece.PianoPiece;
 import keycontacts.model.student.Address;
 import keycontacts.model.student.Email;
+import keycontacts.model.student.GradeLevel;
 import keycontacts.model.student.Name;
 import keycontacts.model.student.Phone;
 import keycontacts.model.tag.Tag;
@@ -146,6 +147,34 @@ public class ParserUtil {
     }
 
     /**
+     * Parses {@code Collection<String> pianoPieces} into a {@code Set<PianoPiece>}.
+     */
+    public static Set<PianoPiece> parsePianoPieces(Collection<String> pianoPieces) throws ParseException {
+        requireNonNull(pianoPieces);
+        final Set<PianoPiece> pianoPieceSet = new HashSet<>();
+        for (String pianoPieceName : pianoPieces) {
+            pianoPieceSet.add(parsePianoPiece(pianoPieceName));
+        }
+        return pianoPieceSet;
+    }
+  
+    /**
+     * Parses a {@code String gradeLevel} into a {@code GradeLevel}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code gradeLevel} is invalid.
+     */
+    public static GradeLevel parseGradeLevel(String gradeLevel) throws ParseException {
+        requireNonNull(gradeLevel);
+        String trimmedGradeLevel = gradeLevel.trim();
+        if (!GradeLevel.isValidGradeLevel(trimmedGradeLevel)) {
+            throw new ParseException(GradeLevel.MESSAGE_CONSTRAINTS);
+        }
+
+        return new GradeLevel(trimmedGradeLevel);
+    }
+
+    /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
@@ -171,19 +200,7 @@ public class ParserUtil {
         }
         return new PianoPiece(trimmedPianoPiece);
     }
-
-    /**
-     * Parses {@code Collection<String> pianoPieces} into a {@code Set<PianoPiece>}.
-     */
-    public static Set<PianoPiece> parsePianoPieces(Collection<String> pianoPieces) throws ParseException {
-        requireNonNull(pianoPieces);
-        final Set<PianoPiece> pianoPieceSet = new HashSet<>();
-        for (String pianoPieceName : pianoPieces) {
-            pianoPieceSet.add(parsePianoPiece(pianoPieceName));
-        }
-        return pianoPieceSet;
-    }
-
+  
     /**
      * Parses {@code String date} into a {@code LocalDate}.
      */
