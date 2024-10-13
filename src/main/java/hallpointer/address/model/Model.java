@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import hallpointer.address.commons.core.GuiSettings;
 import hallpointer.address.model.member.Member;
+import hallpointer.address.model.session.Session;
 import javafx.collections.ObservableList;
 
 /**
@@ -75,6 +76,8 @@ public interface Model {
      * The member identity of {@code editedMember} must not be the same as another existing member in the address book.
      */
     void setMember(Member target, Member editedMember);
+
+    void addSession(Session session);
 
     /** Returns an unmodifiable view of the filtered member list */
     ObservableList<Member> getFilteredMemberList();
