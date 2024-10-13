@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.policy.Policy;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,6 +23,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Policy> filteredPolicies;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -33,7 +35,9 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.filteredPolicies = new FilteredList<>(this.addressBook.getPolicyList());
+
     }
 
     public ModelManager() {
@@ -126,6 +130,26 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    // =========== Filtered Policy List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Policy} backed by the internal list of
+     * {@code versionedAddressBook}.
+     */
+    @Override
+    public ObservableList<Policy> getFilteredPolicyList() {
+        return filteredPolicies;
+    }
+
+    /**
+     * Updates the filter of the filtered policy list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    public void updateFilteredPolicyList(Predicate<Policy> predicate) {
+        requireNonNull(predicate);
+        filteredPolicies.setPredicate(predicate);
     }
 
     @Override

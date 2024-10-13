@@ -1,5 +1,6 @@
 package seedu.address.model.policy;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import seedu.address.model.person.Person;
@@ -13,7 +14,7 @@ public abstract class Policy {
     private Person insuree;
     private double premiumAmount;
     private double coverageAmount;
-    // private LocalDateTime expiryDate;
+    private LocalDateTime expiryDate;
 
     /**
      * Constructor for a new Policy without a insuree specified.
@@ -84,6 +85,15 @@ public abstract class Policy {
      */
     public Person getInsuree() {
         return insuree;
+    }
+
+    /**
+     * Return this policy's expiry date.
+     *
+     * @return this policy's expiry date.
+     */
+    public LocalDateTime getExpiryDate() {
+        return expiryDate;
     }
 
     /**

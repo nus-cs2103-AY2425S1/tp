@@ -2,12 +2,15 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.policy.Policy;
 
 /**
  * Wraps all data at the address-book level
@@ -53,7 +56,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-
         setPersons(newData.getPersonList());
     }
 
@@ -106,6 +108,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    public ObservableList<Policy> getPolicyList() {
+        List<Policy> allPolicies = new ArrayList<>();
+        for (Person person : persons) {
+            allPolicies.addAll(person.getPolicies().getAllPolicies());
+        }
+        return FXCollections.observableList(allPolicies);
     }
 
     @Override

@@ -1,6 +1,8 @@
 package seedu.address.model.policy;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * A class to store a mapping of {@code PolicyType} to {@code Policy}.
@@ -42,6 +44,14 @@ public class PolicyMap {
         }
         policies.remove(type);
         return true;
+    }
+
+    /**
+     * Retrieves all policies as a list.
+     * @return List of all policies in the map.
+     */
+    public List<Policy> getAllPolicies() {
+        return new ArrayList<>(policies.values());
     }
 
     @Override
