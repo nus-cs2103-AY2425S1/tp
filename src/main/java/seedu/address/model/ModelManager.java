@@ -43,7 +43,8 @@ public class ModelManager implements Model {
         this(new AddressBook(), new UserPrefs());
     }
 
-    //=========== UserPrefs ==================================================================================
+    // =========== UserPrefs
+    // ==================================================================================
 
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
@@ -78,7 +79,8 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    // =========== AddressBook
+    // ================================================================================
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
@@ -128,12 +130,15 @@ public class ModelManager implements Model {
     @Override
     public void addEvent(Event event) {
         addressBook.addEvent(event);
+        updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
     }
 
-    //=========== Filtered Vendor List Accessors =============================================================
+    // =========== Filtered Vendor List Accessors
+    // =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Vendor} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Vendor} backed by the
+     * internal list of
      * {@code versionedAddressBook}
      */
     @Override
@@ -147,15 +152,23 @@ public class ModelManager implements Model {
         filteredVendors.setPredicate(predicate);
     }
 
-    //=========== Filtered Event List Accessors =============================================================
+    // =========== Filtered Event List Accessors
+    // =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Event} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Event} backed by the
+     * internal list of
      * {@code versionedAddressBook}
      */
     @Override
     public ObservableList<Event> getFilteredEventList() {
         return filteredEvents;
+    }
+
+    @Override
+    public void updateFilteredEventList(Predicate<Event> predicate) {
+        requireNonNull(predicate);
+        filteredEvents.setPredicate(predicate);
     }
 
     @Override
@@ -172,7 +185,8 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredVendors.equals(otherModelManager.filteredVendors);
+                && filteredVendors.equals(otherModelManager.filteredVendors)
+                && filteredEvents.equals(otherModelManager.filteredEvents);
     }
 
 }
