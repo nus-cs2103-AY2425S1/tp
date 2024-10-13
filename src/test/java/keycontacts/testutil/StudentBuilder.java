@@ -5,6 +5,7 @@ import java.util.Set;
 
 import keycontacts.model.student.Address;
 import keycontacts.model.student.Email;
+import keycontacts.model.student.GradeLevel;
 import keycontacts.model.student.Name;
 import keycontacts.model.student.Phone;
 import keycontacts.model.student.Student;
@@ -20,12 +21,14 @@ public class StudentBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_GRADE_LEVEL = "ABRSM 3";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private GradeLevel gradeLevel;
 
     /**
      * Creates a {@code StudentBuilder} with the default details.
@@ -36,6 +39,7 @@ public class StudentBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        gradeLevel = new GradeLevel(DEFAULT_GRADE_LEVEL);
     }
 
     /**
@@ -47,6 +51,7 @@ public class StudentBuilder {
         email = studentToCopy.getEmail();
         address = studentToCopy.getAddress();
         tags = new HashSet<>(studentToCopy.getTags());
+        gradeLevel = studentToCopy.getGradeLevel();
     }
 
     /**
@@ -89,8 +94,17 @@ public class StudentBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code GradeLevel} of the {@code Student} that we are building.
+     * @param gradeLevel
+     */
+    public StudentBuilder withGradeLevel(String gradeLevel) {
+        this.gradeLevel = new GradeLevel(gradeLevel);
+        return this;
+    }
+
     public Student build() {
-        return new Student(name, phone, email, address, tags);
+        return new Student(name, phone, email, address, tags, gradeLevel);
     }
 
 }

@@ -15,6 +15,7 @@ import keycontacts.model.lesson.Day;
 import keycontacts.model.lesson.Time;
 import keycontacts.model.student.Address;
 import keycontacts.model.student.Email;
+import keycontacts.model.student.GradeLevel;
 import keycontacts.model.student.Name;
 import keycontacts.model.student.Phone;
 import keycontacts.model.tag.Tag;
@@ -154,6 +155,22 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String gradeLevel} into a {@code GradeLevel}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code gradeLevel} is invalid.
+     */
+    public static GradeLevel parseGradeLevel(String gradeLevel) throws ParseException {
+        requireNonNull(gradeLevel);
+        String trimmedGradeLevel = gradeLevel.trim();
+        if (!GradeLevel.isValidGradeLevel(trimmedGradeLevel)) {
+            throw new ParseException(GradeLevel.MESSAGE_CONSTRAINTS);
+        }
+
+        return new GradeLevel(trimmedGradeLevel);
     }
 
     /**
