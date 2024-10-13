@@ -53,7 +53,8 @@ public class EditCommandTest {
                 .withPhone(editedStudent.getPhone().toString())
                 .withEmail(editedStudent.getEmail().toString())
                 .withAddress(editedStudent.getAddress().toString())
-                .withTags(editedStudent.getTags().stream().map(Tag::toString).toArray(String[]::new)).build();
+                .withTags(editedStudent.getTags().stream().map(Tag::toString).toArray(String[]::new))
+                .withGradeLevel(editedStudent.getGradeLevel().toString()).build();
 
         expectedModel.setStudent(studentToEdit, expectedEditedStudent);
 

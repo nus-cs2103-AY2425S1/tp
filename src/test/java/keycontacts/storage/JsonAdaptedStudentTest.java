@@ -33,9 +33,9 @@ public class JsonAdaptedStudentTest {
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
- 
+
     private static final String VALID_GRADE_LEVEL = BENSON.getGradeLevel().toString();
-  
+
     private static final List<JsonAdaptedPianoPiece> VALID_PIANO_PIECES = BENSON.getPianoPieces().stream()
             .map(JsonAdaptedPianoPiece::new)
             .collect(Collectors.toList());
@@ -61,7 +61,7 @@ public class JsonAdaptedStudentTest {
     public void toModelType_nullName_throwsIllegalValueException() {
         JsonAdaptedStudent student = new JsonAdaptedStudent(null, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                 VALID_TAGS, VALID_GRADE_LEVEL, VALID_PIANO_PIECES, EMPTY_REGULAR_LESSON);
-     
+
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }

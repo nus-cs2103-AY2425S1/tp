@@ -54,10 +54,10 @@ public class Student {
 
     /**
      * Constructor for a new student with non-default student associations. Identity and data fields must be
-     * present and not null. This is mainly used in {@code AddCommand}
+     * present and not null.
      */
-    public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags, GradeLevel gradeLevel, Set<PianoPiece> pianoPieces,
-                    RegularLesson regularLesson) {
+    public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags, GradeLevel gradeLevel,
+                   Set<PianoPiece> pianoPieces, RegularLesson regularLesson) {
         requireAllNonNull(name, phone, email, address, tags, gradeLevel, pianoPieces);
         this.name = name;
         this.phone = phone;
@@ -66,7 +66,7 @@ public class Student {
 
         this.tags.addAll(tags);
         this.gradeLevel = gradeLevel;
-      
+
         this.pianoPieces.addAll(pianoPieces);
         this.regularLesson = regularLesson;
     }
@@ -94,11 +94,11 @@ public class Student {
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }
-  
+
     public GradeLevel getGradeLevel() {
         return gradeLevel;
     }
-  
+
     /**
      * Returns an immutable piano piece set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -136,8 +136,7 @@ public class Student {
         Address updatedAddress = editStudentDescriptor.getAddress().orElse(address);
         Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(tags);
         GradeLevel updatedGradeLevel = editStudentDescriptor.getGradeLevel().orElse(this.gradeLevel);
-      
-        return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, 
+        return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
                 updatedGradeLevel, pianoPieces, regularLesson);
     }
 
@@ -155,7 +154,7 @@ public class Student {
         Set<PianoPiece> updatedPianoPieces = new HashSet<>(pianoPieces);
         updatedPianoPieces.addAll(addedPianoPieces);
 
-        return new Student(name, phone, email, address, tags, gradeLevel, updatedPianoPieces, 
+        return new Student(name, phone, email, address, tags, gradeLevel, updatedPianoPieces,
                            regularLesson);
     }
 
@@ -201,7 +200,7 @@ public class Student {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, gradeLevel, pianoPieces, 
+        return Objects.hash(name, phone, email, address, tags, gradeLevel, pianoPieces,
                             regularLesson);
     }
 

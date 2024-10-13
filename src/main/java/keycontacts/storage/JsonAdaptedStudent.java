@@ -138,7 +138,7 @@ class JsonAdaptedStudent {
         }
 
         final GradeLevel modelGradeLevel = new GradeLevel(gradeLevel);
-      
+
         final Set<PianoPiece> modelPianoPieces = new HashSet<>(studentPianoPieces);
 
         final RegularLesson modelRegularLesson;

@@ -115,9 +115,9 @@ public class StudentBuilder {
         this.pianoPieces = SampleDataUtil.getPianoPieceSet(pianoPieces);
         return this;
     }
-  
+
     public Student build() {
-        return new Student(name, phone, email, address, tags, gradeLevel, pianoPieces);
+        return new Student(name, phone, email, address, tags, gradeLevel, pianoPieces, null);
     }
 
 }

@@ -97,10 +97,10 @@ public class StudentTest {
 
         // different grade level -> returns false
         editedAlice = new StudentBuilder(ALICE).withGradeLevel(VALID_GRADE_LEVEL_BOB).build();
-      
+
         // different piano pieces -> returns false
         editedAlice = new StudentBuilder(ALICE).withPianoPieces(VALID_PIANO_PIECE_BEETHOVEN).build();
-      
+
         assertFalse(ALICE.equals(editedAlice));
     }
 
@@ -108,7 +108,7 @@ public class StudentTest {
     public void toStringMethod() {
         String expected = Student.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags()
-                + ", gradeLevel=" + ALICE.getGradeLevel() + ", pianoPieces=" + ALICE.getPianoPieces() 
+                + ", gradeLevel=" + ALICE.getGradeLevel() + ", pianoPieces=" + ALICE.getPianoPieces()
                 + ", regularLesson=" + ALICE.getRegularLessonString() + "}";
         assertEquals(expected, ALICE.toString());
     }

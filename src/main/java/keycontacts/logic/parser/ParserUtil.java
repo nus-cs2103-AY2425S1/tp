@@ -157,7 +157,7 @@ public class ParserUtil {
         }
         return pianoPieceSet;
     }
-  
+
     /**
      * Parses a {@code String gradeLevel} into a {@code GradeLevel}.
      * Leading and trailing whitespaces will be trimmed.
@@ -200,7 +200,7 @@ public class ParserUtil {
         }
         return new PianoPiece(trimmedPianoPiece);
     }
-  
+
     /**
      * Parses {@code String date} into a {@code LocalDate}.
      */
