@@ -2,7 +2,10 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FEES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MONTHSPAID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -17,7 +20,6 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -46,6 +48,9 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_FEES + "FEES] "
+            + "[" + PREFIX_CLASSID + "CLASSID] "
+            + "[" + PREFIX_MONTHSPAID + "MONTHSPAID] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -129,12 +134,11 @@ public class EditCommand extends Command {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("index", index)
-                .add("editPersonDescriptor", editPersonDescriptor)
-                .toString();
+        return "seedu.address.logic.commands.EditCommand{"
+                + "index=" + index
+                + ", editPersonDescriptor=" + editPersonDescriptor
+                + '}';
     }
-
     /**
      * Stores the details to edit the person with. Each non-empty field value will replace the
      * corresponding field value of the person.
@@ -144,6 +148,8 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
+        private Fees fees;
+        private ClassId classId;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -157,6 +163,8 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setFees(toCopy.fees);
+            setClassId(toCopy.classId);
             setTags(toCopy.tags);
         }
 
@@ -164,7 +172,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, fees, classId, tags);
         }
 
         public void setName(Name name) {
@@ -197,6 +205,22 @@ public class EditCommand extends Command {
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
+        }
+
+        public void setFees(Fees fees) {
+            this.fees = fees;
+        }
+
+        public Optional<Fees> getFees() {
+            return Optional.ofNullable(fees);
+        }
+
+        public void setClassId(ClassId classId) {
+            this.classId = classId;
+        }
+
+        public Optional<ClassId> getClassId() {
+            return Optional.ofNullable(classId);
         }
 
         /**
@@ -232,18 +256,25 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
+                    && Objects.equals(fees, otherEditPersonDescriptor.fees)
+                    && Objects.equals(classId, otherEditPersonDescriptor.classId)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
+
         @Override
         public String toString() {
-            return new ToStringBuilder(this)
-                    .add("name", name)
-                    .add("phone", phone)
-                    .add("email", email)
-                    .add("address", address)
-                    .add("tags", tags)
-                    .toString();
+            return "seedu.address.logic.commands.EditCommand.EditPersonDescriptor{"
+                    + "name=" + name
+                    + ", phone=" + phone
+                    + ", email=" + email
+                    + ", address=" + address
+                    + ", fees=" + fees
+                    + ", classId=" + classId
+                    + ", tags=" + tags
+                    + '}';
         }
     }
 }
+
+
