@@ -13,6 +13,14 @@ import seedu.address.model.Model;
  */
 public class DeleteCommandTest {
 
+    @Test
+    public void toStringMethod() {
+        Index targetIndex = Index.fromOneBased(1);
+        DeleteCommandStub deleteCommand = new DeleteCommandStub(targetIndex);
+        String expected = DeleteCommandStub.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
+        assertEquals(expected, deleteCommand.toString());
+    }
+
     private class DeleteCommandStub extends DeleteCommand {
         public DeleteCommandStub(Index targetIndex) {
             super(targetIndex);
@@ -23,13 +31,5 @@ public class DeleteCommandTest {
             // This method is not used in the test
             return null;
         }
-    }
-
-    @Test
-    public void toStringMethod() {
-        Index targetIndex = Index.fromOneBased(1);
-        DeleteCommandStub deleteCommand = new DeleteCommandStub(targetIndex);
-        String expected = DeleteCommandStub.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
-        assertEquals(expected, deleteCommand.toString());
     }
 }
