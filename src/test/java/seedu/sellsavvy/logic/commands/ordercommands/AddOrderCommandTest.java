@@ -1,6 +1,6 @@
 package seedu.sellsavvy.logic.commands.ordercommands;
 
-import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.assertCommandSuccess;
+import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.assertCommandSuccess;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.sellsavvy.testutil.TypicalOrders.ABACUS;
 import static seedu.sellsavvy.testutil.TypicalPersons.getTypicalAddressBook;
