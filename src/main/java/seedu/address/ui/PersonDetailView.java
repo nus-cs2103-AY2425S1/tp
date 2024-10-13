@@ -9,7 +9,7 @@ import seedu.address.model.person.Person;
 /**
  * Detail view of a Person.
  */
-public class DetailView extends UiPart<Region> {
+public class PersonDetailView extends UiPart<Region> {
 
     private static final String FXML = "PersonDetailView.fxml";
 
@@ -22,7 +22,7 @@ public class DetailView extends UiPart<Region> {
      *
      * @param p The Person to display.
      */
-    public DetailView(Person p) {
+    public PersonDetailView(Person p) {
         super(FXML);
         this.person = p;
     }

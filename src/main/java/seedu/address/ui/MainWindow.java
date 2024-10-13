@@ -49,6 +49,9 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane personListPanelPlaceholder;
 
     @FXML
+    private StackPane eventListPanelPlaceholder;
+
+    @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
@@ -59,6 +62,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private SplitPane eventsSplitView;
+
+    @FXML
+    private VBox personDetailViewPlaceholder;
 
     @FXML
     private VBox contactDetailViewPlaceholder;
@@ -129,8 +135,8 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        // eventListPanel = new EventListPanel(logic.getFilteredEventList());
-        // eventListPanelPlaceHolder.getChildren().add(eventListPanel.getRoot());
+        eventListPanel = new EventListPanel(logic.getFilteredEventList());
+        eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());

@@ -59,7 +59,7 @@
                               </AnchorPane>
                             <AnchorPane>
                                  <children>
-                                    <VBox fx:id="contactDetailViewPlaceholder" minWidth="450.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    <VBox fx:id="personDetailViewPlaceholder" minWidth="450.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                  </children>
                               </AnchorPane>
                           </items>
@@ -68,16 +68,16 @@
                   </Tab>
                 <Tab fx:id="eventsTab" text="Events">
                      <content>
-                        <SplitPane dividerPositions="0.5" prefHeight="200.0" prefWidth="200.0">
+                        <SplitPane fx:id="eventsSplitView" dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0">
                            <items>
                               <AnchorPane>
                                  <children>
                                     <VBox fx:id="eventList" minWidth="350.0" prefWidth="450.0" styleClass="pane-with-border" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <padding>
-                                          <Insets bottom="10" left="10" right="10" top="10" />
-                                       </padding>
                                        <children>
-                                          <StackPane fx:id="eventListPanelPlaceholder" />
+                                          <StackPane fx:id="eventListPanelPlaceholder" VBox.vgrow="ALWAYS">
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin></StackPane>
                                        </children>
                                     </VBox>
                                  </children>
