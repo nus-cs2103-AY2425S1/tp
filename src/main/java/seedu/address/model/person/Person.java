@@ -41,6 +41,15 @@ public class Person {
         this.tags.addAll(tags);
         this.policies = new PolicyMap();
     }
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, PolicyMap policies) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.policies = policies;
+    }
 
     public Name getName() {
         return name;

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -150,6 +151,27 @@ public class ParserUtil {
             return new HealthPolicy();
         } else if (lowerCaseTrimmedPolicy.equals(education)) {
             return new EducationPolicy();
+        } else {
+            throw new ParseException(Policy.MESSAGE_CONSTRAINTS);
+        }
+    }
+    public static PolicyType parsePolicyType(Optional<String> policy) throws ParseException {
+        requireNonNull(policy);
+        if(policy.isEmpty()){
+            throw new ParseException(Policy.MESSAGE_CONSTRAINTS);
+        }
+        final String lowerCaseTrimmedPolicy = policy.get().trim().toLowerCase();
+        String life = PolicyType.LIFE.toString().toLowerCase();
+        String health = PolicyType.HEALTH.toString().toLowerCase();
+        String education = PolicyType.EDUCATION.toString().toLowerCase();
+
+        // Cannot use switch cases here because life, health and education are dynamic variables.
+        if (lowerCaseTrimmedPolicy.equals(life)) {
+            return PolicyType.LIFE;
+        } else if (lowerCaseTrimmedPolicy.equals(health)) {
+            return PolicyType.HEALTH;
+        } else if (lowerCaseTrimmedPolicy.equals(education)) {
+            return PolicyType.EDUCATION;
         } else {
             throw new ParseException(Policy.MESSAGE_CONSTRAINTS);
         }
