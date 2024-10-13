@@ -47,7 +47,7 @@ public class EditClientCommandTest {
 
         EditClientCommand editClientCommand = new EditClientCommand(INDEX_FIRST_PERSON,
             editPersonDescriptor, editCarDescriptor,
-            true, true);
+            true, false);
 
         String expectedMessage = String.format(EditClientCommand.MESSAGE_EDIT_PERSON_SUCCESS,
             Messages.format(editedPerson));
