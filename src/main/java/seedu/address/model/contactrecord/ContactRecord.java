@@ -1,4 +1,4 @@
-package seedu.address.model.contactdate;
+package seedu.address.model.contactrecord;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
@@ -10,9 +10,9 @@ import seedu.address.model.person.CallFrequency;
 
 /**
  * Represents a Person's contacted date in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidContactDate(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidContactRecord(String)}
  */
-public class ContactDate {
+public class ContactRecord {
     public static final String MESSAGE_CONSTRAINTS =
             "Dates should be in the format of YYYY-MM-DD";
     public static final String VALIDATION_REGEX = "\\d{4}-\\d{2}-\\d{2}";
@@ -20,22 +20,22 @@ public class ContactDate {
     private final String notes;
 
     /**
-     * Constructs a {@code ContactDate}.
+     * Constructs a {@code ContactRecord}.
      *
      * @param date A valid date and time.
      */
-    public ContactDate(String date, String notes) {
+    public ContactRecord(String date, String notes) {
         requireNonNull(date);
         requireNonNull(notes);
-        checkArgument(isValidContactDate(date), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidContactRecord(date), MESSAGE_CONSTRAINTS);
         value = LocalDate.parse(date);
         this.notes = notes;
     }
 
     /**
-     * Returns true if a given string is a valid date.
+     * Returns true if a given string is a valid record with a valid date.
      */
-    public static boolean isValidContactDate(String test) {
+    public static boolean isValidContactRecord(String test) {
         try {
             if (!test.matches(VALIDATION_REGEX)) {
                 return false;
@@ -48,23 +48,23 @@ public class ContactDate {
     }
 
     /**
-     * Returns the current date.
+     * Returns the current record.
      */
-    public static ContactDate createCurrentDate(String notes) {
-        return new ContactDate(LocalDate.now().toString(), notes);
+    public static ContactRecord createCurrentRecord(String notes) {
+        return new ContactRecord(LocalDate.now().toString(), notes);
     }
 
     /**
-     * Returns a new {@code ContactDate} that is a specified number of days after the current date.
+     * Returns a new {@code ContactRecord} that is a specified number of days after the current date.
      * The number of days is determined by the {@code callFrequency}.
      *
      * @param callFrequency The frequency of calls, represented as a {@code CallFrequency} object,
      *                      which determines how many days to add to the current date.
-     * @return A new {@code ContactDate} that is {@code callFrequency} days after the current date.
+     * @return A new {@code ContactRecord} that is {@code callFrequency} days after the current date.
      */
-    public ContactDate add(CallFrequency callFrequency) {
+    public ContactRecord add(CallFrequency callFrequency) {
         int daysToAdd = Integer.parseInt(callFrequency.value); // Parse the number of days from callFrequency
-        return new ContactDate(value.plusDays(daysToAdd).toString(), ""); // Create and return a new ContactDate
+        return new ContactRecord(value.plusDays(daysToAdd).toString(), ""); // Create and return a new ContactRecord
     }
 
     @Override
@@ -83,12 +83,12 @@ public class ContactDate {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ContactDate)) {
+        if (!(other instanceof ContactRecord)) {
             return false;
         }
 
-        ContactDate otherDate = (ContactDate) other;
-        return value.equals(otherDate.value) && notes.equals(otherDate.notes);
+        ContactRecord otherRecord = (ContactRecord) other;
+        return value.equals(otherRecord.value) && notes.equals(otherRecord.notes);
     }
 
     @Override

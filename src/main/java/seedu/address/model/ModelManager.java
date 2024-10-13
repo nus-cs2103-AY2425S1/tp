@@ -12,8 +12,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.contactdate.ContactDate;
-import seedu.address.model.contactdate.ContactDateList;
+import seedu.address.model.contactrecord.ContactRecord;
+import seedu.address.model.contactrecord.ContactRecordList;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
@@ -130,9 +130,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void markAsContacted(Person target, ContactDate contactDate) {
+    public void markAsContacted(Person target, ContactRecord contactRecord) {
         requireNonNull(target);
-        target.markAsContacted(contactDate);
+        target.markAsContacted(contactRecord);
     }
 
     @Override
@@ -164,26 +164,26 @@ public class ModelManager implements Model {
 
     //=========== Call History ================================================================================
     @Override
-    public ContactDateList getCallHistory(Person target) {
+    public ContactRecordList getCallHistory(Person target) {
         requireNonNull(target);
-        return target.getContactDates();
+        return target.getContactRecords();
     }
 
     @Override
-    public void updateDisplayedList(ContactDateList callHistory) {
+    public void updateDisplayedList(ContactRecordList callHistory) {
         requireNonNull(callHistory);
         displayedCallHistory.clear();
-        for (ContactDate date : callHistory) {
-            displayedCallHistory.add(date.toString());
+        for (ContactRecord record : callHistory) {
+            displayedCallHistory.add(record.toString());
         }
     }
 
     @Override
-    public ContactDateList getDisplayedCallHistory() {
-        ContactDateList callHistory = new ContactDateList();
+    public ContactRecordList getDisplayedCallHistory() {
+        ContactRecordList callHistory = new ContactRecordList();
         for (String call : displayedCallHistory) {
-            ContactDate contactDate = new ContactDate(call, "");
-            callHistory.add(contactDate);
+            ContactRecord contactRecord = new ContactRecord(call, "");
+            callHistory.add(contactRecord);
         }
         return callHistory;
     }

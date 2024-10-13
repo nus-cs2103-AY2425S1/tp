@@ -27,10 +27,10 @@ import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.contactdate.ContactDate;
+import seedu.address.model.contactrecord.ContactRecord;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.ContactDateBuilder;
+import seedu.address.testutil.ContactRecordBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -96,11 +96,11 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_mark() throws Exception {
-        ContactDate validDate = new ContactDateBuilder().withNotes(VALID_NOTES).build();
+        ContactRecord validRecord = new ContactRecordBuilder().withNotes(VALID_NOTES).build();
         MarkCommand command = (MarkCommand) parser.parseCommand(
                 MarkCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
                 + " " + NOTES_DESC);
-        assertEquals(new MarkCommand(INDEX_FIRST_PERSON, validDate), command);
+        assertEquals(new MarkCommand(INDEX_FIRST_PERSON, validRecord), command);
     }
 
     @Test

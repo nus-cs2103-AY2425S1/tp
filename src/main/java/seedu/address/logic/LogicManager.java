@@ -15,7 +15,7 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.contactdate.ContactDateList;
+import seedu.address.model.contactrecord.ContactRecordList;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
 
@@ -88,7 +88,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ContactDateList getCallHistory() {
+    public ContactRecordList getCallHistory() {
         return model.getDisplayedCallHistory();
     }
 }

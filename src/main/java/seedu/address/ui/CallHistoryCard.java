@@ -3,7 +3,7 @@ package seedu.address.ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import seedu.address.model.contactdate.ContactDate;
+import seedu.address.model.contactrecord.ContactRecord;
 
 /**
  * An UI component that displays information of a {@code CallHistory}.
@@ -14,15 +14,15 @@ public class CallHistoryCard extends UiPart<HBox> {
     @FXML
     private Label indexLabel;
     @FXML
-    private Label contactDateLabel;
+    private Label contactRecordLabel;
 
     /**
      * Creates a {@code CallHistoryCard} with the given {@code CallHistory} and index to display.
      */
-    public CallHistoryCard(ContactDate contactDate, int index) {
+    public CallHistoryCard(ContactRecord contactRecord, int index) {
         super(FXML);
         indexLabel.setText(index + ". ");
-        contactDateLabel.setText(contactDate.toString());
+        contactRecordLabel.setText(contactRecord.toString());
     }
 }
 

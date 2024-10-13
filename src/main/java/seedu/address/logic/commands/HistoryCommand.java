@@ -9,7 +9,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.contactdate.ContactDateList;
+import seedu.address.model.contactrecord.ContactRecordList;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
@@ -66,7 +66,7 @@ public class HistoryCommand extends Command {
             }
         }
 
-        ContactDateList callHistory = model.getCallHistory(personFound);
+        ContactRecordList callHistory = model.getCallHistory(personFound);
 
         model.updateDisplayedList(callHistory);
 
