@@ -177,6 +177,10 @@ public class AddCommandTest {
         }
 
         @Override
+        public void deleteAssignment(Assignment assignment) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
         public String checkAssignment(Assignment assignment) {
             throw new AssertionError("This method should not be called.");
         }
