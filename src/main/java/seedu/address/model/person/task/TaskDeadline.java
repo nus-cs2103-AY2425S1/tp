@@ -3,7 +3,7 @@ package seedu.address.model.person.task;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -14,7 +14,7 @@ import java.time.format.DateTimeParseException;
 public class TaskDeadline {
     public static final String MESSAGE_CONSTRAINTS = "Task deadline should be in the format YYYY-MM-DD.";
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    public final LocalDateTime taskDeadline;
+    public final LocalDate taskDeadline;
 
     /**
      * Constucts a {@code TaskDeadline}
@@ -23,7 +23,7 @@ public class TaskDeadline {
     public TaskDeadline(String taskDeadline) {
         requireNonNull(taskDeadline);
         checkArgument(isValidTaskDeadline(taskDeadline), MESSAGE_CONSTRAINTS);
-        this.taskDeadline = LocalDateTime.parse(taskDeadline, formatter);
+        this.taskDeadline = LocalDate.parse(taskDeadline, formatter);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class TaskDeadline {
     public static boolean isValidTaskDeadline(String test) {
         boolean valid = true;
         try {
-            LocalDateTime.parse(test, formatter);
+            LocalDate.parse(test, formatter);
         } catch (DateTimeParseException e) {
             valid = false;
         }

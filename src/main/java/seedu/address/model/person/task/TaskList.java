@@ -15,17 +15,18 @@ import seedu.address.storage.JsonAdaptedTask;
  * Represents a Person's task list in the address book.
  * Guarantees: is always valid
  */
-public class TaskList implements Iterable<Task>{
+public class TaskList implements Iterable<Task> {
     private final ObservableList<Task> tasks = FXCollections.observableArrayList();
     private final ObservableList<Task> unmodifiableTasks =
             FXCollections.unmodifiableObservableList(tasks);
 
     /**
-     * Sorts task by deadline
+     * Sorts task by deadline, earlier tasks are placed at the front
      */
     public void sortByDeadline() {
         tasks.sort((o1, o2) -> o1.taskDeadline.compareTo(o2.taskDeadline));
     }
+
     /**
      * Adds a task to the list and sorts it by date.
      */

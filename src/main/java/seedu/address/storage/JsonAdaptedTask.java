@@ -59,4 +59,18 @@ public class JsonAdaptedTask {
 
         return new Task(modelTaskDesc, modelTaskDeadline);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof JsonAdaptedTask)) {
+            return false;
+        }
+
+        JsonAdaptedTask otherTask = (JsonAdaptedTask) other;
+        return taskDescription.equals(otherTask.taskDescription) && taskDeadline.equals(otherTask.taskDeadline);
+    }
 }

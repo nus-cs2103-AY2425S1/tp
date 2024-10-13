@@ -10,6 +10,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_ENGLISH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_MATH;
+import static seedu.address.testutil.TypicalTasks.GRADING_TASK;
+import static seedu.address.testutil.TypicalTasks.MARKING_TASK;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,7 +32,9 @@ public class TypicalPersons {
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier").withNote("Needs Jesus rn")
             .withAddress("311, Clementi Ave 2, #02-25").withEmergencyContact("94351253")
             .withPhone("98765432")
-            .withSubjects("CHEMISTRY", "MATH").withLevel("P2").build();
+            .withSubjects("CHEMISTRY", "MATH").withLevel("P2").withTaskList(
+                    MARKING_TASK, GRADING_TASK
+            ).build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withNote("Needs Jesus rn").withAddress("wall street").withEmergencyContact("94351253").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
