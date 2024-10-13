@@ -76,7 +76,8 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + SCHEDULE_DESC_BOB + SUBJECT_DESC_BOB + RATE_DESC_BOB + PAID_DESC_BOB + OWED_AMOUNT_DESC_BOB,
+                + ADDRESS_DESC_BOB + SCHEDULE_DESC_BOB + SUBJECT_DESC_BOB + RATE_DESC_BOB + PAID_DESC_BOB
+                        + OWED_AMOUNT_DESC_BOB,
                 new AddCommand(expectedPerson));
     }
 
@@ -84,7 +85,8 @@ public class AddCommandParserTest {
     public void parse_repeatedValue_failure() {
         /*public void parse_repeatedNonTagValue_failure() {*/
         String validExpectedPersonString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + SCHEDULE_DESC_BOB + SUBJECT_DESC_BOB + RATE_DESC_BOB + PAID_DESC_BOB + OWED_AMOUNT_DESC_BOB;
+                + ADDRESS_DESC_BOB + SCHEDULE_DESC_BOB + SUBJECT_DESC_BOB + RATE_DESC_BOB + PAID_DESC_BOB
+                        + OWED_AMOUNT_DESC_BOB;
 
         // multiple names
         assertParseFailure(parser, NAME_DESC_AMY + validExpectedPersonString,
@@ -160,7 +162,7 @@ public class AddCommandParserTest {
         // invalid rate
         assertParseFailure(parser, INVALID_RATE_DESC + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_RATE));
-        
+
         // invalid paid
         assertParseFailure(parser, INVALID_PAID_DESC + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PAID));
@@ -297,17 +299,17 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + SCHEDULE_DESC_BOB + SUBJECT_DESC_BOB
                 + INVALID_RATE_DESC, Rate.MESSAGE_CONSTRAINTS);
- 
+
         // invalid paid
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + SCHEDULE_DESC_BOB + SUBJECT_DESC_BOB
                 + RATE_DESC_BOB + INVALID_PAID_DESC, Paid.MESSAGE_CONSTRAINTS);
- 
+
         // invalid owedAmount
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + SCHEDULE_DESC_BOB + SUBJECT_DESC_BOB
                 + RATE_DESC_BOB + INVALID_OWED_AMOUNT_DESC, OwedAmount.MESSAGE_CONSTRAINTS);
- 
+
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC + SCHEDULE_DESC_BOB + SUBJECT_DESC_BOB + RATE_DESC_BOB
