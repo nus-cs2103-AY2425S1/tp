@@ -5,11 +5,14 @@ import static seedu.sellsavvy.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.sellsavvy.model.order.*;
 import seedu.sellsavvy.model.person.exceptions.DuplicatePersonException;
 import seedu.sellsavvy.model.person.exceptions.PersonNotFoundException;
+import seedu.sellsavvy.model.tag.Tag;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
@@ -98,6 +101,17 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Creates a {@code UniquePersonList} copy of all data in this list.
+     */
+    public UniquePersonList copyPersons() {
+        UniquePersonList copy = new UniquePersonList();
+        for (Person person : internalList) {
+            copy.add(copyPerson(person));
+        }
+        return copy;
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Person> asUnmodifiableObservableList() {
@@ -146,5 +160,32 @@ public class UniquePersonList implements Iterable<Person> {
             }
         }
         return true;
+    }
+
+    /**
+     * Creates a new copy of {@code Person} with new attributes.
+     * Only the tags are not copied.
+     */
+    private Person copyPerson(Person person) {
+        Name name = new Name(person.getName().toString());
+        Address address = new Address(person.getAddress().toString());
+        Phone phone = new Phone(person.getPhone().toString());
+        Email email = new Email(person.getEmail().toString());
+        Set<Tag> tags = person.getTags();
+        OrderList orderList = new OrderList();
+        for (Order order : person.getOrderList()) {
+            orderList.add(copyOrder(order));
+        }
+        return new Person(name, phone, email, address, tags, orderList);
+    }
+
+    /**
+     * Creates a new copy of {@code Order} with new attributes.
+     */
+    private Order copyOrder(Order order) {
+        Item item = new Item(order.getItem().toString());
+        Date date = new Date(order.getDate().toString());
+        Count count = new Count(order.getCount().toString());
+        return new Order(item, count, date);
     }
 }
