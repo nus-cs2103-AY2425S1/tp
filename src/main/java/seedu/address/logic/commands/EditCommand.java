@@ -168,7 +168,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, studentId, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, studentId, phone, email, address, tags, tutorials);
         }
 
         public void setName(Name name) {
@@ -242,7 +242,7 @@ public class EditCommand extends Command {
          * Returns {@code Optional#empty()} if {@code tutorials} is null.
          */
         public Optional<Set<Tutorial>> getTutorials() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tutorials)) : Optional.empty();
+            return (tutorials != null) ? Optional.of(Collections.unmodifiableSet(tutorials)) : Optional.empty();
         }
 
         @Override
@@ -262,7 +262,8 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(tutorials, otherEditPersonDescriptor.tutorials);
         }
 
         @Override

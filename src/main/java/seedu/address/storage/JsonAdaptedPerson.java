@@ -67,6 +67,9 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        tutorials.addAll(source.getTutorials().stream()
+                .map(JsonAdaptedTutorial::new)
+                .collect(Collectors.toList()));
     }
 
     /**
