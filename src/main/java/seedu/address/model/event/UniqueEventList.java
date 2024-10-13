@@ -86,7 +86,7 @@ public class UniqueEventList implements Iterable<Event> {
 
     /**
      * Replaces the contents of this list with {@code events}.
-     * {@code events} must not contain duplicate persons.
+     * {@code events} must not contain duplicate events.
      */
     public void setEvents(List<Event> events) {
         requireAllNonNull(events);
