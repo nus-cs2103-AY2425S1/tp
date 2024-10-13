@@ -16,6 +16,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -50,6 +51,8 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane statusbarPlaceholder;
 
+    @FXML
+    private StackPane personDetailsCardPlaceholder;
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
@@ -112,6 +115,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanel.setMainWindow(this);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -123,7 +127,17 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
+    /**
+     * Updates the Detail plane with the currently selected person.
+     */
+    public void setPersonDetails(Person person) {
+        PersonDetails personDetails = new PersonDetails();
+        personDetails.updatePersonDetails(person);
 
+        // Clear the existing view in the StackPane and set the new PersonDetails
+        personDetailsCardPlaceholder.getChildren().clear();
+        personDetailsCardPlaceholder.getChildren().add(personDetails.getRoot());
+    }
     /**
      * Sets the default size based on {@code guiSettings}.
      */
