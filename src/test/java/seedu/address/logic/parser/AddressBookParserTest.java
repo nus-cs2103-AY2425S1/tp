@@ -107,12 +107,12 @@ public class AddressBookParserTest {
     public void parseCommand_deleteInsuranceCommand() throws Exception {
         String userInput = DeleteInsuranceCommand.COMMAND_WORD
                 + " "
-                + INDEX_FIRST_PERSON.getOneBased()
+                + INDEX_FIRST_CLIENT.getOneBased()
                 + " "
                 + PREFIX_INSURANCE_ID
                 + " 0 ";
         DeleteInsuranceCommand command = (DeleteInsuranceCommand) parser.parseCommand(userInput);
-        assertEquals(new DeleteInsuranceCommand(INDEX_FIRST_PERSON, 0), command);
+        assertEquals(new DeleteInsuranceCommand(INDEX_FIRST_CLIENT, 0), command);
     }
 
     @Test

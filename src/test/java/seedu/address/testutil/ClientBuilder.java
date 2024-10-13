@@ -3,12 +3,12 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
-import seedu.address.model.client.insurance.InsurancePlan;
 import seedu.address.model.client.insurance.InsurancePlansManager;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -97,8 +97,12 @@ public class ClientBuilder {
     /**
      * Sets the {@code InsurancePlansManager} of the {@code Client} that we are building.
      */
-    public ClientBuilder withInsurancePlansManager(InsurancePlan insurancePlan) {
-        this.insurancePlansManager.addPlan(insurancePlan);
+    public ClientBuilder withInsurancePlansManager(String insurancePlansString) {
+        try {
+            this.insurancePlansManager = new InsurancePlansManager(insurancePlansString);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
         return this;
     }
 

@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INSURANCE_ID;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
 

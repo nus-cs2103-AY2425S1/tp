@@ -1,6 +1,6 @@
 package seedu.address.model.client.insurance;
 
-import static seedu.address.model.person.insurance.InsurancePlanFactory.createInsurancePlan;
+import static seedu.address.model.client.insurance.InsurancePlanFactory.createInsurancePlan;
 
 import java.util.ArrayList;
 
