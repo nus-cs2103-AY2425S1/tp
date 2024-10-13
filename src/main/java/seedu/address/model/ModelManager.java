@@ -135,6 +135,11 @@ public class ModelManager implements Model {
         assignmentList.addAssignment(assignment);
     }
 
+    @Override
+    public void deleteAssignment(Assignment assignment) {
+        assignmentList.deleteAssignment(assignment);
+    }
+
     //=========== Filtered Student List Accessors =============================================================
 
     /**

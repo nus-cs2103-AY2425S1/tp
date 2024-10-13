@@ -101,4 +101,10 @@ public interface Model {
      * {@code assignment} must not already exist in the assignment list.
      */
     void addAssignment(Assignment assignment);
+
+    /**
+     * Deletes the specified assignment.
+     * The assignment must exist in the assignment list.
+     */
+    void deleteAssignment(Assignment assignment);
 }

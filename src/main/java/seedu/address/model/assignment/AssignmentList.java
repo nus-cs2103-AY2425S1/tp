@@ -2,6 +2,7 @@ package seedu.address.model.assignment;
 
 import java.util.ArrayList;
 
+import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.assignment.exceptions.DuplicateAssignmentException;
 
 /**
@@ -50,6 +51,20 @@ public class AssignmentList {
      */
     public boolean hasAssignment(Assignment assignment) {
         return this.assignments.contains(assignment);
+    }
+
+    /**
+     * Deletes the specified assignment from the list.
+     * The assignment must exist in the list.
+     *
+     * @param assignment The assignment to be deleted.
+     * @throws AssignmentNotFoundException if the assignment does not exist in the list.
+     */
+    public void deleteAssignment(Assignment assignment) {
+        if (!hasAssignment(assignment)) {
+            throw new AssignmentNotFoundException();
+        }
+        assignments.remove(assignment);
     }
 
     @Override
