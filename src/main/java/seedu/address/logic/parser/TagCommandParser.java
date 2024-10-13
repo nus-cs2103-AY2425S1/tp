@@ -25,6 +25,9 @@ public class TagCommandParser implements Parser<TagCommand> {
         try {
             Index index = ParserUtil.parseIndex(multimap.getPreamble());
             Set<Tag> tagList = ParserUtil.parseTags(multimap.getAllValues(PREFIX_TAG)); //the list of tags to be added
+            if (tagList.isEmpty()) {
+                throw new ParseException("No tags specified");
+            }
             return new TagCommand(index, tagList);
 
         } catch (ParseException pe) {

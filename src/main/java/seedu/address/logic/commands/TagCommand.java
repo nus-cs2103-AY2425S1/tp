@@ -21,10 +21,10 @@ import seedu.address.model.tag.Tag;
 public class TagCommand extends Command {
     public static final String COMMAND_WORD = "tag";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds new tags to the person "
-            + "identified by the index number used in the displayed person list. \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds new one-word tags to the person "
+            + "identified by their index number. \n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_TAG + "TAG... \n"
+            + PREFIX_TAG + "TAG (specify at least 1)... \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TAG + "friends" + " "
             + PREFIX_TAG + "owesMoney";
