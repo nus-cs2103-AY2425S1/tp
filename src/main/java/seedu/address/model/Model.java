@@ -110,8 +110,19 @@ public interface Model {
      */
     String checkAssignment(Assignment assignment) throws AssignmentNotFoundException;
 
+    /**
+     * Sets the status of assignment of the given student to a specified boolean value.
+     * @param assignment The assignment to be marked or unmarked.
+     * @param targetStudent The target student that completes or not completes the assignment.
+     * @param newStatus New boolean value of the status.
+     * @throws AssignmentNotFoundException If the assignment is not found.
+     */
     void setAssignmentStatus(Assignment assignment, Student targetStudent, boolean newStatus)
             throws AssignmentNotFoundException;
 
+    /**
+     * Lists all current assignments.
+     * @return String of all current assignments.
+     */
     String listAssignments();
 }

@@ -186,6 +186,11 @@ public class AddCommandTest {
                 throws AssignmentNotFoundException {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public String listAssignments() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

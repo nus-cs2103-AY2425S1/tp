@@ -79,6 +79,13 @@ public class AssignmentList {
         return targetAssignment.toString() + "\n" + completedString + "\n" + uncompletedString;
     }
 
+    /**
+     * Sets the status of assignment of the given student to a specified boolean value.
+     * @param assignment The assignment to be marked or unmarked.
+     * @param targetStudent The target student that completes or not completes the assignment.
+     * @param newStatus New boolean value of the status.
+     * @throws AssignmentNotFoundException If the assignment is not found.
+     */
     public void setStatus(Assignment assignment, Student targetStudent, boolean newStatus)
             throws AssignmentNotFoundException {
         Assignment targetAssignment = getAssignment(assignment);
@@ -86,6 +93,13 @@ public class AssignmentList {
         targetAssignment.markStatus(studentId, newStatus);
     }
 
+    /**
+     * Retrieves assignment within the list with given title.
+     *
+     * @param assignment The assignment used to contain the title.
+     * @return The assignment of given title within the list.
+     * @throws AssignmentNotFoundException If the assignment is not found.
+     */
     private Assignment getAssignment(Assignment assignment) throws AssignmentNotFoundException {
         return assignments.stream()
                 .filter(assignment::equals)

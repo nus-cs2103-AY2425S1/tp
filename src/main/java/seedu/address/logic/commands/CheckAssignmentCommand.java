@@ -24,9 +24,9 @@ public class CheckAssignmentCommand extends Command {
     private Assignment assignment;
 
     /**
-     * Constructs an AddAssignmentCommand with the specified assignment.
+     * Constructs a CheckAssignmentCommand with the specified assignment.
      *
-     * @param assignment The assignment to be added.
+     * @param assignment The assignment to be checked.
      */
     public CheckAssignmentCommand(Assignment assignment) {
         this.assignment = assignment;

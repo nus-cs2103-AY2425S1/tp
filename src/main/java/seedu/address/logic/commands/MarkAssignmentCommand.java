@@ -30,9 +30,10 @@ public class MarkAssignmentCommand extends Command {
     private final Assignment assignment;
 
     /**
-     * Constructs an AddAssignmentCommand with the specified assignment.
+     * Constructs a MarkAssignmentCommand with the specified index and assignment.
      *
-     * @param assignment The assignment to be added.
+     * @param targetIndex The index of the assignment to be marked.
+     * @param assignment The assignment to be marked.
      */
     public MarkAssignmentCommand(int targetIndex, Assignment assignment) {
         this.assignment = assignment;

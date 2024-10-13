@@ -30,8 +30,9 @@ public class UnmarkAssignmentCommand extends Command {
     private final Assignment assignment;
 
     /**
-     * Constructs an AddAssignmentCommand with the specified assignment.
+     * Constructs a UnmarkAssignmentCommand with the specified index and assignment.
      *
+     * @param targetIndex The index of the assignment to be unmarked.
      * @param assignment The assignment to be added.
      */
     public UnmarkAssignmentCommand(int targetIndex, Assignment assignment) {
