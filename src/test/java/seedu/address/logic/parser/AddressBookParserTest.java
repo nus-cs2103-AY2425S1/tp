@@ -7,6 +7,8 @@ import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.util.Arrays;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
@@ -15,10 +17,16 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.FullNameMatchesPredicate;
+import seedu.address.model.person.JobCodePredicate;
+import seedu.address.model.person.NameEmailPredicate;
+import seedu.address.model.person.NamePhonePredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.TagPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -62,13 +70,47 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
     }
 
-    //    @Test
-    //    public void parseCommand_find() throws Exception {
-    //        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-    //        FindCommand command = (FindCommand) parser.parseCommand(
-    //                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-    //        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
-    //    }
+    @Test
+    public void parseCommand_findName() throws Exception {
+        Person person = new PersonBuilder().withName("Bobby Coo").build();
+        String userInput = PersonUtil.getFindCommandByName(person);
+        FindCommand command = (FindCommand) parser.parseCommand(userInput);
+        assertEquals(new FindCommand(new FullNameMatchesPredicate("Bobby Coo")), command);
+    }
+
+    @Test
+    public void parseCommand_findNameEmail() throws Exception {
+        Person person = new PersonBuilder().withName("Bobby Coo")
+                .withEmail("bobby@example.com").build();
+        String userInput = PersonUtil.getFindCommandByNameEmail(person);
+        FindCommand command = (FindCommand) parser.parseCommand(userInput);
+        assertEquals(new FindCommand(new NameEmailPredicate("Bobby Coo", "bobby@example.com")), command);
+    }
+
+    @Test
+    public void parseCommand_findNamePhone() throws Exception {
+        Person person = new PersonBuilder().withName("Bobby Coo")
+                .withPhone("12121212").build();
+        String userInput = PersonUtil.getFindCommandByNamePhone(person);
+        FindCommand command = (FindCommand) parser.parseCommand(userInput);
+        assertEquals(new FindCommand(new NamePhonePredicate("Bobby Coo", "12121212")), command);
+    }
+
+    @Test
+    public void parseCommand_findJobCode() throws Exception {
+        Person person = new PersonBuilder().withJobCode("SWE1234").build();
+        String userInput = PersonUtil.getFindCommandByJobCode(person);
+        FindCommand command = (FindCommand) parser.parseCommand(userInput);
+        assertEquals(new FindCommand(new JobCodePredicate("SWE1234")), command);
+    }
+
+    @Test
+    public void parseCommand_findTag() throws Exception {
+        Person person = new PersonBuilder().withTags("tp").build();
+        String userInput = PersonUtil.getFindCommandByTag(person);
+        FindCommand command = (FindCommand) parser.parseCommand(userInput);
+        assertEquals(new FindCommand(new TagPredicate(Arrays.asList("tp"))), command);
+    }
 
     @Test
     public void parseCommand_help() throws Exception {

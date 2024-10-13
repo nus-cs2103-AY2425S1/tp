@@ -10,6 +10,7 @@ import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.FindCommand;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -58,5 +59,42 @@ public class PersonUtil {
             }
         }
         return sb.toString();
+    }
+
+    /**
+     * Returns a find command string for finding a person by name.
+     */
+    public static String getFindCommandByName(Person person) {
+        return FindCommand.COMMAND_WORD + " " + PREFIX_NAME + person.getName().fullName;
+    }
+
+    /**
+     * Returns a find command string for finding a person by email.
+     */
+    public static String getFindCommandByNameEmail(Person person) {
+        return FindCommand.COMMAND_WORD + " " + PREFIX_NAME + person.getName().fullName
+                + " " + PREFIX_EMAIL + person.getEmail().value;
+    }
+
+    /**
+     * Returns a find command string for finding a person by phone.
+     */
+    public static String getFindCommandByNamePhone(Person person) {
+        return FindCommand.COMMAND_WORD + " " + PREFIX_NAME + person.getName().fullName
+                + " " + PREFIX_PHONE + person.getPhone().value;
+    }
+
+    /**
+     * Returns a find command string for finding a person by job code.
+     */
+    public static String getFindCommandByJobCode(Person person) {
+        return FindCommand.COMMAND_WORD + " " + PREFIX_JOBCODE + person.getJobCode().value;
+    }
+
+    /**
+     * Returns a find command string for finding a person by tag.
+     */
+    public static String getFindCommandByTag(Person person) {
+        return FindCommand.COMMAND_WORD + " " + PREFIX_TAG + person.getTags().iterator().next().tagName;
     }
 }

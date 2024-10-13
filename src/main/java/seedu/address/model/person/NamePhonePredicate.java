@@ -35,7 +35,7 @@ public class NamePhonePredicate implements Predicate<Person> {
             return false;
         }
         NamePhonePredicate otherPredicate = (NamePhonePredicate) other;
-        return name.equals(otherPredicate.name)
+        return name.equalsIgnoreCase(otherPredicate.name)
                 && phone.equals(otherPredicate.phone);
     }
 }
