@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.DeleteCommand.ItemTypeToDelete;
+import seedu.address.logic.commands.DeleteVendorCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -27,7 +27,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_VENDOR)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteVendorCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_VENDOR);
@@ -35,11 +35,10 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         try {
             Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_VENDOR).get());
             // default to vendor since event deletion is not supported
-            ItemTypeToDelete itemType = ItemTypeToDelete.VENDOR;
-            return new DeleteCommand(itemType, index);
+            return new DeleteVendorCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteVendorCommand.MESSAGE_USAGE), pe);
         }
     }
 
