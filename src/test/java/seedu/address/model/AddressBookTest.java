@@ -31,7 +31,6 @@ public class AddressBookTest {
     private final AddressBook addressBook = new AddressBook();
     private final Event testEvent = new Event(new Name("Test Event"), new Date("2024-10-11"));
     private final Event similarTestEvent = new Event(new Name("Test Event"), new Date("2023-05-20"));
-    private final Event differentEvent = new Event(new Name("Different"), new Date("2020-06-01"));
 
     @Test
     public void constructor() {
