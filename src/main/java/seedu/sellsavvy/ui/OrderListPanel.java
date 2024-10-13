@@ -21,6 +21,7 @@ public class OrderListPanel extends UiPart<Region> {
     private static final String FXML = "OrderListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(OrderListPanel.class);
     private static final String DEFAULT_TITLE = "Order";
+    private static final String TITLE_WITH_SELECTED_PERSON = "Order( %1$s )";
 
     @FXML
     private ListView<Order> orderListView;
@@ -55,6 +56,9 @@ public class OrderListPanel extends UiPart<Region> {
         }
         orderListView.setItems(person.getOrderList().asUnmodifiableObservableList());
         orderListView.setCellFactory(listView -> new OrderListViewCell());
+        orderListView.setManaged(true);
+        orderGuide.setManaged(false);
+        orderListTitle.setText(String.format(TITLE_WITH_SELECTED_PERSON,person.getName().fullName));
     }
 
     /**
