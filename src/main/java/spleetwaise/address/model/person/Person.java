@@ -2,20 +2,21 @@ package spleetwaise.address.model.person;
 
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 import spleetwaise.address.commons.util.CollectionUtil;
 import spleetwaise.address.commons.util.ToStringBuilder;
 import spleetwaise.address.model.tag.Tag;
+import spleetwaise.commons.IdUtil;
 
 /**
- * Represents a Person in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Represents a Person in the address book. Guarantees: details are present and not null, field values are validated,
+ * immutable.
  */
 public class Person {
 
     // Identity fields
+    private final String id;
     private final Name name;
     private final Phone phone;
     private final Email email;
@@ -27,13 +28,22 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(String id, Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         CollectionUtil.requireAllNonNull(name, phone, email, address, tags);
+        this.id = id;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+    }
+
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+        this(IdUtil.getId(), name, phone, email, address, tags);
+    }
+
+    public String getId() {
+        return id;
     }
 
     public Name getName() {
@@ -53,29 +63,35 @@ public class Person {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException} if modification is attempted.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both persons have the same name and phone number. This defines a notion of
+     * equality between two persons based on their identity.
      */
     public boolean isSamePerson(Person otherPerson) {
         if (otherPerson == this) {
+            // This means that the otherPerson has the same id, name, phone, email, address and tags
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        return otherPerson != null && name.equals(otherPerson.name) && phone.equals(otherPerson.phone);
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both persons have the same id.
+     */
+    public boolean hasSameId(Person otherPerson) {
+        return otherPerson.getId().equals(getId());
+    }
+
+    /**
+     * Returns true if both persons have the same identity and data fields. This defines a stronger notion of equality
+     * between two persons.
      */
     @Override
     public boolean equals(Object other) {
@@ -84,12 +100,12 @@ public class Person {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Person otherPerson)) {
             return false;
         }
 
-        Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
+        return id.equals(otherPerson.id)
+                && name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
@@ -98,8 +114,7 @@ public class Person {
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return this.id.hashCode();
     }
 
     @Override
