@@ -31,6 +31,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedGrade> grades = new ArrayList<>();  // Added to store grades
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -38,13 +39,16 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("grades") List<JsonAdaptedGrade> grades) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         if (tags != null) {
             this.tags.addAll(tags);
+        }
+        if (grades != null) {
+            this.grades.addAll(grades);
         }
     }
 
@@ -59,6 +63,9 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                             .map(JsonAdaptedTag::new)
                             .collect(Collectors.toList()));
+        grades.addAll(source.getGradeList().getList().stream() // Convert GradeList to JSON
+                .map(JsonAdaptedGrade::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -108,6 +115,9 @@ class JsonAdaptedPerson {
 
         // TODO: Store gradeList properly
         final GradeList modelGradeList = new GradeList();
+        for (JsonAdaptedGrade grade : grades) {
+            modelGradeList.addGrade(grade.toModelType());
+        }
 
         // TODO: Store attendanceList properly
         final AttendanceList modelAttendancelist = new AttendanceList();

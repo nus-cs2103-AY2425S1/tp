@@ -61,6 +61,16 @@ public class GradeList {
     }
 
     /**
+     * Retrieves the list of grades in this {@code GradeList}.
+     *
+     * @return A list of {@code Grade} objects representing all the grades in the grade list.
+     */
+    public List<Grade> getList() {
+        return new ArrayList<>(grades); // Returning a copy to prevent external modification
+    }
+
+
+    /**
      * Returns true if there is a grade recorded for the specified test.
      *
      * @param testName The name of the test.
@@ -82,17 +92,26 @@ public class GradeList {
 
         for (Grade g:  grades) {
             float currentWeightage = g.getWeightage();
-            totalWeightage += currentWeightage;
-            totalScore += g.getScore() * currentWeightage;
+            totalWeightage += currentWeightage / 100;
+            totalScore += g.getScore() * currentWeightage / 100;
         }
 
         String summary = "Overall score: " + totalScore;
 
         if (totalWeightage < FULL_WEIGHTAGE) {
-            summary += NOT_ALL_WEIGHTAGE + (totalWeightage * 100) + "%";
+            summary += NOT_ALL_WEIGHTAGE + totalWeightage + "%";
         }
 
         return summary;
+    }
+
+    /**
+     * Returns true if the grade list is empty.
+     *
+     * @return true if there are no grades in the list, false otherwise.
+     */
+    public boolean isEmpty() {
+        return grades.isEmpty();  // Assuming 'grades' is the collection of Grade objects
     }
 
     @Override

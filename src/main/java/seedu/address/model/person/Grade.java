@@ -102,7 +102,7 @@ public class Grade {
      * @return the weightage of the test.
      */
     public float getWeightage() {
-        return weightage / 100;
+        return weightage;
     }
 
     @Override

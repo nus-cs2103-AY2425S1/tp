@@ -40,6 +40,8 @@ public class PersonCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label grades;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -55,5 +57,19 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+        // Set grades label with person's grades
+        if (person.getGradeList() != null && !person.getGradeList().isEmpty()) {
+            grades.setText(formatGrades(person.getGradeList().toString()));  // Format and set grades
+        } else {
+            grades.setText("No grades available");
+        }
+    }
+
+    /**
+     * Formats the grade list to display properly in the UI.
+     */
+    private String formatGrades(String gradeList) {
+        return "Grades:\n" + gradeList;  // You can customize this formatting as needed
     }
 }
