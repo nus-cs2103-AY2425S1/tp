@@ -12,6 +12,7 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.Date;
 import seedu.address.model.appointment.From;
 import seedu.address.model.appointment.To;
+import seedu.address.model.person.Email;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,7 +24,7 @@ public class Person {
     // Identity fields
     private final Name name;
     private final Phone phone;
-//    private final Email email;
+    private final Email email;
 //
 //    // Data fields
 //    private final Address address;
@@ -35,11 +36,11 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Appointment appointment, Property property) {
+    public Person(Name name, Phone phone, Email email, Appointment appointment, Property property) {
         requireAllNonNull(name, phone, appointment, property);
         this.name = name;
         this.phone = phone;
-//        this.email = email;
+        this.email = email;
 //        this.address = address;
 //        this.remark = remark;
         this.property = property;
@@ -50,6 +51,7 @@ public class Person {
     public Person(Name name) {
         this.name = name;
         this.phone = null;
+        this.email = null;
         this.property = new Property("");
         this.appointment = new Appointment(new Date(""), new From(""), new To(""));
     }
@@ -62,9 +64,9 @@ public class Person {
         return phone;
     }
 
-//    public Email getEmail() {
-//        return email;
-//    }
+    public Email getEmail() {
+        return email;
+    }
 //
 //    public Address getAddress() {
 //        return address;
@@ -121,8 +123,7 @@ public class Person {
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
-                && property.equals(otherPerson.property);
-//                && email.equals(otherPerson.email)
+                && email.equals(otherPerson.email);
 //                && address.equals(otherPerson.address)
 //                && tags.equals(otherPerson.tags);
     }
@@ -130,7 +131,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, appointment, property);
+        return Objects.hash(name, phone, email, appointment, property);
     }
 
     @Override
@@ -138,7 +139,7 @@ public class Person {
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
-//                .add("email", email)
+                .add("email", email)
 //                .add("address", address)
 //                .add("remark", remark)
 //                .add("tags", tags)

@@ -37,9 +37,9 @@ public class AddClientParser implements Parser<AddClientProfile> {
      */
     public AddClientProfile parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddClientProfile.MESSAGE_USAGE));
         }
@@ -47,14 +47,14 @@ public class AddClientParser implements Parser<AddClientProfile> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_PROPERTY);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-//        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
+        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
 //        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
 //        Remark remark = new Remark(""); // add command does not allow adding remarks straight away
         Property property = new Property(""); // add command does not allow adding properties straight away
         Appointment appointment = new Appointment(new Date(""), new From(""), new To("")); //add command does not allow adding appointment straight away
 //        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, appointment, property);
+        Person person = new Person(name, phone, email, appointment, property);
 
         return new AddClientProfile(person);
     }

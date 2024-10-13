@@ -32,7 +32,7 @@ class JsonAdaptedPerson {
 
     private final String name;
     private final String phone;
-//    private final String email;
+    private final String email;
 //    private final String address;
 //    private final String remark;
     private final String property;
@@ -53,7 +53,7 @@ class JsonAdaptedPerson {
                         @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
-        //this.email = email;
+        this.email = email;
         //this.address = address;
         //this.remark = remark;
         this.date = date;
@@ -71,7 +71,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
-//        email = source.getEmail().value;
+        email = source.getEmail().value;
 //        address = source.getAddress().value;
 //        remark = source.getRemark().value;
         property = source.getProperty().getProperty();
@@ -110,13 +110,13 @@ class JsonAdaptedPerson {
         }
         final Phone modelPhone = new Phone(phone);
 
-//        if (email == null) {
-//            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
-//        }
-//        if (!Email.isValidEmail(email)) {
-//            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
-//        }
-//        final Email modelEmail = new Email(email);
+        if (email == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
+        }
+        if (!Email.isValidEmail(email)) {
+            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+        }
+        final Email modelEmail = new Email(email);
 //
 //        if (address == null) {
 //            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
@@ -151,7 +151,7 @@ class JsonAdaptedPerson {
         final Property modelProperty = new Property(property);
 
 //        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelAppointment, modelProperty);
+        return new Person(modelName, modelPhone, modelEmail, modelAppointment, modelProperty);
     }
 
 }

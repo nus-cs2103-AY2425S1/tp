@@ -43,9 +43,9 @@ public class Messages {
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName())
                 .append("; Phone: ")
-                .append(person.getPhone());
-//                .append("; Email: ")
-//                .append(person.getEmail())
+                .append(person.getPhone())
+                .append("; Email: ")
+                .append(person.getEmail());
 //                .append("; Address: ")
 //                .append(person.getAddress())
 //                .append("; Tags: ");

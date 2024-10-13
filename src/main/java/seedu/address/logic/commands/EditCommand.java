@@ -101,14 +101,14 @@ public class EditCommand extends Command {
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-//        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
+        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
 //        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
 //        Remark updatedRemark = personToEdit.getRemark(); // edit command does not allow editing remarks
         Property updatedProperty = personToEdit.getProperty(); // edit command does not allow editing properties
         Appointment updatedAppointment = personToEdit.getAppointment(); // edit command does not allow editing appointments
 //        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedAppointment, updatedProperty);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAppointment, updatedProperty);
     }
 
     @Override
@@ -142,8 +142,7 @@ public class EditCommand extends Command {
     public static class EditPersonDescriptor {
         private Name name;
         private Phone phone;
-        private Property property;
-//        private Email email;
+        private Email email;
 //        private Address address;
 //        private Set<Tag> tags;
 
@@ -156,7 +155,7 @@ public class EditCommand extends Command {
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
-//            setEmail(toCopy.email);
+            setEmail(toCopy.email);
 //            setAddress(toCopy.address);
 //            setTags(toCopy.tags);
         }
@@ -184,13 +183,13 @@ public class EditCommand extends Command {
             return Optional.ofNullable(phone);
         }
 
-//        public void setEmail(Email email) {
-//            this.email = email;
-//        }
-//
-//        public Optional<Email> getEmail() {
-//            return Optional.ofNullable(email);
-//        }
+        public void setEmail(Email email) {
+            this.email = email;
+        }
+
+        public Optional<Email> getEmail() {
+            return Optional.ofNullable(email);
+        }
 //
 //        public void setAddress(Address address) {
 //            this.address = address;
@@ -230,8 +229,8 @@ public class EditCommand extends Command {
 
             EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
             return Objects.equals(name, otherEditPersonDescriptor.name)
-                    && Objects.equals(phone, otherEditPersonDescriptor.phone);
-//                    && Objects.equals(email, otherEditPersonDescriptor.email)
+                    && Objects.equals(phone, otherEditPersonDescriptor.phone)
+                    && Objects.equals(email, otherEditPersonDescriptor.email);
 //                    && Objects.equals(address, otherEditPersonDescriptor.address)
 //                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
@@ -241,7 +240,6 @@ public class EditCommand extends Command {
             return new ToStringBuilder(this)
                     .add("name", name)
                     .add("phone", phone)
-                    .add("property", property)
                     .toString();
         }
     }
