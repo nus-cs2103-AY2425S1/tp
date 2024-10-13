@@ -44,7 +44,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                 // Try to parse it as an index first
                 Index index = ParserUtil.parseIndex(args);
                 return new DeleteCommand(index);
-            } catch (ParseException pe) {
+            } catch (ParseException pe) { // cannot parse as index
                 // If it is not an index, handle using parseOtherAttributes
                 return parseOtherAttributes(argMultiMap);
             }
@@ -62,22 +62,26 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         Optional<String> optionalName = argMultimap.getValue(PREFIX_NAME);
         Optional<String> optionalPhone = argMultimap.getValue(PREFIX_PHONE);
         Optional<String> optionalEmail = argMultimap.getValue(PREFIX_EMAIL);
-        if (optionalPhone.isEmpty() && optionalEmail.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
-        }
-        if (optionalName.isPresent()) {
+        if (optionalName.isPresent() && optionalPhone.isPresent()) {
+            // find using name and phone
+            System.out.println("NAME AND PHONE PRESENT");
             Name name = ParserUtil.parseName(optionalName.get());
-            System.out.println("finding using name and check duplicates");
-            System.out.println("assuming there are duplicates");
-            if (optionalPhone.isPresent()) {
-                Phone phone = ParserUtil.parsePhone(optionalPhone.get());
-                System.out.println("finding using phone");
-            } else if (optionalEmail.isPresent()) {
-                Email email = ParserUtil.parseEmail(optionalEmail.get());
-                System.out.println("finding using email");
-            }
+            Phone phone = ParserUtil.parsePhone(optionalPhone.get());
+            return new DeleteCommand(name, phone);
+        } else if (optionalName.isPresent() && optionalEmail.isPresent()) {
+            System.out.println("Only name is present");
+            //find using name and email
+            Name name = ParserUtil.parseName(optionalName.get());
+            Email email = ParserUtil.parseEmail(optionalEmail.get());
+            return new DeleteCommand(name, email);
+        } else if (optionalName.isPresent()) {
+            System.out.println("ONLY NAME IS PRESENT");
+            // find using name only
+            Name name = ParserUtil.parseName(optionalName.get());
+            return new DeleteCommand(name);
+        } else {
+            // Wrong attributes used to find for the contacts. return delete format.
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
-        return new DeleteCommand(Index.fromOneBased(1));
     }
 }
