@@ -87,19 +87,25 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
         assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
         assertParseFailure(parser, "1" + INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS); // invalid address
-        assertParseFailure(parser, "1" + INVALID_CLIENT_TYPE_DESC, ClientType.MESSAGE_CONSTRAINTS); // invalid client type
+        assertParseFailure(parser, "1" + INVALID_CLIENT_TYPE_DESC,
+                ClientType.MESSAGE_CONSTRAINTS); // invalid client type
 
         // invalid phone followed by valid email
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
 
-        // while parsing {@code PREFIX_CLIENT_TYPE} alone will reset the client types of the {@code Person} being edited,
+        // while parsing {@code PREFIX_CLIENT_TYPE} alone will reset
+        // the client types of the {@code Person} being edited,
         // parsing it together with a valid client type results in error
-        assertParseFailure(parser, "1" + CLIENT_TYPE_DESC_A + CLIENT_TYPE_DESC_B + CLIENT_TYPE_EMPTY, ClientType.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + CLIENT_TYPE_DESC_A + CLIENT_TYPE_EMPTY + CLIENT_TYPE_DESC_B, ClientType.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + CLIENT_TYPE_EMPTY + CLIENT_TYPE_DESC_A + CLIENT_TYPE_DESC_B, ClientType.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + CLIENT_TYPE_DESC_A
+                + CLIENT_TYPE_DESC_B + CLIENT_TYPE_EMPTY, ClientType.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + CLIENT_TYPE_DESC_A
+                + CLIENT_TYPE_EMPTY + CLIENT_TYPE_DESC_B, ClientType.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + CLIENT_TYPE_EMPTY
+                + CLIENT_TYPE_DESC_A + CLIENT_TYPE_DESC_B, ClientType.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_ADDRESS_AMY + VALID_PHONE_AMY,
+        assertParseFailure(parser, "1" + INVALID_NAME_DESC
+                        + INVALID_EMAIL_DESC + VALID_ADDRESS_AMY + VALID_PHONE_AMY,
                 Name.MESSAGE_CONSTRAINTS);
     }
 

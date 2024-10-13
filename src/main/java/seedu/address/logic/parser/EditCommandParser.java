@@ -59,7 +59,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
-        parseClientTypesForEdit(argMultimap.getAllValues(PREFIX_CLIENT_TYPE)).ifPresent(editPersonDescriptor::setClientTypes);
+        parseClientTypesForEdit(argMultimap.getAllValues(PREFIX_CLIENT_TYPE))
+                .ifPresent(editPersonDescriptor::setClientTypes);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
@@ -69,7 +70,8 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     /**
-     * Parses {@code Collection<String> clientTypes} into a {@code Set<ClientTypes>} if {@code clientTypes} is non-empty.
+     * Parses {@code Collection<String> clientTypes} into a {@code Set<ClientTypes>}
+     * if {@code clientTypes} is non-empty.
      * If {@code clientTypes} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<ClientTypes>} containing zero clientTypes.
      */
@@ -79,7 +81,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (clientTypes.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> clientTypesSet = clientTypes.size() == 1 && clientTypes.contains("") ? Collections.emptySet() : clientTypes;
+        Collection<String> clientTypesSet = clientTypes.size() == 1 && clientTypes.contains("")
+                ? Collections.emptySet() : clientTypes;
         return Optional.of(ParserUtil.parseClientTypes(clientTypesSet));
     }
 
