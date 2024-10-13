@@ -108,4 +108,8 @@ public class PersonBuilder {
         return new Person(name, phone, email, address, tags, notes);
     }
 
+    public Person buildWithoutNotes() {
+        return new Person(name, phone, email, address, tags, new Notes(new ArrayList<String>()));
+    }
+
 }
