@@ -13,13 +13,13 @@ import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.student.Student;
 
 /**
- * Command to mark an assignment as completed.
+ * Command to mark an assignment as not done.
  */
-public class MarkAssignmentCommand extends Command {
-    public static final String COMMAND_WORD = "markAsg";
-    public static final String SUCCESS_MESSAGE = "Assignment marked successfully!";
+public class UnmarkAssignmentCommand extends Command {
+    public static final String COMMAND_WORD = "unmarkAsg";
+    public static final String SUCCESS_MESSAGE = "Assignment unmarked successfully!";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Mark the student at specified index as completed for the assignment. " + "Parameters: "
+            + ": Mark the student at specified index as not completed for the assignment. " + "Parameters: "
             + "<Index>: STUDENT INDEX "
             + PREFIX_NAME + "ASSIGNMENT NAME \n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -34,7 +34,7 @@ public class MarkAssignmentCommand extends Command {
      *
      * @param assignment The assignment to be added.
      */
-    public MarkAssignmentCommand(int targetIndex, Assignment assignment) {
+    public UnmarkAssignmentCommand(int targetIndex, Assignment assignment) {
         this.assignment = assignment;
         this.targetIndex = targetIndex;
     }
@@ -51,7 +51,7 @@ public class MarkAssignmentCommand extends Command {
         Student targetStudent = lastShownList.get(targetIndex);
 
         try {
-            model.setAssignmentStatus(assignment, targetStudent, true);
+            model.setAssignmentStatus(assignment, targetStudent, false);
         } catch (AssignmentNotFoundException e) {
             throw new CommandException(MESSAGE_ASSIGNMENT_NOT_FOUND);
         }

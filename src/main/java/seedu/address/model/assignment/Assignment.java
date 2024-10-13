@@ -11,7 +11,7 @@ public class Assignment {
     private final String title;
     private final LocalDateTime date;
     private final HashMap<Integer, Boolean> statuses;
-    private int numOfCompletedStudents;
+    private int numOfCompletedStudents = 0;
 
     /**
      * Constructs an Assignment with the specified title and due date.
@@ -23,7 +23,6 @@ public class Assignment {
         this.title = title;
         this.date = date;
         this.statuses = new HashMap<>();
-        this.numOfCompletedStudents = 0;
     }
 
     /**
@@ -64,7 +63,7 @@ public class Assignment {
 
     /**
      * Marks the completion status of a student for this assignment.
-     * Updates the number of completed students if the status changes to completed.
+     * Updates the number of completed students if the status changes to done.
      *
      * @param index  The index of the student.
      * @param status The completion status of the student (true if completed).
@@ -74,10 +73,15 @@ public class Assignment {
             if (status && !statuses.get(index)) {
                 numOfCompletedStudents++;
             }
+            if (!status && statuses.get(index)) {
+                numOfCompletedStudents--;
+            }
             statuses.replace(index, status);
         } else {
             statuses.put(index, status);
-            numOfCompletedStudents++;
+            if (status) {
+                numOfCompletedStudents++;
+            }
         }
     }
 

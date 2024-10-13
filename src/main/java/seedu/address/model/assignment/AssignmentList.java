@@ -74,7 +74,9 @@ public class AssignmentList {
                 uncompletedList.append(student.getName()).append(", ");
             }
         }
-        return completedList.append("\n").append(uncompletedList).toString();
+        String completedString = completedList.substring(0, Math.max(0, completedList.length() - 2));
+        String uncompletedString = uncompletedList.substring(0, Math.max(0, uncompletedList.length() - 2));
+        return targetAssignment.toString() + "\n" + completedString + "\n" + uncompletedString;
     }
 
     public void setStatus(Assignment assignment, Student targetStudent, boolean newStatus)

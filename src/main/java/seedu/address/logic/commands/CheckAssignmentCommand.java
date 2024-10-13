@@ -38,7 +38,7 @@ public class CheckAssignmentCommand extends Command {
 
         try {
             String assignmentStatus = model.checkAssignment(assignment);
-            return new CommandResult(SUCCESS_MESSAGE + "\n" + assignment.toString()
+            return new CommandResult(SUCCESS_MESSAGE
                     + "\n" + assignmentStatus);
         } catch (AssignmentNotFoundException e) {
             throw new CommandException(MESSAGE_ASSIGNMENT_NOT_FOUND);
