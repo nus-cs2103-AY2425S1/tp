@@ -16,13 +16,13 @@ import seedu.address.logic.commands.DeleteClientProfileCommand;
  * The path variation for those two cases occur inside the ParserUtil, and
  * therefore should be covered by the ParserUtilTest.
  */
-public class DeleteCommandParserTest {
+public class DeleteClientProfileCommandParserTest {
 
-    private DeleteCommandParser parser = new DeleteCommandParser();
+    private DeleteClientProfileCommandParser parser = new DeleteClientProfileCommandParser();
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "Alice", new DeleteClientProfileCommand(ALICE.getName()));
+        assertParseSuccess(parser, "delete n/Alice Pauline", new DeleteClientProfileCommand(ALICE.getName()));
     }
 
     @Test

@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -27,9 +28,7 @@ public class EditPersonDescriptorBuilder {
         descriptor = new EditPersonDescriptor();
         descriptor.setName(person.getName());
         descriptor.setPhone(person.getPhone());
-        //  descriptor.setEmail(person.getEmail());
-        //  descriptor.setAddress(person.getAddress());
-        //  descriptor.setTags(person.getTags());
+        descriptor.setEmail(person.getEmail());
     }
 
     /**
@@ -52,7 +51,7 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code Email} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withEmail(String email) {
-        //  descriptor.setEmail(new Email(email));
+          descriptor.setEmail(new Email(email));
         return this;
     }
 
@@ -64,15 +63,11 @@ public class EditPersonDescriptorBuilder {
         return this;
     }
 
-    /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
-     * that we are building.
-     */
-    public EditPersonDescriptorBuilder withTags(String... tags) {
-        //  Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        //  descriptor.setTags(tagSet);
-        return this;
-    }
+    //  public EditPersonDescriptorBuilder withTags(String... tags) {
+    //      Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
+    //      descriptor.setTags(tagSet);
+    //      return this;
+    //  }
 
     public EditPersonDescriptor build() {
         return descriptor;

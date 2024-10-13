@@ -26,10 +26,11 @@ import seedu.address.model.person.Person;
  * Contains integration tests (interaction with the Model) and unit tests for
  * {@code DeleteClientProfileCommand}.
  */
-public class DeleteCommandTest {
+public class DeleteClientProfileCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
+    // change tests to use Person.name instead of index
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());

@@ -25,8 +25,6 @@ public class PersonBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_REMARK = "She likes aardvarks.";
     public static final String DEFAULT_PROPERTY = "123 Geylang Lor 21";
     public static final String DEFAULT_DATE = "01/01/2024";
     public static final String DEFAULT_FROM = "0800";
@@ -35,8 +33,6 @@ public class PersonBuilder {
     private Name name;
     private Phone phone;
     private Email email;
-    private Address address;
-    private Remark remark;
     private Property property;
     private Appointment appointment;
     private Set<Tag> tags;
@@ -48,12 +44,10 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        address = new Address(DEFAULT_ADDRESS);
-        remark = new Remark(DEFAULT_REMARK);
         property = new Property(DEFAULT_PROPERTY);
         appointment = new Appointment(new Date(DEFAULT_DATE), new From(DEFAULT_FROM),
                                         new To(DEFAULT_TO));
-        tags = new HashSet<>();
+        //  tags = new HashSet<>();
     }
 
     /**
@@ -62,9 +56,7 @@ public class PersonBuilder {
     public PersonBuilder(Person personToCopy) {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
-        //  email = personToCopy.getEmail();
-        //  address = personToCopy.getAddress();
-        //  remark = personToCopy.getRemark();
+        email = personToCopy.getEmail();
         property = personToCopy.getProperty();
         appointment = personToCopy.getAppointment();
         //  tags = new HashSet<>(personToCopy.getTags());
@@ -94,29 +86,13 @@ public class PersonBuilder {
     //      return this;
     //  }
 
-    ///**
-    //* Sets the {@code Address} of the {@code Person} that we are building.
-    //*/
-    //  public PersonBuilder withAddress(String address) {
-    //      this.address = new Address(address);
-    //      return this;
-    //  }
-
-    ///**
-    //* Sets the {@code Email} of the {@code Person} that we are building.
-    //*/
-    //  public PersonBuilder withEmail(String email) {
-    //      this.email = new Email(email);
-    //      return this;
-    //  }
-
-    ///**
-    // * Sets the {@code Remark} of the {@code Person} that we are building.
-    // */
-    //  public PersonBuilder withRemark(String remark) {
-    //      this.remark = new Remark(remark);
-    //      return this;
-    //  }
+    /**
+    * Sets the {@code Email} of the {@code Person} that we are building.
+    */
+      public PersonBuilder withEmail(String email) {
+          this.email = new Email(email);
+          return this;
+      }
 
     /**
      * Sets the {@code Property} of the {@code Person} that we are building.
@@ -126,16 +102,16 @@ public class PersonBuilder {
         return this;
     }
 
-    ///**
-    //* Sets the {@code Appointment} of the {@code Person} that we are building.
-    //*/
-    //  public PersonBuilder withAppointment(String date, String from, String to) {
-    //      this.appointment = new Appointment(new Date(date), new From(from), new To(to));
-    //      return this;
-    //  }
+    /**
+    * Sets the {@code Appointment} of the {@code Person} that we are building.
+    */
+      public PersonBuilder withAppointment(String date, String from, String to) {
+          this.appointment = new Appointment(new Date(date), new From(from), new To(to));
+          return this;
+      }
 
     public Person build() {
-        return new Person(name, phone, appointment, property);
+        return new Person(name, phone, email, appointment, property);
     }
 
 }
