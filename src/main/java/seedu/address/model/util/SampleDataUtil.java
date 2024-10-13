@@ -17,7 +17,7 @@ public class SampleDataUtil {
     public static Internship[] getSampleInternships() {
         return new Internship[] {
                 new Internship(new Company(
-                        new Email("company1@mail.com"),new NameO("Company 1")),
+                        new Email("company1@mail.com"),new Name("Company 1")),
                         new Date(LocalDate.now()), new Role("role 1"))
         };
     }

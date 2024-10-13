@@ -18,7 +18,7 @@ import seedu.address.model.person.Person;
  */
 public class AddCommand extends Command<Internship> {
 
-    public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_WORD = "/a";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an internship application to the address book. "
             + "Parameters: "

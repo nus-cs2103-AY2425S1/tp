@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,10 +11,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -48,6 +47,24 @@ public class ParserUtil {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
+    }
+
+    public static Role parseRole(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+//        if (!Name.validate(trimmedName)) {
+//            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+//        }
+        return new Role(trimmedName);
+    }
+
+    public static Date parseDate(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+//        if (!Name.validate(trimmedName)) {
+//            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+//        }
+        return new Date(LocalDate.parse(trimmedName, DateTimeFormatter.ofPattern("dd/MM/yy")));
     }
 
     /**

@@ -35,7 +35,7 @@ class JsonAdaptedInternship {
         this.companyName = companyName;
         this.companyEmail = companyEmail;
         this.role = role;
-        this.date = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd/MM/yy"));
+        this.date = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
     /**
@@ -54,7 +54,7 @@ class JsonAdaptedInternship {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Internship toModelType() throws IllegalValueException {
-        NameO name = new NameO(companyName);
+        Name name = new Name(companyName);
         Email email = new Email(companyEmail);
         Company company = new Company(email, name);
         Role role = new Role(this.role);

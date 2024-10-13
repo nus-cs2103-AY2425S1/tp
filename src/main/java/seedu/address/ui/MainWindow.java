@@ -111,7 +111,6 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        System.out.println("Filter list is " + logic.getFilteredList());
         internshipListPanel = new InternshipListPanel(logic.getFilteredList());
         personListPanelPlaceholder.getChildren().add(internshipListPanel.getRoot());
 
