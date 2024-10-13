@@ -60,6 +60,7 @@ public class EditClientCommand extends Command {
             + PREFIX_EMAIL + "johndoe@example.com";
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_CAR_DOES_NOT_EXIST = "This person does not have a car to edit.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_DUPLICATE_CAR = "This car already exists in the address book.";
 
@@ -101,6 +102,9 @@ public class EditClientCommand extends Command {
 
         Car editedCar = null;
 
+        if (personToEdit.getCar() == null && isCarEdited) {
+            throw new CommandException(MESSAGE_CAR_DOES_NOT_EXIST);
+        }
         if (personToEdit.getCar() != null) {
             Car carToEdit = personToEdit.getCar();
             editedCar = createEditedCar(carToEdit, editCarDescriptor);

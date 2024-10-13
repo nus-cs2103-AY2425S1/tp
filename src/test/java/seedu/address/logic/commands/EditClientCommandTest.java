@@ -47,7 +47,7 @@ public class EditClientCommandTest {
 
         EditClientCommand editClientCommand = new EditClientCommand(INDEX_FIRST_PERSON,
             editPersonDescriptor, editCarDescriptor,
-            true, true);
+            true, false);
 
         String expectedMessage = String.format(EditClientCommand.MESSAGE_EDIT_PERSON_SUCCESS,
             Messages.format(editedPerson));
@@ -169,6 +169,25 @@ public class EditClientCommandTest {
                     true, false);
 
         assertCommandFailure(editClientCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    /**
+     * Edit a person without a car should throw an error
+     *
+     */
+    @Test
+    public void execute_carDoesNotExist_failure() {
+        EditClientCommand editClientCommand = new EditClientCommand(INDEX_FIRST_PERSON,
+            new EditPersonDescriptor(), new EditCarDescriptor(), true, true);
+        assertCommandFailure(editClientCommand, modelWithoutCar, EditClientCommand.MESSAGE_CAR_DOES_NOT_EXIST);
+    }
+
+    @Test
+    public void execute_carDoesNotExistFilteredList_failure() {
+        showPersonAtIndex(modelWithoutCar, INDEX_FIRST_PERSON);
+        EditClientCommand editClientCommand = new EditClientCommand(INDEX_FIRST_PERSON,
+            new EditPersonDescriptor(), new EditCarDescriptor(), true, true);
+        assertCommandFailure(editClientCommand, modelWithoutCar, EditClientCommand.MESSAGE_CAR_DOES_NOT_EXIST);
     }
 
     @Test
