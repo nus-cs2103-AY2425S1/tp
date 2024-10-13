@@ -13,6 +13,11 @@ mark {
   width: 100%;
 }
 
+/* Need this to allow for <box seamless></box> elements */
+div.alert.box-container.seamless {
+  color: black;
+}
+
 /* Scrollbar */
 
 .slim-scroll::-webkit-scrollbar {
@@ -41,6 +46,17 @@ mark {
 .slim-scroll-blue::-webkit-scrollbar-track {
   background: transparent;
   border-radius: 20px;
+}
+
+/* Nav bar */
+
+.navbar {
+  height: 56px;
+}
+
+.navbar-brand,
+.navbar-nav .nav-link {
+  line-height: 56px;
 }
 
 /* Layout containers */
@@ -136,35 +152,36 @@ mark {
 
   /* Reduce font size when printing */
   h1 {
-      font-size: 1.2rem !important;
+    font-size: 1.2rem !important;
   }
   h2 {
-      font-size: 1.0rem !important;
+    font-size: 1rem !important;
   }
   h3 {
-      font-size: 0.9rem !important;
+    font-size: 0.9rem !important;
   }
   h4 {
-      font-size: 0.8rem !important;
+    font-size: 0.8rem !important;
   }
   h5 {
-      font-size: 0.7rem !important;
+    font-size: 0.7rem !important;
   }
   body {
-      font-size: 0.65rem !important;
+    font-size: 0.65rem !important;
   }
   .btn {
-      font-size: 0.65rem !important;
+    font-size: 0.65rem !important;
   }
   img {
-      zoom: 0.8;  /* might not work on some browsers */
+    zoom: 0.8; /* might not work on some browsers */
   }
 }
 
-h2,
+/* These override the header colors set by the theme. Disabled for the time being */
+/* h2,
 h3,
 h4,
 h5,
 h6 {
   color: #e46c0a;
-}
+} */
