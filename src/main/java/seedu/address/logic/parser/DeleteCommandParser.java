@@ -24,16 +24,6 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      * and returns a DeleteCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    //    public DeleteCommand parse1(String args) throws ParseException {
-    //        try {
-    //            Index index = ParserUtil.parseIndex(args);
-    //            return new DeleteCommand(index);
-    //        } catch (ParseException pe) {
-    //            throw new ParseException(
-    //                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
-    //        }
-    //    }
-
     public DeleteCommand parse(String args) throws ParseException {
         String[] trimmedArgs = args.trim().split(" ");
         ArgumentMultimap argMultiMap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_EMAIL, PREFIX_PHONE);
@@ -64,18 +54,15 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         Optional<String> optionalEmail = argMultimap.getValue(PREFIX_EMAIL);
         if (optionalName.isPresent() && optionalPhone.isPresent()) {
             // find using name and phone
-            System.out.println("NAME AND PHONE PRESENT");
             Name name = ParserUtil.parseName(optionalName.get());
             Phone phone = ParserUtil.parsePhone(optionalPhone.get());
             return new DeleteCommand(name, phone);
         } else if (optionalName.isPresent() && optionalEmail.isPresent()) {
-            System.out.println("Only name is present");
             //find using name and email
             Name name = ParserUtil.parseName(optionalName.get());
             Email email = ParserUtil.parseEmail(optionalEmail.get());
             return new DeleteCommand(name, email);
         } else if (optionalName.isPresent()) {
-            System.out.println("ONLY NAME IS PRESENT");
             // find using name only
             Name name = ParserUtil.parseName(optionalName.get());
             return new DeleteCommand(name);

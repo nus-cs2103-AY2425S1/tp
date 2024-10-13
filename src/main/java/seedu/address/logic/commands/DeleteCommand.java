@@ -28,8 +28,14 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Parameters:\nINDEX (must be a positive integer) OR "
+            + "n/NAME OR "
+            + "n/NAME e/EMAIl"
+            + "n/NAME p/PHONE\n"
+            + "Example:\n" + COMMAND_WORD + " 1 OR "
+            + COMMAND_WORD + " n/John Doe OR "
+            + COMMAND_WORD + " n/John Doe e/johndoe@gmail.com OR "
+            + COMMAND_WORD + " n/John Doe p/88306733";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
@@ -159,10 +165,12 @@ public class DeleteCommand extends Command {
         FullNameMatchesPredicate fullNameMatchesPredicate = new FullNameMatchesPredicate(nameString);
         listForFilter.setPredicate(fullNameMatchesPredicate);
         if (listForFilter.isEmpty()) {
-            throw new CommandException("NO SUCH CONTACT");
+            throw new CommandException("No matching contacts found.");
         }
         if (listForFilter.size() > 1) {
-            throw new CommandException("DUPLICATE FULL NAMES. PLEASE TYPE NAME AND PHONE, OR NAME AND EMAIL");
+            throw new CommandException("Multiple contacts with the same full name found. Please specify more using"
+                    + "this format:\n" + COMMAND_WORD  + " n/NAME e/EMAIL OR "
+                    + COMMAND_WORD + " n/NAME p/PHONE");
         }
         Person personToDelete = listForFilter.get(0);
         model.deletePerson(personToDelete);
@@ -185,7 +193,7 @@ public class DeleteCommand extends Command {
         NamePhonePredicate namePhonePredicate = new NamePhonePredicate(nameString, phoneString);
         listForFilter.setPredicate(namePhonePredicate);
         if (listForFilter.isEmpty()) {
-            throw new CommandException("NO SUCH CONTACT");
+            throw new CommandException("No matching contacts found.");
         }
         Person personToDelete = listForFilter.get(0);
         model.deletePerson(personToDelete);
@@ -208,7 +216,7 @@ public class DeleteCommand extends Command {
         NameEmailPredicate nameEmailPredicate = new NameEmailPredicate(nameString, emailString);
         listForFilter.setPredicate(nameEmailPredicate);
         if (listForFilter.isEmpty()) { // if no matching contact
-            throw new CommandException("NO SUCH CONTACT");
+            throw new CommandException("No matching contacts found");
         }
         Person personToDelete = listForFilter.get(0);
         model.deletePerson(personToDelete);
