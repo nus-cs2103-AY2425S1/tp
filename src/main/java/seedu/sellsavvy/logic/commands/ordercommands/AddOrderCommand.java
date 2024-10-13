@@ -45,7 +45,10 @@ public class AddOrderCommand extends Command {
     private final Order toAdd;
 
     /**
-     * Creates an AddOrderCommand to add the specific order under
+     * Creates an AddOrderCommand to add the specific order under the specified index.
+     *
+     * @param index of the person in the filtered person list to add order under.
+     * @param toAdd the order made by the person.
      */
     public AddOrderCommand(Index index, Order toAdd) {
         requireAllNonNull(index, toAdd);
@@ -77,16 +80,14 @@ public class AddOrderCommand extends Command {
             return true;
         }
 
-        //instanceof handles nulls
+        // instanceof handles nulls
         if (!(other instanceof AddOrderCommand)) {
             return false;
         }
 
         AddOrderCommand otherAddOrderCommand = (AddOrderCommand) other;
-        boolean samePerson = index.equals(otherAddOrderCommand.index);
-        boolean sameOrder = toAdd.equals(otherAddOrderCommand.toAdd);
-
-        return samePerson && sameOrder;
+        return index.equals(otherAddOrderCommand.index)
+                && toAdd.equals(otherAddOrderCommand.toAdd);
     }
 
     @Override
