@@ -68,10 +68,12 @@ public class Delivery {
         }
 
         // what are the conditions on same deliveries (weaker equality)
+        // added the status check cos marking status needs to create a new delivery to replace the existing
         return otherDelivery != null
                 && otherDelivery.getDeliveryDate().equals(getDeliveryDate())
                 && otherDelivery.getDeliveryProduct().equals(getDeliveryProduct())
-                && otherDelivery.getDeliverySender().equals(getDeliverySender());
+                && otherDelivery.getDeliverySender().equals(getDeliverySender())
+                && otherDelivery.getDeliveryStatus().equals(getDeliveryStatus());
     }
 
     /**

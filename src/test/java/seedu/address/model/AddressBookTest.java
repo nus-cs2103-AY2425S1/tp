@@ -19,8 +19,10 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.delivery.Delivery;
+import seedu.address.model.delivery.Status;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.testutil.DeliveryBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
@@ -83,6 +85,18 @@ public class AddressBookTest {
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
     }
+
+    @Test
+    public void setDelivery_validTargetAndUpdatedDelivery_success() {
+        Delivery delivery = new DeliveryBuilder().build();
+        Delivery updatedDelivery = new DeliveryBuilder().withStatus(Status.DELIVERED).build();
+
+        addressBook.addDelivery(delivery);
+        addressBook.setDelivery(delivery, updatedDelivery);
+
+        assertEquals(updatedDelivery, addressBook.getDeliveryList().get(0));
+    }
+
 
     @Test
     public void toStringMethod() {

@@ -10,8 +10,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.delivery.exceptions.DeliveryNotFoundException;
 import seedu.address.model.delivery.exceptions.DuplicateDeliveryException;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-
 
 /**
  * A list of deliveries that enforces uniqueness between its elements and does not allow nulls.
@@ -69,7 +67,7 @@ public class UniqueDeliveryList implements Iterable<Delivery> {
         }
 
         if (!target.isSameDelivery(editedDelivery) && contains(editedDelivery)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateDeliveryException();
         }
 
         internalList.set(index, editedDelivery);

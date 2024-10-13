@@ -36,7 +36,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredDeliveries = new FilteredList<>(this.addressBook.getDeliveryList()); // Initialize filtered deliveries
+        filteredDeliveries = new FilteredList<>(this.addressBook.getDeliveryList());
 
     }
 
@@ -132,6 +132,14 @@ public class ModelManager implements Model {
     public void addDelivery(Delivery target) {
         addressBook.addDelivery(target);
         updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES); // Refresh the list after adding
+    }
+
+    @Override
+    public void setDelivery(Delivery target, Delivery updatedDelivery) {
+        requireNonNull(target);
+        requireNonNull(updatedDelivery);
+
+        addressBook.setDelivery(target, updatedDelivery);
     }
 
     //=========== Filtered Delivery List Accessors =============================================================
