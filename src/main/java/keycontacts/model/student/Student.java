@@ -27,6 +27,7 @@ public class Student {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final GradeLevel gradeLevel;
 
     // Associations
     private final RegularLesson regularLesson;
@@ -35,13 +36,14 @@ public class Student {
      * Constructor for a new student. Uses default associations.
      * Every field must be present and not null.
      */
-    public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags, GradeLevel gradeLevel) {
+        requireAllNonNull(name, phone, email, address, tags, gradeLevel);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.gradeLevel = gradeLevel;
         this.regularLesson = null;
     }
 
@@ -50,13 +52,14 @@ public class Student {
      * present and not null.
      */
     public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                    RegularLesson regularLesson) {
+                    GradeLevel gradeLevel, RegularLesson regularLesson) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.gradeLevel = gradeLevel;
         this.regularLesson = regularLesson;
     }
 
@@ -82,6 +85,10 @@ public class Student {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public GradeLevel getGradeLevel() {
+        return gradeLevel;
     }
 
     public Optional<RegularLesson> getRegularLesson() {
@@ -112,15 +119,17 @@ public class Student {
         Email updatedEmail = editStudentDescriptor.getEmail().orElse(email);
         Address updatedAddress = editStudentDescriptor.getAddress().orElse(address);
         Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(tags);
+        GradeLevel gradeLevel = editStudentDescriptor.getGradeLevel().orElse(this.gradeLevel);
 
-        return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, regularLesson);
+        return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, gradeLevel,
+            regularLesson);
     }
 
     /**
      * Creates and returns a new {@code Student} with the updated {@code regularLesson}.
      */
     public Student withRegularLesson(RegularLesson regularLesson) {
-        return new Student(name, phone, email, address, tags, regularLesson);
+        return new Student(name, phone, email, address, tags, gradeLevel, regularLesson);
     }
 
     /**
@@ -157,13 +166,14 @@ public class Student {
                 && email.equals(otherStudent.email)
                 && address.equals(otherStudent.address)
                 && tags.equals(otherStudent.tags)
+                && gradeLevel.equals(otherStudent.gradeLevel)
                 && getRegularLesson().equals(otherStudent.getRegularLesson());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, regularLesson);
+        return Objects.hash(name, phone, email, address, tags, gradeLevel, regularLesson);
     }
 
     @Override
@@ -174,6 +184,7 @@ public class Student {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("gradeLevel", gradeLevel)
                 .add("regularLesson", regularLesson)
                 .toString();
     }

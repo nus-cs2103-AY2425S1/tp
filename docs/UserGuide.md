@@ -79,10 +79,10 @@ Format: `help`
 
 Adds a student to the student directory.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS g/GRADE_LEVEL`
 
 Examples:
-* `add n/John Doe p/98765432 a/John street, block 123, #01-01`
+* `add n/John Doe p/98765432 a/John street, block 123, #01-01 g/LCM 1`
 
 ### Listing all students : `list`
 
@@ -94,7 +94,7 @@ Format: `list`
 
 Edits an existing student in the student directory.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [a/ADDRESS]`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [g/GRADE_LEVEL]`
 
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -186,7 +186,7 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER a/ADDRESS` <br> e.g., `add n/James Ho p/22224444 a/123, Clementi Rd, 1234665`
+**Add**    | `add n/NAME p/PHONE_NUMBER a/ADDRESS` <br> e.g., `add n/James Ho p/22224444 a/123, Clementi Rd, 1234665 g/LCM 1`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS]`<br> e.g.,`edit 2 n/James Lee p/81234567`
