@@ -257,10 +257,10 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(fees, otherEditPersonDescriptor.fees)
-                    && Objects.equals(classId, otherEditPersonDescriptor.classId)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
+
+
 
 
         @Override
