@@ -8,6 +8,7 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.Date;
 import seedu.address.model.appointment.From;
 import seedu.address.model.appointment.To;
+import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -22,9 +23,7 @@ class JsonAdaptedPerson {
 
     private final String name;
     private final String phone;
-    //    private final String email;
-    //    private final String address;
-    //    private final String remark;
+    private final String email;
     private final String property;
     private final String date;
     private final String from;
@@ -36,15 +35,12 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-             @JsonProperty("date") String date, @JsonProperty("from") String from, @JsonProperty("to") String to,
+             @JsonProperty("date") String date, @JsonProperty("email") String email, @JsonProperty("from") String from, @JsonProperty("to") String to,
                              @JsonProperty("property") String property) {
-        // @JsonProperty("email") String email, @JsonProperty("address") String address,
-        //                @JsonProperty("remark") String remark, @JsonProperty("tags") List<JsonAdaptedTag> tags
+        // @JsonProperty("tags") List<JsonAdaptedTag> tags
         this.name = name;
         this.phone = phone;
-        //  this.email = email;
-        //  this.address = address;
-        //  this.remark = remark;
+        this.email = email;
         this.date = date;
         this.from = from;
         this.to = to;
@@ -60,9 +56,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
-        //  email = source.getEmail().value;
-        //  address = source.getAddress().value;
-        //  remark = source.getRemark().value;
+        email = source.getEmail().value;
         property = source.getProperty().getProperty();
         date = source.getAppointment().getDate().value;
         from = source.getAppointment().getFrom().value;
@@ -99,29 +93,13 @@ class JsonAdaptedPerson {
         }
         final Phone modelPhone = new Phone(phone);
 
-        //    if (email == null) {
-        //      throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-        //              Email.class.getSimpleName()));
-        //    }
-        //    if (!Email.isValidEmail(email)) {
-        //      throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
-        //    }
-        //    final Email modelEmail = new Email(email);
-        //
-        //    if (address == null) {
-        //      throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-        //              Address.class.getSimpleName()));
-        //    }
-        //    if (!Address.isValidAddress(address)) {
-        //      throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
-        //    }
-        //    final Address modelAddress = new Address(address);
-        //
-        //    if (remark == null) {
-        //      throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-        //              Remark.class.getSimpleName()));
-        //    }
-        //    final Remark modelRemark = new Remark(remark);
+        if (email == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
+        }
+        if (!Email.isValidEmail(email)) {
+            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+        }
+        final Email modelEmail = new Email(email);
 
         if (date == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
@@ -144,7 +122,7 @@ class JsonAdaptedPerson {
         final Property modelProperty = new Property(property);
 
         //    final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelAppointment, modelProperty);
+        return new Person(modelName, modelPhone, modelEmail, modelAppointment, modelProperty);
     }
 
 }

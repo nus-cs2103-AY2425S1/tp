@@ -41,13 +41,11 @@ public class Messages {
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName())
                 .append("; Phone: ")
-                //  .append("; Email: ")
-                //  .append(person.getEmail())
-                //  .append("; Address: ")
-                //  .append(person.getAddress())
                 //  .append("; Tags: ")
-                .append(person.getPhone());
-        //  person.getTags().forEach(builder::append);
+                //  person.getTags().forEach(builder::append);
+                .append(person.getPhone())
+                .append("; Email: ")
+                .append(person.getEmail());
         return builder.toString();
     }
 
