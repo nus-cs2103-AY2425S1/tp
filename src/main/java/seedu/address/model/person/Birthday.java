@@ -8,6 +8,7 @@ import static java.util.Objects.requireNonNull;
  */
 public class Birthday {
 
+    public static final Birthday EMPTY_BIRTHDAY = Birthday.of("");
     public final String value;
 
     /**
@@ -19,6 +20,11 @@ public class Birthday {
         requireNonNull(birthday);
         value = birthday;
     }
+
+    public static Birthday of(String birthday) {
+        return new Birthday(birthday);
+    }
+
     @Override
     public String toString() {
         return value;
