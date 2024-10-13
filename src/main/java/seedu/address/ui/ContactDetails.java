@@ -18,7 +18,7 @@ public class ContactDetails extends UiPart<Region> {
     private Label name;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code ContactDetailPannel} with the given {@code Person}.
      */
     public ContactDetails(Person person) {
         super(FXML);
