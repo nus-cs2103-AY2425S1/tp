@@ -118,10 +118,10 @@ public class EditCommand extends Command {
         Priority updatedPriority = personToEdit.getPriority();
         Set<Appointment> updatedAppointments = editPersonDescriptor.getAppointments()
                                                                    .orElse(personToEdit.getAppointments());
-        MedCon updatedMedCon = personToEdit.getMedCon();
+        Set<MedCon> updatedMedCons = editPersonDescriptor.getMedCons().orElse(personToEdit.getMedCons());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedNric, updatedAddress, updatedDateOfBirth,
-                updatedGender, updatedTags, updatedPriority, updatedAppointments, updatedMedCon);
+                updatedGender, updatedTags, updatedPriority, updatedAppointments, updatedMedCons);
 
     }
 
@@ -163,7 +163,7 @@ public class EditCommand extends Command {
         private Nric nric;
         private Set<Tag> tags;
         private Set<Appointment> appointments;
-        private MedCon medCon;
+        private Set<MedCon> medCons;
 
         public EditPersonDescriptor() {}
 
@@ -181,7 +181,7 @@ public class EditCommand extends Command {
             setNric(toCopy.nric);
             setTags(toCopy.tags);
             setAppointments(toCopy.appointments);
-            setMedCon(toCopy.medCon);
+            setMedCons(toCopy.medCons);
         }
 
         /**
@@ -189,7 +189,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, address, dateOfBirth, nric, gender, tags,
-                                               appointments, medCon);
+                                               appointments, medCons);
         }
 
         public void setName(Name name) {
@@ -247,12 +247,21 @@ public class EditCommand extends Command {
         public void setNric(Nric nric) {
             this.nric = nric;
         }
-        public Optional<MedCon> getMedCon() {
-            return Optional.ofNullable(medCon);
+        /**
+         * Returns an unmodifiable medCon set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code medCons} is null.
+         */
+        public Optional<Set<MedCon>> getMedCons() {
+            return (medCons != null) ? Optional.of(Collections.unmodifiableSet(medCons)) : Optional.empty();
         }
 
-        public void setMedCon(MedCon medCon) {
-            this.medCon = medCon;
+        /**
+         * Sets {@code medCons} to this object's {@code medCons}.
+         * A defensive copy of {@code medCons} is used internally.
+         */
+        public void setMedCons(Set<MedCon> medCons) {
+            this.medCons = (medCons != null) ? new HashSet<>(medCons) : null;
         }
 
         /**

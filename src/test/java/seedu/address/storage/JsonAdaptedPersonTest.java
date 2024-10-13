@@ -51,7 +51,9 @@ public class JsonAdaptedPersonTest {
     private static final List<JsonAdaptedAppointment> VALID_APPOINTMENTS = BENSON.getAppointments().stream()
                                                                                  .map(JsonAdaptedAppointment::new)
                                                                                  .collect(Collectors.toList());
-    private static final String VALID_MEDCON = BENSON.getMedCon().toString();
+    private static final List<JsonAdaptedMedCon> VALID_MEDCON = BENSON.getMedCons().stream()
+                                                                      .map(JsonAdaptedMedCon::new)
+                                                                      .collect(Collectors.toList());
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {

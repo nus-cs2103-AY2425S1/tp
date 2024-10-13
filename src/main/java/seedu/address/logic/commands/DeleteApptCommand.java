@@ -100,7 +100,7 @@ public class DeleteApptCommand extends Command {
         Nric updatedNric = personToEdit.getNric();
         Priority updatedPriority = personToEdit.getPriority();
         Set<Tag> updatedTags = personToEdit.getTags();
-        MedCon updatedMedCon = personToEdit.getMedCon();
+        Set<MedCon> updatedMedCons = personToEdit.getMedCons();
 
 
         // get list, make mutable, delete, and make immutable
@@ -110,7 +110,7 @@ public class DeleteApptCommand extends Command {
         Set<Appointment> newAppointments = new HashSet<>(newAppointmentsMutable);
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedNric, updatedAddress, updatedDateOfBirth,
-                          updatedGender, updatedTags, updatedPriority, newAppointments, updatedMedCon);
+                          updatedGender, updatedTags, updatedPriority, newAppointments, updatedMedCons);
     }
 
     @Override

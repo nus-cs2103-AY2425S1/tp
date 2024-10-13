@@ -63,12 +63,12 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Set<Appointment> appointmentList = Collections.emptySet();
-        MedCon medCon = new MedCon("");
+        Set<MedCon> medConList = Collections.emptySet();
         Priority priority = new Priority();
 
         logger.info("Successfully parsed all fields for AddCommand");
         Person person = new Person(name, phone, email, nric, address, dob, gender, tagList, priority, appointmentList,
-                medCon);
+                medConList);
         logger.info("Successfully created new Person object");
 
         return new AddCommand(person);

@@ -11,6 +11,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -29,17 +32,20 @@ public class AddMedConCommandTest {
     public void equals() {
         Nric firstNric = new Nric(VALID_NRIC_AMY);
         Nric secondNric = new Nric(VALID_NRIC_BOB);
-        MedCon firstMedCon = new MedCon(VALID_MEDCON_AMY);
-        MedCon secondMedCon = new MedCon(VALID_MEDCON_BOB);
+        Set<MedCon> firstMedConSet = new HashSet<>();
+        firstMedConSet.add(new MedCon(VALID_MEDCON_AMY));
+        Set<MedCon> secondMedConSet = new HashSet<>();
+        secondMedConSet.add(new MedCon(VALID_MEDCON_BOB));
 
-        AddMedConCommand firstMedConCommand = new AddMedConCommand(firstNric, firstMedCon);
-        AddMedConCommand secondMedConCommand = new AddMedConCommand(secondNric, secondMedCon);
+        AddMedConCommand firstMedConCommand = new AddMedConCommand(firstNric, firstMedConSet);
+        AddMedConCommand secondMedConCommand = new AddMedConCommand(secondNric, secondMedConSet);
+
 
         // same object -> returns true
         assertTrue(firstMedConCommand.equals(firstMedConCommand));
 
         // same value -> returns true
-        AddMedConCommand firstMedConCommandCopy = new AddMedConCommand(firstNric, firstMedCon);
+        AddMedConCommand firstMedConCommandCopy = new AddMedConCommand(firstNric, firstMedConSet);
         assertTrue(firstMedConCommand.equals(firstMedConCommandCopy));
 
         // different types -> returns false
@@ -56,8 +62,9 @@ public class AddMedConCommandTest {
     public void execute_noPersonFound() {
         // ensures CommandException is thrown when provided with Nric that is not in addressbook
         Nric nric = new Nric("T1111111F");
-        MedCon medCon = new MedCon("cancer");
-        AddMedConCommand command = new AddMedConCommand(nric, medCon);
+        Set<MedCon> medConSet = new HashSet<>();
+        medConSet.add(new MedCon("Cancer"));
+        AddMedConCommand command = new AddMedConCommand(nric, medConSet);
         assertThrows(CommandException.class, () -> command.execute(model));
     }
 
@@ -65,36 +72,20 @@ public class AddMedConCommandTest {
     public void execute_addMedCon_success() throws Exception {
         // Setup data
         Nric aliceNric = ALICE.getNric();
-        MedCon initialMedCon = new MedCon("Diabetes");
-        MedCon emptyMedCon = new MedCon(""); // Empty MedCon to represent optional state
-        MedCon updatedMedCon = new MedCon("Hypertension");
+        Set<MedCon> initialMedConSet = new HashSet<>();
+        initialMedConSet.add(new MedCon("Diabetes"));
+
+        Set<MedCon> updatedMedConSet = new HashSet<>();
+        updatedMedConSet.add(new MedCon("Hypertension"));
 
         // Create and execute the first command to add an initial medical condition
-        AddMedConCommand addMedConCommand = new AddMedConCommand(aliceNric, initialMedCon);
+        AddMedConCommand addMedConCommand = new AddMedConCommand(aliceNric, initialMedConSet);
         CommandResult commandResult = addMedConCommand.execute(model);
 
         // Fetch the updated person and verify that the medical condition was added
         Person updatedAlice = model.fetchPersonIfPresent(new NricMatchesPredicate(aliceNric))
                 .orElseThrow(() -> new AssertionError("Person not found"));
-        assertEquals(initialMedCon, updatedAlice.getMedCon());
-
-        // Create and execute a command to add an empty medical condition (representing optional)
-        AddMedConCommand addEmptyMedConCommand = new AddMedConCommand(aliceNric, emptyMedCon);
-        CommandResult emptyCommandResult = addEmptyMedConCommand.execute(model);
-
-        // Fetch the updated person again and verify that the medical condition is now empty
-        Person aliceWithoutMedCon = model.fetchPersonIfPresent(new NricMatchesPredicate(aliceNric))
-                .orElseThrow(() -> new AssertionError("Person not found"));
-        assertEquals(emptyMedCon, aliceWithoutMedCon.getMedCon());
-
-        // Create and execute a command to update the medical condition to a new value
-        AddMedConCommand updateMedConCommand = new AddMedConCommand(aliceNric, updatedMedCon);
-        CommandResult updatedCommandResult = updateMedConCommand.execute(model);
-
-        // Fetch the updated person again and verify that the medical condition was updated
-        Person secondUpdatedAlice = model.fetchPersonIfPresent(new NricMatchesPredicate(aliceNric))
-                .orElseThrow(() -> new AssertionError("Person not found"));
-        assertEquals(updatedMedCon, secondUpdatedAlice.getMedCon());
+        assertEquals(initialMedConSet, updatedAlice.getMedCons());
     }
 
 }

@@ -14,6 +14,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddMedConCommand;
@@ -25,22 +29,34 @@ public class AddMedConCommandParserTest {
 
     @Test
     public void parse_allFieldsValid_success() {
-        // For Amy with MedCon
-        AddMedConCommand expectedCommandForAmy = new AddMedConCommand(new Nric(VALID_NRIC_AMY),
-                new MedCon(VALID_MEDCON_AMY));
+        // For Amy with one MedCon
+        Set<MedCon> medConsAmy = new HashSet<>();
+        medConsAmy.add(new MedCon(VALID_MEDCON_AMY));
+        AddMedConCommand expectedCommandForAmy = new AddMedConCommand(new Nric(VALID_NRIC_AMY), medConsAmy);
         assertParseSuccess(parser, NRIC_DESC_AMY + MEDCON_DESC_AMY, expectedCommandForAmy);
 
-        // For Bob with MedCon
-        AddMedConCommand expectedCommandForBob = new AddMedConCommand(new Nric(VALID_NRIC_BOB),
-                new MedCon(VALID_MEDCON_BOB));
+        // For Bob with one MedCon
+        Set<MedCon> medConsBob = new HashSet<>();
+        medConsBob.add(new MedCon(VALID_MEDCON_BOB));
+        AddMedConCommand expectedCommandForBob = new AddMedConCommand(new Nric(VALID_NRIC_BOB), medConsBob);
         assertParseSuccess(parser, NRIC_DESC_BOB + MEDCON_DESC_BOB, expectedCommandForBob);
 
+        // For Amy with multiple MedCons
+        Set<MedCon> multipleMedConsAmy = new HashSet<>();
+        multipleMedConsAmy.add(new MedCon(VALID_MEDCON_AMY));
+        multipleMedConsAmy.add(new MedCon(VALID_MEDCON_BOB));
+        AddMedConCommand expectedCommandForAmyMultiple = new AddMedConCommand(new Nric(VALID_NRIC_AMY),
+                multipleMedConsAmy);
+        assertParseSuccess(parser, NRIC_DESC_AMY + MEDCON_DESC_AMY + MEDCON_DESC_BOB,
+                expectedCommandForAmyMultiple);
+
         // For Amy without MedCon (MedCon is optional)
-        AddMedConCommand expectedCommandForAmyNoMedCon = new AddMedConCommand(new Nric(VALID_NRIC_AMY), new MedCon(""));
+        Set<MedCon> noMedCons = Collections.emptySet();
+        AddMedConCommand expectedCommandForAmyNoMedCon = new AddMedConCommand(new Nric(VALID_NRIC_AMY), noMedCons);
         assertParseSuccess(parser, NRIC_DESC_AMY, expectedCommandForAmyNoMedCon);
 
         // For Bob without MedCon (MedCon is optional)
-        AddMedConCommand expectedCommandForBobNoMedCon = new AddMedConCommand(new Nric(VALID_NRIC_BOB), new MedCon(""));
+        AddMedConCommand expectedCommandForBobNoMedCon = new AddMedConCommand(new Nric(VALID_NRIC_BOB), noMedCons);
         assertParseSuccess(parser, NRIC_DESC_BOB, expectedCommandForBobNoMedCon);
     }
 

@@ -5,6 +5,9 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDCON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import seedu.address.logic.commands.AddMedConCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.MedCon;
@@ -18,9 +21,9 @@ public class AddMedConCommandParser implements Parser<AddMedConCommand> {
      * Parses the given arguments string and creates a {@link AddMedConCommand} object.
      *
      * @param args the arguments string containing user input.
-     * @return A {@link AddMedConCommand} object containing the parsed NRIC and medical conditon.
+     * @return A {@link AddMedConCommand} object containing the parsed NRIC and set of medical conditions.
      * @throws ParseException if the user input does not conform to the expected format or
-     *         if the NRIC or medical condition is not provided.
+     *         if the NRIC is not provided.
      */
     public AddMedConCommand parse(String args) throws ParseException {
         requireNonNull(args);
@@ -35,10 +38,16 @@ public class AddMedConCommandParser implements Parser<AddMedConCommand> {
         String nricStr = argMultimap.getValue(PREFIX_NRIC).get();
         Nric nric = ParserUtil.parseNric(nricStr);
 
-        // Parse MedCon if present, otherwise use empty value
-        String medConStr = argMultimap.getValue(PREFIX_MEDCON).orElse("");
-        MedCon medCon = new MedCon(medConStr);
+        // Parse all MedCon values and add them to a set
+        Set<MedCon> medCons = new HashSet<>();
+        for (String medConStr : argMultimap.getAllValues(PREFIX_MEDCON)) {
+            if (medConStr.length() > 45) {
+                throw new ParseException("Length of medical condition exceeds 45 characters.");
+            }
+            medCons.add(new MedCon(medConStr));
+        }
 
-        return new AddMedConCommand(nric, medCon);
+        return new AddMedConCommand(nric, medCons);
+
     }
 }

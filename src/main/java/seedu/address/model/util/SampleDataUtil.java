@@ -26,8 +26,6 @@ import seedu.address.model.tag.Tag;
  */
 public class SampleDataUtil {
 
-    public static final MedCon EMPTY_MEDCON = new MedCon("");
-
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"),
@@ -39,7 +37,8 @@ public class SampleDataUtil {
                        new Gender("M"),
                        getTagSet("friends"),
                        new Priority(),
-                       getAppointmentSet("Dental:2024-12-25:1235-1300"), EMPTY_MEDCON
+                       getAppointmentSet("Dental:2024-12-25:1235-1300"),
+                       getMedConSet("tooth decay")
             ),
             new Person(new Name("Bernice Yu"),
                        new Phone("99272758"),
@@ -51,7 +50,7 @@ public class SampleDataUtil {
                        getTagSet("colleagues", "friends"),
                        new Priority(),
                        getAppointmentSet("Orthopedic:2024-12-01:1200-1300", "Physio:2024-12-01:1500-1600"),
-                       EMPTY_MEDCON
+                    getMedConSet("arthritis, scoliosis")
             ),
             new Person(new Name("Charlotte Oliveiro"),
                        new Phone("93210283"),
@@ -62,7 +61,8 @@ public class SampleDataUtil {
                        new Gender("M"),
                        getTagSet("neighbours"),
                        new Priority(),
-                       Collections.emptySet(), EMPTY_MEDCON
+                       Collections.emptySet(),
+                       getMedConSet("skill issue")
             ),
             new Person(new Name("David Li"),
                        new Phone("91031282"),
@@ -75,7 +75,8 @@ public class SampleDataUtil {
                        new Priority(),
                        getAppointmentSet("OT:2025-01-12:1000-1300",
                                          "PT:2025-02-02:1200-1300",
-                                         "Consult:2025-02-20:1400-1430"), EMPTY_MEDCON
+                                         "Consult:2025-02-20:1400-1430"),
+                       getMedConSet("presley syndrome, lung cancer, arthritis")
             ),
             new Person(new Name("Irfan Ibrahim"),
                        new Phone("92492021"),
@@ -86,7 +87,8 @@ public class SampleDataUtil {
                        new Gender("M"),
                        getTagSet("classmates"),
                        new Priority(),
-                       getAppointmentSet("Dental:2024-10-25:1235-1300"), EMPTY_MEDCON
+                       getAppointmentSet("Dental:2024-10-25:1235-1300"),
+                       getMedConSet("cavity")
             ),
             new Person(new Name("Roy Balakrishnan"),
                        new Phone("92624417"),
@@ -97,7 +99,8 @@ public class SampleDataUtil {
                        new Gender("M"),
                        getTagSet("colleagues"),
                        new Priority(),
-                       Collections.emptySet(), EMPTY_MEDCON
+                       Collections.emptySet(),
+                       Collections.emptySet()
             )
         };
     }
@@ -115,6 +118,14 @@ public class SampleDataUtil {
      */
     public static Set<Tag> getTagSet(String... strings) {
         Set<Tag> collect = Arrays.stream(strings).map(Tag::new).collect(Collectors.toSet());
+        return collect;
+    }
+
+    /**
+     * Returns a MedCon set containing the list of strings given.
+     */
+    public static Set<MedCon> getMedConSet(String... strings) {
+        Set<MedCon> collect = Arrays.stream(strings).map(MedCon::new).collect(Collectors.toSet());
         return collect;
     }
 
