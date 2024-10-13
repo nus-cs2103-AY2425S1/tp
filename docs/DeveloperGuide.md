@@ -338,7 +338,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 2a. No contacts stored in the System.
 
-  - 2a1 System informs Actor that they have no contacts stored.
+  - 2a1. System informs Actor that they have no contacts stored.
 
     Use case ends.
 
@@ -384,6 +384,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  Actor requests to find specific people.
 2.  System shows a filtered list of persons.
+
+    Use case ends.
+
+**Extensions**
+
+- 2a. No contacts match keywords.
+
+  - 2a1. System informs Actor that they have no contacts that match.
 
     Use case ends.
 
