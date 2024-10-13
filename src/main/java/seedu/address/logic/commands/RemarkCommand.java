@@ -64,11 +64,9 @@ public class RemarkCommand extends Command {
         String message;
         if (remark.value.isEmpty()) {
             message = MESSAGE_DELETE_REMARK_SUCCESS;
-        }
-        else if (!personToEdit.getRemark().value.isEmpty()) {
+        } else if (!personToEdit.getRemark().value.isEmpty()) {
             message = MESSAGE_EDIT_REMARK_SUCCESS;
-        }
-        else {
+        } else {
             message = MESSAGE_ADD_REMARK_SUCCESS;
         }
 
