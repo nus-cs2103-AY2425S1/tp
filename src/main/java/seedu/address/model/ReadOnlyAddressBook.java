@@ -6,12 +6,12 @@ import seedu.address.model.person.Person;
 /**
  * Unmodifiable view of a book
  */
-public interface ReadOnlyAddressBook {
+public interface ReadOnlyAddressBook<T> {
 
     /**
      * Returns an unmodifiable view of the persons list.
      * This list will not contain any duplicate persons.
      */
-    ObservableList<Person> getPersonList();
+    ObservableList<T> getList();
 
 }

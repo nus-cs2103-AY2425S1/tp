@@ -5,12 +5,13 @@ import static java.util.Objects.requireNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.AddressBookComparable;
 
 /**
  * Represents an Internship in the network book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Internship {
+public class Internship implements AddressBookComparable<Internship> {
 
     // Identity fields
     private final Company company;
@@ -61,6 +62,7 @@ public class Internship {
      * Returns true if both internships have the same company, date of application, and role.
      * This defines a weaker notion of equality between two internships.
      */
+    @Override
     public boolean isSame(Internship otherInternship) {
         if (otherInternship == this) {
             return true;
