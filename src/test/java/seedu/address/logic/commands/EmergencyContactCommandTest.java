@@ -48,18 +48,18 @@ public class EmergencyContactCommandTest {
     }
     @Test
     public void execute_deleteEmergencyContactUnfilteredList_success() {
-        // TO IMPLEMENT
-        /*Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        // TODO To edit after implementing delete emergency contact function
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson).withEmergencyContact("",
                 "").build();
-        EmergencyContactCommand emergencyContactCommand = new EmergencyContactCommand(INDEX_FIRST_PERSON,
+        EmergencyContactCommand emergencyContactCommand = new EmergencyContactCommand(INDEX_THIRD_PERSON,
                 new EmergencyContact(editedPerson.getEmergencyContact().contactName,
                         editedPerson.getEmergencyContact().contactNumber));
         String expectedMessage = String.format(EmergencyContactCommand.MESSAGE_DELETE_EMERGENCY_CONTACT_SUCCESS,
                 editedPerson);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
-        assertCommandSuccess(emergencyContactCommand, model, expectedMessage, expectedModel);*/
+        assertCommandSuccess(emergencyContactCommand, model, expectedMessage, expectedModel);
     }
     @Test
     public void execute_filteredList_success() {
@@ -83,10 +83,7 @@ public class EmergencyContactCommandTest {
                 new EmergencyContact(VALID_EMERGENCY_CONTACT_NAME_BOB, VALID_EMERGENCY_CONTACT_NUMBER_BOB));
         assertCommandFailure(emergencyContactCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
-    /**
-     * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of address book
-     */
+
     @Test
     public void execute_overrideEmergencyContactUnfilteredList_failure() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
