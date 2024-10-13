@@ -3,7 +3,7 @@ layout: page
 title: Celes's Project Portfolio Page
 ---
 
-### Project: AddressBook Level 3
+### Project: CareConnect
 
 CareConnect - A CLI-first case management application that enables social workers to efficiently manage client details, appointments, and priorities. Repeated chores including data entry and search will be streamlined via simple CLI inputs, easing the mental load of the social workers, allowing them to focus more on delivering high-quality care and support for the clients.
 
