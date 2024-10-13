@@ -6,18 +6,30 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a delivery's order time.
+ * Guarantees: is valid as declared in {@link #isValidTime(String)} (String)}
+ */
 public class Time {
     public static final String MESSAGE_CONSTRAINTS =
             "Incorrect time format. Expected format: hh:mm:ss";
     public final LocalTime value;
 
+    /**
+     * Constructs a {@code Time}.
+     *
+     * @param time A valid time.
+     */
     public Time(String time) {
         requireNonNull(time);
-        checkArgument(isValidEta(time), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidTime(time), MESSAGE_CONSTRAINTS);
         value = LocalTime.parse(time);
     }
 
-    public static boolean isValidEta(String test) {
+    /**
+     * Returns true if a given string is a valid time.
+     */
+    public static boolean isValidTime(String test) {
         try {
             LocalTime parsedTime = LocalTime.parse(test);
         } catch (DateTimeParseException e) {

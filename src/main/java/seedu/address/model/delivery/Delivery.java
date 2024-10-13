@@ -9,6 +9,10 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Person;
 
+/**
+ * Represents a Delivery.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 public class Delivery {
     private final Person person;
     private final Address address;
@@ -21,6 +25,9 @@ public class Delivery {
 
     private final Eta eta;
 
+    /**
+     * Every field must be present and not null.
+     */
     public Delivery(Person person, Address address, Cost cost, Date date, Time time, Eta eta) {
         requireAllNonNull(person, address, cost, date, time, eta);
         this.person = person;
@@ -31,6 +38,9 @@ public class Delivery {
         this.eta = eta;
     }
 
+    /**
+     * Every field must be present and not null.
+     */
     public Delivery(Person person, Address address, Cost cost, Eta eta) {
         requireAllNonNull(person, address, cost, eta);
         this.person = person;
@@ -65,6 +75,9 @@ public class Delivery {
         return eta;
     }
 
+    /**
+     * Returns true if both deliveries are equal.
+     */
     public boolean isSameDelivery(Delivery otherDelivery) {
         if (otherDelivery == this) {
             return true;

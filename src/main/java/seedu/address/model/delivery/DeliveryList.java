@@ -10,6 +10,11 @@ import javafx.collections.ObservableList;
 import seedu.address.model.delivery.exceptions.DeliveryNotFoundException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
+/**
+ * A list of deliveries that does not allow nulls.
+ *
+ * Supports a minimal set of list operations.
+ */
 public class DeliveryList {
     private final ObservableList<Delivery> internalList = FXCollections.observableArrayList();
     private final ObservableList<Delivery> internalUnmodifiableList =
