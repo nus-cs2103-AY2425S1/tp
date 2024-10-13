@@ -13,10 +13,11 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
-import seedu.address.logic.Mode;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Context;
+import seedu.address.model.ModelManager;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -104,9 +105,7 @@ public class MainWindow extends UiPart<Stage> {
          */
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
-                menuItem
-                        .getOnAction()
-                        .handle(new ActionEvent());
+                menuItem.getOnAction().handle(new ActionEvent());
                 event.consume();
             }
         });
@@ -119,35 +118,23 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
 
         jobListPanel = new JobListPanel(logic.getFilteredJobList());
-        jobListPanel
-                .getRoot()
-                .setVisible(false);
+        jobListPanel.getRoot().setVisible(false);
 
         companyListPanel = new CompanyListPanel(logic.getFilteredCompanyList());
-        companyListPanel
-                .getRoot()
-                .setVisible(false);
+        companyListPanel.getRoot().setVisible(false);
 
         personListPanelPlaceholder
                 .getChildren()
-                .addAll(personListPanel.getRoot(),
-                        jobListPanel.getRoot(),
-                        companyListPanel.getRoot());
+                .addAll(personListPanel.getRoot(), jobListPanel.getRoot(), companyListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
-        resultDisplayPlaceholder
-                .getChildren()
-                .add(resultDisplay.getRoot());
+        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
-        statusbarPlaceholder
-                .getChildren()
-                .add(statusBarFooter.getRoot());
+        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
-        commandBoxPlaceholder
-                .getChildren()
-                .add(commandBox.getRoot());
+        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
     /**
@@ -157,12 +144,8 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.setHeight(guiSettings.getWindowHeight());
         primaryStage.setWidth(guiSettings.getWindowWidth());
         if (guiSettings.getWindowCoordinates() != null) {
-            primaryStage.setX(guiSettings
-                    .getWindowCoordinates()
-                    .getX());
-            primaryStage.setY(guiSettings
-                    .getWindowCoordinates()
-                    .getY());
+            primaryStage.setX(guiSettings.getWindowCoordinates().getX());
+            primaryStage.setY(guiSettings.getWindowCoordinates().getY());
         }
     }
 
@@ -187,8 +170,11 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleExit() {
-        GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
+        GuiSettings guiSettings = new GuiSettings(
+                primaryStage.getWidth(),
+                primaryStage.getHeight(),
+                (int) primaryStage.getX(),
+                (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
@@ -198,35 +184,22 @@ public class MainWindow extends UiPart<Stage> {
         return personListPanel;
     }
 
-    // TODO: Not sure if this is the best approach, for further discussion
-    private void updateListPanel(Mode mode) {
-        personListPanel
-                .getRoot()
-                .setVisible(false);
-        jobListPanel
-                .getRoot()
-                .setVisible(false);
-        companyListPanel
-                .getRoot()
-                .setVisible(false);
-        switch (mode) {
+    private void updateListPanel(Context context) {
+        personListPanel.getRoot().setVisible(false);
+        jobListPanel.getRoot().setVisible(false);
+        companyListPanel.getRoot().setVisible(false);
+        switch (context) {
         case JOB:
-            jobListPanel
-                    .getRoot()
-                    .setVisible(true);
+            jobListPanel.getRoot().setVisible(true);
             break;
         case COMPANY:
-            companyListPanel
-                    .getRoot()
-                    .setVisible(true);
+            companyListPanel.getRoot().setVisible(true);
             break;
         case CONTACT:
-            personListPanel
-                    .getRoot()
-                    .setVisible(true);
+            personListPanel.getRoot().setVisible(true);
             break;
         default:
-            assert(false); // this should never happen
+            assert (false); // this should never happen
         }
     }
 
@@ -239,8 +212,7 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
-            // TODO: Doesn't look like the best approach, for further discussion
-            updateListPanel(commandResult.getMode());
+            updateListPanel(ModelManager.getContext());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowHelp()) {

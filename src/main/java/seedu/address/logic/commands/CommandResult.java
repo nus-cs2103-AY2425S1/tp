@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Mode;
 
 /**
  * Represents the result of a command execution.
@@ -20,20 +19,6 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
-    private final Mode mode;
-
-    /**
-     * Constructs a {@code CommandResult} with the additional fields
-     * to update the mode of the app after a command.
-     */
-    // TODO: Terrible solution, should consider leveraging polymorphism via Command class
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, Mode mode) {
-        this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.showHelp = showHelp;
-        this.exit = exit;
-        this.mode = mode;
-    }
-
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
@@ -41,7 +26,6 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        this.mode = Mode.CONTACT;
     }
 
     /**
@@ -62,10 +46,6 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
-    }
-
-    public Mode getMode() {
-        return mode;
     }
 
     @Override
