@@ -169,16 +169,8 @@ public class ParserUtil {
         if (!GradeLevel.isValidGradeLevel(trimmedGradeLevel)) {
             throw new ParseException(GradeLevel.MESSAGE_CONSTRAINTS);
         }
-        String schoolLevel;
-        int grade;
-        try {
-            schoolLevel = trimmedGradeLevel.split(" ")[0];
-            grade = Integer.parseInt(trimmedGradeLevel.split(" ")[1]);
-        } catch (NumberFormatException e) {
-            throw new ParseException(GradeLevel.MESSAGE_CONSTRAINTS);
-        }
 
-        return new GradeLevel(schoolLevel, grade);
+        return new GradeLevel(trimmedGradeLevel);
     }
 
     /**
