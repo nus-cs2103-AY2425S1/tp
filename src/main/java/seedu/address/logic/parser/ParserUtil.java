@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -9,7 +8,6 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.ClassId;
@@ -155,53 +153,6 @@ public class ParserUtil {
         }
         return tagSet;
     }
-
-
-    /**
-     * Parses a {@code String Names} into a {@code String[]}.
-     * @throws ParseException if the user input does not conform the expected format
-     */
-    public static String[] parseNameClassIdFind(String args) throws ParseException {
-        String[] nameClassId = args.split("n/", 2)[1].split("c/", 2);
-
-        if (nameClassId.length < 2 || nameClassId[1].trim().isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        }
-
-        return nameClassId[0].trim().split("\\s+");
-    }
-
-    /**
-     * Parses a {@code String Names} into a {@code String[]}.
-     * @throws ParseException if the user input does not conform the expected format
-     */
-    public static String[] parseNameFind(String args) throws ParseException {
-        String[] names = args.split("n/", 2);
-        if (names.length < 2 || names[1].trim().isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        }
-
-        return names[1].trim().split("\\s+");
-
-    }
-
-    /**
-     * Parses a {@code String Class IDs} into a {@code String[]}.
-     * @throws ParseException if the user input does not conform the expected format
-     */
-
-    public static String[] parseClassIdFind(String args) throws ParseException {
-        String[] classIds = args.split("c/", 2);
-        if (classIds.length < 2 || classIds[1].trim().isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        }
-
-        return classIds[1].trim().split("\\s+");
-    }
-
 
     public static boolean isValidIndex(String preamble) {
         return StringUtil.isNonZeroUnsignedInteger(preamble);
