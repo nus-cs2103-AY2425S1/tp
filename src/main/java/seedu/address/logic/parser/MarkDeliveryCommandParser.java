@@ -19,7 +19,7 @@ public class MarkDeliveryCommandParser implements Parser<MarkDeliveryCommand> {
      */
     public MarkDeliveryCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
-        if (!trimmedArgs.startsWith("-s")) {
+        if (!trimmedArgs.startsWith("-d")) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkDeliveryCommand.MESSAGE_USAGE));
         }

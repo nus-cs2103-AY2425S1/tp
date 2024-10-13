@@ -19,8 +19,8 @@ public class MarkDeliveryCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the status of the delivery identified by the index number used in the displayed delivery list.\n"
-            + "Parameters: -s INDEX (must be a positive integer) STATUS (PENDING, DELIVERED, CANCELLED)\n"
-            + "Example: " + COMMAND_WORD + " -s 1 DELIVERED";
+            + "Parameters: -d INDEX (must be a positive integer) STATUS (PENDING, DELIVERED, CANCELLED)\n"
+            + "Example: " + COMMAND_WORD + " -d 1 DELIVERED";
 
     public static final String MESSAGE_MARK_DELIVERY_SUCCESS = "Marked Delivery: %1$s as %2$s";
 

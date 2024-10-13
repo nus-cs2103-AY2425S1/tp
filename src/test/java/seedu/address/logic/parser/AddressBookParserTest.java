@@ -67,7 +67,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_mark_delivery() throws Exception {
         MarkDeliveryCommand command = (MarkDeliveryCommand) parser.parseCommand(
-                MarkDeliveryCommand.COMMAND_WORD + " -s " + INDEX_FIRST_DELIVERY.getOneBased() + " DELIVERED");
+                MarkDeliveryCommand.COMMAND_WORD + " -d " + INDEX_FIRST_DELIVERY.getOneBased() + " DELIVERED");
         assertEquals(new MarkDeliveryCommand(INDEX_FIRST_DELIVERY, DELIVERED), command);
     }
 
