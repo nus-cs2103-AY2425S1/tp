@@ -62,6 +62,9 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Nric} of the {@code Person} that we are building.
+     */
     public PersonBuilder withNric(String nric) {
         this.nric = new Nric(nric);
         return this;
