@@ -56,18 +56,18 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
-    private final StudentId index;
+    private final StudentId studentId;
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
+     * @param studentId of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
-    public EditCommand(StudentId index, EditPersonDescriptor editPersonDescriptor) {
-        requireNonNull(index);
+    public EditCommand(StudentId studentId, EditPersonDescriptor editPersonDescriptor) {
+        requireNonNull(studentId);
         requireNonNull(editPersonDescriptor);
 
-        this.index = index;
+        this.studentId = studentId;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 
@@ -81,7 +81,7 @@ public class EditCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }*/
         Person personToEdit =  lastShownList.stream()
-                .filter(person -> person.getStudentId().equals(index))  
+                .filter(person -> person.getStudentId().equals(studentId))
                 .findFirst()
                 .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_STUDENTID));;
 
@@ -126,14 +126,14 @@ public class EditCommand extends Command {
         }
 
         EditCommand otherEditCommand = (EditCommand) other;
-        return index.equals(otherEditCommand.index)
+        return studentId.equals(otherEditCommand.studentId)
                 && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("index", index)
+                .add("studentId", studentId)
                 .add("editPersonDescriptor", editPersonDescriptor)
                 .toString();
     }
