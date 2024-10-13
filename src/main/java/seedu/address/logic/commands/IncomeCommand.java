@@ -2,7 +2,9 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import javafx.collections.ObservableList;
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
 
 
 /**
@@ -16,14 +18,13 @@ public class IncomeCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        int feesOwed = 0;
-        int feesEarned = 0;
-        //ObservableList<Person> personList = model.getFilteredPersonList();
-        //for (Person person: personList) {
-        //fees_owed += person.getFeeOwed();
-        //fees_earned += person.getFeeEarned();
-        //}
-        return new CommandResult("Fees owed: " + feesOwed + ", fees earned: "
-                + feesEarned);
+        double totalOwed = 0;
+        double totalPaid = 0;
+        ObservableList<Person> personList = model.getFilteredPersonList();
+        for (Person person: personList) {
+        totalOwed += person.getOwedAmount().value;
+        totalPaid += person.getPaid().value;
+        }
+        return new CommandResult("Total Paid: " + totalPaid + "   Total Owed: " + totalOwed);
     }
 }
