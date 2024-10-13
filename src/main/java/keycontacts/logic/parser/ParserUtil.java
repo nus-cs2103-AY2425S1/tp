@@ -180,7 +180,7 @@ public class ParserUtil {
 
         return new GradeLevel(schoolLevel, grade);
     }
-    
+
     /**
      * Parses {@code String date} into a {@code LocalDate}.
      */
