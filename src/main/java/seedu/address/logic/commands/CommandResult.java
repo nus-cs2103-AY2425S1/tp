@@ -32,11 +32,19 @@ public class CommandResult {
     }
 
     /**
-     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser} and {@code showPeopleList},
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser, boolean showPeopleList) {
         this(feedbackToUser, false, false, showPeopleList);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
+     * and other fields set to their default value.
+     */
+    public CommandResult(String feedbackToUser) {
+        this(feedbackToUser, false, false, true);
     }
 
     public String getFeedbackToUser() {
