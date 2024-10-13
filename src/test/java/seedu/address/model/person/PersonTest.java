@@ -35,16 +35,24 @@ public class PersonTest {
         // null -> returns false
         assertFalse(ALICE.isSamePerson(null));
 
-        // same name, all other attributes different -> returns true
-        Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withSchedule(VALID_SCHEDULE_BOB).build();
+        // same name and phone, all other attributes different -> returns true
+        Person editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB)
+                                                     .withAddress(VALID_ADDRESS_BOB).withSchedule(VALID_SCHEDULE_BOB)
+                                                     .withSubject(VALID_SUBJECT_BOB).withRate(VALID_RATE_BOB).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
+
+        // same name, all other attributes different -> returns false
+        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+                .withAddress(VALID_ADDRESS_BOB).withSchedule(VALID_SCHEDULE_BOB)
+                .withSubject(VALID_SUBJECT_BOB).withRate(VALID_RATE_BOB).build();
+        assertFalse(ALICE.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
         editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.isSamePerson(editedAlice));
 
         // name differs in case, all other attributes same -> returns false
+        // Note for Yi Fan: when you update the case-insensitive, this should return true
         Person editedBob = new PersonBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
         assertFalse(BOB.isSamePerson(editedBob));
 
