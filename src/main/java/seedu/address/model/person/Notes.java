@@ -26,6 +26,23 @@ public class Notes {
         notes.add(note);
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Notes)) {
+
+            return false;
+        }
+
+        Notes otherNotes = (Notes) other;
+        return notes.equals(otherNotes.notes);
+
+    }
+
     /**
      * Returns all stored notes as a String
      *
