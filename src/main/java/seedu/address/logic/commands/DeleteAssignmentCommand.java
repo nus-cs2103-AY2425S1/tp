@@ -19,7 +19,7 @@ public class DeleteAssignmentCommand extends Command {
             + " Parameters: TITLE\n"
             + "Example: " + COMMAND_WORD + " CS2100 Assignment";
 
-    public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Deleted Assignment: %1$s";
+    public static final String MESSAGE_DELETE_ASSIGNMENT_SUCCESS = "Deleted Assignment: %1$s";
     public static final String MESSAGE_ASSIGNMENT_NOT_FOUND = "This assignment doesn't exist!";
 
     private final Assignment assignment;
@@ -37,7 +37,7 @@ public class DeleteAssignmentCommand extends Command {
         }
 
         model.deleteAssignment(assignment);
-        return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, assignment.toString()));
+        return new CommandResult(String.format(MESSAGE_DELETE_ASSIGNMENT_SUCCESS, assignment.toString()));
     }
 
     @Override
