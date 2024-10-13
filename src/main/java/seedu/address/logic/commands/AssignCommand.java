@@ -1,75 +1,59 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VENDOR_ID;
 
+import java.util.stream.Stream;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.vendor.Vendor;
 
+/**
+ * Assigns a vendor to an event.
+ */
 public class AssignCommand extends Command {
+
     public static final String COMMAND_WORD = "assign";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns a vendor to an event. "
             + "Parameters: "
-            + "v/<VENDOR_ID> e/<EVENT_ID> or e/<EVENT_ID> v/<VENDOR_ID>\n"
-            + "Example: " + COMMAND_WORD + " v/123 e/456";
+            + "v/<VENDOR_INDEX> e/<EVENT_INDEX> or e/<EVENT_INDEX> v/<VENDOR_INDEX>\n"
+            + "Example: " + COMMAND_WORD + " v/1 e/2";
 
     public static final String MESSAGE_ASSIGN_SUCCESS = "Vendor %s assigned to Event %s";
-    public static final String MESSAGE_INVALID_VENDOR_ID = "The vendor ID provided is invalid.";
-    public static final String MESSAGE_INVALID_EVENT_ID = "The event ID provided is invalid.";
+    public static final String MESSAGE_INVALID_VENDOR_INDEX = "The vendor index provided is invalid.";
+    public static final String MESSAGE_INVALID_EVENT_INDEX = "The event index provided is invalid.";
 
-    private final Vendor vendor;
-    private final Event event;
+    private final Index vendorIndex;
+    private final Index eventIndex;
 
-    public AssignCommand(Vendor vendor, Event event) {
-        requireNonNull(vendor);
-        requireNonNull(event);
-        this.vendor = vendor;
-        this.event = event;
+    /**
+     * Creates an AssignCommand to assign the specified {@code Vendor} to the specified {@code Event}.
+     */
+    public AssignCommand(Index vendorIndex, Index eventIndex) {
+        requireNonNull(vendorIndex);
+        requireNonNull(eventIndex);
+        this.vendorIndex = vendorIndex;
+        this.eventIndex = eventIndex;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.assignVendorToEvent(vendor, event);
-        return new CommandResult(String.format(MESSAGE_ASSIGN_SUCCESS, vendor.getVendorId(), event.getEventId()));
-    }
 
-    public static AssignCommand parse(String arguments, Model model) throws ParseException {
-        requireNonNull(model);
-        String[] tokens = arguments.trim().split("\\s+");
+        // Retrieve Vendor and Event objects using the indices
+        Vendor vendor = model.getFilteredVendorList().get(vendorIndex.getZeroBased());
+        Event event = model.getFilteredEventList().get(eventIndex.getZeroBased());
 
-        int vendorId = -1;
-        int eventId = -1;
+        // TODO: Handle case where the tag already exists
+        Tag tag = new Tag(vendor, event);
+        model.addTag(tag);
 
-        for (int i = 0; i < tokens.length; i++) {
-            if (tokens[i].startsWith("v/")) {
-                try {
-                    vendorId = Integer.parseInt(tokens[i].substring(2));
-                } catch (NumberFormatException e) {
-                    throw new ParseException(MESSAGE_INVALID_VENDOR_ID);
-                }
-            } else if (tokens[i].startsWith("e/")) {
-                try {
-                    eventId = Integer.parseInt(tokens[i].substring(2));
-                } catch (NumberFormatException e) {
-                    throw new ParseException(MESSAGE_INVALID_EVENT_ID);
-                }
-            }
-        }
-
-        if (vendorId == -1 || eventId == -1) {
-            throw new ParseException(MESSAGE_USAGE);
-        }
-
-        // Retrieve Vendor and Event objects from the model
-        Vendor vendor = model.getVendorById(vendorId)
-                .orElseThrow(() -> new ParseException(MESSAGE_INVALID_VENDOR_ID));
-        Event event = model.getEventById(eventId)
-                .orElseThrow(() -> new ParseException(MESSAGE_INVALID_EVENT_ID));
-
-        return new AssignCommand(vendor, event);
+        return new CommandResult(String.format(MESSAGE_ASSIGN_SUCCESS, vendorIndex.getOneBased(), eventIndex.getOneBased()));
     }
 }
 

@@ -1,12 +1,15 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VENDOR_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_ID;
+
+import java.util.stream.Stream;
+
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AssignCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.Model;
-import seedu.address.model.event.Event;
-import seedu.address.model.vendor.Vendor;
-
-import java.util.Optional;
 
 /**
  * Parses input arguments and creates a new AssignCommand object.
@@ -14,50 +17,41 @@ import java.util.Optional;
 public class AssignCommandParser implements Parser<AssignCommand> {
 
     @Override
-    public AssignCommand parse(String args, Model model) throws ParseException {
-        String[] tokens = args.trim().split("\\s+");
+    public AssignCommand parse(String args) throws ParseException {
+        requireNonNull(args);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_VENDOR_ID, PREFIX_EVENT_ID);
 
-        int vendorId = -1;
-        int eventId = -1;
-
-        // Parse tokens to find vendorId and eventId
-        for (int i = 0; i < tokens.length; i++) {
-            if (tokens[i].equalsIgnoreCase("vendor") && i + 1 < tokens.length) {
-                try {
-                    vendorId = Integer.parseInt(tokens[i + 1]);
-                } catch (NumberFormatException e) {
-                    throw new ParseException("Invalid vendor ID format. Vendor ID should be a number.");
-                }
-            } else if (tokens[i].equalsIgnoreCase("event") && i + 1 < tokens.length) {
-                try {
-                    eventId = Integer.parseInt(tokens[i + 1]);
-                } catch (NumberFormatException e) {
-                    throw new ParseException("Invalid event ID format. Event ID should be a number.");
-                }
-            }
+        // Check if both vendor and event prefixes are present
+        if (!arePrefixesPresent(argMultimap, PREFIX_VENDOR_ID, PREFIX_EVENT_ID) 
+                || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignCommand.MESSAGE_USAGE));
         }
 
-        // Check if both vendorId and eventId were provided
-        if (vendorId == -1 || eventId == -1) {
-            throw new ParseException(AssignCommand.MESSAGE_USAGE);
+        // Parse vendor index using the Index class
+        Index vendorIndex;
+        try {
+            vendorIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_VENDOR_ID).get());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignCommand.MESSAGE_USAGE), pe);
         }
 
-        // Retrieve Vendor and Event objects from the model
-        Optional<Vendor> optionalVendor = model.getVendorById(vendorId);
-        Optional<Event> optionalEvent = model.getEventById(eventId);
-
-        if (optionalVendor.isEmpty()) {
-            throw new ParseException(AssignCommand.MESSAGE_INVALID_VENDOR_ID);
+        // Parse event index using the Index class
+        Index eventIndex;
+        try {
+            eventIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_EVENT_ID).get());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignCommand.MESSAGE_USAGE), pe);
         }
 
-        if (optionalEvent.isEmpty()) {
-            throw new ParseException(AssignCommand.MESSAGE_INVALID_EVENT_ID);
-        }
+        return new AssignCommand(vendorIndex, eventIndex);
+    }
 
-        Vendor vendor = optionalVendor.get();
-        Event event = optionalEvent.get();
-
-        return new AssignCommand(vendor, event);
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
 
