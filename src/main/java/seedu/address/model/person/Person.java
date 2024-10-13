@@ -29,13 +29,14 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, DateOfLastVisit dateOfLastVisit) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.dateOfLastVisit = dateOfLastVisit;
     }
 
     public Name getName() {
@@ -52,6 +53,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public DateOfLastVisit getDateOfLastVisit() {
+        return dateOfLastVisit;
     }
 
     /**
