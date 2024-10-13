@@ -43,6 +43,8 @@ public class AddCarCommand extends Command {
      * Creates an AddCarCommand to add the specified {@code Car} to the {@code Person}
      */
     public AddCarCommand(Index index, Car carToAdd) {
+        requireNonNull(index);
+        requireNonNull(carToAdd);
         this.index = index;
         this.carToAdd = carToAdd;
     }
