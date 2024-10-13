@@ -17,4 +17,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_SALARY = new Prefix("s/");
     public static final Prefix PREFIX_REQUIREMENTS = new Prefix("r/");
     public static final Prefix PREFIX_DESCRIPTION = new Prefix("d/");
+    public static final Prefix PREFIX_BILLING_DATE = new Prefix("b/");
 }
