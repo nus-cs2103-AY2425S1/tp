@@ -22,10 +22,13 @@ import seedu.address.model.person.Person;
  * A utility class containing a list of {@code Person} objects to be used in tests.
  */
 public class TypicalPersons {
+    private static final String ALICE_TELEGRAMHANDLE = "94351253";
+    private static final String ALICE_EMAIL = "alice@example.com";
+    private static final String BOB_NICKNAME = "booby";
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
-            .withStudentStatus("undergraduate 1").withEmail("alice@example.com")
-            .withTelegramHandle("94351253")
+            .withStudentStatus("undergraduate 1").withEmail(ALICE_EMAIL)
+            .withTelegramHandle(ALICE_TELEGRAMHANDLE)
             .withRoles("Admin").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withStudentStatus("undergraduate 2")
@@ -71,6 +74,28 @@ public class TypicalPersons {
             .withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB)
             .withEmail(VALID_EMAIL_BOB).withStudentStatus(VALID_STUDENT_STATUS_BOB)
             .withRoles(VALID_ROLE_PRESIDENT, VALID_ROLE_ADMIN)
+            .build();
+    public static final Person BOB_HASSAMETELE_ALICE = new PersonBuilder().withName(VALID_NAME_BOB + "1")
+            .withTelegramHandle(ALICE_TELEGRAMHANDLE)
+            .withEmail(VALID_EMAIL_BOB + "1").withStudentStatus(VALID_STUDENT_STATUS_BOB)
+            .withRoles(VALID_ROLE_ADMIN)
+            .build();
+    public static final Person BOB_HASSAMEEMAIL_ALICE = new PersonBuilder().withName(VALID_NAME_BOB + "2")
+            .withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB)
+            .withEmail(ALICE_EMAIL).withStudentStatus(VALID_STUDENT_STATUS_BOB)
+            .withRoles(VALID_ROLE_ADMIN)
+            .build();
+    public static final Person BOBNICK = new PersonBuilder().withName(VALID_NAME_BOB)
+            .withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB + "3")
+            .withEmail(VALID_EMAIL_BOB + "3").withStudentStatus(VALID_STUDENT_STATUS_BOB)
+            .withRoles(VALID_ROLE_PRESIDENT, VALID_ROLE_ADMIN)
+            .withNickname(BOB_NICKNAME)
+            .build();
+    public static final Person BOB_HASSAMENICK_BOBNICK = new PersonBuilder().withName(VALID_NAME_BOB)
+            .withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB + "4")
+            .withEmail(VALID_EMAIL_BOB + "4").withStudentStatus(VALID_STUDENT_STATUS_BOB)
+            .withRoles(VALID_ROLE_ADMIN)
+            .withNickname(BOB_NICKNAME)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
