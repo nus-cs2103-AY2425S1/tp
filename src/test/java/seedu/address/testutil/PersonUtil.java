@@ -4,6 +4,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OWED_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
@@ -37,6 +38,7 @@ public class PersonUtil {
         sb.append(PREFIX_SCHEDULE + person.getSchedule().value + " ");
         sb.append(PREFIX_SUBJECT + person.getSubject().toString() + " ");
         sb.append(PREFIX_RATE + person.getRate().toString() + " ");
+        sb.append(PREFIX_PAID + person.getPaid().toString() + " ");
         sb.append(PREFIX_OWED_AMOUNT + person.getOwedAmount().toString() + " ");
         return sb.toString();
     }
@@ -53,6 +55,9 @@ public class PersonUtil {
         descriptor.getSchedule().ifPresent(schedule -> sb.append(PREFIX_SCHEDULE).append(schedule.value).append(" "));
         descriptor.getSubject().ifPresent(subject -> sb.append(PREFIX_SUBJECT).append(subject.toString()).append(" "));
         descriptor.getRate().ifPresent(rate -> sb.append(PREFIX_RATE).append(rate.toString()).append(" "));
+        descriptor.getPaid().ifPresent(paid -> sb.append(PREFIX_PAID).append(paid.toString()).append(" "));
+        descriptor.getOwedAmount().ifPresent(owedAmount -> sb.append(PREFIX_OWED_AMOUNT)
+                                                             .append(owedAmount.toString()).append(" "));
         return sb.toString();
     }
 }

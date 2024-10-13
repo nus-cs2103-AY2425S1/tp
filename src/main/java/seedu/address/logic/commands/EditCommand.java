@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OWED_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
@@ -25,6 +26,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.OwedAmount;
+import seedu.address.model.person.Paid;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Rate;
@@ -48,7 +50,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_SCHEDULE + "SCHEDULE] "
             + "[" + PREFIX_SUBJECT + "SUBJECT] "
-            + "[" + PREFIX_RATE + "RATE] "
+            + "[" + PREFIX_RATE + "FEE] "
+            + "[" + PREFIX_PAID + "PAID] "
             + "[" + PREFIX_OWED_AMOUNT + "OWED] "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -56,8 +59,8 @@ public class EditCommand extends Command {
             + PREFIX_SCHEDULE + "Saturday-1000-1200 "
             + PREFIX_SUBJECT + "Mathematics "
             + PREFIX_RATE + "300 "
+            + PREFIX_PAID + "600 "
             + PREFIX_OWED_AMOUNT + "300 ";
-
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
@@ -112,11 +115,12 @@ public class EditCommand extends Command {
         Schedule updatedSchedule = editPersonDescriptor.getSchedule().orElse(personToEdit.getSchedule());
         Subject updatedSubject = editPersonDescriptor.getSubject().orElse(personToEdit.getSubject());
         Rate updatedRate = editPersonDescriptor.getRate().orElse(personToEdit.getRate());
+        Paid updatedPaid = editPersonDescriptor.getPaid().orElse(personToEdit.getPaid());
         OwedAmount updatedOwedAmount = editPersonDescriptor.getOwedAmount().orElse(personToEdit.getOwedAmount());
 
         return new Person(
                 updatedName, updatedPhone, updatedEmail, updatedAddress, updatedSchedule, updatedSubject, updatedRate,
-                updatedOwedAmount
+                updatedPaid, updatedOwedAmount
         );
     }
 
@@ -156,6 +160,7 @@ public class EditCommand extends Command {
         private Schedule schedule;
         private Subject subject;
         private Rate rate;
+        private Paid paid;
         private OwedAmount owedAmount;
 
         public EditPersonDescriptor() {}
@@ -171,6 +176,7 @@ public class EditCommand extends Command {
             setSchedule(toCopy.schedule);
             setSubject(toCopy.subject);
             setRate(toCopy.rate);
+            setPaid(toCopy.paid);
             setOwedAmount(toCopy.owedAmount);
         }
 
@@ -178,7 +184,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, schedule, rate, owedAmount);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, schedule, rate, paid, owedAmount);
         }
 
         public void setName(Name name) {
@@ -236,6 +242,13 @@ public class EditCommand extends Command {
             return Optional.ofNullable(rate);
         }
 
+        public void setPaid(Paid paid) {
+            this.paid = paid;
+        }
+        public Optional<Paid> getPaid() {
+            return Optional.ofNullable(paid);
+        }
+
         public void setOwedAmount(OwedAmount owedAmount) {
             this.owedAmount = owedAmount;
         }
@@ -262,7 +275,9 @@ public class EditCommand extends Command {
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(schedule, otherEditPersonDescriptor.schedule)
                     && Objects.equals(subject, otherEditPersonDescriptor.subject)
-                    && Objects.equals(rate, otherEditPersonDescriptor.rate);
+                    && Objects.equals(rate, otherEditPersonDescriptor.rate)
+                    && Objects.equals(paid, otherEditPersonDescriptor.paid)
+                    && Objects.equals(owedAmount, otherEditPersonDescriptor.owedAmount);
         }
 
         @Override
@@ -275,6 +290,8 @@ public class EditCommand extends Command {
                     .add("schedule", schedule)
                     .add("subject", subject)
                     .add("rate", rate)
+                    .add("paid", paid)
+                    .add("owedAmount", owedAmount)
                     .toString();
         }
 

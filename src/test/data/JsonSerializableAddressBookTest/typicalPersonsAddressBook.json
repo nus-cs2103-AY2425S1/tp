@@ -8,6 +8,7 @@
     "schedule": "Sunday-1800-1900",
     "subject": "economics",
     "rate": "250.50",
+    "paid": "0.00",
     "owedAmount": "250.50"
   }, {
     "name" : "Benson Meier",
@@ -17,6 +18,7 @@
     "schedule" : "Monday-1800-1900",
     "subject": "mathematics",
     "rate" : "100.80",
+    "paid" : "201.60",
     "owedAmount" : "0"
   }, {
     "name" : "Carl Kurz",
@@ -26,6 +28,7 @@
     "schedule" : "Tuesday-1800-1900",
     "subject": "mathematics",
     "rate" : "300",
+    "paid" : "1200",
     "owedAmount" : "900"
   }, {
     "name" : "Daniel Meier",
@@ -35,6 +38,7 @@
     "schedule" : "Wednesday-1800-1900",
     "subject": "mathematics",
     "rate" : "450.5",
+    "paid" : "450.50",
     "owedAmount" : "901.00"
   }, {
     "name" : "Elle Meyer",
@@ -44,6 +48,7 @@
     "schedule" : "Thursday-1800-1900",
     "subject": "mathematics",
     "rate" : "350",
+    "paid" : "2800",
     "owedAmount" : "0"
   }, {
     "name" : "Fiona Kunz",
@@ -53,6 +58,7 @@
     "schedule" : "Friday-1800-1900",
     "subject" : "mathematics",
     "rate" : "260.25",
+    "paid" : "0.00",
     "owedAmount" : "520.50"
   }, {
     "name" : "George Best",
@@ -62,6 +68,7 @@
     "schedule" : "Saturday-1800-1900",
     "subject" : "mathematics",
     "rate" : "120",
+    "paid" : "1200",
     "owedAmount" : "0"
   } ]
 }
