@@ -11,13 +11,13 @@ import seedu.address.model.assignment.Assignment;
 
 
 /**
- * Parses input arguments and creates a new DeleteCommand object
+ * Parses input arguments and creates a new DeleteAssignmentCommand object
  */
 public class DeleteAssignmentCommandParser implements Parser<DeleteAssignmentCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the DeleteCommand
-     * and returns a DeleteCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the DeleteAssignmentCommand
+     * and returns a DeleteAssignmentCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteAssignmentCommand parse(String args) throws ParseException {
