@@ -3,9 +3,14 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPPLIER_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -53,6 +58,31 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+
+    public static final String VALID_DATE_APPLE = " 10-10-2024 16:00";
+    public static final String VALID_SUPPLIER_INDEX_APPLE = " 1";
+    public static final String VALID_PRODUCT_APPLE = " Iphone16Pro";
+    public static final String VALID_COST_APPLE = " 200000";
+    public static final String VALID_QUANTITY_APPLE = " 200 units";
+    public static final String TIME_DESC_APPLE = " " + PREFIX_DATETIME + VALID_DATE_APPLE;
+    public static final String SUPPLIER_INDEX_DESC_APPLE = " " + PREFIX_SUPPLIER_INDEX + VALID_SUPPLIER_INDEX_APPLE;
+    public static final String PRODUCT_DESC_APPLE = " " + PREFIX_PRODUCT + VALID_PRODUCT_APPLE;
+    public static final String QUANTITY_DESC_APPLE = " " + PREFIX_QUANTITY + VALID_QUANTITY_APPLE;
+    public static final String COST_DESC_APPLE = " " + PREFIX_COST + VALID_COST_APPLE;
+    public static final String INVALID_DATE_APPLE = " " + PREFIX_DATETIME + " 1010-2024 16:00";
+    public static final String INVALID_SUPPLIER_INDEX_APPLE_ZERO = " " + PREFIX_SUPPLIER_INDEX + " 0";
+    public static final String INVALID_SUPPLIER_INDEX_APPLE_NEGATIVE = " " + PREFIX_SUPPLIER_INDEX + " -3";
+    public static final String INVALID_PRODUCT_APPLE = " " + PREFIX_PRODUCT + " Iphone16@@@@Pro";
+    public static final String INVALID_PRODUCT_APPLE_EMPTY_SPACE = " " + PREFIX_PRODUCT + "      ";
+    public static final String INVALID_COST_APPLE_NAN = " " + PREFIX_COST + " abcdedfg";
+    public static final String INVALID_COST_APPLE_ZERO = " " + PREFIX_COST + " 0";
+
+    public static final String INVALID_COST_APPLE_NEGATIVE = " " + PREFIX_COST + " -200";
+    public static final String INVALID_COST_APPLE_WRONG_DP = " " + PREFIX_COST + " 200.123";
+    public static final String INVALID_QUANTITY_APPLE_MISSING_UNITS = " " + PREFIX_QUANTITY + " 200";
+    public static final String INVALID_QUANTITY_APPLE_NEGATIVE = " " + PREFIX_QUANTITY + " 200";
+    public static final String INVALID_QUANTITY_APPLE_ZERO = " " + PREFIX_QUANTITY + " 0";
+    public static final String INVALID_QUANTITY_APPLE_NAN = " " + PREFIX_QUANTITY + " abc";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

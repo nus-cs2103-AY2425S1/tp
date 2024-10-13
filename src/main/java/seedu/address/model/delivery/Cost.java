@@ -32,7 +32,9 @@ public class Cost {
      * Returns true if the given string is a valid cost.
      */
     public static boolean isValidCost(String test) {
-        return test.matches(VALIDATION_REGEX);
+        boolean isNumber = test.matches(VALIDATION_REGEX);
+        boolean isValid = isNumber && !(Double.parseDouble(test) == 0);
+        return isValid;
     }
 
     // Give user more options to custom set thier units??

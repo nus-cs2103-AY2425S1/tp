@@ -167,7 +167,7 @@ public class ParserUtil {
         requireNonNull(productName);
         String trimmedProductName = productName.trim();
         if (!Product.isValidProductName(trimmedProductName)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Product.MESSAGE_CONSTRAINTS);
         }
         return new Product(trimmedProductName);
     }

@@ -121,14 +121,16 @@ public class Delivery {
         if (!(other instanceof Delivery)) {
             return false;
         }
-
         Delivery otherDelivery = (Delivery) other;
+        boolean isSameSender = this.sender == null || otherDelivery.sender == null
+                             ? otherDelivery.sender == this.sender
+                             : this.sender.equals(otherDelivery.sender);
         return product.equals(otherDelivery.product)
-                && sender.equals(otherDelivery.sender)
                 && status.equals(otherDelivery.status)
                 && deliveryTime.equals(otherDelivery.deliveryTime)
                 && cost.equals(otherDelivery.cost)
-                && quantity.equals(otherDelivery.quantity);
+                && quantity.equals(otherDelivery.quantity)
+                && isSameSender;
     }
 
     @Override

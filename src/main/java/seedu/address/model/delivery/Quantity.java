@@ -29,6 +29,12 @@ public class Quantity {
         value = quantityFormatter(quantity);
     }
 
+    /**
+     * Checks that input is a number bigger than 0 and contains units
+     *
+     * @param test Input quantity provided by user.
+     * @return True if test contains a number bigger than 0 followed by units.
+     */
     public static boolean isValidQuantity(String test) {
         return test.matches(VALIDATION_REGEX);
     }
