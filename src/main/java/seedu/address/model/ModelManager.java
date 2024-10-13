@@ -54,7 +54,7 @@ public class ModelManager implements Model {
     @Override
     public Person findPersonByNameAndJob(Name name, Job job) {
         for (Person person : addressBook.getPersonList()) {
-            if (person.getName().equals(name) && person.getJob().equals(job)) {
+            if (person.getName().isSameName(name) && person.getJob().isSameJob(job)) {
                 return person;
             }
         }
