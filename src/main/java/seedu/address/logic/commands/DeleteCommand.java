@@ -16,7 +16,7 @@ public abstract class DeleteCommand extends Command {
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         return new ToStringBuilder(this)
                 .add("targetIndex", targetIndex)
                 .toString();
