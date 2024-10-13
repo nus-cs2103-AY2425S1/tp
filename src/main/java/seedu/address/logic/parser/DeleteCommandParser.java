@@ -27,6 +27,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             String[] arr = args.split(",");
             int size = arr.length;
             int[] temp = new int[size];
+            Index[] index = new Index[size];
 
             // converts string to int
             for (int i = 0; i < size; i++) {
@@ -36,17 +37,13 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             Arrays.sort(temp);
             for (int i = 0; i < size; i++) {
                 arr[i] = String.valueOf(temp[i]);
+                index[i] = ParserUtil.parseIndex(arr[i]);
             }
-
-
-            Index index = ParserUtil.parseIndex(args);
             return new DeleteCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
         }
     }
-    
-
 
 }
