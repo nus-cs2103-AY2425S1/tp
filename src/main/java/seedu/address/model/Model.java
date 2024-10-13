@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Person;
 
 /**
@@ -38,6 +39,11 @@ public interface Model {
      * Returns the user prefs' address book file path.
      */
     Path getAddressBookFilePath();
+
+    /**
+     * Returns the person who will be focused on.
+     */
+    Person getFocusedPerson();
 
     /**
      * Sets the user prefs' address book file path.
@@ -75,6 +81,13 @@ public interface Model {
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
     void setPerson(Person target, Person editedPerson);
+
+    /**
+     * Sets the {@code person} in the contact to be focused on in the addressbook.
+     * 
+     * @param index The index of the {@code Person} in the contact list.
+     */
+    void setFocusedPerson(Index index);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

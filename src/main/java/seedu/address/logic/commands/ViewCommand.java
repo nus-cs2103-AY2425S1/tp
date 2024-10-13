@@ -23,7 +23,7 @@ public class ViewCommand extends Command {
             + "Parameters: INDEX (Must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_VIEW_PERSON_SUCCESS = "Person: %1$s";
+    public static final String MESSAGE_VIEW_PERSON_SUCCESS = "Fetched details of person: %1$s";
 
     private final Index targetIndex;
 
@@ -41,9 +41,9 @@ public class ViewCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person p = personList.get(targetIndex.getZeroBased());
+        model.setFocusedPerson(targetIndex);
 
-        return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, Messages.format(p)));
+        return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, targetIndex.getOneBased()));
     }
 
     @Override
