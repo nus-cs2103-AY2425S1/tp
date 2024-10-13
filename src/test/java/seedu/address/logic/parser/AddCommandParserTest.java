@@ -185,7 +185,8 @@ public class AddCommandParserTest {
                 expectedMessage);
 
         // all prefixes missing
-        assertParseFailure(parser, VALID_NAME_BOB + NRIC_DESC_AMY + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB,
+        assertParseFailure(parser, VALID_NAME_BOB + NRIC_DESC_AMY + VALID_PHONE_BOB
+                        + VALID_EMAIL_BOB + VALID_ADDRESS_BOB,
                 expectedMessage);
     }
 
