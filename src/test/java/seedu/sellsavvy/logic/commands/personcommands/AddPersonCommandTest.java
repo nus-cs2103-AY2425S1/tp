@@ -14,6 +14,7 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.sellsavvy.commons.core.GuiSettings;
 import seedu.sellsavvy.logic.Messages;
@@ -157,6 +158,16 @@ public class AddPersonCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyObjectProperty<Person> getSelectedPerson() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateSelectedPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
     }

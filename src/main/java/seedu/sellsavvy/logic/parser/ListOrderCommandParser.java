@@ -4,7 +4,6 @@ import static seedu.sellsavvy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.sellsavvy.commons.core.index.Index;
 import seedu.sellsavvy.logic.commands.ordercommands.ListOrderCommand;
-import seedu.sellsavvy.logic.commands.personcommands.DeletePersonCommand;
 import seedu.sellsavvy.logic.parser.exceptions.ParseException;
 
 /**

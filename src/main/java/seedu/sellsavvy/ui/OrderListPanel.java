@@ -10,7 +10,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.sellsavvy.commons.core.LogsCenter;
-import seedu.sellsavvy.logic.commands.personcommands.AddPersonCommand;
+import seedu.sellsavvy.logic.commands.ordercommands.ListOrderCommand;
 import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.person.Person;
 
@@ -19,9 +19,10 @@ import seedu.sellsavvy.model.person.Person;
  */
 public class OrderListPanel extends UiPart<Region> {
     private static final String FXML = "OrderListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(OrderListPanel.class);
     private static final String DEFAULT_TITLE = "Order";
     private static final String TITLE_WITH_SELECTED_PERSON = "Order( %1$s )";
+
+    private final Logger logger = LogsCenter.getLogger(OrderListPanel.class);
 
     @FXML
     private ListView<Order> orderListView;
@@ -35,7 +36,8 @@ public class OrderListPanel extends UiPart<Region> {
      */
     public OrderListPanel(ReadOnlyObjectProperty<Person> selectedPerson) {
         super(FXML);
-        orderGuide.setText("Use one of the following commands below to view order:\n" + "1. " + AddPersonCommand.MESSAGE_USAGE);
+        orderGuide.setText("Use one of the following commands below to view order:\n" + "1. "
+                + ListOrderCommand.MESSAGE_USAGE);
         updateOrderList(selectedPerson.get());
         selectedPerson.addListener(((observable, oldPerson, newPerson) -> {
             updateOrderList(newPerson);
@@ -54,7 +56,7 @@ public class OrderListPanel extends UiPart<Region> {
         orderListView.setItems(person.getOrderList().asUnmodifiableObservableList());
         orderListView.setCellFactory(listView -> new OrderListViewCell());
         toggleOrderListVisibility(true);
-        orderListTitle.setText(String.format(TITLE_WITH_SELECTED_PERSON,person.getName().fullName));
+        orderListTitle.setText(String.format(TITLE_WITH_SELECTED_PERSON, person.getName().fullName));
     }
 
     /**

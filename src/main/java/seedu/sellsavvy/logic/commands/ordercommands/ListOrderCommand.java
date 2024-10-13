@@ -1,5 +1,9 @@
 package seedu.sellsavvy.logic.commands.ordercommands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+
 import seedu.sellsavvy.commons.core.index.Index;
 import seedu.sellsavvy.logic.Messages;
 import seedu.sellsavvy.logic.commands.Command;
@@ -7,11 +11,6 @@ import seedu.sellsavvy.logic.commands.CommandResult;
 import seedu.sellsavvy.logic.commands.exceptions.CommandException;
 import seedu.sellsavvy.model.Model;
 import seedu.sellsavvy.model.person.Person;
-
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.sellsavvy.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 /**
  * Lists all orders under a specified person to the user.
