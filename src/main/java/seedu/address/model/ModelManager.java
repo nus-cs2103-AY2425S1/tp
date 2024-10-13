@@ -6,6 +6,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -126,6 +128,14 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public List<Person> getManagers() {
+        return addressBook.getPersonList().stream()
+                .filter(person -> person.getTags().stream()
+                        .anyMatch(tag -> tag.tagName.equalsIgnoreCase("manager")))
+                .collect(Collectors.toList());
     }
 
     @Override
