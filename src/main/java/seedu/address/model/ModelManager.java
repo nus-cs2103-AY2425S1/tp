@@ -13,6 +13,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.State;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Student;
 
 /**
@@ -61,6 +62,7 @@ public class ModelManager implements Model {
     public State getState() {
         return this.userPrefs.getState();
     }
+
 
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
@@ -151,7 +153,27 @@ public class ModelManager implements Model {
         updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
 
+    /**
+     * Returns the group with the same group name as {@code groupName} exists in the address book
+     */
+    @Override
+    public Group findGroup(GroupName groupName) {
+        requireNonNull(groupName);
+        return addressBook.findGroupByName(groupName);
+    }
 
+    @Override
+    public boolean containsGroupName(GroupName groupName) {
+        requireNonNull(groupName);
+        return addressBook.containsGroupName(groupName);
+    }
+
+    @Override
+    public void deleteStudentFromGroup(Group group, Student student) {
+        requireNonNull(group);
+        requireNonNull(student);
+        addressBook.deleteStudentFromGroup(group, student);
+    }
 
     //=========== Filtered Student List Accessors =============================================================
 
