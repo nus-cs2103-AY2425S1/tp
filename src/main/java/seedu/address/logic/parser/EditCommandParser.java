@@ -82,6 +82,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         return new EditCommand(new NricMatchesPredicate(patientNric), editPersonDescriptor);
     }
 
+
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
      * If {@code tags} contain only one element which is an empty string, it will be parsed into a
@@ -96,5 +97,4 @@ public class EditCommandParser implements Parser<EditCommand> {
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
-
 }
