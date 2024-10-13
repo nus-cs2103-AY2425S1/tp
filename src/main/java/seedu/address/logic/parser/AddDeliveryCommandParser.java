@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPPLIER_INDEX;
 
-
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddDeliveryCommand;

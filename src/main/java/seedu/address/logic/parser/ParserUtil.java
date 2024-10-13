@@ -150,6 +150,10 @@ public class ParserUtil {
     public static SupplierIndex parseSupplierIndex(String supplierIndex) throws ParseException {
         requireNonNull(supplierIndex);
         String trimmedSupplierIndex = supplierIndex.trim();
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedSupplierIndex)
+                || !SupplierIndex.isValidIndex(trimmedSupplierIndex)) {
+            throw new ParseException(SupplierIndex.MESSAGE_CONSTRAINTS);
+        }
         return new SupplierIndex(trimmedSupplierIndex);
     }
 
@@ -193,7 +197,7 @@ public class ParserUtil {
         requireNonNull(cost);
         String trimmedCost = cost.trim();
         if (!Cost.isValidCost(trimmedCost)) {
-            throw new ParseException(Quantity.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Cost.MESSAGE_CONSTRAINTS);
         }
         return new Cost(trimmedCost);
     }

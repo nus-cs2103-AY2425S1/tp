@@ -1,17 +1,42 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPPLIER_INDEX;
+
+import java.util.List;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.delivery.Delivery;
+import seedu.address.model.delivery.SupplierIndex;
+import seedu.address.model.person.Person;
 
 /**
  * Adds a delivery to the address book.
  */
 public class AddDeliveryCommand extends Command {
-    public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_WORD = "add -d";
+
+    //to change later
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a delivery to the address book. "
+            + "Parameters: "
+            + PREFIX_DATETIME + " dd-mm-yyyy hh:mm "
+            + PREFIX_SUPPLIER_INDEX + " SUPPLIER_INDEX "
+            + PREFIX_PRODUCT + " PRODUCT "
+            + PREFIX_QUANTITY + " QUANTITY kg/g/litres/ml/units"
+            + PREFIX_COST + " COST\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_DATETIME + " 18-06-2024 17:00 "
+            + PREFIX_SUPPLIER_INDEX + " 1 "
+            + PREFIX_PRODUCT + " bread "
+            + PREFIX_QUANTITY + " 500g "
+            + PREFIX_COST + " 25.50 ";
     public static final String MESSAGE_SUCCESS = "New delivery added: %1$s";
     public static final String MESSAGE_DUPLICATE_DELIVERY = "Delivery is already added!!!";
     private final Delivery deliveryToAdd;
@@ -25,13 +50,19 @@ public class AddDeliveryCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
-        if (false) {
+        //Need to update when list changes name
+        List<Person> lastShownList = model.getFilteredPersonList();
+        SupplierIndex supplierIndex = this.deliveryToAdd.getSupplierIndex();
+        if (supplierIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+        Person sender = lastShownList.get(supplierIndex.getZeroBased());
+        this.deliveryToAdd.setDeliverySender(sender);
+        if (model.hasDelivery(deliveryToAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_DELIVERY);
         }
-
-        //create new method in Model interface
-        return new CommandResult(String.format(MESSAGE_SUCCESS, this.deliveryToAdd));
+        model.addDelivery(this.deliveryToAdd);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(this.deliveryToAdd)));
     }
 
     /**

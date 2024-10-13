@@ -9,7 +9,7 @@ public class SupplierIndex {
     public static final String MESSAGE_CONSTRAINTS =
             "SupplierIndex should be a positive number greater than 0"
                     + " and smaller than total number of suppliers";
-    public final String index;
+    public final int index;
 
     /**
      * Constructs a {@code SupplierIndex}.
@@ -19,23 +19,26 @@ public class SupplierIndex {
     public SupplierIndex(String index) {
         requireNonNull(index);
         checkArgument(isValidIndex(index), MESSAGE_CONSTRAINTS);
-        this.index = index;
+        this.index = Integer.parseInt(index);
     }
 
     /**
-     * Returns true if the given string is a valid index.
+     * Returns true if the given string represents a positive-ingeger.
+     *
+     * @param test String value of Supplier_index provided by user.
+     * @return True if test is an nteger and false otherwise.
      */
     public static boolean isValidIndex(String test) {
         try {
             Integer.parseInt(test);
-            return true;
         } catch (NumberFormatException e) {
             return false;
         }
+        return true;
     }
     @Override
     public String toString() {
-        return index;
+        return "" + index;
     }
 
     @Override
@@ -49,11 +52,20 @@ public class SupplierIndex {
         }
 
         SupplierIndex otherSupplierIndex = (SupplierIndex) other;
-        return index.equals(otherSupplierIndex.index);
+        return index == otherSupplierIndex.index;
     }
 
     @Override
     public int hashCode() {
-        return index.hashCode();
+        return ((Integer) index).hashCode();
+    }
+
+    /**
+     * Represents the index provided by user minus 1.
+     *
+     * @return Index of Supplier in ObservableList.
+     */
+    public int getZeroBased() {
+        return this.index - 1;
     }
 }

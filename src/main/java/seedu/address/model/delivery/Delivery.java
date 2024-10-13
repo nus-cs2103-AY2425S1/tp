@@ -52,7 +52,7 @@ public class Delivery {
      */
     public Delivery(Product product, Person sender, Status status, Time deliveryTime, Cost cost,
                     Quantity quantity, SupplierIndex supplierIndex) {
-        requireAllNonNull(product, sender, status, deliveryTime, cost, quantity, supplierIndex);
+        requireAllNonNull(product, status, deliveryTime, cost, quantity, supplierIndex);
         this.product = product;
         this.sender = sender;
         this.status = status;
@@ -87,6 +87,9 @@ public class Delivery {
 
     public Quantity getDeliveryQuantity() {
         return this.quantity;
+    }
+    public void setDeliverySender(Person sender) {
+        this.sender = sender;
     }
 
 
