@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -42,6 +43,14 @@ public class SearchBox extends UiPart<Region> {
     @FXML
     private void handleCommandUpdate() {
         String commandText = searchBoxField.getText();
+
+        if (commandText.equals("")) {
+            try {
+                commandExecutor.execute(ListCommand.COMMAND_WORD);
+            } catch (CommandException | ParseException e) {
+                return;
+            }
+        }
 
         try {
             commandExecutor.execute(String.format("%s %s",
