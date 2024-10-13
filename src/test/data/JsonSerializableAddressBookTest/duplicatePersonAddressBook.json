@@ -6,7 +6,8 @@
     "address": "123, Jurong West Ave 6, #08-111",
     "schedule": "Sunday-1800-1900",
     "subject" : "Mathematics",
-    "rate": "250.50"
+    "rate": "250.50",
+    "owedAmount": "250.50"
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
@@ -14,6 +15,7 @@
     "address": "4th street",
     "schedule": "Saturday-1800-1900",
     "subject" : "Mathematics",
-    "rate": "250.50"
+    "rate": "250.50",
+    "owedAmount": "250.50"
   } ]
 }

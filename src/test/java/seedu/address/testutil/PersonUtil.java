@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_OWED_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
@@ -36,6 +37,7 @@ public class PersonUtil {
         sb.append(PREFIX_SCHEDULE + person.getSchedule().value + " ");
         sb.append(PREFIX_SUBJECT + person.getSubject().toString() + " ");
         sb.append(PREFIX_RATE + person.getRate().toString() + " ");
+        sb.append(PREFIX_OWED_AMOUNT + person.getOwedAmount().toString() + " ");
         return sb.toString();
     }
 

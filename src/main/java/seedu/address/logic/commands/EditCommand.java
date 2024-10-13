@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_OWED_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
@@ -23,6 +24,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.OwedAmount;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Rate;
@@ -45,14 +47,16 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_SCHEDULE + "SCHEDULE] "
-            + "[" + PREFIX_SUBJECT + "SUBJECT]] "
+            + "[" + PREFIX_SUBJECT + "SUBJECT] "
             + "[" + PREFIX_RATE + "RATE] "
+            + "[" + PREFIX_OWED_AMOUNT + "OWED] "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com"
-            + PREFIX_SCHEDULE + "Saturday-1000-1200"
-            + PREFIX_SUBJECT + "Mathematics"
-            + PREFIX_RATE + "300";
+            + PREFIX_EMAIL + "johndoe@example.com "
+            + PREFIX_SCHEDULE + "Saturday-1000-1200 "
+            + PREFIX_SUBJECT + "Mathematics "
+            + PREFIX_RATE + "300 "
+            + PREFIX_OWED_AMOUNT + "300 ";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -108,9 +112,11 @@ public class EditCommand extends Command {
         Schedule updatedSchedule = editPersonDescriptor.getSchedule().orElse(personToEdit.getSchedule());
         Subject updatedSubject = editPersonDescriptor.getSubject().orElse(personToEdit.getSubject());
         Rate updatedRate = editPersonDescriptor.getRate().orElse(personToEdit.getRate());
+        OwedAmount updatedOwedAmount = editPersonDescriptor.getOwedAmount().orElse(personToEdit.getOwedAmount());
 
         return new Person(
-                updatedName, updatedPhone, updatedEmail, updatedAddress, updatedSchedule, updatedSubject, updatedRate
+                updatedName, updatedPhone, updatedEmail, updatedAddress, updatedSchedule, updatedSubject, updatedRate,
+                updatedOwedAmount
         );
     }
 
@@ -150,6 +156,7 @@ public class EditCommand extends Command {
         private Schedule schedule;
         private Subject subject;
         private Rate rate;
+        private OwedAmount owedAmount;
 
         public EditPersonDescriptor() {}
 
@@ -164,13 +171,14 @@ public class EditCommand extends Command {
             setSchedule(toCopy.schedule);
             setSubject(toCopy.subject);
             setRate(toCopy.rate);
+            setOwedAmount(toCopy.owedAmount);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, schedule, rate);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, schedule, rate, owedAmount);
         }
 
         public void setName(Name name) {
@@ -228,6 +236,13 @@ public class EditCommand extends Command {
             return Optional.ofNullable(rate);
         }
 
+        public void setOwedAmount(OwedAmount owedAmount) {
+            this.owedAmount = owedAmount;
+        }
+
+        public Optional<OwedAmount> getOwedAmount() {
+            return Optional.ofNullable(owedAmount);
+        }
 
         @Override
         public boolean equals(Object other) {
