@@ -13,6 +13,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentList;
+import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.student.Student;
 import seedu.address.model.tut.Tut;
 
@@ -144,8 +145,31 @@ public class ModelManager implements Model {
 
     @Override
     public void addAssignment(Assignment assignment) {
+        requireNonNull(assignment);
+
         assignmentList.addAssignment(assignment);
     }
+
+    @Override
+    public String checkAssignment(Assignment assignment) throws AssignmentNotFoundException {
+        requireNonNull(assignment);
+
+        return assignmentList.getStatus(assignment, addressBook.getStudentList());
+    }
+
+    @Override
+    public void setAssignmentStatus(Assignment assignment, Student targetStudent, boolean newStatus)
+            throws AssignmentNotFoundException {
+        requireAllNonNull(targetStudent, newStatus);
+
+        assignmentList.setStatus(assignment, targetStudent, newStatus);
+    }
+
+    @Override
+    public String listAssignments() {
+        return assignmentList.toString();
+    }
+
 
     //=========== Filtered Student List Accessors =============================================================
 

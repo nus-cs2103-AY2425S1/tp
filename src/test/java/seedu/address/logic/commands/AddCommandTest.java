@@ -24,6 +24,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentList;
+import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.student.Student;
 import seedu.address.model.tut.Tut;
 import seedu.address.testutil.StudentBuilder;
@@ -157,6 +158,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public String checkAssignment(Assignment assignment) throws AssignmentNotFoundException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasAssignment(Assignment assignment) {
             throw new AssertionError("This method should not be called.");
         }
@@ -185,6 +191,17 @@ public class AddCommandTest {
         public void addTutorial(Tut toAdd) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void setAssignmentStatus(Assignment assignment, Student student, boolean status)
+                throws AssignmentNotFoundException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String listAssignments() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -206,7 +223,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that always accept the student being added.
+     * A Model stub that always accepts the student being added.
      */
     private class ModelStubAcceptingStudentAdded extends ModelStub {
         final ArrayList<Student> studentsAdded = new ArrayList<>();
