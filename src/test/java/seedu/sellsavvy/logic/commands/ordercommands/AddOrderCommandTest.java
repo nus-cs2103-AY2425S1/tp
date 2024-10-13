@@ -1,11 +1,15 @@
 package seedu.sellsavvy.logic.commands.ordercommands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.sellsavvy.logic.commands.ordercommands.AddOrderCommand.MESSAGE_DUPLICATE_WARNING;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.assertCommandFailure;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.assertCommandSuccess;
 import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.showPersonAtIndex;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.sellsavvy.testutil.TypicalOrders.ABACUS;
 import static seedu.sellsavvy.testutil.TypicalOrders.BLOCKS;
 import static seedu.sellsavvy.testutil.TypicalPersons.getTypicalAddressBook;
@@ -101,5 +105,33 @@ public class AddOrderCommandTest {
         AddOrderCommand addOrderCommand = new AddOrderCommand(outOfBoundIndex, ABACUS);
 
         assertCommandFailure(addOrderCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void equals() {
+        final AddOrderCommand standardCommand = new AddOrderCommand(INDEX_FIRST_PERSON, ABACUS);
+
+        // same object -> returns true
+        assertTrue(standardCommand.equals(standardCommand));
+
+        // same values -> returns true
+        assertTrue(standardCommand.equals(new AddOrderCommand(INDEX_FIRST_PERSON, ABACUS)));
+
+        // null -> returns false
+        assertFalse(standardCommand.equals(null));
+
+        // different Index -> returns false
+        assertFalse(standardCommand.equals(new AddOrderCommand(INDEX_SECOND_PERSON, ABACUS)));
+
+        // different item -> returns false
+        assertFalse(standardCommand.equals(new AddOrderCommand(INDEX_FIRST_PERSON, BLOCKS)));
+    }
+
+    @Test
+    public void toStringMethod() {
+        AddOrderCommand addOrderCommand = new AddOrderCommand(INDEX_FIRST_PERSON, ABACUS);
+        String expected = AddOrderCommand.class.getCanonicalName()
+                + "{index=" + INDEX_FIRST_PERSON + ", order=" + ABACUS + "}";
+        assertEquals(expected, addOrderCommand.toString());
     }
 }
