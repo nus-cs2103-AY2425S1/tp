@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -23,6 +24,7 @@ import seedu.address.model.student.PresentDates;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.TutorialClass;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tut.Tut;
 import seedu.address.model.tut.TutDate;
 
 /**
@@ -34,8 +36,9 @@ public class ParserUtil {
     private static final String DATE_TIME_FORMAT = "yyyy-MM-dd HHmm";
 
     /**
-     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
-     * trimmed.
+     * Parses {@code oneBasedIndex} into an {@code Index} and returns it.
+     * Leading and trailing whitespaces will be trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -57,6 +60,21 @@ public class ParserUtil {
         String trimmedName = name.trim();
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        return new Name(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String tutName} into a {@code Name}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code tutName} is invalid.
+     */
+    public static Name parseTutName(String tutName) throws ParseException {
+        requireNonNull(tutName);
+        String trimmedName = tutName.trim();
+        if (!Name.isValidName(trimmedName)) {
+            throw new ParseException(Tut.MESSAGE_NAME_CONSTRAINTS);
         }
         return new Name(trimmedName);
     }
@@ -164,8 +182,30 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a tutorial id and converts it into an integer.
+     *
+     * @param id String id of the tutorial.
+     * @return an integer id of the tutorial.
+     * @throws ParseException if the id is invalid.
+     */
+    public static int parseTutIndex(String id) throws ParseException {
+        requireNonNull(id);
+        String trimmedId = id.trim();
+        checkArgument(checkUsingIsDigitMethod(trimmedId), Tut.MESSAGE_ID_CONSTRAINTS);
+        return Integer.parseInt(trimmedId);
+    }
+
+    static boolean checkUsingIsDigitMethod(String input) {
+        for (char c : input.toCharArray()) {
+            if (!Character.isDigit(c)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
      * Parses a date string in the format "dd/MM/yyyy" and converts it to a {@link TutDate} object.
-     * If the input string does not match the expected format, a {@link ParseException} is thrown.
      *
      * @param date The date string in the format "dd/MM/yyyy".
      * @return A {@link TutDate} object representing the parsed date.
@@ -182,13 +222,10 @@ public class ParserUtil {
 
     /**
      * Parses a collection of date strings and converts them into a {@link PresentDates} object.
-     * Each string must be in the format "dd/MM/yyyy", and all dates will be parsed and added
-     * to the resulting {@link PresentDates} collection.
      *
      * @param presentDates A collection of date strings in the format "dd/MM/yyyy".
      * @return A {@link PresentDates} object containing the parsed dates.
      * @throws ParseException If any of the date strings cannot be parsed.
-     * @throws NullPointerException If the provided collection is null.
      */
     public static PresentDates parseDates(Collection<String> presentDates) throws ParseException {
         requireNonNull(presentDates);
@@ -200,12 +237,10 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a due date string into local date time object.
+     * Parses a due date string into a {@link LocalDateTime} object.
      *
      * @param dueDateString String representing due date.
-     *
-     * @return LocalDateTime object with given due date.
-     *
+     * @return {@link LocalDateTime} object with given due date.
      * @throws ParseException if the given string is invalid.
      */
     public static LocalDateTime parseDueDate(String dueDateString) throws ParseException {

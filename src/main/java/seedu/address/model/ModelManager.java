@@ -15,6 +15,7 @@ import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.student.Student;
+import seedu.address.model.tut.Tut;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -115,6 +116,17 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedStudent);
 
         addressBook.setStudent(target, editedStudent);
+    }
+    @Override
+    public void addTutorial(Tut tutorial) {
+        requireNonNull(tutorial);
+        addressBook.addTutorial(tutorial);
+    }
+
+    @Override
+    public boolean hasTutorial(Tut tutorial) {
+        requireNonNull(tutorial);
+        return addressBook.hasTutorial(tutorial);
     }
 
     //=========== Assignment ================================================================================

@@ -9,6 +9,7 @@ import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.student.Student;
+import seedu.address.model.tut.Tut;
 
 /**
  * The API of the Model component.
@@ -89,6 +90,10 @@ public interface Model {
      */
     void updateFilteredStudentList(Predicate<Student> predicate);
 
+    boolean hasTutorial(Tut tutorial);
+    void addTutorial(Tut toAdd);
+
+
     /** Returns the AssignmentList */
     AssignmentList getAssignmentList();
 
@@ -102,6 +107,7 @@ public interface Model {
      * {@code assignment} must not already exist in the assignment list.
      */
     void addAssignment(Assignment assignment);
+
 
     /**
      * Deletes the specified assignment.
