@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentList;
+import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.student.Student;
 
 /**
@@ -101,4 +102,11 @@ public interface Model {
      * {@code assignment} must not already exist in the assignment list.
      */
     void addAssignment(Assignment assignment);
+
+    /**
+     * check the completion statuses of the specified assignment.
+     * @param assignment Assignment to be checked.
+     * @return String representing the completion statuses.
+     */
+    String checkAssignment(Assignment assignment) throws AssignmentNotFoundException;
 }

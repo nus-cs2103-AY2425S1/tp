@@ -2,7 +2,10 @@ package seedu.address.model.assignment;
 
 import java.util.ArrayList;
 
+import javafx.collections.ObservableList;
+import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.assignment.exceptions.DuplicateAssignmentException;
+import seedu.address.model.student.Student;
 
 /**
  * Represents a list of assignments.
@@ -50,6 +53,31 @@ public class AssignmentList {
      */
     public boolean hasAssignment(Assignment assignment) {
         return this.assignments.contains(assignment);
+    }
+
+    /**
+     * Returns completion statuses of all students for the specified assignment.
+     * @param assignment Assignment to be checked.
+     * @param studentList Current list of students.
+     * @return String representing statuses for the assignment.
+     * @throws AssignmentNotFoundException If the assignment is not found.
+     */
+    public String getStatus(Assignment assignment, ObservableList<Student> studentList)
+            throws AssignmentNotFoundException {
+        Assignment targetAssignment = assignments.stream()
+                .filter(assignment::equals)
+                .findFirst()
+                .orElseThrow(AssignmentNotFoundException::new);
+        StringBuilder completedList = new StringBuilder("Students who have completed: \n");
+        StringBuilder uncompletedList = new StringBuilder("Students who have not completed: \n");
+        for (Student student : studentList) {
+            if (targetAssignment.getStatus(Integer.parseInt(student.getStudentId().value))) {
+                completedList.append(student.getName()).append(", ");
+            } else {
+                uncompletedList.append(student.getName()).append(", ");
+            }
+        }
+        return completedList.append("\n").append(uncompletedList).toString();
     }
 
     @Override
