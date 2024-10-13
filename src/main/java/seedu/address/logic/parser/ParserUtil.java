@@ -103,7 +103,6 @@ public class ParserUtil {
      * @throws ParseException if the given {@code workExp} is invalid.
      */
     public static WorkExp parseWorkExp(String workExp) throws ParseException {
-        requireNonNull(workExp);
         String trimmedWorkExp = workExp.trim();
         if (!WorkExp.isValidWorkExp(trimmedWorkExp)) {
             throw new ParseException(WorkExp.MESSAGE_CONSTRAINTS);

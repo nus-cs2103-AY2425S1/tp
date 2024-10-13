@@ -18,7 +18,7 @@ public class WorkExp {
      * The role and company names should start with an uppercase letter.
      * Year should be a 4-digit number.
      */
-    public static final String VALIDATION_REGEX = "^[A-Z][a-zA-Z ]*,[A-Z][a-zA-Z ]*,\\d{4}$";
+    public static final String VALIDATION_REGEX = "^[A-Z][a-zA-Z ]*,[A-Z][a-zA-Z ]*,\\d{4}$|^$";
 
     public final String value;
 
@@ -28,7 +28,6 @@ public class WorkExp {
      * @param workExp A valid work experience string.
      */
     public WorkExp(String workExp) {
-        requireNonNull(workExp);
         checkArgument(isValidWorkExp(workExp), MESSAGE_CONSTRAINTS);
         value = workExp;
     }
