@@ -27,6 +27,14 @@ public class RoleTest {
     }
 
     @Test
+    public void defaultConstructor_inputArraysWithDifferentLength_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Role(new ModuleCode[]{new ModuleCode("CS1101S")},
+                    new String[]{"Hello", "Goodbye"});
+        });
+    }
+
+    @Test
     public void alternateConstructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> {
             new Role(null);
