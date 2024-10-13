@@ -50,7 +50,9 @@ public class Messages {
                 .append("; Fee: ")
                 .append(person.getRate())
                 .append("; Paid: ")
-                .append(person.getPaid());
+                .append(person.getPaid())
+                .append("; Owed: ")
+                .append(person.getOwedAmount());
 
         return builder.toString();
     }

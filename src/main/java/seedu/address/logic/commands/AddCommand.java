@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_OWED_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RATE;
@@ -14,6 +15,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.OwedAmount;
 import seedu.address.model.person.Person;
 
 /**
@@ -33,6 +35,7 @@ public class AddCommand extends Command {
             + PREFIX_SUBJECT + "SUBJECT "
             + PREFIX_RATE + "FEE "
             + "[" + PREFIX_PAID + "PAID] "
+            + "[" + PREFIX_OWED_AMOUNT + "OWED] "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
@@ -41,7 +44,8 @@ public class AddCommand extends Command {
             + PREFIX_SCHEDULE + "Sunday-1000-1200 "
             + PREFIX_SUBJECT + "Biology "
             + PREFIX_RATE + "3000 "
-            + PREFIX_PAID + "6000";
+            + PREFIX_PAID + "6000 "
+            + PREFIX_OWED_AMOUNT + "3000 ";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";

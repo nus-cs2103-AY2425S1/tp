@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_OWED_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RATE;
@@ -31,8 +32,8 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
-    public static final String VALID_PHONE_AMY = "11111111";
-    public static final String VALID_PHONE_BOB = "22222222";
+    public static final String VALID_PHONE_AMY = "91111111";
+    public static final String VALID_PHONE_BOB = "82222222";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
@@ -45,6 +46,8 @@ public class CommandTestUtil {
     public static final String VALID_RATE_BOB = "300.25";
     public static final String VALID_PAID_AMY = "750.00";
     public static final String VALID_PAID_BOB = "0.0";
+    public static final String VALID_OWED_AMOUNT_AMY = "500.00";
+    public static final String VALID_OWED_AMOUNT_BOB = "300.25";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -62,6 +65,8 @@ public class CommandTestUtil {
     public static final String RATE_DESC_BOB = " " + PREFIX_RATE + VALID_RATE_BOB;
     public static final String PAID_DESC_AMY = " " + PREFIX_PAID + VALID_PAID_AMY;
     public static final String PAID_DESC_BOB = " " + PREFIX_PAID + VALID_PAID_BOB;
+    public static final String OWED_AMOUNT_DESC_AMY = " " + PREFIX_OWED_AMOUNT + VALID_OWED_AMOUNT_AMY;
+    public static final String OWED_AMOUNT_DESC_BOB = " " + PREFIX_OWED_AMOUNT + VALID_OWED_AMOUNT_BOB;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -71,6 +76,7 @@ public class CommandTestUtil {
     public static final String INVALID_SUBJECT_DESC = " " + PREFIX_SUBJECT + "Physical education";
     public static final String INVALID_RATE_DESC = " " + PREFIX_RATE + "12.398";
     public static final String INVALID_PAID_DESC = " " + PREFIX_PAID + " ";
+    public static final String INVALID_OWED_AMOUNT_DESC = " " + PREFIX_OWED_AMOUNT + "19.000";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -82,11 +88,11 @@ public class CommandTestUtil {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withSchedule(VALID_SCHEDULE_AMY).withSubject(VALID_SUBJECT_AMY).withRate(VALID_RATE_AMY)
-                .withPaid(VALID_PAID_AMY).build();
+                .withPaid(VALID_PAID_AMY).withOwedAmount(VALID_OWED_AMOUNT_AMY).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withSchedule(VALID_SCHEDULE_BOB).withSubject(VALID_SUBJECT_BOB).withRate(VALID_RATE_BOB)
-                .withPaid(VALID_PAID_BOB).build();
+                .withPaid(VALID_PAID_BOB).withOwedAmount(VALID_OWED_AMOUNT_BOB).build();
     }
 
     /**

@@ -8,6 +8,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.OwedAmount;
 import seedu.address.model.person.Paid;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Rate;
@@ -125,7 +126,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String rate} into an {@code Rate}
+     * Parses a {@code String rate} into a {@code Rate}
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code rate} is invalid.
@@ -151,5 +152,20 @@ public class ParserUtil {
             throw new ParseException(Paid.MESSAGE_CONSTRAINTS);
         }
         return new Paid(trimmedPaid);
+    }
+
+    /**
+     * Parses a {@code String owedAmount} into an {@code OwedAmount}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the {@code owedAmount} is invalid.
+     */
+    public static OwedAmount parseOwedAmount(String owedAmount) throws ParseException {
+        requireNonNull(owedAmount);
+        String trimmedOwedAmount = owedAmount.trim();
+        if (!OwedAmount.isValidOwedAmount(trimmedOwedAmount)) {
+            throw new ParseException(OwedAmount.MESSAGE_CONSTRAINTS);
+        }
+        return new OwedAmount(trimmedOwedAmount);
     }
 }

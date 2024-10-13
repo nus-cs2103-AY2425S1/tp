@@ -23,12 +23,13 @@ public class Person {
     private final Subject subject;
     private final Rate rate;
     private final Paid paid;
+    private final OwedAmount owedAmount;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Schedule schedule,
-            Subject subject, Rate rate, Paid paid) {
+            Subject subject, Rate rate, Paid paid, OwedAmount owedAmount) {
         requireAllNonNull(name, phone, email, address);
         this.name = name;
         this.phone = phone;
@@ -38,6 +39,7 @@ public class Person {
         this.subject = subject;
         this.rate = rate;
         this.paid = paid;
+        this.owedAmount = owedAmount;
     }
 
     public Name getName() {
@@ -70,13 +72,9 @@ public class Person {
     public Paid getPaid() {
         return paid;
     }
-    /**
-     * Returns a new {@code Person} instance with the updated
-     * @param paid
-     * @return
-     */
-    public Person withPaid(Paid paid) {
-        return new Person(name, phone, email, address, schedule, subject, rate, paid);
+
+    public OwedAmount getOwedAmount() {
+        return owedAmount;
     }
 
     /**
@@ -89,7 +87,8 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getName().equals(getName())
+                && otherPerson.getPhone().equals(getPhone());
     }
 
     /**
@@ -115,13 +114,14 @@ public class Person {
                 && schedule.equals(otherPerson.schedule)
                 && subject.equals(otherPerson.subject)
                 && rate.equals(otherPerson.rate)
-                && paid.equals(otherPerson.paid);
+                && paid.equals(otherPerson.paid)
+                && owedAmount.equals(otherPerson.owedAmount);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, schedule, subject, rate, paid);
+        return Objects.hash(name, phone, email, address, schedule, subject, rate, paid, owedAmount);
     }
 
     @Override
@@ -135,6 +135,7 @@ public class Person {
                 .add("subject", subject)
                 .add("rate", rate)
                 .add("paid", paid)
+                .add("owedAmount", owedAmount)
                 .toString();
     }
 
