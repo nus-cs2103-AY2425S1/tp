@@ -148,7 +148,7 @@
     -fx-min-width: 30;
     -fx-alignment: center;
     -fx-background-radius: 3;
-    -fx-padding: 0 2 0 2;
+    -fx-padding: 1 2 0 2;
 }
 
 .stack-pane {
@@ -348,10 +348,12 @@
     -fx-text-fill: black;
 }
 
-.detail-panel-placeholder .content {
-    -fx-background-color:  #504f4f;
-    -fx-background-radius: 0;
-    -fx-border-radius: 2;
+#detailPanel {
+    -fx-padding: 15 20 15 20;
+}
+
+#detailPanelVBox .label {
+    -fx-text-fill: white;
 }
 
 

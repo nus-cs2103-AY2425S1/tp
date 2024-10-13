@@ -7,12 +7,15 @@
            xmlns:fx="http://javafx.com/fxml"
            fx:id="detailPanel"
            styleClass="pane-with-border">
-    <Label fx:id="name" />
-    <Label fx:id="id" />
-    <Label fx:id="phone" />
-    <Label fx:id="address" />
-    <Label fx:id="email" />
-    <Label fx:id="role" />
-    <Label fx:id="major" />
-    <FlowPane fx:id="tags" />
+    <VBox fx:id="detailPanelVBox">
+        <Label fx:id="name" />
+        <Label fx:id="id" />
+        <Label fx:id="phone" />
+        <Label fx:id="address" />
+        <Label fx:id="email" />
+        <Label fx:id="role" />
+        <Label fx:id="major" />
+        <FlowPane fx:id="tags" />
+    </VBox>
+
 </StackPane>
