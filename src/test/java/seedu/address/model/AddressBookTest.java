@@ -18,6 +18,10 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.event.Date;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.Name;
+import seedu.address.model.event.exceptions.DuplicateEventException;
 import seedu.address.model.vendor.Vendor;
 import seedu.address.model.vendor.exceptions.DuplicateVendorException;
 import seedu.address.testutil.VendorBuilder;
@@ -25,6 +29,8 @@ import seedu.address.testutil.VendorBuilder;
 public class AddressBookTest {
 
     private final AddressBook addressBook = new AddressBook();
+    private final Event testEvent = new Event(new Name("Test Event"), new Date("2024-10-11"));
+    private final Event similarTestEvent = new Event(new Name("Test Event"), new Date("2023-05-20"));
 
     @Test
     public void constructor() {
@@ -79,13 +85,63 @@ public class AddressBookTest {
     }
 
     @Test
+    public void hasEvent_nullEvent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasEvent(null));
+    }
+
+    @Test
+    public void hasEvent_eventNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasEvent(testEvent));
+    }
+
+    @Test
+    public void hasEvent_eventInAddressBook_returnsTrue() {
+        addressBook.addEvent(testEvent);
+        assertTrue(addressBook.hasEvent(testEvent));
+    }
+
+    @Test
+    public void hasEvent_eventWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.addEvent(testEvent);
+        assertTrue(addressBook.hasEvent(similarTestEvent));
+    }
+
+    // might be redundant has this is already tested in UniqueEventListTest.java
+    @Test
+    public void addEvent_nullEvent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.addEvent(null));
+    }
+
+    // might be redundant has this is already tested in UniqueEventListTest.java
+    @Test
+    public void addEvent_eventInAddressBook_throwsDuplicateEventException() {
+        addressBook.addEvent(testEvent);
+        assertThrows(DuplicateEventException.class, () -> addressBook.addEvent(testEvent));
+    }
+
+    // might be redundant has this is already tested in UniqueEventListTest.java
+    @Test
+    public void addEvent_eventWithSameIdentityFieldsInAddressBook_throwsDuplicateEventException() {
+        addressBook.addEvent(testEvent);
+        assertThrows(DuplicateEventException.class, () -> addressBook.addEvent(testEvent));
+    }
+
+    @Test
     public void getVendorList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getVendorList().remove(0));
     }
 
     @Test
+    public void getEventList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getEventList().remove(0));
+    }
+
+    @Test
     public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName() + "{vendors=" + addressBook.getVendorList() + "}";
+        String expected = AddressBook.class.getCanonicalName()
+                + "{vendors=" + addressBook.getVendorList() + ", "
+                + "events=" + addressBook.getEventList()
+                + "}";
         assertEquals(expected, addressBook.toString());
     }
 
@@ -95,6 +151,7 @@ public class AddressBookTest {
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Vendor> vendors = FXCollections.observableArrayList();
+        private final ObservableList<Event> events = FXCollections.observableArrayList();
 
         AddressBookStub(Collection<Vendor> vendors) {
             this.vendors.setAll(vendors);
@@ -103,6 +160,11 @@ public class AddressBookTest {
         @Override
         public ObservableList<Vendor> getVendorList() {
             return vendors;
+        }
+
+        @Override
+        public ObservableList<Event> getEventList() {
+            return events;
         }
     }
 
