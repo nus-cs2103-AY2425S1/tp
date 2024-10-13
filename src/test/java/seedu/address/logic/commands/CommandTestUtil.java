@@ -61,6 +61,8 @@ public class CommandTestUtil {
     public static final String VALID_REMARK_GEORGE = "avid reader";
     public static final String VALID_REMARK_HOON = "loves animals";
     public static final String VALID_REMARK_IDA = "enjoys painting";
+    public static final String VALID_BIRTHDAY_AMY = "2000-03-15";
+    public static final String VALID_BIRTHDAY_BOB = "1999-01-27";
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
