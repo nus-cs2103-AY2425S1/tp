@@ -1,9 +1,9 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_WEDDING;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_BIRTHDAY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_WEDDING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BIRTHDAY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_BIRTHDAY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_WEDDING;
 
 import java.util.ArrayList;
 import java.util.Arrays;
