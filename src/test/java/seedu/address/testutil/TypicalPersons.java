@@ -47,7 +47,8 @@ public class TypicalPersons {
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz")
             .withNric("S6482983A").withPhone("9482427")
             .withEmail("lydia@example.com").withAddress("little tokyo").build();
-    public static final Person GEORGE = new PersonBuilder().withName("George Best").withNric("G3536933F").withPhone("9482442")
+    public static final Person GEORGE = new PersonBuilder().withName("George Best")
+            .withNric("G3536933F").withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street").build();
 
     // Manually added
