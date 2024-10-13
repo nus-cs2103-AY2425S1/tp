@@ -105,6 +105,8 @@ public class GradeList {
         return summary;
     }
 
+    // TODO: Check if total weightage has crossed 100%
+
     /**
      * Returns true if the grade list is empty.
      *
