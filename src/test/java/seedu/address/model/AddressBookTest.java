@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -18,6 +19,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
@@ -76,6 +78,61 @@ public class AddressBookTest {
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(addressBook.hasPerson(editedAlice));
+    }
+
+    @Test
+    public void findPersonsWithName_nullName_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.findPersonsWithName(null));
+    }
+
+    @Test
+    public void findPersonsWithName_personNotInAddressBook_returnsEmptyList() {
+        List<Person> resultList = new ArrayList<>();
+        assertEquals(addressBook.findPersonsWithName(ALICE.getName()), resultList);
+    }
+
+    @Test
+    public void findPersonsWithName_personInAddressBook_returnsPersonList() {
+        List<Person> resultList = new ArrayList<>();
+        resultList.add(ALICE);
+        addressBook.addPerson(ALICE);
+        assertEquals(addressBook.findPersonsWithName(ALICE.getName()), resultList);
+    }
+
+    @Test
+    public void findPersonsWithName_personWithPartOfNameNotInAddressBook_returnsEmptyList() {
+        List<Person> resultList = new ArrayList<>();
+
+        addressBook.addPerson(ALICE);
+        String nameString = ALICE.getName().toString();
+        String partOfNameString = nameString.substring(0, nameString.length() - 1);
+        Name partOfName = new Name(partOfNameString);
+
+        assertEquals(addressBook.findPersonsWithName(partOfName), resultList);
+    }
+
+    @Test
+    public void findPersonsWithName_personWithLowerCasedNameInAddressBook_returnsPersonList() {
+        List<Person> resultList = new ArrayList<>();
+        resultList.add(ALICE);
+
+        addressBook.addPerson(ALICE);
+        String nameString = ALICE.getName().toString();
+        String lowerCasedNameString = nameString.toLowerCase();
+        Name lowerCasedName = new Name(lowerCasedNameString);
+        assertEquals(addressBook.findPersonsWithName(lowerCasedName), resultList);
+    }
+
+    @Test
+    public void findPersonsWithName_personWithUpperCasedNameInAddressBook_returnsPersonList() {
+        List<Person> resultList = new ArrayList<>();
+        resultList.add(ALICE);
+
+        addressBook.addPerson(ALICE);
+        String nameString = ALICE.getName().toString();
+        String upperCasedNameString = nameString.toUpperCase();
+        Name upperCasedName = new Name(upperCasedNameString);
+        assertEquals(addressBook.findPersonsWithName(upperCasedName), resultList);
     }
 
     @Test
