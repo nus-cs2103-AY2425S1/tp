@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -80,13 +81,13 @@ public class DeleteCommand extends Command {
         }
 
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return targetIndexes.equals(otherDeleteCommand.targetIndexes);
+        return Arrays.equals(targetIndexes, otherDeleteCommand.targetIndexes);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("targetIndex", targetIndexes)
+                .add("targetIndex", Arrays.toString(targetIndexes))
                 .toString();
     }
 
