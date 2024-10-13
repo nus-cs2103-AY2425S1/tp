@@ -47,10 +47,10 @@ public class AddOrderCommand extends Command {
     /**
      * Creates an AddOrderCommand to add the specific order under
      */
-    public AddOrderCommand(Index index, Order order) {
-        requireAllNonNull(index, order);
+    public AddOrderCommand(Index index, Order toAdd) {
+        requireAllNonNull(index, toAdd);
         this.index = index;
-        this.toAdd = order;
+        this.toAdd = toAdd;
     }
 
     @Override
@@ -93,7 +93,7 @@ public class AddOrderCommand extends Command {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("index", index)
-                .add("toAdd", toAdd)
+                .add("order", toAdd)
                 .toString();
     }
 }

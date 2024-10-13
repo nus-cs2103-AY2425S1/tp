@@ -21,7 +21,7 @@ import seedu.sellsavvy.model.person.Phone;
 import seedu.sellsavvy.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new AddPersonCommand object
+ * Parses input arguments and creates a new AddPersonCommand object.
  */
 public class AddPersonCommandParser implements Parser<AddPersonCommand> {
 
