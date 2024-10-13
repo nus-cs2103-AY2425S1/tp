@@ -216,7 +216,7 @@ public class DeleteCommand extends Command {
         NameEmailPredicate nameEmailPredicate = new NameEmailPredicate(nameString, emailString);
         listForFilter.setPredicate(nameEmailPredicate);
         if (listForFilter.isEmpty()) { // if no matching contact
-            throw new CommandException("No matching contacts found");
+            throw new CommandException("No matching contacts found.");
         }
         Person personToDelete = listForFilter.get(0);
         model.deletePerson(personToDelete);

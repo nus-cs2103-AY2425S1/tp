@@ -30,4 +30,6 @@ public class DeleteCommandParserTest {
         assertParseFailure(parser, "j/XYZ1235", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 DeleteCommand.MESSAGE_USAGE));
     }
+
+    //test return Delete Command by name, name and email
 }
