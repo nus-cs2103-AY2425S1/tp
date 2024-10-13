@@ -59,6 +59,7 @@ public class PersonUtil {
                 tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
             }
         }
+        descriptor.getDateOfLastVisit().ifPresent(date -> sb.append(PREFIX_DATEOFLASTVISIT).append(date.value).append(" "));
         return sb.toString();
     }
 }
