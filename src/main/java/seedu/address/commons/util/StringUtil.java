@@ -56,7 +56,7 @@ public class StringUtil {
 
         // prepare partial word (using lower case for case insensitive search)
         String preppedPartialWord = partialWord.trim().toLowerCase();
-        checkArgument(!preppedPartialWord.isEmpty(), "Parital Word parameter cannot be empty");
+        checkArgument(!preppedPartialWord.isEmpty(), "Partial Word parameter cannot be empty");
         checkArgument(preppedPartialWord.split("\\s+").length == 1,
                 "Partial Word parameter should be a single word");
 

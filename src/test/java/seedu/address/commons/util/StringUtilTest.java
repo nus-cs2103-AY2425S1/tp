@@ -123,6 +123,88 @@ public class StringUtilTest {
         assertTrue(StringUtil.containsWordIgnoreCase("AAA bBb ccc  bbb", "bbB"));
     }
 
+    //---------------- Tests for containsPartialWordIgnoreCase --------------------------------------
+
+    /*
+     * Invalid equivalence partitions for partialWord: null, empty, multiple words
+     * Invalid equivalence partitions for sentence: null
+     * The four test cases below test one invalid input at a time.
+     */
+
+    @Test
+    public void containsPartialWordIgnoreCase_nullWord_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> StringUtil.containsPartialWordIgnoreCase("typical sentence",
+                null));
+    }
+
+    @Test
+    public void containsPartialWordIgnoreCase_emptyWord_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, "Partial Word parameter cannot be empty", ()
+                -> StringUtil.containsPartialWordIgnoreCase("typical sentence", "  "));
+    }
+
+    @Test
+    public void containsPartialWordIgnoreCase_multipleWords_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, "Partial Word parameter should be a single word", ()
+                -> StringUtil.containsPartialWordIgnoreCase("typical sentence", "aaa BBB"));
+    }
+
+    @Test
+    public void containsPartialWordIgnoreCase_nullSentence_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> StringUtil.containsPartialWordIgnoreCase(null, "abc"));
+    }
+
+    /*
+     * Valid equivalence partitions for word:
+     *   - any word
+     *   - word containing symbols/numbers
+     *   - word with leading/trailing spaces
+     *
+     * Valid equivalence partitions for sentence:
+     *   - empty string
+     *   - one word
+     *   - multiple words
+     *   - sentence with extra spaces
+     *
+     * Possible scenarios returning true:
+     *   - partialWord is a complete word in sentence
+     *   - partialWord is part of a word in sentence
+     *   - partialWord is part of multiple words in sentence
+     *
+     * Possible scenarios returning false:
+     *   - sentence does not contain partialWord
+     *   - sentence matches part of the partialWord
+     *
+     * The test method below tries to verify all above with a reasonably low number of test cases.
+     */
+
+    @Test
+    public void containsPartialWordIgnoreCase_validInputs_correctResult() {
+
+        // Empty sentence
+        assertFalse(StringUtil.containsPartialWordIgnoreCase("", "abc")); // Boundary case
+        assertFalse(StringUtil.containsPartialWordIgnoreCase("    ", "123"));
+
+        // Matches a partial word only
+        assertTrue(StringUtil.containsPartialWordIgnoreCase("aaa bbb ccc",
+                "bb")); // Sentence word bigger than query word
+        assertFalse(StringUtil.containsPartialWordIgnoreCase("aaa bbb ccc",
+                "bbbb")); // Query word bigger than sentence word
+
+        // Matches word in the sentence, different upper/lower case letters
+        assertTrue(StringUtil.containsPartialWordIgnoreCase("aaa bBb ccc", " Bbb")); // First word (boundary case)
+        assertTrue(StringUtil.containsPartialWordIgnoreCase("aaa bBb ccc@1", "CCc@1")); // Last word (boundary case)
+        assertTrue(StringUtil.containsPartialWordIgnoreCase("  AAA   bBb   ccc  ", "aaa")); // Sentence has extra spaces
+        assertTrue(StringUtil.containsPartialWordIgnoreCase("Aaa", "aaa")); // Only one word in sentence (boundary case)
+        assertTrue(StringUtil.containsPartialWordIgnoreCase("aaa bbb ccc", "  ccc  ")); // Leading/trailing spaces
+
+        // part of multiple words in sentence
+        assertTrue(StringUtil.containsPartialWordIgnoreCase("AAA bBb ccc  bbb", "bB"));
+
+        // sentence does not contain partial word
+        assertFalse(StringUtil.containsPartialWordIgnoreCase("abc def", "fg"));
+    }
+
     //---------------- Tests for getDetails --------------------------------------
 
     /*
