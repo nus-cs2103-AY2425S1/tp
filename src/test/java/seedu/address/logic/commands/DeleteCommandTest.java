@@ -8,7 +8,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for
+ * Contains unit tests for
  * {@code DeleteCommand}.
  */
 public class DeleteCommandTest {

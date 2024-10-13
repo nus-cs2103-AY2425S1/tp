@@ -4,7 +4,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Deletes a vendor identified using it's displayed index from the address book.
+ * Parent abstract class for delete commands.
+ * Contains the index of the target to be deleted.
  */
 public abstract class DeleteCommand extends Command {
 
