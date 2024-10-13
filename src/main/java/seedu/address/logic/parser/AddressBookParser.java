@@ -83,7 +83,7 @@ public class AddressBookParser {
             return new ViewClientCommandParser().parse(arguments);
 
         case AddCarCommand.COMMAND_WORD:
-            return new AddCarCommand();
+            return new AddCarCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
