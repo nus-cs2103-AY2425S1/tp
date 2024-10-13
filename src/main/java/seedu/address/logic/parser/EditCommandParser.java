@@ -59,7 +59,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_CLIENT_TYPE)).ifPresent(editPersonDescriptor::setClientTypes);
+        parseClientTypesForEdit(argMultimap.getAllValues(PREFIX_CLIENT_TYPE)).ifPresent(editPersonDescriptor::setClientTypes);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
@@ -69,18 +69,18 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
-     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Tag>} containing zero tags.
+     * Parses {@code Collection<String> clientTypes} into a {@code Set<ClientTypes>} if {@code clientTypes} is non-empty.
+     * If {@code clientTypes} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<ClientTypes>} containing zero clientTypes.
      */
-    private Optional<Set<ClientType>> parseTagsForEdit(Collection<String> tags) throws ParseException {
-        assert tags != null;
+    private Optional<Set<ClientType>> parseClientTypesForEdit(Collection<String> clientTypes) throws ParseException {
+        assert clientTypes != null;
 
-        if (tags.isEmpty()) {
+        if (clientTypes.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        return Optional.of(ParserUtil.parseClientTypes(tagSet));
+        Collection<String> clientTypesSet = clientTypes.size() == 1 && clientTypes.contains("") ? Collections.emptySet() : clientTypes;
+        return Optional.of(ParserUtil.parseClientTypes(clientTypesSet));
     }
 
 }

@@ -25,14 +25,14 @@ public class ParserUtilTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_CLIENT_TYPE = "#A";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
-    private static final String VALID_TAG_1 = "friend";
-    private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_CLIENT_TYPE_1 = "A";
+    private static final String VALID_CLIENT_TYPE_2 = "B";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -149,49 +149,48 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTag_null_throwsNullPointerException() {
+    public void parseClientType_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseClientType(null));
     }
 
     @Test
-    public void parseTag_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseClientType(INVALID_TAG));
+    public void parseClientType_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseClientType(INVALID_CLIENT_TYPE));
     }
 
     @Test
-    public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
-        ClientType expectedTag = new ClientType(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseClientType(VALID_TAG_1));
+    public void parseClientType_validValueWithoutWhitespace_returnsClientType() throws Exception {
+        ClientType expectedClientType = new ClientType(VALID_CLIENT_TYPE_1);
+        assertEquals(expectedClientType, ParserUtil.parseClientType(VALID_CLIENT_TYPE_1));
     }
 
     @Test
-    public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
-        String tagWithWhitespace = WHITESPACE + VALID_TAG_1 + WHITESPACE;
-        ClientType expectedTag = new ClientType(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseClientType(tagWithWhitespace));
+    public void parseClientType_validValueWithWhitespace_returnsTrimmedClientType() throws Exception {
+        String tagWithWhitespace = WHITESPACE + VALID_CLIENT_TYPE_1 + WHITESPACE;
+        ClientType expectedClientType = new ClientType(VALID_CLIENT_TYPE_1);
+        assertEquals(expectedClientType, ParserUtil.parseClientType(tagWithWhitespace));
     }
 
     @Test
-    public void parseTags_null_throwsNullPointerException() {
+    public void parseClientTypes_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseClientTypes(null));
     }
 
     @Test
-    public void parseTags_collectionWithInvalidTags_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseClientTypes(Arrays.asList(VALID_TAG_1, INVALID_TAG)));
+    public void parseClientTypes_collectionWithInvalidClientTypes_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseClientTypes(Arrays.asList(VALID_CLIENT_TYPE_1, INVALID_CLIENT_TYPE)));
     }
 
     @Test
-    public void parseTags_emptyCollection_returnsEmptySet() throws Exception {
+    public void parseClientTypes_emptyCollection_returnsEmptySet() throws Exception {
         assertTrue(ParserUtil.parseClientTypes(Collections.emptyList()).isEmpty());
     }
 
     @Test
-    public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<ClientType> actualTagSet = ParserUtil.parseClientTypes(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
-        Set<ClientType> expectedTagSet = new HashSet<ClientType>(Arrays.asList(new ClientType(VALID_TAG_1),
-                new ClientType(VALID_TAG_2)));
+    public void parseClientTypes_collectionWithValidClientTypes_returnsClientTypeSet() throws Exception {
+        Set<ClientType> actualClientTypeSet = ParserUtil.parseClientTypes(Arrays.asList(VALID_CLIENT_TYPE_1, VALID_CLIENT_TYPE_2));
+        Set<ClientType> expectedClientTypeSet = new HashSet<ClientType>(Arrays.asList(new ClientType(VALID_CLIENT_TYPE_1), new ClientType(VALID_CLIENT_TYPE_2)));
 
-        assertEquals(expectedTagSet, actualTagSet);
+        assertEquals(expectedClientTypeSet, actualClientTypeSet);
     }
 }

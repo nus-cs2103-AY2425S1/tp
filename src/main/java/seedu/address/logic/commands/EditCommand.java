@@ -99,7 +99,7 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<ClientType> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getClientTypes());
+        Set<ClientType> updatedTags = editPersonDescriptor.getClientTypes().orElse(personToEdit.getClientTypes());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
     }
@@ -205,7 +205,7 @@ public class EditCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code clientTypes} is null.
          */
-        public Optional<Set<ClientType>> getTags() {
+        public Optional<Set<ClientType>> getClientTypes() {
             return (clientTypes != null) ? Optional.of(Collections.unmodifiableSet(clientTypes)) : Optional.empty();
         }
 

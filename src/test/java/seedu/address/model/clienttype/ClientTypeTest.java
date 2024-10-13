@@ -4,7 +4,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-public class TagTest {
+public class ClientTypeTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
@@ -12,14 +12,15 @@ public class TagTest {
     }
 
     @Test
-    public void constructor_invalidTagName_throwsIllegalArgumentException() {
-        String invalidTagName = "";
-        assertThrows(IllegalArgumentException.class, () -> new ClientType(invalidTagName));
+    public void constructor_invalidClientTypeName_throwsIllegalArgumentException() {
+        String invalidClientTypeName = "";
+        assertThrows(IllegalArgumentException.class, () -> new ClientType(invalidClientTypeName));
     }
 
     @Test
-    public void isValidTagName() {
-        // null tag name
+    public void isValidClientTypeName() {
+        // null client type name
         assertThrows(NullPointerException.class, () -> ClientType.isValidClientTypeName(null));
     }
+
 }

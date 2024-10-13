@@ -13,20 +13,20 @@ import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.ClientHub;
 import seedu.address.testutil.TypicalPersons;
 
-public class JsonSerializableAddressBookTest {
+public class JsonSerializableClientHubTest {
 
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializableAddressBookTest");
-    private static final Path TYPICAL_PERSONS_FILE = TEST_DATA_FOLDER.resolve("typicalPersonsAddressBook.json");
-    private static final Path INVALID_PERSON_FILE = TEST_DATA_FOLDER.resolve("invalidPersonAddressBook.json");
-    private static final Path DUPLICATE_PERSON_FILE = TEST_DATA_FOLDER.resolve("duplicatePersonAddressBook.json");
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializableClientHubTest");
+    private static final Path TYPICAL_PERSONS_FILE = TEST_DATA_FOLDER.resolve("typicalPersonsClientHub.json");
+    private static final Path INVALID_PERSON_FILE = TEST_DATA_FOLDER.resolve("invalidPersonClientHub.json");
+    private static final Path DUPLICATE_PERSON_FILE = TEST_DATA_FOLDER.resolve("duplicatePersonClientHub.json");
 
     @Test
     public void toModelType_typicalPersonsFile_success() throws Exception {
         JsonSerializableClientHub dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_FILE,
                 JsonSerializableClientHub.class).get();
-        ClientHub addressBookFromFile = dataFromFile.toModelType();
-        ClientHub typicalPersonsAddressBook = TypicalPersons.getTypicalAddressBook();
-        assertEquals(addressBookFromFile, typicalPersonsAddressBook);
+        ClientHub clientHubFromFile = dataFromFile.toModelType();
+        ClientHub typicalPersonsClientHub = TypicalPersons.getTypicalClientHub();
+        assertEquals(clientHubFromFile, typicalPersonsClientHub);
     }
 
     @Test
