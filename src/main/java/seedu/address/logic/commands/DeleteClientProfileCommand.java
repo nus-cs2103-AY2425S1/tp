@@ -4,13 +4,12 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
-import seedu.address.model.person.Name;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
 
 /**
  * Deletes a client identified using it's displayed index from the address book.
@@ -24,8 +23,8 @@ public class DeleteClientProfileCommand extends Command {
             + "Parameters: CLIENT_NAME (case-insensitive)\n"
             + "Example: " + COMMAND_WORD + " n/Tan Wen Xuan";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Successfully deleted %1$s " + 
-            " with the number, %2$s!";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Successfully deleted %1$s "
+            + " with the number, %2$s!";
     private final Name targetName;
 
     public DeleteClientProfileCommand(Name targetName) {
@@ -45,9 +44,9 @@ public class DeleteClientProfileCommand extends Command {
         if (!lastShownList.contains(personToDelete)) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_INPUT);
         }
-        
+
         model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, 
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
                 personToDelete.getName(), personToDelete.getPhone()));
     }
 

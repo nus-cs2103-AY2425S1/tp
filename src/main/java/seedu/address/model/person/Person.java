@@ -2,17 +2,13 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.Date;
 import seedu.address.model.appointment.From;
 import seedu.address.model.appointment.To;
-import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
@@ -23,14 +19,14 @@ public class Person {
     // Identity fields
     private final Name name;
     private final Phone phone;
-//    private final Email email;
-//
-//    // Data fields
-//    private final Address address;
-//    private final Remark remark;
+    //  private final Email email;
+
+    // Data fields
+    //  private final Address address;
+    //  private final Remark remark;
     private final Property property;
     private final Appointment appointment;
-//    private final Set<Tag> tags = new HashSet<>();
+    //  private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
@@ -39,14 +35,21 @@ public class Person {
         requireAllNonNull(name, phone, appointment, property);
         this.name = name;
         this.phone = phone;
-//        this.email = email;
-//        this.address = address;
-//        this.remark = remark;
+        //  this.email = email;
+        //  this.address = address;
+        //  this.remark = remark;
         this.property = property;
         this.appointment = appointment;
-//        this.tags.addAll(tags);
+        //  this.tags.addAll(tags);
     }
 
+    /**
+     * Constructs a {@code Person} object with the specified name.
+     * Initializes the phone number as {@code null}, sets the property to a default empty value,
+     * and creates an appointment with default values for the date, start time, and end time.
+     *
+     * @param name The {@code Name} of the person. Must not be {@code null}.
+     */
     public Person(Name name) {
         this.name = name;
         this.phone = null;
@@ -62,17 +65,15 @@ public class Person {
         return phone;
     }
 
-//    public Email getEmail() {
-//        return email;
-//    }
-//
-//    public Address getAddress() {
-//        return address;
-//    }
-//
-//    public Remark getRemark() {
-//        return remark;
-//    }
+    //  public Email getEmail() {
+    //      return email;
+    //  }
+    //  public Address getAddress() {
+    //      return address;
+    //  }
+    //  public Remark getRemark() {
+    //      return remark;
+    //  }
 
     public Property getProperty() {
         return property;
@@ -82,13 +83,9 @@ public class Person {
         return appointment;
     }
 
-//    /**
-//     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-//     * if modification is attempted.
-//     */
-//    public Set<Tag> getTags() {
-//        return Collections.unmodifiableSet(tags);
-//    }
+    //  public Set<Tag> getTags() {
+    //      return Collections.unmodifiableSet(tags);
+    //  }
 
     /**
      * Returns true if both persons have the same name.
@@ -122,9 +119,9 @@ public class Person {
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && property.equals(otherPerson.property);
-//                && email.equals(otherPerson.email)
-//                && address.equals(otherPerson.address)
-//                && tags.equals(otherPerson.tags);
+                //  && email.equals(otherPerson.email)
+                //  && address.equals(otherPerson.address)
+                //  && tags.equals(otherPerson.tags);
     }
 
     @Override
@@ -138,10 +135,10 @@ public class Person {
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
-//                .add("email", email)
-//                .add("address", address)
-//                .add("remark", remark)
-//                .add("tags", tags)
+                //  .add("email", email)
+                //  .add("address", address)
+                //  .add("remark", remark)
+                //  .add("tags", tags)
                 .add("appointment", appointment)
                 .add("property", property)
                 .toString();

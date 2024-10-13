@@ -1,7 +1,6 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a property that the client wants in the address book.
@@ -18,7 +17,7 @@ public class Property {
      */
     public Property(String property) {
         requireNonNull(property);
-//        checkArgument(isValidProperty(property), MESSAGE_CONSTRAINTS);
+        //  checkArgument(isValidProperty(property), MESSAGE_CONSTRAINTS);
         this.value = property;
     }
 
@@ -26,9 +25,9 @@ public class Property {
      * Returns true if a given string is a valid property.
      *
      */
-//    public static boolean isValidProperty(String test) {
-//        return test.matches(VALIDATION_REGEX);
-//    }
+    //  public static boolean isValidProperty(String test) {
+    //      return test.matches(VALIDATION_REGEX);
+    //  }
 
     public String getProperty() {
         return value;

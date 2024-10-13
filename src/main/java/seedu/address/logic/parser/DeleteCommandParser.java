@@ -3,9 +3,9 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MISSING_CLIENT_NAME;
 
-import seedu.address.model.person.Name;
 import seedu.address.logic.commands.DeleteClientProfileCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Name;
 
 /**
  * Parses input arguments and creates a new DeleteClientProfileCommand object
