@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.types.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -9,6 +9,10 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.types.common.Address;
+import seedu.address.model.types.common.Email;
+import seedu.address.model.types.common.Name;
+import seedu.address.model.types.common.Phone;
 
 /**
  * Represents a Person in the address book.
