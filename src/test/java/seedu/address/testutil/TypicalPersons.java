@@ -39,7 +39,7 @@ public class TypicalPersons {
 
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street")
-            .withUniversity("NUS")
+            .withUniversity("NUS").withMajor("Computer Science")
             .build();
 
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")

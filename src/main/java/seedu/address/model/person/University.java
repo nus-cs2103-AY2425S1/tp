@@ -11,7 +11,7 @@ public class University {
 
     public static final String MESSAGE_CONSTRAINTS =
             "University names should not be blank and should only contain alphanumeric characters and spaces.";
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} \\-]*";
     public final String value;
 
     /**
@@ -29,7 +29,7 @@ public class University {
      * Returns true if a given string is a valid university name.
      */
     public static boolean isValidUniversity(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.trim().matches(VALIDATION_REGEX);
     }
 
     @Override
