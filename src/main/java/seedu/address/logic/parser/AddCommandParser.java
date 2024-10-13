@@ -52,8 +52,6 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        //Fees fees = new Fees("564");
-        //ClassId classId = new ClassId("1");
         Fees fees = ParserUtil.parseFees(argMultimap.getValue(PREFIX_FEES).get());
         ClassId classId = ParserUtil.parseClassId(argMultimap.getValue(PREFIX_CLASSID).get());
         MonthsPaid monthsPaid = new MonthsPaid("2024-01 2024-02");

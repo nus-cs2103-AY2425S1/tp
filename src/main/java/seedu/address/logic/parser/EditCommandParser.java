@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSID;
@@ -15,7 +16,6 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -49,16 +49,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
-        // Check for duplicate prefixes and throw exception for the first one found
-        if (hasDuplicate(argMultimap, PREFIX_PHONE)) {
-            throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
-        }
-        if (hasDuplicate(argMultimap, PREFIX_EMAIL)) {
-            throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
-        }
-        if (hasDuplicate(argMultimap, PREFIX_ADDRESS)) {
-            throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
-        }
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
@@ -86,11 +77,6 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         return new EditCommand(index, editPersonDescriptor);
-    }
-
-    // Helper method to detect duplicate fields
-    private boolean hasDuplicate(ArgumentMultimap argMultimap, Prefix prefix) {
-        return argMultimap.getAllValues(prefix).size() > 1;
     }
 
     private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
