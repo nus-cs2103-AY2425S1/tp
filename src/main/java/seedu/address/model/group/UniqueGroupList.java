@@ -30,7 +30,7 @@ public class UniqueGroupList implements Iterable<Group> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent student as the given argument.
+     * Returns true if the list contains an equivalent group as the given argument.
      */
     public boolean contains(Group toCheck) {
         requireNonNull(toCheck);
@@ -50,9 +50,9 @@ public class UniqueGroupList implements Iterable<Group> {
     }
 
     /**
-     * Replaces the student {@code target} in the list with {@code editedStudent}.
+     * Replaces the group {@code target} in the list with {@code editedGroup}.
      * {@code target} must exist in the list.
-     * The student identity of {@code editedStudent} must not be the same as another existing student in the list.
+     * The group identity of {@code editedStudent} must not be the same as another existing student in the list.
      */
     public void setGroup(Group target, Group editedStudent) {
         requireAllNonNull(target, editedStudent);
@@ -96,6 +96,26 @@ public class UniqueGroupList implements Iterable<Group> {
         }
 
         internalList.setAll(students);
+    }
+
+    /**
+     * Finds the group with matching group name {@code groupName}
+     */
+    public Group findGroupByName(GroupName groupName) {
+        requireNonNull(groupName);
+        return internalList.stream()
+                .filter(group -> group.getGroupName().equals(groupName))
+                .findFirst()
+                .orElse(null);
+    }
+
+    /**
+     * Returns true if a group with the specified group name exists in the list.
+     */
+    public boolean containsGroupWithName(GroupName groupName) {
+        requireNonNull(groupName);
+        return internalList.stream()
+                .anyMatch(group -> group.getGroupName().equals(groupName));
     }
 
     /**
