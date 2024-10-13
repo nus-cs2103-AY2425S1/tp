@@ -9,7 +9,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMERGENCY_CONTA
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIFTH_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -76,6 +78,37 @@ public class EmergencyContactCommandTest {
         expectedModel.setPerson(firstPerson, editedPerson);
         assertCommandSuccess(emergencyContactCommand, model, expectedMessage, expectedModel);
     }
+
+    @Test
+    public void execute_overrideEmergencyContactWithOnlyNameUnfilteredList_success() {
+        Person fourthPerson = model.getFilteredPersonList().get(INDEX_FOURTH_PERSON.getZeroBased());
+        Person editedPerson = new PersonBuilder(fourthPerson).withEmergencyContact(EMERGENCY_CONTACT_NAME_STUB,
+                EMERGENCY_CONTACT_NUMBER_STUB).build();
+        EmergencyContactCommand emergencyContactCommand = new EmergencyContactCommand(INDEX_FOURTH_PERSON,
+                new EmergencyContact(editedPerson.getEmergencyContact().contactName,
+                        editedPerson.getEmergencyContact().contactNumber));
+        String expectedMessage = String.format(EmergencyContactCommand.MESSAGE_ADD_EMERGENCY_CONTACT_SUCCESS,
+                editedPerson);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(fourthPerson, editedPerson);
+        assertCommandSuccess(emergencyContactCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_overrideEmergencyContactWithOnlyNumberUnfilteredList_success() {
+        Person fifthPerson = model.getFilteredPersonList().get(INDEX_FIFTH_PERSON.getZeroBased());
+        Person editedPerson = new PersonBuilder(fifthPerson).withEmergencyContact(EMERGENCY_CONTACT_NAME_STUB,
+                EMERGENCY_CONTACT_NUMBER_STUB).build();
+        EmergencyContactCommand emergencyContactCommand = new EmergencyContactCommand(INDEX_FIFTH_PERSON,
+                new EmergencyContact(editedPerson.getEmergencyContact().contactName,
+                        editedPerson.getEmergencyContact().contactNumber));
+        String expectedMessage = String.format(EmergencyContactCommand.MESSAGE_ADD_EMERGENCY_CONTACT_SUCCESS,
+                editedPerson);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(fifthPerson, editedPerson);
+        assertCommandSuccess(emergencyContactCommand, model, expectedMessage, expectedModel);
+    }
+
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
