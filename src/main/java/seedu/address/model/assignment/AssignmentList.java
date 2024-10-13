@@ -97,7 +97,7 @@ public class AssignmentList {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < assignments.size(); i++) {
-            sb.append(i).append(". ").append(assignments.get(i).toString()).append("\n");
+            sb.append(i + 1).append(". ").append(assignments.get(i).toString()).append("\n");
         }
         return sb.toString();
     }

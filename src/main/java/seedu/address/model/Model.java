@@ -112,4 +112,6 @@ public interface Model {
 
     void setAssignmentStatus(Assignment assignment, Student targetStudent, boolean newStatus)
             throws AssignmentNotFoundException;
+
+    String listAssignments();
 }

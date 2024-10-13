@@ -153,6 +153,11 @@ public class ModelManager implements Model {
         assignmentList.setStatus(assignment, targetStudent, newStatus);
     }
 
+    @Override
+    public String listAssignments() {
+        return assignmentList.toString();
+    }
+
 
     //=========== Filtered Student List Accessors =============================================================
 
