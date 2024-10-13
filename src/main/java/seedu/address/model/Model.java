@@ -105,6 +105,14 @@ public interface Model {
     void deleteDelivery(Delivery delivery);
 
     /**
+     * Replaces the given delivery {@code target} with {@code editedDelivery}.
+     * {@code target} must exist in the address book.
+     * The delivery identity of {@code editedDelivery} must not be the same as
+     * another existing delivery in the address book.
+     */
+    void setDelivery(Delivery target, Delivery updatedDelivery);
+
+    /**
      * Returns an unmodifiable view of the filtered delivery list
      */
     ObservableList<Delivery> getFilteredDeliveryList();

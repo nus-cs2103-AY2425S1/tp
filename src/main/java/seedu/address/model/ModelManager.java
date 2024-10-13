@@ -134,6 +134,14 @@ public class ModelManager implements Model {
         updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES); // Refresh the list after adding
     }
 
+    @Override
+    public void setDelivery(Delivery target, Delivery updatedDelivery) {
+        requireNonNull(target);
+        requireNonNull(updatedDelivery);
+
+        addressBook.setDelivery(target, updatedDelivery);
+    }
+
     //=========== Filtered Delivery List Accessors =============================================================
     @Override
     public ObservableList<Delivery> getFilteredDeliveryList() {
