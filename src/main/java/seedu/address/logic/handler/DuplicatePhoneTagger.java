@@ -1,7 +1,5 @@
 package seedu.address.logic.handler;
 
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -70,7 +68,6 @@ public class DuplicatePhoneTagger {
             boolean isPhoneDuplicate = isPhoneDuplicate(phone);
             Person updatedPerson = updatePerson(personToUpdate, isPhoneDuplicate);
             model.setPerson(personToUpdate, updatedPerson);
-            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         }
     }
 
