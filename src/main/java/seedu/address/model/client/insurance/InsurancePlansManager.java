@@ -1,5 +1,7 @@
 package seedu.address.model.client.insurance;
 
+import static seedu.address.model.person.insurance.InsurancePlanFactory.createInsurancePlan;
+
 import java.util.ArrayList;
 
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -10,8 +12,10 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class InsurancePlansManager {
 
-    public static final String DUPLICATE_PLAN_DETECTED_MESSAGE = "This plan has already been added to this client.";
-    public static final String PLAN_NOT_DETECTED_MESSAGE = "This client does not own this plan.";
+    public static final String DUPLICATE_PLAN_DETECTED_MESSAGE = "This plan with id: %1$s, "
+            + "has already been added to this client: %2$s";
+    public static final String PLAN_NOT_DETECTED_MESSAGE = "This plan with id: %1$s, "
+            + "has not been added to this client: %2$s";
 
     private final ArrayList<InsurancePlan> insurancePlans;
 
@@ -22,6 +26,27 @@ public class InsurancePlansManager {
         this.insurancePlans = new ArrayList<>();
     }
 
+    /**
+     * Constructs an {@code InsurancePlansManager} by initializing it with a string representing saved insurance plans.
+     *
+     * @param insurancePlansString the string representing saved insurance plans. If no insurance plans have been
+     *                             added, it should be "No added plans".
+     * @throws ParseException if the string cannot be parsed into valid insurance plans.
+     * @throws AssertionError if the insurancePlansString is an empty string or contains only whitespace.
+     */
+    public InsurancePlansManager(String insurancePlansString) throws ParseException {
+        this();
+        assert !insurancePlansString.trim().isEmpty() : "Saved insurance plans string must not be an empty string. "
+                + "If no insurance plans have been added, it will be \"No added plans\" ";
+
+        if (!insurancePlansString.equals("No added plans")) {
+            String[] planNames = insurancePlansString.split(", ");
+            for (String planName : planNames) {
+                InsurancePlan planToBeAdded = createInsurancePlan(planName);
+                addPlan(planToBeAdded);
+            }
+        }
+    }
 
     /**
      * Returns a list of insurance plans currently owned by the client.
@@ -70,6 +95,9 @@ public class InsurancePlansManager {
      * @throws ParseException if the plan is owned by the client.
      */
     public void checkIfPlanNotOwned(InsurancePlan plan) throws ParseException {
+        if (insurancePlans.isEmpty()) {
+            return;
+        }
         for (InsurancePlan p : insurancePlans) {
             if (p.equals(plan)) {
                 throw new ParseException(DUPLICATE_PLAN_DETECTED_MESSAGE);
@@ -86,13 +114,13 @@ public class InsurancePlansManager {
      */
     @Override
     public String toString() {
-        StringBuilder plans = new StringBuilder("Insurance Plans: ");
+        StringBuilder plans = new StringBuilder();
         for (InsurancePlan plan : insurancePlans) {
             plans.append(plan.toString()).append(", ");
         }
 
-        if (!insurancePlans.isEmpty()) {
-            plans.append("None");
+        if (insurancePlans.isEmpty()) {
+            plans.append("No added plans");
         } else {
             plans.setLength(plans.length() - 2); // Remove trailing ", "
         }

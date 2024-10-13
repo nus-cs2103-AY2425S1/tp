@@ -30,9 +30,12 @@ public class TypicalClients {
     public static final Client BENSON = new ClientBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
+            .withInsurancePlansManager("Basic Insurance Plan, Travel Insurance Plan")
             .withTags("owesMoney", "friends").build();
     public static final Client CARL = new ClientBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").withAddress("wall street").build();
+            .withEmail("heinz@example.com")
+            .withInsurancePlansManager("Basic Insurance Plan")
+            .withAddress("wall street").build();
     public static final Client DANIEL = new ClientBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends").build();
     public static final Client ELLE = new ClientBuilder().withName("Elle Meyer").withPhone("9482224")
@@ -60,7 +63,7 @@ public class TypicalClients {
     private TypicalClients() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical clients.
+     * Returns an {@code AddressBook} with all the typical persons.
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();

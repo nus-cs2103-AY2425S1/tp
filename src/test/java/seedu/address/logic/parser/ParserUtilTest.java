@@ -44,7 +44,7 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+                -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
     @Test
@@ -192,18 +192,5 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
-    }
-
-    @Test
-    void parseInsurancePlan_success() throws Exception {
-        String insuranceIdString = "0";
-        int insuranceId = ParserUtil.parseInsurancePlan(insuranceIdString);
-        assertEquals(insuranceId, 0);
-    }
-
-    @Test
-    void parseInsurancePlan_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseInsurancePlan("-1"));
-        assertThrows(ParseException.class, () -> ParserUtil.parseInsurancePlan("a"));
     }
 }

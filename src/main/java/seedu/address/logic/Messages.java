@@ -43,6 +43,8 @@ public class Messages {
                 .append(client.getEmail())
                 .append("; Address: ")
                 .append(client.getAddress())
+                .append("; Insurance Plans: ")
+                .append(client.getInsurancePlansManager())
                 .append("; Tags: ");
         client.getTags().forEach(builder::append);
         return builder.toString();

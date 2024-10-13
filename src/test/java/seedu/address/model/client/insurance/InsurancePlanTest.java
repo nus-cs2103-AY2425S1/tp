@@ -2,11 +2,8 @@ package seedu.address.model.client.insurance;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
-
-import seedu.address.commons.exceptions.IllegalValueException;
 
 class InsurancePlanTest {
 
@@ -15,6 +12,12 @@ class InsurancePlanTest {
         InsurancePlan testPlan = new TravelPlanStub();
         InsurancePlan testPlan2 = new TravelPlanStub();
         assertEquals(testPlan, testPlan2);
+    }
+
+    @Test
+    void testEquals_sameObject_success() {
+        InsurancePlan testPlan = new TravelPlanStub();
+        testPlan.equals(testPlan);
     }
 
     @Test
@@ -31,23 +34,8 @@ class InsurancePlanTest {
     }
 
     @Test
-    void testCheckValidPlan_success() {
-        try {
-            int validId = 0;
-            InsurancePlan.checkValidPlan(validId);
-        } catch (IllegalValueException e) {
-            fail();
-        }
-    }
-
-    @Test
-    void testCheckValidPlan_fail() {
-        try {
-            int validId = -1;
-            InsurancePlan.checkValidPlan(validId);
-            fail();
-        } catch (IllegalValueException e) {
-            assertEquals(e.getMessage(), InsurancePlan.INVALID_PLAN_ID_MESSAGE);
-        }
+    void checkToString() {
+        InsurancePlan testPlan = new BasicPlanStub();
+        assertEquals("Basic Insurance Plan", testPlan.toString());
     }
 }
