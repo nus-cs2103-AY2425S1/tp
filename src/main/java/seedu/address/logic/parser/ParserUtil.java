@@ -135,10 +135,11 @@ public class ParserUtil {
      */
     public static Time parseDateTime(String dateTime) throws ParseException {
         requireNonNull(dateTime);
-        if (!Time.isValidTime(dateTime)) {
+        String trimmedDateTime = dateTime.trim();
+        if (!Time.isValidTime(trimmedDateTime)) {
             throw new ParseException(Time.MESSAGE_CONSTRAINTS);
         }
-        return new Time(dateTime);
+        return new Time(trimmedDateTime);
     }
 
     /**
