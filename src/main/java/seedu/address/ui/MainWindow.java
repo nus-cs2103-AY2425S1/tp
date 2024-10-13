@@ -189,7 +189,7 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isExit()) {
                 handleExit();
             }
-            
+
             searchBox.clearSearchBox();
 
             return commandResult;
