@@ -21,6 +21,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.event.Date;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.Name;
+import seedu.address.model.event.exceptions.DuplicateEventException;
 import seedu.address.model.vendor.Vendor;
 import seedu.address.model.vendor.exceptions.DuplicateVendorException;
 import seedu.address.testutil.VendorBuilder;
@@ -104,6 +105,26 @@ public class AddressBookTest {
     public void hasEvent_eventWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addEvent(testEvent);
         assertTrue(addressBook.hasEvent(similarTestEvent));
+    }
+
+    // might be redundant has this is already tested in UniqueEventListTest.java
+    @Test
+    public void addEvent_nullEvent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.addEvent(null));
+    }
+
+    // might be redundant has this is already tested in UniqueEventListTest.java
+    @Test
+    public void addEvent_eventInAddressBook_throwsDuplicateEventException() {
+        addressBook.addEvent(testEvent);
+        assertThrows(DuplicateEventException.class, () -> addressBook.addEvent(testEvent));
+    }
+
+    // might be redundant has this is already tested in UniqueEventListTest.java
+    @Test
+    public void addEvent_eventWithSameIdentityFieldsInAddressBook_throwsDuplicateEventException() {
+        addressBook.addEvent(testEvent);
+        assertThrows(DuplicateEventException.class, () -> addressBook.addEvent(testEvent));
     }
 
     @Test
