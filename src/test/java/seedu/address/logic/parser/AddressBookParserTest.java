@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.model.delivery.Status.DELIVERED;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_DELIVERY;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
@@ -17,12 +19,14 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddDeliveryCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteDeliveryCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.MarkDeliveryCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -63,6 +67,20 @@ public class AddressBookParserTest {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_delete_delivery() throws Exception {
+        DeleteDeliveryCommand command = (DeleteDeliveryCommand) parser.parseCommand(
+                DeleteCommand.COMMAND_WORD + " -d " + INDEX_FIRST_DELIVERY.getOneBased());
+        assertEquals(new DeleteDeliveryCommand(INDEX_FIRST_DELIVERY), command);
+    }
+
+    @Test
+    public void parseCommand_mark_delivery() throws Exception {
+        MarkDeliveryCommand command = (MarkDeliveryCommand) parser.parseCommand(
+                MarkDeliveryCommand.COMMAND_WORD + " -d " + INDEX_FIRST_DELIVERY.getOneBased() + " DELIVERED");
+        assertEquals(new MarkDeliveryCommand(INDEX_FIRST_DELIVERY, DELIVERED), command);
     }
 
     @Test

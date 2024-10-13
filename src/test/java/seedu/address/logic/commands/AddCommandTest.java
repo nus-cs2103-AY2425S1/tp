@@ -170,6 +170,21 @@ public class AddCommandTest {
         }
 
         @Override
+        public void setDelivery(Delivery target, Delivery editedDelivery) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Delivery> getFilteredDeliveryList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredDeliveryList(Predicate<Delivery> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addDelivery(Delivery delivery) {
             throw new AssertionError("This method should not be called.");
         }

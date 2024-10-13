@@ -95,6 +95,19 @@ public class AddressBook implements ReadOnlyAddressBook {
         deliveries.remove(key);
     }
 
+    /**
+     * Replaces the given delivery {@code target} in the list with {@code editedDelivery}.
+     * {@code target} must exist in the address book.
+     * The delivery identity of {@code editedDelivery} must not be the same as
+     * another existing delivery in the address book.
+     */
+    public void setDelivery(Delivery target, Delivery updatedDelivery) {
+        requireNonNull(target);
+        requireNonNull(updatedDelivery);
+
+        deliveries.setDelivery(target, updatedDelivery);
+    }
+
     //// person-level operations
 
     /**
