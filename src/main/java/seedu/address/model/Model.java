@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
 import seedu.address.model.policy.Policy;
+import seedu.address.model.policy.PolicyExpiryDatePredicate;
 
 /**
  * The API of the Model component.
@@ -80,7 +81,7 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
-    /** Returns an unmodifiable view of the filtered policies list */
+    /** Returns an unmodifiable view of the filtered policy list */
     ObservableList<Policy> getFilteredPolicyList();
 
     /**
@@ -88,4 +89,6 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    void updateFilteredPolicyList(Predicate<Policy> predicate);
 }

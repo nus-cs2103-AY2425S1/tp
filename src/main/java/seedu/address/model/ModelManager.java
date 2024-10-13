@@ -147,6 +147,7 @@ public class ModelManager implements Model {
      * Updates the filter of the filtered policy list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
+    @Override
     public void updateFilteredPolicyList(Predicate<Policy> predicate) {
         requireNonNull(predicate);
         filteredPolicies.setPredicate(predicate);
