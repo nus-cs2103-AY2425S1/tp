@@ -28,7 +28,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Architecture
 
-<img src="images/ArchitectureDiagram.png" width="280" />
+<img src="images/ArchitectureDiagram.png" width="281" />
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -53,7 +53,7 @@ The bulk of the app's work is done by the following four components:
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+<img src="images/ArchitectureSequenceDiagram.png" width="544"  alt=""/>
 
 Each of the four main components (also shown in the diagram above),
 
@@ -62,7 +62,7 @@ Each of the four main components (also shown in the diagram above),
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
-<img src="images/ComponentManagers.png" width="300" />
+<img src="images/ComponentManagers.png" width="314" />
 
 The sections below give more details of each component.
 
@@ -89,7 +89,7 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<img src="images/LogicClassDiagram.png" width="550"/>
+<img src="images/LogicClassDiagram.png" width="534" alt=""/>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
@@ -101,14 +101,14 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<img src="images/ParserClasses.png" width="600"/>
+<img src="images/ParserClasses.png" width="668"/>
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
@@ -117,7 +117,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="488"  alt=""/>
 
 
 The `Model` component,
@@ -129,7 +129,7 @@ The `Model` component,
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+<img src="images/BetterModelClassDiagram.png" width="472"  alt=""/>
 
 </div>
 
@@ -138,7 +138,7 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<img src="images/StorageClassDiagram.png" width="627"  alt=""/>
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
@@ -222,7 +222,7 @@ Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Sinc
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+<img src="images/CommitActivityDiagram.png" width="308"  alt=""/>
 
 #### Design considerations:
 
@@ -262,74 +262,143 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* requires efficient management of extensive databases for volunteers and events.
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: This application serves to streamline volunteer and for volunteer organisations.
+It provides essential tools to track volunteers and events efficiently, enabling organisations to
+maintain accurate records and enhance their operational capabilities.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                  | I want to …​                           | So that I can…​                                                                      |
+|----------|------------------------------------------|----------------------------------------|--------------------------------------------------------------------------------------|
+| `* * *`  | HR department employee                   | Remove volunteers                      | Keep volunteer records up to date                                                    | 
+| `* * *`  | HR department employee                   | View volunteers                        | Quickly access and review the list of all volunteers                                 | 
+| `* * *`  | HR department employee                   | Export volunteer information           | Generate reports for internal use                                                    | 
+| `* * *`  | Events director                          | Create events                          | Organize new events to engage volunteers                                             | 
+| `* * *`  | Events director                          | Remove events                          | Keep the events list clean and up to date                                            | 
+| `* * *`  | Events director                          | View events                            | Get an overview of upcoming and past events                                          | 
+| `* * *`  | Events director                          | Add volunteer to event                 | Assign volunteers to specific events                                                 | 
+| `* * *`  | HR department employee                   | Add event to volunteer                 | Track the events a volunteer has participated in                                     | 
+| `* * *`  | Events director                          | Remove volunteer from event            | Keep the list of volunteers attending the event updated                              | 
+| `* * *`  | HR department employee                   | Remove event from volunteer            | Keep the events list for the volunteer clean and up to date                          | 
+| `* *`    | HR department employee                   | Edit volunteer information             | Update volunteer details such as availability, hours, etc.                           | 
+| `* *`    | Events director                          | Filter volunteers by availability      | Find available volunteers for a particular event                                     | 
+| `* *`    | Events director, HR department employee  | Search/filter event by name            | Locate specific events quickly                                                       | 
+| `* *`    | Events director                          | View volunteers for a particular event | Find out how many volunteers have signed up for the event                            | 
+| `* *`    | Events director, HR department employee  | Search volunteers by name              | Find a specific volunteer by their name                                              | 
+| `* *`    | HR department employee                   | Track volunteer hours                  | Monitor and log the hours each volunteer has worked                                  | 
+| `*`      | General user                             | View event details per volunteer       | See which events a volunteer participated in                                         | 
+| `*`      | HR department employee                   | View volunteer participation history   | Track volunteer engagement with past events                                          | 
+| `*`      | General user                             | Toggle view options for events         | Customize how events are displayed in the app                                        | 
+| `*`      | General user                             | Dark mode                              | Enhance the app's user experience for those who prefer a darker interface            | 
+| `*`      | General user                             | Accessibility features                 | Improve usability for visually impaired users through larger fonts and color changes |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+# UML Use Cases: Contact Management Application for Volunteer Organizations
 
-**Use case: Delete a person**
+## Actors
+- Management Staff
 
-**MSS**
+## Use Cases
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+### 1. Create Volunteer Event
 
-    Use case ends.
+**Actor**: Management Staff
 
-**Extensions**
+**Description**: Create a new volunteer event in the system.
 
-* 2a. The list is empty.
+**Preconditions**:
+- User is logged in with management privileges
 
-  Use case ends.
+**Main Flow**:
+1. User selects "Create New Event" option
+2. System displays event creation form
+3. User enters event details (eventName, date, time, location, required roles)
+4. User submits the form
+5. System validates the information
+6. System creates the new event and confirms creation to the user
 
-* 3a. The given index is invalid.
+**Alternative Flows**:
+- 5a. If information is invalid, system displays error and returns to step 3
+- 6a. If event creation fails, system notifies user and provides option to try again
 
-    * 3a1. AddressBook shows an error message.
+**Postconditions**:
+- New event is stored in the system
 
-      Use case resumes at step 2.
+### 2. Add Volunteer to Event
 
-*{More to be added}*
+**Actor**: Management Staff
+
+**Description**: Assign a volunteer to a specific event.
+
+**Preconditions**:
+- Volunteer event exists in the system
+- Volunteer is registered in the system
+
+**Main Flow**:
+1. User navigates to the event details page
+2. User selects "Add Volunteer" option
+3. System displays list of available volunteers
+4. User selects a volunteer
+5. System prompts for role assignment and availability
+6. User provides role and availability information
+7. System adds the volunteer to the event and confirms addition
+
+**Extensions**:
+- 4a. If desired volunteer is not in the list, user can add a new volunteer
+- 7a. If addition fails, system notifies user and provides option to try again
+
+**Postconditions**:
+- Volunteer is associated with the event in the system
+
+## UML Use Case Diagram
+
+```mermaid
+graph TD
+    A[Management Staff] -->|Creates| B(Create Volunteer Event)
+    A -->|Assigns| C(Add Volunteer to Event)
+    B -->|Enables| C
+    B -->|Enables| D
+```
+
+This diagram shows the main actor (Management Staff) and their interactions with the three primary use cases we've defined. The arrows indicate the relationships between the actor and the use cases, as well as dependencies between use cases.
+
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. The system should work on any mainstream OS with Java 17 or above.
+2. The system should be able to handle up to 1000 volunteers, events, and donors without noticeable performance degradation.
+3. A user should be able to perform common tasks (add, delete, view) within 5 seconds for typical usage.
+4. The system should have a simple and intuitive command-line interface that minimizes the learning curve for new users.
+5. System response time for any action should be less than 1 second for all operations.
+6. The system should be able to support concurrent users without data corruption or errors.
+7. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 *{More to be added}*
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-
+* **Volunteer**: An individual who participates in a community event without monetary compensation.
+* **Event**: A planned activity organised by a community or non-profit organisation, requiring volunteer coordination.
+* **Donor**: An individual or organization that contributes funds or resources to support community events.
+* **Recurring Events**: Events that occur repeatedly on a set schedule.
+* **CLI (Command-Line Interface)**: A text-based interface where users input commands to interact with the application.
+* **NFR (Non-Functional Requirement)**: System attributes like performance, scalability, and usability that don’t affect specific functional behaviors.
+* **Duplicate Handling**: A system feature that prevents the creation of identical entries.
 --------------------------------------------------------------------------------------------------------------------
 
+## **Appendix: Instructions for manual testing**
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
@@ -345,16 +414,16 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. _{ more test cases …​ }_
 
 ### Deleting a person
 
@@ -362,16 +431,16 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
 
 ### Saving data
 
@@ -379,4 +448,4 @@ testers are expected to do more *exploratory* testing.
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
