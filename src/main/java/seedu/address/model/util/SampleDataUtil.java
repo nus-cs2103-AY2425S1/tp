@@ -47,7 +47,7 @@ public class SampleDataUtil {
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }
-        return sampleAb;
+        return new AddressBook(sampleAb);
     }
 
     /**
