@@ -9,8 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Time {
 
-    public static final String MESSAGE_CONSTRAINTS = "Time should be in the format HH:mm (24-hour format) and must be valid.";
-
+    public static final String MESSAGE_CONSTRAINTS = "Time should be in the format HH:mm (24-hour format) "
+        + "and must be valid.";
     /*
      * The time must follow the 24-hour format (HH:mm) where hours are between 00 and 23
      * and minutes are between 00 and 59.
