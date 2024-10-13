@@ -43,7 +43,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        emergencyContact = new EmergencyContact(DEFAULT_EMERGENCY_CONTACT_NAME, DEFAULT_EMERGENCY_CONTACT_NUMBER);
+        emergencyContact = new EmergencyContact("", "");
         tags = new HashSet<>();
         priorityLevel = new PriorityLevel(DEFAULT_PRIORITY_LEVEL);
     }
