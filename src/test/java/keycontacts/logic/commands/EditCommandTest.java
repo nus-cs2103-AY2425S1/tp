@@ -44,7 +44,15 @@ public class EditCommandTest {
                 Messages.format(editedStudent));
 
         Model expectedModel = new ModelManager(new StudentDirectory(model.getStudentDirectory()), new UserPrefs());
-        expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
+
+        Student studentToEdit = model.getFilteredStudentList().get(0);
+        Student expectedEditedStudent = new StudentBuilder(studentToEdit)
+                .withName(editedStudent.getName().toString())
+                .withPhone(editedStudent.getPhone().toString())
+                .withAddress(editedStudent.getAddress().toString())
+                .withGradeLevel(editedStudent.getGradeLevel().toString()).build();
+
+        expectedModel.setStudent(studentToEdit, expectedEditedStudent);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }

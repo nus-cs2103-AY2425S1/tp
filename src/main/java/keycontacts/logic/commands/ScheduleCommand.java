@@ -31,8 +31,8 @@ public class ScheduleCommand extends Command {
             + PREFIX_START_TIME + "START_TIME "
             + PREFIX_END_TIME + "END_TIME\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_DAY + "Monday"
-            + PREFIX_START_TIME + "16:00"
+            + PREFIX_DAY + "Monday "
+            + PREFIX_START_TIME + "16:00 "
             + PREFIX_END_TIME + "18:00";
 
     public static final String MESSAGE_SCHEDULE_LESSON_SUCCESS = "Scheduled lesson for student: %1$s";

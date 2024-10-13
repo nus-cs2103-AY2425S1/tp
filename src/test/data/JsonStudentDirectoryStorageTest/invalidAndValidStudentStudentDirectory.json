@@ -2,10 +2,12 @@
   "students": [ {
     "name": "Valid Student",
     "phone": "9482424",
-    "address": "4th street"
+    "address": "4th street",
+    "gradeLevel": "ABRSM 1"
   }, {
     "name": "Student With Invalid Phone Field",
     "phone": "948asdf2424",
-    "address": "4th street"
+    "address": "4th street",
+    "gradeLevel": "ABRSM 3"
   } ]
 }

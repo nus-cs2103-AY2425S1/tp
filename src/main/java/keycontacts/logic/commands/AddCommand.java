@@ -2,6 +2,7 @@ package keycontacts.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static keycontacts.logic.parser.CliSyntax.PREFIX_GRADE_LEVEL;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_NAME;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_PHONE;
 
@@ -22,11 +23,13 @@ public class AddCommand extends Command {
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
-            + PREFIX_ADDRESS + "ADDRESS\n"
+            + PREFIX_ADDRESS + "ADDRESS "
+            + PREFIX_GRADE_LEVEL + "GRADE_LEVEL\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
-            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 ";
+            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
+            + PREFIX_GRADE_LEVEL + "RSL 2 ";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the student directory";

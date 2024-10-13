@@ -1,6 +1,7 @@
 package keycontacts.testutil;
 
 import static keycontacts.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static keycontacts.logic.parser.CliSyntax.PREFIX_GRADE_LEVEL;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_NAME;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_PHONE;
 
@@ -28,6 +29,7 @@ public class StudentUtil {
         sb.append(PREFIX_NAME + student.getName().fullName + " ");
         sb.append(PREFIX_PHONE + student.getPhone().value + " ");
         sb.append(PREFIX_ADDRESS + student.getAddress().value + " ");
+        sb.append(PREFIX_GRADE_LEVEL + student.getGradeLevel().value + " ");
         return sb.toString();
     }
 
@@ -39,6 +41,8 @@ public class StudentUtil {
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
+        descriptor.getGradeLevel().ifPresent(gradeLevel -> sb.append(PREFIX_GRADE_LEVEL).append(gradeLevel.value)
+            .append(" "));
         return sb.toString();
     }
 }

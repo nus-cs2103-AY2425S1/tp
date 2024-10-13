@@ -2,6 +2,7 @@ package keycontacts.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static keycontacts.logic.parser.CliSyntax.PREFIX_GRADE_LEVEL;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_NAME;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_PHONE;
 import static keycontacts.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
@@ -17,6 +18,7 @@ import keycontacts.logic.Messages;
 import keycontacts.logic.commands.exceptions.CommandException;
 import keycontacts.model.Model;
 import keycontacts.model.student.Address;
+import keycontacts.model.student.GradeLevel;
 import keycontacts.model.student.Name;
 import keycontacts.model.student.Phone;
 import keycontacts.model.student.Student;
@@ -34,7 +36,8 @@ public class EditCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS]\n"
+            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_GRADE_LEVEL + "GRADE_LEVEL]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_ADDRESS + "Town";
@@ -79,7 +82,6 @@ public class EditCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, Messages.format(editedStudent)));
     }
 
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -112,6 +114,7 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Address address;
+        private GradeLevel gradeLevel;
 
         public EditStudentDescriptor() {}
 
@@ -122,13 +125,14 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setAddress(toCopy.address);
+            setGradeLevel(toCopy.gradeLevel);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, address);
+            return CollectionUtil.isAnyNonNull(name, phone, address, gradeLevel);
         }
 
         public void setName(Name name) {
@@ -155,6 +159,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
+        public void setGradeLevel(GradeLevel gradeLevel) {
+            this.gradeLevel = gradeLevel;
+        }
+
+        public Optional<GradeLevel> getGradeLevel() {
+            return Optional.ofNullable(gradeLevel);
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -166,10 +178,11 @@ public class EditCommand extends Command {
                 return false;
             }
 
-            EditStudentDescriptor otherEditStudentDescriptor = (EditStudentDescriptor) other;
-            return Objects.equals(name, otherEditStudentDescriptor.name)
-                    && Objects.equals(phone, otherEditStudentDescriptor.phone)
-                    && Objects.equals(address, otherEditStudentDescriptor.address);
+            EditStudentDescriptor otherEditPersonDescriptor = (EditStudentDescriptor) other;
+            return Objects.equals(name, otherEditPersonDescriptor.name)
+                    && Objects.equals(phone, otherEditPersonDescriptor.phone)
+                    && Objects.equals(address, otherEditPersonDescriptor.address)
+                    && Objects.equals(gradeLevel, otherEditPersonDescriptor.gradeLevel);
         }
 
         @Override
@@ -178,6 +191,7 @@ public class EditCommand extends Command {
                     .add("name", name)
                     .add("phone", phone)
                     .add("address", address)
+                    .add("gradeLevel", gradeLevel)
                     .toString();
         }
     }

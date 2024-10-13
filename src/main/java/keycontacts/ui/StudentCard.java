@@ -1,5 +1,8 @@
 package keycontacts.ui;
 
+import java.util.Comparator;
+import java.util.stream.Collectors;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -34,7 +37,11 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private Label address;
     @FXML
+    private Label gradeLevel;
+    @FXML
     private Label regularLesson;
+    @FXML
+    private Label pianoPieces;
 
     /**
      * Creates a {@code StudentCode} with the given {@code Student} and index to display.
@@ -46,6 +53,11 @@ public class StudentCard extends UiPart<Region> {
         name.setText(student.getName().fullName);
         phone.setText(student.getPhone().value);
         address.setText(student.getAddress().value);
+        gradeLevel.setText(student.getGradeLevel().value);
         regularLesson.setText(student.getRegularLessonDisplay());
+        pianoPieces.setText(student.getPianoPieces().stream()
+                .sorted(Comparator.comparing(pianoPiece -> pianoPiece.pianoPieceName))
+                .map(pianoPiece -> pianoPiece.pianoPieceName)
+                .collect(Collectors.joining(", ")));
     }
 }

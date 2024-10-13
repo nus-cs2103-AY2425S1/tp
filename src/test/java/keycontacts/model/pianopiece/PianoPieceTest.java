@@ -26,7 +26,7 @@ public class PianoPieceTest {
         assertThrows(NullPointerException.class, () -> PianoPiece.isValidPianoPieceName(null));
 
         // blank
-        assertFalse(PianoPiece.isValidPianoPieceName("")); // empty string
+        assertFalse(PianoPiece.isValidPianoPieceName(" ")); // whitespace
 
         // valid name
         assertTrue(PianoPiece.isValidPianoPieceName("Für Elise")); // unicode character ü
@@ -57,7 +57,7 @@ public class PianoPieceTest {
         String pianoPieceName = "Fugue";
         PianoPiece piece = new PianoPiece(pianoPieceName);
 
-        assertEquals("[" + pianoPieceName + "]", piece.toString());
+        assertEquals(pianoPieceName, piece.toString());
     }
 
     @Test

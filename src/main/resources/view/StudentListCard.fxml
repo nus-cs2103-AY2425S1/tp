@@ -3,7 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
@@ -28,7 +27,9 @@
       </HBox>
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
+      <Label fx:id="gradeLevel" styleClass="cell_small_label" text="\$gradeLevel" />
       <Label fx:id="regularLesson" styleClass="cell_small_label" text="\$regularLesson" />
+      <Label fx:id="pianoPieces" styleClass="cell_small_label" text="\$pianoPieces" />
     </VBox>
   </GridPane>
 </HBox>
