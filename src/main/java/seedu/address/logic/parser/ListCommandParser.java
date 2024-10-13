@@ -31,11 +31,11 @@ public class ListCommandParser implements Parser<ListCommand> {
         String trimmedArgs = args.trim();
 
         switch (trimmedArgs) {
-        case ListContactCommand.COMMAND_ENTITY:
+        case ListContactCommand.ENTITY_WORD:
             return new ListContactCommand();
-        case ListJobCommand.COMMAND_ENTITY:
+        case ListJobCommand.ENTITY_WORD:
             return new ListJobCommand();
-        case ListCompanyCommand.COMMAND_ENTITY:
+        case ListCompanyCommand.ENTITY_WORD:
             return new ListCompanyCommand();
         default:
             throw new ParseException(ListCommand.MESSAGE_USAGE);

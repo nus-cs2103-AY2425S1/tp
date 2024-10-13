@@ -66,7 +66,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_validCommand_success() throws Exception {
-        String listContactCommand = ListContactCommand.COMMAND_WORD + " " + ListContactCommand.COMMAND_ENTITY;
+        String listContactCommand = ListContactCommand.COMMAND_WORD + " " + ListContactCommand.ENTITY_WORD;
         assertCommandSuccess(listContactCommand, ListContactCommand.MESSAGE_SUCCESS, model);
     }
 

@@ -10,7 +10,7 @@ import seedu.address.model.Model;
  */
 public class ListContactCommand extends ListCommand {
 
-    public static final String COMMAND_ENTITY = "contact";
+    public static final String ENTITY_WORD = "contact";
 
     public static final String MESSAGE_SUCCESS = "Listed all contacts";
 

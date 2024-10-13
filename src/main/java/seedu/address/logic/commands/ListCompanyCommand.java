@@ -10,7 +10,7 @@ import seedu.address.model.Model;
  */
 public class ListCompanyCommand extends ListCommand {
 
-    public static final String COMMAND_ENTITY = "company";
+    public static final String ENTITY_WORD = "company";
 
     public static final String MESSAGE_SUCCESS = "Listed all companies";
 

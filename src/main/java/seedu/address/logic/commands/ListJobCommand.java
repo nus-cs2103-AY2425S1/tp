@@ -10,7 +10,7 @@ import seedu.address.model.Model;
  */
 public class ListJobCommand extends ListCommand {
 
-    public static final String COMMAND_ENTITY = "job";
+    public static final String ENTITY_WORD = "job";
 
     public static final String MESSAGE_SUCCESS = "Listed all jobs";
 

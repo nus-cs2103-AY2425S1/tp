@@ -87,13 +87,13 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_listContacts() throws Exception {
-        String listContactCommand = ListCompanyCommand.COMMAND_WORD + " " + ListContactCommand.COMMAND_ENTITY;
+        String listContactCommand = ListCompanyCommand.COMMAND_WORD + " " + ListContactCommand.ENTITY_WORD;
         assertTrue(parser.parseCommand(listContactCommand) instanceof ListCommand);
     }
 
     @Test
     public void parseCommand_listCompanies() throws Exception {
-        String listCompanyCommand = ListCompanyCommand.COMMAND_WORD + " " + ListCompanyCommand.COMMAND_ENTITY;
+        String listCompanyCommand = ListCompanyCommand.COMMAND_WORD + " " + ListCompanyCommand.ENTITY_WORD;
         assertTrue(parser.parseCommand(listCompanyCommand) instanceof ListCompanyCommand);
     }
 
