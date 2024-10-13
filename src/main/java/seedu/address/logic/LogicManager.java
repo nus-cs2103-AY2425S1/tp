@@ -85,9 +85,4 @@ public class LogicManager implements Logic {
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
     }
-
-    @Override
-    public ObservableList<Person> getSortedPersonList() {
-        return model.getSortedPersonList();
-    }
 }
