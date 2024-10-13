@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import hallpointer.address.commons.core.GuiSettings;
 import hallpointer.address.commons.core.LogsCenter;
 import hallpointer.address.model.member.Member;
+import hallpointer.address.model.session.Session;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
@@ -18,10 +19,13 @@ import javafx.collections.transformation.FilteredList;
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+    private static final Predicate<Member> PREDICATE_SHOW_ALL_SESSIONS = unused -> true;
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Member> filteredMembers;
+    private final FilteredList<Session> filteredSessions;
+
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +38,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredMembers = new FilteredList<>(this.addressBook.getMemberList());
+        filteredSessions = new FilteredList<>(this.addressBook.getSessionList());
     }
 
     public ModelManager() {
@@ -111,6 +116,13 @@ public class ModelManager implements Model {
         addressBook.setMember(target, editedMember);
     }
 
+    @Override
+    public void addSession(Session session) {
+        addressBook.addSession(session);
+        updateFilteredMemberList(PREDICATE_SHOW_ALL_SESSIONS); // This predicate shows all sessions
+    }
+
+
     //=========== Filtered Member List Accessors =============================================================
 
     /**
@@ -126,6 +138,17 @@ public class ModelManager implements Model {
     public void updateFilteredMemberList(Predicate<Member> predicate) {
         requireNonNull(predicate);
         filteredMembers.setPredicate(predicate);
+    }
+
+    /**
+     * Updates the filtered session list based on the given predicate.
+     *
+     * @param predicate The predicate to filter the sessions.
+     * @throws NullPointerException If the predicate is null.
+     */
+    public void updateFilteredSessionList(Predicate<Session> predicate) {
+        requireNonNull(predicate);
+        filteredSessions.setPredicate(predicate); // Assuming you have a FilteredList<Session>
     }
 
     @Override
