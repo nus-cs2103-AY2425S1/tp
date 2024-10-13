@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Arrays;
 import java.util.Optional;
 
 import javafx.collections.ObservableList;
@@ -13,8 +12,8 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.FullNameMatchesPredicate;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.NameEmailPredicate;
 import seedu.address.model.person.NamePhonePredicate;
 import seedu.address.model.person.Person;
@@ -157,9 +156,8 @@ public class DeleteCommand extends Command {
     private CommandResult deleteByName(Optional<Name> name, Model model, FilteredList<Person> listForFilter)
             throws CommandException {
         String nameString = name.get().fullName;
-        NameContainsKeywordsPredicate nameContainsKeywordsPredicate = new NameContainsKeywordsPredicate(
-                Arrays.asList(nameString));
-        listForFilter.setPredicate(nameContainsKeywordsPredicate);
+        FullNameMatchesPredicate fullNameMatchesPredicate = new FullNameMatchesPredicate(nameString);
+        listForFilter.setPredicate(fullNameMatchesPredicate);
         if (listForFilter.isEmpty()) {
             throw new CommandException("NO SUCH CONTACT");
         }
