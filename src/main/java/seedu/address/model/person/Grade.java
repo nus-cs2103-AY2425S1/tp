@@ -20,8 +20,8 @@ public class Grade {
             "Weightage should be a numeric value between 0 (exclusive) and 100 (inclusive).";
 
 
-    // Validation regex for test name (allows alphabetic characters and spaces)
-    private static final String TEST_NAME_VALIDATION_REGEX = "^[A-Za-z ]+$";
+    // Validation regex for test name (allows alphanumeric characters and spaces)
+    public static final String TEST_NAME_VALIDATION_REGEX = "^[A-Za-z0-9 _-]+$";
 
     private final String testName;
     private final float score;

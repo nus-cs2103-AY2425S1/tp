@@ -20,7 +20,12 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
  */
 public class GradeCommand extends Command {
     public static final String COMMAND_WORD = "grade";
-    public static final String MESSAGE_USAGE = "";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a grade to the person identified "
+            + "by the index number used in the displayed person list. "
+            + "Existing grades will be updated by the input values.\n"
+            + "Parameters: INDEX (must be a positive integer) EXAM_NAME EXAM_SCORE EXAM_WEIGHTAGE\n"
+            + "Example: " + COMMAND_WORD + " 1 Midterm 85 30";
+
     private final Grade toAdd;
     private final Index index;
 
