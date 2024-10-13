@@ -15,7 +15,7 @@ import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.tag.Tag;
 
 /**
- * A utility class for Person.
+ * A utility class for Client.
  */
 public class ClientUtil {
 
