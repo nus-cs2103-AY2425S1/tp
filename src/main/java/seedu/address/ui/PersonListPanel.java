@@ -18,7 +18,7 @@ public class PersonListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
 
     @FXML
-    private ListView<Person> personListView;
+    private ListView<Person> personListView;    // displays a vertical of items that users can scroll through
 
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
@@ -26,7 +26,8 @@ public class PersonListPanel extends UiPart<Region> {
     public PersonListPanel(ObservableList<Person> personList) {
         super(FXML);
         personListView.setItems(personList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
+        // cell factory creates new ListCell objects for each item in the ListView.
+        personListView.setCellFactory(listView -> new PersonListViewCell());    // provides customisation of how each cell is displayed
     }
 
     /**
@@ -34,10 +35,11 @@ public class PersonListPanel extends UiPart<Region> {
      */
     class PersonListViewCell extends ListCell<Person> {
         @Override
-        protected void updateItem(Person person, boolean empty) {
+        protected void updateItem(Person person, boolean empty) {   // define how each item is displayed in the cell
             super.updateItem(person, empty);
 
             if (empty || person == null) {
+                // when the cell is empty
                 setGraphic(null);
                 setText(null);
             } else {
