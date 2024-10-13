@@ -42,7 +42,7 @@ public class AddMedConCommandParser implements Parser<AddMedConCommand> {
         Set<MedCon> medCons = new HashSet<>();
         for (String medConStr : argMultimap.getAllValues(PREFIX_MEDCON)) {
             if (medConStr.length() > 45) {
-                throw new ParseException("Length of medical condition exceeds 45 characters.");
+                throw new ParseException("Medical condition length exceeds the limit of 45 characters");
             }
             medCons.add(new MedCon(medConStr));
         }

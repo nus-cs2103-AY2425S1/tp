@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_MEDCON;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NRIC_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.MEDCON_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.MEDCON_DESC_BOB;
@@ -81,5 +82,15 @@ public class AddMedConCommandParserTest {
         assertParseFailure(parser, MEDCON_DESC_AMY, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 AddMedConCommand.MESSAGE_USAGE));
     }
+
+
+    @Test
+    public void parse_medConLengthGreaterThan45Characters_failure() {
+        // Medical condition exceeds 45 characters
+        String input = NRIC_DESC_AMY + " c/" + INVALID_MEDCON;
+
+        assertParseFailure(parser, input, "Medical condition length exceeds the limit of 45 characters");
+    }
+
 }
 

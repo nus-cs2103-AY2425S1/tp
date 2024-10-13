@@ -73,10 +73,10 @@ public class AddMedConCommandTest {
         // Setup data
         Nric aliceNric = ALICE.getNric();
         Set<MedCon> initialMedConSet = new HashSet<>();
-        initialMedConSet.add(new MedCon("Diabetes"));
+        initialMedConSet.add(new MedCon(VALID_MEDCON_AMY));
 
         Set<MedCon> updatedMedConSet = new HashSet<>();
-        updatedMedConSet.add(new MedCon("Hypertension"));
+        updatedMedConSet.add(new MedCon(VALID_MEDCON_BOB));
 
         // Create and execute the first command to add an initial medical condition
         AddMedConCommand addMedConCommand = new AddMedConCommand(aliceNric, initialMedConSet);
@@ -87,5 +87,4 @@ public class AddMedConCommandTest {
                 .orElseThrow(() -> new AssertionError("Person not found"));
         assertEquals(initialMedConSet, updatedAlice.getMedCons());
     }
-
 }
