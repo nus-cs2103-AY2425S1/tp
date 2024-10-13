@@ -4,11 +4,11 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ISSUE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MAKE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VIN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VRN;
 
@@ -22,7 +22,7 @@ import seedu.address.logic.commands.EditClientCommand;
 import seedu.address.logic.commands.EditClientCommand.EditCarDescriptor;
 import seedu.address.logic.commands.EditClientCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.issue.Issue;
 
 /**
  * Parses input arguments and creates a new EditClientCommand object
@@ -37,7 +37,7 @@ public class EditClientCommandParser implements Parser<EditClientCommand> {
     public EditClientCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_ISSUE,
                         PREFIX_VRN, PREFIX_VIN, PREFIX_MAKE, PREFIX_MODEL);
 
         Index index;
@@ -75,7 +75,7 @@ public class EditClientCommandParser implements Parser<EditClientCommand> {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
             isPersonEdited = true;
         }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
+        parseIssuesForEdit(argMultimap.getAllValues(PREFIX_ISSUE)).ifPresent(editPersonDescriptor::setIssues);
 
         if (argMultimap.getValue(PREFIX_VRN).isPresent()) {
             editCarDescriptor.setVrn(ParserUtil.parseVrn(argMultimap.getValue(PREFIX_VRN).get()));
@@ -106,18 +106,18 @@ public class EditClientCommandParser implements Parser<EditClientCommand> {
 
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
-     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Tag>} containing zero tags.
+     * Parses {@code Collection<String> issues} into a {@code Set<Issue>} if {@code issues} is non-empty.
+     * If {@code issues} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Issue>} containing zero issues.
      */
-    private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
-        assert tags != null;
+    private Optional<Set<Issue>> parseIssuesForEdit(Collection<String> issues) throws ParseException {
+        assert issues != null;
 
-        if (tags.isEmpty()) {
+        if (issues.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        return Optional.of(ParserUtil.parseTags(tagSet));
+        Collection<String> issueSet = issues.size() == 1 && issues.contains("") ? Collections.emptySet() : issues;
+        return Optional.of(ParserUtil.parseIssues(issueSet));
     }
 
 }

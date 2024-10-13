@@ -8,12 +8,12 @@ import seedu.address.model.car.CarMake;
 import seedu.address.model.car.CarModel;
 import seedu.address.model.car.Vin;
 import seedu.address.model.car.Vrn;
+import seedu.address.model.issue.Issue;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -30,7 +30,7 @@ public class PersonBuilder {
     private Phone phone;
     private Email email;
     private Address address;
-    private Set<Tag> tags;
+    private Set<Issue> issues;
     private Car car = null;
 
     /**
@@ -41,7 +41,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        tags = new HashSet<>();
+        issues = new HashSet<>();
     }
 
     /**
@@ -53,7 +53,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         car = personToCopy.getCar();
-        tags = new HashSet<>(personToCopy.getTags());
+        issues = new HashSet<>(personToCopy.getIssues());
     }
 
     /**
@@ -65,10 +65,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code issues} into a {@code Set<Issue>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
+    public PersonBuilder withIssues(String ... issues) {
+        this.issues = SampleDataUtil.getIssueSet(issues);
         return this;
     }
 
@@ -109,9 +109,9 @@ public class PersonBuilder {
      */
     public Person build() {
         if (car != null) {
-            return new Person(name, phone, email, address, tags, car);
+            return new Person(name, phone, email, address, issues, car);
         }
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, phone, email, address, issues);
     }
 
 }

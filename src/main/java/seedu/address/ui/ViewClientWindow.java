@@ -35,7 +35,7 @@ public class ViewClientWindow extends UiPart<Stage> {
     private Label clientCarDetailsLabel;
 
     @FXML
-    private FlowPane tags;
+    private FlowPane issues;
 
     /**
      * Creates a new ViewClientWindow.
@@ -88,7 +88,7 @@ public class ViewClientWindow extends UiPart<Stage> {
      * Fills the client details labels with the given client's details.
      */
     private void fillClientDetails(Person client) {
-        tags.getChildren().clear(); // tags is reused.
+        issues.getChildren().clear(); // issues is reused.
 
         // Client Details.
         clientNameLabel.setText("        Name: " + client.getName());
@@ -100,7 +100,7 @@ public class ViewClientWindow extends UiPart<Stage> {
         Car car = client.getCar();
         if (car == null) {
             clientCarDetailsLabel.setText("        No Car associated to Client");
-            tags.getChildren().add(new Label("Not Applicable"));
+            issues.getChildren().add(new Label("Not Applicable"));
             return;
         }
         String carDetails = String.format("        VRN: %s\n"
@@ -111,13 +111,13 @@ public class ViewClientWindow extends UiPart<Stage> {
         clientCarDetailsLabel.setText(carDetails);
 
         // Car Issues
-        if (client.getTags().isEmpty()) {
-            tags.getChildren().add(new Label("No Issues"));
+        if (client.getIssues().isEmpty()) {
+            issues.getChildren().add(new Label("No Issues"));
             return;
         }
-        client.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        client.getIssues().stream()
+                .sorted(Comparator.comparing(issue -> issue.issueName))
+                .forEach(issue -> issues.getChildren().add(new Label(issue.issueName)));
     }
 
     /**

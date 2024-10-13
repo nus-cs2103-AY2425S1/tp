@@ -15,12 +15,12 @@ import seedu.address.model.car.CarMake;
 import seedu.address.model.car.CarModel;
 import seedu.address.model.car.Vin;
 import seedu.address.model.car.Vrn;
+import seedu.address.model.issue.Issue;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link Person}. CONVERTS JSON TO PERSON
@@ -39,7 +39,7 @@ class JsonAdaptedPerson {
     private final String make;
     private final String model;
 
-    private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedIssue> issues = new ArrayList<>();
 
 
     /**
@@ -48,7 +48,7 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("issues") List<JsonAdaptedIssue> issues,
             @JsonProperty("vin") String vin,
             @JsonProperty("vrn") String vrn,
             @JsonProperty("make") String make,
@@ -62,8 +62,8 @@ class JsonAdaptedPerson {
         this.make = make;
         this.model = model;
 
-        if (tags != null) {
-            this.tags.addAll(tags);
+        if (issues != null) {
+            this.issues.addAll(issues);
         }
     }
 
@@ -86,8 +86,8 @@ class JsonAdaptedPerson {
             make = null;
             model = null;
         }
-        tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
+        issues.addAll(source.getIssues().stream()
+                .map(JsonAdaptedIssue::new)
                 .collect(Collectors.toList()));
     }
 
@@ -97,9 +97,9 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
+        final List<Issue> personIssues = new ArrayList<>();
+        for (JsonAdaptedIssue issue : issues) {
+            personIssues.add(issue.toModelType());
         }
 
         if (name == null) {
@@ -134,11 +134,11 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
+        final Set<Issue> modelIssues = new HashSet<>(personIssues);
 
 
         if (vin == null && vrn == null && make == null && model == null) {
-            return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+            return new Person(modelName, modelPhone, modelEmail, modelAddress, modelIssues);
         }
 
         checkForMissingCarField();
@@ -146,7 +146,7 @@ class JsonAdaptedPerson {
 
         // If all car details are present and valid, return a person with a car
         final Car car = new Car(new Vrn(vrn), new Vin(vin), new CarMake(make), new CarModel(model));
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, car);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelIssues, car);
     }
 
     public void checkForMissingCarField() throws IllegalValueException {

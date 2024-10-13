@@ -9,7 +9,7 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.car.Car;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.issue.Issue;
 
 /**
  * Represents a Person in the address book.
@@ -26,18 +26,18 @@ public class Person {
     private final Address address;
     private final Car car;
 
-    private final Set<Tag> tags = new HashSet<>(); // TAGS wont be used for now, but just kept for compatibility
+    private final Set<Issue> issues = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Set<Issue> issues) {
+        requireAllNonNull(name, phone, email, address, issues);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.tags.addAll(tags);
+        this.issues.addAll(issues);
         this.car = null;
         System.out.println("Person without car created");
     }
@@ -48,17 +48,17 @@ public class Person {
      * @param phone
      * @param email
      * @param address
-     * @param tags
+     * @param issues
      * @param car
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Car car) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Set<Issue> issues, Car car) {
+        requireAllNonNull(name, phone, email, address, issues);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.car = car;
-        this.tags.addAll(tags);
+        this.issues.addAll(issues);
         System.out.println("Person with car created" + car);
     }
 
@@ -83,11 +83,11 @@ public class Person {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable issue set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Set<Issue> getIssues() {
+        return Collections.unmodifiableSet(issues);
     }
 
     /**
@@ -125,7 +125,7 @@ public class Person {
                     && phone.equals(otherPerson.phone)
                     && email.equals(otherPerson.email)
                     && address.equals(otherPerson.address)
-                    && tags.equals(otherPerson.tags);
+                    && issues.equals(otherPerson.issues);
         } else if (car == null || otherPerson.car == null) {
             return false;
         }
@@ -134,13 +134,13 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags)
+                && issues.equals(otherPerson.issues)
                 && car.equals(otherPerson.car);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, phone, email, address, tags, car);
+        return Objects.hash(name, phone, email, address, issues, car);
     }
 
     @Override
@@ -151,7 +151,7 @@ public class Person {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
-                    .add("tags", tags)
+                    .add("issues", issues)
                     .toString();
         }
         return new ToStringBuilder(this)
@@ -159,7 +159,7 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("tags", tags)
+                .add("issues", issues)
                 .add("car", car)
                 .toString();
     }
