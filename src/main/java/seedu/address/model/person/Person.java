@@ -83,6 +83,25 @@ public class Person {
     }
 
     /**
+     * Returns true if both persons have the same fields.
+     * This defines a weaker notion of equality between two persons.
+     * This is called after isSamePerson, will return true if
+     * - TelegramHandle field already exist
+     * - Email field already exist
+     * - Nickname already exist for the same Name
+     */
+    public boolean hasSameFields(Person otherPerson) {
+        if (otherPerson == this) {
+            return true;
+        }
+
+        return otherPerson != null
+                && otherPerson.getTelegramHandle().equals(getTelegramHandle())
+                || otherPerson.getEmail().equals(getEmail())
+                || (otherPerson.getNickname().equals(getNickname()) && otherPerson.getName().equals(getName()));
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
