@@ -45,6 +45,14 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+
+        // append notes if available
+        if (!person.getNotes().getNotes().isEmpty()) {
+            builder.append("; Notes: ");
+            String notesString = String.join(", ", person.getNotes().getNotes());
+            builder.append(notesString);
+        }
+
         return builder.toString();
     }
 

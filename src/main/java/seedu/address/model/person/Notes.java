@@ -52,7 +52,7 @@ public class Notes {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         for (String note : notes) {
-            stringBuilder.append(note).append(" ");
+            stringBuilder.append(note).append(", ");
         }
 
         return stringBuilder.toString();
