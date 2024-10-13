@@ -17,6 +17,8 @@ import spleetwaise.address.logic.parser.exceptions.ParseException;
 import spleetwaise.address.model.ReadOnlyAddressBook;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.storage.Storage;
+import spleetwaise.commons.exceptions.SpleetWaiseCommandException;
+import spleetwaise.transaction.logic.parser.ParserUtil;
 import spleetwaise.transaction.logic.parser.TransactionParser;
 import spleetwaise.transaction.model.transaction.Transaction;
 
@@ -42,16 +44,17 @@ public class LogicManager implements Logic {
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
      */
     public LogicManager(spleetwaise.address.model.Model addressBookModel,
-        spleetwaise.transaction.model.Model transactionModel, Storage storage) {
+                        spleetwaise.transaction.model.Model transactionModel, Storage storage) {
         this.addressBookModel = addressBookModel;
         this.transactionModel = transactionModel;
         this.storage = storage;
         addressBookParser = new AddressBookParser();
         transactionParser = new TransactionParser();
+        ParserUtil.setAddressBookModel(addressBookModel);
     }
 
     @Override
-    public CommandResult execute(String commandText) throws CommandException, ParseException {
+    public CommandResult execute(String commandText) throws ParseException, SpleetWaiseCommandException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
@@ -66,31 +69,6 @@ public class LogicManager implements Logic {
         }
 
         throw new ParseException(String.format(MESSAGE_UNKNOWN_COMMAND, commandText));
-    }
-
-    private CommandResult executeAddressBookCommand(spleetwaise.address.logic.commands.Command addressBookCommand)
-            throws CommandException {
-        CommandResult commandResult = addressBookCommand.execute(addressBookModel);
-
-        // Save AddressBook data
-        try {
-            storage.saveAddressBook(addressBookModel.getAddressBook());
-        } catch (AccessDeniedException e) {
-            throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
-        } catch (IOException ioe) {
-            throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
-        }
-
-        return commandResult;
-    }
-
-    private CommandResult executeTransactionCommand(spleetwaise.transaction.logic.commands.Command transactionCommand)
-            throws CommandException {
-        CommandResult commandResult = transactionCommand.execute(transactionModel);
-
-        // TODO: Save Transactions data
-
-        return commandResult;
     }
 
     @Override
@@ -121,5 +99,30 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Transaction> getFilteredTransactionList() {
         return transactionModel.getFilteredTransactionList();
+    }
+
+    private CommandResult executeAddressBookCommand(spleetwaise.address.logic.commands.Command addressBookCommand)
+            throws SpleetWaiseCommandException {
+        CommandResult commandResult = addressBookCommand.execute(addressBookModel);
+
+        // Save AddressBook data
+        try {
+            storage.saveAddressBook(addressBookModel.getAddressBook());
+        } catch (AccessDeniedException e) {
+            throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
+        } catch (IOException ioe) {
+            throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
+        }
+
+        return commandResult;
+    }
+
+    private CommandResult executeTransactionCommand(spleetwaise.transaction.logic.commands.Command transactionCommand)
+            throws SpleetWaiseCommandException {
+        CommandResult commandResult = transactionCommand.execute(transactionModel);
+
+        // TODO: Save Transactions data
+
+        return commandResult;
     }
 }

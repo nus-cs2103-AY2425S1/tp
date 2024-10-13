@@ -1,9 +1,9 @@
-package spleetwaise.address.logic.commands.exceptions;
+package spleetwaise.transaction.logic.commands.exceptions;
 
 import spleetwaise.commons.exceptions.SpleetWaiseCommandException;
 
 /**
- * Represents an error that occurs during command execution in the address component.
+ * Represents an error that occurs during command execution in the transaction component.
  */
 public class CommandException extends SpleetWaiseCommandException {
     public CommandException(String message) {
