@@ -38,8 +38,8 @@ public class Person {
         //  this.email = email;
         //  this.address = address;
         //  this.remark = remark;
-        this.property = property;
         this.appointment = appointment;
+        this.property = property;
         //  this.tags.addAll(tags);
     }
 
