@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.Arrays;
 
@@ -29,61 +31,21 @@ public class FindCommandParser implements Parser<FindCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        if (trimmedArgs.contains("n/") && trimmedArgs.contains("c/")) {
-            String[] nameKeywords = parseNameClassId(trimmedArgs);
-            String[] classIdKeywords = parseClassId(trimmedArgs);
+        if (trimmedArgs.contains(PREFIX_NAME.toString()) && trimmedArgs.contains(PREFIX_CLASSID.toString())) {
+            String[] nameKeywords = ParserUtil.parseNameClassIdFind(trimmedArgs);
+            String[] classIdKeywords = ParserUtil.parseClassIdFind(trimmedArgs);
             return new FindCommand(new NameAndClassIdContainsKeywordsPredicate(Arrays.asList(nameKeywords),
                     Arrays.asList(classIdKeywords)));
         }
 
-        if (trimmedArgs.contains("n/")) {
-            String[] nameKeywords = parseName(trimmedArgs);
+        if (trimmedArgs.contains(PREFIX_NAME.toString())) {
+            String[] nameKeywords = ParserUtil.parseNameFind(trimmedArgs);
             return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
         }
 
-
-
-        String[] classIdKeywords = parseClassId(trimmedArgs);
+        String[] classIdKeywords = ParserUtil.parseClassIdFind(trimmedArgs);
         return new FindCommand(new ClassIdContainsKeywordsPredicate(Arrays.asList(classIdKeywords)));
 
-
-
-
     }
-
-    private String[] parseNameClassId(String args) throws ParseException {
-        String[] nameClassId = args.split("n/", 2)[1].split("c/", 2);
-
-        if (nameClassId.length < 2 || nameClassId[1].trim().isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        }
-
-        return nameClassId[0].trim().split("\\s+");
-    }
-
-    private String[] parseName(String args) throws ParseException {
-        String[] names = args.split("n/", 2);
-        if (names.length < 2 || names[1].trim().isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        }
-
-        return names[1].trim().split("\\s+");
-
-    }
-
-    private String[] parseClassId(String args) throws ParseException {
-        String[] classIds = args.split("c/", 2);
-        if (classIds.length < 2 || classIds[1].trim().isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        }
-
-        return classIds[1].trim().split("\\s+");
-
-    }
-
-
 
 }

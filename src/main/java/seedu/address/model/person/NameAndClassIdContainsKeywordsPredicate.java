@@ -47,10 +47,10 @@ public class NameAndClassIdContainsKeywordsPredicate implements Predicate<Person
             return false;
         }
 
-        NameAndClassIdContainsKeywordsPredicate otherClassIdContainsKeywordsPredicate =
+        NameAndClassIdContainsKeywordsPredicate otherNameAndClassIdContainsKeywordsPredicate =
                 (NameAndClassIdContainsKeywordsPredicate) other;
-        return nameKeywords.equals(otherClassIdContainsKeywordsPredicate.nameKeywords)
-                && classIdKeywords.equals(otherClassIdContainsKeywordsPredicate.classIdKeywords);
+        return nameKeywords.equals(otherNameAndClassIdContainsKeywordsPredicate.nameKeywords)
+                && classIdKeywords.equals(otherNameAndClassIdContainsKeywordsPredicate.classIdKeywords);
     }
 
     @Override

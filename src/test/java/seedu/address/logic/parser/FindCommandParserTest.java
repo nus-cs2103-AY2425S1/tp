@@ -18,14 +18,14 @@ public class FindCommandParserTest {
     private FindCommandParser parser = new FindCommandParser();
 
     @Test
-    public void parse_emptyArg_throwsParseException() {
+    public void testParseMethodWithEmptyArg() {
         assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
 
 
     @Test
-    public void parse_validArgs_returnsFindCommand() {
+    public void testParseMethodWithvalidArgs() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
                 new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
@@ -36,7 +36,7 @@ public class FindCommandParserTest {
 
 
     @Test
-    public void parse_invalidArgsWithName_throwsParseException() {
+    public void testParseMethodWithInvalidArgsWithName() {
         // missing keywords after n/
         assertParseFailure(parser, "n/",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
@@ -47,7 +47,7 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_validArgsWithClassId_returnsFindCommand() {
+    public void testParseMethodWithValidArgsWithClassId() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
                 new FindCommand(new ClassIdContainsKeywordsPredicate(Arrays.asList("1", "2")));
@@ -58,7 +58,7 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_validArgsWithNameAndClassId_returnsFindCommand() {
+    public void testParseMethodValidArgsWithNameAndClassId() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
                 new FindCommand(new NameAndClassIdContainsKeywordsPredicate(Arrays.asList("Bob", "Alice"),

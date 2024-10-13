@@ -15,7 +15,7 @@ import seedu.address.testutil.PersonBuilder;
 public class NameAndClassIdContainsKeywordsPredicateTest {
 
     @Test
-    public void equals() {
+    public void testEqualsMethod() {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
         List<String> secondPredicateKeywordList = Arrays.asList("1", "2");
         List<String> thirdPredicateKeywordList = Arrays.asList("second");
@@ -46,7 +46,7 @@ public class NameAndClassIdContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void testNameAndClassIdContainsKeywordsreturnsTrue() {
+    public void testNameAndClassIdContainsKeywordsReturnsTrue() {
         // One keyword
         NameAndClassIdContainsKeywordsPredicate predicate =
                 new NameAndClassIdContainsKeywordsPredicate(Collections.singletonList("Alice"),
@@ -68,7 +68,7 @@ public class NameAndClassIdContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void testNameAndClassIdContainsKeywordsreturnsFalse() {
+    public void testNameAndClassIdContainsKeywordsReturnsFalse() {
         // Zero keywords
         NameAndClassIdContainsKeywordsPredicate predicate =
                 new NameAndClassIdContainsKeywordsPredicate(Collections.emptyList(), Collections.emptyList());
@@ -86,7 +86,7 @@ public class NameAndClassIdContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void toStringMethod() {
+    public void testToStringMethod() {
         List<String> keywords = List.of("keyword1", "keyword2");
         List<String> keywords2 = List.of("keyword3", "keyword4");
         NameAndClassIdContainsKeywordsPredicate predicate =
