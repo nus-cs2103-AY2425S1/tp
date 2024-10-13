@@ -19,7 +19,8 @@ public class AddAssignmentCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_DUEDATE + "yyyy-MM-dd HHmm (Due date)\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "2024-10-23 1230";
+            + PREFIX_NAME + "Assignment 1 "
+            + PREFIX_DUEDATE + "2024-10-23 1230";
     public static final String MESSAGE_DUPLICATE_ASSIGNMENT = "This assignment already exists!";
 
     private final Assignment assignment;
