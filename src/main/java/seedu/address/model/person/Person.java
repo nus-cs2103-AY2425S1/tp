@@ -80,6 +80,23 @@ public class Person {
     }
 
     /**
+     * Returns true if property is in the list of properties to buy.
+     * @param property Property to check
+     * @return boolean
+     */
+    public boolean containsBuyProperty(Property property) {
+        return buyingProperties.contains(property);
+    }
+
+    /**
+     * Adds a property to the list of properties to buy.
+     * @param property Property to add
+     */
+    public void addBuyProperty(Property property) {
+        buyingProperties.add(property);
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
