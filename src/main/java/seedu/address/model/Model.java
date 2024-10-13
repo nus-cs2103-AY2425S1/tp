@@ -7,7 +7,6 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
 import seedu.address.model.policy.Policy;
-import seedu.address.model.policy.PolicyExpiryDatePredicate;
 
 /**
  * The API of the Model component.
