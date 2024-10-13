@@ -378,6 +378,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+**Use case: UC5 - Find people**
+
+**MSS**
+
+1.  Actor requests to find specific people.
+2.  System shows a filtered list of persons.
+
+    Use case ends.
+
 ### Non-Functional Requirements
 
 1.  The system should work on any _mainstream OS_ as long as it has Java `17` or above installed.
