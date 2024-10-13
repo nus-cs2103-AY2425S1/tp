@@ -6,7 +6,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.PatientPredicate;
+import seedu.address.model.patient.PatientPredicate;
 
 /**
  * Lists all patients in the address book to the user.
@@ -20,19 +20,18 @@ public class ListPatientCommand extends Command {
 
     /**
      * Executes the command and returns the result message.
-     * As this command is not yet implemented, it throws a {@code CommandException}.
      *
      * @param model The model to execute the command on.
-     * @throws CommandException if the command is not implemented.
      */
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model) {
         requireNonNull(model);
         PatientPredicate predicate = new PatientPredicate();
         model.updateFilteredPersonList(predicate);
         return new CommandResult(String.format(
                 Messages.MESSAGE_PATIENTS_LISTED_OVERVIEW,
-                model.getFilteredPersonList().size()));
+                model.getFilteredPersonList().size()
+        ));
     }
 
     /**

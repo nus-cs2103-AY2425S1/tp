@@ -1,8 +1,8 @@
-package seedu.address.model.person;
+package seedu.address.model.patient;
 
 import java.util.function.Predicate;
 
-import seedu.address.model.patient.Patient;
+import seedu.address.model.person.Person;
 
 /**
  * Tests that a {@code Person} is an instanceof Patient.

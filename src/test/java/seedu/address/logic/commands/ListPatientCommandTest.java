@@ -17,7 +17,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.PatientPredicate;
+import seedu.address.model.patient.PatientPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code ListPatientCommand}.
