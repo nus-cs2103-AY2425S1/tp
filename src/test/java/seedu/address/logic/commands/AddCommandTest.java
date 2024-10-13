@@ -109,12 +109,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getClientHubFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setClientHubFilePath(Path clientHubFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -124,12 +124,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyClientHub newData) {
+        public void setClientHub(ReadOnlyClientHub newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyClientHub getAddressBook() {
+        public ReadOnlyClientHub getClientHub() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -196,7 +196,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyClientHub getAddressBook() {
+        public ReadOnlyClientHub getClientHub() {
             return new ClientHub();
         }
     }
