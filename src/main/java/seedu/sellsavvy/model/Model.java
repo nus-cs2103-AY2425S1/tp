@@ -80,6 +80,11 @@ public interface Model {
     ObservableList<Person> getFilteredPersonList();
 
     /**
+     * Creates a copy of the entire {@code Model}.
+     */
+    Model createCopy();
+
+    /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */

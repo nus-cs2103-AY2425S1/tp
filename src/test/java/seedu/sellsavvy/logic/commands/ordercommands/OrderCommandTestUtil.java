@@ -1,6 +1,12 @@
 package seedu.sellsavvy.logic.commands.ordercommands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.sellsavvy.testutil.Assert.assertThrows;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import seedu.sellsavvy.commons.core.index.Index;
 import seedu.sellsavvy.logic.commands.Command;
@@ -8,8 +14,8 @@ import seedu.sellsavvy.logic.commands.CommandResult;
 import seedu.sellsavvy.logic.commands.exceptions.CommandException;
 import seedu.sellsavvy.model.AddressBook;
 import seedu.sellsavvy.model.Model;
-import seedu.sellsavvy.model.ModelManager;
-import seedu.sellsavvy.model.UserPrefs;
+import seedu.sellsavvy.model.person.NameContainsKeywordsPredicate;
+import seedu.sellsavvy.model.person.Person;
 
 /**
  * Contains helper methods for testing Order commands.
@@ -31,11 +37,9 @@ public class OrderCommandTestUtil {
     public static void assertCommandSuccess(Command command, Model actualModel, CommandResult expectedCommandResult,
             Model expectedModel) {
         try {
-            AddressBook actualAddressBook = (AddressBook) actualModel.getAddressBook();
-            Model actualModelCopy = new ModelManager(actualAddressBook.createCopy(), new UserPrefs());
-            CommandResult result = command.execute(actualModelCopy);
+            CommandResult result = command.execute(actualModel);
             assertEquals(expectedCommandResult, result);
-            assertEquals(expectedModel, actualModelCopy);
+            assertEquals(expectedModel, actualModel);
         } catch (CommandException ce) {
             throw new AssertionError("Execution of command should not fail.", ce);
         }
@@ -60,12 +64,28 @@ public class OrderCommandTestUtil {
      * - the CommandException message matches {@code expectedMessage} <br>
      * - the address book, filtered order list and selected order in {@code actualModel} remain unchanged
      */
-    public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {}
+    public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
+        // we are unable to defensively copy the model for comparison later, so we can
+        // only do so by copying its components.
+        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+        List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
 
-    //TODO:
+        assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
+        assertEquals(expectedAddressBook, actualModel.getAddressBook());
+        assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
+    }
+
     /**
      * Updates {@code model}'s filtered list to show only the order at the given {@code targetIndex} in the
      * {@code model}'s address book.
      */
-    public static void showOrderAtIndex(Model model, Index targetIndex) {}
+    public static void showOrderAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
+
+        Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
+        final String[] splitName = person.getName().fullName.split("\\s+");
+        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredPersonList().size());
+    }
 }
