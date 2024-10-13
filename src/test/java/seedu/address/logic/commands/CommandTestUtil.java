@@ -4,11 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MAJOR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNIVERSITY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MAJOR;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -39,9 +39,7 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_UNIVERSITY_AMY = "NUS";
-
     public static final String VALID_UNIVERSITY_BOB = "NTU";
-
     public static final String VALID_MAJOR_AMY = "Computer Science";
     public static final String VALID_MAJOR_BOB = "Business";
 
@@ -68,7 +66,8 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-    public static final String INVALID_UNIVERSITY_DESC = " " + PREFIX_UNIVERSITY + "NTU%"; // '%' not allowed in university
+    public static final String INVALID_UNIVERSITY_DESC = " " + PREFIX_UNIVERSITY + "NTU%";
+    // '%' not allowed in university
     public static final String INVALID_MAJOR_DESC = " " + PREFIX_MAJOR + "1234"; // numbers not allowed in major
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
