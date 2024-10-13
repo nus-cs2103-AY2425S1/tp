@@ -29,15 +29,28 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
-    private Label name;
-    @FXML
     private Label id;
+    @FXML
+    private Label name;
     @FXML
     private Label phone;
     @FXML
+    private Label email;
+    @FXML
     private Label address;
     @FXML
-    private Label email;
+    private Label schedule;
+    @FXML
+    private Label subject;
+    @FXML
+    private Label rate;
+    @FXML
+    private Label paid;
+    @FXML
+    private Label owedAmount;
+
+
+
 
     // used to display blue color tags.
     @FXML
@@ -51,9 +64,14 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
+        phone.setText("Contact: " + person.getPhone().value);
+        address.setText("Address: " + person.getAddress().value);
+        email.setText("Email: " + person.getEmail().value);
+        schedule.setText("Schedule: " + person.getSchedule().value);
+        subject.setText("Subjects: " + person.getSubject().toString());
+        rate.setText("Rate: $" + person.getRate().toString() + "/hr");
+        paid.setText("Paid: $" + person.getPaid().toString());
+        owedAmount.setText("Owed: $" + person.getOwedAmount().toString());
 
         // This is the code to show blue tags. I will comment it out instead of deleting it.
         /*
