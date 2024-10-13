@@ -39,21 +39,21 @@ public class TypicalPersons {
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street")
             .withSchedule("Wednesday-1800-1900").withSubject("Mathematics").withRate("450.5").build();
-    public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
+    public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("94802224")
             .withEmail("werner@example.com").withAddress("michegan ave")
             .withSchedule("Thursday-1800-1900").withSubject("Mathematics").withRate("350").build();
-    public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
+    public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("94824270")
             .withEmail("lydia@example.com").withAddress("little tokyo")
             .withSchedule("Friday-1800-1900").withSubject("Mathematics").withRate("260.25").build();
-    public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
+    public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("94824420")
             .withEmail("anna@example.com").withAddress("4th street").withSchedule("Saturday-1800-1900")
             .withSubject("Mathematics").withRate("120").build();
 
     // Manually added
-    public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
+    public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("84820424")
             .withEmail("stefan@example.com").withAddress("little india")
             .withSchedule("Sunday-1800-1900").withRate("200").build();
-    public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
+    public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("84820131")
             .withEmail("hans@example.com").withAddress("chicago ave")
             .withSchedule("Monday-1800-1900").withRate("450").build();
 
