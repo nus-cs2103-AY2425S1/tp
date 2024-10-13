@@ -26,7 +26,6 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
-        System.out.println(argMultimap.getAllValues(PREFIX_NAME));
         return new FindCommand(new NameContainsKeywordsPredicate(
                 argMultimap.getAllValues(PREFIX_NAME)));
     }
