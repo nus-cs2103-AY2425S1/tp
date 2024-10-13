@@ -8,6 +8,8 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.vendor.UniqueVendorList;
 import seedu.address.model.vendor.Vendor;
+import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.tag.Tag;
 
 /**
  * Wraps all data at the address-book level
@@ -16,6 +18,7 @@ import seedu.address.model.vendor.Vendor;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueVendorList vendors;
+    private final UniqueTagList tags;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -92,6 +95,13 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeVendor(Vendor key) {
         vendors.remove(key);
+    }
+
+    //// assign operations
+
+    public void addTag(Tag tag) {
+        requireNonNull(tag);
+        tags.add(tag);
     }
 
     //// util methods

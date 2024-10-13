@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Set;
+import java.util.HashSet;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,6 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.vendor.Vendor;
 
 /**
@@ -22,6 +25,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Vendor> filteredVendors;
+    private final Set<Tag> tags;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -33,6 +37,7 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.tags = new HashSet<>();
         filteredVendors = new FilteredList<>(this.addressBook.getVendorList());
     }
 
@@ -109,6 +114,12 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedVendor);
 
         addressBook.setVendor(target, editedVendor);
+    }
+
+    @Override
+    public void addTag(Tag tag) {
+        requireNonNull(tag);
+        addressBook.addTag(tag);
     }
 
     //=========== Filtered Vendor List Accessors =============================================================
