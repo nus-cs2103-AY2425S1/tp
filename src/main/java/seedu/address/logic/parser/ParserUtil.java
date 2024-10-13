@@ -155,9 +155,20 @@ public class ParserUtil {
             throw new ParseException(Policy.MESSAGE_CONSTRAINTS);
         }
     }
+
+    /**
+     * Parses a {@code Optional<String>} policy into a {@code PolicyType}.
+     *
+     * @param policy The optional string representing the policy type.
+     *               The policy string will be trimmed and converted to lowercase
+     *               for comparison with predefined {@code PolicyType} values.
+     * @return The {@code PolicyType} corresponding to the given policy string.
+     * @throws ParseException If the given {@code policy} is empty or does not match
+     *                        any valid {@code PolicyType}.
+     */
     public static PolicyType parsePolicyType(Optional<String> policy) throws ParseException {
         requireNonNull(policy);
-        if(policy.isEmpty()){
+        if (policy.isEmpty()) {
             throw new ParseException(Policy.MESSAGE_CONSTRAINTS);
         }
         final String lowerCaseTrimmedPolicy = policy.get().trim().toLowerCase();
