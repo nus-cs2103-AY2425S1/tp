@@ -74,7 +74,7 @@ public class PaidCommand extends Command {
         Boolean updatedHasPaid = true;
 
         return new Person(personToPay.getName(), personToPay.getPhone(), personToPay.getEmail(),
-                personToPay.getAddress(), personToPay.getTags(), updatedHasPaid);
+                personToPay.getAddress(), personToPay.getBirthday(), personToPay.getTags(), updatedHasPaid);
     }
 
     @Override
