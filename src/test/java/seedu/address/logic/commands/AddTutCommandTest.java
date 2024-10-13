@@ -173,6 +173,11 @@ public class AddTutCommandTest {
         }
 
         @Override
+        public void deleteAssignment(Assignment assignment) {
+
+        }
+
+        @Override
         public String checkAssignment(Assignment assignment) throws AssignmentNotFoundException {
             throw new AssertionError("This method should not be called.");
         }

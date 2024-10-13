@@ -151,6 +151,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteAssignment(Assignment assignment) {
+        assignmentList.deleteAssignment(assignment);
+    }
+
+    @Override
     public String checkAssignment(Assignment assignment) throws AssignmentNotFoundException {
         requireNonNull(assignment);
 
@@ -169,7 +174,6 @@ public class ModelManager implements Model {
     public String listAssignments() {
         return assignmentList.toString();
     }
-
 
     //=========== Filtered Student List Accessors =============================================================
 

@@ -35,7 +35,6 @@ public class DeleteCommandTest {
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_STUDENT_SUCCESS,
                 Messages.format(studentToDelete));
-
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new AssignmentList());
         expectedModel.deleteStudent(studentToDelete);
 

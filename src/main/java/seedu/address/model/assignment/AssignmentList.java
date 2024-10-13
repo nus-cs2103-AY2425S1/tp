@@ -56,6 +56,20 @@ public class AssignmentList {
     }
 
     /**
+     * Deletes the specified assignment from the list.
+     * The assignment must exist in the list.
+     *
+     * @param assignment The assignment to be deleted.
+     * @throws AssignmentNotFoundException if the assignment does not exist in the list.
+     */
+    public void deleteAssignment(Assignment assignment) {
+        if (!hasAssignment(assignment)) {
+            throw new AssignmentNotFoundException();
+        }
+        assignments.remove(assignment);
+    }
+
+    /**
      * Returns completion statuses of all students for the specified assignment.
      * @param assignment Assignment to be checked.
      * @param studentList Current list of students.

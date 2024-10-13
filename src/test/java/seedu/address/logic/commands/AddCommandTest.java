@@ -183,12 +183,15 @@ public class AddCommandTest {
         }
 
         @Override
+
         public boolean hasTutorial(Tut tutorial) {
             return false;
         }
 
         @Override
         public void addTutorial(Tut toAdd) {
+        }
+        public void deleteAssignment(Assignment assignment) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -202,6 +205,7 @@ public class AddCommandTest {
         public String listAssignments() {
             throw new AssertionError("This method should not be called.");
         }
+
     }
 
     /**
@@ -245,5 +249,4 @@ public class AddCommandTest {
             return new AddressBook();
         }
     }
-
 }

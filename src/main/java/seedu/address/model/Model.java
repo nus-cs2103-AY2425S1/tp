@@ -110,7 +110,14 @@ public interface Model {
 
 
     /**
+     * Deletes the specified assignment.
+     * The assignment must exist in the assignment list.
+     */
+    void deleteAssignment(Assignment assignment);
+
+    /**
      * check the completion statuses of the specified assignment.
+     *
      * @param assignment Assignment to be checked.
      * @return String representing the completion statuses.
      */
@@ -118,6 +125,7 @@ public interface Model {
 
     /**
      * Sets the status of assignment of the given student to a specified boolean value.
+     *
      * @param assignment The assignment to be marked or unmarked.
      * @param targetStudent The target student that completes or not completes the assignment.
      * @param newStatus New boolean value of the status.
@@ -128,6 +136,7 @@ public interface Model {
 
     /**
      * Lists all current assignments.
+     *
      * @return String of all current assignments.
      */
     String listAssignments();
