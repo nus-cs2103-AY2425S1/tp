@@ -12,6 +12,9 @@ public class Priority {
     public static final String MESSAGE_CONSTRAINTS =
             "Priority should only be 'HIGH', 'MEDIUM' or 'LOW'";
 
+    /**
+     * Represents the different level of priority.
+     */
     public enum PriorityLevel {
 
         HIGH,
@@ -19,7 +22,7 @@ public class Priority {
         LOW;
     }
 
-    public PriorityLevel priority;
+    private PriorityLevel priority;
 
     /**
      * Constructs a {@code Priority}.
@@ -46,9 +49,9 @@ public class Priority {
      * Returns true if a given priority is a valid priority level.
      */
     public static boolean isValidPriority(String test) {
-        return test.equalsIgnoreCase("low") ||
-               test.equalsIgnoreCase("medium") ||
-               test.equalsIgnoreCase("high");
+        return test.equalsIgnoreCase("low")
+               || test.equalsIgnoreCase("medium")
+               || test.equalsIgnoreCase("high");
     }
 
     @Override
