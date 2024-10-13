@@ -2,6 +2,9 @@ package seedu.sellsavvy.logic.commands.ordercommands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_COUNT;
+import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_ITEM;
 import static seedu.sellsavvy.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -28,6 +31,22 @@ public class OrderCommandTestUtil {
     public static final String VALID_DATE_BOTTLE = "05-06-2027";
     public static final String VALID_ITEM_ATLAS = "Atlas A";
     public static final String VALID_ITEM_BOTTLE = "Bottle B";
+
+    public static final String COUNT_DESC_ATLAS = " " + PREFIX_COUNT + VALID_COUNT_ATLAS;
+    public static final String COUNT_DESC_BOTTLE = " " + PREFIX_COUNT + VALID_COUNT_BOTTLE;
+    public static final String DATE_DESC_ATLAS = " " + PREFIX_DATE + VALID_DATE_ATLAS;
+    public static final String DATE_DESC_BOTTLE = " " + PREFIX_DATE + VALID_DATE_BOTTLE;
+    public static final String ITEM_DESC_ATLAS = " " + PREFIX_ITEM + VALID_ITEM_ATLAS;
+    public static final String ITEM_DESC_BOTTLE = " " + PREFIX_ITEM + VALID_ITEM_BOTTLE;
+
+    public static final String INVALID_ITEM_DESC = " " + PREFIX_ITEM + "Atlas&";
+    public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "a";
+    public static final String INVALID_DATE_NO_HYPHEN = " " + PREFIX_DATE + "02/12/2024";
+    public static final String INVALID_DATE_DIGIT = " " + PREFIX_DATE + "2/1/2024";
+    public static final String INVALID_DATE_VALUE = " " + PREFIX_DATE + "32-01-2024";
+    public static final String INVALID_COUNT_ZERO = " " + PREFIX_COUNT + "0";
+    public static final String INVALID_COUNT_NEGATIVE = " " + PREFIX_COUNT + "-2";
+    public static final String INVALID_COUNT_STRING = " " + PREFIX_COUNT + "2 some random string";
 
     /**
      * Executes the given {@code command}, confirms that <br>
