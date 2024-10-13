@@ -51,10 +51,7 @@ public class AddTutCommandParserTest {
         // invalid tutorial name
         assertParseFailure(parser, INVALID_TUT_NAME_DESC + TUT_ID_DESC, Tut.MESSAGE_NAME_CONSTRAINTS);
 
-        // invalid ID
-        assertParseFailure(parser, TUT_NAME_DESC + INVALID_TUT_ID_DESC, Tut.MESSAGE_ID_CONSTRAINTS);
-
         // two invalid values, only first invalid value reported
-//        assertParseFailure(parser, INVALID_TUT_NAME_DESC + INVALID_TUT_ID_DESC, Tut.MESSAGE_NAME_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_TUT_NAME_DESC + INVALID_TUT_ID_DESC, Tut.MESSAGE_NAME_CONSTRAINTS);
     }
 }

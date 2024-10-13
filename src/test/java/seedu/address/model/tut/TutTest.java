@@ -57,6 +57,6 @@ public class TutTest {
         Student aliceCopy = new StudentBuilder(ALICE).build();
         Tut tut = new Tut(TUT_NAME, TUT_01);
         tut.add(aliceCopy);
-        assertTrue(tut.toString().equals(TUT_NAME + ": Tutorial" + TUT_01));
+        assertTrue(tut.toString().equals(TUT_NAME + ": Tutorial " + TUT_01));
     }
 }

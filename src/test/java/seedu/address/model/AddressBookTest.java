@@ -116,11 +116,11 @@ public class AddressBookTest {
     @Test
     public void getTutorialList_addStudent() {
         List<Tut> expectedTutorial = new ArrayList<>();
-        Tut TutSample2 = new Tut(TUT_NAME, TUT_01);
+        Tut tutSample2 = new Tut(TUT_NAME, TUT_01);
         TUT_SAMPLE.add(ALICE);
-        TutSample2.add(ALICE);
+        tutSample2.add(ALICE);
         expectedTutorial.add(TUT_SAMPLE);
-        addressBook.addTutorial(TutSample2);
+        addressBook.addTutorial(tutSample2);
         List<Tut> actualTutorial = addressBook.getTutorials();
         assertTrue(actualTutorial.equals(expectedTutorial));
     }
@@ -129,12 +129,12 @@ public class AddressBookTest {
         addressBook.resetData(getTypicalAddressBook());
         AddressBook addressBookSample = getTypicalAddressBook();
         List<Tut> expectedTutorial = new ArrayList<>();
-        Tut TutSample2 = new Tut(TUT_NAME, TUT_01);
+        Tut tutSample2 = new Tut(TUT_NAME, TUT_01);
         TUT_SAMPLE.add(ALICE);
-        TutSample2.add(ALICE);
+        tutSample2.add(ALICE);
         expectedTutorial.add(TUT_SAMPLE);
-        addressBook.addTutorial(TutSample2);
-        addressBookSample.addTutorial(TutSample2);
+        addressBook.addTutorial(tutSample2);
+        addressBookSample.addTutorial(tutSample2);
         assertTrue(addressBook.equals(addressBookSample));
     }
 
