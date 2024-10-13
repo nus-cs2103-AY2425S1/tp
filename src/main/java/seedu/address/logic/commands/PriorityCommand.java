@@ -19,7 +19,7 @@ import seedu.address.model.person.Priority;
  */
 public class PriorityCommand extends Command {
 
-    public static final String COMMAND_WORD = "updatePriority";
+    public static final String COMMAND_WORD = "assignPriority";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns/updates "
             + "a priority of a patient in the address book.\n"
@@ -65,7 +65,8 @@ public class PriorityCommand extends Command {
                 Person editedPerson = new Person(
                         person.getName(), person.getPhone(), person.getEmail(),
                         person.getNric(), person.getAddress(), person.getDateOfBirth(),
-                        person.getGender(), person.getTags(), priority, person.getAppointments());
+                        person.getGender(), person.getTags(), priority, person.getAppointments(),
+                        person.getMedCon());
                 model.setPerson(person, editedPerson);
                 model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
                 return new CommandResult(generateSuccessMessage(editedPerson));

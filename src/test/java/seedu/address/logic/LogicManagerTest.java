@@ -63,7 +63,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete 9";
+        String deleteCommand = "delete S1234567A";
         assertCommandException(deleteCommand, MESSAGE_PERSON_NRIC_NOT_FOUND);
     }
 

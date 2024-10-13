@@ -15,6 +15,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
+import seedu.address.model.person.MedCon;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
@@ -36,6 +37,7 @@ class JsonAdaptedPerson {
     private final String dateOfBirth;
     private final String gender;
     private final String nric;
+    private final String medCon;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String priority;
     private final List<JsonAdaptedAppointment> appointments = new ArrayList<>();
@@ -51,7 +53,8 @@ class JsonAdaptedPerson {
             @JsonProperty("nric") String nric,
             @JsonProperty("tags") List<JsonAdaptedTag> tags,
             @JsonProperty("priority") String priority,
-            @JsonProperty("appointments") List<JsonAdaptedAppointment> appointments) {
+            @JsonProperty("appointments") List<JsonAdaptedAppointment> appointments,
+            @JsonProperty("medCon") String medCon) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -60,6 +63,7 @@ class JsonAdaptedPerson {
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
         this.nric = nric;
+        this.medCon = medCon;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -79,6 +83,7 @@ class JsonAdaptedPerson {
         dateOfBirth = source.getDateOfBirth().value;
         gender = source.getGender().value;
         nric = source.getNric().value;
+        medCon = source.getMedCon().value;
         priority = source.getPriority().priority;
         tags.addAll(source.getTags()
                           .stream()
@@ -174,8 +179,14 @@ class JsonAdaptedPerson {
         }
         final Priority modelPriority = new Priority(priority);
         final Set<Appointment> modelAppointments = new HashSet<>(personAppointments);
+
+        if (medCon == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, MedCon.class.getSimpleName()));
+        }
+        final MedCon modelMedCon = new MedCon(medCon);
+
         return new Person(modelName, modelPhone, modelEmail, modelNric, modelAddress, modelDateOfBirth,
-                modelGender, modelTags, modelPriority, modelAppointments);
+                modelGender, modelTags, modelPriority, modelAppointments, modelMedCon);
 
     }
 

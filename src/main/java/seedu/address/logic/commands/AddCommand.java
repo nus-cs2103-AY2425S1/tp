@@ -65,12 +65,12 @@ public class AddCommand extends Command {
         requireNonNull(model);
 
         if (model.hasPerson(toAdd)) {
-            logger.warning("Duplicate person detected: " + toAdd);
+            logger.warning("Duplicate person detected: " + toAdd.getName() + " with NRIC: " + toAdd.getNric());
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
         model.addPerson(toAdd);
-        logger.info("Successfully added person: " + toAdd);
+        logger.info("Successfully added person: " + toAdd.getName() + " with NRIC: " + toAdd.getNric());
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

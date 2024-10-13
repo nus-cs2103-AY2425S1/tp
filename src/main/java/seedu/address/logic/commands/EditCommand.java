@@ -29,6 +29,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
+import seedu.address.model.person.MedCon;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.NricMatchesPredicate;
@@ -94,7 +95,7 @@ public class EditCommand extends Command {
         }
 
         model.setPerson(personToEdit, editedPerson);
-        logger.info("Edit command has been exceuted successfully on a person with NRIC: " + predicate);
+        logger.info("Edit command has been executed successfully on a person with NRIC: " + predicate);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
@@ -116,9 +117,12 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Priority updatedPriority = personToEdit.getPriority();
         Set<Appointment> updatedAppointments = editPersonDescriptor.getAppointments()
-            .orElse(personToEdit.getAppointments());
+                                                                   .orElse(personToEdit.getAppointments());
+        MedCon updatedMedCon = personToEdit.getMedCon();
+
         return new Person(updatedName, updatedPhone, updatedEmail, updatedNric, updatedAddress, updatedDateOfBirth,
-                updatedGender, updatedTags, updatedPriority, updatedAppointments);
+                updatedGender, updatedTags, updatedPriority, updatedAppointments, updatedMedCon);
+
     }
 
     @Override
@@ -159,6 +163,7 @@ public class EditCommand extends Command {
         private Nric nric;
         private Set<Tag> tags;
         private Set<Appointment> appointments;
+        private MedCon medCon;
 
         public EditPersonDescriptor() {}
 
@@ -176,6 +181,7 @@ public class EditCommand extends Command {
             setNric(toCopy.nric);
             setTags(toCopy.tags);
             setAppointments(toCopy.appointments);
+            setMedCon(toCopy.medCon);
         }
 
         /**
@@ -183,7 +189,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, address, dateOfBirth, nric, gender, tags,
-                                               appointments);
+                                               appointments, medCon);
         }
 
         public void setName(Name name) {
@@ -240,6 +246,13 @@ public class EditCommand extends Command {
 
         public void setNric(Nric nric) {
             this.nric = nric;
+        }
+        public Optional<MedCon> getMedCon() {
+            return Optional.ofNullable(medCon);
+        }
+
+        public void setMedCon(MedCon medCon) {
+            this.medCon = medCon;
         }
 
         /**
