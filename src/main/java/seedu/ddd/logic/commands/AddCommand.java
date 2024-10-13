@@ -57,7 +57,6 @@ public class AddCommand extends Command {
         }
 
         model.addContact(toAdd);
-        System.out.println(toAdd.toString());
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

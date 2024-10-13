@@ -23,7 +23,6 @@ public class ClientUtil {
      * Returns an add command string for adding the {@code contact}.
      */
     public static String getAddContactCommand(Client client) {
-        System.out.println(AddContactCommand.COMMAND_WORD + " client " + getPersonDetails(client));
         return AddContactCommand.COMMAND_WORD + " client " + getPersonDetails(client);
     }
 
