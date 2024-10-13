@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.BirthdayCommand;
+import seedu.address.model.person.Birthday;
 
 public class BirthdayCommandParserTest {
     private BirthdayCommandParser parser = new BirthdayCommandParser();
@@ -19,11 +20,12 @@ public class BirthdayCommandParserTest {
         // have birthday
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + " " + PREFIX_BIRTHDAY + nonEmptyBirthday;
-        BirthdayCommand expectedCommand = new BirthdayCommand(INDEX_FIRST_PERSON, nonEmptyBirthday);
+        BirthdayCommand expectedCommand = new BirthdayCommand(INDEX_FIRST_PERSON, new Birthday(nonEmptyBirthday));
         assertParseSuccess(parser, userInput, expectedCommand);
+
         // no birthday
         userInput = targetIndex.getOneBased() + " " + PREFIX_BIRTHDAY;
-        expectedCommand = new BirthdayCommand(INDEX_FIRST_PERSON, "");
+        expectedCommand = new BirthdayCommand(INDEX_FIRST_PERSON, new Birthday(""));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 

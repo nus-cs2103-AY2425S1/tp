@@ -42,6 +42,8 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private Label remark;
+    @FXML
+    private Label birthday;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.

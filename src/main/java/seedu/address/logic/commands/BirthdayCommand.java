@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Birthday;
 
 /**
  * Changes the birthday of an existing person in the address book.
@@ -25,13 +26,13 @@ public class BirthdayCommand extends Command {
             + PREFIX_BIRTHDAY + "2001-12-12";
 
     private final Index index;
-    private final String birthday;
+    private final Birthday birthday;
 
     /**
      * @param index of the person in the filtered person list to edit the birthday
      * @param birthday of the person to be updated to
      */
-    public BirthdayCommand(Index index, String birthday) {
+    public BirthdayCommand(Index index, Birthday birthday) {
         requireAllNonNull(index, birthday);
 
         this.index = index;

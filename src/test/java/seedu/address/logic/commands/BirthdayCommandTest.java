@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Birthday;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for BirthdayCommand.
@@ -24,15 +25,17 @@ public class BirthdayCommandTest {
 
     @Test
     public void execute() {
-        final String birthday = "Some birthday";
+        final Birthday birthday = new Birthday("Some birthday");
         assertCommandFailure(new BirthdayCommand(INDEX_FIRST_PERSON, birthday), model,
                 String.format(MESSAGE_ARGUMENTS, INDEX_FIRST_PERSON.getOneBased(), birthday));
     }
     @Test
     public void equals() {
-        final BirthdayCommand standardCommand = new BirthdayCommand(INDEX_FIRST_PERSON, VALID_BIRTHDAY_AMY);
+        final BirthdayCommand standardCommand = new BirthdayCommand(INDEX_FIRST_PERSON,
+                new Birthday(VALID_BIRTHDAY_AMY));
         // same values -> returns true
-        BirthdayCommand commandWithSameValues = new BirthdayCommand(INDEX_FIRST_PERSON, VALID_BIRTHDAY_AMY);
+        BirthdayCommand commandWithSameValues = new BirthdayCommand(INDEX_FIRST_PERSON,
+                new Birthday(VALID_BIRTHDAY_AMY));
         assertTrue(standardCommand.equals(commandWithSameValues));
         // same object -> returns true
         assertTrue(standardCommand.equals(standardCommand));
@@ -41,8 +44,8 @@ public class BirthdayCommandTest {
         // different types -> returns false
         assertFalse(standardCommand.equals(new ClearCommand()));
         // different index -> returns false
-        assertFalse(standardCommand.equals(new BirthdayCommand(INDEX_SECOND_PERSON, VALID_BIRTHDAY_AMY)));
+        assertFalse(standardCommand.equals(new BirthdayCommand(INDEX_SECOND_PERSON, new Birthday(VALID_BIRTHDAY_AMY))));
         // different birthday -> returns false
-        assertFalse(standardCommand.equals(new BirthdayCommand(INDEX_FIRST_PERSON, VALID_BIRTHDAY_BOB)));
+        assertFalse(standardCommand.equals(new BirthdayCommand(INDEX_FIRST_PERSON, new Birthday(VALID_BIRTHDAY_BOB))));
     }
 }

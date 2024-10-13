@@ -7,6 +7,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.BirthdayCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Birthday;
+
 /**
  * Parses input arguments and creates a new {@code BirthdayCommand} object
  */
@@ -26,6 +28,6 @@ public class BirthdayCommandParser implements Parser<BirthdayCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, BirthdayCommand.MESSAGE_USAGE), ive);
         }
         String birthday = argMultimap.getValue(PREFIX_BIRTHDAY).orElse("");
-        return new BirthdayCommand(index, birthday);
+        return new BirthdayCommand(index, new Birthday(birthday));
     }
 }

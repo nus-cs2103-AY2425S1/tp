@@ -28,6 +28,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
@@ -108,9 +109,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_birthday() throws Exception {
-        final String birthday = "2023-06-06";
+        final Birthday birthday = new Birthday("2023-06-06");
         BirthdayCommand command = (BirthdayCommand) parser.parseCommand(BirthdayCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_BIRTHDAY + birthday);
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_BIRTHDAY + birthday.value);
         assertEquals(new BirthdayCommand(INDEX_FIRST_PERSON, birthday), command);
     }
 
