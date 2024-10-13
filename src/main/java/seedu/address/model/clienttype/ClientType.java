@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a ClientType in the address book.
- * Guarantees: immutable; name is valid as declared in {@link #isValidclientTypeName(String)}
+ * Guarantees: immutable; name is valid as declared in {@link #isValidClientTypeName(String)}
  */
 public class ClientType {
 

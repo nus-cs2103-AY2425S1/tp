@@ -9,22 +9,22 @@ import seedu.address.model.clienttype.ClientType;
 /**
  * Jackson-friendly version of {@link ClientType}.
  */
-class JsonAdaptedTag {
+class JsonAdaptedClientType {
 
     private final String clientTypeName;
 
     /**
-     * Constructs a {@code JsonAdaptedTag} with the given {@code clientTypeName}.
+     * Constructs a {@code JsonAdaptedclientType} with the given {@code clientTypeName}.
      */
     @JsonCreator
-    public JsonAdaptedTag(String clientTypeName) {
+    public JsonAdaptedClientType(String clientTypeName) {
         this.clientTypeName = clientTypeName;
     }
 
     /**
-     * Converts a given {@code Tag} into this class for Jackson use.
+     * Converts a given {@code clientType} into this class for Jackson use.
      */
-    public JsonAdaptedTag(ClientType source) {
+    public JsonAdaptedClientType(ClientType source) {
         clientTypeName = source.clientTypeName;
     }
 
@@ -34,7 +34,7 @@ class JsonAdaptedTag {
     }
 
     /**
-     * Converts this Jackson-friendly adapted tag object into the model's {@code Tag} object.
+     * Converts this Jackson-friendly adapted client type object into the model's {@code clientType} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
