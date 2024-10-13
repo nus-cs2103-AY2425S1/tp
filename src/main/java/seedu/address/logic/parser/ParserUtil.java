@@ -9,10 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -94,6 +91,15 @@ public class ParserUtil {
         }
         return new Email(trimmedEmail);
     }
+
+
+    public static Remark parseRemark(String remark) {
+        requireNonNull(remark);
+        String trimmedRemark = remark.trim();
+        return new Remark(trimmedRemark);
+    }
+
+
 
     /**
      * Parses a {@code String tag} into a {@code Tag}.
