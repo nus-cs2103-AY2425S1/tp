@@ -17,8 +17,8 @@ import seedu.address.model.job.Job;
  */
 public class AddJobCommand extends AddCommand<Job> {
 
-    public static final String COMMAND_ENTITY = "job";
-    public static final String FULL_COMMAND = COMMAND_WORD + " " + COMMAND_ENTITY;
+    public static final String ENTITY_WORD = "job";
+    public static final String FULL_COMMAND = COMMAND_WORD + " " + ENTITY_WORD;
     public static final String MESSAGE_USAGE = FULL_COMMAND + ": Adds a job listing to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "JOBNAME "

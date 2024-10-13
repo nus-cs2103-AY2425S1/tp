@@ -22,11 +22,11 @@ public class AddCommandParser implements Parser<AddCommand<?>> {
         String addArgs = args.replace(" " + entity, "");
 
         switch (entity) {
-        case AddContactCommand.COMMAND_ENTITY:
+        case AddContactCommand.ENTITY_WORD:
             return new AddContactCommandParser().parse(addArgs);
-        case AddJobCommand.COMMAND_ENTITY:
+        case AddJobCommand.ENTITY_WORD:
             return new AddJobCommandParser().parse(addArgs);
-        case AddCompanyCommand.COMMAND_ENTITY:
+        case AddCompanyCommand.ENTITY_WORD:
             return new AddCompanyCommandParser().parse(addArgs);
         default:
             throw new ParseException(AddCommand.MESSAGE_USAGE);
