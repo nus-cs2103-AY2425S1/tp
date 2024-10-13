@@ -42,9 +42,6 @@ public class SearchBox extends UiPart<Region> {
     @FXML
     private void handleCommandUpdate() {
         String commandText = searchBoxField.getText();
-        if (commandText.equals("")) {
-            return;
-        }
 
         try {
             commandExecutor.execute(String.format("%s %s",
