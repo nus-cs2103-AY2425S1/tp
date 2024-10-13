@@ -5,6 +5,8 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -43,16 +45,12 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
-
-    @FXML
-    private StackPane eventListPanelPlaceholder;
-
-    @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
+    @FXML
+    private TabPane tabPanePlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -70,6 +68,8 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
+        tabPanePlaceholder.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
     }
 
     public Stage getPrimaryStage() {
@@ -115,10 +115,10 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         eventListPanel = new EventListPanel(logic.getFilteredEventList());
-        eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
-
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        tabPanePlaceholder.getTabs().add(new Tab("Persons", personListPanel.getRoot()));
+        tabPanePlaceholder.getTabs().add(new Tab("Events", eventListPanel.getRoot()));
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -187,10 +187,18 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
+                return commandResult;
             }
 
             if (commandResult.isExit()) {
                 handleExit();
+                return commandResult;
+            }
+
+            if (commandResult.isShowPeopleList() && !tabPanePlaceholder.getTabs().get(0).isSelected()) {
+                tabPanePlaceholder.getSelectionModel().select(0);
+            } else if (!commandResult.isShowPeopleList() && !tabPanePlaceholder.getTabs().get(1).isSelected()) {
+                tabPanePlaceholder.getSelectionModel().select(1);
             }
 
             return commandResult;
