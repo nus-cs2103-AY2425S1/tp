@@ -10,7 +10,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * The UI component that is responsible for receiving find command 
+ * The UI component that is responsible for receiving find command
  * without requiring command word.
  */
 public class SearchBox extends UiPart<Region> {
@@ -48,7 +48,7 @@ public class SearchBox extends UiPart<Region> {
         }
 
         try {
-            commandExecutor.execute(String.format("%s %s", 
+            commandExecutor.execute(String.format("%s %s",
                     FindCommand.COMMAND_WORD, commandText));
         } catch (CommandException | ParseException e) {
             return;
