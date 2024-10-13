@@ -19,7 +19,7 @@ KeyContacts is a **desktop app for piano teachers to manager their students' inf
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T08-2/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for KeyContacts.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar keycontacts.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -30,7 +30,7 @@ KeyContacts is a **desktop app for piano teachers to manager their students' inf
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 a/John street, block 123, #01-01 g/ABRSM 3` : Adds a student named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 a/John street, block 123, #01-01 g/ABRSM 3` : Adds a student named `John Doe` to the student directory.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -101,7 +101,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [g/GRADE_LEVEL]`
 * Existing values will be updated to the input values.
 
 Examples:
-*  `edit 1 n/Jane Doe p/91234567` Edits the name andphone number of the 1st person to be `Jane Doe` and `91234567` respectively.
+*  `edit 1 n/Jane Doe p/91234567` Edits the name and phone number of the 1st person to be `Jane Doe` and `91234567` respectively.
 
 ### Locating students by name: `find`
 
