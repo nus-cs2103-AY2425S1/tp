@@ -15,7 +15,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class SearchBox extends UiPart<Region> {
 
-    public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "SearchBox.fxml";
 
     private final CommandExecutor commandExecutor;
@@ -53,5 +52,12 @@ public class SearchBox extends UiPart<Region> {
         } catch (CommandException | ParseException e) {
             return;
         }
+    }
+
+    /**
+     * Clears search box input.
+     */
+    public void clearSearchBox() {
+        searchBoxField.setText("");
     }
 }

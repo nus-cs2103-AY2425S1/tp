@@ -34,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private SearchBox searchBox;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -126,7 +127,7 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        SearchBox searchBox = new SearchBox(this::executeFindCommand);
+        searchBox = new SearchBox(this::executeFindCommand);
         searchBoxPlaceholder.getChildren().add(searchBox.getRoot());
     }
 
@@ -188,6 +189,8 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isExit()) {
                 handleExit();
             }
+            
+            searchBox.clearSearchBox();
 
             return commandResult;
         } catch (CommandException | ParseException e) {
