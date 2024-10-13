@@ -142,6 +142,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("vendors", vendors)
+                .add("events", events)
                 .toString();
     }
 
