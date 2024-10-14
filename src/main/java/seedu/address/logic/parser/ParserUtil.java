@@ -16,6 +16,7 @@ import seedu.address.model.person.Interest;
 import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.WorkExp;
 import seedu.address.model.person.University;
 import seedu.address.model.tag.Tag;
 
@@ -100,6 +101,20 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String workExp} into a {@code WorkExp}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code workExp} is invalid.
+     */
+    public static WorkExp parseWorkExp(String workExp) throws ParseException {
+        String trimmedWorkExp = workExp.trim();
+        if (!WorkExp.isValidWorkExp(trimmedWorkExp)) {
+            throw new ParseException(WorkExp.MESSAGE_CONSTRAINTS);
+        }
+        return new WorkExp(trimmedWorkExp);
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -169,20 +184,5 @@ public class ParserUtil {
             throw new ParseException(Interest.MESSAGE_CONSTRAINTS);
         }
         return new Interest(trimmedInterest);
-    }
-
-    /**
-     * Parses a {@code String experience} into an {@code Experience}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code experience} is invalid.
-     */
-    public static Experience parseExperience(String experience) throws ParseException {
-        requireNonNull(experience);
-        String trimmedExperience = experience.trim();
-        if (!Experience.isValidExperience(trimmedExperience)) {
-            throw new ParseException(Experience.MESSAGE_CONSTRAINTS);
-        }
-        return new Experience(trimmedExperience);
     }
 }
