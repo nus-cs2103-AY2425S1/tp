@@ -1,4 +1,4 @@
-package seedu.address.model.goods;
+package seedu.address.model.goodsReceipt;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

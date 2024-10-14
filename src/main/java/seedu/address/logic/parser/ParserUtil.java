@@ -10,7 +10,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.goods.Date;
+import seedu.address.model.goodsReceipt.Date;
 import seedu.address.model.goods.GoodsCategories;
 import seedu.address.model.goods.GoodsName;
 import seedu.address.model.person.Address;
