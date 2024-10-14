@@ -18,7 +18,6 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
 import seedu.address.model.policy.EducationPolicy;
 import seedu.address.model.policy.HealthPolicy;
 import seedu.address.model.policy.LifePolicy;
@@ -32,11 +31,11 @@ public class DeletePolicyCommandTest {
     private final HealthPolicy health = new HealthPolicy();
     private final EducationPolicy education = new EducationPolicy();
 
-//    @Test
-//    public void execute_deletePolicyUnfilteredList_success() {
-//        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-//
-//    }
+    //    @Test
+    //    public void execute_deletePolicyUnfilteredList_success() {
+    //        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+    //
+    //    }
     @Test
     public void constructor_nullInputs_throwsNullPointerException() {
         final Set<PolicyType> policyTypes = new HashSet<>();
