@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Person's attendance status in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAttendance(String)}.
  */
-public class Attendance {
+public class PersonAttendance {
     public static final String MESSAGE_CONSTRAINTS = "Attendance status must be either 'present' or 'absent'";
 
     // Valid attendance statuses
@@ -20,7 +20,7 @@ public class Attendance {
      *
      * @param status A valid attendance status.
      */
-    public Attendance(String status) {
+    public PersonAttendance(String status) {
         requireNonNull(status);
         checkArgument(isValidAttendance(status), MESSAGE_CONSTRAINTS);
         value = status;
@@ -42,7 +42,7 @@ public class Attendance {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Attendance otherAttendance)) {
+        if (!(other instanceof PersonAttendance otherAttendance)) {
             return false;
         }
 
