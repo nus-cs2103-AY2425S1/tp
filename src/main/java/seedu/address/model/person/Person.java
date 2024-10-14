@@ -62,8 +62,8 @@ public class Person {
         return email;
     }
 
-    public Address getAddress() {
-        return address.orElse(null);
+    public Optional<Address> getAddress() {
+        return address;
     }
 
     /**
@@ -129,4 +129,10 @@ public class Person {
         return builder.toString();
     }
 
+    /**
+     * Returns true if this person has a non-null address.
+     */
+    public boolean hasAddress() {
+        return this.address.isPresent();
+    }
 }

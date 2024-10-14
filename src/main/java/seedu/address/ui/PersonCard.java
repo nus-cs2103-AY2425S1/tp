@@ -50,10 +50,10 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
-        if (person.getAddress() != null) {
-            Label address = new Label(person.getAddress().value);
+        if (person.hasAddress()) {
+            Label address = new Label(person.getAddress().map(Object::toString).orElse(null));
             address.getStyleClass().add("cell_small_label");
-            address.setText(person.getAddress().value);
+            address.setText(person.getAddress().orElse(null).value);
             cardPane.getChildren().add(address);
         }
         email.setText(person.getEmail().value);
