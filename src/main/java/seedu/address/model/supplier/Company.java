@@ -1,6 +1,7 @@
-package seedu.address.model.person;
+package seedu.address.model.supplier;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's company in the address book.
@@ -14,7 +15,7 @@ public class Company {
      * The first character of the company must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "\\s*[\\p{Alnum}\\p{Punct}][\\p{Alnum}\\p{Punct} ]*\\s*";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public final String value;
 
@@ -26,6 +27,7 @@ public class Company {
     public Company(String company) {
         requireNonNull(company);
         company = normalizeCompanyName(company);
+        checkArgument(isValidCompany(company), MESSAGE_CONSTRAINTS);
         this.value = company;
     }
 

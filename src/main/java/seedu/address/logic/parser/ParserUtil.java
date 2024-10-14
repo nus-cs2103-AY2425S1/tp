@@ -13,6 +13,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.supplier.SupplierStatus;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -120,5 +121,19 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String statusString} into a {@code SupplierStatus}.
+     * Leading and trailing whitespaces
+     * will be trimmed.
+     * @throws ParseException if the given {@code statusString} is invalid.
+     */
+    public static SupplierStatus parseSupplierStatus(String statusString) throws ParseException {
+        try {
+            return new SupplierStatus(statusString);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(SupplierStatus.MESSAGE_CONSTRAINTS);
+        }
     }
 }
