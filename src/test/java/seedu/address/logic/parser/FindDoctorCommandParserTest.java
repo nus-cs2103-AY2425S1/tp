@@ -10,7 +10,6 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindDoctorCommand;
-import seedu.address.logic.commands.FindPatientCommand;
 import seedu.address.model.doctor.FindDoctorPredicate;
 
 public class FindDoctorCommandParserTest {
