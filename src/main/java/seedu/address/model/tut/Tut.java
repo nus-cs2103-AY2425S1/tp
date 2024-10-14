@@ -8,6 +8,7 @@ import java.util.List;
 
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.TutorialClass;
 
 
 /**
@@ -20,7 +21,7 @@ public class Tut {
     public static final String MESSAGE_NAME_CONSTRAINTS = "Tutorial names should only contain alphanumeric"
             + " characters and spaces, "
             + "and it should not be blank.";
-    public static final String MESSAGE_ID_CONSTRAINTS = "Tutorial ID should be a non-negative integer.";
+    public static final String MESSAGE_ID_CONSTRAINTS = TutorialClass.MESSAGE_CONSTRAINTS;
 
     // Example validation regex for tutorial name (customize as needed)
     public static final String NAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
@@ -29,23 +30,18 @@ public class Tut {
 
     // TODO: Insert TutDate
     private final String tutName;
-    private final Integer id;
+    private final TutorialClass tutorialClass;
     /**
      * Constructs a {@code Tut}.
      *
      * @param tutName A valid tutorial name.
      */
-    public Tut(String tutName, int id) {
-        requireNonNull(id);
+    public Tut(String tutName, TutorialClass tutorialClass) {
+        requireNonNull(tutorialClass);
         requireNonNull(tutName);
         checkArgument(isValidName(tutName), MESSAGE_NAME_CONSTRAINTS);
-        checkArgument(isValidId(id), MESSAGE_ID_CONSTRAINTS);
         this.tutName = tutName;
-        this.id = id;
-    }
-
-    private Boolean isValidId(int id) {
-        return id >= 0;
+        this.tutorialClass = tutorialClass;
     }
 
     /**
@@ -86,12 +82,12 @@ public class Tut {
         }
 
         Tut otherTutorial = (Tut) other;
-        return id.equals(otherTutorial.id)
+        return tutorialClass.equals(otherTutorial.tutorialClass)
                 && tutName.equals(otherTutorial.tutName)
                 && students.equals(otherTutorial.students);
     }
     @Override
     public String toString() {
-        return tutName + ": Tutorial " + id;
+        return tutName + ": Tutorial " + tutorialClass;
     }
 }
