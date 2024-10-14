@@ -26,7 +26,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Edits the details of an existing person in the address book.
  */
-public class EditCommand extends Command<Internship> {
+public class EditCommand extends Command<InternshipApplication> {
 
     public static final String COMMAND_WORD = "edit";
 
@@ -63,9 +63,9 @@ public class EditCommand extends Command<Internship> {
     }
 
     @Override
-    public CommandResult execute(Model<Internship> model) throws CommandException {
+    public CommandResult execute(Model<InternshipApplication> model) throws CommandException {
         requireNonNull(model);
-        List<Internship> lastShownList = model.getFilteredList();
+        List<InternshipApplication> lastShownList = model.getFilteredList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);

@@ -14,17 +14,17 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
-    public static Internship[] getSampleInternships() {
-        return new Internship[] {
-                new Internship(new Company(
+    public static InternshipApplication[] getSampleInternships() {
+        return new InternshipApplication[] {
+                new InternshipApplication(new Company(
                         new Email("company1@mail.com"),new Name("Company 1")),
                         new Date(LocalDate.now()), new Role("role 1"))
         };
     }
 
-    public static ReadOnlyAddressBook<Internship> getSampleAddressBook() {
-        AddressBook<Internship> sampleAb = new AddressBook<>();
-        for (Internship sampleInternship : getSampleInternships()) {
+    public static ReadOnlyAddressBook<InternshipApplication> getSampleAddressBook() {
+        AddressBook<InternshipApplication> sampleAb = new AddressBook<>();
+        for (InternshipApplication sampleInternship : getSampleInternships()) {
             sampleAb.addItem(sampleInternship);
         }
         return sampleAb;

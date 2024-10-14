@@ -36,7 +36,7 @@ class JsonAdaptedInternship {
     /**
      * Converts a given {@code Person} into this class for Jackson use.
      */
-    public JsonAdaptedInternship(Internship source) {
+    public JsonAdaptedInternship(InternshipApplication source) {
         companyName = source.getCompany().getName().getValue();
         companyEmail = source.getCompany().getEmail().getValue();
         role = source.getRole().getValue();
@@ -48,13 +48,13 @@ class JsonAdaptedInternship {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
-    public Internship toModelType() throws IllegalValueException {
+    public InternshipApplication toModelType() throws IllegalValueException {
         Name name = new Name(companyName);
         Email email = new Email(companyEmail);
         Company company = new Company(email, name);
         Role role = new Role(this.role);
         Date date = new Date(this.date);
-        return new Internship(company, date, role);
+        return new InternshipApplication(company, date, role);
     }
 
 }

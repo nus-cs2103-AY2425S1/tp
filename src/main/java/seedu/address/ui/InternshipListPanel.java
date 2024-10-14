@@ -8,7 +8,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.internship.Internship;
+import seedu.address.model.internship.InternshipApplication;
 
 /**
  * Panel containing the list of persons.
@@ -18,12 +18,12 @@ public class InternshipListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(InternshipListPanel.class);
 
     @FXML
-    private ListView<Internship> internshipListView;
+    private ListView<InternshipApplication> internshipListView;
 
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public InternshipListPanel(ObservableList<Internship> internshipList) {
+    public InternshipListPanel(ObservableList<InternshipApplication> internshipList) {
         super(FXML);
         internshipListView.setItems(internshipList);
         internshipListView.setCellFactory(listView -> new InternshipListViewCell());
@@ -32,9 +32,9 @@ public class InternshipListPanel extends UiPart<Region> {
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
      */
-    class InternshipListViewCell extends ListCell<Internship> {
+    class InternshipListViewCell extends ListCell<InternshipApplication> {
         @Override
-        protected void updateItem(Internship internship, boolean empty) {
+        protected void updateItem(InternshipApplication internship, boolean empty) {
             super.updateItem(internship, empty);
 
             if (empty || internship == null) {

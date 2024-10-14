@@ -11,7 +11,7 @@ import seedu.address.model.HireMeComparable;
  * Represents an Internship in the network book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Internship implements HireMeComparable<Internship> {
+public class InternshipApplication implements HireMeComparable<InternshipApplication> {
 
     // Identity fields
     private final Company company;
@@ -22,7 +22,7 @@ public class Internship implements HireMeComparable<Internship> {
      * Constructs an {@code Internship} with a company, date of application, and role.
      * Company, date of application, and role must be present and not null.
      */
-    public Internship(Company company, Date dateOfApplication, Role role) {
+    public InternshipApplication(Company company, Date dateOfApplication, Role role) {
         requireNonNull(company);
         requireNonNull(dateOfApplication);
         requireNonNull(role);
@@ -63,7 +63,7 @@ public class Internship implements HireMeComparable<Internship> {
      * This defines a weaker notion of equality between two internships.
      */
     @Override
-    public boolean isSame(Internship otherInternship) {
+    public boolean isSame(InternshipApplication otherInternship) {
         if (otherInternship == this) {
             return true;
         }
@@ -84,11 +84,11 @@ public class Internship implements HireMeComparable<Internship> {
             return true;
         }
 
-        if (!(other instanceof Internship)) {
+        if (!(other instanceof InternshipApplication)) {
             return false;
         }
 
-        Internship otherInternship = (Internship) other;
+        InternshipApplication otherInternship = (InternshipApplication) other;
         return company.equals(otherInternship.company)
                 && dateOfApplication.equals(otherInternship.dateOfApplication)
                 && role.equals(otherInternship.role);

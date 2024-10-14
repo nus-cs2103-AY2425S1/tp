@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.internship.Internship;
+import seedu.address.model.internship.InternshipApplication;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -36,7 +36,7 @@ class JsonSerializableAddressBook {
      *
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
-    public JsonSerializableAddressBook(ReadOnlyAddressBook<Internship> source) {
+    public JsonSerializableAddressBook(ReadOnlyAddressBook<InternshipApplication> source) {
         internships.addAll(source.getList().stream().map(JsonAdaptedInternship::new).collect(Collectors.toList()));
     }
 
@@ -45,10 +45,10 @@ class JsonSerializableAddressBook {
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public AddressBook<Internship> toModelType() throws IllegalValueException {
-        AddressBook<Internship> addressBook = new AddressBook<>();
+    public AddressBook<InternshipApplication> toModelType() throws IllegalValueException {
+        AddressBook<InternshipApplication> addressBook = new AddressBook<>();
         for (JsonAdaptedInternship jsonAdaptedInternship : internships) {
-            Internship internship = jsonAdaptedInternship.toModelType();
+            InternshipApplication internship = jsonAdaptedInternship.toModelType();
             if (addressBook.hasItem(internship)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }

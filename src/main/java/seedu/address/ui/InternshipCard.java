@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.internship.Internship;
+import seedu.address.model.internship.InternshipApplication;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -21,7 +21,7 @@ public class InternshipCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Internship internship;
+    public final InternshipApplication internship;
 
     @FXML
     private HBox cardPane;
@@ -39,7 +39,7 @@ public class InternshipCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public InternshipCard(Internship internship, int displayedIndex) {
+    public InternshipCard(InternshipApplication internship, int displayedIndex) {
         super(FXML);
         this.internship = internship;
         id.setText(displayedIndex + ". ");

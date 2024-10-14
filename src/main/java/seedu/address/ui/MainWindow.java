@@ -16,7 +16,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.internship.Internship;
+import seedu.address.model.internship.InternshipApplication;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -29,7 +29,7 @@ public class MainWindow extends UiPart<Stage> {
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
-    private Logic<Internship> logic;
+    private Logic<InternshipApplication> logic;
 
     // Independent Ui parts residing in this Ui container
     private InternshipListPanel internshipListPanel;

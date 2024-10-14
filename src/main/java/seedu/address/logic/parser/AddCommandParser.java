@@ -38,7 +38,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         Company company = new Company(email, name);
 
-        return new AddCommand(new Internship(company, date, role));
+        return new AddCommand(new InternshipApplication(company, date, role));
     }
 
     /**

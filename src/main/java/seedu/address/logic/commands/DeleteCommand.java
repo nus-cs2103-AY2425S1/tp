@@ -9,12 +9,12 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.internship.Internship;
+import seedu.address.model.internship.InternshipApplication;
 
 /**
  * Deletes an internship application identified using it's displayed index from the address book.
  */
-public class DeleteCommand extends Command<Internship> {
+public class DeleteCommand extends Command<InternshipApplication> {
 
     public static final String COMMAND_WORD = "delete";
 
@@ -32,15 +32,15 @@ public class DeleteCommand extends Command<Internship> {
     }
 
     @Override
-    public CommandResult execute(Model<Internship> model) throws CommandException {
+    public CommandResult execute(Model<InternshipApplication> model) throws CommandException {
         requireNonNull(model);
-        List<Internship> lastShownList = model.getFilteredList();
+        List<InternshipApplication> lastShownList = model.getFilteredList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Internship internshipApplicationToDelete = lastShownList.get(targetIndex.getZeroBased());
+        InternshipApplication internshipApplicationToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteItem(internshipApplicationToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(internshipApplicationToDelete)));
