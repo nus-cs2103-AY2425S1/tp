@@ -129,7 +129,7 @@ public class ParserUtil {
      * Parses an {@code String remark} into an {@code Remark}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code email} is invalid.
+     * @throws ParseException if the given {@code remark} is invalid.
      */
     public static Remark parseRemark(String remark) throws ParseException {
         requireNonNull(remark);
@@ -154,5 +154,4 @@ public class ParserUtil {
         }
         return new Tier(trimmedTag);
     }
-
 }
