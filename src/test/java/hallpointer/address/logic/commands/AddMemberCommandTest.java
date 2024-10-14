@@ -157,6 +157,15 @@ public class AddMemberCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        /**
+         * @param session
+         */
+        @Override
+        public void addSession(Session session) {
+            throw new AssertionError("This method should not be called");
+
+        }
+
         @Override
         public ObservableList<Member> getFilteredMemberList() {
             throw new AssertionError("This method should not be called.");
