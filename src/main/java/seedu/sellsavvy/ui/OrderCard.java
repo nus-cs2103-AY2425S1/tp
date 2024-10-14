@@ -11,7 +11,9 @@ import seedu.sellsavvy.model.order.Order;
  */
 public class OrderCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    public static final String ORDER_HEADING_FORMAT = "%1$s. %2$s (x%3$s)";
+    public static final String DELIVER_BY_FORMAT = "Delivery by: %1$s";
+    private static final String FXML = "OrderListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -21,16 +23,12 @@ public class OrderCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Order order;
+    private final Order order;
 
     @FXML
     private HBox cardPane;
     @FXML
-    private Label id;
-    @FXML
-    private Label item;
-    @FXML
-    private Label count;
+    private Label heading;
     @FXML
     private Label date;
 
@@ -41,10 +39,9 @@ public class OrderCard extends UiPart<Region> {
     public OrderCard(Order order, int displayedIndex) {
         super(FXML);
         this.order = order;
-        id.setText(displayedIndex + ". ");
-        item.setText(order.getItem().toString());
-        count.setText(order.getCount().value);
-        date.setText(order.getDate().value);
+        heading.setText(String.format(ORDER_HEADING_FORMAT, displayedIndex,
+                order.getItem().fullDescription, order.getCount().value));
+        date.setText(String.format(DELIVER_BY_FORMAT, order.getDate().value));
     }
 }
 

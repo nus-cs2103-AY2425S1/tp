@@ -18,17 +18,8 @@
             <padding>
                 <Insets top="5" right="5" bottom="5" left="15" />
             </padding>
-            <HBox spacing="0.5" alignment="CENTER_LEFT">
-                <Label fx:id="id" styleClass="cell_big_label">
-                    <minWidth>
-                        <!-- Ensures that the label text is never truncated -->
-                        <Region fx:constant="USE_PREF_SIZE" />
-                    </minWidth>
-                </Label>
-                <Label fx:id="item" text="\$first" styleClass="cell_big_label" />
-            </HBox>
-            <Label fx:id="count" styleClass="cell_small_label" text="\$phone" />
-            <Label fx:id="date" styleClass="cell_small_label" text="\$address" />
+            <Label fx:id="heading" styleClass="cell_large_label" wrapText="true"/>
+            <Label fx:id="date" styleClass="label-deadline" text="\$date" />
         </VBox>
     </GridPane>
 </HBox>
