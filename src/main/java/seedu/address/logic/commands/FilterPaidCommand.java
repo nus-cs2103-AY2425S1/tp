@@ -1,12 +1,11 @@
 package seedu.address.logic.commands;
 
-import jdk.jshell.spi.ExecutionControl;
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.StudentHasPaidPredicate;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Finds and lists all persons in address book whose paid status matches the argument.

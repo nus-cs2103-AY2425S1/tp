@@ -1,24 +1,23 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import seedu.address.logic.commands.FilterPaidCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.StudentHasPaidPredicate;
 
-
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 /**
  * Parses input arguments and creates a new FilterPaidCommand object
  */
-public class FilterPaidCommandParser implements Parser<FilterPaidCommand>{
+public class FilterPaidCommandParser implements Parser<FilterPaidCommand> {
+    private static final String HAS_PAID = "true";
+    private static final String HAS_NOT_PAID = "false";
     /**
      * Parses the given {@code String} of arguments in the context of the FilterPaidCommand
      * and returns a FilterPaidCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    private static final String HAS_PAID = "true";
-    private static final String HAS_NOT_PAID = "false";
-    public FilterPaidCommand parse(String args) throws ParseException{
+    public FilterPaidCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
