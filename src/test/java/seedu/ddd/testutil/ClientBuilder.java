@@ -7,6 +7,7 @@ import seedu.ddd.model.person.Address;
 import seedu.ddd.model.person.Client;
 import seedu.ddd.model.person.Date;
 import seedu.ddd.model.person.Email;
+import seedu.ddd.model.person.Id;
 import seedu.ddd.model.person.Name;
 import seedu.ddd.model.person.Phone;
 import seedu.ddd.model.tag.Tag;
@@ -23,12 +24,15 @@ public class ClientBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_DATE = "01 Jan 2000";
 
+    public static final int DEFAULT_ID = 0;
+
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Date date;
     private Set<Tag> tags;
+    private Id id;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -40,6 +44,7 @@ public class ClientBuilder {
         address = new Address(DEFAULT_ADDRESS);
         date = new Date(DEFAULT_DATE);
         tags = new HashSet<>();
+        id = new Id(DEFAULT_ID);
     }
 
     /**
@@ -95,7 +100,7 @@ public class ClientBuilder {
     }
 
     public Client build() {
-        return new Client(name, phone, email, address, date, tags);
+        return new Client(name, phone, email, address, date, tags, id);
     }
 
 }
