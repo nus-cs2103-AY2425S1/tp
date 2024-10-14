@@ -58,7 +58,7 @@ public class AddressBookParserTest {
         Contact contact = new ClientBuilder().build();
         EditContactDescriptor descriptor = new EditClientDescriptorBuilder((Client) contact).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_CONTACT.getOneBased() + " " + ClientUtil.getEditPersonDescriptorDetails(descriptor));
+                + INDEX_FIRST_CONTACT.getOneBased() + " " + ClientUtil.getEditClientDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_CONTACT, descriptor), command);
     }
 
