@@ -11,6 +11,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.ALICE_P;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
@@ -57,39 +58,39 @@ public class PersonTest {
     public void equals() {
         // same values -> returns true
         Person aliceCopy = new PersonBuilder(ALICE).build();
-        assertEquals(ALICE, aliceCopy);
+        assertEquals(ALICE_P, aliceCopy);
 
         // same object -> returns true
-        assertEquals(ALICE, ALICE);
+        assertEquals(ALICE_P, ALICE_P);
 
         // null -> returns false
-        assertNotEquals(null, ALICE);
+        assertNotEquals(null, ALICE_P);
 
         // different type -> returns false
-        assertNotEquals(5, ALICE);
+        assertNotEquals(5, ALICE_P);
 
         // different person -> returns false
-        assertNotEquals(ALICE, BOB);
+        assertNotEquals(ALICE_P, BOB);
 
         // different name -> returns false
-        Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertNotEquals(ALICE, editedAlice);
+        Person editedAlice = new PersonBuilder(ALICE_P).withName(VALID_NAME_BOB).build();
+        assertNotEquals(ALICE_P, editedAlice);
 
         // different phone -> returns false
-        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
-        assertNotEquals(ALICE, editedAlice);
+        editedAlice = new PersonBuilder(ALICE_P).withPhone(VALID_PHONE_BOB).build();
+        assertNotEquals(ALICE_P, editedAlice);
 
         // different email -> returns false
         editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
-        assertNotEquals(ALICE, editedAlice);
+        assertNotEquals(ALICE_P, editedAlice);
 
         // different address -> returns false
-        editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
-        assertNotEquals(ALICE, editedAlice);
+        editedAlice = new PersonBuilder(ALICE_P).withAddress(VALID_ADDRESS_BOB).build();
+        assertNotEquals(ALICE_P, editedAlice);
 
         // different tags -> returns false
-        editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
-        assertNotEquals(ALICE, editedAlice);
+        editedAlice = new PersonBuilder(ALICE_P).withTags(VALID_TAG_HUSBAND).build();
+        assertNotEquals(ALICE_P, editedAlice);
     }
 
     @Test

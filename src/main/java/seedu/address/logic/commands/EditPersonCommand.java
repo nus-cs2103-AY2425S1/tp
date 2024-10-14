@@ -101,6 +101,7 @@ public class EditPersonCommand extends EditCommand {
         assert entity instanceof PersonDescriptor;
         return Messages.formatPerson((PersonDescriptor) entity);
     }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)

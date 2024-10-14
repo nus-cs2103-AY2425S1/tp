@@ -39,7 +39,7 @@ public class JsonAdaptedPersonTest {
 
         // todo: fix this to make it less hacky
         JsonAdaptedPerson person = new JsonAdaptedPerson(new Person(0, BENSON));
-        assertEquals(BENSON, person.toModelType());
+        assertEquals(BENSON, person.toModelType().getPersonDescriptor());
     }
 
     @Test
