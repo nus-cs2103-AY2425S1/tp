@@ -40,7 +40,7 @@ public class IsStudentOfCoursePredicate implements Predicate<Student> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof NameContainsKeywordsPredicate)) {
+        if (!(other instanceof IsStudentOfCoursePredicate)) {
             return false;
         }
 
