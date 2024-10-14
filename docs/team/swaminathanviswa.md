@@ -1,6 +1,6 @@
 ---
-layout: page
-title: Swaminathan Viswa's Project Portfolio Page
+  layout: default.md
+  title: "Swaminathan Viswa's Project Portfolio Page"
 ---
 
 ### Project: AddressBook Level 3

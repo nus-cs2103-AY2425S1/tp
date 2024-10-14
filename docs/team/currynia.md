@@ -1,6 +1,6 @@
 ---
-layout: page
-title: Wen Rui's Project Portfolio Page
+  layout: default.md
+  title: "Wen Rui's Project Portfolio Page"
 ---
 
 ### Project: AddressBook Level 3

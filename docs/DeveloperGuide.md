@@ -1,16 +1,19 @@
 ---
-layout: page
-title: Developer Guide
+  layout: default.md
+  title: "Developer Guide"
+  pageNav: 3
 ---
 
-- Table of Contents
-  {:toc}
+# KonTActs Developer Guide
+
+<!-- * Table of Contents -->
+<page-nav-print />
 
 ---
 
 ## **Acknowledgements**
 
-- {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
 
 ---
 
@@ -22,15 +25,10 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **Design**
 
-<div markdown="span" class="alert alert-primary">
-
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
-
-</div>
 
 ### Architecture
 
-<img src="images/ArchitectureDiagram.png" width="280" />
+<puml src="diagrams/ArchitectureDiagram.puml" width="280" />
 
 The **_Architecture Diagram_** given above explains the high-level design of the App.
 
@@ -56,7 +54,7 @@ The bulk of the app's work is done by the following four components:
 
 The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+<puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
 Each of the four main components (also shown in the diagram above),
 
@@ -65,7 +63,7 @@ Each of the four main components (also shown in the diagram above),
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
-<img src="images/ComponentManagers.png" width="300" />
+<puml src="diagrams/ComponentManagers.puml" width="300" />
 
 The sections below give more details of each component.
 
@@ -73,7 +71,7 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+<puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -92,14 +90,16 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<img src="images/LogicClassDiagram.png" width="550"/>
+<puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
-</div>
+<box type="info" seamless>
+
+**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</box>
 
 How the `Logic` component works:
 
@@ -111,7 +111,7 @@ How the `Logic` component works:
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<img src="images/ParserClasses.png" width="600"/>
+<puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
 
@@ -122,7 +122,7 @@ How the parsing works:
 
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
 The `Model` component,
 
@@ -131,17 +131,19 @@ The `Model` component,
 - stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 - does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<box type="info" seamless>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-</div>
+<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
+
+</box>
 
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
 
@@ -175,58 +177,67 @@ Given below is an example usage scenario and how the undo/redo mechanism behaves
 
 Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
-![UndoRedoState0](images/UndoRedoState0.png)
+<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
 Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
-![UndoRedoState1](images/UndoRedoState1.png)
+<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
 Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
-![UndoRedoState2](images/UndoRedoState2.png)
+<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<box type="info" seamless>
 
-</div>
+**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+
+</box>
 
 Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
-![UndoRedoState3](images/UndoRedoState3.png)
+<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+
+<box type="info" seamless>
+
+**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
-</div>
+</box>
 
 The following sequence diagram shows how an undo operation goes through the `Logic` component:
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
+<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<box type="info" seamless>
 
-</div>
+**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
 
 Similarly, how an undo operation goes through the `Model` component is shown below:
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
+<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
 
 The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<box type="info" seamless>
 
-</div>
+**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+
+</box>
 
 Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
-![UndoRedoState4](images/UndoRedoState4.png)
+<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
 
 Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
-![UndoRedoState5](images/UndoRedoState5.png)
+<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
 
 #### Design considerations:
 
@@ -278,37 +289,37 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a/an …​       | I want to …​                                                           | So that …​                                                                     |
-|-------|------------------|------------------------------------------------------------------------|--------------------------------------------------------------------------------|
-| `* * *` | CS2030S TA       | store student's github username                                        | I can easily reference them when grading assignments.                          |
-| `* * *` | user             | add the student's contact number                                       | I can easily reference them when I need to contact my students.                |
-| `* * *` | CS2030S TA       | add the contact details of other TAs                                   | I can quickly reach out for help or collaboration.                             |
-| `* * *` | CS2030S TA       | add contact details of professors                                      | I can easily reach them for guidance or to pass on important information.      |
-| `* * *` | CS2030S TA       | delete contacts easily                                                 | I dont clutter the list with unwanted contacts.                                |
-| `* * *` | CS2030S TA       | store the grades and progress of my students                           | I can keep track of which of my students need more guidance and follow up.     |
-| `* * *` | CS2030S TA       | store student's telegram username                                      | I can easily reference them and contact them when needed to.                   |
-| `* * *` | CS2030S TA       | see the student's MC or reasoning when they do not turn up for lessons | I can create make up lessons / check up on them.                               |
-| `* *` | CS2030S TA       | have a function to hide the details of students that I do not need     | I can only the the information that I want to see.                             |
-| `* *` | CS2030S TA       | view the last modification date of student contact details             | I can confirm the accuracy and recency of the information stored.              |
-| `* *` | CS2030S TA       | create contacts with optional fields                                   | I can resepct the privacy of my students.                                      |
-| `*`  | CS2030S TA       | search for a student’s GitHub username                                 | I can quickly access their repository for grading and feedback.                |
-| `*`  | potential user   | see the application populated with sample data                         | I can see how the app looks like when it is in use.                            |
-| `*`  | CS2030S TA       | put the contacts into different tabs                                   | I can easily navigate between different types of contacts.                     |
-| `*`  | CS2030S TA       | use the command line interface to search for contacts                  | I can integrate the tool smoothly into my existing workflow.                   |
-| `*`  | CS2030S TA       | search for the contact details of professors/ other TAs                | I can quickly contact them for help if needed.                                 |
-| `*`  | CS2030S TA       | find my students house in time                                         | I can offer them help in times of crisis.                                      |
-| `*`  | CS2030S TA       | organise the contact of my students                                    | I can view the details of each student with greater ease.                      |
-| `*`  | CS2030S TA       | import student contact information from a file                         | I can easily transfer data between devices.                                    |
-| `*`  | CS2030S TA       | export student contact information to a file                           | I can backup or share contact details with other TAs or professors if needed.  |
-| `*`  | CS2030S TA       | flag specific students for follow-up                                   | I can easily identify students who may need additional support or guidance.    |
-| `*`  | CS2030S TA       | choose to sort my students                                             | I can group students based on their proficiency.                               |
-| `*`  | CS2030S TA       | filter the contact details that is shown                               | I can easily find the information of a particular group.                       |
-| `*`  | CS2030S TA       | filter contacts based on a certain criteria                            | I can access a specific subset of students that I want.                        |
-| `*`  | CS2030S TA       | tag students with custom labels                                        | I can categorize students based on their progress or needs.                    |
-| `*`  | CS2030S TA       | use the command line to access my students work                        | have their work and contact and tags all tied together in one smooth workflow. |
-| `*`  | experienced user | create shortcuts for commands that I use frequently                    | I can access the frequently used information quickly.                          |
-| `*`  | new user         | use a help function to check what this app offers                      | I can easily have the details of the commands to use in my fingertips.         |
-| `*`  | CS2030S TA       | create automatic flags to indicate if a student's work is marked       | I can monitor grading deadlines so that I can stay on top of my responsibilities without missing any critical dates.                                 |
+| Priority | As a/an …​       | I want to …​                                                           | So that …​                                                                                                            |
+|-------|------------------|------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
+| `* * *` | CS2030S TA       | store student's github username                                        | I can easily reference them when grading assignments.                                                                 |
+| `* * *` | user             | add the student's contact number                                       | I can easily reference them when I need to contact my students.                                                       |
+| `* * *` | CS2030S TA       | add the contact details of other TAs                                   | I can quickly reach out for help or collaboration.                                                                    |
+| `* * *` | CS2030S TA       | add contact details of professors                                      | I can easily reach them for guidance or to pass on important information.                                             |
+| `* * *` | CS2030S TA       | delete contacts easily                                                 | I dont clutter the list with unwanted contacts.                                                                       |
+| `* * *` | CS2030S TA       | store the grades and progress of my students                           | I can keep track of which of my students need more guidance and follow up.                                            |
+| `* * *` | CS2030S TA       | store student's telegram username                                      | I can easily reference them and contact them when needed to.                                                          |
+| `* * *` | CS2030S TA       | see the student's MC or reasoning when they do not turn up for lessons | I can create make up lessons / check up on them.                                                                      |
+| `* *` | CS2030S TA       | have a function to hide the details of students that I do not need     | I can only the the information that I want to see.                                                                    |
+| `* *` | CS2030S TA       | view the last modification date of student contact details             | I can confirm the accuracy and recency of the information stored.                                                     |
+| `* *` | CS2030S TA       | create contacts with optional fields                                   | I can resepct the privacy of my students.                                                                             |
+| `*`  | CS2030S TA       | search for a student’s GitHub username                                 | I can quickly access their repository for grading and feedback.                                                       |
+| `*`  | potential user   | see the application populated with sample data                         | I can see how the app looks like when it is in use.                                                                   |
+| `*`  | CS2030S TA       | put the contacts into different tabs                                   | I can easily navigate between different types of contacts.                                                            |
+| `*`  | CS2030S TA       | use the command line interface to search for contacts                  | I can integrate the tool smoothly into my existing workflow.                                                          |
+| `*`  | CS2030S TA       | search for the contact details of professors/ other TAs                | I can quickly contact them for help if needed.                                                                        |
+| `*`  | CS2030S TA       | find my students house in time                                         | I can offer them help in times of crisis.                                                                             |
+| `*`  | CS2030S TA       | organise the contact of my students                                    | I can view the details of each student with greater ease.                                                             |
+| `*`  | CS2030S TA       | import student contact information from a file                         | I can easily transfer data between devices.                                                                           |
+| `*`  | CS2030S TA       | export student contact information to a file                           | I can backup or share contact details with other TAs or professors if needed.                                         |
+| `*`  | CS2030S TA       | flag specific students for follow-up                                   | I can easily identify students who may need additional support or guidance.                                           |
+| `*`  | CS2030S TA       | choose to sort my students                                             | I can group students based on their proficiency.                                                                      |
+| `*`  | CS2030S TA       | filter the contact details that is shown                               | I can easily find the information of a particular group.                                                              |
+| `*`  | CS2030S TA       | filter contacts based on a certain criteria                            | I can access a specific subset of students that I want.                                                               |
+| `*`  | CS2030S TA       | tag students with custom labels                                        | I can categorize students based on their progress or needs.                                                           |
+| `*`  | CS2030S TA       | use the command line to access my students work                        | have their work and contact and tags all tied together in one smooth workflow.                                        |
+| `*`  | experienced user | create shortcuts for commands that I use frequently                    | I can access the frequently used information quickly.                                                                 |
+| `*`  | new user         | use a help function to check what this app offers                      | I can easily have the details of the commands to use in my fingertips.                                                |
+| `*`  | CS2030S TA       | create automatic flags to indicate if a student's work is marked       | I can monitor grading deadlines so that I can stay on top of my responsibilities without missing any critical dates.  |
 
 ### Use cases
 
@@ -668,21 +679,21 @@ Actor: TA
 
 ### Glossary
 
-* Contact: An individual (e.g. student) stored in the system, typically having details regarding them such as their name, github username and etc.
+* **Contact**: An individual (e.g. student) stored in the system, typically having details regarding them such as their name, github username and etc.
 
-* Easy to use for new users: intuitive commands that are easy to understand and UI that is easy to navigate.
+* **Easy to use for new users**: intuitive commands that are easy to understand and UI that is easy to navigate.
 
-* Mainstream OS: Windows, Linux, Unix, MacOS.
+* **Mainstream OS**: Windows, Linux, Unix, MacOS.
 
-* Average typing speed: about 40 words per minute.
+* **Average typing speed**: about 40 words per minute.
 
-* Uptime: The system should be operational during that period of time.
+* **Uptime**: The system should be operational during that period of time.
 
-* Between sessions: Every opening and closing of the application.
+* **Between sessions**: Every opening and closing of the application.
 
-* Proper documentation: A detailed user and developer guide which helps future users and developers to understand and use the code.
+* **Proper documentation**: A detailed user and developer guide which helps future users and developers to understand and use the code.
 
-* Typical usage: Normal or expected usage patterns of the application, such as the frequency of adding, deleting, or viewing contacts during everyday use.
+* **Typical usage**: Normal or expected usage patterns of the application, such as the frequency of adding, deleting, or viewing contacts during everyday use.
 
 ---
 
@@ -690,10 +701,12 @@ Actor: TA
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
+<box type="info" seamless>
+
+**Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
-</div>
+</box>
 
 ### Launch and shutdown
 

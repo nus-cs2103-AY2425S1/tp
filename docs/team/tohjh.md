@@ -1,6 +1,6 @@
 ---
-layout: page
-title: Tohjh's Project Portfolio Page
+  layout: default.md
+  title: "Tohjh's Project Portfolio Page"
 ---
 
 ### Project: AddressBook Level 3
