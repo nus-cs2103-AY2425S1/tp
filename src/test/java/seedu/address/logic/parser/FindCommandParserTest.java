@@ -31,10 +31,8 @@ public class FindCommandParserTest {
     }
     @Test
     public void parse_validArgs_returnsFindCommand() throws ParseException {
-        // Parse valid arguments
         FindCommand findCommand = parser.parse("Alice Bob");
 
-        // Create sample persons with matching names
         Person personMatchingAlice = new Person(
                 new Name("Alice"),
                 new Phone("98765432"),
@@ -51,9 +49,8 @@ public class FindCommandParserTest {
                 new HashSet<>(Arrays.asList(new Tag("musician")))
         );
 
-        // Test that the actual parsed command returns true for both cases (name match)
-        assertTrue(findCommand.getPredicate().test(personMatchingAlice)); // Should match Alice
-        assertTrue(findCommand.getPredicate().test(personMatchingBob)); // Should match Bob
+        assertTrue(findCommand.getPredicate().test(personMatchingAlice));
+        assertTrue(findCommand.getPredicate().test(personMatchingBob));
     }
     @Test
     public void parse_validPhoneArgs_returnsFindCommand() throws ParseException {
