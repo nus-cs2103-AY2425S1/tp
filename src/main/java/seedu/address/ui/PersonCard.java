@@ -61,20 +61,18 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
 
-        setDateField(person);
-        setNoteField(person);
-        setReminderField(person);
-
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-    }
-
-    /**
-     * Sets the text for the reminder field.
-     * @param person
-     */
-    private void setReminderField(Person person) {
+        if (person.getSchedule().toString().isEmpty()) {
+            schedule.setText(person.getSchedule().toString());
+        } else {
+            schedule.setText(
+                    LocalDateTime.parse(person.getSchedule().toString(), DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"))
+                            .format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a")));
+        }
+        if (person.getSchedule().getNotes() == null || person.getSchedule().getNotes().isEmpty()) {
+            note.setText("");
+        } else {
+            note.setText("Notes: " + person.getSchedule().getNotes());
+        }
         if (person.getReminder() != null && !person.getReminder().toString().isEmpty()) {
             String formattedDateTime = LocalDateTime.parse(
                             person.getReminder().getAppointmentDateTime(),
@@ -88,31 +86,9 @@ public class PersonCard extends UiPart<Region> {
         } else {
             reminder.setText("");
         }
-    }
 
-    /**
-     * Sets the text for the notes field.
-     * @param person
-     */
-    private void setNoteField(Person person) {
-        if (person.getSchedule().getNotes() == null || person.getSchedule().getNotes().isEmpty()) {
-            note.setText("");
-        } else {
-            note.setText("Notes: " + person.getSchedule().getNotes());
-        }
-    }
-
-    /**
-     * Sets the text for the date field.
-     * @param person
-     */
-    private void setDateField(Person person) {
-        if (person.getSchedule().toString().isEmpty()) {
-            schedule.setText(person.getSchedule().toString());
-        } else {
-            schedule.setText(
-                    LocalDateTime.parse(person.getSchedule().toString(), DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"))
-                            .format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a")));
-        }
+        person.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }
