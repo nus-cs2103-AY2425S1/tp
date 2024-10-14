@@ -37,7 +37,8 @@
             <styleClass>
                <String fx:value="cell_small_label" />
                <String fx:value="remark" />
-            </styleClass></Label>
+            </styleClass>
+      </Label>
 
     </VBox>
       <rowConstraints>
