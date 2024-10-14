@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -30,7 +29,6 @@ public class FindCommandParserTest {
     public void parse_emptyArg_throwsParseException() {
         assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
-
     @Test
     public void parse_validArgs_returnsFindCommand() throws ParseException {
         // Parse valid arguments
@@ -57,7 +55,6 @@ public class FindCommandParserTest {
         assertTrue(findCommand.getPredicate().test(personMatchingAlice)); // Should match Alice
         assertTrue(findCommand.getPredicate().test(personMatchingBob)); // Should match Bob
     }
-
     @Test
     public void parse_validPhoneArgs_returnsFindCommand() throws ParseException {
         // Mixed phone numbers
@@ -83,38 +80,30 @@ public class FindCommandParserTest {
         assertTrue(findCommand.getPredicate().test(personMatchingFirstPhone));
         assertTrue(findCommand.getPredicate().test(personMatchingSecondPhone));
     }
-
     @Test
     public void parse_validNameAndPhoneArgs_returnsFindCommand() throws ParseException  {
         FindCommand findCommand = parser.parse("Alice 12345");
-
         Set<Tag> tagsForAlice = new HashSet<>(Arrays.asList(new Tag("friend")));
         Person personMatchingName = new Person(
                 new Name("Alice"),
                 new Phone("98765432"),
                 new Email("alice@example.com"),
                 new Address("123 AMK Ave"),
-                tagsForAlice
-        );
-
+                tagsForAlice);
         Set<Tag> tagsForBob = new HashSet<>(Arrays.asList(new Tag("musician")));
         Person personMatchingPhone = new Person(
                 new Name("Bob"),
                 new Phone("12345"),
                 new Email("bob@example.com"),
                 new Address("456 AMK Road"),
-                tagsForBob
-        );
-
+                tagsForBob);
         assertTrue(findCommand.getPredicate().test(personMatchingName));
         assertTrue(findCommand.getPredicate().test(personMatchingPhone));
     }
-
     @Test
     public void parse_nullArgs_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> parser.parse(null));
     }
-
     @Test
     public void equals_sameObject_returnsTrue() {
         PhoneContainsKeywordsPredicate predicate = new PhoneContainsKeywordsPredicate(Arrays.asList("12345"));
