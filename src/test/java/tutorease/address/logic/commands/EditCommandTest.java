@@ -13,6 +13,7 @@ import static tutorease.address.logic.commands.CommandTestUtil.assertCommandSucc
 import static tutorease.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static tutorease.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static tutorease.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static tutorease.address.testutil.TypicalLessons.getTypicalLessons;
 import static tutorease.address.testutil.TypicalPersons.getTypicalTutorEase;
 
 import org.junit.jupiter.api.Test;
@@ -33,7 +34,7 @@ import tutorease.address.testutil.PersonBuilder;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalTutorEase(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalTutorEase(), new UserPrefs(), getTypicalLessons());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -43,7 +44,9 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
-        Model expectedModel = new ModelManager(new TutorEase(model.getTutorEase()), new UserPrefs());
+        Model expectedModel = new ModelManager(new TutorEase(model.getTutorEase()), new UserPrefs(),
+                getTypicalLessons());
+
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -64,7 +67,9 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
-        Model expectedModel = new ModelManager(new TutorEase(model.getTutorEase()), new UserPrefs());
+        Model expectedModel = new ModelManager(new TutorEase(model.getTutorEase()), new UserPrefs(),
+                getTypicalLessons());
+
         expectedModel.setPerson(lastPerson, editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -77,7 +82,8 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
-        Model expectedModel = new ModelManager(new TutorEase(model.getTutorEase()), new UserPrefs());
+        Model expectedModel = new ModelManager(new TutorEase(model.getTutorEase()), new UserPrefs(),
+                getTypicalLessons());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -93,7 +99,9 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
-        Model expectedModel = new ModelManager(new TutorEase(model.getTutorEase()), new UserPrefs());
+        Model expectedModel = new ModelManager(new TutorEase(model.getTutorEase()), new UserPrefs(),
+                getTypicalLessons());
+
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);

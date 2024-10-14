@@ -15,6 +15,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
     private Path tutorEaseFilePath = Paths.get("data" , "tutorease.json");
+    private Path lessonSchedulePath = Paths.get("data" , "lessonschedule.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -51,9 +52,16 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         return tutorEaseFilePath;
     }
 
-    public void setTutorEaseFilePath(Path tutorEaseFilePath) {
-        requireNonNull(tutorEaseFilePath);
-        this.tutorEaseFilePath = tutorEaseFilePath;
+    /**
+     * Returns the file path of the lesson schedule data file.
+     */
+    public Path getLessonScheduleFilePath() {
+        return lessonSchedulePath;
+    }
+
+    public void setTutorEaseFilePath(Path addressBookFilePath) {
+        requireNonNull(addressBookFilePath);
+        this.tutorEaseFilePath = addressBookFilePath;
     }
 
     @Override

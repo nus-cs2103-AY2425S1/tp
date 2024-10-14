@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import tutorease.address.model.LessonSchedule;
 import tutorease.address.model.ReadOnlyTutorEase;
 import tutorease.address.model.TutorEase;
 import tutorease.address.model.person.Address;
@@ -12,6 +13,7 @@ import tutorease.address.model.person.Name;
 import tutorease.address.model.person.Person;
 import tutorease.address.model.person.Phone;
 import tutorease.address.model.tag.Tag;
+
 
 /**
  * Contains utility methods for populating {@code TutorEase} with sample data.
@@ -46,6 +48,10 @@ public class SampleDataUtil {
             sampleAb.addPerson(samplePerson);
         }
         return sampleAb;
+    }
+
+    public static LessonSchedule getSampleLessonSchedule() {
+        return new LessonSchedule();
     }
 
     /**

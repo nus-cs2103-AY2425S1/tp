@@ -15,6 +15,7 @@ import tutorease.address.commons.util.ConfigUtil;
 import tutorease.address.commons.util.StringUtil;
 import tutorease.address.logic.Logic;
 import tutorease.address.logic.LogicManager;
+import tutorease.address.model.LessonSchedule;
 import tutorease.address.model.Model;
 import tutorease.address.model.ModelManager;
 import tutorease.address.model.ReadOnlyTutorEase;
@@ -22,8 +23,10 @@ import tutorease.address.model.ReadOnlyUserPrefs;
 import tutorease.address.model.TutorEase;
 import tutorease.address.model.UserPrefs;
 import tutorease.address.model.util.SampleDataUtil;
+import tutorease.address.storage.JsonLessonScheduleStorage;
 import tutorease.address.storage.JsonTutorEaseStorage;
 import tutorease.address.storage.JsonUserPrefsStorage;
+import tutorease.address.storage.LessonScheduleStorage;
 import tutorease.address.storage.Storage;
 import tutorease.address.storage.StorageManager;
 import tutorease.address.storage.TutorEaseStorage;
@@ -58,7 +61,9 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         TutorEaseStorage tutorEaseStorage = new JsonTutorEaseStorage(userPrefs.getTutorEaseFilePath());
-        storage = new StorageManager(tutorEaseStorage, userPrefsStorage);
+        LessonScheduleStorage lessonScheduleStorage = new JsonLessonScheduleStorage(
+                userPrefs.getLessonScheduleFilePath());
+        storage = new StorageManager(tutorEaseStorage, userPrefsStorage, lessonScheduleStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -76,7 +81,10 @@ public class MainApp extends Application {
         logger.info("Using data file : " + storage.getTutorEaseFilePath());
 
         Optional<ReadOnlyTutorEase> tutorEaseOptional;
+        Optional<LessonSchedule> lessonScheduleOptional;
         ReadOnlyTutorEase initialData;
+        LessonSchedule initialLessonSchedule;
+
         try {
             tutorEaseOptional = storage.readTutorEase();
             if (!tutorEaseOptional.isPresent()) {
@@ -84,13 +92,20 @@ public class MainApp extends Application {
                         + " populated with a sample TutorEase.");
             }
             initialData = tutorEaseOptional.orElseGet(SampleDataUtil::getSampleTutorEase);
+            lessonScheduleOptional = storage.readLessonSchedule(initialData);
+            if (!lessonScheduleOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getLessonScheduleFilePath()
+                        + " populated with a sample LessonSchedule.");
+            }
+            initialLessonSchedule = lessonScheduleOptional.orElseGet(SampleDataUtil::getSampleLessonSchedule);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getTutorEaseFilePath() + " could not be loaded."
                     + " Will be starting with an empty TutorEase.");
             initialData = new TutorEase();
+            initialLessonSchedule = new LessonSchedule();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        return new ModelManager(initialData, userPrefs, initialLessonSchedule);
     }
 
     private void initLogging(Config config) {

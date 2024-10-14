@@ -87,6 +87,13 @@ public class TutorEase implements ReadOnlyTutorEase {
     }
 
     /**
+     * Returns the person with the given name.
+     */
+    public Person getPerson(String name) {
+        return persons.getPerson(name);
+    }
+
+    /**
      * Removes {@code key} from this {@code TutorEase}.
      * {@code key} must exist in the address book.
      */
