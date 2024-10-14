@@ -9,6 +9,8 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 
@@ -29,6 +31,16 @@ public class DeleteCommand extends Command {
 
     private final Index targetIndex;
     private final Phone phoneNumber;
+    private final NameContainsKeywordsPredicate predicate;
+
+
+    //overload with constructor to delete using name --> partial
+
+    public DeleteCommand(NameContainsKeywordsPredicate predicate) {
+        this.predicate = predicate;
+        this.phoneNumber = null;
+        this.targetIndex = null;
+    }
 
     /**
      * Initializes command to delete a person identified using it's displayed index
@@ -37,6 +49,7 @@ public class DeleteCommand extends Command {
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
         this.phoneNumber = null;
+        this.predicate = null;
     }
 
     /**
@@ -46,6 +59,7 @@ public class DeleteCommand extends Command {
     public DeleteCommand(Phone phoneNumber) {
         this.phoneNumber = phoneNumber;
         this.targetIndex = null;
+        this.predicate = null;
     }
 
     @Override
@@ -65,12 +79,20 @@ public class DeleteCommand extends Command {
 
         // deleting by phone Number,
         // check for validity of arguments are done in DeleteCommandParser
-        } else {
+        } else if (phoneNumber != null) {
             personToDelete = findPersonToDeleteByPhoneNumber(lastShownList, phoneNumber);
 
             // no person with given phone number
             if (personToDelete == null) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PHONE_NUMBER);
+            }
+        } else {
+            model.updateFilteredPersonList(predicate);
+            if (model.getFilteredPersonList().size() == 1) {
+                personToDelete = model.getFilteredPersonList().get(0);
+            } else {
+                return new CommandResult(
+                        String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
             }
         }
 
