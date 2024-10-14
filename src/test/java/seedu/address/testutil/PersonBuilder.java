@@ -9,6 +9,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.TelegramUsername;
+import seedu.address.model.role.Role;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -29,6 +30,7 @@ public class PersonBuilder {
     private Address address;
     private TelegramUsername telegramUsername;
     private Set<Tag> tags;
+    private Set<Role> roles;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -40,6 +42,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         telegramUsername = new TelegramUsername(DEFAULT_TELEGRAM_USERNAME);
         tags = new HashSet<>();
+        roles = new HashSet<>();
     }
 
     /**
@@ -52,6 +55,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         telegramUsername = personToCopy.getTelegramUsername();
         tags = new HashSet<>(personToCopy.getTags());
+        roles = new HashSet<>(personToCopy.getRoles());
     }
 
     /**
@@ -105,8 +109,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code roles} into a {@code Set<Role>} and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withRoles(String ... roles) {
+        this.roles = SampleDataUtil.getRoleSet(roles);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, tags, telegramUsername);
+        return new Person(name, phone, email, address, tags, telegramUsername, roles);
     }
 
 }

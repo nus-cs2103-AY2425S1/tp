@@ -16,6 +16,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.TelegramUsername;
+import seedu.address.model.role.Role;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -31,6 +32,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final String telegramUsername;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedRole> roles = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -62,6 +64,9 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        roles.addAll(source.getRoles().stream()
+                .map(JsonAdaptedRole::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -73,6 +78,11 @@ class JsonAdaptedPerson {
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
+        }
+
+        final List<Role> personRoles = new ArrayList<>();
+        for (JsonAdaptedRole role : roles) {
+            personRoles.add(role.toModelType());
         }
 
         if (name == null) {
@@ -110,7 +120,9 @@ class JsonAdaptedPerson {
         final TelegramUsername modelTelegramUsername = new TelegramUsername(telegramUsername);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelTelegramUsername);
+        final Set<Role> modelRoles = new HashSet<>(personRoles);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags,
+                modelTelegramUsername, modelRoles);
     }
 
 }
