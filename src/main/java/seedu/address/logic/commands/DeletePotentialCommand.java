@@ -14,30 +14,20 @@ import seedu.address.model.person.Person;
 /**
  * Deletes a person identified using it's displayed index from the address book.
  */
-public abstract class DeleteCommand extends Command {
+public class DeletePotentialCommand extends DeleteCommand {
 
-    public static final String COMMAND_WORD = "delete";
+    public static final String COMMAND_TYPE = "ph";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the employee (e) or potential hire (ph) type "
-            + "identified by the index number used in the employee list.\n"
-            + "Parameters: TYPE INDEX\n"
-            + "Employee Example: " + COMMAND_WORD + " e 1\n"
-            + "Potential Hire Example: " + COMMAND_WORD + " ph 2";
-
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted %1$s: %2$s";
-
-    public static final String MESSAGE_DELETE_PERSON_WRONG_TYPE =
-            "The selected index is not an %1$s. You've likely selected a person of another type.";
-
-    protected final Index targetIndex;
+            + ": Deletes the potential hire (ph) identified by the index number used in the potential hire list.\n"
+            + "Parameters: ph INDEX\n"
+            + "Example: " + COMMAND_WORD + " ph 2";
 
     /**
      * @param targetIndex of the person in the displayed list to delete.
      */
-    public DeleteCommand(Index targetIndex) {
-        requireNonNull(targetIndex);
-        this.targetIndex = targetIndex;
+    public DeletePotentialCommand(Index targetIndex) {
+        super(targetIndex);
     }
 
     @Override
@@ -50,9 +40,12 @@ public abstract class DeleteCommand extends Command {
         }
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+        if (personToDelete.isEmployee()) {
+            throw new CommandException(String.format(MESSAGE_DELETE_PERSON_WRONG_TYPE, "potential hire"));
+        }
         model.deletePerson(personToDelete);
         return new CommandResult(
-                String.format(MESSAGE_DELETE_PERSON_SUCCESS, "Employee", Messages.format(personToDelete)));
+                String.format(MESSAGE_DELETE_PERSON_SUCCESS, "Potential Hire", Messages.format(personToDelete)));
     }
 
     @Override
@@ -62,7 +55,7 @@ public abstract class DeleteCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteCommand otherDeleteCommand)) {
+        if (!(other instanceof DeletePotentialCommand otherDeleteCommand)) {
             return false;
         }
 
@@ -72,6 +65,7 @@ public abstract class DeleteCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .add("targetType", "ph")
                 .add("targetIndex", targetIndex)
                 .toString();
     }

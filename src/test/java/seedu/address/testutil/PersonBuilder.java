@@ -21,6 +21,7 @@ public class PersonBuilder {
     public static final String DEFAULT_DEPARTMENT = "IT";
     public static final String DEFAULT_ROLE = "SWE";
     public static final String DEFAULT_CONTRACT_START_DATE = "2024-10-09";
+    public static final boolean DEFAULT_IS_EMPLOYEE = true;
 
     private Name name;
     private Phone phone;
@@ -29,6 +30,7 @@ public class PersonBuilder {
     private Department department;
     private Role role;
     private ContractEndDate contractEndDate;
+    private boolean isEmployee;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -41,6 +43,7 @@ public class PersonBuilder {
         department = new Department(DEFAULT_DEPARTMENT);
         role = new Role(DEFAULT_ROLE);
         contractEndDate = ContractEndDate.of(DEFAULT_CONTRACT_START_DATE);
+        isEmployee = DEFAULT_IS_EMPLOYEE;
     }
 
     /**
@@ -54,6 +57,7 @@ public class PersonBuilder {
         department = personToCopy.getDepartment();
         role = personToCopy.getRole();
         contractEndDate = personToCopy.getContractEndDate();
+        isEmployee = personToCopy.isEmployee();
     }
 
     /**
@@ -112,8 +116,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code isEmployee} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withIsEmployee(boolean isEmployee) {
+        this.isEmployee = isEmployee;
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, department, role, contractEndDate, true);
+        return new Person(name, phone, email, address, department, role, contractEndDate, isEmployee);
     }
 
 }
