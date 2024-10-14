@@ -40,12 +40,30 @@ public class UniquePersonListTest {
     }
 
     @Test
+    public void list_sortedLexicographically_returnsTrue() {
+        uniquePersonList.add(BOB);
+        uniquePersonList.add(ALICE);
+        assertEquals(uniquePersonList.iterator().next(), ALICE);
+    }
+
+    @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniquePersonList.add(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(uniquePersonList.contains(editedAlice));
     }
+
+    public void editedList_sortedLexicographically_returnsTrue() {
+        uniquePersonList.add(ALICE);
+        uniquePersonList.add(BOB);
+        Person editedAlice =
+                new PersonBuilder(ALICE).withName("Darcy").withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+                        .build();
+        assertTrue(uniquePersonList.contains(editedAlice));
+        assertEquals(uniquePersonList.iterator().next(), BOB);
+    }
+
 
     @Test
     public void add_nullPerson_throwsNullPointerException() {
@@ -163,9 +181,18 @@ public class UniquePersonListTest {
     }
 
     @Test
+    public void setPersons_list_sortsListLexicographically() {
+        uniquePersonList.add(ALICE);
+        List<Person> personList = Arrays.asList(BOB, ALICE);
+        uniquePersonList.setPersons(personList);
+
+        assertEquals(ALICE, uniquePersonList.iterator().next());
+    }
+
+    @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
-            -> uniquePersonList.asUnmodifiableObservableList().remove(0));
+                -> uniquePersonList.asUnmodifiableObservableList().remove(0));
     }
 
     @Test
