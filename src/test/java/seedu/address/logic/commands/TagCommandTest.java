@@ -35,7 +35,7 @@ public class TagCommandTest {
         expectedModel.setPerson(firstPerson, taggedPerson);
 
         String expectedMessage = String.format(TagCommand.MESSAGE_TAG_PERSON_SUCCESS,
-                taggedPerson.getName(), TagCommand.tagSetToString(tagSet));
+                taggedPerson.getName(), Tag.tagSetToString(tagSet));
 
         assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
     }
