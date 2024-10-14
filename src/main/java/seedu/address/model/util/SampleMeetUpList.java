@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.MeetUpList;
 import seedu.address.model.ReadOnlyMeetUpList;
-import seedu.address.model.meetup.MeetUp;
+import seedu.address.model.meetup.*;
 import seedu.address.model.tag.Tag;
 
 
@@ -17,8 +17,10 @@ import seedu.address.model.tag.Tag;
 public class SampleMeetUpList {
     public static MeetUp[] getSampleMeetUps() {
         return new MeetUp[] {
-            new MeetUp("Placeholder", "placeholder", LocalDateTime.now(), LocalDateTime.now()),
-            new MeetUp("Placeholder2", "placeholder2", LocalDateTime.now(), LocalDateTime.now())
+            new MeetUp(new MeetUpName("Placeholder"), new MeetUpInfo("placeholder"),
+                    new MeetUpFrom(LocalDateTime.now()), new MeetUpTo(LocalDateTime.now())),
+                new MeetUp(new MeetUpName("Placeholder2"), new MeetUpInfo("placeholder2"),
+                        new MeetUpFrom(LocalDateTime.now()), new MeetUpTo(LocalDateTime.now())),
         };
     }
 
